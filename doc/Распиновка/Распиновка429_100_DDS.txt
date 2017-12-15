@@ -1,0 +1,49 @@
+stm32f429vit6 DDS
+
+BOOT    94
+NRST    14
+VDD     11, 19, 28, 50, 75, 100
+VDDA    22
+VCAP    49, 73
+VREF    21
+VSS     10, 20, 27, 74, 99
+
+
+*** JTAG ***
+JTMS-SWDIO  72
+JTCK-SWCLK  76
+JTDI        77
+JTDO-SWO    89
+JTRST       90
+
+*** SPI4 *** - к основному процессору
+SCK     1
+NSS     3
+MISO    4
+MOSI    5
+
+*** LTDC *** - экран
+CLK     45
+HSYNC   63
+VSYNC   29
+DE      44
+R2 - 78     G2 - 31     B2 - 87
+R3 - 35     G3 - 42     B3 - 57
+R4 - 70     G4 - 47     B4 - 43
+R5 - 71     G5 - 48     B5 - 26
+R6 - 36     G6 - 64     B6 - 95
+R7 - 46     G7 - 84     B7 - 96
+
+*** Клавиатура ***
+SL0 - PB12 - 51
+SL1 - PB13 - 52
+SL2 - PB14 - 53
+SL3 - PB15 - 54
+SL4 - PD8  - 55
+SL5 - PD9  - 56
+
+RL0 - PA8  - 67
+RL1 - PA9  - 68
+RL2 - PA10 - 69
+RL3 - PD13 - 60
+RL4 - PD12 - 59

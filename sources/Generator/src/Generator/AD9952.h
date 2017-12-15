@@ -1,0 +1,17 @@
+#pragma once
+#include "GeneratorSettingsTypes.h"
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class AD9952
+{
+public:
+
+    void Init();
+
+    void SetFrequency(Channel ch, float frequency);
+
+    void SetAmplitude(Channel ch, float amplitude);
+
+private:
+};

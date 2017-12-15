@@ -1,32 +1,18 @@
-# Prerequisites
-*.d
+*.tmp
+*.uvgui*.*
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+doc/doxygen/KornetDDS/*
 
-# Precompiled Headers
-*.gch
-*.pch
+sources/VS/Panel/.vs/*
+sources/.vs/*
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+sources/Generator/DebugConfig/*
+sources/Generator/Listings/*
+sources/Generator/Objects/*
+sources/Panel/DebugConfig/*
+sources/Panel/Listings/*
+sources/Panel/Objects/*
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+sources/VS/Panel/Debug/*
+sources/VS/Panel/x64/*
+sources/VS/Generator/x64/*

@@ -1,0 +1,682 @@
+#include "InputWindowStruct.h"
+#include "Painter.h"
+#include "Log.h"
+#include "Generator/Generator.h"
+#include "Settings/SettingsSignals.h"
+#include "Utils/Math.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define CURRENT_POS         (iws->hightLightDigit)
+#define CURRENT_DIGIT       (iws->inputBuffer[CURRENT_POS])
+#define DIGIT(num)          (iws->inputBuffer[num])
+#define POS_COMMA           (iws->posComma)
+
+#define IN_NUM_LOCK_MODE    (iws->numLockMode)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void IncreaseDigit(int num);
+static void DecreaseDigit(int num);
+/// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
+static bool All0LeftWithThis(int num);
+/// Возвращает true, елси все цифры слева и эта являются девятками
+static bool All9LeftWithThis(int num);
+/// Возвращает true, если среди цифр единственная единица и она находится в даной позиции
+static bool Only1InThis(int num);
+/// Сдвигает все разряды вправо
+static void ShiftToRight();
+/// Сдвиг всех разрядов влево
+static void ShiftToLeft();
+/// Возвращает true, если есть только одна крайняя справа цифра
+static bool OnlyOneRigthDigit();
+/// Возвращает число до запятой
+static int ValueBeforeComma(InputWindowStruct *iws);
+/// Возвращает число после запятой
+static float ValueAfterComma(InputWindowStruct *iws);
+/// Переключает порядок на следующий по возрастанию
+static void IncreaseOrder();
+/// Сохраняет значение для возможности последующего восстановления
+static void SaveValue();
+/// Восстанавливает ранее сохранённое значение
+static void RestoreValue();
+/// Заполняет iws из inputBuffer
+static void FillIWSfromInputBuffer();
+/// Заслать текущее значение в генератор
+static void SendIWStoGenerator();
+
+static InputWindowStruct *iws = 0;
+static WaveForm form;
+static WaveParameter param;
+static Channel ch;
+
+#define SIZE_INPUT_BUFFER 17
+static char inputBuffer[SIZE_INPUT_BUFFER];
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void IWS_Fill(InputWindowStruct *iws_, Channel ch_, WaveForm form_, WaveParameter param_)
+{
+    ch = ch_;
+    form = form_;
+    param = param_;
+    iws = iws_;
+
+    IN_NUM_LOCK_MODE = false;
+
+    memset(inputBuffer, 0, SIZE_INPUT_BUFFER);
+
+	for (int i = 0; i < NUM_DIGITS; i++)
+	{
+		iws->inputBuffer[i] = PARAMETER_DIG(ch, form, param, i);
+	}
+	for (int i = NUM_DIGITS - 1; i > 0; --i)
+	{
+		if (iws->inputBuffer[i] == 0)
+		{
+			iws->inputBuffer[i] = '0';
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	CURRENT_POS = DIGIT(NUM_DIGITS - 1) == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_KeyLeft(void)
+{
+	if (CURRENT_POS > 0)
+	{
+		if (CURRENT_POS == 1 && DIGIT(0) == '.')
+		{
+			return;
+		}
+		--CURRENT_POS;
+		if (CURRENT_DIGIT == '.')
+		{
+            IWS_KeyLeft();
+		}
+	}
+    else
+    {
+        if (!OnlyOneRigthDigit() && POS_COMMA != NUM_DIGITS - 1)
+        {
+            ShiftToRight();
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_KeyRight(void)
+{
+	if (CURRENT_POS < NUM_DIGITS - 1)
+	{
+		if (CURRENT_POS == NUM_DIGITS - 2 && DIGIT(NUM_DIGITS - 1) == '.')
+		{
+			return;
+		}
+		++CURRENT_POS;
+		if (CURRENT_DIGIT == '.')
+		{
+            IWS_KeyRight();
+		}
+	}
+    else if(DIGIT(0) == '0')
+    {
+        ShiftToLeft();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_RegLeft(void)
+{
+    DecreaseDigit(CURRENT_POS);
+
+    if (set.sig_tuneFull)
+    {
+        SendIWStoGenerator();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_RegRight(void)
+{
+    SaveValue();
+
+    float value = IWS_Value(iws);
+
+    IncreaseDigit(CURRENT_POS);
+
+    float value2 = IWS_Value(iws);
+
+    if (IWS_Value(iws) > MaxValue(iws->param))
+    {
+        RestoreValue();
+    }
+    else
+    {
+        int value = ValueBeforeComma(iws);
+
+        if (value > 999)
+        {
+            IncreaseOrder();
+        }
+    }
+
+    if (set.sig_tuneFull)
+    {
+        SendIWStoGenerator();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char *IWS_StringValue(InputWindowStruct *iws)
+{
+    static char buffer[20];
+    buffer[0] = '\0';
+
+    for (int i = 0; i < NUM_DIGITS; i++)
+    {
+        char str[2] = {0, 0};
+        str[0] = DIGIT(i);
+        strcat(buffer, str);
+        if (iws->posComma == i)
+        {
+            str[0] = '.';
+            strcat(buffer, str);
+        }
+    }
+
+    return buffer;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void IncreaseDigit(int num)
+{
+    if (num < 0 || num >= NUM_DIGITS)
+    {
+        return;
+    }
+
+    if (All9LeftWithThis(num))
+    {
+        ShiftToRight();
+        ++CURRENT_POS;
+        IncreaseDigit(CURRENT_POS);
+    }
+    else
+    {
+        DIGIT(num)++;
+        if (DIGIT(num) > '9')
+        {
+            DIGIT(num) = '0';
+            IncreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void DecreaseDigit(int num)
+{
+    if (num < 0 || num >= NUM_DIGITS)
+    {
+        return;
+    }
+
+    if (All0LeftWithThis(num))
+    {
+        return;
+    }
+
+    if (Only1InThis(num))
+    {
+        return;
+    }
+
+    DIGIT(num)--;
+    if (DIGIT(num) < '0')
+    {
+        DIGIT(num) = '9';
+        DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool All0LeftWithThis(int num)
+{
+    for (int i = num; i >= 0; i--)
+    {
+        if (DIGIT(i) != '0')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool All9LeftWithThis(int num)
+{
+    for (int i = num; i >= 0; i--)
+    {
+        if (DIGIT(i) != '9' && DIGIT(i) != '.')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool Only1InThis(int num)
+{
+    if (DIGIT(num) != '1')
+    {
+        return false;
+    }
+
+    for (int i = 0; i < num; i++)
+    {
+        if (DIGIT(i) != '0')
+        {
+            return false;
+        }
+    }
+
+    for (int i = num + 1; i < NUM_DIGITS; i++)
+    {
+        if (DIGIT(i) != '0')
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void ShiftToRight(void)
+{
+    for (int i = NUM_DIGITS - 2; i >= 0; i--)
+    {
+        DIGIT(i + 1) = DIGIT(i);
+    }
+    DIGIT(0) = '0';
+    ++POS_COMMA;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void ShiftToLeft(void)
+{
+    for (int i = 1; i < NUM_DIGITS; i++)
+    {
+        DIGIT(i - 1) = DIGIT(i);
+    }
+    DIGIT(NUM_DIGITS - 1) = '0';
+    --POS_COMMA;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+const char *NameOrder(Order order)
+{
+    static const char *names[NumOrders][2] =
+    {
+        {"н",   "n"},
+        {"мк",  "u"},
+        {"м",   "m"},
+        {"",    ""},
+        {"к",   "k"},
+        {"М",   "M"}
+    };
+
+    return names[order][LANGUAGE];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+const char *NameUnit(char buffer[10], Order order, WaveParameter parameter)
+{
+    static const char *names[][2] =
+    {
+        {"Гц",  "Hz"},
+        {"с",   "s"},
+        {"В",   "V"},
+        {"В",   "V"},
+        {"с",  "s"},
+        {"",    ""},
+        {"o",  "o"},
+        {"с",  "s"}
+    };
+
+    sprintf(buffer, "%s%s", NameOrder(order), names[parameter][LANGUAGE]);
+
+    return buffer;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool OnlyOneRigthDigit(void)
+{
+    char digitLast = DIGIT(NUM_DIGITS - 1);
+
+    if (digitLast != '0' && All0LeftWithThis(NUM_DIGITS - 2))
+    {
+        return true;
+    }
+    return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static int ValueBeforeComma(InputWindowStruct *iws)
+{
+    int lowPos = iws->posComma;     // Младший байт числа
+
+    int retValue = 0;
+
+    int pow = 1;
+
+    for (int i = lowPos; i >= 0; i--)
+    {
+        retValue += (0x0f & iws->inputBuffer[i]) * pow;
+        pow *= 10;
+    }
+
+    return retValue;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static float ValueAfterComma(InputWindowStruct *iws)
+{
+    int retValue = 0;
+    int pow = 1;
+    for (int i = NUM_DIGITS - 1; i > iws->posComma; i--)
+    {
+        uint8 digit = iws->inputBuffer[i];
+        digit &= 0x0f;
+        retValue += digit * pow;
+        pow *= 10;
+    }
+
+    return 1.0f / pow * retValue;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void IncreaseOrder(void)
+{
+    if (iws->order < NumOrders - 1)
+    {
+        ++iws->order;
+        POS_COMMA -= 3;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+float IWS_Value(InputWindowStruct *iws)
+{
+    float value = ValueBeforeComma(iws) + ValueAfterComma(iws);
+
+    Order order = iws->order;
+
+    if (order == Nano)
+    {
+        return value * 1e-9f;
+    }
+    if (order == Micro)
+    {
+        return value * 1e-6f;
+    }
+    if (order == Milli)
+    {
+        return value * 1e-3f;
+    }
+    if (order == Kilo)
+    {
+        return value * 1e3f;
+    }
+    if (order == Mega)
+    {
+        return value * 1e6f;
+    }
+
+    return value;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void SaveValue(void)
+{
+    for (int i = 0; i < NUM_DIGITS; i++)
+    {
+        iws->prevBuffer[i] = DIGIT(i);
+    }
+    iws->prevPosComma = iws->posComma;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void RestoreValue(void)
+{
+    for (int i = 0; i < NUM_DIGITS; i++)
+    {
+        DIGIT(i) = iws->prevBuffer[i];
+    }
+    iws->posComma = iws->prevPosComma;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_PressKey(Control key)
+{
+    typedef struct
+    {
+        Control control;
+        char    symbol;
+    } StructControl;
+
+    static const StructControl command[] =
+    {
+        {B_1, '1'}, {B_2, '2'}, {B_3, '3'}, {B_4, '4'}, {B_5, '5'},
+        {B_6, '6'}, {B_7, '7'}, {B_8, '8'}, {B_9, '9'}, {B_0, '0'}, {B_Dot, '.'},
+        {Control_None, '.'}
+    };
+
+    if (!IN_NUM_LOCK_MODE)
+    {
+        IN_NUM_LOCK_MODE = true;
+        inputBuffer[0] = 0;
+
+        volatile size_t length = strlen(inputBuffer);
+    }
+
+    if (strlen(inputBuffer) < SIZE_INPUT_BUFFER - 1)
+    {
+        int i = 0;
+        while (command[i].control != Control_None)
+        {
+            if (command[i].control == key)
+            {
+                int length = strlen(inputBuffer);
+                inputBuffer[length] = command[i].symbol;
+                inputBuffer[length + 1] = 0;
+                break;
+            }
+            i++;
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_DrawInputField(int x, int y)
+{
+    int width = 230;
+    int height = 60;
+
+    Painter_FillRegionC(x, y, width, height, COLOR_BACK);
+    Painter_DrawRectangleC(x, y, width, height, COLOR_FILL);
+
+    x += 8;
+    y += 19;
+
+    int i = 0;
+
+    while (inputBuffer[i])
+    {
+        x = Painter_DrawBigChar(x, y, 3, inputBuffer[i]);
+        x += 2;
+        ++i;
+    }
+
+    Painter_FillRegionC(270, 30, 45, 100, COLOR_BACK);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_SaveValue(void)
+{
+    if (IN_NUM_LOCK_MODE)
+    {
+        IN_NUM_LOCK_MODE = false;
+
+        FillIWSfromInputBuffer();
+    }
+
+    SendIWStoGenerator();
+
+    ADDITION_PAGE = 0;
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void IWS_FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters)
+{
+    for (int i = 0; i < NumParameters; i++)
+    {
+        allowParameters->allow[i] = INPUT_WINDOW_STRUCT(ch, form, i).allow;
+    }
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void SendIWStoGenerator(void)
+{
+    PARAMETER(ch, form, param) = *iws;
+
+    if (param == Delay)
+    {
+        PARAMETER(B, Form_Impulse, Frequency) = PARAMETER(B, Form_Impulse, Frequency);
+        float frequency = IWS_Value(&PARAMETER(A, Form_Impulse, Frequency));
+        Generator_SetParameter(B, Frequency, frequency);
+
+        float value = IWS_Value(&PARAMETER(ch, form, param));
+        Generator_SetParameter(ch, param, value);
+    }
+    else
+    {
+        float value = IWS_Value(&PARAMETER(ch, form, param));
+        Generator_SetParameter(ch, param, value);
+
+        //TuneGenerator(ch);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void FillIWSfromInputBuffer(void)
+{
+    if (param == Duration || param == Delay)
+    {
+        iws->order = Micro;
+    }
+    else
+    {
+        iws->order = One;
+    }
+
+    if (FindSymbol(inputBuffer, '.') == -1)             // Если точки нету
+    {
+        inputBuffer[strlen(inputBuffer)] = '.';         // То ставим её вместо завершающего нуля
+        inputBuffer[strlen(inputBuffer) + 1] = 0;       // и перемещаем нуль вправо
+    }
+    else
+    {
+        while ((int)fabsf(atof(inputBuffer)) == 0)     // Пока целая часть числа в inputBuffer == 0
+        {
+            // Сдвигаем запятую на три места вправо
+            int pos = FindSymbol(inputBuffer, '.');
+
+            for (int i = pos; i < pos + 3; i++)
+            {
+                inputBuffer[i] = inputBuffer[i + 1];
+                if(inputBuffer[i] == 0)
+                {
+                    inputBuffer[i] = '0';
+                }
+            }
+            inputBuffer[pos + 3] = '.';
+            if(inputBuffer[pos + 4] == 0)
+            {
+                inputBuffer[pos + 4] = '0';
+            }
+
+            --iws->order;
+        }
+    }
+
+    if (iws->sign != Sign_None)
+    {
+        iws->sign = (atof(inputBuffer) >= 0.0f) ? Sign_Plus : Sign_Minus;
+    }
+
+    iws->hightLightDigit = NUM_DIGITS - 1;
+
+    while ((int)fabsf(atof(inputBuffer)) > 999)     // Пока целая часть числа в inputBuffer > 999
+    {
+        // Сдвигаем запятую на три места влево
+        int pos = FindSymbol(inputBuffer, '.');
+        
+        for (int i = pos; i > pos - 3; i--)         // Сдвигаем три символа слева от точки на одну позицию вправо
+        {
+            inputBuffer[i] = inputBuffer[i - 1];
+        }
+
+        inputBuffer[pos - 3] = '.';                 // И ставим точку слева от этой тройки
+
+        ++iws->order;                               // И увеличиваем степень на три порядка
+    }
+
+    // В этой точке целая часть числа уже не превышает 999
+
+    float value = fabsf(atof(inputBuffer));
+
+    int intValue = (int)value;
+
+    // Заносим целую часть числа в буфер
+    sprintf(iws->inputBuffer, "%d", intValue);
+
+    iws->posComma = strlen(iws->inputBuffer) - 1;
+
+    int numDigits = NUM_DIGITS - strlen(iws->inputBuffer);      // Столько цифр нужно записать после запятой
+
+    int pos = FindSymbol(inputBuffer, '.');                     // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
+
+    for (int i = 0; i < numDigits; i++)
+    {
+        iws->inputBuffer[iws->posComma + 1 + i] = inputBuffer[pos + 1 + i];
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Order& operator++(Order& order)
+{
+    int value = (int)order + 1;
+    order = (Order)value;
+    return order;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Order& operator--(Order& order)
+{
+    int value = (int)order - 1;
+    order = (Order)value;
+    return order;
+}

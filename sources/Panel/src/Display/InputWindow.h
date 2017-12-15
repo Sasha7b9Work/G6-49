@@ -1,0 +1,11 @@
+#pragma once
+#include "Keyboard/Controls.h"
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Функцию надо вызывать при вызове окна на экран
+void InputWindow_Init();
+
+void InputWindow_Draw();
+
+void InputWindow_ProcessContorl(StructControl control);

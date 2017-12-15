@@ -1,0 +1,114 @@
+#pragma once
+#include "Display/Painter.h"
+#include "Display/Symbols.h"
+#include "Menu/MenuItems.h"
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//static const  SButton sbLeft;
+extern void InputWindow_KeyLeft();
+static void        Draw_Left(int, int);
+//static const  SButton sbRight;
+extern void InputWindow_KeyRight();
+static void        Draw_Right(int, int);
+//static const  SButton sbCancel;
+static void     OnPress_Cancel();
+static void        Draw_Cancel(int, int);
+//static const  SButton sbEnter;
+extern void InputWindow_KeyEnter();
+static void        Draw_Enter(int, int);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// нймн ббндю - яхлбнк бкебн -------------------------------------------------------------------------------------------------------------------------
+static const SButton sbLeft =
+{
+    Item_SButton, InputWindow_KeyLeft,
+    {
+        "яхлбнк бкебн", "SYMBOL LEFT"
+    },
+    0,
+    Draw_Left
+};
+
+static void Draw_Left(int x, int y)
+{
+    Painter_SetFont(TypeFont_UGO2);
+    Painter_Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_LEFT);
+    Painter_SetFont(TypeFont_8);
+}
+
+// нймн ббндю - яхлбнк бопюбн ------------------------------------------------------------------------------------------------------------------------
+static const SButton sbRight =
+{
+    Item_SButton, InputWindow_KeyRight,
+    {
+        "яхлбнк бопюбн", "SYMBOL RIGHT"
+    },
+    0,
+    Draw_Right
+};
+
+// нймн ббндю - нрлемю -------------------------------------------------------------------------------------------------------------------------------
+static uint8 units = 0;
+
+static const SButton sbCancel =
+{
+    Item_SButton, OnPress_Cancel,
+    {
+        "едхмхжш хглепемхъ", "UNITS"
+    },
+    &units,
+    Draw_Cancel
+};
+
+static void OnPress_Cancel(void)
+{
+    ADDITION_PAGE = 0;
+}
+
+static void Draw_Cancel(int x, int y)
+{
+    Painter_SetFont(TypeFont_UGO2);
+    Painter_Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_DELETE);
+    Painter_SetFont(TypeFont_8);
+}
+
+// нймн ббндю - ббнд ---------------------------------------------------------------------------------------------------------------------------------
+static const SButton sbEnter =
+{
+    Item_SButton, InputWindow_KeyEnter,
+    {
+        "ббнд", "ENTER"
+    },
+		0,
+    Draw_Enter
+};
+
+static void Draw_Enter(int x, int y)
+{
+    Painter_SetFont(TypeFont_UGO2);
+    Painter_Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_SAVE);
+    Painter_SetFont(TypeFont_8);
+}
+
+Page pInput =
+{
+    Item_SB_Page, 0,
+    {
+        "ббнд гмювемхъ", "VALUE ENTRY"
+    },
+    {
+        (void*)&sbLeft,       ///< нймн ббндю - яхлбнк бкебн
+        (void*)&sbRight,      ///< нймн ббндю - яхлбнк бопюбн
+        (void*)&sbCancel,     ///< нймн ббндю - нрлемю
+        (void*)&sbEnter       ///< нймн ббндю - ббнд
+    }
+};
+
+static void Draw_Right(int x, int y)
+{
+    Painter_SetFont(TypeFont_UGO2);
+    Painter_Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_RIGHT);
+    Painter_SetFont(TypeFont_8);
+}
