@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A472E9D7-D9E7-4074-80D4-56D2BCF5DE65}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Panel</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src;..\..\Panel\src\libs;..\..\Panel\src\libs\forVS;$(IncludePath)</IncludePath>
+    <OutDir>.\Debug</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\Panel\src;..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src\libs;..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;$(IncludePath)</IncludePath>
+    <OutDir>.\x64\Debug</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F429xx;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_HAL_DRIVER;STM32F429xx;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Common\Command.c" />
+    <ClCompile Include="..\..\Panel\src\Display\Colors.c" />
+    <ClCompile Include="..\..\Panel\src\Display\Display.c" />
+    <ClCompile Include="..\..\Panel\src\Display\font\Font.c" />
+    <ClCompile Include="..\..\Panel\src\Display\InputWindow.c" />
+    <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.c" />
+    <ClCompile Include="..\..\Panel\src\Display\Painter.c" />
+    <ClCompile Include="..\..\Panel\src\Display\Painter54.c" />
+    <ClCompile Include="..\..\Panel\src\Display\Painter54.h" />
+    <ClCompile Include="..\..\Panel\src\Display\PainterText.c" />
+    <ClCompile Include="..\..\Panel\src\Display\PainterText54.h" />
+    <ClCompile Include="..\..\Panel\src\Generator\Generator.c" />
+    <ClCompile Include="..\..\Panel\src\Globals.c" />
+    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.c" />
+    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.c" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Hardware.c" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer.c" />
+    <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.c" />
+    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_hal_msp.c" />
+    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_it.c" />
+    <ClCompile Include="..\..\Panel\src\libs\system_stm32f4xx.c" />
+    <ClCompile Include="..\..\Panel\src\Log.c" />
+    <ClCompile Include="..\..\Panel\src\main.c" />
+    <ClCompile Include="..\..\Panel\src\Menu\Menu.c" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.c" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.c" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsDrawing.c" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.c" />
+    <ClCompile Include="..\..\Panel\src\Settings\Settings.c" />
+    <ClCompile Include="..\..\Panel\src\Utils\Math.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_ltdc.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c" />
+    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Common\Command.h" />
+    <ClInclude Include="..\..\Panel\src\defines.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Colors.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Display.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Display54.h" />
+    <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h" />
+    <ClInclude Include="..\..\Panel\src\Display\font\Font.h" />
+    <ClInclude Include="..\..\Panel\src\Display\InputWindow.h" />
+    <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Painter.h" />
+    <ClInclude Include="..\..\Panel\src\Display\PainterC.h" />
+    <ClInclude Include="..\..\Panel\src\Display\PainterText.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
+    <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h" />
+    <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h" />
+    <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h" />
+    <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
+    <ClInclude Include="..\..\Panel\src\Globals.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\FLASH.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\FSMC.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Hardware.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Hardware54.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
+    <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h" />
+    <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h" />
+    <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard54.h" />
+    <ClInclude Include="..\..\Panel\src\libs\forVS\core_cm4.h" />
+    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_conf.h" />
+    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_msp54.h" />
+    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_it.h" />
+    <ClInclude Include="..\..\Panel\src\Log.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDrawing.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsLogic.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h" />
+    <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
+    <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />
+    <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
+    <ClInclude Include="..\..\Panel\src\Utils\Math.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma2d.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h" />
+    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Panel\src\Display\font\font5.inc" />
+    <None Include="..\..\Panel\src\Display\font\font5display.inc" />
+    <None Include="..\..\Panel\src\Display\font\font8.inc" />
+    <None Include="..\..\Panel\src\Display\font\font8display.inc" />
+    <None Include="..\..\Panel\src\Display\font\fontUGO.inc" />
+    <None Include="..\..\Panel\src\Display\font\fontUGO2.inc" />
+    <None Include="..\..\Panel\src\Display\font\fontUGO2display.inc" />
+    <None Include="..\..\Panel\src\Display\font\fontUGOdisplay.inc" />
+    <None Include="..\..\Panel\src\libs\startup_stm32f429xx.s" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
