@@ -1,5 +1,6 @@
 *.tmp
 *.uvgui*.*
+JLink*.*
 
 doc/doxygen/KornetDDS/*
 
