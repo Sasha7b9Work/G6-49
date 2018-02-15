@@ -1,6 +1,8 @@
 #pragma once
 #include "defines.h"
 
+#define __weak __attribute((weak))
+
 #define HAL_MODULE_ENABLED
 #define HAL_DMA_MODULE_ENABLED
 #define HAL_FLASH_MODULE_ENABLED

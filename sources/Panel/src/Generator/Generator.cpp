@@ -82,14 +82,14 @@ static void MasterSynchro(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator_EnableChannel(Channel ch, bool enable)
 {
-    uint8 buffer[3] = {ENABLE_CHANNEL, ch, enable ? 1 : 0};
+    uint8 buffer[3] = {ENABLE_CHANNEL, ch, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 3);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator_SetDebugMode(bool enable)
 {
-    uint8 buffer[2] = {MODE_DEBUG, enable ? 1 : 0};
+    uint8 buffer[2] = {MODE_DEBUG, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 2);
 }
 

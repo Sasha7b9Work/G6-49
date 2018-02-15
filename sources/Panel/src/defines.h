@@ -30,7 +30,6 @@ typedef enum
 #define NUM_ITEMS_ON_PAGE   4
 
 typedef void    (*pFuncVV)();
-typedef bool    (*pFuncBV)();
 typedef void    (*pFuncVII)(int, int);
 
 #define GetBit(value, bit) (((value) >> (bit)) & 0x01)
