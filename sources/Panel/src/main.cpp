@@ -18,7 +18,7 @@ int main(void)
 {
     Hardware_Init();
 
-    Keyboard_Init();
+    Keyboard::Init();
 
     uint time = HAL_GetTick();
 

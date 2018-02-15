@@ -71,7 +71,7 @@ void Item_Rotate(void *item, Control control)
         {
             if(*(choice->cell) == 0)
             {
-                *(choice->cell) = Choice_NumChoices(choice) - 1;
+                *(choice->cell) = (uint8)(Choice_NumChoices(choice) - 1);
             }
             else
             {

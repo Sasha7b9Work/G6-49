@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Display\InputWindowStruct.c</Filename>
+          <Filename>C:\My\Work\stm32\KornetDDS\sources\Panel\src\Display\InputWindowStruct.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelDDS\src/Display/InputWindowStruct.c\583</Expression>
         </Bp>

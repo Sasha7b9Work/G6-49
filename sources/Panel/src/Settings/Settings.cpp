@@ -26,67 +26,67 @@ Settings set =
     {
         {
             {                                                                           // [A][Form_Sine]
-                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency},
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period},
-                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude},
-                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset},
-                {false},
-                {false},
-                {false},
-                {false}
+                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false},
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    false},
+                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, false},
+                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    false},
+                {},
+                {},
+                {},
+                {}
             },
             {                                                                           // [A][Form_Saw]
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency},
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period},
-                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude},
-                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset},
-                {false},
-                {false},
-                {false},
-                {false}
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false},
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    false},
+                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, false},
+                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    false},
+                {},
+                {},
+                {},
+                {}
             },
             {                                                                           // [A][Form_Impulse]
-                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency},
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period},
-                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude},
-                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset},
-                {true, Sign_None, "10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration},
-                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio},
-                {false},
-                {false}
+                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false},
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    false},
+                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, false},
+                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    false},
+                {true, Sign_None, "10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration,  false},
+                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio, false},
+                {},
+                {}
             }    
                 
         },
         {
             {                                                                           // [B][Form_Sine]
-                {true, Sign_None, "20001", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency},
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period},
-                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude},
-                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset},
-                {false},
-                {false},
-                {true, Sign_Plus, "10000", "", 0, 0, NUM_DIGITS - 1, One,   Phase},
-                {false}
+                {true, Sign_None, "20001", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false},
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    false},
+                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, false},
+                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    false},
+                {},
+                {},
+                {true, Sign_Plus, "10000", "", 0, 0, NUM_DIGITS - 1, One,   Phase,     false},
+                {}
             },
             {                                                                           // [B][Form_Saw]
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency},
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period},
-                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude},
-                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset},
-                {false},
-                {false},
-                {false},
-                {false}
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false},
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    false},
+                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, false},
+                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    false},
+                {},
+                {},
+                {},
+                {}
             },
             {                                                                           // [B][Form_Impulse]
-                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency},
-                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period},
-                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude},
-                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset},
-                {true, Sign_None, "10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration},
-                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio},
-                {false},
-                {true, Sign_None, "50000", "", 1, 0, NUM_DIGITS - 1, Micro, Delay}
+                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false},
+                {true, Sign_None, "10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    false},
+                {true, Sign_None, "50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, false},
+                {true, Sign_Plus, "00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    false},
+                {true, Sign_None, "10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration,  false},
+                {true, Sign_None, "20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio, false},
+                {},
+                {true, Sign_None, "50000", "", 1, 0, NUM_DIGITS - 1, Micro, Delay,     false}
             } 
         }
     },

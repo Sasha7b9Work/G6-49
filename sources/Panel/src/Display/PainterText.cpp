@@ -150,7 +150,7 @@ void Painter_DrawTextInRect(int x, int y, int width, const char *text)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int Painter_DrawChar(int eX, int eY, char symbol)
 {
-    int8 width = font->symbol[symbol].width;
+    int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
 
     int size = 1;
@@ -185,8 +185,8 @@ int Painter_DrawChar(int eX, int eY, char symbol)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter_DrawText(int x, int y, const char *text)
 {
-    int numSymbols = strlen(text);
-    for (int i = 0; i < numSymbols; ++i)
+    uint numSymbols = strlen(text);
+    for (uint i = 0; i < numSymbols; ++i)
     {
         x = Painter_DrawChar(x, y, text[i]);
         ++x;

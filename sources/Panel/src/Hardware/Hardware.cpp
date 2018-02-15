@@ -135,7 +135,7 @@ static void MX_TIM4_Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void _Error_Handler(const char * file, int line)
+__attribute((noreturn)) void _Error_Handler(const char *, int)
 {
     /* USER CODE BEGIN Error_Handler_Debug */
     /* User can add his own implementation to report the HAL error return state */

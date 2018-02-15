@@ -34,8 +34,10 @@ void FSMC_Init(void)
             FMC_WAIT_SIGNAL_DISABLE,           ///< Init.WaitSignal
             FMC_EXTENDED_MODE_DISABLE,         ///< Init.ExtendedMode
             FMC_ASYNCHRONOUS_WAIT_DISABLE,     ///< Init.AsynchronousWait
-            FMC_WRITE_BURST_DISABLE            ///< Init.WriteBurst
-        }
+            FMC_WRITE_BURST_DISABLE,           ///< Init.WriteBurst
+            0, 0, 0
+        },
+        HAL_UNLOCKED, HAL_SRAM_STATE_RESET, 0
     };
 
     if (HAL_SRAM_Init((SRAM_HandleTypeDef*)(&sramHandle), (FMC_NORSRAM_TimingTypeDef*)(&sramTiming),

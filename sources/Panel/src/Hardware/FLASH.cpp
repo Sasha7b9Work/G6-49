@@ -32,8 +32,8 @@ void FLASH_SaveSettings(void)
 
     // Ќаходим первый свободный адрес записи
     int address = ADDR_SECTOR_SETTINGS;
-    while (READ_HALF_WORD(address) != 0xffff &&                     // ѕока по адресу, кратному SIZE_RECORD, записаны настройки
-           address < (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS)) // и мы не вышли за пределы секторы настроек
+    while (READ_HALF_WORD(address) != 0xffff &&                             // ѕока по адресу, кратному SIZE_RECORD, записаны настройки
+           (uint)address < (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS))   // и мы не вышли за пределы секторы настроек
     {
         address += SIZE_RECORD;
     }
@@ -45,7 +45,7 @@ void FLASH_SaveSettings(void)
     }
 
     CURRENT_PAGE = 0;
-    WriteBufferBytes(address, &set, sizeof(Settings));
+    WriteBufferBytes((uint)address, &set, sizeof(Settings));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,12 +58,12 @@ void FLASH_LoadSettins(void)
         do
         {
             address += SIZE_RECORD;
-        } while(READ_HALF_WORD(address) != 0xffff && address < (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS));
+        } while(READ_HALF_WORD(address) != 0xffff && address < (int)(ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS));
 
         address -= SIZE_RECORD;
 
         // „итаем в Settings set количество байт, указанное в (int16)*address
-        ReadBufferBytes(address, &set, READ_HALF_WORD(address));
+        ReadBufferBytes((uint)address, &set, READ_HALF_WORD(address));
     }
 }
 
@@ -122,7 +122,7 @@ static uint GetSector(uint startAddress)
     static const StructSector sectors[] =
     {
         {FLASH_SECTOR_11, ADDR_SECTOR_SETTINGS},
-        {0}
+        {}
     };
 
     int i = 0;

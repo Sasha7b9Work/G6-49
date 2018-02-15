@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Panel\src;..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src\libs;..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs;..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
     <OutDir>.\x64\Debug</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -161,12 +161,12 @@
     <ClCompile Include="..\..\Panel\src\Display\Painter54.h" />
     <ClCompile Include="..\..\Panel\src\Display\PainterText.c" />
     <ClCompile Include="..\..\Panel\src\Display\PainterText54.h" />
-    <ClCompile Include="..\..\Panel\src\Generator\Generator.c" />
+    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Globals.c" />
-    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.c" />
-    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.c" />
-    <ClCompile Include="..\..\Panel\src\Hardware\Hardware.c" />
-    <ClCompile Include="..\..\Panel\src\Hardware\Timer.c" />
+    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Hardware.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.c" />
     <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_hal_msp.c" />
     <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_it.c" />
@@ -222,7 +222,6 @@
     <ClInclude Include="..\..\Panel\src\Hardware\FLASH.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\FSMC.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Hardware.h" />
-    <ClInclude Include="..\..\Panel\src\Hardware\Hardware54.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h" />

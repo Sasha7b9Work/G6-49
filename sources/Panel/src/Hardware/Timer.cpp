@@ -228,7 +228,7 @@ void Timer_StartLogging(void)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Timer_LogPointUS(char *name)
+uint Timer_LogPointUS(char *)
 {
     uint interval = gTimerTics - timePrevPoint;
     timePrevPoint = gTimerTics;
@@ -237,7 +237,7 @@ uint Timer_LogPointUS(char *name)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Timer_LogPointMS(char *name)
+uint Timer_LogPointMS(char *)
 {
     uint interval = gTimerTics - timePrevPoint;
     timePrevPoint = gTimerTics;

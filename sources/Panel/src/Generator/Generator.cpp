@@ -23,7 +23,8 @@ static SPI_HandleTypeDef hSPI4 =
         SPI_TIMODE_DISABLED,
         SPI_CRCCALCULATION_DISABLED,
         7
-    }
+    },
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
 
@@ -144,7 +145,7 @@ static void SendToInterface(uint8 *data, int size)
         static uint8 recvBuffer[LENGTH_SPI_BUFFER];     // Это массив для принимаемых данных
 
         memset(buffer, 0, LENGTH_SPI_BUFFER);
-        memcpy(buffer, data, size);
+        memcpy(buffer, data, (uint)size);
         
         __IO CommandWrite command = (CommandWrite)buffer[0];
         __IO Channel ch = (Channel)buffer[1];
@@ -175,7 +176,7 @@ static void ShiftToLeft(uint8 *buffer, int length)
 {
     for (int i = 0; i < length; i++)
     {
-        buffer[i] = (buffer[i] << 1);
+        buffer[i] = (uint8)(buffer[i] << 1);
         if (i < length - 1)
         {
             if (GetBit(buffer[i + 1], 7))

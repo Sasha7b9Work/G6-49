@@ -37,7 +37,7 @@ void* ItemFromPage(int numItem)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *Choice_CurrentName(Choice* choice)
+const char *Choice_CurrentName(Choice* choice)
 {
     return choice->names[(*(choice->cell)) * 2 + LANGUAGE];
 }
@@ -179,11 +179,11 @@ int Choice_CurrentChoice(Choice *choice)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char* Choice_Name(Choice* choice, int num)
+const char* Choice_Name(Choice* choice, int num)
 {
     Item type = TypeItem(choice);
 
-    char* retValue = 0;
+    const char* retValue = 0;
 
     if (type == Item_Choice)
     {

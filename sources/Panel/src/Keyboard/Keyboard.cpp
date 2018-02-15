@@ -54,13 +54,13 @@ static GPIO_TypeDef* rlsPorts[] = {GPIOA, GPIOA, GPIOA, GPIOD, GPIOD};
 #define RESET_SL(n)     HAL_GPIO_WritePin(slsPorts[n], sls[n], GPIO_PIN_RESET)
 #define READ_RL(n)      HAL_GPIO_ReadPin(rlsPorts[n], rls[n])
 
-TIM_HandleTypeDef timHandle;
-
 static bool init = false;
+
+TIM_HandleTypeDef Keyboard::timHandle;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Keyboard_Init(void)
+void Keyboard::Init(void)
 {
     for (int i = 0; i < 5; i++)
     {
@@ -203,7 +203,7 @@ static void FillCommand(Control control, TypePress typePress)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-    if (htim == &timHandle)
+    if (htim == &Keyboard::timHandle)
     {
         Update();
     }

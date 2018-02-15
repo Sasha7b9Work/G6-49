@@ -2,41 +2,40 @@
 #include "Display/InputWindow.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsSignals.h"
+#include "Menu/MenuItems.h"
 #include "AddPageInput.h"
 
 
 static void            OnPress_Channel();
 static void            OnPress_Form();
-static void            OnPress_Parameters();
 static void            OnPress_SetParameter();
 
 static uint8 waveForm = 0;
 
+void PanelSignals_Init();
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ¿–¿Ã≈“– ---------------------------------------------------------------------------------------------------------------------
+#pragma clang diagnostic ignored "-Wglobal-constructors"
 static ChoiceParameter cpParameters =
+#pragma clang diagnostic warning "-Wglobal-constructors"
 {
     Item_ChoiceParameter, OnPress_SetParameter,
     {
         "œ¿–¿Ã≈“–", "PARAMETER"
     },
-    {true, true, true, true, false, false, false},
+    {{true, true, true, true, false, false, false, false}},
     (uint8 *)&(set.sig_parameter[(WaveForm)waveForm])
 };
 
-void PanelSignals_Init(void)
+void PanelSignals_Init()
 {
     waveForm = WAVE_FORM;
     IWS_FillAllowParameters(CHANNEL, WAVE_FORM, &cpParameters.allowParameters);
     cpParameters.numParameter = (uint8 *)&(set.sig_parameter[(WaveForm)waveForm]);
 }
 
-
-static void OnPress_Parameters(void)
-{
-
-}
 
 // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿Õ¿À ------------------------------------------------------------------------------------------------------------------------
 static const Choice cChannel =

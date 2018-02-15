@@ -5,8 +5,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern TIM_HandleTypeDef timHandle;
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -20,7 +18,7 @@ void LTDC_IRQHandler(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void TIM3_IRQHandler(void)
 {
-    HAL_TIM_IRQHandler(&timHandle);
+    HAL_TIM_IRQHandler(&Keyboard::timHandle);
 }
 
 void SysTick_Handler(void)

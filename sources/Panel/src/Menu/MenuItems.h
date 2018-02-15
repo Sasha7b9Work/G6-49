@@ -7,10 +7,10 @@
 #define MAX_CHOICE_VARIANTS 10  ///< Максимальное количество вариантов для Choice
 
 /// Структура определяет допустимость параметра для определённой формы сигнала
-typedef struct
+struct AllowableParameters
 {
     bool allow[NumParameters];
-} AllowableParameters;
+};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,20 +33,20 @@ typedef enum
 
 
 /// Универсальный элементы выбора
-typedef struct
+struct Choice
 {
     COMMON_PART_ITEM
-    char    *names[MAX_CHOICE_VARIANTS * 2];
-    uint8   *cell;
-} Choice;
+    const char *names[MAX_CHOICE_VARIANTS * 2];
+    uint8      *cell;
+};
 
 /// Элемент для выбора параметра сигнала
-typedef struct
+struct ChoiceParameter
 {
     COMMON_PART_ITEM
     AllowableParameters     allowParameters;
     uint8                   *numParameter;
-} ChoiceParameter;
+};
 
 /// Кнопка
 typedef struct
@@ -73,11 +73,11 @@ const char* ItemTitle(void* item);
 
 void* ItemFromPage(int numItem);
 
-char* Choice_CurrentName(Choice* choice);
+const char* Choice_CurrentName(Choice* choice);
 
 char* ChoiceWaveParameter_CurrentName(ChoiceParameter *choice);
 
-char* Choice_Name(Choice* choice, int num);
+const char* Choice_Name(Choice* choice, int num);
 
 const char* Page_Name(const Page* page);
 

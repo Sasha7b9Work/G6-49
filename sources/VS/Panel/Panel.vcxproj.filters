@@ -69,9 +69,6 @@
     <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\Hardware.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\libs\system_stm32f4xx.c">
       <Filter>libs</Filter>
     </ClCompile>
@@ -87,14 +84,8 @@
     <ClCompile Include="..\..\Panel\src\Display\font\Font.c">
       <Filter>Display\font</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\Timer.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Math.c">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.c">
-      <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.c">
       <Filter>Menu</Filter>
@@ -147,9 +138,6 @@
     <ClCompile Include="..\..\Panel\src\main.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c">
       <Filter>HAL</Filter>
     </ClCompile>
@@ -192,7 +180,19 @@
     <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\Generator.c">
+    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Hardware.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
   </ItemGroup>
@@ -229,9 +229,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Display54.h">
       <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Hardware\Hardware54.h">
-      <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_msp54.h">
       <Filter>libs</Filter>

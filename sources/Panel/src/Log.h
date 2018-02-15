@@ -10,4 +10,4 @@ typedef enum
 } TypeTrace;
 
 
-void Log_Write(TypeTrace type, char *format, ...);
+void Log_Write(TypeTrace type, const char * __restrict format, ...);

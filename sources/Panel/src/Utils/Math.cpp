@@ -52,11 +52,11 @@ void AddLimitationFloat(float *val, float delta, float min, float max)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int FindSymbol(char *string, char symbol)
 {
-    for (int i = 0; i < strlen(string); i++)
+    for (uint i = 0; i < strlen(string); i++)
     {
         if (string[i] == symbol)
         {
-            return i;
+            return (int)i;
         }
     }
 

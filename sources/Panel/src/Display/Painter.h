@@ -39,8 +39,6 @@ Color Painter_GetColor();
 
 void Painter_LoadPalette();
 
-void Painter_SetPalette(Color color);
-
 void Painter_SetPoint(int x, int y);
 
 void Painter_DrawHLine(int y, int x0, int x1);
@@ -77,8 +75,6 @@ void Painter_DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
 void Painter_DrawSignal(int x, uint8 data[281], bool modeLines);
 
 void Painter_DrawPicture(int x, int y, int width, int height, uint8 *address);
-
-void    Painter_SendToDisplay(uint8 *bytes, int numBytes);
 
 #define WRITE_BYTE(offset, value)   *(command + offset) = (uint8)value
 #define WRITE_SHORT(offset, value)  *((uint16*)(command + offset)) = (uint16)value

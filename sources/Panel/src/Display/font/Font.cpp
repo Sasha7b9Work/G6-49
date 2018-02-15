@@ -2,7 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "defines.h"
 #include "Display/DisplayTypes.h"
-#include "font.h"
+#include "Font.h"
 
 
 //#include "font5display.inc"
@@ -37,7 +37,7 @@ int Font_GetLengthText(const char *text)
     return retValue;
 }
 
-int Font_GetHeightSymbol(char symbol)
+int Font_GetHeightSymbol(char)
 {
     return 9;
 }
