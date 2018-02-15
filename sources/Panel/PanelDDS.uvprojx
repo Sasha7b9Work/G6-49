@@ -576,16 +576,6 @@
           <GroupName>libs</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\stm32f4xx_hal_msp.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f429xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\src\libs\startup_stm32f429xx.s</FilePath>
@@ -604,6 +594,16 @@
               <FileName>stm32f4xx_it.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\stm32f4xx_it.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_msp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\stm32f4xx_hal_msp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\stm32f4xx_it.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -626,29 +626,14 @@
           <GroupName>Display</GroupName>
           <Files>
             <File>
-              <FileName>Display.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\Display.c</FilePath>
-            </File>
-            <File>
               <FileName>Display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
-              <FileName>Painter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\Painter.c</FilePath>
-            </File>
-            <File>
               <FileName>Painter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Painter.h</FilePath>
-            </File>
-            <File>
-              <FileName>Colors.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\Colors.c</FilePath>
             </File>
             <File>
               <FileName>Colors.h</FileName>
@@ -661,11 +646,6 @@
               <FilePath>.\src\Display\DisplayTypes.h</FilePath>
             </File>
             <File>
-              <FileName>PainterText.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\PainterText.c</FilePath>
-            </File>
-            <File>
               <FileName>PainterText.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\PainterText.h</FilePath>
@@ -676,35 +656,55 @@
               <FilePath>.\src\Display\PainterC.h</FilePath>
             </File>
             <File>
-              <FileName>InputWindow.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\InputWindow.c</FilePath>
-            </File>
-            <File>
               <FileName>InputWindow.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\InputWindow.h</FilePath>
-            </File>
-            <File>
-              <FileName>InputWindowStruct.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\InputWindowStruct.c</FilePath>
             </File>
             <File>
               <FileName>InputWindowStruct.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\InputWindowStruct.h</FilePath>
             </File>
+            <File>
+              <FileName>Colors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Colors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Display.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputWindow.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\InputWindow.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InputWindowStruct.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\InputWindowStruct.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Painter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PainterText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\PainterText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Symbols.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Symbols.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Display/font</GroupName>
           <Files>
-            <File>
-              <FileName>Font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display\font\Font.c</FilePath>
-            </File>
             <File>
               <FileName>Font.h</FileName>
               <FileType>5</FileType>
@@ -730,20 +730,25 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\font\fontUGO2.inc</FilePath>
             </File>
+            <File>
+              <FileName>Font.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\font\Font.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Generator</GroupName>
           <Files>
             <File>
-              <FileName>Generator.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Generator\Generator.c</FilePath>
-            </File>
-            <File>
               <FileName>Generator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Generator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Generator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Generator.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -751,19 +756,9 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>Hardware.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\Hardware.c</FilePath>
-            </File>
-            <File>
               <FileName>Hardware.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Hardware.h</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\Timer.c</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>
@@ -771,35 +766,40 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>FSMC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\FSMC.c</FilePath>
-            </File>
-            <File>
               <FileName>FSMC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FSMC.h</FilePath>
-            </File>
-            <File>
-              <FileName>FLASH.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Hardware\FLASH.c</FilePath>
             </File>
             <File>
               <FileName>FLASH.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FLASH.h</FilePath>
             </File>
+            <File>
+              <FileName>FLASH.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\FLASH.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FSMC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Hardware.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Hardware.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Keyboard</GroupName>
           <Files>
-            <File>
-              <FileName>Keyboard.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Keyboard\Keyboard.c</FilePath>
-            </File>
             <File>
               <FileName>Keyboard.h</FileName>
               <FileType>5</FileType>
@@ -810,30 +810,20 @@
               <FileType>5</FileType>
               <FilePath>.\src\Keyboard\Controls.h</FilePath>
             </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\Keyboard.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Menu</GroupName>
           <Files>
             <File>
-              <FileName>Menu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\Menu.c</FilePath>
-            </File>
-            <File>
               <FileName>Menu.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Menu.h</FilePath>
-            </File>
-            <File>
-              <FileName>MenuDrawing.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\MenuDrawing.c</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItems.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\MenuItems.c</FilePath>
             </File>
             <File>
               <FileName>MenuItems.h</FileName>
@@ -841,24 +831,39 @@
               <FilePath>.\src\Menu\MenuItems.h</FilePath>
             </File>
             <File>
-              <FileName>MenuItemsDrawing.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\MenuItemsDrawing.c</FilePath>
-            </File>
-            <File>
               <FileName>MenuItemsDrawing.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\MenuItemsDrawing.h</FilePath>
             </File>
             <File>
-              <FileName>MenuItemsLogic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Menu\MenuItemsLogic.c</FilePath>
-            </File>
-            <File>
               <FileName>MenuItemsLogic.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\MenuItemsLogic.h</FilePath>
+            </File>
+            <File>
+              <FileName>Menu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Menu.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuDrawing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuDrawing.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItemsDrawing.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItemsDrawing.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItemsLogic.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItemsLogic.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -906,14 +911,14 @@
               <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
             <File>
-              <FileName>Settings.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Settings\Settings.c</FilePath>
-            </File>
-            <File>
               <FileName>SettingsSignals.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Settings\SettingsSignals.h</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -921,14 +926,14 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Math.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utils\Math.c</FilePath>
-            </File>
-            <File>
               <FileName>Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -936,19 +941,9 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
               <FileName>defines.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\defines.h</FilePath>
-            </File>
-            <File>
-              <FileName>Globals.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Globals.c</FilePath>
             </File>
             <File>
               <FileName>Globals.h</FileName>
@@ -956,14 +951,24 @@
               <FilePath>.\src\Globals.h</FilePath>
             </File>
             <File>
-              <FileName>Log.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Log.c</FilePath>
-            </File>
-            <File>
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
+            </File>
+            <File>
+              <FileName>globals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\globals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
             </File>
           </Files>
         </Group>
