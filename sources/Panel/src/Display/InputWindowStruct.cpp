@@ -150,11 +150,7 @@ void IWS_RegRight(void)
 {
     SaveValue();
 
-    float value = IWS_Value(iws);
-
     IncreaseDigit(CURRENT_POS);
-
-    float value2 = IWS_Value(iws);
 
     if (IWS_Value(iws) > MaxValue(iws->param))
     {
@@ -162,9 +158,7 @@ void IWS_RegRight(void)
     }
     else
     {
-        int value = ValueBeforeComma(iws);
-
-        if (value > 999)
+        if (ValueBeforeComma(iws) > 999)
         {
             IncreaseOrder();
         }
@@ -177,7 +171,7 @@ void IWS_RegRight(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *IWS_StringValue(InputWindowStruct *iws)
+char *IWS_StringValue(InputWindowStruct *iws_)
 {
     static char buffer[20];
     buffer[0] = '\0';
@@ -187,7 +181,7 @@ char *IWS_StringValue(InputWindowStruct *iws)
         char str[2] = {0, 0};
         str[0] = DIGIT(i);
         strcat(buffer, str);
-        if (iws->posComma == i)
+        if (iws_->posComma == i)
         {
             str[0] = '.';
             strcat(buffer, str);
@@ -372,9 +366,9 @@ static bool OnlyOneRigthDigit(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int ValueBeforeComma(InputWindowStruct *iws)
+static int ValueBeforeComma(InputWindowStruct *iws_)
 {
-    int lowPos = iws->posComma;     // Младший байт числа
+    int lowPos = iws_->posComma;     // Младший байт числа
 
     int retValue = 0;
 
@@ -382,7 +376,7 @@ static int ValueBeforeComma(InputWindowStruct *iws)
 
     for (int i = lowPos; i >= 0; i--)
     {
-        retValue += (0x0f & iws->inputBuffer[i]) * pow;
+        retValue += (0x0f & iws_->inputBuffer[i]) * pow;
         pow *= 10;
     }
 
@@ -390,13 +384,13 @@ static int ValueBeforeComma(InputWindowStruct *iws)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static float ValueAfterComma(InputWindowStruct *iws)
+static float ValueAfterComma(InputWindowStruct *iws_)
 {
     int retValue = 0;
     int pow = 1;
-    for (int i = NUM_DIGITS - 1; i > iws->posComma; i--)
+    for (int i = NUM_DIGITS - 1; i > iws_->posComma; i--)
     {
-        uint8 digit = iws->inputBuffer[i];
+        uint8 digit = iws_->inputBuffer[i];
         digit &= 0x0f;
         retValue += digit * pow;
         pow *= 10;
@@ -416,11 +410,11 @@ static void IncreaseOrder(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float IWS_Value(InputWindowStruct *iws)
+float IWS_Value(InputWindowStruct *iws_)
 {
-    float value = ValueBeforeComma(iws) + ValueAfterComma(iws);
+    float value = ValueBeforeComma(iws_) + ValueAfterComma(iws_);
 
-    Order order = iws->order;
+    Order order = iws_->order;
 
     if (order == Nano)
     {
@@ -486,8 +480,6 @@ void IWS_PressKey(Control key)
     {
         IN_NUM_LOCK_MODE = true;
         inputBuffer[0] = 0;
-
-        volatile size_t length = strlen(inputBuffer);
     }
 
     if (strlen(inputBuffer) < SIZE_INPUT_BUFFER - 1)
@@ -497,7 +489,7 @@ void IWS_PressKey(Control key)
         {
             if (command[i].control == key)
             {
-                int length = strlen(inputBuffer);
+                int length = (int)strlen(inputBuffer);
                 inputBuffer[length] = command[i].symbol;
                 inputBuffer[length + 1] = 0;
                 break;
@@ -548,11 +540,11 @@ void IWS_SaveValue(void)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters)
+void IWS_FillAllowParameters(Channel ch_, WaveForm form_, AllowableParameters *allowParameters)
 {
     for (int i = 0; i < NumParameters; i++)
     {
-        allowParameters->allow[i] = INPUT_WINDOW_STRUCT(ch, form, i).allow;
+        allowParameters->allow[i] = INPUT_WINDOW_STRUCT(ch_, form_, i).allow;
     }
 }
 
@@ -599,7 +591,7 @@ static void FillIWSfromInputBuffer(void)
     }
     else
     {
-        while ((int)fabsf(atof(inputBuffer)) == 0)     // Пока целая часть числа в inputBuffer == 0
+        while ((int)fabs(atof(inputBuffer)) == 0)     // Пока целая часть числа в inputBuffer == 0
         {
             // Сдвигаем запятую на три места вправо
             int pos = FindSymbol(inputBuffer, '.');
@@ -624,12 +616,12 @@ static void FillIWSfromInputBuffer(void)
 
     if (iws->sign != Sign_None)
     {
-        iws->sign = (atof(inputBuffer) >= 0.0f) ? Sign_Plus : Sign_Minus;
+        iws->sign = (atof(inputBuffer) >= 0.0) ? Sign_Plus : Sign_Minus;
     }
 
     iws->hightLightDigit = NUM_DIGITS - 1;
 
-    while ((int)fabsf(atof(inputBuffer)) > 999)     // Пока целая часть числа в inputBuffer > 999
+    while ((int)fabs(atof(inputBuffer)) > 999)     // Пока целая часть числа в inputBuffer > 999
     {
         // Сдвигаем запятую на три места влево
         int pos = FindSymbol(inputBuffer, '.');
@@ -646,16 +638,16 @@ static void FillIWSfromInputBuffer(void)
 
     // В этой точке целая часть числа уже не превышает 999
 
-    float value = fabsf(atof(inputBuffer));
+    float value = (float)fabs(atof(inputBuffer));
 
     int intValue = (int)value;
 
     // Заносим целую часть числа в буфер
     sprintf(iws->inputBuffer, "%d", intValue);
 
-    iws->posComma = strlen(iws->inputBuffer) - 1;
+    iws->posComma = (int)strlen(iws->inputBuffer) - 1;
 
-    int numDigits = NUM_DIGITS - strlen(iws->inputBuffer);      // Столько цифр нужно записать после запятой
+    int numDigits = NUM_DIGITS - (int)strlen(iws->inputBuffer);      // Столько цифр нужно записать после запятой
 
     int pos = FindSymbol(inputBuffer, '.');                     // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
 

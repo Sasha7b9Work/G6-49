@@ -25,7 +25,7 @@ static const char *nameWaveForm[NumForms][2] =
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-char *ItemTitle(void* item)
+const char *ItemTitle(void* item)
 {
     return ((Choice*)item)->title[LANGUAGE];
 }
@@ -49,7 +49,7 @@ char *ChoiceWaveParameter_CurrentName(ChoiceParameter *choice)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char* Page_Name(const Page* page)
+const char* Page_Name(const Page* page)
 {
     return page->title[LANGUAGE];
 }

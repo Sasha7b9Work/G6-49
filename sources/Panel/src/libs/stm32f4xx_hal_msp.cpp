@@ -81,14 +81,6 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef* htim_pwm)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
-{
-    if(htim->Instance == TIM4)
-    {
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef* htim_pwm)
 {
     if(htim_pwm->Instance == TIM4)

@@ -11,8 +11,6 @@ static void SystemClock_Config();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void MX_TIM4_Init();
 
-extern void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
-
 static TIM_HandleTypeDef htim4;
 
 
@@ -101,7 +99,6 @@ void SystemClock_Config(void)
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 /* TIM4 init function */
 static void MX_TIM4_Init(void)
@@ -135,13 +132,10 @@ static void MX_TIM4_Init(void)
     {
         _Error_Handler(__FILE__, __LINE__);
     }
-
-    HAL_TIM_MspPostInit(&htim4);
 }
 
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void _Error_Handler(char * file, int line)
+void _Error_Handler(const char * file, int line)
 {
     /* USER CODE BEGIN Error_Handler_Debug */
     /* User can add his own implementation to report the HAL error return state */

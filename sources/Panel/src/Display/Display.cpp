@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display.h"
 #include "Display/Painter.h"
-#include "Display/font/Font.h"
+#include "Display/Font/Font.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "Keyboard/Keyboard.h"
@@ -26,7 +26,7 @@ static const char *text = 0;
 
 #define STRING_IN_CONSOLE 29
 #define SYMBOLS_IN_STRING 64
-static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {0};
+static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static LTDC_HandleTypeDef hltdc;
@@ -245,8 +245,8 @@ static void DrawSignalUGO(Channel chan, int y0)
 
         for (int i = delta; i < width; i++)
         {
-            int y1 = aveY - sinf((i - delta) * speed) * height / 2.0f;
-            int y2 = aveY - sinf(i * speed) * height / 2.0f;
+            int y1 = aveY - (int)(sinf((i - delta) * speed) * height / 2.0f);
+            int y2 = aveY - (int)(sinf(i * speed) * height / 2.0f);
 
             Painter_DrawLine(x0 + i - delta, y1, x0 + i, y2);
             Painter_RunDisplay();

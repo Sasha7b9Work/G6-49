@@ -125,6 +125,8 @@ static void DrawDigits(int x, int y)
     Painter_DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, iws.order, iws.param));
 }
 
+#pragma clang diagnostic ignored "-Wunused-parameter"
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawAmplitude(int x, int y)
 {
@@ -173,8 +175,10 @@ static void DrawDuration(int x, int y)
 
 }
 
+#pragma clang diagnostic warning "-Wunused-parameter"
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow_KeyLeft(void)
+void InputWindow::KeyLeft()
 {
     if (!IN_NUM_LOCK_MODE)
     {
@@ -183,7 +187,7 @@ void InputWindow_KeyLeft(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow_KeyRight(void)
+void InputWindow::KeyRight()
 {
     if (!IN_NUM_LOCK_MODE)
     {
@@ -192,7 +196,7 @@ void InputWindow_KeyRight(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow_KeyEnter(void)
+void InputWindow::KeyEnter()
 {
     IWS_SaveValue();
 }

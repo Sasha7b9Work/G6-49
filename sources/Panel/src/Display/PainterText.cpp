@@ -17,7 +17,7 @@ static bool ByteFontNotEmpty(int eChar, int byte)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int DrawSpaces(int x, int y, char *text, int *numSymbols)
+static int DrawSpaces(int x, int y, const char *text, int *numSymbols)
 {
     *numSymbols = 0;
     while (*text == ' ')
@@ -30,7 +30,7 @@ static int DrawSpaces(int x, int y, char *text, int *numSymbols)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int DrawSubString(int x, int y, char *text)
+static int DrawSubString(int x, int y, const char *text)
 {
     int numSymbols = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
@@ -44,7 +44,7 @@ static int DrawSubString(int x, int y, char *text)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int GetLenghtSubString(char *text)
+static int GetLenghtSubString(const char *text)
 {
     int retValue = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
@@ -73,7 +73,7 @@ static bool BitInFontIsExist(int eChar, int numByte, int bit)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter_DrawBigChar(int eX, int eY, int size, char symbol)
 {
-    int8 width = font->symbol[symbol].width;
+    int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
 
     for (int b = 0; b < height; b++)
@@ -106,7 +106,7 @@ int Painter_DrawBigChar(int eX, int eY, int size, char symbol)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter_DrawBigText(int eX, int eY, int size, const char *text)
 {
-    int numSymbols = strlen(text);
+    int numSymbols = (int)strlen(text);
 
     int x = eX;
 
@@ -125,7 +125,7 @@ void Painter_DrawTextRelativelyRight(int xRight, int y, const char *text)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter_DrawTextInRect(int x, int y, int width, char *text)
+void Painter_DrawTextInRect(int x, int y, int width, const char *text)
 {
     int xStart = x;
     int xEnd = xStart + width;

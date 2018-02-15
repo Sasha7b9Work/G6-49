@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char *Command_Name(CommandWrite command)
 {
-    static char *names[NUM_COMMAND_WRITE] =
+    static const char *names[NUM_COMMAND_WRITE] =
     {
         "SERVICE",
         "ENABLE",
@@ -26,7 +26,7 @@ char *Command_Name(CommandWrite command)
     {
         static char buffer[10] = {0};
         sprintf(buffer, "%x", (uint8)command);
-        LOG_WRITE("ОШИБКА - принято %s", buffer);
+        LOG_WRITE((char *)"ОШИБКА - принято %s", buffer);
     }
-    return names[command];
+    return const_cast<char *>(names[command]);
 }

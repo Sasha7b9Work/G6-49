@@ -6,26 +6,23 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //static const  SButton sbLeft;
-extern void InputWindow_KeyLeft();
-static void        Draw_Left(int, int);
+static void     Draw_Left(int, int);
 //static const  SButton sbRight;
-extern void InputWindow_KeyRight();
-static void        Draw_Right(int, int);
+static void     Draw_Right(int, int);
 //static const  SButton sbCancel;
 static void     OnPress_Cancel();
-static void        Draw_Cancel(int, int);
+static void     Draw_Cancel(int, int);
 //static const  SButton sbEnter;
-extern void InputWindow_KeyEnter();
-static void        Draw_Enter(int, int);
+static void     Draw_Enter(int, int);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // нймн ббндю - яхлбнк бкебн -------------------------------------------------------------------------------------------------------------------------
 static const SButton sbLeft =
 {
-    Item_SButton, InputWindow_KeyLeft,
+    Item_SButton, InputWindow::KeyLeft,
     {
-        "яхлбнк бкебн", "SYMBOL LEFT"
+        (char *)"яхлбнк бкебн", (char *)"SYMBOL LEFT"
     },
     0,
     Draw_Left
@@ -41,7 +38,7 @@ static void Draw_Left(int x, int y)
 // нймн ббндю - яхлбнк бопюбн ------------------------------------------------------------------------------------------------------------------------
 static const SButton sbRight =
 {
-    Item_SButton, InputWindow_KeyRight,
+    Item_SButton, InputWindow::KeyRight,
     {
         "яхлбнк бопюбн", "SYMBOL RIGHT"
     },
@@ -77,7 +74,7 @@ static void Draw_Cancel(int x, int y)
 // нймн ббндю - ббнд ---------------------------------------------------------------------------------------------------------------------------------
 static const SButton sbEnter =
 {
-    Item_SButton, InputWindow_KeyEnter,
+    Item_SButton, InputWindow::KeyEnter,
     {
         "ббнд", "ENTER"
     },

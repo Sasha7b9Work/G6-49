@@ -27,9 +27,9 @@ typedef enum
 } Item;
 
 #define COMMON_PART_ITEM        \
-        Item    typeItem;       \
-        pFuncVV funcOnPress;    \
-        char    *title[2];
+        Item       typeItem;       \
+        pFuncVV    funcOnPress;    \
+        const char *title[2];
 
 
 /// ”ниверсальный элементы выбора
@@ -69,7 +69,7 @@ typedef struct
 } Page;
 
 
-char* ItemTitle(void* item);
+const char* ItemTitle(void* item);
 
 void* ItemFromPage(int numItem);
 
@@ -79,7 +79,7 @@ char* ChoiceWaveParameter_CurrentName(ChoiceParameter *choice);
 
 char* Choice_Name(Choice* choice, int num);
 
-char* Page_Name(const Page* page);
+const char* Page_Name(const Page* page);
 
 bool ItemIsChoice(void* item);
 

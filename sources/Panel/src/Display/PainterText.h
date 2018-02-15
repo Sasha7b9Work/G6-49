@@ -44,7 +44,7 @@ void Painter_DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int he
 
 int Painter_DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
 
-void Painter_DrawTextInRect(int x, int y, int width, char *text);
+void Painter_DrawTextInRect(int x, int y, int width, const char *text);
 
 void Painter_DrawTextRelativelyRight(int xRight, int y, const char *text);
 

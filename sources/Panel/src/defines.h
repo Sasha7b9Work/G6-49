@@ -1,4 +1,22 @@
 #pragma once
+
+
+// warning: use of old-style cast
+#pragma clang diagnostic ignored "-Wold-style-cast"
+
+// warning: padding struct ... with 2 bytes to align
+#pragma clang diagnostic ignored "-Wpadded"
+
+// warning: variadic macros are incompatible with C++98
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+
+// warning: illegal character encoding in string literal
+#pragma clang diagnostic ignored "-Winvalid-source-encoding"
+
+// warning: array subscript is of type 'char'
+#pragma clang diagnostic ignored "-Wchar-subscripts"
+
+
 #include <stm32f4xx.h>
 #include <stm32f4xx_hal.h>
 
@@ -10,7 +28,7 @@ typedef unsigned char       uint8;
 typedef unsigned char       uchar;
 typedef signed char         int8;
 
-void _Error_Handler(char *, int);
+void _Error_Handler(const char *, int);
 #define ERROR_HANDLER() /* _Error_Handler(__FILE__, __LINE__) */
 
 typedef enum

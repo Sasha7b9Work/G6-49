@@ -15,6 +15,7 @@ extern "C" {
     void PendSV_Handler();
     void SysTick_Handler();
     void LTDC_IRQHandler();
+    void TIM3_IRQHandler();
 
 #ifdef __cplusplus
 }
