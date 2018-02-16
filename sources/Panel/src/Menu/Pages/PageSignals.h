@@ -32,7 +32,7 @@ static ChoiceParameter cpParameters =
 void PanelSignals_Init()
 {
     waveForm = WAVE_FORM;
-    IWS_FillAllowParameters(CHANNEL, WAVE_FORM, &cpParameters.allowParameters);
+    InputWindowStruct::FillAllowParameters(CHANNEL, WAVE_FORM, &cpParameters.allowParameters);
     cpParameters.numParameter = (uint8 *)&(set.sig_parameter[(WaveForm)waveForm]);
 }
 
@@ -83,7 +83,7 @@ static void OnPress_Form(void)
     }
 
     WAVE_FORM = form;
-    IWS_FillAllowParameters(CHANNEL, WAVE_FORM, &cpParameters.allowParameters);
+    InputWindowStruct::FillAllowParameters(CHANNEL, WAVE_FORM, &cpParameters.allowParameters);
     cpParameters.numParameter = (uint8 *)&(set.sig_parameter[WAVE_FORM]);
     TuneGenerator(CHANNEL);
 }
@@ -91,7 +91,7 @@ static void OnPress_Form(void)
 static void OnPress_Channel(void)
 {
     waveForm = WAVE_FORM;
-    IWS_FillAllowParameters(CHANNEL, WAVE_FORM, &cpParameters.allowParameters);
+    InputWindowStruct::FillAllowParameters(CHANNEL, WAVE_FORM, &cpParameters.allowParameters);
     cpParameters.numParameter = (uint8 *)&(set.sig_parameter[WAVE_FORM]);
 }
 

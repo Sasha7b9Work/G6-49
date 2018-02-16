@@ -286,7 +286,7 @@ static void DrawSignalParameters(Channel ch, int y0)
     Painter_DrawTextC(22, y0 + 3, NameWaveForm(form), COLOR_FILL);
 
     AllowableParameters allowParameters;
-    IWS_FillAllowParameters(ch, form, &allowParameters);
+    InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
     
     for (int i = 0; i < NumParameters; i++)
     {

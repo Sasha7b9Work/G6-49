@@ -531,7 +531,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_FillAllowParameters(Channel ch_, WaveForm form_, AllowableParameters *allowParameters)
+void InputWindowStruct::FillAllowParameters(Channel ch_, WaveForm form_, AllowableParameters *allowParameters)
 {
     for (int i = 0; i < NumParameters; i++)
     {
