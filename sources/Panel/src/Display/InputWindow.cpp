@@ -182,7 +182,7 @@ void InputWindow::KeyLeft()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        IWS_KeyLeft();
+        InputWindowStruct::KeyLeft();
     }
 }
 
@@ -191,7 +191,7 @@ void InputWindow::KeyRight()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        IWS_KeyRight();
+        InputWindowStruct::KeyRight();
     }
 }
 
@@ -212,21 +212,21 @@ void InputWindow_ProcessContorl(StructControl control)
     {
         if (pressed == TypePress_Release)
         {
-            IWS_PressKey(key);
+            InputWindowStruct::PressKey(key);
         }
     }
     else if (key == REG_A_LEFT)
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            IWS_RegLeft();
+            InputWindowStruct::RegLeft();
         }
     }
     else if (key == REG_B_RIGHT)
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            IWS_RegRight();
+            InputWindowStruct::RegRight();
         }
     }
     else if ((key >= B_F1 & key <= B_F4) && pressed == TypePress_Release)

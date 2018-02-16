@@ -38,6 +38,11 @@ public:
     float Value();
 
     static void DrawInputField(int x, int y);
+    static void KeyLeft();
+    static void KeyRight();
+    static void RegLeft();
+    static void RegRight();
+    static void PressKey(Control key);
 
     bool            allow;                      ///< Если true, параметр разрешен для данного сигнала
     Sign            sign;
@@ -53,11 +58,6 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void IWS_KeyLeft();
-void IWS_KeyRight();
-void IWS_RegLeft();
-void IWS_RegRight();
-void IWS_PressKey(Control key);
 void IWS_SaveValue();
 /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
 void IWS_FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters);

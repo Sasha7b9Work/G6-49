@@ -90,7 +90,7 @@ void InputWindowStruct::Fill(Channel ch_, WaveForm form_, WaveParameter param_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_KeyLeft(void)
+void InputWindowStruct::KeyLeft(void)
 {
 	if (CURRENT_POS > 0)
 	{
@@ -101,7 +101,7 @@ void IWS_KeyLeft(void)
 		--CURRENT_POS;
 		if (CURRENT_DIGIT == '.')
 		{
-            IWS_KeyLeft();
+            InputWindowStruct::KeyLeft();
 		}
 	}
     else
@@ -114,7 +114,7 @@ void IWS_KeyLeft(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_KeyRight(void)
+void InputWindowStruct::KeyRight()
 {
 	if (CURRENT_POS < NUM_DIGITS - 1)
 	{
@@ -125,7 +125,7 @@ void IWS_KeyRight(void)
 		++CURRENT_POS;
 		if (CURRENT_DIGIT == '.')
 		{
-            IWS_KeyRight();
+            InputWindowStruct::KeyRight();
 		}
 	}
     else if(DIGIT(0) == '0')
@@ -135,7 +135,7 @@ void IWS_KeyRight(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_RegLeft(void)
+void InputWindowStruct::RegLeft()
 {
     DecreaseDigit(CURRENT_POS);
 
@@ -146,7 +146,7 @@ void IWS_RegLeft(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_RegRight(void)
+void InputWindowStruct::RegRight(void)
 {
     SaveValue();
 
@@ -459,7 +459,7 @@ static void RestoreValue(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_PressKey(Control key)
+void InputWindowStruct::PressKey(Control key)
 {
     typedef struct
     {
