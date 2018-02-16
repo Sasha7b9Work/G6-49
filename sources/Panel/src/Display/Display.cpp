@@ -359,7 +359,7 @@ void Display::DrawConsole(void)
     int y = 1;
     for (int i = 0; i < STRING_IN_CONSOLE; i++)
     {
-        int length = Font_GetLengthText(&bufferConsole[i][0]);
+        int length = Font::GetLengthText(&bufferConsole[i][0]);
         Painter_FillRegionC(2, y, length, 8, COLOR_BACK);
         Painter_DrawTextC(2, y, &bufferConsole[i][0], COLOR_FILL);
         y += 8;

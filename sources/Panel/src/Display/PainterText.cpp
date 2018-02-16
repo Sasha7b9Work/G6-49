@@ -49,7 +49,7 @@ static int GetLenghtSubString(const char *text)
     int retValue = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        retValue += Font_GetLengthSymbol(*text);
+        retValue += Font::GetLengthSymbol(*text);
         text++;
     }
     return retValue;
@@ -120,7 +120,7 @@ void Painter_DrawBigText(int eX, int eY, int size, const char *text)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter_DrawTextRelativelyRight(int xRight, int y, const char *text)
 {
-    int lenght = Font_GetLengthText(text);
+    int lenght = Font::GetLengthText(text);
     Painter_DrawText(xRight - lenght, y, text);
 }
 
@@ -136,7 +136,7 @@ void Painter_DrawTextInRect(int x, int y, int width, const char *text)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font_GetHeightSymbol(*text);
+            y += Font::GetHeightSymbol(*text);
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, text);
