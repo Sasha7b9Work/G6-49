@@ -1,7 +1,7 @@
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "DisplayTypes.h"
-#include "PainterC.h"
+#include "Painter.h"
 #include "Menu/MenuItemsLogic.h"
 #include "Settings/Settings.h"
 #include <stdio.h>
@@ -51,8 +51,8 @@ void InputWindow::Draw(void)
         y += HEIGHT_SIGNAL;
     }
 
-    PainterC::FillRegion(x, y, width, height, COLOR_BACK);
-    PainterC::DrawRectangle(x, y, width, height, COLOR_FILL);
+    Painter::FillRegionC(x, y, width, height, COLOR_BACK);
+    Painter::DrawRectangleC(x, y, width, height, COLOR_FILL);
 
     static const pFuncVII func[NumParameters] =
     {
@@ -94,7 +94,7 @@ static void DrawDigits(int x, int y)
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        PainterC::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, COLOR_EMPTY_DIGIT);
+        Painter::FillRegionC(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, COLOR_EMPTY_DIGIT);
 
         Painter::SetColor(COLOR_FILL);
 

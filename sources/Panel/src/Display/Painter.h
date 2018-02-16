@@ -3,7 +3,6 @@
 #include "Colors.h"
 #include "DisplayTypes.h"
 #include "PainterText.h"
-#include "PainterC.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,6 +48,10 @@ public:
     static void DrawBigText(int x, int y, int size, const char *text);
 
     static int DrawTextC(int x, int y, const char *text, Color color);
+
+    static void FillRegionC(int x, int y, int width, int height, Color color);
+
+    static void DrawRectangleC(int x, int y, int width, int height, Color color);
 };
 
 #define WRITE_BYTE(offset, value)   *(command + offset) = (uint8)value

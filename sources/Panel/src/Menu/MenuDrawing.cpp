@@ -2,7 +2,6 @@
 #include "Menu.h"
 #include "MenuItemsDrawing.h"
 #include "Display/Painter.h"
-#include "Display/PainterC.h"
 #include "Display/PainterText.h"
 #include "Settings/Settings.h"
 #include <math.h>
@@ -36,7 +35,7 @@ void Menu::Draw(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::DrawTitle(void)
 {
-    PainterC::DrawRectangle(0, 0, WIDTH_SCREEN - 1, HEIGHT_TITLE, COLOR_FILL);
+    Painter::DrawRectangleC(0, 0, WIDTH_SCREEN - 1, HEIGHT_TITLE, COLOR_FILL);
     Painter_DrawTextRelativelyRight(315, 5, Page_Name(CurrentPage()));
 }
 
@@ -47,7 +46,7 @@ void Menu::DrawPagesUGO(void)
     {
         for (int i = 0; i < NUM_PAGES; i++)
         {
-            PainterC::DrawRectangle(7 + i * 16, 7, 5, 5, COLOR_FILL);
+            Painter::DrawRectangleC(7 + i * 16, 7, 5, 5, COLOR_FILL);
         }
 
         Painter::FillRegion(5 + CURRENT_PAGE * 16, 5, 9, 9);

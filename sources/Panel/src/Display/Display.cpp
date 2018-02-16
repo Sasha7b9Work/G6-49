@@ -178,7 +178,7 @@ void Display::Update(void)
         InputWindow::Draw();
     }
 
-    PainterC::DrawRectangle(0, 0, 318, 238, COLOR_FILL);
+    Painter::DrawRectangleC(0, 0, 318, 238, COLOR_FILL);
 
     if (text)
     {
@@ -202,7 +202,7 @@ void Display::DrawSignal(Channel ch)
     if (CHANNEL_ENABLED(ch))
     {
         int y0 = (ch == A) ? HEIGHT_TITLE : HEIGHT_TITLE + HEIGHT_SIGNAL;
-        PainterC::DrawRectangle(0, y0, WIDTH_SIGNAL, HEIGHT_SIGNAL, COLOR_FILL);
+        Painter::DrawRectangleC(0, y0, WIDTH_SIGNAL, HEIGHT_SIGNAL, COLOR_FILL);
 
         Painter::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2");
 
@@ -285,7 +285,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
             Color color = COLOR_FILL;
             if (ch == CHANNEL && strcmp(gMenu.NameCurrentParameter(), NameParameter((WaveParameter)i)) == 0)
             {
-                PainterC::FillRegion(x0, y0, 139, 8, COLOR_FILL);
+                Painter::FillRegionC(x0, y0, 139, 8, COLOR_FILL);
                 color = COLOR_BACK;
             }
             Painter::DrawTextC(x0 + 1, y0, NameParameter((WaveParameter)i), color);
@@ -360,7 +360,7 @@ void Display::DrawConsole(void)
     for (int i = 0; i < STRING_IN_CONSOLE; i++)
     {
         int length = Font::GetLengthText(&bufferConsole[i][0]);
-        PainterC::FillRegion(2, y, length, 8, COLOR_BACK);
+        Painter::FillRegionC(2, y, length, 8, COLOR_BACK);
         Painter::DrawTextC(2, y, &bufferConsole[i][0], COLOR_FILL);
         y += 8;
     }

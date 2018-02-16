@@ -1,6 +1,6 @@
 #include "InputWindowStruct.h"
-#include "Painter.h"
 #include "Log.h"
+#include "Display/Painter.h"
 #include "Generator/Generator.h"
 #include "Settings/SettingsSignals.h"
 #include "Utils/Math.h"
@@ -512,8 +512,8 @@ void InputWindowStruct::DrawInputField(int x, int y)
     int width = 230;
     int height = 60;
 
-    PainterC::FillRegion(x, y, width, height, COLOR_BACK);
-    PainterC::DrawRectangle(x, y, width, height, COLOR_FILL);
+    Painter::FillRegionC(x, y, width, height, COLOR_BACK);
+    Painter::DrawRectangleC(x, y, width, height, COLOR_FILL);
 
     x += 8;
     y += 19;
@@ -527,7 +527,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
         ++i;
     }
 
-    PainterC::FillRegion(270, 30, 45, 100, COLOR_BACK);
+    Painter::FillRegionC(270, 30, 45, 100, COLOR_BACK);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

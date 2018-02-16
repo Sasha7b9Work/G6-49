@@ -72,8 +72,8 @@ static void DrawOpenedChoice(Choice *choice)
 
     ++y;
 
-    PainterC::FillRegion(x, y, width, height, COLOR_BACK);
-    PainterC::DrawRectangle(x, y, width, height, COLOR_FILL);
+    Painter::FillRegionC(x, y, width, height, COLOR_BACK);
+    Painter::DrawRectangleC(x, y, width, height, COLOR_FILL);
     Painter::DrawHLine(y + 12, x, x + width);
 
     Painter_DrawTextRelativelyRight(x + width - 2, y + 2, ItemTitle(choice));
@@ -84,7 +84,7 @@ static void DrawOpenedChoice(Choice *choice)
     {
         if (Choice_CurrentChoice(choice) == i)
         {
-            PainterC::FillRegion(x + 2, y, WIDTH_ITEM - 4, 8, COLOR_FILL);
+            Painter::FillRegionC(x + 2, y, WIDTH_ITEM - 4, 8, COLOR_FILL);
             Painter::DrawTextC(x + 3, y, Choice_Name(choice, i), COLOR_BACK);
         }
         else

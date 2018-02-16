@@ -144,3 +144,17 @@ void Painter::SetPoint(int x, int y)
         *(Display::GetBuffer() + y * 320 + x) = color;
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::FillRegionC(int x, int y, int width, int height, Color col)
+{
+    Painter::SetColor(col);
+    Painter::FillRegion(x, y, width, height);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawRectangleC(int x, int y, int width, int height, Color col)
+{
+    Painter::SetColor(col);
+    Painter::DrawRectangle(x, y, width, height);
+}
