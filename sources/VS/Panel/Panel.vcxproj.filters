@@ -60,9 +60,6 @@
     <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_ltdc.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Display.c">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Menu.c">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -74,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c">
       <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Colors.c">
-      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Settings\Settings.c">
       <Filter>Settings</Filter>
@@ -102,29 +96,8 @@
     <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <Filter>HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\InputWindow.c">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
       <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Painter.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Painter54.h">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterText54.h">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterText.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Painter54.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.c">
-      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Common\Command.c">
       <Filter>Common</Filter>
@@ -195,6 +168,24 @@
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Painter.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h">
@@ -212,9 +203,6 @@
     <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Display.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
       <Filter>Menu</Filter>
     </ClInclude>
@@ -226,9 +214,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
       <Filter>dox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Display54.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_msp54.h">
       <Filter>libs</Filter>
@@ -242,26 +227,11 @@
     <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard54.h">
       <Filter>Keyboard</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Painter.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Colors.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
       <Filter>Settings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\PainterText.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h">
       <Filter>Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\PainterC.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h">
       <Filter>Display\font</Filter>
@@ -296,23 +266,14 @@
     <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
       <Filter>HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\InputWindow.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h">
       <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Symbols.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h">
       <Filter>Settings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
       <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Common\Command.h">
       <Filter>Common</Filter>
@@ -382,6 +343,33 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
       <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Colors.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Display.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\InputWindow.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Painter.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\PainterC.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\PainterText.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Symbols.h">
+      <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

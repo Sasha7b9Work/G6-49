@@ -171,7 +171,7 @@ void IWS_RegRight(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *IWS_StringValue(InputWindowStruct *iws_)
+char *IWS_StringValue(InputWindowStruct *iws)
 {
     static char buffer[20];
     buffer[0] = '\0';
@@ -181,7 +181,7 @@ char *IWS_StringValue(InputWindowStruct *iws_)
         char str[2] = {0, 0};
         str[0] = DIGIT(i);
         strcat(buffer, str);
-        if (iws_->posComma == i)
+        if (iws->posComma == i)
         {
             str[0] = '.';
             strcat(buffer, str);

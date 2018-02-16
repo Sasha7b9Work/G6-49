@@ -151,16 +151,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.c" />
-    <ClCompile Include="..\..\Panel\src\Display\Colors.c" />
-    <ClCompile Include="..\..\Panel\src\Display\Display.c" />
+    <ClCompile Include="..\..\Panel\src\Display\Colors.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\Display.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\font\Font.c" />
-    <ClCompile Include="..\..\Panel\src\Display\InputWindow.c" />
-    <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.c" />
-    <ClCompile Include="..\..\Panel\src\Display\Painter.c" />
-    <ClCompile Include="..\..\Panel\src\Display\Painter54.c" />
-    <ClCompile Include="..\..\Panel\src\Display\Painter54.h" />
-    <ClCompile Include="..\..\Panel\src\Display\PainterText.c" />
-    <ClCompile Include="..\..\Panel\src\Display\PainterText54.h" />
+    <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Globals.c" />
     <ClCompile Include="..\..\Panel\src\Hardware\FLASH.cpp" />
@@ -205,7 +202,6 @@
     <ClInclude Include="..\..\Panel\src\defines.h" />
     <ClInclude Include="..\..\Panel\src\Display\Colors.h" />
     <ClInclude Include="..\..\Panel\src\Display\Display.h" />
-    <ClInclude Include="..\..\Panel\src\Display\Display54.h" />
     <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h" />
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h" />
     <ClInclude Include="..\..\Panel\src\Display\InputWindow.h" />

@@ -30,8 +30,9 @@ typedef enum
     Sign_Plus
 } Sign;
 
-typedef struct
+class InputWindowStruct
 {
+public:
     bool            allow;                      ///< ≈сли true, параметр разрешен дл€ данного сигнала
     Sign            sign;
 	char            inputBuffer[NUM_DIGITS + 1];
@@ -42,7 +43,7 @@ typedef struct
 	Order           order;
     WaveParameter   param;
     bool            numLockMode;                ///< true, когда происходит клавишный (0...9) ввод значени€
-} InputWindowStruct;
+};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
