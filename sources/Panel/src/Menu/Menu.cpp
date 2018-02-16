@@ -37,7 +37,7 @@ void Menu::Update(void)
         StructControl control = Keyboard_GetNextControl();
         if (ADDITION_PAGE == &pInput)
         {
-            InputWindow_ProcessContorl(control);
+            InputWindow::ProcessContorl(control);
         }
         else
         {

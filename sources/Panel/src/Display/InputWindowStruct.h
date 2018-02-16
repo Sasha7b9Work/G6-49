@@ -33,16 +33,25 @@ typedef enum
 class InputWindowStruct
 {
 public:
+
     void Fill(Channel ch, WaveForm form, WaveParameter param);
+
     char *StringValue();
+
     float Value();
 
     static void DrawInputField(int x, int y);
+
     static void KeyLeft();
+
     static void KeyRight();
+
     static void RegLeft();
+
     static void RegRight();
+
     static void PressKey(Control key);
+
     static void SaveValue();
     /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
     static void FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters);

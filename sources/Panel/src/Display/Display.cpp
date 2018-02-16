@@ -185,7 +185,7 @@ void Display_Update(void)
 
     if (ADDITION_PAGE_IS_INPUT)
     {
-        InputWindow_Draw();
+        InputWindow::Draw();
     }
 
     Painter_DrawRectangleC(0, 0, 318, 238, COLOR_FILL);

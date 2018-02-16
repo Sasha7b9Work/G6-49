@@ -106,7 +106,7 @@ static const Button bSetParameter =
 
 static void OnPress_SetParameter(void)
 {
-    InputWindow_Init();
+    InputWindow::Init();
 
     ADDITION_PAGE = &pInput;
 }

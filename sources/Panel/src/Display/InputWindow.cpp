@@ -28,7 +28,7 @@ static void DrawDigits(int x, int y);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindow_Init(void)
+void InputWindow::Init(void)
 {
     chan = CHANNEL;
     form = WAVE_FORM_CH(chan);
@@ -39,7 +39,7 @@ void InputWindow_Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow_Draw(void)
+void InputWindow::Draw(void)
 {
     int x = 0;
     int y = HEIGHT_TITLE;
@@ -202,7 +202,7 @@ void InputWindow::KeyEnter()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow_ProcessContorl(StructControl control)
+void InputWindow::ProcessContorl(StructControl control)
 {
     Control key = control.control;
     TypePress pressed = control.typePress;
