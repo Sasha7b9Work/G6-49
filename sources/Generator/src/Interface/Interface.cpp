@@ -26,7 +26,8 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
         SPI_TIMODE_DISABLED,            // Init.TIMode
         SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
         7                               // InitCRCPolynomial
-    }
+    },
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
 
@@ -56,9 +57,8 @@ void Interface::Init(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ProcessingCommand()
 {
-    //SlaveSynchro();
-
-    __IO HAL_StatusTypeDef res = HAL_SPI_Receive(&hSPI1, buffer, LENGTH_SPI_BUFFER, 10);
+    HAL_StatusTypeDef res = HAL_SPI_Receive(&hSPI1, buffer, LENGTH_SPI_BUFFER, 10);
+    
     if (res == HAL_OK)
     {
         hardware.SetBusy();
@@ -78,17 +78,13 @@ void Interface::ProcessingCommand()
                 HAL_SPI_Init(&hSPI1);
             }
             memcpy(prevBuffer, buffer, LENGTH_SPI_BUFFER);
-            HAL_StatusTypeDef res = HAL_SPI_TransmitReceive(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER, 5);
+            res = HAL_SPI_TransmitReceive(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER, 5);
         } while(memcmp(buffer, prevBuffer, LENGTH_SPI_BUFFER) != 0     // Пока не совпадут пва принятых буфера
                 && res != HAL_TIMEOUT);             // Или не истечёт время ожидания ответа, что свидетельствует о том, что передатчик не передаёт
                                                     // данные, т.е. последние принятые данные правильные
 
         ProcessCommand();
         hardware.SetReady();
-    }
-    else if (res != HAL_TIMEOUT)
-    {
-        res = res;
     }
 }
 
@@ -126,7 +122,6 @@ void Interface::CommandEnable(void)
     Channel ch = (Channel)buffer[1];
     bool enable = buffer[2] == 1;
     
-    __IO uint8 b0 = buffer[0];
     __IO uint8 b1 = buffer[1];
     __IO uint8 b2 = buffer[2];
 

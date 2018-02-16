@@ -1,4 +1,5 @@
 #include "FSMC.h"
+#include "Hardware/Hardware.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -43,6 +44,6 @@ void FSMC_Init(void)
     if (HAL_SRAM_Init((SRAM_HandleTypeDef*)(&sramHandle), (FMC_NORSRAM_TimingTypeDef*)(&sramTiming),
         (FMC_NORSRAM_TimingTypeDef*)(&sramTiming)) != HAL_OK)
     {
-        ERROR_HANDLER();
+        ERROR_HANDLER;
     };
 }

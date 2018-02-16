@@ -52,7 +52,8 @@ void InitPins(void)
         GPIO_PIN_0,
         GPIO_MODE_OUTPUT_PP,
         GPIO_NOPULL,
-        GPIO_SPEED_FREQ_HIGH
+        GPIO_SPEED_FREQ_HIGH,
+        0
     };
 
     for (int i = 0; i < NumPins; ++i)

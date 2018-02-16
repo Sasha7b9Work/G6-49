@@ -14,9 +14,7 @@ int main(void)
     hardware.Init();
     
     hardware.SetReady();
-
-    static uint prevTime = 0;
-    
+  
     while (1)
     {
         interface.ProcessingCommand();

@@ -83,7 +83,8 @@ void FPGA::Init(void)
             0,                              // ContinuousClock
             0,                              // WriteFifo
             FSMC_PAGE_SIZE_NONE             // PageSize
-        }
+        },
+        HAL_UNLOCKED, HAL_NOR_STATE_RESET
     };
 
     FSMC_NORSRAM_TimingTypeDef timing =
@@ -99,7 +100,7 @@ void FPGA::Init(void)
 
     if (HAL_NOR_Init(&hNOR, &timing, NULL) != HAL_OK)
     {
-        _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 
     // Настраиваем выходы для записи в регистры ПЛИС
@@ -223,7 +224,7 @@ void FPGA::GenerateSaw(void)
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        dataA[i] = step * i;
+        dataA[i] = (uint16)(step * i);
         dataB[i] = MAX_VALUE - dataA[i];
     }
 

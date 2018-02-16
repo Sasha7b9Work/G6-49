@@ -21,7 +21,8 @@ static SPI_HandleTypeDef hSPI3 =
         SPI_TIMODE_DISABLE,
         SPI_CRCCALCULATION_DISABLE,
         10
-    }
+    },
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
 
@@ -162,7 +163,7 @@ static void WriteToHardware(Channel ch, RegAD9952 reg, uint value)
     
     WritePin(ChipSelect(ch), false);
 
-    HAL_SPI_Transmit(&hSPI3, buffer, numBytes[reg] + 1, 1);
+    HAL_SPI_Transmit(&hSPI3, buffer, (uint16)(numBytes[reg] + 1), 1);
     
     WritePin(AD9952_IO_UPD, true);
     volatile int i = 0;

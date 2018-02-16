@@ -107,13 +107,13 @@ void Generator::SetOffset(Channel ch, float offset)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPhase(Channel ch, float phase)
+void Generator::SetPhase(Channel, float)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDutyRatio(Channel ch, float dutyRatio)
+void Generator::SetDutyRatio(Channel, float)
 {
 
 }
@@ -125,7 +125,7 @@ void Generator::SetDuration(Channel ch, float duration)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDelay(Channel ch, float delay)
+void Generator::SetDelay(Channel, float delay)
 {
     fpga.SetDelay(delay);
 }

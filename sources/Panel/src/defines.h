@@ -28,9 +28,6 @@ typedef unsigned char       uint8;
 typedef unsigned char       uchar;
 typedef signed char         int8;
 
-void _Error_Handler(const char *, int);
-#define ERROR_HANDLER() /* _Error_Handler(__FILE__, __LINE__) */
-
 typedef enum
 {
     COLOR_BACK          = 0x00,

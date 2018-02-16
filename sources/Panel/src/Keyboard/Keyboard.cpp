@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Keyboard.h"
 #include "Display/Display.h"
+#include "Hardware/Hardware.h"
 #include <stm32f4xx.h>
 #include <stm32f4xx_hal.h>
 
@@ -108,12 +109,12 @@ void Keyboard::Init(void)
 
     if (HAL_TIM_Base_Init(&timHandle) != HAL_OK)
     {
-        ERROR_HANDLER();
+        ERROR_HANDLER;
     }
 
     if (HAL_TIM_Base_Start_IT(&timHandle) != HAL_OK)
     {
-        ERROR_HANDLER();
+        ERROR_HANDLER;
     }
     
     init = true;

@@ -88,7 +88,7 @@ void Hardware::SystemClock_Config(void)
     RCC_OscInitStruct.PLL.PLLQ = 7;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
-        _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 
     RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -100,7 +100,7 @@ void Hardware::SystemClock_Config(void)
 
     if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
     {
-        _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 
     /**Configure the Systick interrupt time 
@@ -116,7 +116,7 @@ void Hardware::SystemClock_Config(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void _Error_Handler(char * file, int line)
+__attribute((noreturn)) void _Error_Handler(const char *, int)
 {
     while (1)
     {

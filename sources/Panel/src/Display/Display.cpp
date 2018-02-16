@@ -2,6 +2,7 @@
 #include "Display.h"
 #include "Display/Painter.h"
 #include "Display/Font/Font.h"
+#include "Hardware/Hardware.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "Keyboard/Keyboard.h"
@@ -57,7 +58,7 @@ void Display_Init(void)
     hltdc.Init.Backcolor.Red = 0;
     if (HAL_LTDC_Init(&hltdc) != HAL_OK)
     {
-      _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 
     pLayerCfg.WindowX0 = 0;
@@ -77,7 +78,7 @@ void Display_Init(void)
     pLayerCfg.Backcolor.Red = 0;
     if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
     {
-      _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 
     uint clut[10] =

@@ -54,14 +54,14 @@ void SystemClock_Config(void)
     RCC_OscInitStruct.PLL.PLLQ = 4;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
-        ERROR_HANDLER();
+        ERROR_HANDLER;
     }
 
     /**Activate the Over-Drive mode 
     */
     if (HAL_PWREx_EnableOverDrive() != HAL_OK)
     {
-        ERROR_HANDLER();
+        ERROR_HANDLER;
     }
 
     /**Initializes the CPU, AHB and APB busses clocks 
@@ -75,7 +75,7 @@ void SystemClock_Config(void)
 
     if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
     {
-        ERROR_HANDLER();
+        ERROR_HANDLER;
     }
 
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
@@ -84,7 +84,7 @@ void SystemClock_Config(void)
     PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
-        ERROR_HANDLER();
+        ERROR_HANDLER;
     }
 
     /**Configure the Systick interrupt time 
@@ -114,14 +114,14 @@ static void MX_TIM4_Init(void)
     htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     if (HAL_TIM_PWM_Init(&htim4) != HAL_OK)
     {
-        _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 
     sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
     sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
     if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
     {
-        _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 
     sConfigOC.OCMode = TIM_OCMODE_PWM1;
@@ -130,7 +130,7 @@ static void MX_TIM4_Init(void)
     sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
     if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
     {
-        _Error_Handler(__FILE__, __LINE__);
+        ERROR_HANDLER;
     }
 }
 

@@ -17,7 +17,8 @@ static I2C_HandleTypeDef hI2C =
         0,                          // OwnAddress2
         I2C_GENERALCALL_DISABLE,    // GeneralCallMode
         I2C_NOSTRETCH_DISABLE       // NoStretchMode
-    }
+    },
+    0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_I2C_STATE_RESET, HAL_I2C_MODE_NONE, 0, 0, 0, 0, 0
 };
 
 
@@ -64,7 +65,7 @@ void AD5697::WriteParameter(Channel ch, WaveParameter param, float value_)
 {
     static const uint8 address[NumChannels] = {BINARY_U8(00001100), BINARY_U8(00001101)};
 
-    uint16 value = ((uint16)value_ << 4);
+    uint16 value = (uint16)((uint16)value_ << 4);
     uint8 buffer[3] = {CreateCommandByte(param), (uint8)(value >> 8), (uint8)value};
     TransmitI2C(address[ch], buffer);
     WritePin(PinLDAC(ch), false);
