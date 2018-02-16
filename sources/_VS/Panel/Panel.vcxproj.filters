@@ -13,9 +13,6 @@
     <Filter Include="libs">
       <UniqueIdentifier>{a4928849-fe5d-48ed-a5bf-317c2f6cfa34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libs\forVS">
-      <UniqueIdentifier>{1b435a85-2743-4101-92e0-c687eec9f9f9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{e416a234-63fa-4376-8ba5-f17d155acb0e}</UniqueIdentifier>
     </Filter>
@@ -46,180 +43,156 @@
     <Filter Include="Generator">
       <UniqueIdentifier>{d815a53e-22cf-4a7a-b506-a73b3f524f9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_VS">
+      <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.c">
-      <Filter>Keyboard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_hal_msp.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_it.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_ltdc.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Display.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Menu.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\Hardware.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\libs\system_stm32f4xx.c">
       <Filter>libs</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Colors.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Settings\Settings.c">
-      <Filter>Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\font\Font.c">
-      <Filter>Display\font</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\Timer.c">
+    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Utils\Math.c">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.c">
+    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.c">
-      <Filter>Menu</Filter>
+    <ClCompile Include="..\..\Panel\src\Hardware\Hardware.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.c">
-      <Filter>Menu</Filter>
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsDrawing.c">
-      <Filter>Menu</Filter>
+    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
+      <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.c">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\InputWindow.c">
+    <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Painter.c">
+    <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Painter54.h">
+    <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterText54.h">
+    <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterText.c">
+    <ClCompile Include="..\..\Panel\src\Display\Painter.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Painter54.c">
+    <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.c">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Common\Command.c">
+    <ClCompile Include="..\..\Common\Command.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Globals.c">
+    <ClCompile Include="..\..\Panel\src\Display\Font\Font.cpp">
+      <Filter>Display\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_ltdc.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c">
+      <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.cpp">
+      <Filter>Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_hal_msp.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_it.cpp">
+      <Filter>libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsDrawing.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\globals.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Log.c">
+    <ClCompile Include="..\..\Panel\src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\main.c">
+    <ClCompile Include="..\..\Panel\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.c">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\Generator.c">
-      <Filter>Generator</Filter>
+    <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h">
-      <Filter>Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h">
-      <Filter>Keyboard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_it.h">
       <Filter>libs</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\libs\forVS\core_cm4.h">
-      <Filter>libs\forVS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Display.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
       <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma2d.h">
-      <Filter>HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Hardware.h">
       <Filter>Hardware</Filter>
@@ -227,53 +200,20 @@
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
       <Filter>dox</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Display54.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Hardware\Hardware54.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_msp54.h">
-      <Filter>libs</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_conf.h">
       <Filter>libs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard54.h">
-      <Filter>Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Painter.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Colors.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
       <Filter>Settings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\PainterText.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h">
       <Filter>Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\PainterC.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h">
       <Filter>Display\font</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h">
       <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Utils\Math.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\FSMC.h">
       <Filter>Hardware</Filter>
@@ -296,83 +236,17 @@
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsLogic.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\InputWindow.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h">
       <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Symbols.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h">
       <Filter>Settings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Common\Command.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\defines.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Globals.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Log.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\FLASH.h">
       <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h">
-      <Filter>HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h">
       <Filter>dox</Filter>
@@ -386,6 +260,147 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Colors.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Display.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\InputWindow.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Painter.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\PainterC.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\PainterText.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Symbols.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma2d.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
+      <Filter>HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h">
+      <Filter>Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h">
+      <Filter>Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\defines.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\globals.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\Math.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\core_cm4.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\ctype.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\integer.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\inttypes.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\limits.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\math.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdarg.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdint.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdio.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdlib.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\string.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\tchar.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\windows.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\libs\startup_stm32f429xx.s">
@@ -394,13 +409,7 @@
     <None Include="..\..\Panel\src\Display\font\font5.inc">
       <Filter>Display\font</Filter>
     </None>
-    <None Include="..\..\Panel\src\Display\font\font5display.inc">
-      <Filter>Display\font</Filter>
-    </None>
     <None Include="..\..\Panel\src\Display\font\font8.inc">
-      <Filter>Display\font</Filter>
-    </None>
-    <None Include="..\..\Panel\src\Display\font\font8display.inc">
       <Filter>Display\font</Filter>
     </None>
     <None Include="..\..\Panel\src\Display\font\fontUGO.inc">
@@ -409,11 +418,8 @@
     <None Include="..\..\Panel\src\Display\font\fontUGO2.inc">
       <Filter>Display\font</Filter>
     </None>
-    <None Include="..\..\Panel\src\Display\font\fontUGO2display.inc">
-      <Filter>Display\font</Filter>
-    </None>
-    <None Include="..\..\Panel\src\Display\font\fontUGOdisplay.inc">
-      <Filter>Display\font</Filter>
+    <None Include="..\..\..\..\_common_\_VS\algorithm">
+      <Filter>_VS</Filter>
     </None>
   </ItemGroup>
 </Project>
