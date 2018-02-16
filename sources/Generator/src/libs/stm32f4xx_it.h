@@ -3,16 +3,15 @@
 #ifdef __cpusplus
 extern "C" {
 #endif
-
-void NMI_Handler();
-void HardFault_Handler();
-void MemManage_Handler();
-void BusFault_Handler();
-void UsageFault_Handler();
-void SVC_Handler();
-void DebugMon_Handler();
-void PendSV_Handler();
-void SysTick_Handler();
+    void NMI_Handler(void);
+    void HardFault_Handler(void);
+    void MemManage_Handler(void);
+    void BusFault_Handler(void);
+    void UsageFault_Handler(void);
+    void SVC_Handler(void);
+    void DebugMon_Handler(void);
+    void PendSV_Handler(void);
+    void SysTick_Handler(void);
 
 #ifdef __cplusplus
 }

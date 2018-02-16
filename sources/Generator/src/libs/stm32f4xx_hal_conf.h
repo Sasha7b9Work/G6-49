@@ -1,9 +1,10 @@
 #pragma once
 
-#ifdef WIN32
-#define __IO
-typedef unsigned int uint32_t
-#endif
+#define __weak __attribute((weak))
+
+// warning: padding struct ... with n bytes to align
+#pragma clang diagnostic ignored "-Wpadded"
+
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

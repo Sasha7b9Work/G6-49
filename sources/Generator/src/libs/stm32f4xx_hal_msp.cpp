@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "stm32f4xx_hal.h"
 
 
@@ -28,7 +29,7 @@ void HAL_MspInit(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
+void HAL_SPI_MspInit(SPI_HandleTypeDef *)
 {
 
 }

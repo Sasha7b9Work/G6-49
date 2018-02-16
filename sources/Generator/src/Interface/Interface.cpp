@@ -112,10 +112,7 @@ void Interface::ProcessCommand()
         &Interface::CommandModeDebug,   /// MODE_DEBUG
         &Interface::CommandParameter    /// SET_DELAY
     };
-    
-    __IO CommandWrite command = (CommandWrite)buffer[0];
-    __IO Channel ch = (Channel)buffer[1];
-    
+  
     if (buffer[0] < NUM_COMMAND_WRITE)
     {       
         pFuncVV f = commands[buffer[0]];
