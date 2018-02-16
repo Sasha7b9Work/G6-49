@@ -34,6 +34,7 @@ class InputWindowStruct
 {
 public:
     char *StringValue();
+    float Value();
 
     bool            allow;                      ///< Если true, параметр разрешен для данного сигнала
     Sign            sign;
@@ -56,7 +57,6 @@ void IWS_KeyRight();
 void IWS_RegLeft();
 void IWS_RegRight();
 void IWS_PressKey(Control key);
-float IWS_Value(InputWindowStruct *iws);
 void IWS_SaveValue();
 /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
 void IWS_FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters);

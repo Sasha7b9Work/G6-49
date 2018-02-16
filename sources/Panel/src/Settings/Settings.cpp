@@ -150,11 +150,11 @@ void TuneGenerator(Channel ch)
     Generator_EnableChannel(ch, set.sig_enabled[ch]);
     WaveForm form = WAVE_FORM_CH(ch);
     Generator_SetFormWave(ch, WAVE_FORM_CH(ch));
-    Generator_SetParameter(ch, Frequency, IWS_Value(&INPUT_WINDOW_STRUCT(ch, form, Frequency)));
-    Generator_SetParameter(ch, Amplitude, IWS_Value(&INPUT_WINDOW_STRUCT(ch, form, Amplitude)));
+    Generator_SetParameter(ch, Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Frequency))->Value());
+    Generator_SetParameter(ch, Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Amplitude))->Value());
     if (form == Form_Impulse)
     {
-        Generator_SetParameter(ch, Duration, IWS_Value(&INPUT_WINDOW_STRUCT(ch, form, Duration)));
+        Generator_SetParameter(ch, Duration, (&INPUT_WINDOW_STRUCT(ch, form, Duration))->Value());
     }
-    Generator_SetParameter(ch, Offset,    IWS_Value(&INPUT_WINDOW_STRUCT(ch, WAVE_FORM_CH(ch), Offset)));
+    Generator_SetParameter(ch, Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM_CH(ch), Offset))->Value());
 }

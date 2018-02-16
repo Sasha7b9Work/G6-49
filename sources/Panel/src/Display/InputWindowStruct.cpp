@@ -152,7 +152,7 @@ void IWS_RegRight(void)
 
     IncreaseDigit(CURRENT_POS);
 
-    if (IWS_Value(iws) > MaxValue(iws->param))
+    if (iws->Value() > MaxValue(iws->param))
     {
         RestoreValue();
     }
@@ -410,11 +410,9 @@ static void IncreaseOrder(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float IWS_Value(InputWindowStruct *iws_)
+float InputWindowStruct::Value()
 {
-    float value = ValueBeforeComma(iws_) + ValueAfterComma(iws_);
-
-    Order order = iws_->order;
+    float value = ValueBeforeComma(this) + ValueAfterComma(this);
 
     if (order == Nano)
     {
@@ -557,18 +555,16 @@ static void SendIWStoGenerator(void)
     if (m_param == Delay)
     {
         PARAMETER(B, Form_Impulse, Frequency) = PARAMETER(B, Form_Impulse, Frequency);
-        float frequency = IWS_Value(&PARAMETER(A, Form_Impulse, Frequency));
+        float frequency = PARAMETER(A, Form_Impulse, Frequency).Value();
         Generator_SetParameter(B, Frequency, frequency);
 
-        float value = IWS_Value(&PARAMETER(ch, form, m_param));
+        float value = PARAMETER(ch, form, m_param).Value();
         Generator_SetParameter(ch, m_param, value);
     }
     else
     {
-        float value = IWS_Value(&PARAMETER(ch, form, m_param));
+        float value = PARAMETER(ch, form, m_param).Value();
         Generator_SetParameter(ch, m_param, value);
-
-        //TuneGenerator(ch);
     }
 }
 
