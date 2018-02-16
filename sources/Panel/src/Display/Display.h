@@ -1,6 +1,7 @@
 #pragma once
 #include "defines.h"
 #include "Keyboard/Controls.h"
+#include "Settings/SettingsTypes.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,4 +21,29 @@ public:
     static void AddStringToConsole(char *string);
 
     static void SetColorBackground();
+
+private:
+    static void DrawSignal(Channel chan);
+
+    static void DrawSignalUGO(Channel chan, int y0);
+
+    static void DrawSignalParameters(Channel chan, int y0);
+
+    static void DrawParameterValue(Channel chan, WaveParameter parameter, int x, int y);
+
+    static void DrawConsole();
+
+    static const char *text;
+
+    static const int STRING_IN_CONSOLE = 29;
+
+    static const int SYMBOLS_IN_STRING = 64;
+
+    static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING];
+
+    static LTDC_HandleTypeDef hltdc;
+    // Экран
+    static uint8 frontBuffer[320 * 240];
+    // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
+    static uint8 backBuffer[320 * 240];
 };

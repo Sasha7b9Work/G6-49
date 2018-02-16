@@ -17,22 +17,11 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawSignal(Channel chan);
-static void DrawSignalUGO(Channel chan, int y0);
-static void DrawSignalParameters(Channel chan, int y0);
-static void DrawParameterValue(Channel chan, WaveParameter parameter, int x, int y);
-static void DrawConsole();
-
-static const char *text = 0;
-
-#define STRING_IN_CONSOLE 29
-#define SYMBOLS_IN_STRING 64
-static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static LTDC_HandleTypeDef hltdc;
-static uint8 frontBuffer[320 * 240];       // Это экран
-static uint8 backBuffer[320 * 240];        // Зто задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
+const char *       Display::text = 0;
+char               Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
+LTDC_HandleTypeDef Display::hltdc;
+uint8              Display::frontBuffer[320 * 240];
+uint8              Display::backBuffer[320 * 240];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,7 +197,7 @@ void Display::SetButton(Control control)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSignal(Channel ch)
+void Display::DrawSignal(Channel ch)
 {
     if (CHANNEL_ENABLED(ch))
     {
@@ -224,7 +213,7 @@ static void DrawSignal(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSignalUGO(Channel chan, int y0)
+void Display::DrawSignalUGO(Channel chan, int y0)
 {
     y0 += 30;
     int height = 50;
@@ -276,7 +265,7 @@ static void DrawSignalUGO(Channel chan, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawSignalParameters(Channel ch, int y0)
+void Display::DrawSignalParameters(Channel ch, int y0)
 {
     int x0 = 107;
     
@@ -309,7 +298,7 @@ static void DrawSignalParameters(Channel ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
+void Display::DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
 {
     WaveForm form = WAVE_FORM_CH(ch);
 
@@ -360,7 +349,7 @@ void Display::AddStringToConsole(char *string)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawConsole(void)
+void Display::DrawConsole(void)
 {
     if (!CONSOLE_ENABLED)
     {
