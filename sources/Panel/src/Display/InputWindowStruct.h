@@ -33,6 +33,8 @@ typedef enum
 class InputWindowStruct
 {
 public:
+    char *StringValue();
+
     bool            allow;                      ///< Если true, параметр разрешен для данного сигнала
     Sign            sign;
 	char            inputBuffer[NUM_DIGITS + 1];
@@ -54,7 +56,6 @@ void IWS_KeyRight();
 void IWS_RegLeft();
 void IWS_RegRight();
 void IWS_PressKey(Control key);
-char *IWS_StringValue(InputWindowStruct *iws);
 float IWS_Value(InputWindowStruct *iws);
 void IWS_SaveValue();
 /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала

@@ -312,7 +312,7 @@ static void DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
 {
     WaveForm form = WAVE_FORM_CH(ch);
 
-    x = Painter_DrawText(x, y, IWS_StringValue(&PARAMETER(ch, form, param)));
+    x = Painter_DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 
     char buffer[10];
     Painter_DrawText(x, y, NameUnit(buffer, PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
