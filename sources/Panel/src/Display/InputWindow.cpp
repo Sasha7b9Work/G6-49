@@ -100,10 +100,10 @@ static void DrawDigits(int x, int y)
 
         if (i == iws.hightLightDigit)
         {
-            Painter_SetFont(TypeFont_UGO2);
+            Painter::SetFont(TypeFont_UGO2);
             Painter_Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
             Painter_Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
-            Painter_SetFont(TypeFont_8);
+            Painter::SetFont(TypeFont_8);
         }
 
         if (iws.inputBuffer[i])

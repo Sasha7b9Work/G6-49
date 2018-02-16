@@ -15,7 +15,7 @@ void Item_Draw(int x, int y, void *item)
 
     if (type == Item_Choice)
     {
-        Painter_DrawText(x + 5, y + 5, ItemTitle(item));
+        Painter::DrawText(x + 5, y + 5, ItemTitle(item));
         Painter_DrawTextRelativelyRight(315, y + 30, Choice_CurrentName((Choice *)item));
     }
     else if (type == Item_Button)
@@ -24,7 +24,7 @@ void Item_Draw(int x, int y, void *item)
     }
     else if (type == Item_ChoiceParameter)
     {
-        Painter_DrawText(x + 5, y + 5, ItemTitle(item));
+        Painter::DrawText(x + 5, y + 5, ItemTitle(item));
         Painter_DrawTextRelativelyRight(315, y + 30, ChoiceWaveParameter_CurrentName((ChoiceParameter *)item));
     }
     else if (type == Item_SButton)

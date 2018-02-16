@@ -52,6 +52,10 @@ public:
     static void FillRegionC(int x, int y, int width, int height, Color color);
 
     static void DrawRectangleC(int x, int y, int width, int height, Color color);
+
+    static int DrawText(int x, int y, const char *text);
+
+    static void SetFont(TypeFont typeFont);
 };
 
 #define WRITE_BYTE(offset, value)   *(command + offset) = (uint8)value

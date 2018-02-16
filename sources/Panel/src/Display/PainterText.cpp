@@ -121,7 +121,7 @@ void Painter::DrawBigText(int eX, int eY, int size, const char *text)
 void Painter_DrawTextRelativelyRight(int xRight, int y, const char *text)
 {
     int lenght = Font::GetLengthText(text);
-    Painter_DrawText(xRight - lenght, y, text);
+    Painter::DrawText(xRight - lenght, y, text);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -183,23 +183,10 @@ int Painter_DrawChar(int eX, int eY, char symbol)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter_DrawText(int x, int y, const char *text)
-{
-    uint numSymbols = strlen(text);
-    for (uint i = 0; i < numSymbols; ++i)
-    {
-        x = Painter_DrawChar(x, y, text[i]);
-        ++x;
-    }
-
-    return x;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawTextC(int x, int y, const char *text, Color color)
 {
     Painter::SetColor(color);
-    return Painter_DrawText(x, y, text);
+    return DrawText(x, y, text);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -210,10 +197,4 @@ void Painter_Draw4SymbolsInRect(int x, int y, char eChar)
         Painter_DrawChar(x + 8 * i, y, eChar + i);
         Painter_DrawChar(x + 8 * i, y + 8, eChar + i + 16);
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter_SetFont(TypeFont typeFont)
-{
-    font = fonts[typeFont];
 }

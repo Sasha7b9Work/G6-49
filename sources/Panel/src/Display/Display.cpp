@@ -182,7 +182,7 @@ void Display::Update(void)
 
     if (text)
     {
-        Painter_DrawText(75, 4, text);
+        Painter::DrawText(75, 4, text);
     }
 
     DrawConsole();
@@ -302,10 +302,10 @@ void Display::DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
 {
     WaveForm form = WAVE_FORM_CH(ch);
 
-    x = Painter_DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
+    x = Painter::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 
     char buffer[10];
-    Painter_DrawText(x, y, NameUnit(buffer, PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
+    Painter::DrawText(x, y, NameUnit(buffer, PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -215,7 +215,6 @@
     <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
-    <ClCompile Include="..\..\Panel\src\Display\PainterC.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\globals.cpp" />
@@ -317,7 +316,6 @@
     <ClInclude Include="..\..\Panel\src\Display\InputWindow.h" />
     <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h" />
     <ClInclude Include="..\..\Panel\src\Display\Painter.h" />
-    <ClInclude Include="..\..\Panel\src\Display\PainterC.h" />
     <ClInclude Include="..\..\Panel\src\Display\PainterText.h" />
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h" />

@@ -158,3 +158,22 @@ void Painter::DrawRectangleC(int x, int y, int width, int height, Color col)
     Painter::SetColor(col);
     Painter::DrawRectangle(x, y, width, height);
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Painter::DrawText(int x, int y, const char *text)
+{
+    uint numSymbols = strlen(text);
+    for (uint i = 0; i < numSymbols; ++i)
+    {
+        x = Painter_DrawChar(x, y, text[i]);
+        ++x;
+    }
+
+    return x;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::SetFont(TypeFont typeFont)
+{
+    font = fonts[typeFont];
+}
