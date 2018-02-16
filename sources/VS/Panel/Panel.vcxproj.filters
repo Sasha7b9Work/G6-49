@@ -13,9 +13,6 @@
     <Filter Include="libs">
       <UniqueIdentifier>{a4928849-fe5d-48ed-a5bf-317c2f6cfa34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libs\forVS">
-      <UniqueIdentifier>{1b435a85-2743-4101-92e0-c687eec9f9f9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{e416a234-63fa-4376-8ba5-f17d155acb0e}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,9 @@
     </Filter>
     <Filter Include="Generator">
       <UniqueIdentifier>{d815a53e-22cf-4a7a-b506-a73b3f524f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_VS">
+      <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -190,9 +190,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_it.h">
       <Filter>libs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\libs\forVS\core_cm4.h">
-      <Filter>libs\forVS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
       <Filter>Menu</Filter>
@@ -365,6 +362,45 @@
     <ClInclude Include="..\..\Panel\src\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\core_cm4.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\ctype.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\integer.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\inttypes.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\limits.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\math.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdarg.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdint.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdio.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\stdlib.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\string.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\tchar.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\_common_\_VS\windows.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\libs\startup_stm32f429xx.s">
@@ -381,6 +417,9 @@
     </None>
     <None Include="..\..\Panel\src\Display\font\fontUGO2.inc">
       <Filter>Display\font</Filter>
+    </None>
+    <None Include="..\..\..\..\_common_\_VS\algorithm">
+      <Filter>_VS</Filter>
     </None>
   </ItemGroup>
 </Project>
