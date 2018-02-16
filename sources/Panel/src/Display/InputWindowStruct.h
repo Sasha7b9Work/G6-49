@@ -33,6 +33,7 @@ typedef enum
 class InputWindowStruct
 {
 public:
+    void Fill(Channel ch, WaveForm form, WaveParameter param);
     char *StringValue();
     float Value();
 
@@ -50,7 +51,6 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void IWS_Fill(InputWindowStruct *iws, Channel ch, WaveForm form, WaveParameter param);
 void IWS_DrawInputField(int x, int y);
 void IWS_KeyLeft();
 void IWS_KeyRight();

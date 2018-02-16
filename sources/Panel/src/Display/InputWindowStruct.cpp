@@ -59,12 +59,12 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void IWS_Fill(InputWindowStruct *iws_, Channel ch_, WaveForm form_, WaveParameter param_)
+void InputWindowStruct::Fill(Channel ch_, WaveForm form_, WaveParameter param_)
 {
     ch = ch_;
     form = form_;
     m_param = param_;
-    iws = iws_;
+    iws = this;
 
     IN_NUM_LOCK_MODE = false;
 

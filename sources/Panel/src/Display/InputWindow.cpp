@@ -35,7 +35,7 @@ void InputWindow_Init(void)
     param = set.sig_parameter[form];
     iws = INPUT_WINDOW_STRUCT(chan, form, param);
 
-	IWS_Fill(&iws, chan, form, param);
+	(&iws)->Fill(chan, form, param);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
