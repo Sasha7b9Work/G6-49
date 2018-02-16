@@ -51,11 +51,11 @@ static void SendIWStoGenerator();
 
 static InputWindowStruct *iws = 0;
 static WaveForm form;
-static WaveParameter param;
+static WaveParameter m_param;
 static Channel ch;
 
-#define SIZE_INPUT_BUFFER 17
-static char inputBuffer[SIZE_INPUT_BUFFER];
+#define SIZE_INPUT_BUFFER_IWS 17
+static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,16 +63,16 @@ void IWS_Fill(InputWindowStruct *iws_, Channel ch_, WaveForm form_, WaveParamete
 {
     ch = ch_;
     form = form_;
-    param = param_;
+    m_param = param_;
     iws = iws_;
 
     IN_NUM_LOCK_MODE = false;
 
-    memset(inputBuffer, 0, SIZE_INPUT_BUFFER);
+    memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
 
 	for (int i = 0; i < NUM_DIGITS; i++)
 	{
-		iws->inputBuffer[i] = PARAMETER_DIG(ch, form, param, i);
+		iws->inputBuffer[i] = PARAMETER_DIG(ch, form, m_param, i);
 	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
@@ -171,7 +171,7 @@ void IWS_RegRight(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *IWS_StringValue(InputWindowStruct *iws)
+char *IWS_StringValue(InputWindowStruct *iws_)
 {
     static char buffer[20];
     buffer[0] = '\0';
@@ -179,7 +179,7 @@ char *IWS_StringValue(InputWindowStruct *iws)
     for (int i = 0; i < NUM_DIGITS; i++)
     {
         char str[2] = {0, 0};
-        str[0] = DIGIT(i);
+        str[0] = iws_->inputBuffer[i];
         strcat(buffer, str);
         if (iws->posComma == i)
         {
@@ -479,19 +479,19 @@ void IWS_PressKey(Control key)
     if (!IN_NUM_LOCK_MODE)
     {
         IN_NUM_LOCK_MODE = true;
-        inputBuffer[0] = 0;
+        m_inputBuffer[0] = 0;
     }
 
-    if (strlen(inputBuffer) < SIZE_INPUT_BUFFER - 1)
+    if (strlen(m_inputBuffer) < SIZE_INPUT_BUFFER_IWS - 1)
     {
         int i = 0;
         while (command[i].control != Control_None)
         {
             if (command[i].control == key)
             {
-                int length = (int)strlen(inputBuffer);
-                inputBuffer[length] = command[i].symbol;
-                inputBuffer[length + 1] = 0;
+                int length = (int)strlen(m_inputBuffer);
+                m_inputBuffer[length] = command[i].symbol;
+                m_inputBuffer[length + 1] = 0;
                 break;
             }
             i++;
@@ -513,9 +513,9 @@ void IWS_DrawInputField(int x, int y)
 
     int i = 0;
 
-    while (inputBuffer[i])
+    while (m_inputBuffer[i])
     {
-        x = Painter_DrawBigChar(x, y, 3, inputBuffer[i]);
+        x = Painter_DrawBigChar(x, y, 3, m_inputBuffer[i]);
         x += 2;
         ++i;
     }
@@ -552,21 +552,21 @@ void IWS_FillAllowParameters(Channel ch_, WaveForm form_, AllowableParameters *a
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendIWStoGenerator(void)
 {
-    PARAMETER(ch, form, param) = *iws;
+    PARAMETER(ch, form, m_param) = *iws;
 
-    if (param == Delay)
+    if (m_param == Delay)
     {
         PARAMETER(B, Form_Impulse, Frequency) = PARAMETER(B, Form_Impulse, Frequency);
         float frequency = IWS_Value(&PARAMETER(A, Form_Impulse, Frequency));
         Generator_SetParameter(B, Frequency, frequency);
 
-        float value = IWS_Value(&PARAMETER(ch, form, param));
-        Generator_SetParameter(ch, param, value);
+        float value = IWS_Value(&PARAMETER(ch, form, m_param));
+        Generator_SetParameter(ch, m_param, value);
     }
     else
     {
-        float value = IWS_Value(&PARAMETER(ch, form, param));
-        Generator_SetParameter(ch, param, value);
+        float value = IWS_Value(&PARAMETER(ch, form, m_param));
+        Generator_SetParameter(ch, m_param, value);
 
         //TuneGenerator(ch);
     }
@@ -575,7 +575,7 @@ static void SendIWStoGenerator(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void FillIWSfromInputBuffer(void)
 {
-    if (param == Duration || param == Delay)
+    if (m_param == Duration || m_param == Delay)
     {
         iws->order = Micro;
     }
@@ -584,30 +584,30 @@ static void FillIWSfromInputBuffer(void)
         iws->order = One;
     }
 
-    if (FindSymbol(inputBuffer, '.') == -1)             // Если точки нету
+    if (FindSymbol(m_inputBuffer, '.') == -1)             // Если точки нету
     {
-        inputBuffer[strlen(inputBuffer)] = '.';         // То ставим её вместо завершающего нуля
-        inputBuffer[strlen(inputBuffer) + 1] = 0;       // и перемещаем нуль вправо
+        m_inputBuffer[strlen(m_inputBuffer)] = '.';         // То ставим её вместо завершающего нуля
+        m_inputBuffer[strlen(m_inputBuffer) + 1] = 0;       // и перемещаем нуль вправо
     }
     else
     {
-        while ((int)fabs(atof(inputBuffer)) == 0)     // Пока целая часть числа в inputBuffer == 0
+        while ((int)fabs(atof(m_inputBuffer)) == 0)     // Пока целая часть числа в inputBuffer == 0
         {
             // Сдвигаем запятую на три места вправо
-            int pos = FindSymbol(inputBuffer, '.');
+            int pos = FindSymbol(m_inputBuffer, '.');
 
             for (int i = pos; i < pos + 3; i++)
             {
-                inputBuffer[i] = inputBuffer[i + 1];
-                if(inputBuffer[i] == 0)
+                m_inputBuffer[i] = m_inputBuffer[i + 1];
+                if(m_inputBuffer[i] == 0)
                 {
-                    inputBuffer[i] = '0';
+                    m_inputBuffer[i] = '0';
                 }
             }
-            inputBuffer[pos + 3] = '.';
-            if(inputBuffer[pos + 4] == 0)
+            m_inputBuffer[pos + 3] = '.';
+            if(m_inputBuffer[pos + 4] == 0)
             {
-                inputBuffer[pos + 4] = '0';
+                m_inputBuffer[pos + 4] = '0';
             }
 
             --iws->order;
@@ -616,29 +616,29 @@ static void FillIWSfromInputBuffer(void)
 
     if (iws->sign != Sign_None)
     {
-        iws->sign = (atof(inputBuffer) >= 0.0) ? Sign_Plus : Sign_Minus;
+        iws->sign = (atof(m_inputBuffer) >= 0.0) ? Sign_Plus : Sign_Minus;
     }
 
     iws->hightLightDigit = NUM_DIGITS - 1;
 
-    while ((int)fabs(atof(inputBuffer)) > 999)     // Пока целая часть числа в inputBuffer > 999
+    while ((int)fabs(atof(m_inputBuffer)) > 999)     // Пока целая часть числа в inputBuffer > 999
     {
         // Сдвигаем запятую на три места влево
-        int pos = FindSymbol(inputBuffer, '.');
+        int pos = FindSymbol(m_inputBuffer, '.');
         
         for (int i = pos; i > pos - 3; i--)         // Сдвигаем три символа слева от точки на одну позицию вправо
         {
-            inputBuffer[i] = inputBuffer[i - 1];
+            m_inputBuffer[i] = m_inputBuffer[i - 1];
         }
 
-        inputBuffer[pos - 3] = '.';                 // И ставим точку слева от этой тройки
+        m_inputBuffer[pos - 3] = '.';                 // И ставим точку слева от этой тройки
 
         ++iws->order;                               // И увеличиваем степень на три порядка
     }
 
     // В этой точке целая часть числа уже не превышает 999
 
-    float value = (float)fabs(atof(inputBuffer));
+    float value = (float)fabs(atof(m_inputBuffer));
 
     int intValue = (int)value;
 
@@ -649,11 +649,11 @@ static void FillIWSfromInputBuffer(void)
 
     int numDigits = NUM_DIGITS - (int)strlen(iws->inputBuffer);      // Столько цифр нужно записать после запятой
 
-    int pos = FindSymbol(inputBuffer, '.');                     // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
+    int pos = FindSymbol(m_inputBuffer, '.');                     // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
 
     for (int i = 0; i < numDigits; i++)
     {
-        iws->inputBuffer[iws->posComma + 1 + i] = inputBuffer[pos + 1 + i];
+        iws->inputBuffer[iws->posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
     }
 }
 
