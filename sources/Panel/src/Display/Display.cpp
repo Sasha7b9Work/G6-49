@@ -164,9 +164,9 @@ uint8 *Display::GetBuffer(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update(void)
 {
-    Painter_BeginScene(COLOR_BACK);
+    Painter::BeginScene(COLOR_BACK);
 
-    Painter_SetColor(COLOR_FILL);
+    Painter::SetColor(COLOR_FILL);
 
     DrawSignal(A);
     DrawSignal(B);
@@ -178,7 +178,7 @@ void Display::Update(void)
         InputWindow::Draw();
     }
 
-    Painter_DrawRectangleC(0, 0, 318, 238, COLOR_FILL);
+    PainterC::DrawRectangle(0, 0, 318, 238, COLOR_FILL);
 
     if (text)
     {
@@ -187,7 +187,7 @@ void Display::Update(void)
 
     DrawConsole();
 
-    Painter_EndScene();
+    Painter::EndScene();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,9 +202,9 @@ void Display::DrawSignal(Channel ch)
     if (CHANNEL_ENABLED(ch))
     {
         int y0 = (ch == A) ? HEIGHT_TITLE : HEIGHT_TITLE + HEIGHT_SIGNAL;
-        Painter_DrawRectangleC(0, y0, WIDTH_SIGNAL, HEIGHT_SIGNAL, COLOR_FILL);
+        PainterC::DrawRectangle(0, y0, WIDTH_SIGNAL, HEIGHT_SIGNAL, COLOR_FILL);
 
-        Painter_DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2");
+        Painter::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2");
 
         DrawSignalUGO(ch, y0);
 
@@ -223,8 +223,8 @@ void Display::DrawSignalUGO(Channel chan, int y0)
     int maxY = minY + height;
     int x0 = 10;
 
-    Painter_DrawVLine(x0, minY, maxY);
-    Painter_DrawHLine(aveY, x0, x0 + width);
+    Painter::DrawVLine(x0, minY, maxY);
+    Painter::DrawHLine(aveY, x0, x0 + width);
 
     WaveForm form = WAVE_FORM_CH(chan);
 
@@ -238,8 +238,8 @@ void Display::DrawSignalUGO(Channel chan, int y0)
             int y1 = aveY - (int)(sinf((i - delta) * speed) * height / 2.0f);
             int y2 = aveY - (int)(sinf(i * speed) * height / 2.0f);
 
-            Painter_DrawLine(x0 + i - delta, y1, x0 + i, y2);
-            Painter_RunDisplay();
+            Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
+            Painter::RunDisplay();
         }
     }
     else if (form == Form_Saw)
@@ -247,8 +247,8 @@ void Display::DrawSignalUGO(Channel chan, int y0)
         int dX = 30;
         for (int x = x0; x < x0 + 80; x += dX)
         {
-            Painter_DrawLine(x, aveY, x + dX, minY);
-            Painter_DrawLine(x + dX, aveY, x + dX, minY);
+            Painter::DrawLine(x, aveY, x + dX, minY);
+            Painter::DrawLine(x + dX, aveY, x + dX, minY);
         }
     }
     else if (form == Form_Impulse)
@@ -256,9 +256,9 @@ void Display::DrawSignalUGO(Channel chan, int y0)
         int deltaX = 20;
         for (int i = 0; i < 5; i++)
         {
-            Painter_DrawVLine(x0, minY, aveY);
-            Painter_DrawHLine(minY, x0, x0 + 5);
-            Painter_DrawVLine(x0 + 5, minY, aveY);
+            Painter::DrawVLine(x0, minY, aveY);
+            Painter::DrawHLine(minY, x0, x0 + 5);
+            Painter::DrawVLine(x0 + 5, minY, aveY);
             x0 += deltaX;
         }
     }
@@ -273,7 +273,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 
     y0 += 5;
 
-    Painter_DrawTextC(22, y0 + 3, NameWaveForm(form), COLOR_FILL);
+    Painter::DrawTextC(22, y0 + 3, NameWaveForm(form), COLOR_FILL);
 
     AllowableParameters allowParameters;
     InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
@@ -285,10 +285,10 @@ void Display::DrawSignalParameters(Channel ch, int y0)
             Color color = COLOR_FILL;
             if (ch == CHANNEL && strcmp(gMenu.NameCurrentParameter(), NameParameter((WaveParameter)i)) == 0)
             {
-                Painter_FillRegionC(x0, y0, 139, 8, COLOR_FILL);
+                PainterC::FillRegion(x0, y0, 139, 8, COLOR_FILL);
                 color = COLOR_BACK;
             }
-            Painter_DrawTextC(x0 + 1, y0, NameParameter((WaveParameter)i), color);
+            Painter::DrawTextC(x0 + 1, y0, NameParameter((WaveParameter)i), color);
 
             DrawParameterValue(ch, (WaveParameter)i, x0 + 80, y0);
 
@@ -360,8 +360,8 @@ void Display::DrawConsole(void)
     for (int i = 0; i < STRING_IN_CONSOLE; i++)
     {
         int length = Font::GetLengthText(&bufferConsole[i][0]);
-        Painter_FillRegionC(2, y, length, 8, COLOR_BACK);
-        Painter_DrawTextC(2, y, &bufferConsole[i][0], COLOR_FILL);
+        PainterC::FillRegion(2, y, length, 8, COLOR_BACK);
+        Painter::DrawTextC(2, y, &bufferConsole[i][0], COLOR_FILL);
         y += 8;
     }
 }

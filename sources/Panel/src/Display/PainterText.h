@@ -28,8 +28,6 @@ int Painter_DrawFormatText(int x, int y, char *format, ...);
 /// Пишет строку в позиции x, y
 int Painter_DrawFormText(int x, int y, Color color, char *text, ...);
 
-int Painter_DrawTextC(int x, int y, const char *text, Color color);
-
 int Painter_DrawTextWithLimitationC(int x, int y, const char* text, Color color, int limitX, int limitY, int limitWidth, int limitHeight);
 /// Возвращает нижнюю координату прямоугольника
 int Painter_DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
@@ -57,8 +55,6 @@ void Painter_Draw10SymbolsInRect(int x, int y, char eChar);
 int Painter_DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text);
 
 int Painter_DrawBigChar(int x, int y, int size, char symbol);
-
-void Painter_DrawBigText(int x, int y, int size, const char *text);
 
 /** @} @}
  */

@@ -51,8 +51,8 @@ void InputWindow::Draw(void)
         y += HEIGHT_SIGNAL;
     }
 
-    Painter_FillRegionC(x, y, width, height, COLOR_BACK);
-    Painter_DrawRectangleC(x, y, width, height, COLOR_FILL);
+    PainterC::FillRegion(x, y, width, height, COLOR_BACK);
+    PainterC::DrawRectangle(x, y, width, height, COLOR_FILL);
 
     static const pFuncVII func[NumParameters] =
     {
@@ -86,7 +86,7 @@ static void DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Painter_DrawBigText(x, y, 3, NameParameter(param));
+    Painter::DrawBigText(x, y, 3, NameParameter(param));
 
     char buf[2] = "0";
 
@@ -94,9 +94,9 @@ static void DrawDigits(int x, int y)
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        Painter_FillRegionC(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, COLOR_EMPTY_DIGIT);
+        PainterC::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, COLOR_EMPTY_DIGIT);
 
-        Painter_SetColor(COLOR_FILL);
+        Painter::SetColor(COLOR_FILL);
 
         if (i == iws.hightLightDigit)
         {
@@ -109,20 +109,20 @@ static void DrawDigits(int x, int y)
         if (iws.inputBuffer[i])
         {
             buf[0] = iws.inputBuffer[i];
-            Painter_DrawBigText(x, y - 1, SIZE_TEXT, buf);
+            Painter::DrawBigText(x, y - 1, SIZE_TEXT, buf);
         }
 
         x += 24;
 
         if (iws.posComma == i)
         {
-            Painter_FillRegion(x - 3, y + HEIGHT_DIGIT - 2, SIZE_TEXT, SIZE_TEXT + 1);
+            Painter::FillRegion(x - 3, y + HEIGHT_DIGIT - 2, SIZE_TEXT, SIZE_TEXT + 1);
             x += 4;
         }
     }
 
     char buffer[10] = {0};
-    Painter_DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, iws.order, iws.param));
+    Painter::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, iws.order, iws.param));
 }
 
 #pragma clang diagnostic ignored "-Wunused-parameter"

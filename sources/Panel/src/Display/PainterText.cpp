@@ -91,7 +91,7 @@ int Painter_DrawBigChar(int eX, int eY, int size, char symbol)
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            Painter_SetPoint(x + i, y + j);
+                            Painter::SetPoint(x + i, y + j);
                         }
                     }
                 }
@@ -104,7 +104,7 @@ int Painter_DrawBigChar(int eX, int eY, int size, char symbol)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter_DrawBigText(int eX, int eY, int size, const char *text)
+void Painter::DrawBigText(int eX, int eY, int size, const char *text)
 {
     int numSymbols = (int)strlen(text);
 
@@ -170,7 +170,7 @@ int Painter_DrawChar(int eX, int eY, char symbol)
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            Painter_SetPoint(x + i, y + j);
+                            Painter::SetPoint(x + i, y + j);
                         }
                     }
                 }
@@ -196,9 +196,9 @@ int Painter_DrawText(int x, int y, const char *text)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter_DrawTextC(int x, int y, const char *text, Color color)
+int Painter::DrawTextC(int x, int y, const char *text, Color color)
 {
-    Painter_SetColor(color);
+    Painter::SetColor(color);
     return Painter_DrawText(x, y, text);
 }
 

@@ -32,7 +32,7 @@ void Item_Draw(int x, int y, void *item)
         int size = 23;
         x += 20;
         y += 17;
-        Painter_DrawRectangle(x, y, size, size);
+        Painter::DrawRectangle(x, y, size, size);
         SButton *button = (SButton*)item;
         if (button->funcDraw)
         {
@@ -72,9 +72,9 @@ static void DrawOpenedChoice(Choice *choice)
 
     ++y;
 
-    Painter_FillRegionC(x, y, width, height, COLOR_BACK);
-    Painter_DrawRectangleC(x, y, width, height, COLOR_FILL);
-    Painter_DrawHLine(y + 12, x, x + width);
+    PainterC::FillRegion(x, y, width, height, COLOR_BACK);
+    PainterC::DrawRectangle(x, y, width, height, COLOR_FILL);
+    Painter::DrawHLine(y + 12, x, x + width);
 
     Painter_DrawTextRelativelyRight(x + width - 2, y + 2, ItemTitle(choice));
 
@@ -84,12 +84,12 @@ static void DrawOpenedChoice(Choice *choice)
     {
         if (Choice_CurrentChoice(choice) == i)
         {
-            Painter_FillRegionC(x + 2, y, WIDTH_ITEM - 4, 8, COLOR_FILL);
-            Painter_DrawTextC(x + 3, y, Choice_Name(choice, i), COLOR_BACK);
+            PainterC::FillRegion(x + 2, y, WIDTH_ITEM - 4, 8, COLOR_FILL);
+            Painter::DrawTextC(x + 3, y, Choice_Name(choice, i), COLOR_BACK);
         }
         else
         {
-            Painter_DrawTextC(x + 3, y, Choice_Name(choice, i), COLOR_FILL);
+            Painter::DrawTextC(x + 3, y, Choice_Name(choice, i), COLOR_FILL);
         }
         y += 10;
     }

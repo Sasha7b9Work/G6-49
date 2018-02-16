@@ -186,6 +186,9 @@
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\PainterC.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_it.h">

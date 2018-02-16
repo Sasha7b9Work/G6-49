@@ -512,8 +512,8 @@ void InputWindowStruct::DrawInputField(int x, int y)
     int width = 230;
     int height = 60;
 
-    Painter_FillRegionC(x, y, width, height, COLOR_BACK);
-    Painter_DrawRectangleC(x, y, width, height, COLOR_FILL);
+    PainterC::FillRegion(x, y, width, height, COLOR_BACK);
+    PainterC::DrawRectangle(x, y, width, height, COLOR_FILL);
 
     x += 8;
     y += 19;
@@ -527,7 +527,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
         ++i;
     }
 
-    Painter_FillRegionC(270, 30, 45, 100, COLOR_BACK);
+    PainterC::FillRegion(270, 30, 45, 100, COLOR_BACK);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

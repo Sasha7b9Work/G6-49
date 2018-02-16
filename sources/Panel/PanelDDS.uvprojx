@@ -1701,6 +1701,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
             </File>
+            <File>
+              <FileName>PainterC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\PainterC.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -215,6 +215,7 @@
     <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\PainterC.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\globals.cpp" />
