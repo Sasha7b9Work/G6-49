@@ -141,7 +141,7 @@ void Settings_Load(void)
 
     TuneGenerator(A);
     TuneGenerator(B);
-    Display_SetColorBackground();
+    Display::SetColorBackground();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ void Hardware_Init(void)
 
     HAL_Init();
     
-    Display_Init();
+    Display::Init();
 
     MX_TIM4_Init();
 

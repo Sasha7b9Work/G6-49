@@ -36,7 +36,7 @@ static uint8 backBuffer[320 * 240];        // Зто задний буфер. В нём происходит
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Display_Init(void)
+void Display::Init(void)
 {
     LTDC_LayerCfgTypeDef pLayerCfg;
 
@@ -104,7 +104,7 @@ void Display_Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display_SetColorBackground(void)
+void Display::SetColorBackground(void)
 {
     if (set.serv_bacgroundBlack)
     {
@@ -133,7 +133,7 @@ void Display_SetColorBackground(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display_ToggleBuffers(void)
+void Display::ToggleBuffers(void)
 {
     uint destination = (uint)frontBuffer;
     uint source = (uint)backBuffer;
@@ -166,14 +166,14 @@ void Display_ToggleBuffers(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Display_GetBuffer(void)
+uint8 *Display::GetBuffer(void)
 {
     return backBuffer;
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display_Update(void)
+void Display::Update(void)
 {
     Painter_BeginScene(COLOR_BACK);
 
@@ -202,7 +202,7 @@ void Display_Update(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display_SetButton(Control control)
+void Display::SetButton(Control control)
 {
     text = ControlName(control);
 }
@@ -320,7 +320,7 @@ static void DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display_AddStringToConsole(char *string)
+void Display::AddStringToConsole(char *string)
 {
     // Находим номер первой пустой строки
     int numEmptyString = 0;

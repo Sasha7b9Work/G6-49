@@ -4,17 +4,20 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Инициализация дисплея.
-void Display_Init();
+class Display
+{
+public:
+    static void Init();
 
-void Display_Update();
+    static void Update();
 
-void Display_ToggleBuffers();
+    static void ToggleBuffers();
 
-uint8 *Display_GetBuffer();
+    static uint8 *GetBuffer();
 
-void Display_SetButton(Control control);
+    static void SetButton(Control control);
 
-void Display_AddStringToConsole(char *string);
+    static void AddStringToConsole(char *string);
 
-void Display_SetColorBackground();
+    static void SetColorBackground();
+};

@@ -31,5 +31,5 @@ void Log_Write(TypeTrace type, const char * __restrict format, ...)
     vsprintf(pointer, format, args);
 #pragma clang diagnostic warning "-Wformat-nonliteral"
     va_end(args);
-    Display_AddStringToConsole(buffer);
+    Display::AddStringToConsole(buffer);
 }

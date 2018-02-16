@@ -40,7 +40,7 @@ int main(void)
     while (1)
     {
         gMenu.Update();
-        Display_Update();
+        Display::Update();
     }
 }
 
