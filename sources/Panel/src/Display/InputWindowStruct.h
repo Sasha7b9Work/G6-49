@@ -37,6 +37,8 @@ public:
     char *StringValue();
     float Value();
 
+    static void DrawInputField(int x, int y);
+
     bool            allow;                      ///< ≈сли true, параметр разрешен дл€ данного сигнала
     Sign            sign;
 	char            inputBuffer[NUM_DIGITS + 1];
@@ -51,7 +53,6 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void IWS_DrawInputField(int x, int y);
 void IWS_KeyLeft();
 void IWS_KeyRight();
 void IWS_RegLeft();

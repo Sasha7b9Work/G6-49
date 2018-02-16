@@ -498,7 +498,7 @@ void IWS_PressKey(Control key)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_DrawInputField(int x, int y)
+void InputWindowStruct::DrawInputField(int x, int y)
 {
     int width = 230;
     int height = 60;

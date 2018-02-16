@@ -75,7 +75,7 @@ void InputWindow_Draw(void)
 
     if (IN_NUM_LOCK_MODE)
     {
-        IWS_DrawInputField(10, y + 27);
+        InputWindowStruct::DrawInputField(10, y + 27);
     }
 }
 
