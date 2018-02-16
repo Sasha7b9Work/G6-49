@@ -40,8 +40,6 @@ static int ValueBeforeComma(InputWindowStruct *iws);
 static float ValueAfterComma(InputWindowStruct *iws);
 /// Переключает порядок на следующий по возрастанию
 static void IncreaseOrder();
-/// Сохраняет значение для возможности последующего восстановления
-static void SaveValue();
 /// Восстанавливает ранее сохранённое значение
 static void RestoreValue();
 /// Заполняет iws из inputBuffer
@@ -148,7 +146,13 @@ void InputWindowStruct::RegLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindowStruct::RegRight(void)
 {
-    SaveValue();
+
+    // Сохраняем значение
+    for (int i = 0; i < NUM_DIGITS; i++)
+    {
+        iws->prevBuffer[i] = DIGIT(i);
+    }
+    iws->prevPosComma = iws->posComma;
 
     IncreaseDigit(CURRENT_POS);
 
@@ -439,13 +443,18 @@ float InputWindowStruct::Value()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SaveValue(void)
+void InputWindowStruct::SaveValue(void)
 {
-    for (int i = 0; i < NUM_DIGITS; i++)
+    if (IN_NUM_LOCK_MODE)
     {
-        iws->prevBuffer[i] = DIGIT(i);
+        IN_NUM_LOCK_MODE = false;
+
+        FillIWSfromInputBuffer();
     }
-    iws->prevPosComma = iws->posComma;
+
+    SendIWStoGenerator();
+
+    ADDITION_PAGE = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -520,22 +529,6 @@ void InputWindowStruct::DrawInputField(int x, int y)
 
     Painter_FillRegionC(270, 30, 45, 100, COLOR_BACK);
 }
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void IWS_SaveValue(void)
-{
-    if (IN_NUM_LOCK_MODE)
-    {
-        IN_NUM_LOCK_MODE = false;
-
-        FillIWSfromInputBuffer();
-    }
-
-    SendIWStoGenerator();
-
-    ADDITION_PAGE = 0;
-}
-
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void IWS_FillAllowParameters(Channel ch_, WaveForm form_, AllowableParameters *allowParameters)

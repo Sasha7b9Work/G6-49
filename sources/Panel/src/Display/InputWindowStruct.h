@@ -43,6 +43,7 @@ public:
     static void RegLeft();
     static void RegRight();
     static void PressKey(Control key);
+    static void SaveValue();
 
     bool            allow;                      ///< Если true, параметр разрешен для данного сигнала
     Sign            sign;
@@ -58,7 +59,6 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void IWS_SaveValue();
 /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
 void IWS_FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters);
 
