@@ -1,4 +1,4 @@
-#pragma once
+#pragma once 
 
 
 #define LOG_WRITE(...) Log_Write(TypeTrace_Info, __VA_ARGS__)
