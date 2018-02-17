@@ -16,16 +16,16 @@ void Item_Draw(int x, int y, void *item)
     if (type == Item_Choice)
     {
         Painter::DrawText(x + 5, y + 5, ItemTitle(item));
-        Painter_DrawTextRelativelyRight(315, y + 30, Choice_CurrentName((Choice *)item));
+        Painter::DrawTextRelativelyRight(315, y + 30, Choice_CurrentName((Choice *)item));
     }
     else if (type == Item_Button)
     {
-        Painter_DrawTextInRect(x + 5, y + 17, WIDTH_ITEM, ItemTitle(item));
+        Painter::DrawTextInRect(x + 5, y + 17, WIDTH_ITEM, ItemTitle(item));
     }
     else if (type == Item_ChoiceParameter)
     {
         Painter::DrawText(x + 5, y + 5, ItemTitle(item));
-        Painter_DrawTextRelativelyRight(315, y + 30, ChoiceWaveParameter_CurrentName((ChoiceParameter *)item));
+        Painter::DrawTextRelativelyRight(315, y + 30, ChoiceWaveParameter_CurrentName((ChoiceParameter *)item));
     }
     else if (type == Item_SButton)
     {
@@ -76,7 +76,7 @@ static void DrawOpenedChoice(Choice *choice)
     Painter::DrawRectangleC(x, y, width, height, COLOR_FILL);
     Painter::DrawHLine(y + 12, x, x + width);
 
-    Painter_DrawTextRelativelyRight(x + width - 2, y + 2, ItemTitle(choice));
+    Painter::DrawTextRelativelyRight(x + width - 2, y + 2, ItemTitle(choice));
 
     y += 14;
 

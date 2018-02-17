@@ -21,3 +21,5 @@ sources/VS/Generator/x64/*
 
 sources/_VS/Panel/Debug/*
 sources/_VS/Panel/x64/*
+
+sources/_VS/Generator/x64/*

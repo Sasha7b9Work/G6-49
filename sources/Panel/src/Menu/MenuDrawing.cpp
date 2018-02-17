@@ -2,7 +2,6 @@
 #include "Menu.h"
 #include "MenuItemsDrawing.h"
 #include "Display/Painter.h"
-#include "Display/PainterText.h"
 #include "Settings/Settings.h"
 #include <math.h>
 
@@ -36,7 +35,7 @@ void Menu::Draw(void)
 void Menu::DrawTitle(void)
 {
     Painter::DrawRectangleC(0, 0, WIDTH_SCREEN - 1, HEIGHT_TITLE, COLOR_FILL);
-    Painter_DrawTextRelativelyRight(315, 5, Page_Name(CurrentPage()));
+    Painter::DrawTextRelativelyRight(315, 5, Page_Name(CurrentPage()));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

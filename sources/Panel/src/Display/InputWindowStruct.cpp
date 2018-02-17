@@ -522,7 +522,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
 
     while (m_inputBuffer[i])
     {
-        x = Painter_DrawBigChar(x, y, 3, m_inputBuffer[i]);
+        x = Painter::DrawBigChar(x, y, 3, m_inputBuffer[i]);
         x += 2;
         ++i;
     }

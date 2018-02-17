@@ -31,7 +31,7 @@ static const SButton sbLeft =
 static void Draw_Left(int x, int y)
 {
     Painter::SetFont(TypeFont_UGO2);
-    Painter_Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_LEFT);
+    Painter::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_LEFT);
     Painter::SetFont(TypeFont_8);
 }
 
@@ -67,7 +67,7 @@ static void OnPress_Cancel(void)
 static void Draw_Cancel(int x, int y)
 {
     Painter::SetFont(TypeFont_UGO2);
-    Painter_Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_DELETE);
+    Painter::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_DELETE);
     Painter::SetFont(TypeFont_8);
 }
 
@@ -85,7 +85,7 @@ static const SButton sbEnter =
 static void Draw_Enter(int x, int y)
 {
     Painter::SetFont(TypeFont_UGO2);
-    Painter_Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_SAVE);
+    Painter::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_SAVE);
     Painter::SetFont(TypeFont_8);
 }
 
@@ -106,6 +106,6 @@ Page pInput =
 static void Draw_Right(int x, int y)
 {
     Painter::SetFont(TypeFont_UGO2);
-    Painter_Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_RIGHT);
+    Painter::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_RIGHT);
     Painter::SetFont(TypeFont_8);
 }

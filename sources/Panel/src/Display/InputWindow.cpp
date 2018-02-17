@@ -101,8 +101,8 @@ static void DrawDigits(int x, int y)
         if (i == iws.hightLightDigit)
         {
             Painter::SetFont(TypeFont_UGO2);
-            Painter_Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
-            Painter_Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
+            Painter::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
+            Painter::Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
             Painter::SetFont(TypeFont_8);
         }
 

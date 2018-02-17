@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "Colors.h"
 #include "DisplayTypes.h"
-#include "PainterText.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,6 +55,30 @@ public:
     static int DrawText(int x, int y, const char *text);
 
     static void SetFont(TypeFont typeFont);
+    
+    static int DrawChar(int x, int y, char symbol);
+    
+    static int DrawBigChar(int eX, int eY, int size, char symbol);
+
+    static void DrawTextInRect(int x, int y, int width, const char *text);
+
+    static void DrawTextRelativelyRight(int xRight, int y, const char *text);
+
+    static void Draw4SymbolsInRect(int x, int y, char eChar);
+
+private:
+
+    static bool ByteFontNotEmpty(int eChar, int byte);
+
+    static bool BitInFontIsExist(int eChar, int numByte, int bit);
+
+    static int DrawSpaces(int x, int y, const char *text, int *numSymbols);
+
+    static int DrawSubString(int x, int y, const char *text);
+
+    static int GetLenghtSubString(const char *text);
+
+    static uint8 color;
 };
 
 #define WRITE_BYTE(offset, value)   *(command + offset) = (uint8)value
