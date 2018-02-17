@@ -67,7 +67,7 @@ typedef enum
   HAL_SAI_STATE_READY    = 0x01U,  /*!< SAI initialized and ready for use                  */
   HAL_SAI_STATE_BUSY     = 0x02U,  /*!< SAI internal process is ongoing                    */
   HAL_SAI_STATE_BUSY_TX  = 0x12U,  /*!< Data transmission process is ongoing               */
-  HAL_SAI_STATE_BUSY_RX  = 0x22U,  /*!< Data reception process is ongoing                  */
+  HAL_SAI_STATE_BUSY_RX  = 0x22U   /*!< Data reception process is ongoing                  */
 }HAL_SAI_StateTypeDef;
 
 /**
