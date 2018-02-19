@@ -183,6 +183,9 @@
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libs\common\stm32\429\stm429.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_it.h">
@@ -391,6 +394,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\_common_\_VS\windows.h">
       <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\stm32\429\stm429.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

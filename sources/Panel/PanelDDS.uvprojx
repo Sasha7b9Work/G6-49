@@ -1958,6 +1958,21 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>stm32</GroupName>
+          <Files>
+            <File>
+              <FileName>stm429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\stm32\429\stm429.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm429.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\stm32\429\stm429.h</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>
