@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs;..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\libs\common\_VS</IncludePath>
+    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs;..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\libs\common\_VS;..\..\..\sources\libs</IncludePath>
     <OutDir>.\x64\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
     <ClCompile Include="..\..\libs\common\stm32\429\stm429.cpp" />
+    <ClCompile Include="..\..\libs\common\stm32\stm32.cpp" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -218,12 +219,11 @@
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\globals.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\FLASH.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\FSMC.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Hardware.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.cpp" />
-    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_hal_msp.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_it.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\system_stm32f4xx.c" />
     <ClCompile Include="..\..\Panel\src\Log.cpp" />
@@ -252,6 +252,7 @@
     <ClInclude Include="..\..\..\..\_common_\_VS\windows.h" />
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\libs\common\stm32\429\stm429.h" />
+    <ClInclude Include="..\..\libs\common\stm32\stm32.h" />
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -323,8 +324,8 @@
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\FLASH.h" />
-    <ClInclude Include="..\..\Panel\src\Hardware\FSMC.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Hardware.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h" />

@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</IncludePath>
+              <IncludePath>.\src;.\src\libs;..\libs;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1597,11 +1597,6 @@
               <FilePath>.\src\libs\stm32f4xx_it.h</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_msp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\stm32f4xx_hal_msp.cpp</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_it.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\libs\stm32f4xx_it.cpp</FilePath>
@@ -1752,11 +1747,6 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>FSMC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\FSMC.h</FilePath>
-            </File>
-            <File>
               <FileName>FLASH.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\FLASH.h</FilePath>
@@ -1767,11 +1757,6 @@
               <FilePath>.\src\Hardware\FLASH.cpp</FilePath>
             </File>
             <File>
-              <FileName>FSMC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\FSMC.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Hardware.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Hardware.cpp</FilePath>
@@ -1780,6 +1765,16 @@
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1970,6 +1965,16 @@
               <FileName>stm429.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\stm32\429\stm429.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\stm32\stm32.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\stm32\stm32.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -75,11 +75,6 @@ void Keyboard::Init(void)
 
     GPIO_InitTypeDef isGPIO;
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __TIM3_CLK_ENABLE();
-
     // Инициализируем порты опроса
     isGPIO.Pin = RL0 | RL1 | RL2;
     isGPIO.Mode = GPIO_MODE_INPUT;

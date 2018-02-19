@@ -43,9 +43,6 @@ static void ShiftToLeft(uint8 *buffer, int length);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator_Init(void)
 {
-    __HAL_RCC_SPI4_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-
     GPIO_InitTypeDef isGPIO =
     {   //  CLK         MI           MO
         GPIO_PIN_2 | GPIO_PIN_5 | GPIO_PIN_6,
