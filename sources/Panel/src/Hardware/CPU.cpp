@@ -406,3 +406,27 @@ uint CPU::_TIM_::TimeMS()
 {
     return HAL_GetTick();
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::_TIM3_::Start(uint timeStopMS)
+{
+    Stop();
+
+    if (timeStopMS == MAX_UINT)
+    {
+        return;
+    }
+
+    uint dT = timeStopMS - TIME_MS;
+
+    handleTIM3.Init.Period = (dT * 2) - 1;  // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
+
+    HAL_TIM_Base_Init(&handleTIM3);
+    HAL_TIM_Base_Start_IT(&handleTIM3);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::_TIM3_::Stop()
+{
+    HAL_TIM_Base_Stop_IT(&handleTIM3);
+}

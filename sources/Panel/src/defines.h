@@ -1,6 +1,5 @@
 #pragma once
 
-
 // warning: use of old-style cast
 #pragma clang diagnostic ignored "-Wold-style-cast"
 
@@ -16,7 +15,6 @@
 // warning: array subscript is of type 'char'
 #pragma clang diagnostic ignored "-Wchar-subscripts"
 
-#include <stm32f4xx.h>
 
 typedef unsigned int        uint;
 typedef unsigned short int  uint16;

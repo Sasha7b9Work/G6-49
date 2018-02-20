@@ -15,7 +15,6 @@ typedef struct
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static TimerStruct timers[NumTimers];
-static TIM_HandleTypeDef handleTIM3;
 static uint timeStartLogging = 0;
 static uint timePrevPoint = 0;
 
@@ -26,8 +25,6 @@ static uint timePrevPoint = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void StartTIM(uint timeStop);    // Завести таймр, который остановится в timeStop мс
-static void StopTIM();
 static uint NearestTime();          // Возвращает время срабатывания ближайщего таймера, либо 0, если таймеров нет
 static void TuneTIM(TypeTimer2 type);   // Настроить систему на таймер
 
@@ -100,9 +97,9 @@ static void TuneTIM(TypeTimer2 type)
     uint timeNext = timer->timeFirstMS + timer->dTms;
     timer->timeNextMS = timeNext;
 
-    if(timeNext < timeNearest)      // Если таймер должен сработать раньше текущего
+    if(timeNext < timeNearest)          // Если таймер должен сработать раньше текущего
     {
-        StartTIM(timeNext);         // то заводим таймер на наше время
+        CPU::_TIM3_::Start(timeNext);   // то заводим таймер на наше время
     }
 }
 
@@ -130,32 +127,6 @@ static uint NearestTime(void)
     
     return time;
 }
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void StartTIM(uint timeStopMS)
-{
-    StopTIM();
-
-    if(timeStopMS == MAX_UINT)
-    {
-        return;
-    }
-
-    uint dT = timeStopMS - TIME_MS;
-
-    handleTIM3.Init.Period = (dT * 2) - 1;      // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
-
-    HAL_TIM_Base_Init(&handleTIM3);
-    HAL_TIM_Base_Start_IT(&handleTIM3);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void StopTIM(void)
-{
-    HAL_TIM_Base_Stop_IT(&handleTIM3);
-}
-
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer_PauseOnTime(uint timeMS)
