@@ -3,7 +3,6 @@
 #include "Display/Painter.h"
 #include "Display/Font/Font.h"
 #include "Hardware/CPU.h"
-#include "Hardware/Hardware.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "Keyboard/Keyboard.h"

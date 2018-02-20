@@ -2,7 +2,7 @@
 #include "Log.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
-#include "Hardware/Hardware.h"
+#include "Hardware/Timer.h"
 #include "Generator/Generator.h"
 #include "Keyboard/Keyboard.h"
 #include "Menu/Menu.h"
@@ -17,7 +17,11 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main(void)
 {
-    Hardware_Init();
+    CPU::Config();
+   
+    Display::Init();
+
+    Timer_Init();
 
     Keyboard::Init();
 
