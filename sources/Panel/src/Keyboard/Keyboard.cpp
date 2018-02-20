@@ -154,17 +154,17 @@ static void FillCommand(Control control, TypePress typePress)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Keyboard_BufferIsEmpty(void)
+bool Keyboard::BufferIsEmpty(void)
 {
     return pointer == 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-StructControl Keyboard_GetNextControl(void)
+StructControl Keyboard::GetNextControl(void)
 {
     StructControl retValue;
 
-    if (Keyboard_BufferIsEmpty())
+    if (BufferIsEmpty())
     {
         retValue.control = Control_None;
     }

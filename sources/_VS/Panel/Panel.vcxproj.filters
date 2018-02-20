@@ -10,9 +10,6 @@
     <Filter Include="Keyboard">
       <UniqueIdentifier>{5fe703b1-d458-4c6f-a0e6-a77cd316817a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libs">
-      <UniqueIdentifier>{a4928849-fe5d-48ed-a5bf-317c2f6cfa34}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{e416a234-63fa-4376-8ba5-f17d155acb0e}</UniqueIdentifier>
     </Filter>
@@ -46,17 +43,8 @@
     <Filter Include="_VS">
       <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="stm32">
-      <UniqueIdentifier>{9ca004e3-a313-45c4-bd07-436e2d30262f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Panel\src\libs\system_stm32f4xx.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\Hardware.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -174,13 +162,19 @@
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\stm32\429\stm429.cpp">
-      <Filter>stm32</Filter>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\system_stm32f4xx.c">
+      <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\common\stm32\stm32.cpp">
-      <Filter>stm32</Filter>
+      <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp">
+    <ClCompile Include="..\..\libs\common\stm32\429\stm429.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
@@ -193,9 +187,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
       <Filter>dox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_conf.h">
-      <Filter>libs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
       <Filter>Settings</Filter>
@@ -380,20 +371,20 @@
     <ClInclude Include="..\..\..\..\_common_\_VS\windows.h">
       <Filter>_VS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\stm32\429\stm429.h">
-      <Filter>stm32</Filter>
+    <ClInclude Include="..\..\Panel\src\Hardware\CPU.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\stm32f4xx_hal_conf.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\stm32\stm32.h">
-      <Filter>stm32</Filter>
+      <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Hardware\CPU.h">
+    <ClInclude Include="..\..\libs\common\stm32\429\stm429.h">
       <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Panel\src\libs\startup_stm32f429xx.s">
-      <Filter>libs</Filter>
-    </None>
     <None Include="..\..\Panel\src\Display\font\font5.inc">
       <Filter>Display\font</Filter>
     </None>
@@ -408,6 +399,9 @@
     </None>
     <None Include="..\..\..\..\_common_\_VS\algorithm">
       <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\Panel\src\Hardware\startup_stm32f429xx.s">
+      <Filter>Hardware</Filter>
     </None>
   </ItemGroup>
 </Project>

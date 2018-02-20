@@ -32,9 +32,9 @@ void Menu::Init(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Update(void)
 {
-    while (!Keyboard_BufferIsEmpty())
+    while (!Keyboard::BufferIsEmpty())
     {
-        StructControl control = Keyboard_GetNextControl();
+        StructControl control = Keyboard::GetNextControl();
         if (ADDITION_PAGE == &pInput)
         {
             InputWindow::ProcessContorl(control);

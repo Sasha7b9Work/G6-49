@@ -219,11 +219,11 @@
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\FLASH.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Hardware.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\system_stm32f4xx.c" />
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.cpp" />
-    <ClCompile Include="..\..\Panel\src\libs\system_stm32f4xx.c" />
     <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp" />
@@ -323,10 +323,10 @@
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Hardware.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h" />
-    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Panel\src\Log.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
@@ -348,7 +348,7 @@
     <None Include="..\..\Panel\src\Display\font\font8.inc" />
     <None Include="..\..\Panel\src\Display\font\fontUGO.inc" />
     <None Include="..\..\Panel\src\Display\font\fontUGO2.inc" />
-    <None Include="..\..\Panel\src\libs\startup_stm32f429xx.s" />
+    <None Include="..\..\Panel\src\Hardware\startup_stm32f429xx.s" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
