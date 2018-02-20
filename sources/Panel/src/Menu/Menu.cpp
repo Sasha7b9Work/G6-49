@@ -113,12 +113,12 @@ void Menu::ProcessControl(StructControl control)
         else if(key == B_ON1)
         {
             CHANNEL_ENABLED_A = !CHANNEL_ENABLED_A;
-            Generator_EnableChannel(A, CHANNEL_ENABLED_A);
+            Generator::EnableChannel(A, CHANNEL_ENABLED_A);
         }
         else if (key == B_ON2)
         {
             CHANNEL_ENABLED_B = !CHANNEL_ENABLED_B;
-            Generator_EnableChannel(B, CHANNEL_ENABLED_B);
+            Generator::EnableChannel(B, CHANNEL_ENABLED_B);
         }
     }
 }

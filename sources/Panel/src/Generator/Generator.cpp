@@ -31,35 +31,35 @@ static void MasterSynchro(void)
 */
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator_EnableChannel(Channel ch, bool enable)
+void Generator::EnableChannel(Channel ch, bool enable)
 {
     uint8 buffer[3] = {ENABLE_CHANNEL, ch, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 3);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator_SetDebugMode(bool enable)
+void Generator::SetDebugMode(bool enable)
 {
     uint8 buffer[2] = {MODE_DEBUG, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator_Reset(void)
+void Generator::Reset(void)
 {
     uint8 command = RUN_RESET;
     SendToInterface(&command, 1);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator_SetFormWave(Channel ch, WaveForm form)
+void Generator::SetFormWave(Channel ch, WaveForm form)
 {
     uint8 buffer[3] = {SET_FORM_WAVE, ch, form};
     SendToInterface(buffer, 3);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator_SetParameter(Channel ch, WaveParameter param, float value)
+void Generator::SetParameter(Channel ch, WaveParameter param, float value)
 {
     static const CommandWrite commands[NumParameters] =
     {

@@ -25,7 +25,7 @@ static const Choice cConsole =
 
 static void OnPress_DebugMode()
 {
-    Generator_SetDebugMode(DEBUG_MODE_ENABLED);
+    Generator::SetDebugMode(DEBUG_MODE_ENABLED);
 }
 
 // Œ“À¿ƒ ¿ - —Œ’–¿Õ»“‹ Õ¿—“–Œ… » ---------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ static const Button bReset =
 
 static void OnPress_Reset(void)
 {
-    Generator_Reset();
+    Generator::Reset();
     uint time = TIME_MS;
     while (TIME_MS - time < 100) {};
     Settings_Load();

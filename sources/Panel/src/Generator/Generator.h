@@ -10,14 +10,18 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Generator_Reset();
+class Generator
+{
+public:
+    static void Reset();
 
-void Generator_EnableChannel(Channel ch, bool enable);
+    static void EnableChannel(Channel ch, bool enable);
 
-void Generator_SetFormWave(Channel ch, WaveForm form);
+    static void SetFormWave(Channel ch, WaveForm form);
 
-void Generator_SetParameter(Channel ch, WaveParameter param, float value);
+    static void SetParameter(Channel ch, WaveParameter param, float value);
 
-void Generator_SetDebugMode(bool enable);
+    static void SetDebugMode(bool enable);
+};
 
 /** @}  @} */

@@ -549,15 +549,15 @@ static void SendIWStoGenerator(void)
     {
         PARAMETER(B, Form_Impulse, Frequency) = PARAMETER(B, Form_Impulse, Frequency);
         float frequency = PARAMETER(A, Form_Impulse, Frequency).Value();
-        Generator_SetParameter(B, Frequency, frequency);
+        Generator::SetParameter(B, Frequency, frequency);
 
         float value = PARAMETER(ch, form, m_param).Value();
-        Generator_SetParameter(ch, m_param, value);
+        Generator::SetParameter(ch, m_param, value);
     }
     else
     {
         float value = PARAMETER(ch, form, m_param).Value();
-        Generator_SetParameter(ch, m_param, value);
+        Generator::SetParameter(ch, m_param, value);
     }
 }
 
