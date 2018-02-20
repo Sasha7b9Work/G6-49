@@ -8,9 +8,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Возвращает true, если процессор генератора не может принимать команды
-static bool InterfaceIsBusy();
-
 static void SendToInterface(uint8 *buffer, int size);
 /// Сдвигает буфер на один бит влево
 static void ShiftToLeft(uint8 *buffer, int length);
@@ -84,7 +81,7 @@ void Generator_SetParameter(Channel ch, WaveParameter param, float value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendToInterface(uint8 *data, int size)
 {
-    while (InterfaceIsBusy())
+    while (CPU::_SPI4_::IsBusy())
     {
     };
     
@@ -100,8 +97,8 @@ static void SendToInterface(uint8 *data, int size)
         memset(buffer, 0, LENGTH_SPI_BUFFER);
         memcpy(buffer, data, (uint)size);
         
-        __IO CommandWrite command = (CommandWrite)buffer[0];
-        __IO Channel ch = (Channel)buffer[1];
+        volatile CommandWrite command = (CommandWrite)buffer[0];
+        volatile Channel ch = (Channel)buffer[1];
 
         CPU::_SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
 
@@ -116,12 +113,6 @@ static void SendToInterface(uint8 *data, int size)
         command = command;
         ch = ch;
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool InterfaceIsBusy(void)
-{
-    return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

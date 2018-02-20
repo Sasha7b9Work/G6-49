@@ -159,7 +159,7 @@ void CPU::InitLTDC()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SetFrontBuffer(uint frontBuffer)
+void CPU::_LTDC_::SetFrontBuffer(uint frontBuffer)
 {
     LTDC_LayerCfgTypeDef pLayerCfg;
 
@@ -329,6 +329,9 @@ void CPU::SetCallbackKeyboard(void (*func)())
 extern "C" {
 #endif
 
+void LTDC_IRQHandler();
+void TIM3_IRQHandler();
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void LTDC_IRQHandler(void)
 {
@@ -370,4 +373,10 @@ void CPU::_SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint
 void CPU::_SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
 {
     HAL_SPI_Transmit(&handleSPI4, buffer, size, timeOut);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool CPU::_SPI4_::IsBusy()
+{
+    return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET;
 }

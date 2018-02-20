@@ -25,20 +25,26 @@ public:
 
     static void InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL);
 
-    static void SetFrontBuffer(uint frontBuffer);
-
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     class _LTDC_
     {
     public:
+
         static void SetColors(uint clut[], uint numColors);
+
+        static void SetFrontBuffer(uint frontBuffer);
     };
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------
     class _SPI4_
     {
     public:
+        /// Переслать массив данных
         static void Transmit(uint8 *buffer, uint16 size, uint timeOut);
-
+        /// Переслать массив данных с одновременным приёмом второго массива
         static void TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut);
+        /// Возвращает true, если интерфейс занят - процессор не может приниммать команды
+        static bool IsBusy();
     };
 
 private:
@@ -57,15 +63,3 @@ private:
 
     static void EnablePeriphery();
 };
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void LTDC_IRQHandler();
-void TIM3_IRQHandler();
-
-#ifdef __cplusplus
-}
-#endif
