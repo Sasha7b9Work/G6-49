@@ -30,13 +30,13 @@ static void TuneTIM(TypeTimer2 type);   // Настроить систему на таймер
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Timer_IsRun(TypeTimer2 type)
+bool Timer::IsRun(TypeTimer2 type)
 {
     return TIME_NEXT(type) != MAX_UINT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_Init(void)
+void Timer::Init(void)
 {
     for(uint i = 0; i < NumTimers; i++)
     {
@@ -46,7 +46,7 @@ void Timer_Init(void)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_Set(TypeTimer2 type, pFuncVV func, uint dTms)
+void Timer::Set(TypeTimer2 type, pFuncVV func, uint dTms)
 {
     TimerStruct *timer = &timers[type];
     timer->func = func;
@@ -55,23 +55,23 @@ void Timer_Set(TypeTimer2 type, pFuncVV func, uint dTms)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_SetAndStartOnce(TypeTimer2 type, pFuncVV func, uint dTms)
+void Timer::SetAndStartOnce(TypeTimer2 type, pFuncVV func, uint dTms)
 {
-    Timer_Set(type, func, dTms);
-    Timer_StartOnce(type);
+    Set(type, func, dTms);
+    StartOnce(type);
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_SetAndEnable(TypeTimer2 type, pFuncVV func, uint dTms)
+void Timer::SetAndEnable(TypeTimer2 type, pFuncVV func, uint dTms)
 {
-    Timer_Set(type, func, dTms);
-    Timer_Enable(type);
+    Set(type, func, dTms);
+    Enable(type);
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_StartOnce(TypeTimer2 type)
+void Timer::StartOnce(TypeTimer2 type)
 {
     timers[type].repeat = false;
     TuneTIM(type);
@@ -79,7 +79,7 @@ void Timer_StartOnce(TypeTimer2 type)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_Enable(TypeTimer2 type)
+void Timer::Enable(TypeTimer2 type)
 {
     timers[type].repeat = true;
     TuneTIM(type);
@@ -105,7 +105,7 @@ static void TuneTIM(TypeTimer2 type)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_Disable(TypeTimer2 type)
+void Timer::Disable(TypeTimer2 type)
 {
     timers[type].timeNextMS = MAX_UINT;
     timers[type].repeat = false;
@@ -129,7 +129,7 @@ static uint NearestTime(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_PauseOnTime(uint timeMS)
+void Timer::PauseOnTime(uint timeMS)
 {
     uint time = TIME_MS;
     while (TIME_MS - time < timeMS)
@@ -139,7 +139,7 @@ void Timer_PauseOnTime(uint timeMS)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_PauseOnTicks(uint numTicks)
+void Timer::PauseOnTicks(uint numTicks)
 {
     uint startTicks = TIME_TICKS;
     while (TIME_TICKS - startTicks < numTicks)
@@ -148,7 +148,7 @@ void Timer_PauseOnTicks(uint numTicks)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_StartLogging(void)
+void Timer::StartLogging(void)
 {
     timeStartLogging = TIME_TICKS;
     timePrevPoint = timeStartLogging;
@@ -156,7 +156,7 @@ void Timer_StartLogging(void)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Timer_LogPointUS(char *)
+uint Timer::LogPointUS(char *)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;
@@ -165,7 +165,7 @@ uint Timer_LogPointUS(char *)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint Timer_LogPointMS(char *)
+uint Timer::LogPointMS(char *)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;

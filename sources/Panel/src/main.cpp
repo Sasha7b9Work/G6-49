@@ -21,7 +21,7 @@ int main(void)
    
     Display::Init();
 
-    Timer_Init();
+    Timer::Init();
 
     Keyboard::Init();
 
