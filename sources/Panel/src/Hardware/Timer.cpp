@@ -1,4 +1,5 @@
 #include "Timer.h"
+#include "Hardware/CPU.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +93,7 @@ void Timer_Enable(TypeTimer2 type)
 static void TuneTIM(TypeTimer2 type)
 {
     TimerStruct *timer = &timers[type];
-    timer->timeFirstMS = gTimeMS;
+    timer->timeFirstMS = TIME_MS;
 
     uint timeNearest = NearestTime();
 
@@ -141,7 +142,7 @@ static void StartTIM(uint timeStopMS)
         return;
     }
 
-    uint dT = timeStopMS - gTimeMS;
+    uint dT = timeStopMS - TIME_MS;
 
     handleTIM3.Init.Period = (dT * 2) - 1;      // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
 
@@ -159,8 +160,8 @@ static void StopTIM(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer_PauseOnTime(uint timeMS)
 {
-    uint time = gTimeMS;
-    while (gTimeMS - time < timeMS)
+    uint time = TIME_MS;
+    while (TIME_MS - time < timeMS)
     {
     };
 }
@@ -169,26 +170,16 @@ void Timer_PauseOnTime(uint timeMS)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer_PauseOnTicks(uint numTicks)
 {
-    uint startTicks = gTimerTics;
-    while (gTimerTics - startTicks < numTicks)
+    uint startTicks = TIME_TICS;
+    while (TIME_TICS - startTicks < numTicks)
     {
     };
 }
 
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer_StartMultiMeasurement(void)
-{
-    TIM2->CR1 &= (uint)~TIM_CR1_CEN;
-    TIM2->CNT = 0;
-    TIM2->CR1 |= TIM_CR1_CEN;
-}
-
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer_StartLogging(void)
 {
-    timeStartLogging = gTimerTics;
+    timeStartLogging = TIME_TICS;
     timePrevPoint = timeStartLogging;
 }
 
@@ -196,8 +187,8 @@ void Timer_StartLogging(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint Timer_LogPointUS(char *)
 {
-    uint interval = gTimerTics - timePrevPoint;
-    timePrevPoint = gTimerTics;
+    uint interval = TIME_TICS - timePrevPoint;
+    timePrevPoint = TIME_TICS;
     return interval;
 }
 
@@ -205,8 +196,8 @@ uint Timer_LogPointUS(char *)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint Timer_LogPointMS(char *)
 {
-    uint interval = gTimerTics - timePrevPoint;
-    timePrevPoint = gTimerTics;
+    uint interval = TIME_TICS - timePrevPoint;
+    timePrevPoint = TIME_TICS;
     return interval;
 }
 

@@ -3,14 +3,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-class _LTDC_
-{
-public:
-    static void SetColors(uint clut[], uint numColors);
-};
-*/
-
+#define TIME_TICS CPU::_TIM_::TimeTicks()
+#define TIME_US   CPU::_TIM_::TimeUS()
+#define TIME_MS   CPU::_TIM_::TimeMS()
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +40,20 @@ public:
         static void TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut);
         /// Возвращает true, если интерфейс занят - процессор не может приниммать команды
         static bool IsBusy();
+    };
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    class _TIM_
+    {
+    public:
+        /// Запускает счётчик для измерения малых промежутков времени
+        static void StartMultiMeasurement();
+        /// \brief Количество тиков, прошедших с момента последнего вызова StartMultiMeasurement(). Не более (1 << 32)
+        static uint TimeTicks();
+
+        static uint TimeUS();
+
+        static uint TimeMS();
     };
 
 private:
