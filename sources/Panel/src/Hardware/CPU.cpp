@@ -4,6 +4,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#define TIME_UPDATE 2   ///< Время между опросами клавиатуры
+
 /// Таймер для опроса клавиатуры
 static TIM_HandleTypeDef handleTIM3;
 
@@ -34,7 +37,10 @@ static SPI_HandleTypeDef handleSPI4 =
 
 static void (*callbackKeyboard)() = 0;
 
-#define TIME_UPDATE 2   ///< Время между опросами клавиатуры
+static GPIO_TypeDef *ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
+
+static uint frontBuffer = 0;
+static uint backBuffer = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,8 +165,11 @@ void CPU::InitLTDC()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_LTDC_::SetFrontBuffer(uint frontBuffer)
+void CPU::_LTDC_::SetBuffers(uint front, uint back)
 {
+    frontBuffer = front;
+    backBuffer = back;
+
     LTDC_LayerCfgTypeDef pLayerCfg;
 
     pLayerCfg.WindowX0 = 0;
@@ -232,8 +241,6 @@ void CPU::InitFSMC(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL)
 {
-    GPIO_TypeDef *ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
-
     GPIO_InitTypeDef isGPIO;
 
     for (int i = 0; i < numRL; i++)
@@ -364,6 +371,36 @@ void CPU::_LTDC_::SetColors(uint clut[], uint numColors)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::_LTDC_::ToggleBuffers()
+{
+    DMA2D_HandleTypeDef hDMA2D;
+
+    hDMA2D.Init.Mode = DMA2D_M2M;
+    hDMA2D.Init.ColorMode = DMA2D_INPUT_L8;
+    hDMA2D.Init.OutputOffset = 0;
+
+    hDMA2D.XferCpltCallback = NULL;
+
+    hDMA2D.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+    hDMA2D.LayerCfg[1].InputAlpha = 0xFF;
+    hDMA2D.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
+    hDMA2D.LayerCfg[1].InputOffset = 0;
+
+    hDMA2D.Instance = DMA2D;
+
+    if (HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
+    {
+        if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
+        {
+            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, 320, 240) == HAL_OK)
+            {
+                HAL_DMA2D_PollForTransfer(&hDMA2D, 100);
+            }
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::_SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
     HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
@@ -429,4 +466,10 @@ void CPU::_TIM3_::Start(uint timeStopMS)
 void CPU::_TIM3_::Stop()
 {
     HAL_TIM_Base_Stop_IT(&handleTIM3);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::_GPIO_::WritePin(char port, uint16 maskPin, bool state)
+{
+    HAL_GPIO_WritePin(ports[port - 'A'], maskPin, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }

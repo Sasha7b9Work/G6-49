@@ -12,8 +12,6 @@ public:
 
     static void Update();
 
-    static void ToggleBuffers();
-
     static uint8 *GetBuffer();
 
     static void SetButton(Control control);

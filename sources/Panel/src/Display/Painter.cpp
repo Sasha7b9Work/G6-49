@@ -2,6 +2,7 @@
 #include "Painter.h"
 #include "globals.h"
 #include "Font/Font.h"
+#include "Hardware/CPU.h"
 #include "Utils/Math.h"
 #include <stdio.h>
 #include <string.h>
@@ -106,7 +107,7 @@ void Painter::DrawVLine(int x, int y0, int y1)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::EndScene(void)
 {
-    Display::ToggleBuffers();
+    CPU::_LTDC_::ToggleBuffers();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

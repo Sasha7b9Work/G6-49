@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/Settings.h"
+#include "Hardware/CPU.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,8 +54,8 @@ static const Button bReset =
 static void OnPress_Reset(void)
 {
     Generator_Reset();
-    uint time = HAL_GetTick();
-    while (HAL_GetTick() - time < 100) {};
+    uint time = TIME_MS;
+    while (TIME_MS - time < 100) {};
     Settings_Load();
 }
 

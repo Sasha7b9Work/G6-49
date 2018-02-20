@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Log.h"
 #include "Display/Display.h"
+#include "Hardware/CPU.h"
 #include "Hardware/Hardware.h"
 #include "Generator/Generator.h"
 #include "Keyboard/Keyboard.h"
@@ -20,18 +21,18 @@ int main(void)
 
     Keyboard::Init();
 
-    uint time = HAL_GetTick();
+    uint time = TIME_MS;
 
-    while (HAL_GetTick() - time < 200)
+    while (TIME_MS - time < 200)
     {
     };    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо
                                                 // быстрее панели
 
     Generator_Reset();
 
-    time = HAL_GetTick();
+    time = TIME_MS;
 
-    while (HAL_GetTick() - time < 200) { };
+    while (TIME_MS - time < 200) { };
 
     Settings_Load();
 

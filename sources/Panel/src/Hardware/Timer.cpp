@@ -141,8 +141,8 @@ void Timer_PauseOnTime(uint timeMS)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer_PauseOnTicks(uint numTicks)
 {
-    uint startTicks = TIME_TICS;
-    while (TIME_TICS - startTicks < numTicks)
+    uint startTicks = TIME_TICKS;
+    while (TIME_TICKS - startTicks < numTicks)
     {
     };
 }
@@ -150,7 +150,7 @@ void Timer_PauseOnTicks(uint numTicks)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer_StartLogging(void)
 {
-    timeStartLogging = TIME_TICS;
+    timeStartLogging = TIME_TICKS;
     timePrevPoint = timeStartLogging;
 }
 
@@ -158,8 +158,8 @@ void Timer_StartLogging(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint Timer_LogPointUS(char *)
 {
-    uint interval = TIME_TICS - timePrevPoint;
-    timePrevPoint = TIME_TICS;
+    uint interval = TIME_TICKS - timePrevPoint;
+    timePrevPoint = TIME_TICKS;
     return interval;
 }
 
@@ -167,8 +167,8 @@ uint Timer_LogPointUS(char *)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint Timer_LogPointMS(char *)
 {
-    uint interval = TIME_TICS - timePrevPoint;
-    timePrevPoint = TIME_TICS;
+    uint interval = TIME_TICKS - timePrevPoint;
+    timePrevPoint = TIME_TICKS;
     return interval;
 }
 

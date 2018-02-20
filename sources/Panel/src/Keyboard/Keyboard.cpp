@@ -3,7 +3,7 @@
 #include "Display/Display.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/CPU.h"
-
+#include <stm32f4xx_hal.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static StructControl commands[10];
@@ -49,7 +49,7 @@ static uint16 rls[] =             {RL0,   RL1,   RL2,   RL3,   RL4};
 static GPIO_TypeDef* rlsPorts[] = {GPIOA, GPIOA, GPIOA, GPIOD, GPIOD};
 static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 
-#define SET_SL(n)       HAL_GPIO_WritePin(slsPorts[n], sls[n], GPIO_PIN_SET);
+#define SET_SL(n)       CPU::_GPIO_::WritePin(slsAsciiPorts[n], sls[n], true);
 #define SET_ALL_SL      HAL_GPIO_WritePin(GPIOB, SL0 | SL1 | SL2 | SL3, GPIO_PIN_SET); HAL_GPIO_WritePin(GPIOD, SL4 | SL5, GPIO_PIN_SET);
 #define RESET_SL(n)     HAL_GPIO_WritePin(slsPorts[n], sls[n], GPIO_PIN_RESET)
 #define READ_RL(n)      HAL_GPIO_ReadPin(rlsPorts[n], rls[n])
