@@ -4,18 +4,37 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Таймер для опроса клавиатуры
+/// РўР°Р№РјРµСЂ РґР»СЏ РѕРїСЂРѕСЃР° РєР»Р°РІРёР°С‚СѓСЂС‹
 static TIM_HandleTypeDef handleTIM3;
 
 static TIM_HandleTypeDef handleTIM2;
 
 static TIM_HandleTypeDef handleTIM5;
-/// Для дисплея
-static LTDC_HandleTypeDef hltdc;
+/// Р”Р»СЏ РґРёСЃРїР»РµСЏ
+static LTDC_HandleTypeDef handleLTDC;
+/// Р”Р»СЏ СЃРІСЏР·Рё СЃ РѕСЃРЅРѕРІРЅС‹Рј РїСЂРѕС†РµСЃСЃРѕСЂРѕРј
+static SPI_HandleTypeDef handleSPI4 =
+{
+    SPI4,
+    {
+        SPI_MODE_MASTER,
+        SPI_DIRECTION_2LINES,
+        SPI_DATASIZE_8BIT,
+        SPI_POLARITY_HIGH,
+        SPI_PHASE_2EDGE,
+        SPI_NSS_SOFT,
+        SPI_BAUDRATEPRESCALER_2,
+        SPI_FIRSTBIT_MSB,
+        SPI_TIMODE_DISABLED,
+        SPI_CRCCALCULATION_DISABLED,
+        7
+    },
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+};
 
 static void (*callbackKeyboard)() = 0;
 
-#define TIME_UPDATE 2   ///< Время между опросами клавиатуры
+#define TIME_UPDATE 2   ///< Р’СЂРµРјСЏ РјРµР¶РґСѓ РѕРїСЂРѕСЃР°РјРё РєР»Р°РІРёР°С‚СѓСЂС‹
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,9 +52,9 @@ void CPU::EnablePeriphery()
 {
     __HAL_RCC_SPI4_CLK_ENABLE();
 
-    __HAL_RCC_TIM2_CLK_ENABLE();    // Для тиков
-    __HAL_RCC_TIM3_CLK_ENABLE();    // Для таймеров
-    __HAL_RCC_TIM5_CLK_ENABLE();    // Для миллисекунд
+    __HAL_RCC_TIM2_CLK_ENABLE();    // Р”Р»СЏ С‚РёРєРѕРІ
+    __HAL_RCC_TIM3_CLK_ENABLE();    // Р”Р»СЏ С‚Р°Р№РјРµСЂРѕРІ
+    __HAL_RCC_TIM5_CLK_ENABLE();    // Р”Р»СЏ РјРёР»Р»РёСЃРµРєСѓРЅРґ
 
     __HAL_RCC_LTDC_CLK_ENABLE();
     __HAL_RCC_DMA2D_CLK_ENABLE();
@@ -57,6 +76,8 @@ void CPU::InitHardware()
     InitTIM2();
 
     InitTIM5();
+
+    InitSPI4();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,23 +116,23 @@ void CPU::InitLTDC()
     HAL_GPIO_Init(GPIOE, &isGPIO);
 
 
-    hltdc.Instance = LTDC;
-    hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-    hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-    hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AH;
-    hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IIPC;
-    hltdc.Init.HorizontalSync = 0;
-    hltdc.Init.VerticalSync = 0;
-    hltdc.Init.AccumulatedHBP = 70;
-    hltdc.Init.AccumulatedVBP = 13;
-    hltdc.Init.AccumulatedActiveW = 390;
-    hltdc.Init.AccumulatedActiveH = 253;
-    hltdc.Init.TotalWidth = 408;
-    hltdc.Init.TotalHeigh = 263;
-    hltdc.Init.Backcolor.Blue = 0;
-    hltdc.Init.Backcolor.Green = 0;
-    hltdc.Init.Backcolor.Red = 0;
-    if (HAL_LTDC_Init(&hltdc) != HAL_OK)
+    handleLTDC.Instance = LTDC;
+    handleLTDC.Init.HSPolarity = LTDC_HSPOLARITY_AL;
+    handleLTDC.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+    handleLTDC.Init.DEPolarity = LTDC_DEPOLARITY_AH;
+    handleLTDC.Init.PCPolarity = LTDC_PCPOLARITY_IIPC;
+    handleLTDC.Init.HorizontalSync = 0;
+    handleLTDC.Init.VerticalSync = 0;
+    handleLTDC.Init.AccumulatedHBP = 70;
+    handleLTDC.Init.AccumulatedVBP = 13;
+    handleLTDC.Init.AccumulatedActiveW = 390;
+    handleLTDC.Init.AccumulatedActiveH = 253;
+    handleLTDC.Init.TotalWidth = 408;
+    handleLTDC.Init.TotalHeigh = 263;
+    handleLTDC.Init.Backcolor.Blue = 0;
+    handleLTDC.Init.Backcolor.Green = 0;
+    handleLTDC.Init.Backcolor.Red = 0;
+    if (HAL_LTDC_Init(&handleLTDC) != HAL_OK)
     {
         ERROR_HANDLER;
     }
@@ -124,9 +145,9 @@ void CPU::InitLTDC()
         0x000000ff
     };
 
-    HAL_LTDC_ConfigCLUT(&hltdc, clut, 10, 0);
+    HAL_LTDC_ConfigCLUT(&handleLTDC, clut, 10, 0);
 
-    HAL_LTDC_EnableCLUT(&hltdc, 0);
+    HAL_LTDC_EnableCLUT(&handleLTDC, 0);
 
     GPIO_InitTypeDef initStr;
     initStr.Pin = GPIO_PIN_6;
@@ -134,7 +155,7 @@ void CPU::InitLTDC()
     initStr.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOB, &initStr);
 
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Р’РєР»СЋС‡РµРЅРёРµ РїРѕРґСЃРІРµС‚РєРё
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,7 +178,7 @@ void CPU::SetFrontBuffer(uint frontBuffer)
     pLayerCfg.Backcolor.Blue = 0;
     pLayerCfg.Backcolor.Green = 0;
     pLayerCfg.Backcolor.Red = 0;
-    if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
+    if (HAL_LTDC_ConfigLayer(&handleLTDC, &pLayerCfg, 0) != HAL_OK)
     {
         ERROR_HANDLER;
     }
@@ -166,7 +187,7 @@ void CPU::SetFrontBuffer(uint frontBuffer)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::InitFSMC(void)
 {
-    /// \todo временно изменил - возможно, на флешку не пишет из-за неправильных таймингов
+    /// \todo РІСЂРµРјРµРЅРЅРѕ РёР·РјРµРЅРёР» - РІРѕР·РјРѕР¶РЅРѕ, РЅР° С„Р»РµС€РєСѓ РЅРµ РїРёС€РµС‚ РёР·-Р·Р° РЅРµРїСЂР°РІРёР»СЊРЅС‹С… С‚Р°Р№РјРёРЅРіРѕРІ
     static const FMC_NORSRAM_TimingTypeDef sramTiming =
     {
         6,                  ///< FSMC_AddressSetupTime
@@ -229,7 +250,7 @@ void CPU::InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[],
         HAL_GPIO_Init(ports[portSL[i] - 'A'], &isGPIO);
     }
 
-    // Инициализируем таймер, по прерываниям которого будем опрашивать клавиатуру
+    // РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј С‚Р°Р№РјРµСЂ, РїРѕ РїСЂРµСЂС‹РІР°РЅРёСЏРј РєРѕС‚РѕСЂРѕРіРѕ Р±СѓРґРµРј РѕРїСЂР°С€РёРІР°С‚СЊ РєР»Р°РІРёР°С‚СѓСЂСѓ
     HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
 
     HAL_NVIC_EnableIRQ(TIM3_IRQn);
@@ -276,6 +297,29 @@ void CPU::InitTIM5()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::InitSPI4()
+{
+    GPIO_InitTypeDef isGPIO =
+    {   //  CLK         MI           MO
+        GPIO_PIN_2 | GPIO_PIN_5 | GPIO_PIN_6,
+        GPIO_MODE_AF_PP,
+        GPIO_NOPULL,
+        GPIO_SPEED_HIGH,
+        GPIO_AF5_SPI4
+    };
+
+    HAL_GPIO_Init(GPIOE, &isGPIO);
+
+    HAL_SPI_Init(&handleSPI4);
+
+    // РќР° СЌС‚РѕРј РїРёРЅРµ Р±СѓРґРµРј С‡РёС‚Р°С‚СЊ Р·Р°РЅСЏС‚РѕСЃС‚СЊ РїСЂРѕС†РµСЃСЃРѕСЂР° РіРµРЅРµСЂР°С‚РѕСЂР°
+    isGPIO.Pin = GPIO_PIN_4;
+    isGPIO.Mode = GPIO_MODE_INPUT;
+    isGPIO.Alternate = 0;
+    HAL_GPIO_Init(GPIOE, &isGPIO);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SetCallbackKeyboard(void (*func)())
 {
     callbackKeyboard = func;
@@ -313,5 +357,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::_LTDC_::SetColors(uint clut[], uint numColors)
 {
-    HAL_LTDC_ConfigCLUT(&hltdc, clut, numColors, 0);
+    HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::_SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
+{
+    HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::_SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
+{
+    HAL_SPI_Transmit(&handleSPI4, buffer, size, timeOut);
 }

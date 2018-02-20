@@ -13,8 +13,6 @@ void Hardware_Init(void)
    
     Display::Init();
 
-    Generator_Init();
-    
     Timer_Init();
 }
 

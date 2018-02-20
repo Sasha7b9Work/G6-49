@@ -1437,7 +1437,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1460,18 +1460,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Globals.h</PathWithFileName>
-      <FilenameWithoutPath>Globals.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>13</GroupNumber>
-      <FileNumber>97</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Log.h</PathWithFileName>
       <FilenameWithoutPath>Log.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1479,7 +1467,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>98</FileNumber>
+      <FileNumber>97</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1491,7 +1479,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>99</FileNumber>
+      <FileNumber>98</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1503,13 +1491,25 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>100</FileNumber>
+      <FileNumber>99</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\main.cpp</PathWithFileName>
       <FilenameWithoutPath>main.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>13</GroupNumber>
+      <FileNumber>100</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\globals.h</PathWithFileName>
+      <FilenameWithoutPath>globals.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

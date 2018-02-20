@@ -20,14 +20,6 @@ public:
 
     static void Config();
 
-    static void EnablePeriphery();
-
-    static void InitHardware();
-    /// Инициализация дисплея
-    static void InitLTDC();
-    /// Инициализация шины для связи с ПЛИС
-    static void InitFSMC();
-
     /// Установка каллбэка для клавиатуры
     static void SetCallbackKeyboard(void (*func)());
 
@@ -37,14 +29,33 @@ public:
 
     class _LTDC_
     {
-        public:
-            static void SetColors(uint clut[], uint numColors);
+    public:
+        static void SetColors(uint clut[], uint numColors);
+    };
+
+    class _SPI4_
+    {
+    public:
+        static void Transmit(uint8 *buffer, uint16 size, uint timeOut);
+
+        static void TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut);
     };
 
 private:
+    /// Инициализация SPI для связи с основным процессором
+    static void InitSPI4();
+
     static void InitTIM2();
 
     static void InitTIM5();
+
+    static void InitHardware();
+    /// Инициализация дисплея
+    static void InitLTDC();
+    /// Инициализация шины для связи с ПЛИС
+    static void InitFSMC();
+
+    static void EnablePeriphery();
 };
 
 

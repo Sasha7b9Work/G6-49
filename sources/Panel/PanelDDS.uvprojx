@@ -1917,11 +1917,6 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>Globals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Globals.h</FilePath>
-            </File>
-            <File>
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
@@ -1940,6 +1935,11 @@
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>globals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\globals.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -2,30 +2,9 @@
 #include "Generator.h"
 #include "Log.h"
 #include "Menu/MenuItems.h"
+#include "Hardware/CPU.h"
 #include "../../Common/Command.h"
 #include <string.h>
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static SPI_HandleTypeDef hSPI4 =
-{
-    SPI4,
-    {
-        SPI_MODE_MASTER,
-        SPI_DIRECTION_2LINES,
-        SPI_DATASIZE_8BIT,
-        SPI_POLARITY_HIGH,
-        SPI_PHASE_2EDGE,
-        SPI_NSS_SOFT,
-        SPI_BAUDRATEPRESCALER_2,
-        SPI_FIRSTBIT_MSB,
-        SPI_TIMODE_DISABLED,
-        SPI_CRCCALCULATION_DISABLED,
-        7
-    },
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
-};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,29 +20,6 @@ static void ShiftToLeft(uint8 *buffer, int length);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Generator_Init(void)
-{
-    GPIO_InitTypeDef isGPIO =
-    {   //  CLK         MI           MO
-        GPIO_PIN_2 | GPIO_PIN_5 | GPIO_PIN_6,
-        GPIO_MODE_AF_PP,
-        GPIO_NOPULL,
-        GPIO_SPEED_HIGH,
-        GPIO_AF5_SPI4
-    };
-
-    HAL_GPIO_Init(GPIOE, &isGPIO);
-
-    HAL_SPI_Init(&hSPI4);
-
-    // На этом пине будем читать занятость процессора генератора
-    isGPIO.Pin = GPIO_PIN_4;
-    isGPIO.Mode = GPIO_MODE_INPUT;
-    isGPIO.Alternate = 0;
-    HAL_GPIO_Init(GPIOE, &isGPIO);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 /*
 static void MasterSynchro(void)
 {
@@ -147,12 +103,12 @@ static void SendToInterface(uint8 *data, int size)
         __IO CommandWrite command = (CommandWrite)buffer[0];
         __IO Channel ch = (Channel)buffer[1];
 
-        HAL_SPI_Transmit(&hSPI4, buffer, LENGTH_SPI_BUFFER, 10);                                // Первая передача
+        CPU::_SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
 
         do
         {
-            memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                           // Очищаем приёмный буфер
-            HAL_SPI_TransmitReceive(&hSPI4, buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
+            memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
+            CPU::_SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
             ShiftToLeft(recvBuffer, LENGTH_SPI_BUFFER);
         }
         while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
