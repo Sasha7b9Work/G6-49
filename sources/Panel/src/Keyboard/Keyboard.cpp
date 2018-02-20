@@ -46,10 +46,10 @@ static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
 static uint16 rls[] =             {RL0,   RL1,   RL2,   RL3,   RL4};
 static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 
-#define SET_SL(n)       CPU::_GPIO_::WritePin(slsAsciiPorts[n], sls[n], true)
-#define SET_ALL_SL      CPU::_GPIO_::WritePin('B', SL0 | SL1 | SL2 | SL3, true); CPU::_GPIO_::WritePin('D', SL4 | SL5, true);
-#define RESET_SL(n)     CPU::_GPIO_::WritePin(slsAsciiPorts[n], sls[n], false)
-#define READ_RL(n)      CPU::_GPIO_::ReadPin(rlsAsciiPorts[n], rls[n])
+#define SET_SL(n)       CPU::GPIO_::WritePin(slsAsciiPorts[n], sls[n], true)
+#define SET_ALL_SL      CPU::GPIO_::WritePin('B', SL0 | SL1 | SL2 | SL3, true); CPU::GPIO_::WritePin('D', SL4 | SL5, true);
+#define RESET_SL(n)     CPU::GPIO_::WritePin(slsAsciiPorts[n], sls[n], false)
+#define READ_RL(n)      CPU::GPIO_::ReadPin(rlsAsciiPorts[n], rls[n])
 
 static bool init = false;
 
@@ -66,9 +66,9 @@ void Keyboard::Init(void)
 
     pointer = 0;
 
-    CPU::SetCallbackKeyboard(&Keyboard::Update);
+    CPU::Keyboard::SetCallback(&Keyboard::Update);
 
-    CPU::InitKeyboardInputs(sls, slsAsciiPorts, 6, rls, rlsAsciiPorts, 5);
+    CPU::Keyboard::InitInputs(sls, slsAsciiPorts, 6, rls, rlsAsciiPorts, 5);
 
     init = true;
 }

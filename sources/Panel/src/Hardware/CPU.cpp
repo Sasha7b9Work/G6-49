@@ -165,7 +165,7 @@ void CPU::InitLTDC()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_LTDC_::SetBuffers(uint front, uint back)
+void CPU::LTDC_::SetBuffers(uint front, uint back)
 {
     frontBuffer = front;
     backBuffer = back;
@@ -239,7 +239,7 @@ void CPU::InitFSMC(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL)
+void CPU::Keyboard::InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL)
 {
     GPIO_InitTypeDef isGPIO;
 
@@ -327,7 +327,7 @@ void CPU::InitSPI4()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SetCallbackKeyboard(void (*func)())
+void CPU::Keyboard::SetCallback(void (*func)())
 {
     callbackKeyboard = func;
 }
@@ -365,13 +365,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_LTDC_::SetColors(uint clut[], uint numColors)
+void CPU::LTDC_::SetColors(uint clut[], uint numColors)
 {
     HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_LTDC_::ToggleBuffers()
+void CPU::LTDC_::ToggleBuffers()
 {
     DMA2D_HandleTypeDef hDMA2D;
 
@@ -401,25 +401,25 @@ void CPU::_LTDC_::ToggleBuffers()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
+void CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
     HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
+void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
 {
     HAL_SPI_Transmit(&handleSPI4, buffer, size, timeOut);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::_SPI4_::IsBusy()
+bool CPU::SPI4_::IsBusy()
 {
     return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_TIM_::StartMultiMeasurement()
+void CPU::TIM_::StartMultiMeasurement()
 {
     TIM2->CR1 &= (uint)~TIM_CR1_CEN;
     TIM2->CNT = 0;
@@ -427,25 +427,25 @@ void CPU::_TIM_::StartMultiMeasurement()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint CPU::_TIM_::TimeTicks()
+uint CPU::TIM_::TimeTicks()
 {
     return TIM2->CNT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint CPU::_TIM_::TimeUS()
+uint CPU::TIM_::TimeUS()
 {
     return TIM2->CNT / 90;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint CPU::_TIM_::TimeMS()
+uint CPU::TIM_::TimeMS()
 {
     return HAL_GetTick();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_TIM3_::Start(uint timeStopMS)
+void CPU::TIM3_::Start(uint timeStopMS)
 {
     Stop();
 
@@ -463,19 +463,19 @@ void CPU::_TIM3_::Start(uint timeStopMS)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_TIM3_::Stop()
+void CPU::TIM3_::Stop()
 {
     HAL_TIM_Base_Stop_IT(&handleTIM3);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_GPIO_::WritePin(char port, uint16 maskPin, bool state)
+void CPU::GPIO_::WritePin(char port, uint16 maskPin, bool state)
 {
     HAL_GPIO_WritePin(ports[port - 'A'], maskPin, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::_GPIO_::ReadPin(char port, uint16 maskPin)
+bool CPU::GPIO_::ReadPin(char port, uint16 maskPin)
 {
     return HAL_GPIO_ReadPin(ports[port - 'A'], maskPin) == GPIO_PIN_SET;
 }

@@ -81,7 +81,7 @@ void Generator_SetParameter(Channel ch, WaveParameter param, float value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendToInterface(uint8 *data, int size)
 {
-    while (CPU::_SPI4_::IsBusy())
+    while (CPU::SPI4_::IsBusy())
     {
     };
     
@@ -100,12 +100,12 @@ static void SendToInterface(uint8 *data, int size)
         volatile CommandWrite command = (CommandWrite)buffer[0];
         volatile Channel ch = (Channel)buffer[1];
 
-        CPU::_SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
+        CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
 
         do
         {
             memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
-            CPU::_SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
+            CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
             ShiftToLeft(recvBuffer, LENGTH_SPI_BUFFER);
         }
         while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);

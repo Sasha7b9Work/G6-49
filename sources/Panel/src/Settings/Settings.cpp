@@ -131,13 +131,13 @@ float MaxValue(WaveParameter param)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings_Save(void)
 {
-    CPU::_FLASH::SaveSettings();
+    CPU::FLASH_::SaveSettings();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings_Load(void)
 {
-    CPU::_FLASH::LoadSettings();
+    CPU::FLASH_::LoadSettings();
 
     TuneGenerator(A);
     TuneGenerator(B);

@@ -26,7 +26,7 @@ uint8              Display::backBuffer[320 * 240];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Init()
 {
-    CPU::_LTDC_::SetBuffers((uint)frontBuffer, (uint)backBuffer);
+    CPU::LTDC_::SetBuffers((uint)frontBuffer, (uint)backBuffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------    
@@ -42,7 +42,7 @@ void Display::SetColorBackground(void)
             0x000000ff
         };
 
-        CPU::_LTDC_::SetColors(clut, 10);
+        CPU::LTDC_::SetColors(clut, 10);
     }
     else
     {
@@ -54,7 +54,7 @@ void Display::SetColorBackground(void)
             0x000000ff
         };
 
-        CPU::_LTDC_::SetColors(clut, 10);
+        CPU::LTDC_::SetColors(clut, 10);
     }
 }
 

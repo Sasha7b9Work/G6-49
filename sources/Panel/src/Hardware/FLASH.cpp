@@ -27,7 +27,7 @@ static uint GetSector(uint startAddress);
 static void ReadBufferBytes(uint addrSrc, void *bufferDest, int size);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CPU::_FLASH::SaveSettings(void)
+void CPU::FLASH_::SaveSettings(void)
 {
     // Записываем в Settings.size текущий размер структуры Settings
     set.size = sizeof(Settings);
@@ -51,7 +51,7 @@ void CPU::_FLASH::SaveSettings(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::_FLASH::LoadSettings(void)
+void CPU::FLASH_::LoadSettings(void)
 {
     if (READ_HALF_WORD(ADDR_SECTOR_SETTINGS) != 0xffff)     // Если настройки уже сохранялись
     {

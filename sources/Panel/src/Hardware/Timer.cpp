@@ -99,7 +99,7 @@ static void TuneTIM(TypeTimer2 type)
 
     if(timeNext < timeNearest)          // Если таймер должен сработать раньше текущего
     {
-        CPU::_TIM3_::Start(timeNext);   // то заводим таймер на наше время
+        CPU::TIM3_::Start(timeNext);   // то заводим таймер на наше время
     }
 }
 
