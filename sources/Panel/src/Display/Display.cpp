@@ -2,6 +2,7 @@
 #include "Display.h"
 #include "Display/Painter.h"
 #include "Display/Font/Font.h"
+#include "Hardware/CPU.h"
 #include "Hardware/Hardware.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
@@ -11,7 +12,6 @@
 #include "Settings/Settings.h"
 #include "Settings/SettingsSignals.h"
 #include "Settings/SettingsTypes.h"
-#include <stm32f4xx_hal.h>
 #include <math.h>
 #include <string.h>
 
@@ -19,80 +19,17 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *       Display::text = 0;
 char               Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
-LTDC_HandleTypeDef Display::hltdc;
 uint8              Display::frontBuffer[320 * 240];
 uint8              Display::backBuffer[320 * 240];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Display::Init(void)
+void Display::Init()
 {
-    LTDC_LayerCfgTypeDef pLayerCfg;
-
-    hltdc.Instance = LTDC;
-    hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-    hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-    hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AH;
-    hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IIPC;
-    hltdc.Init.HorizontalSync = 0;
-    hltdc.Init.VerticalSync = 0;
-    hltdc.Init.AccumulatedHBP = 70;
-    hltdc.Init.AccumulatedVBP = 13;
-    hltdc.Init.AccumulatedActiveW = 390;
-    hltdc.Init.AccumulatedActiveH = 253;
-    hltdc.Init.TotalWidth = 408;
-    hltdc.Init.TotalHeigh = 263;
-    hltdc.Init.Backcolor.Blue = 0;
-    hltdc.Init.Backcolor.Green = 0;
-    hltdc.Init.Backcolor.Red = 0;
-    if (HAL_LTDC_Init(&hltdc) != HAL_OK)
-    {
-        ERROR_HANDLER;
-    }
-
-    pLayerCfg.WindowX0 = 0;
-    pLayerCfg.WindowX1 = 320;
-    pLayerCfg.WindowY0 = 0;
-    pLayerCfg.WindowY1 = 240;
-    pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
-    pLayerCfg.Alpha = 127;
-    pLayerCfg.Alpha0 = 127;
-    pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
-    pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-    pLayerCfg.FBStartAdress = (uint32_t)frontBuffer;
-    pLayerCfg.ImageWidth = 320;
-    pLayerCfg.ImageHeight = 240;
-    pLayerCfg.Backcolor.Blue = 0;
-    pLayerCfg.Backcolor.Green = 0;
-    pLayerCfg.Backcolor.Red = 0;
-    if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
-    {
-        ERROR_HANDLER;
-    }
-
-    uint clut[10] =
-    {
-        0x00000000,
-        0x00ffffff,
-        0x00a0a0a0,
-        0x000000ff
-    };
-
-    HAL_LTDC_ConfigCLUT(&hltdc, clut, 10, 0);
-
-    HAL_LTDC_EnableCLUT(&hltdc, 0);
-
-    GPIO_InitTypeDef initStr;
-    initStr.Pin = GPIO_PIN_6;
-    initStr.Mode = GPIO_MODE_OUTPUT_PP;
-    initStr.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOB, &initStr);
-
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
-
+    CPU::SetFrontBuffer((uint)frontBuffer);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------    
 void Display::SetColorBackground(void)
 {
     if (set.serv_bacgroundBlack)
@@ -105,7 +42,7 @@ void Display::SetColorBackground(void)
             0x000000ff
         };
 
-        HAL_LTDC_ConfigCLUT(&hltdc, clut, 10, 0);
+        CPU::_LTDC_::SetColors(clut, 10);
     }
     else
     {
@@ -117,7 +54,7 @@ void Display::SetColorBackground(void)
             0x000000ff
         };
 
-        HAL_LTDC_ConfigCLUT(&hltdc, clut, 10, 0);
+        CPU::_LTDC_::SetColors(clut, 10);
     }
 }
 

@@ -40,8 +40,6 @@ private:
     static const int SYMBOLS_IN_STRING = 64;
 
     static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING];
-
-    static LTDC_HandleTypeDef hltdc;
     // Экран
     static uint8 frontBuffer[320 * 240];
     // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer

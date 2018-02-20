@@ -16,10 +16,7 @@
 // warning: array subscript is of type 'char'
 #pragma clang diagnostic ignored "-Wchar-subscripts"
 
-
 #include <stm32f4xx.h>
-#include <stm32f4xx_hal.h>
-
 
 typedef unsigned int        uint;
 typedef unsigned short int  uint16;

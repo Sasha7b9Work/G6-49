@@ -2,6 +2,18 @@
 #include "common/stm32/429/stm429.h"
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+class _LTDC_
+{
+public:
+    static void SetColors(uint clut[], uint numColors);
+};
+*/
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class CPU : public STM429
 {
 public:
@@ -20,6 +32,21 @@ public:
     static void SetCallbackKeyboard(void (*func)());
 
     static void InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL);
+
+    static void SetFrontBuffer(uint frontBuffer);
+
+//    static _LTDC_ LTDC_;
+
+    class _LTDC_
+    {
+        public:
+            static void SetColors(uint clut[], uint numColors);
+    };
+
+private:
+    static void InitTIM2();
+
+    static void InitTIM5();
 };
 
 

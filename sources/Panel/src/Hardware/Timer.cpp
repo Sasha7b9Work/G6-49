@@ -1,7 +1,4 @@
-// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "Timer.h"
-#include "stm32f4xx_hal.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,24 +53,6 @@ void Timer_Init(void)
     handleTIM3.Init.CounterMode = TIM_COUNTERMODE_UP;
     handleTIM3.Init.Period = 1;
     handleTIM3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-
-    TIM_HandleTypeDef handleTIM2;
-    handleTIM2.Instance = TIM2;
-    handleTIM2.Init.Prescaler = 0;
-    handleTIM2.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handleTIM2.Init.Period = (uint)-1;
-    handleTIM2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    HAL_TIM_Base_Init(&handleTIM2);
-    HAL_TIM_Base_Start(&handleTIM2);
-
-    TIM_HandleTypeDef handleTIM5;
-    handleTIM5.Instance = TIM5;
-    handleTIM5.Init.Prescaler = 44999;
-    handleTIM5.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handleTIM5.Init.Period = (uint) -1;
-    handleTIM5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    HAL_TIM_Base_Init(&handleTIM5);
-    HAL_TIM_Base_Start(&handleTIM5);
 }
 
 

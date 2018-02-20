@@ -7,6 +7,12 @@
 /// Таймер для опроса клавиатуры
 static TIM_HandleTypeDef handleTIM3;
 
+static TIM_HandleTypeDef handleTIM2;
+
+static TIM_HandleTypeDef handleTIM5;
+/// Для дисплея
+static LTDC_HandleTypeDef hltdc;
+
 static void (*callbackKeyboard)() = 0;
 
 #define TIME_UPDATE 2   ///< Время между опросами клавиатуры
@@ -44,9 +50,13 @@ void CPU::EnablePeriphery()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::InitHardware()
 {
-    CPU::InitLTDC();
+    InitLTDC();
 
-    CPU::InitFSMC();
+    InitFSMC();
+
+    InitTIM2();
+
+    InitTIM5();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,6 +93,74 @@ void CPU::InitLTDC()
     //               G3             B4           DE            CLK           R7
     isGPIO.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
     HAL_GPIO_Init(GPIOE, &isGPIO);
+
+
+    hltdc.Instance = LTDC;
+    hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
+    hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+    hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AH;
+    hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IIPC;
+    hltdc.Init.HorizontalSync = 0;
+    hltdc.Init.VerticalSync = 0;
+    hltdc.Init.AccumulatedHBP = 70;
+    hltdc.Init.AccumulatedVBP = 13;
+    hltdc.Init.AccumulatedActiveW = 390;
+    hltdc.Init.AccumulatedActiveH = 253;
+    hltdc.Init.TotalWidth = 408;
+    hltdc.Init.TotalHeigh = 263;
+    hltdc.Init.Backcolor.Blue = 0;
+    hltdc.Init.Backcolor.Green = 0;
+    hltdc.Init.Backcolor.Red = 0;
+    if (HAL_LTDC_Init(&hltdc) != HAL_OK)
+    {
+        ERROR_HANDLER;
+    }
+    
+    uint clut[10] =
+    {
+        0x00000000,
+        0x00ffffff,
+        0x00a0a0a0,
+        0x000000ff
+    };
+
+    HAL_LTDC_ConfigCLUT(&hltdc, clut, 10, 0);
+
+    HAL_LTDC_EnableCLUT(&hltdc, 0);
+
+    GPIO_InitTypeDef initStr;
+    initStr.Pin = GPIO_PIN_6;
+    initStr.Mode = GPIO_MODE_OUTPUT_PP;
+    initStr.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &initStr);
+
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::SetFrontBuffer(uint frontBuffer)
+{
+    LTDC_LayerCfgTypeDef pLayerCfg;
+
+    pLayerCfg.WindowX0 = 0;
+    pLayerCfg.WindowX1 = 320;
+    pLayerCfg.WindowY0 = 0;
+    pLayerCfg.WindowY1 = 240;
+    pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
+    pLayerCfg.Alpha = 127;
+    pLayerCfg.Alpha0 = 127;
+    pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
+    pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
+    pLayerCfg.FBStartAdress = frontBuffer;
+    pLayerCfg.ImageWidth = 320;
+    pLayerCfg.ImageHeight = 240;
+    pLayerCfg.Backcolor.Blue = 0;
+    pLayerCfg.Backcolor.Green = 0;
+    pLayerCfg.Backcolor.Red = 0;
+    if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
+    {
+        ERROR_HANDLER;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -174,6 +252,30 @@ void CPU::InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[],
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::InitTIM2()
+{
+    handleTIM2.Instance = TIM2;
+    handleTIM2.Init.Prescaler = 0;
+    handleTIM2.Init.CounterMode = TIM_COUNTERMODE_UP;
+    handleTIM2.Init.Period = (uint)-1;
+    handleTIM2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+    HAL_TIM_Base_Init(&handleTIM2);
+    HAL_TIM_Base_Start(&handleTIM2);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::InitTIM5()
+{
+    handleTIM5.Instance = TIM5;
+    handleTIM5.Init.Prescaler = 44999;
+    handleTIM5.Init.CounterMode = TIM_COUNTERMODE_UP;
+    handleTIM5.Init.Period = (uint)-1;
+    handleTIM5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+    HAL_TIM_Base_Init(&handleTIM5);
+    HAL_TIM_Base_Start(&handleTIM5);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SetCallbackKeyboard(void (*func)())
 {
     callbackKeyboard = func;
@@ -199,10 +301,17 @@ void TIM3_IRQHandler(void)
 }
 #endif
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim == &handleTIM3 && callbackKeyboard)
     {
         callbackKeyboard();
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::_LTDC_::SetColors(uint clut[], uint numColors)
+{
+    HAL_LTDC_ConfigCLUT(&hltdc, clut, numColors, 0);
 }
