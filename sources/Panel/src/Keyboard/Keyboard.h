@@ -12,8 +12,6 @@ class Keyboard
 public:
 
     static void Init();
-
-    static TIM_HandleTypeDef timHandle;
 };
 
 

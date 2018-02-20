@@ -147,9 +147,6 @@
     <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.cpp">
       <Filter>Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_it.cpp">
-      <Filter>libs</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -191,9 +188,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_it.h">
-      <Filter>libs</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
       <Filter>Menu</Filter>
     </ClInclude>

@@ -224,7 +224,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\Hardware.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.cpp" />
-    <ClCompile Include="..\..\Panel\src\libs\stm32f4xx_it.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\system_stm32f4xx.c" />
     <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
@@ -331,7 +330,6 @@
     <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h" />
     <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_hal_conf.h" />
-    <ClInclude Include="..\..\Panel\src\libs\stm32f4xx_it.h" />
     <ClInclude Include="..\..\Panel\src\Log.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
