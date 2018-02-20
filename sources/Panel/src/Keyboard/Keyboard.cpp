@@ -2,6 +2,7 @@
 #include "Keyboard.h"
 #include "Display/Display.h"
 #include "Hardware/Hardware.h"
+#include "Hardware/CPU.h"
 #include <stm32f4xx.h>
 #include <stm32f4xx_hal.h>
 
@@ -15,24 +16,22 @@ static int pointer = 0;
 static void FillCommand(Control control, TypePress typePressm);
 static void DetectRegulator();
 
-#define SL0 GPIO_PIN_12
-#define SL1 GPIO_PIN_13
-#define SL2 GPIO_PIN_14
-#define SL3 GPIO_PIN_15
-#define SL4 GPIO_PIN_8
-#define SL5 GPIO_PIN_9
+#define SL0 (1 << 12)
+#define SL1 (1 << 13)
+#define SL2 (1 << 14)
+#define SL3 (1 << 15)
+#define SL4 (1 << 8)
+#define SL5 (1 << 9)
 #define NUM_SL 6
 
-#define RL0 GPIO_PIN_8
-#define RL1 GPIO_PIN_9
-#define RL2 GPIO_PIN_10
-#define RL3 GPIO_PIN_13
-#define RL4 GPIO_PIN_12
+#define RL0 (1 << 8)
+#define RL1 (1 << 9)
+#define RL2 (1 << 10)
+#define RL3 (1 << 13)
+#define RL4 (1 << 12)
 #define NUM_RL 5
 
 #define BUTTON_IS_PRESS(state)  ((state) == 0)
-
-#define TIME_UPDATE 2   ///< Время между опросами клавиатуры
 
 /// При обнаружении нажатия кнопки сюда записывается время нажатия
 static uint timePress[5][6];
@@ -46,9 +45,11 @@ static const Control controls[5][6] = {{B_0, B_5, B_Dot,    B_Ch,   B_F1, B_LEFT
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static GPIO_TypeDef* slsPorts[] = {GPIOB, GPIOB, GPIOB, GPIOB, GPIOD, GPIOD};
+static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
 
 static uint16 rls[] =             {RL0,   RL1,   RL2,   RL3,   RL4};
 static GPIO_TypeDef* rlsPorts[] = {GPIOA, GPIOA, GPIOA, GPIOD, GPIOD};
+static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 
 #define SET_SL(n)       HAL_GPIO_WritePin(slsPorts[n], sls[n], GPIO_PIN_SET);
 #define SET_ALL_SL      HAL_GPIO_WritePin(GPIOB, SL0 | SL1 | SL2 | SL3, GPIO_PIN_SET); HAL_GPIO_WritePin(GPIOD, SL4 | SL5, GPIO_PIN_SET);
@@ -70,50 +71,15 @@ void Keyboard::Init(void)
 
     pointer = 0;
 
-    GPIO_InitTypeDef isGPIO;
+    CPU::SetCallbackKeyboard(&Keyboard::Update);
 
-    // Инициализируем порты опроса
-    isGPIO.Pin = RL0 | RL1 | RL2;
-    isGPIO.Mode = GPIO_MODE_INPUT;
-    isGPIO.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &isGPIO);
+    CPU::InitKeyboardInputs(sls, slsAsciiPorts, 6, rls, rlsAsciiPorts, 5);
 
-    isGPIO.Pin = RL3 | RL4;
-    HAL_GPIO_Init(GPIOD, &isGPIO);
-
-    isGPIO.Pin = SL0 | SL1 | SL2 | SL3;
-    isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(GPIOB, &isGPIO);
-
-    isGPIO.Pin = SL4 | SL5;
-    HAL_GPIO_Init(GPIOD, &isGPIO);
-
-    // Инициализируем таймер, по прерываниям которого будем опрашивать клавиатуру
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
-
-    HAL_NVIC_EnableIRQ(TIM3_IRQn);
-
-    timHandle.Instance = TIM3;
-    timHandle.Init.Period = TIME_UPDATE * 10 - 1;
-    timHandle.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
-    timHandle.Init.ClockDivision = 0;
-    timHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
-
-    if (HAL_TIM_Base_Init(&timHandle) != HAL_OK)
-    {
-        ERROR_HANDLER;
-    }
-
-    if (HAL_TIM_Base_Start_IT(&timHandle) != HAL_OK)
-    {
-        ERROR_HANDLER;
-    }
-    
     init = true;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void Update(void)
+void Keyboard::Update(void)
 {
     if(!init)
     {
@@ -191,15 +157,6 @@ static void FillCommand(Control control, TypePress typePress)
     commands[pointer].control = control;
     commands[pointer++].typePress = typePress;
     Display::SetButton(typePress == TypePress_Press ? control : Control_None);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if (htim == &Keyboard::timHandle)
-    {
-        Update();
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

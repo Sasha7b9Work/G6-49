@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src;..\..\Panel\src\libs;..\..\Panel\src\libs\forVS;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src;..\..\Panel\src\libs;..\..\Panel\src\libs\forVS;..\..\libs;D:\Projects\stm32\KornetDDS\sources\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
     <OutDir>.\Debug</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

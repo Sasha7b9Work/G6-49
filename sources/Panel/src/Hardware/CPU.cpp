@@ -1,13 +1,29 @@
 #include <stm32f4xx.h>
 #include "CPU.h"
+#include "Keyboard\Keyboard.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static TIM_HandleTypeDef timHandle;
+/// Таймер для опроса клавиатуры
+static TIM_HandleTypeDef handleTIM3;
+
+static void (*callbackKeyboard)() = 0;
+
+#define TIME_UPDATE 2   ///< Время между опросами клавиатуры
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void STM32::EnablePeriphery()
+void CPU::Config()
+{
+    STM429::Config();
+    
+    EnablePeriphery();
+    
+    InitHardware();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::EnablePeriphery()
 {
     __HAL_RCC_SPI4_CLK_ENABLE();
 
@@ -26,7 +42,7 @@ void STM32::EnablePeriphery()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void STM32::InitHardware()
+void CPU::InitHardware()
 {
     CPU::InitLTDC();
 
@@ -114,6 +130,55 @@ void CPU::InitFSMC(void)
     };
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL)
+{
+    GPIO_TypeDef *ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
+
+    GPIO_InitTypeDef isGPIO;
+
+    for (int i = 0; i < numRL; i++)
+    {
+        isGPIO.Pin = rl[i];
+        isGPIO.Mode = GPIO_MODE_INPUT;
+        HAL_GPIO_Init(ports[portRL[i] - 'A'], &isGPIO);
+    }
+
+    for (int i = 0; i < numSL; i++)
+    {
+        isGPIO.Pin = sl[i];
+        isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
+        HAL_GPIO_Init(ports[portSL[i] - 'A'], &isGPIO);
+    }
+
+    // Инициализируем таймер, по прерываниям которого будем опрашивать клавиатуру
+    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
+
+    HAL_NVIC_EnableIRQ(TIM3_IRQn);
+
+    handleTIM3.Instance = TIM3;
+    handleTIM3.Init.Period = TIME_UPDATE * 10 - 1;
+    handleTIM3.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
+    handleTIM3.Init.ClockDivision = 0;
+    handleTIM3.Init.CounterMode = TIM_COUNTERMODE_UP;
+
+    if (HAL_TIM_Base_Init(&handleTIM3) != HAL_OK)
+    {
+        ERROR_HANDLER;
+    }
+
+    if (HAL_TIM_Base_Start_IT(&handleTIM3) != HAL_OK)
+    {
+        ERROR_HANDLER;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::SetCallbackKeyboard(void (*func)())
+{
+    callbackKeyboard = func;
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -127,9 +192,17 @@ void LTDC_IRQHandler(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void TIM3_IRQHandler(void)
 {
-    HAL_TIM_IRQHandler(&timHandle);
+    HAL_TIM_IRQHandler(&handleTIM3);
 }
 
 #ifdef __cplusplus
 }
 #endif
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    if (htim == &handleTIM3 && callbackKeyboard)
+    {
+        callbackKeyboard();
+    }
+}

@@ -10,8 +10,10 @@
 class Keyboard
 {
 public:
-
     static void Init();
+
+private:
+    static void Update();
 };
 
 

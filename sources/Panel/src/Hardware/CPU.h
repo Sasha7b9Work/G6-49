@@ -5,8 +5,21 @@
 class CPU : public STM429
 {
 public:
+
+    static void Config();
+
+    static void EnablePeriphery();
+
+    static void InitHardware();
+    /// Инициализация дисплея
     static void InitLTDC();
+    /// Инициализация шины для связи с ПЛИС
     static void InitFSMC();
+
+    /// Установка каллбэка для клавиатуры
+    static void SetCallbackKeyboard(void (*func)());
+
+    static void InitKeyboardInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL);
 };
 
 
