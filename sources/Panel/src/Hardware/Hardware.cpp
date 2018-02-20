@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Hardware.h"
+#include "Timer.h"
 #include "Display/Display.h"
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
@@ -13,6 +14,8 @@ void Hardware_Init(void)
     Display::Init();
 
     Generator_Init();
+    
+    Timer_Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

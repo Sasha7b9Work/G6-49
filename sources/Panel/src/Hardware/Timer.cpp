@@ -44,15 +44,6 @@ void Timer_Init(void)
     {
         timers[i].timeNextMS = MAX_UINT;
     }
-
-    HAL_NVIC_EnableIRQ(TIM3_IRQn);
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
-
-    handleTIM3.Instance = TIM3;
-    handleTIM3.Init.Prescaler = 54000 - 1;
-    handleTIM3.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handleTIM3.Init.Period = 1;
-    handleTIM3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 }
 
 

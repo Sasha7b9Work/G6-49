@@ -35,8 +35,6 @@ public:
 
     static void SetFrontBuffer(uint frontBuffer);
 
-//    static _LTDC_ LTDC_;
-
     class _LTDC_
     {
         public:
