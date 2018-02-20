@@ -3,7 +3,7 @@
 #include "Display/Colors.h"
 #include "Display/Display.h"
 #include "Generator/Generator.h"
-#include "Hardware/FLASH.h"
+#include "Hardware/CPU.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,13 +131,13 @@ float MaxValue(WaveParameter param)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings_Save(void)
 {
-    FLASH_SaveSettings();
+    CPU::_FLASH::SaveSettings();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings_Load(void)
 {
-    FLASH_LoadSettins();
+    CPU::_FLASH::LoadSettings();
 
     TuneGenerator(A);
     TuneGenerator(B);

@@ -77,6 +77,14 @@ public:
         static bool ReadPin(char port, uint16 maskPin);
     };
 
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
+    class _FLASH
+    {
+    public:
+        static void SaveSettings();
+        static void LoadSettings();
+    };
+
 private:
     /// Инициализация SPI для связи с основным процессором
     static void InitSPI4();

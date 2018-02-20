@@ -236,9 +236,6 @@
     <ClInclude Include="..\..\Common\Command.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Hardware\FLASH.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h">
       <Filter>dox</Filter>
     </ClInclude>

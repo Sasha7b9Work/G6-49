@@ -322,7 +322,6 @@
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
-    <ClInclude Include="..\..\Panel\src\Hardware\FLASH.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Hardware.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h" />

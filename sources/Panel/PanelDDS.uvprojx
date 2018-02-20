@@ -1737,11 +1737,6 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>FLASH.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\FLASH.h</FilePath>
-            </File>
-            <File>
               <FileName>FLASH.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\FLASH.cpp</FilePath>
