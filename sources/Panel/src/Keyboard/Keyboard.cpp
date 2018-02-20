@@ -3,7 +3,6 @@
 #include "Display/Display.h"
 #include "Hardware/Hardware.h"
 #include "Hardware/CPU.h"
-#include <stm32f4xx_hal.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static StructControl commands[10];
@@ -42,15 +41,13 @@ static const Control controls[5][6] = {{B_0, B_5, B_Dot,    B_Ch,   B_F1, B_LEFT
                                        {B_4, B_9, B_LEFT,   B_ON2,  B_F5, B_RIGHT}};        // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
-//static GPIO_TypeDef* slsPorts[] = {GPIOB, GPIOB, GPIOB, GPIOB, GPIOD, GPIOD};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
 
 static uint16 rls[] =             {RL0,   RL1,   RL2,   RL3,   RL4};
-//static GPIO_TypeDef* rlsPorts[] = {GPIOA, GPIOA, GPIOA, GPIOD, GPIOD};
 static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 
 #define SET_SL(n)       CPU::_GPIO_::WritePin(slsAsciiPorts[n], sls[n], true)
-#define SET_ALL_SL      CPU::_GPIO_::WritePin('B', SL0 | SL1 | SL2 | SL3, GPIO_PIN_SET); CPU::_GPIO_::WritePin('D', SL4 | SL5, GPIO_PIN_SET);
+#define SET_ALL_SL      CPU::_GPIO_::WritePin('B', SL0 | SL1 | SL2 | SL3, true); CPU::_GPIO_::WritePin('D', SL4 | SL5, true);
 #define RESET_SL(n)     CPU::_GPIO_::WritePin(slsAsciiPorts[n], sls[n], false)
 #define READ_RL(n)      CPU::_GPIO_::ReadPin(rlsAsciiPorts[n], rls[n])
 
