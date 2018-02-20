@@ -72,7 +72,9 @@ public:
     class _GPIO_
     {
     public:
-        void WritePin(char port, uint16 maskPin, bool state);
+        static void WritePin(char port, uint16 maskPin, bool state);
+
+        static bool ReadPin(char port, uint16 maskPin);
     };
 
 private:

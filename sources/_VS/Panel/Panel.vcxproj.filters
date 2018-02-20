@@ -165,9 +165,6 @@
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\globals.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -339,9 +336,6 @@
       <Filter>Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\defines.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\globals.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Log.h">

@@ -1,6 +1,5 @@
 #include "Display.h"
 #include "Painter.h"
-#include "globals.h"
 #include "Font/Font.h"
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"

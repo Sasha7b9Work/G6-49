@@ -473,3 +473,9 @@ void CPU::_GPIO_::WritePin(char port, uint16 maskPin, bool state)
 {
     HAL_GPIO_WritePin(ports[port - 'A'], maskPin, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool CPU::_GPIO_::ReadPin(char port, uint16 maskPin)
+{
+    return HAL_GPIO_ReadPin(ports[port - 'A'], maskPin) == GPIO_PIN_SET;
+}
