@@ -11,24 +11,21 @@ class Menu
 {
 public:
         
-    void Init();
+    static void Init();
 
-    void Update();
+    static void Update();
 
-    void Draw();
+    static void Draw();
     /// Возвращает true, если ручка управляет переклюичением страниц меню
-    bool RegIsControlPages();
+    static bool RegIsControlPages();
 
-    char *NameCurrentParameter();
+    static char *NameCurrentParameter();
 
 private:
 
-    void DrawTitle();
+    static void DrawTitle();
 
-    void DrawPagesUGO();
+    static void DrawPagesUGO();
 
-    void ProcessControl(StructControl control);
+    static void ProcessControl(StructControl control);
 };
-
-
-extern Menu gMenu;

@@ -73,7 +73,7 @@ void Display::Update(void)
     DrawSignal(A);
     DrawSignal(B);
     
-    gMenu.Draw();
+    Menu::Draw();
 
     if (ADDITION_PAGE_IS_INPUT)
     {
@@ -185,7 +185,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
         if (allowParameters.allow[i])
         {
             Color color = COLOR_FILL;
-            if (ch == CHANNEL && strcmp(gMenu.NameCurrentParameter(), NameParameter((WaveParameter)i)) == 0)
+            if (ch == CHANNEL && strcmp(Menu::NameCurrentParameter(), NameParameter((WaveParameter)i)) == 0)
             {
                 Painter::FillRegionC(x0, y0, 139, 8, COLOR_FILL);
                 color = COLOR_BACK;

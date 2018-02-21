@@ -40,11 +40,11 @@ int main(void)
 
     Settings_Load();
 
-    gMenu.Init();
+    Menu::Init();
 
     while (1)
     {
-        gMenu.Update();
+        Menu::Update();
         Display::Update();
     }
 }
