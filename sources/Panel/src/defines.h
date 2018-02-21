@@ -12,12 +12,6 @@
 // warning: array subscript is of type 'char'
 #pragma clang diagnostic ignored "-Wchar-subscripts"
 
-// warning: this function declaration is not a prototype
-#pragma clang diagnostic ignored "-Wstrict-prototypes"
-
-// warning: comparing floating point with == or != is unsafe
-#pragma clang diagnostic ignored "-Wfloat-equal"
-
 // warning: format string is not a string literal
 #pragma clang diagnostic ignored "-Wformat-nonliteral"
 

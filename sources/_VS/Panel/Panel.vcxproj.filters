@@ -174,10 +174,10 @@
     <ClCompile Include="..\..\libs\common\stm32\429\stm429.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Utils\Dictionary.cpp">
+    <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp">
+    <ClCompile Include="..\..\libs\common\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -383,10 +383,10 @@
     <ClInclude Include="..\..\libs\common\stm32\429\stm429.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Utils\Dictionary.h">
+    <ClInclude Include="..\..\libs\common\Utils\StringUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Utils\StringUtils.h">
+    <ClInclude Include="..\..\libs\common\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

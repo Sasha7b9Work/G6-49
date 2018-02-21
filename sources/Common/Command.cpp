@@ -25,7 +25,7 @@ char *Command_Name(CommandWrite command)
     if (command >= NUM_COMMAND_WRITE)
     {
         static char buffer[10] = {0};
-        sprintf(buffer, "%x", (uint8)command);
+        sprintf(buffer, "%x", static_cast<uint8>(command));
         LOG_WRITE("ОШИБКА - принято %s", buffer);
     }
     return const_cast<char *>(names[command]);
