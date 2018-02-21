@@ -3,9 +3,6 @@
 // warning: use of old-style cast
 #pragma clang diagnostic ignored "-Wold-style-cast"
 
-// warning: padding struct ... with 2 bytes to align
-#pragma clang diagnostic ignored "-Wpadded"
-
 // warning: variadic macros are incompatible with C++98
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
 

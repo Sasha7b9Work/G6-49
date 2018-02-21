@@ -5,7 +5,7 @@
 // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ 2 - «¿—€À ¿ --------------------------------------------------------------------------------------------------------------------
 static const Choice cTypeTune =
 {
-    Item_Choice, 0,
+    Item_Choice, {}, 0,
     {
         "«¿—€À ¿", "SENDING"
     },
@@ -19,7 +19,7 @@ static const Choice cTypeTune =
 
 const Page pSignals2 =
 {
-    Item_Page, 0,
+    Item_Page, {}, 0,
     {
         "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ 2", "SIGNAL SETTINGS 2"
     },

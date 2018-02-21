@@ -11,7 +11,7 @@ static void        OnChanged_Background();
 // —≈–¬»— - ﬂ«€  -------------------------------------------------------------------------------------------------------------------------------------
 static const Choice cService_Language =
 {
-    Item_Choice, 0,
+    Item_Choice, {}, 0,
     {
         "ﬂ«€ ", "LANGUAGE"
     },
@@ -25,7 +25,7 @@ static const Choice cService_Language =
 // —≈–¬»— - ÷¬≈“ ‘ŒÕ¿ --------------------------------------------------------------------------------------------------------------------------------
 static const Choice cService_Background =
 {
-    Item_Choice, OnChanged_Background,
+    Item_Choice, {}, OnChanged_Background,
     {
         "÷¬≈“ ‘ŒÕ¿", "BACKGROUND"
     },
@@ -43,7 +43,7 @@ static void OnChanged_Background(void)
 
 const Page pService =
 {
-    Item_Page, 0,
+    Item_Page, {}, 0,
     {
         "—≈–¬»—", "SERVICE"
     },

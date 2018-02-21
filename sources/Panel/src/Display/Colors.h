@@ -43,6 +43,7 @@ typedef struct
     Color   color;
     int8    currentField;
     bool    alreadyUsed;
+    uint8   notUsed0;
 } ColorType;
 
 void Color_Log(Color color);           // Вывести в лог значение цвета.

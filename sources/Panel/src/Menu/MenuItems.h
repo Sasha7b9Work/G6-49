@@ -26,9 +26,10 @@ typedef enum
     Item_SB_Page
 } Item;
 
-#define COMMON_PART_ITEM        \
-        Item       typeItem;       \
-        pFuncVV    funcOnPress;    \
+#define COMMON_PART_ITEM            \
+        Item       typeItem;        \
+        uint8      notUsed0[3];     \
+        pFuncVV    funcOnPress;     \
         const char *title[2];
 
 

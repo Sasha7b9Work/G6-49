@@ -20,7 +20,7 @@ static void     Draw_Enter(int, int);
 // нймн ббндю - яхлбнк бкебн -------------------------------------------------------------------------------------------------------------------------
 static const SButton sbLeft =
 {
-    Item_SButton, InputWindow::KeyLeft,
+    Item_SButton, {}, InputWindow::KeyLeft,
     {
         (char *)"яхлбнк бкебн", (char *)"SYMBOL LEFT"
     },
@@ -38,7 +38,7 @@ static void Draw_Left(int x, int y)
 // нймн ббндю - яхлбнк бопюбн ------------------------------------------------------------------------------------------------------------------------
 static const SButton sbRight =
 {
-    Item_SButton, InputWindow::KeyRight,
+    Item_SButton, {}, InputWindow::KeyRight,
     {
         "яхлбнк бопюбн", "SYMBOL RIGHT"
     },
@@ -51,7 +51,7 @@ static uint8 units = 0;
 
 static const SButton sbCancel =
 {
-    Item_SButton, OnPress_Cancel,
+    Item_SButton, {}, OnPress_Cancel,
     {
         "едхмхжш хглепемхъ", "UNITS"
     },
@@ -74,7 +74,7 @@ static void Draw_Cancel(int x, int y)
 // нймн ббндю - ббнд ---------------------------------------------------------------------------------------------------------------------------------
 static const SButton sbEnter =
 {
-    Item_SButton, InputWindow::KeyEnter,
+    Item_SButton, {}, InputWindow::KeyEnter,
     {
         "ббнд", "ENTER"
     },
@@ -91,7 +91,7 @@ static void Draw_Enter(int x, int y)
 
 Page pInput =
 {
-    Item_SB_Page, 0,
+    Item_SB_Page, {}, 0,
     {
         "ббнд гмювемхъ", "VALUE ENTRY"
     },

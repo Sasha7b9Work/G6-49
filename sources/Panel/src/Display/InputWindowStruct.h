@@ -60,12 +60,14 @@ public:
     SignValue       sign;
 	char            inputBuffer[NUM_DIGITS + 1];
     char            prevBuffer[NUM_DIGITS + 1];
+    uint8           notUsed0[2];
     int             posComma;                   ///< ѕосле какого знакоместа выводить зап€тую
     int             prevPosComma;
 	int	            hightLightDigit;            ///< ѕозици€ подсвеченного знакоместа
 	Order           order;
     WaveParameter   param;
     bool            numLockMode;                ///< true, когда происходит клавишный (0...9) ввод значени€
+    uint8           notUsed1;
 };
 
 

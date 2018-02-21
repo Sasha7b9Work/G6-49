@@ -12,7 +12,7 @@ static void  OnPress_Reset();
 // Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ ---------------------------------------------------------------------------------------------------------------------------------
 static const Choice cConsole =
 {
-    Item_Choice, 0,
+    Item_Choice, {}, 0,
     {
         " ŒÕ—ŒÀ‹", "CONSOLE"
     },
@@ -31,7 +31,7 @@ static void OnPress_DebugMode()
 // Œ“À¿ƒ ¿ - —Œ’–¿Õ»“‹ Õ¿—“–Œ… » ---------------------------------------------------------------------------------------------------------------------
 static const Button bSaveSettings =
 {
-    Item_Button, OnPress_SaveSettings,
+    Item_Button, {}, OnPress_SaveSettings,
     {
         "—Œ’–¿Õ»“‹ Õ¿—“–Œ… »", "SAVE SETTINGS"
     }
@@ -45,7 +45,7 @@ static void OnPress_SaveSettings(void)
 // Œ“À¿ƒ ¿ - —¡–Œ— -----------------------------------------------------------------------------------------------------------------------------------
 static const Button bReset =
 {
-    Item_Button, OnPress_Reset,
+    Item_Button, {}, OnPress_Reset,
     {
         "—¡–Œ—", "RESET"
     }
@@ -61,7 +61,7 @@ static void OnPress_Reset(void)
 
 const Page pDebug =
 {
-    Item_Page, 0,
+    Item_Page, {}, 0,
     {
         "Œ“À¿ƒ ¿", "DEBUG"
     },
@@ -75,7 +75,7 @@ const Page pDebug =
 // Œ“À¿ƒ ¿ - –≈∆»Ã -----------------------------------------------------------------------------------------------------------------------------------
 static const Choice cDebugMode =
 {
-    Item_Choice, OnPress_DebugMode,
+    Item_Choice, {}, OnPress_DebugMode,
     {
         "–≈∆»Ã", "MODE"
     },

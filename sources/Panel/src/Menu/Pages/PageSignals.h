@@ -21,7 +21,7 @@ void PanelSignals_Init();
 static ChoiceParameter cpParameters =
 #pragma clang diagnostic warning "-Wglobal-constructors"
 {
-    Item_ChoiceParameter, OnPress_SetParameter,
+    Item_ChoiceParameter, {}, OnPress_SetParameter,
     {
         "œ¿–¿Ã≈“–", "PARAMETER"
     },
@@ -40,7 +40,7 @@ void PanelSignals_Init()
 // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿Õ¿À ------------------------------------------------------------------------------------------------------------------------
 static const Choice cChannel =
 {
-    Item_Choice, OnPress_Channel,
+    Item_Choice, {}, OnPress_Channel,
     {
         " ¿Õ¿À", "CHANNEL",
     },
@@ -54,7 +54,7 @@ static const Choice cChannel =
 // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘Œ–Ã¿ ------------------------------------------------------------------------------------------------------------------------
 static const Choice cForm =
 {
-    Item_Choice, OnPress_Form,
+    Item_Choice, {}, OnPress_Form,
     {
         "‘Œ–Ã¿", "FORM"
     },
@@ -98,7 +98,7 @@ static void OnPress_Channel(void)
 // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬¬≈—“» «Õ¿◊≈Õ»≈ œ¿–¿Ã≈“–¿ ----------------------------------------------------------------------------------------------------
 static const Button bSetParameter =
 {
-    Item_Button, OnPress_SetParameter,
+    Item_Button, {}, OnPress_SetParameter,
     {
         "¬¬≈—“» «Õ¿◊≈Õ»≈ œ¿–¿Ã≈“–¿", "ENTER VALUE PARAMETER"
     }
@@ -113,7 +113,7 @@ static void OnPress_SetParameter(void)
 
 const Page pSignals =
 {
-    Item_Page, 0,
+    Item_Page, {}, 0,
     {
         "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬", "SIGNAL SETTINGS"
     },
