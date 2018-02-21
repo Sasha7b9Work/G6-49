@@ -9,7 +9,7 @@
 #define NUM_DIGITS          5
 
 
-typedef enum
+enum Order
 {
     Nano,       // нано
     Micro,      // микро
@@ -18,17 +18,17 @@ typedef enum
     Kilo,       // кило
     Mega,       // мега
     NumOrders
-} Order;
+};
 
 Order& operator++(Order& order);
 Order& operator--(Order& order);
 
-typedef enum
+enum SignValue
 {
     Sign_None,
     Sign_Minus,
     Sign_Plus
-} Sign;
+};
 
 class InputWindowStruct
 {
@@ -57,7 +57,7 @@ public:
     static void FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters);
 
     bool            allow;                      ///< Если true, параметр разрешен для данного сигнала
-    Sign            sign;
+    SignValue       sign;
 	char            inputBuffer[NUM_DIGITS + 1];
     char            prevBuffer[NUM_DIGITS + 1];
     int             posComma;                   ///< После какого знакоместа выводить запятую

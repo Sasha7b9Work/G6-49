@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src;..\..\Panel\src\libs;..\..\Panel\src\libs\forVS;..\..\libs;D:\Projects\stm32\KornetDDS\sources\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
-    <OutDir>.\Debug</OutDir>
+    <IncludePath>..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_FW_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src;..\..\Panel\src\libs;..\..\Panel\src\libs\forVS;..\..\libs\common;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\libs\common\_VS</IncludePath>
+    <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -93,6 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F429xx;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,6 +155,8 @@
     <ClCompile Include="..\..\Common\Command.cpp" />
     <ClCompile Include="..\..\libs\common\stm32\429\stm429.cpp" />
     <ClCompile Include="..\..\libs\common\stm32\stm32.cpp" />
+    <ClCompile Include="..\..\libs\common\Utils\Dictionary.cpp" />
+    <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -232,7 +235,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsDrawing.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
-    <ClCompile Include="..\..\Panel\src\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\_common_\_VS\core_cm4.h" />
@@ -251,6 +253,8 @@
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\libs\common\stm32\429\stm429.h" />
     <ClInclude Include="..\..\libs\common\stm32\stm32.h" />
+    <ClInclude Include="..\..\libs\common\Utils\Dictionary.h" />
+    <ClInclude Include="..\..\libs\common\Utils\StringUtils.h" />
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -340,7 +344,6 @@
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
-    <ClInclude Include="..\..\Panel\src\Utils\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\_common_\_VS\algorithm" />

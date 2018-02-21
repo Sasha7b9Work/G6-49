@@ -159,9 +159,6 @@
     <ClCompile Include="..\..\Panel\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -176,6 +173,12 @@
     </ClCompile>
     <ClCompile Include="..\..\libs\common\stm32\429\stm429.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Utils\Dictionary.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,9 +332,6 @@
     <ClInclude Include="..\..\Panel\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Utils\Math.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\_common_\_VS\core_cm4.h">
       <Filter>_VS</Filter>
     </ClInclude>
@@ -382,6 +382,12 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\common\stm32\429\stm429.h">
       <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Utils\Dictionary.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Utils\StringUtils.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

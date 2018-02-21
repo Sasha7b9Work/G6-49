@@ -4,6 +4,7 @@
 #include "Generator/Generator.h"
 #include "Settings/SettingsSignals.h"
 #include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -573,7 +574,7 @@ static void FillIWSfromInputBuffer(void)
         iws->order = One;
     }
 
-    if (FindSymbol(m_inputBuffer, '.') == -1)             // Если точки нету
+    if (SU::FindSymbol(m_inputBuffer, '.') == -1)             // Если точки нету
     {
         m_inputBuffer[strlen(m_inputBuffer)] = '.';         // То ставим её вместо завершающего нуля
         m_inputBuffer[strlen(m_inputBuffer) + 1] = 0;       // и перемещаем нуль вправо
@@ -583,7 +584,7 @@ static void FillIWSfromInputBuffer(void)
         while ((int)fabs(atof(m_inputBuffer)) == 0)     // Пока целая часть числа в inputBuffer == 0
         {
             // Сдвигаем запятую на три места вправо
-            int pos = FindSymbol(m_inputBuffer, '.');
+            int pos = SU::FindSymbol(m_inputBuffer, '.');
 
             for (int i = pos; i < pos + 3; i++)
             {
@@ -610,17 +611,17 @@ static void FillIWSfromInputBuffer(void)
 
     iws->hightLightDigit = NUM_DIGITS - 1;
 
-    while ((int)fabs(atof(m_inputBuffer)) > 999)     // Пока целая часть числа в inputBuffer > 999
+    while ((int)fabs(atof(m_inputBuffer)) > 999)    // Пока целая часть числа в inputBuffer > 999
     {
         // Сдвигаем запятую на три места влево
-        int pos = FindSymbol(m_inputBuffer, '.');
+        int pos = SU::FindSymbol(m_inputBuffer, '.');
         
         for (int i = pos; i > pos - 3; i--)         // Сдвигаем три символа слева от точки на одну позицию вправо
         {
             m_inputBuffer[i] = m_inputBuffer[i - 1];
         }
 
-        m_inputBuffer[pos - 3] = '.';                 // И ставим точку слева от этой тройки
+        m_inputBuffer[pos - 3] = '.';               // И ставим точку слева от этой тройки
 
         ++iws->order;                               // И увеличиваем степень на три порядка
     }
@@ -638,7 +639,7 @@ static void FillIWSfromInputBuffer(void)
 
     int numDigits = NUM_DIGITS - (int)strlen(iws->inputBuffer);      // Столько цифр нужно записать после запятой
 
-    int pos = FindSymbol(m_inputBuffer, '.');                     // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
+    int pos = SU::FindSymbol(m_inputBuffer, '.');       // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
 
     for (int i = 0; i < numDigits; i++)
     {

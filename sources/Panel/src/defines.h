@@ -18,7 +18,14 @@
 // warning: this function declaration is not a prototype
 #pragma clang diagnostic ignored "-Wstrict-prototypes"
 
+// warning: comparing floating point with == or != is unsafe
+#pragma clang diagnostic ignored "-Wfloat-equal"
 
+// warning: format string is not a string literal
+#pragma clang diagnostic ignored "-Wformat-nonliteral"
+
+
+typedef const    char *const    pString;
 typedef unsigned int        uint;
 typedef unsigned short int  uint16;
 typedef signed short int    int16;
@@ -44,6 +51,19 @@ typedef enum
 
 typedef void    (*pFuncVV)();
 typedef void    (*pFuncVII)(int, int);
+
+// Для определения задания буферов лучше пользоваться этими макросами, чтобы потом легче было отследить, где можно памяти освободить
+#define CHAR_BUF(name, size)            char name[size]
+#define CHAR_BUF2(name, size1, size2)   char name[size1][size2]
+
+#define _GET_BIT(value, bit)                    (((value) >> bit) & 0x01)
+#define _SET_BIT(value, bit)                    ((value) |= (1 << bit))
+#define _CLEAR_BIT(value, bit)                  ((value) &= (~(1 << bit)))
+#define _SET_BIT_VALUE(value, numBit, bitValue) (value |= (bitValue << numBit))
+
+#define ERROR_VALUE_FLOAT   1.111e29f
+#define ERROR_VALUE_UINT8   255
+#define ERROR_STRING_VALUE  "--.--"
 
 #define GetBit(value, bit) (((value) >> (bit)) & 0x01)
 #define SetBit(value, bit) ((value) |= (1 << (bit)))

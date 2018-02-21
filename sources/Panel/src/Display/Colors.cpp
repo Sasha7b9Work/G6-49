@@ -1,5 +1,3 @@
-// This is an independent project of an individual developer. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "defines.h"
 #include "Colors.h"
 #include "Display/Painter.h"
@@ -119,9 +117,11 @@ void Color_BrightnessChange(ColorType *colorType, int delta)
         return;
     }
 
-    int sign = Math_Sign(delta);
+    int sign = Sign(delta);
 
-    LIMITATION(colorType->brightness, colorType->brightness + sign * 0.01f, 0.0f, 1.0f);
+    colorType->brightness += sign * 0.01f;
+    
+    LIMITATION(colorType->brightness, 0.0f, 1.0f);
 
     colorType->red += sign * colorType->stepRed;
     colorType->green += sign * colorType->stepGreen;
@@ -175,7 +175,8 @@ void Color_ComponentChange(ColorType * const colorType, int delta)
 
     if (index >= 1 && index <= 3)
     {
-        AddLimitationFloat(pointers[index], (float)Math_Sign(delta), 0.0f, maxs[index]);
+        *pointers[index] += (float)Sign(delta);
+        LIMITATION(*pointers[index], 0.0f, maxs[index]);
     }
 
     SetColor(colorType);

@@ -45,8 +45,8 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2)
     int y = y1;
     int dx = (int)fabsf((float)(x2 - x1));
     int dy = (int)fabsf((float)(y2 - y1));
-    int s1 = Math_Sign(x2 - x1);
-    int s2 = Math_Sign(y2 - y1);
+    int s1 = Sign(x2 - x1);
+    int s2 = Sign(y2 - y1);
     int temp;
     int exchange = 0;
     if (dy > dx)

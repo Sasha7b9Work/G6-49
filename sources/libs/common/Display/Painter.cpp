@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Log.h"
 #include "Painter.h"
 #include "Display/Colors.h"
@@ -154,7 +155,6 @@ void Painter::SetPalette(Color color)
     uint8 command[4] = {SET_PALETTE_COLOR};
     WRITE_BYTE(1, color.value);
     WRITE_SHORT(2, COLOR(color.value));
-
     SendToDisplay(command, 4);
     SendToInterfaces(command, 4);
 }
@@ -741,9 +741,7 @@ void Painter::SendToDisplay(uint8 *bytes, int numBytes)
 #endif
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-#pragma clang diagnostic ignored "-Wunused-parameter"
-void Painter::SendToInterfaces(uint8 *pointer, int size)
-#pragma clang diagnostic warning "-Wunused-parameter"
+void Painter::SendToInterfaces(uint8 * pointer, int size)
 {
     if (TRANSMIT_IN_PROCESS)
     {

@@ -335,9 +335,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F429xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F429xx, KORNET</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\Hardware;..\libs;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</IncludePath>
+              <IncludePath>.\src;.\src\Hardware;..\libs\common;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1682,26 +1682,6 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>stm429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\stm32\429\stm429.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm429.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\stm32\429\stm429.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\stm32\stm32.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\stm32\stm32.h</FilePath>
-            </File>
-            <File>
               <FileName>startup_stm32f429xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\src\Hardware\startup_stm32f429xx.s</FilePath>
@@ -1715,6 +1695,31 @@
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Hardware\system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/stm32</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\stm32.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\429\stm429.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm429.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\429\stm429.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1847,14 +1852,24 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Math.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Math.h</FilePath>
-            </File>
-            <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Math.cpp</FilePath>
+              <FilePath>..\libs\common\Utils\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Utils\Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Utils\StringUtils.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Utils\StringUtils.h</FilePath>
             </File>
           </Files>
         </Group>
