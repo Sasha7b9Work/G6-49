@@ -1,7 +1,7 @@
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "DisplayTypes.h"
-#include "Painter.h"
+#include "Display/Painter.h"
 #include "Menu/MenuItemsLogic.h"
 #include "Settings/Settings.h"
 #include <stdio.h>
