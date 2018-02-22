@@ -66,9 +66,9 @@ uint8 *Display::GetBuffer(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update(void)
 {
-    Painter::BeginScene(COLOR_BACK);
+    Painter::BeginScene(Color::BACK);
 
-    Painter::SetColor(COLOR_FILL);
+    Painter::SetColor(Color::FILL);
 
     DrawSignal(A);
     DrawSignal(B);
@@ -80,7 +80,7 @@ void Display::Update(void)
         InputWindow::Draw();
     }
 
-    Painter::DrawRectangleC(0, 0, 318, 238, COLOR_FILL);
+    Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
 
     if (text)
     {
@@ -103,8 +103,8 @@ void Display::DrawSignal(Channel ch)
 {
     if (CHANNEL_ENABLED(ch))
     {
-        int y0 = (ch == A) ? HEIGHT_TITLE : HEIGHT_TITLE + HEIGHT_SIGNAL;
-        Painter::DrawRectangleC(0, y0, WIDTH_SIGNAL, HEIGHT_SIGNAL, COLOR_FILL);
+        int y0 = (ch == A) ? TITLE_HEIGHT : TITLE_HEIGHT + SIGNAL_HEIGHT;
+        Painter::DrawRectangle(0, y0, SIGNAL_WIDTH, SIGNAL_HEIGHT, Color::FILL);
 
         Painter::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2");
 
@@ -175,7 +175,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 
     y0 += 5;
 
-    Painter::DrawTextC(22, y0 + 3, NameWaveForm(form), COLOR_FILL);
+    Painter::DrawText(22, y0 + 3, NameWaveForm(form), Color::FILL);
 
     AllowableParameters allowParameters;
     InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
@@ -184,13 +184,13 @@ void Display::DrawSignalParameters(Channel ch, int y0)
     {
         if (allowParameters.allow[i])
         {
-            Color color = COLOR_FILL;
+            Color color = Color::FILL;
             if (ch == CHANNEL && strcmp(Menu::NameCurrentParameter(), NameParameter((WaveParameter)i)) == 0)
             {
-                Painter::FillRegionC(x0, y0, 139, 8, COLOR_FILL);
-                color = COLOR_BACK;
+                Painter::FillRegion(x0, y0, 139, 8, Color::FILL);
+                color.value = Color::BACK.value;
             }
-            Painter::DrawTextC(x0 + 1, y0, NameParameter((WaveParameter)i), color);
+            Painter::DrawText(x0 + 1, y0, NameParameter((WaveParameter)i), color);
 
             DrawParameterValue(ch, (WaveParameter)i, x0 + 80, y0);
 
@@ -262,8 +262,14 @@ void Display::DrawConsole(void)
     for (int i = 0; i < STRING_IN_CONSOLE; i++)
     {
         int length = Font::GetLengthText(&bufferConsole[i][0]);
-        Painter::FillRegionC(2, y, length, 8, COLOR_BACK);
-        Painter::DrawTextC(2, y, &bufferConsole[i][0], COLOR_FILL);
+        Painter::FillRegion(2, y, length, 8, Color::BACK);
+        Painter::DrawText(2, y, &bufferConsole[i][0], Color::FILL);
         y += 8;
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::AddStringToIndicating(pString)
+{
+
 }

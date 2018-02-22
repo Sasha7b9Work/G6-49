@@ -3,63 +3,13 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 #include "stub.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static TypeFont currentTypeFont = TypeFont_None;
-static bool ByteFontNotEmpty(int eChar, int byte);
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Painter::SetFont(TypeFont typeFont)
-{
-    if (typeFont == currentTypeFont)
-    {
-        return;
-    }
-    font = fonts[typeFont];
-
-    uint8 command[4] = {SET_FONT, (uint8)typeFont};
-
-    SendToDisplay(command, 4);
-    SendToInterfaces(command, 2);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::LoadFont(TypeFont typeFont)
-{
-    const uchar *bytes = 0;
-    if (typeFont == TypeFont_5)
-    {
-        bytes = font5display;
-    }
-    else if (typeFont == TypeFont_8)
-    {
-        bytes = font8display;
-    }
-    else if (typeFont == TypeFont_UGO)
-    {
-        bytes = fontUGOdisplay;
-    }
-    else if (typeFont == TypeFont_UGO2)
-    {
-        bytes = fontUGO2display;
-    }
-
-    uint8 command[3084] = {LOAD_FONT, (uint8)typeFont};
-    for (int i = 0; i < 3080; i++)
-    {
-        WRITE_BYTE(2 + i, bytes[i]);
-    }
-    /// \todo шрифты теперь зашиты в дисплей
-    //Painter_SendToDisplay(command, 3084);
-    SendToInterfaces(command, 2);
-    SendToInterfaces((uint8 *)(fonts[typeFont]), sizeof(Font));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool ByteFontNotEmpty(int eChar, int byte)
+bool Painter::ByteFontNotEmpty(int eChar, int byte)
 {
     static const uint8 *bytes = 0;
     static int prevChar = -1;
@@ -70,9 +20,9 @@ static bool ByteFontNotEmpty(int eChar, int byte)
     }
     return bytes[byte];
 }
-
+    
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool BitInFontIsExist(int eChar, int numByte, int bit)
+bool Painter::BitInFontIsExist(int eChar, int numByte, int bit)
 {
     static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
     static int prevChar = -1;
@@ -87,7 +37,7 @@ static bool BitInFontIsExist(int eChar, int numByte, int bit)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawCharInColorDisplay(int eX, int eY, char symbol)
+void Painter::DrawCharInColorDisplay(int eX, int eY, char symbol)
 {
     int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
@@ -112,7 +62,7 @@ static void DrawCharInColorDisplay(int eX, int eY, char symbol)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int DrawBigChar(int eX, int eY, int size, char symbol)
+int Painter::DrawBigChar(int eX, int eY, int size, char symbol)
 {
     int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
@@ -145,86 +95,19 @@ static int DrawBigChar(int eX, int eY, int size, char symbol)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawCharHardCol(int x, int y, char symbol)
-{
-    char str[2] = {0, 0};
-    str[0] = symbol;
-    Painter::DrawText(x, y, str);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 extern void CalculateCurrentColor();
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawChar(int x, int y, char symbol, Color color)
-{
-    SetColor(color);
-    CalculateCurrentColor();
-    if (Font_GetSize() == 5)
-    {
-        DrawCharHardCol(x, y + 3, symbol);
-    }
-    else if (Font_GetSize() == 8)
-    {
-        DrawCharHardCol(x, y, symbol);
-    }
-    else
-    {
-        DrawCharInColorDisplay(x, y, symbol);
-    }
-    return x + Font_GetLengthSymbol(symbol);
-}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBackground)
 {
-    int width = Font_GetLengthText(text);
-    int height = Font_GetSize();
+    int width = Font::GetLengthText(text);
+    int height = Font::GetSize();
 
-    Color colorText = GetColor();
+    Color colorText(GetColor());
     FillRegion(x - 1, y, width, height, colorBackground);
     SetColor(colorText);
 
     return DrawText(x, y, text);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawText(int x, int y, const char *text, Color color)
-{
-    SetColor(color);
-    if (*text == 0)
-    {
-        return x;
-    }
-    CalculateCurrentColor();
-
-    int retValue = x;
-    y += (8 - Font_GetSize());
-#define SIZE_BUFFER 100
-    uint8 command[SIZE_BUFFER] = {DRAW_TEXT};
-    WRITE_SHORT(1, x);
-    WRITE_BYTE(3, (uint8)(y + 1));
-
-    uint8 *pointer = command + 5;
-    uint8 length = 0;
-
-    int counter = 0;
-    while (*text && length < (SIZE_BUFFER - 7))
-    {
-        *pointer = (uint8)(*text);
-        retValue += Font_GetLengthSymbol(*text);
-        text++;
-        pointer++;
-        length++;
-        counter++;
-    }
-
-    *pointer = 0;
-    WRITE_BYTE(4, length);
-    int numBytes = ((length + 4) / 4) * 4 + 4;
-    SendToDisplay(command, numBytes);
-    SendToInterfaces(command, 1 + 2 + 1 + 1 + length);
-    return retValue;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -239,7 +122,7 @@ int Painter::DrawFormatText(int x, int y, char *format, ...)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight)
+int Painter::DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
     int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
@@ -276,7 +159,7 @@ int Painter::DrawTextWithLimitationC(int x, int y, const char *text, Color color
     while (*text)
     {
         x = DrawCharWithLimitation(x, y, *text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font_GetLengthSymbol(*text);
+        retValue += Font::GetLengthSymbol(*text);
         text++;
     }
     return retValue + 1;
@@ -493,7 +376,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     for (int i = numSyllabels - 2; i >= 0; i--)
     {
         char *subString = PartWordForTransfer(word, lengthSyllables, i, buffer);
-        int length = Font_GetLengthText(subString);
+        int length = Font::GetLengthText(subString);
         if (xRight - x > length - 5)
         {
             if (draw)
@@ -546,7 +429,7 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
             }
             else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font_GetLengthText(word);
+                int lengthString = Font::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
                     int numSymb = DrawPartWord(word, x, y, right, true);
@@ -599,11 +482,11 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
                 {
                     continue;
                 }
-                x += Font_GetLengthSymbol(symbol);
+                x += Font::GetLengthSymbol(symbol);
             }
             else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font_GetLengthText(word);
+                int lengthString = Font::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
                     int numSymb = DrawPartWord(word, x, y, right, false);
@@ -614,7 +497,7 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
                 else
                 {
                     curSymbol += length;
-                    x += Font_GetLengthText(word);
+                    x += Font::GetLengthText(word);
                 }
             }
         }
@@ -663,8 +546,8 @@ int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
 int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
 {
     SetColor(color);
-    int lenght = Font_GetLengthText(text);
-    int height = Font_GetHeightSymbol(text[0]);
+    int lenght = Font::GetLengthText(text);
+    int height = Font::GetHeightSymbol(text[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
     return DrawText(x, y, text);
@@ -674,7 +557,7 @@ int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, cons
 void Painter::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder, 
                                                   Color colorBackground)
 {
-    int lenght = Font_GetLengthText(text);
+    int lenght = Font::GetLengthText(text);
     int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
@@ -692,19 +575,19 @@ int Painter::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int heig
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int GetLenghtSubString(char *text)
+int Painter::GetLenghtSubString(const char *text)
 {
     int retValue = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        retValue += Font_GetLengthSymbol(*text);
+        retValue += Font::GetLengthSymbol(*text);
         text++;
     }
     return retValue;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int DrawSubString(int x, int y, char *text)
+int Painter::DrawSubString(int x, int y, const char *text)
 {
     int numSymbols = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
@@ -717,7 +600,7 @@ static int DrawSubString(int x, int y, char *text)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int DrawSpaces(int x, int y, char *text, int *numSymbols)
+int Painter::DrawSpaces(int x, int y, const char *text, int *numSymbols)
 {
     *numSymbols = 0;
     while (*text == ' ')
@@ -730,7 +613,7 @@ static int DrawSpaces(int x, int y, char *text, int *numSymbols)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawTextInRect(int x, int y, int width, char *text)
+void Painter::DrawTextInRect(int x, int y, int width, const char *text)
 {
     int xStart = x;
     int xEnd = xStart + width;
@@ -741,7 +624,7 @@ void Painter::DrawTextInRect(int x, int y, int width, char *text)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font_GetHeightSymbol(*text);
+            y += Font::GetHeightSymbol(*text);
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, text);
@@ -756,7 +639,7 @@ void Painter::DrawTextInRect(int x, int y, int width, char *text)
 void Painter::DrawTextRelativelyRight(int xRight, int y, const char *text, Color color)
 {
     SetColor(color);
-    int lenght = Font_GetLengthText(text);
+    int lenght = Font::GetLengthText(text);
     DrawText(xRight - lenght, y, text);
 }
 

@@ -20,7 +20,7 @@ void Item_Draw(int x, int y, void *item)
     }
     else if (type == Item_Button)
     {
-        Painter::DrawTextInRect(x + 5, y + 17, WIDTH_ITEM, ItemTitle(item));
+        Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, ItemTitle(item));
     }
     else if (type == Item_ChoiceParameter)
     {
@@ -62,18 +62,18 @@ void DrawOpenedItem(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawOpenedChoice(Choice *choice)
 {
-    int width = WIDTH_ITEM;
+    int width = ITEM_WIDTH;
     int height = Choice_NumChoices(choice) * 10 + 2 + 12;
 
-    int y = HEIGHT_TITLE + PositionOnPage(choice) * HEIGHT_ITEM;
-    int x = WIDTH_SCREEN - WIDTH_ITEM - 20;
+    int y = TITLE_HEIGHT + PositionOnPage(choice) * ITEM_HEIGHT;
+    int x = SCREEN_WIDTH - ITEM_WIDTH - 20;
 
-    y += (HEIGHT_ITEM - height) / 2;
+    y += (ITEM_HEIGHT - height) / 2;
 
     ++y;
 
-    Painter::FillRegionC(x, y, width, height, COLOR_BACK);
-    Painter::DrawRectangleC(x, y, width, height, COLOR_FILL);
+    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Painter::DrawRectangle(x, y, width, height, Color::FILL);
     Painter::DrawHLine(y + 12, x, x + width);
 
     Painter::DrawTextRelativelyRight(x + width - 2, y + 2, ItemTitle(choice));
@@ -84,12 +84,12 @@ static void DrawOpenedChoice(Choice *choice)
     {
         if (Choice_CurrentChoice(choice) == i)
         {
-            Painter::FillRegionC(x + 2, y, WIDTH_ITEM - 4, 8, COLOR_FILL);
-            Painter::DrawTextC(x + 3, y, Choice_Name(choice, i), COLOR_BACK);
+            Painter::FillRegion(x + 2, y, ITEM_WIDTH - 4, 8, Color::FILL);
+            Painter::DrawText(x + 3, y, Choice_Name(choice, i), Color::BACK);
         }
         else
         {
-            Painter::DrawTextC(x + 3, y, Choice_Name(choice, i), COLOR_FILL);
+            Painter::DrawText(x + 3, y, Choice_Name(choice, i), Color::FILL);
         }
         y += 10;
     }

@@ -26,6 +26,7 @@ public:
     static Color CHAN[4];
 
     explicit Color(uint8 val) : value(val) { }
+    Color(const Color &color) : value(color.value) { }
 
     static Color Cursors(Channel ch);
     static Color Trig();
@@ -40,6 +41,8 @@ public:
 
     static void InitGlobalColors();
     static void Log(Color color);
+
+    Color& operator=(const Color &color);
 
 private:
     static const uint8 COLOR_BLACK;

@@ -13,12 +13,12 @@ void Menu::Draw(void)
 
     for (int i = 0; i < 4; i++)
     {
-        int x = WIDTH_SCREEN - WIDTH_ITEM - 1;
-        int y = HEIGHT_TITLE + i * HEIGHT_ITEM;
+        int x = SCREEN_WIDTH - ITEM_WIDTH - 1;
+        int y = TITLE_HEIGHT + i * ITEM_HEIGHT;
 
         if (CurrentPage()->typeItem == Item_Page)
         {
-            Painter::DrawRectangle(x, y, WIDTH_ITEM, HEIGHT_ITEM);
+            Painter::DrawRectangle(x, y, ITEM_WIDTH, ITEM_HEIGHT);
         }
         Item_Draw(x, y, ItemFromPage(i));
     }
@@ -34,7 +34,7 @@ void Menu::Draw(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::DrawTitle(void)
 {
-    Painter::DrawRectangleC(0, 0, WIDTH_SCREEN - 1, HEIGHT_TITLE, COLOR_FILL);
+    Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, TITLE_HEIGHT, Color::FILL);
     Painter::DrawTextRelativelyRight(315, 5, Page_Name(CurrentPage()));
 }
 
@@ -45,7 +45,7 @@ void Menu::DrawPagesUGO(void)
     {
         for (int i = 0; i < NUM_PAGES; i++)
         {
-            Painter::DrawRectangleC(7 + i * 16, 7, 5, 5, COLOR_FILL);
+            Painter::DrawRectangle(7 + i * 16, 7, 5, 5, Color::FILL);
         }
 
         Painter::FillRegion(5 + CURRENT_PAGE * 16, 5, 9, 9);

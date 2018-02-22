@@ -1542,16 +1542,6 @@
           <GroupName>Display</GroupName>
           <Files>
             <File>
-              <FileName>Colors.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Colors.h</FilePath>
-            </File>
-            <File>
-              <FileName>Colors.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Colors.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Display.h</FilePath>
@@ -1592,66 +1582,6 @@
               <FilePath>.\src\Display\Symbols.h</FilePath>
             </File>
             <File>
-              <FileName>_Painter_.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\_Painter_.cpp</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>0</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>0</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <useXO>2</useXO>
-                    <v6Lang>0</v6Lang>
-                    <v6LangP>0</v6LangP>
-                    <vShortEn>2</vShortEn>
-                    <vShortWch>2</vShortWch>
-                    <v6Lto>2</v6Lto>
-                    <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-            <File>
-              <FileName>_Painter_.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\_Painter_.h</FilePath>
-            </File>
-            <File>
               <FileName>Painter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Display\Painter.cpp</FilePath>
@@ -1660,6 +1590,31 @@
               <FileName>Painter.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\Display\Painter.h</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Display\Colors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Display\Colors.h</FilePath>
+            </File>
+            <File>
+              <FileName>PainterText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Display\PainterText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PainterSTM429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Display\PainterSTM429.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PainterTextSTM429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Display\PainterTextSTM429.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1992,19 +1947,34 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>Log.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Log.h</FilePath>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
             </File>
             <File>
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Log.cpp</FilePath>
+              <FilePath>..\libs\common\Log.cpp</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
+              <FileName>Log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Log.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>VCP</GroupName>
+          <Files>
+            <File>
+              <FileName>VCP.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\main.cpp</FilePath>
+              <FilePath>..\libs\common\VCP\VCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\VCP\VCP.h</FilePath>
             </File>
           </Files>
         </Group>

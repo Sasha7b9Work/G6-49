@@ -2,13 +2,13 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define WIDTH_SCREEN    320
-#define HEIGHT_SCREEN   240
-#define HEIGHT_TITLE    19
-#define WIDTH_ITEM      69
-#define HEIGHT_ITEM     ((HEIGHT_SCREEN - HEIGHT_TITLE - 1) / 4)
-#define HEIGHT_SIGNAL   ((HEIGHT_SCREEN - HEIGHT_TITLE) / 2)
-#define WIDTH_SIGNAL    ((WIDTH_SCREEN - WIDTH_ITEM) - 1)
+#define SCREEN_WIDTH    320
+#define SCREEN_HEIGHT   240
+#define TITLE_HEIGHT    19
+#define ITEM_WIDTH      69
+#define ITEM_HEIGHT     ((SCREEN_HEIGHT - TITLE_HEIGHT - 1) / 4)
+#define SIGNAL_HEIGHT   ((SCREEN_HEIGHT - TITLE_HEIGHT) / 2)
+#define SIGNAL_WIDTH    ((SCREEN_WIDTH - ITEM_WIDTH) - 1)
 
 typedef enum
 {

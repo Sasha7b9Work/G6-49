@@ -42,17 +42,17 @@ void InputWindow::Init(void)
 void InputWindow::Draw(void)
 {
     int x = 0;
-    int y = HEIGHT_TITLE;
-    int width = WIDTH_SIGNAL;
-    int height = HEIGHT_SIGNAL;
+    int y = TITLE_HEIGHT;
+    int width = SIGNAL_WIDTH;
+    int height = SIGNAL_HEIGHT;
 
     if (CHANNEL_IS_A)
     {
-        y += HEIGHT_SIGNAL;
+        y += SIGNAL_HEIGHT;
     }
 
-    Painter::FillRegionC(x, y, width, height, COLOR_BACK);
-    Painter::DrawRectangleC(x, y, width, height, COLOR_FILL);
+    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Painter::DrawRectangle(x, y, width, height, Color::FILL);
 
     static const pFuncVII func[NumParameters] =
     {
@@ -94,9 +94,9 @@ static void DrawDigits(int x, int y)
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        Painter::FillRegionC(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, COLOR_EMPTY_DIGIT);
+        Painter::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, Color::MENU_FIELD);
 
-        Painter::SetColor(COLOR_FILL);
+        Painter::SetColor(Color::FILL);
 
         if (i == iws.hightLightDigit)
         {

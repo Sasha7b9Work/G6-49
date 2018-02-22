@@ -15,26 +15,26 @@
 // warning: format string is not a string literal
 #pragma clang diagnostic ignored "-Wformat-nonliteral"
 
+// warning: declartation requires a global constuctor
+#pragma clang diagnostic ignored "-Wglobal-constructors"
 
-typedef const    char *const    pString;
+// warning: cast from ... to ... increase required aligment from ... to ...
+#pragma clang diagnostic ignored "-Wcast-align"
+
+// warning: ISO C++11 does not allow conversion from string literal to 'char *'
+#pragma clang diagnostic ignored "-Wwritable-strings"
+
+
+#define DEBUG
+
+
+typedef const char *const   pString;
 typedef unsigned int        uint;
 typedef unsigned short int  uint16;
 typedef signed short int    int16;
 typedef unsigned char       uint8;
 typedef unsigned char       uchar;
 typedef signed char         int8;
-
-typedef enum
-{
-    COLOR_BACK           = 0x00,
-    COLOR_FILL           = 0x01,
-    COLOR_EMPTY_DIGIT    = 0x02,
-    COLOR_MENU_TITLE     = 0x03,
-    COLOR_MENU_ITEM_DARK = 0x04,
-    NUM_COLORS,
-    COLOR_FLASH_10,
-    COLOR_FLASH_01
-} Color;
 
 #define MAX_UINT ((uint)-1)
 

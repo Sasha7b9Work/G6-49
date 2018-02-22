@@ -54,9 +54,6 @@
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -180,6 +177,21 @@
     <ClCompile Include="..\..\Panel\src\Display\_Painter_.cpp">
       <Filter>Display</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libs\common\Display\Colors.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Display\Painter.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Display\PainterSTM429.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Display\PainterText.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Display\PainterTextSTM429.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
@@ -241,9 +253,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
       <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\Colors.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Display.h">
       <Filter>Display</Filter>
@@ -387,6 +396,12 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\_Painter_.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Display\Colors.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Display\Painter.h">
       <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>

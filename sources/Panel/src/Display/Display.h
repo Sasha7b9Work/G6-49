@@ -20,6 +20,8 @@ public:
 
     static void SetColorBackground();
 
+    static void AddStringToIndicating(pString string);
+
 private:
     static void DrawSignal(Channel chan);
 
