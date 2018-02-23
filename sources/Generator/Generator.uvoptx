@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Generator\AD5697.cpp</Filename>
+          <Filename>.\src\Generator\AD5697.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/Generator/AD5697.cpp\59</Expression>
         </Bp>
