@@ -223,7 +223,6 @@
     <ClCompile Include="..\..\Panel\src\Display\Font\Font.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp" />
-    <ClCompile Include="..\..\Panel\src\Display\_Painter_.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
@@ -324,7 +323,6 @@
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h" />
     <ClInclude Include="..\..\Panel\src\Display\InputWindow.h" />
     <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h" />
-    <ClInclude Include="..\..\Panel\src\Display\_Painter_.h" />
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h" />
     <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h" />

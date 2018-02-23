@@ -174,9 +174,6 @@
     <ClCompile Include="..\..\libs\common\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\_Painter_.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libs\common\Display\Colors.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -394,9 +391,6 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\common\Utils\Math.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\_Painter_.h">
-      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\Display\Colors.h">
       <Filter>Display</Filter>
