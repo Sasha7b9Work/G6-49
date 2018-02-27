@@ -142,7 +142,7 @@ void CPU::InitLTDC()
     handleLTDC.Init.Backcolor.Red = 0;
     if (HAL_LTDC_Init(&handleLTDC) != HAL_OK)
     {
-        ERROR_HANDLER;
+        ERROR_HANDLER();
     }
     
     uint clut[10] =
@@ -191,7 +191,7 @@ void CPU::LTDC_::SetBuffers(uint front, uint back)
     pLayerCfg.Backcolor.Red = 0;
     if (HAL_LTDC_ConfigLayer(&handleLTDC, &pLayerCfg, 0) != HAL_OK)
     {
-        ERROR_HANDLER;
+        ERROR_HANDLER();
     }
 }
 
@@ -236,7 +236,7 @@ void CPU::InitFSMC(void)
     if (HAL_SRAM_Init((SRAM_HandleTypeDef*)(&sramHandle), (FMC_NORSRAM_TimingTypeDef*)(&sramTiming),
         (FMC_NORSRAM_TimingTypeDef*)(&sramTiming)) != HAL_OK)
     {
-        ERROR_HANDLER;
+        ERROR_HANDLER();
     };
 }
 
@@ -272,12 +272,12 @@ void CPU::Keyboard::InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[
 
     if (HAL_TIM_Base_Init(&handleTIM3) != HAL_OK)
     {
-        ERROR_HANDLER;
+        ERROR_HANDLER();
     }
 
     if (HAL_TIM_Base_Start_IT(&handleTIM3) != HAL_OK)
     {
-        ERROR_HANDLER;
+        ERROR_HANDLER();
     }
 }
 
