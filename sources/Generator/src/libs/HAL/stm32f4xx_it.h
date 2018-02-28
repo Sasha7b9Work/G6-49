@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef __cpusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
     void NMI_Handler(void);

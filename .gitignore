@@ -1,5 +1,7 @@
 *.out
 *.tmp
+*.lib
+*.pdb
 *.uvgui*.*
 JLink*.*
 

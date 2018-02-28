@@ -115,6 +115,10 @@ void Hardware::SystemClock_Config(void)
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
+#ifdef MSVC
+#define __attribute(x)
+#endif
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 __attribute((noreturn)) void _Error_Handler(const char *, int)
 {

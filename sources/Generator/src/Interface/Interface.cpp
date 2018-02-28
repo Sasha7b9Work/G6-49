@@ -91,9 +91,9 @@ void Interface::ProcessingCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ProcessCommand()
 {
-    typedef void(Interface::*pFuncVV)();
+    typedef void(Interface::*pFuncInterfaceVV)();
 
-    static const pFuncVV commands[NUM_COMMAND_WRITE] =
+    static const pFuncInterfaceVV commands[NUM_COMMAND_WRITE] =
     {
         &Interface::CommandEmpty,       /// WRITE_SERVICE_COMMAND
         &Interface::CommandEnable,      /// ENABLE_CHANNEL
@@ -111,7 +111,7 @@ void Interface::ProcessCommand()
   
     if (buffer[0] < NUM_COMMAND_WRITE)
     {       
-        pFuncVV f = commands[buffer[0]];
+        pFuncInterfaceVV f = commands[buffer[0]];
         (this->*f)();
     }
 }
@@ -152,14 +152,18 @@ void Interface::CommandParameter(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandReset(void)
+void Interface::CommandReset()
 {
+#ifndef MSVC
+
 #define MAIN_PROGRAM_START_ADDRESS  (uint)0x8000000
     typedef void(*pFunction)();
     __disable_irq();
     pFunction JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
     __enable_irq();
     JumpToApplication();
+
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

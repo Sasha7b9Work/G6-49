@@ -120,9 +120,9 @@ void FPGA::Init(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetWaveForm(WaveForm form)
 {
-    typedef void(FPGA::*pFuncVV)();
+    typedef void(FPGA::*pFuncFpgaVV)();
     
-    static const pFuncVV func[] =
+    static const pFuncFpgaVV func[] =
     {
         &FPGA::GenerateSine,
         &FPGA::GenerateSaw,
@@ -131,7 +131,7 @@ void FPGA::SetWaveForm(WaveForm form)
 
     if (form < NumForms)
     {
-        pFuncVV f = func[form];
+        pFuncFpgaVV f = func[form];
         (this->*f)();
     }
 }
@@ -154,7 +154,7 @@ void FPGA::SetFrequency(Channel ch, float frequency)
             WriteControlRegister();
         }
         uint N = (uint)(1e8f / frequency + 0.5f);
-        WriteRegister(ch == A ? Reg_FPGA_PeriodA : Reg_FPGA_PeriodB, N);
+        WriteRegister(ch == A ? (uint8)Reg_FPGA_PeriodA : (uint8)Reg_FPGA_PeriodB, N);
     }
 }
 
@@ -225,7 +225,7 @@ void FPGA::GenerateSaw(void)
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
         dataA[i] = (uint16)(step * i);
-        dataB[i] = MAX_VALUE - dataA[i];
+        dataB[i] = (uint16)(MAX_VALUE - dataA[i]);
     }
 
     SendData();
@@ -300,5 +300,5 @@ uint8 FPGA::RegisterForDuration(Channel ch)
     {
         return Reg_FPGA_DurationBandDelay;
     }
-    return ch == A ? Reg_FPGA_DurationA : Reg_FPGA_DurationB;
+    return (ch == A) ? (uint8)Reg_FPGA_DurationA : (uint8)Reg_FPGA_DurationB;
 }

@@ -22,11 +22,11 @@
     <ProjectGuid>{F437C9BF-D778-490F-B6DB-313FBC24C15D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Generator</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Generator\src\libs;..\..\Generator\src;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
+    <IncludePath>..\..\Generator\src;..\..\Generator\src\libs\HAL;..\..\libs\common;..\..\libs\common\_VS;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -88,10 +88,11 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;USE_HAL_DRIVER;STM32F407xx;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;USE_HAL_DRIVER;STM32F407xx;MSVC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4068;4310;4464;4820</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,17 +162,53 @@
     <ClInclude Include="..\..\Generator\src\Hardware\Hardware.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Generator\src\Interface\Interface.h" />
-    <ClInclude Include="..\..\Generator\src\libs\stm32f4xx_hal_conf.h" />
-    <ClInclude Include="..\..\Generator\src\libs\stm32f4xx_it.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h" />
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h" />
+    <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h" />
+    <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_it.h" />
+    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
+    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h" />
+    <ClInclude Include="..\..\libs\common\_VS\core_cm4.h" />
+    <ClInclude Include="..\..\libs\common\_VS\core_cmFunc.h" />
+    <ClInclude Include="..\..\libs\common\_VS\core_cmInstr.h" />
+    <ClInclude Include="..\..\libs\common\_VS\core_cmSimd.h" />
+    <ClInclude Include="..\..\libs\common\_VS\ctype.h" />
+    <ClInclude Include="..\..\libs\common\_VS\integer.h" />
+    <ClInclude Include="..\..\libs\common\_VS\inttypes.h" />
+    <ClInclude Include="..\..\libs\common\_VS\limits.h" />
+    <ClInclude Include="..\..\libs\common\_VS\math.h" />
+    <ClInclude Include="..\..\libs\common\_VS\stdarg.h" />
+    <ClInclude Include="..\..\libs\common\_VS\stdint.h" />
+    <ClInclude Include="..\..\libs\common\_VS\stdio.h" />
+    <ClInclude Include="..\..\libs\common\_VS\stdlib.h" />
+    <ClInclude Include="..\..\libs\common\_VS\string.h" />
+    <ClInclude Include="..\..\libs\common\_VS\tchar.h" />
+    <ClInclude Include="..\..\libs\common\_VS\windows.h" />
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
@@ -184,22 +221,48 @@
     <ClCompile Include="..\..\Generator\src\Hardware\Hardware.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp" />
-    <ClCompile Include="..\..\Generator\src\libs\stm32f4xx_hal_msp.c" />
-    <ClCompile Include="..\..\Generator\src\libs\stm32f4xx_it.c" />
-    <ClCompile Include="..\..\Generator\src\libs\system_stm32f4xx.c" />
+    <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_msp.cpp" />
+    <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_it.cpp" />
     <ClCompile Include="..\..\Generator\src\main.cpp" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_nor.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c" />
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c" />
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_nor.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Generator\src\libs\startup_stm32f407xx.s" />
+    <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\libs\common\_VS\algorithm" />
+    <None Include="..\..\libs\common\_VS\cstdlib" />
+    <None Include="..\..\libs\common\_VS\cstring" />
+    <None Include="..\..\libs\common\_VS\limits" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

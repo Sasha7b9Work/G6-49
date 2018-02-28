@@ -41,7 +41,9 @@ typedef void(*pFuncVCh)(Channel);
 
 #ifdef _CONSOLE
 
-#define __IO
+#ifndef __IO
+#define __IO volatile
+#endif
 #define uint32_t uint
 
 #endif

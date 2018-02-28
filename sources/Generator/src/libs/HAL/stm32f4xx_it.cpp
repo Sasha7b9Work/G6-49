@@ -1,5 +1,9 @@
 #include "stm32f4xx_it.h"
-#include <stm32f4xx_hal.h>
+#include <stm32f4xx.h>
+
+#ifdef MSVC
+#define __attribute(x)
+#endif
 
 #ifdef __cplusplus
 extern "C" {

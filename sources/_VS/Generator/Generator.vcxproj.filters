@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="HAL">
-      <UniqueIdentifier>{d25b18f7-fb9e-4211-bb88-ec55b6bac8b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="libs">
       <UniqueIdentifier>{c7ab4f89-315c-45ec-b7e7-7982e74fc7ba}</UniqueIdentifier>
     </Filter>
@@ -19,34 +16,37 @@
     <Filter Include="Interface">
       <UniqueIdentifier>{233f06b4-dbf8-4e99-96b1-30d53fe46589}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common">
+    <Filter Include="libs\HAL">
+      <UniqueIdentifier>{d25b18f7-fb9e-4211-bb88-ec55b6bac8b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\CMSIS">
+      <UniqueIdentifier>{980ec59a-8ed9-4b35-9654-a1be33dfd050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
       <UniqueIdentifier>{9fb7c831-1827-4375-b31e-8be47d1389fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_VS">
+      <UniqueIdentifier>{4813cb9e-504a-4ec9-b68c-726ee8a80022}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
-      <Filter>HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Generator\src\libs\stm32f4xx_hal_conf.h">
-      <Filter>libs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Generator\src\libs\stm32f4xx_it.h">
-      <Filter>libs</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\Hardware\Hardware.h">
       <Filter>Hardware</Filter>
@@ -76,60 +76,111 @@
       <Filter>Generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Common\Command.h">
-      <Filter>Common</Filter>
+      <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\Generator\AD5697.h">
       <Filter>Generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h">
+      <Filter>libs\HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_it.h">
+      <Filter>libs\HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\core_cm4.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\core_cmFunc.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\core_cmInstr.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\core_cmSimd.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\ctype.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\integer.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\inttypes.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\limits.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\math.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\stdarg.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\stdint.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\stdio.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\stdlib.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\string.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\tchar.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\_VS\windows.h">
+      <Filter>_VS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
-      <Filter>HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Generator\src\libs\stm32f4xx_hal_msp.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Generator\src\libs\stm32f4xx_it.c">
-      <Filter>libs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Generator\src\libs\system_stm32f4xx.c">
-      <Filter>libs</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_nor.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c">
-      <Filter>HAL</Filter>
+      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
@@ -162,12 +213,33 @@
       <Filter>Generator</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Common\Command.cpp">
-      <Filter>Common</Filter>
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_msp.cpp">
+      <Filter>libs\HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_it.cpp">
+      <Filter>libs\HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
+      <Filter>libs\CMSIS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Generator\src\libs\startup_stm32f407xx.s">
-      <Filter>libs</Filter>
+    <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">
+      <Filter>libs\CMSIS</Filter>
+    </None>
+    <None Include="..\..\libs\common\_VS\algorithm">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\libs\common\_VS\cstdlib">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\libs\common\_VS\cstring">
+      <Filter>_VS</Filter>
+    </None>
+    <None Include="..\..\libs\common\_VS\limits">
+      <Filter>_VS</Filter>
     </None>
   </ItemGroup>
 </Project>
