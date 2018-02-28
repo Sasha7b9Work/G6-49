@@ -88,7 +88,7 @@ void Menu::ProcessControl(StructControl control)
                 OPENED_ITEM = 0;
             }
         }
-        else if (key >= B_F1 & key <= B_F4)
+        else if (key >= B_F1 && key <= B_F4)
         {
             void *address = ItemFromPage(key - B_F1);
             if (ItemIsChoice(address))

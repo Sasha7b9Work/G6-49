@@ -128,49 +128,49 @@ static void DrawDigits(int x, int y)
 #pragma clang diagnostic ignored "-Wunused-parameter"
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawAmplitude(int x, int y)
+static void DrawAmplitude(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawFrequency(int x, int y)
+static void DrawFrequency(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawOffset(int x, int y)
+static void DrawOffset(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawPhase(int x, int y)
+static void DrawPhase(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDelay(int x, int y)
+static void DrawDelay(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawPeriod(int x, int y)
+static void DrawPeriod(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDutyRatio(int x, int y)
+static void DrawDutyRatio(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDuration(int x, int y)
+static void DrawDuration(int, int)
 {
 
 }
@@ -229,7 +229,7 @@ void InputWindow::ProcessContorl(StructControl control)
             InputWindowStruct::RegRight();
         }
     }
-    else if ((key >= B_F1 & key <= B_F4) && pressed == TypePress_Release)
+    else if ((key >= B_F1 && key <= B_F4) && pressed == TypePress_Release)
     {
         void *address = ItemFromPage(key - B_F1);
         if (ItemIsChoice(address))

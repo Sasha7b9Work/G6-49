@@ -471,13 +471,13 @@ static void RestoreValue(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindowStruct::PressKey(Control key)
 {
-    typedef struct
+    struct StrControl
     {
         Control control;
         char    symbol;
-    } StructControl;
+    };
 
-    static const StructControl command[] =
+    static const StrControl command[] =
     {
         {B_1, '1'}, {B_2, '2'}, {B_3, '3'}, {B_4, '4'}, {B_5, '5'},
         {B_6, '6'}, {B_7, '7'}, {B_8, '8'}, {B_9, '9'}, {B_0, '0'}, {B_Dot, '.'},

@@ -1714,7 +1714,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Display/font</GroupName>
+          <GroupName>Display/Font</GroupName>
           <Files>
             <File>
               <FileName>Font.h</FileName>

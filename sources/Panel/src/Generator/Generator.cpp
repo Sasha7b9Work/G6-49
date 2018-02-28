@@ -33,7 +33,7 @@ static void MasterSynchro(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::EnableChannel(Channel ch, bool enable)
 {
-    uint8 buffer[3] = {ENABLE_CHANNEL, ch, (uint8)(enable ? 1 : 0)};
+    uint8 buffer[3] = {ENABLE_CHANNEL, (uint8)ch, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 3);
 }
 
@@ -54,7 +54,7 @@ void Generator::Reset(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Channel ch, WaveForm form)
 {
-    uint8 buffer[3] = {SET_FORM_WAVE, ch, form};
+    uint8 buffer[3] = {SET_FORM_WAVE, (uint8)ch, (uint8)form};
     SendToInterface(buffer, 3);
 }
 
@@ -73,7 +73,7 @@ void Generator::SetParameter(Channel ch, WaveParameter param, float value)
         SET_DELAY
     };
 
-    uint8 buffer[6] = {commands[param], ch};
+    uint8 buffer[6] = {(uint8)commands[param], (uint8)ch};
     memcpy(&buffer[2], &value, 4);
     SendToInterface(buffer, 6);
 }

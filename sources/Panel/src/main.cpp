@@ -21,8 +21,6 @@ int main(void)
    
     Display::Init();
 
-    Timer::Init();
-
     Keyboard::Init();
 
     uint time = TIME_MS;

@@ -8,12 +8,13 @@
   <WorkspaceName>WorkSpace</WorkspaceName>
 
   <project>
-    <PathAndName>.\Panel\PanelDDS.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
+    <PathAndName>.\Generator\Generator.uvprojx</PathAndName>
   </project>
 
   <project>
-    <PathAndName>.\Generator\Generator.uvprojx</PathAndName>
+    <PathAndName>.\Panel\PanelDDS.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
 </ProjectWorkspace>
