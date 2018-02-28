@@ -2,6 +2,7 @@
 *.tmp
 *.lib
 *.pdb
+*.txt
 *.uvgui*.*
 JLink*.*
 

@@ -94,6 +94,8 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F429xx;MSVC;USE_HAL_DRIVER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4068;4365;4464;4514;4774;4820</DisableSpecificWarnings>
+      <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

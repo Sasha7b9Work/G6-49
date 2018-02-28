@@ -93,6 +93,8 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;USE_HAL_DRIVER;STM32F407xx;MSVC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4068;4310;4464;4820</DisableSpecificWarnings>
+      <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
