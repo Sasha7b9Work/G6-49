@@ -9,11 +9,11 @@
 
   <project>
     <PathAndName>.\Panel\PanelDDS.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\Generator\Generator.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>
