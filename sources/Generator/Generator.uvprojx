@@ -337,7 +337,7 @@
               <MiscControls>-Wno-c++98-compat</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;.\src\libs</IncludePath>
+              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -379,7 +379,22 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>HAL</GroupName>
+          <GroupName>libs/CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>startup_stm32f407xx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\libs\CMSIS\startup_stm32f407xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\libs\CMSIS\system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>libs/HAL</GroupName>
           <Files>
             <File>
               <FileName>stm32f4xx_hal.h</FileName>
@@ -921,40 +936,40 @@
                 </FileArmAds>
               </FileOption>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>libs</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f407xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\src\libs\startup_stm32f407xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\system_stm32f4xx.c</FilePath>
-            </File>
             <File>
               <FileName>stm32f4xx_hal_conf.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\libs\stm32f4xx_hal_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\stm32f4xx_it.h</FilePath>
+              <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_msp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\libs\stm32f4xx_hal_msp.cpp</FilePath>
+              <FilePath>.\src\libs\HAL\stm32f4xx_hal_msp.cpp</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.cpp</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\libs\stm32f4xx_it.cpp</FilePath>
+              <FilePath>.\src\libs\HAL\stm32f4xx_it.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\libs\HAL\stm32f4xx_it.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src</GroupName>
+          <Files>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\defines.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1075,21 +1090,6 @@
               <FileName>Interface.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Interface\Interface.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>src</GroupName>
-          <Files>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\main.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>defines.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\defines.h</FilePath>
             </File>
           </Files>
         </Group>
