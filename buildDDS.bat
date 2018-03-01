@@ -1,6 +1,6 @@
 @echo off
 
-@echo Build KornetDDS
+@echo Build DDS
 
 echo Compile PanelDDS  ... %TIME%
 
