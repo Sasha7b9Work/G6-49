@@ -32,12 +32,6 @@ FPGA::FPGA() : modeWork(ModeNone)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::Init(void)
 {
-    __HAL_RCC_FSMC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-    __HAL_RCC_GPIOF_CLK_ENABLE();
-    __HAL_RCC_GPIOG_CLK_ENABLE();
-
     GPIO_InitTypeDef isGPIO = 
     {
         0,
@@ -105,9 +99,6 @@ void FPGA::Init(void)
     }
 
     // Настраиваем выходы для записи в регистры ПЛИС
-
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOG_CLK_ENABLE();
 
     WritePin(FPGA_WR_RG, false);
     WritePin(FPGA_CLK_RG, false);

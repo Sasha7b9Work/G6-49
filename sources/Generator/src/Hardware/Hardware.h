@@ -7,18 +7,12 @@ class Hardware
 {
 public:
 
-    void Init();
+    static void Init();
     /// Установить на PA2 признак того, что процессор занят
-    void SetBusy();
+    static void SetBusy();
     /// Установить на PA2 признак того, что процессор свободен
-    void SetReady();
+    static void SetReady();
 
 private:
 
-    void GPIOS_Init();
-
-    void SystemClock_Config();
 };
-
-
-extern Hardware hardware;

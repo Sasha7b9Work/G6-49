@@ -6,4 +6,10 @@ class CPU : public STM407
 {
 public:
     static void Init();
+
+private:
+
+    static void EnablePeriphery();
+
+    static void InitGPIOS();
 };

@@ -51,9 +51,6 @@ static void Reset();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void AD9952::Init(void)
 {
-    __HAL_RCC_SPI3_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-
     GPIO_InitTypeDef isGPIO = 
     {   //   SCK          MI           MO
         GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12,

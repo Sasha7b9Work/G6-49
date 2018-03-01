@@ -28,9 +28,6 @@ void AD5697::Init(void)
     Reset(A);
     Reset(B);
     
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_I2C1_CLK_ENABLE();
-
     GPIO_InitTypeDef isGPIO =
     {//    SCL          SDA
         GPIO_PIN_6 | GPIO_PIN_7,

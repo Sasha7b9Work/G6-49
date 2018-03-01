@@ -38,9 +38,6 @@ static uint8 buffer[LENGTH_SPI_BUFFER];     ///< Буфер для принимаемых команд
                                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init(void)
 {
-    __HAL_RCC_SPI1_CLK_ENABLE();
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-
     GPIO_InitTypeDef isGPIOA =
     {   //  SCK         MI           MO
         GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7,
@@ -61,7 +58,7 @@ void Interface::ProcessingCommand()
     
     if (res == HAL_OK)
     {
-        hardware.SetBusy();
+        Hardware::SetBusy();
 
         static uint8 prevBuffer[LENGTH_SPI_BUFFER] = {0};
         bool first = true;
@@ -84,7 +81,7 @@ void Interface::ProcessingCommand()
                                                     // данные, т.е. последние принятые данные правильные
 
         ProcessCommand();
-        hardware.SetReady();
+        Hardware::SetReady();
     }
 }
 
