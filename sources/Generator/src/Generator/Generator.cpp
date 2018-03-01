@@ -1,8 +1,8 @@
 #include "AD5697.h"
 #include "FPGA.h"
-#include "Common.h"
 #include "Generator.h"
 #include "GeneratorSettingsTypes.h"
+#include "Hardware/CPU.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +25,7 @@ void Generator::EnableChannel(Channel ch, bool enable)
 {
     static const GeneratorPin pin[NumChannels] = { Pin_P3_OutA, Pin_P4_OutB };
 
-    WritePin(pin[ch], enable);
+    CPU::WritePin(pin[ch], enable);
 }
 
 
@@ -37,7 +37,7 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
     waveIsSine = (form == Form_Sine);
 
     // Если нужен синус, то пишем ноль, чтобы обеспечить прохождение сигнала DDS. Иначе 1, чтобы обеспечить прохождение сигнала ПЛИС
-    WritePin(pin[ch], !waveIsSine);
+    CPU::WritePin(pin[ch], !waveIsSine);
 
     if (!waveIsSine)
     {

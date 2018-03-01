@@ -69,9 +69,6 @@
     <ClInclude Include="..\..\Generator\src\Generator\AD9952.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\Common.h">
-      <Filter>Generator</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Generator\src\Interface\Interface.h">
       <Filter>Interface</Filter>
     </ClInclude>
@@ -211,9 +208,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Generator\Common.cpp">
-      <Filter>Generator</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Generator\FPGA.cpp">
       <Filter>Generator</Filter>

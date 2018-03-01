@@ -2,6 +2,7 @@
 #include "Generator/Generator.h"
 #include "Generator/AD5697.h"
 #include "Interface/Interface.h"
+#include "Hardware/CPU.h"
 #include "Hardware/Hardware.h"
 #include <stm32f4xx_hal.h>
 
@@ -13,7 +14,7 @@ int main(void)
 {
     Hardware::Init();
     
-    Hardware::SetReady();
+    CPU::SetReady();
   
     while (1)
     {

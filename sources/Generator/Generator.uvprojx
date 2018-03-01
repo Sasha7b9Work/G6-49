@@ -982,11 +982,6 @@
               <FilePath>.\src\Generator\AD5697.cpp</FilePath>
             </File>
             <File>
-              <FileName>Common.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Common.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FPGA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\FPGA.cpp</FilePath>
@@ -1010,11 +1005,6 @@
               <FileName>AD5697.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\AD5697.h</FilePath>
-            </File>
-            <File>
-              <FileName>Common.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Common.h</FilePath>
             </File>
             <File>
               <FileName>FPGA.h</FileName>

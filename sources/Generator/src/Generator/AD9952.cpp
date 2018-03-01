@@ -1,7 +1,7 @@
 #include "AD9952.h"
-#include "Common.h"
 #include "defines.h"
 #include "GeneratroSettings.h"
+#include "Hardware/CPU.h"
 #include <math.h>
 
 
@@ -158,18 +158,18 @@ static void WriteToHardware(Channel ch, RegAD9952 reg, uint value)
         --curByte;
     }
     
-    WritePin(ChipSelect(ch), false);
+    CPU::WritePin(ChipSelect(ch), false);
 
     HAL_SPI_Transmit(&hSPI3, buffer, (uint16)(numBytes[reg] + 1), 1);
     
-    WritePin(AD9952_IO_UPD, true);
+    CPU::WritePin(AD9952_IO_UPD, true);
     volatile int i = 0;
     for (; i < 1000; ++i)
     {
     };
-    WritePin(AD9952_IO_UPD, false);
+    CPU::WritePin(AD9952_IO_UPD, false);
 
-    WritePin(ChipSelect(ch), true);
+    CPU::WritePin(ChipSelect(ch), true);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -181,17 +181,17 @@ static GeneratorPin ChipSelect(Channel ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Reset(void)
 {
-    WritePin(AD9952_RES_DDS, false);
-    WritePin(AD9952_RES_DDS, true);
-    WritePin(AD9952_RES_DDS, false);
+    CPU::WritePin(AD9952_RES_DDS, false);
+    CPU::WritePin(AD9952_RES_DDS, true);
+    CPU::WritePin(AD9952_RES_DDS, false);
 
-    WritePin(AD9952_SPI3_CSA, true);
-    WritePin(AD9952_SPI3_CSB, true);
-    WritePin(AD9952_IO_UPD, false);
-    WritePin(AD9952_IOSYNA, false);
-    WritePin(AD9952_IOSYNB, false);
+    CPU::WritePin(AD9952_SPI3_CSA, true);
+    CPU::WritePin(AD9952_SPI3_CSB, true);
+    CPU::WritePin(AD9952_IO_UPD, false);
+    CPU::WritePin(AD9952_IOSYNA, false);
+    CPU::WritePin(AD9952_IOSYNB, false);
 
-    WritePin(AD9952_RES_DDS, false);
-    WritePin(AD9952_RES_DDS, true);
-    WritePin(AD9952_RES_DDS, false);
+    CPU::WritePin(AD9952_RES_DDS, false);
+    CPU::WritePin(AD9952_RES_DDS, true);
+    CPU::WritePin(AD9952_RES_DDS, false);
 }

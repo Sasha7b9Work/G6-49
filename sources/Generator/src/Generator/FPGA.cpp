@@ -1,6 +1,5 @@
 #include "FPGA.h"
 #include "defines.h"
-#include "Common.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include <string.h>
@@ -100,13 +99,13 @@ void FPGA::Init(void)
 
     // Настраиваем выходы для записи в регистры ПЛИС
 
-    WritePin(FPGA_WR_RG, false);
-    WritePin(FPGA_CLK_RG, false);
-    WritePin(FPGA_DT_RG, false);
-    WritePin(FPGA_A0_RG, false);
-    WritePin(FPGA_A1_RG, false);
-    WritePin(FPGA_A2_RG, false);
-    WritePin(FPGA_A3_RG, false);
+    CPU::WritePin(FPGA_WR_RG, false);
+    CPU::WritePin(FPGA_CLK_RG, false);
+    CPU::WritePin(FPGA_DT_RG, false);
+    CPU::WritePin(FPGA_A0_RG, false);
+    CPU::WritePin(FPGA_A1_RG, false);
+    CPU::WritePin(FPGA_A2_RG, false);
+    CPU::WritePin(FPGA_A3_RG, false);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -264,13 +263,13 @@ void FPGA::WriteRegister(uint8 reg, uint value)
 
     for (int bit = (reg == Reg_FPGA_Control) ? 15 : 31; bit >= 0; bit--)
     {
-        WritePin(FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
-        WritePin(FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
-        WritePin(FPGA_CLK_RG, false);
+        CPU::WritePin(FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
+        CPU::WritePin(FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
+        CPU::WritePin(FPGA_CLK_RG, false);
     }
 
-    WritePin(FPGA_WR_RG, true);                         // Теперь переписываем данные из сдвиговоого регистра в FPGA
-    WritePin(FPGA_WR_RG, false);
+    CPU::WritePin(FPGA_WR_RG, true);                         // Теперь переписываем данные из сдвиговоого регистра в FPGA
+    CPU::WritePin(FPGA_WR_RG, false);
     timer.PauseOnTime(10);                              // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
 }
 
@@ -281,7 +280,7 @@ void FPGA::WriteAddress(uint8 reg)
 
     for (int i = 0; i < 4; i++)
     {
-        WritePin(pins[i], GetBit(reg, i) == 1);
+        CPU::WritePin(pins[i], GetBit(reg, i) == 1);
     }
 }
 

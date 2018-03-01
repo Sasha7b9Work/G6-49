@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Common.h"
 #include "AD5697.h"
 #include "../../Common/Command.h"
 
@@ -65,8 +64,8 @@ void AD5697::WriteParameter(Channel ch, WaveParameter param, float value_)
     uint16 value = (uint16)((uint16)value_ << 4);
     uint8 buffer[3] = {CreateCommandByte(param), (uint8)(value >> 8), (uint8)value};
     TransmitI2C(address[ch], buffer);
-    WritePin(PinLDAC(ch), false);
-    WritePin(PinLDAC(ch), true);
+    CPU::WritePin(PinLDAC(ch), false);
+    CPU::WritePin(PinLDAC(ch), true);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,10 +86,10 @@ void AD5697::Reset(Channel ch)
 {
     static const GeneratorPin pinRS[NumChannels] = {AD5697_D_RSA, AD5697_D_RSB};
 
-    WritePin(PinLDAC(ch), true);
-    WritePin(pinRS[ch], true);
-    WritePin(pinRS[ch], false);
-    WritePin(pinRS[ch], true);
+    CPU::WritePin(PinLDAC(ch), true);
+    CPU::WritePin(pinRS[ch], true);
+    CPU::WritePin(pinRS[ch], false);
+    CPU::WritePin(pinRS[ch], true);
 
     //SetOffset(ch, 0.0f);
 }

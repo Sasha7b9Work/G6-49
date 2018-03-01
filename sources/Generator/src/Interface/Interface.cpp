@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Interface.h"
 #include "Generator/Generator.h"
+#include "Hardware/CPU.h"
 #include "Hardware/Hardware.h"
 #include "../../Common/Command.h"
 #include <string.h>
@@ -58,7 +59,7 @@ void Interface::ProcessingCommand()
     
     if (res == HAL_OK)
     {
-        Hardware::SetBusy();
+        CPU::SetBusy();
 
         static uint8 prevBuffer[LENGTH_SPI_BUFFER] = {0};
         bool first = true;
@@ -81,7 +82,7 @@ void Interface::ProcessingCommand()
                                                     // данные, т.е. последние принятые данные правильные
 
         ProcessCommand();
-        Hardware::SetReady();
+        CPU::SetReady();
     }
 }
 

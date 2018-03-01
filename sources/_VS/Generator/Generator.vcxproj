@@ -156,7 +156,6 @@
     <ClInclude Include="..\..\Generator\src\defines.h" />
     <ClInclude Include="..\..\Generator\src\Generator\AD5697.h" />
     <ClInclude Include="..\..\Generator\src\Generator\AD9952.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\Common.h" />
     <ClInclude Include="..\..\Generator\src\Generator\FPGA.h" />
     <ClInclude Include="..\..\Generator\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Generator\src\Generator\GeneratorSettingsTypes.h" />
@@ -218,7 +217,6 @@
     <ClCompile Include="..\..\Common\Command.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\AD5697.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\AD9952.cpp" />
-    <ClCompile Include="..\..\Generator\src\Generator\Common.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\FPGA.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\GeneratorSettings.cpp" />
