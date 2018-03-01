@@ -51,9 +51,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
@@ -201,6 +198,9 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
@@ -214,9 +214,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h">
       <Filter>Display\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Hardware\Timer.h">
-      <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h">
       <Filter>Settings</Filter>
@@ -430,6 +427,12 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h">
       <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\Timer.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f429xx.h">
+      <Filter>libs\CMSIS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

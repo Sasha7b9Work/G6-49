@@ -9,8 +9,5 @@
 // Эта функция вызывается при срабатывании любого аппаратного таймера
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-    CPU::Keyboard::TIM4_::ElapsedCallback(htim);
-
     Timer::ElapsedCallback(htim);
 }
-

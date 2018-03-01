@@ -222,6 +222,7 @@
     <ClCompile Include="..\..\Generator\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\GeneratorSettings.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp" />
     <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp" />
     <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

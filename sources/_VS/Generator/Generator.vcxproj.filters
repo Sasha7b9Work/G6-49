@@ -233,6 +233,9 @@
     <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">

@@ -10,8 +10,6 @@ public:
 
     static void Init();
 
-    static void OnIRQHandlerTIM3();
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 #include "Hardware/CPU_VCP.h"
 
@@ -35,13 +33,15 @@ public:
         static StructControl GetNextControl();
 
         //--------------------------------------------------------------------------------------------------------------------------------------------
-        class TIM3_
+        class TIM4_
         {
         public:
             /// Завести таймер, который остановится в timeStop мс
             static void Start(uint timeStopMS);
 
             static void Stop();
+
+            static void ElapsedCallback(void *htim);
         };
 
     private:

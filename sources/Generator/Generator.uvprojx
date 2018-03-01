@@ -1096,6 +1096,11 @@
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\Timer.h</FilePath>
             </File>
+            <File>
+              <FileName>CPU_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

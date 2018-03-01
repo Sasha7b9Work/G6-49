@@ -164,6 +164,7 @@
     <ClCompile Include="..\..\libs\common\Hardware\stm32\429\stm429.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp" />
+    <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\libs\common\Log.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\Math.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp" />
@@ -252,7 +253,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -271,6 +271,7 @@
     <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\429\stm429.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h" />
+    <ClInclude Include="..\..\libs\common\Hardware\Timer.h" />
     <ClInclude Include="..\..\libs\common\Log.h" />
     <ClInclude Include="..\..\libs\common\Utils\Math.h" />
     <ClInclude Include="..\..\libs\common\Utils\StringUtils.h" />
@@ -295,6 +296,7 @@
     <ClInclude Include="..\..\libs\common\_VS\string.h" />
     <ClInclude Include="..\..\libs\common\_VS\tchar.h" />
     <ClInclude Include="..\..\libs\common\_VS\windows.h" />
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f429xx.h" />
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -384,7 +386,6 @@
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
-    <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

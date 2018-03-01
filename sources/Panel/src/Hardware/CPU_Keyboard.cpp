@@ -12,7 +12,7 @@ static StructControl commands[10];
 static int pointer = 0;
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 /// “аймер дл€ опроса клавиатуры
-static TIM_HandleTypeDef handleTIM3;
+static TIM_HandleTypeDef handleTIM4;
 static void(*callbackKeyboard)() = 0;
 
 
@@ -209,22 +209,22 @@ void CPU::Keyboard::InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[
     }
 
     // »нициализируем таймер, по прерывани€м которого будем опрашивать клавиатуру
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
+    HAL_NVIC_SetPriority(TIM4_IRQn, 0, 1);
 
-    HAL_NVIC_EnableIRQ(TIM3_IRQn);
+    HAL_NVIC_EnableIRQ(TIM4_IRQn);
 
-    handleTIM3.Instance = TIM3;
-    handleTIM3.Init.Period = TIME_UPDATE * 10 - 1;
-    handleTIM3.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
-    handleTIM3.Init.ClockDivision = 0;
-    handleTIM3.Init.CounterMode = TIM_COUNTERMODE_UP;
+    handleTIM4.Instance = TIM4;
+    handleTIM4.Init.Period = TIME_UPDATE * 10 - 1;
+    handleTIM4.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
+    handleTIM4.Init.ClockDivision = 0;
+    handleTIM4.Init.CounterMode = TIM_COUNTERMODE_UP;
 
-    if (HAL_TIM_Base_Init(&handleTIM3) != HAL_OK)
+    if (HAL_TIM_Base_Init(&handleTIM4) != HAL_OK)
     {
         ERROR_HANDLER();
     }
 
-    if (HAL_TIM_Base_Start_IT(&handleTIM3) != HAL_OK)
+    if (HAL_TIM_Base_Start_IT(&handleTIM4) != HAL_OK)
     {
         ERROR_HANDLER();
     }
@@ -271,15 +271,9 @@ const char *ControlName(Control control)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::OnIRQHandlerTIM3()
+void CPU::Keyboard::TIM4_::ElapsedCallback(void *htim)
 {
-    HAL_TIM_IRQHandler(&handleTIM3);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if (htim == &handleTIM3 && callbackKeyboard)
+    if ((TIM_HandleTypeDef *)htim == &handleTIM4 && callbackKeyboard)
     {
         callbackKeyboard();
     }
@@ -292,7 +286,7 @@ void CPU::Keyboard::SetCallback(void(*func)())
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::TIM3_::Start(uint timeStopMS)
+void CPU::Keyboard::TIM4_::Start(uint timeStopMS)
 {
     Stop();
 
@@ -303,14 +297,30 @@ void CPU::Keyboard::TIM3_::Start(uint timeStopMS)
 
     uint dT = timeStopMS - TIME_MS;
 
-    handleTIM3.Init.Period = (dT * 2) - 1;  // 10 соответствует 0.1мс. “.е. если нам нужна 1мс, нужно засылать (100 - 1)
+    handleTIM4.Init.Period = (dT * 2) - 1;  // 10 соответствует 0.1мс. “.е. если нам нужна 1мс, нужно засылать (100 - 1)
 
-    HAL_TIM_Base_Init(&handleTIM3);
-    HAL_TIM_Base_Start_IT(&handleTIM3);
+    HAL_TIM_Base_Init(&handleTIM4);
+    HAL_TIM_Base_Start_IT(&handleTIM4);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::TIM3_::Stop()
+void CPU::Keyboard::TIM4_::Stop()
 {
-    HAL_TIM_Base_Stop_IT(&handleTIM3);
+    HAL_TIM_Base_Stop_IT(&handleTIM4);
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    void TIM4_IRQHandler();
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    void TIM4_IRQHandler()
+    {
+        HAL_TIM_IRQHandler(&handleTIM4);
+    }
+
+#ifdef __cplusplus
+}
+#endif

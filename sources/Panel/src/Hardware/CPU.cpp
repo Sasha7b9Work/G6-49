@@ -52,7 +52,7 @@ void CPU::EnablePeriphery()
 
     __HAL_RCC_TIM2_CLK_ENABLE();    // Для тиков
     __HAL_RCC_TIM3_CLK_ENABLE();    // Для таймеров
-    __HAL_RCC_TIM5_CLK_ENABLE();    // Для миллисекунд
+    __HAL_RCC_TIM4_CLK_ENABLE();    // Для опроса клавиатуры
 
     __HAL_RCC_LTDC_CLK_ENABLE();
     __HAL_RCC_DMA2D_CLK_ENABLE();
