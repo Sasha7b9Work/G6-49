@@ -335,7 +335,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>-Wno-c++98-compat</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F407xx</Define>
+              <Define>USE_HAL_DRIVER, DEBUG, STM32F407xx</Define>
               <Undefine></Undefine>
               <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\common;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Include</IncludePath>
             </VariousControls>
@@ -941,6 +941,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -956,6 +966,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\defines.h</FilePath>
             </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Log.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -965,6 +985,21 @@
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Common\Command.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Display</GroupName>
+          <Files>
+            <File>
+              <FileName>Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Display\Display.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Display\Display.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1032,24 +1067,34 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer.h</FilePath>
-            </File>
-            <File>
               <FileName>CPU.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
+              <FileName>CPU_VCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\CPU_VCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CPU.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_VCP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\CPU_VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\Timer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1080,6 +1125,16 @@
               <FileName>stm407.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\stm32\407\stm407.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.h</FilePath>
             </File>
           </Files>
         </Group>

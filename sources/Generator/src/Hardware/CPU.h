@@ -42,6 +42,9 @@ public:
     
     static  void WritePin(GeneratorPin pin, bool set);
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+#include "Hardware/CPU_VCP.h"
+
 private:
 
     static void EnablePeriphery();

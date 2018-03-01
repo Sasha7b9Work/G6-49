@@ -1,9 +1,8 @@
-#include "Timer.h"
+#include "Display.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Timer::PauseOnTime(uint timeMS)
+void Display::AddStringToIndicating(char *)
 {
-    uint time = HAL_GetTick();
-    while (HAL_GetTick() - time < timeMS) { };
+
 }

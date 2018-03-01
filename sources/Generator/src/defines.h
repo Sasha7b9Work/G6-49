@@ -1,10 +1,10 @@
 #pragma once
 
-// warning: use of old-style cast
 #pragma clang diagnostic ignored "-Wold-style-cast"
-
-// warning: declaration requires a global constructor
 #pragma clang diagnostic ignored "-Wglobal-constructors"
+#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+#pragma clang diagnostic ignored "-Wwritable-strings"
+#pragma clang diagnostic ignored "-Wformat-nonliteral"
 
 #include "Generator/GeneratorSettingsTypes.h"
 #include <stm32f4xx.h>

@@ -87,9 +87,6 @@
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\Timer.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
@@ -156,6 +153,12 @@
     <ClInclude Include="..\..\libs\common\Hardware\stm32\407\stm407.h">
       <Filter>Hardware\stm32</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\Timer.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -200,9 +203,6 @@
     <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Generator\src\Generator\FPGA.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
@@ -226,6 +226,12 @@
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\stm32\407\stm407.cpp">
       <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
