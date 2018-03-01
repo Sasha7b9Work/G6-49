@@ -160,6 +160,7 @@
     <ClCompile Include="..\..\libs\common\Display\PainterSTM429.cpp" />
     <ClCompile Include="..\..\libs\common\Display\PainterText.cpp" />
     <ClCompile Include="..\..\libs\common\Display\PainterTextSTM429.cpp" />
+    <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\429\stm429.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp" />
@@ -248,8 +249,8 @@
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Flash.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_It.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
@@ -267,6 +268,7 @@
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\libs\common\Display\Colors.h" />
     <ClInclude Include="..\..\libs\common\Display\Painter.h" />
+    <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\429\stm429.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h" />
     <ClInclude Include="..\..\libs\common\Log.h" />

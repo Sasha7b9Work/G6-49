@@ -1772,14 +1772,14 @@
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
-              <FileName>CPU.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CPU.h</FilePath>
+              <FileName>CPU_FLASH.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
             </File>
             <File>
-              <FileName>CPU_Flash.cpp</FileName>
+              <FileName>CPU_IT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_Flash.cpp</FilePath>
+              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_Keyboard.cpp</FileName>
@@ -1787,9 +1787,9 @@
               <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
             </File>
             <File>
-              <FileName>CPU_It.cpp</FileName>
+              <FileName>CPU_VCP.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_It.cpp</FilePath>
+              <FilePath>..\libs\common\Hardware\CPU_VCP.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.cpp</FileName>
@@ -1797,24 +1797,24 @@
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\VCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\VCP.h</FilePath>
-            </File>
-            <File>
               <FileName>Controls.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Controls.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CPU.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_VCP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\CPU_VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
           </Files>
         </Group>

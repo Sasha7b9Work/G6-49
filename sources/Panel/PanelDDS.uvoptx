@@ -1109,7 +1109,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1128,12 +1128,12 @@
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>72</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\CPU.h</PathWithFileName>
-      <FilenameWithoutPath>CPU.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\CPU_FLASH.cpp</PathWithFileName>
+      <FilenameWithoutPath>CPU_FLASH.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1144,8 +1144,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\CPU_Flash.cpp</PathWithFileName>
-      <FilenameWithoutPath>CPU_Flash.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\CPU_IT.cpp</PathWithFileName>
+      <FilenameWithoutPath>CPU_IT.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1168,8 +1168,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\CPU_It.cpp</PathWithFileName>
-      <FilenameWithoutPath>CPU_It.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\libs\common\Hardware\CPU_VCP.cpp</PathWithFileName>
+      <FilenameWithoutPath>CPU_VCP.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1192,20 +1192,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Timer.h</PathWithFileName>
-      <FilenameWithoutPath>Timer.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Controls.h</PathWithFileName>
+      <FilenameWithoutPath>Controls.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>78</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\libs\common\Hardware\VCP.cpp</PathWithFileName>
-      <FilenameWithoutPath>VCP.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\CPU.h</PathWithFileName>
+      <FilenameWithoutPath>CPU.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1216,8 +1216,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\libs\common\Hardware\VCP.h</PathWithFileName>
-      <FilenameWithoutPath>VCP.h</FilenameWithoutPath>
+      <PathWithFileName>..\libs\common\Hardware\CPU_VCP.h</PathWithFileName>
+      <FilenameWithoutPath>CPU_VCP.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1228,8 +1228,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Controls.h</PathWithFileName>
-      <FilenameWithoutPath>Controls.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Timer.h</PathWithFileName>
+      <FilenameWithoutPath>Timer.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

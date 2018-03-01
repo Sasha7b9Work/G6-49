@@ -186,16 +186,19 @@
     <ClCompile Include="..\..\libs\common\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_It.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp">
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Flash.cpp">
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
+    <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
@@ -423,6 +426,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h">
       <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
