@@ -3,7 +3,7 @@
 #include "Generator/AD5697.h"
 #include "Interface/Interface.h"
 #include "Hardware/CPU.h"
-#include "Hardware/Hardware.h"
+#include "Hardware/Timer.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -12,8 +12,10 @@ extern SPI_HandleTypeDef hSPI1;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main(void)
 {
-    Hardware::Init();
-    
+    CPU::Init();
+    Timer::PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
+    Generator::Init();
+    Interface::Init();
     CPU::SetReady();
   
     while (1)

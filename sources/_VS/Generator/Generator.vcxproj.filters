@@ -51,9 +51,6 @@
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\Hardware.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Generator\src\defines.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -202,9 +199,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp">
       <Filter>Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\Hardware.cpp">
-      <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>

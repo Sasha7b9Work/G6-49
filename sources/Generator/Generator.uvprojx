@@ -1032,19 +1032,9 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>Hardware.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Hardware.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Hardware.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Hardware.h</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>
