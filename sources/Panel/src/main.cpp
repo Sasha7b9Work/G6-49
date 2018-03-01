@@ -20,8 +20,6 @@ int main(void)
    
     Display::Init();
 
-    CPU::Keyboard::Init();
-
     uint time = TIME_MS;
 
     while (TIME_MS - time < 200)

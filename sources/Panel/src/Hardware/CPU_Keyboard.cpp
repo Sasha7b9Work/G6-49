@@ -1,10 +1,19 @@
+#pragma clang diagnostic ignored "-Wpadded"
+#include <stm32f4xx.h>
+#pragma clang diagnostic warning "-Wpadded"
 #include "defines.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define TIME_UPDATE 2   ///< Время между опросами клавиатуры
 static StructControl commands[10];
 static int pointer = 0;
+static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
+/// Таймер для опроса клавиатуры
+static TIM_HandleTypeDef handleTIM3;
+static void(*callbackKeyboard)() = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +190,47 @@ StructControl CPU::Keyboard::GetNextControl(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL)
+{
+    GPIO_InitTypeDef isGPIO;
+
+    for (int i = 0; i < numRL; i++)
+    {
+        isGPIO.Pin = rl[i];
+        isGPIO.Mode = GPIO_MODE_INPUT;
+        HAL_GPIO_Init(ports[portRL[i] - 'A'], &isGPIO);
+    }
+
+    for (int i = 0; i < numSL; i++)
+    {
+        isGPIO.Pin = sl[i];
+        isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
+        HAL_GPIO_Init(ports[portSL[i] - 'A'], &isGPIO);
+    }
+
+    // Инициализируем таймер, по прерываниям которого будем опрашивать клавиатуру
+    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
+
+    HAL_NVIC_EnableIRQ(TIM3_IRQn);
+
+    handleTIM3.Instance = TIM3;
+    handleTIM3.Init.Period = TIME_UPDATE * 10 - 1;
+    handleTIM3.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
+    handleTIM3.Init.ClockDivision = 0;
+    handleTIM3.Init.CounterMode = TIM_COUNTERMODE_UP;
+
+    if (HAL_TIM_Base_Init(&handleTIM3) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+
+    if (HAL_TIM_Base_Start_IT(&handleTIM3) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *ControlName(Control control)
 {
     static const char *names[] =
@@ -218,4 +268,49 @@ const char *ControlName(Control control)
     };
 
     return names[control];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::OnIRQHandlerTIM3()
+{
+    HAL_TIM_IRQHandler(&handleTIM3);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    if (htim == &handleTIM3 && callbackKeyboard)
+    {
+        callbackKeyboard();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::SetCallback(void(*func)())
+{
+    callbackKeyboard = func;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TIM3_::Start(uint timeStopMS)
+{
+    Stop();
+
+    if (timeStopMS == MAX_UINT)
+    {
+        return;
+    }
+
+    uint dT = timeStopMS - TIME_MS;
+
+    handleTIM3.Init.Period = (dT * 2) - 1;  // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
+
+    HAL_TIM_Base_Init(&handleTIM3);
+    HAL_TIM_Base_Start_IT(&handleTIM3);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TIM3_::Stop()
+{
+    HAL_TIM_Base_Stop_IT(&handleTIM3);
 }

@@ -1782,6 +1782,11 @@
               <FilePath>.\src\Hardware\CPU_Flash.cpp</FilePath>
             </File>
             <File>
+              <FileName>CPU_Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
+            </File>
+            <File>
               <FileName>CPU_It.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_It.cpp</FilePath>
@@ -1810,16 +1815,6 @@
               <FileName>Controls.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Controls.h</FilePath>
-            </File>
-            <File>
-              <FileName>Keyboard.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Keyboard.h</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_Keyboard.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
             </File>
           </Files>
         </Group>

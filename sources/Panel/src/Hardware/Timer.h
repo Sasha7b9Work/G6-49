@@ -11,6 +11,10 @@
  *  @{
  */
 
+#define TIME_TICKS Timer::TimeTicks()
+#define TIME_US    Timer::TimeUS()
+#define TIME_MS    Timer::TimeMS()
+
 typedef enum
 {
     kPressKey,                  ///< Нужно устанавливать, когда приходит нажатие клавиши.
@@ -65,7 +69,14 @@ public:
     static uint LogPointUS(char *name);
 
     static uint LogPointMS(char *name);
+    /// Запускает счётчик для измерения малых промежутков времени
+    static void StartMultiMeasurement();
+    /// \brief Количество тиков, прошедших с момента последнего вызова StartMultiMeasurement(). Не более (1 << 32)
+    static uint TimeTicks();
 
+    static uint TimeUS();
+
+    static uint TimeMS();
 };
 
 /** @}  @}
