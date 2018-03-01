@@ -946,16 +946,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\libs\HAL\stm32f4xx_hal_msp.cpp</FilePath>
             </File>
-            <File>
-              <FileName>stm32f4xx_it.cpp</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_it.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_it.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1075,6 +1065,26 @@
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/stm32</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\stm32.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_it.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
             </File>
           </Files>
         </Group>

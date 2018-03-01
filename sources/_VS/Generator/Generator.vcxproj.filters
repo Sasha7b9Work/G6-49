@@ -28,6 +28,9 @@
     <Filter Include="_VS">
       <UniqueIdentifier>{4813cb9e-504a-4ec9-b68c-726ee8a80022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hardware\stm32">
+      <UniqueIdentifier>{59929fa6-44e8-4b21-bc41-eca07291a380}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -96,9 +99,6 @@
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_it.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
       <Filter>_VS</Filter>
     </ClInclude>
@@ -152,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\windows.h">
       <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h">
+      <Filter>Hardware\stm32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,11 +221,14 @@
     <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_msp.cpp">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_it.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
       <Filter>libs\CMSIS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp">
+      <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp">
+      <Filter>Hardware\stm32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

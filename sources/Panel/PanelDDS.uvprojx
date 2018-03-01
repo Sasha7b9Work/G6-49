@@ -1822,6 +1822,11 @@
               <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
             </File>
             <File>
+              <FileName>stm32_it.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
+            </File>
+            <File>
               <FileName>stm429.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\stm32\429\stm429.cpp</FilePath>
@@ -1830,11 +1835,6 @@
               <FileName>stm429.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\stm32\429\stm429.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32_it.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
             </File>
           </Files>
         </Group>
