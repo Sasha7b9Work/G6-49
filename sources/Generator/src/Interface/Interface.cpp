@@ -128,7 +128,7 @@ void Interface::CommandEnable(void)
         b1 = b1;
     }
     
-    generator.EnableChannel(ch, enable);
+    Generator::EnableChannel(ch, enable);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ void Interface::CommandFormWave(void)
 {
     Channel ch = (Channel)buffer[1];
     WaveForm form = (WaveForm)buffer[2];
-    generator.SetFormWave(ch, form);
+    Generator::SetFormWave(ch, form);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -146,7 +146,7 @@ void Interface::CommandParameter(void)
     CommandWrite command = (CommandWrite)buffer[0];
     float value = 0.0f;
     memcpy(&value, &buffer[2], 4);
-    generator.SetParameter(ch, command, value);
+    Generator::SetParameter(ch, command, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -11,38 +11,35 @@
 class Generator
 {
 public:
-    void Init();
+    static void Init();
 
-    void EnableChannel(Channel ch, bool enable);
+    static void EnableChannel(Channel ch, bool enable);
 
-    void SetFormWave(Channel ch, WaveForm form);
+    static void SetFormWave(Channel ch, WaveForm form);
 
-    void SetParameter(Channel ch, CommandWrite command, float value);
+    static void SetParameter(Channel ch, CommandWrite command, float value);
 
-    void SetOffset(Channel ch, float offset);
+    static void SetOffset(Channel ch, float offset);
 
 private:
 
-    void SetFrequency(Channel ch, float frequency);
+    static void SetFrequency(Channel ch, float frequency);
 
-    void SetAmplitude(Channel ch, float amplitude);
+    static void SetAmplitude(Channel ch, float amplitude);
 
     //void SetOffset(Channel ch, float offset);
 
-    void SetPhase(Channel ch, float phase);
+    static void SetPhase(Channel ch, float phase);
 
-    void SetDutyRatio(Channel ch, float dutyRatio);
+    static void SetDutyRatio(Channel ch, float dutyRatio);
 
-    void SetDuration(Channel ch, float duration);
+    static void SetDuration(Channel ch, float duration);
 
-    void SetDelay(Channel ch, float duration);
+    static void SetDelay(Channel ch, float duration);
 
-    AD9952 ad9952;
+    static AD9952 ad9952;
 
-    AD5697 ad5697;
+    static AD5697 ad5697;
 
-    FPGA   fpga;
+    static FPGA   fpga;
 };
-
-
-extern Generator generator;

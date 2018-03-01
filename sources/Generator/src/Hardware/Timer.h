@@ -7,7 +7,5 @@ class Timer
 {
 public:
 
-    void PauseOnTime(uint timeMS);
+    static void PauseOnTime(uint timeMS);
 };
-
-extern Timer timer;

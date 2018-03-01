@@ -12,7 +12,7 @@ void Hardware::Init(void)
     CPU::Init();
     CPU::WritePin(Pin_P3_OutA, false);
     CPU::WritePin(Pin_P4_OutB, false);
-    timer.PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
-    generator.Init();
+    Timer::PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
+    Generator::Init();
     interface.Init();
 }

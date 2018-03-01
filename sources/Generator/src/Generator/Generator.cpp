@@ -6,8 +6,11 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Generator generator;
 static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту в правильное место - ПЛИС или AD9952
+
+AD9952 Generator::ad9952;
+AD5697 Generator::ad5697;
+FPGA   Generator::fpga;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +51,7 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(Channel ch, CommandWrite command, float value)
 {
-    typedef void(Generator::*pFuncChF)(Channel, float);
+    typedef void (*pFuncChF)(Channel, float);
 
     static const pFuncChF func[NUM_COMMAND_WRITE] =
     {
@@ -70,7 +73,7 @@ void Generator::SetParameter(Channel ch, CommandWrite command, float value)
 
     if (f)
     {
-        (this->*f)(ch, value);
+        (f)(ch, value);
     }
 }
 
