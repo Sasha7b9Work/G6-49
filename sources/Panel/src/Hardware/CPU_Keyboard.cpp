@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Keyboard.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
 
@@ -53,7 +52,7 @@ static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 static bool init = false;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Keyboard::Init(void)
+void CPU::Keyboard::Init(void)
 {
     for (int i = 0; i < 5; i++)
     {
@@ -73,7 +72,7 @@ void Keyboard::Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Keyboard::Update(void)
+void CPU::Keyboard::Update(void)
 {
     if(!init)
     {
@@ -154,13 +153,13 @@ static void FillCommand(Control control, TypePress typePress)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Keyboard::BufferIsEmpty(void)
+bool CPU::Keyboard::BufferIsEmpty(void)
 {
     return pointer == 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-StructControl Keyboard::GetNextControl(void)
+StructControl CPU::Keyboard::GetNextControl(void)
 {
     StructControl retValue;
 

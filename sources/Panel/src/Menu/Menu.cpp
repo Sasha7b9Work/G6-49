@@ -2,7 +2,6 @@
 #include "MenuItemsLogic.h"
 #include "Display/InputWindowStruct.h"
 #include "Generator/Generator.h"
-#include "Hardware/Keyboard.h"
 #include "Pages/PageSignals.h"
 #include "Pages/PageSignals2.h"
 #include "Pages/PageService.h"
@@ -30,9 +29,9 @@ void Menu::Init(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Update(void)
 {
-    while (!Keyboard::BufferIsEmpty())
+    while (!CPU::Keyboard::BufferIsEmpty())
     {
-        StructControl control = Keyboard::GetNextControl();
+        StructControl control = CPU::Keyboard::GetNextControl();
         if (ADDITION_PAGE == &pInput)
         {
             InputWindow::ProcessContorl(control);

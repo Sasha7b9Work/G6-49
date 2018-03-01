@@ -4,7 +4,6 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Generator/Generator.h"
-#include "Hardware/Keyboard.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 
@@ -21,7 +20,7 @@ int main(void)
    
     Display::Init();
 
-    Keyboard::Init();
+    CPU::Keyboard::Init();
 
     uint time = TIME_MS;
 

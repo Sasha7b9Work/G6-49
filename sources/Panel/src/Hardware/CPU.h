@@ -1,4 +1,5 @@
 #pragma once
+#include "Hardware/Controls.h"
 #include "Hardware/stm32/429/stm429.h"
 
 
@@ -21,10 +22,20 @@ public:
     class Keyboard
     {
     public:
+
+        static void Init();
         /// Установка каллбэка для клавиатуры
         static void SetCallback(void(*func)());
 
         static void InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL);
+        /// Возвращает true, если буфер пуст
+        static bool BufferIsEmpty();
+        /// Возвращает следующий орган управления, если таковой имеется
+        static StructControl GetNextControl();
+
+    private:
+
+        static void Update();
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------

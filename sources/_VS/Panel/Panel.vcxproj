@@ -250,6 +250,7 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Flash.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_It.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -379,6 +380,7 @@
     <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h" />
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h">

@@ -195,6 +195,9 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Flash.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
@@ -418,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\common\Log.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
