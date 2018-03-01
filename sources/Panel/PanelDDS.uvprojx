@@ -1777,9 +1777,14 @@
               <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
-              <FileName>CPU_FLASH.cpp</FileName>
+              <FileName>CPU_Flash.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
+              <FilePath>.\src\Hardware\CPU_Flash.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_It.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_It.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.cpp</FileName>

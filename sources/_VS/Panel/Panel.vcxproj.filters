@@ -195,6 +195,9 @@
     <ClCompile Include="..\..\libs\common\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_It.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
