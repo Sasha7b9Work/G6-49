@@ -1792,11 +1792,6 @@
               <FilePath>..\libs\common\Hardware\CPU_VCP.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Controls.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Controls.h</FilePath>
@@ -1812,9 +1807,14 @@
               <FilePath>..\libs\common\Hardware\CPU_VCP.h</FilePath>
             </File>
             <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer.h</FilePath>
+              <FilePath>..\libs\common\Hardware\Timer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1845,6 +1845,16 @@
               <FileName>stm429.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\stm32\429\stm429.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.h</FilePath>
             </File>
           </Files>
         </Group>

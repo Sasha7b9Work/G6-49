@@ -1,31 +1,18 @@
 #pragma once
 
-// warning: use of old-style cast
 #pragma clang diagnostic ignored "-Wold-style-cast"
-
-// warning: variadic macros are incompatible with C++98
 #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-
-// warning: illegal character encoding in string literal
 #pragma clang diagnostic ignored "-Winvalid-source-encoding"
-
-// warning: array subscript is of type 'char'
 #pragma clang diagnostic ignored "-Wchar-subscripts"
-
-// warning: format string is not a string literal
 #pragma clang diagnostic ignored "-Wformat-nonliteral"
-
-// warning: declartation requires a global constuctor
 #pragma clang diagnostic ignored "-Wglobal-constructors"
-
-// warning: cast from ... to ... increase required aligment from ... to ...
 #pragma clang diagnostic ignored "-Wcast-align"
-
-// warning: ISO C++11 does not allow conversion from string literal to 'char *'
 #pragma clang diagnostic ignored "-Wwritable-strings"
-
+#pragma clang diagnostic ignored "-Wpadded"
 
 #define DEBUG
+
+#include <stm32f4xx.h>
 
 
 typedef const char *const   pString;
