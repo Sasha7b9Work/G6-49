@@ -14,5 +14,5 @@ void Hardware::Init(void)
     CPU::WritePin(Pin_P4_OutB, false);
     Timer::PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
     Generator::Init();
-    interface.Init();
+    Interface::Init();
 }

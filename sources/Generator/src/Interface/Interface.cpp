@@ -8,10 +8,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Interface interface;
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static SPI_HandleTypeDef hSPI1 =                                   // Для связи с панелью
 {
     SPI1,
@@ -89,7 +85,7 @@ void Interface::ProcessingCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ProcessCommand()
 {
-    typedef void(Interface::*pFuncInterfaceVV)();
+    typedef void(*pFuncInterfaceVV)();
 
     static const pFuncInterfaceVV commands[NUM_COMMAND_WRITE] =
     {
@@ -110,7 +106,7 @@ void Interface::ProcessCommand()
     if (buffer[0] < NUM_COMMAND_WRITE)
     {       
         pFuncInterfaceVV f = commands[buffer[0]];
-        (this->*f)();
+        f();
     }
 }
 

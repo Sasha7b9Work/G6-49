@@ -18,7 +18,7 @@ int main(void)
   
     while (1)
     {
-        interface.ProcessingCommand();
+        Interface::ProcessingCommand();
 
 /*        
         if(HAL_GetTick() - prevTime > 100)

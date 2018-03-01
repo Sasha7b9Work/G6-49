@@ -6,26 +6,23 @@ class Interface
 {
 public:
 
-    void Init();
+    static void Init();
 
-    void ProcessingCommand();
+    static void ProcessingCommand();
 
 private:
 
-    void CommandEmpty();
+    static void CommandEmpty();
 
-    void ProcessCommand();
+    static void ProcessCommand();
 
-    void CommandEnable();
+    static void CommandEnable();
 
-    void CommandFormWave();
+    static void CommandFormWave();
 
-    void CommandParameter();
+    static void CommandParameter();
 
-    void CommandReset();
+    static void CommandReset();
 
-    void CommandModeDebug();
+    static void CommandModeDebug();
 };
-
-
-extern Interface interface;
