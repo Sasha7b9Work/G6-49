@@ -4,9 +4,6 @@
     <Filter Include="Display">
       <UniqueIdentifier>{4201a8fb-8297-4f49-9322-40b8d3de1d91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Keyboard">
-      <UniqueIdentifier>{5fe703b1-d458-4c6f-a0e6-a77cd316817a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{e416a234-63fa-4376-8ba5-f17d155acb0e}</UniqueIdentifier>
     </Filter>
@@ -132,9 +129,6 @@
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Keyboard\Keyboard.cpp">
-      <Filter>Keyboard</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
@@ -142,9 +136,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp">
@@ -200,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp">
       <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Flash.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,12 +298,6 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
       <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Keyboard\Controls.h">
-      <Filter>Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Keyboard\Keyboard.h">
-      <Filter>Keyboard</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\defines.h">
       <Filter>src</Filter>

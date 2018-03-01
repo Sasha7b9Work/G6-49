@@ -1806,6 +1806,21 @@
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\VCP.h</FilePath>
             </File>
+            <File>
+              <FileName>Controls.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Controls.h</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Keyboard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Keyboard.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1835,26 +1850,6 @@
               <FileName>stm429.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\stm32\429\stm429.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Keyboard</GroupName>
-          <Files>
-            <File>
-              <FileName>Keyboard.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\Keyboard.h</FilePath>
-            </File>
-            <File>
-              <FileName>Controls.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\Controls.h</FilePath>
-            </File>
-            <File>
-              <FileName>Keyboard.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Keyboard\Keyboard.cpp</FilePath>
             </File>
           </Files>
         </Group>

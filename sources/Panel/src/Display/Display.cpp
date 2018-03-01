@@ -5,7 +5,7 @@
 #include "Hardware/CPU.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
-#include "Keyboard/Keyboard.h"
+#include "Hardware/Keyboard.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"

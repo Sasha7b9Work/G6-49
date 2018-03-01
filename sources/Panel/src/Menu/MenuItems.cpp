@@ -1,6 +1,6 @@
 #include "MenuItems.h"
 #include "Menu.h"
-#include "Keyboard/Controls.h"
+#include "Hardware/Controls.h"
 #include "Settings/Settings.h"
 
 

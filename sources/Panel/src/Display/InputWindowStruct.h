@@ -1,6 +1,6 @@
 #pragma once
 #include "defines.h"
-#include "Keyboard/Controls.h"
+#include "Hardware/Controls.h"
 #include "Menu/MenuItems.h"
 #include "Settings/SettingsTypes.h"
 

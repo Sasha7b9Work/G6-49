@@ -2,7 +2,7 @@
 #include "MenuItemsLogic.h"
 #include "Display/InputWindowStruct.h"
 #include "Generator/Generator.h"
-#include "Keyboard/Keyboard.h"
+#include "Hardware/Keyboard.h"
 #include "Pages/PageSignals.h"
 #include "Pages/PageSignals2.h"
 #include "Pages/PageService.h"

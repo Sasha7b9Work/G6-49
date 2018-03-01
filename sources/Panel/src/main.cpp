@@ -4,7 +4,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Generator/Generator.h"
-#include "Keyboard/Keyboard.h"
+#include "Hardware/Keyboard.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 

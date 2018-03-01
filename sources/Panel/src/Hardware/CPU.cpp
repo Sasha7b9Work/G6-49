@@ -2,7 +2,7 @@
 #include <stm32f4xx.h>
 #pragma clang diagnostic warning "-Wpadded"
 #include "CPU.h"
-#include "Keyboard\Keyboard.h"
+#include "Hardware/Keyboard.h"
 #include "Hardware/Timer.h"
 
 
