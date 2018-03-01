@@ -162,6 +162,7 @@
     <ClCompile Include="..\..\libs\common\Display\PainterTextSTM429.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\429\stm429.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp" />
+    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp" />
     <ClCompile Include="..\..\libs\common\Log.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\Math.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp" />
