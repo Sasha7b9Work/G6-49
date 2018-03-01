@@ -156,6 +156,12 @@
     <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h">
       <Filter>Hardware\stm32</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Generator\src\Hardware\CPU.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\stm32\407\stm407.h">
+      <Filter>Hardware\stm32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -218,9 +224,6 @@
     <ClCompile Include="..\..\Common\Command.cpp">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_msp.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
       <Filter>libs\CMSIS</Filter>
     </ClCompile>
@@ -228,6 +231,12 @@
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp">
+      <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\stm32\407\stm407.cpp">
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
   </ItemGroup>

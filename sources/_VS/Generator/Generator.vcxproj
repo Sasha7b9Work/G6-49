@@ -161,10 +161,12 @@
     <ClInclude Include="..\..\Generator\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Generator\src\Generator\GeneratorSettingsTypes.h" />
     <ClInclude Include="..\..\Generator\src\Generator\GeneratroSettings.h" />
+    <ClInclude Include="..\..\Generator\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\Hardware.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Generator\src\Interface\Interface.h" />
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h" />
+    <ClInclude Include="..\..\libs\common\Hardware\stm32\407\stm407.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h" />
@@ -220,14 +222,15 @@
     <ClCompile Include="..\..\Generator\src\Generator\FPGA.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Generator\src\Generator\GeneratorSettings.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\Hardware.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp" />
     <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_msp.cpp" />
     <ClCompile Include="..\..\Generator\src\main.cpp" />
+    <ClCompile Include="..\..\libs\common\Hardware\stm32\407\stm407.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">

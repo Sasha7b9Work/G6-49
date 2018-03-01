@@ -13,7 +13,7 @@ class CPU : public STM429
 {
 public:
 
-    static void Config();
+    static void Init();
 
     static void OnIRQHandlerTIM3();
 

@@ -1,6 +1,4 @@
 #pragma once
-#include "Generator/GeneratorSettingsTypes.h"
-#include <stm32f4xx_hal.h>
 
 // warning: use of old-style cast
 #pragma clang diagnostic ignored "-Wold-style-cast"
@@ -8,10 +6,8 @@
 // warning: declaration requires a global constructor
 #pragma clang diagnostic ignored "-Wglobal-constructors"
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void _Error_Handler(const char *, int);
-#define ERROR_HANDLER _Error_Handler(__FILE__, __LINE__)
-
+#include "Generator/GeneratorSettingsTypes.h"
+#include <stm32f4xx.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef unsigned int   uint;

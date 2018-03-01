@@ -337,7 +337,7 @@
               <MiscControls>-Wno-c++98-compat</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Include</IncludePath>
+              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\common;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -941,11 +941,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
             </File>
-            <File>
-              <FileName>stm32f4xx_hal_msp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_hal_msp.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1066,6 +1061,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
+            <File>
+              <FileName>CPU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\CPU.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1085,6 +1090,16 @@
               <FileName>stm32_it.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm407.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\407\stm407.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm407.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\407\stm407.h</FilePath>
             </File>
           </Files>
         </Group>

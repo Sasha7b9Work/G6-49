@@ -2,6 +2,7 @@
 #include "Generator/Generator.h"
 #include "Interface/Interface.h"
 #include "Hardware/Timer.h"
+#include "Hardware/CPU.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -12,8 +13,7 @@ Hardware hardware;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Hardware::Init(void)
 {
-    SystemClock_Config();
-    HAL_Init();
+    CPU::Init();
     InitPins();
     GPIOS_Init();
     WritePin(Pin_P3_OutA, false);
@@ -67,64 +67,6 @@ void Hardware::SetBusy(void)
 void Hardware::SetReady(void)
 {
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Hardware::SystemClock_Config(void)
-{
-    RCC_OscInitTypeDef RCC_OscInitStruct;
-    RCC_ClkInitTypeDef RCC_ClkInitStruct;
-
-    __HAL_RCC_PWR_CLK_ENABLE();
-
-    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-    RCC_OscInitStruct.PLL.PLLM = 25;
-    RCC_OscInitStruct.PLL.PLLN = 336;
-    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-    RCC_OscInitStruct.PLL.PLLQ = 7;
-    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-    {
-        ERROR_HANDLER;
-    }
-
-    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-        |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-    RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-
-    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-    {
-        ERROR_HANDLER;
-    }
-
-    /**Configure the Systick interrupt time 
-    */
-    HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
-
-    /**Configure the Systick 
-    */
-    HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
-
-    /* SysTick_IRQn interrupt configuration */
-    HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
-}
-
-#ifdef MSVC
-#define __attribute(x)
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-__attribute((noreturn)) void _Error_Handler(const char *, int)
-{
-    while (1)
-    {
-    }
 }
 
 #ifdef USE_FULL_ASSERT

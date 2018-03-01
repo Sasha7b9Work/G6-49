@@ -1,6 +1,7 @@
 #include "FPGA.h"
 #include "defines.h"
 #include "Common.h"
+#include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include <string.h>
 
@@ -100,7 +101,7 @@ void FPGA::Init(void)
 
     if (HAL_NOR_Init(&hNOR, &timing, NULL) != HAL_OK)
     {
-        ERROR_HANDLER;
+        ERROR_HANDLER();
     }
 
     // Настраиваем выходы для записи в регистры ПЛИС
