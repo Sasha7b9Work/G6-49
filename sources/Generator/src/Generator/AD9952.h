@@ -7,11 +7,11 @@ class AD9952
 {
 public:
 
-    void Init();
+    static void Init();
 
-    void SetFrequency(Channel ch, float frequency);
+    static void SetFrequency(Channel ch, float frequency);
 
-    void SetAmplitude(Channel ch, float amplitude);
+    static void SetAmplitude(Channel ch, float amplitude);
 
 private:
 };

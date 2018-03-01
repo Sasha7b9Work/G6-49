@@ -23,12 +23,12 @@
 static float dur[2] = {0.0f, 0.0f};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::FPGA() : modeWork(ModeNone)
-{
+FPGA::ModeWorkFPGA FPGA::modeWork = ModeNone;
+uint16             FPGA::dataA[FPGA_NUM_POINTS];
+uint16             FPGA::dataB[FPGA_NUM_POINTS];
 
-}
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FPGA::Init(void)
 {
     GPIO_InitTypeDef isGPIO = 
@@ -111,7 +111,7 @@ void FPGA::Init(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetWaveForm(WaveForm form)
 {
-    typedef void(FPGA::*pFuncFpgaVV)();
+    typedef void(*pFuncFpgaVV)();
     
     static const pFuncFpgaVV func[] =
     {
@@ -123,7 +123,7 @@ void FPGA::SetWaveForm(WaveForm form)
     if (form < NumForms)
     {
         pFuncFpgaVV f = func[form];
-        (this->*f)();
+        f();
     }
 }
 

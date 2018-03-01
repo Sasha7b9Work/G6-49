@@ -8,19 +8,15 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту в правильное место - ПЛИС или AD9952
 
-AD9952 Generator::ad9952;
-AD5697 Generator::ad5697;
-FPGA   Generator::fpga;
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::Init()
 {
     EnableChannel(A, false);
     EnableChannel(B, false);
-    ad9952.Init();
-    ad5697.Init();
-    fpga.Init();
+    AD9952::Init();
+    AD5697::Init();
+    FPGA::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,7 +40,7 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 
     if (!waveIsSine)
     {
-        fpga.SetWaveForm(form);
+        FPGA::SetWaveForm(form);
     }
 }
 
@@ -82,11 +78,11 @@ void Generator::SetFrequency(Channel ch, float frequency)
 {
     if (waveIsSine)
     {
-        ad9952.SetFrequency(ch, frequency);
+        AD9952::SetFrequency(ch, frequency);
     }
     else
     {
-        fpga.SetFrequency(ch, frequency);
+        FPGA::SetFrequency(ch, frequency);
     }
 }
 
@@ -95,18 +91,18 @@ void Generator::SetAmplitude(Channel ch, float amplitude)
 {
     if (waveIsSine)
     {
-        ad9952.SetAmplitude(ch, amplitude);
+        AD9952::SetAmplitude(ch, amplitude);
     }
     else
     {
-        ad5697.SetAmplitude(ch, amplitude);
+        AD5697::SetAmplitude(ch, amplitude);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetOffset(Channel ch, float offset)
 {
-    ad5697.SetOffset(ch, offset);
+    AD5697::SetOffset(ch, offset);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -124,11 +120,11 @@ void Generator::SetDutyRatio(Channel, float)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDuration(Channel ch, float duration)
 {
-    fpga.SetDuration(ch, duration);
+    FPGA::SetDuration(ch, duration);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDelay(Channel, float delay)
 {
-    fpga.SetDelay(delay);
+    FPGA::SetDelay(delay);
 }

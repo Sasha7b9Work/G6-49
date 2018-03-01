@@ -36,10 +36,4 @@ private:
     static void SetDuration(Channel ch, float duration);
 
     static void SetDelay(Channel ch, float duration);
-
-    static AD9952 ad9952;
-
-    static AD5697 ad5697;
-
-    static FPGA   fpga;
 };

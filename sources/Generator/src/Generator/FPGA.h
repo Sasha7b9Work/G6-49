@@ -12,45 +12,43 @@
 class FPGA
 {
 public:
-    FPGA();
+    static void Init();
 
-    void Init();
+    static void SetWaveForm(WaveForm form);
 
-    void SetWaveForm(WaveForm form);
+    static void SetFrequency(Channel ch, float frequency);
 
-    void SetFrequency(Channel ch, float frequency);
+    static void SetDuration(Channel ch, float duration);
 
-    void SetDuration(Channel ch, float duration);
-
-    void SetDelay(float delay);
+    static void SetDelay(float delay);
 
 private:
-    typedef enum
+    enum ModeWorkFPGA
     {
         ModeNone,
         ModeDDS,
         ModeImpulse,    ///< Режим, в котором импульcы могут иметь разную частоту
         ModeImpulse2    ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
-    } ModeWorkFPGA;
+    };
 
-    void GenerateSine();
+    static void GenerateSine();
 
-    void GenerateSaw();
+    static void GenerateSaw();
     /// Установить импульсный режим работы
-    void SetModeImpulse();
+    static void SetModeImpulse();
     /// Заслать рассчитанные точки в плис
-    void SendData();
+    static void SendData();
     /// Записать значение в регистр
-    void WriteRegister(uint8 reg, uint value);
+    static void WriteRegister(uint8 reg, uint value);
     /// Установить на A0_RG...A3_RG адрес, соответсвующй регистру
-    void WriteAddress(uint8 reg);
+    static void WriteAddress(uint8 reg);
 
-    void WriteControlRegister();
+    static void WriteControlRegister();
 
-    uint8 RegisterForDuration(Channel ch);
+    static uint8 RegisterForDuration(Channel ch);
 
-    ModeWorkFPGA modeWork;
+    static ModeWorkFPGA modeWork;
 
-    uint16 dataA[FPGA_NUM_POINTS];   ///< Точки сигнала для засылки в ПЛИС
-    uint16 dataB[FPGA_NUM_POINTS];
+    static uint16 dataA[FPGA_NUM_POINTS];   ///< Точки сигнала для засылки в ПЛИС
+    static uint16 dataB[FPGA_NUM_POINTS];
 };
