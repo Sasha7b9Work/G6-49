@@ -40,7 +40,7 @@ static const Button bSaveSettings =
 
 static void OnPress_SaveSettings(void)
 {
-    Settings_Save();
+    Settings::Save();
 }
 
 // Œ“À¿ƒ ¿ - —¡–Œ— -----------------------------------------------------------------------------------------------------------------------------------
@@ -55,9 +55,8 @@ static const Button bReset =
 static void OnPress_Reset(void)
 {
     Generator::Reset();
-    uint time = TIME_MS;
-    while (TIME_MS - time < 100) {};
-    Settings_Load();
+    Timer::PauseOnTime(100);
+    Settings::Load();
 }
 
 const Page pDebug =

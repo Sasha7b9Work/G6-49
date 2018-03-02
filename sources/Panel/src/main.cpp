@@ -17,23 +17,18 @@
 int main(void)
 {
     CPU::Init();
+
+    Timer::Init();
    
     Display::Init();
 
-    uint time = TIME_MS;
-
-    while (TIME_MS - time < 200)
-    {
-    };    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо
-                                                // быстрее панели
+    Timer::PauseOnTime(200);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
 
     Generator::Reset();
 
-    time = TIME_MS;
+    Timer::PauseOnTime(200);
 
-    while (TIME_MS - time < 200) { };
-
-    Settings_Load();
+    Settings::Load();
 
     Menu::Init();
 

@@ -2,12 +2,9 @@
 #include <stm32f4xx.h>
 #pragma clang diagnostic warning "-Wpadded"
 #include "CPU.h"
-#include "Hardware/Timer.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static TIM_HandleTypeDef handleTIM2;
-
 /// Для дисплея
 static LTDC_HandleTypeDef handleLTDC;
 /// Для связи с основным процессором
@@ -39,15 +36,13 @@ static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 void CPU::Init()
 {
     STM429::Init();
-    
-    EnablePeriphery();
-    
-    InitHardware();
-}
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::EnablePeriphery()
-{
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOE_CLK_ENABLE();
+    
     __HAL_RCC_SPI4_CLK_ENABLE();
 
     __HAL_RCC_TIM2_CLK_ENABLE();    // Для тиков
@@ -57,31 +52,18 @@ void CPU::EnablePeriphery()
     __HAL_RCC_LTDC_CLK_ENABLE();
     __HAL_RCC_DMA2D_CLK_ENABLE();
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-}
+   
+    LTDC_::Init();
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::InitHardware()
-{
-    InitLTDC();
+    FSMC::Init();
 
-    InitFSMC();
-
-    InitTIM2();
-
-    InitSPI4();
-    
-    Timer::Init();
+    SPI4_::Init();
 
     Keyboard::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::InitLTDC()
+void CPU::LTDC_::Init()
 {
     GPIO_InitTypeDef isGPIO =
     {
@@ -188,7 +170,7 @@ void CPU::LTDC_::SetBuffers(uint front, uint back)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::InitFSMC(void)
+void CPU::FSMC::Init(void)
 {
     /// \todo временно изменил - возможно, на флешку не пишет из-за неправильных таймингов
     static const FMC_NORSRAM_TimingTypeDef sramTiming =
@@ -233,19 +215,7 @@ void CPU::InitFSMC(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::InitTIM2()
-{
-    handleTIM2.Instance = TIM2;
-    handleTIM2.Init.Prescaler = 0;
-    handleTIM2.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handleTIM2.Init.Period = (uint)-1;
-    handleTIM2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    HAL_TIM_Base_Init(&handleTIM2);
-    HAL_TIM_Base_Start(&handleTIM2);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::InitSPI4()
+void CPU::SPI4_::Init()
 {
     GPIO_InitTypeDef isGPIO =
     {   //  CLK         MI           MO

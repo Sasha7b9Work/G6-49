@@ -49,6 +49,12 @@ public:
     //------------------------------------------------------------------------------------------------------------------------------------------------
     class LTDC_
     {
+    friend class CPU;
+
+    private:
+
+        static void Init();
+
     public:
 
         static void SetColors(uint clut[], uint numColors);
@@ -59,8 +65,12 @@ public:
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
+    // SPI для связи с основным процессором
     class SPI4_
     {
+    friend class CPU;
+    private:
+        static void Init();
     public:
         /// Переслать массив данных
         static void Transmit(uint8 *buffer, uint16 size, uint timeOut);
@@ -87,19 +97,15 @@ public:
         static void LoadSettings();
     };
 
-private:
-    /// Инициализация SPI для связи с основным процессором
-    static void InitSPI4();
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    // Шина для связи с ПЛИС
+    class FSMC
+    {
+    friend class CPU;
 
-    static void InitTIM2();
-
-    static void InitHardware();
-    /// Инициализация дисплея
-    static void InitLTDC();
-    /// Инициализация шины для связи с ПЛИС
-    static void InitFSMC();
-
-    static void EnablePeriphery();
+    private:
+        static void Init();
+    };
 };
 
 

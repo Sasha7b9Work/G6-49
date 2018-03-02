@@ -39,8 +39,9 @@ extern Page pInput;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
 
-typedef struct
+class Settings
 {
+public:
     uint16              size;                           ///< Размер структуры Settings
     uint16              disp_Colors[16];                ///< Цвета
     Channel             sig_channel;                    ///< Текущий выбранный канал
@@ -56,12 +57,13 @@ typedef struct
     bool                serv_bacgroundBlack;            ///< Если true, то цвет фона - чёрный
     bool                sig_tuneFull;                   ///< Если true, то засылка параметра происходит непрерывно во время настройки
     bool                dbg_debugModeEnabled;           ///< Если true, то включён отладочный режим - непрерывные засылки в альтеру
-} Settings;
+
+    static void Save();
+    static void Load();
+};
 
 #pragma pack(pop)
 
 extern Settings set;
 
-void Settings_Save();
-void Settings_Load();
 void TuneGenerator(Channel ch);
