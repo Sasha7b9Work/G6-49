@@ -313,12 +313,17 @@ void CPU::Keyboard::TIM4_::Stop()
 extern "C" {
 #endif
 
-    void TIM4_IRQHandler();
-
     //------------------------------------------------------------------------------------------------------------------------------------------------
     void TIM4_IRQHandler()
     {
-        HAL_TIM_IRQHandler(&handleTIM4);
+        if ((TIM4->SR & TIM_SR_UIF) == TIM_SR_UIF)
+        {
+            if ((TIM4->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+            {
+                TIM4->SR = ~TIM_DIER_UIE;
+                CPU::Keyboard::TIM4_::ElapsedCallback(&handleTIM4);
+            }
+        }
     }
 
 #ifdef __cplusplus
