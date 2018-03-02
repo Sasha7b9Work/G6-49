@@ -1112,11 +1112,6 @@
               <FilePath>..\libs\common\Hardware\stm32\stm32.cpp</FilePath>
             </File>
             <File>
-              <FileName>stm32.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
-            </File>
-            <File>
               <FileName>stm32_it.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
@@ -1127,14 +1122,19 @@
               <FilePath>..\libs\common\Hardware\stm32\407\stm407.cpp</FilePath>
             </File>
             <File>
-              <FileName>stm407.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\407\stm407.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer4XX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm407.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\407\stm407.h</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.h</FileName>
