@@ -164,10 +164,10 @@
     <ClInclude Include="..\..\Generator\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Generator\src\Interface\Interface.h" />
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h" />
-    <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\407\stm407.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h" />
     <ClInclude Include="..\..\libs\common\Hardware\Timer.h" />
+    <ClInclude Include="..\..\libs\common\Hardware\VCP.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h" />
     <ClInclude Include="..\..\libs\common\_VS\core_cm4.h" />
@@ -228,11 +228,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\main.cpp" />
-    <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\407\stm407.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp" />
+    <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

@@ -91,7 +91,7 @@
       </PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;STM32F429xx;MSVC;USE_HAL_DRIVER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>STM32F429xx;MSVC;USE_HAL_DRIVER</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4068;4365;4464;4514;4774;4820</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
@@ -160,11 +160,11 @@
     <ClCompile Include="..\..\libs\common\Display\PainterSTM429.cpp" />
     <ClCompile Include="..\..\libs\common\Display\PainterText.cpp" />
     <ClCompile Include="..\..\libs\common\Display\PainterTextSTM429.cpp" />
-    <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\429\stm429.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp" />
+    <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\libs\common\Log.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\Math.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp" />
@@ -268,10 +268,10 @@
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\libs\common\Display\Colors.h" />
     <ClInclude Include="..\..\libs\common\Display\Painter.h" />
-    <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\429\stm429.h" />
     <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h" />
     <ClInclude Include="..\..\libs\common\Hardware\Timer.h" />
+    <ClInclude Include="..\..\libs\common\Hardware\VCP.h" />
     <ClInclude Include="..\..\libs\common\Log.h" />
     <ClInclude Include="..\..\libs\common\Utils\Math.h" />
     <ClInclude Include="..\..\libs\common\Utils\StringUtils.h" />

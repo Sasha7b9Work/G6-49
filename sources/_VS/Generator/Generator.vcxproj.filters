@@ -156,7 +156,7 @@
     <ClInclude Include="..\..\libs\common\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h">
+    <ClInclude Include="..\..\libs\common\Hardware\VCP.h">
       <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
@@ -230,10 +230,10 @@
     <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp">
+    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
+    <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>

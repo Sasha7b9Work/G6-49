@@ -189,9 +189,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\CPU_VCP.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -199,6 +196,9 @@
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
@@ -425,14 +425,14 @@
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\CPU_VCP.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libs\common\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f429xx.h">
       <Filter>libs\CMSIS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\VCP.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
