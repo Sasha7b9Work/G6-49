@@ -1811,6 +1811,11 @@
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\VCP.h</FilePath>
             </File>
+            <File>
+              <FileName>CPU_LTDC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_LTDC.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -252,6 +252,7 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_LTDC.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

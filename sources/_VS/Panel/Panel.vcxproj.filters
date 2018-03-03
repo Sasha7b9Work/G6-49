@@ -198,6 +198,9 @@
     <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm429.cpp">
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_LTDC.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
