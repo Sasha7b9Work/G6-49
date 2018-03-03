@@ -106,6 +106,10 @@ public:
     private:
         static void Init();
     };
+
+private:
+
+        static void SystemClockConfig();
 };
 
 
