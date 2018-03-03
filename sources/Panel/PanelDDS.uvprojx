@@ -1777,11 +1777,6 @@
               <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
             </File>
             <File>
-              <FileName>CPU_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CPU_Keyboard.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
@@ -1837,16 +1832,6 @@
               <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
             </File>
             <File>
-              <FileName>stm429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\429\stm429.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm429.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\429\stm429.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer4XX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
@@ -1855,6 +1840,16 @@
               <FileName>Timer4XX.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\stm429.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm429.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\stm429.h</FilePath>
             </File>
           </Files>
         </Group>

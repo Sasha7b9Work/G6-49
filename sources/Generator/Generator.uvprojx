@@ -1087,11 +1087,6 @@
               <FilePath>..\libs\common\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>CPU_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>VCP.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\VCP.cpp</FilePath>
@@ -1117,11 +1112,6 @@
               <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
             </File>
             <File>
-              <FileName>stm407.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\407\stm407.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer4XX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
@@ -1132,14 +1122,19 @@
               <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
             </File>
             <File>
-              <FileName>stm407.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\407\stm407.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer4XX.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm407.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\stm407.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm407.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Hardware\stm32\4XX\stm407.h</FilePath>
             </File>
           </Files>
         </Group>

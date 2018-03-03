@@ -150,14 +150,14 @@
     <ClInclude Include="..\..\Generator\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\407\stm407.h">
-      <Filter>Hardware\stm32</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libs\common\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\Hardware\VCP.h">
       <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\stm32\4XX\stm407.h">
+      <Filter>Hardware\stm32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,17 +224,14 @@
     <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\407\stm407.cpp">
-      <Filter>Hardware\stm32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm407.cpp">
+      <Filter>Hardware\stm32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

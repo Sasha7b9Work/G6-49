@@ -162,9 +162,6 @@
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp">
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\429\stm429.cpp">
-      <Filter>Hardware\stm32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -192,14 +189,14 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm429.cpp">
+      <Filter>Hardware\stm32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,9 +323,6 @@
     <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h">
       <Filter>Hardware\stm32</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\429\stm429.h">
-      <Filter>Hardware\stm32</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
       <Filter>_VS</Filter>
     </ClInclude>
@@ -433,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\common\Hardware\VCP.h">
       <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Hardware\stm32\4XX\stm429.h">
+      <Filter>Hardware\stm32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
