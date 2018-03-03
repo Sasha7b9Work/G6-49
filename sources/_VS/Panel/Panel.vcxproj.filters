@@ -198,7 +198,7 @@
     <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm429.cpp">
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_LTDC.cpp">
+    <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
@@ -433,6 +433,9 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\common\Hardware\stm32\4XX\stm429.h">
       <Filter>Hardware\stm32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

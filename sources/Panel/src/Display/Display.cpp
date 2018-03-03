@@ -3,6 +3,7 @@
 #include "Display/Painter.h"
 #include "Display/Font/Font.h"
 #include "Hardware/CPU.h"
+#include "Hardware/LTDC.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "Menu/Menu.h"
@@ -24,7 +25,9 @@ uint8              Display::backBuffer[320 * 240];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Init()
 {
-    CPU::LTDC_::SetBuffers((uint)frontBuffer, (uint)backBuffer);
+    LTDC_::Init();
+
+    LTDC_::SetBuffers((uint)frontBuffer, (uint)backBuffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------    
@@ -40,7 +43,7 @@ void Display::SetColorBackground(void)
             0x000000ff
         };
 
-        CPU::LTDC_::SetColors(clut, 10);
+        LTDC_::SetColors(clut, 10);
     }
     else
     {
@@ -52,7 +55,7 @@ void Display::SetColorBackground(void)
             0x000000ff
         };
 
-        CPU::LTDC_::SetColors(clut, 10);
+        LTDC_::SetColors(clut, 10);
     }
 }
 

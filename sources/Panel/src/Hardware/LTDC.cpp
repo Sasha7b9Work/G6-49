@@ -1,3 +1,5 @@
+#include "defines.h"
+#include "LTDC.h"
 #include "CPU.h"
 
 
@@ -8,7 +10,7 @@ static uint backBuffer = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CPU::LTDC_::Init()
+void LTDC_::Init()
 {
     GPIO_InitTypeDef isGPIO =
     {
@@ -86,7 +88,7 @@ void CPU::LTDC_::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::LTDC_::SetBuffers(uint front, uint back)
+void LTDC_::SetBuffers(uint front, uint back)
 {
     frontBuffer = front;
     backBuffer = back;
@@ -98,8 +100,8 @@ void CPU::LTDC_::SetBuffers(uint front, uint back)
     pLayerCfg.WindowY0 = 0;
     pLayerCfg.WindowY1 = 240;
     pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
-    pLayerCfg.Alpha = 127;
-    pLayerCfg.Alpha0 = 127;
+    pLayerCfg.Alpha = 255;
+    pLayerCfg.Alpha0 = 255;
     pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
     pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
     pLayerCfg.FBStartAdress = frontBuffer;
@@ -115,13 +117,13 @@ void CPU::LTDC_::SetBuffers(uint front, uint back)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::LTDC_::SetColors(uint clut[], uint numColors)
+void LTDC_::SetColors(uint clut[], uint numColors)
 {
     HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::LTDC_::ToggleBuffers()
+void LTDC_::ToggleBuffers()
 {
     DMA2D_HandleTypeDef hDMA2D;
 

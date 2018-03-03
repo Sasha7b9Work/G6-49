@@ -2,6 +2,7 @@
 #include <stm32f4xx.h>
 #pragma clang diagnostic warning "-Wpadded"
 #include "CPU.h"
+#include "LTDC.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,9 +50,6 @@ void CPU::Init()
     __HAL_RCC_DMA2D_CLK_ENABLE();
     __HAL_RCC_LTDC_CLK_ENABLE();
     __HAL_RCC_SPI4_CLK_ENABLE();
-
-   
-    LTDC_::Init();
 
     FSMC::Init();
 
