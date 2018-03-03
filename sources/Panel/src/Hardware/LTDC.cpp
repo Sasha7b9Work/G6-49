@@ -10,7 +10,7 @@ static uint backBuffer = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void LTDC_::Init()
+void LTDC_::Init(uint front, uint back)
 {
     GPIO_InitTypeDef isGPIO =
     {
@@ -85,6 +85,8 @@ void LTDC_::Init()
     HAL_GPIO_Init(GPIOB, &initStr);
 
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
+
+    SetBuffers(front, back);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -7,6 +7,7 @@ typedef enum
 {
     A,
     B,
+    A_B,
     NumChannels
 } Channel;
 

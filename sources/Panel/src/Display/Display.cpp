@@ -25,20 +25,20 @@ uint8              Display::backBuffer[320 * 240];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Init()
 {
-    LTDC_::Init();
+    LTDC_::Init((uint)frontBuffer, (uint)backBuffer);
 
-    LTDC_::SetBuffers((uint)frontBuffer, (uint)backBuffer);
+    Color::InitGlobalColors();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------    
-void Display::SetColorBackground(void)
+void Display::SetColorBackground()
 {
     if (set.serv_bacgroundBlack)
     {
-        uint clut[10] =
+        static uint clut[10] =
         {
-            0x00000000,
             0x00ffffff,
+            0x00000000,
             0x00a0a0a0,
             0x000000ff
         };
@@ -47,10 +47,10 @@ void Display::SetColorBackground(void)
     }
     else
     {
-        uint clut[10] =
+        static uint clut[10] =
         {
-            0x00ffffff,
             0x00000000,
+            0x00ffffff,
             0x00a0a0a0,
             0x000000ff
         };
@@ -68,9 +68,9 @@ uint8 *Display::GetBuffer(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update(void)
 {
-    Painter::BeginScene(Color::BACK);
+    Painter::BeginScene(Color::BLACK);
 
-    Painter::SetColor(Color::FILL);
+    Painter::SetColor(Color::WHITE);
 
     DrawSignal(A);
     DrawSignal(B);
@@ -82,7 +82,7 @@ void Display::Update(void)
         InputWindow::Draw();
     }
 
-    Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
+    Painter::DrawRectangle(0, 0, 318, 238, Color::WHITE);
 
     if (text)
     {
