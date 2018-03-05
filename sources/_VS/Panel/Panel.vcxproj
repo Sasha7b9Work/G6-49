@@ -402,6 +402,7 @@
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
+    <ClInclude Include="..\..\Panel\src\Settings\SetttingsDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\libs\common\_VS\algorithm" />

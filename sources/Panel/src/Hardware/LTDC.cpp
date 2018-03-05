@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "LTDC.h"
 #include "CPU.h"
+#include "Display/Painter.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,16 +67,6 @@ void LTDC_::Init(uint front, uint back)
         ERROR_HANDLER();
     }
 
-    uint clut[10] =
-    {
-        0x00000000,
-        0x00ffffff,
-        0x00a0a0a0,
-        0x000000ff
-    };
-
-    HAL_LTDC_ConfigCLUT(&handleLTDC, clut, 10, 0);
-
     HAL_LTDC_EnableCLUT(&handleLTDC, 0);
 
     GPIO_InitTypeDef initStr;
@@ -119,7 +110,7 @@ void LTDC_::SetBuffers(uint front, uint back)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void LTDC_::SetColors(uint clut[], uint numColors)
+void LTDC_::SetColors(uint clut[], uint8 numColors)
 {
     HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
 }

@@ -26,6 +26,7 @@ typedef signed short int    int16;
 typedef unsigned char       uint8;
 typedef unsigned char       uchar;
 typedef signed char         int8;
+typedef unsigned int        col_val;
 
 #define MAX_UINT ((uint)-1)
 

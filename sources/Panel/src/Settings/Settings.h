@@ -43,7 +43,7 @@ class Settings
 {
 public:
     uint16              size;                           ///< Размер структуры Settings
-    uint16              disp_Colors[16];                ///< Цвета
+    col_val             disp_Colors[16];                ///< Цвета
     Channel             sig_channel;                    ///< Текущий выбранный канал
     WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
     WaveParameter       sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала

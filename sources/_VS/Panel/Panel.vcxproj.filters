@@ -437,6 +437,9 @@
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h">
       <Filter>Hardware</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Settings\SetttingsDisplay.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\Display\font\font5.inc">

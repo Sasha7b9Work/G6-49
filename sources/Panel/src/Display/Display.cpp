@@ -9,6 +9,7 @@
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
+#include "Settings/SettingsDisplay.h"
 #include "Settings/SettingsSignals.h"
 #include "Settings/SettingsTypes.h"
 #include <math.h>
@@ -16,47 +17,16 @@
 #include <stdio.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *       Display::text = 0;
-char               Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
-uint8              Display::frontBuffer[320 * 240];
-uint8              Display::backBuffer[320 * 240];
+const char *Display::text = 0;
+char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
+uint8       Display::frontBuffer[320 * 240];
+uint8       Display::backBuffer[320 * 240];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Init()
 {
     LTDC_::Init((uint)frontBuffer, (uint)backBuffer);
-
-    Color::InitGlobalColors();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------    
-void Display::SetColorBackground()
-{
-    if (set.serv_bacgroundBlack)
-    {
-        static uint clut[10] =
-        {
-            0x00ffffff,
-            0x00000000,
-            0x00a0a0a0,
-            0x000000ff
-        };
-
-        LTDC_::SetColors(clut, 10);
-    }
-    else
-    {
-        static uint clut[10] =
-        {
-            0x00000000,
-            0x00ffffff,
-            0x00a0a0a0,
-            0x000000ff
-        };
-
-        LTDC_::SetColors(clut, 10);
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,18 +38,32 @@ uint8 *Display::GetBuffer(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update(void)
 {
+    /*
+    Painter::BeginScene(Color::BLACK);
+
+    for (int i = 0; i < 10; i++)
+    {
+        Painter::DrawVLine(i * 5, 10, 200, Color::WHITE);
+    }
+
+    Painter::EndScene();
+
+    return;
+    */
+
     Painter::BeginScene(Color::BLACK);
 
     Painter::SetColor(Color::WHITE);
 
     DrawSignal(A);
+
     DrawSignal(B);
     
     Menu::Draw();
 
     if (ADDITION_PAGE_IS_INPUT)
     {
-        InputWindow::Draw();
+        //InputWindow::Draw();
     }
 
     Painter::DrawRectangle(0, 0, 318, 238, Color::WHITE);

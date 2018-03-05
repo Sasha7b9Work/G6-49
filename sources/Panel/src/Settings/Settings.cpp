@@ -2,6 +2,7 @@
 #include "Settings.h"
 #include "Display/Colors.h"
 #include "Display/Display.h"
+#include "Display/Painter.h"
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 
@@ -141,7 +142,8 @@ void Settings::Load(void)
 
     TuneGenerator(A);
     TuneGenerator(B);
-    Display::SetColorBackground();
+    
+    Painter::LoadPalette();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

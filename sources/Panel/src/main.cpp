@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Log.h"
 #include "Display/Display.h"
+#include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Generator/Generator.h"
@@ -17,18 +18,21 @@
 int main(void)
 {
     CPU::Init();
-
+    
     Timer::Init();
-   
+  
     Display::Init();
 
     Timer::PauseOnTime(200);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
 
     Generator::Reset();
 
-    Timer::PauseOnTime(200);
-
     Settings::Load();
+       
+    Painter::SetColorValue(Color::BLACK, 0x00000000);
+    Painter::SetColorValue(Color::WHITE, 0xffffffff);
+    
+    Painter::LoadPalette();
 
     Menu::Init();
 

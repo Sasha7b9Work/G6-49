@@ -53,7 +53,7 @@ void InputWindow::Draw(void)
 
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
-
+    
     static const pFuncVII func[NumParameters] =
     {
         DrawFrequency,

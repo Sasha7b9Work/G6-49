@@ -22,8 +22,6 @@ public:
 
     static void AddStringToConsole(char *string);
 
-    static void SetColorBackground();
-
     static void AddStringToIndicating(pString string);
 
 private:

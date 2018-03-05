@@ -38,7 +38,7 @@ static const Choice cService_Background =
 
 static void OnChanged_Background(void)
 {
-    Display::SetColorBackground();
+    Color::InitGlobalColors();
 }
 
 const Page pService =
