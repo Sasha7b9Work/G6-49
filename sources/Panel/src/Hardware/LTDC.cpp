@@ -2,6 +2,7 @@
 #include "LTDC.h"
 #include "CPU.h"
 #include "Display/Painter.h"
+#include "Hardware/Timer.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,8 +68,6 @@ void LTDC_::Init(uint front, uint back)
         ERROR_HANDLER();
     }
 
-    HAL_LTDC_EnableCLUT(&handleLTDC, 0);
-
     GPIO_InitTypeDef initStr;
     initStr.Pin = GPIO_PIN_6;
     initStr.Mode = GPIO_MODE_OUTPUT_PP;
@@ -76,7 +75,7 @@ void LTDC_::Init(uint front, uint back)
     HAL_GPIO_Init(GPIOB, &initStr);
 
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
-
+    
     SetBuffers(front, back);
 }
 
@@ -113,6 +112,8 @@ void LTDC_::SetBuffers(uint front, uint back)
 void LTDC_::SetColors(uint clut[], uint8 numColors)
 {
     HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
+    
+    HAL_LTDC_EnableCLUT(&handleLTDC, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
