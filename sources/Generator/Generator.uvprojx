@@ -1096,6 +1096,11 @@
               <FileType>5</FileType>
               <FilePath>..\libs\common\Hardware\VCP.h</FilePath>
             </File>
+            <File>
+              <FileName>CPU_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1105,11 +1110,6 @@
               <FileName>stm32.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Hardware\stm32\stm32.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32_it.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\stm32_it.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.cpp</FileName>

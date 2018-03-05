@@ -218,9 +218,6 @@
     <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp">
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp">
-      <Filter>Hardware\stm32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -232,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm407.cpp">
       <Filter>Hardware\stm32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

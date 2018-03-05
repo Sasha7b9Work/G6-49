@@ -29,11 +29,6 @@ int main(void)
 
     Settings::Load();
        
-    Painter::SetColorValue(Color::BLACK, 0x00000000);
-    Painter::SetColorValue(Color::WHITE, 0xffffffff);
-    
-    Painter::LoadPalette();
-
     Menu::Init();
 
     while (1)

@@ -180,9 +180,6 @@
     <ClCompile Include="..\..\libs\common\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32_it.cpp">
-      <Filter>Hardware\stm32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -199,6 +196,9 @@
       <Filter>Hardware\stm32</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>

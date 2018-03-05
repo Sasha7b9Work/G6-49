@@ -13,7 +13,7 @@ Settings set =
     sizeof(Settings),
     {
         MAKE_COLOR(0, 0, 0),
-        MAKE_COLOR(31, 63, 31),
+        MAKE_COLOR(0xff, 0xff, 0xff),
         MAKE_COLOR(5, 10, 5)
     }
     ,

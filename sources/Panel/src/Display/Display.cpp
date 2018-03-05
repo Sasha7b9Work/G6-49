@@ -38,22 +38,9 @@ uint8 *Display::GetBuffer(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update(void)
 {
-    /*
-    Painter::BeginScene(Color::BLACK);
+    Painter::BeginScene(Color::BACK);
 
-    for (int i = 0; i < 10; i++)
-    {
-        Painter::DrawVLine(i * 5, 10, 200, Color::WHITE);
-    }
-
-    Painter::EndScene();
-
-    return;
-    */
-
-    Painter::BeginScene(Color::BLACK);
-
-    Painter::SetColor(Color::WHITE);
+    Painter::SetColor(Color::FILL);
 
     DrawSignal(A);
 
@@ -63,10 +50,10 @@ void Display::Update(void)
 
     if (ADDITION_PAGE_IS_INPUT)
     {
-        //InputWindow::Draw();
+        InputWindow::Draw();
     }
 
-    Painter::DrawRectangle(0, 0, 318, 238, Color::WHITE);
+    Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
 
     if (text)
     {
@@ -174,7 +161,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
             if (ch == CHANNEL && strcmp(Menu::NameCurrentParameter(), NameParameter((WaveParameter)i)) == 0)
             {
                 Painter::FillRegion(x0, y0, 139, 8, Color::FILL);
-                color.value = Color::BACK.value;
+                color = Color::BACK;
             }
             Painter::DrawText(x0 + 1, y0, NameParameter((WaveParameter)i), color);
 
