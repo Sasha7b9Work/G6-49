@@ -1,58 +1,44 @@
-#pragma once
-#include "Settings/Settings.h"
+#include "PageDebug.h"
+#include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Page *PageDebug::pointer = &pDebug;
-static void  OnPress_SaveSettings();
-static void  OnPress_Reset();
+extern const PageBase pDebug;
+Page *PageDebug::pointer = (Page *)&pDebug;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ ---------------------------------------------------------------------------------------------------------------------------------
-static const Choice cConsole =
-{
-    Item_Choice, {}, 0,
-    {
-        "ÊÎÍÑÎËÜ", "CONSOLE"
-    },
-    {
-        DISABLED_RU, DISABLED_EN,
-        ENABLED_RU, ENABLED_EN
-    },
-    (uint8*)&CONSOLE_ENABLED
-};
-
-static void OnPress_DebugMode()
+static void OnPress_DebugMode(bool)
 {
     Generator::SetDebugMode(DEBUG_MODE_ENABLED);
 }
 
-// ÎÒËÀÄÊÀ - ÑÎÕĞÀÍÈÒÜ ÍÀÑÒĞÎÉÊÈ ---------------------------------------------------------------------------------------------------------------------
-static const Button bSaveSettings =
-{
-    Item_Button, {}, OnPress_SaveSettings,
-    {
-        "ÑÎÕĞÀÍÈÒÜ ÍÀÑÒĞÎÉÊÈ", "SAVE SETTINGS"
-    }
-};
+DEF_CHOICE_2(cConsole,                                                                                                     //--- ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ ---
+    "ÊÎÍÑÎËÜ", "CONSOLE",
+    "Âêëş÷àåò è âûêëş÷àåò îòîáğàæåíèå îòëàäî÷íîé êîíñîëè",
+    "Turns on or off the display of the debug console",
+    DISABLED_RU, DISABLED_EN,
+    ENABLED_RU, ENABLED_EN,
+    CONSOLE_ENABLED, pDebug, FuncActive, OnPress_DebugMode, FuncDraw
+)
 
-static void OnPress_SaveSettings(void)
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_SaveSettings()
 {
     Settings::Save();
 }
 
-// ÎÒËÀÄÊÀ - ÑÁĞÎÑ -----------------------------------------------------------------------------------------------------------------------------------
-static const Button bReset =
-{
-    Item_Button, {}, OnPress_Reset,
-    {
-        "ÑÁĞÎÑ", "RESET"
-    }
-};
+DEF_BUTTON( bSaveSettings,                                                                                     //--- ÎÒËÀÄÊÀ - ÑÎÕĞÀÍÈÒÜ ÍÀÑÒĞÎÉÊÈ ---
+    "ÑÎÕĞÀÍÈÒÜ ÍÀÑÒĞÎÉÊÈ", "SAVE SETTINGS",
+    "Ñîõğàíèòü òåêóùèå íàñòğîéêè",
+    "Save current settings",
+    pDebug, FuncActive, OnPress_SaveSettings, FuncDraw
+)
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Reset(void)
 {
     Generator::Reset();
@@ -60,29 +46,18 @@ static void OnPress_Reset(void)
     Settings::Load();
 }
 
-const Page pDebug =
-{
-    Item_Page, {}, 0,
-    {
-        "ÎÒËÀÄÊÀ", "DEBUG"
-    },
-    {
-        (void *)&cConsole,      ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
-        (void *)&bSaveSettings, ///< ÎÒËÀÄÊÀ - ÑÎÕĞÀÍÈÒÜ ÍÀÑÒĞÎÉÊÈ
-        (void *)&bReset         ///< ÎÒËÀÄÊÀ - ÑÁĞÎÑ
-    }
-};
+DEF_BUTTON( bReset,                                                                                                          //--- ÎÒËÀÄÊÀ - ÑÁĞÎÑ ---
+    "ÑÁĞÎÑ", "RESET",
+    "Ñáğîñ íàñòğîåê íà çíà÷åíèÿ ïî óìîë÷àíèş",
+    "Resetting settings to default values",
+    pDebug, FuncActive, OnPress_Reset, FuncDraw
+)
 
-// ÎÒËÀÄÊÀ - ĞÅÆÈÌ -----------------------------------------------------------------------------------------------------------------------------------
-static const Choice cDebugMode =
-{
-    Item_Choice, {}, OnPress_DebugMode,
-    {
-        "ĞÅÆÈÌ", "MODE"
-    },
-    {
-        "ÍÎĞÌÀËÜÍÛÉ", "NORMAL",
-        "ÎÒËÀÄÎ×ÍÛÉ", "DEBUG"
-    },
-    (uint8 *)&DEBUG_MODE_ENABLED
-};
+DEF_PAGE_3( pDebug,
+    "ÎÒËÀÄÊÀ", "DEBUG",
+    "", "",
+    cConsole,      ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
+    bSaveSettings, ///< ÎÒËÀÄÊÀ - ÑÎÕĞÀÍÈÒÜ ÍÀÑÒĞÎÉÊÈ
+    bReset,        ///< ÎÒËÀÄÊÀ - ÑÁĞÎÑ
+    Page_Debug, 0, FuncActive, FuncPress
+)

@@ -1,7 +1,8 @@
-#pragma once
+#include "Display/InputWindow.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Menu/MenuItems.h"
+#include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +76,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnRotate_Reg(int angle)
+static void OnRotate_Reg(int)
 {
 
 }

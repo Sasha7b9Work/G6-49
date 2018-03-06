@@ -8,7 +8,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Page *PageSignals::pointer = &pSignals;
+extern PageBase pSignals;
+Page *PageSignals::pointer = (Page *)&pSignals;
 
 static void OnPress_Channel();
 static void OnPress_SetParameter();
@@ -17,16 +18,6 @@ static uint8 waveForm = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ¿–¿Ã≈“– ---------------------------------------------------------------------------------------------------------------------
-ChoiceParameter PageSignals::cpParameters =
-{
-    Item_ChoiceParameter, {}, OnPress_SetParameter,
-    {
-        "œ¿–¿Ã≈“–", "PARAMETER"
-    },
-    {{true, true, true, true, false, false, false, false}},
-    (uint8 *)&(set.sig_parameter[(WaveForm)waveForm])
-};
 
 void PageSignals::Init()
 {
@@ -35,6 +26,13 @@ void PageSignals::Init()
     cpParameters.numParameter = (uint8 *)&(set.sig_parameter[(WaveForm)waveForm]);
 }
 
+DEF_CHOICE_PARAMETER(cpParameters,                                                                             //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ¿–¿Ã≈“– ---
+    "œ¿–¿Ã≈“–", "PARAMETER",
+    "¬˚·Ó Ô‡‡ÏÂÚ‡ ‰Îˇ Ì‡ÒÚÓÈÍË",
+    "Choosing a setting for customization",
+    pSignals, FuncActive, OnPress_SetParameter, (set.sig_parameter[(WaveForm)waveForm]),
+    true, true, true, true, false, false, false, false
+)
 
 // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿Õ¿À ------------------------------------------------------------------------------------------------------------------------
 static const Choice cChannel =
@@ -110,7 +108,7 @@ static void OnPress_SetParameter(void)
     ADDITION_PAGE = &pInput;
 }
 
-const Page pSignals =
+const PageBase pSignals =
 {
     Item_Page, {}, 0,
     {
