@@ -22,7 +22,7 @@
 */
 
 /// Возможные команды для передачи в основной процессор
-typedef enum
+enum CommandWrite
 {
     WRITE_SERVICE_COMMAND   = 0,    ///< Служебная. Код посыалется в отсутствие информации для передачи.
     ENABLE_CHANNEL          = 1,    ///< Включить/выключить канал
@@ -38,9 +38,9 @@ typedef enum
     SET_DELAY               = 11,   ///< Задержка
     NUM_COMMAND_WRITE,
     COMMAND_NONE
-} CommandWrite;
+};
 
-typedef enum
+enum WaveParameter
 {
     Frequency,      ///< Частота
     Period,         ///< Период
@@ -51,23 +51,23 @@ typedef enum
     Phase,          ///< Фаза
     Delay,          ///< Задержка
     NumParameters
-} WaveParameter;
+};
 
-typedef enum
+enum WaveForm
 {
     Form_Sine,
     Form_Saw,
     Form_Impulse,
     NumForms
-} WaveForm;
+};
 
 
 /// Возможные команды, принимаемые от основного процессора
-typedef enum
+enum CommandRead
 {
     READ_SERVICE_COMMAND,   ///< Служебная команда. Используется для того, чтобы можно было посылать данные основному процессору
     READ_POINTS             ///< Принимает точки произвольного сигнала
-} CommandRead;
+};
 
 
 #define LENGTH_SPI_BUFFER   10

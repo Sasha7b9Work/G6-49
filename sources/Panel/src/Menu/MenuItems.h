@@ -15,7 +15,7 @@ struct AllowableParameters
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-typedef enum
+enum Item
 {
     Item_None,
     Item_Choice,
@@ -24,7 +24,7 @@ typedef enum
     Item_SButton,
     Item_ChoiceParameter,
     Item_SB_Page
-} Item;
+};
 
 #define COMMON_PART_ITEM            \
         Item       typeItem;        \
@@ -50,10 +50,10 @@ struct ChoiceParameter
 };
 
 ///  нопка
-typedef struct
+struct Button
 {
     COMMON_PART_ITEM
-} Button;
+};
 
 ///  нопка в режиме дополнительной страницы
 struct SButton
@@ -63,11 +63,11 @@ struct SButton
     pFuncVII    funcDraw;
 };
 
-typedef struct
+struct Page
 {
     COMMON_PART_ITEM
     void *items[NUM_ITEMS_ON_PAGE]; ///< ”казатели на итемы, содержащиес€ на странице
-} Page;
+};
 
 
 const char* ItemTitle(void* item);
