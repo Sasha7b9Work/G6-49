@@ -976,6 +976,11 @@
               <FileType>5</FileType>
               <FilePath>..\libs\common\Log.h</FilePath>
             </File>
+            <File>
+              <FileName>stub.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\stub.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -985,21 +990,6 @@
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Common\Command.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Display</GroupName>
-          <Files>
-            <File>
-              <FileName>Display.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Display\Display.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Display.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Display\Display.h</FilePath>
             </File>
           </Files>
         </Group>
