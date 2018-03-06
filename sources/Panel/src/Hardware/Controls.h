@@ -3,7 +3,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef enum
+enum PanelControl
 {
     Control_None    = 0x00,
     B_F1            = 0x01,
@@ -35,21 +35,21 @@ typedef enum
     REG_A_LEFT      = 0x1b,
     REG_B_RIGHT     = 0x1c,
     REG_BTN
-} Control;
+};
 
-typedef enum
+enum TypePress
 {
     TypePress_Press,
     TypePress_LongPress,
     TypePress_Release
-} TypePress;
+};
 
 /// Хранит код органа управления и его состояние - если pressed == true, то кнопка находится в нажатом состоянии
-typedef struct
+struct StructControl
 {
-    Control control;
-    TypePress typePress;
-} StructControl;
+    PanelControl control;
+    TypePress    typePress;
+};
 
 
-const char *ControlName(Control control);
+const char *PanelControlName(PanelControl control);

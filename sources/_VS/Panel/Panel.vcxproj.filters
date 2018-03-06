@@ -168,12 +168,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsDrawing.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -200,6 +194,27 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals2.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\common\Menu\MenuItems.cpp">
+      <Filter>Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -392,30 +407,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDrawing.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsLogic.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libs\common\Log.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -439,6 +430,33 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SetttingsDisplay.h">
       <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Menu\MenuItemsDefs.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\common\Menu\MenuItems.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
+      <Filter>Menu\Pages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

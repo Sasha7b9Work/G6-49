@@ -18,6 +18,9 @@
 
 #include <stm32f4xx.h>
 
+#ifndef __cplusplus
+typedef int bool;
+#endif
 
 typedef const char *const   pString;
 typedef unsigned int        uint;
@@ -32,8 +35,12 @@ typedef unsigned int        col_val;
 
 #define NUM_ITEMS_ON_PAGE   4
 
-typedef void    (*pFuncVV)();
-typedef void    (*pFuncVII)(int, int);
+typedef void (*pFuncVV)();
+typedef void (*pFuncVII)(int, int);
+typedef void (*pFuncVI)(int);
+typedef bool (*pFuncBV)();
+typedef void (*pFuncVB)(bool);
+
 
 // Для определения задания буферов лучше пользоваться этими макросами, чтобы потом легче было отследить, где можно памяти освободить
 #define CHAR_BUF(name, size)            char name[size]

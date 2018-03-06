@@ -1,4 +1,4 @@
-#include "MenuItemsDrawing.h"
+#include "Menu/MenuItems.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
@@ -11,7 +11,7 @@ static void DrawOpenedChoice(Choice *choice);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Item_Draw(int x, int y, void *item)
 {
-    Item type = TypeItem(item);
+    TypeItem type = TypeOfItem(item);
 
     if (type == Item_Choice)
     {
@@ -27,26 +27,26 @@ void Item_Draw(int x, int y, void *item)
         Painter::DrawText(x + 5, y + 5, ItemTitle(item));
         Painter::DrawTextRelativelyRight(315, y + 30, ChoiceWaveParameter_CurrentName((ChoiceParameter *)item));
     }
-    else if (type == Item_SButton)
+    else if (type == Item_SmallButton)
     {
         int size = 23;
         x += 20;
         y += 17;
         Painter::DrawRectangle(x, y, size, size);
         SButton *button = (SButton*)item;
-        if (button->funcDraw)
+        if (button->funcForDraw)
         {
-            button->funcDraw(x, y);
+            button->funcForDraw(x, y);
         }
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawOpenedItem(void)
+void DrawOpenedItem()
 {
     if (OPENED_ITEM)
     {
-        Item typeItem = TypeItem(OPENED_ITEM);
+        TypeItem typeItem = TypeOfItem(OPENED_ITEM);
 
         if (typeItem == Item_Choice)
         {
@@ -65,10 +65,10 @@ static void DrawOpenedChoice(Choice *choice)
     int width = ITEM_WIDTH;
     int height = Choice_NumChoices(choice) * 10 + 2 + 12;
 
-    int y = TITLE_HEIGHT + PositionOnPage(choice) * ITEM_HEIGHT;
+    int y = MP_TITLE_HEIGHT + PositionOnPage(choice) * MI_HEIGHT;
     int x = SCREEN_WIDTH - ITEM_WIDTH - 20;
 
-    y += (ITEM_HEIGHT - height) / 2;
+    y += (MI_HEIGHT - height) / 2;
 
     ++y;
 

@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Menu.h"
-#include "MenuItemsDrawing.h"
+#include "Menu/MenuItems.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include <math.h>
@@ -14,11 +14,11 @@ void Menu::Draw(void)
     for (int i = 0; i < 4; i++)
     {
         int x = SCREEN_WIDTH - ITEM_WIDTH - 1;
-        int y = TITLE_HEIGHT + i * ITEM_HEIGHT;
+        int y = MP_TITLE_HEIGHT + i * MI_HEIGHT;
 
-        if (CurrentPage()->typeItem == Item_Page)
+        if (CurrentPage()->type == Item_Page)
         {
-            Painter::DrawRectangle(x, y, ITEM_WIDTH, ITEM_HEIGHT);
+            Painter::DrawRectangle(x, y, ITEM_WIDTH, MI_HEIGHT);
         }
         Item_Draw(x, y, ItemFromPage(i));
     }
@@ -34,7 +34,7 @@ void Menu::Draw(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::DrawTitle(void)
 {
-    Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, TITLE_HEIGHT, Color::FILL);
+    Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, MP_TITLE_HEIGHT, Color::FILL);
     Painter::DrawTextRelativelyRight(315, 5, Page_Name(CurrentPage()));
 }
 

@@ -49,9 +49,9 @@ static void FillIWSfromInputBuffer();
 static void SendIWStoGenerator();
 
 static InputWindowStruct *iws = 0;
-static WaveForm form;
-static WaveParameter m_param;
-static Channel ch;
+static WaveForm           form;
+static WaveParameter      m_param;
+static Channel            ch;
 
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
@@ -469,12 +469,12 @@ static void RestoreValue(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::PressKey(Control key)
+void InputWindowStruct::PressKey(PanelControl key)
 {
     struct StrControl
     {
-        Control control;
-        char    symbol;
+        PanelControl control;
+        char         symbol;
     };
 
     static const StrControl command[] =

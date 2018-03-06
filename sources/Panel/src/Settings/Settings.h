@@ -6,7 +6,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern Page pInput;
+extern const PageBase pInput;
 
 #define CHANNEL                 (set.sig_channel)
 #define CHANNEL_IS_A            (CHANNEL == A)
@@ -28,12 +28,14 @@ extern Page pInput;
 #define OPENED_ITEM             (set.menu_openedItem)
 #define OPENED_ITEM_IS_NONE     (OPENED_ITEM == 0)
 #define ADDITION_PAGE           (set.menu_page)
-#define ADDITION_PAGE_IS_INPUT  (ADDITION_PAGE == &pInput)
+#define ADDITION_PAGE_IS_INPUT  (ADDITION_PAGE == (Page *)&pInput)
 #define ADDITION_PAGE_IS_NONE   (ADDITION_PAGE == 0)
 
 #define CONSOLE_ENABLED         (set.dbg_console)
 
 #define DEBUG_MODE_ENABLED      (set.dbg_debugModeEnabled)
+
+#define LANG                    (set.serv_language)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

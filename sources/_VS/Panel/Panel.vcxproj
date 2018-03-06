@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>STM32F429xx;MSVC;USE_HAL_DRIVER</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4068;4365;4464;4514;4774;4820</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4068;4365;4464;4514;4623;4626;4774;4820;5027</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
@@ -165,6 +165,7 @@
     <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\libs\common\Log.cpp" />
+    <ClCompile Include="..\..\libs\common\Menu\MenuItems.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\Math.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -259,9 +260,13 @@
     <ClCompile Include="..\..\Panel\src\main.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsDrawing.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals2.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +278,8 @@
     <ClInclude Include="..\..\libs\common\Hardware\Timer.h" />
     <ClInclude Include="..\..\libs\common\Hardware\VCP.h" />
     <ClInclude Include="..\..\libs\common\Log.h" />
+    <ClInclude Include="..\..\libs\common\Menu\MenuItems.h" />
+    <ClInclude Include="..\..\libs\common\Menu\MenuItemsDefs.h" />
     <ClInclude Include="..\..\libs\common\Utils\Math.h" />
     <ClInclude Include="..\..\libs\common\Utils\StringUtils.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
@@ -391,9 +398,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDrawing.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsLogic.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />

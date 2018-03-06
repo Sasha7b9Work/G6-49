@@ -17,7 +17,7 @@ static void(*callbackKeyboard)() = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void FillCommand(Control control, TypePress typePressm);
+static void FillCommand(PanelControl control, TypePress typePressm);
 static void DetectRegulator();
 
 #define SL0 (1 << 12)
@@ -41,11 +41,11 @@ static void DetectRegulator();
 static uint timePress[5][6];
 
                                      // SL0  SL1  SL2       SL3     SL4   SL5
-static const Control controls[5][6] = {{B_0, B_5, B_Dot,    B_Ch,   B_F1, B_LEFT},          // RL0
-                                       {B_1, B_6, B_Minus,  B_WF,   B_F2, Control_None},    // RL1
-                                       {B_2, B_7, B_ESC,    B_U,    B_F3, REG_BTN},         // RL2
-                                       {B_3, B_8, B_M,      B_ON1,  B_F4, Control_None},    // RL3
-                                       {B_4, B_9, B_LEFT,   B_ON2,  B_F5, B_RIGHT}};        // RL4
+static const PanelControl controls[5][6] = {{B_0, B_5, B_Dot,    B_Ch,   B_F1, B_LEFT},          // RL0
+                                            {B_1, B_6, B_Minus,  B_WF,   B_F2, Control_None},    // RL1
+                                            {B_2, B_7, B_ESC,    B_U,    B_F3, REG_BTN},         // RL2
+                                            {B_3, B_8, B_M,      B_ON1,  B_F4, Control_None},    // RL3
+                                            {B_4, B_9, B_LEFT,   B_ON2,  B_F5, B_RIGHT}};        // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
@@ -98,7 +98,7 @@ void CPU::Keyboard::Update(void)
         {
             uint state = READ_RL(rl);
 
-            Control control =  controls[rl][sl];
+            PanelControl control =  controls[rl][sl];
 
             if (control != Control_None)
             {
@@ -154,7 +154,7 @@ static void DetectRegulator(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillCommand(Control control, TypePress typePress)
+static void FillCommand(PanelControl control, TypePress typePress)
 {
     commands[pointer].control = control;
     commands[pointer++].typePress = typePress;
@@ -231,7 +231,7 @@ void CPU::Keyboard::InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *ControlName(Control control)
+const char *PanelControlName(PanelControl control)
 {
     static const char *names[] =
     {

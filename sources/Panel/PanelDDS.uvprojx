@@ -1616,6 +1616,11 @@
               <FileType>5</FileType>
               <FilePath>..\libs\common\Log.h</FilePath>
             </File>
+            <File>
+              <FileName>stub.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\stub.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1867,21 +1872,6 @@
               <FilePath>.\src\Menu\Menu.h</FilePath>
             </File>
             <File>
-              <FileName>MenuItems.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItems.h</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItemsDrawing.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItemsDrawing.h</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItemsLogic.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItemsLogic.h</FilePath>
-            </File>
-            <File>
               <FileName>Menu.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Menu.cpp</FilePath>
@@ -1892,19 +1882,34 @@
               <FilePath>.\src\Menu\MenuDrawing.cpp</FilePath>
             </File>
             <File>
-              <FileName>MenuItems.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItemsDrawing.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsDrawing.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MenuItemsLogic.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuItemsLogic.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Menu\MenuItems.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\libs\common\Menu\MenuItems.h</FilePath>
+            </File>
+            <File>
+              <FileName>MenuPagesNames.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\MenuPagesNames.h</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItemsAdd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\MenuItemsAdd.h</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItemsGraphics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItemsGraphics.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1912,9 +1917,29 @@
           <GroupName>Menu/Pages</GroupName>
           <Files>
             <File>
-              <FileName>PageSignals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals.h</FilePath>
+              <FileName>AddPageInput.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\AddPageInput.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageDebug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageService.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals2.cpp</FilePath>
             </File>
             <File>
               <FileName>AddPageInput.h</FileName>
@@ -1930,6 +1955,11 @@
               <FileName>PageService.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageService.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals.h</FilePath>
             </File>
             <File>
               <FileName>PageSignals2.h</FileName>

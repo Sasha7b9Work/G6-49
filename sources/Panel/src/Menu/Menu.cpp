@@ -1,29 +1,32 @@
 #include "Menu.h"
-#include "MenuItemsLogic.h"
+#include "Menu/MenuItems.h"
+#include "Display/InputWindow.h"
 #include "Display/InputWindowStruct.h"
 #include "Generator/Generator.h"
-#include "Pages/PageSignals.h"
-#include "Pages/PageSignals2.h"
-#include "Pages/PageService.h"
-#include "Pages/PageDebug.h"
+#include "Hardware/CPU.h"
 #include "Utils/Math.h"
+#include "Menu/Pages/PageSignals.h"
+#include "Menu/Pages/PageSignals2.h"
+#include "Menu/Pages/PageService.h"
+#include "Menu/Pages/PageDebug.h"
+#include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Page *menu[NUM_PAGES] =
 {
-    &pSignals,
-    &pSignals2,
-    &pService,
-    &pDebug
+    PageSignals::pointer,
+    PageSignals2::pointer,
+    PageService::pointer,
+    PageDebug::pointer
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Menu::Init(void)
 {
-    PanelSignals_Init();
-    OnPress_Form();
+    PageSignals::Init();
+    PageSignals::OnPress_Form();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +35,7 @@ void Menu::Update(void)
     while (!CPU::Keyboard::BufferIsEmpty())
     {
         StructControl control = CPU::Keyboard::GetNextControl();
-        if (ADDITION_PAGE == &pInput)
+        if (ADDITION_PAGE_IS_INPUT)
         {
             InputWindow::ProcessContorl(control);
         }
@@ -46,7 +49,7 @@ void Menu::Update(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ProcessControl(StructControl control)
 {
-    Control key = control.control;
+    PanelControl key = control.control;
     TypePress pressed = control.typePress;
 
     if (key == REG_A_LEFT)
@@ -129,5 +132,5 @@ bool Menu::RegIsControlPages(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *Menu::NameCurrentParameter(void)
 {
-    return ChoiceWaveParameter_CurrentName(&cpParameters);
+    return ChoiceWaveParameter_CurrentName(&PageSignals::cpParameters);
 }

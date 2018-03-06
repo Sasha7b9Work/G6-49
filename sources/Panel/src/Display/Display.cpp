@@ -66,9 +66,9 @@ void Display::Update(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::SetButton(Control control)
+void Display::SetButton(PanelControl control)
 {
-    text = ControlName(control);
+    text = PanelControlName(control);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ void Display::DrawSignal(Channel ch)
 {
     if (CHANNEL_ENABLED(ch))
     {
-        int y0 = (ch == A) ? TITLE_HEIGHT : TITLE_HEIGHT + SIGNAL_HEIGHT;
+        int y0 = (ch == A) ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
         Painter::DrawRectangle(0, y0, SIGNAL_WIDTH, SIGNAL_HEIGHT, Color::FILL);
 
         Painter::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2");

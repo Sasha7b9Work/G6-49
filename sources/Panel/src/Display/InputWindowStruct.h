@@ -50,7 +50,7 @@ public:
 
     static void RegRight();
 
-    static void PressKey(Control key);
+    static void PressKey(PanelControl key);
 
     static void SaveValue();
     /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала

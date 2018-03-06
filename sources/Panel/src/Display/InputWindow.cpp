@@ -2,7 +2,6 @@
 #include "InputWindowStruct.h"
 #include "DisplayTypes.h"
 #include "Display/Painter.h"
-#include "Menu/MenuItemsLogic.h"
 #include "Settings/Settings.h"
 #include <stdio.h>
 
@@ -10,9 +9,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (iws.numLockMode)
 
-static Channel chan;
-static WaveForm form;
-static WaveParameter param;
+static Channel           chan;
+static WaveForm          form;
+static WaveParameter     param;
 static InputWindowStruct iws;
 
 
@@ -42,7 +41,7 @@ void InputWindow::Init(void)
 void InputWindow::Draw(void)
 {
     int x = 0;
-    int y = TITLE_HEIGHT;
+    int y = MP_TITLE_HEIGHT;
     int width = SIGNAL_WIDTH;
     int height = SIGNAL_HEIGHT;
 
@@ -204,7 +203,7 @@ void InputWindow::KeyEnter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::ProcessContorl(StructControl control)
 {
-    Control key = control.control;
+    PanelControl key = control.control;
     TypePress pressed = control.typePress;
 
     if (key == B_0 || key == B_1 || key == B_2 || key == B_3 || key == B_4 || key == B_5 || key == B_6 || key == B_7 || key == B_8 || key == B_9 ||

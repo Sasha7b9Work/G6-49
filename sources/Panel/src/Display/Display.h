@@ -18,7 +18,7 @@ public:
 
     static uint8 *GetBuffer();
 
-    static void SetButton(Control control);
+    static void SetButton(PanelControl control);
 
     static void AddStringToConsole(char *string);
 
