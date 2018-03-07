@@ -38,6 +38,11 @@ extern const PageBase pInput;
 #define LANG                    (set.serv_language)
 #define LANG_RU                 (LANG == Russian)
 
+#define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
+#define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
+
+#define BACKGROUND_BLACK        (set.serv_bacgroundBlack)
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -60,6 +65,8 @@ public:
     bool                serv_bacgroundBlack;            ///< Если true, то цвет фона - чёрный
     bool                sig_tuneFull;                   ///< Если true, то засылка параметра происходит непрерывно во время настройки
     bool                dbg_debugModeEnabled;           ///< Если true, то включён отладочный режим - непрерывные засылки в альтеру
+    int8                menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
+    int8                menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
 
     static void Save();
     static void Load();

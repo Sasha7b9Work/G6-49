@@ -1,55 +1,48 @@
 #pragma once
+#include "Display/Colors.h"
 #include "Display/Display.h"
 #include "Settings/Settings.h"
+#include "PageService.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Page *PageService::pointer = &pService;
-static void        OnChanged_Background();
+extern const PageBase pService;
+Page *PageService::pointer = (Page *)&pService;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// —≈–¬»— - ﬂ«€  -------------------------------------------------------------------------------------------------------------------------------------
-static const Choice cService_Language =
-{
-    Item_Choice, {}, 0,
-    {
-        "ﬂ«€ ", "LANGUAGE"
-    },
-    {
-        "–”—— »…", "RUSSIAN",
-        "¿Õ√À»…— »…", "ENGLISH"
-    },
-    (uint8 *)&set.serv_language
-};
+DEF_CHOICE_2( cService_Language,                                                                                               //--- —≈–¬»— - ﬂ«€  ---
+    "ﬂ«€ ", "LANGUAGE",
+    "¬˚·Ó ˇÁ˚Í‡ ÏÂÌ˛",
+    "Selecting the menu language",
+    "–”—— »…",    "RUSSIAN",
+    "¿Õ√À»…— »…", "ENGLISH",
+    LANG, pService, FuncActive, FuncChangedChoice, FuncDraw
+)
 
-// —≈–¬»— - ÷¬≈“ ‘ŒÕ¿ --------------------------------------------------------------------------------------------------------------------------------
-static const Choice cService_Background =
-{
-    Item_Choice, {}, OnChanged_Background,
-    {
-        "÷¬≈“ ‘ŒÕ¿", "BACKGROUND"
-    },
-    {
-        "¡≈À€…",  "WHITE",
-        "◊®–Õ€…", "BLACK"
-    },
-    (uint8 *)&set.serv_bacgroundBlack
-};
 
-static void OnChanged_Background(void)
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChanged_Background(bool)
 {
     Color::InitGlobalColors();
 }
 
-const Page pService =
-{
-    Item_Page, {}, 0,
-    {
-        "—≈–¬»—", "SERVICE"
-    },
-    {
-        (void*)&cService_Language,      ///< —≈–¬»— - ﬂ«€ 
-        (void*)&cService_Background     ///< —≈–¬»— - ÷¬≈“ ‘ŒÕ¿
-    }
-};
+DEF_CHOICE_2( cService_Background,                                                                                        //--- —≈–¬»— - ÷¬≈“ ‘ŒÕ¿ ---
+    "÷¬≈“ ‘ŒÕ¿", "BACKGROUND",
+    "¬˚·Ó ˆ‚ÂÚ‡ ÙÓÌ‡",
+    "Select background color",
+    "¡≈À€…",  "WHITE",
+    "◊®–Õ€…", "BLACK",
+    BACKGROUND_BLACK, pService, FuncActive, OnChanged_Background, FuncDraw
+)
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_2( pService,                                                                                                                 //--- —≈–¬»— ---
+    "—≈–¬»—", "SERVICE",
+    "—Â‚ËÒÌ˚Â ÙÛÌÍˆËË",
+    "Service functions",
+    cService_Language,   ///< —≈–¬»— - ﬂ«€ 
+    cService_Background, ///< —≈–¬»— - ÷¬≈“ ‘ŒÕ¿
+    Page_Service, 0, FuncActive, FuncPress
+)

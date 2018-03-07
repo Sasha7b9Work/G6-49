@@ -428,9 +428,6 @@
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Settings\SetttingsDisplay.h">
-      <Filter>Settings</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h">
       <Filter>Menu</Filter>
     </ClInclude>
@@ -457,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
       <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h">
+      <Filter>Settings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

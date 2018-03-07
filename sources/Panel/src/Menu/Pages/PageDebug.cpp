@@ -21,7 +21,7 @@ DEF_CHOICE_2(cConsole,                                                          
     "Включает и выключает отображение отладочной консоли",
     "Turns on or off the display of the debug console",
     DISABLED_RU, DISABLED_EN,
-    ENABLED_RU, ENABLED_EN,
+    ENABLED_RU,  ENABLED_EN,
     CONSOLE_ENABLED, pDebug, FuncActive, OnPress_DebugMode, FuncDraw
 )
 
