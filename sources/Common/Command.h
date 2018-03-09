@@ -77,6 +77,14 @@ enum CommandRead
 #define SPI_MASTER_SYNBYTE  0xAC
 
 
-char *Command_Name(CommandWrite command);
+const char *Command_Name(CommandWrite command);
+
+const char *WaveForm_Name(WaveForm form);
+
+const char* Parameter_Name(WaveParameter parameter);
+
+const char* Choice_Name(void* choice, int num);
+
+const char* ChoiceWaveParameter_CurrentName(void *choice);
 
 /** @}  @} */

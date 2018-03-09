@@ -148,7 +148,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 
     y0 += 5;
 
-    Painter::DrawText(22, y0 + 3, NameWaveForm(form), Color::FILL);
+    Painter::DrawText(22, y0 + 3, WaveForm_Name(form), Color::FILL);
 
     AllowableParameters allowParameters;
     InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
@@ -158,12 +158,12 @@ void Display::DrawSignalParameters(Channel ch, int y0)
         if (allowParameters.allow[i])
         {
             Color color = Color::FILL;
-            if (ch == CHANNEL && strcmp(Menu::NameCurrentParameter(), NameParameter((WaveParameter)i)) == 0)
+            if (ch == CHANNEL && strcmp(Menu::NameCurrentParameter(), Parameter_Name((WaveParameter)i)) == 0)
             {
                 Painter::FillRegion(x0, y0, 139, 8, Color::FILL);
                 color = Color::BACK;
             }
-            Painter::DrawText(x0 + 1, y0, NameParameter((WaveParameter)i), color);
+            Painter::DrawText(x0 + 1, y0, Parameter_Name((WaveParameter)i), color);
 
             DrawParameterValue(ch, (WaveParameter)i, x0 + 80, y0);
 

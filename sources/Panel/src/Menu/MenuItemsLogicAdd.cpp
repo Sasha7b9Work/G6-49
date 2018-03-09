@@ -8,7 +8,7 @@ void Choice_Press(Choice *choice, TypePress press)
 {
     if (press == TypePress_Release)
     {
-        CircleIncrease<int8>(choice->cell, 0, (int8)(Choice_NumChoices(choice) - 1));
+        CircleIncrease<int8>(choice->cell, 0, (int8)(choice->NumSubItems() - 1));
         if (choice->funcOnChanged)
         {
             choice->funcOnChanged(true);
@@ -65,13 +65,13 @@ void Item_Rotate(void *item, PanelControl control)
 
         if (control == REG_A_LEFT)
         {
-            CircleIncrease<int8>(choice->cell, 0, (int8)(Choice_NumChoices(choice) - 1));
+            CircleIncrease<int8>(choice->cell, 0, (int8)(choice->NumSubItems() - 1));
         }
         else if (control == REG_B_RIGHT)
         {
             if(*(choice->cell) == 0)
             {
-                *(choice->cell) = (uint8)(Choice_NumChoices(choice) - 1);
+                *(choice->cell) = (uint8)(choice->NumSubItems() - 1);
             }
             else
             {

@@ -1,5 +1,5 @@
 #pragma once
-#include "PageSignals2.h"
+#include "PageSettings2.h"
 #include "Settings/Settings.h"
 
 

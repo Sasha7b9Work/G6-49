@@ -72,8 +72,6 @@ struct Page
 
 const char* ItemTitle(void* item);
 
-void* ItemFromPage(int numItem);
-
 const char* Choice_CurrentName(Choice* choice);
 
 char* ChoiceWaveParameter_CurrentName(ChoiceParameter *choice);
@@ -85,8 +83,6 @@ const char* Page_Name(const Page* page);
 bool ItemIsChoice(void* item);
 
 bool ItemIsChoiceParameter(void *item);
-
-bool ItemIsButton(void* item);
 
 bool ItemIsSButton(void* item);
 
@@ -101,8 +97,3 @@ Control ButtonForItem(void *item);
 int Choice_CurrentChoice(Choice *choice);
 /// Возвращает адрес текущую страницу
 Page* CurrentPage();
-
-char* NameParameter(WaveParameter parameter);
-
-char* NameWaveForm(WaveForm form);
-

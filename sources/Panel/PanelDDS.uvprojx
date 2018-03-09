@@ -1882,11 +1882,6 @@
               <FilePath>.\src\Menu\MenuDrawing.cpp</FilePath>
             </File>
             <File>
-              <FileName>MenuItemsLogic.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsLogic.cpp</FilePath>
-            </File>
-            <File>
               <FileName>MenuItems.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\libs\common\Menu\MenuItems.cpp</FilePath>
@@ -1911,6 +1906,21 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuItemsGraphics.cpp</FilePath>
             </File>
+            <File>
+              <FileName>MenuItemsAdd.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItemsAdd.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItemsLogicAdd.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItemsLogicAdd.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItemsLogic.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\libs\common\Menu\MenuItemsLogic.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1932,16 +1942,6 @@
               <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageSignals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSignals2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals2.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AddPageInput.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\AddPageInput.h</FilePath>
@@ -1957,14 +1957,24 @@
               <FilePath>.\src\Menu\Pages\PageService.h</FilePath>
             </File>
             <File>
-              <FileName>PageSignals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals.h</FilePath>
+              <FileName>PageSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSettings.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageSignals2.h</FileName>
+              <FileName>PageSettings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals2.h</FilePath>
+              <FilePath>.\src\Menu\Pages\PageSettings.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageSettings2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSettings2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSettings2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageSettings2.h</FilePath>
             </File>
           </Files>
         </Group>

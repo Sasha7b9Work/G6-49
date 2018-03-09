@@ -85,7 +85,7 @@ static void DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Painter::DrawBigText(x, y, 3, NameParameter(param));
+    Painter::DrawBigText(x, y, 3, Parameter_Name(param));
 
     char buf[2] = "0";
 

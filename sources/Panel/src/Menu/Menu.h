@@ -3,8 +3,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define NUM_PAGES           4   ///< Количество страниц в меню
-
+#define NUM_PAGES     4   ///< Количество страниц в меню
+#define PAGE_IS_MAIN  false
 
 extern const Page *menu[NUM_PAGES];
 
@@ -20,7 +20,7 @@ public:
     /// Возвращает true, если ручка управляет переклюичением страниц меню
     static bool RegIsControlPages();
 
-    static char *NameCurrentParameter();
+    static const char *NameCurrentParameter();
     /// Возвращает адрес открытого элемента меню
     static Control *OpenedItem();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
@@ -28,6 +28,8 @@ public:
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
     static Control *itemUnderKey;
+
+    static void SetItemForHint(void *item);
 
 private:
 

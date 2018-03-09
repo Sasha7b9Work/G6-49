@@ -5,8 +5,8 @@
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"
-#include "Menu/Pages/PageSignals.h"
-#include "Menu/Pages/PageSignals2.h"
+#include "Menu/Pages/PageSettings.h"
+#include "Menu/Pages/PageSettings2.h"
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/PageDebug.h"
 #include "Settings/Settings.h"
@@ -130,7 +130,7 @@ bool Menu::RegIsControlPages(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *Menu::NameCurrentParameter(void)
+const char *Menu::NameCurrentParameter(void)
 {
-    return ChoiceWaveParameter_CurrentName(&PageSignals::cpParameters);
+    return ChoiceWaveParameter_CurrentName(PageSignals::cpParameters);
 }

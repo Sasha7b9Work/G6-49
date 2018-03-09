@@ -166,6 +166,7 @@
     <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\libs\common\Log.cpp" />
     <ClCompile Include="..\..\libs\common\Menu\MenuItems.cpp" />
+    <ClCompile Include="..\..\libs\common\Menu\MenuItemsLogic.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\Math.cpp" />
     <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -260,13 +261,15 @@
     <ClCompile Include="..\..\Panel\src\main.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsAdd.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogicAdd.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals2.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings2.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\_MenuItems.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +394,7 @@
     <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h" />
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
+    <ClInclude Include="..\..\Panel\src\globals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h" />
@@ -403,8 +407,11 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings2.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\_MenuItems.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\_MenuItemsDrawing.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\_MenuItemsLogic.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />

@@ -16,7 +16,7 @@ void Item_Draw(int x, int y, void *item)
     if (type == Item_Choice)
     {
         Painter::DrawText(x + 5, y + 5, ItemTitle(item));
-        Painter::DrawTextRelativelyRight(315, y + 30, Choice_CurrentName((Choice *)item));
+        Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)item)->NameCurrentSubItem());
     }
     else if (type == Item_Button)
     {
@@ -63,7 +63,7 @@ void DrawOpenedItem()
 static void DrawOpenedChoice(Choice *choice)
 {
     int width = ITEM_WIDTH;
-    int height = Choice_NumChoices(choice) * 10 + 2 + 12;
+    int height = choice->NumSubItems() * 10 + 2 + 12;
 
     int y = MP_TITLE_HEIGHT + PositionOnPage(choice) * MI_HEIGHT;
     int x = SCREEN_WIDTH - ITEM_WIDTH - 20;
@@ -80,7 +80,7 @@ static void DrawOpenedChoice(Choice *choice)
 
     y += 14;
 
-    for (int i = 0; i < Choice_NumChoices(choice); i++)
+    for (int i = 0; i < choice->NumSubItems(); i++)
     {
         if (Choice_CurrentChoice(choice) == i)
         {
