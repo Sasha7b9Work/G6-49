@@ -3,8 +3,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define NUM_PAGES     4   ///< Количество страниц в меню
+#define NUM_PAGES     4        ///< Количество страниц в меню
 #define PAGE_IS_MAIN  false
+#define MENU_TEMP_ENABLE_STRING_NAVI()
 
 extern const Page *menu[NUM_PAGES];
 
