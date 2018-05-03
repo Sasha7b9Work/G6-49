@@ -1,7 +1,7 @@
 #include "InputWindowStruct.h"
 #include "Log.h"
 #include "Display/Painter.h"
-#include "Generator/Generator.h"
+#include "Generator.h"
 #include "Settings/SettingsSignals.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"

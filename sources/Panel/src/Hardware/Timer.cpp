@@ -3,7 +3,7 @@
 #include "Log.h"
 #if defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F429xx)
 #include <stm32f4xx.h>
-#include "stm32/4XX/Timer4XX.h"
+#include "Hardware/Timer4XX.h"
 #elif defined STM32F207xx
 #include "stm32/2XX/Timer2XX.h"
 #endif
