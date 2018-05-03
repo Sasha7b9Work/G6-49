@@ -22,9 +22,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{145effa6-1dfd-4227-aa65-7c77fe10de74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Generator">
-      <UniqueIdentifier>{d815a53e-22cf-4a7a-b506-a73b3f524f9c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="_VS">
       <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
     </Filter>
@@ -46,14 +43,8 @@
     <Filter Include="_dox">
       <UniqueIdentifier>{2690e07f-3dde-4194-baae-01189395676f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hardware\stm32">
-      <UniqueIdentifier>{9697a5be-5e7b-4345-9f64-c5693cd73a94}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
-      <Filter>Generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -135,41 +126,8 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Utils\Math.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Display\Colors.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Display\Painter.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Display\PainterSTM429.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Display\PainterText.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Display\PainterTextSTM429.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <Filter>libs\CMSIS</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp">
-      <Filter>Hardware\stm32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Log.cpp">
-      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
       <Filter>Hardware</Filter>
@@ -177,23 +135,11 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm429.cpp">
-      <Filter>Hardware\stm32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp">
-      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp">
       <Filter>Menu\Pages</Filter>
@@ -204,32 +150,77 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Menu\MenuItems.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings2.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\_MenuItems.cpp">
+    <ClCompile Include="..\..\Panel\src\globals.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Painter.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\PainterTextSTM429.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\stm32.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer4XX.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\VCP.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsAdd.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogicAdd.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Menu\MenuItemsLogic.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\Sound.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\globals.cpp">
+    <ClCompile Include="..\..\Panel\src\Generator.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\StringUtils.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +247,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h">
       <Filter>_dox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator\Generator.h">
-      <Filter>Generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Display.h">
       <Filter>Display</Filter>
@@ -338,23 +326,8 @@
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Utils\StringUtils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Utils\Math.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Display\Colors.h">
-      <Filter>Display</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Display\Painter.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h">
-      <Filter>Hardware\stm32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
       <Filter>_VS</Filter>
@@ -419,41 +392,14 @@
     <ClInclude Include="..\..\libs\common\_VS\limits.h">
       <Filter>_VS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Log.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f429xx.h">
       <Filter>libs\CMSIS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\VCP.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\4XX\stm429.h">
-      <Filter>Hardware\stm32</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h">
       <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Menu\MenuItemsDefs.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Menu\MenuItems.h">
-      <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h">
       <Filter>Menu\Pages</Filter>
@@ -473,17 +419,59 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings2.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\_MenuItems.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\_MenuItemsDrawing.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\_MenuItemsLogic.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\globals.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Painter.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Colors.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\stm32.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\stm429.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\Timer.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\Timer4XX.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\VCP.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Generator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\structs.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\Math.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\StringUtils.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

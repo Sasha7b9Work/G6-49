@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\libs\common;..\..\libs\common\_VS;..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
+    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\libs\common;D:\Projects\stm32\DDS\sources\Panel\src\_VS;..\..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;D:\Projects\stm32\DDS\sources\Panel\src\libs</IncludePath>
     <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,20 +155,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
-    <ClCompile Include="..\..\libs\common\Display\Colors.cpp" />
-    <ClCompile Include="..\..\libs\common\Display\Painter.cpp" />
-    <ClCompile Include="..\..\libs\common\Display\PainterSTM429.cpp" />
-    <ClCompile Include="..\..\libs\common\Display\PainterText.cpp" />
-    <ClCompile Include="..\..\libs\common\Display\PainterTextSTM429.cpp" />
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm429.cpp" />
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp" />
-    <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp" />
-    <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp" />
-    <ClCompile Include="..\..\libs\common\Log.cpp" />
-    <ClCompile Include="..\..\libs\common\Menu\MenuItems.cpp" />
-    <ClCompile Include="..\..\libs\common\Menu\MenuItemsLogic.cpp" />
-    <ClCompile Include="..\..\libs\common\Utils\Math.cpp" />
-    <ClCompile Include="..\..\libs\common\Utils\StringUtils.cpp" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -245,48 +231,50 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Colors.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Font\Font.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp" />
-    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp" />
+    <ClCompile Include="..\..\Panel\src\Display\PainterTextSTM429.cpp" />
+    <ClCompile Include="..\..\Panel\src\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\globals.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\Sound.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\stm32.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer4XX.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsAdd.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogicAdd.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings2.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\_MenuItems.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
+    <ClCompile Include="..\..\Panel\src\Utils\Math.cpp" />
+    <ClCompile Include="..\..\Panel\src\Utils\StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
-    <ClInclude Include="..\..\libs\common\Display\Colors.h" />
-    <ClInclude Include="..\..\libs\common\Display\Painter.h" />
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\4XX\stm429.h" />
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h" />
-    <ClInclude Include="..\..\libs\common\Hardware\Timer.h" />
-    <ClInclude Include="..\..\libs\common\Hardware\VCP.h" />
-    <ClInclude Include="..\..\libs\common\Log.h" />
-    <ClInclude Include="..\..\libs\common\Menu\MenuItems.h" />
-    <ClInclude Include="..\..\libs\common\Menu\MenuItemsDefs.h" />
-    <ClInclude Include="..\..\libs\common\Utils\Math.h" />
-    <ClInclude Include="..\..\libs\common\Utils\StringUtils.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h" />
     <ClInclude Include="..\..\libs\common\_VS\core_cm4.h" />
@@ -386,38 +374,48 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\defines.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Colors.h" />
     <ClInclude Include="..\..\Panel\src\Display\Display.h" />
     <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h" />
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h" />
     <ClInclude Include="..\..\Panel\src\Display\InputWindow.h" />
     <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h" />
+    <ClInclude Include="..\..\Panel\src\Display\Painter.h" />
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h" />
     <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h" />
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h" />
-    <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
+    <ClInclude Include="..\..\Panel\src\Generator.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\stm32.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\stm429.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Timer4XX.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Log.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings2.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\_MenuItems.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\_MenuItemsDrawing.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\_MenuItemsLogic.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
+    <ClInclude Include="..\..\Panel\src\structs.h" />
+    <ClInclude Include="..\..\Panel\src\Utils\Math.h" />
+    <ClInclude Include="..\..\Panel\src\Utils\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\libs\common\_VS\algorithm" />

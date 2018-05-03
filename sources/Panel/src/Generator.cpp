@@ -79,7 +79,7 @@ void Generator::SetParameter(Channel ch, WaveParameter param, float value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendToInterface(uint8 *data, int size)
+static void SendToInterface(uint8 *, int)
 {
     /*
     while (CPU::SPI4_::IsBusy())

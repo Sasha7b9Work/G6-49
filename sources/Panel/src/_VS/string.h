@@ -4,7 +4,7 @@
 char   *strcat(char *, const char *);
 char   *strcpy(char *, const char *);
 unsigned int  strlen(const char *);
-int     strcmp(char *, char *);
+int     strcmp(const void *, const void *);
 char    toupper(char);
 char    tolower(char);
 float   atof(char *);
