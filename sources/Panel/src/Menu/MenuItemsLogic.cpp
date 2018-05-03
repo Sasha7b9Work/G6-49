@@ -9,7 +9,6 @@
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
-#include "stub.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -353,20 +352,6 @@ void Time::DecCurrentPosition()
         {
             *value[position] = max[position];
         }
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::SetCurrentSB()
-{
-    if (funcOfActive())
-    {
-        if (SHOW_STRING_NAVI_TEMP)
-        {
-            MENU_TEMP_ENABLE_STRING_NAVI();
-        }
-        SetCurrent(true);
-        Open(!IsOpened());
     }
 }
 

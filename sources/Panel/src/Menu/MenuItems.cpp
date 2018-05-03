@@ -5,7 +5,6 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Log.h"
-#include "stub.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -191,7 +190,7 @@ bool Control::ChangeOpened(int delta)
     }
     else if (type == Item_ChoiceReg || type == Item_Choice)
     {
-        ((Choice *)this)->ChangeIndex(MENU_IS_SHOWN ? delta : -delta);
+        ((Choice *)this)->ChangeIndex(delta);
     }
     else if (type == Item_Governor)
     {
@@ -248,7 +247,6 @@ void Control::ShortPress()
     {
         Page *page = (Page *)this;
         page->funcOnPress();
-        page->SetCurrentSB();
     }
     else if(type == Item_Governor)
     {

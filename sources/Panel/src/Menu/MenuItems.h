@@ -127,7 +127,6 @@ public:
     int NumSubPages() const;        ///< Dозвращает число подстраниц в странице по адресу page
     int NumItems() const;           ///< Возвращает количество элементов в странице по адресу page
     NamePage GetNamePage() const;   ///< Возвращает имя страницы page
-    void SetCurrentSB();            ///< Установить текущей данную страницу с мылыми кнопками.
     int8 CurrentSubPage() const;
     void SetCurrentSubPage(int8 pos);
     void SetPosActItem(int8 pos);   ///< Устанавливает позицию активного пункта меню

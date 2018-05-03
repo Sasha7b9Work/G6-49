@@ -8,7 +8,6 @@
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "stub.h"
 
 
 /** @addtogroup Display

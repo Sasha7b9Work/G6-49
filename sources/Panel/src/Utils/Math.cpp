@@ -10,7 +10,6 @@
 #include <cstring>
 #endif
 #include <limits>
-#include "stub.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int LowSignedBit(uint value)
@@ -168,28 +167,6 @@ float RandFloat(float min, float max)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Math::MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
-{
-    uint8 max = Math::MaxFromArray(data, firstPoint, lastPoint);
-    if (max >= MAX_VALUE)
-    {
-        max = ERROR_VALUE_UINT8;
-    }
-    return max;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Math::MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint)
-{
-    uint8 min = Math::MinFromArray(data, firstPoint, lastPoint);
-    if (min < MIN_VALUE || min >= MAX_VALUE)
-    {
-        min = ERROR_VALUE_UINT8;
-    }
-    return min;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine)
 {
     if (y0 == y1)
@@ -198,31 +175,6 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
     }
 
     return (yHorLine - y0) / ((float)(y1 - y0) / (float)(x1 - x0)) + x0;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Math::CalculateMathFunction(float *dataAandResult, float *dataB, int numPoints)
-{
-    if (MATH_FUNC_IS_SUM)
-    {
-        int delta = dataB - dataAandResult;
-        float *end = &dataAandResult[numPoints];
-        while (dataAandResult < end)
-        {
-            *dataAandResult += *(dataAandResult + delta);
-            dataAandResult++;
-        }
-    }
-    else if (MATH_FUNC_IS_MUL)
-    {
-        int delta = dataB - dataAandResult;
-        float *end = &dataAandResult[numPoints];
-        while (dataAandResult < end)
-        {
-            *dataAandResult *= *(dataAandResult + delta);
-            dataAandResult++;
-        }
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
