@@ -337,7 +337,7 @@
               <MiscControls>--diag_suppress=161</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\HAL;.\src\Hardware;..\libs\common;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src\libs</IncludePath>
+              <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\Hardware;..\libs\common;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Panel\src\libs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -384,12 +384,12 @@
             <File>
               <FileName>startup_stm32f429xx.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\src\libs\CMSIS\startup_stm32f429xx.s</FilePath>
+              <FilePath>..\..\Panel\src\libs\CMSIS\startup_stm32f429xx.s</FilePath>
             </File>
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\libs\CMSIS\system_stm32f4xx.c</FilePath>
+              <FilePath>..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -449,7 +449,7 @@
             <File>
               <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -504,12 +504,12 @@
             <File>
               <FileName>stm32f4xx_hal.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -564,12 +564,12 @@
             <File>
               <FileName>stm32f4xx_hal_cortex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -624,12 +624,12 @@
             <File>
               <FileName>stm32f4xx_hal_dma.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_dma2d.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -684,12 +684,12 @@
             <File>
               <FileName>stm32f4xx_hal_dma2d.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma2d.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma2d.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -744,12 +744,12 @@
             <File>
               <FileName>stm32f4xx_hal_flash.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_flash_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -804,12 +804,12 @@
             <File>
               <FileName>stm32f4xx_hal_flash_ex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -864,12 +864,12 @@
             <File>
               <FileName>stm32f4xx_hal_gpio.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_ltdc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_ltdc.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_ltdc.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -924,12 +924,12 @@
             <File>
               <FileName>stm32f4xx_hal_ltdc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -984,12 +984,12 @@
             <File>
               <FileName>stm32f4xx_hal_pwr.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_pwr_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1044,12 +1044,12 @@
             <File>
               <FileName>stm32f4xx_hal_pwr_ex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1104,12 +1104,12 @@
             <File>
               <FileName>stm32f4xx_hal_rcc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1164,12 +1164,12 @@
             <File>
               <FileName>stm32f4xx_hal_rcc_ex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_rtc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1224,12 +1224,12 @@
             <File>
               <FileName>stm32f4xx_hal_rtc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_rtc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rtc_ex.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1284,12 +1284,12 @@
             <File>
               <FileName>stm32f4xx_hal_rtc_ex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1344,12 +1344,12 @@
             <File>
               <FileName>stm32f4xx_hal_spi.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_sram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1404,12 +1404,12 @@
             <File>
               <FileName>stm32f4xx_hal_sram.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1464,12 +1464,12 @@
             <File>
               <FileName>stm32f4xx_hal_tim.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_tim_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1524,12 +1524,12 @@
             <File>
               <FileName>stm32f4xx_hal_tim_ex.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_ll_fmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1584,12 +1584,12 @@
             <File>
               <FileName>stm32f4xx_ll_fmc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h</FilePath>
+              <FilePath>..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_conf.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
+              <FilePath>..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1599,37 +1599,37 @@
             <File>
               <FileName>defines.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\defines.h</FilePath>
+              <FilePath>..\..\Panel\src\defines.h</FilePath>
             </File>
             <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\main.cpp</FilePath>
+              <FilePath>..\..\Panel\src\main.cpp</FilePath>
             </File>
             <File>
               <FileName>globals.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\globals.cpp</FilePath>
+              <FilePath>..\..\Panel\src\globals.cpp</FilePath>
             </File>
             <File>
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Log.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Log.cpp</FilePath>
             </File>
             <File>
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Log.h</FilePath>
+              <FilePath>..\..\Panel\src\Log.h</FilePath>
             </File>
             <File>
               <FileName>Generator.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Generator.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Generator.cpp</FilePath>
             </File>
             <File>
               <FileName>Generator.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Generator.h</FilePath>
+              <FilePath>..\..\Panel\src\Generator.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1637,14 +1637,14 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
-              <FileName>Command.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Common\Command.h</FilePath>
-            </File>
-            <File>
               <FileName>Command.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Common\Command.cpp</FilePath>
+              <FilePath>..\..\Common\Command.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Command.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Common\Command.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1654,77 +1654,77 @@
             <File>
               <FileName>Display.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Display.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\Display.h</FilePath>
             </File>
             <File>
               <FileName>Display.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Display.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\Display.cpp</FilePath>
             </File>
             <File>
               <FileName>DisplayTypes.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\DisplayTypes.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\DisplayTypes.h</FilePath>
             </File>
             <File>
               <FileName>InputWindow.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\InputWindow.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\InputWindow.h</FilePath>
             </File>
             <File>
               <FileName>InputWindow.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\InputWindow.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\InputWindow.cpp</FilePath>
             </File>
             <File>
               <FileName>InputWindowStruct.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\InputWindowStruct.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\InputWindowStruct.h</FilePath>
             </File>
             <File>
               <FileName>InputWindowStruct.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\InputWindowStruct.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\InputWindowStruct.cpp</FilePath>
             </File>
             <File>
               <FileName>Symbols.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Symbols.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\Symbols.h</FilePath>
             </File>
             <File>
               <FileName>Painter.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\Painter.cpp</FilePath>
             </File>
             <File>
               <FileName>Painter.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Painter.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\Painter.h</FilePath>
             </File>
             <File>
               <FileName>PainterSTM429.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterSTM429.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\PainterSTM429.cpp</FilePath>
             </File>
             <File>
               <FileName>PainterText.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterText.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\PainterText.cpp</FilePath>
             </File>
             <File>
               <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Colors.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\Colors.cpp</FilePath>
             </File>
             <File>
               <FileName>Colors.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Colors.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\Colors.h</FilePath>
             </File>
             <File>
               <FileName>PainterTextSTM429.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterTextSTM429.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\PainterTextSTM429.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1734,32 +1734,32 @@
             <File>
               <FileName>Font.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\font\Font.h</FilePath>
+              <FilePath>..\..\Panel\src\Display\font\Font.h</FilePath>
             </File>
             <File>
               <FileName>font5.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\font\font5.inc</FilePath>
+              <FilePath>..\..\Panel\src\Display\font\font5.inc</FilePath>
             </File>
             <File>
               <FileName>font8.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\font\font8.inc</FilePath>
+              <FilePath>..\..\Panel\src\Display\font\font8.inc</FilePath>
             </File>
             <File>
               <FileName>fontUGO.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\font\fontUGO.inc</FilePath>
+              <FilePath>..\..\Panel\src\Display\font\fontUGO.inc</FilePath>
             </File>
             <File>
               <FileName>fontUGO2.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\font\fontUGO2.inc</FilePath>
+              <FilePath>..\..\Panel\src\Display\font\fontUGO2.inc</FilePath>
             </File>
             <File>
               <FileName>Font.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\font\Font.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\font\Font.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1769,87 +1769,87 @@
             <File>
               <FileName>CPU.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_FLASH.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\CPU_FLASH.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_Keyboard.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\CPU_Keyboard.cpp</FilePath>
             </File>
             <File>
               <FileName>Controls.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Controls.h</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\Controls.h</FilePath>
             </File>
             <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CPU.h</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
               <FileName>LTDC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\LTDC.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\LTDC.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_IT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer.h</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
               <FileName>VCP.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\VCP.cpp</FilePath>
             </File>
             <File>
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\VCP.h</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\VCP.h</FilePath>
             </File>
             <File>
               <FileName>stm32.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\stm32.cpp</FilePath>
             </File>
             <File>
               <FileName>stm32.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32.h</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\stm32.h</FilePath>
             </File>
             <File>
               <FileName>stm429.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm429.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\stm429.cpp</FilePath>
             </File>
             <File>
               <FileName>stm429.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm429.h</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\stm429.h</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\Timer4XX.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
+              <FilePath>..\..\Panel\src\Hardware\Timer4XX.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1859,57 +1859,57 @@
             <File>
               <FileName>Menu.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Menu.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Menu.h</FilePath>
             </File>
             <File>
               <FileName>Menu.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Menu.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Menu.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuDrawing.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuDrawing.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuDrawing.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuPagesNames.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuPagesNames.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuPagesNames.h</FilePath>
             </File>
             <File>
               <FileName>MenuItemsAdd.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItemsAdd.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuItemsAdd.h</FilePath>
             </File>
             <File>
               <FileName>MenuItemsGraphics.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsGraphics.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuItemsGraphics.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuItemsAdd.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsAdd.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuItemsAdd.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuItemsLogicAdd.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsLogicAdd.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuItemsLogicAdd.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuItems.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuItems.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuItems.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItems.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuItems.h</FilePath>
             </File>
             <File>
               <FileName>MenuItemsLogic.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsLogic.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\MenuItemsLogic.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1919,52 +1919,52 @@
             <File>
               <FileName>AddPageInput.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\AddPageInput.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\AddPageInput.cpp</FilePath>
             </File>
             <File>
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageDebug.cpp</FilePath>
             </File>
             <File>
               <FileName>PageService.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageService.cpp</FilePath>
             </File>
             <File>
               <FileName>AddPageInput.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\AddPageInput.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\AddPageInput.h</FilePath>
             </File>
             <File>
               <FileName>PageDebug.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageDebug.h</FilePath>
             </File>
             <File>
               <FileName>PageService.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageService.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageService.h</FilePath>
             </File>
             <File>
               <FileName>PageSettings.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings.cpp</FilePath>
             </File>
             <File>
               <FileName>PageSettings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings.h</FilePath>
             </File>
             <File>
               <FileName>PageSettings2.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings2.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings2.cpp</FilePath>
             </File>
             <File>
               <FileName>PageSettings2.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings2.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings2.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1974,27 +1974,27 @@
             <File>
               <FileName>SettingsTypes.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
+              <FilePath>..\..\Panel\src\Settings\SettingsTypes.h</FilePath>
             </File>
             <File>
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
+              <FilePath>..\..\Panel\src\Settings\Settings.h</FilePath>
             </File>
             <File>
               <FileName>SettingsSignals.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsSignals.h</FilePath>
+              <FilePath>..\..\Panel\src\Settings\SettingsSignals.h</FilePath>
             </File>
             <File>
               <FileName>Settings.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Settings\Settings.cpp</FilePath>
             </File>
             <File>
               <FileName>SettingsDisplay.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsDisplay.h</FilePath>
+              <FilePath>..\..\Panel\src\Settings\SettingsDisplay.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2004,22 +2004,22 @@
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Math.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Utils\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\Math.h</FilePath>
+              <FilePath>..\..\Panel\src\Utils\Math.h</FilePath>
             </File>
             <File>
               <FileName>StringUtils.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Utils\StringUtils.cpp</FilePath>
             </File>
             <File>
               <FileName>StringUtils.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\StringUtils.h</FilePath>
+              <FilePath>..\..\Panel\src\Utils\StringUtils.h</FilePath>
             </File>
           </Files>
         </Group>
