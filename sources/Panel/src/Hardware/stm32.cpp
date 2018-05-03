@@ -1,11 +1,13 @@
 #include "defines.h"
-#pragma clang diagnostic ignored "-Wpadded"
-#ifdef STM32F207xx
-#include <stm32f2xx.h>
-#else
+
+#ifdef STM32F429xx
 #include <stm32f4xx.h>
 #endif
-#pragma clang diagnostic warning "-Wpadded"
+
+#ifdef STM32F746xx
+#include <stm32f7xx.h>
+#endif
+
 #include "stm32.h"
 
 

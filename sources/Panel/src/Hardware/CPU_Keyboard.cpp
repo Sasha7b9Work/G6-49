@@ -1,6 +1,11 @@
-#pragma clang diagnostic ignored "-Wpadded"
+#ifdef STM32F429x
 #include <stm32f4xx.h>
-#pragma clang diagnostic warning "-Wpadded"
+#endif
+
+#ifdef STM32F746xx
+#include <stm32f7xx.h>
+#endif
+
 #include "defines.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"

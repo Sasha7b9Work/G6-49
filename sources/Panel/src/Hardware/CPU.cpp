@@ -1,12 +1,18 @@
-#pragma clang diagnostic ignored "-Wpadded"
+#ifdef STM32F429xx
 #include <stm32f4xx.h>
-#pragma clang diagnostic warning "-Wpadded"
+#endif
+
+#ifdef STM32F746xx
+#include <stm32f7xx.h>
+#endif
+
 #include "CPU.h"
 #include "LTDC.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Для связи с основным процессором
+#ifdef STM32F429xx
 static SPI_HandleTypeDef handleSPI4 =
 {
     SPI4,
@@ -25,6 +31,7 @@ static SPI_HandleTypeDef handleSPI4 =
     },
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
+#endif
 
 
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
@@ -61,6 +68,7 @@ void CPU::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::Init()
 {
+#ifdef STM32F429xx
     GPIO_InitTypeDef isGPIO =
     {   //  CLK         MI           MO
         GPIO_PIN_2 | GPIO_PIN_5 | GPIO_PIN_6,
@@ -79,12 +87,15 @@ void CPU::SPI4_::Init()
     isGPIO.Mode = GPIO_MODE_INPUT;
     isGPIO.Alternate = 0;
     HAL_GPIO_Init(GPIOE, &isGPIO);
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
+#ifdef STM32F429xx
     HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

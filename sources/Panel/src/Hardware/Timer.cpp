@@ -1,12 +1,17 @@
 #include "defines.h"
 #include "Timer.h"
 #include "Log.h"
-#if defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F429xx)
+
+#ifdef STM32F429xx
 #include <stm32f4xx.h>
 #include "Hardware/Timer4XX.h"
-#elif defined STM32F207xx
-#include "stm32/2XX/Timer2XX.h"
 #endif
+
+#ifdef STM32F746xx
+#include <stm32f7xx.h>
+#include "Hardware/Timer7XX.h"
+#endif
+
 #include <limits.h>
 #include "Hardware/CPU.h"
 
