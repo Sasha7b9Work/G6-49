@@ -481,7 +481,7 @@ void InputWindowStruct::PressKey(PanelControl key)
     {
         {B_1, '1'}, {B_2, '2'}, {B_3, '3'}, {B_4, '4'}, {B_5, '5'},
         {B_6, '6'}, {B_7, '7'}, {B_8, '8'}, {B_9, '9'}, {B_0, '0'}, {B_Dot, '.'},
-        {Control_None, '.'}
+        {B_None, '.'}
     };
 
     if (!IN_NUM_LOCK_MODE)
@@ -493,7 +493,7 @@ void InputWindowStruct::PressKey(PanelControl key)
     if (strlen(m_inputBuffer) < SIZE_INPUT_BUFFER_IWS - 1)
     {
         int i = 0;
-        while (command[i].control != Control_None)
+        while (command[i].control != B_None)
         {
             if (command[i].control == key)
             {

@@ -76,6 +76,8 @@ void Menu::ProcessControl(StructControl control)
         {
             if (CURRENT_PAGE < NUM_PAGES - 1)
             {
+                volatile int8 curPage = CURRENT_PAGE;
+
                 ++CURRENT_PAGE;
             }
         }

@@ -23,7 +23,7 @@ void Menu::Draw(void)
         Item_Draw(x, y, ItemFromPage(i));
     }
 
-    DrawPagesUGO();
+    DrawPagesUGO(); 
 
     if (OPENED_ITEM)
     {

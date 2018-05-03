@@ -44,7 +44,7 @@ PanelControl ButtonForItem(void *item)
         return (PanelControl)((int)B_F1 + pos);
     }
 
-    return Control_None;
+    return B_None;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

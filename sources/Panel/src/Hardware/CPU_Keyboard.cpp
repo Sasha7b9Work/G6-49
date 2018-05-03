@@ -40,12 +40,12 @@ static void DetectRegulator();
 /// При обнаружении нажатия кнопки сюда записывается время нажатия
 static uint timePress[5][6];
 
-                                     // SL0  SL1  SL2       SL3     SL4   SL5
-static const PanelControl controls[5][6] = {{B_0, B_5, B_Dot,    B_Ch,   B_F1, B_LEFT},          // RL0
-                                            {B_1, B_6, B_Minus,  B_WF,   B_F2, Control_None},    // RL1
-                                            {B_2, B_7, B_ESC,    B_U,    B_F3, REG_BTN},         // RL2
-                                            {B_3, B_8, B_M,      B_ON1,  B_F4, Control_None},    // RL3
-                                            {B_4, B_9, B_LEFT,   B_ON2,  B_F5, B_RIGHT}};        // RL4
+                                           // SL0  SL1  SL2       SL3     SL4   SL5
+static const PanelControl controls[5][6] = {{B_0, B_5, B_Dot,   B_ESC,   B_F1, B_None},          // RL0
+                                            {B_1, B_6, B_Minus, B_LEFT,  B_F2, B_None},    // RL1
+                                            {B_2, B_7, B_None,  B_RIGHT, B_F3, B_None},         // RL2
+                                            {B_3, B_8, B_ON1,   B_None,  B_F4, B_None},    // RL3
+                                            {B_4, B_9, B_ON2,   B_None,  B_F5, B_None}};        // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
@@ -100,7 +100,7 @@ void CPU::Keyboard::Update(void)
 
             PanelControl control =  controls[rl][sl];
 
-            if (control != Control_None)
+            if (control != B_None)
             {
                 if (timePress[rl][sl])                                      // Если клавиша находится в нажатом положении
                 {
@@ -130,23 +130,39 @@ void CPU::Keyboard::Update(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DetectRegulator(void)
 {
-    RESET_SL(5);
+    static bool prevStateButton = true;
+    static uint timePrev = 0;
+    
+    bool state = CPU::GPIO_::ReadPin('C', GPIO_PIN_2);
 
-    static uint prevStatesIsOne = false;
+    if(state != prevStateButton)
+    {
+        if(TIME_MS - timePrev < 50)
+        {
+            return;
+        }
 
-    uint stateLeft = READ_RL(1);
-    uint stateRight = READ_RL(3);
+        timePrev = TIME_MS;
+
+        FillCommand(REG_BTN, state ? TypePress_Release : TypePress_Press);
+        prevStateButton = state;
+    }
+
+    static bool prevStatesIsOne = false;
+
+    bool stateLeft = CPU::GPIO_::ReadPin('C', GPIO_PIN_0);
+    bool stateRight = CPU::GPIO_::ReadPin('C', GPIO_PIN_1);
 
     if (stateLeft && stateRight)
     {
         prevStatesIsOne = true;
     }
-    else if (prevStatesIsOne && BUTTON_IS_PRESS(stateLeft) && !BUTTON_IS_PRESS(stateRight))
+    else if (prevStatesIsOne && stateLeft && !stateRight)
     {
         FillCommand(REG_A_LEFT, TypePress_Press);
         prevStatesIsOne = false;
     }
-    else if (prevStatesIsOne && !BUTTON_IS_PRESS(stateLeft) && BUTTON_IS_PRESS(stateRight))
+    else if (prevStatesIsOne && !stateLeft && stateRight)
     {
         FillCommand(REG_B_RIGHT, TypePress_Press);
         prevStatesIsOne = false;
@@ -158,7 +174,7 @@ static void FillCommand(PanelControl control, TypePress typePress)
 {
     commands[pointer].control = control;
     commands[pointer++].typePress = typePress;
-    Display::SetButton(typePress == TypePress_Press ? control : Control_None);
+    Display::SetButton(typePress == TypePress_Press ? control : B_None);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -174,7 +190,7 @@ StructControl CPU::Keyboard::GetNextControl(void)
 
     if (BufferIsEmpty())
     {
-        retValue.control = Control_None;
+        retValue.control = B_None;
     }
     else
     {
@@ -228,6 +244,12 @@ void CPU::Keyboard::InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[
     {
         ERROR_HANDLER();
     }
+
+    // Инициализируем ручку
+    isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2;
+    isGPIO.Mode = GPIO_MODE_INPUT;
+    isGPIO.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(GPIOC, &isGPIO);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
