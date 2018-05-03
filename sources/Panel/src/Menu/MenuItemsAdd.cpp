@@ -6,7 +6,14 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void* ItemFromPage(int numItem)
 {
-    return (void *)CurrentPage()->items[numItem];
+    Page *page = CurrentPage();
+
+    if(page->NumItems() - 1 < numItem)
+    {
+        return 0;
+    }
+
+    return (void *)page->items[numItem];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,5 +121,14 @@ TypeItem TypeOfItem(void *address)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Page* CurrentPage(void)
 {
-    return (ADDITION_PAGE_IS_NONE ? (Page*)menu[CURRENT_PAGE] : ADDITION_PAGE);
+    volatile int8 num = CURRENT_PAGE;
+
+    if(num == 1)
+    {
+        num = num;
+    }
+    
+    Page *page = (Page *)menu[num];
+
+    return (ADDITION_PAGE_IS_NONE ? page : ADDITION_PAGE);
 }
