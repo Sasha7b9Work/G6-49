@@ -225,6 +225,12 @@
     <ClCompile Include="..\..\libs\common\Menu\MenuItemsLogic.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Sound.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\globals.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">

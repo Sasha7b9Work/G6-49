@@ -1621,6 +1621,11 @@
               <FileType>5</FileType>
               <FilePath>..\libs\common\stub.h</FilePath>
             </File>
+            <File>
+              <FileName>globals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\globals.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1825,6 +1830,11 @@
               <FileName>CPU_IT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sound.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Sound.cpp</FilePath>
             </File>
           </Files>
         </Group>

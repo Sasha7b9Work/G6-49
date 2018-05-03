@@ -250,11 +250,13 @@
     <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
+    <ClCompile Include="..\..\Panel\src\globals.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Sound.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

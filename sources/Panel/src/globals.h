@@ -1,4 +1,5 @@
 #pragma once
+#include "defines.h"
 
 
 #define HINT_MODE_ENABLED false
