@@ -337,7 +337,7 @@
               <MiscControls>--diag_suppress=161</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx, KORNET</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\HAL;.\src\Hardware;..\libs\common;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</IncludePath>
+              <IncludePath>.\src;.\src\libs\HAL;.\src\Hardware;..\libs\common;..\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src\libs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1607,24 +1607,19 @@
               <FilePath>.\src\main.cpp</FilePath>
             </File>
             <File>
+              <FileName>globals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\globals.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Log.cpp</FilePath>
+              <FilePath>.\src\Log.cpp</FilePath>
             </File>
             <File>
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Log.h</FilePath>
-            </File>
-            <File>
-              <FileName>stub.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\stub.h</FilePath>
-            </File>
-            <File>
-              <FileName>globals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\globals.cpp</FilePath>
+              <FilePath>.\src\Log.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1689,37 +1684,37 @@
             <File>
               <FileName>Painter.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Display\Painter.cpp</FilePath>
+              <FilePath>.\src\Display\Painter.cpp</FilePath>
             </File>
             <File>
               <FileName>Painter.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Display\Painter.h</FilePath>
-            </File>
-            <File>
-              <FileName>Colors.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Display\Colors.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Colors.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Display\Colors.h</FilePath>
-            </File>
-            <File>
-              <FileName>PainterText.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Display\PainterText.cpp</FilePath>
+              <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
               <FileName>PainterSTM429.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Display\PainterSTM429.cpp</FilePath>
+              <FilePath>.\src\Display\PainterSTM429.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PainterText.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\PainterText.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Colors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Colors.h</FilePath>
             </File>
             <File>
               <FileName>PainterTextSTM429.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Display\PainterTextSTM429.cpp</FilePath>
+              <FilePath>.\src\Display\PainterTextSTM429.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1802,26 +1797,6 @@
               <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\Timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\VCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\VCP.h</FilePath>
-            </File>
-            <File>
               <FileName>LTDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\LTDC.cpp</FilePath>
@@ -1832,9 +1807,24 @@
               <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
             <File>
-              <FileName>Sound.cpp</FileName>
+              <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Sound.cpp</FilePath>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1844,32 +1834,32 @@
             <File>
               <FileName>stm32.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\stm32.cpp</FilePath>
+              <FilePath>.\src\Hardware\stm32\stm32.cpp</FilePath>
             </File>
             <File>
               <FileName>stm32.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.h</FilePath>
+              <FilePath>.\src\Hardware\stm32\stm32.h</FilePath>
             </File>
             <File>
               <FileName>stm429.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\stm429.cpp</FilePath>
+              <FilePath>.\src\Hardware\stm32\4XX\stm429.cpp</FilePath>
             </File>
             <File>
               <FileName>stm429.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\stm429.h</FilePath>
+              <FilePath>.\src\Hardware\stm32\4XX\stm429.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\stm32\4XX\Timer4XX.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1890,16 +1880,6 @@
               <FileName>MenuDrawing.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuDrawing.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItems.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Menu\MenuItems.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItems.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Menu\MenuItems.h</FilePath>
             </File>
             <File>
               <FileName>MenuPagesNames.h</FileName>
@@ -1927,9 +1907,19 @@
               <FilePath>.\src\Menu\MenuItemsLogicAdd.cpp</FilePath>
             </File>
             <File>
+              <FileName>MenuItems.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\MenuItems.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MenuItems.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\MenuItems.h</FilePath>
+            </File>
+            <File>
               <FileName>MenuItemsLogic.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Menu\MenuItemsLogic.cpp</FilePath>
+              <FilePath>.\src\Menu\MenuItemsLogic.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2024,22 +2014,22 @@
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Utils\Math.cpp</FilePath>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Utils\Math.h</FilePath>
+              <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
               <FileName>StringUtils.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Utils\StringUtils.cpp</FilePath>
+              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
             </File>
             <File>
               <FileName>StringUtils.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Utils\StringUtils.h</FilePath>
+              <FilePath>.\src\Utils\StringUtils.h</FilePath>
             </File>
           </Files>
         </Group>

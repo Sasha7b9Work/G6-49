@@ -7,10 +7,8 @@
 #include "Log.h"
 #include "Settings/Settings.h"
 #include "Hardware/CPU.h"
-#include "Hardware/Sound.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
-//#include "Menu/Pages/PageDisplay.h"
 #include "stub.h"
 
 
@@ -47,7 +45,6 @@ void Choice::StartChange(int delta)
     {
         return;
     }
-    Sound::GovernorChangedValue();
     if (HINT_MODE_ENABLED)
     {
         Menu::SetItemForHint(this);
@@ -127,7 +124,6 @@ void Choice::ChangeIndex(int delta)
     }
     *cell = (int8)index;
     CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
-    Sound::GovernorChangedValue();
     NEED_FINISH_DRAW = 1;
 }
 
@@ -140,7 +136,6 @@ int Choice::NumSubItems()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::StartChange(int delta)
 {
-    Sound::GovernorChangedValue();
     if (delta > 0 && tsGovernor.address == this && tsGovernor.dir == INCREASE)
     {
         *cell = NextValue();
@@ -231,7 +226,6 @@ void Governor::ChangeValue(int delta)
         {
             funcOfChanged();
         }
-        Sound::GovernorChangedValue();
     }
 }
 
@@ -310,7 +304,6 @@ void Time::SetOpened()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Time::IncCurrentPosition()
 {
-    Sound::GovernorChangedValue();
     int8 *value[] = { 0, day, month, year, hours, minutes, seconds };
     int8 position = *curField;
     if (position != iSET && position != iEXIT)
@@ -343,14 +336,12 @@ void MACaddress::ChangeValue(int delta)
 {
     uint8 *value = mac0 + gCurDigit;
     *value += delta > 0 ? 1 : -1;
-    Sound::GovernorChangedValue();
     DISPLAY_SHOW_WARNING(NeedRebootDevice);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Time::DecCurrentPosition()
 {
-    Sound::GovernorChangedValue();
     static const int8 max[] = {0, 31, 12, 99, 23, 59, 59};
     static const int8 min[] = {0, 1, 1, 15, 0, 0, 0};
     int8 *value[] = {0, day, month, year, hours, minutes, seconds};
@@ -385,12 +376,10 @@ void GovernorColor::ChangeValue(int delta)
     if (ct->currentField == 0)
     {
         ct->BrightnessChange(delta);
-        Sound::GovernorChangedValue();
     }
     else
     {
         ct->ComponentChange(delta);
-        Sound::GovernorChangedValue();
     }
 
     Color::InitGlobalColors();
@@ -435,7 +424,6 @@ void IPaddress::ChangeValue(int delta)
         {
             ip0[numByte] = (uint8)newValue;
         }
-        Sound::GovernorChangedValue();
         DISPLAY_SHOW_WARNING(NeedRebootDevice);
     }
 }

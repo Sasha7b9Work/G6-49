@@ -2,8 +2,6 @@
 #include "Log.h"
 #include "Painter.h"
 #include "Display/Colors.h"
-#include "Ethernet/Ethernet.h"
-#include "Ethernet/TcpSocket.h"
 #include "FlashDrive/FileManager.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
@@ -275,46 +273,9 @@ bool Painter::SaveScreenToFlashDrive()
     return true;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void Get4Bytes(uint8 bytes[4])
+void Painter::ResetFlash()
 {
-    while (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_11) == GPIO_PIN_RESET) {};
-    bytes[0] = *ADDR_CDISPLAY;
-    bytes[1] = *ADDR_CDISPLAY;
-    bytes[2] = *ADDR_CDISPLAY;
-    bytes[3] = *ADDR_CDISPLAY;
 }
-*/
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static Color GetColor(int x, int y)
-{
-    uint8 command[4];
-    command[0] = GET_PIXEL;
-    *((int16 *)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
-    SendToDisplay(command, 4);
-    Get4Bytes(command);
-    return (Color)(command[0] & 0x0f);
-}
-*/
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void Get8Points(int x, int y, uint8 buffer[4])
-{
-    uint8 command[4];
-    command[0] = GET_PIXEL;
-    *((int16 *)(command + 1)) = (int16)x;
-    *(command + 3) = (int8)y;
-    SendToDisplay(command, 4);
-    Get4Bytes(buffer);
-}
-*/
 
 /** @} @}
 */

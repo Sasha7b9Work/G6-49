@@ -2,7 +2,6 @@
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
 #include <Menu/Menu.h>
-#include "Hardware/Sound.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Log.h"
@@ -90,12 +89,10 @@ void Page::ChangeSubPage(int delta)
 {
     if (delta > 0 && CurrentSubPage() < NumSubPages() - 1)
     {
-        Sound::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() + 1);
     }
     else if (delta < 0 && CurrentSubPage() > 0)
     {
-        Sound::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() - 1);
     }
 }
