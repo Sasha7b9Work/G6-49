@@ -63,11 +63,11 @@ void Item_Rotate(void *item, PanelControl control)
     {
         Choice *choice = (Choice*)item;
 
-        if (control == REG_A_LEFT)
+        if (control == REG_LEFT)
         {
             CircleIncrease<int8>(choice->cell, 0, (int8)(choice->NumSubItems() - 1));
         }
-        else if (control == REG_B_RIGHT)
+        else if (control == REG_RIGHT)
         {
             if(*(choice->cell) == 0)
             {

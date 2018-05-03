@@ -159,12 +159,12 @@ static void DetectRegulator(void)
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        FillCommand(REG_A_LEFT, TypePress_Press);
+        FillCommand(REG_LEFT, TypePress_Press);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        FillCommand(REG_B_RIGHT, TypePress_Press);
+        FillCommand(REG_RIGHT, TypePress_Press);
         prevStatesIsOne = false;
     }
 }

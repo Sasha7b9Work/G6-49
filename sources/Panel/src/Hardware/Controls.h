@@ -32,8 +32,8 @@ enum PanelControl
     B_U             = 0x18,
     B_ON1           = 0x19,
     B_ON2           = 0x1a,
-    REG_A_LEFT      = 0x1b,
-    REG_B_RIGHT     = 0x1c,
+    REG_LEFT        = 0x1b,
+    REG_RIGHT       = 0x1c,
     REG_BTN
 };
 

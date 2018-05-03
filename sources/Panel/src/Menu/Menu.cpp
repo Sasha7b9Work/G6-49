@@ -56,7 +56,7 @@ void Menu::ProcessControl(StructControl control)
     PanelControl key = control.control;
     TypePress pressed = control.typePress;
 
-    if (key == REG_A_LEFT)
+    if (key == REG_LEFT)
     {
         if (RegIsControlPages())
         {
@@ -67,10 +67,10 @@ void Menu::ProcessControl(StructControl control)
         }
         else
         {
-            Item_Rotate(OPENED_ITEM, REG_A_LEFT);
+            Item_Rotate(OPENED_ITEM, REG_LEFT);
         }
     }
-    else if (key == REG_B_RIGHT)
+    else if (key == REG_RIGHT)
     {
         if (RegIsControlPages())
         {
@@ -78,12 +78,12 @@ void Menu::ProcessControl(StructControl control)
             {
                 volatile int8 curPage = CURRENT_PAGE;
 
-                ++CURRENT_PAGE;
+                //++CURRENT_PAGE;
             }
         }
         else
         {
-            Item_Rotate(OPENED_ITEM, REG_B_RIGHT);
+            Item_Rotate(OPENED_ITEM, REG_RIGHT);
         }
     }
 

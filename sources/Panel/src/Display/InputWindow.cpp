@@ -214,14 +214,14 @@ void InputWindow::ProcessContorl(StructControl control)
             InputWindowStruct::PressKey(key);
         }
     }
-    else if (key == REG_A_LEFT)
+    else if (key == REG_LEFT)
     {
         if (!IN_NUM_LOCK_MODE)
         {
             InputWindowStruct::RegLeft();
         }
     }
-    else if (key == REG_B_RIGHT)
+    else if (key == REG_RIGHT)
     {
         if (!IN_NUM_LOCK_MODE)
         {
