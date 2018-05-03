@@ -75,7 +75,7 @@ typedef enum
   LPM_L0 = 0x00U, /* on */
   LPM_L1 = 0x01U, /* LPM L1 sleep */
   LPM_L2 = 0x02U, /* suspend */
-  LPM_L3 = 0x03U  /* off */
+  LPM_L3 = 0x03U, /* off */
 }PCD_LPM_StateTypeDef;
 
 typedef USB_OTG_GlobalTypeDef  PCD_TypeDef;
