@@ -16,9 +16,9 @@ void Painter::BeginScene(Color col)
         SetColor(col);
     }
 
-    for (int x = 0; x < 320; ++x)
+    for (int x = 0; x < SCREEN_WIDTH; ++x)
     {
-        for (int y = 0; y < 240; ++y)
+        for (int y = 0; y < SCREEN_HEIGHT; ++y)
         {
             SetPoint(x, y);
         }
@@ -171,9 +171,9 @@ void Painter::CalculateCurrentColor(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetPoint(int x, int y)
 {
-    if (x >= 0 && x < 320 && y >= 0 && y < 240)
+    if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)
     {
-        *(Display::GetBuffer() + y * 320 + x) = currentColor.value;
+        *(Display::GetBuffer() + y * SCREEN_WIDTH + x) = currentColor.value;
     }
 }
 

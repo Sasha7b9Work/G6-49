@@ -19,8 +19,16 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *Display::text = 0;
 char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
+#ifdef STM32F429xx
 uint8       Display::frontBuffer[320 * 240];
 uint8       Display::backBuffer[320 * 240];
+#endif
+    
+    
+#ifdef STM32F746xx
+uint8       Display::frontBuffer[1024 * 600];
+uint8       Display::backBuffer[1024 * 600];
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +49,11 @@ void Display::Update(void)
     Painter::BeginScene(Color::BACK);
 
     Painter::SetColor(Color::FILL);
+    
+    Painter::FillRegion(10, 10, 100, 100);
 
+#ifdef STM32F429xx
+    
     DrawSignal(A);
 
     DrawSignal(B);
@@ -61,6 +73,8 @@ void Display::Update(void)
     }
 
     DrawConsole();
+    
+#endif
 
     Painter::EndScene();
 }

@@ -2,8 +2,16 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifdef STM32F429xx
 #define SCREEN_WIDTH    320
 #define SCREEN_HEIGHT   240
+#endif
+
+#ifdef STM32F746xx
+#define SCREEN_WIDTH    1024
+#define SCREEN_HEIGHT   600
+#endif
+
 #define MP_TITLE_HEIGHT 19
 #define ITEM_WIDTH      69
 #define MI_HEIGHT       ((SCREEN_HEIGHT - MP_TITLE_HEIGHT - 1) / 4)
