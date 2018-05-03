@@ -2,8 +2,6 @@
 #include "Log.h"
 #include "Painter.h"
 #include "Display/Colors.h"
-#include "FlashDrive/FileManager.h"
-#include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"

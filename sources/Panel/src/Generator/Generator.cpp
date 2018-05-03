@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void SendToInterface(uint8 *buffer, int size);
 /// Сдвигает буфер на один бит влево
-static void ShiftToLeft(uint8 *buffer, int length);
+//static void ShiftToLeft(uint8 *buffer, int length);
 
 
 //static void MasterSynchro();
@@ -118,6 +118,7 @@ static void SendToInterface(uint8 *data, int size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static void ShiftToLeft(uint8 *buffer, int length)
 {
     for (int i = 0; i < length; i++)
@@ -132,3 +133,4 @@ static void ShiftToLeft(uint8 *buffer, int length)
         }
     }
 }
+*/
