@@ -128,6 +128,7 @@ static void WriteBufferBytes(uint address, void *buffer, int numBytes)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static uint GetSector(uint startAddress)
 {
+#ifdef STM32F429xx
     typedef struct
     {
         uint number;
@@ -149,6 +150,7 @@ static uint GetSector(uint startAddress)
         }
         i++;
     }
+#endif
 
     return MAX_UINT;
 }

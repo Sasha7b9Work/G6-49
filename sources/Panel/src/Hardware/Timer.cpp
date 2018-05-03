@@ -16,15 +16,17 @@
 #include "Hardware/CPU.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#if defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F429xx)
+#ifdef STM32F429xx
 
 static Timer4XX tim2;   // Для тиков
 static Timer4XX tim3;   // Для таймеров
 
-#elif defined STM32F207xx
+#endif
 
-static Timer2XX tim2;   // Для тиков
-static Timer2XX tim3;   // Для таймеров
+#ifdef STM32F746xx
+
+static Timer7XX tim2;   // Для тиков
+static Timer7XX tim3;   // Для таймеров
 
 #endif
 

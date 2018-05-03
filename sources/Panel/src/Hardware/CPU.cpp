@@ -41,8 +41,14 @@ static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 void CPU::Init()
 {
     SystemClockConfig();
-
+    
+#ifdef STM32F429xx
     STM429::Init();
+#endif
+
+#ifdef STM32F746xx
+    STM746::Init();
+#endif
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -101,7 +107,9 @@ void CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
 {
+#ifdef STM32F429xx
     HAL_SPI_Transmit(&handleSPI4, buffer, size, timeOut);
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -195,6 +203,7 @@ void CPU::SystemClockConfig()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::FSMC::Init(void)
 {
+#ifdef STM32F429xx
     /// \todo временно изменил - возможно, на флешку не пишет из-за неправильных таймингов
     static const FMC_NORSRAM_TimingTypeDef sramTiming =
     {
@@ -235,4 +244,5 @@ void CPU::FSMC::Init(void)
     {
         ERROR_HANDLER();
     };
+#endif
 }

@@ -8,7 +8,7 @@
   <WorkspaceName>WorkSpace</WorkspaceName>
 
   <project>
-    <PathAndName>.\DDS-Open\Panel\PanelDDS.uvprojx</PathAndName>
+    <PathAndName>.\DDS-Open\Panel\PanelDDS-Open.uvprojx</PathAndName>
     <NodeIsActive>1</NodeIsActive>
     <NodeIsExpanded>1</NodeIsExpanded>
   </project>

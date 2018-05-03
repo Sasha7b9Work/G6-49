@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Panel</TargetName>
+      <TargetName>Panel-Open</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pArmCC>5060528::V5.06 update 5 (build 528)::ARMCC</pArmCC>
@@ -337,7 +337,7 @@
               <MiscControls>--diag_suppress=161</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F746xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\Hardware;..\..\libs\STM32Cube_F7\Drivers\CMSIS\Include;..\..\libs\STM32Cube_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Inc;.\src\libs</IncludePath>
+              <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\Hardware;..\..\libs\STM32Cube_F7\Drivers\CMSIS\Include;..\..\libs\STM32Cube_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Inc;.\src\libs;.\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -825,6 +825,26 @@
               <FileName>stm32.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Hardware\stm32.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer7XX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer7XX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer7XX.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer7XX.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm746.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\stm746.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm746.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\stm746.h</FilePath>
             </File>
           </Files>
         </Group>
