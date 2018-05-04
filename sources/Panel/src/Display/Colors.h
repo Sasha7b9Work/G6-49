@@ -25,7 +25,7 @@ public:
     static Color GRID;
     static Color CHAN[4];
 
-    explicit Color(uint8 val) : value(val) { }
+    explicit Color(uint8 val);
     Color(const Color &color) : value(color.value) { }
 
     static Color Cursors(Channel ch);

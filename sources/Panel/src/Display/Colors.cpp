@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Colors.h"
 #include "Log.h"
 #include "Display/Colors.h"
 #include "Display/Painter.h"
@@ -50,6 +51,11 @@ Color Color::GRID(COLOR_GRID);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Color::Color(const uint8 val) : value(val)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Color::InitGlobalColors()
 {
     Color::BACK.value = BACKGROUND_BLACK ? Color::BLACK.value : Color::WHITE.value;
