@@ -2,7 +2,7 @@
 #include "Interface.h"
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
-#include "../../Common/Command.h"
+#include "Command.h"
 #include <string.h>
 
 

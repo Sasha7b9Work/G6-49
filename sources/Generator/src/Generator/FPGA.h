@@ -1,6 +1,6 @@
 #pragma once
 #include "defines.h"
-#include "../../Common/Command.h"
+#include "Command.h"
 #include "GeneratorSettingsTypes.h"
 
 

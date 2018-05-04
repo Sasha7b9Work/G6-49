@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Common/Command.h"
+#include "Command.h"
 #include "defines.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
