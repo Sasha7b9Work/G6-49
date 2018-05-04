@@ -101,7 +101,7 @@ void CPU::Keyboard::Update(void)
 
         for (int rl = 0; rl < NUM_RL; rl++)
         {
-            uint state = READ_RL(rl);
+            bool state = READ_RL(rl);
 
             PanelControl control =  controls[rl][sl];
 

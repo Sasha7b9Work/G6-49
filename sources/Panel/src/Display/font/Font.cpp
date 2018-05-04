@@ -40,7 +40,7 @@ int Font::GetHeightSymbol(char)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Font::GetLengthSymbol(uchar symbol)
+int Font::GetLengthSymbol(char symbol)
 {
     return font->symbol[symbol].width + 1;
 }

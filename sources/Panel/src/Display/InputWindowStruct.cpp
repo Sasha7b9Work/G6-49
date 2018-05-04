@@ -395,7 +395,7 @@ static float ValueAfterComma(InputWindowStruct *iws_)
     int pow = 1;
     for (int i = NUM_DIGITS - 1; i > iws_->posComma; i--)
     {
-        uint8 digit = iws_->inputBuffer[i];
+        char digit = iws_->inputBuffer[i];
         digit &= 0x0f;
         retValue += digit * pow;
         pow *= 10;

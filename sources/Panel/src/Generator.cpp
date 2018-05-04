@@ -3,7 +3,7 @@
 #include "Log.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
-#include "../../Common/Command.h"
+#include "Command.h"
 #include <string.h>
 
 

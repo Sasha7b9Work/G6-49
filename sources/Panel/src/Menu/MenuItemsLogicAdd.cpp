@@ -71,7 +71,7 @@ void Item_Rotate(void *item, PanelControl control)
         {
             if(*(choice->cell) == 0)
             {
-                *(choice->cell) = (uint8)(choice->NumSubItems() - 1);
+                *(choice->cell) = (int8)(choice->NumSubItems() - 1);
             }
             else
             {

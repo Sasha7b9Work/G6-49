@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\common\_VS;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\Panel\src\libs</IncludePath>
+    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\common\_VS;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\Panel\src\libs;..\..\common</IncludePath>
     <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>STM32F429xx;WIN32;USE_HAL_DRIVER</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4068;4365;4464;4514;4623;4626;4774;4820;5027</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4514;4623;4626;4774;4820;5027</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>

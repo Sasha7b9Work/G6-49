@@ -337,7 +337,7 @@
               <MiscControls>--cpp</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\HAL;.\src\Hardware;..\libs\common;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src\libs</IncludePath>
+              <IncludePath>.\src;.\src\libs\HAL;.\src\Hardware;..\libs\common;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src\libs;..\common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
