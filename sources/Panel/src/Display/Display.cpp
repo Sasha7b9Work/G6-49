@@ -170,10 +170,15 @@ void Display::DrawSignalParameters(Channel ch, int y0)
         if (allowParameters.allow[i])
         {
             Color color = Color::FILL;
-            if (ch == CURRENT_CHANNEL && strcmp(Menu::NameCurrentParameter(), Parameter_Name((WaveParameter)i)) == 0)
+            if (ch == CURRENT_CHANNEL)
             {
-                Painter::FillRegion(x0, y0, 139, 8, Color::FILL);
-                color = Color::BACK;
+                pString curPar = Menu::NameCurrentParameter();
+                pString parName = Parameter_Name((WaveParameter)i);
+                if(strcmp(curPar, parName) == 0)
+                {
+                    Painter::FillRegion(x0, y0, 139, 8, Color::FILL);
+                    color = Color::BACK;
+                }
             }
             Painter::DrawText(x0 + 1, y0, Parameter_Name((WaveParameter)i), color);
 
