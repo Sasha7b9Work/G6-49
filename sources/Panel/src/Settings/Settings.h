@@ -69,7 +69,7 @@ public:
     int8                menu_currentSubPage[NumPages];  ///< Ќомер текущей подстраницы дл€ каждой страницы
 
     static void Save();
-    static void Load();
+    static void Load(bool _default = false);
 };
 
 #pragma pack(pop)

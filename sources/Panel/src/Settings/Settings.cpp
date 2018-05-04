@@ -9,7 +9,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Settings set =
+static const Settings defSet =
 {
     sizeof(Settings),
     {
@@ -99,10 +99,12 @@ Settings set =
     (Page*)0,                       // menu_page
     false,                          // dbg_console
     {true, true},                   // sig_enabled
-    false,                          // serv_colorBackground
+    true,                           // serv_backgroundBlack
     true,                           // sig_tuneFull
     false                           // dbg_debugModeEnabled
 };
+
+Settings set = defSet;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,9 +140,16 @@ void Settings::Save(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Settings::Load(void)
+void Settings::Load(bool _default)
 {
-    CPU::FLASH_::LoadSettings();
+    if(_default)
+    {
+        set = defSet;
+    }
+    else
+    {
+        CPU::FLASH_::LoadSettings();
+    }
 
     TuneGenerator(A);
     TuneGenerator(B);

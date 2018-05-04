@@ -43,7 +43,7 @@ static void OnPress_Reset(void)
 {
     Generator::Reset();
     Timer::PauseOnTime(100);
-    Settings::Load();
+    Settings::Load(true);
 }
 
 DEF_BUTTON( bReset,                                                                                                          //--- Œ“À¿ƒ ¿ - —¡–Œ— ---
