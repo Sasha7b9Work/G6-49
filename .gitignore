@@ -3,7 +3,6 @@
 *.lib
 *.pdb
 *.txt
-*.uvgui*.*
 JLink*.*
 
 doc/doxygen/KornetDDS/*

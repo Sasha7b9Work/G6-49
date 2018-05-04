@@ -50,8 +50,6 @@ void Display::Update(void)
 
     Painter::SetColor(Color::FILL);
     
-    Painter::FillRegion(10, 10, 100, 100);
-
 #ifdef STM32F429xx
     
     DrawSignal(A);

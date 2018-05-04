@@ -91,7 +91,7 @@
       </PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>STM32F429xx;MSVC;USE_HAL_DRIVER</PreprocessorDefinitions>
+      <PreprocessorDefinitions>STM32F429xx;WIN32;USE_HAL_DRIVER</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4068;4365;4464;4514;4623;4626;4774;4820;5027</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
