@@ -22,9 +22,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{145effa6-1dfd-4227-aa65-7c77fe10de74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_VS">
-      <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="libs">
       <UniqueIdentifier>{b6de8b91-eaaa-4cfb-b45d-d852f5c55068}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="_dox">
       <UniqueIdentifier>{2690e07f-3dde-4194-baae-01189395676f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\_VS">
+      <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,67 +330,67 @@
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cm4.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cmFunc.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cmInstr.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cmSimd.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\ctype.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\integer.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\inttypes.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\math.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdarg.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdint.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdio.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdlib.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\string.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\tchar.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\windows.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cstdlib">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cstring">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\limits">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\limits.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
       <Filter>Hardware</Filter>
@@ -491,7 +491,7 @@
       <Filter>libs\CMSIS</Filter>
     </None>
     <None Include="..\..\libs\common\_VS\algorithm">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
   </ItemGroup>
 </Project>

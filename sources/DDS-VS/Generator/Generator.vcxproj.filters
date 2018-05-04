@@ -25,11 +25,8 @@
     <Filter Include="common">
       <UniqueIdentifier>{9fb7c831-1827-4375-b31e-8be47d1389fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_VS">
+    <Filter Include="common\_VS">
       <UniqueIdentifier>{4813cb9e-504a-4ec9-b68c-726ee8a80022}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hardware\stm32">
-      <UniqueIdentifier>{59929fa6-44e8-4b21-bc41-eca07291a380}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,73 +88,61 @@
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cm4.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cmFunc.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cmInstr.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\core_cmSimd.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\ctype.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\integer.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\inttypes.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\limits.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\math.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdarg.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdint.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdio.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\stdlib.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\string.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\tchar.h">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\libs\common\_VS\windows.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\stm32.h">
-      <Filter>Hardware\stm32</Filter>
+      <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\Timer.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\VCP.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\Hardware\stm32\4XX\stm407.h">
-      <Filter>Hardware\stm32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,26 +194,11 @@
     <ClCompile Include="..\..\Generator\src\Generator\GeneratorSettings.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\Command.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
       <Filter>libs\CMSIS</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\stm32.cpp">
-      <Filter>Hardware\stm32</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\Timer.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\VCP.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libs\common\Hardware\stm32\4XX\stm407.cpp">
-      <Filter>Hardware\stm32</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
@@ -239,16 +209,16 @@
       <Filter>libs\CMSIS</Filter>
     </None>
     <None Include="..\..\libs\common\_VS\algorithm">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
     <None Include="..\..\libs\common\_VS\cstdlib">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
     <None Include="..\..\libs\common\_VS\cstring">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
     <None Include="..\..\libs\common\_VS\limits">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
   </ItemGroup>
 </Project>
