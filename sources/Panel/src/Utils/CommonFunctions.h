@@ -2,19 +2,19 @@
 #include "defines.h"
 
 
-inline void EmptyFuncVV() {}
+void EmptyFuncVV();
 
-inline void EmptyFuncVpV(void *) {}
+void EmptyFuncVpV(void *);
 
-inline void EmptyFuncVII(int, int) {}
+void EmptyFuncVII(int, int);
 
-inline void EmptyFuncVI(int) {}
+void EmptyFuncVI(int);
 
-inline bool EmptyFuncBV() { return true; }
+bool EmptyFuncBV();
 
-inline void EmptyFuncVB(bool) {}
+void EmptyFuncVB(bool);
 
-inline void EmptyFuncpVII(void *, int, int) {}
+void EmptyFuncpVII(void *, int, int);
 
 void LoggingFloatArray(float *data, int num);
 
