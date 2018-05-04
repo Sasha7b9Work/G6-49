@@ -30,22 +30,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\defines.h">
@@ -69,10 +69,10 @@
     <ClInclude Include="..\..\Generator\src\Generator\FPGA.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Common\Command.h">
@@ -81,7 +81,7 @@
     <ClInclude Include="..\..\Generator\src\Generator\AD5697.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h">
@@ -144,10 +144,10 @@
     <ClInclude Include="..\..\Generator\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\Hardware\stm32.h">
@@ -167,31 +167,31 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_nor.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_nor.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Generator\Generator.cpp">
@@ -224,10 +224,10 @@
     <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c">
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Hardware\stm32.cpp">
