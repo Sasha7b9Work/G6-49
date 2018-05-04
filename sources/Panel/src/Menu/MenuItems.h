@@ -167,11 +167,18 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4623)
+#endif
 struct StructHelpSmallButton
 {
     pFuncVII    funcDrawUGO;    ///< Указатель на функцию отрисовки изображения варианта кнопки
     pString     helpUGO[2];     ///< Подпись к данному изображению.
 };
+#ifdef WIN32
+#pragma warning(pop)
+#endif
 
 
 /// Описывает кнопку для дополнительного режима меню.
