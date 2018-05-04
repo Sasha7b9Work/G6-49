@@ -6,26 +6,26 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool ItemIsButton(void* item)
 {
-    return item && (TypeOfItem(item) == Item_Button);
+    return item && (((Control *)item)->Type() == Item_Button);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool ItemIsChoice(void* item)
 {
-    return item && (TypeOfItem(item) == Item_Choice);
+    return item && (((Control *)item)->Type() == Item_Choice);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool ItemIsSButton(void* item)
 {
-    return item && (TypeOfItem(item) == Item_SmallButton);
+    return item && (((Control *)item)->Type() == Item_SmallButton);
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool ItemIsChoiceParameter(void *item)
 {
-    return item && (TypeOfItem(item) == Item_ChoiceParameter);
+    return item && (((Control *)item)->Type() == Item_ChoiceParameter);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ const char *ItemTitle(void* item)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Choice_CurrentChoice(Choice *choice)
 {
-    TypeItem type = TypeOfItem(choice);
+    TypeItem type = choice->Type();
 
     int retValue = 0;
 
@@ -93,16 +93,6 @@ int PositionOnPage(void *item)
         }
     }
     return -1;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-TypeItem TypeOfItem(void *address)
-{
-    if (address)
-    {
-        return ((Choice*)address)->type;
-    }
-    return Item_None;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

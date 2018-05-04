@@ -10,12 +10,7 @@ static void DrawOpenedChoice(Choice *choice);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Item_Draw(int x, int y, void *item)
 {
-    if(item == 0)
-    {
-        return;
-    }
-
-    TypeItem type = TypeOfItem(item);
+    TypeItem type = ((Control *)item)->Type();
 
     if (type == Item_Choice)
     {
@@ -50,7 +45,7 @@ void DrawOpenedItem()
 {
     if (OPENED_ITEM)
     {
-        TypeItem typeItem = TypeOfItem(OPENED_ITEM);
+        TypeItem typeItem = ((Control *)OPENED_ITEM)->Type();
 
         if (typeItem == Item_Choice)
         {

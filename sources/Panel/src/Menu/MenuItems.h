@@ -96,6 +96,8 @@ public:
     //void Draw(int x, int y, bool opened);
 
     void Press(TypePress press);
+
+    TypeItem Type();
 };
 
 

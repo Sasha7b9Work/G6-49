@@ -69,7 +69,7 @@ const char* Parameter_Name(WaveParameter parameter)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char* Choice_Name(void* choice, int num)
 {
-    TypeItem type = TypeOfItem(choice);
+    TypeItem type = ((Control *)choice)->Type();
 
     const char* retValue = 0;
 

@@ -52,8 +52,6 @@ void Item_Draw(int x, int y, void *item);
 
 void DrawOpenedItem();
 
-TypeItem TypeOfItem(void* address);
-
 const char* ItemTitle(void* item);
 /// Возвращает порядковый номер пункта меню на странице
 int PositionOnPage(void *item);
