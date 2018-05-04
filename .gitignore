@@ -7,9 +7,8 @@ JLink*.*
 
 doc/doxygen/KornetDDS/*
 
-sources/VS/Panel/.vs/*
 sources/.vs/*
-sources/_VS/Panel/.vs/*
+sources/DDS-VS/Panel/.vs/*
 
 sources/Generator/DebugConfig/*
 sources/Generator/Listings/*
@@ -22,11 +21,11 @@ sources/VS/Panel/Debug/*
 sources/VS/Panel/x64/*
 sources/VS/Generator/x64/*
 
-sources/_VS/Panel/Debug/*
-sources/_VS/Panel/x64/*
+sources/DDS-VS/Panel/Debug/*
+sources/DDS-VS/Panel/x64/*
 
-sources/_VS/Generator/x64/*
-sources/_VS/Generator/Debug/*
+sources/DDS-VS/Generator/x64/*
+sources/DDS-VS/Generator/Debug/*
 
 sources/DDS-Open/Panel/DebugConfig/*
 sources/DDS-Open/Panel/Objects/*
