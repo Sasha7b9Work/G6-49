@@ -4,23 +4,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Choice_Press(Choice *choice, TypePress press)
-{
-    if (press == TypePress_Release)
-    {
-        CircleIncrease<int8>(choice->cell, 0, (int8)(choice->NumSubItems() - 1));
-        if (choice->funcOnChanged)
-        {
-            choice->funcOnChanged(true);
-        }
-    }
-    else if (press == TypePress_LongPress)
-    {
-        OPENED_ITEM = choice;
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void ChoiceWaveParameter_Press(ChoiceParameter *choice, TypePress press)
 {
     if (press == TypePress_Release)

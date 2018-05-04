@@ -93,9 +93,9 @@ public:
     /// Вызывается при "длинном" нажатии
     void LongPress();
 
-    void Draw(int x, int y, bool opened);
+    //void Draw(int x, int y, bool opened);
 
-    void Press();
+    void Press(TypePress press);
 };
 
 
@@ -283,6 +283,8 @@ public:
     const char *NamePrevSubItem();
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     const char *NameSubItem(int i);
+
+    void Press(TypePress press);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// IPaddress ///

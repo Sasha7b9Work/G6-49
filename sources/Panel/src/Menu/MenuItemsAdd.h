@@ -29,8 +29,6 @@ public:
 
 bool ItemIsChoice(void* item);
 
-void Choice_Press(Choice *choice, TypePress press);
-
 bool ItemIsButton(void* item);
 
 void Button_Press(Button *button);

@@ -230,7 +230,7 @@ void InputWindow::ProcessContorl(StructControl strContr)
         
         if (ItemIsChoice(control))
         {
-            Choice_Press((Choice *)control, pressed);
+            control->Press(pressed);
         }
         else if (ItemIsButton(control))
         {

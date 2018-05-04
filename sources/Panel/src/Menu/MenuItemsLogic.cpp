@@ -102,6 +102,23 @@ float Choice::Step()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Choice::Press(TypePress press)
+{
+    if(press == TypePress_Release)
+    {
+        CircleIncrease<int8>(cell, 0, (int8)(NumSubItems() - 1));
+        if(funcOnChanged)
+        {
+            funcOnChanged(true);
+        }
+    }
+    else if(press == TypePress_LongPress)
+    {
+        OPENED_ITEM = this;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::ChangeIndex(int delta)
 {
     int index = *cell;
@@ -428,4 +445,13 @@ void IPaddress::GetNumPosIPvalue(int *numIP, int *selPos)
     }
 
 
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Control::Press(TypePress press)
+{
+    if(type == Item_Choice)
+    {
+        ((Choice*)this)->Press(press);
+    }
 }
