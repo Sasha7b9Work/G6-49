@@ -20,7 +20,7 @@ static uint8 waveForm = 0;
 static void OnPress_Channel(bool)
 {
     waveForm = (uint8)WAVE_FORM;
-    InputWindowStruct::FillAllowParameters(CHANNEL, WAVE_FORM, &parameters.allowParameters);
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&(set.sig_parameter[WAVE_FORM]);
 }
 
@@ -30,7 +30,7 @@ DEF_CHOICE_2( cChannel,                                                         
     "Selecting a channel to set up",
     "1", "1",
     "2", "2",
-    CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
+    CURRENT_CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
 )
 
 
@@ -52,9 +52,9 @@ void PageSignals::OnPress_Form(bool)
     }
 
     WAVE_FORM = form;
-    InputWindowStruct::FillAllowParameters(CHANNEL, WAVE_FORM, &parameters.allowParameters);
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&(set.sig_parameter[WAVE_FORM]);
-    TuneGenerator(CHANNEL);
+    TuneGenerator(CURRENT_CHANNEL);
 }
 
 DEF_CHOICE_3( cForm,                                                                                              //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘Œ–Ã¿ ---
@@ -95,7 +95,7 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 void PageSignals::Init()
 {
     waveForm = (uint8)WAVE_FORM;
-    InputWindowStruct::FillAllowParameters(CHANNEL, WAVE_FORM, &parameters.allowParameters);
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&(set.sig_parameter[(WaveForm)waveForm]);
 }
 

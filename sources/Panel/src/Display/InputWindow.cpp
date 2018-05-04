@@ -29,7 +29,7 @@ static void DrawDigits(int x, int y);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void InputWindow::Init(void)
 {
-    chan = CHANNEL;
+    chan = CURRENT_CHANNEL;
     form = WAVE_FORM_CH(chan);
     param = set.sig_parameter[form];
     iws = INPUT_WINDOW_STRUCT(chan, form, param);
@@ -45,7 +45,7 @@ void InputWindow::Draw(void)
     int width = SIGNAL_WIDTH;
     int height = SIGNAL_HEIGHT;
 
-    if (CHANNEL_IS_A)
+    if (CURRENT_CHANNEL_IS_A)
     {
         y += SIGNAL_HEIGHT;
     }

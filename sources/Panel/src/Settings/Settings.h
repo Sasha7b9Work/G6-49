@@ -8,15 +8,15 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pInput;
 
-#define CHANNEL                 (set.sig_channel)
-#define CHANNEL_IS_A            (CHANNEL == A)
-#define CHANNEL_IS_B            (CHANNEL == B)
+#define CURRENT_CHANNEL                 (set.sig_channel)
+#define CURRENT_CHANNEL_IS_A            (CURRENT_CHANNEL == A)
+#define CURRENT_CHANNEL_IS_B            (CURRENT_CHANNEL == B)
 
 #define CHANNEL_ENABLED(ch)     (set.sig_enabled[ch])
 #define CHANNEL_ENABLED_A       (CHANNEL_ENABLED(A))
 #define CHANNEL_ENABLED_B       (CHANNEL_ENABLED(B))
 
-#define WAVE_FORM               (set.sig_form[CHANNEL])
+#define WAVE_FORM               (set.sig_form[CURRENT_CHANNEL])
 #define WAVE_FORM_CH(ch)        (set.sig_form[ch])
 #define WAVE_FORM_IS_FPGA       (WAVE_FORM != Form_Sine && WAVE_FORM != Form_Impulse)
 
