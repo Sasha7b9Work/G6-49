@@ -162,6 +162,11 @@
     <ClInclude Include="..\..\Generator\src\Generator\GeneratorSettingsTypes.h" />
     <ClInclude Include="..\..\Generator\src\Generator\GeneratroSettings.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\CPU.h" />
+    <ClInclude Include="..\..\Generator\src\Hardware\stm32.h" />
+    <ClInclude Include="..\..\Generator\src\Hardware\stm407.h" />
+    <ClInclude Include="..\..\Generator\src\Hardware\Timer.h" />
+    <ClInclude Include="..\..\Generator\src\Hardware\Timer4XX.h" />
+    <ClInclude Include="..\..\Generator\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Generator\src\Interface\Interface.h" />
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
@@ -206,6 +211,8 @@
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h" />
+    <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h" />
     <ClInclude Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -218,6 +225,11 @@
     <ClCompile Include="..\..\Generator\src\Generator\GeneratorSettings.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\stm32.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\stm407.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\Timer4XX.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\VCP.cpp" />
     <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp" />
     <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -247,6 +259,8 @@
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c" />
+    <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c" />
     <ClCompile Include="..\..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
