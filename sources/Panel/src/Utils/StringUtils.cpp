@@ -84,7 +84,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
     }
 
     float absValue = fabsf(value);
-    sprintf(pBuffer, (char *)format, (double)absValue);
+    sprintf(pBuffer, format, (double)absValue);
 
     float val = (float)atof(pBuffer);
 

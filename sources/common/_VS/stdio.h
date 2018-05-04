@@ -1,4 +1,4 @@
 #pragma once
 
-int sprintf(char *, const char *, ...);
+int sprintf(char *, char *, ...);
 int snprintf(char *, int, const char *, ...);
