@@ -10,14 +10,14 @@
       <TargetName>Generator</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pArmCC>6070000::V6.7::.\ARMCLANG</pArmCC>
-      <pCCUsed>6070000::V6.7::.\ARMCLANG</pCCUsed>
-      <uAC6>1</uAC6>
+      <pArmCC>5060528::V5.06 update 5 (build 528)::ARMCC</pArmCC>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407ZGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.12.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x20000) IRAM2(0x10000000,0x10000) IROM(0x08000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -312,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>7</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -334,7 +334,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>-Wno-c++98-compat</MiscControls>
+              <MiscControls>--cpp</MiscControls>
               <Define>USE_HAL_DRIVER, DEBUG, STM32F407xx</Define>
               <Undefine></Undefine>
               <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\common;..\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\libs\STM32Cube_F4\Drivers\CMSIS\Include</IncludePath>
@@ -969,17 +969,12 @@
             <File>
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Log.cpp</FilePath>
+              <FilePath>.\src\Log.cpp</FilePath>
             </File>
             <File>
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Log.h</FilePath>
-            </File>
-            <File>
-              <FileName>stub.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\stub.h</FilePath>
+              <FilePath>.\src\Log.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1062,69 +1057,64 @@
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\Timer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CPU.h</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\Timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\VCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\VCP.h</FilePath>
             </File>
             <File>
               <FileName>CPU_IT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware/stm32</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\stm32.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\stm32.h</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\Timer4XX.h</FilePath>
-            </File>
             <File>
               <FileName>stm407.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\stm407.cpp</FilePath>
+              <FilePath>.\src\Hardware\stm407.cpp</FilePath>
             </File>
             <File>
               <FileName>stm407.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\libs\common\Hardware\stm32\4XX\stm407.h</FilePath>
+              <FilePath>.\src\Hardware\stm407.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\stm32.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\stm32.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
             </File>
           </Files>
         </Group>

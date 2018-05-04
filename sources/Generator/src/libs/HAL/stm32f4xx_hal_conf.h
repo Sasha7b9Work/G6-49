@@ -6,10 +6,6 @@
 #define __attribute(x)
 #endif
 
-// warning: padding struct ... with n bytes to align
-#pragma clang diagnostic ignored "-Wpadded"
-
-
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
