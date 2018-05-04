@@ -51,10 +51,10 @@ void Menu::Update(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessControl(StructControl control)
+void Menu::ProcessControl(StructControl strContr)
 {
-    PanelControl key = control.control;
-    TypePress pressed = control.typePress;
+    PanelControl key = strContr.control;
+    TypePress pressed = strContr.typePress;
 
     if (key == REG_LEFT)
     {

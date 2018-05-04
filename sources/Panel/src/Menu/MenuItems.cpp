@@ -61,7 +61,7 @@ Control *Page::Item(int numElement) const
         return 0;
     }
 
-    return (Control *)items[numElement + (isPageSB ? 1 : 0)];
+    return (Control *)items[numElement];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

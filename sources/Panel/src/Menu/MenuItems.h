@@ -94,6 +94,8 @@ public:
     void LongPress();
 
     void Draw(int x, int y, bool opened);
+
+    void Press();
 };
 
 

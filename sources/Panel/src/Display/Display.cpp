@@ -78,7 +78,7 @@ void Display::Update(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::SetButton(PanelControl control)
+void Display::SetButton(PanelControl)
 {
     //text = PanelControlName(control);
 }
