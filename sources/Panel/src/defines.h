@@ -4,16 +4,6 @@
 #define __ARMCLIB_VERSION 6070001
 #endif
 
-#pragma clang diagnostic ignored "-Wold-style-cast"
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-#pragma clang diagnostic ignored "-Winvalid-source-encoding"
-#pragma clang diagnostic ignored "-Wchar-subscripts"
-#pragma clang diagnostic ignored "-Wformat-nonliteral"
-#pragma clang diagnostic ignored "-Wglobal-constructors"
-#pragma clang diagnostic ignored "-Wcast-align"
-#pragma clang diagnostic ignored "-Wwritable-strings"
-#pragma clang diagnostic ignored "-Wpadded"
-
 #define DEBUG
 
 #ifdef STM32F429xx

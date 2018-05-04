@@ -124,8 +124,6 @@ static void DrawDigits(int x, int y)
     Painter::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, iws.order, iws.param));
 }
 
-#pragma clang diagnostic ignored "-Wunused-parameter"
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawAmplitude(int, int)
 {
@@ -173,8 +171,6 @@ static void DrawDuration(int, int)
 {
 
 }
-
-#pragma clang diagnostic warning "-Wunused-parameter"
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::KeyLeft()
