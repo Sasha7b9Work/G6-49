@@ -20,7 +20,7 @@ void Menu::Draw(void)
         {
             Painter::DrawRectangle(x, y, ITEM_WIDTH, MI_HEIGHT);
         }
-        Item_Draw(x, y, ItemFromPage(i));
+        Item_Draw(x, y, CurrentPage()->Item(i));
     }
 
     DrawPagesUGO(); 

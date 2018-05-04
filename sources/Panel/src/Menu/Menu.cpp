@@ -95,23 +95,24 @@ void Menu::ProcessControl(StructControl control)
             }
         }
         else if (key >= B_F1 && key <= B_F4)
-        {
-            void *address = ItemFromPage(key - B_F1);
-            if (ItemIsChoice(address))
+        {           
+            Control *control = CurrentPage()->Item(key - B_F1);
+            
+            if (ItemIsChoice(control))
             {
-                Choice_Press((Choice *)address, pressed);
+                Choice_Press((Choice *)control, pressed);
             }
-            else if (ItemIsButton(address))
+            else if (ItemIsButton(control))
             {
-                Button_Press((Button *)address);
+                Button_Press((Button *)control);
             }
-            else if (ItemIsSButton(address))
+            else if (ItemIsSButton(control))
             {
-                SButton_Press((SButton *)address);
+                SButton_Press((SButton *)control);
             }
-            else if (ItemIsChoiceParameter(address))
+            else if (ItemIsChoiceParameter(control))
             {
-                ChoiceWaveParameter_Press((ChoiceParameter *)address, pressed);
+                ChoiceWaveParameter_Press((ChoiceParameter *)control, pressed);
             }
         }
         else if(key == B_ON1)

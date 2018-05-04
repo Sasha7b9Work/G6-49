@@ -27,8 +27,6 @@ public:
 };
 
 
-void* ItemFromPage(int numItem);
-
 bool ItemIsChoice(void* item);
 
 void Choice_Press(Choice *choice, TypePress press);
