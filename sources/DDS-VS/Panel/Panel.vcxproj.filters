@@ -37,9 +37,6 @@
     <Filter Include="Display\Font">
       <UniqueIdentifier>{255c5d44-7148-42c2-bd4d-c6717ab7f6f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_dox">
-      <UniqueIdentifier>{2690e07f-3dde-4194-baae-01189395676f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="common\_VS">
       <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
     </Filter>
@@ -227,9 +224,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h">
-      <Filter>_dox</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
       <Filter>Settings</Filter>
     </ClInclude>
@@ -244,12 +238,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Command.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h">
-      <Filter>_dox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h">
-      <Filter>_dox</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Display.h">
       <Filter>Display</Filter>

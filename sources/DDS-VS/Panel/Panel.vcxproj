@@ -385,9 +385,6 @@
     <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h" />
     <ClInclude Include="..\..\Panel\src\Display\Painter.h" />
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
-    <ClInclude Include="..\..\Panel\src\dox\02 Межпроцессорное взаимодействие.h" />
-    <ClInclude Include="..\..\Panel\src\dox\03 Аппаратные сигналы генератора.h" />
-    <ClInclude Include="..\..\Panel\src\dox\RelatedPages.h" />
     <ClInclude Include="..\..\Panel\src\Generator.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
