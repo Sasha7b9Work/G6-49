@@ -16,6 +16,19 @@ static bool loggerUSB = false;
 #define SIZE_BUFFER_LOG 200
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifdef STM32F746xx
+void Log::Write(TypeTrace, char *, ...)
+{
+}
+
+void Log::Trace(TypeTrace, const char *, const char *, int, char *, ...)
+{
+}
+
+#endif
+
+
+#ifdef STM32F429xx
 void Log::Write(TypeTrace type, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
@@ -87,3 +100,4 @@ void Log::EnableLoggerUSB(bool enable)
 {
     loggerUSB = enable;
 }
+#endif

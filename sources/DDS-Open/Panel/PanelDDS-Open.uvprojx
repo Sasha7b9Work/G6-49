@@ -55,7 +55,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -337,7 +337,7 @@
               <MiscControls>--diag_suppress=161</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F746xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\Hardware;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Include;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\common\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Inc;.\src\libs;.\src;..\..\common</IncludePath>
+              <IncludePath>.\src;.\src\libs;..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\Hardware;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Include;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\common\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Inc;..\..\common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -764,67 +764,57 @@
             <File>
               <FileName>CPU.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\CPU.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_FLASH.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\CPU_FLASH.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_Keyboard.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\CPU_Keyboard.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Controls.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Hardware\Controls.h</FilePath>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Hardware\CPU.h</FilePath>
-            </File>
-            <File>
-              <FileName>LTDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\LTDC.cpp</FilePath>
+              <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
               <FileName>CPU_IT.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\CPU_IT.cpp</FilePath>
+              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
+              <FileName>LTDC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\Timer.cpp</FilePath>
+              <FilePath>.\src\Hardware\LTDC.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.h</FileName>
+              <FileName>LTDC.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Hardware\Timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\VCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Hardware\VCP.h</FilePath>
+              <FilePath>.\src\Hardware\LTDC.h</FilePath>
             </File>
             <File>
               <FileName>stm32.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Hardware\stm32.cpp</FilePath>
+              <FilePath>.\src\Hardware\stm32.cpp</FilePath>
             </File>
             <File>
               <FileName>stm32.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Hardware\stm32.h</FilePath>
+              <FilePath>.\src\Hardware\stm32.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm746.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\stm746.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm746.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\stm746.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
               <FileName>Timer7XX.cpp</FileName>
@@ -837,14 +827,14 @@
               <FilePath>.\src\Hardware\Timer7XX.h</FilePath>
             </File>
             <File>
-              <FileName>stm746.cpp</FileName>
+              <FileName>CPU_Keyboard.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm746.cpp</FilePath>
+              <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
             </File>
             <File>
-              <FileName>stm746.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm746.h</FilePath>
+              <FileName>CPU_FLASH.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
             </File>
           </Files>
         </Group>
