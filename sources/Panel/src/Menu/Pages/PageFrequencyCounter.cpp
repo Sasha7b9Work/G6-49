@@ -2,11 +2,13 @@
 #include "Settings/Settings.h"
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pFrequencyCounter;
 Page *PageFrequencyCounter::pointer = (Page *)&pFrequencyCounter;
 
 
-DEF_CHOICE_2(cEnableFrequencyCounter,
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEF_CHOICE_2(cEnableFrequencyCounter,                                                                               //--- ЧАСТОТОМЕР - ОТОБРАЖЕНИЕ ---
     "ОТОБРАЖЕНИЕ", "DISPLAY",
     "Включает и выключает вывод частотомера",
     "Turns the frequency meter output on and off",
@@ -16,9 +18,11 @@ DEF_CHOICE_2(cEnableFrequencyCounter,
 )
 
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_1(pFrequencyCounter,
     "ЧАСТОТОМЕР", "FRUENCY METER",
-    "", "",
+    "Управление фукнциями частотомера",
+    "Control of frequency meter functions",
     cEnableFrequencyCounter,
     Page_FrequencyCounter, 0, FuncActive, FuncPress
 )

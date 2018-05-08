@@ -31,7 +31,7 @@ void InputWindow::Init(void)
 {
     chan = CURRENT_CHANNEL;
     form = WAVE_FORM_CH(chan);
-    param = set.sig_parameter[form];
+    param = CURRENT_PARAMETER(form);
     iws = INPUT_WINDOW_STRUCT(chan, form, param);
 
 	(&iws)->Fill(chan, form, param);

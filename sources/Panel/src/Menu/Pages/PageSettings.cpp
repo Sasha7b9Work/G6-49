@@ -21,7 +21,7 @@ static void OnPress_Channel(bool)
 {
     waveForm = (uint8)WAVE_FORM;
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&(set.sig_parameter[WAVE_FORM]);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM);
 }
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - КАНАЛ ---
@@ -53,7 +53,7 @@ void PageSignals::OnPress_Form(bool)
 
     WAVE_FORM = form;
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&(set.sig_parameter[WAVE_FORM]);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM);
     TuneGenerator(CURRENT_CHANNEL);
 }
 
@@ -87,7 +87,7 @@ DEF_CHOICE_PARAMETER(parameters,                                                
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки",
     "Choosing a setting for customization",
-    pSignals, FuncActive, OnPress_SetParameter, (set.sig_parameter[(WaveForm)waveForm]),
+    pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER((WaveForm)waveForm)),
     true, true, true, true, false, false, false, false
 )
 
@@ -96,7 +96,7 @@ void PageSignals::Init()
 {
     waveForm = (uint8)WAVE_FORM;
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&(set.sig_parameter[(WaveForm)waveForm]);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER((WaveForm)waveForm);
 }
 
 DEF_PAGE_4
