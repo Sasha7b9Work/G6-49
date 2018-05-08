@@ -205,34 +205,34 @@ void LTDC_::Init(uint front, uint back)
   HAL_LTDC_Init(&handleLTDC);
 
   pLayerCfg.WindowX0 = 0;
-  pLayerCfg.WindowX1 = 1024;
+  pLayerCfg.WindowX1 = SCREEN_WIDTH;
   pLayerCfg.WindowY0 = 0;
-  pLayerCfg.WindowY1 = 600;
+  pLayerCfg.WindowY1 = SCREEN_HEIGHT;
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
   pLayerCfg.Alpha = 0xFF;
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   pLayerCfg.FBStartAdress = 0xD0000000;
-  pLayerCfg.ImageWidth = 1024;
-  pLayerCfg.ImageHeight = 600;
+  pLayerCfg.ImageWidth = SCREEN_WIDTH;
+  pLayerCfg.ImageHeight = SCREEN_HEIGHT;
   pLayerCfg.Backcolor.Blue = 0;
   pLayerCfg.Backcolor.Green = 0;
   pLayerCfg.Backcolor.Red = 0;
   HAL_LTDC_ConfigLayer(&handleLTDC, &pLayerCfg, 0);
 
   pLayerCfg1.WindowX0 = 0;
-  pLayerCfg1.WindowX1 = 1024;
+  pLayerCfg1.WindowX1 = SCREEN_WIDTH;
   pLayerCfg1.WindowY0 = 0;
-  pLayerCfg1.WindowY1 = 600;
+  pLayerCfg1.WindowY1 = SCREEN_HEIGHT;
   pLayerCfg1.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
   pLayerCfg1.Alpha = 0;
   pLayerCfg1.Alpha0 = 0;
   pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
   pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   pLayerCfg1.FBStartAdress = 0xD0200000;
-  pLayerCfg1.ImageWidth = 1024;
-  pLayerCfg1.ImageHeight = 600;
+  pLayerCfg1.ImageWidth = SCREEN_WIDTH;
+  pLayerCfg1.ImageHeight = SCREEN_HEIGHT;
   pLayerCfg1.Backcolor.Blue = 0;
   pLayerCfg1.Backcolor.Green = 0;
   pLayerCfg1.Backcolor.Red = 0;
@@ -252,7 +252,7 @@ void LTDC_::SetBuffers(uint front, uint back)
     pLayerCfg.WindowX0 = 0;
     pLayerCfg.WindowX1 = SCREEN_WIDTH;
     pLayerCfg.WindowY0 = 0;
-    pLayerCfg.WindowY1 = 240;
+    pLayerCfg.WindowY1 = SCREEN_HEIGHT;
     pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
     pLayerCfg.Alpha = 255;
     pLayerCfg.Alpha0 = 255;
@@ -260,7 +260,7 @@ void LTDC_::SetBuffers(uint front, uint back)
     pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
     pLayerCfg.FBStartAdress = frontBuffer;
     pLayerCfg.ImageWidth = SCREEN_WIDTH;
-    pLayerCfg.ImageHeight = 240;
+    pLayerCfg.ImageHeight = SCREEN_HEIGHT;
     pLayerCfg.Backcolor.Blue = 0;
     pLayerCfg.Backcolor.Green = 0;
     pLayerCfg.Backcolor.Red = 0;
@@ -300,7 +300,7 @@ void LTDC_::ToggleBuffers()
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, 1024, 600) == HAL_OK)
+            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&hDMA2D, 100);
             }

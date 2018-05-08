@@ -36,3 +36,7 @@ sources/DDS-Open/Panel/Listings/*
 sources/DDS-Open/Generator/DebugConfig/*
 sources/DDS-Open/Generator/Objects/*
 sources/DDS-Open/Generator/Listings/*
+
+
+sources/_VS/Generator/Debug/*
+sources/_VS/Panel/Debug/*

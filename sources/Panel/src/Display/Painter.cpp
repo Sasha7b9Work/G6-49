@@ -182,7 +182,7 @@ bool Painter::SaveScreenToFlashDrive()
     {
         0x42,
         0x4d,
-        14 + 40 + 1024 + 320 * 240 / 2,
+        14 + 40 + 1024 + SCREEN_WIDTH * SCREEN_HEIGHT / 2,
         0,
         0,
         14 + 40 + 1024
@@ -203,8 +203,8 @@ bool Painter::SaveScreenToFlashDrive()
     BITMAPINFOHEADER bmIH =
     {
         40, // size;
-        320,// width;
-        240,// height;
+        SCREEN_WIDTH,// width;
+        SCREEN_HEIGHT,// height;
         1,  // planes;
         4,  // bitCount;
         0,  // compression;
@@ -217,7 +217,7 @@ bool Painter::SaveScreenToFlashDrive()
 
     FDrive::WriteToFile((uint8 *)(&bmIH), 40, &structForWrite);
 
-    uint8 buffer[320 * 3] = {0};
+    uint8 buffer[SCREEN_WIDTH * 3] = {0};
 
     typedef struct tagRGBQUAD
     {
@@ -246,9 +246,9 @@ bool Painter::SaveScreenToFlashDrive()
 
     FSMC_SET_MODE(ModeFSMC_Display);
 
-    for (int y = 239; y >= 0; y--)
+    for (int y = SCREEN_HEIGHT - 1; y >= 0; y--)
     {
-        for (int x = 1; x < 320; x += 2)
+        for (int x = 1; x < SCREEN_WIDTH; x += 2)
         {
             uint8 color = Read2points(x, y);
 

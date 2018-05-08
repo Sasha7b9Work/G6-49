@@ -8,8 +8,8 @@
 #endif
 
 #ifdef STM32F746xx
-#define SCREEN_WIDTH    1024
-#define SCREEN_HEIGHT   600
+#define SCREEN_WIDTH    320
+#define SCREEN_HEIGHT   240
 #endif
 
 #define MP_TITLE_HEIGHT 19
