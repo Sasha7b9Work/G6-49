@@ -119,7 +119,7 @@ void FPGA::SetWaveForm(WaveForm form)
         &FPGA::GenerateSaw,
         &FPGA::SetModeImpulse
     };
-
+    
     if (form < NumForms)
     {
         pFuncFpgaVV f = func[form];

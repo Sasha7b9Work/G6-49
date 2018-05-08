@@ -33,6 +33,8 @@ extern const PageBase pInput;
 
 #define CONSOLE_ENABLED         (set.dbg_console)
 
+#define FREQ_COUNTER_ENABLED    (set.freq_enabled)
+
 #define DEBUG_MODE_ENABLED      (set.dbg_debugModeEnabled)
 
 #define LANG                    (set.serv_language)
@@ -67,6 +69,7 @@ public:
     bool                dbg_debugModeEnabled;           ///< Если true, то включён отладочный режим - непрерывные засылки в альтеру
     int8                menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
     int8                menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
+    bool                freq_enabled;                   ///< Отображение показаний частотомера
 
     static void Save();
     static void Load(bool _default = false);

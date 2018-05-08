@@ -1922,24 +1922,24 @@
               <FilePath>.\src\Menu\Pages\AddPageInput.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageDebug.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageService.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AddPageInput.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\AddPageInput.h</FilePath>
             </File>
             <File>
+              <FileName>PageDebug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageDebug.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageService.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
             </File>
             <File>
               <FileName>PageService.h</FileName>
@@ -1965,6 +1965,16 @@
               <FileName>PageSettings2.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageSettings2.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageFrequencyCounter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFrequencyCounter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFrequencyCounter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageFrequencyCounter.h</FilePath>
             </File>
           </Files>
         </Group>

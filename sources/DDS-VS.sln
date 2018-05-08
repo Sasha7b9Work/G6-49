@@ -9,9 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Panel", "DDS-VS\Panel\Panel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{AF211104-7844-40E3-98A9-B0218BA28966}"
 	ProjectSection(SolutionItems) = preProject
+		doc\01 Алгоритмы.h = doc\01 Алгоритмы.h
 		doc\02 Межпроцессорное взаимодействие.h = doc\02 Межпроцессорное взаимодействие.h
 		doc\03 Аппаратные сигналы генератора.h = doc\03 Аппаратные сигналы генератора.h
-		doc\RelatedPages.h = doc\RelatedPages.h
+		doc\04 Загрузчик.h = doc\04 Загрузчик.h
 		doc\timers.txt = doc\timers.txt
 	EndProjectSection
 EndProject

@@ -4,6 +4,8 @@
 *.pdb
 *.txt
 JLink*.*
+*~*
+*$*
 
 doc/doxygen/KornetDDS/*
 

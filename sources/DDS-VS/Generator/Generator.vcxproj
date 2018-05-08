@@ -94,7 +94,7 @@
       <PreprocessorDefinitions>USE_HAL_DRIVER;STM32F407xx;MSVC</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4310;4820</DisableSpecificWarnings>
-      <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-MP -Qspectre %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
