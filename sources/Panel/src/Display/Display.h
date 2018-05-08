@@ -36,6 +36,8 @@ private:
 
     static void DrawConsole();
 
+    static void DrawFrequencyCounter();
+
     static const char *text;
 
     static const int STRING_IN_CONSOLE = 29;
@@ -43,8 +45,8 @@ private:
     static const int SYMBOLS_IN_STRING = 64;
 
     static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING];
-    // Экран
+    /// Экран
     static uint8 frontBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
-    // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
+    /// Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
     static uint8 backBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
 };

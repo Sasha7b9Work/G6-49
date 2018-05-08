@@ -70,6 +70,8 @@ void Display::Update(void)
         Painter::DrawText(75, 4, text);
     }
 
+    DrawFrequencyCounter();
+
     DrawConsole();
     
 #endif
@@ -172,8 +174,6 @@ void Display::DrawSignalParameters(Channel ch, int y0)
             Color color = Color::FILL;
             if (ch == CURRENT_CHANNEL)
             {
-                volatile WaveParameter param = CURRENT_PARAMETER(WAVE_FORM_CH(ch));
-
                 pString curPar = Menu::NameCurrentParameter();
                 pString parName = Parameter_Name((WaveParameter)i);
                 if(strcmp(curPar, parName) == 0)
@@ -264,4 +264,15 @@ void Display::DrawConsole(void)
 void Display::AddStringToIndicating(pString)
 {
 
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawFrequencyCounter()
+{
+    if(!FREQ_COUNTER_ENABLED)
+    {
+        return;
+    }
+
+    Painter::DrawText(8, SCREEN_HEIGHT - 16, "F", Color::FILL);
 }
