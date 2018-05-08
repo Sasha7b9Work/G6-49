@@ -61,7 +61,7 @@ public:
     InputWindowStruct   sig_structParameter[NumChannels][NumForms][NumParameters];
     Language            serv_language;                  ///< Выбранный язык
     int8                menu_currentPage;               ///< Отображаемая страница меню
-    void*               menu_openedItem;                ///< Если какой-то пункт меню раскрыт, то здесь его адрес
+    Control*            menu_openedItem;                ///< Если какой-то пункт меню раскрыт, то здесь его адрес
     Page*               menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
     bool                dbg_console;
     bool                sig_enabled[NumChannels];       ///< Состояние выхода - включен или выключен

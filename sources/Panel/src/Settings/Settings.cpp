@@ -95,7 +95,7 @@ static const Settings defSet =
     },
     Russian,                        // serv_language
     0,                              // menu_currentPage
-    (void*)0,                       // menu_openedItem
+    (Control *)0,                   // menu_openedItem
     (Page*)0,                       // menu_page
     false,                          // dbg_console
     {true, true},                   // sig_enabled

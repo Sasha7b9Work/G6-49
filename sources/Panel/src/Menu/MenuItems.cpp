@@ -392,3 +392,9 @@ void Page::SetCurrentSubPage(int8 pos)
 {
     MENU_CURRENT_SUBPAGE(name) = pos;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Control::IsChoice()
+{
+    return Type() == Item_Choice;
+}

@@ -100,7 +100,7 @@ void Menu::ProcessControl(StructControl strContr)
         {           
             Control *control = CurrentPage()->Item(key - B_F1);
             
-            if (ItemIsChoice(control))
+            if (control->IsChoice())
             {
                 control->Press(pressed);
             }

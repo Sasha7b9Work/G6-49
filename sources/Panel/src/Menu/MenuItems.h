@@ -98,6 +98,8 @@ public:
     void Press(TypePress press);
 
     TypeItem Type();
+
+    bool IsChoice();
 };
 
 

@@ -40,9 +40,9 @@ void SButton_Press(SButton *button)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Item_Rotate(void *item, PanelControl control)
+void Item_Rotate(Control *item, PanelControl control)
 {
-    if (ItemIsChoice(item))
+    if (item->IsChoice())
     {
         Choice *choice = (Choice*)item;
 
