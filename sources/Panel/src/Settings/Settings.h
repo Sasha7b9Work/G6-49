@@ -8,9 +8,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pInput;
 
-#define CURRENT_CHANNEL                 (set.sig_channel)
-#define CURRENT_CHANNEL_IS_A            (CURRENT_CHANNEL == A)
-#define CURRENT_CHANNEL_IS_B            (CURRENT_CHANNEL == B)
+#define CURRENT_CHANNEL         (set.sig_channel)
+#define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == A)
+#define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == B)
 
 #define CHANNEL_ENABLED(ch)     (set.sig_enabled[ch])
 #define CHANNEL_ENABLED_A       (CHANNEL_ENABLED(A))

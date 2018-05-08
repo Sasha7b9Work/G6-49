@@ -172,6 +172,8 @@ void Display::DrawSignalParameters(Channel ch, int y0)
             Color color = Color::FILL;
             if (ch == CURRENT_CHANNEL)
             {
+                volatile WaveParameter param = CURRENT_PARAMETER(WAVE_FORM_CH(ch));
+
                 pString curPar = Menu::NameCurrentParameter();
                 pString parName = Parameter_Name((WaveParameter)i);
                 if(strcmp(curPar, parName) == 0)

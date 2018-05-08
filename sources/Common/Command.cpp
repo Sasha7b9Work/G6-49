@@ -101,5 +101,7 @@ const char* Choice_Name(void* choice, int num)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *ChoiceWaveParameter_CurrentName(void *choice)
 {
-    return (char*)(nameParameter[*(((Choice *)choice)->cell)][LANG]);
+    int num = *((ChoiceParameter *)choice)->numParameter;
+
+    return (const char*)(nameParameter[num][LANG]);
 }
