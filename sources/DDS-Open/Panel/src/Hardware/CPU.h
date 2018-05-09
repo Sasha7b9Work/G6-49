@@ -57,7 +57,7 @@ public:
 
         static void Init();
 
-        static void DrawButton(int x, int y, char *title);
+        static void DrawButton(int x, int y, const char *title);
 
     public:
         static void Draw();

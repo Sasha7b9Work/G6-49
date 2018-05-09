@@ -9,7 +9,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-uint time = 0;
+/// Время последнего нажатия кнопки
+static uint timeLastPress = 0;
 static void(*callbackKeyboard)() = 0;
 static TIM_HandleTypeDef handleTIM4;
 #define TIME_UPDATE 2
@@ -17,6 +18,22 @@ static uint8 TS_flag = 0;
 TS_StateTypeDef TS_state = { 0 };
 uint8 TouchPoint = 0;
 TS_StateTypeDef TS_BKState;
+#define WIDTH_BUTTON  150
+#define HEIGHT_BUTTON 80
+#define DELTA_BUTTON  10
+static int x0 = 350;
+static int y0 = 25;
+
+struct StructButton
+{
+    int x;
+    int y;
+};
+
+static int selX = 0; // Если кнопка нажата, то
+static int selY = 0; // здесь её координаты
+
+static StructButton strBtn[6][4];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +56,15 @@ void CPU::Keyboard::Init()
     HAL_TIM_Base_Start_IT(&handleTIM4);
 
     TOUCH::Init();
+
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            strBtn[i][j].x = x0 + j * (WIDTH_BUTTON + DELTA_BUTTON);
+            strBtn[i][j].y = y0 + i * (HEIGHT_BUTTON + DELTA_BUTTON);
+        }
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,17 +81,10 @@ StructControl CPU::Keyboard::GetNextControl()
     return retValue;
 }
 
-#define WIDTH_BUTTON 150
-#define HEIGHT_BUTTON 80
-#define DELTA 10
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Draw()
 {
-    int x0 = 350;
-    int y0 = 25;
-
-    static char *titles[6][4] =
+    static const char *titles[6][4] =
     {
         {"F1", "1", "2", "3"},
         {"F2", "4", "5", "6"},
@@ -79,37 +98,66 @@ void CPU::Keyboard::Draw()
     {
         for (int j = 0; j < 4; j++)
         {
-            char *title = titles[i][j];
+            const char *title = titles[i][j];
             if (title[0])
             {
-                DrawButton(x0 + j * (WIDTH_BUTTON + DELTA), y0 + i * (HEIGHT_BUTTON + DELTA), title);
+                DrawButton(strBtn[i][j].x, strBtn[i][j].y, title);
             }
         }
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::DrawButton(int x, int y, char *title)
+void CPU::Keyboard::DrawButton(int x, int y, const char *title)
 {
-    Painter::DrawRectangle(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
-    Painter::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title);
+    if (selX == x && selY == y)
+    {
+        Painter::FillRegion(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
+        Painter::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title, Color::BACK);
+    }
+    else
+    {
+        Painter::DrawRectangle(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
+        Painter::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Update()
 {
+    if (TIME_MS - timeLastPress < 15)
+    {
+        return;
+    }
+
     if (TS_flag == 1)
     {
-        char buffer[20];
-
         TOUCH::GetState(&TS_state);
         if (TS_state.touchDetected != 0)
         {
-            Painter::DrawText(10, 500, Int2String(TS_state.touchX[0], false, 5, buffer));
-            Painter::DrawText(10, 520, Int2String(TS_state.touchY[0], false, 5, buffer));
+            int x = TS_state.touchX[0];
+            int y = TS_state.touchY[0];
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (x > strBtn[i][j].x && x < (strBtn[i][j].x + WIDTH_BUTTON) &&
+                        y > strBtn[i][j].y && y < (strBtn[i][j].y + HEIGHT_BUTTON))
+                    {
+                        selX = strBtn[i][j].x;
+                        selY = strBtn[i][j].y;
+                    }
+                }
+            }
         }
 
         TS_flag = 0;
+        timeLastPress = TIME_MS;
+    }
+    else
+    {
+        selX = -1;
     }
 }
 
@@ -128,29 +176,9 @@ void CPU::Keyboard::TOUCH::GetState(TS_StateTypeDef *TS_State)
     if (TS_State->touchDetected != 0)
     {
         //Touch point 1 coordinates
-        TS_State->touchY[0] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x02] << 8) + RegBuf[0x03]);
-        TS_State->touchX[0] = (((uint16_t)RegBuf[0x04] << 8) + RegBuf[0x05]);
+        TS_State->touchY[0] = (uint16)(GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x02] << 8) + RegBuf[0x03]));
+        TS_State->touchX[0] = (uint16)((((uint16_t)RegBuf[0x04] << 8) + RegBuf[0x05]));
         TS_State->touchWeight[0] = RegBuf[0x06];
-
-        //Touch point 2 coordinates
-        TS_State->touchY[1] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x07] << 8) + RegBuf[0x08]);
-        TS_State->touchX[1] = (((uint16_t)RegBuf[0x09] << 8) + RegBuf[0x0A]);
-        TS_State->touchWeight[1] = RegBuf[0x0B];
-
-        //Touch point 3 coordinates
-        TS_State->touchY[2] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x0C] << 8) + RegBuf[0x0D]);
-        TS_State->touchX[2] = (((uint16_t)RegBuf[0x0E] << 8) + RegBuf[0x0F]);
-        TS_State->touchWeight[2] = RegBuf[0x10];
-
-        //Touch point 4 coordinates
-        TS_State->touchY[3] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x11] << 8) + RegBuf[0x18]);
-        TS_State->touchX[3] = (((uint16_t)RegBuf[0x19] << 8) + RegBuf[0x1A]);
-        TS_State->touchWeight[3] = RegBuf[0x1B];
-
-        //Touch point 5 coordinates
-        TS_State->touchY[4] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x1C] << 8) + RegBuf[0x1D]);
-        TS_State->touchX[4] = (((uint16_t)RegBuf[0x1E] << 8) + RegBuf[0x1F]);
-        TS_State->touchWeight[4] = RegBuf[0x20];
     }
 }
 
