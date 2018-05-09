@@ -36,6 +36,14 @@
 #ifndef __STM32F7xx_HAL_CONF_H
 #define __STM32F7xx_HAL_CONF_H
 
+#define __weak __attribute((weak))
+
+#ifdef WIN32
+#define __attribute(x)
+#define SCB_EnableICache()
+#define SCB_EnableDCache()
+#endif
+
 #ifdef __cplusplus
  extern "C" {
 #endif
