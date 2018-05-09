@@ -30,8 +30,6 @@ public:
         static void Draw();
         /// Установка каллбэка для клавиатуры
         static void SetCallback(void(*func)());
-
-        static void InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL);
         /// Возвращает true, если буфер пуст
         static bool BufferIsEmpty();
         /// Возвращает следующий орган управления, если таковой имеется
