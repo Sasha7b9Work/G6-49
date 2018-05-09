@@ -279,6 +279,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
+    <ClInclude Include="..\..\common\_VS\core_cm4.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmFunc.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmInstr.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmSimd.h" />
+    <ClInclude Include="..\..\common\_VS\ctype.h" />
+    <ClInclude Include="..\..\common\_VS\integer.h" />
+    <ClInclude Include="..\..\common\_VS\inttypes.h" />
+    <ClInclude Include="..\..\common\_VS\limits.h" />
+    <ClInclude Include="..\..\common\_VS\math.h" />
+    <ClInclude Include="..\..\common\_VS\stdarg.h" />
+    <ClInclude Include="..\..\common\_VS\stdint.h" />
+    <ClInclude Include="..\..\common\_VS\stdio.h" />
+    <ClInclude Include="..\..\common\_VS\stdlib.h" />
+    <ClInclude Include="..\..\common\_VS\string.h" />
+    <ClInclude Include="..\..\common\_VS\tchar.h" />
+    <ClInclude Include="..\..\common\_VS\windows.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h" />
     <ClInclude Include="..\..\libs\common\_VS\core_cm4.h" />
@@ -421,6 +439,10 @@
     <ClInclude Include="..\..\Panel\src\Utils\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\common\_VS\algorithm" />
+    <None Include="..\..\common\_VS\cstdlib" />
+    <None Include="..\..\common\_VS\cstring" />
+    <None Include="..\..\common\_VS\limits" />
     <None Include="..\..\libs\common\_VS\algorithm" />
     <None Include="..\..\Panel\src\Display\font\font5.inc" />
     <None Include="..\..\Panel\src\Display\font\font8.inc" />

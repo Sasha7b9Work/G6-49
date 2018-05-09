@@ -5,11 +5,15 @@
 #ifdef STM32F429xx
 #define SCREEN_WIDTH    320
 #define SCREEN_HEIGHT   240
+#define BUFFER_WIDTH    SCREEN_WIDTH    /* Ширина буфера для рисования */
+#define BUFFER_HEIGHT   SCREEN_HEIGHT   /* Высота буфера для рисования */
 #endif
 
 #ifdef STM32F746xx
-#define SCREEN_WIDTH    1024
-#define SCREEN_HEIGHT   600
+#define SCREEN_WIDTH    320
+#define SCREEN_HEIGHT   240
+#define BUFFER_WIDTH    1024            /* Ширина буфера для рисования */
+#define BUFFER_HEIGHT   600             /* Высота буфера для рисования */
 #endif
 
 #define MP_TITLE_HEIGHT 19

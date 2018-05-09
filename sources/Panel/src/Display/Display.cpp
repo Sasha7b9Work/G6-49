@@ -16,13 +16,14 @@
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *Display::text = 0;
 char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
 #ifdef STM32F429xx
-uint8       *Display::frontBuffer = malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
-uint8       *Display::backBuffer = malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
+uint8       *Display::frontBuffer = (uint8 *)malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
+uint8       *Display::backBuffer = (uint8 *)malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
 #endif
     
 #ifdef STM32F746xx
