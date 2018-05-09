@@ -11,6 +11,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Время последнего нажатия кнопки
 static uint timeLastPress = 0;
+static int pointer = 0;
+static StructControl commands[10];
 static void(*callbackKeyboard)() = 0;
 static TIM_HandleTypeDef handleTIM4;
 #define TIME_UPDATE 2
@@ -26,6 +28,8 @@ static int y0 = 25;
 
 struct StructButton
 {
+    const char *title;
+    PanelControl control;
     int x;
     int y;
 };
@@ -33,7 +37,15 @@ struct StructButton
 static int selX = 0; // Если кнопка нажата, то
 static int selY = 0; // здесь её координаты
 
-static StructButton strBtn[6][4];
+static StructButton strBtn[6][4] =
+{
+    { {"F1"},  {"1"},        {"2"},    {"3"} },
+    { {"F2"},  {"4"},        {"5"},    {"6"} },
+    { {"F3"},  {"7"},        {"8"},    {"9"} },
+    { {"F4"},  {"."},        {"0"},    {"-"} },
+    { {"ON1"}, {"REG LEFT"}, {"BTN"},  {"REG RIGHT"} },
+    { {"ON2"}, {"ESC"},      {"LEFT"}, {"RIGHT"} }
+};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,40 +77,53 @@ void CPU::Keyboard::Init()
             strBtn[i][j].y = y0 + i * (HEIGHT_BUTTON + DELTA_BUTTON);
         }
     }
+
+    for (int i = 4; i < 6; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            strBtn[i][j].y += DELTA_BUTTON * 2;
+        }
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 1; j < 4; j++)
+        {
+            strBtn[i][j].x += DELTA_BUTTON * 2;
+        }
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool CPU::Keyboard::BufferIsEmpty()
 {
-    return true;
+    return pointer == 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 StructControl CPU::Keyboard::GetNextControl()
 {
     StructControl retValue;
-    retValue.typePress = TypePress_Press;
-    return retValue;
+
+    if (BufferIsEmpty())
+    {
+        retValue.control = B_None;
+    }
+    else
+    {
+        retValue = commands[0];
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Draw()
 {
-    static const char *titles[6][4] =
-    {
-        {"F1", "1", "2", "3"},
-        {"F2", "4", "5", "6"},
-        {"F3", "7", "8", "9"},
-        {"F4", ".", "0", "-"},
-        {"ESC", "REG LEFT", "BTN", "REG RIGHT"},
-        {"ON1", "ON2", "LEFT", "RIGHT"}
-    };
-
     for (int i = 0; i < 6; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            const char *title = titles[i][j];
+            const char *title = strBtn[i][j].title;
             if (title[0])
             {
                 DrawButton(strBtn[i][j].x, strBtn[i][j].y, title);
@@ -125,7 +150,7 @@ void CPU::Keyboard::DrawButton(int x, int y, const char *title)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Update()
 {
-    if (TIME_MS - timeLastPress < 15)
+    if (TIME_MS - timeLastPress < 50)
     {
         return;
     }

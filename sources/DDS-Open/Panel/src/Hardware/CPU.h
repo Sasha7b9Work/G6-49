@@ -59,6 +59,8 @@ public:
 
         static void DrawButton(int x, int y, const char *title);
 
+        static void FillCommand(PanelControl control, TypePress typePress);
+
     public:
         static void Draw();
         /// Установка каллбэка для клавиатуры
