@@ -28,6 +28,17 @@
 #define CLR_CLK()           HAL_GPIO_WritePin(SCL_GPIO_PORT,SCL_GPIO_PIN,GPIO_PIN_RESET)
 #define READ_SDA()          HAL_GPIO_ReadPin(SDA_GPIO_PORT,SDA_GPIO_PIN)
 #define LCD_INT_Pin         GPIO_PIN_7
+#define GT811_READ_XY_REG   0x721  	/* GT811 touch message start address  */
+
+
+struct TS_StateTypeDef
+{
+    uint8  touchDetected;
+    uint16 touchX[5];
+    uint16 touchY[5];
+    uint8  touchWeight[5];
+    uint   SensorId;
+};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,6 +85,7 @@ public:
         {
         public:
             static void Init();
+            static void GetState(TS_StateTypeDef *state);
         private:
             static uint16 GT811_ReadID();
             static uint8 I2C_WriteReg(uint8 I2c_Addr, uint16 reg, uint8 *buf, uint8 len);

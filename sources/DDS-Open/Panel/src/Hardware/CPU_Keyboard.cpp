@@ -2,6 +2,10 @@
 #include "Display/Painter.h"
 #include "Display/Colors.h"
 #include "Hardware/Timer.h"
+#include "Utils/StringUtils.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstdlib>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10,6 +14,9 @@ static void(*callbackKeyboard)() = 0;
 static TIM_HandleTypeDef handleTIM4;
 #define TIME_UPDATE 2
 static uint8 TS_flag = 0;
+TS_StateTypeDef TS_state = { 0 };
+uint8 TouchPoint = 0;
+TS_StateTypeDef TS_BKState;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +100,57 @@ void CPU::Keyboard::Update()
 {
     if (TS_flag == 1)
     {
+        char buffer[20];
+
+        TOUCH::GetState(&TS_state);
+        if (TS_state.touchDetected != 0)
+        {
+            Painter::DrawText(10, 500, Int2String(TS_state.touchX[0], false, 5, buffer));
+            Painter::DrawText(10, 520, Int2String(TS_state.touchY[0], false, 5, buffer));
+        }
+
         TS_flag = 0;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TOUCH::GetState(TS_StateTypeDef *TS_State)
+{
+    uint8_t RegBuf[34];
+
+    /* Read touch message */
+    I2C_ReadReg(GT811_CMD_WR, GT811_READ_XY_REG, RegBuf, sizeof(RegBuf));
+
+    /* get touch massage */
+    TS_State->SensorId = (uint)(RegBuf[0x00] >> 6);
+    TS_State->touchDetected = (uint8)(RegBuf[0x00] & 0x1F);
+
+    if (TS_State->touchDetected != 0)
+    {
+        //Touch point 1 coordinates
+        TS_State->touchY[0] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x02] << 8) + RegBuf[0x03]);
+        TS_State->touchX[0] = (((uint16_t)RegBuf[0x04] << 8) + RegBuf[0x05]);
+        TS_State->touchWeight[0] = RegBuf[0x06];
+
+        //Touch point 2 coordinates
+        TS_State->touchY[1] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x07] << 8) + RegBuf[0x08]);
+        TS_State->touchX[1] = (((uint16_t)RegBuf[0x09] << 8) + RegBuf[0x0A]);
+        TS_State->touchWeight[1] = RegBuf[0x0B];
+
+        //Touch point 3 coordinates
+        TS_State->touchY[2] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x0C] << 8) + RegBuf[0x0D]);
+        TS_State->touchX[2] = (((uint16_t)RegBuf[0x0E] << 8) + RegBuf[0x0F]);
+        TS_State->touchWeight[2] = RegBuf[0x10];
+
+        //Touch point 4 coordinates
+        TS_State->touchY[3] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x11] << 8) + RegBuf[0x18]);
+        TS_State->touchX[3] = (((uint16_t)RegBuf[0x19] << 8) + RegBuf[0x1A]);
+        TS_State->touchWeight[3] = RegBuf[0x1B];
+
+        //Touch point 5 coordinates
+        TS_State->touchY[4] = GT811_MAX_HEIGHT - (((uint16_t)RegBuf[0x1C] << 8) + RegBuf[0x1D]);
+        TS_State->touchX[4] = (((uint16_t)RegBuf[0x1E] << 8) + RegBuf[0x1F]);
+        TS_State->touchWeight[4] = RegBuf[0x20];
     }
 }
 
