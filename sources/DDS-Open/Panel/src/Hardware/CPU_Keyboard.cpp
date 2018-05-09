@@ -9,6 +9,7 @@ uint time = 0;
 static void(*callbackKeyboard)() = 0;
 static TIM_HandleTypeDef handleTIM4;
 #define TIME_UPDATE 2
+static uint8 TS_flag = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,6 +30,8 @@ void CPU::Keyboard::Init()
     HAL_TIM_Base_Init(&handleTIM4);
 
     HAL_TIM_Base_Start_IT(&handleTIM4);
+
+    TOUCH::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +91,10 @@ void CPU::Keyboard::DrawButton(int x, int y, char *title)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Update()
 {
-    time = TIME_MS;
+    if (TS_flag == 1)
+    {
+        TS_flag = 0;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -130,6 +136,303 @@ void CPU::Keyboard::TIM4_::ElapsedCallback(void *htim)
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TOUCH::Init()
+{
+    // Инициализируем I2C
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+
+    GPIO_InitStruct.Pin = SDA_GPIO_PIN;
+    HAL_GPIO_Init(SDA_GPIO_PORT, &GPIO_InitStruct);
+    HAL_GPIO_WritePin(SDA_GPIO_PORT, SDA_GPIO_PIN, GPIO_PIN_SET);
+
+    GPIO_InitStruct.Pin = SCL_GPIO_PIN;
+    HAL_GPIO_Init(SCL_GPIO_PORT, &GPIO_InitStruct);
+    HAL_GPIO_WritePin(SCL_GPIO_PORT, SCL_GPIO_PIN, GPIO_PIN_SET);
+
+    // Инициализируем GT811
+
+    /*Configure GPIO pin : PtPin */
+    GPIO_InitStruct.Pin = LCD_INT_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+    /* EXTI interrupt init*/
+    HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+    /* reset GT811 */
+    HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_RESET);
+    HAL_Delay(200);
+    HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_SET);
+    HAL_Delay(200);
+
+    /* if Version is correct, send the configuration parameters */
+    if (GT811_ReadID() == GT811_VERSION_VALUE)
+    {
+        /* touch screen configuration parameter (touch screen manufacturers provide) */
+        uint8_t GTP_CFG_DATA[] =
+        {
+            0x12,0x10,0x0E,0x0C,0x0A,0x08,0x06,0x04,0x02,0x00,0x05,0x55,0x15,0x55,0x25,0x55,0x35,0x55,0x45,0x55,
+            0x55,0x55,0x65,0x55,0x75,0x55,0x85,0x55,0x95,0x55,0xA5,0x55,0xB5,0x55,0xC5,0x55,0xD5,0x55,0xE5,0x55,
+            0xF5,0x55,0x1B,0x03,0x00,0x00,0x00,0x13,0x13,0x13,0x0F,0x0F,0x0A,0x50,0x30,0x05,0x03,0x64,0x05,0xe0,
+            0x01,0x20,0x03,0x00,0x00,0x32,0x2C,0x34,0x2E,0x00,0x00,0x04,0x14,0x22,0x04,0x00,0x00,0x00,0x00,0x00,
+            0x20,0x14,0xEC,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0C,0x30,0x25,0x28,0x14,0x00,
+            0x00,0x00,0x00,0x00,0x00,0x01,
+        };
+
+        /* config  */
+        GTP_CFG_DATA[62] = GT811_MAX_WIDTH >> 8;
+        GTP_CFG_DATA[61] = GT811_MAX_WIDTH & 0xff;
+        GTP_CFG_DATA[60] = GT811_MAX_HEIGHT >> 8;
+        GTP_CFG_DATA[59] = GT811_MAX_HEIGHT & 0xff;
+
+        I2C_WriteReg(GT811_CMD_WR, GT811_CONFIG_REG, (uint8_t *)GTP_CFG_DATA, sizeof(GTP_CFG_DATA));
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint16 CPU::Keyboard::TOUCH::GT811_ReadID()
+{
+    uint8_t value[2];
+    I2C_ReadReg(GT811_CMD_WR, GT811_VERSION, value, 2);
+    return (uint16)(value[0] * 0x100 + value[1]);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 CPU::Keyboard::TOUCH::I2C_WriteReg(uint8 I2c_Addr, uint16 reg, uint8 *buf, uint8 len)
+{
+    uint8_t i;
+    uint8_t ret = 0;
+    I2C_Start();
+
+    I2C_Send_Byte(I2c_Addr);   //Slaver Addr
+    I2C_Wait_Ack();
+
+#ifdef I2C_MEMADD_16BIT
+    I2C_Send_Byte((uint8)(reg >> 8));   	     //Data Addr high
+    I2C_Wait_Ack();
+#endif
+
+    I2C_Send_Byte((uint8)(reg & 0xFF));   	   //Data Addr low
+    I2C_Wait_Ack();
+
+    for (i = 0; i < len; i++)
+    {
+        I2C_Send_Byte(buf[i]);
+        ret = I2C_Wait_Ack();
+        if (ret)break;
+    }
+    I2C_Stop();
+    return ret;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TOUCH::I2C_ReadReg(uint8 I2c_Addr, uint16 reg, uint8 *buf, uint8 len)
+{
+    uint8_t i;
+    I2C_Start();
+    I2C_Send_Byte(I2c_Addr);
+    I2C_Wait_Ack();
+
+#ifdef I2C_MEMADD_16BIT
+    I2C_Send_Byte((uint8)(reg >> 8));   	     //Data Addr high
+    I2C_Wait_Ack();
+#endif
+
+    I2C_Send_Byte((uint8)(reg & 0xFF));   	   //Data Addr low
+    I2C_Wait_Ack();
+    I2C_Stop();
+
+    I2C_Start();
+    I2C_Send_Byte((uint8)(I2c_Addr + 1));
+    I2C_Wait_Ack();
+
+    for (i = 0; i < len; i++)
+    {
+        buf[i] = I2C_Read_Byte((uint8)(i == (len - 1) ? 0 : 1));
+    }
+    I2C_Stop();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void SDA_OUT()
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    GPIO_InitStruct.Pin = SDA_GPIO_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+    HAL_GPIO_Init(SDA_GPIO_PORT, &GPIO_InitStruct);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void delay_us(uint32_t value)
+{
+    uint32_t i;
+    i = value * 250;
+    while (i--);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TOUCH::I2C_Start()
+{
+    SDA_OUT();
+
+    SET_SDA();
+    delay_us(1);
+
+    SET_CLK();
+    delay_us(1);
+
+    CLR_SDA();
+    delay_us(1);
+
+    CLR_CLK();
+    delay_us(1);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TOUCH::I2C_Send_Byte(uint8 txd)
+{
+    uint8_t t;
+
+    SDA_OUT();
+    CLR_CLK();       //Put low CLK to send data
+
+    for (t = 0; t < 8; t++)
+    {
+        if (txd & 0x80)
+            SET_SDA();
+        else
+            CLR_SDA();
+
+        txd <<= 1;
+        delay_us(1);
+
+        SET_CLK();
+        delay_us(1);
+        CLR_CLK();
+        delay_us(1);
+    }
+
+    SET_SDA();
+    delay_us(1);
+    CLR_CLK();
+    delay_us(1);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void SDA_IN()
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    GPIO_InitStruct.Pin = SDA_GPIO_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+    HAL_GPIO_Init(SDA_GPIO_PORT, &GPIO_InitStruct);
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 CPU::Keyboard::TOUCH::I2C_Wait_Ack()
+{
+    uint16_t ucErrTime = 0;
+
+    SDA_IN();
+    SET_SDA();
+    delay_us(1);
+    SET_CLK();
+    delay_us(1);
+
+    while (READ_SDA())
+    {
+        ucErrTime++;
+        if (ucErrTime > 250)
+        {
+            I2C_Stop();
+            return 1;
+        }
+    }
+    CLR_CLK();
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::TOUCH::I2C_Stop()
+{
+    SDA_OUT();
+
+    CLR_SDA();
+    delay_us(1);
+
+    SET_CLK();
+    delay_us(1);
+
+    SET_SDA();
+    delay_us(1);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void I2C_NAck(void)
+{
+    SDA_OUT();
+
+    SET_SDA();
+    delay_us(1);
+
+    SET_CLK();
+    delay_us(1);
+
+    CLR_CLK();
+    delay_us(1);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void I2C_Ack(void)
+{
+    SDA_OUT();
+    CLR_CLK();
+
+    CLR_SDA();
+    delay_us(1);
+
+    SET_CLK();
+    delay_us(1);
+
+    CLR_CLK();
+    delay_us(1);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 CPU::Keyboard::TOUCH::I2C_Read_Byte(uint8 ack)
+{
+    unsigned char i, receive = 0;
+    SDA_IN();         //SDA set in
+    for (i = 0; i < 8; i++)
+    {
+        CLR_CLK();
+        delay_us(1);
+        SET_CLK();
+        receive <<= 1;
+        if (READ_SDA())receive++;
+        delay_us(1);
+    }
+    CLR_CLK();
+    if (!ack)I2C_NAck();   //sent nACK
+    else I2C_Ack();        //sent ACK   
+
+    return receive;
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -144,6 +447,15 @@ extern "C" {
                 TIM4->SR = ~TIM_DIER_UIE;
                 CPU::Keyboard::TIM4_::ElapsedCallback(&handleTIM4);
             }
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+    {
+        if (GPIO_Pin == GPIO_PIN_7)
+        {
+            TS_flag = 1;
         }
     }
 
