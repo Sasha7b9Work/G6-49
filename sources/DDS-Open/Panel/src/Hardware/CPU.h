@@ -1,13 +1,6 @@
 #pragma once
 #include "Hardware/Controls.h"
-
-#ifdef STM32F429xx
-#include "Hardware/stm429.h"
-#endif
-
-#ifdef STM32F746xx
 #include "Hardware/stm746.h"
-#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,13 +9,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef STM32F429xx
-class CPU : public STM429
-#endif
-    
-#ifdef STM32F746xx
 class CPU : public STM746
-#endif
 {
 public:
 
@@ -64,22 +51,6 @@ public:
         static void Update();
     };
 
-    //--------------------------------------------------------------------------------------------------------------------------------------- SPI4 ---
-    // SPI для связи с основным процессором
-    class SPI4_
-    {
-    friend class CPU;
-    private:
-        static void Init();
-    public:
-        /// Переслать массив данных
-        static void Transmit(uint8 *buffer, uint16 size, uint timeOut);
-        /// Переслать массив данных с одновременным приёмом второго массива
-        static void TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut);
-        /// Возвращает true, если интерфейс занят - процессор не может приниммать команды
-        static bool IsBusy();
-    };
-
     //-------------------------------------------------------------------------------------------------------------------------------------- GPIO ----
     class GPIO_
     {
@@ -96,15 +67,24 @@ public:
         static void SaveSettings();
         static void LoadSettings();
     };
-
-    //--------------------------------------------------------------------------------------------------------------------------------------- FSMC ---
-    // Шина для связи с ПЛИС
-    class FSMC
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------- FMC ---
+    class FMC_
     {
     friend class CPU;
-
     private:
         static void Init();
+    };
+    
+    //-------------------------------------------------------------------------------------------------------------------------------------- SDRAM ---
+    class SDRAM_
+    {
+    friend class CPU;
+    private:
+        static void Init();
+        static void InitializationSequence(uint count);
+        static SDRAM_HandleTypeDef sdramHandle;
+#define SDRAM_DEVICE_ADDR ((uint)0xD0000000)
     };
 
 private:

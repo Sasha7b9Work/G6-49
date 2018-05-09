@@ -27,9 +27,7 @@ int main(void)
 
     Generator::Reset();
 
-#ifdef STM32F429xx
     Settings::Load();
-#endif
        
     Menu::Init();
 

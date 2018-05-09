@@ -14,73 +14,47 @@ static uint backBuffer = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void LTDC_::Init(uint front, uint back)
 {
-    
-#ifdef STM32F429xx
-    GPIO_InitTypeDef isGPIO =
-    {
-        //  R3         R6
-        GPIO_PIN_0 | GPIO_PIN_1,
-        GPIO_MODE_AF_PP,
-        GPIO_NOPULL,
-        GPIO_SPEED_FREQ_LOW,
-        GPIO_AF9_LTDC
-    };
-    HAL_GPIO_Init(GPIOB, &isGPIO);
+    frontBuffer = front;
+    backBuffer = back;
+  LTDC_LayerCfgTypeDef pLayerCfg;
+  //LTDC_LayerCfgTypeDef pLayerCfg1;
 
-    //              B5          VSYNC         G2            R4          R5
-    isGPIO.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_6 | GPIO_PIN_11 | GPIO_PIN_12;
-    isGPIO.Alternate = GPIO_AF14_LTDC;
-    HAL_GPIO_Init(GPIOA, &isGPIO);
+  handleLTDC.Instance = LTDC;
+  handleLTDC.Init.HSPolarity = LTDC_HSPOLARITY_AL;
+  handleLTDC.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+  handleLTDC.Init.DEPolarity = LTDC_DEPOLARITY_AL;
+  handleLTDC.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+  handleLTDC.Init.HorizontalSync = 19;
+  handleLTDC.Init.VerticalSync = 2;
+  handleLTDC.Init.AccumulatedHBP = 159;
+  handleLTDC.Init.AccumulatedVBP = 22;
+  handleLTDC.Init.AccumulatedActiveW = 1183;
+  handleLTDC.Init.AccumulatedActiveH = 622;
+  handleLTDC.Init.TotalWidth = 1343;
+  handleLTDC.Init.TotalHeigh = 634;
+  handleLTDC.Init.Backcolor.Blue = 0;
+  handleLTDC.Init.Backcolor.Green = 0;
+  handleLTDC.Init.Backcolor.Red = 0;
+  HAL_LTDC_Init(&handleLTDC);
 
-    //              G4             G5            B6          B7
-    isGPIO.Pin = GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_8 | GPIO_PIN_9;
-    HAL_GPIO_Init(GPIOB, &isGPIO);
-
-    //              HSYNC         G6           R2
-    isGPIO.Pin = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOC, &isGPIO);
-
-    //                B3          G7          B2
-    isGPIO.Pin = GPIO_PIN_10 | GPIO_PIN_3 | GPIO_PIN_6;
-    HAL_GPIO_Init(GPIOD, &isGPIO);
-
-    //               G3             B4           DE            CLK           R7
-    isGPIO.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOE, &isGPIO);
-
-
-    handleLTDC.Instance = LTDC;
-    handleLTDC.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-    handleLTDC.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-    handleLTDC.Init.DEPolarity = LTDC_DEPOLARITY_AH;
-    handleLTDC.Init.PCPolarity = LTDC_PCPOLARITY_IIPC;
-    handleLTDC.Init.HorizontalSync = 0;
-    handleLTDC.Init.VerticalSync = 0;
-    handleLTDC.Init.AccumulatedHBP = 70;
-    handleLTDC.Init.AccumulatedVBP = 13;
-    handleLTDC.Init.AccumulatedActiveW = 390;
-    handleLTDC.Init.AccumulatedActiveH = 253;
-    handleLTDC.Init.TotalWidth = 408;
-    handleLTDC.Init.TotalHeigh = 263;
-    handleLTDC.Init.Backcolor.Blue = 0;
-    handleLTDC.Init.Backcolor.Green = 0;
-    handleLTDC.Init.Backcolor.Red = 0;
-    if (HAL_LTDC_Init(&handleLTDC) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    GPIO_InitTypeDef initStr;
-    initStr.Pin = GPIO_PIN_6;
-    initStr.Mode = GPIO_MODE_OUTPUT_PP;
-    initStr.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOB, &initStr);
-
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
-#endif
-    
-#ifdef STM32F746xx
-    GPIO_InitTypeDef GPIO_InitStruct;
+  pLayerCfg.WindowX0 = 0;
+  pLayerCfg.WindowX1 = SCREEN_WIDTH;
+  pLayerCfg.WindowY0 = 0;
+  pLayerCfg.WindowY1 = SCREEN_HEIGHT;
+  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
+  pLayerCfg.Alpha = 0xFF;
+  pLayerCfg.Alpha0 = 0xFF;
+  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
+  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
+  pLayerCfg.FBStartAdress = frontBuffer;
+  pLayerCfg.ImageWidth = SCREEN_WIDTH;
+  pLayerCfg.ImageHeight = SCREEN_HEIGHT;
+  pLayerCfg.Backcolor.Blue = 0;
+  pLayerCfg.Backcolor.Green = 0;
+  pLayerCfg.Backcolor.Red = 0;
+  HAL_LTDC_ConfigLayer(&handleLTDC, &pLayerCfg, 0);
+  
+  GPIO_InitTypeDef GPIO_InitStruct;
     __LTDC_CLK_ENABLE();
   
     /**LTDC GPIO Configuration    
@@ -182,62 +156,18 @@ void LTDC_::Init(uint front, uint back)
     /* Peripheral interrupt init*/
     HAL_NVIC_SetPriority(LTDC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(LTDC_IRQn);
+  /* USER CODE BEGIN LTDC_MspInit 1 */
+
+  /* USER CODE END LTDC_MspInit 1 */
     
-      LTDC_LayerCfgTypeDef pLayerCfg;
-  LTDC_LayerCfgTypeDef pLayerCfg1;
-
-  handleLTDC.Instance = LTDC;
-  handleLTDC.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-  handleLTDC.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-  handleLTDC.Init.DEPolarity = LTDC_DEPOLARITY_AL;
-  handleLTDC.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-  handleLTDC.Init.HorizontalSync = 19;
-  handleLTDC.Init.VerticalSync = 2;
-  handleLTDC.Init.AccumulatedHBP = 159;
-  handleLTDC.Init.AccumulatedVBP = 22;
-  handleLTDC.Init.AccumulatedActiveW = 1183;
-  handleLTDC.Init.AccumulatedActiveH = 622;
-  handleLTDC.Init.TotalWidth = 1343;
-  handleLTDC.Init.TotalHeigh = 634;
-  handleLTDC.Init.Backcolor.Blue = 0;
-  handleLTDC.Init.Backcolor.Green = 0;
-  handleLTDC.Init.Backcolor.Red = 0;
-  HAL_LTDC_Init(&handleLTDC);
-
-  pLayerCfg.WindowX0 = 0;
-  pLayerCfg.WindowX1 = SCREEN_WIDTH;
-  pLayerCfg.WindowY0 = 0;
-  pLayerCfg.WindowY1 = SCREEN_HEIGHT;
-  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
-  pLayerCfg.Alpha = 0xFF;
-  pLayerCfg.Alpha0 = 0;
-  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
-  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-  pLayerCfg.FBStartAdress = 0xD0000000;
-  pLayerCfg.ImageWidth = SCREEN_WIDTH;
-  pLayerCfg.ImageHeight = SCREEN_HEIGHT;
-  pLayerCfg.Backcolor.Blue = 0;
-  pLayerCfg.Backcolor.Green = 0;
-  pLayerCfg.Backcolor.Red = 0;
-  HAL_LTDC_ConfigLayer(&handleLTDC, &pLayerCfg, 0);
-
-  pLayerCfg1.WindowX0 = 0;
-  pLayerCfg1.WindowX1 = SCREEN_WIDTH;
-  pLayerCfg1.WindowY0 = 0;
-  pLayerCfg1.WindowY1 = SCREEN_HEIGHT;
-  pLayerCfg1.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
-  pLayerCfg1.Alpha = 0;
-  pLayerCfg1.Alpha0 = 0;
-  pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
-  pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-  pLayerCfg1.FBStartAdress = 0xD0200000;
-  pLayerCfg1.ImageWidth = SCREEN_WIDTH;
-  pLayerCfg1.ImageHeight = SCREEN_HEIGHT;
-  pLayerCfg1.Backcolor.Blue = 0;
-  pLayerCfg1.Backcolor.Green = 0;
-  pLayerCfg1.Backcolor.Red = 0;
-#endif
-
+    __HAL_LTDC_ENABLE(&handleLTDC);
+#define LCD_DISP_PIN                    GPIO_PIN_12
+#define LCD_DISP_GPIO_PORT              GPIOI
+    HAL_GPIO_WritePin(LCD_DISP_GPIO_PORT, LCD_DISP_PIN, GPIO_PIN_SET);
+#define LCD_BL_CTRL_PIN                  GPIO_PIN_3
+#define LCD_BL_CTRL_GPIO_PORT            GPIOK
+    HAL_GPIO_WritePin(LCD_BL_CTRL_GPIO_PORT, LCD_BL_CTRL_PIN, GPIO_PIN_SET);
+    
     SetBuffers(front, back);
 }
 

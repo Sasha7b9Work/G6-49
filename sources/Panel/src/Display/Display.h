@@ -46,7 +46,7 @@ private:
 
     static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING];
     /// Экран
-    static uint8 frontBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
+    static uint8 *frontBuffer;
     /// Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
-    static uint8 backBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
+    static uint8 *backBuffer;
 };

@@ -25,9 +25,11 @@ sources/VS/Generator/x64/*
 
 sources/DDS-VS/Panel/Debug/*
 sources/DDS-VS/Panel/x64/*
+sources/DDS-VS/Panel/Release/*
 
 sources/DDS-VS/Generator/x64/*
 sources/DDS-VS/Generator/Debug/*
+sources/DDS-VS/Generator/Release/*
 
 sources/DDS-Open/Panel/DebugConfig/*
 sources/DDS-Open/Panel/Objects/*
@@ -36,7 +38,3 @@ sources/DDS-Open/Panel/Listings/*
 sources/DDS-Open/Generator/DebugConfig/*
 sources/DDS-Open/Generator/Objects/*
 sources/DDS-Open/Generator/Listings/*
-
-
-sources/_VS/Generator/Debug/*
-sources/_VS/Panel/Debug/*

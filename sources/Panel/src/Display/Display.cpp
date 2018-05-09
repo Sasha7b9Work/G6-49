@@ -20,8 +20,15 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *Display::text = 0;
 char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
-uint8       Display::frontBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
-uint8       Display::backBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
+#ifdef STM32F429xx
+uint8       *Display::frontBuffer = malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
+uint8       *Display::backBuffer = malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
+#endif
+    
+#ifdef STM32F746xx
+uint8       *Display::frontBuffer = (uint8 *)SDRAM_DEVICE_ADDR;
+uint8       *Display::backBuffer = (uint8 *)(SDRAM_DEVICE_ADDR + SCREEN_HEIGHT * SCREEN_WIDTH);
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,8 +49,6 @@ void Display::Update(void)
     Painter::BeginScene(Color::BACK);
 
     Painter::SetColor(Color::FILL);
-    
-#ifdef STM32F429xx
     
     DrawSignal(A);
 
@@ -66,8 +71,6 @@ void Display::Update(void)
     DrawFrequencyCounter();
 
     DrawConsole();
-    
-#endif
 
     Painter::EndScene();
 }
