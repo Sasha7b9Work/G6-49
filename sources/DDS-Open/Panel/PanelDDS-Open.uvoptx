@@ -133,7 +133,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>ьш7</Name>
+          <Name>/</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -146,7 +146,24 @@
           <Name>UL2CM3(-S0 -C0 -P0 -FD20010000 -FC1000 -FN1 -FF0STM32F7x_1024 -FS08000000 -FL0100000 -FP0($$Device:STM32F746IGTx$CMSIS\Flash\STM32F7x_1024.FLM))</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>76</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134244272</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;..\..\Panel\src\Display\Display.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\PanelDDS\../../Panel/src/Display/Display.cpp\76</Expression>
+        </Bp>
+      </Breakpoint>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -836,7 +853,7 @@
 
   <Group>
     <GroupName>Display</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

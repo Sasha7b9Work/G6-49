@@ -38,17 +38,17 @@ void LTDC_::Init(uint front, uint back)
   HAL_LTDC_Init(&handleLTDC);
 
   pLayerCfg.WindowX0 = 0;
-  pLayerCfg.WindowX1 = SCREEN_WIDTH;
+  pLayerCfg.WindowX1 = BUFFER_WIDTH;
   pLayerCfg.WindowY0 = 0;
-  pLayerCfg.WindowY1 = SCREEN_HEIGHT;
+  pLayerCfg.WindowY1 = BUFFER_HEIGHT;
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
   pLayerCfg.Alpha = 0xFF;
   pLayerCfg.Alpha0 = 0xFF;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
   pLayerCfg.FBStartAdress = frontBuffer;
-  pLayerCfg.ImageWidth = SCREEN_WIDTH;
-  pLayerCfg.ImageHeight = SCREEN_HEIGHT;
+  pLayerCfg.ImageWidth = BUFFER_WIDTH;
+  pLayerCfg.ImageHeight = BUFFER_HEIGHT;
   pLayerCfg.Backcolor.Blue = 0;
   pLayerCfg.Backcolor.Green = 0;
   pLayerCfg.Backcolor.Red = 0;
@@ -180,17 +180,17 @@ void LTDC_::SetBuffers(uint front, uint back)
     LTDC_LayerCfgTypeDef pLayerCfg;
 
     pLayerCfg.WindowX0 = 0;
-    pLayerCfg.WindowX1 = SCREEN_WIDTH;
+    pLayerCfg.WindowX1 = BUFFER_WIDTH;
     pLayerCfg.WindowY0 = 0;
-    pLayerCfg.WindowY1 = SCREEN_HEIGHT;
+    pLayerCfg.WindowY1 = BUFFER_HEIGHT;
     pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
     pLayerCfg.Alpha = 255;
     pLayerCfg.Alpha0 = 255;
     pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
     pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
     pLayerCfg.FBStartAdress = frontBuffer;
-    pLayerCfg.ImageWidth = SCREEN_WIDTH;
-    pLayerCfg.ImageHeight = SCREEN_HEIGHT;
+    pLayerCfg.ImageWidth = BUFFER_WIDTH;
+    pLayerCfg.ImageHeight = BUFFER_HEIGHT;
     pLayerCfg.Backcolor.Blue = 0;
     pLayerCfg.Backcolor.Green = 0;
     pLayerCfg.Backcolor.Red = 0;
@@ -230,7 +230,7 @@ void LTDC_::ToggleBuffers()
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
+            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&hDMA2D, 100);
             }

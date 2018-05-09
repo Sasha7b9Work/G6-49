@@ -24,7 +24,10 @@ public:
 
         static void Init();
 
+        static void DrawButton(int x, int y, char *title);
+
     public:
+        static void Draw();
         /// Установка каллбэка для клавиатуры
         static void SetCallback(void(*func)());
 

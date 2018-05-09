@@ -91,7 +91,7 @@
       </PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>STM32F746xx;WIN32;USE_HAL_DRIVER;USE_HAL_TIM_REGISTER_CALLBACKS=0</PreprocessorDefinitions>
+      <PreprocessorDefinitions>STM32F746xx;WIN32;USE_HAL_DRIVER;USE_HAL_TIM_REGISTER_CALLBACKS=0;__FPU_USED=0</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4774;4820;5045</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
@@ -240,7 +240,9 @@
     <ClCompile Include="..\..\DDS-Open\Panel\src\Hardware\stm746.cpp" />
     <ClCompile Include="..\..\DDS-Open\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\DDS-Open\Panel\src\Hardware\Timer7XX.cpp" />
-    <ClCompile Include="..\..\DDS-Open\Panel\src\libs\system_stm32f7xx.c" />
+    <ClCompile Include="..\..\DDS-Open\Panel\src\libs\system_stm32f7xx.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Font\Font.cpp" />

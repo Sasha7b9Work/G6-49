@@ -22,13 +22,13 @@
 const char *Display::text = 0;
 char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
 #ifdef STM32F429xx
-uint8       *Display::frontBuffer = (uint8 *)malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
-uint8       *Display::backBuffer = (uint8 *)malloc(SCREEN_WIDTH * SCREEN_HEIGHT);
+uint8       *Display::frontBuffer = (uint8 *)malloc(BUFFER_WIDTH * BUFFER_HEIGHT);
+uint8       *Display::backBuffer = (uint8 *)malloc(BUFFER_WIDTH * BUFFER_HEIGHT);
 #endif
     
 #ifdef STM32F746xx
 uint8       *Display::frontBuffer = (uint8 *)SDRAM_DEVICE_ADDR;
-uint8       *Display::backBuffer = (uint8 *)(SDRAM_DEVICE_ADDR + SCREEN_HEIGHT * SCREEN_WIDTH);
+uint8       *Display::backBuffer = (uint8 *)(SDRAM_DEVICE_ADDR + BUFFER_HEIGHT * BUFFER_WIDTH);
 #endif
 
 
@@ -72,6 +72,8 @@ void Display::Update(void)
     DrawFrequencyCounter();
 
     DrawConsole();
+
+    CPU::Keyboard::Draw();
 
     Painter::EndScene();
 }
