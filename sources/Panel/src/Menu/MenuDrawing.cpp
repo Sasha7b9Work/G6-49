@@ -3,6 +3,7 @@
 #include "Menu/MenuItems.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
+#include "Utils/StringUtils.h"
 #include <math.h>
 
 
@@ -49,6 +50,10 @@ void Menu::DrawPagesUGO(void)
         }
 
         Painter::FillRegion(5 + CURRENT_PAGE * 16, 5, 9, 9);
+
+        char buffer[20];
+
+        Painter::DrawText(8 + CURRENT_PAGE * 16, 5, Int2String(CURRENT_PAGE + 1, false, 1, buffer), Color::BACK);
     }
 }
 
