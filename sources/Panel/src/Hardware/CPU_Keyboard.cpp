@@ -336,6 +336,11 @@ void CPU::Keyboard::TIM4_::Stop()
     HAL_TIM_Base_Stop_IT(&handleTIM4);
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::Draw()
+{
+} 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
