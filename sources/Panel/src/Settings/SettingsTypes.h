@@ -26,7 +26,13 @@ typedef enum
 {
     StopBit_1,
     StopBit_2
-}StopBit;
+} StopBit;
+
+typedef enum
+{
+    Parity_Off,
+    Parity_On
+} Parity;
 
 
 float MinValue(WaveParameter param);

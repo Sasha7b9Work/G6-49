@@ -49,6 +49,7 @@ extern const PageBase pInput;
 
 #define SIZE_BYTE               (set.usb_sizeByte)
 #define STOP_BIT                (set.usb_stopBit)
+#define PARITY                  (set.usb_parity)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -84,6 +85,7 @@ public:
     bool                freq_enabled;                   ///< Отображение показаний частотомера
     SizeByte            usb_sizeByte;                   ///< Размер байта для связи по USB
     StopBit             usb_stopBit;                    ///< Количество стоп-бит
+    Parity              usb_parity;                     ///< Флаг чётности
 
     static void Save();
     static void Load(bool _default = false);
