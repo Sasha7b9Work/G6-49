@@ -38,26 +38,10 @@ DEF_BUTTON( bSaveSettings,                                                      
     pDebug, FuncActive, OnPress_SaveSettings, FuncDraw
 )
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Reset(void)
-{
-    Generator::Reset();
-    Timer::PauseOnTime(100);
-    Settings::Load(true);
-}
-
-DEF_BUTTON( bReset,                                                                                                          //--- ÎÒËÀÄÊÀ - ÑÁĞÎÑ ---
-    "ÑÁĞÎÑ", "RESET",
-    "Ñáğîñ íàñòğîåê íà çíà÷åíèÿ ïî óìîë÷àíèş",
-    "Resetting settings to default values",
-    pDebug, FuncActive, OnPress_Reset, FuncDraw
-)
-
-DEF_PAGE_3( pDebug,
+DEF_PAGE_2( pDebug,
     "ÎÒËÀÄÊÀ", "DEBUG",
     "", "",
     cConsole,      ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
     bSaveSettings, ///< ÎÒËÀÄÊÀ - ÑÎÕĞÀÍÈÒÜ ÍÀÑÒĞÎÉÊÈ
-    bReset,        ///< ÎÒËÀÄÊÀ - ÑÁĞÎÑ
     Page_Debug, 0, FuncActive, FuncPress
 )

@@ -1,6 +1,8 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Display/Display.h"
+#include "Generator.h"
+#include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "PageService.h"
 
@@ -11,6 +13,21 @@ Page *PageService::pointer = (Page *)&pService;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void OnPress_Reset(void)
+{
+    Generator::Reset();
+    Timer::PauseOnTime(100);
+    Settings::Load(true);
+}
+
+DEF_BUTTON(bReset,                                                                                                           //--- ОТЛАДКА - СБРОС ---
+           "СБРОС", "RESET",
+           "Сброс настроек на значения по умолчанию",
+           "Resetting settings to default values",
+           pService, FuncActive, OnPress_Reset, FuncDraw
+)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2( cService_Language,                                                                                               //--- СЕРВИС - ЯЗЫК ---
     "ЯЗЫК", "LANGUAGE",
     "Выбор языка меню",
@@ -38,10 +55,11 @@ DEF_CHOICE_2( cService_Background,                                              
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_2( pService,                                                                                                                 //--- СЕРВИС ---
+DEF_PAGE_3( pService,                                                                                                                 //--- СЕРВИС ---
     "СЕРВИС", "SERVICE",
     "Сервисные функции",
     "Service functions",
+    bReset,
     cService_Language,   ///< СЕРВИС - ЯЗЫК
     cService_Background, ///< СЕРВИС - ЦВЕТ ФОНА
     Page_Service, 0, FuncActive, FuncPress

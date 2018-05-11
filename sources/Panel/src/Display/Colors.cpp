@@ -10,7 +10,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const uint8 Color::COLOR_BLACK              = 0;
 const uint8 Color::COLOR_WHITE              = 1;
-const uint8 Color::COLOR_GRAY               = 2;
+const uint8 Color::COLOR_GRAY_25            = 2;
+const uint8 Color::COLOR_GRAY_50            = 3;
+const uint8 Color::COLOR_GRAY_75            = 4;
 const uint8 Color::COLOR_MENU_FIELD         = 5;
 const uint8 Color::COLOR_MENU_TITLE         = 6;
 const uint8 Color::COLOR_MENU_TITLE_DARK    = 7;
@@ -18,8 +20,6 @@ const uint8 Color::COLOR_MENU_TITLE_BRIGHT  = 8;
 const uint8 Color::COLOR_MENU_ITEM          = 9;
 const uint8 Color::COLOR_MENU_ITEM_DARK     = 10;
 const uint8 Color::COLOR_MENU_ITEM_BRIGHT   = 11;
-const uint8 Color::COLOR_DATA_WHITE_ACCUM_A = 12;
-const uint8 Color::COLOR_DATA_WHITE_ACCUM_B = 13;
 const uint8 Color::COLOR_GRID_WHITE         = 14;
 const uint8 Color::COLOR_EMPTY              = 15;
 const uint8 Color::COLOR_NUMBER             = 16;
@@ -31,20 +31,20 @@ const uint8 Color::COLOR_INVERSE            = 19;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Color Color::BLACK(COLOR_BLACK);
 Color Color::WHITE(COLOR_WHITE);
+Color Color::GRAY_25(COLOR_GRAY_25);
+Color Color::GRAY_50(COLOR_GRAY_50);
+Color Color::GRAY_75(COLOR_GRAY_75);
 Color Color::MENU_FIELD(COLOR_MENU_FIELD);
 Color Color::MENU_TITLE_DARK(COLOR_MENU_TITLE_DARK);
 Color Color::MENU_TITLE_BRIGHT(COLOR_MENU_ITEM_BRIGHT);
 Color Color::MENU_ITEM_DARK(COLOR_MENU_ITEM_DARK);
 Color Color::MENU_ITEM_BRIGHT(COLOR_MENU_ITEM_BRIGHT);
-Color Color::DATA_WHITE_ACCUM_A(COLOR_DATA_WHITE_ACCUM_A);
-Color Color::DATA_WHITE_ACCUM_B(COLOR_DATA_WHITE_ACCUM_B);
 Color Color::NUMBER(COLOR_NUMBER);
 Color Color::FLASH_10(COLOR_FLASH_10);
 Color Color::FLASH_01(COLOR_FLASH_01);
 
 Color Color::FILL(COLOR_WHITE);
 Color Color::BACK(COLOR_BLACK);
-Color Color::GRAY(COLOR_GRAY);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,8 @@ void Color::InitGlobalColors()
 {
     Color::BACK.value = BACKGROUND_BLACK ? Color::BLACK.value : Color::WHITE.value;
     Color::FILL.value = BACKGROUND_BLACK ? Color::WHITE.value : Color::BLACK.value;
-    Color::GRAY.value = BACKGROUND_BLACK ? Color(COLOR_GRAY).value : Color(COLOR_GRID_WHITE).value;
+    Color::GRAY_75.value = BACKGROUND_BLACK ? Color(COLOR_GRAY_75).value : Color(COLOR_GRAY_25).value;
+    Color::GRAY_25.value = BACKGROUND_BLACK ? Color(COLOR_GRAY_25).value : Color(COLOR_GRAY_75).value;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

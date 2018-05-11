@@ -7,23 +7,23 @@
 class Color
 {
 public:
-    static Color BLACK;
-    static Color WHITE;
+    static Color BLACK;             // Чёрный
+    static Color WHITE;             // Белый
+    static Color GRAY_25;           // Серый 25%
+    static Color GRAY_50;           // Серый 50%
+    static Color GRAY_75;           // Серый 75%
     static Color MENU_FIELD;
     static Color MENU_TITLE_DARK;
     static Color MENU_TITLE_BRIGHT;
     static Color MENU_ITEM_DARK;
     static Color MENU_ITEM_BRIGHT;
-    static Color DATA_WHITE_ACCUM_A;
-    static Color DATA_WHITE_ACCUM_B;
     static Color NUMBER;
     static Color FLASH_10;
     static Color FLASH_01;
 
     static Color FILL;
     static Color BACK;
-    static Color GRAY;
-
+    
     explicit Color(const uint8 val);
     Color(const Color &color);
 
@@ -44,7 +44,9 @@ public:
 private:
     static const uint8 COLOR_BLACK;
     static const uint8 COLOR_WHITE;
-    static const uint8 COLOR_GRAY;
+    static const uint8 COLOR_GRAY_25;
+    static const uint8 COLOR_GRAY_50;
+    static const uint8 COLOR_GRAY_75;
     static const uint8 COLOR_MENU_FIELD;
     static const uint8 COLOR_MENU_TITLE;
     static const uint8 COLOR_MENU_TITLE_DARK;
@@ -52,8 +54,6 @@ private:
     static const uint8 COLOR_MENU_ITEM;
     static const uint8 COLOR_MENU_ITEM_DARK;
     static const uint8 COLOR_MENU_ITEM_BRIGHT;
-    static const uint8 COLOR_DATA_WHITE_ACCUM_A;   ///< Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов
-    static const uint8 COLOR_DATA_WHITE_ACCUM_B;
     static const uint8 COLOR_GRID_WHITE;
     static const uint8 COLOR_EMPTY;
     static const uint8 COLOR_NUMBER;
