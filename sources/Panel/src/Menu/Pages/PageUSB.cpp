@@ -17,7 +17,7 @@ DEF_CHOICE_2(cSizeByte,
 )
 
 DEF_CHOICE_2(cStopBit,
-    "Стоп-бит", "Stop-bit",
+    "СТОП-БИТ", "STOP-BIT",
     "", "",
     "1", "1",
     "2", "2",
@@ -29,7 +29,7 @@ DEF_PAGE_2(pUSB,
     "USB", "USB",
     "Настройки параметров связи по интерфейсу USB",
     "Communication parameters settings on the USB interface",
-    cSizeByte,              ///< USB - Размер байта
-    cStopBit,               ///< USB - Стоп-бит
+    cSizeByte,              ///< USB - РАЗМЕР БАЙТА
+    cStopBit,               ///< USB - СТОП-БИТ
     Page_USB, 0, FuncActive, FuncPress
 )
