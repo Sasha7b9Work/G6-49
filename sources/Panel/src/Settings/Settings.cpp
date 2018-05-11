@@ -13,6 +13,8 @@ static const Settings defSet =
 {
     sizeof(Settings),
     {
+    },
+    {
         MAKE_COLOR(0x00, 0x00, 0x00),
         MAKE_COLOR(0xff, 0xff, 0xff),
         MAKE_COLOR(0x40, 0x40, 0x40),

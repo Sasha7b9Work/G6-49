@@ -77,8 +77,17 @@ void CPU::FLASH_::LoadSettings(void)
 
         address -= SIZE_RECORD;
 
-        // Читаем в Settings set количество байт, указанное в (int16)*address
-        ReadBufferBytes((uint)address, &set, READ_HALF_WORD(address));
+        uint16 size = READ_HALF_WORD(address);
+
+        if(size != sizeof(Settings))    // Если размер сохранённой структуры не совпадает с размером имеющейся - считаем только калибровочные
+        {                               // коэффициенты + 2 байта на размер первого элемента струтуры Settings
+            ReadBufferBytes((uint)address, &set, 2 + sizeof(set.empty));
+        }
+        else
+        {
+            // Читаем в Settings set количество байт, указанное в (int16)*address
+            ReadBufferBytes((uint)address, &set, READ_HALF_WORD(address));
+        }
     }
 }
 

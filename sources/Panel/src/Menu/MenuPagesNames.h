@@ -10,6 +10,7 @@ enum NamePage
     Page_Service,
     Page_Debug,
     Page_FrequencyCounter,
+    Page_USB,
     PageSB_Input,
     NumPages
 };

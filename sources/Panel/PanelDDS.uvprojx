@@ -334,7 +334,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--cpp</MiscControls>
+              <MiscControls>--cpp --diag_suppress=1165</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
               <IncludePath>.\src;.\src\libs\HAL;.\src\Hardware;..\libs\common;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src\libs;..\common</IncludePath>
@@ -1975,6 +1975,16 @@
               <FileName>PageFrequencyCounter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageUSB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageUSB.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageUSB.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageUSB.h</FilePath>
             </File>
           </Files>
         </Group>

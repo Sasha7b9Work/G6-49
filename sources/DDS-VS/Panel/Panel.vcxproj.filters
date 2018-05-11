@@ -228,6 +228,9 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageUSB.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -529,6 +532,9 @@
     </ClInclude>
     <ClInclude Include="..\..\common\_VS\windows.h">
       <Filter>_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageUSB.h">
+      <Filter>Menu\Pages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

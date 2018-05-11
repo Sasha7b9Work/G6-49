@@ -7,7 +7,6 @@ typedef enum
 {
     A,
     B,
-    A_B,
     NumChannels
 } Channel;
 
@@ -16,6 +15,12 @@ typedef enum
     Russian,
     English
 } Language;
+
+typedef enum
+{
+    SizeByte_7bit,
+    SizeByte_8bit
+} SizeByte;
 
 
 float MinValue(WaveParameter param);

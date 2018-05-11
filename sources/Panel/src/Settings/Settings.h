@@ -47,6 +47,8 @@ extern const PageBase pInput;
 
 #define CURRENT_PARAMETER(form) (set.sig_parameter[form])
 
+#define SIZE_BYTE               (set.usb_sizeByte)
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
 
@@ -54,6 +56,14 @@ class Settings
 {
 public:
     uint16              size;                           ///< Размер структуры Settings
+    union
+    {
+        uint8 empty[2 * 4 * 8];                         ///< Резервируем место для калибровочных коэффициентов исходя из того, что 2 канала,
+                                                        ///< четыре параметра на каждый канал и в каждом параметре 8 байт
+        struct Cal
+        {
+        }cal;
+    };
     col_val             disp_Colors[16];                ///< Цвета
     Channel             sig_channel;                    ///< Текущий выбранный канал
     WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
@@ -71,6 +81,7 @@ public:
     int8                menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
     int8                menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
     bool                freq_enabled;                   ///< Отображение показаний частотомера
+    int8                usb_sizeByte;                   ///< Размер байта для связи по USB
 
     static void Save();
     static void Load(bool _default = false);
