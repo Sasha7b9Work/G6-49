@@ -10,9 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const uint8 Color::COLOR_BLACK              = 0;
 const uint8 Color::COLOR_WHITE              = 1;
-const uint8 Color::COLOR_GRID               = 2;
-const uint8 Color::COLOR_DATA_A             = 3;
-const uint8 Color::COLOR_DATA_B             = 4;
+const uint8 Color::COLOR_GRAY               = 2;
 const uint8 Color::COLOR_MENU_FIELD         = 5;
 const uint8 Color::COLOR_MENU_TITLE         = 6;
 const uint8 Color::COLOR_MENU_TITLE_DARK    = 7;
@@ -44,10 +42,9 @@ Color Color::NUMBER(COLOR_NUMBER);
 Color Color::FLASH_10(COLOR_FLASH_10);
 Color Color::FLASH_01(COLOR_FLASH_01);
 
-Color Color::CHAN[4] = {Color(COLOR_DATA_A), Color(COLOR_DATA_B), Color(COLOR_WHITE), Color(COLOR_WHITE)};
 Color Color::FILL(COLOR_WHITE);
 Color Color::BACK(COLOR_BLACK);
-Color Color::GRID(COLOR_GRID);
+Color Color::GRAY(COLOR_GRAY);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,9 +62,7 @@ void Color::InitGlobalColors()
 {
     Color::BACK.value = BACKGROUND_BLACK ? Color::BLACK.value : Color::WHITE.value;
     Color::FILL.value = BACKGROUND_BLACK ? Color::WHITE.value : Color::BLACK.value;
-    Color::GRID.value = BACKGROUND_BLACK ? Color(COLOR_GRID).value : Color(COLOR_GRID_WHITE).value;
-    Color::CHAN[A].value = BACKGROUND_BLACK ? Color::CHAN[A].value : Color::DATA_WHITE_ACCUM_A.value;
-    Color::CHAN[B].value = BACKGROUND_BLACK ? Color::CHAN[B].value : Color::DATA_WHITE_ACCUM_B.value;
+    Color::GRAY.value = BACKGROUND_BLACK ? Color(COLOR_GRAY).value : Color(COLOR_GRID_WHITE).value;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,12 +71,6 @@ void Color::Log(Color color)
 #define colorVal (COLOR(color.value))
 
     LOG_WRITE("Color %d R=%d, G=%d, B=%d", color.value, R_FROM_COLOR(colorVal), G_FROM_COLOR(colorVal), B_FROM_COLOR(colorVal));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-Color Color::Cursors(Channel ch)
-{
-    return CHAN[ch];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

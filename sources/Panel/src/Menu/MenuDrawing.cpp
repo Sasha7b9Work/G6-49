@@ -48,10 +48,10 @@ void Menu::DrawPagesUGO(void)
     {
         for (int i = 0; i < NUM_PAGES; i++)
         {
-            Painter::DrawRectangle(5 + i * delta, 5, delta, 8, Color::FILL);
+            Painter::DrawRectangle(5 + i * delta, 5, delta, 8, Color::GRAY);
         }
 
-        Painter::FillRegion(5 + CURRENT_PAGE * delta, 5, delta, 8);
+        Painter::FillRegion(5 + CURRENT_PAGE * delta, 5, delta, 8, Color::FILL);
 
         char buffer[20];
 

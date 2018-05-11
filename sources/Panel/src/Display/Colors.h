@@ -22,14 +22,11 @@ public:
 
     static Color FILL;
     static Color BACK;
-    static Color GRID;
-    static Color CHAN[4];
+    static Color GRAY;
 
     explicit Color(const uint8 val);
     Color(const Color &color);
 
-    static Color Cursors(Channel ch);
-    static Color Trig();
     static Color ChanAccum(Channel ch);     ///< ÷вет канала в режиме накоплени€
     static Color MenuItem(bool shade);      ///< ÷вет элемента меню.
     static Color MenuTitle(bool shade);     ///< ÷вет заголовка страницы. inShade == true, если страница затенена
@@ -47,9 +44,7 @@ public:
 private:
     static const uint8 COLOR_BLACK;
     static const uint8 COLOR_WHITE;
-    static const uint8 COLOR_GRID;
-    static const uint8 COLOR_DATA_A;
-    static const uint8 COLOR_DATA_B;
+    static const uint8 COLOR_GRAY;
     static const uint8 COLOR_MENU_FIELD;
     static const uint8 COLOR_MENU_TITLE;
     static const uint8 COLOR_MENU_TITLE_DARK;
