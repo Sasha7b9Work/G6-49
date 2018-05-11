@@ -15,10 +15,13 @@
 */
 
 
-namespace Painter
-{
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawHPointLine(int y, int x0, int x1, float delta)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Color    Painter::currentColor = Color::NUMBER;
+TypeFont Painter::currentTypeFont = TypeFont_None;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
 {
     for (int x = x0; x <= x1; x += (int)delta)
     {
@@ -27,7 +30,7 @@ void DrawHPointLine(int y, int x0, int x1, float delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawVPointLine(int x, int y0, int y1, float delta)
+void Painter::DrawVPointLine(int x, int y0, int y1, float delta)
 {
     for (int y = y0; y <= y1; y += (int)delta)
     {
@@ -36,7 +39,7 @@ void DrawVPointLine(int x, int y0, int y1, float delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart)
+void Painter::DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int deltaStart)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
@@ -61,7 +64,7 @@ void DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmpty, int d
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int deltaStart)
+void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int deltaStart)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmtpy))
     {
@@ -86,7 +89,7 @@ void DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmtpy, int d
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade)
+void Painter::DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade)
 {
     FillRegion(x + thickness, y + thickness, width - thickness * 2, height - thickness * 2, normal);
     if (isPressed && !isShade)
@@ -109,6 +112,12 @@ void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color 
             DrawHLine(y + height - i, x + 1 + i, x + width - i);
         }
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Color Painter::GetColor()
+{
+    return currentColor;
 }
 
 #ifdef OSCI
@@ -136,7 +145,7 @@ static uint8 Read2points(int x, int y)
 #endif
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool SaveScreenToFlashDrive()
+bool Painter::SaveScreenToFlashDrive()
 {
 #ifdef OSCI
 #pragma pack(1)
@@ -261,10 +270,8 @@ bool SaveScreenToFlashDrive()
     return true;
 }
 
-void ResetFlash()
+void Painter::ResetFlash()
 {
-}
-
 }
 
 /** @} @}

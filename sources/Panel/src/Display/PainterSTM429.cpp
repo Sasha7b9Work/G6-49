@@ -9,14 +9,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static Color currentColor = Color::NUMBER;
-
-
-namespace Painter
-{
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void BeginScene(Color col)
+void Painter::BeginScene(Color col)
 {   
     if(col != Color::NUMBER)
     {
@@ -33,7 +26,7 @@ void BeginScene(Color col)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SetColorValue(Color color, col_val value)
+void Painter::SetColorValue(Color color, col_val value)
 {
     COLOR(color.value) = value;
 
@@ -41,7 +34,7 @@ void SetColorValue(Color color, col_val value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void LoadPalette()
+void Painter::LoadPalette()
 {
     LTDC_::SetColors(&COLOR(0), Color::NUMBER.value);
     
@@ -49,13 +42,13 @@ void LoadPalette()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void EndScene(void)
+void Painter::EndScene(void)
 {
     LTDC_::ToggleBuffers();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawHLine(int y, int x0, int x1, Color col)
+void Painter::DrawHLine(int y, int x0, int x1, Color col)
 {
     if (col != Color::NUMBER)
     {
@@ -69,7 +62,7 @@ void DrawHLine(int y, int x0, int x1, Color col)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawLine(int x1, int y1, int x2, int y2, Color col)
+void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 {
     SetColor(col);
 
@@ -122,7 +115,7 @@ void DrawLine(int x1, int y1, int x2, int y2, Color col)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawRectangle(int x, int y, int width, int height, Color col)
+void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 {
     SetColor(col);
 
@@ -133,7 +126,7 @@ void DrawRectangle(int x, int y, int width, int height, Color col)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawVLine(int x, int y0, int y1, Color col)
+void Painter::DrawVLine(int x, int y0, int y1, Color col)
 {
     SetColor(col);
 
@@ -144,7 +137,7 @@ void DrawVLine(int x, int y0, int y1, Color col)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FillRegion(int x, int y, int width, int height, Color col)
+void Painter::FillRegion(int x, int y, int width, int height, Color col)
 {
     SetColor(col);
 
@@ -155,13 +148,13 @@ void FillRegion(int x, int y, int width, int height, Color col)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void RunDisplay(void)
+void Painter::RunDisplay(void)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SetColor(Color color)
+void Painter::SetColor(Color color)
 {
     if (color.value != Color::NUMBER.value)
     {
@@ -170,13 +163,13 @@ void SetColor(Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CalculateCurrentColor(void)
+void Painter::CalculateCurrentColor(void)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SetPoint(int x, int y)
+void Painter::SetPoint(int x, int y)
 {
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {
@@ -185,13 +178,13 @@ void SetPoint(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SetPalette(Color)
+void Painter::SetPalette(Color)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-col_val ReduceBrightness(col_val colorValue, float newBrightness)
+col_val Painter::ReduceBrightness(col_val colorValue, float newBrightness)
 {
     int red = (int)(R_FROM_COLOR(colorValue) * newBrightness);
     LIMITATION(red, 0, 0xff);
@@ -200,12 +193,4 @@ col_val ReduceBrightness(col_val colorValue, float newBrightness)
     int blue = (int)(B_FROM_COLOR(colorValue) * newBrightness);
     LIMITATION(blue, 0, 0xff);
     return MAKE_COLOR(red, green, blue);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-Color GetColor()
-{
-    return currentColor;
-}
-
 }
