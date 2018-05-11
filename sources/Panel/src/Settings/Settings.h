@@ -48,6 +48,7 @@ extern const PageBase pInput;
 #define CURRENT_PARAMETER(form) (set.sig_parameter[form])
 
 #define SIZE_BYTE               (set.usb_sizeByte)
+#define STOP_BIT                (set.usb_stopBit)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -81,7 +82,8 @@ public:
     int8                menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
     int8                menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
     bool                freq_enabled;                   ///< Отображение показаний частотомера
-    int8                usb_sizeByte;                   ///< Размер байта для связи по USB
+    SizeByte            usb_sizeByte;                   ///< Размер байта для связи по USB
+    StopBit             usb_stopBit;                    ///< Количество стоп-бит
 
     static void Save();
     static void Load(bool _default = false);

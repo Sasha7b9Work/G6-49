@@ -96,15 +96,20 @@ static const Settings defSet =
             } 
         }
     },
-    Russian,                        // serv_language
-    0,                              // menu_currentPage
-    (Control *)0,                   // menu_openedItem
-    (Page*)0,                       // menu_page
-    false,                          // dbg_console
-    {true, true},                   // sig_enabled
-    true,                           // serv_backgroundBlack
-    true,                           // sig_tuneFull
-    false                           // dbg_debugModeEnabled
+    Russian,        // serv_language
+    0,              // menu_currentPage
+    (Control *)0,   // menu_openedItem
+    (Page*)0,       // menu_page
+    false,          // dbg_console
+    {true, true},   // sig_enabled
+    true,           // serv_backgroundBlack
+    true,           // sig_tuneFull
+    false,          // dbg_debugModeEnabled
+    {0},            // menu_posActItem[]
+    {0},            // menu_currentSubPage[]
+    false,          // freq_enabled
+    SizeByte_8bit,  // usb_sizeByte
+    StopBit_1       // usb_stopBit
 };
 
 Settings set = defSet;

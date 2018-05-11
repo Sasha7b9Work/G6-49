@@ -22,6 +22,12 @@ typedef enum
     SizeByte_8bit
 } SizeByte;
 
+typedef enum
+{
+    StopBit_1,
+    StopBit_2
+}StopBit;
+
 
 float MinValue(WaveParameter param);
 float MaxValue(WaveParameter param);
