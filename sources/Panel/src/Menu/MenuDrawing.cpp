@@ -42,18 +42,20 @@ void Menu::DrawTitle(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::DrawPagesUGO(void)
 {
+    static const int delta = 10;
+
     if (RegIsControlPages())
     {
         for (int i = 0; i < NUM_PAGES; i++)
         {
-            Painter::DrawRectangle(7 + i * 16, 7, 5, 5, Color::FILL);
+            Painter::DrawRectangle(5 + i * delta, 5, delta, 8, Color::FILL);
         }
 
-        Painter::FillRegion(5 + CURRENT_PAGE * 16, 5, 9, 9);
+        Painter::FillRegion(5 + CURRENT_PAGE * delta, 5, delta, 8);
 
         char buffer[20];
 
-        Painter::DrawText(8 + CURRENT_PAGE * 16, 5, Int2String(CURRENT_PAGE + 1, false, 1, buffer), Color::BACK);
+        Painter::DrawText(6 + CURRENT_PAGE * delta, 5, Int2String(CURRENT_PAGE + 1, false, 2, buffer), Color::BACK);
     }
 }
 
