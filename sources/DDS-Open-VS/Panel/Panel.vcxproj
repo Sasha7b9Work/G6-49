@@ -413,6 +413,7 @@
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Panel\src\Generator.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

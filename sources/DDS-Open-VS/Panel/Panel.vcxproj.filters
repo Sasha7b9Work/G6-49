@@ -524,6 +524,9 @@
     <ClInclude Include="..\..\common\_VS\core_cm7.h">
       <Filter>_VS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\Display\font\font5.inc">

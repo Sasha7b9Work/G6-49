@@ -39,12 +39,12 @@ static int selY = 0; // здесь её координаты
 
 static StructButton strBtn[6][4] =
 {
-    { {"F1"},  {"1"},        {"2"},    {"3"} },
-    { {"F2"},  {"4"},        {"5"},    {"6"} },
-    { {"F3"},  {"7"},        {"8"},    {"9"} },
-    { {"F4"},  {"."},        {"0"},    {"-"} },
-    { {"ON1"}, {"REG LEFT"}, {"BTN"},  {"REG RIGHT"} },
-    { {"ON2"}, {"ESC"},      {"LEFT"}, {"RIGHT"} }
+    { {"F1", B_F1},   {"1", B_1},             {"2", B_2},       {"3", B_3} },
+    { {"F2", B_F2},   {"4", B_4},             {"5", B_5},       {"6", B_6} },
+    { {"F3", B_F3},   {"7", B_7},             {"8", B_8},       {"9", B_9} },
+    { {"F4", B_F4},   {".", B_Dot},           {"0", B_0},       {"-", B_Minus} },
+    { {"ON1", B_ON1}, {"REG LEFT", REG_LEFT}, {"BTN", REG_BTN}, {"REG RIGHT", REG_RIGHT} },
+    { {"ON2", B_ON2}, {"ESC", B_ESC},         {"LEFT", B_LEFT}, {"RIGHT", B_RIGHT} }
 };
 
 
