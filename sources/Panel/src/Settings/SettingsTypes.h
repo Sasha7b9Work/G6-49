@@ -10,6 +10,22 @@ typedef enum
     NumChannels
 } Channel;
 
+/// 
+typedef enum
+{
+    Interval_1,
+    Interval_10
+} Interval;
+
+typedef enum
+{
+    BillingTime_1ms,
+    BillingTime_10ms,
+    BillingTime_100ms,
+    BillingTime_1000ms,
+    BillingTime_10000ms
+} BillingTime;
+
 typedef enum
 {
     Russian,

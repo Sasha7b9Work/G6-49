@@ -28,8 +28,8 @@ DEF_CHOICE_2( cChannel,                                                         
     "КАНАЛ", "CHANNEL",
     "Выбор канала для настройки",
     "Selecting a channel to set up",
-    "1", "1",
-    "2", "2",
+    "A", "A",
+    "B", "B",
     CURRENT_CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
 )
 

@@ -50,6 +50,9 @@ extern const PageBase pInput;
 #define SIZE_BYTE               (set.usb_sizeByte)
 #define STOP_BIT                (set.usb_stopBit)
 #define PARITY                  (set.usb_parity)
+#define INTERVAL                (set.freq_interval)
+#define BILLING_TIME            (set.freq_billingTime)
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -86,6 +89,8 @@ public:
     SizeByte            usb_sizeByte;                   ///< Размер байта для связи по USB
     StopBit             usb_stopBit;                    ///< Количество стоп-бит
     Parity              usb_parity;                     ///< Флаг чётности
+    Interval            freq_interval;                  ///< Интервал запуска измерений
+    BillingTime         freq_billingTime;               ///< Время счёта
 
     static void Save();
     static void Load(bool _default = false);

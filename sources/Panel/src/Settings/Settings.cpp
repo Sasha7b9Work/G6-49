@@ -109,7 +109,10 @@ static const Settings defSet =
     {0},            // menu_currentSubPage[]
     false,          // freq_enabled
     SizeByte_8bit,  // usb_sizeByte
-    StopBit_1       // usb_stopBit
+    StopBit_1,      // usb_stopBit
+    Parity_Off,     // usb_parity
+    Interval_1,     // freq_interval
+    BillingTime_1ms // freq_billingTime
 };
 
 Settings set = defSet;
