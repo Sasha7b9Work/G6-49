@@ -43,11 +43,8 @@ void Item_Rotate(Control *item, PanelControl control);
 /// Возвращает функциональную клавишу, назначенную пункту меню
 PanelControl ButtonForItem(void *item);
 
-void Item_Draw(int x, int y, void *item);
-
 void DrawOpenedItem();
 
-const char *ItemTitle(void* item);
 /// Возвращает порядковый номер пункта меню на странице
 int PositionOnPage(void *item);
 
