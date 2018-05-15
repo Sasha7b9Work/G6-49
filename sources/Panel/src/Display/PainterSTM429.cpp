@@ -16,8 +16,7 @@ void Painter::BeginScene(Color col)
     {
         SetColor(col);
     }
-
-    
+   
     uint *address = (uint *)Display::GetBuffer();
 
     uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
