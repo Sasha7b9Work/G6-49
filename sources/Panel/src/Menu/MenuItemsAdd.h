@@ -47,5 +47,3 @@ void DrawOpenedItem();
 
 /// Возвращает порядковый номер пункта меню на странице
 int PositionOnPage(void *item);
-
-int Choice_CurrentChoice(Choice *choice);

@@ -79,7 +79,7 @@ static void DrawOpenedChoice(Choice *choice)
 
     for (int i = 0; i < choice->NumSubItems(); i++)
     {
-        if (Choice_CurrentChoice(choice) == i)
+        if (choice->CurrentChoice() == i)
         {
             Painter::FillRegion(x + 2, y, ITEM_WIDTH - 4, 8, Color::FILL);
             Painter::DrawText(x + 3, y, Choice_Name(choice, i), Color::BACK);

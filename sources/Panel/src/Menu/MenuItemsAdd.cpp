@@ -37,38 +37,6 @@ PanelControl ButtonForItem(void *item)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Choice_CurrentChoice(Choice *choice)
-{
-    TypeItem type = choice->Type();
-
-    int retValue = 0;
-
-    if (type == Item_Choice)
-    {
-        retValue = *(choice->cell);
-    }
-    else if (type == Item_ChoiceParameter)
-    {
-        ChoiceParameter *param = (ChoiceParameter *)choice;
-
-        for (int i = 0; i < NumParameters; i++)
-        {
-            if ((param->allowParameters).allow[i] == false)
-            {
-                continue;
-            }
-            if (i == *param->numParameter)
-            {
-                break;
-            }
-            retValue++;
-        }
-    }
-
-    return retValue;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 int PositionOnPage(void *item)
 {
     for (int numPage = 0; numPage < NUM_PAGES; numPage++)

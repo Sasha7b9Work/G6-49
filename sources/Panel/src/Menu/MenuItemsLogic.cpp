@@ -461,3 +461,33 @@ TypeItem Control::Type()
 {
     return type;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Choice::CurrentChoice()
+{
+    int retValue = 0;
+
+    if (type == Item_Choice)
+    {
+        retValue = *cell;
+    }
+    else if (type == Item_ChoiceParameter)
+    {
+        ChoiceParameter *param = (ChoiceParameter *)this;
+
+        for (int i = 0; i < NumParameters; i++)
+        {
+            if ((param->allowParameters).allow[i] == false)
+            {
+                continue;
+            }
+            if (i == *param->numParameter)
+            {
+                break;
+            }
+            retValue++;
+        }
+    }
+
+    return retValue;
+}
