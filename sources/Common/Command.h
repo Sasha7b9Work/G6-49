@@ -65,7 +65,7 @@ enum Type_WaveForm
 struct WaveForm
 {
     Type_WaveForm type;
-    WaveForm(uint8 num = 0) : type((Type_WaveForm)num) {};
+    WaveForm(uint8 num = 0);
     const char * Name();
     uint8 ToValue();
 };
@@ -86,7 +86,7 @@ enum CommandRead
 #define SPI_MASTER_SYNBYTE  0xAC
 
 
-const char *Command_Name(CommandWrite command);
+//const char *Command_Name(CommandWrite command);
 
 
 /** @}  @} */
