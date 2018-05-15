@@ -113,6 +113,11 @@ StructControl CPU::Keyboard::GetNextControl()
     else
     {
         retValue = commands[0];
+        for (int i = 1; i < pointer; i++)
+        {
+            commands[i - 1] = commands[i];
+        }
+        --pointer;
     }
 
     return retValue;
@@ -182,10 +187,31 @@ void CPU::Keyboard::Update()
         TS_flag = 0;
         timeLastPress = TIME_MS;
     }
+    else if(selX != -1)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (selX == strBtn[i][j].x && selY == strBtn[i][j].y)
+                {
+                    FillCommand(strBtn[i][j].control, TypePress_Release);
+                    selX = -1;
+                }
+            }
+        }
+    }
     else
     {
         selX = -1;
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Keyboard::FillCommand(PanelControl control, TypePress typePress)
+{
+    commands[pointer].control = control;
+    commands[pointer++].typePress = typePress;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
