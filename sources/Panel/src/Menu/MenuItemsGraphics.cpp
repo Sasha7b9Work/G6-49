@@ -19,7 +19,7 @@ void Control::Draw(int x, int y, bool)
     else if (type == Item_ChoiceParameter)
     {
         Painter::DrawText(x + 5, y + 5, Title());
-        Painter::DrawTextRelativelyRight(315, y + 30, ChoiceWaveParameter_CurrentName((ChoiceParameter *)this));
+        Painter::DrawTextRelativelyRight(315, y + 30, ((ChoiceParameter *)this)->CurrentName());
     }
     else if (type == Item_SmallButton)
     {
@@ -61,11 +61,11 @@ void Choice::DrawOpened()
         if (CurrentChoice() == i)
         {
             Painter::FillRegion(x + 2, y, ITEM_WIDTH - 4, 8, Color::FILL);
-            Painter::DrawText(x + 3, y, Choice_Name(this, i), Color::BACK);
+            Painter::DrawText(x + 3, y, NameSubItem(i), Color::BACK);
         }
         else
         {
-            Painter::DrawText(x + 3, y, Choice_Name(this, i), Color::FILL);
+            Painter::DrawText(x + 3, y, NameSubItem(i), Color::FILL);
         }
         y += 10;
     }

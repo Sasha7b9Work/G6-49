@@ -124,7 +124,7 @@ bool Menu::RegIsControlPages(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Menu::NameCurrentParameter(void)
 {
-    return ChoiceWaveParameter_CurrentName(PageSignals::cpParameters);
+    return PageSignals::cpParameters->CurrentName();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

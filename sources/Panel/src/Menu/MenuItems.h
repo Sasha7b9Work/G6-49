@@ -323,7 +323,9 @@ public:
     pFuncVV              funcOnPress;
     AllowableParameters  allowParameters;
     uint8               *numParameter;
-    void Press(TypePress press);
+    void    Press(TypePress press);
+    pString NameSubItem(int num);
+    pString CurrentName();
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// IPaddress ///
@@ -512,6 +514,7 @@ typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
+const char* Parameter_Name(WaveParameter parameter);
 
 /** @}  @}
  */

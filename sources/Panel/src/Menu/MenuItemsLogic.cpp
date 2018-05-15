@@ -12,6 +12,18 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static pString nameParameter[NumParameters][2] =
+{
+    { "вюярнрю",      "FREQUENCY" },
+    { "оепхнд",       "PERIOD" },
+    { "юлокхрсдю",    "AMPLITUDE" },
+    { "ялеыемхе",     "OFFSET" },
+    { "дкхрекэмнярэ", "DURATION" },
+    { "яйбюфмнярэ",   "DUTY RATIO" },
+    { "тюгю",         "PHASE" },
+    { "гюдепфйю",     "DELAY" }
+};
+
 typedef enum
 {
     NONE,
@@ -596,4 +608,35 @@ void Button::Press()
     {
         funcOnPress();
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ChoiceParameter::NameSubItem(int number)
+{
+    const char * retValue = 0;
+    for (int i = 0; i < NumParameters; i++)
+    {
+        if ((allowParameters).allow[i] == false)
+        {
+            continue;
+        }
+        if (number == 0)
+        {
+            retValue = (char*)nameParameter[i][LANGUAGE];
+        }
+        --number;
+    }
+    return retValue;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+const char* Parameter_Name(WaveParameter parameter)
+{
+    return (char*)nameParameter[parameter][LANG];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ChoiceParameter::CurrentName()
+{
+    return (const char*)(nameParameter[*numParameter][LANG]);
 }
