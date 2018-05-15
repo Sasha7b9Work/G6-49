@@ -44,7 +44,7 @@ void Menu::DrawPagesUGO()
     {
         for (int i = 0; i < NUM_PAGES; i++)
         {
-            Painter::DrawRectangle(5 + i * delta, 5, delta, 8, Color::GRAY_75);
+            Painter::DrawRectangle(5 + i * delta, 5, delta, 8, Color::GRAY_25);
         }
 
         Painter::FillRegion(5 + CURRENT_PAGE * delta, 5, delta, 8, Color::FILL);

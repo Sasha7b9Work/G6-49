@@ -46,17 +46,17 @@ void Display::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Display::GetBuffer(void)
+uint8 *Display::GetBuffer()
 {
     return backBuffer;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::Update(void)
+void Display::Update()
 {
     uint timeStart = TIME_MS;
 
-    Painter::BeginScene(Color::BLUE);
+    Painter::BeginScene(Color::BACK);
 
     Painter::SetColor(Color::FILL);
     
