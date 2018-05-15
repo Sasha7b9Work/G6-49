@@ -100,24 +100,7 @@ void Menu::ProcessControl(StructControl strContr)
         }
         else if (key >= B_F1 && key <= B_F4)
         {           
-            Control *control = CurrentPage()->Item(key - B_F1);
-            
-            if (control->IsChoice())
-            {
-                control->Press(pressed);
-            }
-            else if (ItemIsButton(control))
-            {
-                Button_Press((Button *)control);
-            }
-            else if (ItemIsSButton(control))
-            {
-                SButton_Press((SButton *)control);
-            }
-            else if (ItemIsChoiceParameter(control))
-            {
-                ((ChoiceParameter *)control)->Press(pressed);
-            }
+            CurrentPage()->Item(key - B_F1)->Press(pressed);
         }
         else if(key == B_ON1)
         {

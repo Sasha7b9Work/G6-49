@@ -454,9 +454,17 @@ void Control::Press(TypePress press)
     {
         ((Choice *)this)->Press(press);
     }
+    else if(type == Item_Button)
+    {
+        ((Button *)this)->Press();
+    }
     else if(type == Item_ChoiceParameter)
     {
         ((ChoiceParameter *)this)->Press(press);
+    }
+    else if(type == Item_SmallButton)
+    {
+        ((SButton *)this)->Press();
     }
 }
 
@@ -528,7 +536,7 @@ PanelControl Control::ButtonForItem()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::Rotate(PanelControl control)
 {
-    if (IsChoice())
+    if (type == Item_Choice)
     {
         Choice *choice = (Choice *)this;
 
@@ -569,5 +577,29 @@ void ChoiceParameter::Press(TypePress press)
     else if (press == TypePress_LongPress)
     {
         OPENED_ITEM = this;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Control::IsChoiceParameter()
+{
+    return type == Item_ChoiceParameter;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void SButton::Press()
+{
+    if (funcOnPress)
+    {
+        funcOnPress();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Button::Press()
+{
+    if (funcOnPress)
+    {
+        funcOnPress();
     }
 }

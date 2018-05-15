@@ -227,23 +227,6 @@ void InputWindow::ProcessContorl(StructControl strContr)
     }
     else if ((key >= B_F1 && key <= B_F4) && pressed == TypePress_Release)
     {
-        Control *control = Menu::CurrentPage()->Item(key - B_F1);
-        
-        if (control->IsChoice())
-        {
-            control->Press(pressed);
-        }
-        else if (ItemIsButton(control))
-        {
-            Button_Press((Button *)control);
-        }
-        else if (ItemIsSButton(control))
-        {
-            SButton_Press((SButton *)control);
-        }
-        else if (ItemIsChoiceParameter(control))
-        {
-            ((ChoiceParameter *)control)->Press(pressed);
-        }
+        Menu::CurrentPage()->Item(key - B_F1)->Press(pressed);
     }
 }

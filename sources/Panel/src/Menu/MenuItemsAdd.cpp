@@ -15,10 +15,3 @@ bool ItemIsSButton(void* item)
 {
     return item && (((Control *)item)->Type() == Item_SmallButton);
 }
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool ItemIsChoiceParameter(void *item)
-{
-    return item && (((Control *)item)->Type() == Item_ChoiceParameter);
-}
