@@ -3,6 +3,7 @@
 #include "CPU.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
+#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,25 +207,15 @@ void LTDC_::ToggleBuffers()
     hDMA2D.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
     hDMA2D.LayerCfg[1].InputOffset = 0;
 
-    /*
-    hDMA2D.LayerCfg[0].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-    hDMA2D.LayerCfg[0].InputAlpha = 0xFF;
-    hDMA2D.LayerCfg[0].InputColorMode = DMA2D_INPUT_L8;
-    hDMA2D.LayerCfg[0].InputOffset = 0;
-    */
-
     hDMA2D.Instance = DMA2D;
 
     if (HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
     {
-        //if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
+        if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
+            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
             {
-                if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
-                {
-                    HAL_DMA2D_PollForTransfer(&hDMA2D, 100);
-                }
+                HAL_DMA2D_PollForTransfer(&hDMA2D, 100);
             }
         }
     }
@@ -236,7 +227,7 @@ void LTDC_::FillBackBuffer(Color color)
     DMA2D_HandleTypeDef hDMA2D;
 
     hDMA2D.Init.Mode = DMA2D_R2M;
-    hDMA2D.Init.ColorMode = DMA2D_INPUT_L8;
+    hDMA2D.Init.ColorMode = DMA2D_INPUT_ARGB8888;
     hDMA2D.Init.OutputOffset = 0;
 
     hDMA2D.XferCpltCallback = NULL;
@@ -247,7 +238,7 @@ void LTDC_::FillBackBuffer(Color color)
     hDMA2D.LayerCfg[0].InputOffset = 0;
 
     hDMA2D.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-    hDMA2D.LayerCfg[1].InputAlpha = 0x0;
+    hDMA2D.LayerCfg[1].InputAlpha = 0xff;
     hDMA2D.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
     hDMA2D.LayerCfg[1].InputOffset = 0;
 
@@ -255,7 +246,7 @@ void LTDC_::FillBackBuffer(Color color)
 
     if (HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
     {
-        if (HAL_DMA2D_ConfigLayer(&hDMA2D, 0) == HAL_OK)
+        if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
             if (HAL_DMA2D_Start(&hDMA2D, color.value, backBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
             {

@@ -21,6 +21,7 @@ typedef int bool;
 typedef const char *const   pString;
 typedef unsigned int        uint;
 typedef unsigned short int  uint16;
+typedef unsigned long long int uint64;
 typedef signed short int    int16;
 typedef unsigned char       uint8;
 typedef unsigned char       uchar;
