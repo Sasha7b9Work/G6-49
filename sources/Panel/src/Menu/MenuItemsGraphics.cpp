@@ -5,10 +5,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void DrawOpenedChoice(Choice *choice);
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Control::Draw(int x, int y, bool opened)
+void Control::Draw(int x, int y, bool)
 {
     if (type == Item_Choice)
     {
@@ -39,30 +36,12 @@ void Control::Draw(int x, int y, bool opened)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void DrawOpenedItem()
-{
-    if (OPENED_ITEM)
-    {
-        TypeItem typeItem = ((Control *)OPENED_ITEM)->Type();
-
-        if (typeItem == Item_Choice)
-        {
-            DrawOpenedChoice((Choice *)OPENED_ITEM);
-        }
-        else if (typeItem == Item_ChoiceParameter)
-        {
-            DrawOpenedChoice((Choice *)OPENED_ITEM);
-        }
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawOpenedChoice(Choice *choice)
+void Choice::DrawOpened()
 {
     int width = ITEM_WIDTH;
-    int height = choice->NumSubItems() * 10 + 2 + 12;
+    int height = NumSubItems() * 10 + 2 + 12;
 
-    int y = MP_TITLE_HEIGHT + PositionOnPage(choice) * MI_HEIGHT;
+    int y = MP_TITLE_HEIGHT + PositionOnPage() * MI_HEIGHT;
     int x = SCREEN_WIDTH - ITEM_WIDTH - 20;
 
     y += (MI_HEIGHT - height) / 2;
@@ -73,20 +52,20 @@ static void DrawOpenedChoice(Choice *choice)
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
     Painter::DrawHLine(y + 12, x, x + width);
 
-    Painter::DrawTextRelativelyRight(x + width - 2, y + 2, choice->Title());
+    Painter::DrawTextRelativelyRight(x + width - 2, y + 2, Title());
 
     y += 14;
 
-    for (int i = 0; i < choice->NumSubItems(); i++)
+    for (int i = 0; i < NumSubItems(); i++)
     {
-        if (choice->CurrentChoice() == i)
+        if (CurrentChoice() == i)
         {
             Painter::FillRegion(x + 2, y, ITEM_WIDTH - 4, 8, Color::FILL);
-            Painter::DrawText(x + 3, y, Choice_Name(choice, i), Color::BACK);
+            Painter::DrawText(x + 3, y, Choice_Name(this, i), Color::BACK);
         }
         else
         {
-            Painter::DrawText(x + 3, y, Choice_Name(choice, i), Color::FILL);
+            Painter::DrawText(x + 3, y, Choice_Name(this, i), Color::FILL);
         }
         y += 10;
     }

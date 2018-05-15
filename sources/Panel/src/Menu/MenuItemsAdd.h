@@ -41,9 +41,4 @@ void ChoiceWaveParameter_Press(ChoiceParameter *choice, TypePress press);
 
 void Item_Rotate(Control *item, PanelControl control);
 /// Возвращает функциональную клавишу, назначенную пункту меню
-PanelControl ButtonForItem(void *item);
-
-void DrawOpenedItem();
-
-/// Возвращает порядковый номер пункта меню на странице
-int PositionOnPage(void *item);
+PanelControl ButtonForItem(Control *item);

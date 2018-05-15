@@ -24,9 +24,9 @@ bool ItemIsChoiceParameter(void *item)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-PanelControl ButtonForItem(void *item)
+PanelControl ButtonForItem(Control *item)
 {
-    int pos = PositionOnPage(item);
+    int pos = item->PositionOnPage();
 
     if (pos >= 0)
     {
@@ -34,20 +34,4 @@ PanelControl ButtonForItem(void *item)
     }
 
     return B_None;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int PositionOnPage(void *item)
-{
-    for (int numPage = 0; numPage < NUM_PAGES; numPage++)
-    {
-        for (int numItem = 0; numItem < NUM_ITEMS_ON_PAGE; numItem++)
-        {
-            if (item == menu[numPage]->items[numItem])
-            {
-                return numItem;
-            }
-        }
-    }
-    return -1;
 }

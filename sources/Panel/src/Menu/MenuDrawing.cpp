@@ -55,4 +55,20 @@ void Menu::DrawPagesUGO()
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::DrawOpenedItem()
+{
+    if (OPENED_ITEM)
+    {
+        TypeItem typeItem = ((Control *)OPENED_ITEM)->Type();
 
+        if (typeItem == Item_Choice)
+        {
+            ((Choice *)OPENED_ITEM)->DrawOpened();
+        }
+        else if (typeItem == Item_ChoiceParameter)
+        {
+            ((Choice *)OPENED_ITEM)->DrawOpened();
+        }
+    }
+}

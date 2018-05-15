@@ -40,4 +40,6 @@ private:
     static void DrawPagesUGO();
 
     static void ProcessControl(StructControl control);
+
+    static void DrawOpenedItem();
 };

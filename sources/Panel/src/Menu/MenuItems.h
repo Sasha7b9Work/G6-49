@@ -100,6 +100,8 @@ public:
     TypeItem Type();
 
     bool IsChoice();
+    /// ¬озвращает пор€дковый номер пункта меню на странице
+    int PositionOnPage();
 };
 
 
@@ -277,7 +279,7 @@ public:
     void  ChangeIndex(int delta);           ///< »змен€ет значение choice в зависимости от величины и знака delta.
     int   NumSubItems();                    ///< ¬озвращает количество вариантов выбора в элементе по адресу choice
     void  Draw(int x, int y, bool opened);
-    void  DrawOpened(int x, int y);
+    void  DrawOpened();
     void  DrawClosed(int x, int y);
     /// ¬озвращает им€ текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameCurrentSubItem();

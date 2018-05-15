@@ -491,3 +491,19 @@ int Choice::CurrentChoice()
 
     return retValue;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Control::PositionOnPage()
+{
+    for (int numPage = 0; numPage < NUM_PAGES; numPage++)
+    {
+        for (int numItem = 0; numItem < NUM_ITEMS_ON_PAGE; numItem++)
+        {
+            if (this == menu[numPage]->items[numItem])
+            {
+                return numItem;
+            }
+        }
+    }
+    return -1;
+}
