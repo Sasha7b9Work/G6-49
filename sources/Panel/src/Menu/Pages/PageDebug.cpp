@@ -38,10 +38,23 @@ DEF_BUTTON( bSaveSettings,                                                      
     pDebug, FuncActive, OnPress_SaveSettings, FuncDraw
 )
 
-DEF_PAGE_2( pDebug,
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2( cStatistics,
+    "СТАТИСТИКА", "STATISTICS",
+    "Включает/отключает показ на экране статистики по частоте кадров в виде ФПС / время отрисовки одного кадра / время, потраченое на отрисовку за "
+    "весь кадр",
+    "Enables / disables the display of statistics on the frame rate in the form of FPS / time of drawing one frame / time spent on rendering for the "
+    "whole frame",
+    DISABLED_RU, DISABLED_EN,
+    ENABLED_RU, ENABLED_EN,
+    SHOW_STATISTICS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
+)
+
+DEF_PAGE_3( pDebug,
     "ОТЛАДКА", "DEBUG",
     "", "",
     cConsole,      ///< ОТЛАДКА - КОНСОЛЬ
     bSaveSettings, ///< ОТЛАДКА - СОХРАНИТЬ НАСТРОЙКИ
+    cStatistics,   ///< ОТЛАДКА - СТАТИСТИКА
     Page_Debug, 0, FuncActive, FuncPress
 )

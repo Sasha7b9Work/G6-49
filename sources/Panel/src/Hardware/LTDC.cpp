@@ -10,6 +10,8 @@ static LTDC_HandleTypeDef handleLTDC;
 static uint frontBuffer = 0;
 static uint backBuffer = 0;
 
+DMA2D_HandleTypeDef LTDC_::hDMA2D;
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void LTDC_::Init(uint front, uint back)
@@ -80,6 +82,19 @@ void LTDC_::Init(uint front, uint back)
 #endif
 
     SetBuffers(front, back);
+
+    hDMA2D.Init.Mode = DMA2D_M2M;
+    hDMA2D.Init.ColorMode = DMA2D_INPUT_L8;
+    hDMA2D.Init.OutputOffset = 0;
+
+    hDMA2D.XferCpltCallback = NULL;
+
+    hDMA2D.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+    hDMA2D.LayerCfg[1].InputAlpha = 0xFF;
+    hDMA2D.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
+    hDMA2D.LayerCfg[1].InputOffset = 0;
+
+    hDMA2D.Instance = DMA2D;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,28 +137,13 @@ void LTDC_::SetColors(uint clut[], uint8 numColors)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void LTDC_::ToggleBuffers()
 {
-    DMA2D_HandleTypeDef hDMA2D;
-
-    hDMA2D.Init.Mode = DMA2D_M2M;
-    hDMA2D.Init.ColorMode = DMA2D_INPUT_L8;
-    hDMA2D.Init.OutputOffset = 0;
-
-    hDMA2D.XferCpltCallback = NULL;
-
-    hDMA2D.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-    hDMA2D.LayerCfg[1].InputAlpha = 0xFF;
-    hDMA2D.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
-    hDMA2D.LayerCfg[1].InputOffset = 0;
-
-    hDMA2D.Instance = DMA2D;
-
     if (HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
             if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
             {
-                HAL_DMA2D_PollForTransfer(&hDMA2D, 100);
+                HAL_DMA2D_PollForTransfer(&hDMA2D, 1);
             }
         }
     }

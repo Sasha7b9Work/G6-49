@@ -19,4 +19,6 @@ public:
 private:
 
     static void SetBuffers(uint frontBuffer, uint backBuffer);
+
+    static DMA2D_HandleTypeDef hDMA2D;
 };

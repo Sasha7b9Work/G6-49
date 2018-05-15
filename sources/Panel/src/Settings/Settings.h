@@ -53,6 +53,8 @@ extern const PageBase pInput;
 #define INTERVAL                (set.freq_interval)
 #define BILLING_TIME            (set.freq_billingTime)
 
+#define SHOW_STATISTICS         (set.dbg_statistics)
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -91,6 +93,7 @@ public:
     Parity              usb_parity;                     ///< Флаг чётности
     Interval            freq_interval;                  ///< Интервал запуска измерений
     BillingTime         freq_billingTime;               ///< Время счёта
+    bool                dbg_statistics;                 ///< Показывать ли статистику
 
     static void Save();
     static void Load(bool _default = false);
