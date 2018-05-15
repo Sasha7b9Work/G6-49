@@ -43,7 +43,7 @@ void CPU::Init()
     SystemClockConfig();
     
 #ifdef STM32F429xx
-    STM429::Init();
+    STM32::Init();
 #endif
 
 #ifdef STM32F746xx

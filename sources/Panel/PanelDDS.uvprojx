@@ -1832,16 +1832,6 @@
               <FilePath>.\src\Hardware\stm32.h</FilePath>
             </File>
             <File>
-              <FileName>stm429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm429.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm429.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm429.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer4XX.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>

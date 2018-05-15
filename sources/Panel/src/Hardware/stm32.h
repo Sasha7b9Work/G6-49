@@ -8,5 +8,7 @@ class STM32
 public:
     static void ErrorHandler();
 
+    static void Init();
+
 protected:
 };

@@ -248,7 +248,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\stm32.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Timer4XX.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\VCP.cpp" />
@@ -389,7 +388,6 @@
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\stm32.h" />
-    <ClInclude Include="..\..\Panel\src\Hardware\stm429.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer4XX.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\VCP.h" />

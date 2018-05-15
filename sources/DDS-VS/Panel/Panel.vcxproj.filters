@@ -174,9 +174,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\stm32.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -357,9 +354,6 @@
       <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\stm32.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Hardware\stm429.h">
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h">

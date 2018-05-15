@@ -2,7 +2,7 @@
 #include "Hardware/Controls.h"
 
 #ifdef STM32F429xx
-#include "Hardware/stm429.h"
+#include "Hardware/stm32.h"
 #endif
 
 #ifdef STM32F746xx
@@ -17,7 +17,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef STM32F429xx
-class CPU : public STM429
+class CPU : public STM32
 #endif
     
 #ifdef STM32F746xx
