@@ -29,7 +29,7 @@ void Generator::EnableChannel(Channel ch, bool enable)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Channel ch, WaveForm form)
+void Generator::SetFormWave(Channel ch, Type_WaveForm form)
 {
     static const GeneratorPin pin[NumChannels] = {Pin_P1_AmplifierA, Pin_P2_AmplifierB};
 

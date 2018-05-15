@@ -71,7 +71,7 @@ public:
     };
     col_val             disp_Colors[16];                ///< Цвета
     Channel             sig_channel;                    ///< Текущий выбранный канал
-    WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
+    Type_WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
     WaveParameter       sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
     InputWindowStruct   sig_structParameter[NumChannels][NumForms][NumParameters];
     Language            serv_language;                  ///< Выбранный язык

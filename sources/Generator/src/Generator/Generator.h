@@ -15,7 +15,7 @@ public:
 
     static void EnableChannel(Channel ch, bool enable);
 
-    static void SetFormWave(Channel ch, WaveForm form);
+    static void SetFormWave(Channel ch, Type_WaveForm form);
 
     static void SetParameter(Channel ch, CommandWrite command, float value);
 

@@ -130,7 +130,7 @@ void Interface::CommandEnable(void)
 void Interface::CommandFormWave(void)
 {
     Channel ch = (Channel)buffer[1];
-    WaveForm form = (WaveForm)buffer[2];
+    Type_WaveForm form = (Type_WaveForm)buffer[2];
     Generator::SetFormWave(ch, form);
 }
 

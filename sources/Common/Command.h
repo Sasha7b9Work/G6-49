@@ -54,7 +54,7 @@ enum WaveParameter
     NumParameters
 };
 
-enum WaveForm
+enum Type_WaveForm
 {
     Form_Sine,
     Form_Saw,
@@ -80,6 +80,6 @@ enum CommandRead
 
 const char *Command_Name(CommandWrite command);
 
-const char *WaveForm_Name(WaveForm form);
+const char *WaveForm_Name(Type_WaveForm form);
 
 /** @}  @} */

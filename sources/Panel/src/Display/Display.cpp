@@ -114,7 +114,7 @@ void Display::DrawSignalUGO(Channel chan, int y0)
     Painter::DrawVLine(x0, minY, maxY);
     Painter::DrawHLine(aveY, x0, x0 + width);
 
-    WaveForm form = WAVE_FORM_CH(chan);
+    Type_WaveForm form = WAVE_FORM_CH(chan);
 
     if (form == Form_Sine)
     {
@@ -157,7 +157,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 {
     int x0 = 107;
     
-    WaveForm form = WAVE_FORM_CH(ch);
+    Type_WaveForm form = WAVE_FORM_CH(ch);
 
     y0 += 5;
 
@@ -193,7 +193,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
 {
-    WaveForm form = WAVE_FORM_CH(ch);
+    Type_WaveForm form = WAVE_FORM_CH(ch);
 
     x = Painter::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 

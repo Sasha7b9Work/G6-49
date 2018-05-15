@@ -109,7 +109,7 @@ void FPGA::Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetWaveForm(WaveForm form)
+void FPGA::SetWaveForm(Type_WaveForm form)
 {
     typedef void(*pFuncFpgaVV)();
     

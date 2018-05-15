@@ -14,7 +14,7 @@ class FPGA
 public:
     static void Init();
 
-    static void SetWaveForm(WaveForm form);
+    static void SetWaveForm(Type_WaveForm form);
 
     static void SetFrequency(Channel ch, float frequency);
 
