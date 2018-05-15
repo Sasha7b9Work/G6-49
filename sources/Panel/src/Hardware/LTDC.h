@@ -1,4 +1,5 @@
 #pragma once
+#include "Display/Colors.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,6 +16,8 @@ public:
     static void SetColors(uint clut[], uint8 numColors);
 
     static void ToggleBuffers();
+
+    static void FillRegion(int x, int y, int width, int height, Color color);
 
 private:
 

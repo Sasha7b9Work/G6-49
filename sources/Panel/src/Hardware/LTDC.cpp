@@ -3,6 +3,8 @@
 #include "CPU.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
+#include "Settings/Settings.h"
+#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11,6 +13,9 @@ static uint frontBuffer = 0;
 static uint backBuffer = 0;
 
 DMA2D_HandleTypeDef LTDC_::hDMA2D;
+
+//static uint cl[256];
+//static uint clSize = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,16 +88,24 @@ void LTDC_::Init(uint front, uint back)
 
     SetBuffers(front, back);
 
-    hDMA2D.Init.Mode = DMA2D_M2M;
     hDMA2D.Init.ColorMode = DMA2D_INPUT_L8;
     hDMA2D.Init.OutputOffset = 0;
 
     hDMA2D.XferCpltCallback = NULL;
 
+    
+    hDMA2D.LayerCfg[0].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+    hDMA2D.LayerCfg[0].InputAlpha = 0xff;
+    hDMA2D.LayerCfg[0].InputColorMode = DMA2D_INPUT_L8;
+    hDMA2D.LayerCfg[0].InputOffset = 0;
+    
+
+    /*
     hDMA2D.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
     hDMA2D.LayerCfg[1].InputAlpha = 0xFF;
     hDMA2D.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
     hDMA2D.LayerCfg[1].InputOffset = 0;
+    */
 
     hDMA2D.Instance = DMA2D;
 }
@@ -110,8 +123,8 @@ void LTDC_::SetBuffers(uint front, uint back)
     pLayerCfg.WindowY0 = 0;
     pLayerCfg.WindowY1 = SCREEN_HEIGHT;
     pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
-    pLayerCfg.Alpha = 255;
-    pLayerCfg.Alpha0 = 255;
+    pLayerCfg.Alpha = 0xff;
+    pLayerCfg.Alpha0 = 0xff;
     pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
     pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
     pLayerCfg.FBStartAdress = frontBuffer;
@@ -120,7 +133,7 @@ void LTDC_::SetBuffers(uint front, uint back)
     pLayerCfg.Backcolor.Blue = 0;
     pLayerCfg.Backcolor.Green = 0;
     pLayerCfg.Backcolor.Red = 0;
-    if (HAL_LTDC_ConfigLayer(&handleLTDC, &pLayerCfg, 0) != HAL_OK)
+    if (HAL_LTDC_ConfigLayer(&handleLTDC, &pLayerCfg, 1) != HAL_OK)
     {
         ERROR_HANDLER();
     }
@@ -137,6 +150,8 @@ void LTDC_::SetColors(uint clut[], uint8 numColors)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void LTDC_::ToggleBuffers()
 {
+    hDMA2D.Init.Mode = DMA2D_M2M;
+
     if (HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
@@ -144,6 +159,24 @@ void LTDC_::ToggleBuffers()
             if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&hDMA2D, 1);
+            }
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void LTDC_::FillRegion(int, int, int width, int height, Color color)
+{
+    hDMA2D.Init.Mode = DMA2D_R2M;
+
+    if(HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
+    {
+        if(HAL_DMA2D_ConfigLayer(&hDMA2D, 0) == HAL_OK)
+        {
+            if (HAL_DMA2D_Start(&hDMA2D, color.value, backBuffer, (uint)width, (uint)height) == HAL_OK)
+            {
+                volatile HAL_StatusTypeDef res = HAL_DMA2D_PollForTransfer(&hDMA2D, 100);
+                res = res;
             }
         }
     }

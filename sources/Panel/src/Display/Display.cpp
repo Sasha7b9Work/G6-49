@@ -56,7 +56,7 @@ void Display::Update(void)
 {
     uint timeStart = TIME_MS;
 
-    Painter::BeginScene(Color::BACK);
+    Painter::BeginScene(Color::BLUE);
 
     Painter::SetColor(Color::FILL);
     
