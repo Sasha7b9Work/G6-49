@@ -11,7 +11,7 @@
 #define IN_NUM_LOCK_MODE    (iws.numLockMode)
 
 static Channel           chan;
-static Type_WaveForm          form;
+static WaveForm          form;
 static WaveParameter     param;
 static InputWindowStruct iws;
 

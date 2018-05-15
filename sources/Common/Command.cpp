@@ -6,7 +6,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const char *nameWaveForm[NumForms][2] =
+static pString nameWaveForm[NumForms][2] =
 {
     { "—»Õ”—",    "SINE" },
     { "œ»À¿",     "SAW" },
@@ -41,7 +41,13 @@ const char *Command_Name(CommandWrite command)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char* WaveForm_Name(Type_WaveForm form)
+const char * WaveForm::Name()
 {
-    return (char*)nameWaveForm[form][LANG];
+    return nameWaveForm[type][LANG];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 WaveForm::ToValue()
+{
+    return (uint8)type;
 }

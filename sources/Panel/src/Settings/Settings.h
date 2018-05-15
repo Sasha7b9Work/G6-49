@@ -20,7 +20,7 @@ extern const PageBase pInput;
 #define WAVE_FORM_CH(ch)        (set.sig_form[ch])
 #define WAVE_FORM_IS_FPGA       (WAVE_FORM != Form_Sine && WAVE_FORM != Form_Impulse)
 
-#define INPUT_WINDOW_STRUCT(ch, form, param)    (set.sig_structParameter[ch][form][param])
+#define INPUT_WINDOW_STRUCT(ch, form, param)    (set.sig_structParameter[ch][form.ToValue()][param])
 
 #define COLOR(x)                (set.disp_Colors[x])
 #define LANGUAGE                (set.serv_language)
@@ -45,7 +45,7 @@ extern const PageBase pInput;
 
 #define BACKGROUND_BLACK        (set.serv_bacgroundBlack)
 
-#define CURRENT_PARAMETER(form) (set.sig_parameter[form])
+#define CURRENT_PARAMETER(form) (set.sig_parameter[form.ToValue()])
 
 #define SIZE_BYTE               (set.usb_sizeByte)
 #define STOP_BIT                (set.usb_stopBit)
@@ -71,7 +71,7 @@ public:
     };
     col_val             disp_Colors[16];                ///< Цвета
     Channel             sig_channel;                    ///< Текущий выбранный канал
-    Type_WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
+    WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
     WaveParameter       sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
     InputWindowStruct   sig_structParameter[NumChannels][NumForms][NumParameters];
     Language            serv_language;                  ///< Выбранный язык

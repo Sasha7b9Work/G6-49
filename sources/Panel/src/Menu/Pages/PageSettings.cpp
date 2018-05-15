@@ -19,7 +19,7 @@ static uint8 waveForm = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    waveForm = (uint8)WAVE_FORM;
+    waveForm = WAVE_FORM.ToValue();
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM);
 }
@@ -35,7 +35,7 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetWaveForm(Channel ch, Type_WaveForm form)
+static void SetWaveForm(Channel ch, WaveForm form)
 {
     set.sig_form[ch] = form;
     TuneGenerator(ch);
@@ -43,9 +43,9 @@ static void SetWaveForm(Channel ch, Type_WaveForm form)
 
 void PageSignals::OnPress_Form(bool)
 {
-    Type_WaveForm form = (Type_WaveForm)waveForm;
+    WaveForm form = WaveForm(waveForm);
 
-    if (form == Form_Saw || form == Form_Impulse)
+    if (form.type == Form_Saw || form.type == Form_Impulse)
     {
         SetWaveForm(A, form);
         SetWaveForm(B, form);
@@ -87,16 +87,16 @@ DEF_CHOICE_PARAMETER(parameters,                                                
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки",
     "Choosing a setting for customization",
-    pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER((Type_WaveForm)waveForm)),
+    pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER(WaveForm(waveForm))),
     true, true, true, true, false, false, false, false
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::Init()
 {
-    waveForm = (uint8)WAVE_FORM;
+    waveForm = WAVE_FORM.ToValue();
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER((Type_WaveForm)waveForm);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm(waveForm));
 }
 
 DEF_PAGE_4

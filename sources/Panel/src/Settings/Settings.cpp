@@ -173,11 +173,11 @@ void Settings::Load(bool _default)
 void TuneGenerator(Channel ch)
 {
     Generator::EnableChannel(ch, set.sig_enabled[ch]);
-    Type_WaveForm form = WAVE_FORM_CH(ch);
+    WaveForm form = WAVE_FORM_CH(ch);
     Generator::SetFormWave(ch, WAVE_FORM_CH(ch));
     Generator::SetParameter(ch, Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Frequency))->Value());
     Generator::SetParameter(ch, Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Amplitude))->Value());
-    if (form == Form_Impulse)
+    if (form.type == Form_Impulse)
     {
         Generator::SetParameter(ch, Duration, (&INPUT_WINDOW_STRUCT(ch, form, Duration))->Value());
     }

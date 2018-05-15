@@ -1,5 +1,5 @@
 #pragma once
-//#include "Menu/MenuItems.h"
+#include "defines.h"
 
 
 /** @addtogroup Panel
@@ -62,6 +62,14 @@ enum Type_WaveForm
     NumForms
 };
 
+struct WaveForm
+{
+    Type_WaveForm type;
+    WaveForm(uint8 num = 0) : type((Type_WaveForm)num) {};
+    const char * Name();
+    uint8 ToValue();
+};
+
 
 /// Возможные команды, принимаемые от основного процессора
 enum CommandRead
@@ -80,6 +88,5 @@ enum CommandRead
 
 const char *Command_Name(CommandWrite command);
 
-const char *WaveForm_Name(Type_WaveForm form);
 
 /** @}  @} */

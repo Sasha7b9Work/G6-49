@@ -114,9 +114,9 @@ void Display::DrawSignalUGO(Channel chan, int y0)
     Painter::DrawVLine(x0, minY, maxY);
     Painter::DrawHLine(aveY, x0, x0 + width);
 
-    Type_WaveForm form = WAVE_FORM_CH(chan);
+    WaveForm form = WAVE_FORM_CH(chan);
 
-    if (form == Form_Sine)
+    if (form.type == Form_Sine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -130,7 +130,7 @@ void Display::DrawSignalUGO(Channel chan, int y0)
             Painter::RunDisplay();
         }
     }
-    else if (form == Form_Saw)
+    else if (form.type == Form_Saw)
     {
         int dX = 30;
         for (int x = x0; x < x0 + 80; x += dX)
@@ -139,7 +139,7 @@ void Display::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawLine(x + dX, aveY, x + dX, minY);
         }
     }
-    else if (form == Form_Impulse)
+    else if (form.type == Form_Impulse)
     {
         int deltaX = 20;
         for (int i = 0; i < 5; i++)
@@ -157,11 +157,11 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 {
     int x0 = 107;
     
-    Type_WaveForm form = WAVE_FORM_CH(ch);
+    WaveForm form = WAVE_FORM_CH(ch);
 
     y0 += 5;
 
-    Painter::DrawText(22, y0 + 3, WaveForm_Name(form), Color::FILL);
+    Painter::DrawText(22, y0 + 3, form.Name(), Color::FILL);
 
     AllowableParameters allowParameters;
     InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
@@ -193,7 +193,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
 {
-    Type_WaveForm form = WAVE_FORM_CH(ch);
+    WaveForm form = WAVE_FORM_CH(ch);
 
     x = Painter::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 

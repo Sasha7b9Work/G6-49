@@ -49,7 +49,7 @@ static void FillIWSfromInputBuffer();
 static void SendIWStoGenerator();
 
 static InputWindowStruct *iws = 0;
-static Type_WaveForm           form;
+static WaveForm           form;
 static WaveParameter      m_param;
 static Channel            ch;
 
@@ -58,7 +58,7 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindowStruct::Fill(Channel ch_, Type_WaveForm form_, WaveParameter param_)
+void InputWindowStruct::Fill(Channel ch_, WaveForm form_, WaveParameter param_)
 {
     ch = ch_;
     form = form_;
@@ -532,7 +532,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::FillAllowParameters(Channel ch_, Type_WaveForm form_, AllowableParameters *allowParameters)
+void InputWindowStruct::FillAllowParameters(Channel ch_, WaveForm form_, AllowableParameters *allowParameters)
 {
     for (int i = 0; i < NumParameters; i++)
     {
@@ -548,8 +548,8 @@ static void SendIWStoGenerator(void)
 
     if (m_param == Delay)
     {
-        PARAMETER(B, Form_Impulse, Frequency) = PARAMETER(B, Form_Impulse, Frequency);
-        float frequency = PARAMETER(A, Form_Impulse, Frequency).Value();
+        PARAMETER(B, WaveForm(Form_Impulse), Frequency) = PARAMETER(B, WaveForm(Form_Impulse), Frequency);
+        float frequency = PARAMETER(A, WaveForm(Form_Impulse), Frequency).Value();
         Generator::SetParameter(B, Frequency, frequency);
 
         float value = PARAMETER(ch, form, m_param).Value();

@@ -34,7 +34,7 @@ class InputWindowStruct
 {
 public:
 
-    void Fill(Channel ch, Type_WaveForm form, WaveParameter param);
+    void Fill(Channel ch, WaveForm form, WaveParameter param);
 
     char *StringValue();
 
@@ -54,7 +54,7 @@ public:
 
     static void SaveValue();
     /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
-    static void FillAllowParameters(Channel ch, Type_WaveForm form, AllowableParameters *allowParameters);
+    static void FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters);
 
     bool            allow;                      ///< Если true, параметр разрешен для данного сигнала
     SignValue       sign;
