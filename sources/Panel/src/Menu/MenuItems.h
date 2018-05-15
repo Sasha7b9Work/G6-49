@@ -99,7 +99,6 @@ public:
 
     TypeItem Type();
 
-    bool IsChoiceParameter();
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage();
     /// Возвращает функциональную клавишу, назначенную пункту меню
@@ -513,9 +512,6 @@ typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
-    
-#include <Menu/MenuItemsAdd.h>
 
-    
 /** @}  @}
  */

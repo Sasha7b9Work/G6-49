@@ -1877,24 +1877,9 @@
               <FilePath>.\src\Menu\MenuPagesNames.h</FilePath>
             </File>
             <File>
-              <FileName>MenuItemsAdd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuItemsAdd.h</FilePath>
-            </File>
-            <File>
               <FileName>MenuItemsGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuItemsGraphics.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItemsAdd.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsAdd.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItemsLogicAdd.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\MenuItemsLogicAdd.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuItems.cpp</FileName>
