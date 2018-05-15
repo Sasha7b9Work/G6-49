@@ -46,7 +46,7 @@ char* Hex32toString(uint value, char bufferOut[9], bool upper);
 char* Int2String(int value,                     ///< значение
                  bool alwaysSign,               ///< если установлен в true, знак будет выводиться всегда
                  int numMinFields,              ///< минимальное число занимаемых знакомест. Если для вывода числа столько не требуется, лишние заполняются нулями
-                 char bufferOut[20]             ///< сюда записывается возвращаемое значение
+                 char bufferOut[20] = 0         ///< сюда записывается возвращаемое значение
 );
 /// Сравнивает две строки. Число символов берётся из str1
 bool EqualsStrings(char *str1, char *str2);

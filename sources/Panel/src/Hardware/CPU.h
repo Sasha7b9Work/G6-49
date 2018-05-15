@@ -28,6 +28,10 @@ public:
 
     static void Init();
 
+    static void Update();
+
+    static float GetFPS();
+
     //----------------------------------------------------------------------------------------------------------------------------------- Keyboard ---
     class Keyboard
     {
@@ -112,6 +116,12 @@ public:
 private:
 
     static void SystemClockConfig();
+    /// Время начала замера ФПС (время начала очередного 1-секундного отрезка времени)
+    static uint timeStartMeasFPS;
+    /// Сколько фреймов насчитано с начала очередного 1-секундного отрезка времени
+    static int numFrames;
+
+    static float fps;
 };
 
 

@@ -254,22 +254,25 @@ char *Hex32toString(uint value, char buffer[9], bool upper)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *Int2String(int value, bool alwaysSign, int numMinFields, char buffer[20])
+char *Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
 {
+    static char statBuf[20];
+    char *buf = buffer ? buffer : statBuf;
+
     const int SIZE = 20;
     char format[SIZE] = "%";
     snprintf(&(format[1]), SIZE, "0%d", numMinFields);
     strcat(format, "d");
     if (alwaysSign && value >= 0)
     {
-        buffer[0] = '+';
-        snprintf(buffer + 1, SIZE - 1, format, value);
+        buf[0] = '+';
+        snprintf(buf + 1, SIZE - 1, format, value);
     }
     else
     {
-        snprintf(buffer, SIZE, format, value);
+        snprintf(buf, SIZE, format, value);
     }
-    return buffer;
+    return buf;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

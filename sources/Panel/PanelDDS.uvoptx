@@ -155,18 +155,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>56</LineNumber>
+          <LineNumber>314</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134239032</Address>
+          <Address>134241408</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\DDS\sources\Panel\src\Menu\MenuItemsAdd.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\CPU.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Menu/MenuItemsAdd.cpp\56</Expression>
+          <Expression>\\PanelDDS\src/Hardware/CPU.cpp\314</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

@@ -5,6 +5,7 @@
 #include "Display/Font/Font.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
+#include "Hardware/Timer.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "Menu/Menu.h"
@@ -13,6 +14,7 @@
 #include "Settings/SettingsDisplay.h"
 #include "Settings/SettingsSignals.h"
 #include "Settings/SettingsTypes.h"
+#include "Utils/StringUtils.h"
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
@@ -31,6 +33,11 @@ uint8       *Display::frontBuffer = (uint8 *)SDRAM_DEVICE_ADDR;
 uint8       *Display::backBuffer = (uint8 *)(SDRAM_DEVICE_ADDR + BUFFER_HEIGHT * BUFFER_WIDTH);
 #endif
 
+int Display::timeFrame = 0;
+int Display::timeAllFrames = 0;
+uint Display::timeStartFrames = 0;
+uint Display::timeAccumFrames = 0;
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Display::Init()
@@ -47,6 +54,8 @@ uint8 *Display::GetBuffer(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update(void)
 {
+    uint timeStart = TIME_MS;
+
     Painter::BeginScene(Color::BACK);
 
     Painter::SetColor(Color::FILL);
@@ -78,6 +87,17 @@ void Display::Update(void)
     CPU::Keyboard::Draw();
 
     Painter::EndScene();
+
+    timeFrame = (int)(TIME_MS - timeStart);
+
+    timeAccumFrames += timeFrame;
+
+    if(TIME_MS >= timeStartFrames + 1000)
+    {
+        timeAllFrames = (int)timeAccumFrames;
+        timeStartFrames = TIME_MS;
+        timeAccumFrames = 0;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,6 +303,13 @@ void Display::ShowStatistics()
 {
     if(SHOW_STATISTICS)
     {
-        //Painter::
+        Painter::DrawFilledRectangle(0, SCREEN_HEIGHT - 12, 100, 10, Color::BACK, Color::FILL);
+        char buffer[100] = {0};
+        strcpy(buffer, Int2String((int)(CPU::GetFPS() + 0.5f), false, 3));
+        strcat(buffer, "/");
+        strcat(buffer, Int2String(timeFrame, false, 3));
+        strcat(buffer, "/");
+        strcat(buffer, Int2String(timeAllFrames, false, 3));
+        Painter::DrawText(2, SCREEN_HEIGHT - 11, buffer, Color::FILL);
     }
 }

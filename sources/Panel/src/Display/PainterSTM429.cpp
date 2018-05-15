@@ -126,6 +126,13 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
+{
+    FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
+    DrawRectangle(x, y, width, height, colorRect);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawVLine(int x, int y0, int y1, Color col)
 {
     SetColor(col);

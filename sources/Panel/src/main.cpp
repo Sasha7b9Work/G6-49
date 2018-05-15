@@ -33,6 +33,7 @@ int main(void)
 
     while (1)
     {
+        CPU::Update();
         Menu::Update();
         Display::Update();
     }
