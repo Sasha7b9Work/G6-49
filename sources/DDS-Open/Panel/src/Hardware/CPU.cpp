@@ -1,12 +1,16 @@
 #include <stm32f7xx.h>
 #include "CPU.h"
 #include "LTDC.h"
+#include "Timer.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 SDRAM_HandleTypeDef CPU::SDRAM_::sdramHandle;
 
+uint  CPU::timeStartMeasFPS = 0;
+int   CPU::numFrames = 0;
+float CPU::fps = 0.0f;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::Init()
@@ -324,3 +328,20 @@ void CPU::SDRAM_::InitializationSequence(uint count)
     HAL_SDRAM_ProgramRefreshRate(&sdramHandle, count); 
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::Update()
+{
+    ++numFrames;
+    if (TIME_MS >= timeStartMeasFPS + 1000)
+    {
+        fps = (float)numFrames / (TIME_MS - timeStartMeasFPS) * 1e3f;
+        numFrames = 0;
+        timeStartMeasFPS = TIME_MS;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+float CPU::GetFPS()
+{
+    return fps;
+}

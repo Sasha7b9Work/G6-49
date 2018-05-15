@@ -259,10 +259,8 @@
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsAdd.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogicAdd.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp" />
@@ -420,7 +418,6 @@
     <ClInclude Include="..\..\Panel\src\Log.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />

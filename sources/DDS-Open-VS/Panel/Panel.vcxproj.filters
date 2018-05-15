@@ -162,16 +162,10 @@
     <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsAdd.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogicAdd.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Generator.cpp">
@@ -411,9 +405,6 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\MenuItemsAdd.h">
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h">

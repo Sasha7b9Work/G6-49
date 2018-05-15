@@ -334,7 +334,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--diag_suppress=161</MiscControls>
+              <MiscControls>--cpp --diag_suppress=1165</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F746xx</Define>
               <Undefine></Undefine>
               <IncludePath>.\src;.\src\libs;..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\Hardware;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Include;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\common\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Inc;..\..\common</IncludePath>
@@ -872,24 +872,9 @@
               <FilePath>..\..\Panel\src\Menu\MenuPagesNames.h</FilePath>
             </File>
             <File>
-              <FileName>MenuItemsAdd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Menu\MenuItemsAdd.h</FilePath>
-            </File>
-            <File>
               <FileName>MenuItemsGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\Panel\src\Menu\MenuItemsGraphics.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItemsAdd.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\MenuItemsAdd.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MenuItemsLogicAdd.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\MenuItemsLogicAdd.cpp</FilePath>
             </File>
             <File>
               <FileName>MenuItems.cpp</FileName>
@@ -970,6 +955,16 @@
               <FileName>PageFrequencyCounter.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageUSB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageUSB.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageUSB.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageUSB.h</FilePath>
             </File>
           </Files>
         </Group>
