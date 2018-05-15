@@ -71,6 +71,8 @@ void Display::Update(void)
 
     DrawFrequencyCounter();
 
+    ShowStatistics();
+
     DrawConsole();
 
     CPU::Keyboard::Draw();
@@ -274,4 +276,13 @@ void Display::DrawFrequencyCounter()
     }
 
     Painter::DrawText(8, SCREEN_HEIGHT - 16, "F", Color::FILL);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::ShowStatistics()
+{
+    if(SHOW_STATISTICS)
+    {
+        //Painter::
+    }
 }

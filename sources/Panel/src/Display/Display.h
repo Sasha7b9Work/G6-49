@@ -38,6 +38,8 @@ private:
 
     static void DrawFrequencyCounter();
 
+    static void ShowStatistics();
+
     static const char *text;
 
     static const int STRING_IN_CONSOLE = 29;

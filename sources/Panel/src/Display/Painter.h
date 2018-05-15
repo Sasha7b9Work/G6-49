@@ -24,8 +24,6 @@ public:
     static void RunDisplay();
     /// Вызывается в конце отрисовки каждого кадра. Переносит содержимое буфера на экран
     static void EndScene();
-    /// Послать изображение во внешнее устройство через USB или LAN. Если first == true, то посылается шрифт
-    static void SendFrame(bool first);
     /// Сброс таймера мигания. Нужно для того, чтобы мигающие значки при перемещении не исчезали с экрана
     static void ResetFlash();
     /// Установить цвет рисования
@@ -44,12 +42,6 @@ public:
     static void DrawHPointLine(int y, int x0, int x1, float delta);
     /// Нарисовать вертикальную линию от y0 до y1 точками через каждые delta пикселей
     static void DrawVPointLine(int x, int y0, int y1, float delta);
-    /// \brief Нарисовать numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
-    /// первой точки каждой линии соответствует очередному элементу массива x[]
-    static void DrawMultiVPointLine(int numLines, int y, uint16 x[], int delta, int count, Color color = Color::NUMBER);
-    /// \brief Нарисовать numLines горизонтальных линий, состоящих из count точек каждая с расстоянием между точками delta. Вертикальная координата
-    /// первой точки каждой линии соответствует очередному элементу массива y[]
-    static void DrawMultiHPointLine(int numLines, int x, uint8 y[], int delta, int count, Color color = Color::NUMBER);
     /// Нарисовать горизонтальную линию
     static void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
     /// Нарисовать вертикальную линию
@@ -67,26 +59,12 @@ public:
     static void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
 
     static void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade);
-    /// Установить яркость дисплея.
-    static void SetBrightnessDisplay(int16 brightness);
 
     static col_val ReduceBrightness(col_val colorValue, float newBrightness);
-    /// Нарисовать массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
-    static void DrawVLineArray(int x, int numLines, uint8 *y0y1, Color color);
-    /// modeLines - true - точками, false - точками.
-    static void DrawSignal(int x, uint8 data[281], bool modeLines);
-
-    static void DrawPicture(int x, int y, int width, int height, uint8 *address);
 
     static bool SaveScreenToFlashDrive();
 
-    static void SendToDisplay(uint8 *bytes, int numBytes);
-
-    static void SendToInterfaces(uint8 *pointer, int size);
-
     static void SetFont(TypeFont typeFont);
-    ///  Загрузить шрифта в дисплей
-    static void LoadFont(TypeFont typeFont);
 
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
@@ -137,15 +115,9 @@ private:
 
     static int DrawSpaces(int x, int y, const char *text, int *numSymbols);
 
-    static void CalculateColor(uint8 *color);
-
-    static void OnTimerFlashDisplay();
-
     static Color currentColor;
 
     static TypeFont currentTypeFont;
-
-    static void DrawCharHardCol(int x, int y, char symbol);
 
     static bool ByteFontNotEmpty(int eChar, int byte);
 
