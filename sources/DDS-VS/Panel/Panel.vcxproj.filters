@@ -38,10 +38,7 @@
       <UniqueIdentifier>{255c5d44-7148-42c2-bd4d-c6717ab7f6f2}</UniqueIdentifier>
     </Filter>
     <Filter Include="common\_VS">
-      <UniqueIdentifier>{d596f1ab-baa2-433f-aa52-34464044555f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_VS">
-      <UniqueIdentifier>{7a08a320-836d-4395-abb2-3e727ac86055}</UniqueIdentifier>
+      <UniqueIdentifier>{522de39f-b113-4f43-b498-9a04285ec5fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -323,69 +320,6 @@
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cm4.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cmFunc.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cmInstr.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cmSimd.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\ctype.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\integer.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\inttypes.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\math.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdarg.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdint.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdio.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdlib.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\string.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\tchar.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\windows.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\cstdlib">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\cstring">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\limits">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\limits.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
       <Filter>Hardware</Filter>
     </ClInclude>
@@ -470,62 +404,65 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\core_cm4.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\core_cmFunc.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\core_cmInstr.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\core_cmSimd.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\ctype.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\integer.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\inttypes.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\limits.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\math.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\stdarg.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\stdint.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\stdio.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\stdlib.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\string.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\tchar.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\_VS\windows.h">
-      <Filter>_VS</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageUSB.h">
       <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cm4.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cm7.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmFunc.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmInstr.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmSimd.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\ctype.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\integer.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\inttypes.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\limits.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\math.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdarg.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdint.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdio.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdlib.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\string.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\tchar.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\windows.h">
+      <Filter>common\_VS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -544,20 +481,17 @@
     <None Include="..\..\Panel\src\libs\CMSIS\startup_stm32f429xx.s">
       <Filter>libs\CMSIS</Filter>
     </None>
-    <None Include="..\..\libs\common\_VS\algorithm">
+    <None Include="..\..\common\_VS\algorithm">
       <Filter>common\_VS</Filter>
     </None>
-    <None Include="..\..\common\_VS\algorithm">
-      <Filter>_VS</Filter>
-    </None>
     <None Include="..\..\common\_VS\cstdlib">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
     <None Include="..\..\common\_VS\cstring">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
     <None Include="..\..\common\_VS\limits">
-      <Filter>_VS</Filter>
+      <Filter>common\_VS</Filter>
     </None>
   </ItemGroup>
 </Project>

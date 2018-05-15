@@ -51,7 +51,7 @@ void Menu::DrawPagesUGO()
 
         char buffer[20];
 
-        Painter::DrawText(6 + CURRENT_PAGE * delta, 5, Int2String(CURRENT_PAGE + 1, false, 2, buffer), Color::BLUE);
+        Painter::DrawText(6 + CURRENT_PAGE * delta, 5, Int2String(CURRENT_PAGE + 1, false, 2, buffer), Color::BACK);
     }
 }
 
