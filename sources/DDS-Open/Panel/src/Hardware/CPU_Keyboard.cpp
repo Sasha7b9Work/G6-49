@@ -157,7 +157,7 @@ void CPU::Keyboard::DrawButton(int x, int y, const char *title)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Update()
 {
-    if (TIME_MS - timeLastPress < 50)
+    if (TIME_MS - timeLastPress < 20)
     {
         return;
     }

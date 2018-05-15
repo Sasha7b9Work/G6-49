@@ -6,30 +6,32 @@
 #include "Settings/Settings.h"
 #include "Display/Display.h"
 #include <math.h>
+#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Painter::BeginScene(Color col)
 {   
-
     if(col != Color::NUMBER)
     {
         SetColor(col);
     }
 
-    for (int x = 0; x < BUFFER_WIDTH; ++x)
+    uint *address = (uint *)Display::GetBuffer();
+
+    uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
+
+    uint value = (uint)col.value + (uint)(col.value << 8) + (uint)(col.value << 16) + (uint)(col.value << 24);
+
+    while (address != end)
     {
-        for (int y = 0; y < BUFFER_HEIGHT; ++y)
-        {
-            SetPoint(x, y);
-        }
+        *address++ = value;
     }
 
-    /*
-    col = Color::BLUE;
-    SetColor(col);
-    LTDC_::FillRegion(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT, col);
-    */
+    //memset(address, BUFFER_WIDTH * BUFFER_HEIGHT, col.value);
+
+    //SetColor(col);
+    //LTDC_::FillBackBuffer(col);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,9 +64,29 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
         SetColor(col);
     }
 
+    uint8 *address = Display::GetBuffer() + x0 + y * BUFFER_WIDTH;
+
+    uint8 value = currentColor.value;
+
     for (int x = x0; x <= x1; ++x)
     {
-        SetPoint(x, y);
+        *address++ = value;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Painter::DrawVLine(int x, int y0, int y1, Color col)
+{
+    SetColor(col);
+
+    uint8 *address = Display::GetBuffer() + x + y0 * BUFFER_WIDTH;
+
+    uint8 value = currentColor.value;
+
+    for (int y = y0; y < y1; ++y)
+    {
+        *address = value;
+        address += BUFFER_WIDTH;
     }
 }
 
@@ -137,17 +159,6 @@ void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color col
 {
     FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
     DrawRectangle(x, y, width, height, colorRect);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVLine(int x, int y0, int y1, Color col)
-{
-    SetColor(col);
-
-    for (int y = y0; y <= y1; ++y)
-    {
-        SetPoint(x, y);
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
