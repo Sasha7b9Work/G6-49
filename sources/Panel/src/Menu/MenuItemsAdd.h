@@ -40,5 +40,3 @@ bool ItemIsChoiceParameter(void *item);
 void ChoiceWaveParameter_Press(ChoiceParameter *choice, TypePress press);
 
 void Item_Rotate(Control *item, PanelControl control);
-/// Возвращает функциональную клавишу, назначенную пункту меню
-PanelControl ButtonForItem(Control *item);

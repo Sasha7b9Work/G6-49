@@ -507,3 +507,16 @@ int Control::PositionOnPage()
     }
     return -1;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+PanelControl Control::ButtonForItem()
+{
+    int pos = PositionOnPage();
+
+    if (pos >= 0)
+    {
+        return (PanelControl)((int)B_F1 + pos);
+    }
+
+    return B_None;
+}

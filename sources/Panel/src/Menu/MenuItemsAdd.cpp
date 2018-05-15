@@ -22,16 +22,3 @@ bool ItemIsChoiceParameter(void *item)
 {
     return item && (((Control *)item)->Type() == Item_ChoiceParameter);
 }
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-PanelControl ButtonForItem(Control *item)
-{
-    int pos = item->PositionOnPage();
-
-    if (pos >= 0)
-    {
-        return (PanelControl)((int)B_F1 + pos);
-    }
-
-    return B_None;
-}

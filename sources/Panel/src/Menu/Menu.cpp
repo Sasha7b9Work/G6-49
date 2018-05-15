@@ -93,7 +93,7 @@ void Menu::ProcessControl(StructControl strContr)
     {
         if (OPENED_ITEM && pressed == TypePress_LongPress)
         {
-            if (key == ButtonForItem(OPENED_ITEM))
+            if ((OPENED_ITEM)->ButtonForItem())
             {
                 OPENED_ITEM = 0;
             }

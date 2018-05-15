@@ -102,6 +102,8 @@ public:
     bool IsChoice();
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage();
+    /// Возвращает функциональную клавишу, назначенную пункту меню
+    PanelControl ButtonForItem();
 };
 
 
