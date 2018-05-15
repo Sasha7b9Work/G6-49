@@ -2,6 +2,7 @@
 #include "InputWindowStruct.h"
 #include "DisplayTypes.h"
 #include "Display/Painter.h"
+#include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include <stdio.h>
 
@@ -226,7 +227,7 @@ void InputWindow::ProcessContorl(StructControl strContr)
     }
     else if ((key >= B_F1 && key <= B_F4) && pressed == TypePress_Release)
     {
-        Control *control = CurrentPage()->Item(key - B_F1);
+        Control *control = Menu::CurrentPage()->Item(key - B_F1);
         
         if (control->IsChoice())
         {

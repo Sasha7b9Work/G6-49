@@ -8,7 +8,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Menu::Draw(void)
+void Menu::Draw()
 {
     DrawTitle();
 
@@ -21,7 +21,8 @@ void Menu::Draw(void)
         {
             Painter::DrawRectangle(x, y, ITEM_WIDTH, MI_HEIGHT);
         }
-        Item_Draw(x, y, CurrentPage()->Item(i));
+        //Item_Draw(x, y, CurrentPage()->Item(i));
+        CurrentPage()->Item(i)->Draw(x, y, false);
     }
 
     DrawPagesUGO(); 
@@ -33,14 +34,14 @@ void Menu::Draw(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::DrawTitle(void)
+void Menu::DrawTitle()
 {
     Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, MP_TITLE_HEIGHT, Color::FILL);
     Painter::DrawTextRelativelyRight(315, 5, CurrentPage()->Title());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::DrawPagesUGO(void)
+void Menu::DrawPagesUGO()
 {
     static const int delta = 10;
 

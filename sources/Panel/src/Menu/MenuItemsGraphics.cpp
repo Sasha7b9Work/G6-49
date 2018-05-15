@@ -8,23 +8,21 @@
 static void DrawOpenedChoice(Choice *choice);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Item_Draw(int x, int y, void *item)
+void Control::Draw(int x, int y, bool opened)
 {
-    TypeItem type = ((Control *)item)->Type();
-
     if (type == Item_Choice)
     {
-        Painter::DrawText(x + 5, y + 5, ItemTitle(item));
-        Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)item)->NameCurrentSubItem());
+        Painter::DrawText(x + 5, y + 5, ItemTitle(this));
+        Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)this)->NameCurrentSubItem());
     }
     else if (type == Item_Button)
     {
-        Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, ItemTitle(item));
+        Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, ItemTitle(this));
     }
     else if (type == Item_ChoiceParameter)
     {
-        Painter::DrawText(x + 5, y + 5, ItemTitle(item));
-        Painter::DrawTextRelativelyRight(315, y + 30, ChoiceWaveParameter_CurrentName((ChoiceParameter *)item));
+        Painter::DrawText(x + 5, y + 5, ItemTitle(this));
+        Painter::DrawTextRelativelyRight(315, y + 30, ChoiceWaveParameter_CurrentName((ChoiceParameter *)this));
     }
     else if (type == Item_SmallButton)
     {
@@ -32,7 +30,7 @@ void Item_Draw(int x, int y, void *item)
         x += 20;
         y += 17;
         Painter::DrawRectangle(x, y, size, size);
-        SButton *button = (SButton*)item;
+        SButton *button = (SButton*)this;
         if (button->funcForDraw)
         {
             button->funcForDraw(x, y);

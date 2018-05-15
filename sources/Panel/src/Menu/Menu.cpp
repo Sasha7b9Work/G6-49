@@ -155,3 +155,18 @@ Control *Menu::CurrentItem()
 {
     return 0;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Page *Menu::CurrentPage(void)
+{
+    volatile int8 num = CURRENT_PAGE;
+
+    if (num == 1)
+    {
+        num = num;
+    }
+
+    Page *page = (Page *)menu[num];
+
+    return (ADDITION_PAGE_IS_NONE ? page : ADDITION_PAGE);
+}

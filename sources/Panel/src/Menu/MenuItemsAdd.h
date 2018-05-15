@@ -43,9 +43,6 @@ void Item_Rotate(Control *item, PanelControl control);
 /// Возвращает функциональную клавишу, назначенную пункту меню
 PanelControl ButtonForItem(void *item);
 
-/// Возвращает адрес текущую страницу
-Page* CurrentPage();
-
 void Item_Draw(int x, int y, void *item);
 
 void DrawOpenedItem();

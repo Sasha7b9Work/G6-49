@@ -93,7 +93,7 @@ public:
     /// Вызывается при "длинном" нажатии
     void LongPress();
 
-    //void Draw(int x, int y, bool opened);
+    void Draw(int x, int y, bool opened);
 
     void Press(TypePress press);
 

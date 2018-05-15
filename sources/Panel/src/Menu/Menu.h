@@ -31,7 +31,8 @@ public:
     static Control *itemUnderKey;
 
     static void SetItemForHint(void *item);
-
+    /// Возвращает адрес текущую страницу
+    static Page* CurrentPage();
 private:
 
     static void DrawTitle();
