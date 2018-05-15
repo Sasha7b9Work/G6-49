@@ -12,7 +12,7 @@ public:
     static Color GRAY_25;           // Серый 25%
     static Color GRAY_50;           // Серый 50%
     static Color GRAY_75;           // Серый 75%
-    static Color MENU_FIELD;
+    static Color BLUE;
     static Color MENU_TITLE_DARK;
     static Color MENU_TITLE_BRIGHT;
     static Color MENU_ITEM_DARK;
@@ -47,7 +47,7 @@ private:
     static const uint8 COLOR_GRAY_25;
     static const uint8 COLOR_GRAY_50;
     static const uint8 COLOR_GRAY_75;
-    static const uint8 COLOR_MENU_FIELD;
+    static const uint8 COLOR_BLUE;
     static const uint8 COLOR_MENU_TITLE;
     static const uint8 COLOR_MENU_TITLE_DARK;
     static const uint8 COLOR_MENU_TITLE_BRIGHT;

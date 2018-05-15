@@ -93,7 +93,7 @@ static void DrawDigits(int x, int y)
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        Painter::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, Color::MENU_FIELD);
+        Painter::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, Color::BACK);
 
         Painter::SetColor(Color::FILL);
 
