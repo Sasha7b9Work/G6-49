@@ -1,9 +1,9 @@
 #pragma once
 
-#define ERROR_HANDLER() STM32::ErrorHandler()
+#define ERROR_HANDLER() STM429::ErrorHandler()
 
 
-class STM32
+class STM429
 {
 public:
     static void ErrorHandler();

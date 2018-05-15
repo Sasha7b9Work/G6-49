@@ -171,9 +171,6 @@
     <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\stm32.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -218,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageUSB.cpp">
       <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,9 +353,6 @@
     <ClInclude Include="..\..\Panel\src\Display\Colors.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Hardware\stm32.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
@@ -457,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="..\..\common\_VS\windows.h">
       <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\stm429.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1280,8 +1280,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\stm32.cpp</PathWithFileName>
-      <FilenameWithoutPath>stm32.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Timer4XX.cpp</PathWithFileName>
+      <FilenameWithoutPath>Timer4XX.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1292,8 +1292,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\stm32.h</PathWithFileName>
-      <FilenameWithoutPath>stm32.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Timer4XX.h</PathWithFileName>
+      <FilenameWithoutPath>Timer4XX.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1304,8 +1304,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Timer4XX.cpp</PathWithFileName>
-      <FilenameWithoutPath>Timer4XX.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\stm429.cpp</PathWithFileName>
+      <FilenameWithoutPath>stm429.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1316,8 +1316,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Timer4XX.h</PathWithFileName>
-      <FilenameWithoutPath>Timer4XX.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\stm429.h</PathWithFileName>
+      <FilenameWithoutPath>stm429.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
