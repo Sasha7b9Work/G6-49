@@ -104,6 +104,8 @@ public:
     int PositionOnPage();
     /// Возвращает функциональную клавишу, назначенную пункту меню
     PanelControl ButtonForItem();
+
+    void Rotate(PanelControl control);
 };
 
 
@@ -295,6 +297,32 @@ public:
     void Press(TypePress press);
 
     int CurrentChoice();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct AllowableParameters
+{
+    bool allow[NumParameters];
+};
+
+///
+class ChoiceParameterBase
+{
+public:
+    COMMON_PART_MENU_ITEM;
+    pFuncVV              funcOnPress;
+    AllowableParameters  allowParameters;
+    uint8               *numParameter;
+};
+
+
+class ChoiceParameter : public Control
+{
+public:
+    pFuncVV              funcOnPress;
+    AllowableParameters  allowParameters;
+    uint8               *numParameter;
+    void Press(TypePress press);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// IPaddress ///

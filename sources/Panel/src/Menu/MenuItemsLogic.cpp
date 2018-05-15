@@ -452,7 +452,11 @@ void Control::Press(TypePress press)
 {
     if(type == Item_Choice)
     {
-        ((Choice*)this)->Press(press);
+        ((Choice *)this)->Press(press);
+    }
+    else if(type == Item_ChoiceParameter)
+    {
+        ((ChoiceParameter *)this)->Press(press);
     }
 }
 
@@ -519,4 +523,51 @@ PanelControl Control::ButtonForItem()
     }
 
     return B_None;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Control::Rotate(PanelControl control)
+{
+    if (IsChoice())
+    {
+        Choice *choice = (Choice *)this;
+
+        if (control == REG_LEFT)
+        {
+            CircleIncrease<int8>(choice->cell, 0, (int8)(choice->NumSubItems() - 1));
+        }
+        else if (control == REG_RIGHT)
+        {
+            if (*(choice->cell) == 0)
+            {
+                *(choice->cell) = (int8)(choice->NumSubItems() - 1);
+            }
+            else
+            {
+                --(*(choice->cell));
+            }
+        }
+        if (choice->funcOnChanged)
+        {
+            choice->funcOnChanged(true);
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void ChoiceParameter::Press(TypePress press)
+{
+    if (press == TypePress_Release)
+    {
+        volatile bool allow = false;
+        do
+        {
+            CircleIncrease<uint8>(numParameter, 0, (uint8)(NumParameters - 1));
+            allow = (allowParameters).allow[*numParameter];
+        } while (!allow);
+    }
+    else if (press == TypePress_LongPress)
+    {
+        OPENED_ITEM = this;
+    }
 }

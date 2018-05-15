@@ -71,7 +71,7 @@ void Menu::ProcessControl(StructControl strContr)
         }
         else
         {
-            Item_Rotate(OPENED_ITEM, REG_LEFT);
+            OPENED_ITEM->Rotate(REG_LEFT);
         }
     }
     else if (key == REG_RIGHT)
@@ -85,7 +85,7 @@ void Menu::ProcessControl(StructControl strContr)
         }
         else
         {
-            Item_Rotate(OPENED_ITEM, REG_RIGHT);
+            OPENED_ITEM->Rotate(REG_RIGHT);
         }
     }
 
@@ -116,7 +116,7 @@ void Menu::ProcessControl(StructControl strContr)
             }
             else if (ItemIsChoiceParameter(control))
             {
-                ChoiceWaveParameter_Press((ChoiceParameter *)control, pressed);
+                ((ChoiceParameter *)control)->Press(pressed);
             }
         }
         else if(key == B_ON1)

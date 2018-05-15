@@ -243,7 +243,7 @@ void InputWindow::ProcessContorl(StructControl strContr)
         }
         else if (ItemIsChoiceParameter(control))
         {
-            ChoiceWaveParameter_Press((ChoiceParameter *)control, pressed);
+            ((ChoiceParameter *)control)->Press(pressed);
         }
     }
 }
