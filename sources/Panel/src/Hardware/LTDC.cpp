@@ -152,32 +152,32 @@ void LTDC_::ToggleBuffers()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void LTDC_::FillRegion(int, int, int width, int height, Color color)
+void LTDC_::FillRegion(int, int, int, int, Color color)
 {
     /// \todo Не работает функция
 
-    DMA2D_HandleTypeDef hDMA2D;
+    DMA2D_HandleTypeDef handle;
 
-    hDMA2D.Init.Mode = DMA2D_R2M;
-    hDMA2D.Init.ColorMode = DMA2D_INPUT_L8;
-    hDMA2D.Init.OutputOffset = 0;
+    handle.Init.Mode = DMA2D_R2M;
+    handle.Init.ColorMode = DMA2D_INPUT_L8;
+    handle.Init.OutputOffset = 0;
 
-    hDMA2D.XferCpltCallback = NULL;
+    handle.XferCpltCallback = NULL;
 
-    hDMA2D.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-    hDMA2D.LayerCfg[1].InputAlpha = 0xff;
-    hDMA2D.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
-    hDMA2D.LayerCfg[1].InputOffset = 0;
+    handle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+    handle.LayerCfg[1].InputAlpha = 0xff;
+    handle.LayerCfg[1].InputColorMode = DMA2D_INPUT_L8;
+    handle.LayerCfg[1].InputOffset = 0;
 
-    hDMA2D.Instance = DMA2D;
+    handle.Instance = DMA2D;
 
-    if (HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
+    if (HAL_DMA2D_Init(&handle) == HAL_OK)
     {
-        if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
+        if (HAL_DMA2D_ConfigLayer(&handle, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&hDMA2D, color.value, backBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
+            if (HAL_DMA2D_Start(&handle, color.value, backBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
             {
-                HAL_DMA2D_PollForTransfer(&hDMA2D, 200);
+                HAL_DMA2D_PollForTransfer(&handle, 200);
             }
         }
     }

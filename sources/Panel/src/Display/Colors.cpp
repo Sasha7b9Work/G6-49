@@ -8,38 +8,13 @@
 #include "Utils/Math.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const uint8 Color::COLOR_BLACK              = 0;
-const uint8 Color::COLOR_WHITE              = 1;
-const uint8 Color::COLOR_GRAY_25            = 2;
-const uint8 Color::COLOR_GRAY_50            = 3;
-const uint8 Color::COLOR_GRAY_75            = 4;
-const uint8 Color::COLOR_BLUE               = 5;
-const uint8 Color::COLOR_MENU_TITLE         = 6;
-const uint8 Color::COLOR_MENU_TITLE_DARK    = 7;
-const uint8 Color::COLOR_MENU_TITLE_BRIGHT  = 8;
-const uint8 Color::COLOR_MENU_ITEM          = 9;
-const uint8 Color::COLOR_MENU_ITEM_DARK     = 10;
-const uint8 Color::COLOR_MENU_ITEM_BRIGHT   = 11;
-const uint8 Color::COLOR_GRID_WHITE         = 14;
-const uint8 Color::COLOR_EMPTY              = 15;
-const uint8 Color::COLOR_NUMBER             = 16;
-const uint8 Color::COLOR_FLASH_10           = 17;
-const uint8 Color::COLOR_FLASH_01           = 18;
-const uint8 Color::COLOR_INVERSE            = 19;
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Color Color::BLACK(COLOR_BLACK);
 Color Color::WHITE(COLOR_WHITE);
 Color Color::GRAY_25(COLOR_GRAY_25);
 Color Color::GRAY_50(COLOR_GRAY_50);
 Color Color::GRAY_75(COLOR_GRAY_75);
 Color Color::BLUE(COLOR_BLUE);
-Color Color::MENU_TITLE_DARK(COLOR_MENU_TITLE_DARK);
-Color Color::MENU_TITLE_BRIGHT(COLOR_MENU_ITEM_BRIGHT);
-Color Color::MENU_ITEM_DARK(COLOR_MENU_ITEM_DARK);
-Color Color::MENU_ITEM_BRIGHT(COLOR_MENU_ITEM_BRIGHT);
-Color Color::NUMBER(COLOR_NUMBER);
+const Color Color::NUMBER(COLOR_NUMBER);
 Color Color::FLASH_10(COLOR_FLASH_10);
 Color Color::FLASH_01(COLOR_FLASH_01);
 

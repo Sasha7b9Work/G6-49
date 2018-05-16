@@ -114,7 +114,7 @@ static const Settings defSet =
     Parity_Off,      // usb_parity
     Interval_1,      // freq_interval
     BillingTime_1ms, // freq_billingTime
-    true            // dbg_statistics
+    true             // dbg_statistics
 };
 
 Settings set = defSet;

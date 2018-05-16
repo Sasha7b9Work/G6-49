@@ -3,6 +3,7 @@
 #include "SettingsTypes.h"
 #include "Display/InputWindowStruct.h"
 #include "Menu/MenuItems.h"
+#include "Display/Colors.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +72,7 @@ public:
         {
         }cal;
     };
-    col_val             disp_Colors[16];                ///< Цвета
+    col_val             disp_Colors[32];                ///< Цвета
     Channel             sig_channel;                    ///< Текущий выбранный канал
     WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
     WaveParameter       sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала

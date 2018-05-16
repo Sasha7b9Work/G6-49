@@ -13,11 +13,7 @@ public:
     static Color GRAY_50;           // Серый 50%
     static Color GRAY_75;           // Серый 75%
     static Color BLUE;
-    static Color MENU_TITLE_DARK;
-    static Color MENU_TITLE_BRIGHT;
-    static Color MENU_ITEM_DARK;
-    static Color MENU_ITEM_BRIGHT;
-    static Color NUMBER;
+    static const Color NUMBER;
     static Color FLASH_10;
     static Color FLASH_01;
 
@@ -42,27 +38,34 @@ public:
     Color& operator=(const Color &color);
 
 private:
-    static const uint8 COLOR_BLACK;
-    static const uint8 COLOR_WHITE;
-    static const uint8 COLOR_GRAY_25;
-    static const uint8 COLOR_GRAY_50;
-    static const uint8 COLOR_GRAY_75;
-    static const uint8 COLOR_BLUE;
-    static const uint8 COLOR_BLUE_25;
-    static const uint8 COLOR_BLUE_50;
-    static const uint8 COLOR_BLUE_75;
-    static const uint8 COLOR_MENU_TITLE;
-    static const uint8 COLOR_MENU_TITLE_DARK;
-    static const uint8 COLOR_MENU_TITLE_BRIGHT;
-    static const uint8 COLOR_MENU_ITEM;
-    static const uint8 COLOR_MENU_ITEM_DARK;
-    static const uint8 COLOR_MENU_ITEM_BRIGHT;
-    static const uint8 COLOR_GRID_WHITE;
-    static const uint8 COLOR_EMPTY;
-    static const uint8 COLOR_NUMBER;
-    static const uint8 COLOR_FLASH_10;
-    static const uint8 COLOR_FLASH_01;
-    static const uint8 COLOR_INVERSE;
+
+    enum
+    {
+        COLOR_BLACK,
+        COLOR_WHITE,
+        COLOR_GRAY_25,
+        COLOR_GRAY_50,
+        COLOR_GRAY_75,
+        COLOR_BLUE,
+        COLOR_BLUE_25,
+        COLOR_BLUE_50,
+        COLOR_BLUE_75,
+        COLOR_GREEN,
+        COLOR_GREEN_25,
+        COLOR_GREEN_50,
+        COLOR_GREEN_75,
+        COLOR_RED,
+        COLOR_RED_25,
+        COLOR_RED_50,
+        COLOR_RED_75,
+        COLOR_MENU_ITEM,
+        COLOR_MENU_TITLE,
+        COLOR_MENU_ITEM_DARK,
+        COLOR_NUMBER,
+        COLOR_FLASH_10,
+        COLOR_FLASH_01,
+        COLOR_INVERSE
+    };
 };
 
 bool operator!=(const Color &left, const Color &right);
