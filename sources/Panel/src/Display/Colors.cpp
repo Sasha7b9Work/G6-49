@@ -14,9 +14,26 @@ Color Color::GRAY_25(COLOR_GRAY_25);
 Color Color::GRAY_50(COLOR_GRAY_50);
 Color Color::GRAY_75(COLOR_GRAY_75);
 Color Color::BLUE(COLOR_BLUE);
-const Color Color::NUMBER(COLOR_NUMBER);
+Color Color::BLUE_25(COLOR_BLUE_25);
+Color Color::BLUE_50(COLOR_BLUE_50);
+Color Color::BLUE_75(COLOR_BLUE_75);
+Color Color::GREEN(COLOR_GREEN);
+Color Color::GREEN_25(COLOR_GREEN_25);
+Color Color::GREEN_50(COLOR_GREEN_50);
+Color Color::GREEN_75(COLOR_GREEN_75);
+Color Color::RED(COLOR_RED);
+Color Color::RED_25(COLOR_RED_25);
+Color Color::RED_50(COLOR_RED_50);
+Color Color::RED_75(COLOR_RED_75);
+
+Color Color::NUMBER(COLOR_NUMBER);
+
 Color Color::FLASH_10(COLOR_FLASH_10);
 Color Color::FLASH_01(COLOR_FLASH_01);
+
+Color Color::MENU_ITEM(COLOR_GRAY_50);
+Color Color::MENU_TITLE(COLOR_GRAY_25);
+Color Color::MENU_ITEM_DARK(COLOR_GRAY_75);
 
 Color Color::FILL(COLOR_WHITE);
 Color Color::BACK(COLOR_BLACK);

@@ -13,9 +13,27 @@ public:
     static Color GRAY_50;           // Серый 50%
     static Color GRAY_75;           // Серый 75%
     static Color BLUE;
-    static const Color NUMBER;
+    static Color BLUE_25;
+    static Color BLUE_50;
+    static Color BLUE_75;
+    static Color GREEN;
+    static Color GREEN_25;
+    static Color GREEN_50;
+    static Color GREEN_75;
+    static Color RED;
+    static Color RED_25;
+    static Color RED_50;
+    static Color RED_75;
+    
+    static Color NUMBER;
+
     static Color FLASH_10;
     static Color FLASH_01;
+
+    static Color MENU_ITEM;
+    static Color MENU_TITLE;
+    static Color MENU_ITEM_DARK;
+
 
     static Color FILL;
     static Color BACK;
@@ -58,12 +76,14 @@ private:
         COLOR_RED_25,
         COLOR_RED_50,
         COLOR_RED_75,
+
+        COLOR_NUMBER,
+
+        COLOR_FLASH_10,
+        COLOR_FLASH_01,
         COLOR_MENU_ITEM,
         COLOR_MENU_TITLE,
         COLOR_MENU_ITEM_DARK,
-        COLOR_NUMBER,
-        COLOR_FLASH_10,
-        COLOR_FLASH_01,
         COLOR_INVERSE
     };
 };
