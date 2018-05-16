@@ -48,6 +48,9 @@ private:
     static const uint8 COLOR_GRAY_50;
     static const uint8 COLOR_GRAY_75;
     static const uint8 COLOR_BLUE;
+    static const uint8 COLOR_BLUE_25;
+    static const uint8 COLOR_BLUE_50;
+    static const uint8 COLOR_BLUE_75;
     static const uint8 COLOR_MENU_TITLE;
     static const uint8 COLOR_MENU_TITLE_DARK;
     static const uint8 COLOR_MENU_TITLE_BRIGHT;

@@ -157,7 +157,7 @@
           <Type>0</Type>
           <LineNumber>1052</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134228034</Address>
+          <Address>134227848</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -173,7 +173,7 @@
           <Type>0</Type>
           <LineNumber>1030</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227964</Address>
+          <Address>134227778</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -183,54 +183,6 @@
           <Filename>&lt;2&gt;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma2d.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelDDS\../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c\1030</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>190</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134243688</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\LTDC.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Hardware/LTDC.cpp\190</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>188</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134243670</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\LTDC.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Hardware/LTDC.cpp\188</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>164</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\LTDC.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -301,7 +253,7 @@
 
   <Group>
     <GroupName>libs/CMSIS</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1201,7 +1153,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1389,7 +1341,7 @@
 
   <Group>
     <GroupName>Menu</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1737,7 +1689,7 @@
 
   <Group>
     <GroupName>Utils</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
