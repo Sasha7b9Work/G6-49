@@ -19,8 +19,6 @@ public:
 
     static uint8 *GetBuffer();
 
-    static void SetButton(PanelControl control);
-
     static void AddStringToConsole(char *string);
 
     static void AddStringToIndicating(pString string);
@@ -39,8 +37,6 @@ private:
     static void DrawFrequencyCounter();
 
     static void ShowStatistics();
-
-    static const char *text;
 
     static const int STRING_IN_CONSOLE = 29;
 

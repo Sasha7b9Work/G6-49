@@ -21,7 +21,6 @@
 #include <stdlib.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *Display::text = 0;
 char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
 #ifdef STM32F429xx
 uint8       *Display::frontBuffer = (uint8 *)malloc(BUFFER_WIDTH * BUFFER_HEIGHT);
@@ -73,11 +72,6 @@ void Display::Update()
 
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
 
-    if (text)
-    {
-        Painter::DrawText(75, 4, text);
-    }
-
     DrawFrequencyCounter();
 
     ShowStatistics();
@@ -98,12 +92,6 @@ void Display::Update()
         timeStartFrames = TIME_MS;
         timeAccumFrames = 0;
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::SetButton(PanelControl)
-{
-    //text = PanelControlName(control);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

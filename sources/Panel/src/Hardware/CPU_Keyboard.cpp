@@ -179,7 +179,6 @@ static void FillCommand(PanelControl control, TypePress typePress)
 {
     commands[pointer].control = control;
     commands[pointer++].typePress = typePress;
-    Display::SetButton(typePress == TypePress_Press ? control : B_None);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
