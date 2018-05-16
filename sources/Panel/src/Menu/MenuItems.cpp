@@ -157,7 +157,7 @@ bool Control::IsOpened() const
     {
         return keeper->CurrentItemIsOpened();
     }
-    return (MENU_POS_ACT_ITEM(keeper->name) & 0x80) != 0;
+    return OPENED_ITEM == this;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

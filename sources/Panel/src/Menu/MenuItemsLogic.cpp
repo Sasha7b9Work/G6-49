@@ -462,23 +462,30 @@ void IPaddress::GetNumPosIPvalue(int *numIP, int *selPos)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::Press(TypePress press)
 {
-    Menu::itemUnderKey = press == TypePress_Press ? this : 0;
+    Menu::itemUnderKey = press == TypePress_Press && !IsOpened() ? this : 0;
 
-    if(type == Item_Choice)
+    if(press == TypePress_LongPress && IsOpened())
     {
-        ((Choice *)this)->Press(press);
+        OPENED_ITEM = 0;
     }
-    else if(type == Item_Button)
+    else
     {
-        ((Button *)this)->Press(press);
-    }
-    else if(type == Item_ChoiceParameter)
-    {
-        ((ChoiceParameter *)this)->Press(press);
-    }
-    else if(type == Item_SmallButton)
-    {
-        ((SButton *)this)->Press();
+        if (type == Item_Choice)
+        {
+            ((Choice *)this)->Press(press);
+        }
+        else if (type == Item_Button)
+        {
+            ((Button *)this)->Press(press);
+        }
+        else if (type == Item_ChoiceParameter)
+        {
+            ((ChoiceParameter *)this)->Press(press);
+        }
+        else if (type == Item_SmallButton)
+        {
+            ((SButton *)this)->Press(press);
+        }
     }
 }
 
@@ -595,18 +602,21 @@ void ChoiceParameter::Press(TypePress press)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SButton::Press()
+void SButton::Press(TypePress press)
 {
-    if (funcOnPress)
+    if(press == TypePress_Release)
     {
-        funcOnPress();
+        if (funcOnPress)
+        {
+            funcOnPress();
+        }
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::Press(bool press)
+void Button::Press(TypePress press)
 {
-    if (press && funcOnPress)
+    if (press == TypePress_Release && funcOnPress)
     {
         funcOnPress();
     }

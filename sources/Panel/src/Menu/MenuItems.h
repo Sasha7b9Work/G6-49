@@ -175,7 +175,7 @@ public:
     pFuncVV     funcOnPress;        ///< Функция, которая вызывается при нажатии на кнопку.
     pFuncVII    funcForDraw;        ///< Функция будет вызываться во время отрисовки кнопки.
     void Draw(int x, int y);
-    void Press(bool press);
+    void Press(TypePress press);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -214,7 +214,7 @@ public:
     int                             numHints;
     void Draw(int x, int y);
     void DrawHints(int x, int y, int width);
-    void Press();
+    void Press(TypePress press);
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
