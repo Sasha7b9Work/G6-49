@@ -8,11 +8,12 @@
 void Control::Draw(int x, int y, bool)
 {
     bool pressed = IsPressed();
+    bool opened = IsOpened();
 
     if (type == Item_Choice)
     {
-        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, pressed ? Color::GRAY_50 : Color::GREEN_10);
-        Painter::DrawText(x + 5, y + 5, Title(), pressed ? Color::BACK : Color::FILL);
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : Color::GREEN_10);
+        Painter::DrawText(x + 5, y + 5, Title(), pressed || opened ? Color::BACK : Color::FILL);
         Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, Color::GREEN_25);
         Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)this)->NameCurrentSubItem(), Color::BACK);
     }
@@ -60,10 +61,10 @@ void Choice::DrawOpened()
 
     ++y;
 
-    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Painter::FillRegion(x, y, width, height, Color::GRAY_50);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
     Painter::DrawHLine(y + 12, x, x + width);
-
+    Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
     Painter::DrawTextRelativelyRight(x + width - 2, y + 2, Title());
 
     y += 14;
@@ -72,7 +73,11 @@ void Choice::DrawOpened()
     {
         if (CurrentChoice() == i)
         {
-            Painter::FillRegion(x + 2, y, ITEM_WIDTH - 4, 8, Color::FILL);
+            Painter::FillRegion(x + 2, y, ITEM_WIDTH - 4, 8, Color::GREEN_50);
+            Painter::DrawHLine(y - 1, x + 1, x - 1 + ITEM_WIDTH - 1, Color::GREEN_75);
+            Painter::DrawVLine(x + 1, y - 1, y - 1 + 10);
+            Painter::DrawHLine(y + 9, x + 1, x + ITEM_WIDTH - 1, Color::GREEN_25);
+            Painter::DrawVLine(x - 1 + ITEM_WIDTH, y - 1, y + 9);
             Painter::DrawText(x + 3, y, NameSubItem(i), Color::BACK);
         }
         else

@@ -105,6 +105,8 @@ public:
     PanelControl ButtonForItem();
 
     void Rotate(PanelControl control);
+    /// Возвращает полный путь к элементу меню
+    char *FullPath();
 };
 
 

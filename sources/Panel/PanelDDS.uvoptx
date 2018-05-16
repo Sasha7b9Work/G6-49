@@ -187,18 +187,18 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>12</LineNumber>
+          <LineNumber>660</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134244678</Address>
+          <Address>134245706</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Menu\MenuItemsGraphics.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Menu\MenuItemsLogic.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Menu/MenuItemsGraphics.cpp\12</Expression>
+          <Expression>\\PanelDDS\src/Menu/MenuItemsLogic.cpp\660</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -206,6 +206,11 @@
           <count>0</count>
           <WinNumber>1</WinNumber>
           <ItemText>choice)-</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>buffer</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -1637,7 +1642,7 @@
 
   <Group>
     <GroupName>Settings</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

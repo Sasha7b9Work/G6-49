@@ -9,6 +9,7 @@
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
+#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -651,4 +652,34 @@ const char* Parameter_Name(WaveParameter parameter)
 pString ChoiceParameter::CurrentName()
 {
     return (const char*)(nameParameter[*numParameter][LANG]);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char *Control::FullPath()
+{
+    const PageBase *parent = keeper;
+
+    const char *titles[5] = {Title()};
+    int pointer = 1;
+
+    while(parent)
+    {
+        titles[pointer++] = parent->titleHint[LANG];
+        parent = parent->keeper;
+    }
+
+    static char buffer[100];
+    buffer[0] = 0;
+
+    do
+    {
+        pointer--;
+        strcat(buffer, titles[pointer]);
+        strcat(buffer, " - ");
+        
+    } while(pointer > 0);
+
+    buffer[strlen(buffer) - 3] = 0;
+
+    return buffer;
 }

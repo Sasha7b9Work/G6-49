@@ -20,8 +20,6 @@ void Menu::Draw()
         CurrentPage()->Item(i)->Draw(x, y, false);
     }
 
-    DrawPagesUGO(); 
-
     if (OPENED_ITEM)
     {
         DrawOpenedItem();
@@ -33,7 +31,16 @@ void Menu::DrawTitle()
 {
     Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, MP_TITLE_HEIGHT, Color::FILL);
     Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, MP_TITLE_HEIGHT - 2, Color::BLUE_10);
-    Painter::DrawTextRelativelyRight(315, 5, CurrentPage()->Title(), Color::FILL);
+    if(OPENED_ITEM)
+    {
+        Painter::DrawTextRelativelyRight(315, 5, OPENED_ITEM->FullPath(), Color::FILL);
+    }
+    else
+    {
+        DrawPagesUGO();
+
+        Painter::DrawTextRelativelyRight(315, 5, CurrentPage()->Title(), Color::FILL);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
