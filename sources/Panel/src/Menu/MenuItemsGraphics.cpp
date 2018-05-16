@@ -9,17 +9,23 @@ void Control::Draw(int x, int y, bool)
 {
     if (type == Item_Choice)
     {
-        Painter::DrawText(x + 5, y + 5, Title());
-        Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)this)->NameCurrentSubItem());
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, Color::GREEN_10);
+        Painter::DrawText(x + 5, y + 5, Title(), Color::FILL);
+        Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, Color::GREEN_25);
+        Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)this)->NameCurrentSubItem(), Color::BACK);
     }
     else if (type == Item_Button)
     {
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 5, Color::GREEN_10);
+        Painter::SetColor(Color::FILL);
         Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, Title());
     }
     else if (type == Item_ChoiceParameter)
     {
-        Painter::DrawText(x + 5, y + 5, Title());
-        Painter::DrawTextRelativelyRight(315, y + 30, ((ChoiceParameter *)this)->CurrentName());
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, Color::GREEN_10);
+        Painter::DrawText(x + 5, y + 5, Title(), Color::FILL);
+        Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, Color::GREEN_25);
+        Painter::DrawTextRelativelyRight(315, y + 30, ((ChoiceParameter *)this)->CurrentName(), Color::BACK);
     }
     else if (type == Item_SmallButton)
     {
