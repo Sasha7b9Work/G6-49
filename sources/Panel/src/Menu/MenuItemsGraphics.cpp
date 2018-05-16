@@ -16,7 +16,7 @@ void Control::Draw(int x, int y, bool)
     }
     else if (type == Item_Button)
     {
-        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 5, Color::GREEN_10);
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, Color::GREEN_10);
         Painter::SetColor(Color::FILL);
         Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, Title());
     }
@@ -38,6 +38,10 @@ void Control::Draw(int x, int y, bool)
         {
             button->funcForDraw(x, y);
         }
+    }
+    else
+    {
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, Color::GREEN_25);
     }
 }
 

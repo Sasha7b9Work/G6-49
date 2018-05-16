@@ -197,10 +197,9 @@ void Display::DrawSignalParameters(Channel ch, int y0)
             {
                 pString curPar = Menu::NameCurrentParameter();
                 pString parName = Parameter_Name((WaveParameter)i);
-                if(strcmp(curPar, parName) == 0)
+                if(strcmp(curPar, parName) == 0 && CURRENT_PAGE == 0)
                 {
-                    Painter::FillRegion(x0, y0, 139, 8, Color::FILL);
-                    color = Color::BACK;
+                    Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
                 }
             }
             Painter::DrawText(x0 + 1, y0, Parameter_Name((WaveParameter)i), color);
