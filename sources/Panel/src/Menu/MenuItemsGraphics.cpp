@@ -7,10 +7,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Control::Draw(int x, int y, bool)
 {
+    bool pressed = IsPressed();
+
     if (type == Item_Choice)
     {
-        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, Color::GREEN_10);
-        Painter::DrawText(x + 5, y + 5, Title(), Color::FILL);
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, pressed ? Color::GRAY_50 : Color::GREEN_10);
+        Painter::DrawText(x + 5, y + 5, Title(), pressed ? Color::BACK : Color::FILL);
         Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, Color::GREEN_25);
         Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)this)->NameCurrentSubItem(), Color::BACK);
     }

@@ -43,7 +43,7 @@ void Menu::DrawPagesUGO()
 
     if (RegIsControlPages())
     {
-        for (int i = 0; i < NUM_PAGES; i++)
+        for (int i = 0; i < NUM_PAGES; i++) 
         {
             Painter::DrawRectangle(5 + i * delta, 5, delta, 8, Color::GRAY_25);
         }

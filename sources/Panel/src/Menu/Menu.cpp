@@ -89,7 +89,11 @@ void Menu::ProcessControl(StructControl strContr)
         }
     }
 
-    if (pressed == TypePress_Release || pressed == TypePress_LongPress)
+    if(key >= B_F1 && key <= B_F4)
+    {
+        CurrentPage()->Item(key - B_F1)->Press(pressed);
+    }
+    else if (pressed == TypePress_Release || pressed == TypePress_LongPress)
     {
         if (OPENED_ITEM && pressed == TypePress_LongPress)
         {
@@ -97,10 +101,6 @@ void Menu::ProcessControl(StructControl strContr)
             {
                 OPENED_ITEM = 0;
             }
-        }
-        else if (key >= B_F1 && key <= B_F4)
-        {           
-            CurrentPage()->Item(key - B_F1)->Press(pressed);
         }
         else if(key == B_ON1)
         {

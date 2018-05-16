@@ -462,13 +462,15 @@ void IPaddress::GetNumPosIPvalue(int *numIP, int *selPos)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::Press(TypePress press)
 {
+    Menu::itemUnderKey = press == TypePress_Press ? this : 0;
+
     if(type == Item_Choice)
     {
         ((Choice *)this)->Press(press);
     }
     else if(type == Item_Button)
     {
-        ((Button *)this)->Press();
+        ((Button *)this)->Press(press);
     }
     else if(type == Item_ChoiceParameter)
     {
@@ -602,9 +604,9 @@ void SButton::Press()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::Press()
+void Button::Press(bool press)
 {
-    if (funcOnPress)
+    if (press && funcOnPress)
     {
         funcOnPress();
     }

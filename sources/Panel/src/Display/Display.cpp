@@ -302,7 +302,7 @@ void Display::ShowStatistics()
 {
     if(SHOW_STATISTICS)
     {
-        Painter::DrawFilledRectangle(0, SCREEN_HEIGHT - 12, 100, 10, Color::BACK, Color::FILL);
+        Painter::DrawFilledRectangle(0, SCREEN_HEIGHT - 12, 60, 10, Color::BACK, Color::FILL);
         char buffer[100] = {0};
         strcpy(buffer, Int2String((int)(CPU::GetFPS() + 0.5f), false, 3));
         strcat(buffer, "/");
