@@ -51,7 +51,7 @@ input.close()
 symbols = unpack("2048b", data)
 
 output = open("font8.inc", "w")                   # Fonts for black display
-output.write("#include \"font.h\"\nconst Font font8 = {\n\t8, {\n")
+output.write("#include \"Font.h\"\nconst Font font8 = {\n\t8, {\n")
 
 outputDisplay = open("font8display.inc", "w")     # Font for color display
 outputDisplay.write("/* Main font height 8 */\n\n")

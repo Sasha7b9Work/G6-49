@@ -32,7 +32,8 @@ void Menu::Draw()
 void Menu::DrawTitle()
 {
     Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, MP_TITLE_HEIGHT, Color::FILL);
-    Painter::DrawTextRelativelyRight(315, 5, CurrentPage()->Title());
+    Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, MP_TITLE_HEIGHT - 2, Color::BLUE_10);
+    Painter::DrawTextRelativelyRight(315, 5, CurrentPage()->Title(), Color::FILL);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

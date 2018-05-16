@@ -51,7 +51,7 @@ input.close()
 symbols = unpack("2048b", data)
 
 output = open("font5.inc", "w")
-output.write("#include \"font.h\"\nconst Font font5 = {\n\t5, {\n")
+output.write("#include \"Font.h\"\nconst Font font5 = {\n\t5, {\n")
 
 outputDisplay = open("font5display.inc", "w")
 outputDisplay.write("const BYTE font5display[3080] = {\n")

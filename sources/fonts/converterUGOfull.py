@@ -49,7 +49,7 @@ input.close()
 symbols = unpack("2048b", data)
 
 output = open("fontUGO.inc", "w")
-output.write("#include \"font.h\"\nconst Font fontUGO = {\n\t8, {\n")
+output.write("#include \"Font.h\"\nconst Font fontUGO = {\n\t8, {\n")
 
 outputDisplay = open("fontUGOdisplay.inc", "w")
 outputDisplay.write("const BYTE fontUGOdisplay[3080] = {\n")

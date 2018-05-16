@@ -13,6 +13,7 @@ public:
     static Color GRAY_50;           // Серый 50%
     static Color GRAY_75;           // Серый 75%
     static Color BLUE;
+    static Color BLUE_10;
     static Color BLUE_25;
     static Color BLUE_50;
     static Color BLUE_75;
@@ -66,6 +67,7 @@ private:
         COLOR_GRAY_50,
         COLOR_GRAY_75,
         COLOR_BLUE,
+        COLOR_BLUE_10,
         COLOR_BLUE_25,
         COLOR_BLUE_50,
         COLOR_BLUE_75,

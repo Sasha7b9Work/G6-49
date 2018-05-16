@@ -21,6 +21,7 @@ static const Settings defSet =
         MAKE_COLOR(0x80, 0x80, 0x80),   // GRAY_50
         MAKE_COLOR(0xc0, 0xc0, 0xc0),   // GRAY_75
         MAKE_COLOR(0x00, 0x00, 0xff),   // BLUE
+        MAKE_COLOR(0x00, 0x00, 25),     // BLUE_10
         MAKE_COLOR(0x00, 0x00, 0x40),   // BLUE_25
         MAKE_COLOR(0x00, 0x00, 0x80),   // BLUE_50
         MAKE_COLOR(0x00, 0x00, 0xc0),   // BLUE_75

@@ -14,6 +14,7 @@ Color Color::GRAY_25(COLOR_GRAY_25);
 Color Color::GRAY_50(COLOR_GRAY_50);
 Color Color::GRAY_75(COLOR_GRAY_75);
 Color Color::BLUE(COLOR_BLUE);
+Color Color::BLUE_10(COLOR_BLUE_10);
 Color Color::BLUE_25(COLOR_BLUE_25);
 Color Color::BLUE_50(COLOR_BLUE_50);
 Color Color::BLUE_75(COLOR_BLUE_75);
