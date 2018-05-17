@@ -16,6 +16,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Control *Menu::itemUnderKey = 0;
+Control *Menu::openedItem = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +72,7 @@ void Menu::ProcessControl(StructControl strContr)
         }
         else
         {
-            OPENED_ITEM->Rotate(REG_LEFT);
+            Menu::OpenedItem()->Rotate(REG_LEFT);
         }
     }
     else if (key == REG_RIGHT)
@@ -85,21 +86,21 @@ void Menu::ProcessControl(StructControl strContr)
         }
         else
         {
-            OPENED_ITEM->Rotate(REG_RIGHT);
+            Menu::OpenedItem()->Rotate(REG_RIGHT);
         }
     }
 
     if(key >= B_F1 && key <= B_F4)
     {
-        CurrentPage()->Item(key - B_F1)->Press(pressed);
+        openedItem = CurrentPage()->Item(key - B_F1)->Press(pressed);
     }
     else if (pressed == TypePress_Release || pressed == TypePress_LongPress)
     {
-        if (OPENED_ITEM && pressed == TypePress_LongPress)
+        if (Menu::OpenedItem() && pressed == TypePress_LongPress)
         {
-            if ((OPENED_ITEM)->ButtonForItem())
+            if (Menu::OpenedItem()->ButtonForItem())
             {
-                OPENED_ITEM = 0;
+                openedItem = 0;
             }
         }
         else if(key == B_ON1)
@@ -118,7 +119,7 @@ void Menu::ProcessControl(StructControl strContr)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::RegIsControlPages(void)
 {
-    return OPENED_ITEM_IS_NONE && ADDITION_PAGE_IS_NONE;
+    return openedItem == 0 && ADDITION_PAGE_IS_NONE;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -130,7 +131,7 @@ const char *Menu::NameCurrentParameter(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Menu::OpenedItem()
 {
-    return 0;
+    return openedItem;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

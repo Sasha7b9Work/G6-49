@@ -41,5 +41,5 @@ private:
 
     static void ProcessControl(StructControl control);
 
-    static void DrawOpenedItem();
+    static Control *openedItem;
 };

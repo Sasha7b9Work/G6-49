@@ -69,9 +69,7 @@ class Control
 {
 public:
     COMMON_PART_MENU_ITEM;
-    /// Возвращает высоту в пикселях открытого элемента Choice или NamePage
-    int HeightOpened() const;
-    /// @brief Возвращает true, если элемент меню control затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
+    /// \brief Возвращает true, если элемент меню control затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
     /// раскрывающийся элемент меню вроде Choice или Governor
     bool IsShade() const;
     /// Возвращает true, если кнопка, соответствующая элементу меню control, находится в нажатом положении
@@ -92,8 +90,8 @@ public:
     void LongPress();
 
     void Draw(bool opened, int x = -1, int y = -1) const;
-
-    void Press(TypePress press);
+    /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
+    Control *Press(TypePress press);
 
     TypeControl Type() const;
 
@@ -189,8 +187,8 @@ public:
     pFuncVV     funcOnPress;
     /// Функция будет вызываться во время отрисовки кнопки.
     pFuncVII    funcForDraw;
-
-    void Press(TypePress press);
+    /// Обрабатывает нажатие кнопки. Возвращает ноль, потому что не может находиться в открытом состоянии.
+    Control *Press(TypePress press);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -238,8 +236,8 @@ public:
     const StructHelpSmallButton    *hintUGO; 
 
     int                             numHints;
-
-    void Press(TypePress press);
+    /// Обрабатывает нажатие кнопки. Возвращает 0, потому что не может находиться в открытом состоянии
+    Control *Press(TypePress press);
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
@@ -338,8 +336,8 @@ public:
     const char *NamePrevSubItem() const;
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     const char *NameSubItem(int i) const;
-
-    void Press(TypePress press);
+    /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
+    Control *Press(TypePress press);
 
     int CurrentChoice() const;
 };
@@ -364,11 +362,17 @@ public:
 class ChoiceParameter : public Control
 {
 public:
+
     pFuncVV              funcOnPress;
+
     AllowableParameters  allowParameters;
+
     uint8               *numParameter;
-    void    Press(TypePress press);
+    /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии и 0 в противном.
+    Control *Press(TypePress press);
+
     pString NameSubItem(int num) const;
+
     pString CurrentName() const;
 };
 

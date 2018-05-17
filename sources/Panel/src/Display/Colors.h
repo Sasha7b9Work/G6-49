@@ -9,6 +9,7 @@ class Color
 public:
     static Color BLACK;             // Чёрный
     static Color WHITE;             // Белый
+    static Color GRAY_10;
     static Color GRAY_25;           // Серый 25%
     static Color GRAY_50;           // Серый 50%
     static Color GRAY_75;           // Серый 75%
@@ -63,6 +64,7 @@ private:
     {
         COLOR_BLACK,
         COLOR_WHITE,
+        COLOR_GRAY_10,
         COLOR_GRAY_25,
         COLOR_GRAY_50,
         COLOR_GRAY_75,

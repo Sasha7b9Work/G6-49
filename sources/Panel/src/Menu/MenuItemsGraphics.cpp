@@ -86,10 +86,12 @@ void Choice::Draw(bool opened, int x, int y) const
     else
     {
         bool pressed = IsPressed();
+        bool isShade = IsShade();
+        opened = IsOpened();
 
-        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : Color::GREEN_10);
-        Painter::DrawText(x + 5, y + 5, Title(), pressed || opened? Color::BACK : Color::FILL);
-        Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, Color::GREEN_25);
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
+        Painter::DrawText(x + 5, y + 5, Title(), pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)this)->NameCurrentSubItem(), Color::BACK);
     }
 }

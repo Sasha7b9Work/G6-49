@@ -17,6 +17,7 @@ static const Settings defSet =
     {
         MAKE_COLOR(0x00, 0x00, 0x00),   // BLACK
         MAKE_COLOR(0xff, 0xff, 0xff),   // WHITE
+        MAKE_COLOR(25,   25,   25),     // GRAY_10
         MAKE_COLOR(0x40, 0x40, 0x40),   // GRAY_25
         MAKE_COLOR(0x80, 0x80, 0x80),   // GRAY_50
         MAKE_COLOR(0xc0, 0xc0, 0xc0),   // GRAY_75
@@ -112,7 +113,6 @@ static const Settings defSet =
     },
     Russian,         // serv_language
     0,               // menu_currentPage
-    (Control *)0,    // menu_openedItem
     (Page*)0,        // menu_page
     false,           // dbg_console
     {true, true},    // sig_enabled

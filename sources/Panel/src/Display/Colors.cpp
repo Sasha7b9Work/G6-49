@@ -10,6 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Color Color::BLACK(COLOR_BLACK);
 Color Color::WHITE(COLOR_WHITE);
+Color Color::GRAY_10(COLOR_GRAY_10);
 Color Color::GRAY_25(COLOR_GRAY_25);
 Color Color::GRAY_50(COLOR_GRAY_50);
 Color Color::GRAY_75(COLOR_GRAY_75);

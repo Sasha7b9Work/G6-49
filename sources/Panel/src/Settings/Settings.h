@@ -26,8 +26,6 @@ extern const PageBase pInput;
 #define COLOR(x)                (set.disp_Colors[x])
 #define LANGUAGE                (set.serv_language)
 #define CURRENT_PAGE            (set.menu_currentPage)
-#define OPENED_ITEM             (set.menu_openedItem)
-#define OPENED_ITEM_IS_NONE     (OPENED_ITEM == 0)
 #define ADDITION_PAGE           (set.menu_page)
 #define ADDITION_PAGE_IS_INPUT  (ADDITION_PAGE == (Page *)&pInput)
 #define ADDITION_PAGE_IS_NONE   (ADDITION_PAGE == 0)
@@ -79,7 +77,6 @@ public:
     InputWindowStruct   sig_structParameter[NumChannels][NumForms][NumParameters];
     Language            serv_language;                  ///< Выбранный язык
     int8                menu_currentPage;               ///< Отображаемая страница меню
-    Control*            menu_openedItem;                ///< Если какой-то пункт меню раскрыт, то здесь его адрес
     Page*               menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
     bool                dbg_console;
     bool                sig_enabled[NumChannels];       ///< Состояние выхода - включен или выключен

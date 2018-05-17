@@ -20,10 +20,9 @@ void Menu::Draw()
         CurrentPage()->Item(i)->Draw(false, x, y);
     }
 
-    if (OPENED_ITEM)
+    if (Menu::OpenedItem())
     {
-        //DrawOpenedItem();
-        OPENED_ITEM->Draw(true);
+        Menu::OpenedItem()->Draw(true);
     }
 }
 
@@ -32,9 +31,9 @@ void Menu::DrawTitle()
 {
     Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, MP_TITLE_HEIGHT, Color::FILL);
     Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, MP_TITLE_HEIGHT - 2, Color::BLUE_10);
-    if(OPENED_ITEM)
+    if(Menu::OpenedItem())
     {
-        Painter::DrawTextRelativelyRight(315, 5, OPENED_ITEM->FullPath(), Color::FILL);
+        Painter::DrawTextRelativelyRight(315, 5, Menu::OpenedItem()->FullPath(), Color::FILL);
     }
     else
     {
@@ -61,23 +60,5 @@ void Menu::DrawPagesUGO()
         char buffer[20];
 
         Painter::DrawText(6 + CURRENT_PAGE * delta, 5, Int2String(CURRENT_PAGE + 1, false, 2, buffer), Color::BACK);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::DrawOpenedItem()
-{
-    if (OPENED_ITEM)
-    {
-        TypeControl typeItem = ((Control *)OPENED_ITEM)->Type();
-
-        if (typeItem == Control_Choice)
-        {
-            ((Choice *)OPENED_ITEM)->Draw(true);
-        }
-        else if (typeItem == Control_ChoiceParameter)
-        {
-            ((Choice *)OPENED_ITEM)->Draw(true);
-        }
     }
 }

@@ -102,25 +102,9 @@ void Page::ChangeSubPage(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Control::HeightOpened() const
-{
-    if (type == Control_Page)
-    {
-        int numItems = ((const Page *)this)->NumItems() - ((Page *)this)->CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
-        LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY);
-        return MP_TITLE_HEIGHT + MI_HEIGHT * numItems;
-    }
-    else if (type == Control_Choice || type == Control_ChoiceReg)
-    {
-        return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 1;
-    }
-    return MI_HEIGHT;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsShade() const
 {
-    return keeper->CurrentItemIsOpened() && (this != Menu::OpenedItem());
+    return Menu::OpenedItem() && (this != Menu::OpenedItem());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,7 +141,7 @@ bool Control::IsOpened() const
     {
         return keeper->CurrentItemIsOpened();
     }
-    return OPENED_ITEM == this;
+    return Menu::OpenedItem() == this;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

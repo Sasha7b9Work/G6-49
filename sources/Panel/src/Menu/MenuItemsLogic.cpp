@@ -114,7 +114,7 @@ float Choice::Step()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::Press(TypePress press)
+Control *Choice::Press(TypePress press)
 {
     if(press == TypePress_Release)
     {
@@ -126,8 +126,10 @@ void Choice::Press(TypePress press)
     }
     else if(press == TypePress_LongPress)
     {
-        OPENED_ITEM = this;
+        return this;
     }
+
+    return Menu::OpenedItem();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -392,33 +394,40 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::Press(TypePress press)
+Control *Control::Press(TypePress press)
 {
+    if(IsShade())
+    {
+        return Menu::OpenedItem();
+    }
+
     Menu::itemUnderKey = press == TypePress_Press && !IsOpened() ? this : 0;
 
     if(press == TypePress_LongPress && IsOpened())
     {
-        OPENED_ITEM = 0;
+        return 0;
     }
     else
     {
         if (type == Control_Choice)
         {
-            ((Choice *)this)->Press(press);
+            return ((Choice *)this)->Press(press);
         }
         else if (type == Control_Button)
         {
-            ((Button *)this)->Press(press);
+            return ((Button *)this)->Press(press);
         }
         else if (type == Control_ChoiceParameter)
         {
-            ((ChoiceParameter *)this)->Press(press);
+            return ((ChoiceParameter *)this)->Press(press);
         }
         else if (type == Control_SmallButton)
         {
-            ((SButton *)this)->Press(press);
+            return ((SButton *)this)->Press(press);
         }
     }
+
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -516,7 +525,7 @@ void Control::Rotate(PanelControl control)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void ChoiceParameter::Press(TypePress press)
+Control *ChoiceParameter::Press(TypePress press)
 {
     if (press == TypePress_Release)
     {
@@ -529,12 +538,14 @@ void ChoiceParameter::Press(TypePress press)
     }
     else if (press == TypePress_LongPress)
     {
-        OPENED_ITEM = this;
+        return this;
     }
+
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void SButton::Press(TypePress press)
+Control *SButton::Press(TypePress press)
 {
     if(press == TypePress_Release)
     {
@@ -543,15 +554,19 @@ void SButton::Press(TypePress press)
             funcOnPress();
         }
     }
+
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Button::Press(TypePress press)
+Control *Button::Press(TypePress press)
 {
     if (press == TypePress_Release && funcOnPress)
     {
         funcOnPress();
     }
+
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
