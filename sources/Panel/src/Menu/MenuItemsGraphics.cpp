@@ -22,20 +22,26 @@ void Control::Draw(bool opened, int x, int y) const
     }
     else if (type == Control_SmallButton)
     {
-        int size = 23;
-        x += 20;
-        y += 17;
-        Painter::DrawRectangle(x, y, size, size);
-        SButton *button = (SButton*)this;
-        if (button->funcForDraw)
-        {
-            button->funcForDraw(x, y);
-        }
+        ((SButton *)this)->Draw(x, y);
     }
     else
     {
         Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, Menu::OpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void SButton::Draw(int x, int y)
+{
+    int size = 23;
+    x += 20;
+    y += 17;
+    Painter::DrawRectangle(x, y, size, size);
+    if (funcForDraw)
+    {
+        funcForDraw(x, y);
+    }
+
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

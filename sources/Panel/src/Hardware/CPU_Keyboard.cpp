@@ -145,24 +145,55 @@ void CPU::Keyboard::Update(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DetectRegulator(void)
 {
-    static bool prevStateButton = true;
-    static uint timePrev = 0;
+    // Детектируем кнопку
+    static bool prevPressButton = false;
+    static uint timePrevPress = 0;
+    static bool needDetectButton = true;
     
-    bool state = CPU::GPIO_::ReadPin('C', GPIO_PIN_2);
+    bool press = CPU::GPIO_::ReadPin('C', GPIO_PIN_2) ? false : true;
 
-    if(state != prevStateButton)
+    if(!press)
     {
-        if(TIME_MS - timePrev < 50)
-        {
-            return;
-        }
-
-        timePrev = TIME_MS;
-
-        FillCommand(REG_BTN, state ? TypePress_Release : TypePress_Press);
-        prevStateButton = state;
+        needDetectButton = true;
     }
 
+    if(needDetectButton)
+    {
+        uint time = TIME_MS;
+
+        if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
+        {
+            FillCommand(REG_BTN, TypePress_LongPress);                      // посылаем длинное нажатие
+            needDetectButton = false;
+            prevPressButton = false;
+            timePrevPress = 0;
+        }
+
+        if(timePrevPress == 0)                                              // Если кнопка находилась ранее в отжатом положении
+        {
+            if(press)                                                       // И теперь нажата
+            {
+                timePrevPress = time;
+                prevPressButton = true;
+                FillCommand(REG_BTN, TypePress_Press);
+            }
+        }
+        else                                                                // Ексли копка была нажата ранее
+        {
+            if(time - timePrevPress > 50)                                   // то проверять в следующий раз будем не ранее чем через 50 мс
+            {                                                               // во избежание дребезга контактов
+                if(!press)
+                {
+                    FillCommand(REG_BTN, TypePress_Release);
+                    timePrevPress = 0;
+                    prevPressButton = false;
+                }
+            }
+        }
+    }
+
+
+    // Детектируем поворот
     static bool prevStatesIsOne = false;
 
     bool stateLeft = CPU::GPIO_::ReadPin('C', GPIO_PIN_0);

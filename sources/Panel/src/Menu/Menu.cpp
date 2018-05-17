@@ -89,6 +89,13 @@ void Menu::ProcessControl(StructControl strContr)
             Menu::OpenedItem()->Rotate(REG_RIGHT);
         }
     }
+    else if(key == REG_BTN)
+    {
+        if(openedItem)
+        {
+            openedItem->Press(pressed);
+        }
+    }
 
     if(key >= B_F1 && key <= B_F4)
     {

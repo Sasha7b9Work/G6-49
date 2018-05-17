@@ -396,6 +396,11 @@ void GovernorColor::ChangeValue(int delta)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Control::Press(TypePress press)
 {
+    if(press == TypePress_LongPress && IsOpened())
+    {
+        return 0;
+    }
+
     if(IsShade())
     {
         return Menu::OpenedItem();
@@ -403,28 +408,21 @@ Control *Control::Press(TypePress press)
 
     Menu::itemUnderKey = (press == TypePress_Press) && !IsOpened() ? this : 0;
 
-    if(press == TypePress_LongPress && IsOpened())
+    if (type == Control_Choice)
     {
-        return 0;
+        return ((Choice *)this)->Press(press);
     }
-    else
+    else if (type == Control_Button)
     {
-        if (type == Control_Choice)
-        {
-            return ((Choice *)this)->Press(press);
-        }
-        else if (type == Control_Button)
-        {
-            return ((Button *)this)->Press(press);
-        }
-        else if (type == Control_ChoiceParameter)
-        {
-            return ((ChoiceParameter *)this)->Press(press);
-        }
-        else if (type == Control_SmallButton)
-        {
-            return ((SButton *)this)->Press(press);
-        }
+        return ((Button *)this)->Press(press);
+    }
+    else if (type == Control_ChoiceParameter)
+    {
+        return ((ChoiceParameter *)this)->Press(press);
+    }
+    else if (type == Control_SmallButton)
+    {
+        return ((SButton *)this)->Press(press);
     }
 
     return 0;
