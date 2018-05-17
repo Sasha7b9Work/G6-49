@@ -49,13 +49,16 @@ void Control::Draw(int x, int y, bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::DrawOpened()
+void Choice::Draw(bool opened, int x, int y) const
 {
     int width = ITEM_WIDTH;
     int height = GetHeightOpened();
 
-    int y = MP_TITLE_HEIGHT + PositionOnPage() * MI_HEIGHT;
-    int x = SCREEN_WIDTH - ITEM_WIDTH - 20;
+    if(opened && x == -1)
+    {
+        y = MP_TITLE_HEIGHT + PositionOnPage() * MI_HEIGHT;
+        x = SCREEN_WIDTH - ITEM_WIDTH - 20;
+    }
 
     y += (MI_HEIGHT - height) / 2;
 

@@ -71,7 +71,7 @@ int Page::PosItemOnTop()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Choice::NameSubItem(int i)
+const char *Choice::NameSubItem(int i) const
 {
     return NAME_FROM_INDEX(i);
 }

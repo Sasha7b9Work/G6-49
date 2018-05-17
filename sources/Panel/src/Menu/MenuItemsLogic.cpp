@@ -497,7 +497,7 @@ TypeItem Control::Type()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Choice::CurrentChoice()
+int Choice::CurrentChoice() const
 {
     int retValue = 0;
 
@@ -527,7 +527,7 @@ int Choice::CurrentChoice()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Control::PositionOnPage()
+int Control::PositionOnPage() const
 {
     for (int numPage = 0; numPage < NUM_PAGES; numPage++)
     {

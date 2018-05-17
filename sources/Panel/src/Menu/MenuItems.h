@@ -100,7 +100,7 @@ public:
     TypeItem Type();
 
     /// Возвращает порядковый номер пункта меню на странице
-    int PositionOnPage();
+    int PositionOnPage() const;
     /// Возвращает функциональную клавишу, назначенную пункту меню
     PanelControl ButtonForItem();
 
@@ -285,8 +285,7 @@ public:
     float Step();                           ///< Рассчитывает следующий кадр анимации.
     void  ChangeIndex(int delta);           ///< Изменяет значение choice в зависимости от величины и знака delta.
     int   NumSubItems() const;              ///< Возвращает количество вариантов выбора в элементе по адресу choice
-    void  Draw(int x, int y, bool opened) const;
-    void  DrawOpened();
+    void  Draw(bool opened, int x = -1, int y = -1) const;
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameCurrentSubItem();
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
@@ -296,11 +295,11 @@ public:
 
     const char *NamePrevSubItem();
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
-    const char *NameSubItem(int i);
+    const char *NameSubItem(int i) const;
 
     void Press(TypePress press);
 
-    int CurrentChoice();
+    int CurrentChoice() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

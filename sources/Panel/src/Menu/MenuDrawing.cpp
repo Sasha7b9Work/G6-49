@@ -72,11 +72,11 @@ void Menu::DrawOpenedItem()
 
         if (typeItem == Item_Choice)
         {
-            ((Choice *)OPENED_ITEM)->DrawOpened();
+            ((Choice *)OPENED_ITEM)->Draw(true);
         }
         else if (typeItem == Item_ChoiceParameter)
         {
-            ((Choice *)OPENED_ITEM)->DrawOpened();
+            ((Choice *)OPENED_ITEM)->Draw(true);
         }
     }
 }
