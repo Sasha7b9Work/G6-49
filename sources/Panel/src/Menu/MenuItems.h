@@ -91,7 +91,7 @@ public:
     /// Вызывается при "длинном" нажатии
     void LongPress();
 
-    void Draw(int x, int y, bool opened) const;
+    void Draw(bool opened, int x = -1, int y = -1) const;
 
     void Press(TypePress press);
 

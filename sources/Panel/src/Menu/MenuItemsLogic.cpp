@@ -618,5 +618,5 @@ char *Control::FullPath() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Choice::GetHeightOpened() const 
 {
-    return NumSubItems() * 10 + 2 + 12;
+    return NumSubItems() * 10 + 2 + MI_TITLE_HEIGHT;
 }
