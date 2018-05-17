@@ -52,7 +52,7 @@ void Control::Draw(int x, int y, bool)
 void Choice::DrawOpened()
 {
     int width = ITEM_WIDTH;
-    int height = NumSubItems() * 10 + 2 + 12;
+    int height = GetHeightOpened();
 
     int y = MP_TITLE_HEIGHT + PositionOnPage() * MI_HEIGHT;
     int x = SCREEN_WIDTH - ITEM_WIDTH - 20;

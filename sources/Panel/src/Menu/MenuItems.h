@@ -284,14 +284,15 @@ public:
     void  StartChange(int delta);
     float Step();                           ///< Рассчитывает следующий кадр анимации.
     void  ChangeIndex(int delta);           ///< Изменяет значение choice в зависимости от величины и знака delta.
-    int   NumSubItems();                    ///< Возвращает количество вариантов выбора в элементе по адресу choice
-    void  Draw(int x, int y, bool opened);
+    int   NumSubItems() const;              ///< Возвращает количество вариантов выбора в элементе по адресу choice
+    void  Draw(int x, int y, bool opened) const;
     void  DrawOpened();
-    void  DrawClosed(int x, int y);
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameCurrentSubItem();
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameNextSubItem();
+    /// Возвращает высоту раскрытого
+    int GetHeightOpened() const;
 
     const char *NamePrevSubItem();
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы

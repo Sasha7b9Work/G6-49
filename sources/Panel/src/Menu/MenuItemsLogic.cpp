@@ -157,7 +157,7 @@ void Choice::ChangeIndex(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Choice::NumSubItems()
+int Choice::NumSubItems() const
 {
     return num;
 }
@@ -682,4 +682,10 @@ char *Control::FullPath()
     buffer[strlen(buffer) - 3] = 0;
 
     return buffer;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Choice::GetHeightOpened() const 
+{
+    return NumSubItems() * 10 + 2 + 12;
 }
