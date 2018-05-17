@@ -119,7 +119,15 @@ Control *Choice::Press(StructControl strControl)
     TypePress press = strControl.typePress;
     PanelControl key = strControl.key;
 
-    if (key == REG_LEFT || key == REG_RIGHT)
+    if(key == B_LEFT)
+    {
+        StartChange(-1);
+    }
+    else if(key == B_RIGHT)
+    {
+        StartChange(1);
+    }
+    else if (key == REG_LEFT || key == REG_RIGHT)
     {
         Rotate(key);
     }
@@ -405,11 +413,6 @@ Control *Control::Press(StructControl strControl)
 {
     TypePress press = strControl.typePress;
     PanelControl key = strControl.key;
-
-    if(key == REG_BTN && press == TypePress_LongPress)
-    {
-        key = REG_BTN;
-    }
 
     if(press == TypePress_LongPress)
     {
