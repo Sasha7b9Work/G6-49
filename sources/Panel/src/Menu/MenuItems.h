@@ -371,7 +371,9 @@ public:
 
     pString NameSubItem(int num) const;
 
-    pString CurrentName() const;
+    pString NameCurrentSubItem() const;
+
+    void Draw(bool opened, int x, int y);
 };
 
 

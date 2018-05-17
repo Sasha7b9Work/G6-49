@@ -595,7 +595,7 @@ const char* Parameter_Name(WaveParameter parameter)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString ChoiceParameter::CurrentName() const
+pString ChoiceParameter::NameCurrentSubItem() const
 {
     return (const char*)(nameParameter[*numParameter][LANG]);
 }

@@ -125,7 +125,7 @@ bool Menu::RegIsControlPages(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Menu::NameCurrentParameter(void)
 {
-    return PageSignals::cpParameters->CurrentName();
+    return PageSignals::cpParameters->NameCurrentSubItem();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
