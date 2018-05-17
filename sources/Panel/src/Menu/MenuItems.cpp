@@ -244,20 +244,6 @@ void Control::ShortPress()
             }
         }
     }
-    else if(type == Control_Time)
-    {
-        Time *time = (Time *)this;
-        if(!IsOpened())
-        {
-            SetCurrent(true);
-            time->SetOpened();
-            Open(true);
-        }
-        else
-        {
-            time->SelectNextPosition();
-        }
-    }
     else if(type == Control_GovernorColor)
     {
         if(IS_ACTIVE(this))
@@ -303,23 +289,6 @@ void Control::LongPress()
     if(type == Control_Button)
     {
         ((Button *)this)->ShortPress();
-    }
-    else if(type == Control_Time)
-    {
-        if(Menu::CurrentItem() != this)
-        {
-            SetCurrent(true);
-        }
-        Time *time = (Time *)this;
-        if(IsOpened() && (*time->curField == iSET))
-        {
-            time->SetNewTime();
-        }
-        Open(!IsOpened());
-        time->SetOpened();
-    }
-    else if(type == Control_Formula)
-    {
     }
     else if(type == Control_SmallButton)
     {

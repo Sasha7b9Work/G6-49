@@ -401,7 +401,7 @@ Control *Control::Press(TypePress press)
         return Menu::OpenedItem();
     }
 
-    Menu::itemUnderKey = press == TypePress_Press && !IsOpened() ? this : 0;
+    Menu::itemUnderKey = (press == TypePress_Press) && !IsOpened() ? this : 0;
 
     if(press == TypePress_LongPress && IsOpened())
     {
