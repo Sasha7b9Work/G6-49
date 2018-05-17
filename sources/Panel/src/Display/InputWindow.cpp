@@ -200,7 +200,7 @@ void InputWindow::KeyEnter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::ProcessContorl(StructControl strContr)
 {
-    PanelControl key = strContr.control;
+    PanelControl key = strContr.key;
     TypePress pressed = strContr.typePress;
 
     if (key == B_0 || key == B_1 || key == B_2 || key == B_3 || key == B_4 || key == B_5 || key == B_6 || key == B_7 || key == B_8 || key == B_9 ||
@@ -227,6 +227,6 @@ void InputWindow::ProcessContorl(StructControl strContr)
     }
     else if ((key >= B_F1 && key <= B_F4) && pressed == TypePress_Release)
     {
-        Menu::CurrentPage()->Item(key - B_F1)->Press(pressed);
+        Menu::CurrentPage()->Item(key - B_F1)->Press(strContr);
     }
 }

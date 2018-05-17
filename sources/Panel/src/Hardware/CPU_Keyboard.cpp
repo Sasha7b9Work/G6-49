@@ -218,7 +218,7 @@ static void DetectRegulator(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void FillCommand(PanelControl control, TypePress typePress)
 {
-    commands[pointer].control = control;
+    commands[pointer].key = control;
     commands[pointer++].typePress = typePress;
 }
 
@@ -235,7 +235,7 @@ StructControl CPU::Keyboard::GetNextControl(void)
 
     if (BufferIsEmpty())
     {
-        retValue.control = B_None;
+        retValue.key = B_None;
     }
     else
     {

@@ -89,7 +89,7 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
-    Control *Press(TypePress press);
+    Control *Press(StructControl strControl);
 
     TypeControl Type() const;
 
@@ -97,8 +97,6 @@ public:
     int PositionOnPage() const;
     /// Возвращает функциональную клавишу, назначенную пункту меню
     PanelControl ButtonForItem() const;
-
-    void Rotate(PanelControl control);
     /// Возвращает полный путь к элементу меню
     char *FullPath() const;
 };
@@ -339,9 +337,12 @@ public:
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     const char *NameSubItem(int i) const;
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
-    Control *Press(TypePress press);
+    Control *Press(StructControl strControl);
 
     int CurrentChoice() const;
+
+private:
+    void Rotate(PanelControl control);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

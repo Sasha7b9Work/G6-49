@@ -114,9 +114,16 @@ float Choice::Step()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Choice::Press(TypePress press)
+Control *Choice::Press(StructControl strControl)
 {
-    if(press == TypePress_Release)
+    TypePress press = strControl.typePress;
+    PanelControl key = strControl.key;
+
+    if (key == REG_LEFT || key == REG_RIGHT)
+    {
+        Rotate(key);
+    }
+    else if(press == TypePress_Release)
     {
         CircleIncrease<int8>(cell, 0, (int8)(NumSubItems() - 1));
         if(funcOnChanged)
@@ -394,8 +401,10 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Control::Press(TypePress press)
+Control *Control::Press(StructControl strControl)
 {
+    TypePress press = strControl.typePress;
+
     if(press == TypePress_LongPress && IsOpened())
     {
         return 0;
@@ -410,7 +419,7 @@ Control *Control::Press(TypePress press)
 
     if (type == Control_Choice)
     {
-        return ((Choice *)this)->Press(press);
+        return ((Choice *)this)->Press(strControl);
     }
     else if (type == Control_Button)
     {
@@ -494,7 +503,7 @@ PanelControl Control::ButtonForItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::Rotate(PanelControl control)
+void Choice::Rotate(PanelControl control)
 {
     if (type == Control_Choice)
     {

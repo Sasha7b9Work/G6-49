@@ -47,7 +47,7 @@ enum TypePress
 /// Хранит код органа управления и его состояние - если pressed == true, то кнопка находится в нажатом состоянии
 struct StructControl
 {
-    PanelControl control;
+    PanelControl key;
     TypePress    typePress;
 };
 

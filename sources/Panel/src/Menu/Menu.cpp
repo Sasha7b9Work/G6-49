@@ -58,7 +58,7 @@ void Menu::Update(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ProcessControl(StructControl strContr)
 {
-    PanelControl key = strContr.control;
+    PanelControl key = strContr.key;
     TypePress pressed = strContr.typePress;
 
     if (openedItem)
@@ -67,7 +67,7 @@ void Menu::ProcessControl(StructControl strContr)
 
         if (key == REG_LEFT || key == REG_RIGHT)
         {
-            openedItem->Rotate(key);
+            openedItem->Press(strContr);
         }
         else if (key == REG_BTN)
         {
@@ -77,7 +77,7 @@ void Menu::ProcessControl(StructControl strContr)
             }
             else
             {
-                openedItem->Press(pressed);
+                openedItem->Press(strContr);
             }
         }
         else if(key == B_ESC)
@@ -102,7 +102,7 @@ void Menu::ProcessControl(StructControl strContr)
 
     if (key >= B_F1 && key <= B_F5)
     {
-        openedItem = CurrentPage()->Item(key - B_F1)->Press(pressed);
+        openedItem = CurrentPage()->Item(key - B_F1)->Press(strContr);
     }
     else if (key == REG_LEFT)
     {
