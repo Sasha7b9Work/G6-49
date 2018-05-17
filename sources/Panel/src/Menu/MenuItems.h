@@ -38,7 +38,7 @@ enum TypeControl
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                           \
-    TypeControl        type;           /* Тип итема */                                                     \
+    TypeControl     type;           /* Тип итема */                                                     \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/        \
     bool            isPageSB;       /* Если true, то это страница малых кнопок */                       \
     NamePage        name;           /* Имя из перечисления NamePage */                                  \
@@ -48,21 +48,21 @@ enum TypeControl
 
 class PageBase;
 
-#define IS_PAGE(item)           (item->type == Control_Page)
-#define NOT_PAGE(item)          (item->type != Control_Page)
-#define IS_PAGE_SB(item)        (item->isPageSB)
-#define IS_CHOICE(item)         (item->type == Control_Choice)
-#define IS_CHOICE_REG(item)     (item->type == Control_ChoiceReg)
-#define NOT_CHOICE_REG(item)    (item->type != Control_ChoiceReg)
-#define IS_GOVERNOR(item)       (item->type == Control_Governor)
-#define NOT_GOVERNOR(item)      (item->type != Control_Governor)
-#define IS_GOVERNOR_COLOR(item) (item->type == Control_GovernorColor)
-#define IS_IP(item)             (item->type == Control_IP)
-#define IS_MAC(item)            (item->type == Control_MAC)
-#define IS_TIME(item)           (item->type == Control_Time)
+#define IS_PAGE(control)           (control->type == Control_Page)
+#define NOT_PAGE(control)          (control->type != Control_Page)
+#define IS_PAGE_SB(control)        (control->isPageSB)
+#define IS_CHOICE(control)         (control->type == Control_Choice)
+#define IS_CHOICE_REG(control)     (control->type == Control_ChoiceReg)
+#define NOT_CHOICE_REG(control)    (control->type != Control_ChoiceReg)
+#define IS_GOVERNOR(control)       (control->type == Control_Governor)
+#define NOT_GOVERNOR(control)      (control->type != Control_Governor)
+#define IS_GOVERNOR_COLOR(control) (control->type == Control_GovernorColor)
+#define IS_IP(control)             (control->type == Control_IP)
+#define IS_MAC(control)            (control->type == Control_MAC)
+#define IS_TIME(control)           (control->type == Control_Time)
     
-#define KEEPER(item)            ((PageBase *)item->keeper)
-#define IS_ACTIVE(item)         (item->funcOfActive())
+#define KEEPER(control)            ((PageBase *)control->keeper)
+#define IS_ACTIVE(control)         (control->funcOfActive())
 
 
 class Control
@@ -71,14 +71,14 @@ public:
     COMMON_PART_MENU_ITEM;
     /// Возвращает высоту в пикселях открытого элемента Choice или NamePage
     int HeightOpened() const;
-    /// @brief Возвращает true, если элемент меню item затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
+    /// @brief Возвращает true, если элемент меню control затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
     /// раскрывающийся элемент меню вроде Choice или Governor
     bool IsShade() const;
-    /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
+    /// Возвращает true, если кнопка, соответствующая элементу меню control, находится в нажатом положении
     bool IsPressed() const;
     /// Сделать/разделать текущим
     void SetCurrent(bool active);
-    /// Возвращает true, если элемент меню по адрему item открыт
+    /// Возвращает true, если элемент меню по адрему control открыт
     bool IsOpened() const;
 
     void Open(bool open);
