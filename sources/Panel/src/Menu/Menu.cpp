@@ -61,7 +61,27 @@ void Menu::ProcessControl(StructControl strContr)
     PanelControl key = strContr.control;
     TypePress pressed = strContr.typePress;
 
-    if (key == REG_LEFT)
+    if (openedItem)
+    {
+        if (key == REG_LEFT)
+        {
+            openedItem->Rotate(REG_LEFT);
+        }
+        else if (key == REG_RIGHT)
+        {
+            openedItem->Rotate(REG_RIGHT);
+        }
+        else if (key == REG_BTN)
+        {
+            openedItem->Press(pressed);
+        }
+    }
+
+    if (key >= B_F1 && key <= B_F5)
+    {
+        openedItem = CurrentPage()->Item(key - B_F1)->Press(pressed);
+    }
+    else if (key == REG_LEFT)
     {
         if (RegIsControlPages())
         {
@@ -69,10 +89,6 @@ void Menu::ProcessControl(StructControl strContr)
             {
                 --CURRENT_PAGE;
             }
-        }
-        else
-        {
-            Menu::OpenedItem()->Rotate(REG_LEFT);
         }
     }
     else if (key == REG_RIGHT)
@@ -84,22 +100,6 @@ void Menu::ProcessControl(StructControl strContr)
                 ++CURRENT_PAGE;
             }
         }
-        else
-        {
-            Menu::OpenedItem()->Rotate(REG_RIGHT);
-        }
-    }
-    else if(key == REG_BTN)
-    {
-        if(openedItem)
-        {
-            openedItem->Press(pressed);
-        }
-    }
-
-    if(key >= B_F1 && key <= B_F4)
-    {
-        openedItem = CurrentPage()->Item(key - B_F1)->Press(pressed);
     }
     else if (pressed == TypePress_Release || pressed == TypePress_LongPress)
     {
