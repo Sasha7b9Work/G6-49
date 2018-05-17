@@ -57,8 +57,12 @@ enum WaveParameter
 enum Type_WaveForm
 {
     Form_Sine,
-    Form_Saw,
+    Form_Cosine,
+    Form_Meander,
+    Form_SawPlus,
+    Form_SawMinus,
     Form_Impulse,
+    Form_Free,
     NumForms
 };
 
@@ -66,8 +70,8 @@ struct WaveForm
 {
     Type_WaveForm type;
     WaveForm(uint8 num = 0);
-    const char * Name();
-    uint8 ToValue();
+    const char * Name() const;
+    uint8 ToValue() const;
 };
 
 

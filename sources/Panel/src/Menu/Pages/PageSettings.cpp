@@ -35,21 +35,25 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static void SetWaveForm(Channel ch, WaveForm form)
 {
     set.sig_form[ch] = form;
     TuneGenerator(ch);
 }
+*/
 
 void PageSignals::OnPress_Form(bool)
 {
     WaveForm form = WaveForm(waveForm);
 
+    /*
     if (form.type == Form_Saw || form.type == Form_Impulse)
     {
         SetWaveForm(A, form);
         SetWaveForm(B, form);
     }
+    */
 
     WAVE_FORM = form;
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
