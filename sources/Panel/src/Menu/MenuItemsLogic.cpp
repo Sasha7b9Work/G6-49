@@ -404,8 +404,22 @@ void GovernorColor::ChangeValue(int delta)
 Control *Control::Press(StructControl strControl)
 {
     TypePress press = strControl.typePress;
+    PanelControl key = strControl.key;
 
-    if(press == TypePress_LongPress && IsOpened())
+    if(key == REG_BTN && press == TypePress_LongPress)
+    {
+        key = REG_BTN;
+    }
+
+    if(press == TypePress_LongPress)
+    {
+        if (IsOpened() || key == REG_BTN || key == B_ESC)
+        {
+            return 0;
+        }
+    }
+
+    if(key == B_ESC && (press == TypePress_Release || press == TypePress_LongPress))
     {
         return 0;
     }

@@ -63,28 +63,11 @@ void Menu::ProcessControl(StructControl strContr)
 
     if (openedItem)
     {
-        TypeControl type = openedItem->Type();
-
-        if (key == REG_LEFT || key == REG_RIGHT)
+        if (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC)
         {
-            openedItem->Press(strContr);
+            openedItem = openedItem->Press(strContr);
         }
-        else if (key == REG_BTN)
-        {
-            if(pressed == TypePress_LongPress)
-            {
-                openedItem = 0;
-            }
-            else
-            {
-                openedItem->Press(strContr);
-            }
-        }
-        else if(key == B_ESC)
-        {
-            openedItem = 0;
-        }
-        else if(type == Control_Choice)
+        else if(openedItem->Type() == Control_Choice)
         {
             if (pressed == TypePress_Release)
             {
