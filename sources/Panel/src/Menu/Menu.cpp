@@ -73,7 +73,14 @@ void Menu::ProcessControl(StructControl strContr)
         }
         else if (key == REG_BTN)
         {
-            openedItem->Press(pressed);
+            if(pressed == TypePress_LongPress)
+            {
+                openedItem = 0;
+            }
+            else
+            {
+                openedItem->Press(pressed);
+            }
         }
     }
 
@@ -103,14 +110,7 @@ void Menu::ProcessControl(StructControl strContr)
     }
     else if (pressed == TypePress_Release || pressed == TypePress_LongPress)
     {
-        if (Menu::OpenedItem() && pressed == TypePress_LongPress)
-        {
-            if (Menu::OpenedItem()->ButtonForItem())
-            {
-                openedItem = 0;
-            }
-        }
-        else if(key == B_ON1)
+        if(key == B_ON1)
         {
             CHANNEL_ENABLED_A = !CHANNEL_ENABLED_A;
             Generator::EnableChannel(A, CHANNEL_ENABLED_A);
