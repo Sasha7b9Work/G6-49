@@ -1,3 +1,4 @@
+#include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
@@ -13,9 +14,7 @@ void Control::Draw(bool opened, int x, int y) const
     }
     else if (type == Control_Button)
     {
-        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, Color::GREEN_10);
-        Painter::SetColor(Color::FILL);
-        Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, Title());
+        ((Button *)this)->Draw(x, y);
     }
     else if (type == Control_ChoiceParameter)
     {
@@ -35,8 +34,18 @@ void Control::Draw(bool opened, int x, int y) const
     }
     else
     {
-        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, Color::GREEN_25);
+        Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, Menu::OpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Button::Draw(int x, int y)
+{
+    bool isShade = IsShade();
+
+    Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, isShade ? Color::GRAY_10 : Color::GREEN_10);
+    Painter::SetColor(isShade ? Color::GRAY_25 : Color::FILL);
+    Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, Title());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
