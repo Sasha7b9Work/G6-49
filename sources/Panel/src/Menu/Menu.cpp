@@ -63,13 +63,11 @@ void Menu::ProcessControl(StructControl strContr)
 
     if (openedItem)
     {
-        if (key == REG_LEFT)
+        TypeControl type = openedItem->Type();
+
+        if (key == REG_LEFT || key == REG_RIGHT)
         {
-            openedItem->Rotate(REG_LEFT);
-        }
-        else if (key == REG_RIGHT)
-        {
-            openedItem->Rotate(REG_RIGHT);
+            openedItem->Rotate(key);
         }
         else if (key == REG_BTN)
         {
@@ -80,6 +78,24 @@ void Menu::ProcessControl(StructControl strContr)
             else
             {
                 openedItem->Press(pressed);
+            }
+        }
+        else if(key == B_ESC)
+        {
+            openedItem = 0;
+        }
+        else if(type == Control_Choice)
+        {
+            if (pressed == TypePress_Release)
+            {
+                if (key == B_LEFT)
+                {
+                    ((Choice *)openedItem)->StartChange(-1);
+                }
+                else if (key == B_RIGHT)
+                {
+                    ((Choice *)openedItem)->StartChange(1);
+                }
             }
         }
     }
