@@ -14,13 +14,13 @@ extern int8 gCurDigit;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *Choice::NameCurrentSubItem()
+const char *Choice::NameCurrentSubItem() const
 {
     return ((int8 *)cell == 0) ? "" : NAME_FROM_INDEX(*cell); // names[*((int8 *)cell)][LANG];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Choice::NameNextSubItem()
+const char *Choice::NameNextSubItem() const
 {
     if (cell == 0)
     {
@@ -37,7 +37,7 @@ const char *Choice::NameNextSubItem()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Choice::NamePrevSubItem()
+const char *Choice::NamePrevSubItem() const
 {
     if (cell == 0)
     {
@@ -65,7 +65,7 @@ Control *Page::Item(int numElement) const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Page::PosItemOnTop()
+int Page::PosItemOnTop() const
 {
     return CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
 }
@@ -104,13 +104,13 @@ void Page::ChangeSubPage(int delta)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Control::HeightOpened() const
 {
-    if (type == Item_Page)
+    if (type == Control_Page)
     {
         int numItems = ((const Page *)this)->NumItems() - ((Page *)this)->CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
         LIMITATION(numItems, 0, MENU_ITEMS_ON_DISPLAY);
         return MP_TITLE_HEIGHT + MI_HEIGHT * numItems;
     }
-    else if (type == Item_Choice || type == Item_ChoiceReg)
+    else if (type == Control_Choice || type == Control_ChoiceReg)
     {
         return MOI_HEIGHT_TITLE + ((Choice *)this)->NumSubItems() * MOSI_HEIGHT - 1;
     }
@@ -153,7 +153,7 @@ void Control::SetCurrent(bool active)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsOpened() const
 {
-    if (type == Item_Page)
+    if (type == Control_Page)
     {
         return keeper->CurrentItemIsOpened();
     }
@@ -181,23 +181,15 @@ bool Control::ChangeOpened(int delta)
         return false;
     }
 
-    if (type == Item_Page)
+    if (type == Control_Page)
     {
         ((Page *)this)->ChangeSubPage(delta);
     }
-    else if (type == Item_IP)
-    {
-        ((IPaddress *)this)->ChangeValue(delta);
-    }
-    else if (type == Item_MAC)
-    {
-        ((MACaddress *)this)->ChangeValue(delta);
-    }
-    else if (type == Item_ChoiceReg || type == Item_Choice)
+    else if (type == Control_ChoiceReg || type == Control_Choice)
     {
         ((Choice *)this)->ChangeIndex(delta);
     }
-    else if (type == Item_Governor)
+    else if (type == Control_Governor)
     {
         ((Governor *)this)->ChangeValue(delta);
     }
@@ -223,7 +215,7 @@ bool Page::CurrentItemIsOpened() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::ShortPress()
 {
-    if(type == Item_Choice)
+    if(type == Control_Choice)
     {
         Choice *choice = (Choice *)this;
         if(!IS_ACTIVE(this))
@@ -240,7 +232,7 @@ void Control::ShortPress()
             choice->ChangeIndex(-1);
         }
     }
-    else if(type == Item_Button)
+    else if(type == Control_Button)
     {
         if(IS_ACTIVE(this))
         {
@@ -248,12 +240,12 @@ void Control::ShortPress()
             ((Button *)this)->funcOnPress();
         }
     }
-    else if(type == Item_Page)
+    else if(type == Control_Page)
     {
         Page *page = (Page *)this;
         page->funcOnPress();
     }
-    else if(type == Item_Governor)
+    else if(type == Control_Governor)
     {
         if(IS_ACTIVE(this))
         {
@@ -268,7 +260,7 @@ void Control::ShortPress()
             }
         }
     }
-    else if(type == Item_Time)
+    else if(type == Control_Time)
     {
         Time *time = (Time *)this;
         if(!IsOpened())
@@ -282,14 +274,7 @@ void Control::ShortPress()
             time->SelectNextPosition();
         }
     }
-    else if(type == Item_IP)
-    {
-        if(Menu::OpenedItem() == this)
-        {
-            ((IPaddress *)this)->NextPosition();
-        }
-    }
-    else if(type == Item_GovernorColor)
+    else if(type == Control_GovernorColor)
     {
         if(IS_ACTIVE(this))
         {
@@ -308,14 +293,7 @@ void Control::ShortPress()
             }
         }
     }
-    else if(type == Item_MAC)
-    {
-        if(Menu::OpenedItem() == this)
-        {
-            CircleIncrease<int8>(&gCurDigit, 0, 5);
-        }
-    }
-    else if(type == Item_ChoiceReg)
+    else if(type == Control_ChoiceReg)
     {
         Choice *choice = (Choice *)this;
         if(IS_ACTIVE(this))
@@ -327,7 +305,7 @@ void Control::ShortPress()
             choice->funcOnChanged(false);
         }
     }
-    else if(type == Item_SmallButton)
+    else if(type == Control_SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
@@ -338,11 +316,11 @@ void Control::ShortPress()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::LongPress()
 {
-    if(type == Item_Button)
+    if(type == Control_Button)
     {
         ((Button *)this)->ShortPress();
     }
-    else if(type == Item_Time)
+    else if(type == Control_Time)
     {
         if(Menu::CurrentItem() != this)
         {
@@ -356,10 +334,10 @@ void Control::LongPress()
         Open(!IsOpened());
         time->SetOpened();
     }
-    else if(type == Item_Formula)
+    else if(type == Control_Formula)
     {
     }
-    else if(type == Item_SmallButton)
+    else if(type == Control_SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();

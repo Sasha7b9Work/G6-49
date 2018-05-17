@@ -68,13 +68,13 @@ void Menu::DrawOpenedItem()
 {
     if (OPENED_ITEM)
     {
-        TypeItem typeItem = ((Control *)OPENED_ITEM)->Type();
+        TypeControl typeItem = ((Control *)OPENED_ITEM)->Type();
 
-        if (typeItem == Item_Choice)
+        if (typeItem == Control_Choice)
         {
             ((Choice *)OPENED_ITEM)->Draw(true);
         }
-        else if (typeItem == Item_ChoiceParameter)
+        else if (typeItem == Control_ChoiceParameter)
         {
             ((Choice *)OPENED_ITEM)->Draw(true);
         }

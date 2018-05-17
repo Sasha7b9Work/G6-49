@@ -5,32 +5,32 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Control::Draw(int x, int y, bool)
+void Control::Draw(int x, int y, bool) const
 {
     bool pressed = IsPressed();
     bool opened = IsOpened();
 
-    if (type == Item_Choice)
+    if (type == Control_Choice)
     {
         Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : Color::GREEN_10);
         Painter::DrawText(x + 5, y + 5, Title(), pressed || opened ? Color::BACK : Color::FILL);
         Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, Color::GREEN_25);
         Painter::DrawTextRelativelyRight(315, y + 30, ((Choice *)this)->NameCurrentSubItem(), Color::BACK);
     }
-    else if (type == Item_Button)
+    else if (type == Control_Button)
     {
         Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, MI_HEIGHT - 4, Color::GREEN_10);
         Painter::SetColor(Color::FILL);
         Painter::DrawTextInRect(x + 5, y + 17, ITEM_WIDTH, Title());
     }
-    else if (type == Item_ChoiceParameter)
+    else if (type == Control_ChoiceParameter)
     {
         Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, Color::GREEN_10);
         Painter::DrawText(x + 5, y + 5, Title(), Color::FILL);
         Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, Color::GREEN_25);
         Painter::DrawTextRelativelyRight(315, y + 30, ((ChoiceParameter *)this)->CurrentName(), Color::BACK);
     }
-    else if (type == Item_SmallButton)
+    else if (type == Control_SmallButton)
     {
         int size = 23;
         x += 20;

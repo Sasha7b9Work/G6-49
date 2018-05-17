@@ -35,7 +35,7 @@ typedef enum
 /// Структура используется для анимации элементов ГУИ Choice и Governor
 typedef struct
 {
-    void       *address;    ///< Адрес элемента. Если 0 - не движется
+    const void *address;    ///< Адрес элемента. Если 0 - не движется
     uint        timeStart;  ///< Время начала анимации в миллисекундах
     DIRECTION   dir;        ///< Направление изменения значения
     uint8       notUsed0;
@@ -49,9 +49,8 @@ static TimeStruct tsGovernor = {0, 0, NONE, 0, 0, 0};
 int8 gCurDigit = 0;
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::StartChange(int delta)
+void Choice::StartChange(int delta) const
 {
     if (tsChoice.address != 0)
     {
@@ -182,13 +181,13 @@ void Governor::StartChange(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int16 Governor::NextValue()
+int16 Governor::NextValue() const
 {
     return ((*cell) < maxValue) ? ((*cell) + 1) : minValue;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int16 Governor::PrevValue()
+int16 Governor::PrevValue() const
 {
     return ((*cell) > minValue) ? ((*cell) - 1) : maxValue;
 }
@@ -268,7 +267,7 @@ void Governor::NextPosition()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Governor::NumDigits()
+int Governor::NumDigits() const
 {
     int min = SU::NumDigitsInNumber(Abs(minValue));
     int max = SU::NumDigitsInNumber(Abs(maxValue));
@@ -361,14 +360,6 @@ void Time::SelectNextPosition()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void MACaddress::ChangeValue(int delta)
-{
-    uint8 *value = mac0 + gCurDigit;
-    *value += delta > 0 ? 1 : -1;
-    DISPLAY_SHOW_WARNING(NeedRebootDevice);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Time::DecCurrentPosition()
 {
     static const int8 max[] = {0, 31, 12, 99, 23, 59, 59};
@@ -401,66 +392,6 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void IPaddress::NextPosition()
-{
-    CircleIncrease<int8>(&gCurDigit, 0, port == 0 ? 11 : 16);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void IPaddress::ChangeValue(int delta)
-{
-    int numByte = 0;
-    int numPos = 0;
-
-    GetNumPosIPvalue(&numByte, &numPos);
-
-    int oldValue = 0;
-
-    if (numByte < 4)
-    {
-        uint8 *bytes = ip0;
-        oldValue = bytes[numByte];
-    }
-    else
-    {
-        oldValue = *port;
-    }
-
-    int newValue = oldValue + Sign(delta) * Pow10(numPos);
-    LIMITATION(newValue, 0, numByte == 4 ? 65535 : 255);
-
-    if (oldValue != newValue)
-    {
-        if (numByte == 4)
-        {
-            *port = (uint16)newValue;
-        }
-        else
-        {
-            ip0[numByte] = (uint8)newValue;
-        }
-        DISPLAY_SHOW_WARNING(NeedRebootDevice);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void IPaddress::GetNumPosIPvalue(int *numIP, int *selPos)
-{
-    if (gCurDigit < 12)
-    {
-        *numIP = gCurDigit / 3;
-        *selPos = 2 - (gCurDigit - (*numIP * 3));
-    }
-    else
-    {
-        *numIP = 4;
-        *selPos = 4 - (gCurDigit - 12);
-    }
-
-
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::Press(TypePress press)
 {
     Menu::itemUnderKey = press == TypePress_Press && !IsOpened() ? this : 0;
@@ -471,19 +402,19 @@ void Control::Press(TypePress press)
     }
     else
     {
-        if (type == Item_Choice)
+        if (type == Control_Choice)
         {
             ((Choice *)this)->Press(press);
         }
-        else if (type == Item_Button)
+        else if (type == Control_Button)
         {
             ((Button *)this)->Press(press);
         }
-        else if (type == Item_ChoiceParameter)
+        else if (type == Control_ChoiceParameter)
         {
             ((ChoiceParameter *)this)->Press(press);
         }
-        else if (type == Item_SmallButton)
+        else if (type == Control_SmallButton)
         {
             ((SButton *)this)->Press(press);
         }
@@ -491,7 +422,7 @@ void Control::Press(TypePress press)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-TypeItem Control::Type()
+TypeControl Control::Type() const
 {
     return type;
 }
@@ -501,11 +432,11 @@ int Choice::CurrentChoice() const
 {
     int retValue = 0;
 
-    if (type == Item_Choice)
+    if (type == Control_Choice)
     {
         retValue = *cell;
     }
-    else if (type == Item_ChoiceParameter)
+    else if (type == Control_ChoiceParameter)
     {
         ChoiceParameter *param = (ChoiceParameter *)this;
 
@@ -543,7 +474,7 @@ int Control::PositionOnPage() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-PanelControl Control::ButtonForItem()
+PanelControl Control::ButtonForItem() const
 {
     int pos = PositionOnPage();
 
@@ -558,7 +489,7 @@ PanelControl Control::ButtonForItem()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Control::Rotate(PanelControl control)
 {
-    if (type == Item_Choice)
+    if (type == Control_Choice)
     {
         Choice *choice = (Choice *)this;
 
@@ -624,7 +555,7 @@ void Button::Press(TypePress press)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString ChoiceParameter::NameSubItem(int number)
+pString ChoiceParameter::NameSubItem(int number) const
 {
     const char * retValue = 0;
     for (int i = 0; i < NumParameters; i++)
@@ -649,13 +580,13 @@ const char* Parameter_Name(WaveParameter parameter)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString ChoiceParameter::CurrentName()
+pString ChoiceParameter::CurrentName() const
 {
     return (const char*)(nameParameter[*numParameter][LANG]);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *Control::FullPath()
+char *Control::FullPath() const
 {
     const PageBase *parent = keeper;
 

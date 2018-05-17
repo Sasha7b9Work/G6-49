@@ -30,7 +30,7 @@ public:
     /// если ни одна кнопка не нажата.
     static Control *itemUnderKey;
 
-    static void SetItemForHint(void *item);
+    static void SetItemForHint(const void *item);
     /// Возвращает адрес текущую страницу
     static Page* CurrentPage();
 private:

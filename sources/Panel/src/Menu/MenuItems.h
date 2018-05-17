@@ -19,28 +19,26 @@ extern int8 gCurDigit;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Разные виды пунктов меню
-enum TypeItem
+enum TypeControl
 {
-    Item_None,           
-    Item_Choice,        ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
-    Item_Button,        ///< Кнопка.
-    Item_Page,          ///< Страница.
-    Item_Governor,      ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
-    Item_Time,          ///< Позволяет ввести время.
-    Item_IP,            ///< Позволяет ввести IP-адрес.
-    Item_GovernorColor, ///< Позволяет выбрать цвет.
-    Item_Formula,       ///< Позволяет выбрать знак и коэффициенты для математической формулы (умножение и сложение)
-    Item_MAC,           ///< MAC-адрес
-    Item_ChoiceReg,     ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
-    Item_SmallButton,   ///< Кнопка для режима малых кнопок
-    Item_ChoiceParameter,
-    Item_NumberItems
+    Control_None,           
+    Control_Choice,        ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
+    Control_Button,        ///< Кнопка.
+    Control_Page,          ///< Страница.
+    Control_Governor,      ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
+    Control_Time,          ///< Позволяет ввести время.
+    Control_GovernorColor, ///< Позволяет выбрать цвет.
+    Control_Formula,       ///< Позволяет выбрать знак и коэффициенты для математической формулы (умножение и сложение)
+    Control_ChoiceReg,     ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
+    Control_SmallButton,   ///< Кнопка для режима малых кнопок
+    Control_ChoiceParameter,
+    Control_NumberItems
 };
 
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                           \
-    TypeItem        type;           /* Тип итема */                                                     \
+    TypeControl        type;           /* Тип итема */                                                     \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/        \
     bool            isPageSB;       /* Если true, то это страница малых кнопок */                       \
     NamePage        name;           /* Имя из перечисления NamePage */                                  \
@@ -50,18 +48,18 @@ enum TypeItem
 
 class PageBase;
 
-#define IS_PAGE(item)           (item->type == Item_Page)
-#define NOT_PAGE(item)          (item->type != Item_Page)
+#define IS_PAGE(item)           (item->type == Control_Page)
+#define NOT_PAGE(item)          (item->type != Control_Page)
 #define IS_PAGE_SB(item)        (item->isPageSB)
-#define IS_CHOICE(item)         (item->type == Item_Choice)
-#define IS_CHOICE_REG(item)     (item->type == Item_ChoiceReg)
-#define NOT_CHOICE_REG(item)    (item->type != Item_ChoiceReg)
-#define IS_GOVERNOR(item)       (item->type == Item_Governor)
-#define NOT_GOVERNOR(item)      (item->type != Item_Governor)
-#define IS_GOVERNOR_COLOR(item) (item->type == Item_GovernorColor)
-#define IS_IP(item)             (item->type == Item_IP)
-#define IS_MAC(item)            (item->type == Item_MAC)
-#define IS_TIME(item)           (item->type == Item_Time)
+#define IS_CHOICE(item)         (item->type == Control_Choice)
+#define IS_CHOICE_REG(item)     (item->type == Control_ChoiceReg)
+#define NOT_CHOICE_REG(item)    (item->type != Control_ChoiceReg)
+#define IS_GOVERNOR(item)       (item->type == Control_Governor)
+#define NOT_GOVERNOR(item)      (item->type != Control_Governor)
+#define IS_GOVERNOR_COLOR(item) (item->type == Control_GovernorColor)
+#define IS_IP(item)             (item->type == Control_IP)
+#define IS_MAC(item)            (item->type == Control_MAC)
+#define IS_TIME(item)           (item->type == Control_Time)
     
 #define KEEPER(item)            ((PageBase *)item->keeper)
 #define IS_ACTIVE(item)         (item->funcOfActive())
@@ -93,20 +91,20 @@ public:
     /// Вызывается при "длинном" нажатии
     void LongPress();
 
-    void Draw(int x, int y, bool opened);
+    void Draw(int x, int y, bool opened) const;
 
     void Press(TypePress press);
 
-    TypeItem Type();
+    TypeControl Type() const;
 
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage() const;
     /// Возвращает функциональную клавишу, назначенную пункту меню
-    PanelControl ButtonForItem();
+    PanelControl ButtonForItem() const;
 
     void Rotate(PanelControl control);
     /// Возвращает полный путь к элементу меню
-    char *FullPath();
+    char *FullPath() const;
 };
 
 
@@ -162,7 +160,7 @@ public:
     Control *Item(int numElement) const;
     /// \brief Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
     /// подстраница 1, это будет 5 и т.д.
-    int PosItemOnTop();
+    int PosItemOnTop() const;
     /// Вызывает функцию короткого нажатия кнопки над итемом numItem страницы page
     void ShortPressOnItem(int numItem);
     /// Возвращает позицию текущего элемента странцы page
@@ -279,9 +277,9 @@ public:
     /// Запускает процессс анимации инкремента или декремента элемента меню типа Governor (в зависимости от знака delta).
     void StartChange(int detla);
     /// Возвращает следующее большее значение, которое может принять governor.
-    int16 NextValue();
+    int16 NextValue() const;
     /// Возвращает следующее меньшее значение, которое может принять governor.
-    int16 PrevValue();
+    int16 PrevValue() const;
     /// Рассчитывате следующий кадр анимации.
     float Step();
     /// Изменяет значение в текущей позиции при раскрытом элементе.
@@ -289,7 +287,7 @@ public:
     /// При открытом элементе переставляет курсор на следующую позицию.
     void NextPosition();
     /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
-    int  NumDigits();
+    int  NumDigits() const;
     /// Возвращает изображение регулятора, соответствующее его текущему положению
     static char GetSymbol(int value);
 };
@@ -321,7 +319,7 @@ public:
     /// Функция вызывается после отрисовки элемента. 
     pFuncVII funcForDraw;
 
-    void  StartChange(int delta);
+    void  StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
     float Step();
     /// Изменяет значение choice в зависимости от величины и знака delta.
@@ -331,13 +329,13 @@ public:
 
     void  Draw(bool opened, int x = -1, int y = -1) const;
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameCurrentSubItem();
+    const char *NameCurrentSubItem() const;
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameNextSubItem();
+    const char *NameNextSubItem() const;
     /// Возвращает высоту раскрытого
     int GetHeightOpened() const;
 
-    const char *NamePrevSubItem();
+    const char *NamePrevSubItem() const;
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     const char *NameSubItem(int i) const;
 
@@ -370,68 +368,10 @@ public:
     AllowableParameters  allowParameters;
     uint8               *numParameter;
     void    Press(TypePress press);
-    pString NameSubItem(int num);
-    pString CurrentName();
+    pString NameSubItem(int num) const;
+    pString CurrentName() const;
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// IPaddress ///
-class IPaddressBase
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    uint8 *ip0;
-    uint8 *ip1;
-    uint8 *ip2;
-    uint8 *ip3;
-    pFuncVB funcOfChanged;
-    uint16 *port;
-};
-
-class IPaddress : public Control
-{
-public:
-    uint8 *ip0;
-    uint8 *ip1;
-    uint8 *ip2;
-    uint8 *ip3;
-
-    pFuncVB funcOfChanged;
-
-    uint16 *port;
-    /// При открытом элементе переставляет курсор на следующую позицию.
-    void NextPosition();
-    /// Изменяет значение в текущей позиции при открытом элементе.
-    void ChangeValue(int delta);
-    /// Возвращает номер текущего байта (4 - номер порта) и номер текущей позиции в байте.
-    void GetNumPosIPvalue(int *numIP, int *selPos);
-};
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// MACaddress ///
-class MACaddressBase
-{
-public:
-    COMMON_PART_MENU_ITEM;
-    uint8 *mac0;
-    uint8 *mac1;
-    uint8 *mac2;
-    uint8 *mac3;
-    uint8 *mac4;
-    uint8 *mac5;
-    pFuncVB funcOfChanged;
-};
-
-class MACaddress : public Control
-{
-public:
-    uint8 *mac0;
-    uint8 *mac1;
-    uint8 *mac2;
-    uint8 *mac3;
-    uint8 *mac4;
-    uint8 *mac5;
-    pFuncVB funcOfChanged;
-    void ChangeValue(int delta);
-};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Formula ////
 
