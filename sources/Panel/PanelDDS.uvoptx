@@ -138,7 +138,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>/</Name>
+          <Name>Мф0</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -187,9 +187,9 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>660</LineNumber>
+          <LineNumber>411</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134245706</Address>
+          <Address>134244864</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -198,7 +198,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Menu\MenuItemsLogic.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Menu/MenuItemsLogic.cpp\660</Expression>
+          <Expression>\\PanelDDS\src/Menu/MenuItemsLogic.cpp\411</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

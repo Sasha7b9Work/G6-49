@@ -75,8 +75,8 @@ void Choice::StartChange(int delta) const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float Choice::Step()
 {
-    static const float speed = 0.1f;
-    static const int numLines = 12;
+    static const float speed = 0.3f;
+    static const int numLines = 60;
     if (tsChoice.address == this)
     {
         float delta = speed * (TIME_MS - tsChoice.timeStart);

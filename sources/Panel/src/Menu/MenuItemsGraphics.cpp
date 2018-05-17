@@ -1,6 +1,7 @@
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Display/DisplayTypes.h"
+#include "Display/Font/Font.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 
@@ -76,7 +77,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Choice::Draw(bool opened, int x, int y)
 {
-    Step();
+    int step = (int)(Step() + 0.5f);
 
     if(opened)
     {
@@ -125,6 +126,27 @@ void Choice::Draw(bool opened, int x, int y)
         Painter::FillRegion(x + 2, y + 2, ITEM_WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
         Painter::DrawText(x + 5, y + 5, Title(), pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, ITEM_WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
-        Painter::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
+        Painter::SetColor(Color::BACK);
+        if (step == 0.0f)
+        {
+            Painter::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem());
+        }
+        else
+        {
+            int x0 = 315 - step;
+
+            Painter::DrawTextRelativelyRight(x0, y + 30, NameCurrentSubItem());
+
+            int length = Font::GetLengthText(NameNextSubItem());
+
+            if (x0 + length > x + ITEM_WIDTH - 5)
+            {
+                Painter::DrawText(x0, y + 30, NameNextSubItem());
+            }
+            else
+            {
+                Painter::DrawTextRelativelyRight(315, y + 30, NameNextSubItem());
+            }
+        }
     }
 }
