@@ -108,7 +108,7 @@ StructControl CPU::Keyboard::GetNextControl()
 
     if (BufferIsEmpty())
     {
-        retValue.control = B_None;
+        retValue.key = B_None;
     }
     else
     {
@@ -210,7 +210,7 @@ void CPU::Keyboard::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::FillCommand(PanelControl control, TypePress typePress)
 {
-    commands[pointer].control = control;
+    commands[pointer].key = control;
     commands[pointer++].typePress = typePress;
 }
 

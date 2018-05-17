@@ -140,7 +140,7 @@ void Display::DrawSignalUGO(Channel chan, int y0)
             Painter::RunDisplay();
         }
     }
-    else if (form.type == Form_Saw)
+    else if (form.type == Form_SawPlus)
     {
         int dX = 30;
         for (int x = x0; x < x0 + 80; x += dX)
