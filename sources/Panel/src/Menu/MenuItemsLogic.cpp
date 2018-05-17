@@ -119,25 +119,13 @@ Control *Choice::Press(StructControl strControl)
     TypePress press = strControl.typePress;
     PanelControl key = strControl.key;
 
-    if(key == B_LEFT)
+    if(key == B_LEFT && press == TypePress_Release || key == REG_RIGHT)
     {
         StartChange(-1);
     }
-    else if(key == B_RIGHT)
+    else if(key == B_RIGHT && press == TypePress_Release || key == REG_LEFT || press == TypePress_Release)
     {
         StartChange(1);
-    }
-    else if (key == REG_LEFT || key == REG_RIGHT)
-    {
-        Rotate(key);
-    }
-    else if(press == TypePress_Release)
-    {
-        CircleIncrease<int8>(cell, 0, (int8)(NumSubItems() - 1));
-        if(funcOnChanged)
-        {
-            funcOnChanged(true);
-        }
     }
     else if(press == TypePress_LongPress)
     {

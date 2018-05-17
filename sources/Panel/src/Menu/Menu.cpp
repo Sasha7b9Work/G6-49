@@ -61,12 +61,9 @@ void Menu::ProcessControl(StructControl strContr)
     PanelControl key = strContr.key;
     TypePress pressed = strContr.typePress;
 
-    if (openedItem)
+    if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
     {
-        if (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT)
-        {
-            openedItem = openedItem->Press(strContr);
-        }
+        openedItem = openedItem->Press(strContr);
     }
 
     if (key >= B_F1 && key <= B_F5)

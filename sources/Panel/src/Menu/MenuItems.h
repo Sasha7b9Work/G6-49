@@ -325,7 +325,7 @@ public:
     /// Возвращает количество вариантов выбора в элементе по адресу choice
     int   NumSubItems() const;
 
-    void  Draw(bool opened, int x = -1, int y = -1) const;
+    void  Draw(bool opened, int x = -1, int y = -1);
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameCurrentSubItem() const;
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы

@@ -74,8 +74,10 @@ void ChoiceParameter::Draw(bool opened, int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::Draw(bool opened, int x, int y) const
+void Choice::Draw(bool opened, int x, int y)
 {
+    Step();
+
     if(opened)
     {
         int width = ITEM_WIDTH;
