@@ -28,6 +28,8 @@ public:
     static void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
 
     static void DrawTextInRect(int x, int y, int width, const char *text);
+    /// Пишет строку в позиции x, y
+    static int DrawFormText(int x, int y, Color color, pString text, ...);
 
 private:
 

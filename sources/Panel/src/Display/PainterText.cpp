@@ -16,17 +16,7 @@
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 extern void CalculateCurrentColor();
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
-{
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
-    va_start(args, text);
-    vsprintf(buffer, text, args);
-    va_end(args);
-    return Text::DrawText(x, y, buffer, color);
-}
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)

@@ -2,6 +2,8 @@
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
 #include "Utils/Math.h"
+#include <stdarg.h>
+#include <stdio.h>
 #include <string.h>
 
 
@@ -577,4 +579,16 @@ int Text::DrawSpaces(int x, int y, const char *text, int *numSymbols)
         (*numSymbols)++;
     }
     return x;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawFormText(int x, int y, Color color, pString text, ...)
+{
+#define SIZE_BUFFER_DRAW_FORM_TEXT 200
+    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
+    va_list args;
+    va_start(args, text);
+    vsprintf(buffer, text, args);
+    va_end(args);
+    return DrawText(x, y, buffer, color);
 }
