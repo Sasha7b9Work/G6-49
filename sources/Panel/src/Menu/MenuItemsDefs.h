@@ -185,8 +185,9 @@ static const SButtonBase name = { Control_SmallButton, 0, false, Page_NoPage, &k
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_CHOICE_2(name, titleRU, titleEN, hintRU, hintEN, nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2, cell, keeper,  \
-    funcActive, funcChanged, funcDraw)                                                                                                              \
+#define DEF_CHOICE_2(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
+    nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2,                                                                         \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2};                                                                                \
 static pString hints##name##Ru[] = {hintRu1, hintRu2};                                                                                              \
 static pString hints##name##En[] = {hintEn1, hintEn2};                                                                                              \
@@ -194,33 +195,44 @@ static const ChoiceBase name = { Control_Choice, 2, false, Page_NoPage, &keeper,
     (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_3(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
-    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, cell, keeper, funcActive, funcChanged, funcDraw)                                          \
+    nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2, nameRu3, nameEn3, hintRu3, hintEn3,                                     \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3};                                                              \
-static const ChoiceBase name = { Control_Choice, 3, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,     \
-    hints##name, funcChanged, funcDraw};
+static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3};                                                                                     \
+static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3};                                                                                     \
+static const ChoiceBase name = { Control_Choice, 3, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+    (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_4(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
-    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, cell, keeper, funcActive, funcChanged, funcDraw)                        \
+    nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2, nameRu3, nameEn3, hintRu3, hintEn3, nameRu4, nameEn4, hintRu4, hintEn4, \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4};                                            \
-static const ChoiceBase name = { Control_Choice, 4, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,     \
-    hints##name, funcChanged, funcDraw};
+static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4};                                                                            \
+static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4};                                                                            \
+static const ChoiceBase name = { Control_Choice, 4, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+    (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_5(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
     nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2, nameRu3, nameEn3, hintRu3, hintEn3, nameRu4, nameEn4, hintRu4, hintEn4, \
-    nameRu5, nameEn5, hintRu5, hintEn5, cell, keeper, funcActive, funcChanged, funcDraw)                                                            \
+    nameRu5, nameEn5, hintRu5, hintEn5,                                                                                                             \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
     nameRu5, nameEn5};                                                                                                                              \
 static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4, hintRu5};                                                                   \
 static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5};                                                                   \
-static const ChoiceBase name = { Control_Choice, 5, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,     \
-    hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
+static const ChoiceBase name = { Control_Choice, 5, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+    (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
-#define DEF_CHOICE_6(name, titleRU, titleEN, hintRU, hintEN,nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4,                          \
-    nameEn4, nameRu5, nameEn5, nameRu6, nameEn6, cell, keeper, funcActive, funcChanged, funcDraw)                                                   \
+#define DEF_CHOICE_6(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
+    nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2, nameRu3, nameEn3, hintRu3, hintEn3, nameRu4, nameEn4, hintRu4, hintEn4, \
+    nameRu5, nameEn5, hintRu5, hintEn5, nameRu6, nameEn6, hintRu6, hintEn6,                                                                         \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
     nameRu5, nameEn5, nameRu6, nameEn6};                                                                                                            \
-static const ChoiceBase name = { Control_Choice, 6, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,     \
-    hints##name, funcChanged, funcDraw};
+static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4, hintRu5, hintRu6};                                                          \
+static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5, hintEn6};                                                          \
+static const ChoiceBase name = { Control_Choice, 6, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+    (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_7(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
     nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2, nameRu3, nameEn3, hintRu3, hintEn3, nameRu4, nameEn4, hintRu4, hintEn4, \
@@ -230,29 +242,34 @@ static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nam
     nameEn4, nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7};                                                                                 \
 static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4, hintRu5, hintRu6, hintRu7};                                                 \
 static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5, hintEn6, hintEn7};                                                 \
-static const ChoiceBase name = { Control_Choice, 7, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,     \
-    hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
+static const ChoiceBase name = { Control_Choice, 7, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+    (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_8(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
-    nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                       \
-    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, cell, keeper, funcActive, funcChanged, funcDraw)                                          \
+    nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2, nameRu3, nameEn3, hintRu3, hintEn3, nameRu4, nameEn4, hintRu4, hintEn4, \
+    nameRu5, nameEn5, hintRu5, hintEn5, nameRu6, nameEn6, hintR61, hintEn6, nameRu7, nameEn7, hintRu7, hintEn7, nameRu8, nameEn8, hintRu8, hintEn8, \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
     nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8};                                                                        \
-static const ChoiceBase name = { Control_Choice, 8, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,     \
-    hints##name, funcChanged, funcDraw};
+static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4, hintRu5, hintRu6, hintRu7, hintRu8};                                        \
+static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5, hintEn6, hintEn7, hintEn8};                                        \
+static const ChoiceBase name = { Control_Choice, 8, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+    (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_REG_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                    \
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                       \
-    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, cell, keeper, funcActive, funcChanged, funcDraw)                        \
+    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9,                                                                         \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
     nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9};                                                      \
-static const ChoiceBase name = { Control_ChoiceReg, 9, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell,  \
-    hints##name, funcChanged, funcDraw};
+static const ChoiceBase name = { Control_ChoiceReg, 9, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                 \
+    (int8 *)&cell, hints##name, funcChanged, funcDraw};
 
 #define DEF_CHOICE_REG_10(name, titleRU, titleEN, hintRU, hintEN,                                                                                   \
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                       \
-    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10, cell, keeper, funcActive, funcChanged, funcDraw)    \
+    nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10,                                                     \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
     nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10};                                  \
-static const ChoiceBase name = { Control_ChoiceReg, 10, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN}, (int8 *)&cell, \
-    hints##name, funcChanged, funcDraw};
+static const ChoiceBase name = { Control_ChoiceReg, 10, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                \
+    (int8 *)&cell, hints##name, funcChanged, funcDraw};
