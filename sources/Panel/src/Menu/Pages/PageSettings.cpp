@@ -61,13 +61,17 @@ void PageSignals::OnPress_Form(bool)
     TuneGenerator(CURRENT_CHANNEL);
 }
 
-DEF_CHOICE_3( cForm,                                                                                              //--- мюярпнийх яхцмюкнб - тнплю ---
+DEF_CHOICE_7( cForm,                                                                                              //--- мюярпнийх яхцмюкнб - тнплю ---
     "тнплю", "FORM",
     "бШАНП ТНПЛШ ЯХЦМЮКЮ",
     "Select waveform",
-    "яхмся",   "SINE",
-    "охкю",    "SAW",
-    "хлоскэя", "IMPULSE",
+    "яхмся",        "SINE",
+    "йняхмся",      "COSINE",
+    "леюмдп",       "MEANDER",
+    "охкю+",        "SAW+",
+    "охкю-",        "SAW-",
+    "хлоскэя",      "IMPULSE",
+    "опнхгбнкэмши", "FREE",
     waveForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 

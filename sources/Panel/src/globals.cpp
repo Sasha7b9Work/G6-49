@@ -3,5 +3,5 @@
 
 volatile BitField gBF =
 {
-    0
+    0       // showHints
 };

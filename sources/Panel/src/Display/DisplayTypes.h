@@ -17,11 +17,11 @@
 #endif
 
 #define MP_TITLE_HEIGHT 18
-#define ITEM_WIDTH      69
+#define MI_WIDTH      69
 #define MI_HEIGHT       55
 #define MI_TITLE_HEIGHT 12
 #define SIGNAL_HEIGHT   (FREQ_COUNTER_ENABLED ? ((SCREEN_HEIGHT - MP_TITLE_HEIGHT) / 2 - 10) :  ((SCREEN_HEIGHT - MP_TITLE_HEIGHT) / 2))
-#define SIGNAL_WIDTH    ((SCREEN_WIDTH - ITEM_WIDTH) - 1)
+#define SIGNAL_WIDTH    ((SCREEN_WIDTH - MI_WIDTH) - 1)
 
 #define MOI_HEIGHT_TITLE        19
 #define MOSI_HEIGHT             14

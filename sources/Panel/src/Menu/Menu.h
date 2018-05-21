@@ -29,10 +29,10 @@ public:
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
     static Control *itemUnderKey;
-
-    static void SetItemForHint(const void *item);
     /// Возвращает адрес текущую страницу
     static Page* CurrentPage();
+
+    static Control *ItemHint();
 private:
 
     static void DrawTitle();
@@ -42,4 +42,6 @@ private:
     static void ProcessControl(StructControl control);
 
     static Control *openedItem;
+    /// Контрол, для которого нужно выводить подсказку
+    static Control *itemHint;
 };

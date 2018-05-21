@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "globals.h"
 #include "Display.h"
 #include "DisplayTypes.h"
 #include "Display/Painter.h"
@@ -80,6 +81,8 @@ void Display::Update()
 
     CPU::Keyboard::Draw();
 
+    DrawHint();
+
     Painter::EndScene();
 
     timeFrame = (int)(TIME_MS - timeStart);
@@ -97,11 +100,11 @@ void Display::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DrawSignal(Channel ch)
 {
+    int y0 = (ch == A) ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
+    Painter::FillRegion(0 + 1, y0 + 1, SIGNAL_WIDTH - 2, SIGNAL_HEIGHT - 2, Color::GREEN_5);
     if (CHANNEL_ENABLED(ch))
     {
-        int y0 = (ch == A) ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
         Painter::DrawRectangle(0, y0, SIGNAL_WIDTH, SIGNAL_HEIGHT, Color::FILL);
-        Painter::FillRegion(0 + 1, y0 + 1, SIGNAL_WIDTH - 2, SIGNAL_HEIGHT - 2, Color::GREEN_5);
         Painter::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2", Color::FILL);
         DrawSignalUGO(ch, y0);
         DrawSignalParameters(ch, y0);
@@ -296,5 +299,23 @@ void Display::ShowStatistics()
         strcat(buffer, "/");
         strcat(buffer, Int2String(timeAllFrames, false, 3));
         Painter::DrawText(2, SCREEN_HEIGHT - 11, buffer, Color::FILL);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Display::DrawHint()
+{
+    if(IN_MODE_SHOW_HINTS)
+    {
+        int x0 = 0;
+        int y0 = MP_TITLE_HEIGHT;
+        int width = 319 - MI_WIDTH;
+
+        Painter::DrawTextInBoundedRectWithTransfers(x0, y0, width, "бйкчв╗м пефхл ондяйюгнй.\nдкъ онксвемхъ хмтнплюжхх он щкелемрс лемч хкх мюгмювемхч ймнойх "
+        "хяонкэгсире яннрберярбсчыхи нпцюм сопюбкемхъ.", Color::BACK, Color::FILL);
+
+        if(Menu::ItemHint())
+        {
+        }
     }
 }

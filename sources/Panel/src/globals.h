@@ -2,14 +2,12 @@
 #include "defines.h"
 
 
-#define HINT_MODE_ENABLED false
-#define SHOW_DEBUG_MENU   true
-#define NEED_FINISH_DRAW  (gBF.needFinishDraw)
+#define IN_MODE_SHOW_HINTS (gBF.showHints)
 
 
 struct BitField
 {
-    uint needFinishDraw;    ///< Если 1, то нужно немедленно завершить отрисовку и вывести на экран то, что уже нарисовано.
+    uint showHints : 1;     ///< Установленное в 1 значение означает, что прибор находится режиме показа подсказок
 };
 
 extern volatile BitField gBF;

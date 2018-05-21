@@ -14,9 +14,9 @@ void Menu::Draw()
 
     for (int i = 0; i < 4; i++)
     {
-        int x = SCREEN_WIDTH - ITEM_WIDTH - 1;
+        int x = SCREEN_WIDTH - MI_WIDTH - 1;
         int y = MP_TITLE_HEIGHT + i * MI_HEIGHT;
-        Painter::DrawRectangle(x, y, ITEM_WIDTH, MI_HEIGHT, Color::FILL);
+        Painter::DrawRectangle(x, y, MI_WIDTH, MI_HEIGHT, Color::FILL);
         CurrentPage()->Item(i)->Draw(false, x, y);
     }
 

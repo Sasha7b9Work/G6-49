@@ -36,7 +36,7 @@ def CalculateWidth(num_symbol):
     if num_symbol >= 16 and num_symbol < 32:
         return num_symbol - 16
     if num_symbol == 32:
-        return 2
+        return 5
     retValue = 0;
     for num_byte in range(8):
         byte = symbols[num_symbol * 8 + num_byte]

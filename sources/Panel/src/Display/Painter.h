@@ -66,6 +66,8 @@ public:
 
     static bool SaveScreenToFlashDrive();
 
+    /************** Функции работы с текстом ************************/
+
     static void SetFont(TypeFont typeFont);
 
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);

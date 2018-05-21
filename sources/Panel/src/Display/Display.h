@@ -37,6 +37,8 @@ private:
     static void DrawFrequencyCounter();
 
     static void ShowStatistics();
+    /// Написать подсказку
+    static void DrawHint();
 
     static const int STRING_IN_CONSOLE = 29;
 

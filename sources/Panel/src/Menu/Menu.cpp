@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "globals.h"
 #include "Menu/MenuItems.h"
 #include "Display/InputWindow.h"
 #include "Display/InputWindowStruct.h"
@@ -17,9 +18,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Control *Menu::itemUnderKey = 0;
 Control *Menu::openedItem = 0;
+Control *Menu::itemHint = 0;
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Page *menu[NUM_PAGES] =
 {
     PageSignals::pointer,
@@ -36,6 +36,12 @@ void Menu::Init(void)
 {
     PageSignals::Init();
     PageSignals::OnPress_Form();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Control *Menu::ItemHint()
+{
+    return itemHint;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -61,12 +67,21 @@ void Menu::ProcessControl(StructControl strContr)
     PanelControl key = strContr.key;
     TypePress pressed = strContr.typePress;
 
-    if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
+    if(key == B_ESC && pressed == TypePress_LongPress)
+    {
+        IN_MODE_SHOW_HINTS++;
+        itemHint = 0;
+    }
+    
+    if(IN_MODE_SHOW_HINTS)
+    {
+
+    }
+    else if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
     {
         openedItem = openedItem->Press(strContr);
     }
-
-    if (key >= B_F1 && key <= B_F5)
+    else if (key >= B_F1 && key <= B_F5)
     {
         openedItem = CurrentPage()->Item(key - B_F1)->Press(strContr);
     }
