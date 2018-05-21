@@ -11,8 +11,10 @@ Page *PageUSB::pointer = (Page *)&pUSB;
 DEF_CHOICE_2(cSizeByte,                                                                                                   //--- USB - пюглеп аюирю ---
    "пюглеп аюирю", "SIZE BYTE",
    "", "",
-   "7 АХР", "7 bits",
-   "8 АХР", "8 bits",
+   "7 АХР", "7 bits", "",
+                      "",
+   "8 АХР", "8 bits", "",
+                      "",
    SIZE_BYTE, pUSB, FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -20,8 +22,10 @@ DEF_CHOICE_2(cSizeByte,                                                         
 DEF_CHOICE_2(cStopBit,                                                                                                        //--- USB - ярно-ахр ---
     "ярно-ахр", "STOP-BIT",
     "", "",
-    "1", "1",
-    "2", "2",
+    "1", "1", "",
+              "",
+    "2", "2", "",
+              "",
     STOP_BIT, pUSB, FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -29,8 +33,10 @@ DEF_CHOICE_2(cStopBit,                                                          
 DEF_CHOICE_2(cParity,                                                                                                         //--- USB - в╗рмнярэ ---
     "в╗рмнярэ", "PARITY",
     "", "",
-    "опнбепърэ", "VERIFY",
-    "ме опнбепърэ", "NOT VERIFY",
+    "опнбепърэ", "VERIFY",        "",
+                                  "",
+    "ме опнбепърэ", "NOT VERIFY", "",
+                                  "",
     PARITY, pUSB, FuncActive, FuncChangedChoice, FuncDraw
 )
 

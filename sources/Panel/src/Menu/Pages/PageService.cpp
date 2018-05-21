@@ -32,8 +32,10 @@ DEF_CHOICE_2( cService_Language,                                                
     "ъгшй", "LANGUAGE",
     "бШАНП ЪГШЙЮ ЛЕМЧ",
     "Selecting the menu language",
-    "псяяйхи",    "RUSSIAN",
-    "юмцкхияйхи", "ENGLISH",
+    "псяяйхи",    "RUSSIAN", "",
+                             "",
+    "юмцкхияйхи", "ENGLISH", "",
+                             "",
     LANG, pService, FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -48,8 +50,10 @@ DEF_CHOICE_2( cService_Background,                                              
     "жбер тнмю", "BACKGROUND",
     "бШАНП ЖБЕРЮ ТНМЮ",
     "Select background color",
-    "аекши",  "WHITE",
-    "в╗пмши", "BLACK",
+    "аекши",  "WHITE", "",
+                       "",
+    "в╗пмши", "BLACK", "",
+                       "",
     BACKGROUND_BLACK, pService, FuncActive, OnChanged_Background, FuncDraw
 )
 

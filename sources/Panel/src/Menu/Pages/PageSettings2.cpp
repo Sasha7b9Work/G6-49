@@ -13,8 +13,10 @@ DEF_CHOICE_2( cTypeTune,                                                        
     "ЗАСЫЛКА", "SENDING",
     "Определяет периодичность засылки настроек сигналов в устройство управления",
     "Specifies the frequency of sending signal settings to the control device",
-    "ОДНОКРАТНО", "SINGLE",
-    "НЕПРЕРЫВНО", "CONTINUOUSLY",
+    "ОДНОКРАТНО", "SINGLE",       "",
+                                  "",
+    "НЕПРЕРЫВНО", "CONTINUOUSLY", "",
+                                  "",
     set.sig_tuneFull, pSignals2, FuncActive, FuncChangedChoice, FuncDraw
 )
 
