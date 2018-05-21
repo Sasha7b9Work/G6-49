@@ -7,6 +7,9 @@
 class Text
 {
 public:
+    /// Устанавливает верхний регистр выводимых символов
+    static void SetUpperCase(bool upper);
+    
     static void SetFont(TypeFont typeFont);
 
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
@@ -15,10 +18,10 @@ public:
 
     static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
     /// Возвращает нижнюю координату прямоугольника
-    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, bool inUpReg, Color colorBackground, Color colorFill);
+    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
 
     /// Пишет текст с переносами
-    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, bool inUpReg = false, Color color = Color::NUMBER);
+    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
 
     static int DrawBigChar(int eX, int eY, int size, char symbol);
 
@@ -71,4 +74,6 @@ private:
     static int DrawSubString(int x, int y, const char *text);
 
     static int DrawSpaces(int x, int y, const char *text, int *numSymbols);
+
+    static bool upperCase;
 };

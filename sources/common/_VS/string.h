@@ -5,8 +5,6 @@ char   *strcat(char *, const char *);
 char   *strcpy(char *, const char *);
 unsigned int  strlen(const char *);
 int     strcmp(const void *, const void *);
-char    toupper(char);
-char    tolower(char);
 float   atof(char *);
 void    memcpy(void *, const void *, unsigned int);
 void    memset(void *, int, unsigned int);

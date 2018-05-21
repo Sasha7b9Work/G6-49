@@ -5,12 +5,23 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool Text::upperCase = false;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Text::SetFont(TypeFont typeFont)
 {
     font = fonts[typeFont];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Text::SetUpperCase(bool upper)
+{
+    upperCase = upper;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,14 +36,14 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, bool inUpReg, Color colorBackground, Color colorFill)
+int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill)
 {
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
 
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
-    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, height, text, inUpReg, colorFill);
+    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, height, text, colorFill);
     return y + height;
 }
 
@@ -40,6 +51,11 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char
 int Text::DrawChar(int eX, int eY, char symbol, Color color)
 {
     Painter::SetColor(color);
+
+    if (upperCase)
+    {
+        symbol = toupper(symbol);
+    }
 
     int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
@@ -252,7 +268,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, const char *text, bool inUpReg, Color color)
+int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, const char *text, Color color)
 {
     Painter::SetColor(color);
 
