@@ -32,10 +32,10 @@ DEF_CHOICE_2( cService_Language,                                                
     "я«џ ", "LANGUAGE",
     "¬ыбор €зыка меню",
     "Selecting the menu language",
-    "–”—— »…",    "RUSSIAN", "",
-                             "",
-    "јЌ√Ћ»…— »…", "ENGLISH", "",
-                             "",
+    "–”—— »…",    "RUSSIAN", "язык меню - русский",
+                             "Menu language - Russian",
+    "јЌ√Ћ»…— »…", "ENGLISH", "язык меню - английский",
+                             "Menu language - English",
     LANG, pService, FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -50,10 +50,10 @@ DEF_CHOICE_2( cService_Background,                                              
     "÷¬≈“ ‘ќЌј", "BACKGROUND",
     "¬ыбор цвета фона",
     "Select background color",
-    "Ѕ≈Ћџ…",  "WHITE", "",
-                       "",
-    "„®–Ќџ…", "BLACK", "",
-                       "",
+    "Ѕ≈Ћџ…",  "WHITE", "÷вет фона - белый",
+                       "Background color - white",
+    "„®–Ќџ…", "BLACK", "÷вет фона - чЄрный",
+                       "Background color - black",
     BACKGROUND_BLACK, pService, FuncActive, OnChanged_Background, FuncDraw
 )
 

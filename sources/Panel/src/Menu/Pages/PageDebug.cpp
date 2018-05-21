@@ -20,10 +20,10 @@ DEF_CHOICE_2(cConsole,                                                          
     "КОНСОЛЬ", "CONSOLE",
     "Включает и выключает отображение отладочной консоли",
     "Turns on or off the display of the debug console",
-    DISABLED_RU, DISABLED_EN, "",
-                              "",
-    ENABLED_RU,  ENABLED_EN,  "",
-                              "",
+    DISABLED_RU, DISABLED_EN, "Отображение консоли включено",
+                              "Console display enabled",
+    ENABLED_RU,  ENABLED_EN,  "Отображение консоли выключено",
+                              "Console display disabled",
     CONSOLE_ENABLED, pDebug, FuncActive, OnPress_DebugMode, FuncDraw
 )
 
@@ -47,10 +47,10 @@ DEF_CHOICE_2( cStatistics,
     "весь кадр",
     "Enables / disables the display of statistics on the frame rate in the form of FPS / time of drawing one frame / time spent on rendering for the "
     "whole frame",
-    DISABLED_RU, DISABLED_EN, "",
-                              "",
-    ENABLED_RU, ENABLED_EN,   "",
-                              "",
+    DISABLED_RU, DISABLED_EN, "Показ статистики включён",
+                              "Statistics show on",
+    ENABLED_RU, ENABLED_EN,   "Показ статистики выключен",
+                              "Statistics showing off",
     SHOW_STATISTICS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
 )
 
