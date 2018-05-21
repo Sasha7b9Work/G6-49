@@ -78,24 +78,15 @@ public:
 
     static int DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
 
-    static void DrawTextInRect(int x, int y, int width, const char *text);
-
     static void Draw2SymbolsC(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
     static void Draw10SymbolsInRect(int x, int y, char eChar);
-    
     
     
 
 private:
 
     static void CalculateCurrentColor();
-
-    static int GetLenghtSubString(const char *text);
-
-    static int DrawSubString(int x, int y, const char *text);
-
-    static int DrawSpaces(int x, int y, const char *text, int *numSymbols);
 
     static Color currentColor;
 

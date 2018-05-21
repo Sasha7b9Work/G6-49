@@ -517,3 +517,64 @@ void Text::DrawTextRelativelyRight(int xRight, int y, const char *text, Color co
     int lenght = Font::GetLengthText(text);
     DrawText(xRight - lenght, y, text, color);
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Text::DrawTextInRect(int x, int y, int width, const char *text)
+{
+    int xStart = x;
+    int xEnd = xStart + width;
+
+    while (*text != 0)
+    {
+        int length = GetLenghtSubString(text);
+        if (length + x > xEnd)
+        {
+            x = xStart;
+            y += Font::GetHeightSymbol(*text);
+        }
+        int numSymbols = 0;
+        numSymbols = DrawSubString(x, y, text);
+        text += numSymbols;
+        x += length;
+        x = DrawSpaces(x, y, text, &numSymbols);
+        text += numSymbols;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawSubString(int x, int y, const char *text)
+{
+    int numSymbols = 0;
+    while (((*text) != ' ') && ((*text) != '\0'))
+    {
+        x = DrawChar(x, y, *text) + 1;
+        numSymbols++;
+        text++;
+    }
+    return numSymbols;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::GetLenghtSubString(const char *text)
+{
+    int retValue = 0;
+    while (((*text) != ' ') && ((*text) != '\0'))
+    {
+        retValue += Font::GetLengthSymbol(*text);
+        text++;
+    }
+    return retValue;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawSpaces(int x, int y, const char *text, int *numSymbols)
+{
+    *numSymbols = 0;
+    while (*text == ' ')
+    {
+        x = DrawChar(x, y, *text);
+        text++;
+        (*numSymbols)++;
+    }
+    return x;
+}

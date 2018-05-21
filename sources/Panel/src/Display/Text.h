@@ -27,6 +27,8 @@ public:
 
     static void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
 
+    static void DrawTextInRect(int x, int y, int width, const char *text);
+
 private:
 
     static bool ByteFontNotEmpty(int eChar, int byte);
@@ -51,4 +53,10 @@ private:
     static bool IsConsonant(char symbol);
 
     static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
+
+    static int GetLenghtSubString(const char *text);
+
+    static int DrawSubString(int x, int y, const char *text);
+
+    static int DrawSpaces(int x, int y, const char *text, int *numSymbols);
 };
