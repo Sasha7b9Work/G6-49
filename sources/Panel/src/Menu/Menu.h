@@ -31,8 +31,10 @@ public:
     static Control *itemUnderKey;
     /// ¬озвращает адрес текущую страницу
     static Page* CurrentPage();
-
+    /// ¬озвращает указатель на контрол, дл€ которого нужно выводить подсказку.
     static Control *ItemHint();
+    /// ¬озвращает орган управлени€, дл€ которого нужно выводить подсказку
+    static PanelControl PanelControlHint();
 private:
 
     static void DrawTitle();
@@ -44,4 +46,6 @@ private:
     static Control *openedItem;
     ///  онтрол, дл€ которого нужно выводить подсказку
     static Control *itemHint;
+    /// ќрган управлени€, дл€ которого нужно выводить подсказку
+    static PanelControl panelControlHint;
 };

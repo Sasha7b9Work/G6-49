@@ -25,14 +25,14 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill)
+int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, bool inUpReg, Color colorBackground, Color colorFill)
 {
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
 
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
-    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, height, text, colorFill);
+    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, height, text, inUpReg, colorFill);
     return y + height;
 }
 
@@ -252,7 +252,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, const char *text, Color color)
+int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, const char *text, bool inUpReg, Color color)
 {
     Painter::SetColor(color);
 

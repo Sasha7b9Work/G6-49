@@ -316,11 +316,15 @@ void Display::DrawHint()
         "ÂÊËÞ×¨Í ÐÅÆÈÌ ÏÎÄÑÊÀÇÎÊ.\n"
         "ÄËß ÏÎËÓ×ÅÍÈß ÈÍÔÎÐÌÀÖÈÈ ÏÎ ÝËÅÌÅÍÒÓ ÌÅÍÞ ÈËÈ ÍÀÇÍÀ×ÅÍÈÞ ÊÍÎÏÊÈ ÈÑÏÎËÜÇÓÉÒÅ ÑÎÎÒÂÅÒÑÒÂÓÞÙÈÉ ÎÐÃÀÍ ÓÏÐÀÂËÅÍÈß.\n"
         "ÄËß ÂÛÕÎÄÀ ÈÇ ÐÅÆÈÌÀ ÏÎÄÑÊÀÇÎÊ ÍÀÆÌÈÒÅ È ÓÄÅÐÆÈÂÀÉÒÅ ÊÍÎÏÊÓ ESC.",
-        Color::BACK, Color::FILL);
+        true, Color::BACK, Color::FILL);
 
         Painter::DrawFilledRectangle(x0, y0, width, 239 - y0 - 1, Color::BACK, Color::FILL);
 
         if(Menu::ItemHint())
+        {
+            Menu::ItemHint()->DrawHint(x0 + 2, y0 + 5, width, 239 - y0 - 1, Color::FILL);
+        }
+        else if(Menu::PanelControlHint())
         {
 
         }

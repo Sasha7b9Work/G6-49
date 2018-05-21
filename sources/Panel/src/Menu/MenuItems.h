@@ -1,4 +1,5 @@
 #pragma once
+#include "Display/Colors.h"
 #include "Display/Display.h"
 #include "MenuItemsDefs.h"
 #include "Menu/MenuPagesNames.h"
@@ -99,6 +100,8 @@ public:
     PanelControl ButtonForItem() const;
     /// Возвращает полный путь к элементу меню
     char *FullPath() const;
+    /// Вывести подсказку в заданном месте экрана
+    void DrawHint(int x, int y, int width, int height, Color color = Color::NUMBER) const;
 };
 
 

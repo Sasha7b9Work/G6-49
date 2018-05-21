@@ -26,8 +26,8 @@ static void OnPress_Channel(bool)
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - КАНАЛ ---
     "КАНАЛ", "CHANNEL",
-    "Выбор канала для настройки",
-    "Selecting a channel to set up",
+    "ВЫБОР КАНАЛА ДЛЯ НАСТРОЙКИ",
+    "SELECTING A CHANNEL TO SET UP",
     "A", "A",
     "B", "B",
     CURRENT_CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
@@ -63,8 +63,8 @@ void PageSignals::OnPress_Form(bool)
 
 DEF_CHOICE_7( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
     "ФОРМА", "FORM",
-    "Выбор формы сигнала",
-    "Select waveform",
+    "ВЫБОР ФОРМЫ СИГНАЛА",
+    "SELECT WAVEFORM",
     "СИНУС",        "SINE",
     "КОСИНУС",      "COSINE",
     "МЕАНДР",       "MEANDER",
@@ -86,15 +86,15 @@ static void OnPress_SetParameter()
 
 DEF_BUTTON( bSetParameter,                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА ---
     "ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА", "ENTER VALUE PARAMETER",
-    "Открывает окно ввода параметра",
-    "Opens the parameter input window",
+    "ОТКРЫВАЕТ ОКНО ВВОДА ПАРАМЕТРА",
+    "OPENS THE PARAMETER INPUT WINDOW",
     pSignals, FuncActive, OnPress_SetParameter, FuncDraw
 )
 
 DEF_CHOICE_PARAMETER(parameters,                                                                               //--- НАСТРОЙКИ СИГНАЛОВ - ПАРАМЕТР ---
     "ПАРАМЕТР", "PARAMETER",
-    "Выбор параметра для настройки",
-    "Choosing a setting for customization",
+    "ВЫБОР ПАРАМЕТРА ДЛЯ НАСТРОЙКИ",
+    "CHOOSING A SETTING FOR CUSTOMIZATION",
     pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER(WaveForm(waveForm))),
     true, true, true, true, false, false, false, false
 )

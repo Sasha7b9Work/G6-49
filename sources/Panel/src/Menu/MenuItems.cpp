@@ -1,6 +1,8 @@
 #include "MenuItems.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
+#include "Display/Painter.h"
+#include "Display/Text.h"
 #include <Menu/Menu.h>
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
@@ -322,4 +324,12 @@ void Page::SetPosActItem(int8 pos)
 void Page::SetCurrentSubPage(int8 pos)
 {
     MENU_CURRENT_SUBPAGE(name) = pos;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Control::DrawHint(int x, int y, int width, int height, Color color) const
+{
+    Painter::SetColor(color);
+
+    Text::DrawTextInRectWithTransfers(x, y, width, height, titleHint[2 + LANG], true, color);
 }

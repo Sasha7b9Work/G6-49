@@ -15,10 +15,10 @@ public:
 
     static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
     /// Возвращает нижнюю координату прямоугольника
-    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
+    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, bool inUpReg, Color colorBackground, Color colorFill);
 
     /// Пишет текст с переносами
-    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
+    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, bool inUpReg = false, Color color = Color::NUMBER);
 
     static int DrawBigChar(int eX, int eY, int size, char symbol);
 

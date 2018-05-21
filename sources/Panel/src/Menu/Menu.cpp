@@ -19,6 +19,7 @@
 Control *Menu::itemUnderKey = 0;
 Control *Menu::openedItem = 0;
 Control *Menu::itemHint = 0;
+PanelControl Menu::panelControlHint = B_None;
 
 const Page *menu[NUM_PAGES] =
 {
@@ -42,6 +43,12 @@ void Menu::Init(void)
 Control *Menu::ItemHint()
 {
     return itemHint;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+PanelControl Menu::PanelControlHint()
+{
+    return panelControlHint;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,11 +78,21 @@ void Menu::ProcessControl(StructControl strContr)
     {
         IN_MODE_SHOW_HINTS++;
         itemHint = 0;
+        panelControlHint = B_None;
     }
     
     if(IN_MODE_SHOW_HINTS)
     {
-
+        if(key >= B_F1 && key <= B_F5)
+        {
+            itemHint = CurrentPage()->Item(key - B_F1);
+            panelControlHint = B_None;
+        }
+        else
+        {
+            panelControlHint = key;
+            itemHint = 0;
+        }
     }
     else if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
     {
