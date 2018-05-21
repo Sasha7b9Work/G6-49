@@ -39,9 +39,9 @@ enum PanelControl
 
 enum TypePress
 {
-    TypePress_Press,
-    TypePress_LongPress,
-    TypePress_Release
+    Down,
+    Long,
+    Up
 };
 
 /// Хранит код органа управления и его состояние - если pressed == true, то кнопка находится в нажатом состоянии

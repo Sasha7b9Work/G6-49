@@ -114,15 +114,15 @@ Control *Choice::Press(StructControl strControl)
     TypePress press = strControl.typePress;
     PanelControl key = strControl.key;
 
-    if(key == B_LEFT && press == TypePress_Release || key == REG_RIGHT)
+    if(key == B_LEFT && press == Up || key == REG_RIGHT)
     {
         StartChange(-1);
     }
-    else if(key == B_RIGHT && press == TypePress_Release || key == REG_LEFT || press == TypePress_Release)
+    else if(key == B_RIGHT && press == Up || key == REG_LEFT || press == Up)
     {
         StartChange(1);
     }
-    else if(press == TypePress_LongPress)
+    else if(press == Long)
     {
         return this;
     }
@@ -392,7 +392,7 @@ Control *Control::Press(StructControl strControl)
     TypePress press = strControl.typePress;
     PanelControl key = strControl.key;
 
-    if(press == TypePress_LongPress)
+    if(press == Long)
     {
         if (IsOpened() || key == REG_BTN || key == B_ESC)
         {
@@ -400,7 +400,7 @@ Control *Control::Press(StructControl strControl)
         }
     }
 
-    if(key == B_ESC && (press == TypePress_Release || press == TypePress_LongPress))
+    if(key == B_ESC && (press == Up || press == Long))
     {
         return 0;
     }
@@ -410,7 +410,7 @@ Control *Control::Press(StructControl strControl)
         return Menu::OpenedItem();
     }
 
-    Menu::itemUnderKey = (press == TypePress_Press) && !IsOpened() ? this : 0;
+    Menu::itemUnderKey = (press == Down) && !IsOpened() ? this : 0;
 
     if (type == Control_Choice)
     {
@@ -529,7 +529,7 @@ void Choice::Rotate(PanelControl control)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Control *ChoiceParameter::Press(TypePress press)
 {
-    if (press == TypePress_Release)
+    if (press == Up)
     {
         volatile bool allow = false;
         do
@@ -538,7 +538,7 @@ Control *ChoiceParameter::Press(TypePress press)
             allow = (allowParameters).allow[*numParameter];
         } while (!allow);
     }
-    else if (press == TypePress_LongPress)
+    else if (press == Long)
     {
         return this;
     }
@@ -549,7 +549,7 @@ Control *ChoiceParameter::Press(TypePress press)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Control *SButton::Press(TypePress press)
 {
-    if(press == TypePress_Release)
+    if(press == Up)
     {
         if (funcOnPress)
         {
@@ -563,7 +563,7 @@ Control *SButton::Press(TypePress press)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Control *Button::Press(TypePress press)
 {
-    if (press == TypePress_Release && funcOnPress)
+    if (press == Up && funcOnPress)
     {
         funcOnPress();
     }

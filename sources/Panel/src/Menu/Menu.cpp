@@ -67,7 +67,7 @@ void Menu::ProcessControl(StructControl strContr)
     PanelControl key = strContr.key;
     TypePress pressed = strContr.typePress;
 
-    if(key == B_ESC && pressed == TypePress_LongPress)
+    if(key == B_ESC && pressed == Long)
     {
         IN_MODE_SHOW_HINTS++;
         itemHint = 0;
@@ -105,7 +105,7 @@ void Menu::ProcessControl(StructControl strContr)
             }
         }
     }
-    else if (pressed == TypePress_Release || pressed == TypePress_LongPress)
+    else if (pressed == Up || pressed == Long)
     {
         if(key == B_ON1)
         {

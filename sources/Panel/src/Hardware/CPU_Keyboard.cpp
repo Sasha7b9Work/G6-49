@@ -113,19 +113,19 @@ void CPU::Keyboard::Update(void)
                     if(delta > 500)                                         // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        FillCommand(controls[rl][sl], TypePress_LongPress); // это будет длинное нажатие
+                        FillCommand(controls[rl][sl], Long);                // это будет длинное нажатие
                     }
                     else if (delta > 100 &&                                 // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                            // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = 0;                              // То учитываем это в массиве
-                        FillCommand(controls[rl][sl], TypePress_Release);   // И сохраняем отпускание кнопки в буфере команд
+                        FillCommand(controls[rl][sl], Up);                  // И сохраняем отпускание кнопки в буфере команд
                     }
                 }
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT) // Если кнопка нажата
                 {
                     timePress[rl][sl] = time;                               // то сохраняем время её нажатия
-                    FillCommand(controls[rl][sl], TypePress_Press);
+                    FillCommand(controls[rl][sl], Down);
                 }
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
@@ -163,7 +163,7 @@ static void DetectRegulator(void)
 
         if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
         {
-            FillCommand(REG_BTN, TypePress_LongPress);                      // посылаем длинное нажатие
+            FillCommand(REG_BTN, Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -175,7 +175,7 @@ static void DetectRegulator(void)
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                FillCommand(REG_BTN, TypePress_Press);
+                FillCommand(REG_BTN, Down);
             }
         }
         else                                                                // Ексли копка была нажата ранее
@@ -184,7 +184,7 @@ static void DetectRegulator(void)
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    FillCommand(REG_BTN, TypePress_Release);
+                    FillCommand(REG_BTN, Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -205,12 +205,12 @@ static void DetectRegulator(void)
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        FillCommand(REG_LEFT, TypePress_Press);
+        FillCommand(REG_LEFT, Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        FillCommand(REG_RIGHT, TypePress_Press);
+        FillCommand(REG_RIGHT, Down);
         prevStatesIsOne = false;
     }
 }

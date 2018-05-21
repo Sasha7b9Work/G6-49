@@ -207,7 +207,7 @@ void InputWindow::ProcessContorl(StructControl strContr)
     if (key == B_0 || key == B_1 || key == B_2 || key == B_3 || key == B_4 || key == B_5 || key == B_6 || key == B_7 || key == B_8 || key == B_9 ||
         key == B_Dot)
     {
-        if (pressed == TypePress_Release)
+        if (pressed == Up)
         {
             InputWindowStruct::PressKey(key);
         }
@@ -226,7 +226,7 @@ void InputWindow::ProcessContorl(StructControl strContr)
             InputWindowStruct::RegRight();
         }
     }
-    else if ((key >= B_F1 && key <= B_F4) && pressed == TypePress_Release)
+    else if ((key >= B_F1 && key <= B_F4) && pressed == Up)
     {
         Menu::CurrentPage()->Item(key - B_F1)->Press(strContr);
     }
