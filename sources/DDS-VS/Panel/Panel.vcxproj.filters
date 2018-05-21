@@ -165,9 +165,6 @@
     <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>

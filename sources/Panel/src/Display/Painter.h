@@ -70,16 +70,8 @@ public:
     
     
 
-    static int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
-    /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
-    static void DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder, 
-                                             Color colorBackground);
+    
 
-    static int DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
-
-    static void Draw2SymbolsC(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
-
-    static void Draw10SymbolsInRect(int x, int y, char eChar);
 
 private:
 

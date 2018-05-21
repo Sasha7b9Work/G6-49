@@ -1707,11 +1707,6 @@
               <FilePath>.\src\Display\PainterSTM429.cpp</FilePath>
             </File>
             <File>
-              <FileName>PainterText.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterText.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Colors.cpp</FilePath>

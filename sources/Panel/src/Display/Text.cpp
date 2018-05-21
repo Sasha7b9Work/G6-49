@@ -592,3 +592,52 @@ int Text::DrawFormText(int x, int y, Color color, pString text, ...)
     va_end(args);
     return DrawText(x, y, buffer, color);
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
+{
+    Painter::SetColor(color);
+    int lenght = Font::GetLengthText(text);
+    int height = Font::GetHeightSymbol(text[0]);
+    int x = eX + (width - lenght) / 2;
+    int y = eY + (eHeight - height) / 2;
+    return DrawText(x, y, text);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Text::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
+                                                  Color colorBackground)
+{
+    int lenght = Font::GetLengthText(text);
+    int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
+    int w = lenght + widthBorder * 2 - 2;
+    int h = 7 + widthBorder * 2 - 1;
+    Painter::FillRegion(eX - lenght - widthBorder, y - widthBorder + 1, w, h);
+    DrawStringInCenterRect(x, y, width, height, text, colorText);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
+{
+    Painter::DrawRectangle(x, y, width, height, colorFill);
+    Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
+    Painter::SetColor(colorFill);
+    return DrawStringInCenterRect(x, y, width, height, text);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Text::Draw2SymbolsC(int x, int y, char symbol1, char symbol2, Color color1, Color color2)
+{
+    DrawChar(x, y, symbol1, color1);
+    DrawChar(x, y, symbol2, color2);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Text::Draw10SymbolsInRect(int x, int y, char eChar)
+{
+    for (char i = 0; i < 5; i++)
+    {
+        DrawChar(x + 8 * i, y, eChar + i);
+        DrawChar(x + 8 * i, y + 8, eChar + i + 16);
+    }
+}
