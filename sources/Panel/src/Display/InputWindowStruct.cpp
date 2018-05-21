@@ -1,6 +1,7 @@
 #include "InputWindowStruct.h"
 #include "Log.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Generator.h"
 #include "Settings/SettingsSignals.h"
 #include "Utils/Math.h"
@@ -523,7 +524,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
 
     while (m_inputBuffer[i])
     {
-        x = Painter::DrawBigChar(x, y, 3, m_inputBuffer[i]);
+        x = Text::DrawBigChar(x, y, 3, m_inputBuffer[i]);
         x += 2;
         ++i;
     }

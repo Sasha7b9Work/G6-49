@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "Menu/MenuItems.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include <math.h>
@@ -33,13 +34,13 @@ void Menu::DrawTitle()
     Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, MP_TITLE_HEIGHT - 2, Color::BLUE_10);
     if(Menu::OpenedItem())
     {
-        Painter::DrawTextRelativelyRight(315, 5, Menu::OpenedItem()->FullPath(), Color::FILL);
+        Text::DrawTextRelativelyRight(315, 5, Menu::OpenedItem()->FullPath(), Color::FILL);
     }
     else
     {
         DrawPagesUGO();
 
-        Painter::DrawTextRelativelyRight(315, 5, CurrentPage()->Title(), Color::FILL);
+        Text::DrawTextRelativelyRight(315, 5, CurrentPage()->Title(), Color::FILL);
     }
 }
 
@@ -59,6 +60,6 @@ void Menu::DrawPagesUGO()
 
         char buffer[20];
 
-        Painter::DrawText(6 + CURRENT_PAGE * delta, 5, Int2String(CURRENT_PAGE + 1, false, 2, buffer), Color::BACK);
+        Text::DrawText(6 + CURRENT_PAGE * delta, 5, Int2String(CURRENT_PAGE + 1, false, 2, buffer), Color::BACK);
     }
 }

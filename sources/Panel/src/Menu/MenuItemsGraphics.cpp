@@ -3,6 +3,7 @@
 #include "Display/DisplayTypes.h"
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Settings/Settings.h"
 
 
@@ -68,9 +69,9 @@ void ChoiceParameter::Draw(bool opened, int x, int y)
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        Painter::DrawText(x + 5, y + 5, Title(), pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        Text::DrawText(x + 5, y + 5, Title(), pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, MI_WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
-        Painter::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
+        Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
     }
 }
 
@@ -95,7 +96,7 @@ void Choice::Draw(bool opened, int x, int y)
         Painter::DrawRectangle(x, y, width, height, Color::FILL);
         Painter::DrawHLine(y + 12, x, x + width);
         Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
-        Painter::DrawTextRelativelyRight(x + width - 2, y + 2, Title());
+        Text::DrawTextRelativelyRight(x + width - 2, y + 2, Title());
 
         y += 14;
 
@@ -108,11 +109,11 @@ void Choice::Draw(bool opened, int x, int y)
                 Painter::DrawVLine(x + 1, y - 1, y - 1 + 10);
                 Painter::DrawHLine(y + 9, x + 1, x + MI_WIDTH - 1, Color::GREEN_25);
                 Painter::DrawVLine(x - 1 + MI_WIDTH, y - 1, y + 9);
-                Painter::DrawText(x + 3, y, NameSubItem(i), Color::BACK);
+                Text::DrawText(x + 3, y, NameSubItem(i), Color::BACK);
             }
             else
             {
-                Painter::DrawText(x + 3, y, NameSubItem(i), Color::FILL);
+                Text::DrawText(x + 3, y, NameSubItem(i), Color::FILL);
             }
             y += 10;
         }
@@ -124,28 +125,28 @@ void Choice::Draw(bool opened, int x, int y)
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        Painter::DrawText(x + 5, y + 5, Title(), pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        Text::DrawText(x + 5, y + 5, Title(), pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, MI_WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Painter::SetColor(Color::BACK);
         if (step == 0.0f)
         {
-            Painter::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem());
+            Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem());
         }
         else
         {
             int x0 = 315 - step;
 
-            Painter::DrawTextRelativelyRight(x0, y + 30, NameCurrentSubItem());
+            Text::DrawTextRelativelyRight(x0, y + 30, NameCurrentSubItem());
 
             int length = Font::GetLengthText(NameNextSubItem());
 
             if (x0 + length > x + MI_WIDTH - 5)
             {
-                Painter::DrawText(x0, y + 30, NameNextSubItem());
+                Text::DrawText(x0, y + 30, NameNextSubItem());
             }
             else
             {
-                Painter::DrawTextRelativelyRight(315, y + 30, NameNextSubItem());
+                Text::DrawTextRelativelyRight(315, y + 30, NameNextSubItem());
             }
         }
     }

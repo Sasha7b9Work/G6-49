@@ -67,24 +67,9 @@ public:
     static bool SaveScreenToFlashDrive();
 
     /************** Функции работы с текстом ************************/
-
-    static void SetFont(TypeFont typeFont);
-
-    static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
-
-    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
-    /// Выводит текст на прямоугольнике цвета colorBackgound
-    static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
-
-    static int DrawFormatText(int x, int y, char *format, ...);
+    
     /// Пишет строку в позиции x, y
     static int DrawFormText(int x, int y, Color color, pString text, ...);
-
-    static int DrawTextWithLimitationC(int x, int y, const char *text, Color color, int limitX, int limitY, int limitWidth, int limitHeight);
-    /// Возвращает нижнюю координату прямоугольника
-    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
-
-    static int DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color);
 
     static int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
@@ -95,19 +80,12 @@ public:
 
     static void DrawTextInRect(int x, int y, int width, const char *text);
 
-    static void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
-
     static void Draw2SymbolsC(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
-    static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
-
     static void Draw10SymbolsInRect(int x, int y, char eChar);
-    /// Пишет текст с переносами
-    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text);
-
-    static void DrawBigText(int x, int y, int size, const char *text, Color color = Color::NUMBER);
     
-    static int DrawBigChar(int eX, int eY, int size, char symbol);
+    
+    
 
 private:
 
@@ -122,14 +100,6 @@ private:
     static Color currentColor;
 
     static TypeFont currentTypeFont;
-
-    static bool ByteFontNotEmpty(int eChar, int byte);
-
-    static void DrawCharInColorDisplay(int eX, int eY, char symbol);
-
-    static int DrawCharWithLimitation(int eX, int eY, char symbol, int limitX, int limitY, int limitWidth, int limitHeight);
-
-    static bool BitInFontIsExist(int eChar, int numByte, int bit);
 };
 
 

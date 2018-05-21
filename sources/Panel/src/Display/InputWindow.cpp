@@ -2,6 +2,7 @@
 #include "InputWindowStruct.h"
 #include "DisplayTypes.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include <stdio.h>
@@ -86,7 +87,7 @@ static void DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Painter::DrawBigText(x, y, 3, Parameter_Name(param));
+    Text::DrawBigText(x, y, 3, Parameter_Name(param));
 
     char buf[2] = "0";
 
@@ -100,16 +101,16 @@ static void DrawDigits(int x, int y)
 
         if (i == iws.hightLightDigit)
         {
-            Painter::SetFont(TypeFont_UGO2);
-            Painter::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
-            Painter::Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
-            Painter::SetFont(TypeFont_8);
+            Text::SetFont(TypeFont_UGO2);
+            Text::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
+            Text::Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
+            Text::SetFont(TypeFont_8);
         }
 
         if (iws.inputBuffer[i])
         {
             buf[0] = iws.inputBuffer[i];
-            Painter::DrawBigText(x, y - 1, SIZE_TEXT, buf);
+            Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
         }
 
         x += 24;
@@ -122,7 +123,7 @@ static void DrawDigits(int x, int y)
     }
 
     char buffer[10] = {0};
-    Painter::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, iws.order, iws.param));
+    Text::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, iws.order, iws.param));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

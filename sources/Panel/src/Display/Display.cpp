@@ -3,6 +3,7 @@
 #include "Display.h"
 #include "DisplayTypes.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Display/Font/Font.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
@@ -105,7 +106,7 @@ void Display::DrawSignal(Channel ch)
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(0, y0, SIGNAL_WIDTH, SIGNAL_HEIGHT, Color::FILL);
-        Painter::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2", Color::FILL);
+        Text::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2", Color::FILL);
         DrawSignalUGO(ch, y0);
         DrawSignalParameters(ch, y0);
     }
@@ -172,7 +173,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
 
     y0 += 5;
 
-    Painter::DrawText(22, y0 + 3, form.Name(), Color::FILL);
+    Text::DrawText(22, y0 + 3, form.Name(), Color::FILL);
 
     AllowableParameters allowParameters;
     InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
@@ -191,7 +192,7 @@ void Display::DrawSignalParameters(Channel ch, int y0)
                     Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
                 }
             }
-            Painter::DrawText(x0 + 1, y0, Parameter_Name((WaveParameter)i), color);
+            Text::DrawText(x0 + 1, y0, Parameter_Name((WaveParameter)i), color);
 
             DrawParameterValue(ch, (WaveParameter)i, x0 + 80, y0);
 
@@ -205,10 +206,10 @@ void Display::DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
 {
     WaveForm form = WAVE_FORM_CH(ch);
 
-    x = Painter::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
+    x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 
     char buffer[10];
-    Painter::DrawText(x, y, NameUnit(buffer, PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
+    Text::DrawText(x, y, NameUnit(buffer, PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -264,7 +265,7 @@ void Display::DrawConsole(void)
     {
         int length = Font::GetLengthText(&bufferConsole[i][0]);
         Painter::FillRegion(2, y, length, 8, Color::BACK);
-        Painter::DrawText(2, y, &bufferConsole[i][0], Color::FILL);
+        Text::DrawText(2, y, &bufferConsole[i][0], Color::FILL);
         y += 8;
     }
 }
@@ -283,7 +284,7 @@ void Display::DrawFrequencyCounter()
         return;
     }
 
-    Painter::DrawText(8, SCREEN_HEIGHT - 16, "F", Color::FILL);
+    Text::DrawText(8, SCREEN_HEIGHT - 16, "F", Color::FILL);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -298,7 +299,7 @@ void Display::ShowStatistics()
         strcat(buffer, Int2String(timeFrame, false, 3));
         strcat(buffer, "/");
         strcat(buffer, Int2String(timeAllFrames, false, 3));
-        Painter::DrawText(2, SCREEN_HEIGHT - 11, buffer, Color::FILL);
+        Text::DrawText(2, SCREEN_HEIGHT - 11, buffer, Color::FILL);
     }
 }
 
@@ -311,7 +312,7 @@ void Display::DrawHint()
         int y0 = MP_TITLE_HEIGHT;
         int width = 319 - MI_WIDTH;
 
-        Painter::DrawTextInBoundedRectWithTransfers(x0, y0, width, "бйкчв╗м пефхл ондяйюгнй.\nдкъ онксвемхъ хмтнплюжхх он щкелемрс лемч хкх мюгмювемхч ймнойх "
+        Text::DrawTextInBoundedRectWithTransfers(x0, y0, width, "бйкчв╗м пефхл ондяйюгнй.\nдкъ онксвемхъ хмтнплюжхх он щкелемрс лемч хкх мюгмювемхч ймнойх "
         "хяонкэгсире яннрберярбсчыхи нпцюм сопюбкемхъ.", Color::BACK, Color::FILL);
 
         if(Menu::ItemHint())

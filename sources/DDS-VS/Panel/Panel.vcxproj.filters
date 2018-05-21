@@ -162,9 +162,6 @@
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterTextSTM429.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -218,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Text.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +457,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\stm429.h">
       <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Text.h">
+      <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

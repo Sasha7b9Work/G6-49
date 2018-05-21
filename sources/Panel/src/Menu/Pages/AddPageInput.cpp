@@ -1,6 +1,7 @@
 #include "Display/InputWindow.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
+#include "Display/Text.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
 
@@ -12,9 +13,9 @@ extern const PageBase pInput;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Draw_Left(int x, int y)
 {
-    Painter::SetFont(TypeFont_UGO2);
-    Painter::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_LEFT);
-    Painter::SetFont(TypeFont_8);
+    Text::SetFont(TypeFont_UGO2);
+    Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_LEFT);
+    Text::SetFont(TypeFont_8);
 }
 
 DEF_SMALL_BUTTON(sbLeft,                                                                                           //--- нймн ббндю - яхлбнк бкебн ---
@@ -27,9 +28,9 @@ DEF_SMALL_BUTTON(sbLeft,                                                        
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Right(int x, int y)
 {
-    Painter::SetFont(TypeFont_UGO2);
-    Painter::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_RIGHT);
-    Painter::SetFont(TypeFont_8);
+    Text::SetFont(TypeFont_UGO2);
+    Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_RIGHT);
+    Text::SetFont(TypeFont_8);
 }
 
 DEF_SMALL_BUTTON(sbRight,                                                                                         //--- нймн ббндю - яхлбнк бопюбн ---
@@ -48,9 +49,9 @@ static void OnPress_Cancel(void)
 
 static void Draw_Cancel(int x, int y)
 {
-    Painter::SetFont(TypeFont_UGO2);
-    Painter::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_DELETE);
-    Painter::SetFont(TypeFont_8);
+    Text::SetFont(TypeFont_UGO2);
+    Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_DELETE);
+    Text::SetFont(TypeFont_8);
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                               //--- нймн ббндю - нрлемю ---
@@ -63,9 +64,9 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Enter(int x, int y)
 {
-    Painter::SetFont(TypeFont_UGO2);
-    Painter::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_SAVE);
-    Painter::SetFont(TypeFont_8);
+    Text::SetFont(TypeFont_UGO2);
+    Text::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_SAVE);
+    Text::SetFont(TypeFont_8);
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                  //--- нймн ббндю - ббнд ---
