@@ -312,8 +312,10 @@ void Display::DrawHint()
         int y0 = MP_TITLE_HEIGHT;
         int width = 319 - MI_WIDTH;
 
-        Text::DrawTextInBoundedRectWithTransfers(x0, y0, width, "бйкчв╗м пефхл ондяйюгнй.\nдкъ онксвемхъ хмтнплюжхх он щкелемрс лемч хкх мюгмювемхч ймнойх "
-        "хяонкэгсире яннрберярбсчыхи нпцюм сопюбкемхъ.", Color::BACK, Color::FILL);
+        Text::DrawTextInBoundedRectWithTransfers(x0, y0, width,
+        "бйкчв╗м пефхл ондяйюгнй.\n"
+        "дкъ онксвемхъ хмтнплюжхх он щкелемрс лемч хкх мюгмювемхч ймнойх хяонкэгсире яннрберярбсчыхи нпцюм сопюбкемхъ.",
+        Color::BACK, Color::FILL);
 
         if(Menu::ItemHint())
         {

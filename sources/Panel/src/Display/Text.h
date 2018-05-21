@@ -17,9 +17,8 @@ public:
     /// Возвращает нижнюю координату прямоугольника
     static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
 
-    static int DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color);
     /// Пишет текст с переносами
-    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text);
+    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
 
     static int DrawBigChar(int eX, int eY, int size, char symbol);
 

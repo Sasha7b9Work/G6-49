@@ -32,7 +32,7 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char
 
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
-    DrawTextInRectWithTransfersC(x + 3, y + 3, width - 8, height, text, colorFill);
+    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, height, text, colorFill);
     return y + height;
 }
 
@@ -176,13 +176,6 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, const char *
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInRectWithTransfersC(int x, int y, int width, int height, const char *text, Color color)
-{
-    Painter::SetColor(color);
-    return DrawTextInRectWithTransfers(x, y, width, height, text);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 char *Text::GetWord(const char *firstSymbol, int *length, char buffer[20])
 {
     int pointer = 0;
@@ -259,8 +252,10 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, const char *text)
+int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, const char *text, Color color)
 {
+    Painter::SetColor(color);
+
     int top = eY;
     int left = eX;
     int right = eX + eWidth;
