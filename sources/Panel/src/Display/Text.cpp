@@ -206,23 +206,23 @@ char *Text::GetWord(const char *firstSymbol, int *length, char buffer[20])
 bool Text::IsLetter(char symbol)
 {
     static const bool isLetter[256] =
-    {
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-        true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false,
-        true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-        true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false,
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-        true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-        true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-        true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-        true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true
+    {     //  0x00   0x01   0x02   0x03   0x04   0x05   0x06   0x07   0x08   0x09   0x0a   0x0b   0x0c   0x0d   0x0e   0x0f
+ /* 0x00 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+ /* 0x10 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+ /* 0x20 */  false, true,  true,  false, false, false, false, false, true,  true,  false, false, false, false, true,  false,
+ /* 0x30 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, false, false, false,
+ /* 0x40 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
+ /* 0x50 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, false, false,
+ /* 0x60 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
+ /* 0x70 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, false, false,
+ /* 0x80 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+ /* 0x90 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+ /* 0xa0 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+ /* 0xb0 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+ /* 0xc0 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
+ /* 0xd0 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
+ /* 0xe0 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
+ /* 0xf0 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true
     };
 
     return isLetter[(uint8)symbol];
@@ -261,7 +261,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInRectWithTransfers(const int left, const int top, const int width, const char *text, const Color color)
+int Text::DrawTextInRectWithTransfers(const int left, const int top, const int width, pString text, const Color color)
 {
     Painter::SetColor(color);
 

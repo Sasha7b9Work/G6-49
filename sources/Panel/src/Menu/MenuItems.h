@@ -101,7 +101,7 @@ public:
     /// Возвращает полный путь к элементу меню
     char *FullPath() const;
     /// Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
-    int DrawHint(int x, int y, int width, int height, Color color = Color::NUMBER) const;
+    int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
 };
 
 

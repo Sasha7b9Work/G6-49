@@ -332,7 +332,7 @@ void Display::DrawHint()
         {
             Control *control = Menu::ItemHint();
             Text::DrawFormatTextInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->FullPath());
-            y0 = control->DrawHint(x0 + 5, y0 + 17, width, 239 - y0 - 1) + 5;
+            y0 = control->DrawHint(x0 + 5, y0 + 17, width) + 5;
 
             char number = '1';
 

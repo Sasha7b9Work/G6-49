@@ -327,7 +327,7 @@ void Page::SetCurrentSubPage(int8 pos)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Control::DrawHint(int x, int y, int width, int height, Color color) const
+int Control::DrawHint(int x, int y, int width, Color color) const
 {
     Painter::SetColor(color);
 
