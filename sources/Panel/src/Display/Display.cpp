@@ -44,6 +44,8 @@ uint Display::timeAccumFrames = 0;
 void Display::Init()
 {
     LTDC_::Init((uint)frontBuffer, (uint)backBuffer);
+    
+    Text::SetUpperCase(true);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -322,7 +324,8 @@ void Display::DrawHint()
 
         if(Menu::ItemHint())
         {
-            Menu::ItemHint()->DrawHint(x0 + 2, y0 + 5, width, 239 - y0 - 1, Color::FILL);
+            Control *control = Menu::ItemHint();
+            control->DrawHint(x0 + 2, y0 + 5, width, 239 - y0 - 1, Color::FILL);
         }
         else if(Menu::PanelControlHint())
         {

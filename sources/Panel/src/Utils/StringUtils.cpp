@@ -613,3 +613,21 @@ int SU::FindSymbol(const char *string, char symbol)
     }
     return -1;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char SU::ToUpper(char symbol)
+{
+    if(symbol <= 0x7a)
+    {
+        return toupper(symbol);
+    }
+    else if(symbol == 0xb8)
+    {
+        return 0xa8;
+    }
+    else if(symbol >= 0xe0)
+    {
+        return symbol - 0x20;
+    }
+    return symbol;
+}

@@ -2,6 +2,7 @@
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
 #include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
@@ -54,7 +55,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
 
     if (upperCase)
     {
-        symbol = toupper(symbol);
+        symbol = SU::ToUpper(symbol);
     }
 
     int8 width = (int8)font->symbol[symbol].width;
