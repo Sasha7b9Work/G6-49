@@ -632,7 +632,7 @@ int Text::DrawFormatText(int x, int y, pString text, ...)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Text::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
+void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
                                                   Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
@@ -644,7 +644,7 @@ void Text::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int heig
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
+int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
 {
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);

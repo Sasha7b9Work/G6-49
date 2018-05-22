@@ -46,9 +46,9 @@ public:
 
     static int DrawFormatTextInCenterRect(int x, int y, int width, int height, const char *text, ...);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
-    static void DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
+    static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
                                                     Color colorBackground);
-    static int DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
+    static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
 
 private:
 
