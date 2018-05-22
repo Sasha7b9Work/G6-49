@@ -24,7 +24,7 @@ public:
 
     static void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
     
-    static void Draw2SymbolsC(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
+    static void Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
     static void Draw10SymbolsInRect(int x, int y, char eChar);
 
@@ -34,17 +34,17 @@ public:
 
     /*************** Вывод текста в области экрана **************************/
 
-    static void DrawTextInRect(int x, int y, int width, const char *text);
+    static void DrawTextInColumn(int x, int y, int width, const char *text);
     /// Возвращает нижнюю координату прямоугольника
     static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
     /// Пишет текст с переносами
-    static int DrawTextInRectWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
+    static int DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
 
-    static int DrawFormatTextInRectWithTransfers(int x, int y, int width, pString text, ...);
+    static int DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...);
 
-    static int DrawTextInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
+    static int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
 
-    static int DrawFormatTextInCenterRect(int x, int y, int width, int height, const char *text, ...);
+    static int DrawFormatStringInCenterRect(int x, int y, int width, int height, const char *text, ...);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
                                                     Color colorBackground);

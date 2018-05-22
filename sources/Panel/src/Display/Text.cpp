@@ -44,7 +44,7 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char
 
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
-    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, text, colorFill);
+    DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, text, colorFill);
     return y + height;
 }
 
@@ -261,7 +261,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInRectWithTransfers(const int left, const int top, const int width, pString text, const Color color)
+int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color)
 {
     Painter::SetColor(color);
 
@@ -522,7 +522,7 @@ void Text::DrawTextRelativelyRight(int xRight, int y, const char *text, Color co
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Text::DrawTextInRect(int x, int y, int width, const char *text)
+void Text::DrawTextInColumn(int x, int y, int width, const char *text)
 {
     int xStart = x;
     int xEnd = xStart + width;
@@ -583,7 +583,7 @@ int Text::DrawSpaces(int x, int y, const char *text, int *numSymbols)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
+int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
 {
     Painter::SetColor(color);
     int lenght = Font::GetLengthText(text);
@@ -594,7 +594,7 @@ int Text::DrawTextInCenterRect(int eX, int eY, int width, int eHeight, const cha
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawFormatTextInRectWithTransfers(int x, int y, int width, pString text, ...)
+int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
@@ -603,11 +603,11 @@ int Text::DrawFormatTextInRectWithTransfers(int x, int y, int width, pString tex
     vsprintf(buffer, text, args);
     va_end(args);
 
-    return DrawTextInRectWithTransfers(x, y, width, buffer);
+    return DrawTextInColumnWithTransfers(x, y, width, buffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawFormatTextInCenterRect(int x, int y, int width, int height, const char *text, ...)
+int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, const char *text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
@@ -616,7 +616,7 @@ int Text::DrawFormatTextInCenterRect(int x, int y, int width, int height, const 
     vsprintf(buffer, text, args);
     va_end(args);
 
-    return DrawTextInCenterRect(x, y, width, height, buffer);
+    return DrawStringInCenterRect(x, y, width, height, buffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -636,11 +636,11 @@ void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int heigh
                                                   Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
-    int eX = DrawTextInCenterRect(x, y, width, height, text, colorBackground);
+    int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
     Painter::FillRegion(eX - lenght - widthBorder, y - widthBorder + 1, w, h);
-    DrawTextInCenterRect(x, y, width, height, text, colorText);
+    DrawStringInCenterRect(x, y, width, height, text, colorText);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -649,11 +649,11 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
     Painter::SetColor(colorFill);
-    return DrawTextInCenterRect(x, y, width, height, text);
+    return DrawStringInCenterRect(x, y, width, height, text);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Text::Draw2SymbolsC(int x, int y, char symbol1, char symbol2, Color color1, Color color2)
+void Text::Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2)
 {
     DrawChar(x, y, symbol1, color1);
     DrawChar(x, y, symbol2, color2);

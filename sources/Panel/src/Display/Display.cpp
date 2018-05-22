@@ -331,7 +331,7 @@ void Display::DrawHint()
         if(Menu::ItemHint())
         {
             Control *control = Menu::ItemHint();
-            Text::DrawFormatTextInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->FullPath());
+            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->FullPath());
             y0 = control->DrawHint(x0 + 5, y0 + 17, width) + 5;
 
             char number = '1';
@@ -342,7 +342,7 @@ void Display::DrawHint()
 
                 for(int i = 0; i < choice->NumSubItems(); i++)
                 {
-                    y0 = Text::DrawFormatTextInRectWithTransfers(x0 + 2, y0, width - 10, "%c. \"%s\" %s", number++, choice->NameSubItem(i),
+                    y0 = Text::DrawFormatTextInColumnWithTransfers(x0 + 2, y0, width - 10, "%c. \"%s\" %s", number++, choice->NameSubItem(i),
                                                                  LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
                 }
             }

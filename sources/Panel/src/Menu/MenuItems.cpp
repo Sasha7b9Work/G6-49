@@ -331,5 +331,5 @@ int Control::DrawHint(int x, int y, int width, Color color) const
 {
     Painter::SetColor(color);
 
-    return Text::DrawTextInRectWithTransfers(x, y, width, titleHint[2 + LANG], color);
+    return Text::DrawTextInColumnWithTransfers(x, y, width, titleHint[2 + LANG], color);
 }
