@@ -38,9 +38,9 @@ public:
     /// Возвращает нижнюю координату прямоугольника
     static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
     /// Пишет текст с переносами
-    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
+    static int DrawTextInRectWithTransfers(const int left, const int top, const int width, const char *text, const Color color = Color::NUMBER);
 
-    static int DrawFormatTextInRectWithTransfers(int x, int y, int width, int height, pString text, ...);
+    static int DrawFormatTextInRectWithTransfers(int x, int y, int width, pString text, ...);
 
     static int DrawTextInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
 

@@ -44,7 +44,7 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char
 
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
-    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, height, text, colorFill);
+    DrawTextInRectWithTransfers(x + 3, y + 3, width - 8, text, colorFill);
     return y + height;
 }
 
@@ -56,11 +56,6 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
     if (upperCase)
     {
         symbol = SU::ToUpper(symbol);
-    }
-
-    if (symbol == ')' || symbol == '\"')
-    {
-        eX++;
     }
 
     int8 width = (int8)font->symbol[symbol].width;
@@ -84,14 +79,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
         }
     }
 
-    int retValue = eX + width;
-
-    if(symbol >= '0' && symbol <= '9' || symbol == '\"')
-    {
-        retValue++;
-    }
-
-    return retValue;
+    return eX + width;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -273,14 +261,11 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, const char *text, Color color)
+int Text::DrawTextInRectWithTransfers(const int left, const int top, const int width, const char *text, const Color color)
 {
     Painter::SetColor(color);
 
-    int top = eY;
-    int left = eX;
-    int right = eX + eWidth;
-    int bottom = eY + eHeight;
+    int right = left + width;
 
     char buffer[20];
     int numSymbols = (int)strlen(text);
@@ -290,7 +275,7 @@ int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, c
 
     int curSymbol = 0;
 
-    while (y < bottom && curSymbol < numSymbols)
+    while (curSymbol < numSymbols)
     {
         while (x < right - 1 && curSymbol < numSymbols)
         {
@@ -324,7 +309,7 @@ int Text::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, c
                 else
                 {
                     curSymbol += length;
-                    x = DrawText(x, y, word);
+                    x = DrawText(x, y, word) + 1;
                 }
             }
         }
@@ -609,7 +594,7 @@ int Text::DrawTextInCenterRect(int eX, int eY, int width, int eHeight, const cha
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawFormatTextInRectWithTransfers(int x, int y, int width, int height, pString text, ...)
+int Text::DrawFormatTextInRectWithTransfers(int x, int y, int width, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
@@ -618,7 +603,7 @@ int Text::DrawFormatTextInRectWithTransfers(int x, int y, int width, int height,
     vsprintf(buffer, text, args);
     va_end(args);
 
-    return DrawTextInRectWithTransfers(x, y, width, height, buffer);
+    return DrawTextInRectWithTransfers(x, y, width, buffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
