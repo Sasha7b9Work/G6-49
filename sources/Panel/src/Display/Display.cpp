@@ -62,12 +62,12 @@ void Display::Update()
     Painter::BeginScene(Color::BACK);
 
     Painter::SetColor(Color::FILL);
+
+    Menu::Draw();
     
     DrawSignal(A);
 
     DrawSignal(B);
-    
-    Menu::Draw();
 
     if (ADDITION_PAGE_IS_INPUT)
     {
