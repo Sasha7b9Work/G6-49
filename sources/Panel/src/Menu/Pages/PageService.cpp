@@ -41,6 +41,7 @@ DEF_CHOICE_2( cService_Language,                                                
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static void OnChanged_Background(bool)
 {
     Color::InitGlobalColors();
@@ -56,15 +57,16 @@ DEF_CHOICE_2( cService_Background,                                              
                        "Background color - black",
     BACKGROUND_BLACK, pService, FuncActive, OnChanged_Background, FuncDraw
 )
+*/
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_3( pService,                                                                                                                 //--- ÑÅÐÂÈÑ ---
+DEF_PAGE_2( pService,                                                                                                                 //--- ÑÅÐÂÈÑ ---
     "ÑÅÐÂÈÑ", "SERVICE",
     "Ñåðâèñíûå ôóíêöèè",
     "Service functions",
     bReset,
     cService_Language,   ///< ÑÅÐÂÈÑ - ßÇÛÊ
-    cService_Background, ///< ÑÅÐÂÈÑ - ÖÂÅÒ ÔÎÍÀ
+    //cService_Background, ///< ÑÅÐÂÈÑ - ÖÂÅÒ ÔÎÍÀ
     Page_Service, 0, FuncActive, FuncPress
 )

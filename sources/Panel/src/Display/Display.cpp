@@ -324,16 +324,21 @@ void Display::DrawHint()
         "For information about the menu item or the purpose of the button, use the appropriate control.\n"
         "To exit the prompt mode, press and hold the ESC key."
         ,
-        Color::BACK, Color::FILL);
+        Color::BACK, Color::FILL, Color::GRAY_50);
 
-        /*
         Painter::DrawFilledRectangle(x0, y0, width, 239 - y0 - 1, Color::BACK, Color::FILL);
 
         if(Menu::ItemHint())
         {
             Control *control = Menu::ItemHint();
+            Painter::SetColor(Color::GREEN_50);
+
             Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->FullPath());
+            Painter::SetColor(Color::GREEN);
+
             y0 = control->DrawHint(x0 + 5, y0 + 17, width) + 5;
+
+            Painter::SetColor(Color::WHITE);
 
             char number = '1';
 
@@ -354,6 +359,5 @@ void Display::DrawHint()
         {
 
         }
-        */
     }
 }

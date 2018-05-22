@@ -37,13 +37,13 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill)
+int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBack, Color colorRect, Color colorText)
 {
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
-    Painter::DrawRectangle(x, y, width, height, colorFill);
-    Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
-    DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, text, colorFill);
+    Painter::DrawRectangle(x, y, width, height, colorRect);
+    Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBack);
+    DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, text, colorText);
     return y + height;
 }
 

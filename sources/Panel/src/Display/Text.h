@@ -36,7 +36,7 @@ public:
 
     static void DrawTextInColumn(int x, int y, int width, const char *text);
     /// Возвращает нижнюю координату прямоугольника
-    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
+    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBack, Color colorRect, Color colorText);
     /// Пишет текст с переносами
     static int DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
 
