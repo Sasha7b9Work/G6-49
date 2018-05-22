@@ -39,9 +39,9 @@ static const Settings defSet =
     }
     ,
     A,                              // sig_channel
-    { Form_Sine, Form_Sine },       // sig_form[NumChannels]
+    { Sine, Sine },                 // sig_form[NumChannels]
     { 
-        Frequency,    // sig_parameter[NumForms]
+        Frequency,                  // sig_parameter[NumForms]
         Frequency,
         Frequency
     },
@@ -112,7 +112,7 @@ static const Settings defSet =
             } 
         }
     },
-    Russian,         // serv_language
+    RU,              // serv_language
     0,               // menu_currentPage
     (Page*)0,        // menu_page
     false,           // dbg_console
@@ -192,7 +192,7 @@ void TuneGenerator(Channel ch)
     Generator::SetFormWave(ch, WAVE_FORM_CH(ch));
     Generator::SetParameter(ch, Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Frequency))->Value());
     Generator::SetParameter(ch, Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Amplitude))->Value());
-    if (form.type == Form_Impulse)
+    if (form.type == Impulse)
     {
         Generator::SetParameter(ch, Duration, (&INPUT_WINDOW_STRUCT(ch, form, Duration))->Value());
     }

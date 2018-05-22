@@ -28,8 +28,8 @@ typedef enum
 
 typedef enum
 {
-    Russian,
-    English
+    RU,
+    EN
 } Language;
 
 typedef enum

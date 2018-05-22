@@ -37,7 +37,7 @@ extern const PageBase pInput;
 #define DEBUG_MODE_ENABLED      (set.dbg_debugModeEnabled)
 
 #define LANG                    (set.serv_language)
-#define LANG_RU                 (LANG == Russian)
+#define LANG_RU                 (LANG == RU)
 
 #define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])

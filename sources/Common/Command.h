@@ -56,13 +56,18 @@ enum WaveParameter
 
 enum Type_WaveForm
 {
-    Form_Sine,
-    Form_Cosine,
-    Form_Meander,
-    Form_SawPlus,
-    Form_SawMinus,
-    Form_Impulse,
-    Form_Free,
+    Sine,           ///< Синус
+    Cosine,         ///< Косинус
+    Meander,        ///< Меандр
+    RampPlus,       ///< Пила+
+    RampMinus,      ///< Пила-
+    Triangle,       ///< Треугольник
+    Trapeze,        ///< Трапеция
+    Impulse,        ///< Импульс
+    ExpPlus,        ///< Экспонента+
+    ExpMinus,       ///< Экспонента-
+    Noize,          ///< Шум
+    Free,           ///< Произвольный
     NumForms
 };
 
@@ -82,12 +87,16 @@ enum CommandRead
     READ_POINTS             ///< Принимает точки произвольного сигнала
 };
 
-
 #define LENGTH_SPI_BUFFER   10
 
 #define SPI_SLAVE_SYNBYTE   0x53
 
 #define SPI_MASTER_SYNBYTE  0xAC
+
+#define NAME_FORM(form, lang) namesWaveForm[form][lang]
+#define FORM_RU(form) NAME_FORM(form, RU)
+#define FORM_EN(form) NAME_FORM(form, EN)
+extern const char * namesWaveForm[NumForms][2];
 
 
 //const char *Command_Name(CommandWrite command);

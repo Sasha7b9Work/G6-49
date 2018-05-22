@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{AF211104-784
 		doc\03 Аппаратные сигналы генератора.h = doc\03 Аппаратные сигналы генератора.h
 		doc\04 Загрузчик.h = doc\04 Загрузчик.h
 		doc\05 Меню.h = doc\05 Меню.h
+		doc\06 Сигналы и их параметры.h = doc\06 Сигналы и их параметры.h
 		doc\timers.txt = doc\timers.txt
 	EndProjectSection
 EndProject

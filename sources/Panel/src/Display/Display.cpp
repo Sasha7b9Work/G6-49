@@ -63,11 +63,11 @@ void Display::Update()
 
     Painter::SetColor(Color::FILL);
 
-    Menu::Draw();
-    
     DrawSignal(A);
 
     DrawSignal(B);
+
+    Menu::Draw();
 
     if (ADDITION_PAGE_IS_INPUT)
     {
@@ -130,7 +130,7 @@ void Display::DrawSignalUGO(Channel chan, int y0)
 
     WaveForm form = WAVE_FORM_CH(chan);
 
-    if (form.type == Form_Sine)
+    if (form.type == Sine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -144,7 +144,7 @@ void Display::DrawSignalUGO(Channel chan, int y0)
             Painter::RunDisplay();
         }
     }
-    else if (form.type == Form_SawPlus)
+    else if (form.type == RampPlus)
     {
         int dX = 30;
         for (int x = x0; x < x0 + 80; x += dX)
@@ -153,7 +153,7 @@ void Display::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawLine(x + dX, aveY, x + dX, minY);
         }
     }
-    else if (form.type == Form_Impulse)
+    else if (form.type == Impulse)
     {
         int deltaX = 20;
         for (int i = 0; i < 5; i++)

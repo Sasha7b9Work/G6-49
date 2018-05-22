@@ -157,7 +157,7 @@
           <Type>0</Type>
           <LineNumber>1052</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227876</Address>
+          <Address>134229708</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -173,7 +173,7 @@
           <Type>0</Type>
           <LineNumber>1030</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227806</Address>
+          <Address>134229638</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -187,9 +187,9 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>60</LineNumber>
+          <LineNumber>318</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134245842</Address>
+          <Address>134247996</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -198,23 +198,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;2&gt;.\src\Display\Text.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Display/Text.cpp\60</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>57</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134245834</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Display\Text.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Display/Text.cpp\57</Expression>
+          <Expression>\\\src/Display/Text.cpp\318</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -1726,7 +1710,7 @@
 
   <Group>
     <GroupName>Utils</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
