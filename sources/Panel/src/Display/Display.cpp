@@ -333,10 +333,10 @@ void Display::DrawHint()
             Control *control = Menu::ItemHint();
             Painter::SetColor(Color::GREEN_50);
 
-            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->FullPath());
+            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->Title());
             Painter::SetColor(Color::GREEN);
 
-            y0 = control->DrawHint(x0 + 5, y0 + 17, width) + 5;
+            y0 = control->DrawHint(x0 + 5, y0 + 17, width - 8) + 5;
 
             Painter::SetColor(Color::WHITE);
 
@@ -348,12 +348,10 @@ void Display::DrawHint()
 
                 for(int i = 0; i < choice->NumSubItems(); i++)
                 {
-                    y0 = Text::DrawFormatTextInColumnWithTransfers(x0 + 2, y0, width - 10, "%c. \"%s\" %s", number++, choice->NameSubItem(i),
-                                                                 LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
+                    y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width - 10, Color::GREEN, "%c. \"%s\" %s", number++, 
+                                                                choice->NameSubItem(i), LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
                 }
             }
-
-            Text::DrawText(10, 200, "1. 2. 3. A. B. C.");
         }
         else if(Menu::PanelControlHint())
         {

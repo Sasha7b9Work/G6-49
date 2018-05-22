@@ -26,12 +26,12 @@ static void OnPress_Channel(bool)
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - КАНАЛ ---
     "КАНАЛ", "CHANNEL",
-    "Выбор канала для настройки",
-    "Selecting a channel to set up",
-    "A", "A", "Управление параметрами сигнала на выходе A",
-              "Controlling the signal parameters at output A",
-    "B", "B", "Управление параметрами сигнала на выходе B",
-              "Controlling the signal parameters at output B",
+    "Выбор канала для настройки.",
+    "Selecting a channel to set up.",
+    "A", "A", "Управление параметрами сигнала на выходе A.",
+              "Controlling the signal parameters at output A.",
+    "B", "B", "Управление параметрами сигнала на выходе B.",
+              "Controlling the signal parameters at output B.",
     CURRENT_CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
 )
 
@@ -65,22 +65,22 @@ void PageSignals::OnPress_Form(bool)
 
 DEF_CHOICE_7( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
     "ФОРМА", "FORM",
-    "Выбор формы сигнала",
-    "Select waveform",
-    "СИНУС",        "SINE",    "Синус",
-                               "Sinus",
-    "КОСИНУС",      "COSINE",  "Косинус",
-                               "Cosine",
-    "МЕАНДР",       "MEANDER", "Меандр",
-                               "Meander",
-    "ПИЛА+",        "SAW+",    "Нарастающая пила",
-                               "Growing saw",
-    "ПИЛА-",        "SAW-",    "Убывающая пила",
-                               "Wrecking saw",
-    "ИМПУЛЬС",      "IMPULSE", "Импульсы",
-                               "Impulses",
-    "ПРОИЗВОЛЬНЫЙ", "FREE",    "Произвольная форма сигнала",
-                               "Arbitrary waveform",
+    "Выбор формы сигнала.",
+    "Select waveform.",
+    "СИНУС",        "SINE",    "Синус.",
+                               "Sinus.",
+    "КОСИНУС",      "COSINE",  "Косинус.",
+                               "Cosine.",
+    "МЕАНДР",       "MEANDER", "Меандр.",
+                               "Meander.",
+    "ПИЛА+",        "SAW+",    "Нарастающая пила.",
+                               "Growing saw.",
+    "ПИЛА-",        "SAW-",    "Убывающая пила.",
+                               "Wrecking saw.",
+    "ИМПУЛЬС",      "IMPULSE", "Импульсы.",
+                               "Impulses.",
+    "ПРОИЗВОЛЬНЫЙ", "FREE",    "Произвольная форма сигнала.",
+                               "Arbitrary waveform.",
     waveForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -95,15 +95,15 @@ static void OnPress_SetParameter()
 
 DEF_BUTTON( bSetParameter,                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА ---
     "ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА", "ENTER VALUE PARAMETER",
-    "Открывает окно ввода параметра",
-    "Opens the parameter input window",
+    "Открывает окно ввода параметра.",
+    "Opens the parameter input window.",
     pSignals, FuncActive, OnPress_SetParameter, FuncDraw
 )
 
 DEF_CHOICE_PARAMETER(parameters,                                                                               //--- НАСТРОЙКИ СИГНАЛОВ - ПАРАМЕТР ---
     "ПАРАМЕТР", "PARAMETER",
-    "Выбор параметра для настройки",
-    "Choosing a setting for customization",
+    "Выбор параметра для настройки.",
+    "Choosing a setting for customization.",
     pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER(WaveForm(waveForm))),
     true, true, true, true, false, false, false, false
 )

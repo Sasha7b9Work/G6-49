@@ -208,7 +208,7 @@ bool Text::IsLetter(char symbol)
     {     //  0x00   0x01   0x02   0x03   0x04   0x05   0x06   0x07   0x08   0x09   0x0a   0x0b   0x0c   0x0d   0x0e   0x0f
  /* 0x00 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
  /* 0x10 */  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
- /* 0x20 */  false, true,  true,  false, false, false, false, false, true,  true,  false, false, false, false, true,  false,
+ /* 0x20 */  false, true,  true,  false, false, false, false, false, true,  true,  true,  true,  true,  true,  true,  false,
  /* 0x30 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, false, false, false,
  /* 0x40 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
  /* 0x50 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, false, false,
@@ -257,6 +257,91 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     }
 
     return 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color color)
+{
+    bool inverse = false;               // Установленное в true значение означает, что сейчас идёт вывод инверсным цветом
+
+    Painter::SetColor(color);
+
+    Color colorDraw = Painter::GetColor();
+
+    int right = left + width;
+
+    char buffer[20];
+    int numSymbols = (int)strlen(text);
+
+    int y = top - 1;
+    int x = left;
+
+    int curSymbol = 0;
+
+    while (curSymbol < numSymbols)
+    {
+        while (x < right - 1 && curSymbol < numSymbols)
+        {
+            int length = 0;
+            char *word = GetWord(text + curSymbol, &length, buffer);
+
+            if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
+            {
+                char symbol = text[curSymbol++];
+                if (symbol == '\n')
+                {
+                    x = right;
+                    continue;
+                }
+                if (symbol == ' ' && x == left)
+                {
+                    continue;
+                }
+                x = DrawChar(x, y, symbol);
+            }
+            else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
+            {
+                int lengthString = Font::GetLengthText(word);
+                if (x + lengthString > right + 5)
+                {
+                    int numSymb = DrawPartWord(word, x, y, right, true);
+                    x = right;
+                    curSymbol += numSymb;
+                    continue;
+                }
+                else
+                {
+                    curSymbol += length;
+
+                    for (uint i = 0; i < strlen(word); ++i)
+                    {
+                        if(inverse && word[i] == '\"')
+                        {
+                            Painter::SetColor(colorDraw);
+                            inverse = false;
+                            x = DrawChar(x, y, word[i]);
+                        }
+                        else
+                        {
+                            x = DrawChar(x, y, word[i]);
+                            if (!inverse && word[i] == '\"')
+                            {
+                                Painter::SetColor(colorDif);
+                                inverse = true;
+                            }
+                        }
+                        ++x;
+                    }
+                }
+            }
+        }
+        x = left;
+        y += 9;
+    }
+
+    Painter::SetColor(color);
+
+    return y;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -603,6 +688,19 @@ int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString t
     va_end(args);
 
     return DrawTextInColumnWithTransfers(x, y, width, buffer);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...)
+{
+#define SIZE_BUFFER_DRAW_FORM_TEXT 200
+    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
+    va_list args;
+    va_start(args, text);
+    vsprintf(buffer, text, args);
+    va_end(args);
+
+    return DrawTextInColumnWithTransfersDiffColors(x, y, width, buffer, color);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
