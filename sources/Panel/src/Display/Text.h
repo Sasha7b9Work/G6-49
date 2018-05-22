@@ -49,6 +49,8 @@ public:
     static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
                                                     Color colorBackground);
     static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
+    /// ≈сли true, то все буквы вывод€тс€ в верхнем регистре
+    static bool IsUpperCase();
 
 private:
 

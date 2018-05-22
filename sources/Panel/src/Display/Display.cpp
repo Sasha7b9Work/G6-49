@@ -326,6 +326,7 @@ void Display::DrawHint()
         ,
         Color::BACK, Color::FILL);
 
+        /*
         Painter::DrawFilledRectangle(x0, y0, width, 239 - y0 - 1, Color::BACK, Color::FILL);
 
         if(Menu::ItemHint())
@@ -353,5 +354,6 @@ void Display::DrawHint()
         {
 
         }
+        */
     }
 }

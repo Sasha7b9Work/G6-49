@@ -1,4 +1,4 @@
-#include "CommonFunctions.h"
+    #include "CommonFunctions.h"
 #include "Log.h"
 #include <stdio.h>
 #include <string.h>

@@ -1,9 +1,8 @@
 #include "defines.h"
 #include "Display/DisplayTypes.h"
+#include "Display/Text.h"
 #include "Font.h"
-
-//#include "font5display.inc"
-
+#include "Utils/StringUtils.h"
 #include "font8.inc"
 #include "font5.inc"
 #include "fontUGO.inc"
@@ -42,5 +41,5 @@ int Font::GetHeightSymbol(char)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Font::GetLengthSymbol(char symbol)
 {
-    return font->symbol[symbol].width + 1;
+    return font->symbol[Text::IsUpperCase() ? SU::ToUpper(symbol) : symbol].width + 1;
 }

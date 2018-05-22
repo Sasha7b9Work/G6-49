@@ -41,7 +41,6 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char
 {
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
-
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
     DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, text, colorFill);
@@ -155,7 +154,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, const char *
                 {
                     continue;
                 }
-                x += Font::GetLengthSymbol(symbol);
+                x += Font::GetLengthSymbol(SU::ToUpper(symbol));
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
@@ -667,4 +666,10 @@ void Text::Draw10SymbolsInRect(int x, int y, char eChar)
         DrawChar(x + 8 * i, y, eChar + i);
         DrawChar(x + 8 * i, y + 8, eChar + i + 16);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Text::IsUpperCase()
+{
+    return upperCase;
 }
