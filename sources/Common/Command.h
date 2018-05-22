@@ -66,7 +66,7 @@ enum Type_WaveForm
     Impulse,        ///< »мпульс
     ExpPlus,        ///< Ёкспонента+
     ExpMinus,       ///< Ёкспонента-
-    Noize,          ///< Ўум
+    Noise,          ///< Ўум
     Free,           ///< ѕроизвольный
     NumForms
 };

@@ -256,6 +256,21 @@ static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5,
 static const ChoiceBase name = { Control_Choice, 8, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
     (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
+#define DEF_CHOICE_12(name, titleRU, titleEN, hintRU, hintEN,                                                                                       \
+    nameRu1,  nameEn1,  hintRu1,  hintEn1,  nameRu2,  nameEn2,  hintRu2,  hintEn2,  nameRu3,  nameEn3,  hintRu3,  hintEn3,                          \
+    nameRu4,  nameEn4,  hintRu4,  hintEn4,  nameRu5,  nameEn5,  hintRu5,  hintEn5,  nameRu6,  nameEn6,  hintRu6,  hintEn6,                          \
+    nameRu7,  nameEn7,  hintRu7,  hintEn7,  nameRu8,  nameEn8,  hintRu8,  hintEn8,  nameRu9,  nameEn9,  hintRu9,  hintEn9,                          \
+    nameRu10, nameEn10, hintRu10, hintEn10, nameRu11, nameEn11, hintRu11, hintEn11, nameRu12, nameEn12, hintRu12, hintEn12,                         \
+    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
+static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4,                                             \
+    nameRu5, nameEn5, nameRu6,  nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9, nameRu10, nameEn10, nameRu11, nameEn11,              \
+    nameRu12, nameEn12};                                                                                                                            \
+static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4, hintRu5, hintRu6, hintRu7, hintRu8, hintRu9, hintRu10, hintRu11, hintRu12}; \
+static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5, hintEn6, hintEn7, hintEn8, hintEn9, hintEn10, hintEn11, hintEn12}; \
+static const ChoiceBase name = { Control_Choice, 12, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                   \
+    (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
+
+
 #define DEF_CHOICE_REG_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                    \
     nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nameEn3, nameRu4, nameEn4, nameRu5, nameEn5,                                                       \
     nameRu6, nameEn6, nameRu7, nameEn7, nameRu8, nameEn8, nameRu9, nameEn9,                                                                         \

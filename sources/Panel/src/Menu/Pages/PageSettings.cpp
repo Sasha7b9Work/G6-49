@@ -63,7 +63,7 @@ void PageSignals::OnPress_Form(bool)
     TuneGenerator(CURRENT_CHANNEL);
 }
 
-DEF_CHOICE_7( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
+DEF_CHOICE_12( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
@@ -83,10 +83,14 @@ DEF_CHOICE_7( cForm,                                                            
                                             "Trapeze",
     FORM_RU(Impulse),   FORM_EN(Impulse),   "Импульс.",
                                             "Impulse.",
-    FORM_RU(ExpPlus), FORM_EN(ExpMinus), "Возрастающая экспонента",
-             ""
-    "ПРОИЗВОЛЬНЫЙ", "FREE",    "Произвольная форма сигнала.",
-                               "Arbitrary waveform.",
+    FORM_RU(ExpPlus),   FORM_EN(ExpPlus),   "Возрастающая экспонента.",
+                                            "Growing exponent.",
+    FORM_RU(ExpMinus),  FORM_EN(ExpMinus),  "Убывающая экспонента.",
+                                            "Decreasing exponent.",
+    FORM_RU(Noise),     FORM_EN(Noise),     "Шум.",
+                                            "Noise.",
+    FORM_RU(Free),      FORM_EN(Free),      "Произвольная форма сигнала.",
+                                            "Arbitrary waveform.",
     waveForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
