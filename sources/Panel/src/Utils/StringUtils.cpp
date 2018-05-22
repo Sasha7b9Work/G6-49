@@ -602,7 +602,7 @@ bool EqualsStrings(char *str1, char *str2)
 int SU::FindSymbol(const char *string, char symbol)
 {
     int pos = 0;
-    while(*string)
+    while(*string)  
     {
         if(*string == symbol)
         {
@@ -617,17 +617,17 @@ int SU::FindSymbol(const char *string, char symbol)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char SU::ToUpper(char symbol)
 {
-    if(symbol <= 0x7a)
-    {
-        return toupper(symbol);
-    }
-    else if(symbol == 0xb8)
-    {
-        return 0xa8;
-    }
-    else if(symbol >= 0xe0)
+    if(symbol >= 0xe0)
     {
         return symbol - 0x20;
+    }
+    else if (symbol == 0xb8)
+    {
+        return symbol - 0x10;
+    }
+    else if (symbol <= 0x7a)
+    {
+        return toupper(symbol);
     }
     return symbol;
 }

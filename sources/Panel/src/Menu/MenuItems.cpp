@@ -327,9 +327,9 @@ void Page::SetCurrentSubPage(int8 pos)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::DrawHint(int x, int y, int width, int height, Color color) const
+int Control::DrawHint(int x, int y, int width, int height, Color color) const
 {
     Painter::SetColor(color);
 
-    Text::DrawTextInRectWithTransfers(x, y, width, height, titleHint[2 + LANG], color);
+    return Text::DrawTextInRectWithTransfers(x, y, width, height, titleHint[2 + LANG], color);
 }

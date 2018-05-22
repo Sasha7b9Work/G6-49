@@ -58,36 +58,40 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
         symbol = SU::ToUpper(symbol);
     }
 
+    if (symbol == ')' || symbol == '\"')
+    {
+        eX++;
+    }
+
     int8 width = (int8)font->symbol[symbol].width;
     int8 height = (int8)font->height;
-
-    int size = 1;
 
     for (int b = 0; b < height; b++)
     {
         if (ByteFontNotEmpty(symbol, b))
         {
             int x = eX;
-            int y = eY + b * size + 9 - height;
+            int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
                 if (BitInFontIsExist(symbol, b, bit))
                 {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            Painter::SetPoint(x + i, y + j);
-                        }
-                    }
+                    Painter::SetPoint(x, y);
                 }
-                x += size;
+                x++;
             }
         }
     }
 
-    return eX + width * size;
+    int retValue = eX + width;
+
+    if(symbol >= '0' && symbol <= '9' || symbol == '\"')
+    {
+        retValue++;
+    }
+
+    return retValue;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -594,19 +598,7 @@ int Text::DrawSpaces(int x, int y, const char *text, int *numSymbols)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawFormText(int x, int y, Color color, pString text, ...)
-{
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
-    va_start(args, text);
-    vsprintf(buffer, text, args);
-    va_end(args);
-    return DrawText(x, y, buffer, color);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
+int Text::DrawTextInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
 {
     Painter::SetColor(color);
     int lenght = Font::GetLengthText(text);
@@ -617,15 +609,53 @@ int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const c
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawFormatTextInRectWithTransfers(int x, int y, int width, int height, pString text, ...)
+{
+#define SIZE_BUFFER_DRAW_FORM_TEXT 200
+    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
+    va_list args;
+    va_start(args, text);
+    vsprintf(buffer, text, args);
+    va_end(args);
+
+    return DrawTextInRectWithTransfers(x, y, width, height, buffer);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawFormatTextInCenterRect(int x, int y, int width, int height, const char *text, ...)
+{
+#define SIZE_BUFFER_DRAW_FORM_TEXT 200
+    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
+    va_list args;
+    va_start(args, text);
+    vsprintf(buffer, text, args);
+    va_end(args);
+
+    return DrawTextInCenterRect(x, y, width, height, buffer);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Text::DrawFormatText(int x, int y, pString text, ...)
+{
+#define SIZE_BUFFER_DRAW_FORM_TEXT 200
+    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
+    va_list args;
+    va_start(args, text);
+    vsprintf(buffer, text, args);
+    va_end(args);
+    return DrawText(x, y, buffer);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Text::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
                                                   Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
-    int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
+    int eX = DrawTextInCenterRect(x, y, width, height, text, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
     Painter::FillRegion(eX - lenght - widthBorder, y - widthBorder + 1, w, h);
-    DrawStringInCenterRect(x, y, width, height, text, colorText);
+    DrawTextInCenterRect(x, y, width, height, text, colorText);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -634,7 +664,7 @@ int Text::DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height,
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
     Painter::SetColor(colorFill);
-    return DrawStringInCenterRect(x, y, width, height, text);
+    return DrawTextInCenterRect(x, y, width, height, text);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

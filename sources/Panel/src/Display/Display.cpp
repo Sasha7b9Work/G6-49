@@ -317,7 +317,7 @@ void Display::DrawHint()
         y0 = Text::DrawTextInBoundedRectWithTransfers(x0, y0, width,
         "Включён режим подсказок.\n"
         "Для получения информации по элементу меню или назначению кнопки используйте соответствующий орган управления.\n"
-        "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC",
+        "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC. 1. 2. 3.",
         Color::BACK, Color::FILL);
 
         Painter::DrawFilledRectangle(x0, y0, width, 239 - y0 - 1, Color::BACK, Color::FILL);
@@ -325,7 +325,21 @@ void Display::DrawHint()
         if(Menu::ItemHint())
         {
             Control *control = Menu::ItemHint();
-            control->DrawHint(x0 + 2, y0 + 5, width, 239 - y0 - 1, Color::FILL);
+            Text::DrawFormatTextInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->FullPath());
+            y0 = control->DrawHint(x0 + 5, y0 + 17, width, 239 - y0 - 1) + 5;
+
+            char number = '1';
+
+            if(control->Type() == Control_Choice)
+            {
+                Choice *choice = (Choice *)control;
+
+                for(int i = 0; i < choice->NumSubItems(); i++)
+                {
+                    y0 = Text::DrawFormatTextInRectWithTransfers(x0 + 2, y0, width - 10, 20, "%c. \"%s\" %s", number++, choice->NameSubItem(i),
+                                                                 LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
+                }
+            }
         }
         else if(Menu::PanelControlHint())
         {

@@ -17,32 +17,38 @@ public:
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
     static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
-    /// Возвращает нижнюю координату прямоугольника
-    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
-
-    /// Пишет текст с переносами
-    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
 
     static int DrawBigChar(int eX, int eY, int size, char symbol);
 
     static void DrawBigText(int x, int y, int size, const char *text, Color color = Color::NUMBER);
 
     static void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
-
-    static void DrawTextInRect(int x, int y, int width, const char *text);
-    /// Пишет строку в позиции x, y
-    static int DrawFormText(int x, int y, Color color, pString text, ...);
-
-    static int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
-    /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
-    static void DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
-                                                    Color colorBackground);
-
-    static int DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
-
+    
     static void Draw2SymbolsC(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
     static void Draw10SymbolsInRect(int x, int y, char eChar);
+
+    /***************** Вывод форматированного текста ***********************/
+    /// Пишет строку в позиции x, y
+    static int DrawFormatText(int x, int y, pString text, ...);
+
+    /*************** Вывод текста в области экрана **************************/
+
+    static void DrawTextInRect(int x, int y, int width, const char *text);
+    /// Возвращает нижнюю координату прямоугольника
+    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBackground, Color colorFill);
+    /// Пишет текст с переносами
+    static int DrawTextInRectWithTransfers(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
+
+    static int DrawFormatTextInRectWithTransfers(int x, int y, int width, int height, pString text, ...);
+
+    static int DrawTextInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
+
+    static int DrawFormatTextInCenterRect(int x, int y, int width, int height, const char *text, ...);
+    /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
+    static void DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
+                                                    Color colorBackground);
+    static int DrawStringInCenterRectAndBoundItC(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
 
 private:
 
