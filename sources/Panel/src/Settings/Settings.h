@@ -9,48 +9,45 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pInput;
 
-#define CURRENT_CHANNEL         (set.sig_channel)
-#define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == A)
-#define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == B)
-
-#define CHANNEL_ENABLED(ch)     (set.sig_enabled[ch])
-#define CHANNEL_ENABLED_A       (CHANNEL_ENABLED(A))
-#define CHANNEL_ENABLED_B       (CHANNEL_ENABLED(B))
-
 #define WAVE_FORM               (set.sig_form[CURRENT_CHANNEL])
 #define WAVE_FORM_CH(ch)        (set.sig_form[ch])
-#define WAVE_FORM_IS_FPGA       (WAVE_FORM != Form_Sine && WAVE_FORM != Form_Impulse)
+#define WAVE_FORM_IS_FPGA       (WAVE_FORM != Sine && WAVE_FORM != Impulse)
 
 #define COLOR(x)                (set.disp_Colors[x])
-#define LANGUAGE                (set.serv_language)
 #define CURRENT_PAGE            (set.menu_currentPage)
 #define ADDITION_PAGE           (set.menu_page)
 #define ADDITION_PAGE_IS_INPUT  (ADDITION_PAGE == (Page *)&pInput)
 #define ADDITION_PAGE_IS_NONE   (ADDITION_PAGE == 0)
 
-#define CONSOLE_ENABLED         (set.dbg_console)
-
-#define FREQ_COUNTER_ENABLED    (set.freq_enabled)
-
-#define DEBUG_MODE_ENABLED      (set.dbg_debugModeEnabled)
-
-#define LANG                    (set.serv_language)
-#define LANG_RU                 (LANG == RU)
-
 #define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
 
-#define BACKGROUND_BLACK        (set.serv_bacgroundBlack)
-
 #define CURRENT_PARAMETER(form) (set.sig_parameter[form.ToValue()])
 
-#define SIZE_BYTE               (set.usb_sizeByte)
-#define STOP_BIT                (set.usb_stopBit)
-#define PARITY                  (set.usb_parity)
-#define INTERVAL                (set.freq_interval)
 #define BILLING_TIME            (set.freq_billingTime)
 
-#define SHOW_STATISTICS         (set.dbg_statistics)
+#define BIT_FL1(numBit)  ((FLAG_1 >> numBit) & 0x01)
+#define BIT_FL2(numBit)  ((FLAG_2 >> numBit) & 0x01)
+
+#define CONSOLE_ENABLED         (BIT_FL1(BIT_CONSOLE))
+#define FREQ_COUNTER_ENABLED    (BIT_FL1(BIT_FREQ_ENABLED))
+#define DEBUG_MODE_ENABLED      (BIT_FL1(BIT_DBG_MODE))
+#define BACKGROUND_BLACK        (BIT_FL1(BIT_BACK_BLACK))
+#define SHOW_STATISTICS         (BIT_FL1(BIT_STATISTICS))
+#define TUNE_FULL               (BIT_FL1(BIT_TUNE_FULL))
+#define INTERVAL                ((Interval)BIT_FL1(BIT_FREQ_INTERVAL))
+#define PARITY                  ((Parity)BIT_FL1(BIT_PARITY))
+
+#define CHANNEL_ENABLED(ch)     ((FLAG_2 >> (ch + BIT_CHAN_A)) & 0x01)
+#define SWITCH_CHANNEL_A        (FLAG_2 ^= (1 << (BIT_CHAN_A)))
+#define SWITCH_CHANNEL_B        (FLAG_2 ^= (1 << (BIT_CHAN_B)))
+#define LANG                    ((Language)BIT_FL2(BIT_LANGUAGE))
+#define LANG_RU                 (LANG == RU)
+#define CURRENT_CHANNEL         ((Channel)BIT_FL2(BIT_CHANNEL))
+#define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == A)
+#define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == B)
+#define SIZE_BYTE               ((SizeByte)BIT_FL2(BIT_SIZE_BYTE))
+#define STOP_BIT                ((StopBit)BIT_FL2(BIT_STOP_BIT))
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,27 +65,35 @@ public:
         {
         }cal;
     };
-    col_val             disp_Colors[32];                ///< Цвета
-    Channel             sig_channel;                    ///< Текущий выбранный канал
-    WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
-    WaveParameter       sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
-    Language            serv_language;                  ///< Выбранный язык
-    int8                menu_currentPage;               ///< Отображаемая страница меню
-    Page*               menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
-    bool                dbg_console;
-    bool                sig_enabled[NumChannels];       ///< Состояние выхода - включен или выключен
-    bool                serv_bacgroundBlack;            ///< Если true, то цвет фона - чёрный
-    bool                sig_tuneFull;                   ///< Если true, то засылка параметра происходит непрерывно во время настройки
-    bool                dbg_debugModeEnabled;           ///< Если true, то включён отладочный режим - непрерывные засылки в альтеру
-    int8                menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
-    int8                menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
-    bool                freq_enabled;                   ///< Отображение показаний частотомера
-    SizeByte            usb_sizeByte;                   ///< Размер байта для связи по USB
-    StopBit             usb_stopBit;                    ///< Количество стоп-бит
-    Parity              usb_parity;                     ///< Флаг чётности
-    Interval            freq_interval;                  ///< Интервал запуска измерений
-    BillingTime         freq_billingTime;               ///< Время счёта
-    bool                dbg_statistics;                 ///< Показывать ли статистику
+    col_val         disp_Colors[32];                ///< Цвета
+    WaveForm        sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
+    WaveParameter   sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
+    int8            menu_currentPage;               ///< Отображаемая страница меню
+    Page*           menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
+    int8            menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
+    int8            menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
+    BillingTime     freq_billingTime;               ///< Время счёта
+
+#define FLAG_1      set.flag1
+    uint8           flag1;
+#define BIT_PARITY        0  ///< usb_parity           - флаг чётности Parity
+#define BIT_FREQ_INTERVAL 1  ///< freq_interval        - интервал запуска измерений
+#define BIT_CONSOLE       2  ///< dbg_console          - показ отладочной консоли
+#define BIT_BACK_BLACK    3  ///< serv_bacgroundBlack  - если 1, то цвет фона - чёрный
+#define BIT_TUNE_FULL     4  ///< sig_tuneFull         - если 1, то засылка параметра происходит непрерывно во время настройки
+#define BIT_DBG_MODE      5  ///< dbg_debugModeEnabled - если 1, то включён отладочный режим - непрерывные засылки в альтеру
+#define BIT_FREQ_ENABLED  6  ///< freq_enabled         - если 1, то отображаются показания частотомера
+#define BIT_STATISTICS    7  ///< dbg_statistics       - если 1, то показывать статистику
+
+#define FLAG_2      set.flag2
+    uint8           flag2;
+#define BIT_LANGUAGE      0  ///< serv_language        - выбранный язык
+#define BIT_CHAN_A        1  ///< бит, отвечающий за включённый канал A
+#define BIT_CHAN_B        2  ///< бит, отвечающий за включённый канал B
+#define BIT_CHANNEL       3  ///< sig_channel          - текущий выбранный канал
+#define BIT_SIZE_BYTE     4  ///< usb_sizeByte         - размер байта для связи по USB
+#define BIT_STOP_BIT      5  ///< usb_stopBit          - количество стоп-бит
+
 
     static void Save();
     static void Load(bool _default = false);

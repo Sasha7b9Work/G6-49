@@ -46,7 +46,7 @@ typedef void (*pFuncVB)(bool);
 #define _GET_BIT(value, bit)                    (((value) >> bit) & 0x01)
 #define _SET_BIT(value, bit)                    ((value) |= (1 << bit))
 #define _CLEAR_BIT(value, bit)                  ((value) &= (~(1 << bit)))
-#define _SET_BIT_VALUE(value, numBit, bitValue) (value |= (bitValue << numBit))
+#define _SET_BIT_VALUE(value, numBit, bitValue) ((value) |= ((bitValue) << (numBit)))
 
 #define ERROR_VALUE_FLOAT   1.111e29f
 #define ERROR_VALUE_UINT8   255
@@ -60,3 +60,16 @@ typedef void (*pFuncVB)(bool);
 #define ENABLED_EN "ON"
 #define DISABLED_RU "ÎÒÊË"
 #define DISABLED_EN "OFF"
+
+#define _bitset(bits)                               \
+  ((uint8)(                                         \
+  (((uint8)((uint)bits / 01)        % 010) << 0) |  \
+  (((uint8)((uint)bits / 010)       % 010) << 1) |  \
+  (((uint8)((uint)bits / 0100)      % 010) << 2) |  \
+  (((uint8)((uint)bits / 01000)     % 010) << 3) |  \
+  (((uint8)((uint)bits / 010000)    % 010) << 4) |  \
+  (((uint8)((uint)bits / 0100000)   % 010) << 5) |  \
+  (((uint8)((uint)bits / 01000000)  % 010) << 6) |  \
+  (((uint8)((uint)bits / 010000000) % 010) << 7)))
+
+#define BINARY_U8( bits ) _bitset(0##bits)

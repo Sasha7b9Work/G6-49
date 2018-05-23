@@ -36,13 +36,15 @@ enum TypeControl
 
 
 /// Общая часть для всех типов элементов меню
-#define COMMON_PART_MENU_ITEM                                                                           \
-    TypeControl     type;           /* Тип итема */                                                     \
-    int8            num;            /* Число вариантов для Choice или число контролов для Page*/        \
-    bool            isPageSB;       /* Если true, то это страница малых кнопок */                       \
-    NamePage        name;           /* Имя из перечисления NamePage */                                  \
-    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */        \
-    pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                     \
+#define COMMON_PART_MENU_ITEM                                                                                                                   \
+    TypeControl     type;           /* Тип итема */                                                                                             \
+    int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                                \
+    bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Control_Page */                                   \
+                                    /* Если type == Control_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */     \
+    NamePage        nameOrNumBit;   /* Имя из перечисления NamePage, если type == Control_Page */                                               \
+                                    /* В случае, если type == Control_Choice,  определяет номер бита */                                         \
+    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
+    pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                                                             \
     const char      *titleHint[4]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
 class PageBase;
@@ -316,7 +318,7 @@ class Choice : public Control
 {
 public:
 
-    int8 * cell;
+    int8 * cell_;
     /// Варианты выбора на русском и английском языках.
     pString *names;
     /// Подсказки для каждого варианта на русском языке
@@ -350,11 +352,9 @@ public:
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
     Control *Press(StructControl strControl);
 
-    int CurrentChoice() const;
-
-private:
-    void Rotate(PanelControl control);
+    int8 CurrentChoice() const;
 };
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct AllowableParameters

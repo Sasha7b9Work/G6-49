@@ -17,7 +17,7 @@ DEF_CHOICE_2( cTypeTune,                                                        
                                   "The signal settings are sent once, after you press the confirm button.",
     "НЕПРЕРЫВНО", "CONTINUOUSLY", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
                                   "Sending of signal settings occurs synchronously with changing information on the screen.",
-    set.sig_tuneFull, pSignals2, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_TUNE_FULL, pSignals2, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

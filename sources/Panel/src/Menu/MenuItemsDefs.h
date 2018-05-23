@@ -187,11 +187,11 @@ static const SButtonBase name = { Control_SmallButton, 0, false, Page_NoPage, &k
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_CHOICE_2(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \
     nameRu1, nameEn1, hintRu1, hintEn1, nameRu2, nameEn2, hintRu2, hintEn2,                                                                         \
-    cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
+    cell, numBit, keeper, funcActive, funcChanged, funcDraw)                                                                                        \
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2};                                                                                \
 static pString hints##name##Ru[] = {hintRu1, hintRu2};                                                                                              \
 static pString hints##name##En[] = {hintEn1, hintEn2};                                                                                              \
-static const ChoiceBase name = { Control_Choice, 2, false, Page_NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                    \
+static const ChoiceBase name = { Control_Choice, 2, true, (NamePage)numBit, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                   \
     (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_3(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \

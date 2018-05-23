@@ -16,7 +16,7 @@ DEF_CHOICE_2(cEnableFrequencyCounter,                                           
                               "Display of frequency meter readings is disabled.",
     ENABLED_RU,  ENABLED_EN,  "В нижней части экрана выводятся показания частотомера.",
                               "The bottom of the screen displays the frequency meter.",
-    FREQ_COUNTER_ENABLED, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_FREQ_ENABLED, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ DEF_CHOICE_2(cInterval,                                                         
                     "The measurement of the frequency meter is started at intervals of 1 second.",
     "10 с", "10 s", "Запуск процесса измерения частомера производится с интервалом 10 секунда.",
                     "The process of measuring the frequency meter is started at intervals of 10 seconds.",
-    INTERVAL, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_FREQ_INTERVAL, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

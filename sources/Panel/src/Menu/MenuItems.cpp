@@ -18,18 +18,27 @@ extern int8 gCurDigit;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *Choice::NameCurrentSubItem() const
 {
-    return ((int8 *)cell == 0) ? "" : NAME_FROM_INDEX(*cell); // names[*((int8 *)cell)][LANG];
+    return (cell_ == 0) ? "" : NAME_FROM_INDEX(CurrentChoice());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NameNextSubItem() const
 {
-    if (cell == 0)
+    if (cell_ == 0)
     {
         return "";
     }
 
-    int index = *((int8 *)cell) + 1;
+    int index = *cell_;
+
+    if(isPageSB)
+    {
+        index = (index >> nameOrNumBit) & 0x01 + 1;
+    }
+    else
+    {
+        index++;
+    }
 
     if (index == NumSubItems())
     {
@@ -41,12 +50,21 @@ const char *Choice::NameNextSubItem() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NamePrevSubItem() const
 {
-    if (cell == 0)
+    if (cell_ == 0)
     {
         return "";
     }
 
-    int index = *((int8 *)cell) - 1;
+    int index = *cell_;
+
+    if (isPageSB)
+    {
+        index = (index >> nameOrNumBit) & 0x01 - 1;
+    }
+    else
+    {
+        index--;
+    }
 
     if (index < 0)
     {
@@ -87,7 +105,7 @@ void Page::ShortPressOnItem(int numItem)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Page::PosCurrentItem() const
 {
-    return MENU_POS_ACT_ITEM(name) & 0x7f;
+    return MENU_POS_ACT_ITEM(nameOrNumBit) & 0x7f;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -184,7 +202,7 @@ bool Control::ChangeOpened(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-#define CURRENT_ITEM_IS_OPENED return _GET_BIT(MENU_POS_ACT_ITEM(name), 7) == 1
+#define CURRENT_ITEM_IS_OPENED return _GET_BIT(MENU_POS_ACT_ITEM(nameOrNumBit), 7) == 1
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool PageBase::CurrentItemIsOpened() const
@@ -311,19 +329,19 @@ void Control::LongPress()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Page::CurrentSubPage() const
 {
-    return MENU_CURRENT_SUBPAGE(name);
+    return MENU_CURRENT_SUBPAGE(nameOrNumBit);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::SetPosActItem(int8 pos)
 {
-    MENU_POS_ACT_ITEM(name) = pos;
+    MENU_POS_ACT_ITEM(nameOrNumBit) = pos;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::SetCurrentSubPage(int8 pos)
 {
-    MENU_CURRENT_SUBPAGE(name) = pos;
+    MENU_CURRENT_SUBPAGE(nameOrNumBit) = pos;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

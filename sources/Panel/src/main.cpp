@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "globals.h"
 #include "Log.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
@@ -31,7 +32,7 @@ int main(void)
        
     Menu::Init();
 
-    LOG_WRITE("%d %d", sizeof(InputWindowStruct), sizeof(Settings));
+    LOG_WRITE("%d %d %d", sizeof(InputWindowStruct), sizeof(Settings), sizeof(sig_structParameter));
 
     while (1)
     {

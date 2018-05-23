@@ -37,32 +37,20 @@ static const Settings defSet =
         MAKE_COLOR(0x40, 0x00, 0x00),   // RED_25
         MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
         MAKE_COLOR(0xc0, 0x00, 0x00)    // RED_75
-    }
-    ,
-    A,                                  // sig_channel
+    },
     { Sine, Sine },                     // sig_form[NumChannels]
     { 
         Frequency,                      // sig_parameter[NumForms]
         Frequency,
         Frequency
     },
-    RU,              // serv_language
-    0,               // menu_currentPage
-    (Page*)0,        // menu_page
-    true,            // dbg_console
-    {true, true},    // sig_enabled
-    true,            // serv_backgroundBlack
-    true,            // sig_tuneFull
-    false,           // dbg_debugModeEnabled
-    {0},             // menu_posActItem[]
-    {0},             // menu_currentSubPage[]
-    false,           // freq_enabled
-    SizeByte_8bit,   // usb_sizeByte
-    StopBit_1,       // usb_stopBit
-    Parity_Off,      // usb_parity
-    Interval_1,      // freq_interval
-    BillingTime_1ms, // freq_billingTime
-    false             // dbg_statistics
+    0,                   // menu_currentPage
+    (Page*)0,            // menu_page
+    {0},                 // menu_posActItem[]
+    {0},                 // menu_currentSubPage[]
+    BillingTime_1ms,     // freq_billingTime
+    BINARY_U8(00001100), // flag1
+    BINARY_U8(00000110)  // flag2
 };
 
 Settings set = defSet;
@@ -123,7 +111,7 @@ void Settings::Load(bool _default)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void TuneGenerator(Channel ch)
 {
-    Generator::EnableChannel(ch, set.sig_enabled[ch]);
+    Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     WaveForm form = WAVE_FORM_CH(ch);
     Generator::SetFormWave(ch, WAVE_FORM_CH(ch));
     Generator::SetParameter(ch, Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Frequency))->Value());

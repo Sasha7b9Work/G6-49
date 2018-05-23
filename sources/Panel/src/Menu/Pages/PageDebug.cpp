@@ -24,7 +24,7 @@ DEF_CHOICE_2(cConsole,                                                          
                               "Console display enabled",
     ENABLED_RU,  ENABLED_EN,  "Отображение консоли выключено",
                               "Console display disabled",
-    CONSOLE_ENABLED, pDebug, FuncActive, OnPress_DebugMode, FuncDraw
+    FLAG_1, BIT_CONSOLE, pDebug, FuncActive, OnPress_DebugMode, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ DEF_CHOICE_2( cStatistics,
                               "Statistics show on",
     ENABLED_RU, ENABLED_EN,   "Показ статистики выключен",
                               "Statistics showing off",
-    SHOW_STATISTICS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_STATISTICS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 DEF_PAGE_3( pDebug,

@@ -32,7 +32,7 @@ DEF_CHOICE_2( cChannel,                                                         
               "Controlling the signal parameters at output A.",
     "B", "B", "”правление параметрами сигнала на выходе B.",
               "Controlling the signal parameters at output B.",
-    CURRENT_CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
+    FLAG_2, BIT_CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
 )
 
 

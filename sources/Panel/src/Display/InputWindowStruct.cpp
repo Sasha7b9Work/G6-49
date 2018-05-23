@@ -140,7 +140,7 @@ void InputWindowStruct::RegLeft()
 {
     DecreaseDigit(CURRENT_POS);
 
-    if (set.sig_tuneFull)
+    if (TUNE_FULL)
     {
         SendIWStoGenerator();
     }
@@ -171,7 +171,7 @@ void InputWindowStruct::RegRight(void)
         }
     }
 
-    if (set.sig_tuneFull)
+    if (TUNE_FULL)
     {
         SendIWStoGenerator();
     }
@@ -337,7 +337,7 @@ const char *NameOrder(Order order)
         {"Ì",   "M"}
     };
 
-    return names[order][LANGUAGE];
+    return names[order][LANG];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -355,7 +355,7 @@ const char *NameUnit(char buffer[10], Order order, WaveParameter parameter)
         {"ñ",  "s"}
     };
 
-    sprintf(buffer, "%s%s", NameOrder(order), names[parameter][LANGUAGE]);
+    sprintf(buffer, "%s%s", NameOrder(order), names[parameter][LANG]);
 
     return buffer;
 }
