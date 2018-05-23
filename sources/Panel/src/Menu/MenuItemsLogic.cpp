@@ -81,7 +81,6 @@ float Choice::Step()
             delta = 0.001f; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
         }
         int8 index = CurrentIndex();
-        bool changed = false;
         if (tsChoice.dir == INCREASE)
         {
             if (delta <= numLines)
@@ -89,7 +88,6 @@ float Choice::Step()
                 return delta;
             }
             CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
-            changed = true;
         }
         else if (tsChoice.dir == DECREASE)
         {
@@ -100,13 +98,9 @@ float Choice::Step()
                 return delta;
             }
             CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
-            changed = true;
         }
 
-        if (changed)
-        {
-            *cell = isPageSB ? (*cell ^= (1 << (int)nameOrNumBit)) : index;
-        }
+        *cell = isPageSB ? (*cell ^= (1 << (int)nameOrNumBit)) : index;
 
         tsChoice.address = 0;
         CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
