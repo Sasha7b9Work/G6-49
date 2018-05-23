@@ -37,7 +37,7 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBack, Color colorRect, Color colorText)
+int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText)
 {
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
@@ -82,7 +82,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawText(int x, int y, const char *text, Color color)
+int Text::DrawText(int x, int y, pString text, Color color)
 {
     Painter::SetColor(color);
 
@@ -125,7 +125,7 @@ bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Text::GetHeightTextWithTransfers(int left, int top, int right, const char *text, int *height)
+bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height)
 {
     char buffer[20];
     int numSymbols = (int)strlen(text);
@@ -583,7 +583,7 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Text::DrawBigText(int eX, int eY, int size, const char *text, Color color)
+void Text::DrawBigText(int eX, int eY, int size, pString text, Color color)
 {
     Painter::SetColor(color);
 
@@ -599,17 +599,19 @@ void Text::DrawBigText(int eX, int eY, int size, const char *text, Color color)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Text::DrawTextRelativelyRight(int xRight, int y, const char *text, Color color)
+void Text::DrawTextRelativelyRight(int xRight, int y, pString text, Color color)
 {
     int lenght = Font::GetLengthText(text);
     DrawText(xRight - lenght, y, text, color);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Text::DrawTextInColumn(int x, int y, int width, const char *text)
+void Text::DrawTextInColumn(int x, int y, int width, pString t)
 {
     int xStart = x;
     int xEnd = xStart + width;
+
+    const char *text = t;
 
     while (*text != 0)
     {
@@ -629,8 +631,9 @@ void Text::DrawTextInColumn(int x, int y, int width, const char *text)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawSubString(int x, int y, const char *text)
+int Text::DrawSubString(int x, int y, pString t)
 {
+    const char *text = t;
     int numSymbols = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
     {
@@ -642,8 +645,10 @@ int Text::DrawSubString(int x, int y, const char *text)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::GetLenghtSubString(const char *text)
+int Text::GetLenghtSubString(pString t)
 {
+    const char *text = t;
+
     int retValue = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
     {
@@ -654,8 +659,9 @@ int Text::GetLenghtSubString(const char *text)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawSpaces(int x, int y, const char *text, int *numSymbols)
+int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
 {
+    const char *text = t;
     *numSymbols = 0;
     while (*text == ' ')
     {
@@ -667,7 +673,7 @@ int Text::DrawSpaces(int x, int y, const char *text, int *numSymbols)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
+int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, pString text, Color color)
 {
     Painter::SetColor(color);
     int lenght = Font::GetLengthText(text);
@@ -704,7 +710,7 @@ int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width,
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, const char *text, ...)
+int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
@@ -729,7 +735,7 @@ int Text::DrawFormatText(int x, int y, pString text, ...)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
+void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
                                                   Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
@@ -741,7 +747,7 @@ void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int heigh
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill)
+int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill)
 {
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);

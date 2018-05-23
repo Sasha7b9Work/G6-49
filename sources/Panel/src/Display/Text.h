@@ -16,13 +16,13 @@ public:
 
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
-    static int DrawText(int x, int y, const char *text, Color color = Color::NUMBER);
+    static int DrawText(int x, int y, pString text, Color color = Color::NUMBER);
 
     static int DrawBigChar(int eX, int eY, int size, char symbol);
 
-    static void DrawBigText(int x, int y, int size, const char *text, Color color = Color::NUMBER);
+    static void DrawBigText(int x, int y, int size, pString text, Color color = Color::NUMBER);
 
-    static void DrawTextRelativelyRight(int xRight, int y, const char *text, Color color = Color::NUMBER);
+    static void DrawTextRelativelyRight(int xRight, int y, pString text, Color color = Color::NUMBER);
     
     static void Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
@@ -34,9 +34,9 @@ public:
 
     /*************** Вывод текста в области экрана **************************/
 
-    static void DrawTextInColumn(int x, int y, int width, const char *text);
+    static void DrawTextInColumn(int x, int y, int width, pString text);
     /// Возвращает нижнюю координату прямоугольника
-    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, const char *text, Color colorBack, Color colorRect, Color colorText);
+    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText);
     /// Пишет текст с переносами
     static int DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
 
@@ -47,13 +47,13 @@ public:
     /// Выводит форматированный текст в столбик шириной width. При этом слов, заключённое в двойные кавычки, выводится цветом color
     static int DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...);
 
-    static int DrawStringInCenterRect(int x, int y, int width, int height, const char *text, Color color = Color::NUMBER);
+    static int DrawStringInCenterRect(int x, int y, int width, int height, pString text, Color color = Color::NUMBER);
 
-    static int DrawFormatStringInCenterRect(int x, int y, int width, int height, const char *text, ...);
+    static int DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
-    static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder,
+    static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
                                                     Color colorBackground);
-    static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, const char *text, Color colorBackground, Color colorFill);
+    static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
     /// Если true, то все буквы выводятся в верхнем регистре
     static bool IsUpperCase();
 
@@ -63,7 +63,7 @@ private:
 
     static bool BitInFontIsExist(int eChar, int numByte, int bit);
     /// Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
-    static bool GetHeightTextWithTransfers(int left, int top, int right, const char *text, int *height);
+    static bool GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height);
 
     static char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
 
@@ -82,11 +82,11 @@ private:
 
     static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
 
-    static int GetLenghtSubString(const char *text);
+    static int GetLenghtSubString(pString text);
 
-    static int DrawSubString(int x, int y, const char *text);
+    static int DrawSubString(int x, int y, pString text);
 
-    static int DrawSpaces(int x, int y, const char *text, int *numSymbols);
+    static int DrawSpaces(int x, int y, pString text, int *numSymbols);
 
     static bool upperCase;
 };
