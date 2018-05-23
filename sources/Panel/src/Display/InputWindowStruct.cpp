@@ -410,7 +410,8 @@ static void IncreaseOrder(void)
 {
     if (iws->order < NumOrders - 1)
     {
-        ++iws->order;
+        iws->order = (Order)((uint)iws->order + 1);
+
         POS_COMMA -= 3;
     }
 }
@@ -601,7 +602,7 @@ static void FillIWSfromInputBuffer(void)
                 m_inputBuffer[pos + 4] = '0';
             }
 
-            --iws->order;
+            iws->order = (Order)((uint)iws->order - 1);
         }
     }
 
@@ -624,7 +625,7 @@ static void FillIWSfromInputBuffer(void)
 
         m_inputBuffer[pos - 3] = '.';               // И ставим точку слева от этой тройки
 
-        ++iws->order;                               // И увеличиваем степень на три порядка
+        iws->order = (Order)((uint)iws->order + 1); // И увеличиваем степень на три порядка
     }
 
     // В этой точке целая часть числа уже не превышает 999
@@ -636,7 +637,7 @@ static void FillIWSfromInputBuffer(void)
     // Заносим целую часть числа в буфер
     sprintf(iws->inputBuffer, "%d", intValue);
 
-    iws->posComma = (int)strlen(iws->inputBuffer) - 1;
+    iws->posComma = (int8)strlen(iws->inputBuffer) - 1;
 
     int numDigits = NUM_DIGITS - (int)strlen(iws->inputBuffer);      // Столько цифр нужно записать после запятой
 
@@ -646,20 +647,4 @@ static void FillIWSfromInputBuffer(void)
     {
         iws->inputBuffer[iws->posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-Order& operator++(Order& order)
-{
-    int value = (int)order + 1;
-    order = (Order)value;
-    return order;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-Order& operator--(Order& order)
-{
-    int value = (int)order - 1;
-    order = (Order)value;
-    return order;
 }

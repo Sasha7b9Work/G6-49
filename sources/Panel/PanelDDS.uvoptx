@@ -187,18 +187,18 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>318</LineNumber>
+          <LineNumber>51</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134247996</Address>
+          <Address>134243482</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Display\Text.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\CPU_FLASH.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Display/Text.cpp\318</Expression>
+          <Expression>\\PanelDDS\src/Hardware/CPU_FLASH.cpp\51</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -211,6 +211,11 @@
           <count>1</count>
           <WinNumber>1</WinNumber>
           <ItemText>buffer</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>set</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -1466,7 +1471,7 @@
 
   <Group>
     <GroupName>Menu/Pages</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

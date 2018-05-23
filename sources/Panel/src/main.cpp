@@ -31,6 +31,8 @@ int main(void)
        
     Menu::Init();
 
+    LOG_WRITE("%d %d", sizeof(InputWindowStruct), sizeof(Settings));
+
     while (1)
     {
         CPU::Update();

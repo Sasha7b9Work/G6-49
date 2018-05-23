@@ -20,9 +20,6 @@ enum Order
     NumOrders
 };
 
-Order& operator++(Order& order);
-Order& operator--(Order& order);
-
 enum SignValue
 {
     Sign_None,
@@ -56,18 +53,16 @@ public:
     /// «аполнить структуру allowParameters значени€ми в соответствии с допустимыми дл€ данных формы сигнала и канала
     static void FillAllowParameters(Channel ch, WaveForm form, AllowableParameters *allowParameters);
 
-    bool            allow;                      ///< ≈сли true, параметр разрешен дл€ данного сигнала
-    SignValue       sign;
-	char            inputBuffer[NUM_DIGITS + 1];
-    char            prevBuffer[NUM_DIGITS + 1];
-    uint8           notUsed0[2];
-    int             posComma;                   ///< ѕосле какого знакоместа выводить зап€тую
-    int             prevPosComma;
-	int	            hightLightDigit;            ///< ѕозици€ подсвеченного знакоместа
-	Order           order;
-    WaveParameter   param;
-    bool            numLockMode;                ///< true, когда происходит клавишный (0...9) ввод значени€
-    uint8           notUsed1;
+	char          inputBuffer[NUM_DIGITS + 1];
+    char          prevBuffer[NUM_DIGITS + 1];
+    int8          posComma;                   ///< ѕосле какого знакоместа выводить зап€тую
+    int8          prevPosComma;
+	int8          hightLightDigit;            ///< ѕозици€ подсвеченного знакоместа
+	Order         order                 : 3;
+    WaveParameter param                 : 4;  ///< ѕеречисление типа WaveParameter
+    SignValue     sign                  : 2;  ///< ѕеречисление типа SignValue
+    uint          allow                 : 1;  ///< ≈сли 1, параметр разрешен дл€ данного сигнала
+    uint          numLockMode           : 1;  ///< 1, когда происходит клавишный (0...9) ввод значени€
 };
 
 

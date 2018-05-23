@@ -42,6 +42,8 @@ static void ReadBufferBytes(uint addrSrc, void *bufferDest, int size);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::FLASH_::SaveSettings(void)
 {
+    __IO int sizeStruct = sizeof(InputWindowStruct);
+
     // «аписываем в Settings.size текущий размер структуры Settings
     set.size = sizeof(Settings);
 

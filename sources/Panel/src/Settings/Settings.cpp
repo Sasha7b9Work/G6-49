@@ -38,42 +38,43 @@ static const Settings defSet =
         MAKE_COLOR(0xc0, 0x00, 0x00)    // RED_75
     }
     ,
-    A,                              // sig_channel
-    { Sine, Sine },                 // sig_form[NumChannels]
+    A,                                  // sig_channel
+    { Sine, Sine },                     // sig_form[NumChannels]
     { 
-        Frequency,                  // sig_parameter[NumForms]
+        Frequency,                      // sig_parameter[NumForms]
         Frequency,
         Frequency
     },
+                                        // sig_structParameter
     {
         {
             {                                                                           // [A][Form_Sine]
-                {true, Sign_None, "20000", "", {}, 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false, 0},
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Milli, Period,    false, 0},
-                {true, Sign_None, "50000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Amplitude, false, 0},
-                {true, Sign_Plus, "00000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Offset,    false, 0},
+                {"20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
+                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
+                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
                 {},
                 {},
                 {},
                 {}
             },
             {                                                                           // [A][Form_Saw]
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false, 0},
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Milli, Period,    false, 0},
-                {true, Sign_None, "50000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Amplitude, false, 0},
-                {true, Sign_Plus, "00000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Offset,    false, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
+                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
+                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
                 {},
                 {},
                 {},
                 {}
             },
             {                                                                           // [A][Form_Impulse]
-                {true, Sign_None, "20000", "", {}, 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false, 0},
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Milli, Period,    false, 0},
-                {true, Sign_None, "50000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Amplitude, false, 0},
-                {true, Sign_Plus, "00000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Offset,    false, 0},
-                {true, Sign_None, "10000", "", {}, 2, 0, NUM_DIGITS - 1, Micro, Duration,  false, 0},
-                {true, Sign_None, "20000", "", {}, 0, 0, NUM_DIGITS - 1, One,   DutyRatio, false, 0},
+                {"20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
+                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
+                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
+                {"10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration,  Sign_None, 1, 0},
+                {"20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio, Sign_None, 1, 0},
                 {},
                 {}
             }    
@@ -81,41 +82,41 @@ static const Settings defSet =
         },
         {
             {                                                                           // [B][Form_Sine]
-                {true, Sign_None, "20001", "", {}, 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false, 0},
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Milli, Period,    false, 0},
-                {true, Sign_None, "50000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Amplitude, false, 0},
-                {true, Sign_Plus, "00000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Offset,    false, 0},
+                {"20001", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
+                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
+                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
                 {},
                 {},
-                {true, Sign_Plus, "10000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Phase,     false, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, One,   Phase,     Sign_Plus, 1, 0},
                 {}
             },
             {                                                                           // [B][Form_Saw]
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false, 0},
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Milli, Period,    false, 0},
-                {true, Sign_None, "50000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Amplitude, false, 0},
-                {true, Sign_Plus, "00000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Offset,    false, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
+                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
+                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
                 {},
                 {},
                 {},
                 {}
             },
             {                                                                           // [B][Form_Impulse]
-                {true, Sign_None, "20000", "", {}, 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, false, 0},
-                {true, Sign_None, "10000", "", {}, 0, 0, NUM_DIGITS - 1, Milli, Period,    false, 0},
-                {true, Sign_None, "50000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Amplitude, false, 0},
-                {true, Sign_Plus, "00000", "", {}, 0, 0, NUM_DIGITS - 1, One,   Offset,    false, 0},
-                {true, Sign_None, "10000", "", {}, 2, 0, NUM_DIGITS - 1, Micro, Duration,  false, 0},
-                {true, Sign_None, "20000", "", {}, 0, 0, NUM_DIGITS - 1, One,   DutyRatio, false, 0},
+                {"20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
+                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
+                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
+                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
+                {"10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration,  Sign_None, 1, 0},
+                {"20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio, Sign_None, 1, 0},
                 {},
-                {true, Sign_None, "50000", "", {}, 1, 0, NUM_DIGITS - 1, Micro, Delay,     false, 0}
+                {"50000", "", 1, 0, NUM_DIGITS - 1, Micro, Delay,     Sign_None, 1, 0}
             } 
         }
     },
     RU,              // serv_language
     0,               // menu_currentPage
     (Page*)0,        // menu_page
-    false,           // dbg_console
+    true,            // dbg_console
     {true, true},    // sig_enabled
     true,            // serv_backgroundBlack
     true,            // sig_tuneFull
@@ -128,7 +129,7 @@ static const Settings defSet =
     Parity_Off,      // usb_parity
     Interval_1,      // freq_interval
     BillingTime_1ms, // freq_billingTime
-    true             // dbg_statistics
+    false             // dbg_statistics
 };
 
 Settings set = defSet;
@@ -169,6 +170,9 @@ void Settings::Save(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Load(bool _default)
 {
+    set = defSet;
+
+    /*
     if(_default)
     {
         set = defSet;
@@ -177,6 +181,7 @@ void Settings::Load(bool _default)
     {
         CPU::FLASH_::LoadSettings();
     }
+    */
 
     TuneGenerator(A);
     TuneGenerator(B);

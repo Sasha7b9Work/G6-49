@@ -24,6 +24,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
+int         Display::stringsInConsole = 0;
 #ifdef STM32F429xx
 uint8       *Display::frontBuffer = (uint8 *)malloc(BUFFER_WIDTH * BUFFER_HEIGHT);
 uint8       *Display::backBuffer = (uint8 *)malloc(BUFFER_WIDTH * BUFFER_HEIGHT);
@@ -273,12 +274,6 @@ void Display::DrawConsole(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::AddStringToIndicating(pString)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DrawFrequencyCounter()
 {
     if(!FREQ_COUNTER_ENABLED)
@@ -340,7 +335,7 @@ void Display::DrawHint()
 
             Painter::SetColor(Color::WHITE);
 
-            char number = '1';
+            int number = 1;
 
             if(control->Type() == Control_Choice)
             {
@@ -348,7 +343,7 @@ void Display::DrawHint()
 
                 for(int i = 0; i < choice->NumSubItems(); i++)
                 {
-                    y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width - 10, Color::GREEN, "%c. \"%s\" %s", number++, 
+                    y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width - 10, Color::GREEN, "%d. \"%s\" %s", number++, 
                                                                 choice->NameSubItem(i), LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
                 }
             }

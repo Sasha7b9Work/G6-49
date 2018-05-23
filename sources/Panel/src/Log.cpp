@@ -45,7 +45,7 @@ void Log::Write(TypeTrace type, char *format, ...)
     va_start(args, format);
     vsprintf(pointer, format, args);
     va_end(args);
-    DISPLAY_ADD_STRING(buffer);
+    Display::AddStringToConsole(buffer);
     if(loggerUSB)
     {
         VCP::SendFormatStringAsynch(buffer);
@@ -77,8 +77,8 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     strcat(message, " ");
     strcat(message, func);
     strcat(message, numBuffer);
-    DISPLAY_ADD_STRING(message);
-    DISPLAY_ADD_STRING(buffer);
+    Display::AddStringToConsole(message);
+    Display::AddStringToConsole(buffer);
     if(loggerUSB)
     {
         VCP::SendFormatStringAsynch(message);
