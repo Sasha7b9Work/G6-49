@@ -76,23 +76,23 @@ public:
 
 #define FLAG_1      set.flag1
     uint8           flag1;
-#define BIT_PARITY        0  ///< usb_parity           - флаг чётности Parity
-#define BIT_FREQ_INTERVAL 1  ///< freq_interval        - интервал запуска измерений
-#define BIT_CONSOLE       2  ///< dbg_console          - показ отладочной консоли
-#define BIT_BACK_BLACK    3  ///< serv_bacgroundBlack  - если 1, то цвет фона - чёрный
-#define BIT_TUNE_FULL     4  ///< sig_tuneFull         - если 1, то засылка параметра происходит непрерывно во время настройки
-#define BIT_DBG_MODE      5  ///< dbg_debugModeEnabled - если 1, то включён отладочный режим - непрерывные засылки в альтеру
-#define BIT_FREQ_ENABLED  6  ///< freq_enabled         - если 1, то отображаются показания частотомера
-#define BIT_STATISTICS    7  ///< dbg_statistics       - если 1, то показывать статистику
+#define BIT_PARITY        0  ///< Parity   - флаг чётности Parity
+#define BIT_FREQ_INTERVAL 1  ///< Interval - интервал запуска измерений
+#define BIT_CONSOLE       2  ///<          - показ отладочной консоли
+#define BIT_BACK_BLACK    3  ///<          - если 1, то цвет фона - чёрный
+#define BIT_TUNE_FULL     4  ///<          - если 1, то засылка параметра происходит непрерывно во время настройки
+#define BIT_DBG_MODE      5  ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
+#define BIT_FREQ_ENABLED  6  ///<          - если 1, то отображаются показания частотомера
+#define BIT_STATISTICS    7  ///<          - если 1, то показывать статистику
 
 #define FLAG_2      set.flag2
     uint8           flag2;
-#define BIT_LANGUAGE      0  ///< serv_language        - выбранный язык
-#define BIT_CHAN_A        1  ///< бит, отвечающий за включённый канал A
-#define BIT_CHAN_B        2  ///< бит, отвечающий за включённый канал B
-#define BIT_CHANNEL       3  ///< sig_channel          - текущий выбранный канал
-#define BIT_SIZE_BYTE     4  ///< usb_sizeByte         - размер байта для связи по USB
-#define BIT_STOP_BIT      5  ///< usb_stopBit          - количество стоп-бит
+#define BIT_LANGUAGE      0  ///< Language - выбранный язык
+#define BIT_CHAN_A        1  ///<          - бит, отвечающий за включённый канал A
+#define BIT_CHAN_B        2  ///<          - бит, отвечающий за включённый канал B
+#define BIT_CHANNEL       3  ///< Channel  - текущий выбранный канал
+#define BIT_SIZE_BYTE     4  ///< SizeByte - размер байта для связи по USB
+#define BIT_STOP_BIT      5  ///< StopBit  - количество стоп-бит
 
 
     static void Save();

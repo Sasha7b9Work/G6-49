@@ -3,52 +3,52 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef enum
+enum Channel
 {
     A,
     B,
     NumChannels
-} Channel;
+};
 
 /// 
-typedef enum
+enum Interval
 {
     Interval_1,
     Interval_10
-} Interval;
+};
 
-typedef enum
+enum BillingTime
 {
     BillingTime_1ms,
     BillingTime_10ms,
     BillingTime_100ms,
     BillingTime_1000ms,
     BillingTime_10000ms
-} BillingTime;
+};
 
-typedef enum
+enum Language
 {
     RU,
     EN
-} Language;
+};
 
-typedef enum
+enum SizeByte
 {
-    SizeByte_7bit,
-    SizeByte_8bit
-} SizeByte;
+    Size_7bit,
+    Size_8bit
+};
 
-typedef enum
+enum StopBit
 {
     StopBit_1,
     StopBit_2
-} StopBit;
+};
 
-typedef enum
+enum Parity
 {
     Parity_Off,
     Parity_On
-} Parity;
+};
 
 
 float MinValue(WaveParameter param);

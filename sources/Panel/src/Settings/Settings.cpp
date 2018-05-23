@@ -49,8 +49,24 @@ static const Settings defSet =
     {0},                 // menu_posActItem[]
     {0},                 // menu_currentSubPage[]
     BillingTime_1ms,     // freq_billingTime
+
     BINARY_U8(00001100), // flag1
-    BINARY_U8(00000110)  // flag2
+//            ||||||||------ 0 BIT_PARITY         Parity_Off
+//            |||||||------- 1 BIT_FREQ_INTERVAL  Interval_1
+//            ||||||-------- 2 BIT_CONSOLE      
+//            |||||--------- 3 BIT_BACK_BLACK   
+//            ||||---------- 4 BIT_TUNE_FULL    
+//            |||----------- 5 BIT_DBG_MODE     
+//            ||------------ 6 BIT_FREQ_ENABLED 
+//            |------------- 7 BIT_STATISTICS   
+
+    BINARY_U8(00010110)  // flag2
+//              ||||||------ 0 BIT_LANGUAGE       RU
+//              |||||------- 1 BIT_CHAN_A   
+//              ||||-------- 2 BIT_CHAN_B   
+//              |||--------- 3 BIT_CHANNEL        A
+//              ||---------- 4 BIT_SIZE_BYTE      8bit
+//              |----------- 5 BIT_STOP_BIT       StopBit_1
 };
 
 Settings set = defSet;
