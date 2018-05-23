@@ -43,10 +43,9 @@ typedef void (*pFuncVB)(bool);
 #define CHAR_BUF(name, size)            char name[size]
 #define CHAR_BUF2(name, size1, size2)   char name[size1][size2]
 
-#define _GET_BIT(value, bit)                    (((value) >> bit) & 0x01)
-#define _SET_BIT(value, bit)                    ((value) |= (1 << bit))
-#define _CLEAR_BIT(value, bit)                  ((value) &= (~(1 << bit)))
-#define _SET_BIT_VALUE(value, numBit, bitValue) ((value) |= ((bitValue) << (numBit)))
+#define _GET_BIT(value, bit)        (((value) >> bit) & 0x01)
+#define _SET_BIT(value, bit)        ((value) |= (1 << bit))
+#define _CLEAR_BIT(value, bit)      ((value) &= (~(1 << bit)))
 
 #define ERROR_VALUE_FLOAT   1.111e29f
 #define ERROR_VALUE_UINT8   255

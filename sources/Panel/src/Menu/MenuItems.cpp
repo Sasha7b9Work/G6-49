@@ -18,59 +18,31 @@ extern int8 gCurDigit;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *Choice::NameCurrentSubItem() const
 {
-    return (cell_ == 0) ? "" : NAME_FROM_INDEX(CurrentChoice());
+    return NAME_FROM_INDEX(CurrentIndex());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NameNextSubItem() const
 {
-    if (cell_ == 0)
-    {
-        return "";
-    }
+    int8 nextIndex = CurrentIndex() + 1;
 
-    int index = *cell_;
-
-    if(isPageSB)
+    if (nextIndex == NumSubItems())
     {
-        index = (index >> nameOrNumBit) & 0x01 + 1;
+        nextIndex = 0;
     }
-    else
-    {
-        index++;
-    }
-
-    if (index == NumSubItems())
-    {
-        index = 0;
-    }
-    return NAME_FROM_INDEX(index);
+    return NAME_FROM_INDEX(nextIndex);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *Choice::NamePrevSubItem() const
 {
-    if (cell_ == 0)
-    {
-        return "";
-    }
+    int8 prevIndex = CurrentIndex() - 1;
 
-    int index = *cell_;
-
-    if (isPageSB)
+    if (prevIndex < 0)
     {
-        index = (index >> nameOrNumBit) & 0x01 - 1;
+        prevIndex = NumSubItems() - 1;
     }
-    else
-    {
-        index--;
-    }
-
-    if (index < 0)
-    {
-        index = NumSubItems() - 1;
-    }
-    return NAME_FROM_INDEX(index);
+    return NAME_FROM_INDEX(prevIndex);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

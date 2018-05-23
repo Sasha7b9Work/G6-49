@@ -71,94 +71,47 @@ void Choice::StartChange(int delta) const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float Choice::Step()
 {
-    if(isPageSB)                                            // Для Choice это означает, что вариантов выбора всего два
+    static const float speed = 0.3f;
+    static const int numLines = 60;
+    if (tsChoice.address == this)
     {
-        static const float speed = 0.3f;
-        static const int numLines = 60;
-        if (tsChoice.address == this)
+        float delta = speed * (TIME_MS - tsChoice.timeStart);
+        if (delta == 0.0f)
         {
-            float delta = speed * (TIME_MS - tsChoice.timeStart);
-            if (delta == 0.0f)
-            {
-                delta = 0.001f; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
-            }
-
-            int8 index = CurrentChoice();
-
-            if (tsChoice.dir == INCREASE)
-            {
-                if (delta <= numLines)
-                {
-                    return delta;
-                }
-//                CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
-                index ^= 1;
-            }
-            else if (tsChoice.dir == DECREASE)
-            {
-                delta = -delta;
-
-                if (delta >= -numLines)
-                {
-                    return delta;
-                }
-//                CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
-                index ^= 1;
-            }
-
-            if(index == 0)
-            {
-                _CLEAR_BIT(*cell_, (int)nameOrNumBit);
-            }
-            else
-            {
-                _SET_BIT(*cell_, (int)nameOrNumBit);
-            }
-
-            //_SET_BIT_VALUE(*cell_, (int)nameOrNumBit, index & 0x01);
-
-            tsChoice.address = 0;
-            CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
-            tsChoice.dir = NONE;
-            return 0.0f;
+            delta = 0.001f; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
         }
-    }
-    else                                                    // А здесь обычный Choice - со множеством вариантов выбора
-    {
-        static const float speed = 0.3f;
-        static const int numLines = 60;
-        if (tsChoice.address == this)
+        int8 index = CurrentIndex();
+        bool changed = false;
+        if (tsChoice.dir == INCREASE)
         {
-            float delta = speed * (TIME_MS - tsChoice.timeStart);
-            if (delta == 0.0f)
+            if (delta <= numLines)
             {
-                delta = 0.001f; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
+                return delta;
             }
-            int8 index = CurrentChoice();
-            if (tsChoice.dir == INCREASE)
-            {
-                if (delta <= numLines)
-                {
-                    return delta;
-                }
-                CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
-            }
-            else if (tsChoice.dir == DECREASE)
-            {
-                delta = -delta;
-
-                if (delta >= -numLines)
-                {
-                    return delta;
-                }
-                CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
-            }
-            *cell_ = index;
-            tsChoice.address = 0;
-            CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
-            tsChoice.dir = NONE;
-            return 0.0f;
+            CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
+            changed = true;
         }
+        else if (tsChoice.dir == DECREASE)
+        {
+            delta = -delta;
+    
+            if (delta >= -numLines)
+            {
+                return delta;
+            }
+            CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
+            changed = true;
+        }
+
+        if (changed)
+        {
+            *cell = isPageSB ? (*cell ^= (1 << (int)nameOrNumBit)) : index;
+        }
+
+        tsChoice.address = 0;
+        CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
+        tsChoice.dir = NONE;
+        return 0.0f;
     }
     return 0.0f;
 }
@@ -190,11 +143,11 @@ void Choice::ChangeIndex(int delta)
 {
     if(isPageSB)
     {
-        *cell_ ^= (1 << nameOrNumBit);
+        *cell ^= (1 << nameOrNumBit);
     }
     else
     {
-        int index = *cell_;
+        int8 index = *cell;
         if (delta < 0)
         {
             ++index;
@@ -211,13 +164,13 @@ void Choice::ChangeIndex(int delta)
                 index = NumSubItems() - 1;
             }
         }
-        *cell_ = (int8)index;
+        *cell = (int8)index;
     }
     CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Choice::NumSubItems() const
+int8 Choice::NumSubItems() const
 {
     return num;
 }
@@ -501,7 +454,7 @@ TypeControl Control::Type() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int8 Choice::CurrentChoice() const
+int8 Choice::CurrentIndex() const
 {
     int8 retValue = 0;
 
@@ -509,11 +462,11 @@ int8 Choice::CurrentChoice() const
     {
         if(isPageSB)
         {
-            retValue = (*cell_ >> nameOrNumBit) & 0x01;
+            retValue = (*cell >> nameOrNumBit) & 0x01;
         }
         else
         {
-            retValue = *cell_;
+            retValue = *cell;
         }
     }
     else if (type == Control_ChoiceParameter)

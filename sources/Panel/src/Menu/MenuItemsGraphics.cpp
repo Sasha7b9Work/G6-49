@@ -102,7 +102,7 @@ void Choice::Draw(bool opened, int x, int y)
 
         for (int i = 0; i < NumSubItems(); i++)
         {
-            if (CurrentChoice() == i)
+            if (CurrentIndex() == i)
             {
                 Painter::FillRegion(x + 2, y, MI_WIDTH - 4, 8, Color::GREEN_50);
                 Painter::DrawHLine(y - 1, x + 1, x - 1 + MI_WIDTH - 1, Color::GREEN_75);

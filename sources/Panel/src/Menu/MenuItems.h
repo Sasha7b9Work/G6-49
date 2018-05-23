@@ -318,7 +318,7 @@ class Choice : public Control
 {
 public:
 
-    int8 * cell_;
+    int8 * cell;
     /// Варианты выбора на русском и английском языках.
     pString *names;
     /// Подсказки для каждого варианта на русском языке
@@ -330,15 +330,15 @@ public:
     /// Функция вызывается после отрисовки элемента. 
     pFuncVII funcForDraw;
 
-    void  StartChange(int delta) const;
+    void StartChange(int delta) const;
     /// Рассчитывает следующий кадр анимации.
     float Step();
     /// Изменяет значение choice в зависимости от величины и знака delta.
-    void  ChangeIndex(int delta);
+    void ChangeIndex(int delta);
     /// Возвращает количество вариантов выбора в элементе по адресу choice
-    int   NumSubItems() const;
+    int8 NumSubItems() const;
 
-    void  Draw(bool opened, int x = -1, int y = -1);
+    void Draw(bool opened, int x = -1, int y = -1);
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameCurrentSubItem() const;
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
@@ -352,7 +352,7 @@ public:
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
     Control *Press(StructControl strControl);
 
-    int8 CurrentChoice() const;
+    int8 CurrentIndex() const;
 };
 
 
