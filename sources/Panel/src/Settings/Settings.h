@@ -21,8 +21,6 @@ extern const PageBase pInput;
 #define WAVE_FORM_CH(ch)        (set.sig_form[ch])
 #define WAVE_FORM_IS_FPGA       (WAVE_FORM != Form_Sine && WAVE_FORM != Form_Impulse)
 
-#define INPUT_WINDOW_STRUCT(ch, form, param)    (set.sig_structParameter[ch][form.ToValue()][param])
-
 #define COLOR(x)                (set.disp_Colors[x])
 #define LANGUAGE                (set.serv_language)
 #define CURRENT_PAGE            (set.menu_currentPage)
@@ -74,7 +72,6 @@ public:
     Channel             sig_channel;                    ///< Текущий выбранный канал
     WaveForm            sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
     WaveParameter       sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
-    InputWindowStruct   sig_structParameter[NumChannels][NumForms][NumParameters];
     Language            serv_language;                  ///< Выбранный язык
     int8                menu_currentPage;               ///< Отображаемая страница меню
     Page*               menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес

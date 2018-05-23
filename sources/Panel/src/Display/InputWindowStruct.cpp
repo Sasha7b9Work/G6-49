@@ -1,5 +1,6 @@
 #include "InputWindowStruct.h"
 #include "Log.h"
+#include "globals.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Generator.h"

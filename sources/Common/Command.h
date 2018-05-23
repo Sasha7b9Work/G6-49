@@ -48,7 +48,7 @@ enum WaveParameter
     Amplitude,      ///< Амплитуда
     Offset,         ///< Смещение
     Duration,       ///< Длительность
-    DutyRatio,      ///< Скважность
+    DutyCycle,      ///< Скважность
     Phase,          ///< Фаза
     Delay,          ///< Задержка
     NumParameters

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "globals.h"
 #include "Settings.h"
 #include "Display/Colors.h"
 #include "Display/Display.h"
@@ -45,74 +46,6 @@ static const Settings defSet =
         Frequency,
         Frequency
     },
-                                        // sig_structParameter
-    {
-        {
-            {                                                                           // [A][Form_Sine]
-                {"20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
-                {},
-                {},
-                {},
-                {}
-            },
-            {                                                                           // [A][Form_Saw]
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
-                {},
-                {},
-                {},
-                {}
-            },
-            {                                                                           // [A][Form_Impulse]
-                {"20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
-                {"10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration,  Sign_None, 1, 0},
-                {"20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio, Sign_None, 1, 0},
-                {},
-                {}
-            }    
-                
-        },
-        {
-            {                                                                           // [B][Form_Sine]
-                {"20001", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
-                {},
-                {},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, One,   Phase,     Sign_Plus, 1, 0},
-                {}
-            },
-            {                                                                           // [B][Form_Saw]
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
-                {},
-                {},
-                {},
-                {}
-            },
-            {                                                                           // [B][Form_Impulse]
-                {"20000", "", 0, 0, NUM_DIGITS - 1, Kilo,  Frequency, Sign_None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Milli, Period,    Sign_None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, One,   Amplitude, Sign_None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, One,   Offset,    Sign_Plus, 1, 0},
-                {"10000", "", 2, 0, NUM_DIGITS - 1, Micro, Duration,  Sign_None, 1, 0},
-                {"20000", "", 0, 0, NUM_DIGITS - 1, One,   DutyRatio, Sign_None, 1, 0},
-                {},
-                {"50000", "", 1, 0, NUM_DIGITS - 1, Micro, Delay,     Sign_None, 1, 0}
-            } 
-        }
-    },
     RU,              // serv_language
     0,               // menu_currentPage
     (Page*)0,        // menu_page
@@ -143,7 +76,7 @@ static const float minMax[NumParameters][2] =
     {0.000f,  65535.0f},    // Amplitude
     {0.0f,    4095.0f},     // Offset
     {2e-08f,  10.0f},       // Duration
-    {0.001f,  1.0f},        // DutyRatio
+    {0.001f,  1.0f},        // DutyCycle
     {-180.0f, 180.0f},      // Phase
     {2e-08f,  10e08f}       // Delay
 };
@@ -172,7 +105,6 @@ void Settings::Load(bool _default)
 {
     set = defSet;
 
-    /*
     if(_default)
     {
         set = defSet;
@@ -181,7 +113,6 @@ void Settings::Load(bool _default)
     {
         CPU::FLASH_::LoadSettings();
     }
-    */
 
     TuneGenerator(A);
     TuneGenerator(B);

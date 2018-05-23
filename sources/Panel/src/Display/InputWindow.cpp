@@ -1,3 +1,4 @@
+#include "globals.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
 #include "DisplayTypes.h"
