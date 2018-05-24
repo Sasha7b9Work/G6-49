@@ -28,10 +28,6 @@ bool Hint::ProcessControl(StructControl strCtrl)
         item = 0;
         control = B_None;
         numPages = 0;
-        if(show)
-        {
-            needCalculate = true;
-        }
     }
 
     if (show)
@@ -40,6 +36,7 @@ bool Hint::ProcessControl(StructControl strCtrl)
         {
             item = Menu::CurrentPage()->GetItem(key - B_F1);
             control = B_None;
+            needCalculate = true;
         }
         else if (key == REG_LEFT || key == REG_RIGHT)
         {
