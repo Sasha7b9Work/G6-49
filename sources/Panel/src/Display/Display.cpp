@@ -346,7 +346,7 @@ void Display::DrawHint()
                     y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width - 10, Color::GREEN, "%d. \"%s\" %s", number++, 
                                                                 choice->NameSubItem(i), LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
                 }
-            }
+            }   
         }
         else if(Menu::PanelControlHint())
         {

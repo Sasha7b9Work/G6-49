@@ -500,36 +500,6 @@ public:
     int8 *year;
 };
 
-/// ”станавливает и показывает врем€.
-class Time : public Control
-{
-public:
-    /// “екущее поле установки. 0 - выход, 1 - сек, 2 - мин, 3 - часы, 4 - день, 5 - мес€ц, 6 - год, 7 - установить.
-    int8 *curField;
-
-    int8 *hours;
-
-    int8 *minutes;
-
-    int8 *seconds;
-
-    int8 *month;
-
-    int8 *day;
-
-    int8 *year;
-
-    void SetOpened();
-
-    void IncCurrentPosition();
-
-    void SetNewTime();
-
-    void SelectNextPosition();
-
-    void DecCurrentPosition();
-};
-
 #define CHOICE_RUN_FUNC_CHANGED(c, val)     \
     if(c->funcOnChanged)                    \
     {                                       \

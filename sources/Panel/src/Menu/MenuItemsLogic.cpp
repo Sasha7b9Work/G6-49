@@ -322,65 +322,6 @@ NamePage Page::GetNamePage() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Time::SetOpened()
-{
-    PackedTime time = RTC_GET_PACKED_TIME();
-    *(seconds) = (int8)time.seconds;
-    *(minutes) = (int8)time.minutes;
-    *(hours) = (int8)time.hours;
-    *(day) = (int8)time.day;
-    *(month) = (int8)time.month;
-    *(year) = (int8)time.year;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Time::IncCurrentPosition()
-{
-    int8 *value[] = { 0, day, month, year, hours, minutes, seconds };
-    int8 position = *curField;
-    if (position != iSET && position != iEXIT)
-    {
-        static const int8 max[] = { 0, 31, 12, 99, 23, 59, 59 };
-        static const int8 min[] = { 0, 1, 1, 15, 0, 0, 0 };
-        *(value[position]) = (*(value[position]))++;
-        if (*value[position] > max[position])
-        {
-            *value[position] = min[position];
-        }
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Time::SetNewTime()
-{
-    RTC_SET_TIME_AND_DATA(*day, *month, *year, *hours, *minutes, *seconds);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Time::SelectNextPosition()
-{
-    CircleIncrease<int8>(curField, 0, 7);
-    Painter::ResetFlash();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Time::DecCurrentPosition()
-{
-    static const int8 max[] = {0, 31, 12, 99, 23, 59, 59};
-    static const int8 min[] = {0, 1, 1, 15, 0, 0, 0};
-    int8 *value[] = {0, day, month, year, hours, minutes, seconds};
-    int8 position = *curField;
-    if (position != iSET && position != iEXIT)
-    {
-        (*(value[position]))--;
-        if (*value[position] < min[position])
-        {
-            *value[position] = max[position];
-        }
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void GovernorColor::ChangeValue(int delta)
 {
     if (ct->currentField == 0)

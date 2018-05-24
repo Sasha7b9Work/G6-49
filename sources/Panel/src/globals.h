@@ -4,6 +4,7 @@
 
 
 #define IN_MODE_SHOW_HINTS (gBF.showHints)
+#define HINTS
 
 #define INPUT_WINDOW_STRUCT(ch, form, param)    (sig_structParameter[ch][form.ToValue()][param])
 #define AMPLITUDE(ch, form)                     (sig_structParameter[ch][form][Amplitude])
@@ -24,19 +25,8 @@ extern InputWindowStruct sig_structParameter[NumChannels][NumForms][NumParameter
 
 struct BitField
 {
-    uint showHints : 1;     ///< Установленное в 1 значение означает, что прибор находится режиме показа подсказок
+    uint showHints : 1;         ///< Установленное в 1 значение означает, что прибор находится режиме показа подсказок
+    uint needSwitchPages : 1;   ///< Установленное в 1 значение означает, что в подсказке несколько страниц и их нужно переключать вращением ручки
 };
 
 extern volatile BitField gBF;
-
-struct PackedTime
-{
-    uint hours : 5;
-    uint minutes : 6;
-    uint seconds : 6;
-    uint year : 7;
-    uint month : 4;
-    uint notUsed0 : 4;
-    uint day : 5;
-    uint notUsed1 : 27;
-};
