@@ -31,8 +31,6 @@ public:
     static Item *itemUnderKey;
     /// Возвращает адрес текущую страницу
     static Page* CurrentPage();
-    /// Возвращает орган управления, для которого нужно выводить подсказку
-    static Control PanelControlHint();
 private:
 
     static void DrawTitle();
@@ -42,6 +40,4 @@ private:
     static void ProcessControl(StructControl control);
 
     static Item *openedItem;
-
-    static Control panelControlHint;
 };

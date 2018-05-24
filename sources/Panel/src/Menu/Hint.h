@@ -1,5 +1,6 @@
 #pragma once
 #include "Menu/MenuItems.h"
+#include "Hardware/Controls.h"
 
 
 class Hint
@@ -11,11 +12,9 @@ public:
     static void Switch();
     /// ќтрисовка подсказки
     static void Draw();
-    /// ¬ызвов метода сообщает, что контрол дл€ подсказки не назначен
-    static void ClearItem();
     /// Ќазначение контрола, дл€ которого нужно выводить подсказку
     static void SetItem(const Item * const item);
-    /// ќбработать поворот ручки (листание страниц)
+    /// ќбработать поворот ручки (листание страниц). ¬озвращает false, еcли поворот ручки не пригодилс€
     static void ProcessGovernor(Control gov);
 
 private:
@@ -23,4 +22,6 @@ private:
     static bool show;
     ///  онтрол, дл€ которого нужно выводить подсказку
     static const Item *item;
+
+    static Control control;
 };

@@ -19,7 +19,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Item *Menu::itemUnderKey = 0;
 Item *Menu::openedItem = 0;
-Control Menu::panelControlHint = B_None;
+//Control Menu::panelControlHint = B_None;
 
 const Page *menu[NUM_PAGES] =
 {
@@ -37,12 +37,6 @@ void Menu::Init(void)
 {
     PageSignals::Init();
     PageSignals::OnPress_Form();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-Control Menu::PanelControlHint()
-{
-    return panelControlHint;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,26 +65,11 @@ void Menu::ProcessControl(StructControl strContr)
     if(key == B_ESC && pressed == Long)
     {
         Hint::Switch();
-        panelControlHint = B_None;
     }
     
     if(Hint::Show())
     {
-        if(key >= B_F1 && key <= B_F5)
-        {
-            Hint::SetItem(CurrentPage()->GetItem(key - B_F1));
-            panelControlHint = B_None;
-        }
-        else if(key == REG_LEFT || key == REG_RIGHT)
-        {
-            Hint::ProcessGovernor(key);
-        }
-        else
-        {
-            panelControlHint = key;
-            Hint::ClearItem();
-        }
-
+        Hint::ProcessGovernor(key);
     }
     else if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
     {
