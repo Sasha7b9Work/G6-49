@@ -91,6 +91,8 @@ void Hint::Draw()
 
         if (item)
         {
+            int yUGO = y0 + 5;
+
             Painter::SetColor(Color::GREEN_50);
             Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->Title());
             Painter::SetColor(Color::GREEN);
@@ -105,6 +107,8 @@ void Hint::Draw()
                     Calcualte(choice, x0, y0, width);
                     needCalculate = false;
                 }
+
+                DrawPagesUGO(width + 5, yUGO);
 
                 if (numPages == 1)
                 {
@@ -183,6 +187,35 @@ void Hint::Calcualte(Choice *choice, int x, int y, int width)
                 firstItemOnSecondPage = i;
                 break;
             }
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Hint::DrawPagesUGO(const int xRight, const int y0)
+{
+    if(numPages < 2)
+    {
+        return;
+    }
+
+    int delta = 3;
+    int size = 6;
+
+    for(int i = 1; i <= numPages; i++)
+    {
+        int x = xRight - size - (i - 1) * (delta + size);
+
+        if (numPages + 1 - i == currentPage)
+        {
+            Painter::FillRegion(x, y0, size, size, Color::FILL);
+            Text::SetFont(TypeFont_5);
+            Text::DrawChar(x + 2, y0 - 3, (char)(currentPage + 0x30), Color::BACK);
+            Text::SetFont(TypeFont_8);
+        }
+        else
+        {
+            Painter::DrawRectangle(x, y0, size, size, Color::FILL);
         }
     }
 }

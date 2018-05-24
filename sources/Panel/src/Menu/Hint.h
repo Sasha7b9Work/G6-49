@@ -20,6 +20,8 @@ private:
     static int NumPagesInHint(Choice *choice, int x, int y, int width);
     /// Рассчитывает данные, необходимые для разбивки подсказки на страницы
     static void Calcualte(Choice *choice, int x, int y, int width);
+    /// Рисует УГО страниц в многостраничной подсказке
+    static void DrawPagesUGO(const int xRight, const int y);
     /// Если true - нужно выводить подсказку на экран
     static bool show;
     /// Контрол, для которого нужно выводить подсказку
