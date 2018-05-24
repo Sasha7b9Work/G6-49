@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "globals.h"
+#include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
 #include "Display/InputWindow.h"
 #include "Display/InputWindowStruct.h"
@@ -76,12 +77,12 @@ void Menu::ProcessControl(StructControl strContr)
 
     if(key == B_ESC && pressed == Long)
     {
-        IN_MODE_SHOW_HINTS++;
+        Hint::Switch();
         itemHint = 0;
         panelControlHint = B_None;
     }
     
-    if(IN_MODE_SHOW_HINTS)
+    if(Hint::Show())
     {
         if(key >= B_F1 && key <= B_F5)
         {

@@ -255,6 +255,7 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp" />
@@ -395,6 +396,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Log.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Hint.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h" />

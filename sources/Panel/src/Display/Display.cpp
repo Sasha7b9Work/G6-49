@@ -10,6 +10,7 @@
 #include "Hardware/Timer.h"
 #include "InputWindow.h"
 #include "InputWindowStruct.h"
+#include "Menu/Hint.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
@@ -303,7 +304,7 @@ void Display::ShowStatistics()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::DrawHint()
 {
-    if(IN_MODE_SHOW_HINTS)
+    if(Hint::Show())
     {
         int x0 = 0;
         int y0 = MP_TITLE_HEIGHT;

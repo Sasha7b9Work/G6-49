@@ -216,6 +216,9 @@
     <ClCompile Include="..\..\Panel\src\Display\Text.cpp">
       <Filter>Display</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -457,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Text.h">
       <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Hint.h">
+      <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
