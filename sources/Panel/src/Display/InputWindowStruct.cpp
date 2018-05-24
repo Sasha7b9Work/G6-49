@@ -472,11 +472,11 @@ static void RestoreValue(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::PressKey(PanelControl key)
+void InputWindowStruct::PressKey(Control key)
 {
     struct StrControl
     {
-        PanelControl control;
+        Control control;
         char         symbol;
     };
 

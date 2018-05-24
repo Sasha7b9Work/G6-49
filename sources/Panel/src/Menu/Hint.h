@@ -16,7 +16,7 @@ public:
     /// Ќазначение контрола, дл€ которого нужно выводить подсказку
     static void SetItem(const Item * const item);
     /// ќбработать поворот ручки (листание страниц)
-    static void ProcessGovernor(PanelControl gov);
+    static void ProcessGovernor(Control gov);
 
 private:
     /// ≈сли true - нужно выводить подсказку на экран

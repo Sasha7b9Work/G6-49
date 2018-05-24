@@ -32,7 +32,7 @@ public:
     /// Возвращает адрес текущую страницу
     static Page* CurrentPage();
     /// Возвращает орган управления, для которого нужно выводить подсказку
-    static PanelControl PanelControlHint();
+    static Control PanelControlHint();
 private:
 
     static void DrawTitle();
@@ -43,5 +43,5 @@ private:
 
     static Item *openedItem;
 
-    static PanelControl panelControlHint;
+    static Control panelControlHint;
 };

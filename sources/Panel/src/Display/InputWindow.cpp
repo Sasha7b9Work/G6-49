@@ -202,7 +202,7 @@ void InputWindow::KeyEnter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::ProcessContorl(StructControl strContr)
 {
-    PanelControl key = strContr.key;
+    Control key = strContr.key;
     TypePress pressed = strContr.typePress;
 
     if (key == B_0 || key == B_1 || key == B_2 || key == B_3 || key == B_4 || key == B_5 || key == B_6 || key == B_7 || key == B_8 || key == B_9 ||

@@ -19,7 +19,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Item *Menu::itemUnderKey = 0;
 Item *Menu::openedItem = 0;
-PanelControl Menu::panelControlHint = B_None;
+Control Menu::panelControlHint = B_None;
 
 const Page *menu[NUM_PAGES] =
 {
@@ -40,7 +40,7 @@ void Menu::Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-PanelControl Menu::PanelControlHint()
+Control Menu::PanelControlHint()
 {
     return panelControlHint;
 }
@@ -65,7 +65,7 @@ void Menu::Update(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ProcessControl(StructControl strContr)
 {
-    PanelControl key = strContr.key;
+    Control key = strContr.key;
     TypePress pressed = strContr.typePress;
 
     if(key == B_ESC && pressed == Long)

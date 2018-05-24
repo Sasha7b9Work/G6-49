@@ -114,7 +114,7 @@ float Choice::Step()
 Item *Choice::Press(StructControl strControl)
 {
     TypePress press = strControl.typePress;
-    PanelControl key = strControl.key;
+    Control key = strControl.key;
 
     if(key == B_LEFT && press == Up || key == REG_RIGHT)
     {
@@ -340,7 +340,7 @@ void GovernorColor::ChangeValue(int delta)
 Item *Item::Press(StructControl strControl)
 {
     TypePress press = strControl.typePress;
-    PanelControl key = strControl.key;
+    Control key = strControl.key;
 
     if(press == Long)
     {
@@ -442,13 +442,13 @@ int Item::PositionOnPage() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-PanelControl Item::ButtonForItem() const
+Control Item::ButtonForItem() const
 {
     int pos = PositionOnPage();
 
     if (pos >= 0)
     {
-        return (PanelControl)((int)B_F1 + pos);
+        return (Control)((int)B_F1 + pos);
     }
 
     return B_None;

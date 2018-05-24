@@ -40,7 +40,7 @@ void Hint::SetItem(const Item * const item_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Hint::ProcessGovernor(PanelControl)
+void Hint::ProcessGovernor(Control)
 {
 
 }
