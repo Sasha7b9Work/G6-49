@@ -111,7 +111,7 @@ float Choice::Step()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Choice::Press(StructControl strControl)
+Item *Choice::Press(StructControl strControl)
 {
     TypePress press = strControl.typePress;
     PanelControl key = strControl.key;
@@ -337,7 +337,7 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Control::Press(StructControl strControl)
+Item *Item::Press(StructControl strControl)
 {
     TypePress press = strControl.typePress;
     PanelControl key = strControl.key;
@@ -362,19 +362,19 @@ Control *Control::Press(StructControl strControl)
 
     Menu::itemUnderKey = (press == Down) && !IsOpened() ? this : 0;
 
-    if (type == Control_Choice)
+    if (type == Item_Choice)
     {
         return ((Choice *)this)->Press(strControl);
     }
-    else if (type == Control_Button)
+    else if (type == Item_Button)
     {
         return ((Button *)this)->Press(press);
     }
-    else if (type == Control_ChoiceParameter)
+    else if (type == Item_ChoiceParameter)
     {
         return ((ChoiceParameter *)this)->Press(press);
     }
-    else if (type == Control_SmallButton)
+    else if (type == Item_SmallButton)
     {
         return ((SButton *)this)->Press(press);
     }
@@ -383,7 +383,7 @@ Control *Control::Press(StructControl strControl)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-TypeControl Control::Type() const
+TypeItem Item::Type() const
 {
     return type;
 }
@@ -393,7 +393,7 @@ int8 Choice::CurrentIndex() const
 {
     int8 retValue = 0;
 
-    if (type == Control_Choice)
+    if (type == Item_Choice)
     {
         if(isPageSB)
         {
@@ -404,7 +404,7 @@ int8 Choice::CurrentIndex() const
             retValue = *cell;
         }
     }
-    else if (type == Control_ChoiceParameter)
+    else if (type == Item_ChoiceParameter)
     {
         ChoiceParameter *param = (ChoiceParameter *)this;
 
@@ -426,7 +426,7 @@ int8 Choice::CurrentIndex() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Control::PositionOnPage() const
+int Item::PositionOnPage() const
 {
     for (int numPage = 0; numPage < NUM_PAGES; numPage++)
     {
@@ -442,7 +442,7 @@ int Control::PositionOnPage() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-PanelControl Control::ButtonForItem() const
+PanelControl Item::ButtonForItem() const
 {
     int pos = PositionOnPage();
 
@@ -455,7 +455,7 @@ PanelControl Control::ButtonForItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *ChoiceParameter::Press(TypePress press)
+Item *ChoiceParameter::Press(TypePress press)
 {
     if (press == Up)
     {
@@ -475,7 +475,7 @@ Control *ChoiceParameter::Press(TypePress press)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *SButton::Press(TypePress press)
+Item *SButton::Press(TypePress press)
 {
     if(press == Up)
     {
@@ -489,7 +489,7 @@ Control *SButton::Press(TypePress press)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Button::Press(TypePress press)
+Item *Button::Press(TypePress press)
 {
     if (press == Up && funcOnPress)
     {
@@ -531,7 +531,7 @@ pString ChoiceParameter::NameCurrentSubItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *Control::FullPath() const
+char *Item::FullPath() const
 {
     const PageBase *parent = keeper;
 

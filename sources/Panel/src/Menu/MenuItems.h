@@ -20,53 +20,53 @@ extern int8 gCurDigit;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Разные виды пунктов меню
-enum TypeControl
+enum TypeItem
 {
-    Control_None,           
-    Control_Choice,        ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
-    Control_Button,        ///< Кнопка.
-    Control_Page,          ///< Страница.
-    Control_Governor,      ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
-    Control_GovernorColor, ///< Позволяет выбрать цвет.
-    Control_ChoiceReg,     ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
-    Control_SmallButton,   ///< Кнопка для режима малых кнопок
-    Control_ChoiceParameter,
-    Control_NumberItems
+    Item_None,           
+    Item_Choice,        ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
+    Item_Button,        ///< Кнопка.
+    Item_Page,          ///< Страница.
+    Item_Governor,      ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
+    Item_GovernorColor, ///< Позволяет выбрать цвет.
+    Item_ChoiceReg,     ///< Элемент выбора, в котором выбор осуществляется не кнопкой, а ручкой
+    Item_SmallButton,   ///< Кнопка для режима малых кнопок
+    Item_ChoiceParameter,
+    Item_NumberItems
 };
 
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                                   \
-    TypeControl     type;           /* Тип итема */                                                                                             \
+    TypeItem     type;           /* Тип итема */                                                                                             \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                                \
-    bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Control_Page */                                   \
-                                    /* Если type == Control_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */     \
-    NamePage        nameOrNumBit;   /* Имя из перечисления NamePage, если type == Control_Page */                                               \
-                                    /* В случае, если type == Control_Choice,  определяет номер бита */                                         \
+    bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                   \
+                                    /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */     \
+    NamePage        nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                               \
+                                    /* В случае, если type == Item_Choice,  определяет номер бита */                                         \
     const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
     pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                                                             \
     const char      *titleHint[4]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
 class PageBase;
 
-#define IS_PAGE(control)           (control->type == Control_Page)
-#define NOT_PAGE(control)          (control->type != Control_Page)
+#define IS_PAGE(control)           (control->type == Item_Page)
+#define NOT_PAGE(control)          (control->type != Item_Page)
 #define IS_PAGE_SB(control)        (control->isPageSB)
-#define IS_CHOICE(control)         (control->type == Control_Choice)
-#define IS_CHOICE_REG(control)     (control->type == Control_ChoiceReg)
-#define NOT_CHOICE_REG(control)    (control->type != Control_ChoiceReg)
-#define IS_GOVERNOR(control)       (control->type == Control_Governor)
-#define NOT_GOVERNOR(control)      (control->type != Control_Governor)
-#define IS_GOVERNOR_COLOR(control) (control->type == Control_GovernorColor)
-#define IS_IP(control)             (control->type == Control_IP)
-#define IS_MAC(control)            (control->type == Control_MAC)
-#define IS_TIME(control)           (control->type == Control_Time)
+#define IS_CHOICE(control)         (control->type == Item_Choice)
+#define IS_CHOICE_REG(control)     (control->type == Item_ChoiceReg)
+#define NOT_CHOICE_REG(control)    (control->type != Item_ChoiceReg)
+#define IS_GOVERNOR(control)       (control->type == Item_Governor)
+#define NOT_GOVERNOR(control)      (control->type != Item_Governor)
+#define IS_GOVERNOR_COLOR(control) (control->type == Item_GovernorColor)
+#define IS_IP(control)             (control->type == Item_IP)
+#define IS_MAC(control)            (control->type == Item_MAC)
+#define IS_TIME(control)           (control->type == Item_Time)
     
 #define KEEPER(control)            ((PageBase *)control->keeper)
 #define IS_ACTIVE(control)         (control->funcOfActive())
 
 
-class Control
+class Item
 {
 public:
     COMMON_PART_MENU_ITEM;
@@ -92,9 +92,9 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
-    Control *Press(StructControl strControl);
+    Item *Press(StructControl strControl);
 
-    TypeControl Type() const;
+    TypeItem Type() const;
 
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage() const;
@@ -116,7 +116,7 @@ public:
     COMMON_PART_MENU_ITEM;
     /// \brief Здесь указатели на пункты этой страницы (в обычной странице) для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 
     /// 0 - B_Menu, 1...5 - B_F1...B_F5
-    const Control * const *items;                                               
+    const Item * const *items;
     /// Будет вызываться при нажатии на свёрнутую страницу
     pFuncVV  funcOnPress;
     /// Будет вызываться после отрисовки кнопок
@@ -129,14 +129,14 @@ public:
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 #define SMALL_BUTTON_FROM_PAGE(page, numButton)     ((SButton *)((Page *)page)->items[numButton])
 
-class Page : public Control
+class Page : public Item
 {
 public:
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// \brief Здесь указатели на пункты этой страницы (в обычной странице) для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 
     /// 0 - B_Menu,  1...5 - B_F1...B_F5
-    const Control * const *items;   
+    const Item * const *items;   
     /// Будет вызываться при нажатии на свёрнутую страницу
     pFuncVV  funcOnPress;
     /// Будет вызываться после отрисовки кнопок
@@ -156,7 +156,7 @@ public:
     /// Устанавливает позицию активного пункта меню
     void SetPosActItem(int8 pos);
     /// Возвращает адрес элемента меню заданной страницы
-    Control *Item(int numElement) const;
+    Item *GetItem(int numElement) const;
     /// \brief Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
     /// подстраница 1, это будет 5 и т.д.
     int PosItemOnTop() const;
@@ -181,7 +181,7 @@ public:
     pFuncVII    funcForDraw;
 };
 
-class Button : public Control
+class Button : public Item
 {
 public:
     /// Функция, которая вызывается при нажатии на кнопку.
@@ -189,7 +189,7 @@ public:
     /// Функция будет вызываться во время отрисовки кнопки.
     pFuncVII    funcForDraw;
     /// Обрабатывает нажатие кнопки. Возвращает ноль, потому что не может находиться в открытом состоянии.
-    Control *Press(TypePress press);
+    Item *Press(TypePress press);
 
     void Draw(int x, int y);
 };
@@ -228,7 +228,7 @@ public:
 };
 
 
-class SButton : public Control
+class SButton : public Item
 {
 public:
     /// Эта функция вызвается для обработки нажатия кнопки.
@@ -240,7 +240,7 @@ public:
 
     int                             numHints;
     /// Обрабатывает нажатие кнопки. Возвращает 0, потому что не может находиться в открытом состоянии
-    Control *Press(TypePress press);
+    Item *Press(TypePress press);
 
     void Draw(int x, int y);
 };
@@ -264,7 +264,7 @@ public:
     pFuncVV funcBeforeDraw;
 };
 
-class Governor : public Control
+class Governor : public Item
 {
 public:
     /// Минмальное значение, которое может принимать регулятор.
@@ -314,7 +314,7 @@ public:
     pFuncVII funcForDraw;
 };
 
-class Choice : public Control
+class Choice : public Item
 {
 public:
 
@@ -350,7 +350,7 @@ public:
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     const char *NameSubItem(int i) const;
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
-    Control *Press(StructControl strControl);
+    Item *Press(StructControl strControl);
 
     int8 CurrentIndex() const;
 };
@@ -373,7 +373,7 @@ public:
 };
 
 
-class ChoiceParameter : public Control
+class ChoiceParameter : public Item
 {
 public:
 
@@ -383,7 +383,7 @@ public:
 
     uint8               *numParameter;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии и 0 в противном.
-    Control *Press(TypePress press);
+    Item *Press(TypePress press);
 
     pString NameSubItem(int num) const;
 
@@ -425,7 +425,7 @@ public:
     pFuncVV funcOfChanged;
 };
 
-class Formula : public Control
+class Formula : public Item
 {
 public:
     /// Адрес ячейки, где хранится Function, из которой берётся знак операции
@@ -458,7 +458,7 @@ public:
     pFuncVV funcOnChanged;
 };
 
-class GovernorColor : public Control
+class GovernorColor : public Item
 {
 public:
     /// Структура для описания цвета.

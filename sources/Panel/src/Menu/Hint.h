@@ -11,14 +11,16 @@ public:
     static void Switch();
     /// Отрисовка подсказки
     static void Draw();
-
+    /// Вызвов метода сообщает, что контрол для подсказки не назначен
     static void ClearItem();
-
-    static void SetItem(const Control * const item);
+    /// Назначение контрола, для которого нужно выводить подсказку
+    static void SetItem(const Item * const item);
+    /// Обработать поворот ручки (листание страниц)
+    static void ProcessGovernor(PanelControl gov);
 
 private:
     /// Если true - нужно выводить подсказку на экран
     static bool show;
     /// Контрол, для которого нужно выводить подсказку
-    static const Control *item;
+    static const Item *item;
 };

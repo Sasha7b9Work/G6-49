@@ -229,6 +229,6 @@ void InputWindow::ProcessContorl(StructControl strContr)
     }
     else if ((key >= B_F1 && key <= B_F4) && pressed == Up)
     {
-        Menu::CurrentPage()->Item(key - B_F1)->Press(strContr);
+        Menu::CurrentPage()->GetItem(key - B_F1)->Press(strContr);
     }
 }

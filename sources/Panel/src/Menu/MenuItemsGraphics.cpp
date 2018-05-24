@@ -8,21 +8,21 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Control::Draw(bool opened, int x, int y) const
+void Item::Draw(bool opened, int x, int y) const
 {
-    if (type == Control_Choice)
+    if (type == Item_Choice)
     {
         ((Choice *)this)->Draw(opened, x, y);
     }
-    else if (type == Control_Button)
+    else if (type == Item_Button)
     {
         ((Button *)this)->Draw(x, y);
     }
-    else if (type == Control_ChoiceParameter)
+    else if (type == Item_ChoiceParameter)
     {
         ((ChoiceParameter *)this)->Draw(opened, x, y);
     }
-    else if (type == Control_SmallButton)
+    else if (type == Item_SmallButton)
     {
         ((SButton *)this)->Draw(x, y);
     }

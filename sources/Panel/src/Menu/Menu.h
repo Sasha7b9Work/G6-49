@@ -23,12 +23,12 @@ public:
 
     static const char *NameCurrentParameter();
     /// Возвращает адрес открытого элемента меню
-    static Control *OpenedItem();
+    static Item *OpenedItem();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
-    static Control *CurrentItem();
+    static Item *CurrentItem();
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
-    static Control *itemUnderKey;
+    static Item *itemUnderKey;
     /// Возвращает адрес текущую страницу
     static Page* CurrentPage();
     /// Возвращает орган управления, для которого нужно выводить подсказку
@@ -41,7 +41,7 @@ private:
 
     static void ProcessControl(StructControl control);
 
-    static Control *openedItem;
-    /// Орган управления, для которого нужно выводить подсказку
+    static Item *openedItem;
+
     static PanelControl panelControlHint;
 };

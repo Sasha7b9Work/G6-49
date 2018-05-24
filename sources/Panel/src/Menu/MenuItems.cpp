@@ -46,14 +46,14 @@ const char *Choice::NamePrevSubItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Page::Item(int numElement) const
+Item *Page::GetItem(int numElement) const
 {
     if(NumItems() - 1 < numElement)
     {
         return 0;
     }
 
-    return (Control *)items[numElement];
+    return (Item *)items[numElement];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -94,19 +94,19 @@ void Page::ChangeSubPage(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsShade() const
+bool Item::IsShade() const
 {
     return Menu::OpenedItem() && (this != Menu::OpenedItem());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsPressed() const
+bool Item::IsPressed() const
 {
     return this == Menu::itemUnderKey;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::SetCurrent(bool active)
+void Item::SetCurrent(bool active)
 {
     Page *page = (Page *)keeper;
     if (!active)
@@ -117,7 +117,7 @@ void Control::SetCurrent(bool active)
     {
         for (int i = 0; i < page->NumItems(); i++)
         {
-            if (page->Item(i) == this)
+            if (page->GetItem(i) == this)
             {
                 page->SetPosActItem((int8)i);
                 return;
@@ -127,9 +127,9 @@ void Control::SetCurrent(bool active)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::IsOpened() const
+bool Item::IsOpened() const
 {
-    if (type == Control_Page)
+    if (type == Item_Page)
     {
         return keeper->CurrentItemIsOpened();
     }
@@ -137,35 +137,35 @@ bool Control::IsOpened() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::Open(bool open)
+void Item::Open(bool open)
 {
     Page *parent = (Page *)keeper;
     parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Control::Title() const
+const char *Item::Title() const
 {
     return titleHint[LANG];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Control::ChangeOpened(int delta)
+bool Item::ChangeOpened(int delta)
 {
     if (delta < 2 && delta > -2)
     {
         return false;
     }
 
-    if (type == Control_Page)
+    if (type == Item_Page)
     {
         ((Page *)this)->ChangeSubPage(delta);
     }
-    else if (type == Control_ChoiceReg || type == Control_Choice)
+    else if (type == Item_ChoiceReg || type == Item_Choice)
     {
         ((Choice *)this)->ChangeIndex(delta);
     }
-    else if (type == Control_Governor)
+    else if (type == Item_Governor)
     {
         ((Governor *)this)->ChangeValue(delta);
     }
@@ -189,9 +189,9 @@ bool Page::CurrentItemIsOpened() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::ShortPress()
+void Item::ShortPress()
 {
-    if(type == Control_Choice)
+    if(type == Item_Choice)
     {
         Choice *choice = (Choice *)this;
         if(!IS_ACTIVE(this))
@@ -208,7 +208,7 @@ void Control::ShortPress()
             choice->ChangeIndex(-1);
         }
     }
-    else if(type == Control_Button)
+    else if(type == Item_Button)
     {
         if(IS_ACTIVE(this))
         {
@@ -216,12 +216,12 @@ void Control::ShortPress()
             ((Button *)this)->funcOnPress();
         }
     }
-    else if(type == Control_Page)
+    else if(type == Item_Page)
     {
         Page *page = (Page *)this;
         page->funcOnPress();
     }
-    else if(type == Control_Governor)
+    else if(type == Item_Governor)
     {
         if(IS_ACTIVE(this))
         {
@@ -236,7 +236,7 @@ void Control::ShortPress()
             }
         }
     }
-    else if(type == Control_GovernorColor)
+    else if(type == Item_GovernorColor)
     {
         if(IS_ACTIVE(this))
         {
@@ -255,7 +255,7 @@ void Control::ShortPress()
             }
         }
     }
-    else if(type == Control_ChoiceReg)
+    else if(type == Item_ChoiceReg)
     {
         Choice *choice = (Choice *)this;
         if(IS_ACTIVE(this))
@@ -267,7 +267,7 @@ void Control::ShortPress()
             choice->funcOnChanged(false);
         }
     }
-    else if(type == Control_SmallButton)
+    else if(type == Item_SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
@@ -276,13 +276,13 @@ void Control::ShortPress()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Control::LongPress()
+void Item::LongPress()
 {
-    if(type == Control_Button)
+    if(type == Item_Button)
     {
         ((Button *)this)->ShortPress();
     }
-    else if(type == Control_SmallButton)
+    else if(type == Item_SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
@@ -317,7 +317,7 @@ void Page::SetCurrentSubPage(int8 pos)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Control::DrawHint(int x, int y, int width, Color color) const
+int Item::DrawHint(int x, int y, int width, Color color) const
 {
     Painter::SetColor(color);
 

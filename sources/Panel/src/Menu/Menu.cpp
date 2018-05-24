@@ -17,8 +17,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Control *Menu::itemUnderKey = 0;
-Control *Menu::openedItem = 0;
+Item *Menu::itemUnderKey = 0;
+Item *Menu::openedItem = 0;
 PanelControl Menu::panelControlHint = B_None;
 
 const Page *menu[NUM_PAGES] =
@@ -78,14 +78,19 @@ void Menu::ProcessControl(StructControl strContr)
     {
         if(key >= B_F1 && key <= B_F5)
         {
-            Hint::SetItem(CurrentPage()->Item(key - B_F1));
+            Hint::SetItem(CurrentPage()->GetItem(key - B_F1));
             panelControlHint = B_None;
+        }
+        else if(key == REG_LEFT || key == REG_RIGHT)
+        {
+            Hint::ProcessGovernor(key);
         }
         else
         {
             panelControlHint = key;
             Hint::ClearItem();
         }
+
     }
     else if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
     {
@@ -93,7 +98,7 @@ void Menu::ProcessControl(StructControl strContr)
     }
     else if (key >= B_F1 && key <= B_F5)
     {
-        openedItem = CurrentPage()->Item(key - B_F1)->Press(strContr);
+        openedItem = CurrentPage()->GetItem(key - B_F1)->Press(strContr);
     }
     else if (key == REG_LEFT)
     {
@@ -143,13 +148,13 @@ const char *Menu::NameCurrentParameter(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Menu::OpenedItem()
+Item *Menu::OpenedItem()
 {
     return openedItem;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control *Menu::CurrentItem()
+Item *Menu::CurrentItem()
 {
     return 0;
 }
