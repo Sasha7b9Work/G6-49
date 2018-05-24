@@ -707,11 +707,6 @@
               <FilePath>..\..\Panel\src\Display\PainterSTM429.cpp</FilePath>
             </File>
             <File>
-              <FileName>PainterText.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Display\PainterText.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\Panel\src\Display\Colors.cpp</FilePath>
@@ -722,9 +717,14 @@
               <FilePath>..\..\Panel\src\Display\Colors.h</FilePath>
             </File>
             <File>
-              <FileName>PainterTextSTM429.cpp</FileName>
+              <FileName>Text.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Display\PainterTextSTM429.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Display\Text.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Text.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Display\Text.h</FilePath>
             </File>
           </Files>
         </Group>

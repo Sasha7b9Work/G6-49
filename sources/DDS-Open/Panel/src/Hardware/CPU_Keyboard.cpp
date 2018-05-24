@@ -195,7 +195,7 @@ void CPU::Keyboard::Update()
             {
                 if (selX == strBtn[i][j].x && selY == strBtn[i][j].y)
                 {
-                    FillCommand(strBtn[i][j].control, TypePress_Release);
+                    FillCommand(strBtn[i][j].control, Up);
                     selX = -1;
                 }
             }
