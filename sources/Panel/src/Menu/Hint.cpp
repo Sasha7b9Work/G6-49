@@ -10,50 +10,50 @@
 bool        Hint::show = false;
 const Item *Hint::item = 0;
 Control     Hint::control = B_None;
+int         Hint::numPages = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Hint::Show()
+bool Hint::ProcessControl(StructControl strCtrl)
 {
-    return show;
-}
+    Control key = strCtrl.key;
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Hint::Switch()
-{
-    show = !show;
-    item = 0;
-    control = B_None;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Hint::SetItem(const Item * const item_)
-{
-    item = item_;
-    control = B_None;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Hint::ProcessGovernor(Control key)
-{
-    if(key >= B_F1 && key <= B_F5)
+    if (key == B_ESC && strCtrl.typePress == Long)
     {
-        SetItem(Menu::CurrentPage()->GetItem(key - B_F1));
-    }
-    else if(key == REG_LEFT || key == REG_RIGHT)
-    {
-
-    }
-    else
-    {
+        show = !show;
         item = 0;
+        control = B_None;
+        numPages = 0;
     }
+
+    if (show)
+    {
+        if (key >= B_F1 && key <= B_F5)
+        {
+            item = Menu::CurrentPage()->GetItem(key - B_F1);
+            control = B_None;
+        }
+        else if (key == REG_LEFT || key == REG_RIGHT)
+        {
+            if(numPages > 0)
+            {
+            }
+        }
+        else
+        {
+            item = 0;
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Hint::Draw()
 {
-    if (Show())
+    if (show)
     {
         int x0 = 0;
         int y0 = MP_TITLE_HEIGHT;

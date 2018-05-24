@@ -62,14 +62,8 @@ void Menu::ProcessControl(StructControl strContr)
     Control key = strContr.key;
     TypePress pressed = strContr.typePress;
 
-    if(key == B_ESC && pressed == Long)
+    if(Hint::ProcessControl(strContr))
     {
-        Hint::Switch();
-    }
-    
-    if(Hint::Show())
-    {
-        Hint::ProcessGovernor(key);
     }
     else if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
     {
