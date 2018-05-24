@@ -265,7 +265,7 @@ void Display::DrawConsole(void)
     }
 
     int y = 1;
-    for (int i = 0; i < STRING_IN_CONSOLE; i++)
+    for (int i = 0; i < stringsInConsole; i++)
     {
         int length = Font::GetLengthText(&bufferConsole[i][0]);
         Painter::FillRegion(2, y, length, 8, Color::BACK);
