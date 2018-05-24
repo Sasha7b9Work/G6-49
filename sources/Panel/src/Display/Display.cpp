@@ -80,7 +80,7 @@ void Display::Update()
 
     DrawFrequencyCounter();
 
-    DrawHint();
+    Hint::Draw();
 
     ShowStatistics();
 
@@ -298,60 +298,5 @@ void Display::ShowStatistics()
         strcat(buffer, "/");
         strcat(buffer, Int2String(timeAllFrames, false, 3));
         Text::DrawText(2, SCREEN_HEIGHT - 11, buffer, Color::FILL);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::DrawHint()
-{
-    if(Hint::Show())
-    {
-        int x0 = 0;
-        int y0 = MP_TITLE_HEIGHT;
-        int width = 319 - MI_WIDTH;
-
-        y0 = Text::DrawTextInBoundedRectWithTransfers(x0, y0, width,
-        LANG_RU ?
-        "Включён режим подсказок.\n"
-        "Для получения информации по элементу меню или назначению кнопки используйте соответствующий орган управления.\n"
-        "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC."
-        :
-        "Prompt mode is enabled.\n"
-        "For information about the menu item or the purpose of the button, use the appropriate control.\n"
-        "To exit the prompt mode, press and hold the ESC key."
-        ,
-        Color::BACK, Color::FILL, Color::GRAY_50);
-
-        Painter::DrawFilledRectangle(x0, y0, width, 239 - y0 - 1, Color::BACK, Color::FILL);
-
-        if(Menu::ItemHint())
-        {
-            Control *control = Menu::ItemHint();
-            Painter::SetColor(Color::GREEN_50);
-
-            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", control->Title());
-            Painter::SetColor(Color::GREEN);
-
-            y0 = control->DrawHint(x0 + 5, y0 + 17, width - 8) + 5;
-
-            Painter::SetColor(Color::WHITE);
-
-            int number = 1;
-
-            if(control->Type() == Control_Choice)
-            {
-                Choice *choice = (Choice *)control;
-
-                for(int i = 0; i < choice->NumSubItems(); i++)
-                {
-                    y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width - 10, Color::GREEN, "%d. \"%s\" %s", number++, 
-                                                                choice->NameSubItem(i), LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
-                }
-            }   
-        }
-        else if(Menu::PanelControlHint())
-        {
-
-        }
     }
 }
