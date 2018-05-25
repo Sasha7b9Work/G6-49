@@ -40,6 +40,9 @@
     <Filter Include="common\_VS">
       <UniqueIdentifier>{522de39f-b113-4f43-b498-9a04285ec5fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrequencyMeter">
+      <UniqueIdentifier>{7f35b7ae-0ac3-4dce-916a-90ff1271dcfd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -224,6 +227,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Console.cpp">
       <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\Statistics.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp">
+      <Filter>FrequencyMeter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -475,6 +484,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Console.h">
       <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\Statistics.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h">
+      <Filter>FrequencyMeter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

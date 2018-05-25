@@ -43,6 +43,11 @@ void InputWindow::Init(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Draw(void)
 {
+    if(ADDITION_PAGE_IS_NONE)
+    {
+        return;
+    }
+
     int x = 0;
     int y = MP_TITLE_HEIGHT;
     int width = SIGNAL_WIDTH;

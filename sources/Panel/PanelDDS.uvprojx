@@ -2056,6 +2056,31 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\CommonFunctions.h</FilePath>
             </File>
+            <File>
+              <FileName>Statistics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Statistics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Statistics.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Statistics.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FrequencyMeter</GroupName>
+          <Files>
+            <File>
+              <FileName>FrequencyMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FrequencyMeter\FrequencyMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FrequencyMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FrequencyMeter\FrequencyMeter.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

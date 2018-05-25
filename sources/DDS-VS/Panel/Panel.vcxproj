@@ -240,6 +240,7 @@
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Text.cpp" />
+    <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\globals.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
@@ -274,6 +275,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp" />
+    <ClCompile Include="..\..\Panel\src\Utils\Statistics.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\StringUtils.cpp" />
     <ClCompile Include="..\..\Panel\src\Wave.cpp" />
   </ItemGroup>
@@ -386,6 +388,7 @@
     <ClInclude Include="..\..\Panel\src\Display\Painter.h" />
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Panel\src\Display\Text.h" />
+    <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h" />
     <ClInclude Include="..\..\Panel\src\Generator.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
@@ -418,6 +421,7 @@
     <ClInclude Include="..\..\Panel\src\structs.h" />
     <ClInclude Include="..\..\Panel\src\Utils\CommonFunctions.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Math.h" />
+    <ClInclude Include="..\..\Panel\src\Utils\Statistics.h" />
     <ClInclude Include="..\..\Panel\src\Utils\StringUtils.h" />
     <ClInclude Include="..\..\Panel\src\Wave.h" />
   </ItemGroup>
