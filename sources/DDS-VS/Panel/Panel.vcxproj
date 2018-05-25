@@ -274,6 +274,7 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\StringUtils.cpp" />
+    <ClCompile Include="..\..\Panel\src\Wave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
@@ -416,6 +417,7 @@
     <ClInclude Include="..\..\Panel\src\Utils\CommonFunctions.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Math.h" />
     <ClInclude Include="..\..\Panel\src\Utils\StringUtils.h" />
+    <ClInclude Include="..\..\Panel\src\Wave.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\common\_VS\algorithm" />

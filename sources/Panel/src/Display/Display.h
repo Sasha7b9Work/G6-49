@@ -21,14 +21,6 @@ public:
     static void AddStringToConsole(char *string);
 
 private:
-    static void DrawSignal(Channel chan);
-
-    static void DrawSignalUGO(Channel chan, int y0);
-
-    static void DrawSignalParameters(Channel chan, int y0);
-
-    static void DrawParameterValue(Channel chan, Type_WaveParameter parameter, int x, int y);
-
     static void DrawConsole();
 
     static void DrawFrequencyCounter();

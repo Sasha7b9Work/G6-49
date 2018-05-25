@@ -1631,6 +1631,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator.h</FilePath>
             </File>
+            <File>
+              <FileName>Wave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Wave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Wave.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
