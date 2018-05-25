@@ -34,7 +34,7 @@ enum CommandWrite
     SET_DURATION            = 6,
     SET_DUTYRATIO           = 7,
     SET_PHASE               = 8,
-    RUN_RESET               = 9,   ///< Сброс состояния
+    RUN_RESET               = 9,    ///< Сброс состояния
     MODE_DEBUG              = 10,   ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
     SET_DELAY               = 11,   ///< Задержка
     NUM_COMMAND_WRITE,

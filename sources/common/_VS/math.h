@@ -8,6 +8,8 @@ float cosf(float);
 float sinf(float);
 bool isnan(float);
 int rand();
+float expf(float);
+void srand(int);
 float powf(float, float);
 
 

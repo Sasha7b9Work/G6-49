@@ -7,6 +7,7 @@
 #include "Settings/Settings.h"
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +18,7 @@ void Wave::DrawSignal(Channel ch)
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(0, y0, SIGNAL_WIDTH, SIGNAL_HEIGHT, Color::FILL);
-        Text::DrawBigText(5, y0 + 5, 2, (ch == A) ? "1" : "2", Color::FILL);
+        Text::DrawBigText(5, y0 + 5, 2, (ch == A) ? "A" : "B", Color::FILL);
         DrawSignalUGO(ch, y0);
         DrawSignalParameters(ch, y0);
     }
@@ -34,12 +35,34 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
     int maxY = minY + height;
     int x0 = 10;
 
-    Painter::DrawVLine(x0, minY, maxY);
-    Painter::DrawHLine(aveY, x0, x0 + width);
 
-    WaveForm form = WAVE_FORM_CH(chan);
+    static bool first = true;
 
-    if (form.type == Sine)
+    static int yNoise[100];
+    static int yExp[100];
+
+    if (first)
+    {
+        srand(2);
+        for (int i = 0; i < 100; i++)
+        {
+            yNoise[i] = aveY - (rand() % 50 - 25);
+
+            yExp[i] = aveY - (int)(expf(i / 12.5f) + 0.5f) + 1;
+        }
+
+        first = false;
+    }
+
+    Type_WaveForm type = WAVE_FORM_CH(chan).type;
+
+    if (type != Free)
+    {
+        Painter::DrawVLine(x0, minY, maxY);
+        Painter::DrawHLine(aveY, x0, x0 + width);
+    }
+
+    if (type == Sine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -53,16 +76,78 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::RunDisplay();
         }
     }
-    else if (form.type == RampPlus)
+    else if(type == Cosine)
     {
-        int dX = 30;
+        float speed = 0.1f;
+        int delta = 1;
+
+        for (int i = delta; i < width; i++)
+        {
+            int y1 = aveY - (int)(cosf((i - delta) * speed) * height / 2.0f);
+            int y2 = aveY - (int)(cosf(i * speed) * height / 2.0f);
+
+            Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
+            Painter::RunDisplay();
+        }
+    }
+    else if(type == Meander)
+    {
+        int dX = 40;
+        int dY = 20;
+        for(int x = x0; x < x0 + 80; x += dX)
+        {
+            Painter::DrawHLine(aveY - dY, x, x + dX / 2);
+            Painter::DrawVLine(x + dX / 2, aveY - dY, aveY + dY);
+            Painter::DrawHLine(aveY + dY, x + dX / 2, x + dX);
+            Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
+        }
+    }
+    else if (type == RampPlus)
+    {
+        int dX = 28;
         for (int x = x0; x < x0 + 80; x += dX)
         {
             Painter::DrawLine(x, aveY, x + dX, minY);
             Painter::DrawLine(x + dX, aveY, x + dX, minY);
         }
     }
-    else if (form.type == Impulse)
+    else if(type == RampMinus)
+    {
+        int dX = 28;
+        int dY = 20;
+        for (int x = x0; x < x0 + 80; x += dX)
+        {
+            Painter::DrawLine(x, aveY - dY, x + dX, aveY);
+            Painter::DrawVLine(x + dX, aveY - dY, aveY);
+        }
+    }
+    else if(type == Triangle)
+    {
+        int dX = 38;
+        int dY = 20;
+        for(int x = x0; x < x0 + 80; x += dX)
+        {
+            int xAve = x + dX / 2;
+            if (xAve < x0 + 80)
+            {
+                Painter::DrawLine(x, aveY, xAve, aveY - dY);
+                Painter::DrawLine(xAve, aveY - dY, x + dX, aveY);
+            }
+        }
+    }
+    else if(type == Trapeze)
+    {
+        int dX = 20;
+        int dY = 20;
+        for (int i = 0; i < 2; i++)
+        {
+            Painter::DrawLine(x0, aveY, x0 + dX / 2, aveY - dY);
+            Painter::DrawHLine(aveY - dY, x0 + dX / 2, x0 + 3 * dX / 2);
+            Painter::DrawLine(x0 + 3 * dX / 2, aveY - dY, x0 + 2 * dX, aveY);
+            x0 += 2 * dX;
+        }
+    }
+    else if (type == Impulse)
     {
         int deltaX = 20;
         for (int i = 0; i < 5; i++)
@@ -72,6 +157,43 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawVLine(x0 + 5, minY, aveY);
             x0 += deltaX;
         }
+    }
+    else if (type == ExpPlus)
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            for (int x = 1 + (i * 40); x < 40 + (i * 40); x++)
+            {
+                Painter::SetPoint(x0 + x, yExp[x - (i * 40)]);
+                Painter::DrawLine(x0 + x - 1, yExp[x - 1 - i * 40], x0 + x, yExp[x - i * 40]);
+            }
+            Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
+        }
+    }
+    else if (type == ExpMinus)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            for (int x = 1 + (i * 40); x < 40 + (i * 40); x++)
+            {
+                Painter::SetPoint(x0 + x, yExp[40 - (x - (i * 40))]);
+                Painter::DrawLine(x0 + x - 1, yExp[40 - (x - 1 - i * 40)], x0 + x, yExp[40 - (x - i * 40)]);
+            }
+            Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
+        }
+    }
+    else if(type == Noise)
+    {
+        int i = 0;
+        int dX = 1;
+        for(int x = x0; x <= x0 + 85; x += dX)
+        {
+            Painter::DrawLine(x, yNoise[i], x + dX, yNoise[i + 1]);
+            i++;
+        }
+    }
+    else if(type == Free)
+    {
     }
 }
 
