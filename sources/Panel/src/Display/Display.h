@@ -18,24 +18,12 @@ public:
 
     static uint8 *GetBuffer();
 
-    static void AddStringToConsole(char *string);
-
 private:
-    static void DrawConsole();
-
     static void DrawFrequencyCounter();
 
     static void ShowStatistics();
     /// Написать подсказку
     static void DrawHint();
-
-    static const int STRING_IN_CONSOLE = 29;
-
-    static const int SYMBOLS_IN_STRING = 64;
-    /// Здесь хранятся строки консоли
-    static char bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING];
-    /// Количество строк в консоли
-    static int stringsInConsole;
     /// Экран
     static uint8 *frontBuffer;
     /// Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer

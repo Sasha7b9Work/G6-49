@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "globals.h"
+#include "Console.h"
 #include "Wave.h"
 #include "Display.h"
 #include "DisplayTypes.h"
@@ -25,8 +26,6 @@
 #include <stdlib.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-char        Display::bufferConsole[STRING_IN_CONSOLE][SYMBOLS_IN_STRING] = {};
-int         Display::stringsInConsole = 0;
 #ifdef STM32F429xx
 uint8       *Display::frontBuffer = (uint8 *)malloc(BUFFER_WIDTH * BUFFER_HEIGHT);
 uint8       *Display::backBuffer = (uint8 *)malloc(BUFFER_WIDTH * BUFFER_HEIGHT);
@@ -85,7 +84,7 @@ void Display::Update()
 
     ShowStatistics();
 
-    DrawConsole();
+    Console::Draw();
 
     CPU::Keyboard::Draw();
 
@@ -100,64 +99,6 @@ void Display::Update()
         timeAllFrames = (int)timeAccumFrames;
         timeStartFrames = TIME_MS;
         timeAccumFrames = 0;
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::AddStringToConsole(char *string)
-{
-    // Находим номер первой пустой строки
-    int numEmptyString = 0;
-
-    for (; numEmptyString < STRING_IN_CONSOLE; numEmptyString++)
-    {
-        if (!bufferConsole[numEmptyString][0])
-        {
-            break;
-        }
-    }
-
-
-    // Если пустой строки нет
-    if (numEmptyString == STRING_IN_CONSOLE)
-    {
-        // То сдвигаем все строки на одну
-        for (int i = 1; i < STRING_IN_CONSOLE; i++)
-        {
-            strcpy(&bufferConsole[i - 1][0], &bufferConsole[i][0]);
-        }
-        numEmptyString = STRING_IN_CONSOLE - 1;
-    }
-
-    char tempBuffer[1000] = "";
-
-    static int numLines = 0;
-
-    sprintf(tempBuffer, "%d %s", numLines++, string);
-
-    if (strlen(tempBuffer) > SYMBOLS_IN_STRING - 1)
-    {
-        tempBuffer[SYMBOLS_IN_STRING - 1] = 0;
-    }
-    
-    strcpy(&bufferConsole[numEmptyString][0], tempBuffer);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Display::DrawConsole(void)
-{
-    if (!CONSOLE_ENABLED)
-    {
-        return;
-    }
-
-    int y = 1;
-    for (int i = 0; i < stringsInConsole; i++)
-    {
-        int length = Font::GetLengthText(&bufferConsole[i][0]);
-        Painter::FillRegion(2, y, length, 8, Color::BACK);
-        Text::DrawText(2, y, &bufferConsole[i][0], Color::FILL);
-        y += 8;
     }
 }
 

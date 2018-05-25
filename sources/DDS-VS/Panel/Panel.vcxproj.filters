@@ -222,6 +222,9 @@
     <ClCompile Include="..\..\Panel\src\Wave.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Console.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -469,6 +472,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Wave.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Console.h">
+      <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

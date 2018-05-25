@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Log.h"
+#include "Display/Console.h"
 #include <Display/Display.h>
 #include <Hardware/CPU.h>
 #include "Hardware/VCP.h"
@@ -45,7 +46,7 @@ void Log::Write(TypeTrace type, char *format, ...)
     va_start(args, format);
     vsprintf(pointer, format, args);
     va_end(args);
-    Display::AddStringToConsole(buffer);
+    Console::AddString(buffer);
     if(loggerUSB)
     {
         VCP::SendFormatStringAsynch(buffer);
@@ -77,8 +78,8 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     strcat(message, " ");
     strcat(message, func);
     strcat(message, numBuffer);
-    Display::AddStringToConsole(message);
-    Display::AddStringToConsole(buffer);
+    Console::AddString(message);
+    Console::AddString(buffer);
     if(loggerUSB)
     {
         VCP::SendFormatStringAsynch(message);
