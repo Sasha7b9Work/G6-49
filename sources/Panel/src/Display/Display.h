@@ -27,7 +27,7 @@ private:
 
     static void DrawSignalParameters(Channel chan, int y0);
 
-    static void DrawParameterValue(Channel chan, WaveParameter parameter, int x, int y);
+    static void DrawParameterValue(Channel chan, Type_WaveParameter parameter, int x, int y);
 
     static void DrawConsole();
 

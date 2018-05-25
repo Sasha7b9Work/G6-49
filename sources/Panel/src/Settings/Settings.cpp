@@ -8,6 +8,11 @@
 #include "Hardware/CPU.h"
 
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4310)
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static const Settings defSet =
@@ -69,6 +74,10 @@ static const Settings defSet =
 //              |----------- 5 BIT_STOP_BIT       StopBit_1
 };
 
+#ifdef WIN32
+#pragma warning(pop)
+#endif
+
 Settings set = defSet;
 
 
@@ -87,13 +96,13 @@ static const float minMax[NumParameters][2] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float MinValue(WaveParameter param)
+float MinValue(Type_WaveParameter param)
 {
     return minMax[param][0];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float MaxValue(WaveParameter param)
+float MaxValue(Type_WaveParameter param)
 {
     return minMax[param][1];
 }

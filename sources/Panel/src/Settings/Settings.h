@@ -67,7 +67,7 @@ public:
     };
     col_val         disp_Colors[32];                ///< Цвета
     WaveForm        sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
-    WaveParameter   sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
+    Type_WaveParameter   sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
     int8            menu_currentPage;               ///< Отображаемая страница меню
     Page*           menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
     int8            menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы

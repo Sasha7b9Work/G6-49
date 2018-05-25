@@ -52,7 +52,7 @@ static void SendIWStoGenerator();
 
 static InputWindowStruct *iws = 0;
 static WaveForm           form;
-static WaveParameter      m_param;
+static Type_WaveParameter      m_param;
 static Channel            ch;
 
 #define SIZE_INPUT_BUFFER_IWS 17
@@ -60,7 +60,7 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindowStruct::Fill(Channel ch_, WaveForm form_, WaveParameter param_)
+void InputWindowStruct::Fill(Channel ch_, WaveForm form_, Type_WaveParameter param_)
 {
     ch = ch_;
     form = form_;
@@ -341,7 +341,7 @@ const char *NameOrder(Order order)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *NameUnit(char buffer[10], Order order, WaveParameter parameter)
+const char *NameUnit(char buffer[10], Order order, Type_WaveParameter parameter)
 {
     static const char *names[][2] =
     {

@@ -519,7 +519,7 @@ pString ChoiceParameter::NameSubItem(int number) const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char* Parameter_Name(WaveParameter parameter)
+const char* Parameter_Name(Type_WaveParameter parameter)
 {
     return (char*)nameParameter[parameter][LANG];
 }

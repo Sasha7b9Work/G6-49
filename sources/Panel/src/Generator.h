@@ -19,7 +19,7 @@ public:
 
     static void SetFormWave(Channel ch, WaveForm form);
 
-    static void SetParameter(Channel ch, WaveParameter param, float value);
+    static void SetParameter(Channel ch, Type_WaveParameter param, float value);
 
     static void SetDebugMode(bool enable);
 };

@@ -511,7 +511,7 @@ typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
-const char* Parameter_Name(WaveParameter parameter);
+const char* Parameter_Name(Type_WaveParameter parameter);
 
 /** @}  @}
  */

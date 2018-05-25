@@ -41,16 +41,22 @@ enum CommandWrite
     COMMAND_NONE
 };
 
-enum WaveParameter
+enum Type_WaveParameter
 {
-    Frequency,      ///< Частота
-    Period,         ///< Период
-    Amplitude,      ///< Амплитуда
-    Offset,         ///< Смещение
-    Duration,       ///< Длительность
-    DutyCycle,      ///< Скважность
-    Phase,          ///< Фаза
-    Delay,          ///< Задержка
+    Frequency,          ///< Частота
+    Period,             ///< Период
+    Amplitude,          ///< Амплитуда
+    Offset,             ///< Смещение
+    Duration,           ///< Длительность
+    DutyCycle,          ///< Скважность
+    Phase,              ///< Сдвиг фазы
+    Delay,              ///< Задержка
+    DepthModulation,    ///< Глубина амплитудной модуляции
+    Polarity,           ///< Полярность
+    DurationRise,       ///< Длительность нарастания
+    DurationFall,       ///< Длительность спада
+    DurationStady,      ///< Длительность установившего значения
+    Filling,            ///< Заполнение
     NumParameters
 };
 

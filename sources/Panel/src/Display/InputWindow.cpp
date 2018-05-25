@@ -14,7 +14,7 @@
 
 static Channel           chan;
 static WaveForm          form;
-static WaveParameter     param;
+static Type_WaveParameter     param;
 static InputWindowStruct iws;
 
 

@@ -59,7 +59,7 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Channel ch, WaveParameter param, float value)
+void Generator::SetParameter(Channel ch, Type_WaveParameter param, float value)
 {
     static const CommandWrite commands[NumParameters] =
     {

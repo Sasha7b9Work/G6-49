@@ -51,5 +51,5 @@ enum Parity
 };
 
 
-float MinValue(WaveParameter param);
-float MaxValue(WaveParameter param);
+float MinValue(Type_WaveParameter param);
+float MaxValue(Type_WaveParameter param);

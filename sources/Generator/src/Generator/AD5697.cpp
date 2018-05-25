@@ -57,7 +57,7 @@ void AD5697::SetOffset(Channel ch, float offset)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::WriteParameter(Channel ch, WaveParameter param, float value_)
+void AD5697::WriteParameter(Channel ch, Type_WaveParameter param, float value_)
 {
     static const uint8 address[NumChannels] = {BINARY_U8(00001100), BINARY_U8(00001101)};
 
@@ -76,7 +76,7 @@ void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 AD5697::CreateCommandByte(WaveParameter param)
+uint8 AD5697::CreateCommandByte(Type_WaveParameter param)
 {
     return (uint8)(BINARY_U8(00010000) | ((param == Amplitude) ? 0x01 : 0x08));
 }
