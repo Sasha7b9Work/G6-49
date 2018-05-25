@@ -1,6 +1,5 @@
 #include "globals.h"
 #include "InputWindow.h"
-#include "InputWindowStruct.h"
 #include "DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -12,21 +11,10 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (iws.numLockMode)
 
-static Channel           chan;
-static WaveForm          form;
-static Type_WaveParameter     param;
-static InputWindowStruct iws;
-
-
-static void DrawAmplitude(int x, int y);
-static void DrawFrequency(int x, int y);
-static void DrawOffset(int x, int y);
-static void DrawPhase(int x, int y);
-static void DrawDelay(int x, int y);
-static void DrawPeriod(int x, int y);
-static void DrawDutyRatio(int x, int y);
-static void DrawDuration(int x, int y);
-static void DrawDigits(int x, int y);
+Channel            InputWindow::chan;
+WaveForm           InputWindow::form;
+Type_WaveParameter InputWindow::param;
+InputWindowStruct  InputWindow::iws;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +58,13 @@ void InputWindow::Draw(void)
         DrawDuration,
         DrawDutyRatio,
         DrawPhase,
-        DrawDelay
+        DrawDelay,
+        DrawDepthModulation,
+        DrawPolarity,
+        DrawDurationRise,
+        DrawDurationFall,
+        DrawDurationStady,
+        DrawDutyFactor
     };
 
     x += 40;
@@ -87,7 +81,7 @@ void InputWindow::Draw(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDigits(int x, int y)
+void InputWindow::DrawDigits(int x, int y)
 {
 #define SIZE_TEXT       5
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
@@ -133,49 +127,79 @@ static void DrawDigits(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawAmplitude(int, int)
+void InputWindow::DrawDepthModulation(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawPolarity(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawDurationRise(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawDurationFall(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawDutyFactor(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawDurationStady(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawAmplitude(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawFrequency(int, int)
+void InputWindow::DrawFrequency(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawOffset(int, int)
+void InputWindow::DrawOffset(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawPhase(int, int)
+void InputWindow::DrawPhase(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDelay(int, int)
+void InputWindow::DrawDelay(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawPeriod(int, int)
+void InputWindow::DrawPeriod(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDutyRatio(int, int)
+void InputWindow::DrawDutyRatio(int, int)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDuration(int, int)
+void InputWindow::DrawDuration(int, int)
 {
 
 }

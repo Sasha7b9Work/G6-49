@@ -89,7 +89,7 @@ static const float minMax[NumParameters][2] =
     {0.000f,  65535.0f},    // Amplitude
     {0.0f,    4095.0f},     // Offset
     {2e-08f,  10.0f},       // Duration
-    {0.001f,  1.0f},        // DutyCycle
+    {0.001f,  1.0f},        // DutyRatio
     {-180.0f, 180.0f},      // Phase
     {2e-08f,  10e08f}       // Delay
 };

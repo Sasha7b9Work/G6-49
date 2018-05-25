@@ -48,7 +48,7 @@ enum Type_WaveParameter
     Amplitude,          ///< Амплитуда
     Offset,             ///< Смещение
     Duration,           ///< Длительность
-    DutyCycle,          ///< Скважность
+    DutyRatio,          ///< Скважность
     Phase,              ///< Сдвиг фазы
     Delay,              ///< Задержка
     DepthModulation,    ///< Глубина амплитудной модуляции
@@ -56,7 +56,7 @@ enum Type_WaveParameter
     DurationRise,       ///< Длительность нарастания
     DurationFall,       ///< Длительность спада
     DurationStady,      ///< Длительность установившего значения
-    Filling,            ///< Заполнение
+    DutyFactor,         ///< Коэффициент заполнения
     NumParameters
 };
 
