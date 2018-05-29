@@ -45,7 +45,6 @@ public:
     explicit Color(const uint8 val);
     Color(const Color &color);
 
-    static Color ChanAccum(Channel ch);     ///< ÷вет канала в режиме накоплени€
     static Color MenuItem(bool shade);      ///< ÷вет элемента меню.
     static Color MenuTitle(bool shade);     ///< ÷вет заголовка страницы. inShade == true, если страница затенена
     static Color BorderMenu(bool shade);    ///< ÷вет окантовки меню

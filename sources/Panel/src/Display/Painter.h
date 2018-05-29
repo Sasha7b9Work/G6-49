@@ -18,14 +18,8 @@ class Painter
 public:
     /// Вызывается в начале отрисовки каждого кадра. Заполняет буфер цветом color
     static void BeginScene(Color color);
-    /// \brief Заставляет дисплей вывполнить ранее засланные в него команды, не дожидаясь завершающей отрисовку команды EndScene(). 
-    /// Нужно вызывать, если команды отрисовки кадра превышают размер буфера команд дисплея. Например, когда отрисовывается много сигналов на экране в 
-    /// режиме накопления.
-    static void RunDisplay();
     /// Вызывается в конце отрисовки каждого кадра. Переносит содержимое буфера на экран
     static void EndScene();
-    /// Сброс таймера мигания. Нужно для того, чтобы мигающие значки при перемещении не исчезали с экрана
-    static void ResetFlash();
     /// Установить цвет рисования
     static void SetColor(Color color);
     /// Возвращает текущий цвет рисования
@@ -34,8 +28,6 @@ public:
     static void SetColorValue(Color color, col_val value);
     /// Загружает в дисплей все цвета
     static void LoadPalette();
-    /// Загружает в дисплей код данного цвета
-    static void SetPalette(Color color);
     /// Нарисовать точку текущим цветом
     static void SetPoint(int x, int y);
     /// Нарисовать горизонтальную линию от x0 до x1 точками через каждые delta пикселей
@@ -66,16 +58,7 @@ public:
 
     static bool SaveScreenToFlashDrive();
 
-    /************** Функции работы с текстом ************************/
-    
-    
-
-    
-
-
 private:
-
-    static void CalculateCurrentColor();
 
     static Color currentColor;
 

@@ -73,7 +73,6 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             int y2 = aveY - (int)(sinf(i * speed) * height / 2.0f);
 
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
-            Painter::RunDisplay();
         }
     }
     else if(type == Cosine)
@@ -87,7 +86,6 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             int y2 = aveY - (int)(cosf(i * speed) * height / 2.0f);
 
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
-            Painter::RunDisplay();
         }
     }
     else if(type == Meander)
