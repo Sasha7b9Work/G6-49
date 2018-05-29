@@ -1,6 +1,7 @@
 #include "CPU.h"
 #include "Display/Painter.h"
 #include "Display/Colors.h"
+#include "Display/Text.h"
 #include "Hardware/Timer.h"
 #include "Utils/StringUtils.h"
 #include <stdio.h>
@@ -29,7 +30,7 @@ static int y0 = 25;
 struct StructButton
 {
     const char *title;
-    PanelControl control;
+    Control control;
     int x;
     int y;
 };
@@ -145,12 +146,12 @@ void CPU::Keyboard::DrawButton(int x, int y, const char *title)
     if (selX == x && selY == y)
     {
         Painter::FillRegion(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
-        Painter::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title, Color::BACK);
+        Text::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title, Color::BACK);
     }
     else
     {
         Painter::DrawRectangle(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
-        Painter::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title);
+        Text::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title);
     }
 }
 
@@ -208,7 +209,7 @@ void CPU::Keyboard::Update()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::FillCommand(PanelControl control, TypePress typePress)
+void CPU::Keyboard::FillCommand(Control control, TypePress typePress)
 {
     commands[pointer].key = control;
     commands[pointer++].typePress = typePress;

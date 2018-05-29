@@ -40,6 +40,9 @@
     <Filter Include="HAL">
       <UniqueIdentifier>{08b0c125-9162-4ad7-ad4e-a3f13afa9481}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrequencyMeter">
+      <UniqueIdentifier>{a330bd33-1b51-4d7a-b964-94c7556875e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -87,13 +90,7 @@
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterTextSTM429.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp">
-      <Filter>Display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Display\PainterText.cpp">
       <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp">
@@ -164,6 +161,24 @@
     </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma2d.c">
       <Filter>HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Text.cpp">
+      <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\Statistics.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp">
+      <Filter>FrequencyMeter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Wave.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Display\Console.cpp">
+      <Filter>Display</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +421,24 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h">
       <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Text.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\Statistics.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h">
+      <Filter>FrequencyMeter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Hint.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Wave.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Display\Console.h">
+      <Filter>Display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

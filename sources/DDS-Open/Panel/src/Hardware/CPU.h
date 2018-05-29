@@ -63,7 +63,7 @@ public:
 
         static void DrawButton(int x, int y, const char *title);
 
-        static void FillCommand(PanelControl control, TypePress typePress);
+        static void FillCommand(Control control, TypePress typePress);
 
     public:
         static void Draw();

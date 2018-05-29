@@ -631,6 +631,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Generator.h</FilePath>
             </File>
+            <File>
+              <FileName>Wave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Wave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Wave.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -725,6 +735,16 @@
               <FileName>Text.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Display\Text.h</FilePath>
+            </File>
+            <File>
+              <FileName>Console.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Display\Console.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Console.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Display\Console.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -891,6 +911,16 @@
               <FileType>8</FileType>
               <FilePath>..\..\Panel\src\Menu\MenuItemsLogic.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Hint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Menu\Hint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Hint.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Menu\Hint.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1031,6 +1061,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Utils\CommonFunctions.h</FilePath>
             </File>
+            <File>
+              <FileName>Statistics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Utils\Statistics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Statistics.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Utils\Statistics.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1055,6 +1095,21 @@
               <FileName>system_stm32f7xx.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\libs\system_stm32f7xx.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FrequencyMeter</GroupName>
+          <Files>
+            <File>
+              <FileName>FrequencyMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FrequencyMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\FrequencyMeter\FrequencyMeter.h</FilePath>
             </File>
           </Files>
         </Group>
