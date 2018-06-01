@@ -11,7 +11,7 @@ extern const PageBase pInput;
 
 #define WAVE_FORM               (set.sig_form[CURRENT_CHANNEL])
 #define WAVE_FORM_CH(ch)        (set.sig_form[ch])
-#define WAVE_FORM_IS_FPGA       (WAVE_FORM != Sine && WAVE_FORM != Impulse)
+#define WAVE_FORM_IS_FREE       (WAVE_FORM != Sine && WAVE_FORM != Impulse)
 
 #define COLOR(x)                (set.disp_Colors[x])
 #define CURRENT_PAGE            (set.menu_currentPage)
@@ -65,14 +65,14 @@ public:
         {
         }cal;
     };
-    col_val         disp_Colors[32];                ///< Цвета
-    WaveForm        sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
-    Type_WaveParameter   sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
-    int8            menu_currentPage;               ///< Отображаемая страница меню
-    Page*           menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
-    int8            menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
-    int8            menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
-    BillingTime     freq_billingTime;               ///< Время счёта
+    col_val            disp_Colors[32];                ///< Цвета
+    WaveForm           sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
+    Type_WaveParameter sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
+    int8               menu_currentPage;               ///< Отображаемая страница меню
+    Page*              menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
+    int8               menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
+    int8               menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
+    BillingTime        freq_billingTime;               ///< Время счёта
 
 #define FLAG_1      set.flag1
     uint8           flag1;

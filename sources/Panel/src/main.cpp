@@ -34,6 +34,10 @@ int main(void)
 
     while (1)
     {
+        if(WAVE_FORM_CH(A).type == Sine && CURRENT_CHANNEL == A)
+        {
+        }
+
         CPU::Update();
         Menu::Update();
         Display::Update();

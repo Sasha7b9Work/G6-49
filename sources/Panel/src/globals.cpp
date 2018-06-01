@@ -14,7 +14,7 @@ InputWindowStruct sig_structParameter[NumChannels][NumForms][NumParameters] =
 /* DutyRatio */ {},
 /* Phase     */ {},
 /* Delay     */ {},
-///* DepthMod  */ {"00000", "", 0, 0, NUM_DIGITS - 1, One,  DepthModulation, Sign_None, 1, 0},
+/* DepthMod  */ {"00000", "", 0, 0, NUM_DIGITS - 1, One,  DepthModulation, Sign_None, 1, 0},
 /* Polarity  */ {},
 /* DurRise   */ {},
 /* DurFall   */ {},

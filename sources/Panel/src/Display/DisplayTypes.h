@@ -2,22 +2,21 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef STM32F429xx
 #define SCREEN_WIDTH    320
 #define SCREEN_HEIGHT   240
+
+#ifdef STM32F429xx
 #define BUFFER_WIDTH    SCREEN_WIDTH    /* Ширина буфера для рисования */
 #define BUFFER_HEIGHT   SCREEN_HEIGHT   /* Высота буфера для рисования */
 #endif
 
 #ifdef STM32F746xx
-#define SCREEN_WIDTH    320
-#define SCREEN_HEIGHT   240
 #define BUFFER_WIDTH    1024            /* Ширина буфера для рисования */
 #define BUFFER_HEIGHT   600             /* Высота буфера для рисования */   
 #endif
 
 #define MP_TITLE_HEIGHT 18
-#define MI_WIDTH      69
+#define MI_WIDTH        69
 #define MI_HEIGHT       55
 #define MI_TITLE_HEIGHT 12
 #define SIGNAL_HEIGHT   (FREQ_COUNTER_ENABLED ? ((SCREEN_HEIGHT - MP_TITLE_HEIGHT) / 2 - 10) :  ((SCREEN_HEIGHT - MP_TITLE_HEIGHT) / 2))
