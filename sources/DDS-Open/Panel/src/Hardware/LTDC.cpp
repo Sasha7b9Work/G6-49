@@ -138,9 +138,7 @@ void LTDC_::Init(uint front, uint back)
     /* Peripheral interrupt init*/
     HAL_NVIC_SetPriority(LTDC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(LTDC_IRQn);
-  /* USER CODE BEGIN LTDC_MspInit 1 */
 
-  /* USER CODE END LTDC_MspInit 1 */
     
     __HAL_LTDC_ENABLE(&handleLTDC);
 #define LCD_DISP_PIN                    GPIO_PIN_12
