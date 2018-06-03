@@ -19,8 +19,7 @@ static TIM_HandleTypeDef handleTIM4;
 #define TIME_UPDATE 2
 static uint8 TS_flag = 0;
 TS_StateTypeDef TS_state = { 0 };
-uint8 TouchPoint = 0;
-TS_StateTypeDef TS_BKState;
+
 #define WIDTH_BUTTON  150
 #define HEIGHT_BUTTON 80
 #define DELTA_BUTTON  10
@@ -240,30 +239,6 @@ void CPU::Keyboard::TOUCH::GetState(TS_StateTypeDef *TS_State)
 void CPU::Keyboard::SetCallback(void(*func)())
 {
     callbackKeyboard = func;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::TIM4_::Start(uint timeStopMS)
-{
-    Stop();
-
-    if (timeStopMS == MAX_UINT)
-    {
-        return;
-    }
-
-    uint dT = timeStopMS - TIME_MS;
-
-    handleTIM4.Init.Period = (dT * 2) - 1;  // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
-
-    HAL_TIM_Base_Init(&handleTIM4);
-    HAL_TIM_Base_Start_IT(&handleTIM4);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::TIM4_::Stop()
-{
-    HAL_TIM_Base_Stop_IT(&handleTIM4);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
