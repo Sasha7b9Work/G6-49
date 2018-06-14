@@ -106,6 +106,12 @@ void Menu::ProcessControl(StructControl strContr)
             Generator::EnableChannel(B, CHANNEL_ENABLED(B));
         }
     }
+    else if(Menu::CurrentPage() == PageSignals::pointer)
+    {
+        if((key >= B_0 && key <= B_9) || key == B_Dot)
+        {
+        }
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

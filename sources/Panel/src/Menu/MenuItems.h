@@ -1,6 +1,7 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Display/Display.h"
+#include "Hardware/Controls.h"
 #include "MenuItemsDefs.h"
 #include "Menu/MenuPagesNames.h"
 
@@ -143,6 +144,8 @@ public:
     pFuncVV  funcOnDraw;
     /// В странице малых кнопок вызывается при повороте ручки установка
     pFuncVI  funcRegSetSB;
+    /// Обработака нажатия кнопки. Возвращает true, если обработка произошла и дальше кнопку обрабатывать не требуется
+    pFuncBV  fuuncOnKey;
     /// Dозвращает число подстраниц в странице по адресу page
     int NumSubPages() const;
     /// Возвращает количество элементов в странице по адресу page
@@ -166,6 +169,8 @@ public:
     int8 PosCurrentItem() const;
 
     void ChangeSubPage(int delta);
+
+    bool ProcessingControl(Control key);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
