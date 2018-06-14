@@ -8,29 +8,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void SendToInterface(uint8 *buffer, int size);
-/// Сдвигает буфер на один бит влево
-//static void ShiftToLeft(uint8 *buffer, int length);
-
-
-//static void MasterSynchro();
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-static void MasterSynchro(void)
-{
-    uint8 txByte = SPI_MASTER_SYNBYTE;
-    uint8 rxByte = 0x00;
-
-    do
-    {
-        HAL_SPI_TransmitReceive(&hSPI4, &txByte, &rxByte, 1, HAL_MAX_DELAY);
-    } while(rxByte != SPI_SLAVE_SYNBYTE);
-}
-*/
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::EnableChannel(Channel ch, bool enable)
 {
     uint8 buffer[3] = {ENABLE_CHANNEL, (uint8)ch, (uint8)(enable ? 1 : 0)};
@@ -79,7 +56,7 @@ void Generator::SetParameter(Channel ch, Type_WaveParameter param, float value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendToInterface(uint8 *, int)
+void Generator::SendToInterface(uint8 *, int)
 {
     /*
     while (CPU::SPI4_::IsBusy())
@@ -118,8 +95,43 @@ static void SendToInterface(uint8 *, int)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void ShiftToLeft(uint8 *buffer, int length)
+void Generator::TestSend(uint8 *data, int size)
+{
+    while (CPU::SPI4_::IsBusy())
+    {
+    };
+
+    if (size > LENGTH_SPI_BUFFER)
+    {
+        LOG_WRITE("слишком маленький буфер");
+    }
+    else
+    {
+        static uint8 buffer[LENGTH_SPI_BUFFER];         // Это массив для передаваемых данных
+        static uint8 recvBuffer[LENGTH_SPI_BUFFER];     // Это массив для принимаемых данных
+
+        memset(buffer, 0, LENGTH_SPI_BUFFER);
+        memcpy(buffer, data, (uint)size);
+
+        volatile CommandWrite command = (CommandWrite)buffer[0];
+        volatile Channel ch = (Channel)buffer[1];
+
+        CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
+
+        do
+        {
+            memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
+            CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
+            ShiftToLeft(recvBuffer, LENGTH_SPI_BUFFER);
+        } while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
+
+        command = command;
+        ch = ch;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::ShiftToLeft(uint8 *buffer, int length)
 {
     for (int i = 0; i < length; i++)
     {
@@ -133,4 +145,15 @@ static void ShiftToLeft(uint8 *buffer, int length)
         }
     }
 }
-*/
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::MasterSynchro(void)
+{
+    uint8 txByte = SPI_MASTER_SYNBYTE;
+    uint8 rxByte = 0x00;
+    
+    do
+    {
+        CPU::SPI4_::TransmitReceive(&txByte, &rxByte, 1, HAL_MAX_DELAY);
+    } while(rxByte != SPI_SLAVE_SYNBYTE);
+}

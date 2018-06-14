@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "Interface.h"
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
@@ -112,6 +113,8 @@ void Interface::ProcessCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandEnable(void)
 {
+    LOG_WRITE("Tест");
+
     Channel ch = (Channel)buffer[1];
     bool enable = buffer[2] == 1;
     
