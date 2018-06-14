@@ -28,7 +28,7 @@ void Console::AddString(char *string)
 
 
     // Если пустой строки нет
-    if (numEmptyString == MAX_STRINGS)
+        if (numEmptyString == MAX_STRINGS)
     {
         // То сдвигаем все строки на одну
         for (int i = 1; i < MAX_STRINGS; i++)

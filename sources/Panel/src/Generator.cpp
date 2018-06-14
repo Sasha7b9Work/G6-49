@@ -31,6 +31,7 @@ void Generator::Reset(void)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Channel ch, WaveForm form)
 {
+    return;
     uint8 buffer[3] = {SET_FORM_WAVE, (uint8)ch, form.ToValue()};
     SendToInterface(buffer, 3);
 }
@@ -58,8 +59,6 @@ void Generator::SetParameter(Channel ch, Type_WaveParameter param, float value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SendToInterface(uint8 *data, int size)
 {
-    return;
-
     while (CPU::SPI4_::IsBusy())
     {
     };
@@ -95,8 +94,11 @@ void Generator::SendToInterface(uint8 *data, int size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TestSend(uint8 *data, int size)
+void Generator::TestSend()
 {
+    uint8 data[3] = {ENABLE_CHANNEL, 0, 1};
+    int size = 3;
+
     while (CPU::SPI4_::IsBusy())
     {
     };
@@ -122,6 +124,7 @@ void Generator::TestSend(uint8 *data, int size)
         {
             memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
             CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
+            LOG_WRITE("Принято %d %d %d %d", recvBuffer[0], recvBuffer[1], recvBuffer[2], recvBuffer[3]);
             ShiftToLeft(recvBuffer, LENGTH_SPI_BUFFER);
         } while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
 
