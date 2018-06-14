@@ -1,9 +1,7 @@
-#ifdef STM32F429xx
-#include <stm32f4xx.h>
-#endif
-
-#ifdef STM32F746xx
+#ifdef OPEN
 #include <stm32f7xx.h>
+#else
+#include <stm32f4xx.h>
 #endif
 
 #include "CPU.h"
@@ -13,7 +11,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Для связи с основным процессором
-#ifdef STM32F429xx
+#ifndef OPEN
 static SPI_HandleTypeDef handleSPI4 =
 {
     SPI4,
@@ -46,13 +44,11 @@ float CPU::fps = 0.0f;
 void CPU::Init()
 {
     SystemClockConfig();
-    
-#ifdef STM32F429xx
-    STM429::Init();
-#endif
 
-#ifdef STM32F746xx
+#ifdef OPEN
     STM746::Init();
+#else
+    STM429::Init();
 #endif
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -83,7 +79,7 @@ void CPU::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::Init()
 {
-#ifdef STM32F429xx
+#ifndef OPEN
     GPIO_InitTypeDef isGPIO =
     {   //  CLK         MI           MO
         GPIO_PIN_2 | GPIO_PIN_5 | GPIO_PIN_6,
@@ -108,7 +104,7 @@ void CPU::SPI4_::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
-#ifdef STM32F429xx
+#ifndef OPEN
     HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
 #endif
 }
@@ -116,7 +112,7 @@ void CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
 {
-#ifdef STM32F429xx
+#ifndef OPEN
     HAL_SPI_Transmit(&handleSPI4, buffer, size, timeOut);
 #endif
 }

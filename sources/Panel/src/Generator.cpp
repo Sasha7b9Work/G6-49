@@ -56,9 +56,10 @@ void Generator::SetParameter(Channel ch, Type_WaveParameter param, float value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SendToInterface(uint8 *, int)
+void Generator::SendToInterface(uint8 *data, int size)
 {
-    /*
+    return;
+
     while (CPU::SPI4_::IsBusy())
     {
     };
@@ -91,7 +92,6 @@ void Generator::SendToInterface(uint8 *, int)
         command = command;
         ch = ch;
     }
-    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
