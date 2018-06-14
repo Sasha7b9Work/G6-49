@@ -11,17 +11,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>115 388</TableColWidths>
+      <TableColWidths>115 179</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>868 285</TableColWidths>
+      <TableColWidths>868 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>1028 154 154 100</TableColWidths>
+      <TableColWidths>1028</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -36,7 +36,7 @@
       <WinId>1936</WinId>
       <ViewName>Watch 1</ViewName>
       <UserString></UserString>
-      <TableColWidths>336 70 70</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>1937</WinId>
@@ -60,7 +60,7 @@
       <WinId>466</WinId>
       <ViewName>Source Browser - *** Not Enabled ***</ViewName>
       <UserString>500</UserString>
-      <TableColWidths>166</TableColWidths>
+      <TableColWidths>300</TableColWidths>
     </View>
   </TreeListPane>
 
@@ -100,8 +100,8 @@
     <MDIClientArea>
       <RegID>0</RegID>
       <MDITabState>
-        <Len>981</Len>
-        <Data>01000000040000000100000001000000010000000100000000000000020000000000000001000000010000000000000028000000280000000100000009000000020000000100000048443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C6C6962735C434D5349535C737461727475705F73746D33326634323978782E730000000015737461727475705F73746D33326634323978782E7300000000FFDC7800FFFFFFFF30443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C6D61696E2E63707000000000086D61696E2E63707000000000BECEA100FFFFFFFF35443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C47656E657261746F722E637070000000000D47656E657261746F722E63707000000000F0A0A100FFFFFFFF38443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C446973706C61795C546578742E6370700000000008546578742E63707000000000BCA8E100FFFFFFFF42443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C4D656E755C4D656E754974656D7347726170686963732E63707000000000154D656E754974656D7347726170686963732E637070000000009CC1B600FFFFFFFF3C443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C4D656E755C4D656E7544726177696E672E637070000000000F4D656E7544726177696E672E63707000000000F7B88600FFFFFFFF3B443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C446973706C61795C446973706C61792E637070000000000B446973706C61792E63707000000000D9ADC200FFFFFFFF3B443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C446973706C61795C436F6E736F6C652E637070000000000B436F6E736F6C652E63707000000000A5C2D700FFFFFFFF39443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C446973706C61795C436F6E736F6C652E680000000009436F6E736F6C652E6800000000B3A6BE00FFFFFFFF0100000010000000C5D4F200FFDC7800BECEA100F0A0A100BCA8E1009CC1B600F7B88600D9ADC200A5C2D700B3A6BE00EAD6A300F6FA7D00B5E99D005FC3CF00C1838300CACAD5000100000000000000020000000000000044000000C2050000EB030000</Data>
+        <Len>256</Len>
+        <Data>01000000040000000100000001000000010000000100000000000000020000000000000001000000010000000000000028000000280000000100000001000000000000000100000035443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C47656E657261746F722E637070000000000D47656E657261746F722E63707000000000FFDC7800FFFFFFFF0100000010000000C5D4F200FFDC7800BECEA100F0A0A100BCA8E1009CC1B600F7B88600D9ADC200A5C2D700B3A6BE00EAD6A300F6FA7D00B5E99D005FC3CF00C1838300CACAD50001000000000000000200000000000000440000005C050000EB030000</Data>
       </MDITabState>
     </MDIClientArea>
     <ViewEx>
@@ -3515,7 +3515,7 @@
       <Size>100</Size>
       <ActiveTab>2</ActiveTab>
       <Doc>
-        <Name>.\src\libs\CMSIS\startup_stm32f429xx.s</Name>
+        <Name>&lt;2&gt;.\src\libs\CMSIS\startup_stm32f429xx.s</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>181</TopLine>
         <CurrentLine>198</CurrentLine>
@@ -3524,7 +3524,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\main.cpp</Name>
+        <Name>&lt;2&gt;.\src\main.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>20</CurrentLine>
@@ -3533,7 +3533,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Generator.cpp</Name>
+        <Name>&lt;2&gt;.\src\Generator.cpp</Name>
         <ColumnNumber>27</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>25</CurrentLine>
@@ -3542,7 +3542,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Display\Text.cpp</Name>
+        <Name>&lt;2&gt;.\src\Display\Text.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>617</TopLine>
         <CurrentLine>631</CurrentLine>
@@ -3551,7 +3551,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Menu\MenuItemsGraphics.cpp</Name>
+        <Name>&lt;2&gt;.\src\Menu\MenuItemsGraphics.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>19</TopLine>
         <CurrentLine>33</CurrentLine>
@@ -3560,7 +3560,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Menu\MenuDrawing.cpp</Name>
+        <Name>&lt;2&gt;.\src\Menu\MenuDrawing.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>12</TopLine>
         <CurrentLine>28</CurrentLine>
@@ -3569,7 +3569,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Display\Display.cpp</Name>
+        <Name>&lt;2&gt;.\src\Display\Display.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>15</TopLine>
         <CurrentLine>55</CurrentLine>
@@ -3578,7 +3578,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Display\Console.cpp</Name>
+        <Name>&lt;2&gt;.\src\Display\Console.cpp</Name>
         <ColumnNumber>8</ColumnNumber>
         <TopLine>17</TopLine>
         <CurrentLine>31</CurrentLine>
@@ -3587,7 +3587,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Display\Console.h</Name>
+        <Name>&lt;2&gt;.\src\Display\Console.h</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>1</CurrentLine>

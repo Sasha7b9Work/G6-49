@@ -113,11 +113,20 @@ void FPGA::SetWaveForm(Type_WaveForm form)
 {
     typedef void(*pFuncFpgaVV)();
     
-    static const pFuncFpgaVV func[] =
+    static const pFuncFpgaVV func[NumForms] =
     {
-        &FPGA::GenerateSine,
-        &FPGA::GenerateSaw,
-        &FPGA::SetModeImpulse
+        CreateSine,
+        CreateCosine,
+        CreateMeander,
+        CreateRampPlus,
+        CreateRampMinus,
+        CreateTriangle,
+        CreateTrapeze,
+        CreateImpulse,
+        CreateExponentePlus,
+        CreateExponenteMinus,
+        CreateNoise,
+        CreateFree
     };
     
     if (form < NumForms)
@@ -191,7 +200,7 @@ void FPGA::WriteControlRegister()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::GenerateSine(void)
+void FPGA::CreateSine(void)
 {
     memset(dataA, 0, FPGA_NUM_POINTS * 2);
     memset(dataB, 0, FPGA_NUM_POINTS * 2);
@@ -199,7 +208,7 @@ void FPGA::GenerateSine(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeImpulse(void)
+void FPGA::CreateImpulse(void)
 {
     modeWork = ModeImpulse;
 
@@ -207,7 +216,7 @@ void FPGA::SetModeImpulse(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::GenerateSaw(void)
+void FPGA::CreateRampPlus()
 {
     modeWork = ModeDDS;
 
@@ -222,6 +231,70 @@ void FPGA::GenerateSaw(void)
     SendData();
 
     WriteControlRegister();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateRampMinus()
+{
+    modeWork = ModeDDS;
+
+    float step = (float)(MAX_VALUE - MIN_VALUE) / FPGA_NUM_POINTS;
+
+    for (int i = 0; i < FPGA_NUM_POINTS; i++)
+    {
+        dataA[i] = (uint16)(step * i);
+        dataB[i] = (uint16)(MAX_VALUE - dataA[i]);
+    }
+
+    SendData();
+
+    WriteControlRegister();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateFree()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateNoise()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateCosine()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateMeander()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateTrapeze()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateTriangle()
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateExponentePlus()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateExponenteMinus()
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -31,11 +31,32 @@ private:
         ModeImpulse2    ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
     };
 
-    static void GenerateSine();
+    static void CreateSine();
 
-    static void GenerateSaw();
+    static void CreateCosine();
+
+    static void CreateMeander();
+
+    static void CreateRampPlus();
+
+    static void CreateRampMinus();
+
+    static void CreateTriangle();
+
+    static void CreateTrapeze();
+
+    //static void GenerateSaw();
     /// Установить импульсный режим работы
-    static void SetModeImpulse();
+    static void CreateImpulse();
+
+    static void CreateExponentePlus();
+
+    static void CreateExponenteMinus();
+
+    static void CreateNoise();
+
+    static void CreateFree();
+
     /// Заслать рассчитанные точки в плис
     static void SendData();
     /// Записать значение в регистр

@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Interface\Interface.cpp</Filename>
+          <Filename>D:\Projects\stm32\DDS\sources\Panel\src\Interface\Interface.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/Interface/Interface.cpp\58</Expression>
         </Bp>
