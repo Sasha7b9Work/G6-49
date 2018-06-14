@@ -18,7 +18,7 @@ DMA2D_HandleTypeDef LTDC_::hDMA2D;
 void LTDC_::Init(uint front, uint back)
 {
     
-#ifdef STM32F429xx
+#ifndef OPEN
     GPIO_InitTypeDef isGPIO =
     {
         //  R3         R6

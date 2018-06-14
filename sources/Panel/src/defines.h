@@ -6,12 +6,10 @@
 
 #define DEBUG
 
-#ifdef STM32F429xx
-#include <stm32f4xx.h>
-#endif
-
-#ifdef STM32F746xx
+#ifdef OPEN
 #include <stm32f7xx.h>
+#else
+#include <stm32f4xx.h>
 #endif
 
 #ifndef __cplusplus

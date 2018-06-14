@@ -1,12 +1,10 @@
 #pragma once
 #include "Hardware/Controls.h"
 
-#ifdef STM32F429xx
-#include "Hardware/stm429.h"
-#endif
-
-#ifdef STM32F746xx
+#ifdef OPEN
 #include "Hardware/stm746.h"
+#else
+#include "Hardware/stm429.h"
 #endif
 
 
@@ -16,12 +14,10 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef STM32F429xx
-class CPU : public STM429
-#endif
-    
-#ifdef STM32F746xx
+#ifdef OPEN
 class CPU : public STM746
+#else
+class CPU : public STM429
 #endif
 {
 public:

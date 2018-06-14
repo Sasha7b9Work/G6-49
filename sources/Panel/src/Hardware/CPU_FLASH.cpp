@@ -2,17 +2,17 @@
 #include "CPU.h"
 #include "Settings/Settings.h"
 
-#ifdef STM32F429xx
-#include <stm32f4xx.h>
-#endif
-
-#ifdef STM32F746xx
+#ifdef OPEN
 #include <stm32f7xx.h>
+#else
+#include <stm32f4xx.h>
 #endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef STM32F429xx
+#ifdef OPEN
+#define CLEAR_FLASH_FLAGS
+#else
 #define CLEAR_FLASH_FLAGS                                                                   \
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP     |  /* end of operation flag              */   \
                             FLASH_FLAG_OPERR  |  /* operation error flag               */   \
@@ -20,10 +20,6 @@
                             FLASH_FLAG_PGAERR |  /* programming alignment error flag   */   \
                             FLASH_FLAG_PGPERR |  /* programming parallelism error flag */   \
                             FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
-#endif
-
-#ifdef STM32F746xx
-#define CLEAR_FLASH_FLAGS
 #endif
 
 #define ADDR_SECTOR_SETTINGS    ((uint)0x080E0000)
@@ -137,7 +133,7 @@ static void WriteBufferBytes(uint address, void *buffer, int numBytes)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static uint GetSector(uint startAddress)
 {
-#ifdef STM32F429xx
+#ifndef OPEN
     typedef struct
     {
         uint number;
