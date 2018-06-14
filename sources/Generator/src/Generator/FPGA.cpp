@@ -131,8 +131,7 @@ void FPGA::SetWaveForm(Type_WaveForm form)
     
     if (form < NumForms)
     {
-        pFuncFpgaVV f = func[form];
-        f();
+        func[form]();
     }
 }
 
