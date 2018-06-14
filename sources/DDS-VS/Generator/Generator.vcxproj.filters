@@ -165,6 +165,9 @@
     <ClInclude Include="..\..\Generator\src\Hardware\VCP.h">
       <Filter>Hardware</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Generator\src\Generator\Multiplexor.h">
+      <Filter>Generator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -244,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Hardware\VCP.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\Generator\Multiplexor.cpp">
+      <Filter>Generator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

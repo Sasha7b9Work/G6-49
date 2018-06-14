@@ -55,6 +55,11 @@ void Interface::ProcessingCommand()
     
     if (res == HAL_OK)
     {
+        if(buffer[0] != 0 || buffer[1] != 0 || buffer[2] != 0)
+        {
+            buffer[0] = buffer[0];
+        }
+        
         CPU::SetBusy();
 
         static uint8 prevBuffer[LENGTH_SPI_BUFFER] = {0};

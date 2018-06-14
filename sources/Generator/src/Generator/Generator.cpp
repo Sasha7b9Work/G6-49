@@ -1,6 +1,7 @@
 #include "AD5697.h"
 #include "FPGA.h"
 #include "Generator.h"
+#include "Multiplexor.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 
@@ -17,6 +18,7 @@ void Generator::Init()
     AD9952::Init();
     AD5697::Init();
     FPGA::Init();
+    Multiplexor::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,6 +44,8 @@ void Generator::SetFormWave(Channel ch, Type_WaveForm form)
     {
         FPGA::SetWaveForm(form);
     }
+
+    Multiplexor::SetMode(ch, form);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
