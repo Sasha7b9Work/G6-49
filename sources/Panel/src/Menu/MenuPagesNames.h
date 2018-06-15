@@ -12,5 +12,6 @@ enum NamePage
     Page_FrequencyCounter,
     Page_USB,
     PageSB_Input,
+    Page_Registers,
     NumPages
 };

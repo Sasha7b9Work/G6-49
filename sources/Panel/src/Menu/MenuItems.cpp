@@ -94,7 +94,7 @@ void Page::ChangeSubPage(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::ProcessingControl(Control key)
+bool Page::ProcessingControl(Control)
 {
     if(fuuncOnKey)
     {

@@ -234,6 +234,9 @@
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp">
       <Filter>FrequencyMeter</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageRegisters.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -490,6 +493,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h">
       <Filter>FrequencyMeter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageRegisters.h">
+      <Filter>Menu\Pages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,7 @@
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/PageDebug.h"
 #include "Menu/Pages/PageUSB.h"
+#include "Menu/Pages/PageRegisters.h"
 #include "Settings/Settings.h"
 
 
@@ -25,6 +26,7 @@ const Page *menu[NUM_PAGES] =
 {
     PageSignals::pointer,
     PageSignals2::pointer,
+    PageRegisters::pointer,
     PageFrequencyCounter::pointer,
     PageUSB::pointer,
     PageService::pointer,
