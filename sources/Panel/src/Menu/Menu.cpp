@@ -65,6 +65,9 @@ void Menu::ProcessControl(StructControl strContr)
     if(Hint::ProcessControl(strContr))
     {
     }
+    //else if(Menu::CurrentPage()->ProcessingControl(key))
+    //{
+    //}
     else if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))
     {
         openedItem = openedItem->Press(strContr);
@@ -104,12 +107,6 @@ void Menu::ProcessControl(StructControl strContr)
         {
             SWITCH_CHANNEL_B;
             Generator::EnableChannel(B, CHANNEL_ENABLED(B));
-        }
-    }
-    else if(Menu::CurrentPage() == PageSignals::pointer)
-    {
-        if((key >= B_0 && key <= B_9) || key == B_Dot)
-        {
         }
     }
 }

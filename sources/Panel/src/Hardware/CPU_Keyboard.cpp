@@ -43,12 +43,12 @@ static void DetectRegulator();
 /// При обнаружении нажатия кнопки сюда записывается время нажатия
 static uint timePress[5][6];
 
-                                           // SL0  SL1  SL2       SL3     SL4   SL5
-static const Control controls[5][6] = {{B_0, B_5, B_Dot,   B_ESC,   B_F1, B_None},          // RL0
-                                            {B_1, B_6, B_Minus, B_LEFT,  B_F2, B_None},    // RL1
-                                            {B_2, B_7, B_None,  B_RIGHT, B_F3, B_None},         // RL2
-                                            {B_3, B_8, B_ON1,   B_None,  B_F4, B_None},    // RL3
-                                            {B_4, B_9, B_ON2,   B_None,  B_F5, B_None}};        // RL4
+                                     // SL0  SL1  SL2       SL3     SL4   SL5
+static const Control controls[5][6] = {{B_0, B_5, B_Dot,   B_ESC,   B_F1, B_None},    // RL0
+                                       {B_1, B_6, B_Minus, B_LEFT,  B_F2, B_None},    // RL1
+                                       {B_2, B_7, B_None,  B_RIGHT, B_F3, B_None},    // RL2
+                                       {B_3, B_8, B_ON1,   B_None,  B_F4, B_None},    // RL3
+                                       {B_4, B_9, B_ON2,   B_None,  B_F5, B_None}};   // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
