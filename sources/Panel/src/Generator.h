@@ -28,8 +28,6 @@ public:
 private:
     
     static void SendToInterface(uint8 *buffer, int size);
-    /// Сдвигает буфер на один бит влево
-    static void ShiftToLeft(uint8 *buffer, int length);
 
     static void MasterSynchro();
 };

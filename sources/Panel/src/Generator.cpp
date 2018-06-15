@@ -83,7 +83,6 @@ void Generator::SendToInterface(uint8 *data, int size)
         {
             memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
             CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
-            ShiftToLeft(recvBuffer, LENGTH_SPI_BUFFER);
         }
         while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
         
@@ -123,28 +122,10 @@ void Generator::TestSend()
         {
             memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
             CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
-            LOG_WRITE("Принято %d %d %d %d", recvBuffer[0], recvBuffer[1], recvBuffer[2], recvBuffer[3]);
-            ShiftToLeft(recvBuffer, LENGTH_SPI_BUFFER);
         } while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
 
         command = command;
         ch = ch;
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::ShiftToLeft(uint8 *buffer, int length)
-{
-    for (int i = 0; i < length; i++)
-    {
-        buffer[i] = (uint8)(buffer[i] << 1);
-        if (i < length - 1)
-        {
-            if (GetBit(buffer[i + 1], 7))
-            {
-                SetBit(buffer[i], 0);
-            }
-        }
     }
 }
 
