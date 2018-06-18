@@ -64,7 +64,7 @@ static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 static bool init = false;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CPU::Keyboard::Init(void)
+void CPU::Keyboard::Init()
 {
     for (int i = 0; i < 5; i++)
     {
@@ -84,7 +84,7 @@ void CPU::Keyboard::Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::Update(void)
+void CPU::Keyboard::Update()
 {
     if(!init)
     {
@@ -141,7 +141,7 @@ void CPU::Keyboard::Update(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DetectRegulator(void)
+static void DetectRegulator()
 {
     // Детектируем кнопку
     static bool prevPressButton = false;
@@ -221,13 +221,13 @@ static void FillCommand(Control control, TypePress typePress)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::Keyboard::BufferIsEmpty(void)
+bool CPU::Keyboard::BufferIsEmpty()
 {
     return pointer == 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-StructControl CPU::Keyboard::GetNextControl(void)
+StructControl CPU::Keyboard::GetNextControl()
 {
     StructControl retValue;
 

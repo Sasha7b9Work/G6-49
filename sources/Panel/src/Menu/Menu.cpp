@@ -35,14 +35,14 @@ const Page *menu[NUM_PAGES] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Menu::Init(void)
+void Menu::Init()
 {
     PageSignals::Init();
     PageSignals::OnPress_Form();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::Update(void)
+void Menu::Update()
 {
     while (!CPU::Keyboard::BufferIsEmpty())
     {
@@ -114,13 +114,13 @@ void Menu::ProcessControl(StructControl strContr)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Menu::RegIsControlPages(void)
+bool Menu::RegIsControlPages()
 {
     return openedItem == 0 && ADDITION_PAGE_IS_NONE;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Menu::NameCurrentParameter(void)
+const char *Menu::NameCurrentParameter()
 {
     return PageSignals::cpParameters->NameCurrentSubItem();
 }
@@ -138,7 +138,7 @@ Item *Menu::CurrentItem()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Page *Menu::CurrentPage(void)
+Page *Menu::CurrentPage()
 {
     volatile int8 num = CURRENT_PAGE;
 

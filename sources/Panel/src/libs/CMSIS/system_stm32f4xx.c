@@ -157,7 +157,7 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
   * @param  None
   * @retval None
   */
-void SystemInit(void)
+void SystemInit()
 {
   /* FPU settings ------------------------------------------------------------*/
   #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
@@ -230,7 +230,7 @@ void SystemInit(void)
   * @param  None
   * @retval None
   */
-void SystemCoreClockUpdate(void)
+void SystemCoreClockUpdate()
 {
   uint32_t tmp = 0, pllvco = 0, pllp = 2, pllsource = 0, pllm = 2;
   
@@ -287,7 +287,7 @@ void SystemCoreClockUpdate(void)
   * @param  None
   * @retval None
   */
-void SystemInit_ExtMemCtl(void)
+void SystemInit_ExtMemCtl()
 {
   register uint32_t tmpreg = 0, timeout = 0xFFFF;
   register __IO uint32_t index;

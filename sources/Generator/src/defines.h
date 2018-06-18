@@ -4,9 +4,10 @@
 #include <stm32f4xx.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef unsigned int   uint;
-typedef unsigned short uint16;
-typedef unsigned char  uint8;
+typedef unsigned int       uint;
+typedef unsigned short     uint16;
+typedef unsigned char      uint8;
+typedef const char * const pString;
 
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);

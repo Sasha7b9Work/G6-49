@@ -7,6 +7,14 @@ class Wave
 public:
     /// Нарисовать информацию о параметрах сигнала на экране
     static void DrawSignal(Channel ch);
+    /// Позиция x области отрисовки сигнала
+    static int X();
+    /// Позиция y области отрисовки сигнала
+    static int Y(Channel ch);
+    /// Ширина области отрисовки сигнала
+    static int Width();
+    /// Высота области отрисовки сигнала
+    static int Height();
 private:
 
     static void DrawSignalUGO(Channel chan, int y0);

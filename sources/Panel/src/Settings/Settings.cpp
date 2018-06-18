@@ -108,7 +108,7 @@ float MaxValue(Type_WaveParameter param)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Settings::Save(void)
+void Settings::Save()
 {
     CPU::FLASH_::SaveSettings();
 }

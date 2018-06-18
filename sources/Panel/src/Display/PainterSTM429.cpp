@@ -45,7 +45,7 @@ void Painter::LoadPalette()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::EndScene(void)
+void Painter::EndScene()
 {
     LTDC_::ToggleBuffers();
 }

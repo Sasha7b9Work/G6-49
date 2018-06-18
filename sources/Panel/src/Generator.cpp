@@ -22,7 +22,7 @@ void Generator::SetDebugMode(bool enable)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::Reset(void)
+void Generator::Reset()
 {
     uint8 command = RUN_RESET;
     SendToInterface(&command, 1);
@@ -117,7 +117,7 @@ void Generator::TestSend()
         volatile Channel ch = (Channel)buffer[1];
 
         CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
-
+    
         do
         {
             memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
@@ -130,7 +130,7 @@ void Generator::TestSend()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::MasterSynchro(void)
+void Generator::MasterSynchro()
 {
     uint8 txByte = SPI_MASTER_SYNBYTE;
     uint8 rxByte = 0x00;

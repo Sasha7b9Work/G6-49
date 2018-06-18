@@ -33,7 +33,7 @@ static uint8 buffer[LENGTH_SPI_BUFFER];     ///< Буфер для принимаемых команд
 
 
                                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Interface::Init(void)
+void Interface::Init()
 {
     GPIO_InitTypeDef isGPIOA =
     {   //  SCK         MI           MO
@@ -94,18 +94,19 @@ void Interface::ProcessCommand()
 
     static const pFuncInterfaceVV commands[NUM_COMMAND_WRITE] =
     {
-        &Interface::CommandEmpty,       /// WRITE_SERVICE_COMMAND
-        &Interface::CommandEnable,      /// ENABLE_CHANNEL
-        &Interface::CommandFormWave,    /// SET_FORM_WAVE
-        &Interface::CommandParameter,   /// SET_FREQUENCY
-        &Interface::CommandParameter,   /// SET_AMPLITUDE
-        &Interface::CommandParameter,   /// SET_OFFSET
-        &Interface::CommandParameter,   /// SET_DURATION
-        &Interface::CommandParameter,   /// SET_DUTYRATIO
-        &Interface::CommandParameter,   /// SET_PHASE
-        &Interface::CommandReset,       /// RUN_RESET
-        &Interface::CommandModeDebug,   /// MODE_DEBUG
-        &Interface::CommandParameter    /// SET_DELAY
+        CommandEmpty,        /// WRITE_SERVICE_COMMAND
+        CommandEnable,       /// ENABLE_CHANNEL
+        CommandFormWave,     /// SET_FORM_WAVE
+        CommandParameter,    /// SET_FREQUENCY
+        CommandParameter,    /// SET_AMPLITUDE
+        CommandParameter,    /// SET_OFFSET
+        CommandParameter,    /// SET_DURATION
+        CommandParameter,    /// SET_DUTYRATIO
+        CommandParameter,    /// SET_PHASE
+        CommandReset,        /// RUN_RESET
+        CommandModeDebug,    /// MODE_DEBUG
+        CommandParameter,    /// SET_DELAY
+        CommandWriteRegister /// WRITE_REGISTER
     };
   
     if (buffer[0] < NUM_COMMAND_WRITE)
@@ -116,7 +117,7 @@ void Interface::ProcessCommand()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandEnable(void)
+void Interface::CommandEnable()
 {
     LOG_WRITE("Tест");
 
@@ -135,7 +136,7 @@ void Interface::CommandEnable(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandFormWave(void)
+void Interface::CommandFormWave()
 {
     Channel ch = (Channel)buffer[1];
     Type_WaveForm form = (Type_WaveForm)buffer[2];
@@ -143,7 +144,12 @@ void Interface::CommandFormWave(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandParameter(void)
+void Interface::CommandWriteRegister()
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandParameter()
 {
     Channel ch = (Channel)buffer[1];
     CommandWrite command = (CommandWrite)buffer[0];
@@ -168,18 +174,19 @@ void Interface::CommandReset()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandModeDebug(void)
+void Interface::CommandModeDebug()
 {
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandEmpty(void)
+void Interface::CommandEmpty()
 {
 }
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 /*
-static void SlaveSynchro(void)
+static void SlaveSynchro()
 {
     uint8 txByte = SPI_SLAVE_SYNBYTE;
     uint8 rxByte = 0x00;

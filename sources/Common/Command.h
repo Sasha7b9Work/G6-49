@@ -13,13 +13,16 @@
 /*
     Структура комадны
 
-1.    WRITE_SERVICE_COMMAND
+1.  WRITE_SERVICE_COMMAND
 
-           0             1         2
-2.    SET_FORM_CHANNEL NUM_CHAN FormChannel
+    0                1        2
+2.  SET_FORM_CHANNEL NUM_CHAN FormChannel
 
-            0                  1           2          3...6
-3.    SET_PARAMETER_CHANNEL NUM_CHAN ParameterChannel value
+    0                     1        2                3...6
+3.  SET_PARAMETER_CHANNEL NUM_CHAN ParameterChannel value
+
+    0              1             2...5
+12. WRITE_REGISTER NAME_REGISTER VALUE
 */
 
 /// Возможные команды для передачи в основной процессор
@@ -37,6 +40,7 @@ enum CommandWrite
     RUN_RESET               = 9,    ///< Сброс состояния
     MODE_DEBUG              = 10,   ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
     SET_DELAY               = 11,   ///< Задержка
+    WRITE_REGISTER          = 12,   ///< Занести значение в регистр
     NUM_COMMAND_WRITE,
     COMMAND_NONE
 };
@@ -81,8 +85,24 @@ struct WaveForm
 {
     Type_WaveForm type;
     WaveForm(uint8 num = 0);
-    const char * Name() const;
+    pString Name() const;
     uint8 ToValue() const;
+};
+
+enum Name_Register
+{
+    Multiplexor1,
+    Multiplexor2,
+    OffsetA,
+    OffsetB,
+    NumRegisters
+};
+
+struct Register
+{
+    Register(uint8 n = 0);
+    Name_Register name;
+    pString Name() const;
 };
 
 

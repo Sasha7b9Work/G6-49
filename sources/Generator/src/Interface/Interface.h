@@ -25,4 +25,6 @@ private:
     static void CommandReset();
 
     static void CommandModeDebug();
+
+    static void CommandWriteRegister();
 };

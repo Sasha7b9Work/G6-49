@@ -58,15 +58,16 @@ void Generator::SetParameter(Channel ch, CommandWrite command, float value)
         0,
         0,
         0,
-        &Generator::SetFrequency,
-        &Generator::SetAmplitude,
-        &Generator::SetOffset,
-        &Generator::SetDuration,
-        &Generator::SetDutyRatio,
-        &Generator::SetPhase,
+        SetFrequency,
+        SetAmplitude,
+        SetOffset,
+        SetDuration,
+        SetDutyRatio,
+        SetPhase,
         0,
         0,
-        &Generator::SetDelay
+        SetDelay,
+        0
     };
 
     pFuncChF f = func[command];

@@ -91,7 +91,7 @@ void InputWindowStruct::Fill(Channel ch_, WaveForm form_, Type_WaveParameter par
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::KeyLeft(void)
+void InputWindowStruct::KeyLeft()
 {
 	if (CURRENT_POS > 0)
 	{
@@ -147,7 +147,7 @@ void InputWindowStruct::RegLeft()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::RegRight(void)
+void InputWindowStruct::RegRight()
 {
 
     // Сохраняем значение
@@ -303,7 +303,7 @@ static bool Only1InThis(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ShiftToRight(void)
+static void ShiftToRight()
 {
     for (int i = NUM_DIGITS - 2; i >= 0; i--)
     {
@@ -314,7 +314,7 @@ static void ShiftToRight(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ShiftToLeft(void)
+static void ShiftToLeft()
 {
     for (int i = 1; i < NUM_DIGITS; i++)
     {
@@ -361,7 +361,7 @@ const char *NameUnit(char buffer[10], Order order, Type_WaveParameter parameter)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnlyOneRigthDigit(void)
+static bool OnlyOneRigthDigit()
 {
     char digitLast = DIGIT(NUM_DIGITS - 1);
 
@@ -407,7 +407,7 @@ static float ValueAfterComma(InputWindowStruct *iws_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void IncreaseOrder(void)
+static void IncreaseOrder()
 {
     if (iws->order < NumOrders - 1)
     {
@@ -447,7 +447,7 @@ float InputWindowStruct::Value()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::SaveValue(void)
+void InputWindowStruct::SaveValue()
 {
     if (IN_NUM_LOCK_MODE)
     {
@@ -462,7 +462,7 @@ void InputWindowStruct::SaveValue(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void RestoreValue(void)
+static void RestoreValue()
 {
     for (int i = 0; i < NUM_DIGITS; i++)
     {
@@ -545,7 +545,7 @@ void InputWindowStruct::FillAllowParameters(Channel ch_, WaveForm form_, Allowab
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendIWStoGenerator(void)
+static void SendIWStoGenerator()
 {
     PARAMETER(ch, form, m_param) = *iws;
 
@@ -566,7 +566,7 @@ static void SendIWStoGenerator(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillIWSfromInputBuffer(void)
+static void FillIWSfromInputBuffer()
 {
     if (m_param == Duration || m_param == Delay)
     {

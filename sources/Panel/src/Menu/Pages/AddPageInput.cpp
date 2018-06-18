@@ -42,7 +42,7 @@ DEF_SMALL_BUTTON(sbRight,                                                       
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Cancel(void)
+static void OnPress_Cancel()
 {
     ADDITION_PAGE = 0;
 }

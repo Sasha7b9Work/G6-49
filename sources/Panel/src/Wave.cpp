@@ -13,15 +13,40 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Wave::DrawSignal(Channel ch)
 {
-    int y0 = (ch == A) ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
-    Painter::FillRegion(0 + 1, y0 + 1, SIGNAL_WIDTH - 2, SIGNAL_HEIGHT - 2, Color::GREEN_5);
+    int x0 = X();
+    int y0 = Y(ch);
+    Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::GREEN_5);
     if (CHANNEL_ENABLED(ch))
     {
-        Painter::DrawRectangle(0, y0, SIGNAL_WIDTH, SIGNAL_HEIGHT, Color::FILL);
-        Text::DrawBigText(5, y0 + 5, 2, (ch == A) ? "A" : "B", Color::FILL);
+        Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
+        Text::DrawBigText(x0 + 5, y0 + 5, 2, (ch == A) ? "A" : "B", Color::FILL);
         DrawSignalUGO(ch, y0);
         DrawSignalParameters(ch, y0);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Wave::X()
+{
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Wave::Y(Channel ch)
+{
+    return (ch == A) ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Wave::Width()
+{
+    return SIGNAL_WIDTH;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Wave::Height()
+{
+    return SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -49,7 +49,7 @@ static void Reset();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void AD9952::Init(void)
+void AD9952::Init()
 {
     GPIO_InitTypeDef isGPIO = 
     {   //   SCK          MI           MO
@@ -179,7 +179,7 @@ static GeneratorPin ChipSelect(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void Reset(void)
+static void Reset()
 {
     CPU::WritePin(AD9952_RES_DDS, false);
     CPU::WritePin(AD9952_RES_DDS, true);

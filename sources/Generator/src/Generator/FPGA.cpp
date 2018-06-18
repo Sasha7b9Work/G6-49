@@ -29,7 +29,7 @@ uint16             FPGA::dataB[FPGA_NUM_POINTS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FPGA::Init(void)
+void FPGA::Init()
 {
     GPIO_InitTypeDef isGPIO = 
     {
@@ -199,7 +199,7 @@ void FPGA::WriteControlRegister()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateSine(void)
+void FPGA::CreateSine()
 {
     memset(dataA, 0, FPGA_NUM_POINTS * 2);
     memset(dataB, 0, FPGA_NUM_POINTS * 2);
@@ -207,7 +207,7 @@ void FPGA::CreateSine(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateImpulse(void)
+void FPGA::CreateImpulse()
 {
     modeWork = ModeImpulse;
 
@@ -297,7 +297,7 @@ void FPGA::CreateExponenteMinus()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SendData(void)
+void FPGA::SendData()
 {
     WriteRegister(Reg_FPGA_Control, 1);
     uint8 *address = ADDR_BANK;

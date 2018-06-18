@@ -50,7 +50,7 @@ const char *Command_Name(CommandWrite command)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char * WaveForm::Name() const
+pString WaveForm::Name() const
 {
     return NAME_FORM(type, LANG);
 }
@@ -65,3 +65,24 @@ uint8 WaveForm::ToValue() const
 WaveForm::WaveForm(uint8 num) : type((Type_WaveForm)num)
 {
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString Register::Name() const
+{
+    static pString names[NumRegisters] =
+    {
+        "Мультиплексор 1",
+        "Мультиплексор 2",
+        "Смещение 1",
+        "Смещение 2"
+    };
+
+    return names[name];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Register::Register(uint8 n)
+{
+    name = (Name_Register)n;
+}
+

@@ -8,6 +8,7 @@
 #include "InputWindow.h"
 #include "Menu/Hint.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/PageRegisters.h"
 #include "Utils/Statistics.h"
 #include <stdlib.h>
 
@@ -47,6 +48,8 @@ void Display::Update()
     Wave::DrawSignal(B);
 
     Menu::Draw();
+
+    PageRegisters::Draw();
 
     InputWindow::Draw();
 

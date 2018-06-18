@@ -18,7 +18,7 @@ InputWindowStruct  InputWindow::iws;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindow::Init(void)
+void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
     form = WAVE_FORM_CH(chan);
@@ -29,7 +29,7 @@ void InputWindow::Init(void)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Draw(void)
+void InputWindow::Draw()
 {
     if(ADDITION_PAGE_IS_NONE)
     {
