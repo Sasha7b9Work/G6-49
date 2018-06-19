@@ -235,16 +235,20 @@ DEF_BUTTON(bSave,                                                               
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool OnKey(StructControl strCntrl)
 {
-    if(!showInputWindow && KeyIsDigit(strCntrl.key))
+    Control key = strCntrl.key;
+
+    if(!showInputWindow && KeyIsDigit(key))
     {
-        showInputWindow = true;
-        pos = 0;
+        sending[currentRegister] = false;
+        OnPress_Send();
+        buffer[0] = KeyToChar(key);
+        pos = 1;
     }
-    else if(showInputWindow && KeyIsDigit(strCntrl.key) && strCntrl.typePress == Down)
+    else if(showInputWindow && KeyIsDigit(key) && strCntrl.typePress == Down)
     {
         if(pos < SIZE_BUFFER)
         {
-            buffer[pos++] = KeyToChar(strCntrl.key);
+            buffer[pos++] = KeyToChar(key);
         }
     }
 
