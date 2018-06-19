@@ -4,6 +4,7 @@
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 #include "Command.h"
+#include "structs.h"
 #include <string.h>
 
 
@@ -146,6 +147,15 @@ void Interface::CommandFormWave()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandWriteRegister()
 {
+    Name_Register reg = (Name_Register)buffer[1];
+
+    BitSet32 set;
+    for (int i = 0; i < 4; i++)
+    {
+        set.byte[i] = buffer[i + 2];
+    }
+
+    uint value = set.word;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
