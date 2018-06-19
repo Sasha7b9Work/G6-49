@@ -170,6 +170,14 @@ void Interface::CommandWriteRegister()
     {
         AD5697::SetOffset(B, (float)value);
     }
+    else if (reg == FreqMeterHYS)
+    {
+        AD5697::SetFreqHysteresys((float)value);
+    }
+    else if (reg == FreqMeterLevel)
+    {
+        AD5697::SetFreqLevel((float)value);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
