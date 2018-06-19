@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>STM32F429xx;WIN32;USE_HAL_DRIVER</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4774;4820;5045</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4211;4774;4820;5045</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
@@ -263,7 +263,9 @@
     <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4211;4774;4820;5045</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp" />

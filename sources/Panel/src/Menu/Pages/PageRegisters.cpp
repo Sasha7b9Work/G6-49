@@ -9,15 +9,24 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern PageBase pRegisters;
-Page *PageRegisters::pointer = (Page *)&pRegisters;
-Name_Register PageRegisters::currentRegister = FreqMeterLevel;
-bool showInputWindow = false;
-
 #define X_INPUT      5
 #define Y_INPUT      170
 #define WIDTH_INPUT  240
 #define HEIGHT_INPUT 60
+
+extern PageBase pRegisters;
+Page *PageRegisters::pointer = (Page *)&pRegisters;
+Name_Register PageRegisters::currentRegister = FreqMeterLevel;
+bool showInputWindow = false;
+extern const ButtonBase bBackspace;
+extern const ButtonBase bCancel;
+extern const ButtonBase bSave;
+
+#define SIZE_BUFFER 10
+/// Здесь хранятся введённые символы
+static char buffer[SIZE_BUFFER];
+/// Это указатель на первый своодный символ
+static int pos = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +71,13 @@ void PageRegisters::DrawInputWindow()
     Painter::DrawRectangle(X_INPUT, Y_INPUT, WIDTH_INPUT, HEIGHT_INPUT, Color::FILL);
     Register reg(currentRegister);
     Text::DrawBigText(X_INPUT + 17, Y_INPUT + 2, 2, reg.Name());
+
+    int x = X_INPUT + 5;
+
+    for(int i = 0; i < pos; i++)
+    {
+        x = Text::DrawBigChar(x, Y_INPUT + 20, 5, buffer[i]) + 3;
+    }
 }
 
 
@@ -94,6 +110,11 @@ DEF_BUTTON(bNext,                                                               
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Send()
 {
+    showInputWindow = true;
+
+    pRegisters.items[0] = (Item *)&bBackspace;
+    pRegisters.items[1] = (Item *)&bCancel;
+    pRegisters.items[2] = (Item *)&bSave;
 }
 
 DEF_BUTTON(bSend,                                                                                                         //--- РЕГИСТРЫ - Заслать ---
@@ -106,6 +127,10 @@ DEF_BUTTON(bSend,                                                               
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Backspace()
 {
+    if(pos > 0)
+    {
+        pos--;
+    }
 }
 
 static void OnDraw_Backspace(int x, int y)
@@ -157,7 +182,7 @@ static void OnDraw_Save(int x, int y)
     Text::SetFont(TypeFont_8);
 }
 
-DEF_BUTTON(bSave,
+DEF_BUTTON(bSave,                                                                                          //--- РЕГИСТРЫ - Окно ввода --- Заслать ---
     "Заслать", "Send",
     "Записывает значение в выбранный регистр",
     "Writes a value to the selected register",
@@ -168,13 +193,12 @@ DEF_BUTTON(bSave,
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool OnKey(StructControl strCntrl)
 {
-    if(KeyIsDigit(strCntrl.key) && !showInputWindow)
+    if(showInputWindow && KeyIsDigit(strCntrl.key) && strCntrl.typePress == Down)
     {
-        showInputWindow = true;
-
-        pRegisters.items[0] = (Item *)&bBackspace;
-        pRegisters.items[1] = (Item *)&bCancel;
-        pRegisters.items[2] = (Item *)&bSave;
+        if(pos < SIZE_BUFFER)
+        {
+            buffer[pos++] = KeyToChar(strCntrl.key);
+        }
     }
 
     return false;

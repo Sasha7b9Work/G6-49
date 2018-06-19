@@ -108,8 +108,6 @@ void AD5697::Reset(Channel ch)
     CPU::WritePin(pinRS[ch], true);
     CPU::WritePin(pinRS[ch], false);
     CPU::WritePin(pinRS[ch], true);
-
-    //SetOffset(ch, 0.0f);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

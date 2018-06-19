@@ -6,3 +6,14 @@ bool KeyIsDigit(Control key)
 {
     return (key >= B_0 && key <= B_9);
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char KeyToChar(Control key)
+{
+    if(KeyIsDigit(key))
+    {
+        return (char)((key - B_0) | 0x30);
+    }
+
+    return '\0';
+}

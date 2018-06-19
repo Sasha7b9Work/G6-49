@@ -52,4 +52,6 @@ struct StructControl
 
 bool KeyIsDigit(Control key);
 
+char KeyToChar(Control key);
+
 const char *PanelControlName(Control control);
