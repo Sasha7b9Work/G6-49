@@ -15,9 +15,9 @@ Name_Register PageRegisters::currentRegister = FreqMeterLevel;
 bool showInputWindow = false;
 
 #define X_INPUT      5
-#define Y_INPUT      190
+#define Y_INPUT      170
 #define WIDTH_INPUT  240
-#define HEIGHT_INPUT 75
+#define HEIGHT_INPUT 60
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ void PageRegisters::DrawInputWindow()
 
     Painter::DrawRectangle(X_INPUT, Y_INPUT, WIDTH_INPUT, HEIGHT_INPUT, Color::FILL);
     Register reg(currentRegister);
-    Text::DrawBigText(X_INPUT + 3, Y_INPUT + 2, 2, reg.Name());
+    Text::DrawBigText(X_INPUT + 17, Y_INPUT + 2, 2, reg.Name());
 }
 
 
