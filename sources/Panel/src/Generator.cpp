@@ -4,6 +4,7 @@
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
 #include "Command.h"
+#include "structs.h"
 #include <string.h>
 
 
@@ -12,6 +13,15 @@ void Generator::EnableChannel(Channel ch, bool enable)
 {
     uint8 buffer[3] = {ENABLE_CHANNEL, (uint8)ch, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 3);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::LoadRegister(Name_Register reg, uint value)
+{
+    INIT_BIT_SET_32(set, value);
+
+    uint8 buffer[6] = {WRITE_REGISTER, (uint8)reg, set.byte0, set.byte1, set.byte2, set.byte3};
+    SendToInterface(buffer, 6);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

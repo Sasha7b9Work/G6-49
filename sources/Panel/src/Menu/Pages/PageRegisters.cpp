@@ -1,11 +1,13 @@
 #include "PageRegisters.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
+#include "Generator.h"
 #include "Display/Symbols.h"
 #include "Wave.h"
 #include "Menu/Menu.h"
 #include "Command.h"
 #include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,7 +18,7 @@
 
 extern PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
-Name_Register PageRegisters::currentRegister = FreqMeterLevel;
+Name_Register currentRegister = FreqMeterLevel;
 bool showInputWindow = false;
 extern const ButtonBase bBackspace;
 extern const ButtonBase bCancel;
@@ -24,7 +26,7 @@ extern const ButtonBase bSave;
 
 #define SIZE_BUFFER 10
 /// Здесь хранятся введённые символы
-static char buffer[SIZE_BUFFER];
+static char buffer[SIZE_BUFFER + 1];
 /// Это указатель на первый своодный символ
 static int pos = 0;
 
@@ -84,7 +86,7 @@ void PageRegisters::DrawInputWindow()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Prev()
 {
-    CircleDecrease<uint8>((uint8 *)&PageRegisters::currentRegister, 0, NumRegisters - 1);
+    CircleDecrease<uint8>((uint8 *)&currentRegister, 0, NumRegisters - 1);
 }
 
 DEF_BUTTON( bPrev,                                                                                                     //--- РЕГИСТРЫ - Предыдущий ---
@@ -97,7 +99,7 @@ DEF_BUTTON( bPrev,                                                              
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Next()
 {
-    CircleIncrease<uint8>((uint8 *)&PageRegisters::currentRegister, 0, NumRegisters - 1);
+    CircleIncrease<uint8>((uint8 *)&currentRegister, 0, NumRegisters - 1);
 }
 
 DEF_BUTTON(bNext,                                                                                                       //--- РЕГИСТРЫ - Следующий ---
@@ -170,9 +172,23 @@ DEF_BUTTON(bCancel,                                                             
     pRegisters, FuncActive, OnPress_Cancel, OnDraw_Cancel
 )
 
+void LoadRegister()
+{
+    buffer[pos] = '\0';
+
+    uint value = 0;
+
+    if(String2UInt(buffer, &value))
+    {
+        Generator::LoadRegister(currentRegister, value);
+    }
+}
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Save()
 {
+    LoadRegister();
+    OnPress_Cancel();
 }
 
 static void OnDraw_Save(int x, int y)

@@ -312,6 +312,33 @@ bool String2Int(char *str, int *value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+bool String2UInt(char *str, uint *value)
+{
+    uint length = strlen(str);
+    if (length == 0)
+    {
+        return false;
+    }
+
+    *value = 0;
+    int pow = 1;
+    uint i = length;
+    do
+    {
+        --i;
+        int val = str[i] & (~(0x30));
+        if (val < 0 || val > 9)
+        {
+            return false;
+        }
+        *value += val * pow;
+        pow *= 10;
+    } while (i > 0);
+
+    return true;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numDigits)
 {
     buffer[0] = 0;

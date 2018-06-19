@@ -9,8 +9,6 @@ public:
 
     static Page *pointer;
 
-    static Name_Register currentRegister;
-
 private:
     /// Написать регистры
     static void DrawRegisters(int x, int y);

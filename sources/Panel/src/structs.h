@@ -1,8 +1,11 @@
 #pragma once
 #include "defines.h"
 
+#ifndef WIN32
+#pragma anon_unions
+#endif
 
-typedef union
+union BitSet16
 {
     uint16 halfWord;
     uint8  byte[2];
@@ -11,9 +14,13 @@ typedef union
         uint8 byte0;
         uint8 byte1;
     };
-} BitSet16;
+};
 
-typedef union
+#define INIT_BIT_SET_32(name, value)    \
+    BitSet32 name;                      \
+    name.word = value;
+
+union BitSet32
 {
     uint    word;
     uint16  halfWord[2];
@@ -30,9 +37,9 @@ typedef union
         uint8 byte2;
         uint8 byte3;
     };
-} BitSet32;
+};
 
-typedef union
+union BitSet64
 {
     uint64 dword;
     uint   word[2];
@@ -66,4 +73,4 @@ typedef union
         uint8 byte6;
         uint8 byte7;
     };
-} BitSet64;
+};
