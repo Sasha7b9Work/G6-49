@@ -31,6 +31,9 @@ int main()
        
     Menu::Init();
 
+    Generator::LoadRegister(OffsetA, 2048);
+    Generator::LoadRegister(OffsetB, 2048);
+
     while (1)
     {
         if(WAVE_FORM_CH(A).type == Sine && CURRENT_CHANNEL == A)

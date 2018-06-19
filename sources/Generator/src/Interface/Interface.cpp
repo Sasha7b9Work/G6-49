@@ -2,6 +2,7 @@
 #include "Log.h"
 #include "Interface.h"
 #include "Generator/Generator.h"
+#include "Generator/Multiplexor.h"
 #include "Hardware/CPU.h"
 #include "Command.h"
 #include "structs.h"
@@ -156,6 +157,19 @@ void Interface::CommandWriteRegister()
     }
 
     uint value = set.word;
+
+    if (reg == Multiplexor1 || reg == Multiplexor2)
+    {
+        Multiplexor::WriteRegister(reg, value);
+    }
+    else if (reg == OffsetA)
+    {
+        AD5697::SetOffset(A, (float)value);
+    }
+    else if(reg == OffsetB)
+    {
+        AD5697::SetOffset(B, (float)value);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

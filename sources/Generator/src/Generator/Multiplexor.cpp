@@ -29,6 +29,27 @@ void Multiplexor::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Multiplexor::WriteRegister(Name_Register reg, uint value)
+{
+    if(reg == Multiplexor1)
+    {
+        if(value & 0x1)  {   SetPin(PIN_MXA_A0);   }
+        else             { ResetPin(PIN_MXA_A0); }
+
+        if(value & 0x2)  {   SetPin(PIN_MXA_A1);   }
+        else             { ResetPin(PIN_MXA_A1); }
+    }
+    else if(reg == Multiplexor2)
+    {
+        if (value & 0x1) {   SetPin(PIN_MXB_A0);   }
+        else             { ResetPin(PIN_MXB_A0); }
+
+        if (value & 0x2) {   SetPin(PIN_MXB_A1);   }
+        else             { ResetPin(PIN_MXB_A1); }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Multiplexor::SetMode(Channel ch, Type_WaveForm form)
 {
 #define PIN_MX(ch, num) pins[ch][num]
@@ -36,7 +57,7 @@ void Multiplexor::SetMode(Channel ch, Type_WaveForm form)
     static const uint16 pins[2][2] =
     {
         {PIN_MXA_A0, PIN_MXA_A1},
-        {PIN_MXB_A0, PIN_MXA_A1}
+        {PIN_MXB_A0, PIN_MXB_A1}
     };
 
     if(form == Sine || form == Cosine)

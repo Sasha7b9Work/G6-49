@@ -8,6 +8,7 @@
 #include "Command.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
+#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,6 +30,10 @@ extern const ButtonBase bSave;
 static char buffer[SIZE_BUFFER + 1];
 /// Это указатель на первый своодный символ
 static int pos = 0;
+/// true, означает, что значение в этот регистр уже засылалось
+static bool sending[NumRegisters] = {false, false, false, false, false, false};
+/// Здесь засланные значения для каждого регистра
+static uint values[NumRegisters];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,6 +64,14 @@ void PageRegisters::DrawRegisters(int x, int y)
             color = Color::BACK;
         }
         Text::DrawText(x, y + i * 10, reg.Name(), color);
+        if(sending[i])
+        {
+            if(i == currentRegister)
+            {
+                Painter::SetColor(Color::FILL);
+            }
+            Text::DrawFormatText(x + 130, y + i * 10, Int2String((int)values[i], false, 1));
+        }
     }
 }
 
@@ -117,6 +130,17 @@ static void OnPress_Send()
     pRegisters.items[0] = (Item *)&bBackspace;
     pRegisters.items[1] = (Item *)&bCancel;
     pRegisters.items[2] = (Item *)&bSave;
+
+    if(sending[currentRegister])
+    {
+        Int2String((int)values[currentRegister], false, 1, buffer);
+        pos = (int)strlen(buffer);
+    }
+    else
+    {
+        pos = 0;
+
+    }
 }
 
 DEF_BUTTON(bSend,                                                                                                         //--- РЕГИСТРЫ - Заслать ---
@@ -181,6 +205,8 @@ void LoadRegister()
     if(String2UInt(buffer, &value))
     {
         Generator::LoadRegister(currentRegister, value);
+        values[currentRegister] = value;
+        sending[currentRegister] = true;
     }
 }
 
@@ -209,7 +235,12 @@ DEF_BUTTON(bSave,                                                               
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool OnKey(StructControl strCntrl)
 {
-    if(showInputWindow && KeyIsDigit(strCntrl.key) && strCntrl.typePress == Down)
+    if(!showInputWindow && KeyIsDigit(strCntrl.key))
+    {
+        showInputWindow = true;
+        pos = 0;
+    }
+    else if(showInputWindow && KeyIsDigit(strCntrl.key) && strCntrl.typePress == Down)
     {
         if(pos < SIZE_BUFFER)
         {
