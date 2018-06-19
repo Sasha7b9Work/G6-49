@@ -102,6 +102,7 @@ enum Name_Register
 
 struct Register
 {
+    Register(Name_Register n = Multiplexor1);
     Register(uint8 n = 0);
     Name_Register name;
     pString Name() const;

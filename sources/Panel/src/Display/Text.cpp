@@ -29,10 +29,16 @@ void Text::SetUpperCase(bool upper)
 void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
     Painter::SetColor(color);
+
+    char symbols[4];
+    int pointer = 0;
+
     for (char i = 0; i < 2; i++)
     {
         DrawChar(x + 8 * i, y, eChar + i);
+        symbols[pointer++] = eChar + i;
         DrawChar(x + 8 * i, y + 8, eChar + i + 16);
+        symbols[pointer++] = eChar + i + 16;
     }
 }
 

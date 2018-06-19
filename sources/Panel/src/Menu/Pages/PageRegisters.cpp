@@ -1,6 +1,7 @@
 #include "PageRegisters.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
+#include "Display/Symbols.h"
 #include "Wave.h"
 #include "Menu/Menu.h"
 #include "Command.h"
@@ -8,10 +9,15 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pRegisters;
+extern PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
 Name_Register PageRegisters::currentRegister = FreqMeterLevel;
 bool showInputWindow = false;
+
+#define X_INPUT      5
+#define Y_INPUT      190
+#define WIDTH_INPUT  240
+#define HEIGHT_INPUT 75
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +32,7 @@ void PageRegisters::Draw()
 
     DrawRegisters(Wave::X() + 4, Wave::Y(A) + 3);
 
-    DrawInputWindow(Wave::X() + 4, Wave::Y(B));
+    DrawInputWindow();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,14 +52,16 @@ void PageRegisters::DrawRegisters(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void PageRegisters::DrawInputWindow(int x, int y)
+void PageRegisters::DrawInputWindow()
 {
     if(!showInputWindow)
     {
         return;
     }
 
-    Painter::FillRegion(x, y, 200, 50, Color::BLUE);
+    Painter::DrawRectangle(X_INPUT, Y_INPUT, WIDTH_INPUT, HEIGHT_INPUT, Color::FILL);
+    Register reg(currentRegister);
+    Text::DrawBigText(X_INPUT + 3, Y_INPUT + 2, 2, reg.Name());
 }
 
 
@@ -95,7 +103,67 @@ DEF_BUTTON(bSend,                                                               
     pRegisters, FuncActive, OnPress_Send, FuncDraw
 )
 
-static Item emptyItem = {Item_None};
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_Backspace()
+{
+}
+
+static void OnDraw_Backspace(int x, int y)
+{
+    Text::SetFont(TypeFont_UGO2);
+    Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_LEFT, Color::FILL);
+    Text::SetFont(TypeFont_8);
+}
+
+DEF_BUTTON(bBackspace,                                                                                   //--- РЕГИСТРЫ - Input window - Backspace ---
+    "Backspace", "Backspace",
+    "Удаляет последний введённый символ",
+    "Deletes the last character you typed",
+    pRegisters, FuncActive, OnPress_Backspace, OnDraw_Backspace
+)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_Cancel()
+{
+    showInputWindow = false;
+    pRegisters.items[0] = (Item *)&bPrev;
+    pRegisters.items[1] = (Item *)&bNext;
+    pRegisters.items[2] = (Item *)&bSend;
+}
+
+static void OnDraw_Cancel(int x, int y)
+{
+    Text::SetFont(TypeFont_UGO2);
+    Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_DELETE, Color::FILL);
+    Text::SetFont(TypeFont_8);
+}
+
+DEF_BUTTON(bCancel,                                                                                         //--- РЕГИСТРЫ - Input window - Отмена ---
+    "Отмена", "Cancel",
+    "Отменяет засылку значения в регистр и закрывает окно ввода",
+    "Cancels the sending of values into the register and closes the input window",
+    pRegisters, FuncActive, OnPress_Cancel, OnDraw_Cancel
+)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_Save()
+{
+}
+
+static void OnDraw_Save(int x, int y)
+{
+    Text::SetFont(TypeFont_UGO2);
+    Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_SAVE, Color::FILL);
+    Text::SetFont(TypeFont_8);
+}
+
+DEF_BUTTON(bSave,
+    "Заслать", "Send",
+    "Записывает значение в выбранный регистр",
+    "Writes a value to the selected register",
+    pRegisters, FuncActive, OnPress_Save, OnDraw_Save
+)
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool OnKey(StructControl strCntrl)
@@ -103,12 +171,18 @@ bool OnKey(StructControl strCntrl)
     if(KeyIsDigit(strCntrl.key) && !showInputWindow)
     {
         showInputWindow = true;
+
+        pRegisters.items[0] = (Item *)&bBackspace;
+        pRegisters.items[1] = (Item *)&bCancel;
+        pRegisters.items[2] = (Item *)&bSave;
     }
 
     return false;
 }
 
-DEF_PAGE_4(pRegisters,                                                                                                              //--- РЕГИСТРЫ ---
+static Item emptyItem = {Item_None};
+
+DEF_PAGE_4_VAR(pRegisters,                                                                                                          //--- РЕГИСТРЫ ---
     "РЕГИСТРЫ", "REGISTERS",
     "",
     "",

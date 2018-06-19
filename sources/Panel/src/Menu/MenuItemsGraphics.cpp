@@ -54,6 +54,7 @@ void Button::Draw(int x, int y)
     Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, isShade ? Color::GRAY_10 : Color::GREEN_10);
     Painter::SetColor(isShade ? Color::GRAY_25 : Color::FILL);
     Text::DrawTextInColumn(x + 5, y + 17, MI_WIDTH, Title());
+    funcForDraw(x, y);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
