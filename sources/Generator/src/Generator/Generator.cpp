@@ -100,7 +100,6 @@ void Generator::SetAmplitude(Channel ch, float amplitude)
     }
     else
     {
-        AD5697::SetAmplitude(ch, amplitude);
     }
 }
 

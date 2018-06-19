@@ -141,6 +141,7 @@ void TuneGenerator(Channel ch)
     Generator::SetFormWave(ch, WAVE_FORM_CH(ch));
     Generator::SetParameter(ch, Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Frequency))->Value());
     Generator::SetParameter(ch, Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Amplitude))->Value());
+    Generator::SetParameter(ch, Offset, (&INPUT_WINDOW_STRUCT(ch, form, Offset))->Value());
     if (form.type == Impulse)
     {
         Generator::SetParameter(ch, Duration, (&INPUT_WINDOW_STRUCT(ch, form, Duration))->Value());

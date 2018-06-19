@@ -28,6 +28,9 @@
     <Filter Include="common\_VS">
       <UniqueIdentifier>{4813cb9e-504a-4ec9-b68c-726ee8a80022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{fbc513a4-c409-4ed9-b1f6-b3652fdc04eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -168,6 +171,9 @@
     <ClInclude Include="..\..\Generator\src\Generator\Multiplexor.h">
       <Filter>Generator</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Generator\src\Utils\Math.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -250,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\Generator\Multiplexor.cpp">
       <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\Utils\Math.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1143,6 +1143,21 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>Utils</GroupName>
+          <Files>
+            <File>
+              <FileName>Math.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Math.h</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>

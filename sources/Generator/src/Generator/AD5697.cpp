@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "AD5697.h"
 #include "Command.h"
+#include "Utils/Math.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,42 +42,39 @@ void AD5697::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::SetAmplitude(Channel ch, float amplitude)
-{
-    WriteParameter(ch, Amplitude, amplitude);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Channel ch, float offset)
 {   
-    if(offset < 0.0f)
-    {
-        offset = 0.0f;
-    }
-    else if(offset > 4096.0f)
-    {
-        offset = 4096.0f;
-    }
-
-    uint8 address = BINARY_U8(00001100);
+    Limitation(&offset, 0.0f, 4095.0f);
 
     uint16 value = (uint16)((uint16)offset << 4);
 
     uint8 data[3] = {(uint8)(BINARY_U8(00010000) | ((ch == A) ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
 
-    WriteParameter(address, data, AD5697_LDACA);
+    WriteParameter(BINARY_U8(00001100), data, AD5697_Offset);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::WriteParameter(Channel ch, Type_WaveParameter param, float value_)
+void AD5697::SetFreqHysteresys(float hyst)
 {
-    static const uint8 address[NumChannels] = {BINARY_U8(00001100), BINARY_U8(00001101)};
+    Limitation(&hyst, 0.0f, 4095.0f);
 
-    uint16 value = (uint16)((uint16)value_ << 4);
-    uint8 buffer[3] = {CreateCommandByte(param), (uint8)(value >> 8), (uint8)value};
-    TransmitI2C(address[ch], buffer);
-    CPU::WritePin(PinLDAC(ch), false);
-    CPU::WritePin(PinLDAC(ch), true);
+    uint16 value = (uint16)((uint16)Offset << 4);
+
+    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x01)), (uint8)(value >> 8), (uint8)value};
+
+    WriteParameter(BINARY_U8(00001101), data, AD5697_Freq);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD5697::SetFreqLevel(float level)
+{
+    Limitation(&level, 0.0f, 4095.0f);
+
+    uint16 value = (uint16)((uint16)level << 4);
+
+    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x08)), (uint8)(value >> 8), (uint8)value};
+
+    WriteParameter(BINARY_U8(00001101), data, AD5697_Freq);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +115,7 @@ void AD5697::Reset(Channel ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 GeneratorPin AD5697::PinLDAC(Channel ch)
 {
-    static const GeneratorPin pinLDAC[NumChannels] = {AD5697_LDACA, AD5697_LDACB};
+    static const GeneratorPin pinLDAC[NumChannels] = {AD5697_Offset, AD5697_Freq};
 
     return pinLDAC[ch];
 }

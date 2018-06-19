@@ -170,6 +170,7 @@
     <ClInclude Include="..\..\Generator\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Generator\src\Interface\Interface.h" />
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h" />
+    <ClInclude Include="..\..\Generator\src\Utils\Math.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h" />
     <ClInclude Include="..\..\libs\common\_VS\core_cm4.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Generator\src\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">
