@@ -4,11 +4,13 @@
 #include "Wave.h"
 #include "Menu/Menu.h"
 #include "Command.h"
+#include "Utils/Math.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
+Name_Register PageRegisters::currentRegister = FreqMeterLevel;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +23,7 @@ void PageRegisters::Draw()
 
     Painter::FillRegion(Wave::X(), Wave::Y(A) + 1, Wave::Width() - 1, Wave::Height() * 2, Color::BACK);
 
-    DrawRegisters(Wave::X() + 2, Wave::Y(A) + 3);
+    DrawRegisters(Wave::X() + 4, Wave::Y(A) + 3);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -30,7 +32,13 @@ void PageRegisters::DrawRegisters(int x, int y)
     for(uint8 i = 0; i < NumRegisters; i++)
     {
         Register reg(i);
-        Text::DrawText(x, y + i * 10, reg.Name(), Color::FILL);
+        Color color = Color::FILL;
+        if(i == currentRegister)
+        {
+            Painter::FillRegion(x - 1, y + i * 10, 127, 8, Color::FILL);
+            color = Color::BACK;
+        }
+        Text::DrawText(x, y + i * 10, reg.Name(), color);
     }
 }
 
@@ -38,6 +46,7 @@ void PageRegisters::DrawRegisters(int x, int y)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Prev()
 {
+    CircleDecrease<uint8>((uint8 *)&PageRegisters::currentRegister, 0, NumRegisters - 1);
 }
 
 DEF_BUTTON( bPrev,                                                                                                     //--- –≈√»—“–€ - œÂ‰˚‰Û˘ËÈ ---
@@ -50,6 +59,7 @@ DEF_BUTTON( bPrev,                                                              
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Next()
 {
+    CircleIncrease<uint8>((uint8 *)&PageRegisters::currentRegister, 0, NumRegisters - 1);
 }
 
 DEF_BUTTON(bNext,                                                                                                       //--- –≈√»—“–€ - —ÎÂ‰Û˛˘ËÈ ---

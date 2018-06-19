@@ -95,6 +95,8 @@ enum Name_Register
     Multiplexor2,
     OffsetA,
     OffsetB,
+    FreqMeterLevel,
+    FreqMeterHYS,
     NumRegisters
 };
 
