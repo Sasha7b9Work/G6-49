@@ -24,6 +24,8 @@ private:
     static void TransmitI2C(uint8 address, uint8 data[3]);
 
     static void WriteParameter(Channel ch, Type_WaveParameter param, float value_);
+    /// «аписать три байта данных по данному адресу
+    static void WriteParameter(uint8 address, uint8 data[3], GeneratorPin pin);
 
     static GeneratorPin PinLDAC(Channel ch);
 

@@ -57,7 +57,14 @@ void AD5697::SetOffset(Channel ch, float offset)
     {
         offset = 4096.0f;
     }
-    WriteParameter(ch, Offset, offset);
+
+    uint8 address = BINARY_U8(00001100);
+
+    uint16 value = (uint16)((uint16)offset << 4);
+
+    uint8 data[3] = {(uint8)(BINARY_U8(00010000) | ((ch == A) ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
+
+    WriteParameter(address, data, AD5697_LDACA);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,16 +80,25 @@ void AD5697::WriteParameter(Channel ch, Type_WaveParameter param, float value_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 AD5697::CreateCommandByte(Type_WaveParameter param)
+{
+    return (uint8)(BINARY_U8(00010000) | ((param == Amplitude) ? 0x01 : 0x08));
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD5697::WriteParameter(uint8 address, uint8 data[3], GeneratorPin pin)
+{
+    TransmitI2C(address, data);
+    CPU::WritePin(pin, false);
+    CPU::WritePin(pin, true);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 {
     // Смещение на один бит влево - страшная штука. Если не знать, можно потерять много времени
     HAL_I2C_Master_Transmit(&hI2C, (uint16)(address << 1), data, 3, 100);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 AD5697::CreateCommandByte(Type_WaveParameter param)
-{
-    return (uint8)(BINARY_U8(00010000) | ((param == Amplitude) ? 0x01 : 0x08));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
