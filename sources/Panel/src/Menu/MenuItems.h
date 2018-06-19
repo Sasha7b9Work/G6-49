@@ -119,11 +119,14 @@ public:
     /// 0 - B_Menu, 1...5 - B_F1...B_F5
     const Item * const *items;
     /// Будет вызываться при нажатии на свёрнутую страницу
-    pFuncVV  funcOnPress;
+    pFuncVV funcOnPress;
     /// Будет вызываться после отрисовки кнопок
-    pFuncVV  funcOnDraw;
+    pFuncVV funcOnDraw;
     /// В странице малых кнопок вызывается при повороте ручки установка
-    pFuncVI  funcRegSetSB;
+    pFuncVI funcRegSetSB;
+
+    pFuncBV funcOnKey;
+
     bool CurrentItemIsOpened() const;
 };
 

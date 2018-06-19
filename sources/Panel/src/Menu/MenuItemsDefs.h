@@ -3,6 +3,7 @@
 #define FuncDraw            EmptyFuncVII
 #define FuncDrawPage        EmptyFuncVV
 #define FuncActive          EmptyFuncBV
+#define FuncOnKey           EmptyFuncBVfalse
 #define FuncPress           EmptyFuncVV
 #define EmptyPressPage      EmptyFuncVV
 #define FuncChanged         EmptyFuncVV
@@ -59,10 +60,10 @@ static const Item * const  items##name[] = {(Item *)&item1, (Item *)&item2};    
 const PageBase name = { Item_Page, 2, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                   \
     items##name, funcPress, FuncDrawPage, FuncRegSetPage};
 
-#define DEF_PAGE_3(name, titleRU, titleEN, hintRU, hintEN, item1, item2, item3, namePage, keeper, funcActive, funcPress)                            \
+#define DEF_PAGE_3(name, titleRU, titleEN, hintRU, hintEN, item1, item2, item3, namePage, keeper, funcActive, funcPress, funcOnKey)        \
 static const Item * const  items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3};                                            \
 const PageBase name = { Item_Page, 3, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                   \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
+    items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
 
 #define DEF_PAGE_4(name, titleRU, titleEN, hintRU, hintEN,                                                                                          \
     item1, item2, item3, item4, namePage, keeper, funcActive, funcPress)                                                                            \

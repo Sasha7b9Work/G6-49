@@ -60,5 +60,5 @@ DEF_PAGE_3( pDebug,
     cConsole,      ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
     bSaveSettings, ///< ÎÒËÀÄÊÀ - ÑÎÕÐÀÍÈÒÜ ÍÀÑÒÐÎÉÊÈ
     cStatistics,   ///< ÎÒËÀÄÊÀ - ÑÒÀÒÈÑÒÈÊÀ
-    Page_Debug, 0, FuncActive, FuncPress
+    Page_Debug, 0, FuncActive, FuncPress, FuncOnKey
 )

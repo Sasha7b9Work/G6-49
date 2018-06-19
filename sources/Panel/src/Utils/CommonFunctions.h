@@ -12,6 +12,8 @@ void EmptyFuncVI(int);
 
 bool EmptyFuncBV();
 
+bool EmptyFuncBVfalse();
+
 void EmptyFuncVB(bool);
 
 void EmptyFuncpVII(void *, int, int);

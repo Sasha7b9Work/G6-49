@@ -83,12 +83,17 @@ DEF_BUTTON(bSend,                                                               
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3(pRegisters,
+static bool OnKey_Registers()
+{
+    return false;
+}
+
+DEF_PAGE_3(pRegisters,                                                                                                              //--- –≈√»—“–€ ---
     "–≈√»—“–€", "REGISTERS",
     "",
     "",
     bPrev,
     bNext,
     bSend,
-    Page_Registers, 0, FuncActive, FuncPress
+    Page_Registers, 0, FuncActive, FuncPress, OnKey_Registers
 )

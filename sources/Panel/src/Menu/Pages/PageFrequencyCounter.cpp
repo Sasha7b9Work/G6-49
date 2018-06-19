@@ -58,5 +58,5 @@ DEF_PAGE_3(pFrequencyCounter,
     cEnableFrequencyCounter,
     cInterval,
     cBillingTime,
-    Page_FrequencyCounter, 0, FuncActive, FuncPress
+    Page_FrequencyCounter, 0, FuncActive, FuncPress, FuncOnKey
 )
