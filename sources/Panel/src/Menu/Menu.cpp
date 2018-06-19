@@ -67,7 +67,7 @@ void Menu::ProcessControl(StructControl strContr)
     if(Hint::ProcessControl(strContr))
     {
     }
-    else if(Menu::CurrentPage()->ProcessingControl(key))
+    else if(Menu::CurrentPage()->ProcessingControl(strContr))
     {
     }
     else if (openedItem && (key == REG_LEFT || key == REG_RIGHT || key == REG_BTN || key == B_ESC || key == B_LEFT || key == B_RIGHT))

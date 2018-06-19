@@ -14,4 +14,6 @@ public:
 private:
     /// Написать регистры
     static void DrawRegisters(int x, int y);
+
+    static void DrawInputWindow(int x, int y);
 };

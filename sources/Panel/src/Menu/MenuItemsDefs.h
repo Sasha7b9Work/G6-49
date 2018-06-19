@@ -3,7 +3,7 @@
 #define FuncDraw            EmptyFuncVII
 #define FuncDrawPage        EmptyFuncVV
 #define FuncActive          EmptyFuncBV
-#define FuncOnKey           EmptyFuncBVfalse
+#define FuncOnKey           EmptyFuncBKey
 #define FuncPress           EmptyFuncVV
 #define EmptyPressPage      EmptyFuncVV
 #define FuncChanged         EmptyFuncVV
@@ -66,7 +66,7 @@ const PageBase name = { Item_Page, 3, false, namePage, keeper, funcActive, {titl
     items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
 
 #define DEF_PAGE_4(name, titleRU, titleEN, hintRU, hintEN,                                                                                          \
-    item1, item2, item3, item4, namePage, keeper, funcActive, funcPress)                                                                            \
+    item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcOnKey)                                                                            \
 static const Item * const  items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4};                         \
 const PageBase name = { Item_Page, 4, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                                   \
     items##name, funcPress, FuncDrawPage, FuncRegSetPage};

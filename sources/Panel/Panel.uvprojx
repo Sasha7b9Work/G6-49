@@ -1861,6 +1861,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\stm429.h</FilePath>
             </File>
+            <File>
+              <FileName>Controls.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Controls.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

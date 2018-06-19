@@ -135,5 +135,5 @@ DEF_PAGE_4
     cForm,          ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÔÎÐÌÀ
     parameters,     ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÏÀÐÀÌÅÒÐ
     bSetParameter,  ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÂÂÅÑÒÈ ÇÍÀ×ÅÍÈÅ ÏÀÐÀÌÅÒÐÀ
-    Page_Settings, 0, FuncActive, FuncPress
+    Page_Settings, 0, FuncActive, FuncPress, FuncOnKey
 )

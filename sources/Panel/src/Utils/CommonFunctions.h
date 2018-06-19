@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include "Hardware/Controls.h"
 
 
 void EmptyFuncVV();
@@ -12,7 +13,7 @@ void EmptyFuncVI(int);
 
 bool EmptyFuncBV();
 
-bool EmptyFuncBVfalse();
+bool EmptyFuncBKey(StructControl);
 
 void EmptyFuncVB(bool);
 

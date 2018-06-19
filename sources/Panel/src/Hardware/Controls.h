@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,9 +46,10 @@ enum TypePress
 /// Хранит код органа управления и его состояние - если pressed == true, то кнопка находится в нажатом состоянии
 struct StructControl
 {
-    Control key;
-    TypePress    typePress;
+    Control   key;
+    TypePress typePress;
 };
 
+bool KeyIsDigit(Control key);
 
 const char *PanelControlName(Control control);

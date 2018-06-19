@@ -58,7 +58,7 @@ bool EmptyFuncBV()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool EmptyFuncBVfalse()
+bool EmptyFuncBKey(StructControl)
 {
     return false;
 }

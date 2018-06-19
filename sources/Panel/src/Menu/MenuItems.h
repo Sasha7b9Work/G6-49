@@ -4,6 +4,7 @@
 #include "Hardware/Controls.h"
 #include "MenuItemsDefs.h"
 #include "Menu/MenuPagesNames.h"
+#include "Hardware/Controls.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,6 +19,7 @@ extern int8 gCurDigit;
 
 #define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по вертикали.
 
+typedef bool (*pFuncBKey)(StructControl);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Разные виды пунктов меню
@@ -125,7 +127,7 @@ public:
     /// В странице малых кнопок вызывается при повороте ручки установка
     pFuncVI funcRegSetSB;
 
-    pFuncBV funcOnKey;
+    pFuncBKey funcOnKey;
 
     bool CurrentItemIsOpened() const;
 };
@@ -148,7 +150,7 @@ public:
     /// В странице малых кнопок вызывается при повороте ручки установка
     pFuncVI  funcRegSetSB;
     /// Обработака нажатия кнопки. Возвращает true, если обработка произошла и дальше кнопку обрабатывать не требуется
-    pFuncBV  fuuncOnKey;
+    pFuncBKey fuuncOnKey;
     /// Dозвращает число подстраниц в странице по адресу page
     int NumSubPages() const;
     /// Возвращает количество элементов в странице по адресу page
@@ -173,7 +175,7 @@ public:
 
     void ChangeSubPage(int delta);
 
-    bool ProcessingControl(Control key);
+    bool ProcessingControl(StructControl);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///

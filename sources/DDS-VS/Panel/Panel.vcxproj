@@ -243,6 +243,7 @@
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\globals.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp" />

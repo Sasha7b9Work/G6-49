@@ -11,6 +11,7 @@
 extern const PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
 Name_Register PageRegisters::currentRegister = FreqMeterLevel;
+bool showInputWindow = false;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,6 +25,8 @@ void PageRegisters::Draw()
     Painter::FillRegion(Wave::X(), Wave::Y(A) + 1, Wave::Width() - 1, Wave::Height() * 2, Color::BACK);
 
     DrawRegisters(Wave::X() + 4, Wave::Y(A) + 3);
+
+    DrawInputWindow(Wave::X() + 4, Wave::Y(B));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,6 +43,17 @@ void PageRegisters::DrawRegisters(int x, int y)
         }
         Text::DrawText(x, y + i * 10, reg.Name(), color);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void PageRegisters::DrawInputWindow(int x, int y)
+{
+    if(!showInputWindow)
+    {
+        return;
+    }
+
+    Painter::FillRegion(x, y, 200, 50, Color::BLUE);
 }
 
 
@@ -81,19 +95,26 @@ DEF_BUTTON(bSend,                                                               
     pRegisters, FuncActive, OnPress_Send, FuncDraw
 )
 
+static Item emptyItem = {Item_None};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool OnKey_Registers()
+bool OnKey(StructControl strCntrl)
 {
+    if(KeyIsDigit(strCntrl.key) && !showInputWindow)
+    {
+        showInputWindow = true;
+    }
+
     return false;
 }
 
-DEF_PAGE_3(pRegisters,                                                                                                              //--- –≈√»—“–€ ---
+DEF_PAGE_4(pRegisters,                                                                                                              //--- –≈√»—“–€ ---
     "–≈√»—“–€", "REGISTERS",
     "",
     "",
     bPrev,
     bNext,
     bSend,
-    Page_Registers, 0, FuncActive, FuncPress, OnKey_Registers
+    emptyItem,
+    Page_Registers, 0, FuncActive, FuncPress, OnKey
 )
