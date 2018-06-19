@@ -26,7 +26,7 @@ void Generator::EnableChannel(Channel ch, bool enable)
 {
     static const GeneratorPin pin[NumChannels] = { Pin_P3_OutA, Pin_P4_OutB };
 
-    CPU::WritePin(pin[ch], enable);
+    CPU::WritePin(pin[ch], !enable);
 }
 
 

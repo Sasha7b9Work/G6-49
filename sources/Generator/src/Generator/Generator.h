@@ -27,8 +27,6 @@ private:
 
     static void SetAmplitude(Channel ch, float amplitude);
 
-    //void SetOffset(Channel ch, float offset);
-
     static void SetPhase(Channel ch, float phase);
 
     static void SetDutyRatio(Channel ch, float dutyRatio);

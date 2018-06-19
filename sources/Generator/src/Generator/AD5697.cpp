@@ -49,7 +49,11 @@ void AD5697::SetAmplitude(Channel ch, float amplitude)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Channel ch, float offset)
 {   
-    if(offset > 4096.0f)
+    if(offset < 0.0f)
+    {
+        offset = 0.0f;
+    }
+    else if(offset > 4096.0f)
     {
         offset = 4096.0f;
     }

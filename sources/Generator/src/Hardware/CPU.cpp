@@ -20,8 +20,8 @@ static const StructPort registers[NumPins] =
     {GPIOC, GPIO_PIN_8},    // AD9952_RES_DDS
     {GPIOE, GPIO_PIN_12},   // Pin_P1_AmplifierA
     {GPIOE, GPIO_PIN_13},   // Pin_P2_AmplifierB
-    {GPIOE, GPIO_PIN_14},   // Pin_P3_OutA
-    {GPIOE, GPIO_PIN_15},   // Pin_P4_OutB
+    {GPIOE, GPIO_PIN_12},   // Pin_P3_OutA
+    {GPIOE, GPIO_PIN_13},   // Pin_P4_OutB
     {GPIOC, GPIO_PIN_2},    // AD5697_LDACA
     {GPIOC, GPIO_PIN_3},    // AD5697_LDACB
     {GPIOC, GPIO_PIN_5},    // AD5697_D_RSA
