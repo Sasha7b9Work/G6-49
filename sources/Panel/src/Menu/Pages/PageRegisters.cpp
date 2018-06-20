@@ -13,9 +13,9 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define X_INPUT      5
-#define Y_INPUT      170
+#define Y_INPUT      183
 #define WIDTH_INPUT  240
-#define HEIGHT_INPUT 60
+#define HEIGHT_INPUT 52
 
 extern PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
@@ -60,7 +60,7 @@ void PageRegisters::DrawRegisters(int x, int y)
         Color color = Color::FILL;
         if(i == currentRegister)
         {
-            Painter::FillRegion(x - 1, y + i * 10, 127, 8, Color::FILL);
+            Painter::FillRegion(x - 1, y + i * 10, 132, 8, Color::FILL);
             color = Color::BACK;
         }
         Text::DrawText(x, y + i * 10, reg.Name(), color);
@@ -70,7 +70,7 @@ void PageRegisters::DrawRegisters(int x, int y)
             {
                 Painter::SetColor(Color::FILL);
             }
-            Text::DrawFormatText(x + 130, y + i * 10, Int2String((int)values[i], false, 1));
+            Text::DrawFormatText(x + 135, y + i * 10, Int2String((int)values[i], false, 1));
         }
     }
 }
@@ -85,13 +85,13 @@ void PageRegisters::DrawInputWindow()
 
     Painter::DrawRectangle(X_INPUT, Y_INPUT, WIDTH_INPUT, HEIGHT_INPUT, Color::FILL);
     Register reg(currentRegister);
-    Text::DrawBigText(X_INPUT + 17, Y_INPUT + 2, 2, reg.Name());
+    Text::DrawBigText(X_INPUT + 3, Y_INPUT + 2, 2, reg.Name());
 
     int x = X_INPUT + 5;
 
     for(int i = 0; i < pos; i++)
     {
-        x = Text::DrawBigChar(x, Y_INPUT + 20, 5, buffer[i]) + 3;
+        x = Text::DrawBigChar(x, Y_INPUT + 20, 4, buffer[i]) + 3;
     }
 }
 

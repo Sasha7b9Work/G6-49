@@ -30,7 +30,7 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
     Painter::SetColor(color);
 
-    char symbols[4];
+    __IO char symbols[4];
     int pointer = 0;
 
     for (char i = 0; i < 2; i++)

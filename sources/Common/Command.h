@@ -97,6 +97,16 @@ enum Name_Register
     OffsetB,
     FreqMeterLevel,
     FreqMeterHYS,
+    FPGA_RG0_Control,           ///< Управляющий регистр
+    FPGA_RG1_Freq,              ///< Регистр кода частоты
+    FPGA_RG2_Mul,               ///< Регистр кода умножителя
+    FPGA_RG3_RectA,             ///< Регистр кода сигнала прямоугольной формы канала А
+    FPGA_RG4_RectB,             ///< Регистр кода сигнала прямоугольной формы канала B
+    FPGA_RG5_PeriodImpulseA,    ///< Регистр кода периода прямоугольных импульсов канала А
+    FPGA_RG6_DurationImpulseA,  ///< Регистр кода длительности прямоугльных импульсов канала А
+    FPGA_RG7_PeriodImpulseB,    ///< Регистр кода периода прямоугольных импульсов канала B
+    FPGA_RG8_DurationImpulseB,  ///< Регистр кода длительности прямоуольных импульсов канала B
+    FPGA_RG9_FreqMeter,         ///< Регистр параметров частотомера
     NumRegisters
 };
 
