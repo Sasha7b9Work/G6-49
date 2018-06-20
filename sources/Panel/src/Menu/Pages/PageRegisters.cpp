@@ -22,8 +22,8 @@ enum TypeInput
 {
     Uint32,         ///< Десятичное число. Можно ввести значение до 2^32.
     Binary,         ///< Последовательность нулей и единиц
-    Int8_Int8,      ///< Два восьмибитных числа в десятичном виде.
-    Int14_Int14,    ///< Два числа, максимум 2^14, в десятичном виде
+    Uint8_Uint8,      ///< Два восьмибитных числа в десятичном виде.
+    Uint14_Uint14,    ///< Два числа, максимум 2^14, в десятичном виде
 };
 
 extern PageBase pRegisters;
@@ -52,22 +52,22 @@ struct DescInput
 
 static DescInput desc[NumRegisters] =
 {
-    {10, Uint32      }, // Multiplexor1,
-    {10, Uint32      }, // Multiplexor2,
-    {10, Uint32      }, // OffsetA,
-    {10, Uint32      }, // OffsetB,
-    {10, Uint32      }, // FreqMeterLevel,
-    {10, Uint32      }, // FreqMeterHYS,
-    {7,  Binary      }, // FPGA_RG0_Control,
-    {10, Uint32      }, // FPGA_RG1_Freq,
-    {7,  Int8_Int8   }, // FPGA_RG2_Mul,
-    {11, Int14_Int14 }, // FPGA_RG3_RectA,
-    {11, Int14_Int14 }, // FPGA_RG4_RectB,
-    {10, Uint32      }, // FPGA_RG5_PeriodImpulseA,
-    {10, Uint32      }, // FPGA_RG6_DurationImpulseA,
-    {10, Uint32      }, // FPGA_RG7_PeriodImpulseB,
-    {10, Uint32      }, // FPGA_RG8_DurationImpulseB,
-    {12, Binary      }  // FPGA_RG9_FreqMeter
+    {10, Uint32         }, // Multiplexor1,
+    {10, Uint32         }, // Multiplexor2,
+    {10, Uint32         }, // OffsetA,
+    {10, Uint32         }, // OffsetB,
+    {10, Uint32         }, // FreqMeterLevel,
+    {10, Uint32         }, // FreqMeterHYS,
+    {7,  Binary         }, // FPGA_RG0_Control,
+    {10, Uint32         }, // FPGA_RG1_Freq,
+    {7,  Uint8_Uint8    }, // FPGA_RG2_Mul,
+    {11, Uint14_Uint14  }, // FPGA_RG3_RectA,
+    {11, Uint14_Uint14  }, // FPGA_RG4_RectB,
+    {10, Uint32         }, // FPGA_RG5_PeriodImpulseA,
+    {10, Uint32         }, // FPGA_RG6_DurationImpulseA,
+    {10, Uint32         }, // FPGA_RG7_PeriodImpulseB,
+    {10, Uint32         }, // FPGA_RG8_DurationImpulseB,
+    {12, Binary         }  // FPGA_RG9_FreqMeter
 };
 
 
@@ -80,6 +80,10 @@ static TypeInput TypeBuffer(Name_Register name = NumRegisters);
 static bool AllowableSymbol(Control key);
 /// Выводит значение регистра i
 static void DrawValue(int x, int y, uint8 i);
+/// Возвращает из буфера значение, предшествующее точке
+static uint FirstValue();
+/// Возвращает из буфера значение, следующее за точкой
+static uint SecondValue();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,12 +115,24 @@ static bool AllowableSymbol(Control key)
     {
         return key == B_0 || key == B_1;
     }
-    else if(type == Int8_Int8)
+    else if(type == Uint8_Uint8 || type == Uint14_Uint14)
     {
+        if(KeyIsDigit(key))
+        {
+            return true;
+        }
 
-    }
-    else if(type == Int14_Int14)
-    {
+        if (key == B_Dot)
+        {
+            for (int i = 0; i < sizeof(buffer); i++)
+            {
+                if (buffer[i] == '.')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     return false;
@@ -166,15 +182,28 @@ static void DrawValue(int x, int y, uint8 i)
 
     Name_Register name = (Name_Register)i;
 
-    if(TypeBuffer(name) == Uint32)
+    TypeInput type = TypeBuffer(name);
+
+    if(type == Uint32)
     {
         Text::DrawFormatText(x, y, UInt2String(values[i]));
     }
-    else if(TypeBuffer(name) == Binary)
+    else if(type == Binary)
     {
         char buf[33];
 
         Text::DrawFormatText(x, y, Bin2StringN(values[i], buf, SizeBuffer(name)));
+    }
+    else if(type == Uint8_Uint8 || type == Uint14_Uint14)
+    {
+        uint mask = type == Uint8_Uint8 ? 0xffU : 0x3fffU;
+        int numBits = type == Uint8_Uint8 ? 8 : 14;
+
+        uint first = values[i] & mask;
+        uint second = (values[i] >> numBits) & mask;
+        x = Text::DrawFormatText(x, y, UInt2String(first));
+        x = Text::DrawFormatText(x, y, ".");
+        Text::DrawFormatText(x, y, UInt2String(second));
     }
 }
 
@@ -238,7 +267,7 @@ DEF_BUTTON(bNext,                                                               
 static void OnPress_Send()
 {
     showInputWindow = true;
-    memset(buffer, MAX_SIZE_BUFFER, 0);
+    memset(buffer, 0, MAX_SIZE_BUFFER);
 
     pRegisters.items[0] = (Item *)&bBackspace;
     pRegisters.items[1] = (Item *)&bCancel;
@@ -255,14 +284,27 @@ static void OnPress_Send()
         }
         else if(type == Binary)
         {
-            Bin2StringN(values[currentRegister], buffer, 7);
+            Bin2StringN(values[currentRegister], buffer, SizeBuffer(currentRegister));
             position = (int)strlen(buffer);
+        }
+        else if(type == Uint8_Uint8 || type == Uint14_Uint14)
+        {
+            uint mask = type == Uint8_Uint8 ? 0xffU : 0x3fffU;
+            int numBits = type == Uint8_Uint8 ? 8 : 14;
+
+            uint first = values[currentRegister] & mask;
+            uint second = (values[currentRegister] >> numBits) & mask;
+            
+            strcpy(buffer, UInt2String(first));
+            strcat(buffer, ".");
+            strcat(buffer, UInt2String(second));
         }
     }
     else
     {
         position = 0;
-        buffer[0] = 0;
+        memset(buffer, 0, MAX_SIZE_BUFFER);
+        values[position] = 0;
     }
 }
 
@@ -279,7 +321,10 @@ static void OnPress_Backspace()
     if(position > 0)
     {
         position--;
-        buffer[position] = 0;
+        for(int i = position; i < MAX_SIZE_BUFFER; i++)
+        {
+            buffer[i] = 0;
+        }
     }
 }
 
@@ -301,7 +346,7 @@ DEF_BUTTON(bBackspace,                                                          
 static void OnPress_Cancel()
 {
     showInputWindow = false;
-    memset(buffer, MAX_SIZE_BUFFER, 0);
+    memset(buffer, 0, MAX_SIZE_BUFFER);
     pRegisters.items[0] = (Item *)&bPrev;
     pRegisters.items[1] = (Item *)&bNext;
     pRegisters.items[2] = (Item *)&bSend;
@@ -321,6 +366,52 @@ DEF_BUTTON(bCancel,                                                             
     pRegisters, FuncActive, OnPress_Cancel, OnDraw_Cancel
 )
 
+uint FirstValue()
+{
+    char buff[20];
+
+    for(uint i = 0; i < sizeof(buffer); i++)
+    {
+        if(buffer[i] == '.')
+        {
+            for(uint j = 0; j < i; j++)
+            {
+                buff[j] = buffer[j];
+            }
+            buff[i] = 0;
+
+            uint result = 0;
+
+            if(String2UInt(buff, &result))
+            {
+                return result;
+            }
+            break;
+        }
+    }
+
+    return 0;
+}
+
+uint SecondValue()
+{
+    for(uint i = 0; i < sizeof(buffer); i++)
+    {
+        if(buffer[i] == '.')
+        {
+            uint result = 0;
+
+            if(String2UInt(&buffer[i + 1], &result))
+            {
+                return result;
+            }
+            break;
+        }
+    }
+
+    return 0;
+}
+
 void LoadRegister()
 {
     uint value = 0;
@@ -331,15 +422,27 @@ void LoadRegister()
     {
         if (String2UInt(buffer, &value))
         {
-            Generator::LoadRegister(currentRegister, value);
             values[currentRegister] = value;
             sending[currentRegister] = true;
+            Generator::LoadRegister(currentRegister, value);
         }
     }
     else if(type == Binary)
     {
         values[currentRegister] = StringToBin32(buffer);
         sending[currentRegister] = true;
+        Generator::LoadRegister(currentRegister, values[currentRegister]);
+    }
+    else if(type == Uint8_Uint8 || type == Uint14_Uint14)
+    {
+        int numBits = type == Uint8_Uint8 ? 8 : 14;
+
+        uint first = FirstValue();
+        uint second = SecondValue();
+
+        values[currentRegister] = first + (second << numBits);
+        sending[currentRegister] = true;
+        Generator::LoadRegister(currentRegister, values[currentRegister]);
     }
 }
 
@@ -369,14 +472,19 @@ bool OnKey(StructControl strCntrl)
 {
     Control key = strCntrl.key;
 
-    if(!showInputWindow && AllowableSymbol(key))
+    if(!showInputWindow)
     {
-        sending[currentRegister] = false;
-        OnPress_Send();
-        buffer[0] = KeyToChar(key);
-        position = 1;
+        if (AllowableSymbol(key))
+        {
+            sending[currentRegister] = false;
+            OnPress_Send();
+            memset(buffer, 0, MAX_SIZE_BUFFER);
+            buffer[0] = KeyToChar(key);
+            position = 1;
+            return true;
+        }
     }
-    else if(showInputWindow && strCntrl.typePress == Down)
+    else if(strCntrl.typePress == Down)
     {
         if (AllowableSymbol(key))
         {
@@ -384,6 +492,7 @@ bool OnKey(StructControl strCntrl)
             {
                 buffer[position++] = KeyToChar(key);
             }
+            return true;
         }
         else if(key == B_LEFT)
         {
@@ -391,6 +500,7 @@ bool OnKey(StructControl strCntrl)
             {
                 --position;
             }
+            return true;
         }
         else if(key == B_RIGHT)
         {
@@ -398,10 +508,12 @@ bool OnKey(StructControl strCntrl)
             {
                 ++position;
             }
+            return true;
         }
         else if(key == B_ESC)
         {
             OnPress_Cancel();
+            return true;
         }
     }
 
