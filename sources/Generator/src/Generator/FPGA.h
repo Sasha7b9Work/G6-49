@@ -35,6 +35,18 @@ private:
 
     enum
     {
+        RG0_Control,
+        RG1_Freq,
+        RG2_Mul,
+        RG3_RectA,
+        RG4_RectB,
+        RG5_PeriodImpulseA,
+        RG6_DurationImpulseA,
+        RG7_PeriodImpulseB,
+        RG8_DurationImpulseB,
+        RG9_FreqMeter,
+        NumRegisters
+        /*
         Reg_Control,
         Reg_PeriodA,
         Reg_DurationA,
@@ -42,6 +54,7 @@ private:
         Reg_DurationBandDelay,
         Reg_DurationB,
         Reg_Frequency
+        */
     };
 
     static void CreateSine();

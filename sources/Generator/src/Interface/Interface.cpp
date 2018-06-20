@@ -3,6 +3,7 @@
 #include "Interface.h"
 #include "Generator/Generator.h"
 #include "Generator/Multiplexor.h"
+#include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
 #include "Command.h"
 #include "structs.h"
@@ -158,25 +159,72 @@ void Interface::CommandWriteRegister()
 
     uint value = set.word;
 
-    if (reg == Multiplexor1 || reg == Multiplexor2)
+    switch (reg)
     {
+    case Multiplexor1:
+    case Multiplexor2:
         Multiplexor::WriteRegister(reg, value);
-    }
-    else if (reg == OffsetA)
-    {
+        break;
+
+    case OffsetA:
         AD5697::SetOffset(A, (float)value);
-    }
-    else if(reg == OffsetB)
-    {
+        break;
+
+    case OffsetB:
         AD5697::SetOffset(B, (float)value);
-    }
-    else if (reg == FreqMeterHYS)
-    {
-        AD5697::SetFreqHysteresys((float)value);
-    }
-    else if (reg == FreqMeterLevel)
-    {
+        break;
+
+    case FreqMeterLevel:
         AD5697::SetFreqLevel((float)value);
+        break;
+
+    case FreqMeterHYS:
+        AD5697::SetFreqHysteresys((float)value);
+        break;
+
+    case FPGA_RG0_Control:
+        FPGA::WriteRegister(FPGA::RG0_Control, value);
+        break;
+
+    case FPGA_RG1_Freq:
+        FPGA::WriteRegister(FPGA::RG1_Freq, value);
+        break;
+
+    case FPGA_RG2_Mul:
+        FPGA::WriteRegister(FPGA::RG2_Mul, value);
+        break;
+
+    case FPGA_RG3_RectA:
+        FPGA::WriteRegister(FPGA::RG3_RectA, value);
+        break;
+
+    case FPGA_RG4_RectB:
+        FPGA::WriteRegister(FPGA::RG4_RectB, value);
+        break;
+
+    case FPGA_RG5_PeriodImpulseA:
+        FPGA::WriteRegister(FPGA::RG5_PeriodImpulseA, value);
+        break;
+
+    case FPGA_RG6_DurationImpulseA:
+        FPGA::WriteRegister(FPGA::RG6_DurationImpulseA, value);
+        break;
+
+    case FPGA_RG7_PeriodImpulseB:
+        FPGA::WriteRegister(FPGA::RG7_PeriodImpulseB, value);
+        break;
+
+    case FPGA_RG8_DurationImpulseB:
+        FPGA::WriteRegister(FPGA::RG8_DurationImpulseB, value);
+        break;
+
+    case FPGA_RG9_FreqMeter:
+        FPGA::WriteRegister(FPGA::RG9_FreqMeter, value);
+        break;
+
+    case NumRegisters:
+    default:
+        break;
     }
 }
 
