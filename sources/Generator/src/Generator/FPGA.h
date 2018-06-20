@@ -11,6 +11,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FPGA
 {
+friend class Interface;
+
 public:
     static void Init();
 
@@ -29,6 +31,17 @@ private:
         ModeDDS,
         ModeImpulse,    ///< Режим, в котором импульcы могут иметь разную частоту
         ModeImpulse2    ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
+    };
+
+    enum
+    {
+        Reg_Control,
+        Reg_PeriodA,
+        Reg_DurationA,
+        Reg_PeriodB,
+        Reg_DurationBandDelay,
+        Reg_DurationB,
+        Reg_Frequency
     };
 
     static void CreateSine();

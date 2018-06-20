@@ -8,15 +8,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define ADDR_BANK           ((uint8*)NOR_MEMORY_ADRESS1)
 
-#define Reg_FPGA_Control            0
-#define Reg_FPGA_PeriodA            1
-#define Reg_FPGA_DurationA          2
-#define Reg_FPGA_PeriodB            3
-#define Reg_FPGA_DurationBandDelay  4
-#define Reg_FPGA_DurationB          5
-#define Reg_FPGA_Frequency          6
-
-
 #define MAX_VALUE ((1 << 14) - 1)
 #define MIN_VALUE (0)
 
@@ -143,7 +134,7 @@ void FPGA::SetFrequency(Channel ch, float frequency)
     if (modeWork == ModeDDS)
     {
         uint N = (uint)(frequency * (1 << 30) / 1e8f + 0.5f);
-        WriteRegister(Reg_FPGA_Frequency, N);
+        WriteRegister(Reg_Frequency, N);
     }
     else if(modeWork == ModeImpulse || modeWork == ModeImpulse2)
     {
@@ -153,7 +144,7 @@ void FPGA::SetFrequency(Channel ch, float frequency)
             WriteControlRegister();
         }
         uint N = (uint)(1e8f / frequency + 0.5f);
-        WriteRegister(ch == A ? (uint8)Reg_FPGA_PeriodA : (uint8)Reg_FPGA_PeriodB, N);
+        WriteRegister(ch == A ? (uint8)Reg_PeriodA : (uint8)Reg_PeriodB, N);
     }
 }
 
@@ -178,7 +169,7 @@ void FPGA::SetDelay(float delay)
 
     uint N = (uint)(delay / 1e-8f + 0.5f);
     
-    WriteRegister(Reg_FPGA_DurationBandDelay, N);
+    WriteRegister(Reg_DurationBandDelay, N);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,15 +177,15 @@ void FPGA::WriteControlRegister()
 {
     if (modeWork == ModeDDS)
     {
-        WriteRegister(Reg_FPGA_Control, 0);
+        WriteRegister(Reg_Control, 0);
     }
     else if (modeWork == ModeImpulse)
     {
-        WriteRegister(Reg_FPGA_Control, 2);
+        WriteRegister(Reg_Control, 2);
     }
     else if (modeWork == ModeImpulse2)
     {
-        WriteRegister(Reg_FPGA_Control, 4);
+        WriteRegister(Reg_Control, 4);
     }
 }
 
@@ -299,7 +290,7 @@ void FPGA::CreateExponenteMinus()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SendData()
 {
-    WriteRegister(Reg_FPGA_Control, 1);
+    WriteRegister(Reg_Control, 1);
     uint8 *address = ADDR_BANK;
     
     uint16 *data = dataA;
@@ -333,7 +324,7 @@ void FPGA::WriteRegister(uint8 reg, uint value)
 {  
     WriteAddress(reg);
 
-    for (int bit = (reg == Reg_FPGA_Control) ? 15 : 31; bit >= 0; bit--)
+    for (int bit = (reg == Reg_Control) ? 15 : 31; bit >= 0; bit--)
     {
         CPU::WritePin(FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
         CPU::WritePin(FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
@@ -361,7 +352,7 @@ uint8 FPGA::RegisterForDuration(Channel ch)
 {
     if (modeWork == ModeImpulse && ch == B)
     {
-        return Reg_FPGA_DurationBandDelay;
+        return Reg_DurationBandDelay;
     }
-    return (ch == A) ? (uint8)Reg_FPGA_DurationA : (uint8)Reg_FPGA_DurationB;
+    return (ch == A) ? (uint8)Reg_DurationA : (uint8)Reg_DurationB;
 }
