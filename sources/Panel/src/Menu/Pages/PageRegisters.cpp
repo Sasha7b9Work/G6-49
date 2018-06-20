@@ -17,6 +17,15 @@
 #define WIDTH_INPUT  240
 #define HEIGHT_INPUT 52
 
+/// Тип вводимых чисел в окне ввода
+enum TypeInput
+{
+    Uint32,         ///< Десятичное число. Можно ввести значение до 2^32.
+    Binary,         ///< Последовательность нулей и единиц
+    Int8_Int8,      ///< Два восьмибитных числа в десятичном виде.
+    Int14_Int14,    ///< Два числа, максимум 2^14, в десятичном виде
+};
+
 extern PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
 Name_Register currentRegister = FreqMeterLevel;
@@ -25,9 +34,9 @@ extern const ButtonBase bBackspace;
 extern const ButtonBase bCancel;
 extern const ButtonBase bSave;
 
-#define SIZE_BUFFER 10
+#define MAX_SIZE_BUFFER 12
 /// Здесь хранятся введённые символы
-static char buffer[SIZE_BUFFER + 1];
+static char buffer[MAX_SIZE_BUFFER + 1];
 /// Это указатель на первый своодный символ
 static int pos = 0;
 /// true, означает, что значение в этот регистр уже засылалось
@@ -35,8 +44,84 @@ static bool sending[NumRegisters] = {false, false, false, false, false, false};
 /// Здесь засланные значения для каждого регистра
 static uint values[NumRegisters];
 
+struct DescInput
+{
+    int size;
+    TypeInput type;
+};
+
+static DescInput desc[NumRegisters] =
+{
+    {10, Uint32      }, // Multiplexor1,
+    {10, Uint32      }, // Multiplexor2,
+    {10, Uint32      }, // OffsetA,
+    {10, Uint32      }, // OffsetB,
+    {10, Uint32      }, // FreqMeterLevel,
+    {10, Uint32      }, // FreqMeterHYS,
+    {7,  Binary      }, // FPGA_RG0_Control,
+    {10, Uint32      }, // FPGA_RG1_Freq,
+    {7,  Int8_Int8   }, // FPGA_RG2_Mul,
+    {11, Int14_Int14 }, // FPGA_RG3_RectA,
+    {11, Int14_Int14 }, // FPGA_RG4_RectB,
+    {10, Uint32      }, // FPGA_RG5_PeriodImpulseA,
+    {10, Uint32      }, // FPGA_RG6_DurationImpulseA,
+    {10, Uint32      }, // FPGA_RG7_PeriodImpulseB,
+    {10, Uint32      }, // FPGA_RG8_DurationImpulseB,
+    {12, Binary      }  // FPGA_RG9_FreqMeter
+};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Возвращает размер буфера для текущего регистра
+static int SizeBuffer();
+/// Возвращает тип ввода для данного регистра
+static TypeInput TypeBuffer();
+/// Возращает true, если символ является корректным для данного типа ввода
+static bool AllowableSymbol(Control key);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static int SizeBuffer()
+{
+    return desc[currentRegister].size;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static TypeInput TypeBuffer()
+{
+    return desc[currentRegister].type;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool AllowableSymbol(Control key)
+{
+    TypeInput type = TypeBuffer();
+
+    if(pos == SizeBuffer())
+    {
+        return false;
+    }
+
+    if(type == Uint32)
+    {
+        return KeyIsDigit(key);
+    }
+    else if(type == Binary)
+    {
+        return key == B_0 || key == B_1;
+    }
+    else if(type == Int8_Int8)
+    {
+
+    }
+    else if(type == Int14_Int14)
+    {
+    }
+
+    return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageRegisters::Draw()
 {
     if(Menu::CurrentPage() != pointer)
@@ -70,7 +155,7 @@ void PageRegisters::DrawRegisters(int x, int y)
             {
                 Painter::SetColor(Color::FILL);
             }
-            Text::DrawFormatText(x + 135, y + i * 10, Int2String((int)values[i], false, 1));
+            Text::DrawFormatText(x + 135, y + i * 10, UInt2String(values[i]));
         }
     }
 }
@@ -133,7 +218,7 @@ static void OnPress_Send()
 
     if(sending[currentRegister])
     {
-        Int2String((int)values[currentRegister], false, 1, buffer);
+        UInt2String(values[currentRegister], buffer);
         pos = (int)strlen(buffer);
     }
     else
@@ -231,22 +316,21 @@ DEF_BUTTON(bSave,                                                               
     pRegisters, FuncActive, OnPress_Save, OnDraw_Save
 )
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool OnKey(StructControl strCntrl)
 {
     Control key = strCntrl.key;
 
-    if(!showInputWindow && KeyIsDigit(key))
+    if(!showInputWindow && AllowableSymbol(key))
     {
         sending[currentRegister] = false;
         OnPress_Send();
         buffer[0] = KeyToChar(key);
         pos = 1;
     }
-    else if(showInputWindow && KeyIsDigit(key) && strCntrl.typePress == Down)
+    else if(showInputWindow && strCntrl.typePress == Down && AllowableSymbol(key))
     {
-        if(pos < SIZE_BUFFER)
+        if(pos < SizeBuffer())
         {
             buffer[pos++] = KeyToChar(key);
         }

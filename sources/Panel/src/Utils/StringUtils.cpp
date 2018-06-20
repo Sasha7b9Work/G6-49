@@ -276,6 +276,17 @@ char *Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+char *UInt2String(uint value, char buffer[20])
+{
+    static char buf[20];
+    
+    char *retValue = buffer ? buffer : buf;
+
+    sprintf(retValue, "%u", value);
+    return retValue;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool String2Int(char *str, int *value)
 {
     int sign = str[0] == '-' ? -1 : 1;

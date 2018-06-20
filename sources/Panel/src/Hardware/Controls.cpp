@@ -14,6 +14,10 @@ char KeyToChar(Control key)
     {
         return (char)((key - B_0) | 0x30);
     }
+    else if(key == B_Dot)
+    {
+        return '.';
+    }
 
     return '\0';
 }
