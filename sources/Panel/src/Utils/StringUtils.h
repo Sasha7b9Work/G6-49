@@ -52,6 +52,8 @@ char* Int2String(int value,                     ///< значение
 char* UInt2String(uint value,                     ///< значение
                  char bufferOut[20] = 0         ///< сюда записывается возвращаемое значение
 );
+/// Преобразует двоичное число ,представленное строкой из нулей и единиц, в uint
+uint StringToBin32(char buffer[33]);
 /// Сравнивает две строки. Число символов берётся из str1
 bool EqualsStrings(char *str1, char *str2);
 
@@ -103,3 +105,5 @@ char* Bin2String(uint8 value, char bufferOut[9]);
 /// @brief Преобразует value в текстовую строку
 /// @attention Строка будте храниться до следующего вызова функции. Если рузультат нужен большее количество времени, то его нужно скопировать себе
 char* Bin2String16(uint16 value, char bufferOut[19]);
+/// Переводит числов в двоичный вид с заданный количеством разрядов
+char *Bin2StringN(uint value, char buffer[33], int n);

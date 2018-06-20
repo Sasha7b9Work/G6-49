@@ -72,32 +72,34 @@ static DescInput desc[NumRegisters] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Возвращает размер буфера для текущего регистра
-static int SizeBuffer();
-/// Возвращает тип ввода для данного регистра
-static TypeInput TypeBuffer();
+/// Возвращает размер буфера для регистра i
+static int SizeBuffer(Name_Register name);
+/// Возвращает тип ввода для регистра i
+static TypeInput TypeBuffer(Name_Register name);
 /// Возращает true, если символ является корректным для данного типа ввода
 static bool AllowableSymbol(Control key);
+/// Выводит значение регистра i
+static void DrawValue(int x, int y, uint8 i);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static int SizeBuffer()
+static int SizeBuffer(Name_Register name)
 {
-    return desc[currentRegister].size;
+    return desc[name].size;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static TypeInput TypeBuffer()
+static TypeInput TypeBuffer(Name_Register name)
 {
-    return desc[currentRegister].type;
+    return desc[name].type;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static bool AllowableSymbol(Control key)
 {
-    TypeInput type = TypeBuffer();
+    TypeInput type = TypeBuffer(currentRegister);
 
-    if(pos == SizeBuffer())
+    if(pos == SizeBuffer(currentRegister))
     {
         return false;
     }
@@ -149,14 +151,31 @@ void PageRegisters::DrawRegisters(int x, int y)
             color = Color::BACK;
         }
         Text::DrawText(x, y + i * 10, reg.Name(), color);
-        if(sending[i])
-        {
-            if(i == currentRegister)
-            {
-                Painter::SetColor(Color::FILL);
-            }
-            Text::DrawFormatText(x + 135, y + i * 10, UInt2String(values[i]));
-        }
+        DrawValue(x + 135, y + i * 10, i);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawValue(int x, int y, uint8 i)
+{
+    if(!sending[i])
+    {
+        return;
+    }
+
+    Painter::SetColor(Color::FILL);
+
+    Name_Register name = (Name_Register)i;
+
+    if(TypeBuffer(name) == Uint32)
+    {
+        Text::DrawFormatText(x, y, UInt2String(values[i]));
+    }
+    else if(TypeBuffer(name) == Binary)
+    {
+        char buf[33];
+
+        Text::DrawFormatText(x, y, Bin2StringN(values[i], buf, SizeBuffer(name)));
     }
 }
 
@@ -178,6 +197,8 @@ void PageRegisters::DrawInputWindow()
     {
         x = Text::DrawBigChar(x, Y_INPUT + 20, 4, buffer[i]) + 3;
     }
+
+    Painter::DrawFilledRectangle(x - 1, Y_INPUT + 20, 20, 29, Color::GRAY_10, Color::BLUE);
 }
 
 
@@ -287,10 +308,20 @@ void LoadRegister()
 
     uint value = 0;
 
-    if(String2UInt(buffer, &value))
+    TypeInput type = TypeBuffer(currentRegister);
+
+    if (type == Uint32)
     {
-        Generator::LoadRegister(currentRegister, value);
-        values[currentRegister] = value;
+        if (String2UInt(buffer, &value))
+        {
+            Generator::LoadRegister(currentRegister, value);
+            values[currentRegister] = value;
+            sending[currentRegister] = true;
+        }
+    }
+    else if(type == Binary)
+    {
+        values[currentRegister] = StringToBin32(buffer);
         sending[currentRegister] = true;
     }
 }
@@ -330,7 +361,7 @@ bool OnKey(StructControl strCntrl)
     }
     else if(showInputWindow && strCntrl.typePress == Down && AllowableSymbol(key))
     {
-        if(pos < SizeBuffer())
+        if(pos < SizeBuffer(currentRegister))
         {
             buffer[pos++] = KeyToChar(key);
         }
