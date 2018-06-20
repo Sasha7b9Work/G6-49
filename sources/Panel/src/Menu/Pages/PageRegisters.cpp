@@ -37,8 +37,8 @@ extern const ButtonBase bSave;
 #define MAX_SIZE_BUFFER 12
 /// Здесь хранятся введённые символы
 static char buffer[MAX_SIZE_BUFFER + 1];
-/// Это указатель на первый своодный символ
-static int pos = 0;
+/// Это указатель на активное знакоместо - куда сейчас будет вставлен символ
+static int position = 0;
 /// true, означает, что значение в этот регистр уже засылалось
 static bool sending[NumRegisters] = {false, false, false, false, false, false};
 /// Здесь засланные значения для каждого регистра
@@ -73,9 +73,9 @@ static DescInput desc[NumRegisters] =
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Возвращает размер буфера для регистра i
-static int SizeBuffer(Name_Register name);
+static int SizeBuffer(Name_Register name = NumRegisters);
 /// Возвращает тип ввода для регистра i
-static TypeInput TypeBuffer(Name_Register name);
+static TypeInput TypeBuffer(Name_Register name = NumRegisters);
 /// Возращает true, если символ является корректным для данного типа ввода
 static bool AllowableSymbol(Control key);
 /// Выводит значение регистра i
@@ -85,12 +85,16 @@ static void DrawValue(int x, int y, uint8 i);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static int SizeBuffer(Name_Register name)
 {
+    name = (name == NumRegisters) ? currentRegister : name;
+
     return desc[name].size;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static TypeInput TypeBuffer(Name_Register name)
 {
+    name = (name == NumRegisters) ? currentRegister : name;
+
     return desc[name].type;
 }
 
@@ -98,11 +102,6 @@ static TypeInput TypeBuffer(Name_Register name)
 static bool AllowableSymbol(Control key)
 {
     TypeInput type = TypeBuffer(currentRegister);
-
-    if(pos == SizeBuffer(currentRegister))
-    {
-        return false;
-    }
 
     if(type == Uint32)
     {
@@ -193,12 +192,19 @@ void PageRegisters::DrawInputWindow()
 
     int x = X_INPUT + 5;
 
-    for(int i = 0; i < pos; i++)
+    for(uint i = 0; i < strlen(buffer); i++)
     {
+        if(i == (uint)position)
+        {
+            Painter::DrawFilledRectangle(x - 2, Y_INPUT + 19, 19, 31, Color::GRAY_10, Color::BLUE);
+            Painter::SetColor(Color::FILL);
+        }
         x = Text::DrawBigChar(x, Y_INPUT + 20, 4, buffer[i]) + 3;
     }
-
-    Painter::DrawFilledRectangle(x - 1, Y_INPUT + 20, 20, 29, Color::GRAY_10, Color::BLUE);
+    if (position == (int)strlen(buffer) && position < SizeBuffer())
+    {
+        Painter::DrawFilledRectangle(x - 2, Y_INPUT + 19, 19, 31, Color::GRAY_10, Color::BLUE);
+    }
 }
 
 
@@ -232,6 +238,7 @@ DEF_BUTTON(bNext,                                                               
 static void OnPress_Send()
 {
     showInputWindow = true;
+    memset(buffer, MAX_SIZE_BUFFER, 0);
 
     pRegisters.items[0] = (Item *)&bBackspace;
     pRegisters.items[1] = (Item *)&bCancel;
@@ -239,13 +246,23 @@ static void OnPress_Send()
 
     if(sending[currentRegister])
     {
-        UInt2String(values[currentRegister], buffer);
-        pos = (int)strlen(buffer);
+        TypeInput type = TypeBuffer();
+
+        if (type == Uint32)
+        {
+            UInt2String(values[currentRegister], buffer);
+            position = (int)strlen(buffer);
+        }
+        else if(type == Binary)
+        {
+            Bin2StringN(values[currentRegister], buffer, 7);
+            position = (int)strlen(buffer);
+        }
     }
     else
     {
-        pos = 0;
-
+        position = 0;
+        buffer[0] = 0;
     }
 }
 
@@ -259,9 +276,10 @@ DEF_BUTTON(bSend,                                                               
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Backspace()
 {
-    if(pos > 0)
+    if(position > 0)
     {
-        pos--;
+        position--;
+        buffer[position] = 0;
     }
 }
 
@@ -283,6 +301,7 @@ DEF_BUTTON(bBackspace,                                                          
 static void OnPress_Cancel()
 {
     showInputWindow = false;
+    memset(buffer, MAX_SIZE_BUFFER, 0);
     pRegisters.items[0] = (Item *)&bPrev;
     pRegisters.items[1] = (Item *)&bNext;
     pRegisters.items[2] = (Item *)&bSend;
@@ -304,8 +323,6 @@ DEF_BUTTON(bCancel,                                                             
 
 void LoadRegister()
 {
-    buffer[pos] = '\0';
-
     uint value = 0;
 
     TypeInput type = TypeBuffer(currentRegister);
@@ -357,13 +374,34 @@ bool OnKey(StructControl strCntrl)
         sending[currentRegister] = false;
         OnPress_Send();
         buffer[0] = KeyToChar(key);
-        pos = 1;
+        position = 1;
     }
-    else if(showInputWindow && strCntrl.typePress == Down && AllowableSymbol(key))
+    else if(showInputWindow && strCntrl.typePress == Down)
     {
-        if(pos < SizeBuffer(currentRegister))
+        if (AllowableSymbol(key))
         {
-            buffer[pos++] = KeyToChar(key);
+            if (position < SizeBuffer(currentRegister))
+            {
+                buffer[position++] = KeyToChar(key);
+            }
+        }
+        else if(key == B_LEFT)
+        {
+            if(position > 0)
+            {
+                --position;
+            }
+        }
+        else if(key == B_RIGHT)
+        {
+            if(position < (int)strlen(buffer))
+            {
+                ++position;
+            }
+        }
+        else if(key == B_ESC)
+        {
+            OnPress_Cancel();
         }
     }
 
