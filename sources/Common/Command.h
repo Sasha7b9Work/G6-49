@@ -107,6 +107,7 @@ enum Name_Register
     FPGA_RG7_PeriodImpulseB,    ///< Регистр кода периода прямоугольных импульсов канала B
     FPGA_RG8_DurationImpulseB,  ///< Регистр кода длительности прямоуольных импульсов канала B
     FPGA_RG9_FreqMeter,         ///< Регистр параметров частотомера
+    Multiplexor3,
     NumRegisters
 };
 
