@@ -222,6 +222,10 @@ void Interface::CommandWriteRegister()
         FPGA::WriteRegister(FPGA::RG9_FreqMeter, value);
         break;
 
+    case Multiplexor3:
+        Multiplexor::WriteRegister(reg, value);
+        break;
+
     case NumRegisters:
     default:
         break;

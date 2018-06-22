@@ -10,10 +10,12 @@
     A0_MX2 - PF3
 */
 
-#define PIN_MXA_A0       GPIO_PIN_0
-#define PIN_MXA_A1       GPIO_PIN_1
-#define PIN_MXB_A0       GPIO_PIN_2
-#define PIN_MXB_A1       GPIO_PIN_3
+#define PIN_MXA_A0  GPIO_PIN_0
+#define PIN_MXA_A1  GPIO_PIN_1
+#define PIN_MXB_A0  GPIO_PIN_2
+#define PIN_MXB_A1  GPIO_PIN_3
+#define PIN_MX3_A0  GPIO_PIN_4
+#define PIN_MX3_A1  GPIO_PIN_5
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +23,7 @@ void Multiplexor::Init()
 {
     GPIO_InitTypeDef  isGPIO =
     {
-        PIN_MXA_A0 | PIN_MXA_A1 | PIN_MXB_A0 | PIN_MXB_A1,
+        PIN_MXA_A0 | PIN_MXA_A1 | PIN_MXB_A0 | PIN_MXB_A1 | PIN_MX3_A0 | PIN_MX3_A1,
         GPIO_MODE_OUTPUT_PP,
         GPIO_PULLUP
     };
@@ -31,22 +33,25 @@ void Multiplexor::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Multiplexor::WriteRegister(Name_Register reg, uint value)
 {
-    if(reg == Multiplexor1)
-    {
-        if(value & 0x1)  {   SetPin(PIN_MXA_A0);   }
-        else             { ResetPin(PIN_MXA_A0); }
+    uint16 pinA0 = PIN_MXA_A0;
+    uint16 pinA1 = PIN_MXA_A1;
 
-        if(value & 0x2)  {   SetPin(PIN_MXA_A1);   }
-        else             { ResetPin(PIN_MXA_A1); }
-    }
-    else if(reg == Multiplexor2)
+    if(reg == Multiplexor2)
     {
-        if (value & 0x1) {   SetPin(PIN_MXB_A0);   }
-        else             { ResetPin(PIN_MXB_A0); }
-
-        if (value & 0x2) {   SetPin(PIN_MXB_A1);   }
-        else             { ResetPin(PIN_MXB_A1); }
+        pinA0 = PIN_MXA_A0;
+        pinA1 = PIN_MXA_A1;
     }
+    else if(reg == Multiplexor3)
+    {
+        pinA0 = PIN_MX3_A0;
+        pinA1 = PIN_MX3_A1;
+    }
+
+    if(value & 0x1)  {   SetPin(pinA0); }
+    else             { ResetPin(pinA0); }
+    
+    if(value & 0x2)  {   SetPin(pinA1); }
+    else             { ResetPin(pinA1); }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

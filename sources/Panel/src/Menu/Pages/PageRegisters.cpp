@@ -40,9 +40,9 @@ static char buffer[MAX_SIZE_BUFFER + 1];
 /// Это указатель на активное знакоместо - куда сейчас будет вставлен символ
 static int position = 0;
 /// true, означает, что значение в этот регистр уже засылалось
-static bool sending[NumRegisters] = {false, false, false, false, false, false};
+static bool sending[NumRegisters] = {false};
 /// Здесь засланные значения для каждого регистра
-static uint values[NumRegisters];
+static uint values[NumRegisters] = {0};
 
 struct DescInput
 {
@@ -52,8 +52,8 @@ struct DescInput
 
 static DescInput desc[NumRegisters] =
 {
-    {10, Uint32         }, // Multiplexor1,
-    {10, Uint32         }, // Multiplexor2,
+    {2,  Uint32         }, // Multiplexor1,
+    {2,  Uint32         }, // Multiplexor2,
     {10, Uint32         }, // OffsetA,
     {10, Uint32         }, // OffsetB,
     {10, Uint32         }, // FreqMeterLevel,
@@ -67,7 +67,8 @@ static DescInput desc[NumRegisters] =
     {10, Uint32         }, // FPGA_RG6_DurationImpulseA,
     {10, Uint32         }, // FPGA_RG7_PeriodImpulseB,
     {10, Uint32         }, // FPGA_RG8_DurationImpulseB,
-    {12, Binary         }  // FPGA_RG9_FreqMeter
+    {12, Binary         }, // FPGA_RG9_FreqMeter
+    {2,  Uint32         }  // Multiplexor3
 };
 
 
