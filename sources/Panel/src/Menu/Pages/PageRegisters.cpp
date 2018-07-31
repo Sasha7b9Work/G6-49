@@ -8,6 +8,7 @@
 #include "Command.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
+#include "Utils/NumberBuffer.h"
 #include <string.h>
 
 
@@ -481,14 +482,10 @@ static bool OnRegulator(Control key)
 {
     if (TypeBuffer(currentRegister) == Uint32)
     {
-        if (key == REG_RIGHT)
+        if(key == REG_RIGHT || key == REG_LEFT)
         {
-
-
-            return true;
-        }
-        else if(key == REG_LEFT)
-        {
+            NumberBuffer::Set(buffer, SizeBuffer(), position);
+            NumberBuffer::ProcessKey(key);
             return true;
         }
     }

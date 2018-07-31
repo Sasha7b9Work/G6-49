@@ -2086,6 +2086,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Statistics.h</FilePath>
             </File>
+            <File>
+              <FileName>NumberBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\NumberBuffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NumberBuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\NumberBuffer.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
