@@ -87,6 +87,8 @@ static void DrawValue(int x, int y, uint8 i);
 static uint FirstValue();
 /// Возвращает из буфера значение, следующее за точкой
 static uint SecondValue();
+/// Преобразует строку из buffer в uint
+static uint BufferToValue();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -416,26 +418,22 @@ uint SecondValue()
     return 0;
 }
 
-void LoadRegister()
+static uint BufferToValue()
 {
-    uint value = 0;
-
     TypeInput type = TypeBuffer(currentRegister);
 
-    if (type == Uint32)
+    uint result = 0;
+
+    if(type == Uint32)
     {
-        if (String2UInt(buffer, &value))
+        if(!String2UInt(buffer, &result))
         {
-            values[currentRegister] = value;
-            sending[currentRegister] = true;
-            Generator::LoadRegister(currentRegister, value);
+            result = 0;
         }
     }
     else if(type == Binary)
     {
-        values[currentRegister] = StringToBin32(buffer);
-        sending[currentRegister] = true;
-        Generator::LoadRegister(currentRegister, values[currentRegister]);
+        result = StringToBin32(buffer);
     }
     else if(type == Uint8_Uint8 || type == Uint14_Uint14)
     {
@@ -444,10 +442,17 @@ void LoadRegister()
         uint first = FirstValue();
         uint second = SecondValue();
 
-        values[currentRegister] = first + (second << numBits);
-        sending[currentRegister] = true;
-        Generator::LoadRegister(currentRegister, values[currentRegister]);
+        result = first + (second << numBits);
     }
+
+    return result;
+}
+
+static void LoadRegister()
+{
+    values[currentRegister] = BufferToValue();
+    sending[currentRegister] = true;
+    Generator::LoadRegister(currentRegister, values[currentRegister]);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -472,7 +477,27 @@ DEF_BUTTON(bSave,                                                               
 )
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool OnKey(StructControl strCntrl)
+static bool OnRegulator(Control key)
+{
+    if (TypeBuffer(currentRegister) == Uint32)
+    {
+        if (key == REG_RIGHT)
+        {
+
+
+            return true;
+        }
+        else if(key == REG_LEFT)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+static bool OnKey(StructControl strCntrl)
 {
     Control key = strCntrl.key;
 
@@ -518,6 +543,10 @@ bool OnKey(StructControl strCntrl)
         {
             OnPress_Cancel();
             return true;
+        }
+        else
+        {
+            return OnRegulator(key);
         }
     }
 
