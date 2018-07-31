@@ -43,8 +43,8 @@ void Multiplexor::WriteRegister(Name_Register reg, uint value)
     }
     else if(reg == Multiplexor3)
     {
-        pinA0 = PIN_MX3_A0;
-        pinA1 = PIN_MX3_A1;
+        pinA0 = PIN_MXB_A0;
+        pinA1 = PIN_MXB_A1;
     }
 
     if(value & 0x1)  {   SetPin(pinA0); }
