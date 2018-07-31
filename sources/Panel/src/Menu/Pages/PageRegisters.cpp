@@ -40,8 +40,6 @@ extern const ButtonBase bSave;
 #define MAX_SIZE_BUFFER 12
 /// Здесь хранятся введённые символы
 static char buffer[MAX_SIZE_BUFFER + 1];
-/// Это указатель на активное знакоместо - куда сейчас будет вставлен символ
-static int position = 0;
 /// true, означает, что значение в этот регистр уже засылалось
 static bool sending[NumRegisters] = {false};
 /// Здесь засланные значения для каждого регистра
@@ -228,9 +226,11 @@ void PageRegisters::DrawInputWindow()
 
     int x = X_INPUT + 5;
 
-    for(uint i = 0; i < strlen(buffer); i++)
+    int position = NumberBuffer::PositionCursor();
+
+    for(int i = 0; i < (int)strlen(buffer); i++)
     {
-        if(i == (uint)position)
+        if(i == position)
         {
             Painter::DrawFilledRectangle(x - 2, Y_INPUT + 19, 19, 31, Color::GRAY_10, Color::BLUE);
             Painter::SetColor(Color::FILL);
@@ -497,7 +497,7 @@ static bool OnKey(StructControl strCntrl)
             OnPress_Send();
             memset(buffer, 0, MAX_SIZE_BUFFER);
             buffer[0] = KeyToChar(key);
-            position = 1;
+            NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1);
             return true;
         }
     }
@@ -505,26 +505,12 @@ static bool OnKey(StructControl strCntrl)
     {
         if (AllowableSymbol(key))
         {
-            if (position < SizeBuffer(currentRegister))
-            {
-                buffer[position++] = KeyToChar(key);
-            }
+            NumberBuffer::ProcessKey(key);
             return true;
         }
-        else if(key == B_LEFT)
+        else if(key == B_RIGHT || key == B_LEFT)
         {
-            if(position > 0)
-            {
-                --position;
-            }
-            return true;
-        }
-        else if(key == B_RIGHT)
-        {
-            if(position < (int)strlen(buffer))
-            {
-                ++position;
-            }
+            NumberBuffer::ProcessKey(key);
             return true;
         }
         else if(key == B_ESC)

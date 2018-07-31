@@ -25,6 +25,35 @@ void NumberBuffer::ProcessKey(Control key)
     {
         ProcessRegulator(key);
     }
+    else if(key == B_LEFT)
+    {
+        if(position > 0)
+        {
+            --position;
+        }
+    }
+    else if(key == B_RIGHT)
+    {
+        if(position < NumSymbols())
+        {
+            ++position;
+        }
+    }
+    else if(AllowableSymbol(key))                    // Символьная кнопка
+    {
+        buffer[position++] = KeyToChar(key);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool NumberBuffer::AllowableSymbol(Control key)
+{
+    if(KeyIsDigit(key) || key == B_Dot || key == B_Minus)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,4 +137,10 @@ void NumberBuffer::PressBackspace()
             buffer[i] = 0;
         }
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int NumberBuffer::PositionCursor()
+{
+    return position;
 }

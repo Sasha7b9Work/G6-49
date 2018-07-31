@@ -20,6 +20,8 @@ public:
     static void ProcessKey(Control key);
     /// Обработка Backspace
     static void PressBackspace();
+    /// Возвращает номер разряда, в котором находится курсор
+    static int PositionCursor();
 
 private:
     static char *buffer;
@@ -38,4 +40,6 @@ private:
     static bool DecreaseDigit(int pos);
     /// Возвращает позицию символа для изменения
     static int PositionSymbolForChange();
+    /// Является ли допустимым данный символ
+    static bool AllowableSymbol(Control key);
 };
