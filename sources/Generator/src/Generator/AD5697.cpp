@@ -58,9 +58,9 @@ void AD5697::SetFreqHysteresys(float hyst)
 {
     Limitation(&hyst, 0.0f, 4095.0f);
 
-    uint16 value = (uint16)((uint16)Offset << 4);
+    uint16 value = (uint16)((uint16)hyst << 4);
 
-    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x01)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x08)), (uint8)(value >> 8), (uint8)value};
 
     WriteParameter(BINARY_U8(00001101), data, AD5697_Freq);
 }
@@ -72,7 +72,7 @@ void AD5697::SetFreqLevel(float level)
 
     uint16 value = (uint16)((uint16)level << 4);
 
-    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x08)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x01)), (uint8)(value >> 8), (uint8)value};
 
     WriteParameter(BINARY_U8(00001101), data, AD5697_Freq);
 }
