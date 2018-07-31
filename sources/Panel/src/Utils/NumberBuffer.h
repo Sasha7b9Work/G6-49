@@ -18,6 +18,8 @@ public:
     static void Set(char *buffer, int size, int position, int maxValue = 0);
     /// Обработка клавиши
     static void ProcessKey(Control key);
+    /// Обработка Backspace
+    static void PressBackspace();
 
 private:
     static char *buffer;

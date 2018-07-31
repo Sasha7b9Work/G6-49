@@ -280,6 +280,8 @@ static void OnPress_Send()
     pRegisters.items[1] = (Item *)&bCancel;
     pRegisters.items[2] = (Item *)&bSave;
 
+    int position = 0;
+
     if(sending[currentRegister])
     {
         TypeInput type = TypeBuffer();
@@ -313,6 +315,8 @@ static void OnPress_Send()
         memset(buffer, 0, MAX_SIZE_BUFFER);
         values[position] = 0;
     }
+
+    NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, position);
 }
 
 DEF_BUTTON(bSend,                                                                                                         //--- РЕГИСТРЫ - Заслать ---
@@ -323,18 +327,6 @@ DEF_BUTTON(bSend,                                                               
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Backspace()
-{
-    if(position > 0)
-    {
-        position--;
-        for(int i = position; i < MAX_SIZE_BUFFER; i++)
-        {
-            buffer[i] = 0;
-        }
-    }
-}
-
 static void OnDraw_Backspace(int x, int y)
 {
     Text::SetFont(TypeFont_UGO2);
@@ -346,7 +338,7 @@ DEF_BUTTON(bBackspace,                                                          
     "Backspace", "Backspace",
     "Удаляет последний введённый символ",
     "Deletes the last character you typed",
-    pRegisters, FuncActive, OnPress_Backspace, OnDraw_Backspace
+    pRegisters, FuncActive, NumberBuffer::PressBackspace, OnDraw_Backspace
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -484,7 +476,6 @@ static bool OnRegulator(Control key)
     {
         if(key == REG_RIGHT || key == REG_LEFT)
         {
-            NumberBuffer::Set(buffer, SizeBuffer(), position);
             NumberBuffer::ProcessKey(key);
             return true;
         }

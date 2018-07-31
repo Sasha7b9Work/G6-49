@@ -97,3 +97,15 @@ int NumberBuffer::NumSymbols()
     return (int)strlen(buffer);
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void NumberBuffer::PressBackspace()
+{
+    if (position > 0)
+    {
+        position--;
+        for (int i = position; i < size; i++)
+        {
+            buffer[i] = 0;
+        }
+    }
+}
