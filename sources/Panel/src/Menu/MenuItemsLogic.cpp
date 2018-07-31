@@ -438,7 +438,7 @@ int Item::PositionOnPage() const
     {
         for (int numItem = 0; numItem < NUM_ITEMS_ON_PAGE; numItem++)
         {
-            if (this == menu[numPage]->items[numItem])
+            if (this == pages[numPage]->items[numItem])
             {
                 return numItem;
             }

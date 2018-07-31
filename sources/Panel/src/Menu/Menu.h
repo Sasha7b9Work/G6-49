@@ -7,7 +7,8 @@
 #define PAGE_IS_MAIN  false
 #define MENU_TEMP_ENABLE_STRING_NAVI()
 
-extern const Page *menu[NUM_PAGES];
+extern const Page *pages[NUM_PAGES];
+
 
 class Menu
 {

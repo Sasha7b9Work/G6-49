@@ -28,8 +28,10 @@ enum TypeInput
 
 extern PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
+/// –егистр, в который будет производитс€ занесение значени€ по нажатию кнопки «ј—Ћј“№
 Name_Register currentRegister = FreqMeterLevel;
-bool showInputWindow = false;
+/// ‘лаг показа окна ввода
+static bool showInputWindow = false;
 extern const ButtonBase bBackspace;
 extern const ButtonBase bCancel;
 extern const ButtonBase bSave;
@@ -217,8 +219,9 @@ void PageRegisters::DrawInputWindow()
     }
 
     Painter::DrawRectangle(X_INPUT, Y_INPUT, WIDTH_INPUT, HEIGHT_INPUT, Color::FILL);
+    Painter::FillRegion(X_INPUT + 1, Y_INPUT + 1, WIDTH_INPUT - 2, HEIGHT_INPUT - 2, Color::BACK);
     Register reg(currentRegister);
-    Text::DrawBigText(X_INPUT + 3, Y_INPUT + 2, 2, reg.Name());
+    Text::DrawBigText(X_INPUT + 3, Y_INPUT + 2, 2, reg.Name(), Color::FILL);
 
     int x = X_INPUT + 5;
 

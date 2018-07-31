@@ -22,7 +22,7 @@ Item *Menu::itemUnderKey = 0;
 Item *Menu::openedItem = 0;
 //Control Menu::panelControlHint = B_None;
 
-const Page *menu[NUM_PAGES] =
+const Page *pages[NUM_PAGES] =
 {
     PageSignals::pointer,
     PageSignals2::pointer,
@@ -147,7 +147,7 @@ Page *Menu::CurrentPage()
         num = num;
     }
 
-    Page *page = (Page *)menu[num];
+    Page *page = (Page *)pages[num];
 
     return (ADDITION_PAGE_IS_NONE ? page : ADDITION_PAGE);
 }
