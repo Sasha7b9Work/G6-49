@@ -100,28 +100,28 @@ bool NumberBuffer::IncreaseDigit(int pos)
         ++buffer[pos];
         return true;
     }
-    else if(pos > 0)
+    else
     {
-        if(IncreaseDigit(pos - 1))
+        if (pos > 0)
         {
-            buffer[pos] = '0';
-            return true;
-        }
-        else if(position == NumSymbols())
-        {
-            if (pos == position - 1)
+            if (IncreaseDigit(pos - 1))
             {
-                if (All9())
+                buffer[pos] = '0';
+                return true;
+            }
+        }
+        else 
+        {
+            if (position == NumSymbols() && All9())
+            {
+                buffer[0] = '1';
+                position++;
+                for (int i = 1; i < position; i++)
                 {
-                    buffer[0] = '1';
-                    position++;
-                    for (int i = 1; i < position; i++)
-                    {
-                        buffer[i] = '0';
-                    }
-                    buffer[position + 1] = 0;
-                    return true;
+                    buffer[i] = '0';
                 }
+                buffer[position + 1] = 0;
+                return true;
             }
         }
     }
