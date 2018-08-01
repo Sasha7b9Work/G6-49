@@ -108,6 +108,9 @@ enum Name_Register
     FPGA_RG8_DurationImpulseB,  ///< Регистр кода длительности прямоуольных импульсов канала B
     FPGA_RG9_FreqMeter,         ///< Регистр параметров частотомера
     Multiplexor3,
+    FreqMeter_Resist,
+    FreqMeter_Couple,
+    FreqMeter_Filtr,
     NumRegisters
 };
 

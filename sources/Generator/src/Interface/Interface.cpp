@@ -5,6 +5,7 @@
 #include "Generator/Multiplexor.h"
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
+#include "Hardware/FreqMeter.h"
 #include "Command.h"
 #include "structs.h"
 #include <string.h>
@@ -224,6 +225,18 @@ void Interface::CommandWriteRegister()
 
     case Multiplexor3:
         Multiplexor::WriteRegister(reg, value);
+        break;
+
+    case FreqMeter_Resist:
+        FreqMeter::SetResist((FreqResist)value);
+        break;
+
+    case FreqMeter_Couple:
+        FreqMeter::SetCouple((FreqCouple)value);
+        break;
+
+    case FreqMeter_Filtr:
+        FreqMeter::SetFiltr((FreqFiltr)value);
         break;
 
     case NumRegisters:

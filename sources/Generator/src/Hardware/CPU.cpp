@@ -32,7 +32,10 @@ static const StructPort registers[NumPins] =
     {GPIOG, GPIO_PIN_5},    // FPGA_A0_RG
     {GPIOG, GPIO_PIN_6},    // FPGA_A1_RG
     {GPIOG, GPIO_PIN_7},    // FPGA_A2_RG
-    {GPIOG, GPIO_PIN_8}     // FPGA_A3_RG
+    {GPIOG, GPIO_PIN_8},    // FPGA_A3_RG
+    {GPIOE, GPIO_PIN_14},   // FREQ_METER_RESIST
+    {GPIOE, GPIO_PIN_15},   // FREQ_METER_COUPLE
+    {GPIOB, GPIO_PIN_10}    // FREQ_METER_FILTR
 };
 
 

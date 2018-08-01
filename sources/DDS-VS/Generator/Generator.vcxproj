@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
+    <ClInclude Include="..\..\common\CommonTypes.h" />
     <ClInclude Include="..\..\Generator\src\defines.h" />
     <ClInclude Include="..\..\Generator\src\Generator\AD5697.h" />
     <ClInclude Include="..\..\Generator\src\Generator\AD9952.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="..\..\Generator\src\Generator\GeneratroSettings.h" />
     <ClInclude Include="..\..\Generator\src\Generator\Multiplexor.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\CPU.h" />
+    <ClInclude Include="..\..\Generator\src\Hardware\FreqMeter.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\stm32.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\stm407.h" />
     <ClInclude Include="..\..\Generator\src\Hardware\Timer.h" />
@@ -228,6 +230,7 @@
     <ClCompile Include="..\..\Generator\src\Generator\Multiplexor.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Generator\src\Hardware\FreqMeter.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\stm32.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\stm407.cpp" />
     <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp" />

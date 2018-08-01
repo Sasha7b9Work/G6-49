@@ -322,7 +322,7 @@ void FPGA::SendData()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(uint8 reg, uint value)
 {
-    int numBits[NumRegisters] =
+    int numBits[NumRegistersFPGA] =
     {
         16, // RG0_Control,
         32, // RG1_Freq,

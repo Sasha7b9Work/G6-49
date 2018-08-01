@@ -26,6 +26,9 @@ enum GeneratorPin
     FPGA_A1_RG,
     FPGA_A2_RG,
     FPGA_A3_RG,
+    FREQ_METER_RESIST,
+    FREQ_METER_COUPLE,
+    FREQ_METER_FILTR,
     NumPins
 };
 

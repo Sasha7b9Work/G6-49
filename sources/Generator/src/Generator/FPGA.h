@@ -45,7 +45,7 @@ private:
         RG7_PeriodImpulseB,
         RG8_DurationImpulseB,
         RG9_FreqMeter,
-        NumRegisters
+        NumRegistersFPGA
         /*
         Reg_Control,
         Reg_PeriodA,
