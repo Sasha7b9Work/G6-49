@@ -59,7 +59,7 @@ static DescInput desc[NumRegisters] =
     {10, Uint32         }, // OffsetB,
     {10, Uint32         }, // FreqMeterLevel,
     {10, Uint32         }, // FreqMeterHYS,
-    {7,  Binary         }, // FPGA_RG0_Control,
+    {10, Binary         }, // FPGA_RG0_Control,
     {10, Uint32         }, // FPGA_RG1_Freq,
     {7,  Uint8_Uint8    }, // FPGA_RG2_Mul,
     {11, Uint14_Uint14  }, // FPGA_RG3_RectA,
@@ -316,7 +316,7 @@ static void OnPress_Send()
         values[position] = 0;
     }
 
-    NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, position);
+    NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, position, (currentRegister == FreqMeterLevel || currentRegister == FreqMeterHYS) ? 4095 : 0);
 }
 
 DEF_BUTTON(bSend,                                                                                                         //--- –≈√»—“–€ - «‡ÒÎ‡Ú¸ ---
@@ -477,6 +477,7 @@ static bool OnRegulator(Control key)
         if(key == REG_RIGHT || key == REG_LEFT)
         {
             NumberBuffer::ProcessKey(key);
+            LoadRegister();
             return true;
         }
     }
@@ -497,7 +498,7 @@ static bool OnKey(StructControl strCntrl)
             OnPress_Send();
             memset(buffer, 0, MAX_SIZE_BUFFER);
             buffer[0] = KeyToChar(key);
-            NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1);
+            NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == FreqMeterLevel || currentRegister == FreqMeterHYS) ? 4095 : 0);
             return true;
         }
     }

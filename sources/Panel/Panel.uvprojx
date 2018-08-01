@@ -1997,11 +1997,6 @@
               <FilePath>.\src\Menu\Pages\PageUSB.h</FilePath>
             </File>
             <File>
-              <FileName>Definition.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Definition.h</FilePath>
-            </File>
-            <File>
               <FileName>PageRegisters.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageRegisters.cpp</FilePath>

@@ -269,6 +269,7 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageRegisters.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings.cpp" />
@@ -415,6 +416,7 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageRegisters.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings.h" />

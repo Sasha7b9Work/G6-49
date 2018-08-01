@@ -15,7 +15,7 @@ class NumberBuffer
 public:
     /// \brief Задаёт первоначальные установки. size - размер буфера c учётом завершающего нуля, position - текущая позиция курсора, maxValue - 
     /// максимальное значение, которое может храниться в буфере.
-    static void Set(char *buffer, int size, int position, int maxValue = 0);
+    static void Set(char *buffer, int size, int position, int maxValue);
     /// Обработка клавиши
     static void ProcessKey(Control key);
     /// Обработка Backspace
@@ -42,4 +42,6 @@ private:
     static int PositionSymbolForChange();
     /// Является ли допустимым данный символ
     static bool AllowableSymbol(Control key);
+    /// 
+    static uint ToUINT();
 };

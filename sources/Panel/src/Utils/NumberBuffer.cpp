@@ -1,5 +1,7 @@
 #include "NumberBuffer.h"
+#include "Utils/StringUtils.h"
 #include <string.h>
+#include <stdlib.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +66,10 @@ void NumberBuffer::ProcessRegulator(Control key)
         return;                                     // просто выходим, ничего не делая
     }
 
+    // Сохраняем старое значение, чтобы восстановить его в случае, если при изменении оно превысит максимальное
+    char temp[32];
+    memcpy(temp, buffer, size);
+
     if (key == REG_RIGHT)
     {
         IncreaseDigit(PositionSymbolForChange());
@@ -71,6 +77,12 @@ void NumberBuffer::ProcessRegulator(Control key)
     else if(key == REG_LEFT)
     {
         DecreaseDigit(PositionSymbolForChange());
+    }
+
+    // Восстанавливаем старое значение, если новое вышло за пределы
+    if(max != 0 && ToUINT() > max)
+    {
+        memcpy(buffer, temp, size);
     }
 }
 
@@ -143,4 +155,16 @@ void NumberBuffer::PressBackspace()
 int NumberBuffer::PositionCursor()
 {
     return position;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint NumberBuffer::ToUINT()
+{
+    uint result = (uint)-1;
+    if(!String2UInt(buffer, &result))
+    {
+        return (uint)-1;
+    }
+
+    return result;
 }
