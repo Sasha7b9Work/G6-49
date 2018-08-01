@@ -52,7 +52,7 @@ DEF_CHOICE_5(cBillingTime,
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_3(pFrequencyCounter,
-    "ЧАСТОТОМЕР", "FRUENCY METER",
+    "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
     cEnableFrequencyCounter,

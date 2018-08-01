@@ -10,13 +10,6 @@ enum Channel
     NumChannels
 };
 
-/// 
-enum Interval
-{
-    Interval_1,
-    Interval_10
-};
-
 enum BillingTime
 {
     BillingTime_1ms,
@@ -48,6 +41,34 @@ enum Parity
 {
     Parity_Off,
     Parity_On
+};
+
+/// 
+enum FreqInterval
+{
+    FreqInterval_1,
+    FreqInterval_10
+};
+
+/// Сопротивление входа частотомера
+enum FreqResist
+{
+    FreqResist_1MOhm,
+    FreqResist_50Ohm
+};
+
+/// Открытый/закрытый вход частотомера
+enum FreqCouple
+{
+    FreqCouple_AC,
+    FreqCouple_DC
+};
+
+/// ФНЧ частотомера
+enum FreqFiltr
+{
+    FreqFiltr_Enable,
+    FreqFiltr_Disable
 };
 
 

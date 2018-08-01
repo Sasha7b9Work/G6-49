@@ -28,14 +28,13 @@ extern const PageBase pInput;
 
 #define BIT_FL1(numBit)  ((FLAG_1 >> numBit) & 0x01)
 #define BIT_FL2(numBit)  ((FLAG_2 >> numBit) & 0x01)
+#define BIT_FL3(numBit)  ((FLAG_3 >> numBit) & 0x01)
 
 #define CONSOLE_ENABLED         (BIT_FL1(BIT_CONSOLE))
-#define FREQ_COUNTER_ENABLED    (BIT_FL1(BIT_FREQ_ENABLED))
 #define DEBUG_MODE_ENABLED      (BIT_FL1(BIT_DBG_MODE))
 #define BACKGROUND_BLACK        (BIT_FL1(BIT_BACK_BLACK))
 #define SHOW_STATISTICS         (BIT_FL1(BIT_STATISTICS))
 #define TUNE_FULL               (BIT_FL1(BIT_TUNE_FULL))
-#define INTERVAL                ((Interval)BIT_FL1(BIT_FREQ_INTERVAL))
 #define PARITY                  ((Parity)BIT_FL1(BIT_PARITY))
 
 #define CHANNEL_ENABLED(ch)     ((FLAG_2 >> (ch + BIT_CHAN_A)) & 0x01)
@@ -48,6 +47,12 @@ extern const PageBase pInput;
 #define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == B)
 #define SIZE_BYTE               ((SizeByte)BIT_FL2(BIT_SIZE_BYTE))
 #define STOP_BIT                ((StopBit)BIT_FL2(BIT_STOP_BIT))
+
+#define FREQ_RESIST             ((FreqResist)BIT_FL2(BIT_FREQ_RESIST))
+#define FREQ_COUPLE             ((FreqCouple)BIT_FL2(BIT_FREQ_COUPLE))
+#define FREQ_FILTR              ((FreqFiltr)BIT_FL3(BIT_FREQ_FILTR))
+#define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED))
+#define FREQ_INTERVAL           ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,6 +98,12 @@ public:
 #define BIT_CHANNEL       3  ///< Channel  - текущий выбранный канал
 #define BIT_SIZE_BYTE     4  ///< SizeByte - размер байта для связи по USB
 #define BIT_STOP_BIT      5  ///< StopBit  - количество стоп-бит
+#define BIT_FREQ_RESIST   6  ///< FreqResist - сопротивление входа частотомера
+#define BIT_FREQ_COUPLE   7  ///< FreqCouple - открытый/закрытый вход частотомера
+
+#define FLAG_3      set.flag3
+    uint8           flag3;
+#define BIT_FREQ_FILTR    0  ///< FreqFiltr  - ФНЧ частотомера
 
 
     static void Save();
