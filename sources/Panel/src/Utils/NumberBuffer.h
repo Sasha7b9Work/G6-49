@@ -42,6 +42,8 @@ private:
     static int PositionSymbolForChange();
     /// Является ли допустимым данный символ
     static bool AllowableSymbol(Control key);
-    /// 
+    /// Возвращает числовое значение, представленное в буфере
     static uint ToUINT();
+    /// Возвращает true, если в числе все девятки
+    static bool All9();
 };

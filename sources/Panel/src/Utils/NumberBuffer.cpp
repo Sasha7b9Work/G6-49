@@ -68,7 +68,7 @@ void NumberBuffer::ProcessRegulator(Control key)
 
     // Сохраняем старое значение, чтобы восстановить его в случае, если при изменении оно превысит максимальное
     char temp[32];
-    memcpy(temp, buffer, size);
+    memcpy(temp, buffer, (uint)size);
 
     if (key == REG_RIGHT)
     {
@@ -80,9 +80,9 @@ void NumberBuffer::ProcessRegulator(Control key)
     }
 
     // Восстанавливаем старое значение, если новое вышло за пределы
-    if(max != 0 && ToUINT() > max)
+    if(max != 0 && ToUINT() > (uint)max)
     {
-        memcpy(buffer, temp, size);
+        memcpy(buffer, temp, (uint)size);
     }
 }
 
@@ -107,9 +107,39 @@ bool NumberBuffer::IncreaseDigit(int pos)
             buffer[pos] = '0';
             return true;
         }
+        else if(position == NumSymbols())
+        {
+            if (pos == position - 1)
+            {
+                if (All9())
+                {
+                    buffer[0] = '1';
+                    position++;
+                    for (int i = 1; i < position; i++)
+                    {
+                        buffer[i] = '0';
+                    }
+                    buffer[position + 1] = 0;
+                    return true;
+                }
+            }
+        }
     }
 
     return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool NumberBuffer::All9()
+{
+    for(int i = 0; i < NumSymbols(); i++)
+    {
+        if(buffer[i] != '9')
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
