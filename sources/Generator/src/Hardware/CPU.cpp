@@ -39,6 +39,12 @@ static const StructPort registers[NumPinsWrite] =
     {GPIOC, GPIO_PIN_1}     // FREQ_METER_CLK
 };
 
+static const StructPort registersRead[NumPinsRead] =
+{
+    {GPIOC, GPIO_PIN_0},    // FREQ_METER_DRY
+    {GPIOB, GPIO_PIN_12}    // FREQ_METER_DATA
+};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::Init()
@@ -131,10 +137,25 @@ void CPU::InitPins()
         HAL_GPIO_Init(registers[i].port, &isGPIO);
         HAL_GPIO_WritePin(registers[i].port, registers[i].pin, GPIO_PIN_RESET);
     }
+
+    isGPIO.Mode = GPIO_MODE_INPUT;
+    isGPIO.Pull = GPIO_PULLUP;
+
+    for(int i = 0; i < NumPinsRead; ++i)
+    {
+        isGPIO.Pin = registersRead[i].pin;
+        HAL_GPIO_Init(registersRead[i].port, &isGPIO);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::WritePin(GeneratorWritePin pin, bool set)
 {
     HAL_GPIO_WritePin(registers[pin].port, registers[pin].pin, set ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool CPU::ReadPin(GeneratorRedPins pin)
+{
+    return HAL_GPIO_ReadPin(registersRead[pin].port, registersRead[pin].pin) == GPIO_PIN_SET;
 }

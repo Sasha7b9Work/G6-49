@@ -55,6 +55,8 @@ public:
     
     static  void WritePin(GeneratorWritePin pin, bool set);
 
+    static bool ReadPin(GeneratorRedPins pin);
+
 private:
 
     static void EnablePeriphery();

@@ -1,5 +1,7 @@
+#include "defines.h"
 #include "FreqMeter.h"
 #include "Hardware/CPU.h"
+#include "Interface/Interface.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +37,20 @@ void FreqMeter::SetFiltr(FreqFiltr filtr)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::Update()
 {
+    if(CPU::ReadPin(FREQ_METER_DRY))
+    {
+        uint data = 0;
+        for(int i = 31; i >= 0; i--)
+        {
+            if(CPU::ReadPin(FREQ_METER_DATA))
+            {
+                data += (1 << i);
+            }
+            CPU::WritePin(FREQ_METER_CLK, true);
+            CPU::WritePin(FREQ_METER_CLK, false);
+        }
 
+        Interface::SendFrequency(data);
+    }
 }
 
