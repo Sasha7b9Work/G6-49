@@ -100,19 +100,20 @@ void Interface::ProcessCommand()
 
     static const pFuncInterfaceVV commands[NUM_COMMAND_WRITE] =
     {
-        CommandWriteService, /// WRITE_SERVICE_COMMAND
-        CommandEnable,       /// ENABLE_CHANNEL
-        CommandFormWave,     /// SET_FORM_WAVE
-        CommandParameter,    /// SET_FREQUENCY
-        CommandParameter,    /// SET_AMPLITUDE
-        CommandParameter,    /// SET_OFFSET
-        CommandParameter,    /// SET_DURATION
-        CommandParameter,    /// SET_DUTYRATIO
-        CommandParameter,    /// SET_PHASE
-        CommandReset,        /// RUN_RESET
-        CommandModeDebug,    /// MODE_DEBUG
-        CommandParameter,    /// SET_DELAY
-        CommandWriteRegister /// WRITE_REGISTER
+        CommandEmpty,
+        CommandEnable,          /// ENABLE_CHANNEL
+        CommandFormWave,        /// SET_FORM_WAVE
+        CommandParameter,       /// SET_FREQUENCY
+        CommandParameter,       /// SET_AMPLITUDE
+        CommandParameter,       /// SET_OFFSET
+        CommandParameter,       /// SET_DURATION
+        CommandParameter,       /// SET_DUTYRATIO
+        CommandParameter,       /// SET_PHASE
+        CommandReset,           /// RUN_RESET
+        CommandModeDebug,       /// MODE_DEBUG
+        CommandParameter,       /// SET_DELAY
+        CommandWriteRegister,   /// WRITE_REGISTER
+        CommandReadData         /// READ_DATA
     };
   
     if (buffer[0] < NUM_COMMAND_WRITE)

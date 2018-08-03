@@ -55,24 +55,17 @@ void Generator::Update()
 
     if (TIME_MS - timePrev > 1000)
     {
-        /// Пишем сервисную команду для запроса данных от основной платы
-        uint8 command = WRITE_SERVICE_COMMAND;
-        SendToInterface(&command, 1);
-
-        /// Считываем количество готовых для передачи в панель байт
-        uint size = 0;
-        ReadFromInterface((uint8 *)&size, 4);
-
-        /// Читаем байты
-        if (size != 0)
+        while (CPU::SPI4_::IsBusy())
         {
-            uint8 *buffer = (uint8 *)malloc(size);
+        };
 
-            ReadFromInterface(buffer, (int)size);
+        /// Читаем данные из генератора
+        static uint8 recv[LENGTH_SPI_BUFFER];
+        ReadFromInterface(recv, LENGTH_SPI_BUFFER);
 
-            ExecuteCommand(buffer, (int)size);
-
-            free(buffer);
+        if(recv[0])
+        {
+            ExecuteCommand(recv, LENGTH_SPI_BUFFER);
         }
 
         timePrev = TIME_MS;
@@ -145,11 +138,22 @@ void Generator::SendToInterface(uint8 *data, int size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::ReadFromInterface(uint8 *buffer, int size)
+void Generator::ReadFromInterface(uint8 *buffer, int)
 {
-    uint8 recv[LENGTH_SPI_BUFFER];
-    CPU::SPI4_::Receive(recv, LENGTH_SPI_BUFFER, 5);
-    memcpy(buffer, recv, (uint)size);
+    while(CPU::SPI4_::IsBusy())
+    {
+    };
+
+    static uint8 send[LENGTH_SPI_BUFFER] = {READ_DATA};
+    static uint8 recv[LENGTH_SPI_BUFFER];
+
+    do 
+    {
+        memset(recv, 0, LENGTH_SPI_BUFFER);
+        memset(buffer, 0, LENGTH_SPI_BUFFER);
+        CPU::SPI4_::TransmitReceive(send, recv, LENGTH_SPI_BUFFER, 5);
+        CPU::SPI4_::TransmitReceive(send, buffer, LENGTH_SPI_BUFFER, 5);
+    } while (memcmp(recv, buffer, LENGTH_SPI_BUFFER) != 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

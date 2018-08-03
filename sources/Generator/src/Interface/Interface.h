@@ -18,9 +18,9 @@ private:
 
     static void ProcessCommand();
 
-    static void CommandWriteService();
-
     static void CommandEnable();
+
+    static void CommandReadData();
 
     static void CommandFormWave();
 
