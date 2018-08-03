@@ -34,7 +34,7 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 buffer[LENGTH_SPI_BUFFER];     ///< Буфер для принимаемых команд
-
+uint Interface::freqForSend = 0;
 
                                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
@@ -92,13 +92,22 @@ void Interface::ProcessingCommand()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::WriteToInterface(uint8 *data, int size)
+{
+    uint8 trans[LENGTH_SPI_BUFFER];
+    memcpy(trans, data, (uint)size);
+
+    HAL_SPI_Transmit(&hSPI1, trans, LENGTH_SPI_BUFFER, 10);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ProcessCommand()
 {
     typedef void(*pFuncInterfaceVV)();
 
     static const pFuncInterfaceVV commands[NUM_COMMAND_WRITE] =
     {
-        CommandEmpty,        /// WRITE_SERVICE_COMMAND
+        CommandWriteService, /// WRITE_SERVICE_COMMAND
         CommandEnable,       /// ENABLE_CHANNEL
         CommandFormWave,     /// SET_FORM_WAVE
         CommandParameter,    /// SET_FREQUENCY
@@ -123,8 +132,6 @@ void Interface::ProcessCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandEnable()
 {
-    LOG_WRITE("Tест");
-
     Channel ch = (Channel)buffer[1];
     bool enable = buffer[2] == 1;
     
@@ -137,6 +144,25 @@ void Interface::CommandEnable()
     }
     
     Generator::EnableChannel(ch, enable);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandWriteService()
+{
+    if(freqForSend != 0)
+    {
+        // Передаём число 5 - количество готовых к передаче байт (1 байт команды + 4 байта данных)
+        BitSet32 data;
+        data.word = 0;
+        data.byte0 = 5;
+        WriteToInterface((uint8 *)data.word, 4);
+
+        data.word = freqForSend;
+        uint8 trans[5] = {FREQ_MEASURE, data.byte0, data.byte1, data.byte2, data.byte3};
+        WriteToInterface(trans, 5);
+
+        freqForSend = 0;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -281,8 +307,9 @@ void Interface::CommandEmpty()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SendFrequency(uint)
+void Interface::SendFrequency(uint value)
 {
+    freqForSend = value;
 }
 
 

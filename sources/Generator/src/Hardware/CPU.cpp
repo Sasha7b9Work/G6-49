@@ -139,7 +139,7 @@ void CPU::InitPins()
     }
 
     isGPIO.Mode = GPIO_MODE_INPUT;
-    isGPIO.Pull = GPIO_PULLUP;
+    isGPIO.Pull = GPIO_PULLDOWN;
 
     for(int i = 0; i < NumPinsRead; ++i)
     {
@@ -155,7 +155,9 @@ void CPU::WritePin(GeneratorWritePin pin, bool set)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::ReadPin(GeneratorRedPins pin)
+bool CPU::ReadPin(GeneratorReadPin pin)
 {
-    return HAL_GPIO_ReadPin(registersRead[pin].port, registersRead[pin].pin) == GPIO_PIN_SET;
+    GPIO_PinState state = HAL_GPIO_ReadPin(registersRead[pin].port, registersRead[pin].pin);
+
+    return state == GPIO_PIN_SET;
 }

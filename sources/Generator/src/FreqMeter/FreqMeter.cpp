@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "FreqMeter.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "Interface/Interface.h"
 
 
@@ -47,10 +48,11 @@ void FreqMeter::Update()
                 data += (1 << i);
             }
             CPU::WritePin(FREQ_METER_CLK, true);
+            Timer::PauseOnTime(1);
             CPU::WritePin(FREQ_METER_CLK, false);
         }
 
-        Interface::SendFrequency(data);
+        Interface::SendFrequency(111111);
     }
 }
 

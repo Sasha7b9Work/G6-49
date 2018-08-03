@@ -18,6 +18,8 @@ private:
 
     static void ProcessCommand();
 
+    static void CommandWriteService();
+
     static void CommandEnable();
 
     static void CommandFormWave();
@@ -29,4 +31,8 @@ private:
     static void CommandModeDebug();
 
     static void CommandWriteRegister();
+
+    static void WriteToInterface(uint8 *buffer, int size);
+    /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
+    static uint freqForSend;
 };

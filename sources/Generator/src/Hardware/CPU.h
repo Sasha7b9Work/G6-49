@@ -35,7 +35,7 @@ enum GeneratorWritePin
 };
 
 /// Порты чтения
-enum GeneratorRedPins
+enum GeneratorReadPin
 {
     FREQ_METER_DRY,     ///< Пин чтения готовности частотомера к выдаче данных
     FREQ_METER_DATA,    ///< Пин чтения данных
@@ -55,7 +55,7 @@ public:
     
     static  void WritePin(GeneratorWritePin pin, bool set);
 
-    static bool ReadPin(GeneratorRedPins pin);
+    static bool ReadPin(GeneratorReadPin pin);
 
 private:
 

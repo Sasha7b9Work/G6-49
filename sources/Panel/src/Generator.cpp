@@ -3,6 +3,7 @@
 #include "Log.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Command.h"
 #include "structs.h"
@@ -50,24 +51,31 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Update()
 {
-    /// Пишем сервисную команду для запроса данных от основной платы
-    uint8 command = WRITE_SERVICE_COMMAND;
-    SendToInterface(&command, 1);
+    static uint timePrev = 0;
 
-    /// Считываем количество байт
-    uint size = 0;
-    ReadFromInterface((uint8 *)&size, 4);
-
-    /// Читаем байты
-    if(size != 0)
+    if (TIME_MS - timePrev > 1000)
     {
-        uint8 *buffer = (uint8 *)malloc(size);
+        /// Пишем сервисную команду для запроса данных от основной платы
+        uint8 command = WRITE_SERVICE_COMMAND;
+        SendToInterface(&command, 1);
 
-        ReadFromInterface(buffer, (int)size);
+        /// Считываем количество байт
+        uint size = 0;
+        ReadFromInterface((uint8 *)&size, 4);
 
-        ExecuteCommand(buffer, (int)size);
+        /// Читаем байты
+        if (size != 0)
+        {
+            uint8 *buffer = (uint8 *)malloc(size);
 
-        free(buffer);
+            ReadFromInterface(buffer, (int)size);
+
+            ExecuteCommand(buffer, (int)size);
+
+            free(buffer);
+        }
+
+        timePrev = TIME_MS;
     }
 }
 
@@ -129,12 +137,20 @@ void Generator::SendToInterface(uint8 *data, int size)
 
         CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                                // Первая передача
 
+        int counter = 0;
+
         do
         {
+            counter++;
             memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
             CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
         }
         while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
+
+        if(counter > 1)
+        {
+            counter++;
+        }
         
         command = command;
         ch = ch;
@@ -144,6 +160,11 @@ void Generator::SendToInterface(uint8 *data, int size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::ReadFromInterface(uint8 *buffer, int size)
 {
+    uint8 recv[LENGTH_SPI_BUFFER];
+    CPU::SPI4_::Receive(recv, LENGTH_SPI_BUFFER, 5);
+    memcpy(buffer, recv, (uint)size);
+
+    /*
     // Даём запрос на чтение size байт
     static uint8 trans[5] = {READ_COMMAND};
     BitSet32 data;
@@ -168,6 +189,7 @@ void Generator::ReadFromInterface(uint8 *buffer, int size)
     } while (memcmp(recv1, recv2, LENGTH_SPI_BUFFER) != 0);
 
     memcpy(buffer, recv1, (uint)size);
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
