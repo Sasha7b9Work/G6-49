@@ -132,28 +132,15 @@ void Generator::SendToInterface(uint8 *data, int size)
         memset(buffer, 0, LENGTH_SPI_BUFFER);
         memcpy(buffer, data, (uint)size);
         
-        volatile CommandWrite command = (CommandWrite)buffer[0];
-        volatile Channel ch = (Channel)buffer[1];
-
         CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                                // Первая передача
-
-        int counter = 0;
 
         do
         {
-            counter++;
             memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
             CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
         }
         while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
 
-        if(counter > 1)
-        {
-            counter++;
-        }
-        
-        command = command;
-        ch = ch;
     }
 }
 
