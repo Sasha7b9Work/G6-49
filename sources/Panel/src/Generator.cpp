@@ -59,7 +59,7 @@ void Generator::Update()
         uint8 command = WRITE_SERVICE_COMMAND;
         SendToInterface(&command, 1);
 
-        /// Считываем количество байт
+        /// Считываем количество готовых для передачи в панель байт
         uint size = 0;
         ReadFromInterface((uint8 *)&size, 4);
 
@@ -96,7 +96,7 @@ void Generator::ExecuteCommand(uint8 *buffer, int)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(Channel ch, Type_WaveParameter param, float value)
 {
-    static const CommandWrite commands[NumParameters] =
+    static const CommandPanel commands[NumParameters] =
     {
         SET_FREQUENCY,
         COMMAND_NONE,
@@ -150,33 +150,6 @@ void Generator::ReadFromInterface(uint8 *buffer, int size)
     uint8 recv[LENGTH_SPI_BUFFER];
     CPU::SPI4_::Receive(recv, LENGTH_SPI_BUFFER, 5);
     memcpy(buffer, recv, (uint)size);
-
-    /*
-    // Даём запрос на чтение size байт
-    static uint8 trans[5] = {READ_COMMAND};
-    BitSet32 data;
-    data.word = (uint)size;
-    for(int i = 0; i < 4; i++)
-    {
-        trans[i + 1] = data.byte[i];
-    }
-
-    SendToInterface(trans, 5);
-
-    static uint8 recv1[LENGTH_SPI_BUFFER];  // Буфер приёма1
-    static uint8 recv2[LENGTH_SPI_BUFFER];  // Буфер приёма2
-
-    do
-    {
-        memset(recv1, 0, LENGTH_SPI_BUFFER);
-        memset(recv2, 0, LENGTH_SPI_BUFFER);
-        CPU::SPI4_::Receive(recv1, LENGTH_SPI_BUFFER, 5);
-        CPU::SPI4_::Receive(recv2, LENGTH_SPI_BUFFER, 5);
-
-    } while (memcmp(recv1, recv2, LENGTH_SPI_BUFFER) != 0);
-
-    memcpy(buffer, recv1, (uint)size);
-    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -201,7 +174,7 @@ void Generator::TestSend()
         memset(buffer, 0, LENGTH_SPI_BUFFER);
         memcpy(buffer, data, (uint)size);
 
-        volatile CommandWrite command = (CommandWrite)buffer[0];
+        volatile CommandPanel command = (CommandPanel)buffer[0];
         volatile Channel ch = (Channel)buffer[1];
 
         CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача

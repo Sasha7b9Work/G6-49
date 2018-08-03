@@ -51,7 +51,7 @@ void Generator::SetFormWave(Channel ch, Type_WaveForm form)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Channel ch, CommandWrite command, float value)
+void Generator::SetParameter(Channel ch, CommandPanel command, float value)
 {
     typedef void (*pFuncChF)(Channel, float);
 

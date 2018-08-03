@@ -59,11 +59,7 @@ void Interface::ProcessingCommand()
     
     if (res == HAL_OK)
     {
-        if(buffer[0] != 0 || buffer[1] != 0 || buffer[2] != 0)
-        {
-            buffer[0] = buffer[0];
-        }
-        
+       
         CPU::SetBusy();
 
         static uint8 prevBuffer[LENGTH_SPI_BUFFER] = {0};
@@ -71,15 +67,12 @@ void Interface::ProcessingCommand()
 
         do
         {
-            if (first)
-            {
-                first = false;
-            }
-            else
+            if(!first)
             {
                 HAL_SPI_DeInit(&hSPI1);
                 HAL_SPI_Init(&hSPI1);
             }
+            first = false;
             memcpy(prevBuffer, buffer, LENGTH_SPI_BUFFER);
             res = HAL_SPI_TransmitReceive(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER, 5);
         } while(memcmp(buffer, prevBuffer, LENGTH_SPI_BUFFER) != 0     // Пока не совпадут пва принятых буфера
@@ -275,7 +268,7 @@ void Interface::CommandWriteRegister()
 void Interface::CommandParameter()
 {
     Channel ch = (Channel)buffer[1];
-    CommandWrite command = (CommandWrite)buffer[0];
+    CommandPanel command = (CommandPanel)buffer[0];
     float value = 0.0f;
     memcpy(&value, &buffer[2], 4);
     Generator::SetParameter(ch, command, value);

@@ -26,7 +26,7 @@
 */
 
 /// Возможные команды для передачи в основной процессор
-enum CommandWrite
+enum CommandPanel
 {
     WRITE_SERVICE_COMMAND   = 0,    ///< Служебная. Код посыалется в отсутствие информации для передачи.
     ENABLE_CHANNEL          = 1,    ///< Включить/выключить канал
@@ -45,6 +45,15 @@ enum CommandWrite
     READ_COMMAND            = 13,   ///< READ_COMMAND                                     /* Используется для приёма данных от основного процессора */
     NUM_COMMAND_WRITE,
     COMMAND_NONE
+};
+
+/// Возможные команды, принимаемые от основного процессора
+enum CommandGenerator
+{
+    READ_POINTS = 0,    ///< Принимает точки произвольного сигнала
+                        //   0            1...4
+    FREQ_MEASURE = 1,   ///< FREQ_MEASURE RESULT                                                          /* Результат измерения частотомера */
+    NUM_COMMAND_READ
 };
 
 enum Type_WaveParameter
@@ -125,15 +134,6 @@ struct Register
 };
 
 
-/// Возможные команды, принимаемые от основного процессора
-enum CommandRead
-{
-    READ_POINTS         = 0,   ///< Принимает точки произвольного сигнала
-                               //   0            1...4
-    FREQ_MEASURE        = 1,   ///< FREQ_MEASURE RESULT                                                          /* Результат измерения частотомера */
-    NUM_COMMAND_READ
-};
-
 #define LENGTH_SPI_BUFFER   10
 
 #define SPI_SLAVE_SYNBYTE   0x53
@@ -146,7 +146,7 @@ enum CommandRead
 extern const char * namesWaveForm[NumForms][2];
 
 
-//const char *Command_Name(CommandWrite command);
+//const char *Command_Name(CommandPanel command);
 
 
 /** @}  @} */

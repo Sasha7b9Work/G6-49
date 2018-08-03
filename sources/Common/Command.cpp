@@ -23,7 +23,7 @@ const char * namesWaveForm[NumForms][2] =
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *Command_Name(CommandWrite command)
+const char *Command_Name(CommandPanel command)
 {
     static const char *names[NUM_COMMAND_WRITE] =
     {
