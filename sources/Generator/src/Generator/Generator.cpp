@@ -4,7 +4,7 @@
 #include "Multiplexor.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
-#include "Hardware/FreqMeter.h"
+#include "FreqMeter/FreqMeter.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ void Generator::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::EnableChannel(Channel ch, bool enable)
 {
-    static const GeneratorPin pin[NumChannels] = { Pin_P3_OutA, Pin_P4_OutB };
+    static const GeneratorWritePin pin[NumChannels] = { Pin_P3_OutA, Pin_P4_OutB };
 
     CPU::WritePin(pin[ch], !enable);
 }
@@ -35,7 +35,7 @@ void Generator::EnableChannel(Channel ch, bool enable)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Channel ch, Type_WaveForm form)
 {
-    static const GeneratorPin pin[NumChannels] = {Pin_P1_AmplifierA, Pin_P2_AmplifierB};
+    static const GeneratorWritePin pin[NumChannels] = {Pin_P1_AmplifierA, Pin_P2_AmplifierB};
 
     waveIsSine = (form == Sine);
 

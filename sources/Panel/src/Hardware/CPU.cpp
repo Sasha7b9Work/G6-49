@@ -118,6 +118,14 @@ void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::SPI4_::Receive(uint8 *recv, uint16 size, uint timeOut)
+{
+#ifndef OPEN
+    HAL_SPI_Receive(&handleSPI4, recv, size, timeOut);
+#endif
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool CPU::SPI4_::IsBusy()
 {
     return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET;

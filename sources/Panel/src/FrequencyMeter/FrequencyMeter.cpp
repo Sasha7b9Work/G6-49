@@ -1,6 +1,11 @@
 #include "FrequencyMeter.h"
 #include "Display/Text.h"
+#include "Display/Painter.h"
 #include "Settings/Settings.h"
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+uint FrequencyMeter::frequency = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11,5 +16,12 @@ void FrequencyMeter::Draw()
         return;
     }
 
-    Text::DrawText(8, SCREEN_HEIGHT - 16, "F", Color::FILL);
+    Painter::SetColor(Color::FILL);
+    Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "F = %d", frequency);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FrequencyMeter::SetMeasure(uint value)
+{
+    frequency = value;
 }

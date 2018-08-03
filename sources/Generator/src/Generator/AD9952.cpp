@@ -44,7 +44,7 @@ static void WriteCFR2(Channel ch);
 static void WriteASF(Channel ch);
 static void WriteFTW0(Channel ch);
 static void WriteToHardware(Channel ch, RegAD9952 reg, uint value);
-static GeneratorPin ChipSelect(Channel ch);
+static GeneratorWritePin ChipSelect(Channel ch);
 static void Reset();
 
 
@@ -173,7 +173,7 @@ static void WriteToHardware(Channel ch, RegAD9952 reg, uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static GeneratorPin ChipSelect(Channel ch)
+static GeneratorWritePin ChipSelect(Channel ch)
 {
     return (ch == A) ? AD9952_SPI3_CSA : AD9952_SPI3_CSB;
 }

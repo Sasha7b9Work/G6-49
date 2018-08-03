@@ -1126,16 +1126,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
             </File>
-            <File>
-              <FileName>FreqMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\FreqMeter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FreqMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\FreqMeter.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1165,6 +1155,21 @@
               <FileName>Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Math.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FreqMeter</GroupName>
+          <Files>
+            <File>
+              <FileName>FreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter.h</FilePath>
             </File>
           </Files>
         </Group>

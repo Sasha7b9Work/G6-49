@@ -85,7 +85,7 @@ uint8 AD5697::CreateCommandByte(Type_WaveParameter param)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::WriteParameter(uint8 address, uint8 data[3], GeneratorPin pin)
+void AD5697::WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin)
 {
     TransmitI2C(address, data);
     CPU::WritePin(pin, false);
@@ -102,7 +102,7 @@ void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::Reset(Channel ch)
 {
-    static const GeneratorPin pinRS[NumChannels] = {AD5697_D_RSA, AD5697_D_RSB};
+    static const GeneratorWritePin pinRS[NumChannels] = {AD5697_D_RSA, AD5697_D_RSB};
 
     CPU::WritePin(PinLDAC(ch), true);
     CPU::WritePin(pinRS[ch], true);
@@ -111,9 +111,9 @@ void AD5697::Reset(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-GeneratorPin AD5697::PinLDAC(Channel ch)
+GeneratorWritePin AD5697::PinLDAC(Channel ch)
 {
-    static const GeneratorPin pinLDAC[NumChannels] = {AD5697_Offset, AD5697_Freq};
+    static const GeneratorWritePin pinLDAC[NumChannels] = {AD5697_Offset, AD5697_Freq};
 
     return pinLDAC[ch];
 }

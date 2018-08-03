@@ -7,6 +7,8 @@ class FreqMeter
 public:
     static void Init();
 
+    static void Update();
+
     static void SetResist(FreqResist resist);
 
     static void SetCouple(FreqCouple couple);

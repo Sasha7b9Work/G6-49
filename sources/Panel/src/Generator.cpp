@@ -3,9 +3,11 @@
 #include "Log.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
+#include "FrequencyMeter/FrequencyMeter.h"
 #include "Command.h"
 #include "structs.h"
 #include <string.h>
+#include <stdlib.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,6 +45,44 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 {
     uint8 buffer[3] = {SET_FORM_WAVE, (uint8)ch, form.ToValue()};
     SendToInterface(buffer, 3);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::Update()
+{
+    /// Пишем сервисную команду для запроса данных от основной платы
+    uint8 command = WRITE_SERVICE_COMMAND;
+    SendToInterface(&command, 1);
+
+    /// Считываем количество байт
+    uint size = 0;
+    ReadFromInterface((uint8 *)&size, 4);
+
+    /// Читаем байты
+    if(size != 0)
+    {
+        uint8 *buffer = (uint8 *)malloc(size);
+
+        ReadFromInterface(buffer, (int)size);
+
+        ExecuteCommand(buffer, (int)size);
+
+        free(buffer);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::ExecuteCommand(uint8 *buffer, int)
+{
+    if(buffer[0] == FREQ_MEASURE)
+    {
+        BitSet32 data;
+        for(int i = 0; i < 4; i++)
+        {
+            data.byte[i] = buffer[i + 1];
+        }
+        FrequencyMeter::SetMeasure(data.word);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +127,7 @@ void Generator::SendToInterface(uint8 *data, int size)
         volatile CommandWrite command = (CommandWrite)buffer[0];
         volatile Channel ch = (Channel)buffer[1];
 
-        CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
+        CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                                // Первая передача
 
         do
         {
@@ -99,6 +139,35 @@ void Generator::SendToInterface(uint8 *data, int size)
         command = command;
         ch = ch;
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::ReadFromInterface(uint8 *buffer, int size)
+{
+    // Даём запрос на чтение size байт
+    static uint8 trans[5] = {READ_COMMAND};
+    BitSet32 data;
+    data.word = (uint)size;
+    for(int i = 0; i < 4; i++)
+    {
+        trans[i + 1] = data.byte[i];
+    }
+
+    SendToInterface(trans, 5);
+
+    static uint8 recv1[LENGTH_SPI_BUFFER];  // Буфер приёма1
+    static uint8 recv2[LENGTH_SPI_BUFFER];  // Буфер приёма2
+
+    do
+    {
+        memset(recv1, 0, LENGTH_SPI_BUFFER);
+        memset(recv2, 0, LENGTH_SPI_BUFFER);
+        CPU::SPI4_::Receive(recv1, LENGTH_SPI_BUFFER, 5);
+        CPU::SPI4_::Receive(recv2, LENGTH_SPI_BUFFER, 5);
+
+    } while (memcmp(recv1, recv2, LENGTH_SPI_BUFFER) != 0);
+
+    memcpy(buffer, recv1, (uint)size);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

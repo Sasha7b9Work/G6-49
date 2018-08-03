@@ -41,6 +41,8 @@ enum CommandWrite
     MODE_DEBUG              = 10,   ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
     SET_DELAY               = 11,   ///< Задержка
     WRITE_REGISTER          = 12,   ///< Занести значение в регистр
+                                    //   0
+    READ_COMMAND            = 13,   ///< READ_COMMAND                                     /* Используется для приёма данных от основного процессора */
     NUM_COMMAND_WRITE,
     COMMAND_NONE
 };
@@ -126,8 +128,10 @@ struct Register
 /// Возможные команды, принимаемые от основного процессора
 enum CommandRead
 {
-    READ_SERVICE_COMMAND,   ///< Служебная команда. Используется для того, чтобы можно было посылать данные основному процессору
-    READ_POINTS             ///< Принимает точки произвольного сигнала
+    READ_POINTS         = 0,   ///< Принимает точки произвольного сигнала
+                               //   0            1...4
+    FREQ_MEASURE        = 1,   ///< FREQ_MEASURE RESULT                                                          /* Результат измерения частотомера */
+    NUM_COMMAND_READ
 };
 
 #define LENGTH_SPI_BUFFER   10

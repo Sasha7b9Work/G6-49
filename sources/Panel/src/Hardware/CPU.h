@@ -78,6 +78,8 @@ public:
         static void Transmit(uint8 *buffer, uint16 size, uint timeOut);
         /// Переслать массив данных с одновременным приёмом второго массива
         static void TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut);
+        /// Принять массив данных
+        static void Receive(uint8 *recv, uint16 size, uint timeOut);
         /// Возвращает true, если интерфейс занят - процессор не может приниммать команды
         static bool IsBusy();
     };

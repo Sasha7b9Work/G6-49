@@ -14,6 +14,8 @@ class Generator
 {
 public:
     static void Reset();
+    /// Эта функция вызывается в цилке для приёма сообщений от прибора
+    static void Update();
 
     static void EnableChannel(Channel ch, bool enable);
 
@@ -31,7 +33,11 @@ private:
     
     static void SendToInterface(uint8 *buffer, int size);
 
+    static void ReadFromInterface(uint8 *buffer, int size);
+
     static void MasterSynchro();
+
+    static void ExecuteCommand(uint8 *buffer, int size);
 };
 
 /** @}  @} */

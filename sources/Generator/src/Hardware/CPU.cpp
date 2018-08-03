@@ -10,7 +10,7 @@ struct StructPort
     uint16        pin;
 };
 
-static const StructPort registers[NumPins] =
+static const StructPort registers[NumPinsWrite] =
 {
     {GPIOF, GPIO_PIN_6},    // AD9952_SPI3_CSA
     {GPIOF, GPIO_PIN_7},    // AD9952_SPI3_CSB
@@ -35,7 +35,8 @@ static const StructPort registers[NumPins] =
     {GPIOG, GPIO_PIN_8},    // FPGA_A3_RG
     {GPIOE, GPIO_PIN_14},   // FREQ_METER_RESIST
     {GPIOE, GPIO_PIN_15},   // FREQ_METER_COUPLE
-    {GPIOB, GPIO_PIN_10}    // FREQ_METER_FILTR
+    {GPIOB, GPIO_PIN_10},   // FREQ_METER_FILTR
+    {GPIOC, GPIO_PIN_1}     // FREQ_METER_CLK
 };
 
 
@@ -124,7 +125,7 @@ void CPU::InitPins()
         0
     };
 
-    for (int i = 0; i < NumPins; ++i)
+    for (int i = 0; i < NumPinsWrite; ++i)
     {
         isGPIO.Pin = registers[i].pin;
         HAL_GPIO_Init(registers[i].port, &isGPIO);
@@ -133,7 +134,7 @@ void CPU::InitPins()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::WritePin(GeneratorPin pin, bool set)
+void CPU::WritePin(GeneratorWritePin pin, bool set)
 {
     HAL_GPIO_WritePin(registers[pin].port, registers[pin].pin, set ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }

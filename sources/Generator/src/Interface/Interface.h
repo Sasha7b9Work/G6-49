@@ -9,6 +9,8 @@ public:
     static void Init();
 
     static void ProcessingCommand();
+    /// ѕослать в панель измеренное значение частоты
+    static void SendFrequency(uint frequency);
 
 private:
 

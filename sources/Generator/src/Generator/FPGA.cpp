@@ -353,7 +353,7 @@ void FPGA::WriteRegister(uint8 reg, uint value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteAddress(uint8 reg)
 {
-    static const GeneratorPin pins[] = {FPGA_A0_RG, FPGA_A1_RG, FPGA_A2_RG, FPGA_A3_RG};
+    static const GeneratorWritePin pins[] = {FPGA_A0_RG, FPGA_A1_RG, FPGA_A2_RG, FPGA_A3_RG};
 
     for (int i = 0; i < 4; i++)
     {

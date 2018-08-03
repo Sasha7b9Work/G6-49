@@ -5,7 +5,7 @@
 #include "Generator/Multiplexor.h"
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
-#include "Hardware/FreqMeter.h"
+#include "FreqMeter/FreqMeter.h"
 #include "Command.h"
 #include "structs.h"
 #include <string.h>

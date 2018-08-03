@@ -31,6 +31,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{fbc513a4-c409-4ed9-b1f6-b3652fdc04eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FreqMeter">
+      <UniqueIdentifier>{5c2d5a42-6e3b-4b55-ac0c-ef491a2cee48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -174,11 +177,11 @@
     <ClInclude Include="..\..\Generator\src\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\FreqMeter.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\common\CommonTypes.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Generator\src\FreqMeter\FreqMeter.h">
+      <Filter>FreqMeter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,8 +269,8 @@
     <ClCompile Include="..\..\Generator\src\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\FreqMeter.cpp">
-      <Filter>Hardware</Filter>
+    <ClCompile Include="..\..\Generator\src\FreqMeter\FreqMeter.cpp">
+      <Filter>FreqMeter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

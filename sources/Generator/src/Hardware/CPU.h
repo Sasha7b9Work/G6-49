@@ -3,7 +3,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-enum GeneratorPin
+/// Порты записи
+enum GeneratorWritePin
 {
     AD9952_SPI3_CSA,
     AD9952_SPI3_CSB,
@@ -29,7 +30,16 @@ enum GeneratorPin
     FREQ_METER_RESIST,
     FREQ_METER_COUPLE,
     FREQ_METER_FILTR,
-    NumPins
+    FREQ_METER_CLK,     ///< Пин формирования тактов чтения измеренного значения
+    NumPinsWrite
+};
+
+/// Порты чтения
+enum GeneratorRedPins
+{
+    FREQ_METER_DRY,     ///< Пин чтения готовности частотомера к выдаче данных
+    FREQ_METER_DATA,    ///< Пин чтения данных
+    NumPinsRead
 };
 
 
@@ -43,7 +53,7 @@ public:
     /// Установить на PA2 признак того, что процессор свободен
     static void SetReady();
     
-    static  void WritePin(GeneratorPin pin, bool set);
+    static  void WritePin(GeneratorWritePin pin, bool set);
 
 private:
 

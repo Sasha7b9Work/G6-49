@@ -4,6 +4,7 @@
 #include "Interface/Interface.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "FreqMeter/FreqMeter.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -21,6 +22,7 @@ int main()
     while (1)
     {
         Interface::ProcessingCommand();
+        FreqMeter::Update();
 
 /*        
         if(HAL_GetTick() - prevTime > 100)
