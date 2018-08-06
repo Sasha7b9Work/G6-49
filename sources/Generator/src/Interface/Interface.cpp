@@ -67,17 +67,17 @@ void Interface::ProcessingCommand()
 
         do
         {
+            /*
             if(!first)
             {
                 HAL_SPI_DeInit(&hSPI1);
                 HAL_SPI_Init(&hSPI1);
             }
             first = false;
+            */
             memcpy(prevBuffer, buffer, LENGTH_SPI_BUFFER);
             res = HAL_SPI_TransmitReceive(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER, 5);
-        } while(memcmp(buffer, prevBuffer, LENGTH_SPI_BUFFER) != 0     // Пока не совпадут пва принятых буфера
-                && res != HAL_TIMEOUT);             // Или не истечёт время ожидания ответа, что свидетельствует о том, что передатчик не передаёт
-                                                    // данные, т.е. последние принятые данные правильные
+        } while(res != HAL_TIMEOUT);        // 
 
         ProcessCommand();
         CPU::SetReady();

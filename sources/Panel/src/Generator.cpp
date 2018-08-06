@@ -123,7 +123,8 @@ void Generator::SendToInterface(uint8 *data, int size)
     };
     
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
-    static uint8 recv1[LENGTH_SPI_BUFFER];          // Это массив для принимаемых данных
+    static uint8 recv1[LENGTH_SPI_BUFFER];          // Это 1-й массив для принимаемых данных
+    static uint8 recv2[LENGTH_SPI_BUFFER];          // Это 2-й массив для принимаемых данных
 
     for(int i = 0; i < LENGTH_SPI_BUFFER; i++)
     {
@@ -132,14 +133,12 @@ void Generator::SendToInterface(uint8 *data, int size)
 
     memcpy(trans, data, (uint)size);
     
-    CPU::SPI4_::Transmit(trans, LENGTH_SPI_BUFFER, 10);                     // Первая передача
-
     do
     {
-        memset(recv1, 0, LENGTH_SPI_BUFFER);                                // Очищаем приёмный буфер
         CPU::SPI4_::TransmitReceive(trans, recv1, LENGTH_SPI_BUFFER, 5);
+        CPU::SPI4_::TransmitReceive(trans, recv2, LENGTH_SPI_BUFFER, 5);
     }
-    while (memcmp(trans, recv1, LENGTH_SPI_BUFFER) != 0);
+    while (memcmp(recv1, recv2, LENGTH_SPI_BUFFER) != 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
