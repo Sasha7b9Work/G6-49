@@ -141,6 +141,11 @@ void Interface::CommandEnable()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandReadData()
+{
+}
+
+/*
 void Interface::CommandWriteService()
 {
     if(freqForSend != 0)
@@ -158,6 +163,7 @@ void Interface::CommandWriteService()
         freqForSend = 0;
     }
 }
+*/
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandFormWave()

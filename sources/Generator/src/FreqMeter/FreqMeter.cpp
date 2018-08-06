@@ -48,8 +48,9 @@ void FreqMeter::Update()
                 data += (1 << i);
             }
             CPU::WritePin(FREQ_METER_CLK, true);
-            Timer::PauseOnTime(1);
+            Timer::PauseOnTicks(45);
             CPU::WritePin(FREQ_METER_CLK, false);
+            Timer::PauseOnTime(1);
         }
 
         Interface::SendFrequency(111111);
