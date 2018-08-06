@@ -48,7 +48,11 @@ void FreqMeter::Update()
                 data += (1 << i);
             }
             CPU::WritePin(FREQ_METER_CLK, true);
-            Timer::PauseOnTicks(45);
+            volatile int j = 0;
+            while(j < 25)
+            {
+                j++;
+            }
             CPU::WritePin(FREQ_METER_CLK, false);
             Timer::PauseOnTime(1);
         }

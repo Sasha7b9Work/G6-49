@@ -27,8 +27,6 @@ public:
 
     static void LoadRegister(Name_Register reg, uint value);
 
-    static void TestSend();
-
 private:
     
     static void SendToInterface(uint8 *buffer, int size);

@@ -7,6 +7,8 @@
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Command.h"
 #include "structs.h"
+
+#include <math.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -109,32 +111,35 @@ void Generator::SetParameter(Channel ch, Type_WaveParameter param, float value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SendToInterface(uint8 *data, int size)
 {
-    while (CPU::SPI4_::IsBusy())
+    /*
+        Алгоритм передачи.
+        Передача совмещена с приёмом.
+        В случае, если у генератора нет данных для передачи, он возвращает принятую информацию.
+        В случае наличия информации для передачи он передаёт её.
+    */
+
+    while (CPU::SPI4_::IsBusy())                    // Ждём, пока генератор будет готов к приёму информации
     {
     };
     
-    if (size > LENGTH_SPI_BUFFER)
+    static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
+    static uint8 recv1[LENGTH_SPI_BUFFER];          // Это массив для принимаемых данных
+
+    for(int i = 0; i < LENGTH_SPI_BUFFER; i++)
     {
-        LOG_WRITE("слишком маленький буфер");
+        trans[i] = (uint8)rand();
     }
-    else
+
+    memcpy(trans, data, (uint)size);
+    
+    CPU::SPI4_::Transmit(trans, LENGTH_SPI_BUFFER, 10);                     // Первая передача
+
+    do
     {
-        static uint8 buffer[LENGTH_SPI_BUFFER];         // Это массив для передаваемых данных
-        static uint8 recvBuffer[LENGTH_SPI_BUFFER];     // Это массив для принимаемых данных
-
-        memset(buffer, 0, LENGTH_SPI_BUFFER);
-        memcpy(buffer, data, (uint)size);
-        
-        CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                                // Первая передача
-
-        do
-        {
-            memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
-            CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
-        }
-        while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
-
+        memset(recv1, 0, LENGTH_SPI_BUFFER);                                // Очищаем приёмный буфер
+        CPU::SPI4_::TransmitReceive(trans, recv1, LENGTH_SPI_BUFFER, 5);
     }
+    while (memcmp(trans, recv1, LENGTH_SPI_BUFFER) != 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,44 +159,6 @@ void Generator::ReadFromInterface(uint8 *buffer, int)
         CPU::SPI4_::TransmitReceive(send, recv, LENGTH_SPI_BUFFER, 5);
         CPU::SPI4_::TransmitReceive(send, buffer, LENGTH_SPI_BUFFER, 5);
     } while (memcmp(recv, buffer, LENGTH_SPI_BUFFER) != 0);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TestSend()
-{
-    uint8 data[3] = {ENABLE_CHANNEL, 0, 1};
-    int size = 3;
-
-    while (CPU::SPI4_::IsBusy())
-    {
-    };
-
-    if (size > LENGTH_SPI_BUFFER)
-    {
-        LOG_WRITE("слишком маленький буфер");
-    }
-    else
-    {
-        static uint8 buffer[LENGTH_SPI_BUFFER];         // Это массив для передаваемых данных
-        static uint8 recvBuffer[LENGTH_SPI_BUFFER];     // Это массив для принимаемых данных
-
-        memset(buffer, 0, LENGTH_SPI_BUFFER);
-        memcpy(buffer, data, (uint)size);
-
-        volatile CommandPanel command = (CommandPanel)buffer[0];
-        volatile Channel ch = (Channel)buffer[1];
-
-        CPU::SPI4_::Transmit(buffer, LENGTH_SPI_BUFFER, 10);                               // Первая передача
-    
-        do
-        {
-            memset(recvBuffer, 0, LENGTH_SPI_BUFFER);                                       // Очищаем приёмный буфер
-            CPU::SPI4_::TransmitReceive(buffer, recvBuffer, LENGTH_SPI_BUFFER, 5);
-        } while (memcmp(buffer, recvBuffer, LENGTH_SPI_BUFFER) != 0);
-
-        command = command;
-        ch = ch;
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
