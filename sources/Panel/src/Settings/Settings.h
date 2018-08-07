@@ -52,6 +52,7 @@ extern const PageBase pInput;
 #define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED))
 #define FREQ_INTERVAL           ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
 #define FREQ_MEASURE            ((FreqMeasure)BIT_FL3(BIT_FREQ_MEASURE))
+#define FREQ_MEASURE_IS_FREQ    (FREQ_MEASURE == FreqMeasure_Freq)
 #define FREQ_AVE_PERIOD         (set.freq_avePeriod)
 #define FREQ_BILLING_TIME       (set.freq_billingTime)
 #define FREQ_TIME_STAMPS        (set.freq_timeStamps)

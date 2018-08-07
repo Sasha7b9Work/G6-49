@@ -18,6 +18,14 @@ void FrequencyMeter::Draw()
 
     Painter::SetColor(Color::FILL);
     Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "F = %d", frequency);
+
+    if(FREQ_MEASURE_IS_FREQ)
+    {
+
+    }
+    else
+    {
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
