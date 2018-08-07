@@ -307,12 +307,13 @@ uint StringToBin32(char buffer[33])
 
     uint size = strlen(buffer);
 
-    for(uint i = 0; i < size; i++)
+    char *pointer = buffer;
+
+    for(int i = size - 1; i >= 0; i--)
     {
-        result <<= 1;
-        if(buffer[i] != '0')
+        if(*pointer++ != '0')
         {
-            ++result;
+            _SET_BIT(result, i);
         }
     }
 

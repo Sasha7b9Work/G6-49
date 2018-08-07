@@ -333,7 +333,7 @@ void FPGA::WriteRegister(uint8 reg, uint value)
         32, // RG6_DurationImpulseA,
         32, // RG7_PeriodImpulseB,
         32, // RG8_DurationImpulseB,
-        12  // RG9_FreqMeter
+        13  // RG9_FreqMeter
     };
 
     WriteAddress(reg);
