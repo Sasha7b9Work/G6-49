@@ -2016,6 +2016,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter2.h</FilePath>
             </File>
+            <File>
+              <FileName>PageFrequencyCounter3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFrequencyCounter3.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFrequencyCounter3.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageFrequencyCounter3.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -51,6 +51,15 @@ enum FreqMeasure
     FreqMeasure_Period
 };
 
+/// Число усредняемых период в режиме измерения периода сигнала
+enum FreqAvePeriod
+{
+    FreqAvePeriod_1,
+    FreqAvePeriod_10,
+    FreqAvePeriod_100,
+    FreqAvePeriod_1000,
+    FreqAvePeriod_10000
+};
 
 float MinValue(Type_WaveParameter param);
 float MaxValue(Type_WaveParameter param);

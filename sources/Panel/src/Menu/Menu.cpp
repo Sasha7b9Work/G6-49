@@ -11,6 +11,7 @@
 #include "Menu/Pages/PageSettings2.h"
 #include "Menu/Pages/PageFrequencyCounter.h"
 #include "Menu/Pages/PageFrequencyCounter2.h"
+#include "Menu/Pages/PageFrequencyCounter3.h"
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/PageDebug.h"
 #include "Menu/Pages/PageUSB.h"
@@ -29,6 +30,7 @@ const Page *pages[NUM_PAGES] =
     PageSignals2::pointer,
     PageRegisters::pointer,
     PageFrequencyCounter::pointer,
+    PageFrequencyCounter3::pointer,
     PageFrequencyCounter2::pointer,
     PageUSB::pointer,
     PageService::pointer,

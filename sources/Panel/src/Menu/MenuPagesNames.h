@@ -11,6 +11,7 @@ enum NamePage
     Page_Debug,
     Page_FrequencyCounter,
     Page_FrequencyCounter2,
+    Page_FrequencyCounter3,
     Page_USB,
     PageSB_Input,
     Page_Registers,

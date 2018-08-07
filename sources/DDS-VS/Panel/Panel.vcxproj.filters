@@ -246,6 +246,9 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -510,6 +513,9 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
   </ItemGroup>

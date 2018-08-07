@@ -24,8 +24,6 @@ extern const PageBase pInput;
 
 #define CURRENT_PARAMETER(form) (set.sig_parameter[form.ToValue()])
 
-#define BILLING_TIME            (set.freq_billingTime)
-
 #define BIT_FL1(numBit)  ((FLAG_1 >> numBit) & 0x01)
 #define BIT_FL2(numBit)  ((FLAG_2 >> numBit) & 0x01)
 #define BIT_FL3(numBit)  ((FLAG_3 >> numBit) & 0x01)
@@ -54,7 +52,8 @@ extern const PageBase pInput;
 #define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED))
 #define FREQ_INTERVAL           ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
 #define FREQ_MEASURE            ((FreqMeasure)BIT_FL3(BIT_FREQ_MEASURE))
-
+#define FREQ_AVE_PERIOD         (set.freq_avePeriod)
+#define BILLING_TIME            (set.freq_billingTime)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -71,14 +70,15 @@ public:
         {
         }cal;
     };
-    col_val            disp_Colors[32];                ///< Цвета
-    WaveForm           sig_form[NumChannels];          ///< Текущая выбранная форма сигнала
-    Type_WaveParameter sig_parameter[NumForms];        ///< Текущий выбранный параметр сигнала
-    int8               menu_currentPage;               ///< Отображаемая страница меню
-    Page*              menu_page;                      ///< Если активна страница не из главного меню, то здесь её адрес
-    int8               menu_posActItem[NumPages];      ///< Позиция активного пункта меню для каждой страницы
-    int8               menu_currentSubPage[NumPages];  ///< Номер текущей подстраницы для каждой страницы
-    BillingTime        freq_billingTime;               ///< Время счёта
+    col_val            disp_Colors[32];                 ///< Цвета
+    WaveForm           sig_form[NumChannels];           ///< Текущая выбранная форма сигнала
+    Type_WaveParameter sig_parameter[NumForms];         ///< Текущий выбранный параметр сигнала
+    int8               menu_currentPage;                ///< Отображаемая страница меню
+    Page*              menu_page;                       ///< Если активна страница не из главного меню, то здесь её адрес
+    int8               menu_posActItem[NumPages];       ///< Позиция активного пункта меню для каждой страницы
+    int8               menu_currentSubPage[NumPages];   ///< Номер текущей подстраницы для каждой страницы
+    BillingTime        freq_billingTime;                ///< Время счёта
+    FreqAvePeriod      freq_avePeriod;                  ///< Число усредняемых периодов в режиме измерения периода
 
 #define FLAG_1      set.flag1
     uint8           flag1;

@@ -49,11 +49,12 @@ static const Settings defSet =
         Frequency,
         Frequency
     },
-    0,                   // menu_currentPage
-    (Page*)0,            // menu_page
-    {0},                 // menu_posActItem[]
-    {0},                 // menu_currentSubPage[]
-    BillingTime_1ms,     // freq_billingTime
+    0,                  // menu_currentPage
+    (Page*)0,           // menu_page
+    {0},                // menu_posActItem[]
+    {0},                // menu_currentSubPage[]
+    BillingTime_1ms,    // freq_billingTime
+    FreqAvePeriod_1,    // freq_avePeriod
 
     BINARY_U8(00001100), // flag1
 //            ||||||||------ 0 BIT_PARITY         Parity_Off
