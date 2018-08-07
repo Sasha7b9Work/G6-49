@@ -57,7 +57,7 @@ void FreqMeter::Update()
             Timer::PauseOnTime(1);
         }
 
-        Interface::SendFrequency(111111);
+        Interface::SendFrequency(data);
     }
 }
 

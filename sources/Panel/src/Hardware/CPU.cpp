@@ -22,7 +22,7 @@ static SPI_HandleTypeDef handleSPI4 =
         SPI_POLARITY_HIGH,
         SPI_PHASE_2EDGE,
         SPI_NSS_SOFT,
-        SPI_BAUDRATEPRESCALER_4,
+        SPI_BAUDRATEPRESCALER_8,
         SPI_FIRSTBIT_MSB,
         SPI_TIMODE_DISABLED,
         SPI_CRCCALCULATION_DISABLED,
@@ -105,7 +105,11 @@ void CPU::SPI4_::Init()
 void CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
 #ifndef OPEN
-    HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
+    HAL_StatusTypeDef res =  HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
+    if (res != HAL_OK)
+    {
+        res = res;
+    }
 #endif
 }
 

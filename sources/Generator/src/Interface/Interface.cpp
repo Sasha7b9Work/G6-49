@@ -22,7 +22,7 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
         SPI_POLARITY_HIGH,              // Init.CLKPolarity
         SPI_PHASE_2EDGE,                // Init.CLKPhase
         SPI_NSS_SOFT,                   // Init.NSS
-        SPI_BAUDRATEPRESCALER_2,        // Init.BaudRatePrescaler
+        SPI_BAUDRATEPRESCALER_8,        // Init.BaudRatePrescaler
         SPI_FIRSTBIT_MSB,               // Init.FirstBit
         SPI_TIMODE_DISABLED,            // Init.TIMode
         SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
@@ -55,33 +55,25 @@ void Interface::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ProcessingCommand()
 {
-    HAL_StatusTypeDef res = HAL_SPI_Receive(&hSPI1, buffer, LENGTH_SPI_BUFFER, 10);
+    CPU::SetReady();
+
+    uint8 trans[LENGTH_SPI_BUFFER] = {0};
+
+    HAL_StatusTypeDef res = HAL_SPI_TransmitReceive(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER, 10);
     
     if (res == HAL_OK)
     {
-       
         CPU::SetBusy();
 
-        static uint8 prevBuffer[LENGTH_SPI_BUFFER] = {0};
-        bool first = true;
-
-        do
-        {
-            /*
-            if(!first)
-            {
-                HAL_SPI_DeInit(&hSPI1);
-                HAL_SPI_Init(&hSPI1);
-            }
-            first = false;
-            */
-            memcpy(prevBuffer, buffer, LENGTH_SPI_BUFFER);
-            res = HAL_SPI_TransmitReceive(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER, 5);
-        } while(res != HAL_TIMEOUT);        // 
-
         ProcessCommand();
-        CPU::SetReady();
     }
+    else
+    {
+        HAL_SPI_DeInit(&hSPI1);
+        HAL_SPI_Init(&hSPI1);
+    }
+
+    CPU::SetBusy();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

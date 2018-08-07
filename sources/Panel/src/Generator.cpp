@@ -53,6 +53,8 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Update()
 {
+    return;
+
     static uint timePrev = 0;
 
     if (TIME_MS - timePrev > 1000)
@@ -63,7 +65,7 @@ void Generator::Update()
 
         /// Читаем данные из генератора
         static uint8 recv[LENGTH_SPI_BUFFER];
-        ReadFromInterface(recv, LENGTH_SPI_BUFFER);
+//        ReadFromInterface(recv, LENGTH_SPI_BUFFER);
 
         if(recv[0])
         {
@@ -123,27 +125,22 @@ void Generator::SendToInterface(uint8 *data, int size)
     };
     
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
-    static uint8 recv1[LENGTH_SPI_BUFFER];          // Это 1-й массив для принимаемых данных
-    static uint8 recv2[LENGTH_SPI_BUFFER];          // Это 2-й массив для принимаемых данных
-
-    for(int i = 0; i < LENGTH_SPI_BUFFER; i++)
-    {
-        trans[i] = (uint8)rand();
-    }
+    static uint8 recv[LENGTH_SPI_BUFFER];           // Это массив для принимаемых данных
 
     memcpy(trans, data, (uint)size);
-    
-    do
+
+    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 5);
+
+    if(recv[0] != 0)
     {
-        CPU::SPI4_::TransmitReceive(trans, recv1, LENGTH_SPI_BUFFER, 5);
-        CPU::SPI4_::TransmitReceive(trans, recv2, LENGTH_SPI_BUFFER, 5);
+        ReadAndRunFromInterface();
     }
-    while (memcmp(recv1, recv2, LENGTH_SPI_BUFFER) != 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::ReadFromInterface(uint8 *buffer, int)
+void Generator::ReadAndRunFromInterface()
 {
+    return;
     while(CPU::SPI4_::IsBusy())
     {
     };
@@ -151,6 +148,7 @@ void Generator::ReadFromInterface(uint8 *buffer, int)
     static uint8 send[LENGTH_SPI_BUFFER] = {READ_DATA};
     static uint8 recv[LENGTH_SPI_BUFFER];
 
+    /*
     do 
     {
         memset(recv, 0, LENGTH_SPI_BUFFER);
@@ -158,6 +156,7 @@ void Generator::ReadFromInterface(uint8 *buffer, int)
         CPU::SPI4_::TransmitReceive(send, recv, LENGTH_SPI_BUFFER, 5);
         CPU::SPI4_::TransmitReceive(send, buffer, LENGTH_SPI_BUFFER, 5);
     } while (memcmp(recv, buffer, LENGTH_SPI_BUFFER) != 0);
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

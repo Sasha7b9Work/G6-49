@@ -28,10 +28,10 @@ public:
     static void LoadRegister(Name_Register reg, uint value);
 
 private:
-    
+    /// Заслать в генератор данные
     static void SendToInterface(uint8 *buffer, int size);
-
-    static void ReadFromInterface(uint8 *buffer, int size);
+    /// Читать и выполнять данные из генератора
+    static void ReadAndRunFromInterface();
 
     static void MasterSynchro();
 
