@@ -49,12 +49,13 @@ static const Settings defSet =
         Frequency,
         Frequency
     },
-    0,                  // menu_currentPage
-    (Page*)0,           // menu_page
-    {0},                // menu_posActItem[]
-    {0},                // menu_currentSubPage[]
-    BillingTime_1ms,    // freq_billingTime
-    FreqAvePeriod_1,    // freq_avePeriod
+    0,                      // menu_currentPage
+    (Page*)0,               // menu_page
+    {0},                    // menu_posActItem[]
+    {0},                    // menu_currentSubPage[]
+    BillingTime_1ms,        // freq_billingTime
+    FreqAvePeriod_1,        // freq_avePeriod
+    FreqTimeStamps_100kHz,  // freq_timeStamps
 
     BINARY_U8(00001100), // flag1
 //            ||||||||------ 0 BIT_PARITY         Parity_Off
@@ -66,13 +67,19 @@ static const Settings defSet =
 //            ||------------ 6 BIT_FREQ_ENABLED 
 //            |------------- 7 BIT_STATISTICS   
 
-    BINARY_U8(00010110)  // flag2
-//              ||||||------ 0 BIT_LANGUAGE       RU
-//              |||||------- 1 BIT_CHAN_A   
-//              ||||-------- 2 BIT_CHAN_B   
-//              |||--------- 3 BIT_CHANNEL        A
-//              ||---------- 4 BIT_SIZE_BYTE      8bit
-//              |----------- 5 BIT_STOP_BIT       StopBit_1
+    BINARY_U8(00010110), // flag2
+//            ||||||||------ 0 BIT_LANGUAGE       RU
+//            |||||||------- 1 BIT_CHAN_A   
+//            ||||||-------- 2 BIT_CHAN_B   
+//            |||||--------- 3 BIT_CHANNEL        A
+//            ||||---------- 4 BIT_SIZE_BYTE      8bit
+//            |||----------- 5 BIT_STOP_BIT       StopBit_1
+//            ||------------ 6 BIT_FREQ_RESIST
+//            |------------- 7 BIT_FREQ_COUPLE
+
+    BINARY_U8(00000000) // flag3
+//                  ||------ 0 BIT_FREQ_FILTR
+//                  |------- 1 BIT_FREQ_MEASURE
 };
 
 #ifdef WIN32

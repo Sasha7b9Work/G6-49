@@ -61,5 +61,15 @@ enum FreqAvePeriod
     FreqAvePeriod_10000
 };
 
+/// Метки времени
+enum FreqTimeStamps
+{
+    FreqTimeStamps_1kHz,
+    FreqTimeStamps_10kHz,
+    FreqTimeStamps_100kHz,
+    FreqTimeStamps_1MHz,
+    FreqTimeStamps_10MHz
+};
+
 float MinValue(Type_WaveParameter param);
 float MaxValue(Type_WaveParameter param);

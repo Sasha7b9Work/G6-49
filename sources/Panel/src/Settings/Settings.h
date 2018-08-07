@@ -54,6 +54,7 @@ extern const PageBase pInput;
 #define FREQ_MEASURE            ((FreqMeasure)BIT_FL3(BIT_FREQ_MEASURE))
 #define FREQ_AVE_PERIOD         (set.freq_avePeriod)
 #define BILLING_TIME            (set.freq_billingTime)
+#define FREQ_TIME_STAMPS        (set.freq_timeStamps)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -79,6 +80,7 @@ public:
     int8               menu_currentSubPage[NumPages];   ///< Номер текущей подстраницы для каждой страницы
     BillingTime        freq_billingTime;                ///< Время счёта
     FreqAvePeriod      freq_avePeriod;                  ///< Число усредняемых периодов в режиме измерения периода
+    FreqTimeStamps     freq_timeStamps;                 ///< Метки времени
 
 #define FLAG_1      set.flag1
     uint8           flag1;
