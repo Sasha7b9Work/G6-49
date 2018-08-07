@@ -71,5 +71,12 @@ enum FreqTimeStamps
     FreqTimeStamps_10MHz
 };
 
+/// Тестовый режим частотомера
+enum FreqTest
+{
+    FreqTest_Off,
+    FreqTest_On
+};
+
 float MinValue(Type_WaveParameter param);
 float MaxValue(Type_WaveParameter param);

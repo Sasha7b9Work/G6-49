@@ -55,6 +55,7 @@ extern const PageBase pInput;
 #define FREQ_AVE_PERIOD         (set.freq_avePeriod)
 #define BILLING_TIME            (set.freq_billingTime)
 #define FREQ_TIME_STAMPS        (set.freq_timeStamps)
+#define FREQ_TEST               ((FreqTest)BIT_FL3(BIT_FREQ_TEST))
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -106,8 +107,9 @@ public:
 
 #define FLAG_3      set.flag3
     uint8           flag3;
-#define BIT_FREQ_FILTR    0  ///< FreqFiltr  - ФНЧ частотомера
+#define BIT_FREQ_FILTR    0  ///< FreqFiltr   - ФНЧ частотомера
 #define BIT_FREQ_MEASURE  1  ///< FreqMeasure - измерение частоты или измерение периода
+#define BIT_FREQ_TEST     2  ///< FreqTest    - включение тестового режима
 
 
     static void Save();

@@ -6,6 +6,10 @@
 extern const PageBase pFrequencyCounter;
 Page *PageFrequencyCounter::pointer = (Page *)&pFrequencyCounter;
 
+static void OnPress_Measure(bool);
+static void OnPress_Interval(bool);
+static void OnPress_BillingTime(bool);
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_CHOICE_2(cEnableFrequencyCounter,                                                                               //--- ЧАСТОТОМЕР - ОТОБРАЖЕНИЕ ---
@@ -28,8 +32,13 @@ DEF_CHOICE_2(cMeasure,                                                          
                             "Frequency measurement",
     "Период", "Period",     "Измерение периода",
                             "Period measurement",
-    FLAG_3, BIT_FREQ_MEASURE, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_3, BIT_FREQ_MEASURE, pFrequencyCounter, FuncActive, OnPress_Measure, FuncDraw
 )
+
+static void OnPress_Measure(bool)
+{
+    PageFrequencyCounter::WriteRegisterRG9();
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2(cInterval,                                                                                        //--- ЧАСТОТОМЕР - ИНТЕРВАЛ ЗАПУСКА ---
@@ -40,8 +49,13 @@ DEF_CHOICE_2(cInterval,                                                         
                     "The measurement of the frequency meter is started at intervals of 1 second.",
     "10 с", "10 s", "Запуск процесса измерения частомера производится с интервалом 10 секунда.",
                     "The process of measuring the frequency meter is started at intervals of 10 seconds.",
-    FLAG_1, BIT_FREQ_INTERVAL, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_FREQ_INTERVAL, pFrequencyCounter, FuncActive, OnPress_Interval, FuncDraw
 )
+
+static void OnPress_Interval(bool)
+{
+    PageFrequencyCounter::WriteRegisterRG9();
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_5(cBillingTime,                                                                                          //--- ЧАСТОТОМЕР - ВРЕМЯ СЧЁТА ---
@@ -58,8 +72,13 @@ DEF_CHOICE_5(cBillingTime,                                                      
                             "The measurement duration is 1000 milliseconds.",
     "10000 мс", "10000 ms", "Длительность измерения 10000 миллисекунд.",
                             "The measurement duration is 10,000 milliseconds.",
-    BILLING_TIME, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
+    BILLING_TIME, pFrequencyCounter, FuncActive, OnPress_BillingTime, FuncDraw
 )
+
+static void OnPress_BillingTime(bool)
+{
+    PageFrequencyCounter::WriteRegisterRG9();
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_4(pFrequencyCounter,                                                                                                     //--- ЧАСТОТОМЕР ---
@@ -72,3 +91,8 @@ DEF_PAGE_4(pFrequencyCounter,                                                   
     cBillingTime,
     Page_FrequencyCounter, 0, FuncActive, FuncPress, FuncOnKey
 )
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void PageFrequencyCounter::WriteRegisterRG9()
+{
+}

@@ -1,10 +1,15 @@
 #include "PageFrequencyCounter3.h"
+#include "PageFrequencyCounter.h"
 #include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pFrequencyCounte3;
 Page *PageFrequencyCounter3::pointer = (Page *)&pFrequencyCounte3;
+
+static void OnPress_Test(bool);
+static void OnPress_TimeStamps(bool);
+static void OnPress_AvePeriod(bool);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,8 +27,13 @@ DEF_CHOICE_5(cAvePeriod,                                                        
                         "Measure to produce for a thousand periods",
     "10000", "10000",   "Измерения производить по десяти тысячам периодов",
                         "Measurements are made for ten thousand periods",
-    FREQ_AVE_PERIOD, pFrequencyCounte3, FuncActive, FuncChangedChoice, FuncDraw
+    FREQ_AVE_PERIOD, pFrequencyCounte3, FuncActive, OnPress_AvePeriod, FuncDraw
 )
+
+static void OnPress_AvePeriod(bool)
+{
+    PageFrequencyCounter::WriteRegisterRG9();
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_5(cTimeStamps,                                                                                       //--- ЧАСТОТОМЕР 3 - МЕТКИ ВРЕМЕНИ ---
@@ -35,15 +45,36 @@ DEF_CHOICE_5(cTimeStamps,                                                       
     "100 кГц",  "100 kHz",  "", "",
     "1 МГц",    "1 MHz",    "", "",
     "10 МГц",   "10 MHz",   "", "",
-    FREQ_TIME_STAMPS, pFrequencyCounte3, FuncActive, FuncChangedChoice, FuncDraw
+    FREQ_TIME_STAMPS, pFrequencyCounte3, FuncActive, OnPress_TimeStamps, FuncDraw
 )
 
+static void OnPress_TimeStamps(bool)
+{
+    PageFrequencyCounter::WriteRegisterRG9();
+}
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_2(pFrequencyCounte3,                                                                                                   //--- ЧАСТОТОМЕР 3 ---
+DEF_CHOICE_2(cTest,                                                                                                      //--- ЧАСТОТОМЕР 3 - ТЕСТ ---
+    "ТЕСТ", "TEST",
+    "Включение/отключение тестового режима",
+    "Enable/disable test mode",
+    DISABLED_RU, DISABLED_EN, "", "",
+    ENABLED_RU,  ENABLED_EN,  "", "",
+    FLAG_3, BIT_FREQ_TEST, pFrequencyCounte3, FuncActive, OnPress_Test, FuncDraw
+)
+
+static void OnPress_Test(bool)
+{
+    PageFrequencyCounter::WriteRegisterRG9();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_3(pFrequencyCounte3,                                                                                                   //--- ЧАСТОТОМЕР 3 ---
     "ЧАСТОТОМЕР 3", "FREQUENCY COUNTER 3",
     "Управление функциями частотомера",
     "Control of frequency meter functions",
     cAvePeriod,
     cTimeStamps,
-    Page_FrequencyCounter3, 0, FuncActive, FuncPress
+    cTest,
+    Page_FrequencyCounter3, 0, FuncActive, FuncPress, FuncOnKey
 )
