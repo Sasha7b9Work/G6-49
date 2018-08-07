@@ -59,13 +59,21 @@ void Interface::ProcessingCommand()
 
     uint8 trans[LENGTH_SPI_BUFFER] = {0};
 
-    HAL_StatusTypeDef res = HAL_SPI_TransmitReceive(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER, 10);
-    
-    if (res == HAL_OK)
+    if (freqForSend != 0)
+    {
+        trans[0] = FREQ_MEASURE;
+    }
+   
+    if (HAL_SPI_TransmitReceive(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER, 10) == HAL_OK)
     {
         CPU::SetBusy();
 
         ProcessCommand();
+
+        if (trans[0] != 0)
+        {
+            SendToInterface(trans);
+        }
     }
     else
     {
@@ -77,12 +85,22 @@ void Interface::ProcessingCommand()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::WriteToInterface(uint8 *data, int size)
+void Interface::SendToInterface(uint8 *trans)
 {
-    uint8 trans[LENGTH_SPI_BUFFER];
-    memcpy(trans, data, (uint)size);
+    BitSet32 data;
+    data.word = freqForSend;
+    for (int i = 0; i < 4; i++)
+    {
+        trans[1 + i] = data.byte[i];
+    }
 
-    HAL_SPI_Transmit(&hSPI1, trans, LENGTH_SPI_BUFFER, 10);
+    CPU::SetReady();
+
+    uint8 recv[LENGTH_SPI_BUFFER];
+
+    HAL_SPI_TransmitReceive(&hSPI1, trans, recv, LENGTH_SPI_BUFFER, 10);
+
+    CPU::SetBusy();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

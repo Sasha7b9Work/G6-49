@@ -32,7 +32,7 @@ private:
 
     static void CommandWriteRegister();
 
-    static void WriteToInterface(uint8 *buffer, int size);
+    static void SendToInterface(uint8 *trans);
     /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
 };

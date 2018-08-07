@@ -53,28 +53,16 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Update()
 {
-    return;
-
     static uint timePrev = 0;
 
-    if (TIME_MS - timePrev > 1000)
+    if(TIME_MS - timePrev > 100)
     {
-        while (CPU::SPI4_::IsBusy())
-        {
-        };
+        uint8 trans[LENGTH_SPI_BUFFER] = {0};
 
-        /// Читаем данные из генератора
-        static uint8 recv[LENGTH_SPI_BUFFER];
-//        ReadFromInterface(recv, LENGTH_SPI_BUFFER);
-
-        if(recv[0])
-        {
-            ExecuteCommand(recv, LENGTH_SPI_BUFFER);
-        }
+        SendToInterface(trans, LENGTH_SPI_BUFFER);
 
         timePrev = TIME_MS;
-    }
-}
+    }}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::ExecuteCommand(uint8 *buffer, int)
@@ -129,34 +117,36 @@ void Generator::SendToInterface(uint8 *data, int size)
 
     memcpy(trans, data, (uint)size);
 
-    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 5);
+    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 5); // Передаём данные
 
-    if(recv[0] != 0)
+    if(recv[0] != 0)                    // Если первый принятый байт не равен нулю, то у генератора есть данные для передачи
     {
-        ReadAndRunFromInterface();
+        ReadAndRunFromInterface();      // Принимаем их
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::ReadAndRunFromInterface()
 {
-    return;
     while(CPU::SPI4_::IsBusy())
     {
-    };
+    }
 
-    static uint8 send[LENGTH_SPI_BUFFER] = {READ_DATA};
-    static uint8 recv[LENGTH_SPI_BUFFER];
+    uint8 trans[LENGTH_SPI_BUFFER] = {0};
+    uint8 recv[LENGTH_SPI_BUFFER];
 
-    /*
-    do 
+    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 5);
+
+    if(recv[0] == FREQ_MEASURE)
     {
-        memset(recv, 0, LENGTH_SPI_BUFFER);
-        memset(buffer, 0, LENGTH_SPI_BUFFER);
-        CPU::SPI4_::TransmitReceive(send, recv, LENGTH_SPI_BUFFER, 5);
-        CPU::SPI4_::TransmitReceive(send, buffer, LENGTH_SPI_BUFFER, 5);
-    } while (memcmp(recv, buffer, LENGTH_SPI_BUFFER) != 0);
-    */
+        BitSet32 data;
+        for(int i = 0; i < 4; i++)
+        {
+            data.byte[i] = recv[1 + i];
+        }
+
+        FrequencyMeter::SetMeasure(data.word);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
