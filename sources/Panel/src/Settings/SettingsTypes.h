@@ -44,6 +44,13 @@ enum FreqInterval
     FreqInterval_10
 };
 
+/// Измерять частоту или период
+enum FreqMeasure
+{
+    FreqMeasure_Freq,
+    FreqMeasure_Period
+};
+
 
 float MinValue(Type_WaveParameter param);
 float MaxValue(Type_WaveParameter param);

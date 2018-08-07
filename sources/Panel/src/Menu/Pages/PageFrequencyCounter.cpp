@@ -20,6 +20,18 @@ DEF_CHOICE_2(cEnableFrequencyCounter,                                           
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2(cMeasure,                                                                                                //--- ЧАСТОТОМЕР - ИЗМЕРЕНИЕ ---
+    "ИЗМЕРЕНИЕ", "MEASURE",
+    "Установка режима работы",
+    "Setting the operating mode",
+    "Частота", "Frequency", "Измерение частоты",
+                            "Frequency measurement",
+    "Период", "Period",     "Измерение периода",
+                            "Period measurement",
+    FLAG_3, BIT_FREQ_MEASURE, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
+)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2(cInterval,                                                                                        //--- ЧАСТОТОМЕР - ИНТЕРВАЛ ЗАПУСКА ---
     "ИНТЕРВАЛ ЗАПУСКА", "START INTERVAL",
     "Выбор интервала запуска измерений частоты.",
@@ -32,7 +44,7 @@ DEF_CHOICE_2(cInterval,                                                         
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_5(cBillingTime,
+DEF_CHOICE_5(cBillingTime,                                                                                          //--- ЧАСТОТОМЕР - ВРЕМЯ СЧЁТА ---
     "ВРЕМЯ СЧЁТА", "BILLING TIME",
     "Выбор времени проведения измерения.",
     "Selecting the measurement time.",
@@ -49,13 +61,13 @@ DEF_CHOICE_5(cBillingTime,
     BILLING_TIME, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
 )
 
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_3(pFrequencyCounter,
+DEF_PAGE_4(pFrequencyCounter,                                                                                                     //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
     cEnableFrequencyCounter,
+    cMeasure,
     cInterval,
     cBillingTime,
     Page_FrequencyCounter, 0, FuncActive, FuncPress, FuncOnKey

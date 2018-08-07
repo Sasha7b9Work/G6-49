@@ -53,6 +53,7 @@ extern const PageBase pInput;
 #define FREQ_FILTR              ((FreqFiltr)BIT_FL3(BIT_FREQ_FILTR))
 #define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED))
 #define FREQ_INTERVAL           ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
+#define FREQ_MEASURE            ((FreqMeasure)BIT_FL3(BIT_FREQ_MEASURE))
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,6 +105,7 @@ public:
 #define FLAG_3      set.flag3
     uint8           flag3;
 #define BIT_FREQ_FILTR    0  ///< FreqFiltr  - ФНЧ частотомера
+#define BIT_FREQ_MEASURE  1  ///< FreqMeasure - измерение частоты или измерение периода
 
 
     static void Save();
