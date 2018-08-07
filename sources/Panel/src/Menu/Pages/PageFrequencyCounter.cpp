@@ -1,5 +1,6 @@
 #include "PageFrequencyCounter.h"
 #include "Settings/Settings.h"
+#include "Generator.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +73,7 @@ DEF_CHOICE_5(cBillingTime,                                                      
                             "The measurement duration is 1000 milliseconds.",
     "10000 мс", "10000 ms", "ƒлительность измерени€ 10000 миллисекунд.",
                             "The measurement duration is 10,000 milliseconds.",
-    BILLING_TIME, pFrequencyCounter, FuncActive, OnPress_BillingTime, FuncDraw
+    FREQ_BILLING_TIME, pFrequencyCounter, FuncActive, OnPress_BillingTime, FuncDraw
 )
 
 static void OnPress_BillingTime(bool)
@@ -95,4 +96,63 @@ DEF_PAGE_4(pFrequencyCounter,                                                   
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageFrequencyCounter::WriteRegisterRG9()
 {
+    uint data = 0;
+
+    //----------- –ежим работы ------------------
+
+    static const uint maskMeasure[2] = {0, 1};
+    data |= maskMeasure[FREQ_MEASURE];
+
+    //----------- „исло усредн€емых периодов ----
+
+    static const uint maskAvePeriod[5] =
+    {
+        BINARY_U8(00000000),    // 1
+        BINARY_U8(00000010),    // 10
+        BINARY_U8(00000110),    // 100
+        BINARY_U8(00001010),    // 1000
+        BINARY_U8(00001110)     // 10000
+    };
+    data |= maskAvePeriod[FREQ_AVE_PERIOD];
+
+    //---------- ¬рем€ индикации ----------------
+
+    static const uint maskInterval[2] =
+    {
+        BINARY_U8(00000000),
+        BINARY_U8(00010000)
+    };
+    data |= maskInterval[FREQ_INTERVAL];
+
+    //--------- ¬рем€ счЄта ---------------------
+
+    static const uint maskTime[5] =
+    {
+        BINARY_U8(00000000),    // 1 мс
+        BINARY_U8(00000000),    // 10 мс
+        BINARY_U8(00000000),    // 100 мс
+        BINARY_U8(00000000),    // 1 с
+        BINARY_U8(00000000)     // 10 с
+    };
+    data |= maskTime[FREQ_BILLING_TIME];
+
+    //--------- ћетки времени -------------------
+
+    static const uint maskTimeStamp[5] =
+    {
+        BINARY_U8(00001010),    // 1 к√ц
+        BINARY_U8(00000110),    // 10 к√ц
+        BINARY_U8(00000010),    // 100 к√ц
+        BINARY_U8(00000001),    // 1 ћ√ц
+        BINARY_U8(00000000)     // 10 ћ√ц
+    };
+
+    data |= (maskTimeStamp[FREQ_TIME_STAMPS] << 8);
+
+    if(FREQ_TEST)
+    {
+        _SET_BIT(data, 12);
+    }
+
+    Generator::LoadRegister(FPGA_RG9_FreqMeter, data);
 }

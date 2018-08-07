@@ -70,3 +70,5 @@ typedef void (*pFuncVB)(bool);
   (((uint8)((uint)bits / 010000000) % 010) << 7)))
 
 #define BINARY_U8( bits ) _bitset(0##bits)
+
+#define BINARY_U16(bits1, bits0) ((BINARY_U8(bits1) << 8) | (BINARY_U8(bits0)))
