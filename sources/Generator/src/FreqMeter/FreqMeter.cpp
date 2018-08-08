@@ -41,12 +41,8 @@ void FreqMeter::Update()
     if(CPU::ReadPin(FREQ_METER_DRY))
     {
         uint data = 0;
-        for(int i = 31; i >= 0; i--)
+        for(int i = 30; i >= 0; i--)
         {
-            if(CPU::ReadPin(FREQ_METER_DATA))
-            {
-                data += (1 << i);
-            }
             CPU::WritePin(FREQ_METER_CLK, true);
             volatile int j = 0;
             while(j < 25)
@@ -55,6 +51,10 @@ void FreqMeter::Update()
             }
             CPU::WritePin(FREQ_METER_CLK, false);
             Timer::PauseOnTime(1);
+            if (CPU::ReadPin(FREQ_METER_DATA))
+            {
+                data += (1 << i);
+            }
         }
 
         Interface::SendFrequency(data);

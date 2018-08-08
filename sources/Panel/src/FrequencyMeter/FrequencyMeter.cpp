@@ -23,8 +23,7 @@ void FrequencyMeter::Draw()
 
     if(FREQ_MEASURE_IS_FREQ)
     {
-        int allDigits = (int)FREQ_BILLING_TIME + 2;
-        Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "F = %s êÃö", UInt2StringThisPoint(frequency, buffer, allDigits, allDigits - 2));
+        Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "F = %s êÃö", UInt2StringThisPoint(frequency, buffer, 6, (int)FREQ_BILLING_TIME));
     }
     else
     {
