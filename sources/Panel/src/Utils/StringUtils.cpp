@@ -301,14 +301,35 @@ char *UInt2String(uint value, char buffer[20])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *UInt2StringThisPoint(uint value, char bufferOut[20], int allSymbols, int forFract)
+char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
 {
-    int fillSymbols = 0;            // Количество уже заполненных символов в строке
+    int allSymbols = allDigits + 1;         // Всего символов на 1 больше, чем десятичных знаков - ещё одно место занимает точка
 
-    while(fillSymbols != allSymbols)
+    char *pointer = bufferOut + allSymbols; // Выводить символы будем начиная с конца
+
+    *pointer-- = 0;                         // Пишем ноль в конец строки как символ её конца
+
+    while(pointer >= bufferOut)
     {
+        if(forFract == 0)
+        {
+            *pointer = '.';
+            pointer--;
+        }
+        forFract--;
+
+        uint digit = value % 10;             // Находим текущую выводимую цифру как остаток от деления на 10
+
+        value /= 10;
+
+        *pointer = (char)digit | 0x30;
+
+        pointer--;
     }
+
+    return bufferOut;
 }
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint StringToBin32(char buffer[33])
@@ -319,7 +340,7 @@ uint StringToBin32(char buffer[33])
 
     char *pointer = buffer;
 
-    for(int i = size - 1; i >= 0; i--)
+    for(int i = (int)size - 1; i >= 0; i--)
     {
         if(*pointer++ != '0')
         {

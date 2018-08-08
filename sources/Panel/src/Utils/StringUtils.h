@@ -53,7 +53,7 @@ char* UInt2String(uint value,                     ///< значение
                  char bufferOut[20] = 0         ///< сюда записывается возвращаемое значение
 );
 /// Перевести десятичное число в символьную строку длиной allDigits. После точка отстоит на forFract символов от конца
-char* UInt2StringThisPoint(uint value, char bufferOut[20], int allSymbols, int forFract);
+char* UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract);
 /// Преобразует двоичное число ,представленное строкой из нулей и единиц, в uint
 uint StringToBin32(char buffer[33]);
 /// Сравнивает две строки. Число символов берётся из str1
