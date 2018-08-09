@@ -49,15 +49,15 @@ static const Settings defSet =
         Frequency,
         Frequency
     },
-    0,                      // menu_currentPage
+    3,                      // menu_currentPage
     (Page*)0,               // menu_page
     {0},                    // menu_posActItem[]
     {0},                    // menu_currentSubPage[]
     BillingTime_1ms,        // freq_billingTime
     FreqAvePeriod_1,        // freq_avePeriod
-    FreqTimeStamps_100kHz,  // freq_timeStamps
+    FreqTimeStamps_10MHz,   // freq_timeStamps
 
-    BINARY_U8(00001100), // flag1
+    BINARY_U8(01001100), // flag1
 //            ||||||||------ 0 BIT_PARITY         Parity_Off
 //            |||||||------- 1 BIT_FREQ_INTERVAL  Interval_1
 //            ||||||-------- 2 BIT_CONSOLE      

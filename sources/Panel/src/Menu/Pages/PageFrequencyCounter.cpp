@@ -1,6 +1,7 @@
 #include "PageFrequencyCounter.h"
 #include "Settings/Settings.h"
 #include "Generator.h"
+#include "FrequencyMeter/FrequencyMeter.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,4 +156,5 @@ void PageFrequencyCounter::WriteRegisterRG9()
     }
 
     Generator::LoadRegister(FPGA_RG9_FreqMeter, data);
+    FrequencyMeter::SetInactive();
 }

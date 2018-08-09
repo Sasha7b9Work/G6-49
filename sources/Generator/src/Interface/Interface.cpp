@@ -34,7 +34,7 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 buffer[LENGTH_SPI_BUFFER];     ///< Буфер для принимаемых команд
-uint Interface::freqForSend = 0;
+uint Interface::freqForSend = MAX_UINT;
 
                                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
@@ -59,7 +59,7 @@ void Interface::ProcessingCommand()
 
     uint8 trans[LENGTH_SPI_BUFFER] = {0};
 
-    if (freqForSend != 0)
+    if (freqForSend != MAX_UINT)
     {
         trans[0] = FREQ_MEASURE;
     }
@@ -257,6 +257,7 @@ void Interface::CommandWriteRegister()
 
     case FPGA_RG9_FreqMeter:
         FPGA::WriteRegister(FPGA::RG9_FreqMeter, value);
+        freqForSend = MAX_UINT;
         break;
 
     case Multiplexor3:

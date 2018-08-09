@@ -7,6 +7,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uint FrequencyMeter::frequency = 0;
+bool FrequencyMeter::inactive = true;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,13 +18,13 @@ void FrequencyMeter::Draw()
         return;
     }
 
-    Painter::SetColor(Color::FILL);
+    Painter::SetColor(inactive ? Color::BLUE_50 : Color::FILL);
 
     char buffer[20];
 
     if(FREQ_MEASURE_IS_FREQ)
     {
-        Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "F = %s êÃö", UInt2StringThisPoint(frequency, buffer, 6, (int)FREQ_BILLING_TIME));
+        Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "F = %s êÃö", UInt2StringThisPoint(frequency, buffer, 8, (int)FREQ_BILLING_TIME));
     }
     else
     {
@@ -50,4 +51,11 @@ void FrequencyMeter::Draw()
 void FrequencyMeter::SetMeasure(uint value)
 {
     frequency = value;
+    inactive = false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FrequencyMeter::SetInactive()
+{
+    inactive = true;
 }

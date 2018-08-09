@@ -39,3 +39,5 @@ typedef void(*pFuncVCh)(Channel);
 #define uint32_t uint
 
 #endif
+
+#define MAX_UINT ((uint)-1)
