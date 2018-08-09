@@ -129,10 +129,10 @@ void PageFrequencyCounter::WriteRegisterRG9()
     static const uint maskTime[5] =
     {
         BINARY_U8(00000000),    // 1 мс
-        BINARY_U8(00000000),    // 10 мс
-        BINARY_U8(00000000),    // 100 мс
-        BINARY_U8(00000000),    // 1 с
-        BINARY_U8(00000000)     // 10 с
+        BINARY_U8(00100000),    // 10 мс
+        BINARY_U8(01000000),    // 100 мс
+        BINARY_U8(01100000),    // 1 с
+        BINARY_U8(10000000)     // 10 с
     };
     data |= maskTime[FREQ_BILLING_TIME];
 
