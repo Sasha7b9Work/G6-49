@@ -61,7 +61,7 @@ void Interface::ProcessingCommand()
 
     if (freqForSend != MAX_UINT)
     {
-        trans[0] = FREQ_MEASURE;
+        trans[0] = COM_FREQ_MEASURE;
     }
    
     if (HAL_SPI_TransmitReceive(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER, 10) == HAL_OK)

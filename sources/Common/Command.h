@@ -49,8 +49,8 @@ enum CommandPanel
 /// Возможные команды, принимаемые от основного процессора
 enum CommandGenerator
 {
-                        //   0            1...5
-    FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                                /* Результат измерения частотомера */
+                            //   0            1...5
+    COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                                /* Результат измерения частотомера */
     NUM_COMMAND_READ
 };
 

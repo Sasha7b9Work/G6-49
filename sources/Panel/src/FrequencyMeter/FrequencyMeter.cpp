@@ -50,6 +50,10 @@ void FrequencyMeter::Draw()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FrequencyMeter::SetMeasure(uint value)
 {
+    if(value == MAX_UINT)
+    {
+        return;
+    }
     frequency = value;
     inactive = false;
 }

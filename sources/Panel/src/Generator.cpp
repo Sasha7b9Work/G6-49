@@ -67,7 +67,7 @@ void Generator::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::ExecuteCommand(uint8 *buffer, int)
 {
-    if(buffer[0] == FREQ_MEASURE)
+    if(buffer[0] == COM_FREQ_MEASURE)
     {
         BitSet32 data;
         for(int i = 0; i < 4; i++)
@@ -137,7 +137,7 @@ void Generator::ReadAndRunFromInterface()
 
     CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 5);
 
-    if(recv[0] == FREQ_MEASURE)
+    if(recv[0] == COM_FREQ_MEASURE)
     {
         BitSet32 data;
         for(int i = 0; i < 4; i++)
