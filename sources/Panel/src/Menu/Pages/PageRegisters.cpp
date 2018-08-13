@@ -59,7 +59,7 @@ static DescInput desc[NumRegisters] =
     {10, Uint32         }, // OffsetB,
     {10, Uint32         }, // FreqMeterLevel,
     {10, Uint32         }, // FreqMeterHYS,
-    {10, Binary         }, // FPGA_RG0_Control,
+    {8,  Binary         }, // FPGA_RG0_Control,
     {10, Uint32         }, // FPGA_RG1_Freq,
     {7,  Uint8_Uint8    }, // FPGA_RG2_Mul,
     {11, Uint14_Uint14  }, // FPGA_RG3_RectA,
@@ -316,7 +316,7 @@ static void OnPress_Send()
         values[position] = 0;
     }
 
-    NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, position, (currentRegister == FreqMeterLevel || currentRegister == FreqMeterHYS) ? 4095 : 0);
+    NumberBuffer::Set(buffer, desc[currentRegister].size, position, (currentRegister == FreqMeterLevel || currentRegister == FreqMeterHYS) ? 4095 : 0);
 }
 
 DEF_BUTTON(bSend,                                                                                                         //--- –≈√»—“–€ - «‡ÒÎ‡Ú¸ ---

@@ -41,7 +41,7 @@ void NumberBuffer::ProcessKey(Control key)
             ++position;
         }
     }
-    else if(AllowableSymbol(key))                    // Символьная кнопка
+    else if(AllowableSymbol(key) && position < NumSymbols())                    // Символьная кнопка
     {
         buffer[position++] = KeyToChar(key);
     }
@@ -165,7 +165,7 @@ bool NumberBuffer::DecreaseDigit(int pos)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int NumberBuffer::NumSymbols()
 {
-    return (int)strlen(buffer);
+    return (int)size;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

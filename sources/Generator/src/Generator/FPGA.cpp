@@ -324,7 +324,7 @@ void FPGA::WriteRegister(uint8 reg, uint value)
 {
     int numBits[NumRegistersFPGA] =
     {
-        16, // RG0_Control,
+        8,  // RG0_Control,
         32, // RG1_Freq,
         16, // RG2_Mul,
         28, // RG3_RectA,
