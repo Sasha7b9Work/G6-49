@@ -69,6 +69,7 @@ static DescInput desc[NumRegisters] =
     {10, Uint32         }, // FPGA_RG7_PeriodImpulseB,
     {10, Uint32         }, // FPGA_RG8_DurationImpulseB,
     {12, Binary         }, // FPGA_RG9_FreqMeter
+    {11, Uint14_Uint14  }, // FPGA_RG10_Offset
     {2,  Uint32         }  // Multiplexor3
 };
 
