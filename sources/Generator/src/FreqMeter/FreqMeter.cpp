@@ -20,19 +20,19 @@ void FreqMeter::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::SetResist(FreqResist resist)
 {
-    CPU::WritePin(FREQ_METER_RESIST, resist == FreqResist_50Ohm);
+    CPU::WritePin(FREQ_METER_RESIST, resist.Is(FreqResist::_50Ohm));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::SetCouple(FreqCouple couple)
 {
-    CPU::WritePin(FREQ_METER_COUPLE, couple == FreqCouple_DC);
+    CPU::WritePin(FREQ_METER_COUPLE, couple.Is(FreqCouple::DC));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::SetFiltr(FreqFiltr filtr)
 {
-    CPU::WritePin(FREQ_METER_FILTR, filtr == FreqFiltr_Disable);
+    CPU::WritePin(FREQ_METER_FILTR, filtr.Is(FreqFiltr::Disable));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

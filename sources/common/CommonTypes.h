@@ -8,7 +8,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define COMMON_ENUM     uint8 value; operator uint8() const { return value; }; operator uint8() { return value; }
+#undef COMMON_ENUM
+#define COMMON_ENUM     \
+    uint8 value; operator uint8() const { return value; }; operator uint8() { return value; }; bool Is(uint8 v) const { return v == value; }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,24 +40,54 @@ struct Chan
 };
 
 /// Сопротивление входа частотомера
-enum FreqResist
+struct FreqResist
 {
-    FreqResist_1MOhm,
-    FreqResist_50Ohm
+    enum
+    {
+        _1MOhm,
+        _50Ohm
+    };
+    COMMON_ENUM;
+    FreqResist(uint v) : value((uint8)v)
+    {
+    };
+    FreqResist(int v) : value((uint8)v)
+    {
+    };
 };
 
 /// Открытый/закрытый вход частотомера
-enum FreqCouple
+struct FreqCouple
 {
-    FreqCouple_AC,
-    FreqCouple_DC
+    enum
+    {
+        AC,
+        DC
+    };
+    COMMON_ENUM;
+    FreqCouple(uint v) : value((uint8)v)
+    {
+    };
+    FreqCouple(int v) : value((uint8)v)
+    {
+    };
 };
 
 /// ФНЧ частотомера
-enum FreqFiltr
+struct FreqFiltr
 {
-    FreqFiltr_Enable,
-    FreqFiltr_Disable
+    enum
+    {
+        Enable,
+        Disable
+    };
+    COMMON_ENUM;
+    FreqFiltr(uint v) : value((uint8)v)
+    {
+    };
+    FreqFiltr(int v) : value((uint8)v)
+    {
+    };
 };
 
 #ifdef WIN32
