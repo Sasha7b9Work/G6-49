@@ -53,14 +53,14 @@ static void SendIWStoGenerator();
 static InputWindowStruct *iws = 0;
 static WaveForm           form;
 static WaveParameter      m_param;
-static Channel            ch;
+static Chan               ch;
 
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindowStruct::Fill(Channel ch_, WaveForm form_, WaveParameter param_)
+void InputWindowStruct::Fill(Chan ch_, WaveForm form_, WaveParameter param_)
 {
     ch = ch_;
     form = form_;
@@ -535,7 +535,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::FillAllowParameters(Channel ch_, WaveForm form_, AllowableParameters *allowParameters)
+void InputWindowStruct::FillAllowParameters(Chan ch_, WaveForm form_, AllowableParameters *allowParameters)
 {
     for (int i = 0; i < WaveParameter::Number; i++)
     {
@@ -551,9 +551,10 @@ static void SendIWStoGenerator()
 
     if (m_param.Is(WaveParameter::Delay))
     {
-        PARAMETER(B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency) = PARAMETER(B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency);
-        float frequency = PARAMETER(A, WaveForm(WaveForm::Impulse), WaveParameter::Frequency).Value();
-        Generator::SetParameter(B, WaveParameter::Frequency, frequency);
+        PARAMETER(Chan::B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency) = 
+            PARAMETER(Chan::B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency);
+        float frequency = PARAMETER(Chan::A, WaveForm(WaveForm::Impulse), WaveParameter::Frequency).Value();
+        Generator::SetParameter(Chan::B, WaveParameter::Frequency, frequency);
 
         float value = PARAMETER(ch, form, m_param).Value();
         Generator::SetParameter(ch, m_param, value);

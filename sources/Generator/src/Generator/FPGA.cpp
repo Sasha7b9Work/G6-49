@@ -124,7 +124,7 @@ void FPGA::SetWaveForm(WaveForm form)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetFrequency(Channel ch, float frequency)
+void FPGA::SetFrequency(Chan ch, float frequency)
 {
     WriteControlRegister();
     
@@ -135,18 +135,18 @@ void FPGA::SetFrequency(Channel ch, float frequency)
     }
     else if(modeWork == ModeImpulse || modeWork == ModeImpulse2)
     {
-        if (ch == B && ModeImpulse2)
+        if (ch.IsB() && ModeImpulse2)
         {
             modeWork = ModeImpulse;
             WriteControlRegister();
         }
         uint N = (uint)(1e8f / frequency + 0.5f);
-        WriteRegister((ch == A) ? (uint8)RG5_PeriodImpulseA : (uint8)RG7_PeriodImpulseB, N);
+        WriteRegister(ch.IsA() ? (uint8)RG5_PeriodImpulseA : (uint8)RG7_PeriodImpulseB, N);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetDuration(Channel ch, float duration)
+void FPGA::SetDuration(Chan ch, float duration)
 {
     dur[ch] = duration;
 
@@ -162,7 +162,7 @@ void FPGA::SetDelay(float delay)
 
     WriteControlRegister();
 
-    SetDuration(B, dur[1]);
+    SetDuration(Chan::B, dur[1]);
 
     uint N = (uint)(delay / 1e-8f + 0.5f);
     
@@ -360,7 +360,7 @@ void FPGA::WriteAddress(uint8 reg)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGA::RegisterForDuration(Channel ch)
+uint8 FPGA::RegisterForDuration(Chan ch)
 {
-    return (ch == A) ? (uint8)RG6_DurationImpulseA : (uint8)RG8_DurationImpulseB;
+    return ch.IsA() ? (uint8)RG6_DurationImpulseA : (uint8)RG8_DurationImpulseB;
 }

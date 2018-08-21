@@ -55,7 +55,7 @@ void Multiplexor::WriteRegister(Register reg, uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::SetMode(Channel ch, WaveForm form)
+void Multiplexor::SetMode(Chan ch, WaveForm form)
 {
 #define PIN_MX(ch, num) pins[ch][num]
 

@@ -25,8 +25,8 @@ static I2C_HandleTypeDef hI2C =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void AD5697::Init()
 {
-    Reset(A);
-    Reset(B);
+    Reset(Chan::A);
+    Reset(Chan::B);
     
     GPIO_InitTypeDef isGPIO =
     {//    SCL          SDA
@@ -42,13 +42,13 @@ void AD5697::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::SetOffset(Channel ch, float offset)
+void AD5697::SetOffset(Chan ch, float offset)
 {   
     Limitation(&offset, 0.0f, 4095.0f);
 
     uint16 value = (uint16)((uint16)offset << 4);
 
-    uint8 data[3] = {(uint8)(BINARY_U8(00010000) | ((ch == A) ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] = {(uint8)(BINARY_U8(00010000) | (ch.IsA() ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
 
     WriteParameter(BINARY_U8(00001100), data, AD5697_Offset);
 }
@@ -100,9 +100,9 @@ void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::Reset(Channel ch)
+void AD5697::Reset(Chan ch)
 {
-    static const GeneratorWritePin pinRS[NumChannels] = {AD5697_D_RSA, AD5697_D_RSB};
+    static const GeneratorWritePin pinRS[Chan::Number] = {AD5697_D_RSA, AD5697_D_RSB};
 
     CPU::WritePin(PinLDAC(ch), true);
     CPU::WritePin(pinRS[ch], true);
@@ -111,9 +111,9 @@ void AD5697::Reset(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-GeneratorWritePin AD5697::PinLDAC(Channel ch)
+GeneratorWritePin AD5697::PinLDAC(Chan ch)
 {
-    static const GeneratorWritePin pinLDAC[NumChannels] = {AD5697_Offset, AD5697_Freq};
+    static const GeneratorWritePin pinLDAC[Chan::Number] = {AD5697_Offset, AD5697_Freq};
 
     return pinLDAC[ch];
 }

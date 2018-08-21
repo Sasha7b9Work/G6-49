@@ -1,6 +1,5 @@
 #pragma once
-
-#include "Generator/GeneratorSettingsTypes.h"
+//#include "Generator/GeneratorSettingsTypes.h"
 #include <stm32f4xx.h>
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12,7 +11,6 @@ typedef const char * const pString;
 
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);
-typedef void(*pFuncVCh)(Channel);
 
 #define GetBit(value, bit) (((value) >> (bit)) & 0x01)
 #define SetBit(value, bit) ((value) |= (1 << (bit)))

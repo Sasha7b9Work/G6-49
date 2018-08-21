@@ -38,7 +38,7 @@ DEF_CHOICE_2( cChannel,                                                         
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 /*
-static void SetWaveForm(Channel ch, WaveForm form)
+static void SetWaveForm(Chan ch, WaveForm form)
 {
     set.sig_form[ch] = form;
     TuneGenerator(ch);

@@ -14,7 +14,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Generator::EnableChannel(Channel ch, bool enable)
+void Generator::EnableChannel(Chan ch, bool enable)
 {
     uint8 buffer[3] = {ENABLE_CHANNEL, (uint8)ch, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 3);
@@ -44,7 +44,7 @@ void Generator::Reset()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Channel ch, WaveForm form)
+void Generator::SetFormWave(Chan ch, WaveForm form)
 {
     uint8 buffer[3] = {SET_FORM_WAVE, (uint8)ch, form};
     SendToInterface(buffer, 3);
@@ -79,7 +79,7 @@ void Generator::ExecuteCommand(uint8 *buffer, int)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Channel ch, WaveParameter param, float value)
+void Generator::SetParameter(Chan ch, WaveParameter param, float value)
 {
     static const CommandPanel commands[WaveParameter::Number] =
     {

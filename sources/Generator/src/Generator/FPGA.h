@@ -18,9 +18,9 @@ public:
 
     static void SetWaveForm(WaveForm form);
 
-    static void SetFrequency(Channel ch, float frequency);
+    static void SetFrequency(Chan ch, float frequency);
 
-    static void SetDuration(Channel ch, float duration);
+    static void SetDuration(Chan ch, float duration);
 
     static void SetDelay(float delay);
 
@@ -93,7 +93,7 @@ private:
 
     static void WriteControlRegister();
 
-    static uint8 RegisterForDuration(Channel ch);
+    static uint8 RegisterForDuration(Chan ch);
 
     static ModeWorkFPGA modeWork;
 

@@ -51,7 +51,7 @@ private:
 
     static void DrawDutyFactor(int x, int y);
 
-    static Channel              chan;
+    static Chan              chan;
 
     static WaveForm             form;
 

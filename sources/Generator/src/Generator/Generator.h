@@ -13,25 +13,25 @@ class Generator
 public:
     static void Init();
 
-    static void EnableChannel(Channel ch, bool enable);
+    static void EnableChannel(Chan ch, bool enable);
 
-    static void SetFormWave(Channel ch, WaveForm form);
+    static void SetFormWave(Chan ch, WaveForm form);
 
-    static void SetParameter(Channel ch, CommandPanel command, float value);
+    static void SetParameter(Chan ch, CommandPanel command, float value);
 
-    static void SetOffset(Channel ch, float offset);
+    static void SetOffset(Chan ch, float offset);
 
 private:
 
-    static void SetFrequency(Channel ch, float frequency);
+    static void SetFrequency(Chan ch, float frequency);
 
-    static void SetAmplitude(Channel ch, float amplitude);
+    static void SetAmplitude(Chan ch, float amplitude);
 
-    static void SetPhase(Channel ch, float phase);
+    static void SetPhase(Chan ch, float phase);
 
-    static void SetDutyRatio(Channel ch, float dutyRatio);
+    static void SetDutyRatio(Chan ch, float dutyRatio);
 
-    static void SetDuration(Channel ch, float duration);
+    static void SetDuration(Chan ch, float duration);
 
-    static void SetDelay(Channel ch, float duration);
+    static void SetDelay(Chan ch, float duration);
 };

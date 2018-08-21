@@ -17,11 +17,11 @@ public:
     /// Эта функция вызывается в цилке для приёма сообщений от прибора
     static void Update();
 
-    static void EnableChannel(Channel ch, bool enable);
+    static void EnableChannel(Chan ch, bool enable);
 
-    static void SetFormWave(Channel ch, WaveForm form);
+    static void SetFormWave(Chan ch, WaveForm form);
 
-    static void SetParameter(Channel ch, WaveParameter param, float value);
+    static void SetParameter(Chan ch, WaveParameter param, float value);
 
     static void SetDebugMode(bool enable);
 

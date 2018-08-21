@@ -43,9 +43,9 @@ void Display::Update()
 
     Painter::BeginScene(Color::BACK);
 
-    Wave::DrawSignal(A);
+    Wave::DrawSignal(Chan::A);
 
-    Wave::DrawSignal(B);
+    Wave::DrawSignal(Chan::B);
 
     Menu::Draw();
 

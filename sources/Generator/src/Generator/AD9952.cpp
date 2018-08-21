@@ -38,13 +38,13 @@ typedef enum
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void WriteRegister(Channel ch, RegAD9952 reg);
-static void WriteCFR1(Channel ch);
-static void WriteCFR2(Channel ch);
-static void WriteASF(Channel ch);
-static void WriteFTW0(Channel ch);
-static void WriteToHardware(Channel ch, RegAD9952 reg, uint value);
-static GeneratorWritePin ChipSelect(Channel ch);
+static void WriteRegister(Chan ch, RegAD9952 reg);
+static void WriteCFR1(Chan ch);
+static void WriteCFR2(Chan ch);
+static void WriteASF(Chan ch);
+static void WriteFTW0(Chan ch);
+static void WriteToHardware(Chan ch, RegAD9952 reg, uint value);
+static GeneratorWritePin ChipSelect(Chan ch);
 static void Reset();
 
 
@@ -66,30 +66,32 @@ void AD9952::Init()
 
     Reset();
 
-    WriteCFR1(A);
-    WriteCFR1(B);
+    WriteCFR1(Chan::A);
+    WriteCFR1(Chan::B);
 
-    WriteCFR2(A);
-    WriteCFR2(B);
+    WriteCFR2(Chan::A);
+    WriteCFR2(Chan::B);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetFrequency(Channel ch, float frequency)
+void AD9952::SetFrequency(Chan ch, float frequency)
 {
     setDDS.ad9952[ch].frequency = frequency;
     WriteRegister(ch, AD9952_FTW0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetAmplitude(Channel ch, float amplitude)
+void AD9952::SetAmplitude(Chan ch, float amplitude)
 {
     setDDS.ad9952[ch].amplitude = amplitude;
     WriteRegister(ch, AD9952_ASF);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteRegister(Channel ch, RegAD9952 reg)
+static void WriteRegister(Chan ch, RegAD9952 reg)
 {
+    typedef void(*pFuncVCh)(Chan);
+
     static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, 0, WriteFTW0, 0};
 
     pFuncVCh f = func[reg];
@@ -101,10 +103,10 @@ static void WriteRegister(Channel ch, RegAD9952 reg)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteCFR1(Channel ch)
+static void WriteCFR1(Chan ch)
 {
     uint value = 0;
-    if(ch == B)
+    if(ch.IsB())
     {
         SetBit(value, 1);
         SetBit(value, 23);
@@ -116,7 +118,7 @@ static void WriteCFR1(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteCFR2(Channel ch)
+static void WriteCFR2(Chan ch)
 {
     uint value = 0;
     SetBit(value, 3);
@@ -124,7 +126,7 @@ static void WriteCFR2(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteASF(Channel ch)
+static void WriteASF(Chan ch)
 {
     uint value = ((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7;
 
@@ -132,7 +134,7 @@ static void WriteASF(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteFTW0(Channel ch)
+static void WriteFTW0(Chan ch)
 {
     float FTWf = (setDDS.ad9952[ch].frequency / 1e8f) * powf(2, 32);
 
@@ -140,7 +142,7 @@ static void WriteFTW0(Channel ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteToHardware(Channel ch, RegAD9952 reg, uint value)
+static void WriteToHardware(Chan ch, RegAD9952 reg, uint value)
 {
     static const int numBytes[] =               // Число байт данных для передачи
     { //CFR1 CFR2 ASF ARR FTW0 POW
@@ -173,9 +175,9 @@ static void WriteToHardware(Channel ch, RegAD9952 reg, uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static GeneratorWritePin ChipSelect(Channel ch)
+static GeneratorWritePin ChipSelect(Chan ch)
 {
-    return (ch == A) ? AD9952_SPI3_CSA : AD9952_SPI3_CSB;
+    return ch.IsA() ? AD9952_SPI3_CSA : AD9952_SPI3_CSB;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

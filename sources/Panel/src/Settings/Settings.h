@@ -40,9 +40,9 @@ extern const PageBase pInput;
 #define SWITCH_CHANNEL_B        (FLAG_2 ^= (1 << (BIT_CHAN_B)))
 #define LANG                    ((Language)BIT_FL2(BIT_LANGUAGE))
 #define LANG_RU                 (LANG == Language::RU)
-#define CURRENT_CHANNEL         ((Channel)BIT_FL2(BIT_CHANNEL))
-#define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == A)
-#define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == B)
+#define CURRENT_CHANNEL         ((Chan)BIT_FL2(BIT_CHANNEL))
+#define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == Chan::A)
+#define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == Chan::B)
 #define SIZE_BYTE               ((SizeByte)BIT_FL2(BIT_SIZE_BYTE))
 #define STOP_BIT                ((StopBit)BIT_FL2(BIT_STOP_BIT))
 
@@ -74,7 +74,7 @@ public:
         }cal;
     };
     col_val         disp_Colors[32];                 ///< Цвета
-    WaveForm        sig_form[NumChannels];           ///< Текущая выбранная форма сигнала
+    WaveForm        sig_form[Chan::Number];          ///< Текущая выбранная форма сигнала
     WaveParameter   sig_parameter[WaveForm::Number]; ///< Текущий выбранный параметр сигнала
     int8            menu_currentPage;                ///< Отображаемая страница меню
     Page*           menu_page;                       ///< Если активна страница не из главного меню, то здесь её адрес
@@ -100,7 +100,7 @@ public:
 #define BIT_LANGUAGE      0  ///< Language - выбранный язык
 #define BIT_CHAN_A        1  ///<          - бит, отвечающий за включённый канал A
 #define BIT_CHAN_B        2  ///<          - бит, отвечающий за включённый канал B
-#define BIT_CHANNEL       3  ///< Channel  - текущий выбранный канал
+#define BIT_CHANNEL       3  ///< Chan  - текущий выбранный канал
 #define BIT_SIZE_BYTE     4  ///< SizeByte - размер байта для связи по USB
 #define BIT_STOP_BIT      5  ///< StopBit  - количество стоп-бит
 #define BIT_FREQ_RESIST   6  ///< FreqResist - сопротивление входа частотомера
@@ -121,4 +121,4 @@ public:
 
 extern Settings set;
 
-void TuneGenerator(Channel ch);
+void TuneGenerator(Chan ch);

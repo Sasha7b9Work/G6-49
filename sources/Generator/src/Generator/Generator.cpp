@@ -14,8 +14,8 @@ static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::Init()
 {
-    EnableChannel(A, false);
-    EnableChannel(B, false);
+    EnableChannel(Chan::A, false);
+    EnableChannel(Chan::B, false);
     AD9952::Init();
     AD5697::Init();
     FPGA::Init();
@@ -24,18 +24,18 @@ void Generator::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::EnableChannel(Channel ch, bool enable)
+void Generator::EnableChannel(Chan ch, bool enable)
 {
-    static const GeneratorWritePin pin[NumChannels] = { Pin_P3_OutA, Pin_P4_OutB };
+    static const GeneratorWritePin pin[Chan::Number] = { Pin_P3_OutA, Pin_P4_OutB };
 
     CPU::WritePin(pin[ch], !enable);
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Channel ch, WaveForm form)
+void Generator::SetFormWave(Chan ch, WaveForm form)
 {
-    static const GeneratorWritePin pin[NumChannels] = {Pin_P1_AmplifierA, Pin_P2_AmplifierB};
+    static const GeneratorWritePin pin[Chan::Number] = {Pin_P1_AmplifierA, Pin_P2_AmplifierB};
 
     waveIsSine = form.Is(WaveForm::Sine);
 
@@ -51,9 +51,9 @@ void Generator::SetFormWave(Channel ch, WaveForm form)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Channel ch, CommandPanel command, float value)
+void Generator::SetParameter(Chan ch, CommandPanel command, float value)
 {
-    typedef void (*pFuncChF)(Channel, float);
+    typedef void (*pFuncChF)(Chan, float);
 
     static const pFuncChF func[NUM_COMMAND_WRITE] =
     {
@@ -81,7 +81,7 @@ void Generator::SetParameter(Channel ch, CommandPanel command, float value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFrequency(Channel ch, float frequency)
+void Generator::SetFrequency(Chan ch, float frequency)
 {
     if (waveIsSine)
     {
@@ -94,7 +94,7 @@ void Generator::SetFrequency(Channel ch, float frequency)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetAmplitude(Channel ch, float amplitude)
+void Generator::SetAmplitude(Chan ch, float amplitude)
 {
     if (waveIsSine)
     {
@@ -106,31 +106,31 @@ void Generator::SetAmplitude(Channel ch, float amplitude)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetOffset(Channel ch, float offset)
+void Generator::SetOffset(Chan ch, float offset)
 {
     AD5697::SetOffset(ch, offset);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPhase(Channel, float)
+void Generator::SetPhase(Chan, float)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDutyRatio(Channel, float)
+void Generator::SetDutyRatio(Chan, float)
 {
 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDuration(Channel ch, float duration)
+void Generator::SetDuration(Chan ch, float duration)
 {
     FPGA::SetDuration(ch, duration);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDelay(Channel, float delay)
+void Generator::SetDelay(Chan, float delay)
 {
     FPGA::SetDelay(delay);
 }

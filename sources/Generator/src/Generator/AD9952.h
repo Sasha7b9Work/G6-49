@@ -9,9 +9,9 @@ public:
 
     static void Init();
 
-    static void SetFrequency(Channel ch, float frequency);
+    static void SetFrequency(Chan ch, float frequency);
 
-    static void SetAmplitude(Channel ch, float amplitude);
+    static void SetAmplitude(Chan ch, float amplitude);
 
 private:
 };

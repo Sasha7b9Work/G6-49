@@ -11,7 +11,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Wave::DrawSignal(Channel ch)
+void Wave::DrawSignal(Chan ch)
 {
     int x0 = X();
     int y0 = Y(ch);
@@ -19,7 +19,7 @@ void Wave::DrawSignal(Channel ch)
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
-        Text::DrawBigText(x0 + 5, y0 + 5, 2, (ch == A) ? "A" : "B", Color::FILL);
+        Text::DrawBigText(x0 + 5, y0 + 5, 2, ch.IsA() ? "A" : "B", Color::FILL);
         DrawSignalUGO(ch, y0);
         DrawSignalParameters(ch, y0);
     }
@@ -32,9 +32,9 @@ int Wave::X()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Y(Channel ch)
+int Wave::Y(Chan ch)
 {
-    return (ch == A) ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
+    return ch.IsA() ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ int Wave::Height()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::DrawSignalUGO(Channel chan, int y0)
+void Wave::DrawSignalUGO(Chan chan, int y0)
 {
     y0 += 30;
     int height = 50;
@@ -221,7 +221,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::DrawSignalParameters(Channel ch, int y0)
+void Wave::DrawSignalParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
@@ -258,7 +258,7 @@ void Wave::DrawSignalParameters(Channel ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::DrawParameterValue(Channel ch, WaveParameter param, int x, int y)
+void Wave::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
 {
     WaveForm form = WAVE_FORM_CH(ch);
 

@@ -151,9 +151,9 @@ void PageRegisters::Draw()
         return;
     }
 
-    Painter::FillRegion(Wave::X(), Wave::Y(A) + 1, Wave::Width() - 1, Wave::Height() * 2, Color::BACK);
+    Painter::FillRegion(Wave::X(), Wave::Y(Chan::A) + 1, Wave::Width() - 1, Wave::Height() * 2, Color::BACK);
 
-    DrawRegisters(Wave::X() + 4, Wave::Y(A) + 3);
+    DrawRegisters(Wave::X() + 4, Wave::Y(Chan::A) + 3);
 
     DrawInputWindow();
 }

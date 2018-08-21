@@ -136,7 +136,7 @@ void Interface::ProcessCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandEnable()
 {
-    Channel ch = (Channel)buffer[1];
+    Chan ch = (Chan)buffer[1];
     bool enable = buffer[2] == 1;
     
     __IO uint8 b1 = buffer[1];
@@ -178,7 +178,7 @@ void Interface::CommandWriteService()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandFormWave()
 {
-    Channel ch = (Channel)buffer[1];
+    Chan ch = (Chan)buffer[1];
     WaveForm form = (WaveForm)buffer[2];
     Generator::SetFormWave(ch, form);
 }
@@ -204,11 +204,11 @@ void Interface::CommandWriteRegister()
         break;
 
     case Register::OffsetA:
-        AD5697::SetOffset(A, (float)value);
+        AD5697::SetOffset(Chan::A, (float)value);
         break;
 
     case Register::OffsetB:
-        AD5697::SetOffset(B, (float)value);
+        AD5697::SetOffset(Chan::B, (float)value);
         break;
 
     case Register::FreqMeterLevel:
@@ -289,7 +289,7 @@ void Interface::CommandWriteRegister()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandParameter()
 {
-    Channel ch = (Channel)buffer[1];
+    Chan ch = (Chan)buffer[1];
     CommandPanel command = (CommandPanel)buffer[0];
     float value = 0.0f;
     memcpy(&value, &buffer[2], 4);

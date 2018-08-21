@@ -135,14 +135,14 @@ void Settings::Load(bool _default)
         CPU::FLASH_::LoadSettings();
     }
 
-    TuneGenerator(A);
-    TuneGenerator(B);
+    TuneGenerator(Chan::A);
+    TuneGenerator(Chan::B);
     
     Painter::LoadPalette();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void TuneGenerator(Channel ch)
+void TuneGenerator(Chan ch)
 {
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     WaveForm form = WAVE_FORM_CH(ch);

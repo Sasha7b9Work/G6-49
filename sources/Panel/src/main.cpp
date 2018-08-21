@@ -37,7 +37,7 @@ int main()
 
     while (1)
     {
-        if(WAVE_FORM_CH(A).Is(WaveForm::Sine) && CURRENT_CHANNEL == A)
+        if(WAVE_FORM_CH(Chan::A).Is(WaveForm::Sine) && CURRENT_CHANNEL.IsA())
         {
         }
 
