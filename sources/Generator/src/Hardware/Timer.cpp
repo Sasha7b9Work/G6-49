@@ -24,7 +24,7 @@ static Timer2XX tim3;   // Для таймеров
 #endif
 
 
-typedef struct
+struct TimerStruct
 {
     pFuncVV func;       // Функция таймера
     uint    dTms;          // Период срабатывания, мс
@@ -33,7 +33,7 @@ typedef struct
     uint8   notUsed0;
     uint8   notUsed1;
     uint8   notUsed2;
-} TimerStruct;
+};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

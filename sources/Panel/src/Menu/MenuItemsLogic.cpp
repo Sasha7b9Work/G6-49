@@ -31,15 +31,15 @@ static pString nameParameter[WaveParameter::Number][2] =
     { "КОЭФФ. ЗАПОЛН.", "DUTY FACTOR"}
 };
 
-typedef enum
+enum DIRECTION
 {
     NONE,
     INCREASE,
     DECREASE
-} DIRECTION;
+};
 
 /// Структура используется для анимации элементов ГУИ Choice и Governor
-typedef struct
+struct TimeStruct
 {
     const void *address;    ///< Адрес элемента. Если 0 - не движется
     uint        timeStart;  ///< Время начала анимации в миллисекундах
@@ -47,7 +47,7 @@ typedef struct
     uint8       notUsed0;
     uint8       notUsed1;
     uint8       notUsed2;
-} TimeStruct;
+};
 
 static TimeStruct tsChoice = {0, 0, NONE, 0, 0, 0};
 static TimeStruct tsGovernor = {0, 0, NONE, 0, 0, 0};
