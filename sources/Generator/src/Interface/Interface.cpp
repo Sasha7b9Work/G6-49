@@ -220,48 +220,48 @@ void Interface::CommandWriteRegister()
         break;
 
     case Register::FPGA_RG0_Control:
-        FPGA::WriteRegister(FPGA::RG0_Control, value);
+        FPGA::WriteRegister(FPGA::RG::_0_Control, value);
         break;
 
     case Register::FPGA_RG1_Freq:
-        FPGA::WriteRegister(FPGA::RG1_Freq, value);
+        FPGA::WriteRegister(FPGA::RG::_1_Freq, value);
         break;
 
     case Register::FPGA_RG2_Mul:
-        FPGA::WriteRegister(FPGA::RG2_Mul, value);
+        FPGA::WriteRegister(FPGA::RG::_2_Mul, value);
         break;
 
     case Register::FPGA_RG3_RectA:
-        FPGA::WriteRegister(FPGA::RG3_RectA, value);
+        FPGA::WriteRegister(FPGA::RG::_3_RectA, value);
         break;
 
     case Register::FPGA_RG4_RectB:
-        FPGA::WriteRegister(FPGA::RG4_RectB, value);
+        FPGA::WriteRegister(FPGA::RG::_4_RectB, value);
         break;
 
     case Register::FPGA_RG5_PeriodImpulseA:
-        FPGA::WriteRegister(FPGA::RG5_PeriodImpulseA, value);
+        FPGA::WriteRegister(FPGA::RG::_5_PeriodImpulseA, value);
         break;
 
     case Register::FPGA_RG6_DurationImpulseA:
-        FPGA::WriteRegister(FPGA::RG6_DurationImpulseA, value);
+        FPGA::WriteRegister(FPGA::RG::_6_DurationImpulseA, value);
         break;
 
     case Register::FPGA_RG7_PeriodImpulseB:
-        FPGA::WriteRegister(FPGA::RG7_PeriodImpulseB, value);
+        FPGA::WriteRegister(FPGA::RG::_7_PeriodImpulseB, value);
         break;
 
     case Register::FPGA_RG8_DurationImpulseB:
-        FPGA::WriteRegister(FPGA::RG8_DurationImpulseB, value);
+        FPGA::WriteRegister(FPGA::RG::_8_DurationImpulseB, value);
         break;
 
     case Register::FPGA_RG9_FreqMeter:
-        FPGA::WriteRegister(FPGA::RG9_FreqMeter, value);
+        FPGA::WriteRegister(FPGA::RG::_9_FreqMeter, value);
         freqForSend = MAX_UINT;
         break;
 
     case Register::FPGA_RG10_Offset:
-        FPGA::WriteRegister(FPGA::RG10_Offset, value);
+        FPGA::WriteRegister(FPGA::RG::_10_Offset, value);
         break;
 
     case Register::Multiplexor3:

@@ -33,29 +33,35 @@ private:
         ModeImpulse2    ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
     };
 
-    enum
+    struct RG
     {
-        RG0_Control,
-        RG1_Freq,
-        RG2_Mul,
-        RG3_RectA,
-        RG4_RectB,
-        RG5_PeriodImpulseA,
-        RG6_DurationImpulseA,
-        RG7_PeriodImpulseB,
-        RG8_DurationImpulseB,
-        RG9_FreqMeter,
-        RG10_Offset,
-        NumRegistersFPGA
-        /*
-        Reg_Control,
-        Reg_PeriodA,
-        Reg_DurationA,
-        Reg_PeriodB,
-        Reg_DurationBandDelay,
-        Reg_DurationB,
-        Reg_Frequency
-        */
+        enum
+        {
+            _0_Control,
+            _1_Freq,
+            _2_Mul,
+            _3_RectA,
+            _4_RectB,
+            _5_PeriodImpulseA,
+            _6_DurationImpulseA,
+            _7_PeriodImpulseB,
+            _8_DurationImpulseB,
+            _9_FreqMeter,
+            _10_Offset,
+            Number
+            /*
+            Reg_Control,
+            Reg_PeriodA,
+            Reg_DurationA,
+            Reg_PeriodB,
+            Reg_DurationBandDelay,
+            Reg_DurationB,
+            Reg_Frequency
+            */
+        };
+        uint8 value;
+        RG(uint8 v) : value(v) { };
+        operator uint8() const { return value; };
     };
 
     static void CreateSine();
