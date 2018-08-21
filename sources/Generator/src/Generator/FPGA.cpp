@@ -90,13 +90,13 @@ void FPGA::Init()
 
     // Настраиваем выходы для записи в регистры ПЛИС
 
-    CPU::WritePin(FPGA_WR_RG, false);
-    CPU::WritePin(FPGA_CLK_RG, false);
-    CPU::WritePin(FPGA_DT_RG, false);
-    CPU::WritePin(FPGA_A0_RG, false);
-    CPU::WritePin(FPGA_A1_RG, false);
-    CPU::WritePin(FPGA_A2_RG, false);
-    CPU::WritePin(FPGA_A3_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_A0_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_A1_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_A2_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_A3_RG, false);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -338,20 +338,26 @@ void FPGA::WriteRegister(uint8 reg, uint value)
 
     for (int bit = numBits[reg] - 1; bit >= 0; bit--)
     {
-        CPU::WritePin(FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
-        CPU::WritePin(FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
-        CPU::WritePin(FPGA_CLK_RG, false);
+        CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
+        CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
+        CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, false);
     }
 
-    CPU::WritePin(FPGA_WR_RG, true);                         // Теперь переписываем данные из сдвиговоого регистра в FPGA
-    CPU::WritePin(FPGA_WR_RG, false);
+    CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, true);                         // Теперь переписываем данные из сдвиговоого регистра в FPGA
+    CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, false);
     Timer::PauseOnTime(10);                              // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteAddress(uint8 reg)
 {
-    static const GeneratorWritePin pins[] = {FPGA_A0_RG, FPGA_A1_RG, FPGA_A2_RG, FPGA_A3_RG};
+    static const GeneratorWritePin pins[] = 
+    {
+        GeneratorWritePin::FPGA_A0_RG, 
+        GeneratorWritePin::FPGA_A1_RG, 
+        GeneratorWritePin::FPGA_A2_RG, 
+        GeneratorWritePin::FPGA_A3_RG
+    };
 
     for (int i = 0; i < 4; i++)
     {

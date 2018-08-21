@@ -20,19 +20,19 @@ void FreqMeter::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::SetResist(FreqResist resist)
 {
-    CPU::WritePin(FREQ_METER_RESIST, resist.Is(FreqResist::_50Ohm));
+    CPU::WritePin(GeneratorWritePin::FREQ_METER_RESIST, resist.Is(FreqResist::_50Ohm));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::SetCouple(FreqCouple couple)
 {
-    CPU::WritePin(FREQ_METER_COUPLE, couple.Is(FreqCouple::DC));
+    CPU::WritePin(GeneratorWritePin::FREQ_METER_COUPLE, couple.Is(FreqCouple::DC));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::SetFiltr(FreqFiltr filtr)
 {
-    CPU::WritePin(FREQ_METER_FILTR, filtr.Is(FreqFiltr::Disable));
+    CPU::WritePin(GeneratorWritePin::FREQ_METER_FILTR, filtr.Is(FreqFiltr::Disable));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,13 +43,13 @@ void FreqMeter::Update()
         uint data = 0;
         for(int i = 30; i >= 0; i--)
         {
-            CPU::WritePin(FREQ_METER_CLK, true);
+            CPU::WritePin(GeneratorWritePin::FREQ_METER_CLK, true);
             volatile int j = 0;
             while(j < 25)
             {
                 j++;
             }
-            CPU::WritePin(FREQ_METER_CLK, false);
+            CPU::WritePin(GeneratorWritePin::FREQ_METER_CLK, false);
             Timer::PauseOnTime(1);
             if (CPU::ReadPin(FREQ_METER_DATA))
             {

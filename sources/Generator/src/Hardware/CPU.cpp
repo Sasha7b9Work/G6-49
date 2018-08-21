@@ -10,7 +10,7 @@ struct StructPort
     uint16        pin;
 };
 
-static const StructPort registers[NumPinsWrite] =
+static const StructPort registers[GeneratorWritePin::Number] =
 {
     {GPIOF, GPIO_PIN_6},    // AD9952_SPI3_CSA
     {GPIOF, GPIO_PIN_7},    // AD9952_SPI3_CSB
@@ -57,8 +57,8 @@ void CPU::Init()
 
     InitPins();
 
-    WritePin(Pin_P3_OutA, false);
-    WritePin(Pin_P4_OutB, false);
+    WritePin(GeneratorWritePin::Pin_P3_OutA, false);
+    WritePin(GeneratorWritePin::Pin_P4_OutB, false);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ void CPU::InitPins()
         0
     };
 
-    for (int i = 0; i < NumPinsWrite; ++i)
+    for (int i = 0; i < GeneratorWritePin::Number; ++i)
     {
         isGPIO.Pin = registers[i].pin;
         HAL_GPIO_Init(registers[i].port, &isGPIO);

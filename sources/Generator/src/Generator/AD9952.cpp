@@ -142,12 +142,12 @@ void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
 
     HAL_SPI_Transmit(&hSPI3, buffer, (uint16)(numBytes[reg] + 1), 1);
     
-    CPU::WritePin(AD9952_IO_UPD, true);
+    CPU::WritePin(GeneratorWritePin::AD9952_IO_UPD, true);
     volatile int i = 0;
     for (; i < 1000; ++i)
     {
     };
-    CPU::WritePin(AD9952_IO_UPD, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_IO_UPD, false);
 
     CPU::WritePin(ChipSelect(ch), true);
 }
@@ -155,23 +155,23 @@ void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 GeneratorWritePin AD9952::ChipSelect(Chan ch)
 {
-    return ch.IsA() ? AD9952_SPI3_CSA : AD9952_SPI3_CSB;
+    return (uint8)(ch.IsA() ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::Reset()
 {
-    CPU::WritePin(AD9952_RES_DDS, false);
-    CPU::WritePin(AD9952_RES_DDS, true);
-    CPU::WritePin(AD9952_RES_DDS, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, true);
+    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
 
-    CPU::WritePin(AD9952_SPI3_CSA, true);
-    CPU::WritePin(AD9952_SPI3_CSB, true);
-    CPU::WritePin(AD9952_IO_UPD, false);
-    CPU::WritePin(AD9952_IOSYNA, false);
-    CPU::WritePin(AD9952_IOSYNB, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_SPI3_CSA, true);
+    CPU::WritePin(GeneratorWritePin::AD9952_SPI3_CSB, true);
+    CPU::WritePin(GeneratorWritePin::AD9952_IO_UPD, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_IOSYNA, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_IOSYNB, false);
 
-    CPU::WritePin(AD9952_RES_DDS, false);
-    CPU::WritePin(AD9952_RES_DDS, true);
-    CPU::WritePin(AD9952_RES_DDS, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
+    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, true);
+    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
 }

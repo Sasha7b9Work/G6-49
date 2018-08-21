@@ -69,11 +69,14 @@ struct CommandPanel
 };
 
 /// Возможные команды, принимаемые от основного процессора
-enum CommandGenerator
+struct CommandGenerator
 {
-                            //   0            1...5
-    COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                           /* Результат измерения частотомера */
-    NUM_COMMAND_READ
+    enum
+    {
+        //   0            1...5
+        COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                           /* Результат измерения частотомера */
+        NUM_COMMAND_READ
+    };
 };
 
 struct WaveParameter

@@ -26,7 +26,7 @@ void Generator::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::EnableChannel(Chan ch, bool enable)
 {
-    static const GeneratorWritePin pin[Chan::Number] = { Pin_P3_OutA, Pin_P4_OutB };
+    static const GeneratorWritePin pin[Chan::Number] = { GeneratorWritePin::Pin_P3_OutA, GeneratorWritePin::Pin_P4_OutB };
 
     CPU::WritePin(pin[ch], !enable);
 }
@@ -35,7 +35,7 @@ void Generator::EnableChannel(Chan ch, bool enable)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Chan ch, WaveForm form)
 {
-    static const GeneratorWritePin pin[Chan::Number] = {Pin_P1_AmplifierA, Pin_P2_AmplifierB};
+    static const GeneratorWritePin pin[Chan::Number] = { GeneratorWritePin::Pin_P1_AmplifierA, GeneratorWritePin::Pin_P2_AmplifierB };
 
     waveIsSine = form.Is(WaveForm::Sine);
 
