@@ -17,5 +17,5 @@ private:
     static void SetPin(uint16 pin);
     static void ResetPin(uint16 pin);
 
-    static void WriteRegister(Name_Register reg, uint value);
+    static void WriteRegister(Register reg, uint value);
 };

@@ -155,6 +155,6 @@ void PageFrequencyCounter::WriteRegisterRG9()
         _SET_BIT(data, 12);
     }
 
-    Generator::LoadRegister(FPGA_RG9_FreqMeter, data);
+    Generator::LoadRegister(Register::FPGA_RG9_FreqMeter, data);
     FrequencyMeter::SetInactive();
 }

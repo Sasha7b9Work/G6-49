@@ -26,7 +26,7 @@ DEF_CHOICE_2(cResist,
 
 static void OnPress_Resist(bool)
 {
-    Generator::LoadRegister(FreqMeter_Resist, (uint)FREQ_RESIST);
+    Generator::LoadRegister(Register::FreqMeter_Resist, (uint)FREQ_RESIST);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ DEF_CHOICE_2(cCouple,
 
 static void OnPress_Couple(bool)
 {
-    Generator::LoadRegister(FreqMeter_Couple, (uint)FREQ_COUPLE);
+    Generator::LoadRegister(Register::FreqMeter_Couple, (uint)FREQ_COUPLE);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ DEF_CHOICE_2(cFiltr,
 
 static void OnPress_Filtr(bool)
 {
-    Generator::LoadRegister(FreqMeter_Filtr, (uint)FREQ_FILTR);
+    Generator::LoadRegister(Register::FreqMeter_Filtr, (uint)FREQ_FILTR);
 }
 
 

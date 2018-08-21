@@ -30,7 +30,7 @@ enum TypeInput
 extern PageBase pRegisters;
 Page *PageRegisters::pointer = (Page *)&pRegisters;
 /// Регистр, в который будет производится занесение значения по нажатию кнопки ЗАСЛАТЬ
-Name_Register currentRegister = FreqMeterLevel;
+Register currentRegister = Register::FreqMeterLevel;
 /// Флаг показа окна ввода
 static bool showInputWindow = false;
 extern const ButtonBase bBackspace;
@@ -41,9 +41,9 @@ extern const ButtonBase bSave;
 /// Здесь хранятся введённые символы
 static char buffer[MAX_SIZE_BUFFER + 1];
 /// true, означает, что значение в этот регистр уже засылалось
-static bool sending[NumRegisters] = {false};
+static bool sending[Register::Number] = {false};
 /// Здесь засланные значения для каждого регистра
-static uint values[NumRegisters] = {0};
+static uint values[Register::Number] = {0};
 
 struct DescInput
 {
@@ -51,7 +51,7 @@ struct DescInput
     TypeInput type;
 };
 
-static DescInput desc[NumRegisters] =
+static DescInput desc[Register::Number] =
 {
     {2,  Uint32         }, // Multiplexor1,
     {2,  Uint32         }, // Multiplexor2,
@@ -76,9 +76,9 @@ static DescInput desc[NumRegisters] =
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Возвращает размер буфера для регистра i
-static int SizeBuffer(Name_Register name = NumRegisters);
+static int SizeBuffer(Register name = Register::Number);
 /// Возвращает тип ввода для регистра i
-static TypeInput TypeBuffer(Name_Register name = NumRegisters);
+static TypeInput TypeBuffer(Register name = Register::Number);
 /// Возращает true, если символ является корректным для данного типа ввода
 static bool AllowableSymbol(Control key);
 /// Выводит значение регистра i
@@ -92,17 +92,17 @@ static uint BufferToValue();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static int SizeBuffer(Name_Register name)
+static int SizeBuffer(Register name)
 {
-    name = (name == NumRegisters) ? currentRegister : name;
+    name = (name == Register::Number) ? currentRegister : name;
 
     return desc[name].size;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static TypeInput TypeBuffer(Name_Register name)
+static TypeInput TypeBuffer(Register name)
 {
-    name = (name == NumRegisters) ? currentRegister : name;
+    name = (name == Register::Number) ? currentRegister : name;
 
     return desc[name].type;
 }
@@ -161,7 +161,7 @@ void PageRegisters::Draw()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageRegisters::DrawRegisters(int x, int y)
 {
-    for(uint8 i = 0; i < NumRegisters; i++)
+    for(uint8 i = 0; i < Register::Number; i++)
     {
         Register reg(i);
         Color color = Color::FILL;
@@ -185,7 +185,7 @@ static void DrawValue(int x, int y, uint8 i)
 
     Painter::SetColor(Color::FILL);
 
-    Name_Register name = (Name_Register)i;
+    Register name(i);
 
     TypeInput type = TypeBuffer(name);
 
@@ -248,7 +248,7 @@ void PageRegisters::DrawInputWindow()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Prev()
 {
-    CircleDecrease<uint8>((uint8 *)&currentRegister, 0, NumRegisters - 1);
+    CircleDecrease<uint8>((uint8 *)&currentRegister, 0, Register::Number - 1);
 }
 
 DEF_BUTTON( bPrev,                                                                                                     //--- РЕГИСТРЫ - Предыдущий ---
@@ -261,7 +261,7 @@ DEF_BUTTON( bPrev,                                                              
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Next()
 {
-    CircleIncrease<uint8>((uint8 *)&currentRegister, 0, NumRegisters - 1);
+    CircleIncrease<uint8>((uint8 *)&currentRegister, 0, Register::Number - 1);
 }
 
 DEF_BUTTON(bNext,                                                                                                       //--- РЕГИСТРЫ - Следующий ---
@@ -317,7 +317,8 @@ static void OnPress_Send()
         values[position] = 0;
     }
 
-    NumberBuffer::Set(buffer, desc[currentRegister].size, position, (currentRegister == FreqMeterLevel || currentRegister == FreqMeterHYS) ? 4095 : 0);
+    NumberBuffer::Set(buffer, desc[currentRegister].size, position, (currentRegister == Register::FreqMeterLevel || 
+                                                                     currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
 }
 
 DEF_BUTTON(bSend,                                                                                                         //--- РЕГИСТРЫ - Заслать ---
@@ -499,7 +500,8 @@ static bool OnKey(StructControl strCntrl)
             OnPress_Send();
             memset(buffer, 0, MAX_SIZE_BUFFER);
             buffer[0] = KeyToChar(key);
-            NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == FreqMeterLevel || currentRegister == FreqMeterHYS) ? 4095 : 0);
+            NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel || 
+                                                           currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
             return true;
         }
     }

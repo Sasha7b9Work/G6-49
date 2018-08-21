@@ -25,7 +25,7 @@ public:
 
     static void SetDebugMode(bool enable);
 
-    static void LoadRegister(Name_Register reg, uint value);
+    static void LoadRegister(Register reg, uint value);
 
 private:
     /// Заслать в генератор данные

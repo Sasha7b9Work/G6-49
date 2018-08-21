@@ -21,7 +21,7 @@ void Generator::EnableChannel(Channel ch, bool enable)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::LoadRegister(Name_Register reg, uint value)
+void Generator::LoadRegister(Register reg, uint value)
 {
     INIT_BIT_SET_32(set, value);
 

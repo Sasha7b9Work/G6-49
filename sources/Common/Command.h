@@ -102,7 +102,7 @@ struct WaveForm
     {
         return type == form.type;
     }
-    WaveForm(uint8 num) : type(num)
+    WaveForm(uint8 num = 0) : type(num)
     {
     }
     operator uint8() const
@@ -111,38 +111,46 @@ struct WaveForm
     }
 };
 
-enum Name_Register
-{
-    Multiplexor1,
-    Multiplexor2,
-    OffsetA,
-    OffsetB,
-    FreqMeterLevel,
-    FreqMeterHYS,
-    FPGA_RG0_Control,           ///< Управляющий регистр
-    FPGA_RG1_Freq,              ///< Регистр кода частоты
-    FPGA_RG2_Mul,               ///< Регистр кода умножителя
-    FPGA_RG3_RectA,             ///< Регистр кода сигнала прямоугольной формы канала А
-    FPGA_RG4_RectB,             ///< Регистр кода сигнала прямоугольной формы канала B
-    FPGA_RG5_PeriodImpulseA,    ///< Регистр кода периода прямоугольных импульсов канала А
-    FPGA_RG6_DurationImpulseA,  ///< Регистр кода длительности прямоугльных импульсов канала А
-    FPGA_RG7_PeriodImpulseB,    ///< Регистр кода периода прямоугольных импульсов канала B
-    FPGA_RG8_DurationImpulseB,  ///< Регистр кода длительности прямоуольных импульсов канала B
-    FPGA_RG9_FreqMeter,         ///< Регистр параметров частотомера
-    FPGA_RG10_Offset,           ///< Регистр смещения
-    Multiplexor3,
-    FreqMeter_Resist,
-    FreqMeter_Couple,
-    FreqMeter_Filtr,
-    NumRegisters
-};
-
 struct Register
 {
-    Register(Name_Register n = Multiplexor1);
-    Register(uint8 n = 0);
-    Name_Register name;
+    enum
+    {
+        Multiplexor1,
+        Multiplexor2,
+        OffsetA,
+        OffsetB,
+        FreqMeterLevel,
+        FreqMeterHYS,
+        FPGA_RG0_Control,           ///< Управляющий регистр
+        FPGA_RG1_Freq,              ///< Регистр кода частоты
+        FPGA_RG2_Mul,               ///< Регистр кода умножителя
+        FPGA_RG3_RectA,             ///< Регистр кода сигнала прямоугольной формы канала А
+        FPGA_RG4_RectB,             ///< Регистр кода сигнала прямоугольной формы канала B
+        FPGA_RG5_PeriodImpulseA,    ///< Регистр кода периода прямоугольных импульсов канала А
+        FPGA_RG6_DurationImpulseA,  ///< Регистр кода длительности прямоугльных импульсов канала А
+        FPGA_RG7_PeriodImpulseB,    ///< Регистр кода периода прямоугольных импульсов канала B
+        FPGA_RG8_DurationImpulseB,  ///< Регистр кода длительности прямоуольных импульсов канала B
+        FPGA_RG9_FreqMeter,         ///< Регистр параметров частотомера
+        FPGA_RG10_Offset,           ///< Регистр смещения
+        Multiplexor3,
+        FreqMeter_Resist,
+        FreqMeter_Couple,
+        FreqMeter_Filtr,
+        Number
+    };
+    Register(uint8 n = Multiplexor1) : name(n)
+    {
+    };
+    uint8 name;
     pString Name() const;
+    bool Is(uint8 n) const
+    {
+        return n == this->name;
+    }
+    operator uint8() const
+    {
+        return name;
+    }
 };
 
 

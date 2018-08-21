@@ -186,7 +186,7 @@ void Interface::CommandFormWave()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandWriteRegister()
 {
-    Name_Register reg = (Name_Register)buffer[1];
+    Register reg = (Register)buffer[1];
 
     BitSet32 set;
     for (int i = 0; i < 4; i++)
@@ -196,91 +196,91 @@ void Interface::CommandWriteRegister()
 
     uint value = set.word;
 
-    switch (reg)
+    switch (reg.name)
     {
-    case Multiplexor1:
-    case Multiplexor2:
+    case Register::Multiplexor1:
+    case Register::Multiplexor2:
         Multiplexor::WriteRegister(reg, value);
         break;
 
-    case OffsetA:
+    case Register::OffsetA:
         AD5697::SetOffset(A, (float)value);
         break;
 
-    case OffsetB:
+    case Register::OffsetB:
         AD5697::SetOffset(B, (float)value);
         break;
 
-    case FreqMeterLevel:
+    case Register::FreqMeterLevel:
         AD5697::SetFreqLevel((float)value);
         break;
 
-    case FreqMeterHYS:
+    case Register::FreqMeterHYS:
         AD5697::SetFreqHysteresys((float)value);
         break;
 
-    case FPGA_RG0_Control:
+    case Register::FPGA_RG0_Control:
         FPGA::WriteRegister(FPGA::RG0_Control, value);
         break;
 
-    case FPGA_RG1_Freq:
+    case Register::FPGA_RG1_Freq:
         FPGA::WriteRegister(FPGA::RG1_Freq, value);
         break;
 
-    case FPGA_RG2_Mul:
+    case Register::FPGA_RG2_Mul:
         FPGA::WriteRegister(FPGA::RG2_Mul, value);
         break;
 
-    case FPGA_RG3_RectA:
+    case Register::FPGA_RG3_RectA:
         FPGA::WriteRegister(FPGA::RG3_RectA, value);
         break;
 
-    case FPGA_RG4_RectB:
+    case Register::FPGA_RG4_RectB:
         FPGA::WriteRegister(FPGA::RG4_RectB, value);
         break;
 
-    case FPGA_RG5_PeriodImpulseA:
+    case Register::FPGA_RG5_PeriodImpulseA:
         FPGA::WriteRegister(FPGA::RG5_PeriodImpulseA, value);
         break;
 
-    case FPGA_RG6_DurationImpulseA:
+    case Register::FPGA_RG6_DurationImpulseA:
         FPGA::WriteRegister(FPGA::RG6_DurationImpulseA, value);
         break;
 
-    case FPGA_RG7_PeriodImpulseB:
+    case Register::FPGA_RG7_PeriodImpulseB:
         FPGA::WriteRegister(FPGA::RG7_PeriodImpulseB, value);
         break;
 
-    case FPGA_RG8_DurationImpulseB:
+    case Register::FPGA_RG8_DurationImpulseB:
         FPGA::WriteRegister(FPGA::RG8_DurationImpulseB, value);
         break;
 
-    case FPGA_RG9_FreqMeter:
+    case Register::FPGA_RG9_FreqMeter:
         FPGA::WriteRegister(FPGA::RG9_FreqMeter, value);
         freqForSend = MAX_UINT;
         break;
 
-    case FPGA_RG10_Offset:
+    case Register::FPGA_RG10_Offset:
         FPGA::WriteRegister(FPGA::RG10_Offset, value);
         break;
 
-    case Multiplexor3:
+    case Register::Multiplexor3:
         Multiplexor::WriteRegister(reg, value);
         break;
 
-    case FreqMeter_Resist:
+    case Register::FreqMeter_Resist:
         FreqMeter::SetResist((FreqResist)value);
         break;
 
-    case FreqMeter_Couple:
+    case Register::FreqMeter_Couple:
         FreqMeter::SetCouple((FreqCouple)value);
         break;
 
-    case FreqMeter_Filtr:
+    case Register::FreqMeter_Filtr:
         FreqMeter::SetFiltr((FreqFiltr)value);
         break;
 
-    case NumRegisters:
+    case Register::Number:
     default:
         break;
     }

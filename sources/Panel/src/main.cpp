@@ -31,9 +31,9 @@ int main()
        
     Menu::Init();
 
-    Generator::LoadRegister(OffsetA, 2048);
+    Generator::LoadRegister(Register::OffsetA, 2048);
     
-    Generator::LoadRegister(OffsetB, 2048);
+    Generator::LoadRegister(Register::OffsetB, 2048);
 
     while (1)
     {
