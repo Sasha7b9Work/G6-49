@@ -25,7 +25,7 @@ const char * namesWaveForm[WaveForm::Number][2] =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *Command_Name(CommandPanel command)
 {
-    static const char *names[NUM_COMMAND_WRITE] =
+    static const char *names[CommandPanel::Number] =
     {
         "SERVICE",
         "ENABLE",
@@ -40,7 +40,7 @@ const char *Command_Name(CommandPanel command)
         "MODE DEBUG"
     };
 
-    if (command >= NUM_COMMAND_WRITE)
+    if (command >= CommandPanel::Number)
     {
         static char buffer[10] = {0};
         sprintf(buffer, "%x", static_cast<uint8>(command));

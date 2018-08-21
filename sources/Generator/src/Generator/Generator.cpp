@@ -55,7 +55,7 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
 {
     typedef void (*pFuncChF)(Chan, float);
 
-    static const pFuncChF func[NUM_COMMAND_WRITE] =
+    static const pFuncChF func[CommandPanel::Number] =
     {
         0,
         0,

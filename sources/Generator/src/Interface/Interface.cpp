@@ -108,7 +108,7 @@ void Interface::ProcessCommand()
 {
     typedef void(*pFuncInterfaceVV)();
 
-    static const pFuncInterfaceVV commands[NUM_COMMAND_WRITE] =
+    static const pFuncInterfaceVV commands[CommandPanel::Number] =
     {
         CommandEmpty,
         CommandEnable,          /// ENABLE_CHANNEL
@@ -126,7 +126,7 @@ void Interface::ProcessCommand()
         CommandReadData         /// READ_DATA
     };
   
-    if (buffer[0] < NUM_COMMAND_WRITE)
+    if (buffer[0] < CommandPanel::Number)
     {       
         pFuncInterfaceVV f = commands[buffer[0]];
         f();

@@ -26,24 +26,8 @@ static SPI_HandleTypeDef hSPI3 =
 };
 
 
-typedef enum
-{
-    AD9952_CFR1,
-    AD9952_CFR2,
-    AD9952_ASF,
-    AD9952_ARR,
-    AD9952_FTW0,
-    AD9952_POW
-} RegAD9952;
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void WriteRegister(Chan ch, RegAD9952 reg);
-static void WriteCFR1(Chan ch);
-static void WriteCFR2(Chan ch);
-static void WriteASF(Chan ch);
-static void WriteFTW0(Chan ch);
-static void WriteToHardware(Chan ch, RegAD9952 reg, uint value);
+static void WriteToHardware(Chan ch, uint8 reg, uint value);
 static GeneratorWritePin ChipSelect(Chan ch);
 static void Reset();
 
@@ -77,18 +61,18 @@ void AD9952::Init()
 void AD9952::SetFrequency(Chan ch, float frequency)
 {
     setDDS.ad9952[ch].frequency = frequency;
-    WriteRegister(ch, AD9952_FTW0);
+    WriteRegister(ch, AD9952::FTW0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::SetAmplitude(Chan ch, float amplitude)
 {
     setDDS.ad9952[ch].amplitude = amplitude;
-    WriteRegister(ch, AD9952_ASF);
+    WriteRegister(ch, AD9952::ASF);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteRegister(Chan ch, RegAD9952 reg)
+void AD9952::WriteRegister(Chan ch, uint8 reg)
 {
     typedef void(*pFuncVCh)(Chan);
 
@@ -103,7 +87,7 @@ static void WriteRegister(Chan ch, RegAD9952 reg)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteCFR1(Chan ch)
+void AD9952::WriteCFR1(Chan ch)
 {
     uint value = 0;
     if(ch.IsB())
@@ -114,35 +98,35 @@ static void WriteCFR1(Chan ch)
     SetBit(value, 9);       // Однонаправленный режим
     SetBit(value, 13);
     SetBit(value, 25);      // OSK enable - управление амплитудой
-    WriteToHardware(ch, AD9952_CFR1, value);
+    WriteToHardware(ch, AD9952::CFR1, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteCFR2(Chan ch)
+void AD9952::WriteCFR2(Chan ch)
 {
     uint value = 0;
     SetBit(value, 3);
-    WriteToHardware(ch, AD9952_CFR2, value);
+    WriteToHardware(ch, AD9952::CFR2, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteASF(Chan ch)
+void AD9952::WriteASF(Chan ch)
 {
     uint value = ((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7;
 
-    WriteToHardware(ch, AD9952_ASF, value);
+    WriteToHardware(ch, AD9952::ASF, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteFTW0(Chan ch)
+void AD9952::WriteFTW0(Chan ch)
 {
     float FTWf = (setDDS.ad9952[ch].frequency / 1e8f) * powf(2, 32);
 
-    WriteToHardware(ch, AD9952_FTW0, (uint)(FTWf + 0.5f));
+    WriteToHardware(ch, AD9952::FTW0, (uint)(FTWf + 0.5f));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteToHardware(Chan ch, RegAD9952 reg, uint value)
+static void WriteToHardware(Chan ch, uint8 reg, uint value)
 {
     static const int numBytes[] =               // Число байт данных для передачи
     { //CFR1 CFR2 ASF ARR FTW0 POW

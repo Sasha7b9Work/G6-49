@@ -14,4 +14,19 @@ public:
     static void SetAmplitude(Chan ch, float amplitude);
 
 private:
+    enum
+    {
+        CFR1,
+        CFR2,
+        ASF,
+        ARR,
+        FTW0,
+        POW
+    };
+
+    static void WriteRegister(Chan ch, uint8 reg);
+    static void WriteCFR1(Chan ch);
+    static void WriteCFR2(Chan ch);
+    static void WriteASF(Chan ch);
+    static void WriteFTW0(Chan ch);
 };

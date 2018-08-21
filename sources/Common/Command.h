@@ -13,6 +13,11 @@
  *  @{
  */
 
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#undef COMMON_ENUM
+#define COMMON_ENUM     \
+    uint8 value; operator uint8() const { return value; }; operator uint8() { return value; }; bool Is(uint8 v) const { return v == value; }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -31,31 +36,43 @@
 */
 
 /// Возможные команды для передачи в основной процессор
-enum CommandPanel
+struct CommandPanel
 {
-
-    ENABLE_CHANNEL          = 1,    ///< Включить/выключить канал
-    SET_FORM_WAVE           = 2,    ///< Установить форму сигнала
-    SET_FREQUENCY           = 3,    ///< Установить частоту
-    SET_AMPLITUDE           = 4,    ///< Установить амплитуду
-    SET_OFFSET              = 5,    ///< Установать смещение
-    SET_DURATION            = 6,
-    SET_DUTYRATIO           = 7,
-    SET_PHASE               = 8,
-    RUN_RESET               = 9,    ///< Сброс состояния
-    MODE_DEBUG              = 10,   ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
-    SET_DELAY               = 11,   ///< Задержка
-    WRITE_REGISTER          = 12,   ///< Занести значение в регистр
-    READ_DATA               = 13,   ///< Чтение данных из генератора
-    NUM_COMMAND_WRITE,
-    COMMAND_NONE
+    enum
+    {
+        COMMAND_NONE = 0,
+        ENABLE_CHANNEL = 1,    ///< Включить/выключить канал
+        SET_FORM_WAVE = 2,    ///< Установить форму сигнала
+        SET_FREQUENCY = 3,    ///< Установить частоту
+        SET_AMPLITUDE = 4,    ///< Установить амплитуду
+        SET_OFFSET = 5,    ///< Установать смещение
+        SET_DURATION = 6,
+        SET_DUTYRATIO = 7,
+        SET_PHASE = 8,
+        RUN_RESET = 9,    ///< Сброс состояния
+        MODE_DEBUG = 10,   ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
+        SET_DELAY = 11,   ///< Задержка
+        WRITE_REGISTER = 12,   ///< Занести значение в регистр
+        READ_DATA = 13,   ///< Чтение данных из генератора
+        SET_DEPTH_MODULATION = 14,
+        SET_POLARITY = 15,
+        SET_DURATION_RISE = 16,
+        SET_DURATION_FALL = 17,
+        SET_DURATION_STADY = 18,
+        SET_DUTY_FACTOR = 19,
+        Number
+    };
+    COMMON_ENUM;
+    CommandPanel(uint8 v) : value(v)
+    {
+    };
 };
 
 /// Возможные команды, принимаемые от основного процессора
 enum CommandGenerator
 {
                             //   0            1...5
-    COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                                /* Результат измерения частотомера */
+    COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                           /* Результат измерения частотомера */
     NUM_COMMAND_READ
 };
 
