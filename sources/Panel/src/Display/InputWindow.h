@@ -55,7 +55,7 @@ private:
 
     static WaveForm             form;
 
-    static Type_WaveParameter   param;
+    static WaveParameter        param;
 
     static InputWindowStruct    iws;
 };

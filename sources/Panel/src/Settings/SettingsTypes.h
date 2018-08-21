@@ -141,8 +141,6 @@ struct FreqTest
     };
 };
 
-float MinValue(Type_WaveParameter param);
-float MaxValue(Type_WaveParameter param);
 
 #ifdef WIN32
 #pragma warning(pop)

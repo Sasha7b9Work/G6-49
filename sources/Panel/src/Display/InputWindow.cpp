@@ -11,10 +11,10 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (iws.numLockMode)
 
-Channel            InputWindow::chan;
-WaveForm           InputWindow::form;
-Type_WaveParameter InputWindow::param;
-InputWindowStruct  InputWindow::iws;
+Channel             InputWindow::chan;
+WaveForm            InputWindow::form;
+WaveParameter       InputWindow::param;
+InputWindowStruct   InputWindow::iws;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ void InputWindow::Draw()
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
     
-    static const pFuncVII func[NumParameters] =
+    static const pFuncVII func[WaveParameter::Number] =
     {
         DrawFrequency,
         DrawPeriod,
@@ -87,7 +87,7 @@ void InputWindow::DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Text::DrawBigText(x, y, 3, Parameter_Name(param));
+    Text::DrawBigText(x, y, 3, param.Name());
 
     char buf[2] = "0";
 

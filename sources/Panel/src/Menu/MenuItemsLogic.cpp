@@ -13,7 +13,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static pString nameParameter[NumParameters][2] =
+static pString nameParameter[WaveParameter::Number][2] =
 {
     { "◊¿—“Œ“¿",        "FREQUENCY" },
     { "œ≈–»Œƒ",         "PERIOD" },
@@ -414,7 +414,7 @@ int8 Choice::CurrentIndex() const
     {
         ChoiceParameter *param = (ChoiceParameter *)this;
 
-        for (int i = 0; i < NumParameters; i++)
+        for (int i = 0; i < WaveParameter::Number; i++)
         {
             if ((param->allowParameters).allow[i] == false)
             {
@@ -468,7 +468,7 @@ Item *ChoiceParameter::Press(TypePress press)
         volatile bool allow = false;
         do
         {
-            CircleIncrease<uint8>(numParameter, 0, (uint8)(NumParameters - 1));
+            CircleIncrease<uint8>(numParameter, 0, (uint8)(WaveParameter::Number - 1));
             allow = (allowParameters).allow[*numParameter];
         } while (!allow);
     }
@@ -509,7 +509,7 @@ Item *Button::Press(TypePress press)
 pString ChoiceParameter::NameSubItem(int number) const
 {
     const char * retValue = 0;
-    for (int i = 0; i < NumParameters; i++)
+    for (int i = 0; i < WaveParameter::Number; i++)
     {
         if ((allowParameters).allow[i] == false)
         {
@@ -525,9 +525,9 @@ pString ChoiceParameter::NameSubItem(int number) const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char* Parameter_Name(Type_WaveParameter parameter)
+pString WaveParameter::Name()
 {
-    return (char*)nameParameter[parameter][LANG];
+    return (char*)nameParameter[type][LANG];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

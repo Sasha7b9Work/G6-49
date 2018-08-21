@@ -25,11 +25,11 @@ private:
     /// Запись непосредственно в DAC
     static void TransmitI2C(uint8 address, uint8 data[3]);
 
-    //static void WriteParameter(Channel ch, Type_WaveParameter param, float value_);
+    //static void WriteParameter(Channel ch, WaveParameter param, float value_);
     /// Записать три байта данных по данному адресу
     static void WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin);
 
     static GeneratorWritePin PinLDAC(Channel ch);
 
-    static uint8 CreateCommandByte(Type_WaveParameter param);
+    static uint8 CreateCommandByte(WaveParameter param);
 };

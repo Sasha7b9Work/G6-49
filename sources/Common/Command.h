@@ -59,23 +59,44 @@ enum CommandGenerator
     NUM_COMMAND_READ
 };
 
-enum Type_WaveParameter
+struct WaveParameter
 {
-    Frequency,          ///< Частота
-    Period,             ///< Период
-    Amplitude,          ///< Амплитуда
-    Offset,             ///< Смещение
-    Duration,           ///< Длительность
-    DutyRatio,          ///< Скважность
-    Phase,              ///< Сдвиг фазы
-    Delay,              ///< Задержка
-    DepthModulation,    ///< Глубина амплитудной модуляции
-    Polarity,           ///< Полярность
-    DurationRise,       ///< Длительность нарастания
-    DurationFall,       ///< Длительность спада
-    DurationStady,      ///< Длительность установившего значения
-    DutyFactor,         ///< Коэффициент заполнения
-    NumParameters
+    enum
+    {
+        Frequency,          ///< Частота
+        Period,             ///< Период
+        Amplitude,          ///< Амплитуда
+        Offset,             ///< Смещение
+        Duration,           ///< Длительность
+        DutyRatio,          ///< Скважность
+        Phase,              ///< Сдвиг фазы
+        Delay,              ///< Задержка
+        DepthModulation,    ///< Глубина амплитудной модуляции
+        Polarity,           ///< Полярность
+        DurationRise,       ///< Длительность нарастания
+        DurationFall,       ///< Длительность спада
+        DurationStady,      ///< Длительность установившего значения
+        DutyFactor,         ///< Коэффициент заполнения
+        Number
+    };
+    uint8 type;
+    WaveParameter(uint8 t = 0) : type(t)
+    {
+    };
+    WaveParameter(int t) : type((uint8)t)
+    {
+    };
+    bool Is(WaveParameter param) const
+    {
+        return type == param.type;
+    }
+    float MinValue();
+    float MaxValue();
+    pString Name();
+    operator uint8() const
+    {
+        return type;
+    }
 };
 
 struct WaveForm

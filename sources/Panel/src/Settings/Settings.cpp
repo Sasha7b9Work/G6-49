@@ -45,9 +45,9 @@ static const Settings defSet =
     },
     { WaveForm::Sine, WaveForm::Sine }, // sig_form[NumChannels]
     { 
-        Frequency,                      // sig_parameter[NumForms]
-        Frequency,
-        Frequency
+        WaveParameter::Frequency,                      // sig_parameter[NumForms]
+        WaveParameter::Frequency,
+        WaveParameter::Frequency
     },
     3,                      // menu_currentPage
     (Page*)0,               // menu_page
@@ -90,7 +90,7 @@ Settings set = defSet;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const float minMax[NumParameters][2] =
+static const float minMax[WaveParameter::Number][2] =
 {
     {1.0f,    50e6f},       // Frequency
     {2e-08f,  1.0f},        // Period
@@ -104,15 +104,15 @@ static const float minMax[NumParameters][2] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float MinValue(Type_WaveParameter param)
+float WaveParameter::MinValue()
 {
-    return minMax[param][0];
+    return minMax[type][0];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float MaxValue(Type_WaveParameter param)
+float WaveParameter::MaxValue()
 {
-    return minMax[param][1];
+    return minMax[type][1];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -147,12 +147,12 @@ void TuneGenerator(Channel ch)
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     WaveForm form = WAVE_FORM_CH(ch);
     Generator::SetFormWave(ch, WAVE_FORM_CH(ch));
-    Generator::SetParameter(ch, Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Frequency))->Value());
-    Generator::SetParameter(ch, Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Amplitude))->Value());
-    Generator::SetParameter(ch, Offset, (&INPUT_WINDOW_STRUCT(ch, form, Offset))->Value());
+    Generator::SetParameter(ch, WaveParameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Frequency))->Value());
+    Generator::SetParameter(ch, WaveParameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Amplitude))->Value());
+    Generator::SetParameter(ch, WaveParameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Offset))->Value());
     if (form.Is(WaveForm::Impulse))
     {
-        Generator::SetParameter(ch, Duration, (&INPUT_WINDOW_STRUCT(ch, form, Duration))->Value());
+        Generator::SetParameter(ch, WaveParameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Duration))->Value());
     }
-    Generator::SetParameter(ch, Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM_CH(ch), Offset))->Value());
+    Generator::SetParameter(ch, WaveParameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM_CH(ch), WaveParameter::Offset))->Value());
 }
