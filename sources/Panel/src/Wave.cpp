@@ -79,15 +79,15 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
         first = false;
     }
 
-    Type_WaveForm type = WAVE_FORM_CH(chan).type;
+    WaveForm form = WAVE_FORM_CH(chan).type;
 
-    if (type != Free)
+    if (!form.Is(WaveForm::Free))
     {
         Painter::DrawVLine(x0, minY, maxY);
         Painter::DrawHLine(aveY, x0, x0 + width);
     }
 
-    if (type == Sine)
+    if (form.Is(WaveForm::Sine))
     {
         float speed = 0.1f;
         int delta = 1;
@@ -100,7 +100,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
-    else if(type == Cosine)
+    else if(form.Is(WaveForm::Cosine))
     {
         float speed = 0.1f;
         int delta = 1;
@@ -113,7 +113,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
-    else if(type == Meander)
+    else if(form.Is(WaveForm::Meander))
     {
         int dX = 40;
         int dY = 20;
@@ -125,7 +125,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
         }
     }
-    else if (type == RampPlus)
+    else if (form.Is(WaveForm::RampPlus))
     {
         int dX = 28;
         for (int x = x0; x < x0 + 80; x += dX)
@@ -134,7 +134,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawLine(x + dX, aveY, x + dX, minY);
         }
     }
-    else if(type == RampMinus)
+    else if(form.Is(WaveForm::RampMinus))
     {
         int dX = 28;
         int dY = 20;
@@ -144,7 +144,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY);
         }
     }
-    else if(type == Triangle)
+    else if(form.Is(WaveForm::Triangle))
     {
         int dX = 38;
         int dY = 20;
@@ -158,7 +158,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             }
         }
     }
-    else if(type == Trapeze)
+    else if(form.Is(WaveForm::Trapeze))
     {
         int dX = 20;
         int dY = 20;
@@ -170,7 +170,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             x0 += 2 * dX;
         }
     }
-    else if (type == Impulse)
+    else if (form.Is(WaveForm::Impulse))
     {
         int deltaX = 20;
         for (int i = 0; i < 5; i++)
@@ -181,7 +181,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             x0 += deltaX;
         }
     }
-    else if (type == ExpPlus)
+    else if (form.Is(WaveForm::ExpPlus))
     {
         for(int i = 0; i < 2; i++)
         {
@@ -193,7 +193,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
-    else if (type == ExpMinus)
+    else if (form.Is(WaveForm::ExpMinus))
     {
         for (int i = 0; i < 2; i++)
         {
@@ -205,7 +205,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
-    else if(type == Noise)
+    else if(form.Is(WaveForm::Noise))
     {
         int i = 0;
         int dX = 1;
@@ -215,7 +215,7 @@ void Wave::DrawSignalUGO(Channel chan, int y0)
             i++;
         }
     }
-    else if(type == Free)
+    else if(form.Is(WaveForm::Free))
     {
     }
 }

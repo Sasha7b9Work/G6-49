@@ -55,7 +55,7 @@ void Multiplexor::WriteRegister(Name_Register reg, uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::SetMode(Channel ch, Type_WaveForm form)
+void Multiplexor::SetMode(Channel ch, WaveForm form)
 {
 #define PIN_MX(ch, num) pins[ch][num]
 
@@ -65,12 +65,12 @@ void Multiplexor::SetMode(Channel ch, Type_WaveForm form)
         {PIN_MXB_A0, PIN_MXB_A1}
     };
 
-    if(form == Sine || form == Cosine)
+    if(form.Is(WaveForm::Sine) || form.Is(WaveForm::Cosine))
     {
         SetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));
     }
-    else if(form == Impulse)
+    else if(form.Is(WaveForm::Impulse))
     {
         ResetPin(PIN_MX(ch, 0));
         SetPin(PIN_MX(ch, 1));

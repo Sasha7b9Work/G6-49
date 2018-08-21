@@ -179,7 +179,7 @@ void Interface::CommandWriteService()
 void Interface::CommandFormWave()
 {
     Channel ch = (Channel)buffer[1];
-    Type_WaveForm form = (Type_WaveForm)buffer[2];
+    WaveForm form = (WaveForm)buffer[2];
     Generator::SetFormWave(ch, form);
 }
 
@@ -258,6 +258,10 @@ void Interface::CommandWriteRegister()
     case FPGA_RG9_FreqMeter:
         FPGA::WriteRegister(FPGA::RG9_FreqMeter, value);
         freqForSend = MAX_UINT;
+        break;
+
+    case FPGA_RG10_Offset:
+        FPGA::WriteRegister(FPGA::RG10_Offset, value);
         break;
 
     case Multiplexor3:

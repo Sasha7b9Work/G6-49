@@ -2,7 +2,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-InputWindowStruct sig_structParameter[NumChannels][NumForms][NumParameters] =
+InputWindowStruct sig_structParameter[NumChannels][WaveForm::Number][NumParameters] =
 {
             {
             {                                                                           // [A][Form_Sine]

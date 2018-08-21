@@ -73,29 +73,29 @@ enum Type_WaveParameter
     NumParameters
 };
 
-enum Type_WaveForm
-{
-    Sine,           ///< Синус
-    Cosine,         ///< Косинус
-    Meander,        ///< Меандр
-    RampPlus,       ///< Пила+
-    RampMinus,      ///< Пила-
-    Triangle,       ///< Треугольник
-    Trapeze,        ///< Трапеция
-    Impulse,        ///< Импульс
-    ExpPlus,        ///< Экспонента+
-    ExpMinus,       ///< Экспонента-
-    Noise,          ///< Шум
-    Free,           ///< Произвольный
-    NumForms
-};
-
 struct WaveForm
 {
-    Type_WaveForm type;
+    enum
+    {
+        Sine,           ///< Синус
+        Cosine,         ///< Косинус
+        Meander,        ///< Меандр
+        RampPlus,       ///< Пила+
+        RampMinus,      ///< Пила-
+        Triangle,       ///< Треугольник
+        Trapeze,        ///< Трапеция
+        Impulse,        ///< Импульс
+        ExpPlus,        ///< Экспонента+
+        ExpMinus,       ///< Экспонента-
+        Noise,          ///< Шум
+        Free,           ///< Произвольный
+        Number
+    };
+    uint8 type;
     WaveForm(uint8 num = 0);
     pString Name() const;
-    uint8 ToValue() const;
+    operator uint8() const;
+    bool Is(WaveForm form) const;
 };
 
 enum Name_Register
@@ -142,7 +142,7 @@ struct Register
 #define NAME_FORM(form, lang) namesWaveForm[form][lang]
 #define FORM_RU(form) NAME_FORM(form, RU)
 #define FORM_EN(form) NAME_FORM(form, EN)
-extern const char * namesWaveForm[NumForms][2];
+extern const char * namesWaveForm[WaveForm::Number][2];
 
 
 //const char *Command_Name(CommandPanel command);

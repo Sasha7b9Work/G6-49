@@ -19,7 +19,7 @@ static uint8 waveForm = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    waveForm = WAVE_FORM.ToValue();
+    waveForm = WAVE_FORM;
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM);
 }
@@ -67,30 +67,18 @@ DEF_CHOICE_12( cForm,                                                           
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
-    FORM_RU(Sine),      FORM_EN(Sine),      "Синус.",
-                                            "Sinus.",
-    FORM_RU(Cosine),    FORM_EN(Cosine),    "Косинус.",
-                                            "Cosine.",
-    FORM_RU(Meander),   FORM_EN(Meander),   "Меандр.",
-                                            "Meander.",
-    FORM_RU(RampPlus),  FORM_EN(RampPlus),  "Нарастающая пила.",
-                                            "Growing saw.",
-    FORM_RU(RampMinus), FORM_EN(RampMinus), "Убывающая пила.",
-                                            "Wrecking saw.",
-    FORM_RU(Triangle),  FORM_EN(Triangle),  "Треугольник.",
-                                            "Triangle.",
-    FORM_RU(Trapeze),   FORM_EN(Trapeze),   "Трапеция.",
-                                            "Trapeze.",
-    FORM_RU(Impulse),   FORM_EN(Impulse),   "Импульс.",
-                                            "Impulse.",
-    FORM_RU(ExpPlus),   FORM_EN(ExpPlus),   "Возрастающая экспонента.",
-                                            "Growing exponent.",
-    FORM_RU(ExpMinus),  FORM_EN(ExpMinus),  "Убывающая экспонента.",
-                                            "Decreasing exponent.",
-    FORM_RU(Noise),     FORM_EN(Noise),     "Шум.",
-                                            "Noise.",
-    FORM_RU(Free),      FORM_EN(Free),      "Произвольная форма сигнала.",
-                                            "Arbitrary waveform.",
+    FORM_RU(WaveForm::Sine),        FORM_EN(WaveForm::Sine),        "Синус.",                       "Sinus.",
+    FORM_RU(WaveForm::Cosine),      FORM_EN(WaveForm::Cosine),      "Косинус.",                     "Cosine.",
+    FORM_RU(WaveForm::Meander),     FORM_EN(WaveForm::Meander),     "Меандр.",                      "Meander.",
+    FORM_RU(WaveForm::RampPlus),    FORM_EN(WaveForm::RampPlus),    "Нарастающая пила.",            "Growing saw.",
+    FORM_RU(WaveForm::RampMinus),   FORM_EN(WaveForm::RampMinus),   "Убывающая пила.",              "Wrecking saw.",
+    FORM_RU(WaveForm::Triangle),    FORM_EN(WaveForm::Triangle),    "Треугольник.",                 "Triangle.",
+    FORM_RU(WaveForm::Trapeze),     FORM_EN(WaveForm::Trapeze),     "Трапеция.",                    "Trapeze.",
+    FORM_RU(WaveForm::Impulse),     FORM_EN(WaveForm::Impulse),     "Импульс.",                     "Impulse.",
+    FORM_RU(WaveForm::ExpPlus),     FORM_EN(WaveForm::ExpPlus),     "Возрастающая экспонента.",     "Growing exponent.",
+    FORM_RU(WaveForm::ExpMinus),    FORM_EN(WaveForm::ExpMinus),    "Убывающая экспонента.",        "Decreasing exponent.",
+    FORM_RU(WaveForm::Noise),       FORM_EN(WaveForm::Noise),       "Шум.",                         "Noise.",
+    FORM_RU(WaveForm::Free),        FORM_EN(WaveForm::Free),        "Произвольная форма сигнала.",  "Arbitrary waveform.",
     waveForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -121,7 +109,7 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::Init()
 {
-    waveForm = WAVE_FORM.ToValue();
+    waveForm = WAVE_FORM;
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm(waveForm));
 }

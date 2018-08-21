@@ -100,11 +100,11 @@ void FPGA::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetWaveForm(Type_WaveForm form)
+void FPGA::SetWaveForm(WaveForm form)
 {
     typedef void(*pFuncFpgaVV)();
     
-    static const pFuncFpgaVV func[NumForms] =
+    static const pFuncFpgaVV func[WaveForm::Number] =
     {
         CreateSine,
         CreateCosine,
@@ -120,10 +120,7 @@ void FPGA::SetWaveForm(Type_WaveForm form)
         CreateFree
     };
     
-    if (form < NumForms)
-    {
-        func[form]();
-    }
+    func[form]();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -333,7 +330,8 @@ void FPGA::WriteRegister(uint8 reg, uint value)
         32, // RG6_DurationImpulseA,
         32, // RG7_PeriodImpulseB,
         32, // RG8_DurationImpulseB,
-        13  // RG9_FreqMeter
+        13, // RG9_FreqMeter
+        28  // RG10_Offset
     };
 
     WriteAddress(reg);

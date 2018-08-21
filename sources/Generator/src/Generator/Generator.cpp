@@ -33,11 +33,11 @@ void Generator::EnableChannel(Channel ch, bool enable)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Channel ch, Type_WaveForm form)
+void Generator::SetFormWave(Channel ch, WaveForm form)
 {
     static const GeneratorWritePin pin[NumChannels] = {Pin_P1_AmplifierA, Pin_P2_AmplifierB};
 
-    waveIsSine = (form == Sine);
+    waveIsSine = form.Is(WaveForm::Sine);
 
     // Если нужен синус, то пишем ноль, чтобы обеспечить прохождение сигнала DDS. Иначе 1, чтобы обеспечить прохождение сигнала ПЛИС
     CPU::WritePin(pin[ch], !waveIsSine);

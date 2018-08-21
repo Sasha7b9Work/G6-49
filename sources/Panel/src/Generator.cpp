@@ -46,7 +46,7 @@ void Generator::Reset()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Channel ch, WaveForm form)
 {
-    uint8 buffer[3] = {SET_FORM_WAVE, (uint8)ch, form.ToValue()};
+    uint8 buffer[3] = {SET_FORM_WAVE, (uint8)ch, form};
     SendToInterface(buffer, 3);
 }
 

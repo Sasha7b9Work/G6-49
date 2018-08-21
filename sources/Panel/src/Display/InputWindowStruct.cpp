@@ -551,8 +551,8 @@ static void SendIWStoGenerator()
 
     if (m_param == Delay)
     {
-        PARAMETER(B, WaveForm(Impulse), Frequency) = PARAMETER(B, WaveForm(Impulse), Frequency);
-        float frequency = PARAMETER(A, WaveForm(Impulse), Frequency).Value();
+        PARAMETER(B, WaveForm(WaveForm::Impulse), Frequency) = PARAMETER(B, WaveForm(WaveForm::Impulse), Frequency);
+        float frequency = PARAMETER(A, WaveForm(WaveForm::Impulse), Frequency).Value();
         Generator::SetParameter(B, Frequency, frequency);
 
         float value = PARAMETER(ch, form, m_param).Value();

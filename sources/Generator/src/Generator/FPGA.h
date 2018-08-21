@@ -16,7 +16,7 @@ friend class Interface;
 public:
     static void Init();
 
-    static void SetWaveForm(Type_WaveForm form);
+    static void SetWaveForm(WaveForm form);
 
     static void SetFrequency(Channel ch, float frequency);
 
@@ -45,6 +45,7 @@ private:
         RG7_PeriodImpulseB,
         RG8_DurationImpulseB,
         RG9_FreqMeter,
+        RG10_Offset,
         NumRegistersFPGA
         /*
         Reg_Control,
