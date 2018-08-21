@@ -36,7 +36,7 @@ DEF_CHOICE_2( cService_Language,                                                
                              "Menu language - Russian",
     "јЌ√Ћ»…— »…", "ENGLISH", "язык меню - английский",
                              "Menu language - English",
-    FLAG_2, LANG, pService, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_2, (uint8)LANG, pService, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 

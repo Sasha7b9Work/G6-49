@@ -1,6 +1,11 @@
 #pragma once
 #include "defines.h"
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4514)
+#endif
+
 
 /** @addtogroup Panel
  *  @{
@@ -92,10 +97,18 @@ struct WaveForm
         Number
     };
     uint8 type;
-    WaveForm(uint8 num = 0);
     pString Name() const;
-    operator uint8() const;
-    bool Is(WaveForm form) const;
+    bool Is(WaveForm form) const
+    {
+        return type == form.type;
+    }
+    WaveForm(uint8 num) : type(num)
+    {
+    }
+    operator uint8() const
+    {
+        return type;
+    }
 };
 
 enum Name_Register
@@ -140,8 +153,8 @@ struct Register
 #define SPI_MASTER_SYNBYTE  0xAC
 
 #define NAME_FORM(form, lang) namesWaveForm[form][lang]
-#define FORM_RU(form) NAME_FORM(form, RU)
-#define FORM_EN(form) NAME_FORM(form, EN)
+#define FORM_RU(form) NAME_FORM(form, Language::RU)
+#define FORM_EN(form) NAME_FORM(form, Language::EN)
 extern const char * namesWaveForm[WaveForm::Number][2];
 
 
@@ -149,3 +162,7 @@ extern const char * namesWaveForm[WaveForm::Number][2];
 
 
 /** @}  @} */
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

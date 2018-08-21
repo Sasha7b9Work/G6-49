@@ -1,82 +1,149 @@
 #pragma once
+#include "defines.h"
 #include "Command.h"
 #include "CommonTypes.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-enum BillingTime
+#define COMMON_ENUM     uint8 value; operator uint8() const { return value; }; operator uint8() { return value; }
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4514)
+#endif
+
+struct BillingTime
 {
-    BillingTime_1ms,
-    BillingTime_10ms,
-    BillingTime_100ms,
-    BillingTime_1000ms,
-    BillingTime_10000ms
+    enum
+    {
+        _1ms,
+        _10ms,
+        _100ms,
+        _1000ms,
+        _10000ms
+    };
+    COMMON_ENUM;
 };
 
-enum Language
+struct Language
 {
-    RU,
-    EN
+    enum
+    {
+        RU,
+        EN
+    };
+    COMMON_ENUM;
+    Language(int v) : value((uint8)v)
+    {
+    };
 };
 
-enum SizeByte
+struct SizeByte
 {
-    Size_7bit,
-    Size_8bit
+    enum
+    {
+        _7bit,
+        _8bit
+    };
+    COMMON_ENUM;
 };
 
-enum StopBit
+struct StopBit
 {
-    StopBit_1,
-    StopBit_2
+    enum
+    {
+        _1,
+        _2
+    };
+    COMMON_ENUM;
 };
 
-enum Parity
+struct Parity
 {
-    Parity_Off,
-    Parity_On
+    enum
+    {
+        Off,
+        On
+    };
+    COMMON_ENUM;
 };
 
 /// 
-enum FreqInterval
+struct FreqInterval
 {
-    FreqInterval_1,
-    FreqInterval_10
+    enum
+    {
+        _1,
+        _10
+    };
+    COMMON_ENUM;
+    FreqInterval(int v) : value((uint8)v)
+    {
+    }
 };
 
 /// Измерять частоту или период
-enum FreqMeasure
+struct FreqMeasure
 {
-    FreqMeasure_Freq,
-    FreqMeasure_Period
+    enum
+    {
+        Freq,
+        Period
+    };
+    COMMON_ENUM;
+    FreqMeasure(int v) : value((uint8)v)
+    {
+    }
 };
 
 /// Число усредняемых период в режиме измерения периода сигнала
-enum FreqAvePeriod
+struct FreqAvePeriod
 {
-    FreqAvePeriod_1,
-    FreqAvePeriod_10,
-    FreqAvePeriod_100,
-    FreqAvePeriod_1000,
-    FreqAvePeriod_10000
+    enum
+    {
+        _1,
+        _10,
+        _100,
+        _1000,
+        _10000
+    };
+    COMMON_ENUM;
 };
 
 /// Метки времени
-enum FreqTimeStamps
+struct FreqTimeStamps
 {
-    FreqTimeStamps_1kHz,
-    FreqTimeStamps_10kHz,
-    FreqTimeStamps_100kHz,
-    FreqTimeStamps_1MHz,
-    FreqTimeStamps_10MHz
+    enum
+    {
+        _1kHz,
+        _10kHz,
+        _100kHz,
+        _1MHz,
+        _10MHz
+    };
+    COMMON_ENUM;
 };
 
 /// Тестовый режим частотомера
-enum FreqTest
+struct FreqTest
 {
-    FreqTest_Off,
-    FreqTest_On
+    enum
+    {
+        Off,
+        On
+    };
+    COMMON_ENUM;
+    FreqTest(int v) : value((uint8)v)
+    {
+    };
 };
 
 float MinValue(Type_WaveParameter param);
 float MaxValue(Type_WaveParameter param);
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif
