@@ -1,4 +1,6 @@
 #pragma once
+#include "defines.h"
+#include "Hardware/CPU.h"
 #include "GeneratorSettingsTypes.h"
 
 
@@ -14,16 +16,25 @@ public:
     static void SetAmplitude(Chan ch, float amplitude);
 
 private:
-    enum
+    struct Register
     {
-        CFR1,
-        CFR2,
-        ASF,
-        ARR,
-        FTW0,
-        POW
+        enum
+        {
+            CFR1,
+            CFR2,
+            ASF,
+            ARR,
+            FTW0,
+            POW
+        };
+        uint8 value;
+        Register(uint8 v) : value(v) { };
+        operator uint8() const { return value;  };
     };
 
+    static void WriteToHardware(Chan ch, Register reg, uint value);
+    static GeneratorWritePin ChipSelect(Chan ch);
+    static void Reset();
     static void WriteRegister(Chan ch, uint8 reg);
     static void WriteCFR1(Chan ch);
     static void WriteCFR2(Chan ch);

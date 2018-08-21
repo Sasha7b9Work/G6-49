@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>USE_HAL_DRIVER;STM32F407xx;MSVC;WIN32</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4201;4310;4820;5045</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4201;4310;4514;4820;5045</DisableSpecificWarnings>
       <AdditionalOptions>-MP -Qspectre %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
