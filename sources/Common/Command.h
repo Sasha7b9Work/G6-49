@@ -126,7 +126,7 @@ struct WaveForm
 
 struct Register
 {
-    enum
+    enum E
     {
         Multiplexor1,
         Multiplexor2,
@@ -150,20 +150,11 @@ struct Register
         FreqMeter_Couple,
         FreqMeter_Filtr,
         Number
-    };
-    Register(uint8 n = Multiplexor1) : name(n)
-    {
-    };
-    uint8 name;
+    } value;
+    bool Is(E reg) const { return reg == value; };
+    Register(E v) : value(v) {};
+    operator uint8() const { return (uint8)value; };
     pString Name() const;
-    bool Is(uint8 n) const
-    {
-        return n == this->name;
-    }
-    operator uint8() const
-    {
-        return name;
-    }
 };
 
 

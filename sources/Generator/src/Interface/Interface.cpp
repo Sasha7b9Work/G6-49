@@ -186,7 +186,7 @@ void Interface::CommandFormWave()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandWriteRegister()
 {
-    Register reg = (Register)buffer[1];
+    Register reg = (Register::E)buffer[1];
 
     BitSet32 set;
     for (int i = 0; i < 4; i++)
@@ -196,7 +196,7 @@ void Interface::CommandWriteRegister()
 
     uint value = set.word;
 
-    switch (reg.name)
+    switch (reg.value)
     {
     case Register::Multiplexor1:
     case Register::Multiplexor2:

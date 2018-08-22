@@ -80,5 +80,5 @@ pString Register::Name() const
         "Мультиплексор 3"
     };
 
-    return names[name];
+    return names[value];
 }

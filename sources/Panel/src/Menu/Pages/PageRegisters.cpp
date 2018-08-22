@@ -163,7 +163,7 @@ void PageRegisters::DrawRegisters(int x, int y)
 {
     for(uint8 i = 0; i < Register::Number; i++)
     {
-        Register reg(i);
+        Register reg((Register::E)i);
         Color color = Color::FILL;
         if(i == currentRegister)
         {
@@ -185,7 +185,7 @@ static void DrawValue(int x, int y, uint8 i)
 
     Painter::SetColor(Color::FILL);
 
-    Register name(i);
+    Register name((Register::E)i);
 
     TypeInput type = TypeBuffer(name);
 
