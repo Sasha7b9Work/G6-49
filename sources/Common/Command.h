@@ -32,7 +32,7 @@
 /// Возможные команды для передачи в основной процессор
 struct CommandPanel
 {
-    enum ECommandPanel
+    enum E
     {
         COMMAND_NONE = 0,
         ENABLE_CHANNEL = 1,    ///< Включить/выключить канал
@@ -56,14 +56,14 @@ struct CommandPanel
         SET_DUTY_FACTOR = 19,
         Number
     } value;
-    CommandPanel(ECommandPanel v) : value(v){};
+    CommandPanel(E v) : value(v){};
     operator uint8() const { return (uint8)value; };
 };
 
 /// Возможные команды, принимаемые от основного процессора
 struct CommandGenerator
 {
-    enum ECommandGenerator
+    enum E
     {
         //   0            1...5
         COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                           /* Результат измерения частотомера */
@@ -73,7 +73,7 @@ struct CommandGenerator
 
 struct WaveParameter
 {
-    enum EWaveParameter
+    enum E
     {
         Frequency,          ///< Частота
         Period,             ///< Период
@@ -92,8 +92,8 @@ struct WaveParameter
         Number
     } value;
 
-    WaveParameter(int v) : value((EWaveParameter)v) {};
-    bool Is(EWaveParameter param) const { return param == value; }
+    WaveParameter(int v) : value((E)v) {};
+    bool Is(E param) const { return param == value; }
     operator uint8() const { return (uint8)value; }
     float MinValue() const;
     float MaxValue() const;
@@ -102,7 +102,7 @@ struct WaveParameter
 
 struct WaveForm
 {
-    enum EWaveForm
+    enum E
     {
         Sine,           ///< Синус
         Cosine,         ///< Косинус
@@ -118,8 +118,8 @@ struct WaveForm
         Free,           ///< Произвольный
         Number
     } value;
-    WaveForm(EWaveForm v) : value((EWaveForm)v) { };
-    bool Is(EWaveForm form) const { return form == value; };
+    WaveForm(E v) : value((E)v) { };
+    bool Is(E form) const { return form == value; };
     operator uint8() const { return (uint8)value; };
     pString Name() const;
 };

@@ -47,7 +47,7 @@ static void SetWaveForm(Chan ch, WaveForm form)
 
 void PageSignals::OnPress_Form(bool)
 {
-    WaveForm form = WaveForm((WaveForm::EWaveForm)waveForm);
+    WaveForm form = WaveForm((WaveForm::E)waveForm);
 
     /*
     if (form.type == Form_Saw || form.type == Form_Impulse)
@@ -102,7 +102,7 @@ DEF_CHOICE_PARAMETER(parameters,                                                
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки.",
     "Choosing a setting for customization.",
-    pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER(WaveForm((WaveForm::EWaveForm)waveForm))),
+    pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER(WaveForm((WaveForm::E)waveForm))),
     true, true, true, true, false, false, false, false
 )
 
@@ -111,7 +111,7 @@ void PageSignals::Init()
 {
     waveForm = WAVE_FORM;
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm((WaveForm::EWaveForm)waveForm));
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm((WaveForm::E)waveForm));
 }
 
 DEF_PAGE_4
