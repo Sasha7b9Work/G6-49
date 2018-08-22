@@ -5,26 +5,44 @@
 #include "Settings/SettingsTypes.h"
 
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4514)
+#endif
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define NUM_DIGITS          5
 
 
-enum Order
+struct Order
 {
-    Nano,       // нано
-    Micro,      // микро
-    Milli,      // милли
-    One,        // единицы
-    Kilo,       // кило
-    Mega,       // мега
-    NumOrders
+    enum
+    {
+        Nano,       // нано
+        Micro,      // микро
+        Milli,      // милли
+        One,        // единицы
+        Kilo,       // кило
+        Mega,       // мега
+        Number
+    };
+    uint8 value;
+    Order(uint8 v) : value(v) {};
+    operator uint8() const { return value; };
 };
 
-enum SignValue
+struct SignValue
 {
-    Sign_None,
-    Sign_Minus,
-    Sign_Plus
+    enum
+    {
+        None,
+        Minus,
+        Plus
+    };
+    uint8 value;
+    SignValue(uint8 v) : value(v) {};
+    operator uint8() const { return value; };
 };
 
 class InputWindowStruct
@@ -58,9 +76,9 @@ public:
     int8          posComma;                   ///< ѕосле какого знакоместа выводить зап€тую
     int8          prevPosComma;
 	int8          hightLightDigit;            ///< ѕозици€ подсвеченного знакоместа
-	Order         order                 : 3;
+	uint8         order                 : 3;
     uint8         param                 : 4;  ///< ѕеречисление типа WaveParameter
-    SignValue     sign                  : 2;  ///< ѕеречисление типа SignValue
+    uint8         sign                  : 2;  ///< ѕеречисление типа SignValue
     uint          allow                 : 1;  ///< ≈сли 1, параметр разрешен дл€ данного сигнала
     uint          numLockMode           : 1;  ///< 1, когда происходит клавишный (0...9) ввод значени€
 };
@@ -70,3 +88,7 @@ public:
 const char *NameOrder(Order order);
 const char *NameUnit(char buffer[10], Order order, WaveParameter parameter);
 
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

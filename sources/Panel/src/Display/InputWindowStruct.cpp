@@ -327,7 +327,7 @@ static void ShiftToLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 const char *NameOrder(Order order)
 {
-    static const char *names[NumOrders][2] =
+    static const char *names[Order::Number][2] =
     {
         {"н",   "n"},
         {"мк",  "u"},
@@ -409,7 +409,7 @@ static float ValueAfterComma(InputWindowStruct *iws_)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void IncreaseOrder()
 {
-    if (iws->order < NumOrders - 1)
+    if (iws->order < Order::Number - 1)
     {
         iws->order = (Order)((uint)iws->order + 1);
 
@@ -422,23 +422,23 @@ float InputWindowStruct::Value()
 {
     float value = ValueBeforeComma(this) + ValueAfterComma(this);
 
-    if (order == Nano)
+    if (order == Order::Nano)
     {
         return value * 1e-9f;
     }
-    if (order == Micro)
+    if (order == Order::Micro)
     {
         return value * 1e-6f;
     }
-    if (order == Milli)
+    if (order == Order::Milli)
     {
         return value * 1e-3f;
     }
-    if (order == Kilo)
+    if (order == Order::Kilo)
     {
         return value * 1e3f;
     }
-    if (order == Mega)
+    if (order == Order::Mega)
     {
         return value * 1e6f;
     }
@@ -571,11 +571,11 @@ static void FillIWSfromInputBuffer()
 {
     if (m_param.Is(WaveParameter::Duration) || m_param.Is(WaveParameter::Delay))
     {
-        iws->order = Micro;
+        iws->order = Order::Micro;
     }
     else
     {
-        iws->order = One;
+        iws->order = Order::One;
     }
 
     if (SU::FindSymbol(m_inputBuffer, '.') == -1)             // Если точки нету
@@ -608,9 +608,9 @@ static void FillIWSfromInputBuffer()
         }
     }
 
-    if (iws->sign != Sign_None)
+    if (iws->sign != SignValue::None)
     {
-        iws->sign = (atof(m_inputBuffer) >= 0.0) ? Sign_Plus : Sign_Minus;
+        iws->sign = (atof(m_inputBuffer) >= 0.0) ? SignValue::Plus : SignValue::Minus;
     }
 
     iws->hightLightDigit = NUM_DIGITS - 1;
