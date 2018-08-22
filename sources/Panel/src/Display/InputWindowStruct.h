@@ -17,7 +17,7 @@
 
 struct Order
 {
-    enum
+    enum E
     {
         Nano,       // нано
         Micro,      // микро
@@ -26,23 +26,22 @@ struct Order
         Kilo,       // кило
         Mega,       // мега
         Number
-    };
-    uint8 value;
-    Order(uint8 v) : value(v) {};
-    operator uint8() const { return value; };
+    } value;
+    Order(E v) : value(v) {};
+    operator uint8() const { return (uint8)value; };
+    pString Name() const;
 };
 
 struct SignValue
 {
-    enum
+    enum E
     {
         None,
         Minus,
         Plus
-    };
-    uint8 value;
-    SignValue(uint8 v) : value(v) {};
-    operator uint8() const { return value; };
+    } value;
+    SignValue(E v) : value(v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 class InputWindowStruct
@@ -85,7 +84,6 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *NameOrder(Order order);
 const char *NameUnit(char buffer[10], Order order, WaveParameter parameter);
 
 

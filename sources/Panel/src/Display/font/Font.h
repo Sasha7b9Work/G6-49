@@ -20,7 +20,7 @@ struct Font
 {
     struct Type
     {
-        enum
+        enum E
         {
             _5,
             _8,
@@ -28,10 +28,9 @@ struct Font
             _UGO2,
             Number,
             None
-        };
-        uint8 value;
-        Type(uint8 v) : value(v) {};
-        operator uint8() const { return value; };
+        } value;
+        Type(E v) : value(v) {};
+        operator uint8() const { return (uint8)value; };
     };
 
     static int GetSize();

@@ -325,7 +325,7 @@ static void ShiftToLeft()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *NameOrder(Order order)
+pString Order::Name() const
 {
     static const char *names[Order::Number][2] =
     {
@@ -337,7 +337,7 @@ const char *NameOrder(Order order)
         {"М",   "M"}
     };
 
-    return names[order][LANG];
+    return names[value][LANG];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -355,7 +355,7 @@ const char *NameUnit(char buffer[10], Order order, WaveParameter parameter)
         {"с",  "s"}
     };
 
-    sprintf(buffer, "%s%s", NameOrder(order), names[parameter][LANG]);
+    sprintf(buffer, "%s%s", order.Name(), names[parameter][LANG]);
 
     return buffer;
 }
@@ -411,7 +411,7 @@ static void IncreaseOrder()
 {
     if (iws->order < Order::Number - 1)
     {
-        iws->order = (Order)((uint)iws->order + 1);
+        iws->order = (Order)(Order::E)((uint)iws->order + 1);
 
         POS_COMMA -= 3;
     }
@@ -604,7 +604,7 @@ static void FillIWSfromInputBuffer()
                 m_inputBuffer[pos + 4] = '0';
             }
 
-            iws->order = (Order)((uint)iws->order - 1);
+            iws->order = (Order::E)((uint)iws->order - 1);
         }
     }
 
@@ -627,7 +627,7 @@ static void FillIWSfromInputBuffer()
 
         m_inputBuffer[pos - 3] = '.';               // И ставим точку слева от этой тройки
 
-        iws->order = (Order)((uint)iws->order + 1); // И увеличиваем степень на три порядка
+        iws->order = (Order::E)((uint)iws->order + 1); // И увеличиваем степень на три порядка
     }
 
     // В этой точке целая часть числа уже не превышает 999

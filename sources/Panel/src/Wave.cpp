@@ -265,5 +265,5 @@ void Wave::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
     x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 
     char buffer[10];
-    Text::DrawText(x, y, NameUnit(buffer, PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
+    Text::DrawText(x, y, NameUnit(buffer, (Order::E)PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
 }

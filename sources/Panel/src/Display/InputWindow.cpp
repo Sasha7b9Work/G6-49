@@ -123,7 +123,7 @@ void InputWindow::DrawDigits(int x, int y)
     }
 
     char buffer[10] = {0};
-    Text::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, iws.order, iws.param));
+    Text::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, (Order::E)iws.order, iws.param));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
