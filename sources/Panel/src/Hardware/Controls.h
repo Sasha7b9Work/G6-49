@@ -46,20 +46,20 @@ struct Control
 
     struct Action
     {
-        enum
+        enum EAction
         {
             Down,
             Long,
             Up
         };
-        uint8 value;
-        Action(uint8 v = Down) : value(v) {};
-        operator uint8() const { return value; };
+        EAction value;
+        Action(EAction v = Down) : value(v) {};
+        operator uint8() const { return (uint8)value; };
         bool Is(Action a) const { return a.value == value; };
     } action;
 
     EControl value;
-    Control(EControl v = B_None, uint8 a = Action::Down) : action(a), value(v) {};
+    Control(EControl v = B_None, Action::EAction a = Action::Down) : action(a), value(v) {};
     Control operator=(Control rval)
     {
         value = rval.value;
