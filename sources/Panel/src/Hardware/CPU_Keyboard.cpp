@@ -43,12 +43,12 @@ static void DetectRegulator();
 /// ѕри обнаружении нажати€ кнопки сюда записываетс€ врем€ нажати€
 static uint timePress[5][6];
 
-                                     // SL0  SL1  SL2       SL3     SL4   SL5
-static const Control controls[5][6] = {{B_0, B_5, B_Dot,   B_ESC,   B_F1, B_None},    // RL0
-                                       {B_1, B_6, B_Minus, B_LEFT,  B_F2, B_None},    // RL1
-                                       {B_2, B_7, B_None,  B_RIGHT, B_F3, B_None},    // RL2
-                                       {B_3, B_8, B_ON1,   B_None,  B_F4, B_None},    // RL3
-                                       {B_4, B_9, B_ON2,   B_None,  B_F5, B_None}};   // RL4
+                                     //          SL0           SL1           SL2               SL3               SL4            SL5
+static const Control controls[5][6] = {{Control::B_0, Control::B_5, Control::B_Dot,   Control::B_ESC,   Control::B_F1, Control::B_None},    // RL0
+                                       {Control::B_1, Control::B_6, Control::B_Minus, Control::B_LEFT,  Control::B_F2, Control::B_None},    // RL1
+                                       {Control::B_2, Control::B_7, Control::B_None,  Control::B_RIGHT, Control::B_F3, Control::B_None},    // RL2
+                                       {Control::B_3, Control::B_8, Control::B_ON1,   Control::B_None,  Control::B_F4, Control::B_None},    // RL3
+                                       {Control::B_4, Control::B_9, Control::B_ON2,   Control::B_None,  Control::B_F5, Control::B_None}};   // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
@@ -103,7 +103,7 @@ void CPU::Keyboard::Update()
 
             Control control =  controls[rl][sl];
 
-            if (control != B_None)
+            if (control != Control::B_None)
             {
                 if (timePress[rl][sl] && timePress[rl][sl] != MAX_UINT)     // ≈сли клавиша находитс€ в нажатом положении
                 {
@@ -161,7 +161,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // ≈сли нажатие длитс€ более 0.5 сек
         {
-            FillCommand(REG_BTN, Long);                                     // посылаем длинное нажатие
+            FillCommand(Control::REG_BTN, Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -173,7 +173,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                FillCommand(REG_BTN, Down);
+                FillCommand(Control::REG_BTN, Down);
             }
         }
         else                                                                // ≈ксли копка была нажата ранее
@@ -182,7 +182,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    FillCommand(REG_BTN, Up);
+                    FillCommand(Control::REG_BTN, Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -203,12 +203,12 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        FillCommand(REG_LEFT, Down);
+        FillCommand(Control::REG_LEFT, Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        FillCommand(REG_RIGHT, Down);
+        FillCommand(Control::REG_RIGHT, Down);
         prevStatesIsOne = false;
     }
 }
@@ -233,7 +233,7 @@ StructControl CPU::Keyboard::GetNextControl()
 
     if (BufferIsEmpty())
     {
-        retValue.key = B_None;
+        retValue.key = Control::B_None;
     }
     else
     {

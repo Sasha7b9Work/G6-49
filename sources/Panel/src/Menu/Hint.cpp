@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool        Hint::show = false;
 const Item *Hint::item = 0;
-Control     Hint::control = B_None;
+Control     Hint::control = Control::B_None;
 int         Hint::numPages = 0;
 int         Hint::currentPage = 0;
 int         Hint::firstItemOnSecondPage = 0;
@@ -22,27 +22,27 @@ bool Hint::ProcessControl(StructControl strCtrl)
 {
     Control key = strCtrl.key;
 
-    if (key == B_ESC && strCtrl.typePress == Long)
+    if (key.Is(Control::B_ESC) && strCtrl.typePress == Long)
     {
         show = !show;
         item = 0;
-        control = B_None;
+        control = Control::B_None;
         numPages = 0;
     }
 
     if (show)
     {
-        if (key >= B_F1 && key <= B_F5)
+        if (key >= Control::B_F1 && key <= Control::B_F5)
         {
-            item = Menu::CurrentPage()->GetItem(key - B_F1);
-            control = B_None;
+            item = Menu::CurrentPage()->GetItem(key - Control::B_F1);
+            control = Control::B_None;
             needCalculate = true;
         }
-        else if (key == REG_LEFT || key == REG_RIGHT)
+        else if (key.Is(Control::REG_LEFT) || key.Is(Control::REG_RIGHT))
         {
             if(numPages > 1)
             {
-                if(key == REG_LEFT)
+                if(key.Is(Control::REG_LEFT))
                 {
                     if(currentPage > 1)
                     {
@@ -128,7 +128,7 @@ void Hint::Draw()
             }
             
         }
-        else if (control != B_None)
+        else if (!control.Is(Control::B_None))
         {
 
         }

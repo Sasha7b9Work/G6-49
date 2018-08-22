@@ -234,29 +234,29 @@ void InputWindow::ProcessContorl(StructControl strContr)
     Control key = strContr.key;
     TypePress pressed = strContr.typePress;
 
-    if ((key >= B_0 && key <= B_9) || key == B_Dot)
+    if ((key >= Control::B_0 && key <= Control::B_9) || key == Control::B_Dot)
     {
         if (pressed == Up)
         {
             InputWindowStruct::PressKey(key);
         }
     }
-    else if (key == REG_LEFT)
+    else if (key == Control::REG_LEFT)
     {
         if (!IN_NUM_LOCK_MODE)
         {
             InputWindowStruct::RegLeft();
         }
     }
-    else if (key == REG_RIGHT)
+    else if (key == Control::REG_RIGHT)
     {
         if (!IN_NUM_LOCK_MODE)
         {
             InputWindowStruct::RegRight();
         }
     }
-    else if ((key >= B_F1 && key <= B_F4) && pressed == Up)
+    else if ((key >= Control::B_F1 && key <= Control::B_F4) && pressed == Up)
     {
-        Menu::CurrentPage()->GetItem(key - B_F1)->Press(strContr);
+        Menu::CurrentPage()->GetItem(key - Control::B_F1)->Press(strContr);
     }
 }

@@ -122,11 +122,11 @@ Item *Choice::Press(StructControl strControl)
     TypePress press = strControl.typePress;
     Control key = strControl.key;
 
-    if(key == B_LEFT && press == Up || key == REG_RIGHT)
+    if(key.Is(Control::B_LEFT) && press == Up || key.Is(Control::REG_RIGHT))
     {
         StartChange(-1);
     }
-    else if(key == B_RIGHT && press == Up || key == REG_LEFT || press == Up)
+    else if(key.Is(Control::B_RIGHT) && press == Up || key.Is(Control::REG_LEFT) || press == Up)
     {
         StartChange(1);
     }
@@ -350,13 +350,13 @@ Item *Item::Press(StructControl strControl)
 
     if(press == Long)
     {
-        if (IsOpened() || key == REG_BTN || key == B_ESC)
+        if (IsOpened() || key.Is(Control::REG_BTN) || key.Is(Control::B_ESC))
         {
             return 0;
         }
     }
 
-    if(key == B_ESC && (press == Up || press == Long))
+    if(key.Is(Control::B_ESC) && (press == Up || press == Long))
     {
         return 0;
     }
@@ -454,10 +454,10 @@ Control Item::ButtonForItem() const
 
     if (pos >= 0)
     {
-        return (Control)((int)B_F1 + pos);
+        return (Control)(uint8)(Control::B_F1 + pos);
     }
 
-    return B_None;
+    return Control::B_None;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

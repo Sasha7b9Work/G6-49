@@ -23,18 +23,18 @@ void NumberBuffer::Set(char *buf, int s, int p, int maxValue)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void NumberBuffer::ProcessKey(Control key)
 {
-    if (key == REG_RIGHT || key == REG_LEFT)
+    if (key == Control::REG_RIGHT || key == Control::REG_LEFT)
     {
         ProcessRegulator(key);
     }
-    else if(key == B_LEFT)
+    else if(key == Control::B_LEFT)
     {
         if(position > 0)
         {
             --position;
         }
     }
-    else if(key == B_RIGHT)
+    else if(key == Control::B_RIGHT)
     {
         if(position < NumSymbols())
         {
@@ -50,7 +50,7 @@ void NumberBuffer::ProcessKey(Control key)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool NumberBuffer::AllowableSymbol(Control key)
 {
-    if(KeyIsDigit(key) || key == B_Dot || key == B_Minus)
+    if(KeyIsDigit(key) || key == Control::B_Dot || key == Control::B_Minus)
     {
         return true;
     }
@@ -70,11 +70,11 @@ void NumberBuffer::ProcessRegulator(Control key)
     char temp[32];
     memcpy(temp, buffer, (uint)size);
 
-    if (key == REG_RIGHT)
+    if (key.Is(Control::REG_RIGHT))
     {
         IncreaseDigit(PositionSymbolForChange());
     }
-    else if(key == REG_LEFT)
+    else if(key.Is(Control::REG_LEFT))
     {
         DecreaseDigit(PositionSymbolForChange());
     }
