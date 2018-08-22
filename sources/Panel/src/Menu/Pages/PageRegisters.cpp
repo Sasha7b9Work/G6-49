@@ -529,7 +529,7 @@ static bool OnKey(Control control)
     return false;
 }
 
-static Item emptyItem = {Item_None};
+static Item emptyItem = {TypeItem::None};
 
 DEF_PAGE_4_VAR(pRegisters,                                                                                                          //--- –≈√»—“–€ ---
     "–≈√»—“–€", "REGISTERS",

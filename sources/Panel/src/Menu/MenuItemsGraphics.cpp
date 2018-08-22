@@ -10,19 +10,19 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Item::Draw(bool opened, int x, int y) const
 {
-    if (type == Item_Choice)
+    if (type == TypeItem::Choice)
     {
         ((Choice *)this)->Draw(opened, x, y);
     }
-    else if (type == Item_Button)
+    else if (type == TypeItem::Button)
     {
         ((Button *)this)->Draw(x, y);
     }
-    else if (type == Item_ChoiceParameter)
+    else if (type == TypeItem::ChoiceParameter)
     {
         ((ChoiceParameter *)this)->Draw(opened, x, y);
     }
-    else if (type == Item_SmallButton)
+    else if (type == TypeItem::SmallButton)
     {
         ((SButton *)this)->Draw(x, y);
     }

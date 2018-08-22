@@ -140,7 +140,7 @@ void Item::SetCurrent(bool active)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsOpened() const
 {
-    if (type == Item_Page)
+    if (type == TypeItem::Page)
     {
         return keeper->CurrentItemIsOpened();
     }
@@ -168,15 +168,15 @@ bool Item::ChangeOpened(int delta)
         return false;
     }
 
-    if (type == Item_Page)
+    if (type == TypeItem::Page)
     {
         ((Page *)this)->ChangeSubPage(delta);
     }
-    else if (type == Item_ChoiceReg || type == Item_Choice)
+    else if (type == TypeItem::ChoiceReg || type == TypeItem::Choice)
     {
         ((Choice *)this)->ChangeIndex(delta);
     }
-    else if (type == Item_Governor)
+    else if (type == TypeItem::Governor)
     {
         ((Governor *)this)->ChangeValue(delta);
     }
@@ -202,7 +202,7 @@ bool Page::CurrentItemIsOpened() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::ShortPress()
 {
-    if(type == Item_Choice)
+    if(type == TypeItem::Choice)
     {
         Choice *choice = (Choice *)this;
         if(!IS_ACTIVE(this))
@@ -219,7 +219,7 @@ void Item::ShortPress()
             choice->ChangeIndex(-1);
         }
     }
-    else if(type == Item_Button)
+    else if(type == TypeItem::Button)
     {
         if(IS_ACTIVE(this))
         {
@@ -227,12 +227,12 @@ void Item::ShortPress()
             ((Button *)this)->funcOnPress();
         }
     }
-    else if(type == Item_Page)
+    else if(type == TypeItem::Page)
     {
         Page *page = (Page *)this;
         page->funcOnPress();
     }
-    else if(type == Item_Governor)
+    else if(type == TypeItem::Governor)
     {
         if(IS_ACTIVE(this))
         {
@@ -247,7 +247,7 @@ void Item::ShortPress()
             }
         }
     }
-    else if(type == Item_GovernorColor)
+    else if(type == TypeItem::GovernorColor)
     {
         if(IS_ACTIVE(this))
         {
@@ -266,7 +266,7 @@ void Item::ShortPress()
             }
         }
     }
-    else if(type == Item_ChoiceReg)
+    else if(type == TypeItem::ChoiceReg)
     {
         Choice *choice = (Choice *)this;
         if(IS_ACTIVE(this))
@@ -278,7 +278,7 @@ void Item::ShortPress()
             choice->funcOnChanged(false);
         }
     }
-    else if(type == Item_SmallButton)
+    else if(type == TypeItem::SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
@@ -289,11 +289,11 @@ void Item::ShortPress()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::LongPress()
 {
-    if(type == Item_Button)
+    if(type == TypeItem::Button)
     {
         ((Button *)this)->ShortPress();
     }
-    else if(type == Item_SmallButton)
+    else if(type == TypeItem::SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
