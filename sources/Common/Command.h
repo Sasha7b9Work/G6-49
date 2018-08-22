@@ -38,7 +38,7 @@
 /// Возможные команды для передачи в основной процессор
 struct CommandPanel
 {
-    enum
+    enum ECommandPanel
     {
         COMMAND_NONE = 0,
         ENABLE_CHANNEL = 1,    ///< Включить/выключить канал
@@ -62,10 +62,9 @@ struct CommandPanel
         SET_DUTY_FACTOR = 19,
         Number
     };
-    COMMON_ENUM;
-    CommandPanel(uint8 v) : value(v)
-    {
-    };
+    ECommandPanel value;
+    CommandPanel(ECommandPanel v) : value(v){};
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Возможные команды, принимаемые от основного процессора

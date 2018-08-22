@@ -290,7 +290,7 @@ void Interface::CommandWriteRegister()
 void Interface::CommandParameter()
 {
     Chan ch = (Chan)buffer[1];
-    CommandPanel command = (CommandPanel)buffer[0];
+    CommandPanel command = (CommandPanel::ECommandPanel)buffer[0];
     float value = 0.0f;
     memcpy(&value, &buffer[2], 4);
     Generator::SetParameter(ch, command, value);
