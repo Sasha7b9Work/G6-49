@@ -39,7 +39,7 @@ static const StructPort registers[GeneratorWritePin::Number] =
     {GPIOC, GPIO_PIN_1}     // FREQ_METER_CLK
 };
 
-static const StructPort registersRead[NumPinsRead] =
+static const StructPort registersRead[GeneratorReadPin::Number] =
 {
     {GPIOC, GPIO_PIN_0},    // FREQ_METER_DRY
     {GPIOB, GPIO_PIN_12}    // FREQ_METER_DATA
@@ -141,7 +141,7 @@ void CPU::InitPins()
     isGPIO.Mode = GPIO_MODE_INPUT;
     isGPIO.Pull = GPIO_PULLDOWN;
 
-    for(int i = 0; i < NumPinsRead; ++i)
+    for(int i = 0; i < GeneratorReadPin::Number; ++i)
     {
         isGPIO.Pin = registersRead[i].pin;
         HAL_GPIO_Init(registersRead[i].port, &isGPIO);

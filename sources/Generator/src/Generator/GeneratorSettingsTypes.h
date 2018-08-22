@@ -12,9 +12,7 @@ struct TransmissionSequence
         LSB_2_MSB           ///< От младшего бита к старшему
     };
     uint8 value;
-    TransmissionSequence(uint8 v) : value(v)
-    {
-    };
+    TransmissionSequence(uint8 v) : value(v) {};
 };
 
 struct TypeWave
@@ -25,7 +23,5 @@ struct TypeWave
         Cos
     };
     uint8 value;
-    TypeWave(uint8 v) : value(v)
-    {
-    };
+    TypeWave(uint8 v) : value(v) {};
 };

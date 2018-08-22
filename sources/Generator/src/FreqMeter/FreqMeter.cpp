@@ -38,7 +38,7 @@ void FreqMeter::SetFiltr(FreqFiltr filtr)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FreqMeter::Update()
 {
-    if(CPU::ReadPin(FREQ_METER_DRY))
+    if(CPU::ReadPin(GeneratorReadPin::FREQ_METER_DRY))
     {
         uint data = 0;
         for(int i = 30; i >= 0; i--)
@@ -51,7 +51,7 @@ void FreqMeter::Update()
             }
             CPU::WritePin(GeneratorWritePin::FREQ_METER_CLK, false);
             Timer::PauseOnTime(1);
-            if (CPU::ReadPin(FREQ_METER_DATA))
+            if (CPU::ReadPin(GeneratorReadPin::FREQ_METER_DATA))
             {
                 data += (1 << i);
             }

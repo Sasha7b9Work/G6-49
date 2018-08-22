@@ -37,21 +37,22 @@ struct GeneratorWritePin
         Number
     };
     uint8 value;
-    GeneratorWritePin(uint8 v) : value(v)
-    {
-    };
-    operator uint8() const
-    {
-        return value;
-    };
+    GeneratorWritePin(uint8 v) : value(v) {};
+    operator uint8() const { return value; };
 };
 
 /// Порты чтения
-enum GeneratorReadPin
+struct GeneratorReadPin
 {
-    FREQ_METER_DRY,     ///< Пин чтения готовности частотомера к выдаче данных
-    FREQ_METER_DATA,    ///< Пин чтения данных
-    NumPinsRead
+    enum
+    {
+        FREQ_METER_DRY,     ///< Пин чтения готовности частотомера к выдаче данных
+        FREQ_METER_DATA,    ///< Пин чтения данных
+        Number
+    };
+    uint8 value;
+    GeneratorReadPin(uint8 v) : value(v) {};
+    operator uint8() const { return value; };
 };
 
 

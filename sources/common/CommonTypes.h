@@ -65,12 +65,8 @@ struct FreqCouple
         DC
     };
     COMMON_ENUM;
-    FreqCouple(uint v) : value((uint8)v)
-    {
-    };
-    FreqCouple(int v) : value((uint8)v)
-    {
-    };
+    FreqCouple(uint v) : value((uint8)v) {};
+    FreqCouple(int v) : value((uint8)v) {};
 };
 
 /// ФНЧ частотомера

@@ -37,7 +37,7 @@ struct TimerStruct
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static TimerStruct timers[NumTimers];
+static TimerStruct timers[Timer::Type::Number];
 static uint timeStartLogging = 0;
 static uint timePrevPoint = 0;
 
@@ -55,13 +55,13 @@ static void StopTIM();
 /// Возвращает время срабатывания ближайщего таймера, либо 0, если таймеров нет
 static uint NearestTime();
 /// Настроить систему на таймер
-static void TuneTIM(TypeTimer type);
+static void TuneTIM(Timer::Type type);
 /// Вызывается при срабатывании таймера
 static void ElapsedCallback();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Timer::IsRun(TypeTimer type)
+bool Timer::IsRun(Type type)
 {
     return TIME_NEXT(type) != UINT_MAX;
 }
@@ -69,7 +69,7 @@ bool Timer::IsRun(TypeTimer type)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::Init()
 {
-    for(uint i = 0; i < NumTimers; i++)
+    for(uint i = 0; i < Timer::Type::Number; i++)
     {
         timers[i].timeNextMS = UINT_MAX;
     }
@@ -104,7 +104,7 @@ static void ElapsedCallback()
 
     StopTIM();
 
-    for (uint type = 0; type < NumTimers; type++)
+    for (uint type = 0; type < Timer::Type::Number; type++)
     {
         if (TIME_NEXT(type) <= time)            // Если пришло время срабатывания
         {
@@ -129,7 +129,7 @@ static void ElapsedCallback()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer::Set(TypeTimer type, pFuncVV func, uint dTms)
+void Timer::Set(Type type, pFuncVV func, uint dTms)
 {
     TimerStruct *timer = &timers[type];
     timer->func = func;
@@ -137,35 +137,35 @@ void Timer::Set(TypeTimer type, pFuncVV func, uint dTms)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer::SetAndStartOnce(TypeTimer type, pFuncVV func, uint dTms)
+void Timer::SetAndStartOnce(Type type, pFuncVV func, uint dTms)
 {
     Timer::Set(type, func, dTms);
     StartOnce(type);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer::SetAndEnable(TypeTimer type, pFuncVV func, uint dTms)
+void Timer::SetAndEnable(Type type, pFuncVV func, uint dTms)
 {
     Set(type, func, dTms);
     Enable(type);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer::StartOnce(TypeTimer type)
+void Timer::StartOnce(Type type)
 {
     timers[type].repeat = false;
     TuneTIM(type);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer::Enable(TypeTimer type)
+void Timer::Enable(Type type)
 {
     timers[type].repeat = true;
     TuneTIM(type);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void TuneTIM(TypeTimer type)
+static void TuneTIM(Timer::Type type)
 {
     TimerStruct *timer = &timers[type];
 
@@ -181,7 +181,7 @@ static void TuneTIM(TypeTimer type)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Timer::Disable(TypeTimer type)
+void Timer::Disable(Type type)
 {
     timers[type].timeNextMS = UINT_MAX;
     timers[type].repeat = false;
@@ -192,7 +192,7 @@ static uint NearestTime()
 {
     uint time = UINT_MAX;
 
-    for(uint type = 0; type < NumTimers; type++)
+    for(uint type = 0; type < Timer::Type::Number; type++)
     {
         if(TIME_NEXT(type) < time)
         {
