@@ -448,7 +448,7 @@ Control Item::ButtonForItem() const
 
     if (pos >= 0)
     {
-        return (Control)(uint8)(Control::B_F1 + pos);
+        return (Control)(Control::EControl)(Control::B_F1 + pos);
     }
 
     return Control::B_None;

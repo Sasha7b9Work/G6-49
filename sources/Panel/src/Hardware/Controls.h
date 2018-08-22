@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Control
 {
-    enum
+    enum EControl
     {
         B_None    = 0x00,
         B_F1      = 0x01,
@@ -58,15 +58,15 @@ struct Control
         bool Is(Action a) const { return a.value == value; };
     } action;
 
-    uint8 value;
-    Control(uint8 v = B_None, uint8 a = Action::Down) : action(a), value(v) {};
+    EControl value;
+    Control(EControl v = B_None, uint8 a = Action::Down) : action(a), value(v) {};
     Control operator=(Control rval)
     {
         value = rval.value;
         action = rval.action;
         return *this;
     }
-    operator uint8() const { return value; };
+    operator uint8() const { return (uint8)value; };
     bool Is(Control c) { return c.value == value; };
     bool IsDigit() const;
     char ToChar() const;
