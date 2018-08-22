@@ -12,7 +12,7 @@
 
 struct BillingTime
 {
-    enum EBillingTime
+    enum E
     {
         _1ms,
         _10ms,
@@ -25,18 +25,18 @@ struct BillingTime
 
 struct Language
 {
-    enum ELanguage
+    enum E
     {
         RU,
         EN
     } value;
-    Language(int v) : value((ELanguage)v) {};
+    Language(int v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 
 struct SizeByte
 {
-    enum ESizeByte
+    enum E
     {
         _7bit,
         _8bit
@@ -45,7 +45,7 @@ struct SizeByte
 
 struct StopBit
 {
-    enum EStopBit
+    enum E
     {
         _1,
         _2
@@ -54,7 +54,7 @@ struct StopBit
 
 struct Parity
 {
-    enum EParity
+    enum E
     {
         Off,
         On
@@ -64,31 +64,31 @@ struct Parity
 /// 
 struct FreqInterval
 {
-    enum EFreqInterval
+    enum E
     {
         _1,
         _10
     } value;
-    FreqInterval(int v) : value((EFreqInterval)v) {};
+    FreqInterval(int v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 
 /// Измерять частоту или период
 struct FreqMeasure
 {
-    enum EFreqMeasure
+    enum E
     {
         Freq,
         Period
     } value;
-    FreqMeasure(int v) : value((EFreqMeasure)v) {};
+    FreqMeasure(int v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 
 /// Число усредняемых период в режиме измерения периода сигнала
 struct FreqAvePeriod
 {
-    enum EFrqAvePeriod
+    enum E
     {
         _1,
         _10,
@@ -102,7 +102,7 @@ struct FreqAvePeriod
 /// Метки времени
 struct FreqTimeStamps
 {
-    enum EFreqTimeStamps
+    enum E
     {
         _1kHz,
         _10kHz,
@@ -116,12 +116,12 @@ struct FreqTimeStamps
 /// Тестовый режим частотомера
 struct FreqTest
 {
-    enum EFreqTest
+    enum E
     {
         Off,
         On
     } value;
-    FreqTest(int v) : value((EFreqTest)v) {};
+    FreqTest(int v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 
