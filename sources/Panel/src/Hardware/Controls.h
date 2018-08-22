@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Control
 {
-    enum EControl
+    enum E
     {
         B_None    = 0x00,
         B_F1      = 0x01,
@@ -46,20 +46,20 @@ struct Control
 
     struct Action
     {
-        enum EAction
+        enum E
         {
             Down,
             Long,
             Up
         };
-        EAction value;
-        Action(EAction v = Down) : value(v) {};
+        E value;
+        Action(E v = Down) : value(v) {};
         operator uint8() const { return (uint8)value; };
         bool Is(Action a) const { return a.value == value; };
     } action;
 
-    EControl value;
-    Control(EControl v = B_None, Action::EAction a = Action::Down) : action(a), value(v) {};
+    E value;
+    Control(E v = B_None, Action::E a = Action::Down) : action(a), value(v) {};
     Control operator=(Control rval)
     {
         value = rval.value;

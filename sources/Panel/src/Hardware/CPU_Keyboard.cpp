@@ -20,7 +20,7 @@ static void(*callbackKeyboard)() = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void FillCommand(Control control, Control::Action::EAction action);
+static void FillCommand(Control control, Control::Action::E action);
 static void DetectRegulator();
 
 #define SL0 (1 << 12)
@@ -214,7 +214,7 @@ static void DetectRegulator()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillCommand(Control control, Control::Action::EAction action)
+static void FillCommand(Control control, Control::Action::E action)
 {
     commands[pointer++] = Control(control.value, action);
 }
