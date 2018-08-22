@@ -38,7 +38,7 @@ private:
 
     static void DrawPagesUGO();
 
-    static void ProcessControl(StructControl control);
+    static void ProcessControl(Control control);
 
     static Item *openedItem;
 };

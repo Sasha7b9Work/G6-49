@@ -229,34 +229,31 @@ void InputWindow::KeyEnter()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::ProcessContorl(StructControl strContr)
+void InputWindow::ProcessContorl(Control control)
 {
-    Control key = strContr.key;
-    TypePress pressed = strContr.typePress;
-
-    if ((key >= Control::B_0 && key <= Control::B_9) || key == Control::B_Dot)
+    if ((control >= Control::B_0 && control <= Control::B_9) || control.Is(Control::B_Dot))
     {
-        if (pressed == Up)
+        if (control.action.Is(Control::Action::Up))
         {
-            InputWindowStruct::PressKey(key);
+            InputWindowStruct::PressKey(control);
         }
     }
-    else if (key == Control::REG_LEFT)
+    else if (control.Is(Control::REG_LEFT))
     {
         if (!IN_NUM_LOCK_MODE)
         {
             InputWindowStruct::RegLeft();
         }
     }
-    else if (key == Control::REG_RIGHT)
+    else if (control.Is(Control::REG_RIGHT))
     {
         if (!IN_NUM_LOCK_MODE)
         {
             InputWindowStruct::RegRight();
         }
     }
-    else if ((key >= Control::B_F1 && key <= Control::B_F4) && pressed == Up)
+    else if ((control >= Control::B_F1 && control <= Control::B_F4) && control.action.Is(Control::Action::Up))
     {
-        Menu::CurrentPage()->GetItem(key - Control::B_F1)->Press(strContr);
+        Menu::CurrentPage()->GetItem(control - Control::B_F1)->Press(control);
     }
 }

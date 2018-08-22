@@ -114,7 +114,7 @@ static bool AllowableSymbol(Control key)
 
     if(type == Uint32)
     {
-        return KeyIsDigit(key);
+        return key.IsDigit();
     }
     else if(type == Binary)
     {
@@ -122,7 +122,7 @@ static bool AllowableSymbol(Control key)
     }
     else if(type == Uint8_Uint8 || type == Uint14_Uint14)
     {
-        if(KeyIsDigit(key))
+        if(key.IsDigit())
         {
             return true;
         }
@@ -488,43 +488,41 @@ static bool OnRegulator(Control key)
 }
 
 
-static bool OnKey(StructControl strCntrl)
+static bool OnKey(Control control)
 {
-    Control key = strCntrl.key;
-
     if(!showInputWindow)
     {
-        if (AllowableSymbol(key))
+        if (AllowableSymbol(control))
         {
             sending[currentRegister] = false;
             OnPress_Send();
             memset(buffer, 0, MAX_SIZE_BUFFER);
-            buffer[0] = KeyToChar(key);
+            buffer[0] = control.ToChar();
             NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel || 
                                                            currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
             return true;
         }
     }
-    else if(strCntrl.typePress == Down)
+    else if(control.action.Is(Control::Action::Down))
     {
-        if (AllowableSymbol(key))
+        if (AllowableSymbol(control))
         {
-            NumberBuffer::ProcessKey(key);
+            NumberBuffer::ProcessKey(control);
             return true;
         }
-        else if(key.Is(Control::B_RIGHT) || key.Is(Control::B_LEFT))
+        else if(control.Is(Control::B_RIGHT) || control.Is(Control::B_LEFT))
         {
-            NumberBuffer::ProcessKey(key);
+            NumberBuffer::ProcessKey(control);
             return true;
         }
-        else if(key.Is(Control::B_ESC))
+        else if(control.Is(Control::B_ESC))
         {
             OnPress_Cancel();
             return true;
         }
         else
         {
-            return OnRegulator(key);
+            return OnRegulator(control);
         }
     }
 

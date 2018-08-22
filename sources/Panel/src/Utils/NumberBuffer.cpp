@@ -43,14 +43,14 @@ void NumberBuffer::ProcessKey(Control key)
     }
     else if(AllowableSymbol(key) && position < NumSymbols())                    // Символьная кнопка
     {
-        buffer[position++] = KeyToChar(key);
+        buffer[position++] = key.ToChar();
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool NumberBuffer::AllowableSymbol(Control key)
 {
-    if(KeyIsDigit(key) || key == Control::B_Dot || key == Control::B_Minus)
+    if(key.IsDigit() || key.Is(Control::B_Dot) || key.Is(Control::B_Minus))
     {
         return true;
     }

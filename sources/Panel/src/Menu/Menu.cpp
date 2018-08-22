@@ -50,7 +50,7 @@ void Menu::Update()
 {
     while (!CPU::Keyboard::BufferIsEmpty())
     {
-        StructControl control = CPU::Keyboard::GetNextControl();
+        Control control = CPU::Keyboard::GetNextControl();
         if (ADDITION_PAGE_IS_INPUT)
         {
             InputWindow::ProcessContorl(control);
@@ -63,25 +63,22 @@ void Menu::Update()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessControl(StructControl strContr)
+void Menu::ProcessControl(Control key)
 {
-    Control key = strContr.key;
-    TypePress pressed = strContr.typePress;
-
-    if(Hint::ProcessControl(strContr))
+    if(Hint::ProcessControl(key))
     {
     }
-    else if(Menu::CurrentPage()->ProcessingControl(strContr))
+    else if(Menu::CurrentPage()->ProcessingControl(key))
     {
     }
     else if (openedItem && (key.Is(Control::REG_LEFT) || key.Is(Control::REG_RIGHT) || key.Is(Control::REG_BTN) || key.Is(Control::B_ESC) || 
                             key.Is(Control::B_LEFT) || key.Is(Control::B_RIGHT)))
     {
-        openedItem = openedItem->Press(strContr);
+        openedItem = openedItem->Press(key);
     }
     else if (key >= Control::B_F1 && key <= Control::B_F5)
     {
-        openedItem = CurrentPage()->GetItem(key - Control::B_F1)->Press(strContr);
+        openedItem = CurrentPage()->GetItem(key - Control::B_F1)->Press(key);
     }
     else if (key.Is(Control::REG_LEFT))
     {
@@ -103,7 +100,7 @@ void Menu::ProcessControl(StructControl strContr)
             }
         }
     }
-    else if (pressed == Up || pressed == Long)
+    else if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
     {
         if(key.Is(Control::B_ON1))
         {

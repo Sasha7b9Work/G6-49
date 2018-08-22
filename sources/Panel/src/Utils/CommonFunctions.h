@@ -13,7 +13,7 @@ void EmptyFuncVI(int);
 
 bool EmptyFuncBV();
 
-bool EmptyFuncBKey(StructControl);
+bool EmptyFuncBKey(Control);
 
 void EmptyFuncVB(bool);
 

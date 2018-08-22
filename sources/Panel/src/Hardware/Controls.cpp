@@ -2,19 +2,19 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool KeyIsDigit(Control key)
+bool Control::IsDigit() const
 {
-    return (key >= Control::B_0 && key <= Control::B_9);
+    return (value >= Control::B_0 && value <= Control::B_9);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char KeyToChar(Control key)
+char Control::ToChar() const
 {
-    if(KeyIsDigit(key))
+    if(IsDigit())
     {
-        return (char)((key - Control::B_0) | 0x30);
+        return (char)((value - Control::B_0) | 0x30);
     }
-    else if(key == Control::B_Dot)
+    else if(value == B_Dot)
     {
         return '.';
     }

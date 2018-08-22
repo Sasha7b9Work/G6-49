@@ -19,7 +19,7 @@ extern int8 gCurDigit;
 
 #define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по вертикали.
 
-typedef bool (*pFuncBKey)(StructControl);
+typedef bool (*pFuncBKey)(Control);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Разные виды пунктов меню
@@ -95,7 +95,7 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
-    Item *Press(StructControl strControl);
+    Item *Press(Control control);
 
     TypeItem Type() const;
 
@@ -175,7 +175,7 @@ public:
 
     void ChangeSubPage(int delta);
 
-    bool ProcessingControl(StructControl);
+    bool ProcessingControl(Control);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
@@ -199,7 +199,7 @@ public:
     /// Функция будет вызываться во время отрисовки кнопки.
     pFuncVII    funcForDraw;
     /// Обрабатывает нажатие кнопки. Возвращает ноль, потому что не может находиться в открытом состоянии.
-    Item *Press(TypePress press);
+    Item *Press(Control::Action action);
 
     void Draw(int x, int y);
 };
@@ -250,7 +250,7 @@ public:
 
     int                             numHints;
     /// Обрабатывает нажатие кнопки. Возвращает 0, потому что не может находиться в открытом состоянии
-    Item *Press(TypePress press);
+    Item *Press(Control::Action action);
 
     void Draw(int x, int y);
 };
@@ -360,7 +360,7 @@ public:
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     const char *NameSubItem(int i) const;
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
-    Item *Press(StructControl strControl);
+    Item *Press(Control control);
 
     int8 CurrentIndex() const;
 };
@@ -393,7 +393,7 @@ public:
 
     uint8               *numParameter;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии и 0 в противном.
-    Item *Press(TypePress press);
+    Item *Press(Control::Action action);
 
     pString NameSubItem(int num) const;
 

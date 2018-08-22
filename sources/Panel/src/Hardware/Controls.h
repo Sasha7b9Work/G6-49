@@ -43,32 +43,35 @@ struct Control
         REG_RIGHT = 0x1c,
         REG_BTN
     };
+
+    struct Action
+    {
+        enum
+        {
+            Down,
+            Long,
+            Up
+        };
+        uint8 value;
+        Action(uint8 v = Down) : value(v) {};
+        operator uint8() const { return value; };
+        bool Is(Action a) const { return a.value == value; };
+    } action;
+
     uint8 value;
-    Control(uint8 v) : value(v) {};
+    Control(uint8 v = B_None, uint8 a = Action::Down) : action(a), value(v) {};
+    Control operator=(Control rval)
+    {
+        value = rval.value;
+        action = rval.action;
+        return *this;
+    }
     operator uint8() const { return value; };
     bool Is(Control c) { return c.value == value; };
+    bool IsDigit() const;
+    char ToChar() const;
+    pString Name() const;
 };
-
-enum TypePress
-{
-    Down,
-    Long,
-    Up
-};
-
-/// Хранит код органа управления и его состояние - если pressed == true, то кнопка находится в нажатом состоянии
-struct StructControl
-{
-    Control   key;
-    TypePress typePress;
-    StructControl() : key(Control::B_None), typePress(Down) {};
-};
-
-bool KeyIsDigit(Control key);
-
-char KeyToChar(Control key);
-
-const char *PanelControlName(Control control);
 
 
 #ifdef WIN32

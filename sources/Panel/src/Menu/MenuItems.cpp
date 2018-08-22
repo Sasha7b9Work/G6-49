@@ -94,11 +94,11 @@ void Page::ChangeSubPage(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::ProcessingControl(StructControl strCntrl)
+bool Page::ProcessingControl(Control control)
 {
     if(fuuncOnKey)
     {
-        return fuuncOnKey(strCntrl);
+        return fuuncOnKey(control);
     }
     
     return false;

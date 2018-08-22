@@ -18,11 +18,9 @@ bool        Hint::needCalculate = false;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Hint::ProcessControl(StructControl strCtrl)
+bool Hint::ProcessControl(Control key)
 {
-    Control key = strCtrl.key;
-
-    if (key.Is(Control::B_ESC) && strCtrl.typePress == Long)
+    if (key.Is(Control::B_ESC) && key.action.Is(Control::Action::Long))
     {
         show = !show;
         item = 0;

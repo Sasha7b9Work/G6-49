@@ -18,7 +18,7 @@ public:
 
     static void KeyEnter();
 
-    static void ProcessContorl(StructControl control);
+    static void ProcessContorl(Control control);
 
 private:
     static void DrawAmplitude(int x, int y);

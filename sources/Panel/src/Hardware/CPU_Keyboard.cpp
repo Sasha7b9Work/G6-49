@@ -11,7 +11,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define TIME_UPDATE 2   ///< Время между опросами клавиатуры
-static StructControl commands[10];
+static Control commands[10];
 static int pointer = 0;
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 /// Таймер для опроса клавиатуры
@@ -20,7 +20,7 @@ static void(*callbackKeyboard)() = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void FillCommand(Control control, TypePress typePressm);
+static void FillCommand(Control control, Control::Action action);
 static void DetectRegulator();
 
 #define SL0 (1 << 12)
@@ -111,19 +111,19 @@ void CPU::Keyboard::Update()
                     if(delta > 500)                                         // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        FillCommand(controls[rl][sl], Long);                // это будет длинное нажатие
+                        FillCommand(controls[rl][sl], Control::Action::Long);                // это будет длинное нажатие
                     }
                     else if (delta > 100 &&                                 // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                            // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = 0;                              // То учитываем это в массиве
-                        FillCommand(controls[rl][sl], Up);                  // И сохраняем отпускание кнопки в буфере команд
+                        FillCommand(controls[rl][sl], Control::Action::Up);                  // И сохраняем отпускание кнопки в буфере команд
                     }
                 }
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT) // Если кнопка нажата
                 {
                     timePress[rl][sl] = time;                               // то сохраняем время её нажатия
-                    FillCommand(controls[rl][sl], Down);
+                    FillCommand(controls[rl][sl], Control::Action::Down);
                 }
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
@@ -161,7 +161,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
         {
-            FillCommand(Control::REG_BTN, Long);                                     // посылаем длинное нажатие
+            FillCommand(Control::REG_BTN, Control::Action::Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -173,7 +173,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                FillCommand(Control::REG_BTN, Down);
+                FillCommand(Control::REG_BTN, Control::Action::Down);
             }
         }
         else                                                                // Ексли копка была нажата ранее
@@ -182,7 +182,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    FillCommand(Control::REG_BTN, Up);
+                    FillCommand(Control::REG_BTN, Control::Action::Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -203,21 +203,20 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        FillCommand(Control::REG_LEFT, Down);
+        FillCommand(Control::REG_LEFT, Control::Action::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        FillCommand(Control::REG_RIGHT, Down);
+        FillCommand(Control::REG_RIGHT, Control::Action::Down);
         prevStatesIsOne = false;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillCommand(Control control, TypePress typePress)
+static void FillCommand(Control control, Control::Action action)
 {
-    commands[pointer].key = control;
-    commands[pointer++].typePress = typePress;
+    commands[pointer++] = Control(control.value, action);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -227,13 +226,13 @@ bool CPU::Keyboard::BufferIsEmpty()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-StructControl CPU::Keyboard::GetNextControl()
+Control CPU::Keyboard::GetNextControl()
 {
-    StructControl retValue;
+    Control retValue;
 
     if (BufferIsEmpty())
     {
-        retValue.key = Control::B_None;
+        retValue.value = Control::B_None;
     }
     else
     {

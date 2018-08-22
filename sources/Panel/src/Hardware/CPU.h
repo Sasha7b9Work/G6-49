@@ -45,7 +45,7 @@ public:
         /// Возвращает true, если буфер пуст
         static bool BufferIsEmpty();
         /// Возвращает следующий орган управления, если таковой имеется
-        static StructControl GetNextControl();
+        static Control GetNextControl();
         /// Функция-заглушка. Для эмулятора, на котором нет физической клавиатуры и нужно её рисовать на экране
         static void Draw();
 

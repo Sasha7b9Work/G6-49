@@ -117,20 +117,17 @@ float Choice::Step()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Choice::Press(StructControl strControl)
+Item *Choice::Press(Control key)
 {
-    TypePress press = strControl.typePress;
-    Control key = strControl.key;
-
-    if(key.Is(Control::B_LEFT) && press == Up || key.Is(Control::REG_RIGHT))
+    if(key.Is(Control::B_LEFT) && key.action.Is(Control::Action::Up) || key.Is(Control::REG_RIGHT))
     {
         StartChange(-1);
     }
-    else if(key.Is(Control::B_RIGHT) && press == Up || key.Is(Control::REG_LEFT) || press == Up)
+    else if(key.Is(Control::B_RIGHT) && key.action.Is(Control::Action::Up) || key.Is(Control::REG_LEFT) || key.action.Is(Control::Action::Up))
     {
         StartChange(1);
     }
-    else if(press == Long)
+    else if(key.action.Is(Control::Action::Long))
     {
         return this;
     }
@@ -343,12 +340,9 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Item::Press(StructControl strControl)
+Item *Item::Press(Control key)
 {
-    TypePress press = strControl.typePress;
-    Control key = strControl.key;
-
-    if(press == Long)
+    if(key.action.Is(Control::Action::Long))
     {
         if (IsOpened() || key.Is(Control::REG_BTN) || key.Is(Control::B_ESC))
         {
@@ -356,7 +350,7 @@ Item *Item::Press(StructControl strControl)
         }
     }
 
-    if(key.Is(Control::B_ESC) && (press == Up || press == Long))
+    if(key.Is(Control::B_ESC) && (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long)))
     {
         return 0;
     }
@@ -366,23 +360,23 @@ Item *Item::Press(StructControl strControl)
         return Menu::OpenedItem();
     }
 
-    Menu::itemUnderKey = (press == Down) && !IsOpened() ? this : 0;
+    Menu::itemUnderKey = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
 
     if (type == Item_Choice)
     {
-        return ((Choice *)this)->Press(strControl);
+        return ((Choice *)this)->Press(key);
     }
     else if (type == Item_Button)
     {
-        return ((Button *)this)->Press(press);
+        return ((Button *)this)->Press(key.action);
     }
     else if (type == Item_ChoiceParameter)
     {
-        return ((ChoiceParameter *)this)->Press(press);
+        return ((ChoiceParameter *)this)->Press(key.action);
     }
     else if (type == Item_SmallButton)
     {
-        return ((SButton *)this)->Press(press);
+        return ((SButton *)this)->Press(key.action);
     }
 
     return 0;
@@ -461,9 +455,9 @@ Control Item::ButtonForItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *ChoiceParameter::Press(TypePress press)
+Item *ChoiceParameter::Press(Control::Action action)
 {
-    if (press == Up)
+    if (action.Is(Control::Action::Up))
     {
         volatile bool allow = false;
         do
@@ -472,7 +466,7 @@ Item *ChoiceParameter::Press(TypePress press)
             allow = (allowParameters).allow[*numParameter];
         } while (!allow);
     }
-    else if (press == Long)
+    else if (action.Is(Control::Action::Long))
     {
         return this;
     }
@@ -481,9 +475,9 @@ Item *ChoiceParameter::Press(TypePress press)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *SButton::Press(TypePress press)
+Item *SButton::Press(Control::Action action)
 {
-    if(press == Up)
+    if(action.Is(Control::Action::Up))
     {
         if (funcOnPress)
         {
@@ -495,9 +489,9 @@ Item *SButton::Press(TypePress press)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Button::Press(TypePress press)
+Item *Button::Press(Control::Action action)
 {
-    if (press == Up && funcOnPress)
+    if (action.Is(Control::Action::Up) && funcOnPress)
     {
         funcOnPress();
     }
