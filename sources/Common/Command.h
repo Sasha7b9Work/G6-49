@@ -102,7 +102,7 @@ struct WaveParameter
 
 struct WaveForm
 {
-    enum
+    enum EWaveForm
     {
         Sine,           ///< Синус
         Cosine,         ///< Косинус
@@ -117,20 +117,11 @@ struct WaveForm
         Noise,          ///< Шум
         Free,           ///< Произвольный
         Number
-    };
-    uint8 type;
+    } value;
+    WaveForm(EWaveForm v) : value((EWaveForm)v) { };
+    bool Is(EWaveForm form) const { return form == value; };
+    operator uint8() const { return (uint8)value; };
     pString Name() const;
-    bool Is(WaveForm form) const
-    {
-        return type == form.type;
-    }
-    WaveForm(uint8 num = 0) : type(num)
-    {
-    }
-    operator uint8() const
-    {
-        return type;
-    }
 };
 
 struct Register

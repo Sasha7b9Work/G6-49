@@ -179,7 +179,7 @@ void Interface::CommandWriteService()
 void Interface::CommandFormWave()
 {
     Chan ch = (Chan)buffer[1];
-    WaveForm form = (WaveForm)buffer[2];
+    WaveForm form = (WaveForm::EWaveForm)buffer[2];
     Generator::SetFormWave(ch, form);
 }
 

@@ -79,7 +79,7 @@ void Wave::DrawSignalUGO(Chan chan, int y0)
         first = false;
     }
 
-    WaveForm form = WAVE_FORM_CH(chan).type;
+    WaveForm form = WAVE_FORM_CH(chan).value;
 
     if (!form.Is(WaveForm::Free))
     {
