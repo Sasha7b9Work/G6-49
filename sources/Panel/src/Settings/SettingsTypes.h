@@ -5,12 +5,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#undef COMMON_ENUM
-#define COMMON_ENUM     uint8 value; operator uint8() const { return value; }; operator uint8() { return value; }
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef WIN32
 #pragma warning(push)
 #pragma warning(disable:4514)
@@ -82,57 +76,53 @@ struct FreqInterval
 /// Измерять частоту или период
 struct FreqMeasure
 {
-    enum
+    enum EFreqMeasure
     {
         Freq,
         Period
-    };
-    COMMON_ENUM;
-    FreqMeasure(int v) : value((uint8)v)
-    {
-    }
+    } value;
+    FreqMeasure(int v) : value((EFreqMeasure)v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Число усредняемых период в режиме измерения периода сигнала
 struct FreqAvePeriod
 {
-    enum
+    enum EFrqAvePeriod
     {
         _1,
         _10,
         _100,
         _1000,
         _10000
-    };
-    COMMON_ENUM;
+    } value;
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Метки времени
 struct FreqTimeStamps
 {
-    enum
+    enum EFreqTimeStamps
     {
         _1kHz,
         _10kHz,
         _100kHz,
         _1MHz,
         _10MHz
-    };
-    COMMON_ENUM;
+    } value;
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Тестовый режим частотомера
 struct FreqTest
 {
-    enum
+    enum EFreqTest
     {
         Off,
         On
-    };
-    COMMON_ENUM;
-    FreqTest(int v) : value((uint8)v)
-    {
-    };
+    } value;
+    FreqTest(int v) : value((EFreqTest)v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 
