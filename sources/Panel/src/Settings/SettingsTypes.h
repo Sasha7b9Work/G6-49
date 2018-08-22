@@ -18,28 +18,26 @@
 
 struct BillingTime
 {
-    enum
+    enum EBillingTime
     {
         _1ms,
         _10ms,
         _100ms,
         _1000ms,
         _10000ms
-    };
-    COMMON_ENUM;
+    } value;
+    operator int() const { return (int)value; };
 };
 
 struct Language
 {
-    enum
+    enum ELanguage
     {
         RU,
         EN
-    };
-    COMMON_ENUM;
-    Language(int v) : value((uint8)v)
-    {
-    };
+    } value;
+    Language(int v) : value((ELanguage)v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 struct SizeByte
