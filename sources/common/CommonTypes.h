@@ -16,27 +16,17 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Chan
 {
-    enum
+    enum E
     {
         A,
         B,
         Number
-    };
-    COMMON_ENUM;
-    Chan(uint8 v = A) : value(v)
-    {
-    };
-    Chan(int v) : value((uint8)v)
-    {
-    }
-    bool IsA() const
-    {
-        return value == A;
-    }
-    bool IsB() const
-    {
-        return value == B;
-    }
+    } value;
+    Chan(E v) : value(v) {};
+    Chan(int v) : value((E)v) {};
+    bool IsA() const { return value == A; };
+    bool IsB() const { return value == B; };
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Сопротивление входа частотомера

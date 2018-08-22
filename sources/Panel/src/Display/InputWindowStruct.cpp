@@ -53,7 +53,7 @@ static void SendIWStoGenerator();
 static InputWindowStruct *iws = 0;
 static WaveForm           form = WaveForm::Cosine;
 static WaveParameter      m_param = WaveParameter::Amplitude;
-static Chan               ch;
+static Chan               ch = Chan::A;
 
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];

@@ -136,7 +136,7 @@ void Interface::ProcessCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandEnable()
 {
-    Chan ch = (Chan)buffer[1];
+    Chan ch = (Chan::E)buffer[1];
     bool enable = buffer[2] == 1;
     
     __IO uint8 b1 = buffer[1];
@@ -178,7 +178,7 @@ void Interface::CommandWriteService()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandFormWave()
 {
-    Chan ch = (Chan)buffer[1];
+    Chan ch = (Chan::E)buffer[1];
     WaveForm form = (WaveForm::E)buffer[2];
     Generator::SetFormWave(ch, form);
 }
@@ -289,7 +289,7 @@ void Interface::CommandWriteRegister()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandParameter()
 {
-    Chan ch = (Chan)buffer[1];
+    Chan ch = (Chan::E)buffer[1];
     CommandPanel command = (CommandPanel::E)buffer[0];
     float value = 0.0f;
     memcpy(&value, &buffer[2], 4);
