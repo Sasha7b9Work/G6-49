@@ -269,15 +269,15 @@ void Interface::CommandWriteRegister()
         break;
 
     case Register::FreqMeter_Resist:
-        FreqMeter::SetResist((FreqResist)value);
+        FreqMeter::SetResist((FreqResist::E)value);
         break;
 
     case Register::FreqMeter_Couple:
-        FreqMeter::SetCouple((FreqCouple)value);
+        FreqMeter::SetCouple((FreqCouple::E)value);
         break;
 
     case Register::FreqMeter_Filtr:
-        FreqMeter::SetFiltr((FreqFiltr)value);
+        FreqMeter::SetFiltr((FreqFiltr::E)value);
         break;
 
     case Register::Number:
