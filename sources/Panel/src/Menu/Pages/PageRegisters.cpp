@@ -331,9 +331,9 @@ DEF_BUTTON(bSend,                                                               
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnDraw_Backspace(int x, int y)
 {
-    Text::SetFont(TypeFont_UGO2);
+    Text::SetFont(Font::Type::_UGO2);
     Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_LEFT, Color::FILL);
-    Text::SetFont(TypeFont_8);
+    Text::SetFont(Font::Type::_8);
 }
 
 DEF_BUTTON(bBackspace,                                                                                   //--- –≈√»—“–€ - Input window - Backspace ---
@@ -355,9 +355,9 @@ static void OnPress_Cancel()
 
 static void OnDraw_Cancel(int x, int y)
 {
-    Text::SetFont(TypeFont_UGO2);
+    Text::SetFont(Font::Type::_UGO2);
     Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_DELETE, Color::FILL);
-    Text::SetFont(TypeFont_8);
+    Text::SetFont(Font::Type::_8);
 }
 
 DEF_BUTTON(bCancel,                                                                                         //--- –≈√»—“–€ - Input window - ŒÚÏÂÌ‡ ---
@@ -459,9 +459,9 @@ static void OnPress_Save()
 
 static void OnDraw_Save(int x, int y)
 {
-    Text::SetFont(TypeFont_UGO2);
+    Text::SetFont(Font::Type::_UGO2);
     Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_SAVE, Color::FILL);
-    Text::SetFont(TypeFont_8);
+    Text::SetFont(Font::Type::_8);
 }
 
 DEF_BUTTON(bSave,                                                                                          //--- –≈√»—“–€ - ŒÍÌÓ ‚‚Ó‰‡ --- «‡ÒÎ‡Ú¸ ---

@@ -25,17 +25,6 @@
 
 typedef enum
 {
-    TypeFont_5,
-    TypeFont_8,
-    TypeFont_UGO,
-    TypeFont_UGO2,
-    TypeFont_Number,
-    TypeFont_None
-} TypeFont;
-
-
-typedef enum
-{
     EMPTY_FUCTION,
     SET_BRIGHTNESS,         // 1
     SET_ORIENTATION,        // 2 Установить ориентацию экрана. 0 - нормальная, 1 - обратная

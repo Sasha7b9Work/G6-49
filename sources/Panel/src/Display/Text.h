@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
+#include "Display/Font/Font.h"
 
 
 class Text
@@ -10,7 +11,7 @@ public:
     /// Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
     
-    static void SetFont(TypeFont typeFont);
+    static void SetFont(Font::Type typeFont);
 
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 

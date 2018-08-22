@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
+#include "Display/Font/Font.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -62,7 +63,7 @@ private:
 
     static Color currentColor;
 
-    static TypeFont currentTypeFont;
+    static Font::Type currentTypeFont;
 };
 
 
