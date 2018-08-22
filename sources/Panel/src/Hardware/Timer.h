@@ -2,6 +2,11 @@
 #include "defines.h"
 
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4514)
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,49 +24,52 @@
 #define TIME_US    (TIM2->CNT / 90)
 #define TIME_MS    HAL_GetTick()
 
-enum TypeTimer
-{
-    kPressKey,                  ///< Нужно устанавливать, когда приходит нажатие клавиши.
-    kShowLevelRShiftA,          ///< Нужно устанавливать, когда изменяется положение ручки смещения канала 1.
-    kShowLevelRShiftB,          ///< Нужно устанавливать, когда изменяется положение ручки смещения канала 2.
-    kShowLevelTrigLev,          ///< Нужно устанавливать, когда изменяется положение ручки уровня синхронизации
-    kENumSignalsInSec,          ///< Для установки количества считываний сигнала в секунду.
-    kFlashDisplay,              ///< Таймер для мерцающих участков экрана чёрно-белого дисплея.
-    kShowMessages,              ///< Таймер для засекания время показа информационных и предупреждающих сообщений.
-    kMenuAutoHide,              ///< Таймер для отсчёта времени скрывания меню.
-    kRShiftMarkersAutoHide,     ///< Таймер для отсчёта времени скрывания дополнительных боковых меток.
-    kUSB,                       ///< Вспомогательный, для общих нужд.
-    kStopSound,                 ///< Выключить звук
-    kTemporaryPauseFPGA,        ///< Временная пауза для фиксации сигнала на экране после поворота ручек
-    kStrNaviAutoHide,           ///< Прятать строку навигации меню
-    kTimerStartP2P,             ///< Таймер для запуска следующего цикла поточечного чтения
-    kTimerDisplay,              ///< Таймер на ручную отрисовку экрана
-    kTemp,
-    NumTimers
-};
-
-
 class Timer
 {
 public:
+
+    struct Type
+    {
+        enum E
+        {
+            kPressKey,                  ///< Нужно устанавливать, когда приходит нажатие клавиши.
+            kShowLevelRShiftA,          ///< Нужно устанавливать, когда изменяется положение ручки смещения канала 1.
+            kShowLevelRShiftB,          ///< Нужно устанавливать, когда изменяется положение ручки смещения канала 2.
+            kShowLevelTrigLev,          ///< Нужно устанавливать, когда изменяется положение ручки уровня синхронизации
+            kENumSignalsInSec,          ///< Для установки количества считываний сигнала в секунду.
+            kFlashDisplay,              ///< Таймер для мерцающих участков экрана чёрно-белого дисплея.
+            kShowMessages,              ///< Таймер для засекания время показа информационных и предупреждающих сообщений.
+            kMenuAutoHide,              ///< Таймер для отсчёта времени скрывания меню.
+            kRShiftMarkersAutoHide,     ///< Таймер для отсчёта времени скрывания дополнительных боковых меток.
+            kUSB,                       ///< Вспомогательный, для общих нужд.
+            kStopSound,                 ///< Выключить звук
+            kTemporaryPauseFPGA,        ///< Временная пауза для фиксации сигнала на экране после поворота ручек
+            kStrNaviAutoHide,           ///< Прятать строку навигации меню
+            kTimerStartP2P,             ///< Таймер для запуска следующего цикла поточечного чтения
+            kTimerDisplay,              ///< Таймер на ручную отрисовку экрана
+            kTemp,
+            Number
+        } value;
+        operator uint8() const { return (uint8)value; };
+    };
 
     static void Init();
 
     static void DeInit();
     /// Назначает таймеру timer функцию и время срабатывания
-    static void Set(TypeTimer type, pFuncVV func, uint dTms);
+    static void Set(Type type, pFuncVV func, uint dTms);
 
-    static void SetAndStartOnce(TypeTimer type, pFuncVV func, uint dTms);
+    static void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
 
-    static void SetAndEnable(TypeTimer type, pFuncVV func, uint dTms);
+    static void SetAndEnable(Type type, pFuncVV func, uint dTms);
 
-    static void StartOnce(TypeTimer type);
+    static void StartOnce(Type type);
 
-    static void Enable(TypeTimer type);
+    static void Enable(Type type);
 
-    static void Disable(TypeTimer type);
+    static void Disable(Type type);
 
-    static bool IsRun(TypeTimer type);
+    static bool IsRun(Type type);
 
     static void PauseOnTime(uint timeMS);
 
@@ -79,3 +87,8 @@ public:
 
 /** @}  @}
  */
+
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif
