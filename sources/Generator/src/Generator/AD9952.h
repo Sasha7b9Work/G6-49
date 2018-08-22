@@ -18,7 +18,7 @@ public:
 private:
     struct Register
     {
-        enum
+        enum E
         {
             CFR1,
             CFR2,
@@ -26,10 +26,9 @@ private:
             ARR,
             FTW0,
             POW
-        };
-        uint8 value;
-        Register(uint8 v) : value(v) { };
-        operator uint8() const { return value;  };
+        } value;
+        Register(E v) : value(v) { };
+        operator uint8() const { return (uint8)value;  };
     };
 
     static void WriteToHardware(Chan ch, Register reg, uint value);

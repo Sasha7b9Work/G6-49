@@ -35,7 +35,7 @@ private:
 
     struct RG
     {
-        enum
+        enum E
         {
             _0_Control,
             _1_Freq,
@@ -58,10 +58,9 @@ private:
             Reg_DurationB,
             Reg_Frequency
             */
-        };
-        uint8 value;
-        RG(uint8 v) : value(v) { };
-        operator uint8() const { return value; };
+        } value;
+        RG(E v) : value(v) { };
+        operator uint8() const { return (uint8)value; };
     };
 
     static void CreateSine();

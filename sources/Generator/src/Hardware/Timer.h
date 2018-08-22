@@ -25,7 +25,7 @@ public:
 
     struct Type
     {
-        enum
+        enum E 
         {
             kPressKey,                  ///< Нужно устанавливать, когда приходит нажатие клавиши.
             kShowLevelRShiftA,          ///< Нужно устанавливать, когда изменяется положение ручки смещения канала 1.
@@ -44,10 +44,9 @@ public:
             kTimerDisplay,              ///< Таймер на ручную отрисовку экрана
             kTemp,
             Number
-        };
-        uint8 value;
-        Type(uint8 v) : value(v) {};
-        operator uint8() const { return value; };
+        } value;
+        Type(E v) : value(v) {};
+        operator uint8() const { return (uint8)value; };
     };
 
     static void Init();

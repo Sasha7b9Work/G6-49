@@ -155,7 +155,7 @@ void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 GeneratorWritePin AD9952::ChipSelect(Chan ch)
 {
-    return (uint8)(ch.IsA() ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
+    return (GeneratorWritePin::E)(ch.IsA() ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

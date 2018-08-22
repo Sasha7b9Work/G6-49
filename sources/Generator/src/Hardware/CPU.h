@@ -7,7 +7,7 @@
 /// Порты записи
 struct GeneratorWritePin
 {
-    enum
+    enum E
     {
         AD9952_SPI3_CSA,
         AD9952_SPI3_CSB,
@@ -35,24 +35,22 @@ struct GeneratorWritePin
         FREQ_METER_FILTR,
         FREQ_METER_CLK,     ///< Пин формирования тактов чтения измеренного значения
         Number
-    };
-    uint8 value;
-    GeneratorWritePin(uint8 v) : value(v) {};
-    operator uint8() const { return value; };
+    } value;
+    GeneratorWritePin(E v) : value(v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Порты чтения
 struct GeneratorReadPin
 {
-    enum
+    enum E
     {
         FREQ_METER_DRY,     ///< Пин чтения готовности частотомера к выдаче данных
         FREQ_METER_DATA,    ///< Пин чтения данных
         Number
-    };
-    uint8 value;
-    GeneratorReadPin(uint8 v) : value(v) {};
-    operator uint8() const { return value; };
+    } value;
+    GeneratorReadPin(E v) : value(v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 
