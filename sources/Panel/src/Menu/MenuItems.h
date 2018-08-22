@@ -7,6 +7,12 @@
 #include "Hardware/Controls.h"
 
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4514)
+#endif
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** @addtogroup Menu
@@ -39,8 +45,8 @@ struct TypeItem
         Number
     } value;
     operator uint8() const { return (uint8)value; };
+    bool Is(E v) const { return v == value; };
 };
-
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                                   \
@@ -528,3 +534,8 @@ typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
 /** @}  @}
  */
+
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

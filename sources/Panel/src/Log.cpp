@@ -30,12 +30,12 @@ void Log::Trace(TypeTrace, const char *, const char *, int, char *, ...)
 
 
 #ifndef OPEN
-void Log::Write(TypeTrace type, char *format, ...)
+void Log::Write(TypeTrace::E type, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
     char *pointer = buffer;
 
-    if (type == TypeTrace_Error)
+    if (type == TypeTrace::Error)
     {
         buffer[0] = 0;
         strcat(buffer, "!!! ERROR !!! ");
@@ -54,7 +54,7 @@ void Log::Write(TypeTrace type, char *format, ...)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::Trace(TypeTrace type, const char *module, const char *func, int numLine, char *format, ...)
+void Log::Trace(TypeTrace::E type, const char *module, const char *func, int numLine, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
     char message[SIZE_BUFFER_LOG];
@@ -66,11 +66,11 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     char numBuffer[SIZE];
     snprintf(numBuffer, 100, ":%d", numLine);
     message[0] = 0;
-    if (type == TypeTrace_Error)
+    if (type == TypeTrace::Error)
     {
         strcat(message, "!!!ERROR!!! ");
     }
-    else if (type == TypeTrace_Info)
+    else if (type == TypeTrace::Info)
     {
         strcat(message, "            ");
     }
