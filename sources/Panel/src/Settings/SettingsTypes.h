@@ -42,46 +42,41 @@ struct Language
 
 struct SizeByte
 {
-    enum
+    enum ESizeByte
     {
         _7bit,
         _8bit
-    };
-    COMMON_ENUM;
+    } value;
 };
 
 struct StopBit
 {
-    enum
+    enum EStopBit
     {
         _1,
         _2
-    };
-    COMMON_ENUM;
+    } value;
 };
 
 struct Parity
 {
-    enum
+    enum EParity
     {
         Off,
         On
-    };
-    COMMON_ENUM;
+    } value;
 };
 
 /// 
 struct FreqInterval
 {
-    enum
+    enum EFreqInterval
     {
         _1,
         _10
-    };
-    COMMON_ENUM;
-    FreqInterval(int v) : value((uint8)v)
-    {
-    }
+    } value;
+    FreqInterval(int v) : value((EFreqInterval)v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Измерять частоту или период
