@@ -47,6 +47,15 @@ static const Settings defSet =
     { 
         WaveParameter::Frequency,                      // sig_parameter[NumForms]
         WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
+        WaveParameter::Frequency,
         WaveParameter::Frequency
     },
     3,                      // menu_currentPage
@@ -104,15 +113,15 @@ static const float minMax[WaveParameter::Number][2] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float WaveParameter::MinValue()
+float WaveParameter::MinValue() const
 {
-    return minMax[type][0];
+    return minMax[value][0];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float WaveParameter::MaxValue()
+float WaveParameter::MaxValue() const
 {
-    return minMax[type][1];
+    return minMax[value][1];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

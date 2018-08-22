@@ -13,12 +13,6 @@
  *  @{
  */
 
- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#undef COMMON_ENUM
-#define COMMON_ENUM     \
-    uint8 value; operator uint8() const { return value; }; operator uint8() { return value; }; bool Is(uint8 v) const { return v == value; }
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
     Структура комадны
@@ -61,8 +55,7 @@ struct CommandPanel
         SET_DURATION_STADY = 18,
         SET_DUTY_FACTOR = 19,
         Number
-    };
-    ECommandPanel value;
+    } value;
     CommandPanel(ECommandPanel v) : value(v){};
     operator uint8() const { return (uint8)value; };
 };
@@ -70,17 +63,17 @@ struct CommandPanel
 /// Возможные команды, принимаемые от основного процессора
 struct CommandGenerator
 {
-    enum
+    enum ECommandGenerator
     {
         //   0            1...5
         COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                           /* Результат измерения частотомера */
         NUM_COMMAND_READ
-    };
+    } value;
 };
 
 struct WaveParameter
 {
-    enum
+    enum EWaveParameter
     {
         Frequency,          ///< Частота
         Period,             ///< Период
@@ -97,25 +90,14 @@ struct WaveParameter
         DurationStady,      ///< Длительность установившего значения
         DutyFactor,         ///< Коэффициент заполнения
         Number
-    };
-    uint8 type;
-    WaveParameter(uint8 t = 0) : type(t)
-    {
-    };
-    WaveParameter(int t) : type((uint8)t)
-    {
-    };
-    bool Is(WaveParameter param) const
-    {
-        return type == param.type;
-    }
-    float MinValue();
-    float MaxValue();
-    pString Name();
-    operator uint8() const
-    {
-        return type;
-    }
+    } value;
+
+    WaveParameter(int v) : value((EWaveParameter)v) {};
+    bool Is(EWaveParameter param) const { return param == value; }
+    operator uint8() const { return (uint8)value; }
+    float MinValue() const;
+    float MaxValue() const;
+    pString Name() const;
 };
 
 struct WaveForm

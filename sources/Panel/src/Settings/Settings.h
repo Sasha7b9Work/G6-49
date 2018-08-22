@@ -6,6 +6,12 @@
 #include "Display/Colors.h"
 
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4623)
+#endif
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pInput;
 
@@ -112,7 +118,6 @@ public:
 #define BIT_FREQ_MEASURE  1  ///< FreqMeasure - измерение частоты или измерение периода
 #define BIT_FREQ_TEST     2  ///< FreqTest    - включение тестового режима
 
-
     static void Save();
     static void Load(bool _default = false);
 };
@@ -122,3 +127,8 @@ public:
 extern Settings set;
 
 void TuneGenerator(Chan ch);
+
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

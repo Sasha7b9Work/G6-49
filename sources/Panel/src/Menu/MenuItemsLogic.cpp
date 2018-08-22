@@ -519,9 +519,9 @@ pString ChoiceParameter::NameSubItem(int number) const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString WaveParameter::Name()
+pString WaveParameter::Name() const
 {
-    return (char*)nameParameter[type][LANG];
+    return (char*)nameParameter[value][LANG];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

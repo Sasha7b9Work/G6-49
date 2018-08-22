@@ -11,9 +11,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (iws.numLockMode)
 
-Chan             InputWindow::chan;
+Chan                InputWindow::chan;
 WaveForm            InputWindow::form;
-WaveParameter       InputWindow::param;
+WaveParameter       InputWindow::param = WaveParameter::Amplitude;
 InputWindowStruct   InputWindow::iws;
 
 
