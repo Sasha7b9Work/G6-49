@@ -549,7 +549,7 @@ static void SendIWStoGenerator()
 {
     PARAMETER(ch, form, m_param) = *iws;
 
-    if (m_param.Is(WaveParameter::Delay))
+    if (m_param == WaveParameter::Delay)
     {
         PARAMETER(Chan::B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency) = 
             PARAMETER(Chan::B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency);
@@ -569,7 +569,7 @@ static void SendIWStoGenerator()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void FillIWSfromInputBuffer()
 {
-    if (m_param.Is(WaveParameter::Duration) || m_param.Is(WaveParameter::Delay))
+    if (m_param == WaveParameter::Duration || m_param == WaveParameter::Delay)
     {
         iws->order = Order::Micro;
     }

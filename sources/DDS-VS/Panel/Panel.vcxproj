@@ -399,7 +399,6 @@
     <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Wave.h" />
-    <ClInclude Include="..\..\Panel\src\Generator\WaveSignal.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />

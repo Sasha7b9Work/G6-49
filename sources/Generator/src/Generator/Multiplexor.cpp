@@ -36,12 +36,12 @@ void Multiplexor::WriteRegister(Register reg, uint value)
     uint16 pinA0 = PIN_MXA_A0;
     uint16 pinA1 = PIN_MXA_A1;
 
-    if(reg.Is(Register::Multiplexor2))
+    if(reg == Register::Multiplexor2)
     {
         pinA0 = PIN_MXB_A0;
         pinA1 = PIN_MXB_A1;
     }
-    else if(reg.Is(Register::Multiplexor3))
+    else if(reg == Register::Multiplexor3)
     {
         pinA0 = PIN_MX3_A0;
         pinA1 = PIN_MX3_A1;

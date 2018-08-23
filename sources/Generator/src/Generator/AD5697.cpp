@@ -80,7 +80,7 @@ void AD5697::SetFreqLevel(float level)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 AD5697::CreateCommandByte(WaveParameter param)
 {
-    return (uint8)(BINARY_U8(00010000) | (param.Is(WaveParameter::Amplitude) ? 0x01 : 0x08));
+    return (uint8)(BINARY_U8(00010000) | (param == WaveParameter::Amplitude ? 0x01 : 0x08));
 }
 
 

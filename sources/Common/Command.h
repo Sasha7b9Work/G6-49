@@ -93,7 +93,6 @@ struct WaveParameter
     } value;
 
     WaveParameter(int v) : value((E)v) {};
-    bool Is(E param) const { return param == value; }
     operator uint8() const { return (uint8)value; }
     float MinValue() const;
     float MaxValue() const;
@@ -150,7 +149,6 @@ struct Register
         FreqMeter_Filtr,
         Number
     } value;
-    bool Is(E reg) const { return reg == value; };
     Register(E v) : value(v) {};
     operator uint8() const { return (uint8)value; };
     pString Name() const;
