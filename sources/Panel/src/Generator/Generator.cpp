@@ -134,10 +134,11 @@ void Generator::SendToInterface(uint8 *data, int size)
 
     memcpy(trans, data, (uint)size);
 
-    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 5); // Передаём данные
+    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 10); // Передаём данные
 
     if(recv[0] != 0)                    // Если первый принятый байт не равен нулю, то у генератора есть данные для передачи
     {
+        Timer::PauseOnTime(2);
         ReadAndRunFromInterface();      // Принимаем их
     }
 }
@@ -152,7 +153,7 @@ void Generator::ReadAndRunFromInterface()
     uint8 trans[LENGTH_SPI_BUFFER] = {0};
     uint8 recv[LENGTH_SPI_BUFFER];
 
-    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 5);
+    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 10);
 
     if(recv[0] == CommandGenerator::COM_FREQ_MEASURE)
     {

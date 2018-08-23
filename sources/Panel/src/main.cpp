@@ -47,14 +47,16 @@ int main()
         Menu::Update();
         Display::Update();
         Generator::Update();
-        //SendToGenerator();
+        SendToGenerator();
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void SendToGenerator()
 {
-    Generator::LoadRegister(Register::Multiplexor1, 100);
+    //Generator::LoadRegister(Register::Multiplexor1, 100);
+    //Generator::EnableChannel(Chan::A, !Generator::ChannelEnabled(Chan::A));
+    //Generator::EnableChannel(Chan::B, !Generator::ChannelEnabled(Chan::B));
 }
 
 

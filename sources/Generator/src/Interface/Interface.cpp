@@ -78,14 +78,14 @@ void Interface::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ProcessingCommand()
 {
-    CPU::SetReady();
-
     uint8 trans[LENGTH_SPI_BUFFER] = {0};
 
     if (freqForSend != MAX_UINT)
     {
         trans[0] = CommandGenerator::COM_FREQ_MEASURE;
     }
+
+    CPU::SetReady();
    
     if (HAL_SPI_TransmitReceive(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER, 10) == HAL_OK)
     {

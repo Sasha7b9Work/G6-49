@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Hardware\CPU.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\CPU.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelDDS\src/Hardware/CPU.cpp\111</Expression>
         </Bp>

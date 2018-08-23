@@ -11,17 +11,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>115 388</TableColWidths>
+      <TableColWidths>115 77</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>552 100</TableColWidths>
+      <TableColWidths>868 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>1028 154 154 100</TableColWidths>
+      <TableColWidths>1028</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -60,7 +60,7 @@
       <WinId>466</WinId>
       <ViewName>Source Browser - *** Not Enabled ***</ViewName>
       <UserString>500</UserString>
-      <TableColWidths>166</TableColWidths>
+      <TableColWidths>300</TableColWidths>
     </View>
   </TreeListPane>
 
@@ -91,17 +91,17 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>116</Top>
-        <Left>730</Left>
-        <Right>1917</Right>
-        <Bottom>1119</Bottom>
+        <Top>48</Top>
+        <Left>502</Left>
+        <Right>1689</Right>
+        <Bottom>1051</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
       <RegID>0</RegID>
       <MDITabState>
-        <Len>357</Len>
-        <Data>01000000040000000100000001000000010000000100000000000000020000000000000001000000010000000000000028000000280000000100000002000000010000000100000048443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C6C6962735C434D5349535C737461727475705F73746D33326634323978782E730000000015737461727475705F73746D33326634323978782E7300000000C5D4F200FFFFFFFF30443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C6D61696E2E63707000000000086D61696E2E63707000000000FFDC7800FFFFFFFF0100000010000000C5D4F200FFDC7800BECEA100F0A0A100BCA8E1009CC1B600F7B88600D9ADC200A5C2D700B3A6BE00EAD6A300F6FA7D00B5E99D005FC3CF00C1838300CACAD5000100000000000000020000000000000044000000C205000007040000</Data>
+        <Len>246</Len>
+        <Data>01000000040000000100000001000000010000000100000000000000020000000000000001000000010000000000000028000000280000000100000001000000000000000100000030443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C6D61696E2E63707000000000086D61696E2E63707000000000C5D4F200FFFFFFFF0100000010000000C5D4F200FFDC7800BECEA100F0A0A100BCA8E1009CC1B600F7B88600D9ADC200A5C2D700B3A6BE00EAD6A300F6FA7D00B5E99D005FC3CF00C1838300CACAD50001000000000000000200000000000000440000005305000007040000</Data>
       </MDITabState>
     </MDIClientArea>
     <ViewEx>
@@ -3515,7 +3515,7 @@
       <Size>100</Size>
       <ActiveTab>1</ActiveTab>
       <Doc>
-        <Name>.\src\libs\CMSIS\startup_stm32f429xx.s</Name>
+        <Name>&lt;2&gt;.\src\libs\CMSIS\startup_stm32f429xx.s</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>180</TopLine>
         <CurrentLine>198</CurrentLine>
@@ -3524,7 +3524,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\main.cpp</Name>
+        <Name>&lt;2&gt;.\src\main.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>6</TopLine>
         <CurrentLine>21</CurrentLine>
