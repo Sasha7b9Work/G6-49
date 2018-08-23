@@ -35,8 +35,6 @@ private:
     /// Читать и выполнять данные из генератора
     static void ReadAndRunFromInterface();
 
-    static void MasterSynchro();
-
     static void ExecuteCommand(uint8 *buffer, int size);
 
     static bool enabledCh[Chan::Number];

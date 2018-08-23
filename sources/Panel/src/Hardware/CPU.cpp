@@ -22,7 +22,7 @@ static SPI_HandleTypeDef handleSPI4 =
         SPI_POLARITY_HIGH,
         SPI_PHASE_2EDGE,
         SPI_NSS_SOFT,
-        SPI_BAUDRATEPRESCALER_8,
+        SPI_BAUDRATEPRESCALER_256,
         SPI_FIRSTBIT_MSB,
         SPI_TIMODE_DISABLED,
         SPI_CRCCALCULATION_DISABLED,
@@ -105,7 +105,7 @@ void CPU::SPI4_::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
-    while(TIME_MS - timeLastTransmit < 10)
+    while(IsBusy())
     {};
     timeLastTransmit = TIME_MS;
 #ifndef OPEN

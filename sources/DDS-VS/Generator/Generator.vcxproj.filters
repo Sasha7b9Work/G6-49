@@ -93,60 +93,6 @@
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cm4.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cmFunc.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cmInstr.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\core_cmSimd.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\ctype.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\integer.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\inttypes.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\limits.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\math.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdarg.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdint.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdio.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\stdlib.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\string.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\tchar.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\libs\common\_VS\windows.h">
-      <Filter>common\_VS</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Generator\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
     </ClInclude>
@@ -182,6 +128,63 @@
     </ClInclude>
     <ClInclude Include="..\..\Generator\src\FreqMeter\FreqMeter.h">
       <Filter>FreqMeter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cm4.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cm7.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmFunc.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmInstr.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\core_cmSimd.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\ctype.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\integer.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\inttypes.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\limits.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\math.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdarg.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdint.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdio.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\stdlib.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\string.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\tchar.h">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\windows.h">
+      <Filter>common\_VS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -277,16 +280,16 @@
     <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">
       <Filter>libs\CMSIS</Filter>
     </None>
-    <None Include="..\..\libs\common\_VS\algorithm">
+    <None Include="..\..\common\_VS\algorithm">
       <Filter>common\_VS</Filter>
     </None>
-    <None Include="..\..\libs\common\_VS\cstdlib">
+    <None Include="..\..\common\_VS\cstdlib">
       <Filter>common\_VS</Filter>
     </None>
-    <None Include="..\..\libs\common\_VS\cstring">
+    <None Include="..\..\common\_VS\cstring">
       <Filter>common\_VS</Filter>
     </None>
-    <None Include="..\..\libs\common\_VS\limits">
+    <None Include="..\..\common\_VS\limits">
       <Filter>common\_VS</Filter>
     </None>
   </ItemGroup>

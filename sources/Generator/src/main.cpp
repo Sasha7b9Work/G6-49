@@ -21,9 +21,8 @@ int main()
   
     while (1)
     {
-        Interface::ProcessingCommand();
         FreqMeter::Update();
-
+        Interface::Update();
 /*        
         if(HAL_GetTick() - prevTime > 100)
         {

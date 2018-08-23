@@ -5,6 +5,7 @@
 #include "Generator/Multiplexor.h"
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Command.h"
 #include "structs.h"
@@ -22,19 +23,23 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
         SPI_POLARITY_HIGH,              // Init.CLKPolarity
         SPI_PHASE_2EDGE,                // Init.CLKPhase
         SPI_NSS_SOFT,                   // Init.NSS
-        SPI_BAUDRATEPRESCALER_8,        // Init.BaudRatePrescaler
+        SPI_BAUDRATEPRESCALER_256,      // Init.BaudRatePrescaler
         SPI_FIRSTBIT_MSB,               // Init.FirstBit
         SPI_TIMODE_DISABLED,            // Init.TIMode
         SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
         7                               // InitCRCPolynomial
     },
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+    0, 0, 0, 0, 0, 0, 
+    0, 
+    0, 
+    0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 buffer[LENGTH_SPI_BUFFER];     ///< Буфер для принимаемых команд
 uint  Interface::freqForSend = MAX_UINT;
+uint  Interface::timeLastReceive = 0;
 const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
 {
     CommandEmpty,
@@ -59,7 +64,9 @@ const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
     CommandEmpty
 };
 
-                                            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static uint8 trs[LENGTH_SPI_BUFFER];
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
 {
     GPIO_InitTypeDef isGPIOA =
@@ -72,74 +79,35 @@ void Interface::Init()
     };
     HAL_GPIO_Init(GPIOA, &isGPIOA);
 
+    HAL_NVIC_SetPriority(SPI1_IRQn, 1, 0);
+
     HAL_SPI_Init(&hSPI1);
+
+    HAL_NVIC_EnableIRQ(SPI1_IRQn);
+
+    HAL_SPI_TransmitReceive_IT(&hSPI1, trs, buffer, LENGTH_SPI_BUFFER);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ProcessingCommand()
+SPI_HandleTypeDef *Interface::HandleSPI()
 {
-    uint8 trans[LENGTH_SPI_BUFFER] = {0};
+    return &hSPI1;
+}
 
-    if (freqForSend != MAX_UINT)
-    {
-        trans[0] = CommandGenerator::COM_FREQ_MEASURE;
-    }
-
-    CPU::SetReady();
-   
-    if (HAL_SPI_TransmitReceive(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER, 10) == HAL_OK)
-    {
-        CPU::SetBusy();
-
-        ProcessCommand();
-
-        if (trans[0] != 0)
-        {
-            SendToInterface(trans);
-        }
-    }
-    else
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Update()
+{ 
+    /*
+    if(TIME_MS - timeLastReceive < 1000)
     {
         HAL_SPI_DeInit(&hSPI1);
         HAL_SPI_Init(&hSPI1);
+        HAL_NVIC_EnableIRQ(SPI1_IRQn);
+        HAL_SPI_TransmitReceive_IT(&hSPI1, trs, buffer, LENGTH_SPI_BUFFER);
+        CPU::SetReady();
+        timeLastReceive = TIME_MS;
     }
-
-    CPU::SetBusy();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SendToInterface(uint8 *trans)
-{
-    BitSet32 data;
-    data.word = freqForSend;
-    if(freqForSend != 1000)
-    {
-        freqForSend++;
-    }
-    for (int i = 0; i < 4; i++)
-    {
-        trans[1 + i] = data.byte[i];
-    }
-
-    CPU::SetReady();
-
-    uint8 recv[LENGTH_SPI_BUFFER];
-
-    HAL_SPI_TransmitReceive(&hSPI1, trans, recv, LENGTH_SPI_BUFFER, 10);
-
-    freqForSend = MAX_UINT;
-
-    CPU::SetBusy();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ProcessCommand()
-{ 
-    if (buffer[0] < CommandPanel::Number)
-    {       
-        pFuncInterfaceVV f = commands[buffer[0]].func;
-        f();
-    }
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -147,15 +115,7 @@ void Interface::CommandEnable()
 {
     Chan ch = (Chan::E)buffer[1];
     bool enable = buffer[2] == 1;
-    
-    __IO uint8 b1 = buffer[1];
-    __IO uint8 b2 = buffer[2];
-
-    if((b1 != 0 && b1 != 1) || (b2 != 0 && b2 != 1))
-    {
-        b1 = b1;
-    }
-    
+      
     Generator::EnableChannel(ch, enable);
 }
 
@@ -163,26 +123,6 @@ void Interface::CommandEnable()
 void Interface::CommandReadData()
 {
 }
-
-/*
-void Interface::CommandWriteService()
-{
-    if(freqForSend != 0)
-    {
-        // Передаём число 5 - количество готовых к передаче байт (1 байт команды + 4 байта данных)
-        BitSet32 data;
-        data.word = 0;
-        data.byte0 = 5;
-        WriteToInterface((uint8 *)data.word, 4);
-
-        data.word = freqForSend;
-        uint8 trans[5] = {FREQ_MEASURE, data.byte0, data.byte1, data.byte2, data.byte3};
-        WriteToInterface(trans, 5);
-
-        freqForSend = 0;
-    }
-}
-*/
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandFormWave()
@@ -336,19 +276,30 @@ void Interface::SendFrequency(uint value)
     freqForSend = value;
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::ReceiveCallback()
+{
+    if (buffer[0] < CommandPanel::Number)
+    {
+        pFuncInterfaceVV f = commands[buffer[0]].func;
+        f();
+
+        memset(buffer, 0, LENGTH_SPI_BUFFER);
+    }
+    timeLastReceive = TIME_MS;
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void SlaveSynchro()
+void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *)
 {
-    uint8 txByte = SPI_SLAVE_SYNBYTE;
-    uint8 rxByte = 0x00;
-
-    do
-    {
-        HAL_SPI_TransmitReceive(&hSPI1, &txByte, &rxByte, 1, HAL_MAX_DELAY);
-    } while(rxByte != SPI_MASTER_SYNBYTE);
+    CPU::SetBusy();
+    Interface::ReceiveCallback();
+    HAL_SPI_TransmitReceive_IT(&hSPI1, trs, buffer, LENGTH_SPI_BUFFER);
+    CPU::SetReady();
 }
-*/
 
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi)
+{
+     hspi = &hSPI1;
+}

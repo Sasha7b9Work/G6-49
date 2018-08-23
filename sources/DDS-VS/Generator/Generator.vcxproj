@@ -155,6 +155,25 @@
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\common\CommonTypes.h" />
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
+    <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
+    <ClInclude Include="..\..\common\_VS\core_cm4.h" />
+    <ClInclude Include="..\..\common\_VS\core_cm7.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmFunc.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmInstr.h" />
+    <ClInclude Include="..\..\common\_VS\core_cmSimd.h" />
+    <ClInclude Include="..\..\common\_VS\ctype.h" />
+    <ClInclude Include="..\..\common\_VS\integer.h" />
+    <ClInclude Include="..\..\common\_VS\inttypes.h" />
+    <ClInclude Include="..\..\common\_VS\limits.h" />
+    <ClInclude Include="..\..\common\_VS\math.h" />
+    <ClInclude Include="..\..\common\_VS\stdarg.h" />
+    <ClInclude Include="..\..\common\_VS\stdint.h" />
+    <ClInclude Include="..\..\common\_VS\stdio.h" />
+    <ClInclude Include="..\..\common\_VS\stdlib.h" />
+    <ClInclude Include="..\..\common\_VS\string.h" />
+    <ClInclude Include="..\..\common\_VS\tchar.h" />
+    <ClInclude Include="..\..\common\_VS\windows.h" />
     <ClInclude Include="..\..\Generator\src\defines.h" />
     <ClInclude Include="..\..\Generator\src\FreqMeter\FreqMeter.h" />
     <ClInclude Include="..\..\Generator\src\Generator\AD5697.h" />
@@ -173,24 +192,6 @@
     <ClInclude Include="..\..\Generator\src\Interface\Interface.h" />
     <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Generator\src\Utils\Math.h" />
-    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc.h" />
-    <ClInclude Include="..\..\libs\common\_VS\cmsis_armcc_V6.h" />
-    <ClInclude Include="..\..\libs\common\_VS\core_cm4.h" />
-    <ClInclude Include="..\..\libs\common\_VS\core_cmFunc.h" />
-    <ClInclude Include="..\..\libs\common\_VS\core_cmInstr.h" />
-    <ClInclude Include="..\..\libs\common\_VS\core_cmSimd.h" />
-    <ClInclude Include="..\..\libs\common\_VS\ctype.h" />
-    <ClInclude Include="..\..\libs\common\_VS\integer.h" />
-    <ClInclude Include="..\..\libs\common\_VS\inttypes.h" />
-    <ClInclude Include="..\..\libs\common\_VS\limits.h" />
-    <ClInclude Include="..\..\libs\common\_VS\math.h" />
-    <ClInclude Include="..\..\libs\common\_VS\stdarg.h" />
-    <ClInclude Include="..\..\libs\common\_VS\stdint.h" />
-    <ClInclude Include="..\..\libs\common\_VS\stdio.h" />
-    <ClInclude Include="..\..\libs\common\_VS\stdlib.h" />
-    <ClInclude Include="..\..\libs\common\_VS\string.h" />
-    <ClInclude Include="..\..\libs\common\_VS\tchar.h" />
-    <ClInclude Include="..\..\libs\common\_VS\windows.h" />
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -277,13 +278,13 @@
     <ClCompile Include="..\..\Generator\src\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\common\_VS\algorithm" />
+    <None Include="..\..\common\_VS\cstdlib" />
+    <None Include="..\..\common\_VS\cstring" />
+    <None Include="..\..\common\_VS\limits" />
     <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
-    <None Include="..\..\libs\common\_VS\algorithm" />
-    <None Include="..\..\libs\common\_VS\cstdlib" />
-    <None Include="..\..\libs\common\_VS\cstring" />
-    <None Include="..\..\libs\common\_VS\limits" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

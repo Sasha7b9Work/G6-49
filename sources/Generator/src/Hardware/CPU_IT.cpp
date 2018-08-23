@@ -4,6 +4,7 @@
 #include <stm32f4xx.h>
 #endif
 #include "Hardware/CPU.h"
+#include "Interface/Interface.h"
 
 
 #ifdef __cplusplus
@@ -67,6 +68,11 @@ extern "C" {
     //------------------------------------------------------------------------------------------------------------------------------------------------
     void DebugMon_Handler()
     {
+    }
+
+    void SPI1_IRQHandler()
+    {
+        HAL_SPI_IRQHandler(Interface::HandleSPI());
     }
 
 #ifdef __cplusplus

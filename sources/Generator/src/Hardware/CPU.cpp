@@ -55,6 +55,8 @@ void CPU::Init()
 
     InitGPIOS();
 
+    SetBusy();
+
     InitPins();
 
     WritePin(GeneratorWritePin::Pin_P3_OutA, false);

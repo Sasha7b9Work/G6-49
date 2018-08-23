@@ -26,7 +26,7 @@ int main()
     
     Display::Init();
 
-    Timer::PauseOnTime(200);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
+    Timer::PauseOnTime(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
 
     Generator::Reset();
 
@@ -40,14 +40,10 @@ int main()
 
     while (1)
     {
-        if(Wave::Signal::Form(Chan::A) == WaveForm::Sine && CURRENT_CHANNEL == Chan::A)
-        {
-        }
-
         CPU::Update();
         Menu::Update();
         Display::Update();
-        Generator::Update();
+        //Generator::Update();
         SendToGenerator();
     }
 }
@@ -55,11 +51,9 @@ int main()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void SendToGenerator()
 {
-    for(int i = 0 ; i < 100; i++)
-    {
-        //Generator::EnableChannel(Chan::A, !Generator::ChannelEnabled(Chan::A));
-        //Generator::EnableChannel(Chan::B, !Generator::ChannelEnabled(Chan::B));
-    }
+    Generator::LoadRegister(Register::Multiplexor1, 1);
+    Timer::PauseOnTime(1);
+    Generator::LoadRegister(Register::Multiplexor1, 0);
 }
 
 

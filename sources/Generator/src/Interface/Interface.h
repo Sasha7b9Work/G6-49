@@ -9,15 +9,17 @@ public:
 
     static void Init();
 
-    static void ProcessingCommand();
+    static void Update();
     /// ѕослать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
+
+    static SPI_HandleTypeDef *HandleSPI();
+
+    static void ReceiveCallback();
 
 private:
 
     static void CommandEmpty();
-
-    static void ProcessCommand();
 
     static void CommandEnable();
 
@@ -32,8 +34,6 @@ private:
     static void CommandModeDebug();
 
     static void CommandWriteRegister();
-
-    static void SendToInterface(uint8 *trans);
     /// Ќенулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
 
@@ -46,4 +46,6 @@ private:
     };
     /// «десь хран€тс€ обработчики команд
     static const FuncInterface commands[CommandPanel::Number];
+
+    static uint timeLastReceive;
 };

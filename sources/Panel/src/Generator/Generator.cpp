@@ -130,16 +130,7 @@ void Generator::SendToInterface(uint8 *data, int size)
 
     memcpy(trans, data, (uint)size);
 
-    while (CPU::SPI4_::IsBusy())                    // Ждём, пока генератор будет готов к приёму информации
-    {
-    };
-
-    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 10); // Передаём данные
-
-    if(recv[0] != 0)                    // Если первый принятый байт не равен нулю, то у генератора есть данные для передачи
-    {
-        ReadAndRunFromInterface();      // Принимаем их
-    }
+    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -152,7 +143,7 @@ void Generator::ReadAndRunFromInterface()
     uint8 trans[LENGTH_SPI_BUFFER] = {0};
     uint8 recv[LENGTH_SPI_BUFFER];
 
-    if(CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 10))
+    if(CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100))
     {
         if(recv[0] == CommandGenerator::COM_FREQ_MEASURE)
         {
@@ -165,16 +156,4 @@ void Generator::ReadAndRunFromInterface()
             FrequencyMeter::SetMeasure(data.word);
         }
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::MasterSynchro()
-{
-    uint8 txByte = SPI_MASTER_SYNBYTE;
-    uint8 rxByte = 0x00;
-    
-    do
-    {
-        CPU::SPI4_::TransmitReceive(&txByte, &rxByte, 1, HAL_MAX_DELAY);
-    } while(rxByte != SPI_SLAVE_SYNBYTE);
 }
