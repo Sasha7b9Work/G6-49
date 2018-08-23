@@ -34,7 +34,30 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 buffer[LENGTH_SPI_BUFFER];     ///< Буфер для принимаемых команд
-uint Interface::freqForSend = MAX_UINT;
+uint  Interface::freqForSend = MAX_UINT;
+const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
+{
+    CommandEmpty,
+    CommandEnable,          /// ENABLE_CHANNEL
+    CommandFormWave,        /// SET_FORM_WAVE
+    CommandParameter,       /// SET_FREQUENCY
+    CommandParameter,       /// SET_AMPLITUDE
+    CommandParameter,       /// SET_OFFSET
+    CommandParameter,       /// SET_DURATION
+    CommandParameter,       /// SET_DUTYRATIO
+    CommandParameter,       /// SET_PHASE
+    CommandReset,           /// RUN_RESET
+    CommandModeDebug,       /// MODE_DEBUG
+    CommandParameter,       /// SET_DELAY
+    CommandWriteRegister,   /// WRITE_REGISTER
+    CommandReadData,        /// READ_DATA
+    CommandEmpty,
+    CommandEmpty,
+    CommandEmpty,
+    CommandEmpty,
+    CommandEmpty,
+    CommandEmpty
+};
 
                                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
@@ -105,30 +128,10 @@ void Interface::SendToInterface(uint8 *trans)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ProcessCommand()
-{
-    typedef void(*pFuncInterfaceVV)();
-
-    static const pFuncInterfaceVV commands[CommandPanel::Number] =
-    {
-        CommandEmpty,
-        CommandEnable,          /// ENABLE_CHANNEL
-        CommandFormWave,        /// SET_FORM_WAVE
-        CommandParameter,       /// SET_FREQUENCY
-        CommandParameter,       /// SET_AMPLITUDE
-        CommandParameter,       /// SET_OFFSET
-        CommandParameter,       /// SET_DURATION
-        CommandParameter,       /// SET_DUTYRATIO
-        CommandParameter,       /// SET_PHASE
-        CommandReset,           /// RUN_RESET
-        CommandModeDebug,       /// MODE_DEBUG
-        CommandParameter,       /// SET_DELAY
-        CommandWriteRegister,   /// WRITE_REGISTER
-        CommandReadData         /// READ_DATA
-    };
-  
+{ 
     if (buffer[0] < CommandPanel::Number)
     {       
-        pFuncInterfaceVV f = commands[buffer[0]];
+        pFuncInterfaceVV f = commands[buffer[0]].func;
         f();
     }
 }

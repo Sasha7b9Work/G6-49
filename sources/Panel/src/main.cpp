@@ -4,7 +4,7 @@
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Generator.h"
+#include "Generator/Generator.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 
@@ -12,6 +12,8 @@
 /** @defgroup Panel
  *  @{
  */
+
+static void SendToGenerator();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +47,14 @@ int main()
         Menu::Update();
         Display::Update();
         Generator::Update();
+        //SendToGenerator();
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void SendToGenerator()
+{
+    Generator::LoadRegister(Register::Multiplexor1, 100);
 }
 
 

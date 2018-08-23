@@ -1,4 +1,5 @@
 #pragma once
+#include "Command.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,4 +36,14 @@ private:
     static void SendToInterface(uint8 *trans);
     /// Ќенулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
+
+    typedef void(*pFuncInterfaceVV)();
+
+    struct FuncInterface
+    {
+        pFuncInterfaceVV func;
+        FuncInterface(pFuncInterfaceVV f) : func(f) {};
+    };
+    /// «десь хран€тс€ обработчики команд
+    static const FuncInterface commands[CommandPanel::Number];
 };
