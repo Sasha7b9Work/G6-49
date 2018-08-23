@@ -61,8 +61,6 @@ public:
 
         static void Init();
 
-        static void DrawButton(int x, int y, const char *title);
-
         static void FillCommand(Control control, Control::Action typePress);
 
     public:

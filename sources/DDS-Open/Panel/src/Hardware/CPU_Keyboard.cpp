@@ -32,14 +32,14 @@ struct StructButton
     Control control;
     int x;
     int y;
-    uint timePress;
-    bool selected;
+    uint timePress;     // Время нажатия кнопки. Нужно, чтобы определить наступления события Long. Если оно не равно нулю, то кнопка находится в 
+                        // нажатом состоянии
 };
+
+static StructButton *btnSelected = 0;
 
 #define BUTTON strBtn[i][j]
 
-static int selX = 0; // Если кнопка нажата, то
-static int selY = 0; // здесь её координаты
 
 static StructButton strBtn[6][4] =
 {
@@ -128,33 +128,29 @@ Control CPU::Keyboard::GetNextControl()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawButton(StructButton *button)
+{
+    if (button->timePress)
+    {
+        Painter::FillRegion(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
+        Text::DrawStringInCenterRect(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, button->title, Color::BACK);
+    }
+    else
+    {
+        Painter::DrawRectangle(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
+        Text::DrawStringInCenterRect(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, button->title);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Draw()
 {
     for (int i = 0; i < 6; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            const char *title = BUTTON.title;
-            if (title[0])
-            {
-                DrawButton(BUTTON.x, BUTTON.y, title);
-            }
+            DrawButton(&BUTTON);
         }
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::DrawButton(int x, int y, const char *title)
-{
-    if (selX == x && selY == y)
-    {
-        Painter::FillRegion(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
-        Text::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title, Color::BACK);
-    }
-    else
-    {
-        Painter::DrawRectangle(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
-        Text::DrawStringInCenterRect(x, y, WIDTH_BUTTON, HEIGHT_BUTTON, title);
     }
 }
 
@@ -186,9 +182,28 @@ void CPU::Keyboard::Update()
                 {
                     if (InButton(x, y, &BUTTON))
                     {
-                        selX = BUTTON.x;
-                        selY = BUTTON.y;
-                        FillCommand(BUTTON.control, Control::Action::Down);
+                        if (btnSelected && btnSelected == &BUTTON && (TIME_MS - BUTTON.timePress > 500))
+                        {
+                            FillCommand(BUTTON.control, Control::Action::Long);
+                            BUTTON.timePress = 0;
+                            btnSelected = 0;
+                        }
+                        else
+                        {
+                            if (btnSelected == &BUTTON)
+                            {
+                                continue;
+                            }
+                            else if(btnSelected)
+                            {
+                                btnSelected->timePress = 0;
+                                btnSelected = 0;
+                            }
+
+                            btnSelected = &BUTTON;
+                            BUTTON.timePress = TIME_MS;
+                            FillCommand(BUTTON.control, Control::Action::Down);
+                        }
                     }
                 }
             }
@@ -197,23 +212,11 @@ void CPU::Keyboard::Update()
         TS_flag = 0;
         timeLastPress = TIME_MS;
     }
-    else if(selX != -1)
+    else if(btnSelected)
     {
-        for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                if (selX == BUTTON.x && selY == BUTTON.y)
-                {
-                    FillCommand(BUTTON.control, Control::Action::Up);
-                    selX = -1;
-                }
-            }
-        }
-    }
-    else
-    {
-        selX = -1;
+        FillCommand(btnSelected->control, Control::Action::Up);
+        btnSelected->timePress = 0;
+        btnSelected = 0;
     }
 }
 
