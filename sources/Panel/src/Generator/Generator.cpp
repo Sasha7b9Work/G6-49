@@ -138,7 +138,6 @@ void Generator::SendToInterface(uint8 *data, int size)
 
     if(recv[0] != 0)                    // ≈сли первый прин€тый байт не равен нулю, то у генератора есть данные дл€ передачи
     {
-        Timer::PauseOnTime(2);
         ReadAndRunFromInterface();      // ѕринимаем их
     }
 }
@@ -153,17 +152,18 @@ void Generator::ReadAndRunFromInterface()
     uint8 trans[LENGTH_SPI_BUFFER] = {0};
     uint8 recv[LENGTH_SPI_BUFFER];
 
-    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 10);
-
-    if(recv[0] == CommandGenerator::COM_FREQ_MEASURE)
+    if(CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 10))
     {
-        BitSet32 data;
-        for(int i = 0; i < 4; i++)
+        if(recv[0] == CommandGenerator::COM_FREQ_MEASURE)
         {
-            data.byte[i] = recv[1 + i];
+            BitSet32 data;
+            for(int i = 0; i < 4; i++)
+            {
+                data.byte[i] = recv[1 + i];
+            }
+    
+            FrequencyMeter::SetMeasure(data.word);
         }
-
-        FrequencyMeter::SetMeasure(data.word);
     }
 }
 

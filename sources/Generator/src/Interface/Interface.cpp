@@ -112,6 +112,10 @@ void Interface::SendToInterface(uint8 *trans)
 {
     BitSet32 data;
     data.word = freqForSend;
+    if(freqForSend != 1000)
+    {
+        freqForSend++;
+    }
     for (int i = 0; i < 4; i++)
     {
         trans[1 + i] = data.byte[i];
@@ -122,6 +126,8 @@ void Interface::SendToInterface(uint8 *trans)
     uint8 recv[LENGTH_SPI_BUFFER];
 
     HAL_SPI_TransmitReceive(&hSPI1, trans, recv, LENGTH_SPI_BUFFER, 10);
+
+    freqForSend = MAX_UINT;
 
     CPU::SetBusy();
 }

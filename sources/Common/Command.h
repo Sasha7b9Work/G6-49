@@ -66,8 +66,8 @@ struct CommandGenerator
     enum E
     {
         //   0            1...5
-        COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                           /* Результат измерения частотомера */
-        NUM_COMMAND_READ
+        COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                        /* Результат измерения частотомера */
+        Number
     } value;
 };
 

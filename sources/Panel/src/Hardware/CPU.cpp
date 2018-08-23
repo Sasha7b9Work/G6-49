@@ -103,14 +103,16 @@ void CPU::SPI4_::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
+bool CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
     while(TIME_MS - timeLastTransmit < 10)
     {};
-#ifndef OPEN
-    HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut);
-#endif
     timeLastTransmit = TIME_MS;
+#ifndef OPEN
+    return HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut) == HAL_OK;
+#else
+    return false;
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
