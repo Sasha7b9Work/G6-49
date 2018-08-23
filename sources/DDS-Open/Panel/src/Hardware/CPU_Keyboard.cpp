@@ -32,7 +32,10 @@ struct StructButton
     Control control;
     int x;
     int y;
+    uint timePress;
 };
+
+#define BUTTON strBtn[i][j]
 
 static int selX = 0; // Если кнопка нажата, то
 static int selY = 0; // здесь её координаты
@@ -73,8 +76,8 @@ void CPU::Keyboard::Init()
     {
         for (int j = 0; j < 4; j++)
         {
-            strBtn[i][j].x = x0 + j * (WIDTH_BUTTON + DELTA_BUTTON);
-            strBtn[i][j].y = y0 + i * (HEIGHT_BUTTON + DELTA_BUTTON);
+            BUTTON.x = x0 + j * (WIDTH_BUTTON + DELTA_BUTTON);
+            BUTTON.y = y0 + i * (HEIGHT_BUTTON + DELTA_BUTTON);
         }
     }
 
@@ -82,7 +85,7 @@ void CPU::Keyboard::Init()
     {
         for (int j = 0; j < 4; j++)
         {
-            strBtn[i][j].y += DELTA_BUTTON * 2;
+            BUTTON.y += DELTA_BUTTON * 2;
         }
     }
 
@@ -90,7 +93,7 @@ void CPU::Keyboard::Init()
     {
         for (int j = 1; j < 4; j++)
         {
-            strBtn[i][j].x += DELTA_BUTTON * 2;
+            BUTTON.x += DELTA_BUTTON * 2;
         }
     }
 }
@@ -130,10 +133,10 @@ void CPU::Keyboard::Draw()
     {
         for (int j = 0; j < 4; j++)
         {
-            const char *title = strBtn[i][j].title;
+            const char *title = BUTTON.title;
             if (title[0])
             {
-                DrawButton(strBtn[i][j].x, strBtn[i][j].y, title);
+                DrawButton(BUTTON.x, BUTTON.y, title);
             }
         }
     }
@@ -174,11 +177,12 @@ void CPU::Keyboard::Update()
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (x > strBtn[i][j].x && x < (strBtn[i][j].x + WIDTH_BUTTON) &&
-                        y > strBtn[i][j].y && y < (strBtn[i][j].y + HEIGHT_BUTTON))
+                    if (x > BUTTON.x && x < (BUTTON.x + WIDTH_BUTTON) &&
+                        y > BUTTON.y && y < (BUTTON.y + HEIGHT_BUTTON))
                     {
-                        selX = strBtn[i][j].x;
-                        selY = strBtn[i][j].y;
+                        selX = BUTTON.x;
+                        selY = BUTTON.y;
+                        FillCommand(BUTTON.control, Control::Action::Down);
                     }
                 }
             }
@@ -193,9 +197,9 @@ void CPU::Keyboard::Update()
         {
             for (int j = 0; j < 4; j++)
             {
-                if (selX == strBtn[i][j].x && selY == strBtn[i][j].y)
+                if (selX == BUTTON.x && selY == BUTTON.y)
                 {
-                    FillCommand(strBtn[i][j].control, Control::Action::Up);
+                    FillCommand(BUTTON.control, Control::Action::Up);
                     selX = -1;
                 }
             }
