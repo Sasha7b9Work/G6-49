@@ -34,7 +34,9 @@ public:
     class Signal
     {
     public:
+        /// Возвращает текущую форму сигнала на данном канале
         static WaveForm Form(Chan ch = CURRENT_CHANNEL);
-        static void SetForm(WaveForm form);
+        /// Устанавливает сигнал текущим на данный канал
+        static void SetForm(Chan ch, WaveForm form);
     };
 };

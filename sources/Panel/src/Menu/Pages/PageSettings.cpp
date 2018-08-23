@@ -58,7 +58,7 @@ void PageSignals::OnPress_Form(bool)
     }
     */
 
-    Wave::Signal::SetForm(form);
+    Wave::Signal::SetForm(CURRENT_CHANNEL, form);
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Signal::Form());
     TuneGenerator(CURRENT_CHANNEL);

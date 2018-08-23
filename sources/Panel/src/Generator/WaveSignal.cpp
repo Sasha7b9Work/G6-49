@@ -9,7 +9,7 @@ WaveForm Wave::Signal::Form(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Signal::SetForm(WaveForm form)
+void Wave::Signal::SetForm(Chan ch, WaveForm form)
 {
-    set.sig_form[CURRENT_CHANNEL] = form;
+    set.sig_form[ch] = form;
 }
