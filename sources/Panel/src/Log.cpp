@@ -18,11 +18,11 @@ static bool loggerUSB = false;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef OPEN
-void Log::Write(TypeTrace, char *, ...)
+void Log::Write(TypeTrace::E, char *, ...)
 {
 }
 
-void Log::Trace(TypeTrace, const char *, const char *, int, char *, ...)
+void Log::Trace(TypeTrace::E, const char *, const char *, int, char *, ...)
 {
 }
 

@@ -17,7 +17,7 @@
         <TargetCommonOption>
           <Device>STM32F746IGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F7xx_DFP.2.9.0</PackID>
+          <PackID>Keil.STM32F7xx_DFP.2.10.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20010000,0x40000) IRAM2(0x20000000,0x10000) IROM(0x08000000,0x100000) IROM2(0x00200000,0x100000) CPUTYPE("Cortex-M7") FPU3(SFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -335,7 +335,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--cpp --diag_suppress=1165</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F746xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F746xx,OPEN</Define>
               <Undefine></Undefine>
               <IncludePath>.\src;.\src\libs;..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\Hardware;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Include;..\..\common\libs\STM32Cube_F7\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\common\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Inc;..\..\common</IncludePath>
             </VariousControls>
@@ -621,26 +621,6 @@
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Log.h</FilePath>
             </File>
-            <File>
-              <FileName>Generator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Generator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Generator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Generator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Wave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Wave.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Wave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Wave.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -866,6 +846,11 @@
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Hardware\Controls.h</FilePath>
             </File>
+            <File>
+              <FileName>Controls.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Hardware\Controls.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -996,6 +981,36 @@
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Menu\Pages\PageUSB.h</FilePath>
             </File>
+            <File>
+              <FileName>PageFrequencyCounter2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFrequencyCounter2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageFrequencyCounter3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFrequencyCounter3.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageRegisters.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageRegisters.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageRegisters.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageRegisters.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1071,6 +1086,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\Utils\Statistics.h</FilePath>
             </File>
+            <File>
+              <FileName>NumberBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Utils\NumberBuffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NumberBuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Utils\NumberBuffer.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1110,6 +1135,36 @@
               <FileName>FrequencyMeter.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\Panel\src\FrequencyMeter\FrequencyMeter.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Generator</GroupName>
+          <Files>
+            <File>
+              <FileName>Generator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Generator\Generator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Generator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Generator\Generator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Generator\Wave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Generator\Wave.h</FilePath>
+            </File>
+            <File>
+              <FileName>WaveSignal.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Generator\WaveSignal.cpp</FilePath>
             </File>
           </Files>
         </Group>

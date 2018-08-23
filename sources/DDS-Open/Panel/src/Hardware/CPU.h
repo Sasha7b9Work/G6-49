@@ -63,7 +63,7 @@ public:
 
         static void DrawButton(int x, int y, const char *title);
 
-        static void FillCommand(Control control, TypePress typePress);
+        static void FillCommand(Control control, Control::Action typePress);
 
     public:
         static void Draw();
@@ -72,7 +72,7 @@ public:
         /// Возвращает true, если буфер пуст
         static bool BufferIsEmpty();
         /// Возвращает следующий орган управления, если таковой имеется
-        static StructControl GetNextControl();
+        static Control GetNextControl();
 
         //----------------------------------------------------------------------------------------------------------------------------------- TIM4 ---
         class TIM4_

@@ -124,18 +124,21 @@ void Generator::SendToInterface(uint8 *data, int size)
         В случае, если у генератора нет данных для передачи, он возвращает принятую информацию.
         В случае наличия информации для передачи он передаёт её.
     */
-   
+ 
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
     static uint8 recv[LENGTH_SPI_BUFFER];           // Это массив для принимаемых данных
 
     memcpy(trans, data, (uint)size);
 
+#ifndef OPEN
     CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100);
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::ReadAndRunFromInterface()
 {
+#ifndef OPEN
     while(CPU::SPI4_::IsBusy())
     {
     }
@@ -156,4 +159,6 @@ void Generator::ReadAndRunFromInterface()
             FrequencyMeter::SetMeasure(data.word);
         }
     }
+#endif
 }
+

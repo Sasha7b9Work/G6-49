@@ -13,7 +13,7 @@
 /// Время последнего нажатия кнопки
 static uint timeLastPress = 0;
 static int pointer = 0;
-static StructControl commands[10];
+static Control commands[10];
 static void(*callbackKeyboard)() = 0;
 static TIM_HandleTypeDef handleTIM4;
 #define TIME_UPDATE 2
@@ -39,12 +39,12 @@ static int selY = 0; // здесь её координаты
 
 static StructButton strBtn[6][4] =
 {
-    { {"F1", B_F1},   {"1", B_1},             {"2", B_2},       {"3", B_3} },
-    { {"F2", B_F2},   {"4", B_4},             {"5", B_5},       {"6", B_6} },
-    { {"F3", B_F3},   {"7", B_7},             {"8", B_8},       {"9", B_9} },
-    { {"F4", B_F4},   {".", B_Dot},           {"0", B_0},       {"-", B_Minus} },
-    { {"ON1", B_ON1}, {"REG LEFT", REG_LEFT}, {"BTN", REG_BTN}, {"REG RIGHT", REG_RIGHT} },
-    { {"ON2", B_ON2}, {"ESC", B_ESC},         {"LEFT", B_LEFT}, {"RIGHT", B_RIGHT} }
+    { {"F1",  Control::B_F1},  {"1",        Control::B_1},      {"2",    Control::B_2},     {"3",         Control::B_3} },
+    { {"F2",  Control::B_F2},  {"4",        Control::B_4},      {"5",    Control::B_5},     {"6",         Control::B_6} },
+    { {"F3",  Control::B_F3},  {"7",        Control::B_7},      {"8",    Control::B_8},     {"9",         Control::B_9} },
+    { {"F4",  Control::B_F4},  {".",        Control::B_Dot},    {"0",    Control::B_0},     {"-",         Control::B_Minus} },
+    { {"ON1", Control::B_ON1}, {"REG LEFT", Control::REG_LEFT}, {"BTN",  Control::REG_BTN}, {"REG RIGHT", Control::REG_RIGHT} },
+    { {"ON2", Control::B_ON2}, {"ESC",      Control::B_ESC},    {"LEFT", Control::B_LEFT},  {"RIGHT",     Control::B_RIGHT} }
 };
 
 
@@ -102,13 +102,13 @@ bool CPU::Keyboard::BufferIsEmpty()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-StructControl CPU::Keyboard::GetNextControl()
+Control CPU::Keyboard::GetNextControl()
 {
-    StructControl retValue;
+    Control retValue;
 
     if (BufferIsEmpty())
     {
-        retValue.key = B_None;
+        retValue = Control::B_None;
     }
     else
     {
@@ -195,7 +195,7 @@ void CPU::Keyboard::Update()
             {
                 if (selX == strBtn[i][j].x && selY == strBtn[i][j].y)
                 {
-                    FillCommand(strBtn[i][j].control, Up);
+                    FillCommand(strBtn[i][j].control, Control::Action::Up);
                     selX = -1;
                 }
             }
@@ -208,10 +208,10 @@ void CPU::Keyboard::Update()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::FillCommand(Control control, TypePress typePress)
+void CPU::Keyboard::FillCommand(Control control, Control::Action action)
 {
-    commands[pointer].key = control;
-    commands[pointer++].typePress = typePress;
+    commands[pointer] = control;
+    commands[pointer++].action = action;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -43,6 +43,9 @@
     <Filter Include="FrequencyMeter">
       <UniqueIdentifier>{a330bd33-1b51-4d7a-b964-94c7556875e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Generator">
+      <UniqueIdentifier>{cdf751ac-1bce-448e-a4a3-cd53aea336d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -108,9 +111,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -174,11 +174,35 @@
     <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Wave.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Console.cpp">
       <Filter>Display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\WaveSignal.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageRegisters.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageUSB.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\NumberBuffer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,9 +341,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -434,11 +455,29 @@
     <ClInclude Include="..\..\Panel\src\Menu\Hint.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Wave.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Console.h">
       <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Generator\Generator.h">
+      <Filter>Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Generator\Wave.h">
+      <Filter>Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageRegisters.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageUSB.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\NumberBuffer.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
