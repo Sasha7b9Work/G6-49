@@ -33,6 +33,7 @@ struct StructButton
     int x;
     int y;
     uint timePress;
+    bool selected;
 };
 
 #define BUTTON strBtn[i][j]
@@ -158,6 +159,12 @@ void CPU::Keyboard::DrawButton(int x, int y, const char *title)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool InButton(int x, int y, StructButton *button)
+{
+    return x > button->x && x < (button->x + WIDTH_BUTTON) && y > button->y && y < (button->y + HEIGHT_BUTTON);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::Keyboard::Update()
 {
     if (TIME_MS - timeLastPress < 20)
@@ -177,8 +184,7 @@ void CPU::Keyboard::Update()
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (x > BUTTON.x && x < (BUTTON.x + WIDTH_BUTTON) &&
-                        y > BUTTON.y && y < (BUTTON.y + HEIGHT_BUTTON))
+                    if (InButton(x, y, &BUTTON))
                     {
                         selX = BUTTON.x;
                         selY = BUTTON.y;
