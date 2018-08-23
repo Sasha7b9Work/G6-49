@@ -160,7 +160,7 @@ void TuneGenerator(Chan ch)
     Generator::SetParameter(ch, WaveParameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Frequency))->Value());
     Generator::SetParameter(ch, WaveParameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Amplitude))->Value());
     Generator::SetParameter(ch, WaveParameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Offset))->Value());
-    if (form.Is(WaveForm::Impulse))
+    if (form == WaveForm::Impulse)
     {
         Generator::SetParameter(ch, WaveParameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Duration))->Value());
     }

@@ -84,7 +84,7 @@ void AD9952::WriteRegister(Chan ch, uint8 reg)
 void AD9952::WriteCFR1(Chan ch)
 {
     uint value = 0;
-    if(ch.IsB())
+    if(ch == Chan::B)
     {
         SetBit(value, 1);
         SetBit(value, 23);
@@ -155,7 +155,7 @@ void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 GeneratorWritePin AD9952::ChipSelect(Chan ch)
 {
-    return (GeneratorWritePin::E)(ch.IsA() ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
+    return (GeneratorWritePin::E)(ch == Chan::A ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

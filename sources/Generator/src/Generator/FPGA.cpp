@@ -135,13 +135,13 @@ void FPGA::SetFrequency(Chan ch, float frequency)
     }
     else if(modeWork == ModeImpulse || modeWork == ModeImpulse2)
     {
-        if (ch.IsB() && ModeImpulse2)
+        if (ch == Chan::B && ModeImpulse2)
         {
             modeWork = ModeImpulse;
             WriteControlRegister();
         }
         uint N = (uint)(1e8f / frequency + 0.5f);
-        WriteRegister((uint8)(ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB), N);
+        WriteRegister((uint8)(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB), N);
     }
 }
 
@@ -368,5 +368,5 @@ void FPGA::WriteAddress(uint8 reg)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 FPGA::RegisterForDuration(Chan ch)
 {
-    return ch.IsA() ? (uint8)RG::_6_DurationImpulseA : (uint8)RG::_8_DurationImpulseB;
+    return ch == Chan::A ? (uint8)RG::_6_DurationImpulseA : (uint8)RG::_8_DurationImpulseB;
 }

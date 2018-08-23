@@ -17,10 +17,7 @@ struct Chan
         Number
     } value;
     Chan(E v) : value(v) {};
-    Chan(int v) : value((E)v) {};
-    bool IsA() const { return value == A; };
-    bool IsB() const { return value == B; };
-    operator uint8() const { return (uint8)value; };
+    operator int() const { return (uint8)value; };
 };
 
 /// Сопротивление входа частотомера

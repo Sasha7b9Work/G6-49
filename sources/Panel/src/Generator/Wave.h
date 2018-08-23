@@ -7,6 +7,8 @@ class Wave
 {
 public:
 
+    static pString Name(uint num, Language lang);
+
     /// Отвечает за отображение сигналов на экране
     class Graphic
     {
@@ -35,7 +37,7 @@ public:
     {
     public:
         /// Возвращает текущую форму сигнала на данном канале
-        static WaveForm Form(Chan ch = CURRENT_CHANNEL);
+        static WaveForm Form(Chan ch = (Chan::E)CURRENT_CHANNEL);
         /// Устанавливает сигнал текущим на данный канал
         static void SetForm(Chan ch, WaveForm form);
     };

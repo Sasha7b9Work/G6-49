@@ -19,7 +19,7 @@ void Wave::Graphic::Draw(Chan ch)
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
-        Text::DrawBigText(x0 + 5, y0 + 5, 2, ch.IsA() ? "A" : "B", Color::FILL);
+        Text::DrawBigText(x0 + 5, y0 + 5, 2, ch == Chan::A ? "A" : "B", Color::FILL);
         DrawSignalUGO(ch, y0);
         DrawSignalParameters(ch, y0);
     }
@@ -34,7 +34,7 @@ int Wave::Graphic::X()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Wave::Graphic::Y(Chan ch)
 {
-    return ch.IsA() ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
+    return ch == Chan::A ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,13 +81,13 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
 
     WaveForm form = Wave::Signal::Form(chan);
 
-    if (!form.Is(WaveForm::Free))
+    if (form != WaveForm::Free)
     {
         Painter::DrawVLine(x0, minY, maxY);
         Painter::DrawHLine(aveY, x0, x0 + width);
     }
 
-    if (form.Is(WaveForm::Sine))
+    if (form == WaveForm::Sine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -100,7 +100,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
-    else if(form.Is(WaveForm::Cosine))
+    else if(form == WaveForm::Cosine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -113,7 +113,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
-    else if(form.Is(WaveForm::Meander))
+    else if(form == WaveForm::Meander)
     {
         int dX = 40;
         int dY = 20;
@@ -125,7 +125,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
         }
     }
-    else if (form.Is(WaveForm::RampPlus))
+    else if (form == WaveForm::RampPlus)
     {
         int dX = 28;
         for (int x = x0; x < x0 + 80; x += dX)
@@ -134,7 +134,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x + dX, aveY, x + dX, minY);
         }
     }
-    else if(form.Is(WaveForm::RampMinus))
+    else if(form == WaveForm::RampMinus)
     {
         int dX = 28;
         int dY = 20;
@@ -144,7 +144,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY);
         }
     }
-    else if(form.Is(WaveForm::Triangle))
+    else if(form == WaveForm::Triangle)
     {
         int dX = 38;
         int dY = 20;
@@ -158,7 +158,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             }
         }
     }
-    else if(form.Is(WaveForm::Trapeze))
+    else if(form == WaveForm::Trapeze)
     {
         int dX = 20;
         int dY = 20;
@@ -170,7 +170,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             x0 += 2 * dX;
         }
     }
-    else if (form.Is(WaveForm::Impulse))
+    else if (form == WaveForm::Impulse)
     {
         int deltaX = 20;
         for (int i = 0; i < 5; i++)
@@ -181,7 +181,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             x0 += deltaX;
         }
     }
-    else if (form.Is(WaveForm::ExpPlus))
+    else if (form == WaveForm::ExpPlus)
     {
         for(int i = 0; i < 2; i++)
         {
@@ -193,7 +193,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
-    else if (form.Is(WaveForm::ExpMinus))
+    else if (form == WaveForm::ExpMinus)
     {
         for (int i = 0; i < 2; i++)
         {
@@ -205,7 +205,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
-    else if(form.Is(WaveForm::Noise))
+    else if(form == WaveForm::Noise)
     {
         int i = 0;
         int dX = 1;
@@ -215,7 +215,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
             i++;
         }
     }
-    else if(form.Is(WaveForm::Free))
+    else if(form == WaveForm::Free)
     {
     }
 }
@@ -266,4 +266,16 @@ void Wave::Graphic::DrawParameterValue(Chan ch, WaveParameter param, int x, int 
 
     char buffer[10];
     Text::DrawText(x, y, NameUnit(buffer, (Order::E)PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString Wave::Name(uint num, Language lang)
+{
+    static const pString names[WaveForm::Number][2] = 
+    {
+        {"Синус", "Sine"},
+        {"Косинус", "Cosine"}
+    };
+
+    return names[num][lang];
 }

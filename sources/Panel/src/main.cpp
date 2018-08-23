@@ -40,7 +40,7 @@ int main()
 
     while (1)
     {
-        if(Wave::Signal::Form(Chan::A).Is(WaveForm::Sine) && CURRENT_CHANNEL.IsA())
+        if(Wave::Signal::Form(Chan::A) == WaveForm::Sine && CURRENT_CHANNEL == Chan::A)
         {
         }
 

@@ -37,26 +37,9 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void SetWaveForm(Chan ch, WaveForm form)
-{
-    set.sig_form[ch] = form;
-    TuneGenerator(ch);
-}
-*/
-
 void PageSignals::OnPress_Form(bool)
 {
     WaveForm form = WaveForm((WaveForm::E)waveForm);
-
-    /*
-    if (form.type == Form_Saw || form.type == Form_Impulse)
-    {
-        SetWaveForm(A, form);
-        SetWaveForm(B, form);
-    }
-    */
-
     Wave::Signal::SetForm(CURRENT_CHANNEL, form);
     InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Signal::Form());
@@ -67,19 +50,19 @@ DEF_CHOICE_12( cForm,                                                           
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
-    FORM_RU(WaveForm::Sine),        FORM_EN(WaveForm::Sine),        "Синус.",                       "Sinus.",
-    FORM_RU(WaveForm::Cosine),      FORM_EN(WaveForm::Cosine),      "Косинус.",                     "Cosine.",
-    FORM_RU(WaveForm::Meander),     FORM_EN(WaveForm::Meander),     "Меандр.",                      "Meander.",
-    FORM_RU(WaveForm::RampPlus),    FORM_EN(WaveForm::RampPlus),    "Нарастающая пила.",            "Growing saw.",
-    FORM_RU(WaveForm::RampMinus),   FORM_EN(WaveForm::RampMinus),   "Убывающая пила.",              "Wrecking saw.",
-    FORM_RU(WaveForm::Triangle),    FORM_EN(WaveForm::Triangle),    "Треугольник.",                 "Triangle.",
-    FORM_RU(WaveForm::Trapeze),     FORM_EN(WaveForm::Trapeze),     "Трапеция.",                    "Trapeze.",
-    FORM_RU(WaveForm::Impulse),     FORM_EN(WaveForm::Impulse),     "Импульс.",                     "Impulse.",
-    FORM_RU(WaveForm::ExpPlus),     FORM_EN(WaveForm::ExpPlus),     "Возрастающая экспонента.",     "Growing exponent.",
-    FORM_RU(WaveForm::ExpMinus),    FORM_EN(WaveForm::ExpMinus),    "Убывающая экспонента.",        "Decreasing exponent.",
-    FORM_RU(WaveForm::Noise),       FORM_EN(WaveForm::Noise),       "Шум.",                         "Noise.",
-    FORM_RU(WaveForm::Free),        FORM_EN(WaveForm::Free),        "Произвольная форма сигнала.",  "Arbitrary waveform.",
-    waveForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
+    Wave::Name(0, Language::RU),  FORM_EN(WaveForm::Sine),        "Синус.",                       "Sinus.",
+    FORM_RU(WaveForm::Cosine),          FORM_EN(WaveForm::Cosine),      "Косинус.",                     "Cosine.",
+    FORM_RU(WaveForm::Meander),         FORM_EN(WaveForm::Meander),     "Меандр.",                      "Meander.",
+    FORM_RU(WaveForm::RampPlus),        FORM_EN(WaveForm::RampPlus),    "Нарастающая пила.",            "Growing saw.",
+    FORM_RU(WaveForm::RampMinus),       FORM_EN(WaveForm::RampMinus),   "Убывающая пила.",              "Wrecking saw.",
+    FORM_RU(WaveForm::Triangle),        FORM_EN(WaveForm::Triangle),    "Треугольник.",                 "Triangle.",
+    FORM_RU(WaveForm::Trapeze),         FORM_EN(WaveForm::Trapeze),     "Трапеция.",                    "Trapeze.",
+    FORM_RU(WaveForm::Impulse),         FORM_EN(WaveForm::Impulse),     "Импульс.",                     "Impulse.",
+    FORM_RU(WaveForm::ExpPlus),         FORM_EN(WaveForm::ExpPlus),     "Возрастающая экспонента.",     "Growing exponent.",
+    FORM_RU(WaveForm::ExpMinus),        FORM_EN(WaveForm::ExpMinus),    "Убывающая экспонента.",        "Decreasing exponent.",
+    FORM_RU(WaveForm::Noise),           FORM_EN(WaveForm::Noise),       "Шум.",                         "Noise.",
+    FORM_RU(WaveForm::Free),            FORM_EN(WaveForm::Free),        "Произвольная форма сигнала.",  "Arbitrary waveform.",
+    waveForm, pSignals, FuncActive,     PageSignals::OnPress_Form, FuncDraw
 )
 
 

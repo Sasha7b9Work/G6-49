@@ -119,7 +119,6 @@ struct WaveForm
         Number
     } value;
     WaveForm(E v) : value((E)v) { };
-    bool Is(E form) const { return form == value; };
     operator uint8() const { return (uint8)value; };
     pString Name() const;
 };

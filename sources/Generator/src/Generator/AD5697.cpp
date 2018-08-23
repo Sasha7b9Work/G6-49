@@ -48,7 +48,7 @@ void AD5697::SetOffset(Chan ch, float offset)
 
     uint16 value = (uint16)((uint16)offset << 4);
 
-    uint8 data[3] = {(uint8)(BINARY_U8(00010000) | (ch.IsA() ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] = {(uint8)(BINARY_U8(00010000) | (ch == Chan::A ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
 
     WriteParameter(BINARY_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
 }

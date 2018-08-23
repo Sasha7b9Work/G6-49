@@ -65,12 +65,12 @@ void Multiplexor::SetMode(Chan ch, WaveForm form)
         {PIN_MXB_A0, PIN_MXB_A1}
     };
 
-    if(form.Is(WaveForm::Sine) || form.Is(WaveForm::Cosine))
+    if(form == WaveForm::Sine || form == WaveForm::Cosine)
     {
         SetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));
     }
-    else if(form.Is(WaveForm::Impulse))
+    else if(form == WaveForm::Impulse)
     {
         ResetPin(PIN_MX(ch, 0));
         SetPin(PIN_MX(ch, 1));
