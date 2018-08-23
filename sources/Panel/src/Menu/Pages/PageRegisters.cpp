@@ -40,37 +40,41 @@ extern const ButtonBase bSave;
 #define MAX_SIZE_BUFFER 12
 /// Здесь хранятся введённые символы
 static char buffer[MAX_SIZE_BUFFER + 1];
-/// true, означает, что значение в этот регистр уже засылалось
-static bool sending[Register::Number] = {false};
-/// Здесь засланные значения для каждого регистра
-static uint values[Register::Number] = {0};
 
 struct DescInput
 {
     int size;
     TypeInput type;
+    bool sending;   // true означает, что значение в этот регистр уже засылалось
+    uint value;     // засланное значение
 };
+
+#define VALUE(i)   (desc[i].value)
+#define SENDING(i) (desc[i].sending)
 
 static DescInput desc[Register::Number] =
 {
-    {2,  Uint32         }, // Multiplexor1,
-    {2,  Uint32         }, // Multiplexor2,
-    {10, Uint32         }, // OffsetA,
-    {10, Uint32         }, // OffsetB,
-    {10, Uint32         }, // FreqMeterLevel,
-    {10, Uint32         }, // FreqMeterHYS,
-    {8,  Binary         }, // FPGA_RG0_Control,
-    {10, Uint32         }, // FPGA_RG1_Freq,
-    {7,  Uint8_Uint8    }, // FPGA_RG2_Mul,
-    {11, Uint14_Uint14  }, // FPGA_RG3_RectA,
-    {11, Uint14_Uint14  }, // FPGA_RG4_RectB,
-    {10, Uint32         }, // FPGA_RG5_PeriodImpulseA,
-    {10, Uint32         }, // FPGA_RG6_DurationImpulseA,
-    {10, Uint32         }, // FPGA_RG7_PeriodImpulseB,
-    {10, Uint32         }, // FPGA_RG8_DurationImpulseB,
-    {12, Binary         }, // FPGA_RG9_FreqMeter
-    {11, Uint14_Uint14  }, // FPGA_RG10_Offset
-    {2,  Uint32         }  // Multiplexor3
+    {2,  Uint32        , false, 0 }, // Multiplexor1,
+    {2,  Uint32        , false, 0 }, // Multiplexor2,
+    {10, Uint32        , false, 0 }, // OffsetA,
+    {10, Uint32        , false, 0 }, // OffsetB,
+    {10, Uint32        , false, 0 }, // FreqMeterLevel,
+    {10, Uint32        , false, 0 }, // FreqMeterHYS,
+    {8,  Binary        , false, 0 }, // FPGA_RG0_Control,
+    {10, Uint32        , false, 0 }, // FPGA_RG1_Freq,
+    {7,  Uint8_Uint8   , false, 0 }, // FPGA_RG2_Mul,
+    {11, Uint14_Uint14 , false, 0 }, // FPGA_RG3_RectA,
+    {11, Uint14_Uint14 , false, 0 }, // FPGA_RG4_RectB,
+    {10, Uint32        , false, 0 }, // FPGA_RG5_PeriodImpulseA,
+    {10, Uint32        , false, 0 }, // FPGA_RG6_DurationImpulseA,
+    {10, Uint32        , false, 0 }, // FPGA_RG7_PeriodImpulseB,
+    {10, Uint32        , false, 0 }, // FPGA_RG8_DurationImpulseB,
+    {12, Binary        , false, 0 }, // FPGA_RG9_FreqMeter
+    {11, Uint14_Uint14 , false, 0 }, // FPGA_RG10_Offset
+    {2,  Uint32        , false, 0 }, // Multiplexor3
+    {0},
+    {0},
+    {0}
 };
 
 
@@ -178,7 +182,7 @@ void PageRegisters::DrawRegisters(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawValue(int x, int y, uint8 i)
 {
-    if(!sending[i])
+    if(!SENDING(i))
     {
         return;
     }
@@ -191,21 +195,21 @@ static void DrawValue(int x, int y, uint8 i)
 
     if(type == Uint32)
     {
-        Text::DrawFormatText(x, y, UInt2String(values[i]));
+        Text::DrawFormatText(x, y, UInt2String(VALUE(i)));
     }
     else if(type == Binary)
     {
         char buf[33];
 
-        Text::DrawFormatText(x, y, Bin2StringN(values[i], buf, SizeBuffer(name)));
+        Text::DrawFormatText(x, y, Bin2StringN(VALUE(i) , buf, SizeBuffer(name)));
     }
     else if(type == Uint8_Uint8 || type == Uint14_Uint14)
     {
         uint mask = type == Uint8_Uint8 ? 0xffU : 0x3fffU;
         int numBits = type == Uint8_Uint8 ? 8 : 14;
 
-        uint first = values[i] & mask;
-        uint second = (values[i] >> numBits) & mask;
+        uint first = VALUE(i) & mask;
+        uint second = (VALUE(i) >> numBits) & mask;
         x = Text::DrawFormatText(x, y, UInt2String(first));
         x = Text::DrawFormatText(x, y, ".");
         Text::DrawFormatText(x, y, UInt2String(second));
@@ -283,18 +287,18 @@ static void OnPress_Send()
 
     int position = 0;
 
-    if(sending[currentRegister])
+    if(SENDING(currentRegister))
     {
         TypeInput type = TypeBuffer();
 
         if (type == Uint32)
         {
-            UInt2String(values[currentRegister], buffer);
+            UInt2String(VALUE(currentRegister), buffer);
             position = (int)strlen(buffer);
         }
         else if(type == Binary)
         {
-            Bin2StringN(values[currentRegister], buffer, SizeBuffer(currentRegister));
+            Bin2StringN(VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
             position = (int)strlen(buffer);
         }
         else if(type == Uint8_Uint8 || type == Uint14_Uint14)
@@ -302,8 +306,8 @@ static void OnPress_Send()
             uint mask = type == Uint8_Uint8 ? 0xffU : 0x3fffU;
             int numBits = type == Uint8_Uint8 ? 8 : 14;
 
-            uint first = values[currentRegister] & mask;
-            uint second = (values[currentRegister] >> numBits) & mask;
+            uint first = VALUE(currentRegister) & mask;
+            uint second = (VALUE(currentRegister) >> numBits) & mask;
             
             strcpy(buffer, UInt2String(first));
             strcat(buffer, ".");
@@ -314,7 +318,7 @@ static void OnPress_Send()
     {
         position = 0;
         memset(buffer, 0, MAX_SIZE_BUFFER);
-        values[position] = 0;
+        VALUE(position) = 0;
     }
 
     NumberBuffer::Set(buffer, desc[currentRegister].size, position, (currentRegister == Register::FreqMeterLevel || 
@@ -445,9 +449,9 @@ static uint BufferToValue()
 
 static void LoadRegister()
 {
-    values[currentRegister] = BufferToValue();
-    sending[currentRegister] = true;
-    Generator::LoadRegister(currentRegister, values[currentRegister]);
+    VALUE(currentRegister) = BufferToValue();
+    SENDING(currentRegister) = true;
+    Generator::LoadRegister(currentRegister, VALUE(currentRegister));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -494,7 +498,7 @@ static bool OnKey(Control control)
     {
         if (AllowableSymbol(control))
         {
-            sending[currentRegister] = false;
+            SENDING(currentRegister) = false;
             OnPress_Send();
             memset(buffer, 0, MAX_SIZE_BUFFER);
             buffer[0] = control.ToChar();
