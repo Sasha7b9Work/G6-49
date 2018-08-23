@@ -7,6 +7,11 @@
 #include "Hardware/stm429.h"
 #endif
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4514)
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define RTC_GET_PACKED_TIME() {}
@@ -73,6 +78,8 @@ public:
     friend class CPU;
     private:
         static void Init();
+        /// Время последней передачи
+        static uint timeLastTransmit;
     public:
         /// Переслать массив данных
         static void Transmit(uint8 *buffer, uint16 size, uint timeOut);
@@ -82,6 +89,8 @@ public:
         static void Receive(uint8 *recv, uint16 size, uint timeOut);
         /// Возвращает true, если интерфейс занят - процессор не может приниммать команды
         static bool IsBusy();
+        /// Возвдращает время последней передачи
+        static uint TimeLastTransmit() { return timeLastTransmit; };
     };
 
     //-------------------------------------------------------------------------------------------------------------------------------------- GPIO ----
@@ -145,4 +154,9 @@ extern "C" {
     
 #ifdef __cplusplus
 }
+#endif
+
+
+#ifdef WIN32
+#pragma warning(pop)
 #endif

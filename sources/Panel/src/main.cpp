@@ -54,9 +54,11 @@ int main()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void SendToGenerator()
 {
-    //Generator::LoadRegister(Register::Multiplexor1, 100);
-    //Generator::EnableChannel(Chan::A, !Generator::ChannelEnabled(Chan::A));
-    //Generator::EnableChannel(Chan::B, !Generator::ChannelEnabled(Chan::B));
+    for(int i = 0 ; i < 100; i++)
+    {
+        //Generator::EnableChannel(Chan::A, !Generator::ChannelEnabled(Chan::A));
+        //Generator::EnableChannel(Chan::B, !Generator::ChannelEnabled(Chan::B));
+    }
 }
 
 

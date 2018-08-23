@@ -124,15 +124,15 @@ void Generator::SendToInterface(uint8 *data, int size)
         В случае, если у генератора нет данных для передачи, он возвращает принятую информацию.
         В случае наличия информации для передачи он передаёт её.
     */
-
-    while (CPU::SPI4_::IsBusy())                    // Ждём, пока генератор будет готов к приёму информации
-    {
-    };
-    
+   
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
     static uint8 recv[LENGTH_SPI_BUFFER];           // Это массив для принимаемых данных
 
     memcpy(trans, data, (uint)size);
+
+    while (CPU::SPI4_::IsBusy())                    // Ждём, пока генератор будет готов к приёму информации
+    {
+    };
 
     CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 10); // Передаём данные
 
