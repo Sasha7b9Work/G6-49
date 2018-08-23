@@ -1,5 +1,5 @@
 #include "Console.h"
-#include "Wave.h"
+#include "Generator/Wave.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "FrequencyMeter/FrequencyMeter.h"

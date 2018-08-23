@@ -1,7 +1,7 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Display/Display.h"
-#include "Generator.h"
+#include "Generator/Generator.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "PageService.h"

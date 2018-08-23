@@ -43,6 +43,9 @@
     <Filter Include="FrequencyMeter">
       <UniqueIdentifier>{7f35b7ae-0ac3-4dce-916a-90ff1271dcfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Generator">
+      <UniqueIdentifier>{f651b877-089a-4d50-9022-9bb15b0bc83e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -192,9 +195,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -222,9 +222,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Wave.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Console.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -248,6 +245,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.cpp">
       <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
+      <Filter>Generator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -404,9 +407,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -494,9 +494,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\Hint.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Wave.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Console.h">
       <Filter>Display</Filter>
     </ClInclude>
@@ -517,6 +514,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.h">
       <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Generator\Generator.h">
+      <Filter>Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Generator\Wave.h">
+      <Filter>Generator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

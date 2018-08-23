@@ -3,7 +3,7 @@
 #include "globals.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Generator.h"
+#include "Generator/Generator.h"
 #include "Settings/SettingsSignals.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"

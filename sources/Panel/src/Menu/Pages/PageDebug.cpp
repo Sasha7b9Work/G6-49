@@ -1,5 +1,5 @@
 #include "PageDebug.h"
-#include "Generator.h"
+#include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"

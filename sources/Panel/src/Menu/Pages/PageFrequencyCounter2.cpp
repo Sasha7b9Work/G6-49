@@ -1,6 +1,6 @@
 #include "PageFrequencyCounter2.h"
 #include "Settings/Settings.h"
-#include "Generator.h"
+#include "Generator/Generator.h"
 #include "Settings/Settings.h"
 
 

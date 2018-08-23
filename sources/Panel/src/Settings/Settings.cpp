@@ -4,7 +4,7 @@
 #include "Display/Colors.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
-#include "Generator.h"
+#include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 
 

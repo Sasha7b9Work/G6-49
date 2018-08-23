@@ -19,6 +19,8 @@ public:
 
     static void EnableChannel(Chan ch, bool enable);
 
+    static bool ChannelEnabled(Chan ch);
+
     static void SetFormWave(Chan ch, WaveForm form);
 
     static void SetParameter(Chan ch, WaveParameter param, float value);
@@ -36,6 +38,8 @@ private:
     static void MasterSynchro();
 
     static void ExecuteCommand(uint8 *buffer, int size);
+
+    static bool enabledCh[Chan::Number];
 };
 
 /** @}  @} */
