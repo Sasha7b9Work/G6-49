@@ -11,7 +11,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Wave::DrawSignal(Chan ch)
+void Wave::Graphic::Draw(Chan ch)
 {
     int x0 = X();
     int y0 = Y(ch);
@@ -26,31 +26,31 @@ void Wave::DrawSignal(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::X()
+int Wave::Graphic::X()
 {
     return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Y(Chan ch)
+int Wave::Graphic::Y(Chan ch)
 {
     return ch.IsA() ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Width()
+int Wave::Graphic::Width()
 {
     return SIGNAL_WIDTH;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Height()
+int Wave::Graphic::Height()
 {
     return SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::DrawSignalUGO(Chan chan, int y0)
+void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
 {
     y0 += 30;
     int height = 50;
@@ -221,7 +221,7 @@ void Wave::DrawSignalUGO(Chan chan, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::DrawSignalParameters(Chan ch, int y0)
+void Wave::Graphic::DrawSignalParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
@@ -258,7 +258,7 @@ void Wave::DrawSignalParameters(Chan ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
+void Wave::Graphic::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
 {
     WaveForm form = WAVE_FORM_CH(ch);
 
