@@ -5,6 +5,7 @@
 #include "Menu/MenuItems.h"
 #include "AddPageInput.h"
 #include "PageSettings.h"
+#include "Generator/Wave.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,9 +20,9 @@ static uint8 waveForm = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    waveForm = WAVE_FORM;
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM);
+    waveForm = Wave::Signal::Form();
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Signal::Form());
 }
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿Õ¿À ---
@@ -57,9 +58,9 @@ void PageSignals::OnPress_Form(bool)
     }
     */
 
-    WAVE_FORM = form;
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM);
+    Wave::Signal::SetForm(form);
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Signal::Form());
     TuneGenerator(CURRENT_CHANNEL);
 }
 
@@ -109,8 +110,8 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::Init()
 {
-    waveForm = WAVE_FORM;
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM, &parameters.allowParameters);
+    waveForm = Wave::Signal::Form();
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm((WaveForm::E)waveForm));
 }
 

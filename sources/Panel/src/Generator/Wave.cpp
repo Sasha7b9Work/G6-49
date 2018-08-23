@@ -79,7 +79,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
         first = false;
     }
 
-    WaveForm form = WAVE_FORM_CH(chan).value;
+    WaveForm form = Wave::Signal::Form(chan);
 
     if (!form.Is(WaveForm::Free))
     {
@@ -225,7 +225,7 @@ void Wave::Graphic::DrawSignalParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
-    WaveForm form = WAVE_FORM_CH(ch);
+    WaveForm form = Wave::Signal::Form(ch);
 
     y0 += 5;
 
@@ -260,7 +260,7 @@ void Wave::Graphic::DrawSignalParameters(Chan ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphic::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
 {
-    WaveForm form = WAVE_FORM_CH(ch);
+    WaveForm form = Wave::Signal::Form(ch);
 
     x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 

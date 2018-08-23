@@ -5,6 +5,7 @@
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Generator/Generator.h"
+#include "Generator/Wave.h"
 #include "Hardware/CPU.h"
 
 
@@ -154,8 +155,8 @@ void Settings::Load(bool _default)
 void TuneGenerator(Chan ch)
 {
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
-    WaveForm form = WAVE_FORM_CH(ch);
-    Generator::SetFormWave(ch, WAVE_FORM_CH(ch));
+    WaveForm form = Wave::Signal::Form(ch);
+    Generator::SetFormWave(ch, Wave::Signal::Form(ch));
     Generator::SetParameter(ch, WaveParameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Frequency))->Value());
     Generator::SetParameter(ch, WaveParameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Amplitude))->Value());
     Generator::SetParameter(ch, WaveParameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Offset))->Value());
@@ -163,5 +164,5 @@ void TuneGenerator(Chan ch)
     {
         Generator::SetParameter(ch, WaveParameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Duration))->Value());
     }
-    Generator::SetParameter(ch, WaveParameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM_CH(ch), WaveParameter::Offset))->Value());
+    Generator::SetParameter(ch, WaveParameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, Wave::Signal::Form(ch), WaveParameter::Offset))->Value());
 }

@@ -2131,6 +2131,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Wave.h</FilePath>
             </File>
+            <File>
+              <FileName>WaveSignal.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\WaveSignal.cpp</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

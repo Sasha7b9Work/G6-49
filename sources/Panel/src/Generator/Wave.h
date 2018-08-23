@@ -1,13 +1,16 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
+#include "Settings/Settings.h"
 
 
 class Wave
 {
 public:
 
-    struct Graphic
+    /// Отвечает за отображение сигналов на экране
+    class Graphic
     {
+    public:
         /// Нарисовать информацию о параметрах сигнала на экране
         static void Draw(Chan ch);
         /// Позиция x области отрисовки сигнала
@@ -25,5 +28,13 @@ public:
         static void DrawSignalParameters(Chan chan, int y0);
     
         static void DrawParameterValue(Chan chan, WaveParameter parameter, int x, int y);
+    };
+
+    /// Отвечает за параметры сигнала
+    class Signal
+    {
+    public:
+        static WaveForm Form(Chan ch = CURRENT_CHANNEL);
+        static void SetForm(WaveForm form);
     };
 };

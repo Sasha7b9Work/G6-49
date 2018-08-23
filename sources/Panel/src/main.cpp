@@ -7,6 +7,7 @@
 #include "Generator/Generator.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
+#include "Generator/Wave.h"
 
 
 /** @defgroup Panel
@@ -39,7 +40,7 @@ int main()
 
     while (1)
     {
-        if(WAVE_FORM_CH(Chan::A).Is(WaveForm::Sine) && CURRENT_CHANNEL.IsA())
+        if(Wave::Signal::Form(Chan::A).Is(WaveForm::Sine) && CURRENT_CHANNEL.IsA())
         {
         }
 
