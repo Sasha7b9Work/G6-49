@@ -1,7 +1,6 @@
 #pragma once
 #include "Display/InputWindow.h"
 #include "Settings/Settings.h"
-#include "Settings/SettingsSignals.h"
 #include "Menu/MenuItems.h"
 #include "AddPageInput.h"
 #include "PageSettings.h"

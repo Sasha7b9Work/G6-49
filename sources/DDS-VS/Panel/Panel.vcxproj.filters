@@ -266,9 +266,6 @@
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h">
       <Filter>Display\Font</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h">
-      <Filter>Settings</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Common\Command.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -370,9 +367,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h">
       <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h">
-      <Filter>Settings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings.h">
       <Filter>Menu\Pages</Filter>

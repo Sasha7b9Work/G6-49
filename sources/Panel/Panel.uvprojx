@@ -2022,19 +2022,9 @@
               <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
             <File>
-              <FileName>SettingsSignals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsSignals.h</FilePath>
-            </File>
-            <File>
               <FileName>Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Settings\Settings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsDisplay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsDisplay.h</FilePath>
             </File>
           </Files>
         </Group>

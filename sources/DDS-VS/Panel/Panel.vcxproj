@@ -428,8 +428,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings2.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageUSB.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
-    <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h" />
-    <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Panel\src\structs.h" />
     <ClInclude Include="..\..\Panel\src\Utils\CommonFunctions.h" />
