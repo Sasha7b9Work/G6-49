@@ -155,8 +155,8 @@ void Settings::Load(bool _default)
 void TuneGenerator(Chan ch)
 {
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
-    WaveForm form = Wave::GetForm(ch);
-    Generator::SetFormWave(ch, Wave::GetForm(ch));
+    WaveForm form = Signal::GetForm(ch);
+    Generator::SetFormWave(ch, Signal::GetForm(ch));
     Generator::SetParameter(ch, WaveParameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Frequency))->Value());
     Generator::SetParameter(ch, WaveParameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Amplitude))->Value());
     Generator::SetParameter(ch, WaveParameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Offset))->Value());
@@ -164,5 +164,5 @@ void TuneGenerator(Chan ch)
     {
         Generator::SetParameter(ch, WaveParameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Duration))->Value());
     }
-    Generator::SetParameter(ch, WaveParameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, Wave::GetForm(ch), WaveParameter::Offset))->Value());
+    Generator::SetParameter(ch, WaveParameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, Signal::GetForm(ch), WaveParameter::Offset))->Value());
 }

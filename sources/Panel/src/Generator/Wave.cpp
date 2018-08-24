@@ -11,7 +11,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Wave::Graphic::Draw(Chan ch)
+void Signal::Graphic::Draw(Chan ch)
 {
     int x0 = X();
     int y0 = Y(ch);
@@ -26,31 +26,31 @@ void Wave::Graphic::Draw(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Graphic::X()
+int Signal::Graphic::X()
 {
     return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Graphic::Y(Chan ch)
+int Signal::Graphic::Y(Chan ch)
 {
     return ch == Chan::A ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Graphic::Width()
+int Signal::Graphic::Width()
 {
     return SIGNAL_WIDTH;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Graphic::Height()
+int Signal::Graphic::Height()
 {
     return SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
+void Signal::Graphic::DrawSignalUGO(Chan chan, int y0)
 {
     y0 += 30;
     int height = 50;
@@ -79,7 +79,7 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
         first = false;
     }
 
-    WaveForm form = Wave::GetForm(chan);
+    WaveForm form = Signal::GetForm(chan);
 
     if (form != WaveForm::Free)
     {
@@ -221,11 +221,11 @@ void Wave::Graphic::DrawSignalUGO(Chan chan, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphic::DrawSignalParameters(Chan ch, int y0)
+void Signal::Graphic::DrawSignalParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
-    WaveForm form = Wave::GetForm(ch);
+    WaveForm form = Signal::GetForm(ch);
 
     y0 += 5;
 
@@ -258,9 +258,9 @@ void Wave::Graphic::DrawSignalParameters(Chan ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphic::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
+void Signal::Graphic::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
 {
-    WaveForm form = Wave::GetForm(ch);
+    WaveForm form = Signal::GetForm(ch);
 
     x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 
@@ -269,7 +269,7 @@ void Wave::Graphic::DrawParameterValue(Chan ch, WaveParameter param, int x, int 
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Wave::Name(uint num, Language lang)
+pString Signal::Name(uint num, Language lang)
 {
     static const pString names[WaveForm::Number][2] = 
     {

@@ -22,7 +22,7 @@ InputWindowStruct   InputWindow::iws;
 void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
-    form = Wave::GetForm(chan);
+    form = Signal::GetForm(chan);
     param = CURRENT_PARAMETER(form);
     iws = INPUT_WINDOW_STRUCT(chan, form, param);
 

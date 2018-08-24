@@ -19,9 +19,9 @@ static uint8 waveForm = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    waveForm = Wave::GetForm();
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::GetForm(), &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::GetForm());
+    waveForm = Signal::GetForm();
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Signal::GetForm(), &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Signal::GetForm());
 }
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - КАНАЛ ---
@@ -40,9 +40,9 @@ DEF_CHOICE_2( cChannel,                                                         
 void PageSignals::OnPress_Form(bool)
 {
     WaveForm form = WaveForm((WaveForm::E)waveForm);
-    Wave::SetForm(CURRENT_CHANNEL, form);
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::GetForm(), &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::GetForm());
+    Signal::SetForm(CURRENT_CHANNEL, form);
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Signal::GetForm(), &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Signal::GetForm());
     TuneGenerator(CURRENT_CHANNEL);
 }
 
@@ -50,7 +50,7 @@ DEF_CHOICE_12( cForm,                                                           
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
-    Wave::Name(0, Language::RU),  FORM_EN(WaveForm::Sine),        "Синус.",                       "Sinus.",
+    Signal::Name(0, Language::RU),  FORM_EN(WaveForm::Sine),        "Синус.",                       "Sinus.",
     FORM_RU(WaveForm::Cosine),          FORM_EN(WaveForm::Cosine),      "Косинус.",                     "Cosine.",
     FORM_RU(WaveForm::Meander),         FORM_EN(WaveForm::Meander),     "Меандр.",                      "Meander.",
     FORM_RU(WaveForm::RampPlus),        FORM_EN(WaveForm::RampPlus),    "Нарастающая пила.",            "Growing saw.",
@@ -92,8 +92,8 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::Init()
 {
-    waveForm = Wave::GetForm();
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::GetForm(), &parameters.allowParameters);
+    waveForm = Signal::GetForm();
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Signal::GetForm(), &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm((WaveForm::E)waveForm));
 }
 

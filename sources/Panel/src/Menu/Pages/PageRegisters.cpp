@@ -155,9 +155,9 @@ void PageRegisters::Draw()
         return;
     }
 
-    Painter::FillRegion(Wave::Graphic::X(), Wave::Graphic::Y(Chan::A) + 1, Wave::Graphic::Width() - 1, Wave::Graphic::Height() * 2, Color::BACK);
+    Painter::FillRegion(Signal::Graphic::X(), Signal::Graphic::Y(Chan::A) + 1, Signal::Graphic::Width() - 1, Signal::Graphic::Height() * 2, Color::BACK);
 
-    DrawRegisters(Wave::Graphic::X() + 4, Wave::Graphic::Y(Chan::A) + 3);
+    DrawRegisters(Signal::Graphic::X() + 4, Signal::Graphic::Y(Chan::A) + 3);
 
     DrawInputWindow();
 }

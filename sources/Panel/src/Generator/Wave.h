@@ -3,7 +3,7 @@
 #include "Settings/Settings.h"
 
 
-class Wave
+class Signal
 {
 public:
 
