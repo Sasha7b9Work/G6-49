@@ -91,9 +91,9 @@ void Generator::ExecuteCommand(uint8 *buffer, int)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Chan ch, WaveParameter param, float value)
+void Generator::SetParameter(Chan ch, Wave::Parameter param, float value)
 {
-    static const CommandPanel commands[WaveParameter::Number] =
+    static const CommandPanel commands[Wave::Parameter::Number] =
     {
         CommandPanel::SET_FREQUENCY,
         CommandPanel::COMMAND_NONE,

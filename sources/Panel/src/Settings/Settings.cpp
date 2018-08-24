@@ -45,18 +45,18 @@ static const Settings defSet =
     },
     { Wave::Form::Sine, Wave::Form::Sine }, // sig_form[NumChannels]
     { 
-        WaveParameter::Frequency,                      // sig_parameter[NumForms]
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency,
-        WaveParameter::Frequency
+        Wave::Parameter::Frequency,                      // sig_parameter[NumForms]
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency
     },
     3,                      // menu_currentPage
     (Page*)0,               // menu_page
@@ -99,7 +99,7 @@ Settings set = defSet;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const float minMax[WaveParameter::Number][2] =
+static const float minMax[Wave::Parameter::Number][2] =
 {
     {1.0f,    50e6f},       // Frequency
     {2e-08f,  1.0f},        // Period
@@ -113,13 +113,13 @@ static const float minMax[WaveParameter::Number][2] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float WaveParameter::MinValue() const
+float Wave::Parameter::MinValue() const
 {
     return minMax[value][0];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float WaveParameter::MaxValue() const
+float Wave::Parameter::MaxValue() const
 {
     return minMax[value][1];
 }
@@ -156,12 +156,12 @@ void TuneGenerator(Chan ch)
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     Wave::Form form = WAVE_FORM(ch);
     Generator::SetFormWave(ch, WAVE_FORM(ch));
-    Generator::SetParameter(ch, WaveParameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Frequency))->Value());
-    Generator::SetParameter(ch, WaveParameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Amplitude))->Value());
-    Generator::SetParameter(ch, WaveParameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Offset))->Value());
+    Generator::SetParameter(ch, Wave::Parameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Frequency))->Value());
+    Generator::SetParameter(ch, Wave::Parameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Amplitude))->Value());
+    Generator::SetParameter(ch, Wave::Parameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset))->Value());
     if (form == Wave::Form::Impulse)
     {
-        Generator::SetParameter(ch, WaveParameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Duration))->Value());
+        Generator::SetParameter(ch, Wave::Parameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Duration))->Value());
     }
-    Generator::SetParameter(ch, WaveParameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM(ch), WaveParameter::Offset))->Value());
+    Generator::SetParameter(ch, Wave::Parameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM(ch), Wave::Parameter::Offset))->Value());
 }

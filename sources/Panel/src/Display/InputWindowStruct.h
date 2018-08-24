@@ -48,7 +48,7 @@ class InputWindowStruct
 {
 public:
 
-    void Fill(Chan ch, Wave::Form form, WaveParameter param);
+    void Fill(Chan ch, Wave::Form form, Wave::Parameter param);
 
     char *StringValue();
 
@@ -76,7 +76,7 @@ public:
     int8          prevPosComma;
 	int8          hightLightDigit;            ///< Позиция подсвеченного знакоместа
 	uint8         order                 : 3;
-    uint8         param                 : 4;  ///< Перечисление типа WaveParameter
+    uint8         param                 : 4;  ///< Перечисление типа Wave::Parameter
     uint8         sign                  : 2;  ///< Перечисление типа SignValue
     uint          allow                 : 1;  ///< Если 1, параметр разрешен для данного сигнала
     uint          numLockMode           : 1;  ///< 1, когда происходит клавишный (0...9) ввод значения
@@ -84,7 +84,7 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *NameUnit(char buffer[10], Order order, WaveParameter parameter);
+const char *NameUnit(char buffer[10], Order order, Wave::Parameter parameter);
 
 
 #ifdef WIN32

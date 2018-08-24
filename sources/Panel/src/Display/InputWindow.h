@@ -55,7 +55,7 @@ private:
 
     static Wave::Form             form;
 
-    static WaveParameter        param;
+    static Wave::Parameter        param;
 
     static InputWindowStruct    iws;
 };

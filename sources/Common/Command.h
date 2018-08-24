@@ -73,34 +73,6 @@ struct CommandGenerator
     } value;
 };
 
-struct WaveParameter
-{
-    enum E
-    {
-        Frequency,          ///< Частота
-        Period,             ///< Период
-        Amplitude,          ///< Амплитуда
-        Offset,             ///< Смещение
-        Duration,           ///< Длительность
-        DutyRatio,          ///< Скважность
-        Phase,              ///< Сдвиг фазы
-        Delay,              ///< Задержка
-        DepthModulation,    ///< Глубина амплитудной модуляции
-        Polarity,           ///< Полярность
-        DurationRise,       ///< Длительность нарастания
-        DurationFall,       ///< Длительность спада
-        DurationStady,      ///< Длительность установившего значения
-        DutyFactor,         ///< Коэффициент заполнения
-        Number
-    } value;
-
-    WaveParameter(int v) : value((E)v) {};
-    operator uint8() const { return (uint8)value; }
-    float MinValue() const;
-    float MaxValue() const;
-    pString Name() const;
-};
-
 class Wave
 {
 public:
@@ -122,13 +94,36 @@ public:
             Free,           ///< Произвольный
             Number
         } value;
-        Form(E v) : value((E)v)
+        Form(E v) : value((E)v) { };
+        operator uint8() const  { return (uint8)value; };
+        pString Name() const;
+    };
+
+    struct Parameter
+    {
+        enum E
         {
-        };
-        operator uint8() const
-        {
-            return (uint8)value;
-        };
+            Frequency,          ///< Частота
+            Period,             ///< Период
+            Amplitude,          ///< Амплитуда
+            Offset,             ///< Смещение
+            Duration,           ///< Длительность
+            DutyRatio,          ///< Скважность
+            Phase,              ///< Сдвиг фазы
+            Delay,              ///< Задержка
+            DepthModulation,    ///< Глубина амплитудной модуляции
+            Polarity,           ///< Полярность
+            DurationRise,       ///< Длительность нарастания
+            DurationFall,       ///< Длительность спада
+            DurationStady,      ///< Длительность установившего значения
+            DutyFactor,         ///< Коэффициент заполнения
+            Number
+        } value;
+
+        Parameter(int v) : value((E)v) { };
+        operator uint8() const { return (uint8)value; }
+        float MinValue() const;
+        float MaxValue() const;
         pString Name() const;
     };
 

@@ -234,7 +234,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
     AllowableParameters allowParameters;
     InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
 
-    for (int i = 0; i < WaveParameter::Number; i++)
+    for (int i = 0; i < Wave::Parameter::Number; i++)
     {
         if (allowParameters.allow[i])
         {
@@ -242,15 +242,15 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
             if (ch == CURRENT_CHANNEL)
             {
                 pString curPar = Menu::NameCurrentParameter();
-                pString parName = WaveParameter(i).Name();
+                pString parName = Wave::Parameter(i).Name();
                 if (strcmp(curPar, parName) == 0 && CURRENT_PAGE == 0)
                 {
                     Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
                 }
             }
-            Text::DrawText(x0 + 1, y0, WaveParameter(i).Name(), color);
+            Text::DrawText(x0 + 1, y0, Wave::Parameter(i).Name(), color);
 
-            DrawParameterValue(ch, (WaveParameter)i, x0 + 80, y0);
+            DrawParameterValue(ch, (Wave::Parameter)i, x0 + 80, y0);
 
             y0 += 10;
         }
@@ -258,7 +258,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
+void Signal::DrawParameterValue(Chan ch, Wave::Parameter param, int x, int y)
 {
     Wave::Form form = WAVE_FORM(ch);
 

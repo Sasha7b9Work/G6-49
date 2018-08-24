@@ -13,7 +13,7 @@
 
 Chan                InputWindow::chan = Chan::A;
 Wave::Form            InputWindow::form = Wave::Form::Sine;
-WaveParameter       InputWindow::param = WaveParameter::Amplitude;
+Wave::Parameter       InputWindow::param = Wave::Parameter::Amplitude;
 InputWindowStruct   InputWindow::iws;
 
 
@@ -49,7 +49,7 @@ void InputWindow::Draw()
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
     
-    static const pFuncVII func[WaveParameter::Number] =
+    static const pFuncVII func[Wave::Parameter::Number] =
     {
         DrawFrequency,
         DrawPeriod,
