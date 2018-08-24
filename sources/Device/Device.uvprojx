@@ -1126,6 +1126,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
             </File>
+            <File>
+              <FileName>EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EEPROM.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1180,6 +1190,21 @@
               <FileName>FreqMeter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FreqMeter\FreqMeter.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Settings</GroupName>
+          <Files>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
           </Files>
         </Group>

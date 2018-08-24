@@ -21,6 +21,16 @@ void Generator::Init()
     FPGA::Init();
     Multiplexor::Init();
     FreqMeter::Init();
+
+    for(int i = 0; i < 2; i++)
+    {
+        Chan ch = (Chan::E)i;
+        Generator::EnableChannel(ch, true);
+        Generator::SetFormWave(ch, WaveForm::Sine);
+        Generator::SetFrequency(ch, 2000.0f);
+        Generator::SetAmplitude(ch, 4096.0f);
+        Generator::SetOffset(ch, 2048.0f);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

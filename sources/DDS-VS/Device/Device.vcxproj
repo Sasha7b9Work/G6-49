@@ -185,6 +185,7 @@
     <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h" />
     <ClInclude Include="..\..\Device\src\Generator\Multiplexor.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\EEPROM.h" />
     <ClInclude Include="..\..\Device\src\Hardware\stm32.h" />
     <ClInclude Include="..\..\Device\src\Hardware\stm407.h" />
     <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
@@ -192,6 +193,7 @@
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Device\src\Interface\Interface.h" />
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
+    <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Utils\Debug.h" />
     <ClInclude Include="..\..\Device\src\Utils\Math.h" />
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -234,6 +236,7 @@
     <ClCompile Include="..\..\Device\src\Generator\Multiplexor.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp" />
@@ -275,6 +278,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Utils\Debug.cpp" />
