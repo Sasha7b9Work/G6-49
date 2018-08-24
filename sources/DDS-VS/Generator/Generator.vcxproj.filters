@@ -34,6 +34,9 @@
     <Filter Include="FreqMeter">
       <UniqueIdentifier>{5c2d5a42-6e3b-4b55-ac0c-ef491a2cee48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Settings">
+      <UniqueIdentifier>{1787b309-cdce-4760-afe3-787ad19c4528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
