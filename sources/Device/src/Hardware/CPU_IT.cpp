@@ -38,12 +38,8 @@ extern "C" {
     //------------------------------------------------------------------------------------------------------------------------------------------------
     __attribute((noreturn)) void HardFault_Handler()
     {
-        int l = Debug::line;
-        volatile char *file = Debug::file;
         while (1)
         {
-            l = Debug::line;
-            file = file;
         }
     }
 

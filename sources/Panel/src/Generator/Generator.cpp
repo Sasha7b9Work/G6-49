@@ -126,7 +126,6 @@ void Generator::SendToInterface(uint8 *data, int size)
     */
  
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
-    static uint8 prevTrans[LENGTH_SPI_BUFFER];      // Это массив, где хранятся данные, принятые в предыдущий раз
     static uint8 recv[LENGTH_SPI_BUFFER];         // Это массив, куда принимаются данные сейчас
 
     memcpy(trans, data, (uint)size);

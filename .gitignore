@@ -12,9 +12,9 @@ doc/doxygen/KornetDDS/*
 sources/.vs/*
 sources/DDS-VS/Panel/.vs/*
 
-sources/Generator/DebugConfig/*
-sources/Generator/Listings/*
-sources/Generator/Objects/*
+sources/Device/DebugConfig/*
+sources/Device/Listings/*
+sources/Device/Objects/*
 sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
 sources/Panel/Objects/*
