@@ -7,6 +7,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
+#include "Utils/Debug.h"
 #include "Command.h"
 #include "structs.h"
 #include <string.h>
@@ -37,7 +38,8 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static uint8 buffer[LENGTH_SPI_BUFFER];     ///< Буфер для принимаемых команд
+static uint8 buffer[LENGTH_SPI_BUFFER];         ///< Буфер для принимаемых команд
+static uint8 prevBuffer[LENGTH_SPI_BUFFER];     
 uint  Interface::freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
 const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
@@ -64,8 +66,6 @@ const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
     CommandEmpty
 };
 
-static uint8 trs[LENGTH_SPI_BUFFER];
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
 {
@@ -85,7 +85,7 @@ void Interface::Init()
 
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
 
-    HAL_SPI_TransmitReceive_IT(&hSPI1, trs, buffer, LENGTH_SPI_BUFFER);
+    HAL_SPI_TransmitReceive_IT(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,8 +283,6 @@ void Interface::ReceiveCallback()
     {
         pFuncInterfaceVV f = commands[buffer[0]].func;
         f();
-
-        memset(buffer, 0, LENGTH_SPI_BUFFER);
     }
     timeLastReceive = TIME_MS;
 }
@@ -293,13 +291,17 @@ void Interface::ReceiveCallback()
 void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *)
 {
     CPU::SetBusy();
+    memcpy(prevBuffer, buffer, LENGTH_SPI_BUFFER);
     Interface::ReceiveCallback();
-    HAL_SPI_TransmitReceive_IT(&hSPI1, trs, buffer, LENGTH_SPI_BUFFER);
+    memset(buffer, 0, LENGTH_SPI_BUFFER);
+    HAL_SPI_TransmitReceive_IT(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER);
     CPU::SetReady();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi)
+void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
 {
-     hspi = &hSPI1;
+    HAL_SPI_Init(&hSPI1);
+    HAL_NVIC_EnableIRQ(SPI1_IRQn);
+    HAL_SPI_TransmitReceive_IT(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER);
 }

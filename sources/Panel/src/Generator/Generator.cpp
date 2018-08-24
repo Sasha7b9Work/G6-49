@@ -126,13 +126,29 @@ void Generator::SendToInterface(uint8 *data, int size)
     */
  
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
-    static uint8 recv[LENGTH_SPI_BUFFER];           // Это массив для принимаемых данных
+    static uint8 prevTrans[LENGTH_SPI_BUFFER];      // Это массив, где хранятся данные, принятые в предыдущий раз
+    static uint8 recv[LENGTH_SPI_BUFFER];         // Это массив, куда принимаются данные сейчас
 
     memcpy(trans, data, (uint)size);
 
 #ifndef OPEN
     CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100);
 #endif
+    
+    static bool first = true;
+    if(first)
+    {
+        first = false;
+    }
+    else
+    {
+        if(memcmp(prevTrans, recv, LENGTH_SPI_BUFFER) != 0)
+        {
+            LOG_WRITE("ERROR");
+        }
+    }
+    
+    memcpy(prevTrans, trans, LENGTH_SPI_BUFFER);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

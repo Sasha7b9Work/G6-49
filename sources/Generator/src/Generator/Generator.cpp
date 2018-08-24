@@ -35,19 +35,22 @@ void Generator::EnableChannel(Chan ch, bool enable)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Chan ch, WaveForm form)
 {
-    static const GeneratorWritePin pin[Chan::Number] = { GeneratorWritePin::Pin_P1_AmplifierA, GeneratorWritePin::Pin_P2_AmplifierB };
-
-    waveIsSine = form == WaveForm::Sine;
-
-    // Если нужен синус, то пишем ноль, чтобы обеспечить прохождение сигнала DDS. Иначе 1, чтобы обеспечить прохождение сигнала ПЛИС
-    CPU::WritePin(pin[ch], !waveIsSine);
-
-    if (!waveIsSine)
+    if(ch < Chan::Number && form < WaveForm::Number)
     {
-        FPGA::SetWaveForm(form);
-    }
+        static const GeneratorWritePin pin[Chan::Number] = { GeneratorWritePin::Pin_P1_AmplifierA, GeneratorWritePin::Pin_P2_AmplifierB };
 
-    Multiplexor::SetMode(ch, form);
+        waveIsSine = form == WaveForm::Sine;
+
+        // Если нужен синус, то пишем ноль, чтобы обеспечить прохождение сигнала DDS. Иначе 1, чтобы обеспечить прохождение сигнала ПЛИС
+        CPU::WritePin(pin[ch], !waveIsSine);
+
+        if (!waveIsSine)
+        {
+            FPGA::SetWaveForm(form);
+        }
+
+        Multiplexor::SetMode(ch, form);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

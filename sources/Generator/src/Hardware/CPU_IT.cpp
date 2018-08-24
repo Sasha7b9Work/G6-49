@@ -5,6 +5,7 @@
 #endif
 #include "Hardware/CPU.h"
 #include "Interface/Interface.h"
+#include "Utils/Debug.h"
 
 
 #ifdef __cplusplus
@@ -37,8 +38,12 @@ extern "C" {
     //------------------------------------------------------------------------------------------------------------------------------------------------
     __attribute((noreturn)) void HardFault_Handler()
     {
+        int l = Debug::line;
+        volatile char *file = Debug::file;
         while (1)
         {
+            l = Debug::line;
+            file = file;
         }
     }
 

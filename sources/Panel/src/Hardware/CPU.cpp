@@ -38,7 +38,6 @@ static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 uint  CPU::timeStartMeasFPS = 0;
 int   CPU::numFrames = 0;
 float CPU::fps = 0.0f;
-uint  CPU::SPI4_::timeLastTransmit = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,9 +104,7 @@ void CPU::SPI4_::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
 {
-    while(IsBusy())
-    {};
-    timeLastTransmit = TIME_MS;
+    while(IsBusy()) {};
 #ifndef OPEN
     return HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut) == HAL_OK;
 #else
@@ -118,7 +115,7 @@ bool CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
 {
-    timeLastTransmit = TIME_MS;
+    while(IsBusy()) {};
 #ifndef OPEN
     HAL_SPI_Transmit(&handleSPI4, buffer, size, timeOut);
 #endif

@@ -186,6 +186,9 @@
     <ClInclude Include="..\..\common\_VS\windows.h">
       <Filter>common\_VS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Generator\src\Utils\Debug.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -274,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Generator\src\FreqMeter\FreqMeter.cpp">
       <Filter>FreqMeter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Generator\src\Utils\Debug.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
