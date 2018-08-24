@@ -97,7 +97,7 @@ public:
         Form(E v) : value((E)v) { };
         operator uint8() const  { return (uint8)value; };
         pString Name() const;
-    };
+    } form ;
 
     struct Parameter
     {
@@ -125,7 +125,7 @@ public:
         float MinValue() const;
         float MaxValue() const;
         pString Name() const;
-    };
+    } parameters[Parameter::Number];
 
 #ifdef PANEL
     pString Name(uint num, Language lang);
