@@ -5,7 +5,6 @@
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Generator/Generator.h"
-#include "Generator/Wave.h"
 #include "Hardware/CPU.h"
 
 
@@ -44,7 +43,7 @@ static const Settings defSet =
         MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
         MAKE_COLOR(0xc0, 0x00, 0x00)    // RED_75
     },
-    { WaveForm::Sine, WaveForm::Sine }, // sig_form[NumChannels]
+    { Wave::Form::Sine, Wave::Form::Sine }, // sig_form[NumChannels]
     { 
         WaveParameter::Frequency,                      // sig_parameter[NumForms]
         WaveParameter::Frequency,
@@ -155,12 +154,12 @@ void Settings::Load(bool _default)
 void TuneGenerator(Chan ch)
 {
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
-    WaveForm form = WAVE_FORM(ch);
+    Wave::Form form = WAVE_FORM(ch);
     Generator::SetFormWave(ch, WAVE_FORM(ch));
     Generator::SetParameter(ch, WaveParameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Frequency))->Value());
     Generator::SetParameter(ch, WaveParameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Amplitude))->Value());
     Generator::SetParameter(ch, WaveParameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Offset))->Value());
-    if (form == WaveForm::Impulse)
+    if (form == Wave::Form::Impulse)
     {
         Generator::SetParameter(ch, WaveParameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, WaveParameter::Duration))->Value());
     }

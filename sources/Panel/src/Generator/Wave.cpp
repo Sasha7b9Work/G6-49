@@ -1,11 +1,12 @@
-#include "Wave.h"
+#include "Command.h"
 #include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#ifdef PANEL
 pString Wave::Name(uint num, Language lang)
 {
-    static const pString names[WaveForm::Number][2] =
+    static const pString names[Wave::Form::Number][2] =
     {
         {"Синус", "Sine"},
     {"Косинус", "Cosine"}
@@ -13,3 +14,4 @@ pString Wave::Name(uint num, Language lang)
 
     return names[num][lang];
 }
+#endif

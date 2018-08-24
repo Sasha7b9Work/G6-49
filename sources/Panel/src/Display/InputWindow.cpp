@@ -5,7 +5,6 @@
 #include "Display/Text.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Generator/Wave.h"
 #include <stdio.h>
 
 
@@ -13,7 +12,7 @@
 #define IN_NUM_LOCK_MODE    (iws.numLockMode)
 
 Chan                InputWindow::chan = Chan::A;
-WaveForm            InputWindow::form = WaveForm::Sine;
+Wave::Form            InputWindow::form = Wave::Form::Sine;
 WaveParameter       InputWindow::param = WaveParameter::Amplitude;
 InputWindowStruct   InputWindow::iws;
 

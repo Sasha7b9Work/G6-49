@@ -518,9 +518,6 @@
     <ClInclude Include="..\..\Panel\src\Generator\Signal.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator\Wave.h">
-      <Filter>Generator</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\Display\font\font5.inc">

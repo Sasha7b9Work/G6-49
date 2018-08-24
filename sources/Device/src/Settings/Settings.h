@@ -7,7 +7,7 @@
 //{
 //    // Generator
 //    bool          enable[Chan::Number];
-//    WaveForm      form[Chan::Number];
+//    Wave::Form      form[Chan::Number];
 //    uint          rg[10];
 ////    WaveParameter 
 //

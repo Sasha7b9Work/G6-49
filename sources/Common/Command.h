@@ -1,5 +1,7 @@
 #pragma once
 #include "defines.h"
+#include "Settings/SettingsTypes.h"
+
 
 #ifdef WIN32
 #pragma warning(push)
@@ -99,27 +101,40 @@ struct WaveParameter
     pString Name() const;
 };
 
-struct WaveForm
+class Wave
 {
-    enum E
+public:
+    struct Form
     {
-        Sine,           ///< Синус
-        Cosine,         ///< Косинус
-        Meander,        ///< Меандр
-        RampPlus,       ///< Пила+
-        RampMinus,      ///< Пила-
-        Triangle,       ///< Треугольник
-        Trapeze,        ///< Трапеция
-        Impulse,        ///< Импульс
-        ExpPlus,        ///< Экспонента+
-        ExpMinus,       ///< Экспонента-
-        Noise,          ///< Шум
-        Free,           ///< Произвольный
-        Number
-    } value;
-    WaveForm(E v) : value((E)v) { };
-    operator uint8() const { return (uint8)value; };
-    pString Name() const;
+        enum E
+        {
+            Sine,           ///< Синус
+            Cosine,         ///< Косинус
+            Meander,        ///< Меандр
+            RampPlus,       ///< Пила+
+            RampMinus,      ///< Пила-
+            Triangle,       ///< Треугольник
+            Trapeze,        ///< Трапеция
+            Impulse,        ///< Импульс
+            ExpPlus,        ///< Экспонента+
+            ExpMinus,       ///< Экспонента-
+            Noise,          ///< Шум
+            Free,           ///< Произвольный
+            Number
+        } value;
+        Form(E v) : value((E)v)
+        {
+        };
+        operator uint8() const
+        {
+            return (uint8)value;
+        };
+        pString Name() const;
+    };
+
+#ifdef PANEL
+    pString Name(uint num, Language lang);
+#endif
 };
 
 struct Register
@@ -164,7 +179,7 @@ struct Register
 #define NAME_FORM(form, lang) namesWaveForm[form][lang]
 #define FORM_RU(form) NAME_FORM(form, Language::RU)
 #define FORM_EN(form) NAME_FORM(form, Language::EN)
-extern const char * namesWaveForm[WaveForm::Number][2];
+extern const char * namesWaveForm[Wave::Form::Number][2];
 
 
 //const char *Command_Name(CommandPanel command);

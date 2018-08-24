@@ -26,7 +26,7 @@ void Generator::Init()
     {
         Chan ch = (Chan::E)i;
         Generator::EnableChannel(ch, true);
-        Generator::SetFormWave(ch, WaveForm::Sine);
+        Generator::SetFormWave(ch, Wave::Form::Sine);
         Generator::SetFrequency(ch, 2000.0f);
         Generator::SetAmplitude(ch, 4096.0f);
         Generator::SetOffset(ch, 2048.0f);
@@ -43,13 +43,13 @@ void Generator::EnableChannel(Chan ch, bool enable)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Chan ch, WaveForm form)
+void Generator::SetFormWave(Chan ch, Wave::Form form)
 {
-    if(ch < Chan::Number && form < WaveForm::Number)
+    if(ch < Chan::Number && form < Wave::Form::Number)
     {
         static const GeneratorWritePin pin[Chan::Number] = { GeneratorWritePin::Pin_P1_AmplifierA, GeneratorWritePin::Pin_P2_AmplifierB };
 
-        waveIsSine = form == WaveForm::Sine;
+        waveIsSine = form == Wave::Form::Sine;
 
         // Если нужен синус, то пишем ноль, чтобы обеспечить прохождение сигнала DDS. Иначе 1, чтобы обеспечить прохождение сигнала ПЛИС
         CPU::WritePin(pin[ch], !waveIsSine);

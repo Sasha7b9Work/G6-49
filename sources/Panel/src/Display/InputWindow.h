@@ -53,7 +53,7 @@ private:
 
     static Chan              chan;
 
-    static WaveForm             form;
+    static Wave::Form             form;
 
     static WaveParameter        param;
 

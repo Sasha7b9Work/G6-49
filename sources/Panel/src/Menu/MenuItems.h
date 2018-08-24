@@ -5,6 +5,7 @@
 #include "MenuItemsDefs.h"
 #include "Menu/MenuPagesNames.h"
 #include "Hardware/Controls.h"
+#include "Command.h"
 
 
 #ifdef WIN32

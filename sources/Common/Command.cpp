@@ -1,12 +1,12 @@
 #include "Command.h"
 #include "defines.h"
 #include "Log.h"
-#include <Settings/Settings.h>
+#include "Settings/Settings.h"
 #include <stdio.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char * namesWaveForm[WaveForm::Number][2] =
+const char * namesWaveForm[Wave::Form::Number][2] =
 {
     { "яхмся",        "SINE" },
     { "йняхмся",      "COSINE" },
@@ -50,7 +50,7 @@ const char *Command_Name(CommandPanel command)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString WaveForm::Name() const
+pString Wave::Form::Name() const
 {
     return NAME_FORM(value, LANG);
 }

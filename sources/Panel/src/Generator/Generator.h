@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
+#include "Command.h"
 
 
 /** @addtogroup Panel
@@ -21,7 +22,7 @@ public:
 
     static bool ChannelEnabled(Chan ch);
 
-    static void SetFormWave(Chan ch, WaveForm form);
+    static void SetFormWave(Chan ch, Wave::Form form);
 
     static void SetParameter(Chan ch, WaveParameter param, float value);
 

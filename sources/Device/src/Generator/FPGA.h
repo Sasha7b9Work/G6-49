@@ -16,7 +16,7 @@ friend class Interface;
 public:
     static void Init();
 
-    static void SetWaveForm(WaveForm form);
+    static void SetWaveForm(Wave::Form form);
 
     static void SetFrequency(Chan ch, float frequency);
 

@@ -100,11 +100,11 @@ void FPGA::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetWaveForm(WaveForm form)
+void FPGA::SetWaveForm(Wave::Form form)
 {
     typedef void(*pFuncFpgaVV)();
     
-    static const pFuncFpgaVV func[WaveForm::Number] =
+    static const pFuncFpgaVV func[Wave::Form::Number] =
     {
         CreateSine,
         CreateCosine,

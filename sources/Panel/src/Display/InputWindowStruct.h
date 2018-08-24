@@ -48,7 +48,7 @@ class InputWindowStruct
 {
 public:
 
-    void Fill(Chan ch, WaveForm form, WaveParameter param);
+    void Fill(Chan ch, Wave::Form form, WaveParameter param);
 
     char *StringValue();
 
@@ -68,7 +68,7 @@ public:
 
     static void SaveValue();
     /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
-    static void FillAllowParameters(Chan ch, WaveForm form, AllowableParameters *allowParameters);
+    static void FillAllowParameters(Chan ch, Wave::Form form, AllowableParameters *allowParameters);
 
 	char          inputBuffer[NUM_DIGITS + 1];
     char          prevBuffer[NUM_DIGITS + 1];

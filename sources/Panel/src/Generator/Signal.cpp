@@ -1,6 +1,5 @@
 #include "globals.h"
 #include "Signal.h"
-#include "Wave.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -80,15 +79,15 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         first = false;
     }
 
-    WaveForm form = WAVE_FORM(chan);
+    Wave::Form form = WAVE_FORM(chan);
 
-    if (form != WaveForm::Free)
+    if (form != Wave::Form::Free)
     {
         Painter::DrawVLine(x0, minY, maxY);
         Painter::DrawHLine(aveY, x0, x0 + width);
     }
 
-    if (form == WaveForm::Sine)
+    if (form == Wave::Form::Sine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -101,7 +100,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
-    else if(form == WaveForm::Cosine)
+    else if(form == Wave::Form::Cosine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -114,7 +113,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
-    else if(form == WaveForm::Meander)
+    else if(form == Wave::Form::Meander)
     {
         int dX = 40;
         int dY = 20;
@@ -126,7 +125,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
         }
     }
-    else if (form == WaveForm::RampPlus)
+    else if (form == Wave::Form::RampPlus)
     {
         int dX = 28;
         for (int x = x0; x < x0 + 80; x += dX)
@@ -135,7 +134,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x + dX, aveY, x + dX, minY);
         }
     }
-    else if(form == WaveForm::RampMinus)
+    else if(form == Wave::Form::RampMinus)
     {
         int dX = 28;
         int dY = 20;
@@ -145,7 +144,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY);
         }
     }
-    else if(form == WaveForm::Triangle)
+    else if(form == Wave::Form::Triangle)
     {
         int dX = 38;
         int dY = 20;
@@ -159,7 +158,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             }
         }
     }
-    else if(form == WaveForm::Trapeze)
+    else if(form == Wave::Form::Trapeze)
     {
         int dX = 20;
         int dY = 20;
@@ -171,7 +170,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             x0 += 2 * dX;
         }
     }
-    else if (form == WaveForm::Impulse)
+    else if (form == Wave::Form::Impulse)
     {
         int deltaX = 20;
         for (int i = 0; i < 5; i++)
@@ -182,7 +181,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             x0 += deltaX;
         }
     }
-    else if (form == WaveForm::ExpPlus)
+    else if (form == Wave::Form::ExpPlus)
     {
         for(int i = 0; i < 2; i++)
         {
@@ -194,7 +193,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
-    else if (form == WaveForm::ExpMinus)
+    else if (form == Wave::Form::ExpMinus)
     {
         for (int i = 0; i < 2; i++)
         {
@@ -206,7 +205,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
-    else if(form == WaveForm::Noise)
+    else if(form == Wave::Form::Noise)
     {
         int i = 0;
         int dX = 1;
@@ -216,7 +215,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             i++;
         }
     }
-    else if(form == WaveForm::Free)
+    else if(form == Wave::Form::Free)
     {
     }
 }
@@ -226,7 +225,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
-    WaveForm form = WAVE_FORM(ch);
+    Wave::Form form = WAVE_FORM(ch);
 
     y0 += 5;
 
@@ -261,7 +260,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Signal::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
 {
-    WaveForm form = WAVE_FORM(ch);
+    Wave::Form form = WAVE_FORM(ch);
 
     x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 

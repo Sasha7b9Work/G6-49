@@ -91,7 +91,7 @@
       </PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>STM32F429xx;WIN32;USE_HAL_DRIVER</PreprocessorDefinitions>
+      <PreprocessorDefinitions>STM32F429xx;WIN32;USE_HAL_DRIVER;PANEL</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4201;4211;4310;4514;4623;4626;4774;4820;5027;5045</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
@@ -399,7 +399,6 @@
     <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Signal.h" />
-    <ClInclude Include="..\..\Panel\src\Generator\Wave.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />

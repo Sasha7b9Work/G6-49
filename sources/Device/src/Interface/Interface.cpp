@@ -128,7 +128,7 @@ void Interface::CommandReadData()
 void Interface::CommandFormWave()
 {
     Chan ch = (Chan::E)buffer[1];
-    WaveForm form = (WaveForm::E)buffer[2];
+    Wave::Form form = (Wave::Form::E)buffer[2];
     Generator::SetFormWave(ch, form);
 }
 

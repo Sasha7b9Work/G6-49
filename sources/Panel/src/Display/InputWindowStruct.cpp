@@ -51,7 +51,7 @@ static void FillIWSfromInputBuffer();
 static void SendIWStoGenerator();
 
 static InputWindowStruct *iws = 0;
-static WaveForm           form = WaveForm::Cosine;
+static Wave::Form           form = Wave::Form::Cosine;
 static WaveParameter      m_param = WaveParameter::Amplitude;
 static Chan               ch = Chan::A;
 
@@ -60,7 +60,7 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindowStruct::Fill(Chan ch_, WaveForm form_, WaveParameter param_)
+void InputWindowStruct::Fill(Chan ch_, Wave::Form form_, WaveParameter param_)
 {
     ch = ch_;
     form = form_;
@@ -535,7 +535,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::FillAllowParameters(Chan ch_, WaveForm form_, AllowableParameters *allowParameters)
+void InputWindowStruct::FillAllowParameters(Chan ch_, Wave::Form form_, AllowableParameters *allowParameters)
 {
     for (int i = 0; i < WaveParameter::Number; i++)
     {
@@ -551,9 +551,9 @@ static void SendIWStoGenerator()
 
     if (m_param == WaveParameter::Delay)
     {
-        PARAMETER(Chan::B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency) = 
-            PARAMETER(Chan::B, WaveForm(WaveForm::Impulse), WaveParameter::Frequency);
-        float frequency = PARAMETER(Chan::A, WaveForm(WaveForm::Impulse), WaveParameter::Frequency).Value();
+        PARAMETER(Chan::B, Wave::Form(Wave::Form::Impulse), WaveParameter::Frequency) = 
+            PARAMETER(Chan::B, Wave::Form(Wave::Form::Impulse), WaveParameter::Frequency);
+        float frequency = PARAMETER(Chan::A, Wave::Form(Wave::Form::Impulse), WaveParameter::Frequency).Value();
         Generator::SetParameter(Chan::B, WaveParameter::Frequency, frequency);
 
         float value = PARAMETER(ch, form, m_param).Value();
