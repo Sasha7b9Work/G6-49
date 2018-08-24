@@ -19,9 +19,9 @@ static uint8 waveForm = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    waveForm = Wave::GetForm();
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::GetForm(), &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::GetForm());
+    waveForm = WAVE_FORM_CURRENT;
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
 }
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿Õ¿À ---
@@ -41,8 +41,8 @@ void PageSignals::OnPress_Form(bool)
 {
     WaveForm form = WaveForm((WaveForm::E)waveForm);
     Wave::SetForm(CURRENT_CHANNEL, form);
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::GetForm(), &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::GetForm());
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
     TuneGenerator(CURRENT_CHANNEL);
 }
 
@@ -92,8 +92,8 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::Init()
 {
-    waveForm = Wave::GetForm();
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::GetForm(), &parameters.allowParameters);
+    waveForm = WAVE_FORM_CURRENT;
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm((WaveForm::E)waveForm));
 }
 

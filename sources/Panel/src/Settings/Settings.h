@@ -15,6 +15,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pInput;
 
+#define WAVE_FORM(ch)           (set.sig_form[ch])
+#define WAVE_FORM_CURRENT       (WAVE_FORM(CURRENT_CHANNEL))
+
 #define COLOR(x)                (set.disp_Colors[x])
 #define CURRENT_PAGE            (set.menu_currentPage)
 #define ADDITION_PAGE           (set.menu_page)
