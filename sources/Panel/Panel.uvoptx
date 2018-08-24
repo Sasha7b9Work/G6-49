@@ -1939,7 +1939,7 @@
 
   <Group>
     <GroupName>Generator</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1982,24 +1982,24 @@
     <File>
       <GroupNumber>13</GroupNumber>
       <FileNumber>136</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\Wave.h</PathWithFileName>
-      <FilenameWithoutPath>Wave.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\Signal.cpp</PathWithFileName>
+      <FilenameWithoutPath>Signal.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
       <FileNumber>137</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\WaveSignal.cpp</PathWithFileName>
-      <FilenameWithoutPath>WaveSignal.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\Signal.h</PathWithFileName>
+      <FilenameWithoutPath>Signal.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

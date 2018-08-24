@@ -5,7 +5,7 @@
 #include "Display/Text.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Generator/Wave.h"
+#include "Generator/Signal.h"
 #include <stdio.h>
 
 
@@ -22,7 +22,7 @@ InputWindowStruct   InputWindow::iws;
 void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
-    form = Signal::GetForm(chan);
+    form = Wave::GetForm(chan);
     param = CURRENT_PARAMETER(form);
     iws = INPUT_WINDOW_STRUCT(chan, form, param);
 

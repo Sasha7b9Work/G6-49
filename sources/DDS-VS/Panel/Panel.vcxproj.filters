@@ -249,10 +249,10 @@
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
+    <ClCompile Include="..\..\Panel\src\Generator\Signal.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\WaveSignal.cpp">
+    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
   </ItemGroup>
@@ -515,7 +515,7 @@
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator\Wave.h">
+    <ClInclude Include="..\..\Panel\src\Generator\Signal.h">
       <Filter>Generator</Filter>
     </ClInclude>
   </ItemGroup>
