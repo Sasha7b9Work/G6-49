@@ -2126,6 +2126,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Signal.h</FilePath>
             </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Wave.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

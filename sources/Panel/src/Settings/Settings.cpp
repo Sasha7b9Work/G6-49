@@ -5,7 +5,7 @@
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Generator/Generator.h"
-#include "Generator/Signal.h"
+#include "Generator/Wave.h"
 #include "Hardware/CPU.h"
 
 

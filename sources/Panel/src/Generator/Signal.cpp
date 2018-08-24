@@ -1,5 +1,6 @@
 #include "globals.h"
 #include "Signal.h"
+#include "Wave.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -266,16 +267,4 @@ void Signal::DrawParameterValue(Chan ch, WaveParameter param, int x, int y)
 
     char buffer[10];
     Text::DrawText(x, y, NameUnit(buffer, (Order::E)PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Wave::Name(uint num, Language lang)
-{
-    static const pString names[WaveForm::Number][2] = 
-    {
-        {"Синус", "Sine"},
-        {"Косинус", "Cosine"}
-    };
-
-    return names[num][lang];
 }

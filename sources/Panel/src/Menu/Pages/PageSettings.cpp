@@ -4,7 +4,7 @@
 #include "Menu/MenuItems.h"
 #include "AddPageInput.h"
 #include "PageSettings.h"
-#include "Generator/Signal.h"
+#include "Generator/Wave.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ DEF_CHOICE_12( cForm,                                                           
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
-    Wave::Name(0, Language::RU),  FORM_EN(WaveForm::Sine),        "Синус.",                       "Sinus.",
+    FORM_RU(WaveForm::Sine),            FORM_EN(WaveForm::Sine),        "Синус.",                       "Sinus.",
     FORM_RU(WaveForm::Cosine),          FORM_EN(WaveForm::Cosine),      "Косинус.",                     "Cosine.",
     FORM_RU(WaveForm::Meander),         FORM_EN(WaveForm::Meander),     "Меандр.",                      "Meander.",
     FORM_RU(WaveForm::RampPlus),        FORM_EN(WaveForm::RampPlus),    "Нарастающая пила.",            "Growing saw.",

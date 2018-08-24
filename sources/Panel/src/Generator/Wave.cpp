@@ -1,4 +1,4 @@
-#include "Signal.h"
+#include "Wave.h"
 #include "Settings/Settings.h"
 
 
@@ -12,4 +12,16 @@ WaveForm Wave::GetForm(Chan ch)
 void Wave::SetForm(Chan ch, WaveForm form)
 {
     set.sig_form[ch] = form;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString Wave::Name(uint num, Language lang)
+{
+    static const pString names[WaveForm::Number][2] =
+    {
+        {"Синус", "Sine"},
+    {"Косинус", "Cosine"}
+    };
+
+    return names[num][lang];
 }

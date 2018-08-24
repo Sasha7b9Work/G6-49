@@ -5,7 +5,7 @@
 #include "Display/Text.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Generator/Signal.h"
+#include "Generator/Wave.h"
 #include <stdio.h>
 
 
