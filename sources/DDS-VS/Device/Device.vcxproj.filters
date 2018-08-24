@@ -57,25 +57,25 @@
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\defines.h">
+    <ClInclude Include="..\..\Device\src\defines.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\Generator.h">
+    <ClInclude Include="..\..\Device\src\Generator\Generator.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\GeneratroSettings.h">
+    <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\GeneratorSettingsTypes.h">
+    <ClInclude Include="..\..\Device\src\Generator\GeneratorSettingsTypes.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\AD9952.h">
+    <ClInclude Include="..\..\Device\src\Generator\AD9952.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Interface\Interface.h">
+    <ClInclude Include="..\..\Device\src\Interface\Interface.h">
       <Filter>Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\FPGA.h">
+    <ClInclude Include="..\..\Device\src\Generator\FPGA.h">
       <Filter>Generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h">
@@ -87,16 +87,16 @@
     <ClInclude Include="..\..\Common\Command.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\AD5697.h">
+    <ClInclude Include="..\..\Device\src\Generator\AD5697.h">
       <Filter>Generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h">
+    <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\CPU.h">
+    <ClInclude Include="..\..\Device\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h">
@@ -105,31 +105,31 @@
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\stm32.h">
+    <ClInclude Include="..\..\Device\src\Hardware\stm32.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\stm407.h">
+    <ClInclude Include="..\..\Device\src\Hardware\stm407.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\Timer.h">
+    <ClInclude Include="..\..\Device\src\Hardware\Timer.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\Timer4XX.h">
+    <ClInclude Include="..\..\Device\src\Hardware\Timer4XX.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Hardware\VCP.h">
+    <ClInclude Include="..\..\Device\src\Hardware\VCP.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Generator\Multiplexor.h">
+    <ClInclude Include="..\..\Device\src\Generator\Multiplexor.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Utils\Math.h">
+    <ClInclude Include="..\..\Device\src\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\CommonTypes.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\FreqMeter\FreqMeter.h">
+    <ClInclude Include="..\..\Device\src\FreqMeter\FreqMeter.h">
       <Filter>FreqMeter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h">
@@ -189,7 +189,7 @@
     <ClInclude Include="..\..\common\_VS\windows.h">
       <Filter>common\_VS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Generator\src\Utils\Debug.h">
+    <ClInclude Include="..\..\Device\src\Utils\Debug.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
@@ -221,34 +221,34 @@
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Generator\Generator.cpp">
+    <ClCompile Include="..\..\Device\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Generator\AD9952.cpp">
+    <ClCompile Include="..\..\Device\src\Generator\AD9952.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Generator\AD5697.cpp">
+    <ClCompile Include="..\..\Device\src\Generator\AD5697.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\main.cpp">
+    <ClCompile Include="..\..\Device\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp">
+    <ClCompile Include="..\..\Device\src\Interface\Interface.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Generator\FPGA.cpp">
+    <ClCompile Include="..\..\Device\src\Generator\FPGA.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Generator\GeneratorSettings.cpp">
+    <ClCompile Include="..\..\Device\src\Generator\GeneratorSettings.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
+    <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <Filter>libs\CMSIS</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp">
+    <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp">
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c">
@@ -257,36 +257,36 @@
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\stm32.cpp">
+    <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\stm407.cpp">
+    <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp">
+    <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\Timer4XX.cpp">
+    <ClCompile Include="..\..\Device\src\Hardware\Timer4XX.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Hardware\VCP.cpp">
+    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Generator\Multiplexor.cpp">
+    <ClCompile Include="..\..\Device\src\Generator\Multiplexor.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Utils\Math.cpp">
+    <ClCompile Include="..\..\Device\src\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\FreqMeter\FreqMeter.cpp">
+    <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp">
       <Filter>FreqMeter</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Utils\Debug.cpp">
+    <ClCompile Include="..\..\Device\src\Utils\Debug.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">
+    <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f407xx.s">
       <Filter>libs\CMSIS</Filter>
     </None>
     <None Include="..\..\common\_VS\algorithm">

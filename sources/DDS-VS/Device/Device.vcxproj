@@ -21,8 +21,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F437C9BF-D778-490F-B6DB-313FBC24C15D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Generator</RootNamespace>
+    <RootNamespace>Device</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <ProjectName>Device</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,12 +72,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Generator\src;..\..\Generator\src\libs\HAL;..\..\common\_VS;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\common</IncludePath>
+    <IncludePath>..\..\Device\src;..\..\Device\src\libs\HAL;..\..\common\_VS;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\common</IncludePath>
     <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Generator\src;..\..\Generator\src\libs;C:\Keil_v5\ARM\ARMCC\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Device\src;..\..\Device\src\libs;C:\Keil_v5\ARM\ARMCC\include;$(IncludePath)</IncludePath>
     <OutDir>.\x64\Debug</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -174,25 +175,25 @@
     <ClInclude Include="..\..\common\_VS\string.h" />
     <ClInclude Include="..\..\common\_VS\tchar.h" />
     <ClInclude Include="..\..\common\_VS\windows.h" />
-    <ClInclude Include="..\..\Generator\src\defines.h" />
-    <ClInclude Include="..\..\Generator\src\FreqMeter\FreqMeter.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\AD5697.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\AD9952.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\FPGA.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\Generator.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\GeneratorSettingsTypes.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\GeneratroSettings.h" />
-    <ClInclude Include="..\..\Generator\src\Generator\Multiplexor.h" />
-    <ClInclude Include="..\..\Generator\src\Hardware\CPU.h" />
-    <ClInclude Include="..\..\Generator\src\Hardware\stm32.h" />
-    <ClInclude Include="..\..\Generator\src\Hardware\stm407.h" />
-    <ClInclude Include="..\..\Generator\src\Hardware\Timer.h" />
-    <ClInclude Include="..\..\Generator\src\Hardware\Timer4XX.h" />
-    <ClInclude Include="..\..\Generator\src\Hardware\VCP.h" />
-    <ClInclude Include="..\..\Generator\src\Interface\Interface.h" />
-    <ClInclude Include="..\..\Generator\src\libs\HAL\stm32f4xx_hal_conf.h" />
-    <ClInclude Include="..\..\Generator\src\Utils\Debug.h" />
-    <ClInclude Include="..\..\Generator\src\Utils\Math.h" />
+    <ClInclude Include="..\..\Device\src\defines.h" />
+    <ClInclude Include="..\..\Device\src\FreqMeter\FreqMeter.h" />
+    <ClInclude Include="..\..\Device\src\Generator\AD5697.h" />
+    <ClInclude Include="..\..\Device\src\Generator\AD9952.h" />
+    <ClInclude Include="..\..\Device\src\Generator\FPGA.h" />
+    <ClInclude Include="..\..\Device\src\Generator\Generator.h" />
+    <ClInclude Include="..\..\Device\src\Generator\GeneratorSettingsTypes.h" />
+    <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h" />
+    <ClInclude Include="..\..\Device\src\Generator\Multiplexor.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\stm32.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\stm407.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\Timer4XX.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
+    <ClInclude Include="..\..\Device\src\Interface\Interface.h" />
+    <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Debug.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Math.h" />
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -224,25 +225,25 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Generator\src\FreqMeter\FreqMeter.cpp" />
-    <ClCompile Include="..\..\Generator\src\Generator\AD5697.cpp" />
-    <ClCompile Include="..\..\Generator\src\Generator\AD9952.cpp" />
-    <ClCompile Include="..\..\Generator\src\Generator\FPGA.cpp" />
-    <ClCompile Include="..\..\Generator\src\Generator\Generator.cpp" />
-    <ClCompile Include="..\..\Generator\src\Generator\GeneratorSettings.cpp" />
-    <ClCompile Include="..\..\Generator\src\Generator\Multiplexor.cpp" />
-    <ClCompile Include="..\..\Generator\src\Hardware\CPU.cpp" />
-    <ClCompile Include="..\..\Generator\src\Hardware\CPU_IT.cpp" />
-    <ClCompile Include="..\..\Generator\src\Hardware\stm32.cpp" />
-    <ClCompile Include="..\..\Generator\src\Hardware\stm407.cpp" />
-    <ClCompile Include="..\..\Generator\src\Hardware\Timer.cpp" />
-    <ClCompile Include="..\..\Generator\src\Hardware\Timer4XX.cpp" />
-    <ClCompile Include="..\..\Generator\src\Hardware\VCP.cpp" />
-    <ClCompile Include="..\..\Generator\src\Interface\Interface.cpp" />
-    <ClCompile Include="..\..\Generator\src\libs\CMSIS\system_stm32f4xx.c">
+    <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp" />
+    <ClCompile Include="..\..\Device\src\Generator\AD5697.cpp" />
+    <ClCompile Include="..\..\Device\src\Generator\AD9952.cpp" />
+    <ClCompile Include="..\..\Device\src\Generator\FPGA.cpp" />
+    <ClCompile Include="..\..\Device\src\Generator\Generator.cpp" />
+    <ClCompile Include="..\..\Device\src\Generator\GeneratorSettings.cpp" />
+    <ClCompile Include="..\..\Device\src\Generator\Multiplexor.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\Timer4XX.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp" />
+    <ClCompile Include="..\..\Device\src\Interface\Interface.cpp" />
+    <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\main.cpp" />
+    <ClCompile Include="..\..\Device\src\main.cpp" />
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -276,15 +277,15 @@
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Generator\src\Utils\Debug.cpp" />
-    <ClCompile Include="..\..\Generator\src\Utils\Math.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Debug.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\common\_VS\algorithm" />
     <None Include="..\..\common\_VS\cstdlib" />
     <None Include="..\..\common\_VS\cstring" />
     <None Include="..\..\common\_VS\limits" />
-    <None Include="..\..\Generator\src\libs\CMSIS\startup_stm32f407xx.s">
+    <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f407xx.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
   </ItemGroup>

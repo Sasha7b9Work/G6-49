@@ -27,9 +27,9 @@ sources/DDS-VS/Panel/Debug/*
 sources/DDS-VS/Panel/x64/*
 sources/DDS-VS/Panel/Release/*
 
-sources/DDS-VS/Generator/x64/*
-sources/DDS-VS/Generator/Debug/*
-sources/DDS-VS/Generator/Release/*
+sources/DDS-VS/Device/x64/*
+sources/DDS-VS/Device/Debug/*
+sources/DDS-VS/Device/Release/*
 
 sources/DDS-Open/Panel/DebugConfig/*
 sources/DDS-Open/Panel/Objects/*
