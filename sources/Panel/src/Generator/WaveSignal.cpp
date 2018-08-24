@@ -3,13 +3,13 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-WaveForm Wave::Signal::Form(Chan ch)
+WaveForm Wave::Form(Chan ch)
 {
     return set.sig_form[ch];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Signal::SetForm(Chan ch, WaveForm form)
+void Wave::SetForm(Chan ch, WaveForm form)
 {
     set.sig_form[ch] = form;
 }

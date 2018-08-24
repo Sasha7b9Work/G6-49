@@ -8,6 +8,10 @@ class Wave
 public:
 
     static pString Name(uint num, Language lang);
+    /// Возвращает текущую форму сигнала на данном канале
+    static WaveForm Form(Chan ch = (Chan::E)CURRENT_CHANNEL);
+    /// Устанавливает сигнал текущим на данный канал
+    static void SetForm(Chan ch, WaveForm form);
 
     /// Отвечает за отображение сигналов на экране
     class Graphic
@@ -30,15 +34,5 @@ public:
         static void DrawSignalParameters(Chan chan, int y0);
     
         static void DrawParameterValue(Chan chan, WaveParameter parameter, int x, int y);
-    };
-
-    /// Отвечает за параметры сигнала
-    class Signal
-    {
-    public:
-        /// Возвращает текущую форму сигнала на данном канале
-        static WaveForm Form(Chan ch = (Chan::E)CURRENT_CHANNEL);
-        /// Устанавливает сигнал текущим на данный канал
-        static void SetForm(Chan ch, WaveForm form);
     };
 };

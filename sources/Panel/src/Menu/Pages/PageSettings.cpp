@@ -19,9 +19,9 @@ static uint8 waveForm = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    waveForm = Wave::Signal::Form();
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Signal::Form());
+    waveForm = Wave::Form();
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Form(), &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Form());
 }
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿Õ¿À ---
@@ -40,9 +40,9 @@ DEF_CHOICE_2( cChannel,                                                         
 void PageSignals::OnPress_Form(bool)
 {
     WaveForm form = WaveForm((WaveForm::E)waveForm);
-    Wave::Signal::SetForm(CURRENT_CHANNEL, form);
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Signal::Form());
+    Wave::SetForm(CURRENT_CHANNEL, form);
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Form(), &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Form());
     TuneGenerator(CURRENT_CHANNEL);
 }
 
@@ -92,8 +92,8 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::Init()
 {
-    waveForm = Wave::Signal::Form();
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Signal::Form(), &parameters.allowParameters);
+    waveForm = Wave::Form();
+    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, Wave::Form(), &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WaveForm((WaveForm::E)waveForm));
 }
 
