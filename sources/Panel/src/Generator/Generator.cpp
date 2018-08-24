@@ -32,12 +32,13 @@ bool Generator::ChannelEnabled(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::LoadRegister(Register reg, uint value)
+void Generator::LoadRegister(Register reg, uint64 value)
 {
-    INIT_BIT_SET_32(set, value);
+    INIT_BIT_SET_64(set, value);
 
-    uint8 buffer[6] = {CommandPanel::WRITE_REGISTER, (uint8)reg, set.byte0, set.byte1, set.byte2, set.byte3};
-    SendToInterface(buffer, 6);
+    uint8 buffer[10] = {CommandPanel::WRITE_REGISTER, (uint8)reg,   set.byte0, set.byte1, set.byte2, set.byte3,
+                                                                    set.byte4, set.byte5, set.byte6, set.byte7};
+    SendToInterface(buffer, 10);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

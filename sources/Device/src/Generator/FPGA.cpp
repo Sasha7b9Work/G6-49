@@ -317,12 +317,12 @@ void FPGA::SendData()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::WriteRegister(uint8 reg, uint value)
+void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
     int numBits[Register::Number] =
     {
         8,  // RG0_Control,
-        32, // RG1_Freq,
+        40, // RG1_Freq,
         16, // RG2_Mul,
         28, // RG3_RectA,
         28, // RG4_RectB,

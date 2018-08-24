@@ -137,19 +137,19 @@ void Interface::CommandWriteRegister()
 {
     Register reg = (Register::E)buffer[1];
 
-    BitSet32 set;
-    for (int i = 0; i < 4; i++)
+    BitSet64 set;
+    for (int i = 0; i < 8; i++)
     {
         set.byte[i] = buffer[i + 2];
     }
 
-    uint value = set.word;
+    uint64 value = set.dword;
 
     switch (reg.value)
     {
     case Register::Multiplexor1:
     case Register::Multiplexor2:
-        Multiplexor::WriteRegister(reg, value);
+        Multiplexor::WriteRegister(reg, (uint)value);
         break;
 
     case Register::OffsetA:
@@ -214,7 +214,7 @@ void Interface::CommandWriteRegister()
         break;
 
     case Register::Multiplexor3:
-        Multiplexor::WriteRegister(reg, value);
+        Multiplexor::WriteRegister(reg, (uint)value);
         break;
 
     case Register::FreqMeter_Resist:

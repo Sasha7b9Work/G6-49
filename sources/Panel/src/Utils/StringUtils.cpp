@@ -301,6 +301,17 @@ char *UInt2String(uint value, char buffer[20])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+char *UInt64_2String(uint64 value, char buffer[20])
+{
+    static char buf[20];
+
+    char *retValue = buffer ? buffer : buf;
+
+    sprintf(retValue, "%llu", value);
+    return retValue;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
 {
     int allSymbols = allDigits + 1;         // Всего символов на 1 больше, чем десятичных знаков - ещё одно место занимает точка

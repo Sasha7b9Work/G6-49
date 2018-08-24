@@ -49,6 +49,8 @@ char* Int2String(int value,                     ///< значение
                  char bufferOut[20] = 0         ///< сюда записывается возвращаемое значение
 );
 
+char* UInt64_2String(uint64 value, char bufferOut[20] = 0);
+
 char* UInt2String(uint value,                     ///< значение
                  char bufferOut[20] = 0         ///< сюда записывается возвращаемое значение
 );

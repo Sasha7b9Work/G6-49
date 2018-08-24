@@ -21,10 +21,10 @@
 /// Тип вводимых чисел в окне ввода
 enum TypeInput
 {
-    Uint32,         ///< Десятичное число. Можно ввести значение до 2^32.
+    Uint,           ///< Десятичное число. Можно ввести значение до 2^64.
     Binary,         ///< Последовательность нулей и единиц
-    Uint8_Uint8,      ///< Два восьмибитных числа в десятичном виде.
-    Uint14_Uint14,    ///< Два числа, максимум 2^14, в десятичном виде
+    Uint8_Uint8,    ///< Два восьмибитных числа в десятичном виде.
+    Uint14_Uint14,  ///< Два числа, максимум 2^14, в десятичном виде
 };
 
 extern PageBase pRegisters;
@@ -37,7 +37,7 @@ extern const ButtonBase bBackspace;
 extern const ButtonBase bCancel;
 extern const ButtonBase bSave;
 
-#define MAX_SIZE_BUFFER 12
+#define MAX_SIZE_BUFFER 14
 /// Здесь хранятся введённые символы
 static char buffer[MAX_SIZE_BUFFER + 1];
 
@@ -45,8 +45,8 @@ struct DescInput
 {
     int size;
     TypeInput type;
-    bool sending;   // true означает, что значение в этот регистр уже засылалось
-    uint value;     // засланное значение
+    bool sending;       // true означает, что значение в этот регистр уже засылалось
+    uint64 value;       // засланное значение
 };
 
 #define VALUE(i)   (desc[i].value)
@@ -54,24 +54,24 @@ struct DescInput
 
 static DescInput desc[Register::Number] =
 {
-    {2,  Uint32        , false, 0 }, // Multiplexor1,
-    {2,  Uint32        , false, 0 }, // Multiplexor2,
-    {10, Uint32        , false, 0 }, // OffsetA,
-    {10, Uint32        , false, 0 }, // OffsetB,
-    {10, Uint32        , false, 0 }, // FreqMeterLevel,
-    {10, Uint32        , false, 0 }, // FreqMeterHYS,
+    {2,  Uint          , false, 0 }, // Multiplexor1,
+    {2,  Uint          , false, 0 }, // Multiplexor2,
+    {10, Uint          , false, 0 }, // OffsetA,
+    {10, Uint          , false, 0 }, // OffsetB,
+    {10, Uint          , false, 0 }, // FreqMeterLevel,
+    {10, Uint          , false, 0 }, // FreqMeterHYS,
     {8,  Binary        , false, 0 }, // FPGA_RG0_Control,
-    {10, Uint32        , false, 0 }, // FPGA_RG1_Freq,
+    {13, Uint          , false, 0 }, // FPGA_RG1_Freq,
     {7,  Uint8_Uint8   , false, 0 }, // FPGA_RG2_Mul,
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG3_RectA,
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG4_RectB,
-    {10, Uint32        , false, 0 }, // FPGA_RG5_PeriodImpulseA,
-    {10, Uint32        , false, 0 }, // FPGA_RG6_DurationImpulseA,
-    {10, Uint32        , false, 0 }, // FPGA_RG7_PeriodImpulseB,
-    {10, Uint32        , false, 0 }, // FPGA_RG8_DurationImpulseB,
+    {10, Uint          , false, 0 }, // FPGA_RG5_PeriodImpulseA,
+    {10, Uint          , false, 0 }, // FPGA_RG6_DurationImpulseA,
+    {10, Uint          , false, 0 }, // FPGA_RG7_PeriodImpulseB,
+    {10, Uint          , false, 0 }, // FPGA_RG8_DurationImpulseB,
     {12, Binary        , false, 0 }, // FPGA_RG9_FreqMeter
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG10_Offset
-    {2,  Uint32        , false, 0 }, // Multiplexor3
+    {2,  Uint          , false, 0 }, // Multiplexor3
     {0},
     {0},
     {0}
@@ -116,7 +116,7 @@ static bool AllowableSymbol(Control key)
 {
     TypeInput type = TypeBuffer(currentRegister);
 
-    if(type == Uint32)
+    if(type == Uint)
     {
         return key.IsDigit();
     }
@@ -193,15 +193,15 @@ static void DrawValue(int x, int y, uint8 i)
 
     TypeInput type = TypeBuffer(name);
 
-    if(type == Uint32)
+    if(type == Uint)
     {
-        Text::DrawFormatText(x, y, UInt2String(VALUE(i)));
+        Text::DrawFormatText(x, y, UInt64_2String(VALUE(i)));
     }
     else if(type == Binary)
     {
         char buf[33];
 
-        Text::DrawFormatText(x, y, Bin2StringN(VALUE(i) , buf, SizeBuffer(name)));
+        Text::DrawFormatText(x, y, Bin2StringN((uint)VALUE(i) , buf, SizeBuffer(name)));
     }
     else if(type == Uint8_Uint8 || type == Uint14_Uint14)
     {
@@ -291,14 +291,14 @@ static void OnPress_Send()
     {
         TypeInput type = TypeBuffer();
 
-        if (type == Uint32)
+        if (type == Uint)
         {
-            UInt2String(VALUE(currentRegister), buffer);
+            UInt64_2String(VALUE(currentRegister), buffer);
             position = (int)strlen(buffer);
         }
         else if(type == Binary)
         {
-            Bin2StringN(VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
+            Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
             position = (int)strlen(buffer);
         }
         else if(type == Uint8_Uint8 || type == Uint14_Uint14)
@@ -423,7 +423,7 @@ static uint BufferToValue()
 
     uint result = 0;
 
-    if(type == Uint32)
+    if(type == Uint)
     {
         if(!String2UInt(buffer, &result))
         {
@@ -478,7 +478,7 @@ DEF_BUTTON(bSave,                                                               
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool OnRegulator(Control key)
 {
-    if (TypeBuffer(currentRegister) == Uint32)
+    if (TypeBuffer(currentRegister) == Uint)
     {
         if(key.Is(Control::REG_RIGHT) || key.Is(Control::REG_LEFT))
         {

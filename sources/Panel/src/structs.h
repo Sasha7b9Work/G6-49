@@ -20,6 +20,10 @@ union BitSet16
     BitSet32 name;                      \
     name.word = value;
 
+#define INIT_BIT_SET_64(name, value)    \
+    BitSet64 name;                      \
+    name.dword = value;
+
 union BitSet32
 {
     uint    word;
