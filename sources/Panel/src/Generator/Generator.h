@@ -32,8 +32,6 @@ public:
 private:
     /// Заслать в генератор данные
     static void SendToInterface(uint8 *buffer, int size);
-    /// Читать и выполнять данные из генератора
-    static void ReadAndRunFromInterface();
 
     static void ExecuteCommand(uint8 *buffer, int size);
 

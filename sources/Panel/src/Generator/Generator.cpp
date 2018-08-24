@@ -135,46 +135,13 @@ void Generator::SendToInterface(uint8 *data, int size)
     CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100);
 #endif
     
-    static bool first = true;
-    if(first)
+    if(recv[0] == CommandGenerator::COM_FREQ_MEASURE)
     {
-        first = false;
-    }
-    else
-    {
-        if(memcmp(prevTrans, recv, LENGTH_SPI_BUFFER) != 0)
+        BitSet32 bs;
+        for(int i = 0; i < 4; i++)
         {
-            LOG_WRITE("ERROR");
+            bs.byte[i] = recv[i + 1];
         }
+        FrequencyMeter::SetMeasure(bs.word);
     }
-    
-    memcpy(prevTrans, trans, LENGTH_SPI_BUFFER);
 }
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::ReadAndRunFromInterface()
-{
-#ifndef OPEN
-    while(CPU::SPI4_::IsBusy())
-    {
-    }
-
-    uint8 trans[LENGTH_SPI_BUFFER] = {0};
-    uint8 recv[LENGTH_SPI_BUFFER];
-
-    if(CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100))
-    {
-        if(recv[0] == CommandGenerator::COM_FREQ_MEASURE)
-        {
-            BitSet32 data;
-            for(int i = 0; i < 4; i++)
-            {
-                data.byte[i] = recv[1 + i];
-            }
-    
-            FrequencyMeter::SetMeasure(data.word);
-        }
-    }
-#endif
-}
-

@@ -39,7 +39,7 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 buffer[LENGTH_SPI_BUFFER];         ///< Буфер для принимаемых команд
-static uint8 prevBuffer[LENGTH_SPI_BUFFER];     
+static uint8 trans[LENGTH_SPI_BUFFER];     
 uint  Interface::freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
 const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
@@ -85,7 +85,7 @@ void Interface::Init()
 
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
 
-    HAL_SPI_TransmitReceive_IT(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER);
+    HAL_SPI_TransmitReceive_IT(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,6 +283,19 @@ void Interface::ReceiveCallback()
     {
         pFuncInterfaceVV f = commands[buffer[0]].func;
         f();
+        if(freqForSend != MAX_UINT)
+        {
+            trans[0] = CommandGenerator::COM_FREQ_MEASURE;
+            INIT_BIT_SET_32(bs, freqForSend);
+            for(int i = 0; i < 4; i++)
+            {
+                trans[i + 1] = bs.byte[i];
+            }
+        }
+        else
+        {
+            trans[0] = 0;
+        }
     }
     timeLastReceive = TIME_MS;
 }
@@ -291,10 +304,9 @@ void Interface::ReceiveCallback()
 void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *)
 {
     CPU::SetBusy();
-    memcpy(prevBuffer, buffer, LENGTH_SPI_BUFFER);
     Interface::ReceiveCallback();
     memset(buffer, 0, LENGTH_SPI_BUFFER);
-    HAL_SPI_TransmitReceive_IT(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER);
+    HAL_SPI_TransmitReceive_IT(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER);
     CPU::SetReady();
 }
 
@@ -303,5 +315,5 @@ void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
 {
     HAL_SPI_Init(&hSPI1);
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
-    HAL_SPI_TransmitReceive_IT(&hSPI1, prevBuffer, buffer, LENGTH_SPI_BUFFER);
+    HAL_SPI_TransmitReceive_IT(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER);
 }

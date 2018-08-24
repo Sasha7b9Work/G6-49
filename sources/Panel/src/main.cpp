@@ -41,7 +41,7 @@ int main()
         CPU::Update();
         Menu::Update();
         Display::Update();
-        //Generator::Update();
+        Generator::Update();
         SendToGenerator();
     }
 }
