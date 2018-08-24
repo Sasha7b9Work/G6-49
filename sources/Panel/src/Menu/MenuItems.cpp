@@ -172,7 +172,7 @@ bool Item::ChangeOpened(int delta)
     {
         ((Page *)this)->ChangeSubPage(delta);
     }
-    else if (type == TypeItem::ChoiceReg || type == TypeItem::Choice)
+    else if (type == TypeItem::Choice)
     {
         ((Choice *)this)->ChangeIndex(delta);
     }
@@ -264,18 +264,6 @@ void Item::ShortPress()
                 }
                 Open(!IsOpened());
             }
-        }
-    }
-    else if(type == TypeItem::ChoiceReg)
-    {
-        Choice *choice = (Choice *)this;
-        if(IS_ACTIVE(this))
-        {
-            choice->SetCurrent(Menu::CurrentItem() != this);
-        }
-        else
-        {
-            choice->funcOnChanged(false);
         }
     }
     else if(type == TypeItem::SmallButton)
