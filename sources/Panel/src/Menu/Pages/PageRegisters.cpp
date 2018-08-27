@@ -23,7 +23,7 @@ enum TypeInput
 {
     Uint,           ///< Десятичное число. Можно ввести значение до 2^64.
     Binary,         ///< Последовательность нулей и единиц
-    Uint8_Uint8,    ///< Два восьмибитных числа в десятичном виде.
+    Uint10_Uint10,  ///< Два восьмибитных числа в десятичном виде.
     Uint14_Uint14,  ///< Два числа, максимум 2^14, в десятичном виде
 };
 
@@ -62,7 +62,7 @@ static DescInput desc[Register::Number] =
     {10, Uint          , false, 0 }, // FreqMeterHYS,
     {8,  Binary        , false, 0 }, // FPGA_RG0_Control,
     {13, Uint          , false, 0 }, // FPGA_RG1_Freq,
-    {7,  Uint8_Uint8   , false, 0 }, // FPGA_RG2_Mul,
+    {11, Uint10_Uint10 , false, 0 }, // FPGA_RG2_Mul,
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG3_RectA,
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG4_RectB,
     {10, Uint          , false, 0 }, // FPGA_RG5_PeriodImpulseA,
@@ -88,11 +88,11 @@ static bool AllowableSymbol(Control key);
 /// Выводит значение регистра i
 static void DrawValue(int x, int y, uint8 i);
 /// Возвращает из буфера значение, предшествующее точке
-static uint FirstValue();
+static uint64 FirstValue();
 /// Возвращает из буфера значение, следующее за точкой
-static uint SecondValue();
+static uint64 SecondValue();
 /// Преобразует строку из buffer в uint
-static uint BufferToValue();
+static uint64 BufferToValue();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ static bool AllowableSymbol(Control key)
     {
         return key.Is(Control::B_0) || key.Is(Control::B_1);
     }
-    else if(type == Uint8_Uint8 || type == Uint14_Uint14)
+    else if(type == Uint10_Uint10 || type == Uint14_Uint14)
     {
         if(key.IsDigit())
         {
@@ -203,10 +203,10 @@ static void DrawValue(int x, int y, uint8 i)
 
         Text::DrawFormatText(x, y, Bin2StringN((uint)VALUE(i) , buf, SizeBuffer(name)));
     }
-    else if(type == Uint8_Uint8 || type == Uint14_Uint14)
+    else if(type == Uint10_Uint10 || type == Uint14_Uint14)
     {
-        uint mask = type == Uint8_Uint8 ? 0xffU : 0x3fffU;
-        int numBits = type == Uint8_Uint8 ? 8 : 14;
+        uint mask = type == Uint10_Uint10 ? 0x3ffU : 0x3fffU;
+        int numBits = type == Uint10_Uint10 ? 10 : 14;
 
         uint first = VALUE(i) & mask;
         uint second = (VALUE(i) >> numBits) & mask;
@@ -301,10 +301,10 @@ static void OnPress_Send()
             Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
             position = (int)strlen(buffer);
         }
-        else if(type == Uint8_Uint8 || type == Uint14_Uint14)
+        else if(type == Uint10_Uint10 || type == Uint14_Uint14)
         {
-            uint mask = type == Uint8_Uint8 ? 0xffU : 0x3fffU;
-            int numBits = type == Uint8_Uint8 ? 8 : 14;
+            uint mask = type == Uint10_Uint10 ? 0x3ffU : 0x3fffU;
+            int numBits = type == Uint10_Uint10 ? 10 : 14;
 
             uint first = VALUE(currentRegister) & mask;
             uint second = (VALUE(currentRegister) >> numBits) & mask;
@@ -371,7 +371,7 @@ DEF_BUTTON(bCancel,                                                             
     pRegisters, FuncActive, OnPress_Cancel, OnDraw_Cancel
 )
 
-uint FirstValue()
+uint64 FirstValue()
 {
     char buff[20];
 
@@ -385,9 +385,9 @@ uint FirstValue()
             }
             buff[i] = 0;
 
-            uint result = 0;
+            uint64 result = 0;
 
-            if(String2UInt(buff, &result))
+            if(String2UInt64(buff, &result))
             {
                 return result;
             }
@@ -398,15 +398,15 @@ uint FirstValue()
     return 0;
 }
 
-uint SecondValue()
+uint64 SecondValue()
 {
     for(uint i = 0; i < sizeof(buffer); i++)
     {
         if(buffer[i] == '.')
         {
-            uint result = 0;
+            uint64 result = 0;
 
-            if(String2UInt(&buffer[i + 1], &result))
+            if(String2UInt64(&buffer[i + 1], &result))
             {
                 return result;
             }
@@ -417,15 +417,15 @@ uint SecondValue()
     return 0;
 }
 
-static uint BufferToValue()
+static uint64 BufferToValue()
 {
     TypeInput type = TypeBuffer(currentRegister);
 
-    uint result = 0;
+    uint64 result = 0;
 
     if(type == Uint)
     {
-        if(!String2UInt(buffer, &result))
+        if(!String2UInt64(buffer, &result))
         {
             result = 0;
         }
@@ -434,12 +434,12 @@ static uint BufferToValue()
     {
         result = StringToBin32(buffer);
     }
-    else if(type == Uint8_Uint8 || type == Uint14_Uint14)
+    else if(type == Uint10_Uint10 || type == Uint14_Uint14)
     {
-        int numBits = type == Uint8_Uint8 ? 8 : 14;
+        int numBits = type == Uint10_Uint10 ? 10 : 14;
 
-        uint first = FirstValue();
-        uint second = SecondValue();
+        uint64 first = FirstValue();
+        uint64 second = SecondValue();
 
         result = first + (second << numBits);
     }
@@ -449,7 +449,9 @@ static uint BufferToValue()
 
 static void LoadRegister()
 {
-    VALUE(currentRegister) = BufferToValue();
+    volatile uint64 value = BufferToValue();
+
+    VALUE(currentRegister) = value;
     SENDING(currentRegister) = true;
     Generator::LoadRegister(currentRegister, VALUE(currentRegister));
 }

@@ -92,6 +92,8 @@ private:
 
 bool String2Int(char *str, int *value);
 
+bool String2UInt64(char *str, uint64 *value);
+
 bool String2UInt(char *str, uint *value);
 /// @brief ѕреобразует time секунд в текстовую строку
 char* Time2StringAccuracy(float time,           ///< врем€ в секундах. ћожет быть отрицательным

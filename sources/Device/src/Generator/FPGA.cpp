@@ -323,7 +323,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
     {
         8,  // RG0_Control,
         40, // RG1_Freq,
-        16, // RG2_Mul,
+        20, // RG2_Mul,
         28, // RG3_RectA,
         28, // RG4_RectB,
         32, // RG5_PeriodImpulseA,
