@@ -30,7 +30,7 @@ struct FreqResist
     } value;
     bool Is(E v) const { return value == v; };
     FreqResist(E v) : value(v) {};
-    FreqResist(int v) : value((E)v) {};
+    FreqResist(uint v) : value((E)v) {};
     operator uint() const { return (uint)value; };
 };
 
@@ -43,7 +43,7 @@ struct FreqCouple
         DC
     } value;
     FreqCouple(E v) : value(v) {};
-    FreqCouple(int v) : value((E)v) {};
+    FreqCouple(uint v) : value((E)v) {};
     bool Is(E v) const { return v == value; };
     operator uint() const { return (uint)value; };
 };
@@ -57,7 +57,7 @@ struct FreqFiltr
         Disable
     } value;
     FreqFiltr(E v) : value(v) {};
-    FreqFiltr(int v) : value((E)v) {};
+    FreqFiltr(uint v) : value((E)v) {};
     bool Is(E v) const { return v == value; };
     operator uint() const { return (uint)value; };
 };

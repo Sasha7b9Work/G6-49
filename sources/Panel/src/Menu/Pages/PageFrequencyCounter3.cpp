@@ -60,7 +60,7 @@ DEF_CHOICE_2(cTest,                                                             
     "Enable/disable test mode",
     DISABLED_RU, DISABLED_EN, "", "",
     ENABLED_RU,  ENABLED_EN,  "", "",
-    FLAG_3, BIT_FREQ_TEST, pFrequencyCounte3, FuncActive, OnPress_Test, FuncDraw
+    FLAG_1, BIT_FREQ_TEST, pFrequencyCounte3, FuncActive, OnPress_Test, FuncDraw
 )
 
 static void OnPress_Test(bool)

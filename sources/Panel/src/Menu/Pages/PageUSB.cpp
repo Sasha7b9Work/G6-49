@@ -15,7 +15,7 @@ DEF_CHOICE_2(cSizeByte,                                                         
                       "7 bits in byte",
    "8 бит", "8 bits", "8 бит в байте",
                       "8 bits in byte",
-   FLAG_2, BIT_SIZE_BYTE, pUSB, FuncActive, FuncChangedChoice, FuncDraw
+   FLAG_1, BIT_SIZE_BYTE, pUSB, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ DEF_CHOICE_2(cStopBit,                                                          
               "1 stop bit at the end of the byte",
     "2", "2", "2 стоп-бита в конце байта",
               "2 stop bits at the end of the byte",
-    FLAG_2, BIT_STOP_BIT, pUSB, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_STOP_BIT, pUSB, FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

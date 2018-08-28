@@ -106,7 +106,15 @@ float Choice::Step()
             CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
         }
 
-        *cell = isPageSB ? (*cell ^= (1 << (int)nameOrNumBit)) : index;
+        if(isPageSB)
+        {
+            uint *address = (uint *)cell;
+            *address ^= (1 << (int)nameOrNumBit);
+        }
+        else
+        {
+            *cell = index;
+        }
 
         tsChoice.address = 0;
         CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
@@ -140,7 +148,8 @@ void Choice::ChangeIndex(int delta)
 {
     if(isPageSB)
     {
-        *cell ^= (1 << nameOrNumBit);
+        uint *address = (uint *)cell;
+        *address ^= (1 << nameOrNumBit);
     }
     else
     {
@@ -397,7 +406,8 @@ int8 Choice::CurrentIndex() const
     {
         if(isPageSB)
         {
-            retValue = (*cell >> nameOrNumBit) & 0x01;
+            uint *address = (uint *)cell;
+            retValue = (*address >> nameOrNumBit) & 0x01;
         }
         else
         {

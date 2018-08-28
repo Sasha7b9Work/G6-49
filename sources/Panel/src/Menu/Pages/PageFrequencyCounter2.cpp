@@ -21,7 +21,7 @@ DEF_CHOICE_2(cResist,
                         "Input Impedance 1 MOhm",
     "50 Ом", "50 Ohm",  "Сопротивление входа 50 Ом",
                         "Input Impedance 50 Ohm",
-    FLAG_2, BIT_FREQ_RESIST, pFrequencyCounter2, FuncActive, OnPress_Resist, FuncDraw
+    FLAG_1, BIT_FREQ_RESIST, pFrequencyCounter2, FuncActive, OnPress_Resist, FuncDraw
 )
 
 static void OnPress_Resist(bool)
@@ -38,7 +38,7 @@ DEF_CHOICE_2(cCouple,
                     "The DC component is fed to the frequency meter input",
     "Пост", "DC",   "Постоянная составляющая не поступает на вход частотомера",
                     "The DC component is not input to the frequency meter input",
-    FLAG_2, BIT_FREQ_COUPLE, pFrequencyCounter2, FuncActive, OnPress_Couple, FuncDraw
+    FLAG_1, BIT_FREQ_COUPLE, pFrequencyCounter2, FuncActive, OnPress_Couple, FuncDraw
 )
 
 static void OnPress_Couple(bool)
@@ -55,7 +55,7 @@ DEF_CHOICE_2(cFiltr,
                                 "LPF at the frequency meter input is disabled",
     ENABLED_RU, ENABLED_EN,     "ФНЧ на входе частотомера водключен",
                                 "LPF at the input of the frequency meter is turned on",
-    FLAG_3, BIT_FREQ_FILTR, pFrequencyCounter2, FuncActive, OnPress_Filtr, FuncDraw
+    FLAG_1, BIT_FREQ_FILTR, pFrequencyCounter2, FuncActive, OnPress_Filtr, FuncDraw
 )
 
 static void OnPress_Filtr(bool)

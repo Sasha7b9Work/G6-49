@@ -30,7 +30,7 @@ struct Language
         RU,
         EN
     } value;
-    Language(int v) : value((E)v) {};
+    Language(uint v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 
@@ -69,7 +69,7 @@ struct FreqInterval
         _1,
         _10
     } value;
-    FreqInterval(int v) : value((E)v) {};
+    FreqInterval(uint v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 
@@ -81,7 +81,7 @@ struct FreqMeasure
         Freq,
         Period
     } value;
-    FreqMeasure(int v) : value((E)v) {};
+    FreqMeasure(uint v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 
@@ -121,7 +121,7 @@ struct FreqTest
         Off,
         On
     } value;
-    FreqTest(int v) : value((E)v) {};
+    FreqTest(uint v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 

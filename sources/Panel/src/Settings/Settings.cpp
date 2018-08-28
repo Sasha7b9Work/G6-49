@@ -66,30 +66,30 @@ static const Settings defSet =
     FreqAvePeriod::_1,      // freq_avePeriod
     FreqTimeStamps::_10MHz, // freq_timeStamps
 
-    BINARY_U8(01001100), // flag1
-//            ||||||||------ 0 BIT_PARITY         Parity_Off
-//            |||||||------- 1 BIT_FREQ_INTERVAL  Interval_1
-//            ||||||-------- 2 BIT_CONSOLE      
-//            |||||--------- 3 BIT_BACK_BLACK   
-//            ||||---------- 4 BIT_TUNE_FULL    
-//            |||----------- 5 BIT_DBG_MODE     
-//            ||------------ 6 BIT_FREQ_ENABLED 
-//            |------------- 7 BIT_STATISTICS   
-
-    BINARY_U8(00010110), // flag2
-//            ||||||||------ 0 BIT_LANGUAGE       RU
-//            |||||||------- 1 BIT_CHAN_A   
-//            ||||||-------- 2 BIT_CHAN_B   
-//            |||||--------- 3 BIT_CHANNEL        A
-//            ||||---------- 4 BIT_SIZE_BYTE      8bit
-//            |||----------- 5 BIT_STOP_BIT       StopBit_1
-//            ||------------ 6 BIT_FREQ_RESIST
-//            |------------- 7 BIT_FREQ_COUPLE
-
-    BINARY_U8(00000000) // flag3
-//                  ||------ 0 BIT_FREQ_FILTR
-//                  |------- 1 BIT_FREQ_MEASURE
+    BINARY_U32(00000000, 00000000, 00010110, 01001100), // flag1
+//                            |||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
+//                            |||  ||||||||  |||||||------- 1  BIT_FREQ_INTERVAL  Interval_1
+//                            |||  ||||||||  ||||||-------- 2  BIT_CONSOLE      
+//                            |||  ||||||||  |||||--------- 3  BIT_BACK_BLACK   
+//                            |||  ||||||||  ||||---------- 4  BIT_TUNE_FULL    
+//                            |||  ||||||||  |||----------- 5  BIT_DBG_MODE     
+//                            |||  ||||||||  ||------------ 6  BIT_FREQ_ENABLED 
+//                            |||  ||||||||  |------------- 7  BIT_STATISTICS   
+//                            |||  ||||||||
+//                            |||  ||||||||---------------- 8  BIT_LANGUAGE       RU
+//                            |||  |||||||----------------- 9  BIT_CHAN_A   
+//                            |||  ||||||------------------ 10 BIT_CHAN_B   
+//                            |||  |||||------------------- 11 BIT_CHANNEL        A
+//                            |||  ||||-------------------- 12 BIT_SIZE_BYTE      8bit
+//                            |||  |||--------------------- 13 BIT_STOP_BIT       StopBit_1
+//                            |||  ||---------------------- 14 BIT_FREQ_RESIST
+//                            |||  |----------------------- 15 BIT_FREQ_COUPLE
+//                            |||
+//                            |||-------------------------- 16 BIT_FREQ_FILTR
+//                            ||--------------------------- 17 BIT_FREQ_MEASURE
+//                            |---------------------------- 18 BIT_FREQ_TEST
 };
+
 
 #ifdef WIN32
 #pragma warning(pop)

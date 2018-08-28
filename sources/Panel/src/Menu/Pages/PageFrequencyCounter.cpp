@@ -34,7 +34,7 @@ DEF_CHOICE_2(cMeasure,                                                          
                             "Frequency measurement",
     "Период", "Period",     "Измерение периода",
                             "Period measurement",
-    FLAG_3, BIT_FREQ_MEASURE, pFrequencyCounter, FuncActive, OnPress_Measure, FuncDraw
+    FLAG_1, BIT_FREQ_MEASURE, pFrequencyCounter, FuncActive, OnPress_Measure, FuncDraw
 )
 
 static void OnPress_Measure(bool)

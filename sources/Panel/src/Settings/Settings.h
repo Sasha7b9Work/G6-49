@@ -28,9 +28,7 @@ extern const PageBase pInput;
 
 #define CURRENT_PARAMETER(form) (set.sig_parameter[form])
 
-#define BIT_FL1(numBit)  ((FLAG_1 >> numBit) & 0x01)
-#define BIT_FL2(numBit)  ((FLAG_2 >> numBit) & 0x01)
-#define BIT_FL3(numBit)  ((FLAG_3 >> numBit) & 0x01)
+#define BIT_FL1(numBit)         ((FLAG_1 >> numBit) & 0x01)
 
 #define CONSOLE_ENABLED         (BIT_FL1(BIT_CONSOLE))
 #define DEBUG_MODE_ENABLED      (BIT_FL1(BIT_DBG_MODE))
@@ -39,28 +37,28 @@ extern const PageBase pInput;
 #define TUNE_FULL               (BIT_FL1(BIT_TUNE_FULL))
 #define PARITY                  ((Parity)BIT_FL1(BIT_PARITY))
 
-#define CHANNEL_ENABLED(ch)     ((FLAG_2 >> (ch + BIT_CHAN_A)) & 0x01)
-#define SWITCH_CHANNEL_A        (FLAG_2 ^= (1 << (BIT_CHAN_A)))
-#define SWITCH_CHANNEL_B        (FLAG_2 ^= (1 << (BIT_CHAN_B)))
-#define LANG                    ((Language)BIT_FL2(BIT_LANGUAGE))
+#define CHANNEL_ENABLED(ch)     ((FLAG_1 >> (ch + BIT_CHAN_A)) & 0x01)
+#define SWITCH_CHANNEL_A        (FLAG_1 ^= (1 << (BIT_CHAN_A)))
+#define SWITCH_CHANNEL_B        (FLAG_1 ^= (1 << (BIT_CHAN_B)))
+#define LANG                    ((Language)BIT_FL1(BIT_LANGUAGE))
 #define LANG_RU                 (LANG == Language::RU)
-#define CURRENT_CHANNEL         ((Chan::E)BIT_FL2(BIT_CHANNEL))
+#define CURRENT_CHANNEL         ((Chan::E)BIT_FL1(BIT_CHANNEL))
 #define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == Chan::A)
 #define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == Chan::B)
-#define SIZE_BYTE               ((SizeByte)BIT_FL2(BIT_SIZE_BYTE))
-#define STOP_BIT                ((StopBit)BIT_FL2(BIT_STOP_BIT))
+#define SIZE_BYTE               ((SizeByte)BIT_FL1(BIT_SIZE_BYTE))
+#define STOP_BIT                ((StopBit)BIT_FL1(BIT_STOP_BIT))
 
-#define FREQ_RESIST             ((FreqResist)BIT_FL2(BIT_FREQ_RESIST))
-#define FREQ_COUPLE             ((FreqCouple)BIT_FL2(BIT_FREQ_COUPLE))
-#define FREQ_FILTR              ((FreqFiltr)BIT_FL3(BIT_FREQ_FILTR))
+#define FREQ_RESIST             ((FreqResist)BIT_FL1(BIT_FREQ_RESIST))
+#define FREQ_COUPLE             ((FreqCouple)BIT_FL1(BIT_FREQ_COUPLE))
+#define FREQ_FILTR              ((FreqFiltr)BIT_FL1(BIT_FREQ_FILTR))
 #define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED))
 #define FREQ_INTERVAL           ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
-#define FREQ_MEASURE            ((FreqMeasure)BIT_FL3(BIT_FREQ_MEASURE))
+#define FREQ_MEASURE            ((FreqMeasure)BIT_FL1(BIT_FREQ_MEASURE))
 #define FREQ_MEASURE_IS_FREQ    (FREQ_MEASURE == FreqMeasure::Freq)
 #define FREQ_AVE_PERIOD         (set.freq_avePeriod)
 #define FREQ_BILLING_TIME       (set.freq_billingTime)
 #define FREQ_TIME_STAMPS        (set.freq_timeStamps)
-#define FREQ_TEST               ((FreqTest)BIT_FL3(BIT_FREQ_TEST))
+#define FREQ_TEST               ((FreqTest)BIT_FL1(BIT_FREQ_TEST))
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
@@ -89,32 +87,26 @@ public:
     FreqTimeStamps  freq_timeStamps;                   ///< Метки времени
 
 #define FLAG_1      set.flag1
-    uint8           flag1;
-#define BIT_PARITY        0  ///< Parity   - флаг чётности Parity
-#define BIT_FREQ_INTERVAL 1  ///< Interval - интервал запуска измерений
-#define BIT_CONSOLE       2  ///<          - показ отладочной консоли
-#define BIT_BACK_BLACK    3  ///<          - если 1, то цвет фона - чёрный
-#define BIT_TUNE_FULL     4  ///<          - если 1, то засылка параметра происходит непрерывно во время настройки
-#define BIT_DBG_MODE      5  ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
-#define BIT_FREQ_ENABLED  6  ///<          - если 1, то отображаются показания частотомера
-#define BIT_STATISTICS    7  ///<          - если 1, то показывать статистику
-
-#define FLAG_2      set.flag2
-    uint8           flag2;
-#define BIT_LANGUAGE      0  ///< Language - выбранный язык
-#define BIT_CHAN_A        1  ///<          - бит, отвечающий за включённый канал A
-#define BIT_CHAN_B        2  ///<          - бит, отвечающий за включённый канал B
-#define BIT_CHANNEL       3  ///< Chan  - текущий выбранный канал
-#define BIT_SIZE_BYTE     4  ///< SizeByte - размер байта для связи по USB
-#define BIT_STOP_BIT      5  ///< StopBit  - количество стоп-бит
-#define BIT_FREQ_RESIST   6  ///< FreqResist - сопротивление входа частотомера
-#define BIT_FREQ_COUPLE   7  ///< FreqCouple - открытый/закрытый вход частотомера
-
-#define FLAG_3      set.flag3
-    uint8           flag3;
-#define BIT_FREQ_FILTR    0  ///< FreqFiltr   - ФНЧ частотомера
-#define BIT_FREQ_MEASURE  1  ///< FreqMeasure - измерение частоты или измерение периода
-#define BIT_FREQ_TEST     2  ///< FreqTest    - включение тестового режима
+    uint            flag1;
+#define BIT_PARITY        0   ///< Parity   - флаг чётности Parity
+#define BIT_FREQ_INTERVAL 1   ///< Interval - интервал запуска измерений
+#define BIT_CONSOLE       2   ///<          - показ отладочной консоли
+#define BIT_BACK_BLACK    3   ///<          - если 1, то цвет фона - чёрный
+#define BIT_TUNE_FULL     4   ///<          - если 1, то засылка параметра происходит непрерывно во время настройки
+#define BIT_DBG_MODE      5   ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
+#define BIT_FREQ_ENABLED  6   ///<          - если 1, то отображаются показания частотомера
+#define BIT_STATISTICS    7   ///<          - если 1, то показывать статистику
+#define BIT_LANGUAGE      8   ///< Language - выбранный язык
+#define BIT_CHAN_A        9   ///<          - бит, отвечающий за включённый канал A
+#define BIT_CHAN_B        10  ///<          - бит, отвечающий за включённый канал B
+#define BIT_CHANNEL       11  ///< Chan  - текущий выбранный канал
+#define BIT_SIZE_BYTE     12  ///< SizeByte - размер байта для связи по USB
+#define BIT_STOP_BIT      13  ///< StopBit  - количество стоп-бит
+#define BIT_FREQ_RESIST   14  ///< FreqResist - сопротивление входа частотомера
+#define BIT_FREQ_COUPLE   15  ///< FreqCouple - открытый/закрытый вход частотомера
+#define BIT_FREQ_FILTR    16  ///< FreqFiltr   - ФНЧ частотомера
+#define BIT_FREQ_MEASURE  17  ///< FreqMeasure - измерение частоты или измерение периода
+#define BIT_FREQ_TEST     18  ///< FreqTest    - включение тестового режима
 
     static void Save();
     static void Load(bool _default = false);
