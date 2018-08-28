@@ -278,9 +278,6 @@
     <ClInclude Include="..\..\Panel\src\Display\InputWindow.h">
       <Filter>Display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h">
-      <Filter>Display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h">
       <Filter>Display</Filter>
     </ClInclude>

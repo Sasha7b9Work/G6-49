@@ -392,7 +392,6 @@
     <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h" />
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h" />
     <ClInclude Include="..\..\Panel\src\Display\InputWindow.h" />
-    <ClInclude Include="..\..\Panel\src\Display\InputWindowStruct.h" />
     <ClInclude Include="..\..\Panel\src\Display\Painter.h" />
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Panel\src\Display\Text.h" />

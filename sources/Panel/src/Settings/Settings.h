@@ -1,7 +1,6 @@
 #pragma once
 #include "defines.h"
 #include "SettingsTypes.h"
-#include "Display/InputWindowStruct.h"
 #include "Menu/MenuItems.h"
 #include "Display/Colors.h"
 

@@ -3,7 +3,6 @@
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
 #include "Display/InputWindow.h"
-#include "Display/InputWindowStruct.h"
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"

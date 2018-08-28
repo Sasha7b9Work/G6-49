@@ -1,4 +1,3 @@
-#include "InputWindowStruct.h"
 #include "Log.h"
 #include "globals.h"
 #include "Display/Painter.h"
@@ -22,9 +21,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Wave::Form      InputWindow::Struct::form = Wave::Form::Sine;
+Wave::Form      InputWindow::Struct::form    = Wave::Form::Sine;
 Wave::Parameter InputWindow::Struct::m_param = Wave::Parameter::Amplitude;
-Chan            InputWindow::Struct::ch = Chan::A;
+Chan            InputWindow::Struct::ch      = Chan::A;
 
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
