@@ -22,10 +22,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static InputWindow::Struct *iws = 0;
-static Wave::Form           form = Wave::Form::Sine;
-static Wave::Parameter      m_param = Wave::Parameter::Amplitude;
-static Chan                 ch = Chan::A;
+Wave::Form      InputWindow::Struct::form = Wave::Form::Sine;
+Wave::Parameter InputWindow::Struct::m_param = Wave::Parameter::Amplitude;
+Chan            InputWindow::Struct::ch = Chan::A;
 
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
@@ -112,7 +111,7 @@ void InputWindow::Struct::RegLeft()
 
     if (TUNE_FULL)
     {
-        SendIWStoGenerator();
+        SendToGenerator();
     }
 }
 
@@ -143,7 +142,7 @@ void InputWindow::Struct::RegRight()
 
     if (TUNE_FULL)
     {
-        SendIWStoGenerator();
+        SendToGenerator();
     }
 }
 
@@ -423,10 +422,10 @@ void InputWindow::Struct::SaveValue()
     {
         IN_NUM_LOCK_MODE = false;
 
-        FillIWSfromInputBuffer();
+        FillFromInputBuffer();
     }
 
-    SendIWStoGenerator();
+    SendToGenerator();
 
     ADDITION_PAGE = 0;
 }
@@ -505,7 +504,7 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::SendIWStoGenerator()
+void InputWindow::Struct::SendToGenerator()
 {
     PARAMETER(ch, form, m_param) = *this;
 
@@ -529,7 +528,7 @@ void InputWindow::Struct::SendIWStoGenerator()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::FillIWSfromInputBuffer()
+void InputWindow::Struct::FillFromInputBuffer()
 {
     if (m_param == Wave::Parameter::Duration || m_param == Wave::Parameter::Delay)
     {

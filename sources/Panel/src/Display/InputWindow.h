@@ -85,19 +85,25 @@ public:
 
         void SaveValue();
 
-        char   inputBuffer[NUM_DIGITS + 1];
-        char   prevBuffer[NUM_DIGITS + 1];
-        int8   posComma;            ///< После какого знакоместа выводить запятую
-        int8   prevPosComma;
-        int8   hightLightDigit;     ///< Позиция подсвеченного знакоместа
-        uint8  order       : 3;
-        uint8  param       : 4;     ///< Перечисление типа Wave::Parameter
-        uint8  sign        : 2;     ///< Перечисление типа SignValue
-        uint   allow       : 1;     ///< Если 1, параметр разрешен для данного сигнала
-        uint   numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
+        static Wave::Form        form;
+        static Wave::Parameter   m_param;
+        static Chan              ch;
+
+        char     inputBuffer[NUM_DIGITS + 1];
+        char     prevBuffer[NUM_DIGITS + 1];
+        int8     posComma;            ///< После какого знакоместа выводить запятую
+        int8     prevPosComma;
+        int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
+        uint8    order       : 3;
+        uint8    param       : 4;     ///< Перечисление типа Wave::Parameter
+        uint8    sign        : 2;     ///< Перечисление типа SignValue
+        uint     allow       : 1;     ///< Если 1, параметр разрешен для данного сигнала
+        uint     numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
 
     private:
+
         void IncreaseDigit(int num);
+
         void DecreaseDigit(int num);
         /// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
         bool All0LeftWithThis(int num);
@@ -120,9 +126,9 @@ public:
         /// Восстанавливает ранее сохранённое значение
         void RestoreValue();
         /// Заполняет iws из inputBuffer
-        void FillIWSfromInputBuffer();
+        void FillFromInputBuffer();
         /// Заслать текущее значение в генератор
-        void SendIWStoGenerator();
+        void SendToGenerator();
     };
 
     static Struct m_iws;
