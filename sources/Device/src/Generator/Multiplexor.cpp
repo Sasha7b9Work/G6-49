@@ -10,10 +10,10 @@
     A0_MX2 - PF3
 */
 
-#define PIN_MXA_A0  GPIO_PIN_0
-#define PIN_MXA_A1  GPIO_PIN_1
-#define PIN_MXB_A0  GPIO_PIN_2
-#define PIN_MXB_A1  GPIO_PIN_3
+#define PIN_MX1_A0  GPIO_PIN_0
+#define PIN_MX1_A1  GPIO_PIN_1
+#define PIN_MX2_A0  GPIO_PIN_2
+#define PIN_MX2_A1  GPIO_PIN_3
 #define PIN_MX3_A0  GPIO_PIN_4
 #define PIN_MX3_A1  GPIO_PIN_5
 
@@ -23,7 +23,7 @@ void Multiplexor::Init()
 {
     GPIO_InitTypeDef  isGPIO =
     {
-        PIN_MXA_A0 | PIN_MXA_A1 | PIN_MXB_A0 | PIN_MXB_A1 | PIN_MX3_A0 | PIN_MX3_A1,
+        PIN_MX1_A0 | PIN_MX1_A1 | PIN_MX2_A0 | PIN_MX2_A1 | PIN_MX3_A0 | PIN_MX3_A1,
         GPIO_MODE_OUTPUT_PP,
         GPIO_PULLUP
     };
@@ -33,13 +33,13 @@ void Multiplexor::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Multiplexor::WriteRegister(Register reg, uint value)
 {
-    uint16 pinA0 = PIN_MXA_A0;
-    uint16 pinA1 = PIN_MXA_A1;
+    uint16 pinA0 = PIN_MX1_A0;
+    uint16 pinA1 = PIN_MX1_A1;
 
     if(reg == Register::Multiplexor2)
     {
-        pinA0 = PIN_MXB_A0;
-        pinA1 = PIN_MXB_A1;
+        pinA0 = PIN_MX2_A0;
+        pinA1 = PIN_MX2_A1;
     }
     else if(reg == Register::Multiplexor3)
     {
@@ -61,8 +61,8 @@ void Multiplexor::SetMode(Chan ch, Wave::Form form)
 
     static const uint16 pins[2][2] =
     {
-        {PIN_MXA_A0, PIN_MXA_A1},
-        {PIN_MXB_A0, PIN_MXB_A1}
+        {PIN_MX1_A0, PIN_MX1_A1},
+        {PIN_MX2_A0, PIN_MX2_A1}
     };
 
     if(form == Wave::Form::Sine)

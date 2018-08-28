@@ -34,6 +34,14 @@ struct GeneratorWritePin
         FREQ_METER_COUPLE,
         FREQ_METER_FILTR,
         FREQ_METER_CLK,     ///< Пин формирования тактов чтения измеренного значения
+        D0,
+        D1,
+        D2,
+        D3,
+        D4,
+        D5,
+        D6,
+        D7,
         Number
     } value;
     GeneratorWritePin(E v) : value(v) {};

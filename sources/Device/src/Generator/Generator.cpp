@@ -22,14 +22,23 @@ void Generator::Init()
     Multiplexor::Init();
     FreqMeter::Init();
 
+
     for(int i = 0; i < 2; i++)
     {
         Chan ch = (Chan::E)i;
-        Generator::EnableChannel(ch, true);
-        Generator::SetFormWave(ch, Wave::Form::Sine);
-        Generator::SetFrequency(ch, 2000.0f);
-        Generator::SetAmplitude(ch, 4096.0f);
-        Generator::SetOffset(ch, 2048.0f);
+        EnableChannel(ch, true);
+        /*
+        SetFormWave(ch, Wave::Form::Sine);
+        SetFrequency(ch, 2000.0f);
+        SetAmplitude(ch, 4096.0f);
+        SetOffset(ch, 2048.0f);
+        */
+
+        SetFormWave(ch, Wave::Form::RampPlus);
+        SetFrequency(ch, 2000.0f);
+        SetAmplitude(ch, 4096.0f);
+        SetOffset(ch, 2048.0f);
+
     }
 }
 
@@ -47,14 +56,7 @@ void Generator::SetFormWave(Chan ch, Wave::Form form)
 {
     if(ch < Chan::Number && form < Wave::Form::Number)
     {
-        static const GeneratorWritePin pin[Chan::Number] = { GeneratorWritePin::Pin_P1_AmplifierA, GeneratorWritePin::Pin_P2_AmplifierB };
-
-        waveIsSine = form == Wave::Form::Sine;
-
-        // Если нужен синус, то пишем ноль, чтобы обеспечить прохождение сигнала DDS. Иначе 1, чтобы обеспечить прохождение сигнала ПЛИС
-        CPU::WritePin(pin[ch], !waveIsSine);
-
-        if (!waveIsSine)
+        if (form != Wave::Form::Sine)
         {
             FPGA::SetWaveForm(form);
         }

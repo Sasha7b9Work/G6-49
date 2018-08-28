@@ -6,8 +6,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define ADDR_BANK           ((uint8*)NOR_MEMORY_ADRESS1)
-
 #define MAX_VALUE ((1 << 14) - 1)
 #define MIN_VALUE (0)
 
@@ -22,72 +20,6 @@ uint16             FPGA::dataB[FPGA_NUM_POINTS];
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FPGA::Init()
 {
-    GPIO_InitTypeDef isGPIO = 
-    {
-        0,
-        GPIO_MODE_AF_PP,
-        GPIO_NOPULL,
-        GPIO_SPEED_FREQ_VERY_HIGH,
-        GPIO_AF12_FSMC
-    };
-
-    //              D2           D3          NOE          NWE          NE1             D0           D1
-    isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOD, &isGPIO);
-
-    //               D4          D5            D6           D7
-    isGPIO.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOE, &isGPIO);
-
-    //               A0           A1          A2           A3           A4           A5            A6            A7            A8           A9
-    isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOF, &isGPIO);
-
-    //              A10
-    isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1;
-    HAL_GPIO_Init(GPIOG, &isGPIO);
-
-    NOR_HandleTypeDef hNOR =
-    {
-        FSMC_NORSRAM_DEVICE,
-        FSMC_NORSRAM_EXTENDED_DEVICE,
-        {
-            FSMC_NORSRAM_BANK1,             // NSBank
-            FSMC_DATA_ADDRESS_MUX_DISABLE,  // DataAddressMux
-            FSMC_MEMORY_TYPE_NOR,           // MemoryTpe
-            FSMC_NORSRAM_MEM_BUS_WIDTH_8,   // MemoryDataWidth
-            FSMC_BURST_ACCESS_MODE_DISABLE, // BurstAccessMode
-            FSMC_WAIT_SIGNAL_POLARITY_LOW,  // WaitSignalPolarity
-            FSMC_WRAP_MODE_DISABLE,         // WrapMode
-            FSMC_WAIT_TIMING_BEFORE_WS,     // WaitSignalActive
-            FSMC_WRITE_OPERATION_ENABLE,    // WriteOperation
-            FSMC_WAIT_SIGNAL_DISABLE,       // WaitSignal
-            FSMC_EXTENDED_MODE_DISABLE,     // ExtendedMode
-            FSMC_ASYNCHRONOUS_WAIT_DISABLE, // AsynchronousWait
-            FSMC_WRITE_BURST_DISABLE,       // WriteBurst
-            0,                              // ContinuousClock
-            0,                              // WriteFifo
-            FSMC_PAGE_SIZE_NONE             // PageSize
-        },
-        HAL_UNLOCKED, HAL_NOR_STATE_RESET
-    };
-
-    FSMC_NORSRAM_TimingTypeDef timing =
-    {
-/* AddressSetupTime      */ 15,     
-/* AddressHoldTime       */ 15,     
-/* DataSetupTime         */ 255,    
-/* BusTurnAroundDuration */ 15,     
-/* CLKDivision           */ 16,     
-/* DataLatency           */ 17,     
-/* AccessMode            */ FSMC_ACCESS_MODE_A
-    };
-
-    if (HAL_NOR_Init(&hNOR, &timing, NULL) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
     // Настраиваем выходы для записи в регистры ПЛИС
 
     CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, false);
@@ -287,32 +219,37 @@ void FPGA::CreateExponenteMinus()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SendData()
 {
-    WriteRegister(RG::_0_Control, 1);
-    uint8 *address = ADDR_BANK;
+    WriteRegister(RG::_0_Control, 0);
     
-    uint16 *data = dataA;
     for(int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        *address++ = (uint8)*data;
-        data++;
+        WriteByte((uint8)dataA[i]);
+        CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, true);
+        Timer::PauseOnTicks(10);
+        CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, false);
     }
-    data = dataA;
-    for(int i = 0; i < FPGA_NUM_POINTS; i++)
+
+    WriteRegister(RG::_0_Control, 1);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::WriteByte(uint8 byte)
+{
+    static const GeneratorWritePin pins[8] = 
     {
-        *address++ = (uint8)((*data) >> 8);
-        data++;
-    }
-    data = dataB;
-    for(int i = 0; i < FPGA_NUM_POINTS; i++)
+        GeneratorWritePin::D0,
+        GeneratorWritePin::D1,
+        GeneratorWritePin::D2,
+        GeneratorWritePin::D3,
+        GeneratorWritePin::D4,
+        GeneratorWritePin::D5,
+        GeneratorWritePin::D6,
+        GeneratorWritePin::D7
+    };
+
+    for(int i = 0; i < 8; i++)
     {
-        *address++ = (uint8)*data;
-        data++;
-    }
-    data = dataB;
-    for(int i = 0; i < FPGA_NUM_POINTS; i++)
-    {
-        *address++ = (uint8)((*data) >> 8);
-        data++;
+        CPU::WritePin(pins[i], GetBit(byte, i) == 1);
     }
 }
 

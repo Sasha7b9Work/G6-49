@@ -91,6 +91,8 @@ private:
 
     /// Заслать рассчитанные точки в плис
     static void SendData();
+    /// Записать байт в ПЛИС
+    static void WriteByte(uint8 byte);
     /// Записать значение в регистр
     static void WriteRegister(uint8 reg, uint64 value);
     /// Установить на A0_RG...A3_RG адрес, соответсвующй регистру

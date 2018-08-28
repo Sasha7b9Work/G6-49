@@ -36,7 +36,15 @@ static const StructPort registers[GeneratorWritePin::Number] =
     {GPIOE, GPIO_PIN_14},   // FREQ_METER_RESIST
     {GPIOE, GPIO_PIN_15},   // FREQ_METER_COUPLE
     {GPIOB, GPIO_PIN_10},   // FREQ_METER_FILTR
-    {GPIOC, GPIO_PIN_1}     // FREQ_METER_CLK
+    {GPIOC, GPIO_PIN_1},    // FREQ_METER_CLK
+    {GPIOD, GPIO_PIN_14},   // D0
+    {GPIOD, GPIO_PIN_15},   // D1
+    {GPIOD, GPIO_PIN_0},    // D2
+    {GPIOD, GPIO_PIN_1},    // D3
+    {GPIOE, GPIO_PIN_7},    // D4
+    {GPIOE, GPIO_PIN_8},    // D5
+    {GPIOE, GPIO_PIN_9},    // D6
+    {GPIOE, GPIO_PIN_10}    // D7
 };
 
 static const StructPort registersRead[GeneratorReadPin::Number] =
