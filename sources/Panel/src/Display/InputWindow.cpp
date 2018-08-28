@@ -9,12 +9,12 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define IN_NUM_LOCK_MODE    (iws.numLockMode)
+#define IN_NUM_LOCK_MODE    (m_iws.numLockMode)
 
 Chan                InputWindow::chan = Chan::A;
-Wave::Form            InputWindow::form = Wave::Form::Sine;
-Wave::Parameter       InputWindow::param = Wave::Parameter::Amplitude;
-InputWindowStruct   InputWindow::iws;
+Wave::Form          InputWindow::form = Wave::Form::Sine;
+Wave::Parameter     InputWindow::m_param = Wave::Parameter::Amplitude;
+InputWindow::Struct InputWindow::m_iws;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,10 +22,10 @@ void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
     form = WAVE_FORM(chan);
-    param = CURRENT_PARAMETER(form);
-    iws = INPUT_WINDOW_STRUCT(chan, form, param);
+    m_param = CURRENT_PARAMETER(form);
+    m_iws = INPUT_WINDOW_STRUCT(chan, form, m_param);
 
-	(&iws)->Fill(chan, form, param);
+	(&m_iws)->Fill(chan, form, m_param);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,11 +72,11 @@ void InputWindow::Draw()
 
     DrawDigits(x, y);
 
-    func[param](x + 10, y + 10);
+    func[m_param](x + 10, y + 10);
 
     if (IN_NUM_LOCK_MODE)
     {
-        InputWindowStruct::DrawInputField(10, y + 27);
+        Struct::DrawInputField(10, y + 27);
     }
 }
 
@@ -87,7 +87,7 @@ void InputWindow::DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Text::DrawBigText(x, y, 3, param.Name());
+    Text::DrawBigText(x, y, 3, m_param.Name());
 
     char buf[2] = "0";
 
@@ -99,7 +99,7 @@ void InputWindow::DrawDigits(int x, int y)
 
         Painter::SetColor(Color::FILL);
 
-        if (i == iws.hightLightDigit)
+        if (i == m_iws.hightLightDigit)
         {
             Text::SetFont(Font::Type::_UGO2);
             Text::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
@@ -107,15 +107,15 @@ void InputWindow::DrawDigits(int x, int y)
             Text::SetFont(Font::Type::_8);
         }
 
-        if (iws.inputBuffer[i])
+        if (m_iws.inputBuffer[i])
         {
-            buf[0] = iws.inputBuffer[i];
+            buf[0] = m_iws.inputBuffer[i];
             Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
         }
 
         x += 24;
 
-        if (iws.posComma == i)
+        if (m_iws.posComma == i)
         {
             Painter::FillRegion(x - 3, y + HEIGHT_DIGIT - 2, SIZE_TEXT, SIZE_TEXT + 1);
             x += 4;
@@ -123,7 +123,7 @@ void InputWindow::DrawDigits(int x, int y)
     }
 
     char buffer[10] = {0};
-    Text::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, (Order::E)iws.order, iws.param));
+    Text::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, (Order::E)m_iws.order, m_iws.param));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ void InputWindow::KeyLeft()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        InputWindowStruct::KeyLeft();
+        Struct::KeyLeft();
     }
 }
 
@@ -218,38 +218,38 @@ void InputWindow::KeyRight()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        InputWindowStruct::KeyRight();
+        Struct::KeyRight();
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::KeyEnter()
 {
-    InputWindowStruct::SaveValue();
+    Struct::SaveValue();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::ProcessContorl(Control control)
 {
-    if ((control >= Control::B_0 && control <= Control::B_9) || control.Is(Control::B_Dot))
+    if ((control >= Control::B_0 && control <= Control::B_9) || control.Is(Control::B_Dot) || control.Is(Control::B_Minus))
     {
         if (control.action.Is(Control::Action::Up))
         {
-            InputWindowStruct::PressKey(control);
+            Struct::PressKey(control);
         }
     }
     else if (control.Is(Control::REG_LEFT))
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            InputWindowStruct::RegLeft();
+            Struct::RegLeft();
         }
     }
     else if (control.Is(Control::REG_RIGHT))
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            InputWindowStruct::RegRight();
+            Struct::RegRight();
         }
     }
     else if ((control >= Control::B_F1 && control <= Control::B_F4) && control.action.Is(Control::Action::Up))

@@ -107,17 +107,17 @@ void FPGA::SetWaveForm(Wave::Form form)
     static const pFuncFpgaVV func[Wave::Form::Number] =
     {
         CreateSine,
-        CreateCosine,
-        CreateMeander,
+        //CreateCosine,
+        //CreateMeander,
         CreateRampPlus,
         CreateRampMinus,
-        CreateTriangle,
-        CreateTrapeze,
-        CreateImpulse,
-        CreateExponentePlus,
-        CreateExponenteMinus,
-        CreateNoise,
-        CreateFree
+        //CreateTriangle,
+        //CreateTrapeze,
+        //CreateImpulse,
+        //CreateExponentePlus,
+        //CreateExponenteMinus,
+        //CreateNoise,
+        //CreateFree
     };
     
     func[form]();

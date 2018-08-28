@@ -50,12 +50,51 @@ private:
     static void DrawDurationStady(int x, int y);
 
     static void DrawDutyFactor(int x, int y);
-
+    /// Канал, для которого вводится значение
     static Chan              chan;
+    /// Форма сигнала, для которого вводится значение
+    static Wave::Form        form;
+    /// Параметт, значение которого вводится
+    static Wave::Parameter   m_param;
 
-    static Wave::Form             form;
+public:
+    class Struct
+    {
+    public:
 
-    static Wave::Parameter        param;
+        void Fill(Chan ch, Wave::Form form, Wave::Parameter param);
 
-    static InputWindowStruct    iws;
+        char *StringValue();
+
+        float Value();
+
+        static void DrawInputField(int x, int y);
+
+        static void KeyLeft();
+
+        static void KeyRight();
+
+        static void RegLeft();
+
+        static void RegRight();
+
+        static void PressKey(Control key);
+
+        static void SaveValue();
+        /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
+        static void FillAllowParameters(Chan ch, Wave::Form form, AllowableParameters *allowParameters);
+
+        char   inputBuffer[NUM_DIGITS + 1];
+        char   prevBuffer[NUM_DIGITS + 1];
+        int8   posComma;            ///< После какого знакоместа выводить запятую
+        int8   prevPosComma;
+        int8   hightLightDigit;     ///< Позиция подсвеченного знакоместа
+        uint8  order : 3;
+        uint8  param : 4;           ///< Перечисление типа Wave::Parameter
+        uint8  sign : 2;            ///< Перечисление типа SignValue
+        uint   allow : 1;           ///< Если 1, параметр разрешен для данного сигнала
+        uint   numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
+    };
+
+    static Struct m_iws;
 };

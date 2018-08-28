@@ -65,16 +65,18 @@ void Multiplexor::SetMode(Chan ch, Wave::Form form)
         {PIN_MXB_A0, PIN_MXB_A1}
     };
 
-    if(form == Wave::Form::Sine || form == Wave::Form::Cosine)
+    if(form == Wave::Form::Sine)
     {
         SetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));
     }
+    /*
     else if(form == Wave::Form::Impulse)
     {
         ResetPin(PIN_MX(ch, 0));
         SetPin(PIN_MX(ch, 1));
     }
+    */
     else                                                // Для всех остальных форм сигнала используется ПЛИС
     {
         ResetPin(PIN_MX(ch, 0));

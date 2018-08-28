@@ -44,45 +44,6 @@ struct SignValue
     operator uint8() const { return (uint8)value; };
 };
 
-class InputWindowStruct
-{
-public:
-
-    void Fill(Chan ch, Wave::Form form, Wave::Parameter param);
-
-    char *StringValue();
-
-    float Value();
-
-    static void DrawInputField(int x, int y);
-
-    static void KeyLeft();
-
-    static void KeyRight();
-
-    static void RegLeft();
-
-    static void RegRight();
-
-    static void PressKey(Control key);
-
-    static void SaveValue();
-    /// «аполнить структуру allowParameters значени€ми в соответствии с допустимыми дл€ данных формы сигнала и канала
-    static void FillAllowParameters(Chan ch, Wave::Form form, AllowableParameters *allowParameters);
-
-	char          inputBuffer[NUM_DIGITS + 1];
-    char          prevBuffer[NUM_DIGITS + 1];
-    int8          posComma;                   ///< ѕосле какого знакоместа выводить зап€тую
-    int8          prevPosComma;
-	int8          hightLightDigit;            ///< ѕозици€ подсвеченного знакоместа
-	uint8         order                 : 3;
-    uint8         param                 : 4;  ///< ѕеречисление типа Wave::Parameter
-    uint8         sign                  : 2;  ///< ѕеречисление типа SignValue
-    uint          allow                 : 1;  ///< ≈сли 1, параметр разрешен дл€ данного сигнала
-    uint          numLockMode           : 1;  ///< 1, когда происходит клавишный (0...9) ввод значени€
-};
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *NameUnit(char buffer[10], Order order, Wave::Parameter parameter);
 

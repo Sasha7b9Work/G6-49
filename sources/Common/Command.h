@@ -5,7 +5,7 @@
 
 #ifdef WIN32
 #pragma warning(push)
-#pragma warning(disable:4514)
+#pragma warning(disable:4514 4623)
 #endif
 
 
@@ -81,17 +81,17 @@ public:
         enum E
         {
             Sine,           ///< Синус
-            Cosine,         ///< Косинус
-            Meander,        ///< Меандр
+            //Cosine,         ///< Косинус
+            //Meander,        ///< Меандр
             RampPlus,       ///< Пила+
             RampMinus,      ///< Пила-
-            Triangle,       ///< Треугольник
-            Trapeze,        ///< Трапеция
-            Impulse,        ///< Импульс
-            ExpPlus,        ///< Экспонента+
-            ExpMinus,       ///< Экспонента-
-            Noise,          ///< Шум
-            Free,           ///< Произвольный
+            //Triangle,       ///< Треугольник
+            //Trapeze,        ///< Трапеция
+            //Impulse,        ///< Импульс
+            //ExpPlus,        ///< Экспонента+
+            //ExpMinus,       ///< Экспонента-
+            //Noise,          ///< Шум
+            //Free,           ///< Произвольный
             Number
         } value;
         Form(E v) : value((E)v) { };

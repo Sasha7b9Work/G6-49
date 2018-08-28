@@ -1,6 +1,6 @@
 #pragma once
 #include "defines.h"
-#include "Display/InputWindowStruct.h"
+#include "Display/InputWindow.h"
 
 
 #define INPUT_WINDOW_STRUCT(ch, form, param)    (sig_structParameter[ch][form][param])
@@ -17,4 +17,4 @@
 #define PARAMETER_ORDER(ch, form, param)        (sig_structParameter[ch][form][param].order)
 #define PARAMETER_UNIT(ch, form, param)         (sig_structParameter[ch][form][param].param)
 
-extern InputWindowStruct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::Parameter::Number];
+extern InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::Parameter::Number];

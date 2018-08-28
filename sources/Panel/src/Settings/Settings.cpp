@@ -48,15 +48,15 @@ static const Settings defSet =
         Wave::Parameter::Frequency,                      // sig_parameter[NumForms]
         Wave::Parameter::Frequency,
         Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency,
+//        Wave::Parameter::Frequency
     },
     3,                      // menu_currentPage
     (Page*)0,               // menu_page
@@ -158,10 +158,6 @@ void TuneGenerator(Chan ch)
     Generator::SetFormWave(ch, WAVE_FORM(ch));
     Generator::SetParameter(ch, Wave::Parameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Frequency))->Value());
     Generator::SetParameter(ch, Wave::Parameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Amplitude))->Value());
-    Generator::SetParameter(ch, Wave::Parameter::Offset, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset))->Value());
-    if (form == Wave::Form::Impulse)
-    {
-        Generator::SetParameter(ch, Wave::Parameter::Duration, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Duration))->Value());
-    }
+    Generator::SetParameter(ch, Wave::Parameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset))->Value());
     Generator::SetParameter(ch, Wave::Parameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM(ch), Wave::Parameter::Offset))->Value());
 }

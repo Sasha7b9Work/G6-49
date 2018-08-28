@@ -38,9 +38,9 @@ static void ShiftToLeft();
 /// Возвращает true, если есть только одна крайняя справа цифра
 static bool OnlyOneRigthDigit();
 /// Возвращает число до запятой
-static int ValueBeforeComma(InputWindowStruct *iws);
+static int ValueBeforeComma(InputWindow::Struct *iws);
 /// Возвращает число после запятой
-static float ValueAfterComma(InputWindowStruct *iws);
+static float ValueAfterComma(InputWindow::Struct *iws);
 /// Переключает порядок на следующий по возрастанию
 static void IncreaseOrder();
 /// Восстанавливает ранее сохранённое значение
@@ -50,17 +50,17 @@ static void FillIWSfromInputBuffer();
 /// Заслать текущее значение в генератор
 static void SendIWStoGenerator();
 
-static InputWindowStruct *iws = 0;
-static Wave::Form           form = Wave::Form::Cosine;
+static InputWindow::Struct *iws = 0;
+static Wave::Form           form = Wave::Form::Sine;
 static Wave::Parameter      m_param = Wave::Parameter::Amplitude;
-static Chan               ch = Chan::A;
+static Chan                 ch = Chan::A;
 
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindowStruct::Fill(Chan ch_, Wave::Form form_, Wave::Parameter param_)
+void InputWindow::Struct::Fill(Chan ch_, Wave::Form form_, Wave::Parameter param_)
 {
     ch = ch_;
     form = form_;
@@ -91,7 +91,7 @@ void InputWindowStruct::Fill(Chan ch_, Wave::Form form_, Wave::Parameter param_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::KeyLeft()
+void InputWindow::Struct::KeyLeft()
 {
 	if (CURRENT_POS > 0)
 	{
@@ -102,7 +102,7 @@ void InputWindowStruct::KeyLeft()
 		--CURRENT_POS;
 		if (CURRENT_DIGIT == '.')
 		{
-            InputWindowStruct::KeyLeft();
+            InputWindow::Struct::KeyLeft();
 		}
 	}
     else
@@ -115,7 +115,7 @@ void InputWindowStruct::KeyLeft()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::KeyRight()
+void InputWindow::Struct::KeyRight()
 {
 	if (CURRENT_POS < NUM_DIGITS - 1)
 	{
@@ -126,7 +126,7 @@ void InputWindowStruct::KeyRight()
 		++CURRENT_POS;
 		if (CURRENT_DIGIT == '.')
 		{
-            InputWindowStruct::KeyRight();
+            InputWindow::Struct::KeyRight();
 		}
 	}
     else if(DIGIT(0) == '0')
@@ -136,7 +136,7 @@ void InputWindowStruct::KeyRight()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::RegLeft()
+void InputWindow::Struct::RegLeft()
 {
     DecreaseDigit(CURRENT_POS);
 
@@ -147,7 +147,7 @@ void InputWindowStruct::RegLeft()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::RegRight()
+void InputWindow::Struct::RegRight()
 {
 
     // Сохраняем значение
@@ -178,7 +178,7 @@ void InputWindowStruct::RegRight()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *InputWindowStruct::StringValue()
+char *InputWindow::Struct::StringValue()
 {
     static char buffer[20];
     buffer[0] = '\0';
@@ -373,7 +373,7 @@ static bool OnlyOneRigthDigit()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int ValueBeforeComma(InputWindowStruct *iws_)
+static int ValueBeforeComma(InputWindow::Struct *iws_)
 {
     int lowPos = iws_->posComma;     // Младший байт числа
 
@@ -391,7 +391,7 @@ static int ValueBeforeComma(InputWindowStruct *iws_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static float ValueAfterComma(InputWindowStruct *iws_)
+static float ValueAfterComma(InputWindow::Struct *iws_)
 {
     int retValue = 0;
     int pow = 1;
@@ -418,7 +418,7 @@ static void IncreaseOrder()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float InputWindowStruct::Value()
+float InputWindow::Struct::Value()
 {
     float value = ValueBeforeComma(this) + ValueAfterComma(this);
 
@@ -447,7 +447,7 @@ float InputWindowStruct::Value()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::SaveValue()
+void InputWindow::Struct::SaveValue()
 {
     if (IN_NUM_LOCK_MODE)
     {
@@ -472,12 +472,12 @@ static void RestoreValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::PressKey(Control key)
+void InputWindow::Struct::PressKey(Control key)
 {
     struct StrControl
     {
         Control control;
-        char         symbol;
+        char    symbol;
     };
 
     static const StrControl command[] =
@@ -511,7 +511,7 @@ void InputWindowStruct::PressKey(Control key)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::DrawInputField(int x, int y)
+void InputWindow::Struct::DrawInputField(int x, int y)
 {
     int width = 230;
     int height = 60;
@@ -535,7 +535,7 @@ void InputWindowStruct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindowStruct::FillAllowParameters(Chan ch_, Wave::Form form_, AllowableParameters *allowParameters)
+void InputWindow::Struct::FillAllowParameters(Chan ch_, Wave::Form form_, AllowableParameters *allowParameters)
 {
     for (int i = 0; i < Wave::Parameter::Number; i++)
     {
@@ -551,6 +551,7 @@ static void SendIWStoGenerator()
 
     if (m_param == Wave::Parameter::Delay)
     {
+        /*
         PARAMETER(Chan::B, Wave::Form(Wave::Form::Impulse), Wave::Parameter::Frequency) = 
             PARAMETER(Chan::B, Wave::Form(Wave::Form::Impulse), Wave::Parameter::Frequency);
         float frequency = PARAMETER(Chan::A, Wave::Form(Wave::Form::Impulse), Wave::Parameter::Frequency).Value();
@@ -558,6 +559,7 @@ static void SendIWStoGenerator()
 
         float value = PARAMETER(ch, form, m_param).Value();
         Generator::SetParameter(ch, m_param, value);
+        */
     }
     else
     {

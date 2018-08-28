@@ -63,8 +63,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
 
     static bool first = true;
 
-    static int yNoise[100];
-    static int yExp[100];
+    static volatile int yNoise[100];
+    static volatile int yExp[100];
 
     if (first)
     {
@@ -81,11 +81,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
 
     Wave::Form form = WAVE_FORM(chan);
 
-    if (form != Wave::Form::Free)
-    {
-        Painter::DrawVLine(x0, minY, maxY);
-        Painter::DrawHLine(aveY, x0, x0 + width);
-    }
+    Painter::DrawVLine(x0, minY, maxY);
+    Painter::DrawHLine(aveY, x0, x0 + width);
 
     if (form == Wave::Form::Sine)
     {
@@ -100,6 +97,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
+    /*
     else if(form == Wave::Form::Cosine)
     {
         float speed = 0.1f;
@@ -113,6 +111,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
         }
     }
+    */
+    /*
     else if(form == Wave::Form::Meander)
     {
         int dX = 40;
@@ -125,6 +125,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
         }
     }
+    */
     else if (form == Wave::Form::RampPlus)
     {
         int dX = 28;
@@ -144,6 +145,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY);
         }
     }
+    /*
     else if(form == Wave::Form::Triangle)
     {
         int dX = 38;
@@ -158,6 +160,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             }
         }
     }
+    */
+    /*
     else if(form == Wave::Form::Trapeze)
     {
         int dX = 20;
@@ -170,6 +174,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             x0 += 2 * dX;
         }
     }
+    */
+    /*
     else if (form == Wave::Form::Impulse)
     {
         int deltaX = 20;
@@ -181,6 +187,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             x0 += deltaX;
         }
     }
+    */
+    /*
     else if (form == Wave::Form::ExpPlus)
     {
         for(int i = 0; i < 2; i++)
@@ -193,6 +201,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
+    */
+    /*
     else if (form == Wave::Form::ExpMinus)
     {
         for (int i = 0; i < 2; i++)
@@ -205,6 +215,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x0 + 40 * (i + 1), yExp[40], aveY);
         }
     }
+    */
+    /*
     else if(form == Wave::Form::Noise)
     {
         int i = 0;
@@ -215,9 +227,12 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             i++;
         }
     }
+    */
+    /*
     else if(form == Wave::Form::Free)
     {
     }
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -232,7 +247,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
     Text::DrawText(22, y0 + 3, form.Name(), Color::FILL);
 
     AllowableParameters allowParameters;
-    InputWindowStruct::FillAllowParameters(ch, form, &allowParameters);
+    InputWindow::Struct::FillAllowParameters(ch, form, &allowParameters);
 
     for (int i = 0; i < Wave::Parameter::Number; i++)
     {

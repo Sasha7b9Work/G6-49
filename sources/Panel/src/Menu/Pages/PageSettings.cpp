@@ -12,14 +12,14 @@ Page *PageSignals::pointer = (Page *)&pSignals;
 extern ChoiceParameterBase parameters;
 ChoiceParameter *PageSignals::cpParameters = (ChoiceParameter *)&parameters;
 
-static uint8 waveForm = 0;
+static Wave::Form waveForm = Wave::Form::Sine;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
     waveForm = WAVE_FORM_CURRENT;
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    InputWindow::Struct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
 }
 
@@ -38,29 +38,28 @@ DEF_CHOICE_2( cChannel,                                                         
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::OnPress_Form(bool)
 {
-    Wave::Form form = Wave::Form((Wave::Form::E)waveForm);
-    WAVE_FORM(CURRENT_CHANNEL) = form;
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    WAVE_FORM(CURRENT_CHANNEL) = waveForm;
+    InputWindow::Struct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
     TuneGenerator(CURRENT_CHANNEL);
 }
 
-DEF_CHOICE_12( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
+DEF_CHOICE_3( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
     FORM_RU(Wave::Form::Sine),            FORM_EN(Wave::Form::Sine),        "Синус.",                       "Sinus.",
-    FORM_RU(Wave::Form::Cosine),          FORM_EN(Wave::Form::Cosine),      "Косинус.",                     "Cosine.",
-    FORM_RU(Wave::Form::Meander),         FORM_EN(Wave::Form::Meander),     "Меандр.",                      "Meander.",
+//    FORM_RU(Wave::Form::Cosine),          FORM_EN(Wave::Form::Cosine),      "Косинус.",                     "Cosine.",
+//    FORM_RU(Wave::Form::Meander),         FORM_EN(Wave::Form::Meander),     "Меандр.",                      "Meander.",
     FORM_RU(Wave::Form::RampPlus),        FORM_EN(Wave::Form::RampPlus),    "Нарастающая пила.",            "Growing saw.",
     FORM_RU(Wave::Form::RampMinus),       FORM_EN(Wave::Form::RampMinus),   "Убывающая пила.",              "Wrecking saw.",
-    FORM_RU(Wave::Form::Triangle),        FORM_EN(Wave::Form::Triangle),    "Треугольник.",                 "Triangle.",
-    FORM_RU(Wave::Form::Trapeze),         FORM_EN(Wave::Form::Trapeze),     "Трапеция.",                    "Trapeze.",
-    FORM_RU(Wave::Form::Impulse),         FORM_EN(Wave::Form::Impulse),     "Импульс.",                     "Impulse.",
-    FORM_RU(Wave::Form::ExpPlus),         FORM_EN(Wave::Form::ExpPlus),     "Возрастающая экспонента.",     "Growing exponent.",
-    FORM_RU(Wave::Form::ExpMinus),        FORM_EN(Wave::Form::ExpMinus),    "Убывающая экспонента.",        "Decreasing exponent.",
-    FORM_RU(Wave::Form::Noise),           FORM_EN(Wave::Form::Noise),       "Шум.",                         "Noise.",
-    FORM_RU(Wave::Form::Free),            FORM_EN(Wave::Form::Free),        "Произвольная форма сигнала.",  "Arbitrary waveform.",
+//    FORM_RU(Wave::Form::Triangle),        FORM_EN(Wave::Form::Triangle),    "Треугольник.",                 "Triangle.",
+//    FORM_RU(Wave::Form::Trapeze),         FORM_EN(Wave::Form::Trapeze),     "Трапеция.",                    "Trapeze.",
+//    FORM_RU(Wave::Form::Impulse),         FORM_EN(Wave::Form::Impulse),     "Импульс.",                     "Impulse.",
+//    FORM_RU(Wave::Form::ExpPlus),         FORM_EN(Wave::Form::ExpPlus),     "Возрастающая экспонента.",     "Growing exponent.",
+//    FORM_RU(Wave::Form::ExpMinus),        FORM_EN(Wave::Form::ExpMinus),    "Убывающая экспонента.",        "Decreasing exponent.",
+//    FORM_RU(Wave::Form::Noise),           FORM_EN(Wave::Form::Noise),       "Шум.",                         "Noise.",
+//    FORM_RU(Wave::Form::Free),            FORM_EN(Wave::Form::Free),        "Произвольная форма сигнала.",  "Arbitrary waveform.",
     waveForm, pSignals, FuncActive,     PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -84,7 +83,7 @@ DEF_CHOICE_PARAMETER(parameters,                                                
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки.",
     "Choosing a setting for customization.",
-    pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER(Wave::Form((Wave::Form::E)waveForm))),
+    pSignals, FuncActive, OnPress_SetParameter, (CURRENT_PARAMETER(waveForm)),
     true, true, true, true, false, false, false, false
 )
 
@@ -92,8 +91,8 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 void PageSignals::Init()
 {
     waveForm = WAVE_FORM_CURRENT;
-    InputWindowStruct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Form((Wave::Form::E)waveForm));
+    InputWindow::Struct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Form(waveForm));
 }
 
 DEF_PAGE_4
