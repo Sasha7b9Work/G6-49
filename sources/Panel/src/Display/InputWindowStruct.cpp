@@ -23,33 +23,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void IncreaseDigit(int num);
-static void DecreaseDigit(int num);
-/// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
-static bool All0LeftWithThis(int num);
-/// Возвращает true, елси все цифры слева и эта являются девятками
-static bool All9LeftWithThis(int num);
-/// Возвращает true, если среди цифр единственная единица и она находится в даной позиции
-static bool Only1InThis(int num);
-/// Сдвигает все разряды вправо
-static void ShiftToRight();
-/// Сдвиг всех разрядов влево
-static void ShiftToLeft();
-/// Возвращает true, если есть только одна крайняя справа цифра
-static bool OnlyOneRigthDigit();
-/// Возвращает число до запятой
-static int ValueBeforeComma(InputWindow::Struct *iws);
-/// Возвращает число после запятой
-static float ValueAfterComma(InputWindow::Struct *iws);
-/// Переключает порядок на следующий по возрастанию
-static void IncreaseOrder();
-/// Восстанавливает ранее сохранённое значение
-static void RestoreValue();
-/// Заполняет iws из inputBuffer
-static void FillIWSfromInputBuffer();
-/// Заслать текущее значение в генератор
-static void SendIWStoGenerator();
-
 static InputWindow::Struct *iws = 0;
 static Wave::Form           form = Wave::Form::Sine;
 static Wave::Parameter      m_param = Wave::Parameter::Amplitude;
@@ -199,7 +172,7 @@ char *InputWindow::Struct::StringValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void IncreaseDigit(int num)
+void InputWindow::Struct::IncreaseDigit(int num)
 {
     if (num < 0 || num >= NUM_DIGITS)
     {
@@ -224,7 +197,7 @@ static void IncreaseDigit(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DecreaseDigit(int num)
+void InputWindow::Struct::DecreaseDigit(int num)
 {
     if (num < 0 || num >= NUM_DIGITS)
     {
@@ -250,7 +223,7 @@ static void DecreaseDigit(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool All0LeftWithThis(int num)
+bool InputWindow::Struct::All0LeftWithThis(int num)
 {
     for (int i = num; i >= 0; i--)
     {
@@ -263,7 +236,7 @@ static bool All0LeftWithThis(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool All9LeftWithThis(int num)
+bool InputWindow::Struct::All9LeftWithThis(int num)
 {
     for (int i = num; i >= 0; i--)
     {
@@ -276,7 +249,7 @@ static bool All9LeftWithThis(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool Only1InThis(int num)
+bool InputWindow::Struct::Only1InThis(int num)
 {
     if (DIGIT(num) != '1')
     {
@@ -303,7 +276,7 @@ static bool Only1InThis(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ShiftToRight()
+void InputWindow::Struct::ShiftToRight()
 {
     for (int i = NUM_DIGITS - 2; i >= 0; i--)
     {
@@ -314,7 +287,7 @@ static void ShiftToRight()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ShiftToLeft()
+void InputWindow::Struct::ShiftToLeft()
 {
     for (int i = 1; i < NUM_DIGITS; i++)
     {
@@ -361,7 +334,7 @@ const char *NameUnit(char buffer[10], Order order, Wave::Parameter parameter)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnlyOneRigthDigit()
+bool InputWindow::Struct::OnlyOneRigthDigit()
 {
     char digitLast = DIGIT(NUM_DIGITS - 1);
 
@@ -373,7 +346,7 @@ static bool OnlyOneRigthDigit()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int ValueBeforeComma(InputWindow::Struct *iws_)
+int InputWindow::Struct::ValueBeforeComma(Struct *iws_)
 {
     int lowPos = iws_->posComma;     // Младший байт числа
 
@@ -391,7 +364,7 @@ static int ValueBeforeComma(InputWindow::Struct *iws_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static float ValueAfterComma(InputWindow::Struct *iws_)
+float InputWindow::Struct::ValueAfterComma(Struct *iws_)
 {
     int retValue = 0;
     int pow = 1;
@@ -407,7 +380,7 @@ static float ValueAfterComma(InputWindow::Struct *iws_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void IncreaseOrder()
+void InputWindow::Struct::IncreaseOrder()
 {
     if (iws->order < Order::Number - 1)
     {
@@ -462,7 +435,7 @@ void InputWindow::Struct::SaveValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void RestoreValue()
+void InputWindow::Struct::RestoreValue()
 {
     for (int i = 0; i < NUM_DIGITS; i++)
     {
@@ -545,7 +518,7 @@ void InputWindow::Struct::FillAllowParameters(Chan ch_, Wave::Form form_, Allowa
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendIWStoGenerator()
+void InputWindow::Struct::SendIWStoGenerator()
 {
     PARAMETER(ch, form, m_param) = *iws;
 
@@ -569,7 +542,7 @@ static void SendIWStoGenerator()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillIWSfromInputBuffer()
+void InputWindow::Struct::FillIWSfromInputBuffer()
 {
     if (m_param == Wave::Parameter::Duration || m_param == Wave::Parameter::Delay)
     {

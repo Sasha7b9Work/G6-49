@@ -94,6 +94,34 @@ public:
         uint8  sign : 2;            ///< Перечисление типа SignValue
         uint   allow : 1;           ///< Если 1, параметр разрешен для данного сигнала
         uint   numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
+
+    private:
+        static void IncreaseDigit(int num);
+        static void DecreaseDigit(int num);
+        /// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
+        static bool All0LeftWithThis(int num);
+        /// Возвращает true, елси все цифры слева и эта являются девятками
+        static bool All9LeftWithThis(int num);
+        /// Возвращает true, если среди цифр единственная единица и она находится в даной позиции
+        static bool Only1InThis(int num);
+        /// Сдвигает все разряды вправо
+        static void ShiftToRight();
+        /// Сдвиг всех разрядов влево
+        static void ShiftToLeft();
+        /// Возвращает true, если есть только одна крайняя справа цифра
+        static bool OnlyOneRigthDigit();
+        /// Возвращает число до запятой
+        static int ValueBeforeComma(InputWindow::Struct *iws);
+        /// Возвращает число после запятой
+        static float ValueAfterComma(InputWindow::Struct *iws);
+        /// Переключает порядок на следующий по возрастанию
+        static void IncreaseOrder();
+        /// Восстанавливает ранее сохранённое значение
+        static void RestoreValue();
+        /// Заполняет iws из inputBuffer
+        static void FillIWSfromInputBuffer();
+        /// Заслать текущее значение в генератор
+        static void SendIWStoGenerator();
     };
 
     static Struct m_iws;
