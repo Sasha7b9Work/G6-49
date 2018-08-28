@@ -56,7 +56,9 @@ void Generator::SetFormWave(Chan ch, Wave::Form form)
 {
     if(ch < Chan::Number && form < Wave::Form::Number)
     {
-        if (form != Wave::Form::Sine)
+        waveIsSine = form == Wave::Form::Sine;
+
+        if (!waveIsSine)
         {
             FPGA::SetWaveForm(form);
         }

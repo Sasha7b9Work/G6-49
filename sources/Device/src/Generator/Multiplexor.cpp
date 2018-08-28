@@ -70,13 +70,6 @@ void Multiplexor::SetMode(Chan ch, Wave::Form form)
         SetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));
     }
-    /*
-    else if(form == Wave::Form::Impulse)
-    {
-        ResetPin(PIN_MX(ch, 0));
-        SetPin(PIN_MX(ch, 1));
-    }
-    */
     else                                                // Для всех остальных форм сигнала используется ПЛИС
     {
         ResetPin(PIN_MX(ch, 0));
