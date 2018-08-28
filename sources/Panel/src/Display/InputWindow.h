@@ -20,6 +20,9 @@ public:
 
     static void ProcessContorl(Control control);
 
+    /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
+    static void FillAllowParameters(Chan ch, Wave::Form form, AllowableParameters *allowParameters);
+
 private:
     static void DrawAmplitude(int x, int y);
 
@@ -68,60 +71,58 @@ public:
 
         float Value();
 
-        static void DrawInputField(int x, int y);
+        void DrawInputField(int x, int y);
 
-        static void KeyLeft();
+        void KeyLeft();
 
-        static void KeyRight();
+        void KeyRight();
 
-        static void RegLeft();
+        void RegLeft();
 
-        static void RegRight();
+        void RegRight();
 
-        static void PressKey(Control key);
+        void PressKey(Control key);
 
-        static void SaveValue();
-        /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
-        static void FillAllowParameters(Chan ch, Wave::Form form, AllowableParameters *allowParameters);
+        void SaveValue();
 
         char   inputBuffer[NUM_DIGITS + 1];
         char   prevBuffer[NUM_DIGITS + 1];
         int8   posComma;            ///< После какого знакоместа выводить запятую
         int8   prevPosComma;
         int8   hightLightDigit;     ///< Позиция подсвеченного знакоместа
-        uint8  order : 3;
-        uint8  param : 4;           ///< Перечисление типа Wave::Parameter
-        uint8  sign : 2;            ///< Перечисление типа SignValue
-        uint   allow : 1;           ///< Если 1, параметр разрешен для данного сигнала
+        uint8  order       : 3;
+        uint8  param       : 4;     ///< Перечисление типа Wave::Parameter
+        uint8  sign        : 2;     ///< Перечисление типа SignValue
+        uint   allow       : 1;     ///< Если 1, параметр разрешен для данного сигнала
         uint   numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
 
     private:
-        static void IncreaseDigit(int num);
-        static void DecreaseDigit(int num);
+        void IncreaseDigit(int num);
+        void DecreaseDigit(int num);
         /// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
-        static bool All0LeftWithThis(int num);
+        bool All0LeftWithThis(int num);
         /// Возвращает true, елси все цифры слева и эта являются девятками
-        static bool All9LeftWithThis(int num);
+        bool All9LeftWithThis(int num);
         /// Возвращает true, если среди цифр единственная единица и она находится в даной позиции
-        static bool Only1InThis(int num);
+        bool Only1InThis(int num);
         /// Сдвигает все разряды вправо
-        static void ShiftToRight();
+        void ShiftToRight();
         /// Сдвиг всех разрядов влево
-        static void ShiftToLeft();
+        void ShiftToLeft();
         /// Возвращает true, если есть только одна крайняя справа цифра
-        static bool OnlyOneRigthDigit();
+        bool OnlyOneRigthDigit();
         /// Возвращает число до запятой
-        static int ValueBeforeComma(InputWindow::Struct *iws);
+        int ValueBeforeComma();
         /// Возвращает число после запятой
-        static float ValueAfterComma(InputWindow::Struct *iws);
+        float ValueAfterComma();
         /// Переключает порядок на следующий по возрастанию
-        static void IncreaseOrder();
+        void IncreaseOrder();
         /// Восстанавливает ранее сохранённое значение
-        static void RestoreValue();
+        void RestoreValue();
         /// Заполняет iws из inputBuffer
-        static void FillIWSfromInputBuffer();
+        void FillIWSfromInputBuffer();
         /// Заслать текущее значение в генератор
-        static void SendIWStoGenerator();
+        void SendIWStoGenerator();
     };
 
     static Struct m_iws;

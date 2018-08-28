@@ -19,7 +19,7 @@ static Wave::Form waveForm = Wave::Form::Sine;
 static void OnPress_Channel(bool)
 {
     waveForm = WAVE_FORM_CURRENT;
-    InputWindow::Struct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    InputWindow::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
 }
 
@@ -39,7 +39,7 @@ DEF_CHOICE_2( cChannel,                                                         
 void PageSignals::OnPress_Form(bool)
 {
     WAVE_FORM(CURRENT_CHANNEL) = waveForm;
-    InputWindow::Struct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    InputWindow::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
     TuneGenerator(CURRENT_CHANNEL);
 }
@@ -91,7 +91,7 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 void PageSignals::Init()
 {
     waveForm = WAVE_FORM_CURRENT;
-    InputWindow::Struct::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    InputWindow::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Form(waveForm));
 }
 

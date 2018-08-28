@@ -14,16 +14,15 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define CURRENT_POS         (iws->hightLightDigit)
-#define CURRENT_DIGIT       (iws->inputBuffer[CURRENT_POS])
-#define DIGIT(num)          (iws->inputBuffer[num])
-#define POS_COMMA           (iws->posComma)
-
-#define IN_NUM_LOCK_MODE    (iws->numLockMode)
+#define CURRENT_POS         (hightLightDigit)
+#define CURRENT_DIGIT       (inputBuffer[CURRENT_POS])
+#define DIGIT(num)          (inputBuffer[num])
+#define POS_COMMA           (posComma)
+#define IN_NUM_LOCK_MODE    (numLockMode)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static InputWindow::Struct *iws = 0;
+//static InputWindow::Struct *iws = 0;
 static Wave::Form           form = Wave::Form::Sine;
 static Wave::Parameter      m_param = Wave::Parameter::Amplitude;
 static Chan                 ch = Chan::A;
@@ -38,21 +37,19 @@ void InputWindow::Struct::Fill(Chan ch_, Wave::Form form_, Wave::Parameter param
     ch = ch_;
     form = form_;
     m_param = param_;
-    iws = this;
-
-    IN_NUM_LOCK_MODE = false;
+    numLockMode = false;
 
     memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
 
 	for (int i = 0; i < NUM_DIGITS; i++)
 	{
-		iws->inputBuffer[i] = PARAMETER_DIG(ch, form, m_param, i);
+		inputBuffer[i] = PARAMETER_DIG(ch, form, m_param, i);
 	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
-		if (iws->inputBuffer[i] == 0)
+		if (inputBuffer[i] == 0)
 		{
-			iws->inputBuffer[i] = '0';
+			inputBuffer[i] = '0';
 		}
 		else
 		{
@@ -60,27 +57,27 @@ void InputWindow::Struct::Fill(Chan ch_, Wave::Form form_, Wave::Parameter param
 		}
 	}
 
-	CURRENT_POS = DIGIT(NUM_DIGITS - 1) == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
+	hightLightDigit = inputBuffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::KeyLeft()
 {
-	if (CURRENT_POS > 0)
+	if (hightLightDigit > 0)
 	{
-		if (CURRENT_POS == 1 && DIGIT(0) == '.')
+		if (hightLightDigit == 1 && inputBuffer[0] == '.')
 		{
 			return;
 		}
-		--CURRENT_POS;
-		if (CURRENT_DIGIT == '.')
+		--hightLightDigit;
+		if (inputBuffer[hightLightDigit] == '.')
 		{
             InputWindow::Struct::KeyLeft();
 		}
 	}
     else
     {
-        if (!OnlyOneRigthDigit() && POS_COMMA != NUM_DIGITS - 1)
+        if (!OnlyOneRigthDigit() && posComma != NUM_DIGITS - 1)
         {
             ShiftToRight();
         }
@@ -90,19 +87,19 @@ void InputWindow::Struct::KeyLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::KeyRight()
 {
-	if (CURRENT_POS < NUM_DIGITS - 1)
+	if (hightLightDigit < NUM_DIGITS - 1)
 	{
-		if (CURRENT_POS == NUM_DIGITS - 2 && DIGIT(NUM_DIGITS - 1) == '.')
+		if (hightLightDigit == NUM_DIGITS - 2 && inputBuffer[NUM_DIGITS - 1] == '.')
 		{
 			return;
 		}
-		++CURRENT_POS;
-		if (CURRENT_DIGIT == '.')
+		++hightLightDigit;
+		if (inputBuffer[hightLightDigit] == '.')
 		{
             InputWindow::Struct::KeyRight();
 		}
 	}
-    else if(DIGIT(0) == '0')
+    else if(inputBuffer[0] == '0')
     {
         ShiftToLeft();
     }
@@ -111,7 +108,7 @@ void InputWindow::Struct::KeyRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::RegLeft()
 {
-    DecreaseDigit(CURRENT_POS);
+    DecreaseDigit(hightLightDigit);
 
     if (TUNE_FULL)
     {
@@ -126,19 +123,19 @@ void InputWindow::Struct::RegRight()
     // Сохраняем значение
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        iws->prevBuffer[i] = DIGIT(i);
+        prevBuffer[i] = inputBuffer[i];
     }
-    iws->prevPosComma = iws->posComma;
+    prevPosComma = posComma;
 
-    IncreaseDigit(CURRENT_POS);
+    IncreaseDigit(hightLightDigit);
 
-    if (iws->Value() > Wave::Parameter(iws->param).MaxValue())
+    if (Value() > Wave::Parameter(param).MaxValue())
     {
         RestoreValue();
     }
     else
     {
-        if (ValueBeforeComma(iws) > 999)
+        if (ValueBeforeComma() > 999)
         {
             IncreaseOrder();
         }
@@ -161,7 +158,7 @@ char *InputWindow::Struct::StringValue()
         char str[2] = {0, 0};
         str[0] = inputBuffer[i];
         strcat(buffer, str);
-        if (iws->posComma == i)
+        if (posComma == i)
         {
             str[0] = '.';
             strcat(buffer, str);
@@ -182,8 +179,8 @@ void InputWindow::Struct::IncreaseDigit(int num)
     if (All9LeftWithThis(num))
     {
         ShiftToRight();
-        ++CURRENT_POS;
-        IncreaseDigit(CURRENT_POS);
+        ++hightLightDigit;
+        IncreaseDigit(hightLightDigit);
     }
     else
     {
@@ -346,9 +343,9 @@ bool InputWindow::Struct::OnlyOneRigthDigit()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int InputWindow::Struct::ValueBeforeComma(Struct *iws_)
+int InputWindow::Struct::ValueBeforeComma()
 {
-    int lowPos = iws_->posComma;     // Младший байт числа
+    int lowPos = posComma;     // Младший байт числа
 
     int retValue = 0;
 
@@ -356,7 +353,7 @@ int InputWindow::Struct::ValueBeforeComma(Struct *iws_)
 
     for (int i = lowPos; i >= 0; i--)
     {
-        retValue += (0x0f & iws_->inputBuffer[i]) * pow;
+        retValue += (0x0f & inputBuffer[i]) * pow;
         pow *= 10;
     }
 
@@ -364,13 +361,13 @@ int InputWindow::Struct::ValueBeforeComma(Struct *iws_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float InputWindow::Struct::ValueAfterComma(Struct *iws_)
+float InputWindow::Struct::ValueAfterComma()
 {
     int retValue = 0;
     int pow = 1;
-    for (int i = NUM_DIGITS - 1; i > iws_->posComma; i--)
+    for (int i = NUM_DIGITS - 1; i > posComma; i--)
     {
-        char digit = iws_->inputBuffer[i];
+        char digit = inputBuffer[i];
         digit &= 0x0f;
         retValue += digit * pow;
         pow *= 10;
@@ -382,9 +379,9 @@ float InputWindow::Struct::ValueAfterComma(Struct *iws_)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::IncreaseOrder()
 {
-    if (iws->order < Order::Number - 1)
+    if (order < Order::Number - 1)
     {
-        iws->order = (Order)(Order::E)((uint)iws->order + 1);
+        order = (Order)(Order::E)((uint)order + 1);
 
         POS_COMMA -= 3;
     }
@@ -393,7 +390,7 @@ void InputWindow::Struct::IncreaseOrder()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float InputWindow::Struct::Value()
 {
-    float value = ValueBeforeComma(this) + ValueAfterComma(this);
+    float value = ValueBeforeComma() + ValueAfterComma();
 
     if (order == Order::Nano)
     {
@@ -439,9 +436,9 @@ void InputWindow::Struct::RestoreValue()
 {
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        DIGIT(i) = iws->prevBuffer[i];
+        DIGIT(i) = prevBuffer[i];
     }
-    iws->posComma = iws->prevPosComma;
+    posComma = prevPosComma;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -508,19 +505,9 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::FillAllowParameters(Chan ch_, Wave::Form form_, AllowableParameters *allowParameters)
-{
-    for (int i = 0; i < Wave::Parameter::Number; i++)
-    {
-        allowParameters->allow[i] = INPUT_WINDOW_STRUCT(ch_, form_, i).allow;
-    }
-}
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::SendIWStoGenerator()
 {
-    PARAMETER(ch, form, m_param) = *iws;
+    PARAMETER(ch, form, m_param) = *this;
 
     if (m_param == Wave::Parameter::Delay)
     {
@@ -546,11 +533,11 @@ void InputWindow::Struct::FillIWSfromInputBuffer()
 {
     if (m_param == Wave::Parameter::Duration || m_param == Wave::Parameter::Delay)
     {
-        iws->order = Order::Micro;
+        order = Order::Micro;
     }
     else
     {
-        iws->order = Order::One;
+        order = Order::One;
     }
 
     if (SU::FindSymbol(m_inputBuffer, '.') == -1)             // Если точки нету
@@ -579,16 +566,16 @@ void InputWindow::Struct::FillIWSfromInputBuffer()
                 m_inputBuffer[pos + 4] = '0';
             }
 
-            iws->order = (Order::E)((uint)iws->order - 1);
+            order = (Order::E)((uint)order - 1);
         }
     }
 
-    if (iws->sign != SignValue::None)
+    if (sign != SignValue::None)
     {
-        iws->sign = (atof(m_inputBuffer) >= 0.0) ? SignValue::Plus : SignValue::Minus;
+        sign = (atof(m_inputBuffer) >= 0.0) ? SignValue::Plus : SignValue::Minus;
     }
 
-    iws->hightLightDigit = NUM_DIGITS - 1;
+    hightLightDigit = NUM_DIGITS - 1;
 
     while ((int)fabs(atof(m_inputBuffer)) > 999)    // Пока целая часть числа в inputBuffer > 999
     {
@@ -602,7 +589,7 @@ void InputWindow::Struct::FillIWSfromInputBuffer()
 
         m_inputBuffer[pos - 3] = '.';               // И ставим точку слева от этой тройки
 
-        iws->order = (Order::E)((uint)iws->order + 1); // И увеличиваем степень на три порядка
+        order = (Order::E)((uint)order + 1); // И увеличиваем степень на три порядка
     }
 
     // В этой точке целая часть числа уже не превышает 999
@@ -612,16 +599,16 @@ void InputWindow::Struct::FillIWSfromInputBuffer()
     int intValue = (int)value;
 
     // Заносим целую часть числа в буфер
-    sprintf(iws->inputBuffer, "%d", intValue);
+    sprintf(inputBuffer, "%d", intValue);
 
-    iws->posComma = (int8)strlen(iws->inputBuffer) - 1;
+    posComma = (int8)strlen(inputBuffer) - 1;
 
-    int numDigits = NUM_DIGITS - (int)strlen(iws->inputBuffer);      // Столько цифр нужно записать после запятой
+    int numDigits = NUM_DIGITS - (int)strlen(inputBuffer);      // Столько цифр нужно записать после запятой
 
     int pos = SU::FindSymbol(m_inputBuffer, '.');       // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
 
     for (int i = 0; i < numDigits; i++)
     {
-        iws->inputBuffer[iws->posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
+        inputBuffer[posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
     }
 }

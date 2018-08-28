@@ -76,7 +76,7 @@ void InputWindow::Draw()
 
     if (IN_NUM_LOCK_MODE)
     {
-        Struct::DrawInputField(10, y + 27);
+        m_iws.DrawInputField(10, y + 27);
     }
 }
 
@@ -209,7 +209,7 @@ void InputWindow::KeyLeft()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        Struct::KeyLeft();
+        m_iws.KeyLeft();
     }
 }
 
@@ -218,14 +218,14 @@ void InputWindow::KeyRight()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        Struct::KeyRight();
+        m_iws.KeyRight();
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::KeyEnter()
 {
-    Struct::SaveValue();
+    m_iws.SaveValue();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -235,25 +235,34 @@ void InputWindow::ProcessContorl(Control control)
     {
         if (control.action.Is(Control::Action::Up))
         {
-            Struct::PressKey(control);
+            m_iws.PressKey(control);
         }
     }
     else if (control.Is(Control::REG_LEFT))
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            Struct::RegLeft();
+            m_iws.RegLeft();
         }
     }
     else if (control.Is(Control::REG_RIGHT))
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            Struct::RegRight();
+            m_iws.RegRight();
         }
     }
     else if ((control >= Control::B_F1 && control <= Control::B_F4) && control.action.Is(Control::Action::Up))
     {
         Menu::CurrentPage()->GetItem(control - Control::B_F1)->Press(control);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::FillAllowParameters(Chan ch_, Wave::Form form_, AllowableParameters *allowParameters)
+{
+    for (int i = 0; i < Wave::Parameter::Number; i++)
+    {
+        allowParameters->allow[i] = INPUT_WINDOW_STRUCT(ch_, form_, i).allow;
     }
 }

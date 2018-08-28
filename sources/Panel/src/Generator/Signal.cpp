@@ -247,7 +247,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
     Text::DrawText(22, y0 + 3, form.Name(), Color::FILL);
 
     AllowableParameters allowParameters;
-    InputWindow::Struct::FillAllowParameters(ch, form, &allowParameters);
+    InputWindow::FillAllowParameters(ch, form, &allowParameters);
 
     for (int i = 0; i < Wave::Parameter::Number; i++)
     {
