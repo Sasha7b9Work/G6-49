@@ -23,13 +23,5 @@ int main()
     {
         FreqMeter::Update();
         Interface::Update();
-/*        
-        if(HAL_GetTick() - prevTime > 100)
-        {
-            generator.SetOffset(A, 1000.0f);
-            generator.SetOffset(B, 3000.0f);
-            prevTime = HAL_GetTick();
-        }
-        */
     }
 }

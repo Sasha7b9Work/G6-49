@@ -49,8 +49,6 @@ DEF_CHOICE_3( cForm,                                                            
     "Выбор формы сигнала.",
     "Select waveform.",
     FORM_RU(Wave::Form::Sine),            FORM_EN(Wave::Form::Sine),        "Синус.",                       "Sinus.",
-//    FORM_RU(Wave::Form::Cosine),          FORM_EN(Wave::Form::Cosine),      "Косинус.",                     "Cosine.",
-//    FORM_RU(Wave::Form::Meander),         FORM_EN(Wave::Form::Meander),     "Меандр.",                      "Meander.",
     FORM_RU(Wave::Form::RampPlus),        FORM_EN(Wave::Form::RampPlus),    "Нарастающая пила.",            "Growing saw.",
     FORM_RU(Wave::Form::RampMinus),       FORM_EN(Wave::Form::RampMinus),   "Убывающая пила.",              "Wrecking saw.",
 //    FORM_RU(Wave::Form::Triangle),        FORM_EN(Wave::Form::Triangle),    "Треугольник.",                 "Triangle.",
@@ -60,6 +58,8 @@ DEF_CHOICE_3( cForm,                                                            
 //    FORM_RU(Wave::Form::ExpMinus),        FORM_EN(Wave::Form::ExpMinus),    "Убывающая экспонента.",        "Decreasing exponent.",
 //    FORM_RU(Wave::Form::Noise),           FORM_EN(Wave::Form::Noise),       "Шум.",                         "Noise.",
 //    FORM_RU(Wave::Form::Free),            FORM_EN(Wave::Form::Free),        "Произвольная форма сигнала.",  "Arbitrary waveform.",
+//    FORM_RU(Wave::Form::Cosine),          FORM_EN(Wave::Form::Cosine),      "Косинус.",                     "Cosine.",
+//    FORM_RU(Wave::Form::Meander),         FORM_EN(Wave::Form::Meander),     "Меандр.",                      "Meander.",
     waveForm, pSignals, FuncActive,     PageSignals::OnPress_Form, FuncDraw
 )
 
