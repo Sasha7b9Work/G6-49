@@ -151,7 +151,7 @@ void Settings::Load(bool _default)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void TuneGenerator(Chan ch)
+void Settings::TuneGenerator(Chan ch)
 {
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     Wave::Form form = WAVE_FORM(ch);

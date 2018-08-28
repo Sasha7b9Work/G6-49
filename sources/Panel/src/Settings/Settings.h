@@ -118,13 +118,12 @@ public:
 
     static void Save();
     static void Load(bool _default = false);
+    static void TuneGenerator(Chan ch);
 };
 
 #pragma pack(pop)
 
 extern Settings set;
-
-void TuneGenerator(Chan ch);
 
 
 #ifdef WIN32

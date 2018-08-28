@@ -41,7 +41,7 @@ void PageSignals::OnPress_Form(bool)
     WAVE_FORM(CURRENT_CHANNEL) = waveForm;
     InputWindow::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
-    TuneGenerator(CURRENT_CHANNEL);
+    Settings::TuneGenerator(CURRENT_CHANNEL);
 }
 
 DEF_CHOICE_3( cForm,                                                                                              //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘Œ–Ã¿ ---
