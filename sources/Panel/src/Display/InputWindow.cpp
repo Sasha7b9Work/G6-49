@@ -107,15 +107,15 @@ void InputWindow::DrawDigits(int x, int y)
             Text::SetFont(Font::Type::_8);
         }
 
-        if (m_iws.inputBuffer[i])
+        if (m_iws.SymbolInPos(i))
         {
-            buf[0] = m_iws.inputBuffer[i];
+            buf[0] = m_iws.SymbolInPos(i);
             Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
         }
 
         x += 24;
 
-        if (m_iws.posComma == i)
+        if (m_iws.PosComma() == i)
         {
             Painter::FillRegion(x - 3, y + HEIGHT_DIGIT - 2, SIZE_TEXT, SIZE_TEXT + 1);
             x += 4;

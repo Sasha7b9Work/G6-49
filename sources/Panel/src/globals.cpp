@@ -6,10 +6,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
 {
             {
             {                                                                           // [A][Form::Sine]
-/* Frequency */ {"20000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
-/* Period    */ {"05000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
+/* Frequency */ {"20000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0, 0.1f, 30000000.0f},
+/* Period    */ {"05000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0, 3.3333333333e-8f},
 /* Amplitude */ {"50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0, 0.0f, 10.0f},
-/* Offset    */ {"20480", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
+/* Offset    */ {"20480", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Offset,    SignValue::Plus, 1, 0, -5.0f, 5.0f},
 /* Duration  */ {},
 /* DutyRatio */ {},
 /* Phase     */ {},
