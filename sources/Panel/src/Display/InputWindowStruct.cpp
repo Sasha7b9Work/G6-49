@@ -14,8 +14,8 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CURRENT_POS         (hightLightDigit)
-#define CURRENT_DIGIT       (inputBuffer[CURRENT_POS])
-#define DIGIT(num)          (inputBuffer[num])
+#define DIGIT(num)          (buffer[num])
+#define CURRENT_DIGIT       (buffer[CURRENT_POS])
 #define POS_COMMA           (posComma)
 #define IN_NUM_LOCK_MODE    (numLockMode)
 
@@ -41,13 +41,13 @@ void InputWindow::Struct::Fill(Chan ch_, Wave::Form form_, Wave::Parameter param
 
 	for (int i = 0; i < NUM_DIGITS; i++)
 	{
-		inputBuffer[i] = PARAMETER_DIG(ch, form, m_param, i);
+		DIGIT(i) = PARAMETER_DIG(ch, form, m_param, i);
 	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
-		if (inputBuffer[i] == 0)
+		if (DIGIT(i) == 0)
 		{
-			inputBuffer[i] = '0';
+			DIGIT(i) = '0';
 		}
 		else
 		{
@@ -55,19 +55,7 @@ void InputWindow::Struct::Fill(Chan ch_, Wave::Form form_, Wave::Parameter param
 		}
 	}
 
-	hightLightDigit = inputBuffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-char InputWindow::Struct::SymbolInPos(int pos)
-{
-    return DIGIT(pos);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-int8 InputWindow::Struct::PosComma()
-{
-    return posComma;
+	hightLightDigit = buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -75,12 +63,12 @@ void InputWindow::Struct::KeyLeft()
 {
 	if (hightLightDigit > 0)
 	{
-		if (hightLightDigit == 1 && inputBuffer[0] == '.')
+		if (hightLightDigit == 1 && DIGIT(0) == '.')
 		{
 			return;
 		}
 		--hightLightDigit;
-		if (inputBuffer[hightLightDigit] == '.')
+		if (CURRENT_DIGIT == '.')
 		{
             InputWindow::Struct::KeyLeft();
 		}
@@ -99,17 +87,17 @@ void InputWindow::Struct::KeyRight()
 {
 	if (hightLightDigit < NUM_DIGITS - 1)
 	{
-		if (hightLightDigit == NUM_DIGITS - 2 && inputBuffer[NUM_DIGITS - 1] == '.')
+		if (hightLightDigit == NUM_DIGITS - 2 && buffer[NUM_DIGITS - 1] == '.')
 		{
 			return;
 		}
 		++hightLightDigit;
-		if (inputBuffer[hightLightDigit] == '.')
+		if (CURRENT_DIGIT == '.')
 		{
             InputWindow::Struct::KeyRight();
 		}
 	}
-    else if(inputBuffer[0] == '0')
+    else if(DIGIT(0) == '0')
     {
         ShiftToLeft();
     }
@@ -146,22 +134,22 @@ void InputWindow::Struct::RegRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *InputWindow::Struct::StringValue()
 {
-    static char buffer[20];
-    buffer[0] = '\0';
+    static char buf[20];
+    buf[0] = '\0';
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
         char str[2] = {0, 0};
-        str[0] = inputBuffer[i];
-        strcat(buffer, str);
+        str[0] = DIGIT(i);
+        strcat(buf, str);
         if (posComma == i)
         {
             str[0] = '.';
-            strcat(buffer, str);
+            strcat(buf, str);
         }
     }
 
-    return buffer;
+    return buf;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -368,7 +356,7 @@ int InputWindow::Struct::ValueBeforeComma()
 
     for (int i = lowPos; i >= 0; i--)
     {
-        retValue += (0x0f & inputBuffer[i]) * pow;
+        retValue += (0x0f & DIGIT(i)) * pow;
         pow *= 10;
     }
 
@@ -382,7 +370,7 @@ float InputWindow::Struct::ValueAfterComma()
     int pow = 1;
     for (int i = NUM_DIGITS - 1; i > posComma; i--)
     {
-        char digit = inputBuffer[i];
+        char digit = DIGIT(i);
         digit &= 0x0f;
         retValue += digit * pow;
         pow *= 10;
@@ -604,16 +592,16 @@ void InputWindow::Struct::FillFromInputBuffer()
     int intValue = (int)value;
 
     // Заносим целую часть числа в буфер
-    sprintf(inputBuffer, "%d", intValue);
+    sprintf(buffer, "%d", intValue);
 
-    posComma = (int8)strlen(inputBuffer) - 1;
+    posComma = (int8)strlen(buffer) - 1;
 
-    int numDigits = NUM_DIGITS - (int)strlen(inputBuffer);      // Столько цифр нужно записать после запятой
+    int numDigits = NUM_DIGITS - (int)strlen(buffer);      // Столько цифр нужно записать после запятой
 
     int pos = SU::FindSymbol(m_inputBuffer, '.');       // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
 
     for (int i = 0; i < numDigits; i++)
     {
-        inputBuffer[posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
+        buffer[posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
     }
 }

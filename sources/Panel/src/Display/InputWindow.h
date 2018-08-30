@@ -132,11 +132,8 @@ public:
         static Wave::Form        form;
         static Wave::Parameter   m_param;
         static Chan              ch;
-        /// Возвращает символ, размещённый в позиции pos - без учёта позиции знака
-        char SymbolInPos(int pos);
-        int8 PosComma();
 
-        char     inputBuffer[NUM_DIGITS + 1];
+        char     buffer[NUM_DIGITS + 1];    ///< В этом буфере хранится знак числа, а затем цифры с точкой
         int8     posComma;            ///< После какого знакоместа выводить запятую
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
         uint8    order       : 3;

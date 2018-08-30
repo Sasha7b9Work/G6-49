@@ -13,7 +13,7 @@
 #define FREQUENCY_UNIT_STR(ch, form)            (FREQUENCY(ch, form).strUnits[LANGUAGE])
 
 #define PARAMETER(ch, form, param)              (sig_structParameter[ch][form][param])
-#define PARAMETER_DIG(ch, form, param, digit)   (PARAMETER(ch, form, param).inputBuffer[digit])
+#define PARAMETER_DIG(ch, form, param, digit)   (PARAMETER(ch, form, param).buffer[digit])
 #define PARAMETER_ORDER(ch, form, param)        (sig_structParameter[ch][form][param].order)
 #define PARAMETER_UNIT(ch, form, param)         (sig_structParameter[ch][form][param].param)
 
