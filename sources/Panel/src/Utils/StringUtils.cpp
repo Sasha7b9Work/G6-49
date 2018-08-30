@@ -772,3 +772,10 @@ char SU::ToUpper(char symbol)
     }
     return symbol;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void SU::ConcatenateSymbol(char *str, char symbol)
+{
+    char con[2] = {symbol, 0};
+    strcat(str, con);
+}

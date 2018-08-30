@@ -137,17 +137,15 @@ char *InputWindow::Struct::StringValue()
     static char buf[20];
     buf[0] = '\0';
 
-    char str[2] = {sign, 0};
-    strcat(buf, str);
+    SU::ConcatenateSymbol(buf, sign);
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        str[0] = DIGIT(i);
-        strcat(buf, str);
+        SU::ConcatenateSymbol(buf, DIGIT(i));
+
         if (posComma == i)
         {
-            str[0] = '.';
-            strcat(buf, str);
+            SU::ConcatenateSymbol(buf, '.');
         }
     }
 

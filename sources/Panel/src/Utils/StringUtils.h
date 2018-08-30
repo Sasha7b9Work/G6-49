@@ -83,6 +83,8 @@ public:
     static int FindSymbol(const char *string, char symbol);
 
     static char ToUpper(char symbol);
+
+    static void ConcatenateSymbol(char *str, char symbol);
 private:
     /// Возвращает false, если выбор невозможен - строка кончилась.
     static bool ChooseSymbols(const char **string);
