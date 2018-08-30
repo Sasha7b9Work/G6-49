@@ -120,6 +120,7 @@ void Generator::SetAmplitude(Chan ch, float amplitude)
     }
     else
     {
+
     }
 }
 

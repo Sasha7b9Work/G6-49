@@ -34,6 +34,7 @@ extern const PageBase pInput;
 #define DEBUG_MODE_ENABLED      (BIT_FL1(BIT_DBG_MODE))
 #define BACKGROUND_BLACK        (BIT_FL1(BIT_BACK_BLACK))
 #define SHOW_STATISTICS         (BIT_FL1(BIT_STATISTICS))
+/// Если true, то засылка в прибор выполняется при каждом повороте ручки
 #define TUNE_FULL               (BIT_FL1(BIT_TUNE_FULL))
 #define PARITY                  ((Parity)BIT_FL1(BIT_PARITY))
 

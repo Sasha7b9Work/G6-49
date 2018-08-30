@@ -106,7 +106,7 @@ void AD9952::WriteCFR2(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteASF(Chan ch)
 {
-    uint value = ((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7;
+    uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
 
     WriteToHardware(ch, Register::ASF, value);
 }

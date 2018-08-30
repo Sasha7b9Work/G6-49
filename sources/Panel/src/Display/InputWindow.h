@@ -147,10 +147,10 @@ public:
         float    max;                 ///< Максимальное значение параметра
 
     private:
-
-        void IncreaseDigit(int num);
-
-        void DecreaseDigit(int num);
+        /// Увеличивает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось.
+        bool IncreaseDigit(int num);
+        /// Уменьшает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось
+        bool DecreaseDigit(int num);
         /// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
         bool All0LeftWithThis(int num);
         /// Возвращает true, елси все цифры слева и эта являются девятками

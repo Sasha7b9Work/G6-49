@@ -106,11 +106,12 @@ void InputWindow::Struct::KeyRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::RegLeft()
 {
-    DecreaseDigit(hightLightDigit);
-
-    if (TUNE_FULL)
+    if(DecreaseDigit(hightLightDigit))
     {
-        SendToGenerator();
+        if (TUNE_FULL)
+        {
+            SendToGenerator();
+        }
     }
 }
 
@@ -125,23 +126,16 @@ void InputWindow::Struct::RegRight()
     }
     prevPosComma = posComma;
 
-    IncreaseDigit(hightLightDigit);
-
-    if (Value() > Wave::Parameter(param).MaxValue())
+    if(IncreaseDigit(hightLightDigit))
     {
-        RestoreValue();
-    }
-    else
-    {
-        if (ValueBeforeComma() > 999)
+        if(ValueBeforeComma() > 999)
         {
             IncreaseOrder();
         }
-    }
-
-    if (TUNE_FULL)
-    {
-        SendToGenerator();
+        if(TUNE_FULL)
+        {
+            SendToGenerator();
+        }
     }
 }
 
@@ -167,12 +161,14 @@ char *InputWindow::Struct::StringValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::IncreaseDigit(int num)
+bool InputWindow::Struct::IncreaseDigit(int num)
 {
     if (num < 0 || num >= NUM_DIGITS)
     {
-        return;
+        return false;
     }
+
+    Struct temp = *this;
 
     if (All9LeftWithThis(num))
     {
@@ -189,25 +185,30 @@ void InputWindow::Struct::IncreaseDigit(int num)
             IncreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
         }
     }
+
+    if(Value() < min || Value() > max)
+    {
+        *this = temp;
+        return false;
+    }
+
+    return true;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::DecreaseDigit(int num)
+bool InputWindow::Struct::DecreaseDigit(int num)
 {
     if (num < 0 || num >= NUM_DIGITS)
     {
-        return;
+        return false;
     }
 
-    if (All0LeftWithThis(num))
+    if (All0LeftWithThis(num) || Only1InThis(num))
     {
-        return;
+        return false;
     }
 
-    if (Only1InThis(num))
-    {
-        return;
-    }
+    Struct temp = *this;
 
     DIGIT(num)--;
     if (DIGIT(num) < '0')
@@ -215,6 +216,14 @@ void InputWindow::Struct::DecreaseDigit(int num)
         DIGIT(num) = '9';
         DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
     }
+
+    if(Value() < min || Value() > max)
+    {
+        *this = temp;
+        return false;
+    }
+
+    return true;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

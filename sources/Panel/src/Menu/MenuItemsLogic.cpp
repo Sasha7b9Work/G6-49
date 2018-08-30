@@ -17,7 +17,7 @@ static pString nameParameter[Wave::Parameter::Number][2] =
 {
     { "×ÀÑÒÎÒÀ",        "FREQUENCY" },
     { "ÏÅÐÈÎÄ",         "PERIOD" },
-    { "ÀÌÏËÈÒÓÄÀ",      "AMPLITUDE" },
+    { "ÐÀÇÌÀÕ",         "AMPLITUDE" },
     { "ÑÌÅÙÅÍÈÅ",       "OFFSET" },
     { "ÄËÈÒ.",          "DURATION" },
     { "ÑÊÂÀÆÍÎÑÒÜ",     "DUTY RATIO" },
@@ -407,7 +407,7 @@ int8 Choice::CurrentIndex() const
         if(isPageSB)
         {
             uint *address = (uint *)cell;
-            retValue = (*address >> nameOrNumBit) & 0x01;
+            retValue = (int8)((*address >> nameOrNumBit) & 0x01);
         }
         else
         {
