@@ -118,13 +118,6 @@ void InputWindow::Struct::RegLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::RegRight()
 {
-    // Сохраняем значение
-    for (int i = 0; i < NUM_DIGITS; i++)
-    {
-        prevBuffer[i] = inputBuffer[i];
-    }
-    prevPosComma = posComma;
-
     if(IncreaseDigit(hightLightDigit))
     {
         if(ValueBeforeComma() > 999)
@@ -439,16 +432,6 @@ void InputWindow::Struct::SaveValue()
     SendToGenerator();
 
     ADDITION_PAGE = 0;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::RestoreValue()
-{
-    for (int i = 0; i < NUM_DIGITS; i++)
-    {
-        DIGIT(i) = prevBuffer[i];
-    }
-    posComma = prevPosComma;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

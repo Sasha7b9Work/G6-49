@@ -6,10 +6,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
 {
             {
             {                                                                           // [A][Form::Sine]
-/* Frequency */ {"20000", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
-/* Period    */ {"05000", "", 0, 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
-/* Amplitude */ {"50000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0, 0.0f, 10.0f},
-/* Offset    */ {"20480", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
+/* Frequency */ {"20000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
+/* Period    */ {"05000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
+/* Amplitude */ {"50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0, 0.0f, 10.0f},
+/* Offset    */ {"20480", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
 /* Duration  */ {},
 /* DutyRatio */ {},
 /* Phase     */ {},
@@ -22,10 +22,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
 /* DurFactor */ {}
             },
             {                                                                           // [A][Form::RampPlus]
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
+                {"50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
+                {"00000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
                 {},
                 {},
                 {},
@@ -38,10 +38,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 {}
             },
             {                                                                           // [A][Form::RampMinus]
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
+                {"50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
+                {"00000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
                 {},
                 {},
                 {},
@@ -57,20 +57,20 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
         },
         {
             {                                                                           // [B][Form::Sine]
-                {"20001", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
-                {"40960", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Amplitude, SignValue::None, 1, 0},
-                {"20480", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
+                {"20001", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
+                {"40960", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Amplitude, SignValue::None, 1, 0},
+                {"20480", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
                 {},
                 {},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Phase,     SignValue::Plus, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Phase,     SignValue::Plus, 1, 0},
                 {}
             },
             {                                                                           // [B][Form::RampPlus]
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
+                {"50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
+                {"00000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
                 {},
                 {},
                 {},
@@ -83,10 +83,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 {}
             },
             {                                                                           // [B][Form::RampMinus]
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
-                {"10000", "", 0, 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
-                {"50000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
-                {"00000", "", 0, 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, SignValue::None, 1, 0},
+                {"10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    SignValue::None, 1, 0},
+                {"50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, SignValue::None, 1, 0},
+                {"00000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    SignValue::Plus, 1, 0},
                 {},
                 {},
                 {},

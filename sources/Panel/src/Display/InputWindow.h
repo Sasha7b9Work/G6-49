@@ -134,9 +134,7 @@ public:
         static Chan              ch;
 
         char     inputBuffer[NUM_DIGITS + 1];
-        char     prevBuffer[NUM_DIGITS + 1];
         int8     posComma;            ///< После какого знакоместа выводить запятую
-        int8     prevPosComma;
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
         uint8    order       : 3;
         uint8    param       : 4;     ///< Перечисление типа Wave::Parameter
@@ -169,8 +167,6 @@ public:
         float ValueAfterComma();
         /// Переключает порядок на следующий по возрастанию
         void IncreaseOrder();
-        /// Восстанавливает ранее сохранённое значение
-        void RestoreValue();
         /// Заполняет iws из inputBuffer
         void FillFromInputBuffer();
         /// Заслать текущее значение в генератор
