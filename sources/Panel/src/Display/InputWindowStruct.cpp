@@ -199,7 +199,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
         return false;
     }
 
-    if (All0LeftWithThis(num))
+    if (All0LeftWithThis(num) && sign == ' ')
     {
         return false;
     }
@@ -207,6 +207,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
     Struct temp = *this;
 
     DIGIT(num)--;
+
     if (DIGIT(num) < '0')
     {
         DIGIT(num) = '9';
@@ -368,28 +369,30 @@ float InputWindow::Struct::Value()
 {
     float value = ValueBeforeComma() + ValueAfterComma();
 
+    float mul = (sign == '-') ? -1.0f : 1.0f;
+
     if (order == Order::Nano)
     {
-        return value * 1e-9f;
+        return value * 1e-9f * mul;
     }
     if (order == Order::Micro)
     {
-        return value * 1e-6f;
+        return value * 1e-6f * mul;
     }
     if (order == Order::Milli)
     {
-        return value * 1e-3f;
+        return value * 1e-3f * mul;
     }
     if (order == Order::Kilo)
     {
-        return value * 1e3f;
+        return value * 1e3f * mul;
     }
     if (order == Order::Mega)
     {
-        return value * 1e6f;
+        return value * 1e6f * mul;
     }
 
-    return value;
+    return value * mul;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

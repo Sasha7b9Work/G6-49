@@ -2076,6 +2076,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\NumberBuffer.h</FilePath>
             </File>
+            <File>
+              <FileName>Number.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Number.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Number.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Number.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
