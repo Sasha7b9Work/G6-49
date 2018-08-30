@@ -137,9 +137,11 @@ char *InputWindow::Struct::StringValue()
     static char buf[20];
     buf[0] = '\0';
 
+    char str[2] = {sign, 0};
+    strcat(buf, str);
+
     for (int i = 0; i < NUM_DIGITS; i++)
     {
-        char str[2] = {0, 0};
         str[0] = DIGIT(i);
         strcat(buf, str);
         if (posComma == i)
