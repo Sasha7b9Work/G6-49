@@ -141,8 +141,6 @@ public:
         bool All0LeftWithThis(int num);
         /// Возвращает true, елси все цифры слева и эта являются девятками
         bool All9LeftWithThis(int num);
-        /// Возвращает true, если среди цифр единственная единица и она находится в даной позиции
-        bool Only1InThis(int num);
         /// Сдвигает все разряды вправо
         void ShiftToRight();
         /// Сдвиг всех разрядов влево

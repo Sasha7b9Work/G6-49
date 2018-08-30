@@ -199,7 +199,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
         return false;
     }
 
-    if (All0LeftWithThis(num) || Only1InThis(num))
+    if (All0LeftWithThis(num))
     {
         return false;
     }
@@ -245,33 +245,6 @@ bool InputWindow::Struct::All9LeftWithThis(int num)
             return false;
         }
     }
-    return true;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool InputWindow::Struct::Only1InThis(int num)
-{
-    if (DIGIT(num) != '1')
-    {
-        return false;
-    }
-
-    for (int i = 0; i < num; i++)
-    {
-        if (DIGIT(i) != '0')
-        {
-            return false;
-        }
-    }
-
-    for (int i = num + 1; i < NUM_DIGITS; i++)
-    {
-        if (DIGIT(i) != '0')
-        {
-            return false;
-        }
-    }
-
     return true;
 }
 
