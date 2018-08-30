@@ -3,6 +3,7 @@
 #include "SettingsTypes.h"
 #include "Menu/MenuItems.h"
 #include "Display/Colors.h"
+#include "FrequencyMeter/FrequencyMeter.h"
 
 
 #ifdef WIN32
@@ -83,7 +84,7 @@ public:
     Page*           menu_page;                         ///< Если активна страница не из главного меню, то здесь её адрес
     int8            menu_posActItem[NumPages];         ///< Позиция активного пункта меню для каждой страницы
     int8            menu_currentSubPage[NumPages];     ///< Номер текущей подстраницы для каждой страницы
-    BillingTime     freq_billingTime;                  ///< Время счёта
+    FrequencyMeter::BillingTime freq_billingTime;                  ///< Время счёта
     FreqAvePeriod   freq_avePeriod;                    ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps  freq_timeStamps;                   ///< Метки времени
 

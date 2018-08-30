@@ -10,19 +10,6 @@
 #pragma warning(disable:4514)
 #endif
 
-struct BillingTime
-{
-    enum E
-    {
-        _1ms,
-        _10ms,
-        _100ms,
-        _1000ms,
-        _10000ms
-    } value;
-    operator int() const { return (int)value; };
-};
-
 struct Language
 {
     enum E

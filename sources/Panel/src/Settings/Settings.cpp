@@ -62,7 +62,7 @@ static const Settings defSet =
     (Page*)0,               // menu_page
     {0},                    // menu_posActItem[]
     {0},                    // menu_currentSubPage[]
-    BillingTime::_1ms,      // freq_billingTime
+    FrequencyMeter::BillingTime::_1ms,      // freq_billingTime
     FreqAvePeriod::_1,      // freq_avePeriod
     FreqTimeStamps::_10MHz, // freq_timeStamps
 
