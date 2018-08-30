@@ -118,7 +118,6 @@ void InputWindow::Struct::RegLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::RegRight()
 {
-
     // Сохраняем значение
     for (int i = 0; i < NUM_DIGITS; i++)
     {
@@ -182,7 +181,11 @@ bool InputWindow::Struct::IncreaseDigit(int num)
         if (DIGIT(num) > '9')
         {
             DIGIT(num) = '0';
-            IncreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
+            if(!IncreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1))
+            {
+                *this = temp;
+                return false;
+            }
         }
     }
 
