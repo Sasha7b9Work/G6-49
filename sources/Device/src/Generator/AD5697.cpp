@@ -44,7 +44,11 @@ void AD5697::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Chan ch, float offset)
 {   
-    Limitation(&offset, 0.0f, 4095.0f);
+    //Limitation(&offset, 0.0f, 4095.0f);
+
+    float scale = 4096.0f / 20.0f;
+
+    offset = 2048 - (offset * scale);
 
     uint16 value = (uint16)((uint16)offset << 4);
 
