@@ -63,7 +63,7 @@ static const Settings defSet =
     {0},                    // menu_posActItem[]
     {0},                    // menu_currentSubPage[]
     FrequencyMeter::BillingTime::_1ms,      // freq_billingTime
-    FreqAvePeriod::_1,      // freq_avePeriod
+    FrequencyMeter::AvePeriod::_1,      // freq_avePeriod
     FreqTimeStamps::_10MHz, // freq_timeStamps
 
     BINARY_U32(00000000, 00000000, 00010110, 01001100), // flag1

@@ -72,20 +72,6 @@ struct FreqMeasure
     operator uint8() const { return (uint8)value; };
 };
 
-/// Число усредняемых период в режиме измерения периода сигнала
-struct FreqAvePeriod
-{
-    enum E
-    {
-        _1,
-        _10,
-        _100,
-        _1000,
-        _10000
-    } value;
-    operator uint8() const { return (uint8)value; };
-};
-
 /// Метки времени
 struct FreqTimeStamps
 {
