@@ -30,7 +30,7 @@ void Generator::Init()
         
         SetFormWave(ch, Wave::Form::Sine);
         SetFrequency(ch, 2000.0f);
-        SetAmplitude(ch, 4096.0f);
+        SetAmplitude(ch, 5.0f);
         SetOffset(ch, 2048.0f);
         
 
