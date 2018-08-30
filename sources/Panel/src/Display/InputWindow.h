@@ -31,18 +31,6 @@ struct Order
     pString Name() const;
 };
 
-struct SignValue
-{
-    enum E
-    {
-        None,
-        Minus,
-        Plus
-    } value;
-    SignValue(E v) : value(v) { };
-    operator uint8() const    { return (uint8)value; };
-};
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *NameUnit(char buffer[10], Order order, Wave::Parameter parameter);
 
@@ -133,12 +121,12 @@ public:
         static Wave::Parameter   m_param;
         static Chan              ch;
 
+        char     sign;
         char     buffer[NUM_DIGITS + 1];    ///< В этом буфере хранится знак числа, а затем цифры с точкой
         int8     posComma;            ///< После какого знакоместа выводить запятую
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
         uint8    order       : 3;
         uint8    param       : 4;     ///< Перечисление типа Wave::Parameter
-        uint8    sign        : 2;     ///< Перечисление типа SignValue
         uint     allow       : 1;     ///< Если 1, параметр разрешен для данного сигнала
         uint     numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
         float    min;                 ///< Минимальное значение параметра

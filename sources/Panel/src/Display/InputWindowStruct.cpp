@@ -563,9 +563,9 @@ void InputWindow::Struct::FillFromInputBuffer()
         }
     }
 
-    if (sign != SignValue::None)
+    if (sign != ' ')
     {
-        sign = (atof(m_inputBuffer) >= 0.0) ? SignValue::Plus : SignValue::Minus;
+        sign = (atof(m_inputBuffer) >= 0.0) ? '+' : '-';
     }
 
     hightLightDigit = NUM_DIGITS - 1;
