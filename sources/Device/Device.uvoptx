@@ -159,7 +159,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Generator\Generator.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Generator\Generator.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\\src/Generator/Generator.cpp\37</Expression>
         </Bp>
@@ -175,7 +175,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Generator\FPGA.cpp</Filename>
+          <Filename>C:\My\Work\stm32\DDS\sources\Panel\src\Generator\FPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/Generator/FPGA.cpp\218</Expression>
         </Bp>

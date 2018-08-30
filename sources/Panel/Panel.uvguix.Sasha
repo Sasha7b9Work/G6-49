@@ -11,17 +11,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>92 100</TableColWidths>
+      <TableColWidths>115 148</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>868 802</TableColWidths>
+      <TableColWidths>568 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>309 154 154 1053</TableColWidths>
+      <TableColWidths>728</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -30,25 +30,25 @@
       <WinId>1506</WinId>
       <ViewName>Symbols</ViewName>
       <UserString></UserString>
-      <TableColWidths>70 70 70</TableColWidths>
+      <TableColWidths>80 80 80</TableColWidths>
     </View>
     <View>
       <WinId>1936</WinId>
       <ViewName>Watch 1</ViewName>
       <UserString></UserString>
-      <TableColWidths>70 70 70</TableColWidths>
+      <TableColWidths>80 80 80</TableColWidths>
     </View>
     <View>
       <WinId>1937</WinId>
       <ViewName>Watch 2</ViewName>
       <UserString></UserString>
-      <TableColWidths>70 70 70</TableColWidths>
+      <TableColWidths>80 80 80</TableColWidths>
     </View>
     <View>
       <WinId>1935</WinId>
       <ViewName>Call Stack + Locals</ViewName>
       <UserString></UserString>
-      <TableColWidths>70 70 70</TableColWidths>
+      <TableColWidths>80 80 80</TableColWidths>
     </View>
     <View>
       <WinId>2506</WinId>
@@ -91,17 +91,17 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>8</Top>
-        <Left>497</Left>
-        <Right>1684</Right>
-        <Bottom>1011</Bottom>
+        <Top>0</Top>
+        <Left>195</Left>
+        <Right>1904</Right>
+        <Bottom>1200</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
       <RegID>0</RegID>
       <MDITabState>
-        <Len>645</Len>
-        <Data>01000000040000000100000001000000010000000100000000000000020000000000000001000000010000000000000028000000280000000100000005000000040000000100000048443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C6C6962735C434D5349535C737461727475705F73746D33326634323978782E730000000015737461727475705F73746D33326634323978782E7300000000FFDC7800FFFFFFFF30443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C6D61696E2E63707000000000086D61696E2E63707000000000BECEA100FFFFFFFF3F443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C446973706C61795C496E70757457696E646F772E637070000000000F496E70757457696E646F772E63707000000000F0A0A100FFFFFFFF45443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C446973706C61795C496E70757457696E646F775374727563742E6370700000000015496E70757457696E646F775374727563742E63707000000000BCA8E100FFFFFFFF38443A5C50726F6A656374735C73746D33325C4444535C736F75726365735C50616E656C5C7372635C5574696C735C4E756D6265722E637070000000000A4E756D6265722E637070000000009CC1B600FFFFFFFF0100000010000000C5D4F200FFDC7800BECEA100F0A0A100BCA8E1009CC1B600F7B88600D9ADC200A5C2D700B3A6BE00EAD6A300F6FA7D00B5E99D005FC3CF00C1838300CACAD5000100000000000000020000000000000044000000C205000007040000</Data>
+        <Len>255</Len>
+        <Data>01000000040000000100000001000000010000000100000000000000020000000000000001000000010000000000000028000000280000000100000001000000000000000100000037433A5C4D795C576F726B5C73746D33325C4444535C736F75726365735C50616E656C5C7372635C5574696C735C4E756D6265722E637070000000000A4E756D6265722E63707000000000FFDC7800FFFFFFFF0100000010000000C5D4F200FFDC7800BECEA100F0A0A100BCA8E1009CC1B600F7B88600D9ADC200A5C2D700B3A6BE00EAD6A300F6FA7D00B5E99D005FC3CF00C1838300CACAD50001000000000000000200000000000000440000006B0600009D040000</Data>
       </MDITabState>
     </MDIClientArea>
     <ViewEx>
@@ -3515,7 +3515,7 @@
       <Size>100</Size>
       <ActiveTab>4</ActiveTab>
       <Doc>
-        <Name>.\src\libs\CMSIS\startup_stm32f429xx.s</Name>
+        <Name>&lt;2&gt;.\src\libs\CMSIS\startup_stm32f429xx.s</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>180</TopLine>
         <CurrentLine>198</CurrentLine>
@@ -3524,7 +3524,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\main.cpp</Name>
+        <Name>&lt;2&gt;.\src\main.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>2</TopLine>
         <CurrentLine>22</CurrentLine>
@@ -3533,7 +3533,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Display\InputWindow.cpp</Name>
+        <Name>&lt;2&gt;.\src\Display\InputWindow.cpp</Name>
         <ColumnNumber>0</ColumnNumber>
         <TopLine>218</TopLine>
         <CurrentLine>239</CurrentLine>
@@ -3542,7 +3542,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Display\InputWindowStruct.cpp</Name>
+        <Name>&lt;2&gt;.\src\Display\InputWindowStruct.cpp</Name>
         <ColumnNumber>5</ColumnNumber>
         <TopLine>192</TopLine>
         <CurrentLine>203</CurrentLine>
@@ -3551,7 +3551,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\src\Utils\Number.cpp</Name>
+        <Name>&lt;2&gt;.\src\Utils\Number.cpp</Name>
         <ColumnNumber>13</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>14</CurrentLine>

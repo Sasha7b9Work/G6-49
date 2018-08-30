@@ -75,7 +75,7 @@ public:
 
 
 /// Вычисление 10**pow.
-int Pow10(int pow);
+uint Pow10(int pow);
 
 /// Обменивает местами содержимое памяти по адресам value0 и value1
 template<class T> void Swap(T *value0, T *value1) { T temp = *value0; *value0 = *value1; *value1 = temp; }

@@ -123,10 +123,11 @@ void Number::ChangeInPositiveInteger(int position, Step step)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Number::ChangeInNegativeInteger(int position, Step step)
+void Number::ChangeInNegativeInteger(int /*position*/, Step /*step*/)
 {
-    int pos = SIZE_PART + position;
+//    int pos = SIZE_PART + position;
 
+    /*
     if(step == Step::Plus)
     {
 
@@ -134,14 +135,27 @@ void Number::ChangeInNegativeInteger(int position, Step step)
     else
     {
     }
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Number::ChangeInPositiveFract(int position, Step step)
+void Number::ChangeInPositiveFract(int /*position*/, Step /*step*/)
 {
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Number::ChangeInNegativeFract(int position, Step step)
+void Number::ChangeInNegativeFract(int /*position*/, Step /*step*/)
 {
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Number::SetAllZeros()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Number::AllLeftZeroInInteger(int /*position*/)
+{
+    return false;
 }

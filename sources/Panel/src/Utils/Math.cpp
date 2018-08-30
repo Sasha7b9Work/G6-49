@@ -97,16 +97,16 @@ int Math::MinFrom2Int(int val0, int val1)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Pow10(int pow)
+uint Pow10(int pow)
 {
-    int retValue = 1;
+    uint result = 1;
 
     while (pow--)
     {
-        retValue *= 10;
+        result *= 10;
     }
 
-    return retValue;
+    return result;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -353,7 +353,7 @@ float Math::RoundFloat(float value, int numDigits)
 
     if (digsInInt < numDigits)  // Подстрахуемся
     {
-        int pow = Pow10(numDigits - digsInInt);
+        uint pow = Pow10(numDigits - digsInInt);
         absValue = ((int)(absValue * pow + 0.5f)) / (float)pow;
     }
 

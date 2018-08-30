@@ -2086,6 +2086,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Number.h</FilePath>
             </File>
+            <File>
+              <FileName>BigNumber.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\BigNumber.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BigNumber.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\BigNumber.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
