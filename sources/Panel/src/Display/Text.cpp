@@ -58,7 +58,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
 {
     Painter::SetColor(color);
 
-    if (upperCase)
+    if (upperCase && font != fonts[Font::Type::_UGO] && font != fonts[Font::Type::_UGO2])
     {
         symbol = SU::ToUpper(symbol);
     }

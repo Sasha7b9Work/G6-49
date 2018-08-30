@@ -93,6 +93,11 @@ void InputWindow::DrawDigits(int x, int y)
 
     y += 40;
 
+    if(m_iws.sign != ' ')
+    {
+        Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, m_iws.sign);
+    }
+
     for (int i = 0; i < NUM_DIGITS; i++)
     {
         Painter::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, Color::BACK);
