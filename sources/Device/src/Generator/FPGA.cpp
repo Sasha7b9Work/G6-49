@@ -12,8 +12,6 @@
 #define MAX_VALUE ((1 << 14) - 1)
 #define MIN_VALUE (0)
 
-static float dur[2] = {0.0f, 0.0f};
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FPGA::ModeWorkFPGA FPGA::modeWork = ModeNone;
 uint8              FPGA::dataA[FPGA_NUM_POINTS * 2];
@@ -279,14 +277,9 @@ uint FPGA::OffsetToCode(float off)
 
     off = (off - 5.0f) / 5.0f;
 
-    uint code = (uint)(fabsf(off) * max);
+    int code = ~((int)(off * max)) + 1;
 
-    if(Sign(off) == -1)
-    {
-        SetBit(code, 13);
-    }
-
-    return code;
+    return (uint)(code & 0x3fff);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
