@@ -42,6 +42,7 @@ struct GeneratorWritePin
         D5,
         D6,
         D7,
+        FPGA_WR_DATA,
         Number
     } value;
     GeneratorWritePin(E v) : value(v) {};

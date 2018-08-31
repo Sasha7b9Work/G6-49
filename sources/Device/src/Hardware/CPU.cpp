@@ -44,7 +44,8 @@ static const StructPort registers[GeneratorWritePin::Number] =
     {GPIOE, GPIO_PIN_7},    // D4
     {GPIOE, GPIO_PIN_8},    // D5
     {GPIOE, GPIO_PIN_9},    // D6
-    {GPIOE, GPIO_PIN_10}    // D7
+    {GPIOE, GPIO_PIN_10},   // D7
+    {GPIOD, GPIO_PIN_5}     // FPGA_WR_DATA
 };
 
 static const StructPort registersRead[GeneratorReadPin::Number] =

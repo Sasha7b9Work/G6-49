@@ -39,7 +39,7 @@ private:
         {
             _0_Control,
             _1_Freq,
-            _2_Mul,
+            _2_Amplitude,
             _3_RectA,
             _4_RectB,
             _5_PeriodImpulseA,

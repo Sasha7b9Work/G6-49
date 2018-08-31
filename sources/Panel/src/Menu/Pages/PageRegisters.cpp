@@ -62,7 +62,7 @@ static DescInput desc[Register::Number] =
     {10, Uint          , false, 0 }, // FreqMeterHYS,
     {8,  Binary        , false, 0 }, // FPGA_RG0_Control,
     {13, Uint          , false, 0 }, // FPGA_RG1_Freq,
-    {11, Uint10_Uint10 , false, 0 }, // FPGA_RG2_Mul,
+    {11, Uint10_Uint10 , false, 0 }, // FPGA_RG2_Amplitude,
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG3_RectA,
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG4_RectB,
     {10, Uint          , false, 0 }, // FPGA_RG5_PeriodImpulseA,

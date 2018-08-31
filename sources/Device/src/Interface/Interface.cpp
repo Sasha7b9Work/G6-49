@@ -176,8 +176,8 @@ void Interface::CommandWriteRegister()
         FPGA::WriteRegister(FPGA::RG::_1_Freq, value);
         break;
 
-    case Register::FPGA_RG2_Mul:
-        FPGA::WriteRegister(FPGA::RG::_2_Mul, value);
+    case Register::FPGA_RG2_Amplitude:
+        FPGA::WriteRegister(FPGA::RG::_2_Amplitude, value);
         break;
 
     case Register::FPGA_RG3_RectA:

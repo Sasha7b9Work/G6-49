@@ -106,7 +106,7 @@ void FPGA::WriteControlRegister()
 {
     if (modeWork == ModeDDS)
     {
-        WriteRegister(RG::_0_Control, 0);
+        WriteRegister(RG::_0_Control, BINARY_U8(01111001));
     }
     else if (modeWork == ModeImpulse)
     {
@@ -150,6 +150,10 @@ void FPGA::CreateRampPlus()
     SendData();
 
     WriteControlRegister();
+
+    WriteRegister(RG::_1_Freq, 85800);
+    WriteRegister(RG::_2_Amplitude, 0xfffff);
+    WriteRegister(RG::_10_Offset, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,12 +225,15 @@ void FPGA::SendData()
 {
     WriteRegister(RG::_0_Control, 0);
     
-    for(int i = 0; i < FPGA_NUM_POINTS; i++)
+    for(int j = 0; j < 4; j++)
     {
-        WriteByte((uint8)dataA[i]);
-        CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, true);
-        Timer::PauseOnTicks(10);
-        CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, false);
+        for(int i = 0; i < FPGA_NUM_POINTS; i++)
+        {
+            WriteByte((uint8)(dataA[i] & 0x7f));
+            CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, true);
+            for(int x = 0; x < 10; x++) { }
+            CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, false);
+        }
     }
 
     WriteRegister(RG::_0_Control, 1);
@@ -260,7 +267,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
     {
         8,  // RG0_Control,
         40, // RG1_Freq,
-        20, // RG2_Mul,
+        20, // RG2_Amplitude,
         28, // RG3_RectA,
         28, // RG4_RectB,
         32, // RG5_PeriodImpulseA,
