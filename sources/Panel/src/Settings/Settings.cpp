@@ -153,16 +153,10 @@ void Settings::Load(bool _default)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::TuneGenerator(Chan ch)
 {
-    /*
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     Wave::Form form = WAVE_FORM(ch);
     Generator::SetFormWave(ch, WAVE_FORM(ch));
-    if(form == Wave::Form::Sine)
-    {
-        Generator::SetParameter(ch, Wave::Parameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Frequency))->Value());
-        Generator::SetParameter(ch, Wave::Parameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Amplitude))->Value());
-        Generator::SetParameter(ch, Wave::Parameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset))->Value());
-        Generator::SetParameter(ch, Wave::Parameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, WAVE_FORM(ch), Wave::Parameter::Offset))->Value());
-    }
-    */
+    Generator::SetParameter(ch, Wave::Parameter::Frequency, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Frequency))->Value());
+    //Generator::SetParameter(ch, Wave::Parameter::Amplitude, (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Amplitude))->Value());
+    //Generator::SetParameter(ch, Wave::Parameter::Offset,    (&INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset))->Value());
 }

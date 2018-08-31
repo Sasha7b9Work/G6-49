@@ -22,24 +22,13 @@ void Generator::Init()
     Multiplexor::Init();
     FreqMeter::Init();
 
-
     for(int i = 0; i < 2; i++)
     {
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
 
-        /*
-        SetFormWave(ch, Wave::Form::Sine);
-        SetFrequency(ch, 2000.0f);
-        SetAmplitude(ch, 5.0f);
-        SetOffset(ch, 5.0f);
-        */
 
-
-        SetFormWave(ch, Wave::Form::RampPlus);
-        //SetFrequency(ch, 2000.0f);
-        //SetAmplitude(ch, 4096.0f);
-        //SetOffset(ch, 2048.0f);
+        SetFormWave(ch, Wave::Form::RampMinus);
     }
 }
 

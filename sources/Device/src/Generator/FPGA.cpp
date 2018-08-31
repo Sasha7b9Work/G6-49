@@ -65,7 +65,7 @@ void FPGA::SetFrequency(Chan ch, float frequency)
     
     if (modeWork == ModeDDS)
     {
-        uint N = (uint)(frequency * (1 << 30) / 1e8f + 0.5f);
+        uint64 N = (uint64)(frequency * 11e3);
         WriteRegister(RG::_1_Freq, N);
     }
     else if(modeWork == ModeImpulse || modeWork == ModeImpulse2)
@@ -159,7 +159,7 @@ void FPGA::CreateRampPlus()
 
     WriteControlRegister();
 
-    WriteRegister(RG::_1_Freq, 100000000);
+    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
     WriteRegister(RG::_2_Amplitude, 0xfffff);
     WriteRegister(RG::_10_Offset, 0);
 }
@@ -169,16 +169,26 @@ void FPGA::CreateRampMinus()
 {
     modeWork = ModeDDS;
 
-//    float step = (float)(MAX_VALUE - MIN_VALUE) / FPGA_NUM_POINTS;
+    float step = 2.0f / FPGA_NUM_POINTS;
+
+    float *data = (float *)malloc(FPGA_NUM_POINTS * 4);
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-//        dataA[i] = (uint16)(step * i);
+        data[i] = 1.0f - step * i;
     }
+
+    TransformDataToCode(data, dataA);
+
+    free(data);
 
     SendData();
 
     WriteControlRegister();
+
+    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
+    WriteRegister(RG::_2_Amplitude, 0xfffff);
+    WriteRegister(RG::_10_Offset, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

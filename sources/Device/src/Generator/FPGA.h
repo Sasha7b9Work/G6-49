@@ -49,15 +49,6 @@ private:
             _9_FreqMeter,
             _10_Offset,
             Number
-            /*
-            Reg_Control,
-            Reg_PeriodA,
-            Reg_DurationA,
-            Reg_PeriodB,
-            Reg_DurationBandDelay,
-            Reg_DurationB,
-            Reg_Frequency
-            */
         } value;
         RG(E v) : value(v) { };
         operator uint8() const { return (uint8)value; };
