@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include "Utils/Math.h"
 
 
 class BigNumber
@@ -13,6 +14,7 @@ public:
             Plus,
             Minus
         } value;
+        Step(E v) : value(v) {};
         bool IsPlus() { return value == Plus; };
     };
 
@@ -21,6 +23,10 @@ public:
     static void Set(char integer[SIZE], char fract[SIZE], char sign);
 
     static void ChangeDigit(int position, Step step);
+
+    static float GetValue();
+
+    static void Get(char integer[SIZE], char fract[SIZE], char *sign);
 
 private:
 
@@ -36,6 +42,8 @@ private:
         void Clear() { value = 0; numSymbols = 0; };
 
         void AddValue(char digit, int pow) { value += (digit - 0x30) * pow; numSymbols++; };
+        /// ¬озвращает максимально возможное число, которое можно хранить
+        uint Max() { return Pow10(numSymbols) - 1; };
     };
 
     /// «десь число из строки целого
@@ -66,4 +74,12 @@ private:
     static void ChangeIntegerNegativePlus(int position);
 
     static void ChangeIntegerNegativeMinus(int position);
+
+    static void ChangeFractPositivePlus(int position);
+
+    static void ChangeFractPositiveMinus(int position);
+
+    static void ChangeFractNegativePlus(int position);
+
+    static void ChangeFractNegativeMinus(int position);
 };

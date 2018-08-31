@@ -66,7 +66,7 @@ static const Settings defSet =
     FrequencyMeter::AvePeriod::_1,      // freq_avePeriod
     FreqTimeStamps::_10MHz, // freq_timeStamps
 
-    BINARY_U32(00000000, 00000000, 00010110, 01001100), // flag1
+    BINARY_U32(00000000, 00000000, 00010110, 01011100), // flag1
 //                            |||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
 //                            |||  ||||||||  |||||||------- 1  BIT_FREQ_INTERVAL  Interval_1
 //                            |||  ||||||||  ||||||-------- 2  BIT_CONSOLE      

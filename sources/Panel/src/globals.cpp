@@ -9,7 +9,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
 /* Frequency */ {' ', "20000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f},
 /* Period    */ {' ', "05000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.3333333333e-8f},
 /* Amplitude */ {' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f},
-/* Offset    */ {'+', "00000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, -5.0f, 5.0f},
+/* Offset    */ {'+', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f},
 /* Duration  */ {},
 /* DutyRatio */ {},
 /* Phase     */ {},
