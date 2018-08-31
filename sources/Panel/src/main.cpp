@@ -14,9 +14,6 @@
  *  @{
  */
 
-static void SendToGenerator();
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
@@ -32,25 +29,13 @@ int main()
        
     Menu::Init();
 
-    Generator::LoadRegister(Register::OffsetA, 2048);
-    
-    Generator::LoadRegister(Register::OffsetB, 2048);
-
     while (1)
     {
         CPU::Update();
         Menu::Update();
         Display::Update();
         Generator::Update();
-        SendToGenerator();
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void SendToGenerator()
-{
-    //Generator::LoadRegister(Register::Multiplexor1, 1);
-    //Generator::LoadRegister(Register::Multiplexor1, 0);
 }
 
 

@@ -20,11 +20,9 @@ public:
 
     static void SetFrequency(Chan ch, float frequency);
 
-    static void SetDuration(Chan ch, float duration);
-
-    static void SetDelay(float delay);
-
     static void SetAmplitude(Chan ch, float amplitude);
+
+    static void SetOffset(Chan ch, float offset);
 
 private:
     enum ModeWorkFPGA
@@ -58,30 +56,9 @@ private:
 
     static void CreateSine();
 
-    static void CreateCosine();
-
-    static void CreateMeander();
-
     static void CreateRampPlus();
 
     static void CreateRampMinus();
-
-    static void CreateTriangle();
-
-    static void CreateTrapeze();
-
-    //static void GenerateSaw();
-    /// Установить импульсный режим работы
-    static void CreateImpulse();
-
-    static void CreateExponentePlus();
-
-    static void CreateExponenteMinus();
-
-    static void CreateNoise();
-
-    static void CreateFree();
-
     /// Заслать рассчитанные точки в плис
     static void SendData();
     /// Записать байт в ПЛИС
@@ -96,6 +73,8 @@ private:
     static void TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2]);
 
     static uint8 RegisterForDuration(Chan ch);
+    /// Преобразует смещение в прямой код, пригодный для записи в альтеру
+    static uint OffsetToCode(float offset);
 
     static ModeWorkFPGA modeWork;
     /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
@@ -104,4 +83,6 @@ private:
     static uint16 dataB[FPGA_NUM_POINTS];
 
     static float amplitude[Chan::Number];
+
+    static float offset[Chan::Number];
 };

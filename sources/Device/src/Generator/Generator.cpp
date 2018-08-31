@@ -116,7 +116,14 @@ void Generator::SetAmplitude(Chan ch, float amplitude)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetOffset(Chan ch, float offset)
 {
-    AD5697::SetOffset(ch, offset);
+    if(waveIsSine)
+    {
+        AD5697::SetOffset(ch, offset);
+    }
+    else
+    {
+        FPGA::SetOffset(ch, offset);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -132,13 +139,11 @@ void Generator::SetDutyRatio(Chan, float)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDuration(Chan ch, float duration)
+void Generator::SetDuration(Chan, float)
 {
-    FPGA::SetDuration(ch, duration);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDelay(Chan, float delay)
+void Generator::SetDelay(Chan, float)
 {
-    FPGA::SetDelay(delay);
 }
