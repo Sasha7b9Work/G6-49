@@ -18,6 +18,7 @@ static float dur[2] = {0.0f, 0.0f};
 FPGA::ModeWorkFPGA FPGA::modeWork = ModeNone;
 uint8              FPGA::dataA[FPGA_NUM_POINTS * 2];
 uint16             FPGA::dataB[FPGA_NUM_POINTS];
+float              FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +66,7 @@ void FPGA::SetFrequency(Chan ch, float frequency)
     
     if (modeWork == ModeDDS)
     {
-        uint64 N = (uint64)(frequency * 11e3);
+        uint64 N = (uint64)(frequency * 11e3f);
         WriteRegister(RG::_1_Freq, N);
     }
     else if(modeWork == ModeImpulse || modeWork == ModeImpulse2)
@@ -346,4 +347,15 @@ void FPGA::TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_
         code[i] = (uint8)c;
         code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetAmplitude(Chan ch, float ampl)
+{
+    amplitude[ch] = ampl;
+
+    uint nA = (uint)(amplitude[Chan::A] * 1023 / 10);
+    uint nB = (uint)(amplitude[Chan::B] * 1023 / 10);
+
+    WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }

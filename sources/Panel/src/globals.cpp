@@ -23,8 +23,8 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
             },
             {                                                                           // [A][Form::RampPlus]
                 {' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f},
-                {' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0,  3.33333e-8f, 10e6f},
-                {' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f},
+                {' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.33333e-8f, 10e6f},
+                {' ', "10000", 1, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f},
                 {'+', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f},
                 {},
                 {},
@@ -38,10 +38,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 {}
             },
             {                                                                           // [A][Form::RampMinus]
-                {' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0},
-                {' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0},
-                {' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0},
-                {'+', "00000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0},
+                {' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f},
+                {' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.33333e-8f, 10e6f},
+                {' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f},
+                {'+', "00000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f},
                 {},
                 {},
                 {},

@@ -24,6 +24,8 @@ public:
 
     static void SetDelay(float delay);
 
+    static void SetAmplitude(Chan ch, float amplitude);
+
 private:
     enum ModeWorkFPGA
     {
@@ -100,4 +102,6 @@ private:
     /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
     static uint8 dataA[FPGA_NUM_POINTS * 2];
     static uint16 dataB[FPGA_NUM_POINTS];
+
+    static float amplitude[Chan::Number];
 };
