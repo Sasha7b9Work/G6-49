@@ -99,11 +99,14 @@ private:
     static void WriteAddress(uint8 reg);
 
     static void WriteControlRegister();
+    /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
+    static void TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2]);
 
     static uint8 RegisterForDuration(Chan ch);
 
     static ModeWorkFPGA modeWork;
-
-    static uint16 dataA[FPGA_NUM_POINTS];   ///< Точки сигнала для засылки в ПЛИС
+    /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
+    /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
+    static uint8 dataA[FPGA_NUM_POINTS * 2];
     static uint16 dataB[FPGA_NUM_POINTS];
 };

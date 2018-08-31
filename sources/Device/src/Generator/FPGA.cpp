@@ -2,7 +2,10 @@
 #include "defines.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Utils/Math.h"
 #include <string.h>
+#include <stdlib.h>
+#include <math.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13,7 +16,7 @@ static float dur[2] = {0.0f, 0.0f};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FPGA::ModeWorkFPGA FPGA::modeWork = ModeNone;
-uint16             FPGA::dataA[FPGA_NUM_POINTS];
+uint8              FPGA::dataA[FPGA_NUM_POINTS * 2];
 uint16             FPGA::dataB[FPGA_NUM_POINTS];
 
 
@@ -121,7 +124,7 @@ void FPGA::WriteControlRegister()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::CreateSine()
 {
-    memset(dataA, 0, FPGA_NUM_POINTS * 2);
+//    memset(dataA, 0, FPGA_NUM_POINTS * 2);
     memset(dataB, 0, FPGA_NUM_POINTS * 2);
     SendData();
 }
@@ -139,19 +142,24 @@ void FPGA::CreateRampPlus()
 {
     modeWork = ModeDDS;
 
-    float step = (float)(MAX_VALUE - MIN_VALUE) / FPGA_NUM_POINTS;
+    float step = 2.0f / FPGA_NUM_POINTS;
+
+    float *data = (float *)malloc(FPGA_NUM_POINTS * 4);
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        dataA[i] = (uint16)(step * i);
-        dataB[i] = (uint16)(MAX_VALUE - dataA[i]);
+        data[i] = -1.0f + step * i;
     }
+
+    TransformDataToCode(data, dataA);
+
+    free(data);
 
     SendData();
 
     WriteControlRegister();
 
-    WriteRegister(RG::_1_Freq, 85800);
+    WriteRegister(RG::_1_Freq, 100000000);
     WriteRegister(RG::_2_Amplitude, 0xfffff);
     WriteRegister(RG::_10_Offset, 0);
 }
@@ -161,12 +169,11 @@ void FPGA::CreateRampMinus()
 {
     modeWork = ModeDDS;
 
-    float step = (float)(MAX_VALUE - MIN_VALUE) / FPGA_NUM_POINTS;
+//    float step = (float)(MAX_VALUE - MIN_VALUE) / FPGA_NUM_POINTS;
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        dataA[i] = (uint16)(step * i);
-        dataB[i] = (uint16)(MAX_VALUE - dataA[i]);
+//        dataA[i] = (uint16)(step * i);
     }
 
     SendData();
@@ -225,15 +232,12 @@ void FPGA::SendData()
 {
     WriteRegister(RG::_0_Control, 0);
     
-    for(int j = 0; j < 4; j++)
+    for(int i = 0; i < FPGA_NUM_POINTS * 2; i++)
     {
-        for(int i = 0; i < FPGA_NUM_POINTS; i++)
-        {
-            WriteByte((uint8)(dataA[i] & 0x7f));
-            CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, true);
-            for(int x = 0; x < 10; x++) { }
-            CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, false);
-        }
+        WriteByte(dataA[i]);
+        CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, true);
+        for(int x = 0; x < 10; x++) { }
+        CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, false);
     }
 
     WriteRegister(RG::_0_Control, 1);
@@ -313,4 +317,23 @@ void FPGA::WriteAddress(uint8 reg)
 uint8 FPGA::RegisterForDuration(Chan ch)
 {
     return ch == Chan::A ? (uint8)RG::_6_DurationImpulseA : (uint8)RG::_8_DurationImpulseB;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2])
+{
+    int max = 0x1fff;
+
+    for(int i = 0; i < FPGA_NUM_POINTS; i++)
+    {
+        uint16 c = (uint16)(fabs(data[i]) * max);
+
+        if(Sign(data[i]) == -1)
+        {
+            SetBit(c, 13);
+        }
+
+        code[i] = (uint8)c;
+        code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
+    }
 }
