@@ -34,6 +34,10 @@ private:
     static void CommandModeDebug();
 
     static void CommandWriteRegister();
+    /// Команда обрабатывает засылку произвольного сигнала
+    static void CommandCreateWave();
+
+    static void CommandSetWave();
     /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
 

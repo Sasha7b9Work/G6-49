@@ -63,7 +63,9 @@ const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
     CommandEmpty,
     CommandEmpty,
     CommandEmpty,
-    CommandEmpty
+    CommandEmpty,
+    CommandCreateWave,
+    CommandSetWave
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -246,6 +248,12 @@ void Interface::CommandParameter()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandCreateWave()
+{
+    Chan ch = (Chan::E)buffer[1];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandReset()
 {
 #ifndef MSVC
@@ -301,6 +309,11 @@ void Interface::ReceiveCallback()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandSetWave()
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *)
 {
     CPU::SetBusy();
@@ -317,3 +330,6 @@ void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
     HAL_SPI_TransmitReceive_IT(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER);
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+

@@ -29,6 +29,9 @@
 
     0              1             2...5
 12. WRITE_REGISTER NAME_REGISTER VALUE
+
+    0                1        2...3       4...9
+20  CREATE_HAND_WAVE NUM_CHAN START_POINT points
 */
 
 /// Возможные команды для передачи в основной процессор
@@ -37,25 +40,27 @@ struct CommandPanel
     enum E
     {
         COMMAND_NONE = 0,
-        ENABLE_CHANNEL = 1,    ///< Включить/выключить канал
-        SET_FORM_WAVE = 2,    ///< Установить форму сигнала
-        SET_FREQUENCY = 3,    ///< Установить частоту
-        SET_AMPLITUDE = 4,    ///< Установить амплитуду
-        SET_OFFSET = 5,    ///< Установать смещение
+        ENABLE_CHANNEL = 1,     ///< Включить/выключить канал
+        SET_FORM_WAVE = 2,      ///< Установить форму сигнала
+        SET_FREQUENCY = 3,      ///< Установить частоту
+        SET_AMPLITUDE = 4,      ///< Установить амплитуду
+        SET_OFFSET = 5,         ///< Установать смещение
         SET_DURATION = 6,
         SET_DUTYRATIO = 7,
         SET_PHASE = 8,
-        RUN_RESET = 9,    ///< Сброс состояния
-        MODE_DEBUG = 10,   ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
-        SET_DELAY = 11,   ///< Задержка
-        WRITE_REGISTER = 12,   ///< Занести значение в регистр
-        READ_DATA = 13,   ///< Чтение данных из генератора
+        RUN_RESET = 9,          ///< Сброс состояния
+        MODE_DEBUG = 10,        ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
+        SET_DELAY = 11,         ///< Задержка
+        WRITE_REGISTER = 12,    ///< Занести значение в регистр
+        READ_DATA = 13,         ///< Чтение данных из генератора
         SET_DEPTH_MODULATION = 14,
         SET_POLARITY = 15,
         SET_DURATION_RISE = 16,
         SET_DURATION_FALL = 17,
         SET_DURATION_STADY = 18,
         SET_DUTY_FACTOR = 19,
+        CREATE_HAND_WAVE = 20,  ///< Засылает точки произвольного сигнала
+        SET_HAND_WAVE = 21,     ///< Устанавливает вывод произвольного сигнала
         Number
     } value;
     CommandPanel(E v) : value(v){};

@@ -30,6 +30,8 @@ public:
 
     static void LoadRegister(Register reg, uint64 value);
 
+    static void EmptyCommand();
+
 private:
     /// Заслать в генератор данные
     static void SendToInterface(uint8 *buffer, int size);

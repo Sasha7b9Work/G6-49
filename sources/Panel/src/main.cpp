@@ -8,6 +8,7 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Generator/Signal.h"
+#include "Display/Console.h"
 
 
 /** @defgroup Panel
@@ -28,6 +29,13 @@ int main()
     Settings::Load();
        
     Menu::Init();
+
+    Generator::EmptyCommand();
+
+    for(int i = 0; i < 10; i++)
+    {
+        Console::AddString("test");
+    }
 
     while (1)
     {

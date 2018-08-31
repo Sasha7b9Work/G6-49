@@ -42,6 +42,13 @@ void Generator::LoadRegister(Register reg, uint64 value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::EmptyCommand()
+{
+    uint8 buffer[10] = {CommandPanel::COMMAND_NONE};
+    SendToInterface(buffer, 10);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
     uint8 buffer[2] = {CommandPanel::MODE_DEBUG, (uint8)(enable ? 1 : 0)};

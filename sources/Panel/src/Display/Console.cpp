@@ -18,6 +18,7 @@ void Console::AddString(char *string)
     // Находим номер первой пустой строки
     int numEmptyString = 0;
 
+    /*
     for (; numEmptyString < MAX_STRINGS; numEmptyString++)
     {
         if (!buffer[numEmptyString][0])
@@ -25,6 +26,7 @@ void Console::AddString(char *string)
             break;
         }
     }
+    */
 
 
     // Если пустой строки нет
