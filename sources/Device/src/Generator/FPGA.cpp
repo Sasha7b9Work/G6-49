@@ -37,25 +37,27 @@ void FPGA::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetWaveForm(Wave::Form form)
 {
-    typedef void(*pFuncFpgaVV)();
-    
-    static const pFuncFpgaVV func[Wave::Form::Number] =
+    struct StructFunc
     {
-        CreateSine,
-        //CreateCosine,
-        //CreateMeander,
-        CreateRampPlus,
-        CreateRampMinus,
-        //CreateTriangle,
-        //CreateTrapeze,
-        //CreateImpulse,
-        //CreateExponentePlus,
-        //CreateExponenteMinus,
-        //CreateNoise,
-        //CreateFree
+        typedef void(*pFuncFpgaVV)();
+        pFuncFpgaVV func;
+        StructFunc(pFuncFpgaVV f) : func(f) {};
     };
     
-    func[form]();
+    static const StructFunc func[Wave::Form::Number] =
+    {
+        EmptyFunc,
+        CreateRampPlus,
+        CreateRampMinus,
+        CreateMeander,
+    };
+    
+    func[form].func();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::CreateMeander()
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,11 +100,8 @@ void FPGA::WriteControlRegister()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateSine()
+void FPGA::EmptyFunc()
 {
-//    memset(dataA, 0, FPGA_NUM_POINTS * 2);
-    memset(dataB, 0, FPGA_NUM_POINTS * 2);
-    SendData();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

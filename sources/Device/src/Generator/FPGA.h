@@ -54,11 +54,15 @@ private:
         operator uint8() const { return (uint8)value; };
     };
 
-    static void CreateSine();
+    static void EmptyFunc();
 
     static void CreateRampPlus();
 
     static void CreateRampMinus();
+
+    static void CreateMeander();
+
+    static void CreateEnable();
     /// Заслать рассчитанные точки в плис
     static void SendData();
     /// Записать байт в ПЛИС
