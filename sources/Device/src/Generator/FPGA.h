@@ -16,7 +16,7 @@ friend class Interface;
 public:
     static void Init();
 
-    static void SetWaveForm(Wave::Form form);
+    static void SetWaveForm(Chan ch, Wave::Form form);
 
     static void SetFrequency(Chan ch, float frequency);
 
@@ -54,13 +54,13 @@ private:
         operator uint8() const { return (uint8)value; };
     };
 
-    static void EmptyFunc();
+    static void EmptyFunc(Chan ch);
 
-    static void CreateRampPlus();
+    static void CreateRampPlus(Chan ch);
 
-    static void CreateRampMinus();
+    static void CreateRampMinus(Chan ch);
 
-    static void CreateMeander();
+    static void CreateMeander(Chan ch);
 
     static void CreateEnable();
     /// Заслать рассчитанные точки в плис
@@ -83,8 +83,7 @@ private:
     static ModeWorkFPGA modeWork;
     /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
     /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
-    static uint8 dataA[FPGA_NUM_POINTS * 2];
-    static uint16 dataB[FPGA_NUM_POINTS];
+    static uint8 data[Chan::Number][FPGA_NUM_POINTS * 2];
 
     static float amplitude[Chan::Number];
 

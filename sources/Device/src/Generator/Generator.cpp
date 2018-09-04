@@ -50,7 +50,7 @@ void Generator::SetFormWave(Chan ch, Wave::Form form)
 
         if (!waveIsSine)
         {
-            FPGA::SetWaveForm(form);
+            FPGA::SetWaveForm(ch, form);
         }
 
         Multiplexor::SetMode(ch, form);

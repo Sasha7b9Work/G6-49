@@ -14,8 +14,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FPGA::ModeWorkFPGA FPGA::modeWork = ModeNone;
-uint8              FPGA::dataA[FPGA_NUM_POINTS * 2];
-uint16             FPGA::dataB[FPGA_NUM_POINTS];
+uint8              FPGA::data[Chan::Number][FPGA_NUM_POINTS * 2];
 float              FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float              FPGA::offset[Chan::Number] = {5.0f, 5.0f};
 
@@ -35,13 +34,13 @@ void FPGA::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetWaveForm(Wave::Form form)
+void FPGA::SetWaveForm(Chan ch, Wave::Form form)
 {
     struct StructFunc
     {
-        typedef void(*pFuncFpgaVV)();
-        pFuncFpgaVV func;
-        StructFunc(pFuncFpgaVV f) : func(f) {};
+        typedef void(*pFuncFpgaVU8)(Chan);
+        pFuncFpgaVU8 func;
+        StructFunc(pFuncFpgaVU8 f) : func(f) {};
     };
     
     static const StructFunc func[Wave::Form::Number] =
@@ -52,11 +51,11 @@ void FPGA::SetWaveForm(Wave::Form form)
         CreateMeander,
     };
     
-    func[form].func();
+    func[form].func(ch);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateMeander()
+void FPGA::CreateMeander(Chan)
 {
 }
 
@@ -100,27 +99,27 @@ void FPGA::WriteControlRegister()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::EmptyFunc()
+void FPGA::EmptyFunc(Chan)
 {
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateRampPlus()
+void FPGA::CreateRampPlus(Chan ch)
 {
     modeWork = ModeDDS;
 
     float step = 2.0f / FPGA_NUM_POINTS;
 
-    float *data = (float *)malloc(FPGA_NUM_POINTS * 4);
+    float *d = (float *)malloc(FPGA_NUM_POINTS * 4);
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        data[i] = -1.0f + step * i;
+        d[i] = -1.0f + step * i;
     }
 
-    TransformDataToCode(data, dataA);
+    TransformDataToCode(d, data[ch]);
 
-    free(data);
+    free(d);
 
     SendData();
 
@@ -132,22 +131,22 @@ void FPGA::CreateRampPlus()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateRampMinus()
+void FPGA::CreateRampMinus(Chan ch)
 {
     modeWork = ModeDDS;
 
     float step = 2.0f / FPGA_NUM_POINTS;
 
-    float *data = (float *)malloc(FPGA_NUM_POINTS * 4);
+    float *d = (float *)malloc(FPGA_NUM_POINTS * 4);
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        data[i] = 1.0f - step * i;
+        d[i] = 1.0f - step * i;
     }
 
-    TransformDataToCode(data, dataA);
+    TransformDataToCode(d, data[ch]);
 
-    free(data);
+    free(d);
 
     SendData();
 
@@ -163,9 +162,11 @@ void FPGA::SendData()
 {
     WriteRegister(RG::_0_Control, 0);
     
-    for(int i = 0; i < FPGA_NUM_POINTS * 2; i++)
+    uint8 *pointer = &data[0][0];
+
+    for(int i = 0; i < FPGA_NUM_POINTS * 4; i++)
     {
-        WriteByte(dataA[i]);
+        WriteByte(*pointer++);
         CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, true);
         for(int x = 0; x < 10; x++) { }
         CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, false);
@@ -251,15 +252,15 @@ uint8 FPGA::RegisterForDuration(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2])
+void FPGA::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2])
 {
     int max = 0x1fff;
 
     for(int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        uint16 c = (uint16)(fabs(data[i]) * max);
+        uint16 c = (uint16)(fabs(d[i]) * max);
 
-        if(Sign(data[i]) == -1)
+        if(Sign(d[i]) == -1)
         {
             SetBit(c, 13);
         }

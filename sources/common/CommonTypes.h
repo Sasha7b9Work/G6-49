@@ -34,7 +34,8 @@ struct Chan
         Number
     } value;
     Chan(E v) : value(v) {};
-    operator int() const { return (uint8)value; };
+    //operator int() const { return (uint8)value; };
+    operator uint8() const { return (uint8)value; };
 };
 
 /// Сопротивление входа частотомера
