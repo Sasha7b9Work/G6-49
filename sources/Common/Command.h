@@ -87,9 +87,10 @@ public:
         {
             Sine,           ///< Синус
             //Cosine,         ///< Косинус
-            //Meander,        ///< Меандр
+            
             RampPlus,       ///< Пила+
             RampMinus,      ///< Пила-
+            Meander,        ///< Меандр
             //Triangle,       ///< Треугольник
             //Trapeze,        ///< Трапеция
             //Impulse,        ///< Импульс

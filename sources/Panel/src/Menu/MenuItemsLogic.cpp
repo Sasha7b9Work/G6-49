@@ -371,19 +371,19 @@ Item *Item::Press(Control key)
 
     Menu::itemUnderKey = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
 
-    if (type == TypeItem::Choice)
+    if (type == Item::Type::Choice)
     {
         return ((Choice *)this)->Press(key);
     }
-    else if (type == TypeItem::Button)
+    else if (type == Item::Type::Button)
     {
         return ((Button *)this)->Press(key.action);
     }
-    else if (type == TypeItem::ChoiceParameter)
+    else if (type == Item::Type::ChoiceParameter)
     {
         return ((ChoiceParameter *)this)->Press(key.action);
     }
-    else if (type == TypeItem::SmallButton)
+    else if (type == Item::Type::SmallButton)
     {
         return ((SButton *)this)->Press(key.action);
     }
@@ -392,9 +392,9 @@ Item *Item::Press(Control key)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-TypeItem Item::Type() const
+Item::Type Item::GetType() const
 {
-    return type;
+    return (Item::Type::E)type;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -402,7 +402,7 @@ int8 Choice::CurrentIndex() const
 {
     int8 retValue = 0;
 
-    if (type == TypeItem::Choice)
+    if (type == Item::Type::Choice)
     {
         if(isPageSB)
         {
@@ -414,7 +414,7 @@ int8 Choice::CurrentIndex() const
             retValue = *cell;
         }
     }
-    else if (type == TypeItem::ChoiceParameter)
+    else if (type == Item::Type::ChoiceParameter)
     {
         ChoiceParameter *param = (ChoiceParameter *)this;
 

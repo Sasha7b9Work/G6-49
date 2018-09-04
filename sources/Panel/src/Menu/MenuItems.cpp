@@ -140,7 +140,7 @@ void Item::SetCurrent(bool active)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsOpened() const
 {
-    if (type == TypeItem::Page)
+    if (type == Item::Type::Page)
     {
         return keeper->CurrentItemIsOpened();
     }
@@ -168,15 +168,15 @@ bool Item::ChangeOpened(int delta)
         return false;
     }
 
-    if (type == TypeItem::Page)
+    if (type == Item::Type::Page)
     {
         ((Page *)this)->ChangeSubPage(delta);
     }
-    else if (type == TypeItem::Choice)
+    else if (type == Item::Type::Choice)
     {
         ((Choice *)this)->ChangeIndex(delta);
     }
-    else if (type == TypeItem::Governor)
+    else if (type == Item::Type::Governor)
     {
         ((Governor *)this)->ChangeValue(delta);
     }
@@ -202,7 +202,7 @@ bool Page::CurrentItemIsOpened() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::ShortPress()
 {
-    if(type == TypeItem::Choice)
+    if(type == Item::Type::Choice)
     {
         Choice *choice = (Choice *)this;
         if(!IS_ACTIVE(this))
@@ -219,7 +219,7 @@ void Item::ShortPress()
             choice->ChangeIndex(-1);
         }
     }
-    else if(type == TypeItem::Button)
+    else if(type == Item::Type::Button)
     {
         if(IS_ACTIVE(this))
         {
@@ -227,12 +227,12 @@ void Item::ShortPress()
             ((Button *)this)->funcOnPress();
         }
     }
-    else if(type == TypeItem::Page)
+    else if(type == Item::Type::Page)
     {
         Page *page = (Page *)this;
         page->funcOnPress();
     }
-    else if(type == TypeItem::Governor)
+    else if(type == Item::Type::Governor)
     {
         if(IS_ACTIVE(this))
         {
@@ -247,7 +247,7 @@ void Item::ShortPress()
             }
         }
     }
-    else if(type == TypeItem::GovernorColor)
+    else if(type == Item::Type::GovernorColor)
     {
         if(IS_ACTIVE(this))
         {
@@ -266,7 +266,7 @@ void Item::ShortPress()
             }
         }
     }
-    else if(type == TypeItem::SmallButton)
+    else if(type == Item::Type::SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
@@ -277,11 +277,11 @@ void Item::ShortPress()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::LongPress()
 {
-    if(type == TypeItem::Button)
+    if(type == Item::Type::Button)
     {
         ((Button *)this)->ShortPress();
     }
-    else if(type == TypeItem::SmallButton)
+    else if(type == Item::Type::SmallButton)
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();

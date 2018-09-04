@@ -29,28 +29,10 @@ extern int8 gCurDigit;
 typedef bool (*pFuncBKey)(Control);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Разные виды пунктов меню
-struct TypeItem
-{
-    enum E
-    {
-        None,           
-        Choice,             ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
-        Button,             ///< Кнопка.
-        Page,               ///< Страница.
-        Governor,           ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
-        GovernorColor,      ///< Позволяет выбрать цвет.
-        SmallButton,        ///< Кнопка для режима малых кнопок
-        ChoiceParameter,
-        Number
-    } value;
-    operator uint8() const { return (uint8)value; };
-    bool Is(E v) const { return v == value; };
-};
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                                   \
-    TypeItem        type;           /* Тип итема */                                                                                             \
+    uint8           type;           /* Тип итема */                                                                                             \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                                \
     bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                   \
                                     /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */     \
@@ -83,6 +65,25 @@ class Item
 {
 public:
     COMMON_PART_MENU_ITEM;
+    /// Разные виды пунктов меню
+    struct Type
+    {
+        enum E
+        {
+            None,
+            Choice,             ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
+            Button,             ///< Кнопка.
+            Page,               ///< Страница.
+            Governor,           ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
+            GovernorColor,      ///< Позволяет выбрать цвет.
+            SmallButton,        ///< Кнопка для режима малых кнопок
+            ChoiceParameter,
+            Number
+        } value;
+        Type(E v) : value(v) {};
+        operator uint8() const { return (uint8)value; };
+        bool Is(E v) const     { return v == value;   };
+    };
     /// \brief Возвращает true, если элемент меню control затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
     /// раскрывающийся элемент меню вроде Choice или Governor
     bool IsShade() const;
@@ -107,7 +108,7 @@ public:
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
     Item *Press(Control control);
 
-    TypeItem Type() const;
+    Type GetType() const;
 
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage() const;

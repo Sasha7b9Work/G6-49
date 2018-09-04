@@ -48,7 +48,7 @@ static const Settings defSet =
         Wave::Parameter::Frequency,                      // sig_parameter[NumForms]
         Wave::Parameter::Frequency,
         Wave::Parameter::Frequency,
-//        Wave::Parameter::Frequency,
+        Wave::Parameter::Frequency,
 //        Wave::Parameter::Frequency,
 //        Wave::Parameter::Frequency,
 //        Wave::Parameter::Frequency,

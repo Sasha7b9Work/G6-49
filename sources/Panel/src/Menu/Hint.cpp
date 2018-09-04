@@ -95,7 +95,7 @@ void Hint::Draw()
             Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->Title());
             Painter::SetColor(Color::GREEN);
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5;
-            if (item->Type().Is(TypeItem::Choice))
+            if (item->GetType().Is(Item::Type::Choice))
             {
                 Choice *choice = (Choice *)item;
                 width -= 10;
