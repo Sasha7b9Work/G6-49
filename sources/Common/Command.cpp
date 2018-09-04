@@ -6,37 +6,25 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct StrName
-{
-    pString nameRu;
-    pString nameEn;
-    StrName(pString nRu, pString nEn) : nameRu(nRu), nameEn(nEn) {};
-    pString Name(Language lang)
-    {
-        return lang == Language::RU ? nameRu : nameEn;
-    }
-};
-
-static StrName namesWaveForm[Wave::Form::Number] =
-{
-    StrName("—»Õ”—",        "SINE"   ),
-    StrName("œ»À¿+",        "RAMP+"  ),
-    StrName("œ»À¿-",        "RAMP-"  ),
-    StrName("Ã≈¿Õƒ–",       "MEANDER")
-//    { " Œ—»Õ”—",      "COSINE" },
-//    { "“–≈”√ŒÀ‹Õ» ",  "TRIANGLE"},
-//    { "“–¿œ≈÷»ﬂ",     "TRAPEZE"},
-//    { "»Ãœ”À‹—",      "IMPULSE" },
-//    { "› —œŒÕ≈Õ“¿+",  "EXPONENT+"},
-//    { "› —œŒÕ≈Õ“¿-",  "EXPONENT-"},
-//    { "ÿ”Ã",          "NOISE"},
-//    { "œ–Œ»«¬ŒÀ‹Õ€…", "FREE"}
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Wave::Form::Name(Language lang) const
 {
-    return namesWaveForm[value].Name(lang);
+    struct StrName
+    {
+        pString nameRu;
+        pString nameEn;
+        StrName(pString nRu, pString nEn) : nameRu(nRu), nameEn(nEn) { };
+        pString Name(Language lang) { return lang == Language::RU ? nameRu : nameEn; }
+    };
+
+    static StrName names[Wave::Form::Number] =
+    {
+        StrName("—»Õ”—",        "SINE"),
+        StrName("œ»À¿+",        "RAMP+"),
+        StrName("œ»À¿-",        "RAMP-"),
+        StrName("Ã≈¿Õƒ–",       "MEANDER")
+    };
+
+    return names[value].Name(lang);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +36,7 @@ pString Register::Name() const
         StrName(pString n) : name(n) {};
     };
 
-    static StrName names[Register::Number] =
+    static const StrName names[Register::Number] =
     {
         "ÃÛÎ¸ÚËÔÎÂÍÒÓ 1",
         "ÃÛÎ¸ÚËÔÎÂÍÒÓ 2",
