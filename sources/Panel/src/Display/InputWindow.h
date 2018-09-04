@@ -2,6 +2,7 @@
 #include "Hardware/Controls.h"
 #include "Command.h"
 #include "Menu/MenuItems.h"
+#include <string.h>
 
 
 #ifdef WIN32
@@ -121,6 +122,12 @@ public:
         static Wave::Parameter   m_param;
         static Chan              ch;
 
+        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Wave::Parameter::Frequency, 
+               uint a = 0, uint numlm = 0, float _min = 0.1f, float _max = 100e6f) :
+            sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), allow(a), numLockMode(numlm), min(_min), max(_max)
+        {
+            strcpy(buffer, buff);
+        }
         char     sign;
         char     buffer[NUM_DIGITS + 1];    ///< В этом буфере хранится знак числа, а затем цифры с точкой
         int8     posComma;            ///< После какого знакоместа выводить запятую

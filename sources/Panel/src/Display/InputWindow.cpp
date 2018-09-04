@@ -14,7 +14,7 @@
 Chan                InputWindow::chan = Chan::A;
 Wave::Form          InputWindow::form = Wave::Form::Sine;
 Wave::Parameter     InputWindow::m_param = Wave::Parameter::Amplitude;
-InputWindow::Struct InputWindow::m_iws;
+InputWindow::Struct InputWindow::m_iws = InputWindow::Struct(' ');
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

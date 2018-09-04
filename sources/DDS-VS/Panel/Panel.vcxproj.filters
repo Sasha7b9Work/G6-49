@@ -40,28 +40,28 @@
     <Filter Include="Generator">
       <UniqueIdentifier>{f651b877-089a-4d50-9022-9bb15b0bc83e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="common\Display">
+    <Filter Include="Display">
       <UniqueIdentifier>{4201a8fb-8297-4f49-9322-40b8d3de1d91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="common\Display\Font">
+    <Filter Include="Display\Font">
       <UniqueIdentifier>{255c5d44-7148-42c2-bd4d-c6717ab7f6f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\InputWindow.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Common\Command.cpp">
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Font\Font.cpp">
-      <Filter>common\Display\Font</Filter>
+      <Filter>Display\Font</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <Filter>libs\HAL</Filter>
@@ -163,13 +163,13 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
@@ -217,13 +217,13 @@
       <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Text.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Console.cpp">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Statistics.cpp">
       <Filter>Utils</Filter>
@@ -270,22 +270,22 @@
       <Filter>Settings</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\font\Font.h">
-      <Filter>common\Display\Font</Filter>
+      <Filter>Display\Font</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Common\Command.h">
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Display.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\DisplayTypes.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\InputWindow.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h">
       <Filter>libs\HAL</Filter>
@@ -381,10 +381,10 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Painter.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Colors.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h">
       <Filter>Hardware</Filter>
@@ -489,13 +489,13 @@
       <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Text.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Hint.h">
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Console.h">
-      <Filter>common\Display</Filter>
+      <Filter>Display</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Utils\Statistics.h">
       <Filter>Utils</Filter>
@@ -530,16 +530,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\Display\font\font5.inc">
-      <Filter>common\Display\Font</Filter>
+      <Filter>Display\Font</Filter>
     </None>
     <None Include="..\..\Panel\src\Display\font\font8.inc">
-      <Filter>common\Display\Font</Filter>
+      <Filter>Display\Font</Filter>
     </None>
     <None Include="..\..\Panel\src\Display\font\fontUGO.inc">
-      <Filter>common\Display\Font</Filter>
+      <Filter>Display\Font</Filter>
     </None>
     <None Include="..\..\Panel\src\Display\font\fontUGO2.inc">
-      <Filter>common\Display\Font</Filter>
+      <Filter>Display\Font</Filter>
     </None>
     <None Include="..\..\Panel\src\libs\CMSIS\startup_stm32f429xx.s">
       <Filter>libs\CMSIS</Filter>
