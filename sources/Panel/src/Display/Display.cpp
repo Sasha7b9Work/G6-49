@@ -2,7 +2,6 @@
 #include "Generator/Signal.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
 #include "InputWindow.h"

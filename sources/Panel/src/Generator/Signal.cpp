@@ -131,8 +131,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         int dX = 28;
         for (int x = x0; x < x0 + 80; x += dX)
         {
-            Painter::DrawLine(x, aveY, x + dX, minY);
-            Painter::DrawLine(x + dX, aveY, x + dX, minY);
+            Painter::DrawLine(x, maxY, x + dX, minY);
+            Painter::DrawLine(x + dX, maxY, x + dX, minY);
         }
     }
     else if(form == Wave::Form::RampMinus)
@@ -141,8 +141,8 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         int dY = 20;
         for (int x = x0; x < x0 + 80; x += dX)
         {
-            Painter::DrawLine(x, aveY - dY, x + dX, aveY);
-            Painter::DrawVLine(x + dX, aveY - dY, aveY);
+            Painter::DrawLine(x, aveY - dY, x + dX, aveY + dY);
+            Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
         }
     }
     /*
