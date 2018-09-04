@@ -1,6 +1,7 @@
 #pragma once
 #include "defines.h"
 #include "Settings/SettingsTypes.h"
+#include "CommonTypes.h"
 
 
 #ifdef WIN32
@@ -102,7 +103,7 @@ public:
         } value;
         Form(E v) : value((E)v) { };
         operator uint8() const  { return (uint8)value; };
-        pString Name() const;
+        pString Name(Language lang) const;
     } form ;
 
     struct Parameter
@@ -177,13 +178,9 @@ struct Register
 
 #define SPI_MASTER_SYNBYTE  0xAC
 
-#define NAME_FORM(form, lang) namesWaveForm[form][lang]
+#define NAME_FORM(form, lang)  Wave::Form(form).Name(lang)
 #define FORM_RU(form) NAME_FORM(form, Language::RU)
 #define FORM_EN(form) NAME_FORM(form, Language::EN)
-extern const char * namesWaveForm[Wave::Form::Number][2];
-
-
-//const char *Command_Name(CommandPanel command);
 
 
 /** @}  @} */

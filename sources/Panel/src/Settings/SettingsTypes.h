@@ -1,6 +1,5 @@
 #pragma once
 #include "defines.h"
-//#include "Command.h"
 #include "CommonTypes.h"
 
 
@@ -9,17 +8,6 @@
 #pragma warning(push)
 #pragma warning(disable:4514)
 #endif
-
-struct Language
-{
-    enum E
-    {
-        RU,
-        EN
-    } value;
-    Language(uint v) : value((E)v) {};
-    operator uint8() const { return (uint8)value; };
-};
 
 struct SizeByte
 {

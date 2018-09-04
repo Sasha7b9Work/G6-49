@@ -8,6 +8,23 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct Language
+{
+    enum E
+    {
+        RU,
+        EN,
+        Number
+    } value;
+    Language(uint v = 0) : value((E)v)
+    {
+    };
+    operator uint8() const
+    {
+        return (uint8)value;
+    };
+};
+
 struct Chan
 {
     enum E

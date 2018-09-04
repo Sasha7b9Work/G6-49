@@ -112,7 +112,6 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         }
     }
     */
-    /*
     else if(form == Wave::Form::Meander)
     {
         int dX = 40;
@@ -125,7 +124,6 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
         }
     }
-    */
     else if (form == Wave::Form::RampPlus)
     {
         int dX = 28;
@@ -244,7 +242,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
 
     y0 += 5;
 
-    Text::DrawText(22, y0 + 3, form.Name(), Color::FILL);
+    Text::DrawText(22, y0 + 3, form.Name(LANG), Color::FILL);
 
     AllowableParameters allowParameters;
     InputWindow::FillAllowParameters(ch, form, &allowParameters);

@@ -6,13 +6,24 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char * namesWaveForm[Wave::Form::Number][2] =
+struct StrName
 {
-    { "СИНУС",        "SINE" },
+    pString nameRu;
+    pString nameEn;
+    StrName(pString nRu, pString nEn) : nameRu(nRu), nameEn(nEn) {};
+    pString Name(Language lang)
+    {
+        return lang == Language::RU ? nameRu : nameEn;
+    }
+};
+
+static StrName namesWaveForm[Wave::Form::Number] =
+{
+    StrName("СИНУС",        "SINE"   ),
+    StrName("ПИЛА+",        "RAMP+"  ),
+    StrName("ПИЛА-",        "RAMP-"  ),
+    StrName("МЕАНДР",       "MEANDER")
 //    { "КОСИНУС",      "COSINE" },
-//    { "МЕАНДР",       "MEANDER"},
-    { "ПИЛА+",        "RAMP+" },
-    { "ПИЛА-",        "RAMP-"},
 //    { "ТРЕУГОЛЬНИК",  "TRIANGLE"},
 //    { "ТРАПЕЦИЯ",     "TRAPEZE"},
 //    { "ИМПУЛЬС",      "IMPULSE" },
@@ -23,42 +34,21 @@ const char * namesWaveForm[Wave::Form::Number][2] =
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *Command_Name(CommandPanel command)
+pString Wave::Form::Name(Language lang) const
 {
-    static const char *names[CommandPanel::Number] =
-    {
-        "SERVICE",
-        "ENABLE",
-        "SET FORM",
-        "SET FREQUENCY",
-        "SET AMPLITUDE",
-        "SET OFFSET",
-        "SET DURATION",
-        "SET DUTYRATIO",
-        "SET PHASE",
-        "RUN RESET",
-        "MODE DEBUG"
-    };
-
-    if (command >= CommandPanel::Number)
-    {
-        static char buffer[10] = {0};
-        sprintf(buffer, "%x", static_cast<uint8>(command));
-        LOG_WRITE("ОШИБКА - принято %s", buffer);
-    }
-    return const_cast<char *>(names[command]);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Wave::Form::Name() const
-{
-    return NAME_FORM(value, LANG);
+    return namesWaveForm[value].Name(lang);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString Register::Name() const
 {
-    static pString names[Register::Number] =
+    struct StrName
+    {
+        pString name;
+        StrName(pString n) : name(n) {};
+    };
+
+    static StrName names[Register::Number] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",
@@ -77,8 +67,11 @@ pString Register::Name() const
         "RG8 Длит. импульсов B",
         "RG9 Парам. частотомера",
         "RG10 Смещение",
-        "Мультиплексор 3"
+        "Мультиплексор 3",
+        "Частотомер - сопротивление",
+        "Частотомер - связь",
+        "Частотомер - фильтр"
     };
 
-    return names[value];
+    return names[value].name;
 }
