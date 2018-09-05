@@ -325,9 +325,7 @@ uint FPGA::OffsetToCode(float off)
 {
     uint max = 0x1fff;
 
-    off = (off - 5.0f) / 5.0f;
-
-    int code = ~((int)(off * max)) + 1;
+    int code = ~((int)(off / 5.0f * max)) + 1;
 
     return (uint)(code & 0x3fff);
 }
@@ -337,23 +335,10 @@ void FPGA::SetAmplitude(Chan ch, float ampl)
 {
     amplitude[ch] = ampl;
 
-    if(modeWork[ch] == FPGA::ModeWork::Meander)
-    {
-        uint64 mask = ((1 << 14) - 1);
-        float step = 10.0f / mask;
-        uint val = (uint)(step * ampl);
-        RG reg = (ch == Chan::A) ? RG::_3_RectA : RG::_4_RectB;
-        mask <<= 14;
-        registers[reg] = (registers[reg] & (~mask)) | (val << 14);
-        WriteRegister(reg, registers[reg]);
-    }
-    else
-    {
-        uint nA = (uint)(amplitude[Chan::A] * 1023 / 10);
-        uint nB = (uint)(amplitude[Chan::B] * 1023 / 10);
+    uint nA = (uint)(amplitude[Chan::A] * 1023 / 10);
+    uint nB = (uint)(amplitude[Chan::B] * 1023 / 10);
 
-        WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
-    }
+    WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -361,25 +346,8 @@ void FPGA::SetOffset(Chan ch, float off)
 {
     offset[ch] = off;
 
-    if(modeWork[ch] == FPGA::ModeWork::Meander)
-    {
-        uint64 mask = ((1 << 14) - 1);
-
-        float step = 10.0f / mask;
-
-        uint val = (uint)(step * (off + 5.0f));
-
-        RG reg = (ch == Chan::A) ? RG::_3_RectA : RG::_4_RectB;
-
-        registers[reg] = (registers[reg] & (~mask)) | val;
-
-        WriteRegister(reg, registers[reg]);
-    }
-    else
-    {
-        uint nA = OffsetToCode(offset[Chan::A]);
-        uint nB = OffsetToCode(offset[Chan::B]);
-
-        WriteRegister(RG::_10_Offset, nA + (nB << 14));
-    }
+    uint nA = OffsetToCode(offset[Chan::A]);
+    uint nB = OffsetToCode(offset[Chan::B]);
+    
+    WriteRegister(RG::_10_Offset, nA + (nB << 14));
 }

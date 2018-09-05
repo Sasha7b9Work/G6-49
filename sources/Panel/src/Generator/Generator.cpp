@@ -119,6 +119,12 @@ void Generator::SetParameter(Chan ch, Wave::Parameter param, float value)
     };
 
     uint8 buffer[6] = {(uint8)commands[param], (uint8)ch};
+
+    if(param == Wave::Parameter::Offset)
+    {
+        value -= 5.0f;
+    }
+
     memcpy(&buffer[2], &value, 4);
     SendToInterface(buffer, 6);
 }
