@@ -24,15 +24,20 @@ public:
 
     static void SetOffset(Chan ch, float offset);
 
-private:
-    enum ModeWork
+    struct ModeWork
     {
-        ModeNone,
-        ModeDDS,
-        ModeImpulse,    ///< Режим, в котором импульcы могут иметь разную частоту
-        ModeImpulse2    ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
+        enum E
+        {
+            None,
+            DDS,
+            Impulse,    ///< Режим, в котором импульcы могут иметь разную частоту
+            Impulse2    ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
+        } value;
+        ModeWork(E v) : value(v) {};
+        operator uint8() const { return(uint8)value; };
     };
 
+private:
     struct RG
     {
         enum E

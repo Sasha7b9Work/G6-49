@@ -13,7 +13,7 @@
 #define MIN_VALUE (0)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::ModeWork  FPGA::modeWork = ModeNone;
+FPGA::ModeWork  FPGA::modeWork = FPGA::ModeWork::None;
 uint8           FPGA::data[Chan::Number][FPGA_NUM_POINTS * 2];
 float           FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float           FPGA::offset[Chan::Number] = {5.0f, 5.0f};
@@ -64,16 +64,16 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 {
     WriteControlRegister();
     
-    if (modeWork == ModeDDS)
+    if (modeWork == ModeWork::DDS)
     {
         uint64 N = (uint64)(frequency * 11e3f);
         WriteRegister(RG::_1_Freq, N);
     }
-    else if(modeWork == ModeImpulse || modeWork == ModeImpulse2)
+    else if(modeWork == ModeWork::Impulse || modeWork == ModeWork::Impulse2)
     {
-        if (ch == Chan::B && ModeImpulse2)
+        if (ch == Chan::B && ModeWork::Impulse2)
         {
-            modeWork = ModeImpulse;
+            modeWork = ModeWork::Impulse;
             WriteControlRegister();
         }
         uint N = (uint)(1e8f / frequency + 0.5f);
@@ -84,15 +84,15 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteControlRegister()
 {
-    if (modeWork == ModeDDS)
+    if (modeWork == ModeWork::DDS)
     {
         WriteRegister(RG::_0_Control, BINARY_U8(01111001));
     }
-    else if (modeWork == ModeImpulse)
+    else if (modeWork == ModeWork::Impulse)
     {
         WriteRegister(RG::_0_Control, 2);
     }
-    else if (modeWork == ModeImpulse2)
+    else if (modeWork == ModeWork::Impulse2)
     {
         WriteRegister(RG::_0_Control, 4);
     }
@@ -106,7 +106,7 @@ void FPGA::EmptyFunc(Chan)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::CreateRampPlus(Chan ch)
 {
-    modeWork = ModeDDS;
+    modeWork = ModeWork::DDS;
 
     float step = 2.0f / FPGA_NUM_POINTS;
 
@@ -133,7 +133,7 @@ void FPGA::CreateRampPlus(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::CreateRampMinus(Chan ch)
 {
-    modeWork = ModeDDS;
+    modeWork = ModeWork::DDS;
 
     float step = 2.0f / FPGA_NUM_POINTS;
 
