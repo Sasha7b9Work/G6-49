@@ -31,11 +31,25 @@ public:
             None,
             DDS,
             Impulse,    ///< Режим, в котором импульcы могут иметь разную частоту
-            Impulse2    ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
+            Impulse2,  ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
+            Rectangle,
+            Meander,
+            Number
         } value;
         ModeWork(E v) : value(v) {};
         operator uint8() const { return(uint8)value; };
     };
+
+    static struct ClockFrequency
+    {
+        enum E
+        {
+            _100MHz,
+            _1MHz
+        } value;
+        ClockFrequency(E v) : value(v) {};
+        operator uint8() const { return (uint8)value; };
+    } clock;
 
 private:
     struct RG
@@ -85,10 +99,10 @@ private:
     /// Преобразует смещение в прямой код, пригодный для записи в альтеру
     static uint OffsetToCode(float offset);
 
-    static ModeWork modeWork;
+    static ModeWork modeWork[Chan::Number];
     /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
     /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
-    static uint8 data[Chan::Number][FPGA_NUM_POINTS * 2];
+    static uint8 dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
 
     static float amplitude[Chan::Number];
 

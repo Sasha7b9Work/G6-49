@@ -3,6 +3,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
+#include "Generator/Generator.h"
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -13,10 +14,11 @@
 #define MIN_VALUE (0)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::ModeWork  FPGA::modeWork = FPGA::ModeWork::None;
-uint8           FPGA::data[Chan::Number][FPGA_NUM_POINTS * 2];
-float           FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
-float           FPGA::offset[Chan::Number] = {5.0f, 5.0f};
+FPGA::ModeWork       FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+uint8                FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
+float                FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
+float                FPGA::offset[Chan::Number] = {5.0f, 5.0f};
+FPGA::ClockFrequency FPGA::clock = FPGA::ClockFrequency::_100MHz;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,16 +66,16 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 {
     WriteControlRegister();
     
-    if (modeWork == ModeWork::DDS)
+    if (modeWork[ch] == ModeWork::DDS)
     {
         uint64 N = (uint64)(frequency * 11e3f);
         WriteRegister(RG::_1_Freq, N);
     }
-    else if(modeWork == ModeWork::Impulse || modeWork == ModeWork::Impulse2)
+    else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
     {
         if (ch == Chan::B && ModeWork::Impulse2)
         {
-            modeWork = ModeWork::Impulse;
+            modeWork[ch] = ModeWork::Impulse;
             WriteControlRegister();
         }
         uint N = (uint)(1e8f / frequency + 0.5f);
@@ -84,17 +86,39 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteControlRegister()
 {
-    if (modeWork == ModeWork::DDS)
+    uint16 data = 0;
+
+    SetBit(data, 0);                               // В нулевом бите 0 записываем только для записи данных в память
+
+    switch(modeWork[Chan::A])
     {
-        WriteRegister(RG::_0_Control, BINARY_U8(01111001));
+        case ModeWork::Rectangle:   SetBit(data, 1);    break;
+        case ModeWork::Meander:     SetBit(data, 8);    break;
     }
-    else if (modeWork == ModeWork::Impulse)
+
+    switch(modeWork[Chan::B])
     {
-        WriteRegister(RG::_0_Control, 2);
+        case ModeWork::Rectangle:   SetBit(data, 2);    break;
+        case ModeWork::Meander:     SetBit(data, 9);    break;
     }
-    else if (modeWork == ModeWork::Impulse2)
+
+    switch(Generator::sourceManipulation[Chan::A])
     {
-        WriteRegister(RG::_0_Control, 4);
+        case Generator::SourceManipulation::ImpulseA: SetBit(data, 3);                  break;
+        case Generator::SourceManipulation::ImpulseB: SetBit(data, 4);                  break;
+        case Generator::SourceManipulation::None:     SetBit(data, 3); SetBit(data, 4); break;
+    }
+
+    switch(Generator::sourceManipulation[Chan::B])
+    {
+        case Generator::SourceManipulation::ImpulseA: SetBit(data, 5);                  break;
+        case Generator::SourceManipulation::ImpulseB: SetBit(data, 6);                  break;
+        case Generator::SourceManipulation::None:     SetBit(data, 5); SetBit(data, 6); break;
+    }
+
+    if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
+    {
+        SetBit(data, 7);
     }
 }
 
@@ -106,20 +130,20 @@ void FPGA::EmptyFunc(Chan)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::CreateRampPlus(Chan ch)
 {
-    modeWork = ModeWork::DDS;
+    modeWork[ch] = ModeWork::DDS;
 
     float step = 2.0f / FPGA_NUM_POINTS;
 
-    float *d = (float *)malloc(FPGA_NUM_POINTS * 4);
+    float *data = (float *)malloc(FPGA_NUM_POINTS * 4);
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        d[i] = -1.0f + step * i;
+        data[i] = -1.0f + step * i;
     }
 
-    TransformDataToCode(d, data[ch]);
+    TransformDataToCode(data, dataDDS[ch]);
 
-    free(d);
+    free(data);
 
     SendData();
 
@@ -133,7 +157,7 @@ void FPGA::CreateRampPlus(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::CreateRampMinus(Chan ch)
 {
-    modeWork = ModeWork::DDS;
+    modeWork[ch] = ModeWork::DDS;
 
     float step = 2.0f / FPGA_NUM_POINTS;
 
@@ -144,7 +168,7 @@ void FPGA::CreateRampMinus(Chan ch)
         d[i] = 1.0f - step * i;
     }
 
-    TransformDataToCode(d, data[ch]);
+    TransformDataToCode(d, dataDDS[ch]);
 
     free(d);
 
@@ -162,7 +186,7 @@ void FPGA::SendData()
 {
     WriteRegister(RG::_0_Control, 0);
     
-    uint8 *pointer = &data[0][0];
+    uint8 *pointer = &dataDDS[0][0];
 
     for(int i = 0; i < FPGA_NUM_POINTS * 4; i++)
     {
