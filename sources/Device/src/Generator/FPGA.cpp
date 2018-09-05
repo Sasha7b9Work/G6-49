@@ -318,10 +318,23 @@ void FPGA::SetAmplitude(Chan ch, float ampl)
 {
     amplitude[ch] = ampl;
 
-    uint nA = (uint)(amplitude[Chan::A] * 1023 / 10);
-    uint nB = (uint)(amplitude[Chan::B] * 1023 / 10);
+    if(modeWork[ch] == FPGA::ModeWork::Meander)
+    {
+        uint64 mask = ((1 << 14) - 1);
+        float step = 10.0f / mask;
+        uint val = (uint)(step * ampl);
+        RG reg = (ch == Chan::A) ? RG::_3_RectA : RG::_4_RectB;
+        mask <<= 14;
+        registers[reg] = (registers[reg] & (~mask)) | (val << 14);
+        WriteRegister(reg, registers[reg]);
+    }
+    else
+    {
+        uint nA = (uint)(amplitude[Chan::A] * 1023 / 10);
+        uint nB = (uint)(amplitude[Chan::B] * 1023 / 10);
 
-    WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
+        WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -339,7 +352,7 @@ void FPGA::SetOffset(Chan ch, float off)
 
         RG reg = (ch == Chan::A) ? RG::_3_RectA : RG::_4_RectB;
 
-        registers[reg] = (registers[reg] & (~mask)) | (val & mask);
+        registers[reg] = (registers[reg] & (~mask)) | val;
 
         WriteRegister(reg, registers[reg]);
     }

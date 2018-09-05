@@ -58,7 +58,7 @@ static const Settings defSet =
 //        Wave::Parameter::Frequency,
 //        Wave::Parameter::Frequency
     },
-    3,                      // menu_currentPage
+    0,                      // menu_currentPage
     (Page*)0,               // menu_page
     {0},                    // menu_posActItem[]
     {0},                    // menu_currentSubPage[]
