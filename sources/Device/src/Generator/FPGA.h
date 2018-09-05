@@ -25,7 +25,7 @@ public:
     static void SetOffset(Chan ch, float offset);
 
 private:
-    enum ModeWorkFPGA
+    enum ModeWork
     {
         ModeNone,
         ModeDDS,
@@ -80,7 +80,7 @@ private:
     /// Преобразует смещение в прямой код, пригодный для записи в альтеру
     static uint OffsetToCode(float offset);
 
-    static ModeWorkFPGA modeWork;
+    static ModeWork modeWork;
     /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
     /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
     static uint8 data[Chan::Number][FPGA_NUM_POINTS * 2];

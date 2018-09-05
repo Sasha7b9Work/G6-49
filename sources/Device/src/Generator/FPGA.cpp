@@ -13,10 +13,10 @@
 #define MIN_VALUE (0)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::ModeWorkFPGA FPGA::modeWork = ModeNone;
-uint8              FPGA::data[Chan::Number][FPGA_NUM_POINTS * 2];
-float              FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
-float              FPGA::offset[Chan::Number] = {5.0f, 5.0f};
+FPGA::ModeWork  FPGA::modeWork = ModeNone;
+uint8           FPGA::data[Chan::Number][FPGA_NUM_POINTS * 2];
+float           FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
+float           FPGA::offset[Chan::Number] = {5.0f, 5.0f};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
