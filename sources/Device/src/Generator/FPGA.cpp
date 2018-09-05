@@ -50,9 +50,10 @@ void FPGA::SetWaveForm(Chan ch, Wave::Form form)
     static const StructFunc func[Wave::Form::Number] =
     {
         EmptyFunc,
-        CreateRampPlus,
-        CreateRampMinus,
-        CreateMeander,
+        SetRampPlusMode,
+        SetRampMinusMode,
+        SetMeanderMode,
+        SetImpulseMode
     };
     
     func[form].func(ch);
@@ -61,7 +62,7 @@ void FPGA::SetWaveForm(Chan ch, Wave::Form form)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateMeander(Chan ch)
+void FPGA::SetMeanderMode(Chan ch)
 {
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
@@ -72,6 +73,33 @@ void FPGA::CreateMeander(Chan ch)
     RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
 
     WriteRegister(regs[ch], data);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetImpulseMode(Chan ch)
+{
+    modeWork[ch] = ModeWork::Impulse;
+    WriteControlRegister();
+
+    uint64 data = (16383 << 14) + 8191;
+
+    RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
+
+    WriteRegister(regs[ch], data);
+
+    // ”становим значени€ по умолчанию дл€ периода и длительности.
+    /// \todo Ќе забыть убрать
+
+    if(ch == Chan::A)
+    {
+        WriteRegister(RG::_5_PeriodImpulseA, (uint64)1e7);
+        WriteRegister(RG::_6_DurationImpulseA, (uint64)1e6);
+    }
+    else
+    {
+        WriteRegister(RG::_7_PeriodImpulseB, (uint64)2e7);
+        WriteRegister(RG::_8_DurationImpulseB, (uint64)2e7);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -112,6 +140,7 @@ void FPGA::WriteControlRegister()
         case ModeWork::Meander:     
             SetBit(data, 8);
         case ModeWork::Rectangle:
+        case ModeWork::Impulse:
             SetBit(data, 1);
             break;
     }
@@ -121,6 +150,7 @@ void FPGA::WriteControlRegister()
         case ModeWork::Meander:   
             SetBit(data, 9);
         case ModeWork::Rectangle:
+        case ModeWork::Impulse:
             SetBit(data, 2);
             break;
     }
@@ -153,7 +183,7 @@ void FPGA::EmptyFunc(Chan)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateRampPlus(Chan ch)
+void FPGA::SetRampPlusMode(Chan ch)
 {
     modeWork[ch] = ModeWork::DDS;
 
@@ -180,7 +210,7 @@ void FPGA::CreateRampPlus(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateRampMinus(Chan ch)
+void FPGA::SetRampMinusMode(Chan ch)
 {
     modeWork[ch] = ModeWork::DDS;
 

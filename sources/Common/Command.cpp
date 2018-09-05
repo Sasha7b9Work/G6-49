@@ -18,10 +18,11 @@ pString Wave::Form::Name(Language lang) const
 
     static StrName names[Wave::Form::Number] =
     {
-        StrName("—»Õ”—",        "SINE"),
-        StrName("œ»À¿+",        "RAMP+"),
-        StrName("œ»À¿-",        "RAMP-"),
-        StrName("Ã≈¿Õƒ–",       "MEANDER")
+        StrName("—»Õ”—",    "SINE"),
+        StrName("œ»À¿+",    "RAMP+"),
+        StrName("œ»À¿-",    "RAMP-"),
+        StrName("Ã≈¿Õƒ–",   "MEANDER"),
+        StrName("»Ãœ”À‹—",  "IMPULSE")
     };
 
     return names[value].Name(lang);

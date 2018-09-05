@@ -80,11 +80,13 @@ private:
 
     static void EmptyFunc(Chan ch);
 
-    static void CreateRampPlus(Chan ch);
+    static void SetRampPlusMode(Chan ch);
 
-    static void CreateRampMinus(Chan ch);
+    static void SetRampMinusMode(Chan ch);
 
-    static void CreateMeander(Chan ch);
+    static void SetMeanderMode(Chan ch);
+
+    static void SetImpulseMode(Chan ch);
 
     static void CreateEnable();
     /// Заслать рассчитанные точки в плис

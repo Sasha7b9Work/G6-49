@@ -134,11 +134,11 @@ static void WriteBufferBytes(uint address, void *buffer, int numBytes)
 static uint GetSector(uint startAddress)
 {
 #ifndef OPEN
-    typedef struct
+    struct StructSector
     {
         uint number;
         uint startAddress;
-    } StructSector;
+    };
 
     static const StructSector sectors[] =
     {

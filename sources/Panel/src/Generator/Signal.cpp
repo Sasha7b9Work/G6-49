@@ -79,24 +79,28 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         first = false;
     }
 
-    Wave::Form form = WAVE_FORM(chan);
-
     Painter::DrawVLine(x0, minY, maxY);
     Painter::DrawHLine(aveY, x0, x0 + width);
 
-    if (form == Wave::Form::Sine)
+
+    static const struct StructFunc
     {
-        float speed = 0.1f;
-        int delta = 1;
+        typedef void (*pFuncIIII)(int, int, int, int);
+        pFuncIIII func;
+        StructFunc(pFuncIIII f) : func(f) {};
+    } func[Wave::Form::Number] =
+    {
+        DrawSine,
+        DrawRampPlus,
+        DrawRampMinus,
+        DrawMeander,
+        DrawImpulse
+    };
 
-        for (int i = delta; i < width; i++)
-        {
-            int y1 = aveY - (int)(sinf((i - delta) * speed) * height / 2.0f);
-            int y2 = aveY - (int)(sinf(i * speed) * height / 2.0f);
+    func[WAVE_FORM(chan)].func(x0, minY, width, height);
 
-            Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
-        }
-    }
+    Wave::Form form = WAVE_FORM(chan);
+
     /*
     else if(form == Wave::Form::Cosine)
     {
@@ -112,37 +116,6 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         }
     }
     */
-    else if(form == Wave::Form::Meander)
-    {
-        int dX = 40;
-        int dY = 20;
-        for(int x = x0; x < x0 + 80; x += dX)
-        {
-            Painter::DrawHLine(aveY - dY, x, x + dX / 2);
-            Painter::DrawVLine(x + dX / 2, aveY - dY, aveY + dY);
-            Painter::DrawHLine(aveY + dY, x + dX / 2, x + dX);
-            Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
-        }
-    }
-    else if (form == Wave::Form::RampPlus)
-    {
-        int dX = 28;
-        for (int x = x0; x < x0 + 80; x += dX)
-        {
-            Painter::DrawLine(x, maxY, x + dX, minY);
-            Painter::DrawLine(x + dX, maxY, x + dX, minY);
-        }
-    }
-    else if(form == Wave::Form::RampMinus)
-    {
-        int dX = 28;
-        int dY = 20;
-        for (int x = x0; x < x0 + 80; x += dX)
-        {
-            Painter::DrawLine(x, aveY - dY, x + dX, aveY + dY);
-            Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
-        }
-    }
     /*
     else if(form == Wave::Form::Triangle)
     {
@@ -170,19 +143,6 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
             Painter::DrawHLine(aveY - dY, x0 + dX / 2, x0 + 3 * dX / 2);
             Painter::DrawLine(x0 + 3 * dX / 2, aveY - dY, x0 + 2 * dX, aveY);
             x0 += 2 * dX;
-        }
-    }
-    */
-    /*
-    else if (form == Wave::Form::Impulse)
-    {
-        int deltaX = 20;
-        for (int i = 0; i < 5; i++)
-        {
-            Painter::DrawVLine(x0, minY, aveY);
-            Painter::DrawHLine(minY, x0, x0 + 5);
-            Painter::DrawVLine(x0 + 5, minY, aveY);
-            x0 += deltaX;
         }
     }
     */
@@ -231,6 +191,77 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
     {
     }
     */
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Signal::DrawSine(int x0, int y0, int width, int height)
+{
+    float speed = 0.1f;
+    int delta = 1;
+    y0 += height / 2;
+
+    for (int i = delta; i < width; i++)
+    {
+        int y1 = y0 - (int)(sinf((i - delta) * speed) * height / 2.0f);
+        int y2 = y0 - (int)(sinf(i * speed) * height / 2.0f);
+
+        Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Signal::DrawRampPlus(int x0, int y0, int, int height)
+{
+    y0 += height;
+    int dX = 28;
+    for (int x = x0; x < x0 + 80; x += dX)
+    {
+        Painter::DrawLine(x, y0, x + dX, y0 - height);
+        Painter::DrawLine(x + dX, y0, x + dX, y0 - height);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Signal::DrawRampMinus(int x0, int y0, int, int height)
+{
+    int aveY = y0 + height / 2;
+    int dX = 28;
+    int dY = 20;
+    for (int x = x0; x < x0 + 80; x += dX)
+    {
+        Painter::DrawLine(x, aveY - dY, x + dX, aveY + dY);
+        Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Signal::DrawMeander(int x0, int y0, int, int height)
+{
+    int dX = 40;
+    int dY = 20;
+    int aveY = y0 + height / 2;
+    for (int x = x0; x < x0 + 80; x += dX)
+    {
+        Painter::DrawHLine(aveY - dY, x, x + dX / 2);
+        Painter::DrawVLine(x + dX / 2, aveY - dY, aveY + dY);
+        Painter::DrawHLine(aveY + dY, x + dX / 2, x + dX);
+        Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Signal::DrawImpulse(int x0, int y0, int, int height)
+{
+    int minY = y0;
+    int aveY = y0 + height / 2;
+    int deltaX = 20;
+    for (int i = 0; i < 5; i++)
+    {
+        Painter::DrawVLine(x0, minY, aveY);
+        Painter::DrawHLine(minY, x0, x0 + 5);
+        Painter::DrawVLine(x0 + 5, minY, aveY);
+        x0 += deltaX;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

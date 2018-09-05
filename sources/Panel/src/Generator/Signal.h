@@ -20,6 +20,16 @@ private:
     
     static void DrawSignalUGO(Chan chan, int y0);
 
+    static void DrawSine(int x, int y, int width, int height);
+
+    static void DrawRampPlus(int x, int y, int width, int height);
+
+    static void DrawRampMinus(int x, int y, int width, int height);
+
+    static void DrawMeander(int x, int y, int width, int height);
+
+    static void DrawImpulse(int x, int y, int width, int height);
+
     static void DrawSignalParameters(Chan chan, int y0);
 
     static void DrawParameterValue(Chan chan, Wave::Parameter parameter, int x, int y);

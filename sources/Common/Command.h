@@ -86,19 +86,11 @@ public:
     {
         enum E
         {
-            Sine,           ///< Синус
-            //Cosine,         ///< Косинус
-            
-            RampPlus,       ///< Пила+
-            RampMinus,      ///< Пила-
-            Meander,        ///< Меандр
-            //Triangle,       ///< Треугольник
-            //Trapeze,        ///< Трапеция
-            //Impulse,        ///< Импульс
-            //ExpPlus,        ///< Экспонента+
-            //ExpMinus,       ///< Экспонента-
-            //Noise,          ///< Шум
-            //Free,           ///< Произвольный
+            Sine,       ///< Синус
+            RampPlus,   ///< Пила+
+            RampMinus,  ///< Пила-
+            Meander,    ///< Меандр
+            Impulse,    ///< Импульсы
             Number
         } value;
         Form(E v) : value((E)v) { };
