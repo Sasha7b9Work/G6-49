@@ -11,17 +11,17 @@
     <View>
       <WinId>38003</WinId>
       <ViewName>Registers</ViewName>
-      <TableColWidths>115 495</TableColWidths>
+      <TableColWidths>115 148</TableColWidths>
     </View>
     <View>
       <WinId>346</WinId>
       <ViewName>Code Coverage</ViewName>
-      <TableColWidths>568 1102</TableColWidths>
+      <TableColWidths>568 160</TableColWidths>
     </View>
     <View>
       <WinId>204</WinId>
       <ViewName>Performance Analyzer</ViewName>
-      <TableColWidths>728 109 109 724</TableColWidths>
+      <TableColWidths>728</TableColWidths>
     </View>
   </SECTreeCtrl>
 
@@ -48,7 +48,7 @@
       <WinId>1935</WinId>
       <ViewName>Call Stack + Locals</ViewName>
       <UserString></UserString>
-      <TableColWidths>260 70 70</TableColWidths>
+      <TableColWidths>70 70 70</TableColWidths>
     </View>
     <View>
       <WinId>2506</WinId>
@@ -60,7 +60,7 @@
       <WinId>466</WinId>
       <ViewName>Source Browser - *** Not Enabled ***</ViewName>
       <UserString>500</UserString>
-      <TableColWidths>166</TableColWidths>
+      <TableColWidths>300</TableColWidths>
     </View>
   </TreeListPane>
 

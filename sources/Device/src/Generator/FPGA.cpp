@@ -66,11 +66,12 @@ void FPGA::CreateMeander(Chan ch)
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
 
+    // «аписать максимальный размах сигнала в регистры
     uint64 data = (16383 << 14) + 8191;
 
-    WriteRegister(RG::_3_RectA, data);
+    RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
 
-    WriteRegister(RG::_4_RectB, data);
+    WriteRegister(regs[ch], data);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
