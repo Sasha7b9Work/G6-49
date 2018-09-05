@@ -4,6 +4,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Generator/Generator.h"
+#include "Multiplexor.h"
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -55,11 +56,21 @@ void FPGA::SetWaveForm(Chan ch, Wave::Form form)
     };
     
     func[form].func(ch);
+
+    Multiplexor::SetMode(ch, form);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::CreateMeander(Chan)
+void FPGA::CreateMeander(Chan ch)
 {
+    modeWork[ch] = ModeWork::Meander;
+    WriteControlRegister();
+
+    uint64 data = (16383 << 14) + 8191;
+
+    WriteRegister(RG::_3_RectA, data);
+
+    WriteRegister(RG::_4_RectB, data);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,14 +108,20 @@ void FPGA::WriteControlRegister()
 
     switch(modeWork[Chan::A])
     {
-        case ModeWork::Rectangle:   SetBit(data, 1);    break;
-        case ModeWork::Meander:     SetBit(data, 8);    break;
+        case ModeWork::Meander:     
+            SetBit(data, 8);
+        case ModeWork::Rectangle:
+            SetBit(data, 1);
+            break;
     }
 
     switch(modeWork[Chan::B])
     {
-        case ModeWork::Rectangle:   SetBit(data, 2);    break;
-        case ModeWork::Meander:     SetBit(data, 9);    break;
+        case ModeWork::Meander:   
+            SetBit(data, 9);
+        case ModeWork::Rectangle:
+            SetBit(data, 2);
+            break;
     }
 
     switch(Generator::sourceManipulation[Chan::A])
@@ -125,6 +142,8 @@ void FPGA::WriteControlRegister()
     {
         SetBit(data, 7);
     }
+    
+    WriteRegister(RG::_0_Control, data);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -230,7 +249,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
     int numBits[Register::Number] =
     {
-        8,  // RG0_Control,
+        16, // RG0_Control,
         40, // RG1_Freq,
         20, // RG2_Amplitude,
         28, // RG3_RectA,
