@@ -162,7 +162,10 @@ void Settings::TuneGenerator(Chan ch)
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     Wave::Form form = WAVE_FORM(ch);
     Generator::SetFormWave(ch, WAVE_FORM(ch));
-    Generator::SetParameter(ch, Wave::Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Frequency).Value());
-    Generator::SetParameter(ch, Wave::Parameter::Amplitude, INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Amplitude).Value());
-    Generator::SetParameter(ch, Wave::Parameter::Offset,    INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset).Value());
+    if(form != Wave::Form::Impulse)
+    {
+        Generator::SetParameter(ch, Wave::Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Frequency).Value());
+        Generator::SetParameter(ch, Wave::Parameter::Amplitude, INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Amplitude).Value());
+        Generator::SetParameter(ch, Wave::Parameter::Offset,    INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset).Value());
+    }
 }

@@ -92,13 +92,15 @@ void FPGA::SetImpulseMode(Chan ch)
 
     if(ch == Chan::A)
     {
+        WriteRegister(RG::_3_RectA, (8191 << 14) + 16383);
         WriteRegister(RG::_5_PeriodImpulseA, (uint64)1e7);
         WriteRegister(RG::_6_DurationImpulseA, (uint64)1e6);
     }
     else
     {
-        WriteRegister(RG::_7_PeriodImpulseB, (uint64)2e7);
-        WriteRegister(RG::_8_DurationImpulseB, (uint64)2e7);
+        WriteRegister(RG::_4_RectB, (8191 << 14) + 16383);
+        WriteRegister(RG::_7_PeriodImpulseB, (uint64)(1e-3f / 10e-9f));
+        WriteRegister(RG::_8_DurationImpulseB, (uint64)(1e-4f / 10e-9f));
     }
 }
 
