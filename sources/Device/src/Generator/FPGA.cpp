@@ -19,6 +19,7 @@ uint8                FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
 float                FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float                FPGA::offset[Chan::Number] = {5.0f, 5.0f};
 FPGA::ClockFrequency FPGA::clock = FPGA::ClockFrequency::_100MHz;
+uint64               FPGA::registers[FPGA::RG::Number] = {0};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +67,11 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 {
     WriteControlRegister();
     
-    if (modeWork[ch] == ModeWork::DDS)
+    if(modeWork[ch] == ModeWork::Meander)
+    {
+        AD9952::SetFrequency(ch, frequency);
+    }
+    else if (modeWork[ch] == ModeWork::DDS)
     {
         uint64 N = (uint64)(frequency * 11e3f);
         WriteRegister(RG::_1_Freq, N);
@@ -238,6 +243,8 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         28  // RG10_Offset
     };
 
+    registers[reg] = value;
+
     WriteAddress(reg);
 
     for (int bit = numBits[reg] - 1; bit >= 0; bit--)
@@ -322,8 +329,25 @@ void FPGA::SetOffset(Chan ch, float off)
 {
     offset[ch] = off;
 
-    uint nA = OffsetToCode(offset[Chan::A]);
-    uint nB = OffsetToCode(offset[Chan::B]);
+    if(modeWork[ch] == FPGA::ModeWork::Meander)
+    {
+        uint64 mask = ((1 << 14) - 1);
 
-    WriteRegister(RG::_10_Offset, nA + (nB << 14));
+        float step = 10.0f / mask;
+
+        uint val = (uint)(step * (off + 5.0f));
+
+        RG reg = (ch == Chan::A) ? RG::_3_RectA : RG::_4_RectB;
+
+        registers[reg] = (registers[reg] & (~mask)) | (val & mask);
+
+        WriteRegister(reg, registers[reg]);
+    }
+    else
+    {
+        uint nA = OffsetToCode(offset[Chan::A]);
+        uint nB = OffsetToCode(offset[Chan::B]);
+
+        WriteRegister(RG::_10_Offset, nA + (nB << 14));
+    }
 }

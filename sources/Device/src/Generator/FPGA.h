@@ -52,6 +52,8 @@ public:
     } clock;
 
 private:
+
+    ///< Регистры ПЛИС
     struct RG
     {
         enum E
@@ -59,8 +61,11 @@ private:
             _0_Control,
             _1_Freq,
             _2_Amplitude,
-            _3_RectA,
-            _4_RectB,
+            _3_RectA,           /// \brief Регистр кода сигнала прямоугольной формы канала А. Используется для установки двух кодов. 1-й код опреде-
+                                /// ляет нижнее значение прямоугольного сигнала - смещение. 2-й код устанавливает верхнее значение сигнала - как бы
+                                /// амплитуду.
+                                /// b0...b13 - нижнее значение, b14...b27 - верхнее значение
+            _4_RectB,           ///< Аналог _3_RectA для канала B
             _5_PeriodImpulseA,
             _6_DurationImpulseA,
             _7_PeriodImpulseB,
@@ -107,4 +112,6 @@ private:
     static float amplitude[Chan::Number];
 
     static float offset[Chan::Number];
+    /// Здесь хранятся записанные в регистры значения
+    static uint64 registers[RG::Number];
 };
