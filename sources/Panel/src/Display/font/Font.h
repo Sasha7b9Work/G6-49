@@ -37,6 +37,7 @@ struct Font
     static int GetLengthText(const char *text);
     static int GetHeightSymbol(char symbol);
     static int GetLengthSymbol(char symbol);
+    static void Set(Type typeFont);
     
     int height;
     Symbol symbol[256];

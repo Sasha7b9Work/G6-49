@@ -11,8 +11,6 @@ public:
     /// Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
     
-    static void SetFont(Font::Type typeFont);
-
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);

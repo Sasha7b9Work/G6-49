@@ -43,3 +43,9 @@ int Font::GetLengthSymbol(char symbol)
 {
     return font->symbol[Text::IsUpperCase() ? SU::ToUpper(symbol) : symbol].width + 1;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Font::Set(Type typeFont)
+{
+    font = fonts[typeFont];
+}

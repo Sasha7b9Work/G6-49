@@ -66,9 +66,5 @@ private:
     static Font::Type currentTypeFont;
 };
 
-
-#define WRITE_BYTE(offset, value)   *(command + offset) = (uint8)value
-#define WRITE_SHORT(offset, value)  *((uint16 *)(command + offset)) = (uint16)value
-
 /** @} @}
  */
