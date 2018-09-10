@@ -15,6 +15,24 @@ public:
 
     static void SetAmplitude(Chan ch, float amplitude);
 
+    /// ‘ункции дл€ модул€ции "пилой"
+    class Shape
+    {
+    public:
+        /// ”становить/отменить модулирование синусоиды сигналом "пилы"
+        static void SetEnabled(Chan ch, bool enable);
+        /// ”становить длительность
+        static void SetDuration(Chan ch, float duration);
+        /// ”становить размах
+        static void SetAmplitude(Chan ch, float amplitude);
+        /// True означает, что установлена модул€ци€ "пилой"
+        static bool enabled[Chan::Number];
+        /// ƒлительность пилы
+        static float duration[Chan::Number];
+
+        static float amplitude[Chan::Number];
+    };
+
 private:
     struct Register
     {
@@ -37,6 +55,7 @@ private:
     static void WriteRegister(Chan ch, uint8 reg);
     static void WriteCFR1(Chan ch);
     static void WriteCFR2(Chan ch);
+    static void WriteARR(Chan ch);
     static void WriteASF(Chan ch);
     static void WriteFTW0(Chan ch);
 };

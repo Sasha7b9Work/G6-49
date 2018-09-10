@@ -40,7 +40,7 @@ struct CommandPanel
 {
     enum E
     {
-        COMMAND_NONE = 0,
+        None = 0,
         ENABLE_CHANNEL = 1,     ///< Включить/выключить канал
         SET_FORM_WAVE = 2,      ///< Установить форму сигнала
         SET_FREQUENCY = 3,      ///< Установить частоту
@@ -118,6 +118,16 @@ public:
             DutyFactor,         ///< Коэффициент заполнения
             Number
         } value;
+
+        /// Тип параметра
+        struct Type
+        {
+            enum E
+            {
+                NumericValue,   ///< Числовое значение
+                Page            ///< Страница параметров
+            } value;
+        };
 
         Parameter(int v) : value((E)v) { };
         operator uint8() const { return (uint8)value; }

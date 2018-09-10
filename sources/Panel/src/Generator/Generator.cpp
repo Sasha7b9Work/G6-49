@@ -44,7 +44,7 @@ void Generator::LoadRegister(Register reg, uint64 value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::EmptyCommand()
 {
-    uint8 buffer[10] = {CommandPanel::COMMAND_NONE};
+    uint8 buffer[10] = {CommandPanel::None};
     SendToInterface(buffer, 10);
 }
 
@@ -103,7 +103,7 @@ void Generator::SetParameter(Chan ch, Wave::Parameter param, float value)
     static const CommandPanel commands[Wave::Parameter::Number] =
     {
         CommandPanel::SET_FREQUENCY,
-        CommandPanel::COMMAND_NONE,
+        CommandPanel::None,
         CommandPanel::SET_AMPLITUDE,
         CommandPanel::SET_OFFSET,
         CommandPanel::SET_DURATION,

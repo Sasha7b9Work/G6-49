@@ -25,6 +25,12 @@ static SPI_HandleTypeDef hSPI3 =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
+bool AD9952::Shape::enabled[Chan::Number] = {false, false};
+
+float AD9952::Shape::duration[Chan::Number] = {10e-6f, 10e-6f};
+
+float AD9952::Shape::amplitude[Chan::Number] = {5.0f, 5.0f};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void AD9952::Init()
@@ -52,6 +58,28 @@ void AD9952::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD9952::Shape::SetEnabled(Chan ch, bool enable)
+{
+    enabled[ch] = enable;
+    WriteCFR1(ch);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD9952::Shape::SetDuration(Chan ch, float value)
+{
+    duration[ch] = value;
+    WriteRegister(ch, Register::ARR);
+    WriteRegister(ch, Register::ASF);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD9952::Shape::SetAmplitude(Chan ch, float value)
+{
+    amplitude[ch] = value;
+    WriteRegister(ch, Register::ASF);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::SetFrequency(Chan ch, float frequency)
 {
     setDDS.ad9952[ch].frequency = frequency;
@@ -70,7 +98,7 @@ void AD9952::WriteRegister(Chan ch, uint8 reg)
 {
     typedef void(*pFuncVCh)(Chan);
 
-    static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, 0, WriteFTW0, 0};
+    static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, WriteARR, WriteFTW0, 0};
 
     pFuncVCh f = func[reg];
 
@@ -91,6 +119,10 @@ void AD9952::WriteCFR1(Chan ch)
     }
     SetBit(value, 9);       // Однонаправленный режим
     SetBit(value, 13);
+    if(Shape::enabled[ch])
+    {
+        SetBit(value, 24);  // Устанавливаем режим "пилы"
+    }
     SetBit(value, 25);      // OSK enable - управление амплитудой
     WriteToHardware(ch, Register::CFR1, value);
 }
@@ -108,6 +140,11 @@ void AD9952::WriteASF(Chan ch)
 {
     uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
 
+    if(Shape::enabled[ch])
+    {
+        value = 0xffffffff;
+    }
+
     WriteToHardware(ch, Register::ASF, value);
 }
 
@@ -118,6 +155,14 @@ void AD9952::WriteFTW0(Chan ch)
 
     WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5f));
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD9952::WriteARR(Chan ch)
+{
+    WriteToHardware(ch, Register::ARR, 255);
+}
+
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
