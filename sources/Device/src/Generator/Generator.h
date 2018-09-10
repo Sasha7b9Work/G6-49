@@ -49,4 +49,6 @@ private:
     static void SetDuration(Chan ch, float duration);
 
     static void SetDelay(Chan ch, float duration);
+
+    static void EmptyFunc(Chan, float);
 };

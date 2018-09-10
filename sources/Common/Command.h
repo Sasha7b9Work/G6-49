@@ -33,6 +33,12 @@
 
     0                1        2...3       4...9
 20  CREATE_HAND_WAVE NUM_CHAN START_POINT points
+
+    0              1        2
+22  SetRampForSine NUM_CHAN 0/1
+
+    0                      1        2...5
+23  SetDurationRampForSine NUM_CHAN value
 */
 
 /// Возможные команды для передачи в основной процессор
@@ -60,8 +66,11 @@ struct CommandPanel
         SET_DURATION_FALL = 17,
         SET_DURATION_STADY = 18,
         SET_DUTY_FACTOR = 19,
-        CREATE_HAND_WAVE = 20,  ///< Засылает точки произвольного сигнала
-        SET_HAND_WAVE = 21,     ///< Устанавливает вывод произвольного сигнала
+        CREATE_HAND_WAVE = 20,          ///< Засылает точки произвольного сигнала
+        SET_HAND_WAVE = 21,             ///< Устанавливает вывод произвольного сигнала
+        SetRampForSine = 22,            ///< Установить режим модуляции пилой для синуса
+        SetDurationRampForSine = 23,    ///< Установить длительность ипульса при модуляции синуса пилой
+        SetAmplitudeRampForSine = 24,   ///< Установить амплитуду для пилы, модулирующей синус
         Number
     } value;
     CommandPanel(E v) : value(v){};

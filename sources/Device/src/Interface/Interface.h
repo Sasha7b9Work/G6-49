@@ -38,6 +38,12 @@ private:
     static void CommandCreateWave();
 
     static void CommandSetWave();
+
+    static void CommandSetRampForSine();
+
+    static void CommandSetDurationForRampSine();
+
+    static void CommandSetAmplitudeRampForSine();
     /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
 

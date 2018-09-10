@@ -65,7 +65,10 @@ const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
     CommandEmpty,
     CommandEmpty,
     CommandCreateWave,
-    CommandSetWave
+    CommandSetWave,
+    CommandSetRampForSine,
+    CommandSetDurationForRampSine,
+    CommandSetAmplitudeRampForSine
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +126,24 @@ void Interface::CommandEnable()
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandReadData()
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandSetRampForSine()
+{
+    Chan ch = (Chan::E)buffer[1];
+    bool enabled = buffer[2] == 1;
+    AD9952::Shape::SetEnabled(ch, enabled);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandSetDurationForRampSine()
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::CommandSetAmplitudeRampForSine()
 {
 }
 

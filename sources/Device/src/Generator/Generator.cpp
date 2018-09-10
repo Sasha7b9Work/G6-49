@@ -23,6 +23,7 @@ void Generator::Init()
     Multiplexor::Init();
     FreqMeter::Init();
     
+    /*
     for(int i = 0; i < 2; i++)
     {
         Chan ch = (Chan::E)i;
@@ -37,6 +38,7 @@ void Generator::Init()
         //AD9952::Shape::SetDuration(ch, 100.0f);
         //AD9952::Shape::SetAmplitude(ch, 100.0f);
     }
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,31 +69,42 @@ void Generator::SetFormWave(Chan ch, Wave::Form form)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(Chan ch, CommandPanel command, float value)
 {
-    typedef void (*pFuncChF)(Chan, float);
-
-    static const pFuncChF func[CommandPanel::Number] =
+    static const struct StructFunc
     {
-        0,
-        0,
-        0,
+        typedef void (*pFuncChF)(Chan, float);
+        pFuncChF func;
+        StructFunc(pFuncChF f) : func(f) {};
+    }
+    func[CommandPanel::Number] =
+    {
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
         SetFrequency,
         SetAmplitude,
         SetOffset,
         SetDuration,
         SetDutyRatio,
         SetPhase,
-        0,
-        0,
+        EmptyFunc,
+        EmptyFunc,
         SetDelay,
-        0
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc,
+        EmptyFunc
     };
 
-    pFuncChF f = func[command];
-
-    if (f)
-    {
-        (f)(ch, value);
-    }
+    func[command].func(ch, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -152,5 +165,10 @@ void Generator::SetDuration(Chan, float)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDelay(Chan, float)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::EmptyFunc(Chan, float)
 {
 }

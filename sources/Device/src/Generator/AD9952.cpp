@@ -61,11 +61,12 @@ void AD9952::Init()
 void AD9952::Shape::SetEnabled(Chan ch, bool enable)
 {
     enabled[ch] = enable;
-    WriteCFR1(ch);
 
     WriteToHardware(ch, Register::ARR, 1);
 
-    WriteToHardware(ch, Register::ASF, 0xffff);
+    WriteToHardware(ch, Register::ASF, 0x3fff);
+
+    WriteCFR1(ch);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -126,9 +127,9 @@ void AD9952::WriteCFR1(Chan ch)
     if(Shape::enabled[ch])
     {
         SetBit(value, 24);  // Устанавливаем режим "пилы"
+        SetBit(value, 25);      // OSK enable - управление амплитудой
+        //SetBit(value, 26);
     }
-    SetBit(value, 25);      // OSK enable - управление амплитудой
-    SetBit(value, 26);
     WriteToHardware(ch, Register::CFR1, value);
 }
 
