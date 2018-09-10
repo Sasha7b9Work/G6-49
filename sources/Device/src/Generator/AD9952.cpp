@@ -62,6 +62,10 @@ void AD9952::Shape::SetEnabled(Chan ch, bool enable)
 {
     enabled[ch] = enable;
     WriteCFR1(ch);
+
+    WriteToHardware(ch, Register::ARR, 1);
+
+    WriteToHardware(ch, Register::ASF, 0xffff);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -94,7 +98,7 @@ void AD9952::SetAmplitude(Chan ch, float amplitude)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteRegister(Chan ch, uint8 reg)
+void AD9952::WriteRegister(Chan ch, Register reg)
 {
     typedef void(*pFuncVCh)(Chan);
 
@@ -124,6 +128,7 @@ void AD9952::WriteCFR1(Chan ch)
         SetBit(value, 24);  // Устанавливаем режим "пилы"
     }
     SetBit(value, 25);      // OSK enable - управление амплитудой
+    SetBit(value, 26);
     WriteToHardware(ch, Register::CFR1, value);
 }
 
@@ -159,7 +164,7 @@ void AD9952::WriteFTW0(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteARR(Chan ch)
 {
-    WriteToHardware(ch, Register::ARR, 255);
+    WriteToHardware(ch, Register::ARR, 100);
 }
 
 

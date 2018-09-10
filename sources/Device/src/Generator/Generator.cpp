@@ -22,14 +22,20 @@ void Generator::Init()
     FPGA::Init();
     Multiplexor::Init();
     FreqMeter::Init();
-
+    
     for(int i = 0; i < 2; i++)
     {
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
-
-
-        SetFormWave(ch, Wave::Form::RampMinus);
+        SetFormWave(ch, Wave::Form::Sine);
+        SetFrequency(ch, 1e6f);
+        SetAmplitude(ch, 5.0f);
+        if(ch == Chan::A)
+        {
+            AD9952::Shape::SetEnabled(ch, true);
+        }
+        //AD9952::Shape::SetDuration(ch, 100.0f);
+        //AD9952::Shape::SetAmplitude(ch, 100.0f);
     }
 }
 

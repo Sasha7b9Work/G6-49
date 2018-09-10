@@ -52,7 +52,7 @@ private:
     static void WriteToHardware(Chan ch, Register reg, uint value);
     static GeneratorWritePin ChipSelect(Chan ch);
     static void Reset();
-    static void WriteRegister(Chan ch, uint8 reg);
+    static void WriteRegister(Chan ch, Register reg);
     static void WriteCFR1(Chan ch);
     static void WriteCFR2(Chan ch);
     static void WriteARR(Chan ch);
