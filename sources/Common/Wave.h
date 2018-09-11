@@ -24,13 +24,24 @@ struct Parameter
         Number
     } value;
 
-    Parameter(int v = Number) : value((E)v) { };
+    Parameter(int v = Number) : value((E)v) {};
+
+    Parameter(int v, float _min, float _max) : value((E)v), min(_min), max(_max) { };
+
     operator uint8() const                  { return (uint8)value; }
+
     float MinValue() const;
+
     float MaxValue() const;
+
     pString Name() const;
     /// Возвращает true, если параметр является страницей параметров
     bool IsPage() const;
+private:
+
+    float min;
+
+    float max;
 };
 
 

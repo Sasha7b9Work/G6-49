@@ -4,48 +4,43 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static Parameter params_SineA[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Modulation,
-    Parameter::Number
+    Parameter(Parameter::Frequency,  0.1f,    100e6f),
+    Parameter(Parameter::Period,     100e-8f, 100e6f),
+    Parameter(Parameter::Amplitude,  0.0f,    10.0f),
+    Parameter(Parameter::Offset,     0.0f,    10.0f),
+    Parameter(Parameter::Modulation, 0.0f,    10.0f)
 };
 
 static Parameter  params_RampPlusA[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 static Parameter params_RampMinusA[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 static Parameter params_MeanderA[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 static Parameter params_ImpulseA[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 
@@ -63,48 +58,43 @@ static Form formsA[Form::Number] =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static Parameter params_SineB[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Modulation,
-    Parameter::Number
+    Parameter(Parameter::Frequency,  0.1f,    100e6f),
+    Parameter(Parameter::Period,     100e-8f, 100e6f),
+    Parameter(Parameter::Amplitude,  0.0f,    10.0f),
+    Parameter(Parameter::Offset,     0.0f,    10.0f),
+    Parameter(Parameter::Modulation, 0.0f,    10.0f)
 };
 
 static Parameter  params_RampPlusB[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 static Parameter params_RampMinusB[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 static Parameter params_MeanderB[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 static Parameter params_ImpulseB[Parameter::Number] =
 {
-    Parameter::Frequency,
-    Parameter::Period,
-    Parameter::Amplitude,
-    Parameter::Offset,
-    Parameter::Number
+    Parameter(Parameter::Frequency, 0.1f,    100e6f),
+    Parameter(Parameter::Period,    3.3e-8f, 10e6f),
+    Parameter(Parameter::Amplitude, 0.0f,    10.0f),
+    Parameter(Parameter::Offset,    0.0f,    10.0f)
 };
 
 
