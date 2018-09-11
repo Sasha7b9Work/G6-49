@@ -3,7 +3,7 @@
 #include "Display/Text.h"
 #include "Generator/Generator.h"
 #include "Display/Symbols.h"
-#include "Generator/Signal.h"
+#include "Wave.h"
 #include "Menu/Menu.h"
 #include "Command.h"
 #include "Utils/Math.h"
@@ -155,9 +155,9 @@ void PageRegisters::Draw()
         return;
     }
 
-    Painter::FillRegion(Signal::X(), Signal::Y(Chan::A) + 1, Signal::Width() - 1, Signal::Height() * 2, Color::BACK);
+    Painter::FillRegion(Wave::Graphics::X(), Wave::Graphics::Y(Chan::A) + 1, Wave::Graphics::Width() - 1, Wave::Graphics::Height() * 2, Color::BACK);
 
-    DrawRegisters(Signal::X() + 4, Signal::Y(Chan::A) + 3);
+    DrawRegisters(Wave::Graphics::X() + 4, Wave::Graphics::Y(Chan::A) + 3);
 
     DrawInputWindow();
 }

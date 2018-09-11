@@ -7,7 +7,6 @@
 #include "Generator/Generator.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Generator/Signal.h"
 #include "Display/Console.h"
 
 

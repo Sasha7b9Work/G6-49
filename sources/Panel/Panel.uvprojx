@@ -2147,19 +2147,14 @@
               <FilePath>.\src\Generator\Generator.h</FilePath>
             </File>
             <File>
-              <FileName>Signal.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Signal.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Signal.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Signal.h</FilePath>
-            </File>
-            <File>
               <FileName>Wave.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Wave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaveGraphics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\WaveGraphics.cpp</FilePath>
             </File>
           </Files>
         </Group>

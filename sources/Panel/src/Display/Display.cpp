@@ -1,5 +1,5 @@
 #include "Console.h"
-#include "Generator/Signal.h"
+#include "FrequencyMeter/FrequencyMeter.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Hardware/CPU.h"
@@ -43,9 +43,9 @@ void Display::Update()
 
     Painter::BeginScene(Color::BACK);
 
-    Signal::Draw(Chan::A);
+    Wave::Graphics::Draw(Chan::A);
 
-    Signal::Draw(Chan::B);
+    Wave::Graphics::Draw(Chan::B);
 
     Menu::Draw();
 

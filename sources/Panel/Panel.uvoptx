@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Generator\Signal.cpp</Filename>
+          <Filename>D:\Projects\stm32\DDS\sources\Panel\src\Generator\Signal.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelDDS\src/Generator/Signal.cpp\115</Expression>
         </Bp>
@@ -2049,7 +2049,7 @@
 
   <Group>
     <GroupName>Generator</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2084,32 +2084,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\Signal.cpp</PathWithFileName>
-      <FilenameWithoutPath>Signal.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\Wave.cpp</PathWithFileName>
+      <FilenameWithoutPath>Wave.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
       <FileNumber>143</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\Signal.h</PathWithFileName>
-      <FilenameWithoutPath>Signal.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>13</GroupNumber>
-      <FileNumber>144</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\Wave.cpp</PathWithFileName>
-      <FilenameWithoutPath>Wave.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\WaveGraphics.cpp</PathWithFileName>
+      <FilenameWithoutPath>WaveGraphics.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -1,5 +1,5 @@
 #include "globals.h"
-#include "Signal.h"
+#include "Wave.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -13,7 +13,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Signal::Draw(Chan ch)
+void Wave::Graphics::Draw(Chan ch)
 {
     int x0 = X();
     int y0 = Y(ch);
@@ -22,37 +22,37 @@ void Signal::Draw(Chan ch)
     {
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
         Text::DrawBigText(x0 + 5, y0 + 5, 2, ch == Chan::A ? "A" : "B", Color::FILL);
-        DrawSignalUGO(ch, y0);
-        DrawSignalParameters(ch, y0);
+        DrawUGO(ch, y0);
+        DrawParameters(ch, y0);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Signal::X()
+int Wave::Graphics::X()
 {
     return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Signal::Y(Chan ch)
+int Wave::Graphics::Y(Chan ch)
 {
     return ch == Chan::A ? MP_TITLE_HEIGHT : MP_TITLE_HEIGHT + SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Signal::Width()
+int Wave::Graphics::Width()
 {
     return SIGNAL_WIDTH;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Signal::Height()
+int Wave::Graphics::Height()
 {
     return SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawSignalUGO(Chan chan, int y0)
+void Wave::Graphics::DrawUGO(Chan chan, int y0)
 {
     y0 += 30;
     int height = 50;
@@ -89,7 +89,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         typedef void (*pFuncIIII)(int, int, int, int);
         pFuncIIII func;
         StructFunc(pFuncIIII f) : func(f) {};
-    } func[Wave::Form::Number] =
+    } func[Form::Number] =
     {
         DrawSine,
         DrawRampPlus,
@@ -194,7 +194,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawSine(int x0, int y0, int width, int height)
+void Wave::Graphics::DrawSine(int x0, int y0, int width, int height)
 {
     float speed = 0.1f;
     int delta = 1;
@@ -210,7 +210,7 @@ void Signal::DrawSine(int x0, int y0, int width, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawRampPlus(int x0, int y0, int, int height)
+void Wave::Graphics::DrawRampPlus(int x0, int y0, int, int height)
 {
     y0 += height;
     int dX = 28;
@@ -222,7 +222,7 @@ void Signal::DrawRampPlus(int x0, int y0, int, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawRampMinus(int x0, int y0, int, int height)
+void Wave::Graphics::DrawRampMinus(int x0, int y0, int, int height)
 {
     int aveY = y0 + height / 2;
     int dX = 28;
@@ -235,7 +235,7 @@ void Signal::DrawRampMinus(int x0, int y0, int, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawMeander(int x0, int y0, int, int height)
+void Wave::Graphics::DrawMeander(int x0, int y0, int, int height)
 {
     int dX = 40;
     int dY = 20;
@@ -250,7 +250,7 @@ void Signal::DrawMeander(int x0, int y0, int, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawImpulse(int x0, int y0, int, int height)
+void Wave::Graphics::DrawImpulse(int x0, int y0, int, int height)
 {
     int minY = y0;
     int aveY = y0 + height / 2;
@@ -265,11 +265,11 @@ void Signal::DrawImpulse(int x0, int y0, int, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawSignalParameters(Chan ch, int y0)
+void Wave::Graphics::DrawParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
-    Wave::Form form = FORM(ch);
+    Form form = FORM(ch);
 
     y0 += 5;
 
@@ -278,7 +278,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
     AllowableParameters allowParameters;
     InputWindow::FillAllowParameters(ch, form, &allowParameters);
 
-    for (int i = 0; i < Wave::Form::Parameter::Number; i++)
+    for (int i = 0; i < Form::Parameter::Number; i++)
     {
         if (allowParameters.allow[i])
         {
@@ -286,15 +286,15 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
             if (ch == CURRENT_CHANNEL)
             {
                 pString curPar = Menu::NameCurrentParameter();
-                pString parName = Wave::Form::Parameter(i).Name();
+                pString parName = Form::Parameter(i).Name();
                 if (strcmp(curPar, parName) == 0 && CURRENT_PAGE == 0)
                 {
                     Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
                 }
             }
-            Text::DrawText(x0 + 1, y0, Wave::Form::Parameter(i).Name(), color);
+            Text::DrawText(x0 + 1, y0, Form::Parameter(i).Name(), color);
 
-            DrawParameterValue(ch, (Wave::Form::Parameter)i, x0 + 80, y0);
+            DrawParameterValue(ch, (Form::Parameter)i, x0 + 80, y0);
 
             y0 += 10;
         }
@@ -302,9 +302,9 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Signal::DrawParameterValue(Chan ch, Wave::Form::Parameter param, int x, int y)
+void Wave::Graphics::DrawParameterValue(Chan ch, Form::Parameter param, int x, int y)
 {
-    Wave::Form form = FORM(ch);
+    Form form = FORM(ch);
 
     x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 

@@ -246,9 +246,6 @@
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\Signal.cpp">
-      <Filter>Generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Number.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -262,6 +259,9 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\WaveGraphics.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
   </ItemGroup>
@@ -519,9 +519,6 @@
       <Filter>Menu\Pages</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h">
-      <Filter>Generator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator\Signal.h">
       <Filter>Generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Utils\Number.h">
