@@ -120,8 +120,8 @@ public:
         static Chan              ch;
 
         Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Parameter::Frequency, 
-               uint a = 0, uint numlm = 0, float _min = 0.1f, float _max = 100e6f) :
-            sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), allow(a), numLockMode(numlm), min(_min), max(_max)
+               uint numlm = 0, float _min = 0.1f, float _max = 100e6f) :
+            sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), numLockMode(numlm), min(_min), max(_max)
         {
             strcpy(buffer, buff);
         }
@@ -131,7 +131,6 @@ public:
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
         uint8    order       : 3;
         uint8    param       : 4;     ///< Перечисление типа Parameter
-        uint     allow       : 1;     ///< Если 1, параметр разрешен для данного сигнала
         uint     numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
         float    min;                 ///< Минимальное значение параметра
         float    max;                 ///< Максимальное значение параметра
