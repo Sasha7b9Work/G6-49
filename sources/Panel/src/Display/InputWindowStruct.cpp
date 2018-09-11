@@ -21,9 +21,9 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Form      InputWindow::Struct::form    = Form::Sine;
-Parameter InputWindow::Struct::m_param = Parameter::Amplitude;
-Chan            InputWindow::Struct::ch      = Chan::A;
+Form      InputWindow::Struct::form  = Form::Sine;
+Parameter InputWindow::Struct::param = Parameter::Amplitude;
+Chan      InputWindow::Struct::ch    = Chan::A;
 
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
@@ -34,14 +34,14 @@ void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 {
     ch = ch_;
     form = *form_;
-    m_param = *param_;
+    param = *param_;
     numLockMode = false;
 
     memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
 
 	for (int i = 0; i < NUM_DIGITS; i++)
 	{
-		DIGIT(i) = PARAMETER_DIG(ch, form, m_param, i);
+		DIGIT(i) = PARAMETER_DIG(ch, form, param, i);
 	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
@@ -134,7 +134,7 @@ void InputWindow::Struct::RegRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *InputWindow::Struct::StringValue()
 {
-    if(m_param.IsPage())
+    if(param.IsPage())
     {
         return "";
     }
@@ -187,7 +187,7 @@ bool InputWindow::Struct::IncreaseDigit(int num)
         }
     }
 
-    if(Value() < m_param.MinValue() || Value() > m_param.MaxValue())
+    if(Value() < param.MinValue() || Value() > param.MaxValue())
     {
         *this = temp;
         return false;
@@ -219,7 +219,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
         DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
     }
 
-    if(Value() < m_param.MinValue() || Value() > m_param.MaxValue())
+    if(Value() < param.MinValue() || Value() > param.MaxValue())
     {
         *this = temp;
         return false;
@@ -481,9 +481,9 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::SendToGenerator()
 {
-    PARAMETER(ch, form, m_param) = *this;
+    PARAMETER(ch, form, param) = *this;
 
-    if (m_param == Parameter::Delay)
+    if (param == Parameter::Delay)
     {
         /*
         PARAMETER(Chan::B, Form(Form::Impulse), Parameter::Frequency) = 
@@ -497,15 +497,15 @@ void InputWindow::Struct::SendToGenerator()
     }
     else
     {
-        float value = PARAMETER(ch, form, m_param).Value();
-        Generator::SetParameter(ch, m_param, value);
+        float value = PARAMETER(ch, form, param).Value();
+        Generator::SetParameter(ch, param, value);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::FillFromInputBuffer()
 {
-    if (m_param == Parameter::Duration || m_param == Parameter::Delay)
+    if (param == Parameter::Duration || param == Parameter::Delay)
     {
         order = Order::Micro;
     }

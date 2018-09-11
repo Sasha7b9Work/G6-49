@@ -116,7 +116,7 @@ public:
         void SaveValue();
 
         static Form        form;
-        static Parameter   m_param;
+        static Parameter   param;
         static Chan        ch;
 
         Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint numlm = 0) :
