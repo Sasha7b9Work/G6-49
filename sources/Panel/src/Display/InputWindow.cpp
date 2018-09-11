@@ -9,10 +9,10 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define IN_NUM_LOCK_MODE    (m_param->InNumLockMode())
+#define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
 Chan                    InputWindow::chan = Chan::A;
-Parameter               *InputWindow::m_param = 0;
+Parameter               *InputWindow::param = 0;
 InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
 
 
@@ -21,10 +21,10 @@ void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
     Form *form = WAVE_CURRENT.GetCurrentForm();
-    m_param = PARAM(form);
-    m_iws = INPUT_WINDOW_STRUCT(chan, (uint8)(*form), (uint8)(*m_param));
+    param = PARAM(form);
+    m_iws = INPUT_WINDOW_STRUCT(chan, (uint8)(*form), (uint8)(*param));
 
-	(&m_iws)->Fill(chan, form, m_param);
+	(&m_iws)->Fill(chan, form, param);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ void InputWindow::Draw()
 
     DrawDigits(x, y);
 
-    func[*m_param](x + 10, y + 10);
+    func[*param](x + 10, y + 10);
 
     if (IN_NUM_LOCK_MODE)
     {
@@ -86,7 +86,7 @@ void InputWindow::DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Text::DrawBigText(x, y, 3, m_param->Name());
+    Text::DrawBigText(x, y, 3, param->Name());
 
     char buf[2] = "0";
 
@@ -127,7 +127,7 @@ void InputWindow::DrawDigits(int x, int y)
     }
 
     char buffer[10] = {0};
-    Text::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, (Order::E)m_iws.order, m_param->value));
+    Text::DrawBigText(x, y, SIZE_TEXT, NameUnit(buffer, (Order::E)m_iws.order, param->value));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

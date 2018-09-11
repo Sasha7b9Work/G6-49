@@ -86,7 +86,7 @@ private:
     /// Канал, для которого вводится значение
     static Chan         chan;
     /// Параметт, значение которого вводится
-    static Parameter    *m_param;
+    static Parameter    *param;
 
 public:
     class Struct
