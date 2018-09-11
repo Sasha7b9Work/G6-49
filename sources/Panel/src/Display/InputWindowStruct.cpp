@@ -17,12 +17,12 @@
 #define DIGIT(num)          (buffer[num])
 #define CURRENT_DIGIT       (buffer[CURRENT_POS])
 #define POS_COMMA           (posComma)
-#define IN_NUM_LOCK_MODE    (numLockMode)
+#define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Form      InputWindow::Struct::form  = Form::Sine;
-Parameter InputWindow::Struct::param = Parameter::Amplitude;
+Form      *InputWindow::Struct::form  = 0;
+Parameter *InputWindow::Struct::param = 0;
 Chan      InputWindow::Struct::ch    = Chan::A;
 
 #define SIZE_INPUT_BUFFER_IWS 17
@@ -33,9 +33,8 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 {
     ch = ch_;
-    form = *form_;
-    param = *param_;
-    numLockMode = false;
+    form = form_;
+    param = param_;
 
     memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
 
@@ -134,7 +133,7 @@ void InputWindow::Struct::RegRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *InputWindow::Struct::StringValue()
 {
-    if(param.IsPage())
+    if(param->IsPage())
     {
         return "";
     }
@@ -187,7 +186,7 @@ bool InputWindow::Struct::IncreaseDigit(int num)
         }
     }
 
-    if(Value() < param.MinValue() || Value() > param.MaxValue())
+    if(Value() < param->MinValue() || Value() > param->MaxValue())
     {
         *this = temp;
         return false;
@@ -219,7 +218,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
         DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
     }
 
-    if(Value() < param.MinValue() || Value() > param.MaxValue())
+    if(Value() < param->MinValue() || Value() > param->MaxValue())
     {
         *this = temp;
         return false;
@@ -405,7 +404,7 @@ void InputWindow::Struct::SaveValue()
 {
     if (IN_NUM_LOCK_MODE)
     {
-        IN_NUM_LOCK_MODE = false;
+        param->SetNumLockMode(false);
 
         FillFromInputBuffer();
     }
@@ -433,7 +432,8 @@ void InputWindow::Struct::PressKey(Control key)
 
     if (!IN_NUM_LOCK_MODE)
     {
-        IN_NUM_LOCK_MODE = true;
+        param->SetNumLockMode(true);
+
         m_inputBuffer[0] = 0;
     }
 
@@ -481,9 +481,9 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::SendToGenerator()
 {
-    PARAMETER(ch, form, param) = *this;
+    PARAMETER(ch, *form, *param) = *this;
 
-    if (param == Parameter::Delay)
+    if (*param == Parameter::Delay)
     {
         /*
         PARAMETER(Chan::B, Form(Form::Impulse), Parameter::Frequency) = 
@@ -497,15 +497,15 @@ void InputWindow::Struct::SendToGenerator()
     }
     else
     {
-        float value = PARAMETER(ch, form, param).Value();
-        Generator::SetParameter(ch, param, value);
+        float value = PARAMETER(ch, *form, *param).Value();
+        Generator::SetParameter(ch, *param, value);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::FillFromInputBuffer()
 {
-    if (param == Parameter::Duration || param == Parameter::Delay)
+    if (*param == Parameter::Duration || *param == Parameter::Delay)
     {
         order = Order::Micro;
     }

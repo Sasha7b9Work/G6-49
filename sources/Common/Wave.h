@@ -24,9 +24,9 @@ struct Parameter
         Number
     } value;
 
-    Parameter(int v = Number) : value((E)v) {};
+    Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max) : value((E)v), min(_min), max(_max) { };
+    Parameter(int v, float _min, float _max) : value((E)v), min(_min), max(_max), inNumLockMode(false) { };
 
     operator uint8() const                  { return (uint8)value; }
 
@@ -37,11 +37,17 @@ struct Parameter
     pString Name() const;
     /// Возвращает true, если параметр является страницей параметров
     bool IsPage() const;
+
+    bool InNumLockMode() const { return inNumLockMode; };
+
+    void SetNumLockMode(bool mode) { inNumLockMode = mode; };
 private:
 
     float min;
 
     float max;
+    /// Если true, то находимся в режиме клавиатурного ввода (кнопками 1...9)
+    bool inNumLockMode;
 };
 
 

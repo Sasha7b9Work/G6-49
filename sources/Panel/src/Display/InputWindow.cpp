@@ -9,11 +9,11 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define IN_NUM_LOCK_MODE    (m_iws.numLockMode)
+#define IN_NUM_LOCK_MODE    (m_param->InNumLockMode())
 
 Chan                    InputWindow::chan = Chan::A;
-Form              *InputWindow::form = 0;
-Parameter   *InputWindow::m_param = 0;
+Form                    *InputWindow::form = 0;
+Parameter               *InputWindow::m_param = 0;
 InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
 
 
