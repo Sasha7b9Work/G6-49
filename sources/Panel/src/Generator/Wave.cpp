@@ -224,3 +224,13 @@ Form *Wave::GetForm(int i)
 {
     return &forms[i];
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::SetNextParameter()
+{
+    currentParam++;
+    if(currentParam >= NumParameters())
+    {
+        currentParam = 0;
+    }
+}
