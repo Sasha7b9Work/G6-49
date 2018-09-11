@@ -2,50 +2,50 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static Form::Parameter params_SineA[Form::Parameter::Number] =
+static Parameter params_SineA[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Modulation,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Modulation,
+    Parameter::Number
 };
 
-static Form::Parameter  params_RampPlusA[Form::Parameter::Number] =
+static Parameter  params_RampPlusA[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
-static Form::Parameter params_RampMinusA[Form::Parameter::Number] =
+static Parameter params_RampMinusA[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
-static Form::Parameter params_MeanderA[Form::Parameter::Number] =
+static Parameter params_MeanderA[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
-static Form::Parameter params_ImpulseA[Form::Parameter::Number] =
+static Parameter params_ImpulseA[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
 
@@ -61,50 +61,50 @@ static Form formsA[Form::Number] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static Form::Parameter params_SineB[Form::Parameter::Number] =
+static Parameter params_SineB[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Modulation,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Modulation,
+    Parameter::Number
 };
 
-static Form::Parameter  params_RampPlusB[Form::Parameter::Number] =
+static Parameter  params_RampPlusB[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
-static Form::Parameter params_RampMinusB[Form::Parameter::Number] =
+static Parameter params_RampMinusB[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
-static Form::Parameter params_MeanderB[Form::Parameter::Number] =
+static Parameter params_MeanderB[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
-static Form::Parameter params_ImpulseB[Form::Parameter::Number] =
+static Parameter params_ImpulseB[Parameter::Number] =
 {
-    Form::Parameter::Frequency,
-    Form::Parameter::Period,
-    Form::Parameter::Amplitude,
-    Form::Parameter::Offset,
-    Form::Parameter::Number
+    Parameter::Frequency,
+    Parameter::Period,
+    Parameter::Amplitude,
+    Parameter::Offset,
+    Parameter::Number
 };
 
 

@@ -13,7 +13,7 @@
 
 Chan                    InputWindow::chan = Chan::A;
 Form              *InputWindow::form = 0;
-Form::Parameter   *InputWindow::m_param = 0;
+Parameter   *InputWindow::m_param = 0;
 InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
 
 
@@ -49,7 +49,7 @@ void InputWindow::Draw()
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
     
-    static const pFuncVII func[Form::Parameter::Number] =
+    static const pFuncVII func[Parameter::Number] =
     {
         DrawFrequency,
         DrawPeriod,

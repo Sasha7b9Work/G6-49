@@ -277,7 +277,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 
     for (int i = 0; i < form.NumParameters(); i++)
     {
-        Form::Parameter *param = form.GetParameter(i);
+        Parameter *param = form.GetParameter(i);
         Color color = Color::FILL;
         if (ch == CURRENT_CHANNEL)
         {
@@ -300,7 +300,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawParameterValue(Chan ch, Form::Parameter *param, int x, int y)
+void Wave::Graphics::DrawParameterValue(Chan ch, Parameter *param, int x, int y)
 {
     Form *form = FORM(ch);
 

@@ -2,44 +2,41 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct Parameter
+{
+    enum E
+    {
+        Frequency,          ///< Частота
+        Period,             ///< Период
+        Amplitude,          ///< Амплитуда
+        Offset,             ///< Смещение
+        Duration,           ///< Длительность
+        DutyRatio,          ///< Скважность
+        Phase,              ///< Сдвиг фазы
+        Delay,              ///< Задержка
+        DepthModulation,    ///< Глубина амплитудной модуляции
+        Polarity,           ///< Полярность
+        DurationRise,       ///< Длительность нарастания
+        DurationFall,       ///< Длительность спада
+        DurationStady,      ///< Длительность установившего значения
+        DutyFactor,         ///< Коэффициент заполнения
+        Modulation,         ///< Модуляция
+        Number
+    } value;
+
+    Parameter(int v = Number) : value((E)v) { };
+    operator uint8() const                  { return (uint8)value; }
+    float MinValue() const;
+    float MaxValue() const;
+    pString Name() const;
+    /// Возвращает true, если параметр является страницей параметров
+    bool IsPage() const;
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Form
 {
-    struct Parameter
-    {
-        enum E
-        {
-            Frequency,          ///< Частота
-            Period,             ///< Период
-            Amplitude,          ///< Амплитуда
-            Offset,             ///< Смещение
-            Duration,           ///< Длительность
-            DutyRatio,          ///< Скважность
-            Phase,              ///< Сдвиг фазы
-            Delay,              ///< Задержка
-            DepthModulation,    ///< Глубина амплитудной модуляции
-            Polarity,           ///< Полярность
-            DurationRise,       ///< Длительность нарастания
-            DurationFall,       ///< Длительность спада
-            DurationStady,      ///< Длительность установившего значения
-            DutyFactor,         ///< Коэффициент заполнения
-            Modulation,         ///< Модуляция
-            Number
-        } value;
-
-        Parameter(int v = Number) : value((E)v)
-        {
-        };
-        operator uint8() const
-        {
-            return (uint8)value;
-        }
-        float MinValue() const;
-        float MaxValue() const;
-        pString Name() const;
-        /// Возвращает true, если параметр является страницей параметров
-        bool IsPage() const;
-    } params[Form::Parameter::Number];
-
     enum E
     {
         Sine,       ///< Синус
@@ -49,14 +46,9 @@ struct Form
         Impulse,    ///< Импульсы
         Number
     } value;
-    Form(E v = Number) : value(v), currentParam(0)
-    {
-    };
-    Form(E v, Parameter param[Form::Parameter::Number]);
-    operator uint8() const
-    {
-        return (uint8)value;
-    };
+    Form(E v = Number) : value(v), currentParam(0)   { };
+    Form(E v, Parameter param[Parameter::Number]);
+    operator uint8() const    { return (uint8)value;  };
     /// Возвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// Возвращает ссылку на текущий параметр
@@ -69,6 +61,8 @@ struct Form
     void SetNextParameter();
     /// Номер текущего параметра в массиве params
     int currentParam;
+
+    Parameter params[Parameter::Number];
 };
 
 
@@ -76,6 +70,8 @@ struct Form
 class Wave
 {
 public:
+
+    Wave(Chan ch, Form form[Form::Number]);
 
     Form forms[Form::Number];
 
@@ -87,8 +83,6 @@ public:
     int NumberOfForms() const;
 
     Form *GetForm(int i);
-
-    Wave(Chan ch, Form form[Form::Number]);
     /// Какому каналу принадлежит сигнал
     Chan channel;
 
@@ -127,6 +121,6 @@ public:
 
         static void DrawParameters(Chan chan, int y0);
 
-        static void DrawParameterValue(Chan chan, Form::Parameter *parameter, int x, int y);
+        static void DrawParameterValue(Chan chan, Parameter *parameter, int x, int y);
     };
 };

@@ -44,11 +44,11 @@ static const Settings defSet =
         MAKE_COLOR(0xc0, 0x00, 0x00)    // RED_75
     },
     { 
-        Form::Parameter::Frequency,     // sig_parameter[NumForms]
-        Form::Parameter::Frequency,
-        Form::Parameter::Frequency,
-        Form::Parameter::Frequency,
-        Form::Parameter::Frequency
+        Parameter::Frequency,     // sig_parameter[NumForms]
+        Parameter::Frequency,
+        Parameter::Frequency,
+        Parameter::Frequency,
+        Parameter::Frequency
     },
     0,                                  // menu_currentPage
     (Page*)0,                           // menu_page
@@ -123,8 +123,8 @@ void Settings::TuneGenerator(Chan ch)
     Form *form = FORM(ch);
     Generator::SetFormWave(ch, *FORM(ch));
     {
-        Generator::SetParameter(ch, Form::Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, *form, Form::Parameter::Frequency).Value());
-        Generator::SetParameter(ch, Form::Parameter::Amplitude, INPUT_WINDOW_STRUCT(ch, *form, Form::Parameter::Amplitude).Value());
-        Generator::SetParameter(ch, Form::Parameter::Offset,    INPUT_WINDOW_STRUCT(ch, *form, Form::Parameter::Offset).Value());
+        Generator::SetParameter(ch, Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, *form, Parameter::Frequency).Value());
+        Generator::SetParameter(ch, Parameter::Amplitude, INPUT_WINDOW_STRUCT(ch, *form, Parameter::Amplitude).Value());
+        Generator::SetParameter(ch, Parameter::Offset,    INPUT_WINDOW_STRUCT(ch, *form, Parameter::Offset).Value());
     }
 }

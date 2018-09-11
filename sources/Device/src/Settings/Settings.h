@@ -9,7 +9,7 @@
 //    bool          enable[Chan::Number];
 //    Form      form[Chan::Number];
 //    uint          rg[10];
-////    Form::Parameter 
+////    Parameter 
 //
 //
 //    static void Load(bool _default);

@@ -73,7 +73,7 @@ public:
         }cal;
     };
     col_val                     disp_Colors[32];                   ///< Цвета
-    Form::Parameter             sig_parameter[Form::Number];       ///< Текущий выбранный параметр сигнала
+    Parameter             sig_parameter[Form::Number];       ///< Текущий выбранный параметр сигнала
     int8                        menu_currentPage;                  ///< Отображаемая страница меню
     Page*                       menu_page;                         ///< Если активна страница не из главного меню, то здесь её адрес
     int8                        menu_posActItem[NumPages];         ///< Позиция активного пункта меню для каждой страницы

@@ -12,7 +12,7 @@ static struct StructName
     pString nameEN;
     StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
 }
-nameParameter[Form::Parameter::Number] =
+nameParameter[Parameter::Number] =
 {
     StructName("◊¿—“Œ“¿",        "FREQUENCY"),
     StructName("œ≈–»Œƒ",         "PERIOD"),
@@ -99,7 +99,7 @@ static const struct StructMinMax
     float max;
     StructMinMax(float _min, float _max) : min(_min), max(_max) {};
 }
-minMax[Form::Parameter::Number] =
+minMax[Parameter::Number] =
 {
     StructMinMax(1.0f,    50e6f),       // Frequency
     StructMinMax(2e-08f,  1.0f),        // Period
@@ -120,25 +120,25 @@ minMax[Form::Parameter::Number] =
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Form::Parameter::IsPage() const
+bool Parameter::IsPage() const
 {
     return MinValue() == -1.0f && MaxValue() == -1.0f;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Form::Parameter::MinValue() const
+float Parameter::MinValue() const
 {
     return minMax[value].min;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Form::Parameter::MaxValue() const
+float Parameter::MaxValue() const
 {
     return minMax[value].max;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Form::Parameter::Name() const
+pString Parameter::Name() const
 {
     return LANG_RU ? (char *)nameParameter[value].nameRU : (char *)nameParameter[value].nameEN;
 }
@@ -185,16 +185,16 @@ Wave::Wave(Chan ch, Form form[Form::Number]) : channel(ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, Parameter param[Form::Parameter::Number]) : value(v), currentParam(0)
+Form::Form(E v, Parameter param[Parameter::Number]) : value(v), currentParam(0)
 {
-    for(int i = 0; i < Form::Parameter::Number; i++)
+    for(int i = 0; i < Parameter::Number; i++)
     {
         params[i] = param[i];
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Parameter *Form::CurrentParameter()
+Parameter *Form::CurrentParameter()
 {
     return &params[currentParam];
 }
@@ -214,7 +214,7 @@ int Form::NumParameters() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Parameter *Form::GetParameter(int i)
+Parameter *Form::GetParameter(int i)
 {
     return &params[i];
 }
