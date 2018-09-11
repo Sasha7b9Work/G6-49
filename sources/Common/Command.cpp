@@ -6,6 +6,33 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static struct StructName
+{
+    pString nameRU;
+    pString nameEN;
+    StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
+}
+nameParameter[Wave::Parameter::Number] =
+{
+    StructName("◊¿—“Œ“¿",        "FREQUENCY"),
+    StructName("œ≈–»Œƒ",         "PERIOD"),
+    StructName("–¿«Ã¿’",         "AMPLITUDE"),
+    StructName("—Ã≈Ÿ≈Õ»≈",       "OFFSET"),
+    StructName("ƒÀ»“.",          "DURATION"),
+    StructName("— ¬¿∆ÕŒ—“‹",     "DUTY RATIO"),
+    StructName("‘¿«¿",           "PHASE"),
+    StructName("«¿ƒ≈–∆ ¿",       "DELAY"),
+    StructName(" Œ›‘‘. ÃŒƒ.",    "MOD. INDEX"),
+    StructName("œŒÀﬂ–ÕŒ—“‹",     "POLARITY"),
+    StructName("¬–. Õ¿–¿—“¿Õ»ﬂ", "BUILD-UP TIME"),
+    StructName("¬–. —œ¿ƒ¿",      "RELEASING TIME"),
+    StructName("¬–. œ» ¿",       "PEAK TIME"),
+    StructName(" Œ›‘‘. «¿œŒÀÕ.", "DUTY FACTOR"),
+    StructName("ÃÓ‰ÛÎˇˆËˇ",      "Modulation")
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Wave::Form::Name(Language lang) const
 {
     struct StrName
@@ -108,4 +135,10 @@ float Wave::Parameter::MinValue() const
 float Wave::Parameter::MaxValue() const
 {
     return minMax[value].max;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString Wave::Parameter::Name() const
+{
+    return LANG_RU ? (char *)nameParameter[value].nameRU : (char *)nameParameter[value].nameEN;
 }
