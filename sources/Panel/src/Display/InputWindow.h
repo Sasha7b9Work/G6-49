@@ -85,8 +85,6 @@ private:
     static void DrawDutyFactor(int x, int y);
     /// Канал, для которого вводится значение
     static Chan         chan;
-    /// Форма сигнала, для которого вводится значение
-    static Form         *form;
     /// Параметт, значение которого вводится
     static Parameter    *m_param;
 

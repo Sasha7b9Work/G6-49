@@ -12,7 +12,6 @@
 #define IN_NUM_LOCK_MODE    (m_param->InNumLockMode())
 
 Chan                    InputWindow::chan = Chan::A;
-Form                    *InputWindow::form = 0;
 Parameter               *InputWindow::m_param = 0;
 InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
 
@@ -21,7 +20,7 @@ InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
 void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
-    form = WAVE_CURRENT.GetCurrentForm();
+    Form *form = WAVE_CURRENT.GetCurrentForm();
     m_param = PARAM(form);
     m_iws = INPUT_WINDOW_STRUCT(chan, (uint8)(*form), (uint8)(*m_param));
 
