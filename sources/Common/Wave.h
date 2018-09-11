@@ -30,16 +30,13 @@ public:
             } value;
 
             Parameter(int v = Number) : value((E)v) {};
-            Parameter(int v, bool a) : value((E)v), allow(a) { };
             operator uint8() const                           { return (uint8)value; }
             float MinValue() const;
             float MaxValue() const;
             pString Name() const;
             /// ¬озвращает true, если параметр €вл€етс€ страницей параметров
             bool IsPage() const;
-            /// true означает, что параметр разрешЄн
-            bool allow;
-        } parameters[Form::Parameter::Number];
+        } params[Form::Parameter::Number];
 
         enum E
         {

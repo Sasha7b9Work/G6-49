@@ -191,3 +191,12 @@ Wave::Wave(Chan ch, Form form[Form::Number]) : channel(ch)
         forms[i] = form[i];
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Wave::Form::Form(E v, Parameter param[Form::Parameter::Number]) : value(v)
+{
+    for(int i = 0; i < Form::Parameter::Number; i++)
+    {
+        params[i] = param[i];
+    }
+}
