@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\common\CommonTypes.h" />
+    <ClInclude Include="..\..\common\Wave.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
     <ClInclude Include="..\..\common\_VS\core_cm4.h" />

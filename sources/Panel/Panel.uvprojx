@@ -1642,9 +1642,9 @@
               <FilePath>..\Common\Command.h</FilePath>
             </File>
             <File>
-              <FileName>Command.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Common\Command.cpp</FilePath>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Wave.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2147,11 +2147,6 @@
               <FilePath>.\src\Generator\Generator.h</FilePath>
             </File>
             <File>
-              <FileName>Wave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Wave.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Signal.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Signal.cpp</FilePath>
@@ -2160,6 +2155,11 @@
               <FileName>Signal.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Signal.h</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Wave.cpp</FilePath>
             </File>
           </Files>
         </Group>

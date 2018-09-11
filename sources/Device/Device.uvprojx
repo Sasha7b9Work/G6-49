@@ -926,6 +926,11 @@
               <FileType>5</FileType>
               <FilePath>..\Common\Command.h</FilePath>
             </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Wave.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

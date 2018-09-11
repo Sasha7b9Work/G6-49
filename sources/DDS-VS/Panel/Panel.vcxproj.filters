@@ -57,9 +57,6 @@
     <ClCompile Include="..\..\Panel\src\Display\InputWindowStruct.cpp">
       <Filter>Display</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\Command.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Font\Font.cpp">
       <Filter>Display\Font</Filter>
     </ClCompile>
@@ -252,9 +249,6 @@
     <ClCompile Include="..\..\Panel\src\Generator\Signal.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
-      <Filter>Generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Number.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -266,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Debug.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
+      <Filter>Generator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -535,6 +532,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Utils\Debug.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Wave.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

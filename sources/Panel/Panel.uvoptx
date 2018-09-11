@@ -904,12 +904,12 @@
     <File>
       <GroupNumber>4</GroupNumber>
       <FileNumber>50</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Common\Command.cpp</PathWithFileName>
-      <FilenameWithoutPath>Command.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\Wave.h</PathWithFileName>
+      <FilenameWithoutPath>Wave.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2084,18 +2084,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\Wave.cpp</PathWithFileName>
-      <FilenameWithoutPath>Wave.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>13</GroupNumber>
-      <FileNumber>143</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Generator\Signal.cpp</PathWithFileName>
       <FilenameWithoutPath>Signal.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -2103,13 +2091,25 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>144</FileNumber>
+      <FileNumber>143</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Generator\Signal.h</PathWithFileName>
       <FilenameWithoutPath>Signal.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>13</GroupNumber>
+      <FileNumber>144</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Generator\Wave.cpp</PathWithFileName>
+      <FilenameWithoutPath>Wave.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
