@@ -278,6 +278,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
     AllowableParameters allowParameters;
     InputWindow::FillAllowParameters(ch, form, &allowParameters);
 
+
     for (int i = 0; i < Form::Parameter::Number; i++)
     {
         if (allowParameters.allow[i])

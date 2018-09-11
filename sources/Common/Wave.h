@@ -7,20 +7,6 @@ class Wave
 public:
     struct Form
     {
-        enum E
-        {
-            Sine,       ///< Синус
-            RampPlus,   ///< Пила+
-            RampMinus,  ///< Пила-
-            Meander,    ///< Меандр
-            Impulse,    ///< Импульсы
-            Number
-        } value;
-        Form(E v = Number) : value((E)v) { };
-        operator uint8() const           { return (uint8)value; };
-        pString Name(Language lang) const;
-        bool NameIsEqual(Form &form) const;
-
         struct Parameter
         {
             enum E
@@ -43,14 +29,32 @@ public:
                 Number
             } value;
 
-            Parameter(int v = Number) : value((E)v) { };
-            operator uint8() const                  { return (uint8)value; }
+            Parameter(int v = Number) : value((E)v) {};
+            Parameter(int v, bool a) : value((E)v), allow(a) { };
+            operator uint8() const                           { return (uint8)value; }
             float MinValue() const;
             float MaxValue() const;
             pString Name() const;
             /// Возвращает true, если параметр является страницей параметров
             bool IsPage() const;
+            /// true означает, что параметр разрешён
+            bool allow;
         } parameters[Form::Parameter::Number];
+
+        enum E
+        {
+            Sine,       ///< Синус
+            RampPlus,   ///< Пила+
+            RampMinus,  ///< Пила-
+            Meander,    ///< Меандр
+            Impulse,    ///< Импульсы
+            Number
+        } value;
+        Form(E v = Number) : value(v) {};
+        Form(E v, Parameter param[Form::Parameter::Number]);
+        operator uint8() const           { return (uint8)value; };
+        pString Name(Language lang) const;
+        bool NameIsEqual(Form &form) const;
 
     } forms[Form::Number];
 

@@ -11,10 +11,10 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (m_iws.numLockMode)
 
-Chan                InputWindow::chan = Chan::A;
-Wave::Form          InputWindow::form = Wave::Form::Sine;
-Wave::Form::Parameter     InputWindow::m_param = Wave::Form::Parameter::Amplitude;
-InputWindow::Struct InputWindow::m_iws = InputWindow::Struct(' ');
+Chan                    InputWindow::chan = Chan::A;
+Wave::Form              InputWindow::form = Wave::Form::Sine;
+Wave::Form::Parameter   InputWindow::m_param = Wave::Form::Parameter::Amplitude;
+InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
