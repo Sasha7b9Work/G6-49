@@ -84,9 +84,9 @@ private:
 
     static void DrawDutyFactor(int x, int y);
     /// Канал, для которого вводится значение
-    static Chan                     chan;
+    static Chan         chan;
     /// Форма сигнала, для которого вводится значение
-    static Form               *form;
+    static Form         *form;
     /// Параметт, значение которого вводится
     static Parameter    *m_param;
 
@@ -117,11 +117,11 @@ public:
 
         static Form        form;
         static Parameter   m_param;
-        static Chan              ch;
+        static Chan        ch;
 
         Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Parameter::Frequency, 
-               uint numlm = 0, float _min = 0.1f, float _max = 100e6f) :
-            sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), numLockMode(numlm), min(_min), max(_max)
+               uint numlm = 0) :
+            sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), numLockMode(numlm)
         {
             strcpy(buffer, buff);
         }
@@ -132,8 +132,6 @@ public:
         uint8    order       : 3;
         uint8    param       : 4;     ///< Перечисление типа Parameter
         uint     numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
-        float    min;                 ///< Минимальное значение параметра
-        float    max;                 ///< Максимальное значение параметра
 
     private:
         /// Увеличивает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось.

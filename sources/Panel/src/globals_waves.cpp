@@ -98,6 +98,7 @@ static Parameter params_ImpulseB[Parameter::Number] =
 };
 
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static Form formsB[Form::Number] =
 {
     Form(Form::Sine,        params_SineB),

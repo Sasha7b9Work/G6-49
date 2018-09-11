@@ -30,9 +30,9 @@ struct Parameter
 
     operator uint8() const                  { return (uint8)value; }
 
-    float MinValue() const;
+    float MinValue() const { return min; };
 
-    float MaxValue() const;
+    float MaxValue() const { return max; };
 
     pString Name() const;
     /// Возвращает true, если параметр является страницей параметров

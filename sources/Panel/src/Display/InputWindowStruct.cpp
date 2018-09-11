@@ -187,7 +187,7 @@ bool InputWindow::Struct::IncreaseDigit(int num)
         }
     }
 
-    if(Value() < min || Value() > max)
+    if(Value() < m_param.MinValue() || Value() > m_param.MaxValue())
     {
         *this = temp;
         return false;
@@ -219,7 +219,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
         DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
     }
 
-    if(Value() < min || Value() > max)
+    if(Value() < m_param.MinValue() || Value() > m_param.MaxValue())
     {
         *this = temp;
         return false;
