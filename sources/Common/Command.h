@@ -130,16 +130,6 @@ public:
             Number
         } value;
 
-        /// Тип параметра
-        struct Type
-        {
-            enum E
-            {
-                NumericValue,   ///< Числовое значение
-                Page            ///< Страница параметров
-            } value;
-        };
-
         Parameter(int v) : value((E)v) { };
         operator uint8() const { return (uint8)value; }
         float MinValue() const;
@@ -147,7 +137,7 @@ public:
         pString Name() const;
         /// Возвращает true, если параметр является страницей параметров
         bool IsPage() const;
-    } parameters[Parameter::Number];
+    }; // parameters[Parameter::Number];
 
 #ifdef PANEL
     pString Name(uint num, Language lang);
