@@ -92,47 +92,6 @@ Settings set = defSet;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct StructMinMax
-{
-    float min;
-    float max;
-    StructMinMax(float _min, float _max) : min(_min), max(_max) {};
-};
-
-static const StructMinMax minMax[Wave::Parameter::Number] =
-{
-    StructMinMax(1.0f,    50e6f),       // Frequency
-    StructMinMax(2e-08f,  1.0f),        // Period
-    StructMinMax(0.000f,  65535.0f),    // Amplitude
-    StructMinMax(0.0f,    4095.0f),     // Offset
-    StructMinMax(2e-08f,  10.0f),       // Duration
-    StructMinMax(0.001f,  1.0f),        // DutyRatio
-    StructMinMax(-180.0f, 180.0f),      // Phase
-    StructMinMax(2e-08f,  10e08f),      // Delay
-    StructMinMax(1e-3f,   10e6f),       // DepthModulation
-    StructMinMax(-1,      1),           // Polarity
-    StructMinMax(1e-6f,   1e6f),        // DurationRise
-    StructMinMax(1e-6f,   1e6f),        // DurationFall
-    StructMinMax(1e-6f,   1e6f),        // DurationStady
-    StructMinMax(1e-6f,   1e6f),        // DutyFactor
-    StructMinMax(-1.0f,   -1.0f)        // Modulation [-1.0f;1.0f] означает, что этот параметр имеет несколько параметров - выбор его открывает
-                                        // страницу установки параметров
-};
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-float Wave::Parameter::MinValue() const
-{
-    return minMax[value].min;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-float Wave::Parameter::MaxValue() const
-{
-    return minMax[value].max;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Save()
 {
     CPU::FLASH_::SaveSettings();

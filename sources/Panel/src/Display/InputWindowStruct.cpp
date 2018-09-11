@@ -134,6 +134,11 @@ void InputWindow::Struct::RegRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *InputWindow::Struct::StringValue()
 {
+    if(((Wave::Parameter)param).IsPage())
+    {
+        return "";
+    }
+
     static char buf[20];
     buf[0] = '\0';
 

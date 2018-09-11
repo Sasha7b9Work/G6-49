@@ -261,9 +261,8 @@ float BigNumber::GetValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void BigNumber::Get(char integer_[SIZE], char fract_[SIZE], char *sign_)
+void BigNumber::Get(char /*integer_*/[SIZE], char /*fract_*/[SIZE], char * /*sign_*/)
 {
-    *sign_ = sign;
-
+    //*sign_ = sign;
 
 }

@@ -12,23 +12,36 @@
 #include <string.h>
 
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4514 4626 5027)
+#endif
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static pString nameParameter[Wave::Parameter::Number][2] =
+static struct StructName
 {
-    { "◊¿—“Œ“¿",        "FREQUENCY" },
-    { "œ≈–»Œƒ",         "PERIOD" },
-    { "–¿«Ã¿’",         "AMPLITUDE" },
-    { "—Ã≈Ÿ≈Õ»≈",       "OFFSET" },
-    { "ƒÀ»“.",          "DURATION" },
-    { "— ¬¿∆ÕŒ—“‹",     "DUTY RATIO" },
-    { "‘¿«¿",           "PHASE" },
-    { "«¿ƒ≈–∆ ¿",       "DELAY" },
-    { " Œ›‘‘. ÃŒƒ.",    "MOD. INDEX"},
-    { "œŒÀﬂ–ÕŒ—“‹",     "POLARITY"},
-    { "¬–. Õ¿–¿—“¿Õ»ﬂ", "BUILD-UP TIME"},
-    { "¬–. —œ¿ƒ¿",      "RELEASING TIME"},
-    { "¬–. œ» ¿",       "PEAK TIME"},
-    { " Œ›‘‘. «¿œŒÀÕ.", "DUTY FACTOR"}
+    pString nameRU;
+    pString nameEN;
+    StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
+}
+nameParameter[Wave::Parameter::Number] =
+{
+    StructName("◊¿—“Œ“¿",        "FREQUENCY"),
+    StructName("œ≈–»Œƒ",         "PERIOD"),
+    StructName("–¿«Ã¿’",         "AMPLITUDE"),
+    StructName("—Ã≈Ÿ≈Õ»≈",       "OFFSET"),
+    StructName("ƒÀ»“.",          "DURATION"),
+    StructName("— ¬¿∆ÕŒ—“‹",     "DUTY RATIO"),
+    StructName("‘¿«¿",           "PHASE"),
+    StructName("«¿ƒ≈–∆ ¿",       "DELAY"),
+    StructName(" Œ›‘‘. ÃŒƒ.",    "MOD. INDEX"),
+    StructName("œŒÀﬂ–ÕŒ—“‹",     "POLARITY"),
+    StructName("¬–. Õ¿–¿—“¿Õ»ﬂ", "BUILD-UP TIME"),
+    StructName("¬–. —œ¿ƒ¿",      "RELEASING TIME"),
+    StructName("¬–. œ» ¿",       "PEAK TIME"),
+    StructName(" Œ›‘‘. «¿œŒÀÕ.", "DUTY FACTOR"),
+    StructName("ÃÓ‰ÛÎˇˆËˇ",      "Modulation")
 };
 
 enum DIRECTION
@@ -521,7 +534,7 @@ pString ChoiceParameter::NameSubItem(int number) const
         }
         if (number == 0)
         {
-            retValue = (char*)nameParameter[i][LANG];
+            retValue = LANG_RU ? (char *)nameParameter[i].nameRU : (char *)nameParameter[i].nameEN;
         }
         --number;
     }
@@ -531,13 +544,13 @@ pString ChoiceParameter::NameSubItem(int number) const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString Wave::Parameter::Name() const
 {
-    return (char*)nameParameter[value][LANG];
+    return LANG_RU ? (char *)nameParameter[value].nameRU : (char *)nameParameter[value].nameEN;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameCurrentSubItem() const
 {
-    return (const char*)(nameParameter[*numParameter][LANG]);
+    return LANG_RU ? nameParameter[*numParameter].nameRU : nameParameter[*numParameter].nameEN;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -575,3 +588,7 @@ int Choice::GetHeightOpened() const
 {
     return NumSubItems() * 10 + 2 + MI_TITLE_HEIGHT;
 }
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

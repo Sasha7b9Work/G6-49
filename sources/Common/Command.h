@@ -145,6 +145,8 @@ public:
         float MinValue() const;
         float MaxValue() const;
         pString Name() const;
+        /// Возвращает true, если параметр является страницей параметров
+        bool IsPage() const;
     } parameters[Parameter::Number];
 
 #ifdef PANEL

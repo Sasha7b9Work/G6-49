@@ -6,21 +6,21 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
 {
         {
             {                                                                           // [A][Form::Sine]
-/* Frequency */ InputWindow::Struct(' ', "20000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f),
-/* Period    */ InputWindow::Struct(' ', "05000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.3333333333e-8f),
-/* Amplitude */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f),
-/* Offset    */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f),
-/* Duration  */ InputWindow::Struct(' '),
-/* DutyRatio */ InputWindow::Struct(' '),
-/* Phase     */ InputWindow::Struct(' '),
-/* Delay     */ InputWindow::Struct(' '),
-/* Modul     */ InputWindow::Struct(' '),
-/* Polarity  */ InputWindow::Struct(' '),
-/* DurRise   */ InputWindow::Struct(' '),
-/* DurFall   */ InputWindow::Struct(' '),
-/* DurStady  */ InputWindow::Struct(' '),
-/* DutFactor */ InputWindow::Struct(' '),
-/* Modulation */ InputWindow::Struct(' ')
+/* Frequency  */ InputWindow::Struct(' ', "20000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f),
+/* Period     */ InputWindow::Struct(' ', "05000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.3333333333e-8f),
+/* Amplitude  */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f),
+/* Offset     */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f),
+/* Duration   */ InputWindow::Struct(' '),
+/* DutyRatio  */ InputWindow::Struct(' '),
+/* Phase      */ InputWindow::Struct(' '),
+/* Delay      */ InputWindow::Struct(' '),
+/* Modul      */ InputWindow::Struct(' '),
+/* Polarity   */ InputWindow::Struct(' '),
+/* DurRise    */ InputWindow::Struct(' '),
+/* DurFall    */ InputWindow::Struct(' '),
+/* DurStady   */ InputWindow::Struct(' '),
+/* DutFactor  */ InputWindow::Struct(' '),
+/* Modulation */ InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::One,  Wave::Parameter::Modulation, 1, 0, 0.0f, 10.0f)
             },
             {                                                                           // [A][Form::RampPlus]
                 InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f),
@@ -108,7 +108,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
-                InputWindow::Struct(' ')
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::One,  Wave::Parameter::Modulation, 1, 0, 0.0f, 10.0f)
             },
             {                                                                           // [B][Form::RampPlus]
                 InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f),
