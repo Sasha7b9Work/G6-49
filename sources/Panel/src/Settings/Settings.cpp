@@ -114,7 +114,9 @@ static const StructMinMax minMax[Wave::Parameter::Number] =
     StructMinMax(1e-6f,   1e6f),        // DurationRise
     StructMinMax(1e-6f,   1e6f),        // DurationFall
     StructMinMax(1e-6f,   1e6f),        // DurationStady
-    StructMinMax(1e-6f,   1e6f)         // DutyFactor
+    StructMinMax(1e-6f,   1e6f),        // DutyFactor
+    StructMinMax(-1.0f,   -1.0f)        // Modulation [-1.0f;1.0f] означает, что этот параметр имеет несколько параметров - выбор его открывает
+                                        // страницу установки параметров
 };
 
 

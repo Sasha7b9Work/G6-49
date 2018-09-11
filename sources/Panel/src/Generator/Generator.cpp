@@ -115,7 +115,8 @@ void Generator::SetParameter(Chan ch, Wave::Parameter param, float value)
         CommandPanel::SET_DURATION_RISE,
         CommandPanel::SET_DURATION_FALL,
         CommandPanel::SET_DURATION_STADY,
-        CommandPanel::SET_DUTY_FACTOR
+        CommandPanel::SET_DUTY_FACTOR,
+        CommandPanel::SetModulation
     };
 
     uint8 buffer[6] = {(uint8)commands[param], (uint8)ch};

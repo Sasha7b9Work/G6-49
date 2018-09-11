@@ -68,7 +68,8 @@ const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
     CommandSetWave,
     CommandSetRampForSine,
     CommandSetDurationForRampSine,
-    CommandSetAmplitudeRampForSine
+    CommandSetAmplitudeRampForSine,
+    CommandEmpty
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -66,11 +66,12 @@ struct CommandPanel
         SET_DURATION_FALL = 17,
         SET_DURATION_STADY = 18,
         SET_DUTY_FACTOR = 19,
-        CREATE_HAND_WAVE = 20,          ///< Засылает точки произвольного сигнала
-        SET_HAND_WAVE = 21,             ///< Устанавливает вывод произвольного сигнала
-        SetRampForSine = 22,            ///< Установить режим модуляции пилой для синуса
-        SetDurationRampForSine = 23,    ///< Установить длительность ипульса при модуляции синуса пилой
-        SetAmplitudeRampForSine = 24,   ///< Установить амплитуду для пилы, модулирующей синус
+        SetModulation = 20,
+        CREATE_HAND_WAVE = 21,          ///< Засылает точки произвольного сигнала
+        SET_HAND_WAVE = 22,             ///< Устанавливает вывод произвольного сигнала
+        SetRampForSine = 23,            ///< Установить режим модуляции пилой для синуса
+        SetDurationRampForSine = 24,    ///< Установить длительность ипульса при модуляции синуса пилой
+        SetAmplitudeRampForSine = 25,   ///< Установить амплитуду для пилы, модулирующей синус
         Number
     } value;
     CommandPanel(E v) : value(v){};
@@ -125,6 +126,7 @@ public:
             DurationFall,       ///< Длительность спада
             DurationStady,      ///< Длительность установившего значения
             DutyFactor,         ///< Коэффициент заполнения
+            Modulation,         ///< Модуляция
             Number
         } value;
 

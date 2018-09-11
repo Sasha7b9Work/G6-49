@@ -127,9 +127,8 @@ void AD9952::WriteCFR1(Chan ch)
     if(Shape::enabled[ch])
     {
         SetBit(value, 24);  // Устанавливаем режим "пилы"
-        SetBit(value, 25);      // OSK enable - управление амплитудой
-        //SetBit(value, 26);
     }
+    SetBit(value, 25);      // OSK enable - управление амплитудой
     WriteToHardware(ch, Register::CFR1, value);
 }
 

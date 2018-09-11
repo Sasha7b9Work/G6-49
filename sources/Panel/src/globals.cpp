@@ -19,13 +19,15 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
 /* DurRise   */ InputWindow::Struct(' '),
 /* DurFall   */ InputWindow::Struct(' '),
 /* DurStady  */ InputWindow::Struct(' '),
-/* DutFactor */ InputWindow::Struct(' ')
+/* DutFactor */ InputWindow::Struct(' '),
+/* Modulation */ InputWindow::Struct(' ')
             },
             {                                                                           // [A][Form::RampPlus]
                 InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo,  Wave::Parameter::Frequency, 1, 0, 0.1f, 100e6f),
                 InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.33333e-8f, 10e6f),
                 InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f),
                 InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -51,6 +53,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' ')
             },
             {                                                                           // [A][Form::Meander]
@@ -67,6 +70,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' ')
             },
             {                                                                           // [A][Form::Impulse]
@@ -74,6 +78,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.33333e-8f, 10e6f),
                 InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f),
                 InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -102,6 +107,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' ')
             },
             {                                                                           // [B][Form::RampPlus]
@@ -109,6 +115,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.33333e-8f, 10e6f),
                 InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f),
                 InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -134,6 +141,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' ')
             },
             {                                                                           // [B][Form::Meander]
@@ -150,6 +158,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' ')
             },
             {                                                                           // [A][Form::Impulse]
@@ -157,6 +166,7 @@ InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::
                 InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli, Wave::Parameter::Period,    1, 0, 3.33333e-8f, 10e6f),
                 InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Amplitude, 1, 0, 0.0f, 10.0f),
                 InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One,   Wave::Parameter::Offset,    1, 0, 0.0f, 10.0f),
+                InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
