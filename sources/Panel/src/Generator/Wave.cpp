@@ -12,7 +12,7 @@ static struct StructName
     pString nameEN;
     StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
 }
-nameParameter[Wave::Form::Parameter::Number] =
+nameParameter[Form::Parameter::Number] =
 {
     StructName("◊¿—“Œ“¿",        "FREQUENCY"),
     StructName("œ≈–»Œƒ",         "PERIOD"),
@@ -33,7 +33,7 @@ nameParameter[Wave::Form::Parameter::Number] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-pString Wave::Form::Name(Language lang) const
+pString Form::Name(Language lang) const
 {
     struct StrName
     {
@@ -43,7 +43,7 @@ pString Wave::Form::Name(Language lang) const
         pString Name(Language lang) { return lang == Language::RU ? nameRu : nameEn; }
     };
 
-    static StrName names[Wave::Form::Number] =
+    static StrName names[Form::Number] =
     {
         StrName("—»Õ”—",    "SINE"),
         StrName("œ»À¿+",    "RAMP+"),
@@ -99,7 +99,7 @@ static const struct StructMinMax
     float max;
     StructMinMax(float _min, float _max) : min(_min), max(_max) {};
 }
-minMax[Wave::Form::Parameter::Number] =
+minMax[Form::Parameter::Number] =
 {
     StructMinMax(1.0f,    50e6f),       // Frequency
     StructMinMax(2e-08f,  1.0f),        // Period
@@ -120,65 +120,57 @@ minMax[Wave::Form::Parameter::Number] =
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Wave::Form::Parameter::IsPage() const
+bool Form::Parameter::IsPage() const
 {
     return MinValue() == -1.0f && MaxValue() == -1.0f;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Wave::Form::Parameter::MinValue() const
+float Form::Parameter::MinValue() const
 {
     return minMax[value].min;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Wave::Form::Parameter::MaxValue() const
+float Form::Parameter::MaxValue() const
 {
     return minMax[value].max;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Wave::Form::Parameter::Name() const
+pString Form::Parameter::Name() const
 {
     return LANG_RU ? (char *)nameParameter[value].nameRU : (char *)nameParameter[value].nameEN;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Wave::Form Wave::GetCurrentForm()
+Form *Wave::GetCurrentForm()
 {
-    return forms[currentForm];
+    return &forms[currentForm];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::SetCurrentForm(Wave::Form form)
+void Wave::SetNextForm()
 {
-    for(int i = 0; i < NumberOfForms(); i++)
+    currentForm++;
+    if(currentForm >= NumberOfForms())
     {
-        if(form.NameIsEqual(forms[i]))
-        {
-            currentForm = i;
-        }
+        currentForm = 0;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Wave::NumberOfForms() const
 {
-    for(int i = 0; i < Wave::Form::Number; i++)
+    for(int i = 0; i < Form::Number; i++)
     {
-        if(forms[i].value == Wave::Form::Number)
+        if(forms[i].value == Form::Number)
         {
             return i;
         }
     }
 
-    return Wave::Form::Number;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Wave::Form::NameIsEqual(Form &form) const
-{
-    return form.value == value;
+    return Form::Number;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -193,10 +185,42 @@ Wave::Wave(Chan ch, Form form[Form::Number]) : channel(ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Wave::Form::Form(E v, Parameter param[Form::Parameter::Number]) : value(v)
+Form::Form(E v, Parameter param[Form::Parameter::Number]) : value(v), currentParam(0)
 {
     for(int i = 0; i < Form::Parameter::Number; i++)
     {
         params[i] = param[i];
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Form::Parameter *Form::CurrentParameter()
+{
+    return &params[currentParam];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Form::NumParameters() const 
+{
+    for(int i = 0; i < Form::Number; i++)
+    {
+        if(params[i] == Form::Number)
+        {
+            return i;
+        }
+    }
+
+    return Form::Number - 1;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Form::Parameter *Form::GetParameter(int i)
+{
+    return &params[i];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Form *Wave::GetForm(int i)
+{
+    return &forms[i];
 }

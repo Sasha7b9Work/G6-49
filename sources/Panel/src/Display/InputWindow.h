@@ -33,7 +33,7 @@ struct Order
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *NameUnit(char buffer[10], Order order, Wave::Form::Parameter parameter);
+const char *NameUnit(char buffer[10], Order order, Form::Parameter parameter);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,9 +52,6 @@ public:
     static void KeyEnter();
 
     static void ProcessContorl(Control control);
-
-    /// Заполнить структуру allowParameters значениями в соответствии с допустимыми для данных формы сигнала и канала
-    static void FillAllowParameters(Chan ch, Wave::Form form, AllowableParameters *allowParameters);
 
 private:
     static void DrawAmplitude(int x, int y);
@@ -87,18 +84,18 @@ private:
 
     static void DrawDutyFactor(int x, int y);
     /// Канал, для которого вводится значение
-    static Chan              chan;
+    static Chan                     chan;
     /// Форма сигнала, для которого вводится значение
-    static Wave::Form        form;
+    static Form               *form;
     /// Параметт, значение которого вводится
-    static Wave::Form::Parameter   m_param;
+    static Form::Parameter    *m_param;
 
 public:
     class Struct
     {
     public:
 
-        void Fill(Chan ch, Wave::Form form, Wave::Form::Parameter param);
+        void Fill(Chan ch, Form *form, Form::Parameter *param);
 
         char *StringValue();
 
@@ -118,11 +115,11 @@ public:
 
         void SaveValue();
 
-        static Wave::Form        form;
-        static Wave::Form::Parameter   m_param;
+        static Form        form;
+        static Form::Parameter   m_param;
         static Chan              ch;
 
-        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Wave::Form::Parameter::Frequency, 
+        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Form::Parameter::Frequency, 
                uint a = 0, uint numlm = 0, float _min = 0.1f, float _max = 100e6f) :
             sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), allow(a), numLockMode(numlm), min(_min), max(_max)
         {
@@ -133,7 +130,7 @@ public:
         int8     posComma;            ///< После какого знакоместа выводить запятую
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
         uint8    order       : 3;
-        uint8    param       : 4;     ///< Перечисление типа Wave::Form::Parameter
+        uint8    param       : 4;     ///< Перечисление типа Form::Parameter
         uint     allow       : 1;     ///< Если 1, параметр разрешен для данного сигнала
         uint     numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
         float    min;                 ///< Минимальное значение параметра

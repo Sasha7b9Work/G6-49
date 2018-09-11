@@ -7,9 +7,9 @@
 //{
 //    // Generator
 //    bool          enable[Chan::Number];
-//    Wave::Form      form[Chan::Number];
+//    Form      form[Chan::Number];
 //    uint          rg[10];
-////    Wave::Form::Parameter 
+////    Form::Parameter 
 //
 //
 //    static void Load(bool _default);

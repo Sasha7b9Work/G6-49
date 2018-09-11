@@ -12,8 +12,8 @@
 #define IN_NUM_LOCK_MODE    (m_iws.numLockMode)
 
 Chan                    InputWindow::chan = Chan::A;
-Wave::Form              InputWindow::form = Wave::Form::Sine;
-Wave::Form::Parameter   InputWindow::m_param = Wave::Form::Parameter::Amplitude;
+Form              *InputWindow::form = 0;
+Form::Parameter   *InputWindow::m_param = 0;
 InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
 
 
@@ -22,8 +22,8 @@ void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
     form = WAVE_CURRENT.GetCurrentForm();
-    m_param = CURRENT_PARAMETER(form);
-    m_iws = INPUT_WINDOW_STRUCT(chan, form, m_param);
+    m_param = PARAM(form);
+    m_iws = INPUT_WINDOW_STRUCT(chan, (uint8)(*form), (uint8)(*m_param));
 
 	(&m_iws)->Fill(chan, form, m_param);
 }
@@ -49,7 +49,7 @@ void InputWindow::Draw()
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
     
-    static const pFuncVII func[Wave::Form::Parameter::Number] =
+    static const pFuncVII func[Form::Parameter::Number] =
     {
         DrawFrequency,
         DrawPeriod,
@@ -72,7 +72,7 @@ void InputWindow::Draw()
 
     DrawDigits(x, y);
 
-    func[m_param](x + 10, y + 10);
+    func[*m_param](x + 10, y + 10);
 
     if (IN_NUM_LOCK_MODE)
     {
@@ -87,7 +87,7 @@ void InputWindow::DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Text::DrawBigText(x, y, 3, m_param.Name());
+    Text::DrawBigText(x, y, 3, m_param->Name());
 
     char buf[2] = "0";
 
@@ -260,14 +260,5 @@ void InputWindow::ProcessContorl(Control control)
     else if ((control >= Control::B_F1 && control <= Control::B_F4) && control.action.Is(Control::Action::Up))
     {
         Menu::CurrentPage()->GetItem(control - Control::B_F1)->Press(control);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::FillAllowParameters(Chan ch_, Wave::Form form_, AllowableParameters *allowParameters)
-{
-    for (int i = 0; i < Wave::Form::Parameter::Number; i++)
-    {
-        allowParameters->allow[i] = INPUT_WINDOW_STRUCT(ch_, form_, i).allow;
     }
 }

@@ -12,7 +12,7 @@ public:
     /// Первоначальная инициализация
     static void Init();
     /// Скоммутировать мультиплексор в соответствии с формой устанавливаемого сигнала на данном канале
-    static void SetMode(Chan ch, Wave::Form form);
+    static void SetMode(Chan ch, Form form);
 
 private:
     static void SetPin(uint16 pin);

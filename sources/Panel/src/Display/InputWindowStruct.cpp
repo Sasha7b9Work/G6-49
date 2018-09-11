@@ -21,8 +21,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Wave::Form      InputWindow::Struct::form    = Wave::Form::Sine;
-Wave::Form::Parameter InputWindow::Struct::m_param = Wave::Form::Parameter::Amplitude;
+Form      InputWindow::Struct::form    = Form::Sine;
+Form::Parameter InputWindow::Struct::m_param = Form::Parameter::Amplitude;
 Chan            InputWindow::Struct::ch      = Chan::A;
 
 #define SIZE_INPUT_BUFFER_IWS 17
@@ -30,11 +30,11 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindow::Struct::Fill(Chan ch_, Wave::Form form_, Wave::Form::Parameter param_)
+void InputWindow::Struct::Fill(Chan ch_, Form *form_, Form::Parameter *param_)
 {
     ch = ch_;
-    form = form_;
-    m_param = param_;
+    form = *form_;
+    m_param = *param_;
     numLockMode = false;
 
     memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
@@ -134,7 +134,7 @@ void InputWindow::Struct::RegRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *InputWindow::Struct::StringValue()
 {
-    if(((Wave::Form::Parameter)param).IsPage())
+    if(((Form::Parameter)param).IsPage())
     {
         return "";
     }
@@ -293,7 +293,7 @@ pString Order::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *NameUnit(char buffer[10], Order order, Wave::Form::Parameter parameter)
+const char *NameUnit(char buffer[10], Order order, Form::Parameter parameter)
 {
     static const char *names[][2] =
     {
@@ -483,13 +483,13 @@ void InputWindow::Struct::SendToGenerator()
 {
     PARAMETER(ch, form, m_param) = *this;
 
-    if (m_param == Wave::Form::Parameter::Delay)
+    if (m_param == Form::Parameter::Delay)
     {
         /*
-        PARAMETER(Chan::B, Wave::Form(Wave::Form::Impulse), Wave::Form::Parameter::Frequency) = 
-            PARAMETER(Chan::B, Wave::Form(Wave::Form::Impulse), Wave::Form::Parameter::Frequency);
-        float frequency = PARAMETER(Chan::A, Wave::Form(Wave::Form::Impulse), Wave::Form::Parameter::Frequency).Value();
-        Generator::SetParameter(Chan::B, Wave::Form::Parameter::Frequency, frequency);
+        PARAMETER(Chan::B, Form(Form::Impulse), Form::Parameter::Frequency) = 
+            PARAMETER(Chan::B, Form(Form::Impulse), Form::Parameter::Frequency);
+        float frequency = PARAMETER(Chan::A, Form(Form::Impulse), Form::Parameter::Frequency).Value();
+        Generator::SetParameter(Chan::B, Form::Parameter::Frequency, frequency);
 
         float value = PARAMETER(ch, form, m_param).Value();
         Generator::SetParameter(ch, m_param, value);
@@ -505,7 +505,7 @@ void InputWindow::Struct::SendToGenerator()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::FillFromInputBuffer()
 {
-    if (m_param == Wave::Form::Parameter::Duration || m_param == Wave::Form::Parameter::Delay)
+    if (m_param == Form::Parameter::Duration || m_param == Form::Parameter::Delay)
     {
         order = Order::Micro;
     }

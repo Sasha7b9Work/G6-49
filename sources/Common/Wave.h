@@ -2,67 +2,91 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct Form
+{
+    struct Parameter
+    {
+        enum E
+        {
+            Frequency,          ///< Частота
+            Period,             ///< Период
+            Amplitude,          ///< Амплитуда
+            Offset,             ///< Смещение
+            Duration,           ///< Длительность
+            DutyRatio,          ///< Скважность
+            Phase,              ///< Сдвиг фазы
+            Delay,              ///< Задержка
+            DepthModulation,    ///< Глубина амплитудной модуляции
+            Polarity,           ///< Полярность
+            DurationRise,       ///< Длительность нарастания
+            DurationFall,       ///< Длительность спада
+            DurationStady,      ///< Длительность установившего значения
+            DutyFactor,         ///< Коэффициент заполнения
+            Modulation,         ///< Модуляция
+            Number
+        } value;
+
+        Parameter(int v = Number) : value((E)v)
+        {
+        };
+        operator uint8() const
+        {
+            return (uint8)value;
+        }
+        float MinValue() const;
+        float MaxValue() const;
+        pString Name() const;
+        /// Возвращает true, если параметр является страницей параметров
+        bool IsPage() const;
+    } params[Form::Parameter::Number];
+
+    enum E
+    {
+        Sine,       ///< Синус
+        RampPlus,   ///< Пила+
+        RampMinus,  ///< Пила-
+        Meander,    ///< Меандр
+        Impulse,    ///< Импульсы
+        Number
+    } value;
+    Form(E v = Number) : value(v), currentParam(0)
+    {
+    };
+    Form(E v, Parameter param[Form::Parameter::Number]);
+    operator uint8() const
+    {
+        return (uint8)value;
+    };
+    /// Возвращает человеческое название формы сигнала
+    pString Name(Language lang) const;
+    /// Возвращает ссылку на текущий параметр
+    Parameter *CurrentParameter();
+    /// Возвращает количество доступных параметров
+    int NumParameters() const;
+    /// Возвращает ссылку на i-ый параметр из массива params
+    Parameter *GetParameter(int i);
+    /// Установить текущим следующй параметр
+    void SetNextParameter();
+    /// Номер текущего параметра в массиве params
+    int currentParam;
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Wave
 {
 public:
-    struct Form
-    {
-        struct Parameter
-        {
-            enum E
-            {
-                Frequency,          ///< Частота
-                Period,             ///< Период
-                Amplitude,          ///< Амплитуда
-                Offset,             ///< Смещение
-                Duration,           ///< Длительность
-                DutyRatio,          ///< Скважность
-                Phase,              ///< Сдвиг фазы
-                Delay,              ///< Задержка
-                DepthModulation,    ///< Глубина амплитудной модуляции
-                Polarity,           ///< Полярность
-                DurationRise,       ///< Длительность нарастания
-                DurationFall,       ///< Длительность спада
-                DurationStady,      ///< Длительность установившего значения
-                DutyFactor,         ///< Коэффициент заполнения
-                Modulation,         ///< Модуляция
-                Number
-            } value;
 
-            Parameter(int v = Number) : value((E)v) {};
-            operator uint8() const                           { return (uint8)value; }
-            float MinValue() const;
-            float MaxValue() const;
-            pString Name() const;
-            /// Возвращает true, если параметр является страницей параметров
-            bool IsPage() const;
-        } params[Form::Parameter::Number];
-
-        enum E
-        {
-            Sine,       ///< Синус
-            RampPlus,   ///< Пила+
-            RampMinus,  ///< Пила-
-            Meander,    ///< Меандр
-            Impulse,    ///< Импульсы
-            Number
-        } value;
-        Form(E v = Number) : value(v) {};
-        Form(E v, Parameter param[Form::Parameter::Number]);
-        operator uint8() const           { return (uint8)value; };
-        pString Name(Language lang) const;
-        bool NameIsEqual(Form &form) const;
-
-    } forms[Form::Number];
+    Form forms[Form::Number];
 
     /// Возвращает установленную форму
-    Form GetCurrentForm();
-
-    void SetCurrentForm(Form form);
+    Form *GetCurrentForm();
+    /// Установить текущей следующую форму
+    void SetNextForm();
 
     int NumberOfForms() const;
 
-    Form GetForm(int i);
+    Form *GetForm(int i);
 
     Wave(Chan ch, Form form[Form::Number]);
     /// Какому каналу принадлежит сигнал
@@ -103,6 +127,6 @@ public:
 
         static void DrawParameters(Chan chan, int y0);
 
-        static void DrawParameterValue(Chan chan, Form::Parameter parameter, int x, int y);
+        static void DrawParameterValue(Chan chan, Form::Parameter *parameter, int x, int y);
     };
 };

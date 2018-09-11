@@ -27,7 +27,7 @@ void Generator::Init()
     {
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
-        SetFormWave(ch, Wave::Form::RampMinus);
+        SetFormWave(ch, Form::RampMinus);
     }
 }
 
@@ -41,11 +41,11 @@ void Generator::EnableChannel(Chan ch, bool enable)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Chan ch, Wave::Form form)
+void Generator::SetFormWave(Chan ch, Form form)
 {
-    if(ch < Chan::Number && form < Wave::Form::Number)
+    if(ch < Chan::Number && form < Form::Number)
     {
-        waveIsSine = form == Wave::Form::Sine;
+        waveIsSine = form == Form::Sine;
 
         if (!waveIsSine)
         {

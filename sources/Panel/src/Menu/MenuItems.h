@@ -378,31 +378,22 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct AllowableParameters
-{
-    bool allow[Wave::Form::Parameter::Number];
-};
 
 ///
 class ChoiceParameterBase
 {
 public:
     COMMON_PART_MENU_ITEM;
-    pFuncVV              funcOnPress;
-    AllowableParameters  allowParameters;
-    uint8               *numParameter;
+    pFuncVV     funcOnPress;
+    Form  *form;
 };
 
 
 class ChoiceParameter : public Item
 {
 public:
-
-    pFuncVV              funcOnPress;
-
-    AllowableParameters  allowParameters;
-
-    uint8               *numParameter;
+    pFuncVV     funcOnPress;
+    Form  *form;
     /// ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии и 0 в противном.
     Item *Press(Control::Action action);
 

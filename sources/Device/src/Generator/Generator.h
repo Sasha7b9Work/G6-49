@@ -15,7 +15,7 @@ public:
 
     static void EnableChannel(Chan ch, bool enable);
 
-    static void SetFormWave(Chan ch, Wave::Form form);
+    static void SetFormWave(Chan ch, Form form);
 
     static void SetParameter(Chan ch, CommandPanel command, float value);
 

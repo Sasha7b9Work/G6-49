@@ -22,9 +22,9 @@ public:
 
     static bool ChannelEnabled(Chan ch);
 
-    static void SetFormWave(Chan ch, Wave::Form form);
+    static void SetFormWave(Chan ch, Form form);
 
-    static void SetParameter(Chan ch, Wave::Form::Parameter param, float value);
+    static void SetParameter(Chan ch, Form::Parameter param, float value);
 
     static void SetDebugMode(bool enable);
 

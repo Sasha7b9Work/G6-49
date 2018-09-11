@@ -38,7 +38,7 @@ void FPGA::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetWaveForm(Chan ch, Wave::Form form)
+void FPGA::SetWaveForm(Chan ch, Form form)
 {
     struct StructFunc
     {
@@ -47,7 +47,7 @@ void FPGA::SetWaveForm(Chan ch, Wave::Form form)
         StructFunc(pFuncFpgaVU8 f) : func(f) {};
     };
     
-    static const StructFunc func[Wave::Form::Number] =
+    static const StructFunc func[Form::Number] =
     {
         EmptyFunc,
         SetRampPlusMode,

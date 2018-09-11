@@ -9,6 +9,7 @@
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
+#include "Wave.h"
 #include <string.h>
 
 
@@ -406,18 +407,9 @@ int8 Choice::CurrentIndex() const
     {
         ChoiceParameter *param = (ChoiceParameter *)this;
 
-        for (int i = 0; i < Wave::Form::Parameter::Number; i++)
-        {
-            if ((param->allowParameters).allow[i] == false)
-            {
-                continue;
-            }
-            if (i == *param->numParameter)
-            {
-                break;
-            }
-            retValue++;
-        }
+        Form *form = param->form;
+
+        retValue = (int8)form->CurrentParameter()->value;
     }
 
     return retValue;
@@ -457,12 +449,7 @@ Item *ChoiceParameter::Press(Control::Action action)
 {
     if (action.Is(Control::Action::Up))
     {
-        volatile bool allow = false;
-        do
-        {
-            CircleIncrease<uint8>(numParameter, 0, (uint8)(Wave::Form::Parameter::Number - 1));
-            allow = (allowParameters).allow[*numParameter];
-        } while (!allow);
+        form->SetNextParameter();
     }
     else if (action.Is(Control::Action::Long))
     {
@@ -500,26 +487,13 @@ Item *Button::Press(Control::Action action)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameSubItem(int number) const
 {
-    const char * retValue = 0;
-    for (int i = 0; i < Wave::Form::Parameter::Number; i++)
-    {
-        if ((allowParameters).allow[i] == false)
-        {
-            continue;
-        }
-        if (number == 0)
-        {
-            retValue = Wave::Form::Parameter(i).Name();
-        }
-        --number;
-    }
-    return retValue;
+    return form->GetParameter(number)->Name();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameCurrentSubItem() const
 {
-    return Wave::Form::Parameter(*numParameter).Name();
+    return form->CurrentParameter()->Name();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

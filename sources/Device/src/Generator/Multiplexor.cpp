@@ -55,7 +55,7 @@ void Multiplexor::WriteRegister(Register reg, uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::SetMode(Chan ch, Wave::Form form)
+void Multiplexor::SetMode(Chan ch, Form form)
 {
 #define PIN_MX(ch, num) pins[ch][num]
 
@@ -65,7 +65,7 @@ void Multiplexor::SetMode(Chan ch, Wave::Form form)
         {PIN_MX2_A0, PIN_MX2_A1}
     };
 
-    if(form == Wave::Form::Sine)
+    if(form == Form::Sine)
     {
         SetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));

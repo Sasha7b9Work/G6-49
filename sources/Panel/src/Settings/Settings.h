@@ -24,8 +24,6 @@ extern const PageBase pInput;
 #define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
 
-#define CURRENT_PARAMETER(form) (set.sig_parameter[form])
-
 #define BIT_FL1(numBit)         ((FLAG_1 >> numBit) & 0x01)
 
 #define CONSOLE_ENABLED         (BIT_FL1(BIT_CONSOLE))
@@ -75,7 +73,7 @@ public:
         }cal;
     };
     col_val                     disp_Colors[32];                   ///< Цвета
-    Wave::Form::Parameter       sig_parameter[Wave::Form::Number]; ///< Текущий выбранный параметр сигнала
+    Form::Parameter             sig_parameter[Form::Number];       ///< Текущий выбранный параметр сигнала
     int8                        menu_currentPage;                  ///< Отображаемая страница меню
     Page*                       menu_page;                         ///< Если активна страница не из главного меню, то здесь её адрес
     int8                        menu_posActItem[NumPages];         ///< Позиция активного пункта меню для каждой страницы

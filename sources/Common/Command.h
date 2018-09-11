@@ -130,7 +130,7 @@ struct Register
 
 #define SPI_MASTER_SYNBYTE  0xAC
 
-#define NAME_FORM(form, lang)  Wave::Form(form).Name(lang)
+#define NAME_FORM(form, lang)  Form(form).Name(lang)
 #define FORM_RU(form) NAME_FORM(form, Language::RU)
 #define FORM_EN(form) NAME_FORM(form, Language::EN)
 

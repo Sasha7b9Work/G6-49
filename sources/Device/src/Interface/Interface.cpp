@@ -152,7 +152,7 @@ void Interface::CommandSetAmplitudeRampForSine()
 void Interface::CommandFormWave()
 {
     Chan ch = (Chan::E)buffer[1];
-    Wave::Form form = (Wave::Form::E)buffer[2];
+    Form form = (Form::E)buffer[2];
     Generator::SetFormWave(ch, form);
 }
 

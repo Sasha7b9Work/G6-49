@@ -98,10 +98,10 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
         DrawImpulse
     };
 
-    func[FORM(chan)].func(x0, minY, width, height);
+    func[*FORM(chan)].func(x0, minY, width, height);
 
     /*
-    else if(form == Wave::Form::Cosine)
+    else if(form == Form::Cosine)
     {
         float speed = 0.1f;
         int delta = 1;
@@ -116,7 +116,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     }
     */
     /*
-    else if(form == Wave::Form::Triangle)
+    else if(form == Form::Triangle)
     {
         int dX = 38;
         int dY = 20;
@@ -132,7 +132,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     }
     */
     /*
-    else if(form == Wave::Form::Trapeze)
+    else if(form == Form::Trapeze)
     {
         int dX = 20;
         int dY = 20;
@@ -146,7 +146,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     }
     */
     /*
-    else if (form == Wave::Form::ExpPlus)
+    else if (form == Form::ExpPlus)
     {
         for(int i = 0; i < 2; i++)
         {
@@ -160,7 +160,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     }
     */
     /*
-    else if (form == Wave::Form::ExpMinus)
+    else if (form == Form::ExpMinus)
     {
         for (int i = 0; i < 2; i++)
         {
@@ -174,7 +174,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     }
     */
     /*
-    else if(form == Wave::Form::Noise)
+    else if(form == Form::Noise)
     {
         int i = 0;
         int dX = 1;
@@ -186,7 +186,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     }
     */
     /*
-    else if(form == Wave::Form::Free)
+    else if(form == Form::Free)
     {
     }
     */
@@ -269,50 +269,43 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
-    Form form = FORM(ch);
+    Form form = *FORM(ch);
 
     y0 += 5;
 
     Text::DrawText(22, y0 + 3, form.Name(LANG), Color::FILL);
 
-    AllowableParameters allowParameters;
-    InputWindow::FillAllowParameters(ch, form, &allowParameters);
-
-
-    for (int i = 0; i < Form::Parameter::Number; i++)
+    for (int i = 0; i < form.NumParameters(); i++)
     {
-        if (allowParameters.allow[i])
+        Form::Parameter *param = form.GetParameter(i);
+        Color color = Color::FILL;
+        if (ch == CURRENT_CHANNEL)
         {
-            Form::Parameter param(i);
-            Color color = Color::FILL;
-            if (ch == CURRENT_CHANNEL)
+            pString curPar = Menu::NameCurrentParameter();
+            pString parName = param->Name();
+            if (strcmp(curPar, parName) == 0 && CURRENT_PAGE == 0)
             {
-                pString curPar = Menu::NameCurrentParameter();
-                pString parName = param.Name();
-                if (strcmp(curPar, parName) == 0 && CURRENT_PAGE == 0)
-                {
-                    Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
-                }
+                Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
             }
-            Text::DrawText(x0 + 1, y0, param.Name(), color);
-
-            if(!param.IsPage())
-            {
-                DrawParameterValue(ch, param, x0 + 80, y0);
-            }
-
-            y0 += 10;
         }
+        Text::DrawText(x0 + 1, y0, param->Name(), color);
+
+        if(!param->IsPage())
+        {
+            DrawParameterValue(ch, param, x0 + 80, y0);
+        }
+
+        y0 += 10;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawParameterValue(Chan ch, Form::Parameter param, int x, int y)
+void Wave::Graphics::DrawParameterValue(Chan ch, Form::Parameter *param, int x, int y)
 {
-    Form form = FORM(ch);
+    Form *form = FORM(ch);
 
-    x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
+    x = Text::DrawText(x, y, (&PARAMETER(ch, *form, *param))->StringValue());
 
     char buffer[10];
-    Text::DrawText(x, y, NameUnit(buffer, (Order::E)PARAMETER_ORDER(ch, form, param), PARAMETER_UNIT(ch, form, param)));
+    Text::DrawText(x, y, NameUnit(buffer, (Order::E)PARAMETER_ORDER(ch, *form, *param), *param));
 }
