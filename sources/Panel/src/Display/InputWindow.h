@@ -119,9 +119,8 @@ public:
         static Parameter   m_param;
         static Chan        ch;
 
-        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Parameter::Frequency, 
-               uint numlm = 0) :
-            sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), numLockMode(numlm)
+        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint numlm = 0) :
+            sign(s), posComma(comma), hightLightDigit(hd), order(o), numLockMode(numlm)
         {
             strcpy(buffer, buff);
         }
@@ -130,7 +129,6 @@ public:
         int8     posComma;            ///< После какого знакоместа выводить запятую
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
         uint8    order       : 3;
-        uint8    param       : 4;     ///< Перечисление типа Parameter
         uint     numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
 
     private:

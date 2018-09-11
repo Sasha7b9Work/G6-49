@@ -134,7 +134,7 @@ void InputWindow::Struct::RegRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *InputWindow::Struct::StringValue()
 {
-    if(((Parameter)param).IsPage())
+    if(m_param.IsPage())
     {
         return "";
     }
