@@ -282,19 +282,23 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
     {
         if (allowParameters.allow[i])
         {
+            Form::Parameter param(i);
             Color color = Color::FILL;
             if (ch == CURRENT_CHANNEL)
             {
                 pString curPar = Menu::NameCurrentParameter();
-                pString parName = Form::Parameter(i).Name();
+                pString parName = param.Name();
                 if (strcmp(curPar, parName) == 0 && CURRENT_PAGE == 0)
                 {
                     Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
                 }
             }
-            Text::DrawText(x0 + 1, y0, Form::Parameter(i).Name(), color);
+            Text::DrawText(x0 + 1, y0, param.Name(), color);
 
-            DrawParameterValue(ch, (Form::Parameter)i, x0 + 80, y0);
+            if(!param.IsPage())
+            {
+                DrawParameterValue(ch, param, x0 + 80, y0);
+            }
 
             y0 += 10;
         }
