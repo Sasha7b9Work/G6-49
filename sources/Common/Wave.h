@@ -50,14 +50,14 @@ public:
             pString Name() const;
             /// ¬озвращает true, если параметр €вл€етс€ страницей параметров
             bool IsPage() const;
-        } parameters[Wave::Form::Parameter::Number];
+        } parameters[Form::Parameter::Number];
 
-    } forms[Wave::Form::Number];
+    } forms[Form::Number];
 
     /// ¬озвращает установленную форму
     Form GetCurrentForm();
 
-    void SetCurrentForm(Wave::Form form);
+    void SetCurrentForm(Form form);
 
     int NumberOfForms() const;
 
