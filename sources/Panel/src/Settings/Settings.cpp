@@ -45,11 +45,11 @@ static const Settings defSet =
     },
     { Wave::Form::Sine, Wave::Form::Sine }, // sig_form[NumChannels]
     { 
-        Wave::Parameter::Frequency,     // sig_parameter[NumForms]
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency,
-        Wave::Parameter::Frequency
+        Wave::Form::Parameter::Frequency,     // sig_parameter[NumForms]
+        Wave::Form::Parameter::Frequency,
+        Wave::Form::Parameter::Frequency,
+        Wave::Form::Parameter::Frequency,
+        Wave::Form::Parameter::Frequency
     },
     0,                                  // menu_currentPage
     (Page*)0,                           // menu_page
@@ -125,8 +125,8 @@ void Settings::TuneGenerator(Chan ch)
     Generator::SetFormWave(ch, WAVE_FORM(ch));
 //    if(form != Wave::Form::Impulse)
     {
-        Generator::SetParameter(ch, Wave::Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Frequency).Value());
-        Generator::SetParameter(ch, Wave::Parameter::Amplitude, INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Amplitude).Value());
-        Generator::SetParameter(ch, Wave::Parameter::Offset,    INPUT_WINDOW_STRUCT(ch, form, Wave::Parameter::Offset).Value());
+        Generator::SetParameter(ch, Wave::Form::Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, form, Wave::Form::Parameter::Frequency).Value());
+        Generator::SetParameter(ch, Wave::Form::Parameter::Amplitude, INPUT_WINDOW_STRUCT(ch, form, Wave::Form::Parameter::Amplitude).Value());
+        Generator::SetParameter(ch, Wave::Form::Parameter::Offset,    INPUT_WINDOW_STRUCT(ch, form, Wave::Form::Parameter::Offset).Value());
     }
 }

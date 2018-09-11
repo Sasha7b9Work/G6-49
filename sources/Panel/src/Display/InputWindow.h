@@ -33,7 +33,7 @@ struct Order
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *NameUnit(char buffer[10], Order order, Wave::Parameter parameter);
+const char *NameUnit(char buffer[10], Order order, Wave::Form::Parameter parameter);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,14 +91,14 @@ private:
     /// Форма сигнала, для которого вводится значение
     static Wave::Form        form;
     /// Параметт, значение которого вводится
-    static Wave::Parameter   m_param;
+    static Wave::Form::Parameter   m_param;
 
 public:
     class Struct
     {
     public:
 
-        void Fill(Chan ch, Wave::Form form, Wave::Parameter param);
+        void Fill(Chan ch, Wave::Form form, Wave::Form::Parameter param);
 
         char *StringValue();
 
@@ -119,10 +119,10 @@ public:
         void SaveValue();
 
         static Wave::Form        form;
-        static Wave::Parameter   m_param;
+        static Wave::Form::Parameter   m_param;
         static Chan              ch;
 
-        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Wave::Parameter::Frequency, 
+        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo, uint8 p = Wave::Form::Parameter::Frequency, 
                uint a = 0, uint numlm = 0, float _min = 0.1f, float _max = 100e6f) :
             sign(s), posComma(comma), hightLightDigit(hd), order(o), param(p), allow(a), numLockMode(numlm), min(_min), max(_max)
         {
@@ -133,7 +133,7 @@ public:
         int8     posComma;            ///< После какого знакоместа выводить запятую
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
         uint8    order       : 3;
-        uint8    param       : 4;     ///< Перечисление типа Wave::Parameter
+        uint8    param       : 4;     ///< Перечисление типа Wave::Form::Parameter
         uint     allow       : 1;     ///< Если 1, параметр разрешен для данного сигнала
         uint     numLockMode : 1;     ///< 1, когда происходит клавишный (0...9) ввод значения
         float    min;                 ///< Минимальное значение параметра

@@ -406,7 +406,7 @@ int8 Choice::CurrentIndex() const
     {
         ChoiceParameter *param = (ChoiceParameter *)this;
 
-        for (int i = 0; i < Wave::Parameter::Number; i++)
+        for (int i = 0; i < Wave::Form::Parameter::Number; i++)
         {
             if ((param->allowParameters).allow[i] == false)
             {
@@ -460,7 +460,7 @@ Item *ChoiceParameter::Press(Control::Action action)
         volatile bool allow = false;
         do
         {
-            CircleIncrease<uint8>(numParameter, 0, (uint8)(Wave::Parameter::Number - 1));
+            CircleIncrease<uint8>(numParameter, 0, (uint8)(Wave::Form::Parameter::Number - 1));
             allow = (allowParameters).allow[*numParameter];
         } while (!allow);
     }
@@ -501,7 +501,7 @@ Item *Button::Press(Control::Action action)
 pString ChoiceParameter::NameSubItem(int number) const
 {
     const char * retValue = 0;
-    for (int i = 0; i < Wave::Parameter::Number; i++)
+    for (int i = 0; i < Wave::Form::Parameter::Number; i++)
     {
         if ((allowParameters).allow[i] == false)
         {
@@ -509,7 +509,7 @@ pString ChoiceParameter::NameSubItem(int number) const
         }
         if (number == 0)
         {
-            retValue = Wave::Parameter(i).Name();
+            retValue = Wave::Form::Parameter(i).Name();
         }
         --number;
     }
@@ -519,7 +519,7 @@ pString ChoiceParameter::NameSubItem(int number) const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameCurrentSubItem() const
 {
-    return Wave::Parameter(*numParameter).Name();
+    return Wave::Form::Parameter(*numParameter).Name();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

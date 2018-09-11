@@ -32,5 +32,5 @@ private:
 
     static void DrawSignalParameters(Chan chan, int y0);
 
-    static void DrawParameterValue(Chan chan, Wave::Parameter parameter, int x, int y);
+    static void DrawParameterValue(Chan chan, Wave::Form::Parameter parameter, int x, int y);
 };

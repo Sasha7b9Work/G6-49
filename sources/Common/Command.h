@@ -106,38 +106,44 @@ public:
         Form(E v) : value((E)v) { };
         operator uint8() const  { return (uint8)value; };
         pString Name(Language lang) const;
-    } form ;
 
-    struct Parameter
-    {
-        enum E
+        struct Parameter
         {
-            Frequency,          ///< Частота
-            Period,             ///< Период
-            Amplitude,          ///< Амплитуда
-            Offset,             ///< Смещение
-            Duration,           ///< Длительность
-            DutyRatio,          ///< Скважность
-            Phase,              ///< Сдвиг фазы
-            Delay,              ///< Задержка
-            DepthModulation,    ///< Глубина амплитудной модуляции
-            Polarity,           ///< Полярность
-            DurationRise,       ///< Длительность нарастания
-            DurationFall,       ///< Длительность спада
-            DurationStady,      ///< Длительность установившего значения
-            DutyFactor,         ///< Коэффициент заполнения
-            Modulation,         ///< Модуляция
-            Number
-        } value;
+            enum E
+            {
+                Frequency,          ///< Частота
+                Period,             ///< Период
+                Amplitude,          ///< Амплитуда
+                Offset,             ///< Смещение
+                Duration,           ///< Длительность
+                DutyRatio,          ///< Скважность
+                Phase,              ///< Сдвиг фазы
+                Delay,              ///< Задержка
+                DepthModulation,    ///< Глубина амплитудной модуляции
+                Polarity,           ///< Полярность
+                DurationRise,       ///< Длительность нарастания
+                DurationFall,       ///< Длительность спада
+                DurationStady,      ///< Длительность установившего значения
+                DutyFactor,         ///< Коэффициент заполнения
+                Modulation,         ///< Модуляция
+                Number
+            } value;
 
-        Parameter(int v) : value((E)v) { };
-        operator uint8() const { return (uint8)value; }
-        float MinValue() const;
-        float MaxValue() const;
-        pString Name() const;
-        /// Возвращает true, если параметр является страницей параметров
-        bool IsPage() const;
-    }; // parameters[Parameter::Number];
+            Parameter(int v) : value((E)v)
+            {
+            };
+            operator uint8() const
+            {
+                return (uint8)value;
+            }
+            float MinValue() const;
+            float MaxValue() const;
+            pString Name() const;
+            /// Возвращает true, если параметр является страницей параметров
+            bool IsPage() const;
+        };
+
+    } form ;
 
 #ifdef PANEL
     pString Name(uint num, Language lang);

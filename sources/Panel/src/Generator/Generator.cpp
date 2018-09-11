@@ -98,9 +98,9 @@ void Generator::ExecuteCommand(uint8 *buffer, int)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Chan ch, Wave::Parameter param, float value)
+void Generator::SetParameter(Chan ch, Wave::Form::Parameter param, float value)
 {
-    static const CommandPanel commands[Wave::Parameter::Number] =
+    static const CommandPanel commands[Wave::Form::Parameter::Number] =
     {
         CommandPanel::SET_FREQUENCY,
         CommandPanel::None,
@@ -121,7 +121,7 @@ void Generator::SetParameter(Chan ch, Wave::Parameter param, float value)
 
     uint8 buffer[6] = {(uint8)commands[param], (uint8)ch};
 
-    if(param == Wave::Parameter::Offset)
+    if(param == Wave::Form::Parameter::Offset)
     {
         value -= 5.0f;
     }

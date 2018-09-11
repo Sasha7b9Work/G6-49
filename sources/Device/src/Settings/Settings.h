@@ -9,7 +9,7 @@
 //    bool          enable[Chan::Number];
 //    Wave::Form      form[Chan::Number];
 //    uint          rg[10];
-////    Wave::Parameter 
+////    Wave::Form::Parameter 
 //
 //
 //    static void Load(bool _default);

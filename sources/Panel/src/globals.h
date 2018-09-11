@@ -17,4 +17,4 @@
 #define PARAMETER_ORDER(ch, form, param)        (INPUT_WINDOW_STRUCT(ch, form, param).order)
 #define PARAMETER_UNIT(ch, form, param)         (INPUT_WINDOW_STRUCT(ch, form, param).param)
 
-extern InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::Parameter::Number];
+extern InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::Form::Parameter::Number];

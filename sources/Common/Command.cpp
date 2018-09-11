@@ -12,7 +12,7 @@ static struct StructName
     pString nameEN;
     StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
 }
-nameParameter[Wave::Parameter::Number] =
+nameParameter[Wave::Form::Parameter::Number] =
 {
     StructName("◊¿—“Œ“¿",        "FREQUENCY"),
     StructName("œ≈–»Œƒ",         "PERIOD"),
@@ -99,7 +99,7 @@ static const struct StructMinMax
     float max;
     StructMinMax(float _min, float _max) : min(_min), max(_max) {};
 }
-minMax[Wave::Parameter::Number] =
+minMax[Wave::Form::Parameter::Number] =
 {
     StructMinMax(1.0f,    50e6f),       // Frequency
     StructMinMax(2e-08f,  1.0f),        // Period
@@ -120,25 +120,25 @@ minMax[Wave::Parameter::Number] =
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Wave::Parameter::IsPage() const
+bool Wave::Form::Parameter::IsPage() const
 {
     return MinValue() == -1.0f && MaxValue() == -1.0f;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Wave::Parameter::MinValue() const
+float Wave::Form::Parameter::MinValue() const
 {
     return minMax[value].min;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Wave::Parameter::MaxValue() const
+float Wave::Form::Parameter::MaxValue() const
 {
     return minMax[value].max;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Wave::Parameter::Name() const
+pString Wave::Form::Parameter::Name() const
 {
     return LANG_RU ? (char *)nameParameter[value].nameRU : (char *)nameParameter[value].nameEN;
 }
