@@ -21,7 +21,7 @@ InputWindow::Struct InputWindow::m_iws = InputWindow::Struct(' ');
 void InputWindow::Init()
 {
     chan = CURRENT_CHANNEL;
-    form = WAVE_FORM(chan);
+    form = WAVE_CURRENT.GetCurrentForm();
     m_param = CURRENT_PARAMETER(form);
     m_iws = INPUT_WINDOW_STRUCT(chan, form, m_param);
 

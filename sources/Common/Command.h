@@ -103,9 +103,10 @@ public:
             Impulse,    ///< Импульсы
             Number
         } value;
-        Form(E v) : value((E)v) { };
+        Form(E v = Number) : value((E)v) { };
         operator uint8() const  { return (uint8)value; };
         pString Name(Language lang) const;
+        bool NameIsEqual(Form &form) const;
 
         struct Parameter
         {
@@ -129,25 +130,37 @@ public:
                 Number
             } value;
 
-            Parameter(int v) : value((E)v)
-            {
-            };
-            operator uint8() const
-            {
-                return (uint8)value;
-            }
+            Parameter(int v = Number) : value((E)v) { };
+            operator uint8() const         { return (uint8)value; }
             float MinValue() const;
             float MaxValue() const;
             pString Name() const;
             /// Возвращает true, если параметр является страницей параметров
             bool IsPage() const;
-        };
+        } parameters[Wave::Form::Parameter::Number];
 
-    } form ;
+    } forms[Wave::Form::Number];
+
+    /// Возвращает установленную форму
+    Form GetCurrentForm();
+
+    void SetCurrentForm(Wave::Form form);
+
+    int NumberOfForms() const;
+
+    Form GetForm(int i);
+
+    Wave(Chan ch, Form form[Form::Number]);
+    /// Какому каналу принадлежит сигнал
+    Chan channel;
 
 #ifdef PANEL
     pString Name(uint num, Language lang);
 #endif
+
+private:
+    /// Текущая форма сигнала - указывает на номер сигнала в массиве
+    int currentForm;
 };
 
 struct Register

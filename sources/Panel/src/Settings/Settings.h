@@ -15,9 +15,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pInput;
 
-#define WAVE_FORM(ch)           (set.sig_form[ch])
-#define WAVE_FORM_CURRENT       (WAVE_FORM(CURRENT_CHANNEL))
-
 #define COLOR(x)                (set.disp_Colors[x])
 #define CURRENT_PAGE            (set.menu_currentPage)
 #define ADDITION_PAGE           (set.menu_page)
@@ -77,16 +74,15 @@ public:
         {
         }cal;
     };
-    col_val         disp_Colors[32];                   ///< Цвета
-    Wave::Form      sig_form[Chan::Number];            ///< Текущая выбранная форма сигнала
-    Wave::Form::Parameter sig_parameter[Wave::Form::Number]; ///< Текущий выбранный параметр сигнала
-    int8            menu_currentPage;                  ///< Отображаемая страница меню
-    Page*           menu_page;                         ///< Если активна страница не из главного меню, то здесь её адрес
-    int8            menu_posActItem[NumPages];         ///< Позиция активного пункта меню для каждой страницы
-    int8            menu_currentSubPage[NumPages];     ///< Номер текущей подстраницы для каждой страницы
+    col_val                     disp_Colors[32];                   ///< Цвета
+    Wave::Form::Parameter       sig_parameter[Wave::Form::Number]; ///< Текущий выбранный параметр сигнала
+    int8                        menu_currentPage;                  ///< Отображаемая страница меню
+    Page*                       menu_page;                         ///< Если активна страница не из главного меню, то здесь её адрес
+    int8                        menu_posActItem[NumPages];         ///< Позиция активного пункта меню для каждой страницы
+    int8                        menu_currentSubPage[NumPages];     ///< Номер текущей подстраницы для каждой страницы
     FrequencyMeter::BillingTime freq_billingTime;                  ///< Время счёта
     FrequencyMeter::AvePeriod   freq_avePeriod;                    ///< Число усредняемых периодов в режиме измерения периода
-    FreqTimeStamps  freq_timeStamps;                   ///< Метки времени
+    FreqTimeStamps              freq_timeStamps;                   ///< Метки времени
 
 #define FLAG_1      set.flag1
     uint            flag1;

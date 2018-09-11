@@ -1,6 +1,7 @@
 #pragma once
 #include "defines.h"
 #include "Display/InputWindow.h"
+#include "Settings/Settings.h"
 
 
 #define INPUT_WINDOW_STRUCT(ch, form, param)    (sig_structParameter[ch][form][param])
@@ -18,3 +19,16 @@
 #define PARAMETER_UNIT(ch, form, param)         (INPUT_WINDOW_STRUCT(ch, form, param).param)
 
 extern InputWindow::Struct sig_structParameter[Chan::Number][Wave::Form::Number][Wave::Form::Parameter::Number];
+
+
+
+
+/// Текущий сигнал
+#define WAVE(ch)                (wave[ch])
+#define WAVE_CURRENT            (WAVE(CURRENT_CHANNEL))
+
+#define FORM(ch)                (WAVE(ch).GetCurrentForm())
+#define FORM_CURRENT            (FORM(CURRENT_CHANNEL))
+
+
+extern Wave wave[Chan::Number];

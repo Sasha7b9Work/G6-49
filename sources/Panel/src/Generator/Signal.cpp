@@ -5,6 +5,8 @@
 #include "Display/Text.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
+#include "globals.h"
+#include "Utils/Debug.h"
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
@@ -82,7 +84,6 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
     Painter::DrawVLine(x0, minY, maxY);
     Painter::DrawHLine(aveY, x0, x0 + width);
 
-
     static const struct StructFunc
     {
         typedef void (*pFuncIIII)(int, int, int, int);
@@ -97,9 +98,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
         DrawImpulse
     };
 
-    func[WAVE_FORM(chan)].func(x0, minY, width, height);
-
-    Wave::Form form = WAVE_FORM(chan);
+    func[FORM(chan)].func(x0, minY, width, height);
 
     /*
     else if(form == Wave::Form::Cosine)
@@ -191,6 +190,7 @@ void Signal::DrawSignalUGO(Chan chan, int y0)
     {
     }
     */
+
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -269,7 +269,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
-    Wave::Form form = WAVE_FORM(ch);
+    Wave::Form form = FORM(ch);
 
     y0 += 5;
 
@@ -304,7 +304,7 @@ void Signal::DrawSignalParameters(Chan ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Signal::DrawParameterValue(Chan ch, Wave::Form::Parameter param, int x, int y)
 {
-    Wave::Form form = WAVE_FORM(ch);
+    Wave::Form form = FORM(ch);
 
     x = Text::DrawText(x, y, (&PARAMETER(ch, form, param))->StringValue());
 

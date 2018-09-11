@@ -43,7 +43,6 @@ static const Settings defSet =
         MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
         MAKE_COLOR(0xc0, 0x00, 0x00)    // RED_75
     },
-    { Wave::Form::Sine, Wave::Form::Sine }, // sig_form[NumChannels]
     { 
         Wave::Form::Parameter::Frequency,     // sig_parameter[NumForms]
         Wave::Form::Parameter::Frequency,
@@ -121,8 +120,8 @@ void Settings::Load(bool _default)
 void Settings::TuneGenerator(Chan ch)
 {
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
-    Wave::Form form = WAVE_FORM(ch);
-    Generator::SetFormWave(ch, WAVE_FORM(ch));
+    Wave::Form form = FORM(ch);
+    Generator::SetFormWave(ch, FORM(ch));
 //    if(form != Wave::Form::Impulse)
     {
         Generator::SetParameter(ch, Wave::Form::Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, form, Wave::Form::Parameter::Frequency).Value());

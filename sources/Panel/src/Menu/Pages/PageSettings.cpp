@@ -4,6 +4,7 @@
 #include "Menu/MenuItems.h"
 #include "AddPageInput.h"
 #include "PageSettings.h"
+#include "globals.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11,16 +12,16 @@ extern const PageBase pSignals;
 Page *PageSignals::pointer = (Page *)&pSignals;
 extern ChoiceParameterBase parameters;
 ChoiceParameter *PageSignals::cpParameters = (ChoiceParameter *)&parameters;
-
-static Wave::Form waveForm = Wave::Form::Sine;
+/// ÕÓÏÂ ÚÂÍÛ˘ÂÈ ÙÓÏ˚ ÒË„Ì‡Î‡
+static Wave::Form waveForm;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    waveForm = WAVE_FORM_CURRENT;
-    InputWindow::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
+    waveForm = FORM_CURRENT;
+    InputWindow::FillAllowParameters(CURRENT_CHANNEL, FORM_CURRENT, &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(FORM_CURRENT);
 }
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿Õ¿À ---
@@ -38,9 +39,9 @@ DEF_CHOICE_2( cChannel,                                                         
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::OnPress_Form(bool)
 {
-    WAVE_FORM(CURRENT_CHANNEL) = waveForm;
-    InputWindow::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
-    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(WAVE_FORM_CURRENT);
+    WAVE_CURRENT.SetCurrentForm(waveForm);
+    InputWindow::FillAllowParameters(CURRENT_CHANNEL, FORM_CURRENT, &parameters.allowParameters);
+    parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(FORM_CURRENT);
     Settings::TuneGenerator(CURRENT_CHANNEL);
 }
 
@@ -83,8 +84,8 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::Init()
 {
-    waveForm = WAVE_FORM_CURRENT;
-    InputWindow::FillAllowParameters(CURRENT_CHANNEL, WAVE_FORM_CURRENT, &parameters.allowParameters);
+    waveForm = FORM_CURRENT;
+    InputWindow::FillAllowParameters(CURRENT_CHANNEL, FORM_CURRENT, &parameters.allowParameters);
     parameters.numParameter = (uint8 *)&CURRENT_PARAMETER(Wave::Form(waveForm));
 }
 

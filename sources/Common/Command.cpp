@@ -142,3 +142,52 @@ pString Wave::Form::Parameter::Name() const
 {
     return LANG_RU ? (char *)nameParameter[value].nameRU : (char *)nameParameter[value].nameEN;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Wave::Form Wave::GetCurrentForm()
+{
+    return forms[currentForm];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Wave::SetCurrentForm(Wave::Form form)
+{
+    for(int i = 0; i < NumberOfForms(); i++)
+    {
+        if(form.NameIsEqual(forms[i]))
+        {
+            currentForm = i;
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int Wave::NumberOfForms() const
+{
+    for(int i = 0; i < Wave::Form::Number; i++)
+    {
+        if(forms[i].value == Wave::Form::Number)
+        {
+            return i;
+        }
+    }
+
+    return Wave::Form::Number;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Wave::Form::NameIsEqual(Form &form) const
+{
+    return form.value == value;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Wave::Wave(Chan ch, Form form[Form::Number]) : channel(ch)
+{
+    currentForm = 0;
+
+    for(int i = 0; i < Form::Number; i++)
+    {
+        forms[i] = form[i];
+    }
+}

@@ -261,6 +261,12 @@
     <ClCompile Include="..\..\Panel\src\Utils\BigNumber.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\globals_waves.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\Debug.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -525,6 +531,9 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Utils\BigNumber.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\Debug.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
