@@ -98,7 +98,9 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
         DrawImpulse
     };
 
-    func[*FORM(chan)].func(x0, minY, width, height);
+    int index = FORM(chan)->value;
+    
+    func[index].func(x0, minY, width, height);
 
     /*
     else if(form == Form::Cosine)

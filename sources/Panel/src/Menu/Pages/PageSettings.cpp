@@ -13,13 +13,14 @@ Page *PageSignals::pointer = (Page *)&pSignals;
 extern ChoiceParameterBase parameters;
 ChoiceParameter *PageSignals::cpParameters = (ChoiceParameter *)&parameters;
 /// Íîìåð òåêóùåé ôîðìû ñèãíàë
-static int numForm;
+static int numForm = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
     parameters.form = FORM_CURRENT;
+    numForm = FORM_CURRENT->value;
 }
 
 DEF_CHOICE_2( cChannel,                                                                                           //--- ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀÍÀË ---
@@ -38,6 +39,8 @@ DEF_CHOICE_2( cChannel,                                                         
 void PageSignals::OnPress_Form(bool)
 {
     WAVE_CURRENT.SetNextForm();
+
+    numForm = WAVE_CURRENT.GetCurrentForm()->value;
 
     parameters.form = FORM_CURRENT;
 
