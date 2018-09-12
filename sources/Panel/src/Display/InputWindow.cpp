@@ -22,7 +22,7 @@ void InputWindow::Init()
     chan = CURRENT_CHANNEL;
     Form *form = WAVE_CURRENT.GetCurrentForm();
     param = PARAM(form);
-    m_iws = INPUT_WINDOW_STRUCT(chan, (uint8)(*form), param->value);
+    m_iws = INPUT_WINDOW_STRUCT(chan, form->value, param->value);
 
 	(&m_iws)->Fill(chan, form, param);
 }

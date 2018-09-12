@@ -65,7 +65,7 @@ void Multiplexor::SetMode(Chan ch, Form form)
         {PIN_MX2_A0, PIN_MX2_A1}
     };
 
-    if(form == Form::Sine)
+    if(form.Is(Form::Sine))
     {
         SetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));

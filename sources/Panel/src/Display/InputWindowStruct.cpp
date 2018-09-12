@@ -40,7 +40,7 @@ void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 
 	for (int i = 0; i < NUM_DIGITS; i++)
 	{
-		DIGIT(i) = PARAMETER_DIG(ch, form, param->value, i);
+		DIGIT(i) = PARAMETER_DIG(ch, form->value, param->value, i);
 	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
@@ -481,7 +481,7 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::SendToGenerator()
 {
-    PARAMETER(ch, *form, param->value) = *this;
+    PARAMETER(ch, form->value, param->value) = *this;
 
     if (param->Is(Parameter::Delay))
     {
@@ -497,7 +497,7 @@ void InputWindow::Struct::SendToGenerator()
     }
     else
     {
-        float value = PARAMETER(ch, *form, param->value).Value();
+        float value = PARAMETER(ch, form->value, param->value).Value();
         Generator::SetParameter(ch, *param, value);
     }
 }

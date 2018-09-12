@@ -85,9 +85,10 @@ struct Form
         Impulse,    ///< Импульсы
         Number
     } value;
+
     Form(E v = Number) : value(v), currentParam(0)   { };
+
     Form(E v, Parameter param[Parameter::Number]);
-    operator uint8() const    { return (uint8)value;  };
     /// Возвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// Возвращает ссылку на текущий параметр
@@ -100,6 +101,8 @@ struct Form
     void SetNextParameter();
     /// Настраивает генератор в соответствии с установленными параметрами
     void TuneGenerator(Chan ch);
+
+    bool Is(Form::E e) const { return e == value; };
 
 private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет

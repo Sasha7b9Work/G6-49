@@ -56,7 +56,7 @@ void FPGA::SetWaveForm(Chan ch, Form form)
         SetImpulseMode
     };
     
-    func[form].func(ch);
+    func[form.value].func(ch);
 
     Multiplexor::SetMode(ch, form);
 }
