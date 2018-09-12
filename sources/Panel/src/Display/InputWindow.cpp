@@ -11,18 +11,15 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
-//Chan                InputWindow::chan = Chan::A;
-Parameter          *InputWindow::param = 0;
 InputWindow::Struct InputWindow::m_iws;
+Parameter           *InputWindow::param = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void InputWindow::Init()
 {
-    Form *form = WAVE_CURRENT.GetCurrentForm();
-    param = PARAM(form);
-
-    m_iws.Fill(CURRENT_CHANNEL, form, param);
+    param = PARAM_CURRENT;
+    m_iws.Fill(FORM_CURRENT, param);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

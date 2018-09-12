@@ -62,15 +62,15 @@ private:
     static void DrawDurationStady(int x, int y);
 
     static void DrawDutyFactor(int x, int y);
-    /// Параметт, значение которого вводится
-    static Parameter    *param;
+
+    static Parameter *param;
 
 public:
     class Struct
     {
     public:
 
-        void Fill(Chan ch, Form *form, Parameter *param);
+        void Fill(Form *form, Parameter *param);
 
         char *StringValue();
 
@@ -92,7 +92,7 @@ public:
 
         static Form      *form;
         static Parameter *param;
-        static Chan      ch;
+        //static Chan      ch;
 
     private:
         /// Увеличивает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось.

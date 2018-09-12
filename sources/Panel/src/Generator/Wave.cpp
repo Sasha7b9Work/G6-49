@@ -228,7 +228,7 @@ void Form::SendParameterToGenerator(Chan ch, Parameter::E p)
     if (param)
     {
         InputWindow::Struct input;
-        input.Fill(ch, this, param);
+        input.Fill(this, param);
         Generator::SetParameter(ch, p, input.Value());
     }
 }
