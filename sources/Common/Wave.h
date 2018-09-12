@@ -45,7 +45,8 @@ struct Parameter
 
     Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max, Order o) : value((E)v), order(o), min(_min), max(_max), inNumLockMode(false) { };
+    Parameter(int v, float _min, float _max, Order o, Parameter *param = 0, int num = 0) : value((E)v), order(o), min(_min), max(_max), 
+        inNumLockMode(false), params(param), numParams(num) { };
 
     float MinValue() const { return min; };
 
@@ -74,7 +75,7 @@ private:
     bool inNumLockMode;
     /// Здесь находятся дополнительные параметры в случае, если они требуются
     Parameter *params;
-
+    /// Число дополнительных параметров. 0, если таковых не имеется
     int numParams;
 };
 
