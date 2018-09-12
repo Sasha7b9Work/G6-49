@@ -1,4 +1,5 @@
 #pragma once
+#include "defines.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,6 +22,8 @@ struct Order
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define NUM_DIGITS          5
+
 struct Parameter
 {
     enum E
@@ -45,8 +48,8 @@ struct Parameter
 
     Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max, Order o, Parameter *param = 0, int num = 0) : value((E)v), order(o), min(_min), max(_max), 
-        inNumLockMode(false), params(param), numParams(num) { };
+    Parameter(int v, float _min, float _max, Order o, int8 hd = NUM_DIGITS - 1, Parameter *param = 0, int num = 0) : value((E)v), order(o), 
+        hightLightDigit(hd), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num) { };
 
     float MinValue() const { return min; };
 
@@ -65,6 +68,8 @@ struct Parameter
     bool IsInputValue() const { return !IsComplexParameter(); };
     
     Order order;
+    /// Позиция подсвеченного символа
+    int8 hightLightDigit;
     
 private:
 

@@ -103,7 +103,7 @@ void InputWindow::DrawDigits(int x, int y)
 
         Painter::SetColor(Color::FILL);
 
-        if (i == m_iws.hightLightDigit)
+        if (i == param->hightLightDigit)
         {
             Font::Set(Font::Type::_UGO2);
             Text::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');

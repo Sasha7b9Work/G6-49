@@ -13,7 +13,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define CURRENT_POS         (hightLightDigit)
+#define CURRENT_POS         (param->hightLightDigit)
 #define DIGIT(num)          (buffer[num])
 #define CURRENT_DIGIT       (buffer[CURRENT_POS])
 #define POS_COMMA           (posComma)
@@ -54,19 +54,19 @@ void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 		}
 	}
 
-	hightLightDigit = buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
+	param->hightLightDigit = buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::KeyLeft()
 {
-	if (hightLightDigit > 0)
+	if (param->hightLightDigit > 0)
 	{
-		if (hightLightDigit == 1 && DIGIT(0) == '.')
+		if (param->hightLightDigit == 1 && DIGIT(0) == '.')
 		{
 			return;
 		}
-		--hightLightDigit;
+		--param->hightLightDigit;
 		if (CURRENT_DIGIT == '.')
 		{
             InputWindow::Struct::KeyLeft();
@@ -84,13 +84,13 @@ void InputWindow::Struct::KeyLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::KeyRight()
 {
-	if (hightLightDigit < NUM_DIGITS - 1)
+	if (param->hightLightDigit < NUM_DIGITS - 1)
 	{
-		if (hightLightDigit == NUM_DIGITS - 2 && buffer[NUM_DIGITS - 1] == '.')
+		if (param->hightLightDigit == NUM_DIGITS - 2 && buffer[NUM_DIGITS - 1] == '.')
 		{
 			return;
 		}
-		++hightLightDigit;
+		++param->hightLightDigit;
 		if (CURRENT_DIGIT == '.')
 		{
             InputWindow::Struct::KeyRight();
@@ -105,7 +105,7 @@ void InputWindow::Struct::KeyRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::RegLeft()
 {
-    if(DecreaseDigit(hightLightDigit))
+    if(DecreaseDigit(param->hightLightDigit))
     {
         if (TUNE_FULL)
         {
@@ -117,7 +117,7 @@ void InputWindow::Struct::RegLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::RegRight()
 {
-    if(IncreaseDigit(hightLightDigit))
+    if(IncreaseDigit(param->hightLightDigit))
     {
         if(ValueBeforeComma() > 999)
         {
@@ -169,8 +169,8 @@ bool InputWindow::Struct::IncreaseDigit(int num)
     if (All9LeftWithThis(num))
     {
         ShiftToRight();
-        ++hightLightDigit;
-        IncreaseDigit(hightLightDigit);
+        ++param->hightLightDigit;
+        IncreaseDigit(param->hightLightDigit);
     }
     else
     {
@@ -549,7 +549,7 @@ void InputWindow::Struct::FillFromInputBuffer()
         sign = (atof(m_inputBuffer) >= 0.0) ? '+' : '-';
     }
 
-    hightLightDigit = NUM_DIGITS - 1;
+    param->hightLightDigit = NUM_DIGITS - 1;
 
     while ((int)fabs(atof(m_inputBuffer)) > 999)    // Пока целая часть числа в inputBuffer > 999
     {
