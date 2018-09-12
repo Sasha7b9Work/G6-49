@@ -70,7 +70,9 @@ public:
     {
     public:
 
-        void Fill(Form *form, Parameter *param);
+        Struct(Form *f = 0, Parameter *p = 0) : form(f), param(p) {};
+
+        void Set(Form *form, Parameter *param);
 
         char *StringValue();
 
@@ -90,9 +92,8 @@ public:
 
         void SaveValue();
 
-        static Form      *form;
-        static Parameter *param;
-        //static Chan      ch;
+        Form      *form;
+        Parameter *param;
 
     private:
         /// ”величивает значение в заданной позиции. ¬озвращает false, если итоговое значение не изменилось.

@@ -21,16 +21,12 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Form      *InputWindow::Struct::form  = 0;
-Parameter *InputWindow::Struct::param = 0;
-//Chan      InputWindow::Struct::ch    = Chan::A;
-
 #define SIZE_INPUT_BUFFER_IWS 17
 static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindow::Struct::Fill(Form *form_, Parameter *param_)
+void InputWindow::Struct::Set(Form *form_, Parameter *param_)
 {
 //    ch = ch_;
     form = form_;
@@ -491,8 +487,7 @@ void InputWindow::Struct::SendToGenerator()
     }
     else
     {
-        InputWindow::Struct input;
-        input.Fill(form, param);
+        InputWindow::Struct input(form, param);
         float value = input.Value();
         Generator::SetParameter(CURRENT_CHANNEL, *param, value);
     }
