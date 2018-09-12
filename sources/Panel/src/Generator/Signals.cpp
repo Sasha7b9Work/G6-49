@@ -2,13 +2,19 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static Parameter paramsSineModulationA[] =
+{
+    Parameter(Parameter::Amplitude, 0.0f, 65535.0f, "65535", 1, Order::Kilo),
+    Parameter(Parameter::Duration,  0.0f, 255.0f,   "25500", 2, Order::One)
+};
+
 static Parameter params_SineA[Parameter::Number] =
 {
     Parameter(Parameter::Frequency,  0.1f,    100e6f, "15000", 0, Order::Kilo),
     Parameter(Parameter::Period,     100e-8f, 100e6f, "05000", 0, Order::Milli),
     Parameter(Parameter::Amplitude,  0.0f,    10.0f,  "50000", 0, Order::One),
     Parameter(Parameter::Offset,     0.0f,    10.0f,  "50000", 0, Order::One),
-    Parameter(Parameter::Modulation, -1.0f,    -1.0f, "",      0, Order::One)
+    Parameter(Parameter::Modulation, -1.0f,    -1.0f, "",      0, Order::One, paramsSineModulationA, 2, NUM_DIGITS - 1, ' ')
 };
 
 static Parameter  params_RampPlusA[Parameter::Number] =
@@ -47,15 +53,21 @@ static Parameter params_ImpulseA[Parameter::Number] =
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static Form formsA[Form::Number] =
 {
-    Form(Form::Sine,      params_SineA),
-    Form(Form::RampPlus,  params_RampPlusA),
-    Form(Form::RampMinus, params_RampMinusA),
-    Form(Form::Meander,   params_MeanderA),
-    Form(Form::Impulse,   params_ImpulseA)
+    Form(Form::Sine,      params_SineA,      5),
+    Form(Form::RampPlus,  params_RampPlusA,  4),
+    Form(Form::RampMinus, params_RampMinusA, 4),
+    Form(Form::Meander,   params_MeanderA,   4),
+    Form(Form::Impulse,   params_ImpulseA,   4)
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static Parameter paramsSineModulationB[] =
+{
+    Parameter(Parameter::Amplitude, 0.0f, 65535.0f, "65535", 1, Order::Kilo),
+    Parameter(Parameter::Duration,  0.0f, 255.0f,   "25500", 2, Order::One)
+};
+
 static Parameter params_SineB[Parameter::Number] =
 {
     Parameter(Parameter::Frequency,  0.1f,    100e6f, "40000", 0, Order::Kilo),
@@ -63,7 +75,7 @@ static Parameter params_SineB[Parameter::Number] =
     Parameter(Parameter::Amplitude,  0.0f,    10.0f,  "10000", 1, Order::One),
     Parameter(Parameter::Offset,     0.0f,    10.0f,  "50000", 0, Order::One),
     Parameter(Parameter::Phase,      0.0f,    360.0f, "10000", 0, Order::One),
-    Parameter(Parameter::Modulation, -1.0f,   -1.0f,  "10000", 0, Order::One)
+    Parameter(Parameter::Modulation, -1.0f,   -1.0f,  "10000", 0, Order::One, paramsSineModulationB, 2)
 };
 
 static Parameter  params_RampPlusB[Parameter::Number] =
@@ -102,11 +114,11 @@ static Parameter params_ImpulseB[Parameter::Number] =
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static Form formsB[Form::Number] =
 {
-    Form(Form::Sine,        params_SineB),
-    Form(Form::RampPlus,    params_RampPlusB),
-    Form(Form::RampMinus,   params_RampMinusB),
-    Form(Form::Meander,     params_MeanderB),
-    Form(Form::Impulse,     params_ImpulseB)
+    Form(Form::Sine,        params_SineB,      6),
+    Form(Form::RampPlus,    params_RampPlusB,  4),
+    Form(Form::RampMinus,   params_RampMinusB, 4),
+    Form(Form::Meander,     params_MeanderB,   4),
+    Form(Form::Impulse,     params_ImpulseB,   4)
 };
 
 

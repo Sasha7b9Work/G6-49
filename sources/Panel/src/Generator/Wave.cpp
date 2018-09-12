@@ -148,11 +148,10 @@ Wave::Wave(Chan ch, Form form[Form::Number]) : channel(ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, Parameter param[Parameter::Number]) : value(v), currentParam(0)
+Form::Form(E v, Parameter *parameters, int num) : value(v), params(parameters), numParams(num), currentParam(0)
 {
-    for(int i = 0; i < Parameter::Number; i++)
+    for(int i = 0; i < numParams; i++)
     {
-        params[i] = param[i];
         params[i].form = this;
     }
 }
@@ -166,21 +165,17 @@ Parameter *Form::CurrentParameter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Form::NumParameters() const 
 {
-    for(int i = 0; i < Parameter::Number; i++)
-    {
-        if(params[i].Is(Parameter::Number))
-        {
-            return i;
-        }
-    }
-
-    return Parameter::Number - 1;
+    return numParams;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Parameter *Form::GetParameter(int i)
 {
-    return &params[i];
+    if(i < numParams)
+    {
+        return &params[i];
+    }
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -212,7 +207,7 @@ void Form::TuneGenerator(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Parameter *Form::FindParameter(Parameter::E p)
 {
-    for(int i = 0; i < Parameter::Number; i++)
+    for(int i = 0; i < numParams; i++)
     {
         if(params[i].value == p)
         {

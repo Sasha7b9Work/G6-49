@@ -54,8 +54,8 @@ public:
 
     Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ', Parameter *param = 0, 
-        int num = 0) :
+    Parameter(int v, float _min, float _max, pString buf, int8 pos, Order o, Parameter *param = 0, 
+        int num = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') :
         value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num) 
     {
         strcpy(buffer, buf);
@@ -124,7 +124,7 @@ public:
 
     Form(E v = Number) : value(v), currentParam(0)   { };
 
-    Form(E v, Parameter param[Parameter::Number]);
+    Form(E v, Parameter *param, int numParams);
     /// Возвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// Возвращает ссылку на текущий параметр
@@ -147,7 +147,10 @@ private:
     Parameter *FindParameter(Parameter::E p);
     /// Засыалет параметр в генератор
     void SendParameterToGenerator(Chan ch, Parameter::E p);
-    Parameter params[Parameter::Number];
+    /// Здесь хранятся параметры
+    Parameter *params;
+    /// Сколько всего параметров
+    int numParams;
     /// Номер текущего параметра в массиве params
     int currentParam;
 };
