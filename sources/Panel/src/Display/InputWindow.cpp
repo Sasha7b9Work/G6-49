@@ -11,9 +11,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
-Chan                    InputWindow::chan = Chan::A;
-Parameter               *InputWindow::param = 0;
-InputWindow::Struct     InputWindow::m_iws = InputWindow::Struct(' ');
+Chan                InputWindow::chan = Chan::A;
+Parameter          *InputWindow::param = 0;
+InputWindow::Struct InputWindow::m_iws;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,9 +22,6 @@ void InputWindow::Init()
     chan = CURRENT_CHANNEL;
     Form *form = WAVE_CURRENT.GetCurrentForm();
     param = PARAM(form);
-    m_iws = INPUT_WINDOW_STRUCT(chan, form->value, param->value);
-
-	(&m_iws)->Fill(chan, form, param);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,9 +89,9 @@ void InputWindow::DrawDigits(int x, int y)
 
     y += 40;
 
-    if(m_iws.sign != ' ')
+    if(param->sign != ' ')
     {
-        Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, m_iws.sign);
+        Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, param->sign);
     }
 
     for (int i = 0; i < NUM_DIGITS; i++)

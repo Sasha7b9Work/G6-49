@@ -38,10 +38,6 @@ void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 
     memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
 
-	for (int i = 0; i < NUM_DIGITS; i++)
-	{
-		DIGIT(i) = PARAMETER_DIG(i);
-	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
 		if (DIGIT(i) == 0)
@@ -141,7 +137,7 @@ char *InputWindow::Struct::StringValue()
     static char buf[20];
     buf[0] = '\0';
 
-    SU::ConcatenateSymbol(buf, sign);
+    SU::ConcatenateSymbol(buf, param->sign);
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
@@ -203,7 +199,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
         return false;
     }
 
-    if (All0LeftWithThis(num) && sign == ' ')
+    if (All0LeftWithThis(num) && param->sign == ' ')
     {
         return false;
     }
@@ -373,7 +369,7 @@ float InputWindow::Struct::Value()
 {
     float value = ValueBeforeComma() + ValueAfterComma();
 
-    float mul = (sign == '-') ? -1.0f : 1.0f;
+    float mul = (param->sign == '-') ? -1.0f : 1.0f;
 
     if (param->order == Order::Nano)
     {
@@ -481,8 +477,6 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::SendToGenerator()
 {
-    PARAMETER(ch, form->value, param->value) = *this;
-
     if (param->Is(Parameter::Delay))
     {
         /*
@@ -497,7 +491,9 @@ void InputWindow::Struct::SendToGenerator()
     }
     else
     {
-        float value = PARAMETER(ch, form->value, param->value).Value();
+        InputWindow::Struct input;
+        input.Fill(ch, form, param);
+        float value = input.Value();
         Generator::SetParameter(ch, *param, value);
     }
 }
@@ -544,9 +540,9 @@ void InputWindow::Struct::FillFromInputBuffer()
         }
     }
 
-    if (sign != ' ')
+    if (param->sign != ' ')
     {
-        sign = (atof(m_inputBuffer) >= 0.0) ? '+' : '-';
+        param->sign = (atof(m_inputBuffer) >= 0.0) ? '+' : '-';
     }
 
     param->hightLightDigit = NUM_DIGITS - 1;

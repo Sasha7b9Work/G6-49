@@ -156,9 +156,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings2.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\globals.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp">
       <Filter>Display</Filter>
     </ClCompile>

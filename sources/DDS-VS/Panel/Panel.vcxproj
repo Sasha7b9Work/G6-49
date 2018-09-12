@@ -243,7 +243,6 @@
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\WaveGraphics.cpp" />
-    <ClCompile Include="..\..\Panel\src\globals.cpp" />
     <ClCompile Include="..\..\Panel\src\globals_waves.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />

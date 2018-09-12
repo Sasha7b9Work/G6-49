@@ -92,15 +92,9 @@ public:
 
         void SaveValue();
 
-        static Form        *form;
-        static Parameter   *param;
-        static Chan        ch;
-
-        Struct(char s) :
-            sign(s)
-        {
-        }
-        char     sign;
+        static Form      *form;
+        static Parameter *param;
+        static Chan      ch;
 
     private:
         /// ”величивает значение в заданной позиции. ¬озвращает false, если итоговое значение не изменилось.
