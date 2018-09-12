@@ -8,33 +8,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static struct StructName
-{
-    pString nameRU;
-    pString nameEN;
-    StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) {};
-}
-nameParameter[Parameter::Number] =
-{
-    StructName("◊¿—“Œ“¿",        "FREQUENCY"),
-    StructName("œ≈–»Œƒ",         "PERIOD"),
-    StructName("–¿«Ã¿’",         "AMPLITUDE"),
-    StructName("—Ã≈Ÿ≈Õ»≈",       "OFFSET"),
-    StructName("ƒÀ»“.",          "DURATION"),
-    StructName("— ¬¿∆ÕŒ—“‹",     "DUTY RATIO"),
-    StructName("‘¿«¿",           "PHASE"),
-    StructName("«¿ƒ≈–∆ ¿",       "DELAY"),
-    StructName(" Œ›‘‘. ÃŒƒ.",    "MOD. INDEX"),
-    StructName("œŒÀﬂ–ÕŒ—“‹",     "POLARITY"),
-    StructName("¬–. Õ¿–¿—“¿Õ»ﬂ", "BUILD-UP TIME"),
-    StructName("¬–. —œ¿ƒ¿",      "RELEASING TIME"),
-    StructName("¬–. œ» ¿",       "PEAK TIME"),
-    StructName(" Œ›‘‘. «¿œŒÀÕ.", "DUTY FACTOR"),
-    StructName("ÃÓ‰ÛÎˇˆËˇ",      "Modulation")
-};
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name(Language lang) const
 {
     struct StrName
@@ -103,7 +76,41 @@ bool Parameter::IsComplexParameter() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString Parameter::Name() const
 {
-    return LANG_RU ? (char *)nameParameter[value].nameRU : (char *)nameParameter[value].nameEN;
+    static const struct StructName
+    {
+        pString nameRU;
+        pString nameEN;
+        StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) { };
+    }
+    nameParameter[Parameter::Number] =
+    {
+        StructName("◊¿—“Œ“¿",        "FREQUENCY"),
+        StructName("œ≈–»Œƒ",         "PERIOD"),
+        StructName("–¿«Ã¿’",         "AMPLITUDE"),
+        StructName("—Ã≈Ÿ≈Õ»≈",       "OFFSET"),
+        StructName("ƒÀ»“.",          "DURATION"),
+        StructName("— ¬¿∆ÕŒ—“‹",     "DUTY RATIO"),
+        StructName("‘¿«¿",           "PHASE"),
+        StructName("«¿ƒ≈–∆ ¿",       "DELAY"),
+        StructName(" Œ›‘‘. ÃŒƒ.",    "MOD. INDEX"),
+        StructName("œŒÀﬂ–ÕŒ—“‹",     "POLARITY"),
+        StructName("¬–. Õ¿–¿—“¿Õ»ﬂ", "BUILD-UP TIME"),
+        StructName("¬–. —œ¿ƒ¿",      "RELEASING TIME"),
+        StructName("¬–. œ» ¿",       "PEAK TIME"),
+        StructName(" Œ›‘‘. «¿œŒÀÕ.", "DUTY FACTOR"),
+        StructName("ÃÓ‰ÛÎˇˆËˇ",      "Modulation")
+    };
+
+    bool cond = LANG_RU;
+    if(cond)
+    {
+        const __IO Parameter::E *pointer = &value;
+        int index = (int)value;
+        StructName str = nameParameter[index];
+        return (char *)str.nameRU;
+    }
+    
+    return nameParameter[value].nameEN;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -125,26 +132,12 @@ void Wave::SetNextForm()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Wave::NumberOfForms() const
 {
-    for(int i = 0; i < Form::Number; i++)
-    {
-        if(forms[i].value == Form::Number)
-        {
-            return i;
-        }
-    }
-
-    return Form::Number;
+    return numForms;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Wave::Wave(Chan ch, Form form[Form::Number]) : channel(ch)
+Wave::Wave(Chan ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
 {
-    currentForm = 0;
-
-    for(int i = 0; i < Form::Number; i++)
-    {
-        forms[i] = form[i];
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

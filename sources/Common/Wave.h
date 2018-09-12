@@ -161,10 +161,7 @@ class Wave
 {
 public:
 
-    Wave(Chan ch, Form form[Form::Number]);
-
-    Form forms[Form::Number];
-
+    Wave(Chan ch, Form *forms, int numForms);
     /// Возвращает установленную форму
     Form *GetCurrentForm();
     /// Установить текущей следующую форму
@@ -179,6 +176,10 @@ public:
 private:
     /// Текущая форма сигнала - указывает на номер сигнала в массиве
     int currentForm;
+    /// Список форм, которые могут быть назначены
+    Form *forms;
+    /// Количество возможных форм
+    int numForms;
 
 public:
 

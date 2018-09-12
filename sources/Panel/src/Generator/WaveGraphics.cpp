@@ -284,7 +284,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         Color color = Color::FILL;
         if (ch == CURRENT_CHANNEL)
         {
-            pString curPar = Menu::NameCurrentParameter();
+            pString curPar = PARAM_CURRENT->Name();
             pString parName = param->Name();
             if (strcmp(curPar, parName) == 0 && CURRENT_PAGE == 0)
             {

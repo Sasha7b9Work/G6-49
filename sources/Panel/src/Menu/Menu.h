@@ -19,8 +19,6 @@ public:
     static void Draw();
     /// Возвращает true, если ручка управляет переклюичением страниц меню
     static bool RegIsControlPages();
-
-    static const char *NameCurrentParameter();
     /// Возвращает адрес открытого элемента меню
     static Item *OpenedItem();
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней

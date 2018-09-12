@@ -51,7 +51,7 @@ static Parameter params_ImpulseA[Parameter::Number] =
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static Form formsA[Form::Number] =
+static Form formsA[] =
 {
     Form(Form::Sine,      params_SineA,      5),
     Form(Form::RampPlus,  params_RampPlusA,  4),
@@ -112,7 +112,7 @@ static Parameter params_ImpulseB[Parameter::Number] =
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static Form formsB[Form::Number] =
+static Form formsB[] =
 {
     Form(Form::Sine,        params_SineB,      6),
     Form(Form::RampPlus,    params_RampPlusB,  4),
@@ -125,6 +125,6 @@ static Form formsB[Form::Number] =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Wave wave[Chan::Number] =
 {
-    Wave(Chan::A, formsA),
-    Wave(Chan::B, formsB)
+    Wave(Chan::A, formsA, 5),
+    Wave(Chan::B, formsB, 5)
 };
