@@ -14,24 +14,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define NUM_DIGITS          5
 
-
-struct Order
-{
-    enum E
-    {
-        Nano,       // нано
-        Micro,      // микро
-        Milli,      // милли
-        One,        // единицы
-        Kilo,       // кило
-        Mega,       // мега
-        Number
-    } value;
-    Order(E v) : value(v)  { };
-    operator uint8() const { return (uint8)value; };
-    pString Name() const;
-};
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const char *NameUnit(char buffer[10], Order order, Parameter parameter);
 
@@ -117,8 +99,8 @@ public:
         static Parameter   *param;
         static Chan        ch;
 
-        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1, uint8 o = Order::Kilo) :
-            sign(s), posComma(comma), hightLightDigit(hd), order(o)
+        Struct(char s, char *buff = "10000", int8 comma = 0, int8 hd = NUM_DIGITS - 1) :
+            sign(s), posComma(comma), hightLightDigit(hd)
         {
             strcpy(buffer, buff);
         }
@@ -126,7 +108,7 @@ public:
         char     buffer[NUM_DIGITS + 1];    ///< В этом буфере хранится знак числа, а затем цифры с точкой
         int8     posComma;            ///< После какого знакоместа выводить запятую
         int8     hightLightDigit;     ///< Позиция подсвеченного знакоместа
-        uint8    order       : 3;
+        //uint8    order       : 3;
 
     private:
         /// Увеличивает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось.

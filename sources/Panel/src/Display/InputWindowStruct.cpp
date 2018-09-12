@@ -360,9 +360,9 @@ float InputWindow::Struct::ValueAfterComma()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::IncreaseOrder()
 {
-    if (order < Order::Number - 1)
+    if (param->order < Order::Number - 1)
     {
-        order = (Order)(Order::E)((uint)order + 1);
+        param->order = (Order)(Order::E)(param->order + 1);
 
         POS_COMMA -= 3;
     }
@@ -375,23 +375,23 @@ float InputWindow::Struct::Value()
 
     float mul = (sign == '-') ? -1.0f : 1.0f;
 
-    if (order == Order::Nano)
+    if (param->order == Order::Nano)
     {
         return value * 1e-9f * mul;
     }
-    if (order == Order::Micro)
+    if (param->order == Order::Micro)
     {
         return value * 1e-6f * mul;
     }
-    if (order == Order::Milli)
+    if (param->order == Order::Milli)
     {
         return value * 1e-3f * mul;
     }
-    if (order == Order::Kilo)
+    if (param->order == Order::Kilo)
     {
         return value * 1e3f * mul;
     }
-    if (order == Order::Mega)
+    if (param->order == Order::Mega)
     {
         return value * 1e6f * mul;
     }
@@ -507,11 +507,11 @@ void InputWindow::Struct::FillFromInputBuffer()
 {
     if (*param == Parameter::Duration || *param == Parameter::Delay)
     {
-        order = Order::Micro;
+        param->order = Order::Micro;
     }
     else
     {
-        order = Order::One;
+        param->order = Order::One;
     }
 
     if (SU::FindSymbol(m_inputBuffer, '.') == -1)             // Если точки нету
@@ -540,7 +540,7 @@ void InputWindow::Struct::FillFromInputBuffer()
                 m_inputBuffer[pos + 4] = '0';
             }
 
-            order = (Order::E)((uint)order - 1);
+            param->order = (Order::E)(param->order - 1);
         }
     }
 
@@ -563,7 +563,7 @@ void InputWindow::Struct::FillFromInputBuffer()
 
         m_inputBuffer[pos - 3] = '.';               // И ставим точку слева от этой тройки
 
-        order = (Order::E)((uint)order + 1); // И увеличиваем степень на три порядка
+        param->order = (Order::E)(param->order + 1); // И увеличиваем степень на три порядка
     }
 
     // В этой точке целая часть числа уже не превышает 999

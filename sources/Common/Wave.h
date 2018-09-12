@@ -2,6 +2,25 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct Order
+{
+    enum E
+    {
+        Nano,       // нано
+        Micro,      // микро
+        Milli,      // милли
+        One,        // единицы
+        Kilo,       // кило
+        Mega,       // мега
+        Number
+    } value;
+    Order(E v = Number) : value(v)  { };
+    operator uint8() const { return (uint8)value; };
+    pString Name() const;
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Parameter
 {
     enum E
@@ -26,7 +45,7 @@ struct Parameter
 
     Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max) : value((E)v), min(_min), max(_max), inNumLockMode(false) { };
+    Parameter(int v, float _min, float _max, Order o) : value((E)v), order(o), min(_min), max(_max), inNumLockMode(false) { };
 
     operator uint8() const                  { return (uint8)value; }
 
@@ -41,6 +60,9 @@ struct Parameter
     bool InNumLockMode() const { return inNumLockMode; };
 
     void SetNumLockMode(bool mode) { inNumLockMode = mode; };
+    
+    Order order;
+    
 private:
 
     float min;

@@ -6,10 +6,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
 {
         {
             {                                                                           // [A][Form::Sine]
-/* Frequency  */ InputWindow::Struct(' ', "20000", 0, NUM_DIGITS - 1, Order::Kilo),
-/* Period     */ InputWindow::Struct(' ', "05000", 0, NUM_DIGITS - 1, Order::Milli),
-/* Amplitude  */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
-/* Offset     */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+/* Frequency  */ InputWindow::Struct(' ', "20000", 0, NUM_DIGITS - 1),
+/* Period     */ InputWindow::Struct(' ', "05000", 0, NUM_DIGITS - 1),
+/* Amplitude  */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
+/* Offset     */ InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
 /* Duration   */ InputWindow::Struct(' '),
 /* DutyRatio  */ InputWindow::Struct(' '),
 /* Phase      */ InputWindow::Struct(' '),
@@ -20,13 +20,13 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
 /* DurFall    */ InputWindow::Struct(' '),
 /* DurStady   */ InputWindow::Struct(' '),
 /* DutFactor  */ InputWindow::Struct(' '),
-/* Modulation */ InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::One)
+/* Modulation */ InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1)
             },
             {                                                                           // [A][Form::RampPlus]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -40,10 +40,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
                 InputWindow::Struct(' ')
             },
             {                                                                           // [A][Form::RampMinus]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -57,10 +57,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
                 InputWindow::Struct(' ')
             },
             {                                                                           // [A][Form::Meander]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -74,10 +74,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
                 InputWindow::Struct(' ')
             },
             {                                                                           // [A][Form::Impulse]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -94,27 +94,27 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
         },
         {
             {                                                                           // [B][Form::Sine]
-                InputWindow::Struct(' ', "40000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "40000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' '),
-                InputWindow::Struct(' '),
-                InputWindow::Struct(' '),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::One)
+                InputWindow::Struct(' '),
+                InputWindow::Struct(' '),
+                InputWindow::Struct(' '),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1)
             },
             {                                                                           // [B][Form::RampPlus]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -128,10 +128,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
                 InputWindow::Struct(' ')
             },
             {                                                                           // [B][Form::RampMinus]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -145,10 +145,10 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
                 InputWindow::Struct(' ')
             },
             {                                                                           // [B][Form::Meander]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
@@ -161,11 +161,11 @@ InputWindow::Struct sig_structParameter[Chan::Number][Form::Number][Parameter::N
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' ')
             },
-            {                                                                           // [A][Form::Impulse]
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Kilo),
-                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1, Order::Milli),
-                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1, Order::One),
-                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1, Order::One),
+            {                                                                           // [B][Form::Impulse]
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 0, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "10000", 1, NUM_DIGITS - 1),
+                InputWindow::Struct(' ', "50000", 0, NUM_DIGITS - 1),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
                 InputWindow::Struct(' '),
