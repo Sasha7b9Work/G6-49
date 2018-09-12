@@ -163,15 +163,15 @@ Parameter *Form::CurrentParameter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Form::NumParameters() const 
 {
-    for(int i = 0; i < Form::Number; i++)
+    for(int i = 0; i < Parameter::Number; i++)
     {
-        if(params[i] == Form::Number)
+        if(params[i] == Parameter::Number)
         {
             return i;
         }
     }
 
-    return Form::Number - 1;
+    return Parameter::Number - 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

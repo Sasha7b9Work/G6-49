@@ -271,15 +271,17 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 {
     int x0 = 107;
 
-    Form form = *FORM(ch);
+    Form *form = FORM(ch);
 
     y0 += 5;
 
-    Text::DrawText(22, y0 + 3, form.Name(LANG), Color::FILL);
+    Text::DrawText(22, y0 + 3, form->Name(LANG), Color::FILL);
 
-    for (int i = 0; i < form.NumParameters(); i++)
+    int num = form->NumParameters();
+    
+    for (int i = 0; i < num; i++)
     {
-        Parameter *param = form.GetParameter(i);
+        Parameter *param = form->GetParameter(i);
         Color color = Color::FILL;
         if (ch == CURRENT_CHANNEL)
         {
