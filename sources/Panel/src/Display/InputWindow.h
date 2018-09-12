@@ -96,13 +96,11 @@ public:
         static Parameter   *param;
         static Chan        ch;
 
-        Struct(char s, char *buff = "10000") :
+        Struct(char s) :
             sign(s)
         {
-            strcpy(buffer, buff);
         }
         char     sign;
-        char     buffer[NUM_DIGITS + 1];    ///< В этом буфере хранится знак числа, а затем цифры с точкой
 
     private:
         /// Увеличивает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось.

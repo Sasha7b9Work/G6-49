@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,8 +49,11 @@ struct Parameter
 
     Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, Parameter *param = 0, int num = 0) : value((E)v), order(o), 
-        hightLightDigit(hd), posComma(pos), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num) { };
+    Parameter(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, Parameter *param = 0, int num = 0) : value((E)v), order(o), 
+        hightLightDigit(hd), posComma(pos), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num) 
+    {
+        strcpy(buffer, buf);
+    };
 
     float MinValue() const { return min; };
 
@@ -72,6 +76,8 @@ struct Parameter
     int8 hightLightDigit;
     /// После какой цифры воводить запятую
     int8 posComma;
+    /// В этом буфере хранится знак числа, а затем цифры с точкой
+    char buffer[NUM_DIGITS + 1];
     
 private:
 

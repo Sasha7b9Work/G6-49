@@ -14,8 +14,8 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define CURRENT_POS         (param->hightLightDigit)
-#define DIGIT(num)          (buffer[num])
-#define CURRENT_DIGIT       (buffer[CURRENT_POS])
+#define DIGIT(num)          (param->buffer[num])
+#define CURRENT_DIGIT       (param->buffer[CURRENT_POS])
 #define POS_COMMA           (param->posComma)
 #define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
@@ -40,7 +40,7 @@ void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 
 	for (int i = 0; i < NUM_DIGITS; i++)
 	{
-		DIGIT(i) = PARAMETER_DIG(ch, form->value, param->value, i);
+		DIGIT(i) = PARAMETER_DIG(i);
 	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
@@ -54,7 +54,7 @@ void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 		}
 	}
 
-	param->hightLightDigit = buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
+	param->hightLightDigit = param->buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ void InputWindow::Struct::KeyRight()
 {
 	if (param->hightLightDigit < NUM_DIGITS - 1)
 	{
-		if (param->hightLightDigit == NUM_DIGITS - 2 && buffer[NUM_DIGITS - 1] == '.')
+		if (param->hightLightDigit == NUM_DIGITS - 2 && param->buffer[NUM_DIGITS - 1] == '.')
 		{
 			return;
 		}
@@ -573,16 +573,16 @@ void InputWindow::Struct::FillFromInputBuffer()
     int intValue = (int)value;
 
     // Заносим целую часть числа в буфер
-    sprintf(buffer, "%d", intValue);
+    sprintf(param->buffer, "%d", intValue);
 
-    param->posComma = (int8)strlen(buffer) - 1;
+    param->posComma = (int8)strlen(param->buffer) - 1;
 
-    int numDigits = NUM_DIGITS - (int)strlen(buffer);      // Столько цифр нужно записать после запятой
+    int numDigits = NUM_DIGITS - (int)strlen(param->buffer);      // Столько цифр нужно записать после запятой
 
     int pos = SU::FindSymbol(m_inputBuffer, '.');       // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
 
     for (int i = 0; i < numDigits; i++)
     {
-        buffer[param->posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
+        param->buffer[param->posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
     }
 }

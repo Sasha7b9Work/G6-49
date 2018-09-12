@@ -111,9 +111,9 @@ void InputWindow::DrawDigits(int x, int y)
             Font::Set(Font::Type::_8);
         }
 
-        if (m_iws.buffer[i])
+        if (param->buffer[i])
         {
-            buf[0] = m_iws.buffer[i];
+            buf[0] = param->buffer[i];
             Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
         }
 
