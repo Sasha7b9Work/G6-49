@@ -308,7 +308,7 @@ void Wave::Graphics::DrawParameterValue(Chan ch, Parameter *param, int x, int y)
 {
     Form *form = FORM(ch);
 
-    x = Text::DrawText(x, y, (&PARAMETER(ch, *form, *param))->StringValue());
+    x = Text::DrawText(x, y, (&PARAMETER(ch, *form, param->value))->StringValue());
 
     char buffer[10];
     Text::DrawText(x, y, NameUnit(buffer, param->order, *param));

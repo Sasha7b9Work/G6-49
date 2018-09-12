@@ -40,7 +40,7 @@ void InputWindow::Struct::Fill(Chan ch_, Form *form_, Parameter *param_)
 
 	for (int i = 0; i < NUM_DIGITS; i++)
 	{
-		DIGIT(i) = PARAMETER_DIG(ch, form, param, i);
+		DIGIT(i) = PARAMETER_DIG(ch, form, param->value, i);
 	}
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
@@ -306,7 +306,7 @@ const char *NameUnit(char buffer[10], Order order, Parameter parameter)
         {"ñ",  "s"}
     };
 
-    sprintf(buffer, "%s%s", order.Name(), names[parameter][LANG]);
+    sprintf(buffer, "%s%s", order.Name(), names[parameter.value][LANG]);
 
     return buffer;
 }
@@ -481,9 +481,9 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::SendToGenerator()
 {
-    PARAMETER(ch, *form, *param) = *this;
+    PARAMETER(ch, *form, param->value) = *this;
 
-    if (*param == Parameter::Delay)
+    if (param->Is(Parameter::Delay))
     {
         /*
         PARAMETER(Chan::B, Form(Form::Impulse), Parameter::Frequency) = 
@@ -497,7 +497,7 @@ void InputWindow::Struct::SendToGenerator()
     }
     else
     {
-        float value = PARAMETER(ch, *form, *param).Value();
+        float value = PARAMETER(ch, *form, param->value).Value();
         Generator::SetParameter(ch, *param, value);
     }
 }
@@ -505,7 +505,7 @@ void InputWindow::Struct::SendToGenerator()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Struct::FillFromInputBuffer()
 {
-    if (*param == Parameter::Duration || *param == Parameter::Delay)
+    if (param->Is(Parameter::Duration) || param->Is(Parameter::Delay))
     {
         param->order = Order::Micro;
     }

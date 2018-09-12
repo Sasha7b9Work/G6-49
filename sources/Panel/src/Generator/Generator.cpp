@@ -119,9 +119,9 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
         CommandPanel::SetModulation
     };
 
-    uint8 buffer[6] = {(uint8)commands[param], (uint8)ch};
+    uint8 buffer[6] = {(uint8)commands[param.value], (uint8)ch};
 
-    if(param == Parameter::Offset)
+    if(param.Is(Parameter::Offset))
     {
         value -= 5.0f;
     }

@@ -22,7 +22,7 @@ void InputWindow::Init()
     chan = CURRENT_CHANNEL;
     Form *form = WAVE_CURRENT.GetCurrentForm();
     param = PARAM(form);
-    m_iws = INPUT_WINDOW_STRUCT(chan, (uint8)(*form), (uint8)(*param));
+    m_iws = INPUT_WINDOW_STRUCT(chan, (uint8)(*form), param->value);
 
 	(&m_iws)->Fill(chan, form, param);
 }
@@ -71,7 +71,7 @@ void InputWindow::Draw()
 
     DrawDigits(x, y);
 
-    func[*param](x + 10, y + 10);
+    func[param->value](x + 10, y + 10);
 
     if (IN_NUM_LOCK_MODE)
     {

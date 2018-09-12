@@ -47,8 +47,6 @@ struct Parameter
 
     Parameter(int v, float _min, float _max, Order o) : value((E)v), order(o), min(_min), max(_max), inNumLockMode(false) { };
 
-    operator uint8() const                  { return (uint8)value; }
-
     float MinValue() const { return min; };
 
     float MaxValue() const { return max; };
@@ -60,6 +58,8 @@ struct Parameter
     bool InNumLockMode() const { return inNumLockMode; };
 
     void SetNumLockMode(bool mode) { inNumLockMode = mode; };
+
+    bool Is(Parameter::E e) const { return value == e; };
     
     Order order;
     

@@ -167,7 +167,7 @@ int Form::NumParameters() const
 {
     for(int i = 0; i < Parameter::Number; i++)
     {
-        if(params[i] == Parameter::Number)
+        if(params[i].Is(Parameter::Number))
         {
             return i;
         }
