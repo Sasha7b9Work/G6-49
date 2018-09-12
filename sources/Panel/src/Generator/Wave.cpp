@@ -228,7 +228,7 @@ void Form::SendParameterToGenerator(Chan ch, Parameter::E p)
     Parameter *param = FindParameter(p);
     if (param)
     {
-        Generator::SetParameter(ch, p, StructValue(param).Value());
+        Generator::SetParameter(ch, p, param->GetValue());
     }
 }
 
@@ -241,4 +241,18 @@ void Form::OpenCurrentParameter()
     }
 
 
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+float Parameter::GetValue() const
+{
+    StructValue input((Parameter *)this);
+    return input.Value();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char *Parameter::GetStringValue() const
+{
+    StructValue input((Parameter *)this);
+    return input.StringValue();
 }

@@ -59,7 +59,7 @@ void StructValue::KeyLeft()
 		--param->hightLightDigit;
 		if (CURRENT_DIGIT == '.')
 		{
-            StructValue::KeyLeft();
+            KeyLeft();
 		}
 	}
     else
@@ -83,7 +83,7 @@ void StructValue::KeyRight()
 		++param->hightLightDigit;
 		if (CURRENT_DIGIT == '.')
 		{
-            StructValue::KeyRight();
+            KeyRight();
 		}
 	}
     else if(DIGIT(0) == '0')
@@ -476,7 +476,7 @@ void StructValue::SendToGenerator()
     }
     else
     {
-        Generator::SetParameter(CURRENT_CHANNEL, *param, StructValue(param).Value());
+        Generator::SetParameter(CURRENT_CHANNEL, *param, param->GetValue());
     }
 }
 

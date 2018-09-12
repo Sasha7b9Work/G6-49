@@ -65,6 +65,10 @@ public:
 
     float MaxValue() const { return max; };
 
+    float GetValue()  const;
+
+    char *GetStringValue() const;
+
     pString Name() const;
     /// Возвращает true, если параметр содержит несколько параметров
     bool IsComplexParameter() const;

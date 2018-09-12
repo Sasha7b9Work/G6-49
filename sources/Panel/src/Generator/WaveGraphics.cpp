@@ -306,7 +306,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
 {
-    x = Text::DrawText(x, y, StructValue(param).StringValue());
+    x = Text::DrawText(x, y, param->GetStringValue());
 
     char buffer[10];
     Text::DrawText(x, y, NameUnit(buffer, param->order, *param));
