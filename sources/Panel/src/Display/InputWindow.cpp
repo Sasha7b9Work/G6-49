@@ -119,7 +119,7 @@ void InputWindow::DrawDigits(int x, int y)
 
         x += 24;
 
-        if (m_iws.posComma == i)
+        if (param->posComma == i)
         {
             Painter::FillRegion(x - 3, y + HEIGHT_DIGIT - 2, SIZE_TEXT, SIZE_TEXT + 1);
             x += 4;

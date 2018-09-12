@@ -16,7 +16,7 @@
 #define CURRENT_POS         (param->hightLightDigit)
 #define DIGIT(num)          (buffer[num])
 #define CURRENT_DIGIT       (buffer[CURRENT_POS])
-#define POS_COMMA           (posComma)
+#define POS_COMMA           (param->posComma)
 #define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
 
@@ -74,7 +74,7 @@ void InputWindow::Struct::KeyLeft()
 	}
     else
     {
-        if (!OnlyOneRigthDigit() && posComma != NUM_DIGITS - 1)
+        if (!OnlyOneRigthDigit() && param->posComma != NUM_DIGITS - 1)
         {
             ShiftToRight();
         }
@@ -147,7 +147,7 @@ char *InputWindow::Struct::StringValue()
     {
         SU::ConcatenateSymbol(buf, DIGIT(i));
 
-        if (posComma == i)
+        if (param->posComma == i)
         {
             SU::ConcatenateSymbol(buf, '.');
         }
@@ -326,7 +326,7 @@ bool InputWindow::Struct::OnlyOneRigthDigit()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int InputWindow::Struct::ValueBeforeComma()
 {
-    int lowPos = posComma;     // Младший байт числа
+    int lowPos = param->posComma;     // Младший байт числа
 
     int retValue = 0;
 
@@ -346,7 +346,7 @@ float InputWindow::Struct::ValueAfterComma()
 {
     int retValue = 0;
     int pow = 1;
-    for (int i = NUM_DIGITS - 1; i > posComma; i--)
+    for (int i = NUM_DIGITS - 1; i > param->posComma; i--)
     {
         char digit = DIGIT(i);
         digit &= 0x0f;
@@ -575,7 +575,7 @@ void InputWindow::Struct::FillFromInputBuffer()
     // Заносим целую часть числа в буфер
     sprintf(buffer, "%d", intValue);
 
-    posComma = (int8)strlen(buffer) - 1;
+    param->posComma = (int8)strlen(buffer) - 1;
 
     int numDigits = NUM_DIGITS - (int)strlen(buffer);      // Столько цифр нужно записать после запятой
 
@@ -583,6 +583,6 @@ void InputWindow::Struct::FillFromInputBuffer()
 
     for (int i = 0; i < numDigits; i++)
     {
-        buffer[posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
+        buffer[param->posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
     }
 }

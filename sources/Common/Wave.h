@@ -48,8 +48,8 @@ struct Parameter
 
     Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max, Order o, int8 hd = NUM_DIGITS - 1, Parameter *param = 0, int num = 0) : value((E)v), order(o), 
-        hightLightDigit(hd), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num) { };
+    Parameter(int v, float _min, float _max, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, Parameter *param = 0, int num = 0) : value((E)v), order(o), 
+        hightLightDigit(hd), posComma(pos), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num) { };
 
     float MinValue() const { return min; };
 
@@ -70,6 +70,8 @@ struct Parameter
     Order order;
     /// Позиция подсвеченного символа
     int8 hightLightDigit;
+    /// После какой цифры воводить запятую
+    int8 posComma;
     
 private:
 
