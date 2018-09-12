@@ -1,5 +1,4 @@
 #include "Menu.h"
-#include "globals.h"
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
 #include "Display/InputWindow.h"

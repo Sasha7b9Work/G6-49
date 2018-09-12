@@ -241,9 +241,9 @@
     <ClCompile Include="..\..\Panel\src\Display\Text.cpp" />
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
+    <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\WaveGraphics.cpp" />
-    <ClCompile Include="..\..\Panel\src\globals_waves.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
@@ -400,7 +400,7 @@
     <ClInclude Include="..\..\Panel\src\Display\Text.h" />
     <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
-    <ClInclude Include="..\..\Panel\src\globals.h" />
+    <ClInclude Include="..\..\Panel\src\Generator\Signals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h" />

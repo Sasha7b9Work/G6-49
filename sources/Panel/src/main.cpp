@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "globals.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"

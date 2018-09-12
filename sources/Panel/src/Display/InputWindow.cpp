@@ -1,4 +1,4 @@
-#include "globals.h"
+#include "Generator/Signals.h"
 #include "InputWindow.h"
 #include "DisplayTypes.h"
 #include "Display/Painter.h"
@@ -12,7 +12,7 @@
 #define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
 StructValue InputWindow::m_iws;
-Parameter           *InputWindow::param = 0;
+Parameter  *InputWindow::param = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

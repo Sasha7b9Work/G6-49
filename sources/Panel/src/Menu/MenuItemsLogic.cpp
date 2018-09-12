@@ -1,5 +1,4 @@
 #include "Menu/Menu.h"
-#include "globals.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"

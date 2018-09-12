@@ -1,11 +1,10 @@
-#include "globals.h"
+#include "Signals.h"
 #include "Wave.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "globals.h"
 #include "Utils/Debug.h"
 #include <math.h>
 #include <string.h>

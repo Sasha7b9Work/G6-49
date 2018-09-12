@@ -1616,16 +1616,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
             </File>
-            <File>
-              <FileName>globals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\globals.h</FilePath>
-            </File>
-            <File>
-              <FileName>globals_waves.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\globals_waves.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2150,6 +2140,16 @@
               <FileName>WaveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\WaveGraphics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Signals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Signals.h</FilePath>
             </File>
           </Files>
         </Group>

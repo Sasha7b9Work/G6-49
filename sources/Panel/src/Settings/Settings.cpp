@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "globals.h"
+#include "Generator/Signals.h"
 #include "Settings.h"
 #include "Display/Colors.h"
 #include "Display/Display.h"

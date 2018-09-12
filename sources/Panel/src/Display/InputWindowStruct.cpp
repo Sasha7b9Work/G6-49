@@ -1,5 +1,5 @@
 #include "Log.h"
-#include "globals.h"
+#include "Generator/Signals.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Generator/Generator.h"
