@@ -62,8 +62,6 @@ private:
     static void DrawDurationStady(int x, int y);
 
     static void DrawDutyFactor(int x, int y);
-    /// Канал, для которого вводится значение
-    static Chan         chan;
     /// Параметт, значение которого вводится
     static Parameter    *param;
 
