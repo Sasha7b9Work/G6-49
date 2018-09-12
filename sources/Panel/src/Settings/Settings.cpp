@@ -121,10 +121,6 @@ void Settings::TuneGenerator(Chan ch)
 {
     Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
     Form *form = FORM(ch);
-    Generator::SetFormWave(ch, *FORM(ch));
-    {
-        Generator::SetParameter(ch, Parameter::Frequency, INPUT_WINDOW_STRUCT(ch, *form, Parameter::Frequency).Value());
-        Generator::SetParameter(ch, Parameter::Amplitude, INPUT_WINDOW_STRUCT(ch, *form, Parameter::Amplitude).Value());
-        Generator::SetParameter(ch, Parameter::Offset,    INPUT_WINDOW_STRUCT(ch, *form, Parameter::Offset).Value());
-    }
+
+    form->TuneGenerator(ch);
 }

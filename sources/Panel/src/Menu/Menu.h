@@ -14,8 +14,6 @@ class Menu
 {
 public:
         
-    static void Init();
-
     static void Update();
 
     static void Draw();

@@ -98,10 +98,17 @@ struct Form
     Parameter *GetParameter(int i);
     /// Установить текущим следующй параметр
     void SetNextParameter();
+    /// Настраивает генератор в соответствии с установленными параметрами
+    void TuneGenerator(Chan ch);
+
+private:
+    /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
+    Parameter *FindParameter(Parameter::E p);
+    /// Засыалет параметр в генератор
+    void SendParameterToGenerator(Chan ch, Parameter::E p);
+    Parameter params[Parameter::Number];
     /// Номер текущего параметра в массиве params
     int currentParam;
-
-    Parameter params[Parameter::Number];
 };
 
 

@@ -159,3 +159,5 @@ void Generator::SendToInterface(uint8 *data, int size)
         FrequencyMeter::SetMeasure(bs.word);
     }
 }
+
+

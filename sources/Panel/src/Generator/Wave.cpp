@@ -2,6 +2,8 @@
 #include "defines.h"
 #include "Log.h"
 #include "Settings/Settings.h"
+#include "Display/InputWindow.h"
+#include "Generator.h"
 #include <stdio.h>
 
 
@@ -193,5 +195,40 @@ void Form::SetNextParameter()
     if(currentParam >= NumParameters())
     {
         currentParam = 0;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::TuneGenerator(Chan ch)
+{
+    Generator::SetFormWave(ch, *this);
+
+    SendParameterToGenerator(ch, Parameter::Frequency);
+    SendParameterToGenerator(ch, Parameter::Amplitude);
+    SendParameterToGenerator(ch, Parameter::Offset);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Parameter *Form::FindParameter(Parameter::E p)
+{
+    for(int i = 0; i < Parameter::Number; i++)
+    {
+        if(params[i].value == p)
+        {
+            return &params[i];
+        }
+    }
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::SendParameterToGenerator(Chan ch, Parameter::E p)
+{
+    Parameter *param = FindParameter(p);
+    if (param)
+    {
+        InputWindow::Struct input(' ');
+        input.Fill(ch, this, param);
+        Generator::SetParameter(ch, p, input.Value());
     }
 }
