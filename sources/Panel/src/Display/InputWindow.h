@@ -16,6 +16,65 @@ const char *NameUnit(char buffer[10], Order order, Parameter parameter);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Стуктура для обработки нажатия кнопок в окне ввода числового значения
+class StructValue
+{
+public:
+
+    StructValue(Form *f = 0, Parameter *p = 0) : form(f), param(p)  { };
+
+    void Set(Form *form, Parameter *param);
+
+    char *StringValue();
+
+    float Value();
+
+    void DrawInputField(int x, int y);
+
+    void KeyLeft();
+
+    void KeyRight();
+
+    void RegLeft();
+
+    void RegRight();
+
+    void PressKey(Control key);
+
+    void SaveValue();
+
+    Form      *form;
+    Parameter *param;
+
+private:
+    /// Увеличивает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось.
+    bool IncreaseDigit(int num);
+    /// Уменьшает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось
+    bool DecreaseDigit(int num);
+    /// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
+    bool All0LeftWithThis(int num);
+    /// Возвращает true, елси все цифры слева и эта являются девятками
+    bool All9LeftWithThis(int num);
+    /// Сдвигает все разряды вправо
+    void ShiftToRight();
+    /// Сдвиг всех разрядов влево
+    void ShiftToLeft();
+    /// Возвращает true, если есть только одна крайняя справа цифра
+    bool OnlyOneRigthDigit();
+    /// Возвращает число до запятой
+    int ValueBeforeComma();
+    /// Возвращает число после запятой
+    float ValueAfterComma();
+    /// Переключает порядок на следующий по возрастанию
+    void IncreaseOrder();
+    /// Заполняет iws из inputBuffer
+    void FillFromInputBuffer();
+    /// Заслать текущее значение в генератор
+    void SendToGenerator();
+};
+
+
+
 /// Окно редактирования численного значения параметра
 class InputWindow
 {
@@ -65,64 +124,7 @@ private:
 
     static Parameter *param;
 
-public:
-    class Struct
-    {
-    public:
-
-        Struct(Form *f = 0, Parameter *p = 0) : form(f), param(p) {};
-
-        void Set(Form *form, Parameter *param);
-
-        char *StringValue();
-
-        float Value();
-
-        void DrawInputField(int x, int y);
-
-        void KeyLeft();
-
-        void KeyRight();
-
-        void RegLeft();
-
-        void RegRight();
-
-        void PressKey(Control key);
-
-        void SaveValue();
-
-        Form      *form;
-        Parameter *param;
-
-    private:
-        /// Увеличивает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось.
-        bool IncreaseDigit(int num);
-        /// Уменьшает значение в заданной позиции. Возвращает false, если итоговое значение не изменилось
-        bool DecreaseDigit(int num);
-        /// Возвращает true, если все цифры слева от num ранвы нулю. И num тоже
-        bool All0LeftWithThis(int num);
-        /// Возвращает true, елси все цифры слева и эта являются девятками
-        bool All9LeftWithThis(int num);
-        /// Сдвигает все разряды вправо
-        void ShiftToRight();
-        /// Сдвиг всех разрядов влево
-        void ShiftToLeft();
-        /// Возвращает true, если есть только одна крайняя справа цифра
-        bool OnlyOneRigthDigit();
-        /// Возвращает число до запятой
-        int ValueBeforeComma();
-        /// Возвращает число после запятой
-        float ValueAfterComma();
-        /// Переключает порядок на следующий по возрастанию
-        void IncreaseOrder();
-        /// Заполняет iws из inputBuffer
-        void FillFromInputBuffer();
-        /// Заслать текущее значение в генератор
-        void SendToGenerator();
-    };
-
-    static Struct m_iws;
+    static StructValue m_iws;
 };
 
 

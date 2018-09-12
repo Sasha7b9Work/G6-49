@@ -26,7 +26,7 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void InputWindow::Struct::Set(Form *form_, Parameter *param_)
+void StructValue::Set(Form *form_, Parameter *param_)
 {
 //    ch = ch_;
     form = form_;
@@ -50,7 +50,7 @@ void InputWindow::Struct::Set(Form *form_, Parameter *param_)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::KeyLeft()
+void StructValue::KeyLeft()
 {
 	if (param->hightLightDigit > 0)
 	{
@@ -61,7 +61,7 @@ void InputWindow::Struct::KeyLeft()
 		--param->hightLightDigit;
 		if (CURRENT_DIGIT == '.')
 		{
-            InputWindow::Struct::KeyLeft();
+            StructValue::KeyLeft();
 		}
 	}
     else
@@ -74,7 +74,7 @@ void InputWindow::Struct::KeyLeft()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::KeyRight()
+void StructValue::KeyRight()
 {
 	if (param->hightLightDigit < NUM_DIGITS - 1)
 	{
@@ -85,7 +85,7 @@ void InputWindow::Struct::KeyRight()
 		++param->hightLightDigit;
 		if (CURRENT_DIGIT == '.')
 		{
-            InputWindow::Struct::KeyRight();
+            StructValue::KeyRight();
 		}
 	}
     else if(DIGIT(0) == '0')
@@ -95,7 +95,7 @@ void InputWindow::Struct::KeyRight()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::RegLeft()
+void StructValue::RegLeft()
 {
     if(DecreaseDigit(param->hightLightDigit))
     {
@@ -107,7 +107,7 @@ void InputWindow::Struct::RegLeft()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::RegRight()
+void StructValue::RegRight()
 {
     if(IncreaseDigit(param->hightLightDigit))
     {
@@ -123,7 +123,7 @@ void InputWindow::Struct::RegRight()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *InputWindow::Struct::StringValue()
+char *StructValue::StringValue()
 {
     if(!param->IsInputValue())
     {
@@ -149,14 +149,14 @@ char *InputWindow::Struct::StringValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool InputWindow::Struct::IncreaseDigit(int num)
+bool StructValue::IncreaseDigit(int num)
 {
     if (num < 0 || num >= NUM_DIGITS)
     {
         return false;
     }
 
-    Struct temp = *this;
+    StructValue temp = *this;
 
     if (All9LeftWithThis(num))
     {
@@ -188,7 +188,7 @@ bool InputWindow::Struct::IncreaseDigit(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool InputWindow::Struct::DecreaseDigit(int num)
+bool StructValue::DecreaseDigit(int num)
 {
     if (num < 0 || num >= NUM_DIGITS)
     {
@@ -200,7 +200,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
         return false;
     }
 
-    Struct temp = *this;
+    StructValue temp = *this;
 
     DIGIT(num)--;
 
@@ -220,7 +220,7 @@ bool InputWindow::Struct::DecreaseDigit(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool InputWindow::Struct::All0LeftWithThis(int num)
+bool StructValue::All0LeftWithThis(int num)
 {
     for (int i = num; i >= 0; i--)
     {
@@ -233,7 +233,7 @@ bool InputWindow::Struct::All0LeftWithThis(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool InputWindow::Struct::All9LeftWithThis(int num)
+bool StructValue::All9LeftWithThis(int num)
 {
     for (int i = num; i >= 0; i--)
     {
@@ -246,7 +246,7 @@ bool InputWindow::Struct::All9LeftWithThis(int num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::ShiftToRight()
+void StructValue::ShiftToRight()
 {
     for (int i = NUM_DIGITS - 2; i >= 0; i--)
     {
@@ -257,7 +257,7 @@ void InputWindow::Struct::ShiftToRight()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::ShiftToLeft()
+void StructValue::ShiftToLeft()
 {
     for (int i = 1; i < NUM_DIGITS; i++)
     {
@@ -304,7 +304,7 @@ const char *NameUnit(char buffer[10], Order order, Parameter parameter)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool InputWindow::Struct::OnlyOneRigthDigit()
+bool StructValue::OnlyOneRigthDigit()
 {
     char digitLast = DIGIT(NUM_DIGITS - 1);
 
@@ -316,7 +316,7 @@ bool InputWindow::Struct::OnlyOneRigthDigit()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int InputWindow::Struct::ValueBeforeComma()
+int StructValue::ValueBeforeComma()
 {
     int lowPos = param->posComma;     // Ìכאהרטי באיע קטסכא
 
@@ -334,7 +334,7 @@ int InputWindow::Struct::ValueBeforeComma()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float InputWindow::Struct::ValueAfterComma()
+float StructValue::ValueAfterComma()
 {
     int retValue = 0;
     int pow = 1;
@@ -350,7 +350,7 @@ float InputWindow::Struct::ValueAfterComma()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::IncreaseOrder()
+void StructValue::IncreaseOrder()
 {
     if (param->order < Order::Number - 1)
     {
@@ -361,7 +361,7 @@ void InputWindow::Struct::IncreaseOrder()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float InputWindow::Struct::Value()
+float StructValue::Value()
 {
     float value = ValueBeforeComma() + ValueAfterComma();
 
@@ -392,7 +392,7 @@ float InputWindow::Struct::Value()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::SaveValue()
+void StructValue::SaveValue()
 {
     if (IN_NUM_LOCK_MODE)
     {
@@ -407,7 +407,7 @@ void InputWindow::Struct::SaveValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::PressKey(Control key)
+void StructValue::PressKey(Control key)
 {
     struct StrControl
     {
@@ -447,7 +447,7 @@ void InputWindow::Struct::PressKey(Control key)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::DrawInputField(int x, int y)
+void StructValue::DrawInputField(int x, int y)
 {
     int width = 230;
     int height = 60;
@@ -471,7 +471,7 @@ void InputWindow::Struct::DrawInputField(int x, int y)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::SendToGenerator()
+void StructValue::SendToGenerator()
 {
     if (param->Is(Parameter::Delay))
     {
@@ -487,14 +487,12 @@ void InputWindow::Struct::SendToGenerator()
     }
     else
     {
-        InputWindow::Struct input(form, param);
-        float value = input.Value();
-        Generator::SetParameter(CURRENT_CHANNEL, *param, value);
+        Generator::SetParameter(CURRENT_CHANNEL, *param, StructValue(form, param).Value());
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::Struct::FillFromInputBuffer()
+void StructValue::FillFromInputBuffer()
 {
     if (param->Is(Parameter::Duration) || param->Is(Parameter::Delay))
     {
