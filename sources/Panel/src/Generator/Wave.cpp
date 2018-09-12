@@ -153,6 +153,7 @@ Form::Form(E v, Parameter param[Parameter::Number]) : value(v), currentParam(0)
     for(int i = 0; i < Parameter::Number; i++)
     {
         params[i] = param[i];
+        params[i].form = this;
     }
 }
 
@@ -227,7 +228,7 @@ void Form::SendParameterToGenerator(Chan ch, Parameter::E p)
     Parameter *param = FindParameter(p);
     if (param)
     {
-        Generator::SetParameter(ch, p, StructValue(this, param).Value());
+        Generator::SetParameter(ch, p, StructValue(param).Value());
     }
 }
 

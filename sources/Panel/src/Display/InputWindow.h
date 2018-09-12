@@ -21,9 +21,9 @@ class StructValue
 {
 public:
 
-    StructValue(Form *f = 0, Parameter *p = 0) : form(f), param(p)  { };
+    StructValue(Parameter *p = 0) : param(p)  { };
 
-    void Set(Form *form, Parameter *param);
+    void Set(Parameter *param);
 
     char *StringValue();
 
@@ -43,7 +43,6 @@ public:
 
     void SaveValue();
 
-    Form      *form;
     Parameter *param;
 
 private:

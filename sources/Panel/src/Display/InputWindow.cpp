@@ -19,7 +19,7 @@ Parameter           *InputWindow::param = 0;
 void InputWindow::Init()
 {
     param = PARAM_CURRENT;
-    m_iws.Set(FORM_CURRENT, param);
+    m_iws.Set(param);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

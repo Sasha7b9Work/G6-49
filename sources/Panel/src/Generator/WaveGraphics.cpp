@@ -296,7 +296,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 
         if(param->IsInputValue())
         {
-            DrawParameterValue(ch, param, x0 + 80, y0);
+            DrawParameterValue(param, x0 + 80, y0);
         }
 
         y0 += 10;
@@ -304,11 +304,9 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawParameterValue(Chan ch, Parameter *param, int x, int y)
+void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
 {
-    Form *form = FORM(ch);
-
-    x = Text::DrawText(x, y, StructValue(form, param).StringValue());
+    x = Text::DrawText(x, y, StructValue(param).StringValue());
 
     char buffer[10];
     Text::DrawText(x, y, NameUnit(buffer, param->order, *param));

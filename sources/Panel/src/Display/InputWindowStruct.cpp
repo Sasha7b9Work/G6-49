@@ -26,10 +26,8 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void StructValue::Set(Form *form_, Parameter *param_)
+void StructValue::Set(Parameter *param_)
 {
-//    ch = ch_;
-    form = form_;
     param = param_;
 
     memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
@@ -475,19 +473,10 @@ void StructValue::SendToGenerator()
 {
     if (param->Is(Parameter::Delay))
     {
-        /*
-        PARAMETER(Chan::B, Form(Form::Impulse), Parameter::Frequency) = 
-            PARAMETER(Chan::B, Form(Form::Impulse), Parameter::Frequency);
-        float frequency = PARAMETER(Chan::A, Form(Form::Impulse), Parameter::Frequency).Value();
-        Generator::SetParameter(Chan::B, Parameter::Frequency, frequency);
-
-        float value = PARAMETER(ch, form, m_param).Value();
-        Generator::SetParameter(ch, m_param, value);
-        */
     }
     else
     {
-        Generator::SetParameter(CURRENT_CHANNEL, *param, StructValue(form, param).Value());
+        Generator::SetParameter(CURRENT_CHANNEL, *param, StructValue(param).Value());
     }
 }
 

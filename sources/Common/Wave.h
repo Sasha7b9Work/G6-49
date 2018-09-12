@@ -25,8 +25,13 @@ struct Order
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define NUM_DIGITS          5
 
-struct Parameter
+class Form;
+
+class Parameter
 {
+public:
+    friend class Form;
+
     enum E
     {
         Frequency,          ///< Частота
@@ -71,6 +76,8 @@ struct Parameter
     bool Is(Parameter::E e) const { return value == e; };
     /// Возвращает true, если является непосредственно вводимым значением
     bool IsInputValue() const { return !IsComplexParameter(); };
+    /// Возвращает указатель на форму, параметром которой является
+    Form *GetForm() { return form; };
     
     Order order;
     /// Позиция подсвеченного символа
@@ -92,12 +99,15 @@ private:
     Parameter *params;
     /// Число дополнительных параметров. 0, если таковых не имеется
     int numParams;
+    /// Указатель на фрорму, которой принадлежит параметр
+    Form *form; 
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct Form
+class Form
 {
+public:
     enum E
     {
         Sine,       ///< Синус
@@ -194,6 +204,6 @@ public:
 
         static void DrawParameters(Chan chan, int y0);
 
-        static void DrawParameterValue(Chan chan, Parameter *parameter, int x, int y);
+        static void DrawParameterValue(Parameter *parameter, int x, int y);
     };
 };
