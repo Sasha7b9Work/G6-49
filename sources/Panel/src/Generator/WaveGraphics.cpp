@@ -294,7 +294,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         }
         Text::DrawText(x0 + 1, y0, param->Name(), color);
 
-        if(!param->IsPage())
+        if(param->IsInputValue())
         {
             DrawParameterValue(ch, param, x0 + 80, y0);
         }

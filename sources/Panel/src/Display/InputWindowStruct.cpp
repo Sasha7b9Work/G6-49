@@ -133,7 +133,7 @@ void InputWindow::Struct::RegRight()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *InputWindow::Struct::StringValue()
 {
-    if(param->IsPage())
+    if(!param->IsInputValue())
     {
         return "";
     }

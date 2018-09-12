@@ -63,9 +63,16 @@ DEF_CHOICE_5( cForm,                                                            
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_SetParameter()
 {
-    InputWindow::Init();
+    if(PARAM_CURRENT->IsInputValue())
+    {
+        InputWindow::Init();
 
-    ADDITION_PAGE = (Page *)&pInput;
+        ADDITION_PAGE = (Page *)&pInput;
+    }
+    else
+    {
+        FORM_CURRENT->OpenCurrentParameter();
+    }
 }
 
 DEF_BUTTON( bSetParameter,                                                                    //--- мюярпнийх яхцмюкнб - ббеярх гмювемхе оюпюлерпю ---

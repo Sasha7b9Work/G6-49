@@ -52,14 +52,16 @@ struct Parameter
     float MaxValue() const { return max; };
 
     pString Name() const;
-    /// ¬озвращает true, если параметр €вл€етс€ страницей параметров
-    bool IsPage() const;
+    /// ¬озвращает true, если параметр содержит несколько параметров
+    bool IsComplexParameter() const;
 
     bool InNumLockMode() const { return inNumLockMode; };
 
     void SetNumLockMode(bool mode) { inNumLockMode = mode; };
-
+    /// ¬озвращает true, если €вл€етс€ параметром типа e
     bool Is(Parameter::E e) const { return value == e; };
+    /// ¬озвращает true, если €вл€етс€ непосредственно вводимым значением
+    bool IsInputValue() const { return !IsComplexParameter(); };
     
     Order order;
     
@@ -70,6 +72,10 @@ private:
     float max;
     /// ≈сли true, то находимс€ в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
+    /// «десь наход€тс€ дополнительные параметры в случае, если они требуютс€
+    Parameter *params;
+
+    int numParams;
 };
 
 
@@ -101,8 +107,10 @@ struct Form
     void SetNextParameter();
     /// Ќастраивает генератор в соответствии с установленными параметрами
     void TuneGenerator(Chan ch);
-
+    /// ¬озвращает true, если тип формы сигнала соответствует e
     bool Is(Form::E e) const { return e == value; };
+    /// –аскрывает страницу текущего параметра
+    void OpenCurrentParameter();
 
 private:
     /// Ќаходит требуемый параметр. ¬озвращает 0, если такого параметра нет

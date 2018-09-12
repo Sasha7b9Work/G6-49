@@ -95,7 +95,7 @@ pString Register::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Parameter::IsPage() const
+bool Parameter::IsComplexParameter() const
 {
     return MinValue() == -1.0f && MaxValue() == -1.0f;
 }
@@ -231,4 +231,15 @@ void Form::SendParameterToGenerator(Chan ch, Parameter::E p)
         input.Fill(ch, this, param);
         Generator::SetParameter(ch, p, input.Value());
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::OpenCurrentParameter()
+{
+    if(!CurrentParameter()->IsComplexParameter())
+    {
+        return;
+    }
+
+
 }
