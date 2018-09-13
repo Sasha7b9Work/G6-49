@@ -71,7 +71,6 @@ commands[CommandPanel::Number] =
     Interface::CommandEmpty,                    /// SET_DURATION_FALL
     Interface::CommandEmpty,                    /// SET_DURATION_STADY
     Interface::CommandEmpty,                    /// SET_DUTY_FACTOR
-    Interface::CommandCreateWave,               /// SetModulation
     Interface::CommandSetWave,                  /// CREATE_HAND_WAVE
     Interface::CommandSetWave,                  /// SET_HAND_WAVE
     Interface::CommandSetRampForSine,           /// SetRampForSine
