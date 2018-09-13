@@ -26,6 +26,7 @@ struct Order
 #define NUM_DIGITS          5
 
 class Form;
+class Wave;
 
 class Parameter
 {
@@ -127,9 +128,9 @@ public:
         Number
     } value;
 
-    Form(E v = Number) : value(v), currentParam(0)   { };
+    Form(E v = Number) : value(v), wave(0), currentParam(0)   { };
 
-    Form(E v, Parameter *param, int numParams);
+    Form(E v, Parameter *param, int numParams, Wave *w);
     /// ¬озвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// ¬озвращает ссылку на текущий параметр
@@ -148,18 +149,23 @@ public:
     void OpenCurrentParameter();
     /// «акрывает открытый параметр, если таковой имеетс€ и возвращает true в этом случае
     bool CloseOpenedParameter();
+    /// ¬озвращает указатель на родительский Wave
+    Wave *GetWave() { return wave; };
 
 private:
     /// Ќаходит требуемый параметр. ¬озвращает 0, если такого параметра нет
     Parameter *FindParameter(Parameter::E p);
     /// «асыалет параметр в генератор
     void SendParameterToGenerator(Chan ch, Parameter::E p);
+    /// Wave, к которому относитс€ данный Form
+    Wave *wave;
     /// «десь хран€тс€ параметры
     Parameter *params;
     /// —колько всего параметров
     int numParams;
     /// Ќомер текущего параметра в массиве params
     int currentParam;
+
     /// «десь сохран€етс€ указатель на основные параметры в случае раскрыти€ сложного параметра
     Parameter *oldParams;
     /// ќтноситс€ к oldParams
@@ -183,10 +189,12 @@ public:
     int NumberOfForms() const;
 
     Form *GetForm(int i);
-    ///  акому каналу принадлежит сигнал
-    Chan channel;
+
+    Chan GetChannel() const { return channel; };
 
 private:
+    ///  акому каналу принадлежит сигнал
+    Chan channel;
     /// “екуща€ форма сигнала - указывает на номер сигнала в массиве
     int currentForm;
     /// —писок форм, которые могут быть назначены

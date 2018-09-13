@@ -132,7 +132,7 @@ Wave::Wave(Chan ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, Parameter *parameters, int num) : value(v), params(parameters), numParams(num), currentParam(0)
+Form::Form(E v, Parameter *parameters, int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -237,7 +237,7 @@ void Form::OpenCurrentParameter()
 
     if(parent->value == Parameter::ModulationRampSine)
     {
-        //Generator::Ty
+        Generator::TuneChannel(wave->GetChannel());
     }
 }
 
@@ -249,6 +249,7 @@ bool Form::CloseOpenedParameter()
         params = oldParams;
         numParams = oldNumParams;
         currentParam = oldCurrentParams;
+        Generator::TuneChannel(wave->GetChannel());
         return true;
     }
 
