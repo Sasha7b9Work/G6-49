@@ -61,11 +61,6 @@ void AD9952::Init()
 void AD9952::Ramp::SetEnabled(Chan ch, bool enable)
 {
     enabled[ch] = enable;
-
-    WriteToHardware(ch, Register::ARR, 1);
-
-    WriteToHardware(ch, Register::ASF, 0x3fff);
-
     WriteCFR1(ch);
 }
 
@@ -147,7 +142,18 @@ void AD9952::WriteASF(Chan ch)
 
     if(Ramp::enabled[ch])
     {
-        value = 0xffffffff;
+        value = (uint)Ramp::amplitude[ch];
+        uint dur = (uint)Ramp::duration[ch];
+        
+        if(GetBit(dur, 8))
+        {
+            SetBit(value, 14);
+        }
+
+        if(GetBit(dur, 9))
+        {
+            SetBit(value, 15);
+        }
     }
 
     WriteToHardware(ch, Register::ASF, value);
@@ -164,7 +170,7 @@ void AD9952::WriteFTW0(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteARR(Chan ch)
 {
-    WriteToHardware(ch, Register::ARR, 100);
+    WriteToHardware(ch, Register::ARR, (uint8)Ramp::duration[ch]);
 }
 
 
