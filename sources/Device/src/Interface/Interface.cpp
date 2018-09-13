@@ -140,20 +140,24 @@ void Interface::CommandReadData()
 void Interface::CommandSetRampForSine()
 {
     Chan ch = (Chan::E)buffer[1];
-    bool enabled = buffer[2] == 1;
-    AD9952::Ramp::SetEnabled(ch, enabled);
+    bool enabled = GetFloat(&buffer[2]) != 0;
+    //AD9952::Ramp::SetEnabled(ch, enabled);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandSetDurationForRampSine()
 {
     Chan ch = (Chan::E)buffer[1];
-    
+    float duration = (float)((int)GetFloat(&buffer[2]) + 0.5f);
+    //AD9952::Ramp::SetDuration(ch, duration);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandSetAmplitudeRampForSine()
 {
+    Chan ch = (Chan::E)buffer[1];
+    float amplitude = (float)((int)(GetFloat(&buffer[2]) + 0.5f));
+    //AD9952::Ramp::SetAmplitude(ch, amplitude);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -272,7 +276,7 @@ float Interface::GetFloat(uint8 buf[4])
 {
     float result = 0.0f;
     memcpy(&result, buf, 4);
-    return result;
+    return result > 0.0f;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
