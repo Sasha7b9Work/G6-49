@@ -183,28 +183,35 @@ void Form::TuneGenerator(Chan ch)
 
     if(value == Form::Sine && ParameterIsOpened())
     {
-        int current = currentParam;
-        Parameter *param = params;
-        int numPar = numParams;
-
-        currentParam = oldCurrentParams;
-        params = oldParams;
-        numParams = oldNumParams;
-
-        if(CurrentParameter()->value == Parameter::ModulationRampSine)
+        if(ParameterIsOpened())
         {
-            SendParameterToGenerator(ch, Parameter::Frequency);
-            SendParameterToGenerator(ch, Parameter::Amplitude);
-            SendParameterToGenerator(ch, Parameter::Offset);
-            SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+            int current = currentParam;
+            Parameter *param = params;
+            int numPar = numParams;
+
+            currentParam = oldCurrentParams;
+            params = oldParams;
+            numParams = oldNumParams;
+
+            if(CurrentParameter()->value == Parameter::ModulationRampSine)
+            {
+                SendParameterToGenerator(ch, Parameter::Frequency);
+                SendParameterToGenerator(ch, Parameter::Amplitude);
+                SendParameterToGenerator(ch, Parameter::Offset);
+                SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+            }
+
+            currentParam = current;
+            params = param;
+            numParams = numPar;
+
+            SendParameterToGenerator(ch, Parameter::RampSineDuration);
+            SendParameterToGenerator(ch, Parameter::RampSineAmplitude);
         }
-
-        currentParam = current;
-        params = param;
-        numParams = numPar;
-
-        SendParameterToGenerator(ch, Parameter::RampSineDuration);
-        SendParameterToGenerator(ch, Parameter::RampSineAmplitude);
+        else
+        {
+            //SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+        }
     }
     else
     {

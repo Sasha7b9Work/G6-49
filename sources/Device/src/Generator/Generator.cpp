@@ -27,7 +27,6 @@ void Generator::Init()
     {
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
-        SetFormWave(ch, Form::RampMinus);
     }
 }
 
