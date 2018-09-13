@@ -277,6 +277,12 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
     Text::DrawText(22, y0 + 3, form->Name(LANG), Color::FILL);
 
     int num = form->NumParameters();
+
+    if(form->GetParameter(0)->GetParent())
+    {
+        Text::DrawText(x0 + 1, y0, form->GetParameter(0)->GetParent()->Name());
+        y0 += 10;
+    }
     
     for (int i = 0; i < num; i++)
     {

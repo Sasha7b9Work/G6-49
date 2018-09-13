@@ -56,7 +56,8 @@ public:
 
     Parameter(int v, float _min, float _max, pString buf, int8 pos, Order o, Parameter *param = 0, 
         int num = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') :
-        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num) 
+        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num),
+        parent(0)
     {
         strcpy(buffer, buf);
     };
@@ -82,6 +83,8 @@ public:
     bool IsInputValue() const { return !IsComplexParameter(); };
     /// Возвращает указатель на форму, параметром которой является
     Form *GetForm() { return form; };
+    /// Возвращает адрес родительского параметра
+    Parameter *GetParent() { return parent; };
     
     Order order;
     /// Позиция подсвеченного символа
@@ -105,6 +108,8 @@ private:
     int numParams;
     /// Указатель на фрорму, которой принадлежит параметр
     Form *form;
+    /// Если этот параметр вложенный, то здесь адрес родителя
+    Parameter *parent;
 };
 
 

@@ -223,6 +223,8 @@ void Form::OpenCurrentParameter()
     oldNumParams = numParams;
     oldCurrentParams = currentParam;
 
+    Parameter *parent = CurrentParameter();
+
     numParams = CurrentParameter()->numParams;
     params = CurrentParameter()->params;
     currentParam = 0;
@@ -230,6 +232,7 @@ void Form::OpenCurrentParameter()
     for(int i = 0; i < numParams; i++)
     {
         params[i].form = this;
+        params[i].parent = parent;
     }
 }
 
