@@ -51,22 +51,23 @@ void Display::Update()
     Menu::Draw();
     DEBUG_POINT;
     PageRegisters::Draw();
-
+    DEBUG_POINT
     InputWindow::Draw();
-
+    DEBUG_POINT
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
-
+    DEBUG_POINT
     FrequencyMeter::Draw();
-
+    DEBUG_POINT
     Hint::Draw();
-
+    DEBUG_POINT
     Statistics::Show();
-
+    DEBUG_POINT
     Console::Draw();
-
+    DEBUG_POINT
     CPU::Keyboard::Draw();
-
+    DEBUG_POINT
     Painter::EndScene();
-
+    DEBUG_POINT
     Statistics::EndFrame();
+    DEBUG_POINT
 }

@@ -117,6 +117,12 @@ private:
 
     static void DrawDutyFactor(int x, int y);
 
+    static void DrawModulationRampSine(int x, int y);
+
+    static void DrawRampSineDuration(int x, int y);
+
+    static void DrawRampSineAmplitude(int x, int y);
+
     static Parameter *param;
 
     static StructValue m_iws;

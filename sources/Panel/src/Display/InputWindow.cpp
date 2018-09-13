@@ -42,8 +42,13 @@ void InputWindow::Draw()
 
     Painter::FillRegion(x, y, width, height, Color::BACK);
     Painter::DrawRectangle(x, y, width, height, Color::FILL);
-    
-    static const pFuncVII func[Parameter::Number] =
+
+    struct StructFunc
+    {
+        pFuncVII func;
+        StructFunc(pFuncVII f) : func(f) {};
+    }
+    func[Parameter::Number] =
     {
         DrawFrequency,
         DrawPeriod,
@@ -58,7 +63,10 @@ void InputWindow::Draw()
         DrawDurationRise,
         DrawDurationFall,
         DrawDurationStady,
-        DrawDutyFactor
+        DrawDutyFactor,
+        DrawModulationRampSine,
+        DrawRampSineDuration,
+        DrawRampSineAmplitude
     };
 
     x += 40;
@@ -66,7 +74,7 @@ void InputWindow::Draw()
 
     DrawDigits(x, y);
 
-    func[param->value](x + 10, y + 10);
+    func[param->value].func(x + 10, y + 10);
 
     if (IN_NUM_LOCK_MODE)
     {
@@ -201,6 +209,21 @@ void InputWindow::DrawDutyRatio(int, int)
 void InputWindow::DrawDuration(int, int)
 {
 
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawModulationRampSine(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawRampSineDuration(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawRampSineAmplitude(int, int)
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

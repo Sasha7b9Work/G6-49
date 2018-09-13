@@ -4,8 +4,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static Parameter paramsSineModulationA[] =
 {
-    Parameter(Parameter::RampSineAmplitude, 0.0f, 65535.0f, "65535", 1, Order::Kilo),
-    Parameter(Parameter::RampSineDuration,  0.0f, 255.0f,   "25500", 2, Order::One)
+    Parameter(Parameter::RampSineAmplitude, 0.0f, 16383.0f, "16383", 1, Order::Kilo),
+    Parameter(Parameter::RampSineDuration,  0.0f, 1023.0f,  "10230", 0, Order::Kilo)
 };
 
 static Parameter params_SineA[Parameter::Number] =
@@ -66,8 +66,8 @@ static Form formsA[] =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static Parameter paramsSineModulationB[] =
 {
-    Parameter(Parameter::Amplitude, 0.0f, 65535.0f, "65535", 1, Order::Kilo),
-    Parameter(Parameter::Duration,  0.0f, 255.0f,   "25500", 2, Order::One)
+    Parameter(Parameter::RampSineAmplitude, 0.0f, 16383.0f, "16383", 1, Order::Kilo),
+    Parameter(Parameter::RampSineDuration,  0.0f, 1023.0f,  "10230", 0, Order::Kilo)
 };
 
 static Parameter params_SineB[Parameter::Number] =
