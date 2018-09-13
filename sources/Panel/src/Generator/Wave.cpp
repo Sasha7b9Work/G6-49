@@ -181,7 +181,7 @@ void Form::TuneGenerator(Chan ch)
 {
     Generator::SetFormWave(ch, *this);
 
-    if(value == Form::Sine && ParameterIsOpened())
+    if(value == Form::Sine)
     {
         if(ParameterIsOpened())
         {
@@ -210,7 +210,10 @@ void Form::TuneGenerator(Chan ch)
         }
         else
         {
-            //SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+            SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+            SendParameterToGenerator(ch, Parameter::Frequency);
+            SendParameterToGenerator(ch, Parameter::Amplitude);
+            SendParameterToGenerator(ch, Parameter::Offset);
         }
     }
     else

@@ -150,50 +150,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>143</LineNumber>
+          <LineNumber>144</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134234008</Address>
+          <Address>134233990</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Interface\Interface.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Interface\Interface.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/Interface/Interface.cpp\143</Expression>
+          <Expression>\\Generator\src/Interface/Interface.cpp\144</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>150</LineNumber>
+          <LineNumber>98</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134234044</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Interface\Interface.cpp</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\Menu\Pages\PageSignals.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/Interface/Interface.cpp\150</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>158</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234112</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Interface\Interface.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/Interface/Interface.cpp\158</Expression>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>
@@ -613,7 +597,7 @@
 
   <Group>
     <GroupName>Generator</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
