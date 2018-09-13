@@ -52,31 +52,31 @@ static const struct FuncInterface
 commands[CommandPanel::Number] =
 {
     Interface::CommandEmpty,
-    Interface::CommandEnable,          /// ENABLE_CHANNEL
-    Interface::CommandFormWave,        /// SET_FORM_WAVE
-    Interface::CommandParameter,       /// SET_FREQUENCY
-    Interface::CommandParameter,       /// SET_AMPLITUDE
-    Interface::CommandParameter,       /// SET_OFFSET
-    Interface::CommandParameter,       /// SET_DURATION
-    Interface::CommandParameter,       /// SET_DUTYRATIO
-    Interface::CommandParameter,       /// SET_PHASE
-    Interface::CommandReset,           /// RUN_RESET
-    Interface::CommandModeDebug,       /// MODE_DEBUG
-    Interface::CommandParameter,       /// SET_DELAY
-    Interface::CommandWriteRegister,   /// WRITE_REGISTER
-    Interface::CommandReadData,        /// READ_DATA
-    Interface::CommandEmpty,
-    Interface::CommandEmpty,
-    Interface::CommandEmpty,
-    Interface::CommandEmpty,
-    Interface::CommandEmpty,
-    Interface::CommandEmpty,
-    Interface::CommandCreateWave,
-    Interface::CommandSetWave,
-    Interface::CommandSetRampForSine,
-    Interface::CommandSetDurationForRampSine,
-    Interface::CommandSetAmplitudeRampForSine,
-    Interface::CommandEmpty
+    Interface::CommandEnable,                   /// ENABLE_CHANNEL
+    Interface::CommandFormWave,                 /// SET_FORM_WAVE
+    Interface::CommandParameter,                /// SET_FREQUENCY
+    Interface::CommandParameter,                /// SET_AMPLITUDE
+    Interface::CommandParameter,                /// SET_OFFSET
+    Interface::CommandParameter,                /// SET_DURATION
+    Interface::CommandParameter,                /// SET_DUTYRATIO
+    Interface::CommandParameter,                /// SET_PHASE
+    Interface::CommandReset,                    /// RUN_RESET
+    Interface::CommandModeDebug,                /// MODE_DEBUG
+    Interface::CommandParameter,                /// SET_DELAY
+    Interface::CommandWriteRegister,            /// WRITE_REGISTER
+    Interface::CommandReadData,                 /// READ_DATA
+    Interface::CommandEmpty,                    /// SET_DEPTH_MODULATION
+    Interface::CommandEmpty,                    /// SET_POLARITY
+    Interface::CommandEmpty,                    /// SET_DURATION_RISE
+    Interface::CommandEmpty,                    /// SET_DURATION_FALL
+    Interface::CommandEmpty,                    /// SET_DURATION_STADY
+    Interface::CommandEmpty,                    /// SET_DUTY_FACTOR
+    Interface::CommandCreateWave,               /// SetModulation
+    Interface::CommandSetWave,                  /// CREATE_HAND_WAVE
+    Interface::CommandSetWave,                  /// SET_HAND_WAVE
+    Interface::CommandSetRampForSine,           /// SetRampForSine
+    Interface::CommandSetDurationForRampSine,   /// SetRampSineDuration
+    Interface::CommandSetAmplitudeRampForSine   /// SetRampSineAmplitude
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
