@@ -16,7 +16,7 @@ public:
     static void SetAmplitude(Chan ch, float amplitude);
 
     /// ‘ункции дл€ модул€ции "пилой"
-    class Shape
+    class Ramp
     {
     public:
         /// ”становить/отменить модулирование синусоиды сигналом "пилы"

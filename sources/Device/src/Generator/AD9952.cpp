@@ -25,11 +25,11 @@ static SPI_HandleTypeDef hSPI3 =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
-bool AD9952::Shape::enabled[Chan::Number] = {false, false};
+bool AD9952::Ramp::enabled[Chan::Number] = {false, false};
 
-float AD9952::Shape::duration[Chan::Number] = {10e-6f, 10e-6f};
+float AD9952::Ramp::duration[Chan::Number] = {10e-6f, 10e-6f};
 
-float AD9952::Shape::amplitude[Chan::Number] = {5.0f, 5.0f};
+float AD9952::Ramp::amplitude[Chan::Number] = {5.0f, 5.0f};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ void AD9952::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Shape::SetEnabled(Chan ch, bool enable)
+void AD9952::Ramp::SetEnabled(Chan ch, bool enable)
 {
     enabled[ch] = enable;
 
@@ -70,7 +70,7 @@ void AD9952::Shape::SetEnabled(Chan ch, bool enable)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Shape::SetDuration(Chan ch, float value)
+void AD9952::Ramp::SetDuration(Chan ch, float value)
 {
     duration[ch] = value;
     WriteRegister(ch, Register::ARR);
@@ -78,7 +78,7 @@ void AD9952::Shape::SetDuration(Chan ch, float value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Shape::SetAmplitude(Chan ch, float value)
+void AD9952::Ramp::SetAmplitude(Chan ch, float value)
 {
     amplitude[ch] = value;
     WriteRegister(ch, Register::ASF);
@@ -124,7 +124,7 @@ void AD9952::WriteCFR1(Chan ch)
     }
     SetBit(value, 9);       // Однонаправленный режим
     SetBit(value, 13);
-    if(Shape::enabled[ch])
+    if(Ramp::enabled[ch])
     {
         SetBit(value, 24);  // Устанавливаем режим "пилы"
     }
@@ -145,7 +145,7 @@ void AD9952::WriteASF(Chan ch)
 {
     uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
 
-    if(Shape::enabled[ch])
+    if(Ramp::enabled[ch])
     {
         value = 0xffffffff;
     }

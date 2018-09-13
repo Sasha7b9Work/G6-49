@@ -42,6 +42,10 @@ public:
     static void CommandSetDurationForRampSine();
 
     static void CommandSetAmplitudeRampForSine();
+
+private:
+    /// Возвращает значение типа float, хранящееся в массиве
+    static float GetFloat(uint8 buffer[4]);
     /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
 

@@ -141,12 +141,14 @@ void Interface::CommandSetRampForSine()
 {
     Chan ch = (Chan::E)buffer[1];
     bool enabled = buffer[2] == 1;
-    AD9952::Shape::SetEnabled(ch, enabled);
+    AD9952::Ramp::SetEnabled(ch, enabled);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandSetDurationForRampSine()
 {
+    Chan ch = (Chan::E)buffer[1];
+    
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -266,13 +268,19 @@ void Interface::CommandWriteRegister()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+float Interface::GetFloat(uint8 buf[4])
+{
+    float result = 0.0f;
+    memcpy(&result, buf, 4);
+    return result;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CommandParameter()
 {
     Chan ch = (Chan::E)buffer[1];
     CommandPanel command = (CommandPanel::E)buffer[0];
-    float value = 0.0f;
-    memcpy(&value, &buffer[2], 4);
-    Generator::SetParameter(ch, command, value);
+    Generator::SetParameter(ch, command, GetFloat(&buffer[2]));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
