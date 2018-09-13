@@ -10,24 +10,21 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name(Language lang) const
 {
-    struct StrName
+    struct StructName
     {
-        pString nameRu;
-        pString nameEn;
-        StrName(pString nRu, pString nEn) : nameRu(nRu), nameEn(nEn) { };
-        pString Name(Language lang) { return lang == Language::RU ? nameRu : nameEn; }
+        pString name;
+        StructName(pString n) : name(n) { };
+    }
+    names[Form::Number][2] =
+    {
+        {"—»Õ”—",    "SINE"},
+        {"œ»À¿+",    "RAMP+"},
+        {"œ»À¿-",    "RAMP-"},
+        {"Ã≈¿Õƒ–",   "MEANDER"},
+        {"»Ãœ”À‹—",  "IMPULSE"}
     };
 
-    static StrName names[Form::Number] =
-    {
-        StrName("—»Õ”—",    "SINE"),
-        StrName("œ»À¿+",    "RAMP+"),
-        StrName("œ»À¿-",    "RAMP-"),
-        StrName("Ã≈¿Õƒ–",   "MEANDER"),
-        StrName("»Ãœ”À‹—",  "IMPULSE")
-    };
-
-    return names[value].Name(lang);
+    return names[value][lang].name;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
