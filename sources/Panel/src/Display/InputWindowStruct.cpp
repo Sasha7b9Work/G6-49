@@ -268,7 +268,12 @@ void StructValue::ShiftToLeft()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString Order::Name() const
 {
-    static const char *names[Order::Number][2] =
+    struct StructName
+    {
+        pString name;
+        StructName(pString n) : name(n) {};
+    }
+    names[Order::Number][2] =
     {
         {"ם",   "n"},
         {"לך",  "u"},
@@ -278,7 +283,7 @@ pString Order::Name() const
         {"ּ",   "M"}
     };
 
-    return names[value][LANG];
+    return names[value][LANG].name;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

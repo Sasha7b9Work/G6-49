@@ -78,32 +78,31 @@ pString Parameter::Name() const
 {
     static const struct StructName
     {
-        pString nameRU;
-        pString nameEN;
-        StructName(pString nRU, pString nEN) : nameRU(nRU), nameEN(nEN) { };
+        pString name;
+        StructName(pString n) : name(n) { };
     }
-    nameParameter[Parameter::Number] =
+    nameParameter[Parameter::Number][2] =
     {
-        StructName("×ÀÑÒÎÒÀ",        "FREQUENCY"),
-        StructName("ÏÅĞÈÎÄ",         "PERIOD"),
-        StructName("ĞÀÇÌÀÕ",         "AMPLITUDE"),
-        StructName("ÑÌÅÙÅÍÈÅ",       "OFFSET"),
-        StructName("ÄËÈÒ.",          "DURATION"),
-        StructName("ÑÊÂÀÆÍÎÑÒÜ",     "DUTY RATIO"),
-        StructName("ÔÀÇÀ",           "PHASE"),
-        StructName("ÇÀÄÅĞÆÊÀ",       "DELAY"),
-        StructName("ÊÎİÔÔ. ÌÎÄ.",    "MOD. INDEX"),
-        StructName("ÏÎËßĞÍÎÑÒÜ",     "POLARITY"),
-        StructName("ÂĞ. ÍÀĞÀÑÒÀÍÈß", "BUILD-UP TIME"),
-        StructName("ÂĞ. ÑÏÀÄÀ",      "RELEASING TIME"),
-        StructName("ÂĞ. ÏÈÊÀ",       "PEAK TIME"),
-        StructName("ÊÎİÔÔ. ÇÀÏÎËÍ.", "DUTY FACTOR"),
-        StructName("Ìîäóëÿöèÿ",      "Modulation"),
-        StructName("Ñêîğîñòü",       "Speed"),
-        StructName("Ğàçìàõ",         "Amplitude")
+        {"×ÀÑÒÎÒÀ",        "FREQUENCY"},
+        {"ÏÅĞÈÎÄ",         "PERIOD"},
+        {"ĞÀÇÌÀÕ",         "AMPLITUDE"},
+        {"ÑÌÅÙÅÍÈÅ",       "OFFSET"},
+        {"ÄËÈÒ.",          "DURATION"},
+        {"ÑÊÂÀÆÍÎÑÒÜ",     "DUTY RATIO"},
+        {"ÔÀÇÀ",           "PHASE"},
+        {"ÇÀÄÅĞÆÊÀ",       "DELAY"},
+        {"ÊÎİÔÔ. ÌÎÄ.",    "MOD. INDEX"},
+        {"ÏÎËßĞÍÎÑÒÜ",     "POLARITY"},
+        {"ÂĞ. ÍÀĞÀÑÒÀÍÈß", "BUILD-UP TIME"},
+        {"ÂĞ. ÑÏÀÄÀ",      "RELEASING TIME"},
+        {"ÂĞ. ÏÈÊÀ",       "PEAK TIME"},
+        {"ÊÎİÔÔ. ÇÀÏÎËÍ.", "DUTY FACTOR"},
+        {"Ìîäóëÿöèÿ",      "Modulation"},
+        {"Ñêîğîñòü",       "Speed"},
+        {"Ğàçìàõ",         "Amplitude"}
     };
 
-    return LANG_RU ? nameParameter[value].nameRU : nameParameter[value].nameEN;
+    return nameParameter[value][LANG].name;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -307,9 +306,14 @@ char *Parameter::GetStringValue() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Parameter::NameUnit(char buffer[10])
+pString Parameter::NameUnit(char buf[10])
 {
-    static const pString names[][2] =
+    struct StructName
+    {
+        pString name;
+        StructName(pString n) : name(n) {};
+    }
+    names[Parameter::Number][2] =
     {
         {"Ãö",  "Hz"},
         {"ñ",   "s"},
@@ -318,10 +322,19 @@ pString Parameter::NameUnit(char buffer[10])
         {"ñ",   "s"},
         {"",    ""},
         {"o",   "o"},
-        {"ñ",   "s"}
+        {"ñ",   "s"},
+        {"",    ""},
+        {"",    ""},
+        {"",    ""},
+        {"",    ""},
+        {"",    ""},
+        {"",    ""},
+        {"",    ""},
+        {"",    ""},
+        {"",    ""},
     };
 
-    sprintf(buffer, "%s%s", order.Name(), names[value][LANG]);
+    sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);
 
-    return buffer;
+    return buf;
 }
