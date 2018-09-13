@@ -42,34 +42,41 @@ static uint8 buffer[LENGTH_SPI_BUFFER];         ///< Буфер для принимаемых коман
 static uint8 trans[LENGTH_SPI_BUFFER];     
 uint  Interface::freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
-const Interface::FuncInterface Interface::commands[CommandPanel::Number] =
+
+static const struct FuncInterface
 {
-    CommandEmpty,
-    CommandEnable,          /// ENABLE_CHANNEL
-    CommandFormWave,        /// SET_FORM_WAVE
-    CommandParameter,       /// SET_FREQUENCY
-    CommandParameter,       /// SET_AMPLITUDE
-    CommandParameter,       /// SET_OFFSET
-    CommandParameter,       /// SET_DURATION
-    CommandParameter,       /// SET_DUTYRATIO
-    CommandParameter,       /// SET_PHASE
-    CommandReset,           /// RUN_RESET
-    CommandModeDebug,       /// MODE_DEBUG
-    CommandParameter,       /// SET_DELAY
-    CommandWriteRegister,   /// WRITE_REGISTER
-    CommandReadData,        /// READ_DATA
-    CommandEmpty,
-    CommandEmpty,
-    CommandEmpty,
-    CommandEmpty,
-    CommandEmpty,
-    CommandEmpty,
-    CommandCreateWave,
-    CommandSetWave,
-    CommandSetRampForSine,
-    CommandSetDurationForRampSine,
-    CommandSetAmplitudeRampForSine,
-    CommandEmpty
+    typedef void(*pFuncInterfaceVV)();
+    pFuncInterfaceVV func;
+    FuncInterface(pFuncInterfaceVV f) : func(f) {};
+}
+commands[CommandPanel::Number] =
+{
+    Interface::CommandEmpty,
+    Interface::CommandEnable,          /// ENABLE_CHANNEL
+    Interface::CommandFormWave,        /// SET_FORM_WAVE
+    Interface::CommandParameter,       /// SET_FREQUENCY
+    Interface::CommandParameter,       /// SET_AMPLITUDE
+    Interface::CommandParameter,       /// SET_OFFSET
+    Interface::CommandParameter,       /// SET_DURATION
+    Interface::CommandParameter,       /// SET_DUTYRATIO
+    Interface::CommandParameter,       /// SET_PHASE
+    Interface::CommandReset,           /// RUN_RESET
+    Interface::CommandModeDebug,       /// MODE_DEBUG
+    Interface::CommandParameter,       /// SET_DELAY
+    Interface::CommandWriteRegister,   /// WRITE_REGISTER
+    Interface::CommandReadData,        /// READ_DATA
+    Interface::CommandEmpty,
+    Interface::CommandEmpty,
+    Interface::CommandEmpty,
+    Interface::CommandEmpty,
+    Interface::CommandEmpty,
+    Interface::CommandEmpty,
+    Interface::CommandCreateWave,
+    Interface::CommandSetWave,
+    Interface::CommandSetRampForSine,
+    Interface::CommandSetDurationForRampSine,
+    Interface::CommandSetAmplitudeRampForSine,
+    Interface::CommandEmpty
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -311,8 +318,7 @@ void Interface::ReceiveCallback()
 {
     if (buffer[0] < CommandPanel::Number)
     {
-        pFuncInterfaceVV f = commands[buffer[0]].func;
-        f();
+        commands[buffer[0]].func();
         if(freqForSend != MAX_UINT)
         {
             trans[0] = CommandGenerator::COM_FREQ_MEASURE;

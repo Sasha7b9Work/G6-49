@@ -17,8 +17,6 @@ public:
 
     static void ReceiveCallback();
 
-private:
-
     static void CommandEmpty();
 
     static void CommandEnable();
@@ -46,16 +44,6 @@ private:
     static void CommandSetAmplitudeRampForSine();
     /// Ќенулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
-
-    typedef void(*pFuncInterfaceVV)();
-
-    struct FuncInterface
-    {
-        pFuncInterfaceVV func;
-        FuncInterface(pFuncInterfaceVV f) : func(f) {};
-    };
-    /// «десь хран€тс€ обработчики команд
-    static const FuncInterface commands[CommandPanel::Number];
 
     static uint timeLastReceive;
 };

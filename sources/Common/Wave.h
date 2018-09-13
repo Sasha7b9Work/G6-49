@@ -88,6 +88,8 @@ public:
     Form *GetForm() { return form; };
     /// Возвращает адрес родительского параметра
     Parameter *GetParent() { return parent; };
+    /// Возвращает true, если сложный и открыт
+    bool IsOpened();
 
     pString NameUnit(char buffer[10]);
    
@@ -155,10 +157,10 @@ public:
     bool CloseOpenedParameter();
     /// Возвращает указатель на родительский Wave
     Wave *GetWave() { return wave; };
-
-private:
     /// Возвращает true, если текущий параметр сложный и открыт.
     bool ParameterIsOpened() const;
+
+private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
     Parameter *FindParameter(Parameter::E p);
     /// Засыалет параметр в генератор

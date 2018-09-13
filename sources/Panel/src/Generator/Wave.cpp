@@ -196,13 +196,13 @@ void Form::TuneGenerator(Chan ch)
             SendParameterToGenerator(ch, Parameter::Frequency);
             SendParameterToGenerator(ch, Parameter::Amplitude);
             SendParameterToGenerator(ch, Parameter::Offset);
+            SendParameterToGenerator(ch, Parameter::ModulationRampSine);
         }
 
         currentParam = current;
         params = param;
         numParams = numPar;
 
-        SendParameterToGenerator(ch, Parameter::ModulationRampSine);
         SendParameterToGenerator(ch, Parameter::RampSineDuration);
         SendParameterToGenerator(ch, Parameter::RampSineAmplitude);
     }
@@ -245,6 +245,11 @@ void Form::OpenCurrentParameter()
         return;
     }
 
+    if(CurrentParameter()->value == Parameter::ModulationRampSine)
+    {
+        set.sineRampModulationEnabled = true;
+    }
+
     oldParams = params;
     oldNumParams = numParams;
     oldCurrentParams = currentParam;
@@ -275,6 +280,10 @@ bool Form::CloseOpenedParameter()
         params = oldParams;
         numParams = oldNumParams;
         currentParam = oldCurrentParams;
+        if(CurrentParameter()->value == Parameter::ModulationRampSine)
+        {
+            set.sineRampModulationEnabled = false;
+        }
         Generator::TuneChannel(wave->GetChannel());
         return true;
     }
@@ -291,6 +300,10 @@ bool Form::ParameterIsOpened() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float Parameter::GetValue() const
 {
+    if(value == Parameter::ModulationRampSine)
+    {
+        return set.sineRampModulationEnabled ? 1.0f : 0.0f;
+    }
     StructValue input((Parameter *)this);
     return input.Value();
 }
@@ -334,4 +347,10 @@ pString Parameter::NameUnit(char buf[10])
     sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);
 
     return buf;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Parameter::IsOpened()
+{
+    return IsComplexParameter() && GetForm()->ParameterIsOpened();
 }
