@@ -1927,26 +1927,6 @@
               <FilePath>.\src\Menu\Pages\PageService.h</FilePath>
             </File>
             <File>
-              <FileName>PageSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageSettings2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings2.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSettings2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSettings2.h</FilePath>
-            </File>
-            <File>
               <FileName>PageFrequencyCounter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter.cpp</FilePath>
@@ -1995,6 +1975,26 @@
               <FileName>PageFrequencyCounter3.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter3.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals2.h</FilePath>
             </File>
           </Files>
         </Group>

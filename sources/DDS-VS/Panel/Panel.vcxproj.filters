@@ -150,12 +150,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings2.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp">
       <Filter>Display</Filter>
     </ClCompile>
@@ -260,6 +254,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp">
       <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp">
+      <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals2.cpp">
+      <Filter>Menu\Pages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -369,12 +369,6 @@
       <Filter>Menu\Pages</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings2.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Display\Painter.h">
@@ -529,6 +523,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Generator\Signals.h">
       <Filter>Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h">
+      <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
+      <Filter>Menu\Pages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

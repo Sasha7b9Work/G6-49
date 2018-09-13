@@ -104,7 +104,7 @@ private:
     /// Число дополнительных параметров. 0, если таковых не имеется
     int numParams;
     /// Указатель на фрорму, которой принадлежит параметр
-    Form *form; 
+    Form *form;
 };
 
 
@@ -153,6 +153,12 @@ private:
     int numParams;
     /// Номер текущего параметра в массиве params
     int currentParam;
+    /// Здесь сохраняется указатель на основные параметры в случае раскрытия сложного параметра
+    Parameter *oldParams;
+    /// Относится к oldParams
+    int oldNumParams;
+    /// Относится к oldParams
+    int oldCurrentParams;
 };
 
 

@@ -101,16 +101,7 @@ pString Parameter::Name() const
         StructName("Модуляция",      "Modulation")
     };
 
-    bool cond = LANG_RU;
-    if(cond)
-    {
-        const __IO Parameter::E *pointer = &value;
-        int index = (int)value;
-        StructName str = nameParameter[index];
-        return (char *)str.nameRU;
-    }
-    
-    return nameParameter[value].nameEN;
+    return LANG_RU ? nameParameter[value].nameRU : nameParameter[value].nameEN;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,7 +219,18 @@ void Form::OpenCurrentParameter()
         return;
     }
 
+    oldParams = params;
+    oldNumParams = numParams;
+    oldCurrentParams = currentParam;
 
+    params = CurrentParameter()->params;
+    numParams = CurrentParameter()->numParams;
+    currentParam = 0;
+
+    for(int i = 0; i < numParams; i++)
+    {
+        params[i].form = this;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
