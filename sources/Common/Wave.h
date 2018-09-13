@@ -48,7 +48,7 @@ public:
         DurationFall,       ///< Длительность спада
         DurationStady,      ///< Длительность установившего значения
         DutyFactor,         ///< Коэффициент заполнения
-        Modulation,         ///< Модуляция
+        ModulationRampSine, ///< Модуляция пилой для синусоиды
         Number
     } value;
 

@@ -106,7 +106,6 @@ public:
 
     static void Save();
     static void Load(bool _default = false);
-    static void TuneGenerator(Chan ch);
 };
 
 #pragma pack(pop)

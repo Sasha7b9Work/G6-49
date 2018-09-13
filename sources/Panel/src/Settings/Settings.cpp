@@ -110,17 +110,8 @@ void Settings::Load(bool _default)
         CPU::FLASH_::LoadSettings();
     }
 
-    TuneGenerator(Chan::A);
-    TuneGenerator(Chan::B);
+    Generator::TuneChannel(Chan::A);
+    Generator::TuneChannel(Chan::B);
     
     Painter::LoadPalette();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Settings::TuneGenerator(Chan ch)
-{
-    Generator::EnableChannel(ch, CHANNEL_ENABLED(ch));
-    Form *form = FORM(ch);
-
-    form->TuneGenerator(ch);
 }

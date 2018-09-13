@@ -5,6 +5,8 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "FrequencyMeter/FrequencyMeter.h"
+#include "Settings/Settings.h"
+#include "Signals.h"
 #include "Command.h"
 #include "structs.h"
 
@@ -34,10 +36,10 @@ bool Generator::ChannelEnabled(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadRegister(Register reg, uint64 value)
 {
-    INIT_BIT_SET_64(set, value);
+    INIT_BIT_SET_64(bitSet, value);
 
-    uint8 buffer[10] = {CommandPanel::WRITE_REGISTER, (uint8)reg,   set.byte0, set.byte1, set.byte2, set.byte3,
-                                                                    set.byte4, set.byte5, set.byte6, set.byte7};
+    uint8 buffer[10] = {CommandPanel::WRITE_REGISTER, (uint8)reg,   bitSet.byte0, bitSet.byte1, bitSet.byte2, bitSet.byte3,
+                                                                    bitSet.byte4, bitSet.byte5, bitSet.byte6, bitSet.byte7};
     SendToInterface(buffer, 10);
 }
 
@@ -160,4 +162,10 @@ void Generator::SendToInterface(uint8 *data, int size)
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::TuneChannel(Chan ch)
+{
+    EnableChannel(ch, CHANNEL_ENABLED(ch));
 
+    FORM(ch)->TuneGenerator(ch);
+}

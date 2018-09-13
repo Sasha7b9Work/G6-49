@@ -30,6 +30,8 @@ public:
 
     static void LoadRegister(Register reg, uint64 value);
 
+    static void TuneChannel(Chan ch);
+
     static void EmptyCommand();
 
 private:

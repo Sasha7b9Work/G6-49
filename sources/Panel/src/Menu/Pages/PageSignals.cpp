@@ -5,6 +5,7 @@
 #include "AddPageInput.h"
 #include "PageSignals.h"
 #include "Generator/Signals.h"
+#include "Generator/Generator.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +45,7 @@ void OnPress_Form(bool)
 
     parameters.form = FORM_CURRENT;
 
-    Settings::TuneGenerator(CURRENT_CHANNEL);
+    Generator::TuneChannel(CURRENT_CHANNEL);
 }
 
 DEF_CHOICE_5( cForm,                                                                                              //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘Œ–Ã¿ ---

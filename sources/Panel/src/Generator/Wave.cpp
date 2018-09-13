@@ -234,6 +234,25 @@ void Form::OpenCurrentParameter()
         params[i].form = this;
         params[i].parent = parent;
     }
+
+    if(parent->value == Parameter::ModulationRampSine)
+    {
+        //Generator::Ty
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Form::CloseOpenedParameter()
+{
+    if (params[0].parent)
+    {
+        params = oldParams;
+        numParams = oldNumParams;
+        currentParam = oldCurrentParams;
+        return true;
+    }
+
+    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -248,18 +267,4 @@ char *Parameter::GetStringValue() const
 {
     StructValue input((Parameter *)this);
     return input.StringValue();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Form::CloseOpenedParameter()
-{
-    if(params[0].parent)
-    {
-        params = oldParams;
-        numParams = oldNumParams;
-        currentParam = oldCurrentParams;
-        return true;
-    }
-
-    return false;
 }
