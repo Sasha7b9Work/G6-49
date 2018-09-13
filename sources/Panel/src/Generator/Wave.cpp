@@ -223,8 +223,8 @@ void Form::OpenCurrentParameter()
     oldNumParams = numParams;
     oldCurrentParams = currentParam;
 
-    params = CurrentParameter()->params;
     numParams = CurrentParameter()->numParams;
+    params = CurrentParameter()->params;
     currentParam = 0;
 
     for(int i = 0; i < numParams; i++)
