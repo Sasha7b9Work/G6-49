@@ -1,8 +1,4 @@
-#ifdef STM32F207xx
-#include <stm32f2xx.h>
-#else
 #include <stm32f4xx.h>
-#endif
 #include "Hardware/CPU.h"
 #include "Interface/Interface.h"
 #include "Utils/Debug.h"

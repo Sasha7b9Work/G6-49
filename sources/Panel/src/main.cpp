@@ -25,6 +25,8 @@ int main()
     Timer::PauseOnTime(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
 
     Settings::Load();
+
+    Menu::Init();
        
     Generator::EmptyCommand();
 

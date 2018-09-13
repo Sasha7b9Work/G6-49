@@ -36,7 +36,7 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::OnPress_Form(bool)
+void OnPress_Form(bool)
 {
     WAVE_CURRENT.SetNextForm();
 
@@ -56,7 +56,7 @@ DEF_CHOICE_5( cForm,                                                            
     FORM_RU(Form::RampMinus),     FORM_EN(Form::RampMinus),     "Убывающая пила.",      "Wrecking saw.",
     FORM_RU(Form::Meander),       FORM_EN(Form::Meander),       "Меандр.",              "Meander.",
     FORM_RU(Form::Impulse),       FORM_EN(Form::Impulse),       "Треугольник.",         "Triangle.",
-    numForm, pSignals, FuncActive,     PageSignals::OnPress_Form, FuncDraw
+    numForm, pSignals, FuncActive, OnPress_Form, FuncDraw
 )
 
 
@@ -101,3 +101,10 @@ DEF_PAGE_4
     bSetParameter,  ///< НАСТРОЙКИ СИГНАЛОВ - ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА
     Page_Settings, 0, FuncActive, FuncPress, FuncOnKey
 )
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void PageSignals::Init()
+{
+    OnPress_Channel(true);
+}
+

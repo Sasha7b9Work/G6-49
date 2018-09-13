@@ -13,6 +13,8 @@ extern const Page *pages[NUM_PAGES];
 class Menu
 {
 public:
+
+    static void Init();
         
     static void Update();
 

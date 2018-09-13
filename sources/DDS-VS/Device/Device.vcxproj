@@ -77,8 +77,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\Device\src;..\..\Device\src\libs;C:\Keil_v5\ARM\ARMCC\include;$(IncludePath)</IncludePath>
-    <OutDir>.\x64\Debug</OutDir>
+    <IncludePath>D:\Projects\stm32\DDS\sources\common\_VS;..\..\Device\src;..\..\Device\src\libs;D:\Projects\stm32\DDS\sources\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;D:\Projects\stm32\DDS\sources\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;D:\Projects\stm32\DDS\sources\Device\src\libs\HAL;D:\Projects\stm32\DDS\sources\common</IncludePath>
+    <OutDir>.\x64\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
