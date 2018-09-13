@@ -39,16 +39,17 @@ uint8 *Display::GetBuffer()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update()
 {
+    DEBUG_POINT;
     Statistics::BeginFrame();
-
+    DEBUG_POINT;
     Painter::BeginScene(Color::BACK);
-
+    DEBUG_POINT;
     Wave::Graphics::Draw(Chan::A);
-
+    DEBUG_POINT
     Wave::Graphics::Draw(Chan::B);
-
+    DEBUG_POINT;
     Menu::Draw();
-
+    DEBUG_POINT;
     PageRegisters::Draw();
 
     InputWindow::Draw();

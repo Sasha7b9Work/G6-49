@@ -7,6 +7,7 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Display/Console.h"
+#include "Utils/Debug.h"
 
 
 /** @defgroup Panel
@@ -37,10 +38,15 @@ int main()
 
     while (1)
     {
+        DEBUG_POINT;
         CPU::Update();
+        DEBUG_POINT;
         Menu::Update();
+        DEBUG_POINT;
         Display::Update();
+        DEBUG_POINT;
         Generator::Update();
+        DEBUG_POINT;
     }
 }
 

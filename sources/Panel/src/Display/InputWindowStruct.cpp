@@ -282,26 +282,6 @@ pString Order::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *NameUnit(char buffer[10], Order order, Parameter parameter)
-{
-    static const char *names[][2] =
-    {
-        {"Ãö",  "Hz"},
-        {"ñ",   "s"},
-        {"Â",   "V"},
-        {"Â",   "V"},
-        {"ñ",  "s"},
-        {"",    ""},
-        {"o",  "o"},
-        {"ñ",  "s"}
-    };
-
-    sprintf(buffer, "%s%s", order.Name(), names[parameter.value][LANG]);
-
-    return buffer;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool StructValue::OnlyOneRigthDigit()
 {
     char digitLast = DIGIT(NUM_DIGITS - 1);

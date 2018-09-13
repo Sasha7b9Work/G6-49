@@ -49,19 +49,19 @@ struct CommandPanel
     enum E
     {
         None = 0,
-        ENABLE_CHANNEL = 1,     ///< Включить/выключить канал
-        SET_FORM_WAVE = 2,      ///< Установить форму сигнала
-        SET_FREQUENCY = 3,      ///< Установить частоту
-        SET_AMPLITUDE = 4,      ///< Установить амплитуду
-        SET_OFFSET = 5,         ///< Установать смещение
+        ENABLE_CHANNEL = 1,             ///< Включить/выключить канал
+        SET_FORM_WAVE = 2,              ///< Установить форму сигнала
+        SET_FREQUENCY = 3,              ///< Установить частоту
+        SET_AMPLITUDE = 4,              ///< Установить амплитуду
+        SET_OFFSET = 5,                 ///< Установать смещение
         SET_DURATION = 6,
         SET_DUTYRATIO = 7,
         SET_PHASE = 8,
-        RUN_RESET = 9,          ///< Сброс состояния
-        MODE_DEBUG = 10,        ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
-        SET_DELAY = 11,         ///< Задержка
-        WRITE_REGISTER = 12,    ///< Занести значение в регистр
-        READ_DATA = 13,         ///< Чтение данных из генератора
+        RUN_RESET = 9,                  ///< Сброс состояния
+        MODE_DEBUG = 10,                ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
+        SET_DELAY = 11,                 ///< Задержка
+        WRITE_REGISTER = 12,            ///< Занести значение в регистр
+        READ_DATA = 13,                 ///< Чтение данных из генератора
         SET_DEPTH_MODULATION = 14,
         SET_POLARITY = 15,
         SET_DURATION_RISE = 16,
@@ -72,8 +72,8 @@ struct CommandPanel
         CREATE_HAND_WAVE = 21,          ///< Засылает точки произвольного сигнала
         SET_HAND_WAVE = 22,             ///< Устанавливает вывод произвольного сигнала
         SetRampForSine = 23,            ///< Установить режим модуляции пилой для синуса
-        SetDurationRampForSine = 24,    ///< Установить длительность ипульса при модуляции синуса пилой
-        SetAmplitudeRampForSine = 25,   ///< Установить амплитуду для пилы, модулирующей синус
+        SetRampSineDuration = 24,       ///< Установить длительность ипульса при модуляции синуса пилой
+        SetRampSineAmplitude = 25,      ///< Установить амплитуду для пилы, модулирующей синус
         Number
     } value;
     CommandPanel(E v) : value(v){};

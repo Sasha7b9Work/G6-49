@@ -19,10 +19,15 @@ void Wave::Graphics::Draw(Chan ch)
     Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::GREEN_5);
     if (CHANNEL_ENABLED(ch))
     {
+        DEBUG_POINT;
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
+        DEBUG_POINT;
         Text::DrawBigText(x0 + 5, y0 + 5, 2, ch == Chan::A ? "A" : "B", Color::FILL);
+        DEBUG_POINT;
         DrawUGO(ch, y0);
+        DEBUG_POINT;
         DrawParameters(ch, y0);
+        DEBUG_POINT;
     }
 }
 
@@ -284,10 +289,12 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         y0 += 10;
     }
     
+    DEBUG_POINT;
     for (int i = 0; i < num; i++)
     {
         Parameter *param = form->GetParameter(i);
         Color color = Color::FILL;
+        DEBUG_POINT;
         if (ch == CURRENT_CHANNEL)
         {
             pString curPar = PARAM_CURRENT->Name();
@@ -299,25 +306,32 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         }
         Text::DrawText(x0 + 1, y0, param->Name(), color);
 
+        DEBUG_POINT;
         if(param->IsInputValue())
         {
+            DEBUG_POINT;
             DrawParameterValue(param, x0 + 80, y0);
+            DEBUG_POINT;
         }
-
+        DEBUG_POINT;
         y0 += 10;
     }
+    DEBUG_POINT;
 
     if(form->GetParameter(0)->GetParent())
     {
         Text::DrawText(x0 + 1, y0, LANG_RU ? "Выход - ESC" : "Exit - ESC");
     }
+    DEBUG_POINT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
 {
+    DEBUG_POINT;
     x = Text::DrawText(x, y, param->GetStringValue());
-
+    DEBUG_POINT;
     char buffer[10];
-    Text::DrawText(x, y, NameUnit(buffer, param->order, *param));
+    Text::DrawText(x, y, param->NameUnit(buffer));
+    DEBUG_POINT;
 }

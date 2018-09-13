@@ -50,6 +50,8 @@ public:
         DurationStady,      ///< Длительность установившего значения
         DutyFactor,         ///< Коэффициент заполнения
         ModulationRampSine, ///< Модуляция пилой для синусоиды
+        RampSineDuration,   ///< Скорость нарастания пилы при модуляции
+        RampSineAmplitude,  ///< Амплитуда пилы при модуляции
         Number
     } value;
 
@@ -86,6 +88,8 @@ public:
     Form *GetForm() { return form; };
     /// Возвращает адрес родительского параметра
     Parameter *GetParent() { return parent; };
+
+    pString NameUnit(char buffer[10]);
    
     Order order;
     /// Позиция подсвеченного символа
@@ -153,6 +157,8 @@ public:
     Wave *GetWave() { return wave; };
 
 private:
+    /// Возвращает true, если текущий параметр сложный и открыт.
+    bool ParameterIsOpened() const;
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
     Parameter *FindParameter(Parameter::E p);
     /// Засыалет параметр в генератор

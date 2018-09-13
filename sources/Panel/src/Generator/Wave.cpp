@@ -98,7 +98,9 @@ pString Parameter::Name() const
         StructName("ÂÐ. ÑÏÀÄÀ",      "RELEASING TIME"),
         StructName("ÂÐ. ÏÈÊÀ",       "PEAK TIME"),
         StructName("ÊÎÝÔÔ. ÇÀÏÎËÍ.", "DUTY FACTOR"),
-        StructName("Ìîäóëÿöèÿ",      "Modulation")
+        StructName("Ìîäóëÿöèÿ",      "Modulation"),
+        StructName("Ñêîðîñòü",       "Speed"),
+        StructName("Ðàçìàõ",         "Amplitude")
     };
 
     return LANG_RU ? nameParameter[value].nameRU : nameParameter[value].nameEN;
@@ -183,9 +185,37 @@ void Form::TuneGenerator(Chan ch)
 {
     Generator::SetFormWave(ch, *this);
 
-    SendParameterToGenerator(ch, Parameter::Frequency);
-    SendParameterToGenerator(ch, Parameter::Amplitude);
-    SendParameterToGenerator(ch, Parameter::Offset);
+    if(value == Form::Sine && ParameterIsOpened())
+    {
+        int current = currentParam;
+        Parameter *param = params;
+        int numPar = numParams;
+
+        currentParam = oldCurrentParams;
+        params = oldParams;
+        numParams = oldNumParams;
+
+        if(CurrentParameter()->value == Parameter::ModulationRampSine)
+        {
+            SendParameterToGenerator(ch, Parameter::Frequency);
+            SendParameterToGenerator(ch, Parameter::Amplitude);
+            SendParameterToGenerator(ch, Parameter::Offset);
+        }
+
+        currentParam = current;
+        params = param;
+        numParams = numPar;
+
+        SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+        SendParameterToGenerator(ch, Parameter::RampSineDuration);
+        SendParameterToGenerator(ch, Parameter::RampSineAmplitude);
+    }
+    else
+    {
+        SendParameterToGenerator(ch, Parameter::Frequency);
+        SendParameterToGenerator(ch, Parameter::Amplitude);
+        SendParameterToGenerator(ch, Parameter::Offset);
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -244,7 +274,7 @@ void Form::OpenCurrentParameter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Form::CloseOpenedParameter()
 {
-    if (params[0].parent)
+    if (ParameterIsOpened())
     {
         params = oldParams;
         numParams = oldNumParams;
@@ -254,6 +284,12 @@ bool Form::CloseOpenedParameter()
     }
 
     return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Form::ParameterIsOpened() const
+{
+    return params[0].parent != 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -268,4 +304,24 @@ char *Parameter::GetStringValue() const
 {
     StructValue input((Parameter *)this);
     return input.StringValue();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString Parameter::NameUnit(char buffer[10])
+{
+    static const pString names[][2] =
+    {
+        {"Ãö",  "Hz"},
+        {"ñ",   "s"},
+        {"Â",   "V"},
+        {"Â",   "V"},
+        {"ñ",   "s"},
+        {"",    ""},
+        {"o",   "o"},
+        {"ñ",   "s"}
+    };
+
+    sprintf(buffer, "%s%s", order.Name(), names[value][LANG]);
+
+    return buffer;
 }
