@@ -90,6 +90,16 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool OnKey(Control control)
+{
+    if(control.Is(Control::B_ESC))
+    {
+        return FORM_CURRENT->CloseOpenedParameter();
+    }
+
+    return false;
+}
+
 DEF_PAGE_4
 (
     pSignals,
@@ -99,7 +109,7 @@ DEF_PAGE_4
     cForm,          ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÔÎÐÌÀ
     parameters,     ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÏÀÐÀÌÅÒÐ
     bSetParameter,  ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÂÂÅÑÒÈ ÇÍÀ×ÅÍÈÅ ÏÀÐÀÌÅÒÐÀ
-    Page_Settings, 0, FuncActive, FuncPress, FuncOnKey
+    Page_Settings, 0, FuncActive, FuncPress, OnKey
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,4 +117,3 @@ void PageSignals::Init()
 {
     OnPress_Channel(true);
 }
-

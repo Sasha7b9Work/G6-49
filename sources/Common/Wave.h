@@ -85,7 +85,7 @@ public:
     Form *GetForm() { return form; };
     /// ¬озвращает адрес родительского параметра
     Parameter *GetParent() { return parent; };
-    
+   
     Order order;
     /// ѕозици€ подсвеченного символа
     int8 hightLightDigit;
@@ -146,6 +146,8 @@ public:
     bool Is(Form::E e) const { return e == value; };
     /// –аскрывает страницу текущего параметра
     void OpenCurrentParameter();
+    /// «акрывает открытый параметр, если таковой имеетс€ и возвращает true в этом случае
+    bool CloseOpenedParameter();
 
 private:
     /// Ќаходит требуемый параметр. ¬озвращает 0, если такого параметра нет

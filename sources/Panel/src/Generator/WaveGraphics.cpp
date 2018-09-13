@@ -306,6 +306,11 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 
         y0 += 10;
     }
+
+    if(form->GetParameter(0)->GetParent())
+    {
+        Text::DrawText(x0 + 1, y0, LANG_RU ? "Выход - ESC" : "Exit - ESC");
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

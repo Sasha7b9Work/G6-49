@@ -249,3 +249,17 @@ char *Parameter::GetStringValue() const
     StructValue input((Parameter *)this);
     return input.StringValue();
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Form::CloseOpenedParameter()
+{
+    if(params[0].parent)
+    {
+        params = oldParams;
+        numParams = oldNumParams;
+        currentParam = oldCurrentParams;
+        return true;
+    }
+
+    return false;
+}
