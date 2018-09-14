@@ -52,6 +52,8 @@ public:
         ModulationRampSine, ///< ћодул€ци€ пилой дл€ синусоиды
         RampSineDuration,   ///< —корость нарастани€ пилы при модул€ции
         RampSineAmplitude,  ///< јмплитуда пилы при модул€ции
+        PacketPeriod,       ///< ѕериод следовани€ пачек импульсов в пакетном режиме
+        PacketNumber,       ///< „исло импульсов в пачке пакетного режима
         Number
     } value;
 

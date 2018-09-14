@@ -78,17 +78,23 @@ void FPGA::SetMeanderMode(Chan ch)
 void FPGA::SetPackedImpulseMode(Chan)
 {
     SetImpulseMode(Chan::A);
-    SetImpulseMode(Chan::B);
     
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
 
+    //WriteRegister(RG::_6_DurationImpulseA, 5);          // Число импульсов
+    //WriteRegister(RG::_5_PeriodImpulseA,   1e6f);       // Период пачки
+    //WriteRegister(RG::_8_DurationImpulseB, 1e2f);       // Длительность импульса
+    //WriteRegister(RG::_7_PeriodImpulseB,   2e2f);       // Период импульсов
+
+    /*
     PacketImpulse::SetNumberImpules(2);
 
     PacketImpulse::SetPeriodPacket(1e-3f);
     
-    PacketImpulse::SetDurationImpulse(1e-6f);
-    PacketImpulse::SetPeriodImpulse(1e-5f);
+    PacketImpulse::SetDurationImpulse(10e-7f);
+    PacketImpulse::SetPeriodImpulse(30e-7f);
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

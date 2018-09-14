@@ -17,33 +17,38 @@ public:
 
     static void ReceiveCallback();
 
-    static void CommandEmpty();
+    static void Empty();
 
-    static void CommandEnable();
+    static void Enable();
 
-    static void CommandReadData();
+    static void ReadData();
 
-    static void CommandFormWave();
+    static void FormWave();
 
-    static void CommandParameter();
+    static void Parameter();
 
-    static void CommandReset();
+    static void Reset();
 
-    static void CommandModeDebug();
+    static void ModeDebug();
 
-    static void CommandWriteRegister();
+    static void WriteRegister();
     /// Команда обрабатывает засылку произвольного сигнала
-    static void CommandCreateWave();
+    static void CreateWave();
 
-    static void CommandSetWave();
+    static void SetWave();
 
-    static void CommandSetRampForSine();
+    static void SetRampForSine();
 
-    static void CommandSetDurationForRampSine();
+    static void SetDurationForRampSine();
 
-    static void CommandSetAmplitudeRampForSine();
+    static void SetAmplitudeRampForSine();
+
+    static void SetPacketPeriod();
+
+    static void SetPacketNumber();
 
 private:
+
     /// Возвращает значение типа float, хранящееся в массиве
     static float GetFloat(uint8 buffer[4]);
     /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение

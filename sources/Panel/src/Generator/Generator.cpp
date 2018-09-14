@@ -121,7 +121,9 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
         CommandPanel::SET_DUTY_FACTOR,
         CommandPanel::SetRampForSine,
         CommandPanel::SetRampSineDuration,
-        CommandPanel::SetRampSineAmplitude
+        CommandPanel::SetRampSineAmplitude,
+        CommandPanel::SetPacketPeriod,
+        CommandPanel::SetPacketNumber
     };
 
     uint8 buffer[6] = {(uint8)commands[param.value], (uint8)ch};

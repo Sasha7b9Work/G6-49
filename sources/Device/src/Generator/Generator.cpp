@@ -26,17 +26,18 @@ void Generator::Init()
     {
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
-        //Generator::SetFormWave(ch, Form::Sine);
-        //Generator::SetFrequency(ch, 1e6f);
-        //Generator::SetOffset(ch, 0.0f);
-        //Generator::SetAmplitude(ch, 5.0f);
-
-        Generator::SetFormWave(ch, Form::PacketImpuls);
-        FPGA::SetAmplitude(ch, 10.0f);
-        FPGA::SetOffset(ch, 0.0f);
+        Generator::SetFormWave(ch, Form::Sine);
+        Generator::SetFrequency(ch, 1e6f);
+        Generator::SetOffset(ch, 0.0f);
+        Generator::SetAmplitude(ch, 5.0f);
 
 //        FPGA::SetSourceManipulation(ch, FPGA::SourceManipulation::ImpulseA);
     }
+    
+    //Generator::SetFormWave(Chan::A, Form::PacketImpuls);
+    //FPGA::SetAmplitude(Chan::A, 10.0f);
+    //FPGA::SetOffset(Chan::A, 0.0f);
+
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +100,9 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         EmptyFunc,
         EmptyFunc,
         EmptyFunc,
-        EmptyFunc
+        EmptyFunc,
+        SetPacketPeriod,
+        SetPacketNumber
     };
 
     func[command].func(ch, value);
@@ -148,6 +151,16 @@ void Generator::SetOffset(Chan ch, float offset)
 void Generator::SetPhase(Chan, float)
 {
 
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetPacketNumber(Chan, float)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetPacketPeriod(Chan, float)
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

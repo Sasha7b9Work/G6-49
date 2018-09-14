@@ -111,8 +111,8 @@ void Settings::Load(bool _default)
         CPU::FLASH_::LoadSettings();
     }
 
-    //Generator::TuneChannel(Chan::A);
-    //Generator::TuneChannel(Chan::B);
+    Generator::TuneChannel(Chan::A);
+    Generator::TuneChannel(Chan::B);
     
     Painter::LoadPalette();
 }

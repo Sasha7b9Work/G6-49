@@ -66,7 +66,9 @@ void InputWindow::Draw()
         DrawDutyFactor,
         DrawModulationRampSine,
         DrawRampSineDuration,
-        DrawRampSineAmplitude
+        DrawRampSineAmplitude,
+        DrawPacketPeriod,
+        DrawPacketNumber
     };
 
     x += 40;
@@ -197,6 +199,16 @@ void InputWindow::DrawDelay(int, int)
 void InputWindow::DrawPeriod(int, int)
 {
 
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawPacketNumber(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawPacketPeriod(int, int)
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

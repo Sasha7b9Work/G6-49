@@ -74,10 +74,6 @@ void Multiplexor::SetMode(Chan ch, Form form)
     {
         ResetPin(PIN_MX1_A0);
         ResetPin(PIN_MX1_A1);
-        ResetPin(PIN_MX2_A0);
-        ResetPin(PIN_MX2_A1);
-        ResetPin(PIN_MX3_A0);
-        ResetPin(PIN_MX3_A1);
     }
     else                                                // Для всех остальных форм сигнала используется ПЛИС
     {

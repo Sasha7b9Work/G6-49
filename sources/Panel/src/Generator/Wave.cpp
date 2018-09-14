@@ -97,7 +97,9 @@ pString Parameter::Name() const
         {"КОЭФФ. ЗАПОЛН.", "DUTY FACTOR"},
         {"Модуляция",      "Modulation"},
         {"Скорость",       "Speed"},
-        {"Размах",         "Amplitude"}
+        {"Размах",         "Amplitude"},
+        {"Период пакета",  "Packet period"},
+        {"N",              "N"}
     };
 
     return nameParameter[value][LANG].name;
@@ -353,6 +355,8 @@ pString Parameter::NameUnit(char buf[10])
         {"",    ""},
         {"",    ""},
         {"",    ""},
+        {"c",   "s"},
+        {"",    ""}
     };
 
     sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);

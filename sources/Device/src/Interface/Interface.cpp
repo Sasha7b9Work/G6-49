@@ -52,31 +52,33 @@ static const struct FuncInterface
 }
 commands[CommandPanel::Number] =
 {
-    Interface::CommandEmpty,
-    Interface::CommandEnable,                   /// ENABLE_CHANNEL
-    Interface::CommandFormWave,                 /// SET_FORM_WAVE
-    Interface::CommandParameter,                /// SET_FREQUENCY
-    Interface::CommandParameter,                /// SET_AMPLITUDE
-    Interface::CommandParameter,                /// SET_OFFSET
-    Interface::CommandParameter,                /// SET_DURATION
-    Interface::CommandParameter,                /// SET_DUTYRATIO
-    Interface::CommandParameter,                /// SET_PHASE
-    Interface::CommandReset,                    /// RUN_RESET
-    Interface::CommandModeDebug,                /// MODE_DEBUG
-    Interface::CommandParameter,                /// SET_DELAY
-    Interface::CommandWriteRegister,            /// WRITE_REGISTER
-    Interface::CommandReadData,                 /// READ_DATA
-    Interface::CommandEmpty,                    /// SET_DEPTH_MODULATION
-    Interface::CommandEmpty,                    /// SET_POLARITY
-    Interface::CommandEmpty,                    /// SET_DURATION_RISE
-    Interface::CommandEmpty,                    /// SET_DURATION_FALL
-    Interface::CommandEmpty,                    /// SET_DURATION_STADY
-    Interface::CommandEmpty,                    /// SET_DUTY_FACTOR
-    Interface::CommandSetWave,                  /// CREATE_HAND_WAVE
-    Interface::CommandSetWave,                  /// SET_HAND_WAVE
-    Interface::CommandSetRampForSine,           /// SetRampForSine
-    Interface::CommandSetDurationForRampSine,   /// SetRampSineDuration
-    Interface::CommandSetAmplitudeRampForSine   /// SetRampSineAmplitude
+    Interface::Empty,
+    Interface::Enable,                   /// ENABLE_CHANNEL
+    Interface::FormWave,                 /// SET_FORM_WAVE
+    Interface::Parameter,                /// SET_FREQUENCY
+    Interface::Parameter,                /// SET_AMPLITUDE
+    Interface::Parameter,                /// SET_OFFSET
+    Interface::Parameter,                /// SET_DURATION
+    Interface::Parameter,                /// SET_DUTYRATIO
+    Interface::Parameter,                /// SET_PHASE
+    Interface::Reset,                    /// RUN_RESET
+    Interface::ModeDebug,                /// MODE_DEBUG
+    Interface::Parameter,                /// SET_DELAY
+    Interface::WriteRegister,            /// WRITE_REGISTER
+    Interface::ReadData,                 /// READ_DATA
+    Interface::Empty,                    /// SET_DEPTH_MODULATION
+    Interface::Empty,                    /// SET_POLARITY
+    Interface::Empty,                    /// SET_DURATION_RISE
+    Interface::Empty,                    /// SET_DURATION_FALL
+    Interface::Empty,                    /// SET_DURATION_STADY
+    Interface::Empty,                    /// SET_DUTY_FACTOR
+    Interface::SetWave,                  /// CREATE_HAND_WAVE
+    Interface::SetWave,                  /// SET_HAND_WAVE
+    Interface::SetRampForSine,           /// SetRampForSine
+    Interface::SetDurationForRampSine,   /// SetRampSineDuration
+    Interface::SetAmplitudeRampForSine,  /// SetRampSineAmplitude
+    Interface::SetPacketPeriod,
+    Interface::SetPacketNumber
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +126,7 @@ void Interface::Update()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandEnable()
+void Interface::Enable()
 {
     Chan ch = (Chan::E)buffer[1];
     bool enable = buffer[2] == 1;
@@ -133,12 +135,12 @@ void Interface::CommandEnable()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandReadData()
+void Interface::ReadData()
 {
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandSetRampForSine()
+void Interface::SetRampForSine()
 {
     Chan ch = (Chan::E)buffer[1];
     bool enabled = GetFloat(&buffer[2]) != 0;
@@ -146,7 +148,7 @@ void Interface::CommandSetRampForSine()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandSetDurationForRampSine()
+void Interface::SetDurationForRampSine()
 {
     Chan ch = (Chan::E)buffer[1];
     float duration = (float)((int)(GetFloat(&buffer[2]) + 0.5f));
@@ -154,7 +156,7 @@ void Interface::CommandSetDurationForRampSine()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandSetAmplitudeRampForSine()
+void Interface::SetAmplitudeRampForSine()
 {
     Chan ch = (Chan::E)buffer[1];
     float amplitude = (float)((int)(GetFloat(&buffer[2]) + 0.5f));
@@ -162,7 +164,7 @@ void Interface::CommandSetAmplitudeRampForSine()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandFormWave()
+void Interface::FormWave()
 {
     Chan ch = (Chan::E)buffer[1];
     Form form = (Form::E)buffer[2];
@@ -170,7 +172,17 @@ void Interface::CommandFormWave()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandWriteRegister()
+void Interface::SetPacketNumber()
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetPacketPeriod()
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::WriteRegister()
 {
     Register reg = (Register::E)buffer[1];
 
@@ -281,7 +293,7 @@ float Interface::GetFloat(uint8 buf[4])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandParameter()
+void Interface::Parameter()
 {
     Chan ch = (Chan::E)buffer[1];
     CommandPanel command = (CommandPanel::E)buffer[0];
@@ -289,13 +301,13 @@ void Interface::CommandParameter()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandCreateWave()
+void Interface::CreateWave()
 {
     Chan ch = (Chan::E)buffer[1];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandReset()
+void Interface::Reset()
 {
 #ifndef MSVC
 
@@ -310,12 +322,12 @@ void Interface::CommandReset()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandModeDebug()
+void Interface::ModeDebug()
 {
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandEmpty()
+void Interface::Empty()
 {
 }
 
@@ -354,7 +366,7 @@ void Interface::ReceiveCallback()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CommandSetWave()
+void Interface::SetWave()
 {
 }
 

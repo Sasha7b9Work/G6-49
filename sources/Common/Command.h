@@ -73,6 +73,8 @@ struct CommandPanel
         SetRampForSine = 22,            ///< ”становить режим модул€ции пилой дл€ синуса
         SetRampSineDuration = 23,       ///< ”становить длительность ипульса при модул€ции синуса пилой
         SetRampSineAmplitude = 24,      ///< ”становить амплитуду дл€ пилы, модулирующей синус
+        SetPacketPeriod = 25,
+        SetPacketNumber = 26,
         Number
     } value;
     CommandPanel(E v) : value(v){};

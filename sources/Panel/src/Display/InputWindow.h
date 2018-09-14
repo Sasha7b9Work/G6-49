@@ -123,6 +123,10 @@ private:
 
     static void DrawRampSineAmplitude(int x, int y);
 
+    static void DrawPacketPeriod(int x, int y);
+
+    static void DrawPacketNumber(int x, int y);
+
     static Parameter *param;
 
     static StructValue m_iws;
