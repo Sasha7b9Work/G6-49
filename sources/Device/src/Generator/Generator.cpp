@@ -31,7 +31,7 @@ void Generator::Init()
         Generator::SetOffset(ch, 0.0f);
         Generator::SetAmplitude(ch, 5.0f);
 
-        FPGA::SetSourceManipulation(ch, FPGA::SourceManipulation::ImpulseA);
+//        FPGA::SetSourceManipulation(ch, FPGA::SourceManipulation::ImpulseA);
     }
 }
 

@@ -126,11 +126,12 @@ class Form
 public:
     enum E
     {
-        Sine,       ///< Синус
-        RampPlus,   ///< Пила+
-        RampMinus,  ///< Пила-
-        Meander,    ///< Меандр
-        Impulse,    ///< Импульсы
+        Sine,           ///< Синус
+        RampPlus,       ///< Пила+
+        RampMinus,      ///< Пила-
+        Meander,        ///< Меандр
+        Impulse,        ///< Импульсы
+        //PacketImpuls,   ///< Пачка импульсов
         Number
     } value;
 

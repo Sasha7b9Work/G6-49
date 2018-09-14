@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Log.h"
 #include "Interface.h"
+#include "Utils/Console.h"
 #include "Generator/Generator.h"
 #include "Generator/Multiplexor.h"
 #include "Generator/FPGA.h"
@@ -330,7 +331,12 @@ void Interface::ReceiveCallback()
     if (buffer[0] < CommandPanel::Number)
     {
         commands[buffer[0]].func();
-        if(freqForSend != MAX_UINT)
+        if (Console::ExistString())
+        {
+            trans[0] = CommandGenerator::COM_LOG;
+            Console::GetString((char *)(trans + 1));
+        }
+        else if(freqForSend != MAX_UINT)
         {
             trans[0] = CommandGenerator::COM_FREQ_MEASURE;
             INIT_BIT_SET_32(bs, freqForSend);

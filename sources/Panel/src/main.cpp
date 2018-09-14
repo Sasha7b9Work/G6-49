@@ -31,11 +31,6 @@ int main()
        
     Generator::EmptyCommand();
 
-    for(int i = 0; i < 100; i++)
-    {
-        Console::AddString("test asdf");
-    }
-
     while (1)
     {
         DEBUG_POINT;

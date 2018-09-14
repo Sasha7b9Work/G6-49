@@ -6,6 +6,7 @@
 #include "Hardware/Timer.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Settings/Settings.h"
+#include "Display/Console.h"
 #include "Signals.h"
 #include "Command.h"
 #include "structs.h"
@@ -161,6 +162,16 @@ void Generator::SendToInterface(uint8 *data, int size)
             bs.byte[i] = recv[i + 1];
         }
         FrequencyMeter::SetMeasure(bs.word);
+    }
+    else if(recv[0] == CommandGenerator::COM_LOG)
+    {
+        char buf[10];
+        for(int i = 0; i < 9; i++)
+        {
+            buf[i] = (char)recv[i + 1];
+        }
+        buf[9] = '\0';
+        Console::AddString(buf);
     }
 }
 

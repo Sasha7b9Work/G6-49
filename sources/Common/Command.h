@@ -86,6 +86,7 @@ struct CommandGenerator
     {
         //   0            1...5
         COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                        /* Результат измерения частотомера */
+        COM_LOG = 2,
         Number
     } value;
 };

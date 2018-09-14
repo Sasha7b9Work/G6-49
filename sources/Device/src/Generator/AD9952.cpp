@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "GeneratroSettings.h"
 #include "Hardware/CPU.h"
+#include "Utils/Console.h"
 #include <math.h>
 
 
@@ -124,6 +125,7 @@ void AD9952::WriteCFR1(Chan ch)
         SetBit(value, 24);  // Устанавливаем режим "пилы"
     }
     SetBit(value, 25);      // OSK enable - управление амплитудой
+    SetBit(value, 26);
     WriteToHardware(ch, Register::CFR1, value);
 }
 
@@ -156,6 +158,10 @@ void AD9952::WriteASF(Chan ch)
         }
     }
 
+    char buffer[100];
+    sprintf(buffer, "ASF %d", value);
+    Console::AddString(buffer);
+
     WriteToHardware(ch, Register::ASF, value);
 }
 
@@ -170,7 +176,12 @@ void AD9952::WriteFTW0(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteARR(Chan ch)
 {
-    WriteToHardware(ch, Register::ARR, (uint8)Ramp::duration[ch]);
+    uint8 value = (uint8)Ramp::duration[ch];
+    char buffer[100];
+    sprintf(buffer, "ARR %d", value);
+    Console::AddString(buffer);
+
+    WriteToHardware(ch, Register::ARR, value);
 }
 
 
