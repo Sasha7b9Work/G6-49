@@ -131,7 +131,7 @@ public:
         RampMinus,      ///< Пила-
         Meander,        ///< Меандр
         Impulse,        ///< Импульсы
-        //PacketImpuls,   ///< Пачка импульсов
+        PacketImpuls,   ///< Пачка импульсов
         Number
     } value;
 
@@ -239,6 +239,8 @@ public:
         static void DrawMeander(int x, int y, int width, int height);
 
         static void DrawImpulse(int x, int y, int width, int height);
+
+        static void DrawPacketImpulse(int x, int y, int width, int height);
 
         static void DrawParameters(Chan chan, int y0);
 

@@ -26,10 +26,14 @@ void Generator::Init()
     {
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
-        Generator::SetFormWave(ch, Form::Sine);
-        Generator::SetFrequency(ch, 1e6f);
-        Generator::SetOffset(ch, 0.0f);
-        Generator::SetAmplitude(ch, 5.0f);
+        //Generator::SetFormWave(ch, Form::Sine);
+        //Generator::SetFrequency(ch, 1e6f);
+        //Generator::SetOffset(ch, 0.0f);
+        //Generator::SetAmplitude(ch, 5.0f);
+
+        Generator::SetFormWave(ch, Form::PacketImpuls);
+        FPGA::SetAmplitude(ch, 10.0f);
+        FPGA::SetOffset(ch, 0.0f);
 
 //        FPGA::SetSourceManipulation(ch, FPGA::SourceManipulation::ImpulseA);
     }

@@ -28,6 +28,19 @@ public:
 
     static void SetPeriodImpulse(Chan ch, float period);
 
+    class PacketImpulse
+    {
+    public:
+        /// Устанавливает число импульсов в пачке
+        static void SetNumberImpules(uint n);
+        /// Устанавливает период следования пачки
+        static void SetPeriodPacket(float period);
+        /// Устанавливает длительность импульса
+        static void SetDurationImpulse(float duration);
+        /// Устанавливает период следования импульсов в пачке
+        static void SetPeriodImpulse(float period);
+    };
+
     /// Выбор источника манипуляции
     struct SourceManipulation
     {
@@ -57,6 +70,7 @@ public:
             Rectangle,
             Meander,
             Manipulation,   ///< Режим амплитудной манипуляции
+            PackedImpulse,  ///< Пакеты импульсов
             Number
         } value;
         ModeWork(E v) : value(v) {};
@@ -110,6 +124,8 @@ private:
     static void SetMeanderMode(Chan ch);
 
     static void SetImpulseMode(Chan ch);
+
+    static void SetPackedImpulseMode(Chan ch);
 
     static void CreateEnable();
     /// Заслать рассчитанные точки в плис

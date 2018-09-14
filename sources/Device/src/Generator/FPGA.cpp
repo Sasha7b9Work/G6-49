@@ -4,7 +4,6 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Generator/Generator.h"
-#include "Multiplexor.h"
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -54,12 +53,11 @@ void FPGA::SetWaveForm(Chan ch, Form form)
         SetRampPlusMode,
         SetRampMinusMode,
         SetMeanderMode,
-        SetImpulseMode
+        SetImpulseMode,
+        SetPackedImpulseMode
     };
     
     func[form.value].func(ch);
-
-    Multiplexor::SetMode(ch, form);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,6 +75,23 @@ void FPGA::SetMeanderMode(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetPackedImpulseMode(Chan)
+{
+    SetImpulseMode(Chan::A);
+    SetImpulseMode(Chan::B);
+    
+    modeWork[Chan::A] = ModeWork::PackedImpulse;
+    WriteControlRegister();
+
+    PacketImpulse::SetNumberImpules(2);
+
+    PacketImpulse::SetPeriodPacket(1e-3f);
+    
+    PacketImpulse::SetDurationImpulse(1e-6f);
+    PacketImpulse::SetPeriodImpulse(1e-5f);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetImpulseMode(Chan ch)
 {
     modeWork[ch] = ModeWork::Impulse;
@@ -91,6 +106,7 @@ void FPGA::SetImpulseMode(Chan ch)
     // ”становим значени€ по умолчанию дл€ периода и длительности.
     /// \todo Ќе забыть убрать
 
+    /*
     if(ch == Chan::A)
     {
         WriteRegister(RG::_3_RectA, (8191 << 14) + 16383);
@@ -103,6 +119,7 @@ void FPGA::SetImpulseMode(Chan ch)
         WriteRegister(RG::_7_PeriodImpulseB, (uint64)(1e-3f / 10e-9f));
         WriteRegister(RG::_8_DurationImpulseB, (uint64)(1e-4f / 10e-9f));
     }
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,6 +171,37 @@ void FPGA::SetDurationImpulse(Chan ch, float duration)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::PacketImpulse::SetPeriodPacket(float period)
+{
+    uint64 n = (uint64)(period / 10e-9f);
+    WriteRegister(RG::_5_PeriodImpulseA, n - 2);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::PacketImpulse::SetDurationImpulse(float duration)
+{
+    uint64 n = (uint64)(duration / 10e-9f);
+    WriteRegister(RG::_8_DurationImpulseB, n - 1);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::PacketImpulse::SetNumberImpules(uint n)
+{
+    if(n < 2)
+    {
+        n = 2;
+    }
+    WriteRegister(RG::_6_DurationImpulseA, n - 2);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::PacketImpulse::SetPeriodImpulse(float period)
+{
+    uint64 n = (uint64)(period / 10e-9f);
+    WriteRegister(RG::_7_PeriodImpulseB, n - 2);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetPeriodImpulse(Chan ch, float period)
 {
     uint64 value = (uint64)(period / 10e-9f);
@@ -175,6 +223,10 @@ void FPGA::WriteControlRegister()
         case ModeWork::Rectangle:
         case ModeWork::Impulse:
             SetBit(data, 1);
+            break;
+        case ModeWork::PackedImpulse:
+            SetBit(data, 1);
+            SetBit(data, 10);
             break;
     }
 
@@ -216,7 +268,8 @@ void FPGA::WriteControlRegister()
     {
         SetBit(data, 7);
     }
-    
+
+
     WriteRegister(RG::_0_Control, data);
 }
 

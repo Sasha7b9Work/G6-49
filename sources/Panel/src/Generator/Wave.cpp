@@ -21,7 +21,8 @@ pString Form::Name(Language lang) const
         {"œ»À¿+",    "RAMP+"},
         {"œ»À¿-",    "RAMP-"},
         {"Ã≈¿Õƒ–",   "MEANDER"},
-        {"»Ãœ”À‹—",  "IMPULSE"}
+        {"»Ãœ”À‹—",  "IMPULSE"},
+        {"œ¿ ≈“",    "PACKET"}
     };
 
     return names[value][lang].name;

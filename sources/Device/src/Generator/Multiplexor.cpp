@@ -70,6 +70,15 @@ void Multiplexor::SetMode(Chan ch, Form form)
         SetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));
     }
+    else if(form.Is(Form::PacketImpuls))
+    {
+        ResetPin(PIN_MX1_A0);
+        ResetPin(PIN_MX1_A1);
+        ResetPin(PIN_MX2_A0);
+        ResetPin(PIN_MX2_A1);
+        ResetPin(PIN_MX3_A0);
+        ResetPin(PIN_MX3_A1);
+    }
     else                                                // Для всех остальных форм сигнала используется ПЛИС
     {
         ResetPin(PIN_MX(ch, 0));
