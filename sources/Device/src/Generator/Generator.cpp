@@ -9,7 +9,6 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту в правильное место - ПЛИС или AD9952
-Generator::SourceManipulation Generator::sourceManipulation[Chan::Number] = {Generator::SourceManipulation::None, Generator::SourceManipulation::None};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,6 +26,12 @@ void Generator::Init()
     {
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
+        Generator::SetFormWave(ch, Form::Sine);
+        Generator::SetFrequency(ch, 1e6f);
+        Generator::SetOffset(ch, 0.0f);
+        Generator::SetAmplitude(ch, 5.0f);
+
+        FPGA::SetSourceManipulation(ch, FPGA::SourceManipulation::ImpulseA);
     }
 }
 

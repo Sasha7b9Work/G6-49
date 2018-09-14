@@ -21,21 +21,6 @@ public:
 
     static void SetOffset(Chan ch, float offset);
 
-    /// Выбор источника манипуляции
-    static struct SourceManipulation
-    {
-        enum E
-        {
-            None,
-            COMP1,      ///< Сигнал COMP1 - микросхемы AD9952 канала A
-            COMP2,      ///< Сигнал COMP2 - микросхемы AD9952 канала B
-            ImpulseA,   ///< Сигнал формирователя импульсов канала A
-            ImpulseB,   ///< Сигнал формирователя импульсов канала B
-            Number
-        } value;
-        operator uint8() const { return (uint8)value; };
-    } sourceManipulation[Chan::Number];
-
 private:
 
     static void SetFrequency(Chan ch, float frequency);

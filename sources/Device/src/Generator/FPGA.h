@@ -24,16 +24,39 @@ public:
 
     static void SetOffset(Chan ch, float offset);
 
+    static void SetDurationImpulse(Chan ch, float duration);
+
+    static void SetPeriodImpulse(Chan ch, float period);
+
+    /// Выбор источника манипуляции
+    struct SourceManipulation
+    {
+        enum E
+        {
+            None,
+            COMP1,      ///< Сигнал COMP1 - микросхемы AD9952 канала A
+            COMP2,      ///< Сигнал COMP2 - микросхемы AD9952 канала B
+            ImpulseA,   ///< Сигнал формирователя импульсов канала A
+            ImpulseB,   ///< Сигнал формирователя импульсов канала B
+            Number
+        } value;
+        SourceManipulation(E v) : value(v) {};
+        operator uint8() const { return (uint8)value; };
+    };
+
+    static void SetSourceManipulation(Chan ch, SourceManipulation source);
+
     struct ModeWork
     {
         enum E
         {
             None,
             DDS,
-            Impulse,    ///< Режим, в котором импульcы могут иметь разную частоту
-            Impulse2,  ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
+            Impulse,        ///< Режим, в котором импульcы могут иметь разную частоту
+            Impulse2,       ///< Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
             Rectangle,
             Meander,
+            Manipulation,   ///< Режим амплитудной манипуляции
             Number
         } value;
         ModeWork(E v) : value(v) {};
@@ -116,4 +139,6 @@ private:
     static float offset[Chan::Number];
     /// Здесь хранятся записанные в регистры значения
     static uint64 registers[RG::Number];
+
+    static SourceManipulation sourceManipulation[Chan::Number];
 };

@@ -15,12 +15,13 @@
 #define MIN_VALUE (0)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::ModeWork       FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
-uint8                FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
-float                FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
-float                FPGA::offset[Chan::Number] = {5.0f, 5.0f};
-FPGA::ClockFrequency FPGA::clock = FPGA::ClockFrequency::_100MHz;
-uint64               FPGA::registers[FPGA::RG::Number] = {0};
+FPGA::ModeWork              FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+uint8                       FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
+float                       FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
+float                       FPGA::offset[Chan::Number] = {5.0f, 5.0f};
+FPGA::ClockFrequency        FPGA::clock = FPGA::ClockFrequency::_100MHz;
+uint64                      FPGA::registers[FPGA::RG::Number] = {0};
+FPGA::SourceManipulation    FPGA::sourceManipulation[Chan::Number] = {FPGA::SourceManipulation::None, FPGA::SourceManipulation::None};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,6 +132,36 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetSourceManipulation(Chan ch, SourceManipulation source)
+{
+    modeWork[ch] = (source == SourceManipulation::None) ? ModeWork::None : ModeWork::Manipulation;
+
+    sourceManipulation[ch] = source;
+
+    WriteControlRegister();
+
+    SetDurationImpulse(ch, 5e-6f);
+
+    SetPeriodImpulse(ch, 10e-6f);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetDurationImpulse(Chan ch, float duration)
+{
+    uint64 value = (uint64)(duration / 10e-9f);
+    RG reg = ch.IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
+    WriteRegister(reg, value);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetPeriodImpulse(Chan ch, float period)
+{
+    uint64 value = (uint64)(period / 10e-9f);
+    RG reg = ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
+    WriteRegister(reg, value);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteControlRegister()
 {
     uint16 data = 0;
@@ -157,18 +188,28 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    switch(Generator::sourceManipulation[Chan::A])
+    if(sourceManipulation[Chan::A] != SourceManipulation::None)
     {
-        case Generator::SourceManipulation::ImpulseA: SetBit(data, 3);                  break;
-        case Generator::SourceManipulation::ImpulseB: SetBit(data, 4);                  break;
-        case Generator::SourceManipulation::None:     SetBit(data, 3); SetBit(data, 4); break;
+        SetBit(data, 8);
     }
 
-    switch(Generator::sourceManipulation[Chan::B])
+    if(sourceManipulation[Chan::B] != SourceManipulation::None)
     {
-        case Generator::SourceManipulation::ImpulseA: SetBit(data, 5);                  break;
-        case Generator::SourceManipulation::ImpulseB: SetBit(data, 6);                  break;
-        case Generator::SourceManipulation::None:     SetBit(data, 5); SetBit(data, 6); break;
+        SetBit(data, 9);
+    }
+
+    switch(sourceManipulation[Chan::A])
+    {
+        case SourceManipulation::ImpulseA: SetBit(data, 5);                  break;
+        case SourceManipulation::ImpulseB: SetBit(data, 6);                  break;
+        case SourceManipulation::None:     SetBit(data, 5); SetBit(data, 6); break;
+    }
+
+    switch(sourceManipulation[Chan::B])
+    {
+        case SourceManipulation::ImpulseA: SetBit(data, 3);                  break;
+        case SourceManipulation::ImpulseB: SetBit(data, 4);                  break;
+        case SourceManipulation::None:     SetBit(data, 3); SetBit(data, 4); break;
     }
 
     if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
