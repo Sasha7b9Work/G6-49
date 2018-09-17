@@ -400,8 +400,8 @@ void StructValue::PressKey(Control key)
 
     static const StrControl command[] =
     {
-        {Control::B_1, '1'}, {Control::B_2, '2'}, {Control::B_3, '3'}, {Control::B_4, '4'}, {Control::B_5, '5'},
-        {Control::B_6, '6'}, {Control::B_7, '7'}, {Control::B_8, '8'}, {Control::B_9, '9'}, {Control::B_0, '0'}, {Control::B_Dot, '.'},
+        {Control::_1, '1'}, {Control::_2, '2'}, {Control::_3, '3'}, {Control::_4, '4'}, {Control::_5, '5'},
+        {Control::_6, '6'}, {Control::_7, '7'}, {Control::_8, '8'}, {Control::_9, '9'}, {Control::_0, '0'}, {Control::Dot, '.'},
         {Control::None, '.'}
     };
 

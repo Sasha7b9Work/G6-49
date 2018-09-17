@@ -44,11 +44,11 @@ static void DetectRegulator();
 static uint timePress[5][6];
 
                                      //          SL0           SL1           SL2               SL3               SL4            SL5
-static const Control controls[5][6] = {{Control::B_0, Control::B_5, Control::B_Dot,   Control::B_ESC,   Control::B_F1, Control::None},    // RL0
-                                       {Control::B_1, Control::B_6, Control::B_Minus, Control::B_LEFT,  Control::B_F2, Control::None},    // RL1
-                                       {Control::B_2, Control::B_7, Control::None,  Control::B_RIGHT, Control::B_F3, Control::None},    // RL2
-                                       {Control::B_3, Control::B_8, Control::B_ON1,   Control::None,  Control::B_F4, Control::None},    // RL3
-                                       {Control::B_4, Control::B_9, Control::B_ON2,   Control::None,  Control::B_F5, Control::None}};   // RL4
+static const Control controls[5][6] = {{Control::_0, Control::_5, Control::Dot,   Control::Esc,   Control::F1, Control::None},    // RL0
+                                       {Control::_1, Control::_6, Control::Minus, Control::Left,  Control::F2, Control::None},    // RL1
+                                       {Control::_2, Control::_7, Control::None,  Control::Right, Control::F3, Control::None},    // RL2
+                                       {Control::_3, Control::_8, Control::On1,   Control::None,  Control::F4, Control::None},    // RL3
+                                       {Control::_4, Control::_9, Control::On2,   Control::None,  Control::F5, Control::None}};   // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
@@ -161,7 +161,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // ≈сли нажатие длитс€ более 0.5 сек
         {
-            FillCommand(Control::REG_BTN, Control::Action::Long);                                     // посылаем длинное нажатие
+            FillCommand(Control::Reg::Button, Control::Action::Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -173,7 +173,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                FillCommand(Control::REG_BTN, Control::Action::Down);
+                FillCommand(Control::Reg::Button, Control::Action::Down);
             }
         }
         else                                                                // ≈ксли копка была нажата ранее
@@ -182,7 +182,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    FillCommand(Control::REG_BTN, Control::Action::Up);
+                    FillCommand(Control::Reg::Button, Control::Action::Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -203,12 +203,12 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        FillCommand(Control::REG_LEFT, Control::Action::Down);
+        FillCommand(Control::Reg::Left, Control::Action::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        FillCommand(Control::REG_RIGHT, Control::Action::Down);
+        FillCommand(Control::Reg::Right, Control::Action::Down);
         prevStatesIsOne = false;
     }
 }

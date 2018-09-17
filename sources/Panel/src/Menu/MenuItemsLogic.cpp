@@ -115,11 +115,11 @@ float Choice::Step()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Choice::Press(Control key)
 {
-    if(key.Is(Control::B_LEFT) && key.action.Is(Control::Action::Up) || key.Is(Control::REG_RIGHT))
+    if(key.Is(Control::Left) && key.action.Is(Control::Action::Up) || key.Is(Control::Reg::Right))
     {
         StartChange(-1);
     }
-    else if(key.Is(Control::B_RIGHT) && key.action.Is(Control::Action::Up) || key.Is(Control::REG_LEFT) || key.action.Is(Control::Action::Up))
+    else if(key.Is(Control::Right) && key.action.Is(Control::Action::Up) || key.Is(Control::Reg::Left) || key.action.Is(Control::Action::Up))
     {
         StartChange(1);
     }
@@ -341,13 +341,13 @@ Item *Item::Press(Control key)
 {
     if(key.action.Is(Control::Action::Long))
     {
-        if (IsOpened() || key.Is(Control::REG_BTN) || key.Is(Control::B_ESC))
+        if (IsOpened() || key.Is(Control::Reg::Button) || key.Is(Control::Esc))
         {
             return 0;
         }
     }
 
-    if(key.Is(Control::B_ESC) && (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long)))
+    if(key.Is(Control::Esc) && (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long)))
     {
         return 0;
     }
@@ -437,7 +437,7 @@ Control Item::ButtonForItem() const
 
     if (pos >= 0)
     {
-        return (Control::E)(Control::B_F1 + pos);
+        return (Control::E)(Control::F1 + pos);
     }
 
     return Control::None;

@@ -265,29 +265,29 @@ void InputWindow::KeyEnter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::ProcessContorl(Control control)
 {
-    if ((control >= Control::B_0 && control <= Control::B_9) || control.Is(Control::B_Dot) || control.Is(Control::B_Minus))
+    if ((control >= Control::_0 && control <= Control::_9) || control.Is(Control::Dot) || control.Is(Control::Minus))
     {
         if (control.action.Is(Control::Action::Up))
         {
             m_iws.PressKey(control);
         }
     }
-    else if (control.Is(Control::REG_LEFT))
+    else if (control.Is(Control::Reg::Left))
     {
         if (!IN_NUM_LOCK_MODE)
         {
             m_iws.RegLeft();
         }
     }
-    else if (control.Is(Control::REG_RIGHT))
+    else if (control.Is(Control::Reg::Right))
     {
         if (!IN_NUM_LOCK_MODE)
         {
             m_iws.RegRight();
         }
     }
-    else if ((control >= Control::B_F1 && control <= Control::B_F4) && control.action.Is(Control::Action::Up))
+    else if ((control >= Control::F1 && control <= Control::F4) && control.action.Is(Control::Action::Up))
     {
-        Menu::CurrentPage()->GetItem(control - Control::B_F1)->Press(control);
+        Menu::CurrentPage()->GetItem(control - Control::F1)->Press(control);
     }
 }

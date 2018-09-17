@@ -69,16 +69,16 @@ void Menu::ProcessControl(Control key)
     else if(Menu::CurrentPage()->ProcessingControl(key))
     {
     }
-    else if (openedItem && (key.Is(Control::REG_LEFT) || key.Is(Control::REG_RIGHT) || key.Is(Control::REG_BTN) || key.Is(Control::B_ESC) || 
-                            key.Is(Control::B_LEFT) || key.Is(Control::B_RIGHT)))
+    else if (openedItem && (key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right) || key.Is(Control::Reg::Button) || key.Is(Control::Esc) || 
+                            key.Is(Control::Left) || key.Is(Control::Right)))
     {
         openedItem = openedItem->Press(key);
     }
-    else if (key >= Control::B_F1 && key <= Control::B_F5)
+    else if (key >= Control::F1 && key <= Control::F5)
     {
-        openedItem = CurrentPage()->GetItem(key - Control::B_F1)->Press(key);
+        openedItem = CurrentPage()->GetItem(key - Control::F1)->Press(key);
     }
-    else if (key.Is(Control::REG_LEFT))
+    else if (key.Is(Control::Reg::Left))
     {
         if (RegIsControlPages())
         {
@@ -88,7 +88,7 @@ void Menu::ProcessControl(Control key)
             }
         }
     }
-    else if (key.Is(Control::REG_RIGHT))
+    else if (key.Is(Control::Reg::Right))
     {
         if (RegIsControlPages())
         {
@@ -100,12 +100,12 @@ void Menu::ProcessControl(Control key)
     }
     else if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
     {
-        if(key.Is(Control::B_ON1))
+        if(key.Is(Control::On1))
         {
             SWITCH_CHANNEL_A;
             Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
         }
-        else if (key.Is(Control::B_ON2))
+        else if (key.Is(Control::On2))
         {
             SWITCH_CHANNEL_B;
             Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));

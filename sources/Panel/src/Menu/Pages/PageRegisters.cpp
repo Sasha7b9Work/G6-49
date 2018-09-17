@@ -122,7 +122,7 @@ static bool AllowableSymbol(Control key)
     }
     else if(type == Binary)
     {
-        return key.Is(Control::B_0) || key.Is(Control::B_1);
+        return key.Is(Control::_0) || key.Is(Control::_1);
     }
     else if(type == Uint10_Uint10 || type == Uint14_Uint14)
     {
@@ -131,7 +131,7 @@ static bool AllowableSymbol(Control key)
             return true;
         }
 
-        if (key.Is(Control::B_Dot))
+        if (key.Is(Control::Dot))
         {
             for (int i = 0; i < sizeof(buffer); i++)
             {
@@ -482,7 +482,7 @@ static bool OnRegulator(Control key)
 {
     if (TypeBuffer(currentRegister) == Uint)
     {
-        if(key.Is(Control::REG_RIGHT) || key.Is(Control::REG_LEFT))
+        if(key.Is(Control::Reg::Right) || key.Is(Control::Reg::Left))
         {
             NumberBuffer::ProcessKey(key);
             LoadRegister();
@@ -516,12 +516,12 @@ static bool OnKey(Control control)
             NumberBuffer::ProcessKey(control);
             return true;
         }
-        else if(control.Is(Control::B_RIGHT) || control.Is(Control::B_LEFT))
+        else if(control.Is(Control::Right) || control.Is(Control::Left))
         {
             NumberBuffer::ProcessKey(control);
             return true;
         }
-        else if(control.Is(Control::B_ESC))
+        else if(control.Is(Control::Esc))
         {
             OnPress_Cancel();
             return true;

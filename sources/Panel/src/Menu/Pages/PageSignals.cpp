@@ -93,7 +93,7 @@ DEF_CHOICE_PARAMETER(parameters,                                                
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static bool OnKey(Control control)
 {
-    if(control.Is(Control::B_ESC))
+    if(control.Is(Control::Esc))
     {
         return FORM_CURRENT->CloseOpenedParameter();
     }
