@@ -81,7 +81,7 @@ public:
     FrequencyMeter::BillingTime freq_billingTime;               ///< ¬рем€ счЄта
     FrequencyMeter::AvePeriod   freq_avePeriod;                 ///< „исло усредн€емых периодов в режиме измерени€ периода
     FreqTimeStamps              freq_timeStamps;                ///< ћетки времени
-    bool                        sineRampModulationEnabled;      ///< true, если включена модул€ци€ синусоиды пилой
+    bool                        sineManipulation;               ///< true, если включена модул€ци€ синусоиды пилой
 
 #define FLAG_1      set.flag1
     uint            flag1;

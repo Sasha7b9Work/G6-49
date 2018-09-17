@@ -11,8 +11,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pSignals;
 Page *PageSignals::pointer = (Page *)&pSignals;
-extern ChoiceParameterBase parameters;
-ChoiceParameter *PageSignals::cpParameters = (ChoiceParameter *)&parameters;
+extern ChoiceParameterBase cParameters;
 /// мНЛЕП РЕЙСЫЕИ ТНПЛШ ЯХЦМЮК
 static int numForm = 0;
 
@@ -20,7 +19,7 @@ static int numForm = 0;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Channel(bool)
 {
-    parameters.form = FORM_CURRENT;
+    cParameters.form = FORM_CURRENT;
     numForm = FORM_CURRENT->value;
 }
 
@@ -43,7 +42,7 @@ void OnPress_Form(bool)
 
     numForm = WAVE_CURRENT.GetCurrentForm()->value;
 
-    parameters.form = FORM_CURRENT;
+    cParameters.form = FORM_CURRENT;
 
     Generator::TuneChannel(CURRENT_CHANNEL);
 }
@@ -83,7 +82,7 @@ DEF_BUTTON( bSetParameter,                                                      
     pSignals, FuncActive, OnPress_SetParameter, FuncDraw
 )
 
-DEF_CHOICE_PARAMETER(parameters,                                                                               //--- мюярпнийх яхцмюкнб - оюпюлерп ---
+DEF_CHOICE_PARAMETER(cParameters,                                                                              //--- мюярпнийх яхцмюкнб - оюпюлерп ---
     "оюпюлерп", "PARAMETER",
     "бШАНП ОЮПЮЛЕРПЮ ДКЪ МЮЯРПНИЙХ.",
     "Choosing a setting for customization.",
@@ -108,7 +107,7 @@ DEF_PAGE_4
     "", "",
     cChannel,       ///< мюярпнийх яхцмюкнб - йюмюк
     cForm,          ///< мюярпнийх яхцмюкнб - тнплю
-    parameters,     ///< мюярпнийх яхцмюкнб - оюпюлерп
+    cParameters,     ///< мюярпнийх яхцмюкнб - оюпюлерп
     bSetParameter,  ///< мюярпнийх яхцмюкнб - ббеярх гмювемхе оюпюлерпю
     Page_Settings, 0, FuncActive, FuncPress, OnKey
 )

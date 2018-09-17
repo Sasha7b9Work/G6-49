@@ -44,11 +44,11 @@ void Display::Update()
     Painter::BeginScene(Color::BACK);
     
     Wave::Graphics::Draw(Chan::A);
-    
+
     Wave::Graphics::Draw(Chan::B);
     
     Menu::Draw();
-    
+
     PageRegisters::Draw();
     
     InputWindow::Draw();

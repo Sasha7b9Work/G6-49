@@ -4,6 +4,8 @@
 #include "Settings/Settings.h"
 #include "Display/InputWindow.h"
 #include "Generator.h"
+#include "Signals.h"
+#include "Utils/Debug.h"
 #include <stdio.h>
 
 
@@ -150,6 +152,10 @@ Parameter *Form::CurrentParameter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Form::NumParameters() const 
 {
+    if(PARAM_CURRENT->GetParent())
+    {
+        return numParams + 2;
+    }
     return numParams;
 }
 
@@ -196,12 +202,12 @@ void Form::TuneGenerator(Chan ch)
             params = oldParams;
             numParams = oldNumParams;
 
-            if(CurrentParameter()->value == Parameter::ModulationRampSine)
+            if(CurrentParameter()->value == Parameter::Manipulation)
             {
                 SendParameterToGenerator(ch, Parameter::Frequency);
                 SendParameterToGenerator(ch, Parameter::Amplitude);
                 SendParameterToGenerator(ch, Parameter::Offset);
-                SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+                SendParameterToGenerator(ch, Parameter::Manipulation);
             }
 
             currentParam = current;
@@ -213,7 +219,7 @@ void Form::TuneGenerator(Chan ch)
         }
         else
         {
-            SendParameterToGenerator(ch, Parameter::ModulationRampSine);
+            SendParameterToGenerator(ch, Parameter::Manipulation);
             SendParameterToGenerator(ch, Parameter::Frequency);
             SendParameterToGenerator(ch, Parameter::Amplitude);
             SendParameterToGenerator(ch, Parameter::Offset);
@@ -258,9 +264,9 @@ void Form::OpenCurrentParameter()
         return;
     }
 
-    if(CurrentParameter()->value == Parameter::ModulationRampSine)
+    if(CurrentParameter()->Is(Parameter::Manipulation))
     {
-        set.sineRampModulationEnabled = true;
+        set.sineManipulation = true;
     }
 
     oldParams = params;
@@ -279,7 +285,7 @@ void Form::OpenCurrentParameter()
         params[i].parent = parent;
     }
 
-    if(parent->value == Parameter::ModulationRampSine)
+    if(parent->Is(Parameter::Manipulation))
     {
         Generator::TuneChannel(wave->GetChannel());
     }
@@ -293,9 +299,9 @@ bool Form::CloseOpenedParameter()
         params = oldParams;
         numParams = oldNumParams;
         currentParam = oldCurrentParams;
-        if(CurrentParameter()->value == Parameter::ModulationRampSine)
+        if(CurrentParameter()->Is(Parameter::Manipulation))
         {
-            set.sineRampModulationEnabled = false;
+            set.sineManipulation = false;
         }
         Generator::TuneChannel(wave->GetChannel());
         return true;
@@ -313,17 +319,27 @@ bool Form::ParameterIsOpened() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float Parameter::GetValue() const
 {
-    if(value == Parameter::ModulationRampSine)
+    if(Is(Manipulation))
     {
-        return set.sineRampModulationEnabled ? 1.0f : 0.0f;
+        return set.sineManipulation ? 1.0f : 0.0f;
     }
     StructValue input((Parameter *)this);
     return input.Value();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *Parameter::GetStringValue() const
+pString Parameter::GetStringValue() const
 {
+    if(Is(Manipulation))
+    {
+        static const char *values[2][2] =
+        {
+            {" Откл", " Вкл"},
+            {" Off",  " On"}
+        };
+
+        return values[LANG][set.sineManipulation ? 1 : 0];
+    }
     StructValue input((Parameter *)this);
     return input.StringValue();
 }
@@ -358,9 +374,7 @@ pString Parameter::NameUnit(char buf[10])
         {"c",   "s"},
         {"",    ""}
     };
-
     sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);
-
     return buf;
 }
 

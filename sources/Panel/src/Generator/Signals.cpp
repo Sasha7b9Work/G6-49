@@ -14,7 +14,7 @@ static Parameter params_SineA[Parameter::Number] =
     Parameter(Parameter::Period,             100e-8f, 100e6f, "05000", 0, Order::Milli),
     Parameter(Parameter::Amplitude,          0.0f,    10.0f,  "50000", 0, Order::One),
     Parameter(Parameter::Offset,             0.0f,    10.0f,  "50000", 0, Order::One),
-    Parameter(Parameter::ModulationRampSine, -1.0f,    -1.0f, "",      0, Order::One, paramsSineModulationA, 2, NUM_DIGITS - 1, ' ')
+    Parameter(Parameter::Manipulation,       -1.0f,    -1.0f, "",      0, Order::One, paramsSineModulationA, 2, NUM_DIGITS - 1, ' ')
 };
 
 static Parameter  params_RampPlusA[Parameter::Number] =
@@ -79,7 +79,7 @@ static Parameter params_SineB[Parameter::Number] =
     Parameter(Parameter::Amplitude,          0.0f,    10.0f,  "10000", 1, Order::One),
     Parameter(Parameter::Offset,             0.0f,    10.0f,  "50000", 0, Order::One),
     Parameter(Parameter::Phase,              0.0f,    360.0f, "10000", 0, Order::One),
-    Parameter(Parameter::ModulationRampSine, -1.0f,   -1.0f,  "10000", 0, Order::One, paramsSineModulationB, 2)
+    Parameter(Parameter::Manipulation,       -1.0f,   -1.0f,  "10000", 0, Order::One, paramsSineModulationB, 2)
 };
 
 static Parameter  params_RampPlusB[Parameter::Number] =

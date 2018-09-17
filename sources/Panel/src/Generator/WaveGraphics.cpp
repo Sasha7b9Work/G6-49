@@ -200,15 +200,14 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 
     Text::DrawText(22, y0 + 3, form->Name(LANG), Color::FILL);
 
-    int num = form->NumParameters();
-
-    if(form->GetParameter(0)->GetParent())
+    if(form->GetParameter(0)->GetParent()->Is(Parameter::Manipulation))     /// Если это раскрытый параметр
     {
         Text::DrawText(x0 + 1, y0, form->GetParameter(0)->GetParent()->Name());
+        DrawParameterValue(form->GetParameter(0)->GetParent(), x0 + 80, y0);
         y0 += 10;
     }
     
-    for (int i = 0; i < num; i++)
+    for (int i = 0; i < form->NumParameters(); i++)
     {
         Parameter *param = form->GetParameter(i);
         if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == 0)
@@ -216,15 +215,11 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
             Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
         }
         Text::DrawText(x0 + 1, y0, param->Name(), Color::FILL);
-
-        if(param->IsInputValue())
-        {
-            DrawParameterValue(param, x0 + 80, y0);
-        }
+        DrawParameterValue(param, x0 + 80, y0);
         y0 += 10;
     }
 
-    if(form->GetParameter(0)->GetParent())
+    if(form->GetParameter(0)->GetParent()->Is(Parameter::Manipulation))
     {
         Text::DrawText(x0 + 1, y0, LANG_RU ? "Выход - ESC" : "Exit - ESC");
     }
@@ -235,5 +230,7 @@ void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
 {
     x = Text::DrawText(x, y, param->GetStringValue());
     char buffer[10];
-    Text::DrawText(x, y, param->NameUnit(buffer));
+    Text::SetUpperCase(false);
+    Text::DrawText(x + 3, y, param->NameUnit(buffer));
+    Text::SetUpperCase(true);
 }
