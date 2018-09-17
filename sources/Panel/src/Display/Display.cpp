@@ -7,7 +7,7 @@
 #include "InputWindow.h"
 #include "Menu/Hint.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/PageRegisters.h"
+#include "Menu/Pages/PageService.h"
 #include "Utils/Statistics.h"
 #include "Utils/Debug.h"
 #include <stdlib.h>
@@ -49,7 +49,7 @@ void Display::Update()
     
     Menu::Draw();
 
-    PageRegisters::Draw();
+    PageService::PageRegisters::Draw();
     
     InputWindow::Draw();
     

@@ -156,7 +156,6 @@ public:
          Service,
          Debug,
          FrequencyCounter,
-         FrequencyCounter3,
          USB,
          SB_Input,
          Registers,

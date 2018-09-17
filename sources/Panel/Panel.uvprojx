@@ -1942,21 +1942,6 @@
               <FilePath>.\src\Menu\Pages\PageUSB.h</FilePath>
             </File>
             <File>
-              <FileName>PageRegisters.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageRegisters.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageRegisters.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageRegisters.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageFrequencyCounter3.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFrequencyCounter3.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageSignals.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
