@@ -116,7 +116,7 @@ void CPU::Keyboard::Update()
                     else if (delta > 100 &&                                     // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                                // и сейчас кнопка находится в отжатом состоянии
                     {
-                        timePress[rl][sl] = 0;                                  // То учитываем это в массиве
+                        timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
                         FillCommand(controls[rl][sl], Control::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
                 }

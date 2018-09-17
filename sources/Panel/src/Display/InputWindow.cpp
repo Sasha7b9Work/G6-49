@@ -267,7 +267,7 @@ void InputWindow::ProcessContorl(Control control)
 {
     if ((control >= Control::_0 && control <= Control::_9) || control.Is(Control::Dot) || control.Is(Control::Minus))
     {
-        if (control.action.Is(Control::Action::Up))
+        if (control.action.Is(Control::Action::Down))
         {
             m_iws.PressKey(control);
         }

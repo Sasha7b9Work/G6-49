@@ -160,7 +160,7 @@ void AD9952::WriteASF(Chan ch)
 
     char buffer[100];
     sprintf(buffer, "ASF %d", value);
-    Console::AddString(buffer);
+    //Console::AddString(buffer);
 
     WriteToHardware(ch, Register::ASF, value);
 }
@@ -179,7 +179,7 @@ void AD9952::WriteARR(Chan ch)
     uint8 value = (uint8)Ramp::duration[ch];
     char buffer[100];
     sprintf(buffer, "ARR %d", value);
-    Console::AddString(buffer);
+    //Console::AddString(buffer);
 
     WriteToHardware(ch, Register::ARR, value);
 }
