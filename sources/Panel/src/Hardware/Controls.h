@@ -33,21 +33,17 @@ struct Control
         Esc       = 0x12,
         Left      = 0x13,
         Right     = 0x14,
-        Ch        = 0x15,
-        WF        = 0x16,
-        M         = 0x17,
-        U         = 0x18,
-        On1       = 0x19,
-        On2       = 0x1a
+        On1       = 0x15,
+        On2       = 0x16
     } value;
 
     struct Reg
     {
         enum E
         {
-            Left  = 0x1b,
-            Right = 0x1c,
-            Button = 0x1d
+            Left   = 0x17,
+            Right  = 0x18,
+            Button = 0x19
         };
     };
 
