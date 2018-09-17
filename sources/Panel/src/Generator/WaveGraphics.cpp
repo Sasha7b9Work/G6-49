@@ -192,21 +192,21 @@ void Wave::Graphics::DrawPacketImpulse(int x0, int y0, int, int height)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphics::DrawParameters(Chan ch, int y0)
 {
-    int x0 = 107;
-
     Form *form = FORM(ch);
+
+    /*
+    if(form->GetParameter(0)->GetParent()->Is(Parameter::Manipulation))
+    {
+        DrawParametersManipulation(ch, y0);
+    }
+    */
+
+    int x0 = 107;
 
     y0 += 5;
 
     Text::DrawText(22, y0 + 3, form->Name(LANG), Color::FILL);
-
-    if(form->GetParameter(0)->GetParent()->Is(Parameter::Manipulation))     /// Если это раскрытый параметр
-    {
-        Text::DrawText(x0 + 1, y0, form->GetParameter(0)->GetParent()->Name());
-        DrawParameterValue(form->GetParameter(0)->GetParent(), x0 + 80, y0);
-        y0 += 10;
-    }
-    
+   
     for (int i = 0; i < form->NumParameters(); i++)
     {
         Parameter *param = form->GetParameter(i);
@@ -217,11 +217,6 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         Text::DrawText(x0 + 1, y0, param->Name(), Color::FILL);
         DrawParameterValue(param, x0 + 80, y0);
         y0 += 10;
-    }
-
-    if(form->GetParameter(0)->GetParent()->Is(Parameter::Manipulation))
-    {
-        Text::DrawText(x0 + 1, y0, LANG_RU ? "Выход - ESC" : "Exit - ESC");
     }
 }
 

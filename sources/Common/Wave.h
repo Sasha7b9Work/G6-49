@@ -49,7 +49,7 @@ public:
         DurationFall,           ///< Длительность спада
         DurationStady,          ///< Длительность установившего значения
         DutyFactor,             ///< Коэффициент заполнения
-        ModulationRampSine,     ///< Модуляция пилой для синусоиды
+        Manipulation,           ///< Модуляция пилой для синусоиды
         ManipulationDuration,   ///< Длительность импульсов в режиме манипуляции
         ManipulationPeriod,     ///< Период следования импульсов в режиме манипуляции
         PacketPeriod,           ///< Период следования пачек импульсов в пакетном режиме
@@ -67,13 +67,15 @@ public:
         strcpy(buffer, buf);
     };
 
+    bool Is(Parameter::E v) { return value == v; };
+
     float MinValue() const { return min; };
 
     float MaxValue() const { return max; };
 
     float GetValue()  const;
 
-    char *GetStringValue() const;
+    pString GetStringValue() const;
 
     pString Name() const;
     /// Возвращает true, если параметр содержит несколько параметров
@@ -247,5 +249,6 @@ public:
         static void DrawParameters(Chan chan, int y0);
 
         static void DrawParameterValue(Parameter *parameter, int x, int y);
+
     };
 };

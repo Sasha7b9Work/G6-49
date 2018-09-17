@@ -152,10 +152,6 @@ Parameter *Form::CurrentParameter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Form::NumParameters() const 
 {
-    if(PARAM_CURRENT->GetParent())
-    {
-        return numParams + 2;
-    }
     return numParams;
 }
 
