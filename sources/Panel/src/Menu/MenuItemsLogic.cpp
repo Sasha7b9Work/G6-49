@@ -440,7 +440,7 @@ Control Item::ButtonForItem() const
         return (Control::E)(Control::B_F1 + pos);
     }
 
-    return Control::B_None;
+    return Control::None;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

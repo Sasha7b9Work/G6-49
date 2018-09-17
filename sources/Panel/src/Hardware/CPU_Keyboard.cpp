@@ -44,11 +44,11 @@ static void DetectRegulator();
 static uint timePress[5][6];
 
                                      //          SL0           SL1           SL2               SL3               SL4            SL5
-static const Control controls[5][6] = {{Control::B_0, Control::B_5, Control::B_Dot,   Control::B_ESC,   Control::B_F1, Control::B_None},    // RL0
-                                       {Control::B_1, Control::B_6, Control::B_Minus, Control::B_LEFT,  Control::B_F2, Control::B_None},    // RL1
-                                       {Control::B_2, Control::B_7, Control::B_None,  Control::B_RIGHT, Control::B_F3, Control::B_None},    // RL2
-                                       {Control::B_3, Control::B_8, Control::B_ON1,   Control::B_None,  Control::B_F4, Control::B_None},    // RL3
-                                       {Control::B_4, Control::B_9, Control::B_ON2,   Control::B_None,  Control::B_F5, Control::B_None}};   // RL4
+static const Control controls[5][6] = {{Control::B_0, Control::B_5, Control::B_Dot,   Control::B_ESC,   Control::B_F1, Control::None},    // RL0
+                                       {Control::B_1, Control::B_6, Control::B_Minus, Control::B_LEFT,  Control::B_F2, Control::None},    // RL1
+                                       {Control::B_2, Control::B_7, Control::None,  Control::B_RIGHT, Control::B_F3, Control::None},    // RL2
+                                       {Control::B_3, Control::B_8, Control::B_ON1,   Control::None,  Control::B_F4, Control::None},    // RL3
+                                       {Control::B_4, Control::B_9, Control::B_ON2,   Control::None,  Control::B_F5, Control::None}};   // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
@@ -103,26 +103,26 @@ void CPU::Keyboard::Update()
 
             Control control =  controls[rl][sl];
 
-            if (control != Control::B_None)
+            if (control != Control::None)
             {
-                if (timePress[rl][sl] && timePress[rl][sl] != MAX_UINT)     // Если клавиша находится в нажатом положении
+                if (timePress[rl][sl] && timePress[rl][sl] != MAX_UINT)         // Если клавиша находится в нажатом положении
                 {
                     uint delta = time - timePress[rl][sl];
-                    if(delta > 500)                                         // Если прошло более 500 мс с момента нажатия -
+                    if(delta > 500)                                             // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        FillCommand(controls[rl][sl], Control::Action::Long);                // это будет длинное нажатие
+                        FillCommand(controls[rl][sl], Control::Action::Long);   // это будет длинное нажатие
                     }
-                    else if (delta > 100 &&                                 // Если прошло более 100 мс с момента нажатия
-                        !BUTTON_IS_PRESS(state))                            // и сейчас кнопка находится в отжатом состоянии
+                    else if (delta > 100 &&                                     // Если прошло более 100 мс с момента нажатия
+                        !BUTTON_IS_PRESS(state))                                // и сейчас кнопка находится в отжатом состоянии
                     {
-                        timePress[rl][sl] = 0;                              // То учитываем это в массиве
-                        FillCommand(controls[rl][sl], Control::Action::Up);                  // И сохраняем отпускание кнопки в буфере команд
+                        timePress[rl][sl] = 0;                                  // То учитываем это в массиве
+                        FillCommand(controls[rl][sl], Control::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
                 }
-                else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT) // Если кнопка нажата
+                else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
                 {
-                    timePress[rl][sl] = time;                               // то сохраняем время её нажатия
+                    timePress[rl][sl] = time;                                       // то сохраняем время её нажатия
                     FillCommand(controls[rl][sl], Control::Action::Down);
                 }
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
@@ -232,7 +232,7 @@ Control CPU::Keyboard::GetNextControl()
 
     if (BufferIsEmpty())
     {
-        retValue.value = Control::B_None;
+        retValue.value = Control::None;
     }
     else
     {

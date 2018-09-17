@@ -12,7 +12,7 @@ struct Control
 {
     enum E
     {
-        B_None    = 0x00,
+        None    = 0x00,
         B_F1      = 0x01,
         B_F2      = 0x02,
         B_F3      = 0x03,
@@ -59,7 +59,7 @@ struct Control
     } action;
 
     E value;
-    Control(E v = B_None, Action::E a = Action::Down) : action(a), value(v) {};
+    Control(E v = None, Action::E a = Action::Down) : action(a), value(v) {};
     Control operator=(Control rval)
     {
         value = rval.value;

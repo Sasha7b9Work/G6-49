@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool        Hint::show = false;
 const Item *Hint::item = 0;
-Control     Hint::control = Control::B_None;
+Control     Hint::control = Control::None;
 int         Hint::numPages = 0;
 int         Hint::currentPage = 0;
 int         Hint::firstItemOnSecondPage = 0;
@@ -24,7 +24,7 @@ bool Hint::ProcessControl(Control key)
     {
         show = !show;
         item = 0;
-        control = Control::B_None;
+        control = Control::None;
         numPages = 0;
     }
 
@@ -33,7 +33,7 @@ bool Hint::ProcessControl(Control key)
         if (key >= Control::B_F1 && key <= Control::B_F5)
         {
             item = Menu::CurrentPage()->GetItem(key - Control::B_F1);
-            control = Control::B_None;
+            control = Control::None;
             needCalculate = true;
         }
         else if (key.Is(Control::REG_LEFT) || key.Is(Control::REG_RIGHT))
@@ -126,7 +126,7 @@ void Hint::Draw()
             }
             
         }
-        else if (!control.Is(Control::B_None))
+        else if (!control.Is(Control::None))
         {
 
         }

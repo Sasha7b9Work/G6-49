@@ -402,7 +402,7 @@ void StructValue::PressKey(Control key)
     {
         {Control::B_1, '1'}, {Control::B_2, '2'}, {Control::B_3, '3'}, {Control::B_4, '4'}, {Control::B_5, '5'},
         {Control::B_6, '6'}, {Control::B_7, '7'}, {Control::B_8, '8'}, {Control::B_9, '9'}, {Control::B_0, '0'}, {Control::B_Dot, '.'},
-        {Control::B_None, '.'}
+        {Control::None, '.'}
     };
 
     if (!IN_NUM_LOCK_MODE)
@@ -415,7 +415,7 @@ void StructValue::PressKey(Control key)
     if (strlen(m_inputBuffer) < SIZE_INPUT_BUFFER_IWS - 1)
     {
         int i = 0;
-        while (command[i].control != Control::B_None)
+        while (command[i].control != Control::None)
         {
             if (command[i].control == key)
             {
