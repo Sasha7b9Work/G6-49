@@ -198,9 +198,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageUSB.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -399,9 +396,6 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageUSB.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h">

@@ -1932,16 +1932,6 @@
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter.h</FilePath>
             </File>
             <File>
-              <FileName>PageUSB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageUSB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageUSB.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageUSB.h</FilePath>
-            </File>
-            <File>
               <FileName>PageSignals.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
