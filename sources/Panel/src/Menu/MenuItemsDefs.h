@@ -81,11 +81,11 @@ const PageBase name = { Item_Page, 6, false, namePage, keeper, funcActive, {titl
     items##name, funcPress, FuncDrawPage, FuncRegSetPage};
 
 #define DEF_PAGE_7(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
-    item1, item2, item3, item4, item5, item6, item7, namePage, keeper, funcActive, funcPress)                                               \
-static const Item * const  items##name[] = {                                                                                                \
+    item1, item2, item3, item4, item5, item6, item7, namePage, keeper, funcActive, funcPress, funcOnKey)                                    \
+static Item * items##name[] = {                                                                                                             \
     (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7};                        \
-const PageBase name = { Item_Page, 7, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                              \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
+const PageBase name = { Item::Type::Page, 7, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                       \
+    items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
 
 #define DEF_PAGE_8(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
     item1, item2, item3, item4, item5, item6, item7, item8, namePage, keeper, funcActive, funcPress)                                        \

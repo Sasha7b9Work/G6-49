@@ -228,9 +228,6 @@
     <ClCompile Include="..\..\Panel\src\Utils\NumberBuffer.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>

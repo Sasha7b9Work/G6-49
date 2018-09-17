@@ -1952,11 +1952,6 @@
               <FilePath>.\src\Menu\Pages\PageRegisters.h</FilePath>
             </File>
             <File>
-              <FileName>PageFrequencyCounter2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFrequencyCounter2.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageFrequencyCounter3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter3.cpp</FilePath>

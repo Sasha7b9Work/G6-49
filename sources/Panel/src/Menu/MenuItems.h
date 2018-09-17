@@ -153,11 +153,9 @@ public:
     {
          NoPage,
          Settings,
-         Settings2,
          Service,
          Debug,
          FrequencyCounter,
-         FrequencyCounter2,
          FrequencyCounter3,
          USB,
          SB_Input,
