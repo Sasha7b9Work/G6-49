@@ -88,7 +88,9 @@ public:
     /// ¬озвращает true, если €вл€етс€ параметром типа e
     bool Is(Parameter::E e) const { return value == e; };
     /// ¬озвращает true, если €вл€етс€ непосредственно вводимым значением
-    bool IsInputValue() const { return !IsComplexParameter(); };
+    bool IsInputValue() const { return value != Manipulation && value != Exit; };
+    /// ¬озвращает true, если этот параметр - кнопка выхода.
+    bool IsExitParameter() const { return value == Exit; };
     /// ¬озвращает указатель на форму, параметром которой €вл€етс€
     Form *GetForm() { return form; };
     /// ¬озвращает адрес родительского параметра

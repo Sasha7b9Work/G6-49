@@ -194,13 +194,6 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 {
     Form *form = FORM(ch);
 
-    /*
-    if(form->GetParameter(0)->GetParent()->Is(Parameter::Manipulation))
-    {
-        DrawParametersManipulation(ch, y0);
-    }
-    */
-
     int x0 = 107;
 
     y0 += 5;

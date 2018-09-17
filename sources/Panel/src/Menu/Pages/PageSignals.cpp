@@ -69,6 +69,10 @@ static void OnPress_SetParameter()
 
         ADDITION_PAGE = (Page *)&pInput;
     }
+    else if(PARAM_CURRENT->IsExitParameter())
+    {
+        FORM_CURRENT->CloseOpenedParameter();
+    }
     else
     {
         FORM_CURRENT->OpenCurrentParameter();

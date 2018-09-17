@@ -70,7 +70,7 @@ pString Register::Name() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Parameter::IsComplexParameter() const
 {
-    return numParams != 0;
+    return value == Manipulation;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ void Form::OpenCurrentParameter()
             set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
         }
         else
-        {
+       {
             oldParams = params;
             oldNumParams = numParams;
             oldCurrentParams = currentParam;
@@ -301,10 +301,6 @@ bool Form::CloseOpenedParameter()
         params = oldParams;
         numParams = oldNumParams;
         currentParam = oldCurrentParams;
-        if(CurrentParameter()->Is(Parameter::Manipulation))
-        {
-            set.sineManipulation[CURRENT_CHANNEL] = false;
-        }
         Generator::TuneChannel(wave->GetChannel());
         return true;
     }
