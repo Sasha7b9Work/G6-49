@@ -395,9 +395,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>

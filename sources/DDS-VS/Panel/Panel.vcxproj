@@ -416,7 +416,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\Menu.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\MenuPagesNames.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h" />

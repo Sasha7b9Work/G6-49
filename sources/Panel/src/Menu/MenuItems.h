@@ -3,7 +3,6 @@
 #include "Display/Display.h"
 #include "Hardware/Controls.h"
 #include "MenuItemsDefs.h"
-#include "Menu/MenuPagesNames.h"
 #include "Hardware/Controls.h"
 #include "Command.h"
 
@@ -29,6 +28,22 @@ extern int8 gCurDigit;
 typedef bool (*pFuncBKey)(Control);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+enum NamePage
+{
+    Page_NoPage,
+    Page_Settings,
+    Page_Settings2,
+    Page_Service,
+    Page_Debug,
+    Page_FrequencyCounter,
+    Page_FrequencyCounter2,
+    Page_FrequencyCounter3,
+    Page_USB,
+    PageSB_Input,
+    Page_Registers,
+    NumPages
+};
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                                   \

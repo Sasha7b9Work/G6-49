@@ -1857,11 +1857,6 @@
               <FilePath>.\src\Menu\MenuDrawing.cpp</FilePath>
             </File>
             <File>
-              <FileName>MenuPagesNames.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\MenuPagesNames.h</FilePath>
-            </File>
-            <File>
               <FileName>MenuItemsGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuItemsGraphics.cpp</FilePath>
