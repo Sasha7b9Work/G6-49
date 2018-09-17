@@ -1,4 +1,3 @@
-#include "PageFrequencyCounter2.h"
 #include "Settings/Settings.h"
 #include "Generator/Generator.h"
 #include "Settings/Settings.h"
@@ -6,7 +5,6 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pFrequencyCounter2;
-Page *PageFrequencyCounter2::pointer = (Page *)&pFrequencyCounter2;
 
 static void OnPress_Resist(bool);
 static void OnPress_Couple(bool);

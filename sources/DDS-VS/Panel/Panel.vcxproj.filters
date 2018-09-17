@@ -494,12 +494,6 @@
     <ClInclude Include="..\..\Panel\src\Utils\NumberBuffer.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h">
       <Filter>Generator</Filter>
     </ClInclude>

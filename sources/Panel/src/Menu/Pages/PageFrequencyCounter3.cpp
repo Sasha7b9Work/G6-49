@@ -1,11 +1,9 @@
-#include "PageFrequencyCounter3.h"
 #include "PageFrequencyCounter.h"
 #include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pFrequencyCounte3;
-Page *PageFrequencyCounter3::pointer = (Page *)&pFrequencyCounte3;
 
 static void OnPress_Test(bool);
 static void OnPress_TimeStamps(bool);
