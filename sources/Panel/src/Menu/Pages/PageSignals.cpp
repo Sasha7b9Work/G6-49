@@ -47,15 +47,16 @@ void OnPress_Form(bool)
     Generator::TuneChannel(CURRENT_CHANNEL);
 }
 
-DEF_CHOICE_5( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
+DEF_CHOICE_6( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
-    FORM_RU(Form::Sine),          FORM_EN(Form::Sine),          "Синус.",               "Sinus.",
-    FORM_RU(Form::RampPlus),      FORM_EN(Form::RampPlus),      "Нарастающая пила.",    "Growing saw.",
-    FORM_RU(Form::RampMinus),     FORM_EN(Form::RampMinus),     "Убывающая пила.",      "Wrecking saw.",
-    FORM_RU(Form::Meander),       FORM_EN(Form::Meander),       "Меандр.",              "Meander.",
-    FORM_RU(Form::Impulse),       FORM_EN(Form::Impulse),       "Треугольник.",         "Triangle.",
+    FORM_RU(Form::Sine),            FORM_EN(Form::Sine),          "Синус",               "Sinus",
+    FORM_RU(Form::RampPlus),        FORM_EN(Form::RampPlus),      "Нарастающая пила",    "Growing saw",
+    FORM_RU(Form::RampMinus),       FORM_EN(Form::RampMinus),     "Убывающая пила",      "Wrecking saw",
+    FORM_RU(Form::Meander),         FORM_EN(Form::Meander),       "Меандр",              "Meander",
+    FORM_RU(Form::Impulse),         FORM_EN(Form::Impulse),       "Треугольник",         "Triangle",
+    FORM_RU(Form::PacketImpuls),    FORM_EN(Form::PacketImpuls),  "Пакеты",              "Packets",
     numForm, pSignals, FuncActive, OnPress_Form, FuncDraw
 )
 
