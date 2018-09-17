@@ -316,7 +316,7 @@ int Page::NumItems() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-NamePage Page::GetNamePage() const
+Page::Name Page::GetNamePage() const
 {
     return nameOrNumBit;
 }

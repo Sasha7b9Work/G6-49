@@ -72,5 +72,5 @@ DEF_PAGE_3(pFrequencyCounter2,
     cResist,
     cCouple,
     cFiltr,
-    Page_FrequencyCounter2, 0, FuncActive, FuncPress, FuncOnKey
+    Page::Name::FrequencyCounter2, 0, FuncActive, FuncPress, FuncOnKey
 )

@@ -76,5 +76,5 @@ DEF_PAGE_3(pFrequencyCounte3,                                                   
     cAvePeriod,
     cTimeStamps,
     cTest,
-    Page_FrequencyCounter3, 0, FuncActive, FuncPress, FuncOnKey
+    Page::Name::FrequencyCounter3, 0, FuncActive, FuncPress, FuncOnKey
 )

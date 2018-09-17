@@ -68,5 +68,5 @@ DEF_PAGE_2( pService,                                                           
     bReset,
     cService_Language,   ///< ÑÅÐÂÈÑ - ßÇÛÊ
     //cService_Background, ///< ÑÅÐÂÈÑ - ÖÂÅÒ ÔÎÍÀ
-    Page_Service, 0, FuncActive, FuncPress
+    Page::Name::Service, 0, FuncActive, FuncPress
 )

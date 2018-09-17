@@ -26,5 +26,5 @@ DEF_PAGE_1( pSignals2,                                                          
     "",
     "",
     cTypeTune,                                      ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ 2 - ÇÀÑÛËÊÀ
-    Page_Settings2, 0, FuncActive, FuncPress
+    Page::Name::Settings2, 0, FuncActive, FuncPress
 )

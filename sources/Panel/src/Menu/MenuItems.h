@@ -29,29 +29,13 @@ typedef bool (*pFuncBKey)(Control);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-enum NamePage
-{
-    Page_NoPage,
-    Page_Settings,
-    Page_Settings2,
-    Page_Service,
-    Page_Debug,
-    Page_FrequencyCounter,
-    Page_FrequencyCounter2,
-    Page_FrequencyCounter3,
-    Page_USB,
-    PageSB_Input,
-    Page_Registers,
-    NumPages
-};
-
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                                   \
     uint8           type;           /* Тип итема */                                                                                             \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                                \
     bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                   \
                                     /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */     \
-    NamePage        nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                               \
+    uint8           nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                               \
                                     /* В случае, если type == Item_Choice,  определяет номер бита */                                         \
     const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
     pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                                                             \
@@ -164,6 +148,28 @@ public:
 class Page : public Item
 {
 public:
+
+    struct Name
+    {
+        enum E
+        {
+            NoPage,
+            Settings,
+            Settings2,
+            Service,
+            Debug,
+            FrequencyCounter,
+            FrequencyCounter2,
+            FrequencyCounter3,
+            USB,
+            SB_Input,
+            Registers,
+            Number
+        } value;
+        Name(int v) : value((E)v) {};
+        operator uint8() const { return (uint8)value; };
+    };
+
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
     /// \brief Здесь указатели на пункты этой страницы (в обычной странице) для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 
@@ -182,7 +188,7 @@ public:
     /// Возвращает количество элементов в странице по адресу page
     int NumItems() const;
     /// Возвращает имя страницы page
-    NamePage GetNamePage() const;
+    Name GetNamePage() const;
 
     int8 CurrentSubPage() const;
 

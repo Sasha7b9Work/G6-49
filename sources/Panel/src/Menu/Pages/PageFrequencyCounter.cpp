@@ -91,7 +91,7 @@ DEF_PAGE_4(pFrequencyCounter,                                                   
     cMeasure,
     cInterval,
     cBillingTime,
-    Page_FrequencyCounter, 0, FuncActive, FuncPress, FuncOnKey
+    Page::Name::FrequencyCounter, 0, FuncActive, FuncPress, FuncOnKey
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

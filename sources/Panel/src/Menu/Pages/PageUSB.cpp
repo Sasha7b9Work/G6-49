@@ -48,5 +48,5 @@ DEF_PAGE_3(pUSB,                                                                
     cSizeByte,              ///< USB - ÐÀÇÌÅÐ ÁÀÉÒÀ
     cStopBit,               ///< USB - ÑÒÎÏ-ÁÈÒ
     cParity,                ///< USB - ×¨ÒÍÎÑÒÜ
-    Page_USB, 0, FuncActive, FuncPress, FuncOnKey
+    Page::Name::USB, 0, FuncActive, FuncPress, FuncOnKey
 )
