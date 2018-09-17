@@ -6,7 +6,6 @@
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"
 #include "Menu/Pages/PageSignals.h"
-#include "Menu/Pages/PageSignals2.h"
 #include "Menu/Pages/PageFrequencyCounter.h"
 #include "Menu/Pages/PageFrequencyCounter2.h"
 #include "Menu/Pages/PageFrequencyCounter3.h"
@@ -25,7 +24,6 @@ Item *Menu::openedItem = 0;
 const Page *pages[NUM_PAGES] =
 {
     PageSignals::pointer,
-    PageSignals2::pointer,
     PageRegisters::pointer,
     PageFrequencyCounter::pointer,
     PageFrequencyCounter3::pointer,

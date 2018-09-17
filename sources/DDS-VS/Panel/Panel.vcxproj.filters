@@ -258,9 +258,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals2.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -522,9 +519,6 @@
       <Filter>Generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals2.h">
       <Filter>Menu\Pages</Filter>
     </ClInclude>
   </ItemGroup>

@@ -95,6 +95,18 @@ DEF_CHOICE_PARAMETER(cParameters,                                               
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2(cTypeTune,                                                                                      //--- НАСТРОЙКИ СИГНАЛОВ 2 - ЗАСЫЛКА ---
+    "ЗАСЫЛКА", "SENDING",
+    "Определяет периодичность засылки настроек сигналов в устройство управления.",
+    "Specifies the frequency of sending signal settings to the control device.",
+    "ОДНОКРАТНО", "SINGLE", "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
+    "The signal settings are sent once, after you press the confirm button.",
+    "НЕПРЕРЫВНО", "CONTINUOUSLY", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
+    "Sending of signal settings occurs synchronously with changing information on the screen.",
+    FLAG_1, BIT_TUNE_FULL, pSignals, FuncActive, FuncChangedChoice, FuncDraw
+)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static bool OnKey(Control control)
 {
     if(control.Is(Control::Esc))
@@ -105,15 +117,14 @@ static bool OnKey(Control control)
     return false;
 }
 
-DEF_PAGE_4
-(
-    pSignals,
+DEF_PAGE_5( pSignals,
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",
     "", "",
     cChannel,       ///< НАСТРОЙКИ СИГНАЛОВ - КАНАЛ
     cForm,          ///< НАСТРОЙКИ СИГНАЛОВ - ФОРМА
-    cParameters,     ///< НАСТРОЙКИ СИГНАЛОВ - ПАРАМЕТР
+    cParameters,    ///< НАСТРОЙКИ СИГНАЛОВ - ПАРАМЕТР
     bSetParameter,  ///< НАСТРОЙКИ СИГНАЛОВ - ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА
+    cTypeTune,      ///< НАСТРОЙКИ СИГНАЛОВ - ЗАСЫЛКА
     Page::Settings, 0, FuncActive, FuncPress, OnKey
 )
 

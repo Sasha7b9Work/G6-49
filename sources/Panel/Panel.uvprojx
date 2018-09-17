@@ -1981,16 +1981,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageSignals.h</FilePath>
             </File>
-            <File>
-              <FileName>PageSignals2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals2.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSignals2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals2.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
