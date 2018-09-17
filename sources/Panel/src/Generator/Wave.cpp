@@ -221,6 +221,10 @@ void Form::TuneGenerator(Chan ch)
             SendParameterToGenerator(ch, Parameter::Amplitude);
             SendParameterToGenerator(ch, Parameter::Offset);
         }
+        if(!ch.IsA())
+        {
+            SendParameterToGenerator(ch, Parameter::Phase);
+        }
     }
     else
     {

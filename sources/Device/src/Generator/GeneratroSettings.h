@@ -13,6 +13,7 @@ struct SettingsAD9952
     float       frequency;                      ///< Частота
     float       amplitude;
     float       offset;
+    float       phase;
 };
 
 

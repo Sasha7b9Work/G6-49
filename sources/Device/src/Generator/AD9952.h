@@ -15,6 +15,8 @@ public:
 
     static void SetAmplitude(Chan ch, float amplitude);
 
+    static void SetPhase(Chan ch, float phase);
+
     /// Функции для модуляции "пилой"
     class Ramp
     {
@@ -58,4 +60,5 @@ private:
     static void WriteARR(Chan ch);
     static void WriteASF(Chan ch);
     static void WriteFTW0(Chan ch);
+    static void WritePOW(Chan ch);
 };

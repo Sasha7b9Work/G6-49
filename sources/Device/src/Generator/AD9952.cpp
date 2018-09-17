@@ -88,6 +88,16 @@ void AD9952::SetFrequency(Chan ch, float frequency)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD9952::SetPhase(Chan ch, float phase)
+{
+    setDDS.ad9952[ch].phase = phase;
+    if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency)
+    {
+        WriteRegister(ch, Register::POW);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::SetAmplitude(Chan ch, float amplitude)
 {
     setDDS.ad9952[ch].amplitude = amplitude;
@@ -99,7 +109,7 @@ void AD9952::WriteRegister(Chan ch, Register reg)
 {
     typedef void(*pFuncVCh)(Chan);
 
-    static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, WriteARR, WriteFTW0, 0};
+    static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, WriteARR, WriteFTW0, WritePOW};
 
     pFuncVCh f = func[reg];
 
@@ -135,6 +145,13 @@ void AD9952::WriteCFR2(Chan ch)
     uint value = 0;
     SetBit(value, 3);
     WriteToHardware(ch, Register::CFR2, value);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD9952::WritePOW(Chan ch)
+{
+    uint value = (uint)(setDDS.ad9952[Chan::B].phase / 360.0f * (1 << 13) + 0.5f);
+    WriteToHardware(ch, Register::POW, value * 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
