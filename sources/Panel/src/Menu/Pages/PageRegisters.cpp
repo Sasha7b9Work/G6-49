@@ -545,5 +545,5 @@ DEF_PAGE_4_VAR(pRegisters,                                                      
     bNext,
     bSend,
     emptyItem,
-    Page::Name::Registers, 0, FuncActive, FuncPress, OnKey
+    Page::Registers, 0, FuncActive, FuncPress, OnKey
 )

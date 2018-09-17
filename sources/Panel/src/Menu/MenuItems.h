@@ -149,26 +149,22 @@ class Page : public Item
 {
 public:
 
-    struct Name
+    enum E
     {
-        enum E
-        {
-            NoPage,
-            Settings,
-            Settings2,
-            Service,
-            Debug,
-            FrequencyCounter,
-            FrequencyCounter2,
-            FrequencyCounter3,
-            USB,
-            SB_Input,
-            Registers,
-            Number
-        } value;
-        Name(int v) : value((E)v) {};
-        operator uint8() const { return (uint8)value; };
+         NoPage,
+         Settings,
+         Settings2,
+         Service,
+         Debug,
+         FrequencyCounter,
+         FrequencyCounter2,
+         FrequencyCounter3,
+         USB,
+         SB_Input,
+         Registers,
+         Number
     };
+    
 
     /// Возвращает true, если текущий элемент страницы открыт
     bool CurrentItemIsOpened() const;
@@ -187,8 +183,6 @@ public:
     int NumSubPages() const;
     /// Возвращает количество элементов в странице по адресу page
     int NumItems() const;
-    /// Возвращает имя страницы page
-    Name GetNamePage() const;
 
     int8 CurrentSubPage() const;
 

@@ -76,8 +76,8 @@ public:
     Parameter                   sig_parameter[Form::Number];            ///< Текущий выбранный параметр сигнала
     int8                        menu_currentPage;                       ///< Отображаемая страница меню
     Page*                       menu_page;                              ///< Если активна страница не из главного меню, то здесь её адрес
-    int8                        menu_posActItem[Page::Name::Number];    ///< Позиция активного пункта меню для каждой страницы
-    int8                        menu_currentSubPage[Page::Name::Number];///< Номер текущей подстраницы для каждой страницы
+    int8                        menu_posActItem[Page::Number];          ///< Позиция активного пункта меню для каждой страницы
+    int8                        menu_currentSubPage[Page::Number];      ///< Номер текущей подстраницы для каждой страницы
     FrequencyMeter::BillingTime freq_billingTime;                       ///< Время счёта
     FrequencyMeter::AvePeriod   freq_avePeriod;                         ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps              freq_timeStamps;                        ///< Метки времени
