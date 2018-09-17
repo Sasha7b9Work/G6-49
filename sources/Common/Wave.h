@@ -54,6 +54,7 @@ public:
         ManipulationPeriod,     ///< ѕериод следовани€ импульсов в режиме манипул€ции
         PacketPeriod,           ///< ѕериод следовани€ пачек импульсов в пакетном режиме
         PacketNumber,           ///< „исло импульсов в пачке пакетного режима
+        Exit,                   ///< Ётот параметр закрывает открытый параметр
         Number
     } value;
 
@@ -73,7 +74,7 @@ public:
 
     float MaxValue() const { return max; };
 
-    float GetValue()  const;
+    float GetValue() const;
 
     pString GetStringValue() const;
 

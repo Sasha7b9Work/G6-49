@@ -123,7 +123,8 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
         CommandPanel::SetRampSineDuration,
         CommandPanel::SetRampSineAmplitude,
         CommandPanel::SetPacketPeriod,
-        CommandPanel::SetPacketNumber
+        CommandPanel::SetPacketNumber,
+        CommandPanel::None
     };
 
     uint8 buffer[6] = {(uint8)commands[param.value], (uint8)ch};

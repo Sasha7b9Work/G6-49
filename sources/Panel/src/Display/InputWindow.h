@@ -127,6 +127,8 @@ private:
 
     static void DrawPacketNumber(int x, int y);
 
+    static void DrawExit(int x, int y);
+
     static Parameter *param;
 
     static StructValue m_iws;

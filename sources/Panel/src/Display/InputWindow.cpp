@@ -68,7 +68,8 @@ void InputWindow::Draw()
         DrawRampSineDuration,
         DrawRampSineAmplitude,
         DrawPacketPeriod,
-        DrawPacketNumber
+        DrawPacketNumber,
+        DrawExit
     };
 
     x += 40;
@@ -235,6 +236,11 @@ void InputWindow::DrawRampSineDuration(int, int)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::DrawRampSineAmplitude(int, int)
+{
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DrawExit(int, int)
 {
 }
 

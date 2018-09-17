@@ -101,7 +101,8 @@ pString Parameter::Name() const
         {"Период",         "Period"},
         {"Длительность",   "Duration"},
         {"Период пакета",  "Packet period"},
-        {"N",              "N"}
+        {"N",              "N"},
+        {"     Выход ( ESC )", "     Exit ( ESC )"}
     };
 
     return nameParameter[value][LANG].name;
@@ -262,28 +263,33 @@ void Form::OpenCurrentParameter()
 
     if(CurrentParameter()->Is(Parameter::Manipulation))
     {
-        set.sineManipulation = true;
-    }
+        if(CurrentParameter()->GetParent())
+        {
+            set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
+        }
+        else
+        {
+            oldParams = params;
+            oldNumParams = numParams;
+            oldCurrentParams = currentParam;
 
-    oldParams = params;
-    oldNumParams = numParams;
-    oldCurrentParams = currentParam;
+            Parameter *parent = CurrentParameter();
 
-    Parameter *parent = CurrentParameter();
+            numParams = CurrentParameter()->numParams;
+            params = CurrentParameter()->params;
+            currentParam = 0;
 
-    numParams = CurrentParameter()->numParams;
-    params = CurrentParameter()->params;
-    currentParam = 0;
+            for (int i = 0; i < numParams; i++)
+            {
+                params[i].form = this;
+                params[i].parent = parent;
+            }
 
-    for(int i = 0; i < numParams; i++)
-    {
-        params[i].form = this;
-        params[i].parent = parent;
-    }
-
-    if(parent->Is(Parameter::Manipulation))
-    {
-        Generator::TuneChannel(wave->GetChannel());
+            if (parent->Is(Parameter::Manipulation))
+            {
+                Generator::TuneChannel(wave->GetChannel());
+            }
+        }
     }
 }
 
@@ -297,7 +303,7 @@ bool Form::CloseOpenedParameter()
         currentParam = oldCurrentParams;
         if(CurrentParameter()->Is(Parameter::Manipulation))
         {
-            set.sineManipulation = false;
+            set.sineManipulation[CURRENT_CHANNEL] = false;
         }
         Generator::TuneChannel(wave->GetChannel());
         return true;
@@ -317,7 +323,8 @@ float Parameter::GetValue() const
 {
     if(Is(Manipulation))
     {
-        return set.sineManipulation ? 1.0f : 0.0f;
+        Parameter *pointer = (Parameter *)this;
+        return set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1.0f : 0.0f;
     }
     StructValue input((Parameter *)this);
     return input.Value();
@@ -334,7 +341,8 @@ pString Parameter::GetStringValue() const
             {" Off",  " On"}
         };
 
-        return values[LANG][set.sineManipulation ? 1 : 0];
+        Parameter *pointer = (Parameter *)this;
+        return values[LANG][set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1 : 0];
     }
     StructValue input((Parameter *)this);
     return input.StringValue();
@@ -368,6 +376,7 @@ pString Parameter::NameUnit(char buf[10])
         {"c",   "s"},
         {"c",   "s"},
         {"c",   "s"},
+        {"",    ""},
         {"",    ""}
     };
     sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);

@@ -17,7 +17,7 @@ void Debug::StartProfiling()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Debug::PointProfiling(char *name)
+void Debug::PointProfiling(char *)
 {
     //LOG_WRITE("%s %d", name, TIME_US - timeStart);
 }
