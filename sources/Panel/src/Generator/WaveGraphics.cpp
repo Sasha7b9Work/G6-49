@@ -179,13 +179,18 @@ void Wave::Graphics::DrawPacketImpulse(int x0, int y0, int, int height)
 {
     int minY = y0;
     int aveY = y0 + height / 2;
-    int deltaX = 20;
-    for (int i = 0; i < 5; i++)
+    int deltaX = 8;
+    for(int j = 0; j < 2; j++)
     {
-        Painter::DrawVLine(x0, minY, aveY);
-        Painter::DrawHLine(minY, x0, x0 + 5);
-        Painter::DrawVLine(x0 + 5, minY, aveY);
-        x0 += deltaX;
+        for (int i = 0; i < 3; i++)
+        {
+            Painter::DrawVLine(x0, minY, aveY);
+            Painter::DrawHLine(minY, x0, x0 + 2);
+            Painter::DrawVLine(x0 + 2, minY, aveY);
+            x0 += deltaX;
+        }
+
+        x0 += 30;
     }
 }
 

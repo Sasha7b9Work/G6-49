@@ -87,7 +87,7 @@ pString Parameter::Name() const
         {"ПЕРИОД",         "PERIOD"},
         {"РАЗМАХ",         "AMPLITUDE"},
         {"СМЕЩЕНИЕ",       "OFFSET"},
-        {"ДЛИТ.",          "DURATION"},
+        {"Длительность",   "DURATION"},
         {"СКВАЖНОСТЬ",     "DUTY RATIO"},
         {"ФАЗА",           "PHASE"},
         {"ЗАДЕРЖКА",       "DELAY"},
@@ -96,7 +96,7 @@ pString Parameter::Name() const
         {"ВР. НАРАСТАНИЯ", "BUILD-UP TIME"},
         {"ВР. СПАДА",      "RELEASING TIME"},
         {"ВР. ПИКА",       "PEAK TIME"},
-        {"КОЭФФ. ЗАПОЛН.", "DUTY FACTOR"},
+        {"Коэфф заполн.",  "DUTY FACTOR"},
         {"Манипуляция",    "Manipulation"},
         {"Период",         "Period"},
         {"Длительность",   "Duration"},
@@ -189,7 +189,7 @@ void Form::TuneGenerator(Chan ch)
 
     if(value == Form::Sine)
     {
-        if(ParameterIsOpened())
+        if(set.sineManipulation[ch])
         {
             int current = currentParam;
             Parameter *param = params;
