@@ -35,25 +35,25 @@ public:
 
     enum E
     {
-        Frequency,          ///< Частота
-        Period,             ///< Период
-        Amplitude,          ///< Амплитуда
-        Offset,             ///< Смещение
-        Duration,           ///< Длительность
-        DutyRatio,          ///< Скважность
-        Phase,              ///< Сдвиг фазы
-        Delay,              ///< Задержка
-        DepthModulation,    ///< Глубина амплитудной модуляции
-        Polarity,           ///< Полярность
-        DurationRise,       ///< Длительность нарастания
-        DurationFall,       ///< Длительность спада
-        DurationStady,      ///< Длительность установившего значения
-        DutyFactor,         ///< Коэффициент заполнения
-        ModulationRampSine, ///< Модуляция пилой для синусоиды
-        RampSineDuration,   ///< Скорость нарастания пилы при модуляции
-        RampSineAmplitude,  ///< Амплитуда пилы при модуляции
-        PacketPeriod,       ///< Период следования пачек импульсов в пакетном режиме
-        PacketNumber,       ///< Число импульсов в пачке пакетного режима
+        Frequency,              ///< Частота
+        Period,                 ///< Период
+        Amplitude,              ///< Амплитуда
+        Offset,                 ///< Смещение
+        Duration,               ///< Длительность
+        DutyRatio,              ///< Скважность
+        Phase,                  ///< Сдвиг фазы
+        Delay,                  ///< Задержка
+        DepthModulation,        ///< Глубина амплитудной модуляции
+        Polarity,               ///< Полярность
+        DurationRise,           ///< Длительность нарастания
+        DurationFall,           ///< Длительность спада
+        DurationStady,          ///< Длительность установившего значения
+        DutyFactor,             ///< Коэффициент заполнения
+        ModulationRampSine,     ///< Модуляция пилой для синусоиды
+        ManipulationDuration,   ///< Длительность импульсов в режиме манипуляции
+        ManipulationPeriod,     ///< Период следования импульсов в режиме манипуляции
+        PacketPeriod,           ///< Период следования пачек импульсов в пакетном режиме
+        PacketNumber,           ///< Число импульсов в пачке пакетного режима
         Number
     } value;
 

@@ -95,9 +95,9 @@ pString Parameter::Name() const
         {"ВР. СПАДА",      "RELEASING TIME"},
         {"ВР. ПИКА",       "PEAK TIME"},
         {"КОЭФФ. ЗАПОЛН.", "DUTY FACTOR"},
-        {"Модуляция",      "Modulation"},
-        {"Скорость",       "Speed"},
-        {"Размах",         "Amplitude"},
+        {"Манипуляция",    "Manipulation"},
+        {"Период",         "Period"},
+        {"Длительность",   "Duration"},
         {"Период пакета",  "Packet period"},
         {"N",              "N"}
     };
@@ -208,8 +208,8 @@ void Form::TuneGenerator(Chan ch)
             params = param;
             numParams = numPar;
 
-            SendParameterToGenerator(ch, Parameter::RampSineDuration);
-            SendParameterToGenerator(ch, Parameter::RampSineAmplitude);
+            SendParameterToGenerator(ch, Parameter::ManipulationDuration);
+            SendParameterToGenerator(ch, Parameter::ManipulationPeriod);
         }
         else
         {
@@ -353,8 +353,8 @@ pString Parameter::NameUnit(char buf[10])
         {"",    ""},
         {"",    ""},
         {"",    ""},
-        {"",    ""},
-        {"",    ""},
+        {"c",   "s"},
+        {"c",   "s"},
         {"c",   "s"},
         {"",    ""}
     };
