@@ -18,6 +18,8 @@ void FrequencyMeter::Draw()
         return;
     }
 
+    Text::SetUpperCase(false);
+
     Painter::SetColor(inactive ? Color::BLUE_50 : Color::FILL);
 
     char buffer[20];
@@ -45,6 +47,8 @@ void FrequencyMeter::Draw()
 
         Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "T = %s %s", UInt2StringThisPoint(frequency, buffer, 9, str.forFract), str.suffix);
     }
+
+    Text::SetUpperCase(true);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -81,7 +81,7 @@ static void OnPress_SetParameter()
 }
 
 DEF_BUTTON( bSetParameter,                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА ---
-    "ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА", "ENTER VALUE PARAMETER",
+    "Изменить", "Change",
     "Открывает окно ввода параметра.",
     "Opens the parameter input window.",
     pSignals, FuncActive, OnPress_SetParameter, FuncDraw

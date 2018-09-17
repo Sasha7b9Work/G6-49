@@ -88,7 +88,7 @@ static Parameter params_SineB[] =
     Parameter(Parameter::Period,             100e-8f, 100e6f, "10000", 0, Order::Milli),
     Parameter(Parameter::Amplitude,          0.0f,    10.0f,  "10000", 1, Order::One),
     Parameter(Parameter::Offset,             0.0f,    10.0f,  "50000", 0, Order::One),
-    Parameter(Parameter::Phase,              0.0f,    360.0f, "10000", 0, Order::One),
+    Parameter(Parameter::Phase,              0.0f,    360.0f, "00000", 0, Order::One),
     Parameter(Parameter::Manipulation,       -1.0f,   -1.0f,  "10000", 0, Order::One, paramsSineModulationB, 4)
 };
 
