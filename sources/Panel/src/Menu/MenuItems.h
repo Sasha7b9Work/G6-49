@@ -188,8 +188,6 @@ public:
     /// Рисует закрытую страницу
     void DrawClosed(int x, int y) const;
 
-    void DrawSubpage(int i) const;
-
     void SetCurrentSubPage(int8 pos);
     /// Устанавливает позицию активного пункта меню
     void SetPosActItem(int8 pos);

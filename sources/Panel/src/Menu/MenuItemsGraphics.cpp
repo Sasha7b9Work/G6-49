@@ -64,7 +64,7 @@ void Button::Draw(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::DrawClosed(int x, int y) const
 {
-    Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, IsShade() ? Color::GRAY_10 : Color::GREEN_10);
+    Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, IsShade() ? Color::GRAY_10 : Color::GREEN_25);
     Painter::SetColor(IsShade() ? Color::GRAY_25 : Color::FILL);
     Text::DrawTextInColumn(x + 4, y + 17, MI_WIDTH, Title());
 }
@@ -168,13 +168,9 @@ void Choice::Draw(bool opened, int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::Draw() const
 {
-    DrawSubpage(CurrentSubPage());
-}
+    int numPage = CurrentSubPage();
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::DrawSubpage(int numPage) const
-{
-    for(int i = numPage * 4; i < numPage * 4 + 4; i++)
+    for (int i = numPage * 4; i < numPage * 4 + 4; i++)
     {
         int x = SCREEN_WIDTH - MI_WIDTH - 1;
         int y = MP_TITLE_HEIGHT + i * MI_HEIGHT;
@@ -185,4 +181,5 @@ void Page::DrawSubpage(int numPage) const
             item->Draw(false, x, y);
         }
     }
+
 }
