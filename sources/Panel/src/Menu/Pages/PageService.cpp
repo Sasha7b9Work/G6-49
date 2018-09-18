@@ -157,7 +157,7 @@ static bool AllowableSymbol(Control key)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void PageService::PageRegisters::Draw()
 {
-    if (CURRENT_PAGE && CURRENT_PAGE != pointer)
+    if (CURRENT_PAGE != (Page *)&pRegisters)
     {
         return;
     }
