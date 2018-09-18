@@ -4,6 +4,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/PageSignals.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
 #include <math.h>
@@ -208,7 +209,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
     for (int i = 0; i < form->NumParameters(); i++)
     {
         Parameter *param = form->GetParameter(i);
-        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == 0)
+        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
         }

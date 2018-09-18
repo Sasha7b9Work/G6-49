@@ -75,11 +75,10 @@ void Menu::ProcessControl(Control key)
             CURRENT_PAGE->Press(key);
         }
     }
-    else if (key >= Control::F1 && key <= Control::F5 && key.action == Control::Action::Down)
+    else if (key >= Control::F1 && key <= Control::F5)
     {
         Item *item = CURRENT_PAGE->GetItem(key - Control::F1)->Press(key);
         SetOpenedItem(item);
-
     }
     else if (key.Is(Control::Reg::Left))
     {

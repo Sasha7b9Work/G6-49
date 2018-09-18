@@ -380,16 +380,19 @@ Item *Item::Press(Control key)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Page::Press(Control key)
 {
-    if(key.Is(Control::Esc))
+    if(key.action.Is(Control::Action::Up))
     {
-        if(key.action.Is(Control::Action::Down) && KEEPER(this))
+        if(key.Is(Control::Esc))
         {
-            CURRENT_PAGE = (Page *)KEEPER(this);
+            if(KEEPER(this))
+            {
+                CURRENT_PAGE = (Page *)KEEPER(this);
+            }
         }
-    }
-    else
-    {
-        CURRENT_PAGE = this;
+        else
+        {
+            CURRENT_PAGE = this;
+        }
     }
     return 0;
 }
