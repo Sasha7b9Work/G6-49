@@ -101,7 +101,7 @@ void Choice::Draw(bool opened, int x, int y)
         
         if(x == -1)
         {
-            y = MP_TITLE_HEIGHT + PositionOnPage() * MI_HEIGHT;
+            y = MP_TITLE_HEIGHT + PositionOnPage() % Menu::NUM_ITEMS_ON_DISPLAY * MI_HEIGHT;
             x = SCREEN_WIDTH - MI_WIDTH - 20;
         }
 
