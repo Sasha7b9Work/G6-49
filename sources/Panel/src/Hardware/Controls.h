@@ -74,6 +74,8 @@ struct Control
     char ToChar() const;
     pString Name() const;
     bool IsFunctional() const;
+    /// Возвращает true, если поворот ручки
+    bool IsRotate() const;
 };
 
 

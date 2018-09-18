@@ -27,3 +27,9 @@ bool Control::IsFunctional() const
 {
     return value >= F1 && value <= F4;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Control::IsRotate() const
+{
+    return value == Reg::Left || value == Reg::Right;
+}

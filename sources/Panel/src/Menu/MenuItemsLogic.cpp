@@ -123,6 +123,10 @@ Item *Choice::Press(Control key)
     {
         StartChange(1);
     }
+    else if(key.Is(Control::Esc) || key.action.Is(Control::Action::Up))
+    {
+        Menu::SetOpenedItem(0);
+    }
     else if(key.action.Is(Control::Action::Long))
     {
         return this;
@@ -351,27 +355,30 @@ Item *Item::Press(Control key)
         return Menu::GetOpenedItem();
     }
 
-    Menu::itemUnderKey = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
+    if(CURRENT_PAGE->GetItem(key) == this || key.IsRotate() || key.Is(Control::Esc))
+    {
+        Menu::itemUnderKey = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
 
-    if (type == Item::Type::Choice)
-    {
-        return ((Choice *)this)->Press(key);
-    }
-    else if (type == Item::Type::Button)
-    {
-        return ((Button *)this)->Press(key.action);
-    }
-    else if (type == Item::Type::ChoiceParameter)
-    {
-        return ((ChoiceParameter *)this)->Press(key.action);
-    }
-    else if (type == Item::Type::SmallButton)
-    {
-        return ((SButton *)this)->Press(key.action);
-    }
-    else if(type == Item::Type::Page)
-    {
-        return ((Page *)this)->Press(key);
+        if (type == Item::Type::Choice)
+        {
+            return ((Choice *)this)->Press(key);
+        }
+        else if (type == Item::Type::Button)
+        {
+            return ((Button *)this)->Press(key.action);
+        }
+        else if (type == Item::Type::ChoiceParameter)
+        {
+            return ((ChoiceParameter *)this)->Press(key.action);
+        }
+        else if (type == Item::Type::SmallButton)
+        {
+            return ((SButton *)this)->Press(key.action);
+        }
+        else if(type == Item::Type::Page)
+        {
+            return ((Page *)this)->Press(key);
+        }
     }
 
     return 0;

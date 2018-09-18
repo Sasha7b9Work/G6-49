@@ -81,12 +81,15 @@ void Menu::ProcessControl(Control key)
     else if (CURRENT_PAGE->ProcessingControl(key))
     {
     }
-    else if (CURRENT_PAGE->Press(key))
-    {
-    }
     else if(GetOpenedItem())
     {
-        GetOpenedItem()->Press(key);
+        if(!GetOpenedItem()->Press(key))
+        {
+            CURRENT_PAGE->Press(key);
+        }
+    }
+    else if (CURRENT_PAGE->Press(key))
+    {
     }
 }
 
