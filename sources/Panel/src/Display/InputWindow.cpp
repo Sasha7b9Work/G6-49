@@ -294,6 +294,9 @@ void InputWindow::ProcessContorl(Control control)
     }
     else if ((control >= Control::F1 && control <= Control::F4) && control.action.Is(Control::Action::Up))
     {
-        Menu::CurrentPage()->GetItem(control - Control::F1)->Press(control);
+        if(CURRENT_PAGE)
+        {
+            CURRENT_PAGE->GetItem(control - Control::F1)->Press(control);
+        }
     }
 }

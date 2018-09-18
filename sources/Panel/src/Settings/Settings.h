@@ -17,7 +17,7 @@ extern const PageBase pInput;
 
 #define COLOR(x)                (set.disp_Colors[x])
 #define CURRENT_PAGE            (set.menu_currentPage)
-#define ADDITION_PAGE           (set.menu_page)
+#define ADDITION_PAGE           (set.menu_additionPage)
 #define ADDITION_PAGE_IS_INPUT  (ADDITION_PAGE == (Page *)&pInput)
 #define ADDITION_PAGE_IS_NONE   (ADDITION_PAGE == 0)
 
@@ -74,8 +74,8 @@ public:
     };
     col_val                     disp_Colors[32];                        ///< Цвета
     Parameter                   sig_parameter[Form::Number];            ///< Текущий выбранный параметр сигнала
-    int8                        menu_currentPage;                       ///< Отображаемая страница меню
-    Page*                       menu_page;                              ///< Если активна страница не из главного меню, то здесь её адрес
+    Page*                       menu_additionPage;                      ///< Здесь адрес дополнительной страницы, если таковая имеется
+    Page*                       menu_currentPage;                       ///< Адрес открытой страницы меню. 0, если открыта главная страница
     int8                        menu_posActItem[Page::Number];          ///< Позиция активного пункта меню для каждой страницы
     int8                        menu_currentSubPage[Page::Number];      ///< Номер текущей подстраницы для каждой страницы
     FrequencyMeter::BillingTime freq_billingTime;                       ///< Время счёта

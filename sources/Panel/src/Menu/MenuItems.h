@@ -23,7 +23,7 @@
 
 extern int8 gCurDigit;
 
-#define MENU_ITEMS_ON_DISPLAY       5   ///< Сколько пунктов меню помещается на экране по вертикали.
+#define MENU_ITEMS_ON_DISPLAY       4   ///< Сколько пунктов меню помещается на экране по вертикали.
 
 typedef bool (*pFuncBKey)(Control);
 
@@ -159,6 +159,7 @@ public:
          USB,
          SB_Input,
          Registers,
+         Main,
          Number
     };
     

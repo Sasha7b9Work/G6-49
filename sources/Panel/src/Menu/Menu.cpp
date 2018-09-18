@@ -15,14 +15,18 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Item *Menu::itemUnderKey = 0;
 Item *Menu::openedItem = 0;
-//Control Menu::panelControlHint = None;
 
-const Page *Menu::pages[NUM_PAGES] =
-{
+
+DEF_PAGE_3( mainPageMenu,
+    "лемч", "MENU",
+    "", "",
     PageSignals::pointer,
     PageFrequencyCounter::pointer,
-    PageService::pointer
-};
+    PageService::pointer,
+    Page::Main, 0, FuncActive, FuncPress, FuncOnKey
+)
+
+Page *Menu::mainPage = (Page *)&mainPageMenu;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +59,7 @@ void Menu::ProcessControl(Control key)
     if(Hint::ProcessControl(key))
     {
     }
-    else if(Menu::CurrentPage()->ProcessingControl(key))
+    else if(CURRENT_PAGE && CURRENT_PAGE->ProcessingControl(key))
     {
     }
     else if (openedItem && (key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right) || key.Is(Control::Reg::Button) || key.Is(Control::Esc) || 
@@ -65,11 +69,14 @@ void Menu::ProcessControl(Control key)
     }
     else if (key >= Control::F1 && key <= Control::F5)
     {
-        openedItem = CurrentPage()->GetItem(key - Control::F1)->Press(key);
+        if(CURRENT_PAGE)
+        {
+            openedItem = CURRENT_PAGE->GetItem(key - Control::F1)->Press(key);
+        }
     }
     else if (key.Is(Control::Reg::Left))
     {
-        if (RegIsControlPages())
+        if (RegIsControlSubPages())
         {
             if (CURRENT_PAGE > 0)
             {
@@ -79,12 +86,12 @@ void Menu::ProcessControl(Control key)
     }
     else if (key.Is(Control::Reg::Right))
     {
-        if (RegIsControlPages())
+        if (RegIsControlSubPages())
         {
-            if (CURRENT_PAGE < NUM_PAGES - 1)
-            {
-                ++CURRENT_PAGE;
-            }
+            //if (CURRENT_PAGE < NUM_PAGES - 1)
+            //{
+            //    ++CURRENT_PAGE;
+            //}
         }
     }
     else if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
@@ -103,9 +110,9 @@ void Menu::ProcessControl(Control key)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Menu::RegIsControlPages()
+bool Menu::RegIsControlSubPages()
 {
-    return openedItem == 0 && ADDITION_PAGE_IS_NONE;
+    return openedItem == 0 && ADDITION_PAGE_IS_NONE && CURRENT_PAGE && CURRENT_PAGE->NumSubPages() != 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,17 +128,22 @@ Item *Menu::CurrentItem()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Page *Menu::CurrentPage()
+int Menu::GetPosition(Page *page)
 {
-    volatile int8 num = CURRENT_PAGE;
+    Page *keeper = (Page *)KEEPER(page);
 
-    Page *page = (Page *)pages[num];
+    if(keeper == 0)
+    {
+        return 0;
+    }
 
-    return (ADDITION_PAGE_IS_NONE ? page : ADDITION_PAGE);
-}
+    for(int i = 0; i < keeper->NumItems(); i++)
+    {
+        if(page == keeper->GetItem(i))
+        {
+            return i;
+        }
+    }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-const Page *Menu::GetPage(int i)
-{
-    return pages[i];
+    return -1;
 }

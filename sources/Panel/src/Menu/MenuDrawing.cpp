@@ -18,7 +18,10 @@ void Menu::Draw()
         int x = SCREEN_WIDTH - MI_WIDTH - 1;
         int y = MP_TITLE_HEIGHT + i * MI_HEIGHT;
         Painter::DrawRectangle(x, y, MI_WIDTH, MI_HEIGHT, Color::FILL);
-        CurrentPage()->GetItem(i)->Draw(false, x, y);
+        if(CURRENT_PAGE)
+        {
+            CURRENT_PAGE->GetItem(i)->Draw(false, x, y);
+        }
     }
 
     if (Menu::OpenedItem())
@@ -39,17 +42,20 @@ void Menu::DrawTitle()
     else
     {
         DrawPagesUGO();
-
-        Text::DrawTextRelativelyRight(315, 5, CurrentPage()->Title(), Color::FILL);
+        if(CURRENT_PAGE)
+        {
+            Text::DrawTextRelativelyRight(315, 5, CURRENT_PAGE->Title(), Color::FILL);
+        }
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::DrawPagesUGO()
 {
+    /*
     static const int delta = 10;
 
-    if (RegIsControlPages())
+    if (RegIsControlSubPages())
     {
         for (int i = 0; i < NUM_PAGES; i++) 
         {
@@ -62,4 +68,5 @@ void Menu::DrawPagesUGO()
 
         Text::DrawText(6 + CURRENT_PAGE * delta, 5, Int2String(CURRENT_PAGE + 1, false, 2, buffer), Color::BACK);
     }
+    */
 }

@@ -32,7 +32,10 @@ bool Hint::ProcessControl(Control key)
     {
         if (key >= Control::F1 && key <= Control::F5)
         {
-            item = Menu::CurrentPage()->GetItem(key - Control::F1);
+            if(CURRENT_PAGE)
+            {
+                item = CURRENT_PAGE->GetItem(key - Control::F1);
+            }
             control = Control::None;
             needCalculate = true;
         }

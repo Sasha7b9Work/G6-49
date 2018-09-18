@@ -411,16 +411,21 @@ int8 Choice::CurrentIndex() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Item::PositionOnPage() const
 {
-    for (int numPage = 0; numPage < NUM_PAGES; numPage++)
+    if(KEEPER(this) == 0)                       // Если у страницы нет хранителя - она принадлежит главному меню
     {
-        for (int numItem = 0; numItem < NUM_ITEMS_ON_PAGE; numItem++)
+        return Menu::GetPosition((Page *)this);
+    }
+
+    Page *parent = (Page *)KEEPER(this);
+
+    for(int i = 0; i < parent->NumItems(); i++)
+    {
+        if(this == parent->GetItem(i))
         {
-            if (this == Menu::GetPage(numPage)->items[numItem])
-            {
-                return numItem;
-            }
+            return i;
         }
     }
+
     return -1;
 }
 
