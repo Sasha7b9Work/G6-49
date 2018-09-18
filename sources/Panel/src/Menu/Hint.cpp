@@ -34,7 +34,7 @@ bool Hint::ProcessControl(Control key)
         {
             if(CURRENT_PAGE)
             {
-                item = CURRENT_PAGE->GetItem(key - Control::F1);
+                item = CURRENT_PAGE->GetItem(key);
             }
             control = Control::None;
             needCalculate = true;

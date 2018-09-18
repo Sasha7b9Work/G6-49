@@ -6,8 +6,8 @@
 class Menu
 {
 public:
-
-    static const int NUM_ITEMS_ON_PAGE = 4;
+    /// Столько элементов меню помещается на дисплее одновременно
+    static const int NUM_ITEMS_ON_DISPLAY = 4;
 
     static void Init();
         

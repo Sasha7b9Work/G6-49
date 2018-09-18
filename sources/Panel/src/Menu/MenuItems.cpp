@@ -46,20 +46,15 @@ const char *Choice::NamePrevSubItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Page::GetItem(int numElement) const
+Item *Page::GetItem(Control key) const
 {
-    if(numElement >= NumItems())
-    {
-        return 0;
-    }
-
-    return (Item *)items[numElement];
+    return (Item *)items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Control::F1)];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Page::PosItemOnTop() const
 {
-    return CurrentSubPage() * MENU_ITEMS_ON_DISPLAY;
+    return CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,7 +123,7 @@ void Item::SetCurrent(bool active)
     {
         for (int i = 0; i < page->NumItems(); i++)
         {
-            if (page->GetItem(i) == this)
+            if (page->items[i] == this)
             {
                 page->SetPosActItem((int8)i);
                 return;

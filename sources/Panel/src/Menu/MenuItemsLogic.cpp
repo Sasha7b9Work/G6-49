@@ -306,7 +306,7 @@ char Governor::GetSymbol(int value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Page::NumSubPages() const
 {
-    return (NumItems() - 1) / MENU_ITEMS_ON_DISPLAY + 1;
+    return (NumItems() - 1) / Menu::NUM_ITEMS_ON_DISPLAY + 1;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -444,7 +444,7 @@ int Item::PositionOnPage() const
 
     for(int i = 0; i < parent->NumItems(); i++)
     {
-        if(this == parent->GetItem(i))
+        if(this == parent->items[i])
         {
             return i;
         }

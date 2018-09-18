@@ -77,7 +77,7 @@ void Menu::ProcessControl(Control key)
     }
     else if (key >= Control::F1 && key <= Control::F5)
     {
-        Item *item = CURRENT_PAGE->GetItem(key - Control::F1)->Press(key);
+        Item *item = CURRENT_PAGE->GetItem(key)->Press(key);
         SetOpenedItem(item);
     }
     else if (key.Is(Control::Reg::Left))
@@ -145,7 +145,7 @@ int Menu::GetPosition(Page *page)
 
     for(int i = 0; i < keeper->NumItems(); i++)
     {
-        if(page == keeper->GetItem(i))
+        if(page == keeper->items[i])
         {
             return i;
         }

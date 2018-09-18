@@ -173,13 +173,11 @@ void Page::Draw() const
     for (int i = numPage * 4; i < numPage * 4 + 4; i++)
     {
         int x = SCREEN_WIDTH - MI_WIDTH - 1;
-        int y = MP_TITLE_HEIGHT + (i % Menu::NUM_ITEMS_ON_PAGE) * MI_HEIGHT;
+        int y = MP_TITLE_HEIGHT + (i % Menu::NUM_ITEMS_ON_DISPLAY) * MI_HEIGHT;
         Painter::DrawRectangle(x, y, MI_WIDTH, MI_HEIGHT, Color::FILL);
-        Item *item = GetItem(i);
-        if (item)
+        if(i < num)
         {
-            item->Draw(false, x, y);
+            items[i]->Draw(false, x, y);
         }
     }
-
 }
