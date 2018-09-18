@@ -32,7 +32,7 @@ void Item::Draw(bool opened, int x, int y) const
     }
     else
     {
-        Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, Menu::OpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
+        Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, Menu::GetOpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
     }
 }
 

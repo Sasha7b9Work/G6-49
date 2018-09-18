@@ -15,9 +15,9 @@ void Menu::Draw()
 
     CURRENT_PAGE->Draw();
 
-    if(OpenedItem())
+    if(GetOpenedItem())
     {
-        OpenedItem()->Draw(true);
+        GetOpenedItem()->Draw(true);
     }
 }
 
@@ -26,9 +26,9 @@ void Menu::DrawTitle()
 {
     Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, MP_TITLE_HEIGHT, Color::FILL);
     Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, MP_TITLE_HEIGHT - 2, Color::BLUE_10);
-    if(Menu::OpenedItem())
+    if(Menu::GetOpenedItem())
     {
-        Text::DrawTextRelativelyRight(315, 5, Menu::OpenedItem()->FullPath(), Color::FILL);
+        Text::DrawTextRelativelyRight(315, 5, Menu::GetOpenedItem()->FullPath(), Color::FILL);
     }
     else
     {

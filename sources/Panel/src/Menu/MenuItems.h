@@ -182,15 +182,15 @@ public:
     /// Возвращает количество элементов в странице по адресу page
     int NumItems() const;
     /// Возвращает номер текущей подстраницы
-    int8 CurrentSubPage() const;
+    int CurrentSubPage() const;
     /// Рисует открытую страницу
     void Draw() const;
     /// Рисует закрытую страницу
     void DrawClosed(int x, int y) const;
 
-    void SetCurrentSubPage(int8 pos);
+    void SetCurrentSubPage(int pos);
     /// Устанавливает позицию активного пункта меню
-    void SetPosActItem(int8 pos);
+    void SetPosActItem(int pos);
     /// Возвращает адрес элемента меню заданной страницы
     Item *GetItem(int numElement) const;
     /// \brief Возвращает позицию первого элемента страницы по адресу page на экране. Если текущая подстраница 0, это будет 0, если текущая 
@@ -204,6 +204,9 @@ public:
     void ChangeSubPage(int delta);
 
     bool ProcessingControl(Control);
+
+    /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
+    Item *Press(Control control);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///

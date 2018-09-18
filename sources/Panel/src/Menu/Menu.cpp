@@ -14,7 +14,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Item *Menu::itemUnderKey = 0;
-Item *Menu::openedItem = 0;
+Item *Menu::openedItem_ = 0;
 
 extern const PageBase pSignals;
 
@@ -60,39 +60,40 @@ void Menu::ProcessControl(Control key)
     if(Hint::ProcessControl(key))
     {
     }
-    else if(CURRENT_PAGE && CURRENT_PAGE->ProcessingControl(key))
+    else if(CURRENT_PAGE->ProcessingControl(key))
     {
     }
-    else if (openedItem && (key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right) || key.Is(Control::Reg::Button) || key.Is(Control::Esc) || 
-                            key.Is(Control::Left) || key.Is(Control::Right)))
+    else if (key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right) || key.Is(Control::Reg::Button) || key.Is(Control::Esc) || 
+                            key.Is(Control::Left) || key.Is(Control::Right))
     {
-        openedItem = openedItem->Press(key);
-    }
-    else if (key >= Control::F1 && key <= Control::F5)
-    {
-        if(CURRENT_PAGE)
+        if(GetOpenedItem())
         {
-            openedItem = CURRENT_PAGE->GetItem(key - Control::F1)->Press(key);
+            Item *item = GetOpenedItem()->Press(key);
+            SetOpenedItem(item);
         }
+        else
+        {
+            CURRENT_PAGE->Press(key);
+        }
+    }
+    else if (key >= Control::F1 && key <= Control::F5 && key.action == Control::Action::Down)
+    {
+        Item *item = CURRENT_PAGE->GetItem(key - Control::F1)->Press(key);
+        SetOpenedItem(item);
+
     }
     else if (key.Is(Control::Reg::Left))
     {
         if (RegIsControlSubPages())
         {
-            if (CURRENT_PAGE > 0)
-            {
-                --CURRENT_PAGE;
-            }
+            CURRENT_PAGE->ChangeSubPage(-1);
         }
     }
     else if (key.Is(Control::Reg::Right))
     {
         if (RegIsControlSubPages())
         {
-            //if (CURRENT_PAGE < NUM_PAGES - 1)
-            //{
-            //    ++CURRENT_PAGE;
-            //}
+            CURRENT_PAGE->ChangeSubPage(1);
         }
     }
     else if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
@@ -113,13 +114,19 @@ void Menu::ProcessControl(Control key)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::RegIsControlSubPages()
 {
-    return openedItem == 0 && ADDITION_PAGE_IS_NONE && CURRENT_PAGE && CURRENT_PAGE->NumSubPages() != 0;
+    return GetOpenedItem() == 0 && ADDITION_PAGE_IS_NONE && CURRENT_PAGE && CURRENT_PAGE->NumSubPages() != 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Menu::OpenedItem()
+Item *Menu::GetOpenedItem()
 {
-    return openedItem;
+    return openedItem_;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::SetOpenedItem(Item *item)
+{
+    openedItem_ = item;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

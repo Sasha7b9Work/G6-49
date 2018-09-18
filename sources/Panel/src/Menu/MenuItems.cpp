@@ -107,7 +107,7 @@ bool Page::ProcessingControl(Control control)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsShade() const
 {
-    return Menu::OpenedItem() && (this != Menu::OpenedItem());
+    return Menu::GetOpenedItem() &&  this != Menu::GetOpenedItem();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ bool Item::IsOpened() const
     {
         return keeper->CurrentItemIsOpened();
     }
-    return Menu::OpenedItem() == this;
+    return Menu::GetOpenedItem() == this;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -237,7 +237,7 @@ void Item::ShortPress()
         if(IS_ACTIVE(this))
         {
             Governor *governor = (Governor *)this;
-            if(Menu::OpenedItem() == this)
+            if(Menu::GetOpenedItem() == this)
             {
                 governor->NextPosition();
             }
@@ -252,7 +252,7 @@ void Item::ShortPress()
         if(IS_ACTIVE(this))
         {
             GovernorColor *governor = (GovernorColor *)this;
-            if(Menu::OpenedItem() == this)
+            if(Menu::GetOpenedItem() == this)
             {
                 CircleIncrease<int8>(&governor->ct->currentField, 0, 3);
             }
@@ -298,21 +298,21 @@ void Item::LongPress()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int8 Page::CurrentSubPage() const
+int Page::CurrentSubPage() const
 {
     return MENU_CURRENT_SUBPAGE(nameOrNumBit);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::SetPosActItem(int8 pos)
+void Page::SetPosActItem(int pos)
 {
-    MENU_POS_ACT_ITEM(nameOrNumBit) = pos;
+    MENU_POS_ACT_ITEM(nameOrNumBit) = (int8)pos;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::SetCurrentSubPage(int8 pos)
+void Page::SetCurrentSubPage(int pos)
 {
-    MENU_CURRENT_SUBPAGE(nameOrNumBit) = pos;
+    MENU_CURRENT_SUBPAGE(nameOrNumBit) = (int8)pos;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -128,7 +128,7 @@ Item *Choice::Press(Control key)
         return this;
     }
 
-    return Menu::OpenedItem();
+    return Menu::GetOpenedItem();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ void Governor::ChangeValue(int delta)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::NextPosition()
 {
-    if (Menu::OpenedItem() == this)
+    if (Menu::GetOpenedItem() == this)
     {
         CircleIncrease<int8>(&gCurDigit, 0, (int8)(NumDigits() - 1));
     }
@@ -348,7 +348,7 @@ Item *Item::Press(Control key)
 
     if(IsShade())
     {
-        return Menu::OpenedItem();
+        return Menu::GetOpenedItem();
     }
 
     Menu::itemUnderKey = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
@@ -369,7 +369,28 @@ Item *Item::Press(Control key)
     {
         return ((SButton *)this)->Press(key.action);
     }
+    else if(type == Item::Type::Page)
+    {
+        return ((Page *)this)->Press(key);
+    }
 
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Item *Page::Press(Control key)
+{
+    if(key.Is(Control::Esc))
+    {
+        if(key.action.Is(Control::Action::Down) && KEEPER(this))
+        {
+            CURRENT_PAGE = (Page *)KEEPER(this);
+        }
+    }
+    else
+    {
+        CURRENT_PAGE = this;
+    }
     return 0;
 }
 
@@ -530,6 +551,10 @@ int Choice::GetHeightOpened() const
     return NumSubItems() * 10 + 2 + MI_TITLE_HEIGHT;
 }
 
+
+
 #ifdef WIN32
 #pragma warning(pop)
 #endif
+
+

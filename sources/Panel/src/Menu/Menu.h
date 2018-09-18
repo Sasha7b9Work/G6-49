@@ -20,7 +20,9 @@ public:
     /// Возвращает true, если ручка управляет переклюичением подстраниц меню
     static bool RegIsControlSubPages();
     /// Возвращает адрес открытого элемента меню
-    static Item *OpenedItem();
+    static Item *GetOpenedItem();
+
+    static void SetOpenedItem(Item *item);
     /// Возвращает адрес текущего элемента меню (текущим, как правило, является элемент, кнопка которого была нажата последней
     static Item *CurrentItem();
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [1..5], если она находится в нижнем положении, и 0, 
@@ -38,5 +40,5 @@ private:
 
     static void ProcessControl(Control control);
     /// Если какой-то итем раскрыт, то здесь его адрес
-    static Item *openedItem;
+    static Item *openedItem_;
 };
