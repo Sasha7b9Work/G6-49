@@ -86,12 +86,20 @@ void Menu::ProcessControl(Control key)
         {
             CURRENT_PAGE->ChangeSubPage(-1);
         }
+        else if(GetOpenedItem())
+        {
+            GetOpenedItem()->Press(key);
+        }
     }
     else if (key.Is(Control::Reg::Right))
     {
         if (RegIsControlSubPages())
         {
             CURRENT_PAGE->ChangeSubPage(1);
+        }
+        else if(GetOpenedItem())
+        {
+            GetOpenedItem()->Press(key);
         }
     }
     else if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
