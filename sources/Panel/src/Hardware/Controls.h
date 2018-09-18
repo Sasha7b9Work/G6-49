@@ -17,33 +17,32 @@ struct Control
         F2        = 0x02,
         F3        = 0x03,
         F4        = 0x04,
-        F5        = 0x05,
-        _0        = 0x06,
-        _1        = 0x07,
-        _2        = 0x08,
-        _3        = 0x09,
-        _4        = 0x0a,
-        _5        = 0x0b,
-        _6        = 0x0c,
-        _7        = 0x0d,
-        _8        = 0x0e,
-        _9        = 0x0f,
-        Dot       = 0x10,
-        Minus     = 0x11,
-        Esc       = 0x12,
-        Left      = 0x13,
-        Right     = 0x14,
+        _0        = 0x05,
+        _1        = 0x06,
+        _2        = 0x07,
+        _3        = 0x08,
+        _4        = 0x09,
+        _5        = 0x0a,
+        _6        = 0x0b,
+        _7        = 0x0c,
+        _8        = 0x0d,
+        _9        = 0x0e,
+        Dot       = 0x0f,
+        Minus     = 0x10,
+        Esc       = 0x11,
+        Left      = 0x12,
+        Right     = 0x13,
         On1       = 0x15,
-        On2       = 0x16
+        On2       = 0x15
     } value;
 
     struct Reg
     {
         enum E
         {
-            Left   = 0x17,
-            Right  = 0x18,
-            Button = 0x19
+            Left   = 0x16,
+            Right  = 0x17,
+            Button = 0x18
         };
     };
 

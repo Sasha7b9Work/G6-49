@@ -25,5 +25,5 @@ char Control::ToChar() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Control::IsFunctional() const
 {
-    return value >= F1 && value <= F5;
+    return value >= F1 && value <= F4;
 }

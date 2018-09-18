@@ -30,7 +30,7 @@ bool Hint::ProcessControl(Control key)
 
     if (show)
     {
-        if (key >= Control::F1 && key <= Control::F5)
+        if (key.IsFunctional())
         {
             if(CURRENT_PAGE)
             {

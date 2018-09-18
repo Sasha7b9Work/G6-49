@@ -287,7 +287,7 @@ void InputWindow::ProcessContorl(Control key)
             m_iws.RegRight();
         }
     }
-    else if ((key >= Control::F1 && key <= Control::F4) && key.action.Is(Control::Action::Up))
+    else if (key.IsFunctional() && key.action.Is(Control::Action::Up))
     {
         if(CURRENT_PAGE)
         {
