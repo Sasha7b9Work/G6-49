@@ -13,20 +13,11 @@ void Menu::Draw()
 {
     DrawTitle();
 
-    for (int i = 0; i < 4; i++)
-    {
-        int x = SCREEN_WIDTH - MI_WIDTH - 1;
-        int y = MP_TITLE_HEIGHT + i * MI_HEIGHT;
-        Painter::DrawRectangle(x, y, MI_WIDTH, MI_HEIGHT, Color::FILL);
-        if(CURRENT_PAGE)
-        {
-            CURRENT_PAGE->GetItem(i)->Draw(false, x, y);
-        }
-    }
+    CURRENT_PAGE->Draw();
 
-    if (Menu::OpenedItem())
+    if(OpenedItem())
     {
-        Menu::OpenedItem()->Draw(true);
+        OpenedItem()->Draw(true);
     }
 }
 

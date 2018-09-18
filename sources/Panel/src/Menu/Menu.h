@@ -28,6 +28,8 @@ public:
     static Item *itemUnderKey;
     /// Возвращает позицию страницы на страницы. Только если страница принадлежит главному меню. Иначе -1
     static int GetPosition(Page *page);
+    /// Указатель на главную страницу
+    static Page *mainPage;
 private:
     /// Наризовать загол
     static void DrawTitle();
@@ -37,6 +39,4 @@ private:
     static void ProcessControl(Control control);
     /// Если какой-то итем раскрыт, то здесь его адрес
     static Item *openedItem;
-    /// Указатель на главную страницу
-    static Page *mainPage;
 };

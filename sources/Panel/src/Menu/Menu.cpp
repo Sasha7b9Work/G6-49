@@ -16,13 +16,14 @@
 Item *Menu::itemUnderKey = 0;
 Item *Menu::openedItem = 0;
 
+extern const PageBase pSignals;
 
 DEF_PAGE_3( mainPageMenu,
     "лемч", "MENU",
     "", "",
-    PageSignals::pointer,
-    PageFrequencyCounter::pointer,
-    PageService::pointer,
+    *PageSignals::pointer,
+    *PageFrequencyCounter::pointer,
+    *PageService::pointer,
     Page::Main, 0, FuncActive, FuncPress, FuncOnKey
 )
 

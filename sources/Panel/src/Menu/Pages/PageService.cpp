@@ -639,5 +639,5 @@ DEF_PAGE_5( pService,                                                           
     pRegisters,
     pUSB,
     pDebug,
-    Page::Service, 0, FuncActive, FuncPress, FuncOnKey
+    Page::Service, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )

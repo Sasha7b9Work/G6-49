@@ -48,7 +48,8 @@ const char *Choice::NamePrevSubItem() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Page::GetItem(int numElement) const
 {
-    if(NumItems() - 1 < numElement)
+    int numItems = NumItems();
+    if(numElement >= NumItems())
     {
         return 0;
     }

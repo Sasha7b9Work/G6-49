@@ -2,6 +2,7 @@
 #include "Settings/Settings.h"
 #include "Generator/Generator.h"
 #include "FrequencyMeter/FrequencyMeter.h"
+#include "Menu/Menu.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -210,7 +211,7 @@ DEF_PAGE_10(pFrequencyCounter,                                                  
     cAvePeriod,
     cTimeStamps,
     cTest,
-    Page::FrequencyCounter, 0, FuncActive, FuncPress, FuncOnKey
+    Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

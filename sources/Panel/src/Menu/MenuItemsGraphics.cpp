@@ -26,6 +26,10 @@ void Item::Draw(bool opened, int x, int y) const
     {
         ((SButton *)this)->Draw(x, y);
     }
+    else if(type == Item::Type::Page)
+    {
+        ((Page *)this)->DrawClosed(x, y);
+    }
     else
     {
         Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, Menu::OpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
@@ -55,6 +59,14 @@ void Button::Draw(int x, int y)
     Painter::SetColor(isShade ? Color::GRAY_25 : Color::FILL);
     Text::DrawTextInColumn(x + 5, y + 17, MI_WIDTH, Title());
     funcForDraw(x, y);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Page::DrawClosed(int x, int y) const
+{
+    Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, IsShade() ? Color::GRAY_10 : Color::GREEN_10);
+    Painter::SetColor(IsShade() ? Color::GRAY_25 : Color::FILL);
+    Text::DrawTextInColumn(x + 4, y + 17, MI_WIDTH, Title());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,6 +161,28 @@ void Choice::Draw(bool opened, int x, int y)
             {
                 Text::DrawTextRelativelyRight(315, y + 30, NameNextSubItem());
             }
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Page::Draw() const
+{
+    DrawSubpage(CurrentSubPage());
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Page::DrawSubpage(int numPage) const
+{
+    for(int i = numPage * 4; i < numPage * 4 + 4; i++)
+    {
+        int x = SCREEN_WIDTH - MI_WIDTH - 1;
+        int y = MP_TITLE_HEIGHT + i * MI_HEIGHT;
+        Painter::DrawRectangle(x, y, MI_WIDTH, MI_HEIGHT, Color::FILL);
+        Item *item = GetItem(i);
+        if (item)
+        {
+            item->Draw(false, x, y);
         }
     }
 }

@@ -70,7 +70,7 @@ PageBase name = { Item::Type::Page, 4, false, namePage, keeper, funcActive, {tit
 #define DEF_PAGE_5(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
     item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcOnKey)                                                  \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5};                             \
-const PageBase name = { Item::Type::Page, 5, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                       \
+const PageBase name = { Item::Type::Page, 5, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},     \
     items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
 
 #define DEF_PAGE_6(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
@@ -107,7 +107,7 @@ const PageBase name = { Item_Page, 9, false, namePage, keeper, funcActive, {titl
 static Item * items##name[] = {                                                                                                             \
     (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
     (Item *)&item8, (Item *)&item9, (Item *)&item10};                                                                                       \
-const PageBase name = { Item::Type::Page, 10, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                      \
+const PageBase name = { Item::Type::Page, 10, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},    \
     items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
 
 #define DEF_PAGE_11_GLOBAL(name, titleRU, titleEN, hintRU, hintEN,                                                                          \

@@ -6,6 +6,7 @@
 #include "PageSignals.h"
 #include "Generator/Signals.h"
 #include "Generator/Generator.h"
+#include "Menu/Menu.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,7 +126,7 @@ DEF_PAGE_5( pSignals,
     cParameters,    ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÏÀÐÀÌÅÒÐ
     bSetParameter,  ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÂÂÅÑÒÈ ÇÍÀ×ÅÍÈÅ ÏÀÐÀÌÅÒÐÀ
     cTypeTune,      ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÑÛËÊÀ
-    Page::Settings, 0, FuncActive, FuncPress, OnKey
+    Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

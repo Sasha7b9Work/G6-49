@@ -6,6 +6,7 @@
 #include "Display/Painter.h"
 #include "Generator/Generator.h"
 #include "Hardware/CPU.h"
+#include "Menu/Menu.h"
 
 
 #ifdef WIN32
@@ -51,7 +52,7 @@ static const Settings defSet =
         Parameter::Frequency
     },
     (Page *)0,                          // menu_additionPage 
-    (Page *)0,                          // menu_page
+    (Page *)Menu::mainPage,             // menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
     FrequencyMeter::BillingTime::_1ms,  // freq_billingTime
