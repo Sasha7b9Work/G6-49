@@ -2,8 +2,10 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
+#include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
+#include "AddPageInput.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +46,7 @@ DEF_SMALL_BUTTON(sbRight,                                                       
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Cancel()
 {
-    ADDITION_PAGE = 0;
+    Menu::ResetAdditionPage();
 }
 
 static void Draw_Cancel(int x, int y)
@@ -81,6 +83,8 @@ static void OnRotate_Reg(int)
 {
 
 }
+
+Page *AddPageInput::pointer = (Page *)&pInput;
 
 DEF_PAGE_SB( pInput,
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", "VALUE ENTRY",

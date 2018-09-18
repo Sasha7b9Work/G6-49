@@ -27,6 +27,10 @@ public:
     static Item *itemUnderKey;
     /// ¬озвращает позицию страницы на страницы. “олько если страница принадлежит главному меню. »наче -1
     static int GetPosition(Page *page);
+    /// ”станавливает дл€ отрисовки дополнительноую страницу
+    static void SetAdditionPage(Page *page);
+    /// —инмает дополнительную страницу с отрисовки
+    static void ResetAdditionPage();
     /// ”казатель на главную страницу
     static Page *mainPage;
 private:
@@ -38,4 +42,6 @@ private:
     static void ProcessControl(Control control);
     /// ≈сли какой-то итем раскрыт, то здесь его адрес
     static Item *openedItem_;
+    /// —юда помещаетс€ указатель на страницу основного меню в случае, если нужна отрисовка дополнительной страницы
+    static Page *oldPage;
 };

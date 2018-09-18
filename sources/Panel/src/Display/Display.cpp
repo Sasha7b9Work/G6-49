@@ -45,7 +45,6 @@ void Display::Update()
     Wave::Graphics::Draw(Chan::B);
     Menu::Draw();
     PageService::PageRegisters::Draw();
-    InputWindow::Draw();
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
     FrequencyMeter::Draw();
     Hint::Draw();

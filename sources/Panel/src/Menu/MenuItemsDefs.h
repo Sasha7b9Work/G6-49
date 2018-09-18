@@ -28,7 +28,7 @@ static const GovernorBase name = { TypeItem::E::Governor, 0, false, Page::NoPage
     min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GOVERNOR_COLOR(name, titleRU, titleEN, hintRU, hintEN, colorType, keeper)                                                       \
+#define DEF_GOVERNOR_COLOR(name, titleRU, titleEN, hintRU, hintEN, colorType, keeper)                                                        \
 static const GovernorColorBase name = { TypeItem::E::GovernorColor, 0, false, Page::NoPage, &keeper, FuncActive,                             \
     {titleRU, titleEN, hintRU, hintEN}, &colorType, 0};
 
@@ -52,7 +52,7 @@ const PageBase name = { Item::Type::Page, 2, false, namePage, keeper, funcActive
 
 #define DEF_PAGE_3(name, titleRU, titleEN, hintRU, hintEN, item1, item2, item3, namePage, keeper, funcActive, funcPress, funcOnKey)         \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3};                                                             \
-const PageBase name = { Item::Type::Page, 3, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                       \
+const PageBase name = { Item::Type::Page, 3, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},     \
     items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
 
 #define DEF_PAGE_4(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \

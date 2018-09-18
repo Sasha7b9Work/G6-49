@@ -3,6 +3,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Generator/Generator.h"
+#include "Menu/Menu.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
@@ -386,7 +387,7 @@ void StructValue::SaveValue()
 
     SendToGenerator();
 
-    ADDITION_PAGE = 0;
+    Menu::ResetAdditionPage();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -69,7 +69,7 @@ static void OnPress_SetParameter()
     {
         InputWindow::Init();
 
-        ADDITION_PAGE = (Page *)&pInput;
+        Menu::SetAdditionPage((Page *)&pInput);
     }
     else if(PARAM_CURRENT->IsExitParameter())
     {

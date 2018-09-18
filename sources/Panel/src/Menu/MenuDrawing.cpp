@@ -6,6 +6,7 @@
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Debug.h"
+#include "Display/InputWindow.h"
 #include <math.h>
 
 
@@ -18,6 +19,10 @@ void Menu::Draw()
     if(GetOpenedItem())
     {
         GetOpenedItem()->Draw(true);
+    }
+    if(oldPage)
+    {
+        InputWindow::Draw();
     }
 }
 

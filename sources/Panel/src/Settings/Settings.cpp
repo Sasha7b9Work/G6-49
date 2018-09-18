@@ -51,7 +51,6 @@ static const Settings defSet =
         Parameter::Frequency,
         Parameter::Frequency
     },
-    (Page *)0,                          // menu_additionPage 
     (Page *)Menu::mainPage,             // menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]

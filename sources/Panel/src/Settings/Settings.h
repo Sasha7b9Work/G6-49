@@ -17,9 +17,6 @@ extern const PageBase pInput;
 
 #define COLOR(x)                (set.disp_Colors[x])
 #define CURRENT_PAGE            (set.menu_currentPage)
-#define ADDITION_PAGE           (set.menu_additionPage)
-#define ADDITION_PAGE_IS_INPUT  (ADDITION_PAGE == (Page *)&pInput)
-#define ADDITION_PAGE_IS_NONE   (ADDITION_PAGE == 0)
 
 #define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
@@ -74,7 +71,6 @@ public:
     };
     col_val                     disp_Colors[32];                        ///< ÷вета
     Parameter                   sig_parameter[Form::Number];            ///< “екущий выбранный параметр сигнала
-    Page*                       menu_additionPage;                      ///< «десь адрес дополнительной страницы, если такова€ имеетс€
     Page*                       menu_currentPage;                       ///< јдрес открытой страницы меню. 0, если открыта главна€ страница
     int8                        menu_posActItem[Page::Number];          ///< ѕозици€ активного пункта меню дл€ каждой страницы
     int8                        menu_currentSubPage[Page::Number];      ///< Ќомер текущей подстраницы дл€ каждой страницы

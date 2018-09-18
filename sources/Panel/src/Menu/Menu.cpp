@@ -9,12 +9,14 @@
 #include "Menu/Pages/PageFrequencyCounter.h"
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/PageDebug.h"
+#include "Menu/Pages/AddPageInput.h"
 #include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Item *Menu::itemUnderKey = 0;
 Item *Menu::openedItem_ = 0;
+Page *Menu::oldPage = 0;
 
 extern const PageBase pSignals;
 
@@ -43,7 +45,7 @@ void Menu::Update()
     while (!CPU::Keyboard::BufferIsEmpty())
     {
         Control control = CPU::Keyboard::GetNextControl();
-        if (ADDITION_PAGE_IS_INPUT)
+        if (CURRENT_PAGE == AddPageInput::pointer)
         {
             InputWindow::ProcessContorl(control);
         }
@@ -120,7 +122,7 @@ void Menu::ProcessControl(Control key)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::RegIsControlSubPages()
 {
-    return GetOpenedItem() == 0 && ADDITION_PAGE_IS_NONE && CURRENT_PAGE && CURRENT_PAGE->NumSubPages() != 0;
+    return GetOpenedItem() == 0 && oldPage == 0 && CURRENT_PAGE && CURRENT_PAGE->NumSubPages() != 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -160,4 +162,18 @@ int Menu::GetPosition(Page *page)
     }
 
     return -1;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::SetAdditionPage(Page *page)
+{
+    oldPage = CURRENT_PAGE;
+    CURRENT_PAGE = page;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::ResetAdditionPage()
+{
+    CURRENT_PAGE = oldPage;
+    oldPage = 0;
 }

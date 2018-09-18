@@ -3,6 +3,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include "PageService.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,5 +61,5 @@ DEF_PAGE_3( pDebug,
     cConsole,      ///< ÎÒËÀÄÊÀ - ÊÎÍÑÎËÜ
     bSaveSettings, ///< ÎÒËÀÄÊÀ - ÑÎÕÐÀÍÈÒÜ ÍÀÑÒÐÎÉÊÈ
     cStatistics,   ///< ÎÒËÀÄÊÀ - ÑÒÀÒÈÑÒÈÊÀ
-    Page::Debug, 0, FuncActive, FuncPress, FuncOnKey
+    Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey
 )
