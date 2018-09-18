@@ -131,8 +131,6 @@ public:
     pFuncVV funcOnPress;
     /// Будет вызываться после отрисовки кнопок
     pFuncVV funcOnDraw;
-    /// В странице малых кнопок вызывается при повороте ручки установка
-    pFuncVI funcRegSetSB;
 
     pFuncBKey funcOnKey;
 
@@ -171,8 +169,6 @@ public:
     /// Будет вызываться после отрисовки кнопок
     pFuncVV  funcOnDraw;
     /// В странице малых кнопок вызывается при повороте ручки установка
-    pFuncVI  funcRegSetSB;
-    /// Обработака нажатия кнопки. Возвращает true, если обработка произошла и дальше кнопку обрабатывать не требуется
     pFuncBKey fuuncOnKey;
     /// Dозвращает число подстраниц в странице по адресу page
     int NumSubPages() const;

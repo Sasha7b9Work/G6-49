@@ -79,9 +79,9 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnRotate_Reg(int)
+static bool OnControl(Control)
 {
-
+    return false;
 }
 
 Page *AddPageInput::pointer = (Page *)&pInput;
@@ -96,5 +96,5 @@ DEF_PAGE_SB( pInput,
     &sbEnter,    ///< ÎÊÍÎ ÂÂÎÄÀ - ÂÂÎÄ
     0,
     0,
-    Page::SB_Input, 0, FuncActive, FuncPress, FuncDrawPage, OnRotate_Reg
+    Page::SB_Input, 0, FuncActive, FuncPress, FuncDrawPage, OnControl
 )

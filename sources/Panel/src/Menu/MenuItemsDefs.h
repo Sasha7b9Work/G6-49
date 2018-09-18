@@ -34,11 +34,11 @@ static const GovernorColorBase name = { TypeItem::E::GovernorColor, 0, false, Pa
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_PAGE_SB(name, titleRU, titleEN, hintRU, hintEN, item0, item1, item2, item3, item4, item5,                                       \
-    namePage, keeper, funcActive, funcPress, funcDraw, funcRegSet)                                                                          \
+    namePage, keeper, funcActive, funcPress, funcDraw, funcOnKey)                                                                          \
 static Item * items##name[] = {(Item *)item0, (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4,                                   \
     (Item *)item5};                                                                                                                         \
 const PageBase name = { Item::Type::Page, 6, true, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                        \
-    items##name, funcPress, funcDraw, funcRegSet};
+    items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_1(name, titleRU, titleEN, hintRU, hintEN, item1, namePage, keeper, funcActive, funcPress)                                  \
 static Item * items##name[] = {(Item *)&item1};                                                                                             \
@@ -53,7 +53,7 @@ const PageBase name = { Item::Type::Page, 2, false, namePage, keeper, funcActive
 #define DEF_PAGE_3(name, titleRU, titleEN, hintRU, hintEN, item1, item2, item3, namePage, keeper, funcActive, funcPress, funcOnKey)         \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3};                                                             \
 const PageBase name = { Item::Type::Page, 3, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},     \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
+    items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_4(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
     item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcOnKey)                                                         \
@@ -65,13 +65,13 @@ const PageBase name = { Item::Type::Page, 4, false, namePage, keeper, funcActive
     item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcOnKey)                                                         \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4};                                             \
 PageBase name = { Item::Type::Page, 4, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                             \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
+    items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_5(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
     item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcOnKey)                                                  \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5};                             \
 const PageBase name = { Item::Type::Page, 5, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},     \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
+    items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_6(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
     item1, item2, item3, item4, item5, item6, namePage, keeper, funcActive, funcPress)                                                      \
@@ -108,7 +108,7 @@ static Item * items##name[] = {                                                 
     (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
     (Item *)&item8, (Item *)&item9, (Item *)&item10};                                                                                       \
 const PageBase name = { Item::Type::Page, 10, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},    \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage, funcOnKey};
+    items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_11_GLOBAL(name, titleRU, titleEN, hintRU, hintEN,                                                                          \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, namePage, keeper, funcActive, funcPress)                 \
