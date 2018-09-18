@@ -17,7 +17,7 @@ Item *Menu::itemUnderKey = 0;
 Item *Menu::openedItem = 0;
 //Control Menu::panelControlHint = None;
 
-const Page *pages[NUM_PAGES] =
+const Page *Menu::pages[NUM_PAGES] =
 {
     PageSignals::pointer,
     PageFrequencyCounter::pointer,
@@ -125,12 +125,13 @@ Page *Menu::CurrentPage()
 {
     volatile int8 num = CURRENT_PAGE;
 
-    if (num == 1)
-    {
-        num = num;
-    }
-
     Page *page = (Page *)pages[num];
 
     return (ADDITION_PAGE_IS_NONE ? page : ADDITION_PAGE);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+const Page *Menu::GetPage(int i)
+{
+    return pages[i];
 }

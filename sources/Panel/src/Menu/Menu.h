@@ -7,8 +7,6 @@
 #define PAGE_IS_MAIN  false
 #define MENU_TEMP_ENABLE_STRING_NAVI()
 
-extern const Page *pages[NUM_PAGES];
-
 
 class Menu
 {
@@ -30,6 +28,8 @@ public:
     static Item *itemUnderKey;
     /// Возвращает адрес текущую страницу
     static Page* CurrentPage();
+
+    static const Page *GetPage(int i);
 private:
 
     static void DrawTitle();
@@ -39,4 +39,6 @@ private:
     static void ProcessControl(Control control);
 
     static Item *openedItem;
+
+    static const Page *pages[NUM_PAGES];
 };
