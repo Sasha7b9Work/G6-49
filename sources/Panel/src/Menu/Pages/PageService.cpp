@@ -627,8 +627,10 @@ DEF_PAGE_4_VAR(pRegisters,                                                      
     Page::Registers, &pService, FuncActive, FuncPress, OnKey
 )
 
+extern const PageBase pDebug;
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_4( pService,                                                                                                                 //--- ÑÅÐÂÈÑ ---
+DEF_PAGE_5( pService,                                                                                                                 //--- ÑÅÐÂÈÑ ---
     "ÑÅÐÂÈÑ", "SERVICE",
     "Ñåðâèñíûå ôóíêöèè",
     "Service functions",
@@ -636,5 +638,6 @@ DEF_PAGE_4( pService,                                                           
     cLanguage,              ///< ÑÅÐÂÈÑ - ßÇÛÊ
     pRegisters,
     pUSB,
+    pDebug,
     Page::Service, 0, FuncActive, FuncPress, FuncOnKey
 )

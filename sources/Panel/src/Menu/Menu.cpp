@@ -21,8 +21,7 @@ const Page *pages[NUM_PAGES] =
 {
     PageSignals::pointer,
     PageFrequencyCounter::pointer,
-    PageService::pointer,
-    PageDebug::pointer
+    PageService::pointer
 };
 
 
