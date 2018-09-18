@@ -59,63 +59,34 @@ void Menu::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ProcessControl(Control key)
 {
-    if(Hint::ProcessControl(key))
-    {
-    }
-    else if(CURRENT_PAGE->ProcessingControl(key))
-    {
-    }
-    else if (key.Is(Control::Reg::Button) || key.Is(Control::Esc) || key.Is(Control::Left) || key.Is(Control::Right))
-    {
-        if(GetOpenedItem())
-        {
-            Item *item = GetOpenedItem()->Press(key);
-            SetOpenedItem(item);
-        }
-        else
-        {
-            CURRENT_PAGE->Press(key);
-        }
-    }
-    else if (key >= Control::F1 && key <= Control::F5)
-    {
-        Item *item = CURRENT_PAGE->GetItem(key)->Press(key);
-        SetOpenedItem(item);
-    }
-    else if (key.Is(Control::Reg::Left))
-    {
-        if (RegIsControlSubPages())
-        {
-            CURRENT_PAGE->ChangeSubPage(-1);
-        }
-        else if(GetOpenedItem())
-        {
-            GetOpenedItem()->Press(key);
-        }
-    }
-    else if (key.Is(Control::Reg::Right))
-    {
-        if (RegIsControlSubPages())
-        {
-            CURRENT_PAGE->ChangeSubPage(1);
-        }
-        else if(GetOpenedItem())
-        {
-            GetOpenedItem()->Press(key);
-        }
-    }
-    else if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
+    if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
     {
         if(key.Is(Control::On1))
         {
             SWITCH_CHANNEL_A;
             Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
+            return;
         }
         else if (key.Is(Control::On2))
         {
             SWITCH_CHANNEL_B;
             Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
+            return;
         }
+    }
+
+    if (Hint::ProcessControl(key))
+    {
+    }
+    else if (CURRENT_PAGE->ProcessingControl(key))
+    {
+    }
+    else if (CURRENT_PAGE->Press(key))
+    {
+    }
+    else if(GetOpenedItem())
+    {
+        GetOpenedItem()->Press(key);
     }
 }
 

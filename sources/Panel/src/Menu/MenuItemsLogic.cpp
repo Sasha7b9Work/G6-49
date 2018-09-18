@@ -380,20 +380,30 @@ Item *Item::Press(Control key)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Page::Press(Control key)
 {
-    if(key.action.Is(Control::Action::Up))
+    if(CURRENT_PAGE == this)
     {
-        if(key.Is(Control::Esc))
+        if((key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right)) && Menu::RegIsControlSubPages())
+        {
+            ChangeSubPage(key.Is(Control::Reg::Left) ? -1 : 1);
+        }
+        else if(key.Is(Control::Esc) && key.action.Is(Control::Action::Up))
         {
             if(KEEPER(this))
             {
                 CURRENT_PAGE = (Page *)KEEPER(this);
             }
         }
-        else
+        else if(key.IsFunctional())
         {
-            CURRENT_PAGE = this;
+            Item *item = GetItem(key)->Press(key);
+            Menu::SetOpenedItem(item);
         }
     }
+    else if(key.action.Is(Control::Action::Up))
+    {
+        CURRENT_PAGE = this;
+    }
+
     return 0;
 }
 

@@ -74,6 +74,7 @@ struct Control
     bool IsDigit() const;
     char ToChar() const;
     pString Name() const;
+    bool IsFunctional() const;
 };
 
 
