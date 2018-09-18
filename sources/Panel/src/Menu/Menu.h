@@ -3,14 +3,11 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define NUM_PAGES     3        ///< Количество страниц в меню
-#define PAGE_IS_MAIN  false
-#define MENU_TEMP_ENABLE_STRING_NAVI()
-
-
 class Menu
 {
 public:
+
+    static const int NUM_ITEMS_ON_PAGE = 4;
 
     static void Init();
         
@@ -34,9 +31,9 @@ public:
     static Page *mainPage;
 private:
     /// Наризовать загол
-    static void DrawTitle();
+    static int DrawTitle();
 
-    static void DrawPagesUGO();
+    static void DrawPagesUGO(int x);
 
     static void ProcessControl(Control control);
     /// Если какой-то итем раскрыт, то здесь его адрес

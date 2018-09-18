@@ -63,8 +63,7 @@ void Menu::ProcessControl(Control key)
     else if(CURRENT_PAGE->ProcessingControl(key))
     {
     }
-    else if (key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right) || key.Is(Control::Reg::Button) || key.Is(Control::Esc) || 
-                            key.Is(Control::Left) || key.Is(Control::Right))
+    else if (key.Is(Control::Reg::Button) || key.Is(Control::Esc) || key.Is(Control::Left) || key.Is(Control::Right))
     {
         if(GetOpenedItem())
         {

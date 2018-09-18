@@ -40,32 +40,18 @@ uint8 *Display::GetBuffer()
 void Display::Update()
 {
     Statistics::BeginFrame();
-    
     Painter::BeginScene(Color::BACK);
-    
     Wave::Graphics::Draw(Chan::A);
-
     Wave::Graphics::Draw(Chan::B);
-    
     Menu::Draw();
-
     PageService::PageRegisters::Draw();
-    
     InputWindow::Draw();
-    
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
-    
     FrequencyMeter::Draw();
-    
     Hint::Draw();
-    
     Statistics::Show();
-    
     Console::Draw();
-    
     CPU::Keyboard::Draw();
-    
     Painter::EndScene();
-    
     Statistics::EndFrame();
 }

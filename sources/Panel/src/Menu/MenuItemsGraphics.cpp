@@ -5,6 +5,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Settings/Settings.h"
+#include "Utils/Debug.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,11 +170,10 @@ void Choice::Draw(bool opened, int x, int y)
 void Page::Draw() const
 {
     int numPage = CurrentSubPage();
-
     for (int i = numPage * 4; i < numPage * 4 + 4; i++)
     {
         int x = SCREEN_WIDTH - MI_WIDTH - 1;
-        int y = MP_TITLE_HEIGHT + i * MI_HEIGHT;
+        int y = MP_TITLE_HEIGHT + (i % Menu::NUM_ITEMS_ON_PAGE) * MI_HEIGHT;
         Painter::DrawRectangle(x, y, MI_WIDTH, MI_HEIGHT, Color::FILL);
         Item *item = GetItem(i);
         if (item)

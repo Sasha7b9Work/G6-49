@@ -28,8 +28,6 @@ typedef unsigned int        col_val;
 
 #define MAX_UINT ((uint)-1)
 
-#define NUM_ITEMS_ON_PAGE   4
-
 typedef void (*pFuncVV)();
 typedef void (*pFuncVII)(int, int);
 typedef void (*pFuncVI)(int);

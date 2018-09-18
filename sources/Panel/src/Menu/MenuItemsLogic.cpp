@@ -532,6 +532,11 @@ char *Item::FullPath() const
     static char buffer[100];
     buffer[0] = 0;
 
+    if(pointer > 1)
+    {
+        pointer--;
+    }
+
     do
     {
         pointer--;
