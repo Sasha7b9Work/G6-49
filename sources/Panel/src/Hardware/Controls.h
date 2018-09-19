@@ -72,6 +72,7 @@ struct Control
     }
     operator uint8() const { return (uint8)value; };
     bool Is(Control c) { return c.value == value; };
+    bool Is(Control c, Action a) { return value == c && action == a; };
     bool IsDigit() const;
     char ToChar() const;
     pString Name() const;
