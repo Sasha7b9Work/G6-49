@@ -43,7 +43,6 @@ public:
         DutyRatio,              ///< Скважность
         Phase,                  ///< Сдвиг фазы
         Delay,                  ///< Задержка
-        DepthModulation,        ///< Глубина амплитудной модуляции
         Polarity,               ///< Полярность
         DurationRise,           ///< Длительность нарастания
         DurationFall,           ///< Длительность спада

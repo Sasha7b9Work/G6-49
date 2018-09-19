@@ -61,7 +61,6 @@ struct CommandPanel
         ModeDebug,              ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
         SetDelay,               ///< Задержка
         WriteRegister,          ///< Занести значение в регистр
-        SET_DEPTH_MODULATION,
         SET_POLARITY,
         SET_DURATION_RISE,
         SET_DURATION_FALL,
