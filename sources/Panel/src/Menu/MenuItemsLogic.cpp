@@ -357,7 +357,7 @@ Item *Item::Press(Control key)
 
     if(CURRENT_PAGE->GetItem(key) == this || key.IsRotate() || key.Is(Control::Esc))
     {
-        Menu::itemUnderKey = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
+        Menu::pressedItem = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
 
         if (type == Item::Type::Choice)
         {

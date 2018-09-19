@@ -108,7 +108,7 @@ bool Item::IsShade() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsPressed() const
 {
-    return this == Menu::itemUnderKey;
+    return this == Menu::pressedItem;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ void Item::ShortPress()
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
-        Menu::itemUnderKey = this;
+        Menu::pressedItem = this;
     }
 }
 
@@ -280,7 +280,7 @@ void Item::LongPress()
     {
         SButton *button = (SButton *)this;
         button->funcOnPress();
-        Menu::itemUnderKey = this;
+        Menu::pressedItem = this;
     }
     else
     {
