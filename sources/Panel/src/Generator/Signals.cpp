@@ -12,7 +12,7 @@ static Parameter paramsSineModulationA[] =
 
 static Parameter params_SineA[] =
 {
-    Parameter(Parameter::Frequency,          0.1f,    100e6f, "15000", 0, Order::Kilo),
+    Parameter(Parameter::Frequency,          0.1f,    100e6f, "40000", 0, Order::Kilo),
     Parameter(Parameter::Period,             100e-8f, 100e6f, "05000", 0, Order::Milli),
     Parameter(Parameter::Amplitude,          0.0f,    10.0f,  "50000", 0, Order::One),
     Parameter(Parameter::Offset,             0.0f,    10.0f,  "50000", 0, Order::One),
