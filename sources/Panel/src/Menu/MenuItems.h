@@ -33,7 +33,7 @@ typedef bool (*pFuncBKey)(Control);
                                     /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */        \
     uint8           nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                                  \
                                     /* В случае, если type == Item_Choice,  определяет номер бита */                                            \
-    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
+    const PageBase  *keeper_;       /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
     pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                                                             \
     const char      *titleHint[4]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
@@ -85,11 +85,11 @@ public:
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage();
     /// Возвращает полный путь к элементу меню
-    char *FullPath() const;
+    char *FullPath();
     /// Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
     int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
 
-    Page *Keeper() { return (Page *)keeper; };
+    Page *Keeper() { return (Page *)keeper_; };
 
     bool IsActive() const { return funcOfActive(); };
 };

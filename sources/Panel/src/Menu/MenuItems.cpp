@@ -122,8 +122,7 @@ bool Item::IsOpened()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Item::Open(bool open)
 {
-    Page *parent = (Page *)keeper;
-    parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
+    Keeper()->SetPosActItem(open ? (Keeper()->PosCurrentItem() | 0x80) : (Keeper()->PosCurrentItem() & 0x7f));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -531,17 +531,17 @@ pString ChoiceParameter::NameCurrentSubItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-char *Item::FullPath() const
+char *Item::FullPath()
 {
-    const PageBase *parent = keeper;
-
     const char *titles[5] = {Title()};
     int pointer = 1;
+
+    Page *parent = Keeper();
 
     while(parent)
     {
         titles[pointer++] = parent->titleHint[LANG];
-        parent = parent->keeper;
+        parent = parent->Keeper();
     }
 
     static char buffer[100];
