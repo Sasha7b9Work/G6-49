@@ -33,16 +33,16 @@ struct Control
         Left      = 0x12,
         Right     = 0x13,
         On1       = 0x15,
-        On2       = 0x15
+        On2       = 0x16
     } value;
 
     struct Reg
     {
         enum E
         {
-            Left   = 0x16,
-            Right  = 0x17,
-            Button = 0x18
+            Left   = 0x17,
+            Right  = 0x18,
+            Button = 0x19
         };
     };
 

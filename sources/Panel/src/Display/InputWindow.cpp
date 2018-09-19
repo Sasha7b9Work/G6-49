@@ -302,4 +302,8 @@ void InputWindow::ProcessContorl(Control key)
     {
         KeyRight();
     }
+    else if(key.Is(Control::Esc, Control::Action::Up))
+    {
+        Menu::ResetAdditionPage();
+    }
 }
