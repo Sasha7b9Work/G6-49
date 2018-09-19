@@ -17,9 +17,11 @@ public:
     /// ¬озвращает true, если ручка управл€ет переклюичением подстраниц меню
     static bool RegIsControlSubPages();
     /// ¬озвращает адрес открытого элемента меню
-    static Item *GetOpenedItem();
+    static Item *GetOpenedItem() { return openedItem; };
 
-    static void SetOpenedItem(Item *item);
+    static void SetOpenedItem(Item *item) { openedItem = item; };
+    /// ќбнулить открытый итем - итем закрыт
+    static void ResetOpenedItem() { openedItem = 0; };
     /// ¬озвращает адрес текущего элемента меню (текущим, как правило, €вл€етс€ элемент, кнопка которого была нажата последней
     static Item *CurrentItem();
     ///\brief  «десь хранитс€ адрес элемента меню, соответствующего функциональной клавише [F1..F4], если она находитс€ в нижнем положении, и 0, 
@@ -41,7 +43,7 @@ private:
 
     static void ProcessControl(Control control);
     /// ≈сли какой-то итем раскрыт, то здесь его адрес
-    static Item *openedItem_;
+    static Item *openedItem;
     /// —юда помещаетс€ указатель на страницу основного меню в случае, если нужна отрисовка дополнительной страницы
     static Page *oldPage;
 };

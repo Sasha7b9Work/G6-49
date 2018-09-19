@@ -125,7 +125,7 @@ Item *Choice::Press(Control key)
     }
     else if(key.Is(Control::Esc) || key.action.Is(Control::Action::Up))
     {
-        Menu::SetOpenedItem(0);
+        Menu::ResetOpenedItem();
     }
     else if(key.action.Is(Control::Action::Long))
     {
