@@ -489,7 +489,7 @@ static bool OnRegulator(Control key)
 {
     if (TypeBuffer(currentRegister) == Uint)
     {
-        if (key.Is(Control::Reg::Right) || key.Is(Control::Reg::Left))
+        if (key.IsRotate())
         {
             NumberBuffer::ProcessKey(key);
             LoadRegister();

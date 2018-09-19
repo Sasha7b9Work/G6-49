@@ -365,7 +365,7 @@ bool Page::Press(Control key)
 {
     if(CURRENT_PAGE == this)
     {
-        if((key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right)) && Menu::RegIsControlSubPages())
+        if(key.IsRotate() && Menu::RegIsControlSubPages())
         {
             ChangeSubPage(key.Is(Control::Reg::Left) ? -1 : 1);
             return true;

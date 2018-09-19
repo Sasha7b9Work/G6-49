@@ -20,7 +20,7 @@ bool        Hint::needCalculate = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Hint::ProcessControl(Control key)
 {
-    if (key.Is(Control::Esc) && key.action.Is(Control::Action::Long))
+    if (key.Is(Control::Esc, Control::Action::Long))
     {
         show = !show;
         item = 0;
@@ -39,7 +39,7 @@ bool Hint::ProcessControl(Control key)
             control = Control::None;
             needCalculate = true;
         }
-        else if (key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right))
+        else if (key.IsRotate())
         {
             if(numPages > 1)
             {
