@@ -524,10 +524,6 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 {
-    Font::Type type = Font::GetType();
-
-    Font::SetType(Font::Type::_7);
-
     int width = Font::GetWidth(symbol);
     int height = Font::GetHeightSymbol(symbol);
 
@@ -554,8 +550,6 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
             }
         }
     }
-
-    Font::SetType(type);
 
     return eX + width * size;
 }

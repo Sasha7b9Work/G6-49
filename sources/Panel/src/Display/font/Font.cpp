@@ -11,7 +11,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Font *fonts[Font::Type::Number] = {&font5, &font7, &font8, &fontUGO, &fontUGO2};
+const Font *fonts[Font::Type::Number] = {&font5, &font7, &font7, &fontUGO, &fontUGO2};
 const Font *font = 0;
 
 
