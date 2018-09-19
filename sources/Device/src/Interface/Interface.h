@@ -35,8 +35,6 @@ public:
     /// Команда обрабатывает засылку произвольного сигнала
     static void CreateWave();
 
-    static void SetWave();
-
     static void SetRampForSine();
 
     static void SetDurationForRampSine();

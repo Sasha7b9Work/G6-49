@@ -69,8 +69,6 @@ commands[CommandPanel::Number] =
     Interface::Empty,                    /// SET_DURATION_FALL
     Interface::Empty,                    /// SET_DURATION_STADY
     Interface::Empty,                    /// SET_DUTY_FACTOR
-    Interface::SetWave,                  /// CREATE_HAND_WAVE
-    Interface::SetWave,                  /// SET_HAND_WAVE
     Interface::SetRampForSine,           /// SetRampForSine
     Interface::SetDurationForRampSine,   /// SetRampSineDuration
     Interface::SetAmplitudeRampForSine,  /// SetRampSineAmplitude
@@ -360,11 +358,6 @@ void Interface::ReceiveCallback()
         }
     }
     timeLastReceive = TIME_MS;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetWave()
-{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

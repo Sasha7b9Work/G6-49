@@ -61,13 +61,10 @@ struct CommandPanel
         ModeDebug,              ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
         SetDelay,               ///< Задержка
         WriteRegister,          ///< Занести значение в регистр
-//        SET_POLARITY,
         SET_DURATION_RISE,
         SET_DURATION_FALL,
         SET_DURATION_STADY,
         SET_DUTY_FACTOR,
-        CREATE_HAND_WAVE,       ///< Засылает точки произвольного сигнала
-        SET_HAND_WAVE,          ///< Устанавливает вывод произвольного сигнала
         SetRampForSine,         ///< Установить режим модуляции пилой для синуса
         SetRampSineDuration,    ///< Установить длительность ипульса при модуляции синуса пилой
         SetRampSineAmplitude,   ///< Установить амплитуду для пилы, модулирующей синус
