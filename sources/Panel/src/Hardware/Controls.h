@@ -78,6 +78,8 @@ struct Control
     bool IsFunctional() const;
     /// Возвращает true, если поворот ручки
     bool IsRotate() const;
+    /// Возвращает true, если кнопка управления курсором (Влево-Вправо)
+    bool IsCursors() const { return value == Left || value == Right; };
 };
 
 

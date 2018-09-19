@@ -115,11 +115,16 @@ float Choice::Step()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Choice::Press(Control key)
 {
-    if((key.Is(Control::Left) && key.action.Is(Control::Action::Up)) || key.Is(Control::Reg::Right))
+    if(key.action.IsRelease())
+    {
+        key = key;
+    }
+    
+    if((key.Is(Control::Left) && key.action.IsRelease()) || key.Is(Control::Reg::Right))
     {
         StartChange(-1);
     }
-    else if((key.Is(Control::Right) && key.action.Is(Control::Action::Up)) || key.Is(Control::Reg::Left))
+    else if((key.Is(Control::Right) && key.action.IsRelease()) || key.Is(Control::Reg::Left))
     {
         StartChange(1);
     }
@@ -365,7 +370,7 @@ Item *Item::Press(Control key)
         return Menu::GetOpenedItem();
     }
 
-    if(CURRENT_PAGE->GetItem(key) == this || key.IsRotate() || key.Is(Control::Esc))
+    if(CURRENT_PAGE->GetItem(key) == this || key.IsRotate() || key.Is(Control::Esc) || key.IsCursors())
     {
         Menu::pressedItem = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
 
