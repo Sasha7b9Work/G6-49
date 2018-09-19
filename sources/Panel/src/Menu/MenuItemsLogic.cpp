@@ -127,7 +127,7 @@ Item *Choice::Press(Control key)
     {
         Menu::ResetOpenedItem();
     }
-    else if((KEEPER(this))->GetItem(key))
+    else if(Keeper()->GetItem(key))
     {
         if(key.action.Is(Control::Action::Up))
         {
@@ -405,9 +405,9 @@ Item *Page::Press(Control key)
         }
         else if(key.Is(Control::Esc) && key.action.Is(Control::Action::Up))
         {
-            if(KEEPER(this))
+            if(Keeper())
             {
-                CURRENT_PAGE = (Page *)KEEPER(this);
+                CURRENT_PAGE = Keeper();
             }
         }
         else if(key.IsFunctional())
@@ -460,18 +460,16 @@ int8 Choice::CurrentIndex() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int Item::PositionOnPage() const
+int Item::PositionOnPage()
 {
-    if(KEEPER(this) == 0)                       // Если у страницы нет хранителя - она принадлежит главному меню
+    if(Keeper() == 0)                       // Если у страницы нет хранителя - она принадлежит главному меню
     {
         return Menu::GetPosition((Page *)this);
     }
 
-    Page *parent = (Page *)KEEPER(this);
-
-    for(int i = 0; i < parent->NumItems(); i++)
+    for(int i = 0; i < Keeper()->NumItems(); i++)
     {
-        if(this == parent->items[i])
+        if(this == Keeper()->items[i])
         {
             return i;
         }
@@ -481,7 +479,7 @@ int Item::PositionOnPage() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control Item::ButtonForItem() const
+Control Item::ButtonForItem()
 {
     int pos = PositionOnPage();
 

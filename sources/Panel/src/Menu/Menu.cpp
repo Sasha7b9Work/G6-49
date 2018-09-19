@@ -109,7 +109,7 @@ Item *Menu::CurrentItem()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Menu::GetPosition(Page *page)
 {
-    Page *keeper = (Page *)KEEPER(page);
+    Page *keeper = page->Keeper();
 
     if(keeper == 0)
     {

@@ -39,21 +39,9 @@ typedef bool (*pFuncBKey)(Control);
     const char      *titleHint[4]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
 class PageBase;
+class Page;
 
-#define IS_PAGE(control)           (control->type == Item_Page)
-#define NOT_PAGE(control)          (control->type != Item_Page)
-#define IS_PAGE_SB(control)        (control->isPageSB)
-#define IS_CHOICE(control)         (control->type == Item_Choice)
-#define IS_CHOICE_REG(control)     (control->type == Item_ChoiceReg)
-#define NOT_CHOICE_REG(control)    (control->type != Item_ChoiceReg)
-#define IS_GOVERNOR(control)       (control->type == Item_Governor)
-#define NOT_GOVERNOR(control)      (control->type != Item_Governor)
-#define IS_GOVERNOR_COLOR(control) (control->type == Item_GovernorColor)
-#define IS_IP(control)             (control->type == Item_IP)
-#define IS_MAC(control)            (control->type == Item_MAC)
-#define IS_TIME(control)           (control->type == Item_Time)
-    
-#define KEEPER(control)            ((Page *)control->keeper)
+   
 #define IS_ACTIVE(control)         (control->funcOfActive())
 
 
@@ -107,13 +95,15 @@ public:
     Type GetType() const;
 
     /// Возвращает порядковый номер пункта меню на странице
-    int PositionOnPage() const;
+    int PositionOnPage();
     /// Возвращает функциональную клавишу, назначенную пункту меню
-    Control ButtonForItem() const;
+    Control ButtonForItem();
     /// Возвращает полный путь к элементу меню
     char *FullPath() const;
     /// Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
     int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
+
+    Page *Keeper() { return (Page *)keeper; };
 };
 
 
