@@ -48,33 +48,32 @@ struct CommandPanel
 {
     enum E
     {
-        None = 0,
-        ENABLE_CHANNEL = 1,             ///< Включить/выключить канал
-        SET_FORM_WAVE = 2,              ///< Установить форму сигнала
-        SET_FREQUENCY = 3,              ///< Установить частоту
-        SET_AMPLITUDE = 4,              ///< Установить амплитуду
-        SET_OFFSET = 5,                 ///< Установать смещение
-        SET_DURATION = 6,
-        SET_DUTYRATIO = 7,
-        SET_PHASE = 8,
-        RUN_RESET = 9,                  ///< Сброс состояния
-        MODE_DEBUG = 10,                ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
-        SET_DELAY = 11,                 ///< Задержка
-        WRITE_REGISTER = 12,            ///< Занести значение в регистр
-        READ_DATA = 13,                 ///< Чтение данных из генератора
-        SET_DEPTH_MODULATION = 14,
-        SET_POLARITY = 15,
-        SET_DURATION_RISE = 16,
-        SET_DURATION_FALL = 17,
-        SET_DURATION_STADY = 18,
-        SET_DUTY_FACTOR = 19,
-        CREATE_HAND_WAVE = 20,          ///< Засылает точки произвольного сигнала
-        SET_HAND_WAVE = 21,             ///< Устанавливает вывод произвольного сигнала
-        SetRampForSine = 22,            ///< Установить режим модуляции пилой для синуса
-        SetRampSineDuration = 23,       ///< Установить длительность ипульса при модуляции синуса пилой
-        SetRampSineAmplitude = 24,      ///< Установить амплитуду для пилы, модулирующей синус
-        SetPacketPeriod = 25,
-        SetPacketNumber = 26,
+        None,
+        EnableChannel,          ///< Включить/выключить канал
+        SetFormWave,            ///< Установить форму сигнала
+        SetFrequency,           ///< Установить частоту
+        SetAmplitude,           ///< Установить амплитуду
+        SetOffset,              ///< Установать смещение
+        SetDuration,
+        SetDutyRatio,
+        SetPhase,
+        RunReset,               ///< Сброс состояния
+        ModeDebug,              ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
+        SetDelay,               ///< Задержка
+        WriteRegister,          ///< Занести значение в регистр
+        SET_DEPTH_MODULATION,
+        SET_POLARITY,
+        SET_DURATION_RISE,
+        SET_DURATION_FALL,
+        SET_DURATION_STADY,
+        SET_DUTY_FACTOR,
+        CREATE_HAND_WAVE,       ///< Засылает точки произвольного сигнала
+        SET_HAND_WAVE,          ///< Устанавливает вывод произвольного сигнала
+        SetRampForSine,         ///< Установить режим модуляции пилой для синуса
+        SetRampSineDuration,    ///< Установить длительность ипульса при модуляции синуса пилой
+        SetRampSineAmplitude,   ///< Установить амплитуду для пилы, модулирующей синус
+        SetPacketPeriod,
+        SetPacketNumber,
         Number
     } value;
     CommandPanel(E v) : value(v){};
