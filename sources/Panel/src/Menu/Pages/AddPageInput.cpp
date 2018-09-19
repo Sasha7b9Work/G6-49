@@ -15,7 +15,7 @@ extern const PageBase pInput;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Draw_Left(int x, int y)
 {
-    Font::SetType(Font::Type::_UGO2);
+    Font::SetType(Font::Type::UGO2);
     Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_LEFT);
     Font::SetType(Font::Type::_7);
 }
@@ -30,7 +30,7 @@ DEF_SMALL_BUTTON(sbLeft,                                                        
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Right(int x, int y)
 {
-    Font::SetType(Font::Type::_UGO2);
+    Font::SetType(Font::Type::UGO2);
     Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_RIGHT);
     Font::SetType(Font::Type::_7);
 }
@@ -51,7 +51,7 @@ static void OnPress_Cancel()
 
 static void Draw_Cancel(int x, int y)
 {
-    Font::SetType(Font::Type::_UGO2);
+    Font::SetType(Font::Type::UGO2);
     Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_DELETE);
     Font::SetType(Font::Type::_7);
 }
@@ -66,7 +66,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Enter(int x, int y)
 {
-    Font::SetType(Font::Type::_UGO2);
+    Font::SetType(Font::Type::UGO2);
     Text::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_SAVE);
     Font::SetType(Font::Type::_7);
 }

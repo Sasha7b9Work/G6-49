@@ -25,8 +25,8 @@ struct Font
             _5,
             _7,
             _8,
-            _UGO,
-            _UGO2,
+            UGO,
+            UGO2,
             Number,
             None
         } value;

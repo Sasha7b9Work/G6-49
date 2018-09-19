@@ -106,7 +106,7 @@ void InputWindow::DrawDigits(int x, int y)
 
         if (i == param->hightLightDigit)
         {
-            Font::SetType(Font::Type::_UGO2);
+            Font::SetType(Font::Type::UGO2);
             Text::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
             Text::Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
             Font::SetType(Font::Type::_7);
