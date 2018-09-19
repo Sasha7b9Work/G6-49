@@ -479,19 +479,6 @@ int Item::PositionOnPage()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Control Item::ButtonForItem()
-{
-    int pos = PositionOnPage();
-
-    if (pos >= 0)
-    {
-        return (Control::E)(Control::F1 + pos);
-    }
-
-    return Control::None;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *ChoiceParameter::Press(Control::Action action)
 {
     if (action.Is(Control::Action::Up))
