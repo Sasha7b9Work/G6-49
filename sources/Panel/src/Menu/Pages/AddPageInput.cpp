@@ -17,7 +17,7 @@ static void Draw_Left(int x, int y)
 {
     Font::Set(Font::Type::_UGO2);
     Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_LEFT);
-    Font::Set(Font::Type::_8);
+    Font::Set(Font::Type::_7);
 }
 
 DEF_SMALL_BUTTON(sbLeft,                                                                                           //--- нймн ббндю - яхлбнк бкебн ---
@@ -32,7 +32,7 @@ static void Draw_Right(int x, int y)
 {
     Font::Set(Font::Type::_UGO2);
     Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_RIGHT);
-    Font::Set(Font::Type::_8);
+    Font::Set(Font::Type::_7);
 }
 
 DEF_SMALL_BUTTON(sbRight,                                                                                         //--- нймн ббндю - яхлбнк бопюбн ---
@@ -53,7 +53,7 @@ static void Draw_Cancel(int x, int y)
 {
     Font::Set(Font::Type::_UGO2);
     Text::Draw4SymbolsInRect(x + 3, y + 3, SYMBOL_DELETE);
-    Font::Set(Font::Type::_8);
+    Font::Set(Font::Type::_7);
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                               //--- нймн ббндю - нрлемю ---
@@ -68,7 +68,7 @@ static void Draw_Enter(int x, int y)
 {
     Font::Set(Font::Type::_UGO2);
     Text::Draw4SymbolsInRect(x + 4, y + 3, SYMBOL_SAVE);
-    Font::Set(Font::Type::_8);
+    Font::Set(Font::Type::_7);
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                  //--- нймн ббндю - ббнд ---

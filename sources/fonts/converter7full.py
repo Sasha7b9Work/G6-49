@@ -45,17 +45,17 @@ def CalculateWidth(num_symbol):
     return retValue
 
 ###### Start here ######
-input = open("Font8.bin", "rb")
+input = open("Font7.bin", "rb")
 data = input.read()
 input.close()
 symbols = unpack("2048b", data)
 
-output = open("font8.inc", "w")                   # Fonts for black display
-output.write("#include \"Font.h\"\nconst Font font8 = {\n\t8, {\n")
+output = open("font7.inc", "w")                   # Fonts for black display
+output.write("#include \"Font.h\"\nconst Font font7 = {\n\t8, {\n")
 
-outputDisplay = open("font8display.inc", "w")     # Font for color display
-outputDisplay.write("/* Main font height 8 */\n\n")
-outputDisplay.write("const BYTE font8display[" + str(8 + 256 * 8 + 256 * 4) + "] = {\n\n")
+outputDisplay = open("font7display.inc", "w")     # Font for color display
+outputDisplay.write("/* Main font height 7 */\n\n")
+outputDisplay.write("const BYTE font7display[" + str(8 + 256 * 8 + 256 * 4) + "] = {\n\n")
 outputDisplay.write("/* Orient = 0x00, FontID = 0x00 */ 0x00, 0x00,\n")
 outputDisplay.write("/* First character ID */           0x00, 0x00,\n")
 outputDisplay.write("/* Last  character ID */           0xff, 0xff,\n")
@@ -111,6 +111,6 @@ for line in lines:
 output.close()
 outputDisplay.close()
 
-input = open("font8.inc")
+input = open("font7.inc")
 #print(input.read())
 input.close()

@@ -1,6 +1,6 @@
-/* Main font height 8 */
+/* Main font height 7 */
 
-const BYTE font8display[3080] = {
+const BYTE font7display[3080] = {
 
 /* Orient = 0x00, FontID = 0x00 */ 0x00, 0x00,
 /* First character ID */           0x00, 0x00,

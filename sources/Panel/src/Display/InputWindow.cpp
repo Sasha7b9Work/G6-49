@@ -109,7 +109,7 @@ void InputWindow::DrawDigits(int x, int y)
             Font::Set(Font::Type::_UGO2);
             Text::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
             Text::Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
-            Font::Set(Font::Type::_8);
+            Font::Set(Font::Type::_7);
         }
 
         if (param->buffer[i])

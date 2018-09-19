@@ -23,7 +23,7 @@ struct Font
         enum E
         {
             _5,
-            _8,
+            _7,
             _UGO,
             _UGO2,
             Number,
