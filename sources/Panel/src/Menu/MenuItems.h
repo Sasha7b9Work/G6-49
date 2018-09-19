@@ -42,9 +42,6 @@ class PageBase;
 class Page;
 
    
-#define IS_ACTIVE(control)         (control->funcOfActive())
-
-
 class Item
 {
 public:
@@ -104,6 +101,8 @@ public:
     int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
 
     Page *Keeper() { return (Page *)keeper; };
+
+    bool IsActive() const { return funcOfActive(); };
 };
 
 

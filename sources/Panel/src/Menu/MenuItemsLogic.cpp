@@ -50,7 +50,7 @@ void Choice::StartChange(int delta) const
     {
         return;
     }
-    if (!IS_ACTIVE(this))
+    if (!IsActive())
     {
         CHOICE_RUN_FUNC_CHANGED(this, false);
     }
@@ -105,7 +105,7 @@ float Choice::Step()
         }
 
         tsChoice.address = 0;
-        CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
+        CHOICE_RUN_FUNC_CHANGED(this, IsActive());
         tsChoice.dir = NONE;
         return 0.0f;
     }
@@ -178,7 +178,7 @@ void Choice::ChangeIndex(int delta)
         }
         *cell = (int8)index;
     }
-    CHOICE_RUN_FUNC_CHANGED(this, IS_ACTIVE(this));
+    CHOICE_RUN_FUNC_CHANGED(this, IsActive());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -200,7 +200,7 @@ void Item::ShortPress()
     if(type == Item::Type::Choice)
     {
         Choice *choice = (Choice *)this;
-        if(!IS_ACTIVE(this))
+        if(!IsActive())
         {
             choice->funcOnChanged(false);
         }
@@ -216,7 +216,7 @@ void Item::ShortPress()
     }
     else if(type == Item::Type::Button)
     {
-        if(IS_ACTIVE(this))
+        if(IsActive())
         {
             SetCurrent(true);
             ((Button *)this)->funcOnPress();
@@ -229,7 +229,7 @@ void Item::ShortPress()
     }
     else if(type == Item::Type::Governor)
     {
-        if(IS_ACTIVE(this))
+        if(IsActive())
         {
             Governor *governor = (Governor *)this;
             if(Menu::GetOpenedItem() == this)
@@ -244,7 +244,7 @@ void Item::ShortPress()
     }
     else if(type == Item::Type::GovernorColor)
     {
-        if(IS_ACTIVE(this))
+        if(IsActive())
         {
             GovernorColor *governor = (GovernorColor *)this;
             if(Menu::GetOpenedItem() == this)
