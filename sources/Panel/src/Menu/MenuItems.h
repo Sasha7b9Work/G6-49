@@ -70,7 +70,7 @@ public:
     /// Возвращает true, если кнопка, соответствующая элементу меню control, находится в нажатом положении
     bool IsPressed() const;
     /// Возвращает true, если элемент меню по адрему control открыт
-    bool IsOpened() const;
+    bool IsOpened();
 
     void Open(bool open);
     /// Возвращает название элемента, как оно выглядит на дисплее прибора

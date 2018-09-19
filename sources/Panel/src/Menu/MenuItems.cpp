@@ -110,11 +110,11 @@ bool Item::IsPressed() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Item::IsOpened() const
+bool Item::IsOpened()
 {
     if (type == Item::Type::Page)
     {
-        return keeper->CurrentItemIsOpened();
+        return Keeper()->CurrentItemIsOpened();
     }
     return Menu::GetOpenedItem() == this;
 }
