@@ -54,6 +54,8 @@ extern const PageBase pInput;
 #define FREQ_TIME_STAMPS        (set.freq_timeStamps)
 #define FREQ_TEST               ((FreqTest)BIT_FL1(BIT_FREQ_TEST))
 
+#define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
 
@@ -100,6 +102,7 @@ public:
 #define BIT_FREQ_FILTR    16  ///< FreqFiltr   - ФНЧ частотомера
 #define BIT_FREQ_MEASURE  17  ///< FreqMeasure - измерение частоты или измерение периода
 #define BIT_FREQ_TEST     18  ///< FreqTest    - включение тестового режима
+#define BIT_BIG_SYMBOLS   19  ///< Если 1, то символы выводятся чуть увеличенными
 
     static void Save();
     static void Load(bool _default = false);

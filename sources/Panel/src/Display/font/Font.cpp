@@ -5,19 +5,33 @@
 #include "Utils/StringUtils.h"
 #include "font7.inc"
 #include "font5.inc"
+#include "font8.inc"
 #include "fontUGO.inc"
 #include "fontUGO2.inc"
+#include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Font *fonts[Font::Type::Number] = {&font5, &font7, &fontUGO, &fontUGO2};
+const Font *fonts[Font::Type::Number] = {&font5, &font7, &font8, &fontUGO, &fontUGO2};
 const Font *font = &font7;
 
+
+static Font::Type type = Font::Type::_5;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int Font::GetSize()
 {
     return font->height;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Font::ToggleCharacterSize()
+{
+    const Font *f = BIG_SYMBOLS ? (&font8) : (&font7);
+
+    fonts[Type::_7] = f;
+
+    SetType(type);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +59,8 @@ int Font::GetLengthSymbol(char symbol)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Font::Set(Type typeFont)
+void Font::SetType(Type typeFont)
 {
-    font = fonts[typeFont];
+    type = typeFont;
+    font = fonts[type];
 }

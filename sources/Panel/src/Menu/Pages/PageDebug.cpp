@@ -3,6 +3,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include "Display/font/Font.h"
 #include "PageService.h"
 
 
@@ -42,7 +43,7 @@ DEF_BUTTON( bSaveSettings,                                                      
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( cStatistics,
+DEF_CHOICE_2( cStatistics,                                                                                              //--- ОТЛАДКА - Статистика ---
     "СТАТИСТИКА", "STATISTICS",
     "Включает/отключает показ на экране статистики по частоте кадров в виде ФПС / время отрисовки одного кадра / время, потраченое на отрисовку за "
     "весь кадр",
@@ -55,11 +56,30 @@ DEF_CHOICE_2( cStatistics,
     FLAG_1, BIT_STATISTICS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
 )
 
-DEF_PAGE_3( pDebug,
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_BigSymbols(bool)
+{
+    Font::ToggleCharacterSize();
+}
+
+DEF_CHOICE_2 (  cBigSymbols,                                                                                       //--- ОТЛАДКА - Большие символы ---
+    "Большие символы", "Large characters",
+    "Отображение информации более крупными символами",
+    "Display information with larger characters",
+    DISABLED_RU, DISABLED_EN,   "Отображение информации стандартными символами",
+                                "Displaying information with standard symbols",
+    ENABLED_RU, ENABLED_EN,     "Отображение информации увеличенными символами",
+                                "Displaying information with enlarged symbols",
+    FLAG_1, BIT_BIG_SYMBOLS, pDebug, FuncActive, OnPress_BigSymbols, FuncDraw
+)
+
+
+DEF_PAGE_4( pDebug,
     "ОТЛАДКА", "DEBUG",
     "", "",
-    cConsole,      ///< ОТЛАДКА - КОНСОЛЬ
-    bSaveSettings, ///< ОТЛАДКА - СОХРАНИТЬ НАСТРОЙКИ
-    cStatistics,   ///< ОТЛАДКА - СТАТИСТИКА
+    cConsole,       ///< ОТЛАДКА - Консоль
+    bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
+    cStatistics,    ///< ОТЛАДКА - Статистика
+    cBigSymbols,    ///< ОТЛАДКА - Больщие символы
     Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey
 )
