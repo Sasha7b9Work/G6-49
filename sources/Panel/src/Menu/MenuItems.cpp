@@ -127,33 +127,9 @@ void Item::Open(bool open)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Item::Title() const
+pString Item::Title() const
 {
     return titleHint[LANG];
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Item::ChangeOpened(int delta)
-{
-    if (delta < 2 && delta > -2)
-    {
-        return false;
-    }
-
-    if (type == Item::Type::Page)
-    {
-        ((Page *)this)->ChangeSubPage(delta);
-    }
-    else if (type == Item::Type::Choice)
-    {
-        ((Choice *)this)->ChangeIndex(delta);
-    }
-    else if (type == Item::Type::Governor)
-    {
-        ((Governor *)this)->ChangeValue(delta);
-    }
-
-    return true;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

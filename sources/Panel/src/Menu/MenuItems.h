@@ -74,9 +74,7 @@ public:
 
     void Open(bool open);
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
-    const char *Title() const;
-
-    bool ChangeOpened(int delta);
+    pString Title() const;
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
