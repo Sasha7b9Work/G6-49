@@ -214,9 +214,9 @@ static void DetectRegulator()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillCommand(Control control, Control::Action::E action)
+static void FillCommand(Control key, Control::Action::E action)
 {
-    commands[pointer++] = Control(control.value, action);
+    commands[pointer++] = Control(key.value, action);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -266,7 +266,7 @@ void InputWindow::KeyEnter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::ProcessContorl(Control key)
 {
-    if ((key >= Control::_0 && key <= Control::_9) || key.Is(Control::Dot) || key.Is(Control::Minus))
+    if (key.IsDigit() || key.Is(Control::Dot) || key.Is(Control::Minus))
     {
         if (key.action.Is(Control::Action::Down))
         {

@@ -129,10 +129,6 @@ void Hint::Draw()
             }
             
         }
-        else if (!control.Is(Control::None))
-        {
-
-        }
     }
 }
 

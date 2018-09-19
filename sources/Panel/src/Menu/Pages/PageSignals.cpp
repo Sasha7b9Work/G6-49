@@ -108,9 +108,9 @@ DEF_CHOICE_2(cTypeTune,                                                         
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnKey(Control control)
+static bool OnKey(Control key)
 {
-    if(control.Is(Control::Esc) && control.action.IsRelease())
+    if(key.Is(Control::Esc) && key.action.IsRelease())
     {
         return FORM_CURRENT->CloseOpenedParameter();
     }

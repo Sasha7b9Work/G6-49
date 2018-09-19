@@ -501,41 +501,42 @@ static bool OnRegulator(Control key)
 }
 
 
-static bool OnKey(Control control)
+static bool OnKey(Control key)
 {
     if (!showInputWindow)
     {
-        if (AllowableSymbol(control))
+        if (AllowableSymbol(key))
         {
             SENDING(currentRegister) = false;
             OnPress_Send();
             memset(buffer, 0, MAX_SIZE_BUFFER);
-            buffer[0] = control.ToChar();
+            buffer[0] = key.ToChar();
             NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel ||
                                                            currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
             return true;
         }
     }
-    else if (control.action.Is(Control::Action::Down))
+    else if (key.action.Is(Control::Action::Down))
     {
-        if (AllowableSymbol(control))
+        if (AllowableSymbol(key))
         {
-            NumberBuffer::ProcessKey(control);
+            NumberBuffer::ProcessKey(key
+            );
             return true;
         }
-        else if (control.Is(Control::Right) || control.Is(Control::Left))
+        else if (key.IsCursors())
         {
-            NumberBuffer::ProcessKey(control);
+            NumberBuffer::ProcessKey(key);
             return true;
         }
-        else if (control.Is(Control::Esc))
+        else if (key.Is(Control::Esc))
         {
             OnPress_Cancel();
             return true;
         }
         else
         {
-            return OnRegulator(control);
+            return OnRegulator(key);
         }
     }
 
