@@ -150,38 +150,6 @@ Item *Choice::Press(Control key)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Choice::ChangeIndex(int delta)
-{
-    if(isPageSB)
-    {
-        uint *address = (uint *)cell;
-        *address ^= (1 << nameOrNumBit);
-    }
-    else
-    {
-        int8 index = *cell;
-        if (delta < 0)
-        {
-            ++index;
-            if (index == NumSubItems())
-            {
-                index = 0;
-            }
-        }
-        else
-        {
-            --index;
-            if (index < 0)
-            {
-                index = NumSubItems() - 1;
-            }
-        }
-        *cell = (int8)index;
-    }
-    CHOICE_RUN_FUNC_CHANGED(this, IsActive());
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Choice::NumSubItems() const
 {
     return num;
@@ -349,20 +317,20 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Item::Press(Control key)
+void Item::Press(Control key)
 {
     if(key.action.Is(Control::Action::Long))
     {
         if (IsOpened() || key.Is(Control::Reg::Button) || key.Is(Control::Esc))
         {
             Menu::ResetOpenedItem();
-            return 0;
+            return;
         }
     }
 
     if(IsShade())
     {
-        return Menu::GetOpenedItem();
+        return;
     }
 
     if(CURRENT_PAGE->GetItem(key) == this || key.IsRotate() || key.Is(Control::Esc) || key.IsCursors())
@@ -371,57 +339,58 @@ Item *Item::Press(Control key)
 
         if (type == Item::Type::Choice)
         {
-            return ((Choice *)this)->Press(key);
+            ((Choice *)this)->Press(key);
         }
         else if (type == Item::Type::Button)
         {
-            return ((Button *)this)->Press(key.action);
+            ((Button *)this)->Press(key.action);
         }
         else if (type == Item::Type::ChoiceParameter)
         {
-            return ((ChoiceParameter *)this)->Press(key.action);
+            ((ChoiceParameter *)this)->Press(key.action);
         }
         else if (type == Item::Type::SmallButton)
         {
-            return ((SButton *)this)->Press(key.action);
+            ((SButton *)this)->Press(key.action);
         }
         else if(type == Item::Type::Page)
         {
-            return ((Page *)this)->Press(key);
+            ((Page *)this)->Press(key);
         }
     }
-
-    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Page::Press(Control key)
+bool Page::Press(Control key)
 {
     if(CURRENT_PAGE == this)
     {
         if((key.Is(Control::Reg::Left) || key.Is(Control::Reg::Right)) && Menu::RegIsControlSubPages())
         {
             ChangeSubPage(key.Is(Control::Reg::Left) ? -1 : 1);
+            return true;
         }
         else if(key.Is(Control::Esc) && key.action.Is(Control::Action::Up))
         {
             if(Keeper())
             {
                 CURRENT_PAGE = Keeper();
+                return true;
             }
         }
         else if(key.IsFunctional())
         {
-            Item *item = GetItem(key)->Press(key);
-            Menu::SetOpenedItem(item);
+            GetItem(key)->Press(key);
+            return true;
         }
     }
     else if(key.action.IsRelease())
     {
         CURRENT_PAGE = this;
+        return true;
     }
 
-    return 0;
+    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

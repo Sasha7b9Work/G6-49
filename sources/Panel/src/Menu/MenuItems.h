@@ -78,7 +78,7 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    Item *Press(Control control);
+    void Press(Control control);
 
     Type GetType() const;
 
@@ -172,7 +172,7 @@ public:
     bool ProcessingControl(Control);
 
     /// ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    Item *Press(Control control);
+    bool Press(Control control);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
@@ -340,8 +340,6 @@ public:
     void StartChange(int delta) const;
     /// –ассчитывает следующий кадр анимации.
     float Step();
-    /// »змен€ет значение choice в зависимости от величины и знака delta.
-    void ChangeIndex(int delta);
     /// ¬озвращает количество вариантов выбора в элементе по адресу choice
     int8 NumSubItems() const;
 
