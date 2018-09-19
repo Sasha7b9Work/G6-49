@@ -53,7 +53,7 @@ class PageBase;
 #define IS_MAC(control)            (control->type == Item_MAC)
 #define IS_TIME(control)           (control->type == Item_Time)
     
-#define KEEPER(control)            ((PageBase *)control->keeper)
+#define KEEPER(control)            ((Page *)control->keeper)
 #define IS_ACTIVE(control)         (control->funcOfActive())
 
 

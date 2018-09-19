@@ -115,21 +115,35 @@ float Choice::Step()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Choice::Press(Control key)
 {
-    if(key.Is(Control::Left) && key.action.Is(Control::Action::Up) || key.Is(Control::Reg::Right))
+    if((key.Is(Control::Left) && key.action.Is(Control::Action::Up)) || key.Is(Control::Reg::Right))
     {
         StartChange(-1);
     }
-    else if(key.Is(Control::Right) && key.action.Is(Control::Action::Up) || key.Is(Control::Reg::Left) || key.action.Is(Control::Action::Up))
+    else if((key.Is(Control::Right) && key.action.Is(Control::Action::Up)) || key.Is(Control::Reg::Left))
     {
         StartChange(1);
     }
-    else if(key.Is(Control::Esc) || key.action.Is(Control::Action::Up))
+    else if(key.Is(Control::Esc) && key.action.IsRelease())
     {
         Menu::ResetOpenedItem();
     }
-    else if(key.action.Is(Control::Action::Long))
+    else if((KEEPER(this))->GetItem(key))
     {
-        return this;
+        if(key.action.Is(Control::Action::Up))
+        {
+            StartChange(1);
+        }
+        else if(key.action.Is(Control::Action::Long))
+        {
+            if(Menu::GetOpenedItem() == 0)
+            {
+                Menu::SetOpenedItem(this);
+            }
+            else
+            {
+                Menu::ResetOpenedItem();
+            }
+        }
     }
 
     return Menu::GetOpenedItem();
@@ -341,13 +355,9 @@ Item *Item::Press(Control key)
     {
         if (IsOpened() || key.Is(Control::Reg::Button) || key.Is(Control::Esc))
         {
+            Menu::ResetOpenedItem();
             return 0;
         }
-    }
-
-    if(key.Is(Control::Esc) && key.action.IsRelease())
-    {
-        return 0;
     }
 
     if(IsShade())
@@ -406,7 +416,7 @@ Item *Page::Press(Control key)
             Menu::SetOpenedItem(item);
         }
     }
-    else if(key.action.Is(Control::Action::Up))
+    else if(key.action.IsRelease())
     {
         CURRENT_PAGE = this;
     }

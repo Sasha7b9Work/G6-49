@@ -77,13 +77,17 @@ void Menu::ProcessControl(Control key)
 
     if(GetOpenedItem())
     {
+        if(key.action.IsRelease())
+        {
+            key = key;
+        }
         GetOpenedItem()->Press(key);
     }
     else if (Hint::ProcessControl(key))
     {
     }
     else if (CURRENT_PAGE->ProcessingControl(key))
-    {
+    {   
     }
     else if (CURRENT_PAGE->Press(key))
     {
