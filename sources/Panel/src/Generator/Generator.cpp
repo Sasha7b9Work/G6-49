@@ -105,7 +105,7 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
 {
     static const CommandPanel commands[Parameter::Number] =
     {
-        CommandPanel::SET_FREQUENCY,
+        CommandPanel::SetFrequency,
         CommandPanel::None,
         CommandPanel::SET_AMPLITUDE,
         CommandPanel::SET_OFFSET,
