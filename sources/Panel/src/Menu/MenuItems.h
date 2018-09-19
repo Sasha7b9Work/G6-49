@@ -308,7 +308,7 @@ class ChoiceBase
 public:
     COMMON_PART_MENU_ITEM;
 
-    int8    *cell;
+    int8    *cell_;
     /// ¬арианты выбора на русском и английском €зыках.
     pString *names;
     /// ѕодсказки дл€ каждого варианта на русском €зыке
@@ -325,7 +325,7 @@ class Choice : public Item
 {
 public:
 
-    int8 * cell;
+    int8 * cell_;
     /// ¬арианты выбора на русском и английском €зыках.
     pString *names;
     /// ѕодсказки дл€ каждого варианта на русском €зыке
@@ -345,19 +345,23 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1);
     /// ¬озвращает им€ текущего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameCurrentSubItem() const;
+    const char *NameCurrentSubItem();
     /// ¬озвращает им€ следующего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameNextSubItem() const;
+    const char *NameNextSubItem();
     /// ¬озвращает высоту раскрытого
     int GetHeightOpened() const;
 
-    const char *NamePrevSubItem() const;
+    const char *NamePrevSubItem();
     /// ¬озвращает им€ варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     const char *NameSubItem(int i) const;
     /// ¬озвращает указатель на себ€, если находитс€ ы открытом состо€нии, и 0, если в закрытом
     Item *Press(Control control);
 
-    int8 CurrentIndex() const;
+    int8 CurrentIndex();
+
+    int8 GetCell() { return *cell_; };
+
+    void SetCell(int8 index) { *cell_ = index; };
 };
 
 

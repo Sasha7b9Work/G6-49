@@ -96,12 +96,12 @@ float Choice::Step()
 
         if(isPageSB)
         {
-            uint *address = (uint *)cell;
+            uint *address = (uint *)cell_;
             *address ^= (1 << (int)nameOrNumBit);
         }
         else
         {
-            *cell = index;
+            SetCell(index);
         }
 
         tsChoice.address = 0;
@@ -115,11 +115,11 @@ float Choice::Step()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Choice::Press(Control key)
 {   
-    if((key.Is(Control::Left) && key.action.IsRelease()) || key.Is(Control::Reg::Right))
+    if((key.Is(Control::Right) && key.action.IsRelease()) || key.Is(Control::Reg::Right))
     {
         StartChange(-1);
     }
-    else if((key.Is(Control::Right) && key.action.IsRelease()) || key.Is(Control::Reg::Left))
+    else if((key.Is(Control::Left) && key.action.IsRelease()) || key.Is(Control::Reg::Left))
     {
         StartChange(1);
     }
@@ -400,7 +400,7 @@ Item::Type Item::GetType() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-int8 Choice::CurrentIndex() const
+int8 Choice::CurrentIndex()
 {
     int8 retValue = 0;
 
@@ -408,12 +408,12 @@ int8 Choice::CurrentIndex() const
     {
         if(isPageSB)
         {
-            uint *address = (uint *)cell;
+            uint *address = (uint *)cell_;
             retValue = (int8)((*address >> nameOrNumBit) & 0x01);
         }
         else
         {
-            retValue = *cell;
+            retValue = GetCell();
         }
     }
     else if (type == Item::Type::ChoiceParameter)

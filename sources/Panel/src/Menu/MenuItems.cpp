@@ -14,13 +14,13 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const char *Choice::NameCurrentSubItem() const
+const char *Choice::NameCurrentSubItem()
 {
     return NAME_FROM_INDEX(CurrentIndex());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Choice::NameNextSubItem() const
+const char *Choice::NameNextSubItem()
 {
     int8 nextIndex = CurrentIndex() + 1;
 
@@ -32,7 +32,7 @@ const char *Choice::NameNextSubItem() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Choice::NamePrevSubItem() const
+const char *Choice::NamePrevSubItem()
 {
     int8 prevIndex = CurrentIndex() - 1;
 
