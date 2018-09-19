@@ -105,8 +105,6 @@ private:
 
     static void DrawDigits(int x, int y);
 
-    static void DrawPolarity(int x, int y);
-
     static void DrawDurationRise(int x, int y);
 
     static void DrawDurationFall(int x, int y);

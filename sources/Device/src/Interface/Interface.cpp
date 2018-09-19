@@ -65,7 +65,6 @@ commands[CommandPanel::Number] =
     Interface::ModeDebug,                /// MODE_DEBUG
     Interface::Parameter,                /// SET_DELAY
     Interface::WriteRegister,            /// WRITE_REGISTER
-    Interface::Empty,                    /// SET_POLARITY
     Interface::Empty,                    /// SET_DURATION_RISE
     Interface::Empty,                    /// SET_DURATION_FALL
     Interface::Empty,                    /// SET_DURATION_STADY

@@ -53,7 +53,6 @@ void InputWindow::Draw()
         DrawDutyRatio,
         DrawPhase,
         DrawDelay,
-        DrawPolarity,
         DrawDurationRise,
         DrawDurationFall,
         DrawDurationStady,
@@ -128,11 +127,6 @@ void InputWindow::DrawDigits(int x, int y)
 
     char buffer[10] = {0};
     Text::DrawBigText(x, y, SIZE_TEXT, param->NameUnit(buffer));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::DrawPolarity(int, int)
-{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
