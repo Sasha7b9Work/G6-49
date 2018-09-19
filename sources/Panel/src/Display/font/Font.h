@@ -24,14 +24,12 @@ struct Font
         {
             _5,
             _7,
-            _8,
-            UGO,
-            UGO2,
+            _UGO,
+            _UGO2,
             Number,
             None
         } value;
         Type(E v) : value(v) {};
-        Type(int v) : value((E)v) {};
         operator uint8() const { return (uint8)value; };
     };
 
@@ -39,15 +37,20 @@ struct Font
     static int GetLengthText(const char *text);
     static int GetHeightSymbol(char symbol);
     static int GetLengthSymbol(char symbol);
-    static void SetType(Type typeFont);
-    static Type GetType();
-    static int GetWidth(char symbol);
-    static bool ByteFontNotEmpty(int eChar, int byte);
-    static bool BitInFontIsExist(int eChar, int numByte, int bit);
+    static void Set(Type typeFont);
     
     int height;
     Symbol symbol[256];
 };
+
+
+extern const Font *font;
+extern const Font *fonts[Font::Type::Number];
+
+extern const uchar font5display[3080];
+extern const uchar font8display[3080];
+extern const uchar fontUGOdisplay[3080];
+extern const uchar fontUGO2display[3080];
 
 
 #ifdef WIN32

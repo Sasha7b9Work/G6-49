@@ -206,9 +206,9 @@ void Hint::DrawPagesUGO(const int xRight, const int y0)
         if (numPages + 1 - i == currentPage)
         {
             Painter::FillRegion(x, y0, size, size, Color::FILL);
-            Font::SetType(Font::Type::_5);
+            Font::Set(Font::Type::_5);
             Text::DrawChar(x + 2, y0 - 3, (char)(currentPage + 0x30), Color::BACK);
-            Font::SetType(Font::Type::_7);
+            Font::Set(Font::Type::_7);
         }
         else
         {

@@ -58,6 +58,9 @@ public:
 
 private:
 
+    static bool ByteFontNotEmpty(int eChar, int byte);
+
+    static bool BitInFontIsExist(int eChar, int numByte, int bit);
     /// Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
     static bool GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height);
 

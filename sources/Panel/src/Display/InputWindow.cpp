@@ -106,10 +106,10 @@ void InputWindow::DrawDigits(int x, int y)
 
         if (i == param->hightLightDigit)
         {
-            Font::SetType(Font::Type::UGO2);
+            Font::Set(Font::Type::_UGO2);
             Text::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
             Text::Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
-            Font::SetType(Font::Type::_7);
+            Font::Set(Font::Type::_7);
         }
 
         if (param->buffer[i])
@@ -301,9 +301,5 @@ void InputWindow::ProcessContorl(Control key)
     else if(key.Is(Control::Right, Control::Action::Up))
     {
         KeyRight();
-    }
-    else if(key.Is(Control::Esc, Control::Action::Up))
-    {
-        Menu::ResetAdditionPage();
     }
 }

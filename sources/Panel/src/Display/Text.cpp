@@ -52,24 +52,24 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
 {
     Painter::SetColor(color);
 
-    if (upperCase && Font::GetType() != Font::Type::UGO && Font::GetType() != Font::Type::UGO2)
+    if (upperCase && font != fonts[Font::Type::_UGO] && font != fonts[Font::Type::_UGO2])
     {
         symbol = SU::ToUpper(symbol);
     }
 
-    int width = Font::GetWidth(symbol);
-    int height = Font::GetHeightSymbol(symbol);
+    int8 width = (int8)font->symbol[symbol].width;
+    int8 height = (int8)font->height;
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::ByteFontNotEmpty(symbol, b))
+        if (ByteFontNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitInFontIsExist(symbol, b, bit))
+                if (BitInFontIsExist(symbol, b, bit))
                 {
                     Painter::SetPoint(x, y);
                 }
@@ -94,6 +94,34 @@ int Text::DrawText(int x, int y, pString text, Color color)
     }
 
     return x;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Text::ByteFontNotEmpty(int eChar, int byte)
+{
+    static const uint8 *bytes = 0;
+    static int prevChar = -1;
+    if (eChar != prevChar)
+    {
+        prevChar = eChar;
+        bytes = font->symbol[prevChar].bytes;
+    }
+    return bytes[byte];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
+{
+    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
+    static int prevChar = -1;
+    static int prevNumByte = -1;
+    if (prevNumByte != numByte || prevChar != eChar)
+    {
+        prevByte = font->symbol[eChar].bytes[numByte];
+        prevChar = eChar;
+        prevNumByte = numByte;
+    }
+    return prevByte & (1 << bit);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -524,19 +552,19 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 {
-    int width = Font::GetWidth(symbol);
-    int height = Font::GetHeightSymbol(symbol);
+    int8 width = (int8)font->symbol[symbol].width;
+    int8 height = (int8)font->height;
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::ByteFontNotEmpty(symbol, b))
+        if (ByteFontNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitInFontIsExist(symbol, b, bit))
+                if (BitInFontIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {
