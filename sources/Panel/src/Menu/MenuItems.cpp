@@ -10,8 +10,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern int8 gCurDigit;
-
 #define NAME_FROM_INDEX(index) (names[index * 2 + LANG])
 
 
@@ -109,27 +107,6 @@ bool Item::IsShade() const
 bool Item::IsPressed() const
 {
     return this == Menu::pressedItem;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::SetCurrent(bool active)
-{
-    Page *page = (Page *)keeper;
-    if (!active)
-    {
-        page->SetPosActItem(0x7f);
-    }
-    else
-    {
-        for (int i = 0; i < page->NumItems(); i++)
-        {
-            if (page->items[i] == this)
-            {
-                page->SetPosActItem((int8)i);
-                return;
-            }
-        }
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
