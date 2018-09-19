@@ -39,7 +39,7 @@ void Generator::LoadRegister(Register reg, uint64 value)
 {
     INIT_BIT_SET_64(bitSet, value);
 
-    uint8 buffer[10] = {CommandPanel::WRITE_REGISTER, (uint8)reg,   bitSet.byte0, bitSet.byte1, bitSet.byte2, bitSet.byte3,
+    uint8 buffer[10] = {CommandPanel::WriteRegister, (uint8)reg,   bitSet.byte0, bitSet.byte1, bitSet.byte2, bitSet.byte3,
                                                                     bitSet.byte4, bitSet.byte5, bitSet.byte6, bitSet.byte7};
     SendToInterface(buffer, 10);
 }
@@ -54,14 +54,14 @@ void Generator::EmptyCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
-    uint8 buffer[2] = {CommandPanel::MODE_DEBUG, (uint8)(enable ? 1 : 0)};
+    uint8 buffer[2] = {CommandPanel::ModeDebug, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Reset()
 {
-    uint8 command = CommandPanel::RUN_RESET;
+    uint8 command = CommandPanel::RunReset;
     SendToInterface(&command, 1);
 }
 
@@ -112,7 +112,7 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
         CommandPanel::SetDuration,
         CommandPanel::SetDutyRatio,
         CommandPanel::SetPhase,
-        CommandPanel::SET_DELAY,
+        CommandPanel::SetDelay,
         CommandPanel::SET_DEPTH_MODULATION,
         CommandPanel::SET_POLARITY,
         CommandPanel::SET_DURATION_RISE,
