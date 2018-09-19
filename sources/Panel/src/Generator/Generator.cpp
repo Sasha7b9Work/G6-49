@@ -110,7 +110,7 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
         CommandPanel::SetAmplitude,
         CommandPanel::SetOffset,
         CommandPanel::SetDuration,
-        CommandPanel::SET_DUTYRATIO,
+        CommandPanel::SetDutyRatio,
         CommandPanel::SET_PHASE,
         CommandPanel::SET_DELAY,
         CommandPanel::SET_DEPTH_MODULATION,
