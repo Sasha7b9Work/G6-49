@@ -56,12 +56,6 @@ const char *Choice::NameSubItem(int i) const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::ShortPressOnItem(int numItem)
-{
-    ((Button *)items[numItem])->funcOnPress();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Page::PosCurrentItem() const
 {
     return MENU_POS_ACT_ITEM(nameOrNumBit) & 0x7f;
