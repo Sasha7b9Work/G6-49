@@ -38,8 +38,6 @@ private:
     static int DrawTitle();
 
     static void DrawPagesUGO(int x);
-
-    static void ProcessControl(Control control);
     /// Если какой-то итем раскрыт, то здесь его адрес
     static Item *openedItem;
     /// Сюда помещается указатель на страницу основного меню в случае, если нужна отрисовка дополнительной страницы

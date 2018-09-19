@@ -79,9 +79,10 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnControl(Control)
+static bool OnControl(Control key)
 {
-    return false;
+    InputWindow::ProcessContorl(key);
+    return true;
 }
 
 Page *AddPageInput::pointer = (Page *)&pInput;

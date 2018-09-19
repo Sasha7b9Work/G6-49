@@ -44,49 +44,37 @@ void Menu::Update()
 {
     while (!CPU::Keyboard::BufferIsEmpty())
     {
-        Control control = CPU::Keyboard::GetNextControl();
-        if (CURRENT_PAGE == AddPageInput::pointer)
-        {
-            InputWindow::ProcessContorl(control);
-        }
-        else
-        {
-            ProcessControl(control);
-        }
-    }
-}
+        Control key = CPU::Keyboard::GetNextControl();
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessControl(Control key)
-{
-    if (key.action.IsRelease())
-    {
-        if(key.Is(Control::On1))
+        if (key.action.IsRelease())
         {
-            SWITCH_CHANNEL_A;
-            Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
-            return;
+            if (key.Is(Control::On1))
+            {
+                SWITCH_CHANNEL_A;
+                Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
+                return;
+            }
+            else if (key.Is(Control::On2))
+            {
+                SWITCH_CHANNEL_B;
+                Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
+                return;
+            }
         }
-        else if (key.Is(Control::On2))
-        {
-            SWITCH_CHANNEL_B;
-            Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
-            return;
-        }
-    }
 
-    if(GetOpenedItem())
-    {
-        GetOpenedItem()->Press(key);
-    }
-    else if (Hint::ProcessControl(key))
-    {
-    }
-    else if (CURRENT_PAGE->ProcessingControl(key))
-    {   
-    }
-    else if (CURRENT_PAGE->Press(key))
-    {
+        if (GetOpenedItem())
+        {
+            GetOpenedItem()->Press(key);
+        }
+        else if (Hint::ProcessControl(key))
+        {
+        }
+        else if (CURRENT_PAGE->ProcessingControl(key))
+        {
+        }
+        else if (CURRENT_PAGE->Press(key))
+        {
+        }
     }
 }
 
