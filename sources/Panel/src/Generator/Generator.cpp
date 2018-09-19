@@ -24,7 +24,7 @@ bool Generator::enabledCh[Chan::Number] = {true, true};
 void Generator::EnableChannel(Chan ch, bool enable)
 {
     enabledCh[ch] = enable;
-    uint8 buffer[3] = {CommandPanel::ENABLE_CHANNEL, (uint8)ch, (uint8)(enable ? 1 : 0)};
+    uint8 buffer[3] = {CommandPanel::EnableChannel, (uint8)ch, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 3);
 }
 
