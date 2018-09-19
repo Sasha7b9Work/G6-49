@@ -80,10 +80,6 @@ public:
     const char *Title() const;
 
     bool ChangeOpened(int delta);
-    /// Вызывается при "коротком" нажатии
-    void ShortPress();
-    /// Вызывается при "длинном" нажатии
-    void LongPress();
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае

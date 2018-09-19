@@ -77,10 +77,6 @@ void Menu::ProcessControl(Control key)
 
     if(GetOpenedItem())
     {
-        if(key.action.IsRelease())
-        {
-            key = key;
-        }
         GetOpenedItem()->Press(key);
     }
     else if (Hint::ProcessControl(key))

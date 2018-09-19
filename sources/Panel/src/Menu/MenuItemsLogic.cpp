@@ -114,12 +114,7 @@ float Choice::Step()
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *Choice::Press(Control key)
-{
-    if(key.action.IsRelease())
-    {
-        key = key;
-    }
-    
+{   
     if((key.Is(Control::Left) && key.action.IsRelease()) || key.Is(Control::Reg::Right))
     {
         StartChange(-1);
