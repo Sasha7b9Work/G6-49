@@ -87,20 +87,6 @@ void Generator::Update()
     }}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::ExecuteCommand(uint8 *buffer, int)
-{
-    if(buffer[0] == CommandGenerator::COM_FREQ_MEASURE)
-    {
-        BitSet32 data;
-        for(int i = 0; i < 4; i++)
-        {
-            data.byte[i] = buffer[i + 1];
-        }
-        FrequencyMeter::SetMeasure(data.word);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(Chan ch, Parameter param, float value)
 {
     static const CommandPanel commands[Parameter::Number] =
@@ -137,7 +123,7 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SendToInterface(uint8 *data, int size)
+void Generator::SendToInterface(uint8 *data, uint16 size)
 {
     /*
         Алгоритм передачи.
@@ -174,6 +160,23 @@ void Generator::SendToInterface(uint8 *data, int size)
         buf[9] = '\0';
         Console::AddString(buf);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SendToInterfaceNew(uint8 *buffer, uint16 size)
+{
+    uint8 data[6] = {0};
+    memset(data, 0, 6);
+
+    BitSet16 bs;
+    bs.halfWord = (uint16)size;
+
+    data[2] = bs.byte0;
+    data[3] = bs.byte1;
+
+    CPU::SPI4_::Transmit(data, 6, 100);             /// Посылаем в прибор информацию о том, сколько байт
+
+    CPU::SPI4_::Transmit(buffer, size, 100);        /// И засылаем наши данные
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

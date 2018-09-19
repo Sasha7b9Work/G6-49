@@ -36,9 +36,9 @@ public:
 
 private:
     /// Заслать в генератор данные
-    static void SendToInterface(uint8 *buffer, int size);
+    static void SendToInterface(uint8 *buffer, uint16 size);
 
-    static void ExecuteCommand(uint8 *buffer, int size);
+    static void SendToInterfaceNew(uint8 *buffer, uint16 size);
 
     static bool enabledCh[Chan::Number];
 };
