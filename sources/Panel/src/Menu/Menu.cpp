@@ -59,7 +59,7 @@ void Menu::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ProcessControl(Control key)
 {
-    if (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long))
+    if (key.action.IsRelease())
     {
         if(key.Is(Control::On1))
         {
@@ -75,18 +75,15 @@ void Menu::ProcessControl(Control key)
         }
     }
 
-    if (Hint::ProcessControl(key))
+    if(GetOpenedItem())
+    {
+        GetOpenedItem()->Press(key);
+    }
+    else if (Hint::ProcessControl(key))
     {
     }
     else if (CURRENT_PAGE->ProcessingControl(key))
     {
-    }
-    else if(GetOpenedItem())
-    {
-        if(!GetOpenedItem()->Press(key))
-        {
-            CURRENT_PAGE->Press(key);
-        }
     }
     else if (CURRENT_PAGE->Press(key))
     {

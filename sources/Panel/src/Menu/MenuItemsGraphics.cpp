@@ -65,7 +65,17 @@ void Button::Draw(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Page::DrawClosed(int x, int y) const
 {
-    Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, IsShade() ? Color::GRAY_10 : Color::GREEN_25);
+    Color color = Color::GREEN_25;
+    if(IsShade())
+    {
+        color = Color::GRAY_10;
+    }
+    else if(IsPressed())
+    {
+        color = Color::GREEN_50;
+    }
+
+    Painter::FillRegion(x + 2, y + 2, MI_WIDTH - 5, MI_HEIGHT - 4, color);
     Painter::SetColor(IsShade() ? Color::GRAY_25 : Color::FILL);
     Text::DrawTextInColumn(x + 4, y + 17, MI_WIDTH, Title());
 }

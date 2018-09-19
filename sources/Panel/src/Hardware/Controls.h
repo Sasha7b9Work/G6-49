@@ -58,6 +58,8 @@ struct Control
         Action(E v = Down) : value(v) {};
         operator uint8() const { return (uint8)value; };
         bool Is(Action a) const { return a.value == value; };
+        /// Возвращает true, если Up или Long
+        bool IsRelease() const;
     } action;
 
     Control(E v = None, Action::E a = Action::Down) : value(v), action(a) {};

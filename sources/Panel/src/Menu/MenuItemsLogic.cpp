@@ -345,7 +345,7 @@ Item *Item::Press(Control key)
         }
     }
 
-    if(key.Is(Control::Esc) && (key.action.Is(Control::Action::Up) || key.action.Is(Control::Action::Long)))
+    if(key.Is(Control::Esc) && key.action.IsRelease())
     {
         return 0;
     }

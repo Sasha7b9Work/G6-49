@@ -33,3 +33,9 @@ bool Control::IsRotate() const
 {
     return value == Reg::Left || value == Reg::Right;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Control::Action::IsRelease() const
+{
+    return value == Up || value == Long;
+}
