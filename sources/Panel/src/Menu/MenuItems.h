@@ -308,7 +308,7 @@ class ChoiceBase
 public:
     COMMON_PART_MENU_ITEM;
 
-    int8    *cell_;
+    int8    *cell;
     /// ¬арианты выбора на русском и английском €зыках.
     pString *names;
     /// ѕодсказки дл€ каждого варианта на русском €зыке
@@ -325,7 +325,7 @@ class Choice : public Item
 {
 public:
 
-    int8 * cell_;
+    int8 * cell;
     /// ¬арианты выбора на русском и английском €зыках.
     pString *names;
     /// ѕодсказки дл€ каждого варианта на русском €зыке
@@ -358,10 +358,6 @@ public:
     Item *Press(Control control);
 
     int8 CurrentIndex();
-
-    int8 GetCell() { return *cell_; };
-
-    void SetCell(int8 index) { *cell_ = index; };
 };
 
 

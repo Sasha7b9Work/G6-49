@@ -96,12 +96,12 @@ float Choice::Step()
 
         if(isPageSB)
         {
-            uint *address = (uint *)cell_;
+            uint *address = (uint *)cell;
             *address ^= (1 << (int)nameOrNumBit);
         }
         else
         {
-            SetCell(index);
+            *cell = index;
         }
 
         tsChoice.address = 0;
@@ -408,12 +408,12 @@ int8 Choice::CurrentIndex()
     {
         if(isPageSB)
         {
-            uint *address = (uint *)cell_;
+            uint *address = (uint *)cell;
             retValue = (int8)((*address >> nameOrNumBit) & 0x01);
         }
         else
         {
-            retValue = GetCell();
+            retValue = *cell;
         }
     }
     else if (type == Item::Type::ChoiceParameter)
