@@ -294,4 +294,12 @@ void InputWindow::ProcessContorl(Control key)
             CURRENT_PAGE->GetItem(key)->Press(key);
         }
     }
+    else if(key.Is(Control::Left, Control::Action::Up))
+    {
+        KeyLeft();
+    }
+    else if(key.Is(Control::Right, Control::Action::Up))
+    {
+        KeyRight();
+    }
 }

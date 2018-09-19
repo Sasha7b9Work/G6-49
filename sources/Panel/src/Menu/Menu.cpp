@@ -52,13 +52,13 @@ void Menu::Update()
             {
                 SWITCH_CHANNEL_A;
                 Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
-                return;
+                continue;
             }
             else if (key.Is(Control::On2))
             {
                 SWITCH_CHANNEL_B;
                 Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
-                return;
+                continue;
             }
         }
 
