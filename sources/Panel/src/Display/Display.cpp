@@ -28,6 +28,8 @@ void Display::Init()
     LTDC_::Init((uint)frontBuffer, (uint)backBuffer);
     
     Text::SetUpperCase(true);
+
+    Font::SetType(Font::Type::_7);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
