@@ -47,6 +47,7 @@ static Parameter params_ImpulseA[] =
 {
     Parameter(Parameter::Frequency, 0.1f,    100e6f, "10000", 0, Order::Kilo),
     Parameter(Parameter::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli),
+    Parameter(Parameter::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli),
     Parameter(Parameter::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One),
     Parameter(Parameter::Offset,    0.0f,    10.0f,  "50000", 0, Order::One)
 };
@@ -56,7 +57,10 @@ static Parameter params_PacketA[] =
     Parameter(Parameter::Period,        0.0f,   100e6f, "10000", 1, Order::Micro),
     Parameter(Parameter::Duration,      0.0f,   100e6f, "10000", 0, Order::Micro),
     Parameter(Parameter::PacketNumber,  0.0f,   100e6f, "20000", 0, Order::One),
-    Parameter(Parameter::PacketPeriod,  0.0f,   100e6f, "10000", 0, Order::Milli)
+    Parameter(Parameter::PacketPeriod,  0.0f,   100e6f, "10000", 0, Order::Milli),
+    Parameter(Parameter::Amplitude,     0.0f,   10.0f,  "10000", 1, Order::One),
+    Parameter(Parameter::Offset,        0.0f,   10.0f,  "50000", 0, Order::One),
+
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,8 +72,8 @@ static Form formsA[] =
     Form(Form::RampPlus,        params_RampPlusA,  4, &wave[Chan::A]),
     Form(Form::RampMinus,       params_RampMinusA, 4, &wave[Chan::A]),
     Form(Form::Meander,         params_MeanderA,   4, &wave[Chan::A]),
-    Form(Form::Impulse,         params_ImpulseA,   4, &wave[Chan::A]),
-    Form(Form::PacketImpuls,    params_PacketA,    4, &wave[Chan::A])
+    Form(Form::Impulse,         params_ImpulseA,   5, &wave[Chan::A]),
+    Form(Form::PacketImpuls,    params_PacketA,    6, &wave[Chan::A])
 };
 
 
@@ -120,16 +124,9 @@ static Parameter params_ImpulseB[] =
 {
     Parameter(Parameter::Frequency, 0.1f,    100e6f, "10000", 0, Order::Kilo),
     Parameter(Parameter::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli),
+    Parameter(Parameter::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli),
     Parameter(Parameter::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One),
     Parameter(Parameter::Offset,    0.0f,    10.0f,  "50000", 0, Order::One),
-};
-
-static Parameter params_PacketB[] =
-{
-    Parameter(Parameter::Period,        0.0f,   100e6f, "10000", 1, Order::Micro),
-    Parameter(Parameter::Duration,      0.0f,   100e6f, "10000", 0, Order::Micro),
-    Parameter(Parameter::PacketNumber,  0.0f,   100e6f, "20000", 0, Order::One),
-    Parameter(Parameter::PacketPeriod,  0.0f,   100e6f, "10000", 0, Order::Milli)
 };
 
 
@@ -142,8 +139,7 @@ static Form formsB[] =
     Form(Form::RampPlus,     params_RampPlusB,  4, &wave[Chan::B]),
     Form(Form::RampMinus,    params_RampMinusB, 4, &wave[Chan::B]),
     Form(Form::Meander,      params_MeanderB,   4, &wave[Chan::B]),
-    Form(Form::Impulse,      params_ImpulseB,   4, &wave[Chan::B]),
-    Form(Form::PacketImpuls, params_PacketB,    4, &wave[Chan::B])
+    Form(Form::Impulse,      params_ImpulseB,   5, &wave[Chan::B])
 };
 
 
@@ -151,5 +147,5 @@ static Form formsB[] =
 Wave wave[Chan::Number] =
 {
     Wave(Chan::A, formsA, 6),
-    Wave(Chan::B, formsB, 6)
+    Wave(Chan::B, formsB, 5)
 };
