@@ -29,7 +29,7 @@ void InputWindow::Draw()
     Font::SetType(Font::Type::_7);
 
     int x = 0;
-    int y = MP_TITLE_HEIGHT;
+    int y = Page::Title::HEIGHT;
     int width = SIGNAL_WIDTH;
     int height = SIGNAL_HEIGHT;
 

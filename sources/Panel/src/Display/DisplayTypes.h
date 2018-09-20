@@ -14,9 +14,7 @@
 #define BUFFER_HEIGHT   SCREEN_HEIGHT   /* Высота буфера для рисования */
 #endif
 
-#define MP_TITLE_HEIGHT 18
-#define MI_TITLE_HEIGHT 12
-#define SIGNAL_HEIGHT   (FREQ_ENABLED ? ((SCREEN_HEIGHT - MP_TITLE_HEIGHT) / 2 - 10) :  ((SCREEN_HEIGHT - MP_TITLE_HEIGHT) / 2))
+#define SIGNAL_HEIGHT   (FREQ_ENABLED ? ((SCREEN_HEIGHT - Page::Title::HEIGHT) / 2 - 10) :  ((SCREEN_HEIGHT - Page::Title::HEIGHT) / 2))
 #define SIGNAL_WIDTH    ((SCREEN_WIDTH - Item::WIDTH) - 1)
 
 #define MOI_HEIGHT_TITLE        19

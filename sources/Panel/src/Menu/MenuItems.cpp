@@ -114,7 +114,7 @@ void Item::Open(bool open)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Item::Title() const
+pString Item::GetTitle() const
 {
     return titleHint[LANG];
 }

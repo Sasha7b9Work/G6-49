@@ -54,7 +54,7 @@ void Button::Draw(int x, int y)
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, isShade ? Color::GRAY_10 : Color::GREEN_10);
     Painter::SetColor(isShade ? Color::GRAY_25 : Color::FILL);
-    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, Title());
+    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle());
     funcForDraw(x, y);
 }
 
@@ -73,7 +73,7 @@ void Page::DrawClosed(int x, int y) const
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, color);
     Painter::SetColor(IsShade() ? Color::GRAY_25 : Color::FILL);
-    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, Title());
+    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y)
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        Text::DrawText(x + 5, y + 5, Title(), pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        Text::DrawText(x + 5, y + 5, GetTitle(), pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
     }
@@ -107,7 +107,7 @@ void Choice::Draw(bool opened, int x, int y)
         
         if(x == -1)
         {
-            y = MP_TITLE_HEIGHT + PositionOnPage() % Menu::NUM_ITEMS_ON_DISPLAY * Item::HEIGHT;
+            y = Page::Title::HEIGHT + PositionOnPage() % Menu::NUM_ITEMS_ON_DISPLAY * Item::HEIGHT;
             if(y + GetHeightOpened() > SCREEN_HEIGHT)
             {
                 y = SCREEN_HEIGHT - GetHeightOpened() - 2;
@@ -115,12 +115,12 @@ void Choice::Draw(bool opened, int x, int y)
             x = SCREEN_WIDTH - Item::WIDTH - 20;
         }
 
-        Painter::FillRegion(x, y, width, MI_TITLE_HEIGHT, Color::GRAY_50);
-        Painter::FillRegion(x, y + MI_TITLE_HEIGHT, width, height - MI_TITLE_HEIGHT, Color::BACK);
+        Painter::FillRegion(x, y, width, Item::Title::HEIGHT, Color::GRAY_50);
+        Painter::FillRegion(x, y + Item::Title::HEIGHT, width, height - Item::Title::HEIGHT, Color::BACK);
         Painter::DrawRectangle(x, y, width, height, Color::FILL);
         Painter::DrawHLine(y + 12, x, x + width);
         Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
-        Text::DrawTextRelativelyRight(x + width - 2, y + 2, Title());
+        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle());
 
         y += 14;
 
@@ -149,7 +149,7 @@ void Choice::Draw(bool opened, int x, int y)
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        Text::DrawText(x + 5, y + 5, Title(), pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        Text::DrawText(x + 5, y + 5, GetTitle(), pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Painter::SetColor(Color::BACK);
         if (step == 0.0f)
@@ -183,7 +183,7 @@ void Page::Draw() const
     for (int i = numPage * 4; i < numPage * 4 + 4; i++)
     {
         int x = SCREEN_WIDTH - Item::WIDTH - 1;
-        int y = MP_TITLE_HEIGHT + (i % Menu::NUM_ITEMS_ON_DISPLAY) * Item::HEIGHT;
+        int y = Page::Title::HEIGHT + (i % Menu::NUM_ITEMS_ON_DISPLAY) * Item::HEIGHT;
         Painter::DrawRectangle(x, y, Item::WIDTH, Item::HEIGHT, Color::FILL);
         if(i < num)
         {

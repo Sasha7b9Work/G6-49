@@ -29,8 +29,8 @@ void Menu::Draw()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Menu::DrawTitle()
 {
-    Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, MP_TITLE_HEIGHT, Color::FILL);
-    Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, MP_TITLE_HEIGHT - 2, Color::BLUE_10);
+    Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, Page::Title::HEIGHT, Color::FILL);
+    Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, Page::Title::HEIGHT - 2, Color::BLUE_10);
     if(Menu::GetOpenedItem())
     {
         return Text::DrawText(5, 5, Menu::GetOpenedItem()->FullPath(), Color::FILL);

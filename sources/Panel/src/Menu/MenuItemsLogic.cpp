@@ -508,7 +508,7 @@ pString ChoiceParameter::NameCurrentSubItem() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *Item::FullPath()
 {
-    const char *titles[5] = {Title()};
+    const char *titles[5] = {GetTitle()};
     int pointer = 1;
 
     Page *parent = Keeper();
@@ -543,7 +543,7 @@ char *Item::FullPath()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Choice::GetHeightOpened() const 
 {
-    return NumSubItems() * 10 + 2 + MI_TITLE_HEIGHT;
+    return NumSubItems() * 10 + 2 + Item::Title::HEIGHT;
 }
 
 

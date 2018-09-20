@@ -73,7 +73,7 @@ void Hint::Draw()
     if (show)
     {
         int x0 = 0;
-        int y0 = MP_TITLE_HEIGHT;
+        int y0 = Page::Title::HEIGHT;
         int width = 319 - Item::WIDTH;
 
         y0 = Text::DrawTextInBoundedRectWithTransfers(x0, y0, width,
@@ -95,7 +95,7 @@ void Hint::Draw()
             int yUGO = y0 + 5;
 
             Painter::SetColor(Color::GREEN_50);
-            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->Title());
+            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->GetTitle());
             Painter::SetColor(Color::GREEN);
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5;
             if (item->GetType().Is(Item::Type::Choice))
