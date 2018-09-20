@@ -619,7 +619,7 @@ void Text::DrawTextInColumn(int x, int y, int width, pString t)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font::GetHeightSymbol(*text);
+            y += Font::GetHeightSymbol(*text) + 2;
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, text);
