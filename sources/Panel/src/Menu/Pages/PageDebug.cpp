@@ -57,6 +57,7 @@ DEF_CHOICE_2( cStatistics,                                                      
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static void OnPress_BigSymbols(bool)
 {
     Font::ToggleCharacterSize();
@@ -72,6 +73,7 @@ DEF_CHOICE_2 (  cBigSymbols,                                                    
                                 "Displaying information with enlarged symbols",
     FLAG_1, BIT_BIG_SYMBOLS, pDebug, FuncActive, OnPress_BigSymbols, FuncDraw
 )
+*/
 
 
 DEF_PAGE_3( pDebug,
