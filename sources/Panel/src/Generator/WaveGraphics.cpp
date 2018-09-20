@@ -211,11 +211,11 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         Parameter *param = form->GetParameter(i);
         if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
-            Painter::FillRegion(x0, y0, 139, 8, Color::GRAY_25);
+            Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }
         Text::DrawText(x0 + 1, y0, param->Name(), Color::FILL);
         DrawParameterValue(param, x0 + 80, y0);
-        y0 += 10;
+        y0 += 11;
     }
 }
 
@@ -225,6 +225,6 @@ void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
     x = Text::DrawText(x, y, param->GetStringValue());
     char buffer[10];
     Text::SetUpperCase(false);
-    Text::DrawText(x + 3, y, param->NameUnit(buffer));
+    Text::DrawText(x + 2, y, param->NameUnit(buffer));
     Text::SetUpperCase(true);
 }
