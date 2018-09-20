@@ -74,7 +74,7 @@ void Hint::Draw()
     {
         int x0 = 0;
         int y0 = MP_TITLE_HEIGHT;
-        int width = 319 - MI_WIDTH;
+        int width = 319 - Item::WIDTH;
 
         y0 = Text::DrawTextInBoundedRectWithTransfers(x0, y0, width,
             LANG_RU ?
