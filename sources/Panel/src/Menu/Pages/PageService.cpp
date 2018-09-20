@@ -343,7 +343,7 @@ DEF_BUTTON(bSend,                                                               
 static void OnDraw_Backspace(int x, int y)
 {
     Font::SetType(Font::Type::UGO2);
-    Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_LEFT, Color::FILL);
+    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::UGO2::Left, Color::FILL);
     Font::SetType(Font::Type::_8);
 }
 
@@ -367,7 +367,7 @@ static void OnPress_Cancel()
 static void OnDraw_Cancel(int x, int y)
 {
     Font::SetType(Font::Type::UGO2);
-    Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_DELETE, Color::FILL);
+    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::UGO2::Delete, Color::FILL);
     Font::SetType(Font::Type::_8);
 }
 
@@ -473,7 +473,7 @@ static void OnPress_Save()
 static void OnDraw_Save(int x, int y)
 {
     Font::SetType(Font::Type::UGO2);
-    Text::Draw4SymbolsInRect(x + 15, y + 30, SYMBOL_SAVE, Color::FILL);
+    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::UGO2::Save, Color::FILL);
     Font::SetType(Font::Type::_8);
 }
 

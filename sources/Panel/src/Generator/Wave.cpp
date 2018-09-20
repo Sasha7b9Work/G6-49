@@ -3,6 +3,7 @@
 #include "Log.h"
 #include "Settings/Settings.h"
 #include "Display/InputWindow.h"
+#include "Display/Symbols.h"
 #include "Generator.h"
 #include "Signals.h"
 #include "Utils/Debug.h"
@@ -12,7 +13,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name(Language lang) const
 {
-    struct StructName
+    static const struct StructName
     {
         pString name;
         StructName(pString n) : name(n) { };
@@ -33,13 +34,12 @@ pString Form::Name(Language lang) const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString Register::Name() const
 {
-    struct StrName
+    static const struct StrName
     {
         pString name;
         StrName(pString n) : name(n) {};
-    };
-
-    static const StrName names[Register::Number] =
+    }
+    names[Register::Number] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",
@@ -349,7 +349,7 @@ pString Parameter::GetStringValue() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString Parameter::NameUnit(char buf[10])
 {
-    struct StructName
+    static const struct StructName
     {
         pString name;
         StructName(pString n) : name(n) {};
@@ -362,7 +362,7 @@ pString Parameter::NameUnit(char buf[10])
         {"В",   "V"},
         {"с",   "s"},
         {"",    ""},
-        {"град","degr"},
+        {"\x7b","\x7b"},
         {"с",   "s"},
         {"",    ""},
         {"",    ""},
@@ -375,6 +375,7 @@ pString Parameter::NameUnit(char buf[10])
         {"",    ""},
         {"",    ""}
     };
+
     sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);
     return buf;
 }

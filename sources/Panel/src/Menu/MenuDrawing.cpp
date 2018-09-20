@@ -44,7 +44,7 @@ void Menu::DrawPagesUGO(int x)
 {
     x += 10;
 
-    static const int delta = 10;
+    static const int delta = 11;
 
     int numSubPages = CURRENT_PAGE->NumSubPages();
     int numPage = CURRENT_PAGE->CurrentSubPage();
@@ -53,10 +53,10 @@ void Menu::DrawPagesUGO(int x)
     {
         for (int i = 0; i < numSubPages; i++) 
         {
-            Painter::DrawRectangle(x + 5 + i * delta, 5, delta, 8, Color::GRAY_25);
+            Painter::DrawRectangle(x + 5 + i * delta, 5, delta, 9, Color::GRAY_25);
         }
 
-        Painter::FillRegion(x + 5 + numPage * delta, 5, delta, 8, Color::FILL);
+        Painter::FillRegion(x + 5 + numPage * delta, 5, delta, 9, Color::FILL);
 
         char buffer[20];
 
