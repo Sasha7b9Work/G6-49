@@ -53,13 +53,6 @@ symbols = unpack("2048b", data)
 output = open("font5.inc", "w")
 output.write("#include \"Font.h\"\nconst Font font5 = {\n\t5, {\n")
 
-outputDisplay = open("font5display.inc", "w")
-outputDisplay.write("const BYTE font5display[3080] = {\n")
-outputDisplay.write("/* Orient = 0x00, FontID = 0x00 */ 0x00, 0x00,\n")
-outputDisplay.write("/* First character ID */           0x00, 0x00,\n")
-outputDisplay.write("/* Last  character ID */           0xff, 0xff,\n")
-outputDisplay.write("/* Height */                       0x05, 0x00,\n")
-
 outTmpTable = open("table.tmp", "w")    # Temp file for table of symbols
 outTmpMap = open("map.tmp", "w")        # Temp file for bit map
 
@@ -93,22 +86,15 @@ output.write("} };\n")
 
 outTmpMap.write("};\n")
 
-outputDisplay.write("\n/* Table of characters */\n")
 outTmpTable.close()
 outTmpTable = open("table.tmp")
 lines = outTmpTable.readlines()
-for line in lines:
-    outputDisplay.write(line)
 
-outputDisplay.write("\n\n/* Map of characters */\n\n")
 outTmpMap.close();
 outTmpMap = open("map.tmp")
 lines = outTmpMap.readlines()
-for line in lines:
-    outputDisplay.write(line)
 
 output.close()
-outputDisplay.close()
 
 input = open("font5.inc")
 #print(input.read())

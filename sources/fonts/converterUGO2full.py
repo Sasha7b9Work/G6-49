@@ -49,13 +49,6 @@ symbols = unpack("2048b", data)
 output = open("fontUGO2.inc", "w")
 output.write("#include \"Font.h\"\nconst Font fontUGO2 = {\n\t8, {\n")
 
-outputDisplay = open("fontUGO2display.inc", "w")
-outputDisplay.write("const BYTE fontUGO2display[3080] = {\n")
-outputDisplay.write("/* Orient = 0x00, FontID = 0x00 */ 0x00, 0x00,\n")
-outputDisplay.write("/* First character ID */           0x00, 0x00,\n")
-outputDisplay.write("/* Last  character ID */           0xff, 0xff,\n")
-outputDisplay.write("/* Height */                       0x08, 0x00,\n")
-
 outTmpTable = open("table.map", "w")
 outTmpMap = open("map.tmp", "w")
 
@@ -89,23 +82,13 @@ output.write("} };\n")
 
 outTmpMap.write("};\n")
 
-outputDisplay.write("\n/* Table of characters */\n")
 outTmpTable.close()
 outTmpTable = open("table.map")
 lines = outTmpTable.readlines()
-for line in lines:
-    outputDisplay.write(line)
 
 outputDisplay.write("\n\n/* Map of characters */\n\n")
 outTmpMap.close()
 outTmpMap = open("map.tmp")
 lines = outTmpMap.readlines()
-for line in lines:
-    outputDisplay.write(line)
 
 output.close()
-outputDisplay.close();
-
-input = open("fontUGO.inc")
-#print(input.read())
-input.close()

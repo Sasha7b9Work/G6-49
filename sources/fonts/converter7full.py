@@ -53,14 +53,6 @@ symbols = unpack("2048b", data)
 output = open("font7.inc", "w")                   # Fonts for black display
 output.write("#include \"Font.h\"\nconst Font font7 = {\n\t8, {\n")
 
-outputDisplay = open("font7display.inc", "w")     # Font for color display
-outputDisplay.write("/* Main font height 7 */\n\n")
-outputDisplay.write("const BYTE font7display[" + str(8 + 256 * 8 + 256 * 4) + "] = {\n\n")
-outputDisplay.write("/* Orient = 0x00, FontID = 0x00 */ 0x00, 0x00,\n")
-outputDisplay.write("/* First character ID */           0x00, 0x00,\n")
-outputDisplay.write("/* Last  character ID */           0xff, 0xff,\n")
-outputDisplay.write("/* Height */                       0x08, 0x00,\n")
-
 outTmpTable = open("table.tmp", "w")
 outTmpMap = open("map.tmp", "w")
 
@@ -94,22 +86,15 @@ output.write("} };\n")
 
 outTmpMap.write("};\n")
 
-outputDisplay.write("\n/* Table of characters */\n")
 outTmpTable.close()
 outTmpTable = open("table.tmp")
 lines = outTmpTable.readlines()
-for line in lines:
-    outputDisplay.write(line)
 
-outputDisplay.write("\n\n/* Map of characters */\n\n")
 outTmpMap.close()
 outTmpMap = open("map.tmp")
 lines = outTmpMap.readlines()
-for line in lines:
-    outputDisplay.write(line)
 
 output.close()
-outputDisplay.close()
 
 input = open("font7.inc")
 #print(input.read())

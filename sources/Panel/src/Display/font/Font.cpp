@@ -6,13 +6,12 @@
 #include "font7.inc"
 #include "font5.inc"
 #include "font8.inc"
-#include "fontUGO.inc"
 #include "fontUGO2.inc"
 #include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const Font *fonts[Font::Type::Number] = {&font5, &font7, &font8, &fontUGO, &fontUGO2};
+const Font *fonts[Font::Type::Number] = {&font5, &font7, &font8, &fontUGO2};
 const Font *font = &font7;
 
 

@@ -1737,11 +1737,6 @@
               <FilePath>.\src\Display\font\font8.inc</FilePath>
             </File>
             <File>
-              <FileName>fontUGO.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\font\fontUGO.inc</FilePath>
-            </File>
-            <File>
               <FileName>fontUGO2.inc</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\font\fontUGO2.inc</FilePath>
