@@ -11,7 +11,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
-StructValue InputWindow::m_iws;
+StructValue InputWindow::iws;
 Parameter  *InputWindow::param = 0;
 
 
@@ -19,7 +19,7 @@ Parameter  *InputWindow::param = 0;
 void InputWindow::Init()
 {
     param = PARAM_CURRENT;
-    m_iws.Set(param);
+    iws.Set(param);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ void InputWindow::Draw()
 
     if (IN_NUM_LOCK_MODE)
     {
-        m_iws.DrawInputField(10, y + 27);
+        iws.DrawInputField(10, y + 27);
     }
 
     Font::SetType(Font::Type::_8);
@@ -236,7 +236,7 @@ void InputWindow::KeyLeft()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        m_iws.KeyLeft();
+        iws.KeyLeft();
     }
 }
 
@@ -245,14 +245,14 @@ void InputWindow::KeyRight()
 {
     if (!IN_NUM_LOCK_MODE)
     {
-        m_iws.KeyRight();
+        iws.KeyRight();
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::KeyEnter()
 {
-    m_iws.SaveValue();
+    iws.SaveValue();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -262,21 +262,21 @@ void InputWindow::ProcessContorl(Control key)
     {
         if (key.action.Is(Control::Action::Down))
         {
-            m_iws.PressKey(key);
+            iws.PressKey(key);
         }
     }
     else if (key.Is(Control::Reg::Left))
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            m_iws.RegLeft();
+            iws.RegLeft();
         }
     }
     else if (key.Is(Control::Reg::Right))
     {
         if (!IN_NUM_LOCK_MODE)
         {
-            m_iws.RegRight();
+            iws.RegRight();
         }
     }
     else if (key.IsFunctional() && key.action.Is(Control::Action::Up))

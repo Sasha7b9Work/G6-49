@@ -127,7 +127,7 @@ private:
 
     static Parameter *param;
 
-    static StructValue m_iws;
+    static StructValue iws;
 };
 
 
