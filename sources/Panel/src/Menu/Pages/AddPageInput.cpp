@@ -29,7 +29,8 @@ DEF_SMALL_BUTTON(sbLeft,                                                        
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Right(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::FillDown);
+    Text::DrawText(x + 14, y + 12, "Порядок");
+    Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillDown);
 }
 
 DEF_SMALL_BUTTON(sbRight,                                                                                         //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
@@ -48,7 +49,8 @@ static void OnPress_Cancel()
 
 static void Draw_Cancel(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::Delete);
+    Text::DrawText(x + 13, y + 12, "Отменить");
+    Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Delete);
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                               //--- ОКНО ВВОДА - ОТМЕНА ---
@@ -61,7 +63,8 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Enter(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 4, y + 3, Ideograph::_8::Save);
+    Text::DrawText(x + 3, y + 12, "Подтвердить");
+    Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Save);
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                  //--- ОКНО ВВОДА - ВВОД ---

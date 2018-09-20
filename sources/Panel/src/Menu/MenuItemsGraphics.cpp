@@ -42,7 +42,8 @@ void SButton::Draw(int x, int y)
 {
     if(Menu::pressedItem == this)
     {
-        Painter::SetColor(Color::BLUE);
+        Painter::FillRegion(x + 1, y + 1, Item::WIDTH - 2, Item::HEIGHT - 2, Color::FILL);
+        Painter::SetColor(Color::BACK);
     }
     funcForDraw(x, y);
 }

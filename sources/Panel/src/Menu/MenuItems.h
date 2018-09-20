@@ -100,6 +100,7 @@ public:
     struct Title
     {
         static const int HEIGHT = 12;
+
     };
 };
 
