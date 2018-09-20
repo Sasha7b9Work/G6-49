@@ -15,7 +15,8 @@ extern const PageBase pInput;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Draw_Left(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::Left);
+    Text::DrawText(x + 14, y + 12, "оНПЪДНЙ");
+    Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillUp);
 }
 
 DEF_SMALL_BUTTON(sbLeft,                                                                                           //--- нймн ббндю - яхлбнк бкебн ---
@@ -28,7 +29,7 @@ DEF_SMALL_BUTTON(sbLeft,                                                        
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Right(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::Right);
+    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::FillDown);
 }
 
 DEF_SMALL_BUTTON(sbRight,                                                                                         //--- нймн ббндю - яхлбнк бопюбн ---
@@ -73,8 +74,12 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static bool OnControl(Control key)
 {
-    InputWindow::ProcessContorl(key);
-    return true;
+    if(!key.IsFunctional())
+    {
+        InputWindow::ProcessContorl(key);
+        return true;
+    }
+    return false;
 }
 
 Page *AddPageInput::pointer = (Page *)&pInput;

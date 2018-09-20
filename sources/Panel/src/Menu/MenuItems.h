@@ -92,6 +92,10 @@ public:
     Page *Keeper() { return (Page *)keeper_; };
 
     bool IsActive() const { return funcOfActive(); };
+
+    static const int WIDTH = 69;
+
+    static const int HEIGHT = 55;
 };
 
 

@@ -465,11 +465,17 @@ Item *ChoiceParameter::Press(Control::Action action)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Item *SButton::Press(Control::Action action)
 {
-    if(action.Is(Control::Action::Up))
+    if(action.Is(Control::Action::Down))
+    {
+        Menu::pressedItem = this;
+        return this;
+    }
+    if(action.IsRelease())
     {
         if (funcOnPress)
         {
             funcOnPress();
+            Menu::pressedItem = 0;
         }
     }
 
