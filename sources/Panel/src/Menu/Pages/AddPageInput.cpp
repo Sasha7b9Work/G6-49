@@ -15,9 +15,7 @@ extern const PageBase pInput;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Draw_Left(int x, int y)
 {
-    Font::SetType(Font::Type::UGO2);
-    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::UGO2::Left);
-    Font::SetType(Font::Type::_8);
+    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::Left);
 }
 
 DEF_SMALL_BUTTON(sbLeft,                                                                                           //--- нймн ббндю - яхлбнк бкебн ---
@@ -30,9 +28,7 @@ DEF_SMALL_BUTTON(sbLeft,                                                        
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Right(int x, int y)
 {
-    Font::SetType(Font::Type::UGO2);
-    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::UGO2::Right);
-    Font::SetType(Font::Type::_8);
+    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::Right);
 }
 
 DEF_SMALL_BUTTON(sbRight,                                                                                         //--- нймн ббндю - яхлбнк бопюбн ---
@@ -51,9 +47,7 @@ static void OnPress_Cancel()
 
 static void Draw_Cancel(int x, int y)
 {
-    Font::SetType(Font::Type::UGO2);
-    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::UGO2::Delete);
-    Font::SetType(Font::Type::_8);
+    Text::Draw4SymbolsInRect(x + 3, y + 3, Ideograph::_8::Delete);
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                               //--- нймн ббндю - нрлемю ---
@@ -66,9 +60,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Enter(int x, int y)
 {
-    Font::SetType(Font::Type::UGO2);
-    Text::Draw4SymbolsInRect(x + 4, y + 3, Ideograph::UGO2::Save);
-    Font::SetType(Font::Type::_8);
+    Text::Draw4SymbolsInRect(x + 4, y + 3, Ideograph::_8::Save);
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                  //--- нймн ббндю - ббнд ---

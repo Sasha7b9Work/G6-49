@@ -5,6 +5,7 @@
 #include "Display/Text.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
+#include "Display/Symbols.h"
 #include <stdio.h>
 
 
@@ -108,9 +109,9 @@ void InputWindow::DrawDigits(int x, int y)
 
         if (i == param->hightLightDigit)
         {
-            Font::SetType(Font::Type::UGO2);
-            Text::Draw4SymbolsInRect(x + 2, y - 10, '\xa2');
-            Text::Draw4SymbolsInRect(x + 2, y + 35, '\xa0');
+            Font::SetType(Font::Type::_8);
+            Text::Draw4SymbolsInRect(x + 2, y - 10, Ideograph::_8::FillDown);
+            Text::Draw4SymbolsInRect(x + 2, y + 35, Ideograph::_8::FillUp);
             Font::SetType(Font::Type::_7);
         }
 

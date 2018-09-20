@@ -21,18 +21,13 @@ struct Ideograph
 
         enum
         {
-            Degree = '\x7b'
-        };
-    };
-
-    struct UGO2
-    {
-        enum
-        {
-            Left   = '\x20',
-            Delete = '\x22',
-            Save   = '\x2c',
-            Right  = '\x64'
+            Degree   = '\x7b',
+            Left     = '\xa0',
+            Right    = '\xa2',
+            Delete   = '\xa6',
+            FillUp   = '\xaa',
+            FillDown = '\xac',
+            Save     = '\xae'
         };
     };
 };
