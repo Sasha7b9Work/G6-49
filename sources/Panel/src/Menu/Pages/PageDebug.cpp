@@ -74,12 +74,12 @@ DEF_CHOICE_2 (  cBigSymbols,                                                    
 )
 
 
-DEF_PAGE_4( pDebug,
+DEF_PAGE_3( pDebug,
     "ОТЛАДКА", "DEBUG",
     "", "",
     cConsole,       ///< ОТЛАДКА - Консоль
     bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
     cStatistics,    ///< ОТЛАДКА - Статистика
-    cBigSymbols,    ///< ОТЛАДКА - Больщие символы
+//    cBigSymbols,    ///< ОТЛАДКА - Больщие символы
     Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey
 )
