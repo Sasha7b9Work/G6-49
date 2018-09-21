@@ -87,7 +87,7 @@ void Generator::Update()
     }}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Chan ch, Parameter param)
+void Generator::SetParameter(Chan ch, Parameter *param)
 {
     static const CommandPanel commands[Parameter::Number] =
     {
@@ -111,11 +111,11 @@ void Generator::SetParameter(Chan ch, Parameter param)
         CommandPanel::None
     };
 
-    uint8 buffer[6] = {(uint8)commands[param.value], (uint8)ch};
+    uint8 buffer[6] = {(uint8)commands[param->value], (uint8)ch};
 
-    float value = param.GetValue();
+    float value = param->GetValue();
 
-    if(param.Is(Parameter::Offset))
+    if(param->Is(Parameter::Offset))
     {
         value -= 5.0f;
     }
