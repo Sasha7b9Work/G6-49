@@ -183,7 +183,7 @@ void Form::SetNextParameter()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::TuneGenerator(Chan ch)
 {
-    Generator::SetFormWave(ch, this);
+    Generator::SetFormWave(GetWave());
 
     if(value == Form::Sine)
     {

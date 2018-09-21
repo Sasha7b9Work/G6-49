@@ -10,6 +10,7 @@
 #include "Signals.h"
 #include "Command.h"
 #include "structs.h"
+#include "Signals.h"
 
 #include <math.h>
 #include <string.h>
@@ -66,9 +67,9 @@ void Generator::Reset()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Chan ch, Form *form)
+void Generator::SetFormWave(Wave *w)
 {
-    uint8 buffer[3] = {CommandPanel::SetFormWave, (uint8)ch, (uint8)form->value};
+    uint8 buffer[3] = {CommandPanel::SetFormWave, (uint8)w->GetChannel(), (uint8)FORM(w->GetChannel())->value};
     SendToInterface(buffer, 3);
 }
 
