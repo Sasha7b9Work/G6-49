@@ -265,9 +265,11 @@ void Form::OpenCurrentParameter()
 
     if(CurrentParameter()->Is(Parameter::Manipulation))
     {
+        /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
         if(CurrentParameter()->GetParent())
         {
             set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
+//            Generator::SetParameter(GetParent()->GetForm()->GetForm)
         }
         else
        {
@@ -286,11 +288,6 @@ void Form::OpenCurrentParameter()
                 params[i].form = this;
                 params[i].parent = parent;
             }
-
-            if (parent->Is(Parameter::Manipulation))
-            {
-                Generator::TuneChannel(wave->GetChannel());
-            }
         }
     }
 }
@@ -303,7 +300,6 @@ bool Form::CloseOpenedParameter()
         params = oldParams;
         numParams = oldNumParams;
         currentParam = oldCurrentParams;
-        Generator::TuneChannel(wave->GetChannel());
         return true;
     }
 
