@@ -66,9 +66,9 @@ void Generator::Reset()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Chan ch, Form form)
+void Generator::SetFormWave(Chan ch, Form *form)
 {
-    uint8 buffer[3] = {CommandPanel::SetFormWave, (uint8)ch, (uint8)form.value};
+    uint8 buffer[3] = {CommandPanel::SetFormWave, (uint8)ch, (uint8)form->value};
     SendToInterface(buffer, 3);
 }
 

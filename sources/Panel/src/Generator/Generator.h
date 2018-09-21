@@ -22,7 +22,7 @@ public:
 
     static bool ChannelEnabled(Chan ch);
 
-    static void SetFormWave(Chan ch, Form form);
+    static void SetFormWave(Chan ch, Form *form);
 
     static void SetParameter(Parameter *param);
 
