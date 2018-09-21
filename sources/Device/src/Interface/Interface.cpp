@@ -69,9 +69,9 @@ commands[CommandPanel::Number] =
     Interface::Empty,                    /// SET_DURATION_FALL
     Interface::Empty,                    /// SET_DURATION_STADY
     Interface::Empty,                    /// SET_DUTY_FACTOR
-    Interface::SetRampForSine,           /// SetRampForSine
-    Interface::SetDurationForRampSine,   /// SetRampSineDuration
-    Interface::SetAmplitudeRampForSine,  /// SetRampSineAmplitude
+    Interface::SetManipulation,          /// SetManipulation
+    Interface::SetManipulationDuration,  /// SetManipulationDuration
+    Interface::SetManipulationPeriod,    /// SetManipulationPeriod
     Interface::SetPacketPeriod,
     Interface::SetPacketNumber
 };
@@ -135,7 +135,7 @@ void Interface::ReadData()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetRampForSine()
+void Interface::SetManipulation()
 {
     Chan ch = (Chan::E)buffer[1];
     bool enabled = GetFloat(&buffer[2]) != 0;
@@ -143,7 +143,7 @@ void Interface::SetRampForSine()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetDurationForRampSine()
+void Interface::SetManipulationDuration()
 {
     Chan ch = (Chan::E)buffer[1];
     float duration = (float)((int)(GetFloat(&buffer[2]) + 0.5f));
@@ -151,7 +151,7 @@ void Interface::SetDurationForRampSine()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetAmplitudeRampForSine()
+void Interface::SetManipulationPeriod()
 {
     Chan ch = (Chan::E)buffer[1];
     float amplitude = (float)((int)(GetFloat(&buffer[2]) + 0.5f));

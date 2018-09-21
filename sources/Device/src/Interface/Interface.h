@@ -35,11 +35,11 @@ public:
     /// Команда обрабатывает засылку произвольного сигнала
     static void CreateWave();
 
-    static void SetRampForSine();
+    static void SetManipulation();
 
-    static void SetDurationForRampSine();
+    static void SetManipulationDuration();
 
-    static void SetAmplitudeRampForSine();
+    static void SetManipulationPeriod();
 
     static void SetPacketPeriod();
 
