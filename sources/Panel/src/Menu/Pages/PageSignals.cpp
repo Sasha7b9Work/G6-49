@@ -69,7 +69,7 @@ static void OnPress_ChnageParameter()
     {
         InputWindow::Init();
 
-        Menu::SetAdditionPage((Page *)&pInput);
+        Menu::SetAdditionPage((Page *)AddPageInput::pointer);
     }
     else if(PARAM_CURRENT->IsExitParameter())
     {

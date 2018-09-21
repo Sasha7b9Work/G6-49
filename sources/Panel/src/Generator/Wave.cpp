@@ -269,7 +269,7 @@ void Form::OpenCurrentParameter()
         if(CurrentParameter()->GetParent())
         {
             set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
-//            Generator::SetParameter(GetParent()->GetForm()->GetForm)
+            Generator::SetParameter(CurrentParameter());
         }
         else
        {
