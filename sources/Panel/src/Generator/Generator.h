@@ -24,7 +24,7 @@ public:
 
     static void SetFormWave(Chan ch, Form form);
 
-    static void SetParameter(Chan ch, Parameter *param);
+    static void SetParameter(Parameter *param);
 
     static void SetDebugMode(bool enable);
 

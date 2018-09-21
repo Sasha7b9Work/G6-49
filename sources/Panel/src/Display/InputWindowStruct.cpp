@@ -462,7 +462,7 @@ void StructValue::SendToGenerator()
     }
     else
     {
-        Generator::SetParameter(CURRENT_CHANNEL, param);
+        Generator::SetParameter(param);
     }
 }
 
