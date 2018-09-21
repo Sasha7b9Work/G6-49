@@ -103,9 +103,9 @@ void Generator::SetParameter(Chan ch, Parameter param, float value)
         CommandPanel::SET_DURATION_FALL,
         CommandPanel::SET_DURATION_STADY,
         CommandPanel::SET_DUTY_FACTOR,
-        CommandPanel::SetRampForSine,
-        CommandPanel::SetRampSineDuration,
-        CommandPanel::SetRampSineAmplitude,
+        CommandPanel::SetManipulation,
+        CommandPanel::SetManipulationDuration,
+        CommandPanel::SetManipulationPeriod,
         CommandPanel::SetPacketPeriod,
         CommandPanel::SetPacketNumber,
         CommandPanel::None

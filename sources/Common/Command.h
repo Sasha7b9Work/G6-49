@@ -49,25 +49,25 @@ struct CommandPanel
     enum E
     {
         None,
-        EnableChannel,          ///< Включить/выключить канал
-        SetFormWave,            ///< Установить форму сигнала
-        SetFrequency,           ///< Установить частоту
-        SetAmplitude,           ///< Установить амплитуду
-        SetOffset,              ///< Установать смещение
+        EnableChannel,              ///< Включить/выключить канал
+        SetFormWave,                ///< Установить форму сигнала
+        SetFrequency,               ///< Установить частоту
+        SetAmplitude,               ///< Установить амплитуду
+        SetOffset,                  ///< Установать смещение
         SetDuration,
         SetDutyRatio,
         SetPhase,
-        RunReset,               ///< Сброс состояния
-        ModeDebug,              ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
-        SetDelay,               ///< Задержка
-        WriteRegister,          ///< Занести значение в регистр
+        RunReset,                   ///< Сброс состояния
+        ModeDebug,                  ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
+        SetDelay,                   ///< Задержка
+        WriteRegister,              ///< Занести значение в регистр
         SET_DURATION_RISE,
         SET_DURATION_FALL,
         SET_DURATION_STADY,
         SET_DUTY_FACTOR,
-        SetRampForSine,         ///< Установить режим модуляции пилой для синуса
-        SetRampSineDuration,    ///< Установить длительность ипульса при модуляции синуса пилой
-        SetRampSineAmplitude,   ///< Установить амплитуду для пилы, модулирующей синус
+        SetManipulation,            ///< Установить режим манипуляции
+        SetManipulationDuration,    ///< Установить длительность ипульса в режиме манипуляции
+        SetManipulationPeriod,      ///< Установить период следования импульсов в режиме манипуляции
         SetPacketPeriod,
         SetPacketNumber,
         Number
