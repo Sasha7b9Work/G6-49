@@ -199,36 +199,36 @@ void Form::TuneGenerator(Chan ch)
 
             if(CurrentParameter()->value == Parameter::Manipulation)
             {
-                SendParameterToGenerator(ch, Parameter::Frequency);
-                SendParameterToGenerator(ch, Parameter::Amplitude);
-                SendParameterToGenerator(ch, Parameter::Offset);
-                SendParameterToGenerator(ch, Parameter::Manipulation);
+                SendParameterToGenerator(Parameter::Frequency);
+                SendParameterToGenerator(Parameter::Amplitude);
+                SendParameterToGenerator(Parameter::Offset);
+                SendParameterToGenerator(Parameter::Manipulation);
             }
 
             currentParam = current;
             params = param;
             numParams = numPar;
 
-            SendParameterToGenerator(ch, Parameter::ManipulationDuration);
-            SendParameterToGenerator(ch, Parameter::ManipulationPeriod);
+            SendParameterToGenerator(Parameter::ManipulationDuration);
+            SendParameterToGenerator(Parameter::ManipulationPeriod);
         }
         else
         {
-            SendParameterToGenerator(ch, Parameter::Manipulation);
-            SendParameterToGenerator(ch, Parameter::Frequency);
-            SendParameterToGenerator(ch, Parameter::Amplitude);
-            SendParameterToGenerator(ch, Parameter::Offset);
+            SendParameterToGenerator(Parameter::Manipulation);
+            SendParameterToGenerator(Parameter::Frequency);
+            SendParameterToGenerator(Parameter::Amplitude);
+            SendParameterToGenerator(Parameter::Offset);
         }
         if(!ch.IsA())
         {
-            SendParameterToGenerator(ch, Parameter::Phase);
+            SendParameterToGenerator(Parameter::Phase);
         }
     }
     else
     {
-        SendParameterToGenerator(ch, Parameter::Frequency);
-        SendParameterToGenerator(ch, Parameter::Amplitude);
-        SendParameterToGenerator(ch, Parameter::Offset);
+        SendParameterToGenerator(Parameter::Frequency);
+        SendParameterToGenerator(Parameter::Amplitude);
+        SendParameterToGenerator(Parameter::Offset);
     }
 }
 
@@ -246,7 +246,7 @@ Parameter *Form::FindParameter(Parameter::E p)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Form::SendParameterToGenerator(Chan ch, Parameter::E p)
+void Form::SendParameterToGenerator(Parameter::E p)
 {
     Parameter *param = FindParameter(p);
     if (param)

@@ -170,7 +170,7 @@ private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
     Parameter *FindParameter(Parameter::E p);
     /// Засыалет параметр в генератор
-    void SendParameterToGenerator(Chan ch, Parameter::E p);
+    void SendParameterToGenerator(Parameter::E p);
     /// Wave, к которому относится данный Form
     Wave *wave;
     /// Здесь хранятся параметры
