@@ -27,7 +27,7 @@ void Generator::Init()
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
         Generator::SetFormWave(ch, Form::Sine);
-        Generator::SetFrequency(ch, 1e6f);
+        Generator::SetFrequency(ch, 4e3f);
         Generator::SetOffset(ch, 0.0f);
         Generator::SetAmplitude(ch, 5.0f);
 
