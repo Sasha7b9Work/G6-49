@@ -251,7 +251,7 @@ void Form::SendParameterToGenerator(Chan ch, Parameter::E p)
     Parameter *param = FindParameter(p);
     if (param)
     {
-        Generator::SetParameter(ch, p, param->GetValue());
+        Generator::SetParameter(ch, *param);
     }
 }
 
