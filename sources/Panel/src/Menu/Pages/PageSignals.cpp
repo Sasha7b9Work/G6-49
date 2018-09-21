@@ -63,7 +63,7 @@ DEF_CHOICE_6( cForm,                                                            
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_SetParameter()
+static void OnPress_ChnageParameter()
 {
     if(PARAM_CURRENT->IsInputValue())
     {
@@ -81,18 +81,18 @@ static void OnPress_SetParameter()
     }
 }
 
-DEF_BUTTON( bSetParameter,                                                                    //--- мюярпнийх яхцмюкнб - ббеярх гмювемхе оюпюлерпю ---
+DEF_BUTTON( bChangeParameter,                                                                    //--- мюярпнийх яхцмюкнб - ббеярх гмювемхе оюпюлерпю ---
     "хГЛЕМХРЭ", "Change",
     "нРЙПШБЮЕР НЙМН ББНДЮ ОЮПЮЛЕРПЮ.",
     "Opens the parameter input window.",
-    pSignals, FuncActive, OnPress_SetParameter, FuncDraw
+    pSignals, FuncActive, OnPress_ChnageParameter, FuncDraw
 )
 
 DEF_CHOICE_PARAMETER(cParameters,                                                                              //--- мюярпнийх яхцмюкнб - оюпюлерп ---
     "оюпюлерп", "PARAMETER",
     "бШАНП ОЮПЮЛЕРПЮ ДКЪ МЮЯРПНИЙХ.",
     "Choosing a setting for customization.",
-    pSignals, FuncActive, OnPress_SetParameter, WAVE(Chan::A).GetForm(0)
+    pSignals, FuncActive, OnPress_ChnageParameter, WAVE(Chan::A).GetForm(0)
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ DEF_PAGE_5( pSignals,
     cChannel,       ///< мюярпнийх яхцмюкнб - йюмюк
     cForm,          ///< мюярпнийх яхцмюкнб - тнплю
     cParameters,    ///< мюярпнийх яхцмюкнб - оюпюлерп
-    bSetParameter,  ///< мюярпнийх яхцмюкнб - ббеярх гмювемхе оюпюлерпю
+    bChangeParameter,  ///< мюярпнийх яхцмюкнб - ббеярх гмювемхе оюпюлерпю
     cTypeTune,      ///< мюярпнийх яхцмюкнб - гюяшкйю
     Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
 )
