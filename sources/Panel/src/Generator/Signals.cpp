@@ -5,8 +5,8 @@
 static Parameter paramsSineModulationA[] =
 {
     Parameter(Parameter::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One),
-    Parameter(Parameter::ManipulationDuration, 0.0f,  10e3f,  "0100", 0, Order::Milli),
-    Parameter(Parameter::ManipulationPeriod,   0.0f,  10e3f,  "1000", 0, Order::Milli),
+    Parameter(Parameter::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli),
+    Parameter(Parameter::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli),
     Parameter(Parameter::Exit,                 -1.0f, 1.0f,   "",     0, Order::One)
 };
 
@@ -81,8 +81,8 @@ static Form formsA[] =
 static Parameter paramsSineModulationB[] =
 {
     Parameter(Parameter::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One),
-    Parameter(Parameter::ManipulationPeriod,   0.0f,  10e3f,  "1000", 0, Order::Milli),
-    Parameter(Parameter::ManipulationDuration, 0.0f,  10e3f,  "0100", 0, Order::Milli),
+    Parameter(Parameter::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli),
+    Parameter(Parameter::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli),
     Parameter(Parameter::Exit,                 -1.0f, 1.0f,   "",     0, Order::One)
 };
 

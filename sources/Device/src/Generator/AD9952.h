@@ -50,10 +50,10 @@ private:
     static GeneratorWritePin ChipSelect(Chan ch);
     static void Reset();
     static void WriteRegister(Chan ch, Register reg);
-    static void WriteCFR1(Chan ch, uint value = 0);
-    static void WriteCFR2(Chan ch, uint value = 0);
-    static void WriteARR(Chan ch,  uint value = 0);
-    static void WriteASF(Chan ch,  uint value = 0);
-    static void WriteFTW0(Chan ch, uint value = 0);
-    static void WritePOW(Chan ch,  uint value = 0);
+    static void WriteCFR1(Chan ch);
+    static void WriteCFR2(Chan ch);
+    static void WriteARR(Chan ch);
+    static void WriteASF(Chan ch);
+    static void WriteFTW0(Chan ch);
+    static void WritePOW(Chan ch);
 };

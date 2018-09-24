@@ -53,6 +53,9 @@ void AD9952::Init()
 
     WriteCFR2(Chan::A);
     WriteCFR2(Chan::B);
+
+    WriteARR(Chan::A);      // «десь скорость нарастани€ фронта импульса при манипул€ции
+    WriteARR(Chan::B);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -60,8 +63,6 @@ void AD9952::Manipulation::SetEnabled(Chan ch, bool enable)
 {
     enabled[ch] = enable;
     WriteCFR1(ch);
-    WriteARR(ch, 1);
-    WriteASF(ch, 1024 * 16 - 1 + (1 << 14) + (1 << 15));
 
     FPGA::SetWaveForm(ch, Form::Sine);
 }
@@ -93,7 +94,7 @@ void AD9952::SetAmplitude(Chan ch, float amplitude)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteRegister(Chan ch, Register reg)
 {
-    typedef void(*pFuncVCh)(Chan, uint);
+    typedef void(*pFuncVCh)(Chan);
 
     static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, WriteARR, WriteFTW0, WritePOW};
 
@@ -101,80 +102,68 @@ void AD9952::WriteRegister(Chan ch, Register reg)
 
     if (f)
     {
-        f(ch, 0);
+        f(ch);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteCFR1(Chan ch, uint value)
+void AD9952::WriteCFR1(Chan ch)
 {
-    if(value == 0)
+    uint value = 0;
+
+    if(ch == Chan::B)
     {
-        if(ch == Chan::B)
-        {
-            SetBit(value, 1);
-            SetBit(value, 23);
-        }
-        SetBit(value, 9);       // ќднонаправленный режим
-        SetBit(value, 13);
-        if(Manipulation::enabled[ch])
-        {
-            SetBit(value, 24);  // ”станавливаем режим манипул€ции
-        }
-        SetBit(value, 25);      // OSK enable - управление амплитудой
-        SetBit(value, 26);
+        SetBit(value, 1);
+        SetBit(value, 23);
     }
+    SetBit(value, 9);       // ќднонаправленный режим
+    SetBit(value, 13);
+    if(Manipulation::enabled[ch])
+    {
+        SetBit(value, 24);  // ”станавливаем режим манипул€ции
+    }
+    SetBit(value, 25);      // OSK enable - управление амплитудой
+    SetBit(value, 26);
+
     WriteToHardware(ch, Register::CFR1, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteCFR2(Chan ch, uint value)
+void AD9952::WriteCFR2(Chan ch)
 {
-    if(value == 0)
-    {
-        SetBit(value, 3);
-    }
+    uint value = 0;
+    SetBit(value, 3);
     WriteToHardware(ch, Register::CFR2, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WritePOW(Chan ch, uint value)
+void AD9952::WritePOW(Chan ch)
 {
-    if(value == 0)
-    {
-        value = (uint)(setDDS.ad9952[Chan::B].phase / 360.0f * (1 << 13) + 0.5f);
-    }
+    uint value = (uint)(setDDS.ad9952[Chan::B].phase / 360.0f * (1 << 13) + 0.5f);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteASF(Chan ch, uint value)
+void AD9952::WriteASF(Chan ch)
 {
-    if(value == 0)
-    {
-        value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
-    }
+    uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
+    SetBit(value, 14);  // \ Ёто биты множител€ скорости
+    SetBit(value, 15);  // / нарастани€ фронта 
     WriteToHardware(ch, Register::ASF, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteFTW0(Chan ch, uint value)
+void AD9952::WriteFTW0(Chan ch)
 {
-    if(value != 0)
-    {
-        WriteToHardware(ch, Register::FTW0, value);
-        return;
-    }
-
     float FTWf = (setDDS.ad9952[ch].frequency / 1e8f) * powf(2, 32);
 
     WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5f));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteARR(Chan ch, uint value)
+void AD9952::WriteARR(Chan ch)
 {
-    WriteToHardware(ch, Register::ARR, value);
+    WriteToHardware(ch, Register::ARR, 1);
 }
 
 
