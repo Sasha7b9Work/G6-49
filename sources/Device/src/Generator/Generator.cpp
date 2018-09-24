@@ -30,12 +30,6 @@ void Generator::Init()
         Generator::SetFrequency(ch, 1e6f);
         Generator::SetOffset(ch, 0.0f);
         Generator::SetAmplitude(ch, 10.0f);
-
-        
-        AD9952::Manipulation::SetEnabled(ch, true);
-        FPGA::SetDurationImpulse(ch, 10e-3f);
-        FPGA::SetPeriodImpulse(ch, 23e-3f);
-        
     }
 }
 
@@ -164,8 +158,9 @@ void Generator::SetDutyRatio(Chan, float)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDuration(Chan, float)
+void Generator::SetDuration(Chan ch, float value)
 {
+    FPGA::SetDurationImpulse(ch, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
