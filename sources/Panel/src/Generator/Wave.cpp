@@ -96,8 +96,8 @@ pString Parameter::Name() const
         {"Вр пика",        "Peak time"},
         {"Коэфф заполн",   "Duty factor"},
         {"Манипуляция",    "Manipulation"},
-        {"Период",         "Period"},
         {"Длительность",   "Duration"},
+        {"Период",         "Period"},
         {"Период пакета",  "Packet period"},
         {"N",              "N"},
         {"     Выход ( ESC )", "     Exit ( ESC )"}
@@ -269,7 +269,7 @@ void Form::OpenCurrentParameter()
         if(CurrentParameter()->GetParent())
         {
             set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
-            Generator::SetParameter(CurrentParameter());
+            Generator::TuneChannel(GetWave()->GetChannel());
         }
         else
        {

@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Multiplexor.h"
+#include "AD9952.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +80,13 @@ void Multiplexor::SetMode(Chan ch, Form form)
     {
         ResetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));
+    }
+
+    if(form.Is(Form::Sine))
+    {
+        if(AD9952::Manipulation::IsEnabled(ch))
+        {
+        }
     }
 }
 

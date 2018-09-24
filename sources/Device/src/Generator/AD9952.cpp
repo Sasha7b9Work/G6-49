@@ -3,6 +3,7 @@
 #include "GeneratroSettings.h"
 #include "Hardware/CPU.h"
 #include "Utils/Console.h"
+#include "FPGA.h"
 #include <math.h>
 
 
@@ -26,11 +27,7 @@ static SPI_HandleTypeDef hSPI3 =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
-bool AD9952::Ramp::enabled[Chan::Number] = {false, false};
-
-float AD9952::Ramp::duration[Chan::Number] = {10e-6f, 10e-6f};
-
-float AD9952::Ramp::amplitude[Chan::Number] = {5.0f, 5.0f};
+bool AD9952::Manipulation::enabled[Chan::Number] = {false, false};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,25 +56,14 @@ void AD9952::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Ramp::SetEnabled(Chan ch, bool enable)
+void AD9952::Manipulation::SetEnabled(Chan ch, bool enable)
 {
     enabled[ch] = enable;
     WriteCFR1(ch);
-}
+    WriteARR(ch, 1);
+    WriteASF(ch, 1024 * 16 - 1 + (1 << 14) + (1 << 15));
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Ramp::SetDuration(Chan ch, float value)
-{
-    duration[ch] = value;
-    WriteRegister(ch, Register::ARR);
-    WriteRegister(ch, Register::ASF);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Ramp::SetAmplitude(Chan ch, float value)
-{
-    amplitude[ch] = value;
-    WriteRegister(ch, Register::ASF);
+    FPGA::SetWaveForm(ch, Form::Sine);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,7 +93,7 @@ void AD9952::SetAmplitude(Chan ch, float amplitude)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteRegister(Chan ch, Register reg)
 {
-    typedef void(*pFuncVCh)(Chan);
+    typedef void(*pFuncVCh)(Chan, uint);
 
     static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, WriteARR, WriteFTW0, WritePOW};
 
@@ -115,89 +101,79 @@ void AD9952::WriteRegister(Chan ch, Register reg)
 
     if (f)
     {
-        f(ch);
+        f(ch, 0);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteCFR1(Chan ch)
+void AD9952::WriteCFR1(Chan ch, uint value)
 {
-    uint value = 0;
-    if(ch == Chan::B)
+    if(value == 0)
     {
-        SetBit(value, 1);
-        SetBit(value, 23);
+        if(ch == Chan::B)
+        {
+            SetBit(value, 1);
+            SetBit(value, 23);
+        }
+        SetBit(value, 9);       // ќднонаправленный режим
+        SetBit(value, 13);
+        if(Manipulation::enabled[ch])
+        {
+            SetBit(value, 24);  // ”станавливаем режим манипул€ции
+        }
+        SetBit(value, 25);      // OSK enable - управление амплитудой
+        SetBit(value, 26);
     }
-    SetBit(value, 9);       // ќднонаправленный режим
-    SetBit(value, 13);
-    if(Ramp::enabled[ch])
-    {
-        SetBit(value, 24);  // ”станавливаем режим "пилы"
-    }
-    SetBit(value, 25);      // OSK enable - управление амплитудой
-    SetBit(value, 26);
     WriteToHardware(ch, Register::CFR1, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteCFR2(Chan ch)
+void AD9952::WriteCFR2(Chan ch, uint value)
 {
-    uint value = 0;
-    SetBit(value, 3);
+    if(value == 0)
+    {
+        SetBit(value, 3);
+    }
     WriteToHardware(ch, Register::CFR2, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WritePOW(Chan ch)
+void AD9952::WritePOW(Chan ch, uint value)
 {
-    uint value = (uint)(setDDS.ad9952[Chan::B].phase / 360.0f * (1 << 13) + 0.5f);
+    if(value == 0)
+    {
+        value = (uint)(setDDS.ad9952[Chan::B].phase / 360.0f * (1 << 13) + 0.5f);
+    }
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteASF(Chan ch)
+void AD9952::WriteASF(Chan ch, uint value)
 {
-    uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
-
-    if(Ramp::enabled[ch])
+    if(value == 0)
     {
-        value = (uint)Ramp::amplitude[ch];
-        uint dur = (uint)Ramp::duration[ch];
-        
-        if(GetBit(dur, 8))
-        {
-            SetBit(value, 14);
-        }
-
-        if(GetBit(dur, 9))
-        {
-            SetBit(value, 15);
-        }
+        value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
     }
-
-    char buffer[100];
-    sprintf(buffer, "ASF %d", value);
-    //Console::AddString(buffer);
-
     WriteToHardware(ch, Register::ASF, value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteFTW0(Chan ch)
+void AD9952::WriteFTW0(Chan ch, uint value)
 {
+    if(value != 0)
+    {
+        WriteToHardware(ch, Register::FTW0, value);
+        return;
+    }
+
     float FTWf = (setDDS.ad9952[ch].frequency / 1e8f) * powf(2, 32);
 
     WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5f));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteARR(Chan ch)
+void AD9952::WriteARR(Chan ch, uint value)
 {
-    uint8 value = (uint8)Ramp::duration[ch];
-    char buffer[100];
-    sprintf(buffer, "ARR %d", value);
-    //Console::AddString(buffer);
-
     WriteToHardware(ch, Register::ARR, value);
 }
 

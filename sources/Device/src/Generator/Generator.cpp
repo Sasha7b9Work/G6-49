@@ -27,17 +27,16 @@ void Generator::Init()
         Chan ch = (Chan::E)i;
         EnableChannel(ch, true);
         Generator::SetFormWave(ch, Form::Sine);
-        Generator::SetFrequency(ch, 4e3f);
+        Generator::SetFrequency(ch, 1e6f);
         Generator::SetOffset(ch, 0.0f);
         Generator::SetAmplitude(ch, 5.0f);
 
-//        FPGA::SetSourceManipulation(ch, FPGA::SourceManipulation::ImpulseA);
+        /*
+        AD9952::Manipulation::SetEnabled(ch, true);
+        FPGA::SetDurationImpulse(ch, 10e-3f);
+        FPGA::SetPeriodImpulse(ch, 23e-3f);
+        */
     }
-    
-    //Generator::SetFormWave(Chan::A, Form::PacketImpuls);
-    //FPGA::SetAmplitude(Chan::A, 10.0f);
-    //FPGA::SetOffset(Chan::A, 0.0f);
-
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

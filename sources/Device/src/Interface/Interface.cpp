@@ -139,23 +139,23 @@ void Interface::SetManipulation()
 {
     Chan ch = (Chan::E)buffer[1];
     bool enabled = GetFloat(&buffer[2]) != 0;
-    AD9952::Ramp::SetEnabled(ch, enabled);
+    AD9952::Manipulation::SetEnabled(ch, enabled);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetManipulationDuration()
 {
     Chan ch = (Chan::E)buffer[1];
-    float duration = (float)((int)(GetFloat(&buffer[2]) + 0.5f));
-    AD9952::Ramp::SetDuration(ch, duration);
+    float duration = GetFloat(&buffer[2]);
+    FPGA::SetDurationImpulse(ch, duration);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetManipulationPeriod()
 {
     Chan ch = (Chan::E)buffer[1];
-    float amplitude = (float)((int)(GetFloat(&buffer[2]) + 0.5f));
-    AD9952::Ramp::SetAmplitude(ch, amplitude);
+    float period = GetFloat(&buffer[2]);
+    FPGA::SetPeriodImpulse(ch, period);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ void Interface::CreateWave()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Reset()
 {
-#ifndef MSVC
+#ifndef WIN32
 
 #define MAIN_PROGRAM_START_ADDRESS  (uint)0x8000000
     typedef void(*pFunction)();
@@ -337,7 +337,10 @@ void Interface::ReceiveCallback()
 {
     if (buffer[0] < CommandPanel::Number)
     {
-        commands[buffer[0]].func();
+        if(buffer[0] != 0)
+        {
+            commands[buffer[0]].func();
+        }
         if (Console::ExistString())
         {
             trans[0] = CommandGenerator::COM_LOG;

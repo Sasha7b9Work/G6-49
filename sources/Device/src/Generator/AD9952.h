@@ -17,22 +17,17 @@ public:
 
     static void SetPhase(Chan ch, float phase);
 
-    /// ‘ункции дл€ модул€ции "пилой"
-    class Ramp
+    /// ћанипул€ци€
+    class Manipulation
     {
+    friend class AD9952;
     public:
         /// ”становить/отменить модулирование синусоиды сигналом "пилы"
         static void SetEnabled(Chan ch, bool enable);
-        /// ”становить длительность
-        static void SetDuration(Chan ch, float duration);
-        /// ”становить размах
-        static void SetAmplitude(Chan ch, float amplitude);
-        /// True означает, что установлена модул€ци€ "пилой"
+        static bool IsEnabled(Chan ch) { return enabled[ch]; };
+    private:
+        /// True означает, что манипул€ци€ включена
         static bool enabled[Chan::Number];
-        /// ƒлительность пилы
-        static float duration[Chan::Number];
-
-        static float amplitude[Chan::Number];
     };
 
 private:
@@ -55,10 +50,10 @@ private:
     static GeneratorWritePin ChipSelect(Chan ch);
     static void Reset();
     static void WriteRegister(Chan ch, Register reg);
-    static void WriteCFR1(Chan ch);
-    static void WriteCFR2(Chan ch);
-    static void WriteARR(Chan ch);
-    static void WriteASF(Chan ch);
-    static void WriteFTW0(Chan ch);
-    static void WritePOW(Chan ch);
+    static void WriteCFR1(Chan ch, uint value = 0);
+    static void WriteCFR2(Chan ch, uint value = 0);
+    static void WriteARR(Chan ch,  uint value = 0);
+    static void WriteASF(Chan ch,  uint value = 0);
+    static void WriteFTW0(Chan ch, uint value = 0);
+    static void WritePOW(Chan ch,  uint value = 0);
 };

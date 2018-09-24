@@ -20,7 +20,6 @@ float                       FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float                       FPGA::offset[Chan::Number] = {5.0f, 5.0f};
 FPGA::ClockFrequency        FPGA::clock = FPGA::ClockFrequency::_100MHz;
 uint64                      FPGA::registers[FPGA::RG::Number] = {0};
-FPGA::SourceManipulation    FPGA::sourceManipulation[Chan::Number] = {FPGA::SourceManipulation::None, FPGA::SourceManipulation::None};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +48,7 @@ void FPGA::SetWaveForm(Chan ch, Form form)
     
     static const StructFunc func[Form::Number] =
     {
-        EmptyFunc,
+        SetManipulationMode,        ///< Здесь включается режим амплитудной манипуляции
         SetRampPlusMode,
         SetRampMinusMode,
         SetMeanderMode,
@@ -72,6 +71,14 @@ void FPGA::SetMeanderMode(Chan ch)
     RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
 
     WriteRegister(regs[ch], data);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetManipulationMode(Chan ch)
+{
+    modeWork[ch] = ModeWork::Manipulation;
+
+    WriteControlRegister();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -155,20 +162,6 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetSourceManipulation(Chan ch, SourceManipulation source)
-{
-    modeWork[ch] = (source == SourceManipulation::None) ? ModeWork::None : ModeWork::Manipulation;
-
-    sourceManipulation[ch] = source;
-
-    WriteControlRegister();
-
-    SetDurationImpulse(ch, 5e-6f);
-
-    SetPeriodImpulse(ch, 10e-6f);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetDurationImpulse(Chan ch, float duration)
 {
     uint64 value = (uint64)(duration / 10e-9f);
@@ -246,28 +239,26 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(sourceManipulation[Chan::A] != SourceManipulation::None)
+    if(modeWork[Chan::A] == ModeWork::Manipulation)
     {
         SetBit(data, 8);
+        SetBit(data, 5);
+    }
+    else
+    {
+        SetBit(data, 5);
+        SetBit(data, 6);
     }
 
-    if(sourceManipulation[Chan::B] != SourceManipulation::None)
+    if(modeWork[Chan::B] == ModeWork::Manipulation)
     {
         SetBit(data, 9);
+        SetBit(data, 4);
     }
-
-    switch(sourceManipulation[Chan::A])
+    else
     {
-        case SourceManipulation::ImpulseA: SetBit(data, 5);                  break;
-        case SourceManipulation::ImpulseB: SetBit(data, 6);                  break;
-        case SourceManipulation::None:     SetBit(data, 5); SetBit(data, 6); break;
-    }
-
-    switch(sourceManipulation[Chan::B])
-    {
-        case SourceManipulation::ImpulseA: SetBit(data, 3);                  break;
-        case SourceManipulation::ImpulseB: SetBit(data, 4);                  break;
-        case SourceManipulation::None:     SetBit(data, 3); SetBit(data, 4); break;
+        SetBit(data, 3);
+        SetBit(data, 4);
     }
 
     if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
@@ -277,11 +268,6 @@ void FPGA::WriteControlRegister()
 
 
     WriteRegister(RG::_0_Control, data);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::EmptyFunc(Chan)
-{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
