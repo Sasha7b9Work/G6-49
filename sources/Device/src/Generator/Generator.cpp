@@ -31,11 +31,25 @@ void Generator::Init()
         Generator::SetOffset(ch, 0.0f);
         Generator::SetAmplitude(ch, 10.0f);
 
-        Generator::SetFormWave(ch, Form::PacketImpuls);
+        /*
+        Generator::SetFormWave(Chan::A, Form::PacketImpuls);
         FPGA::PacketImpulse::SetPeriodImpulse(1e-3f);
         FPGA::PacketImpulse::SetDurationImpulse(1e-4f);
         FPGA::PacketImpulse::SetNumberImpules(3);
         FPGA::PacketImpulse::SetPeriodImpulse(2e-4f);
+        */
+
+        /*
+        Generator::SetFormWave(ch, Form::Impulse);
+        FPGA::SetDurationImpulse(ch, 1e-4f);
+        FPGA::SetPeriodImpulse(ch, 1e-3f);
+        */
+        
+        
+        Generator::SetFormWave(ch, Form::Impulse);
+        FPGA::SetPeriodImpulse(ch, 1e-3f);
+        FPGA::SetDurationImpulse(ch, 1e-4f);        
+        
     }
 }
 
