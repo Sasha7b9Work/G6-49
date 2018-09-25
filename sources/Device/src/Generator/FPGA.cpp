@@ -14,12 +14,13 @@
 #define MIN_VALUE (0)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::ModeWork              FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
-uint8                       FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
-float                       FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
-float                       FPGA::offset[Chan::Number] = {5.0f, 5.0f};
-FPGA::ClockFrequency        FPGA::clock = FPGA::ClockFrequency::_100MHz;
-uint64                      FPGA::registers[FPGA::RG::Number] = {0};
+FPGA::ModeWork          FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+uint8                   FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
+float                   FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
+float                   FPGA::offset[Chan::Number] = {5.0f, 5.0f};
+FPGA::ClockFrequency    FPGA::clock = FPGA::ClockFrequency::_100MHz;
+uint64                  FPGA::registers[FPGA::RG::Number] = {0};
+bool                    FPGA::autoStart[Chan::Number] = {true, true};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,20 +89,6 @@ void FPGA::SetPackedImpulseMode(Chan)
     
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
-
-    //WriteRegister(RG::_6_DurationImpulseA, 5);          // Число импульсов
-    //WriteRegister(RG::_5_PeriodImpulseA,   1e6f);       // Период пачки
-    //WriteRegister(RG::_8_DurationImpulseB, 1e2f);       // Длительность импульса
-    //WriteRegister(RG::_7_PeriodImpulseB,   2e2f);       // Период импульсов
-
-    /*
-    PacketImpulse::SetNumberImpules(2);
-
-    PacketImpulse::SetPeriodPacket(1e-3f);
-    
-    PacketImpulse::SetDurationImpulse(10e-7f);
-    PacketImpulse::SetPeriodImpulse(30e-7f);
-    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,24 +102,6 @@ void FPGA::SetImpulseMode(Chan ch)
     RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
 
     WriteRegister(regs[ch], data);
-
-    // Установим значения по умолчанию для периода и длительности.
-    /// \todo Не забыть убрать
-
-    /*
-    if(ch == Chan::A)
-    {
-        WriteRegister(RG::_3_RectA, (8191 << 14) + 16383);
-        WriteRegister(RG::_5_PeriodImpulseA, (uint64)1e7);
-        WriteRegister(RG::_6_DurationImpulseA, (uint64)1e6);
-    }
-    else
-    {
-        WriteRegister(RG::_4_RectB, (8191 << 14) + 16383);
-        WriteRegister(RG::_7_PeriodImpulseB, (uint64)(1e-3f / 10e-9f));
-        WriteRegister(RG::_8_DurationImpulseB, (uint64)(1e-4f / 10e-9f));
-    }
-    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -213,57 +182,68 @@ void FPGA::WriteControlRegister()
 {
     uint16 data = 0;
 
-    SetBit(data, 0);                               // В нулевом бите 0 записываем только для записи данных в память
+    SetBit(data, RG0::_0_WriteData);                               // В нулевом бите 0 записываем только для записи данных в память
+    SetBit(data, 4);
+    SetBit(data, 5);
 
     switch(modeWork[Chan::A])
     {
         case ModeWork::Meander:     
-            SetBit(data, 8);
+            SetBit(data, RG0::_8_MeanderA);
         case ModeWork::Rectangle:
         case ModeWork::Impulse:
-            SetBit(data, 1);
+            SetBit(data, RG0::_1_ImpulseA);
             break;
         case ModeWork::PackedImpulse:
-            SetBit(data, 1);
-            SetBit(data, 10);
+            SetBit(data, RG0::_1_ImpulseA);
             break;
     }
 
     switch(modeWork[Chan::B])
     {
         case ModeWork::Meander:   
-            SetBit(data, 9);
+            SetBit(data, RG0::_9_MeanderB);
         case ModeWork::Rectangle:
         case ModeWork::Impulse:
-            SetBit(data, 2);
+            SetBit(data, RG0::_2_ImpulseB);
             break;
     }
 
     if(modeWork[Chan::A] == ModeWork::Manipulation)
     {
-        SetBit(data, 8);
-        SetBit(data, 5);
+        SetBit(data, RG0::_8_MeanderA);
     }
     else
     {
-        SetBit(data, 5);
-        SetBit(data, 6);
+        SetBit(data, RG0::_6_ManipulationA);
     }
 
     if(modeWork[Chan::B] == ModeWork::Manipulation)
     {
-        SetBit(data, 9);
-        SetBit(data, 4);
+        SetBit(data,  RG0::_9_MeanderB);
     }
     else
     {
-        SetBit(data, 3);
-        SetBit(data, 4);
+        SetBit(data, RG0::_3_ManipulationB);
     }
 
     if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
     {
-        SetBit(data, 7);
+        SetBit(data, RG0::_7_Freq_MHz);
+    }
+
+    if(modeWork[Chan::A] == ModeWork::PackedImpulse)
+    {
+        SetBit(data, RG0::_12_HandStartPacket);
+    }
+
+    if(!autoStart[Chan::A])
+    {
+        SetBit(data, RG0::_10_HandStartA);
+    }
+    if(!autoStart[Chan::B])
+    {
+        SetBit(data, RG0::_11_HandStartB);
     }
 
 
