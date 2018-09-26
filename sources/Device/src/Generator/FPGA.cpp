@@ -320,6 +320,13 @@ void FPGA::WriteByte(uint8 byte)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
+    static struct StructAlready
+    {
+        bool value;
+        StructAlready(bool v) : value(v) {};
+    }
+    already[RG::Number] = { false, false, false, false, false, false, false, false, false, false, false };
+
 
     static const struct StructBits
     {
@@ -328,33 +335,38 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
     }
     numBits[RG::Number] =
     {
-        16, // RG0_Control,
-        40, // RG1_Freq,
-        20, // RG2_Amplitude,
-        28, // RG3_RectA,
-        28, // RG4_RectB,
-        32, // RG5_PeriodImpulseA,
-        32, // RG6_DurationImpulseA,
-        32, // RG7_PeriodImpulseB,
-        32, // RG8_DurationImpulseB,
-        13, // RG9_FreqMeter
-        28  // RG10_Offset
+        16, // _0_Control,
+        40, // _1_Freq,
+        20, // _2_Amplitude,
+        28, // _3_RectA,
+        28, // _4_RectB,
+        32, // _5_PeriodImpulseA,
+        32, // _6_DurationImpulseA,
+        32, // _7_PeriodImpulseB,
+        32, // _8_DurationImpulseB,
+        13, // _9_FreqMeter
+        28  // _10_Offset
     };
 
     registers[reg] = value;
 
     WriteAddress(reg);
 
-    for (int bit = numBits[reg].value - 1; bit >= 0; bit--)
+    for(int i = 0; i < 2; i++)
     {
-        CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
-        CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
-        CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, false);
+        for (int bit = numBits[reg].value - 1; bit >= 0; bit--)
+        {
+            CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
+            CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
+            CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, false);
+        }
     }
+
+    already[reg].value = true;
 
     CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, true);                         // Теперь переписываем данные из сдвиговоого регистра в FPGA
     CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, false);
-    Timer::PauseOnTime(10);                              // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
+    Timer::PauseOnTime(10);                                                     // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
