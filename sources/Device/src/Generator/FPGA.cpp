@@ -192,8 +192,6 @@ void FPGA::WriteControlRegister()
             SetBit(data, RG0::_8_MeanderA);
         case ModeWork::Rectangle:
         case ModeWork::Impulse:
-            SetBit(data, RG0::_1_ImpulseA);
-            break;
         case ModeWork::PackedImpulse:
             SetBit(data, RG0::_1_ImpulseA);
             break;
@@ -209,42 +207,18 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(modeWork[Chan::A] == ModeWork::Manipulation)
-    {
-        SetBit(data, RG0::_8_MeanderA);
-    }
-    else
-    {
-        SetBit(data, RG0::_6_ManipulationA);
-    }
+    if(modeWork[Chan::A] == ModeWork::Manipulation)  { SetBit(data, RG0::_8_MeanderA); }
+    else                                             { SetBit(data, RG0::_6_ManipulationA); }
 
-    if(modeWork[Chan::B] == ModeWork::Manipulation)
-    {
-        SetBit(data,  RG0::_9_MeanderB);
-    }
-    else
-    {
-        SetBit(data, RG0::_3_ManipulationB);
-    }
+    if(modeWork[Chan::B] == ModeWork::Manipulation)  { SetBit(data, RG0::_9_MeanderB); }
+    else                                             { SetBit(data, RG0::_3_ManipulationB); }
 
-    if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
-    {
-        SetBit(data, RG0::_7_Freq_MHz);
-    }
+    if(FPGA::clock == FPGA::ClockFrequency::_1MHz)   { SetBit(data, RG0::_7_Freq_MHz); }
 
-    if(modeWork[Chan::A] == ModeWork::PackedImpulse)
-    {
-        SetBit(data, RG0::_12_HandStartPacket);
-    }
+    if(modeWork[Chan::A] == ModeWork::PackedImpulse) { SetBit(data, RG0::_12_HandStartPacket); }
 
-    if(!autoStart[Chan::A])
-    {
-        SetBit(data, RG0::_10_HandStartA);
-    }
-    if(!autoStart[Chan::B])
-    {
-        SetBit(data, RG0::_11_HandStartB);
-    }
+    if(!autoStart[Chan::A])                          { SetBit(data, RG0::_10_HandStartA); }
+    if(!autoStart[Chan::B])                          { SetBit(data, RG0::_11_HandStartB); }
 
 
     WriteRegister(RG::_0_Control, data);
@@ -346,7 +320,13 @@ void FPGA::WriteByte(uint8 byte)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
-    int numBits[Register::Number] =
+
+    static const struct StructBits
+    {
+        int value;
+        StructBits(int v) : value(v) {};
+    }
+    numBits[RG::Number] =
     {
         16, // RG0_Control,
         40, // RG1_Freq,
@@ -365,7 +345,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
 
     WriteAddress(reg);
 
-    for (int bit = numBits[reg] - 1; bit >= 0; bit--)
+    for (int bit = numBits[reg].value - 1; bit >= 0; bit--)
     {
         CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
         CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, true);                    // И записываем его в ПЛИС

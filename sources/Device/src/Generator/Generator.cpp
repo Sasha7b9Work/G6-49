@@ -41,16 +41,20 @@ void Generator::Init()
 
         /*
         Generator::SetFormWave(ch, Form::Impulse);
-        FPGA::SetDurationImpulse(ch, 1e-4f);
-        FPGA::SetPeriodImpulse(ch, 1e-3f);
-        */
-        
-        
-        Generator::SetFormWave(ch, Form::Impulse);
         FPGA::SetPeriodImpulse(ch, 1e-3f);
         FPGA::SetDurationImpulse(ch, 1e-4f);        
-        
+        */
     }
+
+    
+    Generator::SetFormWave(Chan::A, Form::Impulse);
+    FPGA::SetDurationImpulse(Chan::A, 2e-4f);
+    FPGA::SetPeriodImpulse(Chan::A, 1e-3f);
+    
+    
+    Generator::SetFormWave(Chan::B, Form::Impulse);
+    FPGA::SetDurationImpulse(Chan::B, 2e-4f);
+    FPGA::SetPeriodImpulse(Chan::B, 1e-3f);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

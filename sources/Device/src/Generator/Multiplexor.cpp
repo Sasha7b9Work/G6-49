@@ -81,13 +81,6 @@ void Multiplexor::SetMode(Chan ch, Form form)
         ResetPin(PIN_MX(ch, 0));
         ResetPin(PIN_MX(ch, 1));
     }
-
-    if(form.Is(Form::Sine))
-    {
-        if(AD9952::Manipulation::IsEnabled(ch))
-        {
-        }
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
