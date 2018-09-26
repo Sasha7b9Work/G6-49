@@ -93,7 +93,7 @@ void Generator::SetParameter(Parameter *param)
     static const CommandPanel commands[Parameter::Number] =
     {
         CommandPanel::SetFrequency,
-        CommandPanel::None,
+        CommandPanel::SetFrequency,
         CommandPanel::SetAmplitude,
         CommandPanel::SetOffset,
         CommandPanel::SetDuration,
@@ -119,6 +119,10 @@ void Generator::SetParameter(Parameter *param)
     if(param->Is(Parameter::Offset))
     {
         value -= 5.0f;
+    }
+    else if(param->Is(Parameter::Period))
+    {
+        value = 1.0f / value;
     }
 
     memcpy(&buffer[2], &value, 4);

@@ -21,6 +21,8 @@ float                   FPGA::offset[Chan::Number] = {5.0f, 5.0f};
 FPGA::ClockFrequency    FPGA::clock = FPGA::ClockFrequency::_100MHz;
 uint64                  FPGA::registers[FPGA::RG::Number] = {0};
 bool                    FPGA::autoStart[Chan::Number] = {true, true};
+float                   FPGA::PacketImpulse::periodImpulse = 0.0f;
+float                   FPGA::PacketImpulse::durationImpulse = 0.0f;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,8 +87,6 @@ void FPGA::SetManipulationMode(Chan ch)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetPackedImpulseMode(Chan)
 {
-    SetImpulseMode(Chan::A);
-    
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
 }
@@ -148,23 +148,23 @@ void FPGA::PacketImpulse::SetPeriodPacket(float period)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::PacketImpulse::SetDurationImpulse(float duration)
 {
+    PacketImpulse::durationImpulse = duration;
     uint64 n = (uint64)(duration / 10e-9f);
     WriteRegister(RG::_8_DurationImpulseB, n - 1);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::PacketImpulse::SetNumberImpules(uint n)
+void FPGA::PacketImpulse::SetNumberImpules(uint value)
 {
-    if(n < 2)
-    {
-        n = 2;
-    }
-    WriteRegister(RG::_6_DurationImpulseA, n - 2);
+    uint64 n = (uint64)(((value - 1) * periodImpulse + durationImpulse) / 10e-9f);
+
+    WriteRegister(RG::_6_DurationImpulseA, n);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::PacketImpulse::SetPeriodImpulse(float period)
 {
+    PacketImpulse::periodImpulse = period;
     uint64 n = (uint64)(period / 10e-9f);
     WriteRegister(RG::_7_PeriodImpulseB, n - 2);
 }

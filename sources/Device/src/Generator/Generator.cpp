@@ -30,31 +30,29 @@ void Generator::Init()
         Generator::SetFrequency(ch, 1e6f);
         Generator::SetOffset(ch, 0.0f);
         Generator::SetAmplitude(ch, 10.0f);
-
-        /*
-        Generator::SetFormWave(Chan::A, Form::PacketImpuls);
-        FPGA::PacketImpulse::SetPeriodImpulse(1e-3f);
-        FPGA::PacketImpulse::SetDurationImpulse(1e-4f);
-        FPGA::PacketImpulse::SetNumberImpules(3);
-        FPGA::PacketImpulse::SetPeriodImpulse(2e-4f);
-        */
-
-        /*
-        Generator::SetFormWave(ch, Form::Impulse);
-        FPGA::SetPeriodImpulse(ch, 1e-3f);
-        FPGA::SetDurationImpulse(ch, 1e-4f);        
-        */
     }
 
     
-    Generator::SetFormWave(Chan::A, Form::Impulse);
-    FPGA::SetDurationImpulse(Chan::A, 2e-4f);
-    FPGA::SetPeriodImpulse(Chan::A, 1e-3f);
+    for(int i = 0; i < 1; i++)
+    {
+        Generator::SetFormWave(Chan::A, Form::PacketImpuls);
+        FPGA::PacketImpulse::SetPeriodImpulse(2e-4f);
+        FPGA::PacketImpulse::SetDurationImpulse(1e-4f);
+        FPGA::PacketImpulse::SetNumberImpules(3);
+
+        FPGA::PacketImpulse::SetPeriodPacket(1e-3f);
+
+        /*
+        Generator::SetFormWave(Chan::A, Form::Impulse);
+        FPGA::SetPeriodImpulse(Chan::A, 1.0001e-3f);
+        FPGA::SetDurationImpulse(Chan::A, 2e-4f);
+        
     
-    
-    Generator::SetFormWave(Chan::B, Form::Impulse);
-    FPGA::SetDurationImpulse(Chan::B, 2e-4f);
-    FPGA::SetPeriodImpulse(Chan::B, 1e-3f);
+        Generator::SetFormWave(Chan::B, Form::Impulse);
+        FPGA::SetPeriodImpulse(Chan::B, 1e-3f);
+        FPGA::SetDurationImpulse(Chan::B, 1e-4f);
+        */
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -39,6 +39,10 @@ public:
         static void SetDurationImpulse(float duration);
         /// Устанавливает период следования импульсов в пачке
         static void SetPeriodImpulse(float period);
+
+        static float periodImpulse;
+
+        static float durationImpulse;
     };
 
     struct ModeWork
