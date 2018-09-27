@@ -20,11 +20,11 @@ static TIM_HandleTypeDef handleTIM4;
 static uint8 TS_flag = 0;
 TS_StateTypeDef TS_state = { 0 };
 
-#define WIDTH_BUTTON  150
-#define HEIGHT_BUTTON 80
-#define DELTA_BUTTON  10
-static int x0 = 350;
-static int y0 = 25;
+#define WIDTH_BUTTON  88
+#define HEIGHT_BUTTON 93
+#define DELTA_BUTTON  5
+static int x0 = 642;
+static int y0 = 0;
 
 struct StructButton
 {
