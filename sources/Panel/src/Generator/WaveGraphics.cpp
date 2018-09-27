@@ -17,7 +17,7 @@ void Wave::Graphics::Draw(Chan ch)
 {
     int x0 = X();
     int y0 = Y(ch);
-    Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::GREEN_5);
+    Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::BLUE_50);
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);

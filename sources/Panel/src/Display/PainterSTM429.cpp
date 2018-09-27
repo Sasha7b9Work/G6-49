@@ -55,10 +55,38 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
 {
     SetColor(col);
 
+#ifdef OPEN
+
+    if(doubleSize)
+    {
+        y *= 2;
+        x0 *= 2;
+        x1 *= 2;
+    }
+
+#endif
+
     uint8 *address = Display::GetBuffer() + x0 + y * BUFFER_WIDTH;
     uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
 
     uint8 value = currentColor.value;
+
+#ifdef OPEN
+
+    for (int x = x0; x <= x1; ++x)
+    {
+        if (address < end)
+        {
+            *address = value;
+            if(doubleSize)
+            {
+                *(address + BUFFER_WIDTH) = value;
+            }
+            ++address;
+        };
+    }
+
+#else
 
     for (int x = x0; x <= x1; ++x)
     {
@@ -67,12 +95,25 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
             *address++ = value;
         };
     }
+
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawVLine(int x, int y0, int y1, Color col)
 {
     SetColor(col);
+
+#ifdef OPEN
+
+    if(doubleSize)
+    {
+        x *= 2;
+        y0 *= 2;
+        y1 *= 2;
+    }
+
+#endif
 
     uint8 *address = Display::GetBuffer() + x + y0 * BUFFER_WIDTH;
     uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
@@ -84,6 +125,12 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
         if(address < end)
         {
             *address = value;
+#ifdef OPEN
+            if(doubleSize)
+            {
+                *(address + 1) = value;
+            }
+#endif
         };
         address += BUFFER_WIDTH;
     }
@@ -183,10 +230,39 @@ void Painter::SetColor(Color color)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::SetPoint(int x, int y)
 {
+#ifdef OPEN
+
+    if(doubleSize)
+    {
+        x *= 2;
+        y *= 2;
+    }
+
+#endif
+
+    uint8 *buffer = Display::GetBuffer() + y * BUFFER_WIDTH + x;
+
+#ifdef OPEN
+    if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
+    {
+        *buffer = currentColor.value;
+        if(doubleSize)
+        {
+            *(buffer + BUFFER_WIDTH) = currentColor.value;
+            buffer++;
+            *buffer = currentColor.value;
+            *(buffer + BUFFER_WIDTH) = currentColor.value;
+        }
+    }
+
+#else
+
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {
         *(Display::GetBuffer() + y * BUFFER_WIDTH + x) = currentColor.value;
     }
+
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

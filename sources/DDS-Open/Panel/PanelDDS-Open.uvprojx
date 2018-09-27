@@ -657,11 +657,6 @@
               <FilePath>..\..\Panel\src\Display\InputWindow.cpp</FilePath>
             </File>
             <File>
-              <FileName>InputWindowStruct.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Display\InputWindowStruct.h</FilePath>
-            </File>
-            <File>
               <FileName>InputWindowStruct.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\Panel\src\Display\InputWindowStruct.cpp</FilePath>
