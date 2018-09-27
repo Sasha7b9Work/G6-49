@@ -73,7 +73,8 @@ commands[CommandPanel::Number] =
     Interface::SetManipulationDuration,  /// SetManipulationDuration
     Interface::SetManipulationPeriod,    /// SetManipulationPeriod
     Interface::SetPacketPeriod,
-    Interface::SetPacketNumber
+    Interface::SetPacketNumber,
+    Interface::SetStartMode
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,6 +149,11 @@ void Interface::SetManipulationDuration()
     Chan ch = (Chan::E)buffer[1];
     float duration = GetFloat(&buffer[2]);
     FPGA::SetDurationImpulse(ch, duration);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetStartMode()
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

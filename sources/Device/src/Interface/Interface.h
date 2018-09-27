@@ -45,6 +45,8 @@ public:
 
     static void SetPacketNumber();
 
+    static void SetStartMode();
+
 private:
 
     /// ¬озвращает значение типа float, хран€щеес€ в массиве

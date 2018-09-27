@@ -80,6 +80,21 @@ struct FreqFiltr
     operator uint() const { return (uint)value; };
 };
 
+/// Режим запуска
+struct StartMode
+{
+    enum E
+    {
+        Auto,           ///< Автоматический
+        ComparatorA,    ///< Компаратор канала A (в момент перехода из нуля в плюс выхода AD9952 канала A
+        ShaperB,        ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
+        Single          ///< Однократный запуск по нажатию кнопки
+    } value;
+
+    StartMode(float v) : value((E)((int)(v + 0.5f))) {};
+    operator uint8() const { return (uint8)value; };
+};
+
 #ifdef WIN32
 #pragma warning(pop)
 #endif

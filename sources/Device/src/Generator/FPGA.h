@@ -28,6 +28,8 @@ public:
 
     static void SetPeriodImpulse(Chan ch, float period);
 
+    static void SetStartMode(Chan ch, StartMode mode);
+
     class PacketImpulse
     {
     public:

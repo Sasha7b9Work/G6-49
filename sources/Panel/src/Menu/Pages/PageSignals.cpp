@@ -24,7 +24,7 @@ static void OnPress_Channel(bool)
     numForm = FORM_CURRENT->value;
 }
 
-DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - КАНАЛ ---
+DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
     "КАНАЛ", "CHANNEL",
     "Выбор канала для настройки.",
     "Selecting a channel to set up.",
@@ -48,7 +48,7 @@ void OnPress_Form(bool)
     Generator::TuneChannel(CURRENT_CHANNEL);
 }
 
-DEF_CHOICE_6( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ФОРМА ---
+DEF_CHOICE_6( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
@@ -81,14 +81,14 @@ static void OnPress_ChnageParameter()
     }
 }
 
-DEF_BUTTON( bChangeParameter,                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА ---
+DEF_BUTTON( bChangeParameter,                                                                 //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
     "Изменить", "Change",
     "Открывает окно ввода параметра.",
     "Opens the parameter input window.",
     pSignals, FuncActive, OnPress_ChnageParameter, FuncDraw
 )
 
-DEF_CHOICE_PARAMETER(cParameters,                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ПАРАМЕТР ---
+DEF_CHOICE_PARAMETER(cParameters,                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки.",
     "Choosing a setting for customization.",
@@ -96,16 +96,60 @@ DEF_CHOICE_PARAMETER(cParameters,                                               
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cTypeTune,                                                                                      //--- НАСТРОЙКИ СИГНАЛОВ 2 - ЗАСЫЛКА ---
+DEF_CHOICE_2(cTypeTune,                                                                                         //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
     "ЗАСЫЛКА", "SENDING",
     "Определяет периодичность засылки настроек сигналов в устройство управления.",
     "Specifies the frequency of sending signal settings to the control device.",
-    "ОДНОКРАТНО", "SINGLE", "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
-    "The signal settings are sent once, after you press the confirm button.",
-    "НЕПРЕРЫВНО", "CONTINUOUSLY", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
-    "Sending of signal settings occurs synchronously with changing information on the screen.",
+    "ОДНОКРАТНО", "SINGLE",         "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
+                                    "The signal settings are sent once, after you press the confirm button.",
+    "НЕПРЕРЫВНО", "CONTINUOUSLY",   "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
+                                    "Sending of signal settings occurs synchronously with changing information on the screen.",
     FLAG_1, BIT_TUNE_FULL, pSignals, FuncActive, FuncChangedChoice, FuncDraw
 )
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_ModeStartA(bool)
+{
+    Generator::LoadStartMode(Chan::A);
+}
+
+
+DEF_CHOICE_4(   cModeStartA,                                                                            //--- НАСТРОЙКИ СИГНАЛОВ A - Режим запуска ---
+    "Режим запуска", "Launch mode",
+    "Определеяет режим запуска",
+    "Defines the launch mode",
+    "Авто", "Auto",                 "",
+                                    "",
+    "Компаратор А", "Comparator A", "",
+                                    "",
+    "Формирователь B", "Shaper B",  "",
+                                    "",
+    "Однократный", "Single",        "",
+                                    "",
+    START_MODE_A, pSignals, FuncActive, OnPress_ModeStartA, FuncDraw
+)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_ModeStartB(bool)
+{
+    Generator::LoadStartMode(Chan::B);
+}
+
+DEF_CHOICE_4(   cModeStartB,                                                                            //--- НАСТРОЙКИ СИГНАЛОВ B - Режим запуска ---
+    "Режим запуска", "Launch mode",
+    "Определеяет режим запуска",
+    "Defines the launch mode",
+    "Авто", "Auto",                 "",
+                                    "",
+    "Компаратор А", "Comparator A", "",
+                                    "",
+    "Формирователь B", "Shaper B",  "",
+                                    "",
+    "Однократный", "Single",        "",
+                                    "",
+    START_MODE_B, pSignals, FuncActive, OnPress_ModeStartB, FuncDraw
+)
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static bool OnKey(Control key)
@@ -118,14 +162,16 @@ static bool OnKey(Control key)
     return false;
 }
 
-DEF_PAGE_5( pSignals,
+DEF_PAGE_7( pSignals,
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",
     "", "",
-    cChannel,       ///< НАСТРОЙКИ СИГНАЛОВ - КАНАЛ
-    cForm,          ///< НАСТРОЙКИ СИГНАЛОВ - ФОРМА
-    cParameters,    ///< НАСТРОЙКИ СИГНАЛОВ - ПАРАМЕТР
-    bChangeParameter,  ///< НАСТРОЙКИ СИГНАЛОВ - ВВЕСТИ ЗНАЧЕНИЕ ПАРАМЕТРА
-    cTypeTune,      ///< НАСТРОЙКИ СИГНАЛОВ - ЗАСЫЛКА
+    cChannel,           ///< НАСТРОЙКИ СИГНАЛОВ - Канал
+    cForm,              ///< НАСТРОЙКИ СИГНАЛОВ - Форма
+    cParameters,        ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
+    bChangeParameter,   ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
+    cModeStartA,        ///< НАСТРОЙКИ СИГНАЛОВ - Режим запуска A
+    cModeStartB,        ///< НАСТРОЙКИ СИГНАЛОВ - Режим запуска B
+    cTypeTune,          ///< НАСТРОЙКИ СИГНАЛОВ - Засылки
     Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
 )
 

@@ -5,6 +5,7 @@
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"
+#include "CommonTypes.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,15 +34,18 @@ void Generator::Init()
     }
 
     
-    for(int i = 0; i < 1; i++)
+    for(int i = 0; i < 2; i++)
     {
+        /*
         Generator::SetFormWave(Chan::A, Form::PacketImpuls);
-        FPGA::PacketImpulse::SetPeriodImpulse(2e-4f);
+        FPGA::PacketImpulse::SetPeriodImpulse(2e-4  f);
         FPGA::PacketImpulse::SetDurationImpulse(1e-4f);
         FPGA::PacketImpulse::SetNumberImpules(3);
 
         FPGA::PacketImpulse::SetPeriodPacket(1e-3f);
+        */
 
+        
         /*
         Generator::SetFormWave(Chan::A, Form::Impulse);
         FPGA::SetPeriodImpulse(Chan::A, 1.0001e-3f);
@@ -112,7 +116,8 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         EmptyFunc,
         EmptyFunc,
         SetPacketPeriod,
-        SetPacketNumber
+        SetPacketNumber,
+        SetStartMode
     };
 
     func[command].func(ch, value);
@@ -129,6 +134,12 @@ void Generator::SetFrequency(Chan ch, float frequency)
     {
         FPGA::SetFrequency(ch, frequency);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetStartMode(Chan ch, float mode)
+{
+    FPGA::SetStartMode(ch, (StartMode)mode);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

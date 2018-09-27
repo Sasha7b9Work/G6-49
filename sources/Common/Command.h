@@ -70,6 +70,9 @@ struct CommandPanel
         SetManipulationPeriod,      ///< ”становить период следовани€ импульсов в режиме манипул€ции
         SetPacketPeriod,
         SetPacketNumber,
+        // 0            1        2
+        // SetStartMode NUM_CHAN value
+        SetStartMode,               ///< ”становить режим запуска по каналу
         Number
     } value;
     CommandPanel(E v) : value(v){};

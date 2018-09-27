@@ -51,13 +51,14 @@ static const Settings defSet =
         Parameter::Frequency,
         Parameter::Frequency
     },
-    (Page *)Menu::mainPage,             // menu_page
-    {0},                                // menu_posActItem[]
-    {0},                                // menu_currentSubPage[]
-    FrequencyMeter::BillingTime::_1ms,  // freq_billingTime
-    FrequencyMeter::AvePeriod::_1,      // freq_avePeriod
-    FreqTimeStamps::_10MHz,             // freq_timeStamps
-    {false, false},                     // sineManipulation
+    (Page *)Menu::mainPage,                 // menu_page
+    {0},                                    // menu_posActItem[]
+    {0},                                    // menu_currentSubPage[]
+    FrequencyMeter::BillingTime::_1ms,      // freq_billingTime
+    FrequencyMeter::AvePeriod::_1,          // freq_avePeriod
+    FreqTimeStamps::_10MHz,                 // freq_timeStamps
+    {false, false},                         // sineManipulation
+    {StartMode::Auto, StartMode::Auto},     // fpga_StartMode
 
     BINARY_U32(00000000, 00000000, 00010110, 01011100), // flag1
 //                           ||||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
