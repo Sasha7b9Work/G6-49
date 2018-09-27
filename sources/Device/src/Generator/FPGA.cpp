@@ -21,7 +21,7 @@ float                   FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float                   FPGA::offset[Chan::Number] = {5.0f, 5.0f};
 FPGA::ClockFrequency    FPGA::clock = FPGA::ClockFrequency::_100MHz;
 uint64                  FPGA::registers[FPGA::RG::Number] = {0};
-bool                    FPGA::autoStart[Chan::Number] = {true, true};
+StartMode               FPGA::startMode[Chan::Number] = {StartMode::Auto, StartMode::Auto};
 float                   FPGA::PacketImpulse::periodImpulse = 0.0f;
 float                   FPGA::PacketImpulse::durationImpulse = 0.0f;
 
@@ -223,11 +223,31 @@ void FPGA::WriteControlRegister()
 
     if(modeWork[Chan::A] == ModeWork::PackedImpulse) { SetBit(data, RG0::_12_HandStartPacket); }
 
-    if(!autoStart[Chan::A])                          { SetBit(data, RG0::_10_HandStartA); }
-    if(!autoStart[Chan::B])                          { SetBit(data, RG0::_11_HandStartB); }
-
+    if(startMode[Chan::A] == StartMode::Single)
+    {
+        SetBit(data, RG0::_10_HandStartA);
+        SetBit(data, RG0::_13_StartMode0);
+        SetBit(data, RG0::_14_StartMode1);
+    }
+    if(startMode[Chan::B] == StartMode::Single)
+    {
+        SetBit(data, RG0::_11_HandStartB);
+        SetBit(data, RG0::_13_StartMode0);
+        SetBit(data, RG0::_14_StartMode1);
+    }
 
     WriteRegister(RG::_0_Control, data);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool FPGA::Start()
+{
+    if(startMode[Chan::A] != StartMode::Auto || startMode[Chan::B] != StartMode::Auto)
+    {
+        WriteRegister(RG::_11_Start, 2);
+        return true;
+    }
+    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -344,14 +364,6 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
     Console::AddString((char *)names[reg]);
 
 
-    static struct StructAlready
-    {
-        bool value;
-        StructAlready(bool v) : value(v) {};
-    }
-    already[RG::Number] = { false, false, false, false, false, false, false, false, false, false, false };
-
-
     static const struct StructBits
     {
         int value;
@@ -369,7 +381,8 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         32, // _7_PeriodImpulseB,
         32, // _8_DurationImpulseB,
         13, // _9_FreqMeter
-        28  // _10_Offset
+        28, // _10_Offset
+        2,  // _11_Offset
     };
 
     registers[reg] = value;
@@ -385,8 +398,6 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
             CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, false);
         }
     }
-
-    already[reg].value = true;
 
     CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, true);                         // Теперь переписываем данные из сдвиговоого регистра в FPGA
     CPU::WritePin(GeneratorWritePin::FPGA_WR_RG, false);
