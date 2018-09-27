@@ -113,6 +113,9 @@ void Settings::Load(bool _default)
         CPU::FLASH_::LoadSettings();
     }
 
+    Generator::LoadStartMode(Chan::A);
+    Generator::LoadStartMode(Chan::B);
+
     Generator::TuneChannel(Chan::A);
     Generator::TuneChannel(Chan::B);
     

@@ -43,8 +43,8 @@ void Console::Draw()
     for (int i = 0; i < numStrings; i++)
     {
         int length = Font::GetLengthText(&buffer[i][0]);
-        Painter::FillRegion(2, y, length, 8, Color::BACK);
+        Painter::FillRegion(2, y, length, 9, Color::BACK);
         Text::DrawText(2, y, &buffer[i][0], Color::FILL);
-        y += 8;
+        y += 9;
     }
 }

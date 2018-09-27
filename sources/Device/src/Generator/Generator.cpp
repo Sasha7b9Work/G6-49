@@ -117,7 +117,7 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         EmptyFunc,
         SetPacketPeriod,
         SetPacketNumber,
-        SetStartMode
+        EmptyFunc
     };
 
     func[command].func(ch, value);
@@ -134,12 +134,6 @@ void Generator::SetFrequency(Chan ch, float frequency)
     {
         FPGA::SetFrequency(ch, frequency);
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetStartMode(Chan ch, float mode)
-{
-    FPGA::SetStartMode(ch, (StartMode)mode);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

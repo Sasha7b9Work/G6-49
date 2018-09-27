@@ -229,6 +229,8 @@ void Form::TuneGenerator(Chan ch)
         SendParameterToGenerator(Parameter::Frequency);
         SendParameterToGenerator(Parameter::Amplitude);
         SendParameterToGenerator(Parameter::Offset);
+        SendParameterToGenerator(Parameter::Period);
+        SendParameterToGenerator(Parameter::Duration);
     }
 }
 

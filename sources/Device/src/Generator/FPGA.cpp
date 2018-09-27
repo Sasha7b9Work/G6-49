@@ -4,6 +4,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Generator/Generator.h"
+#include "Utils/Console.h"
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -325,6 +326,24 @@ void FPGA::WriteByte(uint8 byte)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
+    static const pString names[RG::Number] =
+    {
+        "Управление",
+        "Частота",
+        "Размах",
+        "Прямоуг A",
+        "Прямоуг B",
+        "Период A",
+        "Длит A",
+        "Период B",
+        "Длит B",
+        "Частотомер",
+        "Смещение"
+    };
+
+    Console::AddString((char *)names[reg]);
+
+
     static struct StructAlready
     {
         bool value;

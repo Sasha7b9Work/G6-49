@@ -39,7 +39,5 @@ private:
 
     static void SetPacketNumber(Chan ch, float number);
 
-    static void SetStartMode(Chan ch, float mode);
-
     static void EmptyFunc(Chan, float);
 };
