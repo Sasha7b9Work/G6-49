@@ -93,7 +93,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>STM32F746xx;WIN32;USE_HAL_DRIVER;USE_HAL_TIM_REGISTER_CALLBACKS=0;__FPU_USED=0;OPEN</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4201;4211;4310;4623;4626;4774;4820;5027;5045</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4201;4211;4310;4514;4623;4626;4774;4820;5027;5045</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
@@ -154,7 +154,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Common\Command.cpp" />
     <ClCompile Include="..\..\common\libs\STM32Cube_F7\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -185,8 +184,6 @@
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp" />
-    <ClCompile Include="..\..\Panel\src\Generator\WaveSignal.cpp" />
-    <ClCompile Include="..\..\Panel\src\globals.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp" />
     <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
@@ -199,13 +196,7 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageRegisters.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSettings2.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageUSB.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\CommonFunctions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -290,13 +281,7 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageRegisters.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSettings2.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageUSB.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />

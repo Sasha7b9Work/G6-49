@@ -177,7 +177,11 @@ void Generator::SendToInterface(uint8 *data, uint16 size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+#ifdef OPEN
+void Generator::SendToInterfaceNew(uint8 *, uint16 size)
+#else
 void Generator::SendToInterfaceNew(uint8 *buffer, uint16 size)
+#endif
 {
     uint8 data[6] = {0};
     memset(data, 0, 6);
@@ -188,9 +192,13 @@ void Generator::SendToInterfaceNew(uint8 *buffer, uint16 size)
     data[2] = bs.byte0;
     data[3] = bs.byte1;
 
+#ifndef OPEN
+
     CPU::SPI4_::Transmit(data, 6, 100);             /// Посылаем в прибор информацию о том, сколько байт
 
     CPU::SPI4_::Transmit(buffer, size, 100);        /// И засылаем наши данные
+
+#endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

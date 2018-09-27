@@ -43,12 +43,12 @@ static StructButton *btnSelected = 0;
 
 static StructButton strBtn[6][4] =
 {
-    { {"F1",  Control::B_F1},  {"1",        Control::B_1},      {"2",    Control::B_2},     {"3",         Control::B_3} },
-    { {"F2",  Control::B_F2},  {"4",        Control::B_4},      {"5",    Control::B_5},     {"6",         Control::B_6} },
-    { {"F3",  Control::B_F3},  {"7",        Control::B_7},      {"8",    Control::B_8},     {"9",         Control::B_9} },
-    { {"F4",  Control::B_F4},  {".",        Control::B_Dot},    {"0",    Control::B_0},     {"-",         Control::B_Minus} },
-    { {"ON1", Control::B_ON1}, {"REG LEFT", Control::REG_LEFT}, {"BTN",  Control::REG_BTN}, {"REG RIGHT", Control::REG_RIGHT} },
-    { {"ON2", Control::B_ON2}, {"ESC",      Control::B_ESC},    {"LEFT", Control::B_LEFT},  {"RIGHT",     Control::B_RIGHT} }
+    { {"F1",  Control::F1},  {"1",        Control::_1},        {"2",    Control::_2},          {"3",         Control::_3} },
+    { {"F2",  Control::F2},  {"4",        Control::_4},        {"5",    Control::_5},          {"6",         Control::_6} },
+    { {"F3",  Control::F3},  {"7",        Control::_7},        {"8",    Control::_8},          {"9",         Control::_9} },
+    { {"F4",  Control::F4},  {".",        Control::Dot},       {"0",    Control::_0},          {"-",         Control::Minus} },
+    { {"ON1", Control::On1}, {"REG LEFT", Control::Reg::Left}, {"BTN",  Control::Reg::Button}, {"REG RIGHT", Control::Reg::Right} },
+    { {"ON2", Control::On2}, {"ESC",      Control::Esc},       {"LEFT", Control::Left},        {"RIGHT",     Control::Right} }
 };
 
 
@@ -112,7 +112,7 @@ Control CPU::Keyboard::GetNextControl()
 
     if (BufferIsEmpty())
     {
-        retValue = Control::B_None;
+        retValue = Control::None;
     }
     else
     {

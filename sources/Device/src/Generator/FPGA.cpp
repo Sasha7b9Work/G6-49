@@ -399,6 +399,7 @@ void FPGA::WriteByte(uint8 byte)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
+    /*
     static const pString names[RG::Number] =
     {
         "Управление",
@@ -415,7 +416,8 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         "Старт"
     };
 
-    //Console::AddString((char *)names[reg]);
+    Console::AddString((char *)names[reg]);
+    */
 
 
     static const struct StructBits
