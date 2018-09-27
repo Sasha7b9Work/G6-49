@@ -50,13 +50,19 @@ void Menu::Update()
         {
             if (key.Is(Control::On1))
             {
-                SWITCH_CHANNEL_A;
+                if(!START_MODE_A_IS_SINGLE)
+                {
+                    SWITCH_CHANNEL_A;
+                }
                 Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
                 continue;
             }
-            else if (key.Is(Control::On2))
+            else if (key.Is(Control::On2) && START_MODE_B != StartMode::Single)
             {
-                SWITCH_CHANNEL_B;
+                if(!START_MODE_B_IS_SINGLE)
+                {
+                    SWITCH_CHANNEL_B;
+                }
                 Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
                 continue;
             }

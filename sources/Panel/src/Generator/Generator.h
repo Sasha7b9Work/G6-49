@@ -11,9 +11,11 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define START_MODE(ch)  (set.fpga_startMode[ch])
-#define START_MODE_A    START_MODE(Chan::A)
-#define START_MODE_B    START_MODE(Chan::B)
+#define START_MODE(ch)          (set.fpga_startMode[ch])
+#define START_MODE_A            START_MODE(Chan::A)
+#define START_MODE_B            START_MODE(Chan::B)
+#define START_MODE_A_IS_SINGLE  (START_MODE_A == StartMode::Single)
+#define START_MODE_B_IS_SINGLE  (START_MODE_B == StartMode::Single)
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

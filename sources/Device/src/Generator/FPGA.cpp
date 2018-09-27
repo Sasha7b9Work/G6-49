@@ -179,8 +179,10 @@ void FPGA::SetPeriodImpulse(Chan ch, float period)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetStartMode(Chan, StartMode)
+void FPGA::SetStartMode(Chan ch, StartMode mode)
 {
+    startMode[ch] = mode;
+    WriteControlRegister();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -358,7 +360,8 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         "Период B",
         "Длит B",
         "Частотомер",
-        "Смещение"
+        "Смещение",
+        "Старт"
     };
 
     Console::AddString((char *)names[reg]);
