@@ -607,11 +607,6 @@
               <FilePath>..\..\Panel\src\main.cpp</FilePath>
             </File>
             <File>
-              <FileName>globals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\globals.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\Panel\src\Log.cpp</FilePath>
@@ -626,11 +621,6 @@
         <Group>
           <GroupName>common</GroupName>
           <Files>
-            <File>
-              <FileName>Command.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Common\Command.cpp</FilePath>
-            </File>
             <File>
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
@@ -942,26 +932,6 @@
               <FilePath>..\..\Panel\src\Menu\Pages\PageService.h</FilePath>
             </File>
             <File>
-              <FileName>PageSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageSettings2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings2.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSettings2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageSettings2.h</FilePath>
-            </File>
-            <File>
               <FileName>PageFrequencyCounter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp</FilePath>
@@ -972,44 +942,14 @@
               <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h</FilePath>
             </File>
             <File>
-              <FileName>PageUSB.cpp</FileName>
+              <FileName>PageSignals.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageUSB.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageSignals.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageUSB.h</FileName>
+              <FileName>PageSignals.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageUSB.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageFrequencyCounter2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFrequencyCounter2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter2.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageFrequencyCounter3.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFrequencyCounter3.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageFrequencyCounter3.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageRegisters.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageRegisters.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageRegisters.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Menu\Pages\PageRegisters.h</FilePath>
+              <FilePath>..\..\Panel\src\Menu\Pages\PageSignals.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1157,14 +1097,19 @@
               <FilePath>..\..\Panel\src\Generator\Wave.cpp</FilePath>
             </File>
             <File>
-              <FileName>Wave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Panel\src\Generator\Wave.h</FilePath>
+              <FileName>WaveGraphics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\Panel\src\Generator\WaveGraphics.cpp</FilePath>
             </File>
             <File>
-              <FileName>WaveSignal.cpp</FileName>
+              <FileName>Signals.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\..\Panel\src\Generator\WaveSignal.cpp</FilePath>
+              <FilePath>..\..\Panel\src\Generator\Signals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Panel\src\Generator\Signals.h</FilePath>
             </File>
           </Files>
         </Group>

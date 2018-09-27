@@ -183,7 +183,9 @@
     <ClCompile Include="..\..\Panel\src\Display\Text.cpp" />
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
+    <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp" />
+    <ClCompile Include="..\..\Panel\src\Generator\WaveGraphics.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp" />
     <ClCompile Include="..\..\Panel\src\Log.cpp" />
     <ClCompile Include="..\..\Panel\src\main.cpp" />
@@ -197,6 +199,7 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\CommonFunctions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -269,6 +272,7 @@
     <ClInclude Include="..\..\Panel\src\Display\Text.h" />
     <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Generator.h" />
+    <ClInclude Include="..\..\Panel\src\Generator\Signals.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Wave.h" />
     <ClInclude Include="..\..\Panel\src\globals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
@@ -282,6 +286,7 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsDisplay.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsSignals.h" />
