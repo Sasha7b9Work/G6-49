@@ -133,12 +133,16 @@ static void DrawButton(StructButton *button)
     if (button->timePress)
     {
         Painter::FillRegion(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
-        Text::DrawStringInCenterRect(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, button->title, Color::BACK);
+        Painter::SetDoubleSize(true);
+        Text::DrawStringInCenterRect(button->x / 2, button->y / 2, WIDTH_BUTTON / 2, HEIGHT_BUTTON / 2, button->title, Color::BACK);
+        Painter::SetDoubleSize(false);
     }
     else
     {
         Painter::DrawRectangle(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, Color::FILL);
-        Text::DrawStringInCenterRect(button->x, button->y, WIDTH_BUTTON, HEIGHT_BUTTON, button->title);
+        Painter::SetDoubleSize(true);
+        Text::DrawStringInCenterRect(button->x / 2, button->y / 2, WIDTH_BUTTON / 2, HEIGHT_BUTTON / 2, button->title);
+        Painter::SetDoubleSize(false);
     }
 }
 
