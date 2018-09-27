@@ -93,6 +93,7 @@ struct StartMode
 
     StartMode(float v) : value((E)((int)(v + 0.5f))) {};
     operator uint8() const { return (uint8)value; };
+    bool Is(StartMode start) const { return start.value == value; };
 };
 
 #ifdef WIN32

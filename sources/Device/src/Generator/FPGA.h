@@ -65,6 +65,7 @@ public:
         } value;
         ModeWork(E v) : value(v) {};
         operator uint8() const { return(uint8)value; };
+        bool Is(ModeWork mode) { return mode.value == value; };
     };
 
     static struct ClockFrequency
@@ -157,6 +158,8 @@ private:
     static uint8 RegisterForDuration(Chan ch);
     /// Преобразует смещение в прямой код, пригодный для записи в альтеру
     static uint OffsetToCode(float offset);
+    /// Установить биты, соответствующие режиму запуска
+    static uint16 SetBitsStartMode(uint16 data);
     /// Режим запуска
     static StartMode startMode[Chan::Number];
     /// Режим работы ПЛИС

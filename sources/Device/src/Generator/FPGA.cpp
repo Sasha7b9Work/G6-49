@@ -225,20 +225,71 @@ void FPGA::WriteControlRegister()
 
     if(modeWork[Chan::A] == ModeWork::PackedImpulse) { SetBit(data, RG0::_12_HandStartPacket); }
 
-    if(startMode[Chan::A] == StartMode::Single)
-    {
-        SetBit(data, RG0::_10_HandStartA);
-        SetBit(data, RG0::_13_StartMode0);
-        SetBit(data, RG0::_14_StartMode1);
-    }
-    if(startMode[Chan::B] == StartMode::Single)
-    {
-        SetBit(data, RG0::_11_HandStartB);
-        SetBit(data, RG0::_13_StartMode0);
-        SetBit(data, RG0::_14_StartMode1);
-    }
+    data = SetBitsStartMode(data);
 
     WriteRegister(RG::_0_Control, data);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint16 FPGA::SetBitsStartMode(uint16 data)
+{
+    ModeWork mode = modeWork[Chan::A];
+    StartMode start = startMode[Chan::A];
+
+    if(mode.Is(ModeWork::Impulse) || mode.Is(ModeWork::PackedImpulse))
+    {
+        if(start.Is(StartMode::Single))
+        {
+            SetBit(data, RG0::_10_HandStartA);
+        }
+    }
+
+    if(mode.Is(ModeWork::DDS))
+    {
+        if(start.Is(StartMode::ComparatorA))
+        {
+            SetBit(data, RG0::_13_StartMode0);
+        }
+        else if(start.Is(StartMode::ShaperB))
+        {
+            SetBit(data, RG0::_14_StartMode1);
+        }
+        else if(start.Is(StartMode::Single))
+        {
+            SetBit(data, RG0::_13_StartMode0);
+            SetBit(data, RG0::_14_StartMode1);
+        }
+    }
+
+    mode = modeWork[Chan::B];
+    start = startMode[Chan::B];
+
+    if(mode.Is(ModeWork::Impulse) || mode.Is(ModeWork::PackedImpulse))
+    {
+        if(start.Is(StartMode::Single))
+        {
+            SetBit(data, RG0::_11_HandStartB);
+        }
+    }
+
+    if (mode.Is(ModeWork::DDS))
+    {
+        if (start.Is(StartMode::ComparatorA))
+        {
+            SetBit(data, RG0::_13_StartMode0);
+        }
+        else if (start.Is(StartMode::ShaperB))
+        {
+            SetBit(data, RG0::_14_StartMode1);
+        }
+        else if (start.Is(StartMode::Single))
+        {
+            SetBit(data, RG0::_13_StartMode0);
+            SetBit(data, RG0::_14_StartMode1);
+        }
+    }
+
+    return data;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -364,7 +415,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         "Старт"
     };
 
-    Console::AddString((char *)names[reg]);
+    //Console::AddString((char *)names[reg]);
 
 
     static const struct StructBits
