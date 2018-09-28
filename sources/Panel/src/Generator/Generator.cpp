@@ -100,7 +100,7 @@ void Generator::SetParameter(Parameter *param)
     static const struct StructCommand
     {
         CommandPanel command;
-        StructCommand(CommandPanel c) : command(c) {};
+        StructCommand(CommandPanel::E c) : command(c) {};
     }
     commands[Parameter::Number] =
     {

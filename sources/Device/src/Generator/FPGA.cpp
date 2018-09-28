@@ -163,16 +163,11 @@ void FPGA::PacketImpulse::SetNumberImpules(uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::PacketImpulse::SetPeriodImpulse(float period)
-{
-    PacketImpulse::periodImpulse = period;
-    uint64 n = (uint64)(period / 10e-9f);
-    WriteRegister(RG::_7_PeriodImpulseB, n - 2);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetPeriodImpulse(Chan ch, float period)
 {
+    // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
+    // в пакетном режиме при необходимости
+    PacketImpulse::periodImpulse = period;
     uint64 value = (uint64)(period / 10e-9f);
     RG reg = ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
     WriteRegister(reg, value);
