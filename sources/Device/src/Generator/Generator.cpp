@@ -28,8 +28,7 @@ void Generator::Init()
     Generator::SetAmplitude(Chan::A, 10.0f);
     Generator::SetFormWave(Chan::A, Form::PacketImpuls);
     FPGA::SetPeriodImpulse(Chan::A, 4e-8f);
-    //FPGA::PacketImpulse::SetPeriodImpulse(4e-8f);
-    FPGA::PacketImpulse::SetDurationImpulse(2e-8f);
+    FPGA::SetDurationImpulse(Chan::A, 2e-8f);
     FPGA::PacketImpulse::SetNumberImpules(50000);
     FPGA::PacketImpulse::SetPeriodPacket(2.5e-3f);
 }

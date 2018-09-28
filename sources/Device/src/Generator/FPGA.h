@@ -39,8 +39,6 @@ public:
         static void SetNumberImpules(uint n);
         /// Устанавливает период следования пачки
         static void SetPeriodPacket(float period);
-        /// Устанавливает длительность импульса
-        static void SetDurationImpulse(float duration);
 
         static float periodImpulse;
 

@@ -134,6 +134,7 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetDurationImpulse(Chan ch, float duration)
 {
+    PacketImpulse::durationImpulse = duration;
     uint64 value = (uint64)(duration / 10e-9f);
     RG reg = ch.IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
     WriteRegister(reg, value);
@@ -144,14 +145,6 @@ void FPGA::PacketImpulse::SetPeriodPacket(float period)
 {
     uint64 n = (uint64)(period / 10e-9f);
     WriteRegister(RG::_5_PeriodImpulseA, n - 2);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::PacketImpulse::SetDurationImpulse(float duration)
-{
-    PacketImpulse::durationImpulse = duration;
-    uint64 n = (uint64)(duration / 10e-9f);
-    WriteRegister(RG::_8_DurationImpulseB, n - 1);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
