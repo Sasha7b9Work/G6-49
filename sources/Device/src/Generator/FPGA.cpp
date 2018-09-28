@@ -141,6 +141,10 @@ void FPGA::SetDurationImpulse(Chan ch, float duration)
     PacketImpulse::durationImpulse = duration;
     uint64 value = (uint64)(duration / 10e-9f);
     RG reg = ch.IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
+    if(ch.IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
+    {
+        reg = RG::_8_DurationImpulseB;
+    }
     WriteRegister(reg, value);
 }
 
@@ -167,6 +171,10 @@ void FPGA::SetPeriodImpulse(Chan ch, float period)
     PacketImpulse::periodImpulse = period;
     uint64 value = (uint64)(period / 10e-9f);
     RG reg = ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
+    if(ch.IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
+    {
+        reg = RG::_7_PeriodImpulseB;
+    }
     WriteRegister(reg, value);
 }
 
@@ -407,9 +415,12 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         "Старт"
     };
 
-    char buffer[100];
-    sprintf(buffer, "%s - %lld", names[reg], value);
-    Console::AddString(buffer);
+    if(reg == 6)
+    {
+        char buffer[100];
+        sprintf(buffer, "%s - %lld", names[reg], value);
+        Console::AddString(buffer);
+    }
 
 
     static const struct StructBits
