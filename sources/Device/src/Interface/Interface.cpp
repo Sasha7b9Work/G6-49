@@ -53,28 +53,29 @@ static const struct FuncInterface
 commands[CommandPanel::Number] =
 {
     Interface::Empty,
-    Interface::Enable,                   /// ENABLE_CHANNEL
-    Interface::FormWave,                 /// SET_FORM_WAVE
-    Interface::Parameter,                /// SET_FREQUENCY
-    Interface::Parameter,                /// SET_AMPLITUDE
-    Interface::Parameter,                /// SET_OFFSET
-    Interface::Parameter,                /// SET_DURATION
-    Interface::Parameter,                /// SET_DUTYRATIO
-    Interface::Parameter,                /// SET_PHASE
-    Interface::Reset,                    /// RUN_RESET
-    Interface::ModeDebug,                /// MODE_DEBUG
-    Interface::Parameter,                /// SET_DELAY
-    Interface::WriteRegister,            /// WRITE_REGISTER
-    Interface::Empty,                    /// SET_DURATION_RISE
-    Interface::Empty,                    /// SET_DURATION_FALL
-    Interface::Empty,                    /// SET_DURATION_STADY
-    Interface::Empty,                    /// SET_DUTY_FACTOR
-    Interface::SetManipulation,          /// SetManipulation
-    Interface::SetManipulationDuration,  /// SetManipulationDuration
-    Interface::SetManipulationPeriod,    /// SetManipulationPeriod
+    Interface::Enable,                  /// EnableChannel
+    Interface::FormWave,                /// SetFormWave
+    Interface::Parameter,               /// SetFrequency
+    Interface::Parameter,               /// SetAmplitude
+    Interface::Parameter,               /// SetOffset
+    Interface::Parameter,               /// SetDuration
+    Interface::Parameter,               /// SetDutyRatio
+    Interface::Parameter,               /// SetPhase
+    Interface::Reset,                   /// RunReset
+    Interface::ModeDebug,               /// ModeDebug
+    Interface::Parameter,               /// SetDelay
+    Interface::WriteRegister,           /// WriteRegister
+    Interface::Empty,                   /// SET_DURATION_RISE
+    Interface::Empty,                   /// SET_DURATION_FALL
+    Interface::Empty,                   /// SET_DURATION_STADY
+    Interface::Empty,                   /// SET_DUTY_FACTOR
+    Interface::SetManipulation,         /// SetManipulation
+    Interface::SetManipulationDuration, /// SetManipulationDuration
+    Interface::SetManipulationPeriod,   /// SetManipulationPeriod
     Interface::SetPacketPeriod,
     Interface::SetPacketNumber,
-    Interface::SetStartMode
+    Interface::SetStartMode,
+    Interface::Parameter                /// SetPeriod
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -97,10 +97,15 @@ void Generator::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(Parameter *param)
 {
-    static const CommandPanel commands[Parameter::Number] =
+    static const struct StructCommand
+    {
+        CommandPanel command;
+        StructCommand(CommandPanel c) : command(c) {};
+    }
+    commands[Parameter::Number] =
     {
         CommandPanel::SetFrequency,
-        CommandPanel::SetFrequency,
+        CommandPanel::SetPeriod,
         CommandPanel::SetAmplitude,
         CommandPanel::SetOffset,
         CommandPanel::SetDuration,
@@ -119,17 +124,13 @@ void Generator::SetParameter(Parameter *param)
         CommandPanel::None
     };
 
-    uint8 buffer[6] = {(uint8)commands[param->value], (uint8)param->GetForm()->GetWave()->GetChannel()};
+    uint8 buffer[6] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel()};
 
     float value = param->GetValue();
 
     if(param->Is(Parameter::Offset))
     {
         value -= 5.0f;
-    }
-    else if(param->Is(Parameter::Period))
-    {
-        value = 1.0f / value;
     }
 
     memcpy(&buffer[2], &value, 4);

@@ -73,6 +73,7 @@ struct CommandPanel
         // 0            1        2
         // SetStartMode NUM_CHAN value
         SetStartMode,               ///< Установить режим запуска по каналу
+        SetPeriod,                  ///< Установить период
         Number
     } value;
     CommandPanel(E v) : value(v){};

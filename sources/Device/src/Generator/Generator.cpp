@@ -22,43 +22,17 @@ void Generator::Init()
     FPGA::Init();
     Multiplexor::Init();
     FreqMeter::Init();
-    
+
     /*
-    for(int i = 0; i < 2; i++)
-    {
-        Chan ch = (Chan::E)i;
-        EnableChannel(ch, true);
-        Generator::SetFormWave(ch, Form::Sine);
-        Generator::SetFrequency(ch, 1e6f);
-        Generator::SetOffset(ch, 0.0f);
-        Generator::SetAmplitude(ch, 10.0f);
-    }
+    Generator::EnableChannel(Chan::A, true);
+    Generator::SetOffset(Chan::A, 0.0f);
+    Generator::SetAmplitude(Chan::A, 10.0f);
+    Generator::SetFormWave(Chan::A, Form::PacketImpuls);
+    FPGA::PacketImpulse::SetPeriodImpulse(4e-8f);
+    FPGA::PacketImpulse::SetDurationImpulse(2e-8f);
+    FPGA::PacketImpulse::SetNumberImpules(50000);
+    FPGA::PacketImpulse::SetPeriodPacket(2.5e-3f);
     */
-
-    
-    for(int i = 0; i < 2; i++)
-    {
-        /*
-        Generator::SetFormWave(Chan::A, Form::PacketImpuls);
-        FPGA::PacketImpulse::SetPeriodImpulse(2e-4  f);
-        FPGA::PacketImpulse::SetDurationImpulse(1e-4f);
-        FPGA::PacketImpulse::SetNumberImpules(3);
-
-        FPGA::PacketImpulse::SetPeriodPacket(1e-3f);
-        */
-
-        
-        /*
-        Generator::SetFormWave(Chan::A, Form::Impulse);
-        FPGA::SetPeriodImpulse(Chan::A, 1.0001e-3f);
-        FPGA::SetDurationImpulse(Chan::A, 2e-4f);
-        
-    
-        Generator::SetFormWave(Chan::B, Form::Impulse);
-        FPGA::SetPeriodImpulse(Chan::B, 1e-3f);
-        FPGA::SetDurationImpulse(Chan::B, 1e-4f);
-        */
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +96,8 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         EmptyFunc,
         SetPacketPeriod,
         SetPacketNumber,
-        EmptyFunc
+        EmptyFunc,
+        SetPeriod
     };
 
     func[command].func(ch, value);
@@ -139,6 +114,12 @@ void Generator::SetFrequency(Chan ch, float frequency)
     {
         FPGA::SetFrequency(ch, frequency);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetPeriod(Chan ch, float period)
+{
+    FPGA::SetPeriodImpulse(ch, period);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
