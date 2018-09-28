@@ -23,6 +23,7 @@ void Generator::Init()
     Multiplexor::Init();
     FreqMeter::Init();
     
+    /*
     for(int i = 0; i < 2; i++)
     {
         Chan ch = (Chan::E)i;
@@ -32,6 +33,7 @@ void Generator::Init()
         Generator::SetOffset(ch, 0.0f);
         Generator::SetAmplitude(ch, 10.0f);
     }
+    */
 
     
     for(int i = 0; i < 2; i++)

@@ -17,7 +17,7 @@ void Wave::Graphics::Draw(Chan ch)
 {
     int x0 = X();
     int y0 = Y(ch);
-    Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::BLUE_50);
+    Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::GREEN_5);
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
@@ -81,7 +81,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
         first = false;
     }
 
-    Painter::DrawVLine(x0, minY, maxY);
+    Painter::DrawVLine(x0, minY - 3, maxY + 3);
     Painter::DrawHLine(aveY, x0, x0 + width);
 
     static const struct StructFunc
@@ -164,13 +164,14 @@ void Wave::Graphics::DrawMeander(int x0, int y0, int, int height)
 void Wave::Graphics::DrawImpulse(int x0, int y0, int, int height)
 {
     int minY = y0;
-    int aveY = y0 + height / 2;
+    int maxY = y0 + height;
     int deltaX = 20;
     for (int i = 0; i < 5; i++)
     {
-        Painter::DrawVLine(x0, minY, aveY);
+        Painter::DrawVLine(x0, minY, maxY);
         Painter::DrawHLine(minY, x0, x0 + 5);
-        Painter::DrawVLine(x0 + 5, minY, aveY);
+        Painter::DrawVLine(x0 + 5, minY, maxY);
+        Painter::DrawHLine(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
         x0 += deltaX;
     }
 }
