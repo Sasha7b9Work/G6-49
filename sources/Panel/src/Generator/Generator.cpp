@@ -167,12 +167,12 @@ void Generator::SendToInterface(uint8 *data, uint16 size)
     }
     else if(recv[0] == CommandGenerator::COM_LOG)
     {
-        char buf[10];
-        for(int i = 0; i < 9; i++)
+        char buf[LENGTH_SPI_BUFFER];
+        for(int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
         {
             buf[i] = (char)recv[i + 1];
         }
-        buf[9] = '\0';
+        buf[LENGTH_SPI_BUFFER - 1] = '\0';
         Console::AddString(buf);
     }
 }
