@@ -53,29 +53,29 @@ static const struct FuncInterface
 commands[CommandPanel::Number] =
 {
     Interface::Empty,
-    Interface::Enable,                  /// EnableChannel
-    Interface::FormWave,                /// SetFormWave
-    Interface::Parameter,               /// SetFrequency
-    Interface::Parameter,               /// SetAmplitude
-    Interface::Parameter,               /// SetOffset
-    Interface::Parameter,               /// SetDuration
-    Interface::Parameter,               /// SetDutyRatio
-    Interface::Parameter,               /// SetPhase
-    Interface::Reset,                   /// RunReset
-    Interface::ModeDebug,               /// ModeDebug
-    Interface::Parameter,               /// SetDelay
-    Interface::WriteRegister,           /// WriteRegister
-    Interface::Empty,                   /// SET_DURATION_RISE
-    Interface::Empty,                   /// SET_DURATION_FALL
-    Interface::Empty,                   /// SET_DURATION_STADY
-    Interface::Empty,                   /// SET_DUTY_FACTOR
-    Interface::SetManipulation,         /// SetManipulation
-    Interface::SetManipulationDuration, /// SetManipulationDuration
-    Interface::SetManipulationPeriod,   /// SetManipulationPeriod
-    Interface::SetPacketPeriod,
-    Interface::SetPacketNumber,
+    Interface::Enable,                  ///< EnableChannel
+    Interface::FormWave,                ///< SetFormWave
+    Interface::Parameter,               ///< SetFrequency
+    Interface::Parameter,               ///< SetAmplitude
+    Interface::Parameter,               ///< SetOffset
+    Interface::Parameter,               ///< SetDuration
+    Interface::Parameter,               ///< SetDutyRatio
+    Interface::Parameter,               ///< SetPhase
+    Interface::Reset,                   ///< RunReset
+    Interface::ModeDebug,               ///< ModeDebug
+    Interface::Parameter,               ///< SetDelay
+    Interface::WriteRegister,           ///< WriteRegister
+    Interface::Empty,                   ///< SET_DURATION_RISE
+    Interface::Empty,                   ///< SET_DURATION_FALL
+    Interface::Empty,                   ///< SET_DURATION_STADY
+    Interface::Empty,                   ///< SET_DUTY_FACTOR
+    Interface::SetManipulation,         ///< SetManipulation
+    Interface::SetManipulationDuration, ///< SetManipulationDuration
+    Interface::SetManipulationPeriod,   ///< SetManipulationPeriod
+    Interface::Parameter,               ///< SetPacketPeriod
+    Interface::Parameter,               ///< SetPacketNumber
     Interface::SetStartMode,
-    Interface::Parameter                /// SetPeriod
+    Interface::Parameter                ///< SetPeriod
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,16 +174,6 @@ void Interface::FormWave()
     Chan ch = (Chan::E)buffer[1];
     Form form = (Form::E)buffer[2];
     Generator::SetFormWave(ch, form);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetPacketNumber()
-{
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetPacketPeriod()
-{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

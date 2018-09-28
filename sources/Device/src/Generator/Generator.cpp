@@ -27,10 +27,10 @@ void Generator::Init()
     Generator::SetOffset(Chan::A, 0.0f);
     Generator::SetAmplitude(Chan::A, 10.0f);
     Generator::SetFormWave(Chan::A, Form::PacketImpuls);
-    FPGA::SetPeriodImpulse(Chan::A, 4e-8f);
-    FPGA::SetDurationImpulse(Chan::A, 2e-8f);
-    FPGA::PacketImpulse::SetNumberImpules(50000);
-    FPGA::PacketImpulse::SetPeriodPacket(2.5e-3f);
+    FPGA::SetPeriodImpulse(Chan::A, 10e-5f);
+    FPGA::SetDurationImpulse(Chan::A, 2e-5f);
+    FPGA::PacketImpulse::SetNumberImpules(3);
+    FPGA::PacketImpulse::SetPeriodPacket(1e-3f);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -153,13 +153,15 @@ void Generator::SetPhase(Chan ch, float phase)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPacketNumber(Chan, float)
+void Generator::SetPacketNumber(Chan, float number)
 {
+    FPGA::PacketImpulse::SetNumberImpules((uint)(number + 0.5f));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPacketPeriod(Chan, float)
+void Generator::SetPacketPeriod(Chan, float period)
 {
+    FPGA::PacketImpulse::SetPeriodPacket(period);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

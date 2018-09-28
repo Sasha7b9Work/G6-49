@@ -41,10 +41,6 @@ public:
 
     static void SetManipulationPeriod();
 
-    static void SetPacketPeriod();
-
-    static void SetPacketNumber();
-
     static void SetStartMode();
 
 private:
