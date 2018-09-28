@@ -49,9 +49,9 @@ static Parameter params_ImpulseA[] =
 
 static Parameter params_PacketA[] =
 {
-    Parameter(Parameter::Period,        0.0f,   100e6f, "10000", 1, Order::Micro),
-    Parameter(Parameter::Duration,      0.0f,   100e6f, "10000", 0, Order::Micro),
-    Parameter(Parameter::PacketNumber,  0.0f,   100e6f, "20000", 0, Order::One),
+    Parameter(Parameter::Period,        0.0f,   100e6f, "02000", 0, Order::Milli),
+    Parameter(Parameter::Duration,      0.0f,   100e6f, "01000", 0, Order::Milli),
+    Parameter(Parameter::PacketNumber,  0.0f,   100e6f, "30000", 0, Order::One),
     Parameter(Parameter::PacketPeriod,  0.0f,   100e6f, "10000", 0, Order::Milli),
     Parameter(Parameter::Amplitude,     0.0f,   10.0f,  "10000", 1, Order::One),
     Parameter(Parameter::Offset,        0.0f,   10.0f,  "50000", 0, Order::One),

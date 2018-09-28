@@ -90,6 +90,10 @@ void FPGA::SetPackedImpulseMode(Chan)
 {
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
+
+    uint64 data = (16383 << 14) + 8191;
+
+    WriteRegister(RG::_3_RectA, data);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

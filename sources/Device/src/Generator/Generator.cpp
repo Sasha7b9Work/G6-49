@@ -22,26 +22,16 @@ void Generator::Init()
     FPGA::Init();
     Multiplexor::Init();
     FreqMeter::Init();
-
-    /*
+        
     Generator::EnableChannel(Chan::A, true);
     Generator::SetOffset(Chan::A, 0.0f);
     Generator::SetAmplitude(Chan::A, 10.0f);
     Generator::SetFormWave(Chan::A, Form::PacketImpuls);
-    FPGA::SetPeriodImpulse(Chan::A, 10e-5f);
-    FPGA::SetDurationImpulse(Chan::A, 2e-5f);
+    FPGA::SetPeriodImpulse(Chan::A, 2e-4f);
+    FPGA::SetDurationImpulse(Chan::A, 1e-4f);
     FPGA::PacketImpulse::SetNumberImpules(3);
     FPGA::PacketImpulse::SetPeriodPacket(1e-3f);
-    */
-
-    Generator::EnableChannel(Chan::A, true);
-    Generator::SetOffset(Chan::A, 0.0f);
-    Generator::SetAmplitude(Chan::A, 10.0f);
-    Generator::SetFormWave(Chan::A, Form::PacketImpuls);
-    FPGA::SetPeriodImpulse(Chan::A, 4e-8f);
-    FPGA::SetDurationImpulse(Chan::A, 2e-8f);
-    FPGA::PacketImpulse::SetNumberImpules(50000);
-    FPGA::PacketImpulse::SetPeriodPacket(2.5e-3f);
+    
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
