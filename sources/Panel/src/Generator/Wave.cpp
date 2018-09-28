@@ -84,7 +84,7 @@ pString Parameter::Name() const
     nameParameter[Parameter::Number][2] =
     {
         {"Частота",        "Frequency"},
-        {"Период",         "Perido"},
+        {"Период",         "Period"},
         {"Размах",         "Amplitude"},
         {"Смещение",       "Offset"},
         {"Длительность",   "Duration"},
@@ -99,7 +99,7 @@ pString Parameter::Name() const
         {"Длительность",   "Duration"},
         {"Период",         "Period"},
         {"Период пакета",  "Packet period"},
-        {"N",              "N"},
+        {"Кол-во имп",     "Num of puls"},
         {"     Выход ( ESC )", "     Exit ( ESC )"}
     };
 
