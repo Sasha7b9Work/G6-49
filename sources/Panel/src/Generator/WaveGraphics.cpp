@@ -180,19 +180,25 @@ void Wave::Graphics::DrawImpulse(int x0, int y0, int, int height)
 void Wave::Graphics::DrawPacketImpulse(int x0, int y0, int, int height)
 {
     int minY = y0;
-    int aveY = y0 + height / 2;
+    int maxY = y0 + height;
     int deltaX = 8;
     for(int j = 0; j < 2; j++)
     {
         for (int i = 0; i < 3; i++)
         {
-            Painter::DrawVLine(x0, minY, aveY);
-            Painter::DrawHLine(minY, x0, x0 + 2);
-            Painter::DrawVLine(x0 + 2, minY, aveY);
+            Painter::DrawVLine(x0, minY, maxY);
+            Painter::DrawHLine(minY, x0, x0 + 4);
+            Painter::DrawVLine(x0 + 4, minY, maxY);
+            Painter::DrawHLine(maxY, x0 + 4, x0 + deltaX);
             x0 += deltaX;
         }
 
-        x0 += 30;
+        if(j == 0)
+        {
+            Painter::DrawHLine(maxY, x0, x0 + 35);
+        }
+
+        x0 += 37;
     }
 }
 
