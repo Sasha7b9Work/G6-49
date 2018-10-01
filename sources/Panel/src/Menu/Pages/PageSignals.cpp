@@ -65,13 +65,13 @@ DEF_CHOICE_6( cForm,                                                            
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_ChnageParameter()
 {
-    if(PARAM_CURRENT->IsInputValue())
+    if(((ParameterValue *)PARAM_CURRENT)->IsInputValue())
     {
         InputWindow::Init();
 
         Menu::SetAdditionPage((Page *)AddPageInput::pointer);
     }
-    else if(PARAM_CURRENT->IsExitParameter())
+    else if(PARAM_CURRENT_IS_EXIT)
     {
         FORM_CURRENT->CloseOpenedParameter();
     }

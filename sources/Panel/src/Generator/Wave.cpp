@@ -134,7 +134,7 @@ Wave::Wave(Chan ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, ParameterValue *parameters, int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
+Form::Form(E v, ParameterBase *parameters, int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -143,7 +143,7 @@ Form::Form(E v, ParameterValue *parameters, int num, Wave *w) : value(v), wave(w
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-ParameterValue *Form::CurrentParameter()
+ParameterBase *Form::CurrentParameter()
 {
     return &params[currentParam];
 }
@@ -155,7 +155,7 @@ int Form::NumParameters() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-ParameterValue *Form::GetParameter(int i)
+ParameterBase *Form::GetParameter(int i)
 {
     if(i < numParams)
     {
@@ -190,14 +190,14 @@ void Form::TuneGenerator(Chan ch)
         if(set.sineManipulation[ch])
         {
             int current = currentParam;
-            ParameterValue *param = params;
+            ParameterBase *param = params;
             int numPar = numParams;
 
             currentParam = oldCurrentParams;
             params = oldParams;
             numParams = oldNumParams;
 
-            if(CurrentParameter()->value == ParameterValue::Manipulation)
+            if(PARAM_CURRENT_IS_MANIPULATION)
             {
                 SendParameterToGenerator(ParameterValue::Frequency);
                 SendParameterToGenerator(ParameterValue::Amplitude);
@@ -241,9 +241,11 @@ ParameterValue *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
-        if(params[i].value == p)
+        ParameterValue *param = (ParameterValue *)&params[i];
+
+        if(param->value == p)
         {
-            return &params[i];
+            return param;
         }
     }
     return 0;
@@ -262,15 +264,15 @@ void Form::SendParameterToGenerator(ParameterValue::E p)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::OpenCurrentParameter()
 {
-    if(!CurrentParameter()->IsComplexParameter())
+    if(!PARAM_CURRENT_IS_COMPLEX)
     {
         return;
     }
 
-    if(CurrentParameter()->Is(ParameterValue::Manipulation))
+    if(PARAM_CURRENT_IS_MANIPULATION)
     {
         /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
-        if(CurrentParameter()->GetParent())
+        if(PARAM_CURRENT_PARENT)
         {
             set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
             Generator::TuneChannel(GetWave()->GetChannel());
@@ -281,10 +283,10 @@ void Form::OpenCurrentParameter()
             oldNumParams = numParams;
             oldCurrentParams = currentParam;
 
-            ParameterValue *parent = CurrentParameter();
+            ParameterValue *parent = PARAM_VALUE(CurrentParameter());
 
-            numParams = CurrentParameter()->numParams;
-            params = CurrentParameter()->params;
+            numParams = parent->numParams;
+            params = parent->params;
             currentParam = 0;
 
             for (int i = 0; i < numParams; i++)

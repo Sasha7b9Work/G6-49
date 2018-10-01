@@ -9,6 +9,7 @@
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include "Wave.h"
+#include "Generator/Signals.h"
 #include <string.h>
 
 
@@ -422,7 +423,7 @@ int8 Choice::CurrentIndex()
 
         Form *form = param->form;
 
-        retValue = (int8)form->CurrentParameter()->value;
+        retValue = (int8)PARAM_VALUE(form->CurrentParameter())->value;
     }
 
     return retValue;
@@ -496,13 +497,13 @@ Item *Button::Press(Control::Action action)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameSubItem(int number) const
 {
-    return form->GetParameter(number)->Name();
+    return PARAM_VALUE(form->GetParameter(number))->Name();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameCurrentSubItem() const
 {
-    return form->CurrentParameter()->Name();
+    return PARAM_VALUE(form->CurrentParameter())->Name();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

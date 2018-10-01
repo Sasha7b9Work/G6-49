@@ -28,7 +28,36 @@ struct Order
 class Form;
 class Wave;
 
-class ParameterValue
+class ParameterBase
+{
+    friend class Form;
+
+public:
+    
+    enum Type
+    {
+        Value,
+        Exit,
+        Complex
+    };
+
+    /// ¬озвращает указатель на форму, параметром которой €вл€етс€
+    Form *GetForm() { return form; };
+    /// ¬озвращает адрес родительского параметра
+    ParameterBase *GetParent() { return parent; };
+private:
+    /// ”казатель на фрорму, которой принадлежит параметр
+    Form *form;
+
+protected:
+    ParameterBase(Type t) : type(t), parent(0) {};
+
+    Type type;
+    /// ≈сли этот параметр вложенный, то здесь адрес родител€
+    ParameterBase *parent;
+};
+
+class ParameterValue : public ParameterBase
 {
 public:
     friend class Form;
@@ -56,12 +85,11 @@ public:
         Number
     } value;
 
-    ParameterValue(int v = Number) : value((E)v), inNumLockMode(false) {};
+    ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), inNumLockMode(false) {};
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, ParameterValue *param = 0, 
-        int num = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') :
-        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num),
-        parent(0)
+        int num = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') : ParameterBase(Value),
+        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num)
     {
         strcpy(buffer, buf);
     };
@@ -89,10 +117,6 @@ public:
     bool IsInputValue() const { return value != Manipulation && value != Exit; };
     /// ¬озвращает true, если этот параметр - кнопка выхода.
     bool IsExitParameter() const { return value == Exit; };
-    /// ¬озвращает указатель на форму, параметром которой €вл€етс€
-    Form *GetForm() { return form; };
-    /// ¬озвращает адрес родительского параметра
-    ParameterValue *GetParent() { return parent; };
     /// ¬озвращает true, если сложный и открыт
     bool IsOpened();
 
@@ -118,10 +142,6 @@ private:
     ParameterValue *params;
     /// „исло дополнительных параметров. 0, если таковых не имеетс€
     int numParams;
-    /// ”казатель на фрорму, которой принадлежит параметр
-    Form *form;
-    /// ≈сли этот параметр вложенный, то здесь адрес родител€
-    ParameterValue *parent;
 };
 
 
@@ -142,15 +162,15 @@ public:
 
     Form(E v = Number) : value(v), wave(0), currentParam(0)   { };
 
-    Form(E v, ParameterValue *param, int numParams, Wave *w);
+    Form(E v, ParameterBase *param, int numParams, Wave *w);
     /// ¬озвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// ¬озвращает ссылку на текущий параметр
-    ParameterValue *CurrentParameter();
+    ParameterBase *CurrentParameter();
     /// ¬озвращает количество доступных параметров
     int NumParameters() const;
     /// ¬озвращает ссылку на i-ый параметр из массива params
-    ParameterValue *GetParameter(int i);
+    ParameterBase *GetParameter(int i);
     /// ”становить текущим следующй параметр
     void SetNextParameter();
     /// Ќастраивает генератор в соответствии с установленными параметрами
@@ -174,14 +194,14 @@ private:
     /// Wave, к которому относитс€ данный Form
     Wave *wave;
     /// «десь хран€тс€ параметры
-    ParameterValue *params;
+    ParameterBase *params;
     /// —колько всего параметров
     int numParams;
     /// Ќомер текущего параметра в массиве params
     int currentParam;
 
     /// «десь сохран€етс€ указатель на основные параметры в случае раскрыти€ сложного параметра
-    ParameterValue *oldParams;
+    ParameterBase *oldParams;
     /// ќтноситс€ к oldParams
     int oldNumParams;
     /// ќтноситс€ к oldParams
@@ -249,7 +269,7 @@ public:
 
         static void DrawParameters(Chan chan, int y0);
 
-        static void DrawParameterValue(ParameterValue *parameter, int x, int y);
+        static void DrawParameterValue(ParameterBase *parameter, int x, int y);
 
     };
 };

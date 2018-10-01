@@ -215,23 +215,23 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
    
     for (int i = 0; i < form->NumParameters(); i++)
     {
-        ParameterValue *param = form->GetParameter(i);
-        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
+        ParameterBase *param = form->GetParameter(i);
+        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT_VALUE->Name(), PARAM_VALUE(param)->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }
-        Text::DrawText(x0 + 1, y0, param->Name(), Color::FILL);
+        Text::DrawText(x0 + 1, y0, PARAM_VALUE(param)->Name(), Color::FILL);
         DrawParameterValue(param, x0 + 80, y0);
         y0 += 11;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawParameterValue(ParameterValue *param, int x, int y)
+void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
 {
-    x = Text::DrawText(x, y, param->GetStringValue());
+    x = Text::DrawText(x, y, PARAM_VALUE(param)->GetStringValue());
     char buffer[10];
     Text::SetUpperCase(false);
-    Text::DrawText(x + 2, y, param->NameUnit(buffer));
+    Text::DrawText(x + 2, y, PARAM_VALUE(param)->NameUnit(buffer));
     Text::SetUpperCase(true);
 }
