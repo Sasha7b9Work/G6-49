@@ -55,15 +55,15 @@ commands[CommandPanel::Number] =
     Interface::Empty,
     Interface::Enable,                  ///< EnableChannel
     Interface::FormWave,                ///< SetFormWave
-    Interface::Parameter,               ///< SetFrequency
-    Interface::Parameter,               ///< SetAmplitude
-    Interface::Parameter,               ///< SetOffset
-    Interface::Parameter,               ///< SetDuration
-    Interface::Parameter,               ///< SetDutyRatio
-    Interface::Parameter,               ///< SetPhase
+    Interface::ParameterValue,               ///< SetFrequency
+    Interface::ParameterValue,               ///< SetAmplitude
+    Interface::ParameterValue,               ///< SetOffset
+    Interface::ParameterValue,               ///< SetDuration
+    Interface::ParameterValue,               ///< SetDutyRatio
+    Interface::ParameterValue,               ///< SetPhase
     Interface::Reset,                   ///< RunReset
     Interface::ModeDebug,               ///< ModeDebug
-    Interface::Parameter,               ///< SetDelay
+    Interface::ParameterValue,               ///< SetDelay
     Interface::WriteRegister,           ///< WriteRegister
     Interface::Empty,                   ///< SET_DURATION_RISE
     Interface::Empty,                   ///< SET_DURATION_FALL
@@ -72,10 +72,10 @@ commands[CommandPanel::Number] =
     Interface::SetManipulation,         ///< SetManipulation
     Interface::SetManipulationDuration, ///< SetManipulationDuration
     Interface::SetManipulationPeriod,   ///< SetManipulationPeriod
-    Interface::Parameter,               ///< SetPacketPeriod
-    Interface::Parameter,               ///< SetPacketNumber
+    Interface::ParameterValue,               ///< SetPacketPeriod
+    Interface::ParameterValue,               ///< SetPacketNumber
     Interface::SetStartMode,
-    Interface::Parameter                ///< SetPeriod
+    Interface::ParameterValue                ///< SetPeriod
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,7 +288,7 @@ float Interface::GetFloat(uint8 buf[4])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Parameter()
+void Interface::ParameterValue()
 {
     Chan ch = (Chan::E)buffer[1];
     CommandPanel command = (CommandPanel::E)buffer[0];

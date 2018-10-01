@@ -27,7 +27,7 @@ static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void StructValue::Set(Parameter *param_)
+void StructValue::Set(ParameterValue *param_)
 {
     param = param_;
 
@@ -457,7 +457,7 @@ void StructValue::DrawInputField(int x, int y)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::SendToGenerator()
 {
-    if (param->Is(Parameter::Delay))
+    if (param->Is(ParameterValue::Delay))
     {
     }
     else
@@ -469,7 +469,7 @@ void StructValue::SendToGenerator()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::FillFromInputBuffer()
 {
-    if (param->Is(Parameter::Duration) || param->Is(Parameter::Delay))
+    if (param->Is(ParameterValue::Duration) || param->Is(ParameterValue::Delay))
     {
         param->order = Order::Micro;
     }

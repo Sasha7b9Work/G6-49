@@ -32,7 +32,7 @@ public:
 
     static void SetFormWave(Wave *w);
 
-    static void SetParameter(Parameter *param);
+    static void SetParameter(ParameterValue *param);
 
     static void SetDebugMode(bool enable);
 

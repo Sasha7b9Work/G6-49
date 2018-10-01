@@ -28,7 +28,7 @@ struct Order
 class Form;
 class Wave;
 
-class Parameter
+class ParameterValue
 {
 public:
     friend class Form;
@@ -56,9 +56,9 @@ public:
         Number
     } value;
 
-    Parameter(int v = Number) : value((E)v), inNumLockMode(false) {};
+    ParameterValue(int v = Number) : value((E)v), inNumLockMode(false) {};
 
-    Parameter(int v, float _min, float _max, pString buf, int8 pos, Order o, Parameter *param = 0, 
+    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, ParameterValue *param = 0, 
         int num = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') :
         value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num),
         parent(0)
@@ -66,7 +66,7 @@ public:
         strcpy(buffer, buf);
     };
 
-    bool Is(Parameter::E v) { return value == v; };
+    bool Is(ParameterValue::E v) { return value == v; };
 
     float MinValue() const { return min; };
 
@@ -84,7 +84,7 @@ public:
 
     void SetNumLockMode(bool mode) { inNumLockMode = mode; };
     /// Возвращает true, если является параметром типа e
-    bool Is(Parameter::E e) const { return value == e; };
+    bool Is(ParameterValue::E e) const { return value == e; };
     /// Возвращает true, если является непосредственно вводимым значением
     bool IsInputValue() const { return value != Manipulation && value != Exit; };
     /// Возвращает true, если этот параметр - кнопка выхода.
@@ -92,7 +92,7 @@ public:
     /// Возвращает указатель на форму, параметром которой является
     Form *GetForm() { return form; };
     /// Возвращает адрес родительского параметра
-    Parameter *GetParent() { return parent; };
+    ParameterValue *GetParent() { return parent; };
     /// Возвращает true, если сложный и открыт
     bool IsOpened();
 
@@ -115,13 +115,13 @@ private:
     /// Если true, то находимся в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
     /// Здесь находятся дополнительные параметры в случае, если они требуются
-    Parameter *params;
+    ParameterValue *params;
     /// Число дополнительных параметров. 0, если таковых не имеется
     int numParams;
     /// Указатель на фрорму, которой принадлежит параметр
     Form *form;
     /// Если этот параметр вложенный, то здесь адрес родителя
-    Parameter *parent;
+    ParameterValue *parent;
 };
 
 
@@ -142,15 +142,15 @@ public:
 
     Form(E v = Number) : value(v), wave(0), currentParam(0)   { };
 
-    Form(E v, Parameter *param, int numParams, Wave *w);
+    Form(E v, ParameterValue *param, int numParams, Wave *w);
     /// Возвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// Возвращает ссылку на текущий параметр
-    Parameter *CurrentParameter();
+    ParameterValue *CurrentParameter();
     /// Возвращает количество доступных параметров
     int NumParameters() const;
     /// Возвращает ссылку на i-ый параметр из массива params
-    Parameter *GetParameter(int i);
+    ParameterValue *GetParameter(int i);
     /// Установить текущим следующй параметр
     void SetNextParameter();
     /// Настраивает генератор в соответствии с установленными параметрами
@@ -168,20 +168,20 @@ public:
 
 private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    Parameter *FindParameter(Parameter::E p);
+    ParameterValue *FindParameter(ParameterValue::E p);
     /// Засыалет параметр в генератор
-    void SendParameterToGenerator(Parameter::E p);
+    void SendParameterToGenerator(ParameterValue::E p);
     /// Wave, к которому относится данный Form
     Wave *wave;
     /// Здесь хранятся параметры
-    Parameter *params;
+    ParameterValue *params;
     /// Сколько всего параметров
     int numParams;
     /// Номер текущего параметра в массиве params
     int currentParam;
 
     /// Здесь сохраняется указатель на основные параметры в случае раскрытия сложного параметра
-    Parameter *oldParams;
+    ParameterValue *oldParams;
     /// Относится к oldParams
     int oldNumParams;
     /// Относится к oldParams
@@ -249,7 +249,7 @@ public:
 
         static void DrawParameters(Chan chan, int y0);
 
-        static void DrawParameterValue(Parameter *parameter, int x, int y);
+        static void DrawParameterValue(ParameterValue *parameter, int x, int y);
 
     };
 };

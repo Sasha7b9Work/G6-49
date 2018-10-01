@@ -68,20 +68,20 @@ pString Register::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Parameter::IsComplexParameter() const
+bool ParameterValue::IsComplexParameter() const
 {
     return value == Manipulation;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Parameter::Name() const
+pString ParameterValue::Name() const
 {
     static const struct StructName
     {
         pString name;
         StructName(pString n) : name(n) { };
     }
-    nameParameter[Parameter::Number][2] =
+    nameParameter[ParameterValue::Number][2] =
     {
         {"Частота",        "Frequency"},
         {"Период",         "Period"},
@@ -134,7 +134,7 @@ Wave::Wave(Chan ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, Parameter *parameters, int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
+Form::Form(E v, ParameterValue *parameters, int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -143,7 +143,7 @@ Form::Form(E v, Parameter *parameters, int num, Wave *w) : value(v), wave(w), pa
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Parameter *Form::CurrentParameter()
+ParameterValue *Form::CurrentParameter()
 {
     return &params[currentParam];
 }
@@ -155,7 +155,7 @@ int Form::NumParameters() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Parameter *Form::GetParameter(int i)
+ParameterValue *Form::GetParameter(int i)
 {
     if(i < numParams)
     {
@@ -190,54 +190,54 @@ void Form::TuneGenerator(Chan ch)
         if(set.sineManipulation[ch])
         {
             int current = currentParam;
-            Parameter *param = params;
+            ParameterValue *param = params;
             int numPar = numParams;
 
             currentParam = oldCurrentParams;
             params = oldParams;
             numParams = oldNumParams;
 
-            if(CurrentParameter()->value == Parameter::Manipulation)
+            if(CurrentParameter()->value == ParameterValue::Manipulation)
             {
-                SendParameterToGenerator(Parameter::Frequency);
-                SendParameterToGenerator(Parameter::Amplitude);
-                SendParameterToGenerator(Parameter::Offset);
-                SendParameterToGenerator(Parameter::Manipulation);
+                SendParameterToGenerator(ParameterValue::Frequency);
+                SendParameterToGenerator(ParameterValue::Amplitude);
+                SendParameterToGenerator(ParameterValue::Offset);
+                SendParameterToGenerator(ParameterValue::Manipulation);
             }
 
             currentParam = current;
             params = param;
             numParams = numPar;
 
-            SendParameterToGenerator(Parameter::ManipulationDuration);
-            SendParameterToGenerator(Parameter::ManipulationPeriod);
+            SendParameterToGenerator(ParameterValue::ManipulationDuration);
+            SendParameterToGenerator(ParameterValue::ManipulationPeriod);
         }
         else
         {
-            SendParameterToGenerator(Parameter::Manipulation);
-            SendParameterToGenerator(Parameter::Frequency);
-            SendParameterToGenerator(Parameter::Amplitude);
-            SendParameterToGenerator(Parameter::Offset);
+            SendParameterToGenerator(ParameterValue::Manipulation);
+            SendParameterToGenerator(ParameterValue::Frequency);
+            SendParameterToGenerator(ParameterValue::Amplitude);
+            SendParameterToGenerator(ParameterValue::Offset);
         }
         if(!ch.IsA())
         {
-            SendParameterToGenerator(Parameter::Phase);
+            SendParameterToGenerator(ParameterValue::Phase);
         }
     }
     else
     {
-        SendParameterToGenerator(Parameter::Frequency);
-        SendParameterToGenerator(Parameter::Amplitude);
-        SendParameterToGenerator(Parameter::Offset);
-        SendParameterToGenerator(Parameter::Period);
-        SendParameterToGenerator(Parameter::Duration);
-        SendParameterToGenerator(Parameter::PacketNumber);
-        SendParameterToGenerator(Parameter::PacketPeriod);
+        SendParameterToGenerator(ParameterValue::Frequency);
+        SendParameterToGenerator(ParameterValue::Amplitude);
+        SendParameterToGenerator(ParameterValue::Offset);
+        SendParameterToGenerator(ParameterValue::Period);
+        SendParameterToGenerator(ParameterValue::Duration);
+        SendParameterToGenerator(ParameterValue::PacketNumber);
+        SendParameterToGenerator(ParameterValue::PacketPeriod);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Parameter *Form::FindParameter(Parameter::E p)
+ParameterValue *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -250,9 +250,9 @@ Parameter *Form::FindParameter(Parameter::E p)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Form::SendParameterToGenerator(Parameter::E p)
+void Form::SendParameterToGenerator(ParameterValue::E p)
 {
-    Parameter *param = FindParameter(p);
+    ParameterValue *param = FindParameter(p);
     if (param)
     {
         Generator::SetParameter(param);
@@ -267,7 +267,7 @@ void Form::OpenCurrentParameter()
         return;
     }
 
-    if(CurrentParameter()->Is(Parameter::Manipulation))
+    if(CurrentParameter()->Is(ParameterValue::Manipulation))
     {
         /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
         if(CurrentParameter()->GetParent())
@@ -281,7 +281,7 @@ void Form::OpenCurrentParameter()
             oldNumParams = numParams;
             oldCurrentParams = currentParam;
 
-            Parameter *parent = CurrentParameter();
+            ParameterValue *parent = CurrentParameter();
 
             numParams = CurrentParameter()->numParams;
             params = CurrentParameter()->params;
@@ -317,19 +317,19 @@ bool Form::ParameterIsOpened() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Parameter::GetValue() const
+float ParameterValue::GetValue() const
 {
     if(Is(Manipulation))
     {
-        Parameter *pointer = (Parameter *)this;
+        ParameterValue *pointer = (ParameterValue *)this;
         return set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1.0f : 0.0f;
     }
-    StructValue input((Parameter *)this);
+    StructValue input((ParameterValue *)this);
     return input.Value();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Parameter::GetStringValue() const
+pString ParameterValue::GetStringValue() const
 {
     if(Is(Manipulation))
     {
@@ -339,22 +339,22 @@ pString Parameter::GetStringValue() const
             {" Off",  " On"}
         };
 
-        Parameter *pointer = (Parameter *)this;
+        ParameterValue *pointer = (ParameterValue *)this;
         return values[LANG][set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1 : 0];
     }
-    StructValue input((Parameter *)this);
+    StructValue input((ParameterValue *)this);
     return input.StringValue();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString Parameter::NameUnit(char buf[10])
+pString ParameterValue::NameUnit(char buf[10])
 {
     static const struct StructName
     {
         pString name;
         StructName(pString n) : name(n) {};
     }
-    names[Parameter::Number][2] =
+    names[ParameterValue::Number][2] =
     {
         {"Гц",  "Hz"},
         {"с",   "s"},
@@ -381,7 +381,7 @@ pString Parameter::NameUnit(char buf[10])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Parameter::IsOpened()
+bool ParameterValue::IsOpened()
 {
     return IsComplexParameter() && GetForm()->ParameterIsOpened();
 }

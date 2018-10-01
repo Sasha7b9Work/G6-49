@@ -215,7 +215,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
    
     for (int i = 0; i < form->NumParameters(); i++)
     {
-        Parameter *param = form->GetParameter(i);
+        ParameterValue *param = form->GetParameter(i);
         if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
@@ -227,7 +227,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
+void Wave::Graphics::DrawParameterValue(ParameterValue *param, int x, int y)
 {
     x = Text::DrawText(x, y, param->GetStringValue());
     char buffer[10];

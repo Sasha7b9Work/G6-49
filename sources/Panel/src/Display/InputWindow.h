@@ -17,9 +17,9 @@ class StructValue
 {
 public:
 
-    StructValue(Parameter *p = 0) : param(p)  { };
+    StructValue(ParameterValue *p = 0) : param(p)  { };
 
-    void Set(Parameter *param);
+    void Set(ParameterValue *param);
 
     char *StringValue();
 
@@ -39,7 +39,7 @@ public:
 
     void SaveValue();
 
-    Parameter *param;
+    ParameterValue *param;
 
 private:
     /// ”величивает значение в заданной позиции. ¬озвращает false, если итоговое значение не изменилось.
@@ -125,7 +125,7 @@ private:
 
     static void DrawExit(int x, int y);
 
-    static Parameter *param;
+    static ParameterValue *param;
 
     static StructValue iws;
 };

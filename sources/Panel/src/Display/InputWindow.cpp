@@ -13,7 +13,7 @@
 #define IN_NUM_LOCK_MODE    (param->InNumLockMode())
 
 StructValue InputWindow::iws;
-Parameter  *InputWindow::param = 0;
+ParameterValue  *InputWindow::param = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ void InputWindow::Draw()
         pFuncVII func;
         StructFunc(pFuncVII f) : func(f) {};
     }
-    func[Parameter::Number] =
+    func[ParameterValue::Number] =
     {
         DrawFrequency,
         DrawPeriod,

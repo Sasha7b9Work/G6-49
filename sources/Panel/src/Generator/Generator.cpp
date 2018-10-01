@@ -95,14 +95,14 @@ void Generator::Update()
     }}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Parameter *param)
+void Generator::SetParameter(ParameterValue *param)
 {
     static const struct StructCommand
     {
         CommandPanel command;
         StructCommand(CommandPanel::E c) : command(c) {};
     }
-    commands[Parameter::Number] =
+    commands[ParameterValue::Number] =
     {
         CommandPanel::SetFrequency,
         CommandPanel::SetPeriod,
@@ -128,7 +128,7 @@ void Generator::SetParameter(Parameter *param)
 
     float value = param->GetValue();
 
-    if(param->Is(Parameter::Offset))
+    if(param->Is(ParameterValue::Offset))
     {
         value -= 5.0f;
     }

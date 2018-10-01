@@ -25,7 +25,7 @@ public:
 
     static void FormWave();
 
-    static void Parameter();
+    static void ParameterValue();
 
     static void Reset();
 

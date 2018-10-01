@@ -259,7 +259,7 @@ void Painter::SetPoint(int x, int y)
 
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {
-        *(Display::GetBuffer() + y * BUFFER_WIDTH + x) = currentColor.value;
+        *buffer = currentColor.value;
     }
 
 #endif
