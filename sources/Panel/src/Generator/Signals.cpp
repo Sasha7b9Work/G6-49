@@ -2,7 +2,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static ParameterValue paramsSineModulationA[] =
+static ParameterBase paramsSineModulationA[] =
 {
     ParameterValue(ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One),
     ParameterValue(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli),
@@ -10,53 +10,93 @@ static ParameterValue paramsSineModulationA[] =
     ParameterValue(ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One)
 };
 
-static ParameterValue params_SineA[] =
+static ParameterValue param_SineA_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
+static ParameterValue param_SineA_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "50000", 0, Order::One);
+static ParameterValue param_SineA_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
+static ParameterValue param_SineA_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "",      0, Order::One, paramsSineModulationA, 4);
+
+static ParameterBase *params_SineA[] =
 {
-    ParameterValue(ParameterValue::Frequency,          0.1f,    100e6f, "10000", 0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude,          0.0f,    10.0f,  "50000", 0, Order::One),
-    ParameterValue(ParameterValue::Offset,             0.0f,    10.0f,  "50000", 0, Order::One),
-    ParameterValue(ParameterValue::Manipulation,       -1.0f,    -1.0f, "",      0, Order::One, paramsSineModulationA, 4)
+    &param_SineA_Frequency,
+    &param_SineA_Amplitude,
+    &param_SineA_Offset,
+    &param_SineA_Manipulation
 };
 
-static ParameterValue  params_RampPlusA[] =
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_RampPlusA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000",  0, Order::Kilo);
+static ParameterValue param_RampPlusA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000",  1, Order::One);
+static ParameterValue param_RampPlusA_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000",  0, Order::One);
+
+static ParameterBase *params_RampPlusA[] =
 {
-    ParameterValue(ParameterValue::Frequency, 0.1f,    100e6f, "10000",  0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000",  1, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,  "50000",  0, Order::One),
+    &param_RampPlusA_Frequency,
+    &param_RampPlusA_Amplitude,
+    &param_RampPlusA_Offset
 };
 
-static ParameterValue params_RampMinusA[] =
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_RampMinusA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue param_RampMinusA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000", 1, Order::One);
+static ParameterValue param_RampMinusA_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_RampMinusA[] =
 {
-    ParameterValue(ParameterValue::Frequency, 0.1f,    100e6f, "10000", 0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One)
+    &param_RampMinusA_Frequency,
+    &param_RampMinusA_Amplitude,
+    &param_RampMinusA_Offset
 };
 
-static ParameterValue params_MeanderA[] =
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_MeanderA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue param_MeanderA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000", 1, Order::One);
+static ParameterValue param_MeanderA_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_MeanderA[] =
 {
-    ParameterValue(ParameterValue::Frequency, 0.1f,    100e6f,  "10000", 0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,   "10000", 1, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,   "50000", 0, Order::One)
+    &param_MeanderA_Frequency,
+    &param_MeanderA_Amplitude,
+    &param_MeanderA_Offset
 };
 
-static ParameterValue params_ImpulseA[] =
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_ImpulseA_Period   (ParameterValue::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli);
+static ParameterValue param_ImpulseA_Duration (ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli);
+static ParameterValue param_ImpulseA_Amplitude(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One);
+static ParameterValue param_ImpulseA_Offset   (ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_ImpulseA[] =
 {
-    ParameterValue(ParameterValue::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli),
-    ParameterValue(ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One)
+    &param_ImpulseA_Period,
+    &param_ImpulseA_Duration,
+    &param_ImpulseA_Amplitude,
+    &param_ImpulseA_Offset
 };
 
-static ParameterValue params_PacketA[] =
-{
-    ParameterValue(ParameterValue::Period,        0.0f,   100e6f, "02000", 0, Order::Milli),
-    ParameterValue(ParameterValue::Duration,      0.0f,   100e6f, "01000", 0, Order::Milli),
-    ParameterValue(ParameterValue::PacketNumber,  0.0f,   100e6f, "30000", 0, Order::One),
-    ParameterValue(ParameterValue::PacketPeriod,  0.0f,   100e6f, "10000", 0, Order::Milli),
-    ParameterValue(ParameterValue::Amplitude,     0.0f,   10.0f,  "10000", 1, Order::One),
-    ParameterValue(ParameterValue::Offset,        0.0f,   10.0f,  "50000", 0, Order::One),
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_PacketA_Period      (ParameterValue::Period,        0.0f, 100e6f, "02000", 0, Order::Milli);
+static ParameterValue param_PacketA_Duration    (ParameterValue::Duration,      0.0f, 100e6f, "01000", 0, Order::Milli);
+static ParameterValue param_PacketA_PacketNumber(ParameterValue::PacketNumber,  0.0f, 100e6f, "30000", 0, Order::One);
+static ParameterValue param_PacketA_PacketPeriod(ParameterValue::PacketPeriod,  0.0f, 100e6f, "10000", 0, Order::Milli);
+static ParameterValue param_PacketA_Amplitude   (ParameterValue::Amplitude,     0.0f, 10.0f,  "10000", 1, Order::One);
+static ParameterValue param_PacketA_Offset      (ParameterValue::Offset,        0.0f, 10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_PacketA[] =
+{
+    &param_PacketA_Period,
+    &param_PacketA_Duration,
+    &param_PacketA_PacketNumber,
+    &param_PacketA_PacketPeriod,
+    &param_PacketA_Amplitude,
+    &param_PacketA_Offset
 };
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 extern Wave wave[Chan::Number];
@@ -73,7 +113,7 @@ static Form formsA[] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static ParameterValue paramsSineModulationB[] =
+static ParameterBase paramsSineModulationB[] =
 {
     ParameterValue(ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One),
     ParameterValue(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli),
@@ -81,42 +121,73 @@ static ParameterValue paramsSineModulationB[] =
     ParameterValue(ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One)
 };
 
-static ParameterValue params_SineB[] =
+static ParameterValue param_SineB_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
+static ParameterValue param_SineB_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "10000", 1, Order::One);
+static ParameterValue param_SineB_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
+static ParameterValue param_SineB_Phase       (ParameterValue::Phase,        0.0f,  360.0f, "00000", 0, Order::One);
+static ParameterValue param_SineB_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "10000", 0, Order::One, paramsSineModulationB, 4);
+
+static ParameterBase *params_SineB[] =
 {
-    ParameterValue(ParameterValue::Frequency,          0.1f,    100e6f, "10000", 0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude,          0.0f,    10.0f,  "10000", 1, Order::One),
-    ParameterValue(ParameterValue::Offset,             0.0f,    10.0f,  "50000", 0, Order::One),
-    ParameterValue(ParameterValue::Phase,              0.0f,    360.0f, "00000", 0, Order::One),
-    ParameterValue(ParameterValue::Manipulation,       -1.0f,   -1.0f,  "10000", 0, Order::One, paramsSineModulationB, 4)
+    &param_SineB_Frequency,
+    &param_SineB_Amplitude,
+    &param_SineB_Offset,
+    &param_SineB_Phase,
+    &param_SineB_Manipulation
 };
 
-static ParameterValue  params_RampPlusB[] =
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_RampPlusB_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue param_RampPlusB_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "50000", 0, Order::One);
+static ParameterValue param_RampPlusB_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_RampPlusB[] =
 {
-    ParameterValue(ParameterValue::Frequency, 0.1f,    100e6f, "10000", 0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,  "50000", 0, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One)
+    &param_RampPlusB_Frequency,
+    &param_RampPlusB_Amplitude,
+    &param_RampPlusB_Offset
 };
 
-static ParameterValue params_RampMinusB[] =
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_RampMinusB_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue param_RampMinusB_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "50000", 0, Order::One);
+static ParameterValue param_RampMinusB_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_RampMinusB[] =
 {
-    ParameterValue(ParameterValue::Frequency, 0.1f,    100e6f, "10000", 0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,  "50000", 0, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One)
+    &param_RampMinusB_Frequency,
+    &param_RampMinusB_Amplitude,
+    &param_RampMinusB_Offset
 };
 
-static ParameterValue params_MeanderB[] =
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_MeanderB_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue param_MeanderB_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000", 1, Order::One);
+static ParameterValue param_MeanderB_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_MeanderB[] =
 {
-    ParameterValue(ParameterValue::Frequency, 0.1f,    100e6f, "10000", 0, Order::Kilo),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One)
+    &param_MeanderB_Frequency,
+    &param_MeanderB_Amplitude,
+    &param_MeanderB_Offset
 };
 
-static ParameterValue params_ImpulseB[] =
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue param_ImpulseB_Period   (ParameterValue::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli);
+static ParameterValue param_ImpulseB_Duration (ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli);
+static ParameterValue param_ImpulseB_Amplitude(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One);
+static ParameterValue param_ImpulseB_Offset   (ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One);
+
+static ParameterBase *params_ImpulseB[] =
 {
-    ParameterValue(ParameterValue::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli),
-    ParameterValue(ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli),
-    ParameterValue(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One),
-    ParameterValue(ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One),
+    &param_ImpulseB_Period,
+    &param_ImpulseB_Duration,
+    &param_ImpulseB_Amplitude,
+    &param_ImpulseB_Offset
 };
 
 

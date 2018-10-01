@@ -20,10 +20,15 @@ void Wave::Graphics::Draw(Chan ch)
     Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::GREEN_5);
     if (CHANNEL_ENABLED(ch))
     {
+        DEBUG_POINT;
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
+        DEBUG_POINT;
         Text::DrawBigText(x0 + 5, y0 + 5, 2, ch == Chan::A ? "A" : "B", Color::FILL);
+        DEBUG_POINT;
         DrawUGO(ch, y0);
+        DEBUG_POINT;
         DrawParameters(ch, y0);
+        DEBUG_POINT;
     }
 }
 
@@ -205,6 +210,7 @@ void Wave::Graphics::DrawPacketImpulse(int x0, int y0, int, int height)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphics::DrawParameters(Chan ch, int y0)
 {
+    DEBUG_POINT;
     Form *form = FORM(ch);
 
     int x0 = 107;
@@ -212,18 +218,35 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
     y0 += 5;
 
     Text::DrawText(22, y0 + 3, form->Name(LANG), Color::FILL);
+    
+    if(!ch.IsA())
+    {
+        ch = ch;
+    }
+    
+    int numParams = form->NumParameters();
    
     for (int i = 0; i < form->NumParameters(); i++)
     {
+        DEBUG_POINT;
         ParameterBase *param = form->GetParameter(i);
-        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT_VALUE->Name(), PARAM_VALUE(param)->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
+
+        ParameterValue *paramValue = (ParameterValue *)param;
+
+        pString name = paramValue->Name();
+        DEBUG_POINT;
+        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT_VALUE->Name(), name) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }
-        Text::DrawText(x0 + 1, y0, PARAM_VALUE(param)->Name(), Color::FILL);
+        DEBUG_POINT;
+        Text::DrawText(x0 + 1, y0, name, Color::FILL);
+        DEBUG_POINT;
         DrawParameterValue(param, x0 + 80, y0);
+        DEBUG_POINT;
         y0 += 11;
     }
+    DEBUG_POINT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

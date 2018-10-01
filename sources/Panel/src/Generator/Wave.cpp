@@ -134,18 +134,18 @@ Wave::Wave(Chan ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, ParameterBase *parameters, int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
+Form::Form(E v, ParameterBase *parameters[], int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
 {
     for(int i = 0; i < numParams; i++)
     {
-        params[i].form = this;
+        params[i]->form = this;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 ParameterBase *Form::CurrentParameter()
 {
-    return &params[currentParam];
+    return params[currentParam];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ ParameterBase *Form::GetParameter(int i)
 {
     if(i < numParams)
     {
-        return &params[i];
+        return params[i];
     }
     return 0;
 }
@@ -190,7 +190,7 @@ void Form::TuneGenerator(Chan ch)
         if(set.sineManipulation[ch])
         {
             int current = currentParam;
-            ParameterBase *param = params;
+            ParameterBase **param = params;
             int numPar = numParams;
 
             currentParam = oldCurrentParams;
@@ -291,8 +291,8 @@ void Form::OpenCurrentParameter()
 
             for (int i = 0; i < numParams; i++)
             {
-                params[i].form = this;
-                params[i].parent = parent;
+                params[i]->form = this;
+                params[i]->parent = parent;
             }
         }
     }

@@ -45,6 +45,8 @@ public:
     Form *GetForm() { return form; };
     /// ¬озвращает адрес родительского параметра
     ParameterBase *GetParent() { return parent; };
+
+    bool IsValue() const { return type == Value; }
 private:
     /// ”казатель на фрорму, которой принадлежит параметр
     Form *form;
@@ -87,7 +89,7 @@ public:
 
     ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), inNumLockMode(false) {};
 
-    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, ParameterValue *param = 0, 
+    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, ParameterBase *param[] = 0, 
         int num = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') : ParameterBase(Value),
         value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num)
     {
@@ -139,7 +141,7 @@ private:
     /// ≈сли true, то находимс€ в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
     /// «десь наход€тс€ дополнительные параметры в случае, если они требуютс€
-    ParameterValue *params;
+    ParameterBase **params;
     /// „исло дополнительных параметров. 0, если таковых не имеетс€
     int numParams;
 };
@@ -162,7 +164,7 @@ public:
 
     Form(E v = Number) : value(v), wave(0), currentParam(0)   { };
 
-    Form(E v, ParameterBase *param, int numParams, Wave *w);
+    Form(E v, ParameterBase *param[], int numParams, Wave *w);
     /// ¬озвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// ¬озвращает ссылку на текущий параметр
@@ -194,14 +196,14 @@ private:
     /// Wave, к которому относитс€ данный Form
     Wave *wave;
     /// «десь хран€тс€ параметры
-    ParameterBase *params;
+    ParameterBase **params;
     /// —колько всего параметров
     int numParams;
     /// Ќомер текущего параметра в массиве params
     int currentParam;
 
     /// «десь сохран€етс€ указатель на основные параметры в случае раскрыти€ сложного параметра
-    ParameterBase *oldParams;
+    ParameterBase **oldParams;
     /// ќтноситс€ к oldParams
     int oldNumParams;
     /// ќтноситс€ к oldParams
