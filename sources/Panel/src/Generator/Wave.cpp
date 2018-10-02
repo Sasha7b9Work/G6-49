@@ -516,5 +516,14 @@ void ParameterChoice::NextChoice()
 {
     CircleIncrease(&choice, 0, num - 1);
 
-    Generator::TuneChannel(form->GetWave()->GetChannel());
+    Chan ch = form->GetWave()->GetChannel();
+
+    if(value == ModeStart)
+    {
+        Generator::LoadStartMode(ch, choice);
+    }
+    else
+    {
+        Generator::TuneChannel(ch);
+    }
 }

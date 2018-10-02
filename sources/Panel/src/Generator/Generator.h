@@ -45,6 +45,7 @@ public:
     static void EmptyCommand();
     /// Загружает режим запуска из set в аппаратуру
     static void LoadStartMode(Chan ch);
+    static void LoadStartMode(Chan ch, int mode);
 
 private:
     /// Заслать в генератор данные

@@ -11,6 +11,7 @@
 #include "Menu/Pages/PageDebug.h"
 #include "Menu/Pages/AddPageInput.h"
 #include "Settings/Settings.h"
+#include "Utils/Debug.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,8 +43,10 @@ void Menu::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Update()
 {
+    DEBUG_POINT;
     while (!CPU::Keyboard::BufferIsEmpty())
     {
+        DEBUG_POINT
         Control key = CPU::Keyboard::GetNextControl();
 
         if (key.action.IsRelease())
@@ -68,9 +71,12 @@ void Menu::Update()
             }
         }
 
+        DEBUG_POINT
         if (GetOpenedItem())
         {
+            DEBUG_POINT
             GetOpenedItem()->Press(key);
+            DEBUG_POINT
         }
         else if (Hint::ProcessControl(key))
         {
@@ -81,7 +87,9 @@ void Menu::Update()
         else if (CURRENT_PAGE->Press(key))
         {
         }
+        DEBUG_POINT
     }
+    DEBUG_POINT
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
