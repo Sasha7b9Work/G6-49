@@ -241,7 +241,7 @@ ParameterValue *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
-        ParameterValue *param = (ParameterValue *)&params[i];
+        ParameterValue *param = (ParameterValue *)params[i];
 
         if(param->value == p)
         {
