@@ -28,6 +28,8 @@ public:
 
     static void SetPeriodImpulse(Chan ch, float period);
 
+    static void SetPolarity(Chan ch, uint8 polarity);
+
     static void SetStartMode(Chan ch, StartMode mode);
     /// Делает однократный запуск. Возвращает true в случае успеха (если установлены соответствующие настройки)
     static bool Start();

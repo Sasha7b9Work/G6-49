@@ -94,6 +94,23 @@ void FPGA::SetPackedImpulseMode(Chan)
     uint64 data = (16383 << 14) + 8191;
 
     WriteRegister(RG::_3_RectA, data);
+
+    SetPolarity(Chan::A, 0);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetPolarity(Chan ch, uint8 polarity)
+{
+    uint64 data = (16383 << 14) + 8191;     // ѕоложительна€ пол€рность
+
+    if(polarity == 1)
+    {
+        data = (8191 << 14) + 16383;        // ќтрицательна€ пол€рность
+    }
+
+    static const RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
+
+    WriteRegister(regs[ch], data);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -102,11 +119,7 @@ void FPGA::SetImpulseMode(Chan ch)
     modeWork[ch] = ModeWork::Impulse;
     WriteControlRegister();
 
-    uint64 data = (16383 << 14) + 8191;
-
-    RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
-
-    WriteRegister(regs[ch], data);
+    SetPolarity(ch, 0);         // ”станавливаем положительную пол€рность
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

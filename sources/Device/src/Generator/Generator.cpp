@@ -86,7 +86,8 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         SetPacketPeriod,
         SetPacketNumber,
         EmptyFunc,
-        SetPeriod
+        SetPeriod,
+        EmptyFunc
     };
 
     func[command].func(ch, value);

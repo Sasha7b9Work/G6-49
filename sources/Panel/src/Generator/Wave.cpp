@@ -246,17 +246,32 @@ void Form::TuneGenerator(Chan ch)
         SendParameterToGenerator(ParameterValue::Duration);
         SendParameterToGenerator(ParameterValue::PacketNumber);
         SendParameterToGenerator(ParameterValue::PacketPeriod);
+        SendParameterToGenerator(ParameterChoice::Polarity);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-ParameterValue *Form::FindParameter(ParameterValue::E p)
+ParameterBase *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
-        ParameterValue *param = (ParameterValue *)params[i];
+        ParameterBase *param = params[i];
 
-        if(param->value == p)
+        if(param->IsValue() && ((ParameterValue *)param)->value == p)
+        {
+            return param;
+        }
+    }
+    return 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+ParameterBase *Form::FindParameter(ParameterChoice::E p)
+{
+    for(int i = 0; i < numParams; i++)
+    {
+        ParameterBase *param = params[i];
+        if(param->IsChoice() && ((ParameterChoice *)param)->value == p)
         {
             return param;
         }
@@ -267,10 +282,20 @@ ParameterValue *Form::FindParameter(ParameterValue::E p)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::SendParameterToGenerator(ParameterValue::E p)
 {
-    ParameterValue *param = FindParameter(p);
+    ParameterBase *param = FindParameter(p);
     if (param)
     {
-        Generator::SetParameter(param);
+        Generator::SetParameter((ParameterValue *)param);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::SendParameterToGenerator(ParameterChoice::E p)
+{
+    ParameterBase *param = FindParameter(p);
+    if(param)
+    {
+        Generator::SetParameter((ParameterChoice *)param);
     }
 }
 
@@ -489,4 +514,9 @@ void Form::ChangeParameter()
 void ParameterChoice::NextChoice()
 {
     CircleIncrease(&choice, 0, num - 1);
+
+    if(value == Polarity)
+    {
+        Generator::TuneChannel(form->GetWave()->GetChannel());
+    }
 }

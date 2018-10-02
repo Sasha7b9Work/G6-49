@@ -59,11 +59,10 @@ public:
 
     pString NameUnit(char buffer[10]) const;
 
-private:
+protected:
     /// Указатель на фрорму, которой принадлежит параметр
     Form *form;
 
-protected:
     ParameterBase(Type t) : type(t), parent(0) {};
 
     Type type;
@@ -97,6 +96,8 @@ public:
     pString GetStringValue() const;
 
     void NextChoice();
+
+    int GetChoice() const { return choice; };
 
 private:
     /// Текущий вариант
@@ -247,9 +248,11 @@ public:
     bool CloseOpenedParameter();
 private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    ParameterValue *FindParameter(ParameterValue::E p);
+    ParameterBase *FindParameter(ParameterValue::E p);
+    ParameterBase *FindParameter(ParameterChoice::E p);
     /// Засыалет параметр в генератор
     void SendParameterToGenerator(ParameterValue::E p);
+    void SendParameterToGenerator(ParameterChoice::E p);
     /// Раскрывает страницу текущего параметра
     void OpenCurrentParameter();
     /// Wave, к которому относится данный Form

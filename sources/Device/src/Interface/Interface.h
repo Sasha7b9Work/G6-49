@@ -43,6 +43,8 @@ public:
 
     static void SetStartMode();
 
+    static void Polarity();
+
 private:
 
     /// ¬озвращает значение типа float, хран€щеес€ в массиве

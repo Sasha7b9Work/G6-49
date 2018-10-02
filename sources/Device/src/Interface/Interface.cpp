@@ -53,29 +53,30 @@ static const struct FuncInterface
 commands[CommandPanel::Number] =
 {
     Interface::Empty,
-    Interface::Enable,                  ///< EnableChannel
-    Interface::FormWave,                ///< SetFormWave
-    Interface::ParameterValue,               ///< SetFrequency
-    Interface::ParameterValue,               ///< SetAmplitude
-    Interface::ParameterValue,               ///< SetOffset
-    Interface::ParameterValue,               ///< SetDuration
-    Interface::ParameterValue,               ///< SetDutyRatio
-    Interface::ParameterValue,               ///< SetPhase
-    Interface::Reset,                   ///< RunReset
-    Interface::ModeDebug,               ///< ModeDebug
-    Interface::ParameterValue,               ///< SetDelay
-    Interface::WriteRegister,           ///< WriteRegister
-    Interface::Empty,                   ///< SET_DURATION_RISE
-    Interface::Empty,                   ///< SET_DURATION_FALL
-    Interface::Empty,                   ///< SET_DURATION_STADY
-    Interface::Empty,                   ///< SET_DUTY_FACTOR
-    Interface::SetManipulation,         ///< SetManipulation
-    Interface::SetManipulationDuration, ///< SetManipulationDuration
-    Interface::SetManipulationPeriod,   ///< SetManipulationPeriod
-    Interface::ParameterValue,               ///< SetPacketPeriod
-    Interface::ParameterValue,               ///< SetPacketNumber
+    Interface::Enable,                      ///< EnableChannel
+    Interface::FormWave,                    ///< SetFormWave
+    Interface::ParameterValue,              ///< SetFrequency
+    Interface::ParameterValue,              ///< SetAmplitude
+    Interface::ParameterValue,              ///< SetOffset
+    Interface::ParameterValue,              ///< SetDuration
+    Interface::ParameterValue,              ///< SetDutyRatio
+    Interface::ParameterValue,              ///< SetPhase
+    Interface::Reset,                       ///< RunReset
+    Interface::ModeDebug,                   ///< ModeDebug
+    Interface::ParameterValue,              ///< SetDelay
+    Interface::WriteRegister,               ///< WriteRegister
+    Interface::Empty,                       ///< SET_DURATION_RISE
+    Interface::Empty,                       ///< SET_DURATION_FALL
+    Interface::Empty,                       ///< SET_DURATION_STADY
+    Interface::Empty,                       ///< SET_DUTY_FACTOR
+    Interface::SetManipulation,             ///< SetManipulation
+    Interface::SetManipulationDuration,     ///< SetManipulationDuration
+    Interface::SetManipulationPeriod,       ///< SetManipulationPeriod
+    Interface::ParameterValue,              ///< SetPacketPeriod
+    Interface::ParameterValue,              ///< SetPacketNumber
     Interface::SetStartMode,
-    Interface::ParameterValue                ///< SetPeriod
+    Interface::ParameterValue,              ///< SetPeriod
+    Interface::Polarity                     ///< SetPolarity
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,6 +130,13 @@ void Interface::Enable()
     bool enable = buffer[2] == 1;
       
     Generator::EnableChannel(ch, enable);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Polarity()
+{
+    Chan ch = (Chan::E)buffer[1];
+    FPGA::SetPolarity(ch, buffer[2]);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -34,6 +34,8 @@ public:
 
     static void SetParameter(ParameterValue *param);
 
+    static void SetParameter(ParameterChoice *param);
+
     static void SetDebugMode(bool enable);
 
     static void LoadRegister(Register reg, uint64 value);

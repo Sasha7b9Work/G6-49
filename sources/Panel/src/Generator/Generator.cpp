@@ -92,7 +92,26 @@ void Generator::Update()
         SendToInterface(trans, LENGTH_SPI_BUFFER);
 
         timePrev = TIME_MS;
-    }}
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetParameter(ParameterChoice *param)
+{
+    static const struct StructCommand
+    {
+        CommandPanel command;
+        StructCommand(CommandPanel::E c) : command(c) {};
+    }
+    commands[ParameterChoice::Number] =
+    {
+        CommandPanel::SetPolarity
+    };
+
+    uint8 buffer[3] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()};
+
+    SendToInterface(buffer, 3);
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterValue *param)
