@@ -218,13 +218,10 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         ch = ch;
     }
     
-    int numParams = form->NumParameters();
-   
     for (int i = 0; i < form->NumParameters(); i++)
     {
         ParameterBase *param = form->GetParameter(i);
-        ParameterValue *paramValue = (ParameterValue *)param;
-        pString name = paramValue->Name();
+        pString name = ((ParameterValue *)param)->Name();
         if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT_VALUE->Name(), name) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
