@@ -86,7 +86,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
 
     static const struct StructFunc
     {
-        typedef void (*pFuncIIII)(int, int, int, int);
+        typedef void (*pFuncIIII)(Chan, int, int, int, int);
         pFuncIIII func;
         StructFunc(pFuncIIII f) : func(f) {};
     } func[Form::Number] =
@@ -101,11 +101,11 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
 
     int index = FORM(chan)->value;
     
-    func[index].func(x0, minY, width, height);
+    func[index].func(chan, x0, minY, width, height);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawSine(int x0, int y0, int width, int height)
+void Wave::Graphics::DrawSine(Chan, int x0, int y0, int width, int height)
 {
     float speed = 0.1f;
     int delta = 1;
@@ -121,7 +121,7 @@ void Wave::Graphics::DrawSine(int x0, int y0, int width, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawRampPlus(int x0, int y0, int, int height)
+void Wave::Graphics::DrawRampPlus(Chan, int x0, int y0, int, int height)
 {
     y0 += height;
     int dX = 28;
@@ -133,7 +133,7 @@ void Wave::Graphics::DrawRampPlus(int x0, int y0, int, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawRampMinus(int x0, int y0, int, int height)
+void Wave::Graphics::DrawRampMinus(Chan, int x0, int y0, int, int height)
 {
     int aveY = y0 + height / 2;
     int dX = 28;
@@ -146,7 +146,7 @@ void Wave::Graphics::DrawRampMinus(int x0, int y0, int, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawMeander(int x0, int y0, int, int height)
+void Wave::Graphics::DrawMeander(Chan, int x0, int y0, int, int height)
 {
     int dX = 40;
     int dY = 20;
@@ -161,23 +161,40 @@ void Wave::Graphics::DrawMeander(int x0, int y0, int, int height)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawImpulse(int x0, int y0, int, int height)
+void Wave::Graphics::DrawImpulse(Chan ch, int x0, int y0, int, int height)
 {
     int minY = y0;
     int maxY = y0 + height;
     int deltaX = 20;
-    for (int i = 0; i < 5; i++)
+
+    ParameterChoice *param = (ParameterChoice *)WAVE(ch).GetCurrentForm()->FindParameter(ParameterChoice::Polarity);
+
+    if(param->GetChoice() == 0)
     {
-        Painter::DrawVLine(x0, minY, maxY);
-        Painter::DrawHLine(minY, x0, x0 + 5);
-        Painter::DrawVLine(x0 + 5, minY, maxY);
-        Painter::DrawHLine(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
-        x0 += deltaX;
+        for (int i = 0; i < 5; i++)
+        {
+            Painter::DrawVLine(x0, minY, maxY);
+            Painter::DrawHLine(minY, x0, x0 + 5);
+            Painter::DrawVLine(x0 + 5, minY, maxY);
+            Painter::DrawHLine(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
+            x0 += deltaX;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Painter::DrawVLine(x0, minY, maxY);
+            Painter::DrawHLine(minY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
+            Painter::DrawVLine(x0 + 5, minY, maxY);
+            Painter::DrawHLine(maxY, x0, x0 + 5);
+            x0 += deltaX;
+        }
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawPacketImpulse(int x0, int y0, int, int height)
+void Wave::Graphics::DrawPacketImpulse(Chan, int x0, int y0, int, int height)
 {
     int minY = y0;
     int maxY = y0 + height;

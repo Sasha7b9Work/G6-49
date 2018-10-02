@@ -358,21 +358,20 @@ public:
 
         static void DrawUGO(Chan chan, int y0);
 
-        static void DrawSine(int x, int y, int width, int height);
+        static void DrawSine(Chan ch, int x, int y, int width, int height);
 
-        static void DrawRampPlus(int x, int y, int width, int height);
+        static void DrawRampPlus(Chan ch, int x, int y, int width, int height);
 
-        static void DrawRampMinus(int x, int y, int width, int height);
+        static void DrawRampMinus(Chan ch, int x, int y, int width, int height);
 
-        static void DrawMeander(int x, int y, int width, int height);
+        static void DrawMeander(Chan ch, int x, int y, int width, int height);
 
-        static void DrawImpulse(int x, int y, int width, int height);
+        static void DrawImpulse(Chan ch, int x, int y, int width, int height);
 
-        static void DrawPacketImpulse(int x, int y, int width, int height);
+        static void DrawPacketImpulse(Chan ch, int x, int y, int width, int height);
 
         static void DrawParameters(Chan chan, int y0);
 
         static void DrawParameterValue(ParameterBase *parameter, int x, int y);
-
     };
 };
