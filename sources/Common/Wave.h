@@ -80,6 +80,7 @@ public:
     enum E
     {
         Polarity,   ///< Полярность импульсов
+        ModeStart,  ///< Режим запуска
         Number
     } value;
 
@@ -93,6 +94,19 @@ public:
         names[1][1] = (char *)var1en;
     };
 
+    ParameterChoice(E v, pString var0ru, pString var0en, pString var1ru, pString var1en, 
+                    pString var2ru, pString var2en, pString var3ru, pString var3en) : ParameterBase(Choice), value(v), choice(0), num(4)
+    {
+        names[0][0] = (char *)var0ru;
+        names[0][1] = (char *)var0en;
+        names[1][0] = (char *)var1ru;
+        names[1][1] = (char *)var1en;
+        names[2][0] = (char *)var2ru;
+        names[2][1] = (char *)var2en;
+        names[3][0] = (char *)var3ru;
+        names[3][1] = (char *)var3en;
+    }
+
     pString GetStringValue() const;
 
     void NextChoice();
@@ -105,7 +119,7 @@ private:
     /// Количество вариантов
     int num;
     /// Варианты на русском языке
-    char *names[2][2];
+    char *names[4][2];
 };
 
 

@@ -105,7 +105,8 @@ void Generator::SetParameter(ParameterChoice *param)
     }
     commands[ParameterChoice::Number] =
     {
-        CommandPanel::SetPolarity
+        CommandPanel::SetPolarity,
+        CommandPanel::SetStartMode
     };
 
     uint8 buffer[3] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()};

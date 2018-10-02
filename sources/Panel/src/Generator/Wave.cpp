@@ -446,7 +446,8 @@ pString ParameterChoice::Name() const
     }
     namesParam[ParameterChoice::Number][2] =
     {
-        {"Полярность", "Polarity"}
+        {"Полярность", "Polarity"},
+        {"Запуск", "Mode start"}
     };
 
     return namesParam[value][LANG].name;
@@ -515,8 +516,5 @@ void ParameterChoice::NextChoice()
 {
     CircleIncrease(&choice, 0, num - 1);
 
-    if(value == Polarity)
-    {
-        Generator::TuneChannel(form->GetWave()->GetChannel());
-    }
+    Generator::TuneChannel(form->GetWave()->GetChannel());
 }
