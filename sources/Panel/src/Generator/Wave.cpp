@@ -397,3 +397,34 @@ bool ParameterValue::IsOpened()
 {
     return IsComplexParameter() && GetForm()->ParameterIsOpened();
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterChoice::Name() const
+{
+    static const struct StructName
+    {
+        pString name;
+        StructName(pString n) : name(n) {};
+    }
+    names[ParameterChoice::Number][2] =
+    {
+        {"Полярность", "Polarity"}
+    };
+
+    return names[value][LANG].name;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterBase::Name() const
+{
+    if(IsValue())
+    {
+        return ((ParameterValue *)this)->Name();
+    }
+    else if(IsChoice())
+    {
+        return ((ParameterChoice *)this)->Name();
+    }
+
+    return "";
+}

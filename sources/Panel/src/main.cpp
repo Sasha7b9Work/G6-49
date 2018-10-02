@@ -33,10 +33,15 @@ int main()
 
     while (1)
     {
+        DEBUG_POINT;
         CPU::Update();
+        DEBUG_POINT;
         Menu::Update();
+        DEBUG_POINT;
         Display::Update();
+        DEBUG_POINT;
         Generator::Update();
+        DEBUG_POINT;
     }
 }
 

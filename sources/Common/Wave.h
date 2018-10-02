@@ -50,6 +50,10 @@ public:
     ParameterBase *GetParent() { return parent; };
 
     bool IsValue() const { return type == Value; }
+
+    bool IsChoice() const { return type == Choice; }
+
+    pString Name() const;
 private:
     /// Указатель на фрорму, которой принадлежит параметр
     Form *form;
@@ -74,6 +78,8 @@ public:
         Polarity,   ///< Полярность импульсов
         Number
     } value;
+
+    pString Name() const;
 
     ParameterChoice(E v) : ParameterBase(Choice), value(v) {};
 };

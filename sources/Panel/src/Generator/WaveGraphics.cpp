@@ -213,20 +213,19 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 
     Text::DrawText(22, y0 + 3, form->Name(LANG), Color::FILL);
     
-    if(!ch.IsA())
-    {
-        ch = ch;
-    }
-    
     for (int i = 0; i < form->NumParameters(); i++)
     {
         ParameterBase *param = form->GetParameter(i);
-        pString name = ((ParameterValue *)param)->Name();
-        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT_VALUE->Name(), name) == 0 && CURRENT_PAGE == PageSignals::pointer)
+        if(param->IsChoice())
+        {
+            param = param;
+        }
+        
+        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT_VALUE->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }
-        Text::DrawText(x0 + 1, y0, name, Color::FILL);
+        Text::DrawText(x0 + 1, y0, param->Name(), Color::FILL);
         DrawParameterValue(param, x0 + 80, y0);
         y0 += 11;
     }
