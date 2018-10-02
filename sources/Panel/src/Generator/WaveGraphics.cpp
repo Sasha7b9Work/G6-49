@@ -221,7 +221,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
             param = param;
         }
         
-        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT_VALUE->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
+        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }
@@ -234,9 +234,9 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
 {
-    x = Text::DrawText(x, y, PARAM_VALUE(param)->GetStringValue());
+    x = Text::DrawText(x, y, param->GetStringValue());
     char buffer[10];
     Text::SetUpperCase(false);
-    Text::DrawText(x + 2, y, PARAM_VALUE(param)->NameUnit(buffer));
+    Text::DrawText(x + 2, y, param->NameUnit(buffer));
     Text::SetUpperCase(true);
 }

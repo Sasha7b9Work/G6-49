@@ -359,7 +359,7 @@ pString ParameterValue::GetStringValue() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString ParameterValue::NameUnit(char buf[10])
+pString ParameterValue::NameUnit(char buf[10]) const
 {
     static const struct StructName
     {
@@ -390,6 +390,16 @@ pString ParameterValue::NameUnit(char buf[10])
 
     sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);
     return buf;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterBase::NameUnit(char buffer[10]) const
+{
+    if(IsValue())
+    {
+        return ((ParameterValue *)this)->NameUnit(buffer);
+    }
+    return "";
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -427,4 +437,24 @@ pString ParameterBase::Name() const
     }
 
     return "";
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterBase::GetStringValue() const
+{
+    if(IsValue())
+    {
+        return ((ParameterValue *)this)->GetStringValue();
+    }
+    else if(IsChoice())
+    {
+        return ((ParameterChoice *)this)->GetStringValue();
+    }
+    return "";
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterChoice::GetStringValue() const
+{
+    return names[choice][LANG];
 }

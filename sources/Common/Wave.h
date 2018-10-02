@@ -54,6 +54,11 @@ public:
     bool IsChoice() const { return type == Choice; }
 
     pString Name() const;
+
+    pString GetStringValue() const;
+
+    pString NameUnit(char buffer[10]) const;
+
 private:
     /// Указатель на фрорму, которой принадлежит параметр
     Form *form;
@@ -88,6 +93,8 @@ public:
         names[1][0] = (char *)var1ru;
         names[1][1] = (char *)var1en;
     };
+
+    pString GetStringValue() const;
 
 private:
     /// Текущий вариант
@@ -171,7 +178,7 @@ public:
     /// Возвращает true, если сложный и открыт
     bool IsOpened();
 
-    pString NameUnit(char buffer[10]);
+    pString NameUnit(char buffer[10]) const;
    
     Order order;
     /// Позиция подсвеченного символа
