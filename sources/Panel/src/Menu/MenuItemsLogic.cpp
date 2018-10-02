@@ -503,7 +503,7 @@ pString ChoiceParameter::NameSubItem(int number) const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameCurrentSubItem() const
 {
-    return PARAM_VALUE(form->CurrentParameter())->Name();
+    return form->CurrentParameter()->Name();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
