@@ -310,7 +310,7 @@ void Form::OpenCurrentParameter()
     if(PARAM_CURRENT_IS_MANIPULATION)
     {
         /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
-        if(PARAM_CURRENT_PARENT)
+        if(PARAM_CURRENT->GetParent())
         {
             set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
             Generator::TuneChannel(GetWave()->GetChannel());

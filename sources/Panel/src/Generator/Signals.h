@@ -16,7 +16,6 @@
 #define PARAM_CURRENT_IS_MANIPULATION   (((ParameterValue *)CurrentParameter())->Is(ParameterValue::Manipulation))
 #define PARAM_CURRENT_IS_EXIT           (((ParameterValue *)PARAM_CURRENT)->IsExitParameter())
 #define PARAM_CURRENT_IS_COMPLEX        (((ParameterValue *)PARAM_CURRENT)->IsComplexParameter())
-#define PARAM_CURRENT_PARENT            (((ParameterValue *)PARAM_CURRENT)->GetParent())
 
 
 
