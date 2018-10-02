@@ -7,6 +7,7 @@
 #include "Generator.h"
 #include "Signals.h"
 #include "Utils/Debug.h"
+#include "Utils/Math.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/AddPageInput.h"
 #include <stdio.h>
@@ -464,7 +465,11 @@ pString ParameterChoice::GetStringValue() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::ChangeParameter()
 {
-    if (((ParameterValue *)PARAM_CURRENT)->IsInputValue())
+    if(PARAM_CURRENT->IsChoice())
+    {
+        ((ParameterChoice *)PARAM_CURRENT)->NextChoice();
+    }
+    else if (((ParameterValue *)PARAM_CURRENT)->IsInputValue())
     {
         InputWindow::Init();
     
@@ -478,4 +483,10 @@ void Form::ChangeParameter()
     {
         OpenCurrentParameter();
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void ParameterChoice::NextChoice()
+{
+    CircleIncrease(&choice, 0, num - 1);
 }

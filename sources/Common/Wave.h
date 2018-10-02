@@ -96,6 +96,8 @@ public:
 
     pString GetStringValue() const;
 
+    void NextChoice();
+
 private:
     /// Текущий вариант
     int choice;
