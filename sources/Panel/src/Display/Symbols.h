@@ -22,6 +22,8 @@ struct Ideograph
         enum
         {
             Degree   = '\x7b',
+            BigPlus  = '\x9c',
+            BigMinus = '\x9d',
             Left     = '\xa0',
             Right    = '\xa2',
             Delete   = '\xa6',

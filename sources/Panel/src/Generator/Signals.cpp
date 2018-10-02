@@ -79,7 +79,7 @@ static ParameterValue  param_ImpulseA_Period   (ParameterValue::Period,    3.3e-
 static ParameterValue  param_ImpulseA_Duration (ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli);
 static ParameterValue  param_ImpulseA_Amplitude(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One);
 static ParameterValue  param_ImpulseA_Offset   (ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One);
-static ParameterChoice param_ImpulseA_Polarity(ParameterChoice::Polarity,  "+", "+", "-", "-");
+static ParameterChoice param_ImpulseA_Polarity(ParameterChoice::Polarity,  "\x9c", "\x9c", "\x9d", "\x9d");
 
 static ParameterBase *params_ImpulseA[] =
 {
