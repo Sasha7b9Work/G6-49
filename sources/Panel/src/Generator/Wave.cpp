@@ -533,6 +533,17 @@ void ParameterChoice::NextChoice()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+bool ParameterChoice::DrawChoice(int x, int y)
+{
+    if(func[choice])
+    {
+        func[choice](x, y);
+    }
+
+    return func[choice] != 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Wave::StartModeIsSingle()
 {
     ParameterChoice* param = (ParameterChoice *)GetCurrentForm()->FindParameter(ParameterChoice::ModeStart);
