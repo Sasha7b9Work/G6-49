@@ -102,6 +102,11 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Painter::DrawVLine(int x, int y0, int y1, Color col)
 {
+    if(y1 < y0)
+    {
+        Swap(&y0, &y1);
+    }
+
     SetColor(col);
 
 #ifdef OPEN

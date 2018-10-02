@@ -165,31 +165,24 @@ void Wave::Graphics::DrawImpulse(Chan ch, int x0, int y0, int, int height)
 {
     int minY = y0;
     int maxY = y0 + height;
-    int deltaX = 20;
 
     ParameterChoice *param = (ParameterChoice *)WAVE(ch).GetCurrentForm()->FindParameter(ParameterChoice::Polarity);
 
-    if(param->GetChoice() == 0)
+    if(param->GetChoice() == 1)
     {
-        for (int i = 0; i < 5; i++)
-        {
-            Painter::DrawVLine(x0, minY, maxY);
-            Painter::DrawHLine(minY, x0, x0 + 5);
-            Painter::DrawVLine(x0 + 5, minY, maxY);
-            Painter::DrawHLine(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
-            x0 += deltaX;
-        }
+        minY = maxY;
+        maxY = y0;
     }
-    else
+
+    int deltaX = 20;
+
+    for (int i = 0; i < 5; i++)
     {
-        for (int i = 0; i < 5; i++)
-        {
-            Painter::DrawVLine(x0, minY, maxY);
-            Painter::DrawHLine(minY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
-            Painter::DrawVLine(x0 + 5, minY, maxY);
-            Painter::DrawHLine(maxY, x0, x0 + 5);
-            x0 += deltaX;
-        }
+        Painter::DrawVLine(x0, minY, maxY);
+        Painter::DrawVLine(x0 + 5, minY, maxY);
+        Painter::DrawHLine(minY, x0, x0 + 5);
+        Painter::DrawHLine(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
+        x0 += deltaX;
     }
 }
 
