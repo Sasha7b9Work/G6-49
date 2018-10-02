@@ -93,12 +93,13 @@ static ParameterBase *params_ImpulseA[] =
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static ParameterValue param_PacketA_Period      (ParameterValue::Period,        0.0f, 100e6f, "02000", 0, Order::Milli);
-static ParameterValue param_PacketA_Duration    (ParameterValue::Duration,      0.0f, 100e6f, "01000", 0, Order::Milli);
-static ParameterValue param_PacketA_PacketNumber(ParameterValue::PacketNumber,  0.0f, 100e6f, "30000", 0, Order::One);
-static ParameterValue param_PacketA_PacketPeriod(ParameterValue::PacketPeriod,  0.0f, 100e6f, "10000", 0, Order::Milli);
-static ParameterValue param_PacketA_Amplitude   (ParameterValue::Amplitude,     0.0f, 10.0f,  "10000", 1, Order::One);
-static ParameterValue param_PacketA_Offset      (ParameterValue::Offset,        0.0f, 10.0f,  "50000", 0, Order::One);
+static ParameterValue  param_PacketA_Period      (ParameterValue::Period,        0.0f, 100e6f, "02000", 0, Order::Milli);
+static ParameterValue  param_PacketA_Duration    (ParameterValue::Duration,      0.0f, 100e6f, "01000", 0, Order::Milli);
+static ParameterValue  param_PacketA_PacketNumber(ParameterValue::PacketNumber,  0.0f, 100e6f, "30000", 0, Order::One);
+static ParameterValue  param_PacketA_PacketPeriod(ParameterValue::PacketPeriod,  0.0f, 100e6f, "10000", 0, Order::Milli);
+static ParameterValue  param_PacketA_Amplitude   (ParameterValue::Amplitude,     0.0f, 10.0f,  "10000", 1, Order::One);
+static ParameterValue  param_PacketA_Offset      (ParameterValue::Offset,        0.0f, 10.0f,  "50000", 0, Order::One);
+static ParameterChoice param_PacketA_Polarity    (ParameterChoice::Polarity,  "\x9c", "\x9c", "\x9d", "\x9d");
 
 static ParameterBase *params_PacketA[] =
 {
@@ -108,6 +109,7 @@ static ParameterBase *params_PacketA[] =
     &param_PacketA_PacketPeriod,
     &param_PacketA_Amplitude,
     &param_PacketA_Offset,
+    &param_PacketA_Polarity,
     0
 };
 
@@ -201,10 +203,11 @@ static ParameterBase *params_MeanderB[] =
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static ParameterValue param_ImpulseB_Period   (ParameterValue::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli);
-static ParameterValue param_ImpulseB_Duration (ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli);
-static ParameterValue param_ImpulseB_Amplitude(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One);
-static ParameterValue param_ImpulseB_Offset   (ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One);
+static ParameterValue  param_ImpulseB_Period   (ParameterValue::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli);
+static ParameterValue  param_ImpulseB_Duration (ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli);
+static ParameterValue  param_ImpulseB_Amplitude(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One);
+static ParameterValue  param_ImpulseB_Offset   (ParameterValue::Offset,    0.0f,    10.0f,  "50000", 0, Order::One);
+static ParameterChoice param_ImpulseB_Polarity(ParameterChoice::Polarity,  "\x9c", "\x9c", "\x9d", "\x9d");
 
 static ParameterBase *params_ImpulseB[] =
 {
@@ -212,6 +215,7 @@ static ParameterBase *params_ImpulseB[] =
     &param_ImpulseB_Duration,
     &param_ImpulseB_Amplitude,
     &param_ImpulseB_Offset,
+    &param_ImpulseB_Polarity,
     0
 };
 
