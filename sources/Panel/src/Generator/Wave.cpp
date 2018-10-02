@@ -491,15 +491,19 @@ pString ParameterChoice::GetStringValue() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::ChangeParameter()
 {
-    if(PARAM_CURRENT->IsChoice())
+    ParameterBase *param = CurrentParameter();
+
+    if(param->IsChoice())
     {
-        ((ParameterChoice *)PARAM_CURRENT)->NextChoice();
+        ((ParameterChoice *)param)->NextChoice();
     }
-    else if (((ParameterValue *)PARAM_CURRENT)->IsInputValue())
+    else if(param->IsValue())
     {
-        InputWindow::Init();
-    
-        Menu::SetAdditionPage((Page *)AddPageInput::pointer);
+        if(((ParameterValue *)param)->IsInputValue())
+        {
+            InputWindow::Init();
+            Menu::SetAdditionPage((Page *)AddPageInput::pointer);
+        }
     }
     else if (PARAM_CURRENT_IS_EXIT)
     {
