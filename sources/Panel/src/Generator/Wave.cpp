@@ -321,10 +321,10 @@ void Form::OpenCurrentParameter()
             oldNumParams = numParams;
             oldCurrentParams = currentParam;
 
-            ParameterValue *parent = PARAM_VALUE(CurrentParameter());
+            ParameterBase *parent = CurrentParameter();
 
-            numParams = parent->numParams;
-            params = parent->params;
+            numParams = ((ParameterValue *)parent)->numParams;
+            params = ((ParameterValue *)parent)->params;
             currentParam = 0;
 
             for (int i = 0; i < numParams; i++)

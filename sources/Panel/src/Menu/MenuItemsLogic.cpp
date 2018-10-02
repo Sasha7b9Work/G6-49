@@ -423,7 +423,7 @@ int8 Choice::CurrentIndex()
 
         Form *form = param->form;
 
-        retValue = (int8)PARAM_VALUE(form->CurrentParameter())->value;
+        retValue = (int8)((ParameterValue *)form->CurrentParameter())->value;
     }
 
     return retValue;
@@ -497,7 +497,7 @@ Item *Button::Press(Control::Action action)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ChoiceParameter::NameSubItem(int number) const
 {
-    return PARAM_VALUE(form->GetParameter(number))->Name();
+    return ((ParameterValue *)(form->GetParameter(number)))->Name();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
