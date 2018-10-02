@@ -110,11 +110,19 @@ public:
 
     ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), inNumLockMode(false) {};
 
-    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, ParameterBase *param[] = 0, 
-        int num = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') : ParameterBase(Value),
-        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param), numParams(num)
+    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, ParameterBase *param[] = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') : 
+        ParameterBase(Value),
+        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param)
     {
         strcpy(buffer, buf);
+        numParams = 0;
+        if(param)
+        {
+            while(params[numParams])
+            {
+                numParams++;
+            }
+        }
     };
 
     bool Is(ParameterValue::E v) { return value == v; };
@@ -185,7 +193,7 @@ public:
 
     Form(E v = Number) : value(v), wave(0), currentParam(0)   { };
 
-    Form(E v, ParameterBase *param[], int numParams, Wave *w);
+    Form(E v, ParameterBase *param[], Wave *w);
     /// ¬озвращает человеческое название формы сигнала
     pString Name(Language lang) const;
     /// ¬озвращает ссылку на текущий параметр

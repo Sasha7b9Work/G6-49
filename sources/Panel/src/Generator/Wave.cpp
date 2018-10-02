@@ -134,8 +134,18 @@ Wave::Wave(Chan ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, ParameterBase *parameters[], int num, Wave *w) : value(v), wave(w), params(parameters), numParams(num), currentParam(0)
+Form::Form(E v, ParameterBase *parameters[], Wave *w) : value(v), wave(w), params(parameters), currentParam(0)
 {
+    numParams = 0;
+
+    if(params)
+    {
+        while(params[numParams])
+        {
+            numParams++;
+        }
+    }
+
     for(int i = 0; i < numParams; i++)
     {
         params[i]->form = this;

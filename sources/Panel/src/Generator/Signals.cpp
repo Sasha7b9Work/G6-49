@@ -12,20 +12,22 @@ static ParameterBase *params_SineModulationA[] =
     &param_SineModulationA_Manipulation,
     &param_SineModulationA_ManipulationDuration,
     &param_SineModulationA_ManipulationPeriod,
-    &param_SineModulationA_Exit 
+    &param_SineModulationA_Exit,
+    0
 };
 
 static ParameterValue param_SineA_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
 static ParameterValue param_SineA_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "50000", 0, Order::One);
 static ParameterValue param_SineA_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
-static ParameterValue param_SineA_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "",      0, Order::One, params_SineModulationA, 4);
+static ParameterValue param_SineA_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "",      0, Order::One, params_SineModulationA);
 
 static ParameterBase *params_SineA[] =
 {
     &param_SineA_Frequency,
     &param_SineA_Amplitude,
     &param_SineA_Offset,
-    &param_SineA_Manipulation
+    &param_SineA_Manipulation,
+    0
 };
 
 
@@ -38,7 +40,8 @@ static ParameterBase *params_RampPlusA[] =
 {
     &param_RampPlusA_Frequency,
     &param_RampPlusA_Amplitude,
-    &param_RampPlusA_Offset
+    &param_RampPlusA_Offset,
+    0
 };
 
 
@@ -51,7 +54,8 @@ static ParameterBase *params_RampMinusA[] =
 {
     &param_RampMinusA_Frequency,
     &param_RampMinusA_Amplitude,
-    &param_RampMinusA_Offset
+    &param_RampMinusA_Offset,
+    0
 };
 
 
@@ -65,7 +69,8 @@ static ParameterBase *params_MeanderA[] =
 {
     &param_MeanderA_Frequency,
     &param_MeanderA_Amplitude,
-    &param_MeanderA_Offset
+    &param_MeanderA_Offset,
+    0
 };
 
 
@@ -82,7 +87,8 @@ static ParameterBase *params_ImpulseA[] =
     &param_ImpulseA_Duration,
     &param_ImpulseA_Amplitude,
     &param_ImpulseA_Offset,
-    &param_ImpulseA_Polarity
+    &param_ImpulseA_Polarity,
+    0
 };
 
 
@@ -101,7 +107,8 @@ static ParameterBase *params_PacketA[] =
     &param_PacketA_PacketNumber,
     &param_PacketA_PacketPeriod,
     &param_PacketA_Amplitude,
-    &param_PacketA_Offset
+    &param_PacketA_Offset,
+    0
 };
 
 
@@ -110,12 +117,12 @@ extern Wave wave[Chan::Number];
 
 static Form formsA[] =
 {
-    Form(Form::Sine,            params_SineA,      4, &wave[Chan::A]),
-    Form(Form::RampPlus,        params_RampPlusA,  3, &wave[Chan::A]),
-    Form(Form::RampMinus,       params_RampMinusA, 3, &wave[Chan::A]),
-    Form(Form::Meander,         params_MeanderA,   3, &wave[Chan::A]),
-    Form(Form::Impulse,         params_ImpulseA,   5, &wave[Chan::A]),
-    Form(Form::PacketImpuls,    params_PacketA,    6, &wave[Chan::A])
+    Form(Form::Sine,            params_SineA,      &wave[Chan::A]),
+    Form(Form::RampPlus,        params_RampPlusA,  &wave[Chan::A]),
+    Form(Form::RampMinus,       params_RampMinusA, &wave[Chan::A]),
+    Form(Form::Meander,         params_MeanderA,   &wave[Chan::A]),
+    Form(Form::Impulse,         params_ImpulseA,   &wave[Chan::A]),
+    Form(Form::PacketImpuls,    params_PacketA,    &wave[Chan::A])
 };
 
 
@@ -130,14 +137,15 @@ static ParameterBase *params_SineModulationB[] =
     &param_SineModulationB_Manipulation,
     &param_SineModulationB_ManipulationDuration,
     &param_SineModulationB_ManipulationPeriod,
-    &param_SineModulationB_Exit
+    &param_SineModulationB_Exit,
+    0
 };
 
 static ParameterValue param_SineB_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
 static ParameterValue param_SineB_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "10000", 1, Order::One);
 static ParameterValue param_SineB_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
 static ParameterValue param_SineB_Phase       (ParameterValue::Phase,        0.0f,  360.0f, "00000", 0, Order::One);
-static ParameterValue param_SineB_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "10000", 0, Order::One, params_SineModulationB, 4);
+static ParameterValue param_SineB_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "10000", 0, Order::One, params_SineModulationB);
 
 static ParameterBase *params_SineB[] =
 {
@@ -145,7 +153,8 @@ static ParameterBase *params_SineB[] =
     &param_SineB_Amplitude,
     &param_SineB_Offset,
     &param_SineB_Phase,
-    &param_SineB_Manipulation
+    &param_SineB_Manipulation,
+    0
 };
 
 
@@ -158,7 +167,8 @@ static ParameterBase *params_RampPlusB[] =
 {
     &param_RampPlusB_Frequency,
     &param_RampPlusB_Amplitude,
-    &param_RampPlusB_Offset
+    &param_RampPlusB_Offset,
+    0
 };
 
 
@@ -171,7 +181,8 @@ static ParameterBase *params_RampMinusB[] =
 {
     &param_RampMinusB_Frequency,
     &param_RampMinusB_Amplitude,
-    &param_RampMinusB_Offset
+    &param_RampMinusB_Offset,
+    0
 };
 
 
@@ -184,7 +195,8 @@ static ParameterBase *params_MeanderB[] =
 {
     &param_MeanderB_Frequency,
     &param_MeanderB_Amplitude,
-    &param_MeanderB_Offset
+    &param_MeanderB_Offset,
+    0
 };
 
 
@@ -199,7 +211,8 @@ static ParameterBase *params_ImpulseB[] =
     &param_ImpulseB_Period,
     &param_ImpulseB_Duration,
     &param_ImpulseB_Amplitude,
-    &param_ImpulseB_Offset
+    &param_ImpulseB_Offset,
+    0
 };
 
 
@@ -208,11 +221,11 @@ extern Wave wave[Chan::Number];
 
 static Form formsB[] =
 {
-    Form(Form::Sine,         params_SineB,      5, &wave[Chan::B]),
-    Form(Form::RampPlus,     params_RampPlusB,  3, &wave[Chan::B]),
-    Form(Form::RampMinus,    params_RampMinusB, 3, &wave[Chan::B]),
-    Form(Form::Meander,      params_MeanderB,   3, &wave[Chan::B]),
-    Form(Form::Impulse,      params_ImpulseB,   4, &wave[Chan::B])
+    Form(Form::Sine,         params_SineB,      &wave[Chan::B]),
+    Form(Form::RampPlus,     params_RampPlusB,  &wave[Chan::B]),
+    Form(Form::RampMinus,    params_RampMinusB, &wave[Chan::B]),
+    Form(Form::Meander,      params_MeanderB,   &wave[Chan::B]),
+    Form(Form::Impulse,      params_ImpulseB,   &wave[Chan::B])
 };
 
 
