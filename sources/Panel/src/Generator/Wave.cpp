@@ -7,6 +7,8 @@
 #include "Generator.h"
 #include "Signals.h"
 #include "Utils/Debug.h"
+#include "Menu/Menu.h"
+#include "Menu/Pages/AddPageInput.h"
 #include <stdio.h>
 
 
@@ -457,4 +459,23 @@ pString ParameterBase::GetStringValue() const
 pString ParameterChoice::GetStringValue() const
 {
     return names[choice][LANG];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::ChangeParameter()
+{
+    if (((ParameterValue *)PARAM_CURRENT)->IsInputValue())
+    {
+        InputWindow::Init();
+    
+        Menu::SetAdditionPage((Page *)AddPageInput::pointer);
+    }
+    else if (PARAM_CURRENT_IS_EXIT)
+    {
+        CloseOpenedParameter();
+    }
+    else if (PARAM_CURRENT_IS_COMPLEX)
+    {
+        OpenCurrentParameter();
+    }
 }

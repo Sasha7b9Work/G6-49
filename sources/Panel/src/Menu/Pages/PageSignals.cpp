@@ -65,20 +65,7 @@ DEF_CHOICE_6( cForm,                                                            
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_ChnageParameter()
 {
-    if(((ParameterValue *)PARAM_CURRENT)->IsInputValue())
-    {
-        InputWindow::Init();
-
-        Menu::SetAdditionPage((Page *)AddPageInput::pointer);
-    }
-    else if(PARAM_CURRENT_IS_EXIT)
-    {
-        FORM_CURRENT->CloseOpenedParameter();
-    }
-    else
-    {
-        FORM_CURRENT->OpenCurrentParameter();
-    }
+    FORM_CURRENT->ChangeParameter();
 }
 
 DEF_BUTTON( bChangeParameter,                                                                 //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---

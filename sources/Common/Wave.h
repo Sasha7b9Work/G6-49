@@ -172,7 +172,7 @@ public:
     /// Возвращает true, если является параметром типа e
     bool Is(ParameterValue::E e) const { return value == e; };
     /// Возвращает true, если является непосредственно вводимым значением
-    bool IsInputValue() const { return value != Manipulation && value != Exit; };
+    bool IsInputValue() const { return IsValue() && value != Manipulation && value != Exit; };
     /// Возвращает true, если этот параметр - кнопка выхода.
     bool IsExitParameter() const { return value == Exit; };
     /// Возвращает true, если сложный и открыт
@@ -235,20 +235,21 @@ public:
     void TuneGenerator(Chan ch);
     /// Возвращает true, если тип формы сигнала соответствует e
     bool Is(Form::E e) const { return e == value; };
-    /// Раскрывает страницу текущего параметра
-    void OpenCurrentParameter();
-    /// Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
-    bool CloseOpenedParameter();
     /// Возвращает указатель на родительский Wave
     Wave *GetWave() { return wave; };
     /// Возвращает true, если текущий параметр сложный и открыт.
     bool ParameterIsOpened() const;
-
+    /// Функция вызывается при нажатии кнопки "Изменить параметр". Фактически активизирует текущий параметр
+    void ChangeParameter();
+    /// Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
+    bool CloseOpenedParameter();
 private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
     ParameterValue *FindParameter(ParameterValue::E p);
     /// Засыалет параметр в генератор
     void SendParameterToGenerator(ParameterValue::E p);
+    /// Раскрывает страницу текущего параметра
+    void OpenCurrentParameter();
     /// Wave, к которому относится данный Form
     Wave *wave;
     /// Здесь хранятся параметры
