@@ -19,11 +19,11 @@ static void Draw_Left(int x, int y)
     Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillUp);
 }
 
-DEF_SMALL_BUTTON(sbLeft,                                                                                           //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
-    "СИМВОЛ ВЛЕВО", "SYMBOL LEFT",
-    "Переместить курсор влево",
-    "Move the cursor to the left",
-    pInput, FuncActive, InputWindow::KeyLeft, Draw_Left
+DEF_SMALL_BUTTON(sbOrderUp,                                                                                           //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
+    "Порядок больше", "Order up",
+    "Увеличить порядок единицы измерения",
+    "Increase the unit order",
+    pInput, FuncActive, InputWindow::OrderUp, Draw_Left
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -33,11 +33,11 @@ static void Draw_Right(int x, int y)
     Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillDown);
 }
 
-DEF_SMALL_BUTTON(sbRight,                                                                                         //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
-    "СИМВОЛ ВПРАВО", "SYMBOL RIGHT",
-    "Переместить курсор вправо",
-    "Move the cursor to the right",
-    pInput, FuncActive, InputWindow::KeyRight, Draw_Right
+DEF_SMALL_BUTTON(sbOrderDown,                                                                                         //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
+    "Порядок меньшше", "Order down",
+    "Уменьшить порядок единицы измерения",
+    "Reduce the unit order",
+    pInput, FuncActive, InputWindow::OrderDown, Draw_Right
 )
 
 
@@ -91,8 +91,8 @@ DEF_PAGE_SB( pInput,
     "ВВОД ЗНАЧЕНИЯ", "VALUE ENTRY",
     "",
     "",
-    &sbLeft,     ///< ОКНО ВВОДА - СИМВОЛ ВЛЕВО
-    &sbRight,    ///< ОКНО ВВОДА - СИМВОЛ ВПРАВО
+    &sbOrderUp,     ///< ОКНО ВВОДА - СИМВОЛ ВЛЕВО
+    &sbOrderDown,    ///< ОКНО ВВОДА - СИМВОЛ ВПРАВО
     &sbCancel,   ///< ОКНО ВВОДА - ОТМЕНА
     &sbEnter,    ///< ОКНО ВВОДА - ВВОД
     0,

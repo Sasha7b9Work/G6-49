@@ -19,6 +19,16 @@ struct Order
     Order(E v = Number) : value(v)  { };
     operator uint8() const { return (uint8)value; };
     pString Name() const;
+    Order& operator++(int)
+    {
+        value = (E)(value + 1);
+        return *this;
+    }
+    Order& operator--(int)
+    {
+        value = (E)(value - 1);
+        return *this;
+    }
 };
 
 

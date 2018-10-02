@@ -78,15 +78,20 @@ public:
 
     static void Draw();
 
-    static void KeyLeft();
+    static void OrderUp();
 
-    static void KeyRight();
+    static void OrderDown();
 
     static void KeyEnter();
 
     static void ProcessContorl(Control control);
 
 private:
+
+    static void KeyLeft();
+
+    static void KeyRight();
+
     static void DrawAmplitude(int x, int y);
 
     static void DrawFrequency(int x, int y);
