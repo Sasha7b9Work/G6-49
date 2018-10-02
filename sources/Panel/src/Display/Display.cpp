@@ -41,17 +41,11 @@ uint8 *Display::GetBuffer()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::Update()
 {
-    DEBUG_POINT;
     Statistics::BeginFrame();
-    DEBUG_POINT;
     Painter::BeginScene(Color::BACK);
-    DEBUG_POINT;
     Wave::Graphics::Draw(Chan::A);
-    DEBUG_POINT;
-    //Wave::Graphics::Draw(Chan::B);
-    DEBUG_POINT;
+    Wave::Graphics::Draw(Chan::B);
     Menu::Draw();
-    DEBUG_POINT;
     PageService::PageRegisters::Draw();
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
     FrequencyMeter::Draw();
@@ -61,5 +55,4 @@ void Display::Update()
     CPU::Keyboard::Draw();
     Painter::EndScene();
     Statistics::EndFrame();
-    DEBUG_POINT;
 }

@@ -2,18 +2,23 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static ParameterBase paramsSineModulationA[] =
+static ParameterValue param_SineModulationA_Manipulation        (ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One);
+static ParameterValue param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
+static ParameterValue param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
+static ParameterValue param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One);
+
+static ParameterBase *params_SineModulationA[] =
 {
-    ParameterValue(ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One),
-    ParameterValue(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli),
-    ParameterValue(ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli),
-    ParameterValue(ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One)
+    &param_SineModulationA_Manipulation,
+    &param_SineModulationA_ManipulationDuration,
+    &param_SineModulationA_ManipulationPeriod,
+    &param_SineModulationA_Exit 
 };
 
 static ParameterValue param_SineA_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
 static ParameterValue param_SineA_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "50000", 0, Order::One);
 static ParameterValue param_SineA_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
-static ParameterValue param_SineA_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "",      0, Order::One, paramsSineModulationA, 4);
+static ParameterValue param_SineA_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "",      0, Order::One, params_SineModulationA, 4);
 
 static ParameterBase *params_SineA[] =
 {
@@ -113,19 +118,24 @@ static Form formsA[] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static ParameterBase paramsSineModulationB[] =
+static ParameterValue param_SineModulationB_Manipulation        (ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One);
+static ParameterValue param_SineModulationB_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
+static ParameterValue param_SineModulationB_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
+static ParameterValue param_SineModulationB_Exit                (ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One);
+
+static ParameterBase *params_SineModulationB[] =
 {
-    ParameterValue(ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One),
-    ParameterValue(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli),
-    ParameterValue(ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli),
-    ParameterValue(ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One)
+    &param_SineModulationB_Manipulation,
+    &param_SineModulationB_ManipulationDuration,
+    &param_SineModulationB_ManipulationPeriod,
+    &param_SineModulationB_Exit
 };
 
 static ParameterValue param_SineB_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
 static ParameterValue param_SineB_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "10000", 1, Order::One);
 static ParameterValue param_SineB_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
 static ParameterValue param_SineB_Phase       (ParameterValue::Phase,        0.0f,  360.0f, "00000", 0, Order::One);
-static ParameterValue param_SineB_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "10000", 0, Order::One, paramsSineModulationB, 4);
+static ParameterValue param_SineB_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "10000", 0, Order::One, params_SineModulationB, 4);
 
 static ParameterBase *params_SineB[] =
 {
