@@ -95,50 +95,6 @@ DEF_CHOICE_2(cTypeTune,                                                         
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_ModeStartA(bool)
-{
-    Generator::LoadStartMode(Chan::A);
-}
-
-
-DEF_CHOICE_4(   cModeStartA,                                                                            //--- НАСТРОЙКИ СИГНАЛОВ A - Режим запуска ---
-    "Режим запуска", "Launch mode",
-    "Определеяет режим запуска",
-    "Defines the launch mode",
-    "Авто", "Auto",                 "",
-                                    "",
-    "Однократный", "Single",        "",
-                                    "",
-    "Компаратор А", "Comparator A", "",
-                                    "",
-    "Формирователь B", "Shaper B",  "",
-                                    "",
-    START_MODE_A, pSignals, FuncActive, OnPress_ModeStartA, FuncDraw
-)
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_ModeStartB(bool)
-{
-    Generator::LoadStartMode(Chan::B);
-}
-
-DEF_CHOICE_4(   cModeStartB,                                                                            //--- НАСТРОЙКИ СИГНАЛОВ B - Режим запуска ---
-    "Режим запуска", "Launch mode",
-    "Определеяет режим запуска",
-    "Defines the launch mode",
-    "Авто", "Auto",                 "",
-                                    "",
-    "Однократный", "Single",        "",
-                                    "",
-    "Компаратор А", "Comparator A", "",
-                                    "",
-    "Формирователь B", "Shaper B",  "",
-                                    "",
-    START_MODE_B, pSignals, FuncActive, OnPress_ModeStartB, FuncDraw
-)
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static bool OnKey(Control key)
 {
     if(key.Is(Control::Esc) && key.action.IsRelease())
@@ -149,15 +105,13 @@ static bool OnKey(Control key)
     return false;
 }
 
-DEF_PAGE_7( pSignals,
+DEF_PAGE_5( pSignals,
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",
     "", "",
     cChannel,           ///< НАСТРОЙКИ СИГНАЛОВ - Канал
     cForm,              ///< НАСТРОЙКИ СИГНАЛОВ - Форма
     cParameters,        ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
     bChangeParameter,   ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
-    cModeStartA,        ///< НАСТРОЙКИ СИГНАЛОВ - Режим запуска A
-    cModeStartB,        ///< НАСТРОЙКИ СИГНАЛОВ - Режим запуска B
     cTypeTune,          ///< НАСТРОЙКИ СИГНАЛОВ - Засылки
     Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
 )

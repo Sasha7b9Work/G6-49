@@ -58,7 +58,6 @@ static const Settings defSet =
     FrequencyMeter::AvePeriod::_1,          // freq_avePeriod
     FreqTimeStamps::_10MHz,                 // freq_timeStamps
     {false, false},                         // sineManipulation
-    {StartMode::Auto, StartMode::Auto},     // fpga_StartMode
 
     BINARY_U32(00000000, 00000000, 00010110, 01011100), // flag1
 //                           ||||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
@@ -112,9 +111,6 @@ void Settings::Load(bool _default)
     {
         CPU::FLASH_::LoadSettings();
     }
-
-    Generator::LoadStartMode(Chan::A);
-    Generator::LoadStartMode(Chan::B);
 
     Generator::TuneChannel(Chan::A);
     Generator::TuneChannel(Chan::B);

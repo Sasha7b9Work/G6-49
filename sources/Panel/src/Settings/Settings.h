@@ -81,7 +81,6 @@ public:
     FrequencyMeter::AvePeriod   freq_avePeriod;                         ///< „исло усредн€емых периодов в режиме измерени€ периода
     FreqTimeStamps              freq_timeStamps;                        ///< ћетки времени
     bool                        sineManipulation[Chan::Number];         ///< true, если включена модул€ци€ синусоиды пилой
-    StartMode                   fpga_startMode[Chan::Number];           ///< –ежим запуска по обоим каналам
 
 #define FLAG_1      set.flag1
     uint            flag1;

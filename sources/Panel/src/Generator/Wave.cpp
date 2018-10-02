@@ -527,3 +527,16 @@ void ParameterChoice::NextChoice()
         Generator::TuneChannel(ch);
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Wave::StartModeIsSingle()
+{
+    ParameterChoice* param = (ParameterChoice *)GetCurrentForm()->FindParameter(ParameterChoice::ModeStart);
+
+    if(param)
+    {
+        return param->GetChoice() == 1;
+    }
+
+    return false;
+}

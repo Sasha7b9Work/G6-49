@@ -3,6 +3,7 @@
 #include "Menu/MenuItems.h"
 #include "Display/InputWindow.h"
 #include "Generator/Generator.h"
+#include "Generator/Signals.h"
 #include "Hardware/CPU.h"
 #include "Utils/Math.h"
 #include "Menu/Pages/PageSignals.h"
@@ -53,16 +54,16 @@ void Menu::Update()
         {
             if (key.Is(Control::On1))
             {
-                if(!START_MODE_A_IS_SINGLE)
+                if(!WAVE(Chan::A).StartModeIsSingle())
                 {
                     SWITCH_CHANNEL_A;
                 }
                 Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
                 continue;
             }
-            else if (key.Is(Control::On2) && START_MODE_B != StartMode::Single)
+            else if (key.Is(Control::On2))
             {
-                if(!START_MODE_B_IS_SINGLE)
+                if(!WAVE(Chan::B).StartModeIsSingle())
                 {
                     SWITCH_CHANNEL_B;
                 }

@@ -30,13 +30,6 @@ void Generator::EnableChannel(Chan ch, bool enable)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::LoadStartMode(Chan ch)
-{
-    uint8 buffer[3] = {CommandPanel::SetStartMode, (uint8)ch, (uint8)START_MODE(ch)};
-    SendToInterface(buffer, 3);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadStartMode(Chan ch, int mode)
 {
     uint8 buffer[3] = {CommandPanel::SetStartMode, (uint8)ch, (uint8)mode};

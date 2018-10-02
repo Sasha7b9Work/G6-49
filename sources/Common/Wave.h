@@ -223,6 +223,8 @@ private:
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Form
 {
+    friend class Wave;
+
 public:
     enum E
     {
@@ -303,6 +305,8 @@ public:
     Form *GetForm(int i);
 
     Chan GetChannel() const { return channel; };
+    /// ¬озвращает true, если установлен ручной режим запуска
+    bool StartModeIsSingle();
 
 private:
     ///  акому каналу принадлежит сигнал
