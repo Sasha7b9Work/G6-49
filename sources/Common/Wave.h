@@ -81,7 +81,21 @@ public:
 
     pString Name() const;
 
-    ParameterChoice(E v) : ParameterBase(Choice), value(v) {};
+    ParameterChoice(E v, pString var0ru, pString var0en, pString var1ru, pString var1en) : ParameterBase(Choice), value(v), choice(0), num(2)
+    {
+        names[0][0] = (char *)var0ru;
+        names[0][1] = (char *)var0en;
+        names[1][0] = (char *)var1ru;
+        names[1][1] = (char *)var1en;
+    };
+
+private:
+    /// Текущий вариант
+    int choice;
+    /// Количество вариантов
+    int num;
+    /// Варианты на русском языке
+    char *names[2][2];
 };
 
 

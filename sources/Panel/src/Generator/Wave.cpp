@@ -406,12 +406,12 @@ pString ParameterChoice::Name() const
         pString name;
         StructName(pString n) : name(n) {};
     }
-    names[ParameterChoice::Number][2] =
+    namesParam[ParameterChoice::Number][2] =
     {
         {"Полярность", "Polarity"}
     };
 
-    return names[value][LANG].name;
+    return namesParam[value][LANG].name;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
