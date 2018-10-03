@@ -358,6 +358,13 @@ float ParameterValue::GetValue() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::GetStringValue() const
 {
+    StructValue input((ParameterValue *)this);
+    return input.StringValue();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterComplex::GetStringValue() const
+{
     if(Is(Manipulation))
     {
         static const char *values[2][2] =
@@ -368,16 +375,6 @@ pString ParameterValue::GetStringValue() const
 
         ParameterValue *pointer = (ParameterValue *)this;
         return values[LANG][set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1 : 0];
-    }
-    StructValue input((ParameterValue *)this);
-    return input.StringValue();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-pString ParameterComplex::GetStringValue() const
-{
-    if(Is(Manipulation))
-    {
     }
 
     return "";
