@@ -19,16 +19,8 @@ struct Order
     Order(E v = Number) : value(v)  { };
     operator uint8() const { return (uint8)value; };
     pString Name() const;
-    Order& operator++(int)
-    {
-        value = (E)(value + 1);
-        return *this;
-    }
-    Order& operator--(int)
-    {
-        value = (E)(value - 1);
-        return *this;
-    }
+    Order& operator++(int);
+    Order& operator--(int);
 };
 
 
@@ -103,31 +95,10 @@ public:
 
     pString Name() const;
 
-    ParameterChoice(E v, pString var0ru, pString var0en,
-                    pString var1ru, pString var1en, funcDraw func0 = 0, funcDraw func1 = 0) : 
-        ParameterBase(Choice), value(v), choice(0), num(2)
-    {
-        names[0][0] = (char *)var0ru;
-        names[0][1] = (char *)var0en;
-        names[1][0] = (char *)var1ru;
-        names[1][1] = (char *)var1en;
-
-        func[0] = func0;
-        func[1] = func1;
-    };
+    ParameterChoice(E v, pString var0ru, pString var0en, pString var1ru, pString var1en, funcDraw func0 = 0, funcDraw func1 = 0);
 
     ParameterChoice(E v, pString var0ru, pString var0en, pString var1ru, pString var1en, 
-                    pString var2ru, pString var2en, pString var3ru, pString var3en) : ParameterBase(Choice), value(v), choice(0), num(4)
-    {
-        names[0][0] = (char *)var0ru;
-        names[0][1] = (char *)var0en;
-        names[1][0] = (char *)var1ru;
-        names[1][1] = (char *)var1en;
-        names[2][0] = (char *)var2ru;
-        names[2][1] = (char *)var2en;
-        names[3][0] = (char *)var3ru;
-        names[3][1] = (char *)var3en;
-    }
+                         pString var2ru, pString var2en, pString var3ru, pString var3en);
 
     pString GetStringValue() const;
 
@@ -161,14 +132,7 @@ public:
         Number
     } value;
 
-    ParameterComplex(ParameterBase *param[]) : ParameterBase(Complex), params(param)
-    {
-        numParams = 0;
-        while(params[numParams])
-        {
-            numParams++;
-        }
-    };
+    ParameterComplex(ParameterBase *param[]);
 
     pString Name() const;
     
@@ -215,12 +179,7 @@ public:
 
     ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), inNumLockMode(false) {};
 
-    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ') : 
-        ParameterBase(Value),
-        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false)
-    {
-        strcpy(buffer, buf);
-    };
+    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 
     bool Is(ParameterValue::E v) { return value == v; };
 
