@@ -447,7 +447,8 @@ pString ParameterChoice::Name() const
     namesParam[ParameterChoice::Number][2] =
     {
         {"Полярность", "Polarity"},
-        {"Запуск", "Mode start"}
+        {"Запуск",     "Mode start"},
+        {"Вид",        "Type"}
     };
 
     return namesParam[value][LANG].name;

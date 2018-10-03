@@ -244,7 +244,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
 {
-    if(param->IsChoice() && ((ParameterChoice *)param)->DrawChoice(x, y))
+    if(param->IsChoice() && ((ParameterChoice *)param)->DrawChoice(x + 6, y))
     {
         return;
     }

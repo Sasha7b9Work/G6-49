@@ -91,8 +91,9 @@ public:
 
     enum E
     {
-        Polarity,   ///< Полярность импульсов
-        ModeStart,  ///< Режим запуска
+        Polarity,           ///< Полярность импульсов
+        ModeStart,          ///< Режим запуска
+        ModeManipulation,   ///< Режим амплитудной манипуляции - со сглаживанием фронта или без
         Number
     } value;
 

@@ -87,6 +87,7 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         SetPacketNumber,
         EmptyFunc,
         SetPeriod,
+        EmptyFunc,
         EmptyFunc
     };
 

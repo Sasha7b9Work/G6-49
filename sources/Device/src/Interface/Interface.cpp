@@ -76,7 +76,8 @@ commands[CommandPanel::Number] =
     Interface::ParameterValue,              ///< SetPacketNumber
     Interface::SetStartMode,
     Interface::ParameterValue,              ///< SetPeriod
-    Interface::Polarity                     ///< SetPolarity
+    Interface::Polarity,                    ///< SetPolarity
+    Interface::Empty                        ///< SetModeManipulation
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

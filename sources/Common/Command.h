@@ -77,6 +77,9 @@ struct CommandPanel
         // 0           1        2
         // SetPolarity NUM_CHAN polarity
         SetPolarity,
+        // 0                   1        2
+        // SetModeManipulation NUM_CHAN mode
+        SetModeManipulation,
         Number
     } value;
     CommandPanel(E v) : value(v){};
