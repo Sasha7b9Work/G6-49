@@ -386,7 +386,7 @@ void StructValue::PressKey(Control key)
     command[] =
     {
         {Control::_1, '1'}, {Control::_2, '2'}, {Control::_3, '3'}, {Control::_4, '4'}, {Control::_5, '5'},
-        {Control::_6, '6'}, {Control::_7, '7'}, {Control::_8, '8'}, {Control::_9, '9'}, {Control::_0, '0'}, {Control::Dot, '.'},
+        {Control::_6, '6'}, {Control::_7, '7'}, {Control::_8, '8'}, {Control::_9, '9'}, {Control::_0, '0'},
         {Control::None, '.'}
     };
 
