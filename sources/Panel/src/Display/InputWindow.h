@@ -25,8 +25,6 @@ public:
 
     float Value();
 
-    void DrawInputField(int x, int y);
-
     void KeyLeft();
 
     void KeyRight();
@@ -62,8 +60,6 @@ private:
     float ValueAfterComma();
     /// Переключает порядок на следующий по возрастанию
     void IncreaseOrder();
-    /// Заполняет iws из inputBuffer
-    void FillFromInputBuffer();
     /// Заслать текущее значение в генератор
     void SendToGenerator();
 };

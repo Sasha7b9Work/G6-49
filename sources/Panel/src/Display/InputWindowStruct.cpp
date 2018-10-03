@@ -18,20 +18,12 @@
 #define DIGIT(num)          (param->buffer[num])
 #define CURRENT_DIGIT       (param->buffer[CURRENT_POS])
 #define POS_COMMA           (param->posComma)
-#define IN_NUM_LOCK_MODE    (param->InNumLockMode())
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define SIZE_INPUT_BUFFER_IWS 17
-static char m_inputBuffer[SIZE_INPUT_BUFFER_IWS];
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void StructValue::Set(ParameterValue *param_)
 {
     param = param_;
-
-    memset(m_inputBuffer, 0, SIZE_INPUT_BUFFER_IWS);
 
 	for (int i = NUM_DIGITS - 1; i > 0; --i)
 	{
@@ -44,8 +36,6 @@ void StructValue::Set(ParameterValue *param_)
 			break;
 		}
 	}
-
-	//param->hightLightDigit = param->buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
     
     param->hightLightDigit = 0;
 }
@@ -380,20 +370,13 @@ float StructValue::Value()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::SaveValue()
 {
-    if (IN_NUM_LOCK_MODE)
-    {
-        param->SetNumLockMode(false);
-
-        FillFromInputBuffer();
-    }
-
     SendToGenerator();
 
     Menu::ResetAdditionPage();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void StructValue::PressKey(Control key)
+void StructValue::PressKey(Control)
 {
     struct StrControl
     {
@@ -408,52 +391,6 @@ void StructValue::PressKey(Control key)
         {Control::None, '.'}
     };
 
-    if (!IN_NUM_LOCK_MODE)
-    {
-        param->SetNumLockMode(true);
-
-        m_inputBuffer[0] = 0;
-    }
-
-    if (strlen(m_inputBuffer) < SIZE_INPUT_BUFFER_IWS - 1)
-    {
-        int i = 0;
-        while (command[i].control != Control::None)
-        {
-            if (command[i].control == key)
-            {
-                int length = (int)strlen(m_inputBuffer);
-                m_inputBuffer[length] = command[i].symbol;
-                m_inputBuffer[length + 1] = 0;
-                break;
-            }
-            i++;
-        }
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void StructValue::DrawInputField(int x, int y)
-{
-    int width = 230;
-    int height = 60;
-
-    Painter::FillRegion(x, y, width, height, Color::BACK);
-    Painter::DrawRectangle(x, y, width, height, Color::FILL);
-
-    x += 8;
-    y += 19;
-
-    int i = 0;
-
-    while (m_inputBuffer[i])
-    {
-        x = Text::DrawBigChar(x, y, 3, m_inputBuffer[i]);
-        x += 2;
-        ++i;
-    }
-
-    Painter::FillRegion(270, 30, 45, 100, Color::BACK);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -465,90 +402,5 @@ void StructValue::SendToGenerator()
     else
     {
         Generator::SetParameter(param);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void StructValue::FillFromInputBuffer()
-{
-    if (param->Is(ParameterValue::Duration) || param->Is(ParameterValue::Delay))
-    {
-        param->order = Order::Micro;
-    }
-    else
-    {
-        param->order = Order::One;
-    }
-
-    if (SU::FindSymbol(m_inputBuffer, '.') == -1)             // Если точки нету
-    {
-        m_inputBuffer[strlen(m_inputBuffer)] = '.';         // То ставим её вместо завершающего нуля
-        m_inputBuffer[strlen(m_inputBuffer) + 1] = 0;       // и перемещаем нуль вправо
-    }
-    else
-    {
-        while ((int)fabs(atof(m_inputBuffer)) == 0)     // Пока целая часть числа в inputBuffer == 0
-        {
-            // Сдвигаем запятую на три места вправо
-            int pos = SU::FindSymbol(m_inputBuffer, '.');
-
-            for (int i = pos; i < pos + 3; i++)
-            {
-                m_inputBuffer[i] = m_inputBuffer[i + 1];
-                if(m_inputBuffer[i] == 0)
-                {
-                    m_inputBuffer[i] = '0';
-                }
-            }
-            m_inputBuffer[pos + 3] = '.';
-            if(m_inputBuffer[pos + 4] == 0)
-            {
-                m_inputBuffer[pos + 4] = '0';
-            }
-
-            param->order = (Order::E)(param->order - 1);
-        }
-    }
-
-    if (param->sign != ' ')
-    {
-        param->sign = (atof(m_inputBuffer) >= 0.0) ? '+' : '-';
-    }
-
-    param->hightLightDigit = NUM_DIGITS - 1;
-
-    while ((int)fabs(atof(m_inputBuffer)) > 999)    // Пока целая часть числа в inputBuffer > 999
-    {
-        // Сдвигаем запятую на три места влево
-        int pos = SU::FindSymbol(m_inputBuffer, '.');
-        
-        for (int i = pos; i > pos - 3; i--)         // Сдвигаем три символа слева от точки на одну позицию вправо
-        {
-            m_inputBuffer[i] = m_inputBuffer[i - 1];
-        }
-
-        m_inputBuffer[pos - 3] = '.';               // И ставим точку слева от этой тройки
-
-        param->order = (Order::E)(param->order + 1); // И увеличиваем степень на три порядка
-    }
-
-    // В этой точке целая часть числа уже не превышает 999
-
-    float value = (float)fabs(atof(m_inputBuffer));
-
-    int intValue = (int)value;
-
-    // Заносим целую часть числа в буфер
-    sprintf(param->buffer, "%d", intValue);
-
-    param->posComma = (int8)strlen(param->buffer) - 1;
-
-    int numDigits = NUM_DIGITS - (int)strlen(param->buffer);      // Столько цифр нужно записать после запятой
-
-    int pos = SU::FindSymbol(m_inputBuffer, '.');       // Находим позицию точки в исходной строке. Символы после неё нужно писать в iws->inputBuffer
-
-    for (int i = 0; i < numDigits; i++)
-    {
-        param->buffer[param->posComma + 1 + i] = m_inputBuffer[pos + 1 + i];
     }
 }

@@ -75,11 +75,6 @@ void InputWindow::Draw()
 
     func[param->value].func(x + 10, y + 10);
 
-    if (IN_NUM_LOCK_MODE)
-    {
-        iws.DrawInputField(10, y + 27);
-    }
-
     Font::SetType(Font::Type::_8);
 }
 
@@ -235,19 +230,13 @@ void InputWindow::DrawExit(int, int)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::KeyLeft()
 {
-    if (!IN_NUM_LOCK_MODE)
-    {
-        iws.KeyLeft();
-    }
+    iws.KeyLeft();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::KeyRight()
 {
-    if (!IN_NUM_LOCK_MODE)
-    {
-        iws.KeyRight();
-    }
+    iws.KeyRight();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -286,17 +275,11 @@ void InputWindow::ProcessContorl(Control key)
     }
     else if (key.Is(Control::Reg::Left))
     {
-        if (!IN_NUM_LOCK_MODE)
-        {
-            iws.RegLeft();
-        }
+        iws.RegLeft();
     }
     else if (key.Is(Control::Reg::Right))
     {
-        if (!IN_NUM_LOCK_MODE)
-        {
-            iws.RegRight();
-        }
+        iws.RegRight();
     }
     else if (key.IsFunctional() && key.action.Is(Control::Action::Up))
     {

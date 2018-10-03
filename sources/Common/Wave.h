@@ -208,10 +208,6 @@ public:
     pString Name() const;
     /// ¬озвращает true, если параметр содержит несколько параметров
     bool IsComplex() const;
-
-    bool InNumLockMode() const { return inNumLockMode; };
-
-    void SetNumLockMode(bool mode) { inNumLockMode = mode; };
     /// ¬озвращает true, если €вл€етс€ параметром типа e
     bool Is(ParameterValue::E e) const { return value == e; };
     /// ¬озвращает true, если €вл€етс€ непосредственно вводимым значением
