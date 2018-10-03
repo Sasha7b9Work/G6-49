@@ -292,32 +292,33 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::OpenCurrentParameter()
 {
+    oldParams = params;
+    oldNumParams = numParams;
+    oldCurrentParams = currentParam;
+
     /*
-    if(PARAM_CURRENT_IS_MANIPULATION)
+    /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
+    if(PARAM_CURRENT->GetParent())
     {
-        /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
-        if(PARAM_CURRENT->GetParent())
+        set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
+        Generator::TuneChannel(GetWave()->GetChannel());
+    }
+    else
+    
+        oldParams = params;
+        oldNumParams = numParams;
+        oldCurrentParams = currentParam;
+
+        ParameterBase *parent = CurrentParameter();
+
+        numParams = ((ParameterValue *)parent)->numParams;
+        params = ((ParameterValue *)parent)->params;
+        currentParam = 0;
+
+        for (int i = 0; i < numParams; i++)
         {
-            set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
-            Generator::TuneChannel(GetWave()->GetChannel());
-        }
-        else
-       {
-            oldParams = params;
-            oldNumParams = numParams;
-            oldCurrentParams = currentParam;
-
-            ParameterBase *parent = CurrentParameter();
-
-            numParams = ((ParameterValue *)parent)->numParams;
-            params = ((ParameterValue *)parent)->params;
-            currentParam = 0;
-
-            for (int i = 0; i < numParams; i++)
-            {
-                params[i]->form = this;
-                params[i]->parent = parent;
-            }
+            params[i]->form = this;
+            params[i]->parent = parent;
         }
     }
     */
