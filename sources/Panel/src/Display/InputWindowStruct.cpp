@@ -45,7 +45,9 @@ void StructValue::Set(ParameterValue *param_)
 		}
 	}
 
-	param->hightLightDigit = param->buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
+	//param->hightLightDigit = param->buffer[NUM_DIGITS - 1] == '.' ? NUM_DIGITS - 2 : NUM_DIGITS - 1;
+    
+    param->hightLightDigit = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
