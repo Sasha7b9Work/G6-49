@@ -63,7 +63,7 @@ public:
 
     bool IsChoice() const { return type == Choice; }
     
-    bool IsComplex() const;
+    bool IsComplex() const { return type == Complex; };
 
     bool IsExit() const;
 
@@ -150,6 +150,41 @@ private:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class ParameterComplex : public ParameterBase
+{
+    friend class Form;
+public:
+
+    enum E
+    {
+        Manipulation,
+        Number
+    } value;
+
+    ParameterComplex(ParameterBase *param[]) : ParameterBase(Complex), params(param)
+    {
+        numParams = 0;
+        while(params[numParams])
+        {
+            numParams++;
+        }
+    };
+
+    pString Name() const;
+    
+    pString GetStringValue() const;
+
+    bool Is(E v) const { return value == v; };
+
+private:
+    /// «десь наход€тс€ дополнительные параметры в случае, если они требуютс€
+    ParameterBase **params;
+    /// „исло дополнительных параметров. 0, если таковых не имеетс€
+    int numParams;
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class ParameterValue : public ParameterBase
 {
 public:
@@ -180,19 +215,11 @@ public:
 
     ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), inNumLockMode(false) {};
 
-    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, ParameterBase *param[] = 0, int8 hd = NUM_DIGITS - 1, char s = ' ') : 
+    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ') : 
         ParameterBase(Value),
-        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false), params(param)
+        value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false)
     {
         strcpy(buffer, buf);
-        numParams = 0;
-        if(param)
-        {
-            while(params[numParams])
-            {
-                numParams++;
-            }
-        }
     };
 
     bool Is(ParameterValue::E v) { return value == v; };
@@ -206,8 +233,6 @@ public:
     pString GetStringValue() const;
 
     pString Name() const;
-    /// ¬озвращает true, если параметр содержит несколько параметров
-    bool IsComplex() const;
     /// ¬озвращает true, если €вл€етс€ параметром типа e
     bool Is(ParameterValue::E e) const { return value == e; };
     /// ¬озвращает true, если €вл€етс€ непосредственно вводимым значением
@@ -235,10 +260,6 @@ private:
     float max;
     /// ≈сли true, то находимс€ в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
-    /// «десь наход€тс€ дополнительные параметры в случае, если они требуютс€
-    ParameterBase **params;
-    /// „исло дополнительных параметров. 0, если таковых не имеетс€
-    int numParams;
 };
 
 

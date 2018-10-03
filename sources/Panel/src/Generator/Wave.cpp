@@ -71,12 +71,6 @@ pString Register::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool ParameterValue::IsComplex() const
-{
-    return value == Manipulation;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::Name() const
 {
     static const struct StructName
@@ -298,6 +292,7 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::OpenCurrentParameter()
 {
+    /*
     if(PARAM_CURRENT_IS_MANIPULATION)
     {
         /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
@@ -325,6 +320,7 @@ void Form::OpenCurrentParameter()
             }
         }
     }
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -375,6 +371,16 @@ pString ParameterValue::GetStringValue() const
     }
     StructValue input((ParameterValue *)this);
     return input.StringValue();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterComplex::GetStringValue() const
+{
+    if(Is(Manipulation))
+    {
+    }
+
+    return "";
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -446,6 +452,22 @@ pString ParameterChoice::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterComplex::Name() const
+{
+    static const struct StructName
+    {
+        pString name;
+        StructName(pString n) : name(n) {};
+    }
+    namesParams[ParameterComplex::Number][2] =
+    {
+        {"Манипуляция", "Manipulation"}
+    };
+
+    return namesParams[value][LANG].name;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterBase::Name() const
 {
     if(IsValue())
@@ -455,6 +477,10 @@ pString ParameterBase::Name() const
     else if(IsChoice())
     {
         return ((ParameterChoice *)this)->Name();
+    }
+    else if(IsComplex())
+    {
+        return ((ParameterComplex *)this)->Name();
     }
 
     return "";
@@ -470,6 +496,10 @@ pString ParameterBase::GetStringValue() const
     else if(IsChoice())
     {
         return ((ParameterChoice *)this)->GetStringValue();
+    }
+    else if(IsComplex())
+    {
+        return ((ParameterComplex *)this)->GetStringValue();
     }
     return "";
 }
@@ -549,10 +579,4 @@ bool Wave::StartModeIsSingle()
 bool ParameterBase::IsExit() const
 {
     return IsValue() && ((ParameterValue *)this)->IsExit();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool ParameterBase::IsComplex() const
-{
-    return IsValue() && ((ParameterValue *)this)->IsComplex();
 }

@@ -39,10 +39,10 @@ static ParameterBase *params_SineModulationA[] =
     0
 };
 
-static ParameterValue param_SineA_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
-static ParameterValue param_SineA_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "50000", 0, Order::One);
-static ParameterValue param_SineA_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
-static ParameterValue param_SineA_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "",      0, Order::One, params_SineModulationA);
+static ParameterValue   param_SineA_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
+static ParameterValue   param_SineA_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "50000", 0, Order::One);
+static ParameterValue   param_SineA_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
+static ParameterComplex param_SineA_Manipulation(params_SineModulationA);
 
 static ParameterBase *params_SineA[] =
 {
@@ -204,11 +204,11 @@ static ParameterBase *params_SineModulationB[] =
     0
 };
 
-static ParameterValue param_SineB_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
-static ParameterValue param_SineB_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "10000", 1, Order::One);
-static ParameterValue param_SineB_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
-static ParameterValue param_SineB_Phase       (ParameterValue::Phase,        0.0f,  360.0f, "00000", 0, Order::One);
-static ParameterValue param_SineB_Manipulation(ParameterValue::Manipulation, -1.0f, -1.0f,  "10000", 0, Order::One, params_SineModulationB);
+static ParameterValue   param_SineB_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
+static ParameterValue   param_SineB_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "10000", 1, Order::One);
+static ParameterValue   param_SineB_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
+static ParameterValue   param_SineB_Phase       (ParameterValue::Phase,        0.0f,  360.0f, "00000", 0, Order::One);
+static ParameterComplex param_SineB_Manipulation(params_SineModulationB);
 
 static ParameterBase *params_SineB[] =
 {
