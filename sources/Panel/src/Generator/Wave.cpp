@@ -71,7 +71,7 @@ pString Register::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool ParameterValue::IsComplexParameter() const
+bool ParameterValue::IsComplex() const
 {
     return value == Manipulation;
 }
@@ -302,11 +302,6 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::OpenCurrentParameter()
 {
-    if(!PARAM_CURRENT_IS_COMPLEX)
-    {
-        return;
-    }
-
     if(PARAM_CURRENT_IS_MANIPULATION)
     {
         /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
@@ -433,7 +428,7 @@ pString ParameterBase::NameUnit(char buffer[10]) const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool ParameterValue::IsOpened()
 {
-    return IsComplexParameter() && GetForm()->ParameterIsOpened();
+    return IsComplex() && GetForm()->ParameterIsOpened();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -498,19 +493,16 @@ void Form::ChangeParameter()
     {
         ((ParameterChoice *)param)->NextChoice();
     }
-    else if(param->IsValue())
+    else if(param->IsValue() && ((ParameterValue *)param)->IsInputValue())
     {
-        if(((ParameterValue *)param)->IsInputValue())
-        {
-            InputWindow::Init();
-            Menu::SetAdditionPage((Page *)AddPageInput::pointer);
-        }
+        InputWindow::Init();
+        Menu::SetAdditionPage((Page *)AddPageInput::pointer);
     }
-    else if (PARAM_CURRENT_IS_EXIT)
+    else if (param->IsExit())
     {
         CloseOpenedParameter();
     }
-    else if (PARAM_CURRENT_IS_COMPLEX)
+    else if (param->IsComplex())
     {
         OpenCurrentParameter();
     }
@@ -555,4 +547,16 @@ bool Wave::StartModeIsSingle()
     }
 
     return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool ParameterBase::IsExit() const
+{
+    return IsValue() && ((ParameterValue *)this)->IsExit();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool ParameterBase::IsComplex() const
+{
+    return IsValue() && ((ParameterValue *)this)->IsComplex();
 }

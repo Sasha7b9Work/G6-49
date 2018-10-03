@@ -14,9 +14,5 @@
 #define PARAM(form)                     ((form)->CurrentParameter())
 #define PARAM_CURRENT                   (PARAM(FORM_CURRENT))
 #define PARAM_CURRENT_IS_MANIPULATION   (((ParameterValue *)CurrentParameter())->Is(ParameterValue::Manipulation))
-#define PARAM_CURRENT_IS_EXIT           (((ParameterValue *)PARAM_CURRENT)->IsExitParameter())
-#define PARAM_CURRENT_IS_COMPLEX        (((ParameterValue *)PARAM_CURRENT)->IsComplexParameter())
-
-
 
 extern Wave wave[Chan::Number];

@@ -6,6 +6,7 @@
 JLink*.*
 *~*
 *$*
+*.bak
 
 doc/doxygen/KornetDDS/*
 

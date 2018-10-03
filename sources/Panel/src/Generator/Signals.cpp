@@ -6,9 +6,9 @@
 static void DrawRawImpulse(int x, int y)
 {
     Painter::DrawHLine(y + 8, x, x + 8);
-    Painter::DrawLine(y + 8, x + 8, y, x + 12);
+    Painter::DrawLine(x + 12, y, x + 8, y + 8);
     Painter::DrawHLine(y, x + 12, x + 20);
-    Painter::DrawLine(y, x + 20, y + 8, x + 24);
+    Painter::DrawLine(x + 20, y, x + 24, y + 8);
     Painter::DrawHLine(y + 8, x + 24, x + 32);
 }
 

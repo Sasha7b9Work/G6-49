@@ -62,6 +62,10 @@ public:
     bool IsValue() const { return type == Value; }
 
     bool IsChoice() const { return type == Choice; }
+    
+    bool IsComplex() const;
+
+    bool IsExit() const;
 
     pString Name() const;
 
@@ -203,7 +207,7 @@ public:
 
     pString Name() const;
     /// Возвращает true, если параметр содержит несколько параметров
-    bool IsComplexParameter() const;
+    bool IsComplex() const;
 
     bool InNumLockMode() const { return inNumLockMode; };
 
@@ -213,7 +217,7 @@ public:
     /// Возвращает true, если является непосредственно вводимым значением
     bool IsInputValue() const { return IsValue() && value != Manipulation && value != Exit; };
     /// Возвращает true, если этот параметр - кнопка выхода.
-    bool IsExitParameter() const { return value == Exit; };
+    bool IsExit() const { return value == Exit; };
     /// Возвращает true, если сложный и открыт
     bool IsOpened();
 

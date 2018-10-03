@@ -107,7 +107,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Wave::Graphics::DrawSine(Chan, int x0, int y0, int width, int height)
 {
-    float speed = 0.1f;
+    float speed = 0.2f;
     int delta = 1;
     y0 += height / 2;
 
