@@ -376,21 +376,31 @@ void StructValue::SaveValue()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void StructValue::PressKey(Control)
+void StructValue::PressKey(Control key)
 {
-    struct StrControl
+    static const struct StrControl
     {
         Control control;
         char    symbol;
-    };
-
-    static const StrControl command[] =
+    }
+    command[] =
     {
         {Control::_1, '1'}, {Control::_2, '2'}, {Control::_3, '3'}, {Control::_4, '4'}, {Control::_5, '5'},
         {Control::_6, '6'}, {Control::_7, '7'}, {Control::_8, '8'}, {Control::_9, '9'}, {Control::_0, '0'}, {Control::Dot, '.'},
         {Control::None, '.'}
     };
 
+    int i = 0;
+    while(command[i].control != Control::None)
+    {
+        if(command[i].control == key)
+        {
+            CURRENT_DIGIT = command[i].symbol;
+            KeyRight();
+            break;
+        }
+        i++;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
