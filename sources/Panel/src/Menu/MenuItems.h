@@ -334,6 +334,8 @@ public:
     pFuncVB	 funcOnChanged;
     /// Функция вызывается после отрисовки элемента. 
     pFuncVII funcForDraw;
+
+    int8 CurrentIndex() const;
 };
 
 class Choice : public Item

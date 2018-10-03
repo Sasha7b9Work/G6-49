@@ -324,7 +324,7 @@ public:
     /// Возвращает установленную форму
     Form *GetCurrentForm();
     /// Установить текущей следующую форму
-    void SetNextForm();
+    void SetForm(int8 num);
 
     int NumberOfForms() const;
 

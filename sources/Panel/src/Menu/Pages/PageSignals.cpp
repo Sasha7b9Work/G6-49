@@ -18,12 +18,6 @@ static int numForm = 0;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Channel(bool)
-{
-    cParameters.form = FORM_CURRENT;
-    numForm = FORM_CURRENT->value;
-}
-
 DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
     "КАНАЛ", "CHANNEL",
     "Выбор канала для настройки.",
@@ -32,23 +26,12 @@ DEF_CHOICE_2( cChannel,                                                         
               "Controlling the signal parameters at output A.",
     "B", "B", "Управление параметрами сигнала на выходе B.",
               "Controlling the signal parameters at output B.",
-    FLAG_1, BIT_CHANNEL, pSignals, FuncActive, OnPress_Channel, FuncDraw
+    FLAG_1, BIT_CHANNEL, pSignals, FuncActive, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void OnPress_Form(bool)
-{
-    WAVE_CURRENT.SetNextForm();
-
-    numForm = WAVE_CURRENT.GetCurrentForm()->value;
-
-    cParameters.form = FORM_CURRENT;
-
-    Generator::TuneChannel(CURRENT_CHANNEL);
-}
-
-DEF_CHOICE_6( cForm,                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+DEF_CHOICE_6( cFormA,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
@@ -58,9 +41,20 @@ DEF_CHOICE_6( cForm,                                                            
     FORM_RU(Form::Meander),         FORM_EN(Form::Meander),       "Меандр",              "Meander",
     FORM_RU(Form::Impulse),         FORM_EN(Form::Impulse),       "Треугольник",         "Triangle",
     FORM_RU(Form::PacketImpuls),    FORM_EN(Form::PacketImpuls),  "Пакеты",              "Packets",
-    numForm, pSignals, FuncActive, OnPress_Form, FuncDraw
+    numForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
+DEF_CHOICE_5( cFormB,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+    "ФОРМА", "FORM",
+    "Выбор формы сигнала.",
+    "Select waveform.",
+    FORM_RU(Form::Sine),      FORM_EN(Form::Sine),      "Синус",            "Sinus",
+    FORM_RU(Form::RampPlus),  FORM_EN(Form::RampPlus),  "Нарастающая пила", "Growing saw",
+    FORM_RU(Form::RampMinus), FORM_EN(Form::RampMinus), "Убывающая пила",   "Wrecking saw",
+    FORM_RU(Form::Meander),   FORM_EN(Form::Meander),   "Меандр",           "Meander",
+    FORM_RU(Form::Impulse),   FORM_EN(Form::Impulse),   "Треугольник",      "Triangle",
+    numForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
+)
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_ChnageParameter()
@@ -109,7 +103,7 @@ DEF_PAGE_5( pSignals,
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",
     "", "",
     cChannel,           ///< НАСТРОЙКИ СИГНАЛОВ - Канал
-    cForm,              ///< НАСТРОЙКИ СИГНАЛОВ - Форма
+    cFormA,             ///< НАСТРОЙКИ СИГНАЛОВ - Форма
     cParameters,        ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
     bChangeParameter,   ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
     cTypeTune,          ///< НАСТРОЙКИ СИГНАЛОВ - Засылки
@@ -120,4 +114,24 @@ DEF_PAGE_5( pSignals,
 void PageSignals::Init()
 {
     OnPress_Channel(true);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void PageSignals::OnPress_Form(bool)
+{
+    ChoiceBase *choice = (ChoiceBase *)pSignals.items[1];
+
+    WAVE_CURRENT.SetForm(choice->CurrentIndex());
+
+    cParameters.form = FORM_CURRENT;
+
+    Generator::TuneChannel(CURRENT_CHANNEL);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void PageSignals::OnPress_Channel(bool)
+{
+    cParameters.form = FORM_CURRENT;
+    numForm = FORM_CURRENT->value;
+    pSignals.items[1] = Chan(CURRENT_CHANNEL).IsA() ? (Item *)&cFormA : (Item *)&cFormB;
 }

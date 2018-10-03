@@ -59,7 +59,15 @@ void Choice::StartChange(int delta) const
     {
         tsChoice.address = this;
         tsChoice.timeStart = TIME_MS;
-        tsChoice.dir = delta > 0 ? INCREASE : DECREASE;
+        
+        if(delta > 0)
+        {
+            tsChoice.dir = INCREASE;
+        }
+        else
+        {
+            tsChoice.dir = DECREASE;
+        }
     }
 }
 
@@ -427,6 +435,16 @@ int8 Choice::CurrentIndex()
     }
 
     return retValue;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+int8 ChoiceBase::CurrentIndex() const
+{
+    if(type == Item::Type::Choice)
+    {
+        return *cell;
+    }
+    return 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
