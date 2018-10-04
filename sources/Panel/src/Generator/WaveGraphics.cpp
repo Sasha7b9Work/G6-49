@@ -252,6 +252,10 @@ void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
         return;
     }
 
+    if(param->IsChoice())
+    {
+        param = param;
+    }
     x = Text::DrawText(x, y, param->GetStringValue());
     char buffer[10];
     Text::SetUpperCase(false);

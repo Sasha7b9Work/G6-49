@@ -1749,6 +1749,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>FrequencyMeter</GroupName>
+          <Files>
+            <File>
+              <FileName>FrequencyMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FrequencyMeter\FrequencyMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FrequencyMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FrequencyMeter\FrequencyMeter.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Generator</GroupName>
+          <Files>
+            <File>
+              <FileName>Generator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Generator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Generator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Generator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Wave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaveGraphics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\WaveGraphics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Signals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Signals.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
@@ -2040,56 +2090,6 @@
               <FileName>Debug.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Debug.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FrequencyMeter</GroupName>
-          <Files>
-            <File>
-              <FileName>FrequencyMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FrequencyMeter\FrequencyMeter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FrequencyMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FrequencyMeter\FrequencyMeter.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Generator</GroupName>
-          <Files>
-            <File>
-              <FileName>Generator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Generator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Generator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Generator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Wave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Wave.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>WaveGraphics.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\WaveGraphics.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Signals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Signals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Signals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Signals.h</FilePath>
             </File>
           </Files>
         </Group>
