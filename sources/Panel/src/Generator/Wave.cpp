@@ -292,36 +292,26 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Form::OpenCurrentParameter()
 {
+    if(!CurrentParameter()->IsComplex())
+    {
+        return;
+    }
+
     oldParams = params;
     oldNumParams = numParams;
     oldCurrentParams = currentParam;
 
-    /*
-    /// Если у этого параметра есть родитель, значит, этот параметр управляет включением/отключением манипуляции
-    if(PARAM_CURRENT->GetParent())
+    ParameterComplex *parent = (ParameterComplex *)CurrentParameter();
+
+    numParams = parent->numParams;
+    params = parent->params;
+    currentParam = 0;
+
+    for(int i = 0; i < numParams; i++)
     {
-        set.sineManipulation[CURRENT_CHANNEL] = !set.sineManipulation[CURRENT_CHANNEL];
-        Generator::TuneChannel(GetWave()->GetChannel());
+        params[i]->form = this;
+        params[i]->parent = parent;
     }
-    else
-    
-        oldParams = params;
-        oldNumParams = numParams;
-        oldCurrentParams = currentParam;
-
-        ParameterBase *parent = CurrentParameter();
-
-        numParams = ((ParameterValue *)parent)->numParams;
-        params = ((ParameterValue *)parent)->params;
-        currentParam = 0;
-
-        for (int i = 0; i < numParams; i++)
-        {
-            params[i]->form = this;
-            params[i]->parent = parent;
-        }
-    }
-    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
