@@ -107,7 +107,8 @@ void Generator::SetParameter(ParameterChoice *param)
     {
         CommandPanel::SetPolarity,
         CommandPanel::SetStartMode,
-        CommandPanel::SetModeManipulation
+        CommandPanel::SetModeManipulation,
+        CommandPanel::SetManipulation
     };
 
     uint8 buffer[3] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()};
@@ -133,11 +134,10 @@ void Generator::SetParameter(ParameterValue *param)
         CommandPanel::SetDutyRatio,
         CommandPanel::SetPhase,
         CommandPanel::SetDelay,
-        CommandPanel::SET_DURATION_RISE,
-        CommandPanel::SET_DURATION_FALL,
-        CommandPanel::SET_DURATION_STADY,
-        CommandPanel::SET_DUTY_FACTOR,
-        CommandPanel::SetManipulation,
+        CommandPanel::SetDurationRise,
+        CommandPanel::SetDurationFall,
+        CommandPanel::SetDurationStady,
+        CommandPanel::SetDutyFactor,
         CommandPanel::SetManipulationDuration,
         CommandPanel::SetManipulationPeriod,
         CommandPanel::SetPacketPeriod,

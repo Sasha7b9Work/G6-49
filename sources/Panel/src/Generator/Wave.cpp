@@ -92,7 +92,6 @@ pString ParameterValue::Name() const
         {"Вр спада",       "Release time"},
         {"Вр пика",        "Peak time"},
         {"Коэфф заполн",   "Duty factor"},
-        {"Манипуляция",    "Manipulation"},
         {"Длительность",   "Duration"},
         {"Период",         "Period"},
         {"Период пакета",  "Packet period"},
@@ -200,6 +199,7 @@ void Form::TuneGenerator(Chan ch)
             params = oldParams;
             numParams = oldNumParams;
 
+            /*
             if(PARAM_CURRENT_IS_MANIPULATION)
             {
                 SendParameterToGenerator(ParameterValue::Frequency);
@@ -207,6 +207,7 @@ void Form::TuneGenerator(Chan ch)
                 SendParameterToGenerator(ParameterValue::Offset);
                 SendParameterToGenerator(ParameterValue::Manipulation);
             }
+            */
 
             currentParam = current;
             params = param;
@@ -217,7 +218,7 @@ void Form::TuneGenerator(Chan ch)
         }
         else
         {
-            SendParameterToGenerator(ParameterValue::Manipulation);
+            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
             SendParameterToGenerator(ParameterValue::Frequency);
             SendParameterToGenerator(ParameterValue::Amplitude);
             SendParameterToGenerator(ParameterValue::Offset);
@@ -337,11 +338,13 @@ bool Form::ParameterIsOpened() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float ParameterValue::GetValue() const
 {
+    /*
     if(Is(Manipulation))
     {
         ParameterValue *pointer = (ParameterValue *)this;
         return set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1.0f : 0.0f;
     }
+    */
     StructValue input((ParameterValue *)this);
     return input.Value();
 }
@@ -393,7 +396,6 @@ pString ParameterValue::NameUnit(char buf[10]) const
         {"",    ""},
         {"",    ""},
         {"",    ""},
-        {"",    ""},
         {"c",   "s"},
         {"c",   "s"},
         {"c",   "s"},
@@ -431,9 +433,10 @@ pString ParameterChoice::Name() const
     }
     namesParam[ParameterChoice::Number][2] =
     {
-        {"Полярность", "Polarity"},
-        {"Запуск",     "Mode start"},
-        {"Вид",        "Type"}
+        {"Полярность",  "Polarity"},
+        {"Запуск",      "Mode start"},
+        {"Вид",         "Type"},
+        {"Манипуляция", "Manipulation"}
     };
 
     return namesParam[value][LANG].name;

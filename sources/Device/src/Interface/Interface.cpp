@@ -65,10 +65,10 @@ commands[CommandPanel::Number] =
     Interface::ModeDebug,                   ///< ModeDebug
     Interface::ParameterValue,              ///< SetDelay
     Interface::WriteRegister,               ///< WriteRegister
-    Interface::Empty,                       ///< SET_DURATION_RISE
-    Interface::Empty,                       ///< SET_DURATION_FALL
-    Interface::Empty,                       ///< SET_DURATION_STADY
-    Interface::Empty,                       ///< SET_DUTY_FACTOR
+    Interface::Empty,                       ///< SetDurationRise
+    Interface::Empty,                       ///< SetDurationFall
+    Interface::Empty,                       ///< SetDurationStady
+    Interface::Empty,                       ///< SetDutyFactor
     Interface::SetManipulation,             ///< SetManipulation
     Interface::SetManipulationDuration,     ///< SetManipulationDuration
     Interface::SetManipulationPeriod,       ///< SetManipulationPeriod

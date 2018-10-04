@@ -51,10 +51,10 @@ typedef void (*pFuncVB)(bool);
 #define SetBit(value, bit) ((value) |= (1 << (bit)))
 #define ClearBit(value, bit) ((value) &= (~(1 << bit)))
 
-#define ENABLED_RU "ÂÊË"
-#define ENABLED_EN "ON"
-#define DISABLED_RU "ÎÒÊË"
-#define DISABLED_EN "OFF"
+#define ENABLED_RU  "Âêë"
+#define ENABLED_EN  "On"
+#define DISABLED_RU "Îòêë"
+#define DISABLED_EN "Off"
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \

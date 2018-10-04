@@ -1,5 +1,6 @@
 #include "Signals.h"
 #include "Display/Painter.h"
+#include "defines.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,12 +22,14 @@ static void DrawRectangleImpulse(int x, int y)
     Painter::DrawHLine(y + 8, x + 24, x + 32);
 }
 
-static ParameterValue param_SineModulationA_Manipulation        (ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One);
-static ParameterChoice param_SineModulationA_ManipulationMode   (ParameterChoice::ManipulationMode, "", "", "", "", 
+static ParameterChoice param_SineModulationA_Manipulation        (ParameterChoice::ManipulationEnabled, 
+                                                                                                        DISABLED_RU, DISABLED_EN,
+                                                                                                        ENABLED_RU,  ENABLED_EN);
+static ParameterChoice param_SineModulationA_ManipulationMode    (ParameterChoice::ManipulationMode, "", "", "", "", 
                                                                                                     DrawRawImpulse, DrawRectangleImpulse);
-static ParameterValue param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
-static ParameterValue param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
-static ParameterValue param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One);
+static ParameterValue  param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
+static ParameterValue  param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
+static ParameterValue  param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One);
 
 
 static ParameterBase *params_SineModulationA[] =
@@ -190,14 +193,19 @@ static Form formsA[] =
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static ParameterValue param_SineModulationB_Manipulation        (ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One);
-static ParameterValue param_SineModulationB_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
-static ParameterValue param_SineModulationB_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
-static ParameterValue param_SineModulationB_Exit                (ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One);
+static ParameterChoice param_SineModulationB_Manipulation        (ParameterChoice::ManipulationEnabled,
+                                                                                                        DISABLED_RU, DISABLED_EN,
+                                                                                                        ENABLED_RU, ENABLED_EN);
+static ParameterChoice param_SineModulationB_ManipulationMode(ParameterChoice::ManipulationMode, "", "", "", "",
+                                                                                                DrawRawImpulse, DrawRectangleImpulse);
+static ParameterValue  param_SineModulationB_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
+static ParameterValue  param_SineModulationB_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
+static ParameterValue  param_SineModulationB_Exit                (ParameterValue::Exit,                 -1.0f, 1.0f,   "",     0, Order::One);
 
 static ParameterBase *params_SineModulationB[] =
 {
     &param_SineModulationB_Manipulation,
+    &param_SineModulationB_ManipulationMode,
     &param_SineModulationB_ManipulationDuration,
     &param_SineModulationB_ManipulationPeriod,
     &param_SineModulationB_Exit,

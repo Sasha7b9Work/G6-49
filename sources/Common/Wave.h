@@ -87,9 +87,10 @@ public:
 
     enum E
     {
-        Polarity,           ///< Полярность импульсов
-        ModeStart,          ///< Режим запуска
-        ManipulationMode,   ///< Режим амплитудной манипуляции - со сглаживанием фронта или без
+        Polarity,               ///< Полярность импульсов
+        ModeStart,              ///< Режим запуска сигналов DDS и импульсных
+        ManipulationMode,       ///< Режим амплитудной манипуляции - со сглаживанием фронта или без
+        ManipulationEnabled,    ///< Включен или выключен режим манипуляции
         Number
     } value;
 
@@ -168,7 +169,6 @@ public:
         DurationFall,           ///< Длительность спада
         DurationStady,          ///< Длительность установившего значения
         DutyFactor,             ///< Коэффициент заполнения
-        Manipulation,           ///< Модуляция пилой для синусоиды
         ManipulationDuration,   ///< Длительность импульсов в режиме манипуляции
         ManipulationPeriod,     ///< Период следования импульсов в режиме манипуляции
         PacketPeriod,           ///< Период следования пачек импульсов в пакетном режиме
@@ -194,10 +194,10 @@ public:
     pString Name() const;
     /// Возвращает true, если является параметром типа e
     bool Is(ParameterValue::E e) const { return value == e; };
-    /// Возвращает true, если является непосредственно вводимым значением
-    bool IsInputValue() const { return IsValue() && value != Manipulation && value != Exit; };
     /// Возвращает true, если этот параметр - кнопка выхода.
     bool IsExit() const { return value == Exit; };
+
+    bool IsInputValue() const { return IsValue() && value != Exit; };
     /// Возвращает true, если сложный и открыт
     bool IsOpened();
 

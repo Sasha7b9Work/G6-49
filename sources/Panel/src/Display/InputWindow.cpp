@@ -58,7 +58,6 @@ void InputWindow::Draw()
         DrawDurationFall,
         DrawDurationStady,
         DrawDutyFactor,
-        DrawModulationRampSine,
         DrawRampSineDuration,
         DrawRampSineAmplitude,
         DrawPacketPeriod,
@@ -203,11 +202,6 @@ void InputWindow::DrawDutyRatio(int, int)
 void InputWindow::DrawDuration(int, int)
 {
 
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::DrawModulationRampSine(int, int)
-{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

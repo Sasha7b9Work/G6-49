@@ -61,10 +61,10 @@ struct CommandPanel
         ModeDebug,                  ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
         SetDelay,                   ///< Задержка
         WriteRegister,              ///< Занести значение в регистр
-        SET_DURATION_RISE,
-        SET_DURATION_FALL,
-        SET_DURATION_STADY,
-        SET_DUTY_FACTOR,
+        SetDurationRise,
+        SetDurationFall,
+        SetDurationStady,
+        SetDutyFactor,
         SetManipulation,            ///< Установить режим манипуляции
         SetManipulationDuration,    ///< Установить длительность ипульса в режиме манипуляции
         SetManipulationPeriod,      ///< Установить период следования импульсов в режиме манипуляции
