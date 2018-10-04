@@ -22,7 +22,7 @@ static void DrawRectangleImpulse(int x, int y)
 }
 
 static ParameterValue param_SineModulationA_Manipulation        (ParameterValue::Manipulation,         -1.0f, 1.0f,   "",     0, Order::One);
-static ParameterChoice param_SineModulationA_ManipulationMode   (ParameterChoice::ModeManipulation, "", "", "", "", 
+static ParameterChoice param_SineModulationA_ManipulationMode   (ParameterChoice::ManipulationMode, "", "", "", "", 
                                                                                                     DrawRawImpulse, DrawRectangleImpulse);
 static ParameterValue param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
 static ParameterValue param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
