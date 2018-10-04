@@ -22,12 +22,20 @@ public:
     {
     friend class AD9952;
     public:
+        enum Type
+        {
+            OSK,    ///< Манипуляция импульсами со сглаженными фронтами
+            FPGA    ///< Манипуляция прямоугольными импульсами
+        };
         /// Установить/отменить модулирование синусоиды сигналом "пилы"
         static void SetEnabled(Chan ch, bool enable);
         static bool IsEnabled(Chan ch) { return enabled[ch]; };
+        static void SetType(Chan ch, Type type);
+        static Type GetType(Chan ch) { return type[ch]; };
     private:
         /// True означает, что манипуляция включена
         static bool enabled[Chan::Number];
+        static Type type[Chan::Number];
     };
 
 private:

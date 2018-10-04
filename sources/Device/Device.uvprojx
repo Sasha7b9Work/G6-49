@@ -934,6 +934,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>FreqMeter</GroupName>
+          <Files>
+            <File>
+              <FileName>FreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Generator</GroupName>
           <Files>
             <File>
@@ -1099,6 +1114,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Settings</GroupName>
+          <Files>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\Settings.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Utils</GroupName>
           <Files>
             <File>
@@ -1130,36 +1160,6 @@
               <FileName>Console.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Console.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FreqMeter</GroupName>
-          <Files>
-            <File>
-              <FileName>FreqMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FreqMeter\FreqMeter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FreqMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FreqMeter\FreqMeter.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Settings</GroupName>
-          <Files>
-            <File>
-              <FileName>Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Settings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
           </Files>
         </Group>

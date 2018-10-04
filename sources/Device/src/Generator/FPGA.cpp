@@ -3,6 +3,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
+#include "Multiplexor.h"
 #include "Generator/Generator.h"
 #include "Utils/Console.h"
 #include <string.h>
@@ -204,8 +205,22 @@ void FPGA::WriteControlRegister()
     uint16 data = 0;
 
     SetBit(data, RG0::_0_WriteData);                               // В нулевом бите 0 записываем только для записи данных в память
+
+    SetBit(data, 3);
+    if (Multiplexor::GetMode(Chan::A).Is(Form::Sine) &&                         // Если включён синус
+        AD9952::Manipulation::IsEnabled(Chan::A) &&                             // и манипуляция
+        AD9952::Manipulation::GetType(Chan::A) == AD9952::Manipulation::OSK)    // и тип манипуляции - OSK ("пила")
+    {
+        ClearBit(data, 3);
+    }
+
     SetBit(data, 4);
-    SetBit(data, 5);
+    if (Multiplexor::GetMode(Chan::A).Is(Form::Sine) &&                          // Если включён синус
+        AD9952::Manipulation::IsEnabled(Chan::A) &&                              // И манипуляция
+        AD9952::Manipulation::GetType(Chan::A) == AD9952::Manipulation::FPGA)    // и тип манипуляции - прямоугольный импульс
+    {
+        ClearBit(data, 4);
+    }
 
     switch(modeWork[Chan::A])
     {
@@ -229,10 +244,8 @@ void FPGA::WriteControlRegister()
     }
 
     if(modeWork[Chan::A] == ModeWork::Manipulation)  { SetBit(data, RG0::_8_MeanderA); }
-    else                                             { SetBit(data, RG0::_6_ManipulationA); }
 
     if(modeWork[Chan::B] == ModeWork::Manipulation)  { SetBit(data, RG0::_9_MeanderB); }
-    else                                             { SetBit(data, RG0::_3_ManipulationB); }
 
     if(FPGA::clock == FPGA::ClockFrequency::_1MHz)   { SetBit(data, RG0::_7_Freq_MHz); }
 
@@ -241,6 +254,7 @@ void FPGA::WriteControlRegister()
     data = SetBitsStartMode(data);
 
     WriteRegister(RG::_0_Control, data);
+
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -452,7 +466,8 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         32, // _8_DurationImpulseB,
         13, // _9_FreqMeter
         28, // _10_Offset
-        2,  // _11_Offset
+        2,  // _11_Start
+        2,  // _12_Multiplexor
     };
 
     registers[reg] = value;

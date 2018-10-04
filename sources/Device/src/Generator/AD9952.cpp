@@ -27,7 +27,8 @@ static SPI_HandleTypeDef hSPI3 =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
-bool AD9952::Manipulation::enabled[Chan::Number] = {false, false};
+bool                       AD9952::Manipulation::enabled[Chan::Number] = {false, false};
+AD9952::Manipulation::Type AD9952::Manipulation::type[Chan::Number] = {AD9952::Manipulation::OSK, AD9952::Manipulation::OSK};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

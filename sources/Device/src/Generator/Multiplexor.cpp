@@ -18,8 +18,16 @@
 #define PIN_MX3_A0  GPIO_PIN_4
 #define PIN_MX3_A1  GPIO_PIN_5
 
+Form Multiplexor::mode[Chan::Number] = {Form::Sine, Form::Sine};
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Form Multiplexor::GetMode(Chan ch)
+{
+    return mode[ch];
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Multiplexor::Init()
 {
     GPIO_InitTypeDef  isGPIO =
@@ -58,6 +66,8 @@ void Multiplexor::WriteRegister(Register reg, uint value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Multiplexor::SetMode(Chan ch, Form form)
 {
+    mode[ch] = form;
+
 #define PIN_MX(ch, num) pins[ch][num]
 
     static const uint16 pins[2][2] =
