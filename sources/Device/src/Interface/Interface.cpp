@@ -3,7 +3,6 @@
 #include "Interface.h"
 #include "Utils/Console.h"
 #include "Generator/Generator.h"
-#include "Generator/Multiplexor.h"
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -200,11 +199,6 @@ void Interface::WriteRegister()
 
     switch (reg.value)
     {
-    case Register::Multiplexor1:
-    case Register::Multiplexor2:
-        Multiplexor::WriteRegister(reg, (uint)value);
-        break;
-
     case Register::OffsetA:
         AD5697::SetOffset(Chan::A, (float)value);
         break;
@@ -279,6 +273,8 @@ void Interface::WriteRegister()
         break;
 
     case Register::Number:
+    case Register::Multiplexor1:
+    case Register::Multiplexor2:
     default:
         break;
     }

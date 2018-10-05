@@ -1,7 +1,6 @@
 #include "AD5697.h"
 #include "FPGA.h"
 #include "Generator.h"
-#include "Multiplexor.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"
@@ -20,7 +19,6 @@ void Generator::Init()
     AD9952::Init();
     AD5697::Init();
     FPGA::Init();
-    Multiplexor::Init();
     FreqMeter::Init();
 }
 
@@ -43,12 +41,7 @@ void Generator::SetFormWave(Chan ch, Form form)
     {
         waveIsSine = form.Is(Form::Sine);
 
-        if (!waveIsSine)
-        {
-            FPGA::SetWaveForm(ch, form);
-        }
-
-        Multiplexor::SetMode(ch, form);
+        FPGA::SetWaveForm(ch, form);
     }
 }
 

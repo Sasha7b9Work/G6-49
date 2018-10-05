@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Multiplexor.h"
+#include "FPGA.h"
 #include "AD9952.h"
 
 
@@ -14,17 +14,17 @@
 #define PIN_MX1_A0  GPIO_PIN_0
 #define PIN_MX2_A0  GPIO_PIN_2
 
-Form Multiplexor::mode[Chan::Number] = {Form::Sine, Form::Sine};
+Form FPGA::Multiplexor::mode[Chan::Number] = {Form::Sine, Form::Sine};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Form Multiplexor::GetMode(Chan ch)
+Form FPGA::Multiplexor::GetMode(Chan ch)
 {
     return mode[ch];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::Init()
+void FPGA::Multiplexor::Init()
 {
     GPIO_InitTypeDef  isGPIO =
     {
@@ -36,7 +36,7 @@ void Multiplexor::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::WriteRegister(Register reg, uint value)
+void FPGA::Multiplexor::WriteRegister(Register reg, uint value)
 {
     uint16 pinA0 = PIN_MX1_A0;
 
@@ -50,7 +50,7 @@ void Multiplexor::WriteRegister(Register reg, uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::SetMode(Chan ch, Form form)
+void FPGA::Multiplexor::SetMode(Chan ch, Form form)
 {
     mode[ch] = form;
 
@@ -77,13 +77,13 @@ void Multiplexor::SetMode(Chan ch, Form form)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::SetPin(uint16 pin)
+void FPGA::Multiplexor::SetPin(uint16 pin)
 {
     HAL_GPIO_WritePin(GPIOF, pin, GPIO_PIN_SET);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Multiplexor::ResetPin(uint16 pin)
+void FPGA::Multiplexor::ResetPin(uint16 pin)
 {
     HAL_GPIO_WritePin(GPIOF, pin, GPIO_PIN_RESET);
 }

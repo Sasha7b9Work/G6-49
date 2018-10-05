@@ -3,7 +3,6 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
-#include "Multiplexor.h"
 #include "Generator/Generator.h"
 #include "Utils/Console.h"
 #include <string.h>
@@ -39,6 +38,8 @@ void FPGA::Init()
     CPU::WritePin(GeneratorWritePin::FPGA_A1_RG, false);
     CPU::WritePin(GeneratorWritePin::FPGA_A2_RG, false);
     CPU::WritePin(GeneratorWritePin::FPGA_A3_RG, false);
+
+    Multiplexor::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -61,7 +62,12 @@ void FPGA::SetWaveForm(Chan ch, Form form)
         SetPackedImpulseMode
     };
     
-    func[form.value].func(ch);
+    if(!form.Is(Form::Sine))
+    {
+        func[form.value].func(ch);
+    }
+
+    Multiplexor::SetMode(ch, form);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

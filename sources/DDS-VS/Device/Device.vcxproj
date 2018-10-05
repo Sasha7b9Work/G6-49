@@ -184,7 +184,6 @@
     <ClInclude Include="..\..\Device\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Device\src\Generator\GeneratorSettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h" />
-    <ClInclude Include="..\..\Device\src\Generator\Multiplexor.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Device\src\Hardware\EEPROM.h" />
     <ClInclude Include="..\..\Device\src\Hardware\stm32.h" />

@@ -120,9 +120,6 @@
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Generator\Multiplexor.h">
-      <Filter>Generator</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\Math.h">
       <Filter>Utils</Filter>
     </ClInclude>
