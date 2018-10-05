@@ -12,7 +12,10 @@
 */
 
 #define PIN_MX1_A0  GPIO_PIN_0
+#define PIN_MX1_A1  GPIO_PIN_1
 #define PIN_MX2_A0  GPIO_PIN_2
+#define PIN_MX2_A1  GPIO_PIN_3
+
 
 Form FPGA::Multiplexor::mode[Chan::Number] = {Form::Sine, Form::Sine};
 
@@ -28,7 +31,7 @@ void FPGA::Multiplexor::Init()
 {
     GPIO_InitTypeDef  isGPIO =
     {
-        PIN_MX1_A0 | PIN_MX2_A0,
+        PIN_MX1_A0 | PIN_MX2_A0 | PIN_MX1_A1 | PIN_MX2_A1,
         GPIO_MODE_OUTPUT_PP,
         GPIO_PULLUP
     };
@@ -54,26 +57,24 @@ void FPGA::Multiplexor::SetMode(Chan ch, Form form)
 {
     mode[ch] = form;
 
-#define PIN_MX(ch) pins[ch]
+#define PIN_MX(ch, pin) pins[ch][pin]
 
-    static const uint16 pins[2] =
+    static const uint16 pins[Chan::Number][2] =
     {
-        PIN_MX1_A0,
-        PIN_MX2_A0
+        {PIN_MX1_A0, PIN_MX1_A1},
+        {PIN_MX2_A0, PIN_MX2_A1}
     };
 
     if(form.Is(Form::Sine))
     {
-        SetPin(PIN_MX(ch));
+        SetPin(PIN_MX(ch, 0));
     }
-    else if(form.Is(Form::PacketImpuls))
+    else
     {
-        ResetPin(PIN_MX1_A0);
+        ResetPin(PIN_MX(ch, 0));
     }
-    else                                                // Для всех остальных форм сигнала используется ПЛИС
-    {
-        ResetPin(PIN_MX(ch));
-    }
+
+    ResetPin(PIN_MX(ch, 1));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -66,8 +66,10 @@ void FPGA::SetWaveForm(Chan ch, Form form)
     {
         func[form.value].func(ch);
     }
-
+    
     Multiplexor::SetMode(ch, form);
+
+    WriteControlRegister();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -208,24 +210,34 @@ void FPGA::SetStartMode(Chan ch, StartMode mode)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteControlRegister()
 {
-    uint16 data = 0;
+    uint16 data = BINARY_U16(00000000, 01111000);       // Биты 3, 4, 5, 6 устанавливаем в единичное состояние. Их активное состояние - нулевое
 
     SetBit(data, RG0::_0_WriteData);                               // В нулевом бите 0 записываем только для записи данных в память
 
-    SetBit(data, 3);
-    if (Multiplexor::GetMode(Chan::A).Is(Form::Sine) &&                         // Если включён синус
-        AD9952::Manipulation::IsEnabled(Chan::A) &&                             // и манипуляция
-        AD9952::Manipulation::GetType(Chan::A) == AD9952::Manipulation::OSK)    // и тип манипуляции - OSK ("пила")
+    if(Multiplexor::GetMode(Chan::A).Is(Form::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
     {
-        ClearBit(data, 3);
+        switch(AD9952::Manipulation::GetType(Chan::A))
+        {
+            case AD9952::Manipulation::OSK:
+                ClearBit(data, 3);
+                break;
+            case AD9952::Manipulation::FPGA:
+                ClearBit(data, 4);
+                break;
+        }
     }
 
-    SetBit(data, 4);
-    if (Multiplexor::GetMode(Chan::A).Is(Form::Sine) &&                          // Если включён синус
-        AD9952::Manipulation::IsEnabled(Chan::A) &&                              // И манипуляция
-        AD9952::Manipulation::GetType(Chan::A) == AD9952::Manipulation::FPGA)    // и тип манипуляции - прямоугольный импульс
+    if (Multiplexor::GetMode(Chan::B).Is(Form::Sine) && AD9952::Manipulation::IsEnabled(Chan::B))
     {
-        ClearBit(data, 4);
+        switch (AD9952::Manipulation::GetType(Chan::B))
+        {
+            case AD9952::Manipulation::OSK:
+                ClearBit(data, 5);
+                break;
+            case AD9952::Manipulation::FPGA:
+                ClearBit(data, 6);
+                break;
+        }
     }
 
     switch(modeWork[Chan::A])

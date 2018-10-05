@@ -29,6 +29,8 @@ typedef void(*pFuncVI)(int);
 
 #define BINARY_U8( bits ) _bitset(0##bits)
 
+#define BINARY_U16(bits1, bits0) ((BINARY_U8(bits1) << 8) | (BINARY_U8(bits0)))
+
 #ifdef _CONSOLE
 
 #ifndef __IO
