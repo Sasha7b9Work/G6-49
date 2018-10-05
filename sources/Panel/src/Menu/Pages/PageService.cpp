@@ -73,7 +73,6 @@ static DescInput desc[Register::Number] =
     {10, Uint          , false, 0 }, // FPGA_RG8_DurationImpulseB,
     {12, Binary        , false, 0 }, // FPGA_RG9_FreqMeter
     {11, Uint14_Uint14 , false, 0 }, // FPGA_RG10_Offset
-    {2,  Uint          , false, 0 }, // Multiplexor3
     {0},
     {0},
     {0}

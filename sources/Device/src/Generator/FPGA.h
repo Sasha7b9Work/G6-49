@@ -99,7 +99,6 @@ private:
             _9_FreqMeter,
             _10_Offset,
             _11_Start,
-            _12_Multiplexor,    ///< ”правление мультиплексорами дл€ управлени€ режимом манипул€ции
             Number
         } value;
         RG(E v) : value(v) { };

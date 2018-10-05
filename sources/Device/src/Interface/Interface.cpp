@@ -266,10 +266,6 @@ void Interface::WriteRegister()
         FPGA::WriteRegister(FPGA::RG::_10_Offset, value);
         break;
 
-    case Register::Multiplexor3:
-        Multiplexor::WriteRegister(reg, (uint)value);
-        break;
-
     case Register::FreqMeter_Resist:
         FreqMeter::SetResist((FreqResist::E)value);
         break;

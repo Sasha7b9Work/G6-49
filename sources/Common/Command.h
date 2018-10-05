@@ -119,7 +119,6 @@ struct Register
         FPGA_RG8_DurationImpulseB,  ///< Регистр кода длительности прямоуольных импульсов канала B
         FPGA_RG9_FreqMeter,         ///< Регистр параметров частотомера
         FPGA_RG10_Offset,           ///< Регистр смещения
-        Multiplexor3,
         FreqMeter_Resist,
         FreqMeter_Couple,
         FreqMeter_Filtr,

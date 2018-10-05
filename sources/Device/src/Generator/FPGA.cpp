@@ -254,7 +254,6 @@ void FPGA::WriteControlRegister()
     data = SetBitsStartMode(data);
 
     WriteRegister(RG::_0_Control, data);
-
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -466,8 +465,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
         32, // _8_DurationImpulseB,
         13, // _9_FreqMeter
         28, // _10_Offset
-        2,  // _11_Start
-        2,  // _12_Multiplexor
+        2   // _11_Start
     };
 
     registers[reg] = value;
