@@ -69,6 +69,13 @@ void AD9952::Manipulation::SetEnabled(Chan ch, bool enable)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void AD9952::Manipulation::SetType(Chan ch, Type t)
+{
+    Manipulation::type[ch] = t;
+    FPGA::SetWaveForm(ch, Form::Sine);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::SetFrequency(Chan ch, float frequency)
 {
     setDDS.ad9952[ch].frequency = frequency;

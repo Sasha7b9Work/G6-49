@@ -76,7 +76,7 @@ commands[CommandPanel::Number] =
     Interface::SetStartMode,
     Interface::ParameterValue,              ///< SetPeriod
     Interface::Polarity,                    ///< SetPolarity
-    Interface::Empty                        ///< SetModeManipulation
+    Interface::SetManipulationMode          ///< SetModeManipulation
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,6 +150,13 @@ void Interface::SetManipulation()
     Chan ch = (Chan::E)buffer[1];
     bool enabled = GetFloat(&buffer[2]) != 0;
     AD9952::Manipulation::SetEnabled(ch, enabled);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetManipulationMode()
+{
+    Chan ch = (Chan::E)buffer[1];
+    AD9952::Manipulation::SetType(ch, buffer[2]);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -340,6 +347,7 @@ void Interface::ReceiveCallback()
     {
         if(buffer[0] != 0)
         {
+            Console::AddString(CommandPanel(buffer[0]).Name());
             commands[buffer[0]].func();
         }
         if (Console::ExistString())

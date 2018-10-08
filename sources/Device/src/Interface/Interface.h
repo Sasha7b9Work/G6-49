@@ -41,6 +41,8 @@ public:
 
     static void SetManipulationPeriod();
 
+    static void SetManipulationMode();
+
     static void SetStartMode();
 
     static void Polarity();
