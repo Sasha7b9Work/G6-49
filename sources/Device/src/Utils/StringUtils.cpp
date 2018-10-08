@@ -20,5 +20,11 @@ char *Float2String(float value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 char *Buffer2FloatString(uint8 *buffer)
 {
-    return Float2String(BitSet32(buffer).floatValue);
+    return Float2String(Buffer2Float(buffer));
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+float Buffer2Float(uint8 *buffer)
+{
+    return BitSet32(buffer).floatValue;
 }

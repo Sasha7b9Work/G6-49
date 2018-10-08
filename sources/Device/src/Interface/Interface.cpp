@@ -8,6 +8,7 @@
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Utils/Debug.h"
+#include "Utils/StringUtils.h"
 #include "Command.h"
 #include "structs.h"
 #include <string.h>
@@ -148,7 +149,7 @@ void Interface::ReadData()
 void Interface::SetManipulation()
 {
     Chan ch = (Chan::E)buffer[1];
-    AD9952::Manipulation::SetEnabled(ch, BitSet32(buffer + 2).floatValue != 0);
+    AD9952::Manipulation::SetEnabled(ch, Buffer2Float(buffer + 2) != 0.0f);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -162,7 +163,7 @@ void Interface::SetManipulationMode()
 void Interface::SetManipulationDuration()
 {
     Chan ch = (Chan::E)buffer[1];
-    FPGA::SetDurationImpulse(ch, BitSet32(buffer + 2).floatValue);
+    FPGA::SetDurationImpulse(ch, Buffer2Float(buffer + 2));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +178,7 @@ void Interface::SetStartMode()
 void Interface::SetManipulationPeriod()
 {
     Chan ch = (Chan::E)buffer[1];
-    FPGA::SetPeriodImpulse(ch, BitSet32(buffer + 2).floatValue);
+    FPGA::SetPeriodImpulse(ch, Buffer2Float(buffer + 2));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -289,7 +290,7 @@ void Interface::ParameterValue()
 {
     Chan ch = (Chan::E)buffer[1];
     CommandPanel command = (CommandPanel::E)buffer[0];
-    Generator::SetParameter(ch, command, BitSet32(buffer + 2).floatValue);
+    Generator::SetParameter(ch, command, Buffer2Float(buffer + 2));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
