@@ -11,6 +11,7 @@
 #include "Command.h"
 #include "structs.h"
 #include "Signals.h"
+#include "Display/Console.h"
 
 #include <math.h>
 #include <string.h>
@@ -167,6 +168,11 @@ void Generator::SendToInterface(uint8 *data, uint16 size)
         ¬ случае, если у генератора нет данных дл€ передачи, он возвращает прин€тую информацию.
         ¬ случае наличи€ информации дл€ передачи он передаЄт еЄ.
     */
+
+    if(*data)
+    {
+        Console::AddString((new CommandPanel(*data))->Name());
+    }
  
     static uint8 trans[LENGTH_SPI_BUFFER];          // Ёто массив дл€ передаваемых данных
     static uint8 recv[LENGTH_SPI_BUFFER];         // Ёто массив, куда принимаютс€ данные сейчас

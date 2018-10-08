@@ -4,7 +4,7 @@
 class Console
 {
 public:
-    static void AddString(char *string);
+    static void AddString(const char *string);
 
     static void Draw();
 

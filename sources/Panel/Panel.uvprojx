@@ -1631,6 +1631,11 @@
               <FileType>5</FileType>
               <FilePath>..\common\Wave.h</FilePath>
             </File>
+            <File>
+              <FileName>Command.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Command.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

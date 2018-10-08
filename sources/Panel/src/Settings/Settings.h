@@ -57,6 +57,9 @@ extern const PageBase pInput;
 
 #define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
 
+#define SINE_MANIPULATION_ENABLED(ch)   (set.sine_ManipulationEnabled[ch])
+#define SINE_MANIPULATION_MODE(ch)      (set.sine_ManipulationMode[ch])
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma pack(push, 1)
 
@@ -73,14 +76,15 @@ public:
         }cal;
     };
     col_val                     disp_Colors[32];                        ///< Цвета
-    ParameterValue                   sig_parameter[Form::Number];            ///< Текущий выбранный параметр сигнала
+    ParameterValue              sig_parameter[Form::Number];            ///< Текущий выбранный параметр сигнала
     Page*                       menu_currentPage;                       ///< Адрес открытой страницы меню. 0, если открыта главная страница
     int8                        menu_posActItem[Page::Number];          ///< Позиция активного пункта меню для каждой страницы
     int8                        menu_currentSubPage[Page::Number];      ///< Номер текущей подстраницы для каждой страницы
     FrequencyMeter::BillingTime freq_billingTime;                       ///< Время счёта
     FrequencyMeter::AvePeriod   freq_avePeriod;                         ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps              freq_timeStamps;                        ///< Метки времени
-    bool                        sineManipulation[Chan::Number];         ///< true, если включена модуляция синусоиды пилой
+    bool                        sine_ManipulationEnabled[Chan::Number]; ///< true, если включена модуляция синусоиды пилой
+    uint8                       sine_ManipulationMode[Chan::Number];
 
 #define FLAG_1      set.flag1
     uint            flag1;

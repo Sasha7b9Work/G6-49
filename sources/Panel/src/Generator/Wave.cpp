@@ -188,40 +188,39 @@ void Form::TuneGenerator(Chan ch)
 
     if(value == Form::Sine)
     {
-        if(set.sineManipulation[ch])
-        {
-            int current = currentParam;
-            ParameterBase **param = params;
-            int numPar = numParams;
-
-            currentParam = oldCurrentParams;
-            params = oldParams;
-            numParams = oldNumParams;
-
-            /*
-            if(PARAM_CURRENT_IS_MANIPULATION)
-            {
-                SendParameterToGenerator(ParameterValue::Frequency);
-                SendParameterToGenerator(ParameterValue::Amplitude);
-                SendParameterToGenerator(ParameterValue::Offset);
-                SendParameterToGenerator(ParameterValue::Manipulation);
-            }
-            */
-
-            currentParam = current;
-            params = param;
-            numParams = numPar;
-
-            SendParameterToGenerator(ParameterValue::ManipulationDuration);
-            SendParameterToGenerator(ParameterValue::ManipulationPeriod);
-        }
-        else
+        if(CurrentParameter()->IsComplex())                                 // Ðàñêðûò ïàðàìåòð ÌÀÍÈÏÓËßÖÈß
         {
             SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
+
+            SendParameterToGenerator(ParameterChoice::ManipulationMode);
+            SendParameterToGenerator(ParameterValue::ManipulationDuration);
+            SendParameterToGenerator(ParameterValue::ManipulationPeriod);
+
+            CloseOpenedParameter();
+
+            SendParameterToGenerator(ParameterValue::Frequency);
+            SendParameterToGenerator(ParameterValue::Amplitude);
+            SendParameterToGenerator(ParameterValue::Offset);
+
+            OpenCurrentParameter();
+        }
+        else                                                                // Ïàðàìåòð ÌÀÍÈÏÓËßÖÈß çàêðûò
+        {
+            OpenCurrentParameter();
+
+            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
+
+            SendParameterToGenerator(ParameterChoice::ManipulationMode);
+            SendParameterToGenerator(ParameterValue::ManipulationDuration);
+            SendParameterToGenerator(ParameterValue::ManipulationPeriod);
+
+            CloseOpenedParameter();
+
             SendParameterToGenerator(ParameterValue::Frequency);
             SendParameterToGenerator(ParameterValue::Amplitude);
             SendParameterToGenerator(ParameterValue::Offset);
         }
+
         if(!ch.IsA())
         {
             SendParameterToGenerator(ParameterValue::Phase);
@@ -337,13 +336,6 @@ bool Form::ParameterIsOpened() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float ParameterValue::GetValue() const
 {
-    /*
-    if(Is(Manipulation))
-    {
-        ParameterValue *pointer = (ParameterValue *)this;
-        return set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1.0f : 0.0f;
-    }
-    */
     StructValue input((ParameterValue *)this);
     return input.Value();
 }
@@ -367,7 +359,7 @@ pString ParameterComplex::GetStringValue() const
         };
 
         ParameterValue *pointer = (ParameterValue *)this;
-        return values[LANG][set.sineManipulation[pointer->GetForm()->GetWave()->GetChannel()] ? 1 : 0];
+        return values[LANG][SINE_MANIPULATION_ENABLED(pointer->GetForm()->GetWave()->GetChannel()) ? 1 : 0];
     }
 
     return "";
@@ -537,6 +529,14 @@ void ParameterChoice::NextChoice()
     }
     else
     {
+        if(value == ManipulationEnabled)
+        {
+            SINE_MANIPULATION_ENABLED(ch) = !SINE_MANIPULATION_ENABLED(ch);
+        }
+        else if(value == ManipulationMode)
+        {
+            SINE_MANIPULATION_MODE(ch) = (SINE_MANIPULATION_MODE(ch) == 0) ? 1u : 0u;
+        }
         Generator::TuneChannel(ch);
     }
 }

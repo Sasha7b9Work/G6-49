@@ -82,8 +82,10 @@ struct CommandPanel
         SetModeManipulation,
         Number
     } value;
-    CommandPanel(E v) : value(v){};
+    CommandPanel(E v) : value(v) {};
+    CommandPanel(uint8 v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
+    pString Name() const;
 };
 
 /// Возможные команды, принимаемые от основного процессора
