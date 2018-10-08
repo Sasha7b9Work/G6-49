@@ -42,7 +42,7 @@ static ParameterBase *params_SineModulationA[] =
     0
 };
 
-static ParameterValue   param_SineA_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
+static ParameterValue   param_SineA_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Mega);
 static ParameterValue   param_SineA_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "50000", 0, Order::One);
 static ParameterValue   param_SineA_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
 static ParameterComplex param_SineA_Manipulation(params_SineModulationA);
@@ -196,7 +196,7 @@ static Form formsA[] =
 static ParameterChoice param_SineModulationB_Manipulation        (ParameterChoice::ManipulationEnabled,
                                                                                                         DISABLED_RU, DISABLED_EN,
                                                                                                         ENABLED_RU, ENABLED_EN);
-static ParameterChoice param_SineModulationB_ManipulationMode(ParameterChoice::ManipulationMode, "", "", "", "",
+static ParameterChoice param_SineModulationB_ManipulationMode    (ParameterChoice::ManipulationMode, "", "", "", "",
                                                                                                 DrawRawImpulse, DrawRectangleImpulse);
 static ParameterValue  param_SineModulationB_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0f,  10e3f,  "5000", 0, Order::Milli);
 static ParameterValue  param_SineModulationB_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0f,  10e3f,  "2500", 1, Order::Milli);
@@ -212,7 +212,7 @@ static ParameterBase *params_SineModulationB[] =
     0
 };
 
-static ParameterValue   param_SineB_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Kilo);
+static ParameterValue   param_SineB_Frequency   (ParameterValue::Frequency,    0.1f,  100e6f, "10000", 0, Order::Mega);
 static ParameterValue   param_SineB_Amplitude   (ParameterValue::Amplitude,    0.0f,  10.0f,  "10000", 1, Order::One);
 static ParameterValue   param_SineB_Offset      (ParameterValue::Offset,       0.0f,  10.0f,  "50000", 0, Order::One);
 static ParameterValue   param_SineB_Phase       (ParameterValue::Phase,        0.0f,  360.0f, "00000", 0, Order::One);

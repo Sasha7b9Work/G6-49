@@ -62,10 +62,7 @@ void FPGA::SetWaveForm(Chan ch, Form form)
         SetPackedImpulseMode
     };
     
-    if(!form.Is(Form::Sine))
-    {
-        func[form.value].func(ch);
-    }
+    func[form.value].func(ch);
     
     Multiplexor::SetMode(ch, form);
 
@@ -212,17 +209,17 @@ void FPGA::WriteControlRegister()
 {
     uint16 data = BINARY_U16(00000000, 01111000);       // Ѕиты 3, 4, 5, 6 устанавливаем в единичное состо€ние. »х активное состо€ние - нулевое
 
-    SetBit(data, RG0::_0_WriteData);                               // ¬ нулевом бите 0 записываем только дл€ записи данных в пам€ть
+    SetBit(data, RG0::_0_WriteData);                    // ¬ нулевом бите 0 записываем только дл€ записи данных в пам€ть
 
     if(Multiplexor::GetMode(Chan::A).Is(Form::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
     {
         switch(AD9952::Manipulation::GetType(Chan::A))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, 3);
+                ClearBit(data, RG0::_3_ManipulationNoOSK1);
                 break;
             case AD9952::Manipulation::Type::FPGA:
-                ClearBit(data, 4);
+                ClearBit(data, RG0::_4_ManipulationNoFPGA1);
                 break;
         }
     }
@@ -232,10 +229,10 @@ void FPGA::WriteControlRegister()
         switch (AD9952::Manipulation::GetType(Chan::B))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, 5);
+                ClearBit(data, RG0::_5_ManipulationNoOSK2);
                 break;
             case AD9952::Manipulation::Type::FPGA:
-                ClearBit(data, 6);
+                ClearBit(data, RG0::_6_ManipulationNoFPGA2);
                 break;
         }
     }
@@ -261,13 +258,25 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(modeWork[Chan::A] == ModeWork::Manipulation)  { SetBit(data, RG0::_8_MeanderA); }
+    if(modeWork[Chan::A] == ModeWork::Manipulation)  
+    {
+        SetBit(data, RG0::_8_MeanderA);
+    }
 
-    if(modeWork[Chan::B] == ModeWork::Manipulation)  { SetBit(data, RG0::_9_MeanderB); }
+    if(modeWork[Chan::B] == ModeWork::Manipulation)
+    {
+        SetBit(data, RG0::_9_MeanderB);
+    }
 
-    if(FPGA::clock == FPGA::ClockFrequency::_1MHz)   { SetBit(data, RG0::_7_Freq_MHz); }
+    if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
+    {
+        SetBit(data, RG0::_7_Freq_MHz);
+    }
 
-    if(modeWork[Chan::A] == ModeWork::PackedImpulse) { SetBit(data, RG0::_12_HandStartPacket); }
+    if(modeWork[Chan::A] == ModeWork::PackedImpulse)
+    {
+        SetBit(data, RG0::_12_HandStartPacket);
+    }
 
     data = SetBitsStartMode(data);
 
