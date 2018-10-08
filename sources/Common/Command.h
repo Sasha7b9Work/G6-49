@@ -135,7 +135,7 @@ struct Register
 };
 
 
-#define LENGTH_SPI_BUFFER   20
+#define LENGTH_SPI_BUFFER   30
 
 #define SPI_SLAVE_SYNBYTE   0x53
 

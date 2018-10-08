@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "StringUtils.h"
 #include "Utils/Math.h"
+#include "structs.h"
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,4 +15,10 @@ char *Float2String(float value)
     static char result[100];
     sprintf(result, "%f", value);
     return result;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char *Buffer2FloatString(uint8 *buffer)
+{
+    return Float2String(BitSet32(buffer).floatValue);
 }

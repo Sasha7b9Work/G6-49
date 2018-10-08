@@ -2,3 +2,5 @@
 
 
 char *Float2String(float value);
+
+char *Buffer2FloatString(uint8 *buffer);

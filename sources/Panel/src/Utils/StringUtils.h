@@ -23,6 +23,8 @@ char *Voltage2String(float voltage,     ///< значение напр€жени€ в вольтах
 char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20]);
 
 char *Float2String(float value);
+
+char *Buffer2FloatString(uint8 *buffer);
 /// @brief ѕреобразует time секунд в текстовую строку
 char* Time2String(float time,           ///< врем€ в секундах. ћожет быть отрицательным
                   bool alwaysSign,      ///< если true, знак показываетс€ даже если time > 0

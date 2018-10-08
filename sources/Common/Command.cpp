@@ -63,17 +63,20 @@ pString CommandPanel::Trace(uint8 *buffer) const
             }
             break;
         case SetFrequency:
-            strcat(result, Float2String(BitSet32(buffer + 2).floatValue));
+            strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetAmplitude:
+            strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetOffset:
+            strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetDuration:
             break;
         case SetDutyRatio:
             break;
         case SetPhase:
+            strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case RunReset:
             break;
@@ -94,10 +97,13 @@ pString CommandPanel::Trace(uint8 *buffer) const
         case SetManipulation:
             break;
         case SetManipulationDuration:
+            strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetManipulationPeriod:
+            strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetPacketPeriod:
+            strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetPacketNumber:
             break;
