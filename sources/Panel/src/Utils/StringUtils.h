@@ -25,6 +25,8 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
 char *Float2String(float value);
 
 char *Buffer2FloatString(uint8 *buffer);
+
+float Buffer2Float(uint8 *buffer);
 /// @brief Преобразует time секунд в текстовую строку
 char* Time2String(float time,           ///< время в секундах. Может быть отрицательным
                   bool alwaysSign,      ///< если true, знак показывается даже если time > 0

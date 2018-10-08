@@ -163,6 +163,11 @@ void Interface::SetManipulationMode()
 void Interface::SetManipulationDuration()
 {
     Chan ch = (Chan::E)buffer[1];
+
+    char add[20];
+    sprintf(add, "%f", Buffer2Float(buffer + 2));
+    Console::AddString(add);
+
     FPGA::SetDurationImpulse(ch, Buffer2Float(buffer + 2));
 }
 
