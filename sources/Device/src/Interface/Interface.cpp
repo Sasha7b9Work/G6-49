@@ -24,7 +24,7 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
         SPI_POLARITY_HIGH,              // Init.CLKPolarity
         SPI_PHASE_2EDGE,                // Init.CLKPhase
         SPI_NSS_SOFT,                   // Init.NSS
-        SPI_BAUDRATEPRESCALER_32,      // Init.BaudRatePrescaler
+        SPI_BAUDRATEPRESCALER_32,       // Init.BaudRatePrescaler
         SPI_FIRSTBIT_MSB,               // Init.FirstBit
         SPI_TIMODE_DISABLED,            // Init.TIMode
         SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
@@ -347,7 +347,7 @@ void Interface::ReceiveCallback()
     {
         if(buffer[0] != 0)
         {
-            Console::AddString(CommandPanel(buffer[0]).Name());
+            Console::AddString(CommandPanel(buffer[0]).Trace(buffer));
             commands[buffer[0]].func();
         }
         if (Console::ExistString())

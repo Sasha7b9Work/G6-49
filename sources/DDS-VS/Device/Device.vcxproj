@@ -230,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
+    <ClCompile Include="..\..\Common\Wave.cpp" />
     <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\AD5697.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\AD9952.cpp" />
