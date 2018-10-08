@@ -54,7 +54,7 @@ void FPGA::SetWaveForm(Chan ch, Form form)
     
     static const StructFunc func[Form::Number] =
     {
-        SetManipulationMode,        ///< «десь включаетс€ режим амплитудной манипул€ции
+        SetSineMode,            ///< «десь включаетс€ режим амплитудной манипул€ции
         SetRampPlusMode,
         SetRampMinusMode,
         SetMeanderMode,
@@ -84,9 +84,9 @@ void FPGA::SetMeanderMode(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetManipulationMode(Chan ch)
+void FPGA::SetSineMode(Chan ch)
 {
-    modeWork[ch] = ModeWork::Manipulation;
+    modeWork[ch] = ModeWork::Sine;
 
     WriteControlRegister();
 }
@@ -211,12 +211,12 @@ void FPGA::WriteControlRegister()
 
     SetBit(data, RG0::_0_WriteData);                    // ¬ нулевом бите 0 записываем только дл€ записи данных в пам€ть
 
-    if(Multiplexor::GetMode(Chan::A).Is(Form::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
+    if(modeWork[Chan::A].Is(ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
     {
         switch(AD9952::Manipulation::GetType(Chan::A))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, RG0::_3_ManipulationOSK1);
+                ClearBit(data, RG0::_3_ManipulationOSK2);
                 break;
             case AD9952::Manipulation::Type::FPGA:
                 ClearBit(data, RG0::_4_ManipulationFPGA1);
@@ -224,12 +224,12 @@ void FPGA::WriteControlRegister()
         }
     }
 
-    if (Multiplexor::GetMode(Chan::B).Is(Form::Sine) && AD9952::Manipulation::IsEnabled(Chan::B))
+    if (modeWork[Chan::B].Is(ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::B))
     {
         switch (AD9952::Manipulation::GetType(Chan::B))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, RG0::_5_ManipulationOSK2);
+                ClearBit(data, RG0::_5_ManipulationOSK1);
                 break;
             case AD9952::Manipulation::Type::FPGA:
                 ClearBit(data, RG0::_6_ManipulationFPGA2);
