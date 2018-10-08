@@ -41,23 +41,23 @@ pString CommandPanel::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString CommandPanel::Trace(uint8 *data) const
+pString CommandPanel::Trace(uint8 *buffer) const
 {
-    static char buffer[50];
-    sprintf(buffer, "%s ", Name());
+    static char result[50];
+    sprintf(result, "%s ", Name());
 
     switch(value)
     {
         case None:
             break;
         case EnableChannel:
-            strcat(buffer, data[2] ? "true" : "false");
+            strcat(result, buffer[2] ? "true" : "false");
             break;
         case SetFormWave:
             Form form((Form::E)buffer[2]);
-            strcat(buffer, form.Name(Language::RU));
+            strcat(result, form.Name(Language::RU));
             break;
     }
 
-    return buffer;
+    return result;
 }
