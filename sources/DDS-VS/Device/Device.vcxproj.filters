@@ -204,6 +204,12 @@
     <ClInclude Include="..\..\Device\src\Utils\Console.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\structs.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\StringUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -310,6 +316,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Common\Wave.cpp">
       <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

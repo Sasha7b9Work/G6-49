@@ -148,8 +148,7 @@ void Interface::ReadData()
 void Interface::SetManipulation()
 {
     Chan ch = (Chan::E)buffer[1];
-    bool enabled = GetFloat(&buffer[2]) != 0;
-    AD9952::Manipulation::SetEnabled(ch, enabled);
+    AD9952::Manipulation::SetEnabled(ch, BitSet32(buffer + 2).floatValue != 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -163,8 +162,7 @@ void Interface::SetManipulationMode()
 void Interface::SetManipulationDuration()
 {
     Chan ch = (Chan::E)buffer[1];
-    float duration = GetFloat(&buffer[2]);
-    FPGA::SetDurationImpulse(ch, duration);
+    FPGA::SetDurationImpulse(ch, BitSet32(buffer + 2).floatValue);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -179,8 +177,7 @@ void Interface::SetStartMode()
 void Interface::SetManipulationPeriod()
 {
     Chan ch = (Chan::E)buffer[1];
-    float period = GetFloat(&buffer[2]);
-    FPGA::SetPeriodImpulse(ch, period);
+    FPGA::SetPeriodImpulse(ch, BitSet32(buffer + 2).floatValue);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -288,19 +285,11 @@ void Interface::WriteRegister()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-float Interface::GetFloat(uint8 buf[4])
-{
-    float result = 0.0f;
-    memcpy(&result, buf, 4);
-    return result;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ParameterValue()
 {
     Chan ch = (Chan::E)buffer[1];
     CommandPanel command = (CommandPanel::E)buffer[0];
-    Generator::SetParameter(ch, command, GetFloat(&buffer[2]));
+    Generator::SetParameter(ch, command, BitSet32(buffer + 2).floatValue);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

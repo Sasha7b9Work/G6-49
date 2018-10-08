@@ -1,7 +1,12 @@
 #pragma once
 
 #ifdef WIN32
+
 #define __ARMCLIB_VERSION 6070001
+
+#pragma warning(push)
+#pragma warning(disable:4201 4514)
+
 #endif
 
 #define DEBUG
@@ -33,7 +38,6 @@ typedef void (*pFuncVII)(int, int);
 typedef void (*pFuncVI)(int);
 typedef bool (*pFuncBV)();
 typedef void (*pFuncVB)(bool);
-
 
 // Для определения задания буферов лучше пользоваться этими макросами, чтобы потом легче было отследить, где можно памяти освободить
 #define CHAR_BUF(name, size)            char name[size]
@@ -72,3 +76,8 @@ typedef void (*pFuncVB)(bool);
 #define BINARY_U16(bits1, bits0) ((BINARY_U8(bits1) << 8) | (BINARY_U8(bits0)))
 
 #define BINARY_U32(bits3, bits2, bits1, bits0) ((BINARY_U16(bits3, bits2) << 16) | (BINARY_U16(bits1, bits0)))
+
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

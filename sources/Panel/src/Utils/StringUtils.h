@@ -21,6 +21,8 @@ char *Voltage2String(float voltage,     ///< значение напряжения в вольтах
 /// \attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопироавать себе.
 /// \retval указатель на строку с числом.
 char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20]);
+
+char *Float2String(float value);
 /// @brief Преобразует time секунд в текстовую строку
 char* Time2String(float time,           ///< время в секундах. Может быть отрицательным
                   bool alwaysSign,      ///< если true, знак показывается даже если time > 0

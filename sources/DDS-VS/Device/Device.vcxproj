@@ -195,6 +195,7 @@
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsTypes.h" />
+    <ClInclude Include="..\..\Device\src\structs.h" />
     <ClInclude Include="..\..\Device\src\Utils\Console.h" />
     <ClInclude Include="..\..\Device\src\Utils\Debug.h" />
     <ClInclude Include="..\..\Device\src\Utils\Math.h" />
@@ -227,6 +228,7 @@
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
@@ -290,6 +292,7 @@
     <ClCompile Include="..\..\Device\src\Utils\Console.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\Debug.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\Math.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\common\_VS\algorithm" />

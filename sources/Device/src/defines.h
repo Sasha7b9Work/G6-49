@@ -41,3 +41,7 @@ typedef void(*pFuncVI)(int);
 #endif
 
 #define MAX_UINT ((uint)-1)
+
+#define ERROR_VALUE_FLOAT   1.111e29f
+#define ERROR_VALUE_UINT8   255
+#define ERROR_STRING_VALUE  "--.--"

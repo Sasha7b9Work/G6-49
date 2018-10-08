@@ -779,3 +779,11 @@ void SU::ConcatenateSymbol(char *str, char symbol)
     char con[2] = {symbol, 0};
     strcat(str, con);
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+char *Float2String(float value)
+{
+    static char result[100];
+    sprintf(result, "%f", value);
+    return result;
+}

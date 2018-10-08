@@ -27,6 +27,7 @@ union BitSet16
 union BitSet32
 {
     uint    word;
+    float   floatValue;
     uint16  halfWord[2];
     struct
     {
@@ -41,7 +42,18 @@ union BitSet32
         uint8 byte2;
         uint8 byte3;
     };
+    BitSet32(uint8 buffer[4] = 0)
+    {
+        if (buffer)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                byte[i] = buffer[i];
+            }
+        }
+    }
 };
+
 
 union BitSet64
 {
