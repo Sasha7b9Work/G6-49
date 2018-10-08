@@ -218,10 +218,10 @@ void FPGA::WriteControlRegister()
     {
         switch(AD9952::Manipulation::GetType(Chan::A))
         {
-            case AD9952::Manipulation::OSK:
+            case AD9952::Manipulation::Type::OSK:
                 ClearBit(data, 3);
                 break;
-            case AD9952::Manipulation::FPGA:
+            case AD9952::Manipulation::Type::FPGA:
                 ClearBit(data, 4);
                 break;
         }
@@ -231,10 +231,10 @@ void FPGA::WriteControlRegister()
     {
         switch (AD9952::Manipulation::GetType(Chan::B))
         {
-            case AD9952::Manipulation::OSK:
+            case AD9952::Manipulation::Type::OSK:
                 ClearBit(data, 5);
                 break;
-            case AD9952::Manipulation::FPGA:
+            case AD9952::Manipulation::Type::FPGA:
                 ClearBit(data, 6);
                 break;
         }

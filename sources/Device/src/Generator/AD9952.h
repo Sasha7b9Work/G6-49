@@ -22,10 +22,15 @@ public:
     {
     friend class AD9952;
     public:
-        enum Type
+        struct Type
         {
-            OSK,    ///< Манипуляция импульсами со сглаженными фронтами
-            FPGA    ///< Манипуляция прямоугольными импульсами
+            enum E
+            {
+                OSK,    ///< Манипуляция импульсами со сглаженными фронтами
+                FPGA    ///< Манипуляция прямоугольными импульсами
+            } value;
+            operator uint8() const { return (uint8)value; };
+            bool Is(E v) const { return value == v; };
         };
         /// Установить/отменить модулирование синусоиды сигналом "пилы"
         static void SetEnabled(Chan ch, bool enable);
@@ -48,10 +53,13 @@ private:
             ASF,
             ARR,
             FTW0,
-            POW
+            POW,
+            Number
         } value;
         Register(E v) : value(v) { };
         operator uint8() const { return (uint8)value;  };
+        pString Name() const;
+        bool Is(E v) const { return value == v; };
     };
 
     static void WriteToHardware(Chan ch, Register reg, uint value);

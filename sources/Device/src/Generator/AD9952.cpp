@@ -28,7 +28,7 @@ static SPI_HandleTypeDef hSPI3 =
 };
 
 bool                       AD9952::Manipulation::enabled[Chan::Number] = {false, false};
-AD9952::Manipulation::Type AD9952::Manipulation::type[Chan::Number] = {AD9952::Manipulation::OSK, AD9952::Manipulation::OSK};
+AD9952::Manipulation::Type AD9952::Manipulation::type[Chan::Number] = {AD9952::Manipulation::Type::OSK, AD9952::Manipulation::Type::OSK};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ void AD9952::WriteCFR1(Chan ch)
     }
     SetBit(value, 9);       // ќднонаправленный режим
     SetBit(value, 13);
-    if(Manipulation::enabled[ch])
+    if(Manipulation::enabled[ch] && Manipulation::type[ch].Is(Manipulation::Type::OSK))
     {
         SetBit(value, 24);  // ”станавливаем режим манипул€ции
     }
@@ -167,11 +167,37 @@ void AD9952::WriteARR(Chan ch)
     WriteToHardware(ch, Register::ARR, 1);
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+pString AD9952::Register::Name() const
+{
+    static const struct StructName
+    {
+        pString name;
+        StructName(pString n) : name(n) {};
+    } names[Number]=
+    {
+        "CFR1",
+        "CFR2",
+        "ASF",
+        "ARR",
+        "FTW0",
+        "POW"
+    };
 
+    return names[value].name;
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
 {
+    if(reg.Is(Register::CFR1))
+    {
+        char string[20];
+        sprintf(string, "%s %d", reg.Name(), value);
+
+        Console::AddString(string);
+    }
+
     static const int numBytes[] =               // „исло байт данных дл€ передачи
     { //CFR1 CFR2 ASF ARR FTW0 POW
          4,   3,   2,  1,  4,   2
