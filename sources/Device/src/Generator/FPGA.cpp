@@ -216,10 +216,10 @@ void FPGA::WriteControlRegister()
         switch(AD9952::Manipulation::GetType(Chan::A))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, RG0::_3_ManipulationNoOSK1);
+                ClearBit(data, RG0::_3_ManipulationOSK1);
                 break;
             case AD9952::Manipulation::Type::FPGA:
-                ClearBit(data, RG0::_4_ManipulationNoFPGA1);
+                ClearBit(data, RG0::_4_ManipulationFPGA1);
                 break;
         }
     }
@@ -229,10 +229,10 @@ void FPGA::WriteControlRegister()
         switch (AD9952::Manipulation::GetType(Chan::B))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, RG0::_5_ManipulationNoOSK2);
+                ClearBit(data, RG0::_5_ManipulationOSK2);
                 break;
             case AD9952::Manipulation::Type::FPGA:
-                ClearBit(data, RG0::_6_ManipulationNoFPGA2);
+                ClearBit(data, RG0::_6_ManipulationFPGA2);
                 break;
         }
     }
@@ -256,16 +256,6 @@ void FPGA::WriteControlRegister()
         case ModeWork::Impulse:
             SetBit(data, RG0::_2_ImpulseB);
             break;
-    }
-
-    if(modeWork[Chan::A] == ModeWork::Manipulation)  
-    {
-        SetBit(data, RG0::_8_MeanderA);
-    }
-
-    if(modeWork[Chan::B] == ModeWork::Manipulation)
-    {
-        SetBit(data, RG0::_9_MeanderB);
     }
 
     if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
