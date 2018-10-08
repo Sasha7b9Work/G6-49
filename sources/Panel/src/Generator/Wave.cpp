@@ -188,13 +188,15 @@ void Form::TuneGenerator(Chan ch)
 
     if(value == Form::Sine)
     {
-        if(CurrentParameter()->IsComplex())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
+        if(CurrentParameter()->GetParent())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
         {
             SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
 
             SendParameterToGenerator(ParameterChoice::ManipulationMode);
             SendParameterToGenerator(ParameterValue::ManipulationDuration);
             SendParameterToGenerator(ParameterValue::ManipulationPeriod);
+
+            int opened = currentParam;
 
             CloseOpenedParameter();
 
@@ -203,6 +205,8 @@ void Form::TuneGenerator(Chan ch)
             SendParameterToGenerator(ParameterValue::Offset);
 
             OpenCurrentParameter();
+
+            currentParam = opened;
         }
         else                                                                // ѕараметр ћјЌ»ѕ”Ћя÷»я закрыт
         {
@@ -531,11 +535,11 @@ void ParameterChoice::NextChoice()
     {
         if(value == ManipulationEnabled)
         {
-            SINE_MANIPULATION_ENABLED(ch) = !SINE_MANIPULATION_ENABLED(ch);
+            SINE_MANIPULATION_ENABLED(ch) = choice;
         }
         else if(value == ManipulationMode)
         {
-            SINE_MANIPULATION_MODE(ch) = (SINE_MANIPULATION_MODE(ch) == 0) ? 1u : 0u;
+            SINE_MANIPULATION_MODE(ch) = (uint8)choice;
         }
         Generator::TuneChannel(ch);
     }

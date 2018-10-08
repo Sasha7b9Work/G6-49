@@ -171,7 +171,7 @@ void Generator::SendToInterface(uint8 *data, uint16 size)
 
     if(*data)
     {
-        Console::AddString((new CommandPanel(*data))->Name());
+        Console::AddString(CommandPanel(*data).Name());
     }
  
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных

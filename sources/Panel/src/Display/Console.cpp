@@ -39,12 +39,16 @@ void Console::Draw()
         return;
     }
 
+    Text::SetUpperCase(false);
+
     int y = 1;
     for (int i = 0; i < numStrings; i++)
     {
         int length = Font::GetLengthText(&buffer[i][0]);
-        Painter::FillRegion(2, y, length, 9, Color::BACK);
+        Painter::FillRegion(2, y, length, 9, Color::GREEN_25);
         Text::DrawText(2, y, &buffer[i][0], Color::FILL);
         y += 9;
     }
+
+    Text::SetUpperCase(true);
 }
