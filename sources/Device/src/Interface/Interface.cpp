@@ -71,7 +71,7 @@ commands[CommandPanel::Number] =
     Interface::Empty,                       ///< SetDutyFactor
     Interface::SetManipulation,             ///< SetManipulation
     Interface::SetManipulationDuration,     ///< SetManipulationDuration
-    Interface::SetManipulationPeriod,       ///< SetManipulationPeriod
+    Interface::ParameterValue,              ///< SetManipulationPeriod
     Interface::ParameterValue,              ///< SetPacketPeriod
     Interface::ParameterValue,              ///< SetPacketNumber
     Interface::SetStartMode,
@@ -177,13 +177,6 @@ void Interface::SetStartMode()
     Chan ch = (Chan::E)buffer[1];
     StartMode mode = (StartMode)buffer[2];
     FPGA::SetStartMode(ch, mode);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetManipulationPeriod()
-{
-    Chan ch = (Chan::E)buffer[1];
-    FPGA::SetPeriodImpulse(ch, Buffer2Float(buffer + 2));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

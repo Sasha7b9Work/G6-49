@@ -75,7 +75,7 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         EmptyFunc,
         EmptyFunc,
         EmptyFunc,
-        EmptyFunc,
+        SetManipulationPeriod,
         SetPacketPeriod,
         SetPacketNumber,
         EmptyFunc,
@@ -98,6 +98,12 @@ void Generator::SetFrequency(Chan ch, float frequency)
     {
         FPGA::SetFrequency(ch, frequency);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetManipulationPeriod(Chan ch, float period)
+{
+    FPGA::SetPeriodImpulse(ch, period);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

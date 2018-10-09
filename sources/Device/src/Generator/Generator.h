@@ -41,5 +41,7 @@ private:
 
     static void SetPacketNumber(Chan ch, float number);
 
+    static void SetManipulationPeriod(Chan ch, float period);
+
     static void EmptyFunc(Chan, float);
 };
