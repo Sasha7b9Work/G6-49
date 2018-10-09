@@ -80,6 +80,9 @@ struct CommandPanel
         // 0                   1        2
         // SetModeManipulation NUM_CHAN mode
         SetModeManipulation,
+        // 0
+        // RequestData
+        RequestData,                ///< Запрос данных
         Number
     } value;
     CommandPanel(E v) : value(v) {};

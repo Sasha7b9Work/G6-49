@@ -77,7 +77,8 @@ commands[CommandPanel::Number] =
     Interface::SetStartMode,
     Interface::ParameterValue,      ///< SetPeriod
     Interface::Polarity,            ///< SetPolarity
-    Interface::SetManipulationMode  ///< SetModeManipulation
+    Interface::SetManipulationMode, ///< SetModeManipulation
+    Interface::Empty                ///< RequestData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

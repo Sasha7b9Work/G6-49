@@ -38,7 +38,8 @@ pString CommandPanel::Name() const
         "SetStartMode",
         "SetPeriod",
         "SetPolarity",
-        "SetModeManipulation"
+        "SetModeManipulation",
+        "RequestData"
     };
     return names[value].name;
 }
