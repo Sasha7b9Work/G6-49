@@ -323,7 +323,7 @@ void Interface::ReceiveCallback()
     {
         if(buffer[0] != 0)
         {
-            Console::AddString(CommandPanel(buffer[0]).Trace(buffer));
+            //Console::AddString(CommandPanel(buffer[0]).Trace(buffer));
             commands[buffer[0]].func();
         }
         if (Console::ExistString())

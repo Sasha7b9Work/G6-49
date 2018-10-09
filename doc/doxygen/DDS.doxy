@@ -833,14 +833,13 @@ RECURSIVE              = YES
 # run.
 
 EXCLUDE                = ../../sources/Panel/src/libs/system_stm32f4xx.c \
-                         ../../sources/common/libs/STM32Cube_F4 \
-                         ../../sources/common/libs/STM32Cube_F7 \
                          ../../sources/DDS-Open/Panel/src/libs/system_stm32f7xx.c \
                          ../../sources/DDS-Open/Panel/src/libs/system_stm32f7xx.h \
                          ../../sources/Generator/src/libs/CMSIS/startup_stm32f407xx.s \
                          ../../sources/Generator/src/libs/CMSIS/system_stm32f4xx.c \
                          ../../sources/Panel/src/libs/CMSIS/startup_stm32f429xx.s \
-                         ../../sources/Panel/src/libs/CMSIS/system_stm32f4xx.c
+                         ../../sources/Panel/src/libs/CMSIS/system_stm32f4xx.c \
+                         ../../sources/Common/libs
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded

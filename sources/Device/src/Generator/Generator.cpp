@@ -104,14 +104,14 @@ void Generator::SetFrequency(Chan ch, float frequency)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetManipulationPeriod(Chan ch, float period)
 {
+    FPGA::SetPolarity(ch, 0);
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetManipulationDuration(Chan ch, float duration)
 {
-    Console::AddFloat(duration);
-
+    FPGA::SetPolarity(ch, 0);
     FPGA::SetDurationImpulse(ch, duration);
 }
 
