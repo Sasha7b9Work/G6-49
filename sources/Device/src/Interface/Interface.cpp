@@ -258,24 +258,6 @@ void Interface::SendFrequency(uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ReceiveCallbackOld()
-{
-    if (recv[0] < CommandPanel::Number)
-    {
-        if(recv[0] != 0)
-        {
-            commands[recv[0]].func();
-        }
-        if (Console::ExistString())
-        {
-//            trans[0] = CommandGenerator::Log;
-//            Console::GetString((char *)(trans + 1));
-        }
-    }
-    timeLastReceive = TIME_MS;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ReceiveCallback()
 {
     BitSet16 bs(&recv[0]);                              // Узнаём количество принимаемых байт
@@ -290,7 +272,11 @@ void Interface::ReceiveCallback()
     }
     else if(recv[0] < CommandPanel::Number)   /// \todo примитивная проверка на ошибки
     {
-        Console::AddString(CommandPanel(recv[0]).Trace(recv));
+        CommandPanel command(recv[0]);
+        if(command == CommandPanel::SetManipulation)
+        {
+            Console::AddString(command.Trace(recv));
+        }
         commands[recv[0]].func();
     }
 }

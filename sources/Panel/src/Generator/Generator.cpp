@@ -153,7 +153,12 @@ void Generator::SendToInterface(uint8 *, uint16 size)
 void Generator::SendToInterface(uint8 *buffer, uint16 size)
 #endif
 {
-    //LOG_WRITE("%s", CommandPanel(*buffer).Trace(buffer));
+    CommandPanel command(*buffer);
+    if(command == CommandPanel::SetManipulation)
+    {
+        CommandPanel command(*buffer);
+        LOG_WRITE("передаю %s", CommandPanel(*buffer).Trace(buffer));
+    }
 
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
 

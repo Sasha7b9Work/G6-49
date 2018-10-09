@@ -11,8 +11,6 @@ public:
     /// ѕослать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
 
-    static void ReceiveCallbackOld();
-
     static void ReceiveCallback();
 
     static void Empty();
