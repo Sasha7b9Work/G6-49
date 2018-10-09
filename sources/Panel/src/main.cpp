@@ -28,8 +28,6 @@ int main()
     Settings::Load();
 
     Menu::Init();
-       
-    Generator::EmptyCommand();
 
     while (1)
     {

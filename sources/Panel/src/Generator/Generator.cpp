@@ -77,7 +77,7 @@ void Generator::Update()
 
     if(TIME_MS - timePrev > 100)
     {
-        ProcessDataFPGA();
+        //ProcessDataFPGA();
 
         timePrev = TIME_MS;
     }
@@ -153,6 +153,11 @@ void Generator::SendToInterface(uint8 *, uint16 size)
 void Generator::SendToInterface(uint8 *buffer, uint16 size)
 #endif
 {
+    if(*buffer == 0)
+    {
+        LOG_WRITE("%s", CommandPanel(*buffer).Trace(buffer));
+    }
+
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
 
     uint8 *pointer = buffer;

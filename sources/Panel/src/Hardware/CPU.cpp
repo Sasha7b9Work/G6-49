@@ -7,6 +7,7 @@
 #include "CPU.h"
 #include "LTDC.h"
 #include "Hardware/Timer.h"
+#include "Log.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,7 +118,13 @@ void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size)
 {
 #ifndef OPEN
     while(IsBusy()) {};
-    HAL_SPI_Transmit(&handleSPI4, buffer, size, 100);
+
+    HAL_StatusTypeDef res = HAL_SPI_Transmit(&handleSPI4, buffer, size, 100);
+
+    if(res != HAL_OK)
+    {
+        LOG_WRITE("ошибка передачи %d", res);
+    }
 #endif
 }
 
@@ -125,7 +132,14 @@ void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size)
 void CPU::SPI4_::Receive(uint8 *recv, uint16 size)
 {
 #ifndef OPEN
-    HAL_SPI_Receive(&handleSPI4, recv, size, 100);
+    while(IsBusy()) {};
+
+    HAL_StatusTypeDef res = HAL_SPI_Receive(&handleSPI4, recv, size, 100);
+
+    if(res != HAL_OK)
+    {
+        LOG_WRITE("ошибка приёма %d", res);
+    }
 #endif
 }
 

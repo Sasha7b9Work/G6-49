@@ -406,8 +406,15 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
+void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hSPI)
 {
+    __IO uint error = hSPI->ErrorCode;
+
+    if(error != HAL_SPI_ERROR_OVR)
+    {
+        error = error;
+    }
+
     HAL_SPI_Init(&hSPI1);
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
     HAL_SPI_Receive_IT(&hSPI1, recv, 2);
