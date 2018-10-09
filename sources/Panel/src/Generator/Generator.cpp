@@ -77,7 +77,7 @@ void Generator::Update()
 
     if(TIME_MS - timePrev > 100)
     {
-        //ProcessDataFPGA();
+        ProcessDataFPGA();
 
         timePrev = TIME_MS;
     }
@@ -186,35 +186,41 @@ void Generator::ProcessDataFPGA()
 
     if(numBytes)  // ѕрин€тое значение означает число байт, готовых дл€ передачи вспомогательным процессором
     {
-        uint8 *buffer = (uint8 *)malloc(numBytes);
-
-        if(buffer)
-        {
-            CPU::SPI4_::Receive(buffer, numBytes);
-
-            if (buffer[0] == CommandGenerator::FreqMeasure)
-            {
-                BitSet32 bs;
-                for (int i = 0; i < 4; i++)
-                {
-                    bs.byte[i] = buffer[i + 1];
-                }
-                FrequencyMeter::SetMeasure(bs.word);
-            }
-            else if (buffer[0] == CommandGenerator::Log)
-            {
-                char buf[LENGTH_SPI_BUFFER];
-                for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
-                {
-                    buf[i] = (char)buffer[i + 1];
-                }
-                buf[LENGTH_SPI_BUFFER - 1] = '\0';
-                Console::AddString(buf);
-            }
-        }
-
-        free(buffer);
+        ReceiveAndRun(numBytes);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::ReceiveAndRun(uint16 numBytes)
+{
+    uint8 *buffer = (uint8 *)malloc(numBytes);
+
+    if (buffer)
+    {
+        CPU::SPI4_::Receive(buffer, numBytes);
+
+        if (buffer[0] == CommandGenerator::FreqMeasure)
+        {
+            BitSet32 bs;
+            for (int i = 0; i < 4; i++)
+            {
+                bs.byte[i] = buffer[i + 1];
+            }
+            FrequencyMeter::SetMeasure(bs.word);
+        }
+        else if (buffer[0] == CommandGenerator::Log)
+        {
+            char buf[LENGTH_SPI_BUFFER];
+            for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
+            {
+                buf[i] = (char)buffer[i + 1];
+            }
+            buf[LENGTH_SPI_BUFFER - 1] = '\0';
+            Console::AddString(buf);
+        }
+    }
+
+    free(buffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

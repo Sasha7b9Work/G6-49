@@ -47,9 +47,10 @@ public:
 private:
     /// Заслать в генератор данные
     static void SendToInterface(uint8 *buffer, uint16 size);
-
     /// Принять и обработать данные от ПЛИС
     static void ProcessDataFPGA();
+    /// Принять numBytes байт от ПЛИС и выполнить их
+    static void ReceiveAndRun(uint16 numBytes);
 };
 
 /** @}  @} */
