@@ -8,8 +8,6 @@ class Interface
 public:
 
     static void Init();
-
-    static void Update();
     /// ѕослать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
 

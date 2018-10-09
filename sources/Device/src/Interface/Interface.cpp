@@ -114,22 +114,6 @@ SPI_HandleTypeDef *Interface::HandleSPI()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Update()
-{ 
-    /*
-    if(TIME_MS - timeLastReceive < 1000)
-    {
-        HAL_SPI_DeInit(&hSPI1);
-        HAL_SPI_Init(&hSPI1);
-        HAL_NVIC_EnableIRQ(SPI1_IRQn);
-        HAL_SPI_TransmitReceive_IT(&hSPI1, trs, buffer, LENGTH_SPI_BUFFER);
-        CPU::SetReady();
-        timeLastReceive = TIME_MS;
-    }
-    */
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Enable()
 {
     Chan ch = (Chan::E)recv[1];
@@ -346,7 +330,11 @@ void Interface::ReceiveCallback()
 
     ResizeRecieveBuffer(bs.halfWord);                   // Устанавливаем размер приёмного буфера равным этому значению
 
+    CPU::SetReady();
+
     HAL_SPI_Receive(&hSPI1, recv, bs.halfWord, 100);    // И принимаем данные
+
+    CPU::SetBusy();
 
     if(recv[0] == CommandPanel::RequestData)
     {

@@ -22,6 +22,5 @@ int main()
     while (1)
     {
         FreqMeter::Update();
-        Interface::Update();
     }
 }
