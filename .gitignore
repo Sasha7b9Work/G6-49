@@ -7,7 +7,7 @@ JLink*.*
 *~*
 *$*
 *.bak
-*.uvguix.*
+*.uvgui*.*
 
 doc/doxygen/KornetDDS/*
 
