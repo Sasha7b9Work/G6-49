@@ -183,7 +183,7 @@ void Generator::SendToInterface(uint8 *data, uint16 size)
     CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100);
 #endif
     
-    if(recv[0] == CommandGenerator::COM_FREQ_MEASURE)
+    if(recv[0] == CommandGenerator::FreqMeasure)
     {
         BitSet32 bs;
         for(int i = 0; i < 4; i++)
@@ -192,7 +192,7 @@ void Generator::SendToInterface(uint8 *data, uint16 size)
         }
         FrequencyMeter::SetMeasure(bs.word);
     }
-    else if(recv[0] == CommandGenerator::COM_LOG)
+    else if(recv[0] == CommandGenerator::Log)
     {
         char buf[LENGTH_SPI_BUFFER];
         for(int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)

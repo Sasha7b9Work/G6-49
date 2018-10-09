@@ -328,12 +328,12 @@ void Interface::ReceiveCallback()
         }
         if (Console::ExistString())
         {
-            trans[0] = CommandGenerator::COM_LOG;
+            trans[0] = CommandGenerator::Log;
             Console::GetString((char *)(trans + 1));
         }
         else if(freqForSend != MAX_UINT)
         {
-            trans[0] = CommandGenerator::COM_FREQ_MEASURE;
+            trans[0] = CommandGenerator::FreqMeasure;
             INIT_BIT_SET_32(bs, freqForSend);
             for(int i = 0; i < 4; i++)
             {

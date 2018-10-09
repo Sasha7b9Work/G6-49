@@ -96,9 +96,9 @@ struct CommandGenerator
 {
     enum E
     {
-        //   0            1...5
-        COM_FREQ_MEASURE = 1,   ///< FREQ_MEASURE частота                                                        /* Результат измерения частотомера */
-        COM_LOG = 2,
+        //                      0           1...5
+        FreqMeasure = 1,   ///< FreqMeasure частота                                                        /* Результат измерения частотомера */
+        Log = 2,
         Number
     } value;
 };
