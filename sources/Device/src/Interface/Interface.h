@@ -15,6 +15,8 @@ public:
 
     static SPI_HandleTypeDef *HandleSPI();
 
+    static void ReceiveCallbackOld();
+
     static void ReceiveCallback();
 
     static void Empty();
@@ -44,6 +46,10 @@ public:
     static void Polarity();
 
 private:
+    /// Послать имеющиеся данные в главный процессор
+    static void SendData();
+    /// Установить размер приёмного буфера равным size
+    static void ResizeRecieveBuffer(uint16 size);
     /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
     static uint freqForSend;
 

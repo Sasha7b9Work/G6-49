@@ -173,7 +173,7 @@ void Generator::ProcessDataFPGA()
 {
     uint8 command = CommandPanel::RequestData;
 
-    CPU::SPI4_::Transmit(&command, 1);
+    SendToInterface(&command, 1);
 
     uint16 numBytes = 0;
 

@@ -14,6 +14,7 @@ union BitSet16
         uint8 byte0;
         uint8 byte1;
     };
+    BitSet16(uint8 *vals) : byte0(*vals), byte1(*(vals + 1)) {};
 };
 
 #define INIT_BIT_SET_32(name, value)    \

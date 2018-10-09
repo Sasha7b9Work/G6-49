@@ -12,6 +12,7 @@
 #include "Command.h"
 #include "structs.h"
 #include <string.h>
+#include <stdlib.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,8 +40,7 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static uint8 buffer[LENGTH_SPI_BUFFER];         ///< Буфер для принимаемых команд
-static uint8 trans[LENGTH_SPI_BUFFER];     
+static uint8 *recv = 0;                         ///< Буфер для принимаемых команд
 uint  Interface::freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
 
@@ -100,7 +100,11 @@ void Interface::Init()
 
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
 
-    HAL_SPI_TransmitReceive_IT(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER);
+    free(recv);
+
+    recv = (uint8 *)malloc(2);
+
+    HAL_SPI_Receive_IT(&hSPI1, recv, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,8 +132,8 @@ void Interface::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Enable()
 {
-    Chan ch = (Chan::E)buffer[1];
-    bool enable = buffer[2] == 1;
+    Chan ch = (Chan::E)recv[1];
+    bool enable = recv[2] == 1;
       
     Generator::EnableChannel(ch, enable);
 }
@@ -137,8 +141,8 @@ void Interface::Enable()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Polarity()
 {
-    Chan ch = (Chan::E)buffer[1];
-    FPGA::SetPolarity(ch, buffer[2]);
+    Chan ch = (Chan::E)recv[1];
+    FPGA::SetPolarity(ch, recv[2]);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,42 +153,42 @@ void Interface::ReadData()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetManipulation()
 {
-    Chan ch = (Chan::E)buffer[1];
-    AD9952::Manipulation::SetEnabled(ch, Buffer2Float(buffer + 2) != 0.0f);
+    Chan ch = (Chan::E)recv[1];
+    AD9952::Manipulation::SetEnabled(ch, Buffer2Float(recv + 2) != 0.0f);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetManipulationMode()
 {
-    Chan ch = (Chan::E)buffer[1];
-    AD9952::Manipulation::SetType(ch, buffer[2]);
+    Chan ch = (Chan::E)recv[1];
+    AD9952::Manipulation::SetType(ch, recv[2]);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetStartMode()
 {
-    Chan ch = (Chan::E)buffer[1];
-    StartMode mode = (StartMode)buffer[2];
+    Chan ch = (Chan::E)recv[1];
+    StartMode mode = (StartMode)recv[2];
     FPGA::SetStartMode(ch, mode);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::FormWave()
 {
-    Chan ch = (Chan::E)buffer[1];
-    Form form = (Form::E)buffer[2];
+    Chan ch = (Chan::E)recv[1];
+    Form form = (Form::E)recv[2];
     Generator::SetFormWave(ch, form);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::WriteRegister()
 {
-    Register reg = (Register::E)buffer[1];
+    Register reg = (Register::E)recv[1];
 
     BitSet64 set;
     for (int i = 0; i < 8; i++)
     {
-        set.byte[i] = buffer[i + 2];
+        set.byte[i] = recv[i + 2];
     }
 
     uint64 value = set.dword;
@@ -275,15 +279,15 @@ void Interface::WriteRegister()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ParameterValue()
 {
-    Chan ch = (Chan::E)buffer[1];
-    CommandPanel command = (CommandPanel::E)buffer[0];
-    Generator::SetParameter(ch, command, Buffer2Float(buffer + 2));
+    Chan ch = (Chan::E)recv[1];
+    CommandPanel command = (CommandPanel::E)recv[0];
+    Generator::SetParameter(ch, command, Buffer2Float(recv + 2));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::CreateWave()
 {
-    Chan ch = (Chan::E)buffer[1];
+    Chan ch = (Chan::E)recv[1];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -318,44 +322,86 @@ void Interface::SendFrequency(uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ReceiveCallback()
+void Interface::ReceiveCallbackOld()
 {
-    if (buffer[0] < CommandPanel::Number)
+    if (recv[0] < CommandPanel::Number)
     {
-        if(buffer[0] != 0)
+        if(recv[0] != 0)
         {
-            //Console::AddString(CommandPanel(buffer[0]).Trace(buffer));
-            commands[buffer[0]].func();
+            commands[recv[0]].func();
         }
         if (Console::ExistString())
         {
-            trans[0] = CommandGenerator::Log;
-            Console::GetString((char *)(trans + 1));
-        }
-        else if(freqForSend != MAX_UINT)
-        {
-            trans[0] = CommandGenerator::FreqMeasure;
-            INIT_BIT_SET_32(bs, freqForSend);
-            for(int i = 0; i < 4; i++)
-            {
-                trans[i + 1] = bs.byte[i];
-            }
-        }
-        else
-        {
-            trans[0] = 0;
+//            trans[0] = CommandGenerator::Log;
+//            Console::GetString((char *)(trans + 1));
         }
     }
     timeLastReceive = TIME_MS;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *)
+void Interface::ReceiveCallback()
+{
+    BitSet16 bs(&recv[0]);                              // Узнаём количество принимаемых байт
+
+    ResizeRecieveBuffer(bs.halfWord);                   // Устанавливаем размер приёмного буфера равным этому значению
+
+    HAL_SPI_Receive(&hSPI1, recv, bs.halfWord, 100);    // И принимаем данные
+
+    if(recv[0] == CommandPanel::RequestData)
+    {
+        SendData();
+    }
+    else if(recv[0] < CommandPanel::Number)   /// \todo примитивная проверка на ошибки
+    {
+        commands[recv[0]].func();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SendData()
+{
+    if(freqForSend != MAX_UINT)
+    {
+        uint16 numBytes = 5;
+
+        CPU::SetReady();
+
+        HAL_SPI_Transmit(&hSPI1, (uint8 *)numBytes, 2, 100);
+
+        CPU::SetBusy();
+
+        uint8 *buffer = (uint8 *)malloc(5);
+        buffer[0] = CommandGenerator::FreqMeasure;
+        INIT_BIT_SET_32(bs, freqForSend);
+        for(int i = 0; i < 4; i++)
+        {
+            buffer[i + 1] = bs.byte[i];
+        }
+
+        CPU::SetReady();
+
+        HAL_SPI_Transmit(&hSPI1, buffer, 5, 100);
+
+        CPU::SetBusy();
+
+        free(buffer);
+    }
+    else
+    {
+        uint16 numBytes = 0;
+        CPU::SetReady();
+        HAL_SPI_Transmit(&hSPI1, (uint8 *)numBytes, 2, 100);
+        CPU::SetBusy();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *)
 {
     CPU::SetBusy();
     Interface::ReceiveCallback();
-    memset(buffer, 0, LENGTH_SPI_BUFFER);
-    HAL_SPI_TransmitReceive_IT(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER);
+    HAL_SPI_Receive_IT(&hSPI1, recv, 2);
     CPU::SetReady();
 }
 
@@ -364,8 +410,13 @@ void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
 {
     HAL_SPI_Init(&hSPI1);
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
-    HAL_SPI_TransmitReceive_IT(&hSPI1, trans, buffer, LENGTH_SPI_BUFFER);
+    HAL_SPI_Receive_IT(&hSPI1, recv, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::ResizeRecieveBuffer(uint16 size)
+{
+    free(recv);
 
+    recv = (uint8 *)malloc(size);
+}
