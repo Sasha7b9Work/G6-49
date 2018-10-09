@@ -4,6 +4,28 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static SPI_HandleTypeDef hSPI1 =                                   // Для связи с панелью
+{
+    SPI1,
+    {
+        SPI_MODE_SLAVE,                 // Init.Mode
+        SPI_DIRECTION_2LINES,           // Init.Direction
+        SPI_DATASIZE_8BIT,              // Init.DataSize
+        SPI_POLARITY_HIGH,              // Init.CLKPolarity
+        SPI_PHASE_2EDGE,                // Init.CLKPhase
+        SPI_NSS_SOFT,                   // Init.NSS
+        SPI_BAUDRATEPRESCALER_32,       // Init.BaudRatePrescaler
+        SPI_FIRSTBIT_MSB,               // Init.FirstBit
+        SPI_TIMODE_DISABLED,            // Init.TIMode
+        SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
+        7                               // InitCRCPolynomial
+    },
+    0, 0, 0, 0, 0, 0,
+    0,
+    0,
+    0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+};
+
 struct StructPort
 {
     GPIO_TypeDef *port;
@@ -70,6 +92,8 @@ void CPU::Init()
 
     WritePin(GeneratorWritePin::Pin_P3_OutA, false);
     WritePin(GeneratorWritePin::Pin_P4_OutB, false);
+
+    SPI1_::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -171,4 +195,52 @@ bool CPU::ReadPin(GeneratorReadPin pin)
     GPIO_PinState state = HAL_GPIO_ReadPin(registersRead[pin].port, registersRead[pin].pin);
 
     return state == GPIO_PIN_SET;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::SPI1_::Init()
+{
+    GPIO_InitTypeDef isGPIOA =
+    {   //  SCK         MI           MO
+        GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7,
+        GPIO_MODE_AF_PP,
+        GPIO_NOPULL,
+        GPIO_SPEED_HIGH,
+        GPIO_AF5_SPI1
+    };
+    HAL_GPIO_Init(GPIOA, &isGPIOA);
+
+    HAL_NVIC_SetPriority(SPI1_IRQn, 1, 0);
+
+    HAL_SPI_Init(&hSPI1);
+
+    HAL_NVIC_EnableIRQ(SPI1_IRQn);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::SPI1_::ReceiveIT(uint8 *buffer, uint16 size)
+{
+    HAL_SPI_Receive_IT(&hSPI1, buffer, size);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+SPI_HandleTypeDef *CPU::SPI1_::Handle()
+{
+    return &hSPI1;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::SPI1_::Receive(uint8 *buffer, uint16 size)
+{
+    CPU::SetReady();
+    HAL_SPI_Receive(&hSPI1, buffer, size, 100);
+    CPU::SetBusy();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::SPI1_::Transmit(void *buffer, uint16 size)
+{
+    CPU::SetReady();
+    HAL_SPI_Transmit(&hSPI1, (uint8 *)buffer, size, 100);
+    CPU::SetBusy();
 }

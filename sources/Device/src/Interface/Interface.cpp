@@ -16,30 +16,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static SPI_HandleTypeDef hSPI1 =                                   // Для связи с панелью
-{
-    SPI1,
-    {
-        SPI_MODE_SLAVE,                 // Init.Mode
-        SPI_DIRECTION_2LINES,           // Init.Direction
-        SPI_DATASIZE_8BIT,              // Init.DataSize
-        SPI_POLARITY_HIGH,              // Init.CLKPolarity
-        SPI_PHASE_2EDGE,                // Init.CLKPhase
-        SPI_NSS_SOFT,                   // Init.NSS
-        SPI_BAUDRATEPRESCALER_32,       // Init.BaudRatePrescaler
-        SPI_FIRSTBIT_MSB,               // Init.FirstBit
-        SPI_TIMODE_DISABLED,            // Init.TIMode
-        SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
-        7                               // InitCRCPolynomial
-    },
-    0, 0, 0, 0, 0, 0, 
-    0, 
-    0, 
-    0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
-};
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 *recv = 0;                         ///< Буфер для принимаемых команд
 uint  Interface::freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
@@ -84,33 +60,9 @@ commands[CommandPanel::Number] =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
 {
-    GPIO_InitTypeDef isGPIOA =
-    {   //  SCK         MI           MO
-        GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7,
-        GPIO_MODE_AF_PP,
-        GPIO_NOPULL,
-        GPIO_SPEED_HIGH,
-        GPIO_AF5_SPI1
-    };
-    HAL_GPIO_Init(GPIOA, &isGPIOA);
-
-    HAL_NVIC_SetPriority(SPI1_IRQn, 1, 0);
-
-    HAL_SPI_Init(&hSPI1);
-
-    HAL_NVIC_EnableIRQ(SPI1_IRQn);
-
     free(recv);
-
     recv = (uint8 *)malloc(2);
-
-    HAL_SPI_Receive_IT(&hSPI1, recv, 2);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-SPI_HandleTypeDef *Interface::HandleSPI()
-{
-    return &hSPI1;
+    CPU::SPI1_::ReceiveIT(recv, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -330,11 +282,7 @@ void Interface::ReceiveCallback()
 
     ResizeRecieveBuffer(bs.halfWord);                   // Устанавливаем размер приёмного буфера равным этому значению
 
-    CPU::SetReady();
-
-    HAL_SPI_Receive(&hSPI1, recv, bs.halfWord, 100);    // И принимаем данные
-
-    CPU::SetBusy();
+    CPU::SPI1_::Receive(recv, bs.halfWord);             // И принимаем данные
 
     if(recv[0] == CommandPanel::RequestData)
     {
@@ -353,11 +301,7 @@ void Interface::SendData()
     {
         uint16 numBytes = 5;
 
-        CPU::SetReady();
-
-        HAL_SPI_Transmit(&hSPI1, (uint8 *)numBytes, 2, 100);
-
-        CPU::SetBusy();
+        CPU::SPI1_::Transmit(&numBytes, 2);
 
         uint8 *buffer = (uint8 *)malloc(5);
         buffer[0] = CommandGenerator::FreqMeasure;
@@ -367,20 +311,14 @@ void Interface::SendData()
             buffer[i + 1] = bs.byte[i];
         }
 
-        CPU::SetReady();
-
-        HAL_SPI_Transmit(&hSPI1, buffer, 5, 100);
-
-        CPU::SetBusy();
+        CPU::SPI1_::Transmit(buffer, 5);
 
         free(buffer);
     }
     else
     {
         uint16 numBytes = 0;
-        CPU::SetReady();
-        HAL_SPI_Transmit(&hSPI1, (uint8 *)numBytes, 2, 100);
-        CPU::SetBusy();
+        CPU::SPI1_::Transmit(&numBytes, 2);
     }
 }
 
@@ -389,23 +327,16 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *)
 {
     CPU::SetBusy();
     Interface::ReceiveCallback();
-    HAL_SPI_Receive_IT(&hSPI1, recv, 2);
+    CPU::SPI1_::ReceiveIT(recv, 2);
     CPU::SetReady();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hSPI)
+void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
 {
-    __IO uint error = hSPI->ErrorCode;
-
-    if(error != HAL_SPI_ERROR_OVR)
-    {
-        error = error;
-    }
-
-    HAL_SPI_Init(&hSPI1);
+    HAL_SPI_Init(CPU::SPI1_::Handle());
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
-    HAL_SPI_Receive_IT(&hSPI1, recv, 2);
+    HAL_SPI_Receive_IT(CPU::SPI1_::Handle(), recv, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

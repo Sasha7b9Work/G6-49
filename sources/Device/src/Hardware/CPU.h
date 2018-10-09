@@ -77,6 +77,22 @@ public:
 
     static bool ReadPin(GeneratorReadPin pin);
 
+    class SPI1_
+    {
+        friend class CPU;
+    private:
+        static void Init();
+
+    public:
+        static void ReceiveIT(uint8 *buffer, uint16 size);
+
+        static void Receive(uint8 *buffer, uint16 size);
+
+        static void Transmit(void *buffer, uint16 size);
+
+        static SPI_HandleTypeDef *Handle();
+    };
+
 private:
 
     static void EnablePeriphery();

@@ -11,8 +11,6 @@ public:
     /// ѕослать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
 
-    static SPI_HandleTypeDef *HandleSPI();
-
     static void ReceiveCallbackOld();
 
     static void ReceiveCallback();

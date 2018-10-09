@@ -69,7 +69,7 @@ extern "C" {
 
     void SPI1_IRQHandler()
     {
-        HAL_SPI_IRQHandler(Interface::HandleSPI());
+        HAL_SPI_IRQHandler(CPU::SPI1_::Handle());
     }
 
 #ifdef __cplusplus
