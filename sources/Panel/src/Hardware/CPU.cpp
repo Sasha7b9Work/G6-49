@@ -122,10 +122,10 @@ void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI4_::Receive(uint8 *recv, uint16 size, uint timeOut)
+void CPU::SPI4_::Receive(uint8 *recv, uint16 size)
 {
 #ifndef OPEN
-    HAL_SPI_Receive(&handleSPI4, recv, size, timeOut);
+    HAL_SPI_Receive(&handleSPI4, recv, size, 100);
 #endif
 }
 

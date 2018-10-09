@@ -77,11 +77,7 @@ void Generator::Update()
 
     if(TIME_MS - timePrev > 100)
     {
-        uint8 trans[LENGTH_SPI_BUFFER] = {0};
-
-        SendToInterface(trans, LENGTH_SPI_BUFFER);
-
-        
+        ProcessDataFPGA();
 
         timePrev = TIME_MS;
     }
@@ -151,41 +147,10 @@ void Generator::SetParameter(ParameterValue *param)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SendToInterface(uint8 *data, uint16 size)
-{
-    static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
-    static uint8 recv[LENGTH_SPI_BUFFER];         // Это массив, куда принимаются данные сейчас
-
-    memcpy(trans, data, (uint)size);
-
-    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER);
-    
-    if(recv[0] == CommandGenerator::FreqMeasure)
-    {
-        BitSet32 bs;
-        for(int i = 0; i < 4; i++)
-        {
-            bs.byte[i] = recv[i + 1];
-        }
-        FrequencyMeter::SetMeasure(bs.word);
-    }
-    else if(recv[0] == CommandGenerator::Log)
-    {
-        char buf[LENGTH_SPI_BUFFER];
-        for(int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
-        {
-            buf[i] = (char)recv[i + 1];
-        }
-        buf[LENGTH_SPI_BUFFER - 1] = '\0';
-        Console::AddString(buf);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 #ifdef OPEN
-void Generator::SendToInterfaceNew(uint8 *, uint16 size)
+void Generator::SendToInterface(uint8 *, uint16 size)
 #else
-void Generator::SendToInterfaceNew(uint8 *buffer, uint16 size)
+void Generator::SendToInterface(uint8 *buffer, uint16 size)
 #endif
 {
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
@@ -200,6 +165,50 @@ void Generator::SendToInterfaceNew(uint8 *buffer, uint16 size)
         CPU::SPI4_::Transmit(pointer, sizeChunk);
 
         pointer += sizeChunk;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::ProcessDataFPGA()
+{
+    uint8 command = CommandPanel::RequestData;
+
+    CPU::SPI4_::Transmit(&command, 1);
+
+    uint16 numBytes = 0;
+
+    CPU::SPI4_::Receive((uint8 *)&numBytes, 2);
+
+    if(numBytes)  // Принятое значение означает число байт, готовых для передачи вспомогательным процессором
+    {
+        uint8 *buffer = (uint8 *)malloc(numBytes);
+
+        if(buffer)
+        {
+            CPU::SPI4_::Receive(buffer, numBytes);
+
+            if (buffer[0] == CommandGenerator::FreqMeasure)
+            {
+                BitSet32 bs;
+                for (int i = 0; i < 4; i++)
+                {
+                    bs.byte[i] = buffer[i + 1];
+                }
+                FrequencyMeter::SetMeasure(bs.word);
+            }
+            else if (buffer[0] == CommandGenerator::Log)
+            {
+                char buf[LENGTH_SPI_BUFFER];
+                for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
+                {
+                    buf[i] = (char)buffer[i + 1];
+                }
+                buf[LENGTH_SPI_BUFFER - 1] = '\0';
+                Console::AddString(buf);
+            }
+        }
+
+        free(buffer);
     }
 }
 
