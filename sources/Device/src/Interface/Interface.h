@@ -37,8 +37,6 @@ public:
 
     static void SetManipulation();
 
-    static void SetManipulationDuration();
-
     static void SetManipulationMode();
 
     static void SetStartMode();

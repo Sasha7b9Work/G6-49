@@ -4,6 +4,7 @@
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"
+#include "Utils/Console.h"
 #include "CommonTypes.h"
 
 
@@ -74,7 +75,7 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         EmptyFunc,
         EmptyFunc,
         EmptyFunc,
-        EmptyFunc,
+        SetManipulationDuration,
         SetManipulationPeriod,
         SetPacketPeriod,
         SetPacketNumber,
@@ -104,6 +105,14 @@ void Generator::SetFrequency(Chan ch, float frequency)
 void Generator::SetManipulationPeriod(Chan ch, float period)
 {
     FPGA::SetPeriodImpulse(ch, period);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetManipulationDuration(Chan ch, float duration)
+{
+    Console::AddFloat(duration);
+
+    FPGA::SetDurationImpulse(ch, duration);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

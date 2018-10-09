@@ -53,31 +53,31 @@ static const struct FuncInterface
 commands[CommandPanel::Number] =
 {
     Interface::Empty,
-    Interface::Enable,                      ///< EnableChannel
-    Interface::FormWave,                    ///< SetFormWave
-    Interface::ParameterValue,              ///< SetFrequency
-    Interface::ParameterValue,              ///< SetAmplitude
-    Interface::ParameterValue,              ///< SetOffset
-    Interface::ParameterValue,              ///< SetDuration
-    Interface::ParameterValue,              ///< SetDutyRatio
-    Interface::ParameterValue,              ///< SetPhase
-    Interface::Reset,                       ///< RunReset
-    Interface::ModeDebug,                   ///< ModeDebug
-    Interface::ParameterValue,              ///< SetDelay
-    Interface::WriteRegister,               ///< WriteRegister
-    Interface::Empty,                       ///< SetDurationRise
-    Interface::Empty,                       ///< SetDurationFall
-    Interface::Empty,                       ///< SetDurationStady
-    Interface::Empty,                       ///< SetDutyFactor
-    Interface::SetManipulation,             ///< SetManipulation
-    Interface::SetManipulationDuration,     ///< SetManipulationDuration
-    Interface::ParameterValue,              ///< SetManipulationPeriod
-    Interface::ParameterValue,              ///< SetPacketPeriod
-    Interface::ParameterValue,              ///< SetPacketNumber
+    Interface::Enable,              ///< EnableChannel
+    Interface::FormWave,            ///< SetFormWave
+    Interface::ParameterValue,      ///< SetFrequency
+    Interface::ParameterValue,      ///< SetAmplitude
+    Interface::ParameterValue,      ///< SetOffset
+    Interface::ParameterValue,      ///< SetDuration
+    Interface::ParameterValue,      ///< SetDutyRatio
+    Interface::ParameterValue,      ///< SetPhase
+    Interface::Reset,               ///< RunReset
+    Interface::ModeDebug,           ///< ModeDebug
+    Interface::ParameterValue,      ///< SetDelay
+    Interface::WriteRegister,       ///< WriteRegister
+    Interface::Empty,               ///< SetDurationRise
+    Interface::Empty,               ///< SetDurationFall
+    Interface::Empty,               ///< SetDurationStady
+    Interface::Empty,               ///< SetDutyFactor
+    Interface::SetManipulation,     ///< SetManipulation
+    Interface::ParameterValue,      ///< SetManipulationDuration
+    Interface::ParameterValue,      ///< SetManipulationPeriod
+    Interface::ParameterValue,      ///< SetPacketPeriod
+    Interface::ParameterValue,      ///< SetPacketNumber
     Interface::SetStartMode,
-    Interface::ParameterValue,              ///< SetPeriod
-    Interface::Polarity,                    ///< SetPolarity
-    Interface::SetManipulationMode          ///< SetModeManipulation
+    Interface::ParameterValue,      ///< SetPeriod
+    Interface::Polarity,            ///< SetPolarity
+    Interface::SetManipulationMode  ///< SetModeManipulation
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,18 +157,6 @@ void Interface::SetManipulationMode()
 {
     Chan ch = (Chan::E)buffer[1];
     AD9952::Manipulation::SetType(ch, buffer[2]);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetManipulationDuration()
-{
-    Chan ch = (Chan::E)buffer[1];
-
-    char add[20];
-    sprintf(add, "%f", Buffer2Float(buffer + 2));
-    Console::AddString(add);
-
-    FPGA::SetDurationImpulse(ch, Buffer2Float(buffer + 2));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

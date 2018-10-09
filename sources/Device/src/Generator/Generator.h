@@ -43,5 +43,7 @@ private:
 
     static void SetManipulationPeriod(Chan ch, float period);
 
+    static void SetManipulationDuration(Chan ch, float duration);
+
     static void EmptyFunc(Chan, float);
 };
