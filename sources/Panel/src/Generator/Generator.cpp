@@ -19,13 +19,8 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Generator::enabledCh[Chan::Number] = {true, true};
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan ch, bool enable)
 {
-    enabledCh[ch] = enable;
     uint8 buffer[3] = {CommandPanel::EnableChannel, (uint8)ch, (uint8)(enable ? 1 : 0)};
     SendToInterface(buffer, 3);
 }
@@ -35,12 +30,6 @@ void Generator::LoadStartMode(Chan ch, int mode)
 {
     uint8 buffer[3] = {CommandPanel::SetStartMode, (uint8)ch, (uint8)mode};
     SendToInterface(buffer, 3);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Generator::ChannelEnabled(Chan ch)
-{
-    return enabledCh[ch];
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,6 +80,8 @@ void Generator::Update()
         uint8 trans[LENGTH_SPI_BUFFER] = {0};
 
         SendToInterface(trans, LENGTH_SPI_BUFFER);
+
+        
 
         timePrev = TIME_MS;
     }
@@ -162,26 +153,12 @@ void Generator::SetParameter(ParameterValue *param)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SendToInterface(uint8 *data, uint16 size)
 {
-    /*
-        Алгоритм передачи.
-        Передача совмещена с приёмом.
-        В случае, если у генератора нет данных для передачи, он возвращает принятую информацию.
-        В случае наличия информации для передачи он передаёт её.
-    */
-
-    if(*data)
-    {
-        //Console::AddString(CommandPanel(*data).Name());
-    }
- 
     static uint8 trans[LENGTH_SPI_BUFFER];          // Это массив для передаваемых данных
     static uint8 recv[LENGTH_SPI_BUFFER];         // Это массив, куда принимаются данные сейчас
 
     memcpy(trans, data, (uint)size);
 
-#ifndef OPEN
-    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER, 100);
-#endif
+    CPU::SPI4_::TransmitReceive(trans, recv, LENGTH_SPI_BUFFER);
     
     if(recv[0] == CommandGenerator::FreqMeasure)
     {
@@ -211,22 +188,19 @@ void Generator::SendToInterfaceNew(uint8 *, uint16 size)
 void Generator::SendToInterfaceNew(uint8 *buffer, uint16 size)
 #endif
 {
-    uint8 data[6] = {0};
-    memset(data, 0, 6);
+    CPU::SPI4_::Transmit((uint8 *)&size, 2);
 
-    BitSet16 bs;
-    bs.halfWord = (uint16)size;
+    uint8 *pointer = buffer;
+    while(size > 0)
+    {
+        uint16 sizeChunk = (size > 1024u) ? 1024u : size; // Размер куска для передачи
 
-    data[2] = bs.byte0;
-    data[3] = bs.byte1;
+        size -= sizeChunk;
 
-#ifndef OPEN
+        CPU::SPI4_::Transmit(pointer, sizeChunk);
 
-    CPU::SPI4_::Transmit(data, 6, 100);             /// Посылаем в прибор информацию о том, сколько байт
-
-    CPU::SPI4_::Transmit(buffer, size, 100);        /// И засылаем наши данные
-
-#endif
+        pointer += sizeChunk;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -102,22 +102,22 @@ void CPU::SPI4_::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size, uint timeOut)
+bool CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size)
 {
-    while(IsBusy()) {};
 #ifndef OPEN
-    return HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, timeOut) == HAL_OK;
+    while(IsBusy()) {};
+    return HAL_SPI_TransmitReceive(&handleSPI4, trans, receiv, size, 100) == HAL_OK;
 #else
     return false;
 #endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size, uint timeOut)
+void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size)
 {
-    while(IsBusy()) {};
 #ifndef OPEN
-    HAL_SPI_Transmit(&handleSPI4, buffer, size, timeOut);
+    while(IsBusy()) {};
+    HAL_SPI_Transmit(&handleSPI4, buffer, size, 100);
 #endif
 }
 

@@ -28,8 +28,6 @@ public:
 
     static void EnableChannel(Chan ch, bool enable);
 
-    static bool ChannelEnabled(Chan ch);
-
     static void SetFormWave(Wave *w);
 
     static void SetParameter(ParameterValue *param);
@@ -51,8 +49,6 @@ private:
     static void SendToInterface(uint8 *buffer, uint16 size);
 
     static void SendToInterfaceNew(uint8 *buffer, uint16 size);
-
-    static bool enabledCh[Chan::Number];
 };
 
 /** @}  @} */

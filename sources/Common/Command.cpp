@@ -118,6 +118,8 @@ pString CommandPanel::Trace(uint8 *buffer) const
         case SetModeManipulation:
             strcat(result, buffer[2] ? "1" : "0");
             break;
+        case RequestData:
+            break;
         case Number:
             break;
     }
