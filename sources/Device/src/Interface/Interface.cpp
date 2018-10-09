@@ -290,6 +290,7 @@ void Interface::ReceiveCallback()
     }
     else if(recv[0] < CommandPanel::Number)   /// \todo примитивная проверка на ошибки
     {
+        Console::AddString(CommandPanel(recv[0]).Trace(recv));
         commands[recv[0]].func();
     }
 }
@@ -297,13 +298,22 @@ void Interface::ReceiveCallback()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SendData()
 {
-    if(freqForSend != MAX_UINT)
+    if (Console::ExistString())
+    {
+        char buffer[LENGTH_SPI_BUFFER] = {CommandGenerator::Log};
+        Console::GetString(buffer + 1);
+
+        uint16 numBytes = LENGTH_SPI_BUFFER;
+        CPU::SPI1_::Transmit(&numBytes, 2);
+        CPU::SPI1_::Transmit(buffer, LENGTH_SPI_BUFFER);
+    }
+    else if(freqForSend != MAX_UINT)
     {
         uint16 numBytes = 5;
 
         CPU::SPI1_::Transmit(&numBytes, 2);
 
-        uint8 *buffer = (uint8 *)malloc(5);
+        uint8 buffer[5];
         buffer[0] = CommandGenerator::FreqMeasure;
         INIT_BIT_SET_32(bs, freqForSend);
         for(int i = 0; i < 4; i++)
@@ -312,8 +322,6 @@ void Interface::SendData()
         }
 
         CPU::SPI1_::Transmit(buffer, 5);
-
-        free(buffer);
     }
     else
     {
