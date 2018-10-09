@@ -136,6 +136,15 @@ public:
         static SDRAM_HandleTypeDef sdramHandle;
 #define SDRAM_DEVICE_ADDR ((uint)0xD0000000)
     };
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    class SPI4_
+    {
+    public:
+        static void Transmit(void *buffer, uint16 size);
+    
+        static void Receive(void *buffer, uint16 size);
+    };
 
 private:
 

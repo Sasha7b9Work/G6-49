@@ -186,6 +186,9 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\Command.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">

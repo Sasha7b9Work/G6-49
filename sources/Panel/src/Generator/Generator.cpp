@@ -147,17 +147,12 @@ void Generator::SetParameter(ParameterValue *param)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-#ifdef OPEN
-void Generator::SendToInterface(uint8 *, uint16 size)
-#else
 void Generator::SendToInterface(uint8 *buffer, uint16 size)
-#endif
 {
     CommandPanel command(*buffer);
     if(command == CommandPanel::SetManipulation)
     {
-        CommandPanel command(*buffer);
-        LOG_WRITE("передаю %s", CommandPanel(*buffer).Trace(buffer));
+        LOG_WRITE("передаю %s", command.Trace(buffer));
     }
 
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
