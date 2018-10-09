@@ -190,9 +190,8 @@ void Form::TuneGenerator(Chan ch)
     {
         if(CurrentParameter()->GetParent())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
         {
-            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
-
             SendParameterToGenerator(ParameterChoice::ManipulationMode);
+            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
             SendParameterToGenerator(ParameterValue::ManipulationDuration);
             SendParameterToGenerator(ParameterValue::ManipulationPeriod);
 
@@ -212,9 +211,8 @@ void Form::TuneGenerator(Chan ch)
         {
             OpenCurrentParameter();
 
-            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
-
             SendParameterToGenerator(ParameterChoice::ManipulationMode);
+            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
             SendParameterToGenerator(ParameterValue::ManipulationDuration);
             SendParameterToGenerator(ParameterValue::ManipulationPeriod);
 
