@@ -70,10 +70,12 @@ struct CommandPanel
         Number
     } value;
     CommandPanel(E v) : value(v) {};
-    CommandPanel(uint8 v) : value((E)v) {};
+    CommandPanel(const uint8 v) : value((E)v)
+    {
+    };
     operator uint8() const { return (uint8)value; };
     pString Name() const;
-    pString Trace(uint8 *buffer) const;
+    pString Trace(const uint8 *buffer) const;
 private:
     pString Value(uint8 *buffer) const;
 };

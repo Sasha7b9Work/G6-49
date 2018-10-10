@@ -2,30 +2,25 @@
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
 #include "Utils/Math.h"
+#include "Utils/Debug.h"
 #include "Colors.h"
 #include "Settings/Settings.h"
 #include "Display/Display.h"
 #include <math.h>
-#include <string.h>
+#include <stdio.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Painter::BeginScene(Color col)
 {   
     SetColor(col);
-
     uint *address = (uint *)Display::GetBuffer();
-
     uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
-
     uint value = (uint)col.value + (uint)(col.value << 8) + (uint)(col.value << 16) + (uint)(col.value << 24);
-
     while (address != end)
     {
         *address++ = value;
     }
-
-    //LTDC_::FillRegion(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT, col);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

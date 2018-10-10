@@ -57,6 +57,19 @@ DEF_CHOICE_2( cStatistics,                                                      
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_CHOICE_2(   cShowSends,                                                                                   //--- ОТЛАДКА - Показывать параметры ---
+    "Показывать параметры", "Show parameters",
+    "Показывает параметры, засылаемые в ПЛИС",
+    "Shows the parameters sent to the FPGA",
+    DISABLED_RU, DISABLED_EN, "Показ параметров включён",
+                              "Parameter display enabled",
+    ENABLED_RU, ENABLED_EN, "Показ параметров выключен",
+                            "Parameter display disabled",
+    FLAG_1, BIT_SHOW_SENDS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
+)
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 /*
 static void OnPress_BigSymbols(bool)
 {
@@ -76,12 +89,13 @@ DEF_CHOICE_2 (  cBigSymbols,                                                    
 */
 
 
-DEF_PAGE_3( pDebug,
+DEF_PAGE_4( pDebug,
     "ОТЛАДКА", "DEBUG",
     "", "",
     cConsole,       ///< ОТЛАДКА - Консоль
-    bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
     cStatistics,    ///< ОТЛАДКА - Статистика
+    cShowSends,     ///< ОТЛАДКА - Показывать параметры
+    bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
 //    cBigSymbols,    ///< ОТЛАДКА - Больщие символы
     Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey
 )

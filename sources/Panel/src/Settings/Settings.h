@@ -31,6 +31,7 @@ extern const PageBase pInput;
 /// ≈сли true, то засылка в прибор выполн€етс€ при каждом повороте ручки
 #define TUNE_FULL               (BIT_FL1(BIT_TUNE_FULL))
 #define PARITY                  ((Parity)BIT_FL1(BIT_PARITY))
+#define DEBUG_SHOW_SENDS        (BIT_FL1(BIT_SHOW_SENDS))
 
 #define CHANNEL_ENABLED(ch)     ((FLAG_1 >> (ch + BIT_CHAN_A)) & 0x01)
 #define SWITCH_CHANNEL_A        (FLAG_1 ^= (1 << (BIT_CHAN_A)))
@@ -108,6 +109,7 @@ public:
 #define BIT_FREQ_MEASURE  17  ///< FreqMeasure - измерение частоты или измерение периода
 #define BIT_FREQ_TEST     18  ///< FreqTest    - включение тестового режима
 #define BIT_BIG_SYMBOLS   19  ///< ≈сли 1, то символы вывод€тс€ чуть увеличенными
+#define BIT_SHOW_SENDS    20  ///< ≈сли 1, то нужно показывать засылаемые настройки
 
     static void Save();
     static void Load(bool _default = false);

@@ -20,6 +20,8 @@ public:
     static void StopIncreaseCounter();
     static uint GetTimeCounterUS();
 
+    static bool ShowSends();
+
     static int line;
     static char *file;
 

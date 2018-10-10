@@ -2,6 +2,9 @@
 #include "Command.h"
 #include "structs.h"
 #include "Utils/StringUtils.h"
+#include "Log.h"
+
+//#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,43 +45,51 @@ pString CommandPanel::Name() const
         "RequestData",
         "LoadFormDDS"
     };
-    return names[value].name;
+    if(value < Number)
+    {
+        return names[value].name;
+    }
+    
+    return "Неправильный параметр";
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString CommandPanel::Trace(uint8 *buffer) const
+pString CommandPanel::Trace(const uint8 *buffer) const
 {
-    static char result[50];
-    sprintf(result, "%s %d ", Name(), buffer[1] + 1);
-
+    /// \tode Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию CommandPanel::Trace()
+    static const int SIZE = 28;
+    static char result[SIZE];
+  
+    snprintf(result, SIZE - 1, "%s %d ", Name(), buffer[1] + 1);
+   
     switch(value)
     {
         case None:
             break;
         case EnableChannel:
-            strcat(result, buffer[2] ? "true" : "false");
+            strlcat(result, buffer[2] ? "true" : "false", SIZE - 1);
             break;
         case SetFormWave:
             {
                 Form form((Form::E)buffer[2]);
-                strcat(result, form.Name(Language::RU));
+                strlcat(result, form.Name(Language::RU), SIZE - 1);
             }
             break;
         case SetFrequency:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            strlcat(result, Buffer2FloatString(buffer + 2), SIZE - 1);
             break;
         case SetAmplitude:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            strlcat(result, Buffer2FloatString(buffer + 2), SIZE - 1);
             break;
         case SetOffset:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            strlcat(result, Buffer2FloatString(buffer + 2), SIZE - 1);
             break;
         case SetDuration:
             break;
         case SetDutyRatio:
             break;
         case SetPhase:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            strlcat(result, Buffer2FloatString(buffer + 2), SIZE - 1);
             break;
         case RunReset:
             break;
@@ -97,16 +108,16 @@ pString CommandPanel::Trace(uint8 *buffer) const
         case SetDutyFactor:
             break;
         case SetManipulation:
-            strcat(result, buffer[2] == 0 ? "false" : "true");
+            strlcat(result, buffer[2] == 0 ? "false" : "true", SIZE - 1);
             break;
         case SetManipulationDuration:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            strlcat(result, Buffer2FloatString(buffer + 2), SIZE - 1);
             break;
         case SetManipulationPeriod:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            strlcat(result, Buffer2FloatString(buffer + 2), SIZE - 1);
             break;
         case SetPacketPeriod:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            strlcat(result, Buffer2FloatString(buffer + 2), SIZE - 1);
             break;
         case SetPacketNumber:
             break;
@@ -117,12 +128,12 @@ pString CommandPanel::Trace(uint8 *buffer) const
         case SetPolarity:
             break;
         case SetManipulationMode:
-            strcat(result, buffer[2] ? "1" : "0");
+            strlcat(result, buffer[2] ? "1" : "0", SIZE - 1);
             break;
         case RequestData:
             break;
         case LoadFormDDS:
-            strcat(result, "точки");
+            strlcat(result, "точки", SIZE - 1);
         case Number:
             break;
     }

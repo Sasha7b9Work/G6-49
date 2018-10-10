@@ -13,6 +13,7 @@
 #include "Signals.h"
 #include "Display/Console.h"
 #include "Utils/Math.h"
+#include "Utils/Debug.h"
 
 #include <math.h>
 #include <string.h>
@@ -253,6 +254,12 @@ void Generator::SendToInterface(const Buffer &buffer)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SendToInterface(const uint8 *buffer, uint16 size)
 {
+    CommandPanel command(*buffer);
+    if(Debug::ShowSends() && command.value != CommandPanel::RequestData)
+    {
+        LOG_WRITE("передаю %s", command.Trace(buffer));
+    }
+
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
 
     const uint8 *pointer = buffer;

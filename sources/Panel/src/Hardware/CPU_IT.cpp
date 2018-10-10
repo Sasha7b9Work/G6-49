@@ -40,7 +40,7 @@ extern "C" {
     {
         __IO int line = Debug::line;
         __IO char *file = Debug::file;
-
+        
         while (1)
         {
             line++;

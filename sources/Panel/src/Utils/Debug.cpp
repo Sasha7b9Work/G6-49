@@ -1,6 +1,7 @@
 #include "Debug.h"
 #include "Log.h"
 #include "Hardware/Timer.h"
+#include "Settings/Settings.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -9,6 +10,7 @@ uint  Debug::timeCounter = 0;
 uint  Debug::timeStartCounter = 0;
 char *Debug::file = 0;
 int   Debug::line = 0;
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Debug::StartProfiling()
@@ -44,4 +46,10 @@ void Debug::StopIncreaseCounter()
 uint Debug::GetTimeCounterUS()
 {
     return timeCounter;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Debug::ShowSends()
+{
+    return DEBUG_SHOW_SENDS;
 }
