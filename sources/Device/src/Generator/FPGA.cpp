@@ -101,9 +101,6 @@ void FPGA::SetModeDDS(Chan ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData();
-    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
-    WriteRegister(RG::_2_Amplitude, 0xfffff);
-    WriteRegister(RG::_10_Offset, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -366,7 +363,7 @@ void FPGA::SendData()
 {
     WriteRegister(RG::_0_Control, 0);
     
-    uint8 *pointer = &dataDDS[0][0];
+    uint8 *pointer = dataDDS[0];
 
     for(int i = 0; i < FPGA_NUM_POINTS * 4; i++)
     {

@@ -50,13 +50,19 @@ pString CommandPanel::Name() const
         return names[value].name;
     }
     
-    return "Неправильный параметр";
+    /// \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию CommandPanel::Trace()
+    /// Возможно, это происходит из-за использования CCM RAM
+    const int SIZE = 23;
+    static char buffer[SIZE + 1];
+    snprintf(buffer, SIZE, "Неправильный параметр %d", value);
+
+    return buffer;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 pString CommandPanel::Trace(const uint8 *buffer) const
 {
-    /// \tode Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию CommandPanel::Trace()
+    /// \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию CommandPanel::Trace()
     static const int SIZE = 28;
     static char result[SIZE];
   
