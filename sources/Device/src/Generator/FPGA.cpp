@@ -358,6 +358,9 @@ void FPGA::SetModeDDS(Chan ch)
     Multiplexor::SetMode(ch, Form::Meander);
     SendData();
     WriteControlRegister();
+    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
+    WriteRegister(RG::_2_Amplitude, 0xfffff);
+    WriteRegister(RG::_10_Offset, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
