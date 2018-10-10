@@ -15,15 +15,13 @@ public:
 
     static void Empty();
 
-    static void Enable();
+    static void EnableChannel();
 
-    static void ReadData();
-
-    static void FormWave();
+    static void SetFormWave();
 
     static void ParameterValue();
 
-    static void Reset();
+    static void RunReset();
 
     static void ModeDebug();
 
@@ -37,7 +35,9 @@ public:
 
     static void SetStartMode();
 
-    static void Polarity();
+    static void LoadFormDDS();
+
+    static void SetPolarity();
 
 private:
     /// Послать имеющиеся данные в главный процессор

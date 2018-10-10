@@ -83,6 +83,7 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         SetPeriod,
         EmptyFunc,
         EmptyFunc,
+        EmptyFunc,
         EmptyFunc
     };
 

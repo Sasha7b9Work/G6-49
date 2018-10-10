@@ -19,29 +19,6 @@
  */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-    Структура комадны
-
-1.  WRITE_SERVICE_COMMAND
-
-    0                1        2
-2.  SET_FORM_CHANNEL NUM_CHAN FormChannel
-
-    0                     1        2                3...6
-3.  SET_PARAMETER_CHANNEL NUM_CHAN ParameterChannel value
-
-    0              1             2...5
-12. WRITE_REGISTER NAME_REGISTER VALUE
-
-    0                1        2...3       4...9
-20  CREATE_HAND_WAVE NUM_CHAN START_POINT points
-
-    0              1        2
-22  SetRampForSine NUM_CHAN 0/1
-
-    0                      1        2...5
-23  SetDurationRampForSine NUM_CHAN value
-*/
 
 /// Возможные команды для передачи в основной процессор
 struct CommandPanel
@@ -50,6 +27,8 @@ struct CommandPanel
     {
         None,
         EnableChannel,              ///< Включить/выключить канал
+    //  0           1       2
+    //  SetFomrWave NumChan Form
         SetFormWave,                ///< Установить форму сигнала
         SetFrequency,               ///< Установить частоту
         SetAmplitude,               ///< Установить амплитуду
@@ -60,6 +39,8 @@ struct CommandPanel
         RunReset,                   ///< Сброс состояния
         ModeDebug,                  ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
         SetDelay,                   ///< Задержка
+    //  0             1            2...9
+    //  WriteRegister NameRegister Value64
         WriteRegister,              ///< Занести значение в регистр
         SetDurationRise,
         SetDurationFall,
@@ -70,19 +51,22 @@ struct CommandPanel
         SetManipulationPeriod,      ///< Установить период следования импульсов в режиме манипуляции
         SetPacketPeriod,
         SetPacketNumber,
-        // 0            1        2
-        // SetStartMode NUM_CHAN value
+    //  0            1        2
+    //  SetStartMode NUM_CHAN value
         SetStartMode,               ///< Установить режим запуска по каналу
         SetPeriod,                  ///< Установить период
-        // 0           1        2
-        // SetPolarity NUM_CHAN polarity
+    //  0           1        2
+    //  SetPolarity NUM_CHAN polarity
         SetPolarity,
-        // 0                   1        2
-        // SetModeManipulation NUM_CHAN mode
-        SetModeManipulation,
-        // 0
-        // RequestData
+    //  0                   1        2
+    //  SetManipulationMode NUM_CHAN mode
+        SetManipulationMode,
+    //  0
+    //  RequestData
         RequestData,                ///< Запрос данных
+    //  0            1       2...8193
+    //  LoadFormDDS, NumChan Points
+        LoadFormDDS,                ///< Загружает точки сигнала произовольной формы
         Number
     } value;
     CommandPanel(E v) : value(v) {};

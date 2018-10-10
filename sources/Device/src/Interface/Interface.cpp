@@ -29,32 +29,33 @@ static const struct FuncInterface
 commands[CommandPanel::Number] =
 {
     Interface::Empty,
-    Interface::Enable,              ///< EnableChannel
-    Interface::FormWave,            ///< SetFormWave
+    Interface::EnableChannel,
+    Interface::SetFormWave,
     Interface::ParameterValue,      ///< SetFrequency
     Interface::ParameterValue,      ///< SetAmplitude
     Interface::ParameterValue,      ///< SetOffset
     Interface::ParameterValue,      ///< SetDuration
     Interface::ParameterValue,      ///< SetDutyRatio
     Interface::ParameterValue,      ///< SetPhase
-    Interface::Reset,               ///< RunReset
-    Interface::ModeDebug,           ///< ModeDebug
+    Interface::RunReset,
+    Interface::ModeDebug,
     Interface::ParameterValue,      ///< SetDelay
-    Interface::WriteRegister,       ///< WriteRegister
+    Interface::WriteRegister,
     Interface::Empty,               ///< SetDurationRise
     Interface::Empty,               ///< SetDurationFall
     Interface::Empty,               ///< SetDurationStady
     Interface::Empty,               ///< SetDutyFactor
-    Interface::SetManipulation,     ///< SetManipulation
+    Interface::SetManipulation,
     Interface::ParameterValue,      ///< SetManipulationDuration
     Interface::ParameterValue,      ///< SetManipulationPeriod
     Interface::ParameterValue,      ///< SetPacketPeriod
     Interface::ParameterValue,      ///< SetPacketNumber
     Interface::SetStartMode,
     Interface::ParameterValue,      ///< SetPeriod
-    Interface::Polarity,            ///< SetPolarity
-    Interface::SetManipulationMode, ///< SetModeManipulation
-    Interface::Empty                ///< RequestData
+    Interface::SetPolarity,
+    Interface::SetManipulationMode,
+    Interface::Empty,               ///< RequestData
+    Interface::LoadFormDDS
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +67,7 @@ void Interface::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Enable()
+void Interface::EnableChannel()
 {
     Chan ch = (Chan::E)recv[1];
     bool enable = recv[2] == 1;
@@ -75,14 +76,14 @@ void Interface::Enable()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Polarity()
+void Interface::SetPolarity()
 {
     Chan ch = (Chan::E)recv[1];
     FPGA::SetPolarity(ch, recv[2]);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ReadData()
+void Interface::LoadFormDDS()
 {
 }
 
@@ -109,7 +110,7 @@ void Interface::SetStartMode()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::FormWave()
+void Interface::SetFormWave()
 {
     Chan ch = (Chan::E)recv[1];
     Form form = (Form::E)recv[2];
@@ -227,7 +228,7 @@ void Interface::CreateWave()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Reset()
+void Interface::RunReset()
 {
 #ifndef WIN32
 

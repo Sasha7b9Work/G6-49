@@ -39,7 +39,8 @@ pString CommandPanel::Name() const
         "SetPeriod",
         "SetPolarity",
         "SetModeManipulation",
-        "RequestData"
+        "RequestData",
+        "LoadFormDDS"
     };
     return names[value].name;
 }
@@ -115,11 +116,13 @@ pString CommandPanel::Trace(uint8 *buffer) const
             break;
         case SetPolarity:
             break;
-        case SetModeManipulation:
+        case SetManipulationMode:
             strcat(result, buffer[2] ? "1" : "0");
             break;
         case RequestData:
             break;
+        case LoadFormDDS:
+            strcat(result, "точки");
         case Number:
             break;
     }

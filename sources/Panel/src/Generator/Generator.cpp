@@ -95,7 +95,7 @@ void Generator::SetParameter(ParameterChoice *param)
     {
         CommandPanel::SetPolarity,
         CommandPanel::SetStartMode,
-        CommandPanel::SetModeManipulation,
+        CommandPanel::SetManipulationMode,
         CommandPanel::SetManipulation
     };
 
