@@ -238,7 +238,7 @@ static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nam
     nameEn4, nameRu5, nameEn5, nameRu6, nameEn6, nameRu7, nameEn7};                                                                                 \
 static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4, hintRu5, hintRu6, hintRu7};                                                 \
 static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5, hintEn6, hintEn7};                                                 \
-static const ChoiceBase name = { Item_Choice, 7, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                      \
+static const ChoiceBase name = { Item::Type::Choice, 7, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                      \
     (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_8(name, titleRU, titleEN, hintRU, hintEN,                                                                                        \

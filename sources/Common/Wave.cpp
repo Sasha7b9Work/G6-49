@@ -17,6 +17,7 @@ pString Form::Name(Language lang) const
         {"Синус",        "Sine"},
         {"Пила+",        "Ramp+"},
         {"Пила-",        "Ramp-"},
+        {"Треугольник",  "Triangle"},
         {"Меандр",       "Meander"},
         {"Импульс",      "Impulse"},
         {"Пакет",        "Packet"},
@@ -25,3 +26,5 @@ pString Form::Name(Language lang) const
 
     return names[value][lang].name;
 }
+
+

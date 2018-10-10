@@ -148,17 +148,17 @@ private:
         static Form mode[Chan::Number];
     };
 
-    static void SetSineMode(Chan ch);
+    static void SetModeSine(Chan ch);
     /// Установить режим произвольного сигнала по каналу ch
     static void SetModeDDS(Chan ch);
     /// Возвращает указатель на точки произвольного сигнала
     static uint8 *DataDDS(Chan ch);
 
-    static void SetMeanderMode(Chan ch);
+    static void SetModeMeander(Chan ch);
 
-    static void SetImpulseMode(Chan ch);
+    static void SetModeImpulse(Chan ch);
 
-    static void SetPackedImpulseMode(Chan ch);
+    static void SetModePackedImpulse(Chan ch);
 
     static void EmptyFunc(Chan ch);
 

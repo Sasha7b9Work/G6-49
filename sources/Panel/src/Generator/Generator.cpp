@@ -66,13 +66,13 @@ void Generator::SetFormWave(Wave *w)
     Chan ch = w->GetChannel();
     uint8 form = (uint8)FORM(ch)->value;
 
-    if(form == Form::Sine || form == Form::Impulse || form == Form::Meander || form == Form::PacketImpuls)
+    if(FORM(ch)->IsDDS())
     {
-        SendToInterface(Buffer(CommandPanel::SetFormWave, ch, form));
+        SetFormDDS(FORM(ch));
     }
     else
     {
-        SetFormDDS(FORM(ch));
+        SendToInterface(Buffer(CommandPanel::SetFormWave, ch, form));
     }
 }
 
@@ -107,6 +107,25 @@ void Generator::SetFormDDS(Form *form)
                 for (int i = 0; i < FPGA_NUM_POINTS; i++)
                 {
                     data[i] = 1.0f - step * i;
+                }
+
+                TransformDataToCode(data, buffer);
+
+                LoadPointsToDDS(ch, buffer);
+            }
+            break;
+        case Form::Triangle:
+            {
+                float step = 2.0f / (FPGA_NUM_POINTS / 2);
+
+                for (int i = 0; i < FPGA_NUM_POINTS / 2; i++)
+                {
+                    data[i] = - 1.0f + step * i;
+                }
+
+                for(int i = FPGA_NUM_POINTS / 2; i < FPGA_NUM_POINTS; i++)
+                {
+                    data[i] = 1.0f - step * (i - FPGA_NUM_POINTS / 2);
                 }
 
                 TransformDataToCode(data, buffer);

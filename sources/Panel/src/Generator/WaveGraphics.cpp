@@ -94,6 +94,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
         DrawSine,
         DrawRampPlus,
         DrawRampMinus,
+        DrawTriangle,
         DrawMeander,
         DrawImpulse,
         DrawPacketImpulse,
@@ -144,6 +145,14 @@ void Wave::Graphics::DrawRampMinus(Chan, int x0, int y0, int, int height)
         Painter::DrawLine(x, aveY - dY, x + dX, aveY + dY);
         Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Wave::Graphics::DrawTriangle(Chan, int x, int y, int width, int height)
+{
+    int min = y + height;
+    Painter::DrawLine(x, min, x + width / 2, y);
+    Painter::DrawLine(x + width / 2, y, x + width, y + height);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

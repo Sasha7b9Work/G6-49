@@ -26,6 +26,7 @@ pString Form::Name(Language lang) const
         {"Синус",        "Sine"},
         {"Пила+",        "Ramp+"},
         {"Пила-",        "Ramp-"},
+        {"Треугольник",  "Triangle"},
         {"Меандр",       "Meander"},
         {"Импульс",      "Impulse"},
         {"Пакет",        "Packet"},
@@ -633,3 +634,9 @@ ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 
 {
     strcpy(buffer, buf);
 };
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Form::IsDDS() const
+{
+    return value == RampPlus || value == RampMinus || value == Triangle || value == DDS;
+}

@@ -233,6 +233,7 @@ public:
         Sine,           ///< Синус
         RampPlus,       ///< Пила+
         RampMinus,      ///< Пила-
+        Triangle,       ///< Треугольник
         Meander,        ///< Меандр
         Impulse,        ///< Импульсы
         PacketImpuls,   ///< Пачка импульсов
@@ -257,6 +258,8 @@ public:
     void TuneGenerator(Chan ch);
     /// Возвращает true, если тип формы сигнала соответствует e
     bool Is(Form::E e) const { return e == value; };
+    /// Возвращает true, если форма сигнала реализуется с помощью ПЛИС
+    bool IsDDS() const;
     /// Возвращает указатель на родительский Wave
     Wave *GetWave() { return wave; };
     /// Возвращает true, если текущий параметр сложный и открыт.
@@ -345,6 +348,8 @@ public:
         static void DrawRampPlus(Chan ch, int x, int y, int width, int height);
 
         static void DrawRampMinus(Chan ch, int x, int y, int width, int height);
+
+        static void DrawTriangle(Chan ch, int x, int y, int width, int height);
 
         static void DrawMeander(Chan ch, int x, int y, int width, int height);
 

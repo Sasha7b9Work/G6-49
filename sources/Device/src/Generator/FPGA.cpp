@@ -54,12 +54,13 @@ void FPGA::SetWaveForm(Chan ch, Form form)
     
     static const StructFunc func[Form::Number] =
     {
-        SetSineMode,            ///< Здесь включается режим амплитудной манипуляции
+        SetModeSine,            ///< Здесь включается режим амплитудной манипуляции
         SetModeDDS,
         SetModeDDS,
-        SetMeanderMode,
-        SetImpulseMode,
-        SetPackedImpulseMode,
+        SetModeDDS,
+        SetModeMeander,
+        SetModeImpulse,
+        SetModePackedImpulse,
         SetModeDDS
     };
     
@@ -76,7 +77,7 @@ void FPGA::EmptyFunc(Chan)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetMeanderMode(Chan ch)
+void FPGA::SetModeMeander(Chan ch)
 {
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
@@ -90,7 +91,7 @@ void FPGA::SetMeanderMode(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetSineMode(Chan ch)
+void FPGA::SetModeSine(Chan ch)
 {
     modeWork[ch] = ModeWork::Sine;
 }
@@ -106,7 +107,7 @@ void FPGA::SetModeDDS(Chan ch)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetPackedImpulseMode(Chan)
+void FPGA::SetModePackedImpulse(Chan)
 {
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
@@ -134,7 +135,7 @@ void FPGA::SetPolarity(Chan ch, uint8 polarity)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetImpulseMode(Chan ch)
+void FPGA::SetModeImpulse(Chan ch)
 {
     modeWork[ch] = ModeWork::Impulse;
     WriteControlRegister();

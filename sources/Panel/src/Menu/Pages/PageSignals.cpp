@@ -31,26 +31,28 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_6( cFormA,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+DEF_CHOICE_7( cFormA,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
-    FORM_RU(Form::Sine),            FORM_EN(Form::Sine),          "Синус",               "Sinus",
-    FORM_RU(Form::RampPlus),        FORM_EN(Form::RampPlus),      "Нарастающая пила",    "Growing saw",
-    FORM_RU(Form::RampMinus),       FORM_EN(Form::RampMinus),     "Убывающая пила",      "Wrecking saw",
-    FORM_RU(Form::Meander),         FORM_EN(Form::Meander),       "Меандр",              "Meander",
-    FORM_RU(Form::Impulse),         FORM_EN(Form::Impulse),       "Треугольник",         "Triangle",
-    FORM_RU(Form::PacketImpuls),    FORM_EN(Form::PacketImpuls),  "Пакеты",              "Packets",
+    FORM_RU(Form::Sine),         FORM_EN(Form::Sine),         "Синус",            "Sinus",
+    FORM_RU(Form::RampPlus),     FORM_EN(Form::RampPlus),     "Нарастающая пила", "Growing saw",
+    FORM_RU(Form::RampMinus),    FORM_EN(Form::RampMinus),    "Убывающая пила",   "Wrecking saw",
+    FORM_RU(Form::Triangle),     FORM_RU(Form::Triangle),     "Треугольник",      "Triangle",
+    FORM_RU(Form::Meander),      FORM_EN(Form::Meander),      "Меандр",           "Meander",
+    FORM_RU(Form::Impulse),      FORM_EN(Form::Impulse),      "Треугольник",      "Triangle",
+    FORM_RU(Form::PacketImpuls), FORM_EN(Form::PacketImpuls), "Пакеты",           "Packets",
     numForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
-DEF_CHOICE_5( cFormB,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+DEF_CHOICE_6( cFormB,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
     FORM_RU(Form::Sine),      FORM_EN(Form::Sine),      "Синус",            "Sinus",
     FORM_RU(Form::RampPlus),  FORM_EN(Form::RampPlus),  "Нарастающая пила", "Growing saw",
     FORM_RU(Form::RampMinus), FORM_EN(Form::RampMinus), "Убывающая пила",   "Wrecking saw",
+    FORM_RU(Form::Triangle),  FORM_RU(Form::Triangle),  "Треугольник",      "Triangle",
     FORM_RU(Form::Meander),   FORM_EN(Form::Meander),   "Меандр",           "Meander",
     FORM_RU(Form::Impulse),   FORM_EN(Form::Impulse),   "Треугольник",      "Triangle",
     numForm, pSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
