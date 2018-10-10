@@ -114,12 +114,12 @@ bool CPU::SPI4_::TransmitReceive(uint8 *trans, uint8 *receiv, uint16 size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size)
+void CPU::SPI4_::Transmit(const uint8 *buffer, uint16 size)
 {
 #ifndef OPEN
     while(IsBusy()) {};
 
-    HAL_SPI_Transmit(&handleSPI4, buffer, size, 100);
+    HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, size, 100);
 
 #endif
 }

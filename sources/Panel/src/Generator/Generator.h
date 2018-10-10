@@ -1,6 +1,7 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
 #include "Command.h"
+#include "Utils/Buffer.h"
 
 
 /** @addtogroup Panel
@@ -47,7 +48,8 @@ public:
 private:
     static const int FPGA_NUM_POINTS = 8 * 1024;
     /// Заслать в генератор данные
-    static void SendToInterface(uint8 *buffer, uint16 size);
+    static void SendToInterface(const uint8 *buffer, uint16 size);
+    static void SendToInterface(const Buffer &buffer);
     /// Принять и обработать данные от ПЛИС
     static void ProcessDataFPGA();
     /// Принять numBytes байт от ПЛИС и выполнить их

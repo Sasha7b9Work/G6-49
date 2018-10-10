@@ -22,15 +22,13 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan ch, bool enable)
 {
-    uint8 buffer[3] = {CommandPanel::EnableChannel, (uint8)ch, (uint8)(enable ? 1 : 0)};
-    SendToInterface(buffer, 3);
+    SendToInterface(Buffer(CommandPanel::EnableChannel, ch, enable ? 1u : 0u));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadStartMode(Chan ch, int mode)
 {
-    uint8 buffer[3] = {CommandPanel::SetStartMode, (uint8)ch, (uint8)mode};
-    SendToInterface(buffer, 3);
+    SendToInterface(Buffer(CommandPanel::SetStartMode, ch, (uint8)mode));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,15 +51,13 @@ void Generator::EmptyCommand()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
-    uint8 buffer[2] = {CommandPanel::ModeDebug, (uint8)(enable ? 1 : 0)};
-    SendToInterface(buffer, 2);
+    SendToInterface(Buffer(CommandPanel::ModeDebug, enable ? 1u : 0u));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Reset()
 {
-    uint8 command = CommandPanel::RunReset;
-    SendToInterface(&command, 1);
+    SendToInterface(Buffer(CommandPanel::RunReset));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,8 +68,7 @@ void Generator::SetFormWave(Wave *w)
 
     if(form == Form::Sine || form == Form::Impulse || form == Form::Meander || form == Form::PacketImpuls)
     {
-        uint8 buffer[3] = {CommandPanel::SetFormWave, ch, form};
-        SendToInterface(buffer, 3);
+        SendToInterface(Buffer(CommandPanel::SetFormWave, ch, form));
     }
     else
     {
@@ -138,13 +133,9 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NU
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2])
 {
-    /*
-    uint8 data = {CommandPanel::LoadFormDDS, ch};
-
-    SendToInterface(data, 2);
+    SendToInterface(Buffer(CommandPanel::LoadFormDDS, ch));
 
     SendToInterface(points, FPGA_NUM_POINTS * 2);
-    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,14 +167,7 @@ void Generator::SetParameter(ParameterChoice *param)
         CommandPanel::SetManipulation
     };
 
-    if(param->value == ParameterChoice::ManipulationEnabled)
-    {
-        LOG_WRITE("modulation %d", (uint8)param->GetChoice());
-    }
-
-    uint8 buffer[3] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()};
-
-    SendToInterface(buffer, 3);
+    SendToInterface(Buffer((uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -229,11 +213,17 @@ void Generator::SetParameter(ParameterValue *param)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SendToInterface(uint8 *buffer, uint16 size)
+void Generator::SendToInterface(const Buffer &buffer)
+{
+    SendToInterface(buffer.Data(), (uint16)buffer.Length());
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SendToInterface(const uint8 *buffer, uint16 size)
 {
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
 
-    uint8 *pointer = buffer;
+    const uint8 *pointer = buffer;
     while(size > 0)
     {
         uint16 sizeChunk = (size > 1024u) ? 1024u : size; // Размер куска для передачи

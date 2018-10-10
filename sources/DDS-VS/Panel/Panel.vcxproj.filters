@@ -249,6 +249,9 @@
     <ClCompile Include="..\..\Common\Command.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\Buffer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -499,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h">
       <Filter>Menu\Pages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\Buffer.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
