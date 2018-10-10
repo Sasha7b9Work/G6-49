@@ -119,12 +119,8 @@ void CPU::SPI4_::Transmit(uint8 *buffer, uint16 size)
 #ifndef OPEN
     while(IsBusy()) {};
 
-    HAL_StatusTypeDef res = HAL_SPI_Transmit(&handleSPI4, buffer, size, 100);
+    HAL_SPI_Transmit(&handleSPI4, buffer, size, 100);
 
-    if(res != HAL_OK)
-    {
-        LOG_WRITE("ошибка передачи %d", res);
-    }
 #endif
 }
 
@@ -134,12 +130,7 @@ void CPU::SPI4_::Receive(uint8 *recv, uint16 size)
 #ifndef OPEN
     while(IsBusy()) {};
 
-    HAL_StatusTypeDef res = HAL_SPI_Receive(&handleSPI4, recv, size, 100);
-
-    if(res != HAL_OK)
-    {
-        LOG_WRITE("ошибка приёма %d", res);
-    }
+    HAL_SPI_Receive(&handleSPI4, recv, size, 100);
 #endif
 }
 

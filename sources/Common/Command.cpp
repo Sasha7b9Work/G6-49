@@ -96,7 +96,7 @@ pString CommandPanel::Trace(uint8 *buffer) const
         case SetDutyFactor:
             break;
         case SetManipulation:
-            strcat(result, Buffer2Float(buffer + 2) == 0.0f ? "false" : "true");
+            strcat(result, buffer[2] == 0 ? "false" : "true");
             break;
         case SetManipulationDuration:
             strcat(result, Buffer2FloatString(buffer + 2));

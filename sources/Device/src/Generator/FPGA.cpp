@@ -442,28 +442,6 @@ void FPGA::WriteByte(uint8 byte)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
-    /*
-    static const pString names[RG::Number] =
-    {
-        "Управление",
-        "Частота",
-        "Размах",
-        "Прямоуг A",
-        "Прямоуг B",
-        "Период A",
-        "Длит A",
-        "Период B",
-        "Длит B",
-        "Частотомер",
-        "Смещение",
-        "Старт"
-    };
-
-    char buffer[100];
-    sprintf(buffer, "%s - %lld", names[reg], value);
-    Console::AddString(buffer);
-    */
-
     static const struct StructBits
     {
         int value;

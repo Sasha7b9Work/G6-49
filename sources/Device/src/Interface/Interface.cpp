@@ -90,7 +90,7 @@ void Interface::ReadData()
 void Interface::SetManipulation()
 {
     Chan ch = (Chan::E)recv[1];
-    AD9952::Manipulation::SetEnabled(ch, Buffer2Float(recv + 2) != 0.0f);
+    AD9952::Manipulation::SetEnabled(ch, recv[2] != 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -272,11 +272,6 @@ void Interface::ReceiveCallback()
     }
     else if(recv[0] < CommandPanel::Number)   /// \todo примитивная проверка на ошибки
     {
-        CommandPanel command(recv[0]);
-        if(command == CommandPanel::SetManipulation)
-        {
-            Console::AddString(command.Trace(recv));
-        }
         commands[recv[0]].func();
     }
 }

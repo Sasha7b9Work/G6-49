@@ -99,6 +99,11 @@ void Generator::SetParameter(ParameterChoice *param)
         CommandPanel::SetManipulation
     };
 
+    if(param->value == ParameterChoice::ManipulationEnabled)
+    {
+        LOG_WRITE("modulation %d", (uint8)param->GetChoice());
+    }
+
     uint8 buffer[3] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()};
 
     SendToInterface(buffer, 3);
@@ -149,12 +154,6 @@ void Generator::SetParameter(ParameterValue *param)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SendToInterface(uint8 *buffer, uint16 size)
 {
-    CommandPanel command(*buffer);
-    if(command == CommandPanel::SetManipulation)
-    {
-        LOG_WRITE("передаю %s", command.Trace(buffer));
-    }
-
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
 
     uint8 *pointer = buffer;

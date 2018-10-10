@@ -197,16 +197,6 @@ pString AD9952::Register::Name() const
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
 {
-    /*
-    if(reg.Is(Register::CFR1))
-    {
-        char string[20];
-        sprintf(string, "%s %d", reg.Name(), value);
-
-        Console::AddString(string);
-    }
-    */
-
     static const int numBytes[] =               // Число байт данных для передачи
     { //CFR1 CFR2 ASF ARR FTW0 POW
          4,   3,   2,  1,  4,   2
