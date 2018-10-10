@@ -55,11 +55,12 @@ void FPGA::SetWaveForm(Chan ch, Form form)
     static const StructFunc func[Form::Number] =
     {
         SetSineMode,            ///< Здесь включается режим амплитудной манипуляции
-        EmptyFunc,
-        EmptyFunc,
+        SetModeDDS,
+        SetModeDDS,
         SetMeanderMode,
         SetImpulseMode,
-        SetPackedImpulseMode
+        SetPackedImpulseMode,
+        SetModeDDS
     };
     
     func[form.value].func(ch);
@@ -92,8 +93,16 @@ void FPGA::SetMeanderMode(Chan ch)
 void FPGA::SetSineMode(Chan ch)
 {
     modeWork[ch] = ModeWork::Sine;
+}
 
-    WriteControlRegister();
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetModeDDS(Chan ch)
+{
+    modeWork[ch] = ModeWork::DDS;
+    SendData();
+    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
+    WriteRegister(RG::_2_Amplitude, 0xfffff);
+    WriteRegister(RG::_10_Offset, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -349,18 +358,6 @@ bool FPGA::Start()
         return true;
     }
     return false;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeDDS(Chan ch)
-{
-    modeWork[ch] = ModeWork::DDS;
-    Multiplexor::SetMode(ch, Form::Meander);
-    SendData();
-    WriteControlRegister();
-    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
-    WriteRegister(RG::_2_Amplitude, 0xfffff);
-    WriteRegister(RG::_10_Offset, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

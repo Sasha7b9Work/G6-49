@@ -118,6 +118,7 @@ void Generator::SetFormDDS(Form *form)
         case Form::Sine:
         case Form::Impulse:
         case Form::PacketImpuls:
+        case Form::DDS:
         case Form::Number:
             break;
     }

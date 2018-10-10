@@ -14,12 +14,13 @@ pString Form::Name(Language lang) const
     }
     names[Form::Number][2] =
     {
-        {"Синус",    "Sine"},
-        {"Пила+",    "Ramp+"},
-        {"Пила-",    "Ramp-"},
-        {"Меандр",   "Meander"},
-        {"Импульс",  "Impulse"},
-        {"Пакет",    "Packet"}
+        {"Синус",        "Sine"},
+        {"Пила+",        "Ramp+"},
+        {"Пила-",        "Ramp-"},
+        {"Меандр",       "Meander"},
+        {"Импульс",      "Impulse"},
+        {"Пакет",        "Packet"},
+        {"Произвольный", "Hand"}
     };
 
     return names[value][lang].name;

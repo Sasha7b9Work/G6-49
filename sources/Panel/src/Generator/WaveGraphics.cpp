@@ -96,7 +96,8 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
         DrawRampMinus,
         DrawMeander,
         DrawImpulse,
-        DrawPacketImpulse
+        DrawPacketImpulse,
+        DrawDDS
     };
 
     int index = FORM(chan)->value;
@@ -210,6 +211,11 @@ void Wave::Graphics::DrawPacketImpulse(Chan, int x0, int y0, int, int height)
 
         x0 += 37;
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Wave::Graphics::DrawDDS(Chan, int, int, int, int)
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

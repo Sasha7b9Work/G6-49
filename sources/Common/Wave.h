@@ -236,6 +236,7 @@ public:
         Meander,        ///< Ìåàíäğ
         Impulse,        ///< Èìïóëüñû
         PacketImpuls,   ///< Ïà÷êà èìïóëüñîâ
+        DDS,            ///< Ïğîèçâîëüíûé ñèãíàë
         Number
     } value;
 
@@ -350,6 +351,8 @@ public:
         static void DrawImpulse(Chan ch, int x, int y, int width, int height);
 
         static void DrawPacketImpulse(Chan ch, int x, int y, int width, int height);
+
+        static void DrawDDS(Chan ch, int x, int y, int width, int height);
 
         static void DrawParameters(Chan chan, int y0);
 

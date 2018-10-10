@@ -89,7 +89,7 @@ void Interface::LoadFormDDS()
 
     CPU::SPI1_::Receive(FPGA::DataDDS(ch), FPGA_NUM_POINTS * 2);
 
-    FPGA::SetModeDDS(ch);
+    Generator::SetFormWave(ch, Form::DDS);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
