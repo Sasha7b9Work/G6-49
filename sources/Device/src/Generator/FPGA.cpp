@@ -379,7 +379,7 @@ void FPGA::SetRampMinusMode(Chan ch)
     modeWork[ch] = ModeWork::DDS;
 
     float step = 2.0f / FPGA_NUM_POINTS;
-
+    
     float *d = (float *)malloc(FPGA_NUM_POINTS * 4);
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)

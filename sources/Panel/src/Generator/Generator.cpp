@@ -12,6 +12,7 @@
 #include "structs.h"
 #include "Signals.h"
 #include "Display/Console.h"
+#include "Utils/Math.h"
 
 #include <math.h>
 #include <string.h>
@@ -66,8 +67,84 @@ void Generator::Reset()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Wave *w)
 {
-    uint8 buffer[3] = {CommandPanel::SetFormWave, (uint8)w->GetChannel(), (uint8)FORM(w->GetChannel())->value};
-    SendToInterface(buffer, 3);
+    Chan ch = w->GetChannel();
+    uint8 form = (uint8)FORM(ch)->value;
+
+    if(form == Form::Sine || form == Form::Impulse || form == Form::Meander || form == Form::PacketImpuls)
+    {
+        uint8 buffer[3] = {CommandPanel::SetFormWave, ch, form};
+        SendToInterface(buffer, 3);
+    }
+    else
+    {
+        SetFormDDS(FORM(ch));
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetFormDDS(Form *form)
+{
+    Chan ch = form->GetWave()->GetChannel();
+
+    switch (form->value)
+    {
+        uint8 buffer[FPGA_NUM_POINTS * 2];
+        float data[FPGA_NUM_POINTS];
+
+        case Form::RampPlus:
+            {
+                float step = 2.0f / FPGA_NUM_POINTS;
+
+                for(int i = 0; i < FPGA_NUM_POINTS; i++)
+                {
+                    data[i] = 1.0f - step * i;
+                }
+
+                TransformDataToCode(data, buffer);
+
+                LoadPointsToDDS(ch, buffer);
+            }
+            break;
+        case Form::RampMinus:
+            break;
+        case Form::Meander:
+        case Form::Sine:
+        case Form::Impulse:
+        case Form::PacketImpuls:
+        case Form::Number:
+            break;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2])
+{
+    int max = 0x1fff;
+
+    for (int i = 0; i < FPGA_NUM_POINTS; i++)
+    {
+        uint16 c = (uint16)(fabs(d[i]) * max);
+
+        if (Sign(d[i]) == -1)
+        {
+            SetBit(c, 13);
+        }
+
+        code[i] = (uint8)c;
+        code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2])
+{
+    /*
+    uint8 data = {CommandPanel::LoadFormDDS, ch};
+
+    SendToInterface(data, 2);
+
+    SendToInterface(points, FPGA_NUM_POINTS * 2);
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
