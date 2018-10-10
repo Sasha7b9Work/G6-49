@@ -372,7 +372,6 @@ void FPGA::SendData()
     {
         WriteByte(*pointer++);
         CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, true);
-        for(int x = 0; x < 10; x++) { }
         CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, false);
     }
 
@@ -382,22 +381,10 @@ void FPGA::SendData()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteByte(uint8 byte)
 {
-    static const GeneratorWritePin pins[8] = 
-    {
-        GeneratorWritePin::D0,
-        GeneratorWritePin::D1,
-        GeneratorWritePin::D2,
-        GeneratorWritePin::D3,
-        GeneratorWritePin::D4,
-        GeneratorWritePin::D5,
-        GeneratorWritePin::D6,
-        GeneratorWritePin::D7
-    };
-
-    for(int i = 0; i < 8; i++)
-    {
-        CPU::WritePin(pins[i], GetBit(byte, i) == 1);
-    }
+    //                                                        биты 0,1                          биты 2,3
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)byte & 0x03) << 14) + (((uint16)(byte & 0x0c)) >> 2);;
+    //                                                        биты 4,5,6
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)byte & 0xf0) << 3);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
