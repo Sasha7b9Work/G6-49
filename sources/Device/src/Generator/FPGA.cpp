@@ -55,8 +55,8 @@ void FPGA::SetWaveForm(Chan ch, Form form)
     static const StructFunc func[Form::Number] =
     {
         SetSineMode,            ///< Здесь включается режим амплитудной манипуляции
-        SetRampPlusMode,
-        SetRampMinusMode,
+        EmptyFunc,
+        EmptyFunc,
         SetMeanderMode,
         SetImpulseMode,
         SetPackedImpulseMode
@@ -67,6 +67,11 @@ void FPGA::SetWaveForm(Chan ch, Form form)
     Multiplexor::SetMode(ch, form);
 
     WriteControlRegister();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::EmptyFunc(Chan)
+{
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -347,57 +352,12 @@ bool FPGA::Start()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetRampPlusMode(Chan ch)
+void FPGA::SetModeDDS(Chan ch)
 {
     modeWork[ch] = ModeWork::DDS;
-
-    float step = 2.0f / FPGA_NUM_POINTS;
-
-    float *data = (float *)malloc(FPGA_NUM_POINTS * 4);
-
-    for (int i = 0; i < FPGA_NUM_POINTS; i++)
-    {
-        data[i] = -1.0f + step * i;
-    }
-
-    TransformDataToCode(data, dataDDS[ch]);
-
-    free(data);
-
+    Multiplexor::SetMode(ch, Form::Meander);
     SendData();
-
     WriteControlRegister();
-
-    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
-    WriteRegister(RG::_2_Amplitude, 0xfffff);
-    WriteRegister(RG::_10_Offset, 0);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetRampMinusMode(Chan ch)
-{
-    modeWork[ch] = ModeWork::DDS;
-
-    float step = 2.0f / FPGA_NUM_POINTS;
-    
-    float *d = (float *)malloc(FPGA_NUM_POINTS * 4);
-
-    for (int i = 0; i < FPGA_NUM_POINTS; i++)
-    {
-        d[i] = 1.0f - step * i;
-    }
-
-    TransformDataToCode(d, dataDDS[ch]);
-
-    free(d);
-
-    SendData();
-
-    WriteControlRegister();
-
-    WriteRegister(RG::_1_Freq, (uint64)(200e3 * 11e3));
-    WriteRegister(RG::_2_Amplitude, 0xfffff);
-    WriteRegister(RG::_10_Offset, 0);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -554,4 +514,10 @@ void FPGA::SetOffset(Chan ch, float off)
     uint nB = OffsetToCode(offset[Chan::B]);
     
     WriteRegister(RG::_10_Offset, nA + (nB << 14));
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *FPGA::DataDDS(Chan ch)
+{
+    return &dataDDS[ch][0];
 }

@@ -149,16 +149,18 @@ private:
     };
 
     static void SetSineMode(Chan ch);
-
-    static void SetRampPlusMode(Chan ch);
-
-    static void SetRampMinusMode(Chan ch);
+    /// ”становить режим произвольного сигнала по каналу ch
+    static void SetModeDDS(Chan ch);
+    /// ¬озвращает указатель на точки произвольного сигнала
+    static uint8 *DataDDS(Chan ch);
 
     static void SetMeanderMode(Chan ch);
 
     static void SetImpulseMode(Chan ch);
 
     static void SetPackedImpulseMode(Chan ch);
+
+    static void EmptyFunc(Chan ch);
 
     static void CreateEnable();
     /// «аслать рассчитанные точки в плис

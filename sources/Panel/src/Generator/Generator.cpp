@@ -92,7 +92,7 @@ void Generator::SetFormDDS(Form *form)
 
                 for(int i = 0; i < FPGA_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0f - step * i;
+                    data[i] = -1.0f + step * i;
                 }
 
                 TransformDataToCode(data, buffer);
@@ -101,6 +101,18 @@ void Generator::SetFormDDS(Form *form)
             }
             break;
         case Form::RampMinus:
+            {
+                float step = 2.0f / FPGA_NUM_POINTS;
+
+                for (int i = 0; i < FPGA_NUM_POINTS; i++)
+                {
+                    data[i] = 1.0f - step * i;
+                }
+
+                TransformDataToCode(data, buffer);
+
+                LoadPointsToDDS(ch, buffer);
+            }
             break;
         case Form::Meander:
         case Form::Sine:
