@@ -157,7 +157,7 @@ public:
     /// Будет вызываться после отрисовки кнопок
     pFuncVV  funcOnDraw;
     /// В странице малых кнопок вызывается при повороте ручки установка
-    pFuncBKey fuuncOnKey;
+    pFuncBKey funcOnKey;
     /// Dозвращает число подстраниц в странице по адресу page
     int NumSubPages() const;
     /// Возвращает количество элементов в странице по адресу page
@@ -178,9 +178,6 @@ public:
     int8 PosCurrentItem() const;
 
     void ChangeSubPage(int delta);
-
-    bool ProcessingControl(Control);
-
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
     bool Press(Control control);
 

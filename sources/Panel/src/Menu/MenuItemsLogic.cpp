@@ -532,10 +532,45 @@ int Choice::GetHeightOpened() const
     return NumSubItems() * 10 + 2 + Item::Title::HEIGHT;
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Page::Press(Control key)
+{
+    if (funcOnKey)
+    {
+        return funcOnKey(key);
+    }
+
+    if (CURRENT_PAGE == this)
+    {
+        if (key.IsRotate() && Menu::RegIsControlSubPages())
+        {
+            ChangeSubPage(key.Is(Control::Reg::Left) ? -1 : 1);
+            return true;
+        }
+        else if (key.Is(Control::Esc) && key.action.Is(Control::Action::Up))
+        {
+            if (Keeper())
+            {
+                CURRENT_PAGE = Keeper();
+                return true;
+            }
+        }
+        else if (key.IsFunctional())
+        {
+            GetItem(key)->Press(key);
+            return true;
+        }
+    }
+    else if (key.action.IsRelease())
+    {
+        CURRENT_PAGE = this;
+        return true;
+    }
+
+    return false;
+}
 
 
 #ifdef WIN32
 #pragma warning(pop)
 #endif
-
-

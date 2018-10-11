@@ -65,9 +65,6 @@ void Menu::ProcessContorl(Control control)
     else if (Hint::ProcessControl(control))
     {
     }
-    else if (CURRENT_PAGE->ProcessingControl(control))
-    {
-    }
     else if (CURRENT_PAGE->Press(control))
     {
     }

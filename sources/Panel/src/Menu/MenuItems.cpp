@@ -75,50 +75,6 @@ void Page::ChangeSubPage(int delta)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::ProcessingControl(Control control)
-{
-    if(fuuncOnKey)
-    {
-        return fuuncOnKey(control);
-    }
-    
-    return false;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::Press(Control key)
-{
-    if (CURRENT_PAGE == this)
-    {
-        if (key.IsRotate() && Menu::RegIsControlSubPages())
-        {
-            ChangeSubPage(key.Is(Control::Reg::Left) ? -1 : 1);
-            return true;
-        }
-        else if (key.Is(Control::Esc) && key.action.Is(Control::Action::Up))
-        {
-            if (Keeper())
-            {
-                CURRENT_PAGE = Keeper();
-                return true;
-            }
-        }
-        else if (key.IsFunctional())
-        {
-            GetItem(key)->Press(key);
-            return true;
-        }
-    }
-    else if (key.action.IsRelease())
-    {
-        CURRENT_PAGE = this;
-        return true;
-    }
-
-    return false;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Item::IsShade() const
 {
     return Menu::GetOpenedItem() &&  this != Menu::GetOpenedItem();
