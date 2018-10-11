@@ -159,6 +159,26 @@ Item *Choice::Press(Control key)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Governor::Press(Control control)
+{
+    if(control.action.Is(Control::Action::Up))
+    {
+        if(Menu::CurrentItemIs(0))
+        {
+            Menu::SetCurrentItem(this);
+        }
+        else if(Menu::CurrentItemIs(this))
+        {
+            Menu::ResetCurrentItem();
+        }
+    }
+    else if(control.action.Is(Control::Action::Long))
+    {
+
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 int8 Choice::NumSubItems() const
 {
     return num;
@@ -365,6 +385,10 @@ void Item::Press(Control key)
         else if(type == Item::Type::Page)
         {
             ((Page *)this)->Press(key);
+        }
+        else if(type == Item::Type::Governor)
+        {
+            ((Governor *)this)->Press(key);
         }
     }
 }

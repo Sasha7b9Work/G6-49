@@ -19,6 +19,7 @@
 Item *Menu::pressedItem = 0;
 Item *Menu::openedItem = 0;
 Page *Menu::oldPage = 0;
+Item *Menu::currentItem = 0;
 
 extern const PageBase pSignals;
 

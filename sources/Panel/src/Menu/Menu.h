@@ -18,8 +18,14 @@ public:
     static bool RegIsControlSubPages();
     /// Возвращает адрес открытого элемента меню
     static Item *GetOpenedItem() { return openedItem; };
-
+    /// Установить Item, который будет считаться открытым
     static void SetOpenedItem(Item *item) { openedItem = item; };
+    /// Установить текущий Item - именно к нему будут приходить события ручки и ESC
+    static void SetCurrentItem(Item *item) { currentItem = item; };
+    /// Сброс текущего Item - текущего Item'a больше нет
+    static void ResetCurrentItem() { currentItem = 0; };
+    /// Возвращает текущий Item
+    static bool CurrentItemIs(const Item *item) { return currentItem == item; };
     /// Обнулить открытый итем - итем закрыт
     static void ResetOpenedItem() { openedItem = 0; };
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [F1..F4], если она находится в нижнем положении, и 0, 
@@ -46,4 +52,6 @@ private:
     static Item *openedItem;
     /// Сюда помещается указатель на страницу основного меню в случае, если нужна отрисовка дополнительной страницы
     static Page *oldPage;
+
+    static Item *currentItem;
 };
