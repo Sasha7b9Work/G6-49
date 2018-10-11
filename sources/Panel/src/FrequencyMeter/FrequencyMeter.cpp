@@ -26,7 +26,9 @@ void FrequencyMeter::Draw()
 
     if(FREQ_MEASURE_IS_FREQ)
     {
-        Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "F = %s êÃö", UInt2StringThisPoint(frequency, buffer, 8, (int)FREQ_BILLING_TIME));
+        char text[50];
+        sprintf(text, "%sêÃö", UInt2StringThisPoint(frequency, buffer, 8, (int)FREQ_BILLING_TIME));
+        Text::DrawBigText(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10, 3, text);
     }
     else
     {
@@ -45,7 +47,8 @@ void FrequencyMeter::Draw()
 
         StrOut str = strs[FREQ_AVE_PERIOD][FREQ_TIME_STAMPS];
 
-        Text::DrawFormatText(8, SCREEN_HEIGHT - 16, "T = %s %s", UInt2StringThisPoint(frequency, buffer, 9, str.forFract), str.suffix);
+        char text[50];
+        sprintf(text, "%s %s", UInt2StringThisPoint(frequency, buffer, 9, str.forFract), str.suffix);
     }
 
     Text::SetUpperCase(true);
