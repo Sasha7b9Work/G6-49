@@ -15,6 +15,11 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Wave::Graphics::Draw(Chan ch)
 {
+    if(FREQ_ENABLED && ch != CURRENT_CHANNEL)
+    {
+        return;
+    }
+
     int x0 = X();
     int y0 = Y(ch);
     Painter::FillRegion(x0 + 1, y0 + 1, Width() - 2, Height() - 2, Color::GREEN_5);
@@ -36,7 +41,7 @@ int Wave::Graphics::X()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Wave::Graphics::Y(Chan ch)
 {
-    return ch == Chan::A ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
+    return (ch == Chan::A || FREQ_ENABLED) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
