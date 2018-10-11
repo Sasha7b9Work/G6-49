@@ -195,6 +195,13 @@ void Governor::Press(Control control)
             }
         }
     }
+    else if(control.action.Is(Control::Action::Up))
+    {
+        if(control.Is(Control::Esc))
+        {
+            Menu::ResetCurrentItem();
+        }
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
