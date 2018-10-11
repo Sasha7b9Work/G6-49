@@ -55,29 +55,10 @@ void Menu::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::ProcessContorl(Control control)
 {
-    if (control.action.IsRelease())
+    if(ProcessOutputs(control))
     {
-        if (control.Is(Control::On1))
-        {
-            if (!WAVE(Chan::A).StartModeIsSingle())
-            {
-                SWITCH_CHANNEL_A;
-            }
-            Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
-            return;
-        }
-        else if (control.Is(Control::On2))
-        {
-            if (!WAVE(Chan::B).StartModeIsSingle())
-            {
-                SWITCH_CHANNEL_B;
-            }
-            Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
-            return;
-        }
     }
-
-    if (GetOpenedItem())
+    else if (GetOpenedItem())
     {
         GetOpenedItem()->Press(control);
     }
@@ -90,6 +71,34 @@ void Menu::ProcessContorl(Control control)
     else if (CURRENT_PAGE->Press(control))
     {
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Menu::ProcessOutputs(Control control)
+{
+    if (control.action.IsRelease())
+    {
+        if (control.Is(Control::On1))
+        {
+            if (!WAVE(Chan::A).StartModeIsSingle())
+            {
+                SWITCH_CHANNEL_A;
+            }
+            Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
+            return true;
+        }
+        else if (control.Is(Control::On2))
+        {
+            if (!WAVE(Chan::B).StartModeIsSingle())
+            {
+                SWITCH_CHANNEL_B;
+            }
+            Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
+            return true;
+        }
+    }
+
+    return false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

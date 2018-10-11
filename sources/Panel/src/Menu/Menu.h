@@ -38,6 +38,8 @@ private:
     static int DrawTitle();
     /// ќбработать управл€ющее воздействие control
     static void ProcessContorl(Control control);
+    /// ќбрабатывает состо€ние выходов. ¬озвращает true, если состо€ние вывода изменилось
+    static bool ProcessOutputs(Control control);
 
     static void DrawPagesUGO(int x);
     /// ≈сли какой-то итем раскрыт, то здесь его адрес
