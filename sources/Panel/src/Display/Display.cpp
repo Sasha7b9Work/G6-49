@@ -7,7 +7,7 @@
 #include "InputWindow.h"
 #include "Menu/Hint.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/PageService.h"
+#include "Menu/Pages/PageDebug.h"
 #include "Utils/Statistics.h"
 #include "Utils/Debug.h"
 #include <stdlib.h>
@@ -46,7 +46,7 @@ void Display::Update()
     Wave::Graphics::Draw(Chan::A);
     Wave::Graphics::Draw(Chan::B);
     Menu::Draw();
-    PageService::PageRegisters::Draw();
+    PageDebug::PageRegisters::Draw();
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
     FrequencyMeter::Draw();
     Hint::Draw();
