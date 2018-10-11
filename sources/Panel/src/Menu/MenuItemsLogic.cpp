@@ -185,6 +185,7 @@ void Governor::Press(Control control)
             if(*cell > minValue)
             {
                 *cell = (*cell)--;
+                funcOfChanged();
             }
         }
         else if(control.Is(Control::Reg::Right))
@@ -192,6 +193,7 @@ void Governor::Press(Control control)
             if(*cell < maxValue)
             {
                 *cell = (*cell)++;
+                funcOfChanged();
             }
         }
     }

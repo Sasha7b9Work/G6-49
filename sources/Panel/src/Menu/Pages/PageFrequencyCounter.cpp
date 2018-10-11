@@ -3,6 +3,8 @@
 #include "Generator/Generator.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Menu/Menu.h"
+#include "Utils/Math.h"
+#include "Log.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -207,6 +209,17 @@ static void OnPress_Test(bool)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_FreqLevel()
 {
+    int max = 4 * 1024;
+
+    float step = max / 200.0f;
+
+    int value = (int)(max / 2 + set.freq_level * step);
+
+    Limitation(&value, 0, max - 1);
+
+    Generator::LoadRegister(Register::FreqMeterLevel, (uint64)value);
+
+    LOG_WRITE("%d", value);
 }
 
 DEF_GOVERNOR( gLevel,                                                                                                   //--- ×ÀÑÒÎÒÎÌÅÐ - Óðîâåíü ---
@@ -220,6 +233,17 @@ DEF_GOVERNOR( gLevel,                                                           
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_Hysteresis()
 {
+    int max = 4 * 1024;
+
+    float step = max / 100.0f;
+
+    int value = (int)(step * set.freq_hysteresis);
+
+    Limitation(&value , 0, max - 1);
+
+    Generator::LoadRegister(Register::FreqMeterHYS, (uint64)value);
+
+    LOG_WRITE("%d", value);
 }
 
 DEF_GOVERNOR( gHysteresis,                                                                                           //--- ×ÀÑÒÎÒÎÌÅÐ - Ãèñòåðåçèñ ---
