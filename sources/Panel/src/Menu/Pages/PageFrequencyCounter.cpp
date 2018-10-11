@@ -22,8 +22,8 @@ static void OnPress_AvePeriod(bool);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2(cEnableFrequencyCounter,                                                                               //--- ЧАСТОТОМЕР - ОТОБРАЖЕНИЕ ---
-    "ОТОБРАЖЕНИЕ", "DISPLAY",
+DEF_CHOICE_2(cEnableFrequencyCounter,                                                                               //--- ЧАСТОТОМЕР - Отображение ---
+    "Отображение", "Display",
     "Включает и выключает вывод частотомера.",
     "Turns the frequency meter output on and off.",
     DISABLED_RU, DISABLED_EN, "Отображение показаний частотомера отключено.",
@@ -34,8 +34,8 @@ DEF_CHOICE_2(cEnableFrequencyCounter,                                           
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cMeasure,                                                                                                //--- ЧАСТОТОМЕР - ИЗМЕРЕНИЕ ---
-    "ИЗМЕРЕНИЕ", "MEASURE",
+DEF_CHOICE_2(cMeasure,                                                                                                //--- ЧАСТОТОМЕР - Измерение ---
+    "Измерение", "Measure",
     "Установка режима работы",
     "Setting the operating mode",
     "Частота", "Frequency", "Измерение частоты",
@@ -51,8 +51,8 @@ static void OnPress_Measure(bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cInterval,                                                                                        //--- ЧАСТОТОМЕР - ИНТЕРВАЛ ЗАПУСКА ---
-    "ИНТЕРВАЛ ЗАПУСКА", "START INTERVAL",
+DEF_CHOICE_2(cInterval,                                                                                        //--- ЧАСТОТОМЕР - Интервал запуска ---
+    "Интервал запуска", "Start interval",
     "Выбор интервала запуска измерений частоты.",
     "Selecting the frequency measurement start interval.",
     "1 c", "1 s",   "Запуск процесса измерения частомера производится с интервалом 1 секунда.",
@@ -68,8 +68,8 @@ static void OnPress_Interval(bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_5(cBillingTime,                                                                                          //--- ЧАСТОТОМЕР - ВРЕМЯ СЧЁТА ---
-    "ВРЕМЯ СЧЁТА", "BILLING TIME",
+DEF_CHOICE_5(cBillingTime,                                                                                          //--- ЧАСТОТОМЕР - Время счёта ---
+    "Время счёта", "Billing time",
     "Выбор времени проведения измерения.",
     "Selecting the measurement time.",
     "1 мс",     "1 ms",     "Длительность измерения 1 миллисекунда.",
@@ -91,15 +91,15 @@ static void OnPress_BillingTime(bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cResist,
-             "СОПРОТИВЛЕНИЕ ВХОДА", "INPUT RESISTANCE",
-             "Управление сопротивлением входа частотомера",
-             "Control of the resistance of the frequency meter input",
-             "1 МОм", "1 MOhm", "Сопротивление входа 1 МОм",
-             "Input Impedance 1 MOhm",
-             "50 Ом", "50 Ohm", "Сопротивление входа 50 Ом",
-             "Input Impedance 50 Ohm",
-             FLAG_1, BIT_FREQ_RESIST, pFrequencyCounter, FuncActive, OnPress_Resist, FuncDraw
+DEF_CHOICE_2(cResist,                                                                                       //--- ЧАСТОТОМЕР - Сопротивление входа ---
+    "Сопротивление входа", "Input resistance",
+    "Управление сопротивлением входа частотомера",
+    "Control of the resistance of the frequency meter input",
+    "1 МОм", "1 MOhm",  "Сопротивление входа 1 МОм",
+                        "Input Impedance 1 MOhm",
+    "50 Ом", "50 Ohm",  "Сопротивление входа 50 Ом",
+                        "Input Impedance 50 Ohm",
+    FLAG_1, BIT_FREQ_RESIST, pFrequencyCounter, FuncActive, OnPress_Resist, FuncDraw
 )
 
 static void OnPress_Resist(bool)
@@ -108,15 +108,15 @@ static void OnPress_Resist(bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cCouple,
-             "ВХОД", "COUPLE",
-             "Пропускает/запрещает постоянную составляющую",
-             "Skips / prohibits the DC component",
-             "Перем", "AC", "Постоянная составляющая поступает на вход частотомера",
-             "The DC component is fed to the frequency meter input",
-             "Пост", "DC", "Постоянная составляющая не поступает на вход частотомера",
-             "The DC component is not input to the frequency meter input",
-             FLAG_1, BIT_FREQ_COUPLE, pFrequencyCounter, FuncActive, OnPress_Couple, FuncDraw
+DEF_CHOICE_2(cCouple,                                                                                                      //--- ЧАСТОТОМЕР - Вход ---
+    "Вход", "Couple",
+    "Пропускает/запрещает постоянную составляющую",
+    "Skips / prohibits the DC component",
+    "Перем", "AC",  "Постоянная составляющая поступает на вход частотомера",
+                    "The DC component is fed to the frequency meter input",
+    "Пост", "DC",   "Постоянная составляющая не поступает на вход частотомера",
+                    "The DC component is not input to the frequency meter input",
+    FLAG_1, BIT_FREQ_COUPLE, pFrequencyCounter, FuncActive, OnPress_Couple, FuncDraw
 )
 
 static void OnPress_Couple(bool)
@@ -125,15 +125,15 @@ static void OnPress_Couple(bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cFiltr,
-             "ФНЧ", "LPF",
-             "Включает/отключает фильтр нижних частот на входе частотомера",
-             "Enables / disables the low-pass filter at the input of the frequency meter",
-             DISABLED_RU, DISABLED_EN, "ФНЧ на входе частотомера отключен",
-             "LPF at the frequency meter input is disabled",
-             ENABLED_RU, ENABLED_EN, "ФНЧ на входе частотомера водключен",
-             "LPF at the input of the frequency meter is turned on",
-             FLAG_1, BIT_FREQ_FILTR, pFrequencyCounter, FuncActive, OnPress_Filtr, FuncDraw
+DEF_CHOICE_2(cFiltr,                                                                                                        //--- ЧАСТОТОМЕР - ФНЧ ---
+    "ФНЧ", "LPF",
+    "Включает/отключает фильтр нижних частот на входе частотомера",
+    "Enables / disables the low-pass filter at the input of the frequency meter",
+    DISABLED_RU, DISABLED_EN,   "ФНЧ на входе частотомера отключен",
+                                "LPF at the frequency meter input is disabled",
+    ENABLED_RU, ENABLED_EN,     "ФНЧ на входе частотомера водключен",
+                                "LPF at the input of the frequency meter is turned on",
+    FLAG_1, BIT_FREQ_FILTR, pFrequencyCounter, FuncActive, OnPress_Filtr, FuncDraw
 )
 
 static void OnPress_Filtr(bool)
@@ -141,20 +141,20 @@ static void OnPress_Filtr(bool)
     Generator::LoadRegister(Register::FreqMeter_Filtr, (uint)FREQ_FILTR);
 }
 
-DEF_CHOICE_5(cAvePeriod,                                                                                       //--- ЧАСТОТОМЕР 3 - ЧИСЛО ПЕРИОДОВ ---
-    "ЧИСЛО ПЕРИОДОВ", "NUMBER OF PERIODS",
+DEF_CHOICE_5(cAvePeriod,                                                                                         //--- ЧАСТОТОМЕР - ЧИСЛО ПЕРИОДОВ ---
+    "Число периодов", "Number of periods",
     "Выбор числа усредняемых периодов в режиме измерения периода",
     "Selecting the number of averaging periods in the period measurement mode",
-    "1", "1", "Измерения производить по одному периоду",
-    "Measurements should be made for one period",
-    "10", "10", "Измерения производить по десяти периодам",
-    "Measurements are made for ten periods",
-    "100", "100", "Измерения производить по ста периодам",
-    "Measurements are made for a hundred periods",
-    "1000", "1000", "Измерения производить по тысяче периодов",
-    "Measure to produce for a thousand periods",
-    "10000", "10000", "Измерения производить по десяти тысячам периодов",
-    "Measurements are made for ten thousand periods",
+    "1", "1",           "Измерения производить по одному периоду",
+                        "Measurements should be made for one period",
+    "10", "10",         "Измерения производить по десяти периодам",
+                        "Measurements are made for ten periods",
+    "100", "100",       "Измерения производить по ста периодам",
+                        "Measurements are made for a hundred periods",
+    "1000", "1000",     "Измерения производить по тысяче периодов",
+                        "Measure to produce for a thousand periods",
+    "10000", "10000",   "Измерения производить по десяти тысячам периодов",
+                        "Measurements are made for ten thousand periods",
     FREQ_AVE_PERIOD, pFrequencyCounter, FuncActive, OnPress_AvePeriod, FuncDraw
 )
 
@@ -164,15 +164,20 @@ static void OnPress_AvePeriod(bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_5(cTimeStamps,                                                                                       //--- ЧАСТОТОМЕР 3 - МЕТКИ ВРЕМЕНИ ---
-    "МЕТКИ ВРЕМЕНИ", "TIME STAMPS",
+DEF_CHOICE_5(cTimeStamps,                                                                                         //--- ЧАСТОТОМЕР - Метки времени ---
+    "Метки времени", "Time stamps",
     "",
     "",
-    "1 кГц", "1 kHz", "", "",
-    "10 кГц", "10 kHz", "", "",
-    "100 кГц", "100 kHz", "", "",
-    "1 МГц", "1 MHz", "", "",
-    "10 МГц", "10 MHz", "", "",
+    "1 кГц",    "1 kHz",    "", 
+                            "",
+    "10 кГц",   "10 kHz",   "", 
+                            "",
+    "100 кГц",  "100 kHz",  "", 
+                            "",
+    "1 МГц",    "1 MHz",    "", 
+                            "",
+    "10 МГц",   "10 MHz",   "", 
+                            "",
     FREQ_TIME_STAMPS, pFrequencyCounter, FuncActive, OnPress_TimeStamps, FuncDraw
 )
 
@@ -182,12 +187,14 @@ static void OnPress_TimeStamps(bool)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cTest,                                                                                                      //--- ЧАСТОТОМЕР 3 - ТЕСТ ---
-    "ТЕСТ", "TEST",
+DEF_CHOICE_2(cTest,                                                                                                        //--- ЧАСТОТОМЕР - Тест ---
+    "Тест", "Test",
     "Включение/отключение тестового режима",
     "Enable/disable test mode",
-    DISABLED_RU, DISABLED_EN, "", "",
-    ENABLED_RU, ENABLED_EN, "", "",
+    DISABLED_RU, DISABLED_EN,   "",
+                                "",
+    ENABLED_RU, ENABLED_EN,     "",
+                                "",
     FLAG_1, BIT_FREQ_TEST, pFrequencyCounter, FuncActive, OnPress_Test, FuncDraw
 )
 
@@ -196,21 +203,24 @@ static void OnPress_Test(bool)
     PageFrequencyCounter::WriteRegisterRG9();
 }
 
+
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_10(pFrequencyCounter,                                                                                                     //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
-    cEnableFrequencyCounter,
-    cMeasure,
-    cInterval,
-    cBillingTime,
-    cResist,
-    cCouple,
-    cFiltr,
-    cAvePeriod,
-    cTimeStamps,
-    cTest,
+    cEnableFrequencyCounter,    // ЧАСТОТОМЕР - Отображение
+    cMeasure,                   // ЧАСТОТОМЕР - Измерение
+    cInterval,                  // ЧАСТОТОМЕР - Интервал запуска
+    cBillingTime,               // ЧАСТОТОМЕР - Время счёта
+    cResist,                    // ЧАСТОТОМЕР - Сопротивление
+    cCouple,                    // ЧАСТОТОМЕР - Вход
+    cFiltr,                     // ЧАСТОТОМЕР - ФНЧ
+    cAvePeriod,                 // ЧАСТОТОМЕР - Число периодов
+    cTimeStamps,                // ЧАСТОТОМЕР - Метки времени
+    cTest,                      // ЧАСТОТОМЕР - Тест
+    //gLevel,                     // ЧАСТОТОМЕР - Уровень
     Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )
 
