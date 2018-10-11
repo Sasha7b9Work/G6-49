@@ -533,21 +533,21 @@ int Choice::GetHeightOpened() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::Press(Control key)
+bool Page::Press(Control control)
 {
     if (funcOnKey)
     {
-        return funcOnKey(key);
+        return funcOnKey(control);
     }
 
     if (CURRENT_PAGE == this)
     {
-        if (key.IsRotate() && Menu::RegIsControlSubPages())
+        if (control.IsRotate() && Menu::RegIsControlSubPages())
         {
-            ChangeSubPage(key.Is(Control::Reg::Left) ? -1 : 1);
+            ChangeSubPage(control.Is(Control::Reg::Left) ? -1 : 1);
             return true;
         }
-        else if (key.Is(Control::Esc) && key.action.Is(Control::Action::Up))
+        else if (control.Is(Control::Esc) && control.action.Is(Control::Action::Up))
         {
             if (Keeper())
             {
@@ -555,13 +555,13 @@ bool Page::Press(Control key)
                 return true;
             }
         }
-        else if (key.IsFunctional())
+        else if (control.IsFunctional())
         {
-            GetItem(key)->Press(key);
+            GetItem(control)->Press(control);
             return true;
         }
     }
-    else if (key.action.IsRelease())
+    else if (control.action.IsRelease())
     {
         CURRENT_PAGE = this;
         return true;
