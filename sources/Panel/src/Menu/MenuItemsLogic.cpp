@@ -537,7 +537,10 @@ bool Page::Press(Control control)
 {
     if (funcOnKey)
     {
-        return funcOnKey(control);
+        if(funcOnKey(control))
+        {
+            return true;
+        }
     }
 
     if (CURRENT_PAGE == this)
