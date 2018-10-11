@@ -27,6 +27,10 @@ void Item::Draw(bool opened, int x, int y) const
     {
         ((SButton *)this)->Draw(x, y);
     }
+    else if(type == Item::Type::Governor)
+    {
+        ((Governor *)this)->Draw(x, y);
+    }
     else if(type == Item::Type::Page)
     {
         ((Page *)this)->DrawClosed(x, y);
@@ -175,6 +179,28 @@ void Choice::Draw(bool opened, int x, int y)
             }
         }
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Governor::Draw(int x, int y) const
+{
+    bool pressed = IsPressed();
+    bool isShade = IsShade();
+    bool opened = IsOpened();
+
+    Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
+    Text::DrawText(x + 5, y + 5, GetTitle(), pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+    Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
+
+    Painter::SetColor(Color::BACK);
+
+    DrawValue(x + 15, y + 30);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Governor::DrawValue(int x, int y) const
+{
+    Text::DrawFormatText(x, y, "%d", *cell);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
