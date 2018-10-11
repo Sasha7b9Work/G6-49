@@ -55,6 +55,7 @@ extern const PageBase pInput;
 #define FREQ_BILLING_TIME       (set.freq_billingTime)
 #define FREQ_TIME_STAMPS        (set.freq_timeStamps)
 #define FREQ_TEST               ((FreqTest)BIT_FL1(BIT_FREQ_TEST))
+#define FREQ_LEVEL              (set.freq_level)
 
 #define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
 
@@ -84,6 +85,7 @@ public:
     FrequencyMeter::BillingTime freq_billingTime;                       ///< ¬рем€ счЄта
     FrequencyMeter::AvePeriod   freq_avePeriod;                         ///< „исло усредн€емых периодов в режиме измерени€ периода
     FreqTimeStamps              freq_timeStamps;                        ///< ћетки времени
+    uint16                      freq_level;                             ///< ”ровень синхронизации
     bool                        sine_ManipulationEnabled[Chan::Number]; ///< true, если включена модул€ци€ синусоиды пилой
     uint8                       sine_ManipulationMode[Chan::Number];
 

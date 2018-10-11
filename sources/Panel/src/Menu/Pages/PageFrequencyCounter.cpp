@@ -204,9 +204,21 @@ static void OnPress_Test(bool)
 }
 
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_FreqLevel()
+{
+}
+
+DEF_GOVERNOR( gLevel,                                                                                                   //--- ЧАСТОТОМЕР - Уровень ---
+    "Уровень", "Level",
+    "Подстройка уровня синхронизации",
+    "Synchronization level adjustment",
+    FREQ_LEVEL, -100, 100, pFrequencyCounter, FuncActive, OnChange_FreqLevel, EmptyFuncVV
+)
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_10(pFrequencyCounter,                                                                                                     //--- ЧАСТОТОМЕР ---
+DEF_PAGE_11(pFrequencyCounter,                                                                                                     //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
@@ -220,7 +232,7 @@ DEF_PAGE_10(pFrequencyCounter,                                                  
     cAvePeriod,                 // ЧАСТОТОМЕР - Число периодов
     cTimeStamps,                // ЧАСТОТОМЕР - Метки времени
     cTest,                      // ЧАСТОТОМЕР - Тест
-    //gLevel,                     // ЧАСТОТОМЕР - Уровень
+    gLevel,                     // ЧАСТОТОМЕР - Уровень
     Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )
 

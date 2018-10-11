@@ -57,6 +57,7 @@ static const Settings defSet =
     FrequencyMeter::BillingTime::_1ms,      // freq_billingTime
     FrequencyMeter::AvePeriod::_1,          // freq_avePeriod
     FreqTimeStamps::_10MHz,                 // freq_timeStamps
+    0,                                      // freq_level
     {false, false},                         // sine_ManipulationEnabled
     {0, 0},                                 // sine_ManipulationMode
 
