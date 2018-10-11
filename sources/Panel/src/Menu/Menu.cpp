@@ -46,43 +46,49 @@ void Menu::Update()
 {
     while (!CPU::Keyboard::BufferIsEmpty())
     {
-        Control key = CPU::Keyboard::GetNextControl();
+        Control control = CPU::Keyboard::GetNextControl();
 
-        if (key.action.IsRelease())
-        {
-            if (key.Is(Control::On1))
-            {
-                if(!WAVE(Chan::A).StartModeIsSingle())
-                {
-                    SWITCH_CHANNEL_A;
-                }
-                Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
-                continue;
-            }
-            else if (key.Is(Control::On2))
-            {
-                if(!WAVE(Chan::B).StartModeIsSingle())
-                {
-                    SWITCH_CHANNEL_B;
-                }
-                Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
-                continue;
-            }
-        }
+        ProcessContorl(control);
+    }
+}
 
-        if (GetOpenedItem())
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Menu::ProcessContorl(Control control)
+{
+    if (control.action.IsRelease())
+    {
+        if (control.Is(Control::On1))
         {
-            GetOpenedItem()->Press(key);
+            if (!WAVE(Chan::A).StartModeIsSingle())
+            {
+                SWITCH_CHANNEL_A;
+            }
+            Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
+            return;
         }
-        else if (Hint::ProcessControl(key))
+        else if (control.Is(Control::On2))
         {
+            if (!WAVE(Chan::B).StartModeIsSingle())
+            {
+                SWITCH_CHANNEL_B;
+            }
+            Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
+            return;
         }
-        else if (CURRENT_PAGE->ProcessingControl(key))
-        {
-        }
-        else if (CURRENT_PAGE->Press(key))
-        {
-        }
+    }
+
+    if (GetOpenedItem())
+    {
+        GetOpenedItem()->Press(control);
+    }
+    else if (Hint::ProcessControl(control))
+    {
+    }
+    else if (CURRENT_PAGE->ProcessingControl(control))
+    {
+    }
+    else if (CURRENT_PAGE->Press(control))
+    {
     }
 }
 

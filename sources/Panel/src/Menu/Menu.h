@@ -36,6 +36,8 @@ public:
 private:
     /// Наризовать загол
     static int DrawTitle();
+    /// Обработать управляющее воздействие control
+    static void ProcessContorl(Control control);
 
     static void DrawPagesUGO(int x);
     /// Если какой-то итем раскрыт, то здесь его адрес
