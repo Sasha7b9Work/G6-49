@@ -44,7 +44,7 @@ void Menu::DrawPagesUGO(int x)
 {
     x += 10;
 
-    static const int delta = 11;
+    static const int delta = 12;
 
     int numSubPages = CURRENT_PAGE->NumSubPages();
     int numPage = CURRENT_PAGE->CurrentSubPage();

@@ -17,7 +17,7 @@ public:
     /// Возвращает true, если ручка управляет переклюичением подстраниц меню
     static bool RegIsControlSubPages();
     /// Возвращает адрес открытого элемента меню
-    static Item *GetOpenedItem() { return openedItem; };
+    static Item* GetOpenedItem() { return openedItem; };
     /// Установить Item, который будет считаться открытым
     static void SetOpenedItem(Item *item) { openedItem = item; };
     /// Установить текущий Item - именно к нему будут приходить события ручки и ESC
@@ -25,7 +25,7 @@ public:
     /// Сброс текущего Item - текущего Item'a больше нет
     static void ResetCurrentItem() { currentItem = 0; };
     /// Возвращает текущий Item
-    static bool CurrentItemIs(const Item *item) { return currentItem == item; };
+    static Item* GetCurrentItem() { return currentItem; };
     /// Обнулить открытый итем - итем закрыт
     static void ResetOpenedItem() { openedItem = 0; };
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [F1..F4], если она находится в нижнем положении, и 0, 

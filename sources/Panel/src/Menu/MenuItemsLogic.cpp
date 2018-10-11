@@ -161,20 +161,39 @@ Item *Choice::Press(Control key)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Governor::Press(Control control)
 {
-    if(control.action.Is(Control::Action::Up))
+    if(control.IsFunctional() && Keeper()->GetItem(control) == this)
     {
-        if(Menu::CurrentItemIs(0))
+        if(control.action.Is(Control::Action::Up))
         {
-            Menu::SetCurrentItem(this);
+            if (!Menu::GetCurrentItem())
+            {
+                Menu::SetCurrentItem(this);
+            }
+            else if (Menu::GetCurrentItem() == this)
+            {
+                Menu::ResetCurrentItem();
+            }
         }
-        else if(Menu::CurrentItemIs(this))
+        else if(control.action.Is(Control::Action::Long))
         {
-            Menu::ResetCurrentItem();
         }
     }
-    else if(control.action.Is(Control::Action::Long))
+    else if(control.IsRotate())
     {
-
+        if(control.Is(Control::Reg::Left))
+        {
+            if(*cell > minValue)
+            {
+                *cell = (*cell)--;
+            }
+        }
+        else if(control.Is(Control::Reg::Right))
+        {
+            if(*cell < maxValue)
+            {
+                *cell = (*cell)++;
+            }
+        }
     }
 }
 

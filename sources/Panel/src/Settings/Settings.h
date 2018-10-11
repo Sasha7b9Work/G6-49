@@ -85,7 +85,7 @@ public:
     FrequencyMeter::BillingTime freq_billingTime;                       ///< Время счёта
     FrequencyMeter::AvePeriod   freq_avePeriod;                         ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps              freq_timeStamps;                        ///< Метки времени
-    uint16                      freq_level;                             ///< Уровень синхронизации
+    int16                       freq_level;                             ///< Уровень синхронизации
     bool                        sine_ManipulationEnabled[Chan::Number]; ///< true, если включена модуляция синусоиды пилой
     uint8                       sine_ManipulationMode[Chan::Number];
 

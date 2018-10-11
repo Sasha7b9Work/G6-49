@@ -201,7 +201,7 @@ void Governor::Draw(int x, int y) const
 void Governor::DrawValue(int x, int y) const
 {
     int x1 = Text::DrawFormatText(x, y, "%d", *cell);
-    if(Menu::CurrentItemIs(this))
+    if(Menu::GetCurrentItem() == this)
     {
         Text::DrawChar(x - 6, y, '\x90');
         Text::DrawChar(x1 + 1, y, '\x91');
