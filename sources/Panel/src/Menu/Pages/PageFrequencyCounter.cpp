@@ -218,7 +218,19 @@ DEF_GOVERNOR( gLevel,                                                           
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_11(pFrequencyCounter,                                                                                                     //--- ЧАСТОТОМЕР ---
+static void OnChange_Hysteresis()
+{
+}
+
+DEF_GOVERNOR( gHysteresis,                                                                                           //--- ЧАСТОТОМЕР - Гистерезис ---
+    "Гистерезис", "Hysteresis",
+    "Задаёт гистерезис для уменьшения влияния помех на точность измерений",
+    "Sets hysteresis to reduce the effect of interference on measurement accuracy",
+    FREQ_HYSTERESIS, 0, 100, pFrequencyCounter, FuncActive, OnChange_Hysteresis, EmptyFuncVV
+)
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+DEF_PAGE_12(pFrequencyCounter,                                                                                                    //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
@@ -233,6 +245,7 @@ DEF_PAGE_11(pFrequencyCounter,                                                  
     cTimeStamps,                // ЧАСТОТОМЕР - Метки времени
     cTest,                      // ЧАСТОТОМЕР - Тест
     gLevel,                     // ЧАСТОТОМЕР - Уровень
+    gHysteresis,                // ЧАСТОТОМЕР - Гистерезис
     Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )
 

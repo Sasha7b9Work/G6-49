@@ -58,6 +58,7 @@ static const Settings defSet =
     FrequencyMeter::AvePeriod::_1,          // freq_avePeriod
     FreqTimeStamps::_10MHz,                 // freq_timeStamps
     0,                                      // freq_level
+    0,                                      // freq_hysteresis
     {false, false},                         // sine_ManipulationEnabled
     {0, 0},                                 // sine_ManipulationMode
 

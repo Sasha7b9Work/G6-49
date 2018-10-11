@@ -56,6 +56,7 @@ extern const PageBase pInput;
 #define FREQ_TIME_STAMPS        (set.freq_timeStamps)
 #define FREQ_TEST               ((FreqTest)BIT_FL1(BIT_FREQ_TEST))
 #define FREQ_LEVEL              (set.freq_level)
+#define FREQ_HYSTERESIS         (set.freq_hysteresis)
 
 #define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
 
@@ -86,6 +87,7 @@ public:
     FrequencyMeter::AvePeriod   freq_avePeriod;                         ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps              freq_timeStamps;                        ///< Метки времени
     int16                       freq_level;                             ///< Уровень синхронизации
+    int16                       freq_hysteresis;                        ///< Величина гистерезиса
     bool                        sine_ManipulationEnabled[Chan::Number]; ///< true, если включена модуляция синусоиды пилой
     uint8                       sine_ManipulationMode[Chan::Number];
 
