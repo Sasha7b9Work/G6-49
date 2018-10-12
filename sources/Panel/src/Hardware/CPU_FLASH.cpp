@@ -30,12 +30,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool EraseSector(uint startAdddress);
-static void WriteBufferBytes(uint address, void *buffer, int numBytes);
-static uint GetSector(uint startAddress);
-static void ReadBufferBytes(uint addrSrc, void *bufferDest, int size);
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::FLASH_::SaveSettings()
 {
     // «аписываем в Settings.size текущий размер структуры Settings
@@ -88,7 +82,7 @@ void CPU::FLASH_::LoadSettings()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static bool EraseSector(uint startAddress)
+bool CPU::FLASH_::EraseSector(uint startAddress)
 {
     if (GetSector(startAddress) == MAX_UINT)
     {
@@ -115,7 +109,7 @@ static bool EraseSector(uint startAddress)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteBufferBytes(uint address, void *buffer, int numBytes)
+void CPU::FLASH_::WriteBufferBytes(uint address, void *buffer, int numBytes)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -131,7 +125,7 @@ static void WriteBufferBytes(uint address, void *buffer, int numBytes)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static uint GetSector(uint startAddress)
+uint CPU::FLASH_::GetSector(uint startAddress)
 {
 #ifndef OPEN
     struct StructSector
@@ -161,7 +155,7 @@ static uint GetSector(uint startAddress)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReadBufferBytes(uint addrSrc, void *bufferDest, int size)
+void CPU::FLASH_::ReadBufferBytes(uint addrSrc, void *bufferDest, int size)
 {
     uint8 *src = (uint8 *)addrSrc;
     uint8 *dest = (uint8 *)bufferDest;

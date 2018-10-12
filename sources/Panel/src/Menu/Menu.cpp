@@ -5,6 +5,7 @@
 #include "Generator/Generator.h"
 #include "Generator/Signals.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Menu/Pages/PageSignals.h"
 #include "Menu/Pages/PageFrequencyCounter.h"
@@ -45,11 +46,23 @@ void Menu::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Menu::Update()
 {
+    static uint timePress = 0;  // Время наступления последнего события. Если равно нулю, то настройки уже сохранены и сохранять их не требуется
+
     while (!CPU::Keyboard::BufferIsEmpty())
     {
         Control control = CPU::Keyboard::GetNextControl();
 
         ProcessContorl(control);
+
+        timePress = TIME_MS;
+    }
+
+    const uint TIME_WAIT = 5000;
+
+    if(timePress && (TIME_MS  - timePress) > TIME_WAIT)      // Сохраняем настройки, если прошло более TIME_WAIT мс
+    {
+        Settings::Save();
+        timePress = 0;
     }
 }
 
