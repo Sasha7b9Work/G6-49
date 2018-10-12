@@ -45,12 +45,18 @@ void CPU::FLASH_::SaveSettings()
 
     if (address == ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS)     // ≈сли адрес указывает на последнюю область сектора дл€ записи настроек
     {
-        EraseSector(ADDR_SECTOR_SETTINGS);                          // “о стираем заполненный сектор настроек
+        EraseSettings();                                            // “о стираем заполненный сектор настроек
         address = ADDR_SECTOR_SETTINGS;
     }
 
     CURRENT_PAGE = 0;
     WriteBufferBytes((uint)address, &set, sizeof(Settings));
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::FLASH_::EraseSettings()
+{
+    EraseSector(ADDR_SECTOR_SETTINGS);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

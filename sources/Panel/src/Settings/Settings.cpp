@@ -100,16 +100,16 @@ void Settings::Save()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Load(bool _default)
 {
+    CPU::FLASH_::EraseSettings();
+
     set = defSet;
 
-    if(_default)
-    {
-        set = defSet;
-    }
-    else
+    if(!_default)
     {
         CPU::FLASH_::LoadSettings();
     }
+
+    //CPU::FLASH_::SaveSettings();
 
     Generator::TuneChannel(Chan::A);
     Generator::TuneChannel(Chan::B);

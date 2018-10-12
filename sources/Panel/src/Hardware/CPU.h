@@ -104,6 +104,7 @@ public:
     public:
         static void SaveSettings();
         static void LoadSettings();
+        static void EraseSettings();
     private:
         static bool EraseSector(uint startAdddress);
         static void WriteBufferBytes(uint address, void *buffer, int numBytes);
