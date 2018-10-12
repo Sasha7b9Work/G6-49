@@ -1,12 +1,7 @@
-#include "defines.h"
-#include "Display/Display.h"
-#include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Generator/Generator.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
-#include "Display/Console.h"
 #include "Utils/Debug.h"
 
 

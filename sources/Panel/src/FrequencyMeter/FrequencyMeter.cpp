@@ -1,8 +1,9 @@
-#include "FrequencyMeter.h"
 #include "Display/Text.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
+#include "Utils/Math.h"
+#include "Log.h"
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,4 +70,43 @@ void FrequencyMeter::SetMeasure(uint value)
 void FrequencyMeter::SetInactive()
 {
     inactive = true;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FrequencyMeter::LoadLevel()
+{
+    int max = 4 * 1024;
+
+    float step = max / 200.0f;
+
+    int value = (int)(max / 2 + FREQ_LEVEL * step);
+
+    Limitation(&value, 0, max - 1);
+
+    Generator::LoadRegister(Register::FreqMeterLevel, (uint64)value);
+
+    LOG_WRITE("%d", value);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FrequencyMeter::LoadHysteresis()
+{
+    int max = 4 * 1024;
+
+    float step = max / 100.0f;
+
+    int value = (int)(step * FREQ_HYSTERESIS);
+
+    Limitation(&value, 0, max - 1);
+
+    Generator::LoadRegister(Register::FreqMeterHYS, (uint64)value);
+
+    LOG_WRITE("%d", value);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FrequencyMeter::LoadSettings()
+{
+    LoadLevel();
+    LoadHysteresis();
 }

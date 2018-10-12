@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "SettingsTypes.h"
 #include "Menu/MenuItems.h"
-#include "Display/Colors.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Generator/Generator.h"
 

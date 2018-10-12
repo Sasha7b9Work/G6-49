@@ -1,10 +1,5 @@
-#include "defines.h"
-#include "Generator/Signals.h"
 #include "Settings.h"
-#include "Display/Colors.h"
-#include "Display/Display.h"
 #include "Display/Painter.h"
-#include "Generator/Generator.h"
 #include "Hardware/CPU.h"
 #include "Menu/Menu.h"
 
@@ -118,6 +113,8 @@ void Settings::Load(bool _default)
 
     Generator::TuneChannel(Chan::A);
     Generator::TuneChannel(Chan::B);
+
+    FrequencyMeter::LoadSettings();
     
     Painter::LoadPalette();
 }
