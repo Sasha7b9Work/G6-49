@@ -116,6 +116,8 @@ public:
 
     static void Save();
     static void Load(bool _default = false);
+
+    Settings& operator=(const Settings &rhs);
 };
 
 #pragma pack(pop)

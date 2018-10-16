@@ -57,7 +57,7 @@ static const Settings defSet =
     {false, false},                         // sine_ManipulationEnabled
     {0, 0},                                 // sine_ManipulationMode
 
-    BINARY_U32(00000000, 00000000, 00010110, 01011100), // flag1
+    BINARY_U32(00000000, 00000000, 00010110, 00011000), // flag1
 //                          |||||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
 //                          |||||  ||||||||  |||||||------- 1  BIT_FREQ_INTERVAL  Interval_1
 //                          |||||  ||||||||  ||||||-------- 2  BIT_CONSOLE      
@@ -94,12 +94,25 @@ Settings set = defSet;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Settings::Save()
 {
+    /*
+    Settings set1 = set;
+    
+    set1 = set1;
+    
     CPU::FLASH_::SaveSettings();
+
+    Settings set2 = set;
+    
+    set2 = set2;
+    
+    set2 = set2;
+    */
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Settings::Load(bool _default)
 {
+    /*
     CPU::FLASH_::EraseSettings();
 
     set = defSet;
@@ -111,10 +124,22 @@ void Settings::Load(bool _default)
 
     //CPU::FLASH_::SaveSettings();
 
+    */
+
     Generator::TuneChannel(Chan::A);
     Generator::TuneChannel(Chan::B);
 
     FrequencyMeter::LoadSettings();
     
     Painter::LoadPalette();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Settings& Settings::operator=(const Settings &rhs)
+{
+    if(this != &rhs)
+    {
+        memcpy(this, &rhs, sizeof(Settings));
+    }
+    return *this;
 }
