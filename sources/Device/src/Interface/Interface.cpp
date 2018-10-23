@@ -87,6 +87,11 @@ void Interface::LoadFormDDS()
 {
     Chan ch = (Chan::E)recv[1];
 
+    uint8 temp[2];
+
+    // —юда примем количество байт
+    CPU::SPI1_::Receive(temp, 2);
+
     CPU::SPI1_::Receive(FPGA::DataDDS(ch), FPGA_NUM_POINTS * 2);
 
     Generator::SetFormWave(ch, Form::DDS);
