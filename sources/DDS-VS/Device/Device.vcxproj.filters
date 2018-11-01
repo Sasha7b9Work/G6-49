@@ -40,6 +40,12 @@
     <Filter Include="libs\USBH">
       <UniqueIdentifier>{14bcc8f7-0f4a-458f-8f22-d36469e19636}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\FatFS">
+      <UniqueIdentifier>{42a3adc6-518a-4c65-a9ca-e98842d25871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FDrive">
+      <UniqueIdentifier>{0d9e9c65-8aa9-46a7-8277-a42a40e62415}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -219,6 +225,12 @@
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h">
       <Filter>libs\USBH</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h">
+      <Filter>libs\FatFS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\FDrive\FDrive.h">
+      <Filter>FDrive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -334,6 +346,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp">
       <Filter>libs\USBH</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FDrive\FDrive.cpp">
+      <Filter>FDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_HCD.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

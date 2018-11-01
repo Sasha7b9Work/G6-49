@@ -1101,6 +1101,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\EEPROM.h</FilePath>
             </File>
+            <File>
+              <FileName>CPU_HCD.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_HCD.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

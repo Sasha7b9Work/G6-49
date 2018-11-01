@@ -121,17 +121,17 @@ void AD9952::WriteCFR1(Chan ch)
 
     if(ch == Chan::B)
     {
-        SetBit(value, 1);
-        SetBit(value, 23);
+        Bit::Set(value, 1);
+        Bit::Set(value, 23);
     }
-    SetBit(value, 9);       // ќднонаправленный режим
-    SetBit(value, 13);
+    Bit::Set(value, 9);       // ќднонаправленный режим
+    Bit::Set(value, 13);
     if(Manipulation::enabled[ch] && Manipulation::type[ch].Is(Manipulation::Type::OSK))
     {
-        SetBit(value, 24);  // ”станавливаем режим манипул€ции
+        Bit::Set(value, 24);  // ”станавливаем режим манипул€ции
     }
-    SetBit(value, 25);      // OSK enable - управление амплитудой
-    SetBit(value, 26);
+    Bit::Set(value, 25);      // OSK enable - управление амплитудой
+    Bit::Set(value, 26);
 
     WriteToHardware(ch, Register::CFR1, value);
 }
@@ -140,7 +140,7 @@ void AD9952::WriteCFR1(Chan ch)
 void AD9952::WriteCFR2(Chan ch)
 {
     uint value = 0;
-    SetBit(value, 3);
+    Bit::Set(value, 3);
     WriteToHardware(ch, Register::CFR2, value);
 }
 
@@ -155,8 +155,8 @@ void AD9952::WritePOW(Chan ch)
 void AD9952::WriteASF(Chan ch)
 {
     uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
-    SetBit(value, 14);  // \ Ёто биты множител€ скорости
-    SetBit(value, 15);  // / нарастани€ фронта 
+    Bit::Set(value, 14);  // \ Ёто биты множител€ скорости
+    Bit::Set(value, 15);  // / нарастани€ фронта 
     WriteToHardware(ch, Register::ASF, value);
 }
 

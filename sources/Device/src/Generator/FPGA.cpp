@@ -222,17 +222,17 @@ void FPGA::WriteControlRegister()
 {
     uint16 data = BINARY_U16(00000000, 01111000);       // Биты 3, 4, 5, 6 устанавливаем в единичное состояние. Их активное состояние - нулевое
 
-    SetBit(data, RG0::_0_WriteData);                    // В нулевом бите 0 записываем только для записи данных в память
+    Bit::Set(data, RG0::_0_WriteData);                    // В нулевом бите 0 записываем только для записи данных в память
 
     if(modeWork[Chan::A].Is(ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
     {
         switch(AD9952::Manipulation::GetType(Chan::A))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, RG0::_3_ManipulationOSK2);
+                Bit::Clear(data, RG0::_3_ManipulationOSK2);
                 break;
             case AD9952::Manipulation::Type::FPGA:
-                ClearBit(data, RG0::_4_ManipulationFPGA1);
+                Bit::Clear(data, RG0::_4_ManipulationFPGA1);
                 break;
         }
     }
@@ -242,10 +242,10 @@ void FPGA::WriteControlRegister()
         switch (AD9952::Manipulation::GetType(Chan::B))
         {
             case AD9952::Manipulation::Type::OSK:
-                ClearBit(data, RG0::_5_ManipulationOSK1);
+                Bit::Clear(data, RG0::_5_ManipulationOSK1);
                 break;
             case AD9952::Manipulation::Type::FPGA:
-                ClearBit(data, RG0::_6_ManipulationFPGA2);
+                Bit::Clear(data, RG0::_6_ManipulationFPGA2);
                 break;
         }
     }
@@ -253,32 +253,32 @@ void FPGA::WriteControlRegister()
     switch(modeWork[Chan::A])
     {
         case ModeWork::Meander:     
-            SetBit(data, RG0::_8_MeanderA);
+            Bit::Set(data, RG0::_8_MeanderA);
         case ModeWork::Rectangle:
         case ModeWork::Impulse:
         case ModeWork::PackedImpulse:
-            SetBit(data, RG0::_1_ImpulseA);
+            Bit::Set(data, RG0::_1_ImpulseA);
             break;
     }
 
     switch(modeWork[Chan::B])
     {
         case ModeWork::Meander:   
-            SetBit(data, RG0::_9_MeanderB);
+            Bit::Set(data, RG0::_9_MeanderB);
         case ModeWork::Rectangle:
         case ModeWork::Impulse:
-            SetBit(data, RG0::_2_ImpulseB);
+            Bit::Set(data, RG0::_2_ImpulseB);
             break;
     }
 
     if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
     {
-        SetBit(data, RG0::_7_Freq_MHz);
+        Bit::Set(data, RG0::_7_Freq_MHz);
     }
 
     if(modeWork[Chan::A] == ModeWork::PackedImpulse)
     {
-        SetBit(data, RG0::_12_HandStartPacket);
+        Bit::Set(data, RG0::_12_HandStartPacket);
     }
 
     data = SetBitsStartMode(data);
@@ -296,7 +296,7 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
     {
         if(start.Is(StartMode::Single))
         {
-            SetBit(data, RG0::_10_HandStartA);
+            Bit::Set(data, RG0::_10_HandStartA);
         }
     }
 
@@ -304,16 +304,16 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
     {
         if(start.Is(StartMode::ComparatorA))
         {
-            SetBit(data, RG0::_13_StartMode0);
+            Bit::Set(data, RG0::_13_StartMode0);
         }
         else if(start.Is(StartMode::ShaperB))
         {
-            SetBit(data, RG0::_14_StartMode1);
+            Bit::Set(data, RG0::_14_StartMode1);
         }
         else if(start.Is(StartMode::Single))
         {
-            SetBit(data, RG0::_13_StartMode0);
-            SetBit(data, RG0::_14_StartMode1);
+            Bit::Set(data, RG0::_13_StartMode0);
+            Bit::Set(data, RG0::_14_StartMode1);
         }
     }
 
@@ -324,7 +324,7 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
     {
         if(start.Is(StartMode::Single))
         {
-            SetBit(data, RG0::_11_HandStartB);
+            Bit::Set(data, RG0::_11_HandStartB);
         }
     }
 
@@ -332,16 +332,16 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
     {
         if (start.Is(StartMode::ComparatorA))
         {
-            SetBit(data, RG0::_13_StartMode0);
+            Bit::Set(data, RG0::_13_StartMode0);
         }
         else if (start.Is(StartMode::ShaperB))
         {
-            SetBit(data, RG0::_14_StartMode1);
+            Bit::Set(data, RG0::_14_StartMode1);
         }
         else if (start.Is(StartMode::Single))
         {
-            SetBit(data, RG0::_13_StartMode0);
-            SetBit(data, RG0::_14_StartMode1);
+            Bit::Set(data, RG0::_13_StartMode0);
+            Bit::Set(data, RG0::_14_StartMode1);
         }
     }
 
@@ -432,7 +432,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
     {
         for (int bit = numBits[reg].value - 1; bit >= 0; bit--)
         {
-            CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, GetBit(value, bit) == 1);  // Устанавливаем или сбрасываем соответствующий бит
+            CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, Bit::Get(value, bit));     // Устанавливаем или сбрасываем соответствующий бит
             CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
             CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, false);
         }
@@ -456,7 +456,7 @@ void FPGA::WriteAddress(uint8 reg)
 
     for (int i = 0; i < 4; i++)
     {
-        CPU::WritePin(pins[i], GetBit(reg, i) == 1);
+        CPU::WritePin(pins[i], Bit::Get(reg, i));
     }
 }
 
@@ -477,7 +477,7 @@ void FPGA::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POI
 
         if(Sign(d[i]) == -1)
         {
-            SetBit(c, 13);
+            Bit::Set(c, 13);
         }
 
         code[i] = (uint8)c;

@@ -94,6 +94,16 @@ public:
         static SPI_HandleTypeDef *Handle();
     };
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    class HCD
+    {
+        friend class CPU;
+    private:
+        static void Init();
+    public:
+        static HCD_HandleTypeDef *Handle();
+    };
+
 private:
 
     static void EnablePeriphery();
@@ -101,7 +111,6 @@ private:
     static void InitGPIOS();
     /// Ќачальна€ инициализаци€ управл€ющих выводов
     static void InitPins();
-
 };
 
 

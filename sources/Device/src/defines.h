@@ -13,9 +13,27 @@ typedef const char * const pString;
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);
 
-#define GetBit(value, bit) (((value) >> (bit)) & 0x01)
-#define SetBit(value, bit) ((value) |= (1 << (bit)))
-#define ClearBit(value, bit) ((value) &= (~(1 << bit)))
+namespace Bit
+{
+    template<typename T>
+    bool Get(T value, int bit)
+    {
+        return ((value >> bit) & 0x01) != 0;
+    }
+
+    template<typename T>
+    void Set(T &value, int bit)
+    {
+        value |= 1 << bit;
+    }
+
+    template<typename T>
+    void Clear(T &value, int bit)
+    {
+        value &= ~(1 << bit);
+    }
+};
+
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \
