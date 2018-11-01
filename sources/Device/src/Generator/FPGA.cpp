@@ -6,6 +6,7 @@
 #include "Generator/Generator.h"
 #include "Utils/Console.h"
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -365,10 +366,25 @@ void FPGA::SendData()
     
     uint8 *pointer = dataDDS[0];
 
-    for(int i = 0; i < FPGA_NUM_POINTS * 4; i++)
+    /// \todo Это временно так задержка организована
+    __IO int i = 0;
+
+    for(i = 0; i < 10; i++)
+    {
+        pointer = dataDDS[0];
+    }
+
+    Console::AddString("");
+
+    for(i = 0; i < FPGA_NUM_POINTS * 4; i++)
     {
         WriteByte(*pointer++);
+
+        /// \todo Это временно так задержка организована
+        __IO int j = 0;
+        for(j = 0; j < 10; j++) {}
         CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, true);
+        for(j = 0; j < 10; j++) {}
         CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, false);
     }
 

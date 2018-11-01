@@ -57,7 +57,7 @@ static const Settings defSet =
     {false, false},                         // sine_ManipulationEnabled
     {0, 0},                                 // sine_ManipulationMode
 
-    BINARY_U32(00000000, 00000000, 00010110, 00011000), // flag1
+    BINARY_U32(00000000, 00000000, 00010110, 00011100), // flag1
 //                          |||||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
 //                          |||||  ||||||||  |||||||------- 1  BIT_FREQ_INTERVAL  Interval_1
 //                          |||||  ||||||||  ||||||-------- 2  BIT_CONSOLE      
