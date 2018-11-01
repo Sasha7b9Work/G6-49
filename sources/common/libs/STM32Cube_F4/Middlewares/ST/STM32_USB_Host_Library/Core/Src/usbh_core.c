@@ -89,6 +89,11 @@ static void USBH_Process_OS(void const * argument);
   * @param  pUsrFunc: User Callback
   * @retval USBH Status
   */
+  
+#ifdef __cplusplus
+extern "C" {
+#endif
+  
 USBH_StatusTypeDef  USBH_Init(USBH_HandleTypeDef *phost, void (*pUsrFunc)(USBH_HandleTypeDef *phost, uint8_t ), uint8_t id)
 {
   /* Check whether the USB Host handle is valid */
@@ -133,6 +138,10 @@ USBH_StatusTypeDef  USBH_Init(USBH_HandleTypeDef *phost, void (*pUsrFunc)(USBH_H
   USBH_LL_Init(phost);
   return USBH_OK;
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 /**
   * @brief  HCD_Init 

@@ -401,6 +401,46 @@
               <FileType>5</FileType>
               <FilePath>.\src\libs\FatFS\ffconf.h</FilePath>
             </File>
+            <File>
+              <FileName>ff_gen_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff_gen_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\ff_gen_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\ff.h</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\diskio.h</FilePath>
+            </File>
+            <File>
+              <FileName>ccsbcs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\option\ccsbcs.c</FilePath>
+            </File>
+            <File>
+              <FileName>syscall.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\option\syscall.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -17,7 +17,9 @@
 
 #include "Utils/StringUtils.h"
 
-
 #include <stdarg.h>
+
+#include "usbh_diskio.h"
+#include "usbh_conf.h"
 
 #endif
