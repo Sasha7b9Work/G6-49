@@ -1,9 +1,12 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Display/Text.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Math.h"
 #include "Log.h"
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

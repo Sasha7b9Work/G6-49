@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "Generator.h"
 #include "Log.h"
@@ -14,10 +16,10 @@
 #include "Display/Console.h"
 #include "Utils/Math.h"
 #include "Utils/Debug.h"
-
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

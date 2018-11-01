@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Command.h"
 #include "defines.h"
 #include "Log.h"
@@ -11,6 +13,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/AddPageInput.h"
 #include <stdio.h>
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

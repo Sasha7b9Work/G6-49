@@ -243,11 +243,21 @@
     <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp" />
-    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
-    <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp" />
-    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp" />
-    <ClCompile Include="..\..\Panel\src\Generator\WaveGraphics.cpp" />
+    <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\WaveGraphics.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
