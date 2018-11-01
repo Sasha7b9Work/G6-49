@@ -209,7 +209,7 @@ void Governor::DrawValue(int x, int y) const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Page::Draw() const
+void Page::DrawOpened() const
 {
     int numPage = CurrentSubPage();
     for (int i = numPage * 4; i < numPage * 4 + 4; i++)
@@ -222,4 +222,6 @@ void Page::Draw() const
             items[i]->Draw(false, x, y);
         }
     }
+
+    funcOnDraw();
 }

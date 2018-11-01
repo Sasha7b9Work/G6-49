@@ -166,7 +166,7 @@ public:
     /// Возвращает номер текущей подстраницы
     int CurrentSubPage() const;
     /// Рисует открытую страницу
-    void Draw() const;
+    void DrawOpened() const;
     /// Рисует закрытую страницу
     void DrawClosed(int x, int y) const;
 

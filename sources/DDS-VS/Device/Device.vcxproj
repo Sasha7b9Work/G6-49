@@ -193,6 +193,8 @@
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
     <ClInclude Include="..\..\Device\src\Interface\Interface.h" />
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
+    <ClInclude Include="..\..\Device\src\libs\USBH\usbh_conf.h" />
+    <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\structs.h" />
@@ -252,6 +254,8 @@
     <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBH\usbh_conf.cpp" />
+    <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp" />
     <ClCompile Include="..\..\Device\src\main.cpp" />
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

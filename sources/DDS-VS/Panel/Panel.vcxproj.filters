@@ -49,6 +49,9 @@
     <Filter Include="Menu\Pages\Include">
       <UniqueIdentifier>{4d0f51ef-be5c-429b-9566-fd03a350c0c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FDrive">
+      <UniqueIdentifier>{7576f1ea-f5b3-454d-a20c-003fd2c00ccc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -257,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals_Load.cpp">
       <Filter>Menu\Pages</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
+      <Filter>FDrive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\Include\PageSignals.h">
       <Filter>Menu\Pages\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\FDrive\FDrive.h">
+      <Filter>FDrive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
