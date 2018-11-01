@@ -1987,9 +1987,19 @@
               <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageSignals_Load.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals_Load.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages/Include</GroupName>
+          <Files>
+            <File>
               <FileName>PageSignals.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals.h</FilePath>
+              <FilePath>.\src\Menu\Pages\Include\PageSignals.h</FilePath>
             </File>
           </Files>
         </Group>

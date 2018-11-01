@@ -4,7 +4,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/PageSignals.h"
+#include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
 #include <math.h>

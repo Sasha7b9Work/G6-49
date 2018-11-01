@@ -7,7 +7,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
-#include "Menu/Pages/PageSignals.h"
+#include "Menu/Pages/Include/PageSignals.h"
 #include "Menu/Pages/PageFrequencyCounter.h"
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/PageDebug.h"

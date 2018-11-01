@@ -102,9 +102,9 @@ DEF_PAGE_4( pService,                                                           
     "СЕРВИС", "SERVICE",
     "Сервисные функции",
     "Service functions",
-    bReset,
-    cLanguage,              ///< СЕРВИС - ЯЗЫК
-    pUSB,
-    pDebug,
+    &bReset,
+    &cLanguage,              ///< СЕРВИС - ЯЗЫК
+    &pUSB,
+    &pDebug,
     Page::Service, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )

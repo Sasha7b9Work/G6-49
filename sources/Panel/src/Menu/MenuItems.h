@@ -143,6 +143,7 @@ public:
          SB_Input,
          Registers,
          Main,
+         Settings_Load,
          Number
     };
     

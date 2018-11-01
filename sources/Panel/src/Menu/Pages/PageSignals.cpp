@@ -3,7 +3,7 @@
 #include "Settings/Settings.h"
 #include "Menu/MenuItems.h"
 #include "AddPageInput.h"
-#include "PageSignals.h"
+#include "Menu/Pages/Include/PageSignals.h"
 #include "Generator/Signals.h"
 #include "Generator/Generator.h"
 #include "Menu/Menu.h"
@@ -101,14 +101,15 @@ static bool OnKey(Control key)
     return false;
 }
 
-DEF_PAGE_5( pSignals,
+DEF_PAGE_6( pSignals,
     "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬", "SIGNAL SETTINGS",
     "", "",
-    cChannel,           ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
-    cFormA,             ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘ÓÏ‡
-    cParameters,        ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
-    bChangeParameter,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
-    cTypeTune,          ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «‡Ò˚ÎÍË
+    &cChannel,                          ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
+    &cFormA,                            ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘ÓÏ‡
+    &cParameters,                       ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
+    &bChangeParameter,                  ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
+    PageSignals::PageLoad::pointer,     ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿
+    &cTypeTune,                         ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «‡Ò˚ÎÍË
     Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
 )
 

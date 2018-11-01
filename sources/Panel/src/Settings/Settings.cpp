@@ -110,7 +110,7 @@ void Settings::Save()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Settings::Load(bool _default)
+void Settings::Load(bool /*_default*/)
 {
     /*
     CPU::FLASH_::EraseSettings();

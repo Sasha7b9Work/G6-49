@@ -612,11 +612,11 @@ DEF_PAGE_4_VAR(pRegisters,                                                      
 DEF_PAGE_5( pDebug,                                                                                                                  //--- ОТЛАДКА ---
     "ОТЛАДКА", "DEBUG",
     "", "",
-    pRegisters,     ///< ОТЛАДКА - Регистры
-    cConsole,       ///< ОТЛАДКА - Консоль
-    cStatistics,    ///< ОТЛАДКА - Статистика
-    cShowSends,     ///< ОТЛАДКА - Показывать параметры
-    bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
+    &pRegisters,     ///< ОТЛАДКА - Регистры
+    &cConsole,       ///< ОТЛАДКА - Консоль
+    &cStatistics,    ///< ОТЛАДКА - Статистика
+    &cShowSends,     ///< ОТЛАДКА - Показывать параметры
+    &bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
 //    cBigSymbols,    ///< ОТЛАДКА - Больщие символы
     Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey
 )

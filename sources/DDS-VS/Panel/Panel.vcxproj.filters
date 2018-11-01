@@ -46,6 +46,9 @@
     <Filter Include="Display\Font">
       <UniqueIdentifier>{255c5d44-7148-42c2-bd4d-c6717ab7f6f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu\Pages\Include">
+      <UniqueIdentifier>{4d0f51ef-be5c-429b-9566-fd03a350c0c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -251,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Buffer.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals_Load.cpp">
+      <Filter>Menu\Pages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -500,11 +506,11 @@
     <ClInclude Include="..\..\Panel\src\Generator\Signals.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h">
-      <Filter>Menu\Pages</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Utils\Buffer.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\Include\PageSignals.h">
+      <Filter>Menu\Pages\Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

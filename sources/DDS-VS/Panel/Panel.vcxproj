@@ -273,6 +273,7 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals_Load.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\BigNumber.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\Buffer.cpp" />
@@ -414,10 +415,10 @@
     <ClInclude Include="..\..\Panel\src\Menu\MenuItems.h" />
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\AddPageInput.h" />
+    <ClInclude Include="..\..\Panel\src\Menu\Pages\Include\PageSignals.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
-    <ClInclude Include="..\..\Panel\src\Menu\Pages\PageSignals.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Panel\src\structs.h" />
