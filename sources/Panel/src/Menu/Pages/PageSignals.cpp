@@ -1,4 +1,5 @@
-#pragma once
+#include "stdafx.h"
+#ifndef WIN32
 #include "Display/InputWindow.h"
 #include "Settings/Settings.h"
 #include "Menu/MenuItems.h"
@@ -7,6 +8,7 @@
 #include "Generator/Signals.h"
 #include "Generator/Generator.h"
 #include "Menu/Menu.h"
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

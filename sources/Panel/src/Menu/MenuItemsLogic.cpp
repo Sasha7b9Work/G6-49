@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Menu/Menu.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
@@ -11,6 +13,7 @@
 #include "Wave.h"
 #include "Generator/Signals.h"
 #include <string.h>
+#endif
 
 
 #ifdef WIN32

@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "MenuItems.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
@@ -7,6 +9,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Log.h"
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -8,14 +8,28 @@
 
 #include "Display/Console.h"
 #include "Display/Display.h"
+#include "Display/InputWindow.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "Display/Text.h"
 
+#include "Generator/Signals.h"
+
+#include "FDrive/FDrive.h"
+
 #include "Hardware/CPU.h"
+#include "Hardware/LTDC.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Timer4XX.h"
 #include "Hardware/VCP.h"
 
 #include "Menu/Menu.h"
+#include "Menu/Hint.h"
+#include "Menu/Pages/AddPageInput.h"
+#include "Menu/Pages/PageDebug.h"
+#include "Menu/Pages/PageFrequencyCounter.h"
+#include "Menu/Pages/PageService.h"
+#include "Menu/Pages/Include/PageSignals.h"
 
 #include "Settings/Settings.h"
 
@@ -31,5 +45,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
+#include <limits.h>
 
 #endif

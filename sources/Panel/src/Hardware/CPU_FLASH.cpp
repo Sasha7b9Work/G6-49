@@ -1,11 +1,13 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "CPU.h"
 #include "Settings/Settings.h"
-
 #ifdef OPEN
 #include <stm32f7xx.h>
 #else
 #include <stm32f4xx.h>
+#endif
 #endif
 
 

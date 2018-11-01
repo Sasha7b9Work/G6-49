@@ -240,22 +240,44 @@
     <ClCompile Include="..\..\Panel\src\Display\Painter.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\PainterSTM429.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Text.cpp" />
-    <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp" />
+    <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Wave.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\WaveGraphics.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\Timer4XX.cpp" />
-    <ClCompile Include="..\..\Panel\src\Hardware\VCP.cpp" />
+    <ClCompile Include="..\..\Panel\src\Hardware\Controls.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Timer4XX.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\VCP.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -265,21 +287,44 @@
     <ClCompile Include="..\..\Panel\src\main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Hint.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Menu.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuDrawing.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItems.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\MenuItemsGraphics.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4211;4774;4820;5045</DisableSpecificWarnings>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp" />
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\AddPageInput.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageDebug.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals_Load.cpp" />
-    <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp" />
+    <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Panel\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>

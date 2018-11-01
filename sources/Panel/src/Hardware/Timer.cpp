@@ -1,7 +1,8 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "Timer.h"
 #include "Log.h"
-
 #ifdef OPEN
 #include <stm32f7xx.h>
 #include "Hardware/Timer7XX.h"
@@ -9,9 +10,10 @@
 #include <stm32f4xx.h>
 #include "Hardware/Timer4XX.h"
 #endif
-
 #include <limits.h>
 #include "Hardware/CPU.h"
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef OPEN

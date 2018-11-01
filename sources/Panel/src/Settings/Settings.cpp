@@ -1,7 +1,10 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Settings.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Menu/Menu.h"
+#endif
 
 
 #ifdef WIN32

@@ -1,13 +1,15 @@
+#include "stdafx.h"
+#ifndef WIN32
 #ifdef OPEN
 #include <stm32f7xx.h>
 #else
 #include <stm32f4xx.h>
 #endif
-
 #include "CPU.h"
 #include "LTDC.h"
 #include "Hardware/Timer.h"
 #include "Log.h"
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
