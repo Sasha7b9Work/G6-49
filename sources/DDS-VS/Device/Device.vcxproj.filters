@@ -238,6 +238,9 @@
     <ClInclude Include="..\..\Device\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h">
+      <Filter>libs\HAL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -363,6 +366,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Log.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_hcd.c">
+      <Filter>libs\HAL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

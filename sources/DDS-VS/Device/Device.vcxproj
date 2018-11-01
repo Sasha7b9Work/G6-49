@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\common\CommonTypes.h" />
+    <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h" />
     <ClInclude Include="..\..\common\Wave.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
@@ -240,6 +241,9 @@
     <ClCompile Include="..\..\Common\Command.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_hcd.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Common\Wave.cpp" />
     <ClCompile Include="..\..\Device\src\FDrive\FDrive.cpp" />
     <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp" />
@@ -264,8 +268,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_conf.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp" />
-    <ClCompile Include="..\..\Device\src\Log.cpp" />
-    <ClCompile Include="..\..\Device\src\main.cpp" />
+    <ClCompile Include="..\..\Device\src\Log.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\main.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

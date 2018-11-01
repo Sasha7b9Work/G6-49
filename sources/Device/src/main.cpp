@@ -1,4 +1,7 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
+#include "FDrive/FDrive.h"
 #include "Generator/Generator.h"
 #include "Generator/AD5697.h"
 #include "Interface/Interface.h"
@@ -6,9 +9,7 @@
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
 #include <stm32f4xx_hal.h>
-
-
-extern SPI_HandleTypeDef hSPI1;
+#endif
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
@@ -17,6 +18,7 @@ int main()
     Timer::PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
     Generator::Init();
     Interface::Init();
+    FDrive::Init();
     CPU::SetReady();
   
     while (1)

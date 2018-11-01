@@ -4,36 +4,16 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef unsigned int       uint;
 typedef unsigned short     uint16;
+typedef unsigned short     uint16_t;
 typedef signed   short     int16;
 typedef unsigned long long uint64;
 typedef unsigned char      uint8;
+typedef unsigned char      uint8_t;
 typedef signed char        int8;
 typedef const char * const pString;
 
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);
-
-namespace Bit
-{
-    template<typename T>
-    bool Get(T value, int bit)
-    {
-        return ((value >> bit) & 0x01) != 0;
-    }
-
-    template<typename T>
-    void Set(T &value, int bit)
-    {
-        value |= 1 << bit;
-    }
-
-    template<typename T>
-    void Clear(T &value, int bit)
-    {
-        value &= ~(1 << bit);
-    }
-};
-
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \

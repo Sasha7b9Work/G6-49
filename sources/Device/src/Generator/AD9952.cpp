@@ -4,6 +4,7 @@
 #include "Hardware/CPU/CPU.h"
 #include "Utils/Console.h"
 #include "FPGA.h"
+#include "Utils/Math.h"
 #include <math.h>
 
 

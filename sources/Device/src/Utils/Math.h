@@ -39,6 +39,28 @@ bool FloatsIsEquals(float value0, float value1, float epsilonPart);
 bool IsEquals(float x, float y);
 
 float RandFloat(float min, float max);
+    
+    
+namespace Bit
+{
+    template<typename T>
+    bool Get(T value, int bit)
+    {
+        return ((value >> bit) & 0x01) != 0;
+    }
+
+    template<typename T>
+    void Set(T &value, int bit)
+    {
+        value |= 1 << bit;
+    }
+
+    template<typename T>
+    void Clear(T &value, int bit)
+    {
+        value &= ~(1 << bit);
+    }
+};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
