@@ -4,7 +4,7 @@
 #include "Utils/Console.h"
 #include "Generator/Generator.h"
 #include "Generator/FPGA.h"
-#include "Hardware/CPU.h"
+#include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Utils/Debug.h"

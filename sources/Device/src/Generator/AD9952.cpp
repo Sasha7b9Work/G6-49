@@ -1,7 +1,7 @@
 #include "AD9952.h"
 #include "defines.h"
 #include "GeneratroSettings.h"
-#include "Hardware/CPU.h"
+#include "Hardware/CPU/CPU.h"
 #include "Utils/Console.h"
 #include "FPGA.h"
 #include <math.h>

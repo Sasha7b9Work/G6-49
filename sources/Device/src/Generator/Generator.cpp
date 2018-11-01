@@ -2,7 +2,7 @@
 #include "FPGA.h"
 #include "Generator.h"
 #include "GeneratorSettingsTypes.h"
-#include "Hardware/CPU.h"
+#include "Hardware/CPU/CPU.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Utils/Console.h"
 #include "CommonTypes.h"

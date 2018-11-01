@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "FreqMeter.h"
-#include "Hardware/CPU.h"
+#include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
 #include "Interface/Interface.h"
 #include "Utils/Debug.h"

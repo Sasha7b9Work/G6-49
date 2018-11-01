@@ -1,6 +1,6 @@
 #include "FPGA.h"
 #include "defines.h"
-#include "Hardware/CPU.h"
+#include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Generator/Generator.h"

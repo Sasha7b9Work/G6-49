@@ -46,6 +46,9 @@
     <Filter Include="FDrive">
       <UniqueIdentifier>{0d9e9c65-8aa9-46a7-8277-a42a40e62415}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hardware\CPU">
+      <UniqueIdentifier>{0394f09f-a093-43c9-9c8b-5d8bd73044da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -105,20 +108,11 @@
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Hardware\CPU.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h">
       <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Hardware\stm32.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Hardware\stm407.h">
-      <Filter>Hardware</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\Timer.h">
       <Filter>Hardware</Filter>
@@ -232,6 +226,18 @@
       <Filter>FDrive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\stdafx.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\CPU\CPU.h">
+      <Filter>Hardware\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\CPU\stm32.h">
+      <Filter>Hardware\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\CPU\stm407.h">
+      <Filter>Hardware\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -285,23 +291,11 @@
     <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <Filter>libs\CMSIS</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c">
       <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp">
-      <Filter>Hardware</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp">
       <Filter>Hardware</Filter>
@@ -351,10 +345,25 @@
     <ClCompile Include="..\..\Device\src\FDrive\FDrive.cpp">
       <Filter>FDrive</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU_HCD.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\stdafx.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU.cpp">
+      <Filter>Hardware\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_HCD.cpp">
+      <Filter>Hardware\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_IT.cpp">
+      <Filter>Hardware\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm32.cpp">
+      <Filter>Hardware\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm407.cpp">
+      <Filter>Hardware\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f407xx.s">

@@ -185,10 +185,10 @@
     <ClInclude Include="..\..\Device\src\Generator\Generator.h" />
     <ClInclude Include="..\..\Device\src\Generator\GeneratorSettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h" />
-    <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\CPU\CPU.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\CPU\stm32.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\CPU\stm407.h" />
     <ClInclude Include="..\..\Device\src\Hardware\EEPROM.h" />
-    <ClInclude Include="..\..\Device\src\Hardware\stm32.h" />
-    <ClInclude Include="..\..\Device\src\Hardware\stm407.h" />
     <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Device\src\Hardware\Timer4XX.h" />
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
@@ -197,6 +197,7 @@
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h" />
+    <ClInclude Include="..\..\Device\src\Log.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\stdafx.h" />
@@ -248,12 +249,12 @@
     <ClCompile Include="..\..\Device\src\Generator\Generator.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\GeneratorSettings.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\Multiplexor.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU_HCD.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_HCD.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm32.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm407.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Timer4XX.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp" />
@@ -263,6 +264,7 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_conf.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp" />
+    <ClCompile Include="..\..\Device\src\Log.cpp" />
     <ClCompile Include="..\..\Device\src\main.cpp" />
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

@@ -2,7 +2,7 @@
 #include "Generator/Generator.h"
 #include "Generator/AD5697.h"
 #include "Interface/Interface.h"
-#include "Hardware/CPU.h"
+#include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
 #include <stm32f4xx_hal.h>
