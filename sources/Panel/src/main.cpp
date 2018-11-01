@@ -1,8 +1,11 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
+#endif
 
 
 /** @defgroup Panel

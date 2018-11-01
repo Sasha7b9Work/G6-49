@@ -264,6 +264,9 @@
     <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
       <Filter>FDrive</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\stdafx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -520,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\FDrive\FDrive.h">
       <Filter>FDrive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\stdafx.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

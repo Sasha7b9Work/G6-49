@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "Log.h"
 #include "Utils/StringUtils.h"
@@ -10,11 +12,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
+#endif
+
 
 #ifndef LANG
 #define LANG 0
 #define LANG_RU true
 #endif
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
