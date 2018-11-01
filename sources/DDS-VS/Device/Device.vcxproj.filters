@@ -231,6 +231,7 @@
     <ClInclude Include="..\..\Device\src\FDrive\FDrive.h">
       <Filter>FDrive</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -353,6 +354,7 @@
     <ClCompile Include="..\..\Device\src\Hardware\CPU_HCD.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f407xx.s">

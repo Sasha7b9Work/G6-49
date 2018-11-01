@@ -199,6 +199,7 @@
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsTypes.h" />
+    <ClInclude Include="..\..\Device\src\stdafx.h" />
     <ClInclude Include="..\..\Device\src\structs.h" />
     <ClInclude Include="..\..\Device\src\Utils\Console.h" />
     <ClInclude Include="..\..\Device\src\Utils\Debug.h" />
@@ -235,7 +236,9 @@
     <ClInclude Include="..\..\Device\src\Utils\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Common\Command.cpp" />
+    <ClCompile Include="..\..\Common\Command.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Common\Wave.cpp" />
     <ClCompile Include="..\..\Device\src\FDrive\FDrive.cpp" />
     <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp" />
@@ -296,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Utils\Console.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\Debug.cpp" />
