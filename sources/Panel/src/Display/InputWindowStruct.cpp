@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Log.h"
 #include "Generator/Signals.h"
 #include "Display/Painter.h"
@@ -11,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

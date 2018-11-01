@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Console.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Display/Painter.h"
@@ -11,6 +13,8 @@
 #include "Utils/Statistics.h"
 #include "Utils/Debug.h"
 #include <stdlib.h>
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #ifdef OPEN

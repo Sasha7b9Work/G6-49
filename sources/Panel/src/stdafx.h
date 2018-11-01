@@ -12,6 +12,7 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
+#include "Display/font/Font.h"
 
 #include "Generator/Signals.h"
 

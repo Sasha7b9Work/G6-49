@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Console.h"
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
@@ -5,6 +7,7 @@
 #include "Settings/Settings.h"
 #include <string.h>
 #include <stdio.h>
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

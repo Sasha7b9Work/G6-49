@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
@@ -8,6 +10,7 @@
 #include "Display/Display.h"
 #include <math.h>
 #include <stdio.h>
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
