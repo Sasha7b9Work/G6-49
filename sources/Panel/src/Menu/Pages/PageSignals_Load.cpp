@@ -69,5 +69,5 @@ DEF_PAGE_4( pLoad,                                                              
     &bDown,     ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Âíèç
     &bEnter,    ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Enter
     &bChoose,   ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Óñòàíîâèòü
-    Page::Settings_Load, PageSignals::pointer, FuncActive, FuncPress, OnKey, FDrive::Draw
+    Page::Settings_Load, PageSignals::pointer, FuncActive, FuncPress, OnKey, FDrive::Graphics::Draw
 )

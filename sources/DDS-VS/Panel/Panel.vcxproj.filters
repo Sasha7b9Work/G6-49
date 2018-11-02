@@ -261,11 +261,11 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals_Load.cpp">
       <Filter>Menu\Pages</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
-      <Filter>FDrive</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\stdafx.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\FDrive\FDriveGraphics.cpp">
+      <Filter>FDrive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

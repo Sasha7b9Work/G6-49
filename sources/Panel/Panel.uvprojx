@@ -1757,9 +1757,9 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
-              <FileName>FDrive.cpp</FileName>
+              <FileName>FDriveGraphics.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDrive.cpp</FilePath>
+              <FilePath>.\src\FDrive\FDriveGraphics.cpp</FilePath>
             </File>
             <File>
               <FileName>FDrive.h</FileName>
