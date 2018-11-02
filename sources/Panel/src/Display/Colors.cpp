@@ -66,14 +66,6 @@ void Color::InitGlobalColors()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Color::Log(Color color)
-{
-#define colorVal (COLOR(color.value))
-
-    LOG_WRITE("Color %d R=%d, G=%d, B=%d", color.value, R_FROM_COLOR(colorVal), G_FROM_COLOR(colorVal), B_FROM_COLOR(colorVal));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 Color Color::BorderMenu(bool shade)
 {
     return MenuTitle(shade);

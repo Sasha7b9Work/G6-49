@@ -259,7 +259,7 @@ void Generator::SendToInterface(const uint8 *buffer, uint16 size)
     CommandPanel command(*buffer);
     if(Debug::ShowSends() && command.value != CommandPanel::RequestData)
     {
-        LOG_WRITE("передаю %s", command.Trace(buffer));
+        //LOG_WRITE("передаю %s", command.Trace(buffer));
     }
 
     CPU::SPI4_::Transmit((uint8 *)&size, 2);
@@ -297,6 +297,8 @@ void Generator::ProcessDataFPGA()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::ReceiveAndRun(uint16 numBytes)
 {
+    LOG_WRITE("Требуется принять %d байт", numBytes);
+
     uint8 *buffer = (uint8 *)malloc(numBytes);
 
     if (buffer)

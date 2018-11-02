@@ -19,7 +19,7 @@ template<class T> void LoggingArray(T *data, char *format, int num)
         strcat(message, buffer);
     }
 
-    LOG_WRITE(message);
+    //LOG_WRITE(message);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

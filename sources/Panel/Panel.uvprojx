@@ -1757,6 +1757,11 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
+              <FileName>FDrive.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\FDrive.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FDriveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FDrive\FDriveGraphics.cpp</FilePath>
@@ -1795,6 +1800,16 @@
               <FileName>Generator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Generator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Interface.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Interface.h</FilePath>
             </File>
             <File>
               <FileName>Wave.cpp</FileName>

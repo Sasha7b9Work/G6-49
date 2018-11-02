@@ -15,6 +15,7 @@
 
 #include "Interface/Interface.h"
 
+#include "Utils/Console.h"
 #include "Utils/StringUtils.h"
 
 #include <stdarg.h>

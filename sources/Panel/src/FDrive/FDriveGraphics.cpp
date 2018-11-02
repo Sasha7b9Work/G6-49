@@ -9,6 +9,32 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define RECS_ON_PAGE    10
+
+/// Номер первого выведенного каталога. Всего может быть выведено RECS_ON_PAGE катаологов
+static int firstDir = 0;
+/// Номер подсвеченного каталога
+static int curDir = 0;
+/// Номер первого выведенного файла. Всего может быть выведено RECS_ON_PAGE файлов
+static int firstFile = 0;
+/// Номер подсвеченного файла
+static int curFile = 0;
+
+static int numDirs = 0;
+
+static int numFiles = 0;
+/// Путь к текущему каталогу
+static char directory[255] = "\\";
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void FDrive::Graphics::Init()
+{
+    strcpy(directory, "\\");
+    firstDir = firstFile = curDir = curFile = 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Graphics::Draw()
 {
     int x = Wave::Graphics::X();
@@ -16,4 +42,6 @@ void FDrive::Graphics::Draw()
     int width = Wave::Graphics::Width() - 2;
     int height = Wave::Graphics::Height() * 2;
     Painter::FillRegion(x, y, width, height, Color::BACK);
+
+    FDrive::GetNumDirsAndFiles(directory, &numDirs, &numFiles);
 }

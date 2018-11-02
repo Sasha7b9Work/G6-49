@@ -54,7 +54,6 @@ public:
     uint8 value;
 
     static void InitGlobalColors();
-    static void Log(Color color);
 
     Color& operator=(const Color &color);
 

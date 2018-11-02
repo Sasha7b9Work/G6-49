@@ -8,6 +8,7 @@
 #include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
+#include "Utils/Console.h"
 #include <stm32f4xx_hal.h>
 #endif
 
@@ -24,5 +25,6 @@ int main()
     while (1)
     {
         FreqMeter::Update();
+        Console::AddString("testing interface");
     }
 }

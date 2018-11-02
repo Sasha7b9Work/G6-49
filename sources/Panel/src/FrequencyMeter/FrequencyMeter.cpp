@@ -87,8 +87,6 @@ void FrequencyMeter::LoadLevel()
     Limitation(&value, 0, max - 1);
 
     Generator::LoadRegister(Register::FreqMeterLevel, (uint64)value);
-
-    LOG_WRITE("%d", value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,8 +101,6 @@ void FrequencyMeter::LoadHysteresis()
     Limitation(&value, 0, max - 1);
 
     Generator::LoadRegister(Register::FreqMeterHYS, (uint64)value);
-
-    LOG_WRITE("%d", value);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

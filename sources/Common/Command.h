@@ -63,16 +63,14 @@ struct CommandPanel
         SetManipulationMode,
     //  0
     //  RequestData
-        RequestData,                ///< Запрос данных
+        RequestData,                ///< Запрос данных. Панель постоянно опрашивает генератор на предмет наличия данных для передачи.
     //  0            1       2...8193
     //  LoadFormDDS, NumChan Points
         LoadFormDDS,                ///< Загружает точки сигнала произовольной формы
         Number
     } value;
     CommandPanel(E v) : value(v) {};
-    CommandPanel(const uint8 v) : value((E)v)
-    {
-    };
+    CommandPanel(const uint8 v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
     pString Name() const;
     pString Trace(const uint8 *buffer) const;
@@ -87,7 +85,7 @@ struct CommandGenerator
     {
         //                      0           1...5
         FreqMeasure = 1,   ///< FreqMeasure частота                                                        /* Результат измерения частотомера */
-        Log = 2,
+        Log         = 2,
         Number
     } value;
 };

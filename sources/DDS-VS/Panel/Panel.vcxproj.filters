@@ -267,6 +267,12 @@
     <ClCompile Include="..\..\Panel\src\FDrive\FDriveGraphics.cpp">
       <Filter>FDrive</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
+      <Filter>FDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\Interface.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -526,6 +532,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\stdafx.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Generator\Interface.h">
+      <Filter>Generator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
