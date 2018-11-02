@@ -17,7 +17,7 @@ pString Command::Name() const
         StructName(pString n) : name(n) {};
     } names[Number] =
     {
-        "None",
+        "RequestData",
         "EnableChannel",
         "SetFormWave",
         "SetFrequency",
@@ -43,7 +43,6 @@ pString Command::Name() const
         "SetPeriod",
         "SetPolarity",
         "SetModeManipulation",
-        "RequestData",
         "LoadFormDDS"
     };
     if(value < Number)
@@ -71,7 +70,7 @@ pString Command::Trace(const uint8 *buffer) const
    
     switch(value)
     {
-        case None:
+        case RequestData:
             break;
         case EnableChannel:
             strlcat(result, buffer[2] ? "true" : "false", SIZE - 1);
@@ -136,8 +135,6 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case SetManipulationMode:
             strlcat(result, buffer[2] ? "1" : "0", SIZE - 1);
-            break;
-        case RequestData:
             break;
         case LoadFormDDS:
             strlcat(result, "точки", SIZE - 1);

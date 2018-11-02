@@ -28,7 +28,7 @@ static const struct FuncInterface
 }
 commands[Command::Number] =
 {
-    Interface::Empty,
+    Interface::Empty,               ///< RequestData
     Interface::EnableChannel,
     Interface::SetFormWave,
     Interface::ParameterValue,      ///< SetFrequency
@@ -54,7 +54,6 @@ commands[Command::Number] =
     Interface::ParameterValue,      ///< SetPeriod
     Interface::SetPolarity,
     Interface::SetManipulationMode,
-    Interface::Empty,               ///< RequestData
     Interface::LoadFormDDS
 };
 

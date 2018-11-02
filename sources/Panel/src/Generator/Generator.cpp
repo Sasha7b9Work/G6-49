@@ -45,13 +45,6 @@ void Generator::LoadRegister(Register reg, uint64 value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::EmptyCommand()
-{
-    uint8 buffer[10] = {Command::None};
-    SendToInterface(buffer, 10);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
     SendToInterface(Buffer(Command::ModeDebug, enable ? 1u : 0u));
@@ -231,7 +224,7 @@ void Generator::SetParameter(ParameterValue *param)
         Command::SetManipulationPeriod,
         Command::SetPacketPeriod,
         Command::SetPacketNumber,
-        Command::None
+        Command::RequestData
     };
 
     uint8 buffer[6] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel()};

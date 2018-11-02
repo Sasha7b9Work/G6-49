@@ -25,7 +25,9 @@ struct Command
 {
     enum E
     {
-        None,
+    //  0
+    //  RequestData
+        RequestData,                ///< Запрос данных. Панель постоянно опрашивает генератор на предмет наличия данных для передачи.
         EnableChannel,              ///< Включить/выключить канал
     //  0           1       2
     //  SetFomrWave NumChan Form
@@ -61,9 +63,6 @@ struct Command
     //  0                   1        2
     //  SetManipulationMode NUM_CHAN mode
         SetManipulationMode,
-    //  0
-    //  RequestData
-        RequestData,                ///< Запрос данных. Панель постоянно опрашивает генератор на предмет наличия данных для передачи.
     //  0            1       2...8193
     //  LoadFormDDS, NumChan Points
         LoadFormDDS,                ///< Загружает точки сигнала произовольной формы
