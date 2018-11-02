@@ -101,9 +101,7 @@ public:
     private:
         static void Init();
     public:
-        static HCD_HandleTypeDef *Handle();
 
-    private:
         static HCD_HandleTypeDef handle;
     };
 
