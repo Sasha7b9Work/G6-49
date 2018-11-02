@@ -47,7 +47,7 @@ void Generator::SetFormWave(Chan ch, Form form)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Chan ch, CommandPanel command, float value)
+void Generator::SetParameter(Chan ch, Command command, float value)
 {
     static const struct StructFunc
     {
@@ -55,7 +55,7 @@ void Generator::SetParameter(Chan ch, CommandPanel command, float value)
         pFuncChF func;
         StructFunc(pFuncChF f) : func(f) {};
     }
-    func[CommandPanel::Number] =
+    func[Command::Number] =
     {
         EmptyFunc,
         EmptyFunc,

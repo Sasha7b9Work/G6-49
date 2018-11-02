@@ -17,7 +17,7 @@ public:
 
     static void SetFormWave(Chan ch, Form form);
 
-    static void SetParameter(Chan ch, CommandPanel command, float value);
+    static void SetParameter(Chan ch, Command command, float value);
 
     static void SetOffset(Chan ch, float offset);
 

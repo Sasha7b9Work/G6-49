@@ -26,7 +26,7 @@ static const struct FuncInterface
     pFuncInterfaceVV func;
     FuncInterface(pFuncInterfaceVV f) : func(f) {};
 }
-commands[CommandPanel::Number] =
+commands[Command::Number] =
 {
     Interface::Empty,
     Interface::EnableChannel,
@@ -227,7 +227,7 @@ void Interface::WriteRegister()
 void Interface::ParameterValue()
 {
     Chan ch = (Chan::E)recv[1];
-    CommandPanel command = (CommandPanel::E)recv[0];
+    Command command = (Command::E)recv[0];
     Generator::SetParameter(ch, command, Buffer2Float(recv + 2));
 }
 
@@ -277,11 +277,11 @@ void Interface::ReceiveCallback()
 
     CPU::SPI1_::Receive(recv, bs.halfWord);             // И принимаем данные
 
-    if(recv[0] == CommandPanel::RequestData)
+    if(recv[0] == Command::RequestData)
     {
         SendData();
     }
-    else if(recv[0] < CommandPanel::Number)   /// \todo примитивная проверка на ошибки
+    else if(recv[0] < Command::Number)   /// \todo примитивная проверка на ошибки
     {
         commands[recv[0]].func();
     }

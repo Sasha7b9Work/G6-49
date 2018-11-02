@@ -25,13 +25,13 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan ch, bool enable)
 {
-    SendToInterface(Buffer(CommandPanel::EnableChannel, ch, enable ? 1u : 0u));
+    SendToInterface(Buffer(Command::EnableChannel, ch, enable ? 1u : 0u));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadStartMode(Chan ch, int mode)
 {
-    SendToInterface(Buffer(CommandPanel::SetStartMode, ch, (uint8)mode));
+    SendToInterface(Buffer(Command::SetStartMode, ch, (uint8)mode));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ void Generator::LoadRegister(Register reg, uint64 value)
 {
     INIT_BIT_SET_64(bitSet, value);
 
-    uint8 buffer[10] = {CommandPanel::WriteRegister, (uint8)reg,   bitSet.byte0, bitSet.byte1, bitSet.byte2, bitSet.byte3,
+    uint8 buffer[10] = {Command::WriteRegister, (uint8)reg,   bitSet.byte0, bitSet.byte1, bitSet.byte2, bitSet.byte3,
                                                                     bitSet.byte4, bitSet.byte5, bitSet.byte6, bitSet.byte7};
     SendToInterface(buffer, 10);
 }
@@ -47,20 +47,20 @@ void Generator::LoadRegister(Register reg, uint64 value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::EmptyCommand()
 {
-    uint8 buffer[10] = {CommandPanel::None};
+    uint8 buffer[10] = {Command::None};
     SendToInterface(buffer, 10);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
-    SendToInterface(Buffer(CommandPanel::ModeDebug, enable ? 1u : 0u));
+    SendToInterface(Buffer(Command::ModeDebug, enable ? 1u : 0u));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Reset()
 {
-    SendToInterface(Buffer(CommandPanel::RunReset));
+    SendToInterface(Buffer(Command::RunReset));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ void Generator::SetFormWave(Wave *w)
     }
     else
     {
-        SendToInterface(Buffer(CommandPanel::SetFormWave, ch, form));
+        SendToInterface(Buffer(Command::SetFormWave, ch, form));
     }
 }
 
@@ -168,7 +168,7 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NU
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2])
 {
-    SendToInterface(Buffer(CommandPanel::LoadFormDDS, ch));
+    SendToInterface(Buffer(Command::LoadFormDDS, ch));
 
     SendToInterface(points, FPGA_NUM_POINTS * 2);
 }
@@ -191,15 +191,15 @@ void Generator::SetParameter(ParameterChoice *param)
 {
     static const struct StructCommand
     {
-        CommandPanel command;
-        StructCommand(CommandPanel::E c) : command(c) {};
+        Command command;
+        StructCommand(Command::E c) : command(c) {};
     }
     commands[ParameterChoice::Number] =
     {
-        CommandPanel::SetPolarity,
-        CommandPanel::SetStartMode,
-        CommandPanel::SetManipulationMode,
-        CommandPanel::SetManipulation
+        Command::SetPolarity,
+        Command::SetStartMode,
+        Command::SetManipulationMode,
+        Command::SetManipulation
     };
 
     SendToInterface(Buffer((uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()));
@@ -210,28 +210,28 @@ void Generator::SetParameter(ParameterValue *param)
 {
     static const struct StructCommand
     {
-        CommandPanel command;
-        StructCommand(CommandPanel::E c) : command(c) {};
+        Command command;
+        StructCommand(Command::E c) : command(c) {};
     }
     commands[ParameterValue::Number] =
     {
-        CommandPanel::SetFrequency,
-        CommandPanel::SetPeriod,
-        CommandPanel::SetAmplitude,
-        CommandPanel::SetOffset,
-        CommandPanel::SetDuration,
-        CommandPanel::SetDutyRatio,
-        CommandPanel::SetPhase,
-        CommandPanel::SetDelay,
-        CommandPanel::SetDurationRise,
-        CommandPanel::SetDurationFall,
-        CommandPanel::SetDurationStady,
-        CommandPanel::SetDutyFactor,
-        CommandPanel::SetManipulationDuration,
-        CommandPanel::SetManipulationPeriod,
-        CommandPanel::SetPacketPeriod,
-        CommandPanel::SetPacketNumber,
-        CommandPanel::None
+        Command::SetFrequency,
+        Command::SetPeriod,
+        Command::SetAmplitude,
+        Command::SetOffset,
+        Command::SetDuration,
+        Command::SetDutyRatio,
+        Command::SetPhase,
+        Command::SetDelay,
+        Command::SetDurationRise,
+        Command::SetDurationFall,
+        Command::SetDurationStady,
+        Command::SetDutyFactor,
+        Command::SetManipulationDuration,
+        Command::SetManipulationPeriod,
+        Command::SetPacketPeriod,
+        Command::SetPacketNumber,
+        Command::None
     };
 
     uint8 buffer[6] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel()};
@@ -256,8 +256,8 @@ void Generator::SendToInterface(const Buffer &buffer)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SendToInterface(const uint8 *buffer, uint16 size)
 {
-    CommandPanel command(*buffer);
-    if(Debug::ShowSends() && command.value != CommandPanel::RequestData)
+    Command command(*buffer);
+    if(Debug::ShowSends() && command.value != Command::RequestData)
     {
         //LOG_WRITE("передаю %s", command.Trace(buffer));
     }
@@ -280,7 +280,7 @@ void Generator::SendToInterface(const uint8 *buffer, uint16 size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::ProcessDataFPGA()
 {
-    uint8 command = CommandPanel::RequestData;
+    uint8 command = Command::RequestData;
 
     SendToInterface(&command, 1);
 

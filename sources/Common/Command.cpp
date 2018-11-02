@@ -9,7 +9,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-pString CommandPanel::Name() const
+pString Command::Name() const
 {
     static const struct StructName
     {
@@ -51,7 +51,7 @@ pString CommandPanel::Name() const
         return names[value].name;
     }
     
-    /// \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию CommandPanel::Trace()
+    /// \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию Command::Trace()
     /// Возможно, это происходит из-за использования CCM RAM
     const int SIZE = 23;
     static char buffer[SIZE + 1];
@@ -61,9 +61,9 @@ pString CommandPanel::Name() const
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-pString CommandPanel::Trace(const uint8 *buffer) const
+pString Command::Trace(const uint8 *buffer) const
 {
-    /// \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию CommandPanel::Trace()
+    /// \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию Command::Trace()
     static const int SIZE = 28;
     static char result[SIZE];
   

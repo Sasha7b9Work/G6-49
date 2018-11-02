@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Возможные команды для передачи в основной процессор
-struct CommandPanel
+struct Command
 {
     enum E
     {
@@ -69,8 +69,8 @@ struct CommandPanel
         LoadFormDDS,                ///< Загружает точки сигнала произовольной формы
         Number
     } value;
-    CommandPanel(E v) : value(v) {};
-    CommandPanel(const uint8 v) : value((E)v) {};
+    Command(E v) : value(v) {};
+    Command(const uint8 v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
     pString Name() const;
     pString Trace(const uint8 *buffer) const;
