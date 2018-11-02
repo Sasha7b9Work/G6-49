@@ -43,7 +43,9 @@ pString Command::Name() const
         "SetPeriod",
         "SetPolarity",
         "SetModeManipulation",
-        "LoadFormDDS"
+        "LoadFormDDS",
+        "FreqMeasure",
+        "Log"
     };
     if(value < Number)
     {
@@ -138,6 +140,11 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case LoadFormDDS:
             strlcat(result, "точки", SIZE - 1);
+            break;
+        case FreqMeasure:
+            break;
+        case Log:
+            break;
         case Number:
             break;
     }

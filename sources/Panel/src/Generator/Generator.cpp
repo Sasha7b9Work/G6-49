@@ -298,7 +298,7 @@ void Generator::ReceiveAndRun(uint16 numBytes)
     {
         CPU::SPI4_::Receive(buffer, numBytes);
 
-        if (buffer[0] == CommandGenerator::FreqMeasure)
+        if (buffer[0] == Command::FreqMeasure)
         {
             BitSet32 bs;
             for (int i = 0; i < 4; i++)
@@ -307,7 +307,7 @@ void Generator::ReceiveAndRun(uint16 numBytes)
             }
             FrequencyMeter::SetMeasure(bs.word);
         }
-        else if (buffer[0] == CommandGenerator::Log)
+        else if (buffer[0] == Command::Log)
         {
             char buf[LENGTH_SPI_BUFFER];
             for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)

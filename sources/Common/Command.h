@@ -66,6 +66,12 @@ struct Command
     //  0            1       2...8193
     //  LoadFormDDS, NumChan Points
         LoadFormDDS,                ///< Загружает точки сигнала произовольной формы
+    //  0            1...5
+    //  FreqMeasure, измерение
+        FreqMeasure,                ///< Пересылка показаний частотомера в панель
+    //  0
+    //  Log
+        Log,                        ///< Сообщение для вывода в лог
         Number
     } value;
     Command(E v) : value(v) {};
@@ -77,17 +83,6 @@ private:
     pString Value(uint8 *buffer) const;
 };
 
-/// Возможные команды, принимаемые от основного процессора
-struct CommandGenerator
-{
-    enum E
-    {
-        //                      0           1...5
-        FreqMeasure = 1,   ///< FreqMeasure частота                                                        /* Результат измерения частотомера */
-        Log         = 2,
-        Number
-    } value;
-};
 
 struct Register
 {
