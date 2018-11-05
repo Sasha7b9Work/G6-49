@@ -4,7 +4,7 @@
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
 #include "Display/InputWindow.h"
-#include "Generator/Generator.h"
+#include "Generator/GeneratorPanel.h"
 #include "Generator/Signals.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"

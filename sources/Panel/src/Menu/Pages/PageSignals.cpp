@@ -6,7 +6,7 @@
 #include "AddPageInput.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Generator/Signals.h"
-#include "Generator/Generator.h"
+#include "Generator/GeneratorPanel.h"
 #include "Menu/Menu.h"
 #endif
 

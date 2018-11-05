@@ -1,8 +1,8 @@
 #include "defines.h"
 #include "Log.h"
-#include "Interface.h"
+#include "InterfaceDevice.h"
 #include "Utils/Console.h"
-#include "Generator/Generator.h"
+#include "Generator/GeneratorDevice.h"
 #include "Generator/FPGA.h"
 #include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
@@ -28,33 +28,35 @@ static const struct FuncInterface
 }
 commands[Command::Number] =
 {
-    Interface::Empty,               ///< RequestData
-    Interface::EnableChannel,
-    Interface::SetFormWave,
-    Interface::ParameterValue,      ///< SetFrequency
-    Interface::ParameterValue,      ///< SetAmplitude
-    Interface::ParameterValue,      ///< SetOffset
-    Interface::ParameterValue,      ///< SetDuration
-    Interface::ParameterValue,      ///< SetDutyRatio
-    Interface::ParameterValue,      ///< SetPhase
-    Interface::RunReset,
-    Interface::ModeDebug,
-    Interface::ParameterValue,      ///< SetDelay
-    Interface::WriteRegister,
-    Interface::Empty,               ///< SetDurationRise
-    Interface::Empty,               ///< SetDurationFall
-    Interface::Empty,               ///< SetDurationStady
-    Interface::Empty,               ///< SetDutyFactor
-    Interface::SetManipulation,
-    Interface::ParameterValue,      ///< SetManipulationDuration
-    Interface::ParameterValue,      ///< SetManipulationPeriod
-    Interface::ParameterValue,      ///< SetPacketPeriod
-    Interface::ParameterValue,      ///< SetPacketNumber
-    Interface::SetStartMode,
-    Interface::ParameterValue,      ///< SetPeriod
-    Interface::SetPolarity,
-    Interface::SetManipulationMode,
-    Interface::LoadFormDDS
+/* RequestData             */ Interface::Empty,
+/* EnableChannel           */ Interface::EnableChannel,
+/* SetFormWave             */ Interface::SetFormWave,
+/* SetFrequency            */ Interface::ParameterValue,
+/* SetAmplitude            */ Interface::ParameterValue,
+/* SetOffset               */ Interface::ParameterValue,
+/* SetDuration             */ Interface::ParameterValue,
+/* SetDutyRatio            */ Interface::ParameterValue,
+/* SetPhase                */ Interface::ParameterValue,
+/* RunReset                */ Interface::RunReset,
+/* ModeDebug               */ Interface::ModeDebug,
+/* SetDelay                */ Interface::ParameterValue,
+/* WriteRegister           */ Interface::WriteRegister,
+/* SetDurationRise         */ Interface::Empty,
+/* SetDurationFall         */ Interface::Empty,
+/* SetDurationStady        */ Interface::Empty,
+/* SetDutyFactor           */ Interface::Empty,
+/* SetManipulation         */ Interface::SetManipulation,
+/* SetManipulationDuration */ Interface::ParameterValue,
+/* SetManipulationPeriod   */ Interface::ParameterValue,
+/* SetPacketPeriod         */ Interface::ParameterValue,
+/* SetPacketNumber         */ Interface::ParameterValue,
+/* SetStartMode            */ Interface::SetStartMode,
+/* SetPeriod               */ Interface::ParameterValue,
+/* SetPolarity             */ Interface::SetPolarity,
+/* SetManipulationMode     */ Interface::SetManipulationMode,
+/* LoadFromDDS             */ Interface::LoadFormDDS,
+/* FreqMeasure             */ Interface::Empty,
+/* Log                     */ Interface::Empty
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -291,7 +293,7 @@ void Interface::SendData()
 {
     if (Console::ExistString())
     {
-        char buffer[LENGTH_SPI_BUFFER] = {CommandGenerator::Log};
+        char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
         Console::GetString(buffer + 1);
 
         uint16 numBytes = LENGTH_SPI_BUFFER;
@@ -305,7 +307,7 @@ void Interface::SendData()
         CPU::SPI1_::Transmit(&numBytes, 2);
 
         uint8 buffer[5];
-        buffer[0] = CommandGenerator::FreqMeasure;
+        buffer[0] = Command::FreqMeasure;
         INIT_BIT_SET_32(bs, freqForSend);
         for(int i = 0; i < 4; i++)
         {

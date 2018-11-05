@@ -7,13 +7,13 @@
 #include "FDrive/FDrive.h"
 #include "FreqMeter/FreqMeter.h"
 
-#include "Generator/Generator.h"
+#include "Generator/GeneratorDevice.h"
 
 #include "Hardware/Timer.h"
 #include "Hardware/CPU/CPU.h"
 #include "Hardware/VCP.h"
 
-#include "Interface/Interface.h"
+#include "Interface/InterfaceDevice.h"
 
 #include "Utils/Console.h"
 #include "Utils/StringUtils.h"

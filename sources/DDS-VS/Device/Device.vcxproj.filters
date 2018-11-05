@@ -72,9 +72,6 @@
     <ClInclude Include="..\..\Device\src\defines.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Generator\Generator.h">
-      <Filter>Generator</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h">
       <Filter>Generator</Filter>
     </ClInclude>
@@ -83,9 +80,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Generator\AD9952.h">
       <Filter>Generator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Interface\Interface.h">
-      <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Generator\FPGA.h">
       <Filter>Generator</Filter>
@@ -241,6 +235,12 @@
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h">
       <Filter>libs\HAL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Generator\GeneratorDevice.h">
+      <Filter>Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Interface\InterfaceDevice.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -270,9 +270,6 @@
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c">
       <Filter>libs\HAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Generator\Generator.cpp">
-      <Filter>Generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Generator\AD9952.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
@@ -281,9 +278,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\main.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Interface\Interface.cpp">
-      <Filter>Interface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Generator\FPGA.cpp">
       <Filter>Generator</Filter>
@@ -369,6 +363,12 @@
     </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_hcd.c">
       <Filter>libs\HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Generator\GeneratorDevice.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Interface\InterfaceDevice.cpp">
+      <Filter>Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

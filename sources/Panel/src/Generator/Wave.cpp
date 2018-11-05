@@ -6,7 +6,7 @@
 #include "Settings/Settings.h"
 #include "Display/InputWindow.h"
 #include "Display/Symbols.h"
-#include "Generator.h"
+#include "GeneratorPanel.h"
 #include "Signals.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"

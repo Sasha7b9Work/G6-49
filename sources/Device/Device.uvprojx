@@ -1157,11 +1157,6 @@
               <FilePath>.\src\Generator\FPGA.cpp</FilePath>
             </File>
             <File>
-              <FileName>Generator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Generator.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GeneratorSettings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\GeneratorSettings.cpp</FilePath>
@@ -1182,11 +1177,6 @@
               <FilePath>.\src\Generator\FPGA.h</FilePath>
             </File>
             <File>
-              <FileName>Generator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Generator.h</FilePath>
-            </File>
-            <File>
               <FileName>GeneratroSettings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\GeneratroSettings.h</FilePath>
@@ -1200,6 +1190,16 @@
               <FileName>Multiplexor.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Multiplexor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorDevice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\GeneratorDevice.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorDevice.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\GeneratorDevice.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1297,14 +1297,14 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
-              <FileName>Interface.cpp</FileName>
+              <FileName>InterfaceDevice.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Interface\Interface.cpp</FilePath>
+              <FilePath>.\src\Interface\InterfaceDevice.cpp</FilePath>
             </File>
             <File>
-              <FileName>Interface.h</FileName>
+              <FileName>InterfaceDevice.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Interface\Interface.h</FilePath>
+              <FilePath>.\src\Interface\InterfaceDevice.h</FilePath>
             </File>
           </Files>
         </Group>

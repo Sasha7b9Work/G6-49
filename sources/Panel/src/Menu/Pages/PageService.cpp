@@ -4,7 +4,7 @@
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Generator/Generator.h"
+#include "Generator/GeneratorPanel.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "PageService.h"

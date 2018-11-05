@@ -183,7 +183,7 @@
     <ClInclude Include="..\..\Device\src\Generator\AD5697.h" />
     <ClInclude Include="..\..\Device\src\Generator\AD9952.h" />
     <ClInclude Include="..\..\Device\src\Generator\FPGA.h" />
-    <ClInclude Include="..\..\Device\src\Generator\Generator.h" />
+    <ClInclude Include="..\..\Device\src\Generator\GeneratorDevice.h" />
     <ClInclude Include="..\..\Device\src\Generator\GeneratorSettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU\CPU.h" />
@@ -193,7 +193,7 @@
     <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Device\src\Hardware\Timer4XX.h" />
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
-    <ClInclude Include="..\..\Device\src\Interface\Interface.h" />
+    <ClInclude Include="..\..\Device\src\Interface\InterfaceDevice.h" />
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h" />
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_conf.h" />
@@ -250,7 +250,7 @@
     <ClCompile Include="..\..\Device\src\Generator\AD5697.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\AD9952.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\FPGA.cpp" />
-    <ClCompile Include="..\..\Device\src\Generator\Generator.cpp" />
+    <ClCompile Include="..\..\Device\src\Generator\GeneratorDevice.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\GeneratorSettings.cpp" />
     <ClCompile Include="..\..\Device\src\Generator\Multiplexor.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU.cpp" />
@@ -262,7 +262,7 @@
     <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Timer4XX.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp" />
-    <ClCompile Include="..\..\Device\src\Interface\Interface.cpp" />
+    <ClCompile Include="..\..\Device\src\Interface\InterfaceDevice.cpp" />
     <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

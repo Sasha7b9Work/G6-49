@@ -1,4 +1,4 @@
 #include "stdafx.h"
 #ifndef WIN32
-#include "Interface.h"
+#include "InterfacePanel.h"
 #endif

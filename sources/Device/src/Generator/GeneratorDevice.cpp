@@ -1,6 +1,6 @@
 #include "AD5697.h"
 #include "FPGA.h"
-#include "Generator.h"
+#include "GeneratorDevice.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU/CPU.h"
 #include "FreqMeter/FreqMeter.h"
@@ -57,33 +57,35 @@ void Generator::SetParameter(Chan ch, Command command, float value)
     }
     func[Command::Number] =
     {
-        EmptyFunc,
-        EmptyFunc,
-        EmptyFunc,
-        SetFrequency,
-        SetAmplitude,
-        SetOffset,
-        SetDuration,
-        SetDutyRatio,
-        SetPhase,
-        EmptyFunc,
-        EmptyFunc,
-        SetDelay,
-        EmptyFunc,
-        EmptyFunc,
-        EmptyFunc,
-        EmptyFunc,
-        EmptyFunc,
-        EmptyFunc,
-        SetManipulationDuration,
-        SetManipulationPeriod,
-        SetPacketPeriod,
-        SetPacketNumber,
-        EmptyFunc,
-        SetPeriod,
-        EmptyFunc,
-        EmptyFunc,
-        EmptyFunc
+/* RequestData             */ EmptyFunc,
+/* EnableChannel           */ EmptyFunc,
+/* SetFormWave             */ EmptyFunc,
+/* SetFrequency            */ SetFrequency,
+/* SetAmplitude            */ SetAmplitude,
+/* SetOffset               */ SetOffset,
+/* SetDuration             */ SetDuration,
+/* SetDutyRatio            */ SetDutyRatio,
+/* SetPhase                */ SetPhase,
+/* RunReset                */ EmptyFunc,
+/* ModeDebug               */ EmptyFunc,
+/* SetDelay                */ SetDelay,
+/* WriteRegister           */ EmptyFunc,
+/* SetDurationRise         */ EmptyFunc,
+/* SetDurationFall         */ EmptyFunc,
+/* SetDurationStady        */ EmptyFunc,
+/* SetDutyFactor           */ EmptyFunc,
+/* SetManipulation         */ EmptyFunc,
+/* SetManipulationDuration */ SetManipulationDuration,
+/* SetManipulationPeriod   */ SetManipulationPeriod,
+/* SetPacketPeriod         */ SetPacketPeriod,
+/* SetPacketNumber         */ SetPacketNumber,
+/* SetStartMode            */ EmptyFunc,
+/* SetPeriod               */ SetPeriod,
+/* SetPolarity             */ EmptyFunc,
+/* SetManipulationMode     */ EmptyFunc,
+/* LoadFromDDS             */ EmptyFunc,
+/* FreqMeasure             */ EmptyFunc,
+/* Log                     */ EmptyFunc
     };
 
     func[command].func(ch, value);

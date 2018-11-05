@@ -228,9 +228,6 @@
     <ClCompile Include="..\..\Panel\src\Utils\NumberBuffer.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\Generator.cpp">
-      <Filter>Generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Number.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -270,7 +267,10 @@
     <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
       <Filter>FDrive</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\Interface.cpp">
+    <ClCompile Include="..\..\Panel\src\Generator\GeneratorPanel.cpp">
+      <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Generator\InterfacePanel.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
   </ItemGroup>
@@ -503,9 +503,6 @@
     <ClInclude Include="..\..\Panel\src\Utils\NumberBuffer.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator\Generator.h">
-      <Filter>Generator</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\Utils\Number.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -533,7 +530,10 @@
     <ClInclude Include="..\..\Panel\src\stdafx.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator\Interface.h">
+    <ClInclude Include="..\..\Panel\src\Generator\GeneratorPanel.h">
+      <Filter>Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Generator\InterfacePanel.h">
       <Filter>Generator</Filter>
     </ClInclude>
   </ItemGroup>

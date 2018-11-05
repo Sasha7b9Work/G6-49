@@ -4,7 +4,7 @@
 #include "Generator/Signals.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Generator/Generator.h"
+#include "Generator/GeneratorPanel.h"
 #include "Menu/Menu.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"

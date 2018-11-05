@@ -1,6 +1,6 @@
 #include <stm32f4xx.h>
 #include "Hardware/CPU/CPU.h"
-#include "Interface/Interface.h"
+#include "Interface/InterfaceDevice.h"
 #include "Utils/Debug.h"
 
 

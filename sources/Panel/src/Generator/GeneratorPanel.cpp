@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Generator.h"
+#include "GeneratorPanel.h"
 #include "Log.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"

@@ -2,7 +2,7 @@
 #include "FreqMeter.h"
 #include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
-#include "Interface/Interface.h"
+#include "Interface/InterfaceDevice.h"
 #include "Utils/Debug.h"
 #include "Settings/Settings.h"
 

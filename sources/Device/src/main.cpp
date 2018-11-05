@@ -2,9 +2,9 @@
 #ifndef WIN32
 #include "defines.h"
 #include "FDrive/FDrive.h"
-#include "Generator/Generator.h"
+#include "Generator/GeneratorDevice.h"
 #include "Generator/AD5697.h"
-#include "Interface/Interface.h"
+#include "Interface/InterfaceDevice.h"
 #include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"

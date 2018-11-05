@@ -1792,26 +1792,6 @@
           <GroupName>Generator</GroupName>
           <Files>
             <File>
-              <FileName>Generator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Generator.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Generator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Generator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Interface.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Interface.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Interface.h</FilePath>
-            </File>
-            <File>
               <FileName>Wave.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Wave.cpp</FilePath>
@@ -1830,6 +1810,26 @@
               <FileName>Signals.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Signals.h</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorPanel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\GeneratorPanel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorPanel.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\GeneratorPanel.h</FilePath>
+            </File>
+            <File>
+              <FileName>InterfacePanel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\InterfacePanel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InterfacePanel.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\InterfacePanel.h</FilePath>
             </File>
           </Files>
         </Group>
