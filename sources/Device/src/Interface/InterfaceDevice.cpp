@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Log.h"
 #include "InterfaceDevice.h"
+#include "FDrive/FDriveDevice.h"
 #include "Utils/Console.h"
 #include "Generator/GeneratorDevice.h"
 #include "Generator/FPGA.h"
@@ -328,6 +329,18 @@ static void SendData()
         uint16 numBytes = LENGTH_SPI_BUFFER;
         CPU::SPI1_::Transmit(&numBytes, 2);
         CPU::SPI1_::Transmit(buffer, LENGTH_SPI_BUFFER);
+    }
+
+    if(FDrive::NumBytesForSend())
+    {
+        uint16 numBytes = FDrive::NumBytesForSend();
+        if(numBytes)
+        {
+            CPU::SPI1_::Transmit(&numBytes, 2);
+            uint8 *buffer = (uint8 *)malloc(numBytes);
+            CPU::SPI1_::Transmit(FDrive::GetDataForSend(buffer), numBytes);
+            free(buffer);
+        }
     }
 
     uint16 numBytes = 0;

@@ -4,6 +4,7 @@
 #include "Command.h"
 #include "structs.h"
 #include "Display/Console.h"
+#include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
 #include "Utils/Buffer.h"
@@ -91,6 +92,10 @@ void Interface::ReceiveAndRun(uint16 numBytes)
             }
             buf[LENGTH_SPI_BUFFER - 1] = '\0';
             Console::AddString(buf);
+        }
+        else if(buffer[0] == Command::FDrive_Mount)
+        {
+            FDrive::SetConnected(buffer[1] != 0);
         }
     }
 

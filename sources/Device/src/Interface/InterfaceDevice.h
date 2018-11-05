@@ -15,11 +15,11 @@ public:
 
     static void Empty();
 
-    static void EnableChannel();
-
     static void SetFormWave();
 
     static void ParameterValue();
+
+    static void EnableChannel();
 
     static void RunReset();
 
@@ -38,6 +38,8 @@ public:
     static void LoadFormDDS();
 
     static void SetPolarity();
+
+
 
 private:
     /// Установить размер приёмного буфера равным size

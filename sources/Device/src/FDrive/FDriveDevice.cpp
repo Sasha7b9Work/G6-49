@@ -13,9 +13,17 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 USBH_HandleTypeDef FDrive::hUSB_Host;
 
+static FATFS FatFS;
+
 static char USBDISKPath[4];
 /// true, если флешка подключена
 volatile static bool isConnected = false;
+/// Количество байт для передачи в Interface
+static uint16 numBytesForSend = 0;
+/// Начало буфера данных для передачи в Interface
+static uint8 *bufferForSend = 0;
+/// Если true, то устройство занято и обмен с интерфейсом запрещён
+static bool isBusy = false;
 
 
 struct State
@@ -23,7 +31,9 @@ struct State
     enum E
     {
         Disconnected,   ///< Начальное значение после старта
-        NeedMount       ///< Обнаружена подключенная флешка, требуется монтирование
+        NeedMount,      ///< Обнаружена подключенная флешка, требуется монтирование
+        Connected,      ///< Флешка подсоединена и примонтирована
+        NeedUnmount     ///< Требуется отмонтировать
     } value;
 };
 
@@ -41,28 +51,23 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
     switch(id)
     {
         case HOST_USER_SELECT_CONFIGURATION:
-            Console::AddString("HOST_USER_SELECT_CONFIGURATION");
             break;
 
         case HOST_USER_CLASS_ACTIVE:
-             Console::AddString("HOST_USER_CLASS_ACTIVE");
+            state = State::NeedMount;
             break;
 
         case HOST_USER_CLASS_SELECTED:
-            Console::AddString("HOST_USER_CLASS_SELECTED");
             break;
 
         case HOST_USER_CONNECTION:
-            Console::AddString("HOST_USER_CONNECTION");
             break;
 
         case HOST_USER_DISCONNECTION:
-            Console::AddString("HOST_USER_DISCONNECTION");
-            isConnected = false;
+            state = State::NeedUnmount;
             break;
 
         default:
-            Console::AddString("default");
             break;
     }
 }
@@ -88,4 +93,55 @@ void FDrive::Init()
 void FDrive::Update()
 {
     USBH_Process(&hUSB_Host);
+
+    if(state == State::NeedMount)
+    {
+        isBusy = true;
+
+        if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
+        {
+            numBytesForSend = 1 + 1;
+            bufferForSend = (uint8 *)malloc(numBytesForSend);
+            bufferForSend[0] = Command::FDrive_Mount;
+            bufferForSend[1] = 1;
+        }
+
+        state = State::Connected;
+
+        isBusy = false;
+    }
+    else if(state == State::NeedUnmount)
+    {
+        isBusy = true;
+
+        f_mount(0, "", 0);
+
+        numBytesForSend = 1 + 1;
+        bufferForSend = (uint8 *)malloc(numBytesForSend);
+        bufferForSend[0] = Command::FDrive_Mount;
+        bufferForSend[1] = 0;
+
+        state = State::Disconnected;
+
+        isBusy = false;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint16 FDrive::NumBytesForSend()
+{
+    if(isBusy)
+    {
+        return 0;
+    }
+    return numBytesForSend;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *FDrive::GetDataForSend(uint8 *buffer)
+{
+    memcpy(buffer, bufferForSend, numBytesForSend);
+    free(bufferForSend);
+    numBytesForSend = 0;
+    return buffer;
 }

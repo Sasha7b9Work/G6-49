@@ -60,6 +60,12 @@ void FDrive::Graphics::Draw()
     int height = Wave::Graphics::Height() * 2;
     Painter::FillRegion(x, y, width, height, Color::BACK);
 
+    if(!FDrive::IsConnected())
+    {
+        Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
+        return;
+    }
+
     if(state == State::None)
     {
         FDrive::RequestNumDirsAndFiles(directory);
