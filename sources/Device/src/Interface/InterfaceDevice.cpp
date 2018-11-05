@@ -60,7 +60,8 @@ commands[Command::Number] =
 /* SetManipulationMode     */ Interface::SetManipulationMode,
 /* LoadFromDDS             */ Interface::LoadFormDDS,
 /* FreqMeasure             */ Interface::Empty,
-/* Log                     */ Interface::Empty
+/* Log                     */ Interface::Empty,
+/* FDrive_NumDirsAndFiles  */ Interface::Empty
 };
 
 

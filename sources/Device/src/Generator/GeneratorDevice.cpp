@@ -88,7 +88,8 @@ void Generator::SetParameter(Chan ch, Command command, float value)
 /* SetManipulationMode     */ EmptyFunc,
 /* LoadFromDDS             */ EmptyFunc,
 /* FreqMeasure             */ EmptyFunc,
-/* Log                     */ EmptyFunc
+/* Log                     */ EmptyFunc,
+/* FDrive_NumDirsAndFiles  */ EmptyFunc
     };
 
     func[command].func(ch, value);

@@ -6,8 +6,6 @@ class FDrive
 public:
     /// Начальная инициализация
     static void Init();
-    /// Возвращает количество файлов и каталогов в каталоге directory
-    static void GetNumDirsAndFiles(pString directory, int *numDirs, int *numFiles);
 
     class Graphics
     {
@@ -21,4 +19,8 @@ public:
 
         static void Init();
     };
+
+private:
+    /// Посылает запрос на количество файлов и каталогов в каталоге directory
+    static void RequestNumDirsAndFiles(pString directory);
 };
