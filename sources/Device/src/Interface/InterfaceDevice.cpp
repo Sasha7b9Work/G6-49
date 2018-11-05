@@ -61,7 +61,8 @@ commands[Command::Number] =
 /* LoadFromDDS             */ Interface::LoadFormDDS,
 /* FreqMeasure             */ Interface::Empty,
 /* Log                     */ Interface::Empty,
-/* FDrive_NumDirsAndFiles  */ Interface::Empty
+/* FDrive_NumDirsAndFiles  */ Interface::Empty,
+/* FDrive_Mount            */ Interface::Empty
 };
 
 

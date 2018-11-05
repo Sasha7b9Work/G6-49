@@ -216,7 +216,6 @@
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h">
       <Filter>libs\FatFS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\stdafx.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU\CPU.h">
       <Filter>Hardware\CPU</Filter>
     </ClInclude>
@@ -240,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\FDrive\FDriveDevice.h">
       <Filter>FDrive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\stdafx.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -339,7 +341,6 @@
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp">
       <Filter>libs\USBH</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\stdafx.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU.cpp">
       <Filter>Hardware\CPU</Filter>
     </ClCompile>
@@ -369,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice.cpp">
       <Filter>FDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\stdafx.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

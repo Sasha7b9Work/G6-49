@@ -6,6 +6,8 @@ class FDrive
 public:
     /// Начальная инициализация
     static void Init();
+    /// true, если флешка подключена
+    static bool Connected();
 
     class Graphics
     {

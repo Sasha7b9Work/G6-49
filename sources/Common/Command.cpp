@@ -46,7 +46,8 @@ pString Command::Name() const
         "LoadFormDDS",
         "FreqMeasure",
         "Log",
-        "FDrive_NumDirsAndFiles"
+        "FDrive_NumDirsAndFiles",
+        "FDrive_Mount"
     };
     if(value < Number)
     {
@@ -147,6 +148,8 @@ pString Command::Trace(const uint8 *buffer) const
         case Log:
             break;
         case FDrive_NumDirsAndFiles:
+            break;
+        case FDrive_Mount:
             break;
         case Number:
             break;

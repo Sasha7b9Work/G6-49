@@ -78,7 +78,10 @@ struct Command
           // Ответ :
           // 0                       1...5   6...9
           //                         NumDirs NumFiles
-/* <-> */    FDrive_NumDirsAndFiles,     ///< Запрос количества каталогов и файлов
+/* <-> */    FDrive_NumDirsAndFiles,    ///< Запрос количества каталогов и файлов
+          // 0             1
+          //               data
+/*  -> */    FDrive_Mount,              ///< Сообщение о примонтированной флешке. data == 0 - флешка отмонтирована. 1 - флешка примонтирована
              Number
     } value;
     Command(E v) : value(v) {};

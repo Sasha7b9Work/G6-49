@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "GeneratorPanel.h"
+#include "InterfacePanel.h"
 #include "Log.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
@@ -23,26 +24,15 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Принять и обработать данные от ПЛИС
-static void ProcessDataFPGA();
-/// Заслать в генератор данные
-static void SendToInterface(const uint8 *buffer, uint16 size);
-
-static void SendToInterface(const Buffer &buffer);
-/// Принять numBytes байт от ПЛИС и выполнить их
-static void ReceiveAndRun(uint16 numBytes);
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan ch, bool enable)
 {
-    SendToInterface(Buffer(Command::EnableChannel, ch, enable ? 1u : 0u));
+    Interface::Send(Buffer(Command::EnableChannel, ch, enable ? 1u : 0u));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadStartMode(Chan ch, int mode)
 {
-    SendToInterface(Buffer(Command::SetStartMode, ch, (uint8)mode));
+    Interface::Send(Buffer(Command::SetStartMode, ch, (uint8)mode));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,19 +42,19 @@ void Generator::LoadRegister(Register reg, uint64 value)
 
     uint8 buffer[10] = {Command::WriteRegister, (uint8)reg,   bitSet.byte0, bitSet.byte1, bitSet.byte2, bitSet.byte3,
                                                                     bitSet.byte4, bitSet.byte5, bitSet.byte6, bitSet.byte7};
-    SendToInterface(buffer, 10);
+    Interface::Send(buffer, 10);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
-    SendToInterface(Buffer(Command::ModeDebug, enable ? 1u : 0u));
+    Interface::Send(Buffer(Command::ModeDebug, enable ? 1u : 0u));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Reset()
 {
-    SendToInterface(Buffer(Command::RunReset));
+    Interface::Send(Buffer(Command::RunReset));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +69,7 @@ void Generator::SetFormWave(Wave *w)
     }
     else
     {
-        SendToInterface(Buffer(Command::SetFormWave, ch, form));
+        Interface::Send(Buffer(Command::SetFormWave, ch, form));
     }
 }
 
@@ -172,9 +162,9 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NU
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2])
 {
-    SendToInterface(Buffer(Command::LoadFormDDS, ch));
+    Interface::Send(Buffer(Command::LoadFormDDS, ch));
 
-    SendToInterface(points, FPGA_NUM_POINTS * 2);
+    Interface::Send(points, FPGA_NUM_POINTS * 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -184,7 +174,7 @@ void Generator::Update()
 
     if(TIME_MS - timePrev > 100)
     {
-        ProcessDataFPGA();
+        Interface::ProcessDataFPGA();
 
         timePrev = TIME_MS;
     }
@@ -206,7 +196,7 @@ void Generator::SetParameter(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    SendToInterface(Buffer((uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()));
+    Interface::Send(Buffer((uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -248,92 +238,7 @@ void Generator::SetParameter(ParameterValue *param)
     }
 
     memcpy(&buffer[2], &value, 4);
-    SendToInterface(buffer, 6);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendToInterface(const Buffer &buffer)
-{
-    SendToInterface(buffer.Data(), (uint16)buffer.Length());
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendToInterface(const uint8 *buffer, uint16 size)
-{
-    Command command(*buffer);
-    if(Debug::ShowSends() && command.value != Command::RequestData)
-    {
-        //LOG_WRITE("передаю %s", command.Trace(buffer));
-    }
-
-    CPU::SPI4_::Transmit(&size, 2);
-
-    const uint8 *pointer = buffer;
-    while(size > 0)
-    {
-        uint16 sizeChunk = (size > 1024u) ? 1024u : size; // Размер куска для передачи
-
-        size -= sizeChunk;
-
-        CPU::SPI4_::Transmit(pointer, sizeChunk);
-
-        pointer += sizeChunk;
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ProcessDataFPGA()
-{
-    /// \todo Процесс обмена прерывается иногда. Нужно проверять информацию на ошибки
-
-    uint8 command = Command::RequestData;
-
-    SendToInterface(&command, 1);
-
-    uint16 numBytes = 0;
-
-    CPU::SPI4_::Receive(&numBytes, 2);
-
-    while(numBytes > 0)         // Принятое значение означает число байт, готовых для передачи вспомогательным процессором
-    {
-        ReceiveAndRun(numBytes);
-        CPU::SPI4_::Receive(&numBytes, 2);
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReceiveAndRun(uint16 numBytes)
-{
-    //LOG_WRITE("Требуется принять %d байт", numBytes);
-
-    uint8 *buffer = (uint8 *)malloc(numBytes);
-
-    if (buffer)
-    {
-        CPU::SPI4_::Receive(buffer, numBytes);
-
-        if (buffer[0] == Command::FreqMeasure)
-        {
-            BitSet32 bs;
-            for (int i = 0; i < 4; i++)
-            {
-                bs.byte[i] = buffer[i + 1];
-            }
-            FrequencyMeter::SetMeasure(bs.word);
-        }
-        else if (buffer[0] == Command::Log)
-        {
-            char buf[LENGTH_SPI_BUFFER];
-            for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
-            {
-                buf[i] = (char)buffer[i + 1];
-            }
-            buf[LENGTH_SPI_BUFFER - 1] = '\0';
-            Console::AddString(buf);
-        }
-    }
-
-    free(buffer);
+    Interface::Send(buffer, 6);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
