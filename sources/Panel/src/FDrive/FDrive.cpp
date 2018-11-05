@@ -12,7 +12,7 @@ void FDrive::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::GetNumDirsAndFiles(pString directory, int *numDirs, int *numFiles)
+void FDrive::GetNumDirsAndFiles(pString /*directory*/, int * /*numDirs*/, int * /*numFiles*/)
 {
 
 }

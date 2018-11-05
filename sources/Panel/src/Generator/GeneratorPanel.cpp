@@ -23,6 +23,17 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Принять и обработать данные от ПЛИС
+static void ProcessDataFPGA();
+/// Заслать в генератор данные
+static void SendToInterface(const uint8 *buffer, uint16 size);
+
+static void SendToInterface(const Buffer &buffer);
+/// Принять numBytes байт от ПЛИС и выполнить их
+static void ReceiveAndRun(uint16 numBytes);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan ch, bool enable)
 {
     SendToInterface(Buffer(Command::EnableChannel, ch, enable ? 1u : 0u));
@@ -241,13 +252,13 @@ void Generator::SetParameter(ParameterValue *param)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SendToInterface(const Buffer &buffer)
+static void SendToInterface(const Buffer &buffer)
 {
     SendToInterface(buffer.Data(), (uint16)buffer.Length());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SendToInterface(const uint8 *buffer, uint16 size)
+static void SendToInterface(const uint8 *buffer, uint16 size)
 {
     Command command(*buffer);
     if(Debug::ShowSends() && command.value != Command::RequestData)
@@ -271,7 +282,7 @@ void Generator::SendToInterface(const uint8 *buffer, uint16 size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::ProcessDataFPGA()
+static void ProcessDataFPGA()
 {
     uint8 command = Command::RequestData;
 
@@ -288,7 +299,7 @@ void Generator::ProcessDataFPGA()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::ReceiveAndRun(uint16 numBytes)
+static void ReceiveAndRun(uint16 numBytes)
 {
     LOG_WRITE("Требуется принять %d байт", numBytes);
 

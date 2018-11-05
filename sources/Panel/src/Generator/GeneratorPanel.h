@@ -45,15 +45,7 @@ public:
 
 private:
     static const int FPGA_NUM_POINTS = 8 * 1024;
-    /// Заслать в генератор данные
-    static void SendToInterface(const uint8 *buffer, uint16 size);
 
-    static void SendToInterface(const Buffer &buffer);
-    /// Принять и обработать данные от ПЛИС
-    static void ProcessDataFPGA();
-    /// Принять numBytes байт от ПЛИС и выполнить их
-    static void ReceiveAndRun(uint16 numBytes);
-    
     static void SetFormDDS(Form *form);
     /// Загружает точки произвольного сигнала в ПЛИС
     static void LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2]);

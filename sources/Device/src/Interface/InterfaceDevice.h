@@ -40,12 +40,8 @@ public:
     static void SetPolarity();
 
 private:
-    /// Послать имеющиеся данные в главный процессор
-    static void SendData();
     /// Установить размер приёмного буфера равным size
     static void ResizeRecieveBuffer(uint16 size);
-    /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
-    static uint freqForSend;
 
     static uint timeLastReceive;
 };

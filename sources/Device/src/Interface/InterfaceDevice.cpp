@@ -17,7 +17,8 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static uint8 *recv = 0;                         ///< Буфер для принимаемых команд
-uint  Interface::freqForSend = MAX_UINT;
+/// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
+static uint freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
 
 static const struct FuncInterface
@@ -58,6 +59,12 @@ commands[Command::Number] =
 /* FreqMeasure             */ Interface::Empty,
 /* Log                     */ Interface::Empty
 };
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Послать имеющиеся данные в главный процессор
+static void SendData();
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
@@ -289,18 +296,9 @@ void Interface::ReceiveCallback()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SendData()
+static void SendData()
 {
-    if (Console::ExistString())
-    {
-        char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
-        Console::GetString(buffer + 1);
-
-        uint16 numBytes = LENGTH_SPI_BUFFER;
-        CPU::SPI1_::Transmit(&numBytes, 2);
-        CPU::SPI1_::Transmit(buffer, LENGTH_SPI_BUFFER);
-    }
-    else if(freqForSend != MAX_UINT)
+    if(freqForSend != MAX_UINT)
     {
         uint16 numBytes = 5;
 
@@ -315,6 +313,15 @@ void Interface::SendData()
         }
 
         CPU::SPI1_::Transmit(buffer, 5);
+    }
+    else if (Console::ExistString())
+    {
+        char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
+        Console::GetString(buffer + 1);
+
+        uint16 numBytes = LENGTH_SPI_BUFFER;
+        CPU::SPI1_::Transmit(&numBytes, 2);
+        CPU::SPI1_::Transmit(buffer, LENGTH_SPI_BUFFER);
     }
     else
     {
