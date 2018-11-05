@@ -28,6 +28,15 @@ static uint8 *bufferForSend = 0;
 static bool isBusy = false;
 /// Путь к каталогу, количество файлов и каталогов в котором нужно узнать
 static char path[256];
+/// Номер запрашиваемого имени - каталога или файла
+static uint numItem = 0;
+
+struct StructForReadDir
+{
+    char nameDir[_MAX_LFN + 1];
+    FILINFO fno;
+    DIR dir;
+};
 
 
 struct State
@@ -53,6 +62,8 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
 static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
 /// Подготовить буфер для даныых
 static void PrepareBufferForData(uint size, uint8 command);
+/// Получить имя numDir-го каталога из каталога fullPath
+static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,6 +159,25 @@ void FDrive::Update()
 
         command = Command::Number;
     }
+    else if(command == Command::FDrive_RequestDir)
+    {
+        char buffer[256];
+        StructForReadDir str;
+        GetNameDir(path, (int)numItem, buffer, &str);
+
+        PrepareBufferForData(1 + 4 + strlen(buffer) + 1, Command::FDrive_RequestDir);
+
+        BitSet32 num;
+        num.word = numItem;
+        num.WriteToBuffer(bufferForSend + 1);
+        strcpy((char *)bufferForSend + 5, buffer);
+
+        command = Command::Number;
+    }
+    else if(command == Command::FDrive_RequestFile)
+    {
+        command = Command::Number;
+    }
 
     isBusy = false;
 }
@@ -195,6 +225,19 @@ void FDrive::HandlerInterface()
             *dest++ = (char)*src++;
         }
         *dest = '\0';
+    }
+    if(command == Command::FDrive_RequestDir || command == Command::FDrive_RequestFile)
+    {
+        uint8 *src = Interface::recv + 5;
+        char *dest = &path[0];
+        while(*src)
+        {
+            *dest++ = (char)*src++;
+        }
+        *dest = '\0';
+
+        BitSet32 num(Interface::recv + 1);
+        numItem = num.word;
     }
 
     isBusy = false;
@@ -247,4 +290,48 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
         }
         f_closedir(&dir);
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s)
+{
+    memcpy(s->nameDir, (void *)fullPath, strlen(fullPath));
+    s->nameDir[strlen(fullPath)] = '\0';
+
+    DIR *pDir = &s->dir;
+    if (f_opendir(pDir, s->nameDir) == FR_OK)
+    {
+        int numDirs = 0;
+        FILINFO *pFNO = &s->fno;
+        bool alreadyNull = false;
+        while (true)
+        {
+            if (f_readdir(pDir, pFNO) != FR_OK)
+            {
+                *nameDirOut = '\0';
+                f_closedir(pDir);
+                return false;
+            }
+            if (pFNO->fname[0] == 0)
+            {
+                if (alreadyNull)
+                {
+                    *nameDirOut = '\0';
+                    f_closedir(pDir);
+                    return false;
+                }
+                alreadyNull = true;
+            }
+            if (numDir == numDirs && (pFNO->fattrib & AM_DIR))
+            {
+                strcpy(nameDirOut, pFNO->fname);
+                return true;
+            }
+            if ((pFNO->fattrib & AM_DIR) && (pFNO->fname[0] != '.'))
+            {
+                numDirs++;
+            }
+        }
+    }
+    return false;
 }

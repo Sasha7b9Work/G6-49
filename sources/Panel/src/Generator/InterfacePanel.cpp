@@ -75,7 +75,7 @@ void Interface::ReceiveAndRun(uint16 numBytes)
     {
         CPU::SPI4_::Receive(buffer, numBytes);
 
-        if (buffer[0] == Command::FreqMeasure)
+        if (*buffer == Command::FreqMeasure)
         {
             BitSet32 bs;
             for (int i = 0; i < 4; i++)
@@ -84,7 +84,7 @@ void Interface::ReceiveAndRun(uint16 numBytes)
             }
             FrequencyMeter::SetMeasure(bs.word);
         }
-        else if (buffer[0] == Command::Log)
+        else if (*buffer == Command::Log)
         {
             char buf[LENGTH_SPI_BUFFER];
             for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
@@ -98,11 +98,17 @@ void Interface::ReceiveAndRun(uint16 numBytes)
         {
             FDrive::SetConnected(buffer[1] != 0);
         }
-        else if(buffer[0] == Command::FDrive_NumDirsAndFiles)
+        else if(*buffer == Command::FDrive_NumDirsAndFiles)
         {
-            BitSet32 numDirs(buffer + 1);
-            BitSet32 numFiles(buffer + 5);
-            FDrive::HandlerSetNumDirsAndFiles(numDirs.word, numFiles.word);
+            FDrive::HandlerInterface(buffer);
+        }
+        else if(*buffer == Command::FDrive_RequestDir)
+        {
+            FDrive::HandlerInterface(buffer);
+        }
+        else if(*buffer == Command::FDrive_RequestFile)
+        {
+            FDrive::HandlerInterface(buffer);
         }
     }
 

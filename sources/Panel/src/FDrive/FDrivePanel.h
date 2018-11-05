@@ -3,8 +3,6 @@
 
 class FDrive
 {
-friend class Interface;
-
 public:
     /// Начальная инициализация
     static void Init();
@@ -34,10 +32,22 @@ public:
     };
 
 private:
+    friend class Graphics;
+    friend class Interface;
+
     /// Посылает запрос на количество файлов и каталогов в каталоге directory
     static void RequestNumDirsAndFiles(pString directory);
+
+    static void RequestNameDir(uint numDir, pString directory);
+
+    static void RequestNameFile(uint numFile, pString directory);
     /// Устанавливает признак присоединённой флешки
     static void SetConnected(bool connected);
 
-    static void HandlerSetNumDirsAndFiles(uint numDirs, uint numFiles);
+    static void HandlerInterface(uint8 *data);
+
+    /// Написать список каталогов
+    static void DrawDirs();
+    /// Написать список файлов
+    static void DrawFiles();
 };

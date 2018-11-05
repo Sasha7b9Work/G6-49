@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "structs.h"
 #include "FDrivePanel.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -13,13 +14,13 @@
 #define RECS_ON_PAGE    10
 
 /// Номер первого выведенного каталога. Всего может быть выведено RECS_ON_PAGE катаологов
-static int firstDir = 0;
+//static int firstDir = 0;
 /// Номер подсвеченного каталога
-static int curDir = 0;
+//static int curDir = 0;
 /// Номер первого выведенного файла. Всего может быть выведено RECS_ON_PAGE файлов
-static int firstFile = 0;
+//static int firstFile = 0;
 /// Номер подсвеченного файла
-static int curFile = 0;
+//static int curFile = 0;
 
 static uint numDirs = 0;
 
@@ -36,7 +37,8 @@ struct State
     enum E
     {
         NeedRepaint,            ///< Нужна перерисовка
-        Idle                    ///< Ничего делать не нужно
+        Idle,                   ///< Ничего делать не нужно
+        Wait                    ///< Ожидание ответа Interface
     } value;
 };
 
@@ -47,17 +49,13 @@ FDrive::View FDrive::view = FDrive::Dirs;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Выводит название текущего каталога в координатах [left, top]
 static void DrawNameCurrentDir(int left, int top);
-/// Написать список каталогов
-static void DrawDirs();
-/// Написать список файлов
-static void DrawFiles();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FDrive::Graphics::Init()
 {
     strcpy(directory, "\\");
-    firstDir = firstFile = curDir = curFile = 0;
+    //firstDir = firstFile = curDir = curFile = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,7 +85,7 @@ void FDrive::Graphics::Draw()
         numDirs = numFiles = 0;
 
         FDrive::RequestNumDirsAndFiles(directory);
-        state = State::Idle;
+        state = State::Wait;
     }
 
     if(view == Dirs)
@@ -107,20 +105,86 @@ static void DrawNameCurrentDir(int left, int top)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::HandlerSetNumDirsAndFiles(uint _numDirs, uint _numFiles)
+void FDrive::HandlerInterface(uint8 *data)
 {
-    numDirs = _numDirs;
-    numFiles = _numFiles;
+    if(*data == Command::FDrive_NumDirsAndFiles)
+    {
+        BitSet32 dirs(data + 1);
+        BitSet32 files(data + 5);
+
+        numDirs = dirs.word;
+        numFiles = files.word;
+
+        state = State::Idle;
+    }
+    else if(*data == Command::FDrive_RequestDir || *data == Command::FDrive_RequestFile)
+    {
+        BitSet32 num(data + 1);
+
+        char *src = (char *)(data + 5);
+        char *dest = &names[num.word][0];
+
+        while(*src)
+        {
+            *dest++ = *src++;
+        }
+
+        *dest = '\0';
+
+        state = State::Idle;
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawDirs()
+void FDrive::DrawDirs()
 {
+    int x = Wave::Graphics::X() + 5;
+    int y = Wave::Graphics::Y(Chan::A) + 5;
+    int delta = 10;
 
+    for(uint i = 0; i < numDirs; i++)
+    {
+        Text::DrawText(x, y, names[i], Color::FILL);
+        y += delta;
+    }
+
+    if(state == State::Idle)
+    {
+        for(uint i = 0; i < numDirs; i++)
+        {
+            if(names[0][0] == 0)
+            {
+                FDrive::RequestNameDir(i, directory);
+                state = State::Wait;
+                break;
+            }
+        }
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void DrawFiles()
+void FDrive::DrawFiles()
 {
+    int x = 5;
+    int y = 10;
+    int delta = 10;
 
+    for(uint i = 0; i < numFiles; i++)
+    {
+        Text::DrawText(x, y, names[i], Color::FILL);
+        y += delta;
+    }
+
+    if(state == State::Idle)
+    {
+        for(uint i = 0; i < numFiles; i++)
+        {
+            if(names[0][0] == 0)
+            {
+                FDrive::RequestNameFile(i, directory);
+                state = State::Wait;
+                break;
+            }
+        }
+    }
 }
