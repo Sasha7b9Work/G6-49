@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "FreqMeter.h"
 #include "Hardware/CPU/CPU.h"
@@ -5,6 +7,7 @@
 #include "Interface/InterfaceDevice.h"
 #include "Utils/Debug.h"
 #include "Settings/Settings.h"
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

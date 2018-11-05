@@ -246,23 +246,57 @@
     </ClCompile>
     <ClCompile Include="..\..\Common\Wave.cpp" />
     <ClCompile Include="..\..\Device\src\FDrive\FDrive.cpp" />
-    <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp" />
-    <ClCompile Include="..\..\Device\src\Generator\AD5697.cpp" />
-    <ClCompile Include="..\..\Device\src\Generator\AD9952.cpp" />
-    <ClCompile Include="..\..\Device\src\Generator\FPGA.cpp" />
-    <ClCompile Include="..\..\Device\src\Generator\GeneratorDevice.cpp" />
-    <ClCompile Include="..\..\Device\src\Generator\GeneratorSettings.cpp" />
-    <ClCompile Include="..\..\Device\src\Generator\Multiplexor.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_HCD.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_IT.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm32.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm407.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\Timer4XX.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp" />
-    <ClCompile Include="..\..\Device\src\Interface\InterfaceDevice.cpp" />
+    <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Generator\AD5697.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Generator\AD9952.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Generator\FPGA.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Generator\GeneratorDevice.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Generator\GeneratorSettings.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Generator\Multiplexor.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_HCD.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_IT.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm407.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Timer4XX.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Interface\InterfaceDevice.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -313,10 +347,18 @@
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Utils\Console.cpp" />
-    <ClCompile Include="..\..\Device\src\Utils\Debug.cpp" />
-    <ClCompile Include="..\..\Device\src\Utils\Math.cpp" />
-    <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp" />
+    <ClCompile Include="..\..\Device\src\Utils\Console.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Debug.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Math.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\common\_VS\algorithm" />

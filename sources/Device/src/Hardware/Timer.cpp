@@ -1,12 +1,14 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "Timer.h"
 #include "Log.h"
-#if defined STM32F407xx
 #include <stm32f4xx.h>
 #include "Timer4XX.h"
-#endif
 #include <limits.h>
 #include "Hardware/CPU/CPU.h"
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #if defined  STM32F407xx

@@ -3,21 +3,28 @@
 #ifdef WIN32
 
 #include "Log.h"
+#include "structs.h"
 
 #include "FDrive/FDrive.h"
 #include "FreqMeter/FreqMeter.h"
 
 #include "Generator/GeneratorDevice.h"
+#include "Generator/GeneratroSettings.h"
 
 #include "Hardware/Timer.h"
+#include "Hardware/Timer4XX.h"
 #include "Hardware/CPU/CPU.h"
 #include "Hardware/VCP.h"
 
 #include "Interface/InterfaceDevice.h"
 
 #include "Utils/Console.h"
+#include "Utils/Debug.h"
+#include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 
+#include <limits.h>
+#include <math.h>
 #include <stdarg.h>
 
 #include "usbh_diskio.h"

@@ -1,7 +1,10 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include <stm32f4xx.h>
 #include "Hardware/CPU/CPU.h"
 #include "Interface/InterfaceDevice.h"
 #include "Utils/Debug.h"
+#endif
 
 
 #ifdef __cplusplus

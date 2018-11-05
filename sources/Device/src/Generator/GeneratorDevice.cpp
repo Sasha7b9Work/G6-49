@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "AD5697.h"
 #include "FPGA.h"
 #include "GeneratorDevice.h"
@@ -6,6 +8,7 @@
 #include "FreqMeter/FreqMeter.h"
 #include "Utils/Console.h"
 #include "CommonTypes.h"
+#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
