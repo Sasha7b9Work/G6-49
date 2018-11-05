@@ -23,56 +23,58 @@
 /// Возможные команды для передачи в основной процессор
 struct Command
 {
+    // Значок "->" означает, что передача ведётся от прибора к панели
+
     enum E
     {
-    //  0
-    //  RequestData
-        RequestData,                ///< Запрос данных. Панель постоянно опрашивает генератор на предмет наличия данных для передачи.
-        EnableChannel,              ///< Включить/выключить канал
-    //  0           1       2
-    //  SetFomrWave NumChan Form
-        SetFormWave,                ///< Установить форму сигнала
-        SetFrequency,               ///< Установить частоту
-        SetAmplitude,               ///< Установить амплитуду
-        SetOffset,                  ///< Установать смещение
-        SetDuration,
-        SetDutyRatio,
-        SetPhase,
-        RunReset,                   ///< Сброс состояния
-        ModeDebug,                  ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
-        SetDelay,                   ///< Задержка
-    //  0             1            2...9
-    //  WriteRegister NameRegister Value64
-        WriteRegister,              ///< Занести значение в регистр
-        SetDurationRise,
-        SetDurationFall,
-        SetDurationStady,
-        SetDutyFactor,
-        SetManipulation,            ///< Установить режим манипуляции
-        SetManipulationDuration,    ///< Установить длительность ипульса в режиме манипуляции
-        SetManipulationPeriod,      ///< Установить период следования импульсов в режиме манипуляции
-        SetPacketPeriod,
-        SetPacketNumber,
-    //  0            1        2
-    //  SetStartMode NUM_CHAN value
-        SetStartMode,               ///< Установить режим запуска по каналу
-        SetPeriod,                  ///< Установить период
-    //  0           1        2
-    //  SetPolarity NUM_CHAN polarity
-        SetPolarity,
-    //  0                   1        2
-    //  SetManipulationMode NUM_CHAN mode
-        SetManipulationMode,
-    //  0            1       2...8193
-    //  LoadFormDDS, NumChan Points
-        LoadFormDDS,                ///< Загружает точки сигнала произовольной формы
-    //  0            1...5
-    //  FreqMeasure, измерение
-        FreqMeasure,                ///< Пересылка показаний частотомера в панель
-    //  0
-    //  Log
-        Log,                        ///< Сообщение для вывода в лог
-        Number
+         // 0
+         // RequestData
+            RequestData,                ///< Запрос данных. Панель постоянно опрашивает генератор на предмет наличия данных для передачи.
+            EnableChannel,              ///< Включить/выключить канал
+         // 0           1       2
+         // SetFomrWave NumChan Form
+            SetFormWave,                ///< Установить форму сигнала
+            SetFrequency,               ///< Установить частоту
+            SetAmplitude,               ///< Установить амплитуду
+            SetOffset,                  ///< Установать смещение
+            SetDuration,
+            SetDutyRatio,
+            SetPhase,
+            RunReset,                   ///< Сброс состояния
+            ModeDebug,                  ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
+            SetDelay,                   ///< Задержка
+         // 0             1            2...9
+         // WriteRegister NameRegister Value64
+            WriteRegister,              ///< Занести значение в регистр
+            SetDurationRise,
+            SetDurationFall,
+            SetDurationStady,
+            SetDutyFactor,
+            SetManipulation,            ///< Установить режим манипуляции
+            SetManipulationDuration,    ///< Установить длительность ипульса в режиме манипуляции
+            SetManipulationPeriod,      ///< Установить период следования импульсов в режиме манипуляции
+            SetPacketPeriod,
+            SetPacketNumber,
+         // 0            1        2
+         // SetStartMode NUM_CHAN value
+            SetStartMode,               ///< Установить режим запуска по каналу
+            SetPeriod,                  ///< Установить период
+         // 0           1        2
+         // SetPolarity NUM_CHAN polarity
+            SetPolarity,
+         // 0                   1        2
+         // SetManipulationMode NUM_CHAN mode
+            SetManipulationMode,
+         // 0            1       2...8193
+         // LoadFormDDS, NumChan Points
+            LoadFormDDS,                ///< Загружает точки сигнала произовольной формы
+         // 0            1...5
+         // FreqMeasure, измерение
+/* -> */    FreqMeasure,                ///< Пересылка показаний частотомера в панель
+         //  0
+         // Log
+/* -> */    Log,                        ///< Сообщение для вывода в лог
+            Number
     } value;
     Command(E v) : value(v) {};
     Command(const uint8 v) : value((E)v) {};
