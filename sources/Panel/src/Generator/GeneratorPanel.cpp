@@ -284,6 +284,8 @@ static void SendToInterface(const uint8 *buffer, uint16 size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void ProcessDataFPGA()
 {
+    /// \todo Процесс обмена прерывается иногда. Нужно проверять информацию на ошибки
+
     uint8 command = Command::RequestData;
 
     SendToInterface(&command, 1);
