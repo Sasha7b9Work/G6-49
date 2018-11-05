@@ -3,6 +3,7 @@
 #include <stm32f4xx.h>
 #include "Hardware/CPU/CPU.h"
 #include "Interface/InterfaceDevice.h"
+#include "Utils/Console.h"
 #include "Utils/Debug.h"
 #endif
 
@@ -26,7 +27,7 @@ extern "C" {
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     void OTG_FS_IRQHandler()
-    {
+    {      
         HAL_HCD_IRQHandler(&CPU::HCD::handle);
     }
     

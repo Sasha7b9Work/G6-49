@@ -31,7 +31,7 @@ void CPU::HCD::Init()
     __SYSCFG_CLK_ENABLE();
 
     isGPIO.Speed = GPIO_SPEED_HIGH;
-    isGPIO.Pin = GPIO_PIN_9 | GPIO_PIN_11 | GPIO_PIN_12;
+    isGPIO.Pin = GPIO_PIN_11 | GPIO_PIN_12;
     isGPIO.Alternate = GPIO_AF10_OTG_FS;
 
     HAL_GPIO_Init(GPIOA, &isGPIO);

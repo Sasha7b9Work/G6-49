@@ -8,6 +8,7 @@ class FDrive
 public:
 
     static void Init();
+    static void Update();
 
     static USBH_HandleTypeDef hUSB_Host;
 };
