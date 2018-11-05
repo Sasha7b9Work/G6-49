@@ -96,7 +96,7 @@ void Interface::ReceiveAndRun(uint16 numBytes)
         }
         else if(buffer[0] == Command::FDrive_Mount)
         {
-            FDrive::SetConnected(buffer[1] != 0);
+            FDrive::HandlerInterface(buffer);
         }
         else if(*buffer == Command::FDrive_NumDirsAndFiles)
         {

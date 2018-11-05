@@ -21,6 +21,8 @@
 //static int firstFile = 0;
 /// Номер подсвеченного файла
 //static int curFile = 0;
+/// true, если флешка подключена
+static bool isConnected = false;
 
 static uint numDirs = 0;
 
@@ -44,7 +46,7 @@ struct State
 
 static State::E state = State::NeedRepaint;
 
-FDrive::View FDrive::view = FDrive::Dirs;
+FDrive::View FDrive::view = FDrive::Files;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Выводит название текущего каталога в координатах [left, top]
@@ -67,7 +69,7 @@ void FDrive::Graphics::Draw()
     int height = Wave::Graphics::Height() * 2;
     Painter::FillRegion(x, y, width, height, Color::BACK);
 
-    if(!FDrive::IsConnected())
+    if(!isConnected)
     {
         Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
         return;
@@ -107,7 +109,15 @@ static void DrawNameCurrentDir(int left, int top)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::HandlerInterface(uint8 *data)
 {
-    if(*data == Command::FDrive_NumDirsAndFiles)
+    if(*data == Command::FDrive_Mount)
+    {
+        isConnected = *(data + 1) != 0;
+        if(!isConnected)
+        {
+            state = State::NeedRepaint;
+        }
+    }
+    else if(*data == Command::FDrive_NumDirsAndFiles)
     {
         BitSet32 dirs(data + 1);
         BitSet32 files(data + 5);
@@ -139,7 +149,7 @@ void FDrive::HandlerInterface(uint8 *data)
 void FDrive::DrawDirs()
 {
     int x = Wave::Graphics::X() + 5;
-    int y = Wave::Graphics::Y(Chan::A) + 5;
+    int y = Wave::Graphics::Y(Chan::A) + 15;
     int delta = 10;
 
     for(uint i = 0; i < numDirs; i++)
@@ -152,7 +162,7 @@ void FDrive::DrawDirs()
     {
         for(uint i = 0; i < numDirs; i++)
         {
-            if(names[0][0] == 0)
+            if(names[i][0] == 0)
             {
                 FDrive::RequestNameDir(i, directory);
                 state = State::Wait;
@@ -179,7 +189,7 @@ void FDrive::DrawFiles()
     {
         for(uint i = 0; i < numFiles; i++)
         {
-            if(names[0][0] == 0)
+            if(names[i][0] == 0)
             {
                 FDrive::RequestNameFile(i, directory);
                 state = State::Wait;

@@ -6,8 +6,6 @@ class FDrive
 public:
     /// Начальная инициализация
     static void Init();
-    /// true, если флешка подключена
-    static bool IsConnected();
 
     /// Что показываем - каталоги или файлы
     enum View
@@ -41,8 +39,6 @@ private:
     static void RequestNameDir(uint numDir, pString directory);
 
     static void RequestNameFile(uint numFile, pString directory);
-    /// Устанавливает признак присоединённой флешки
-    static void SetConnected(bool connected);
 
     static void HandlerInterface(uint8 *data);
 

@@ -228,16 +228,19 @@ void FDrive::HandlerInterface()
     }
     if(command == Command::FDrive_RequestDir || command == Command::FDrive_RequestFile)
     {
-        uint8 *src = Interface::recv + 5;
-        char *dest = &path[0];
-        while(*src)
-        {
-            *dest++ = (char)*src++;
-        }
-        *dest = '\0';
-
         BitSet32 num(Interface::recv + 1);
         numItem = num.word;
+
+        if(numItem < 1)
+        {
+            uint8 *src = Interface::recv + 5;
+            char *dest = &path[0];
+            while(*src)
+            {
+                *dest++ = (char)*src++;
+            }
+            *dest = '\0';
+        }
     }
 
     isBusy = false;
