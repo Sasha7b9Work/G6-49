@@ -13,7 +13,7 @@ public:
     /// Interface вызывает эту функцию для обработки принятой команды
     static void HandlerInterface();
     /// Возвращает количество байт для передачи
-    static uint16 NumBytesForSend();
+    static uint NumBytesForSend();
     /// Получает данные для передачи в панель. Параметром нужно передать указатель на буфер размером не менее возвращаемого функцией NumBytesForSend значения
     static uint8 *GetDataForSend(uint8 *buffer);
 

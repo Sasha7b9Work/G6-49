@@ -11,6 +11,15 @@ public:
     /// true, если флешка подключена
     static bool IsConnected();
 
+    /// Что показываем - каталоги или файлы
+    enum View
+    {
+        Dirs,
+        Files
+    };
+    
+    static View view;
+
     class Graphics
     {
     friend class FDrive;
@@ -29,4 +38,6 @@ private:
     static void RequestNumDirsAndFiles(pString directory);
     /// Устанавливает признак присоединённой флешки
     static void SetConnected(bool connected);
+
+    static void HandlerSetNumDirsAndFiles(uint numDirs, uint numFiles);
 };

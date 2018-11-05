@@ -63,7 +63,9 @@ commands[Command::Number] =
 /* FreqMeasure             */ Interface::Empty,
 /* Log                     */ Interface::Empty,
 /* FDrive_NumDirsAndFiles  */ FDrive::HandlerInterface,
-/* FDrive_Mount            */ Interface::Empty
+/* FDrive_Mount            */ Interface::Empty,
+/* FDrive_RequestDir       */ FDrive::HandlerInterface,
+/* FDrive_RequestFile      */ FDrive::HandlerInterface
 };
 
 
@@ -333,7 +335,7 @@ static void SendData()
 
     if(FDrive::NumBytesForSend())
     {
-        uint16 numBytes = FDrive::NumBytesForSend();
+        uint numBytes = FDrive::NumBytesForSend();
         if(numBytes)
         {
             CPU::SPI1_::Transmit(&numBytes, 2);

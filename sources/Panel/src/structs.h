@@ -54,6 +54,13 @@ union BitSet32
             }
         }
     }
+    void WriteToBuffer(uint8 buffer[4])
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            buffer[i] = byte[i];
+        }
+    }
 };
 
 

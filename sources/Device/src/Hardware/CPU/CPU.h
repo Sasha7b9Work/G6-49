@@ -85,11 +85,11 @@ public:
         static void Init();
 
     public:
-        static void ReceiveIT(void *buffer, uint16 size);
+        static void ReceiveIT(void *buffer, uint size);
 
-        static void Receive(void *buffer, uint16 size);
+        static void Receive(void *buffer, uint size);
 
-        static void Transmit(void *buffer, uint16 size);
+        static void Transmit(void *buffer, uint size);
 
         static SPI_HandleTypeDef *Handle();
     };

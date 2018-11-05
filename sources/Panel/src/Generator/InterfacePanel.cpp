@@ -98,6 +98,12 @@ void Interface::ReceiveAndRun(uint16 numBytes)
         {
             FDrive::SetConnected(buffer[1] != 0);
         }
+        else if(buffer[0] == Command::FDrive_NumDirsAndFiles)
+        {
+            BitSet32 numDirs(buffer + 1);
+            BitSet32 numFiles(buffer + 5);
+            FDrive::HandlerSetNumDirsAndFiles(numDirs.word, numFiles.word);
+        }
     }
 
     free(buffer);

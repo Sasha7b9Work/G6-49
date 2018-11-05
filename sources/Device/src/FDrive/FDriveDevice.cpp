@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "structs.h"
 #include "Log.h"
 #include "FDriveDevice.h"
 #include "Interface/InterfaceDevice.h"
@@ -20,7 +21,7 @@ static char USBDISKPath[4];
 /// true, если флешка подключена
 volatile static bool isConnected = false;
 /// Количество байт для передачи в Interface
-static uint16 numBytesForSend = 0;
+static uint numBytesForSend = 0;
 /// Начало буфера данных для передачи в Interface
 static uint8 *bufferForSend = 0;
 /// Если true, то устройство занято и обмен с интерфейсом запрещён
@@ -49,7 +50,9 @@ static Command command = Command::Number;
 /// В эту функцию попадаем при каждом событии на OTG FS
 static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
 /// Получает количество каталогов и файлов в данной директории
-static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles);
+static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
+/// Подготовить буфер для даныых
+static void PrepareBufferForData(uint size, uint8 command);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,9 +116,8 @@ void FDrive::Update()
 
         if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
         {
-            numBytesForSend = 1 + 1;
-            bufferForSend = (uint8 *)malloc(numBytesForSend);
-            bufferForSend[0] = Command::FDrive_Mount;
+            PrepareBufferForData(1 + 1, Command::FDrive_Mount);
+
             bufferForSend[1] = 1;
         }
 
@@ -126,18 +128,24 @@ void FDrive::Update()
     {
         f_mount(0, "", 0);
 
-        numBytesForSend = 1 + 1;
-        bufferForSend = (uint8 *)malloc(numBytesForSend);
-        bufferForSend[0] = Command::FDrive_Mount;
+        PrepareBufferForData(1 + 1, Command::FDrive_Mount);
+
         bufferForSend[1] = 0;
 
         state = State::Disconnected;
     }
     else if(command == Command::FDrive_NumDirsAndFiles)
     {
-        int numDirs;
-        int numFiles;
-        GetNumDirsAndFiles(path, &numDirs, &numFiles);
+        PrepareBufferForData(1 + 4 + 4, Command::FDrive_NumDirsAndFiles);
+
+        BitSet32 numDirs;
+        BitSet32 numFiles;
+
+        GetNumDirsAndFiles(path, &numDirs.word, &numFiles.word);
+
+        numDirs.WriteToBuffer(bufferForSend + 1);
+        numFiles.WriteToBuffer(bufferForSend + 5);
+
         command = Command::Number;
     }
 
@@ -145,7 +153,15 @@ void FDrive::Update()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint16 FDrive::NumBytesForSend()
+static void PrepareBufferForData(uint size, uint8 com)
+{
+    numBytesForSend = size;
+    bufferForSend = (uint8 *)malloc(numBytesForSend);
+    *bufferForSend = com;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint FDrive::NumBytesForSend()
 {
     if(isBusy)
     {
@@ -185,16 +201,13 @@ void FDrive::HandlerInterface()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles)
+static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
 {
     FILINFO fno;
     DIR dir;
 
     *numDirs = 0;
     *numFiles = 0;
-
-    Console::AddString(fullPath);
-
 
     char nameDir[_MAX_LFN + 1];
     memcpy(nameDir, (void *)fullPath, strlen(fullPath));
@@ -234,7 +247,4 @@ static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles
         }
         f_closedir(&dir);
     }
-
-    Console::AddInt(*numDirs);
-    Console::AddInt(*numFiles);
 }

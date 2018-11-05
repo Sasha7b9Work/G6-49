@@ -2,3 +2,6 @@
 #ifndef WIN32
 #include "EEPROM.h"
 #endif
+
+
+int tempI = 0;

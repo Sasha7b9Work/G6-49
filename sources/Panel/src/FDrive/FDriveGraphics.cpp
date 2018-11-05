@@ -21,27 +21,36 @@ static int firstFile = 0;
 /// Номер подсвеченного файла
 static int curFile = 0;
 
-static int numDirs = 0;
+static uint numDirs = 0;
 
-static int numFiles = 0;
+static uint numFiles = 0;
 /// Путь к текущему каталогу
 static char directory[255] = "\\";
+/// Здесь хранятся имена каталогов или файлов
+static const int NUM_ITEMS = 20;
+static char names[NUM_ITEMS][50];
 
 /// В каком состоянии находится обмен с флешкой
 struct State
 {
     enum E
     {
-        None,               ///< Начальное состояние после запуска
-        WaitNumDirsAndFiles ///< Ожидание ответа на запрос о количестве каталогов и файлов в directory
+        NeedRepaint,            ///< Нужна перерисовка
+        Idle                    ///< Ничего делать не нужно
     } value;
 };
 
-static State::E state = State::None;
+static State::E state = State::NeedRepaint;
+
+FDrive::View FDrive::view = FDrive::Dirs;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Выводит название текущего каталога в координатах [left, top]
 static void DrawNameCurrentDir(int left, int top);
+/// Написать список каталогов
+static void DrawDirs();
+/// Написать список файлов
+static void DrawFiles();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,13 +75,28 @@ void FDrive::Graphics::Draw()
         return;
     }
 
-    if(state == State::None)
+    DrawNameCurrentDir(x + 3, y + 1);
+
+    if(state == State::NeedRepaint)
     {
+        for(int i = 0; i < NUM_ITEMS; i++)
+        {
+            names[i][0] = '\0';
+        }
+
+        numDirs = numFiles = 0;
+
         FDrive::RequestNumDirsAndFiles(directory);
-        state = State::WaitNumDirsAndFiles;
+        state = State::Idle;
+    }
+
+    if(view == Dirs)
+    {
+        DrawDirs();
     }
     else
     {
+        DrawFiles();
     }
 }
 
@@ -80,4 +104,23 @@ void FDrive::Graphics::Draw()
 static void DrawNameCurrentDir(int left, int top)
 {
     Text::DrawText(left, top, directory, Color::FILL);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::HandlerSetNumDirsAndFiles(uint _numDirs, uint _numFiles)
+{
+    numDirs = _numDirs;
+    numFiles = _numFiles;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawDirs()
+{
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawFiles()
+{
+
 }

@@ -221,9 +221,9 @@ void CPU::SPI1_::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI1_::ReceiveIT(void *buffer, uint16 size)
+void CPU::SPI1_::ReceiveIT(void *buffer, uint size)
 {
-    HAL_SPI_Receive_IT(&hSPI1, (uint8 *)buffer, size);
+    HAL_SPI_Receive_IT(&hSPI1, (uint8 *)buffer, (uint16)size);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,17 +233,17 @@ SPI_HandleTypeDef *CPU::SPI1_::Handle()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI1_::Receive(void *buffer, uint16 size)
+void CPU::SPI1_::Receive(void *buffer, uint size)
 {
     CPU::SetReady();
-    HAL_SPI_Receive(&hSPI1, (uint8 *)buffer, size, 100);
+    HAL_SPI_Receive(&hSPI1, (uint8 *)buffer, (uint16)size, 100);
     CPU::SetBusy();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI1_::Transmit(void *buffer, uint16 size)
+void CPU::SPI1_::Transmit(void *buffer, uint size)
 {
     CPU::SetReady();
-    HAL_SPI_Transmit(&hSPI1, (uint8 *)buffer, size, 100);
+    HAL_SPI_Transmit(&hSPI1, (uint8 *)buffer, (uint16)size, 100);
     CPU::SetBusy();
 }
