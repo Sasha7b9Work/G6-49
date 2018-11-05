@@ -314,7 +314,8 @@ static void SendData()
 
         CPU::SPI1_::Transmit(buffer, 5);
     }
-    else if (Console::ExistString())
+
+    if(Console::ExistString())
     {
         char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
         Console::GetString(buffer + 1);
@@ -323,11 +324,9 @@ static void SendData()
         CPU::SPI1_::Transmit(&numBytes, 2);
         CPU::SPI1_::Transmit(buffer, LENGTH_SPI_BUFFER);
     }
-    else
-    {
-        uint16 numBytes = 0;
-        CPU::SPI1_::Transmit(&numBytes, 2);
-    }
+
+    uint16 numBytes = 0;
+    CPU::SPI1_::Transmit(&numBytes, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

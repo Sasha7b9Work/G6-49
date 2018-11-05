@@ -25,6 +25,5 @@ int main()
     while (1)
     {
         FreqMeter::Update();
-        Console::AddString("1");
     }
 }

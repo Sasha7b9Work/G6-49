@@ -85,9 +85,9 @@ public:
         static void Init();
 
     public:
-        static void ReceiveIT(uint8 *buffer, uint16 size);
+        static void ReceiveIT(void *buffer, uint16 size);
 
-        static void Receive(uint8 *buffer, uint16 size);
+        static void Receive(void *buffer, uint16 size);
 
         static void Transmit(void *buffer, uint16 size);
 

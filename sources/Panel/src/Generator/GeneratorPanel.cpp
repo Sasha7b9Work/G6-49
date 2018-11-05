@@ -266,7 +266,7 @@ static void SendToInterface(const uint8 *buffer, uint16 size)
         //LOG_WRITE("передаю %s", command.Trace(buffer));
     }
 
-    CPU::SPI4_::Transmit((uint8 *)&size, 2);
+    CPU::SPI4_::Transmit(&size, 2);
 
     const uint8 *pointer = buffer;
     while(size > 0)
@@ -290,18 +290,19 @@ static void ProcessDataFPGA()
 
     uint16 numBytes = 0;
 
-    CPU::SPI4_::Receive((uint8 *)&numBytes, 2);
+    CPU::SPI4_::Receive(&numBytes, 2);
 
-    if(numBytes)  // ѕрин€тое значение означает число байт, готовых дл€ передачи вспомогательным процессором
+    while(numBytes > 0)         // ѕрин€тое значение означает число байт, готовых дл€ передачи вспомогательным процессором
     {
         ReceiveAndRun(numBytes);
+        CPU::SPI4_::Receive(&numBytes, 2);
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void ReceiveAndRun(uint16 numBytes)
 {
-    LOG_WRITE("“ребуетс€ прин€ть %d байт", numBytes);
+    //LOG_WRITE("“ребуетс€ прин€ть %d байт", numBytes);
 
     uint8 *buffer = (uint8 *)malloc(numBytes);
 
