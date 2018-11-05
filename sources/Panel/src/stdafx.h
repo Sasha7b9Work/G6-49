@@ -16,7 +16,7 @@
 
 #include "Generator/Signals.h"
 
-#include "FDrive/FDrive.h"
+#include "FDrive/FDrivePanel.h"
 
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"

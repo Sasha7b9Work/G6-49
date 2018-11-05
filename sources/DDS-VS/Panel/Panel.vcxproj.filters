@@ -264,14 +264,14 @@
     <ClCompile Include="..\..\Panel\src\FDrive\FDriveGraphics.cpp">
       <Filter>FDrive</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\FDrive\FDrive.cpp">
-      <Filter>FDrive</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Generator\GeneratorPanel.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Generator\InterfacePanel.cpp">
       <Filter>Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\FDrive\FDrivePanel.cpp">
+      <Filter>FDrive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -524,9 +524,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\Include\PageSignals.h">
       <Filter>Menu\Pages\Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\FDrive\FDrive.h">
-      <Filter>FDrive</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\stdafx.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -535,6 +532,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Generator\InterfacePanel.h">
       <Filter>Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\FDrive\FDrivePanel.h">
+      <Filter>FDrive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1757,19 +1757,19 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
-              <FileName>FDrive.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDrive.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FDriveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FDrive\FDriveGraphics.cpp</FilePath>
             </File>
             <File>
-              <FileName>FDrive.h</FileName>
+              <FileName>FDrivePanel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\FDrivePanel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FDrivePanel.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FDrive\FDrive.h</FilePath>
+              <FilePath>.\src\FDrive\FDrivePanel.h</FilePath>
             </File>
           </Files>
         </Group>

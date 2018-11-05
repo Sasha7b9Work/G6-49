@@ -178,7 +178,7 @@
     <ClInclude Include="..\..\common\_VS\tchar.h" />
     <ClInclude Include="..\..\common\_VS\windows.h" />
     <ClInclude Include="..\..\Device\src\defines.h" />
-    <ClInclude Include="..\..\Device\src\FDrive\FDrive.h" />
+    <ClInclude Include="..\..\Device\src\FDrive\FDriveDevice.h" />
     <ClInclude Include="..\..\Device\src\FreqMeter\FreqMeter.h" />
     <ClInclude Include="..\..\Device\src\Generator\AD5697.h" />
     <ClInclude Include="..\..\Device\src\Generator\AD9952.h" />
@@ -245,7 +245,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Common\Wave.cpp" />
-    <ClCompile Include="..\..\Device\src\FDrive\FDrive.cpp" />
+    <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice.cpp" />
     <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>

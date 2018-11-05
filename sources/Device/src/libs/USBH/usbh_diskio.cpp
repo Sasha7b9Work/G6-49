@@ -1,6 +1,6 @@
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
-#include "FDrive/FDrive.h"
+#include "FDrive/FDriveDevice.h"
 
 
 DSTATUS USBH_initialize (BYTE);

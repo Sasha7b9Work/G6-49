@@ -1009,8 +1009,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\FDrive.cpp</PathWithFileName>
-      <FilenameWithoutPath>FDrive.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\FDriveDevice.cpp</PathWithFileName>
+      <FilenameWithoutPath>FDriveDevice.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1021,8 +1021,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\FDrive.h</PathWithFileName>
-      <FilenameWithoutPath>FDrive.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\FDriveDevice.h</PathWithFileName>
+      <FilenameWithoutPath>FDriveDevice.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

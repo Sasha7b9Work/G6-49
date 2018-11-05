@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "Include/PageSignals.h"
 #include "Display/Painter.h"
-#include "FDrive/FDrive.h"
+#include "FDrive/FDrivePanel.h"
 #endif
 
 

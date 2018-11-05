@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "FDrive/FDrive.h"
+#include "FDrive/FDriveDevice.h"
 #include "Generator/GeneratorDevice.h"
 #include "Generator/AD5697.h"
 #include "Interface/InterfaceDevice.h"

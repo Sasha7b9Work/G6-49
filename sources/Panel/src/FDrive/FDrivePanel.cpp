@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "FDrive.h"
+#include "FDrivePanel.h"
 #endif
 
 

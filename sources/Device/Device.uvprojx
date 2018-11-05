@@ -1112,14 +1112,14 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
-              <FileName>FDrive.cpp</FileName>
+              <FileName>FDriveDevice.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDrive.cpp</FilePath>
+              <FilePath>.\src\FDrive\FDriveDevice.cpp</FilePath>
             </File>
             <File>
-              <FileName>FDrive.h</FileName>
+              <FileName>FDriveDevice.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FDrive\FDrive.h</FilePath>
+              <FilePath>.\src\FDrive\FDriveDevice.h</FilePath>
             </File>
           </Files>
         </Group>

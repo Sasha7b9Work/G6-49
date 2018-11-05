@@ -5,7 +5,7 @@
 #include "Log.h"
 #include "structs.h"
 
-#include "FDrive/FDrive.h"
+#include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
 
 #include "Generator/GeneratorDevice.h"

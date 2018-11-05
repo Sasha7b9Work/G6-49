@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Log.h"
-#include "FDrive.h"
+#include "FDriveDevice.h"
 #include "usbh_diskio.h"
 #include "usbh_conf.h"
 #endif
