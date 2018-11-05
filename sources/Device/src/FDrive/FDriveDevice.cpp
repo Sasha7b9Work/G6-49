@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "Log.h"
 #include "FDriveDevice.h"
+#include "Interface/InterfaceDevice.h"
 #include "Hardware/CPU/CPU.h"
 #include "Utils/Console.h"
 #include "usbh_diskio.h"
@@ -24,6 +25,8 @@ static uint16 numBytesForSend = 0;
 static uint8 *bufferForSend = 0;
 /// Если true, то устройство занято и обмен с интерфейсом запрещён
 static bool isBusy = false;
+/// Путь к каталогу, количество файлов и каталогов в котором нужно узнать
+static char path[256];
 
 
 struct State
@@ -38,11 +41,15 @@ struct State
 };
 
 static State::E state = State::Disconnected;
+/// Здесь хранится обрабатываемая команда
+static Command command = Command::Number;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// В эту функцию попадаем при каждом событии на OTG FS
 static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
+/// Получает количество каталогов и файлов в данной директории
+static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,11 +99,17 @@ void FDrive::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Update()
 {
+    if(numBytesForSend)
+    {
+        return;
+    }
+
+    isBusy = true;
+
     USBH_Process(&hUSB_Host);
 
     if(state == State::NeedMount)
     {
-        isBusy = true;
 
         if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
         {
@@ -108,12 +121,9 @@ void FDrive::Update()
 
         state = State::Connected;
 
-        isBusy = false;
     }
     else if(state == State::NeedUnmount)
     {
-        isBusy = true;
-
         f_mount(0, "", 0);
 
         numBytesForSend = 1 + 1;
@@ -122,9 +132,16 @@ void FDrive::Update()
         bufferForSend[1] = 0;
 
         state = State::Disconnected;
-
-        isBusy = false;
     }
+    else if(command == Command::FDrive_NumDirsAndFiles)
+    {
+        int numDirs;
+        int numFiles;
+        GetNumDirsAndFiles(path, &numDirs, &numFiles);
+        command = Command::Number;
+    }
+
+    isBusy = false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -144,4 +161,80 @@ uint8 *FDrive::GetDataForSend(uint8 *buffer)
     free(bufferForSend);
     numBytesForSend = 0;
     return buffer;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::HandlerInterface()
+{
+    isBusy = true;
+
+    command = *Interface::recv;
+
+    if(command == Command::FDrive_NumDirsAndFiles)
+    {
+        uint8 *src = Interface::recv + 1;
+        char *dest = &path[0];
+        while(*src)
+        {
+            *dest++ = (char)*src++;
+        }
+        *dest = '\0';
+    }
+
+    isBusy = false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles)
+{
+    FILINFO fno;
+    DIR dir;
+
+    *numDirs = 0;
+    *numFiles = 0;
+
+    Console::AddString(fullPath);
+
+
+    char nameDir[_MAX_LFN + 1];
+    memcpy(nameDir, (void *)fullPath, strlen(fullPath));
+    nameDir[strlen(fullPath)] = '\0';
+
+    if (f_opendir(&dir, nameDir) == FR_OK)
+    {
+        int numReadingElements = 0;
+        bool alreadyNull = false;
+        while (true)
+        {
+            if (f_readdir(&dir, &fno) != FR_OK)
+            {
+                break;
+            }
+            if (fno.fname[0] == 0)
+            {
+                if (alreadyNull)
+                {
+                    break;
+                }
+                alreadyNull = true;
+                continue;
+            }
+            numReadingElements++;
+            if (fno.fname[0] != '.')
+            {
+                if (fno.fattrib & AM_DIR)
+                {
+                    (*numDirs)++;
+                }
+                else
+                {
+                    (*numFiles)++;
+                }
+            }
+        }
+        f_closedir(&dir);
+    }
+
+    Console::AddInt(*numDirs);
+    Console::AddInt(*numFiles);
 }

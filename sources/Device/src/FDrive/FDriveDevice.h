@@ -10,6 +10,8 @@ public:
     static void Init();
 
     static void Update();
+    /// Interface вызывает эту функцию для обработки принятой команды
+    static void HandlerInterface();
     /// Возвращает количество байт для передачи
     static uint16 NumBytesForSend();
     /// Получает данные для передачи в панель. Параметром нужно передать указатель на буфер размером не менее возвращаемого функцией NumBytesForSend значения

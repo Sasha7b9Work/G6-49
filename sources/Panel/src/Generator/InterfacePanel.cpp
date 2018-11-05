@@ -1,13 +1,14 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Utils/Buffer.h"
+#include "InterfacePanel.h"
 #include "Command.h"
 #include "structs.h"
 #include "Display/Console.h"
 #include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
-#include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "InterfacePanel.h"
 #include <stdlib.h>
@@ -42,7 +43,7 @@ void Interface::ProcessDataFPGA()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Send(const uint8 *buffer, uint16 size)
+void Interface::Send(const uint8 *buffer, uint size)
 {
     Command command(*buffer);
     if (Debug::ShowSends() && command.value != Command::RequestData)
@@ -55,7 +56,7 @@ void Interface::Send(const uint8 *buffer, uint16 size)
     const uint8 *pointer = buffer;
     while (size > 0)
     {
-        uint16 sizeChunk = (size > 1024u) ? 1024u : size; // Размер куска для передачи
+        uint sizeChunk = (size > 1024u) ? 1024u : size; // Размер куска для передачи
 
         size -= sizeChunk;
 

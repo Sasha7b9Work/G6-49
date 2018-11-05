@@ -80,11 +80,11 @@ public:
         static void Init();
     public:
         /// Переслать массив данных
-        static void Transmit(const void *buffer, uint16 size);
+        static void Transmit(const void *buffer, uint size);
         /// Переслать массив данных с одновременным приёмом второго массива
-        static bool TransmitReceive(void *trans, void *receiv, uint16 size);
+        static bool TransmitReceive(void *trans, void *receiv, uint size);
         /// Принять массив данных
-        static void Receive(void *recv, uint16 size);
+        static void Receive(void *recv, uint size);
         /// Возвращает true, если интерфейс занят - процессор не может приниммать команды
         static bool IsBusy();
     };

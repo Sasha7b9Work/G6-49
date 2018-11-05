@@ -8,6 +8,7 @@ public:
     static void AddString(char *buffer);
     static void AddString(pString buffer);
     static void AddFloat(float value);
+    static void AddInt(int value);
     static bool ExistString();
     static void GetString(char buffer[LENGTH_SPI_BUFFER - 1]);
 };

@@ -38,8 +38,8 @@ public:
     static void LoadFormDDS();
 
     static void SetPolarity();
-
-
+    ///< Буфер для принимаемых команд
+    static uint8 *recv;
 
 private:
     /// Установить размер приёмного буфера равным size

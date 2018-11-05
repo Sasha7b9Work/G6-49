@@ -20,7 +20,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static uint8 *recv = 0;                         ///< Ѕуфер дл€ принимаемых команд
+uint8 *Interface::recv = 0;                         
 /// Ќенулевое значение означает, что его следует передать в панель как измеренное частотомером значение
 static uint freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
@@ -62,7 +62,7 @@ commands[Command::Number] =
 /* LoadFromDDS             */ Interface::LoadFormDDS,
 /* FreqMeasure             */ Interface::Empty,
 /* Log                     */ Interface::Empty,
-/* FDrive_NumDirsAndFiles  */ Interface::Empty,
+/* FDrive_NumDirsAndFiles  */ FDrive::HandlerInterface,
 /* FDrive_Mount            */ Interface::Empty
 };
 
@@ -352,7 +352,7 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *)
 {
     CPU::SetBusy();
     Interface::ReceiveCallback();
-    CPU::SPI1_::ReceiveIT(recv, 2);
+    CPU::SPI1_::ReceiveIT(Interface::recv, 2);
     CPU::SetReady();
 }
 
@@ -361,7 +361,7 @@ void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
 {
     HAL_SPI_Init(CPU::SPI1_::Handle());
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
-    HAL_SPI_Receive_IT(CPU::SPI1_::Handle(), recv, 2);
+    HAL_SPI_Receive_IT(CPU::SPI1_::Handle(), Interface::recv, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
