@@ -24,7 +24,7 @@ int main()
   
     while (1)
     {
-        FreqMeter::Update();
-        FDrive::Update();
+        //FreqMeter::Update();
+        //FDrive::Update();
     }
 }
