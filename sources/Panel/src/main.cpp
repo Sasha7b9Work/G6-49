@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #ifndef WIN32
+#include "Generator/InterfacePanel.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
@@ -32,7 +33,7 @@ int main()
         CPU::Update();
         Menu::Update();
         Display::Update();
-        Generator::Update();
+        Interface::Update();
     }
 }
 

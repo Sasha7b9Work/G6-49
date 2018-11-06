@@ -5,6 +5,8 @@
 class Interface
 {
 public:
+    /// Для приёма сообщений от устройства
+    static void Update();
     /// Принять и обработать данные от ПЛИС
     static void ProcessDataFPGA();
     /// Заслать в генератор данные

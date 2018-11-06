@@ -24,8 +24,6 @@ class Generator
 {
 public:
     static void Reset();
-    /// Эта функция вызывается в цилке для приёма сообщений от прибора
-    static void Update();
 
     static void EnableChannel(Chan ch, bool enable);
 

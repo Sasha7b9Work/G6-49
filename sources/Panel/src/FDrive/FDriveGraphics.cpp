@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "structs.h"
 #include "FDrivePanel.h"
 #include "Display/Painter.h"

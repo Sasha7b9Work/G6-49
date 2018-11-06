@@ -9,6 +9,7 @@
 #include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "Utils/Debug.h"
 #include "InterfacePanel.h"
 #include <stdlib.h>
@@ -19,6 +20,19 @@
 void Interface::Send(const Buffer &buffer)
 {
     Send(buffer.Data(), (uint16)buffer.Length());
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Update()
+{
+    static uint timePrev = 0;
+    
+    if (TIME_MS - timePrev > 100)
+    {
+        ProcessDataFPGA();
+    
+        timePrev = TIME_MS;
+    }
 }
 
 

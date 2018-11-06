@@ -64,6 +64,8 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 static void PrepareBufferForData(uint size, uint8 command);
 /// Получить имя numDir-го каталога из каталога fullPath
 static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
+/// Получить имя numFile-го файла из каталога fullPath
+static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,6 +178,17 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_RequestFile)
     {
+        char buffer[256];
+        StructForReadDir str;
+        GetNameFile(path, (int)numItem, buffer, &str);
+
+        PrepareBufferForData(1 + 4 + strlen(buffer) + 1, Command::FDrive_RequestFile);
+
+        BitSet32 num;
+        num.word = numItem;
+        num.WriteToBuffer(bufferForSend + 1);
+        strcpy((char *)bufferForSend + 5, buffer);
+
         command = Command::Number;
     }
 
@@ -333,6 +346,50 @@ static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Struc
             if ((pFNO->fattrib & AM_DIR) && (pFNO->fname[0] != '.'))
             {
                 numDirs++;
+            }
+        }
+    }
+    return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
+{
+    memcpy(s->nameDir, (void *)fullPath, strlen(fullPath));
+    s->nameDir[strlen(fullPath)] = '\0';
+
+    DIR *pDir = &s->dir;
+    FILINFO *pFNO = &s->fno;
+    if (f_opendir(pDir, s->nameDir) == FR_OK)
+    {
+        int numFiles = 0;
+        bool alreadyNull = false;
+        while (true)
+        {
+            if (f_readdir(pDir, pFNO) != FR_OK)
+            {
+                *nameFileOut = '\0';
+                f_closedir(pDir);
+                return false;
+            }
+            if (pFNO->fname[0] == 0)
+            {
+                if (alreadyNull)
+                {
+                    *nameFileOut = '\0';
+                    f_closedir(pDir);
+                    return false;
+                }
+                alreadyNull = true;
+            }
+            if (numFile == numFiles && (pFNO->fattrib & AM_DIR) == 0)
+            {
+                strcpy(nameFileOut, pFNO->fname);
+                return true;
+            }
+            if ((pFNO->fattrib & AM_DIR) == 0 && (pFNO->fname[0] != '.'))
+            {
+                numFiles++;
             }
         }
     }

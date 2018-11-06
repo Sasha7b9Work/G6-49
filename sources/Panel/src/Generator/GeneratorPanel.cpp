@@ -168,19 +168,6 @@ void Generator::LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2])
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::Update()
-{
-    static uint timePrev = 0;
-
-    if(TIME_MS - timePrev > 100)
-    {
-        Interface::ProcessDataFPGA();
-
-        timePrev = TIME_MS;
-    }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterChoice *param)
 {
     static const struct StructCommand

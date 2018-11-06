@@ -3,7 +3,7 @@
 #ifdef WIN32
 
 #include "defines.h"
-#include "Log.h"
+#include "log.h"
 #include "structs.h"
 
 #include "Display/Console.h"
