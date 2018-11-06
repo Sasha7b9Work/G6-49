@@ -4,6 +4,7 @@
 #include "log.h"
 #include "structs.h"
 #include "FDrivePanel.h"
+#include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Wave.h"
@@ -34,6 +35,8 @@ static char directory[255] = "\\";
 static const int NUM_ITEMS = 20;
 static char names[NUM_ITEMS][50];
 
+static bool isBusy = false;
+
 /// В каком состоянии находится обмен с флешкой
 struct State
 {
@@ -48,10 +51,14 @@ struct State
 static State::E state = State::NeedRepaint;
 
 FDrive::View FDrive::view = FDrive::Files;
+/// Здесь хранится сообщение от устройства
+static uint8 message[300] = {0};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Выводит название текущего каталога в координатах [left, top]
 static void DrawNameCurrentDir(int left, int top);
+/// Обработка сообщения
+static void ProcessMessage();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +71,8 @@ void FDrive::Graphics::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Graphics::Draw()
 {
+    ProcessMessage();
+
     int x = Wave::Graphics::X();
     int y = Wave::Graphics::Y(Chan::A) + 1;
     int width = Wave::Graphics::Width() - 2;
@@ -110,6 +119,36 @@ static void DrawNameCurrentDir(int left, int top)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::HandlerInterface(uint8 *data)
 {
+    if(message[0])
+    {
+        LOG_WRITE("Не обработано предыдущее сообщение");
+        Console::Draw();
+        Painter::EndScene();
+        return;
+    }
+
+    if(isBusy)
+    {
+        LOG_WRITE("Я занят %d", *data);
+        return;
+    }
+
+    memcpy(message, data, 300);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static void ProcessMessage()
+{
+    isBusy = true;
+
+    uint8 *data = &message[0];
+
+    if(*data == 0)
+    {
+        isBusy = false;
+        return;
+    }
+
     if(*data == Command::FDrive_Mount)
     {
         isConnected = *(data + 1) != 0;
@@ -144,6 +183,14 @@ void FDrive::HandlerInterface(uint8 *data)
 
         state = State::Idle;
     }
+    else
+    {
+        LOG_WRITE("Не понимаю сообщения");
+    }
+
+    message[0] = 0;
+
+    isBusy = false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,8 +223,8 @@ void FDrive::DrawDirs()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::DrawFiles()
 {
-    int x = 5;
-    int y = 10;
+    int x = Wave::Graphics::X() + 5;
+    int y = Wave::Graphics::Y(Chan::A) + 15;
     int delta = 10;
 
     for(uint i = 0; i < numFiles; i++)

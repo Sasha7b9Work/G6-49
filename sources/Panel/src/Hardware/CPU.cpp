@@ -108,10 +108,15 @@ void CPU::SPI4_::Init()
 bool CPU::SPI4_::TransmitReceive(void *trans, void *receiv, uint size)
 {
 #ifndef OPEN
-    while(IsBusy()) {};
+
+    WaitFreedom();
+
     return HAL_SPI_TransmitReceive(&handleSPI4, (uint8 *)trans, (uint8 *)receiv, (uint16)size, 100) == HAL_OK;
+
 #else
+
     return false;
+
 #endif
 }
 
@@ -119,7 +124,8 @@ bool CPU::SPI4_::TransmitReceive(void *trans, void *receiv, uint size)
 void CPU::SPI4_::Transmit(const void *buffer, uint size)
 {
 #ifndef OPEN
-    while(IsBusy()) {};
+
+    WaitFreedom();
 
     HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100);
 
@@ -130,16 +136,18 @@ void CPU::SPI4_::Transmit(const void *buffer, uint size)
 void CPU::SPI4_::Receive(void *recv, uint size)
 {
 #ifndef OPEN
-    while(IsBusy()) {};
+    
+    WaitFreedom();
 
     HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100);
+
 #endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::SPI4_::IsBusy()
+void CPU::SPI4_::WaitFreedom()
 {
-    return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET;
+    while(HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {};
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

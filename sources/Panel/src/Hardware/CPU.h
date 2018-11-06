@@ -85,8 +85,9 @@ public:
         static bool TransmitReceive(void *trans, void *receiv, uint size);
         /// Принять массив данных
         static void Receive(void *recv, uint size);
-        /// Возвращает true, если интерфейс занят - процессор не может приниммать команды
-        static bool IsBusy();
+    private:
+        /// Ждать пока освободится устройство
+        static void WaitFreedom();
     };
 
     //-------------------------------------------------------------------------------------------------------------------------------------- GPIO ----
