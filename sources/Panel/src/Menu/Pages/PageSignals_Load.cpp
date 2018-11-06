@@ -11,26 +11,17 @@ extern const PageBase pLoad;
 Page *PageSignals::PageLoad::pointer = (Page *)&pLoad;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_Up()
-{
-
-}
-
 DEF_BUTTON( bUp,                                                                                            ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Ââåðõ
     "Ââåðõ", "Âíèç",
     "", "",
-    pLoad, FuncActive, OnPress_Up, FuncDraw
+    pLoad, FuncActive, FDrive::PressUp, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void OnPress_Down()
-{
-}
-
 DEF_BUTTON( bDown,                                                                                           ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Âíèç
     "Âíèç", "Down",
     "", "",
-    pLoad, FuncActive, OnPress_Down, FuncDraw
+    pLoad, FuncActive, FDrive::PressDown, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -69,5 +60,5 @@ DEF_PAGE_4( pLoad,                                                              
     &bDown,     ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Âíèç
     &bEnter,    ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Enter
     &bChoose,   ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Óñòàíîâèòü
-    Page::Settings_Load, PageSignals::pointer, FuncActive, FuncPress, OnKey, FDrive::Graphics::Draw
+    Page::Settings_Load, PageSignals::pointer, FuncActive, FuncPress, OnKey, FDrive::Draw
 )

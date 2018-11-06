@@ -26,9 +26,7 @@ static uint curItem = 0;
 /// true, если флешка подключена
 static bool isConnected = false;
 
-static uint numDirs = 0;
-
-static uint numFiles = 0;
+static uint numItems = 0;
 /// Путь к текущему каталогу
 static char directory[255] = "\\";
 /// Здесь хранятся имена каталогов или файлов
@@ -57,19 +55,17 @@ static uint8 message[300] = {0};
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Выводит название текущего каталога в координатах [left, top]
 static void DrawNameCurrentDir(int left, int top);
-/// Обработка сообщения
-static void ProcessMessage();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FDrive::Graphics::Init()
+void FDrive::Init()
 {
     strcpy(directory, "\\");
     //firstDir = firstFile = curDir = curFile = 0;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::Graphics::Draw()
+void FDrive::Draw()
 {
     DEBUG_POINT;
     ProcessMessage();
@@ -96,7 +92,7 @@ void FDrive::Graphics::Draw()
             names[i][0] = '\0';
         }
 
-        numDirs = numFiles = 0;
+        numItems = 0;
 
         FDrive::RequestNumDirsAndFiles(directory);
         state = State::Wait;
@@ -140,7 +136,7 @@ void FDrive::HandlerInterface(uint8 *data)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static void ProcessMessage()
+void FDrive::ProcessMessage()
 {
     isBusy = true;
 
@@ -165,8 +161,7 @@ static void ProcessMessage()
         BitSet32 dirs(data + 1);
         BitSet32 files(data + 5);
 
-        numDirs = dirs.word;
-        numFiles = files.word;
+        numItems = (view == Files) ? files.word : dirs.word;
 
         state = State::Idle;
     }
@@ -204,7 +199,7 @@ void FDrive::DrawDirs()
     int y = Wave::Graphics::Y(Chan::A) + 15;
     int delta = 10;
 
-    for(uint i = 0; i < numDirs; i++)
+    for(uint i = 0; i < numItems; i++)
     {
         Text::DrawText(x, y, names[i], Color::FILL);
         y += delta;
@@ -212,7 +207,7 @@ void FDrive::DrawDirs()
     DEBUG_POINT;
     if(state == State::Idle)
     {
-        for(uint i = 0; i < numDirs; i++)
+        for(uint i = 0; i < numItems; i++)
         {
             if(names[i][0] == 0)
             {
@@ -233,7 +228,7 @@ void FDrive::DrawFiles()
     int y = Wave::Graphics::Y(Chan::A) + 15;
     int delta = 10;
 
-    for(uint i = 0; i < numFiles; i++)
+    for(uint i = 0; i < numItems; i++)
     {
         DEBUG_POINT;
         if(names[i])
@@ -258,7 +253,7 @@ void FDrive::DrawFiles()
     DEBUG_POINT;
     if(state == State::Idle)
     {
-        for(uint i = 0; i < numFiles; i++)
+        for(uint i = 0; i < numItems; i++)
         {
             if(names[i][0] == 0)
             {
@@ -269,4 +264,22 @@ void FDrive::DrawFiles()
         }
     }
     DEBUG_POINT;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::PressUp()
+{
+    if(curItem > 0)
+    {
+        curItem--;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::PressDown()
+{
+    if(curItem < numItems - 1)
+    {
+        curItem++;
+    }
 }

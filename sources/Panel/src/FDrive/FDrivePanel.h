@@ -16,18 +16,18 @@ public:
     
     static View view;
 
-    class Graphics
-    {
-    friend class FDrive;
-
-    public:
-        /// Отрисовка файло-менеджера
-        static void Draw();
-
-    private:
-
-        static void Init();
-    };
+    /// Отрисовка файло-менеджера
+    static void Draw();
+    /// Обработка нажатия кнопки "Вверх"
+    static void PressUp();
+    /// Обработка нажатия кнопки "Вниз"
+    static void PressDown();
+    /// Написать список каталогов
+    static void DrawDirs();
+    /// Написать список файлов
+    static void DrawFiles();
+    /// Обработка сообщения
+    static void ProcessMessage();
 
 private:
     friend class Graphics;
@@ -41,9 +41,4 @@ private:
     static void RequestNameFile(uint numFile, pString directory);
 
     static void HandlerInterface(uint8 *data);
-    /// Написать список каталогов
-    static void DrawDirs();
-    /// Написать список файлов
-    static void DrawFiles();
-
 };
