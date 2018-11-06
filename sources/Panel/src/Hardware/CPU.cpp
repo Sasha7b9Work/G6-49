@@ -7,13 +7,15 @@
 #endif
 #include "CPU.h"
 #include "LTDC.h"
+#include "Display/Console.h"
+#include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Log.h"
 #endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Р”Р»СЏ СЃРІСЏР·Рё СЃ РѕСЃРЅРѕРІРЅС‹Рј РїСЂРѕС†РµСЃСЃРѕСЂРѕРј
+/// Для связи с основным процессором
 #ifndef OPEN
 static SPI_HandleTypeDef handleSPI4 =
 {
@@ -64,9 +66,9 @@ void CPU::Init()
     __HAL_RCC_GPIOH_CLK_ENABLE();
     __HAL_RCC_GPIOI_CLK_ENABLE();
     
-    __HAL_RCC_TIM2_CLK_ENABLE();    // Р”Р»СЏ С‚РёРєРѕРІ
-    __HAL_RCC_TIM3_CLK_ENABLE();    // Р”Р»СЏ С‚Р°Р№РјРµСЂРѕРІ
-    __HAL_RCC_TIM4_CLK_ENABLE();    // Р”Р»СЏ РѕРїСЂРѕСЃР° РєР»Р°РІРёР°С‚СѓСЂС‹
+    __HAL_RCC_TIM2_CLK_ENABLE();    // Для тиков
+    __HAL_RCC_TIM3_CLK_ENABLE();    // Для таймеров
+    __HAL_RCC_TIM4_CLK_ENABLE();    // Для опроса клавиатуры
 
     __HAL_RCC_DMA2D_CLK_ENABLE();
     __HAL_RCC_LTDC_CLK_ENABLE();
@@ -96,7 +98,7 @@ void CPU::SPI4_::Init()
 
     HAL_SPI_Init(&handleSPI4);
 
-    // РќР° СЌС‚РѕРј РїРёРЅРµ Р±СѓРґРµРј С‡РёС‚Р°С‚СЊ Р·Р°РЅСЏС‚РѕСЃС‚СЊ РїСЂРѕС†РµСЃСЃРѕСЂР° РіРµРЅРµСЂР°С‚РѕСЂР°
+    // На этом пине будем читать занятость процессора генератора
     isGPIO.Pin = GPIO_PIN_4;
     isGPIO.Mode = GPIO_MODE_INPUT;
     isGPIO.Alternate = 0;
@@ -147,7 +149,17 @@ void CPU::SPI4_::Receive(void *recv, uint size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::WaitFreedom()
 {
-    while(HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {};
+    uint time = TIME_MS;
+    while(HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET)
+    {
+        if(TIME_MS - time > 10)
+        {
+            LOG_WRITE("время ожидания %d мс", TIME_MS - time);
+            Console::Draw();
+            Painter::EndScene();
+        }
+    };
+
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,7 +295,7 @@ void CPU::SystemClockConfig()
 void CPU::FSMC::Init()
 {
 #ifndef OPEN
-    /// \todo РІСЂРµРјРµРЅРЅРѕ РёР·РјРµРЅРёР» - РІРѕР·РјРѕР¶РЅРѕ, РЅР° С„Р»РµС€РєСѓ РЅРµ РїРёС€РµС‚ РёР·-Р·Р° РЅРµРїСЂР°РІРёР»СЊРЅС‹С… С‚Р°Р№РјРёРЅРіРѕРІ
+    /// \todo временно изменил - возможно, на флешку не пишет из-за неправильных таймингов
     static const FMC_NORSRAM_TimingTypeDef sramTiming =
     {
         6,                  ///< FSMC_AddressSetupTime
@@ -330,8 +342,8 @@ void CPU::FSMC::Init()
 void CPU::Update()
 {
     ++numFrames;
-    if(TIME_MS >= timeStartMeasFPS + 1000)  // Р•СЃР»Рё РїСЂРѕС€Р»Рѕ Р±РѕР»РµРµ 1 СЃРµРєСѓРЅРґС‹ СЃ РЅР°С‡Р°Р»Р° 1-СЃРµРє РѕС‚СЂРµР·РєР°
-    {                                       // СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј Р¤РџРЎ
+    if(TIME_MS >= timeStartMeasFPS + 1000)  // Если прошло более 1 секунды с начала 1-сек отрезка
+    {                                       // рассчитываем ФПС
         fps = (float)numFrames / (TIME_MS - timeStartMeasFPS) * 1e3f;
         numFrames = 0;
         timeStartMeasFPS = TIME_MS;

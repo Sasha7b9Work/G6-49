@@ -5,9 +5,19 @@
 #else
 #include <stm32f4xx.h>
 #endif
+#include "log.h"
+#include "Display/Console.h"
+#include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Utils/Debug.h"
 #endif
+
+
+#define TRACE_HANDLER               \
+    LOG_FUNC_ENTER;                 \
+    Painter::SetColor(Color::FILL); \
+    Console::Draw();                \
+    Painter::EndScene();
 
 
 #ifdef __cplusplus
@@ -22,24 +32,30 @@ extern "C" {
     }
     
         //--------------------------------------------------------------------------------------------------------------------------------------------
-    __attribute((noreturn)) void MemManage_Handler()
+    void MemManage_Handler()
     {
+        TRACE_HANDLER;
+
         while (1)
         {
         }
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    __attribute((noreturn)) void UsageFault_Handler()
+    void UsageFault_Handler()
     {
+        TRACE_HANDLER;
+
         while (1)
         {
         }
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    __attribute((noreturn)) void HardFault_Handler()
+    void HardFault_Handler()
     {
+        TRACE_HANDLER;
+
         __IO int line = Debug::line;
         __IO char *file = Debug::file;
         
@@ -61,21 +77,25 @@ extern "C" {
     //------------------------------------------------------------------------------------------------------------------------------------------------
     void PendSV_Handler()
     {
+        TRACE_HANDLER;
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     void NMI_Handler()
     {
+        TRACE_HANDLER;
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     void SVC_Handler()
     {
+        TRACE_HANDLER;
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     void DebugMon_Handler()
     {
+        TRACE_HANDLER;
     }
 
 #ifdef __cplusplus

@@ -192,9 +192,6 @@
     <ClCompile Include="..\..\Panel\src\Menu\MenuItemsLogic.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Log.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Math.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -275,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Interface\InterfacePanel.cpp">
       <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\log.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -410,9 +410,6 @@
     <ClInclude Include="..\..\Panel\src\Menu\MenuItemsDefs.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Log.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\structs.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -538,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Interface\InterfacePanel.h">
       <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\log.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
