@@ -152,7 +152,7 @@ void CPU::SPI4_::WaitFreedom()
     uint time = TIME_MS;
     while(HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET)
     {
-        if(TIME_MS - time > 10)
+        if(TIME_MS - time > 100)
         {
             LOG_WRITE("время ожидания %d мс", TIME_MS - time);
             Console::Draw();

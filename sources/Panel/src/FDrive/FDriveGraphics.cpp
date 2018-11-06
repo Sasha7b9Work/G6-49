@@ -7,8 +7,8 @@
 #include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Wave.h"
 #include "Hardware/CPU.h"
+#include "Utils/Debug.h"
 #endif
 
 
@@ -21,8 +21,8 @@
 //static int curDir = 0;
 /// Номер первого выведенного файла. Всего может быть выведено RECS_ON_PAGE файлов
 //static int firstFile = 0;
-/// Номер подсвеченного файла
-//static int curFile = 0;
+/// Номер подсвеченного итема
+static uint curItem = 0;
 /// true, если флешка подключена
 static bool isConnected = false;
 
@@ -71,14 +71,16 @@ void FDrive::Graphics::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Graphics::Draw()
 {
+    DEBUG_POINT;
     ProcessMessage();
+    DEBUG_POINT;
 
     int x = Wave::Graphics::X();
     int y = Wave::Graphics::Y(Chan::A) + 1;
     int width = Wave::Graphics::Width() - 2;
     int height = Wave::Graphics::Height() * 2;
     Painter::FillRegion(x, y, width, height, Color::BACK);
-
+    DEBUG_POINT;
     if(!isConnected)
     {
         Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
@@ -99,7 +101,7 @@ void FDrive::Graphics::Draw()
         FDrive::RequestNumDirsAndFiles(directory);
         state = State::Wait;
     }
-
+    DEBUG_POINT
     if(view == Dirs)
     {
         DrawDirs();
@@ -108,6 +110,7 @@ void FDrive::Graphics::Draw()
     {
         DrawFiles();
     }
+    DEBUG_POINT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -132,8 +135,8 @@ void FDrive::HandlerInterface(uint8 *data)
         LOG_WRITE("Я занят %d", *data);
         return;
     }
-
     memcpy(message, data, 300);
+    ProcessMessage();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -196,6 +199,7 @@ static void ProcessMessage()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::DrawDirs()
 {
+    DEBUG_POINT;
     int x = Wave::Graphics::X() + 5;
     int y = Wave::Graphics::Y(Chan::A) + 15;
     int delta = 10;
@@ -205,7 +209,7 @@ void FDrive::DrawDirs()
         Text::DrawText(x, y, names[i], Color::FILL);
         y += delta;
     }
-
+    DEBUG_POINT;
     if(state == State::Idle)
     {
         for(uint i = 0; i < numDirs; i++)
@@ -218,21 +222,40 @@ void FDrive::DrawDirs()
             }
         }
     }
+    DEBUG_POINT;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::DrawFiles()
 {
+    DEBUG_POINT;
     int x = Wave::Graphics::X() + 5;
     int y = Wave::Graphics::Y(Chan::A) + 15;
     int delta = 10;
 
     for(uint i = 0; i < numFiles; i++)
     {
-        Text::DrawText(x, y, names[i], Color::FILL);
+        DEBUG_POINT;
+        if(names[i])
+        {
+            DEBUG_POINT;
+            names[i][11] = '\0';
+            DEBUG_POINT
+            bool selected = (i == curItem);                     // Признак того, что данный итем является подсвеченным
+            DEBUG_POINT;
+            if(selected)
+            {
+                DEBUG_POINT;
+                Painter::FillRegion(x - 1, y, 100, 9, Color::FILL);
+                DEBUG_POINT
+            }
+            DEBUG_POINT;
+            Text::DrawText(x, y, names[i], (selected) ? Color::BACK : Color::FILL);
+            DEBUG_POINT;
+        }
         y += delta;
     }
-
+    DEBUG_POINT;
     if(state == State::Idle)
     {
         for(uint i = 0; i < numFiles; i++)
@@ -245,4 +268,5 @@ void FDrive::DrawFiles()
             }
         }
     }
+    DEBUG_POINT;
 }

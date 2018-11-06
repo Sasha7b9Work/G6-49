@@ -13,10 +13,11 @@
 #endif
 
 
-#define TRACE_HANDLER               \
-    LOG_FUNC_ENTER;                 \
-    Painter::SetColor(Color::FILL); \
-    Console::Draw();                \
+#define TRACE_HANDLER                               \
+    LOG_FUNC_ENTER;                                 \
+    LOG_WRITE("%s : %d", Debug::file, Debug::line); \
+    Painter::SetColor(Color::FILL);                 \
+    Console::Draw();                                \
     Painter::EndScene();
 
 
@@ -55,14 +56,9 @@ extern "C" {
     void HardFault_Handler()
     {
         TRACE_HANDLER;
-
-        __IO int line = Debug::line;
-        __IO char *file = Debug::file;
         
         while (1)
         {
-            line++;
-            file = file;
         }
     }
 

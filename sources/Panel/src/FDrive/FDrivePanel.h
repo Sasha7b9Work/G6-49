@@ -41,9 +41,9 @@ private:
     static void RequestNameFile(uint numFile, pString directory);
 
     static void HandlerInterface(uint8 *data);
-
     /// Написать список каталогов
     static void DrawDirs();
     /// Написать список файлов
     static void DrawFiles();
+
 };
