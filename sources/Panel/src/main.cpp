@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #ifndef WIN32
-#include "Generator/InterfacePanel.h"
+#include "Interface/InterfacePanel.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"

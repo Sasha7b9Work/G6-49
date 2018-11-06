@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "GeneratorPanel.h"
-#include "InterfacePanel.h"
+#include "Interface/InterfacePanel.h"
 #include "Log.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"

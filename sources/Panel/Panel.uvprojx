@@ -1821,16 +1821,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\GeneratorPanel.h</FilePath>
             </File>
-            <File>
-              <FileName>InterfacePanel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\InterfacePanel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>InterfacePanel.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\InterfacePanel.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1915,6 +1905,21 @@
               <FileName>Controls.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Controls.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Interface</GroupName>
+          <Files>
+            <File>
+              <FileName>InterfacePanel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Interface\InterfacePanel.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InterfacePanel.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Interface\InterfacePanel.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -267,7 +267,6 @@
     <ClCompile Include="..\..\Panel\src\Generator\GeneratorPanel.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\InterfacePanel.cpp" />
     <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -307,6 +306,7 @@
     <ClCompile Include="..\..\Panel\src\Hardware\VCP.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Interface\InterfacePanel.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -496,7 +496,6 @@
     <ClInclude Include="..\..\Panel\src\FDrive\FDrivePanel.h" />
     <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h" />
     <ClInclude Include="..\..\Panel\src\Generator\GeneratorPanel.h" />
-    <ClInclude Include="..\..\Panel\src\Generator\InterfacePanel.h" />
     <ClInclude Include="..\..\Panel\src\Generator\Signals.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
@@ -505,6 +504,7 @@
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer4XX.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\VCP.h" />
+    <ClInclude Include="..\..\Panel\src\Interface\InterfacePanel.h" />
     <ClInclude Include="..\..\Panel\src\libs\HAL\stm32f4xx_hal_conf.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

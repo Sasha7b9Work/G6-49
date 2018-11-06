@@ -4,7 +4,7 @@
 #include "structs.h"
 #include "Command.h"
 #include "FDrivePanel.h"
-#include "Generator/InterfacePanel.h"
+#include "Interface/InterfacePanel.h"
 #include <stdlib.h>
 #endif
 

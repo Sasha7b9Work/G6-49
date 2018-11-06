@@ -52,6 +52,9 @@
     <Filter Include="FDrive">
       <UniqueIdentifier>{7576f1ea-f5b3-454d-a20c-003fd2c00ccc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{2d6f593d-6c30-4301-b67d-c5c873ea835b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -267,11 +270,11 @@
     <ClCompile Include="..\..\Panel\src\Generator\GeneratorPanel.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Generator\InterfacePanel.cpp">
-      <Filter>Generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\FDrive\FDrivePanel.cpp">
       <Filter>FDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Interface\InterfacePanel.cpp">
+      <Filter>Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -530,11 +533,11 @@
     <ClInclude Include="..\..\Panel\src\Generator\GeneratorPanel.h">
       <Filter>Generator</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Generator\InterfacePanel.h">
-      <Filter>Generator</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\FDrive\FDrivePanel.h">
       <Filter>FDrive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Interface\InterfacePanel.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

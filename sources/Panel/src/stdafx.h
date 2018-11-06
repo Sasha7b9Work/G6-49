@@ -14,16 +14,17 @@
 #include "Display/Text.h"
 #include "Display/font/Font.h"
 
-#include "Generator/Signals.h"
-#include "Generator/InterfacePanel.h"
-
 #include "FDrive/FDrivePanel.h"
+
+#include "Generator/Signals.h"
 
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Timer4XX.h"
 #include "Hardware/VCP.h"
+
+#include "Interface/InterfacePanel.h"
 
 #include "Menu/Menu.h"
 #include "Menu/Hint.h"
