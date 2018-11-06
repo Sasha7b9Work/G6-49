@@ -3,10 +3,14 @@
 #include "defines.h"
 #include <stm32f4xx.h>
 #include "CPU.h"
+#include <stdlib.h>
+#include <string.h>
 #endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static CRC_HandleTypeDef handleCRC = {CRC};
+
 static SPI_HandleTypeDef hSPI1 =                                   // Для связи с панелью
 {
     SPI1,
@@ -97,6 +101,8 @@ void CPU::Init()
     WritePin(GeneratorWritePin::Pin_P4_OutB, false);
 
     SPI1_::Init();
+
+    CRC32::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -246,4 +252,38 @@ void CPU::SPI1_::Transmit(void *buffer, uint size)
     CPU::SetReady();
     HAL_SPI_Transmit(&hSPI1, (uint8 *)buffer, (uint16)size, 100);
     CPU::SetBusy();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::CRC32::Init()
+{
+    if (HAL_CRC_Init(&handleCRC) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint CPU::CRC32::Calculate(uint8 *data, uint size)
+{
+    uint sizeBuffer = size;
+    while (sizeBuffer % 4)                           // Увеличиваем до ближайшего кратного четырём
+    {
+        ++sizeBuffer;
+    }
+
+    uint *buffer = (uint *)malloc(sizeBuffer);      // Выделяем память для нового буфера
+
+    memcpy(buffer, data, size);                     // Копируем данные в новый буфер
+
+    for (uint i = size; i < sizeBuffer; i++)          // Заполняем оставшееся место нулями
+    {
+        buffer[i] = 0;
+    }
+
+    uint result = HAL_CRC_Calculate(&handleCRC, buffer, sizeBuffer / 4);
+
+    free(buffer);
+
+    return result;
 }

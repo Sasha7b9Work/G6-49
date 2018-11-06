@@ -123,6 +123,19 @@ public:
         static void Init();
     };
 
+    //-------------------------------------------------------------------------------------------------------------------------------------- CRC32 ---
+    class CRC32
+    {
+    public:
+        static uint Calculate(uint8 *address, uint size);
+
+    private:
+        friend class CPU;
+
+        static void Init();
+    };
+
+
 private:
 
     static void SystemClockConfig();

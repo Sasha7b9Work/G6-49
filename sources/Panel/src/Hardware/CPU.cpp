@@ -11,6 +11,7 @@
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Log.h"
+#include <stdlib.h>
 #endif
 
 
@@ -43,6 +44,8 @@ static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 uint  CPU::timeStartMeasFPS = 0;
 int   CPU::numFrames = 0;
 float CPU::fps = 0.0f;
+
+static CRC_HandleTypeDef handleCRC = {CRC};
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +82,8 @@ void CPU::Init()
     SPI4_::Init();
 
     Keyboard::Init();
+
+    CRC32::Init();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -354,4 +359,38 @@ void CPU::Update()
 float CPU::GetFPS()
 {
     return fps;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void CPU::CRC32::Init()
+{
+    if(HAL_CRC_Init(&handleCRC) != HAL_OK)
+    {
+        ERROR_HANDLER();
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint CPU::CRC32::Calculate(uint8 *data, uint size)
+{
+    uint sizeBuffer = size;
+    while(sizeBuffer % 4)                           // Увеличиваем до ближайшего кратного четырём
+    {
+        ++sizeBuffer;
+    }
+
+    uint *buffer = (uint *)malloc(sizeBuffer);      // Выделяем память для нового буфера
+
+    memcpy(buffer, data, size);                     // Копируем данные в новый буфер
+    
+    for(uint i = size; i < sizeBuffer; i++)          // Заполняем оставшееся место нулями
+    {
+        buffer[i] = 0;
+    }
+
+    uint result = HAL_CRC_Calculate(&handleCRC, buffer, sizeBuffer / 4);
+
+    free(buffer);
+
+    return result;
 }
