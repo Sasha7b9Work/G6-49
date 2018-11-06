@@ -10,7 +10,7 @@ public:
     static void Init();
     /// Послать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
-
+    /// Эту функцию будет вызывать прерывание на SPI1 : приём двух байт - размер принимаемых данных
     static void ReceiveCallback();
 
     static void Empty();
