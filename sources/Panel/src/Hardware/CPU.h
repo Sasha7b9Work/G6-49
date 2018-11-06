@@ -81,8 +81,6 @@ public:
     public:
         /// Переслать массив данных
         static void Transmit(const void *buffer, uint size);
-        /// Переслать массив данных с одновременным приёмом второго массива
-        static bool TransmitReceive(void *trans, void *receiv, uint size);
         /// Принять массив данных
         static void Receive(void *recv, uint size);
     private:
@@ -127,7 +125,7 @@ public:
     class CRC32
     {
     public:
-        static uint Calculate(uint8 *address, uint size);
+        static uint Calculate(void *address, uint size);
 
     private:
         friend class CPU;

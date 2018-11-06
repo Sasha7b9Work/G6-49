@@ -91,7 +91,7 @@ public:
 
         static void Transmit(void *buffer, uint size);
 
-        static SPI_HandleTypeDef *Handle();
+        static SPI_HandleTypeDef handle;
     };
 
     //------------------------------------------------------------------------------------------------------------------------------------------------

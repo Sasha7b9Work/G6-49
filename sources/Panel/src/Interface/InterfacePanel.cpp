@@ -59,12 +59,6 @@ void Interface::ProcessDataFPGA()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(const uint8 *buffer, uint size)
 {
-    Command command(*buffer);
-    if (Debug::ShowSends() && command.value != Command::RequestData)
-    {
-        //LOG_WRITE("передаю %s", command.Trace(buffer));
-    }
-
     CPU::SPI4_::Transmit(&size, 2);
 
     const uint8 *pointer = buffer;

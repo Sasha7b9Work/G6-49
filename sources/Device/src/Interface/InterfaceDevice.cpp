@@ -359,11 +359,13 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
+void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *handle)
 {
-    HAL_SPI_Init(CPU::SPI1_::Handle());
+    Console::AddString(__FUNCTION__);
+    Console::AddInt((int)handle->ErrorCode);
+    HAL_SPI_Init(&CPU::SPI1_::handle);
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
-    HAL_SPI_Receive_IT(CPU::SPI1_::Handle(), Interface::recv, 2);
+    HAL_SPI_Receive_IT(&CPU::SPI1_::handle, Interface::recv, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

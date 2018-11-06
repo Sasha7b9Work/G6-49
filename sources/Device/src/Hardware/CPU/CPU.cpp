@@ -11,7 +11,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static CRC_HandleTypeDef handleCRC = {CRC};
 
-static SPI_HandleTypeDef hSPI1 =                                   // Для связи с панелью
+SPI_HandleTypeDef CPU::SPI1_::handle =                                   // Для связи с панелью
 {
     SPI1,
     {
@@ -21,7 +21,7 @@ static SPI_HandleTypeDef hSPI1 =                                   // Для связи 
         SPI_POLARITY_HIGH,              // Init.CLKPolarity
         SPI_PHASE_2EDGE,                // Init.CLKPhase
         SPI_NSS_SOFT,                   // Init.NSS
-        SPI_BAUDRATEPRESCALER_32,       // Init.BaudRatePrescaler
+        SPI_BAUDRATEPRESCALER_16,       // Init.BaudRatePrescaler
         SPI_FIRSTBIT_MSB,               // Init.FirstBit
         SPI_TIMODE_DISABLED,            // Init.TIMode
         SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
@@ -221,7 +221,7 @@ void CPU::SPI1_::Init()
 
     HAL_NVIC_SetPriority(SPI1_IRQn, 1, 0);
 
-    HAL_SPI_Init(&hSPI1);
+    HAL_SPI_Init(&handle);
 
     HAL_NVIC_EnableIRQ(SPI1_IRQn);
 }
@@ -229,20 +229,14 @@ void CPU::SPI1_::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI1_::ReceiveIT(void *buffer, uint size)
 {
-    HAL_SPI_Receive_IT(&hSPI1, (uint8 *)buffer, (uint16)size);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-SPI_HandleTypeDef *CPU::SPI1_::Handle()
-{
-    return &hSPI1;
+    HAL_SPI_Receive_IT(&handle, (uint8 *)buffer, (uint16)size);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI1_::Receive(void *buffer, uint size)
 {
     CPU::SetReady();
-    HAL_SPI_Receive(&hSPI1, (uint8 *)buffer, (uint16)size, 100);
+    HAL_SPI_Receive(&handle, (uint8 *)buffer, (uint16)size, 100);
     CPU::SetBusy();
 }
 
@@ -250,7 +244,7 @@ void CPU::SPI1_::Receive(void *buffer, uint size)
 void CPU::SPI1_::Transmit(void *buffer, uint size)
 {
     CPU::SetReady();
-    HAL_SPI_Transmit(&hSPI1, (uint8 *)buffer, (uint16)size, 100);
+    HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, 100);
     CPU::SetBusy();
 }
 

@@ -28,7 +28,7 @@ static SPI_HandleTypeDef handleSPI4 =
         SPI_POLARITY_HIGH,
         SPI_PHASE_2EDGE,
         SPI_NSS_SOFT,
-        SPI_BAUDRATEPRESCALER_32,
+        SPI_BAUDRATEPRESCALER_16,
         SPI_FIRSTBIT_MSB,
         SPI_TIMODE_DISABLED,
         SPI_CRCCALCULATION_DISABLED,
@@ -112,22 +112,6 @@ void CPU::SPI4_::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::SPI4_::TransmitReceive(void *trans, void *receiv, uint size)
-{
-#ifndef OPEN
-
-    WaitFreedom();
-
-    return HAL_SPI_TransmitReceive(&handleSPI4, (uint8 *)trans, (uint8 *)receiv, (uint16)size, 100) == HAL_OK;
-
-#else
-
-    return false;
-
-#endif
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::Transmit(const void *buffer, uint size)
 {
 #ifndef OPEN
@@ -143,7 +127,7 @@ void CPU::SPI4_::Transmit(const void *buffer, uint size)
 void CPU::SPI4_::Receive(void *recv, uint size)
 {
 #ifndef OPEN
-    
+
     WaitFreedom();
 
     HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100);
@@ -371,7 +355,7 @@ void CPU::CRC32::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-uint CPU::CRC32::Calculate(uint8 *data, uint size)
+uint CPU::CRC32::Calculate(void *data, uint size)
 {
     uint sizeBuffer = size;
     while(sizeBuffer % 4)                           // Увеличиваем до ближайшего кратного четырём
