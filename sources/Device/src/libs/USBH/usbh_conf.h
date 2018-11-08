@@ -13,7 +13,7 @@
 #define USBH_DEBUG_LEVEL                      0
 #define USBH_USE_OS                           0
 
-#ifdef STM32F437xx
+#ifdef STM32F407xx
 #include "stm32f4xx.h"
 #endif
 

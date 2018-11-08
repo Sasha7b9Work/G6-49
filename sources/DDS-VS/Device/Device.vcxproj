@@ -199,6 +199,7 @@
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h" />
     <ClInclude Include="..\..\Device\src\Log.h" />
+    <ClInclude Include="..\..\Device\src\SCPI\SCPI.h" />
     <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\stdafx.h" />

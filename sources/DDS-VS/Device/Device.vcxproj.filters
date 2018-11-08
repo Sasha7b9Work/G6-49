@@ -49,6 +49,9 @@
     <Filter Include="Hardware\CPU">
       <UniqueIdentifier>{0394f09f-a093-43c9-9c8b-5d8bd73044da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SCPI">
+      <UniqueIdentifier>{1e2c54d1-b47d-4660-af49-d6154e8bcf46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -242,6 +245,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\stdafx.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\SCPI\SCPI.h">
+      <Filter>SCPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
