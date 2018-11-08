@@ -94,7 +94,7 @@ void CPU::SPI4_::Init()
     {   //  CLK         MI           MO
         GPIO_PIN_2 | GPIO_PIN_5 | GPIO_PIN_6,
         GPIO_MODE_AF_PP,
-        GPIO_NOPULL,
+        GPIO_PULLUP,
         GPIO_SPEED_HIGH,
         GPIO_AF5_SPI4
     };

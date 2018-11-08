@@ -303,7 +303,7 @@ void Interface::Update()
             }
             else
             {
-                commands[recv[0]].func();               // Иначе обрабатываем команду
+                //commands[recv[0]].func();               // Иначе обрабатываем команду
             }
         }
         else
@@ -338,11 +338,13 @@ static void SendData()
 
     if(Console::ExistString())
     {
+        /*
         char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
         Console::GetString(buffer + 1);
         Interface::Send(buffer, LENGTH_SPI_BUFFER);
 
         isSending = true;
+        */
     }
 
     if(FDrive::NumBytesForSend())

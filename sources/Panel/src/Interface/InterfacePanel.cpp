@@ -121,10 +121,7 @@ void Interface::ReceiveAndRun(uint numBytes)
 
     if (buffer)
     {
-        if(numBytes != 257)
-        {
-            LOG_WRITE("нужно принять %d байт", numBytes);
-        }
+        LOG_WRITE("нужно принять %d байт", numBytes);
 
         count += numBytes;
 
@@ -169,7 +166,7 @@ void Interface::ReceiveAndRun(uint numBytes)
         }
         else
         {
-            //LOG_WRITE("принято %d после монтирования", count);
+            LOG_WRITE("принято %d после монтирования %d %d %d %d %d", count, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4]);
         }
     }
     else
