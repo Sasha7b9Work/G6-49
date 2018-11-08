@@ -5,12 +5,36 @@
 class Interface
 {
 public:
+
+    /// Структура для работы с интерфейсом
+    struct Data
+    {
+    public:
+
+        Data(uint size);
+        /// Инициализировать структуры для хранения size байт данных
+        bool Init(uint size);
+        /// Освободить память, использованную структурой. Освобождать сразу же после использования
+        void Release();
+        /// Возвращает true, если буфер пуст - нулевой размер
+        bool IsEmpty() const;
+        /// Возвращает указатель на данные
+        uint8 *GetData();
+        /// Возвращает размер буфера данных
+        uint GetSize() const;
+    private:
+        uint8 *data;
+        uint size;
+    };
+
     /// Для приёма сообщений от устройства
     static void Update();
     /// Заслать в генератор данные
     static void Send(const uint8 *buffer, uint size);
 
     static void Send(const Buffer &buffer);
+    /// Послать запрос и ожидать ответа.
+    static void Request(Data *request, Data *answer);
 
 private:
     /// Принять и обработать данные от ПЛИС

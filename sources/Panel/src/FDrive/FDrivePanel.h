@@ -26,8 +26,6 @@ public:
     static void DrawDirs();
     /// Написать список файлов
     static void DrawFiles();
-    /// Обработка сообщения
-    static void ProcessMessage();
 
 private:
     friend class Graphics;

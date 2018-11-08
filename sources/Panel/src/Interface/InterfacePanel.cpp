@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Utils/Buffer.h"
 #include "InterfacePanel.h"
 #include "Command.h"
@@ -53,6 +54,34 @@ void Interface::ProcessDataFPGA()
     {
         ReceiveAndRun(numBytes);
         CPU::SPI4_::Receive(&numBytes, 2);
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Request(Data *request, Data *answer)
+{
+    Interface::Send(request->GetData(), request->GetSize());
+
+    uint16 numBytes = 0;
+
+    CPU::SPI4_::Receive(&numBytes, 2);  /// Узнаём количество байт для приёма
+
+    answer->Release();
+
+    if(numBytes)
+    {
+        if(answer->Init(numBytes))
+        {
+            CPU::SPI4_::Receive(answer->GetData(), answer->GetSize());
+        }
+        else
+        {
+            LOG_WRITE("Не хватает памяти для буфера");
+        }
+    }
+    else
+    {
+        LOG_WRITE("Нет данных для приёма");
     }
 }
 
@@ -112,19 +141,60 @@ void Interface::ReceiveAndRun(uint16 numBytes)
         {
             FDrive::HandlerInterface(buffer);
         }
-        else if(*buffer == Command::FDrive_NumDirsAndFiles)
-        {
-            FDrive::HandlerInterface(buffer);
-        }
-        else if(*buffer == Command::FDrive_RequestDir)
-        {
-            FDrive::HandlerInterface(buffer);
-        }
-        else if(*buffer == Command::FDrive_RequestFile)
-        {
-            FDrive::HandlerInterface(buffer);
-        }
     }
 
     free(buffer);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Interface::Data::Data(uint size) : data(0)
+{
+    Init(size);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Interface::Data::Init(uint _size)
+{
+    if(data)
+    {
+        delete data;
+    }
+
+    size = _size;
+
+    if(size)
+    {
+        data = (uint8 *)malloc(size);
+
+        return data != 0;
+    }
+
+    return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Data::Release()
+{
+    if(data)
+    {
+        delete data;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Interface::Data::IsEmpty() const
+{
+    return data == 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *Interface::Data::GetData()
+{
+    return data;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint Interface::Data::GetSize() const
+{
+    return size;
 }
