@@ -79,7 +79,6 @@ void Interface::Init()
 {
     free(recv);
     recv = (uint8 *)malloc(2);
-    CPU::SPI1_::ReceiveIT(recv, 2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -285,27 +284,32 @@ void Interface::SendFrequency(uint value)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ReceiveCallback()
+void Interface::Update()
 {
-    BitSet16 bs(&recv[0]);                              // Узнаём количество принимаемых байт
+    uint16 numBytes = 0;
+    CPU::SPI1_::Receive(&numBytes, 2);                  // Узнаём количество байт, которые хочет передать панель
 
-    ResizeRecieveBuffer(bs.halfWord);                   // Устанавливаем размер приёмного буфера равным этому значению
-
-    CPU::SPI1_::Receive(recv, bs.halfWord);             // И принимаем данные
-
-    if(recv[0] == Command::RequestData)
+    if(numBytes)
     {
-        SendData();
-    }
-    else if(recv[0] < Command::Number)   /// \todo примитивная проверка на ошибки
-    {
-        commands[recv[0]].func();
-    }
+        ResizeRecieveBuffer(numBytes);                  // Устанавливаем требуемый размер буфера
 
-    if(recv[0] != 0)
-    {
-        Console::AddString("принята ненулевая команда");
-        Console::AddInt(recv[0]);
+        CPU::SPI1_::Receive(recv, numBytes);            // Принимаем данные
+
+        if(recv[0] < Command::Number)
+        {
+            if(recv[0] == Command::RequestData)         // Если запрос на передачу данных
+            {
+                SendData();                             // То засыалем данные
+            }
+            else
+            {
+                commands[recv[0]].func();               // Иначе обрабатываем команду
+            }
+        }
+        else
+        {
+            Console::AddString("Принята неправильная команда");
+        }
     }
 }
 
@@ -355,24 +359,6 @@ static void SendData()
     CPU::SPI1_::Transmit(&numBytes, 2);
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *)
-{
-    CPU::SetBusy();
-    Interface::ReceiveCallback();
-    CPU::SPI1_::ReceiveIT(Interface::recv, 2);
-    CPU::SetReady();
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *handle)
-{
-    Console::AddString(__FUNCTION__);
-    Console::AddInt((int)handle->ErrorCode);
-    HAL_SPI_Init(&CPU::SPI1_::handle);
-    HAL_NVIC_EnableIRQ(SPI1_IRQn);
-    HAL_SPI_Receive_IT(&CPU::SPI1_::handle, Interface::recv, 2);
-}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ResizeRecieveBuffer(uint16 size)

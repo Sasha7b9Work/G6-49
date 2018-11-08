@@ -20,11 +20,11 @@ int main()
     Generator::Init();
     Interface::Init();
     FDrive::Init();
-    CPU::SetReady();
   
     while (1)
     {
-        //FreqMeter::Update();
-        //FDrive::Update();
+        FreqMeter::Update();
+        FDrive::Update();
+        Interface::Update();
     }
 }

@@ -93,8 +93,6 @@ void CPU::Init()
 
     InitGPIOS();
 
-    SetBusy();
-
     InitPins();
 
     WritePin(GeneratorWritePin::Pin_P3_OutA, false);
@@ -219,17 +217,7 @@ void CPU::SPI1_::Init()
     };
     HAL_GPIO_Init(GPIOA, &isGPIOA);
 
-    HAL_NVIC_SetPriority(SPI1_IRQn, 1, 0);
-
     HAL_SPI_Init(&handle);
-
-    HAL_NVIC_EnableIRQ(SPI1_IRQn);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI1_::ReceiveIT(void *buffer, uint size)
-{
-    HAL_SPI_Receive_IT(&handle, (uint8 *)buffer, (uint16)size);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
