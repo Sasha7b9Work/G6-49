@@ -115,8 +115,13 @@ void FDrive::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Update()
 {
+#define TRACE_FLASH                     \
+    Console::AddString(__FUNCTION__);   \
+    Console::AddInt(__LINE__);
+
     if(numBytesForSend)
     {
+        Console::AddInt(numBytesForSend);
         return;
     }
 
@@ -126,7 +131,7 @@ void FDrive::Update()
 
     if(state == State::NeedMount)
     {
-
+        TRACE_FLASH;
         if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
         {
             PrepareBufferForData(1 + 1, Command::FDrive_Mount);
@@ -139,6 +144,7 @@ void FDrive::Update()
     }
     else if(state == State::NeedUnmount)
     {
+        TRACE_FLASH;
         f_mount(0, "", 0);
 
         PrepareBufferForData(1 + 1, Command::FDrive_Mount);
@@ -149,6 +155,7 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_NumDirsAndFiles)
     {
+        TRACE_FLASH;
         PrepareBufferForData(1 + 4 + 4, Command::FDrive_NumDirsAndFiles);
 
         BitSet32 numDirs;
@@ -163,6 +170,7 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_RequestDir)
     {
+        TRACE_FLASH;
         char buffer[256];
         StructForReadDir str;
         GetNameDir(path, (int)numItem, buffer, &str);
@@ -178,6 +186,7 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_RequestFile)
     {
+        TRACE_FLASH;
         char buffer[256];
         StructForReadDir str;
         GetNameFile(path, (int)numItem, buffer, &str);

@@ -39,6 +39,7 @@ union BitSet32
         uint8 byte2;
         uint8 byte3;
     };
+    BitSet32(uint w) : word(w) {};
     BitSet32(const uint8 *buffer = 0)
     {
         if (buffer)

@@ -21,7 +21,7 @@ SPI_HandleTypeDef CPU::SPI1_::handle =                                   // Äëÿ 
         SPI_POLARITY_HIGH,              // Init.CLKPolarity
         SPI_PHASE_2EDGE,                // Init.CLKPhase
         SPI_NSS_SOFT,                   // Init.NSS
-        SPI_BAUDRATEPRESCALER_16,       // Init.BaudRatePrescaler
+        SPI_BAUDRATEPRESCALER_64,       // Init.BaudRatePrescaler
         SPI_FIRSTBIT_MSB,               // Init.FirstBit
         SPI_TIMODE_DISABLED,            // Init.TIMode
         SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation

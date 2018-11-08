@@ -309,6 +309,7 @@ void Interface::Update()
         else
         {
             Console::AddString("Принята неправильная команда");
+            Console::AddInt(recv[0]);
         }
     }
 }
@@ -324,13 +325,14 @@ static void SendData()
 
         uint8 buffer[5];
         buffer[0] = Command::FreqMeasure;
-        INIT_BIT_SET_32(bs, freqForSend);
-        for(int i = 0; i < 4; i++)
-        {
-            buffer[i + 1] = bs.byte[i];
-        }
+
+        BitSet32 bs(freqForSend);
+
+        bs.WriteToBuffer(buffer + 1);
 
         CPU::SPI1_::Transmit(buffer, 5);
+
+        freqForSend = MAX_UINT;
     }
 
     if(Console::ExistString())

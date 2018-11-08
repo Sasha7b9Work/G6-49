@@ -137,9 +137,13 @@ void Interface::ReceiveAndRun(uint16 numBytes)
             buf[LENGTH_SPI_BUFFER - 1] = '\0';
             Console::AddString(buf);
         }
-        else if(buffer[0] == Command::FDrive_Mount)
+        else if(*buffer == Command::FDrive_Mount)
         {
             FDrive::HandlerInterface(buffer);
+        }
+        else
+        {
+            LOG_WRITE("Приняты ошибочные данные %d", *buffer);
         }
     }
 
