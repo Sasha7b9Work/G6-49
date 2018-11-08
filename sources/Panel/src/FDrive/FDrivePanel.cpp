@@ -15,17 +15,23 @@ static uint8 *PrepareBufferForSend(uint size, uint8 command);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FDrive::RequestNumDirsAndFiles(pString directory)
+bool FDrive::GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles)
 {
     uint size = 1 + strlen(directory) + 1;
-    uint8 *data = PrepareBufferForSend(size, Command::FDrive_NumDirsAndFiles);
 
-    memcpy(data + 1, directory, strlen(directory));
-    data[size - 1] = 0;
+    Interface::Data data(size, Command::FDrive_NumDirsAndFiles);    // Подготавливаем и заполняем запрос
 
-    Interface::Send(data, size);
+    strcpy((char *)data.GetData() + 1, directory);
 
-    free(data);
+    Interface::Data answer(0);                                      // Подготавливаем место для ответа
+
+    bool result = Interface::Request(&data, &answer);               // Выполняем запрос, получем ответ
+
+    *numDirs = BitSet32(answer.GetData() + 1).word;                 // Узнаём количество каталогов
+
+    *numFiles = BitSet32(answer.GetData() + 5).word;                // Узнаём количество файлов
+
+    return result;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -118,7 +118,17 @@ void CPU::SPI4_::Transmit(const void *buffer, uint size)
 
     WaitFreedom();
 
-    HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100);
+    if(*((uint8*)buffer) == Command::FDrive_NumDirsAndFiles)
+    {
+        LOG_WRITE("Запрос данных о файлах %s", __FUNCTION__);
+    }
+
+    HAL_StatusTypeDef result = HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100);
+
+    if(result != HAL_OK)
+    {
+        LOG_WRITE("Ошибка передачи %d", result);
+    }
 
 #endif
 }
@@ -138,15 +148,8 @@ void CPU::SPI4_::Receive(void *recv, uint size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI4_::WaitFreedom()
 {
-    uint time = TIME_MS;
     while(HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET)
     {
-        if(TIME_MS - time > 100)
-        {
-            LOG_WRITE("время ожидания %d мс", TIME_MS - time);
-            Console::Draw();
-            Painter::EndScene();
-        }
     };
 
 }

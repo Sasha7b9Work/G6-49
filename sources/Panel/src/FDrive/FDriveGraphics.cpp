@@ -78,6 +78,20 @@ void FDrive::Draw()
         return;
     }
 
+    if(state == State::NeedRepaint)
+    {
+        uint numDirs = 0;
+        uint numFiles = 0;
+        if(!FDrive::GetNumDirsAndFiles(directory, &numDirs, &numFiles))
+        {
+            LOG_WRITE("Не получены данные о файлах");
+            isConnected = false;
+        }
+
+        Painter::SetColor(Color::FILL);
+        Text::DrawFormatText(50, 50, "каталогов - %d, файлов - %d", numDirs, numFiles);
+    }
+
     DrawNameCurrentDir(x + 3, y + 1);
 }
 

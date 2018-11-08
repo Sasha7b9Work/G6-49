@@ -115,13 +115,8 @@ void FDrive::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Update()
 {
-#define TRACE_FLASH                     \
-    Console::AddString(__FUNCTION__);   \
-    Console::AddInt(__LINE__);
-
     if(numBytesForSend)
     {
-        Console::AddInt(numBytesForSend);
         return;
     }
 
@@ -131,7 +126,6 @@ void FDrive::Update()
 
     if(state == State::NeedMount)
     {
-        TRACE_FLASH;
         if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
         {
             PrepareBufferForData(1 + 1, Command::FDrive_Mount);
@@ -144,7 +138,6 @@ void FDrive::Update()
     }
     else if(state == State::NeedUnmount)
     {
-        TRACE_FLASH;
         f_mount(0, "", 0);
 
         PrepareBufferForData(1 + 1, Command::FDrive_Mount);
@@ -155,7 +148,6 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_NumDirsAndFiles)
     {
-        TRACE_FLASH;
         PrepareBufferForData(1 + 4 + 4, Command::FDrive_NumDirsAndFiles);
 
         BitSet32 numDirs;
@@ -170,7 +162,6 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_RequestDir)
     {
-        TRACE_FLASH;
         char buffer[256];
         StructForReadDir str;
         GetNameDir(path, (int)numItem, buffer, &str);
@@ -186,7 +177,6 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_RequestFile)
     {
-        TRACE_FLASH;
         char buffer[256];
         StructForReadDir str;
         GetNameFile(path, (int)numItem, buffer, &str);
@@ -234,32 +224,27 @@ uint8 *FDrive::GetDataForSend(uint8 *buffer)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::HandlerInterface()
 {
+    Console::AddString(__FUNCTION__);
+
     isBusy = true;
 
     command = *Interface::recv;
 
     if(command == Command::FDrive_NumDirsAndFiles)
     {
-        uint8 *src = Interface::recv + 1;
-        char *dest = &path[0];
-        while(*src)
-        {
-            *dest++ = (char)*src++;
-        }
-        *dest = '\0';
-    }
-    if(command == Command::FDrive_RequestDir || command == Command::FDrive_RequestFile)
-    {
-        BitSet32 num(Interface::recv + 1);
-        numItem = num.word;
+        uint numDirs = 0;
+        uint numFiles = 0;
+        GetNumDirsAndFiles((const char *)Interface::recv + 1, &numDirs, &numFiles);
+        Console::AddInt(numDirs);
+        Console::AddInt(numFiles);
+        uint8 *buffer = (uint8 *)malloc(1 + 4 + 4);
 
-        uint8 *src = Interface::recv + 5;
-        char *dest = &path[0];
-        while(*src)
-        {
-            *dest++ = (char)*src++;
-        }
-        *dest = '\0';
+        buffer[0] = Command::FDrive_NumDirsAndFiles;
+        memcpy(buffer + 1, &numDirs, 4);
+        memcpy(buffer + 5, &numFiles, 4);
+        Interface::Send(buffer, 9);
+
+        free(buffer);
     }
 
     isBusy = false;

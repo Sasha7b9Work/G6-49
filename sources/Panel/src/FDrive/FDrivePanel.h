@@ -31,8 +31,8 @@ private:
     friend class Graphics;
     friend class Interface;
 
-    /// Посылает запрос на количество файлов и каталогов в каталоге directory
-    static void RequestNumDirsAndFiles(pString directory);
+    /// Возвращает количество каталогов и файлов в каталоге directory
+    static bool GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles);
 
     static void RequestNameDir(uint numDir, pString directory);
 

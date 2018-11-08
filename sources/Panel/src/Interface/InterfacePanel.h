@@ -11,7 +11,9 @@ public:
     {
     public:
 
-        Data(uint size);
+        Data(uint size, uint8 command = 0);
+
+        ~Data();
         /// Инициализировать структуры для хранения size байт данных
         bool Init(uint size);
         /// Освободить память, использованную структурой. Освобождать сразу же после использования
@@ -34,11 +36,13 @@ public:
 
     static void Send(const Buffer &buffer);
     /// Послать запрос и ожидать ответа.
-    static void Request(Data *request, Data *answer);
+    static bool Request(Data *request, Data *answer);
 
 private:
     /// Принять и обработать данные от ПЛИС
     static void ProcessDataFPGA();
     /// Принять numBytes байт от ПЛИС и выполнить их
-    static void ReceiveAndRun(uint16 numBytes);
+    static void ReceiveAndRun(uint numBytes);
+    /// Сколько байт хочет нам передать прибор
+    static uint BytesForReceive();;
 };

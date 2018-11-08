@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "Console.h"
+#include <stdarg.h>
 #endif
 
 
@@ -30,6 +31,20 @@ void Console::AddString(char *string)
     }
 
     isBusy = false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::AddFormatString(char *format, ...)
+{
+    char buf[100];
+    char *pointer = buf;
+
+    va_list args;
+    va_start(args, format);
+    vsprintf(pointer, format, args);
+    va_end(args);
+
+    Console::AddString(buf);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

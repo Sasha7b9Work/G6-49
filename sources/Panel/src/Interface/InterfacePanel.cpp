@@ -7,6 +7,7 @@
 #include "Command.h"
 #include "structs.h"
 #include "Display/Console.h"
+#include "Display/Painter.h"
 #include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
@@ -46,25 +47,21 @@ void Interface::ProcessDataFPGA()
 
     Send(&command, 1);
 
-    uint16 numBytes = 0;
-
-    CPU::SPI4_::Receive(&numBytes, 2);
+    uint numBytes = BytesForReceive();
 
     while (numBytes > 0)         // Принятое значение означает число байт, готовых для передачи вспомогательным процессором
     {
         ReceiveAndRun(numBytes);
-        CPU::SPI4_::Receive(&numBytes, 2);
+        numBytes = BytesForReceive();
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Request(Data *request, Data *answer)
+bool Interface::Request(Data *request, Data *answer)
 {
-    Interface::Send(request->GetData(), request->GetSize());
+    Send(request->GetData(), request->GetSize());
 
-    uint16 numBytes = 0;
-
-    CPU::SPI4_::Receive(&numBytes, 2);  /// Узнаём количество байт для приёма
+    uint numBytes = BytesForReceive();  /// Узнаём количество байт для приёма
 
     answer->Release();
 
@@ -83,6 +80,16 @@ void Interface::Request(Data *request, Data *answer)
     {
         LOG_WRITE("Нет данных для приёма");
     }
+
+    return numBytes != 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint Interface::BytesForReceive()
+{
+    uint numBytes = 0;
+    CPU::SPI4_::Receive(&numBytes, 2);
+    return numBytes;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +117,7 @@ void Interface::Send(const uint8 *buffer, uint size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ReceiveAndRun(uint16 numBytes)
+void Interface::ReceiveAndRun(uint numBytes)
 {
     uint8 *buffer = (uint8 *)malloc(numBytes);
 
@@ -151,9 +158,20 @@ void Interface::ReceiveAndRun(uint16 numBytes)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-Interface::Data::Data(uint size) : data(0)
+Interface::Data::Data(uint size, uint8 command) : data(0)
 {
     Init(size);
+
+    if(size)
+    {
+        data[0] = command;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Interface::Data::~Data()
+{
+    Release();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

@@ -308,8 +308,7 @@ void Interface::Update()
         }
         else
         {
-            Console::AddString("Принята неправильная команда");
-            Console::AddInt(recv[0]);
+            Console::AddFormatString("Принята неправильная команда %d", recv[0]);
         }
     }
 }
@@ -317,12 +316,10 @@ void Interface::Update()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendData()
 {
+    bool isSending = false;
+
     if(freqForSend != MAX_UINT)
     {
-        uint16 numBytes = 5;
-
-        CPU::SPI1_::Transmit(&numBytes, 2);
-
         uint8 buffer[5];
         buffer[0] = Command::FreqMeasure;
 
@@ -330,35 +327,46 @@ static void SendData()
 
         bs.WriteToBuffer(buffer + 1);
 
-        CPU::SPI1_::Transmit(buffer, 5);
+        Interface::Send(buffer, 5);
 
         freqForSend = MAX_UINT;
+
+        isSending = true;
     }
 
     if(Console::ExistString())
     {
         char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
         Console::GetString(buffer + 1);
+        Interface::Send(buffer, LENGTH_SPI_BUFFER);
 
-        uint16 numBytes = LENGTH_SPI_BUFFER;
-        CPU::SPI1_::Transmit(&numBytes, 2);
-        CPU::SPI1_::Transmit(buffer, LENGTH_SPI_BUFFER);
+        isSending = true;
     }
 
     if(FDrive::NumBytesForSend())
     {
         uint numBytes = FDrive::NumBytesForSend();
-        if(numBytes)
-        {
-            CPU::SPI1_::Transmit(&numBytes, 2);
-            uint8 *buffer = (uint8 *)malloc(numBytes);
-            CPU::SPI1_::Transmit(FDrive::GetDataForSend(buffer), numBytes);
-            free(buffer);
-        }
+        uint8 *buffer = (uint8 *)malloc(numBytes);
+        Interface::Send(FDrive::GetDataForSend(buffer), numBytes);
+        free(buffer);
+
+        isSending = true;
     }
 
-    uint16 numBytes = 0;
-    CPU::SPI1_::Transmit(&numBytes, 2);
+    if(!isSending)
+    {
+        uint16 numBytes = 0;
+        CPU::SPI1_::Transmit(&numBytes, 2);
+    }
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Send(void *buffer, uint size)
+{
+    CPU::SPI1_::Transmit(&size, 2);
+
+    CPU::SPI1_::Transmit(buffer, size);
 }
 
 
@@ -368,4 +376,68 @@ void Interface::ResizeRecieveBuffer(uint16 size)
     free(recv);
 
     recv = (uint8 *)malloc(size);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Interface::Data::Data(uint size, uint8 command) : data(0)
+{
+    Init(size);
+
+    if (size)
+    {
+        data[0] = command;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+Interface::Data::~Data()
+{
+    Release();
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Interface::Data::Init(uint _size)
+{
+    if (data)
+    {
+        delete data;
+    }
+
+    size = _size;
+
+    if (size)
+    {
+        data = (uint8 *)malloc(size);
+
+        return data != 0;
+    }
+
+    return false;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Data::Release()
+{
+    if (data)
+    {
+        delete data;
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+bool Interface::Data::IsEmpty() const
+{
+    return data == 0;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *Interface::Data::GetData()
+{
+    return data;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+uint Interface::Data::GetSize() const
+{
+    return size;
 }
