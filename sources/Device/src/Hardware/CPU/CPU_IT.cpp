@@ -8,8 +8,10 @@
 #endif
 
 
-#define TRACE_HANDLER                   \
+#define TRACE_HANDLER                   
+/*
     Console::AddString(__FUNCTION__);
+*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,10 +31,10 @@ extern "C" {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------
-    void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *handle)
+    void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *)
     {
         TRACE_HANDLER;
-        Console::AddInt((int)handle->ErrorCode);
+//        Console::AddInt((int)handle->ErrorCode);
     }
 
 

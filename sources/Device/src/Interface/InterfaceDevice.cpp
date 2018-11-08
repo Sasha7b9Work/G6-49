@@ -62,10 +62,10 @@ commands[Command::Number] =
 /* LoadFromDDS             */ Interface::LoadFormDDS,
 /* FreqMeasure             */ Interface::Empty,
 /* Log                     */ Interface::Empty,
-/* FDrive_NumDirsAndFiles  */ FDrive::HandlerInterface,
+/* FDrive_NumDirsAndFiles  */ Interface::Empty,
 /* FDrive_Mount            */ Interface::Empty,
-/* FDrive_RequestDir       */ FDrive::HandlerInterface,
-/* FDrive_RequestFile      */ FDrive::HandlerInterface
+/* FDrive_RequestDir       */ Interface::Empty,
+/* FDrive_RequestFile      */ Interface::Empty
 };
 
 
@@ -308,7 +308,7 @@ void Interface::Update()
         }
         else
         {
-            Console::AddFormatString("Принята неправильная команда %d", recv[0]);
+//            Console::AddFormatString("Принята неправильная команда %d", recv[0]);
         }
     }
 }
@@ -320,6 +320,7 @@ static void SendData()
 
     if(freqForSend != MAX_UINT)
     {
+        /*
         uint8 buffer[5];
         buffer[0] = Command::FreqMeasure;
 
@@ -332,6 +333,7 @@ static void SendData()
         freqForSend = MAX_UINT;
 
         isSending = true;
+        */
     }
 
     if(Console::ExistString())
@@ -345,6 +347,8 @@ static void SendData()
 
     if(FDrive::NumBytesForSend())
     {
+        Console::AddString(__FUNCTION__);
+        Console::AddInt(__LINE__);
         uint numBytes = FDrive::NumBytesForSend();
         uint8 *buffer = (uint8 *)malloc(numBytes);
         Interface::Send(FDrive::GetDataForSend(buffer), numBytes);

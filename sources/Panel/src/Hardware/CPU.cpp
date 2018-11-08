@@ -118,29 +118,19 @@ void CPU::SPI4_::Transmit(const void *buffer, uint size)
 
     WaitFreedom();
 
-    if(*((uint8*)buffer) == Command::FDrive_NumDirsAndFiles)
-    {
-        LOG_WRITE("Запрос данных о файлах %s", __FUNCTION__);
-    }
-
-    HAL_StatusTypeDef result = HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100);
-
-    if(result != HAL_OK)
-    {
-        LOG_WRITE("Ошибка передачи %d", result);
-    }
+    HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100);
 
 #endif
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI4_::Receive(void *recv, uint size)
+bool CPU::SPI4_::Receive(void *recv, uint size)
 {
 #ifndef OPEN
 
     WaitFreedom();
 
-    HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100);
+    return HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100) == HAL_OK;
 
 #endif
 }

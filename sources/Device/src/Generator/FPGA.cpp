@@ -377,7 +377,7 @@ void FPGA::SendData()
         pointer = dataDDS[0];
     }
 
-    Console::AddString("");
+//    Console::AddString("");
 
     for(i = 0; i < FPGA_NUM_POINTS * 4; i++)
     {

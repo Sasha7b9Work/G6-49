@@ -44,5 +44,5 @@ private:
     /// Принять numBytes байт от ПЛИС и выполнить их
     static void ReceiveAndRun(uint numBytes);
     /// Сколько байт хочет нам передать прибор
-    static uint BytesForReceive();;
+    static uint BytesForReceive();
 };

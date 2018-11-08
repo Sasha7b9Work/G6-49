@@ -82,7 +82,7 @@ public:
         /// Переслать массив данных
         static void Transmit(const void *buffer, uint size);
         /// Принять массив данных
-        static void Receive(void *recv, uint size);
+        static bool Receive(void *recv, uint size);
     private:
         /// Ждать пока освободится устройство
         static void WaitFreedom();

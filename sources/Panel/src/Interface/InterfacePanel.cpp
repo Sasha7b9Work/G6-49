@@ -76,10 +76,6 @@ bool Interface::Request(Data *request, Data *answer)
             LOG_WRITE("Не хватает памяти для буфера");
         }
     }
-    else
-    {
-        LOG_WRITE("Нет данных для приёма");
-    }
 
     return numBytes != 0;
 }
@@ -121,9 +117,21 @@ void Interface::ReceiveAndRun(uint numBytes)
 {
     uint8 *buffer = (uint8 *)malloc(numBytes);
 
+    static int count = 0;
+
     if (buffer)
     {
-        CPU::SPI4_::Receive(buffer, numBytes);
+        if(numBytes != 257)
+        {
+            LOG_WRITE("нужно принять %d байт", numBytes);
+        }
+
+        count += numBytes;
+
+        if(!CPU::SPI4_::Receive(buffer, numBytes))
+        {
+            LOG_WRITE("Ошибка приёма - данные не приняты");
+        }
 
         if (*buffer == Command::FreqMeasure)
         {
@@ -136,6 +144,7 @@ void Interface::ReceiveAndRun(uint numBytes)
         }
         else if (*buffer == Command::Log)
         {
+            LOG_WRITE("log");
             char buf[LENGTH_SPI_BUFFER];
             for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
             {
@@ -146,12 +155,26 @@ void Interface::ReceiveAndRun(uint numBytes)
         }
         else if(*buffer == Command::FDrive_Mount)
         {
+            count = 0;
+            if(buffer[1] == 0)
+            {
+                LOG_WRITE("unmout");
+            }
+            else
+            {
+                LOG_WRITE("mount");
+            }
+
             FDrive::HandlerInterface(buffer);
         }
         else
         {
-            LOG_WRITE("Приняты ошибочные данные %d", *buffer);
+            //LOG_WRITE("принято %d после монтирования", count);
         }
+    }
+    else
+    {
+        LOG_WRITE("Нет памяти");
     }
 
     free(buffer);

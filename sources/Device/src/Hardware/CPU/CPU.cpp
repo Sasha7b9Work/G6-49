@@ -232,7 +232,7 @@ void CPU::SPI1_::Receive(void *buffer, uint size)
 void CPU::SPI1_::Transmit(void *buffer, uint size)
 {
     CPU::SetReady();
-    HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, 100);
+    HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, 66);
     CPU::SetBusy();
 }
 

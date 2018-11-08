@@ -24,8 +24,6 @@ volatile static bool isConnected = false;
 static uint numBytesForSend = 0;
 /// Начало буфера данных для передачи в Interface
 static uint8 *bufferForSend = 0;
-/// Если true, то устройство занято и обмен с интерфейсом запрещён
-static bool isBusy = false;
 /// Путь к каталогу, количество файлов и каталогов в котором нужно узнать
 static char path[256];
 /// Номер запрашиваемого имени - каталога или файла
@@ -115,13 +113,6 @@ void FDrive::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Update()
 {
-    if(numBytesForSend)
-    {
-        return;
-    }
-
-    isBusy = true;
-
     USBH_Process(&hUSB_Host);
 
     if(state == State::NeedMount)
@@ -148,6 +139,7 @@ void FDrive::Update()
     }
     else if(command == Command::FDrive_NumDirsAndFiles)
     {
+        /*
         PrepareBufferForData(1 + 4 + 4, Command::FDrive_NumDirsAndFiles);
 
         BitSet32 numDirs;
@@ -159,9 +151,11 @@ void FDrive::Update()
         numFiles.WriteToBuffer(bufferForSend + 5);
 
         command = Command::Number;
+        */
     }
     else if(command == Command::FDrive_RequestDir)
     {
+        /*
         char buffer[256];
         StructForReadDir str;
         GetNameDir(path, (int)numItem, buffer, &str);
@@ -174,9 +168,11 @@ void FDrive::Update()
         strcpy((char *)bufferForSend + 5, buffer);
 
         command = Command::Number;
+        */
     }
     else if(command == Command::FDrive_RequestFile)
     {
+        /*
         char buffer[256];
         StructForReadDir str;
         GetNameFile(path, (int)numItem, buffer, &str);
@@ -189,9 +185,8 @@ void FDrive::Update()
         strcpy((char *)bufferForSend + 5, buffer);
 
         command = Command::Number;
+        */
     }
-
-    isBusy = false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -205,10 +200,6 @@ static void PrepareBufferForData(uint size, uint8 com)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 uint FDrive::NumBytesForSend()
 {
-    if(isBusy)
-    {
-        return 0;
-    }
     return numBytesForSend;
 }
 
@@ -224,10 +215,6 @@ uint8 *FDrive::GetDataForSend(uint8 *buffer)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::HandlerInterface()
 {
-    Console::AddString(__FUNCTION__);
-
-    isBusy = true;
-
     command = *Interface::recv;
 
     if(command == Command::FDrive_NumDirsAndFiles)
@@ -235,8 +222,6 @@ void FDrive::HandlerInterface()
         uint numDirs = 0;
         uint numFiles = 0;
         GetNumDirsAndFiles((const char *)Interface::recv + 1, &numDirs, &numFiles);
-        Console::AddInt(numDirs);
-        Console::AddInt(numFiles);
         uint8 *buffer = (uint8 *)malloc(1 + 4 + 4);
 
         buffer[0] = Command::FDrive_NumDirsAndFiles;
@@ -246,8 +231,6 @@ void FDrive::HandlerInterface()
 
         free(buffer);
     }
-
-    isBusy = false;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

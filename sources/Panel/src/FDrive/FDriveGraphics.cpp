@@ -78,13 +78,14 @@ void FDrive::Draw()
         return;
     }
 
+    return;
+
     if(state == State::NeedRepaint)
     {
         uint numDirs = 0;
         uint numFiles = 0;
         if(!FDrive::GetNumDirsAndFiles(directory, &numDirs, &numFiles))
         {
-            LOG_WRITE("Не получены данные о файлах");
             isConnected = false;
         }
 
@@ -106,7 +107,7 @@ void FDrive::HandlerInterface(uint8 *data)
 {
     if(*data == Command::FDrive_Mount)
     {
-        isConnected = (data[1] == 0) ? false : true;
+        isConnected = data[1] != 0;
     }
 }
 
