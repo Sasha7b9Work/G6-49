@@ -1,13 +1,5 @@
 #pragma once
 
-#ifndef __ALIGN_BEGIN
-#define __ALIGN_BEGIN
-#endif
-
-#ifndef __ALIGN_END
-#define __ALIGN_END __attribute__ ((aligned (4)))
-#endif
-
 #ifdef STM32F407xx
 #include <stm32f4xx_hal.h>
 #endif
