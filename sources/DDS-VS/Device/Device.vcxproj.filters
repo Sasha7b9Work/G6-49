@@ -380,6 +380,9 @@
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp">
+      <Filter>SCPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f407xx.s">

@@ -14,4 +14,8 @@ public:
     static void SendFormatStringAsynch(char *format, ...);
 
     static void SendDataSynch(const unsigned char *data, int size);
+
+    static USBD_HandleTypeDef handleUSBD;
+
+    static PCD_HandleTypeDef handlePCD;
 };
