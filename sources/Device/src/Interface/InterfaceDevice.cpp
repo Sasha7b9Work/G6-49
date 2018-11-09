@@ -303,7 +303,7 @@ void Interface::Update()
             }
             else
             {
-                //commands[recv[0]].func();               // Иначе обрабатываем команду
+                commands[recv[0]].func();               // Иначе обрабатываем команду
             }
         }
         else
@@ -320,7 +320,6 @@ static void SendData()
 
     if(freqForSend != MAX_UINT)
     {
-        /*
         uint8 buffer[5];
         buffer[0] = Command::FreqMeasure;
 
@@ -333,7 +332,6 @@ static void SendData()
         freqForSend = MAX_UINT;
 
         isSending = true;
-        */
     }
 
     if(Console::ExistString())
