@@ -52,6 +52,9 @@
     <Filter Include="SCPI">
       <UniqueIdentifier>{1e2c54d1-b47d-4660-af49-d6154e8bcf46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\USBD">
+      <UniqueIdentifier>{b1da9dc2-fc74-4371-8c53-04fbe9bd067a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -249,6 +252,15 @@
     <ClInclude Include="..\..\Device\src\SCPI\SCPI.h">
       <Filter>SCPI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -382,6 +394,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp">
       <Filter>SCPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp">
+      <Filter>libs\USBD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
