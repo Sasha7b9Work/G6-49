@@ -15,7 +15,8 @@ pString Command::Name() const
     {
         pString name;
         StructName(pString n) : name(n) {};
-    } names[Number] =
+    }
+    names[Number] =
     {
         "RequestData",
         "EnableChannel",

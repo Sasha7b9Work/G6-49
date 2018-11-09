@@ -25,7 +25,7 @@ static uint numBytesForSend = 0;
 /// Начало буфера данных для передачи в Interface
 static uint8 *bufferForSend = 0;
 /// Путь к каталогу, количество файлов и каталогов в котором нужно узнать
-static char path[256];
+static char path[128];
 /// Номер запрашиваемого имени - каталога или файла
 static uint numItem = 0;
 

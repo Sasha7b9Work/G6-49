@@ -228,9 +228,13 @@ void CPU::SPI1_::Receive(void *buffer, uint size)
     CPU::SetBusy();
 }
 
+uint CPU::SPI1_::transmitted = 0;
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SPI1_::Transmit(void *buffer, uint size)
 {
+    transmitted += size;
+    
     CPU::SetReady();
     HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, 66);
     CPU::SetBusy();

@@ -320,6 +320,7 @@ static void SendData()
 
     if(freqForSend != MAX_UINT)
     {
+        /*
         uint8 buffer[5];
         buffer[0] = Command::FreqMeasure;
 
@@ -332,29 +333,29 @@ static void SendData()
         freqForSend = MAX_UINT;
 
         isSending = true;
+        */
     }
 
     if(Console::ExistString())
     {
-        /*
         char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
         Console::GetString(buffer + 1);
         Interface::Send(buffer, LENGTH_SPI_BUFFER);
 
         isSending = true;
-        */
     }
 
     if(FDrive::NumBytesForSend())
     {
-        Console::AddString(__FUNCTION__);
-        Console::AddInt(__LINE__);
         uint numBytes = FDrive::NumBytesForSend();
         uint8 *buffer = (uint8 *)malloc(numBytes);
-        Interface::Send(FDrive::GetDataForSend(buffer), numBytes);
-        free(buffer);
+        if(buffer)
+        {
+            Interface::Send(FDrive::GetDataForSend(buffer), numBytes);
+            free(buffer);
 
-        isSending = true;
+            isSending = true;
+        }
     }
 
     if(!isSending)

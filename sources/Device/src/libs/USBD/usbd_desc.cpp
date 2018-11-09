@@ -42,10 +42,14 @@ USBD_DescriptorsTypeDef VCP_Desc = {
   USBD_VCP_InterfaceStrDescriptor,  
 };
 
-#ifdef _WIN32
+
+#ifdef WIN32
+#undef __ALIGN_BEGIN
+#undef __ALIGN_END
 #define __ALIGN_BEGIN
 #define __ALIGN_END
 #endif
+
 
 /* USB Standard Device Descriptor */
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */

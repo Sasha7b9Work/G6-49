@@ -84,7 +84,12 @@ public:
     private:
         static void Init();
 
+        static uint transmitted;
+
     public:
+
+        static uint TransmittedBytes() { return transmitted; }
+
         static void Receive(void *buffer, uint size);
 
         static void Transmit(void *buffer, uint size);

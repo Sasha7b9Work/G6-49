@@ -57,6 +57,80 @@ void Interface::ProcessDataFPGA()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::ReceiveAndRun(uint numBytes)
+{
+    uint8 *buffer = (uint8 *)malloc(numBytes);
+
+    static int count = 0;
+
+    if (buffer)
+    {
+        if(numBytes != 257)
+        {
+            LOG_WRITE("нужно принять %d байт", numBytes);
+        }
+
+        count += numBytes;
+
+        if (!CPU::SPI4_::Receive(buffer, numBytes))
+        {
+            LOG_WRITE("Ошибка приёма - данные не приняты");
+        }
+
+        if (*buffer == Command::FreqMeasure)
+        {
+            BitSet32 bs;
+            for (int i = 0; i < 4; i++)
+            {
+                bs.byte[i] = buffer[i + 1];
+            }
+            FrequencyMeter::SetMeasure(bs.word);
+        }
+        else if (*buffer == Command::Log)
+        {
+            /*
+            LOG_WRITE("log");
+            */
+            char buf[LENGTH_SPI_BUFFER];
+            for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
+            {
+                buf[i] = (char)buffer[i + 1];
+            }
+            buf[LENGTH_SPI_BUFFER - 1] = '\0';
+            Console::AddString(buf);
+        }
+        else if (*buffer == Command::FDrive_Mount)
+        {
+            if(count)
+            {
+                //LOG_WRITE("принято %d после монтирования %d %d %d %d %d", count, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4]);
+            }
+            count = 0;
+            if (buffer[1] == 0)
+            {
+                LOG_WRITE("unmout");
+            }
+            else
+            {
+                LOG_WRITE("mount");
+            }
+
+            FDrive::HandlerInterface(buffer);
+        }
+        else
+        {
+            LOG_WRITE("Неизвестная команда %d, %d байт", *buffer, numBytes);
+        }
+    }
+    else
+    {
+        LOG_WRITE("Нет памяти");
+    }
+
+    free(buffer);
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 bool Interface::Request(Data *request, Data *answer)
 {
     Send(request->GetData(), request->GetSize());
@@ -91,6 +165,11 @@ uint Interface::BytesForReceive()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(const uint8 *buffer, uint size)
 {
+    if(*buffer != 0)
+    {
+        LOG_WRITE("Посылаю %d байт", size);
+    }
+
     /*
         Процесс передачи состоит из двух частей.
         1. Сначала идут два байта - количество передаваемых данных
@@ -110,71 +189,6 @@ void Interface::Send(const uint8 *buffer, uint size)
 
         pointer += sizeChunk;
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ReceiveAndRun(uint numBytes)
-{
-    uint8 *buffer = (uint8 *)malloc(numBytes);
-
-    static int count = 0;
-
-    if (buffer)
-    {
-        LOG_WRITE("нужно принять %d байт", numBytes);
-
-        count += numBytes;
-
-        if(!CPU::SPI4_::Receive(buffer, numBytes))
-        {
-            LOG_WRITE("Ошибка приёма - данные не приняты");
-        }
-
-        if (*buffer == Command::FreqMeasure)
-        {
-            BitSet32 bs;
-            for (int i = 0; i < 4; i++)
-            {
-                bs.byte[i] = buffer[i + 1];
-            }
-            FrequencyMeter::SetMeasure(bs.word);
-        }
-        else if (*buffer == Command::Log)
-        {
-            LOG_WRITE("log");
-            char buf[LENGTH_SPI_BUFFER];
-            for (int i = 0; i < LENGTH_SPI_BUFFER - 1; i++)
-            {
-                buf[i] = (char)buffer[i + 1];
-            }
-            buf[LENGTH_SPI_BUFFER - 1] = '\0';
-            Console::AddString(buf);
-        }
-        else if(*buffer == Command::FDrive_Mount)
-        {
-            count = 0;
-            if(buffer[1] == 0)
-            {
-                LOG_WRITE("unmout");
-            }
-            else
-            {
-                LOG_WRITE("mount");
-            }
-
-            FDrive::HandlerInterface(buffer);
-        }
-        else
-        {
-            LOG_WRITE("принято %d после монтирования %d %d %d %d %d", count, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4]);
-        }
-    }
-    else
-    {
-        LOG_WRITE("Нет памяти");
-    }
-
-    free(buffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

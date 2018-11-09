@@ -21,10 +21,19 @@ int main()
     Interface::Init();
     FDrive::Init();
   
+    uint time = 0;
+
     while (1)
     {
         FreqMeter::Update();
         FDrive::Update();
         Interface::Update();
+
+
+        if(TIME_MS - time > 2000)
+        {
+            Console::AddString("test string");
+            time = TIME_MS;
+        }
     }
 }
