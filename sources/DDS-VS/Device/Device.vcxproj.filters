@@ -255,9 +255,6 @@
     <ClInclude Include="..\..\common\Packet.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Hardware\cpu.h">
-      <Filter>Hardware</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\stm32.h">
       <Filter>Hardware</Filter>
     </ClInclude>
@@ -266,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="..\..\common\Transceiver.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\CPU.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

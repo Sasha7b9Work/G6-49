@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Packet.h"
 #include "Transceiver.h"
 #include "Hardware/CPU.h"
@@ -15,5 +16,8 @@ void Transceiver::Send(uint8 *buffer, uint size)
     packet.Create(buffer, size);
 
     /// Повторяем передачу, пока не передадим
-    while (!Send(&packet))  { }
+    while (!Send(&packet))
+    {
+        LOG_ERROR("Ошибка передачи");
+    }
 }

@@ -85,9 +85,9 @@ public:
         static void Init();
 
     public:
-        static void Receive(void *buffer, uint size);
+        static bool Receive(void *buffer, uint size, uint timeout = 100);
 
-        static void Transmit(void *buffer, uint size);
+        static bool Transmit(void *buffer, uint size, uint timeout = 100);
 
         static SPI_HandleTypeDef handle;
     };

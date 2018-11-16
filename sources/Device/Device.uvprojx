@@ -1337,9 +1337,9 @@
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
-              <FileName>cpu.h</FileName>
+              <FileName>CPU.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\cpu.h</FilePath>
+              <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
               <FileName>CPU_IT.cpp</FileName>

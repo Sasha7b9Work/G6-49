@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Log.h"
+#include "log.h"
+#include "Packet.h"
 #include "InterfaceDevice.h"
 #include "FDrive/FDriveDevice.h"
 #include "Utils/Console.h"
@@ -23,7 +24,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uint8 *Interface::recv = 0;                         
 /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
-static uint freqForSend = MAX_UINT;
+volatile static uint freqForSend = MAX_UINT;
 uint  Interface::timeLastReceive = 0;
 
 static const struct FuncInterface
@@ -73,7 +74,7 @@ commands[Command::Number] =
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Послать имеющиеся данные в главный процессор
-static void SendData();
+//static void SendData();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -320,6 +321,19 @@ void Interface::SendFrequency(uint value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Update()
 {
+    CPU::SetReady();
+
+    Packet packet;
+
+    if (CPU::SPI1_::Receive(packet.Begin(), packet.Size(), 100))
+    {
+
+    }
+
+
+    CPU::SetReady();
+
+    /*
     uint16 numBytes = 0;
     CPU::SPI1_::Receive(&numBytes, 2);                  // Узнаём количество байт, которые хочет передать панель
 
@@ -342,66 +356,11 @@ void Interface::Update()
         }
         else
         {
-//            Console::AddFormatString("Принята неправильная команда %d", recv[0]);
+            Console::AddFormatString("Принята неправильная команда %d", recv[0]);
         }
     }
+    */
 }
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendData()
-{
-    bool isSending = false;
-
-    if(freqForSend != MAX_UINT)
-    {
-        /*
-        uint8 buffer[5];
-        buffer[0] = Command::FreqMeasure;
-
-        BitSet32 bs(freqForSend);
-
-        bs.WriteToBuffer(buffer + 1);
-
-        Interface::Send(buffer, 5);
-
-        freqForSend = MAX_UINT;
-
-        isSending = true;
-        */
-    }
-
-    if(Console::ExistString())
-    {
-        /*
-        char buffer[LENGTH_SPI_BUFFER] = {Command::Log};
-        Console::GetString(buffer + 1);
-        Interface::Send(buffer, LENGTH_SPI_BUFFER);
-
-        isSending = true;
-        */
-    }
-
-    if(FDrive::NumBytesForSend())
-    {
-        /*
-        Console::AddString(__FUNCTION__);
-        Console::AddInt(__LINE__);
-        uint numBytes = FDrive::NumBytesForSend();
-        uint8 *buffer = (uint8 *)malloc(numBytes);
-        Interface::Send(FDrive::GetDataForSend(buffer), numBytes);
-        free(buffer);
-
-        isSending = true;
-        */
-    }
-
-    if(!isSending)
-    {
-        uint16 numBytes = 0;
-        CPU::SPI1_::Transmit(&numBytes, 2);
-    }
-}
-
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(void *buffer, uint size)

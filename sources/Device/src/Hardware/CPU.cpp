@@ -221,19 +221,15 @@ void CPU::SPI1_::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI1_::Receive(void *buffer, uint size)
+bool CPU::SPI1_::Receive(void *buffer, uint size, uint timeout)
 {
-    CPU::SetReady();
-    HAL_SPI_Receive(&handle, (uint8 *)buffer, (uint16)size, 100);
-    CPU::SetBusy();
+    return HAL_SPI_Receive(&handle, (uint8 *)buffer, (uint16)size, timeout) == HAL_OK;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI1_::Transmit(void *buffer, uint size)
+bool CPU::SPI1_::Transmit(void *buffer, uint size, uint timeout)
 {
-    CPU::SetReady();
-    HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, 66);
-    CPU::SetBusy();
+    return HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, timeout) == HAL_OK;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

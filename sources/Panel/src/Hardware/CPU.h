@@ -80,7 +80,7 @@ public:
         static void Init();
     public:
         /// Переслать массив данных
-        static void Transmit(const void *buffer, uint size);
+        static bool Transmit(const void *buffer, uint size);
         /// Принять массив данных
         static bool Receive(void *recv, uint size);
         /// Возвращает true, если прибор готов к обмену

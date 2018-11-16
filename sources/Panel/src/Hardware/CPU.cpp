@@ -112,27 +112,27 @@ void CPU::SPI4_::Init()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::SPI4_::Transmit(const void *buffer, uint size)
+bool CPU::SPI4_::Transmit(const void *buffer, uint size)
 {
-#ifndef OPEN
+    if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100) != HAL_OK)
+    {
+        LOG_ERROR("Ошибка передачи данных");
+        return false;
+    }
 
-    WaitFreedom();
-
-    HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100);
-
-#endif
+    return true;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool CPU::SPI4_::Receive(void *recv, uint size)
 {
-#ifndef OPEN
+    if (HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100) != HAL_OK)
+    {
+        LOG_WRITE("Ошибка приёма данных");
+        return false;
+    }
 
-    WaitFreedom();
-
-    return HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100) == HAL_OK;
-
-#endif
+    return true;
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
