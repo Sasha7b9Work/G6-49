@@ -25,9 +25,9 @@ static uint numBytesForSend = 0;
 /// Начало буфера данных для передачи в Interface
 static uint8 *bufferForSend = 0;
 /// Путь к каталогу, количество файлов и каталогов в котором нужно узнать
-static char path[256];
+//static char path[256];
 /// Номер запрашиваемого имени - каталога или файла
-static uint numItem = 0;
+//static uint numItem = 0;
 
 struct StructForReadDir
 {
@@ -61,9 +61,9 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 /// Подготовить буфер для даныых
 static void PrepareBufferForData(uint size, uint8 command);
 /// Получить имя numDir-го каталога из каталога fullPath
-static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
+//static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
 /// Получить имя numFile-го файла из каталога fullPath
-static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
+//static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,6 +283,7 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s)
 {
     memcpy(s->nameDir, (void *)fullPath, strlen(fullPath));
@@ -325,8 +326,10 @@ static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Struc
     }
     return false;
 }
+*/
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
 {
     memcpy(s->nameDir, (void *)fullPath, strlen(fullPath));
@@ -369,3 +372,4 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, St
     }
     return false;
 }
+*/

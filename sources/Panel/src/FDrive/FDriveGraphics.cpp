@@ -45,14 +45,14 @@ struct State
     } value;
 };
 
-static State::E state = State::NeedRepaint;
+//static State::E state = State::NeedRepaint;
 
 FDrive::View FDrive::view = FDrive::Files;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Выводит название текущего каталога в координатах [left, top]
-static void DrawNameCurrentDir(int left, int top);
+//static void DrawNameCurrentDir(int left, int top);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,6 +78,7 @@ void FDrive::Draw()
         return;
     }
 
+	/*
     return;
 
     if(state == State::NeedRepaint)
@@ -94,13 +95,16 @@ void FDrive::Draw()
     }
 
     DrawNameCurrentDir(x + 3, y + 1);
+	*/
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static void DrawNameCurrentDir(int left, int top)
 {
     Text::DrawText(left, top, directory, Color::FILL);
 }
+*/
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::HandlerInterface(uint8 *data)
