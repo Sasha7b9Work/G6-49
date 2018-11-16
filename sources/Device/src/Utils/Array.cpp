@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Array.h"
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 
 
 Array::Array(uint _size) : size(_size)

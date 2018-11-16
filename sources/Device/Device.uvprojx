@@ -1197,19 +1197,29 @@
               <FilePath>..\Common\Command.h</FilePath>
             </File>
             <File>
-              <FileName>Wave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Wave.h</FilePath>
-            </File>
-            <File>
               <FileName>Command.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Common\Command.cpp</FilePath>
             </File>
             <File>
+              <FileName>Packet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Packet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Packet.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Packet.h</FilePath>
+            </File>
+            <File>
               <FileName>Wave.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Common\Wave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Wave.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1312,6 +1322,56 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
+              <FileName>CPU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>cpu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\cpu.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_HCD.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_HCD.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\EEPROM.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\stm32.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\stm32.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm407.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\stm407.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm407.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\stm407.h</FilePath>
+            </File>
+            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
@@ -1320,16 +1380,6 @@
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.cpp</FileName>
@@ -1342,59 +1392,14 @@
               <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
             </File>
             <File>
-              <FileName>EEPROM.cpp</FileName>
+              <FileName>VCP.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
+              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
             </File>
             <File>
-              <FileName>EEPROM.h</FileName>
+              <FileName>VCP.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\EEPROM.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware/CPU</GroupName>
-          <Files>
-            <File>
-              <FileName>CPU.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU\CPU.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CPU\CPU.h</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_HCD.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU\CPU_HCD.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU\CPU_IT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU\stm32.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CPU\stm32.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm407.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU\stm407.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm407.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\CPU\stm407.h</FilePath>
+              <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
           </Files>
         </Group>

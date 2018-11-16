@@ -46,7 +46,7 @@ void Interface::ProcessDataFPGA()
     
     //uint8 command = Command::RequestData;
     
-    LOG_WRITE_FINALIZE("Делаем запрос %s", __FUNCTION__);
+    //LOG_WRITE_FINALIZE("Делаем запрос %s", __FUNCTION__);
     
     uint8 command = Command::Test;
 
@@ -54,7 +54,7 @@ void Interface::ProcessDataFPGA()
 
     uint numBytes = BytesForReceive();
     
-    LOG_WRITE_FINALIZE("Нужно принять %d байт", numBytes);
+    //LOG_WRITE_FINALIZE("Нужно принять %d байт", numBytes);
 
     while (numBytes > 0)         // Принятое значение означает число байт, готовых для передачи вспомогательным процессором
     {

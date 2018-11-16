@@ -46,9 +46,6 @@
     <Filter Include="FDrive">
       <UniqueIdentifier>{0d9e9c65-8aa9-46a7-8277-a42a40e62415}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Hardware\CPU">
-      <UniqueIdentifier>{0394f09f-a093-43c9-9c8b-5d8bd73044da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SCPI">
       <UniqueIdentifier>{1e2c54d1-b47d-4660-af49-d6154e8bcf46}</UniqueIdentifier>
     </Filter>
@@ -222,15 +219,6 @@
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h">
       <Filter>libs\FatFS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Hardware\CPU\CPU.h">
-      <Filter>Hardware\CPU</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Hardware\CPU\stm32.h">
-      <Filter>Hardware\CPU</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Hardware\CPU\stm407.h">
-      <Filter>Hardware\CPU</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -263,6 +251,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\Array.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Packet.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\cpu.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\stm32.h">
+      <Filter>Hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\stm407.h">
+      <Filter>Hardware</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -362,21 +362,6 @@
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp">
       <Filter>libs\USBH</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU.cpp">
-      <Filter>Hardware\CPU</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_HCD.cpp">
-      <Filter>Hardware\CPU</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\CPU_IT.cpp">
-      <Filter>Hardware\CPU</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm32.cpp">
-      <Filter>Hardware\CPU</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Hardware\CPU\stm407.cpp">
-      <Filter>Hardware\CPU</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -412,6 +397,24 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Utils\Array.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Packet.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_HCD.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp">
+      <Filter>Hardware</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

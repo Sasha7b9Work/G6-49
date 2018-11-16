@@ -5,7 +5,7 @@
 #include "Generator/GeneratorDevice.h"
 #include "Generator/AD5697.h"
 #include "Interface/InterfaceDevice.h"
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Utils/Console.h"

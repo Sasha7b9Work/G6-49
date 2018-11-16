@@ -5,7 +5,7 @@
 #include "Log.h"
 #include "FDriveDevice.h"
 #include "Interface/InterfaceDevice.h"
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 #include "Utils/Console.h"
 #include "usbh_diskio.h"
 #include "usbh_conf.h"

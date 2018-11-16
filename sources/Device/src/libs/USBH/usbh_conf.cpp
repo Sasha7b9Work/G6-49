@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 #include <usbh_core.h>
 
  

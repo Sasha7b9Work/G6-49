@@ -6,7 +6,7 @@
 #include <stm32f4xx.h>
 #include "Timer4XX.h"
 #include <limits.h>
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 #endif
 
 

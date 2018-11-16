@@ -4,6 +4,7 @@
 
 #include "Log.h"
 #include "structs.h"
+#include "Packet.h"
 
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
@@ -13,7 +14,7 @@
 
 #include "Hardware/Timer.h"
 #include "Hardware/Timer4XX.h"
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
 
 #include "Interface/InterfaceDevice.h"

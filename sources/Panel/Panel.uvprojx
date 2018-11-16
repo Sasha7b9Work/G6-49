@@ -1637,19 +1637,29 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
+              <FileName>Command.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Command.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Common\Command.h</FilePath>
             </File>
             <File>
+              <FileName>Packet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Packet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Packet.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Packet.h</FilePath>
+            </File>
+            <File>
               <FileName>Wave.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Wave.h</FilePath>
-            </File>
-            <File>
-              <FileName>Command.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Common\Command.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Log.h"
-#include <Hardware/CPU/CPU.h>
+#include <Hardware/CPU.h>
 #include "Hardware/VCP.h"
 #include <stdarg.h>
 #include <string.h>

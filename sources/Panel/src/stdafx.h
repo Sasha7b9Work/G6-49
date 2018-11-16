@@ -5,6 +5,7 @@
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
+#include "Packet.h"
 
 #include "Display/Console.h"
 #include "Display/Display.h"

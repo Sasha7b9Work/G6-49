@@ -1,6 +1,6 @@
 #pragma once
 #include "defines.h"
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 #include "GeneratorSettingsTypes.h"
 
 

@@ -7,7 +7,7 @@
 #ifdef STM32F746xx
 #include <stm32f7xx_hal.h>
 #endif
-#include "Hardware/CPU/CPU.h"
+#include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Settings/Settings.h"
