@@ -12,6 +12,7 @@
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "InterfacePanel.h"
 #include <stdlib.h>
@@ -29,7 +30,7 @@ void Interface::Update()
 {
     static uint timePrev = 0;
     
-    if (TIME_MS - timePrev > 100)
+    if (TIME_MS - timePrev > 5000)
     {
         ProcessDataFPGA();
     
@@ -42,12 +43,18 @@ void Interface::Update()
 void Interface::ProcessDataFPGA()
 {
     /// \todo Процесс обмена прерывается иногда. Нужно проверять информацию на ошибки
-
-    uint8 command = Command::RequestData;
+    
+    //uint8 command = Command::RequestData;
+    
+    LOG_WRITE_FINALIZE("Делаем запрос %s", __FUNCTION__);
+    
+    uint8 command = Command::Test;
 
     Send(&command, 1);
 
     uint numBytes = BytesForReceive();
+    
+    LOG_WRITE_FINALIZE("Нужно принять %d байт", numBytes);
 
     while (numBytes > 0)         // Принятое значение означает число байт, готовых для передачи вспомогательным процессором
     {
@@ -84,7 +91,10 @@ bool Interface::Request(Data *request, Data *answer)
 uint Interface::BytesForReceive()
 {
     uint numBytes = 0;
-    CPU::SPI4_::Receive(&numBytes, 2);
+    if(!CPU::SPI4_::Receive(&numBytes, 2))
+    {
+        LOG_ERROR("Не получил размер данных. Проверьте!");
+    }
     return numBytes;
 }
 
@@ -164,9 +174,13 @@ void Interface::ReceiveAndRun(uint numBytes)
 
             FDrive::HandlerInterface(buffer);
         }
+        else if(*buffer == Command::Test)
+        {
+            LOG_WRITE("Получено в ответ на Test %d байт", numBytes);
+        }
         else
         {
-            LOG_WRITE("принято %d после монтирования %d %d %d %d %d", count, buffer[0], buffer[1], buffer[2], buffer[3], buffer[4]);
+            LOG_WRITE("принято %d байт в ошибочной команде %d", numBytes, *buffer);
         }
     }
     else

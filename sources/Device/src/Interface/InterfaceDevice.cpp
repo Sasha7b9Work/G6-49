@@ -10,6 +10,7 @@
 #include "Hardware/CPU/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
+#include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "Utils/StringUtils.h"
 #include "Command.h"
@@ -65,7 +66,8 @@ commands[Command::Number] =
 /* FDrive_NumDirsAndFiles  */ Interface::Empty,
 /* FDrive_Mount            */ Interface::Empty,
 /* FDrive_RequestDir       */ Interface::Empty,
-/* FDrive_RequestFile      */ Interface::Empty
+/* FDrive_RequestFile      */ Interface::Empty,
+/* Test                    */ Interface::Test
 };
 
 
@@ -110,6 +112,38 @@ void Interface::LoadFormDDS()
     CPU::SPI1_::Receive(FPGA::DataDDS(ch), FPGA_NUM_POINTS * 2);
 
     Generator::SetFormWave(ch, Form::DDS);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Interface::Test()
+{
+    srand(TIME_MS);
+    
+    Array array(400);
+    
+    for(int i = 0; i < array.Size(); i++)
+    {
+        array.Data()[i] = (uint8)rand();
+    }
+    
+    uint size = 1 + 4 + 4 + array.Size();
+    
+    // Передаем количество байт
+    CPU::SPI1_::Transmit(&size, 2);
+    
+    // А теперь передаем сами байты
+    
+    uint8 buffer[9] = {Command::Test};
+    
+    BitSet32 bsSize(array.Size());
+    bsSize.WriteToBuffer(buffer + 1);
+    
+    BitSet32 bsCRC(array.CRC32());
+    bsCRC.WriteToBuffer(buffer + 5);
+    
+    CPU::SPI1_::Transmit(buffer, 9);
+    
+    CPU::SPI1_::Transmit(array.Data(), array.Size());
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -320,6 +354,7 @@ static void SendData()
 
     if(freqForSend != MAX_UINT)
     {
+        /*
         uint8 buffer[5];
         buffer[0] = Command::FreqMeasure;
 
@@ -332,6 +367,7 @@ static void SendData()
         freqForSend = MAX_UINT;
 
         isSending = true;
+        */
     }
 
     if(Console::ExistString())
@@ -347,6 +383,7 @@ static void SendData()
 
     if(FDrive::NumBytesForSend())
     {
+        /*
         Console::AddString(__FUNCTION__);
         Console::AddInt(__LINE__);
         uint numBytes = FDrive::NumBytesForSend();
@@ -355,6 +392,7 @@ static void SendData()
         free(buffer);
 
         isSending = true;
+        */
     }
 
     if(!isSending)

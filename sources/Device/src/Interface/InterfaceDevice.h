@@ -59,6 +59,8 @@ public:
     static void SetStartMode();
 
     static void LoadFormDDS();
+    
+    static void Test();
 
     static void SetPolarity();
 

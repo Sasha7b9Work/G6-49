@@ -92,7 +92,8 @@ void Generator::SetParameter(Chan ch, Command command, float value)
 /* FDrive_NumDirsAndFiles  */ EmptyFunc,
 /* FDrive_Mount            */ EmptyFunc,
 /* FDrive_RequestDir       */ EmptyFunc,
-/* FDrive_RequestFile      */ EmptyFunc
+/* FDrive_RequestFile      */ EmptyFunc,
+/* Test                    */ EmptyFunc
     };
 
     func[command].func(ch, value);

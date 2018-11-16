@@ -1612,11 +1612,6 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Log.cpp</FilePath>
@@ -1625,6 +1620,16 @@
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>structs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\structs.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1652,14 +1657,34 @@
           <GroupName>Display</GroupName>
           <Files>
             <File>
-              <FileName>Display.h</FileName>
+              <FileName>Colors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Colors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Colors.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Display.h</FilePath>
+              <FilePath>.\src\Display\Colors.h</FilePath>
+            </File>
+            <File>
+              <FileName>Console.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Console.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Console.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Console.h</FilePath>
             </File>
             <File>
               <FileName>Display.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Display.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
               <FileName>DisplayTypes.h</FileName>
@@ -1682,11 +1707,6 @@
               <FilePath>.\src\Display\InputWindowStruct.cpp</FilePath>
             </File>
             <File>
-              <FileName>Symbols.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Symbols.h</FilePath>
-            </File>
-            <File>
               <FileName>Painter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Painter.cpp</FilePath>
@@ -1702,14 +1722,9 @@
               <FilePath>.\src\Display\PainterSTM429.cpp</FilePath>
             </File>
             <File>
-              <FileName>Colors.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Colors.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Colors.h</FileName>
+              <FileName>Symbols.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Colors.h</FilePath>
+              <FilePath>.\src\Display\Symbols.h</FilePath>
             </File>
             <File>
               <FileName>Text.cpp</FileName>
@@ -1720,16 +1735,6 @@
               <FileName>Text.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Text.h</FilePath>
-            </File>
-            <File>
-              <FileName>Console.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Console.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Console.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Console.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1832,19 +1837,9 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>CPU.cpp</FileName>
+              <FileName>Controls.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_FLASH.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_Keyboard.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
+              <FilePath>.\src\Hardware\Controls.cpp</FilePath>
             </File>
             <File>
               <FileName>Controls.h</FileName>
@@ -1852,14 +1847,19 @@
               <FilePath>.\src\Hardware\Controls.h</FilePath>
             </File>
             <File>
+              <FileName>CPU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
+            </File>
+            <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
-              <FileName>LTDC.cpp</FileName>
+              <FileName>CPU_FLASH.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\LTDC.cpp</FilePath>
+              <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_IT.cpp</FileName>
@@ -1867,34 +1867,14 @@
               <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
+              <FileName>CPU_Keyboard.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+              <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
+              <FileName>LTDC.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\VCP.h</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
+              <FilePath>.\src\Hardware\LTDC.cpp</FilePath>
             </File>
             <File>
               <FileName>stm429.cpp</FileName>
@@ -1907,9 +1887,34 @@
               <FilePath>.\src\Hardware\stm429.h</FilePath>
             </File>
             <File>
-              <FileName>Controls.cpp</FileName>
+              <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Controls.cpp</FilePath>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\VCP.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2067,64 +2072,14 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Math.cpp</FileName>
+              <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Math.cpp</FilePath>
+              <FilePath>.\src\Utils\Array.cpp</FilePath>
             </File>
             <File>
-              <FileName>Math.h</FileName>
+              <FileName>Array.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\Math.h</FilePath>
-            </File>
-            <File>
-              <FileName>StringUtils.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StringUtils.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\StringUtils.h</FilePath>
-            </File>
-            <File>
-              <FileName>CommonFunctions.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\CommonFunctions.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CommonFunctions.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\CommonFunctions.h</FilePath>
-            </File>
-            <File>
-              <FileName>Statistics.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Statistics.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Statistics.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Statistics.h</FilePath>
-            </File>
-            <File>
-              <FileName>NumberBuffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\NumberBuffer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>NumberBuffer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\NumberBuffer.h</FilePath>
-            </File>
-            <File>
-              <FileName>Number.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Number.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Number.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Number.h</FilePath>
+              <FilePath>.\src\Utils\Array.h</FilePath>
             </File>
             <File>
               <FileName>BigNumber.cpp</FileName>
@@ -2137,6 +2092,26 @@
               <FilePath>.\src\Utils\BigNumber.h</FilePath>
             </File>
             <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Buffer.h</FilePath>
+            </File>
+            <File>
+              <FileName>CommonFunctions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\CommonFunctions.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CommonFunctions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\CommonFunctions.h</FilePath>
+            </File>
+            <File>
               <FileName>Debug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Debug.cpp</FilePath>
@@ -2147,14 +2122,54 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
-              <FileName>Buffer.cpp</FileName>
+              <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
             </File>
             <File>
-              <FileName>Buffer.h</FileName>
+              <FileName>Math.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\Buffer.h</FilePath>
+              <FilePath>.\src\Utils\Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>Number.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Number.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Number.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Number.h</FilePath>
+            </File>
+            <File>
+              <FileName>NumberBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\NumberBuffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>NumberBuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\NumberBuffer.h</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>StringUtils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\StringUtils.h</FilePath>
+            </File>
+            <File>
+              <FileName>Statistics.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Statistics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Statistics.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Statistics.h</FilePath>
             </File>
           </Files>
         </Group>

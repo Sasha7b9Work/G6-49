@@ -261,6 +261,9 @@
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h">
       <Filter>libs\USBD</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Array.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -406,6 +409,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp">
       <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Array.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -50,7 +50,8 @@ pString Command::Name() const
         "FDrive_NumDirsAndFiles",
         "FDrive_Mount",
         "FDrive_RequestDir",
-        "FDrive_RequestFile"
+        "FDrive_RequestFile",
+        "Test"
     };
     if(value < Number)
     {
@@ -157,6 +158,8 @@ pString Command::Trace(const uint8 *buffer) const
         case FDrive_RequestDir:
             break;
         case FDrive_RequestFile:
+            break;
+        case Test:
             break;
         case Number:
             break;

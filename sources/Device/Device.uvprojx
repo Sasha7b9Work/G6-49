@@ -1447,14 +1447,24 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Math.cpp</FileName>
+              <FileName>Array.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Math.cpp</FilePath>
+              <FilePath>.\src\Utils\Array.cpp</FilePath>
             </File>
             <File>
-              <FileName>Math.h</FileName>
+              <FileName>Array.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\Math.h</FilePath>
+              <FilePath>.\src\Utils\Array.h</FilePath>
+            </File>
+            <File>
+              <FileName>Console.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Console.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Console.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Console.h</FilePath>
             </File>
             <File>
               <FileName>Debug.cpp</FileName>
@@ -1467,14 +1477,14 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
-              <FileName>Console.cpp</FileName>
+              <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Console.cpp</FilePath>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
             </File>
             <File>
-              <FileName>Console.h</FileName>
+              <FileName>Math.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\Console.h</FilePath>
+              <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
               <FileName>StringUtils.cpp</FileName>

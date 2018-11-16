@@ -87,8 +87,11 @@ struct Command
 /* <-> */    FDrive_RequestDir,         ///< Запрос имени каталога
           // 0                  1
           //                    номер путь_к_родительскому_каталогу
-/* <-> */    FDrive_RequestFile,        ///< Запрос имени файла
-             Number
+/* <-> */   FDrive_RequestFile,        ///< Запрос имени файла
+        //  0      1...5    6...9
+        //  Test   size     crc32
+/* <-> */   Test,                   ///< Команда для тестирования SPI
+            Number
     } value;
     Command(E v) : value(v) {};
     Command(const uint8 v) : value((E)v) {};
