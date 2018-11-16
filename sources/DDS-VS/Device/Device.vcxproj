@@ -158,6 +158,7 @@
     <ClInclude Include="..\..\common\CommonTypes.h" />
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h" />
     <ClInclude Include="..\..\common\Packet.h" />
+    <ClInclude Include="..\..\common\Transceiver.h" />
     <ClInclude Include="..\..\common\Wave.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
@@ -251,6 +252,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\common\Packet.cpp" />
+    <ClCompile Include="..\..\common\Transceiver.cpp" />
     <ClCompile Include="..\..\Common\Wave.cpp" />
     <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice.cpp" />
     <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp">
@@ -294,6 +296,7 @@
     <ClCompile Include="..\..\Device\src\Interface\InterfaceDevice.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Interface\Transceiver_407.cpp" />
     <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

@@ -282,6 +282,12 @@
     <ClCompile Include="..\..\common\Packet.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\Transceiver.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Interface\Transceiver_429.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -549,6 +555,9 @@
       <Filter>libs\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\Packet.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Transceiver.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

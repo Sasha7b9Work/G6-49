@@ -264,6 +264,9 @@
     <ClInclude Include="..\..\Device\src\Hardware\stm407.h">
       <Filter>Hardware</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\Transceiver.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -415,6 +418,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp">
       <Filter>Hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Transceiver.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Interface\Transceiver_407.cpp">
+      <Filter>Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

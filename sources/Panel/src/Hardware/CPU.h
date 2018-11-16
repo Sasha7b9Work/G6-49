@@ -83,9 +83,11 @@ public:
         static void Transmit(const void *buffer, uint size);
         /// Принять массив данных
         static bool Receive(void *recv, uint size);
-    private:
+        /// Возвращает true, если прибор готов к обмену
+        static bool IsReady();
         /// Ждать пока освободится устройство
         static void WaitFreedom();
+    private:
     };
 
     //-------------------------------------------------------------------------------------------------------------------------------------- GPIO ----

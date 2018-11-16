@@ -1657,6 +1657,16 @@
               <FilePath>..\common\Packet.h</FilePath>
             </File>
             <File>
+              <FileName>Transceiver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Transceiver.h</FilePath>
+            </File>
+            <File>
               <FileName>Wave.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Wave.h</FilePath>
@@ -1940,6 +1950,11 @@
               <FileName>InterfacePanel.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Interface\InterfacePanel.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver_429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Interface\Transceiver_429.cpp</FilePath>
             </File>
           </Files>
         </Group>

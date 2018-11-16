@@ -234,6 +234,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\common\Packet.cpp" />
+    <ClCompile Include="..\..\common\Transceiver.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -311,6 +312,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Interface\InterfacePanel.cpp" />
+    <ClCompile Include="..\..\Panel\src\Interface\Transceiver_429.cpp" />
     <ClCompile Include="..\..\Panel\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -467,6 +469,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\common\Packet.h" />
+    <ClInclude Include="..\..\common\Transceiver.h" />
     <ClInclude Include="..\..\common\Wave.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />

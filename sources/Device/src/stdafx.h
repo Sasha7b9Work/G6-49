@@ -5,6 +5,7 @@
 #include "Log.h"
 #include "structs.h"
 #include "Packet.h"
+#include "Transceiver.h"
 
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"

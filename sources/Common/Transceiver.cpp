@@ -1,0 +1,19 @@
+#include "stdafx.h"
+#ifndef WIN32
+#include "defines.h"
+#include "Packet.h"
+#include "Transceiver.h"
+#include "Hardware/CPU.h"
+#endif
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Transceiver::Send(uint8 *buffer, uint size)
+{
+    Packet packet;
+
+    packet.Create(buffer, size);
+
+    /// ѕовтор€ем передачу, пока не передадим
+    while (!Send(&packet))  { }
+}

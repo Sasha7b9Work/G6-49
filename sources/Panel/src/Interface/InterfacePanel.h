@@ -32,7 +32,7 @@ public:
     /// Для приёма сообщений от устройства
     static void Update();
     /// Заслать в генератор данные
-    static void Send(const uint8 *buffer, uint size);
+    static void Send(uint8 *buffer, uint size);
 
     static void Send(const Buffer &buffer);
     /// Послать запрос и ожидать ответа.

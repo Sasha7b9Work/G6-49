@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
+#include "Transceiver.h"
 #include "Utils/Buffer.h"
 #include "InterfacePanel.h"
 #include "Command.h"
@@ -99,7 +100,7 @@ uint Interface::BytesForReceive()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Send(const uint8 *buffer, uint size)
+void Interface::Send(uint8 *buffer, uint size)
 {
     /*
         Процесс передачи состоит из двух частей.
@@ -107,6 +108,7 @@ void Interface::Send(const uint8 *buffer, uint size)
         2. Затем идут непосредственно данные
     */
 
+    /*
     CPU::SPI4_::Transmit(&size, 2);
 
     const uint8 *pointer = buffer;
@@ -120,6 +122,9 @@ void Interface::Send(const uint8 *buffer, uint size)
 
         pointer += sizeChunk;
     }
+    */
+
+    Transceiver::Send(buffer, size);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
