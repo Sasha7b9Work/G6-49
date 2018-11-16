@@ -20,6 +20,7 @@
 #define LOG_TRACE
 #define LOG_ERROR(...)          Log::Write(TypeTrace::Error, __VA_ARGS__)
 #define LOG_FUNC_ENTER
+#define LOG_WRITE_FINALIZE(...)
 #else
 #define LOG_WRITE(...)
 #define LOG_ERROR(...)

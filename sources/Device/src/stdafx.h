@@ -20,6 +20,7 @@
 
 #include "SCPI/SCPI.h"
 
+#include "Utils/Array.h"
 #include "Utils/Console.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"

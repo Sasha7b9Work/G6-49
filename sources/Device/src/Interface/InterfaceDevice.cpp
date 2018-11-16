@@ -121,7 +121,7 @@ void Interface::Test()
     
     Array array(400);
     
-    for(int i = 0; i < array.Size(); i++)
+    for(uint i = 0; i < array.Size(); i++)
     {
         array.Data()[i] = (uint8)rand();
     }

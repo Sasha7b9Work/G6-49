@@ -9,7 +9,7 @@ float sinf(float);
 bool isnan(float);
 int rand();
 float expf(float);
-void srand(int);
+void srand(uint);
 float powf(float, float);
 
 
