@@ -8,7 +8,8 @@ JLink*.*
 *$*
 *.bak
 *.uvgui*.*
-archie.zip
+archive.zip
+
 
 doc/doxygen/KornetDDS/*
 
