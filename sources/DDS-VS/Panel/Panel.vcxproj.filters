@@ -55,6 +55,9 @@
     <Filter Include="Interface">
       <UniqueIdentifier>{2d6f593d-6c30-4301-b67d-c5c873ea835b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hardware\Modules">
+      <UniqueIdentifier>{8bfb3e5f-a80f-4a42-9509-8f5be2678f38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -287,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Interface\Transceiver_429.cpp">
       <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Modules\SPI.cpp">
+      <Filter>Hardware\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -559,6 +565,9 @@
     </ClInclude>
     <ClInclude Include="..\..\common\Transceiver.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\Modules\SPI.h">
+      <Filter>Hardware\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

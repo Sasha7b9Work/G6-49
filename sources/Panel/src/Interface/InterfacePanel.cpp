@@ -13,6 +13,7 @@
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Modules/SPI.h"
 #include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "InterfacePanel.h"
@@ -77,7 +78,7 @@ bool Interface::Request(Data *request, Data *answer)
     {
         if(answer->Init(numBytes))
         {
-            CPU::SPI4_::Receive(answer->GetData(), answer->GetSize());
+            SPI4_::Receive(answer->GetData(), answer->GetSize());
         }
         else
         {
@@ -92,7 +93,7 @@ bool Interface::Request(Data *request, Data *answer)
 uint Interface::BytesForReceive()
 {
     uint numBytes = 0;
-    if(!CPU::SPI4_::Receive(&numBytes, 2))
+    if(!SPI4_::Receive(&numBytes, 2))
     {
         LOG_ERROR("Не получил размер данных. Проверьте!");
     }
@@ -140,7 +141,7 @@ void Interface::ReceiveAndRun(uint numBytes)
 
         count += numBytes;
 
-        if(!CPU::SPI4_::Receive(buffer, numBytes))
+        if(!SPI4_::Receive(buffer, numBytes))
         {
             LOG_WRITE("Ошибка приёма - данные не приняты");
         }

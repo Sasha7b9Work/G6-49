@@ -25,6 +25,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Timer4XX.h"
 #include "Hardware/VCP.h"
+#include "Hardware/Modules/SPI.h"
 
 #include "Interface/InterfacePanel.h"
 

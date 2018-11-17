@@ -1939,6 +1939,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Hardware/Modules</GroupName>
+          <Files>
+            <File>
+              <FileName>SPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\SPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\SPI.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Interface</GroupName>
           <Files>
             <File>
