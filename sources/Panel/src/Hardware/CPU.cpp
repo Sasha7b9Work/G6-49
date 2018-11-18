@@ -213,22 +213,22 @@ void CPU::FSMC::Init()
     {
         FMC_NORSRAM_DEVICE,
         FMC_NORSRAM_EXTENDED_DEVICE,
-    {
-        FMC_NORSRAM_BANK1,                 ///< Init.NSBank
-        FMC_DATA_ADDRESS_MUX_ENABLE,       ///< Init.DataAddressMux
-        FMC_MEMORY_TYPE_NOR,               ///< Init.MemoryType
-        FMC_NORSRAM_MEM_BUS_WIDTH_8,       ///< Init.MemoryDataWidth
-        FMC_BURST_ACCESS_MODE_DISABLE,     ///< Init.BurstAccessMode
-        FMC_WAIT_SIGNAL_POLARITY_LOW,      ///< Init.WaitSignalPolarity
-        FMC_WRAP_MODE_DISABLE,             ///< Init.WrapMode
-        FMC_WAIT_TIMING_BEFORE_WS,         ///< Init.WaitSignalActive
-        FMC_WRITE_OPERATION_ENABLE,        ///< Init.WriteOperation
-        FMC_WAIT_SIGNAL_DISABLE,           ///< Init.WaitSignal
-        FMC_EXTENDED_MODE_DISABLE,         ///< Init.ExtendedMode
-        FMC_ASYNCHRONOUS_WAIT_DISABLE,     ///< Init.AsynchronousWait
-        FMC_WRITE_BURST_DISABLE,           ///< Init.WriteBurst
-        0, 0, 0
-    },
+        {
+            FMC_NORSRAM_BANK1,                 ///< Init.NSBank
+            FMC_DATA_ADDRESS_MUX_ENABLE,       ///< Init.DataAddressMux
+            FMC_MEMORY_TYPE_NOR,               ///< Init.MemoryType
+            FMC_NORSRAM_MEM_BUS_WIDTH_8,       ///< Init.MemoryDataWidth
+            FMC_BURST_ACCESS_MODE_DISABLE,     ///< Init.BurstAccessMode
+            FMC_WAIT_SIGNAL_POLARITY_LOW,      ///< Init.WaitSignalPolarity
+            FMC_WRAP_MODE_DISABLE,             ///< Init.WrapMode
+            FMC_WAIT_TIMING_BEFORE_WS,         ///< Init.WaitSignalActive
+            FMC_WRITE_OPERATION_ENABLE,        ///< Init.WriteOperation
+            FMC_WAIT_SIGNAL_DISABLE,           ///< Init.WaitSignal
+            FMC_EXTENDED_MODE_DISABLE,         ///< Init.ExtendedMode
+            FMC_ASYNCHRONOUS_WAIT_DISABLE,     ///< Init.AsynchronousWait
+            FMC_WRITE_BURST_DISABLE,           ///< Init.WriteBurst
+            0, 0, 0
+        },
         HAL_UNLOCKED, HAL_SRAM_STATE_RESET, 0
     };
 

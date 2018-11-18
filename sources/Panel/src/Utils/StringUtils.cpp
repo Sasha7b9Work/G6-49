@@ -774,7 +774,7 @@ char SU::ToUpper(char symbol)
     }
     else if (symbol <= 0x7a)
     {
-        return toupper(symbol);
+        return (char)toupper(symbol);
     }
     return symbol;
 }

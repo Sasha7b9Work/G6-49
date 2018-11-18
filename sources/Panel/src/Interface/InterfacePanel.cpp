@@ -103,28 +103,6 @@ uint Interface::BytesForReceive()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(uint8 *buffer, uint size)
 {
-    /*
-        Процесс передачи состоит из двух частей.
-        1. Сначала идут два байта - количество передаваемых данных
-        2. Затем идут непосредственно данные
-    */
-
-    /*
-    CPU::SPI4_::Transmit(&size, 2);
-
-    const uint8 *pointer = buffer;
-    while (size > 0)
-    {
-        uint sizeChunk = (size > 1024u) ? 1024u : size; // Размер куска для передачи
-
-        size -= sizeChunk;
-
-        CPU::SPI4_::Transmit(pointer, sizeChunk);
-
-        pointer += sizeChunk;
-    }
-    */
-
     Transceiver::Send(buffer, size);
 }
 
