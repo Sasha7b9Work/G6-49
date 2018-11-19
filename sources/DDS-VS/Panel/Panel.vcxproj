@@ -22,7 +22,7 @@
     <ProjectGuid>{A472E9D7-D9E7-4074-80D4-56D2BCF5DE65}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Panel</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\libs;..\..\common;C:\My\Work\stm32\DDS\sources\DDS-VS\Panel\src\include\CMSIS;C:\My\Work\stm32\DDS\sources\DDS-VS\Panel\src\include\HAL;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\libs;..\..\common;src\include\CMSIS;src\include\HAL;$(IncludePath)</IncludePath>
     <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
