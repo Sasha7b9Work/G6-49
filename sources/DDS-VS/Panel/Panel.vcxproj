@@ -271,10 +271,8 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageService.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals_Load.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_Load.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>

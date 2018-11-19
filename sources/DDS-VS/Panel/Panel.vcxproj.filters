@@ -61,6 +61,9 @@
     <Filter Include="libs\HAL\legacy">
       <UniqueIdentifier>{9720fb9c-0dd7-4b11-9cda-705afc5de2cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu\Pages\PageSignals">
+      <UniqueIdentifier>{e855aef2-fcf8-4c67-b1c8-39efa0e9dca6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Panel\src\Display\Display.cpp">
@@ -192,17 +195,11 @@
     <ClCompile Include="..\..\Panel\src\Generator\Signals.cpp">
       <Filter>Generator</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals.cpp">
-      <Filter>Menu\Pages</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Common\Command.cpp">
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\Buffer.cpp">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals_Load.cpp">
-      <Filter>Menu\Pages</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\stdafx.cpp">
       <Filter>src</Filter>
@@ -287,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="src\include\HAL\stm32f4xx_hal_sram.cpp">
       <Filter>libs\HAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals.cpp">
+      <Filter>Menu\Pages\PageSignals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_Load.cpp">
+      <Filter>Menu\Pages\PageSignals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

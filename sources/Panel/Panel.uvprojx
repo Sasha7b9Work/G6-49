@@ -2066,16 +2066,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter.h</FilePath>
             </File>
-            <File>
-              <FileName>PageSignals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSignals_Load.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals_Load.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2085,6 +2075,21 @@
               <FileName>PageSignals.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Pages\Include\PageSignals.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages/PageSignals</GroupName>
+          <Files>
+            <File>
+              <FileName>PageSignals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals_Load.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_Load.cpp</FilePath>
             </File>
           </Files>
         </Group>
