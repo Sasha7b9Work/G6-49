@@ -59,6 +59,14 @@ extern const PageBase pInput;
 
 #define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
 
+#define CAL_AD9952_OFFSET_NEG   set.cal_AD9952_Offset_Negative
+#define CAL_AD9952_OFFSET_ZERO  set.cal_AD9952_Offset_Zero
+#define CAL_AD9952_OFFSET_POS   set.cal_AD9952_Offset_Positive
+#define CAL_AD9952_AMPLITUDE    set.cal_AD9952_Amplitude
+
+
+
+
 #define SINE_MANIPULATION_ENABLED(ch)   (set.sine_ManipulationEnabled[ch])
 #define SINE_MANIPULATION_MODE(ch)      (set.sine_ManipulationMode[ch])
 
@@ -89,6 +97,10 @@ public:
     int16                       freq_hysteresis;                        ///< Величина гистерезиса
     bool                        sine_ManipulationEnabled[Chan::Number]; ///< true, если включена модуляция синусоиды пилой
     uint8                       sine_ManipulationMode[Chan::Number];
+    int16                       cal_AD9952_Offset_Negative;             ///< Калибровочный коэффициент AD9952 на -5В
+    int16                       cal_AD9952_Offset_Zero;                 ///< Калибровочный коэффициент AD9952 на 0В
+    int16                       cal_AD9952_Offset_Positive;             ///< Калибровочный коэффициент AD9952 на +5В
+    int16                       cal_AD9952_Amplitude;                   ///< Калибровочный коэффициент AD9952 размаха
 
 #define FLAG_1      set.flag1
     uint            flag1;

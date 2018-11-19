@@ -212,7 +212,7 @@ static void OnChange_FreqLevel()
     FrequencyMeter::LoadLevel();
 }
 
-DEF_GOVERNOR( gLevel,                                                                                                   //--- ЧАСТОТОМЕР - Уровень ---
+DEF_GOVERNOR( gLevel,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
     "Уровень", "Level",
     "Подстройка уровня синхронизации",
     "Synchronization level adjustment",
@@ -226,7 +226,7 @@ static void OnChange_Hysteresis()
     FrequencyMeter::LoadHysteresis();
 }
 
-DEF_GOVERNOR( gHysteresis,                                                                                           //--- ЧАСТОТОМЕР - Гистерезис ---
+DEF_GOVERNOR( gHysteresis,                                                                                                                                  //--- ЧАСТОТОМЕР - Гистерезис ---
     "Гистерезис", "Hysteresis",
     "Задаёт гистерезис для уменьшения влияния помех на точность измерений",
     "Sets hysteresis to reduce the effect of interference on measurement accuracy",
@@ -234,7 +234,7 @@ DEF_GOVERNOR( gHysteresis,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_12(pFrequencyCounter,                                                                                                    //--- ЧАСТОТОМЕР ---
+DEF_PAGE_12(pFrequencyCounter,                                                                                                                                           //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",

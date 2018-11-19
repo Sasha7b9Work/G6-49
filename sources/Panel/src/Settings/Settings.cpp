@@ -59,6 +59,10 @@ static const Settings defSet =
     0,                                      // freq_hysteresis
     {false, false},                         // sine_ManipulationEnabled
     {0, 0},                                 // sine_ManipulationMode
+    0,                                      // cal_AD9952_Offset_Negative
+    0,                                      // cal_AD9952_Offset_Zero
+    0,                                      // cal_AD9952_Offset_Positive
+    0,                                      // cal_AD9952_Amplitude
 
     BINARY_U32(00000000, 00000000, 00010110, 00011100), // flag1
 //                          |||||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
