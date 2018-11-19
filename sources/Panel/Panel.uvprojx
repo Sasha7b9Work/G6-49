@@ -2087,6 +2087,11 @@
               <FilePath>.\src\Menu\Pages\PageSignals\PageSignals.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageSignals_Calibration.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_Calibration.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageSignals_Load.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_Load.cpp</FilePath>
