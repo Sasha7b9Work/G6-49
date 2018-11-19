@@ -33,7 +33,7 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_7( cFormA,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+DEF_CHOICE_7( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
@@ -47,7 +47,7 @@ DEF_CHOICE_7( cFormA,                                                           
     numForm, pageSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
-DEF_CHOICE_6( cFormB,                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+DEF_CHOICE_6( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
@@ -66,14 +66,14 @@ static void OnPress_ChnageParameter()
     FORM_CURRENT->ChangeParameter();
 }
 
-DEF_BUTTON( bChangeParameter,                                                                 //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
+DEF_BUTTON( bChangeParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
     "Изменить", "Change",
     "Открывает окно ввода параметра.",
     "Opens the parameter input window.",
     pageSignals, FuncActive, OnPress_ChnageParameter, FuncDraw
 )
 
-DEF_CHOICE_PARAMETER(cParameters,                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
+DEF_CHOICE_PARAMETER(cParameters,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки.",
     "Choosing a setting for customization.",
@@ -81,7 +81,7 @@ DEF_CHOICE_PARAMETER(cParameters,                                               
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cTypeTune,                                                                                         //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
+DEF_CHOICE_2(cTypeTune,                                                                                                                                //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
     "ЗАСЫЛКА", "SENDING",
     "Определяет периодичность засылки настроек сигналов в устройство управления.",
     "Specifies the frequency of sending signal settings to the control device.",
