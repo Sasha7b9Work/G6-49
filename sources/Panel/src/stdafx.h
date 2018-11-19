@@ -47,7 +47,7 @@
 #include "Utils/Statistics.h"
 #include "Utils/StringUtils.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

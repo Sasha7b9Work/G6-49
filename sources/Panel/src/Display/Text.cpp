@@ -5,7 +5,7 @@
 #include "Display/Painter.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
-#include <stdarg.h>
+#include <cstdarg>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -691,7 +691,7 @@ int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString t
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
+    std::va_list args;
     va_start(args, text);
     vsprintf(buffer, text, args);
     va_end(args);
@@ -704,7 +704,7 @@ int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width,
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
+    std::va_list args;
     va_start(args, text);
     vsprintf(buffer, text, args);
     va_end(args);
@@ -717,7 +717,7 @@ int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pStr
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
+    std::va_list args;
     va_start(args, text);
     vsprintf(buffer, text, args);
     va_end(args);
@@ -730,7 +730,7 @@ int Text::DrawFormatText(int x, int y, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    va_list args;
+    std::va_list args;
     va_start(args, text);
     vsprintf(buffer, text, args);
     va_end(args);
