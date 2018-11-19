@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <string.h>
 #include <cstdio>
-#include <ctype.h>
+#include <cctype>
 #endif
 
 
@@ -668,7 +668,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = (char)toupper(*pointer);
+                *pointer = (char)std::toupper(*pointer);
                 pointer++;
             }
             return true;
@@ -774,7 +774,7 @@ char SU::ToUpper(char symbol)
     }
     else if (symbol <= 0x7a)
     {
-        return (char)toupper(symbol);
+        return (char)std::toupper(symbol);
     }
     return symbol;
 }

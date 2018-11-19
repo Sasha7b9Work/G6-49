@@ -8,7 +8,7 @@
 #include <cstdarg>
 #include <cstdio>
 #include <string.h>
-#include <ctype.h>
+#include <cctype>
 #endif
 
 
