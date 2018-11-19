@@ -3,7 +3,7 @@
 #include "NumberBuffer.h"
 #include "Utils/StringUtils.h"
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 

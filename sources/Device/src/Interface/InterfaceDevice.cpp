@@ -17,7 +17,7 @@
 #include "Command.h"
 #include "structs.h"
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 

@@ -5,7 +5,7 @@
 #include "Command.h"
 #include "FDrivePanel.h"
 #include "Interface/InterfacePanel.h"
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 
@@ -47,7 +47,7 @@ void FDrive::RequestNameDir(uint numDir, pString directory)
 
     Interface::Send(data, size);
 
-    free(data);
+    std::free(data);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,13 +63,13 @@ void FDrive::RequestNameFile(uint numFile, pString directory)
 
     Interface::Send(data, size);
 
-    free(data);
+    std::free(data);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static uint8 *PrepareBufferForSend(uint size, uint8 command)
 {
-    uint8 *buffer = (uint8 *)malloc(size);
+    uint8 *buffer = (uint8 *)std::malloc(size);
     *buffer = command;
     return buffer;
 }

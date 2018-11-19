@@ -12,7 +12,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #include "Log.h"
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 
@@ -276,7 +276,7 @@ uint CPU::CRC32::Calculate(void *data, uint size)
         ++sizeBuffer;
     }
 
-    uint *buffer = (uint *)malloc(sizeBuffer);      // Выделяем память для нового буфера
+    uint *buffer = (uint *)std::malloc(sizeBuffer);      // Выделяем память для нового буфера
 
     memcpy(buffer, data, size);                     // Копируем данные в новый буфер
     
@@ -287,7 +287,7 @@ uint CPU::CRC32::Calculate(void *data, uint size)
 
     uint result = HAL_CRC_Calculate(&handleCRC, buffer, sizeBuffer / 4);
 
-    free(buffer);
+    std::free(buffer);
 
     return result;
 }

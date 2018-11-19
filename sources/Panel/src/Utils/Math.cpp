@@ -5,7 +5,7 @@
 #include "Settings/Settings.h"
 #include <cmath>
 #if __ARMCLIB_VERSION < 6070001
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #else
 #include <cstdlib>
@@ -40,8 +40,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
         return;
     }
 
-    float *buffer = (float *)malloc((size_t)(numPoints * (int)sizeof(float)));
-    int  *num = (int *)malloc((size_t)(numPoints * (int)sizeof(int)));
+    float *buffer = (float *)std::malloc((size_t)(numPoints * (int)sizeof(float)));
+    int  *num = (int *)std::malloc((size_t)(numPoints * (int)sizeof(int)));
 
     for (int i = 1; i < numPoints; i++)
     {
@@ -64,8 +64,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
         data[i] = (uint8)(buffer[i] / num[i] + 0.5f);
     }
 
-    free(buffer);
-    free(num);
+    std::free(buffer);
+    std::free(num);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -166,7 +166,7 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
 float RandFloat(float min, float max)
 {
     float delta = max - min;
-    return min + ((rand() / (float)RAND_MAX) * delta);
+    return min + ((std::rand() / (float)RAND_MAX) * delta);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

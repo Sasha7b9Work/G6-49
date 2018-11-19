@@ -8,7 +8,7 @@
 #include "Settings/Settings.h"
 #include "structs.h"
 #include <cmath>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include <cstdio>
 #include <ctype.h>
@@ -92,7 +92,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
     float absValue = std::fabsf(value);
     sprintf(pBuffer, format, (double)absValue);
 
-    float val = (float)atof(pBuffer);
+    float val = (float)std::atof(pBuffer);
 
     if (Math::DigitsInIntPart(val) != numDigitsInInt)
     {

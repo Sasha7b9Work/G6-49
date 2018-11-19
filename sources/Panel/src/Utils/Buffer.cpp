@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "Buffer.h"
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Buffer::Buffer(uint8 data0) : data(0), size(0)
 {
-    data = (uint8 *)malloc(1);
+    data = (uint8 *)std::malloc(1);
     if(data)
     {
         data[0] = data0;
@@ -19,7 +19,7 @@ Buffer::Buffer(uint8 data0) : data(0), size(0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Buffer::Buffer(uint8 data0, uint8 data1) : data(0), size(0)
 {
-    data = (uint8 *)malloc(2);
+    data = (uint8 *)std::malloc(2);
     if(data)
     {
         data[0] = data0;
@@ -31,7 +31,7 @@ Buffer::Buffer(uint8 data0, uint8 data1) : data(0), size(0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Buffer::Buffer(uint8 data0, uint8 data1, uint8 data2) : data(0), size(0)
 {
-    data = (uint8 *)malloc(3);
+    data = (uint8 *)std::malloc(3);
     if(data)
     {
         data[0] = data0;
@@ -44,7 +44,7 @@ Buffer::Buffer(uint8 data0, uint8 data1, uint8 data2) : data(0), size(0)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 Buffer::~Buffer()
 {
-    free(data);
+    std::free(data);
     data = 0;
     size = 0;
 }

@@ -5,7 +5,7 @@
 #include "Utils/Math.h"
 #include "structs.h"
 #include <math.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>

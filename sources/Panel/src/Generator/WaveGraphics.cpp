@@ -11,7 +11,7 @@
 #include "Utils/Debug.h"
 #include <cmath>
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 
@@ -78,10 +78,10 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
 
     if (first)
     {
-        srand(2);
+        std::srand(2);
         for (int i = 0; i < 100; i++)
         {
-            yNoise[i] = aveY - (rand() % 50 - 25);
+            yNoise[i] = aveY - (std::rand() % 50 - 25);
 
             yExp[i] = aveY - (int)(std::expf(i / 12.5f) + 0.5f) + 1;
         }

@@ -3,7 +3,7 @@
 #include "defines.h"
 #include <stm32f4xx.h>
 #include "CPU.h"
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #endif
 

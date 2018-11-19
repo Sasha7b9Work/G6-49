@@ -12,7 +12,7 @@
 #include "Menu/Pages/PageDebug.h"
 #include "Utils/Statistics.h"
 #include "Utils/Debug.h"
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 

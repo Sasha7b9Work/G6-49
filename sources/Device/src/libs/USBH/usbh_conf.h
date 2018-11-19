@@ -1,6 +1,6 @@
 #pragma once
 #include "defines.h"
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 
 #define USBH_MAX_NUM_ENDPOINTS                2

@@ -9,7 +9,7 @@
 #include "Utils/Console.h"
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <math.h>
 #endif
 

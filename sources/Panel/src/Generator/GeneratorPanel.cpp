@@ -19,7 +19,7 @@
 #include "Utils/Debug.h"
 #include <cmath>
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 

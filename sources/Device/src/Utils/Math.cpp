@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Math.h"
 #include <math.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include <limits>
 #endif

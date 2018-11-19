@@ -10,7 +10,7 @@
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
 #include <cstdio>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include <cmath>
 #endif

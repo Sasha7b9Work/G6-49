@@ -17,7 +17,7 @@
 #include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "InterfacePanel.h"
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 
@@ -109,7 +109,7 @@ void Interface::Send(uint8 * /*buffer*/, uint /*size*/)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ReceiveAndRun(uint numBytes)
 {
-    uint8 *buffer = (uint8 *)malloc(numBytes);
+    uint8 *buffer = (uint8 *)std::malloc(numBytes);
 
     static int count = 0;
 
@@ -172,7 +172,7 @@ void Interface::ReceiveAndRun(uint numBytes)
         LOG_WRITE("Нет памяти");
     }
 
-    free(buffer);
+    std::free(buffer);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -204,7 +204,7 @@ bool Interface::Data::Init(uint _size)
 
     if(size)
     {
-        data = (uint8 *)malloc(size);
+        data = (uint8 *)std::malloc(size);
 
         return data != 0;
     }
