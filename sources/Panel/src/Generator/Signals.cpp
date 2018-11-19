@@ -60,7 +60,7 @@ static ParameterBase *params_SineA[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampPlusA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000",  0, Order::Kilo);
 static ParameterValue  param_RampPlusA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000",  1, Order::One);
 static ParameterValue  param_RampPlusA_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000",  0, Order::One);
@@ -79,7 +79,7 @@ static ParameterBase *params_RampPlusA[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampMinusA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue  param_RampMinusA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000", 1, Order::One);
 static ParameterValue  param_RampMinusA_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
@@ -97,7 +97,7 @@ static ParameterBase *params_RampMinusA[] =
     0
 };
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue  param_TriangleA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f, "10000",  1, Order::One);
 static ParameterValue  param_TriangleA_Offset   (ParameterValue::Offset,    0.0f, 10.0f, "50000",  0, Order::One);
@@ -116,7 +116,7 @@ static ParameterBase *params_TriangleA[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue param_MeanderA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue param_MeanderA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000", 1, Order::One);
 static ParameterValue param_MeanderA_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
@@ -130,7 +130,7 @@ static ParameterBase *params_MeanderA[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void DrawPlus(int x, int y)
 {
     Painter::DrawHLine(y + 8, x, x + 8);
@@ -171,7 +171,7 @@ static ParameterBase *params_ImpulseA[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_PacketA_Period      (ParameterValue::Period,       0.0f, 100e6f, "02000", 0, Order::Milli);
 static ParameterValue  param_PacketA_Duration    (ParameterValue::Duration,     0.0f, 100e6f, "01000", 0, Order::Milli);
 static ParameterValue  param_PacketA_PacketNumber(ParameterValue::PacketNumber, 0.0f, 100e6f, "30000", 0, Order::One);
@@ -198,7 +198,7 @@ static ParameterBase *params_PacketA[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 extern Wave wave[Chan::Number];
 
 static Form formsA[] =
@@ -250,7 +250,7 @@ static ParameterBase *params_SineB[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampPlusB_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue  param_RampPlusB_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "50000", 0, Order::One);
 static ParameterValue  param_RampPlusB_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
@@ -269,7 +269,7 @@ static ParameterBase *params_RampPlusB[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampMinusB_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue  param_RampMinusB_Amplitude(ParameterValue::Amplitude,  0.0f, 10.0f,  "50000", 0, Order::One);
 static ParameterValue  param_RampMinusB_Offset   (ParameterValue::Offset,     0.0f, 10.0f,  "50000", 0, Order::One);
@@ -288,7 +288,7 @@ static ParameterBase *params_RampMinusB[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_TriangleB_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue  param_TriangleB_Amplitude(ParameterValue::Amplitude,  0.0f, 10.0f,  "50000", 0, Order::One);
 static ParameterValue  param_TriangleB_Offset   (ParameterValue::Offset,     0.0f, 10.0f,  "50000", 0, Order::One);
@@ -307,7 +307,7 @@ static ParameterBase *params_TriangleB[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue param_MeanderB_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue param_MeanderB_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f,  "10000", 1, Order::One);
 static ParameterValue param_MeanderB_Offset   (ParameterValue::Offset,    0.0f, 10.0f,  "50000", 0, Order::One);
@@ -321,7 +321,7 @@ static ParameterBase *params_MeanderB[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_ImpulseB_Period   (ParameterValue::Period,    3.3e-8f, 10e6f,  "10000", 0, Order::Milli);
 static ParameterValue  param_ImpulseB_Duration (ParameterValue::Duration,  0.0f,    100e6f, "01000", 0, Order::Milli);
 static ParameterValue  param_ImpulseB_Amplitude(ParameterValue::Amplitude, 0.0f,    10.0f,  "10000", 1, Order::One);
@@ -344,7 +344,7 @@ static ParameterBase *params_ImpulseB[] =
 };
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 extern Wave wave[Chan::Number];
 
 static Form formsB[] =
