@@ -8,7 +8,7 @@
 #include "Hardware/VCP.h"
 #include "Settings/Settings.h"
 #include <cstdarg>
-#include <string.h>
+#include <cstring>
 #include <cstdio>
 #endif
 

@@ -6,7 +6,7 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 

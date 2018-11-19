@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "Math.h"
 #include "Settings/Settings.h"
-#include <math.h>
+#include <cmath>
 #if __ARMCLIB_VERSION < 6070001
 #include <stdlib.h>
 #include <string.h>
@@ -334,7 +334,7 @@ int Math::FindAnotherElement(uint8 *data, uint8 value, int numElements)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 int Math::DigitsInIntPart(float value)
 {
-    float absValue = fabsf(value);
+    float absValue = std::fabsf(value);
 
     int num = 0;
 
@@ -350,7 +350,7 @@ int Math::DigitsInIntPart(float value)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 float Math::RoundFloat(float value, int numDigits)
 {
-    float absValue = fabsf(value);
+    float absValue = std::fabsf(value);
 
     int digsInInt = Math::DigitsInIntPart(absValue);
 
@@ -366,15 +366,15 @@ float Math::RoundFloat(float value, int numDigits)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool IsEquals(float x, float y)
 {
-    return fabsf(x - y) < std::numeric_limits<float>::epsilon();
+    return std::fabsf(x - y) < std::numeric_limits<float>::epsilon();
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool FloatsIsEquals(float value0, float value1, float epsilonPart)
 {
-    float max = fabsf(value0) > fabsf(value1) ? fabsf(value0) : fabsf(value1);
+    float max = std::fabsf(value0) > std::fabsf(value1) ? std::fabsf(value0) : std::fabsf(value1);
 
     float epsilonAbs = max * epsilonPart;
 
-    return fabsf(value0 - value1) < epsilonAbs;
+    return std::fabsf(value0 - value1) < epsilonAbs;
 }

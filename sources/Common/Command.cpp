@@ -4,7 +4,7 @@
 #include "Command.h"
 #include "structs.h"
 #include "Utils/StringUtils.h"
-#include "Log.h"
+#include "log.h"
 #endif
 
 

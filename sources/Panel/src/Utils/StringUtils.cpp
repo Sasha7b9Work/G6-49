@@ -7,7 +7,7 @@
 #include "Utils/Math.h"
 #include "Settings/Settings.h"
 #include "structs.h"
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <string.h>
 #include <cstdio>
@@ -39,7 +39,7 @@ char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
     static const float factor[4] = {1e6f, 1e3f, 1.0f, 1e-3f};
 
     int num = 0;
-    float absValue = fabsf(voltage) + 0.5e-4f;
+    float absValue = std::fabsf(voltage) + 0.5e-4f;
 
     if      (absValue < 1e-3f) { num = 0; }
     else if (absValue < 1.0f)  { num = 1; }
@@ -89,7 +89,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
         format[5] = '.';
     }
 
-    float absValue = fabsf(value);
+    float absValue = std::fabsf(value);
     sprintf(pBuffer, format, (double)absValue);
 
     float val = (float)atof(pBuffer);
@@ -131,7 +131,7 @@ char *Time2String(float time, bool alwaysSign, char buffer[20])
 
     static const float factor[4] = {1e9f, 1e6f, 1e3f, 1.0f};
 
-    float absTime = fabsf(time);
+    float absTime = std::fabsf(time);
 
     int num = 0;
 
@@ -464,7 +464,7 @@ char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numD
     buffer[0] = 0;
     const char *suffix = LANG_RU ? "ñ" : "s";
 
-    float fabsTime = fabsf(time);
+    float fabsTime = std::fabsf(time);
 
     if (IsEquals(time, ERROR_VALUE_FLOAT))
     {

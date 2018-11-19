@@ -5,7 +5,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Settings/Settings.h"
-#include <string.h>
+#include <cstring>
 #include <cstdio>
 #endif
 

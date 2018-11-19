@@ -9,7 +9,7 @@
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
-#include <math.h>
+#include <cmath>
 #include <string.h>
 #include <stdlib.h>
 #endif
@@ -83,7 +83,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
         {
             yNoise[i] = aveY - (rand() % 50 - 25);
 
-            yExp[i] = aveY - (int)(expf(i / 12.5f) + 0.5f) + 1;
+            yExp[i] = aveY - (int)(std::expf(i / 12.5f) + 0.5f) + 1;
         }
 
         first = false;
@@ -123,8 +123,8 @@ void Wave::Graphics::DrawSine(Chan, int x0, int y0, int width, int height)
 
     for (int i = delta; i < width; i++)
     {
-        int y1 = y0 - (int)(sinf((i - delta) * speed) * height / 2.0f);
-        int y2 = y0 - (int)(sinf(i * speed) * height / 2.0f);
+        int y1 = y0 - (int)(std::sinf((i - delta) * speed) * height / 2.0f);
+        int y2 = y0 - (int)(std::sinf(i * speed) * height / 2.0f);
 
         Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
     }

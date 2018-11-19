@@ -8,7 +8,7 @@
 #include "Colors.h"
 #include "Settings/Settings.h"
 #include "Display/Display.h"
-#include <math.h>
+#include <cmath>
 #include <cstdio>
 #endif
 
@@ -150,8 +150,8 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
     }
     int x = x1;
     int y = y1;
-    int dx = (int)fabsf((float)(x2 - x1));
-    int dy = (int)fabsf((float)(y2 - y1));
+    int dx = (int)std::fabsf((float)(x2 - x1));
+    int dy = (int)std::fabsf((float)(y2 - y1));
     int s1 = Sign(x2 - x1);
     int s2 = Sign(y2 - y1);
     int temp;

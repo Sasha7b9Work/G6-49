@@ -9,7 +9,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Debug.h"
 #include "Display/InputWindow.h"
-#include <math.h>
+#include <cmath>
 #endif
 
 

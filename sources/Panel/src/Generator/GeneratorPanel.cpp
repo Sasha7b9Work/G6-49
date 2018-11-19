@@ -17,7 +17,7 @@
 #include "Display/Console.h"
 #include "Utils/Math.h"
 #include "Utils/Debug.h"
-#include <math.h>
+#include <cmath>
 #include <string.h>
 #include <stdlib.h>
 #endif
@@ -147,7 +147,7 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NU
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
     {
-        uint16 c = (uint16)(fabs(d[i]) * max);
+        uint16 c = (uint16)(std::fabs(d[i]) * max);
 
         if (Sign(d[i]) == -1)
         {
