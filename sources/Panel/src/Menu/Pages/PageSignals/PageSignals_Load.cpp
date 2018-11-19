@@ -7,21 +7,21 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pLoad;
-Page *PageSignals::PageLoad::pointer = (Page *)&pLoad;
+extern const PageBase pageLoad;
+Page *PageSignals::PageLoad::pointer = (Page *)&pageLoad;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_BUTTON( bUp,                                                                                            ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Ââåðõ
     "Ââåðõ", "Âíèç",
     "", "",
-    pLoad, FuncActive, FDrive::PressUp, FuncDraw
+    pageLoad, FuncActive, FDrive::PressUp, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_BUTTON( bDown,                                                                                           ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Âíèç
     "Âíèç", "Down",
     "", "",
-    pLoad, FuncActive, FDrive::PressDown, FuncDraw
+    pageLoad, FuncActive, FDrive::PressDown, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ static void OnPress_Enter()
 DEF_BUTTON(bEnter,                                                                                          ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Enter
     "Enter", "Enter",
     "", "",
-    pLoad, FuncActive, OnPress_Enter, FuncDraw
+    pageLoad, FuncActive, OnPress_Enter, FuncDraw
 )
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ static void OnPress_Choose()
 DEF_BUTTON(bChoose,                                                                                    ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Óñòàíîâèòü
     "Âûáðàòü", "Choose",
     "", "",
-    pLoad, FuncActive, OnPress_Choose, FuncDraw
+    pageLoad, FuncActive, OnPress_Choose, FuncDraw
 )
 
 
@@ -53,7 +53,7 @@ static bool OnKey(Control)
     return false;
 }
 
-DEF_PAGE_4( pLoad,                                                                                                  ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ
+DEF_PAGE_4( pageLoad,                                                                                                  ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ
     "ÇÀÃÐÓÇÊÀ", "LOAD",
     "", "",
     &bUp,       ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ - Ââåðõ
