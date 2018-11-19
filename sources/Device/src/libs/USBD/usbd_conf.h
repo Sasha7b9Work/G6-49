@@ -8,7 +8,7 @@
 #include <stm32f7xx_hal.h>
 #endif
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 
 #define USBD_LPM_ENABLED 0
@@ -22,10 +22,10 @@
 #define USBD_SELF_POWERED                     1
 #define USBD_DEBUG_LEVEL                      0
  
-#define USBD_malloc               malloc
-#define USBD_free                 free
-#define USBD_memset               memset
-#define USBD_memcpy               memcpy
+#define USBD_malloc               std::malloc
+#define USBD_free                 std::free
+#define USBD_memset               std::memset
+#define USBD_memcpy               std::memcpy
 
 
 #if (USBD_DEBUG_LEVEL > 0)

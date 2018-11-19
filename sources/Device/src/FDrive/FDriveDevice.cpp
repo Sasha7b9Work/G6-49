@@ -193,7 +193,7 @@ void FDrive::Update()
 static void PrepareBufferForData(uint size, uint8 com)
 {
     numBytesForSend = size;
-    bufferForSend = (uint8 *)malloc(numBytesForSend);
+    bufferForSend = (uint8 *)std::malloc(numBytesForSend);
     *bufferForSend = com;
 }
 
@@ -207,7 +207,7 @@ uint FDrive::NumBytesForSend()
 uint8 *FDrive::GetDataForSend(uint8 *buffer)
 {
     memcpy(buffer, bufferForSend, numBytesForSend);
-    free(bufferForSend);
+    std::free(bufferForSend);
     numBytesForSend = 0;
     return buffer;
 }
@@ -222,14 +222,14 @@ void FDrive::HandlerInterface()
         uint numDirs = 0;
         uint numFiles = 0;
         GetNumDirsAndFiles((const char *)Interface::recv + 1, &numDirs, &numFiles);
-        uint8 *buffer = (uint8 *)malloc(1 + 4 + 4);
+        uint8 *buffer = (uint8 *)std::malloc(1 + 4 + 4);
 
         buffer[0] = Command::FDrive_NumDirsAndFiles;
         memcpy(buffer + 1, &numDirs, 4);
         memcpy(buffer + 5, &numFiles, 4);
         Interface::Send(buffer, 9);
 
-        free(buffer);
+        std::free(buffer);
     }
 }
 

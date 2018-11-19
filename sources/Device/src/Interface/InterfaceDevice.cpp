@@ -80,8 +80,8 @@ commands[Command::Number] =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Init()
 {
-    free(recv);
-    recv = (uint8 *)malloc(2);
+    std::free(recv);
+    recv = (uint8 *)std::malloc(2);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -118,13 +118,13 @@ void Interface::LoadFormDDS()
 //---------------------------------------------------------------------------------------------------------------------
 void Interface::Test()
 {
-    srand(TIME_MS);
+    std::srand(TIME_MS);
     
     Array array(400);
     
     for(uint i = 0; i < array.Size(); i++)
     {
-        array.Data()[i] = (uint8)rand();
+        array.Data()[i] = (uint8)std::rand();
     }
     
     uint size = 1 + 4 + 4 + array.Size();
@@ -374,9 +374,9 @@ void Interface::Send(void *buffer, uint size)
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::ResizeRecieveBuffer(uint16 size)
 {
-    free(recv);
+    std::free(recv);
 
-    recv = (uint8 *)malloc(size);
+    recv = (uint8 *)std::malloc(size);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -408,7 +408,7 @@ bool Interface::Data::Init(uint _size)
 
     if (size)
     {
-        data = (uint8 *)malloc(size);
+        data = (uint8 *)std::malloc(size);
 
         return data != 0;
     }

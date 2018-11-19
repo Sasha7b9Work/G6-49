@@ -7,12 +7,12 @@ Array::Array(uint _size) : size(_size)
 {
     size = size / 4;
     size *= 4;
-    data = (uint8 *)malloc(size);
+    data = (uint8 *)std::malloc(size);
 }
 
 Array::~Array()
 {
-    free(data);
+    std::free(data);
 }
 
 uint8 *Array::Data()

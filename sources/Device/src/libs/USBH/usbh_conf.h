@@ -26,10 +26,10 @@
   #define   USBH_PROCESS_PRIO    osPriorityNormal
 #endif    
 
-#define USBH_malloc               malloc
-#define USBH_free                 free
-#define USBH_memset               memset
-#define USBH_memcpy               memcpy
+#define USBH_malloc               std::malloc
+#define USBH_free                 std::free
+#define USBH_memset               std::memset
+#define USBH_memcpy               std::memcpy
 
 
 #if (USBH_DEBUG_LEVEL > 0)

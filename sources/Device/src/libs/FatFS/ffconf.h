@@ -280,15 +280,15 @@
 
 #if _USE_LFN == 3
 #if !defined(ff_malloc) || !defined(ff_free)
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 #if !defined(ff_malloc)
-#define ff_malloc malloc
+#define ff_malloc std::malloc
 #endif
 
 #if !defined(ff_free)
-#define ff_free free
+#define ff_free std::free
 #endif
 #endif
 /*--- End of configuration options ---*/

@@ -31,7 +31,8 @@
 #include <limits.h>
 #include <math.h>
 #include <stdarg.h>
-#include <string.h>
+#include <cstring>
+#include <cstdlib>
 
 #include "usbh_diskio.h"
 #include "usbh_conf.h"
