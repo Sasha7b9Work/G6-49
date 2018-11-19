@@ -6,7 +6,7 @@
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include <cstdarg>
-#include <stdio.h>
+#include <cstdio>
 #include <string.h>
 #include <ctype.h>
 #endif

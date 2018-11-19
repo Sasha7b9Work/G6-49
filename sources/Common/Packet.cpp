@@ -4,8 +4,7 @@
 #include "log.h"
 #include "Packet.h"
 #include "Hardware/CPU.h"
-#include <cstdlib>
-#include <cstring>
+#include <string.h>
 #endif
 
 
@@ -24,7 +23,7 @@ void Packet::Create(uint8 *buffer, uint size)
 {
     if (size <= MAX_SIZE_DATA_FIELD)
     {
-        std::memcpy(DataField(), buffer, size);
+        memcpy(DataField(), buffer, size);
         FillServiceField(size);
     }
     else
@@ -51,7 +50,7 @@ void Packet::FillServiceField(uint sizeData)
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Packet::IsEquals(Packet *rhs) const
 {
-    return std::memcmp((void *)&data, &rhs->data, sizeof(Data)) == 0;
+    return memcmp((void *)&data, &rhs->data, sizeof(Data)) == 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

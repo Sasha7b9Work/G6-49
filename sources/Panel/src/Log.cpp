@@ -9,7 +9,7 @@
 #include "Settings/Settings.h"
 #include <cstdarg>
 #include <string.h>
-#include <stdio.h>
+#include <cstdio>
 #endif
 
 

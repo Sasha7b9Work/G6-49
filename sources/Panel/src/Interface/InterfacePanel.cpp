@@ -101,7 +101,7 @@ uint Interface::BytesForReceive()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Send(uint8 *buffer, uint size)
+void Interface::Send(uint8 * /*buffer*/, uint /*size*/)
 {
     //Transceiver::Send(buffer, size);
 }

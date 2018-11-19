@@ -9,7 +9,7 @@
 #include "Settings/Settings.h"
 #include "Display/Display.h"
 #include <math.h>
-#include <stdio.h>
+#include <cstdio>
 #endif
 
 

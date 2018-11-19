@@ -10,7 +10,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
+#include <cstdio>
 #include <ctype.h>
 #endif
 

@@ -6,7 +6,7 @@
 #include "Display/Text.h"
 #include "Settings/Settings.h"
 #include <string.h>
-#include <stdio.h>
+#include <cstdio>
 #endif
 
 

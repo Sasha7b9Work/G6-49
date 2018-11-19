@@ -48,11 +48,11 @@
 #include "Utils/StringUtils.h"
 
 #include <cstdarg>
-#include <stdio.h>
+#include <cstdio>
 #include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <math.h>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
 #include <limits>
 
 #endif

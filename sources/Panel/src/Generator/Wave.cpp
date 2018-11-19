@@ -12,7 +12,7 @@
 #include "Utils/Math.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/AddPageInput.h"
-#include <stdio.h>
+#include <cstdio>
 #endif
 
 

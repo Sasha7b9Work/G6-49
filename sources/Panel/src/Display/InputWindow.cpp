@@ -8,7 +8,7 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Display/Symbols.h"
-#include <stdio.h>
+#include <cstdio>
 #endif
 
 

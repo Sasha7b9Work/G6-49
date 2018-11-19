@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "CommonFunctions.h"
 #include "Log.h"
-#include <stdio.h>
+#include <cstdio>
 #include <string.h>
 #endif
 
