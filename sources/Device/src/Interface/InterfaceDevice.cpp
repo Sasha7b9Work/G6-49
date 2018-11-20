@@ -68,7 +68,8 @@ commands[Command::Number] =
 /* FDrive_Mount            */ Interface::Empty,
 /* FDrive_RequestDir       */ Interface::Empty,
 /* FDrive_RequestFile      */ Interface::Empty,
-/* Test                    */ Interface::Test
+/* Test                    */ Interface::Test,
+/* SetKoeffCalibration     */ Interface::SetKoeffCalibration
 };
 
 
@@ -145,6 +146,11 @@ void Interface::Test()
     CPU::SPI1_::Transmit(buffer, 9);
     
     CPU::SPI1_::Transmit(array.Data(), array.Size());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetKoeffCalibration()
+{
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

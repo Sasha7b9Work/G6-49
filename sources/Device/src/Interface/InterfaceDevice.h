@@ -62,6 +62,8 @@ public:
     
     static void Test();
 
+    static void SetKoeffCalibration();
+
     static void SetPolarity();
 
     static void Send(void *data, uint size);
