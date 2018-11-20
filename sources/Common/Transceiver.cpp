@@ -11,12 +11,17 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Transceiver::Send(uint8 *buffer, uint size)
 {
-    Message packet;
+    Message message;
 
-    packet.CreateNew(buffer, size);
-
-    /// Повторяем передачу, пока не передадим
-    while (!Send(&packet))
+    if (!message.CreateFromRawData(buffer, size))
     {
+        /// Повторяем передачу, пока не передадим
+        while (!Send(&message))
+        {
+        }
+    }
+    else
+    {
+        LOG_WRITE_FINALIZE("Нет память для сообщения");
     }
 }

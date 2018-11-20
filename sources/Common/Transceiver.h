@@ -9,5 +9,5 @@ public:
     static void Send(uint8 *buffer, uint size);
 
 private:
-    static bool Send(Message *packet);
+    static bool Send(Message *message);
 };

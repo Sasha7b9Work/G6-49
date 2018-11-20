@@ -10,31 +10,44 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Transceiver::Send(Message *packet)
+bool Transceiver::Send(Message *message)
 {
     SPI4_::WaitFalling();                                               // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
-    Message recvPacket;                                                  // Сюда будем принимать ответ
+    Message recvMessage;                                                // Сюда будем принимать ответ
 
-    for (int i = 0; i < 2; i++)                                         // Дважды повторим передачу информации, чтобы устройство имело возможность её сравнить и сделать вывод о её достоверности
+    for (int i = 0; i < 2; i++)
     {
-        if (!SPI4_::Transmit(packet->Begin(), packet->Size()))          // Засылаем пакет
+        uint size = message->Size();
+        if (!SPI4_::Transmit(&size, 4))                                 // Передаём размер передаваемых данных
         {
-            LOG_WRITE_FINALIZE("Передать не удалось");
             return false;
         }
 
-        if (!SPI4_::Receive(recvPacket.Begin(), recvPacket.Size()))     // И принимаем ответ
+        if (!SPI4_::Transmit(message->Data(), message->Size()))         // Передаём непосредственно данные
         {
-            LOG_WRITE_FINALIZE("Подтверждения не дождались");
+            return false;
+        }
+
+        uint newSize = 0;
+        if (!SPI4_::Receive(&newSize, 4))                               // Теперь принимаем размер данных, которые хочет передать нам устройство
+        {
+            return false;
+        }
+
+        recvMessage.AllocateMemory(newSize);                            // Выделяем необходимое количество памяти для принимаемых данных
+        if (!SPI4_::Receive(recvMessage.Data(), recvMessage.Size()))    // И принимаем ранее переданную информацию
+        {
             return false;
         }
     }
 
-    if (!recvPacket.IsEquals(packet))
+    bool result = recvMessage.IsEquals(message);
+
+    if (!result)
     {
-        LOG_WRITE_FINALIZE("Пакеты не совпадают");
+        LOG_WRITE_FINALIZE("Принятый пакет не совпадает с переданным");
     }
 
-    return recvPacket.IsEquals(packet);                                 // Возвращаем false, если переданные и принятые данные не совпадают
+    return result;
 }

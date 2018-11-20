@@ -74,8 +74,8 @@ commands[Command::Number] =
 };
 
 
-static Message recvPacket;
-uint8 *Interface::recv = recvPacket.DataField();
+static Message recvMessage;
+uint8 *Interface::recv = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::EnableChannel()
@@ -330,37 +330,17 @@ void Interface::SendFrequency(uint value)
 
 void Interface::Update()
 {
-    static uint time = TIME_MS;
-
-    if (TIME_MS - time < 1)
-    {
-        return;
-    }
-
-    time = TIME_MS;
+#define TIME 10
 
     CPU::SetReady();
 
-    Message transPacket;
+    Message transMessage;
 
-#define TIME 10
+    uint size = 0;
 
-    if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))                // Принимаем пакет данных
+    if (SPI1_::Receive(&size, 4))           // Узнаём размер принимаемого сообщения
     {
-        transPacket.CopyFrom(&recvPacket);
-
-        if (SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), TIME))         // И пересылаем его обратно
-        {
-            if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))        // Если оба принятых пакета совпали - данные прияты верно
-            {
-                transPacket.CopyFrom(&recvPacket);
-
-                if(SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), TIME))    // Пересылаем принятые данные снова в панель, чтобы подвердить успешный приём
-                {
-                    commands[recvPacket.DataField()[0]].func();                  
-                }
-            }
-        }
+        recvMessage.AllocateMemory(size);
     }
 
     CPU::SetBusy();
