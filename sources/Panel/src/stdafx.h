@@ -50,7 +50,7 @@
 
 #include <cstdarg>
 #include <cstdio>
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
 #include <cctype>
 #include <cmath>

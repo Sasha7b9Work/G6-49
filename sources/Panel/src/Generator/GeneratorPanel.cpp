@@ -189,9 +189,10 @@ void Generator::SetParameter(ParameterChoice *param)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetOffset(Chan ch, float offset)
 {
-    uint8 buffer[6] = { (uint8)Command::SetOffset, ch };
-    memcpy(&buffer[2], &offset, 4);
-    Interface::Send(buffer, 6);
+    RawMessage message(6, (uint8)Command::SetOffset, ch);
+    message.Put(offset);
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
