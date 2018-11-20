@@ -330,19 +330,30 @@ void Interface::SendFrequency(uint value)
 
 void Interface::Update()
 {
+    static uint time = TIME_MS;
+
+    if (TIME_MS - time < 1)
+    {
+        return;
+    }
+
+    time = TIME_MS;
+
     CPU::SetReady();
 
     Packet transPacket;
 
-    if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), 100))             // Принимаем пакет данных
+#define TIME 10
+
+    if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))                 // Принимаем пакет данных
     {
         transPacket = recvPacket;
 
-        if (SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), 100))      // И пересылаем его обратно
+        if (SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), TIME))          // И пересылаем его обратно
         {
-            if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), 100))     // Если оба принятых пакета совпали - данные прияты верно
+            if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))         // Если оба принятых пакета совпали - данные прияты верно
             {
-                if(SPI1_::Transmit(recvPacket.Begin(), recvPacket.Size(), 100))    // Пересылаем принятые данные снова в панель, чтобы подвердить успешный приём
+                if(SPI1_::Transmit(recvPacket.Begin(), recvPacket.Size(), TIME))    // Пересылаем принятые данные снова в панель, чтобы подвердить успешный приём
                 {
                     commands[recvPacket.DataField()[0]].func();                  
                 }

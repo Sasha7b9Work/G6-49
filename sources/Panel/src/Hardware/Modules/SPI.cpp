@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Display/Console.h"
+#include "Display/Painter.h"
+#include "Hardware/Timer.h"
 #include "log.h"
 #include "SPI.h"
 #endif
@@ -56,7 +59,7 @@ bool SPI4_::Transmit(const void *buffer, uint size)
 {
 	if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100) != HAL_OK)
 	{
-		LOG_ERROR("Ошибка передачи данных");
+		LOG_WRITE_FINALIZE("Ошибка передачи данных");
 		return false;
 	}
 
@@ -68,7 +71,7 @@ bool SPI4_::Receive(void *recv, uint size)
 {
 	if (HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100) != HAL_OK)
 	{
-		LOG_WRITE("Ошибка приёма данных");
+		LOG_WRITE_FINALIZE("Ошибка приёма данных");
 		return false;
 	}
 
@@ -86,9 +89,13 @@ void SPI4_::WaitFreedom()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SPI4_::WaitFalling()
 {
-    while (IsReady()) {};   // Если попали в время сигнала готовности, пропустим его, чтобы транзакция гарантированно начиналась после разрешающего фронта
+    while (IsReady())
+    {
+    };   // Если попали в время сигнала готовности, пропустим его, чтобы транзакция гарантированно начиналась после разрешающего фронта
 
-    while (!IsReady()) {};  // Теперь ожидаем, когда придёт сигнал готовности
+    while (!IsReady())
+    {
+    };  // Теперь ожидаем, когда придёт сигнал готовности
 }
 
 

@@ -155,34 +155,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>27</LineNumber>
+          <LineNumber>21</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134264562</Address>
+          <Address>134244378</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Interface\InterfacePanel.cpp</Filename>
+          <Filename>&lt;1&gt;..\common\Transceiver.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Interface/InterfacePanel.cpp\27</Expression>
+          <Expression>\\PanelDDS\../common/Transceiver.cpp\21</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>228</LineNumber>
+          <LineNumber>19</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134263606</Address>
+          <Address>134244376</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Generator\GeneratorPanel.cpp</Filename>
+          <Filename>&lt;1&gt;..\common\Transceiver.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PanelDDS\src/Generator/GeneratorPanel.cpp\228</Expression>
+          <Expression>\\PanelDDS\../common/Transceiver.cpp\19</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -845,8 +845,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Log.cpp</PathWithFileName>
-      <FilenameWithoutPath>Log.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\log.cpp</PathWithFileName>
+      <FilenameWithoutPath>log.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -857,8 +857,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Log.h</PathWithFileName>
-      <FilenameWithoutPath>Log.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\log.h</PathWithFileName>
+      <FilenameWithoutPath>log.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Transceiver.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #endif
 
@@ -10,6 +12,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Transceiver::Send(Packet *packet)
 {
+    uint start = TIME_MS;
+
     SPI4_::WaitFalling();                                               // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
     Packet recvPacket;                                                  // Сюда будем принимать ответ
@@ -18,14 +22,19 @@ bool Transceiver::Send(Packet *packet)
     {
         if (!SPI4_::Transmit(packet->Begin(), packet->Size()))          // Засылаем пакет
         {
+            LOG_WRITE_FINALIZE("Передать не удалось");
             return false;
         }
 
         if (!SPI4_::Receive(recvPacket.Begin(), recvPacket.Size()))     // И принимаем ответ
         {
+            LOG_WRITE_FINALIZE("Подтверждения не дождались");
             return false;
         }
     }
+    
+    uint time = TIME_MS - start;
+    LOG_WRITE_FINALIZE("Транзакция успешно завершена за %d мс", time);
 
     return recvPacket.IsEquals(packet);                                 // Возвращаем false, если переданные и принятые данные не совпадают
 }

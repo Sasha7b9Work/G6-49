@@ -1612,14 +1612,14 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>Log.cpp</FileName>
+              <FileName>log.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Log.cpp</FilePath>
+              <FilePath>.\src\log.cpp</FilePath>
             </File>
             <File>
-              <FileName>Log.h</FileName>
+              <FileName>log.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Log.h</FilePath>
+              <FilePath>.\src\log.h</FilePath>
             </File>
             <File>
               <FileName>main.cpp</FileName>

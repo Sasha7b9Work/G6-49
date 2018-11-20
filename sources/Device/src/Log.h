@@ -1,5 +1,8 @@
 #pragma once   
 
+
+#define LOG_WRITE_FINALIZE(...)
+
 #if defined(DEBUG) && !defined(MSVC)
 #define LOG_WRITE(...)          Log::Write(TypeTrace_Info, __VA_ARGS__)
 #define LOG_ERROR(...)          Log::Write(TypeTrace_Error, __VA_ARGS__)

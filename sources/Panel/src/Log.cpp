@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Log.h"
+#include "log.h"
 #include "Display/Console.h"
+#include "Display/Painter.h"
 #include <Display/Display.h>
 #include <Hardware/CPU.h>
 #include "Hardware/VCP.h"
@@ -33,6 +34,8 @@ void Log::Trace(TypeTrace::E, const char *, const char *, int, char *, ...)
 
 
 #ifndef OPEN
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Log::Write(TypeTrace::E type, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
@@ -55,6 +58,15 @@ void Log::Write(TypeTrace::E type, char *format, ...)
         VCP::SendFormatStringAsynch(buffer);
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Log::Finalize()
+{
+    Painter::BeginScene(Color::BACK);
+    Console::Draw();
+    Painter::EndScene();
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Log::Trace(TypeTrace::E type, const char *module, const char *func, int numLine, char *format, ...)
