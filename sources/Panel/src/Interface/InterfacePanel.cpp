@@ -36,8 +36,7 @@ void Interface::Send(RawData *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Update()
 {
-    return;
-
+    /*
     static uint timePrev = 0;
     
     if (TIME_MS - timePrev > 5000)
@@ -46,6 +45,7 @@ void Interface::Update()
     
         timePrev = TIME_MS;
     }
+    */
 }
 
 

@@ -31,10 +31,6 @@ public:
     /// ¬озвращает указатель на начало пол€ данных
     uint8 *DataField();
 
-    void Log() const;
-
-    void Modify();
-
 private:
     /// «аполнить служебное поле значени€ми
     void FillServiceField(uint sizeData);

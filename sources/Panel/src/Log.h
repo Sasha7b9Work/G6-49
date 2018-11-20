@@ -11,8 +11,8 @@
 #define LOG_FUNC_ENTER          Log::Write(TypeTrace::Info, "%s enter", __FUNCTION__);
 #define LOG_FUNC_LEAVE          Log::Write(TypeTrace::Info, "%s leave", __FUNCTION__);
 #define LOG_TRACE()             Log::Write(TypeTrace::Info, "%s : %d", __FILE__, __LINE__);
-#define ASSEERT(cond, ...)      if(cond)(LOG_ERROR_TRACE(__VA_ARGS__));
-#define ASSERT_RET(cond, ...)   if(cond) {LOG_ERROR_TRACE(__VA_ARGS__); return; }
+//#define ASSEERT(cond, ...)      if(cond)(LOG_ERROR_TRACE(__VA_ARGS__));
+//#define ASSERT_RET(cond, ...)   if(cond) {LOG_ERROR_TRACE(__VA_ARGS__); return; }
 #elif defined(WIN32)
 #define ASSERT_RET(cont, ...)
 #define LOG_ERROR_TRACE(...)
