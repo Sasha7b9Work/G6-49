@@ -425,7 +425,7 @@ void Interface::ResizeRecieveBuffer(uint16 size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Interface::Data::Data(uint size, uint8 command) : data(0)
+Interface::Data::Data(uint size, uint8 command) : data(0), size(0)
 {
     Init(size);
 

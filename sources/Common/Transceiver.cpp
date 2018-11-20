@@ -13,7 +13,7 @@ void Transceiver::Send(uint8 *buffer, uint size)
 {
     Packet packet;
 
-    packet.Create(buffer, size);
+    packet.Fill(buffer, size);
 
     /// ѕовтор€ем передачу, пока не передадим
     while (!Send(&packet))
