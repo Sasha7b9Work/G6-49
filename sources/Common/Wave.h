@@ -177,7 +177,7 @@ public:
         Number
     } value;
 
-    ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), inNumLockMode(false) {};
+    ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), hightLightDigit(0), inNumLockMode(false) {};
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 
