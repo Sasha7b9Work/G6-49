@@ -3,6 +3,7 @@
 #include "defines.h"
 #include <stm32f4xx.h>
 #include "CPU.h"
+#include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #include <cstdlib>
 #include <cstring>
@@ -62,6 +63,8 @@ static const StructPort registersRead[GeneratorReadPin::Number] =
     {GPIOB, GPIO_PIN_12}    // FREQ_METER_DATA
 };
 
+/// ¬рем€ последней установки состо€ни€ "зан€то"
+static uint timeBusy = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CPU::Init()
@@ -132,11 +135,17 @@ void CPU::InitGPIOS()
 void CPU::SetBusy()
 {
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+
+    timeBusy = TIME_MS;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void CPU::SetReady()
 {
+    while (TIME_MS - timeBusy < 2)
+    {
+    };
+
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
 }
 
