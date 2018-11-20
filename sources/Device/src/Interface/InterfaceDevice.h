@@ -30,8 +30,6 @@ public:
         uint size;
     };
 
-    static void Init();
-
     static void Update();
     
     static void UpdateOld();
