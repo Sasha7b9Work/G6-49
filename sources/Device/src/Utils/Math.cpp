@@ -4,7 +4,7 @@
 #include "Math.h"
 #include <math.h>
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #include <limits>
 #endif
 

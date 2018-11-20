@@ -4,7 +4,7 @@
 #include <stm32f4xx.h>
 #include "CPU.h"
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #endif
 
 
@@ -191,9 +191,9 @@ void CPU::InitPins()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::WritePin(GeneratorWritePin pin, bool set)
+void CPU::WritePin(GeneratorWritePin pin, bool st)
 {
-    HAL_GPIO_WritePin(registers[pin].port, registers[pin].pin, set ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(registers[pin].port, registers[pin].pin, st ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

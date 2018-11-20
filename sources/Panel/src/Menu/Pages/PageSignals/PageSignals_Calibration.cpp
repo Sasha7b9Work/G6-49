@@ -27,13 +27,15 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E)
     }
     values[KoeffCal::Number] =
     {
-        &CAL_AD9952_OFFSET_NEG(ch),
-        &CAL_AD9952_OFFSET_ZERO(ch),
-        &CAL_AD9952_OFFSET_POS(ch),
-        &CAL_AD9952_AMPLITUDE(ch),
-        &CAL_DDS_MAX(ch),
-        &CAL_DDS_MIN(ch)
+        &CAL_AD9952_OFFSET_NEG(Chan::A),
+        &CAL_AD9952_OFFSET_ZERO(Chan::A),
+        &CAL_AD9952_OFFSET_POS(Chan::A),
+        &CAL_AD9952_AMPLITUDE(Chan::A),
+        &CAL_DDS_MAX(Chan::A),
+        &CAL_DDS_MIN(Chan::A)
     };
+
+
 
     //PageSignals::PageCalibration::WriteKoeffCal(ch, koeff, *values[koeff]);
 }

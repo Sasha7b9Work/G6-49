@@ -11,6 +11,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "FreqMeter/FreqMeter.h"
+#include "Settings/Settings.h"
 #include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "Utils/StringUtils.h"
@@ -151,6 +152,18 @@ void Interface::Test()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetKoeffCalibration()
 {
+    Chan ch = (Chan::E)recv[1];
+
+    static const int16 *values[] =
+    {
+        &CAL_AD9952_OFFSET_NEG(Chan::A),
+        &CAL_AD9952_OFFSET_ZERO(Chan::A),
+        &CAL_AD9952_AMPLITUDE(Chan::A),
+        &CAL_DDS_MAX(Chan::A),
+        &CAL_DDS_MIN(Chan::A)
+    };
+
+    
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -188,13 +201,13 @@ void Interface::WriteRegister()
 {
     Register reg = (Register::E)recv[1];
 
-    BitSet64 set;
+    BitSet64 bs;
     for (int i = 0; i < 8; i++)
     {
-        set.byte[i] = recv[i + 2];
+        bs.byte[i] = recv[i + 2];
     }
 
-    uint64 value = set.dword;
+    uint64 value = bs.dword;
 
     switch (reg.value)
     {

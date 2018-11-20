@@ -6,6 +6,12 @@
 #endif
 
 
+/// Минимальное значение калибровочного коэффициента
+#define MIN -128
+/// Максимальное значение калибровочного коэффициента
+#define MAX 127
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageCalibrationA;
 Page *PageSignals::PageCalibration::PageA::pointer = (Page *)&pageCalibrationA;
@@ -38,7 +44,7 @@ DEF_GOVERNOR(gNegativeAD9952,                                                   
     "AD9952 -5В", "AD9952 -5V",
     "Настройка уровня -5В AD9952",
     "Level setting -5V AD9952",
-    CAL_AD9952_OFFSET_NEG(Chan::A), -128, 128, pageCalibrationA, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
+    CAL_AD9952_OFFSET_NEG(Chan::A), MIN, MAX, pageCalibrationA, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
 )
 
 
@@ -57,7 +63,7 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
     "AD9952 +5В", "AD9952 +5V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_POS(Chan::A), -128, 128, pageCalibrationA, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
+    CAL_AD9952_OFFSET_POS(Chan::A), MIN, MAX, pageCalibrationA, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
 )
 
 
@@ -76,7 +82,7 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
     "AD9952 0В", "AD9952 0V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_ZERO(Chan::A), -128, 128, pageCalibrationA, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9952
+    CAL_AD9952_OFFSET_ZERO(Chan::A), MIN, MAX, pageCalibrationA, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9952
 )
 
 
@@ -98,7 +104,7 @@ DEF_GOVERNOR( gAmplitudeAD9952,                                                 
     "AD9952 Размах", "AD9952 Amplitude",
     "Настройка размаха AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE(Chan::A), -128, 128, pageCalibrationA, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
+    CAL_AD9952_AMPLITUDE(Chan::A), MIN, MAX, pageCalibrationA, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
 

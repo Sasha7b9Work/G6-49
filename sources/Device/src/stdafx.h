@@ -21,6 +21,8 @@
 
 #include "Interface/InterfaceDevice.h"
 
+#include "Settings/Settings.h"
+
 #include "SCPI/SCPI.h"
 
 #include "Utils/Array.h"

@@ -4,7 +4,7 @@
 #include "log.h"
 #include "Packet.h"
 #include "Hardware/CPU.h"
-#include <string.h>
+#include <cstring>
 #endif
 
 
