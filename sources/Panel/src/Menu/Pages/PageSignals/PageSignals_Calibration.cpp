@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #ifndef WIN32
+#include "defines.h"
+#include "RawData.h"
+#include "Interface/InterfacePanel.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/Settings.h"
 #endif
@@ -35,9 +38,8 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E)
         &CAL_DDS_MIN(Chan::A)
     };
 
-
-
-    //PageSignals::PageCalibration::WriteKoeffCal(ch, koeff, *values[koeff]);
+    RawData message(4);
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

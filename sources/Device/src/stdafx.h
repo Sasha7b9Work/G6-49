@@ -31,7 +31,7 @@
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 
-#include <limits.h>
+#include <limits>
 #include <math.h>
 #include <stdarg.h>
 #include <cstring>

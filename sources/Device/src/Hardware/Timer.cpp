@@ -5,7 +5,7 @@
 #include "Log.h"
 #include <stm32f4xx.h>
 #include "Timer4XX.h"
-#include <limits.h>
+#include <limits>
 #include "Hardware/CPU.h"
 #endif
 

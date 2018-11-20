@@ -11,16 +11,3 @@ int rand();
 float expf(float);
 void srand(uint);
 float powf(float, float);
-
-
-namespace std
-{
-    template <class T> class numeric_limits
-    {
-    public:
-        static T epsilon()
-        {
-            return static_cast<T>(0.1f);
-        }
-    };
-}

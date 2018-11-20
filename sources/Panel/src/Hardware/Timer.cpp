@@ -10,7 +10,7 @@
 #include <stm32f4xx.h>
 #include "Hardware/Timer4XX.h"
 #endif
-#include <limits.h>
+#include <limits>
 #include "Hardware/CPU.h"
 #endif
 

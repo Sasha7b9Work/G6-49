@@ -1,6 +1,7 @@
 #pragma once
 #include "defines.h"
 #include <cstring>
+#include <limits>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,7 +178,16 @@ public:
         Number
     } value;
 
-    ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), hightLightDigit(0), posComma(0), sign('+'), inNumLockMode(false) {};
+    ParameterValue(int v = Number) : ParameterBase(Value),
+        value((E)v),
+        hightLightDigit(0),
+        posComma(0),
+        sign('+'),
+        /// \todo Не получается так почему-то
+        //min(std::numeric_limits<float>::min()),
+        //max(std::numeric_limits<float>::max()),
+        inNumLockMode(false)
+    {};
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 

@@ -11,6 +11,7 @@ public:
     /// Конструирует сообщение длиной size
     RawData(uint size);
     RawData(uint size, uint8 value0, uint8 valu1);
+    RawData(uint size, uint8 value0, uint8 value1, uint8 value2, uint8 value3);
     ~RawData();
 
     void Put(uint8 value);
