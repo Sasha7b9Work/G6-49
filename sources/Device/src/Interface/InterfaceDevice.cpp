@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
-#include "Packet.h"
+#include "Message.h"
 #include "InterfaceDevice.h"
 #include "FDrive/FDriveDevice.h"
 #include "Utils/Console.h"
@@ -74,7 +74,7 @@ commands[Command::Number] =
 };
 
 
-static Packet recvPacket;
+static Message recvPacket;
 uint8 *Interface::recv = recvPacket.DataField();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -341,7 +341,7 @@ void Interface::Update()
 
     CPU::SetReady();
 
-    Packet transPacket;
+    Message transPacket;
 
 #define TIME 10
 
@@ -371,7 +371,7 @@ void Interface::UpdateOld()
 {
     CPU::SetReady();
 
-    Packet packet;
+    Message packet;
 
     if (SPI1_::Receive(packet.Begin(), packet.Size(), 100))
     {

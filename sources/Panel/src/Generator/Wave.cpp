@@ -32,7 +32,7 @@ pString Form::Name(Language lang) const
         {"Треугольник",  "Triangle"},
         {"Меандр",       "Meander"},
         {"Импульс",      "Impulse"},
-        {"Пакет",        "Packet"},
+        {"Пакет",        "Message"},
         {"Произвольный", "Hand"}
     };
 
@@ -98,7 +98,7 @@ pString ParameterValue::Name() const
         {"Коэфф заполн",   "Duty factor"},
         {"Длительность",   "Duration"},
         {"Период",         "Period"},
-        {"Период пакета",  "Packet period"},
+        {"Период пакета",  "Message period"},
         {"Кол-во имп",     "Num of puls"},
         {"     Выход ( ESC )", "     Exit ( ESC )"}
     };

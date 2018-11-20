@@ -179,7 +179,7 @@ HAL_StatusTypeDef HAL_HCD_Init(HCD_HandleTypeDef *hhcd)
   *            EP_TYPE_ISOC: Isochronous type,
   *            EP_TYPE_BULK: Bulk type,
   *            EP_TYPE_INTR: Interrupt type
-  * @param  mps Max Packet Size.
+  * @param  mps Max Message Size.
   *          This parameter can be a value from 0 to32K
   * @retval HAL status
   */

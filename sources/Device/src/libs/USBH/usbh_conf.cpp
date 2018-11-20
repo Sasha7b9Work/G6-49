@@ -144,7 +144,7 @@ USBH_StatusTypeDef USBH_LL_ResetPort (USBH_HandleTypeDef *phost)
 /** @brief  Returns the last transfered packet size.
   * @param  phost: Host handle
   * @param  pipe: Pipe index   
-  * @retval Packet Size */
+  * @retval Message Size */
 uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef *phost, uint8_t pipe)  
 {
   return HAL_HCD_HC_GetXferCount((HCD_HandleTypeDef *)phost->pData, pipe);
@@ -158,7 +158,7 @@ uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @param  dev_address: Device USB address
   * @param  speed: Device Speed 
   * @param  ep_type: Endpoint Type
-  * @param  mps: Endpoint Max Packet Size                 
+  * @param  mps: Endpoint Max Message Size                 
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_OpenPipe(USBH_HandleTypeDef *phost, uint8_t pipe, uint8_t epnum, uint8_t dev_address, uint8_t speed, uint8_t ep_type,
                                     uint16_t mps)

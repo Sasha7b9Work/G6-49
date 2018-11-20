@@ -219,9 +219,6 @@
     <ClCompile Include="..\..\Panel\src\log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\Packet.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\common\Transceiver.cpp">
       <Filter>common</Filter>
     </ClCompile>
@@ -301,6 +298,9 @@
       <Filter>Menu\Pages\PageSignals</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\RawData.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Message.cpp">
       <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -503,9 +503,6 @@
     <ClInclude Include="..\..\Panel\src\log.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\Packet.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\common\Transceiver.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -588,6 +585,9 @@
       <Filter>libs\HAL\legacy</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\RawData.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Message.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

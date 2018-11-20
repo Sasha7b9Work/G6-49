@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>1</tvExp>
+        <tvExp>0</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -1225,8 +1225,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Packet.cpp</PathWithFileName>
-      <FilenameWithoutPath>Packet.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\Message.cpp</PathWithFileName>
+      <FilenameWithoutPath>Message.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1237,8 +1237,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Packet.h</PathWithFileName>
-      <FilenameWithoutPath>Packet.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\Message.h</PathWithFileName>
+      <FilenameWithoutPath>Message.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

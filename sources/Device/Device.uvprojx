@@ -1202,14 +1202,14 @@
               <FilePath>..\Common\Command.cpp</FilePath>
             </File>
             <File>
-              <FileName>Packet.cpp</FileName>
+              <FileName>Message.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Packet.cpp</FilePath>
+              <FilePath>..\common\Message.cpp</FilePath>
             </File>
             <File>
-              <FileName>Packet.h</FileName>
+              <FileName>Message.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Packet.h</FilePath>
+              <FilePath>..\common\Message.h</FilePath>
             </File>
             <File>
               <FileName>RawData.cpp</FileName>

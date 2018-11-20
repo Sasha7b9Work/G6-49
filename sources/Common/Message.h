@@ -14,20 +14,20 @@
     Данные могут занимать не всё поле для данных. В поле "Размер данных" рельное количество данных
 */
 
-class Packet
+class Message
 {
 public:
-    Packet();
+    Message();
     /// Создаёт пакет из передаваемых данных
     void CreateNew(uint8 *data, uint size);
 
-    void CopyFrom(const Packet *packet);
+    void CopyFrom(const Message *packet);
     /// Указатель на начало пакета
     uint8 *Begin();
     /// Размер пакета
     uint Size() const;
     /// Возвращает true, если пакеты идентичны (равны с точностью до бита)
-    bool IsEquals(Packet *rhs) const;
+    bool IsEquals(Message *rhs) const;
     /// Возвращает указатель на начало поля данных
     uint8 *DataField();
 

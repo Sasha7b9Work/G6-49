@@ -2,24 +2,24 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
-#include "Packet.h"
+#include "Message.h"
 #include "Hardware/CPU.h"
 #include <cstring>
 #endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-uint Packet::transcievedPackets = 0;
+uint Message::transcievedPackets = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Packet::Packet()
+Message::Message()
 {
     std::memset(&data, 0, sizeof(data));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Packet::CreateNew(uint8 *buffer, uint size)
+void Message::CreateNew(uint8 *buffer, uint size)
 {
     if (size <= MAX_SIZE_DATA_FIELD)
     {
@@ -33,38 +33,38 @@ void Packet::CreateNew(uint8 *buffer, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Packet::CopyFrom(const Packet *packet)
+void Message::CopyFrom(const Message *packet)
 {
-    std::memcpy(this, packet, sizeof(Packet));
+    std::memcpy(this, packet, sizeof(Message));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Packet::DataField()
+uint8 *Message::DataField()
 {
     return (uint8 *)&data.data[0];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Packet::FillServiceField(uint sizeData)
+void Message::FillServiceField(uint sizeData)
 {
     data.numberPacket = ++transcievedPackets;
     data.size = sizeData;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Packet::IsEquals(Packet *rhs) const
+bool Message::IsEquals(Message *rhs) const
 {
     return std::memcmp((void *)&data, &rhs->data, sizeof(Data)) == 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Packet::Begin()
+uint8 *Message::Begin()
 {
     return (uint8 *)&data;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Packet::Size() const
+uint Message::Size() const
 {
     return SIZE;
 }

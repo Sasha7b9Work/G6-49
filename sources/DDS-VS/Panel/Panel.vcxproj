@@ -155,7 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
-    <ClCompile Include="..\..\common\Packet.cpp" />
+    <ClCompile Include="..\..\common\Message.cpp" />
     <ClCompile Include="..\..\common\RawData.cpp" />
     <ClCompile Include="..\..\common\Transceiver.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
@@ -330,7 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
-    <ClInclude Include="..\..\common\Packet.h" />
+    <ClInclude Include="..\..\common\Message.h" />
     <ClInclude Include="..\..\common\RawData.h" />
     <ClInclude Include="..\..\common\Transceiver.h" />
     <ClInclude Include="..\..\common\Wave.h" />

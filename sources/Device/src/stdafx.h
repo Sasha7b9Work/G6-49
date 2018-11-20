@@ -4,7 +4,7 @@
 
 #include "Log.h"
 #include "structs.h"
-#include "Packet.h"
+#include "Message.h"
 #include "RawData.h"
 #include "Transceiver.h"
 

@@ -20,7 +20,7 @@ pString Form::Name(Language lang) const
         {"Треугольник",  "Triangle"},
         {"Меандр",       "Meander"},
         {"Импульс",      "Impulse"},
-        {"Пакет",        "Packet"},
+        {"Пакет",        "Message"},
         {"Произвольный", "Hand"}
     };
 

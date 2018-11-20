@@ -255,9 +255,6 @@
     <ClInclude Include="..\..\Device\src\Utils\Array.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\Packet.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\stm32.h">
       <Filter>Hardware</Filter>
     </ClInclude>
@@ -275,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\Modules\SPI.h">
       <Filter>Hardware\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Message.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,9 +410,6 @@
     <ClCompile Include="..\..\Device\src\Utils\Array.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\Packet.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -439,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\Modules\SPI.cpp">
       <Filter>Hardware\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Message.cpp">
+      <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
