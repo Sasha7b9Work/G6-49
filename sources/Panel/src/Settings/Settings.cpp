@@ -49,20 +49,22 @@ static const Settings defSet =
         ParameterValue::Frequency,
         ParameterValue::Frequency
     },
-    (Page *)Menu::mainPage,                 // menu_page
-    {0},                                    // menu_posActItem[]
-    {0},                                    // menu_currentSubPage[]
-    FrequencyMeter::BillingTime::_1ms,      // freq_billingTime
-    FrequencyMeter::AvePeriod::_1,          // freq_avePeriod
-    FreqTimeStamps::_10MHz,                 // freq_timeStamps
-    0,                                      // freq_level
-    0,                                      // freq_hysteresis
-    {false, false},                         // sine_ManipulationEnabled
-    {0, 0},                                 // sine_ManipulationMode
-    0,                                      // cal_AD9952_Offset_Negative
-    0,                                      // cal_AD9952_Offset_Zero
-    0,                                      // cal_AD9952_Offset_Positive
-    0,                                      // cal_AD9952_Amplitude
+    (Page *)Menu::mainPage,             // menu_page
+    {0},                                // menu_posActItem[]
+    {0},                                // menu_currentSubPage[]
+    FrequencyMeter::BillingTime::_1ms,  // freq_billingTime
+    FrequencyMeter::AvePeriod::_1,      // freq_avePeriod
+    FreqTimeStamps::_10MHz,             // freq_timeStamps
+    0,                                  // freq_level
+    0,                                  // freq_hysteresis
+    {false, false},                     // sine_ManipulationEnabled
+    {0, 0},                             // sine_ManipulationMode
+    {0, 0},                             // cal_AD9952_Offset_Negative
+    {0, 0},                             // cal_AD9952_Offset_Zero
+    {0, 0},                             // cal_AD9952_Offset_Positive
+    {0, 0},                             // cal_AD9952_Amplitude
+    {0, 0},                             // cal_DDS_MAX
+    {0, 0},                             // cal_DDS_MIN
 
     BINARY_U32(00000000, 00000000, 00010110, 00011100), // flag1
 //                          |||||  ||||||||  ||||||||------ 0  BIT_PARITY         Parity_Off
