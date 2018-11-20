@@ -251,7 +251,12 @@ public:
         Number
     } value;
 
-    Form(E v = Number) : value(v), wave(0), currentParam(0)   { };
+    Form(E v = Number) :
+        value(v),
+        wave(0),
+        currentParam(0),
+        oldNumParams(0)
+    { };
 
     Form(E v, ParameterBase *param[], Wave *w);
     /// ¬озвращает человеческое название формы сигнала

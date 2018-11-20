@@ -345,13 +345,13 @@ void Interface::Update()
 
 #define TIME 10
 
-    if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))                 // Принимаем пакет данных
+    if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))                // Принимаем пакет данных
     {
         transPacket = recvPacket;
 
-        if (SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), TIME))          // И пересылаем его обратно
+        if (SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), TIME))         // И пересылаем его обратно
         {
-            if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))         // Если оба принятых пакета совпали - данные прияты верно
+            if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))        // Если оба принятых пакета совпали - данные прияты верно
             {
                 if(SPI1_::Transmit(recvPacket.Begin(), recvPacket.Size(), TIME))    // Пересылаем принятые данные снова в панель, чтобы подвердить успешный приём
                 {
