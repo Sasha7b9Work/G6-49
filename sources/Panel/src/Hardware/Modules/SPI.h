@@ -15,4 +15,6 @@ public:
     static bool IsReady();
     /// Ждать пока освободится устройство
     static void WaitFreedom();
+    /// Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
+    static void WaitFalling();
 };

@@ -54,8 +54,6 @@ private:
     void WriteNumberSubPacket(uint number);
     /// Записать информацию в поле размера данных
     void WriteSizeData(uint size);
-    /// Записать контрольную сумму
-    void WriteCRC();
     /// Количество переданных пакетов. Все пакеты нумеруются по порядку.
     static uint transcievedPackets;
 
