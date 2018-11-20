@@ -297,6 +297,9 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_CalibrationB.cpp">
       <Filter>Menu\Pages\PageSignals</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_Calibration.cpp">
+      <Filter>Menu\Pages\PageSignals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">

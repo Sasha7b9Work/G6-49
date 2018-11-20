@@ -3,6 +3,22 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+struct KoeffCal
+{
+    enum E
+    {
+        AD9952_NEG,
+        AD9952_ZERO,
+        AD9952_POS,
+        AD9952_AMPL,
+        DDS_MAX,
+        DDS_MIN,
+        Number
+    } value;
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class PageSignals
 {
 public:
@@ -39,5 +55,14 @@ public:
         public:
             static Page *pointer;
         };
+
+        static void PrepareForAmplitudeAD9952(Chan ch);
+
+        static void WriteKoeffCal(Chan ch, KoeffCal::E koeff);
+
+        static void OnPress_OffsetAD9952(Chan ch, bool enter, KoeffCal::E koeff);
+
+    private:
+        static void PrepareForOffsetAD9952(Chan ch);
     };
 };

@@ -33,6 +33,8 @@ public:
 
     static void SetParameter(ParameterChoice *param);
 
+    static void SetOffset(Chan ch, float offset);
+
     static void SetDebugMode(bool enable);
 
     static void LoadRegister(Register reg, uint64 value);

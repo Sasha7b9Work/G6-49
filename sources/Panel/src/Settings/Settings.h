@@ -59,12 +59,12 @@ extern const PageBase pInput;
 
 #define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
 
-#define CAL_AD9952_OFFSET_NEG   set.cal_AD9952_Offset_Negative
-#define CAL_AD9952_OFFSET_ZERO  set.cal_AD9952_Offset_Zero
-#define CAL_AD9952_OFFSET_POS   set.cal_AD9952_Offset_Positive
-#define CAL_AD9952_AMPLITUDE    set.cal_AD9952_Amplitude
-
-
+#define CAL_AD9952_OFFSET_NEG(ch)   set.cal_AD9952_Offset_Negative[ch]
+#define CAL_AD9952_OFFSET_ZERO(ch)  set.cal_AD9952_Offset_Zero[ch]
+#define CAL_AD9952_OFFSET_POS(ch)   set.cal_AD9952_Offset_Positive[ch]
+#define CAL_AD9952_AMPLITUDE(ch)    set.cal_AD9952_Amplitude[ch]
+#define CAL_DDS_MAX(ch)             set.cal_DDS_MAX[ch]
+#define CAL_DDS_MIN(ch)             set.cal_DDS_MIN[ch]
 
 
 #define SINE_MANIPULATION_ENABLED(ch)   (set.sine_ManipulationEnabled[ch])
@@ -85,22 +85,24 @@ public:
         {
         }cal;
     };
-    col_val                     disp_Colors[32];                        ///< Цвета
-    ParameterValue              sig_parameter[Form::Number];            ///< Текущий выбранный параметр сигнала
-    Page*                       menu_currentPage;                       ///< Адрес открытой страницы меню. 0, если открыта главная страница
-    int8                        menu_posActItem[Page::Number];          ///< Позиция активного пункта меню для каждой страницы
-    int8                        menu_currentSubPage[Page::Number];      ///< Номер текущей подстраницы для каждой страницы
-    FrequencyMeter::BillingTime freq_billingTime;                       ///< Время счёта
-    FrequencyMeter::AvePeriod   freq_avePeriod;                         ///< Число усредняемых периодов в режиме измерения периода
-    FreqTimeStamps              freq_timeStamps;                        ///< Метки времени
-    int16                       freq_level;                             ///< Уровень синхронизации
-    int16                       freq_hysteresis;                        ///< Величина гистерезиса
-    bool                        sine_ManipulationEnabled[Chan::Number]; ///< true, если включена модуляция синусоиды пилой
+    col_val                     disp_Colors[32];                            ///< Цвета
+    ParameterValue              sig_parameter[Form::Number];                ///< Текущий выбранный параметр сигнала
+    Page*                       menu_currentPage;                           ///< Адрес открытой страницы меню. 0, если открыта главная страница
+    int8                        menu_posActItem[Page::Number];              ///< Позиция активного пункта меню для каждой страницы
+    int8                        menu_currentSubPage[Page::Number];          ///< Номер текущей подстраницы для каждой страницы
+    FrequencyMeter::BillingTime freq_billingTime;                           ///< Время счёта
+    FrequencyMeter::AvePeriod   freq_avePeriod;                             ///< Число усредняемых периодов в режиме измерения периода
+    FreqTimeStamps              freq_timeStamps;                            ///< Метки времени
+    int16                       freq_level;                                 ///< Уровень синхронизации
+    int16                       freq_hysteresis;                            ///< Величина гистерезиса
+    bool                        sine_ManipulationEnabled[Chan::Number];     ///< true, если включена модуляция синусоиды пилой
     uint8                       sine_ManipulationMode[Chan::Number];
-    int16                       cal_AD9952_Offset_Negative;             ///< Калибровочный коэффициент AD9952 на -5В
-    int16                       cal_AD9952_Offset_Zero;                 ///< Калибровочный коэффициент AD9952 на 0В
-    int16                       cal_AD9952_Offset_Positive;             ///< Калибровочный коэффициент AD9952 на +5В
-    int16                       cal_AD9952_Amplitude;                   ///< Калибровочный коэффициент AD9952 размаха
+    int16                       cal_AD9952_Offset_Negative[Chan::Number];   ///< Калибровочный коэффициент AD9952 на -5В
+    int16                       cal_AD9952_Offset_Zero[Chan::Number];       ///< Калибровочный коэффициент AD9952 на 0В
+    int16                       cal_AD9952_Offset_Positive[Chan::Number];   ///< Калибровочный коэффициент AD9952 на +5В
+    int16                       cal_AD9952_Amplitude[Chan::Number];         ///< Калибровочный коэффициент AD9952 размаха
+    int16                       cal_DDS_MAX[Chan::Number];
+    int16                       cal_DDS_MIN[Chan::Number];
 
 #define FLAG_1      set.flag1
     uint            flag1;
