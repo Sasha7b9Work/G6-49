@@ -1671,6 +1671,16 @@
               <FileType>5</FileType>
               <FilePath>..\common\Wave.h</FilePath>
             </File>
+            <File>
+              <FileName>RawMessage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\RawMessage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>RawMessage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\RawMessage.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
