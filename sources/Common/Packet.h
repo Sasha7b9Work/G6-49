@@ -26,6 +26,8 @@ public:
     uint Size() const;
     /// Возвращает true, если пакеты идентичны (равны с точностью до бита)
     bool IsEquals(Packet *rhs) const;
+    /// Возвращает указатель на начало поля данных
+    uint8 *DataField();
 
 private:
     /// Размер пакета
@@ -42,8 +44,6 @@ private:
     static const uint SIZE_SERVICE_FIELD = SIZE_FIELD_CRC + SIZE_FIELD_NUMBER_PACKET + SIZE_FIELD_NUMBER_SUBPACKET + SIZE_FIELD_SIZE_DATA;
     /// Размер поля данных
     static const uint MAX_SIZE_DATA_FIELD = SIZE - SIZE_SERVICE_FIELD;
-    /// Возвращает указатель на начало поля данных
-    uint8 *DataField();
     /// Возвращает указатель на байт, смещённый на offset от начала пакета
     uint8 *FromBegin(uint offset);
     /// Заполнить служебное поле значениями

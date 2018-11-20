@@ -33,6 +33,8 @@ public:
     static void Init();
 
     static void Update();
+    
+    static void UpdateOld();
     /// ѕослать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
 
