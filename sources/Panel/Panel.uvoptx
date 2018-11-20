@@ -157,7 +157,7 @@
           <Type>0</Type>
           <LineNumber>27</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134264522</Address>
+          <Address>134264562</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -173,7 +173,7 @@
           <Type>0</Type>
           <LineNumber>228</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134263566</Address>
+          <Address>134263606</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -1314,7 +1314,7 @@
 
   <Group>
     <GroupName>Generator</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1786,7 +1786,7 @@
 
   <Group>
     <GroupName>Menu/Pages</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1910,7 +1910,7 @@
 
   <Group>
     <GroupName>Menu/Pages/PageSignals</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1933,8 +1933,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Menu\Pages\PageSignals\PageSignals_Calibration.cpp</PathWithFileName>
-      <FilenameWithoutPath>PageSignals_Calibration.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Menu\Pages\PageSignals\PageSignals_Load.cpp</PathWithFileName>
+      <FilenameWithoutPath>PageSignals_Load.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1945,8 +1945,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Menu\Pages\PageSignals\PageSignals_Load.cpp</PathWithFileName>
-      <FilenameWithoutPath>PageSignals_Load.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Menu\Pages\PageSignals\PageSignals_CalibrationA.cpp</PathWithFileName>
+      <FilenameWithoutPath>PageSignals_CalibrationA.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

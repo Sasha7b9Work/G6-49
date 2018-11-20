@@ -144,7 +144,7 @@ public:
          Registers,
          Main,
          Settings_Load,
-         Settings_Calibration,
+         Settings_CalibrationA,
          Number
     };
     

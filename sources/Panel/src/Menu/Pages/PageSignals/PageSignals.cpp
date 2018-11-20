@@ -112,7 +112,7 @@ DEF_PAGE_7( pageSignals,
     &bChangeParameter,                      ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - Ââåñòè çíà÷åíèå ïàðàìåòðà
     PageSignals::PageLoad::pointer,         ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃÐÓÇÊÀ
     &cTypeTune,                             ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - Çàñûëêè
-    PageSignals::PageCalibration::pointer,  ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ
+    PageSignals::PageCalibrationA::pointer,  ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ
     Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
 )
 
