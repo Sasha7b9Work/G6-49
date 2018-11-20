@@ -24,12 +24,12 @@ void Console::AddString(const char *string)
     {
         for(int i = 1; i < MAX_STRINGS; i++)
         {
-            strcpy(&buffer[i - 1][0], &buffer[i][0]);
+            std::strcpy(&buffer[i - 1][0], &buffer[i][0]);
         }
         numStrings--;
     }
     sprintf(&buffer[numStrings][0], "%d ", fullNumber);
-    strcat(&buffer[numStrings][0], string);
+    std::strcat(&buffer[numStrings][0], string);
     numStrings++;
     fullNumber++;
 }

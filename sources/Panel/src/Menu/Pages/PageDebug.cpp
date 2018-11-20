@@ -140,7 +140,7 @@ static bool OnKey(Control key)
         {
             SENDING(currentRegister) = false;
             OnPress_Send();
-            memset(buffer, 0, MAX_SIZE_BUFFER);
+            std::memset(buffer, 0, MAX_SIZE_BUFFER);
             buffer[0] = key.ToChar();
             NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel ||
                                                            currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
@@ -354,7 +354,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
 
     int position = NumberBuffer::PositionCursor();
 
-    for (int i = 0; i < (int)strlen(buffer); i++)
+    for (int i = 0; i < (int)std::strlen(buffer); i++)
     {
         if (i == position)
         {
@@ -363,7 +363,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
         }
         x = Text::DrawBigChar(x, Y_INPUT + 20, 4, buffer[i]) + 3;
     }
-    if (position == (int)strlen(buffer) && position < SizeBuffer())
+    if (position == (int)std::strlen(buffer) && position < SizeBuffer())
     {
         Painter::DrawFilledRectangle(x - 2, Y_INPUT + 19, 19, 31, Color::GRAY_10, Color::BLUE);
     }
@@ -492,7 +492,7 @@ DEF_BUTTON(bNext,                                                               
 static void OnPress_Send()
 {
     showInputWindow = true;
-    memset(buffer, 0, MAX_SIZE_BUFFER);
+    std::memset(buffer, 0, MAX_SIZE_BUFFER);
 
     pRegisters.items[0] = (Item *)&bBackspace;
     pRegisters.items[1] = (Item *)&bCancel;
@@ -507,12 +507,12 @@ static void OnPress_Send()
         if (type == Uint)
         {
             UInt64_2String(VALUE(currentRegister), buffer);
-            position = (int)strlen(buffer);
+            position = (int)std::strlen(buffer);
         }
         else if (type == Binary)
         {
             Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
-            position = (int)strlen(buffer);
+            position = (int)std::strlen(buffer);
         }
         else if (type == Uint10_Uint10 || type == Uint14_Uint14)
         {
@@ -522,15 +522,15 @@ static void OnPress_Send()
             uint first = VALUE(currentRegister) & mask;
             uint second = (VALUE(currentRegister) >> numBits) & mask;
 
-            strcpy(buffer, UInt2String(first));
-            strcat(buffer, ".");
-            strcat(buffer, UInt2String(second));
+            std::strcpy(buffer, UInt2String(first));
+            std::strcat(buffer, ".");
+            std::strcat(buffer, UInt2String(second));
         }
     }
     else
     {
         position = 0;
-        memset(buffer, 0, MAX_SIZE_BUFFER);
+        std::memset(buffer, 0, MAX_SIZE_BUFFER);
         VALUE(position) = 0;
     }
 
@@ -581,7 +581,7 @@ DEF_BUTTON(bSave,                                                               
 static void OnPress_Cancel()
 {
     showInputWindow = false;
-    memset(buffer, 0, MAX_SIZE_BUFFER);
+    std::memset(buffer, 0, MAX_SIZE_BUFFER);
     pRegisters.items[0] = (Item *)&bPrev;
     pRegisters.items[1] = (Item *)&bNext;
     pRegisters.items[2] = (Item *)&bSend;

@@ -82,29 +82,29 @@ pString Command::Trace(const uint8 *buffer) const
         case RequestData:
             break;
         case EnableChannel:
-            strcat(result, buffer[2] ? "true" : "false");
+            std::strcat(result, buffer[2] ? "true" : "false");
             break;
         case SetFormWave:
             {
                 Form form((Form::E)buffer[2]);
-                strcat(result, form.Name(Language::RU));
+                std::strcat(result, form.Name(Language::RU));
             }
             break;
         case SetFrequency:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetAmplitude:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetOffset:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetDuration:
             break;
         case SetDutyRatio:
             break;
         case SetPhase:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case RunReset:
             break;
@@ -123,16 +123,16 @@ pString Command::Trace(const uint8 *buffer) const
         case SetDutyFactor:
             break;
         case SetManipulation:
-            strcat(result, buffer[2] == 0 ? "false" : "true");
+            std::strcat(result, buffer[2] == 0 ? "false" : "true");
             break;
         case SetManipulationDuration:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetManipulationPeriod:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetPacketPeriod:
-            strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, Buffer2FloatString(buffer + 2));
             break;
         case SetPacketNumber:
             break;
@@ -143,10 +143,10 @@ pString Command::Trace(const uint8 *buffer) const
         case SetPolarity:
             break;
         case SetManipulationMode:
-            strcat(result, buffer[2] ? "1" : "0");
+            std::strcat(result, buffer[2] ? "1" : "0");
             break;
         case LoadFormDDS:
-            strcat(result, "точки");
+            std::strcat(result, "точки");
             break;
         case FreqMeasure:
             break;

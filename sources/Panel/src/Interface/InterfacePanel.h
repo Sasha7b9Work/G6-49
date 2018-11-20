@@ -1,5 +1,5 @@
 #pragma once
-#include "RawMessage.h"
+#include "RawData.h"
 #include "Utils/Buffer.h"
 
 
@@ -37,7 +37,7 @@ public:
 
     static void Send(const Buffer &buffer);
 
-    static void Send(RawMessage *message);
+    static void Send(RawData *message);
     /// Послать запрос и ожидать ответа.
     static bool Request(Data *request, Data *answer);
 

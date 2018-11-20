@@ -278,7 +278,7 @@ uint CPU::CRC32::Calculate(void *data, uint size)
 
     uint *buffer = (uint *)std::malloc(sizeBuffer);      // Выделяем память для нового буфера
 
-    memcpy(buffer, data, size);                     // Копируем данные в новый буфер
+    std::memcpy(buffer, data, size);                     // Копируем данные в новый буфер
     
     for(uint i = size; i < sizeBuffer; i++)          // Заполняем оставшееся место нулями
     {

@@ -1,20 +1,20 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "RawMessage.h"
+#include "RawData.h"
 #include <cstdlib>
 #include <cstring>
 #endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-RawMessage::RawMessage(uint size) : buffer(0), allocated(0), used(0)
+RawData::RawData(uint size) : buffer(0), allocated(0), used(0)
 {
     Alloc(size);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RawMessage::RawMessage(uint size, uint8 value0, uint8 value1)
+RawData::RawData(uint size, uint8 value0, uint8 value1)
 {
     Alloc(size);
     
@@ -23,7 +23,7 @@ RawMessage::RawMessage(uint size, uint8 value0, uint8 value1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void RawMessage::Alloc(uint size)
+void RawData::Alloc(uint size)
 {
     std::free(buffer);
     allocated = 0;
@@ -36,19 +36,19 @@ void RawMessage::Alloc(uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RawMessage::~RawMessage()
+RawData::~RawData()
 {
     std::free(buffer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void RawMessage::Put(uint8 value)
+void RawData::Put(uint8 value)
 {
     buffer[used++] = value;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void RawMessage::Put(float value)
+void RawData::Put(float value)
 {
     std::memcpy(buffer + used, &value, 4);
     used += 4;

@@ -1212,14 +1212,14 @@
               <FilePath>..\common\Packet.h</FilePath>
             </File>
             <File>
-              <FileName>Wave.cpp</FileName>
+              <FileName>RawData.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Common\Wave.cpp</FilePath>
+              <FilePath>..\common\RawData.cpp</FilePath>
             </File>
             <File>
-              <FileName>Wave.h</FileName>
+              <FileName>RawData.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Wave.h</FilePath>
+              <FilePath>..\common\RawData.h</FilePath>
             </File>
             <File>
               <FileName>Transceiver.cpp</FileName>
@@ -1232,14 +1232,14 @@
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
             <File>
-              <FileName>RawMessage.cpp</FileName>
+              <FileName>Wave.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\RawMessage.cpp</FilePath>
+              <FilePath>..\Common\Wave.cpp</FilePath>
             </File>
             <File>
-              <FileName>RawMessage.h</FileName>
+              <FileName>Wave.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\RawMessage.h</FilePath>
+              <FilePath>..\common\Wave.h</FilePath>
             </File>
           </Files>
         </Group>

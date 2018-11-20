@@ -156,7 +156,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
     <ClCompile Include="..\..\common\Packet.cpp" />
-    <ClCompile Include="..\..\common\RawMessage.cpp" />
+    <ClCompile Include="..\..\common\RawData.cpp" />
     <ClCompile Include="..\..\common\Transceiver.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -331,7 +331,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
     <ClInclude Include="..\..\common\Packet.h" />
-    <ClInclude Include="..\..\common\RawMessage.h" />
+    <ClInclude Include="..\..\common\RawData.h" />
     <ClInclude Include="..\..\common\Transceiver.h" />
     <ClInclude Include="..\..\common\Wave.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />

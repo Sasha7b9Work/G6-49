@@ -189,7 +189,7 @@ void Generator::SetParameter(ParameterChoice *param)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetOffset(Chan ch, float offset)
 {
-    RawMessage message(6, (uint8)Command::SetOffset, ch);
+    RawData message(6, (uint8)Command::SetOffset, ch);
     message.Put(offset);
 
     Interface::Send(&message);

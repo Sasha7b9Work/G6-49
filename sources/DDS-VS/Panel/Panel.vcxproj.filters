@@ -300,7 +300,7 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_Calibration.cpp">
       <Filter>Menu\Pages\PageSignals</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\RawMessage.cpp">
+    <ClCompile Include="..\..\common\RawData.cpp">
       <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -587,7 +587,7 @@
     <ClInclude Include="src\include\HAL\Legacy\stm32_hal_legacy.h">
       <Filter>libs\HAL\legacy</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\RawMessage.h">
+    <ClInclude Include="..\..\common\RawData.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

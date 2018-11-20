@@ -5,7 +5,7 @@
 #include <Hardware/CPU.h>
 #include "Hardware/VCP.h"
 #include <stdarg.h>
-#include <string.h>
+#include <cstring>
 #include <stdio.h>
 #endif
 
@@ -25,7 +25,7 @@ void Log::Write(TypeTrace type, char *format, ...)
     if (type == TypeTrace_Error)
     {
         buffer[0] = 0;
-        strcat(buffer, "!!! ERROR !!! ");
+        std::strcat(buffer, "!!! ERROR !!! ");
         while (*pointer++) {};
         ++pointer;
     }
@@ -55,16 +55,16 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
     message[0] = 0;
     if (type == TypeTrace_Error)
     {
-        strcat(message, "!!!ERROR!!! ");
+        std::strcat(message, "!!!ERROR!!! ");
     }
     else if (type == TypeTrace_Info)
     {
-        strcat(message, "            ");
+        std::strcat(message, "            ");
     }
-    strcat(message, module);
-    strcat(message, " ");
-    strcat(message, func);
-    strcat(message, numBuffer);
+    std::strcat(message, module);
+    std::strcat(message, " ");
+    std::strcat(message, func);
+    std::strcat(message, numBuffer);
     //DISPLAY_ADD_STRING(message);
     //DISPLAY_ADD_STRING(buffer);
     if(loggerUSB)

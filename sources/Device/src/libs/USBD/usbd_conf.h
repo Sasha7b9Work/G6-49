@@ -9,7 +9,7 @@
 #endif
 
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 
 #define USBD_LPM_ENABLED 0
 #define USE_RTOS         0U

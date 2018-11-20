@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>1</tvExp>
+        <tvExp>0</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -1190,7 +1190,7 @@
 
   <Group>
     <GroupName>common</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1249,8 +1249,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Common\Wave.cpp</PathWithFileName>
-      <FilenameWithoutPath>Wave.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\RawData.cpp</PathWithFileName>
+      <FilenameWithoutPath>RawData.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1261,8 +1261,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Wave.h</PathWithFileName>
-      <FilenameWithoutPath>Wave.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\RawData.h</PathWithFileName>
+      <FilenameWithoutPath>RawData.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1297,8 +1297,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\RawMessage.cpp</PathWithFileName>
-      <FilenameWithoutPath>RawMessage.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\Common\Wave.cpp</PathWithFileName>
+      <FilenameWithoutPath>Wave.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1309,8 +1309,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\RawMessage.h</PathWithFileName>
-      <FilenameWithoutPath>RawMessage.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\Wave.h</PathWithFileName>
+      <FilenameWithoutPath>Wave.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

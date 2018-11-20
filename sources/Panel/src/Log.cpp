@@ -41,7 +41,7 @@ void Log::Write(TypeTrace::E type, char *format, ...)
     if (type == TypeTrace::Error)
     {
         buffer[0] = 0;
-        strcat(buffer, "!!! ERROR !!! ");
+        std::strcat(buffer, "!!! ERROR !!! ");
         while (*pointer++) {};
         ++pointer;
     }
@@ -71,16 +71,16 @@ void Log::Trace(TypeTrace::E type, const char *module, const char *func, int num
     message[0] = 0;
     if (type == TypeTrace::Error)
     {
-        strcat(message, "!!!ERROR!!! ");
+        std::strcat(message, "!!!ERROR!!! ");
     }
     else if (type == TypeTrace::Info)
     {
-        strcat(message, "            ");
+        std::strcat(message, "            ");
     }
-    strcat(message, module);
-    strcat(message, " ");
-    strcat(message, func);
-    strcat(message, numBuffer);
+    std::strcat(message, module);
+    std::strcat(message, " ");
+    std::strcat(message, func);
+    std::strcat(message, numBuffer);
     Console::AddString(message);
     Console::AddString(buffer);
     if(loggerUSB)

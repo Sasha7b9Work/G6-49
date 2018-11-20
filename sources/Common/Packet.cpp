@@ -23,7 +23,7 @@ void Packet::Create(uint8 *buffer, uint size)
 {
     if (size <= MAX_SIZE_DATA_FIELD)
     {
-        memcpy(DataField(), buffer, size);
+        std::memcpy(DataField(), buffer, size);
         FillServiceField(size);
     }
     else
@@ -50,7 +50,7 @@ void Packet::FillServiceField(uint sizeData)
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Packet::IsEquals(Packet *rhs) const
 {
-    return memcmp((void *)&data, &rhs->data, sizeof(Data)) == 0;
+    return std::memcmp((void *)&data, &rhs->data, sizeof(Data)) == 0;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

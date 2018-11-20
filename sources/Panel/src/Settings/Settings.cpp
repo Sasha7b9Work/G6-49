@@ -148,7 +148,7 @@ Settings& Settings::operator=(const Settings &rhs)
 {
     if(this != &rhs)
     {
-        memcpy(this, &rhs, sizeof(Settings));
+        std::memcpy(this, &rhs, sizeof(Settings));
     }
     return *this;
 }

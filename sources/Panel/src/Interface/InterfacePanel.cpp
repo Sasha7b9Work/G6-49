@@ -28,7 +28,7 @@ void Interface::Send(const Buffer &buffer)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Send(RawMessage *message)
+void Interface::Send(RawData *message)
 {
     Send(message->Data(), message->Size());
 }

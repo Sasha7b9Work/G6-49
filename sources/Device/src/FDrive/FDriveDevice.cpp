@@ -206,7 +206,7 @@ uint FDrive::NumBytesForSend()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 *FDrive::GetDataForSend(uint8 *buffer)
 {
-    memcpy(buffer, bufferForSend, numBytesForSend);
+    std::memcpy(buffer, bufferForSend, numBytesForSend);
     std::free(bufferForSend);
     numBytesForSend = 0;
     return buffer;
@@ -225,8 +225,8 @@ void FDrive::HandlerInterface()
         uint8 *buffer = (uint8 *)std::malloc(1 + 4 + 4);
 
         buffer[0] = Command::FDrive_NumDirsAndFiles;
-        memcpy(buffer + 1, &numDirs, 4);
-        memcpy(buffer + 5, &numFiles, 4);
+        std::memcpy(buffer + 1, &numDirs, 4);
+        std::memcpy(buffer + 5, &numFiles, 4);
         Interface::Send(buffer, 9);
 
         std::free(buffer);
@@ -243,8 +243,8 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
     *numFiles = 0;
 
     char nameDir[_MAX_LFN + 1];
-    memcpy(nameDir, (void *)fullPath, strlen(fullPath));
-    nameDir[strlen(fullPath)] = '\0';
+    std::memcpy(nameDir, (void *)fullPath, std::strlen(fullPath));
+    nameDir[std::strlen(fullPath)] = '\0';
 
     if (f_opendir(&dir, nameDir) == FR_OK)
     {
