@@ -12,11 +12,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Transceiver::Send(Packet *packet)
 {
-    Timer::PauseOnTime(1000);
-    LOG_WRITE_FINALIZE("");
-    packet->Log();
-    
-    uint start = TIME_MS;
+    Timer::PauseOnTime(100);
 
     SPI4_::WaitFalling();                                               // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
@@ -36,11 +32,11 @@ bool Transceiver::Send(Packet *packet)
             return false;
         }
     }
-    
-    uint time = TIME_MS - start;
-    LOG_WRITE_FINALIZE("Транзакция успешно завершена за %d мс", time);
-    packet->Log();
-    recvPacket.Log();
+
+    if (!recvPacket.IsEquals(packet))
+    {
+        LOG_WRITE_FINALIZE("Пакеты не совпадают");
+    }
 
     return recvPacket.IsEquals(packet);                                 // Возвращаем false, если переданные и принятые данные не совпадают
 }

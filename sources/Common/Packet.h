@@ -20,6 +20,8 @@ public:
     Packet();
     /// Создаёт пакет из передаваемых данных
     void CreateNew(uint8 *data, uint size);
+
+    void CopyFrom(const Packet *packet);
     /// Указатель на начало пакета
     uint8 *Begin();
     /// Размер пакета
@@ -30,6 +32,8 @@ public:
     uint8 *DataField();
 
     void Log() const;
+
+    void Modify();
 
 private:
     /// Заполнить служебное поле значениями

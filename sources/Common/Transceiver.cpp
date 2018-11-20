@@ -18,8 +18,5 @@ void Transceiver::Send(uint8 *buffer, uint size)
     /// Повторяем передачу, пока не передадим
     while (!Send(&packet))
     {
-        //LOG_WRITE_FINALIZE("Ошибка передачи");
     }
-    
-    LOG_WRITE_FINALIZE("Успешная передача");
 }

@@ -347,13 +347,15 @@ void Interface::Update()
 
     if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))                // Принимаем пакет данных
     {
-        transPacket = recvPacket;
+        transPacket.CopyFrom(&recvPacket);
 
         if (SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), TIME))         // И пересылаем его обратно
         {
             if (SPI1_::Receive(recvPacket.Begin(), recvPacket.Size(), TIME))        // Если оба принятых пакета совпали - данные прияты верно
             {
-                if(SPI1_::Transmit(recvPacket.Begin(), recvPacket.Size(), TIME))    // Пересылаем принятые данные снова в панель, чтобы подвердить успешный приём
+                transPacket.CopyFrom(&recvPacket);
+
+                if(SPI1_::Transmit(transPacket.Begin(), transPacket.Size(), TIME))    // Пересылаем принятые данные снова в панель, чтобы подвердить успешный приём
                 {
                     commands[recvPacket.DataField()[0]].func();                  
                 }
