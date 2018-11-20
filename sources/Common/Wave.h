@@ -69,7 +69,7 @@ protected:
     /// Указатель на фрорму, которой принадлежит параметр
     Form *form;
 
-    ParameterBase(Type t) : type(t), parent(0) {};
+    ParameterBase(Type t) : form(0), type(t), parent(0) {};
 
     Type type;
     /// Если этот параметр вложенный, то здесь адрес родителя

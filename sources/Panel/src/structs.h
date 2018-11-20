@@ -46,7 +46,7 @@ union BitSet32
     };
     BitSet32(uint value) : word(value)  { }
 
-    BitSet32(const uint8 *buffer = 0)
+    BitSet32(const uint8 *buffer = 0) : word(0)
     {
         if (buffer)
         {
