@@ -7,8 +7,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-extern const PageBase pageCalibrationA;
-Page *PageSignals::PageCalibration::PageA::pointer = (Page *)&pageCalibrationA;
+extern const PageBase pageCalibrationB;
+Page *PageSignals::PageCalibration::PageB::pointer = (Page *)&pageCalibrationB;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,11 +22,11 @@ static void OnPress_NegativeAD9952(bool)
 
 }
 
-DEF_GOVERNOR( gNegativeAD9952,                                                                                                       //--- мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 -5б ---
+DEF_GOVERNOR( gNegativeAD9952,                                                                                                       //--- мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 -5б ---
     "AD9952 -5б", "AD9952 -5V",
     "мЮЯРПНИЙЮ СПНБМЪ -5б AD9952",
     "Level setting -5V AD9952",
-    CAL_AD9952_OFFSET_NEG, -128, 128, pageCalibrationA, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
+    CAL_AD9952_OFFSET_NEG, -128, 128, pageCalibrationB, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
 )
 
 
@@ -41,11 +41,11 @@ static void OnPress_PositiveAD9952(bool)
 
 }
 
-DEF_GOVERNOR( gPositiveAD9952,                                                                                                       //--- мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 +5б ---
+DEF_GOVERNOR( gPositiveAD9952,                                                                                                       //--- мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 +5б ---
     "AD9952 +5б", "AD9952 +5V",
     "мЮЯРПНИЙЮ СПНБМЪ +5б AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_POS, -128, 128, pageCalibrationA, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
+    CAL_AD9952_OFFSET_POS, -128, 128, pageCalibrationB, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
 )
 
 
@@ -60,11 +60,11 @@ static void OnPress_ZeroAD9925(bool)
 
 }
 
-DEF_GOVERNOR( gZeroAD9952,                                                                                                            //--- мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 0б ---
+DEF_GOVERNOR( gZeroAD9952,                                                                                                            //--- мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 0б ---
     "AD9952 0б", "AD9952 0V",
     "мЮЯРПНИЙЮ СПНБМЪ +5б AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_ZERO, -128, 128, pageCalibrationA, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9925
+    CAL_AD9952_OFFSET_ZERO, -128, 128, pageCalibrationB, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9925
 )
 
 
@@ -79,22 +79,22 @@ static void OnPress_AmplitudeAD9952(bool)
 
 }
 
-DEF_GOVERNOR( gAmplitudeAD9952,                                                                                                   //--- мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 пЮГЛЮУ ---
+DEF_GOVERNOR( gAmplitudeAD9952,                                                                                                   //--- мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 пЮГЛЮУ ---
     "AD9952 пЮГЛЮУ", "AD9952 Amplitude",
     "мЮЯРПНИЙЮ ПЮГЛЮУЮ AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE, -128, 128, pageCalibrationA, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
+    CAL_AD9952_AMPLITUDE, -128, 128, pageCalibrationB, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageCalibrationA,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю A ---
-    "йюкхапнбйю A", "CALIBRATION A",
+DEF_PAGE_4( pageCalibrationB,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю B ---
+    "йюкхапнбйю B", "CALIBRATION B",
     "", "",
-    &gPositiveAD9952,       ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 +5б
-    &gZeroAD9952,           ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 0б
-    &gNegativeAD9952,       ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 -5б
-    &gAmplitudeAD9952,      ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 ПЮГЛЮУ
-    Page::Settings_CalibrationA, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
+    &gPositiveAD9952,       ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 +5б
+    &gZeroAD9952,           ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 0б
+    &gNegativeAD9952,       ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 -5б
+    &gAmplitudeAD9952,      ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 ПЮГЛЮУ
+    Page::Settings_CalibrationB, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )

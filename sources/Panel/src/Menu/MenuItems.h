@@ -145,6 +145,7 @@ public:
          Main,
          Settings_Load,
          Settings_CalibrationA,
+         Settings_CalibrationB,
          Number
     };
     

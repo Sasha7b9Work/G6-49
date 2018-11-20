@@ -103,16 +103,17 @@ static bool OnKey(Control key)
     return false;
 }
 
-DEF_PAGE_7( pageSignals,
+DEF_PAGE_8( pageSignals,
     "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬", "SIGNAL SETTINGS",
     "", "",
-    &cChannel,                              ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
-    &cFormA,                                ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘ÓÏ‡
-    &cParameters,                           ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
-    &bChangeParameter,                      ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
-    PageSignals::PageLoad::pointer,         ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿
-    &cTypeTune,                             ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «‡Ò˚ÎÍË
-    PageSignals::PageCalibrationA::pointer,  ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿
+    &cChannel,                                      ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
+    &cFormA,                                        ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘ÓÏ‡
+    &cParameters,                                   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
+    &bChangeParameter,                              ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
+    PageSignals::PageLoad::pointer,                 ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿
+    &cTypeTune,                                     ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «‡Ò˚ÎÍË
+    PageSignals::PageCalibration::PageA::pointer,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
+    PageSignals::PageCalibration::PageB::pointer,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B
     Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
 )
 

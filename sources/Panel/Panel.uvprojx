@@ -2087,14 +2087,19 @@
               <FilePath>.\src\Menu\Pages\PageSignals\PageSignals.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageSignals_Load.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_Load.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageSignals_CalibrationA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_CalibrationA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals_CalibrationB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_CalibrationB.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals_Load.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_Load.cpp</FilePath>
             </File>
           </Files>
         </Group>

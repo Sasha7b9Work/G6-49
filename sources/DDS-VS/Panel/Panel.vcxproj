@@ -273,6 +273,7 @@
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_CalibrationA.cpp" />
+    <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_CalibrationB.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_Load.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
