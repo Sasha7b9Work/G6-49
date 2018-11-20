@@ -21,7 +21,7 @@ void PageSignals::PageCalibration::PrepareForAmplitudeAD9952(Chan /*ch*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E)
+void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 {
     static const struct StructCal
     {
@@ -38,7 +38,7 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E)
         &CAL_DDS_MIN(Chan::A)
     };
 
-    RawData message(4);
+    RawData message(4, (uint8)Command::SetKoeffCalibration, ch, (uint8)koeff, (uint8)values[koeff].pointer[ch]);
     Interface::Send(&message);
 }
 
