@@ -177,9 +177,7 @@ public:
         Number
     } value;
 
-    ParameterValue(int v = Number) : ParameterBase(Value),
-        value((E)v), hightLightDigit(0), posComma(0), sign('+'), min(0.0f), max(0.0f), inNumLockMode(false)
-    {};
+    ParameterValue(int v = Number) : ParameterBase(Value), value((E)v), inNumLockMode(false) {};
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 
@@ -243,7 +241,7 @@ public:
         Number
     } value;
 
-    Form(E v = Number) : value(v), wave(0), params(0), numParams(0), currentParam(0), oldParams(0) { };
+    Form(E v = Number) : value(v), wave(0), currentParam(0)   { };
 
     Form(E v, ParameterBase *param[], Wave *w);
     /// ¬озвращает человеческое название формы сигнала
