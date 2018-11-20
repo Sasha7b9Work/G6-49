@@ -216,7 +216,7 @@ DEF_GOVERNOR( gLevel,                                                           
     "Уровень", "Level",
     "Подстройка уровня синхронизации",
     "Synchronization level adjustment",
-    FREQ_LEVEL, -100, 100, pFrequencyCounter, FuncActive, OnChange_FreqLevel, EmptyFuncVV
+    FREQ_LEVEL, -100, 100, pFrequencyCounter, FuncActive, OnChange_FreqLevel, EmptyFuncVV, 0
 )
 
 
@@ -230,7 +230,7 @@ DEF_GOVERNOR( gHysteresis,                                                      
     "Гистерезис", "Hysteresis",
     "Задаёт гистерезис для уменьшения влияния помех на точность измерений",
     "Sets hysteresis to reduce the effect of interference on measurement accuracy",
-    FREQ_HYSTERESIS, 0, 100, pFrequencyCounter, FuncActive, OnChange_Hysteresis, EmptyFuncVV
+    FREQ_HYSTERESIS, 0, 100, pFrequencyCounter, FuncActive, OnChange_Hysteresis, EmptyFuncVV, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

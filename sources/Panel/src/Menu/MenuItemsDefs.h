@@ -23,9 +23,9 @@ static const TimeBase name = { TypeItem::E::Time, 0, false, Page::NoPage, &keepe
     &cur, &h, &mi, &s, &mo, &d, &y };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define DEF_GOVERNOR(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw)              \
+#define DEF_GOVERNOR(name, titleRU, titleEN, hintRU, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw, funcPress)   \
 static const GovernorBase name = { Item::Type::Governor, 0, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},  \
-    min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw};
+    min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw, funcPress};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_GOVERNOR_COLOR(name, titleRU, titleEN, hintRU, hintEN, colorType, keeper)                                                       \

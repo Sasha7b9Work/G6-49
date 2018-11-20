@@ -273,16 +273,12 @@ class GovernorBase
 {
 public:
     COMMON_PART_MENU_ITEM;
-    /// Минмальное значение, которое может принимать регулятор.
     int16   minValue;
-    /// Максимальное значение.
     int16   maxValue;
-
     int16  *cell;
-    /// Функция, которую нужно вызывать после того, как значение регулятора изменилось.
     pFuncVV funcOfChanged;
-    /// Функция, которая вызывается перед отрисовкой
     pFuncVV funcBeforeDraw;
+    pFuncVB funcPress;
 };
 
 class Governor : public Item
@@ -298,6 +294,8 @@ public:
     pFuncVV funcOfChanged;
     /// Функция, которая вызывается перед отрисовкой
     pFuncVV funcBeforeDraw;
+    /// Функция вызывается при нажатие на item. Параметр bool == true означает, что item устанавливается активным
+    pFuncVB funcPress;
     /// Запускает процессс анимации инкремента или декремента элемента меню типа Governor (в зависимости от знака delta).
     void StartChange(int detla);
     /// Возвращает следующее большее значение, которое может принять governor.

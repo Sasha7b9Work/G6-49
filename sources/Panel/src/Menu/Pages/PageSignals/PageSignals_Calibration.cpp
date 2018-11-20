@@ -17,11 +17,16 @@ static void OnChange_NegativeAD9952()
 
 }
 
+static void OnPress_NegativeAD9952(bool)
+{
+
+}
+
 DEF_GOVERNOR( gNegativeAD9952,                                                                                                         //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА - AD9952 -5В ---
     "AD9952 -5В", "AD9952 -5V",
     "Настройка уровня -5В AD9952",
     "Level setting -5V AD9952",
-    CAL_AD9952_OFFSET_NEG, -128, 128, pageCalibration, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV
+    CAL_AD9952_OFFSET_NEG, -128, 128, pageCalibration, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
 )
 
 
@@ -31,11 +36,16 @@ static void OnChange_PositiveAD9952()
 
 }
 
+static void OnPress_PositiveAD9952(bool)
+{
+
+}
+
 DEF_GOVERNOR( gPositiveAD9952,                                                                                                         //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА - AD9952 +5В ---
     "AD9952 +5В", "AD9952 +5V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_POS, -128, 128, pageCalibration, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV
+    CAL_AD9952_OFFSET_POS, -128, 128, pageCalibration, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
 )
 
 
@@ -45,11 +55,16 @@ static void OnChange_ZeroAD9952()
 
 }
 
+static void OnPress_ZeroAD9925(bool)
+{
+
+}
+
 DEF_GOVERNOR( gZeroAD9952,                                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА - AD9952 0В ---
     "AD9952 0В", "AD9952 0V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_ZERO, -128, 128, pageCalibration, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV
+    CAL_AD9952_OFFSET_ZERO, -128, 128, pageCalibration, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9925
 )
 
 
@@ -59,11 +74,16 @@ static void OnChange_AmplitudeAD9952()
 
 }
 
+static void OnPress_AmplitudeAD9952(bool)
+{
+
+}
+
 DEF_GOVERNOR( gAmplitudeAD9952,                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА - AD9952 Размах ---
     "AD9952 Размах", "AD9952 Amplitude",
     "Настройка размаха AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE, -128, 128, pageCalibration, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV
+    CAL_AD9952_AMPLITUDE, -128, 128, pageCalibration, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
 

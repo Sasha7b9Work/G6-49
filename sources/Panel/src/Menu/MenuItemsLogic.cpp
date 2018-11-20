@@ -171,6 +171,10 @@ void Governor::Press(Control control)
             if (!Menu::GetCurrentItem())
             {
                 Menu::SetCurrentItem(this);
+                if (funcPress)
+                {
+                    funcPress(true);
+                }
             }
             else if (Menu::GetCurrentItem() == this)
             {
