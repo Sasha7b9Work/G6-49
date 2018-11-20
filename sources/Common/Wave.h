@@ -257,7 +257,9 @@ public:
         value(v),
         wave(0),
         currentParam(0),
-        oldNumParams(0)
+        oldParams(0),
+        oldNumParams(0),
+        oldCurrentParams(0)
     { };
 
     Form(E v, ParameterBase *param[], Wave *w);
