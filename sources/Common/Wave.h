@@ -186,8 +186,8 @@ public:
         /// \todo Не получается так почему-то
         //min(std::numeric_limits<float>::min()),
         //max(std::numeric_limits<float>::max()),
-        min(-1e30f),
-        max(1e30f),
+        //min(-1e30f),
+        //max(1e30f),
         inNumLockMode(false)
     {};
 
