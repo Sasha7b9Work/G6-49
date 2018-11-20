@@ -10,6 +10,7 @@
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Modules/SPI.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Settings/Settings.h"
 #include "Utils/Array.h"
@@ -110,9 +111,9 @@ void Interface::LoadFormDDS()
     uint8 temp[2];
 
     // Сюда примем количество байт
-    CPU::SPI1_::Receive(temp, 2);
+    SPI1_::Receive(temp, 2);
 
-    CPU::SPI1_::Receive(FPGA::DataDDS(ch), FPGA_NUM_POINTS * 2);
+    SPI1_::Receive(FPGA::DataDDS(ch), FPGA_NUM_POINTS * 2);
 
     Generator::SetFormWave(ch, Form::DDS);
 }
@@ -132,7 +133,7 @@ void Interface::Test()
     uint size = 1 + 4 + 4 + array.Size();
     
     // Передаем количество байт
-    CPU::SPI1_::Transmit(&size, 2);
+    SPI1_::Transmit(&size, 2);
     
     // А теперь передаем сами байты
     
@@ -144,9 +145,9 @@ void Interface::Test()
     BitSet32 bsCRC(array.CRC32());
     bsCRC.WriteToBuffer(buffer + 5);
     
-    CPU::SPI1_::Transmit(buffer, 9);
+    SPI1_::Transmit(buffer, 9);
     
-    CPU::SPI1_::Transmit(array.Data(), array.Size());
+    SPI1_::Transmit(array.Data(), array.Size());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -344,7 +345,7 @@ void Interface::Update()
 
     Packet packet;
 
-    if (CPU::SPI1_::Receive(packet.Begin(), packet.Size(), 100))
+    if (SPI1_::Receive(packet.Begin(), packet.Size(), 100))
     {
 
     }
@@ -384,9 +385,9 @@ void Interface::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(void *buffer, uint size)
 {
-    CPU::SPI1_::Transmit(&size, 2);
+    SPI1_::Transmit(&size, 2);
 
-    CPU::SPI1_::Transmit(buffer, size);
+    SPI1_::Transmit(buffer, size);
 }
 
 

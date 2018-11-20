@@ -52,6 +52,9 @@
     <Filter Include="libs\USBD">
       <UniqueIdentifier>{b1da9dc2-fc74-4371-8c53-04fbe9bd067a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hardware\Modules">
+      <UniqueIdentifier>{69cf0644-8960-4fc2-bbad-8e132fc56b96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -270,6 +273,9 @@
     <ClInclude Include="..\..\common\RawData.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Hardware\Modules\SPI.h">
+      <Filter>Hardware\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -430,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="..\..\common\RawData.cpp">
       <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Modules\SPI.cpp">
+      <Filter>Hardware\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

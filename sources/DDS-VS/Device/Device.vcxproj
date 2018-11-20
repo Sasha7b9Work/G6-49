@@ -191,6 +191,7 @@
     <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Device\src\Hardware\EEPROM.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\Modules\SPI.h" />
     <ClInclude Include="..\..\Device\src\Hardware\stm32.h" />
     <ClInclude Include="..\..\Device\src\Hardware\stm407.h" />
     <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
@@ -284,6 +285,7 @@
     <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Modules\SPI.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Timer.cpp">

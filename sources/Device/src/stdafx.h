@@ -18,6 +18,7 @@
 #include "Hardware/Timer4XX.h"
 #include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
+#include "Hardware/Modules/SPI.h"
 
 #include "Interface/InterfaceDevice.h"
 
