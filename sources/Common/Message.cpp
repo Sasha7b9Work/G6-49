@@ -49,34 +49,23 @@ bool Message::CreateFromMessage(Message *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Message::Put8(uint8 data)
 {
-    if (used < allocated)
-    {
-        buffer[used] = data;
-        used += sizeof(data);
-    }
+     buffer[used] = data;
+     used += sizeof(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Message::Put32(uint data)
 {
-    if (used < allocated)
-    {
-        BitSet32 bs(data);
-        bs.WriteToBuffer(buffer + used);
-        used += sizeof(data);
-    }
+     BitSet32 bs(data);
+     bs.WriteToBuffer(buffer + used);
+     used += sizeof(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 Message::TakeByte()
 {
-    uint8 result = 0xff;
-
-    if (taken < used)
-    {
-        result = buffer[taken];
-        taken += sizeof(result);
-    }
+    uint8 result = buffer[taken];
+    taken += sizeof(result);
 
     return result;
 }
@@ -84,14 +73,9 @@ uint8 Message::TakeByte()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint Message::TakeWord()
 {
-    uint result = 0xffffffff;
-
-    if (taken < used)
-    {
-        BitSet32 bs(buffer + taken);
-        result = bs.word;
-        taken += sizeof(result);
-    }
+    BitSet32 bs(buffer + taken);
+    uint result = bs.word;
+    taken += sizeof(result);
 
     return result;
 }
@@ -99,14 +83,9 @@ uint Message::TakeWord()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint64 Message::TakeDoubleWord()
 {
-    uint64 result = 0xffffffffffffffff;
-
-    if (taken < used)
-    {
-        BitSet64 bs(buffer + taken);
-        result = bs.dword;
-        taken += sizeof(result);
-    }
+    BitSet64 bs(buffer + taken);
+    uint64 result = bs.dword;
+    taken += sizeof(result);
 
     return result;
 }
@@ -114,14 +93,9 @@ uint64 Message::TakeDoubleWord()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Message::TakeFloat()
 {
-    float result = -1.0f;
-
-    if (taken < used)
-    {
-        BitSet32 bs(buffer + taken);
-        result = bs.floatValue;
-        taken += sizeof(result);
-    }
+    BitSet32 bs(buffer + taken);
+    float result = bs.floatValue;
+    taken += sizeof(result);
 
     return result;
 }
