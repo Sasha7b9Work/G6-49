@@ -14,6 +14,18 @@ bool Transceiver::Send(Message *message)
 {
     LOG_WRITE_FINALIZE("Передаю %d байт. Команда %d", message->Size(), *message->Data());
 
+    /*
+    static uint time = 0;
+
+    if (message->Size() > 100)
+    {
+        while (TIME_MS - time < 5000)
+        {
+        }
+
+        time = TIME_MS;
+    }
+    */
 
     SPI4_::WaitFalling();                                               // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
@@ -25,28 +37,39 @@ bool Transceiver::Send(Message *message)
 
         if (!SPI4_::Transmit(&size, 4))                                 // Передаём размер передаваемых данных
         {
-            break;
+            LOG_WRITE_FINALIZE("Не могу передать размер");
         }
 
         if (!SPI4_::Transmit(message->Data(), message->Size()))         // Передаём непосредственно данные
         {
-            break;
+            LOG_WRITE_FINALIZE("Не могу передать данные");
         }
 
         uint newSize = 0;
         if (!SPI4_::Receive(&newSize, 4))                               // Теперь принимаем размер данных, которые хочет передать нам устройство
         {
-            break;
+            LOG_WRITE_FINALIZE("Не могу принять размер");
         }
 
         if (newSize == message->Size())
         {
             result = true;
         }
+        else
+        {
+            result = false;
+            LOG_WRITE_FINALIZE("Размеры не совпадают %d %d", message->Size(), newSize);
+        }
 
         if (SPI4_::ReceiveAndCompare(message->Data(), message->Size()))
         {
             result = true;
+        }
+        else
+        {
+            result = false;
+            LOG_WRITE_FINALIZE("Сравнение данных прошло неудачно");
+            Timer::PauseOnTime(1000);
         }
     }
 

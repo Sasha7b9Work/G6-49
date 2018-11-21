@@ -65,8 +65,8 @@ struct Command
           // 0                   1        2
           // SetManipulationMode NUM_CHAN mode
              SetManipulationMode,
-          // 0            1       2...8193
-          // LoadFormDDS, NumChan Points
+          // 0            1       2                                  3...
+          // LoadFormDDS, NumChan Ќомер_половины_точек_дл€_передачи  Points
              LoadFormDDS,               ///< «агружает точки сигнала произовольной формы
           // 0            1...5
           // FreqMeasure, измерение

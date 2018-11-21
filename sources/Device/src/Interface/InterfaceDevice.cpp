@@ -77,7 +77,7 @@ commands[Command::Number] =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Update()
 {
-#define TIMEOUT 50
+#define TIMEOUT 100
 
     CPU::SetReady();
 
@@ -88,31 +88,33 @@ void Interface::Update()
         Message first;              // Сюда принимаем первое сообщение
         Message second;             // Сюда принимаем второе сообщение
 
-        first.AllocateMemory(size);
-
-        if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                        // Принимаем данные
+        if (first.AllocateMemory(size))
         {
-            if (SPI1_::Transmit(&size, 4, TIMEOUT))                                     // Передаём его размер
+            if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                        // Принимаем данные
             {
-                if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))               // И данные
+                if (SPI1_::Transmit(&size, 4, TIMEOUT))                                     // Передаём его размер
                 {
-                    if (SPI1_::Receive(&size, 4))
+                    if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))               // И данные
                     {
-                        second.AllocateMemory(size);                                    // Второй раз сообщение будем принимать в этот буфер
-
-                        if (SPI1_::Receive(second.Data(), second.Size(), TIMEOUT))      // Что и делаем
+                        if (SPI1_::Receive(&size, 4))
                         {
-                            size = second.Size();
-
-                            if (SPI1_::Transmit(&size, 4, TIMEOUT))
+                            if (second.AllocateMemory(size))                                    // Второй раз сообщение будем принимать в этот буфер
                             {
-                                if (SPI1_::Transmit(second.Data(), second.Size(), TIMEOUT))
+                                if (SPI1_::Receive(second.Data(), second.Size(), TIMEOUT))      // Что и делаем
                                 {
-                                    if (second.IsEquals(&first))                                // Проверяем, совпали ли оба принятых сообщения
-                                    {
-                                        uint8 *recv = first.Data();
+                                    size = second.Size();
 
-                                        commands[recv[0]].func(recv);                           // И, если совпали, передаём сообщение на выполение
+                                    if (SPI1_::Transmit(&size, 4, TIMEOUT))
+                                    {
+                                        if (SPI1_::Transmit(second.Data(), second.Size(), TIMEOUT))
+                                        {
+                                            if (second.IsEquals(&first))                                // Проверяем, совпали ли оба принятых сообщения
+                                            {
+                                                uint8 *recv = first.Data();
+
+                                                //commands[recv[0]].func(recv);                           // И, если совпали, передаём сообщение на выполение
+                                            }
+                                        }
                                     }
                                 }
                             }

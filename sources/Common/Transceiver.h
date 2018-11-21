@@ -6,6 +6,9 @@
 class Transceiver
 {
 public:
+
+    static void Test();
+
     static void Send(uint8 *buffer, uint size);
 
 private:

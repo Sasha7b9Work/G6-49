@@ -57,7 +57,7 @@ void SPI4_::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool SPI4_::Transmit(const void *buffer, uint size)
 {
-	if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 100) != HAL_OK)
+	if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 1000) != HAL_OK)
 	{
 		LOG_WRITE_FINALIZE("Ошибка передачи данных");
 		return false;
@@ -86,7 +86,7 @@ bool SPI4_::ReceiveAndCompare(const void *compared, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        if (Receive(&byte, 1, 5) && data[i] == byte)
+        if (Receive(&byte, 1, 100) && data[i] == byte)
         {
             continue;
         }
