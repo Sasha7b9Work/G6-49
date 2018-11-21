@@ -138,7 +138,13 @@ void Interface::SendData(uint8 *)
 
     if (CreateMessageForSend(&message))
     {
+        Timer::PauseOnTime(2);
+
+        CPU::SetReady();
+
         Transceiver::Transmit(&message);
+
+        CPU::SetBusy();
     }
 }
 

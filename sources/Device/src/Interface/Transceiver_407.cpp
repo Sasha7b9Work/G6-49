@@ -2,10 +2,14 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Transceiver.h"
+#include "Hardware/Modules/SPI.h"
 #endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Transmit(Message *)
+void Transceiver::Transmit(Message *message)
 {
+    SPI1_::Transmit(message->Size(), 10);
+
+    SPI1_::Transmit(message->Data(), message->Size());
 }
