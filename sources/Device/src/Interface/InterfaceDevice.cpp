@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Message.h"
+#include "Transceiver.h"
 #include "InterfaceDevice.h"
 #include "FDrive/FDriveDevice.h"
 #include "Utils/Console.h"
@@ -36,7 +37,7 @@ static const struct FuncInterface
 }
 commands[Command::Number] =
 {
-/* RequestData             */ Interface::Empty,
+/* RequestData             */ Interface::SendData,
 /* EnableChannel           */ Interface::EnableChannel,
 /* SetFormWave             */ Interface::SetFormWave,
 /* SetFrequency            */ Interface::ParameterValue,
@@ -126,6 +127,34 @@ void Interface::Update()
     }
 
     CPU::SetBusy();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SendData(uint8 *)
+{
+    CPU::SetBusy();
+
+    Message message;
+
+    if (CreateMessageForSend(&message))
+    {
+        Transceiver::Transmit(&message);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Interface::CreateMessageForSend(Message *message)
+{
+    if (freqForSend != MAX_UINT)
+    {
+        message->AllocateMemory(5);
+        message->Put8(Command::FreqMeasure);
+        message->Put32(freqForSend);
+
+        return true;
+    }
+
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -366,38 +395,6 @@ void Interface::Empty(uint8 *)
 void Interface::SendFrequency(uint value)
 {
     freqForSend = value;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::UpdateOld()
-{   
-    /*
-    uint16 numBytes = 0;
-    CPU::SPI1_::Receive(&numBytes, 2);                  // Узнаём количество байт, которые хочет передать панель
-
-    if(numBytes)
-    {
-        ResizeRecieveBuffer(numBytes);                  // Устанавливаем требуемый размер буфера
-
-        CPU::SPI1_::Receive(recv, numBytes);            // Принимаем данные
-
-        if(recv[0] < Command::Number)
-        {
-            if(recv[0] == Command::RequestData)         // Если запрос на передачу данных
-            {
-                SendData();                             // То засыалем данные
-            }
-            else
-            {
-                commands[recv[0]].func();               // Иначе обрабатываем команду
-            }
-        }
-        else
-        {
-            Console::AddFormatString("Принята неправильная команда %d", recv[0]);
-        }
-    }
-    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

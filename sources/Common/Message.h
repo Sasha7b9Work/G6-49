@@ -17,7 +17,8 @@ public:
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
     /// Положить байт
-    void Put(uint8 data);
+    void Put8(uint8 data);
+    void Put32(uint data);
     /// Освободить память
     void FreeMemory();
     /// Возвращает указатель на данные

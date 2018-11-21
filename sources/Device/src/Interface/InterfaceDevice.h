@@ -1,5 +1,6 @@
 #pragma once
 #include "Command.h"
+#include "Message.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,10 +32,12 @@ public:
     };
 
     static void Update();
-    
-    static void UpdateOld();
     /// ѕослать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
+
+    static void SendData(uint8 *);
+    /// —оздаЄт сообщение дл€ передачи в случае наличи€ данных дл€ передачи
+    static bool CreateMessageForSend(Message *message);
 
     static void Empty(uint8 *);
 

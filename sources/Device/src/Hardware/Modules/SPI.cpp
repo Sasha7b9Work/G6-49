@@ -56,3 +56,9 @@ bool SPI1_::Transmit(void *buffer, uint size, uint timeout)
 {
     return HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, timeout) == HAL_OK;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool SPI1_::Transmit(uint value, uint timeout)
+{
+    return Transmit(&value, 4, timeout);
+}

@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
+#include "structs.h"
 #include "Message.h"
 #include "Hardware/CPU.h"
 #include <cstring>
@@ -44,12 +45,23 @@ bool Message::CreateFromMessage(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Put(uint8 data)
+void Message::Put8(uint8 data)
 {
     if (used < allocated)
     {
         buffer[used] = data;
         used++;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::Put32(uint data)
+{
+    if (used < allocated)
+    {
+        BitSet32 bs(data);
+        bs.WriteToBuffer(buffer + used);
+        used += 4;
     }
 }
 
