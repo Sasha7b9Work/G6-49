@@ -60,21 +60,18 @@ void Interface::Update()
 
     if (Transceiver::Receive(&message))
     {
-        Run(message.Data());
+        Run(&message);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Run(uint8 *recv)
+void Interface::Run(Message *message)
 {
-    if (*recv == Command::FreqMeasure)
+    uint8 command = message->Take8();
+
+    if (command == Command::FreqMeasure)
     {
-        BitSet32 bs;
-        for (int i = 0; i < 4; i++)
-        {
-            bs.byte[i] = recv[i + 1];
-        }
-        FrequencyMeter::SetMeasure(bs.word);
+        FrequencyMeter::SetMeasure(message->Take32());
     }
 }
 

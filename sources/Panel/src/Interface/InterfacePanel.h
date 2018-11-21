@@ -1,4 +1,5 @@
 #pragma once
+#include "Message.h"
 #include "RawData.h"
 #include "Utils/Buffer.h"
 
@@ -41,5 +42,5 @@ public:
 
 private:
     /// Выполняет команду recv
-    static void Run(uint8 *recv);
+    static void Run(Message *message);
 };
