@@ -1,6 +1,6 @@
 @echo off
 
-@echo Rebuild DDS
+@echo Rebuild DDS          ... %TIME%
 
 @echo Clean Panel ...
 

@@ -2,14 +2,14 @@
 
 @echo Build DDS
 
-@echo Build Panel DDS  ... %TIME%
+@echo Build Panel DDS      ... %TIME%
 
 c:\Keil_v5\UV4\UV4 -b ..\Panel\Panel.uvprojx -j0 -z -o Panel.out
 if ERRORLEVEL 1 goto BadPanelDDS
 
 @echo Ok!
 
-@echo Build Device DDS ... %TIME%
+@echo Build Device DDS     ... %TIME%
 
 :FinePanelDDS
 c:\Keil_v5\UV4\UV4 -b ..\Device\Device.uvprojx -j0 -z -o Device.out

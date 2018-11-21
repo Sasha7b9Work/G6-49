@@ -9,6 +9,7 @@ JLink*.*
 *.bak
 *.uvgui*.*
 archive.zip
+.suo
 
 
 doc/doxygen/KornetDDS/*
