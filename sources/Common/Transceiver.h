@@ -8,4 +8,6 @@ class Transceiver
 public:
 
     static void Send(Message *message);
+
+    static bool Receive(Message *message);
 };

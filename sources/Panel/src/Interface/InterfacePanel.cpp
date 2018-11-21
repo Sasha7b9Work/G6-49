@@ -34,65 +34,6 @@ void Interface::Send(RawData *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ProcessDataFPGA()
-{
-    /// \todo Процесс обмена прерывается иногда. Нужно проверять информацию на ошибки
-    
-    //uint8 command = Command::RequestData;
-    
-    //LOG_WRITE_FINALIZE("Делаем запрос %s", __FUNCTION__);
-    
-    uint8 command = Command::Test;
-
-    Send(&command, 1);
-
-    uint numBytes = BytesForReceive();
-    
-    //LOG_WRITE_FINALIZE("Нужно принять %d байт", numBytes);
-
-    while (numBytes > 0)         // Принятое значение означает число байт, готовых для передачи вспомогательным процессором
-    {
-        ReceiveAndRun(numBytes);
-        numBytes = BytesForReceive();
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::Request(Data *request, Data *answer)
-{
-    Send(request->GetData(), request->GetSize());
-
-    uint numBytes = BytesForReceive();  /// Узнаём количество байт для приёма
-
-    answer->Release();
-
-    if(numBytes)
-    {
-        if(answer->Init(numBytes))
-        {
-            SPI4_::Receive(answer->GetData(), answer->GetSize(), 100);
-        }
-        else
-        {
-            LOG_WRITE("Не хватает памяти для буфера");
-        }
-    }
-
-    return numBytes != 0;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Interface::BytesForReceive()
-{
-    uint numBytes = 0;
-    if(!SPI4_::Receive(&numBytes, 2, 10))
-    {
-        LOG_ERROR("Не получил размер данных. Проверьте!");
-    }
-    return numBytes;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(uint8 *buffer, uint size)
 {
     Message message;
@@ -104,8 +45,6 @@ void Interface::Send(uint8 *buffer, uint size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Update()
 {
-    return;
-
     static uint time = 0;
 
     if (TIME_MS - time < 100)
@@ -117,11 +56,30 @@ void Interface::Update()
     message.AllocateMemory(1);
     message.Put(Command::RequestData);
 
+    Transceiver::Send(&message);
 
+    if (Transceiver::Receive(&message))
+    {
+        Run(message.Data());
+    }
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::Run(uint8 *recv)
+{
+    if (*recv == Command::FreqMeasure)
+    {
+        BitSet32 bs;
+        for (int i = 0; i < 4; i++)
+        {
+            bs.byte[i] = recv[i + 1];
+        }
+        FrequencyMeter::SetMeasure(bs.word);
+    }
+}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void Interface::ReceiveAndRun(uint numBytes)
 {
     uint8 *buffer = (uint8 *)std::malloc(numBytes);
@@ -139,16 +97,7 @@ void Interface::ReceiveAndRun(uint numBytes)
             LOG_WRITE("Ошибка приёма - данные не приняты");
         }
 
-        if (*buffer == Command::FreqMeasure)
-        {
-            BitSet32 bs;
-            for (int i = 0; i < 4; i++)
-            {
-                bs.byte[i] = buffer[i + 1];
-            }
-            FrequencyMeter::SetMeasure(bs.word);
-        }
-        else if (*buffer == Command::Log)
+        if (*buffer == Command::Log)
         {
             LOG_WRITE("log");
             char buf[LENGTH_SPI_BUFFER];
@@ -189,6 +138,7 @@ void Interface::ReceiveAndRun(uint numBytes)
 
     std::free(buffer);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Interface::Data::Data(uint size, uint8 command) : data(0)

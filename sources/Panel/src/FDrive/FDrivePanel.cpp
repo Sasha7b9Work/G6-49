@@ -25,13 +25,13 @@ bool FDrive::GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles
 
     Interface::Data answer(0);                                      // Подготавливаем место для ответа
 
-    bool result = Interface::Request(&data, &answer);               // Выполняем запрос, получем ответ
+//    bool result = Interface::Request(&data, &answer);               // Выполняем запрос, получем ответ
 
     *numDirs = BitSet32(answer.GetData() + 1).word;                 // Узнаём количество каталогов
 
     *numFiles = BitSet32(answer.GetData() + 5).word;                // Узнаём количество файлов
 
-    return result;
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

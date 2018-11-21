@@ -38,14 +38,8 @@ public:
     static void Send(const Buffer &buffer);
 
     static void Send(RawData *message);
-    /// Послать запрос и ожидать ответа.
-    static bool Request(Data *request, Data *answer);
 
 private:
-    /// Принять и обработать данные от ПЛИС
-    static void ProcessDataFPGA();
-    /// Принять numBytes байт от ПЛИС и выполнить их
-    static void ReceiveAndRun(uint numBytes);
-    /// Сколько байт хочет нам передать прибор
-    static uint BytesForReceive();
+    /// Выполняет команду recv
+    static void Run(uint8 *recv);
 };
