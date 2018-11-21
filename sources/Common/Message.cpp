@@ -58,6 +58,7 @@ bool Message::AllocateMemory(uint s)
     {
         size = s;
     }
+
     return buffer != 0;
 }
 

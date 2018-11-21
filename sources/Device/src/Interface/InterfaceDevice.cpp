@@ -75,6 +75,58 @@ commands[Command::Number] =
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Interface::Update()
+{
+#define TIMEOUT 50
+
+    CPU::SetReady();
+
+    uint size = 0;
+
+    if (SPI1_::Receive(&size, 4))                                                       // Узнаём размер принимаемого сообщения
+    {
+        Message first;              // Сюда принимаем первое сообщение
+        Message second;             // Сюда принимаем второе сообщение
+
+        first.AllocateMemory(size);
+
+        if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                        // Принимаем данные
+        {
+            if (SPI1_::Transmit(&size, 4, TIMEOUT))                                     // Передаём его размер
+            {
+                if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))               // И данные
+                {
+                    if (SPI1_::Receive(&size, 4))
+                    {
+                        second.AllocateMemory(size);                                    // Второй раз сообщение будем принимать в этот буфер
+
+                        if (SPI1_::Receive(second.Data(), second.Size(), TIMEOUT))      // Что и делаем
+                        {
+                            size = second.Size();
+
+                            if (SPI1_::Transmit(&size, 4, TIMEOUT))
+                            {
+                                if (SPI1_::Transmit(second.Data(), second.Size(), TIMEOUT))
+                                {
+                                    if (second.IsEquals(&first))                                // Проверяем, совпали ли оба принятых сообщения
+                                    {
+                                        uint8 *recv = first.Data();
+
+                                        commands[recv[0]].func(recv);                           // И, если совпали, передаём сообщение на выполение
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    CPU::SetBusy();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::EnableChannel(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
@@ -317,48 +369,6 @@ void Interface::Empty(uint8 *)
 void Interface::SendFrequency(uint value)
 {
     freqForSend = value;
-}
-
-void Interface::Update()
-{
-#define TIMEOUT 10
-
-    CPU::SetReady();
-
-    uint size = 0;
-
-    if (SPI1_::Receive(&size, 4))                                                       // Узнаём размер принимаемого сообщения
-    {
-        Message first;              // Сюда принимаем первое сообщение
-        Message second;             // Сюда принимаем второе сообщение
-
-        first.AllocateMemory(size);
-
-        if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                        // Принимаем данные
-        {
-            if (SPI1_::Transmit(&size, 4, TIMEOUT))                                     // Передаём его размер
-            {
-                if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))               // И данные
-                {
-                    if (SPI1_::Receive(&size, 4))
-                    {
-                        second.AllocateMemory(size);                                    // Второй раз сообщение будем принимать в этот буфер
-
-                        if (SPI1_::Receive(second.Data(), second.Size(), TIMEOUT))      // Что и делаем
-                        {
-                            if (second.IsEquals(&first))                                // Проверяем, совпали ли оба принятых сообщения
-                            {
-                                uint8 *recv = first.Data();
-                                commands[recv[0]].func(recv);                           // И, если совпали, передаём сообщение на выполение
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    CPU::SetBusy();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -71,7 +71,6 @@ bool SPI4_::Receive(void *recv, uint size)
 {
 	if (HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100) != HAL_OK)
 	{
-		LOG_WRITE_FINALIZE("Ошибка приёма данных");
 		return false;
 	}
 
