@@ -40,6 +40,19 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 
     RawData message(4, (uint8)Command::SetKoeffCalibration, ch, (uint8)koeff, (uint8)values[koeff].pointer[ch]);
     Interface::Send(&message);
+
+    if (koeff == KoeffCal::AD9952_ZERO)
+    {
+        Generator::SetOffset(ch, 0.0f);
+    }
+    else if (koeff == KoeffCal::AD9952_POS)
+    {
+        Generator::SetOffset(ch, +5.0f);
+    }
+    else if (koeff == KoeffCal::AD9952_NEG)
+    {
+        Generator::SetOffset(ch, -5.0f);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

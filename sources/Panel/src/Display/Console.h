@@ -9,7 +9,7 @@ public:
     static void Draw();
 
 private:
-    static const int MAX_STRINGS = 20;
+    static const int MAX_STRINGS = 2;
 
     static const int MAX_SYMBOLS_IN_STRING = 64;
     /// Количество строк в консоли

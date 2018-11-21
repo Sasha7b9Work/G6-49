@@ -42,5 +42,5 @@ public:
 
 private:
     /// Выполняет команду recv
-    static void Run(Message *message);
+    static bool Run(Message *message);
 };

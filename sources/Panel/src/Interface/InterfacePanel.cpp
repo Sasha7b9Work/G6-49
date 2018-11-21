@@ -47,7 +47,7 @@ void Interface::Update()
 {
     static uint time = 0;
 
-    if (TIME_MS - time < 500)
+    if (TIME_MS - time < 100)
     {
         return;
     }
@@ -62,12 +62,16 @@ void Interface::Update()
 
     if (Transceiver::Receive(&message))
     {
-        Run(&message);
+        if (Run(&message))
+        {
+            time = 0;
+            Update();
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Run(Message *msg)
+bool Interface::Run(Message *msg)
 {
     uint8 command = msg->TakeByte();
 
@@ -77,15 +81,19 @@ void Interface::Run(Message *msg)
     else if (command == Command::FreqMeasure)
     {
         FrequencyMeter::SetMeasure(msg->TakeWord());
+        return true;
     }
     else if (command == Command::Log)
     {
         Console::AddString((pString)(msg->Data() + 1));
+        return true;
     }
     else
     {
         LOG_WRITE_FINALIZE("Поступила неизвестная команда %d", command);
     }
+
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

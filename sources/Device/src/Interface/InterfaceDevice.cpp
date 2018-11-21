@@ -134,8 +134,6 @@ void Interface::SendData(Message *)
 
     Message message;
 
-    Console::AddString("Test string");
-
     if (CreateMessageForSend(&message))
     {
         Timer::PauseOnTime(2);
@@ -245,6 +243,14 @@ void Interface::Test(Message *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetKoeffCalibration(Message *msg)
 {
+    uint8 *data = msg->Data();
+
+    char string[100];
+
+    sprintf(string, "êàí %d, koýô %d = %d", data[1], data[2], (int8)data[3]);
+
+    Console::AddString(string);
+
     msg->TakeByte();
 
     Chan ch = (Chan::E)msg->TakeByte();
