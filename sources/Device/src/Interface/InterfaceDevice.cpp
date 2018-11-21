@@ -31,9 +31,9 @@ uint  Interface::timeLastReceive = 0;
 
 static const struct FuncInterface
 {
-    typedef void(*pFuncInterfaceVpU8)(uint8 *);             // Параметром передаём указатель на принятые данные
-    pFuncInterfaceVpU8 func;
-    FuncInterface(pFuncInterfaceVpU8 f) : func(f) {};
+    typedef void(*pFuncInterfaceVpM)(Message *);             // Параметром передаём указатель на принятые данные
+    pFuncInterfaceVpM func;
+    FuncInterface(pFuncInterfaceVpM f) : func(f) {};
 }
 commands[Command::Number] =
 {
@@ -111,9 +111,7 @@ void Interface::Update()
                                         {
                                             if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
                                             {
-                                                uint8 *recv = first.Data();
-
-                                                commands[recv[0]].func(recv);                   // И, если совпали, передаём сообщение на выполение
+                                                commands[first.Data()[0]].func(&first);         // И, если совпали, передаём сообщение на выполение
                                             }
                                         }
                                     }
@@ -130,7 +128,7 @@ void Interface::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SendData(uint8 *)
+void Interface::SendData(Message *)
 {
     CPU::SetBusy();
 
@@ -164,33 +162,41 @@ bool Interface::CreateMessageForSend(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::EnableChannel(uint8 *recv)
+void Interface::EnableChannel(Message *message)
 {
-    Chan ch = (Chan::E)recv[1];
-    bool enable = recv[2] == 1;
+    message->TakeByte();
+
+    Chan ch = (Chan::E)message->TakeByte();
+
+    bool enable = (message->TakeByte() == 1);
       
     Generator::EnableChannel(ch, enable);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetPolarity(uint8 *recv)
+void Interface::SetPolarity(Message *message)
 {
-    Chan ch = (Chan::E)recv[1];
-    FPGA::SetPolarity(ch, recv[2]);
+    message->TakeByte();
+
+    Chan ch = (Chan::E)message->TakeByte();
+
+    FPGA::SetPolarity(ch, message->TakeByte());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::LoadFormDDS(uint8 *recv)
+void Interface::LoadFormDDS(Message *message)
 {
-    Chan ch = (Chan::E)recv[1];
+    message->TakeByte();
 
-    std::memcpy(FPGA::DataDDS(ch), recv + 2, FPGA_NUM_POINTS * 2);
+    Chan ch = (Chan::E)message->TakeByte();
+
+    std::memcpy(FPGA::DataDDS(ch), message->Data() + 2, FPGA_NUM_POINTS * 2);
 
     Generator::SetFormWave(ch, Form::DDS);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Interface::Test(uint8 *)
+void Interface::Test(Message *)
 {
     std::srand(TIME_MS);
     
@@ -222,9 +228,11 @@ void Interface::Test(uint8 *)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetKoeffCalibration(uint8 *recv)
+void Interface::SetKoeffCalibration(Message *msg)
 {
-    Chan ch = (Chan::E)recv[1];
+    msg->TakeByte();
+
+    Chan ch = (Chan::E)msg->TakeByte();
 
     static int16 * const values[] =
     {
@@ -235,51 +243,63 @@ void Interface::SetKoeffCalibration(uint8 *recv)
         &CAL_DDS_MIN(Chan::A)
     };
 
-    values[recv[2]][ch] = (int16)recv[3];
+    int16 *koeff = values[msg->TakeByte()];
+
+    koeff[ch] = (int16)msg->TakeByte();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetManipulation(uint8 *recv)
+void Interface::SetManipulation(Message *msg)
 {
-    Chan ch = (Chan::E)recv[1];
-    AD9952::Manipulation::SetEnabled(ch, recv[2] != 0);
+    msg->TakeByte();
+
+    Chan ch = (Chan::E)msg->TakeByte();
+
+    AD9952::Manipulation::SetEnabled(ch, msg->TakeByte() != 0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetManipulationMode(uint8 *recv)
+void Interface::SetManipulationMode(Message *msg)
 {
-    Chan ch = (Chan::E)recv[1];
-    AD9952::Manipulation::SetType(ch, recv[2]);
+    msg->TakeByte();
+
+    Chan ch = (Chan::E)msg->TakeByte();
+
+    AD9952::Manipulation::SetType(ch, msg->TakeByte());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetStartMode(uint8 *recv)
+void Interface::SetStartMode(Message *msg)
 {
-    Chan ch = (Chan::E)recv[1];
-    StartMode mode = (StartMode)recv[2];
+    msg->TakeByte();
+
+    Chan ch = (Chan::E)msg->TakeByte();
+
+    StartMode mode = (StartMode)msg->TakeByte();
+
     FPGA::SetStartMode(ch, mode);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetFormWave(uint8 *recv)
+void Interface::SetFormWave(Message *msg)
 {
-    Chan ch = (Chan::E)recv[1];
-    Form form = (Form::E)recv[2];
+    msg->TakeByte();
+
+    Chan ch = (Chan::E)msg->TakeByte();
+
+    Form form = (Form::E)msg->TakeByte();
+
     Generator::SetFormWave(ch, form);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::WriteRegister(uint8 *recv)
+void Interface::WriteRegister(Message *msg)
 {
-    Register reg = (Register::E)recv[1];
+    msg->TakeByte();
 
-    BitSet64 bs;
-    for (int i = 0; i < 8; i++)
-    {
-        bs.byte[i] = recv[i + 2];
-    }
+    Register reg = (Register::E)msg->TakeByte();
 
-    uint64 value = bs.dword;
+    uint64 value = msg->TakeDoubleWord();
 
     switch (reg.value)
     {
@@ -365,15 +385,17 @@ void Interface::WriteRegister(uint8 *recv)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ParameterValue(uint8 *recv)
+void Interface::ParameterValue(Message *msg)
 {
-    Chan ch = (Chan::E)recv[1];
-    Command command = (Command::E)recv[0];
-    Generator::SetParameter(ch, command, Buffer2Float(recv + 2));
+    Command command = (Command::E)msg->TakeByte();
+
+    Chan ch = (Chan::E)msg->TakeByte();
+    
+    Generator::SetParameter(ch, command, msg->TakeFloat());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::RunReset(uint8 *)
+void Interface::RunReset(Message *)
 {
 #ifndef WIN32
 
@@ -388,12 +410,12 @@ void Interface::RunReset(uint8 *)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ModeDebug(uint8 *)
+void Interface::ModeDebug(Message *)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Empty(uint8 *)
+void Interface::Empty(Message *)
 {
 }
 

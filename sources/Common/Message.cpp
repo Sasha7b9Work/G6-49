@@ -28,6 +28,7 @@ bool Message::CreateAllocate(uint8 *_buffer, uint _size)
     if (AllocateMemory(_size))
     {
         std::memcpy(buffer, _buffer, _size);
+        used = _size;
     }
 
     return buffer != 0;
@@ -39,6 +40,7 @@ bool Message::CreateFromMessage(Message *message)
     if (AllocateMemory(message->Size()))
     {
         std::memcpy(buffer, message->Data(), message->Size());
+        used = message->Size();
     }
 
     return buffer != 0;
@@ -50,7 +52,7 @@ void Message::Put8(uint8 data)
     if (used < allocated)
     {
         buffer[used] = data;
-        used++;
+        used += sizeof(data);
     }
 }
 
@@ -61,26 +63,26 @@ void Message::Put32(uint data)
     {
         BitSet32 bs(data);
         bs.WriteToBuffer(buffer + used);
-        used += 4;
+        used += sizeof(data);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Message::Take8()
+uint8 Message::TakeByte()
 {
     uint8 result = 0xff;
 
     if (taken < used)
     {
         result = buffer[taken];
-        taken++;
+        taken += sizeof(result);
     }
 
     return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Message::Take32()
+uint Message::TakeWord()
 {
     uint result = 0xffffffff;
 
@@ -88,7 +90,37 @@ uint Message::Take32()
     {
         BitSet32 bs(buffer + taken);
         result = bs.word;
-        taken += 4;
+        taken += sizeof(result);
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint64 Message::TakeDoubleWord()
+{
+    uint64 result = 0xffffffffffffffff;
+
+    if (taken < used)
+    {
+        BitSet64 bs(buffer + taken);
+        result = bs.dword;
+        taken += sizeof(result);
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Message::TakeFloat()
+{
+    float result = -1.0f;
+
+    if (taken < used)
+    {
+        BitSet32 bs(buffer + taken);
+        result = bs.floatValue;
+        taken += sizeof(result);
     }
 
     return result;

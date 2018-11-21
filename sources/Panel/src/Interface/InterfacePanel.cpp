@@ -67,11 +67,11 @@ void Interface::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Run(Message *message)
 {
-    uint8 command = message->Take8();
+    uint8 command = message->TakeByte();
 
     if (command == Command::FreqMeasure)
     {
-        FrequencyMeter::SetMeasure(message->Take32());
+        FrequencyMeter::SetMeasure(message->TakeWord());
     }
 }
 

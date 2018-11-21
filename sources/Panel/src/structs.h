@@ -100,4 +100,14 @@ union BitSet64
         uint8 byte6;
         uint8 byte7;
     };
+    BitSet64(const uint8 *buffer = 0) : dword(0)
+    {
+        if (buffer)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                byte[i] = buffer[i];
+            }
+        }
+    }
 };

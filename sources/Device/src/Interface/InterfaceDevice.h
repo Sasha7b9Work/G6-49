@@ -35,37 +35,37 @@ public:
     /// ѕослать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
 
-    static void SendData(uint8 *);
+    static void SendData(Message *);
     /// —оздаЄт сообщение дл€ передачи в случае наличи€ данных дл€ передачи
     static bool CreateMessageForSend(Message *message);
 
-    static void Empty(uint8 *);
+    static void Empty(Message *);
 
-    static void SetFormWave(uint8 *);
+    static void SetFormWave(Message *);
 
-    static void ParameterValue(uint8 *);
+    static void ParameterValue(Message *);
 
-    static void EnableChannel(uint8 *);
+    static void EnableChannel(Message *);
 
-    static void RunReset(uint8 *);
+    static void RunReset(Message *);
 
-    static void ModeDebug(uint8 *);
+    static void ModeDebug(Message *);
 
-    static void WriteRegister(uint8 *);
+    static void WriteRegister(Message *);
 
-    static void SetManipulation(uint8 *);
+    static void SetManipulation(Message *);
 
-    static void SetManipulationMode(uint8 *);
+    static void SetManipulationMode(Message *);
 
-    static void SetStartMode(uint8 *);
+    static void SetStartMode(Message *);
 
-    static void LoadFormDDS(uint8 *);
+    static void LoadFormDDS(Message *);
     
-    static void Test(uint8 *);
+    static void Test(Message *);
 
-    static void SetKoeffCalibration(uint8 *);
+    static void SetKoeffCalibration(Message *);
 
-    static void SetPolarity(uint8 *);
+    static void SetPolarity(Message *);
 
     static void Send(void *data, uint size);
 

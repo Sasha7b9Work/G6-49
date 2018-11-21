@@ -21,9 +21,13 @@ public:
     /// Положить слово
     void Put32(uint data);
     /// Взять байт
-    uint8 Take8();
+    uint8 TakeByte();
     /// Взять слово
-    uint Take32();
+    uint TakeWord();
+
+    uint64 TakeDoubleWord();
+
+    float TakeFloat();
     /// Освободить память
     void FreeMemory();
     /// Возвращает указатель на данные
