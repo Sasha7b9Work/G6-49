@@ -22,7 +22,7 @@ Message::~Message()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Message::CreateFromRawData(uint8 *_buffer, uint _size)
+bool Message::CreateAllocate(uint8 *_buffer, uint _size)
 {
     if (AllocateMemory(_size))
     {

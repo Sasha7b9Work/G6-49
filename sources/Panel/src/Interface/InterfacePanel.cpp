@@ -96,7 +96,7 @@ uint Interface::BytesForReceive()
 void Interface::Send(uint8 *buffer, uint size)
 {
     Message message;
-    message.CreateFromRawData(buffer, size);
+    message.CreateAllocate(buffer, size);
 
     Transceiver::Send(&message);
 }

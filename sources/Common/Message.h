@@ -10,8 +10,10 @@ public:
     ~Message();
 
     bool CreateFromMessage(Message *message);
-
-    bool CreateFromRawData(uint8 *buffer, uint size);
+    /// Создать сообщение с выделением памяти
+    bool CreateAllocate(uint8 *buffer, uint size);
+    /// Создать сообщение без выделения памяти. Используется непосредственно входной буфер
+    bool CreateUsed(uint8 *buffer, uint size);
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
     /// Положить байт
