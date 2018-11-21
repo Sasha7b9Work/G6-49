@@ -7,8 +7,5 @@ class Transceiver
 {
 public:
 
-    static void Send(uint8 *buffer, uint size);
-
-private:
-    static bool Send(Message *message);
+    static void Send(Message *message);
 };
