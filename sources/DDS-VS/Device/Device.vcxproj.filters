@@ -267,9 +267,6 @@
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h">
       <Filter>Hardware</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\common\RawData.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\Modules\SPI.h">
       <Filter>Hardware\Modules</Filter>
     </ClInclude>
@@ -433,9 +430,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Interface\Transceiver_407.cpp">
       <Filter>Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\common\RawData.cpp">
-      <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\Modules\SPI.cpp">
       <Filter>Hardware\Modules</Filter>

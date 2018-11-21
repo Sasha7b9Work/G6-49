@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "RawData.h"
 #include "Interface/InterfacePanel.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/Settings.h"

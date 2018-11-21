@@ -1,6 +1,5 @@
 #pragma once
 #include "Message.h"
-#include "RawData.h"
 #include "Utils/Buffer.h"
 
 
