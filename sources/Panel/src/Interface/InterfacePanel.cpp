@@ -67,13 +67,27 @@ void Interface::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Run(Message *message)
+void Interface::Run(Message *msg)
 {
-    uint8 command = message->TakeByte();
+    uint8 command = msg->TakeByte();
 
-    if (command == Command::FreqMeasure)
+    if (command == Command::RequestData)
     {
-        FrequencyMeter::SetMeasure(message->TakeWord());
+        LOG_WRITE_FINALIZE("Поступили пустые данные");
+    }
+    else if (command == Command::FreqMeasure)
+    {
+        LOG_WRITE_FINALIZE("Поступило новое измерение частоты");
+        FrequencyMeter::SetMeasure(msg->TakeWord());
+    }
+    else if (command == Command::Log)
+    {
+        LOG_WRITE_FINALIZE("поступила новая тестовая строка");
+        Console::AddString((pString)(msg->Data() + 1));
+    }
+    else
+    {
+        LOG_WRITE_FINALIZE("Поступила неизвестная команда %d", command);
     }
 }
 
