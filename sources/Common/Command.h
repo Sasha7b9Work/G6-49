@@ -65,6 +65,7 @@ struct Command
           // 0                   1        2
           // SetManipulationMode NUM_CHAN mode
              SetManipulationMode,
+/// \tood «десь из-за непон€тной невозможности передать 
           // 0            1       2                                  3...
           // LoadFormDDS, NumChan Ќомер_половины_точек_дл€_передачи  Points
              LoadFormDDS,               ///< «агружает точки сигнала произовольной формы

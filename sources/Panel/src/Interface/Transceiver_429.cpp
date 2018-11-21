@@ -53,23 +53,26 @@ bool Transceiver::Send(Message *message)
 
         if (newSize == message->Size())
         {
+            LOG_WRITE_FINALIZE("Размеры совпадают");
             result = true;
         }
         else
         {
             result = false;
             LOG_WRITE_FINALIZE("Размеры не совпадают %d %d", message->Size(), newSize);
+            Timer::PauseOnTime(5000);
         }
 
         if (SPI4_::ReceiveAndCompare(message->Data(), message->Size()))
         {
+            LOG_WRITE_FINALIZE("Данные совпали");
             result = true;
         }
         else
         {
             result = false;
             LOG_WRITE_FINALIZE("Сравнение данных прошло неудачно");
-            Timer::PauseOnTime(1000);
+            Timer::PauseOnTime(5000);
         }
     }
 

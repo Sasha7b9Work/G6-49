@@ -32,7 +32,7 @@ void Transceiver::Test()
 {
     Message message;
 
-    for (uint size = 11000; size < 20000; size += 1000)
+    for (uint size = 12000; size < 20000; size += 1000)
     {
         message.AllocateMemory(size);
 

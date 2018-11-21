@@ -55,9 +55,9 @@ void SPI4_::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SPI4_::Transmit(const void *buffer, uint size)
+bool SPI4_::Transmit(const void *buffer, uint size, uint timeout)
 {
-	if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, 1000) != HAL_OK)
+	if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, timeout) != HAL_OK)
 	{
 		LOG_WRITE_FINALIZE("Ошибка передачи данных");
 		return false;
