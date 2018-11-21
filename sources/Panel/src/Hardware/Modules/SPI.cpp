@@ -67,15 +67,36 @@ bool SPI4_::Transmit(const void *buffer, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SPI4_::Receive(void *recv, uint size)
+bool SPI4_::Receive(void *recv, uint size, uint timeout)
 {
-	if (HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, 100) != HAL_OK)
+	if (HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, timeout) != HAL_OK)
 	{
 		return false;
 	}
 
 	return true;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool SPI4_::ReceiveAndCompare(const void *compared, uint size)
+{
+    uint8 byte = 0;
+
+    uint8 *data = (uint8 *)compared;
+
+    for (uint i = 0; i < size; i++)
+    {
+        if (Receive(&byte, 1, 5) && data[i] == byte)
+        {
+            continue;
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SPI4_::WaitFreedom()

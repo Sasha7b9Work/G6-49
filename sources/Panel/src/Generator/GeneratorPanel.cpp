@@ -78,11 +78,13 @@ void Generator::SetFormDDS(Form *form)
 {
     Chan ch = form->GetWave()->GetChannel();
 
+    float data[FPGA_NUM_POINTS];
+#define SIZE (FPGA_NUM_POINTS * 2 + 2)
+    uint8 buffer[FPGA_NUM_POINTS * 2 + 2] = { Command::LoadFormDDS, ch };
+    uint8 *points = &buffer[2];
+
     switch (form->value)
     {
-        uint8 buffer[FPGA_NUM_POINTS * 2];
-        float data[FPGA_NUM_POINTS];
-
         case Form::RampPlus:
             {
                 float step = 2.0f / FPGA_NUM_POINTS;
@@ -92,9 +94,9 @@ void Generator::SetFormDDS(Form *form)
                     data[i] = -1.0f + step * i;
                 }
 
-                TransformDataToCode(data, buffer);
+                TransformDataToCode(data, points);
 
-                LoadPointsToDDS(ch, buffer);
+                Interface::Send(buffer, SIZE);
             }
             break;
         case Form::RampMinus:
@@ -106,9 +108,9 @@ void Generator::SetFormDDS(Form *form)
                     data[i] = 1.0f - step * i;
                 }
 
-                TransformDataToCode(data, buffer);
+                TransformDataToCode(data, points);
 
-                LoadPointsToDDS(ch, buffer);
+                Interface::Send(buffer, SIZE);
             }
             break;
         case Form::Triangle:
@@ -125,9 +127,9 @@ void Generator::SetFormDDS(Form *form)
                     data[i] = 1.0f - step * (i - FPGA_NUM_POINTS / 2);
                 }
 
-                TransformDataToCode(data, buffer);
+                TransformDataToCode(data, points);
 
-                LoadPointsToDDS(ch, buffer);
+                Interface::Send(buffer, SIZE);
             }
             break;
         case Form::Meander:
@@ -157,14 +159,6 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NU
         code[i] = (uint8)c;
         code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2])
-{
-    Interface::Send(Buffer(Command::LoadFormDDS, ch));
-
-    Interface::Send(points, FPGA_NUM_POINTS * 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

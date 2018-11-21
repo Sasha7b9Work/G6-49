@@ -53,6 +53,8 @@ bool Message::AllocateMemory(uint s)
         return false;
     }
 
+    LOG_WRITE("Выделяю %d байт", s);
+
     buffer = (uint8 *)std::malloc(s);
     if (buffer)
     {
@@ -60,7 +62,7 @@ bool Message::AllocateMemory(uint s)
     }
     else
     {
-        //LOG_WRITE("Не могу выделить %d байт", s);
+        LOG_WRITE("Не могу выделить %d байт", s);
     }
 
     return buffer != 0;

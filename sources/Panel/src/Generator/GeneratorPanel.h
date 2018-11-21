@@ -47,8 +47,6 @@ private:
     static const int FPGA_NUM_POINTS = 8 * 1024;
 
     static void SetFormDDS(Form *form);
-    /// Загружает точки произвольного сигнала в ПЛИС
-    static void LoadPointsToDDS(Chan ch, uint8 points[FPGA_NUM_POINTS * 2]);
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
     static void TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2]);
 };

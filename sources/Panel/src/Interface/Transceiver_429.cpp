@@ -17,7 +17,7 @@ bool Transceiver::Send(Message *message)
 
     SPI4_::WaitFalling();                                               // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
-    Message recvMessage;                                                // Сюда будем принимать ответ
+    bool result = false;
 
     for (int i = 1; i < 3; i++)
     {
@@ -39,14 +39,16 @@ bool Transceiver::Send(Message *message)
             break;
         }
 
-        recvMessage.AllocateMemory(newSize);                            // Выделяем необходимое количество памяти для принимаемых данных
-        if (!SPI4_::Receive(recvMessage.Data(), recvMessage.Size()))    // И принимаем ранее переданную информацию
+        if (newSize == message->Size())
         {
-            break;
+            result = true;
+        }
+
+        if (SPI4_::ReceiveAndCompare(message->Data(), message->Size()))
+        {
+            result = true;
         }
     }
-
-    bool result = recvMessage.IsEquals(message);
 
     static uint all = 0;
     static uint failed = 0;
