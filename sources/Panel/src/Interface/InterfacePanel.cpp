@@ -47,7 +47,7 @@ void Interface::Update()
 {
     static uint time = 0;
 
-    if (TIME_MS - time < 1000)
+    if (TIME_MS - time < 500)
     {
         return;
     }
@@ -73,16 +73,13 @@ void Interface::Run(Message *msg)
 
     if (command == Command::RequestData)
     {
-        LOG_WRITE_FINALIZE("ѕоступили пустые данные");
     }
     else if (command == Command::FreqMeasure)
     {
-        LOG_WRITE_FINALIZE("ѕоступило новое измерение частоты");
         FrequencyMeter::SetMeasure(msg->TakeWord());
     }
     else if (command == Command::Log)
     {
-        LOG_WRITE_FINALIZE("поступила нова€ тестова€ строка");
         Console::AddString((pString)(msg->Data() + 1));
     }
     else
