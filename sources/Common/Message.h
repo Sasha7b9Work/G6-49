@@ -6,7 +6,8 @@ class Message
 {
 public:
     Message();
-    Message(uint size, uint8 value0, uint8 valu1, uint8 value2);
+    Message(uint size, uint8 value0, uint8 value1);
+    Message(uint size, uint8 value0, uint8 value1, uint8 value2);
 
     ~Message();
 
@@ -23,6 +24,8 @@ public:
     void PutHalfWord(int16 data);
     /// Положить слово
     void PutWord(uint data);
+    /// Положить float
+    void PutFloat(float data);
     /// Взять байт
     uint8 TakeByte();
     /// Взять слово

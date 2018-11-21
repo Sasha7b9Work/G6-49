@@ -50,6 +50,7 @@ union BitSet32
         uint8 byte3;
     };
     BitSet32(uint value) : word(value)  { }
+    BitSet32(float value) : floatValue(value) { }
 
     BitSet32(const uint8 *buffer = 0) : word(0)
     {

@@ -38,7 +38,7 @@ public:
 
     static void Send(const Buffer &buffer);
 
-    static void Send(RawData *message);
+    //static void Send(RawData *message);
 
     static void Send(Message *message);
 
