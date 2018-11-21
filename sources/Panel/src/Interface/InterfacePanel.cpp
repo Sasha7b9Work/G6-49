@@ -81,21 +81,6 @@ void Interface::Run(Message *message)
 /*
 void Interface::ReceiveAndRun(uint numBytes)
 {
-    uint8 *buffer = (uint8 *)std::malloc(numBytes);
-
-    static int count = 0;
-
-    if (buffer)
-    {
-        LOG_WRITE("нужно принять %d байт", numBytes);
-
-        count += numBytes;
-
-        if(!SPI4_::Receive(buffer, numBytes, 100))
-        {
-            LOG_WRITE("Ошибка приёма - данные не приняты");
-        }
-
         if (*buffer == Command::Log)
         {
             LOG_WRITE("log");
@@ -121,21 +106,6 @@ void Interface::ReceiveAndRun(uint numBytes)
 
             FDrive::HandlerInterface(buffer);
         }
-        else if(*buffer == Command::Test)
-        {
-            LOG_WRITE("Получено в ответ на Test %d байт", numBytes);
-        }
-        else
-        {
-            LOG_WRITE("принято %d байт в ошибочной команде %d", numBytes, *buffer);
-        }
-    }
-    else
-    {
-        LOG_WRITE("Нет памяти");
-    }
-
-    std::free(buffer);
 }
 */
 

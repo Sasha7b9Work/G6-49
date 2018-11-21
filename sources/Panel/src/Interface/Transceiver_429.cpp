@@ -22,9 +22,7 @@ void Transceiver::Transmit(Message *message)
 
         for (int i = 0; i < 2; i++)
         {
-            uint size = message->Size();
-
-            SPI4_::Transmit(&size, 4, 10);                                      // Передаём размер передаваемых данных
+            SPI4_::Transmit(message->Size(), 10);                               // Передаём размер передаваемых данных
 
             SPI4_::Transmit(message->Data(), message->Size(), timeout);         // Передаём непосредственно данные
 
