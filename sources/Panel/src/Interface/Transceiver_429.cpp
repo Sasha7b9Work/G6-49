@@ -15,6 +15,7 @@ bool Transceiver::Send(Message *message)
 
     SPI4_::WaitFalling();                                                   // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
+ 
     bool result = false;
 
     for (int i = 1; i < 3; i++)
@@ -66,7 +67,7 @@ bool Transceiver::Send(Message *message)
     if (!result)
     {
         failed++;
-//        LOG_WRITE_FINALIZE("%d из %d пакетов не передано. %f процентов потеряно", failed, all, (float)failed / all * 100.0f);
+        LOG_WRITE("%d/%d %.1f %% потерь", failed, all, (float)failed / all * 100.0f);
     }
 
     return result;

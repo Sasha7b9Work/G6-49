@@ -147,16 +147,9 @@ void Interface::SetPolarity(uint8 *recv)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::LoadFormDDS(uint8 *recv)
 {
-    return;
-
     Chan ch = (Chan::E)recv[1];
 
-    uint8 temp[2];
-
-    // —юда примем количество байт
-    SPI1_::Receive(temp, 2);
-
-    SPI1_::Receive(FPGA::DataDDS(ch), FPGA_NUM_POINTS * 2);
+    std::memcpy(FPGA::DataDDS(ch), recv + 2, FPGA_NUM_POINTS * 2);
 
     Generator::SetFormWave(ch, Form::DDS);
 }
