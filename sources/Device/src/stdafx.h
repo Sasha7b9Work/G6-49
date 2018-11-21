@@ -5,7 +5,6 @@
 #include "Log.h"
 #include "structs.h"
 #include "Message.h"
-#include "RawData.h"
 #include "Transceiver.h"
 
 #include "FDrive/FDriveDevice.h"

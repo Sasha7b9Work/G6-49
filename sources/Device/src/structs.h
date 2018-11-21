@@ -14,8 +14,9 @@ union BitSet16
         uint8 byte0;
         uint8 byte1;
     };
-    BitSet16(uint16 value) : halfWord(value) {};
-    BitSet16(uint8 *vals) : byte0(*vals), byte1(*(vals + 1)) {};
+    explicit BitSet16(uint16 value) : halfWord(value) {};
+    explicit BitSet16(uint8 *vals) : byte0(*vals), byte1(*(vals + 1)) {};
+
     void WriteToBuffer(uint8 buffer[2]) const
     {
         buffer[0] = byte0;
@@ -45,10 +46,10 @@ union BitSet32
         uint8 byte2;
         uint8 byte3;
     };
-    BitSet32(uint w) : word(w) { }
-    BitSet32(float value) : floatValue(value) { }
+    explicit BitSet32(uint w) : word(w) { }
+    explicit BitSet32(float value) : floatValue(value) { }
 
-    BitSet32(const uint8 *buffer = 0) : word(0)
+    explicit BitSet32(const uint8 *buffer = 0) : word(0)
     {
         if (buffer)
         {
@@ -101,7 +102,8 @@ union BitSet64
         uint8 byte6;
         uint8 byte7;
     };
-    BitSet64(const uint8 *buffer = 0) : dword(0)
+
+    explicit BitSet64(const uint8 *buffer = 0) : dword(0)
     {
         if (buffer)
         {

@@ -28,6 +28,8 @@ public:
     void PutFloat(float data);
     /// Взять байт
     uint8 TakeByte();
+    /// Взять полуслово
+    uint16 TakeHalfWord();
     /// Взять слово
     uint TakeWord();
 

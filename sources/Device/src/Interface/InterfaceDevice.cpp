@@ -266,7 +266,7 @@ void Interface::SetKoeffCalibration(Message *msg)
 
     int16 *koeff = values[msg->TakeByte()];
 
-    koeff[ch] = (int16)msg->TakeByte();
+    koeff[ch] = (int16)msg->TakeHalfWord();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

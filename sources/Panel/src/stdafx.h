@@ -6,7 +6,6 @@
 #include "log.h"
 #include "structs.h"
 #include "Message.h"
-#include "RawData.h"
 #include "Transceiver.h"
 
 #include "Display/Console.h"
