@@ -14,6 +14,8 @@ public:
     bool CreateFromRawData(uint8 *buffer, uint size);
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
+    /// Положить байт
+    void Put(uint8 data);
     /// Освободить память
     void FreeMemory();
     /// Возвращает указатель на данные
@@ -26,8 +28,10 @@ public:
     bool IsEquals(const Message *message) const;
 
 private:
-
-    uint size;
-
+    /// Размер выделенной памяти
+    uint allocated;
+    /// Адрес начала данных, либо 0, если память не выделена
     uint8 *buffer;
+    /// Сколько памяти занято реальными данными
+    uint used;
 };

@@ -24,18 +24,15 @@ bool Transceiver::Send(Message *message)
 
         if (!SPI4_::Transmit(&size, 4, 10))                                 // Передаём размер передаваемых данных
         {
-//            LOG_WRITE_FINALIZE("Не могу передать размер");
         }
 
         if (!SPI4_::Transmit(message->Data(), message->Size(), timeout))    // Передаём непосредственно данные
         {
-//            LOG_WRITE_FINALIZE("Не могу передать данные");
         }
 
         uint newSize = 0;
         if (!SPI4_::Receive(&newSize, 4, 10))                               // Теперь принимаем размер данных, которые хочет передать нам устройство
         {
-//            LOG_WRITE_FINALIZE("Не могу принять размер");
         }
 
         if (newSize == message->Size())
@@ -45,7 +42,6 @@ bool Transceiver::Send(Message *message)
         else
         {
             result = false;
-//            LOG_WRITE_FINALIZE("Размеры не совпадают %d %d", message->Size(), newSize);
         }
 
         if (SPI4_::ReceiveAndCompare(message->Data(), message->Size()))
@@ -55,7 +51,6 @@ bool Transceiver::Send(Message *message)
         else
         {
             result = false;
-//            LOG_WRITE_FINALIZE("Сравнение данных прошло неудачно");
         }
     }
 
