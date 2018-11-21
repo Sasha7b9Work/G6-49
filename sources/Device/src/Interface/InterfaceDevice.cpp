@@ -191,7 +191,7 @@ void Interface::SetKoeffCalibration(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
 
-    static const int16 *values[] =
+    static int16 * const values[] =
     {
         &CAL_AD9952_OFFSET_NEG(Chan::A),
         &CAL_AD9952_OFFSET_ZERO(Chan::A),
@@ -200,7 +200,7 @@ void Interface::SetKoeffCalibration(uint8 *recv)
         &CAL_DDS_MIN(Chan::A)
     };
 
-    
+    values[recv[2]][ch] = (int16)recv[3];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
