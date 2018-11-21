@@ -58,6 +58,10 @@ bool Message::AllocateMemory(uint s)
     {
         size = s;
     }
+    else
+    {
+        //LOG_WRITE("Не могу выделить %d байт", s);
+    }
 
     return buffer != 0;
 }
