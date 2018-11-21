@@ -20,40 +20,21 @@ void Transceiver::Send(Message *message)
     {
         SPI4_::WaitFalling();                                                   // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
-        for (int i = 1; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             uint size = message->Size();
 
-            if (!SPI4_::Transmit(&size, 4, 10))                                 // Передаём размер передаваемых данных
-            {
-            }
+            SPI4_::Transmit(&size, 4, 10);                                      // Передаём размер передаваемых данных
 
-            if (!SPI4_::Transmit(message->Data(), message->Size(), timeout))    // Передаём непосредственно данные
-            {
-            }
+            SPI4_::Transmit(message->Data(), message->Size(), timeout);         // Передаём непосредственно данные
 
             uint newSize = 0;
-            if (!SPI4_::Receive(&newSize, 4, 10))                               // Теперь принимаем размер данных, которые хочет передать нам устройство
-            {
-            }
+            SPI4_::Receive(&newSize, 4, 10);                                    // Теперь принимаем размер данных, которые хочет передать нам устройство
 
-            if (newSize == message->Size())
-            {
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }
+            result = (newSize == message->Size());
 
-            if (SPI4_::ReceiveAndCompare(message->Data(), message->Size()))
-            {
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }
+            result = SPI4_::ReceiveAndCompare(message->Data(), message->Size());
+
         }
 
         static uint all = 0;
