@@ -11,7 +11,7 @@ public:
 
     static void Update();
     /// Interface вызывает эту функцию для обработки принятой команды
-    static void HandlerInterface();
+    static void HandlerInterface(uint8 *);
     /// Возвращает количество байт для передачи
     static uint NumBytesForSend();
     /// Получает данные для передачи в панель. Параметром нужно передать указатель на буфер размером не менее возвращаемого функцией NumBytesForSend значения

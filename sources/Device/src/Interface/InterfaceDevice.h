@@ -36,43 +36,37 @@ public:
     /// Послать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
 
-    static void Empty();
+    static void Empty(uint8 *);
 
-    static void SetFormWave();
+    static void SetFormWave(uint8 *);
 
-    static void ParameterValue();
+    static void ParameterValue(uint8 *);
 
-    static void EnableChannel();
+    static void EnableChannel(uint8 *);
 
-    static void RunReset();
+    static void RunReset(uint8 *);
 
-    static void ModeDebug();
+    static void ModeDebug(uint8 *);
 
-    static void WriteRegister();
-    /// Команда обрабатывает засылку произвольного сигнала
-    static void CreateWave();
+    static void WriteRegister(uint8 *);
 
-    static void SetManipulation();
+    static void SetManipulation(uint8 *);
 
-    static void SetManipulationMode();
+    static void SetManipulationMode(uint8 *);
 
-    static void SetStartMode();
+    static void SetStartMode(uint8 *);
 
-    static void LoadFormDDS();
+    static void LoadFormDDS(uint8 *);
     
-    static void Test();
+    static void Test(uint8 *);
 
-    static void SetKoeffCalibration();
+    static void SetKoeffCalibration(uint8 *);
 
-    static void SetPolarity();
+    static void SetPolarity(uint8 *);
 
     static void Send(void *data, uint size);
-    ///< Буфер для принимаемых команд
-    static uint8 *recv;
 
 private:
-    /// Установить размер приёмного буфера равным size
-    static void ResizeRecieveBuffer(uint16 size);
 
     static uint timeLastReceive;
 };

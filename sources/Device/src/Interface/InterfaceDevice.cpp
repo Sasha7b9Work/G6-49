@@ -30,9 +30,9 @@ uint  Interface::timeLastReceive = 0;
 
 static const struct FuncInterface
 {
-    typedef void(*pFuncInterfaceVV)();
-    pFuncInterfaceVV func;
-    FuncInterface(pFuncInterfaceVV f) : func(f) {};
+    typedef void(*pFuncInterfaceVpU8)(uint8 *);             // Параметром передаём указатель на принятые данные
+    pFuncInterfaceVpU8 func;
+    FuncInterface(pFuncInterfaceVpU8 f) : func(f) {};
 }
 commands[Command::Number] =
 {
@@ -74,11 +74,8 @@ commands[Command::Number] =
 };
 
 
-static Message recvMessage;
-uint8 *Interface::recv = 0;
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Interface::EnableChannel()
+void Interface::EnableChannel(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
     bool enable = recv[2] == 1;
@@ -87,14 +84,14 @@ void Interface::EnableChannel()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetPolarity()
+void Interface::SetPolarity(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
     FPGA::SetPolarity(ch, recv[2]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::LoadFormDDS()
+void Interface::LoadFormDDS(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
 
@@ -109,7 +106,7 @@ void Interface::LoadFormDDS()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Interface::Test()
+void Interface::Test(uint8 *)
 {
     std::srand(TIME_MS);
     
@@ -141,7 +138,7 @@ void Interface::Test()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetKoeffCalibration()
+void Interface::SetKoeffCalibration(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
 
@@ -158,21 +155,21 @@ void Interface::SetKoeffCalibration()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetManipulation()
+void Interface::SetManipulation(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
     AD9952::Manipulation::SetEnabled(ch, recv[2] != 0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetManipulationMode()
+void Interface::SetManipulationMode(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
     AD9952::Manipulation::SetType(ch, recv[2]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetStartMode()
+void Interface::SetStartMode(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
     StartMode mode = (StartMode)recv[2];
@@ -180,7 +177,7 @@ void Interface::SetStartMode()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetFormWave()
+void Interface::SetFormWave(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
     Form form = (Form::E)recv[2];
@@ -188,7 +185,7 @@ void Interface::SetFormWave()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::WriteRegister()
+void Interface::WriteRegister(uint8 *recv)
 {
     Register reg = (Register::E)recv[1];
 
@@ -284,7 +281,7 @@ void Interface::WriteRegister()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ParameterValue()
+void Interface::ParameterValue(uint8 *recv)
 {
     Chan ch = (Chan::E)recv[1];
     Command command = (Command::E)recv[0];
@@ -292,13 +289,7 @@ void Interface::ParameterValue()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::CreateWave()
-{
-    Chan ch = (Chan::E)recv[1];
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::RunReset()
+void Interface::RunReset(uint8 *)
 {
 #ifndef WIN32
 
@@ -313,12 +304,12 @@ void Interface::RunReset()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ModeDebug()
+void Interface::ModeDebug(uint8 *)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::Empty()
+void Interface::Empty(uint8 *)
 {
 }
 
@@ -330,17 +321,41 @@ void Interface::SendFrequency(uint value)
 
 void Interface::Update()
 {
-#define TIME 10
+#define TIMEOUT 10
 
     CPU::SetReady();
 
-    Message transMessage;
-
     uint size = 0;
 
-    if (SPI1_::Receive(&size, 4))           // Узнаём размер принимаемого сообщения
+    if (SPI1_::Receive(&size, 4))                                                       // Узнаём размер принимаемого сообщения
     {
-        recvMessage.AllocateMemory(size);
+        Message first;              // Сюда принимаем первое сообщение
+        Message second;             // Сюда принимаем второе сообщение
+
+        first.AllocateMemory(size);
+
+        if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                        // Принимаем данные
+        {
+            if (SPI1_::Transmit(&size, 4, TIMEOUT))                                     // Передаём его размер
+            {
+                if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))               // И данные
+                {
+                    if (SPI1_::Receive(&size, 4))
+                    {
+                        second.AllocateMemory(size);                                    // Второй раз сообщение будем принимать в этот буфер
+
+                        if (SPI1_::Receive(second.Data(), second.Size(), TIMEOUT))      // Что и делаем
+                        {
+                            if (second.IsEquals(&first))                                // Проверяем, совпали ли оба принятых сообщения
+                            {
+                                uint8 *recv = first.Data();
+                                commands[recv[0]].func(recv);                           // И, если совпали, передаём сообщение на выполение
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     CPU::SetBusy();
@@ -348,18 +363,7 @@ void Interface::Update()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::UpdateOld()
-{
-    CPU::SetReady();
-
-    Message packet;
-
-    if (SPI1_::Receive(packet.Begin(), packet.Size(), 100))
-    {
-        SPI1_::Transmit(packet.Begin(), packet.Size(), 100);
-    }
-
-    CPU::SetBusy();
-    
+{   
     /*
     uint16 numBytes = 0;
     CPU::SPI1_::Receive(&numBytes, 2);                  // Узнаём количество байт, которые хочет передать панель
@@ -395,15 +399,6 @@ void Interface::Send(void *buffer, uint size)
     SPI1_::Transmit(&size, 2);
 
     SPI1_::Transmit(buffer, size);
-}
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ResizeRecieveBuffer(uint16 size)
-{
-    std::free(recv);
-
-    recv = (uint8 *)std::malloc(size);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -213,15 +213,15 @@ uint8 *FDrive::GetDataForSend(uint8 *buffer)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::HandlerInterface()
+void FDrive::HandlerInterface(uint8 *recv)
 {
-    command = *Interface::recv;
+    command = *recv;
 
     if(command == Command::FDrive_NumDirsAndFiles)
     {
         uint numDirs = 0;
         uint numFiles = 0;
-        GetNumDirsAndFiles((const char *)Interface::recv + 1, &numDirs, &numFiles);
+        GetNumDirsAndFiles((const char *)recv + 1, &numDirs, &numFiles);
         uint8 *buffer = (uint8 *)std::malloc(1 + 4 + 4);
 
         buffer[0] = Command::FDrive_NumDirsAndFiles;

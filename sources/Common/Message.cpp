@@ -33,9 +33,25 @@ bool Message::CreateFromRawData(uint8 *_buffer, uint _size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Message::CreateFromMessage(Message *message)
+{
+    if (AllocateMemory(message->Size()))
+    {
+        std::memcpy(buffer, message->Data(), message->Size());
+    }
+
+    return buffer != 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Message::AllocateMemory(uint s)
 {
     FreeMemory();
+
+    if (s == 0)
+    {
+        return false;
+    }
 
     buffer = (uint8 *)std::malloc(s);
     if (buffer)
