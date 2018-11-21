@@ -13,5 +13,8 @@ public:
     //static void AddFloat(float value);
     static void AddInt(int value);
     static bool ExistString();
-    static void GetString(char buffer[LENGTH_SPI_BUFFER - 1]);
+    /// ¬озвращает передаваемую строку
+    static char *GetString();
+    /// ”дал€ет передаваемую строку из хранилища
+    static void DeleteString();
 };

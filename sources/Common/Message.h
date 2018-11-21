@@ -17,9 +17,9 @@ public:
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
     /// Положить байт
-    void Put8(uint8 data);
+    void PutByte(uint8 data);
     /// Положить слово
-    void Put32(uint data);
+    void PutWord(uint data);
     /// Взять байт
     uint8 TakeByte();
     /// Взять слово

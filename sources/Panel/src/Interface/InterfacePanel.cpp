@@ -56,7 +56,7 @@ void Interface::Update()
 
     Message message;
     message.AllocateMemory(1);
-    message.Put8(Command::RequestData);
+    message.PutByte(Command::RequestData);
 
     Transceiver::Transmit(&message);
 

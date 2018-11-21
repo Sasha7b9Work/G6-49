@@ -134,6 +134,8 @@ void Interface::SendData(Message *)
 
     Message message;
 
+    Console::AddString("Test string");
+
     if (CreateMessageForSend(&message))
     {
         Timer::PauseOnTime(2);
@@ -147,16 +149,29 @@ void Interface::SendData(Message *)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::CreateMessageForSend(Message *message)
+bool Interface::CreateMessageForSend(Message *msg)
 {
     if (freqForSend != MAX_UINT)
     {
-        message->AllocateMemory(5);
-        message->Put8(Command::FreqMeasure);
-        message->Put32(freqForSend);
-
-        return true;
+        msg->AllocateMemory(5);
+        msg->PutByte(Command::FreqMeasure);
+        msg->PutWord(freqForSend);
+        freqForSend = MAX_UINT;
     }
+    else if (Console::ExistString())
+    {
+        char *string = Console::GetString();
+        msg->AllocateMemory(std::strlen(string) + 1 + 1);    // Один байт добавляем на название команды и один на завершающий ноль
+        msg->PutByte(Command::Log);
+        std::strcpy((char *)msg->Data() + 1, string);
+        Console::DeleteString();
+    }
+    else
+    {
+        msg->AllocateMemory(1);
+        msg->PutByte(Command::RequestData);
+    }
+
 
     return false;
 }

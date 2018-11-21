@@ -47,14 +47,14 @@ bool Message::CreateFromMessage(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Put8(uint8 data)
+void Message::PutByte(uint8 data)
 {
      buffer[used] = data;
      used += sizeof(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Put32(uint data)
+void Message::PutWord(uint data)
 {
      BitSet32 bs(data);
      bs.WriteToBuffer(buffer + used);
