@@ -39,7 +39,7 @@ void Interface::Send(uint8 *buffer, uint size)
     Message message;
     message.CreateAllocate(buffer, size);
 
-    Transceiver::Send(&message);
+    Transceiver::Transmit(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ void Interface::Update()
     message.AllocateMemory(1);
     message.Put(Command::RequestData);
 
-    Transceiver::Send(&message);
+    Transceiver::Transmit(&message);
 
     if (Transceiver::Receive(&message))
     {

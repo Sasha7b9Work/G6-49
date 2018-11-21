@@ -7,7 +7,7 @@ class Transceiver
 {
 public:
 
-    static void Send(Message *message);
+    static void Transmit(Message *message);
 
     static bool Receive(Message *message);
 };

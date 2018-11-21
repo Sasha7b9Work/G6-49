@@ -9,7 +9,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Send(Message *message)
+void Transceiver::Transmit(Message *message)
 {
     uint timeout = (message->Size() > 1000U) ? 200U : 10U;
 
@@ -50,3 +50,18 @@ void Transceiver::Send(Message *message)
 
     };
 }
+
+bool Transceiver::Receive(Message *message)
+{
+    SPI4_::WaitFalling();
+
+    uint size = 0;
+    SPI4_::Receive(&size, 4, 10);
+
+    message->AllocateMemory(size);
+
+    SPI4_::Receive(message->Data(), message->Size(), 50);
+
+    return message->Size() != 0;
+}
+

@@ -9,6 +9,8 @@ private:
 public:
     /// Переслать массив данных
     static bool Transmit(const void *buffer, uint size, uint timeout);
+
+    static bool Transmit(uint value, uint timeout);
     /// Принять массив данных
     static bool Receive(void *recv, uint size, uint timeout);
     /// Функция принимает size байт и сравнивает их с compared. Возвращает true, если байты идентичны
