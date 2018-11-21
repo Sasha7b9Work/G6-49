@@ -86,7 +86,7 @@ bool Interface::Request(Data *request, Data *answer)
     {
         if(answer->Init(numBytes))
         {
-            SPI4_::Receive(answer->GetData(), answer->GetSize());
+            SPI4_::Receive(answer->GetData(), answer->GetSize(), 100);
         }
         else
         {
@@ -101,7 +101,7 @@ bool Interface::Request(Data *request, Data *answer)
 uint Interface::BytesForReceive()
 {
     uint numBytes = 0;
-    if(!SPI4_::Receive(&numBytes, 2))
+    if(!SPI4_::Receive(&numBytes, 2, 10))
     {
         LOG_ERROR("Не получил размер данных. Проверьте!");
     }
@@ -111,8 +111,7 @@ uint Interface::BytesForReceive()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(uint8 *buffer, uint size)
 {
-    //Transceiver::Send(buffer, size);
-    Transceiver::Test();
+    Transceiver::Send(buffer, size);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,7 +127,7 @@ void Interface::ReceiveAndRun(uint numBytes)
 
         count += numBytes;
 
-        if(!SPI4_::Receive(buffer, numBytes))
+        if(!SPI4_::Receive(buffer, numBytes, 100))
         {
             LOG_WRITE("Ошибка приёма - данные не приняты");
         }

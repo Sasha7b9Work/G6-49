@@ -53,8 +53,6 @@ bool Message::AllocateMemory(uint s)
         return false;
     }
 
-    LOG_WRITE("ֲûהוכÿ‏ %d באיע", s);
-
     buffer = (uint8 *)std::malloc(s);
     if (buffer)
     {

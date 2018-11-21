@@ -83,18 +83,18 @@ void Interface::Update()
 
     uint size = 0;
 
-    if (SPI1_::Receive(&size, 4))                                                       // Узнаём размер принимаемого сообщения
+    if (SPI1_::Receive(&size, 4))                                                               // Узнаём размер принимаемого сообщения
     {
         Message first;              // Сюда принимаем первое сообщение
         Message second;             // Сюда принимаем второе сообщение
 
         if (first.AllocateMemory(size))
         {
-            if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                        // Принимаем данные
+            if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                            // Принимаем данные
             {
-                if (SPI1_::Transmit(&size, 4, TIMEOUT))                                     // Передаём его размер
+                if (SPI1_::Transmit(&size, 4, TIMEOUT))                                         // Передаём его размер
                 {
-                    if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))               // И данные
+                    if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))                   // И данные
                     {
                         if (SPI1_::Receive(&size, 4))
                         {
@@ -108,11 +108,11 @@ void Interface::Update()
                                     {
                                         if (SPI1_::Transmit(second.Data(), second.Size(), TIMEOUT))
                                         {
-                                            if (second.IsEquals(&first))                                // Проверяем, совпали ли оба принятых сообщения
+                                            if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
                                             {
                                                 uint8 *recv = first.Data();
 
-                                                //commands[recv[0]].func(recv);                           // И, если совпали, передаём сообщение на выполение
+                                                commands[recv[0]].func(recv);                   // И, если совпали, передаём сообщение на выполение
                                             }
                                         }
                                     }

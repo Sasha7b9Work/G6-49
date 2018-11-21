@@ -59,7 +59,7 @@ bool SPI4_::Transmit(const void *buffer, uint size, uint timeout)
 {
 	if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)buffer, (uint16)size, timeout) != HAL_OK)
 	{
-		LOG_WRITE_FINALIZE("Ошибка передачи данных");
+//		LOG_WRITE_FINALIZE("Ошибка передачи данных");
 		return false;
 	}
 
@@ -86,7 +86,7 @@ bool SPI4_::ReceiveAndCompare(const void *compared, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        if (Receive(&byte, 1, 100) && data[i] == byte)
+        if (Receive(&byte, 1, 10) && data[i] == byte)
         {
             continue;
         }

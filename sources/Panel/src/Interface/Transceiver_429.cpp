@@ -4,7 +4,6 @@
 #include "log.h"
 #include "Transceiver.h"
 #include "Hardware/CPU.h"
-#include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #endif
 
@@ -12,22 +11,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Transceiver::Send(Message *message)
 {
-    LOG_WRITE_FINALIZE("Передаю %d байт. Команда %d", message->Size(), *message->Data());
+    uint timeout = (message->Size() > 1000U) ? 200U : 10U;
 
-    /*
-    static uint time = 0;
-
-    if (message->Size() > 100)
-    {
-        while (TIME_MS - time < 5000)
-        {
-        }
-
-        time = TIME_MS;
-    }
-    */
-
-    SPI4_::WaitFalling();                                               // Ожидаем перехода флага готовности прибора в состояние "свободен"
+    SPI4_::WaitFalling();                                                   // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
     bool result = false;
 
@@ -35,44 +21,40 @@ bool Transceiver::Send(Message *message)
     {
         uint size = message->Size();
 
-        if (!SPI4_::Transmit(&size, 4))                                 // Передаём размер передаваемых данных
+        if (!SPI4_::Transmit(&size, 4, 10))                                 // Передаём размер передаваемых данных
         {
-            LOG_WRITE_FINALIZE("Не могу передать размер");
+//            LOG_WRITE_FINALIZE("Не могу передать размер");
         }
 
-        if (!SPI4_::Transmit(message->Data(), message->Size()))         // Передаём непосредственно данные
+        if (!SPI4_::Transmit(message->Data(), message->Size(), timeout))    // Передаём непосредственно данные
         {
-            LOG_WRITE_FINALIZE("Не могу передать данные");
+//            LOG_WRITE_FINALIZE("Не могу передать данные");
         }
 
         uint newSize = 0;
-        if (!SPI4_::Receive(&newSize, 4))                               // Теперь принимаем размер данных, которые хочет передать нам устройство
+        if (!SPI4_::Receive(&newSize, 4, 10))                               // Теперь принимаем размер данных, которые хочет передать нам устройство
         {
-            LOG_WRITE_FINALIZE("Не могу принять размер");
+//            LOG_WRITE_FINALIZE("Не могу принять размер");
         }
 
         if (newSize == message->Size())
         {
-            LOG_WRITE_FINALIZE("Размеры совпадают");
             result = true;
         }
         else
         {
             result = false;
-            LOG_WRITE_FINALIZE("Размеры не совпадают %d %d", message->Size(), newSize);
-            Timer::PauseOnTime(5000);
+//            LOG_WRITE_FINALIZE("Размеры не совпадают %d %d", message->Size(), newSize);
         }
 
         if (SPI4_::ReceiveAndCompare(message->Data(), message->Size()))
         {
-            LOG_WRITE_FINALIZE("Данные совпали");
             result = true;
         }
         else
         {
             result = false;
-            LOG_WRITE_FINALIZE("Сравнение данных прошло неудачно");
-            Timer::PauseOnTime(5000);
+//            LOG_WRITE_FINALIZE("Сравнение данных прошло неудачно");
         }
     }
 
@@ -84,7 +66,7 @@ bool Transceiver::Send(Message *message)
     if (!result)
     {
         failed++;
-        LOG_WRITE_FINALIZE("%d из %d пакетов не передано. %f процентов потеряно", failed, all, (float)failed / all * 100.0f);
+//        LOG_WRITE_FINALIZE("%d из %d пакетов не передано. %f процентов потеряно", failed, all, (float)failed / all * 100.0f);
     }
 
     return result;
