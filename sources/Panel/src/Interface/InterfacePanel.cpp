@@ -47,10 +47,12 @@ void Interface::Update()
 {
     static uint time = 0;
 
-    if (TIME_MS - time < 100)
+    if (TIME_MS - time < 1000)
     {
         return;
     }
+
+    time = TIME_MS;
 
     Message message;
     message.AllocateMemory(1);
