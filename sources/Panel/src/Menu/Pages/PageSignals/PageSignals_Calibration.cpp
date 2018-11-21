@@ -38,9 +38,10 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
         &CAL_DDS_MIN(Chan::A)
     };
 
-    RawData message(4, (uint8)Command::SetKoeffCalibration, ch, (uint8)koeff, (uint8)values[koeff].pointer[ch]);
+    Message message(5, (uint8)Command::SetKoeffCalibration, ch, (uint8)koeff);
+    message.PutHalfWord(values[koeff].pointer[ch]);
     Interface::Send(&message);
-
+    
     if (koeff == KoeffCal::AD9952_ZERO)
     {
         Generator::SetOffset(ch, 0.0f);
@@ -76,6 +77,7 @@ void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, Koe
     if (enter)
     {
         PrepareForOffsetAD9952(ch);
+        Generator::SetAmplitude(ch, 0.0f);
         Generator::SetOffset(ch, values[koeff].value);
     }
 }

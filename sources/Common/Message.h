@@ -6,6 +6,7 @@ class Message
 {
 public:
     Message();
+    Message(uint size, uint8 value0, uint8 valu1, uint8 value2);
 
     ~Message();
 
@@ -18,6 +19,8 @@ public:
     bool AllocateMemory(uint size);
     /// Положить байт
     void PutByte(uint8 data);
+    /// Положить половину слова
+    void PutHalfWord(int16 data);
     /// Положить слово
     void PutWord(uint data);
     /// Взять байт

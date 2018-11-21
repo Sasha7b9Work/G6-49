@@ -60,8 +60,8 @@ static const Settings defSet =
     {false, false},                     // sine_ManipulationEnabled
     {0, 0},                             // sine_ManipulationMode
     {0, 0},                             // cal_AD9952_Offset_Negative
-    {0, 0},                             // cal_AD9952_Offset_Zero
-    {0, 0},                             // cal_AD9952_Offset_Positive
+    {2048, 2048},                       // cal_AD9952_Offset_Zero
+    {4095, 4095},                       // cal_AD9952_Offset_Positive
     {0, 0},                             // cal_AD9952_Amplitude
     {0, 0},                             // cal_DDS_MAX
     {0, 0},                             // cal_DDS_MIN

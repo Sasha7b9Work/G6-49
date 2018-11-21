@@ -14,7 +14,13 @@ union BitSet16
         uint8 byte0;
         uint8 byte1;
     };
+    BitSet16(uint16 value) : halfWord(value) {};
     BitSet16(uint8 *vals) : byte0(*vals), byte1(*(vals + 1)) {};
+    void WriteToBuffer(uint8 buffer[2]) const
+    {
+        buffer[0] = byte0;
+        buffer[1] = byte1;
+    }
 };
 
 #define INIT_BIT_SET_32(name, value)    \

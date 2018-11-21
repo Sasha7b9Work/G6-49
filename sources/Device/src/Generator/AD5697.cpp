@@ -3,6 +3,8 @@
 #include "defines.h"
 #include "AD5697.h"
 #include "Command.h"
+#include "Settings/Settings.h"
+#include "Utils/Console.h"
 #include "Utils/Math.h"
 #endif
 
@@ -49,7 +51,28 @@ void AD5697::SetOffset(Chan ch, float offset)
 {   
     float scale = 4095.0f / 10.0f;
 
-    offset = (offset + 5.0f) * scale;
+    if (offset == 0.0f)
+    {
+        Console::AddString("Устанавливаю смещение 0");
+        offset = CAL_AD9952_OFFSET_ZERO(ch);
+    }
+    else if (offset == -5.0f)
+    {
+        Console::AddString("Устанавливаю смещение -5В");
+        offset = CAL_AD9952_OFFSET_NEG(ch);
+    }
+    else if (offset == 5.0f)
+    {
+        Console::AddString("Устанавливаю смещение +5В");
+        offset = CAL_AD9952_OFFSET_POS(ch);
+    }
+    else
+    {
+        Console::AddString("Устанавливаю произвольное смещение");
+        offset = (offset + 5.0f) * scale;
+    }
+
+    Console::AddString("Пишу в смещение %f", offset);
 
     uint16 value = (uint16)((uint16)offset << 4);
 

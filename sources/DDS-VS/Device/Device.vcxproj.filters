@@ -276,6 +276,9 @@
     <ClInclude Include="..\..\common\Message.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cstdarg">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">

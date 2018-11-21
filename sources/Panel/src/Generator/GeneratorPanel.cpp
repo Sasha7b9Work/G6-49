@@ -190,6 +190,15 @@ void Generator::SetOffset(Chan ch, float offset)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetAmplitude(Chan ch, float amplitude)
+{
+    RawData message(6, (uint8)Command::SetOffset, ch);
+    message.Put(amplitude);
+
+    Interface::Send(&message);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterValue *param)
 {
     static const struct StructCommand

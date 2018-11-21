@@ -35,6 +35,8 @@ public:
 
     static void SetOffset(Chan ch, float offset);
 
+    static void SetAmplitude(Chan ch, float amplitude);
+
     static void SetDebugMode(bool enable);
 
     static void LoadRegister(Register reg, uint64 value);

@@ -91,14 +91,14 @@ struct Command
         //  0      1...5    6...9
         //  Test   size     crc32
 /* <-> */   Test,                       ///< Команда для тестирования SPI
-         // 0                   1    2                    3
+         // 0                   1    2                    3,4
          // SetKoeffCalibration chan koeff                value
-         //                          0 - AD9952_-5V       -128...+127
-         //                          1 - AD9952_0V        -128...+127
-         //                          2 - AD9952_+5V       -128...+127
-         //                          3 - AD9952_Amplitude -128...+127
-         //                          4 - DDS_MAX          -128...+127
-         //                          5 - DDS_MIN          -128...+127
+         //                          0 - AD9952_-5V       ...
+         //                          1 - AD9952_0V        ...
+         //                          2 - AD9952_+5V       ...
+         //                          3 - AD9952_Amplitude ...
+         //                          4 - DDS_MAX          ...
+         //                          5 - DDS_MIN          ...
 /* <-  */   SetKoeffCalibration,        ///< Установка калибровочного коэффициента
             Number
     } value;
