@@ -2,19 +2,13 @@
 #ifndef WIN32
 #include "defines.h"
 #include "CPU.h"
+#include "Hardware/Modules/EEPROM.h"
 #include "Settings/Settings.h"
-#ifdef OPEN
-#include <stm32f7xx.h>
-#else
 #include <stm32f4xx.h>
-#endif
 #endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef OPEN
-#define CLEAR_FLASH_FLAGS
-#else
 #define CLEAR_FLASH_FLAGS                                                                   \
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP     |  /* end of operation flag              */   \
                             FLASH_FLAG_OPERR  |  /* operation error flag               */   \
@@ -22,7 +16,6 @@
                             FLASH_FLAG_PGAERR |  /* programming alignment error flag   */   \
                             FLASH_FLAG_PGPERR |  /* programming parallelism error flag */   \
                             FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
-#endif
 
 #define ADDR_SECTOR_SETTINGS    ((uint)0x080E0000)
 #define SIZE_SECTOR_SETTINGS    (128 * 1024)
@@ -32,7 +25,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CPU::FLASH_::SaveSettings()
+void FLASH_::SaveSettings()
 {
     // Записываем в Settings.size текущий размер структуры Settings
     set.size = sizeof(Settings);
@@ -40,7 +33,7 @@ void CPU::FLASH_::SaveSettings()
     // Находим первый свободный адрес записи
     int address = ADDR_SECTOR_SETTINGS;
     while (READ_HALF_WORD(address) != 0xffff &&                             // Пока по адресу, кратному SIZE_RECORD, записаны настройки
-           (uint)address < (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS))   // и мы не вышли за пределы секторы настроек
+        (uint)address < (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS))   // и мы не вышли за пределы секторы настроек
     {
         address += SIZE_RECORD;
     }
@@ -56,13 +49,13 @@ void CPU::FLASH_::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::FLASH_::EraseSettings()
+void FLASH_::EraseSettings()
 {
     EraseSector(ADDR_SECTOR_SETTINGS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::FLASH_::LoadSettings()
+void FLASH_::LoadSettings()
 {
     if (READ_HALF_WORD(ADDR_SECTOR_SETTINGS) != 0xffff)     // Если настройки уже сохранялись
     {
@@ -71,13 +64,13 @@ void CPU::FLASH_::LoadSettings()
         do
         {
             address += SIZE_RECORD;
-        } while(READ_HALF_WORD(address) != 0xffff && address < (int)(ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS));
+        } while (READ_HALF_WORD(address) != 0xffff && address < (int)(ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS));
 
         address -= SIZE_RECORD;
 
         uint16 size = READ_HALF_WORD(address);
 
-        if(size != sizeof(Settings))    // Если размер сохранённой структуры не совпадает с размером имеющейся - считаем только калибровочные
+        if (size != sizeof(Settings))    // Если размер сохранённой структуры не совпадает с размером имеющейся - считаем только калибровочные
         {                               // коэффициенты + 2 байта на размер первого элемента струтуры Settings
             ReadBufferBytes((uint)address, &set, 2 + sizeof(set.empty));
         }
@@ -90,7 +83,7 @@ void CPU::FLASH_::LoadSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool CPU::FLASH_::EraseSector(uint startAddress)
+bool FLASH_::EraseSector(uint startAddress)
 {
     if (GetSector(startAddress) == MAX_UINT)
     {
@@ -117,7 +110,7 @@ bool CPU::FLASH_::EraseSector(uint startAddress)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::FLASH_::WriteBufferBytes(uint address, void *buffer, int numBytes)
+void FLASH_::WriteBufferBytes(uint address, void *buffer, int numBytes)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -133,7 +126,7 @@ void CPU::FLASH_::WriteBufferBytes(uint address, void *buffer, int numBytes)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint CPU::FLASH_::GetSector(uint startAddress)
+uint FLASH_::GetSector(uint startAddress)
 {
 #ifndef OPEN
     struct StructSector
@@ -163,7 +156,7 @@ uint CPU::FLASH_::GetSector(uint startAddress)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::FLASH_::ReadBufferBytes(uint addrSrc, void *bufferDest, int size)
+void FLASH_::ReadBufferBytes(uint addrSrc, void *bufferDest, int size)
 {
     uint8 *src = (uint8 *)addrSrc;
     uint8 *dest = (uint8 *)bufferDest;

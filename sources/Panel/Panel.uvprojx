@@ -1877,11 +1877,6 @@
               <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
-              <FileName>CPU_FLASH.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CPU_IT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
@@ -1941,6 +1936,16 @@
         <Group>
           <GroupName>Hardware/Modules</GroupName>
           <Files>
+            <File>
+              <FileName>EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\EEPROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\EEPROM.h</FilePath>
+            </File>
             <File>
               <FileName>SPI.cpp</FileName>
               <FileType>8</FileType>

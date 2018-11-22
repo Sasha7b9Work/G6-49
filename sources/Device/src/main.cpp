@@ -25,8 +25,5 @@ int main()
         FreqMeter::Update();
         //FDrive::Update();
         Interface::Update();
-
-        static uint number = 0;
-        LOG_WRITE("Test string %d", number++);
     }
 }

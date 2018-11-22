@@ -138,6 +138,7 @@ void Interface::SendData(Message *)
 
     Message message;
 
+    /*
     if (messages.Size() != 0)
     {
         Message *msg = messages.Front();
@@ -152,7 +153,10 @@ void Interface::SendData(Message *)
 
         messages.Pop();
     }
-    else if (CreateMessageForSend(&message))
+    else 
+        */
+        
+    if (CreateMessageForSend(&message))
     {
         Timer::PauseOnTime(2);
 

@@ -90,9 +90,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_Keyboard.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
-      <Filter>Hardware</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -299,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="..\..\common\Message.cpp">
       <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Modules\EEPROM.cpp">
+      <Filter>Hardware\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,6 +583,9 @@
     </ClInclude>
     <ClInclude Include="..\..\common\Message.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Hardware\Modules\EEPROM.h">
+      <Filter>Hardware\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

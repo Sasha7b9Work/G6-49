@@ -209,9 +209,6 @@
     <ClCompile Include="..\..\Panel\src\Hardware\CPU.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Hardware\CPU_FLASH.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Hardware\CPU_IT.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -221,6 +218,7 @@
     <ClCompile Include="..\..\Panel\src\Hardware\LTDC.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Hardware\Modules\EEPROM.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\Modules\SPI.cpp" />
     <ClCompile Include="..\..\Panel\src\Hardware\stm429.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -368,6 +366,7 @@
     <ClInclude Include="..\..\Panel\src\Hardware\Controls.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\CPU.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\LTDC.h" />
+    <ClInclude Include="..\..\Panel\src\Hardware\Modules\EEPROM.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Modules\SPI.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\stm429.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />

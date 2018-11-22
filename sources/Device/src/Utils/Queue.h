@@ -4,11 +4,22 @@
 class Queue
 {
 public:
+    Queue();
+
     Message *Front();
 
     void Push(Message *message);
 
     void Pop();
 
-    uint Size();
+    int Size();
+
+private:
+    int first;
+
+    int last;
+
+    static const uint SIZE = 100U;
+
+    Message *storage[SIZE];
 };
