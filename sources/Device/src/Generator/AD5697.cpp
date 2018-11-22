@@ -47,10 +47,35 @@ void AD5697::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static float CalculateOffset(Chan ch, float offset)
+{
+    float zero = CAL_AD9952_OFFSET_ZERO(ch);
+    float pos = CAL_AD9952_OFFSET_POS(ch);
+    float neg = CAL_AD9952_OFFSET_NEG(ch);
+
+    float result = 0;
+
+    if (offset > 0)
+    {
+        float sum = zero + pos;
+
+        result = 2048.0f - (offset / 5000.0f - zero / sum) * sum;
+
+        LIMITATION(result, 0.0f, 4095.0f);
+    }
+    else
+    {
+        result = 2048.0f + offset / 5000.0f * (neg - zero);
+
+        LIMITATION(result, 0.0f, 4095.0f);
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Chan ch, float offset)
 {
-    float scale = 4095.0f / 10.0f;
-
     if (offset == 0.0f)
     {
         offset = CAL_AD9952_OFFSET_ZERO(ch);
@@ -65,7 +90,7 @@ void AD5697::SetOffset(Chan ch, float offset)
     }
     else
     {
-        offset = 4095.0f - (offset + 5.0f) * scale;
+        offset = CalculateOffset(ch, offset);
     }
 
     uint16 value = (uint16)((uint16)offset << 4);
