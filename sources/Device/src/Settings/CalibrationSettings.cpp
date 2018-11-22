@@ -17,7 +17,7 @@ static const CalibrationSettings defSet =
     {0, 0}
 };
 
-CalibrationSettings set = defSet;
+CalibrationSettings setCal = defSet;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void CalibrationSettings::Load()

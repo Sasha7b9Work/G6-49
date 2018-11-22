@@ -6,6 +6,7 @@
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"
+#include "Settings/CalibrationSettings.h"
 #include "CommonTypes.h"
 #endif
 
@@ -17,6 +18,7 @@ static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::Init()
 {
+    setCal.Load();
     EnableChannel(Chan::A, false);
     EnableChannel(Chan::B, false);
     AD9952::Init();

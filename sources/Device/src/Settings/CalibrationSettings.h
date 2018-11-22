@@ -4,12 +4,12 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define CAL_AD9952_OFFSET_NEG(ch)   set.cal_AD9952_Offset_Negative[ch]
-#define CAL_AD9952_OFFSET_POS(ch)   set.cal_AD9952_Offset_Positive[ch]
-#define CAL_AD9952_OFFSET_ZERO(ch)  set.cal_AD9952_Offset_Zero[ch]
-#define CAL_AD9952_AMPLITUDE(ch)    set.cal_AD9952_Amplitude[ch]
-#define CAL_DDS_MAX(ch)             set.cal_DDS_MAX[ch]
-#define CAL_DDS_MIN(ch)             set.cal_DDS_MIN[ch]
+#define CAL_AD9952_OFFSET_NEG(ch)   setCal.cal_AD9952_Offset_Negative[ch]
+#define CAL_AD9952_OFFSET_POS(ch)   setCal.cal_AD9952_Offset_Positive[ch]
+#define CAL_AD9952_OFFSET_ZERO(ch)  setCal.cal_AD9952_Offset_Zero[ch]
+#define CAL_AD9952_AMPLITUDE(ch)    setCal.cal_AD9952_Amplitude[ch]
+#define CAL_DDS_MAX(ch)             setCal.cal_DDS_MAX[ch]
+#define CAL_DDS_MIN(ch)             setCal.cal_DDS_MIN[ch]
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,4 +42,4 @@ struct CalibrationSettings
 };
 
 
-extern CalibrationSettings set;
+extern CalibrationSettings setCal;
