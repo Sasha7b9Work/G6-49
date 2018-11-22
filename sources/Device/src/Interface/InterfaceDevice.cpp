@@ -48,7 +48,7 @@ commands[Command::Number] =
 /* SetPhase                */ Interface::SetPhase,
 /* RunReset                */ Interface::RunReset,
 /* ModeDebug               */ Interface::ModeDebug,
-/* SetDelay                */ Interface::ParameterValue,
+/* SetDelay                */ Interface::SetDelay,
 /* WriteRegister           */ Interface::WriteRegister,
 /* SetDurationRise         */ Interface::Empty,
 /* SetDurationFall         */ Interface::Empty,
@@ -456,6 +456,12 @@ void Interface::SetDutyRatio(Message *msg)
 void Interface::SetPhase(Message *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPhase);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetDelay(Message *msg)
+{
+    SetGeneratorParameter(msg, Generator::SetDelay);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

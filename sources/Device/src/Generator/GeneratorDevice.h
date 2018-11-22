@@ -31,11 +31,11 @@ public:
 
     static void SetPhase(Chan ch, float phase);
 
+    static void SetDelay(Chan ch, float duration);
+
 private:
 
     static void SetPeriod(Chan ch, float period);
-
-    static void SetDelay(Chan ch, float duration);
 
     static void SetPacketPeriod(Chan ch, float duration);
 

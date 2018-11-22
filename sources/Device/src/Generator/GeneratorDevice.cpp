@@ -72,7 +72,7 @@ void Generator::SetParameter(Chan ch, Command command, float value)
 /* SetPhase                */ EmptyFunc,
 /* RunReset                */ EmptyFunc,
 /* ModeDebug               */ EmptyFunc,
-/* SetDelay                */ SetDelay,
+/* SetDelay                */ EmptyFunc,
 /* WriteRegister           */ EmptyFunc,
 /* SetDurationRise         */ EmptyFunc,
 /* SetDurationFall         */ EmptyFunc,

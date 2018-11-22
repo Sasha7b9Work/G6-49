@@ -53,6 +53,8 @@ public:
 
     static void SetPhase(Message *);
 
+    static void SetDelay(Message *);
+
     static void ParameterValue(Message *);
 
     static void EnableChannel(Message *);
