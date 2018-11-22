@@ -3,23 +3,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define LOG_WRITE(...)  Console::AddString(__VA_ARGS__)
-#define LOG_ERROR(...)  Console::AddString(__VA_ARGS__)
+#define LOG_WRITE(...)  Log::AddString(__VA_ARGS__)
+#define LOG_ERROR(...)  Log::AddString(__VA_ARGS__)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Console
+class Log
 {
 public:
-    static bool ExistString();
-    /// ¬озвращает передаваемую строку
-    static char *GetString();
-    /// ”дал€ет передаваемую строку из хранилища
-    static void DeleteString();
-
     static void AddString(char *format, ...);
-
-private:
-    static void AddConstString(char *buffer);
-    static void AddConstString(pString buffer);
 };

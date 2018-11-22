@@ -138,25 +138,19 @@ void Interface::SendData(Message *)
 
     Message message;
 
-    /*
     if (messages.Size() != 0)
     {
-        Message *msg = messages.Front();
-
         Timer::PauseOnTime(2);
 
         CPU::SetReady();
 
-        Transceiver::Transmit(msg);
+        Transceiver::Transmit(messages.Front());
 
         CPU::SetBusy();
 
         messages.Pop();
     }
-    else 
-        */
-        
-    if (CreateMessageForSend(&message))
+    else if (CreateMessageForSend(&message))
     {
         Timer::PauseOnTime(2);
 
@@ -176,15 +170,10 @@ bool Interface::CreateMessageForSend(Message *msg)
         msg->Create(5, Command::FreqMeasure, freqForSend);
         freqForSend = MAX_UINT;
     }
-    else if (Console::ExistString())
+    else if(messages.Size() == 0)
     {
-        char *string = Console::GetString();
-
-        msg->Create(std::strlen(string) + 1 + 1,        // Один байт добавляем на название команды и один на завершающий ноль
-                    Command::Log);
-
-        std::strcpy((char *)msg->Data() + 1, string);
-        Console::DeleteString();
+        static uint count = 0;
+        LOG_WRITE("Test string %d", count++);
     }
     else
     {
