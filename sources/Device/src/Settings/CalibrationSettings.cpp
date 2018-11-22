@@ -37,7 +37,7 @@ void CalibrationSettings::Save()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &rhs)
 {
-    std::memcpy(this, rhs.unused, SIZE_STRUCT);
+    std::memcpy(this, rhs.unused, sizeof(*this));
 
     return *this;
 }
