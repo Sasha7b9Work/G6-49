@@ -78,36 +78,36 @@ commands[Command::Number] =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Update()
 {
-#define TIMEOUT 200
-
     CPU::SetReady();
 
     uint size = 0;
 
-    if (SPI1_::Receive(&size, 4))                                                               // Узнаём размер принимаемого сообщения
+    if (SPI1_::Receive(&size, 4, 10))                                                           // Узнаём размер принимаемого сообщения
     {
         Message first;              // Сюда принимаем первое сообщение
         Message second;             // Сюда принимаем второе сообщение
 
+        uint timeout = size > 100U ? 200U : 10U;
+
         if (first.AllocateMemory(size))
         {
-            if (SPI1_::Receive(first.Data(), first.Size(), TIMEOUT))                            // Принимаем данные
+            if (SPI1_::Receive(first.Data(), first.Size(), timeout))                            // Принимаем данные
             {
-                if (SPI1_::Transmit(&size, 4, TIMEOUT))                                         // Передаём его размер
+                if (SPI1_::Transmit(&size, 4, timeout))                                         // Передаём его размер
                 {
-                    if (SPI1_::Transmit(first.Data(), first.Size(), TIMEOUT))                   // И данные
+                    if (SPI1_::Transmit(first.Data(), first.Size(), timeout))                   // И данные
                     {
-                        if (SPI1_::Receive(&size, 4))
+                        if (SPI1_::Receive(&size, 4, 10))
                         {
                             if (second.AllocateMemory(size))                                    // Второй раз сообщение будем принимать в этот буфер
                             {
-                                if (SPI1_::Receive(second.Data(), second.Size(), TIMEOUT))      // Что и делаем
+                                if (SPI1_::Receive(second.Data(), second.Size(), timeout))      // Что и делаем
                                 {
                                     size = second.Size();
 
-                                    if (SPI1_::Transmit(&size, 4, TIMEOUT))
+                                    if (SPI1_::Transmit(&size, 4, timeout))
                                     {
-                                        if (SPI1_::Transmit(second.Data(), second.Size(), TIMEOUT))
+                                        if (SPI1_::Transmit(second.Data(), second.Size(), timeout))
                                         {
                                             if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
                                             {
@@ -223,7 +223,7 @@ void Interface::Test(Message *)
     uint size = 1 + 4 + 4 + array.Size();
     
     // Передаем количество байт
-    SPI1_::Transmit(&size, 2);
+    SPI1_::Transmit(&size, 2, 10);
     
     // А теперь передаем сами байты
     
@@ -235,21 +235,23 @@ void Interface::Test(Message *)
     BitSet32 bsCRC(array.CRC32());
     bsCRC.WriteToBuffer(buffer + 5);
     
-    SPI1_::Transmit(buffer, 9);
+    SPI1_::Transmit(buffer, 9, 10);
     
-    SPI1_::Transmit(array.Data(), array.Size());
+    SPI1_::Transmit(array.Data(), array.Size(), 100);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetKoeffCalibration(Message *msg)
 {
-    uint8 *data = msg->Data();
+    //uint8 *data = msg->Data();
 
-    char string[100];
+    //char string[100];
 
-    sprintf(string, "кан %d, koэф %d = %d", data[1], data[2], (int8)data[3]);
+    //BitSet16 bs(msg->Data() + 3);
 
-    Console::AddString(string);
+    //sprintf(string, "кан %d, koэф %d = %d", data[1], data[2], (int16)bs.halfWord);
+
+    //Console::AddString(string);
 
     msg->TakeByte();
 
@@ -259,6 +261,7 @@ void Interface::SetKoeffCalibration(Message *msg)
     {
         &CAL_AD9952_OFFSET_NEG(Chan::A),
         &CAL_AD9952_OFFSET_ZERO(Chan::A),
+        &CAL_AD9952_OFFSET_POS(Chan::A),
         &CAL_AD9952_AMPLITUDE(Chan::A),
         &CAL_DDS_MAX(Chan::A),
         &CAL_DDS_MIN(Chan::A)
@@ -449,9 +452,9 @@ void Interface::SendFrequency(uint value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(void *buffer, uint size)
 {
-    SPI1_::Transmit(&size, 2);
+    SPI1_::Transmit(&size, 2, 10);
 
-    SPI1_::Transmit(buffer, size);
+    SPI1_::Transmit(buffer, size, 100);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

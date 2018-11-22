@@ -4,6 +4,7 @@
 #include "log.h"
 #include "Transceiver.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #endif
 
