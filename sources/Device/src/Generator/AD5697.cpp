@@ -53,47 +53,25 @@ static float CalculateOffset(Chan ch, float offset)
     float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
     float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095
 
-    float result = 0;
-
     if (offset > 0)
     {
         float scale = (zero - pos) / 5.0f;
 
-        result = pos + scale * (5.0f - offset);
+        return pos + scale * (5.0f - offset);
     }
-    else
+    else if(offset < 0)
     {
-        result = 2048.0f + offset / 5.0f * (neg - zero);
+        float scale = (neg - zero) / 5.0f;
 
-        LIMITATION(result, 0.0f, 4095.0f);
+        return neg - scale * (5.0f + offset);
     }
-
-    return result;
+    return zero;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Chan ch, float offset)
 {
-    float code = 0.0f;
-
-    if (offset == 0.0f)
-    {
-        code = CAL_AD9952_OFFSET_ZERO(ch);
-    }
-    else if (offset == -5.0f)
-    {
-        code = CAL_AD9952_OFFSET_NEG(ch);
-    }
-    else if (offset == 5.0f)
-    {
-        code = CAL_AD9952_OFFSET_POS(ch);
-    }
-    else
-    {
-        code = CalculateOffset(ch, offset);
-    }
-
-    LOG_WRITE("Смещение %.1f, пишу %d", offset, (uint16)code);
+    float code = CalculateOffset(ch, offset);
 
     uint16 value = (uint16)((uint16)code << 4);
 
