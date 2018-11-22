@@ -14,7 +14,9 @@ public:
     ~Message();
 
     void Create(uint size, uint8);
+    void Create(uint size, uint8, uint8);
     void Create(uint size, uint8, uint);
+    void Create(uint size, uint8, uint8, uint8);
     void Create(uint size, uint8, uint8, float);
     void Create(uint size, uint8, uint8, uint8, uint16);
 
