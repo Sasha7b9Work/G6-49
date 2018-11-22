@@ -23,7 +23,7 @@ static void OnPress_OffsetAD9952(bool enter, KoeffCal::E koeff)
     PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan::A, enter, koeff);
 }
 
-static void OnChange_OffsetAD9952(KoeffCal::E koeff)
+static void OnChange_KoeffAD9952(KoeffCal::E koeff)
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, koeff);
 }
@@ -32,7 +32,7 @@ static void OnChange_OffsetAD9952(KoeffCal::E koeff)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_NegativeAD9952()
 {
-    OnChange_OffsetAD9952(KoeffCal::AD9952_NEG);
+    OnChange_KoeffAD9952(KoeffCal::AD9952_NEG);
 }
 
 static void OnPress_NegativeAD9952(bool enter)
@@ -51,7 +51,7 @@ DEF_GOVERNOR(gNegativeAD9952,                                                   
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_PositiveAD9952()
 {
-    OnChange_OffsetAD9952(KoeffCal::AD9952_POS);
+    OnChange_KoeffAD9952(KoeffCal::AD9952_POS);
 }
 
 static void OnPress_PositiveAD9952(bool enter)
@@ -70,7 +70,7 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_ZeroAD9952()
 {
-    OnChange_OffsetAD9952(KoeffCal::AD9952_ZERO);
+    OnChange_KoeffAD9952(KoeffCal::AD9952_ZERO);
 }
 
 static void OnPress_ZeroAD9952(bool enter)
@@ -89,7 +89,7 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_AmplitudeAD9952()
 {
-
+    OnChange_KoeffAD9952(KoeffCal::AD9952_AMPL);
 }
 
 static void OnPress_AmplitudeAD9952(bool enter)
@@ -100,7 +100,7 @@ static void OnPress_AmplitudeAD9952(bool enter)
     }
 }
 
-DEF_GOVERNOR( gAmplitudeAD9952,                                                                                                   //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A - AD9952 –‡ÁÏ‡ı ---
+DEF_GOVERNOR(gAmplitudeAD9952,                                                                                                   //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A - AD9952 –‡ÁÏ‡ı ---
     "AD9952 –‡ÁÏ‡ı", "AD9952 Amplitude",
     "Õ‡ÒÚÓÈÍ‡ ‡ÁÏ‡ı‡ AD9952",
     "Amplitude settings AD9952",

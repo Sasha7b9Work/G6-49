@@ -21,6 +21,24 @@ void PageSignals::PageCalibration::PrepareForAmplitudeAD9952(Chan /*ch*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/// «аписать нужное дл€ данной калибровки смещение
+static void WriteOffset(Chan ch, KoeffCal::E koeff)
+{
+    if (koeff == KoeffCal::AD9952_ZERO)
+    {
+        Generator::SetOffset(ch, 0.0f);
+    }
+    else if (koeff == KoeffCal::AD9952_NEG)
+    {
+        Generator::SetOffset(ch, +5.0f);
+    }
+    else if (koeff == KoeffCal::AD9952_POS)
+    {
+        Generator::SetOffset(ch, -5.0f);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 {
     Message message;
@@ -30,55 +48,16 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 
     setCal.Save();
 
-    if (koeff == KoeffCal::AD9952_ZERO)
-    {
-        Generator::SetOffset(ch, 0.0f);
-    }
-    else if (koeff == KoeffCal::AD9952_POS)
-    {
-        Generator::SetOffset(ch, +5.0f);
-    }
-    else if (koeff == KoeffCal::AD9952_NEG)
-    {
-        Generator::SetOffset(ch, -5.0f);
-    }
+    WriteOffset(ch, koeff);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, KoeffCal::E koeff)
 {
-    static const struct StructValue
-    {
-        float value;
-        StructValue(float v) : value(v) {};
-    }
-    values[KoeffCal::Number] =
-    {
-        -5.0f,
-        0.0f,
-        5.0f,
-        0.0f,
-        0.0f,
-        0.0f
-    };
-
     if (enter)
     {
         PrepareForOffsetAD9952(ch);
         Generator::SetAmplitude(ch, 0.0f);
-        Generator::SetOffset(ch, values[koeff].value);
-    }
-
-    if (koeff == KoeffCal::AD9952_ZERO)
-    {
-        Generator::SetOffset(ch, 0.0f);
-    }
-    else if (koeff == KoeffCal::AD9952_POS)
-    {
-        Generator::SetOffset(ch, +5.0f);
-    }
-    else if (koeff == KoeffCal::AD9952_NEG)
-    {
-        Generator::SetOffset(ch, -5.0f);
+        WriteOffset(ch, koeff);
     }
 }
