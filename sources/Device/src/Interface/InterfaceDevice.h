@@ -43,6 +43,8 @@ public:
 
     static void SetFrequency(Message *);
 
+    static void SetAmplitude(Message *);
+
     static void ParameterValue(Message *);
 
     static void EnableChannel(Message *);

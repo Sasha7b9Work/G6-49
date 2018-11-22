@@ -41,7 +41,7 @@ commands[Command::Number] =
 /* EnableChannel           */ Interface::EnableChannel,
 /* SetFormWave             */ Interface::SetFormWave,
 /* SetFrequency            */ Interface::SetFrequency,
-/* SetAmplitude            */ Interface::ParameterValue,
+/* SetAmplitude            */ Interface::SetAmplitude,
 /* SetOffset               */ Interface::ParameterValue,
 /* SetDuration             */ Interface::ParameterValue,
 /* SetDutyRatio            */ Interface::ParameterValue,
@@ -422,12 +422,21 @@ static void ParseParameters(Message *msg, Chan *ch, float *value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::SetFrequency(Message *message)
+void Interface::SetFrequency(Message *msg)
 {
     Chan ch = Chan::A;
     float frequency = 0.0f;
-    ParseParameters(message, &ch, &frequency);
+    ParseParameters(msg, &ch, &frequency);
     Generator::SetFrequency(ch, frequency);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetAmplitude(Message *msg)
+{
+    Chan ch = Chan::A;
+    float amplitude = 0.0f;
+    ParseParameters(msg, &ch, &amplitude);
+    Generator::SetAmplitude(ch, amplitude);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

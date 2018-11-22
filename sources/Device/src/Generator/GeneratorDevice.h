@@ -23,11 +23,11 @@ public:
 
     static void SetFrequency(Chan ch, float frequency);
 
+    static void SetAmplitude(Chan ch, float amplitude);
+
 private:
 
     static void SetPeriod(Chan ch, float period);
-
-    static void SetAmplitude(Chan ch, float amplitude);
 
     static void SetPhase(Chan ch, float phase);
 
