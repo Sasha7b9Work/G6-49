@@ -25,6 +25,8 @@ public:
 
     static void SetAmplitude(Chan ch, float amplitude);
 
+    static void SetDuration(Chan ch, float duration);
+
 private:
 
     static void SetPeriod(Chan ch, float period);
@@ -32,8 +34,6 @@ private:
     static void SetPhase(Chan ch, float phase);
 
     static void SetDutyRatio(Chan ch, float dutyRatio);
-
-    static void SetDuration(Chan ch, float duration);
 
     static void SetDelay(Chan ch, float duration);
 

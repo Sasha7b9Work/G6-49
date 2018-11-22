@@ -47,6 +47,8 @@ public:
 
     static void SetOffset(Message *);
 
+    static void SetDuration(Message *);
+
     static void ParameterValue(Message *);
 
     static void EnableChannel(Message *);

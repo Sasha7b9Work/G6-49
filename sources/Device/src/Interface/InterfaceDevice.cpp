@@ -43,7 +43,7 @@ commands[Command::Number] =
 /* SetFrequency            */ Interface::SetFrequency,
 /* SetAmplitude            */ Interface::SetAmplitude,
 /* SetOffset               */ Interface::SetOffset,
-/* SetDuration             */ Interface::ParameterValue,
+/* SetDuration             */ Interface::SetDuration,
 /* SetDutyRatio            */ Interface::ParameterValue,
 /* SetPhase                */ Interface::ParameterValue,
 /* RunReset                */ Interface::RunReset,
@@ -438,6 +438,12 @@ void Interface::SetAmplitude(Message *msg)
 void Interface::SetOffset(Message *msg)
 {
     SetGeneratorParameter(msg, Generator::SetOffset);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetDuration(Message *msg)
+{
+    SetGeneratorParameter(msg, Generator::SetDuration);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
