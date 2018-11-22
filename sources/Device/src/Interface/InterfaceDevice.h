@@ -55,6 +55,8 @@ public:
 
     static void SetDelay(Message *);
 
+    static void SetManipulationDuration(Message *);
+
     static void ParameterValue(Message *);
 
     static void EnableChannel(Message *);

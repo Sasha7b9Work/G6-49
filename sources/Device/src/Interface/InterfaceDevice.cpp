@@ -55,7 +55,7 @@ commands[Command::Number] =
 /* SetDurationStady        */ Interface::Empty,
 /* SetDutyFactor           */ Interface::Empty,
 /* SetManipulation         */ Interface::SetManipulation,
-/* SetManipulationDuration */ Interface::ParameterValue,
+/* SetManipulationDuration */ Interface::SetManipulationDuration,
 /* SetManipulationPeriod   */ Interface::ParameterValue,
 /* SetPacketPeriod         */ Interface::ParameterValue,
 /* SetPacketNumber         */ Interface::ParameterValue,
@@ -462,6 +462,12 @@ void Interface::SetPhase(Message *msg)
 void Interface::SetDelay(Message *msg)
 {
     SetGeneratorParameter(msg, Generator::SetDelay);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetManipulationDuration(Message *msg)
+{
+    SetGeneratorParameter(msg, Generator::SetManipulationDuration);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

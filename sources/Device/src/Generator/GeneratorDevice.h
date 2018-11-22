@@ -33,6 +33,8 @@ public:
 
     static void SetDelay(Chan ch, float duration);
 
+    static void SetManipulationDuration(Chan ch, float duration);
+
 private:
 
     static void SetPeriod(Chan ch, float period);
@@ -42,8 +44,6 @@ private:
     static void SetPacketNumber(Chan ch, float number);
 
     static void SetManipulationPeriod(Chan ch, float period);
-
-    static void SetManipulationDuration(Chan ch, float duration);
 
     static void EmptyFunc(Chan, float);
 };

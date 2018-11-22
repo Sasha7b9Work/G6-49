@@ -79,7 +79,7 @@ void Generator::SetParameter(Chan ch, Command command, float value)
 /* SetDurationStady        */ EmptyFunc,
 /* SetDutyFactor           */ EmptyFunc,
 /* SetManipulation         */ EmptyFunc,
-/* SetManipulationDuration */ SetManipulationDuration,
+/* SetManipulationDuration */ EmptyFunc,
 /* SetManipulationPeriod   */ SetManipulationPeriod,
 /* SetPacketPeriod         */ SetPacketPeriod,
 /* SetPacketNumber         */ SetPacketNumber,
