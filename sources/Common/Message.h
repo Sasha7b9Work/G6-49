@@ -6,20 +6,21 @@ class Message
 {
 public:
     Message();
+    Message(uint size, uint8 v0);
     Message(uint size, uint8 value0, uint8 value1);
     Message(uint size, uint8 value0, uint8 value1, uint8 value2);
 
     ~Message();
 
-    void Create(uint size, uint8 value0, uint8 value1, uint8 value2, uint16 value3);
+    void Create(uint size, uint8 v0);
+    void Create(uint size, uint8 v0, uint v1);
+    void Create(uint size, uint8 v0, uint8 v1, uint8 v2, uint16 v3);
 
     bool CreateFromMessage(Message *message);
     /// Создать сообщение с выделением памяти
     bool CreateAllocate(uint8 *buffer, uint size);
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
-    /// Положить байт
-    void PutByte(uint8 data);
     /// Положить половину слова
     void PutHalfWord(int16 data);
     void PutHalfWord(uint16 data);
@@ -49,6 +50,10 @@ public:
     bool IsEquals(const Message *message) const;
 
 private:
+    /// Положить байт
+    void PutByte(uint8 data);
+
+
     /// Размер выделенной памяти
     uint allocated;
     /// Адрес начала данных, либо 0, если память не выделена

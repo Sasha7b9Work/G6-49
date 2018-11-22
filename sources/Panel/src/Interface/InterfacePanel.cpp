@@ -62,9 +62,7 @@ void Interface::Update()
 
     time = TIME_MS;
 
-    Message message;
-    message.AllocateMemory(1);
-    message.PutByte(Command::RequestData);
+    Message message(1, Command::RequestData);
 
     Transceiver::Transmit(&message);
 

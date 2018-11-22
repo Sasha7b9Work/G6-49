@@ -173,23 +173,22 @@ bool Interface::CreateMessageForSend(Message *msg)
 {
     if (freqForSend != MAX_UINT)
     {
-        msg->AllocateMemory(5);
-        msg->PutByte(Command::FreqMeasure);
-        msg->PutWord(freqForSend);
+        msg->Create(5, Command::FreqMeasure, freqForSend);
         freqForSend = MAX_UINT;
     }
     else if (Console::ExistString())
     {
         char *string = Console::GetString();
-        msg->AllocateMemory(std::strlen(string) + 1 + 1);    // Один байт добавляем на название команды и один на завершающий ноль
-        msg->PutByte(Command::Log);
+
+        msg->Create(std::strlen(string) + 1 + 1,        // Один байт добавляем на название команды и один на завершающий ноль
+                    Command::Log);
+
         std::strcpy((char *)msg->Data() + 1, string);
         Console::DeleteString();
     }
     else
     {
-        msg->AllocateMemory(1);
-        msg->PutByte(Command::RequestData);
+        msg->Create(1, Command::RequestData);
     }
 
 
