@@ -1,93 +1,118 @@
 #include "stdafx.h"
 #ifndef WIN32
-#include "defines.h"
-#include "CPU.h"
-#include "Hardware/Modules/EEPROM.h"
-#include "Settings/Settings.h"
-#include <stm32f4xx.h>
+#include "EEPROM.h"
 #endif
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+#define ADDR_SECTOR_0   ((uint)0x08000000)  // 16k  Загрузчик
+#define ADDR_SECTOR_1   ((uint)0x08004000)  // 16k
+#define ADDR_SECTOR_2   ((uint)0x08008000)  // 16k
+#define ADDR_SECTOR_3   ((uint)0x0800c000)  // 16k
+#define ADDR_SECTOR_4   ((uint)0x08010000)  // 64k  SettingsCalibration
+//#define ADDR_SECTOR_CALIBRATION ADDR_SECTOR_4
+//#define SIZE_SECTOR_CALIBRATION (64 * 1024)
+#define ADDR_SECTOR_5   ((uint)0x08020000)  // 128k Основная прошивка 1
+#define ADDR_SECTOR_6   ((uint)0x08040000)  // 128k Основная прошивка 2
+#define ADDR_SECTOR_7   ((uint)0x08060000)  // 128k Основная прошивка 3
+#define ADDR_SECTOR_8   ((uint)0x08080000)  // 128k
+#define ADDR_SECTOR_9   ((uint)0x080a0000)  // 128k
+#define ADDR_SECTOR_10  ((uint)0x080c0000)  // 128k
+#define ADDR_SECTOR_11  ((uint)0x080e0000)  // 128k
+#define ADDR_SECTOR_SETTINGS ADDR_SECTOR_11
+#define SIZE_SECTOR_SETTINGS (128 * 1024)
+
+#define CLEAR_FLASH_FLAGS \
+    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP    |  /* end of operation flag              */   \
+                           FLASH_FLAG_OPERR  |  /* operation error flag               */   \
+                           FLASH_FLAG_WRPERR |  /* write protected error flag         */   \
+                           FLASH_FLAG_PGAERR |  /* programming alignment error flag   */   \
+                           FLASH_FLAG_PGPERR |  /* programming parallelism error flag */   \
+                           FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define CLEAR_FLASH_FLAGS                                                                   \
-    __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP     |  /* end of operation flag              */   \
-                            FLASH_FLAG_OPERR  |  /* operation error flag               */   \
-                            FLASH_FLAG_WRPERR |  /* write protected error flag         */   \
-                            FLASH_FLAG_PGAERR |  /* programming alignment error flag   */   \
-                            FLASH_FLAG_PGPERR |  /* programming parallelism error flag */   \
-                            FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
-
-#define ADDR_SECTOR_SETTINGS    ((uint)0x080E0000)
-#define SIZE_SECTOR_SETTINGS    (128 * 1024)
-#define SIZE_RECORD             (4 * 1024)          ///< Максиммальный размер сохраняемых настроек
-
-#define READ_HALF_WORD(address) (*((volatile uint16 *)address))
+/// Возвращает первый адрес, значение в котором равно 0xffffffff (можно записывать). Поиск начинается с адреса start, продолжается в участке памяти размером sizeFull. Кратно размеру sizeObject
+static uint FindFirstFreeRecord(uint start, uint sizeSector, uint sizeRecord);
+/// Возвращает адрес последнего блока, в котором первый байт не равен 0xffffffff (в нём сохраенены последние настройки)
+static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord);
+/// Стирает сектор с начальным адресом startAddress
+static void EraseSector(uint startAddress);
+/// Записывает size байт из массива data по адресу address
+static void WriteData(uint address, void *data, uint size);
+/// Возвращает системный идентификатор сектора с начальным адресом address. Ежели такового нету, возвращает -1
+static uint GetSector(uint address);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void EEPROM::SaveSettings()
+void EEPROM::SaveSettings(Settings *settings)
 {
-    // Записываем в Settings.size текущий размер структуры Settings
-    set.size = sizeof(Settings);
+    uint address = FindFirstFreeRecord(ADDR_SECTOR_SETTINGS, SIZE_SECTOR_SETTINGS, sizeof(Settings));
 
-    // Находим первый свободный адрес записи
-    int address = ADDR_SECTOR_SETTINGS;
-    while (READ_HALF_WORD(address) != 0xffff &&                             // Пока по адресу, кратному SIZE_RECORD, записаны настройки
-        (uint)address < (ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS))   // и мы не вышли за пределы секторы настроек
+    if (address == 0)
     {
-        address += SIZE_RECORD;
-    }
-
-    if (address == ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS)     // Если адрес указывает на последнюю область сектора для записи настроек
-    {
-        EraseSettings();                                            // То стираем заполненный сектор настроек
+        EraseSector(ADDR_SECTOR_SETTINGS);
         address = ADDR_SECTOR_SETTINGS;
     }
 
-    CURRENT_PAGE = 0;
-    WriteBufferBytes((uint)address, &set, sizeof(Settings));
+    WriteData(address, settings, sizeof(Settings));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::EraseSettings()
+void EEPROM::LoadSettings(Settings *settings)
 {
-    EraseSector(ADDR_SECTOR_SETTINGS);
-}
+    uint address = FindLastOccupiedRecord(ADDR_SECTOR_SETTINGS, SIZE_SECTOR_SETTINGS, sizeof(Settings));
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::LoadSettings()
-{
-    if (READ_HALF_WORD(ADDR_SECTOR_SETTINGS) != 0xffff)     // Если настройки уже сохранялись
+    if (address)                                            // Если нашли сохранённую запись
     {
-        // Находим область сектора с сохранёнными настройками. Настройки записываются последовательно друг за другом по адресам, кратным SIZE_RECORD
-        int address = ADDR_SECTOR_SETTINGS;
-        do
-        {
-            address += SIZE_RECORD;
-        } while (READ_HALF_WORD(address) != 0xffff && address < (int)(ADDR_SECTOR_SETTINGS + SIZE_SECTOR_SETTINGS));
-
-        address -= SIZE_RECORD;
-
-        uint16 size = READ_HALF_WORD(address);
-
-        if (size != sizeof(Settings))    // Если размер сохранённой структуры не совпадает с размером имеющейся - считаем только калибровочные
-        {                               // коэффициенты + 2 байта на размер первого элемента струтуры Settings
-            ReadBufferBytes((uint)address, &set, 2 + sizeof(set.empty));
-        }
-        else
-        {
-            // Читаем в Settings set количество байт, указанное в (int16)*address
-            ReadBufferBytes((uint)address, &set, READ_HALF_WORD(address));
-        }
+        *settings = *((Settings *)address);      // То запишем её в целевой объект
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool EEPROM::EraseSector(uint startAddress)
+static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 {
-    if (GetSector(startAddress) == MAX_UINT)
+    uint address = start;
+    uint end = start + sizeFull;
+
+    while (address < end)
     {
-        return false;
+        if (*(uint *)address == 0xffffffff)
+        {
+            return address;
+        }
+        address += sizeRecord;
+    }
+
+    return 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
+{
+    uint address = FindFirstFreeRecord(start, sizeSector, sizeRecord);
+
+    if (address == 0)                               // Если свободной записи нет, значит, весь сектора заполнен
+    {
+        return start + sizeSector - sizeRecord;     // надо считвать последнюю запись
+    }
+
+    if (address == start)                           // Если первая свободная запись находится в начале сектора, то сектор пуст - запись в него не производилась
+    {
+        return 0;                                   // Возвращаем 0 как признак того, что записей нет
+    }
+
+    return address - sizeRecord;                    // Во всех остальных случаях возвращаем адрес записи, предыдущей по отношению к первой свободной
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void EraseSector(uint startAddress)
+{
+    if (GetSector(startAddress) == (uint)-1)
+    {
+        return;
     }
 
     CLEAR_FLASH_FLAGS;
@@ -105,30 +130,11 @@ bool EEPROM::EraseSector(uint startAddress)
     HAL_FLASHEx_Erase(&isFLASH, &error);
 
     HAL_FLASH_Lock();
-
-    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::WriteBufferBytes(uint address, void *buffer, int numBytes)
+static uint GetSector(uint address)
 {
-    CLEAR_FLASH_FLAGS;
-
-    HAL_FLASH_Unlock();
-
-    for (int i = 0; i < numBytes; i++)
-    {
-        uint64_t data = ((uint8 *)buffer)[i];
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data);
-        address++;
-    }
-    HAL_FLASH_Lock();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint EEPROM::GetSector(uint startAddress)
-{
-#ifndef OPEN
     struct StructSector
     {
         uint number;
@@ -137,32 +143,34 @@ uint EEPROM::GetSector(uint startAddress)
 
     static const StructSector sectors[] =
     {
-        {FLASH_SECTOR_11, ADDR_SECTOR_SETTINGS},
+        {FLASH_SECTOR_4, ADDR_SECTOR_SETTINGS},
         {}
     };
 
     int i = 0;
     while (sectors[i].startAddress)
     {
-        if (sectors[i].startAddress == startAddress)
+        if (sectors[i].startAddress == address)
         {
             return sectors[i].number;
         }
         i++;
     }
-#endif
 
-    return MAX_UINT;
+    return (uint)(-1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::ReadBufferBytes(uint addrSrc, void *bufferDest, int size)
+static void WriteData(uint address, void *data, uint size)
 {
-    uint8 *src = (uint8 *)addrSrc;
-    uint8 *dest = (uint8 *)bufferDest;
+    CLEAR_FLASH_FLAGS;
 
-    for (int i = 0; i < size; i++)
+    HAL_FLASH_Unlock();
+
+    for (uint i = 0; i < size; i++)
     {
-        dest[i] = src[i];
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, ((uint8 *)data)[i]);
     }
+
+    HAL_FLASH_Lock();
 }
