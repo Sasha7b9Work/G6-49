@@ -1,8 +1,8 @@
-#include "Settings.h"
+#include "CalibrationSettings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static const Settings defSet =
+static const CalibrationSettings defSet =
 {
     {0, 0},         // AD9952 -5Â
     {2048, 2048},   // AD9952 0Â
@@ -12,6 +12,6 @@ static const Settings defSet =
     {0, 0}
 };
 
-Settings set = defSet;
+CalibrationSettings set = defSet;
 
 

@@ -190,7 +190,7 @@
     <ClInclude Include="..\..\Device\src\Generator\GeneratorSettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\Generator\GeneratroSettings.h" />
     <ClInclude Include="..\..\Device\src\Hardware\CPU.h" />
-    <ClInclude Include="..\..\Device\src\Hardware\EEPROM.h" />
+    <ClInclude Include="..\..\Device\src\Hardware\Modules\EEPROM.h" />
     <ClInclude Include="..\..\Device\src\Hardware\Modules\SPI.h" />
     <ClInclude Include="..\..\Device\src\Hardware\stm32.h" />
     <ClInclude Include="..\..\Device\src\Hardware\stm407.h" />
@@ -207,7 +207,7 @@
     <ClInclude Include="..\..\Device\src\libs\USBH\usbh_diskio.h" />
     <ClInclude Include="..\..\Device\src\log.h" />
     <ClInclude Include="..\..\Device\src\SCPI\SCPI.h" />
-    <ClInclude Include="..\..\Device\src\Settings\Settings.h" />
+    <ClInclude Include="..\..\Device\src\Settings\CalibrationSettings.h" />
     <ClInclude Include="..\..\Device\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\stdafx.h" />
     <ClInclude Include="..\..\Device\src\structs.h" />
@@ -280,9 +280,7 @@
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU_HCD.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp" />
-    <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\Modules\EEPROM.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Modules\SPI.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\stm407.cpp" />
@@ -346,7 +344,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp" />
-    <ClCompile Include="..\..\Device\src\Settings\Settings.cpp">
+    <ClCompile Include="..\..\Device\src\Settings\CalibrationSettings.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Device\src\stdafx.cpp">

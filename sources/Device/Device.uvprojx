@@ -1352,16 +1352,6 @@
               <FilePath>.\src\Hardware\CPU_HCD.cpp</FilePath>
             </File>
             <File>
-              <FileName>EEPROM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\EEPROM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EEPROM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\EEPROM.h</FilePath>
-            </File>
-            <File>
               <FileName>stm32.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\stm32.cpp</FilePath>
@@ -1417,6 +1407,16 @@
           <GroupName>Hardware/Modules</GroupName>
           <Files>
             <File>
+              <FileName>EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Modules\EEPROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>EEPROM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Modules\EEPROM.h</FilePath>
+            </File>
+            <File>
               <FileName>SPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Modules\SPI.cpp</FilePath>
@@ -1467,14 +1467,19 @@
           <GroupName>Settings</GroupName>
           <Files>
             <File>
-              <FileName>Settings.cpp</FileName>
+              <FileName>CalibrationSettings.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+              <FilePath>.\src\Settings\CalibrationSettings.cpp</FilePath>
             </File>
             <File>
-              <FileName>Settings.h</FileName>
+              <FileName>CalibrationSettings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
+              <FilePath>.\src\Settings\CalibrationSettings.h</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsTypes.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
             </File>
           </Files>
         </Group>

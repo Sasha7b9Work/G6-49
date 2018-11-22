@@ -6,7 +6,6 @@
 #include "Hardware/Timer.h"
 #include "Interface/InterfaceDevice.h"
 #include "Utils/Debug.h"
-#include "Settings/Settings.h"
 #endif
 
 

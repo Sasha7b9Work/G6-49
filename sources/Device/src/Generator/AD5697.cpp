@@ -4,7 +4,7 @@
 #include "log.h"
 #include "AD5697.h"
 #include "Command.h"
-#include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
 #endif
 
