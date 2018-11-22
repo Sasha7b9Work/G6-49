@@ -404,16 +404,6 @@ void Interface::WriteRegister(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::ParameterValue(Message *msg)
-{
-    Command command = (Command::E)msg->TakeByte();
-
-    Chan ch = (Chan::E)msg->TakeByte();
-    
-    Generator::SetParameter(ch, command, msg->TakeFloat());
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetGeneratorParameter(Message *msg, void(*func)(Chan, float))
 {
     msg->TakeByte();            // Удаляем команду - нам она не нужна, мы уже знаем функцию func

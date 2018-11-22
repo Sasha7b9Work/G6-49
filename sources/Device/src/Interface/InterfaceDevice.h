@@ -65,8 +65,6 @@ public:
 
     static void SetPacketNumber(Message *);
 
-    static void ParameterValue(Message *);
-
     static void EnableChannel(Message *);
 
     static void RunReset(Message *);

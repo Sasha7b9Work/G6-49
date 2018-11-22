@@ -17,8 +17,6 @@ public:
 
     static void SetFormWave(Chan ch, Form form);
 
-    static void SetParameter(Chan ch, Command command, float value);
-
     static void SetOffset(Chan ch, float offset);
 
     static void SetFrequency(Chan ch, float frequency);
@@ -42,10 +40,4 @@ public:
     static void SetPacketNumber(Chan ch, float number);
 
     static void SetPeriod(Chan ch, float period);
-
-private:
-
-    
-
-    static void EmptyFunc(Chan, float);
 };

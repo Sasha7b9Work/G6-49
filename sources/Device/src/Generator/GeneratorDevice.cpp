@@ -51,58 +51,6 @@ void Generator::SetFormWave(Chan ch, Form form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetParameter(Chan ch, Command command, float value)
-{
-    static const struct StructFunc
-    {
-        typedef void (*pFuncChF)(Chan, float);
-        pFuncChF func;
-        StructFunc(pFuncChF f) : func(f) {};
-    }
-    func[Command::Number] =
-    {
-/* RequestData             */ EmptyFunc,
-/* EnableChannel           */ EmptyFunc,
-/* SetFormWave             */ EmptyFunc,
-/* SetFrequency            */ EmptyFunc,
-/* SetAmplitude            */ EmptyFunc,
-/* SetOffset               */ EmptyFunc,
-/* SetDuration             */ EmptyFunc,
-/* SetDutyRatio            */ EmptyFunc,
-/* SetPhase                */ EmptyFunc,
-/* RunReset                */ EmptyFunc,
-/* ModeDebug               */ EmptyFunc,
-/* SetDelay                */ EmptyFunc,
-/* WriteRegister           */ EmptyFunc,
-/* SetDurationRise         */ EmptyFunc,
-/* SetDurationFall         */ EmptyFunc,
-/* SetDurationStady        */ EmptyFunc,
-/* SetDutyFactor           */ EmptyFunc,
-/* SetManipulation         */ EmptyFunc,
-/* SetManipulationDuration */ EmptyFunc,
-/* SetManipulationPeriod   */ EmptyFunc,
-/* SetPacketPeriod         */ EmptyFunc,
-/* SetPacketNumber         */ EmptyFunc,
-/* SetStartMode            */ EmptyFunc,
-/* SetPeriod               */ EmptyFunc,
-/* SetPolarity             */ EmptyFunc,
-/* SetManipulationMode     */ EmptyFunc,
-/* LoadFromDDS             */ EmptyFunc,
-/* FreqMeasure             */ EmptyFunc,
-/* Log                     */ EmptyFunc,
-/* FDrive_NumDirsAndFiles  */ EmptyFunc,
-/* FDrive_Mount            */ EmptyFunc,
-/* FDrive_RequestDir       */ EmptyFunc,
-/* FDrive_RequestFile      */ EmptyFunc,
-/* Test                    */ EmptyFunc,
-/* SetKoeffCalibration     */ EmptyFunc,
-/* GetKoeffCalibration     */ EmptyFunc
-    };
-
-    func[command].func(ch, value);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFrequency(Chan ch, float frequency)
 {
     if (waveIsSine)
@@ -193,10 +141,5 @@ void Generator::SetDuration(Chan ch, float value)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDelay(Chan, float)
-{
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::EmptyFunc(Chan, float)
 {
 }
