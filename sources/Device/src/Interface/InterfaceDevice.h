@@ -32,6 +32,8 @@ public:
     };
 
     static void Update();
+    /// Функция запрашивает новое сообщение, которое будет помещено в очередь для отправки. Вызывающая функция должа в месте вызова заполнить его информацией
+    static Message *GetNewMessageForQueue();
     /// Послать в панель измеренное значение частоты
     static void SendFrequency(uint frequency);
 

@@ -173,6 +173,7 @@
     <ClInclude Include="..\..\common\_VS\inttypes.h" />
     <ClInclude Include="..\..\common\_VS\limits.h" />
     <ClInclude Include="..\..\common\_VS\math.h" />
+    <ClInclude Include="..\..\common\_VS\queue" />
     <ClInclude Include="..\..\common\_VS\stdarg.h" />
     <ClInclude Include="..\..\common\_VS\stdint.h" />
     <ClInclude Include="..\..\common\_VS\stdio.h" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "FDrive/FDriveDevice.h"
 #include "Generator/GeneratorDevice.h"
 #include "Generator/AD5697.h"
@@ -24,5 +25,8 @@ int main()
         FreqMeter::Update();
         //FDrive::Update();
         Interface::Update();
+
+        static uint number = 0;
+        LOG_WRITE("Test string %d", number++);
     }
 }

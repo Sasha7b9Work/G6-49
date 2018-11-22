@@ -36,6 +36,7 @@
 #include <stdarg.h>
 #include <cstring>
 #include <cstdlib>
+#include <queue>
 
 #include "usbh_diskio.h"
 #include "usbh_conf.h"

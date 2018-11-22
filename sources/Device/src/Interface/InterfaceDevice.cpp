@@ -20,6 +20,7 @@
 #include "structs.h"
 #include <string.h>
 #include <cstdlib>
+#include <queue>
 #endif
 
 
@@ -74,6 +75,9 @@ commands[Command::Number] =
 /* GetKoeffCalibration     */ Interface::GetKoeffCalibration
 };
 
+
+/// Очередь сообщений, ожидающих отправки
+std::queue<Message*> messages;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Update()
@@ -526,4 +530,12 @@ uint8 *Interface::Data::GetData()
 uint Interface::Data::GetSize() const
 {
     return size;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message *Interface::GetNewMessageForQueue()
+{
+    Message *msg = new Message();
+    messages.push(msg);
+    return msg;
 }
