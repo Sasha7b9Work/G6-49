@@ -57,7 +57,7 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
     "AD9952 +5В", "AD9952 +5V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_POS(Chan::B), 3900, 4095, pageCalibrationB, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
+    CAL_AD9952_OFFSET_POS(Chan::B), 3000, 4095, pageCalibrationB, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
 )
 
 

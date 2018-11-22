@@ -61,11 +61,11 @@ void AD5697::SetOffset(Chan ch, float offset)
     }
     else if (offset == -5.0f)
     {
-        offset = CAL_AD9952_OFFSET_NEG(ch);
+        offset = CAL_AD9952_OFFSET_POS(ch);
     }
     else if (offset == 5.0f)
     {
-        offset = CAL_AD9952_OFFSET_POS(ch);
+        offset = CAL_AD9952_OFFSET_NEG(ch);
     }
     else
     {
