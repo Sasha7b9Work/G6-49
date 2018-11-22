@@ -49,23 +49,21 @@ void AD5697::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static float CalculateOffset(Chan ch, float offset)
 {
-    float zero = CAL_AD9952_OFFSET_ZERO(ch);
-    float pos = CAL_AD9952_OFFSET_POS(ch);
-    float neg = CAL_AD9952_OFFSET_NEG(ch);
+    float zero = CAL_AD9952_OFFSET_ZERO(ch);    // 2048
+    float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
+    float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095
 
     float result = 0;
 
     if (offset > 0)
     {
-        float sum = zero + pos;
+        float scale = (zero - pos) / 5.0f;
 
-        result = 2048.0f - (offset / 5000.0f - zero / sum) * sum;
-
-        LIMITATION(result, 0.0f, 4095.0f);
+        result = pos + scale * (5.0f - offset);
     }
     else
     {
-        result = 2048.0f + offset / 5000.0f * (neg - zero);
+        result = 2048.0f + offset / 5.0f * (neg - zero);
 
         LIMITATION(result, 0.0f, 4095.0f);
     }
@@ -76,24 +74,28 @@ static float CalculateOffset(Chan ch, float offset)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Chan ch, float offset)
 {
+    float code = 0.0f;
+
     if (offset == 0.0f)
     {
-        offset = CAL_AD9952_OFFSET_ZERO(ch);
+        code = CAL_AD9952_OFFSET_ZERO(ch);
     }
     else if (offset == -5.0f)
     {
-        offset = CAL_AD9952_OFFSET_NEG(ch);
+        code = CAL_AD9952_OFFSET_NEG(ch);
     }
     else if (offset == 5.0f)
     {
-        offset = CAL_AD9952_OFFSET_POS(ch);
+        code = CAL_AD9952_OFFSET_POS(ch);
     }
     else
     {
-        offset = CalculateOffset(ch, offset);
+        code = CalculateOffset(ch, offset);
     }
 
-    uint16 value = (uint16)((uint16)offset << 4);
+    LOG_WRITE("Смещение %.1f, пишу %d", offset, (uint16)code);
+
+    uint16 value = (uint16)((uint16)code << 4);
 
     uint8 data[3] = {(uint8)(BINARY_U8(00010000) | (ch == Chan::A ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
 
