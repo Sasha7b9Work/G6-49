@@ -42,7 +42,7 @@ commands[Command::Number] =
 /* SetFormWave             */ Interface::SetFormWave,
 /* SetFrequency            */ Interface::SetFrequency,
 /* SetAmplitude            */ Interface::SetAmplitude,
-/* SetOffset               */ Interface::ParameterValue,
+/* SetOffset               */ Interface::SetOffset,
 /* SetDuration             */ Interface::ParameterValue,
 /* SetDutyRatio            */ Interface::ParameterValue,
 /* SetPhase                */ Interface::ParameterValue,
@@ -432,6 +432,12 @@ void Interface::SetFrequency(Message *msg)
 void Interface::SetAmplitude(Message *msg)
 {
     SetGeneratorParameter(msg, Generator::SetAmplitude);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetOffset(Message *msg)
+{
+    SetGeneratorParameter(msg, Generator::SetOffset);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

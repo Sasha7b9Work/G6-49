@@ -45,6 +45,8 @@ public:
 
     static void SetAmplitude(Message *);
 
+    static void SetOffset(Message *);
+
     static void ParameterValue(Message *);
 
     static void EnableChannel(Message *);

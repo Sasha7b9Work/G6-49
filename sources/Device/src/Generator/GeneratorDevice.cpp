@@ -66,7 +66,7 @@ void Generator::SetParameter(Chan ch, Command command, float value)
 /* SetFormWave             */ EmptyFunc,
 /* SetFrequency            */ EmptyFunc,
 /* SetAmplitude            */ EmptyFunc,
-/* SetOffset               */ SetOffset,
+/* SetOffset               */ EmptyFunc,
 /* SetDuration             */ SetDuration,
 /* SetDutyRatio            */ SetDutyRatio,
 /* SetPhase                */ SetPhase,
