@@ -32,9 +32,14 @@ struct CalibrationSettings
             int16   cal_DDS_MAX[Chan::Number];
             int16   cal_DDS_MIN[Chan::Number];
         };
-        uint8 unused[512];
+#define SIZE_STRUCT 512
+        uint8 unused[SIZE_STRUCT];
     };
     
+    void Save();
+    void Load();
+
+    CalibrationSettings& operator =(const CalibrationSettings &);
 };
 
 
