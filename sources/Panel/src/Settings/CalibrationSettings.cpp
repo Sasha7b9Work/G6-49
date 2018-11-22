@@ -12,12 +12,12 @@
 static const CalibrationSettings defSet =
 {
     0,              // Это значение не должно равняться (-1), чтобы загрузчик мог определить наличие настроек в EEPROM-памяти
-    {0, 0},         // AD9952 -5В
+    {4095, 4095},   // AD9952 -5В
     {2048, 2048},   // AD9952 0В
-    {4095, 4095},   // AD9952 +5В
-    {0, 0},
-    {0, 0},
-    {0, 0}
+    {0,    0},      // AD9952 +5В
+    {0,    0},
+    {0,    0},
+    {0,    0}
 };
 
 CalibrationSettings setCal = defSet;
@@ -67,11 +67,5 @@ void CalibrationSettings::CreateMessage(Message *message, Chan ch, KoeffCal::E k
     message->PutByte((uint8)Command::SetKoeffCalibration);
     message->PutByte((uint8)ch);
     message->PutByte((uint8)koeff);
-    message->PutHalfWord((uint16)values[koeff].pointer[ch]);
-
-    uint8 *data = message->Data();
-
-    BitSet16 bs(data + 3);
-
-    LOG_WRITE("Пишу %d %d %d", *(data + 1), *(data + 2), (int16)bs.halfWord);
+    message->PutHalfWord(values[koeff].pointer[ch]);
 }

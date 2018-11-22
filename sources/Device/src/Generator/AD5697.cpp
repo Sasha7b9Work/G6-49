@@ -49,10 +49,6 @@ void AD5697::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Chan ch, float offset)
 {
-    LOG_WRITE("Установить смещение %.1f", offset);
-
-    offset = -offset;
-
     float scale = 4095.0f / 10.0f;
 
     if (offset == 0.0f)
@@ -61,18 +57,16 @@ void AD5697::SetOffset(Chan ch, float offset)
     }
     else if (offset == -5.0f)
     {
-        offset = CAL_AD9952_OFFSET_POS(ch);
+        offset = CAL_AD9952_OFFSET_NEG(ch);
     }
     else if (offset == 5.0f)
     {
-        offset = CAL_AD9952_OFFSET_NEG(ch);
+        offset = CAL_AD9952_OFFSET_POS(ch);
     }
     else
     {
-        offset = (offset + 5.0f) * scale;
+        offset = 4095.0f - (offset + 5.0f) * scale;
     }
-
-    Console::AddString("Пишу в смещение %.1f", offset);
 
     uint16 value = (uint16)((uint16)offset << 4);
 

@@ -38,7 +38,7 @@ DEF_GOVERNOR( gNegativeAD9952,                                                  
     "AD9952 -5В", "AD9952 -5V",
     "Настройка уровня -5В AD9952",
     "Level setting -5V AD9952",
-    CAL_AD9952_OFFSET_NEG(Chan::B), 0, 150, pageCalibrationB, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
+    CAL_AD9952_OFFSET_NEG(Chan::B), 3000, 4095, pageCalibrationB, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
 )
 
 
@@ -57,7 +57,7 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
     "AD9952 +5В", "AD9952 +5V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_POS(Chan::B), 3000, 4095, pageCalibrationB, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
+    CAL_AD9952_OFFSET_POS(Chan::B), 0, 1000, pageCalibrationB, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
 )
 
 
@@ -76,7 +76,7 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
     "AD9952 0В", "AD9952 0V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_ZERO(Chan::B), 1900, 2200, pageCalibrationB, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9952
+    CAL_AD9952_OFFSET_ZERO(Chan::B), 1000, 3000, pageCalibrationB, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9952
 )
 
 
