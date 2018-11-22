@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{AF211104-784
 		doc\04 Загрузчик.h = doc\04 Загрузчик.h
 		doc\05 Структура меню.h = doc\05 Структура меню.h
 		doc\06 Сигналы и их параметры.h = doc\06 Сигналы и их параметры.h
+		doc\07 Компиляция и сборка.h = doc\07 Компиляция и сборка.h
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Device", "DDS-VS\Device\Device.vcxproj", "{F437C9BF-D778-490F-B6DB-313FBC24C15D}"
