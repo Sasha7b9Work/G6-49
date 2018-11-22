@@ -21,7 +21,7 @@ static SPI_HandleTypeDef handleSPI4 =
 		SPI_POLARITY_HIGH,
 		SPI_PHASE_2EDGE,
 		SPI_NSS_SOFT,
-		SPI_BAUDRATEPRESCALER_16,
+		SPI_BAUDRATEPRESCALER_32,
 		SPI_FIRSTBIT_MSB,
 		SPI_TIMODE_DISABLED,
 		SPI_CRCCALCULATION_DISABLED,
@@ -83,23 +83,23 @@ bool SPI4_::Receive(void *recv, uint size, uint timeout)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SPI4_::ReceiveAndCompare(const void *compared, uint size)
+uint SPI4_::ReceiveAndCompare(const void *compared, uint size)
 {
+    uint result = 0;
+
     uint8 byte = 0;
 
     uint8 *data = (uint8 *)compared;
 
     for (uint i = 0; i < size; i++)
     {
-        if (Receive(&byte, 1, 10) && data[i] == byte)
+        if (Receive(&byte, 1, 10) && data[i] != byte)
         {
-            continue;
+            result++;
         }
-
-        return false;
     }
 
-    return true;
+    return result;
 }
 
 

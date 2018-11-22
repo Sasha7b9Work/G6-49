@@ -13,8 +13,8 @@ public:
     static bool Transmit(uint value, uint timeout);
     /// Принять массив данных
     static bool Receive(void *recv, uint size, uint timeout);
-    /// Функция принимает size байт и сравнивает их с compared. Возвращает true, если байты идентичны
-    static bool ReceiveAndCompare(const void *compared, uint size);
+    /// Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
+    static uint ReceiveAndCompare(const void *compared, uint size);
     /// Возвращает true, если прибор готов к обмену
     static bool IsReady();
     /// Ждать пока освободится устройство

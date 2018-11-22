@@ -12,7 +12,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Transceiver::Transmit(Message *message)
 {
-    uint timeout = (message->Size() > 1000U) ? 50U : 10U;
+    uint timeout = (message->Size() > 1000U) ? 100U : 10U;
 
     bool result = false;
 
@@ -32,8 +32,14 @@ void Transceiver::Transmit(Message *message)
 
             result = (newSize == message->Size());
 
-            result = SPI4_::ReceiveAndCompare(message->Data(), message->Size());
+            uint trashedBytes = SPI4_::ReceiveAndCompare(message->Data(), message->Size());
 
+            result = (trashedBytes == 0);
+
+            if (trashedBytes > 0)
+            {
+                //LOG_WRITE("Дефектная передача. Искажено %d байт - %.1f %%", trashedBytes, trashedBytes * 100.0f / message->Size());
+            }
         }
 
         static uint all = 0;
@@ -44,7 +50,7 @@ void Transceiver::Transmit(Message *message)
         if (!result)
         {
             failed++;
-            LOG_WRITE("%d/%d %.1f %% потерь", failed, all, (float)failed / all * 100.0f);
+            //LOG_WRITE("%d/%d %.1f %% потерь", failed, all, (float)failed / all * 100.0f);
         }
 
     };
