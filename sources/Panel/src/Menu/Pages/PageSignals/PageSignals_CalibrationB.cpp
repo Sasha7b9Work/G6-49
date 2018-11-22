@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageSignals.h"
-#include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 #endif
 
 

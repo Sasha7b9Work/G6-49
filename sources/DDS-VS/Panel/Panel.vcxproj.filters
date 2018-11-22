@@ -300,6 +300,9 @@
     <ClCompile Include="..\..\Panel\src\Hardware\Modules\EEPROM.cpp">
       <Filter>Hardware\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Settings\CalibrationSettings.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -586,6 +589,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Hardware\Modules\EEPROM.h">
       <Filter>Hardware\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Settings\CalibrationSettings.h">
+      <Filter>Settings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

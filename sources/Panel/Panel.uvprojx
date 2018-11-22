@@ -2117,9 +2117,19 @@
           <GroupName>Settings</GroupName>
           <Files>
             <File>
-              <FileName>SettingsTypes.h</FileName>
+              <FileName>CalibrationSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\CalibrationSettings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CalibrationSettings.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
+              <FilePath>.\src\Settings\CalibrationSettings.h</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings.cpp</FilePath>
             </File>
             <File>
               <FileName>Settings.h</FileName>
@@ -2127,9 +2137,9 @@
               <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
             <File>
-              <FileName>Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
+              <FileName>SettingsTypes.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
             </File>
           </Files>
         </Group>

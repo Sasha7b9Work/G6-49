@@ -274,6 +274,7 @@
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_CalibrationA.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_CalibrationB.cpp" />
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals_Load.cpp" />
+    <ClCompile Include="..\..\Panel\src\Settings\CalibrationSettings.cpp" />
     <ClCompile Include="..\..\Panel\src\Settings\Settings.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -383,6 +384,7 @@
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageDebug.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageFrequencyCounter.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Pages\PageService.h" />
+    <ClInclude Include="..\..\Panel\src\Settings\CalibrationSettings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\Settings.h" />
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Panel\src\stdafx.h" />

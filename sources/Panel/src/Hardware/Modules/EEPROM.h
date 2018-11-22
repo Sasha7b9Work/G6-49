@@ -1,5 +1,5 @@
 #pragma once
-#include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7,7 +7,7 @@ class EEPROM
 {
 public:
 
-    static void SaveSettings(Settings *settings);
+    static void SaveSettings(CalibrationSettings *settings);
 
-    static void LoadSettings(Settings *settings);
+    static void LoadSettings(CalibrationSettings *settings);
 };

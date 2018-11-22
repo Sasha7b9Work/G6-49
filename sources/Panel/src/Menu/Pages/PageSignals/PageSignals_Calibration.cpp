@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Generator/GeneratorPanel.h"
 #include "Interface/InterfacePanel.h"
 #include "Menu/Pages/Include/PageSignals.h"
-#include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 #endif
 
 

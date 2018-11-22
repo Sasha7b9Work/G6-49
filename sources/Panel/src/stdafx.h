@@ -39,6 +39,7 @@
 #include "Menu/Pages/Include/PageSignals.h"
 
 #include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 
 #include "Utils/BigNumber.h"
 #include "Utils/Debug.h"

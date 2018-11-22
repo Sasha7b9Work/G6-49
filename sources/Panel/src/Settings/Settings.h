@@ -59,14 +59,6 @@ extern const PageBase pInput;
 
 #define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
 
-#define CAL_AD9952_OFFSET_NEG(ch)   set.cal_AD9952_Offset_Negative[ch]
-#define CAL_AD9952_OFFSET_ZERO(ch)  set.cal_AD9952_Offset_Zero[ch]
-#define CAL_AD9952_OFFSET_POS(ch)   set.cal_AD9952_Offset_Positive[ch]
-#define CAL_AD9952_AMPLITUDE(ch)    set.cal_AD9952_Amplitude[ch]
-#define CAL_DDS_MAX(ch)             set.cal_DDS_MAX[ch]
-#define CAL_DDS_MIN(ch)             set.cal_DDS_MIN[ch]
-
-
 #define SINE_MANIPULATION_ENABLED(ch)   (set.sine_ManipulationEnabled[ch])
 #define SINE_MANIPULATION_MODE(ch)      (set.sine_ManipulationMode[ch])
 
