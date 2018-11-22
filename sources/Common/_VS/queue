@@ -8,5 +8,8 @@ namespace std
     {
     public:
         void push(T);
+        unsigned int size();
+        T front();
+        void pop();
     };
 };

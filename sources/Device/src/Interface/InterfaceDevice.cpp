@@ -138,7 +138,21 @@ void Interface::SendData(Message *)
 
     Message message;
 
-    if (CreateMessageForSend(&message))
+    if (messages.size() != 0)
+    {
+        Message *msg = messages.front();
+
+        Timer::PauseOnTime(2);
+
+        CPU::SetReady();
+
+        Transceiver::Transmit(msg);
+
+        CPU::SetBusy();
+
+        messages.pop();
+    }
+    else if (CreateMessageForSend(&message))
     {
         Timer::PauseOnTime(2);
 
