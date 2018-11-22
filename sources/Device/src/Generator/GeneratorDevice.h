@@ -21,9 +21,9 @@ public:
 
     static void SetOffset(Chan ch, float offset);
 
-private:
-
     static void SetFrequency(Chan ch, float frequency);
+
+private:
 
     static void SetPeriod(Chan ch, float period);
 

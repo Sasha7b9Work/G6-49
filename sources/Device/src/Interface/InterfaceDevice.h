@@ -41,6 +41,8 @@ public:
 
     static void SetFormWave(Message *);
 
+    static void SetFrequency(Message *);
+
     static void ParameterValue(Message *);
 
     static void EnableChannel(Message *);

@@ -40,7 +40,7 @@ commands[Command::Number] =
 /* RequestData             */ Interface::SendData,
 /* EnableChannel           */ Interface::EnableChannel,
 /* SetFormWave             */ Interface::SetFormWave,
-/* SetFrequency            */ Interface::ParameterValue,
+/* SetFrequency            */ Interface::SetFrequency,
 /* SetAmplitude            */ Interface::ParameterValue,
 /* SetOffset               */ Interface::ParameterValue,
 /* SetDuration             */ Interface::ParameterValue,
@@ -411,6 +411,23 @@ void Interface::ParameterValue(Message *msg)
     Chan ch = (Chan::E)msg->TakeByte();
     
     Generator::SetParameter(ch, command, msg->TakeFloat());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ParseParameters(Message *msg, Chan *ch, float *value)
+{
+    msg->TakeByte();            // Удаляем команду - мы её и так знаем
+    *((uint8 *)ch) = msg->TakeByte();
+    *value = msg->TakeFloat();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetFrequency(Message *message)
+{
+    Chan ch = Chan::A;
+    float frequency = 0.0f;
+    ParseParameters(message, &ch, &frequency);
+    Generator::SetFrequency(ch, frequency);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
