@@ -37,13 +37,15 @@ public:
 
     static void SetManipulationPeriod(Chan ch, float period);
 
-private:
-
-    static void SetPeriod(Chan ch, float period);
-
     static void SetPacketPeriod(Chan ch, float duration);
 
     static void SetPacketNumber(Chan ch, float number);
+
+    static void SetPeriod(Chan ch, float period);
+
+private:
+
+    
 
     static void EmptyFunc(Chan, float);
 };

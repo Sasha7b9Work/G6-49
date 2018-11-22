@@ -43,6 +43,8 @@ public:
 
     static void SetFrequency(Message *);
 
+    static void SetPeriod(Message *);
+
     static void SetAmplitude(Message *);
 
     static void SetOffset(Message *);
@@ -58,6 +60,10 @@ public:
     static void SetManipulationDuration(Message *);
 
     static void SetManipulationPeriod(Message *);
+
+    static void SetPacketPeriod(Message *);
+
+    static void SetPacketNumber(Message *);
 
     static void ParameterValue(Message *);
 

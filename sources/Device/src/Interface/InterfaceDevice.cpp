@@ -57,10 +57,10 @@ commands[Command::Number] =
 /* SetManipulation         */ Interface::SetManipulation,
 /* SetManipulationDuration */ Interface::SetManipulationDuration,
 /* SetManipulationPeriod   */ Interface::SetManipulationPeriod,
-/* SetPacketPeriod         */ Interface::ParameterValue,
-/* SetPacketNumber         */ Interface::ParameterValue,
+/* SetPacketPeriod         */ Interface::SetPacketPeriod,
+/* SetPacketNumber         */ Interface::SetPacketNumber,
 /* SetStartMode            */ Interface::SetStartMode,
-/* SetPeriod               */ Interface::ParameterValue,
+/* SetPeriod               */ Interface::SetPeriod,
 /* SetPolarity             */ Interface::SetPolarity,
 /* SetManipulationMode     */ Interface::SetManipulationMode,
 /* LoadFromDDS             */ Interface::LoadFormDDS,
@@ -429,6 +429,12 @@ void Interface::SetFrequency(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetPeriod(Message *msg)
+{
+    SetGeneratorParameter(msg, Generator::SetPeriod);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetAmplitude(Message *msg)
 {
     SetGeneratorParameter(msg, Generator::SetAmplitude);
@@ -474,6 +480,18 @@ void Interface::SetManipulationDuration(Message *msg)
 void Interface::SetManipulationPeriod(Message *msg)
 {
     SetGeneratorParameter(msg, Generator::SetManipulationPeriod);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetPacketPeriod(Message *msg)
+{
+    SetGeneratorParameter(msg, Generator::SetPacketPeriod);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::SetPacketNumber(Message *msg)
+{
+    SetGeneratorParameter(msg, Generator::SetPacketNumber);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
