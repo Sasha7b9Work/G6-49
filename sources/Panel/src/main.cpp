@@ -6,6 +6,7 @@
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 #include "Utils/Debug.h"
 #include <cstdlib>
 #endif
@@ -25,6 +26,8 @@ int main()
     Display::Init();
 
     Timer::PauseOnTime(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
+
+    //setCal.Load();
 
     set.Load();
 

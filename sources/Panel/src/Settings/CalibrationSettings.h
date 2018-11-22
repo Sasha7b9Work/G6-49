@@ -1,6 +1,8 @@
 #pragma once
 #include "Command.h"
 #include "CommonTypes.h"
+#include "Menu/Pages/Include/PageSignals.h"
+#include "Message.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +39,8 @@ struct CalibrationSettings
     
     void Save();
     void Load();
+
+    void CreateMessage(Message *mesage, Chan ch, KoeffCal::E koeff);
 
     CalibrationSettings& operator =(const CalibrationSettings &);
 };

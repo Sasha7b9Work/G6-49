@@ -23,25 +23,11 @@ void PageSignals::PageCalibration::PrepareForAmplitudeAD9952(Chan /*ch*/)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 {
-    static const struct StructCal
-    {
-        int16 *pointer;
-        StructCal(int16 *p) : pointer(p) {};
-    }
-    values[KoeffCal::Number] =
-    {
-        &CAL_AD9952_OFFSET_NEG(Chan::A),
-        &CAL_AD9952_OFFSET_ZERO(Chan::A),
-        &CAL_AD9952_OFFSET_POS(Chan::A),
-        &CAL_AD9952_AMPLITUDE(Chan::A),
-        &CAL_DDS_MAX(Chan::A),
-        &CAL_DDS_MIN(Chan::A)
-    };
-
-    Message message(5, (uint8)Command::SetKoeffCalibration, ch, (uint8)koeff);
-    message.PutHalfWord(values[koeff].pointer[ch]);
-    Interface::Send(&message);
+    Message message;
+    setCal.CreateMessage(&message, ch, koeff);
     
+    Interface::Send(&message);
+
     if (koeff == KoeffCal::AD9952_ZERO)
     {
         Generator::SetOffset(ch, 0.0f);
@@ -79,5 +65,18 @@ void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, Koe
         PrepareForOffsetAD9952(ch);
         Generator::SetAmplitude(ch, 0.0f);
         Generator::SetOffset(ch, values[koeff].value);
+    }
+
+    if (koeff == KoeffCal::AD9952_ZERO)
+    {
+        Generator::SetOffset(ch, 0.0f);
+    }
+    else if (koeff == KoeffCal::AD9952_POS)
+    {
+        Generator::SetOffset(ch, +5.0f);
+    }
+    else if (koeff == KoeffCal::AD9952_NEG)
+    {
+        Generator::SetOffset(ch, -5.0f);
     }
 }
