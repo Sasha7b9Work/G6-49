@@ -3,6 +3,7 @@
 #include "Settings.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Modules/EEPROM.h"
 #include "Menu/Menu.h"
 #endif
 
@@ -103,40 +104,18 @@ Settings set = defSet;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Settings::Save()
 {
-    /*
-    Settings set1 = set;
-    
-    set1 = set1;
-    
-    CPU::EEPROM::SaveSettings();
-
-    Settings set2 = set;
-    
-    set2 = set2;
-    
-    set2 = set2;
-    */
+    EEPROM::SaveSettings();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Settings::Load(bool /*_default*/)
+void Settings::Load(bool _default)
 {
-    /*
-    CPU::EEPROM::EraseSettings();
-
-    set = defSet;
-
     if(!_default)
     {
-        CPU::EEPROM::LoadSettings();
+        //EEPROM::LoadSettings();
     }
 
-    //CPU::EEPROM::SaveSettings();
-
-    */
-
-    Generator::TuneChannel(Chan::A);
-    Generator::TuneChannel(Chan::B);
+    Generator::LoadSettings();
 
     FrequencyMeter::LoadSettings();
     

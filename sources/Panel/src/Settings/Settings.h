@@ -128,8 +128,8 @@ public:
 #define BIT_BIG_SYMBOLS   19  ///< Если 1, то символы выводятся чуть увеличенными
 #define BIT_SHOW_SENDS    20  ///< Если 1, то нужно показывать засылаемые настройки
 
-    static void Save();
-    static void Load(bool _default = false);
+    void Save();
+    void Load(bool _default = false);
 
     Settings& operator=(const Settings &rhs);
 };

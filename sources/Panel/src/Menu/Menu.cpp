@@ -64,7 +64,7 @@ void Menu::Update()
 
     if(timePress && (TIME_MS  - timePress) > TIME_WAIT)      // Сохраняем настройки, если прошло более TIME_WAIT мс
     {
-        Settings::Save();
+        //Settings::Save();
         timePress = 0;
     }
 }

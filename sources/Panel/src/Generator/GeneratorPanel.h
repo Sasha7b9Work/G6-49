@@ -41,6 +41,8 @@ public:
 
     static void LoadRegister(Register reg, uint64 value);
 
+    static void LoadSettings();
+
     static void TuneChannel(Chan ch);
     /// Загружает режим запуска из set в аппаратуру
     static void LoadStartMode(Chan ch, int mode);

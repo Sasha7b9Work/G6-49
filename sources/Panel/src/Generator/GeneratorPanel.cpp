@@ -247,3 +247,12 @@ void Generator::TuneChannel(Chan ch)
 
     FORM(ch)->TuneGenerator(ch);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::LoadSettings()
+{
+
+
+    Generator::TuneChannel(Chan::A);
+    Generator::TuneChannel(Chan::B);
+}
