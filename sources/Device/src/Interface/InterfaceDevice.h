@@ -89,8 +89,6 @@ public:
 
     static void SetPolarity(Message *);
 
-    static void Send(void *data, uint size);
-
 private:
 
     static uint timeLastReceive;

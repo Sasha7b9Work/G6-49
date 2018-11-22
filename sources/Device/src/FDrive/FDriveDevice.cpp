@@ -226,7 +226,7 @@ void FDrive::HandlerInterface(uint8 *recv)
         buffer[0] = Command::FDrive_NumDirsAndFiles;
         std::memcpy(buffer + 1, &numDirs, 4);
         std::memcpy(buffer + 5, &numFiles, 4);
-        Interface::Send(buffer, 9);
+//        Interface::Send(buffer, 9);
 
         std::free(buffer);
     }
