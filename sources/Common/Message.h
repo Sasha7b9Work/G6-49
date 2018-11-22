@@ -8,6 +8,7 @@ public:
     Message();
     Message(uint size, uint8);
     Message(uint size, uint8, uint8);
+    Message(uint size, uint8, uint);
     Message(uint size, uint8, uint8, uint8);
     Message(uint size, uint8, uint8, float);
 

@@ -45,7 +45,7 @@ void FreqMeter::Update()
 {
     if(CPU::ReadPin(GeneratorReadPin::FREQ_METER_DRY))
     {
-        uint data = 0;
+        uint frequency = 0;
         for(int i = 30; i >= 0; i--)
         {
             CPU::WritePin(GeneratorWritePin::FREQ_METER_CLK, true);
@@ -58,11 +58,13 @@ void FreqMeter::Update()
             Timer::PauseOnTime(1);
             if (CPU::ReadPin(GeneratorReadPin::FREQ_METER_DATA))
             {
-                data += (1 << i);
+                frequency += (1 << i);
             }
         }
 
-        Interface::SendFrequency(data);
+        Message *msg = new Message(5, Command::FreqMeasure, frequency);
+
+        Interface::AddMessageInQueue(msg);
     }
 }
 
