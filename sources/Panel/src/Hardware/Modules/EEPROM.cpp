@@ -25,7 +25,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FLASH_::SaveSettings()
+void EEPROM::SaveSettings()
 {
     // Записываем в Settings.size текущий размер структуры Settings
     set.size = sizeof(Settings);
@@ -49,13 +49,13 @@ void FLASH_::SaveSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FLASH_::EraseSettings()
+void EEPROM::EraseSettings()
 {
     EraseSector(ADDR_SECTOR_SETTINGS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FLASH_::LoadSettings()
+void EEPROM::LoadSettings()
 {
     if (READ_HALF_WORD(ADDR_SECTOR_SETTINGS) != 0xffff)     // Если настройки уже сохранялись
     {
@@ -83,7 +83,7 @@ void FLASH_::LoadSettings()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FLASH_::EraseSector(uint startAddress)
+bool EEPROM::EraseSector(uint startAddress)
 {
     if (GetSector(startAddress) == MAX_UINT)
     {
@@ -110,7 +110,7 @@ bool FLASH_::EraseSector(uint startAddress)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FLASH_::WriteBufferBytes(uint address, void *buffer, int numBytes)
+void EEPROM::WriteBufferBytes(uint address, void *buffer, int numBytes)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -126,7 +126,7 @@ void FLASH_::WriteBufferBytes(uint address, void *buffer, int numBytes)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint FLASH_::GetSector(uint startAddress)
+uint EEPROM::GetSector(uint startAddress)
 {
 #ifndef OPEN
     struct StructSector
@@ -156,7 +156,7 @@ uint FLASH_::GetSector(uint startAddress)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FLASH_::ReadBufferBytes(uint addrSrc, void *bufferDest, int size)
+void EEPROM::ReadBufferBytes(uint addrSrc, void *bufferDest, int size)
 {
     uint8 *src = (uint8 *)addrSrc;
     uint8 *dest = (uint8 *)bufferDest;

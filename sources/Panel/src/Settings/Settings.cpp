@@ -108,7 +108,7 @@ void Settings::Save()
     
     set1 = set1;
     
-    CPU::FLASH_::SaveSettings();
+    CPU::EEPROM::SaveSettings();
 
     Settings set2 = set;
     
@@ -122,16 +122,16 @@ void Settings::Save()
 void Settings::Load(bool /*_default*/)
 {
     /*
-    CPU::FLASH_::EraseSettings();
+    CPU::EEPROM::EraseSettings();
 
     set = defSet;
 
     if(!_default)
     {
-        CPU::FLASH_::LoadSettings();
+        CPU::EEPROM::LoadSettings();
     }
 
-    //CPU::FLASH_::SaveSettings();
+    //CPU::EEPROM::SaveSettings();
 
     */
 
