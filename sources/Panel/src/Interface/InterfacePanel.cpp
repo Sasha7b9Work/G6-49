@@ -55,7 +55,7 @@ void Interface::Update()
 {
     static uint time = 0;
 
-    if (TIME_MS - time < 1000)
+    if (TIME_MS - time < 100)
     {
         return;
     }
