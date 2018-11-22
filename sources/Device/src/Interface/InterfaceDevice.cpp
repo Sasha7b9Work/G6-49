@@ -414,29 +414,24 @@ void Interface::ParameterValue(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ParseParameters(Message *msg, Chan *ch, float *value)
+static void SetGeneratorParameter(Message *msg, void(*func)(Chan, float))
 {
-    msg->TakeByte();            // Удаляем команду - мы её и так знаем
-    *((uint8 *)ch) = msg->TakeByte();
-    *value = msg->TakeFloat();
+    msg->TakeByte();            // Удаляем команду - нам она не нужна, мы уже знаем функцию func
+    Chan ch = (Chan::E)msg->TakeByte();
+    float value = msg->TakeFloat();
+    func(ch, value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetFrequency(Message *msg)
 {
-    Chan ch = Chan::A;
-    float frequency = 0.0f;
-    ParseParameters(msg, &ch, &frequency);
-    Generator::SetFrequency(ch, frequency);
+    SetGeneratorParameter(msg, Generator::SetFrequency);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetAmplitude(Message *msg)
 {
-    Chan ch = Chan::A;
-    float amplitude = 0.0f;
-    ParseParameters(msg, &ch, &amplitude);
-    Generator::SetAmplitude(ch, amplitude);
+    SetGeneratorParameter(msg, Generator::SetAmplitude);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
