@@ -70,7 +70,8 @@ commands[Command::Number] =
 /* FDrive_RequestDir       */ Interface::Empty,
 /* FDrive_RequestFile      */ Interface::Empty,
 /* Test                    */ Interface::Test,
-/* SetKoeffCalibration     */ Interface::SetKoeffCalibration
+/* SetKoeffCalibration     */ Interface::SetKoeffCalibration,
+/* GetKoeffCalibration     */ Interface::GetKoeffCalibration
 };
 
 
@@ -271,6 +272,11 @@ void Interface::SetKoeffCalibration(Message *msg)
     koeff[ch] = (int16)msg->TakeHalfWord();
 
     setCal.Save();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::GetKoeffCalibration(Message *)
+{
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -65,6 +65,8 @@ public:
 
     static void SetKoeffCalibration(Message *);
 
+    static void GetKoeffCalibration(Message *);
+
     static void SetPolarity(Message *);
 
     static void Send(void *data, uint size);

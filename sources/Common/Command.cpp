@@ -51,7 +51,8 @@ pString Command::Name() const
         "FDrive_RequestDir",
         "FDrive_RequestFile",
         "Test",
-        "SetKoeffCalibration"
+        "SetKoeffCalibration",
+        "GetKoeffCalibration"
     };
     if(value < Number)
     {
@@ -162,6 +163,8 @@ pString Command::Trace(const uint8 *buffer) const
         case Test:
             break;
         case SetKoeffCalibration:
+            break;
+        case GetKoeffCalibration:
             break;
         case Number:
             break;

@@ -100,6 +100,7 @@ struct Command
          //                          4 - DDS_MAX          ...
          //                          5 - DDS_MIN          ...
 /* <-  */   SetKoeffCalibration,        ///< Установка калибровочного коэффициента
+/* ->  */   GetKoeffCalibration,        ///< Запрос установленного калибровочного коэффициента
             Number
     } value;
     Command(E v) : value(v) {};

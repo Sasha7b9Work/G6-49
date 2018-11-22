@@ -95,7 +95,8 @@ void Generator::SetParameter(Chan ch, Command command, float value)
 /* FDrive_RequestDir       */ EmptyFunc,
 /* FDrive_RequestFile      */ EmptyFunc,
 /* Test                    */ EmptyFunc,
-/* SetKoeffCalibration     */ EmptyFunc
+/* SetKoeffCalibration     */ EmptyFunc,
+/* GetKoeffCalibration     */ EmptyFunc
     };
 
     func[command].func(ch, value);
