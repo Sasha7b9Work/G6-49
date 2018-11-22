@@ -50,6 +50,12 @@ Message::Message(uint size, uint8 value0, uint8 value1, uint8 value2) : allocate
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::Message(uint size, uint8 v0, uint8 v1, float v2) : allocated(0), buffer(0), used(0), taken(0)
+{
+    Create(size, v0, v1, v2);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Message::Create(uint size, uint8 v0)
 {
     if (AllocateMemory(size))
@@ -65,6 +71,17 @@ void Message::Create(uint size, uint8 v0, uint v1)
     {
         PutByte(v0);
         PutWord(v1);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::Create(uint size, uint8 v0, uint8 v1, float v2)
+{
+    if (AllocateMemory(size))
+    {
+        PutByte(v0);
+        PutByte(v1);
+        PutFloat(v2);
     }
 }
 

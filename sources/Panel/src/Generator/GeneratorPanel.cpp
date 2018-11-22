@@ -183,8 +183,7 @@ void Generator::SetParameter(ParameterChoice *param)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetOffset(Chan ch, float offset)
 {
-    Message message(6, (uint8)Command::SetOffset, ch);
-    message.PutFloat(offset);
+    Message message(6, (uint8)Command::SetOffset, (uint8)ch, offset);
 
     Interface::Send(&message);
 }
@@ -192,8 +191,7 @@ void Generator::SetOffset(Chan ch, float offset)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetAmplitude(Chan ch, float amplitude)
 {
-    Message message(6, (uint8)Command::SetAmplitude, ch);
-    message.PutFloat(amplitude);
+    Message message(6, (uint8)Command::SetAmplitude, ch, amplitude);
 
     Interface::Send(&message);
 }

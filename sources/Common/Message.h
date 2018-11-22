@@ -6,28 +6,23 @@ class Message
 {
 public:
     Message();
-    Message(uint size, uint8 v0);
-    Message(uint size, uint8 value0, uint8 value1);
-    Message(uint size, uint8 value0, uint8 value1, uint8 value2);
+    Message(uint size, uint8);
+    Message(uint size, uint8, uint8);
+    Message(uint size, uint8, uint8, uint8);
+    Message(uint size, uint8, uint8, float);
 
     ~Message();
 
-    void Create(uint size, uint8 v0);
-    void Create(uint size, uint8 v0, uint v1);
-    void Create(uint size, uint8 v0, uint8 v1, uint8 v2, uint16 v3);
+    void Create(uint size, uint8);
+    void Create(uint size, uint8, uint);
+    void Create(uint size, uint8, uint8, float);
+    void Create(uint size, uint8, uint8, uint8, uint16);
 
     bool CreateFromMessage(Message *message);
     /// Создать сообщение с выделением памяти
     bool CreateAllocate(uint8 *buffer, uint size);
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
-    /// Положить половину слова
-    void PutHalfWord(int16 data);
-    void PutHalfWord(uint16 data);
-    /// Положить слово
-    void PutWord(uint data);
-    /// Положить float
-    void PutFloat(float data);
     /// Взять байт
     uint8 TakeByte();
     /// Взять полуслово
@@ -52,6 +47,13 @@ public:
 private:
     /// Положить байт
     void PutByte(uint8 data);
+    /// Положить половину слова
+    void PutHalfWord(int16 data);
+    void PutHalfWord(uint16 data);
+    /// Положить слово
+    void PutWord(uint data);
+    /// Положить float
+    void PutFloat(float data);
 
 
     /// Размер выделенной памяти
