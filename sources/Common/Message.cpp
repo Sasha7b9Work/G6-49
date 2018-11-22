@@ -25,18 +25,34 @@ Message::~Message()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Message::Message(uint size, uint8 value0, uint8 value1) : allocated(0), buffer(0), used(0), taken(0)
 {   
-    AllocateMemory(size);
-    PutByte(value0);
-    PutByte(value1);
+    if (AllocateMemory(size))
+    {
+        PutByte(value0);
+        PutByte(value1);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Message::Message(uint size, uint8 value0, uint8 value1, uint8 value2) : allocated(0), buffer(0), used(0), taken(0)
 {
-    AllocateMemory(size);
-    PutByte(value0);
-    PutByte(value1);
-    PutByte(value2);
+    if (AllocateMemory(size))
+    {
+        PutByte(value0);
+        PutByte(value1);
+        PutByte(value2);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::Create(uint size, uint8 value0, uint8 value1, uint8 value2, uint16 value3)
+{
+    if (AllocateMemory(size))
+    {
+        PutByte(value0);
+        PutByte(value1);
+        PutByte(value2);
+        PutHalfWord(value3);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +89,13 @@ void Message::PutByte(uint8 data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Message::PutHalfWord(int16 data)
 {
-    BitSet16 bs((uint16)data);
+    PutHalfWord((uint16)data);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::PutHalfWord(uint16 data)
+{
+    BitSet16 bs(data);
     bs.WriteToBuffer(buffer + used);
     used += sizeof(data);
 }

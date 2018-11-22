@@ -72,9 +72,5 @@ void CalibrationSettings::CreateMessage(Message *message, Chan::E ch, KoeffCal::
         &CAL_DDS_MIN(Chan::A)
     };
 
-    message->AllocateMemory(5);
-    message->PutByte((uint8)Command::SetKoeffCalibration);
-    message->PutByte((uint8)ch);
-    message->PutByte((uint8)koeff);
-    message->PutHalfWord(values[koeff].pointer[ch]);
+    message->Create(5, (uint8)Command::SetKoeffCalibration, (uint8)ch, (uint8)koeff, (uint16)values[koeff].pointer[ch]);
 }

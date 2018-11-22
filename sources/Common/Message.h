@@ -11,17 +11,18 @@ public:
 
     ~Message();
 
+    void Create(uint size, uint8 value0, uint8 value1, uint8 value2, uint16 value3);
+
     bool CreateFromMessage(Message *message);
     /// Создать сообщение с выделением памяти
     bool CreateAllocate(uint8 *buffer, uint size);
-    /// Создать сообщение без выделения памяти. Используется непосредственно входной буфер
-    bool CreateUsed(uint8 *buffer, uint size);
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
     /// Положить байт
     void PutByte(uint8 data);
     /// Положить половину слова
     void PutHalfWord(int16 data);
+    void PutHalfWord(uint16 data);
     /// Положить слово
     void PutWord(uint data);
     /// Положить float
