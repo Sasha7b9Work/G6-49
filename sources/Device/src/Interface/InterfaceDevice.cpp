@@ -15,12 +15,12 @@
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Array.h"
 #include "Utils/Debug.h"
+#include "Utils/Queue.h"
 #include "Utils/StringUtils.h"
 #include "Command.h"
 #include "structs.h"
 #include <string.h>
 #include <cstdlib>
-#include <queue>
 #endif
 
 
@@ -77,7 +77,7 @@ commands[Command::Number] =
 
 
 /// Очередь сообщений, ожидающих отправки
-std::queue<Message*> messages;
+Queue messages;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Interface::Update()
@@ -138,9 +138,9 @@ void Interface::SendData(Message *)
 
     Message message;
 
-    if (messages.size() != 0)
+    if (messages.Size() != 0)
     {
-        Message *msg = messages.front();
+        Message *msg = messages.Front();
 
         Timer::PauseOnTime(2);
 
@@ -150,7 +150,7 @@ void Interface::SendData(Message *)
 
         CPU::SetBusy();
 
-        messages.pop();
+        messages.Pop();
     }
     else if (CreateMessageForSend(&message))
     {
@@ -547,9 +547,7 @@ uint Interface::Data::GetSize() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message *Interface::GetNewMessageForQueue()
+void Interface::AddMessageInQueue(Message *message)
 {
-    Message *msg = new Message();
-    messages.push(msg);
-    return msg;
+    messages.Push(message);
 }
