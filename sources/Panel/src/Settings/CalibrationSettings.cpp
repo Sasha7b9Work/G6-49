@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
+#include "Interface/InterfacePanel.h"
 #include "CalibrationSettings.h"
 #include "Hardware/Modules/EEPROM.h"
 #endif
@@ -28,7 +29,15 @@ void CalibrationSettings::Load()
     *this = defSet;                     // Сначала заполняем значениями по умолчанию - вдруг сохранённых настроек нету
     EEPROM::LoadSettings(this);
 
-
+    for (int ch = 0; ch < Chan::Number; ch++)
+    {
+        for (int k = 0; k < KoeffCal::Number; k++)
+        {
+            Message message;
+            CreateMessage(&message, (Chan::E)ch, (KoeffCal::E)k);
+            Interface::Send(&message);
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -46,7 +55,7 @@ CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CalibrationSettings::CreateMessage(Message *message, Chan ch, KoeffCal::E koeff)
+void CalibrationSettings::CreateMessage(Message *message, Chan::E ch, KoeffCal::E koeff)
 {
     static const struct StructCal
     {

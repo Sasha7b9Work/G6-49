@@ -24,9 +24,11 @@ void PageSignals::PageCalibration::PrepareForAmplitudeAD9952(Chan /*ch*/)
 void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 {
     Message message;
-    setCal.CreateMessage(&message, ch, koeff);
+    setCal.CreateMessage(&message, ch.value, koeff);
     
     Interface::Send(&message);
+
+    setCal.Save();
 
     if (koeff == KoeffCal::AD9952_ZERO)
     {

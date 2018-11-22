@@ -40,7 +40,7 @@ struct CalibrationSettings
     void Save();
     void Load();
 
-    void CreateMessage(Message *mesage, Chan ch, KoeffCal::E koeff);
+    void CreateMessage(Message *mesage, Chan::E ch, KoeffCal::E koeff);
 
     CalibrationSettings& operator =(const CalibrationSettings &);
 };

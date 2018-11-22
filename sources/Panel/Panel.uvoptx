@@ -157,7 +157,7 @@
           <Type>0</Type>
           <LineNumber>68</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134265040</Address>
+          <Address>134265296</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -171,18 +171,18 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>97</LineNumber>
+          <LineNumber>64</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134264730</Address>
+          <Address>134261916</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Generator\GeneratorPanel.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\Modules\EEPROM.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Generator/GeneratorPanel.cpp\97</Expression>
+          <Expression>\\PanelDDS\src/Hardware/Modules/EEPROM.cpp\64</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -221,6 +221,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>font8</ItemText>
         </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>address</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -233,7 +238,7 @@
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>256</SubType>
-          <ItemText>buffer</ItemText>
+          <ItemText>0x08010000</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
