@@ -136,8 +136,6 @@ void Interface::SendData(Message *)
 {
     CPU::SetBusy();
 
-    Message message;
-
     if (messages.Size() != 0)
     {
         Timer::PauseOnTime(2);
@@ -150,8 +148,10 @@ void Interface::SendData(Message *)
 
         messages.Pop();
     }
-    else if (CreateMessageForSend(&message))
+    else
     {
+        Message message(1, Command::RequestData);
+
         Timer::PauseOnTime(2);
 
         CPU::SetReady();
@@ -160,23 +160,6 @@ void Interface::SendData(Message *)
 
         CPU::SetBusy();
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::CreateMessageForSend(Message *msg)
-{
-    if(messages.Size() == 0)
-    {
-        static uint count = 0;
-        LOG_WRITE("Test string %d", count++);
-    }
-    else
-    {
-        msg->Create(1, Command::RequestData);
-    }
-
-
-    return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

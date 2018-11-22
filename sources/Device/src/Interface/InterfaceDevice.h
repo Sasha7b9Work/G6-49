@@ -36,8 +36,6 @@ public:
     static void AddMessageInQueue(Message *message);
 
     static void SendData(Message *);
-    /// Создаёт сообщение для передачи в случае наличия данных для передачи
-    static bool CreateMessageForSend(Message *message);
 
     static void Empty(Message *);
 
