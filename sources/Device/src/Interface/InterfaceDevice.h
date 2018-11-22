@@ -51,6 +51,8 @@ public:
 
     static void SetDutyRatio(Message *);
 
+    static void SetPhase(Message *);
+
     static void ParameterValue(Message *);
 
     static void EnableChannel(Message *);

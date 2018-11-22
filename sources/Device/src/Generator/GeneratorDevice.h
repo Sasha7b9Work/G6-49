@@ -29,11 +29,11 @@ public:
 
     static void SetDutyRatio(Chan ch, float dutyRatio);
 
+    static void SetPhase(Chan ch, float phase);
+
 private:
 
     static void SetPeriod(Chan ch, float period);
-
-    static void SetPhase(Chan ch, float phase);
 
     static void SetDelay(Chan ch, float duration);
 
