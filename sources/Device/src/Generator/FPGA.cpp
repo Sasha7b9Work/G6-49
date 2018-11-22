@@ -6,7 +6,6 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Generator/GeneratorDevice.h"
-#include "Utils/Console.h"
 #include <string.h>
 #include <stdio.h>
 #include <cstdlib>

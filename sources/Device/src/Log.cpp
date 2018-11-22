@@ -1,90 +1,89 @@
 #include "stdafx.h"
 #ifndef WIN32
-#include "defines.h"
-#include "Log.h"
-#include <Hardware/CPU.h>
-#include "Hardware/VCP.h"
+#include "log.h"
 #include <stdarg.h>
-#include <cstring>
-#include <stdio.h>
 #endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool loggerUSB = false;
+#define MAX_STRINGS 100
+#define SIZE_STRING (LENGTH_SPI_BUFFER - 1)
 
 
-#define SIZE_BUFFER_LOG 200
+static char buffer[MAX_STRINGS][SIZE_STRING] = {};
+static int numStrings = 0;
+/// Если true, то как раз в это время происходит запись в консоль. Поэтому нельзя работать с консолью.
+static bool isBusy = false;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Log::Write(TypeTrace type, char *format, ...)
+void Console::AddConstString(char *string)
 {
-    char buffer[SIZE_BUFFER_LOG];
-    char *pointer = buffer;
+    isBusy = true;
 
-    if (type == TypeTrace_Error)
+    if(numStrings < MAX_STRINGS - 1)
     {
-        buffer[0] = 0;
-        std::strcat(buffer, "!!! ERROR !!! ");
-        while (*pointer++) {};
-        ++pointer;
+        for(int i = 0; i < SIZE_STRING; i++)
+        {
+            buffer[numStrings][i] = string[i];
+        }
+        numStrings++;
     }
+
+    isBusy = false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::AddConstString(pString string)
+{
+    AddConstString((char *)string);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Console::ExistString()
+{
+    return (!isBusy) && (numStrings != 0);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char *Console::GetString()
+{
+    if (!ExistString())
+    {
+        return 0;
+    }
+
+    return &buffer[0][0];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::DeleteString()
+{
+    if (!ExistString())
+    {
+        return;
+    }
+
+    for(int i = 1; i < numStrings; i++)
+    {
+        for(int pos = 0; pos < SIZE_STRING; pos++)
+        {
+            buffer[i - 1][pos] = buffer[i][pos];
+        }
+    }
+
+    numStrings--;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::AddString(char *format, ...)
+{
+    char buf[100];
+
     va_list args;
     va_start(args, format);
-    vsprintf(pointer, format, args);
+    vsprintf(buf, format, args);
     va_end(args);
-    //DISPLAY_ADD_STRING(buffer);
-    if(loggerUSB)
-    {
-        VCP::SendFormatStringAsynch(buffer);
-    }
-}
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::Trace(TypeTrace type, const char *module, const char *func, int numLine, char *format, ...)
-{
-    char buffer[SIZE_BUFFER_LOG];
-    char message[SIZE_BUFFER_LOG];
-    va_list args;
-    va_start(args, format);
-    vsprintf(buffer, format, args);
-    va_end(args);
-    const int SIZE = 20;
-    char numBuffer[SIZE];
-    snprintf(numBuffer, 100, ":%d", numLine);
-    message[0] = 0;
-    if (type == TypeTrace_Error)
-    {
-        std::strcat(message, "!!!ERROR!!! ");
-    }
-    else if (type == TypeTrace_Info)
-    {
-        std::strcat(message, "            ");
-    }
-    std::strcat(message, module);
-    std::strcat(message, " ");
-    std::strcat(message, func);
-    std::strcat(message, numBuffer);
-    //DISPLAY_ADD_STRING(message);
-    //DISPLAY_ADD_STRING(buffer);
-    if(loggerUSB)
-    {
-        VCP::SendFormatStringAsynch(message);
-        VCP::SendFormatStringAsynch(buffer);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::DisconnectLoggerUSB()
-{
-    //static uint8 data = 20;
-    //Log_Write("посылаю %d", data);
-    //VCP_SendData(&data, 1);
-}
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::EnableLoggerUSB(bool enable)
-{
-    loggerUSB = enable;
+    Console::AddConstString(buf);
 }

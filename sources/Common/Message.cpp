@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "log.h"
 #include "structs.h"
 #include "Message.h"
 #include "Hardware/CPU.h"
+#include "log.h"
 #include <cstring>
 #include <cstdlib>
 #endif

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "log.h"
 #include "Message.h"
 #include "Transceiver.h"
 #include "Hardware/CPU.h"

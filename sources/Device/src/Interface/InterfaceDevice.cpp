@@ -6,7 +6,6 @@
 #include "Transceiver.h"
 #include "InterfaceDevice.h"
 #include "FDrive/FDriveDevice.h"
-#include "Utils/Console.h"
 #include "Generator/GeneratorDevice.h"
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"

@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "usbd_core.h"
-#include "Log.h"
 #ifdef STM32F407xx
 #include <stm32f4xx_hal.h>
 #endif

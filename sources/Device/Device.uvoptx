@@ -1157,8 +1157,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Log.cpp</PathWithFileName>
-      <FilenameWithoutPath>Log.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\log.cpp</PathWithFileName>
+      <FilenameWithoutPath>log.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1169,8 +1169,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Log.h</PathWithFileName>
-      <FilenameWithoutPath>Log.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\log.h</PathWithFileName>
+      <FilenameWithoutPath>log.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1885,30 +1885,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Utils\Console.cpp</PathWithFileName>
-      <FilenameWithoutPath>Console.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>16</GroupNumber>
-      <FileNumber>129</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Utils\Console.h</PathWithFileName>
-      <FilenameWithoutPath>Console.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>16</GroupNumber>
-      <FileNumber>130</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Utils\Debug.cpp</PathWithFileName>
       <FilenameWithoutPath>Debug.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1916,7 +1892,7 @@
     </File>
     <File>
       <GroupNumber>16</GroupNumber>
-      <FileNumber>131</FileNumber>
+      <FileNumber>129</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1928,7 +1904,7 @@
     </File>
     <File>
       <GroupNumber>16</GroupNumber>
-      <FileNumber>132</FileNumber>
+      <FileNumber>130</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1940,7 +1916,7 @@
     </File>
     <File>
       <GroupNumber>16</GroupNumber>
-      <FileNumber>133</FileNumber>
+      <FileNumber>131</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1952,7 +1928,7 @@
     </File>
     <File>
       <GroupNumber>16</GroupNumber>
-      <FileNumber>134</FileNumber>
+      <FileNumber>132</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1964,7 +1940,7 @@
     </File>
     <File>
       <GroupNumber>16</GroupNumber>
-      <FileNumber>135</FileNumber>
+      <FileNumber>133</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

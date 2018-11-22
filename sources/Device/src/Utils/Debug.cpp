@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "Debug.h"
-#include "Log.h"
 #include "Hardware/Timer.h"
 #endif
 

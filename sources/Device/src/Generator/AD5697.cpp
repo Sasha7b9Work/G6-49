@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "AD5697.h"
 #include "Command.h"
 #include "Settings/Settings.h"
-#include "Utils/Console.h"
 #include "Utils/Math.h"
 #endif
 
@@ -49,6 +49,8 @@ void AD5697::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetOffset(Chan ch, float offset)
 {   
+    LOG_WRITE("Установить смещение %f", offset);
+
     float scale = 4095.0f / 10.0f;
 
     if (offset == 0.0f)

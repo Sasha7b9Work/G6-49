@@ -2,7 +2,7 @@
 
 #ifdef WIN32
 
-#include "Log.h"
+#include "log.h"
 #include "structs.h"
 #include "Message.h"
 #include "Transceiver.h"
@@ -26,7 +26,6 @@
 #include "SCPI/SCPI.h"
 
 #include "Utils/Array.h"
-#include "Utils/Console.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"

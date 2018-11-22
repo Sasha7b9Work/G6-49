@@ -6,7 +6,6 @@
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"
-#include "Utils/Console.h"
 #include "CommonTypes.h"
 #endif
 

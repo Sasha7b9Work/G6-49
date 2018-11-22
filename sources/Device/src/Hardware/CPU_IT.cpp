@@ -3,7 +3,6 @@
 #include <stm32f4xx.h>
 #include "Hardware/CPU.h"
 #include "Interface/InterfaceDevice.h"
-#include "Utils/Console.h"
 #include "Utils/Debug.h"
 #endif
 

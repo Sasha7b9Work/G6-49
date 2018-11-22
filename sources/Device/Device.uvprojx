@@ -1172,14 +1172,14 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>Log.cpp</FileName>
+              <FileName>log.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Log.cpp</FilePath>
+              <FilePath>.\src\log.cpp</FilePath>
             </File>
             <File>
-              <FileName>Log.h</FileName>
+              <FileName>log.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Log.h</FilePath>
+              <FilePath>.\src\log.h</FilePath>
             </File>
             <File>
               <FileName>structs.h</FileName>
@@ -1490,16 +1490,6 @@
               <FileName>Array.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Array.h</FilePath>
-            </File>
-            <File>
-              <FileName>Console.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Console.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Console.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Console.h</FilePath>
             </File>
             <File>
               <FileName>Debug.cpp</FileName>

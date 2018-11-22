@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "Timer.h"
-#include "Log.h"
 #include <stm32f4xx.h>
 #include "Timer4XX.h"
 #include <limits>

@@ -204,9 +204,6 @@
     <ClInclude Include="..\..\common\Wave.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Utils\Console.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\structs.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -221,9 +218,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h">
       <Filter>libs\FatFS</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\Log.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h">
       <Filter>libs\HAL</Filter>
@@ -275,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="..\..\common\_VS\cstdarg">
       <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\log.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -356,9 +353,6 @@
     <ClCompile Include="..\..\Device\src\Hardware\EEPROM.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Utils\Console.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Common\Command.cpp">
       <Filter>common</Filter>
     </ClCompile>
@@ -373,9 +367,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\libs\USBH\usbh_diskio.cpp">
       <Filter>libs\USBH</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\Log.cpp">
-      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_hcd.c">
       <Filter>libs\HAL</Filter>
@@ -436,6 +427,9 @@
     </ClCompile>
     <ClCompile Include="..\..\common\Message.cpp">
       <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\log.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,6 @@
 #include "defines.h"
 #include "GeneratroSettings.h"
 #include "Hardware/CPU.h"
-#include "Utils/Console.h"
 #include "FPGA.h"
 #include "Utils/Math.h"
 #include <math.h>
