@@ -6,6 +6,7 @@
 #include "Message.h"
 #include "Handlers.h"
 #include "Display/Console.h"
+#include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #endif
 
@@ -13,8 +14,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Handlers::Processing(Message *msg)
 {
-    uint8 command = msg->TakeByte();
-
     static const struct StructFunc
     {
         typedef bool(*pFuncBpM)(Message *);
@@ -53,13 +52,15 @@ bool Handlers::Processing(Message *msg)
         /* FreqMeasure             */ Handlers::FreqMeasure,
         /* Log                     */ Handlers::Log,
         /* FDrive_NumDirsAndFiles  */ Handlers::E,
-        /* FDrive_Mount            */ Handlers::FDrive_Mount,
+        /* FDrive_Mount            */ FDrive::Handler::Processing,
         /* FDrive_RequestDir       */ Handlers::E,
         /* FDrive_RequestFile      */ Handlers::E,
         /* Test                    */ Handlers::E,
         /* SetKoeffCalibration     */ Handlers::E,
         /* GetKoeffCalibration     */ Handlers::E
     };
+
+    uint8 command = msg->TakeByte();
 
     if (command < Command::Number)
     {
@@ -97,20 +98,5 @@ bool Handlers::FreqMeasure(Message *msg)
 bool Handlers::Log(Message *msg)
 {
     Console::AddString((pString)(msg->Data() + 1));
-    return true;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Handlers::FDrive_Mount(Message *msg)
-{
-    if (msg->TakeByte() == 0)
-    {
-        LOG_WRITE("Флешка отмонтирована");
-    }
-    else
-    {
-        LOG_WRITE("Флешка примонтирована");
-    }
-
     return true;
 }

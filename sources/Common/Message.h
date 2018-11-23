@@ -20,6 +20,8 @@ public:
     void Create(uint size, uint8, uint8, uint8);
     void Create(uint size, uint8, uint8, float);
     void Create(uint size, uint8, uint8, uint8, uint16);
+    /// Сбрасывает указатель извлечённой информации.
+    void ResetPointer() { taken = 0; };
 
     bool CreateFromMessage(Message *message);
     /// Создать сообщение с выделением памяти

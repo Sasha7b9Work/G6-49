@@ -11,5 +11,4 @@ private:
     static bool Request(Message *);
     static bool FreqMeasure(Message *);
     static bool Log(Message *);
-    static bool FDrive_Mount(Message *);
 };

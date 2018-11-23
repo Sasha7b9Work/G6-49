@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "structs.h"
 #include "Command.h"
 #include "FDrivePanel.h"
@@ -25,7 +26,7 @@ bool FDrive::GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles
 
     Interface::Data answer(0);                                      // Подготавливаем место для ответа
 
-//    bool result = Interface::Request(&data, &answer);               // Выполняем запрос, получем ответ
+//    bool result = Interface::Request(&data, &answer);                  // Выполняем запрос, получем ответ
 
     *numDirs = BitSet32(answer.GetData() + 1).word;                 // Узнаём количество каталогов
 
@@ -72,4 +73,39 @@ static uint8 *PrepareBufferForSend(uint size, uint8 command)
     uint8 *buffer = (uint8 *)std::malloc(size);
     *buffer = command;
     return buffer;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool FDrive::Handler::Processing(Message *msg)
+{
+    msg->ResetPointer();
+
+    Command::E command = (Command::E)msg->TakeByte();
+
+    if (command == Command::FDrive_Mount)
+    {
+        uint8 mount = msg->TakeByte();
+        if (mount)
+        {
+            LOG_WRITE("Флешка примонтирована");
+        }
+        else
+        {
+            LOG_WRITE("Флешка отмонтирована");
+        }
+    }
+    else if (command == Command::FDrive_NumDirsAndFiles)
+    {
+
+    }
+    else if (command == Command::FDrive_RequestDir)
+    {
+
+    }
+    else if (command == Command::FDrive_RequestFile)
+    {
+
+    }
+
+    return false;
 }

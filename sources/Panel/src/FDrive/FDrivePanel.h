@@ -1,4 +1,5 @@
 #pragma once
+#include "Message.h"
 
 
 class FDrive
@@ -27,9 +28,15 @@ public:
     /// Написать список файлов
     static void DrawFiles();
 
+    class Handler
+    {
+    friend class Handlers;
+        static bool Processing(Message *msg);
+    };
+
 private:
+
     friend class Graphics;
-    friend class Interface;
 
     /// Возвращает количество каталогов и файлов в каталоге directory
     static bool GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles);
