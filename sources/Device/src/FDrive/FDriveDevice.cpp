@@ -306,7 +306,7 @@ void FDrive::Handler::Processing(Message *msg)
 
             Message *answer = new Message(size, Command::FDrive_RequestFile, (uint8)numFile);
 
-            std::strcpy((char *)(answer->Data() + 2), name);
+            std::strcpy(answer->String(2), name);
 
             Interface::AddMessageForTransmit(answer);
         }

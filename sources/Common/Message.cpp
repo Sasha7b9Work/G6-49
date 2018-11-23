@@ -30,7 +30,7 @@ Message::Message(uint8 v0, char *string) : allocated(0), buffer(0), used(0), tak
 
     Create(size, v0);
 
-    std::strcpy((char *)(Data() + 1), string);
+    std::strcpy(String(1), string);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ void Message::Create(uint8 v0, uint8 v1, char *string)
     {
         PutByte(v0);
         PutByte(v1);
-        std::strcpy((char *)(Data() + 2), string);
+        std::strcpy(String(2), string);
     }
 }
 

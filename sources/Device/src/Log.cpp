@@ -18,6 +18,6 @@ void Log::AddString(char *format, ...)
     va_end(args);
 
     Message *msg = new Message(std::strlen(string) + 1 + 1, Command::Log);
-    std::strcpy((char *)msg->Data() + 1, string);
+    std::strcpy(msg->String(1), string);
     Interface::AddMessageForTransmit(msg);
 }

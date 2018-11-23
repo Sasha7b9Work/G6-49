@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Modules\EEPROM.cpp</Filename>
+          <Filename>.\src\Hardware\Modules\EEPROM.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelDDS\src/Hardware/Modules/EEPROM.cpp\64</Expression>
         </Bp>
