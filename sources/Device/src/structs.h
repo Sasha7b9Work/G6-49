@@ -103,6 +103,8 @@ union BitSet64
         uint8 byte7;
     };
 
+    explicit BitSet64(uint64 v) : dword(v) {}
+
     explicit BitSet64(const uint8 *buffer = 0) : dword(0)
     {
         if (buffer)

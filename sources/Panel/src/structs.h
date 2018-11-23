@@ -28,10 +28,6 @@ union BitSet16
     BitSet32 name;                      \
     name.word = value;
 
-#define INIT_BIT_SET_64(name, value)    \
-    BitSet64 name;                      \
-    name.dword = value;
-
 union BitSet32
 {
     uint    word;
@@ -107,6 +103,8 @@ union BitSet64
         uint8 byte6;
         uint8 byte7;
     };
+
+    explicit BitSet64(uint64 v) : dword(v) {}
 
     explicit BitSet64(const uint8 *buffer = 0) : dword(0)
     {

@@ -42,14 +42,7 @@ void Generator::LoadStartMode(Chan ch, int mode)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadRegister(Register reg, uint64 value)
 {
-    INIT_BIT_SET_64(bs, value);
-
-    Message message(10, Command::WriteRegister, (uint8)reg);
-
-    for (int i = 0; i < 8; i++)
-    {
-        message.PutByte(bs.byte[i]);
-    }
+    Message message(10, Command::WriteRegister, (uint8)reg, value);
 
     Interface::Send(&message);
 }
