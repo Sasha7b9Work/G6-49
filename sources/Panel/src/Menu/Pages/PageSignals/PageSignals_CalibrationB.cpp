@@ -12,26 +12,14 @@ Page *PageSignals::PageCalibration::PageB::pointer = (Page *)&pageCalibrationB;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void OnPress_OffsetAD9952(bool enter, KoeffCal::E koeff)
-{
-    PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan::B, enter, koeff);
-}
-
-static void OnChange_KoeffAD9952(KoeffCal::E koeff)
-{
-    PageSignals::PageCalibration::WriteKoeffCal(Chan::B, koeff);
-}
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_NegativeAD9952()
 {
-    OnChange_KoeffAD9952(KoeffCal::AD9952_NEG);
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_NEG);
 }
 
 static void OnPress_NegativeAD9952(bool enter)
 {
-    OnPress_OffsetAD9952(enter, KoeffCal::AD9952_NEG);
+    PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_NEG);
 }
 
 DEF_GOVERNOR( gNegativeAD9952,                                                                                                       //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 -5¬ ---
@@ -45,12 +33,12 @@ DEF_GOVERNOR( gNegativeAD9952,                                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_PositiveAD9952()
 {
-    OnChange_KoeffAD9952(KoeffCal::AD9952_POS);
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_POS);
 }
 
 static void OnPress_PositiveAD9952(bool enter)
 {
-    OnPress_OffsetAD9952(enter, KoeffCal::AD9952_POS);
+    PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_POS);
 }
 
 DEF_GOVERNOR( gPositiveAD9952,                                                                                                       //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 +5¬ ---
@@ -64,12 +52,12 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_ZeroAD9952()
 {
-    OnChange_KoeffAD9952(KoeffCal::AD9952_ZERO);
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_ZERO);
 }
 
 static void OnPress_ZeroAD9952(bool enter)
 {
-    OnPress_OffsetAD9952(enter, KoeffCal::AD9952_ZERO);
+    PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_ZERO);
 }
 
 DEF_GOVERNOR( gZeroAD9952,                                                                                                            //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 0¬ ---
@@ -83,7 +71,7 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_AmplitudeAD9952()
 {
-    OnChange_KoeffAD9952(KoeffCal::AD9952_AMPL);
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_AMPL);
 }
 
 static void OnPress_AmplitudeAD9952(bool enter)
