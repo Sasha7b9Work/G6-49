@@ -1801,6 +1801,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\FDrive\FDrivePanel.h</FilePath>
             </File>
+            <File>
+              <FileName>Items.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\Items.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Items.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FDrive\Items.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

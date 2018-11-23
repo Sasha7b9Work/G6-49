@@ -5,6 +5,7 @@
 #include "structs.h"
 #include "Command.h"
 #include "FDrivePanel.h"
+#include "Items.h"
 #include "Display/Painter.h"
 #include "Display/Text.h" 
 #include "Interface/InterfacePanel.h"
@@ -16,79 +17,7 @@
 /// Примонтирована ли флешка
 static bool isMounted = false;
 
-/// Путь к текущему каталогу
-static char directory[255] = "\\";
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Items
-{
-public:
-
-    static void Init()
-    {
-        numDirs = numFiles = -1;
-        requestIsSend = false;
-    }
-    /// true означает, что идёт ожидание ответа от устройства
-    static bool WaitAnswer()
-    {
-        return requestIsSend;
-    }
-    /// Послать запрос на количество итемов
-    static void SendRequest()
-    {
-        uint size = std::strlen(directory) + 1 + 1;
-
-        Message message(size, Command::FDrive_NumDirsAndFiles);
-        std::strcpy((char *)message.Data() + 1, directory);
-        Interface::Send(&message);
-        requestIsSend = true;
-    }
-    /// Возвращает количество итемов. -1 - запрос не посылался
-    static int NumberDirs()
-    {
-        return numDirs;
-    }
-    static int NumberFiles()
-    {
-        return numFiles;
-    }
-
-    class Handler
-    {
-    friend class FDrive;
-    static bool Processing(Message *msg)
-    {
-        msg->ResetPointer();
-
-        uint8 command = msg->TakeByte();
-
-        if (command == Command::FDrive_NumDirsAndFiles)
-        {
-            numDirs = (int)msg->TakeWord();
-            numFiles = (int)msg->TakeWord();
-            requestIsSend = false;
-            return true;
-        }
-
-        return false;
-    }
-    };
-
-private:
-    /// Количество каталогов в текущем каталоге
-    static int numDirs;
-    /// Количество файлов в текущем каталоге
-    static int numFiles;
-    /// Запрос послан. Ожидается ответ
-    static bool requestIsSend;
-
-};
-
-int  Items::numDirs = -1;
-int  Items::numFiles = -1;
-bool Items::requestIsSend = false;
-
+char FDrive::directory[255] = "\\";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FDrive::Init()

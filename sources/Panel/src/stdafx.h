@@ -17,6 +17,7 @@
 #include "Display/font/Font.h"
 
 #include "FDrive/FDrivePanel.h"
+#include "FDrive/Items.h"
 
 #include "Generator/Signals.h"
 
