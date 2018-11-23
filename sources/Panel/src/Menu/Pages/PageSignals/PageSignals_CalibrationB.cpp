@@ -38,7 +38,7 @@ DEF_GOVERNOR( gNegativeAD9952,                                                  
     "AD9952 -5В", "AD9952 -5V",
     "Настройка уровня -5В AD9952",
     "Level setting -5V AD9952",
-    CAL_AD9952_OFFSET_NEG(Chan::B), 3000, 4095, pageCalibrationB, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
+    CAL_AD9952_OFFSET_NEG(Chan::B), 3000, 4095, pageCalibrationB, FuncActive, OnChange_NegativeAD9952, FuncBeforeDraw, OnPress_NegativeAD9952
 )
 
 
@@ -57,7 +57,7 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
     "AD9952 +5В", "AD9952 +5V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_POS(Chan::B), 0, 1000, pageCalibrationB, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
+    CAL_AD9952_OFFSET_POS(Chan::B), 0, 1000, pageCalibrationB, FuncActive, OnChange_PositiveAD9952, FuncBeforeDraw, OnPress_PositiveAD9952
 )
 
 
@@ -76,7 +76,7 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
     "AD9952 0В", "AD9952 0V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_ZERO(Chan::B), 1000, 3000, pageCalibrationB, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9952
+    CAL_AD9952_OFFSET_ZERO(Chan::B), 1000, 3000, pageCalibrationB, FuncActive, OnChange_ZeroAD9952, FuncBeforeDraw, OnPress_ZeroAD9952
 )
 
 
@@ -95,7 +95,7 @@ DEF_GOVERNOR( gAmplitudeAD9952,                                                 
     "AD9952 Размах", "AD9952 Amplitude",
     "Настройка размаха AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE(Chan::B), -2000, 2000, pageCalibrationB, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
+    CAL_AD9952_AMPLITUDE(Chan::B), -2000, 2000, pageCalibrationB, FuncActive, OnChange_AmplitudeAD9952, FuncBeforeDraw, OnPress_AmplitudeAD9952
 )
 
 
@@ -110,17 +110,54 @@ static void OnPress_OffsetDDS(bool)
 
 }
 
-DEF_GOVERNOR(gOffsetDDS,
+DEF_GOVERNOR( gOffsetDDS,                                                                                                                //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - DDS 0В ---
     "DDS 0В", "DDS 0V",
     "Установка нулевого смещения формирователя произвольных сигналов",
     "Setting zero offset shaper arbitrary signals",
-    CAL_DDS_OFFSET(Chan::B), -10000, 10000, pageCalibrationB, FuncActive, OnChange_OffsetDDS, EmptyFuncVV, OnPress_OffsetDDS
+    CAL_DDS_OFFSET(Chan::B), -10000, 10000, pageCalibrationB, FuncActive, OnChange_OffsetDDS, FuncBeforeDraw, OnPress_OffsetDDS
+)
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_MinDDS()
+{
+
+}
+
+static void OnPress_MinDDS(bool)
+{
+
+}
+
+DEF_GOVERNOR( gMinDDS,                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - DDS -5В ---
+    "DDS -5В", "DDS -5V",
+    "Установка минимального выходного уровня формирователя произвольных сигналов",
+    "Setting the minimum output level shaper arbitrary signals",
+    CAL_DDS_MIN(Chan::B), -10000, 10000, pageCalibrationB, FuncActive, OnChange_MinDDS, FuncBeforeDraw, OnPress_MinDDS
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_MaxDDS()
+{
+
+}
+
+static void OnPress_MaxDDS(bool)
+{
+
+}
+
+DEF_GOVERNOR( gMaxDDS,                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - DDS +5В ---
+    "DDS +5В", "DDS +5V",
+    "Установка минимального выходного уровня формирователя произвольных сигналов",
+    "Setting the minimum output level shaper arbitrary signals",
+    CAL_DDS_MIN(Chan::B), -10000, 10000, pageCalibrationB, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
 )
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_5( pageCalibrationB,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B ---
+DEF_PAGE_7( pageCalibrationB,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B ---
     "КАЛИБРОВКА B", "CALIBRATION B",
     "", "",
     &gPositiveAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - AD9952 +5В
@@ -128,5 +165,7 @@ DEF_PAGE_5( pageCalibrationB,                                                   
     &gNegativeAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - AD9952 -5В
     &gAmplitudeAD9952,      ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - AD9952 размах
     &gOffsetDDS,            ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - DDS 0В
+    &gMinDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - DDS -5В
+    &gMaxDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - DDS +5В
     Page::Settings_CalibrationB, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )

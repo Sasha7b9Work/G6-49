@@ -98,15 +98,73 @@ DEF_GOVERNOR(gAmplitudeAD9952,                                                  
     CAL_AD9952_AMPLITUDE(Chan::A), -2000, 2000, pageCalibrationA, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_OffsetDDS()
+{
+
+}
+
+static void OnPress_OffsetDDS(bool)
+{
+
+}
+
+DEF_GOVERNOR( gOffsetDDS,                                                                                                                //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS 0В ---
+    "DDS 0В", "DDS 0V",
+    "Установка нулевого смещения формирователя произвольных сигналов",
+    "Setting zero offset shaper arbitrary signals",
+    CAL_DDS_OFFSET(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_OffsetDDS, FuncBeforeDraw, OnPress_OffsetDDS
+)
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_MinDDS()
+{
+
+}
+
+static void OnPress_MinDDS(bool)
+{
+
+}
+
+DEF_GOVERNOR( gMinDDS,                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS -5В ---
+    "DDS -5В", "DDS -5V",
+    "Установка минимального выходного уровня формирователя произвольных сигналов",
+    "Setting the minimum output level shaper arbitrary signals",
+    CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_MinDDS, FuncBeforeDraw, OnPress_MinDDS
+)
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_MaxDDS()
+{
+
+}
+
+static void OnPress_MaxDDS(bool)
+{
+
+}
+
+DEF_GOVERNOR( gMaxDDS,                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS +5В ---
+    "DDS +5В", "DDS +5V",
+    "Установка минимального выходного уровня формирователя произвольных сигналов",
+    "Setting the minimum output level shaper arbitrary signals",
+    CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
+)
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageCalibrationA,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A ---
+DEF_PAGE_7( pageCalibrationA,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A ---
     "КАЛИБРОВКА A", "CALIBRATION A",
     "", "",
     &gPositiveAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - AD9952 +5В
     &gZeroAD9952,           ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - AD9952 0В
     &gNegativeAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - AD9952 -5В
     &gAmplitudeAD9952,      ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - AD9952 размах
+    &gOffsetDDS,            ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS 0В
+    &gMinDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS -5В
+    &gMaxDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS +5В
     Page::Settings_CalibrationA, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )
