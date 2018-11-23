@@ -41,8 +41,4 @@ public:
 private:
 
     friend class Graphics;
-
-    static void RequestNameDir(uint numDir);
-
-    static void RequestNameFile(uint numFile);
 };

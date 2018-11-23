@@ -65,38 +65,6 @@ void FDrive::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::RequestNameDir(uint numDir)
-{
-//    uint size = 1 + 4 + std::strlen(directory) + 1;
-    uint8 *data = 0; // PrepareBufferForSend(size, Command::FDrive_RequestDir);
-
-    BitSet32 number(numDir);
-    number.WriteToBuffer(data + 1);
-
-    std::strcpy((char *)data + 5, directory);
-
-//    Interface::Send(data, size);
-
-    std::free(data);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::RequestNameFile(uint numFile)
-{
-    uint size = 1 + 4 + std::strlen(directory) + 1;
-    uint8 *data = 0; // PrepareBufferForSend(size, Command::FDrive_RequestFile);
-
-    BitSet32 number(numFile);
-    number.WriteToBuffer(data + 1);
-
-    std::strcpy((char *)data + 5, directory);
-
-    Interface::Send(data, size);
-
-    std::free(data);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FDrive::Handler::Processing(Message *msg)
 {
     msg->ResetPointer();
