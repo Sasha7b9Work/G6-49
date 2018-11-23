@@ -133,77 +133,6 @@ void FDrive::Update()
 
         state = State::Disconnected;
     }
-    else if(command == Command::FDrive_NumDirsAndFiles)
-    {
-        /*
-        PrepareBufferForData(1 + 4 + 4, Command::FDrive_NumDirsAndFiles);
-
-        BitSet32 numDirs;
-        BitSet32 numFiles;
-
-        GetNumDirsAndFiles(path, &numDirs.word, &numFiles.word);
-
-        numDirs.WriteToBuffer(bufferForSend + 1);
-        numFiles.WriteToBuffer(bufferForSend + 5);
-
-        command = Command::Number;
-        */
-    }
-    else if(command == Command::FDrive_RequestDir)
-    {
-        /*
-        char buffer[256];
-        StructForReadDir str;
-        GetNameDir(path, (int)numItem, buffer, &str);
-
-        PrepareBufferForData(1 + 4 + strlen(buffer) + 1, Command::FDrive_RequestDir);
-
-        BitSet32 num;
-        num.word = numItem;
-        num.WriteToBuffer(bufferForSend + 1);
-        strcpy((char *)bufferForSend + 5, buffer);
-
-        command = Command::Number;
-        */
-    }
-    else if(command == Command::FDrive_RequestFile)
-    {
-        /*
-        char buffer[256];
-        StructForReadDir str;
-        GetNameFile(path, (int)numItem, buffer, &str);
-
-        PrepareBufferForData(1 + 4 + strlen(buffer) + 1, Command::FDrive_RequestFile);
-
-        BitSet32 num;
-        num.word = numItem;
-        num.WriteToBuffer(bufferForSend + 1);
-        strcpy((char *)bufferForSend + 5, buffer);
-
-        command = Command::Number;
-        */
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::HandlerInterface(uint8 *recv)
-{
-    command = *recv;
-
-    if(command == Command::FDrive_NumDirsAndFiles)
-    {
-        uint numDirs = 0;
-        uint numFiles = 0;
-        GetNumDirsAndFiles((const char *)recv + 1, &numDirs, &numFiles);
-        uint8 *buffer = (uint8 *)std::malloc(1 + 4 + 4);
-
-        buffer[0] = Command::FDrive_NumDirsAndFiles;
-        std::memcpy(buffer + 1, &numDirs, 4);
-        std::memcpy(buffer + 5, &numFiles, 4);
-//        Interface::Send(buffer, 9);
-
-        std::free(buffer);
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -253,11 +182,10 @@ static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Struc
 */
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
 {
-    memcpy(s->nameDir, (void *)fullPath, strlen(fullPath));
-    s->nameDir[strlen(fullPath)] = '\0';
+    std::memcpy(s->nameDir, (void *)fullPath, std::strlen(fullPath));
+    s->nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &s->dir;
     FILINFO *pFNO = &s->fno;
@@ -285,7 +213,7 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, St
             }
             if (numFile == numFiles && (pFNO->fattrib & AM_DIR) == 0)
             {
-                strcpy(nameFileOut, pFNO->fname);
+                std::strcpy(nameFileOut, pFNO->fname);
                 return true;
             }
             if ((pFNO->fattrib & AM_DIR) == 0 && (pFNO->fname[0] != '.'))
@@ -296,7 +224,6 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, St
     }
     return false;
 }
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
@@ -359,14 +286,29 @@ void FDrive::Handler::Processing(Message *msg)
         uint numDirs = 0;
         uint numFiles = 0;
 
-        //LOG_WRITE("получаем содержимое %s", (char *)(msg->Data() + 1));
-
         GetNumDirsAndFiles((char *)(msg->Data() + 1), &numDirs, &numFiles);
 
         Message *answer = new Message(9, Command::FDrive_NumDirsAndFiles, numDirs, numFiles);
 
-        //LOG_WRITE("%d файлов, %d каталогов", numFiles, numDirs);
-
         Interface::AddMessageForTransmit(answer);
+    }
+    else if (com == Command::FDrive_RequestFile)
+    {
+        StructForReadDir srd;
+
+        char name[255];
+
+        int numFile = (int)msg->TakeByte();
+
+        if (GetNameFile((char *)(msg->Data() + 2), numFile, name, &srd))
+        {
+            uint size = 1 + 1 + std::strlen(name) + 1;
+
+            Message *answer = new Message(size, Command::FDrive_RequestFile, (uint8)numFile);
+
+            std::strcpy((char *)(answer->Data() + 2), name);
+
+            Interface::AddMessageForTransmit(answer);
+        }
     }
 }

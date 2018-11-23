@@ -11,8 +11,6 @@ public:
     static void Init();
 
     static void Update();
-    /// Interface вызывает эту функцию для обработки принятой команды
-    static void HandlerInterface(uint8 *);
 
     static USBH_HandleTypeDef hUSB_Host;
 
