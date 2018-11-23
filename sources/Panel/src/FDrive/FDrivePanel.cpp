@@ -13,8 +13,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Подготовить буфер для передачи
-static uint8 *PrepareBufferForSend(uint size, uint8 command);
 /// Примонтирована ли флешка
 static bool isMounted = false;
 
@@ -78,7 +76,7 @@ bool FDrive::GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles
 void FDrive::RequestNameDir(uint numDir, pString directory)
 {
     uint size = 1 + 4 + std::strlen(directory) + 1;
-    uint8 *data = PrepareBufferForSend(size, Command::FDrive_RequestDir);
+    uint8 *data = 0; // PrepareBufferForSend(size, Command::FDrive_RequestDir);
 
     BitSet32 number(numDir);
     number.WriteToBuffer(data + 1);
@@ -94,7 +92,7 @@ void FDrive::RequestNameDir(uint numDir, pString directory)
 void FDrive::RequestNameFile(uint numFile, pString directory)
 {
     uint size = 1 + 4 + std::strlen(directory) + 1;
-    uint8 *data = PrepareBufferForSend(size, Command::FDrive_RequestFile);
+    uint8 *data = 0; // PrepareBufferForSend(size, Command::FDrive_RequestFile);
 
     BitSet32 number(numFile);
     number.WriteToBuffer(data + 1);
@@ -104,14 +102,6 @@ void FDrive::RequestNameFile(uint numFile, pString directory)
     Interface::Send(data, size);
 
     std::free(data);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint8 *PrepareBufferForSend(uint size, uint8 command)
-{
-    uint8 *buffer = (uint8 *)std::malloc(size);
-    *buffer = command;
-    return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
