@@ -9,13 +9,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void PageSignals::PageCalibration::PrepareForOffsetAD9952(Chan /*ch*/)
-{
-
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::PrepareForAmplitudeAD9952(Chan /*ch*/)
+void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan /*ch*/)
 {
 
 }
@@ -56,7 +50,6 @@ void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, Koe
 {
     if (enter)
     {
-        PrepareForOffsetAD9952(ch);
         Generator::SetAmplitude(ch, 0.0f);
         WriteOffset(ch, koeff);
     }

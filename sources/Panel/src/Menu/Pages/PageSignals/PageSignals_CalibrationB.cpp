@@ -90,7 +90,7 @@ static void OnPress_AmplitudeAD9952(bool enter)
 {
     if (enter)
     {
-        PageSignals::PageCalibration::PrepareForAmplitudeAD9952(Chan::B);
+        PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan::B);
     }
 }
 
@@ -98,7 +98,7 @@ DEF_GOVERNOR( gAmplitudeAD9952,                                                 
     "AD9952 Размах", "AD9952 Amplitude",
     "Настройка размаха AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE(Chan::B), 0, 1000, pageCalibrationB, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
+    CAL_AD9952_AMPLITUDE(Chan::B), -1000, 1000, pageCalibrationB, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
 

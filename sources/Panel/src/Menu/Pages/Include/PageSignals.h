@@ -56,13 +56,10 @@ public:
             static Page *pointer;
         };
 
-        static void PrepareForAmplitudeAD9952(Chan ch);
-
-        static void WriteKoeffCal(Chan ch, KoeffCal::E koeff);
-
         static void OnPress_OffsetAD9952(Chan ch, bool enter, KoeffCal::E koeff);
 
-    private:
-        static void PrepareForOffsetAD9952(Chan ch);
+        static void OnPress_AmplitudeAD9952(Chan ch);
+
+        static void WriteKoeffCal(Chan ch, KoeffCal::E koeff);
     };
 };

@@ -6,12 +6,6 @@
 #endif
 
 
-/// Минимальное значение калибровочного коэффициента
-#define MIN -128
-/// Максимальное значение калибровочного коэффициента
-#define MAX 127
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageCalibrationA;
 Page *PageSignals::PageCalibration::PageA::pointer = (Page *)&pageCalibrationA;
@@ -96,7 +90,7 @@ static void OnPress_AmplitudeAD9952(bool enter)
 {
     if (enter)
     {
-        PageSignals::PageCalibration::PrepareForAmplitudeAD9952(Chan::A);
+        PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan::A);
     }
 }
 
@@ -104,7 +98,7 @@ DEF_GOVERNOR(gAmplitudeAD9952,                                                  
     "AD9952 Размах", "AD9952 Amplitude",
     "Настройка размаха AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE(Chan::A), MIN, MAX, pageCalibrationA, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
+    CAL_AD9952_AMPLITUDE(Chan::A), -1000, 1000, pageCalibrationA, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
 

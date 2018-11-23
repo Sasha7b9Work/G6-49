@@ -242,7 +242,7 @@ bool Message::AllocateMemory(uint size)
     }
     else
     {
-        LOG_WRITE("Не могу выделить %d байт", size);
+        LOG_WRITE("Недостаточно памяти для %d байт", size);
     }
 
     return buffer != 0;
