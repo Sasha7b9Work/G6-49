@@ -20,6 +20,7 @@
 #include "Hardware/Modules/EEPROM.h"
 #include "Hardware/Modules/SPI.h"
 
+#include "Interface/Handlers.h"
 #include "Interface/InterfaceDevice.h"
 
 #include "Settings/CalibrationSettings.h"

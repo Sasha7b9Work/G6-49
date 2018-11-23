@@ -6,6 +6,7 @@
 class Transceiver
 {
     friend class Interface;
+    friend class Handlers;
 private:
 
     static void Transmit(Message *message);

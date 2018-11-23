@@ -1,11 +1,14 @@
 #pragma once
 #include "Command.h"
 #include "Message.h"
+#include "Utils/Queue.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Interface
 {
+    friend class Handlers;
+
 public:
 
     /// Структура для работы с интерфейсом
@@ -35,61 +38,11 @@ public:
     /// Добавляет сообщение в очередь отправки. Если очередь заполнена, сообщение удаляется и функция возвращает false
     static bool AddMessageInQueue(Message *message);
 
-    static void SendData(Message *);
-
-    static void Empty(Message *);
-
-    static void SetFormWave(Message *);
-
-    static void SetFrequency(Message *);
-
-    static void SetPeriod(Message *);
-
-    static void SetAmplitude(Message *);
-
-    static void SetOffset(Message *);
-
-    static void SetDuration(Message *);
-
-    static void SetDutyRatio(Message *);
-
-    static void SetPhase(Message *);
-
-    static void SetDelay(Message *);
-
-    static void SetManipulationDuration(Message *);
-
-    static void SetManipulationPeriod(Message *);
-
-    static void SetPacketPeriod(Message *);
-
-    static void SetPacketNumber(Message *);
-
-    static void EnableChannel(Message *);
-
-    static void RunReset(Message *);
-
-    static void ModeDebug(Message *);
-
-    static void WriteRegister(Message *);
-
-    static void SetManipulation(Message *);
-
-    static void SetManipulationMode(Message *);
-
-    static void SetStartMode(Message *);
-
-    static void LoadFormDDS(Message *);
-    
-    static void Test(Message *);
-
-    static void SetKoeffCalibration(Message *);
-
-    static void GetKoeffCalibration(Message *);
-
-    static void SetPolarity(Message *);
-
 private:
 
     static uint timeLastReceive;
+    /// Очередь сообщений, ожидающих отправки
+    static Queue messages;
+    /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
+    static uint freqForSend;
 };
