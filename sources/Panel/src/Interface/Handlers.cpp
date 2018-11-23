@@ -15,23 +15,87 @@ bool Handlers::Processing(Message *msg)
 {
     uint8 command = msg->TakeByte();
 
-    if (command == Command::RequestData)
+    static const struct StructFunc
     {
+        typedef bool(*pFuncBpM)(Message *);
+        pFuncBpM func;
+        StructFunc(pFuncBpM f) : func(f) {}
     }
-    else if (command == Command::FreqMeasure)
+    functions[Command::Number] =
     {
-        FrequencyMeter::SetMeasure(msg->TakeWord());
-        return true;
-    }
-    else if (command == Command::Log)
+        Handlers::Request,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::FreqMeasure,
+        Handlers::Log,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E,
+        Handlers::E
+    };
+
+    if (command < Command::Number)
     {
-        Console::AddString((pString)(msg->Data() + 1));
-        return true;
+        /// Сюда сообщение передаётся уже без первого байта
+        return functions[command].func(msg);
     }
     else
     {
-        LOG_WRITE_FINALIZE("Поступила неизвестная команда %d", command);
+        LOG_ERROR("Неправильная команда");
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Handlers::E(Message *)
+{
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Handlers::Request(Message *)
+{
+    return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Handlers::FreqMeasure(Message *msg)
+{
+    FrequencyMeter::SetMeasure(msg->TakeWord());
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Handlers::Log(Message *msg)
+{
+    Console::AddString((pString)(msg->Data() + 1));
+    return true;
 }
