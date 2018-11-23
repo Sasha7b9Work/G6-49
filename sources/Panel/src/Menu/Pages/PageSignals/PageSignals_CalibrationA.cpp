@@ -89,7 +89,7 @@ DEF_GOVERNOR(gAmplitudeAD9952,                                                  
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_OffsetDDS()
 {
-
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::DDS_OFFSET);
 }
 
 static void OnPress_OffsetDDS(bool enter)
@@ -108,7 +108,7 @@ DEF_GOVERNOR( gOffsetDDS,                                                       
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_MinDDS()
 {
-
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::DDS_MIN);
 }
 
 static void OnPress_MinDDS(bool enter)
@@ -126,7 +126,7 @@ DEF_GOVERNOR( gMinDDS,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_MaxDDS()
 {
-
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::DDS_MAX);
 }
 
 static void OnPress_MaxDDS(bool enter)
