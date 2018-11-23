@@ -9,8 +9,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// «аписать нужное дл€ данной калибровки смещение
-static void WriteOffset(Chan ch, KoeffCal::E koeff)
+/// ”становить нужный дл€ данной калибровки параметр
+static void SetParameter(Chan ch, KoeffCal::E koeff)
 {
     if (koeff == KoeffCal::AD9952_ZERO)
     {
@@ -24,6 +24,10 @@ static void WriteOffset(Chan ch, KoeffCal::E koeff)
     {
         Generator::SetOffset(ch, -5.0f);
     }
+    else if (koeff == KoeffCal::AD9952_AMPL)
+    {
+        Generator::SetAmplitude(ch, 10.0f);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +40,7 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 
     setCal.Save();
 
-    WriteOffset(ch, koeff);
+    SetParameter(ch, koeff);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,16 +49,16 @@ void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, Koe
     if (enter)
     {
         Generator::SetAmplitude(ch, 0.0f);
-        WriteOffset(ch, koeff);
+        SetParameter(ch, koeff);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan ch, bool enter)
+void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan ch, bool enter, KoeffCal::E koeff)
 {
     if (enter)
     {
         Generator::SetOffset(ch, 0.0f);
-        Generator::SetAmplitude(ch, 10.0f);
+        SetParameter(ch, koeff);
     }
 }

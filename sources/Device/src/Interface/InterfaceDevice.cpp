@@ -231,16 +231,6 @@ void Interface::Test(Message *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::SetKoeffCalibration(Message *msg)
 {
-    //uint8 *data = msg->Data();
-
-    //char string[100];
-
-    //BitSet16 bs(msg->Data() + 3);
-
-    //sprintf(string, "êàí %d, koýô %d = %d", data[1], data[2], (int16)bs.halfWord);
-
-    //Console::AddString(string);
-
     msg->TakeByte();
 
     Chan ch = (Chan::E)msg->TakeByte();
