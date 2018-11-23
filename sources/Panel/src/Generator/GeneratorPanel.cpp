@@ -38,11 +38,16 @@ void Generator::LoadStartMode(Chan ch, int mode)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadRegister(Register reg, uint64 value)
 {
-    INIT_BIT_SET_64(bitSet, value);
+    INIT_BIT_SET_64(bs, value);
 
-    uint8 buffer[10] = {Command::WriteRegister, (uint8)reg,   bitSet.byte0, bitSet.byte1, bitSet.byte2, bitSet.byte3,
-                                                                    bitSet.byte4, bitSet.byte5, bitSet.byte6, bitSet.byte7};
-    Interface::Send(buffer, 10);
+    Message message(10, Command::WriteRegister, (uint8)reg);
+
+    for (int i = 0; i < 8; i++)
+    {
+        message.PutByte(bs.byte[i]);
+    }
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

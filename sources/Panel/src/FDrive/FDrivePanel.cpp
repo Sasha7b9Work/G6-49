@@ -75,7 +75,7 @@ bool FDrive::GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::RequestNameDir(uint numDir, pString directory)
 {
-    uint size = 1 + 4 + std::strlen(directory) + 1;
+//    uint size = 1 + 4 + std::strlen(directory) + 1;
     uint8 *data = 0; // PrepareBufferForSend(size, Command::FDrive_RequestDir);
 
     BitSet32 number(numDir);
@@ -83,7 +83,7 @@ void FDrive::RequestNameDir(uint numDir, pString directory)
 
     std::strcpy((char *)data + 5, directory);
 
-    Interface::Send(data, size);
+//    Interface::Send(data, size);
 
     std::free(data);
 }

@@ -49,9 +49,9 @@ public:
     /// Возвращает true, если сообщения одинаковы
     bool IsEquals(const Message *message) const;
 
-private:
     /// Положить байт
     void PutByte(uint8 data);
+private:
     /// Положить половину слова
     void PutHalfWord(int16 data);
     void PutHalfWord(uint16 data);
