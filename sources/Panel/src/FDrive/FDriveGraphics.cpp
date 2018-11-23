@@ -31,19 +31,7 @@ static char directory[255] = "\\";
 static const int NUM_ITEMS = 20;
 static char names[NUM_ITEMS][50];
 
-//static bool isBusy = false;
 
-/// В каком состоянии находится обмен с флешкой
-struct State
-{
-    enum E
-    {
-        NeedRepaint,    /// Нужна перерисовка
-        Wait            /// Ничего делать не нужно, данные получены. Просто отрисовываем их
-    } value;
-};
-
-//static State::E state = State::NeedRepaint;
 
 FDrive::View FDrive::view = FDrive::Files;
 

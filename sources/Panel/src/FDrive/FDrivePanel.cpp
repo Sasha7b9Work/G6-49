@@ -16,6 +16,63 @@
 /// Примонтирована ли флешка
 static bool isMounted = false;
 
+class Items
+{
+public:
+    /// true означает, что идёт ожидание ответа от устройства
+    static bool WaitAnswer()
+    {
+        return requestIsSend;
+    }
+    /// Послать запрос на количество итемов
+    static void SendRequest()
+    {
+        Message message(1, Command::FDrive_NumDirsAndFiles);
+        Interface::Send(&message);
+        requestIsSend = true;
+    }
+    /// Возвращает количество итемов. -1 - запрос не посылался
+    static int NumberDirs()
+    {
+        return numDirs;
+    }
+    static int NumberFiles()
+    {
+        return numFiles;
+    }
+
+    class Handler
+    {
+    friend class FDrive;
+    static bool Processing(Message *msg)
+    {
+        msg->ResetPointer();
+
+        uint8 command = msg->TakeByte();
+
+        if (command == Command::FDrive_NumDirsAndFiles)
+        {
+            numDirs = (int)msg->TakeWord();
+            numFiles = (int)msg->TakeWord();
+            return true;
+        }
+
+        return false;
+    }
+    };
+
+private:
+    static int numDirs;
+    static int numFiles;
+    static bool requestIsSend;
+
+};
+
+int  Items::numDirs = -1;
+int  Items::numFiles = -1;
+bool Items::requestIsSend = false;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FDrive::Draw()
 {
@@ -32,44 +89,18 @@ void FDrive::Draw()
         return;
     }
 
-	/*
-    return;
-
-    if(state == State::NeedRepaint)
+    if (Items::NumberDirs() == -1)
     {
-        uint numDirs = 0;
-        uint numFiles = 0;
-        if(!FDrive::GetNumDirsAndFiles(directory, &numDirs, &numFiles))
-        {
-            isConnected = false;
-        }
-
-        Painter::SetColor(Color::FILL);
-        Text::DrawFormatText(50, 50, "каталогов - %d, файлов - %d", numDirs, numFiles);
+        Items::SendRequest();
+    }
+    else if (Items::WaitAnswer())
+    {
+        return;
     }
 
-    DrawNameCurrentDir(x + 3, y + 1);
-	*/
-}
+    Text::DrawFormatText(x + 10, y + 10, "Файлов - %d", Items::NumberFiles());
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles)
-{
-    uint size = 1 + std::strlen(directory) + 1;
-
-    Interface::Data data(size, Command::FDrive_NumDirsAndFiles);    // Подготавливаем и заполняем запрос
-
-    std::strcpy((char *)data.GetData() + 1, directory);
-
-    Interface::Data answer(0);                                      // Подготавливаем место для ответа
-
-//    bool result = Interface::Request(&data, &answer);                  // Выполняем запрос, получем ответ
-
-    *numDirs = BitSet32(answer.GetData() + 1).word;                 // Узнаём количество каталогов
-
-    *numFiles = BitSet32(answer.GetData() + 5).word;                // Узнаём количество файлов
-
-    return false;
+    Text::DrawFormatText(x + 10, y + 20, "Каталогов - %d", Items::NumberDirs());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,18 +145,19 @@ bool FDrive::Handler::Processing(Message *msg)
     if (command == Command::FDrive_Mount)
     {
         isMounted = (msg->TakeByte() != 0);
+        return true;
     }
     else if (command == Command::FDrive_NumDirsAndFiles)
     {
-
+        return Items::Handler::Processing(msg);
     }
     else if (command == Command::FDrive_RequestDir)
     {
-
+        return true;
     }
     else if (command == Command::FDrive_RequestFile)
     {
-
+        return true;
     }
 
     return false;
