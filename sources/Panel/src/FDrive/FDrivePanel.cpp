@@ -5,6 +5,8 @@
 #include "structs.h"
 #include "Command.h"
 #include "FDrivePanel.h"
+#include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Interface/InterfacePanel.h"
 #include <cstdlib>
 #endif
@@ -13,9 +15,46 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Подготовить буфер для передачи
 static uint8 *PrepareBufferForSend(uint size, uint8 command);
-
+/// Примонтирована ли флешка
+static bool isMounted = false;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void FDrive::Draw()
+{
+    int x = Wave::Graphics::X();
+    int y = Wave::Graphics::Y(Chan::A) + 1;
+    int width = Wave::Graphics::Width() - 2;
+    int height = Wave::Graphics::Height() * 2;
+
+    Painter::FillRegion(x, y, width, height, Color::BACK);
+
+    if(!isMounted)
+    {
+        Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
+        return;
+    }
+
+	/*
+    return;
+
+    if(state == State::NeedRepaint)
+    {
+        uint numDirs = 0;
+        uint numFiles = 0;
+        if(!FDrive::GetNumDirsAndFiles(directory, &numDirs, &numFiles))
+        {
+            isConnected = false;
+        }
+
+        Painter::SetColor(Color::FILL);
+        Text::DrawFormatText(50, 50, "каталогов - %d, файлов - %d", numDirs, numFiles);
+    }
+
+    DrawNameCurrentDir(x + 3, y + 1);
+	*/
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FDrive::GetNumDirsAndFiles(pString directory, uint *numDirs, uint *numFiles)
 {
     uint size = 1 + std::strlen(directory) + 1;
@@ -84,15 +123,7 @@ bool FDrive::Handler::Processing(Message *msg)
 
     if (command == Command::FDrive_Mount)
     {
-        uint8 mount = msg->TakeByte();
-        if (mount)
-        {
-            LOG_WRITE("Флешка примонтирована");
-        }
-        else
-        {
-            LOG_WRITE("Флешка отмонтирована");
-        }
+        isMounted = (msg->TakeByte() != 0);
     }
     else if (command == Command::FDrive_NumDirsAndFiles)
     {

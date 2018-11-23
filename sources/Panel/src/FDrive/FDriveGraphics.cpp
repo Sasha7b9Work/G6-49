@@ -23,8 +23,6 @@
 //static int firstFile = 0;
 /// Номер подсвеченного итема
 static uint curItem = 0;
-/// true, если флешка подключена
-static bool isConnected = false;
 
 static uint numItems = 0;
 /// Путь к текущему каталогу
@@ -63,57 +61,12 @@ void FDrive::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::Draw()
-{
-    int x = Wave::Graphics::X();
-    int y = Wave::Graphics::Y(Chan::A) + 1;
-    int width = Wave::Graphics::Width() - 2;
-    int height = Wave::Graphics::Height() * 2;
-
-    Painter::FillRegion(x, y, width, height, Color::BACK);
-
-    if(!isConnected)
-    {
-        Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
-        return;
-    }
-
-	/*
-    return;
-
-    if(state == State::NeedRepaint)
-    {
-        uint numDirs = 0;
-        uint numFiles = 0;
-        if(!FDrive::GetNumDirsAndFiles(directory, &numDirs, &numFiles))
-        {
-            isConnected = false;
-        }
-
-        Painter::SetColor(Color::FILL);
-        Text::DrawFormatText(50, 50, "каталогов - %d, файлов - %d", numDirs, numFiles);
-    }
-
-    DrawNameCurrentDir(x + 3, y + 1);
-	*/
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
 static void DrawNameCurrentDir(int left, int top)
 {
     Text::DrawText(left, top, directory, Color::FILL);
 }
 */
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::HandlerInterface(uint8 *data)
-{
-    if(*data == Command::FDrive_Mount)
-    {
-        isConnected = data[1] != 0;
-    }
-}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::DrawDirs()

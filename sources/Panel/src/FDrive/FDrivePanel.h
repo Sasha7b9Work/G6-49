@@ -44,6 +44,4 @@ private:
     static void RequestNameDir(uint numDir, pString directory);
 
     static void RequestNameFile(uint numFile, pString directory);
-
-    static void HandlerInterface(uint8 *data);
 };
