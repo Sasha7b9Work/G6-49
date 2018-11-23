@@ -99,14 +99,34 @@ DEF_GOVERNOR( gAmplitudeAD9952,                                                 
 )
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_OffsetDDS()
+{
+
+}
+
+static void OnPress_OffsetDDS(bool)
+{
+
+}
+
+DEF_GOVERNOR(gOffsetDDS,
+    "DDS 0В", "DDS 0V",
+    "Установка нулевого смещения формирователя произвольных сигналов",
+    "Setting zero offset shaper arbitrary signals",
+    CAL_DDS_OFFSET(Chan::B), -10000, 10000, pageCalibrationB, FuncActive, OnChange_OffsetDDS, EmptyFuncVV, OnPress_OffsetDDS
+)
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_4( pageCalibrationB,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B ---
+DEF_PAGE_5( pageCalibrationB,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B ---
     "КАЛИБРОВКА B", "CALIBRATION B",
     "", "",
     &gPositiveAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - AD9952 +5В
     &gZeroAD9952,           ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - AD9952 0В
     &gNegativeAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - AD9952 -5В
     &gAmplitudeAD9952,      ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - AD9952 размах
+    &gOffsetDDS,            ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B - DDS 0В
     Page::Settings_CalibrationB, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )
