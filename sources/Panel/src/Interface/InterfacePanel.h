@@ -35,7 +35,7 @@ public:
     /// Заслать в генератор данные
     static void Send(uint8 *buffer, uint size);
 
-    static void Send(const Buffer &buffer);
+    //static void Send(const Buffer &buffer);
 
     static void Send(Message *message);
 };

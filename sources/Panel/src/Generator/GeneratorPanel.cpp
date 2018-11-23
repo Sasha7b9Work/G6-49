@@ -26,13 +26,17 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan ch, bool enable)
 {
-    Interface::Send(Buffer(Command::EnableChannel, ch, enable ? 1u : 0u));
+    Message message(3, Command::EnableChannel, ch, (uint8)(enable ? 1u : 0u));
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadStartMode(Chan ch, int mode)
 {
-    Interface::Send(Buffer(Command::SetStartMode, ch, (uint8)mode));
+    Message message(3, Command::SetStartMode, ch, (uint8)mode);
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,13 +57,17 @@ void Generator::LoadRegister(Register reg, uint64 value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
-    Interface::Send(Buffer(Command::ModeDebug, enable ? 1u : 0u));
+    Message message(2, Command::ModeDebug, (uint8)(enable ? 1u : 0u));
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Reset()
 {
-    Interface::Send(Buffer(Command::RunReset));
+    Message message(1, Command::RunReset);
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -74,7 +82,9 @@ void Generator::SetFormWave(Wave *w)
     }
     else
     {
-        Interface::Send(Buffer(Command::SetFormWave, ch, form));
+        Message message(3, Command::SetFormWave, ch, form);
+
+        Interface::Send(&message);
     }
 }
 
@@ -182,7 +192,11 @@ void Generator::SetParameter(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    Interface::Send(Buffer((uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), (uint8)param->GetChoice()));
+    Message message(3, (uint8)commands[param->value].command,
+        (uint8)param->GetForm()->GetWave()->GetChannel(),
+        (uint8)param->GetChoice());
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
