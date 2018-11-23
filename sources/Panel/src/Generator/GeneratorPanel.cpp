@@ -245,8 +245,6 @@ void Generator::SetParameter(ParameterValue *param)
         Command::RequestData
     };
 
-    uint8 buffer[6] = {(uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel()};
-
     float value = param->GetValue();
 
     if(param->Is(ParameterValue::Offset))
@@ -254,8 +252,9 @@ void Generator::SetParameter(ParameterValue *param)
         value -= 5.0f;
     }
 
-    memcpy(&buffer[2], &value, 4);
-    Interface::Send(buffer, 6);
+    Message message(6, (uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), value);
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
