@@ -59,6 +59,8 @@ public:
 
         static void OnPress_OffsetAD9952(Chan ch, bool enter, KoeffCal::E koeff);
 
+        static void OnPress_DDS(Chan ch, bool enter, KoeffCal::E koeff);
+
         static void OnPress_AmplitudeAD9952(Chan ch, bool enter, KoeffCal::E koeff);
 
         static void WriteKoeffCal(Chan ch, KoeffCal::E koeff);

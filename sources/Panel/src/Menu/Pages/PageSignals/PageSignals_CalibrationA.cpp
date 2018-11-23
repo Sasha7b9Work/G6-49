@@ -104,9 +104,9 @@ static void OnChange_OffsetDDS()
 
 }
 
-static void OnPress_OffsetDDS(bool)
+static void OnPress_OffsetDDS(bool enter)
 {
-
+    PageSignals::PageCalibration::OnPress_DDS(Chan::A, enter, KoeffCal::DDS_OFFSET);
 }
 
 DEF_GOVERNOR( gOffsetDDS,                                                                                                                //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A - DDS 0¬ ---
@@ -123,9 +123,9 @@ static void OnChange_MinDDS()
 
 }
 
-static void OnPress_MinDDS(bool)
+static void OnPress_MinDDS(bool enter)
 {
-
+    PageSignals::PageCalibration::OnPress_DDS(Chan::A, enter, KoeffCal::DDS_MIN);
 }
 
 DEF_GOVERNOR( gMinDDS,                                                                                                                  //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A - DDS -5¬ ---
@@ -141,9 +141,9 @@ static void OnChange_MaxDDS()
 
 }
 
-static void OnPress_MaxDDS(bool)
+static void OnPress_MaxDDS(bool enter)
 {
-
+    PageSignals::PageCalibration::OnPress_DDS(Chan::A, enter, KoeffCal::DDS_MAX);
 }
 
 DEF_GOVERNOR( gMaxDDS,                                                                                                                  //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A - DDS +5¬ ---
