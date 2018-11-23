@@ -35,6 +35,12 @@ Message::Message(uint size, uint8 v0, uint v1) : allocated(0), buffer(0), used(0
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::Message(uint size, uint8 v0, uint v1, uint v2) : allocated(0), buffer(0), used(0), taken(0)
+{
+    Create(size, v0, v1, v2);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Message::Message(uint size, uint8 v0, uint8 v1) : allocated(0), buffer(0), used(0), taken(0)
 {   
     Create(size, v0, v1);
@@ -68,6 +74,17 @@ void Message::Create(uint size, uint8 v0, uint v1)
     {
         PutByte(v0);
         PutWord(v1);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::Create(uint size, uint8 v0, uint v1, uint v2)
+{
+    if (AllocateMemory(size))
+    {
+        PutByte(v0);
+        PutWord(v1);
+        PutWord(v2);
     }
 }
 

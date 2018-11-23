@@ -6,7 +6,7 @@
 #include "Command.h"
 #include "FDrivePanel.h"
 #include "Display/Painter.h"
-#include "Display/Text.h"
+#include "Display/Text.h" 
 #include "Interface/InterfacePanel.h"
 #include <cstdlib>
 #endif
@@ -16,9 +16,19 @@
 /// Примонтирована ли флешка
 static bool isMounted = false;
 
+/// Путь к текущему каталогу
+static char directory[255] = "\\";
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Items
 {
 public:
+
+    static void Init()
+    {
+        numDirs = numFiles = -1;
+        requestIsSend = false;
+    }
     /// true означает, что идёт ожидание ответа от устройства
     static bool WaitAnswer()
     {
@@ -27,7 +37,10 @@ public:
     /// Послать запрос на количество итемов
     static void SendRequest()
     {
-        Message message(1, Command::FDrive_NumDirsAndFiles);
+        uint size = std::strlen(directory) + 1 + 1;
+
+        Message message(size, Command::FDrive_NumDirsAndFiles);
+        std::strcpy((char *)message.Data() + 1, directory);
         Interface::Send(&message);
         requestIsSend = true;
     }
@@ -54,6 +67,7 @@ public:
         {
             numDirs = (int)msg->TakeWord();
             numFiles = (int)msg->TakeWord();
+            requestIsSend = false;
             return true;
         }
 
@@ -62,8 +76,11 @@ public:
     };
 
 private:
+    /// Количество каталогов в текущем каталоге
     static int numDirs;
+    /// Количество файлов в текущем каталоге
     static int numFiles;
+    /// Запрос послан. Ожидается ответ
     static bool requestIsSend;
 
 };
@@ -74,6 +91,13 @@ bool Items::requestIsSend = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void FDrive::Init()
+{
+    std::strcpy(directory, "\\");
+    Items::Init();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Draw()
 {
     int x = Wave::Graphics::X();
@@ -92,11 +116,14 @@ void FDrive::Draw()
     if (Items::NumberDirs() == -1)
     {
         Items::SendRequest();
+        return;
     }
     else if (Items::WaitAnswer())
     {
         return;
     }
+
+    Painter::SetColor(Color::FILL);
 
     Text::DrawFormatText(x + 10, y + 10, "Файлов - %d", Items::NumberFiles());
 
@@ -104,7 +131,7 @@ void FDrive::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::RequestNameDir(uint numDir, pString directory)
+void FDrive::RequestNameDir(uint numDir)
 {
 //    uint size = 1 + 4 + std::strlen(directory) + 1;
     uint8 *data = 0; // PrepareBufferForSend(size, Command::FDrive_RequestDir);
@@ -120,7 +147,7 @@ void FDrive::RequestNameDir(uint numDir, pString directory)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::RequestNameFile(uint numFile, pString directory)
+void FDrive::RequestNameFile(uint numFile)
 {
     uint size = 1 + 4 + std::strlen(directory) + 1;
     uint8 *data = 0; // PrepareBufferForSend(size, Command::FDrive_RequestFile);
@@ -145,6 +172,7 @@ bool FDrive::Handler::Processing(Message *msg)
     if (command == Command::FDrive_Mount)
     {
         isMounted = (msg->TakeByte() != 0);
+        Items::Init();
         return true;
     }
     else if (command == Command::FDrive_NumDirsAndFiles)

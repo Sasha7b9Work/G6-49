@@ -5,6 +5,7 @@
 #include "Command.h"
 #include "Transceiver.h"
 #include "Handlers.h"
+#include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Generator/GeneratorDevice.h"
 #include "InterfaceDevice.h"
@@ -55,10 +56,10 @@ void Handlers::Processing(Message *msg)
         /* LoadFromDDS             */ Handlers::LoadFormDDS,
         /* FreqMeasure             */ Handlers::E,
         /* Log                     */ Handlers::E,
-        /* FDrive_NumDirsAndFiles  */ Handlers::E,
-        /* FDrive_Mount            */ Handlers::E,
-        /* FDrive_RequestDir       */ Handlers::E,
-        /* FDrive_RequestFile      */ Handlers::E,
+        /* FDrive_NumDirsAndFiles  */ FDrive::Handler::Processing,
+        /* FDrive_Mount            */ FDrive::Handler::Processing,
+        /* FDrive_RequestDir       */ FDrive::Handler::Processing,
+        /* FDrive_RequestFile      */ FDrive::Handler::Processing,
         /* Test                    */ Handlers::Test,
         /* SetKoeffCalibration     */ Handlers::SetKoeffCalibration,
         /* GetKoeffCalibration     */ Handlers::GetKoeffCalibration

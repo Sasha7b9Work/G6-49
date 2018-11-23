@@ -38,7 +38,7 @@ private:
 
     friend class Graphics;
 
-    static void RequestNameDir(uint numDir, pString directory);
+    static void RequestNameDir(uint numDir);
 
-    static void RequestNameFile(uint numFile, pString directory);
+    static void RequestNameFile(uint numFile);
 };

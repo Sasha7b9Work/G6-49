@@ -51,10 +51,10 @@ bool Handlers::Processing(Message *msg)
         /* LoadFromDDS             */ Handlers::E,
         /* FreqMeasure             */ Handlers::FreqMeasure,
         /* Log                     */ Handlers::Log,
-        /* FDrive_NumDirsAndFiles  */ Handlers::E,
+        /* FDrive_NumDirsAndFiles  */ FDrive::Handler::Processing,
         /* FDrive_Mount            */ FDrive::Handler::Processing,
-        /* FDrive_RequestDir       */ Handlers::E,
-        /* FDrive_RequestFile      */ Handlers::E,
+        /* FDrive_RequestDir       */ FDrive::Handler::Processing,
+        /* FDrive_RequestFile      */ FDrive::Handler::Processing,
         /* Test                    */ Handlers::E,
         /* SetKoeffCalibration     */ Handlers::E,
         /* GetKoeffCalibration     */ Handlers::E

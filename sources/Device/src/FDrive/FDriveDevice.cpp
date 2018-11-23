@@ -207,55 +207,6 @@ void FDrive::HandlerInterface(uint8 *recv)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
-{
-    FILINFO fno;
-    DIR dir;
-
-    *numDirs = 0;
-    *numFiles = 0;
-
-    char nameDir[_MAX_LFN + 1];
-    std::memcpy(nameDir, (void *)fullPath, std::strlen(fullPath));
-    nameDir[std::strlen(fullPath)] = '\0';
-
-    if (f_opendir(&dir, nameDir) == FR_OK)
-    {
-        int numReadingElements = 0;
-        bool alreadyNull = false;
-        while (true)
-        {
-            if (f_readdir(&dir, &fno) != FR_OK)
-            {
-                break;
-            }
-            if (fno.fname[0] == 0)
-            {
-                if (alreadyNull)
-                {
-                    break;
-                }
-                alreadyNull = true;
-                continue;
-            }
-            numReadingElements++;
-            if (fno.fname[0] != '.')
-            {
-                if (fno.fattrib & AM_DIR)
-                {
-                    (*numDirs)++;
-                }
-                else
-                {
-                    (*numFiles)++;
-                }
-            }
-        }
-        f_closedir(&dir);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
 static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s)
 {
@@ -346,3 +297,76 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, St
     return false;
 }
 */
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
+{
+    FILINFO fno;
+    DIR dir;
+
+    *numDirs = 0;
+    *numFiles = 0;
+
+    char nameDir[_MAX_LFN + 1];
+    std::memcpy(nameDir, (void *)fullPath, std::strlen(fullPath));
+    nameDir[std::strlen(fullPath)] = '\0';
+
+    if (f_opendir(&dir, nameDir) == FR_OK)
+    {
+        int numReadingElements = 0;
+        bool alreadyNull = false;
+        while (true)
+        {
+            if (f_readdir(&dir, &fno) != FR_OK)
+            {
+                break;
+            }
+            if (fno.fname[0] == 0)
+            {
+                if (alreadyNull)
+                {
+                    break;
+                }
+                alreadyNull = true;
+                continue;
+            }
+            numReadingElements++;
+            if (fno.fname[0] != '.')
+            {
+                if (fno.fattrib & AM_DIR)
+                {
+                    (*numDirs)++;
+                }
+                else
+                {
+                    (*numFiles)++;
+                }
+            }
+        }
+        f_closedir(&dir);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::Handler::Processing(Message *msg)
+{
+    msg->ResetPointer();
+
+    uint8 com = msg->TakeByte();
+
+    if (com == Command::FDrive_NumDirsAndFiles)
+    {
+        uint numDirs = 0;
+        uint numFiles = 0;
+
+        //LOG_WRITE("получаем содержимое %s", (char *)(msg->Data() + 1));
+
+        GetNumDirsAndFiles((char *)(msg->Data() + 1), &numDirs, &numFiles);
+
+        Message *answer = new Message(9, Command::FDrive_NumDirsAndFiles, numDirs, numFiles);
+
+        //LOG_WRITE("%d файлов, %d каталогов", numFiles, numDirs);
+
+        Interface::AddMessageForTransmit(answer);
+    }
+}
