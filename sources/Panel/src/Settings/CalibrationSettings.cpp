@@ -70,7 +70,8 @@ void CalibrationSettings::CreateMessage(Message *message, Chan::E ch, KoeffCal::
         &CAL_AD9952_AMPLITUDE(Chan::A),
         &CAL_DDS_MAX(Chan::A),
         &CAL_DDS_MIN(Chan::A),
-        &CAL_DDS_OFFSET(Chan::A)
+        &CAL_DDS_OFFSET(Chan::A),
+        &CAL_FREQ_LEVEL_TRIG
     };
 
     message->Create(5, (uint8)Command::SetKoeffCalibration, (uint8)ch, (uint8)koeff, (uint16)values[koeff].pointer[ch]);

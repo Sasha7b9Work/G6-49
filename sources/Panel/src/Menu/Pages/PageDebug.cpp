@@ -608,7 +608,7 @@ DEF_PAGE_4_VAR(pRegisters,                                                      
     bNext,
     bSend,
     emptyItem,
-    Page::Registers, &pDebug, FuncActive, FuncPress, OnKey
+    Page::Registers, &pDebug, FuncActive, FuncPress, OnKey, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

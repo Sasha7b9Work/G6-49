@@ -64,7 +64,7 @@ void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan ch, bool enter, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::OnPress_DDS(Chan ch, bool enter, KoeffCal::E koeff)
+void PageSignals::PageCalibration::OnPress_DDS(Chan /*ch*/, bool /*enter*/, KoeffCal::E /*koeff*/)
 {
 
 }

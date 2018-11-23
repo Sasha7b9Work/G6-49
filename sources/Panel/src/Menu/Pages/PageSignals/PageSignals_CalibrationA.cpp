@@ -141,10 +141,28 @@ DEF_GOVERNOR( gMaxDDS,                                                          
     CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
 )
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_TrigLev()
+{
+
+}
+
+static void OnPress_TrigLev(bool)
+{
+
+}
+
+DEF_GOVERNOR( gTrigLev,                                                                                                             //--- мюярпнийх яхцмюкнб - йюкхапнбйю ю - сП-МЭ ЯХМУП ---
+    "сП-МЭ ЯХМУП", "Trig lev",
+    "сЯРЮМНБЙЮ СПНБМЪ ЯХМУПНМХГЮЖХХ ВЮЯРНРНЛЕПЮ",
+    "Setting the synchronization level of the frequency counter",
+    CAL_FREQ_LEVEL_TRIG, -10000, 10000, pageCalibrationA, FuncActive, OnChange_TrigLev, FuncBeforeDraw, OnPress_TrigLev
+)
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_7( pageCalibrationA,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю A ---
+DEF_PAGE_8( pageCalibrationA,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю A ---
     "йюкхапнбйю A", "CALIBRATION A",
     "", "",
     &gPositiveAD9952,       ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 +5б
@@ -154,5 +172,6 @@ DEF_PAGE_7( pageCalibrationA,                                                   
     &gOffsetDDS,            ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - DDS 0б
     &gMinDDS,               ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - DDS -5б
     &gMaxDDS,               ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - DDS +5б
+    &gTrigLev,              ///< мюярпнийх яхцмюкнб - йюкхапнбйю ю - сП-МЭ ЯХМУП
     Page::Settings_CalibrationA, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )

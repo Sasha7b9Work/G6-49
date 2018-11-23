@@ -114,7 +114,7 @@ DEF_PAGE_8( pageSignals,
     &cTypeTune,                                     ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - Çàñûëêè
     PageSignals::PageCalibration::PageA::pointer,   ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ A
     PageSignals::PageCalibration::PageB::pointer,   ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ B
-    Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey
+    Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
