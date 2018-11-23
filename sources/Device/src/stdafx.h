@@ -27,7 +27,6 @@
 
 #include "SCPI/SCPI.h"
 
-#include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"

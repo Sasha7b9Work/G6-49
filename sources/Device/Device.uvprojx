@@ -1517,16 +1517,6 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Array.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Array.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Array.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Array.h</FilePath>
-            </File>
-            <File>
               <FileName>Debug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Debug.cpp</FilePath>

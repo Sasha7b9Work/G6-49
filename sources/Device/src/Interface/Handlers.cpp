@@ -12,7 +12,6 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #include "Settings/CalibrationSettings.h"
-#include "Utils/Array.h"
 #endif
 
 
@@ -404,33 +403,7 @@ void Handlers::RunReset(Message *)
 //---------------------------------------------------------------------------------------------------------------------
 void Handlers::Test(Message *)
 {
-    std::srand(TIME_MS);
 
-    Array array(400);
-
-    for (uint i = 0; i < array.Size(); i++)
-    {
-        array.Data()[i] = (uint8)std::rand();
-    }
-
-    uint size = 1 + 4 + 4 + array.Size();
-
-    // Передаем количество байт
-    SPI1_::Transmit(&size, 2, 10);
-
-    // А теперь передаем сами байты
-
-    uint8 buffer[9] = { Command::Test };
-
-    BitSet32 bsSize(array.Size());
-    bsSize.WriteToBuffer(buffer + 1);
-
-    BitSet32 bsCRC(array.CRC32());
-    bsCRC.WriteToBuffer(buffer + 5);
-
-    SPI1_::Transmit(buffer, 9, 10);
-
-    SPI1_::Transmit(array.Data(), array.Size(), 100);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

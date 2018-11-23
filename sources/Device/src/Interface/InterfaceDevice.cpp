@@ -14,7 +14,6 @@
 #include "Hardware/Modules/SPI.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Settings/CalibrationSettings.h"
-#include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "Utils/Queue.h"
 #include "Utils/StringUtils.h"
