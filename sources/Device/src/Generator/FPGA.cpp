@@ -203,7 +203,7 @@ void FPGA::SetPeriodImpulse(Chan ch, float period)
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
     PacketImpulse::periodImpulse = period;
-    uint64 value = (uint64)(period / 10e-9f);
+    uint64 value = (uint64)(period / 10e-9f) - 2;
     RG reg = ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
     if(ch.IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
     {

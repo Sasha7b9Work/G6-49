@@ -13,7 +13,6 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
-#include "Utils/Array.h"
 #include "Utils/Debug.h"
 #include "Handlers.h"
 #include "InterfacePanel.h"
