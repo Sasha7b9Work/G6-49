@@ -68,6 +68,19 @@ bool Items::Handler::Processing(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void SendRequestForNameFile(int number)
+{
+    //          команда | номер_файла | имя_каталога                     | завершающий_ноль
+    uint size = 1 +       1 +           std::strlen(FDrive::directory) +   1;
+
+    Message message(size, Command::FDrive_RequestFile, (uint8)number);
+
+    std::strcpy((char *)(message.Data() + 2), FDrive::directory);
+
+    Interface::Send(&message);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Items::GetNameItem(int i)
 {
     if (names[i].name[0])
@@ -76,10 +89,7 @@ pString Items::GetNameItem(int i)
     }
     else if (i < numFiles)
     {
-        //          команда | номер_файла | имя_каталога                     | завершающий_ноль
-        uint size = 1 +       1 +           std::strlen(FDrive::directory) +   1;
-        Message message(size, Command::FDrive_RequestFile, (uint8)i);
-        Interface::Send(&message);
+        SendRequestForNameFile(i);
     }
 
     return 0;
