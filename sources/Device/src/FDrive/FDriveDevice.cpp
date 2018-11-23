@@ -302,11 +302,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         if (GetNameFile((char *)(msg->Data() + 2), numFile, name, &srd))
         {
-            uint size = 1 + 1 + std::strlen(name) + 1;
-
-            Message *answer = new Message(size, Command::FDrive_RequestFile, (uint8)numFile);
-
-            std::strcpy(answer->String(2), name);
+            Message *answer = new Message(Command::FDrive_RequestFile, (uint8)numFile, name);
 
             Interface::AddMessageForTransmit(answer);
         }
