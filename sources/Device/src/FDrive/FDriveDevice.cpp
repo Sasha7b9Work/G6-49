@@ -19,10 +19,6 @@ static FATFS FatFS;
 static char USBDISKPath[4];
 /// true, если флешка подключена
 volatile static bool isConnected = false;
-/// Количество байт для передачи в Interface
-static uint numBytesForSend = 0;
-/// Начало буфера данных для передачи в Interface
-static uint8 *bufferForSend = 0;
 /// Путь к каталогу, количество файлов и каталогов в котором нужно узнать
 //static char path[256];
 /// Номер запрашиваемого имени - каталога или файла
@@ -57,8 +53,6 @@ static Command command = Command::Number;
 static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
 /// Получает количество каталогов и файлов в данной директории
 static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
-/// Подготовить буфер для даныых
-static void PrepareBufferForData(uint size, uint8 command);
 /// Получить имя numDir-го каталога из каталога fullPath
 //static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
 /// Получить имя numFile-го файла из каталога fullPath
@@ -71,19 +65,24 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
     switch(id)
     {
         case HOST_USER_SELECT_CONFIGURATION:
+            //LOG_WRITE("HOST_USER_SELECT_CONFIGURATION");
             break;
 
         case HOST_USER_CLASS_ACTIVE:
+            //LOG_WRITE("HOST_USER_CLASS_ACTIVE");
             state = State::NeedMount;
             break;
 
         case HOST_USER_CLASS_SELECTED:
+            //LOG_WRITE("HOST_USER_CLASS_SELECTED");
             break;
 
         case HOST_USER_CONNECTION:
+            //LOG_WRITE("HOST_USER_CONNECTION");
             break;
 
         case HOST_USER_DISCONNECTION:
+            //LOG_WRITE("HOST_USER_DISCONNECTION");
             state = State::NeedUnmount;
             break;
 
@@ -118,9 +117,8 @@ void FDrive::Update()
     {
         if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
         {
-            PrepareBufferForData(1 + 1, Command::FDrive_Mount);
-
-            bufferForSend[1] = 1;
+            Message *message = new Message(2, Command::FDrive_Mount, (uint8)1);
+            Interface::AddMessageForTransmit(message);
         }
 
         state = State::Connected;
@@ -130,9 +128,8 @@ void FDrive::Update()
     {
         f_mount(0, "", 0);
 
-        PrepareBufferForData(1 + 1, Command::FDrive_Mount);
-
-        bufferForSend[1] = 0;
+        Message *message = new Message(2, Command::FDrive_Mount, (uint8)0);
+        Interface::AddMessageForTransmit(message);
 
         state = State::Disconnected;
     }
@@ -186,29 +183,6 @@ void FDrive::Update()
         command = Command::Number;
         */
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void PrepareBufferForData(uint size, uint8 com)
-{
-    numBytesForSend = size;
-    bufferForSend = (uint8 *)std::malloc(numBytesForSend);
-    *bufferForSend = com;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint FDrive::NumBytesForSend()
-{
-    return numBytesForSend;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *FDrive::GetDataForSend(uint8 *buffer)
-{
-    std::memcpy(buffer, bufferForSend, numBytesForSend);
-    std::free(bufferForSend);
-    numBytesForSend = 0;
-    return buffer;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

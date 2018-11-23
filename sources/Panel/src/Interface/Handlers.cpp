@@ -23,42 +23,42 @@ bool Handlers::Processing(Message *msg)
     }
     functions[Command::Number] =
     {
-        Handlers::Request,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::FreqMeasure,
-        Handlers::Log,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E,
-        Handlers::E
+        /* RequestData             */ Handlers::Request,
+        /* EnableChannel           */ Handlers::E,
+        /* SetFormWave             */ Handlers::E,
+        /* SetFrequency            */ Handlers::E,
+        /* SetAmplitude            */ Handlers::E,
+        /* SetOffset               */ Handlers::E,
+        /* SetDuration             */ Handlers::E,
+        /* SetDutyRatio            */ Handlers::E,
+        /* SetPhase                */ Handlers::E,
+        /* RunReset                */ Handlers::E,
+        /* ModeDebug               */ Handlers::E,
+        /* SetDelay                */ Handlers::E,
+        /* WriteRegister           */ Handlers::E,
+        /* SetDurationRise         */ Handlers::E,
+        /* SetDurationFall         */ Handlers::E,
+        /* SetDurationStady        */ Handlers::E,
+        /* SetDutyFactor           */ Handlers::E,
+        /* SetManipulation         */ Handlers::E,
+        /* SetManipulationDuration */ Handlers::E,
+        /* SetManipulationPeriod   */ Handlers::E,
+        /* SetPacketPeriod         */ Handlers::E,
+        /* SetPacketNumber         */ Handlers::E,
+        /* SetStartMode            */ Handlers::E,
+        /* SetPeriod               */ Handlers::E,
+        /* SetPolarity             */ Handlers::E,
+        /* SetManipulationMode     */ Handlers::E,
+        /* LoadFromDDS             */ Handlers::E,
+        /* FreqMeasure             */ Handlers::FreqMeasure,
+        /* Log                     */ Handlers::Log,
+        /* FDrive_NumDirsAndFiles  */ Handlers::E,
+        /* FDrive_Mount            */ Handlers::FDrive_Mount,
+        /* FDrive_RequestDir       */ Handlers::E,
+        /* FDrive_RequestFile      */ Handlers::E,
+        /* Test                    */ Handlers::E,
+        /* SetKoeffCalibration     */ Handlers::E,
+        /* GetKoeffCalibration     */ Handlers::E
     };
 
     if (command < Command::Number)
@@ -97,5 +97,20 @@ bool Handlers::FreqMeasure(Message *msg)
 bool Handlers::Log(Message *msg)
 {
     Console::AddString((pString)(msg->Data() + 1));
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Handlers::FDrive_Mount(Message *msg)
+{
+    if (msg->TakeByte() == 0)
+    {
+        LOG_WRITE("Флешка отмонтирована");
+    }
+    else
+    {
+        LOG_WRITE("Флешка примонтирована");
+    }
+
     return true;
 }
