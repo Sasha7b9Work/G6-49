@@ -90,7 +90,7 @@ void Generator::SetFormDDS(Form *form)
 
     Message message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, ch);
 
-    uint8 *points = message.Data() + 2;
+    uint8 *points = message.Data(2);
 
     switch (form->value)
     {
