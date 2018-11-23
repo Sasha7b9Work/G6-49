@@ -13,7 +13,7 @@ public:
 
     static void Update();
     /// Добавляет сообщение в очередь отправки. Если очередь заполнена, сообщение удаляется и функция возвращает false
-    static bool AddMessageInQueue(Message *message);
+    static bool AddMessageForTransmit(Message *message);
 
 private:
     /// Очередь сообщений, ожидающих отправки

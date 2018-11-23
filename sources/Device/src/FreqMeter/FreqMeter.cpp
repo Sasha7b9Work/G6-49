@@ -64,7 +64,7 @@ void FreqMeter::Update()
 
         Message *msg = new Message(5, Command::FreqMeasure, frequency);
 
-        Interface::AddMessageInQueue(msg);
+        Interface::AddMessageForTransmit(msg);
     }
 }
 
