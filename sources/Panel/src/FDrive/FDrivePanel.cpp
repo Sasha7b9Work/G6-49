@@ -54,10 +54,14 @@ void FDrive::Draw()
 
     Painter::SetColor(Color::FILL);
 
+    Text::SetUpperCase(false);
+
     for (int i = 0; i < 20; i++)
     {
         Text::DrawText(x + 5, y + 5 + i * 10, Items::GetNameItem(i));
     }
+
+    Text::SetUpperCase(true);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
