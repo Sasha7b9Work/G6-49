@@ -143,9 +143,28 @@ DEF_GOVERNOR( gMaxDDS,                                                          
 )
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnChange_TrigLev()
+{
+
+}
+
+static void OnPress_TrigLev(bool)
+{
+
+}
+
+DEF_GOVERNOR( gTrigLev,                                                                                                             //--- мюярпнийх яхцмюкнб - йюкхапнбйю B - сП-МЭ ЯХМУП ---
+    "сП-МЭ ЯХМУП", "Trig lev",
+    "сЯРЮМНБЙЮ СПНБМЪ ЯХМУПНМХГЮЖХХ ВЮЯРНРНЛЕПЮ",
+    "Setting the synchronization level of the frequency counter",
+    CAL_FREQ_LEVEL_TRIG, -10000, 10000, pageCalibrationB, FuncActive, OnChange_TrigLev, FuncBeforeDraw, OnPress_TrigLev
+)
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_7( pageCalibrationB,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю B ---
+DEF_PAGE_8( pageCalibrationB,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю B ---
     "йюкхапнбйю B", "CALIBRATION B",
     "", "",
     &gPositiveAD9952,       ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - AD9952 +5б
@@ -155,5 +174,6 @@ DEF_PAGE_7( pageCalibrationB,                                                   
     &gOffsetDDS,            ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - DDS 0б
     &gMinDDS,               ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - DDS -5б
     &gMaxDDS,               ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - DDS +5б
+    &gTrigLev,              ///< мюярпнийх яхцмюкнб - йюкхапнбйю B - сП-МЭ ЯХМУП
     Page::Settings_CalibrationB, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )
