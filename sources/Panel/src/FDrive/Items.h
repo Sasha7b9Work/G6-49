@@ -26,6 +26,8 @@ public:
         return numFiles;
     }
 
+    static pString GetNameItem(int i);
+
     class Handler
     {
         friend class FDrive;

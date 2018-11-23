@@ -14,6 +14,17 @@ int  Items::numFiles = -1;
 bool Items::requestIsSend = false;
 
 
+struct StructFile
+{
+    pString name;
+    StructFile(pString n = 0) : name(n) {}
+}
+names[25] =
+{
+    0
+};
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Items::Init()
 {
@@ -48,4 +59,22 @@ bool Items::Handler::Processing(Message *msg)
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString Items::GetNameItem(int i)
+{
+    if (names[i].name)
+    {
+        return names[i].name;
+    }
+    else if (i < numFiles)
+    {
+        //          команда | номер_файла | имя_каталога                     | завершающий_ноль
+        uint size = 1 +       1 +           std::strlen(FDrive::directory) +   1;
+        Message message(size, Command::FDrive_RequestFile, (uint8)i);
+        Interface::Send(&message);
+    }
+
+    return 0;
 }

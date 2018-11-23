@@ -54,9 +54,10 @@ void FDrive::Draw()
 
     Painter::SetColor(Color::FILL);
 
-    Text::DrawFormatText(x + 10, y + 10, "Файлов - %d", Items::NumberFiles());
-
-    Text::DrawFormatText(x + 10, y + 20, "Каталогов - %d", Items::NumberDirs());
+    for (int i = 0; i < 20; i++)
+    {
+        Text::DrawText(x + 5, y + 5 + i * 10, Items::GetNameItem(i));
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
