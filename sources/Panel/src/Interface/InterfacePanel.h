@@ -1,6 +1,5 @@
 #pragma once
 #include "Message.h"
-#include "Utils/Buffer.h"
 
 
 class Interface
@@ -34,8 +33,6 @@ public:
     static void Update();
     /// Заслать в генератор данные
     static void Send(uint8 *buffer, uint size);
-
-    //static void Send(const Buffer &buffer);
 
     static void Send(Message *message);
 };

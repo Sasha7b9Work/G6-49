@@ -3,7 +3,6 @@
 #include "defines.h"
 #include "log.h"
 #include "Transceiver.h"
-#include "Utils/Buffer.h"
 #include "InterfacePanel.h"
 #include "Command.h"
 #include "structs.h"
@@ -23,14 +22,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-void Interface::Send(const Buffer &buffer)
-{
-    Send(buffer.Data(), (uint16)buffer.Length());
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::Send(uint8 *buffer, uint size)
 {
     Message message;

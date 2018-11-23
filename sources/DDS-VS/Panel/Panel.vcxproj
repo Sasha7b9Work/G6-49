@@ -285,9 +285,6 @@
     <ClCompile Include="..\..\Panel\src\Utils\BigNumber.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Utils\Buffer.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Utils\CommonFunctions.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -392,7 +389,6 @@
     <ClInclude Include="..\..\Panel\src\stdafx.h" />
     <ClInclude Include="..\..\Panel\src\structs.h" />
     <ClInclude Include="..\..\Panel\src\Utils\BigNumber.h" />
-    <ClInclude Include="..\..\Panel\src\Utils\Buffer.h" />
     <ClInclude Include="..\..\Panel\src\Utils\CommonFunctions.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Debug.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Math.h" />

@@ -1,7 +1,6 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
 #include "Command.h"
-#include "Utils/Buffer.h"
 
 
 /** @addtogroup Panel

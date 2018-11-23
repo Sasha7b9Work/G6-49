@@ -195,9 +195,6 @@
     <ClCompile Include="..\..\Common\Command.cpp">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Utils\Buffer.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -484,9 +481,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Generator\Signals.h">
       <Filter>Generator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Utils\Buffer.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Menu\Pages\Include\PageSignals.h">
       <Filter>Menu\Pages\Include</Filter>
