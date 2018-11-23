@@ -16,13 +16,13 @@ bool Items::requestIsSend = false;
 
 struct StructFile
 {
-    pString name;
-    StructFile(pString n = 0) : name(n) {}
+    char name[50];
+    StructFile()
+    {
+        name[0] = 0;
+    }
 }
-names[25] =
-{
-    0
-};
+names[25];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +57,12 @@ bool Items::Handler::Processing(Message *msg)
         requestIsSend = false;
         return true;
     }
+    else if (command == Command::FDrive_RequestFile)
+    {
+        int num = msg->TakeByte();
+        std::strcpy(names[num].name, (char *)msg->Data() + 2);
+        return true;
+    }
 
     return false;
 }
@@ -64,7 +70,7 @@ bool Items::Handler::Processing(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Items::GetNameItem(int i)
 {
-    if (names[i].name)
+    if (names[i].name[0])
     {
         return names[i].name;
     }

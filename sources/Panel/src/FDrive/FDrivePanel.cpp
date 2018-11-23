@@ -115,7 +115,7 @@ bool FDrive::Handler::Processing(Message *msg)
     }
     else if (command == Command::FDrive_RequestFile)
     {
-        return true;
+        return Items::Handler::Processing(msg);
     }
 
     return false;
