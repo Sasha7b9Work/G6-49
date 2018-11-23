@@ -52,5 +52,9 @@ void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, Koe
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan ch, bool enter)
 {
-
+    if (enter)
+    {
+        Generator::SetOffset(ch, 0.0f);
+        Generator::SetAmplitude(ch, 10.0f);
+    }
 }
