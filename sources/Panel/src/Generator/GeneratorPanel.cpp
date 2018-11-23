@@ -94,9 +94,10 @@ void Generator::SetFormDDS(Form *form)
     Chan ch = form->GetWave()->GetChannel();
 
     float data[FPGA_NUM_POINTS];
-#define SIZE (FPGA_NUM_POINTS * 2 + 2)
-    uint8 buffer[FPGA_NUM_POINTS * 2 + 2] = { Command::LoadFormDDS, ch };
-    uint8 *points = &buffer[2];
+
+    Message message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, ch);
+
+    uint8 *points = message.Data() + 2;
 
     switch (form->value)
     {
@@ -111,7 +112,7 @@ void Generator::SetFormDDS(Form *form)
 
                 TransformDataToCode(data, points);
 
-                Interface::Send(buffer, SIZE);
+                Interface::Send(&message);
             }
             break;
         case Form::RampMinus:
@@ -125,7 +126,7 @@ void Generator::SetFormDDS(Form *form)
 
                 TransformDataToCode(data, points);
 
-                Interface::Send(buffer, SIZE);
+                Interface::Send(&message);
             }
             break;
         case Form::Triangle:
@@ -144,7 +145,7 @@ void Generator::SetFormDDS(Form *form)
 
                 TransformDataToCode(data, points);
 
-                Interface::Send(buffer, SIZE);
+                Interface::Send(&message);
             }
             break;
         case Form::Meander:
