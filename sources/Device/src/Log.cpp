@@ -17,7 +17,7 @@ void Log::AddString(char *format, ...)
     vsprintf(string, format, args);
     va_end(args);
 
-    Message *msg = new Message(std::strlen(string) + 1 + 1, Command::Log);
-    std::strcpy(msg->String(1), string);
+    Message *msg = new Message(Command::Log, string);
+
     Interface::AddMessageForTransmit(msg);
 }
