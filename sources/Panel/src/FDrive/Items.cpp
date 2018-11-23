@@ -65,7 +65,7 @@ bool Items::Handler::Processing(Message *msg)
     else if (command == Command::FDrive_RequestFile)
     {
         int num = msg->TakeByte();
-        std::strcpy(names[num].name, (char *)msg->Data() + 2);
+        std::strcpy(names[num].name, msg->String(2));
         return true;
     }
 

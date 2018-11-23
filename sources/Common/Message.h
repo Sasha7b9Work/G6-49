@@ -47,13 +47,15 @@ public:
     /// Освободить память
     void FreeMemory();
     /// Возвращает указатель на данные
-    uint8 *Data();
+    uint8 *Data(int pos = 0);
     /// Возвращает размер данных
     uint Size() const;
     /// Возвращает true, если это null-пакет (память не выделена)
     bool IsEmpty() const;
     /// Возвращает true, если сообщения одинаковы
     bool IsEquals(const Message *message) const;
+    /// Возвращает указатель на pos-й элемент. Удобно для копирования строк
+    char *String(int pos);
 
 private:
     /// Положить байт
