@@ -88,10 +88,7 @@ static void OnChange_AmplitudeAD9952()
 
 static void OnPress_AmplitudeAD9952(bool enter)
 {
-    if (enter)
-    {
-        PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan::B);
-    }
+    PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan::B, enter);
 }
 
 DEF_GOVERNOR( gAmplitudeAD9952,                                                                                                   //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 –‡ÁÏ‡ı ---
