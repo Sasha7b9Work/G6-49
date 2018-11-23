@@ -95,7 +95,7 @@ DEF_GOVERNOR( gAmplitudeAD9952,                                                 
     "AD9952 Размах", "AD9952 Amplitude",
     "Настройка размаха AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE(Chan::B), -1000, 1000, pageCalibrationB, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
+    CAL_AD9952_AMPLITUDE(Chan::B), -2000, 2000, pageCalibrationB, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
 

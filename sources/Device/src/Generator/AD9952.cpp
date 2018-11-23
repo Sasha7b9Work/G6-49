@@ -5,6 +5,7 @@
 #include "GeneratroSettings.h"
 #include "Hardware/CPU.h"
 #include "FPGA.h"
+#include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
 #include <math.h>
 #endif
@@ -98,7 +99,8 @@ void AD9952::SetPhase(Chan ch, float phase)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::SetAmplitude(Chan ch, float amplitude)
 {
-    setDDS.ad9952[ch].amplitude = amplitude;
+    setDDS.ad9952[ch].amplitude = amplitude * (1.0f + CAL_AD9952_AMPLITUDE(ch) / 100.0f);
+
     WriteRegister(ch, Register::ASF);
 }
 
