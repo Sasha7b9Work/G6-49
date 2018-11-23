@@ -24,9 +24,6 @@ union BitSet16
     }
 };
 
-#define INIT_BIT_SET_32(name, value)    \
-    BitSet32 name;                      \
-    name.word = value;
 
 union BitSet32
 {
