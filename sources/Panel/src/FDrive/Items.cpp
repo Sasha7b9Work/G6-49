@@ -14,6 +14,8 @@ int  Items::numFiles = -1;
 bool Items::requestIsSend = false;
 
 
+#define NUM_ITEMS 25
+
 struct StructFile
 {
     char name[50];
@@ -22,7 +24,7 @@ struct StructFile
         name[0] = 0;
     }
 }
-names[25];
+names[NUM_ITEMS];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +32,10 @@ void Items::Init()
 {
     numDirs = numFiles = -1;
     requestIsSend = false;
+    for (int i = 0; i < NUM_ITEMS; i++)
+    {
+        names[i].name[0] = 0;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,12 +76,7 @@ bool Items::Handler::Processing(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendRequestForNameFile(int number)
 {
-    //          команда | номер_файла | имя_каталога                     | завершающий_ноль
-    uint size = 1 +       1 +           std::strlen(FDrive::directory) +   1;
-
-    Message message(size, Command::FDrive_RequestFile, (uint8)number);
-
-    std::strcpy((char *)(message.Data() + 2), FDrive::directory);
+    Message message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
 
     Interface::Send(&message);
 }

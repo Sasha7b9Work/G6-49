@@ -12,6 +12,7 @@ public:
     Message(uint size, uint8, uint, uint);
     Message(uint size, uint8, uint8, uint8);
     Message(uint size, uint8, uint8, float);
+    Message(uint8, uint8, char *);
 
     ~Message();
 
@@ -22,6 +23,7 @@ public:
     void Create(uint size, uint8, uint8, uint8);
     void Create(uint size, uint8, uint8, float);
     void Create(uint size, uint8, uint8, uint8, uint16);
+    void Create(uint8, uint8, char *string);
     /// Сбрасывает указатель извлечённой информации.
     void ResetPointer() { taken = 0; };
 
@@ -53,6 +55,7 @@ public:
 
     /// Положить байт
     void PutByte(uint8 data);
+
 private:
     /// Положить половину слова
     void PutHalfWord(int16 data);
