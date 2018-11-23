@@ -97,6 +97,6 @@ bool Handlers::FreqMeasure(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Handlers::Log(Message *msg)
 {
-    Console::AddString((pString)(msg->Data() + 1));
+    Console::AddString(msg->String(1));
     return true;
 }
