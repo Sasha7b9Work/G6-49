@@ -1962,6 +1962,16 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
+              <FileName>Handlers.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Interface\Handlers.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Handlers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Interface\Handlers.h</FilePath>
+            </File>
+            <File>
               <FileName>InterfacePanel.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\InterfacePanel.cpp</FilePath>

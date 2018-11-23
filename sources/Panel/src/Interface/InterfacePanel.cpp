@@ -16,6 +16,7 @@
 #include "Hardware/Modules/SPI.h"
 #include "Utils/Array.h"
 #include "Utils/Debug.h"
+#include "Handlers.h"
 #include "InterfacePanel.h"
 #include <cstdlib>
 #endif
@@ -60,38 +61,12 @@ void Interface::Update()
 
     if (Transceiver::Receive(&message))
     {
-        if (Run(&message))
+        if (Handlers::Processing(&message))
         {
             time = 0;
             Update();
         }
     }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::Run(Message *msg)
-{
-    uint8 command = msg->TakeByte();
-
-    if (command == Command::RequestData)
-    {
-    }
-    else if (command == Command::FreqMeasure)
-    {
-        FrequencyMeter::SetMeasure(msg->TakeWord());
-        return true;
-    }
-    else if (command == Command::Log)
-    {
-        Console::AddString((pString)(msg->Data() + 1));
-        return true;
-    }
-    else
-    {
-        LOG_WRITE_FINALIZE("Поступила неизвестная команда %d", command);
-    }
-
-    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

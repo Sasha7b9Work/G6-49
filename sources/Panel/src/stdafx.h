@@ -29,6 +29,7 @@
 #include "Hardware/Modules/SPI.h"
 
 #include "Interface/InterfacePanel.h"
+#include "Interface/Handlers.h"
 
 #include "Menu/Menu.h"
 #include "Menu/Hint.h"

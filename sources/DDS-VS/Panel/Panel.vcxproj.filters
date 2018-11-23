@@ -303,6 +303,9 @@
     <ClCompile Include="..\..\Panel\src\Settings\CalibrationSettings.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Interface\Handlers.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -592,6 +595,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Settings\CalibrationSettings.h">
       <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Interface\Handlers.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
