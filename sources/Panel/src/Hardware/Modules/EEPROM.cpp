@@ -5,6 +5,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// \todo Занести это в структуру и обращаться только через структуру, чтобы исключить или уменьшить ошибки в функциях вроде GetSector  
 
 #define ADDR_SECTOR_0   ((uint)0x08000000)  // 16k  Загрузчик
 #define ADDR_SECTOR_1   ((uint)0x08004000)  // 16k
@@ -141,7 +142,7 @@ static uint GetSector(uint address)
 
     static const StructSector sectors[] =
     {
-        {FLASH_SECTOR_4, ADDR_SECTOR_CALIBRATION},
+        {FLASH_SECTOR_11, ADDR_SECTOR_CALIBRATION},
         {}
     };
 
