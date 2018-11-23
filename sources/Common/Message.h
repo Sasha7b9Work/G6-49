@@ -12,6 +12,7 @@ public:
     Message(uint size, uint8, uint, uint);
     Message(uint size, uint8, uint8, uint8);
     Message(uint size, uint8, uint8, float);
+    Message(uint8, char*);
     Message(uint8, uint8, char *);
     Message(uint size, uint8, uint8, uint64);
 

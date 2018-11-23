@@ -41,11 +41,10 @@ void Items::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Items::SendRequest()
 {
-    uint size = std::strlen(FDrive::directory) + 1 + 1;
+    Message message(Command::FDrive_NumDirsAndFiles, FDrive::directory);
 
-    Message message(size, Command::FDrive_NumDirsAndFiles);
-    std::strcpy((char *)message.Data() + 1, FDrive::directory);
     Interface::Send(&message);
+
     requestIsSend = true;
 }
 
