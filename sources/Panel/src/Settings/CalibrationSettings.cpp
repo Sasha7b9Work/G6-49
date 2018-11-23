@@ -17,8 +17,10 @@ static const CalibrationSettings defSet =
     {2048, 2048},   // AD9952 0В
     {0,    0},      // AD9952 +5В
     {0,    0},      // AD9952 Размах
-    {0,    0},
-    {0,    0}
+    {0,    0},      // DDS MAX
+    {0,    0},      // DDS MIN
+    {0,    0},      // DDS OFFSET
+    0               // FREQ TRIG LEV
 };
 
 CalibrationSettings setCal = defSet;
@@ -73,6 +75,11 @@ void CalibrationSettings::CreateMessage(Message *message, Chan::E ch, KoeffCal::
         &CAL_DDS_OFFSET(Chan::A),
         &CAL_FREQ_LEVEL_TRIG
     };
+
+    if (ch == Chan::B && koeff == KoeffCal::FREQ_LEVEL_TRIG)
+    {
+        ch = Chan::A;
+    }
 
     message->Create(5, (uint8)Command::SetKoeffCalibration, (uint8)ch, (uint8)koeff, (uint16)values[koeff].pointer[ch]);
 }

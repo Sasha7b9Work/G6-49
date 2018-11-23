@@ -235,17 +235,24 @@ void Interface::SetKoeffCalibration(Message *msg)
 
     Chan ch = (Chan::E)msg->TakeByte();
 
-    static int16 * const values[] =
+    static const struct StructCal
+    {
+        int16 *pointer;
+        StructCal(int16 *p) : pointer(p) {};
+    }
+    values[KoeffCal::Number] =
     {
         &CAL_AD9952_OFFSET_NEG(Chan::A),
         &CAL_AD9952_OFFSET_ZERO(Chan::A),
         &CAL_AD9952_OFFSET_POS(Chan::A),
         &CAL_AD9952_AMPLITUDE(Chan::A),
         &CAL_DDS_MAX(Chan::A),
-        &CAL_DDS_MIN(Chan::A)
+        &CAL_DDS_MIN(Chan::A),
+        &CAL_DDS_OFFSET(Chan::A),
+        &CAL_FREQ_LEVEL_TRIG
     };
 
-    int16 *koeff = values[msg->TakeByte()];
+    int16 *koeff = values[msg->TakeByte()].pointer;
 
     koeff[ch] = (int16)msg->TakeHalfWord();
 

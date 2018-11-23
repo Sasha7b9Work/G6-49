@@ -10,6 +10,8 @@
 #define CAL_AD9952_AMPLITUDE(ch)    setCal.cal_AD9952_Amplitude[ch]
 #define CAL_DDS_MAX(ch)             setCal.cal_DDS_MAX[ch]
 #define CAL_DDS_MIN(ch)             setCal.cal_DDS_MIN[ch]
+#define CAL_DDS_OFFSET(ch)          setCal.cal_DDS_Offset[ch]
+#define CAL_FREQ_LEVEL_TRIG         setCal.cal_FREQ_Level_Trig
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +33,8 @@ struct CalibrationSettings
             int16   cal_AD9952_Amplitude[Chan::Number];         ///< Калибровочный коэффициент AD9952 размаха
             int16   cal_DDS_MAX[Chan::Number];
             int16   cal_DDS_MIN[Chan::Number];
+            int16   cal_DDS_Offset[Chan::Number];
+            int16   cal_FREQ_Level_Trig;                        ///< Калибровочный коэффициенрт уровня синхронизации
         };
         uint8 unused[512];
     };

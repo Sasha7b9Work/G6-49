@@ -13,8 +13,10 @@ static const CalibrationSettings defSet =
     {2048, 2048},   // AD9952 0В
     {0,    0},      // AD9952 +5В
     {0,    0},      // AD9952 Размах
-    {0,    0},
-    {0,    0}
+    {0,    0},      // DDS MAX
+    {0,    0},      // DDS MIN
+    {0,    0},      // DDS OFFSET
+    0               // FREQ TRIG LEV
 };
 
 CalibrationSettings setCal = defSet;
