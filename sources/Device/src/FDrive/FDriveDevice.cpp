@@ -286,7 +286,7 @@ void FDrive::Handler::Processing(Message *msg)
         uint numDirs = 0;
         uint numFiles = 0;
 
-        GetNumDirsAndFiles((char *)(msg->Data() + 1), &numDirs, &numFiles);
+        GetNumDirsAndFiles(msg->String(1), &numDirs, &numFiles);
 
         Message *answer = new Message(9, Command::FDrive_NumDirsAndFiles, numDirs, numFiles);
 
@@ -300,7 +300,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         int numFile = (int)msg->TakeByte();
 
-        if (GetNameFile((char *)(msg->Data() + 2), numFile, name, &srd))
+        if (GetNameFile(msg->String(2), numFile, name, &srd))
         {
             Message *answer = new Message(Command::FDrive_RequestFile, (uint8)numFile, name);
 
