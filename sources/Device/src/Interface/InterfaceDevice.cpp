@@ -571,7 +571,13 @@ uint Interface::Data::GetSize() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::AddMessageInQueue(Message *message)
+bool Interface::AddMessageInQueue(Message *message)
 {
-    messages.Push(message);
+    if (!messages.Push(message))
+    {
+        delete message;
+        return false;
+    }
+
+    return true;
 }

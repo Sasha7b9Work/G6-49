@@ -32,8 +32,8 @@ public:
     };
 
     static void Update();
-    /// Функция запрашивает новое сообщение, которое будет помещено в очередь для отправки. Вызывающая функция должа в месте вызова заполнить его информацией
-    static void AddMessageInQueue(Message *message);
+    /// Добавляет сообщение в очередь отправки. Если очередь заполнена, сообщение удаляется и функция возвращает false
+    static bool AddMessageInQueue(Message *message);
 
     static void SendData(Message *);
 

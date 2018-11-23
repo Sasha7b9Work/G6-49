@@ -8,7 +8,7 @@ public:
 
     Message *Front();
 
-    void Push(Message *message);
+    bool Push(Message *message);
 
     void Pop();
 

@@ -25,5 +25,8 @@ int main()
         FreqMeter::Update();
         //FDrive::Update();
         Interface::Update();
+        
+        static int counter = 0;
+        LOG_WRITE("Тестовое сообщение %d", counter++);
     }
 }
