@@ -18,11 +18,11 @@ static void SetParameter(Chan ch, KoeffCal::E koeff)
     }
     else if (koeff == KoeffCal::AD9952_NEG)
     {
-        Generator::SetOffset(ch, +5.0f);
+        Generator::SetOffset(ch, -5.0f);
     }
     else if (koeff == KoeffCal::AD9952_POS)
     {
-        Generator::SetOffset(ch, -5.0f);
+        Generator::SetOffset(ch, +5.0f);
     }
     else if (koeff == KoeffCal::AD9952_AMPL)
     {
