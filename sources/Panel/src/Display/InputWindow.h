@@ -25,6 +25,8 @@ public:
 
     float Value();
 
+    uint64 ValueUINT64();
+
     void KeyLeft();
 
     void KeyRight();
@@ -58,6 +60,10 @@ private:
     int ValueBeforeComma();
     /// ¬озвращает число после зап€той
     float ValueAfterComma();
+    /// ¬озвращает число до зап€той, выраженное в нано-единицах
+    uint64 ValueBeforeCommaInNano();
+    /// ¬озвращает число после зап€той, выраженное в единицах нано-размерности
+    uint64 ValueAfterCommaInNano();
     /// ѕереключает пор€док на следующий по возрастанию
     void IncreaseOrder();
     /// «аслать текущее значение в генератор

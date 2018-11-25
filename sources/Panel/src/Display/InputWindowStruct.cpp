@@ -21,6 +21,8 @@
 #define DIGIT(num)          (param->buffer[num])
 #define CURRENT_DIGIT       (param->buffer[CURRENT_POS])
 #define POS_COMMA           (param->posComma)
+#define ORDER               (param->order)
+#define SIGN                (param->sign)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,13 +299,11 @@ bool StructValue::OnlyOneRigthDigit()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int StructValue::ValueBeforeComma()
 {
-    int lowPos = param->posComma;     // Младший байт числа
-
     int retValue = 0;
 
     int pow = 1;
 
-    for (int i = lowPos; i >= 0; i--)
+    for (int i = POS_COMMA; i >= 0; i--)
     {
         retValue += (0x0f & DIGIT(i)) * pow;
         pow *= 10;
@@ -329,6 +329,45 @@ float StructValue::ValueAfterComma()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint64 StructValue::ValueBeforeCommaInNano()
+{
+    uint64 result = 0;
+
+    uint64 pow = 1;
+
+    for (int i = POS_COMMA; i >= 0; i--)
+    {
+        result += (0x0f & DIGIT(i)) * pow;
+        pow *= 10;
+    }
+
+    return result * 1000 * 1000 * 1000;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint64 StructValue::ValueAfterCommaInNano()
+{
+    // Функция возвращает значение в нано-единицах измерения. Т.е.:
+    // 9         ==               9 * 1е-9 = 9 нано
+    // 999       ==             999 * 1е-9 = 999 нано
+    // 999999    ==       999 * 999 * 1e-9 = 999999 нано = 999.999 микро
+    // 999999999 == 999 * 999 * 999 * 1e-9 = 999999999 нано = 999999.999 микро == 999.999999 милли
+
+    uint64 result = 0;
+
+    //         123123123
+    uint64 pow = 100000000;
+
+    for (int i = POS_COMMA + 1; i < NUM_DIGITS; i++)    // Проходим все знакоместа, начиная с того, что после запятой
+    {
+        result += (DIGIT(i) & 0x0f) * pow;
+        pow /= 10;
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::IncreaseOrder()
 {
     if (param->order < Order::Number - 1)
@@ -344,30 +383,70 @@ float StructValue::Value()
 {
     float value = ValueBeforeComma() + ValueAfterComma();
 
-    float mul = (param->sign == '-') ? -1.0f : 1.0f;
+    value *= (param->sign == '-') ? -1.0f : 1.0f;
 
     if (param->order == Order::Nano)
     {
-        return value * 1e-9f * mul;
+        return value * 1e-9f;
     }
     if (param->order == Order::Micro)
     {
-        return value * 1e-6f * mul;
+        return value * 1e-6f;
     }
     if (param->order == Order::Milli)
     {
-        return value * 1e-3f * mul;
+        return value * 1e-3f;
     }
     if (param->order == Order::Kilo)
     {
-        return value * 1e3f * mul;
+        return value * 1e3f;
     }
     if (param->order == Order::Mega)
     {
-        return value * 1e6f * mul;
+        return value * 1e6f;
     }
 
-    return value * mul;
+    return value;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint64 StructValue::ValueUINT64()
+{
+    uint64 beforeNS = ValueBeforeCommaInNano();     // Здесь число до запятой, в нано-единицах
+    uint64 afterNS = ValueAfterCommaInNano();       // Здесь число после запятой, в нано-единицах
+
+    uint64 result = beforeNS + afterNS;             // Теперь здесь количество нано-единиц в предпоожении, что размерность - One
+
+    // Скорректируем значение в соответствии с реальной размерностью
+
+    if (ORDER == Order::Milli)
+    {
+        result /= 1000;
+    }
+    else if (ORDER == Order::Micro)
+    {
+        result /= 1000 * 1000;
+    }
+    else if (ORDER == Order::Nano)
+    {
+        result /= 1000 * 1000 * 1000;
+    }
+    else if (ORDER == Order::Kilo)
+    {
+        result *= 1000;
+    }
+    else if (ORDER == Order::Mega)
+    {
+        result *= 1000 * 1000;
+    }
+
+    if (SIGN == '-')
+    {
+        //          fedcba9876543210
+        result |= 0x8000000000000000;           // Устанавливаем признак отрицательного числа
+    }
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
