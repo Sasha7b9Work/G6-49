@@ -4,6 +4,7 @@
 #include "log.h"
 #include "AD5697.h"
 #include "Command.h"
+#include "FPGA.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
 #endif
@@ -49,6 +50,11 @@ void AD5697::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static float CalculateOffset(Chan ch, float offset)
 {
+    if (FPGA::CurrentMode(ch) != FPGA::ModeWork::Sine)
+    {
+        return CAL_DDS_OFFSET(ch);
+    }
+
     float zero = CAL_AD9952_OFFSET_ZERO(ch);    // 2048
     float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
     float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095

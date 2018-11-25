@@ -102,7 +102,7 @@ DEF_GOVERNOR( gOffsetDDS,                                                       
     "DDS 0В", "DDS 0V",
     "Установка нулевого смещения формирователя произвольных сигналов",
     "Setting zero offset shaper arbitrary signals",
-    CAL_DDS_OFFSET(Chan::B), -10000, 10000, pageCalibrationB, FuncActive, OnChange_OffsetDDS, FuncBeforeDraw, OnPress_OffsetDDS
+    CAL_DDS_OFFSET(Chan::B), 1000, 3000, pageCalibrationB, FuncActive, OnChange_OffsetDDS, FuncBeforeDraw, OnPress_OffsetDDS
 )
 
 

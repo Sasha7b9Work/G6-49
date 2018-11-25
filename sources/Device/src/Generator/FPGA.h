@@ -78,6 +78,8 @@ public:
         operator uint8() const { return (uint8)value; };
     } clock;
 
+    static ModeWork::E CurrentMode(Chan ch) { return modeWork[ch].value; }
+
 private:
 
     ///< Ðåãèñòðû ÏËÈÑ
