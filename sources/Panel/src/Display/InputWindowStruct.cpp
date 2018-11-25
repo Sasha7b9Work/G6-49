@@ -313,22 +313,6 @@ int StructValue::ValueBeforeComma()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float StructValue::ValueAfterComma()
-{
-    int retValue = 0;
-    int pow = 1;
-    for (int i = NUM_DIGITS - 1; i > POS_COMMA; i--)
-    {
-        char digit = DIGIT(i);
-        digit &= 0x0f;
-        retValue += digit * pow;
-        pow *= 10;
-    }
-
-    return 1.0f / pow * retValue;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint64 StructValue::ValueBeforeCommaInNano()
 {
     uint64 result = 0;

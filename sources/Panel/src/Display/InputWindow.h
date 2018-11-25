@@ -58,8 +58,6 @@ private:
     bool OnlyOneRigthDigit();
     /// ¬озвращает число до зап€той
     int ValueBeforeComma();
-    /// ¬озвращает число после зап€той
-    float ValueAfterComma();
     /// ¬озвращает число до зап€той, выраженное в нано-единицах
     uint64 ValueBeforeCommaInNano();
     /// ¬озвращает число после зап€той, выраженное в единицах нано-размерности
