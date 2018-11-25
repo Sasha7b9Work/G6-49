@@ -408,12 +408,7 @@ void FPGA::WriteByte(uint8 byte)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(uint8 reg, uint64 value)
 {
-    static const struct StructBits
-    {
-        int value;
-        StructBits(int v) : value(v) {};
-    }
-    numBits[RG::Number] =
+    DEF_STRUCT(StructBits, int) numBits[RG::Number] =
     {
         16, // _0_Control,
         40, // _1_Freq,
@@ -435,7 +430,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
 
     for(int i = 0; i < 2; i++)
     {
-        for (int bit = numBits[reg].value - 1; bit >= 0; bit--)
+        for (int bit = numBits[reg].val - 1; bit >= 0; bit--)
         {
             CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, Bit::Get(value, bit));     // Устанавливаем или сбрасываем соответствующий бит
             CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, true);                    // И записываем его в ПЛИС

@@ -5,14 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name(Language lang) const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n)
-        {
-        };
-    }
-    names[Form::Number][2] =
+    DEF_STRUCT(StructName, pString) names[Form::Number][2] =
     {
         {"Синус",        "Sine"},
         {"Пила+",        "Ramp+"},
@@ -24,7 +17,7 @@ pString Form::Name(Language lang) const
         {"Произвольный", "Hand"}
     };
 
-    return names[value][lang].name;
+    return names[value][lang].val;
 }
 
 

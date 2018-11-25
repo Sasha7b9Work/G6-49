@@ -182,11 +182,7 @@ void AD9952::WriteARR(Chan ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString AD9952::Register::Name() const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) {};
-    } names[Number]=
+    DEF_STRUCT(StructName, pString) names[Number]=
     {
         "CFR1",
         "CFR2",
@@ -196,7 +192,7 @@ pString AD9952::Register::Name() const
         "POW"
     };
 
-    return names[value].name;
+    return names[value].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
