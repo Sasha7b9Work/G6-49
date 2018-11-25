@@ -233,7 +233,7 @@
     <ClCompile Include="..\..\Panel\src\Hardware\VCP.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Interface\Handlers.cpp" />
+    <ClCompile Include="..\..\Panel\src\Interface\HandlersPanel.cpp" />
     <ClCompile Include="..\..\Panel\src\Interface\InterfacePanel.cpp" />
     <ClCompile Include="..\..\Panel\src\Interface\Transceiver_429.cpp" />
     <ClCompile Include="..\..\Panel\src\log.cpp" />
@@ -373,7 +373,7 @@
     <ClInclude Include="..\..\Panel\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\Timer4XX.h" />
     <ClInclude Include="..\..\Panel\src\Hardware\VCP.h" />
-    <ClInclude Include="..\..\Panel\src\Interface\Handlers.h" />
+    <ClInclude Include="..\..\Panel\src\Interface\HandlersPanel.h" />
     <ClInclude Include="..\..\Panel\src\Interface\InterfacePanel.h" />
     <ClInclude Include="..\..\Panel\src\log.h" />
     <ClInclude Include="..\..\Panel\src\Menu\Hint.h" />

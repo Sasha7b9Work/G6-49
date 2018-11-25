@@ -4,7 +4,7 @@
 #include "log.h"
 #include "Command.h"
 #include "Message.h"
-#include "Handlers.h"
+#include "HandlersPanel.h"
 #include "Display/Console.h"
 #include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
@@ -14,13 +14,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Handlers::Processing(Message *msg)
 {
-    static const struct StructFunc
-    {
-        typedef bool(*pFuncBpM)(Message *);
-        pFuncBpM func;
-        StructFunc(pFuncBpM f) : func(f) {}
-    }
-    functions[Command::Number] =
+    typedef bool(*pFuncBpM)(Message *);
+
+    DEF_STRUCT(StructFunc, pFuncBpM) functions[Command::Number] =
     {
         /* RequestData             */ Handlers::Request,
         /* EnableChannel           */ Handlers::E,
@@ -65,7 +61,7 @@ bool Handlers::Processing(Message *msg)
     if (command < Command::Number)
     {
         /// —юда сообщение передаЄтс€ уже без первого байта
-        return functions[command].func(msg);
+        return functions[command].val(msg);
     }
     else
     {

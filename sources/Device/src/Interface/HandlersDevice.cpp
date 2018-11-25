@@ -4,7 +4,7 @@
 #include "structs.h"
 #include "Command.h"
 #include "Transceiver.h"
-#include "Handlers.h"
+#include "HandlersDevice.h"
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Generator/GeneratorDevice.h"

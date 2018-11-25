@@ -14,7 +14,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #include "Utils/Debug.h"
-#include "Handlers.h"
+#include "HandlersPanel.h"
 #include "InterfacePanel.h"
 #include <cstdlib>
 #endif

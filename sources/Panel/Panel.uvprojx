@@ -1972,14 +1972,14 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
-              <FileName>Handlers.cpp</FileName>
+              <FileName>HandlersPanel.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Interface\Handlers.cpp</FilePath>
+              <FilePath>.\src\Interface\HandlersPanel.cpp</FilePath>
             </File>
             <File>
-              <FileName>Handlers.h</FileName>
+              <FileName>HandlersPanel.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Interface\Handlers.h</FilePath>
+              <FilePath>.\src\Interface\HandlersPanel.h</FilePath>
             </File>
             <File>
               <FileName>InterfacePanel.cpp</FileName>

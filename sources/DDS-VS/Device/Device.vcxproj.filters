@@ -276,7 +276,7 @@
     <ClInclude Include="..\..\Device\src\Utils\Queue.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\Interface\Handlers.h">
+    <ClInclude Include="..\..\Device\src\Interface\HandlersDevice.h">
       <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
@@ -437,7 +437,7 @@
     <ClCompile Include="..\..\Device\src\Utils\Queue.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Interface\Handlers.cpp">
+    <ClCompile Include="..\..\Device\src\Interface\HandlersDevice.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
   </ItemGroup>

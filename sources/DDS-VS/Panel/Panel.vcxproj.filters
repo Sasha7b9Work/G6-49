@@ -300,11 +300,11 @@
     <ClCompile Include="..\..\Panel\src\Settings\CalibrationSettings.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\Interface\Handlers.cpp">
-      <Filter>Interface</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\FDrive\Items.cpp">
       <Filter>FDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Interface\HandlersPanel.cpp">
+      <Filter>Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -593,11 +593,11 @@
     <ClInclude Include="..\..\Panel\src\Settings\CalibrationSettings.h">
       <Filter>Settings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Panel\src\Interface\Handlers.h">
-      <Filter>Interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Panel\src\FDrive\Items.h">
       <Filter>FDrive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Interface\HandlersPanel.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

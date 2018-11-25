@@ -198,7 +198,7 @@
     <ClInclude Include="..\..\Device\src\Hardware\Timer.h" />
     <ClInclude Include="..\..\Device\src\Hardware\Timer4XX.h" />
     <ClInclude Include="..\..\Device\src\Hardware\VCP.h" />
-    <ClInclude Include="..\..\Device\src\Interface\Handlers.h" />
+    <ClInclude Include="..\..\Device\src\Interface\HandlersDevice.h" />
     <ClInclude Include="..\..\Device\src\Interface\InterfaceDevice.h" />
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h" />
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
@@ -295,7 +295,7 @@
     <ClCompile Include="..\..\Device\src\Hardware\VCP.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\Interface\Handlers.cpp" />
+    <ClCompile Include="..\..\Device\src\Interface\HandlersDevice.cpp" />
     <ClCompile Include="..\..\Device\src\Interface\InterfaceDevice.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>

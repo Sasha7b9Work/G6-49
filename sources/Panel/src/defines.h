@@ -78,6 +78,13 @@ typedef void (*pFuncVB)(bool);
 
 #define BINARY_U32(bits3, bits2, bits1, bits0) ((BINARY_U16(bits3, bits2) << 16) | (BINARY_U16(bits1, bits0)))
 
+#define DEF_STRUCT(name, type)  \
+static const struct name        \
+{                               \
+    type val;                   \
+    name(type v) : val(v) {};   \
+}
+
 
 #ifdef WIN32
 #pragma warning(pop)
