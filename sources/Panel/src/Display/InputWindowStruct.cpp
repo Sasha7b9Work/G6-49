@@ -62,7 +62,7 @@ void StructValue::KeyLeft()
 	}
     else
     {
-        if (!OnlyOneRigthDigit() && param->posComma != NUM_DIGITS - 1)
+        if (!OnlyOneRigthDigit() && POS_COMMA != NUM_DIGITS - 1)
         {
             ShiftToRight();
         }
@@ -129,13 +129,13 @@ char *StructValue::StringValue()
     static char buf[20];
     buf[0] = '\0';
 
-    SU::ConcatenateSymbol(buf, param->sign);
+    SU::ConcatenateSymbol(buf, SIGN);
 
     for (int i = 0; i < NUM_DIGITS; i++)
     {
         SU::ConcatenateSymbol(buf, DIGIT(i));
 
-        if (param->posComma == i)
+        if (POS_COMMA == i)
         {
             SU::ConcatenateSymbol(buf, '.');
         }
@@ -191,7 +191,7 @@ bool StructValue::DecreaseDigit(int num)
         return false;
     }
 
-    if (All0LeftWithThis(num) && param->sign == ' ')
+    if (All0LeftWithThis(num) && SIGN == ' ')
     {
         return false;
     }
@@ -317,7 +317,7 @@ float StructValue::ValueAfterComma()
 {
     int retValue = 0;
     int pow = 1;
-    for (int i = NUM_DIGITS - 1; i > param->posComma; i--)
+    for (int i = NUM_DIGITS - 1; i > POS_COMMA; i--)
     {
         char digit = DIGIT(i);
         digit &= 0x0f;
@@ -370,9 +370,9 @@ uint64 StructValue::ValueAfterCommaInNano()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::IncreaseOrder()
 {
-    if (param->order < Order::Number - 1)
+    if (ORDER < Order::Number - 1)
     {
-        param->order = (Order)(Order::E)(param->order + 1);
+        ORDER = (Order)(Order::E)(ORDER + 1);
 
         POS_COMMA -= 3;
     }
@@ -383,25 +383,25 @@ float StructValue::Value()
 {
     float value = ValueBeforeComma() + ValueAfterComma();
 
-    value *= (param->sign == '-') ? -1.0f : 1.0f;
+    value *= (SIGN == '-') ? -1.0f : 1.0f;
 
-    if (param->order == Order::Nano)
+    if (ORDER == Order::Nano)
     {
         return value * 1e-9f;
     }
-    if (param->order == Order::Micro)
+    if (ORDER == Order::Micro)
     {
         return value * 1e-6f;
     }
-    if (param->order == Order::Milli)
+    if (ORDER == Order::Milli)
     {
         return value * 1e-3f;
     }
-    if (param->order == Order::Kilo)
+    if (ORDER == Order::Kilo)
     {
         return value * 1e3f;
     }
-    if (param->order == Order::Mega)
+    if (ORDER == Order::Mega)
     {
         return value * 1e6f;
     }
