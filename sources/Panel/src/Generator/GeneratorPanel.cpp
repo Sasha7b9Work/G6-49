@@ -183,12 +183,7 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NU
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterChoice *param)
 {
-    static const struct StructCommand
-    {
-        Command command;
-        StructCommand(Command::E c) : command(c) {};
-    }
-    commands[ParameterChoice::Number] =
+    DEF_STRUCT(StructCommand, Command::E) commands[ParameterChoice::Number] =
     {
         Command::SetPolarity,
         Command::SetStartMode,
@@ -196,7 +191,7 @@ void Generator::SetParameter(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    Message message(3, (uint8)commands[param->value].command,
+    Message message(3, (uint8)commands[param->value].val,
         (uint8)param->GetForm()->GetWave()->GetChannel(),
         (uint8)param->GetChoice());
 

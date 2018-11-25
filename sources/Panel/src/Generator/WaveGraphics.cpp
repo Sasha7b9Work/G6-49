@@ -92,12 +92,9 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     Painter::DrawVLine(x0, minY - 3, maxY + 3);
     Painter::DrawHLine(aveY, x0, x0 + width);
 
-    static const struct StructFunc
-    {
-        typedef void (*pFuncIIII)(Chan, int, int, int, int);
-        pFuncIIII func;
-        StructFunc(pFuncIIII f) : func(f) {};
-    } func[Form::Number] =
+    typedef void(*pFuncIIII)(Chan, int, int, int, int);
+
+    DEF_STRUCT(StructFunc, pFuncIIII) func[Form::Number] =
     {
         DrawSine,
         DrawRampPlus,
@@ -111,7 +108,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
 
     int index = FORM(chan)->value;
     
-    func[index].func(chan, x0, minY, width, height);
+    func[index].val(chan, x0, minY, width, height);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
