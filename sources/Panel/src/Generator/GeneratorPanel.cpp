@@ -222,7 +222,7 @@ void Generator::SetAmplitude(Chan ch, float amplitude)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterValue *param)
 {
-    DEF_STRUCT(StructCommand, Command) commands[ParameterValue::Number] =
+    DEF_STRUCT(StructCommand, Command::E) commands[ParameterValue::Number] =
     {
         Command::SetFrequency,
         Command::SetPeriod,                     // 
