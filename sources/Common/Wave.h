@@ -199,7 +199,7 @@ public:
 
     float MaxValue() const { return max; };
 
-    float GetValue() const;
+    uint64 GetValueNano() const;
 
     pString GetStringValue() const;
 

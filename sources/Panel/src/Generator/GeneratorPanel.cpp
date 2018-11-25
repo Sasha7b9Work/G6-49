@@ -243,14 +243,16 @@ void Generator::SetParameter(ParameterValue *param)
         Command::RequestData
     };
 
-    float value = param->GetValue();
+    uint64_t value = param->GetValueNano();
 
     if(param->Is(ParameterValue::Offset))
     {
-        value -= 5.0f;
+        value -= 5 * 1000 * 1000 * 1000;
     }
 
-    Message message(6, (uint8)commands[param->value].val, (uint8)param->GetForm()->GetWave()->GetChannel(), value);
+    Chan ch = param->GetForm()->GetWave()->GetChannel();
+
+    Message message(8, (uint8)commands[param->value].val, (uint8)ch, value);
 
     Interface::Send(&message);
 }
