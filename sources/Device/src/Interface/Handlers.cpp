@@ -19,13 +19,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Handlers::Processing(Message *msg)
 {
-    static const struct FuncInterface
-    {
-        typedef void(*pFuncInterfaceVpM)(Message *);             // Параметром передаём указатель на принятые данные
-        pFuncInterfaceVpM func;
-        FuncInterface(pFuncInterfaceVpM f) : func(f) {};
-    }
-    commands[Command::Number] =
+    typedef void(*pFuncInterfaceVpM)(Message *);
+
+    DEF_STRUCT(FuncInterface, pFuncInterfaceVpM) commands[Command::Number] =
     {
         /* RequestData             */ Handlers::SendData,
         /* EnableChannel           */ Handlers::EnableChannel,
@@ -67,7 +63,7 @@ void Handlers::Processing(Message *msg)
 
     uint com = msg->TakeByte();
 
-    commands[com].func(msg);
+    commands[com].val(msg);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

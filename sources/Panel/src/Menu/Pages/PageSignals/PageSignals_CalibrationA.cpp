@@ -144,19 +144,14 @@ DEF_GOVERNOR( gMaxDDS,                                                          
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnChange_TrigLev()
 {
-
-}
-
-static void OnPress_TrigLev(bool)
-{
-
+    PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::FREQ_LEVEL_TRIG);
 }
 
 DEF_GOVERNOR( gTrigLev,                                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА А - Ур-нь синхр ---
     "Ур-нь синхр", "Trig lev",
     "Установка уровня синхронизации частотомера",
     "Setting the synchronization level of the frequency counter",
-    CAL_FREQ_LEVEL_TRIG, -10000, 10000, pageCalibrationA, FuncActive, OnChange_TrigLev, FuncBeforeDraw, OnPress_TrigLev
+    CAL_FREQ_LEVEL_TRIG, -10000, 10000, pageCalibrationA, FuncActive, OnChange_TrigLev, FuncBeforeDraw, EmptyFuncVB
 )
 
 
