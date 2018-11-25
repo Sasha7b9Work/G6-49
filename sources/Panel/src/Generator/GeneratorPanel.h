@@ -28,6 +28,8 @@ public:
 
     static void SetFormWave(Wave *w);
 
+    static void SetFormWave(Chan ch, Form::E form);
+
     static void SetParameter(ParameterValue *param);
 
     static void SetParameter(ParameterChoice *param);

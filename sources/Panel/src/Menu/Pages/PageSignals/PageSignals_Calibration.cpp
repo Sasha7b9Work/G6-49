@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Generator/GeneratorPanel.h"
+#include "Generator/Signals.h"
 #include "Interface/InterfacePanel.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/CalibrationSettings.h"
@@ -69,7 +70,27 @@ void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan ch, bool enter, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::OnPress_DDS(Chan /*ch*/, bool /*enter*/, KoeffCal::E /*koeff*/)
+void PageSignals::PageCalibration::OnPress_DDS(Chan ch, bool enter, KoeffCal::E koeff)
 {
+    /*
+        Для смещения:
+        Установить форму сигнала - меандр.
+        Установить амплитуду 0В.
+    */
 
+    if (enter)
+    {
+        if (koeff == KoeffCal::DDS_OFFSET)
+        {
+            for (int8 i = 0; i < WAVE(ch).NumberOfForms(); i++)
+            {
+                Form *form = WAVE(ch).GetForm(i);
+                if (form->Is(Form::Meander))
+                {
+                    WAVE(ch).SetForm(i);
+                    Generator::TuneChannel(ch);
+                }
+            }
+        }
+    }
 }

@@ -329,6 +329,8 @@ public:
 
     Form *GetForm(int i);
 
+    Form *GetForm(Form::E form);
+
     Chan GetChannel() const { return channel; };
     /// ¬озвращает true, если установлен ручной режим запуска
     bool StartModeIsSingle();
