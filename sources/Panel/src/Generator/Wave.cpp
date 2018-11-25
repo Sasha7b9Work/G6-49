@@ -19,12 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name(Language lang) const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) { };
-    }
-    names[Form::Number][2] =
+    DEF_STRUCT(StructName, pString) names[Form::Number][2] =
     {
         {"Синус",        "Sine"},
         {"Пила+",        "Ramp+"},
@@ -36,18 +31,13 @@ pString Form::Name(Language lang) const
         {"Произвольный", "Hand"}
     };
 
-    return names[value][lang].name;
+    return names[value][lang].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Register::Name() const
 {
-    static const struct StrName
-    {
-        pString name;
-        StrName(pString n) : name(n) {};
-    }
-    names[Register::Number] =
+    DEF_STRUCT(StrName, pString) names[Register::Number] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",
@@ -71,18 +61,13 @@ pString Register::Name() const
         "Частотомер - фильтр"
     };
 
-    return names[value].name;
+    return names[value].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::Name() const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) { };
-    }
-    nameParameter[ParameterValue::Number][2] =
+    DEF_STRUCT(StructName, pString) nameParameter[ParameterValue::Number][2] =
     {
         {"Частота",        "Frequency"},
         {"Период",         "Period"},
@@ -103,7 +88,7 @@ pString ParameterValue::Name() const
         {"     Выход ( ESC )", "     Exit ( ESC )"}
     };
 
-    return nameParameter[value][LANG].name;
+    return nameParameter[value][LANG].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -375,12 +360,7 @@ pString ParameterComplex::GetStringValue() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::NameUnit(char buf[10]) const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) {};
-    }
-    names[ParameterValue::Number][2] =
+    DEF_STRUCT(StructName, pString) names[ParameterValue::Number][2] =
     {
         {"Гц",  "Hz"},
         {"с",   "s"},
@@ -401,7 +381,7 @@ pString ParameterValue::NameUnit(char buf[10]) const
         {"",    ""}
     };
 
-    sprintf(buf, "%s%s", order.Name(), names[value][LANG].name);
+    sprintf(buf, "%s%s", order.Name(), names[value][LANG].val);
     return buf;
 }
 
@@ -424,12 +404,7 @@ bool ParameterValue::IsOpened()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterChoice::Name() const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) {};
-    }
-    namesParam[ParameterChoice::Number][2] =
+    DEF_STRUCT(StructName, pString) namesParam[ParameterChoice::Number][2] =
     {
         {"Полярность",  "Polarity"},
         {"Запуск",      "Mode start"},
@@ -437,23 +412,18 @@ pString ParameterChoice::Name() const
         {"Манипуляция", "Manipulation"}
     };
 
-    return namesParam[value][LANG].name;
+    return namesParam[value][LANG].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterComplex::Name() const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) {};
-    }
-    namesParams[ParameterComplex::Number][2] =
+    DEF_STRUCT(StructName, pString) namesParams[ParameterComplex::Number][2] =
     {
         {"Манипуляция", "Manipulation"}
     };
 
-    return namesParams[value][LANG].name;
+    return namesParams[value][LANG].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
