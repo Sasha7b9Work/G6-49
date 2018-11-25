@@ -138,7 +138,7 @@ DEF_GOVERNOR( gMaxDDS,                                                          
     "DDS +5¬", "DDS +5V",
     "”становка минимального выходного уровн€ формировател€ произвольных сигналов",
     "Setting the minimum output level shaper arbitrary signals",
-    CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
+    CAL_DDS_MAX(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

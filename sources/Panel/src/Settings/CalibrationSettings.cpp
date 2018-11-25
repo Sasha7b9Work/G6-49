@@ -59,12 +59,7 @@ CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void CalibrationSettings::CreateMessage(Message *message, Chan::E ch, KoeffCal::E koeff)
 {
-    static const struct StructCal
-    {
-        int16 *pointer;
-        StructCal(int16 *p) : pointer(p) {};
-    }
-    values[KoeffCal::Number] =
+    DEF_STRUCT(StructCal, int16 *) values[KoeffCal::Number] =
     {
         &CAL_AD9952_OFFSET_NEG(Chan::A),
         &CAL_AD9952_OFFSET_ZERO(Chan::A),
@@ -81,5 +76,5 @@ void CalibrationSettings::CreateMessage(Message *message, Chan::E ch, KoeffCal::
         ch = Chan::A;
     }
 
-    message->Create(5, (uint8)Command::SetKoeffCalibration, (uint8)ch, (uint8)koeff, (uint16)values[koeff].pointer[ch]);
+    message->Create(5, (uint8)Command::SetKoeffCalibration, (uint8)ch, (uint8)koeff, (uint16)values[koeff].val[ch]);
 }

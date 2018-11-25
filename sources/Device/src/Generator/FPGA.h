@@ -176,6 +176,8 @@ private:
     static void WriteControlRegister();
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
     static void TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2]);
+    /// Записывает коды, соответствующие максимальному и минимальному значению
+    static void WriteMaxAmplitude(Chan ch);
 
     static uint8 RegisterForDuration(Chan ch);
     /// Преобразует смещение в прямой код, пригодный для записи в альтеру

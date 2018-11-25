@@ -6,6 +6,7 @@
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Generator/GeneratorDevice.h"
+#include "Settings/CalibrationSettings.h"
 #include <string.h>
 #include <stdio.h>
 #include <cstdlib>
@@ -80,10 +81,17 @@ void FPGA::SetModeMeander(Chan ch)
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
 
-    // «аписать максимальный размах сигнала в регистры
-    uint64 data = (16383 << 14) + 8191;
+    WriteMaxAmplitude(ch);
+}
 
-    RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::WriteMaxAmplitude(Chan ch)
+{
+    // «аписать максимальный размах сигнала в регистры
+
+    uint64 data = ((uint64)(16383 + CAL_DDS_MAX(ch)) << 14) + (8191 + CAL_DDS_MIN(ch));
+
+    RG regs[Chan::Number] = { RG::_3_RectA, RG::_4_RectB };
 
     WriteRegister(regs[ch], data);
 }
@@ -495,6 +503,8 @@ uint FPGA::OffsetToCode(float off)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetAmplitude(Chan ch, float ampl)
 {
+    WriteMaxAmplitude(ch);
+
     amplitude[ch] = ampl;
 
     uint nA = (uint)(amplitude[Chan::A] * 1023 / 10);

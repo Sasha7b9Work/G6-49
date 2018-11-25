@@ -271,8 +271,6 @@ void Generator::TuneChannel(Chan ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadSettings()
 {
-
-
     Generator::TuneChannel(Chan::A);
     Generator::TuneChannel(Chan::B);
 }
