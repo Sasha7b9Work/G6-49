@@ -17,21 +17,21 @@ friend class Handlers;
 public:
     static void Init();
 
-    static void SetWaveForm(Chan ch, Form form);
+    static void SetWaveForm(Chan::E ch, Form form);
 
-    static void SetFrequency(Chan ch, float frequency);
+    static void SetFrequency(Chan::E ch, float frequency);
 
-    static void SetAmplitude(Chan ch, float amplitude);
+    static void SetAmplitude(Chan::E ch, float amplitude);
 
-    static void SetOffset(Chan ch, float offset);
+    static void SetOffset(Chan::E ch, float offset);
 
-    static void SetDurationImpulse(Chan ch, float duration);
+    static void SetDurationImpulse(Chan::E ch, float duration);
 
-    static void SetPeriodImpulse(Chan ch, float period);
+    static void SetPeriodImpulse(Chan::E ch, float period);
 
-    static void SetPolarity(Chan ch, uint8 polarity);
+    static void SetPolarity(Chan::E ch, uint8 polarity);
 
-    static void SetStartMode(Chan ch, StartMode mode);
+    static void SetStartMode(Chan::E ch, StartMode mode);
     /// Делает однократный запуск. Возвращает true в случае успеха (если установлены соответствующие настройки)
     static bool Start();
 
@@ -78,7 +78,7 @@ public:
         operator uint8() const { return (uint8)value; };
     } clock;
 
-    static ModeWork::E CurrentMode(Chan ch) { return modeWork[ch].value; }
+    static ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch].value; }
 
 private:
 
@@ -138,7 +138,7 @@ private:
         /// Первоначальная инициализация
         static void Init();
         /// Скоммутировать мультиплексор в соответствии с формой устанавливаемого сигнала на данном канале
-        static void SetMode(Chan ch, Form form);
+        static void SetMode(Chan::E ch, Form form);
 
         static Form GetMode(Chan ch);
 
@@ -151,17 +151,17 @@ private:
         static Form mode[Chan::Number];
     };
 
-    static void SetModeSine(Chan ch);
+    static void SetModeSine(Chan::E ch);
     /// Установить режим произвольного сигнала по каналу ch
-    static void SetModeDDS(Chan ch);
+    static void SetModeDDS(Chan::E ch);
     /// Возвращает указатель на точки произвольного сигнала
-    static uint8 *DataDDS(Chan ch);
+    static uint8 *DataDDS(Chan::E ch);
 
-    static void SetModeMeander(Chan ch);
+    static void SetModeMeander(Chan::E ch);
 
-    static void SetModeImpulse(Chan ch);
+    static void SetModeImpulse(Chan::E ch);
 
-    static void SetModePackedImpulse(Chan ch);
+    static void SetModePackedImpulse(Chan::E ch);
 
     static void EmptyFunc(Chan ch);
 
@@ -179,7 +179,7 @@ private:
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
     static void TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2]);
     /// Записывает коды, соответствующие максимальному и минимальному значению
-    static void WriteMaxAmplitude(Chan ch);
+    static void WriteMaxAmplitude(Chan::E ch);
 
     static uint8 RegisterForDuration(Chan ch);
     /// Преобразует смещение в прямой код, пригодный для записи в альтеру

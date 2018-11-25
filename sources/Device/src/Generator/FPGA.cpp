@@ -47,9 +47,9 @@ void FPGA::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetWaveForm(Chan ch, Form form)
+void FPGA::SetWaveForm(Chan::E ch, Form form)
 {
-    typedef void(*pFuncFpgaVU8)(Chan);
+    typedef void(*pFuncFpgaVU8)(Chan::E);
 
     DEF_STRUCT(StructFunc, pFuncFpgaVU8) func[Form::Number] =
     {
@@ -76,7 +76,7 @@ void FPGA::EmptyFunc(Chan)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeMeander(Chan ch)
+void FPGA::SetModeMeander(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
@@ -85,7 +85,7 @@ void FPGA::SetModeMeander(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::WriteMaxAmplitude(Chan ch)
+void FPGA::WriteMaxAmplitude(Chan::E ch)
 {
     // Записать максимальный размах сигнала в регистры
 
@@ -97,20 +97,20 @@ void FPGA::WriteMaxAmplitude(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeSine(Chan ch)
+void FPGA::SetModeSine(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Sine;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeDDS(Chan ch)
+void FPGA::SetModeDDS(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModePackedImpulse(Chan)
+void FPGA::SetModePackedImpulse(Chan::E)
 {
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
@@ -123,7 +123,7 @@ void FPGA::SetModePackedImpulse(Chan)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetPolarity(Chan ch, uint8 polarity)
+void FPGA::SetPolarity(Chan::E ch, uint8 polarity)
 {
     uint64 data = (8191 << 14) + 16383;     // Положительная полярность
 
@@ -138,7 +138,7 @@ void FPGA::SetPolarity(Chan ch, uint8 polarity)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetModeImpulse(Chan ch)
+void FPGA::SetModeImpulse(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Impulse;
     WriteControlRegister();
@@ -147,7 +147,7 @@ void FPGA::SetModeImpulse(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetFrequency(Chan ch, float frequency)
+void FPGA::SetFrequency(Chan::E ch, float frequency)
 {
     WriteControlRegister();
     
@@ -173,12 +173,12 @@ void FPGA::SetFrequency(Chan ch, float frequency)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetDurationImpulse(Chan ch, float duration)
+void FPGA::SetDurationImpulse(Chan::E ch, float duration)
 {
     PacketImpulse::durationImpulse = duration;
     uint64 value = (uint64)(duration / 10e-9f);
-    RG reg = ch.IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
-    if(ch.IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
+    RG reg = Chan(ch).IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
+    if(Chan(ch).IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
     {
         reg = RG::_8_DurationImpulseB;
     }
@@ -201,14 +201,14 @@ void FPGA::PacketImpulse::SetNumberImpules(uint value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetPeriodImpulse(Chan ch, float period)
+void FPGA::SetPeriodImpulse(Chan::E ch, float period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
     PacketImpulse::periodImpulse = period;
     uint64 value = (uint64)(period / 10e-9f) - 2;
-    RG reg = ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
-    if(ch.IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
+    RG reg = Chan(ch).IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
+    if(Chan(ch).IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
     {
         reg = RG::_7_PeriodImpulseB;
     }
@@ -216,7 +216,7 @@ void FPGA::SetPeriodImpulse(Chan ch, float period)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetStartMode(Chan ch, StartMode mode)
+void FPGA::SetStartMode(Chan::E ch, StartMode mode)
 {
     startMode[ch] = mode;
     WriteControlRegister();
@@ -496,7 +496,7 @@ uint FPGA::OffsetToCode(float off)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetAmplitude(Chan ch, float ampl)
+void FPGA::SetAmplitude(Chan::E ch, float ampl)
 {
     WriteMaxAmplitude(ch);
 
@@ -509,7 +509,7 @@ void FPGA::SetAmplitude(Chan ch, float ampl)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetOffset(Chan ch, float off)
+void FPGA::SetOffset(Chan::E ch, float off)
 {
     offset[ch] = off;
 
@@ -520,7 +520,7 @@ void FPGA::SetOffset(Chan ch, float off)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *FPGA::DataDDS(Chan ch)
+uint8 *FPGA::DataDDS(Chan::E ch)
 {
     return &dataDDS[ch][0];
 }

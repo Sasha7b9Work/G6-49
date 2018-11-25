@@ -100,7 +100,7 @@ void Handlers::SendData(Message *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::EnableChannel(Message *message)
 {
-    Chan ch = (Chan::E)message->TakeByte();
+    Chan::E ch = (Chan::E)message->TakeByte();
 
     bool enable = (message->TakeByte() == 1);
 
@@ -110,7 +110,7 @@ void Handlers::EnableChannel(Message *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetFormWave(Message *msg)
 {
-    Chan ch = (Chan::E)msg->TakeByte();
+    Chan::E ch = (Chan::E)msg->TakeByte();
 
     Form form = (Form::E)msg->TakeByte();
 
@@ -118,9 +118,9 @@ void Handlers::SetFormWave(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetGeneratorParameter(Message *msg, void(*func)(Chan, float))
+static void SetGeneratorParameter(Message *msg, void(*func)(Chan::E, float))
 {
-    Chan ch = (Chan::E)msg->TakeByte();
+    Chan::E ch = (Chan::E)msg->TakeByte();
     float value = msg->TakeFloat();
     func(ch, value);
 }
@@ -200,7 +200,7 @@ void Handlers::SetPacketNumber(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetManipulation(Message *msg)
 {
-    Chan ch = (Chan::E)msg->TakeByte();
+    Chan::E ch = (Chan::E)msg->TakeByte();
 
     AD9952::Manipulation::SetEnabled(ch, msg->TakeByte() != 0);
 }
@@ -208,7 +208,7 @@ void Handlers::SetManipulation(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetStartMode(Message *msg)
 {
-    Chan ch = (Chan::E)msg->TakeByte();
+    Chan::E ch = (Chan::E)msg->TakeByte();
 
     StartMode mode = (StartMode)msg->TakeByte();
 
@@ -218,7 +218,7 @@ void Handlers::SetStartMode(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetPolarity(Message *message)
 {
-    Chan ch = (Chan::E)message->TakeByte();
+    Chan::E ch = (Chan::E)message->TakeByte();
 
     FPGA::SetPolarity(ch, message->TakeByte());
 }
@@ -226,7 +226,7 @@ void Handlers::SetPolarity(Message *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetManipulationMode(Message *msg)
 {
-    Chan ch = (Chan::E)msg->TakeByte();
+    Chan::E ch = (Chan::E)msg->TakeByte();
 
     AD9952::Manipulation::SetType(ch, msg->TakeByte());
 }
@@ -234,7 +234,7 @@ void Handlers::SetManipulationMode(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::LoadFormDDS(Message *message)
 {
-    Chan ch = (Chan::E)message->TakeByte();
+    Chan::E ch = (Chan::E)message->TakeByte();
 
     std::memcpy(FPGA::DataDDS(ch), message->Data(2), FPGA_NUM_POINTS * 2);
 
@@ -244,7 +244,7 @@ void Handlers::LoadFormDDS(Message *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetKoeffCalibration(Message *msg)
 {
-    Chan ch = (Chan::E)msg->TakeByte();
+    Chan::E ch = (Chan::E)msg->TakeByte();
 
     DEF_STRUCT(StructCal, int16 *) values[KoeffCal::Number] =
     {

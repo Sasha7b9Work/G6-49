@@ -24,7 +24,7 @@ class Generator
 public:
     static void Reset();
 
-    static void EnableChannel(Chan ch, bool enable);
+    static void EnableChannel(Chan::E ch, bool enable);
 
     static void SetFormWave(Wave *w);
 
@@ -34,9 +34,9 @@ public:
 
     static void SetParameter(ParameterChoice *param);
 
-    static void SetOffset(Chan ch, float offset);
+    static void SetOffset(Chan::E ch, float offset);
 
-    static void SetAmplitude(Chan ch, float amplitude);
+    static void SetAmplitude(Chan::E ch, float amplitude);
 
     static void SetDebugMode(bool enable);
 
@@ -44,9 +44,9 @@ public:
 
     static void LoadSettings();
 
-    static void TuneChannel(Chan ch);
+    static void TuneChannel(Chan::E ch);
     /// Загружает режим запуска из set в аппаратуру
-    static void LoadStartMode(Chan ch, int mode);
+    static void LoadStartMode(Chan::E ch, int mode);
 
 private:
     static const int FPGA_NUM_POINTS = 8 * 1024;

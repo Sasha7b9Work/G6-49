@@ -12,7 +12,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// ”становить нужный дл€ данной калибровки параметр
-static void SetParameter(Chan ch, KoeffCal::E koeff)
+static void SetParameter(Chan::E ch, KoeffCal::E koeff)
 {
     if (koeff == KoeffCal::AD9952_ZERO)
     {
@@ -45,10 +45,10 @@ static void SetParameter(Chan ch, KoeffCal::E koeff)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
+void PageSignals::PageCalibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
 {
     Message message;
-    setCal.CreateMessage(&message, ch.value, koeff);
+    setCal.CreateMessage(&message, ch, koeff);
     
     Interface::Send(&message);
 
@@ -58,7 +58,7 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan ch, KoeffCal::E koeff)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, KoeffCal::E koeff)
+void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
     if (enter)
     {
@@ -68,7 +68,7 @@ void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan ch, bool enter, Koe
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan ch, bool enter, KoeffCal::E koeff)
+void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
     if (enter)
     {
@@ -78,7 +78,7 @@ void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan ch, bool enter, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageSignals::PageCalibration::OnPress_DDS(Chan ch, bool enter, KoeffCal::E koeff)
+void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
     if (enter)
     {

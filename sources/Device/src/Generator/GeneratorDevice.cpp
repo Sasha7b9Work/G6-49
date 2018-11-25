@@ -27,7 +27,7 @@ void Generator::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::EnableChannel(Chan ch, bool enable)
+void Generator::EnableChannel(Chan::E ch, bool enable)
 {
     if(!FPGA::Start())
     {
@@ -39,9 +39,9 @@ void Generator::EnableChannel(Chan ch, bool enable)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Chan ch, Form form)
+void Generator::SetFormWave(Chan::E ch, Form form)
 {
-    if(ch.value < Chan::Number && form.value < Form::Number)
+    if(ch < Chan::Number && form.value < Form::Number)
     {
         waveIsSine = form.Is(Form::Sine);
 
@@ -50,7 +50,7 @@ void Generator::SetFormWave(Chan ch, Form form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFrequency(Chan ch, float frequency)
+void Generator::SetFrequency(Chan::E ch, float frequency)
 {
     if (waveIsSine)
     {
@@ -63,27 +63,27 @@ void Generator::SetFrequency(Chan ch, float frequency)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetManipulationPeriod(Chan ch, float period)
+void Generator::SetManipulationPeriod(Chan::E ch, float period)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetManipulationDuration(Chan ch, float duration)
+void Generator::SetManipulationDuration(Chan::E ch, float duration)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetDurationImpulse(ch, duration);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPeriod(Chan ch, float period)
+void Generator::SetPeriod(Chan::E ch, float period)
 {
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetAmplitude(Chan ch, float amplitude)
+void Generator::SetAmplitude(Chan::E ch, float amplitude)
 {
     if (waveIsSine)
     {
@@ -96,7 +96,7 @@ void Generator::SetAmplitude(Chan ch, float amplitude)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetOffset(Chan ch, float offset)
+void Generator::SetOffset(Chan::E ch, float offset)
 {
     if(waveIsSine)
     {
@@ -110,36 +110,36 @@ void Generator::SetOffset(Chan ch, float offset)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPhase(Chan ch, float phase)
+void Generator::SetPhase(Chan::E ch, float phase)
 {
     AD9952::SetPhase(ch, phase);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPacketNumber(Chan, float number)
+void Generator::SetPacketNumber(Chan::E, float number)
 {
     FPGA::PacketImpulse::SetNumberImpules((uint)(number + 0.5f));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetPacketPeriod(Chan, float period)
+void Generator::SetPacketPeriod(Chan::E, float period)
 {
     FPGA::PacketImpulse::SetPeriodPacket(period);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDutyRatio(Chan, float)
+void Generator::SetDutyRatio(Chan::E, float)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDuration(Chan ch, float value)
+void Generator::SetDuration(Chan::E ch, float value)
 {
     FPGA::SetDurationImpulse(ch, value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetDelay(Chan, float)
+void Generator::SetDelay(Chan::E, float)
 {
 }

@@ -11,11 +11,11 @@ public:
 
     static void Init();
 
-    static void SetFrequency(Chan ch, float frequency);
+    static void SetFrequency(Chan::E ch, float frequency);
 
-    static void SetAmplitude(Chan ch, float amplitude);
+    static void SetAmplitude(Chan::E ch, float amplitude);
 
-    static void SetPhase(Chan ch, float phase);
+    static void SetPhase(Chan::E ch, float phase);
 
     /// ћанипул€ци€
     class Manipulation
@@ -34,10 +34,10 @@ public:
             bool Is(E v) const { return value == v; };
         };
         /// ”становить/отменить модулирование синусоиды сигналом "пилы"
-        static void SetEnabled(Chan ch, bool enable);
-        static bool IsEnabled(Chan ch) { return enabled[ch]; };
-        static void SetType(Chan ch, Type type);
-        static Type GetType(Chan ch) { return type[ch]; };
+        static void SetEnabled(Chan::E ch, bool enable);
+        static bool IsEnabled(Chan::E ch) { return enabled[ch]; };
+        static void SetType(Chan::E ch, Type type);
+        static Type GetType(Chan::E ch) { return type[ch]; };
     private:
         /// True означает, что манипул€ци€ включена
         static bool enabled[Chan::Number];
@@ -63,14 +63,14 @@ private:
         bool Is(E v) const { return value == v; };
     };
 
-    static void WriteToHardware(Chan ch, Register reg, uint value);
-    static GeneratorWritePin ChipSelect(Chan ch);
+    static void WriteToHardware(Chan::E ch, Register reg, uint value);
+    static GeneratorWritePin ChipSelect(Chan::E ch);
     static void Reset();
-    static void WriteRegister(Chan ch, Register reg);
-    static void WriteCFR1(Chan ch);
-    static void WriteCFR2(Chan ch);
-    static void WriteARR(Chan ch);
-    static void WriteASF(Chan ch);
-    static void WriteFTW0(Chan ch);
-    static void WritePOW(Chan ch);
+    static void WriteRegister(Chan::E ch, Register reg);
+    static void WriteCFR1(Chan::E ch);
+    static void WriteCFR2(Chan::E ch);
+    static void WriteARR(Chan::E ch);
+    static void WriteASF(Chan::E ch);
+    static void WriteFTW0(Chan::E ch);
+    static void WritePOW(Chan::E ch);
 };

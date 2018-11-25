@@ -54,7 +54,7 @@ void FPGA::Multiplexor::WriteRegister(Register reg, uint value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Multiplexor::SetMode(Chan ch, Form form)
+void FPGA::Multiplexor::SetMode(Chan::E ch, Form form)
 {
     mode[ch] = form;
 

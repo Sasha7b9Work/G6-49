@@ -274,7 +274,7 @@ public:
     /// Установить текущим следующй параметр
     void SetNextParameter();
     /// Настраивает генератор в соответствии с установленными параметрами
-    void TuneGenerator(Chan ch);
+    void TuneGenerator(Chan::E ch);
     /// Возвращает true, если тип формы сигнала соответствует e
     bool Is(Form::E e) const { return e == value; };
     /// Возвращает true, если форма сигнала реализуется с помощью ПЛИС
@@ -319,7 +319,7 @@ class Wave
 {
 public:
 
-    Wave(Chan ch, Form *forms, int numForms);
+    Wave(Chan::E ch, Form *forms, int numForms);
     /// Возвращает установленную форму
     Form *GetCurrentForm();
     /// Установить текущей следующую форму
@@ -329,13 +329,13 @@ public:
 
     Form *GetForm(int i);
 
-    Chan GetChannel() const { return channel; };
+    Chan::E GetChannel() const { return channel; };
     /// Возвращает true, если установлен ручной режим запуска
     bool StartModeIsSingle();
 
 private:
     /// Какому каналу принадлежит сигнал
-    Chan channel;
+    Chan::E channel;
     /// Текущая форма сигнала - указывает на номер сигнала в массиве
     int currentForm;
     /// Список форм, которые могут быть назначены
@@ -349,36 +349,36 @@ public:
     {
     public:
         /// Нарисовать информацию о параметрах сигнала на экране
-        static void Draw(Chan ch);
+        static void Draw(Chan::E ch);
         /// Позиция x области отрисовки сигнала
         static int X();
         /// Позиция y области отрисовки сигнала
-        static int Y(Chan ch);
+        static int Y(Chan::E ch);
         /// Ширина области отрисовки сигнала
         static int Width();
         /// Высота области отрисовки сигнала
         static int Height();
     private:
 
-        static void DrawUGO(Chan chan, int y0);
+        static void DrawUGO(Chan::E chan, int y0);
 
-        static void DrawSine(Chan ch, int x, int y, int width, int height);
+        static void DrawSine(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawRampPlus(Chan ch, int x, int y, int width, int height);
+        static void DrawRampPlus(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawRampMinus(Chan ch, int x, int y, int width, int height);
+        static void DrawRampMinus(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawTriangle(Chan ch, int x, int y, int width, int height);
+        static void DrawTriangle(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawMeander(Chan ch, int x, int y, int width, int height);
+        static void DrawMeander(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawImpulse(Chan ch, int x, int y, int width, int height);
+        static void DrawImpulse(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawPacketImpulse(Chan ch, int x, int y, int width, int height);
+        static void DrawPacketImpulse(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawDDS(Chan ch, int x, int y, int width, int height);
+        static void DrawDDS(Chan::E ch, int x, int y, int width, int height);
 
-        static void DrawParameters(Chan chan, int y0);
+        static void DrawParameters(Chan::E chan, int y0);
 
         static void DrawParameterValue(ParameterBase *parameter, int x, int y);
     };

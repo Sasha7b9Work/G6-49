@@ -64,7 +64,7 @@ void AD9952::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Manipulation::SetEnabled(Chan ch, bool enable)
+void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 {
     enabled[ch] = enable;
     WriteCFR1(ch);
@@ -73,21 +73,21 @@ void AD9952::Manipulation::SetEnabled(Chan ch, bool enable)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Manipulation::SetType(Chan ch, Type t)
+void AD9952::Manipulation::SetType(Chan::E ch, Type t)
 {
     Manipulation::type[ch] = t;
     FPGA::SetWaveForm(ch, Form::Sine);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetFrequency(Chan ch, float frequency)
+void AD9952::SetFrequency(Chan::E ch, float frequency)
 {
     setDDS.ad9952[ch].frequency = frequency;
     WriteRegister(ch, Register::FTW0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetPhase(Chan ch, float phase)
+void AD9952::SetPhase(Chan::E ch, float phase)
 {
     setDDS.ad9952[ch].phase = phase;
     if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency)
@@ -97,7 +97,7 @@ void AD9952::SetPhase(Chan ch, float phase)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetAmplitude(Chan ch, float amplitude)
+void AD9952::SetAmplitude(Chan::E ch, float amplitude)
 {
     setDDS.ad9952[ch].amplitude = amplitude * 0.8f * (1.0f + CAL_AD9952_AMPLITUDE(ch) / 1000.0f);    // 0.8f в этой формуле оттуда, что схема устройства настроена на то, что 100% максимальной
                                                                                                     // амплитуды сигнала на выходе получаются при засылке 80% кода от максимального
@@ -105,9 +105,9 @@ void AD9952::SetAmplitude(Chan ch, float amplitude)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteRegister(Chan ch, Register reg)
+void AD9952::WriteRegister(Chan::E ch, Register reg)
 {
-    typedef void(*pFuncVCh)(Chan);
+    typedef void(*pFuncVCh)(Chan::E);
 
     static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, WriteARR, WriteFTW0, WritePOW};
 
@@ -120,7 +120,7 @@ void AD9952::WriteRegister(Chan ch, Register reg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteCFR1(Chan ch)
+void AD9952::WriteCFR1(Chan::E ch)
 {
     uint value = 0;
 
@@ -142,7 +142,7 @@ void AD9952::WriteCFR1(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteCFR2(Chan ch)
+void AD9952::WriteCFR2(Chan::E ch)
 {
     uint value = 0;
     Bit::Set(value, 3);
@@ -150,14 +150,14 @@ void AD9952::WriteCFR2(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WritePOW(Chan ch)
+void AD9952::WritePOW(Chan::E ch)
 {
     uint value = (uint)(setDDS.ad9952[Chan::B].phase / 360.0f * (1 << 13) + 0.5f);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteASF(Chan ch)
+void AD9952::WriteASF(Chan::E ch)
 {
     uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
     Bit::Set(value, 14);  // \ Это биты множителя скорости
@@ -166,7 +166,7 @@ void AD9952::WriteASF(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteFTW0(Chan ch)
+void AD9952::WriteFTW0(Chan::E ch)
 {
     float FTWf = (setDDS.ad9952[ch].frequency / 1e8f) * powf(2, 32);
 
@@ -174,7 +174,7 @@ void AD9952::WriteFTW0(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteARR(Chan ch)
+void AD9952::WriteARR(Chan::E ch)
 {
     WriteToHardware(ch, Register::ARR, 1);
 }
@@ -196,7 +196,7 @@ pString AD9952::Register::Name() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
+void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
 {
     static const int numBytes[] =               // Число байт данных для передачи
     { //CFR1 CFR2 ASF ARR FTW0 POW
@@ -229,7 +229,7 @@ void AD9952::WriteToHardware(Chan ch, Register reg, uint value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-GeneratorWritePin AD9952::ChipSelect(Chan ch)
+GeneratorWritePin AD9952::ChipSelect(Chan::E ch)
 {
     return (GeneratorWritePin::E)(ch == Chan::A ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
 }

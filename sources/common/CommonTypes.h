@@ -33,7 +33,7 @@ struct Chan
         B,
         Number
     } value;
-    Chan(E v) : value(v) {};
+    explicit Chan(E v) : value(v) {};
     operator uint8() const { return (uint8)value; };
     bool IsA() const { return value == A; };
 };

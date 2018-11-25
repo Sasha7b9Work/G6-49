@@ -110,7 +110,7 @@ int Wave::NumberOfForms() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Wave::Wave(Chan ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
+Wave::Wave(Chan::E ch, Form *f, int num) : channel(ch), forms(f), numForms(num)
 {
 }
 
@@ -172,7 +172,7 @@ void Form::SetNextParameter()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Form::TuneGenerator(Chan ch)
+void Form::TuneGenerator(Chan::E ch)
 {
     Generator::SetFormWave(GetWave());
 
@@ -213,7 +213,7 @@ void Form::TuneGenerator(Chan ch)
             SendParameterToGenerator(ParameterValue::Offset);
         }
 
-        if(!ch.IsA())
+        if(!Chan(ch).IsA())
         {
             SendParameterToGenerator(ParameterValue::Phase);
         }
@@ -498,7 +498,7 @@ void ParameterChoice::NextChoice()
 {
     CircleIncrease(&choice, 0, num - 1);
 
-    Chan ch = form->GetWave()->GetChannel();
+    Chan::E ch = form->GetWave()->GetChannel();
 
     if(value == ModeStart)
     {

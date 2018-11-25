@@ -16,7 +16,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Wave::Graphics::Draw(Chan ch)
+void Wave::Graphics::Draw(Chan::E ch)
 {
     if(FREQ_ENABLED && ch != CURRENT_CHANNEL)
     {
@@ -42,7 +42,7 @@ int Wave::Graphics::X()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Wave::Graphics::Y(Chan ch)
+int Wave::Graphics::Y(Chan::E ch)
 {
     return (ch == Chan::A || FREQ_ENABLED) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
 }
@@ -60,7 +60,7 @@ int Wave::Graphics::Height()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawUGO(Chan chan, int y0)
+void Wave::Graphics::DrawUGO(Chan::E chan, int y0)
 {
     y0 += 30;
     int height = 50;
@@ -92,7 +92,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
     Painter::DrawVLine(x0, minY - 3, maxY + 3);
     Painter::DrawHLine(aveY, x0, x0 + width);
 
-    typedef void(*pFuncIIII)(Chan, int, int, int, int);
+    typedef void(*pFuncIIII)(Chan::E, int, int, int, int);
 
     DEF_STRUCT(StructFunc, pFuncIIII) func[Form::Number] =
     {
@@ -112,7 +112,7 @@ void Wave::Graphics::DrawUGO(Chan chan, int y0)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawSine(Chan, int x0, int y0, int width, int height)
+void Wave::Graphics::DrawSine(Chan::E, int x0, int y0, int width, int height)
 {
     float speed = 0.2f;
     int delta = 1;
@@ -128,7 +128,7 @@ void Wave::Graphics::DrawSine(Chan, int x0, int y0, int width, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawRampPlus(Chan, int x0, int y0, int, int height)
+void Wave::Graphics::DrawRampPlus(Chan::E, int x0, int y0, int, int height)
 {
     y0 += height;
     int dX = 28;
@@ -140,7 +140,7 @@ void Wave::Graphics::DrawRampPlus(Chan, int x0, int y0, int, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawRampMinus(Chan, int x0, int y0, int, int height)
+void Wave::Graphics::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
 {
     int aveY = y0 + height / 2;
     int dX = 28;
@@ -153,7 +153,7 @@ void Wave::Graphics::DrawRampMinus(Chan, int x0, int y0, int, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawTriangle(Chan, int x, int y, int width, int height)
+void Wave::Graphics::DrawTriangle(Chan::E, int x, int y, int width, int height)
 {
     int min = y + height;
     Painter::DrawLine(x, min, x + width / 2, y);
@@ -161,7 +161,7 @@ void Wave::Graphics::DrawTriangle(Chan, int x, int y, int width, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawMeander(Chan, int x0, int y0, int, int height)
+void Wave::Graphics::DrawMeander(Chan::E, int x0, int y0, int, int height)
 {
     int dX = 40;
     int dY = 20;
@@ -176,7 +176,7 @@ void Wave::Graphics::DrawMeander(Chan, int x0, int y0, int, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawImpulse(Chan ch, int x0, int y0, int, int height)
+void Wave::Graphics::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
 {
     int minY = y0;
     int maxY = y0 + height;
@@ -202,7 +202,7 @@ void Wave::Graphics::DrawImpulse(Chan ch, int x0, int y0, int, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawPacketImpulse(Chan, int x0, int y0, int, int height)
+void Wave::Graphics::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
 {
     int minY = y0;
     int maxY = y0 + height;
@@ -228,12 +228,12 @@ void Wave::Graphics::DrawPacketImpulse(Chan, int x0, int y0, int, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawDDS(Chan, int, int, int, int)
+void Wave::Graphics::DrawDDS(Chan::E, int, int, int, int)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Wave::Graphics::DrawParameters(Chan ch, int y0)
+void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
 {
     Form *form = FORM(ch);
 
@@ -254,7 +254,7 @@ void Wave::Graphics::DrawParameters(Chan ch, int y0)
         
         Text::DrawText(x0 + 1, y0, param->Name(), Color::FILL);
         
-        if(i == 3 && ch.IsA())
+        if(i == 3 && Chan(ch).IsA())
         {
             i = i;
         }

@@ -13,7 +13,7 @@ public:
 
     static void Init();
 
-    static void SetOffset(Chan ch, float offset);
+    static void SetOffset(Chan::E ch, float offset);
 
     static void SetFreqLevel(float level);
 
@@ -21,7 +21,7 @@ public:
 
 private:
 
-    static void Reset(Chan ch);
+    static void Reset(Chan::E ch);
     /// Запись непосредственно в DAC
     static void TransmitI2C(uint8 address, uint8 data[3]);
 
@@ -29,7 +29,7 @@ private:
     /// Записать три байта данных по данному адресу
     static void WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin);
 
-    static GeneratorWritePin PinLDAC(Chan ch);
+    static GeneratorWritePin PinLDAC(Chan::E ch);
 
     static uint8 CreateCommandByte(ParameterValue param);
 };

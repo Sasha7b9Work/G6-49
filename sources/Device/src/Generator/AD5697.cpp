@@ -48,7 +48,7 @@ void AD5697::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static float CalculateOffset(Chan ch, float offset)
+static float CalculateOffset(Chan::E ch, float offset)
 {
     if (FPGA::CurrentMode(ch) != FPGA::ModeWork::Sine)
     {
@@ -75,7 +75,7 @@ static float CalculateOffset(Chan ch, float offset)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::SetOffset(Chan ch, float offset)
+void AD5697::SetOffset(Chan::E ch, float offset)
 {
     float code = CalculateOffset(ch, offset);
 
@@ -135,7 +135,7 @@ void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::Reset(Chan ch)
+void AD5697::Reset(Chan::E ch)
 {
     static const GeneratorWritePin pinRS[Chan::Number] = {GeneratorWritePin::AD5697_D_RSA, GeneratorWritePin::AD5697_D_RSB};
 
@@ -146,7 +146,7 @@ void AD5697::Reset(Chan ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-GeneratorWritePin AD5697::PinLDAC(Chan ch)
+GeneratorWritePin AD5697::PinLDAC(Chan::E ch)
 {
     static const GeneratorWritePin pinLDAC[Chan::Number] = {GeneratorWritePin::AD5697_Offset, GeneratorWritePin::AD5697_Freq};
 

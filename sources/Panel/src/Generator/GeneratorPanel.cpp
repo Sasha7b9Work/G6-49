@@ -24,17 +24,17 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Generator::EnableChannel(Chan ch, bool enable)
+void Generator::EnableChannel(Chan::E ch, bool enable)
 {
-    Message message(3, Command::EnableChannel, ch, (uint8)(enable ? 1u : 0u));
+    Message message(3, Command::EnableChannel, (uint8)ch, (uint8)(enable ? 1u : 0u));
 
     Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::LoadStartMode(Chan ch, int mode)
+void Generator::LoadStartMode(Chan::E ch, int mode)
 {
-    Message message(3, Command::SetStartMode, ch, (uint8)mode);
+    Message message(3, Command::SetStartMode, (uint8)ch, (uint8)mode);
 
     Interface::Send(&message);
 }
@@ -66,7 +66,7 @@ void Generator::Reset()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Wave *w)
 {
-    Chan ch = w->GetChannel();
+    Chan::E ch = w->GetChannel();
     uint8 form = (uint8)FORM(ch)->value;
 
     if(FORM(ch)->IsDDS())
@@ -75,7 +75,7 @@ void Generator::SetFormWave(Wave *w)
     }
     else
     {
-        Message message(3, Command::SetFormWave, ch, form);
+        Message message(3, Command::SetFormWave, (uint8)ch, form);
 
         Interface::Send(&message);
     }
@@ -94,11 +94,11 @@ void Generator::SetFormWave(Chan ch, Form::E form)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormDDS(Form *form)
 {
-    Chan ch = form->GetWave()->GetChannel();
+    Chan::E ch = form->GetWave()->GetChannel();
 
     float data[FPGA_NUM_POINTS];
 
-    Message message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, ch);
+    Message message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, (uint8)ch);
 
     uint8 *points = message.Data(2);
 
@@ -199,7 +199,7 @@ void Generator::SetParameter(ParameterChoice *param)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetOffset(Chan ch, float offset)
+void Generator::SetOffset(Chan::E ch, float offset)
 {
     Message message(6, (uint8)Command::SetOffset, (uint8)ch, offset);
 
@@ -207,9 +207,9 @@ void Generator::SetOffset(Chan ch, float offset)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetAmplitude(Chan ch, float amplitude)
+void Generator::SetAmplitude(Chan::E ch, float amplitude)
 {
-    Message message(6, (uint8)Command::SetAmplitude, ch, amplitude);
+    Message message(6, (uint8)Command::SetAmplitude, (uint8)ch, amplitude);
 
     Interface::Send(&message);
 }
@@ -245,7 +245,7 @@ void Generator::SetParameter(ParameterValue *param)
         value -= 5 * 1000 * 1000 * 1000;
     }
 
-    Chan ch = param->GetForm()->GetWave()->GetChannel();
+    Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
     Message message(8, (uint8)commands[param->value].val, (uint8)ch, value);
 
@@ -253,7 +253,7 @@ void Generator::SetParameter(ParameterValue *param)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TuneChannel(Chan ch)
+void Generator::TuneChannel(Chan::E ch)
 {
     EnableChannel(ch, CHANNEL_ENABLED(ch));
 
