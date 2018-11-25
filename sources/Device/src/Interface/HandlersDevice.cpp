@@ -266,8 +266,6 @@ void Handlers::SetKoeffCalibration(Message *msg)
     int16 *koeff = values[msg->TakeByte()].pointer;
 
     koeff[ch] = (int16)msg->TakeHalfWord();
-
-    setCal.Save();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

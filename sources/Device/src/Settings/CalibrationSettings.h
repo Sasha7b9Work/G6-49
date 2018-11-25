@@ -39,9 +39,6 @@ struct CalibrationSettings
         uint8 unused[512];
     };
     
-    void Save();
-    void Load();
-
     CalibrationSettings& operator =(const CalibrationSettings &);
 };
 
