@@ -10,12 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Command::Name() const
 {
-    static const struct StructName
-    {
-        pString name;
-        StructName(pString n) : name(n) {};
-    }
-    names[Number] =
+    DEF_STRUCT(StructName, pString) names[Number] =
     {
         "RequestData",
         "EnableChannel",
@@ -56,7 +51,7 @@ pString Command::Name() const
     };
     if(value < Number)
     {
-        return names[value].name;
+        return names[value].val;
     }
     
     /// \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию Command::Trace()
