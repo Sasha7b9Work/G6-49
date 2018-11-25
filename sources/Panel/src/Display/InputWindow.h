@@ -25,7 +25,7 @@ public:
 
     float Value();
 
-    uint64 ValueUINT64();
+    uint64 ValueNano();
 
     void KeyLeft();
 

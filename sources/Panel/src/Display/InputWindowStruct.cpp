@@ -381,36 +381,11 @@ void StructValue::IncreaseOrder()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float StructValue::Value()
 {
-    float value = ValueBeforeComma() + ValueAfterComma();
-
-    value *= (SIGN == '-') ? -1.0f : 1.0f;
-
-    if (ORDER == Order::Nano)
-    {
-        return value * 1e-9f;
-    }
-    if (ORDER == Order::Micro)
-    {
-        return value * 1e-6f;
-    }
-    if (ORDER == Order::Milli)
-    {
-        return value * 1e-3f;
-    }
-    if (ORDER == Order::Kilo)
-    {
-        return value * 1e3f;
-    }
-    if (ORDER == Order::Mega)
-    {
-        return value * 1e6f;
-    }
-
-    return value;
+    return ValueNano() / 1e9f;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint64 StructValue::ValueUINT64()
+uint64 StructValue::ValueNano()
 {
     uint64 beforeNS = ValueBeforeCommaInNano();     // Здесь число до запятой, в нано-единицах
     uint64 afterNS = ValueAfterCommaInNano();       // Здесь число после запятой, в нано-единицах
