@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "FrequencyMeter/FrequencyMeter.h"
 #include "Generator/GeneratorPanel.h"
 #include "Interface/InterfacePanel.h"
 #include "Menu/Pages/Include/PageSignals.h"
@@ -27,6 +28,10 @@ static void SetParameter(Chan ch, KoeffCal::E koeff)
     else if (koeff == KoeffCal::AD9952_AMPL)
     {
         Generator::SetAmplitude(ch, 10.0f);
+    }
+    else if (koeff == KoeffCal::FREQ_LEVEL_TRIG)
+    {
+        FrequencyMeter::LoadLevel();
     }
 }
 

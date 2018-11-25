@@ -95,6 +95,8 @@ void AD5697::SetFreqHysteresys(float hyst)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetFreqLevel(float level)
 {
+    level += (float)CAL_FREQ_LEVEL_TRIG;
+
     Limitation(&level, 0.0f, 4095.0f);
 
     uint16 value = (uint16)((uint16)level << 4);
