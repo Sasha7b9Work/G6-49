@@ -48,14 +48,9 @@ void FPGA::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetWaveForm(Chan ch, Form form)
 {
-    struct StructFunc
-    {
-        typedef void(*pFuncFpgaVU8)(Chan);
-        pFuncFpgaVU8 func;
-        StructFunc(pFuncFpgaVU8 f) : func(f) {};
-    };
-    
-    static const StructFunc func[Form::Number] =
+    typedef void(*pFuncFpgaVU8)(Chan);
+
+    DEF_STRUCT(StructFunc, pFuncFpgaVU8) func[Form::Number] =
     {
         SetModeSine,            ///< Здесь включается режим амплитудной манипуляции
         SetModeDDS,
@@ -67,7 +62,7 @@ void FPGA::SetWaveForm(Chan ch, Form form)
         SetModeDDS
     };
     
-    func[form.value].func(ch);
+    func[form.value].val(ch);
     
     Multiplexor::SetMode(ch, form);
 
