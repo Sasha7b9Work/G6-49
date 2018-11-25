@@ -222,18 +222,13 @@ void Generator::SetAmplitude(Chan ch, float amplitude)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterValue *param)
 {
-    static const struct StructCommand
-    {
-        Command command;
-        StructCommand(Command::E c) : command(c) {};
-    }
-    commands[ParameterValue::Number] =
+    DEF_STRUCT(StructCommand, Command) commands[ParameterValue::Number] =
     {
         Command::SetFrequency,
-        Command::SetPeriod,
+        Command::SetPeriod,                     // 
         Command::SetAmplitude,
         Command::SetOffset,
-        Command::SetDuration,
+        Command::SetDuration,                   // 
         Command::SetDutyRatio,
         Command::SetPhase,
         Command::SetDelay,
@@ -255,7 +250,7 @@ void Generator::SetParameter(ParameterValue *param)
         value -= 5.0f;
     }
 
-    Message message(6, (uint8)commands[param->value].command, (uint8)param->GetForm()->GetWave()->GetChannel(), value);
+    Message message(6, (uint8)commands[param->value].val, (uint8)param->GetForm()->GetWave()->GetChannel(), value);
 
     Interface::Send(&message);
 }
