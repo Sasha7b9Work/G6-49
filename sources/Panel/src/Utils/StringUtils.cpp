@@ -321,8 +321,10 @@ char *UInt64_2String(uint64 value, char buffer[20])
 char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
 {
     int allSymbols = allDigits + 1;         // Всего символов на 1 больше, чем десятичных знаков - ещё одно место занимает точка
+    
+    char *start = bufferOut;
 
-    char *pointer = bufferOut + allSymbols; // Выводить символы будем начиная с конца
+    char *pointer = start + allSymbols; // Выводить символы будем начиная с конца
 
     *pointer-- = 0;                         // Пишем ноль в конец строки как символ её конца
 

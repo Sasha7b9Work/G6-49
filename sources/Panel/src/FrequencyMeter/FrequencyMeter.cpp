@@ -10,7 +10,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-uint FrequencyMeter::frequency = 0;
+uint FrequencyMeter::valueFreq = 0;
 bool FrequencyMeter::inactive = true;
 
 
@@ -27,12 +27,11 @@ void FrequencyMeter::Draw()
     Painter::SetColor(inactive ? Color::BLUE_50 : Color::FILL);
 
     char buffer[20];
+    char text[50];
 
     if(FREQ_MEASURE_IS_FREQ)
     {
-        char text[50];
-        sprintf(text, "%sêÃö", UInt2StringThisPoint(frequency, buffer, 8, (int)FREQ_BILLING_TIME));
-        Text::DrawBigText(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10, 3, text);
+        sprintf(text, "%sêÃö", UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
     }
     else
     {
@@ -51,9 +50,10 @@ void FrequencyMeter::Draw()
 
         StrOut str = strs[FREQ_AVE_PERIOD][FREQ_TIME_STAMPS];
 
-        char text[50];
-        sprintf(text, "%s %s", UInt2StringThisPoint(frequency, buffer, 9, str.forFract), str.suffix);
+        sprintf(text, "%s%s", UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix);
     }
+
+    Text::DrawBigText(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10, 3, text);
 
     Text::SetUpperCase(true);
 }
@@ -65,7 +65,7 @@ void FrequencyMeter::SetMeasure(uint value)
     {
         return;
     }
-    frequency = value;
+    valueFreq = value;
     inactive = false;
 }
 

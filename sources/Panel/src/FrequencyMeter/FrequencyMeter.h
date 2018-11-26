@@ -25,7 +25,7 @@ public:
 
 private:
 
-    static uint frequency;
+    static uint valueFreq;
 
     static bool inactive;
 
