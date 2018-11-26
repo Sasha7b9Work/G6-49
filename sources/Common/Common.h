@@ -23,6 +23,8 @@ struct ParamValue
     void Divide(uint div);
 
     void Multiplie(uint mul);
+    /// Увеличить на заданное значение
+    void Add(float v);
 
     void SetSign(int sign);
 

@@ -242,12 +242,12 @@ void Generator::SetParameter(ParameterValue *param)
 
     if (param->Is(ParameterValue::Offset))
     {
-        value.FromUINT64(0);
+        value.Add(-5.0f);
     }
 
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
-    Message message(8, (uint8)commands[param->value].val, (uint8)ch, value.ToUINT64());
+    Message message(10, (uint8)commands[param->value].val, (uint8)ch, value.ToUINT64());
 
     Interface::Send(&message);
 }
