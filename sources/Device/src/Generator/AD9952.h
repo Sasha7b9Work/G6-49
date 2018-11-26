@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include "Common.h"
 #include "Hardware/CPU.h"
 #include "GeneratorSettingsTypes.h"
 
@@ -11,11 +12,11 @@ public:
 
     static void Init();
 
-    static void SetFrequency(Chan::E ch, float frequency);
+    static void SetFrequency(Chan::E ch, ParamValue frequency);
 
-    static void SetAmplitude(Chan::E ch, float amplitude);
+    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
 
-    static void SetPhase(Chan::E ch, float phase);
+    static void SetPhase(Chan::E ch, ParamValue phase);
 
     /// Манипуляция
     class Manipulation

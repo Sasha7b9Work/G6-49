@@ -17,27 +17,27 @@ public:
 
     static void SetFormWave(Chan::E ch, Form form);
 
-    static void SetOffset(Chan::E ch, float offset);
+    static void SetOffset(Chan::E ch, ParamValue offset);
 
-    static void SetFrequency(Chan::E ch, float frequency);
+    static void SetFrequency(Chan::E ch, ParamValue frequency);
 
-    static void SetAmplitude(Chan::E ch, float amplitude);
+    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
 
-    static void SetDuration(Chan::E ch, float duration);
+    static void SetDuration(Chan::E ch, ParamValue duration);
 
-    static void SetDutyRatio(Chan::E ch, float dutyRatio);
+    static void SetDutyRatio(Chan::E ch, ParamValue dutyRatio);
 
-    static void SetPhase(Chan::E ch, float phase);
+    static void SetPhase(Chan::E ch, ParamValue phase);
 
-    static void SetDelay(Chan::E ch, float duration);
+    static void SetDelay(Chan::E ch, ParamValue duration);
 
-    static void SetManipulationDuration(Chan::E ch, float duration);
+    static void SetManipulationDuration(Chan::E ch, ParamValue duration);
 
-    static void SetManipulationPeriod(Chan::E ch, float period);
+    static void SetManipulationPeriod(Chan::E ch, ParamValue period);
 
-    static void SetPacketPeriod(Chan::E ch, float duration);
+    static void SetPacketPeriod(Chan::E ch, ParamValue duration);
 
-    static void SetPacketNumber(Chan::E ch, float number);
+    static void SetPacketNumber(Chan::E ch, ParamValue number);
 
-    static void SetPeriod(Chan::E ch, float period);
+    static void SetPeriod(Chan::E ch, ParamValue period);
 };

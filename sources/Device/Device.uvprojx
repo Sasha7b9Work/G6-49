@@ -1212,14 +1212,24 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
+              <FileName>Command.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Command.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Common\Command.h</FilePath>
             </File>
             <File>
-              <FileName>Command.cpp</FileName>
+              <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\Common\Command.cpp</FilePath>
+              <FilePath>..\common\Common.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Common.h</FilePath>
             </File>
             <File>
               <FileName>Message.cpp</FileName>

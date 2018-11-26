@@ -80,16 +80,16 @@ void AD9952::Manipulation::SetType(Chan::E ch, Type t)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetFrequency(Chan::E ch, float frequency)
+void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 {
-    setDDS.ad9952[ch].frequency = frequency;
+    setDDS.ad9952[ch].frequency = frequency.ToFloat();
     WriteRegister(ch, Register::FTW0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetPhase(Chan::E ch, float phase)
+void AD9952::SetPhase(Chan::E ch, ParamValue phase)
 {
-    setDDS.ad9952[ch].phase = phase;
+    setDDS.ad9952[ch].phase = phase.ToFloat();
     if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency)
     {
         WriteRegister(ch, Register::POW);
@@ -97,9 +97,9 @@ void AD9952::SetPhase(Chan::E ch, float phase)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::SetAmplitude(Chan::E ch, float amplitude)
+void AD9952::SetAmplitude(Chan::E ch, ParamValue amplitude)
 {
-    setDDS.ad9952[ch].amplitude = amplitude * 0.8f * (1.0f + CAL_AD9952_AMPLITUDE(ch) / 1000.0f);    // 0.8f в этой формуле оттуда, что схема устройства настроена на то, что 100% максимальной
+    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * 0.8f * (1.0f + CAL_AD9952_AMPLITUDE(ch) / 1000.0f);    // 0.8f в этой формуле оттуда, что схема устройства настроена на то, что 100% максимальной
                                                                                                     // амплитуды сигнала на выходе получаются при засылке 80% кода от максимального
     WriteRegister(ch, Register::ASF);
 }

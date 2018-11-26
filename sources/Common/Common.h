@@ -8,6 +8,8 @@ struct ParamValue
 
     explicit ParamValue(uint64 v) : value(v) {}
 
+    explicit ParamValue(float v);
+
     float ToFloat() const;
 
     int Sign() const;

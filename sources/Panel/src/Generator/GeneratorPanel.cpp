@@ -238,16 +238,18 @@ void Generator::SetParameter(ParameterValue *param)
         Command::RequestData
     };
 
-    float value = param->GetValueNano().ToFloat();
+    ParamValue value = param->GetValueNano();
 
+    /*
     if (param->Is(ParameterValue::Offset))
     {
         value -= 5.0f;
     }
+    */
 
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
-    Message message(8, (uint8)commands[param->value].val, (uint8)ch, value);
+    Message message(8, (uint8)commands[param->value].val, (uint8)ch, value.value);
 
     Interface::Send(&message);
 }

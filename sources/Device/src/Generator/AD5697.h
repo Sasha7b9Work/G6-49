@@ -13,7 +13,7 @@ public:
 
     static void Init();
 
-    static void SetOffset(Chan::E ch, float offset);
+    static void SetOffset(Chan::E ch, ParamValue offset);
 
     static void SetFreqLevel(float level);
 

@@ -19,15 +19,15 @@ public:
 
     static void SetWaveForm(Chan::E ch, Form form);
 
-    static void SetFrequency(Chan::E ch, float frequency);
+    static void SetFrequency(Chan::E ch, ParamValue frequency);
 
-    static void SetAmplitude(Chan::E ch, float amplitude);
+    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
 
-    static void SetOffset(Chan::E ch, float offset);
+    static void SetOffset(Chan::E ch, ParamValue offset);
 
-    static void SetDurationImpulse(Chan::E ch, float duration);
+    static void SetDurationImpulse(Chan::E ch, ParamValue duration);
 
-    static void SetPeriodImpulse(Chan::E ch, float period);
+    static void SetPeriodImpulse(Chan::E ch, ParamValue period);
 
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
@@ -41,11 +41,11 @@ public:
         /// Устанавливает число импульсов в пачке
         static void SetNumberImpules(uint n);
         /// Устанавливает период следования пачки
-        static void SetPeriodPacket(float period);
+        static void SetPeriodPacket(ParamValue period);
 
-        static float periodImpulse;
+        static ParamValue periodImpulse;
 
-        static float durationImpulse;
+        static ParamValue durationImpulse;
     };
 
     struct ModeWork

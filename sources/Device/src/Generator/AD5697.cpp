@@ -48,7 +48,7 @@ void AD5697::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static float CalculateOffset(Chan::E ch, float offset)
+static float CalculateOffset(Chan::E ch, ParamValue offset)
 {
     if (FPGA::CurrentMode(ch) != FPGA::ModeWork::Sine)
     {
@@ -59,23 +59,23 @@ static float CalculateOffset(Chan::E ch, float offset)
     float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
     float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095
 
-    if (offset > 0)
+    if (offset.ToFloat() > 0.0f)
     {
         float scale = (zero - pos) / 5.0f;
 
-        return pos + scale * (5.0f - offset);
+        return pos + scale * (5.0f - offset.ToFloat());
     }
-    else if(offset < 0)
+    else if(offset.ToFloat() < 0.0f)
     {
         float scale = (neg - zero) / 5.0f;
 
-        return neg - scale * (5.0f + offset);
+        return neg - scale * (5.0f + offset.ToFloat());
     }
     return zero;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD5697::SetOffset(Chan::E ch, float offset)
+void AD5697::SetOffset(Chan::E ch, ParamValue offset)
 {
     float code = CalculateOffset(ch, offset);
 
