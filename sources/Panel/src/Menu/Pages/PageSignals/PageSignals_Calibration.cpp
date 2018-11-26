@@ -34,9 +34,15 @@ static void SetParameter(Chan::E ch, KoeffCal::E koeff)
     {
         FrequencyMeter::LoadLevel();
     }
-    else if (koeff == KoeffCal::DDS_MAX || koeff == KoeffCal::DDS_MIN)
+    else if (koeff == KoeffCal::DDS_MAX)
     {
         Generator::SetAmplitude(ch, 10.0f);
+        Generator::SetOffset(ch, 5.0f);
+    }
+    else if (koeff == KoeffCal::DDS_MIN)
+    {
+        Generator::SetAmplitude(ch, 10.0f);
+        Generator::SetOffset(ch, -5.0f);
     }
     else if (koeff == KoeffCal::DDS_OFFSET)
     {
@@ -93,15 +99,19 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
             }
         }
 
-        Generator::SetOffset(ch, 0.0f);
-
         if (koeff == KoeffCal::DDS_OFFSET)
         {
             Generator::SetAmplitude(ch, 0.0f);
         }
-        else
+        else if(koeff == KoeffCal::DDS_MAX)
         {
             Generator::SetAmplitude(ch, 10.0f);
+            Generator::SetOffset(ch, 5.0f);
+        }
+        else if (koeff == KoeffCal::DDS_MIN)
+        {
+            Generator::SetAmplitude(ch, 10.0f);
+            Generator::SetOffset(ch, -5.0f);
         }
     }
 }

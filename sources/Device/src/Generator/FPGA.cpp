@@ -89,7 +89,7 @@ void FPGA::WriteMaxAmplitude(Chan::E ch)
 {
     // «аписать максимальный размах сигнала в регистры
 
-    uint64 data = ((uint64)(16383 + CAL_DDS_MAX(ch)) << 14) + (8191 + CAL_DDS_MIN(ch));
+    uint64 data = ((uint64)(16383) << 14) + (8191);
 
     RG regs[Chan::Number] = { RG::_3_RectA, RG::_4_RectB };
 
@@ -510,8 +510,8 @@ void FPGA::SetAmplitude(Chan::E ch, ParamValue ampl)
 
     amplitude[ch] = ampl.ToFloat();
 
-    uint nA = (uint)(amplitude[Chan::A] * 1023 / 10);
-    uint nB = (uint)(amplitude[Chan::B] * 1023 / 10);
+    uint nA = (uint)(amplitude[Chan::A] * ((1023 + CAL_DDS_MAX(Chan::A)) / 10));
+    uint nB = (uint)(amplitude[Chan::B] * ((1023 + CAL_DDS_MAX(Chan::B)) / 10));
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }
