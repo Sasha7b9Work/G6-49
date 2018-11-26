@@ -176,20 +176,24 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
 void FPGA::SetDurationImpulse(Chan::E ch, ParamValue duration)
 {
     PacketImpulse::durationImpulse = duration;
-    uint64 value = (uint64)(duration.ToFloat() / 10e-9f);
+
     RG reg = Chan(ch).IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
     if(Chan(ch).IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
     {
         reg = RG::_8_DurationImpulseB;
     }
+
+    uint64 value = duration.ToUINT64() / 10;
+
     WriteRegister(reg, value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::PacketImpulse::SetPeriodPacket(ParamValue period)
 {
-    uint64 n = (uint64)(period.ToFloat() / 10e-9f);
-    WriteRegister(RG::_5_PeriodImpulseA, n - 2);
+    uint64 value = period.ToUINT64() / 10 - 2;
+
+    WriteRegister(RG::_5_PeriodImpulseA, value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -205,13 +209,17 @@ void FPGA::SetPeriodImpulse(Chan::E ch, ParamValue period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
+
     PacketImpulse::periodImpulse = period;
-    uint64 value = (uint64)(period.ToFloat() / 10e-9f) - 2;
+
     RG reg = Chan(ch).IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
     if(Chan(ch).IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
     {
         reg = RG::_7_PeriodImpulseB;
     }
+
+    uint64 value = period.ToUINT64() / 10 - 2;
+
     WriteRegister(reg, value);
 }
 

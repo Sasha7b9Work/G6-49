@@ -104,7 +104,7 @@ void Generator::SetOffset(Chan::E ch, ParamValue offset)
     }
     else
     {
-        AD5697::SetOffset(ch, ParamValue(5.0f));
+        AD5697::SetOffset(ch, ParamValue(0.0f));
         FPGA::SetOffset(ch, offset);
     }
 }
