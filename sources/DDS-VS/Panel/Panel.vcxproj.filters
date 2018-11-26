@@ -306,6 +306,9 @@
     <ClCompile Include="..\..\Panel\src\Interface\HandlersPanel.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\Common.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -598,6 +601,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Interface\HandlersPanel.h">
       <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Common.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

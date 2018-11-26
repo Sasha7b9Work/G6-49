@@ -1647,6 +1647,16 @@
               <FilePath>..\Common\Command.h</FilePath>
             </File>
             <File>
+              <FileName>Common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Common.h</FilePath>
+            </File>
+            <File>
+              <FileName>Common.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Common.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Message.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\common\Message.cpp</FilePath>

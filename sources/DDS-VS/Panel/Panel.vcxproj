@@ -155,6 +155,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Command.cpp" />
+    <ClCompile Include="..\..\common\Common.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\common\Message.cpp" />
     <ClCompile Include="..\..\common\Transceiver.cpp" />
     <ClCompile Include="..\..\Panel\src\Display\Colors.cpp">
@@ -327,6 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
+    <ClInclude Include="..\..\common\Common.h" />
     <ClInclude Include="..\..\common\Message.h" />
     <ClInclude Include="..\..\common\Transceiver.h" />
     <ClInclude Include="..\..\common\Wave.h" />

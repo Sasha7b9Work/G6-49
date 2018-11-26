@@ -238,16 +238,8 @@ void Generator::SetParameter(ParameterValue *param)
         Command::RequestData
     };
 
-    /*
-    uint64_t value = param->GetValueNano();
+    float value = param->GetValueNano().ToFloat();
 
-    if(param->Is(ParameterValue::Offset))
-    {
-        value -= 5 * 1000 * 1000 * 1000;
-    }
-    */
-
-    float value = param->GetValue();
     if (param->Is(ParameterValue::Offset))
     {
         value -= 5.0f;

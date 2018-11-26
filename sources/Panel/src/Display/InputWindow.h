@@ -23,9 +23,7 @@ public:
 
     char *StringValue();
 
-    float Value();
-
-    uint64 ValueNano();
+    ParamValue ValueNano();
 
     void KeyLeft();
 

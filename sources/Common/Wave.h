@@ -2,6 +2,7 @@
 #include "defines.h"
 #include <cstring>
 #include <limits>
+#include "Common.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,9 +200,7 @@ public:
 
     float MaxValue() const { return max; };
 
-    uint64 GetValueNano() const;
-
-    float GetValue() const;
+    ParamValue GetValueNano() const;
 
     pString GetStringValue() const;
 

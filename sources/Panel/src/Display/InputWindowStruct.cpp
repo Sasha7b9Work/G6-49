@@ -174,7 +174,7 @@ bool StructValue::IncreaseDigit(int num)
         }
     }
 
-    if(Value() < param->MinValue() || Value() > param->MaxValue())
+    if(ValueNano().ToFloat() < param->MinValue() || ValueNano().ToFloat() > param->MaxValue())
     {
         *this = temp;
         return false;
@@ -206,7 +206,7 @@ bool StructValue::DecreaseDigit(int num)
         DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
     }
 
-    if(Value() < param->MinValue() || Value() > param->MaxValue())
+    if(ValueNano().ToFloat() < param->MinValue() || ValueNano().ToFloat() > param->MaxValue())
     {
         *this = temp;
         return false;
@@ -348,46 +348,39 @@ void StructValue::IncreaseOrder()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float StructValue::Value()
-{
-    return ValueNano() / 1e9f;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint64 StructValue::ValueNano()
+ParamValue StructValue::ValueNano()
 {
     uint64 beforeNS = ValueBeforeCommaInNano();     // Здесь число до запятой, в нано-единицах
     uint64 afterNS = ValueAfterCommaInNano();       // Здесь число после запятой, в нано-единицах
 
-    uint64 result = beforeNS + afterNS;             // Теперь здесь количество нано-единиц в предпоожении, что размерность - One
+    ParamValue result(beforeNS + afterNS);          // Теперь здесь количество нано-единиц в предпоожении, что размерность - One
 
     // Скорректируем значение в соответствии с реальной размерностью
 
     if (ORDER == Order::Milli)
     {
-        result /= 1000;
+        result.Divide(1000);
     }
     else if (ORDER == Order::Micro)
     {
-        result /= 1000 * 1000;
+        result.Divide(1000 * 1000);
     }
     else if (ORDER == Order::Nano)
     {
-        result /= 1000 * 1000 * 1000;
+        result.Divide(1000 * 1000 * 1000);
     }
     else if (ORDER == Order::Kilo)
     {
-        result *= 1000;
+        result.Multiplie(1000);
     }
     else if (ORDER == Order::Mega)
     {
-        result *= 1000 * 1000;
+        result.Multiplie(1000 * 1000);
     }
 
     if (SIGN == '-')
     {
-        //          fedcba9876543210
-        result |= 0x8000000000000000;           // Устанавливаем признак отрицательного числа
+        result.SetSign(-1);
     }
 
     return result;
