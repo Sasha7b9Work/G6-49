@@ -4,13 +4,17 @@
 
 struct ParamValue
 {
-    uint64 value;       // Значение параметра в единицах измерения "нано". Установленный в 
-
     explicit ParamValue(uint64 v) : value(v) {}
 
     explicit ParamValue(float v);
 
     float ToFloat() const;
+
+    void FromFloat(float v);
+
+    void FromUINT64(uint64 v) { value = v; }
+
+    uint64 ToUINT64() const { return value; }
 
     int Sign() const;
 
@@ -21,4 +25,8 @@ struct ParamValue
     void Multiplie(uint mul);
 
     void SetSign(int sign);
+
+private:
+
+    uint64 value;       // Значение параметра в единицах измерения "нано". Установленный в "1" старший бит означает, что число отрицательное
 };
