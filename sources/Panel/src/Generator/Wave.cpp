@@ -333,6 +333,13 @@ uint64 ParameterValue::GetValueNano() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float ParameterValue::GetValue() const
+{
+    StructValue input((ParameterValue *)this);
+    return input.Value();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::GetStringValue() const
 {
     StructValue input((ParameterValue *)this);

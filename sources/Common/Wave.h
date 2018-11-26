@@ -201,6 +201,8 @@ public:
 
     uint64 GetValueNano() const;
 
+    float GetValue() const;
+
     pString GetStringValue() const;
 
     pString Name() const;

@@ -238,11 +238,19 @@ void Generator::SetParameter(ParameterValue *param)
         Command::RequestData
     };
 
+    /*
     uint64_t value = param->GetValueNano();
 
     if(param->Is(ParameterValue::Offset))
     {
         value -= 5 * 1000 * 1000 * 1000;
+    }
+    */
+
+    float value = param->GetValue();
+    if (param->Is(ParameterValue::Offset))
+    {
+        value -= 5.0f;
     }
 
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
