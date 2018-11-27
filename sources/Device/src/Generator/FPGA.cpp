@@ -44,6 +44,9 @@ void FPGA::Init()
     CPU::WritePin(GeneratorWritePin::FPGA_A3_RG, false);
 
     Multiplexor::Init();
+
+    WriteMaxAmplitude(Chan::A);
+    WriteMaxAmplitude(Chan::B);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,8 +83,6 @@ void FPGA::SetModeMeander(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
-
-    WriteMaxAmplitude(ch);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -506,8 +507,6 @@ uint FPGA::OffsetToCode(float off)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetAmplitude(Chan::E ch, ParamValue ampl)
 {
-    WriteMaxAmplitude(ch);
-
     amplitude[ch] = ampl.ToFloat();
 
     uint nA = (uint)(amplitude[Chan::A] * ((1023 + CAL_DDS_MAX(Chan::A)) / 10));

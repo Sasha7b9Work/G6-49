@@ -105,13 +105,23 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
         }
         else if(koeff == KoeffCal::DDS_MAX)
         {
-            Generator::SetAmplitude(ch, 10.0f);
-            Generator::SetOffset(ch, 5.0f);
+            // 1. «аписать в RG::3 (RG::4) значени€, соответствующие максумуму
+            //
         }
         else if (koeff == KoeffCal::DDS_MIN)
         {
-            Generator::SetAmplitude(ch, 10.0f);
-            Generator::SetOffset(ch, -5.0f);
+            // 1. «аписать в RG::3 (RG::4) значени€, соответствующие минимуму
+        }
+    }
+    else
+    {
+        if (koeff == KoeffCal::DDS_MAX)
+        {
+            // 1. «аписать в RG::3 (RG::4) рабочие значени€
+        }
+        else if (koeff == KoeffCal::DDS_MIN)
+        {
+            // 1. «аписать в RG::3 (RG::4) рабочие значени€
         }
     }
 }

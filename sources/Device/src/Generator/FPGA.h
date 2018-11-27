@@ -104,7 +104,6 @@ private:
             Number
         } value;
         explicit RG(E v) : value(v) { };
-        operator uint8() const { return (uint8)value; };
     };
 
     struct RG0
@@ -163,8 +162,6 @@ private:
     static void SetModePackedImpulse(Chan::E ch);
 
     static void EmptyFunc(Chan ch);
-
-    static void CreateEnable();
     /// Заслать рассчитанные точки в плис
     static void SendData();
     /// Записать байт в ПЛИС
