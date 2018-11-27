@@ -201,7 +201,8 @@ void Generator::SetParameter(ParameterChoice *param)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetOffset(Chan::E ch, float offset)
 {
-    Message message(6, (uint8)Command::SetOffset, (uint8)ch, offset);
+    /// \todo √овнокод - запись параметра из двух мест
+    Message message(10, Command::SetOffset, ch, ParamValue(offset).ToUINT64());
 
     Interface::Send(&message);
 }
@@ -209,7 +210,8 @@ void Generator::SetOffset(Chan::E ch, float offset)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetAmplitude(Chan::E ch, float amplitude)
 {
-    Message message(6, (uint8)Command::SetAmplitude, (uint8)ch, amplitude);
+    /// \todo √овнокод - запись параметра из двух мест
+    Message message(10, Command::SetAmplitude, ch, ParamValue(amplitude).ToUINT64());
 
     Interface::Send(&message);
 }
@@ -247,7 +249,9 @@ void Generator::SetParameter(ParameterValue *param)
 
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
-    Message message(10, (uint8)commands[param->value].val, (uint8)ch, value.ToUINT64());
+    Command com = commands[param->value].val;
+
+    Message message(10, com, (uint8)ch, value.ToUINT64());
 
     Interface::Send(&message);
 }
