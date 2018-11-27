@@ -37,12 +37,10 @@ static void SetParameter(Chan::E ch, KoeffCal::E koeff)
     else if (koeff == KoeffCal::DDS_MAX)
     {
         Generator::SetAmplitude(ch, 10.0f);
-        Generator::SetOffset(ch, 5.0f);
     }
     else if (koeff == KoeffCal::DDS_MIN)
     {
-        Generator::SetAmplitude(ch, 10.0f);
-        Generator::SetOffset(ch, -5.0f);
+        Generator::SetAmplitude(ch, -10.0f);
     }
     else if (koeff == KoeffCal::DDS_OFFSET)
     {
@@ -86,6 +84,14 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
+#define MAX_VALUE   (((uint64)(16383) << 14) + 16383)
+#define WORK_VALUE  (((uint64)(16383) << 14) + 8191)
+
+    static const Register::E registers[Chan::Number] =
+    {
+        Register::FPGA_RG3_RectA, Register::FPGA_RG4_RectB
+    };
+
     if (enter)
     {
         for (int8 i = 0; i < WAVE(ch).NumberOfForms(); i++)
@@ -103,25 +109,20 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
         {
             Generator::SetAmplitude(ch, 0.0f);
         }
-        else if(koeff == KoeffCal::DDS_MAX)
+        else if(koeff == KoeffCal::DDS_MAX || koeff == KoeffCal::DDS_MIN)
         {
             // 1. «аписать в RG::3 (RG::4) значени€, соответствующие максумуму
-            //
-        }
-        else if (koeff == KoeffCal::DDS_MIN)
-        {
-            // 1. «аписать в RG::3 (RG::4) значени€, соответствующие минимуму
+
+            Generator::LoadRegister(registers[ch], MAX_VALUE);
         }
     }
     else
     {
-        if (koeff == KoeffCal::DDS_MAX)
+        if (koeff == KoeffCal::DDS_MAX || koeff == KoeffCal::DDS_MIN)
         {
             // 1. «аписать в RG::3 (RG::4) рабочие значени€
-        }
-        else if (koeff == KoeffCal::DDS_MIN)
-        {
-            // 1. «аписать в RG::3 (RG::4) рабочие значени€
+
+            Generator::LoadRegister(registers[ch], WORK_VALUE);
         }
     }
 }

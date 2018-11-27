@@ -92,7 +92,7 @@ void FPGA::WriteMaxAmplitude(Chan::E ch)
 
     uint64 data = ((uint64)(16383) << 14) + (8191);
 
-    RG::E regs[Chan::Number] = { RG::_3_RectA, RG::_4_RectB };
+    static const RG::E regs[Chan::Number] = { RG::_3_RectA, RG::_4_RectB };
 
     WriteRegister(regs[ch], data);
 }
