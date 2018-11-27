@@ -40,7 +40,7 @@ public:
 
     static void SetDebugMode(bool enable);
 
-    static void LoadRegister(Register reg, uint64 value);
+    static void LoadRegister(Register::E reg, uint64 value);
 
     static void LoadSettings();
 

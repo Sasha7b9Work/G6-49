@@ -40,7 +40,7 @@ void FPGA::Multiplexor::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Multiplexor::WriteRegister(Register reg, uint value)
+void FPGA::Multiplexor::WriteRegister(Register::E reg, uint value)
 {
     uint16 pinA0 = PIN_MX1_A0;
 

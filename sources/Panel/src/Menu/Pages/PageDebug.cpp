@@ -30,7 +30,7 @@ static Item emptyItem = {Item::Type::None};
 
 Page *PageDebug::pointer = (Page *)&pDebug;
 /// Регистр, в который будет производится занесение значения по нажатию кнопки ЗАСЛАТЬ
-Register currentRegister = Register::FreqMeterLevel;
+Register::E currentRegister = Register::FreqMeterLevel;
 /// Флаг показа окна ввода
 static bool showInputWindow = false;
 #define MAX_SIZE_BUFFER 14
@@ -85,9 +85,9 @@ static DescInput desc[Register::Number] =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Возвращает размер буфера для регистра i
-static int SizeBuffer(Register name = Register::Number);
+static int SizeBuffer(Register::E name = Register::Number);
 /// Возвращает тип ввода для регистра i
-static TypeInput TypeBuffer(Register name = Register::Number);
+static TypeInput TypeBuffer(Register::E name = Register::Number);
 /// Возращает true, если символ является корректным для данного типа ввода
 static bool AllowableSymbol(Control key);
 /// Выводит значение регистра i
@@ -175,7 +175,7 @@ static bool OnKey(Control key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int SizeBuffer(Register name)
+static int SizeBuffer(Register::E name)
 {
     name = (name == Register::Number) ? currentRegister : name;
 
@@ -183,7 +183,7 @@ static int SizeBuffer(Register name)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static TypeInput TypeBuffer(Register name)
+static TypeInput TypeBuffer(Register::E name)
 {
     name = (name == Register::Number) ? currentRegister : name;
 
@@ -379,7 +379,7 @@ static void DrawValue(int x, int y, uint8 i)
 
     Painter::SetColor(Color::FILL);
 
-    Register name((Register::E)i);
+    Register::E name((Register::E)i);
 
     TypeInput type = TypeBuffer(name);
 

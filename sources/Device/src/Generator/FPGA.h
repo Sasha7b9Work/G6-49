@@ -144,7 +144,7 @@ private:
         static void SetPin(uint16 pin);
         static void ResetPin(uint16 pin);
 
-        static void WriteRegister(Register reg, uint value);
+        static void WriteRegister(Register::E reg, uint value);
 
         static Form mode[Chan::Number];
     };

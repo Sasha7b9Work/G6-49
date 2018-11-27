@@ -40,7 +40,7 @@ void Generator::LoadStartMode(Chan::E ch, int mode)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::LoadRegister(Register reg, uint64 value)
+void Generator::LoadRegister(Register::E reg, uint64 value)
 {
     Message message(10, Command::WriteRegister, (uint8)reg, value);
 

@@ -271,11 +271,11 @@ void Handlers::GetKoeffCalibration(Message *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::WriteRegister(Message *msg)
 {
-    Register reg = (Register::E)msg->TakeByte();
+    Register::E reg = (Register::E)msg->TakeByte();
 
     uint64 value = msg->TakeDoubleWord();
 
-    switch (reg.value)
+    switch (reg)
     {
     case Register::OffsetA:
         AD5697::SetOffset(Chan::A, ParamValue((float)value));

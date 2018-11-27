@@ -140,8 +140,7 @@ struct Register
         FreqMeter_Filtr,
         Number
     } value;
-    Register(E v) : value(v) {};
-    operator uint8() const { return (uint8)value; };
+    explicit Register(E v) : value(v) {};
     pString Name() const;
 };
 
