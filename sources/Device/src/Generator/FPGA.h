@@ -103,7 +103,7 @@ private:
             _11_Start,
             Number
         } value;
-        RG(E v) : value(v) { };
+        explicit RG(E v) : value(v) { };
         operator uint8() const { return (uint8)value; };
     };
 
@@ -170,9 +170,9 @@ private:
     /// Записать байт в ПЛИС
     static void WriteByte(uint8 byte);
     /// Записать значение в регистр
-    static void WriteRegister(uint8 reg, uint64 value);
+    static void WriteRegister(RG::E reg, uint64 value);
     /// Установить на A0_RG...A3_RG адрес, соответсвующй регистру
-    static void WriteAddress(uint8 reg);
+    static void WriteAddress(RG::E reg);
     /// Запись управляющего регистра
     static void WriteControlRegister();
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС

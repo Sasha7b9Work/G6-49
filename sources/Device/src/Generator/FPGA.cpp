@@ -91,7 +91,7 @@ void FPGA::WriteMaxAmplitude(Chan::E ch)
 
     uint64 data = ((uint64)(16383) << 14) + (8191);
 
-    RG regs[Chan::Number] = { RG::_3_RectA, RG::_4_RectB };
+    RG::E regs[Chan::Number] = { RG::_3_RectA, RG::_4_RectB };
 
     WriteRegister(regs[ch], data);
 }
@@ -132,7 +132,7 @@ void FPGA::SetPolarity(Chan::E ch, uint8 polarity)
         data = (16383 << 14) + 8191;        // ќтрицательна€ пол€рность
     }
 
-    static const RG regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
+    static const RG::E regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
 
     WriteRegister(regs[ch], data);
 }
@@ -168,7 +168,7 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
             WriteControlRegister();
         }
         uint N = (uint)(1e8f / frequency.ToFloat() + 0.5f);
-        WriteRegister((uint8)(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB), N);
+        WriteRegister(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
     }
 }
 
@@ -177,7 +177,7 @@ void FPGA::SetDurationImpulse(Chan::E ch, ParamValue duration)
 {
     PacketImpulse::durationImpulse = duration;
 
-    RG reg = Chan(ch).IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
+    RG::E reg = Chan(ch).IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
     if(Chan(ch).IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = RG::_8_DurationImpulseB;
@@ -212,7 +212,7 @@ void FPGA::SetPeriodImpulse(Chan::E ch, ParamValue period)
 
     PacketImpulse::periodImpulse = period;
 
-    RG reg = Chan(ch).IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
+    RG::E reg = Chan(ch).IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
     if(Chan(ch).IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = RG::_7_PeriodImpulseB;
@@ -414,7 +414,7 @@ void FPGA::WriteByte(uint8 byte)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::WriteRegister(uint8 reg, uint64 value)
+void FPGA::WriteRegister(RG::E reg, uint64 value)
 {
     DEF_STRUCT(StructBits, int) numBits[RG::Number] =
     {
@@ -452,7 +452,7 @@ void FPGA::WriteRegister(uint8 reg, uint64 value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::WriteAddress(uint8 reg)
+void FPGA::WriteAddress(RG::E reg)
 {
     static const GeneratorWritePin pins[] = 
     {
