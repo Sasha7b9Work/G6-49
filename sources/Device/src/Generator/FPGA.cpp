@@ -2,6 +2,8 @@
 #ifndef WIN32
 #include "FPGA.h"
 #include "defines.h"
+#include "log.h"
+#include "structs.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
@@ -158,7 +160,7 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
     }
     else if (modeWork[ch] == ModeWork::DDS)
     {
-        uint64 N = (uint64)(frequency.ToFloat() * 11e3f);
+        uint64 N = (uint64)((frequency.ToFloat() * ((uint64)1 << 40)) / 1e8f);
         WriteRegister(RG::_1_Freq, N);
     }
     else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
