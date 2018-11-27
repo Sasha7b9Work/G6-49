@@ -65,16 +65,17 @@ public:
         explicit ModeWork(E v) : value(v) {};
     };
 
-    static struct ClockFrequency
+    struct ClockFrequency
     {
         enum E
         {
             _100MHz,
             _1MHz
         } value;
-        ClockFrequency(E v) : value(v) {};
-        operator uint8() const { return (uint8)value; };
-    } clock;
+        explicit ClockFrequency(E v) : value(v) {};
+    };
+
+    static ClockFrequency::E clock;
 
     static ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
 

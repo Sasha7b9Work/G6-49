@@ -23,7 +23,7 @@ FPGA::ModeWork::E       FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, F
 uint8                   FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
 float                   FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float                   FPGA::offset[Chan::Number] = {5.0f, 5.0f};
-FPGA::ClockFrequency    FPGA::clock = FPGA::ClockFrequency::_100MHz;
+FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
 uint64                  FPGA::registers[FPGA::RG::Number] = {0};
 StartMode               FPGA::startMode[Chan::Number] = {StartMode::Auto, StartMode::Auto};
 ParamValue              FPGA::PacketImpulse::periodImpulse((uint64)0);
