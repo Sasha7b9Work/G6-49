@@ -19,7 +19,7 @@
 #define MIN_VALUE (0)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::ModeWork          FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+FPGA::ModeWork::E       FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
 uint8                   FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
 float                   FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float                   FPGA::offset[Chan::Number] = {5.0f, 5.0f};
@@ -178,7 +178,7 @@ void FPGA::SetDurationImpulse(Chan::E ch, ParamValue duration)
     PacketImpulse::durationImpulse = duration;
 
     RG reg = Chan(ch).IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
-    if(Chan(ch).IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
+    if(Chan(ch).IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = RG::_8_DurationImpulseB;
     }
@@ -213,7 +213,7 @@ void FPGA::SetPeriodImpulse(Chan::E ch, ParamValue period)
     PacketImpulse::periodImpulse = period;
 
     RG reg = Chan(ch).IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
-    if(Chan(ch).IsA() && modeWork[Chan::A].Is(ModeWork::PackedImpulse))
+    if(Chan(ch).IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = RG::_7_PeriodImpulseB;
     }
@@ -237,7 +237,7 @@ void FPGA::WriteControlRegister()
 
     Bit::Set(data, RG0::_0_WriteData);                    // В нулевом бите 0 записываем только для записи данных в память
 
-    if(modeWork[Chan::A].Is(ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
+    if((modeWork[Chan::A] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
     {
         switch(AD9952::Manipulation::GetType(Chan::A))
         {
@@ -250,7 +250,7 @@ void FPGA::WriteControlRegister()
         }
     }
 
-    if (modeWork[Chan::B].Is(ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::B))
+    if ((modeWork[Chan::B] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::B))
     {
         switch (AD9952::Manipulation::GetType(Chan::B))
         {
@@ -263,7 +263,7 @@ void FPGA::WriteControlRegister()
         }
     }
 
-    switch(modeWork[Chan::A])
+    switch((uint8)modeWork[Chan::A])
     {
         case ModeWork::Meander:     
             Bit::Set(data, RG0::_8_MeanderA);
@@ -274,7 +274,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    switch(modeWork[Chan::B])
+    switch((uint8)modeWork[Chan::B])
     {
         case ModeWork::Meander:   
             Bit::Set(data, RG0::_9_MeanderB);
@@ -302,10 +302,10 @@ void FPGA::WriteControlRegister()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint16 FPGA::SetBitsStartMode(uint16 data)
 {
-    ModeWork mode = modeWork[Chan::A];
+    ModeWork::E mode = modeWork[Chan::A];
     StartMode start = startMode[Chan::A];
 
-    if(mode.Is(ModeWork::Impulse) || mode.Is(ModeWork::PackedImpulse))
+    if((mode == ModeWork::Impulse) || (mode == ModeWork::PackedImpulse))
     {
         if(start.Is(StartMode::Single))
         {
@@ -313,7 +313,7 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
         }
     }
 
-    if(mode.Is(ModeWork::DDS))
+    if(mode == ModeWork::DDS)
     {
         if(start.Is(StartMode::ComparatorA))
         {
@@ -333,7 +333,7 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
     mode = modeWork[Chan::B];
     start = startMode[Chan::B];
 
-    if(mode.Is(ModeWork::Impulse) || mode.Is(ModeWork::PackedImpulse))
+    if((mode == ModeWork::Impulse) || (mode == ModeWork::PackedImpulse))
     {
         if(start.Is(StartMode::Single))
         {
@@ -341,7 +341,7 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
         }
     }
 
-    if (mode.Is(ModeWork::DDS))
+    if (mode == ModeWork::DDS)
     {
         if (start.Is(StartMode::ComparatorA))
         {

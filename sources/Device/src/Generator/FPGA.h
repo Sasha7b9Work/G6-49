@@ -62,9 +62,7 @@ public:
             Sine,
             Number
         } value;
-        ModeWork(E v) : value(v) {};
-        operator uint8() const { return(uint8)value; };
-        bool Is(ModeWork mode) { return mode.value == value; };
+        explicit ModeWork(E v) : value(v) {};
     };
 
     static struct ClockFrequency
@@ -78,7 +76,7 @@ public:
         operator uint8() const { return (uint8)value; };
     } clock;
 
-    static ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch].value; }
+    static ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
 
 private:
 
@@ -189,7 +187,7 @@ private:
     /// Режим запуска
     static StartMode startMode[Chan::Number];
     /// Режим работы ПЛИС
-    static ModeWork modeWork[Chan::Number];
+    static ModeWork::E modeWork[Chan::Number];
     /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
     /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
     static uint8 dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
