@@ -30,9 +30,6 @@ public:
                 OSK,    ///< Манипуляция импульсами со сглаженными фронтами
                 FPGA    ///< Манипуляция прямоугольными импульсами
             } value;
-            Type(uint8 v) : value((E)v) {};
-            operator uint8() const { return (uint8)value; };
-            bool Is(E v) const { return value == v; };
         };
         /// Установить/отменить модулирование синусоиды сигналом "пилы"
         static void SetEnabled(Chan::E ch, bool enable);
