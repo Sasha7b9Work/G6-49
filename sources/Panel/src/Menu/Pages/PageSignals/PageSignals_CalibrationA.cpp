@@ -138,7 +138,7 @@ DEF_GOVERNOR( gMaxDDS,                                                          
     "DDS +5В", "DDS +5V",
     "Установка минимального выходного уровня формирователя произвольных сигналов",
     "Setting the minimum output level shaper arbitrary signals",
-    CAL_DDS_MAX(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
+    CAL_DDS_MAX(Chan::A), -1000, 0, pageCalibrationA, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ DEF_GOVERNOR( gTrigLev,                                                         
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_8( pageCalibrationA,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A ---
+DEF_PAGE_7( pageCalibrationA,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A ---
     "КАЛИБРОВКА A", "CALIBRATION A",
     "", "",
     &gPositiveAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - AD9952 +5В
@@ -165,7 +165,7 @@ DEF_PAGE_8( pageCalibrationA,                                                   
     &gNegativeAD9952,       ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - AD9952 -5В
     &gAmplitudeAD9952,      ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - AD9952 размах
     &gOffsetDDS,            ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS 0В
-    &gMinDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS -5В
+    //&gMinDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS -5В
     &gMaxDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS +5В
     &gTrigLev,              ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА А - Ур-нь синхр
     Page::Settings_CalibrationA, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage

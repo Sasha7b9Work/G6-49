@@ -84,7 +84,7 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
-#define MAX_VALUE   (((uint64)(16383) << 14) + 16383)
+#define MAX_VALUE   (((uint64)(8191) << 14) + 8191)
 #define WORK_VALUE  (((uint64)(16383) << 14) + 8191)
 
     static const Register::E registers[Chan::Number] =
