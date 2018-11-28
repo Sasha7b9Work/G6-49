@@ -31,8 +31,9 @@ static SPI_HandleTypeDef hSPI3 =
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
 };
 
-bool                       AD9952::Manipulation::enabled[Chan::Number] = {false, false};
-AD9952::Manipulation::Type AD9952::Manipulation::type[Chan::Number] = {AD9952::Manipulation::Type::OSK, AD9952::Manipulation::Type::OSK};
+bool                            AD9952::Manipulation::enabled[Chan::Number] = {false, false};
+AD9952::Manipulation::Type::E   AD9952::Manipulation::type[Chan::Number] = {AD9952::Manipulation::Type::OSK, AD9952::Manipulation::Type::OSK};
+AD9952::ClockFrequency::E       AD9952::clock = AD9952::ClockFrequency::_100MHz;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +74,7 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void AD9952::Manipulation::SetType(Chan::E ch, Type t)
+void AD9952::Manipulation::SetType(Chan::E ch, Type::E t)
 {
     Manipulation::type[ch] = t;
     FPGA::SetWaveForm(ch, Form::Sine);
@@ -131,7 +132,7 @@ void AD9952::WriteCFR1(Chan::E ch)
     }
     Bit::Set(value, 9);       // ќднонаправленный режим
     Bit::Set(value, 13);
-    if(Manipulation::enabled[ch] && Manipulation::type[ch].Is(Manipulation::Type::OSK))
+    if(Manipulation::enabled[ch] && (Manipulation::type[ch] == Manipulation::Type::OSK))
     {
         Bit::Set(value, 24);  // ”станавливаем режим манипул€ции
     }

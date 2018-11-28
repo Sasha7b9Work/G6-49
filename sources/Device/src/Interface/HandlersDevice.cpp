@@ -228,7 +228,7 @@ void Handlers::SetManipulationMode(Message *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
-    AD9952::Manipulation::SetType(ch, msg->TakeByte());
+    AD9952::Manipulation::SetType(ch, (AD9952::Manipulation::Type::E)msg->TakeByte());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

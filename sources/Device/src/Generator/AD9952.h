@@ -37,12 +37,12 @@ public:
         /// ”становить/отменить модулирование синусоиды сигналом "пилы"
         static void SetEnabled(Chan::E ch, bool enable);
         static bool IsEnabled(Chan::E ch) { return enabled[ch]; };
-        static void SetType(Chan::E ch, Type type);
-        static Type GetType(Chan::E ch) { return type[ch]; };
+        static void SetType(Chan::E ch, Type::E type);
+        static Type::E GetType(Chan::E ch) { return type[ch]; };
     private:
         /// True означает, что манипул€ци€ включена
         static bool enabled[Chan::Number];
-        static Type type[Chan::Number];
+        static Type::E type[Chan::Number];
     };
 
 private:
@@ -74,4 +74,16 @@ private:
     static void WriteASF(Chan::E ch);
     static void WriteFTW0(Chan::E ch);
     static void WritePOW(Chan::E ch);
+
+    struct ClockFrequency
+    {
+        enum E
+        {
+            _100MHz,
+            _1MHz
+        } value;
+        explicit ClockFrequency(E v) : value(v) {};
+    };
+
+    static ClockFrequency::E clock;
 };
