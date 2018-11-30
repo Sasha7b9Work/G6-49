@@ -179,7 +179,7 @@ private:
 
     static uint8 RegisterForDuration(Chan ch);
     /// Преобразует смещение в прямой код, пригодный для записи в альтеру
-    static uint OffsetToCode(float offset);
+    static uint OffsetToCode(Chan::E ch);
     /// Установить биты, соответствующие режиму запуска
     static uint16 SetBitsStartMode(uint16 data);
     /// Режим запуска

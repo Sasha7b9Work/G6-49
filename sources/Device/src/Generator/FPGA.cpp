@@ -497,11 +497,15 @@ void FPGA::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POI
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint FPGA::OffsetToCode(float off)
+uint FPGA::OffsetToCode(Chan::E ch)
 {
+    float off = offset[ch];
+
     uint max = 0x1fff;
 
-    int code = ~((int)(off / 5.0f * max)) + 1;
+    float k = 1.0f + CAL_DDS_MAX(ch) / 1023.0f;
+
+    int code = ~((int)(off / 5.0f * max * k)) + 1;
 
     return (uint)(code & 0x3fff);
 }
@@ -511,8 +515,8 @@ void FPGA::SetAmplitude(Chan::E ch, ParamValue ampl)
 {
     amplitude[ch] = ampl.ToFloat();
 
-    uint nA = (uint)(amplitude[Chan::A] * ((1023 + CAL_DDS_MAX(Chan::A)) / 10));
-    uint nB = (uint)(amplitude[Chan::B] * ((1023 + CAL_DDS_MAX(Chan::B)) / 10));
+    uint nA = (uint)((amplitude[Chan::A] * (1023 + CAL_DDS_MAX(Chan::A))) / 10);
+    uint nB = (uint)((amplitude[Chan::B] * (1023 + CAL_DDS_MAX(Chan::B))) / 10);
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }
@@ -522,8 +526,8 @@ void FPGA::SetOffset(Chan::E ch, ParamValue off)
 {
     offset[ch] = off.ToFloat();
 
-    uint nA = OffsetToCode(offset[Chan::A]);
-    uint nB = OffsetToCode(offset[Chan::B]);
+    uint nA = OffsetToCode(ch);
+    uint nB = OffsetToCode(ch);
     
     WriteRegister(RG::_10_Offset, nA + (nB << 14));
 }
