@@ -17,6 +17,8 @@ friend class Handlers;
 public:
     static void Init();
 
+
+
     static void SetWaveForm(Chan::E ch, Form form);
 
     static void SetFrequency(Chan::E ch, ParamValue frequency);
@@ -74,6 +76,8 @@ public:
         } value;
         explicit ClockFrequency(E v) : value(v) {};
     };
+
+    static void SetClockAD992(ClockFrequency::E clock);
 
     static ClockFrequency::E clock;
 

@@ -83,8 +83,11 @@ void AD9952::Manipulation::SetType(Chan::E ch, Type::E t)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 {
+    float freq = frequency.ToFloat();
     setDDS.ad9952[ch].frequency = frequency.ToFloat();
     WriteRegister(ch, Register::FTW0);
+
+    FPGA::SetClockAD992(freq < 0.1f ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
