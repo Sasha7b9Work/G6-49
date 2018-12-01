@@ -84,10 +84,11 @@ void AD9952::Manipulation::SetType(Chan::E ch, Type::E t)
 void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 {
     float freq = frequency.ToFloat();
-    setDDS.ad9952[ch].frequency = frequency.ToFloat();
-    WriteRegister(ch, Register::FTW0);
 
     FPGA::SetClockAD992(freq < 0.1f ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
+
+    setDDS.ad9952[ch].frequency = frequency.ToFloat();
+    WriteRegister(ch, Register::FTW0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +173,7 @@ void AD9952::WriteASF(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    float FTWf = (setDDS.ad9952[ch].frequency / 1e8f) * powf(2, 32);
+    float FTWf = (setDDS.ad9952[ch].frequency / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8f : 1e6f)) * powf(2, 32);
 
     WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5f));
 }
