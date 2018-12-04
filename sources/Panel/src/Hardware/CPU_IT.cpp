@@ -14,7 +14,7 @@
 
 
 #define TRACE_HANDLER                               \
-    LOG_FUNC_ENTER;                                 \
+    LOG_FUNC_ENTER();                               \
     LOG_WRITE("%s : %d", Debug::file, Debug::line); \
     Painter::SetColor(Color::FILL);                 \
     Console::Draw();                                \

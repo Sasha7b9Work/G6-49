@@ -5,7 +5,7 @@
 #define LOG_WRITE_FINALIZE(...) Log::Write(TypeTrace::Info, __VA_ARGS__); Log::Finalize()
 #define LOG_ERROR(...)          Log::Write(TypeTrace::Error, __VA_ARGS__)
 #define LOG_ERROR_TRACE(...)    Log::Trace(TypeTrace::Error, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
-#define LOG_FUNC_ENTER          Log::Write(TypeTrace::Info, "%s enter", __FUNCTION__);
+#define LOG_FUNC_ENTER()        Log::Write(TypeTrace::Info, "%s enter", __FUNCTION__);
 
 //#define LOG_WRITE_TRACE(...)    Log::Trace(TypeTrace::Info, __MODULE__, __FUNCTION__, __LINE__, __VA_ARGS__)
 // Когда нужен вспомогательный буфер для преобразования числа в строку, можно пользоваться этой функцией
@@ -20,7 +20,7 @@
 #define LOG_WRITE(...)          Log::Write(TypeTrace::Info, __VA_ARGS__)
 #define LOG_TRACE
 #define LOG_ERROR(...)          Log::Write(TypeTrace::Error, __VA_ARGS__)
-#define LOG_FUNC_ENTER
+#define LOG_FUNC_ENTER()
 #define LOG_WRITE_FINALIZE(...)
 #else
 #define LOG_WRITE(...)

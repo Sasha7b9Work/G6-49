@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "FDrivePanel.h"
 #include "Items.h"
 #include "Interface/InterfacePanel.h"
@@ -91,6 +92,6 @@ pString Items::GetNameItem(int i)
     {
         SendRequestForNameFile(i);
     }
-
+    
     return 0;
 }

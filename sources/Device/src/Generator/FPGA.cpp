@@ -493,7 +493,7 @@ void FPGA::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POI
     {
         uint16 c = (uint16)(fabs(d[i]) * max);
 
-        if(Sign(d[i]) == -1)
+        if (Sign(d[i]) == -1)
         {
             Bit::Set(c, 13);
         }
