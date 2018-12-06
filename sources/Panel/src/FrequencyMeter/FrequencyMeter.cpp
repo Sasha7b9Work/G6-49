@@ -38,8 +38,9 @@ void FrequencyMeter::Draw()
         static const struct StrOut
         {
             int forFract;
-            const char * const suffix;
-        } strs[5][5] =
+            const char * suffix;
+        }
+        strs[5][5] =
         {
             {{0, "мс"}, {1, "мс"}, {2, "мс"}, {0, "мкс"}, {1, "мкс"}},
             {{1, "мс"}, {2, "мс"}, {3, "мс"}, {1, "мкс"}, {2, "мкс"}},
