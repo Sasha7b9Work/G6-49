@@ -2232,6 +2232,16 @@
               <FilePath>.\src\Utils\NumberBuffer.h</FilePath>
             </File>
             <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Queue.h</FilePath>
+            </File>
+            <File>
               <FileName>String.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\String.cpp</FilePath>

@@ -2,14 +2,15 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+template <typename T>
 class Queue
 {
 public:
     Queue();
 
-    Message *Front();
+    T *Front();
 
-    bool Push(Message *message);
+    bool Push(T *message);
 
     void Pop();
 
@@ -22,5 +23,5 @@ private:
 
     static const uint SIZE = 100U;
 
-    Message *storage[SIZE];
+    T *storage[SIZE];
 };
