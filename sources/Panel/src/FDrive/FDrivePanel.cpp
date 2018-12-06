@@ -60,7 +60,7 @@ void FDrive::Draw()
 
     for (int i = 0; i < 20; i++)
     {
-        Text::DrawText(x + 5, y + 5 + i * 10, Items::GetNameItem(i));
+        Text::DrawText(x + 5, y + 5 + i * 10, Items::GetNameItem(i).CString());
     }
 
     Text::SetUpperCase(true);

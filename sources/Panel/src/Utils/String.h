@@ -6,9 +6,8 @@
 class String
 {
 public:
-    explicit String();
              String(const String &);
-    explicit String(char symbol);
+    explicit String(char symbol = '\0');
     explicit String(const char *format, ...);
     ~String();
 

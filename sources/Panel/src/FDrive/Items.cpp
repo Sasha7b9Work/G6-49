@@ -82,16 +82,16 @@ static void SendRequestForNameFile(int number)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Items::GetNameItem(int i)
+String Items::GetNameItem(int i)
 {
     if (names[i].name[0])
     {
-        return names[i].name;
+        return String(names[i].name);
     }
     else if (i < numFiles)
     {
         SendRequestForNameFile(i);
     }
     
-    return 0;
+    return String();
 }
