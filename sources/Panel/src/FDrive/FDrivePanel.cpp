@@ -62,8 +62,6 @@ bool FDrive::Handler::Processing(Message *msg)
 
     Command::E command = (Command::E)msg->TakeByte();
 
-    //LOG_WRITE("%s", Command(command).Trace(0));
-
     if (command == Command::FDrive_Mount)
     {
         isMounted = (msg->TakeByte() != 0);
@@ -84,8 +82,6 @@ bool FDrive::Handler::Processing(Message *msg)
     }
     else if (command == Command::FDrive_RequestFileSize)
     {
-        LOG_WRITE("Получен размер файла");
-
         return Items::Handler::Processing(msg);
     }
 

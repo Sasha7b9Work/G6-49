@@ -9,12 +9,14 @@ public:
     explicit Message(uint size, uint8);
     explicit Message(uint size, uint8, uint8);
     explicit Message(uint size, uint8, uint);
+    explicit Message(uint size, uint8, uint8, uint);
     explicit Message(uint size, uint8, uint, uint);
     explicit Message(uint size, uint8, uint8, uint8);
     explicit Message(uint size, uint8, uint8, float);
+    explicit Message(uint size, uint8, uint8, uint64);
     explicit Message(uint8, char*);
     explicit Message(uint8, uint8, char *);
-    explicit Message(uint size, uint8, uint8, uint64);
+
 
     ~Message();
 
@@ -26,6 +28,7 @@ public:
     void Create(uint size, uint8, uint8, float);
     void Create(uint size, uint8, uint8, uint8, uint16);
     void Create(uint8, uint8, char *string);
+    void Create(uint size, uint8 com, uint8 d0, uint d1);
     /// —брасывает указатель извлечЄнной информации.
     void ResetPointer() { taken = 0; };
 

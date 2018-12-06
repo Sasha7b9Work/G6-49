@@ -91,7 +91,6 @@ bool Items::Handler::Processing(Message *msg)
     }
     else if (command == Command::FDrive_RequestFileSize)
     {
-        LOG_WRITE("Получен размер файла");
         int num = msg->TakeByte();
         names[num].size = (int)msg->TakeWord();
         return true;
@@ -182,7 +181,7 @@ static void DrawItem(int i, int x, int y, bool highlight)
     Color color = Color::FILL;
     if (highlight)
     {
-        Painter::FillRegion(x - 1, y, 200, 9, color);
+        Painter::FillRegion(x - 1, y, 230, 9, color);
         color = Color::BACK;
     }
     GetNameItem(i).Draw(x, y, color);

@@ -333,7 +333,7 @@ void FDrive::Handler::Processing(Message *msg)
 
             uint size = GetFileSize(fullPath.CString());
 
-            Message *answer = new Message(Command::FDrive_RequestFileSize, (uint8)numFile, size);
+            Message *answer = new Message(6, Command::FDrive_RequestFileSize, (uint8)numFile, size);
 
             Interface::AddMessageForTransmit(answer);
         }
