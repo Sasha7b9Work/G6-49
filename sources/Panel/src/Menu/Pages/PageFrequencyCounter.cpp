@@ -253,6 +253,11 @@ DEF_PAGE_12(pFrequencyCounter,                                                  
     Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4310)       // cast truncates constant value
+#endif
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageFrequencyCounter::WriteRegisterRG9()
 {
@@ -317,3 +322,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
     Generator::LoadRegister(Register::FPGA_RG9_FreqMeter, data);
     FrequencyMeter::SetInactive();
 }
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif
