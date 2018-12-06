@@ -35,12 +35,10 @@ struct StructFile
 {
     char name[50];
     int size;
-    StructFile() : size(-1)
-    {
-        name[0] = 0;
-    }
+    StructFile() : size(-1) { name[0] = 0; }
+    void Clear() { name[0] = 0; size = -1; }
 }
-names[NUM_ITEMS];
+files[NUM_ITEMS];
 
 /// Текущий файл
 static int curItem = 0;
@@ -55,7 +53,7 @@ void Items::Init()
     requestIsSend = false;
     for (int i = 0; i < NUM_ITEMS; i++)
     {
-        names[i].name[0] = 0;
+        files[i].Clear();
     }
 }
 
@@ -86,13 +84,13 @@ bool Items::Handler::Processing(Message *msg)
     else if (command == Command::FDrive_RequestFile)
     {
         int num = msg->TakeByte();
-        std::strcpy(names[num].name, msg->String(2));
+        std::strcpy(files[num].name, msg->String(2));
         return true;
     }
     else if (command == Command::FDrive_RequestFileSize)
     {
         int num = msg->TakeByte();
-        names[num].size = (int)msg->TakeWord();
+        files[num].size = (int)msg->TakeWord();
         return true;
     }
 
@@ -118,23 +116,23 @@ static void SendRequestForSizeFile(int number)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String GetNameItem(int i)
 {
-    if (names[i].name[0] == 0)
+    if (files[i].name[0] == 0)
     {
         SendRequestForNameFile(i);
     }
     
-    return String(names[i].name);
+    return String(files[i].name);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int GetSizeItem(int i)
 {
-    if (names[i].size == -1)
+    if (files[i].size == -1)
     {
         SendRequestForSizeFile(i);
     }
 
-    return names[i].size;
+    return files[i].size;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
