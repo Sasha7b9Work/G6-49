@@ -14,7 +14,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define DEF_BUTTON(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, funcPress, funcDraw)                                         \
-static const ButtonBase name = { Item::Type::Button, 0, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},       \
+const ButtonBase name = { Item::Type::Button, 0, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},       \
     funcPress, funcDraw };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ const PageBase name = { Item::Type::Page, 4, false, namePage, (const PageBase *)
 #define DEF_PAGE_4_VAR(name, titleRU, titleEN, hintRU, hintEN,                                                                              \
     item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)                                               \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4};                                             \
-PageBase name = { Item::Type::Page, 4, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                             \
+const PageBase name = { Item::Type::Page, 4, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                             \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_5(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
