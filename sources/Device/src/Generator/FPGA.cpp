@@ -479,9 +479,9 @@ void FPGA::WriteAddress(RG::E reg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 FPGA::RegisterForDuration(Chan ch)
+uint8 FPGA::RegisterForDuration(Chan::E ch)
 {
-    return ch == Chan::A ? (uint8)RG::_6_DurationImpulseA : (uint8)RG::_8_DurationImpulseB;
+    return Chan(ch).IsA() ? (uint8)RG::_6_DurationImpulseA : (uint8)RG::_8_DurationImpulseB;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -35,7 +35,7 @@ extern const PageBase pInput;
 #define CHANNEL_ENABLED(ch)     ((FLAG_1 >> (ch + BIT_CHAN_A)) & 0x01)
 #define SWITCH_CHANNEL_A        (FLAG_1 ^= (1 << (BIT_CHAN_A)))
 #define SWITCH_CHANNEL_B        (FLAG_1 ^= (1 << (BIT_CHAN_B)))
-#define LANG                    ((Language)BIT_FL1(BIT_LANG))
+#define LANG                    ((Language::E)BIT_FL1(BIT_LANG))
 #define LANG_RU                 (LANG == Language::RU)
 #define CURRENT_CHANNEL         ((Chan::E)BIT_FL1(BIT_CHANNEL))
 #define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == Chan::A)

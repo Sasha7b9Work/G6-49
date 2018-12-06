@@ -265,7 +265,7 @@ public:
 
     Form(E v, ParameterBase *param[], Wave *w);
     /// ¬озвращает человеческое название формы сигнала
-    pString Name(Language lang) const;
+    pString Name(Language::E lang) const;
     /// ¬озвращает ссылку на текущий параметр
     ParameterBase *CurrentParameter();
     /// ¬озвращает количество доступных параметров

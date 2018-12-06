@@ -16,13 +16,6 @@ struct Language
         EN,
         Number
     } value;
-    Language(uint v = 0) : value((E)v)
-    {
-    };
-    operator uint8() const
-    {
-        return (uint8)value;
-    };
 };
 
 struct Chan
@@ -34,7 +27,6 @@ struct Chan
         Number
     } value;
     explicit Chan(E v) : value(v) {};
-    operator uint8() const { return (uint8)value; };
     bool IsA() const { return value == A; };
 };
 

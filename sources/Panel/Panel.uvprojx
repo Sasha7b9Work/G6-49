@@ -2007,6 +2007,16 @@
           <GroupName>Menu</GroupName>
           <Files>
             <File>
+              <FileName>Hint.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Hint.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Hint.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Hint.h</FilePath>
+            </File>
+            <File>
               <FileName>Menu.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Menu\Menu.h</FilePath>
@@ -2040,16 +2050,6 @@
               <FileName>MenuItemsLogic.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\MenuItemsLogic.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Hint.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Hint.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Hint.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Hint.h</FilePath>
             </File>
           </Files>
         </Group>

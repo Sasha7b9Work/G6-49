@@ -82,11 +82,11 @@ void Generator::SetFormWave(Wave *w)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Chan ch, Form::E form)
+void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
     /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
-    Message message(3, Command::SetFormWave, ch, (uint8)form);
+    Message message(3, Command::SetFormWave, (uint8)ch, (uint8)form);
 
     Interface::Send(&message);
 }

@@ -142,7 +142,7 @@ private:
         /// —коммутировать мультиплексор в соответствии с формой устанавливаемого сигнала на данном канале
         static void SetMode(Chan::E ch, Form form);
 
-        static Form GetMode(Chan ch);
+        static Form GetMode(Chan::E ch);
 
     private:
         static void SetPin(uint16 pin);
@@ -181,7 +181,7 @@ private:
     /// «аписывает коды, соответствующие максимальному и минимальному значению
     static void WriteMaxAmplitude(Chan::E ch);
 
-    static uint8 RegisterForDuration(Chan ch);
+    static uint8 RegisterForDuration(Chan::E ch);
     /// ѕреобразует смещение в пр€мой код, пригодный дл€ записи в альтеру
     static uint OffsetToCode(Chan::E ch);
     /// ”становить биты, соответствующие режиму запуска
