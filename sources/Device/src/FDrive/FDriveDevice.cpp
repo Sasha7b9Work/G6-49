@@ -118,7 +118,7 @@ void FDrive::Update()
     {
         if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
         {
-            Message *message = new Message(Command::FDrive_Mount, (uint8)1);
+            Message *message = new Message(2, Command::FDrive_Mount, (uint8)1);
             Interface::AddMessageForTransmit(message);
         }
 
@@ -129,7 +129,7 @@ void FDrive::Update()
     {
         f_mount(0, "", 0);
 
-        Message *message = new Message(Command::FDrive_Mount, (uint8)0);
+        Message *message = new Message(2, Command::FDrive_Mount, (uint8)0);
         Interface::AddMessageForTransmit(message);
 
         state = State::Disconnected;
