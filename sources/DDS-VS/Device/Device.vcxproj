@@ -245,6 +245,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\Queue.h" />
+    <ClInclude Include="..\..\Device\src\Utils\String.h" />
     <ClInclude Include="..\..\Device\src\Utils\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -362,6 +363,7 @@
     <ClCompile Include="..\..\Device\src\Utils\Queue.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\String.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\StringUtils.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>

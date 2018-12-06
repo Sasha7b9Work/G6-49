@@ -91,6 +91,7 @@ bool Items::Handler::Processing(Message *msg)
     }
     else if (command == Command::FDrive_RequestFileSize)
     {
+        LOG_WRITE("Получен размер файла");
         int num = msg->TakeByte();
         names[num].size = (int)msg->TakeWord();
         return true;

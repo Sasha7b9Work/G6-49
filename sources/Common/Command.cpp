@@ -162,6 +162,8 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case GetKoeffCalibration:
             break;
+        case FDrive_RequestFileSize:
+            break;
         case Number:
             break;
     }

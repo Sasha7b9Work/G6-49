@@ -29,12 +29,13 @@
 
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
+#include "Utils/String.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Queue.h"
 
 #include <limits>
 #include <math.h>
-#include <stdarg.h>
+#include <cstdarg>
 #include <cstring>
 #include <cstdlib>
 

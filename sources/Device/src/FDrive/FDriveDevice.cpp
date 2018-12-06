@@ -6,6 +6,7 @@
 #include "FDriveDevice.h"
 #include "Interface/InterfaceDevice.h"
 #include "Hardware/CPU.h"
+#include "Utils/String.h"
 #include "usbh_diskio.h"
 #include "usbh_conf.h"
 #endif
@@ -117,7 +118,7 @@ void FDrive::Update()
     {
         if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
         {
-            Message *message = new Message(2, Command::FDrive_Mount, (uint8)1);
+            Message *message = new Message(Command::FDrive_Mount, (uint8)1);
             Interface::AddMessageForTransmit(message);
         }
 
@@ -128,7 +129,7 @@ void FDrive::Update()
     {
         f_mount(0, "", 0);
 
-        Message *message = new Message(2, Command::FDrive_Mount, (uint8)0);
+        Message *message = new Message(Command::FDrive_Mount, (uint8)0);
         Interface::AddMessageForTransmit(message);
 
         state = State::Disconnected;
@@ -180,6 +181,20 @@ static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Struc
     return false;
 }
 */
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint GetFileSize(char *fullPath)
+{
+    FIL fp;
+    if (f_open(&fp, fullPath, FA_READ) == FR_OK)
+    {
+        uint size = f_size(&fp);
+        f_close(&fp);
+        return size;
+    }
+
+    return (uint)-1;
+}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
@@ -309,11 +324,18 @@ void FDrive::Handler::Processing(Message *msg)
     }
     else if (com == Command::FDrive_RequestFileSize)
     {
-        LOG_WRITE("Запрос на имя файла %d", (int)msg->TakeByte());
-        /*
         StructForReadDir srd;
-        int size = 0;
+        char name[255];
         int numFile = (int)msg->TakeByte();
-        */
+        if (GetNameFile(msg->String(2), numFile, name, &srd))           // Получаем имя файла
+        {
+            String fullPath("%s\\%s", msg->String(2), name);
+
+            uint size = GetFileSize(fullPath.CString());
+
+            Message *answer = new Message(Command::FDrive_RequestFileSize, (uint8)numFile, size);
+
+            Interface::AddMessageForTransmit(answer);
+        }
     }
 }
