@@ -56,10 +56,21 @@ void FDrive::Draw()
 
     Text::SetUpperCase(false);
 
-    for (int i = 0; i < 20; i++)
+    x += 5;
+    y += 5;
+
+    for (int i = 0; i < 10; i++)
     {
+        Color color = Color::FILL;
         bool highlight = Items::CurrentItem() == i;
-        Items::GetNameItem(i).Draw(x + 5, y + 5 + i * 10);
+        if (highlight)
+        {
+            Painter::FillRegion(x - 1, y, 200, 9, color);
+            color = Color::BACK;
+        }
+        Items::GetNameItem(i).Draw(x, y, color);
+
+        y += 10;
     }
 
     Text::SetUpperCase(true);
