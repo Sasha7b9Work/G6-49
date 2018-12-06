@@ -52,6 +52,6 @@ void Statistics::Show()
         strcat(buffer, Int2String(timeFrame, false, 3).CString());
         strcat(buffer, "/");
         strcat(buffer, Int2String(timeAllFrames, false, 3).CString());
-        Text::DrawText(2, SCREEN_HEIGHT - 11, buffer, Color::FILL);
+        String(buffer).Draw(2, SCREEN_HEIGHT - 11, Color::FILL);
     }
 }

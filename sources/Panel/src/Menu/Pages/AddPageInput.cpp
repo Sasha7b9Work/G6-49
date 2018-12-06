@@ -52,7 +52,7 @@ static void OnPress_Cancel()
 
 static void Draw_Cancel(int x, int y)
 {
-    Text::DrawText(x + 13, y + 12, "Отменить");
+    String("Отменить").Draw(x + 13, y + 12);
     Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Delete);
 }
 
@@ -66,7 +66,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Enter(int x, int y)
 {
-    Text::DrawText(x + 3, y + 12, "Подтвердить");
+    String("Подтвердить").Draw(x + 3, y + 12);
     Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Save);
 }
 

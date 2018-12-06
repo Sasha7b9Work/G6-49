@@ -332,7 +332,7 @@ void PageDebug::PageRegisters::DrawRegisters(int x, int y)
             Painter::FillRegion(x - 1, y + i * 10, 132, 8, Color::FILL);
             color = Color::BACK;
         }
-        Text::DrawText(x, y + i * 10, reg.Name(), color);
+        String(reg.Name()).Draw(x, y + i * 10, color);
         DrawValue(x + 135, y + i * 10, i);
     }
 }
