@@ -2,6 +2,8 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
+#include "Display/Painter.h"
+#include "Display/Text.h"
 #include "FDrivePanel.h"
 #include "Items.h"
 #include "Interface/InterfacePanel.h"
@@ -101,12 +103,6 @@ String Items::GetNameItem(int i)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Items::CurrentItem()
-{
-    return curItem;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Items::NumberDirs()
 {
     return numDirs;
@@ -128,4 +124,26 @@ void Items::PressDown()
     {
         curItem++;
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Items::DrawItems(int x, int y)
+{
+    Text::SetUpperCase(false);
+
+    for (int i = 0; i < 10; i++)
+    {
+        Color color = Color::FILL;
+        bool highlight = (curItem == i);
+        if (highlight)
+        {
+            Painter::FillRegion(x - 1, y, 200, 9, color);
+            color = Color::BACK;
+        }
+        GetNameItem(i).Draw(x, y, color);
+
+        y += 10;
+    }
+
+    Text::SetUpperCase(true);
 }

@@ -24,14 +24,12 @@ public:
     {
         return numFiles;
     }
-    /// Возвращает имя i-го итема
-    static String GetNameItem(int i);
-    /// Возвращает номер текущего итема
-    static int CurrentItem();
     /// Обработка нажатия кнопки "Вверх"
     static void PressUp();
     /// Обработка нажатия кнопки "Вниз"
     static void PressDown();
+    /// Нарисовать списокфайлов
+    static void DrawItems(int x, int y);
 
     class Handler
     {
@@ -44,5 +42,6 @@ private:
     static int numFiles;
     /// Запрос послан. Ожидается ответ
     static bool requestIsSend;
-
+    /// Возвращает имя i-го итема
+    static String GetNameItem(int i);
 };

@@ -52,28 +52,7 @@ void FDrive::Draw()
         return;
     }
 
-    Painter::SetColor(Color::FILL);
-
-    Text::SetUpperCase(false);
-
-    x += 5;
-    y += 5;
-
-    for (int i = 0; i < 10; i++)
-    {
-        Color color = Color::FILL;
-        bool highlight = Items::CurrentItem() == i;
-        if (highlight)
-        {
-            Painter::FillRegion(x - 1, y, 200, 9, color);
-            color = Color::BACK;
-        }
-        Items::GetNameItem(i).Draw(x, y, color);
-
-        y += 10;
-    }
-
-    Text::SetUpperCase(true);
+    Items::DrawItems(x + 5, y + 5);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
