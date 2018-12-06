@@ -116,11 +116,10 @@ void FDrive::Update()
 
     if(state == State::NeedMount)
     {
-        if(f_mount(&FatFS, USBDISKPath, 0) == FR_OK)
-        {
-            Message *message = new Message(2, Command::FDrive_Mount, (uint8)1);
-            Interface::AddMessageForTransmit(message);
-        }
+        FRESULT result = f_mount(&FatFS, USBDISKPath, 0);
+
+        Message *message = new Message(2, Command::FDrive_Mount, (result == FR_OK) ? (uint8)1 : (uint8)2);
+        Interface::AddMessageForTransmit(message);
 
         state = State::Connected;
 

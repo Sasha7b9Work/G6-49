@@ -14,8 +14,14 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Примонтирована ли флешка
-static bool isMounted = false;
+enum Mount
+{
+    Disconnect,
+    Mounted,
+    Failed
+};
+
+static Mount mounted  = Disconnect;
 
 char FDrive::directory[255] = "\\";
 
@@ -36,9 +42,14 @@ void FDrive::Draw()
 
     Painter::FillRegion(x, y, width, height, Color::BACK);
 
-    if(!isMounted)
+    if(mounted == Disconnect)
     {
         Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
+        return;
+    }
+    else if (mounted == Failed)
+    {
+        Text::DrawBigText(30, 110, 2, "Флешка неисправна", Color::FILL);
         return;
     }
 
@@ -64,7 +75,7 @@ bool FDrive::Handler::Processing(Message *msg)
 
     if (command == Command::FDrive_Mount)
     {
-        isMounted = (msg->TakeByte() != 0);
+        mounted = (Mount)msg->TakeByte();
         Items::Init();
         return true;
     }
