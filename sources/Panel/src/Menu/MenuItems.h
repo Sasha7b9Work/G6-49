@@ -369,7 +369,7 @@ public:
 
     const char *NamePrevSubItem();
     /// ¬озвращает им€ варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
-    const char *NameSubItem(int i) const;
+    String NameSubItem(int i) const;
     /// ¬озвращает указатель на себ€, если находитс€ ы открытом состо€нии, и 0, если в закрытом
     Item *Press(Control control);
 

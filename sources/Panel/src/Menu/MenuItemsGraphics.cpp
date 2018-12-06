@@ -141,11 +141,11 @@ void Choice::Draw(bool opened, int x, int y)
                 Painter::DrawVLine(x + 1, y - 1, y - 1 + 10);
                 Painter::DrawHLine(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
                 Painter::DrawVLine(x - 1 + Item::WIDTH, y - 1, y + 9);
-                Text::DrawText(x + 3, y, NameSubItem(i), Color::BACK);
+                NameSubItem(i).Draw(x + 3, y, Color::BACK);
             }
             else
             {
-                Text::DrawText(x + 3, y, NameSubItem(i), Color::FILL);
+                NameSubItem(i).Draw(x + 3, y, Color::FILL);
             }
             y += 10;
         }
