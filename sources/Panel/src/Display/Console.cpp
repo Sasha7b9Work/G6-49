@@ -5,6 +5,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Settings/Settings.h"
+#include "Utils/String.h"
 #include <cstring>
 #include <cstdio>
 #endif
@@ -49,7 +50,10 @@ void Console::Draw()
     {
         int length = Font::GetLengthText(&buffer[i][0]);
         Painter::FillRegion(2, y, length, 9, Color::GREEN_25);
-        Text::DrawText(2, y, &buffer[i][0], Color::FILL);
+        //Text::DrawText(2, y, &buffer[i][0], Color::FILL);
+
+        String(&buffer[i][0]).Draw(2, y, Color::FILL);
+
         y += 9;
     }
 

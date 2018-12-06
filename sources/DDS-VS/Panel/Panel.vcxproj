@@ -303,6 +303,7 @@
     <ClCompile Include="..\..\Panel\src\Utils\Statistics.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\String.cpp" />
     <ClCompile Include="..\..\Panel\src\Utils\StringUtils.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
@@ -398,6 +399,7 @@
     <ClInclude Include="..\..\Panel\src\Utils\Number.h" />
     <ClInclude Include="..\..\Panel\src\Utils\NumberBuffer.h" />
     <ClInclude Include="..\..\Panel\src\Utils\Statistics.h" />
+    <ClInclude Include="..\..\Panel\src\Utils\String.h" />
     <ClInclude Include="..\..\Panel\src\Utils\StringUtils.h" />
     <ClInclude Include="src\include\CMSIS\core_cm4.h" />
     <ClInclude Include="src\include\CMSIS\stm32f429xx.h" />

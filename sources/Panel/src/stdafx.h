@@ -52,6 +52,7 @@
 #include "Utils/Number.h"
 #include "Utils/NumberBuffer.h"
 #include "Utils/Statistics.h"
+#include "Utils/String.h"
 #include "Utils/StringUtils.h"
 
 #include <cstdarg>
