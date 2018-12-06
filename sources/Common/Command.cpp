@@ -47,7 +47,8 @@ pString Command::Name() const
         "FDrive_RequestFile",
         "Test",
         "SetKoeffCalibration",
-        "GetKoeffCalibration"
+        "GetKoeffCalibration",
+        "FDrive_RequestFileSize"
     };
     if(value < Number)
     {

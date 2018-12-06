@@ -102,6 +102,7 @@ struct Command
          //                          5 - DDS_MIN          ...
 /* <-  */   SetKoeffCalibration,        ///< Установка калибровочного коэффициента
 /* ->  */   GetKoeffCalibration,        ///< Запрос установленного калибровочного коэффициента
+/* ->  */   FDrive_RequestFileSize,     ///< Запрос размера файла
             Number
     } value;
     Command(E v) : value(v) {};

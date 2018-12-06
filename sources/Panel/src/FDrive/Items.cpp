@@ -12,6 +12,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Запрос имени файла с порядковым номером number
+static void SendRequestForNameFile(int number);
+/// Запрос размера файла с порядковым номером number
+static void SendRequestForSizeFile(int number);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int  Items::numFiles = -1;
 bool Items::requestIsSend = false;
 
@@ -21,7 +28,8 @@ bool Items::requestIsSend = false;
 struct StructFile
 {
     char name[50];
-    StructFile()
+    int size;
+    StructFile() : size(-1)
     {
         name[0] = 0;
     }
@@ -85,6 +93,12 @@ static void SendRequestForNameFile(int number)
     Message message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
 
     Interface::Send(&message);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void SendRequestForSizeFile(int number)
+{
+    Message message(Command::FDrive_RequestFileSize, (uint8)number, FDrive::directory);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
