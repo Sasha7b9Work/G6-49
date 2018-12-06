@@ -62,7 +62,7 @@ void Button::Draw(int x, int y)
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, isShade ? Color::GRAY_10 : Color::GREEN_10);
     Painter::SetColor(isShade ? Color::GRAY_25 : Color::FILL);
-    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle());
+    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle().CString());
     funcForDraw(x, y);
 }
 
@@ -81,7 +81,7 @@ void Page::DrawClosed(int x, int y) const
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, color);
     Painter::SetColor(IsShade() ? Color::GRAY_25 : Color::FILL);
-    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle());
+    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle().CString());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y)
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        Text::DrawText(x + 5, y + 5, GetTitle(), pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        GetTitle().Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
     }
@@ -128,7 +128,7 @@ void Choice::Draw(bool opened, int x, int y)
         Painter::DrawRectangle(x, y, width, height, Color::FILL);
         Painter::DrawHLine(y + 12, x, x + width);
         Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
-        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle());
+        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle().CString());
 
         y += 14;
 
@@ -157,7 +157,7 @@ void Choice::Draw(bool opened, int x, int y)
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        Text::DrawText(x + 5, y + 5, GetTitle(), pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        GetTitle().Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Painter::SetColor(Color::BACK);
         if (step == 0.0f)
@@ -192,7 +192,7 @@ void Governor::Draw(int x, int y) const
     bool opened = IsOpened();
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-    Text::DrawText(x + 5, y + 5, GetTitle(), pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+    GetTitle().Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
     Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
 
     Painter::SetColor(Color::BACK);

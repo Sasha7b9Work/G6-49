@@ -98,7 +98,7 @@ void Hint::Draw()
             int yUGO = y0 + 5;
 
             Painter::SetColor(Color::GREEN_50);
-            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->GetTitle());
+            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->GetTitle().CString());
             Painter::SetColor(Color::GREEN);
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5;
             if (item->GetType().Is(Item::Type::Choice))
