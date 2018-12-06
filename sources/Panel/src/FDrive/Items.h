@@ -18,16 +18,20 @@ public:
     /// Послать запрос на количество итемов
     static void SendRequest();
     /// Возвращает количество итемов. -1 - запрос не посылался
-    static int NumberDirs()
-    {
-        return numDirs;
-    }
+    static int NumberDirs();
+
     static int NumberFiles()
     {
         return numFiles;
     }
-
+    /// Возвращает имя i-го итема
     static String GetNameItem(int i);
+    /// Возвращает номер текущего итема
+    static int CurrentItem();
+    /// Обработка нажатия кнопки "Вверх"
+    static void PressUp();
+    /// Обработка нажатия кнопки "Вниз"
+    static void PressDown();
 
     class Handler
     {
@@ -36,8 +40,6 @@ public:
     };
 
 private:
-    /// Количество каталогов в текущем каталоге
-    static int numDirs;
     /// Количество файлов в текущем каталоге
     static int numFiles;
     /// Запрос послан. Ожидается ответ
