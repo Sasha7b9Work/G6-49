@@ -36,10 +36,10 @@ int Menu::DrawTitle()
     Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, Page::Title::HEIGHT - 2, Color::BLUE_10);
     if(Menu::GetOpenedItem())
     {
-        return Text::DrawText(5, 5, Menu::GetOpenedItem()->FullPath(), Color::FILL);
+        return Menu::GetOpenedItem()->FullPath().Draw(5, 5, Color::FILL);
     }
 
-    return Text::DrawText(5, 5, CURRENT_PAGE->FullPath(), Color::FILL);
+    return CURRENT_PAGE->FullPath().Draw(5, 5, Color::FILL);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -61,8 +61,6 @@ void Menu::DrawPagesUGO(int x)
 
         Painter::FillRegion(x + 5 + numPage * delta, 5, delta, 9, Color::FILL);
 
-        char buffer[20];
-
-        Text::DrawText(x + 6 + numPage * delta, 5, Int2String(numPage + 1, false, 2, buffer), Color::BACK);
+        Int2String(numPage + 1, false, 2).Draw(x + 6 + numPage * delta, 5, Color::BACK);
     }
 }

@@ -274,7 +274,10 @@ char *Hex32toString(uint value, char buffer[9], bool upper)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
+/// @brief Преобразует value в текстовую строку
+/// @attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопировать себе
+/// \param numMinFields минимальное число занимаемых знакомест. Если для вывода числа столько не требуется, лишние заполняются нулями
+static char *Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
 {
     static char statBuf[20];
     char *buf = buffer ? buffer : statBuf;
@@ -293,6 +296,13 @@ char *Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
         snprintf(buf, SIZE, format, value);
     }
     return buf;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+String Int2String(int value, bool alwaysSign, int numMinFields)
+{
+    char buffer[20];
+    return String(Int2String(value, alwaysSign, numMinFields, buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

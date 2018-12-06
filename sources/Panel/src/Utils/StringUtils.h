@@ -1,4 +1,5 @@
 #pragma once
+#include "Utils/String.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,13 +48,8 @@ char* Hex8toString(uint8 value, char bufferOut[3]);
 char* Hex16toString(uint16 value, char bufferOut[5]);
 
 char* Hex32toString(uint value, char bufferOut[9], bool upper);
-/// @brief ѕреобразует value в текстовую строку
-/// @attention —трока будет хранитьс€ до следующего вызова функции. ≈сли результат нужен большее количество времени, то его нужно скопировать себе
-char* Int2String(int value,                     ///< значение
-                 bool alwaysSign,               ///< если установлен в true, знак будет выводитьс€ всегда
-                 int numMinFields,              ///< минимальное число занимаемых знакомест. ≈сли дл€ вывода числа столько не требуетс€, лишние заполн€ютс€ нул€ми
-                 char bufferOut[20] = 0         ///< сюда записываетс€ возвращаемое значение
-);
+
+String Int2String(int value, bool alwaysSign, int numMinFields);
 
 char* UInt64_2String(uint64 value, char bufferOut[20] = 0);
 

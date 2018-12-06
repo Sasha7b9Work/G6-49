@@ -241,7 +241,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
 
     y0 += 5;
 
-    Text::DrawText(22, y0 + 3, form->Name(LANG), Color::FILL);
+    String(form->Name(LANG)).Draw(22, y0 + 3, Color::FILL);
     
     for (int i = 0; i < form->NumParameters(); i++)
     {
@@ -252,7 +252,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }
         
-        Text::DrawText(x0 + 1, y0, param->Name(), Color::FILL);
+        String(param->Name()).Draw(x0 + 1, y0, Color::FILL);
         
         if(i == 3 && Chan(ch).IsA())
         {
@@ -276,9 +276,10 @@ void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
     {
         param = param;
     }
-    x = Text::DrawText(x, y, param->GetStringValue());
+    x = String(param->GetStringValue()).Draw(x, y);
+
     char buffer[10];
     Text::SetUpperCase(false);
-    Text::DrawText(x + 2, y, param->NameUnit(buffer));
+    String(param->NameUnit(buffer)).Draw(x + 2, y);
     Text::SetUpperCase(true);
 }
