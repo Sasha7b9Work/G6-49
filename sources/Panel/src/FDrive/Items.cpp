@@ -31,6 +31,9 @@ bool Items::requestIsSend = false;
 
 #define NUM_ITEMS 25
 
+
+
+
 struct StructFile
 {
     char name[50];
