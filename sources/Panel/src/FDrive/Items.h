@@ -19,11 +19,6 @@ public:
     static void SendRequest();
     /// Возвращает количество итемов. -1 - запрос не посылался
     static int NumberDirs();
-
-    static int NumberFiles()
-    {
-        return numFiles;
-    }
     /// Обработка нажатия кнопки "Вверх"
     static void PressUp();
     /// Обработка нажатия кнопки "Вниз"
@@ -38,10 +33,6 @@ public:
     };
 
 private:
-    /// Количество файлов в текущем каталоге
-    static int numFiles;
     /// Запрос послан. Ожидается ответ
     static bool requestIsSend;
-    /// Возвращает имя i-го итема
-    static String GetNameItem(int i);
 };

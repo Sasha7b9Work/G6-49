@@ -16,10 +16,16 @@
 static void SendRequestForNameFile(int number);
 /// Запрос размера файла с порядковым номером number
 static void SendRequestForSizeFile(int number);
-
+/// Нарисовать i-й итем
+static void DrawItem(int i, int x, int y, bool highlight);
+/// Возвращает имя i-го итема
+static String GetNameItem(int i);
+/// Возвращает размер i-го итема
+static int GetSizeItem(int i);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int  Items::numFiles = -1;
+/// Количество файлов в текущем каталоге
+static int numFiles;
 bool Items::requestIsSend = false;
 
 
@@ -83,6 +89,12 @@ bool Items::Handler::Processing(Message *msg)
         std::strcpy(names[num].name, msg->String(2));
         return true;
     }
+    else if (command == Command::FDrive_RequestFileSize)
+    {
+        int num = msg->TakeByte();
+        names[num].size = (int)msg->TakeWord();
+        return true;
+    }
 
     return false;
 }
@@ -102,7 +114,7 @@ static void SendRequestForSizeFile(int number)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-String Items::GetNameItem(int i)
+String GetNameItem(int i)
 {
     if (names[i].name[0])
     {
@@ -114,6 +126,17 @@ String Items::GetNameItem(int i)
     }
     
     return String();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+int GetSizeItem(int i)
+{
+    if (names[i].size == -1)
+    {
+        SendRequestForSizeFile(i);
+    }
+
+    return names[i].size;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -134,7 +157,7 @@ void Items::PressUp()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Items::PressDown()
 {
-    if (curItem < Items::NumberFiles() - 1)
+    if (curItem < numFiles - 1)
     {
         curItem++;
     }
@@ -145,19 +168,24 @@ void Items::DrawItems(int x, int y)
 {
     Text::SetUpperCase(false);
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < numFiles; i++)
     {
-        Color color = Color::FILL;
-        bool highlight = (curItem == i);
-        if (highlight)
-        {
-            Painter::FillRegion(x - 1, y, 200, 9, color);
-            color = Color::BACK;
-        }
-        GetNameItem(i).Draw(x, y, color);
-
+        DrawItem(i, x, y, (curItem == i));
         y += 10;
     }
 
     Text::SetUpperCase(true);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void DrawItem(int i, int x, int y, bool highlight)
+{
+    Color color = Color::FILL;
+    if (highlight)
+    {
+        Painter::FillRegion(x - 1, y, 200, 9, color);
+        color = Color::BACK;
+    }
+    GetNameItem(i).Draw(x, y, color);
+    String("%d", GetSizeItem(i)).Draw(x + 180, y);
 }
