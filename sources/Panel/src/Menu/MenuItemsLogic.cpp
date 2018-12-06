@@ -553,7 +553,8 @@ pString ChoiceParameter::NameCurrentSubItem() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String Item::FullPath()
 {
-    const char *titles[5] = {GetTitle().CString()};
+    String title = GetTitle();
+    const char *titles[5] = {title.CString()};
     int pointer = 1;
 
     Page *parent = Keeper();
