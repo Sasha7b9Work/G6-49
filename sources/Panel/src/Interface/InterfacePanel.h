@@ -1,14 +1,19 @@
 #pragma once
 #include "Message.h"
+#include "Utils/List.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Структура содержит данные для элементарного задания, передаваемого в Interface
-struct Task
+struct Task : public ListElement<Task>
 {
+friend class Interface;
+
     Message *message;                   ///< Соообщение для пересылки
     void (*funcProcess)(Message *);     ///< Функция обработки ответного сообщения
+private:
+    uint timeLast;                      ///< Время последней передачи сообщения
 };
 
 
@@ -21,6 +26,6 @@ public:
     static void Update();
 
     static void Send(Message *message);
-
+    /// Добавляеет задание. Если не получилось, возвращает false
     static void AddTask(Task *task);
 };

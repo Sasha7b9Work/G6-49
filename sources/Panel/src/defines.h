@@ -4,6 +4,10 @@
 
 #define __ARMCLIB_VERSION 6070001
 
+#else
+
+#define nullptr NULL;
+
 #endif
 
 #define DEBUG

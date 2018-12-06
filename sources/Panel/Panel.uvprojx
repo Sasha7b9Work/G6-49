@@ -2202,6 +2202,16 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\List.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\List.h</FilePath>
+            </File>
+            <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Math.cpp</FilePath>

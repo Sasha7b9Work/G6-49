@@ -312,6 +312,9 @@
     <ClCompile Include="..\..\Panel\src\Utils\Queue.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\Utils\List.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">
@@ -612,6 +615,9 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Panel\src\Utils\Queue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Panel\src\Utils\List.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

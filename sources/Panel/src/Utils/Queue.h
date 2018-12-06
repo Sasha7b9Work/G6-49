@@ -15,6 +15,8 @@ public:
     void Pop();
 
     int Size();
+    /// Возвращает true, если очередь полностью заполнена (Push() невозможен)
+    bool Full() const;
 
 private:
     int first;

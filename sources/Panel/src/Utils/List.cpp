@@ -1,78 +1,50 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
-#include "Message.h"
+#include "List.h"
 #include "Interface/InterfacePanel.h"
-#include "Utils/Queue.h"
 #endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-template Queue<Task>::Queue();
-template bool Queue<Task>::Push(Task *);
-template bool Queue<Task>::Full() const;
+template void               List<Task>::Append(ListElement<Task> *);
+template bool               List<Task>::Member(ListElement<Task> *);
+template ListElement<Task> *List<Task>::First();
+template ListElement<Task> *List<Task>::Next();
+template Task              *ListElement<Task>::Get();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template <typename T>
-Queue<T>::Queue() : first(0), last(0)
+void List<T>::Append(ListElement<T> * /*element*/)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <typename T>
-void Queue<T>::Pop()
+bool List<T>::Member(ListElement<T> * /*element*/)
 {
-    if (Size() > 0)
-    {
-        delete storage[first];
-        first++;
-        if (first == last)
-        {
-            first = last = 0;
-        }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-template <typename T>
-bool Queue<T>::Push(T *message)
-{
-    if (last < SIZE - 1)
-    {
-        storage[last] = message;
-        last++;
-        return true;
-    }
-
     return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <typename T>
-int Queue<T>::Size()
+ListElement<T> *List<T>::First()
 {
-    return last - first;
+    return nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <typename T>
-bool Queue<T>::Full() const
+ListElement<T> *List<T>::Next()
 {
-    return (last == SIZE - 1);
+    return nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <typename T>
-T *Queue<T>::Front()
+T *ListElement<T>::Get()
 {
-    T *result = 0;
-
-    if (Size() > 0)
-    {
-        result = storage[first];
-    }
-
-    return result;
+    return nullptr;
 }
