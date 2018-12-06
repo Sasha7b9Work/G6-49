@@ -6,7 +6,7 @@
 
 #ifdef WIN32
 #pragma warning(push)
-#pragma warning(disable:4514 4623)
+#pragma warning(disable:4623)
 #endif
 
 

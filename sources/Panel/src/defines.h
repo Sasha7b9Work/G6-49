@@ -4,9 +4,6 @@
 
 #define __ARMCLIB_VERSION 6070001
 
-#pragma warning(push)
-#pragma warning(disable:4201 4514)
-
 #endif
 
 #define DEBUG
@@ -84,8 +81,3 @@ static const struct name        \
     type val;                   \
     name(type v) : val(v) {};   \
 }
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

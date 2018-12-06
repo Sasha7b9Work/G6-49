@@ -7,11 +7,6 @@
 #include "Hardware/stm429.h"
 #endif
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)
-#endif
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define RTC_GET_PACKED_TIME() {}
@@ -137,9 +132,4 @@ extern "C" {
     
 #ifdef __cplusplus
 }
-#endif
-
-
-#ifdef WIN32
-#pragma warning(pop)
 #endif

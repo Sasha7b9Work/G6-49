@@ -4,11 +4,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)
-#endif
-
 struct SizeByte
 {
     enum E
@@ -85,8 +80,3 @@ struct FreqTest
     FreqTest(uint v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

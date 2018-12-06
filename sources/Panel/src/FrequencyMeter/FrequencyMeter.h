@@ -1,11 +1,6 @@
 #pragma once
 #include "defines.h"
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)
-#endif
-
 
 class FrequencyMeter
 {
@@ -57,7 +52,3 @@ public:
         operator uint8() const { return (uint8)value; };
     };
 };
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

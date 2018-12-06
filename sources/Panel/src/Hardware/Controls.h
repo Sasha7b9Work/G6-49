@@ -1,11 +1,6 @@
 #pragma once
 #include "defines.h"
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)
-#endif
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Control
@@ -82,8 +77,3 @@ struct Control
     /// Возвращает true, если кнопка управления курсором (Влево-Вправо)
     bool IsCursors() const { return value == Left || value == Right; };
 };
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

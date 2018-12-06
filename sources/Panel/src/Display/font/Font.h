@@ -3,12 +3,6 @@
 #include "Display/DisplayTypes.h"
 
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)
-#endif
-
-
 struct Symbol
 {
     uchar width;
@@ -51,8 +45,3 @@ extern const uchar font5display[3080];
 extern const uchar font8display[3080];
 extern const uchar fontUGOdisplay[3080];
 extern const uchar fontUGO2display[3080];
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

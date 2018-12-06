@@ -7,12 +7,6 @@
 #include "Command.h"
 
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)
-#endif
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** @addtogroup Menu
@@ -531,8 +525,3 @@ typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
 
 /** @}  @}
  */
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif
