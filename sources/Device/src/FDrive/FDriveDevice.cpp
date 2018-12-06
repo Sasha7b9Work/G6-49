@@ -307,4 +307,13 @@ void FDrive::Handler::Processing(Message *msg)
             Interface::AddMessageForTransmit(answer);
         }
     }
+    else if (com == Command::FDrive_RequestFileSize)
+    {
+        LOG_WRITE("Запрос на имя файла %d", (int)msg->TakeByte());
+        /*
+        StructForReadDir srd;
+        int size = 0;
+        int numFile = (int)msg->TakeByte();
+        */
+    }
 }

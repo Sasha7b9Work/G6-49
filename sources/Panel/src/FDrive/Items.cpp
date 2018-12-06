@@ -111,6 +111,8 @@ static void SendRequestForNameFile(int number)
 static void SendRequestForSizeFile(int number)
 {
     Message message(Command::FDrive_RequestFileSize, (uint8)number, FDrive::directory);
+
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
