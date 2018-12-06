@@ -363,7 +363,7 @@ public:
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameCurrentSubItem();
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameNextSubItem();
+    String NameNextSubItem();
     /// Возвращает высоту раскрытого
     int GetHeightOpened() const;
 

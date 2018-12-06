@@ -54,7 +54,7 @@ public:
     /// ≈сли true, то все буквы вывод€тс€ в верхнем регистре
     static bool IsUpperCase();
 
-     static int DrawText(int x, int y, pString text, Color color = Color::NUMBER);
+    static int DrawText(int x, int y, pString text, Color color = Color::NUMBER);
 
 private:
 

@@ -170,15 +170,15 @@ void Choice::Draw(bool opened, int x, int y)
 
             Text::DrawTextRelativelyRight(x0, y + 30, NameCurrentSubItem());
 
-            int length = Font::GetLengthText(NameNextSubItem());
+            int length = Font::GetLengthText(NameNextSubItem().CString());
 
             if (x0 + length > x + Item::WIDTH - 5)
             {
-                Text::DrawText(x0, y + 30, NameNextSubItem());
+                NameNextSubItem().Draw(x0, y + 30);
             }
             else
             {
-                Text::DrawTextRelativelyRight(315, y + 30, NameNextSubItem());
+                Text::DrawTextRelativelyRight(315, y + 30, NameNextSubItem().CString());
             }
         }
     }

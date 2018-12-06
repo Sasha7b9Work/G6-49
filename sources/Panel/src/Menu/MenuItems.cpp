@@ -23,7 +23,7 @@ const char *Choice::NameCurrentSubItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const char *Choice::NameNextSubItem()
+String Choice::NameNextSubItem()
 {
     int8 nextIndex = CurrentIndex() + 1;
 
@@ -31,7 +31,7 @@ const char *Choice::NameNextSubItem()
     {
         nextIndex = 0;
     }
-    return NAME_FROM_INDEX(nextIndex);
+    return String(NAME_FROM_INDEX(nextIndex));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
