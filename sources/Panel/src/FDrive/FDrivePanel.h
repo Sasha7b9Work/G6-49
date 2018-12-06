@@ -24,10 +24,6 @@ public:
     static void PressUp();
     /// Обработка нажатия кнопки "Вниз"
     static void PressDown();
-    /// Написать список каталогов
-    static void DrawDirs();
-    /// Написать список файлов
-    static void DrawFiles();
 
     class Handler
     {
@@ -37,8 +33,4 @@ public:
 
     /// Путь к текущему каталогу
     static char directory[255];
-
-private:
-
-    friend class Graphics;
 };

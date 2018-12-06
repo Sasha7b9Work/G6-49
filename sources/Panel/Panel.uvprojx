@@ -1797,11 +1797,6 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
-              <FileName>FDriveGraphics.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDriveGraphics.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FDrivePanel.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FDrive\FDrivePanel.cpp</FilePath>

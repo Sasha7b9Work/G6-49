@@ -2,7 +2,14 @@
 #include "defines.h"
 
 #ifndef WIN32
+
 #pragma anon_unions
+
+#else
+
+#pragma warning(push)
+#pragma warning(disable:4201)
+
 #endif
 
 union BitSet16
@@ -114,3 +121,7 @@ union BitSet64
         }
     }
 };
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

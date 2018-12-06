@@ -92,7 +92,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>STM32F429xx;WIN32;USE_HAL_DRIVER;PANEL</PreprocessorDefinitions>
       <SDLCheck>false</SDLCheck>
-      <DisableSpecificWarnings>4201;4211;4310;4464;4514;4623;4626;4710;4774;4820;4996;5027;5045</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4211;4310;4464;4514;4623;4626;4710;4774;4820;4996;5027;5045</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
       <BufferSecurityCheck>true</BufferSecurityCheck>
@@ -188,9 +188,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\FDrive\FDrivePanel.cpp" />
-    <ClCompile Include="..\..\Panel\src\FDrive\FDriveGraphics.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\FDrive\Items.cpp" />
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>

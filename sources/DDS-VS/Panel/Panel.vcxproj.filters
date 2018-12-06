@@ -198,9 +198,6 @@
     <ClCompile Include="..\..\Panel\src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Panel\src\FDrive\FDriveGraphics.cpp">
-      <Filter>FDrive</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Panel\src\Generator\GeneratorPanel.cpp">
       <Filter>Generator</Filter>
     </ClCompile>

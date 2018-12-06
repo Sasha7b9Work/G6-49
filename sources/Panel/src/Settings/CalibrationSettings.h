@@ -19,7 +19,14 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifndef WIN32
+
 #pragma anon_unions
+
+#else
+
+#pragma warning(push)
+#pragma warning(disable:4201)   // nonstandard extension used: nameless struct/union
+
 #endif
 
 struct CalibrationSettings
@@ -51,3 +58,8 @@ struct CalibrationSettings
 
 
 extern CalibrationSettings setCal;
+
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif
