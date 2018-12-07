@@ -11,6 +11,8 @@ struct Task : public ListElement<Task>
 friend class Interface;
 
     Task(Message *msg, bool (*process)(Message *), bool (*equal)(Task *, Task *));
+    /// Деструктор. В нём нужно удалить сообщение
+    ~Task();
     /// Функция сравнения
     bool Equals(Task *, Task *);
     /// Соообщение для пересылки

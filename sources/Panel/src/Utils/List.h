@@ -14,6 +14,8 @@ public:
 
     ListElement(T *v) : value(v) {};
 
+    ~ListElement();
+
     T *Get();
     /// Возвращает указатель на следующий элемент
     ListElement *Next();

@@ -13,6 +13,7 @@ template ListElement<Task> *List<Task>::First();
 template                    List<Task>::List();
 template void               List<Task>::Remove(ListElement<Task> *);
 
+template                    ListElement<Task>::~ListElement();
 template Task              *ListElement<Task>::Get();
 template ListElement<Task> *ListElement<Task>::Next();
 
@@ -146,4 +147,9 @@ ListElement<T> *ListElement<T>::Next()
     return next;
 }
 
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+template <class T>
+ListElement<T>::~ListElement()
+{
+    delete value;
+}
