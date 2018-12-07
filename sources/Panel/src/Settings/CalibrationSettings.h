@@ -44,6 +44,7 @@ struct CalibrationSettings
             int16   cal_DDS_MIN[Chan::Number];
             int16   cal_DDS_Offset[Chan::Number];
             int16   cal_FREQ_Level_Trig;                        ///< Калибровочный коэффициенрт уровня синхронизации
+            uint8   nu[2];
         };
         uint8 unused[512];
     };

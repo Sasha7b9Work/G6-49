@@ -51,6 +51,7 @@ struct DescInput
     int size;
     TypeInput type;
     bool sending;       // true означает, что значение в этот регистр уже засылалось
+    uint8 nu[7];
     uint64 value;       // засланное значение
 };
 

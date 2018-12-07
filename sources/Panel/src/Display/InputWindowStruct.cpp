@@ -401,6 +401,7 @@ void StructValue::PressKey(Control key)
     {
         Control control;
         char    symbol;
+        uint8   nu[3];
     }
     command[] =
     {

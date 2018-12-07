@@ -227,11 +227,15 @@ public:
     char sign;
 private:
 
+    uint8 nu0[3];
+
     float min;
 
     float max;
     /// Если true, то находимся в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
+
+    uint8 nu1[3];
 };
 
 

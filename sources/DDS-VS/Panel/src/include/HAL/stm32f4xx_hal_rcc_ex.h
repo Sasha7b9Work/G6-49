@@ -111,6 +111,7 @@ typedef struct
 
     uint8_t TIMPresSelection;      /*!< Specifies TIM Clock Prescalers Selection.
                                         This parameter can be a value of @ref RCCEx_TIM_PRescaler_Selection */
+    uint8_t nu[3];
 } RCC_PeriphCLKInitTypeDef;
 
 HAL_StatusTypeDef HAL_RCCEx_PeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit);

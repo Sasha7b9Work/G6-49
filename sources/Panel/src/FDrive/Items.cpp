@@ -37,6 +37,7 @@ bool Items::requestIsSend = false;
 struct StructFile
 {
     char name[50];
+    uint8 nutUsed[2];
     int size;
     StructFile() : size(-1) { name[0] = 0; }
     void Clear() { name[0] = 0; size = -1; }
