@@ -6,6 +6,7 @@
 #include "Display/Text.h"
 #include "FDrivePanel.h"
 #include "Items.h"
+#include "File.h"
 #include "Interface/InterfacePanel.h"
 #include <cstring>
 #endif
@@ -28,11 +29,7 @@ static int GetSizeItem(int i);
 static int numFiles;
 bool Items::requestIsSend = false;
 
-
 #define NUM_ITEMS 25
-
-
-
 
 struct StructFile
 {
@@ -48,7 +45,8 @@ files[NUM_ITEMS];
 static int curItem = 0;
 /// Количество каталогов в текущем каталоге
 static int numDirs = -1;
-
+/// Теукущий файл
+static File file;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Items::Init()
@@ -218,4 +216,10 @@ static void DrawItem(int i, int x, int y, bool highlight)
     }
     GetNameItem(i).Draw(x, y, color);
     String("%d", GetSizeItem(i)).Draw(x + 180, y);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+File *Items::CurrentFile()
+{
+    return &file;
 }

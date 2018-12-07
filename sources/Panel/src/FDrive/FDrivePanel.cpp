@@ -6,6 +6,7 @@
 #include "Command.h"
 #include "FDrivePanel.h"
 #include "Items.h"
+#include "File.h"
 #include "Display/Painter.h"
 #include "Display/Text.h" 
 #include "Interface/InterfacePanel.h"
@@ -64,6 +65,8 @@ void FDrive::Draw()
     }
 
     Items::DrawItems(x + 5, y + 5);
+
+    Items::CurrentFile()->Draw(5, 120);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1807,6 +1807,16 @@
               <FilePath>.\src\FDrive\FDrivePanel.h</FilePath>
             </File>
             <File>
+              <FileName>File.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\File.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>File.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FDrive\File.h</FilePath>
+            </File>
+            <File>
               <FileName>Items.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FDrive\Items.cpp</FilePath>

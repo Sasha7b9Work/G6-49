@@ -188,6 +188,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\FDrive\FDrivePanel.cpp" />
+    <ClCompile Include="..\..\Panel\src\FDrive\File.cpp" />
     <ClCompile Include="..\..\Panel\src\FDrive\Items.cpp" />
     <ClCompile Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -364,6 +365,7 @@
     <ClInclude Include="..\..\Panel\src\Display\Symbols.h" />
     <ClInclude Include="..\..\Panel\src\Display\Text.h" />
     <ClInclude Include="..\..\Panel\src\FDrive\FDrivePanel.h" />
+    <ClInclude Include="..\..\Panel\src\FDrive\File.h" />
     <ClInclude Include="..\..\Panel\src\FDrive\Items.h" />
     <ClInclude Include="..\..\Panel\src\FrequencyMeter\FrequencyMeter.h" />
     <ClInclude Include="..\..\Panel\src\Generator\GeneratorPanel.h" />
