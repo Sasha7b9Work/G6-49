@@ -8,8 +8,11 @@ template <typename T> class List;
 template <typename T>
 class ListElement
 {
+friend class List<T>;
 public:
     T *Get();
+    /// Возвращает указатель на следующий элемент
+    ListElement *Next();
 private:
     /// Указатель на список - владелец
     List<T> *owningList;
@@ -25,15 +28,17 @@ template <typename T>
 class List
 {
 public:
+    List();
     /// Добавляем новый элемент в конец списка
     void Append(ListElement<T> *element);
     /// Возвращает true, если список содержит element
     bool Member(ListElement<T> *element);
-
+    /// Возвращает указатель
     ListElement<T> *First();
 
-    ListElement<T> *Next();
 private:
+    /// Возвращает указатель на последний элемент списка
+    ListElement<T> *Last();
     /// Указатель на первый элемент списка. 0, если список пуст
     ListElement<T> *head;
 };

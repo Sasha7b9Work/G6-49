@@ -10,15 +10,41 @@
 template void               List<Task>::Append(ListElement<Task> *);
 template bool               List<Task>::Member(ListElement<Task> *);
 template ListElement<Task> *List<Task>::First();
-template ListElement<Task> *List<Task>::Next();
+template                    List<Task>::List();
+
 template Task              *ListElement<Task>::Get();
+template ListElement<Task> *ListElement<Task>::Next();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template <typename T>
-void List<T>::Append(ListElement<T> * /*element*/)
+List<T>::List() : head(nullptr)
 {
 
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void List<T>::Append(ListElement<T> * element)
+{
+    element->next = nullptr;
+    element->prev = nullptr;
+
+    if (head == nullptr)
+    {
+        head = element;
+    }
+    else
+    {
+
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+template <typename T>
+ListElement<T> *List<T>::Last()
+{
+    return nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,14 +63,14 @@ ListElement<T> *List<T>::First()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <typename T>
-ListElement<T> *List<T>::Next()
+T *ListElement<T>::Get()
 {
     return nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <typename T>
-T *ListElement<T>::Get()
+ListElement<T> *ListElement<T>::Next()
 {
     return nullptr;
 }

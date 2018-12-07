@@ -28,4 +28,12 @@ public:
     static void Send(Message *message);
     /// ƒобавл€еет задание. ≈сли не получилось, возвращает false
     static void AddTask(Task *task);
+
+private:
+    /// ќбрабатывает answer, если запрос на него есть в очереди заданий. ¬озвращает true, если это так
+    static bool ProcessTask(Message *answer);
+    /// ќбрабатывает очередь заданий, засыла€ сообщени€ тех из них, которые необходимо заслать
+    static void SendTasks();
+    /// ¬озвращает true, если прошло слишком мало времени после предыдущей засылки сообщени€
+    static bool PassedLittleTimeAfterSend(Task *task);
 };
