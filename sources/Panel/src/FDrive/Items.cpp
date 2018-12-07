@@ -118,18 +118,33 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 static void SendRequestForNameFile(int number)
 {
     Message *message = new Message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
-
+    
     Task *task = new Task(message, Items::Handler::Processing, EqualsRequestNameFile);
-
+    
     Interface::AddTask(task);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool EqualsRequestSizeFile(Task *task1, Task *task2)
+{
+    Message *msg1 = task1->message;
+    msg1->ResetPointer();
+
+    Message *msg2 = task2->message;
+    msg2->ResetPointer();
+
+    return (Command::FDrive_RequestFileSize == msg1->TakeByte() == msg2->TakeByte()) &&
+        (msg1->TakeByte() == msg2->TakeByte());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendRequestForSizeFile(int number)
 {
-    Message message(Command::FDrive_RequestFileSize, (uint8)number, FDrive::directory);
-
-    Interface::Send(&message);
+    Message *message = new Message(Command::FDrive_RequestFileSize, (uint8)number, FDrive::directory);
+    
+    Task *task = new Task(message, Items::Handler::Processing, EqualsRequestSizeFile);
+    
+    Interface::AddTask(task);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
