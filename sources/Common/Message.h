@@ -17,7 +17,6 @@ public:
     explicit Message(uint8, char*);
     explicit Message(uint8, uint8, char *);
 
-
     ~Message();
 
     void Create(uint size, uint8);
@@ -29,6 +28,8 @@ public:
     void Create(uint size, uint8, uint8, uint8, uint16);
     void Create(uint8, uint8, char *string);
     void Create(uint size, uint8 com, uint8 d0, uint d1);
+    /// Возвращает указатель на созданную копию
+    Message *Clone();
     /// Сбрасывает указатель извлечённой информации.
     void ResetPointer() { taken = 0; };
 
@@ -80,4 +81,6 @@ private:
     uint used;
     /// На какой позиции указатель. Используется для Take
     uint taken;
+
+    Message(const Message &) {};
 };

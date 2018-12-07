@@ -49,7 +49,8 @@ void Interface::Update()
 
     if (Transceiver::Receive(&message))
     {
-        if (ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
+        if (
+            ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
             Handlers::Processing(&message))     // или просто обрабатываем в обратном случае
         {
             time = 0;
@@ -57,7 +58,7 @@ void Interface::Update()
         }
     }
 
-    SendTasks();
+    //SendTasks();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -124,7 +125,7 @@ bool Interface::ProcessTask(Message *answer)
 void Interface::RunAnswer(ListElement<Task> *element, Message *answer)
 {
     element->Get()->funcProcess(answer);
-    tasks.Remove(element);
+    tasks.Remove(element->Get());
     delete element;
 }
 
@@ -135,13 +136,13 @@ bool Task::Equals(Task *task1, Task *task2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Task::Task(Message *msg) : ListElement<Task>(this), message(msg), timeLast(0), funcEqual(nullptr), funcProcess(nullptr)
+Task::Task(Message *msg) : timeLast(0), funcEqual(nullptr), funcProcess(nullptr)
 {
-
+    message = msg->Clone();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Task::Task(Message *msg, bool(*process)(Message *), bool(*equal)(Task *, Task *)) : ListElement<Task>(this), message(msg), timeLast(0), funcEqual(equal), funcProcess(process)
+Task::Task(Message *msg, bool(*process)(Message *), bool(*equal)(Task *, Task *)) : message(msg), timeLast(0), funcEqual(equal), funcProcess(process)
 {
 
 }

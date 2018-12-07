@@ -95,6 +95,18 @@ Message::Message(uint size, uint8 v0, uint8 v1, uint64 v2) : allocated(0), buffe
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message *Message::Clone()
+{
+    Message *result = new Message();
+    if (result->AllocateMemory(Size()))
+    {
+        std::memcpy(result->Data(), Data(), Size());
+    }
+    
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Message::Create(uint size, uint8 v0)
 {
     if (AllocateMemory(size))

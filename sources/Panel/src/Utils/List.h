@@ -12,7 +12,7 @@ friend class List<T>;
 
 public:
 
-    ListElement(T *v) : value(v) {};
+    ListElement(T *v) : value(v), owningList(nullptr), next(nullptr), prev(nullptr) {};
 
     ~ListElement();
 
@@ -20,14 +20,14 @@ public:
     /// Возвращает указатель на следующий элемент
     ListElement *Next();
 private:
+
+    T* value;
     /// Указатель на список - владелец
     List<T> *owningList;
     /// Указатель на следующий элемент. 0, если это это последний элемент в списке
     ListElement *next;
     /// Указатель на предыдущий элемент. 0, если это первый элемент в списке
     ListElement *prev;
-
-    T* value;
 };
 
 
@@ -38,11 +38,11 @@ class List
 public:
     List();
     /// Добавляем новый элемент в конец списка
-    void Append(ListElement<T> *element);
+    void Append(T *element);
     /// Удаляет элемент из списка
-    void Remove(ListElement<T> *element);
+    void Remove(T *element);
     /// Возвращает true, если список содержит element
-    bool Member(ListElement<T> *element);
+    bool Member(T *element);
     /// Возвращает указатель
     ListElement<T> *First();
 

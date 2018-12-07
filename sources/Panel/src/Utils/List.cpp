@@ -7,11 +7,11 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-template void               List<Task>::Append(ListElement<Task> *);
-template bool               List<Task>::Member(ListElement<Task> *);
+template void               List<Task>::Append(Task *);
+template bool               List<Task>::Member(Task *);
 template ListElement<Task> *List<Task>::First();
 template                    List<Task>::List();
-template void               List<Task>::Remove(ListElement<Task> *);
+template void               List<Task>::Remove(Task *);
 
 template                    ListElement<Task>::~ListElement();
 template Task              *ListElement<Task>::Get();
@@ -27,11 +27,9 @@ List<T>::List() : head(nullptr)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <class T>
-void List<T>::Append(ListElement<T> *element)
+void List<T>::Append(T *t)
 {
-    element->next = nullptr;
-    element->prev = nullptr;
-    element->owningList = this;
+    ListElement<T> *element = new ListElement<T>(t);
 
     ListElement<T> *last = Last();
 
@@ -48,13 +46,13 @@ void List<T>::Append(ListElement<T> *element)
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <class T>
-void List<T>::Remove(ListElement<T> *removed)
+void List<T>::Remove(T *removed)
 {
     ListElement<T> *element = First();
 
     while (element)
     {
-        if (element == removed)
+        if (element->Get() == removed)
         {
             /// Здесь надо удалить
 
@@ -107,20 +105,18 @@ ListElement<T> *List<T>::Last()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <class T>
-bool List<T>::Member(ListElement<T> *element)
+bool List<T>::Member(T *t)
 {
-    ListElement<T> *member = First();
+    ListElement<T> *element = First();
 
-    T *el = element->Get();
-
-    while (member != nullptr)
+    while (element != nullptr)
     {
-        if (member->Get()->Equals(member->Get(), el))
+        if (element->Get()->Equals(element->Get(), t))
         {
             return true;
         }
 
-        member = member->Next();
+        element = element->Next();
     }
 
     return false;
