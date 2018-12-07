@@ -4,6 +4,8 @@
 #include "Log.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include <cstdlib>
+#include "stdlib.h"
 #endif
 
 
@@ -55,4 +57,38 @@ uint Debug::GetTimeCounterUS()
 bool Debug::ShowSends()
 {
     return DEBUG_SHOW_SENDS;
+}
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint Debug::FreeHeap()
+{
+    /*
+    uint max = 1024 * 1024;
+    uint min = 0;
+
+    while (min < max)
+    {
+        void *buffer = 0;
+        buffer = std::malloc(max);            // Пытаемся выделить память
+        if (buffer == 0)                            // Если не получилось
+        {
+            max = (max + min) / 2;                  // то уменьшаем верхнюю границу
+            continue;
+        }
+
+        min = max;
+        max = (uint)(max * 1.5);
+        std::free(buffer);
+    }
+    
+    return min;
+    */
+
+    //char buffer[100];
+    //
+    //__heapstats
+
+    return 0;
 }

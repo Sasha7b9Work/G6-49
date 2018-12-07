@@ -332,7 +332,7 @@ bool Message::AllocateMemory(uint size)
     }
     else
     {
-        //LOG_ERROR("Недостаточно памяти для %x байт", size);
+        LOG_ERROR_FINALIZE("Недостаточно памяти для %x байт", size);
     }
 
     return buffer != 0;

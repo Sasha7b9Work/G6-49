@@ -25,6 +25,9 @@ public:
     static int line;
     static char *file;
 
+    /// ¬озвращает размер свободной пам€ти в куче
+    static uint FreeHeap();
+
 private:
     static uint timeStart;
     static uint timeCounter;

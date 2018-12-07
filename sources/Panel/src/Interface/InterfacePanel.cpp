@@ -46,7 +46,7 @@ void Interface::Update()
     Message message(1, Command::RequestData);
 
     Transceiver::Transmit(&message);
-
+    
     if (Transceiver::Receive(&message))
     {
         if (

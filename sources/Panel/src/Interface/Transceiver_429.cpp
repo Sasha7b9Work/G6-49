@@ -70,9 +70,11 @@ bool Transceiver::Receive(Message *message)
     uint size = 0;
     SPI4_::Receive(&size, 4, 10);
 
-    message->AllocateMemory(size);
-
-    SPI4_::Receive(message->Data(), message->Size(), 50);
+    if (message->AllocateMemory(size))
+    {
+        SPI4_::Receive(message->Data(), message->Size(), 50);
+        return true;
+    }
 
     return message->Size() != 0;
 }

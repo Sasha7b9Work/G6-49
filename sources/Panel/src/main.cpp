@@ -10,8 +10,24 @@
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Debug.h"
 #include <cstdlib>
+#include <stdio.h>
 #endif
 
+//namespace std
+//{
+//    struct __FILE
+//    {
+//        int handle;
+//    };
+//    
+//    //FILE  __stdout;
+//}
+//
+//int fputs(int ch, FILE *f)
+//{
+//    LOG_WRITE("%c", ch);
+//    return (ch);
+//}
 
 /** @defgroup Panel
  *  @{
@@ -36,10 +52,12 @@ int main()
 
     while (1)
     {
+        //printf("test");
         CPU::Update();
         Menu::Update();
         Display::Update();
         Interface::Update();
+        //LOG_WRITE("%d", Debug::FreeHeap());
     }
 }
 
