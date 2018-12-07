@@ -28,7 +28,7 @@ public:
 
     class Handler
     {
-        friend class FDrive;
+    public:
         static bool Processing(Message *msg);
     };
 

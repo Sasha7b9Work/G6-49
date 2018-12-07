@@ -6,7 +6,7 @@
 
 #else
 
-#define nullptr NULL
+#define nullptr NULL    
 
 #endif
 

@@ -83,6 +83,7 @@ void Interface::SendTasks()
         if (!PassedLittleTimeAfterSend(task))
         {
             Send(task->message);
+            task->timeLast = TIME_MS;
         }
 
         element = element->Next();
@@ -96,7 +97,51 @@ bool Interface::PassedLittleTimeAfterSend(Task *task)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::ProcessTask(Message * /*answer*/)
+bool Interface::ProcessTask(Message *answer)
 {
+    ListElement<Task> *element = tasks.First();
+
+    Task taskAnswer(answer);
+
+    while (element)
+    {
+        Task *task = element->Get();
+
+        if (task->Equals(task, &taskAnswer))
+        {
+            RunAnswer(element, answer);
+            return true;
+        }
+
+        element = element->Next();
+    }
+
+
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Interface::RunAnswer(ListElement<Task> *element, Message *answer)
+{
+    element->Get()->funcProcess(answer);
+    tasks.Remove(element);
+    delete element;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Task::Equals(Task *task1, Task *task2)
+{
+    return funcEqual(task1, task2);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Task::Task(Message *msg) : ListElement<Task>(this), message(msg), timeLast(0), funcEqual(nullptr), funcProcess(nullptr)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Task::Task(Message *msg, bool(*process)(Message *), bool(*equal)(Task *, Task *)) : ListElement<Task>(this), message(msg), timeLast(0), funcEqual(equal), funcProcess(process)
+{
+
 }

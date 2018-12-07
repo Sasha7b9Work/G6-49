@@ -10,10 +10,20 @@ struct Task : public ListElement<Task>
 {
 friend class Interface;
 
-    Message *message;                   ///< Соообщение для пересылки
-    void (*funcProcess)(Message *);     ///< Функция обработки ответного сообщения
+    Task(Message *msg, bool (*process)(Message *), bool (*equal)(Task *, Task *));
+    /// Функция сравнения
+    bool Equals(Task *, Task *);
+    /// Соообщение для пересылки
+    Message *message;
 private:
-    uint timeLast;                      ///< Время последней передачи сообщения
+    /// Этот конструктор может использоваться только в Interface для сравнения
+    Task(Message *msg);
+    /// Время последней передачи сообщения
+    uint timeLast;
+    /// Функция сравнения
+    bool (*funcEqual)(Task *, Task *);
+    /// Функция обработки ответа
+    bool (*funcProcess)(Message *);
 };
 
 
@@ -36,4 +46,7 @@ private:
     static void SendTasks();
     /// Возвращает true, если прошло слишком мало времени после предыдущей засылки сообщения
     static bool PassedLittleTimeAfterSend(Task *task);
+    /// Обработать ответ на задание
+    static void RunAnswer(ListElement<Task> *element, Message *answer);
+
 };

@@ -9,7 +9,11 @@ template <class T>
 class ListElement
 {
 friend class List<T>;
+
 public:
+
+    ListElement(T *v) : value(v) {};
+
     T *Get();
     /// Возвращает указатель на следующий элемент
     ListElement *Next();
@@ -20,6 +24,8 @@ private:
     ListElement *next;
     /// Указатель на предыдущий элемент. 0, если это первый элемент в списке
     ListElement *prev;
+
+    T* value;
 };
 
 
@@ -31,6 +37,8 @@ public:
     List();
     /// Добавляем новый элемент в конец списка
     void Append(ListElement<T> *element);
+    /// Удаляет элемент из списка
+    void Remove(ListElement<T> *element);
     /// Возвращает true, если список содержит element
     bool Member(ListElement<T> *element);
     /// Возвращает указатель

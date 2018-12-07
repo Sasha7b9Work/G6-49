@@ -102,11 +102,26 @@ bool Items::Handler::Processing(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static bool EqualsRequestNameFile(Task *task1, Task *task2)
+{
+    Message *msg1 = task1->message;
+    msg1->ResetPointer();
+
+    Message *msg2 = task2->message;
+    msg2->ResetPointer();
+
+    return (Command::FDrive_RequestFile == msg1->TakeByte() == msg2->TakeByte()) &&
+        (msg1->TakeByte() == msg2->TakeByte());
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendRequestForNameFile(int number)
 {
-    Message message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
+    Message *message = new Message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
 
-    Interface::Send(&message);
+    Task *task = new Task(message, Items::Handler::Processing, EqualsRequestNameFile);
+
+    Interface::AddTask(task);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
