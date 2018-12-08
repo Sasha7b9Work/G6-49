@@ -91,7 +91,7 @@ bool Items::Handler::Processing(Message *msg)
 
         if (num == curItem)
         {
-            String fileName("%s\\%s", FDrive::directory, files[num].name);
+            //String fileName("%s\\%s", FDrive::directory, files[num].name);
 
             //LOG_WRITE("%s", fileName.CString());
             

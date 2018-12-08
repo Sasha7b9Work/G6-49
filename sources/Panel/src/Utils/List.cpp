@@ -8,7 +8,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template void               List<Task>::Append(Task *);
-template bool               List<Task>::Member(Task *);
+template bool               List<Task>::IsMember(Task *);
 template ListElement<Task> *List<Task>::First();
 template                    List<Task>::List();
 template void               List<Task>::Remove(Task *);
@@ -106,7 +106,7 @@ ListElement<T> *List<T>::Last()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 template <class T>
-bool List<T>::Member(T *t)
+bool List<T>::IsMember(T *t)
 {
     ListElement<T> *element = First();
 

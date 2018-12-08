@@ -42,7 +42,7 @@ public:
     /// Удаляет элемент из списка
     void Remove(T *element);
     /// Возвращает true, если список содержит element
-    bool Member(T *element);
+    bool IsMember(T *element);
     /// Возвращает указатель
     ListElement<T> *First();
     /// Возвращает размер
