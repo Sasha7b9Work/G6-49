@@ -79,7 +79,6 @@ bool FDrive::Handler::Processing(Message *msg)
     if (command == Command::FDrive_Mount)
     {
         mounted = (Mount)msg->TakeByte();
-        LOG_WRITE("mounted = %d", (int)mounted);
         Init();
         return true;
     }

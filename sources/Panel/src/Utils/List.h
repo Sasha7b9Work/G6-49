@@ -12,7 +12,7 @@ friend class List<T>;
 
 public:
 
-    ListElement(T *v) : value(v), owningList(nullptr), next(nullptr), prev(nullptr) {};
+    ListElement(T *v) : value(v), next(nullptr), prev(nullptr) {};
 
     ~ListElement();
 
@@ -23,7 +23,7 @@ private:
 
     T* value;
     /// ”казатель на список - владелец
-    List<T> *owningList;
+    //List<T> *owningList;
     /// ”казатель на следующий элемент. 0, если это это последний элемент в списке
     ListElement *next;
     /// ”казатель на предыдущий элемент. 0, если это первый элемент в списке

@@ -52,12 +52,15 @@ int main()
 
     while (1)
     {
-        //printf("test");
+        DEBUG_POINT;
         CPU::Update();
+        DEBUG_POINT;
         Menu::Update();
+        DEBUG_POINT;
         Display::Update();
+        DEBUG_POINT;
         Interface::Update();
-        //LOG_WRITE("%d", Debug::FreeHeap());
+        DEBUG_POINT;
     }
 }
 

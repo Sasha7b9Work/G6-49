@@ -60,7 +60,7 @@ void List<T>::Remove(T *removed)
             ListElement<T> *next = element->next;
             ListElement<T> *prev = element->prev;
 
-            if (element == First())             // Если удалемый элемент - первый в списке
+            if (element == First())             // Если удаляемый элемент - первый в списке
             {
                 if (next)
                 {

@@ -69,8 +69,6 @@ void Interface::AddTask(Task *task)
         Send(task->message);                    // То посылаем сообщение
         task->timeLast = TIME_MS;               // запоминаем время посылки
         tasks.Append(task);                     // и добавляем в очередь сообщений для повторной отправки
-
-        LOG_WRITE("Размер %d", tasks.Size());
     }
 }
 
@@ -113,7 +111,6 @@ bool Interface::ProcessTask(Message *answer)
         if (task->Equals(task, &taskAnswer))
         {
             RunAnswer(element, answer);
-            LOG_WRITE("Размер после обработки ответа %d", tasks.Size());
             return true;
         }
 

@@ -46,7 +46,7 @@ extern "C" {
     void UsageFault_Handler()
     {
         TRACE_HANDLER;
-
+        
         while (1)
         {
         }
@@ -57,8 +57,14 @@ extern "C" {
     {
         TRACE_HANDLER;
         
+        char *file = Debug::file;
+        int line = Debug::line;
+        
         while (1)
         {
+            TRACE_HANDLER;
+            file = file;
+            line = line;
         }
     }
 

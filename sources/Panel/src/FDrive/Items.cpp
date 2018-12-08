@@ -29,7 +29,7 @@ static int GetSizeItem(int i);
 static int numFiles;
 bool Items::requestIsSend = false;
 
-#define NUM_ITEMS 3
+#define NUM_ITEMS 15
 
 struct StructFile
 {
