@@ -337,4 +337,35 @@ void FDrive::Handler::Processing(Message *msg)
             Interface::AddMessageForTransmit(answer);
         }
     }
+    else if (com == Command::FDrive_RequestFileString)
+    {
+        LOG_WRITE("Запрос на строку %d", msg->TakeWord());
+
+        /*
+        uint numString = msg->TakeWord();
+
+        char string[256];                                   // Здесь будет ответ
+
+        char *out = 0;
+
+        FIL fp;
+        if(f_open(&fp, msg->String(2), FA_READ) == FR_OK)
+        {
+            for (uint i = 0; i < numString; i++)
+            {
+                out = f_gets(string, 256, &fp);
+            }
+            f_close(&fp);
+        }
+
+        if (out != &string[0])
+        {
+            string[0] = 0;
+        }
+
+        Message *answer = new Message(Command::FDrive_RequestFileString, numString, string);
+
+        Interface::AddMessageForTransmit(answer);
+        */
+    }
 }

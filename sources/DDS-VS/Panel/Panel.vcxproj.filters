@@ -318,6 +318,9 @@
     <ClCompile Include="..\..\Panel\src\FDrive\File.cpp">
       <Filter>FDrive</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Panel\src\FDrive\File_requests.cpp">
+      <Filter>FDrive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Panel\src\Settings\SettingsTypes.h">

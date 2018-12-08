@@ -59,7 +59,8 @@ void Handlers::Processing(Message *msg)
         /* Test                    */ Handlers::Test,
         /* SetKoeffCalibration     */ Handlers::SetKoeffCalibration,
         /* GetKoeffCalibration     */ Handlers::GetKoeffCalibration,
-        /* FDrive_RequestFileSize  */ FDrive::Handler::Processing
+        /* FDrive_RequestFileSize  */ FDrive::Handler::Processing,
+        /* FDrive_RequestFileString*/ FDrive::Handler::Processing
     };
 
     uint com = msg->TakeByte();

@@ -17,6 +17,8 @@ friend class Interface;
     bool Equals(Task *, Task *);
     /// Соообщение для пересылки
     Message *message;
+    /// Возвращает указатель на готовое к использованию (со сброщенным указателем) сообщение
+    Message *GetMessage();
 private:
     /// Этот конструктор может использоваться только в Interface для сравнения
     Task(Message *msg);

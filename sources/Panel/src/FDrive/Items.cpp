@@ -87,6 +87,14 @@ bool Items::Handler::Processing(Message *msg)
     {
         int num = msg->TakeByte();
         std::strcpy(files[num].name, msg->String(2));
+
+        if (num == curItem)
+        {
+            String fileName("%s\\%s", FDrive::directory, files[num].name);
+
+            file.Open(fileName.CString());
+        }
+
         return true;
     }
     else if (command == Command::FDrive_RequestFileSize)
