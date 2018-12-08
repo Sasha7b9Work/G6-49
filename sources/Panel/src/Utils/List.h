@@ -45,6 +45,8 @@ public:
     bool Member(T *element);
     /// Возвращает указатель
     ListElement<T> *First();
+    /// Возвращает размер
+    uint Size() const;
 
 private:
     /// Возвращает указатель на последний элемент списка

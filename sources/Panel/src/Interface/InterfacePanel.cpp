@@ -64,7 +64,12 @@ void Interface::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::AddTask(Task *task)
 {
-    if (!tasks.Member(task))                    // Если задания ещё нет в очереди
+    if (tasks.Member(task))                     // Если задание уже в очереди
+    {
+        LOG_WRITE("Такое задание уже есть");
+        LOG_WRITE("Размер %d", tasks.Size());
+    }
+    else                                        // Если задания ещё нет в очереди
     {
         Send(task->message);                    // То посылаем сообщение
         task->timeLast = TIME_MS;               // запоминаем время посылки
@@ -84,6 +89,7 @@ void Interface::SendTasks()
         if (!PassedLittleTimeAfterSend(task))
         {
             Send(task->message);
+          //  LOG_WRITE("посылаю %s", task->message->Trace());
             task->timeLast = TIME_MS;
         }
 

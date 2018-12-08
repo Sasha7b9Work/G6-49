@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "structs.h"
+#include "Command.h"
 #include "Message.h"
 #include "Hardware/CPU.h"
 #include "log.h"
@@ -398,4 +399,16 @@ bool Message::IsEquals(const Message *message) const
 char *Message::String(int pos)
 {
     return (char *)Data(pos);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString Message::Trace()
+{
+    if (Size() == 0)
+    {
+        return "";
+    }
+
+    static Command command(Data()[0]);
+    return command.Trace(0);
 }

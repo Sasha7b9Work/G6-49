@@ -29,7 +29,7 @@ static int GetSizeItem(int i);
 static int numFiles;
 bool Items::requestIsSend = false;
 
-#define NUM_ITEMS 25
+#define NUM_ITEMS 3
 
 struct StructFile
 {
@@ -51,6 +51,7 @@ static File file;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Items::Init()
 {
+    LOG_FUNC_ENTER();
     numDirs = numFiles = -1;
     requestIsSend = false;
     for (int i = 0; i < NUM_ITEMS; i++)
@@ -92,7 +93,9 @@ bool Items::Handler::Processing(Message *msg)
         {
             String fileName("%s\\%s", FDrive::directory, files[num].name);
 
-            file.Open(fileName.CString());
+            //LOG_WRITE("%s", fileName.CString());
+            
+            //file.Open(fileName.CString());
         }
 
         return true;
@@ -110,14 +113,15 @@ bool Items::Handler::Processing(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool EqualsRequestNameFile(Task *task1, Task *task2)
 {
-    Message *msg1 = task1->message;
-    msg1->ResetPointer();
+    Message *msg1 = task1->GetMessage();
 
-    Message *msg2 = task2->message;
-    msg2->ResetPointer();
+    Message *msg2 = task2->GetMessage();
 
-    return (Command::FDrive_RequestFile == msg1->TakeByte() == msg2->TakeByte()) &&
-        (msg1->TakeByte() == msg2->TakeByte());
+    uint8 com = Command::FDrive_RequestFile;
+
+    return  (com == msg1->TakeByte()) &&
+            (com == msg2->TakeByte()) &&
+            (msg1->TakeByte() == msg2->TakeByte());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -133,14 +137,15 @@ static void SendRequestForNameFile(int number)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool EqualsRequestSizeFile(Task *task1, Task *task2)
 {
-    Message *msg1 = task1->message;
-    msg1->ResetPointer();
+    Message *msg1 = task1->GetMessage();
 
-    Message *msg2 = task2->message;
-    msg2->ResetPointer();
+    Message *msg2 = task2->GetMessage();
 
-    return (Command::FDrive_RequestFileSize == msg1->TakeByte() == msg2->TakeByte()) &&
-        (msg1->TakeByte() == msg2->TakeByte());
+    uint8 com = Command::FDrive_RequestFileSize;
+
+    return  (com == msg1->TakeByte()) &&
+            (com == msg2->TakeByte()) &&
+            (msg1->TakeByte() == msg2->TakeByte());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -200,7 +205,7 @@ void Items::PressDown()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Items::DrawItems(int x, int y)
+void Items::Draw(int x, int y)
 {
     Text::SetUpperCase(false);
 
@@ -223,7 +228,7 @@ static void DrawItem(int i, int x, int y, bool highlight)
         color = Color::BACK;
     }
     GetNameItem(i).Draw(x, y, color);
-    String("%d", GetSizeItem(i)).Draw(x + 180, y);
+    //String("%d", GetSizeItem(i)).Draw(x + 180, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

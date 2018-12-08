@@ -26,7 +26,7 @@ public:
     /// Обработка нажатия кнопки "Вниз"
     static void PressDown();
     /// Нарисовать списокфайлов
-    static void DrawItems(int x, int y);
+    static void Draw(int x, int y);
 
     static File *CurrentFile();
 

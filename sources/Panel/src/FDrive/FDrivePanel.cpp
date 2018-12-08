@@ -64,9 +64,9 @@ void FDrive::Draw()
         return;
     }
 
-    Items::DrawItems(x + 5, y + 5);
+    Items::Draw(x + 5, y + 5);
 
-    Items::CurrentFile()->Draw(5, 120);
+    //Items::CurrentFile()->Draw(5, 120);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +79,8 @@ bool FDrive::Handler::Processing(Message *msg)
     if (command == Command::FDrive_Mount)
     {
         mounted = (Mount)msg->TakeByte();
-        Items::Init();
+        LOG_WRITE("mounted = %d", (int)mounted);
+        Init();
         return true;
     }
     else if (command == Command::FDrive_NumDirsAndFiles)

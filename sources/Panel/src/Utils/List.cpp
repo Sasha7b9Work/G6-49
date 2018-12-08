@@ -12,6 +12,7 @@ template bool               List<Task>::Member(Task *);
 template ListElement<Task> *List<Task>::First();
 template                    List<Task>::List();
 template void               List<Task>::Remove(Task *);
+template uint               List<Task>::Size() const;
 
 template                    ListElement<Task>::~ListElement();
 template Task              *ListElement<Task>::Get();
@@ -149,3 +150,21 @@ ListElement<T>::~ListElement()
 {
     delete value;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+template <class T>
+uint List<T>::Size() const
+{
+    uint size = 0;
+
+    ListElement<T> *element = head;
+
+    while (element)
+    {
+        size++;
+        element = element->Next();
+    }
+
+    return size;
+}
+

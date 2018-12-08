@@ -44,7 +44,7 @@ void Log::Write(TypeTrace::E type, char *format, ...)
     if (type == TypeTrace::Error)
     {
         buffer[0] = 0;
-        std::strcat(buffer, "!!! ERROR !!! ");
+        std::strcat(buffer, "!!! ERROR !!! 1111111111111111111111111");
         while (*pointer++) {};
         ++pointer;
     }

@@ -63,6 +63,8 @@ public:
     /// Возвращает указатель на pos-й элемент. Удобно для копирования строк
     char *String(int pos);
 
+    pString Trace();
+
 private:
     /// Положить байт
     void PutByte(uint8 data);
