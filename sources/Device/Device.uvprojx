@@ -441,6 +441,16 @@
               <FileType>1</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src\option\syscall.c</FilePath>
             </File>
+            <File>
+              <FileName>FatFS.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\libs\FatFS\FatFS.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FatFS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\libs\FatFS\FatFS.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

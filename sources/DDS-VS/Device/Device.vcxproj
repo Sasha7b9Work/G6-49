@@ -201,6 +201,7 @@
     <ClInclude Include="..\..\Device\src\Interface\HandlersDevice.h" />
     <ClInclude Include="..\..\Device\src\Interface\InterfaceDevice.h" />
     <ClInclude Include="..\..\Device\src\libs\FatFS\ffconf.h" />
+    <ClInclude Include="..\..\Device\src\libs\FatFS\FatFS.h" />
     <ClInclude Include="..\..\Device\src\libs\HAL\stm32f4xx_hal_conf.h" />
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h" />
     <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h" />
@@ -304,6 +305,7 @@
     <ClCompile Include="..\..\Device\src\libs\CMSIS\system_stm32f4xx.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\FatFS\FatFS.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp" />
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp" />

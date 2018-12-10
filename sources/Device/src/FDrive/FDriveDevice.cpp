@@ -4,6 +4,7 @@
 #include "log.h"
 #include "structs.h"
 #include "FDriveDevice.h"
+#include "libs/FatFS/FatFS.h"
 #include "Interface/InterfaceDevice.h"
 #include "Generator/FPGA.h"
 #include "Generator/GeneratorDevice.h"
@@ -300,12 +301,10 @@ static void ReadFloats(float values[4096], char *name)
     FRESULT result = f_open(&fp, name, FA_READ);
     if (result == FR_OK)
     {
-        LOG_WRITE("Файл открыт");
         char buffer[255];
         f_gets(buffer, 255, &fp);
         if (std::strcmp(buffer, "Rigol Technologies,Inc. Save analog waveform to text files.\r\n") == 0)
         {
-            LOG_WRITE("Файл правильный. Читаю");
             char *pointer = 0;
             int counter = 0;
             do
@@ -340,7 +339,8 @@ static void ReadFloats(float values[4096], char *name)
     }
     else
     {
-        LOG_WRITE("Файл %s не открыт %d", name, result);
+        LOG_ERROR("Произошла ошибка при открытии файла %s", name);
+        LOG_ERROR("%s", FatFS::ErrorString(result).CString());
     }
 }
 
@@ -403,7 +403,6 @@ void FDrive::Handler::Processing(Message *msg)
         std::strcat(fullName, "\\");
         if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)], &srd))
         {
-            LOG_WRITE("Читаю данные");
             float values[4096];
             ReadFloats(values, &fullName[1]);
             uint8 data[FPGA_NUM_POINTS * 2];
@@ -451,6 +450,12 @@ void FDrive::Handler::Processing(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void FindMinMax(float d[4096], float *min, float *max)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Normalize(float d[4096])
 {
     float min = 0.0f;
@@ -481,6 +486,8 @@ static void Normalize(float d[4096])
     {
         d[i] /= scale;
     }
+
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

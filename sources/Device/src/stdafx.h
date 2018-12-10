@@ -7,6 +7,8 @@
 #include "Message.h"
 #include "Transceiver.h"
 
+#include "libs/FatFS/FatFS.h"
+
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
 
