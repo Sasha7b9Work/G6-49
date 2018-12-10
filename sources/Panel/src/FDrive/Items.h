@@ -27,6 +27,8 @@ public:
     static void PressDown();
     /// Нарисовать списокфайлов
     static void Draw(int x, int y);
+    /// Возвращает номер текущего файла
+    static int NumberCurrentFile();
 
     static File *CurrentFile();
 

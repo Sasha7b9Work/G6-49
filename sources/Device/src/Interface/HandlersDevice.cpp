@@ -60,7 +60,8 @@ void Handlers::Processing(Message *msg)
         /* SetKoeffCalibration     */ Handlers::SetKoeffCalibration,
         /* GetKoeffCalibration     */ Handlers::GetKoeffCalibration,
         /* FDrive_RequestFileSize  */ FDrive::Handler::Processing,
-        /* FDrive_RequestFileString*/ FDrive::Handler::Processing
+        /* FDrive_RequestFileString*/ FDrive::Handler::Processing,
+        /* FDrive_LoadToFPGA       */ FDrive::Handler::Processing
     };
 
     uint com = msg->TakeByte();

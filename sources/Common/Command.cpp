@@ -49,7 +49,8 @@ pString Command::Name() const
         "SetKoeffCalibration",
         "GetKoeffCalibration",
         "FDrive_RequestFileSize",
-        "FDrive_RequestFileString"
+        "FDrive_RequestFileString",
+        "FDrive_LoadToFPGA"
     };
     if(value < Number)
     {
@@ -166,6 +167,8 @@ pString Command::Trace(const uint8 *buffer) const
         case FDrive_RequestFileSize:
             break;
         case FDrive_RequestFileString:
+            break;
+        case FDrive_LoadToFPGA:
             break;
         case Number:
             break;

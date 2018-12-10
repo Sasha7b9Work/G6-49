@@ -38,6 +38,7 @@
 #include <cstdarg>
 #include <cstring>
 #include <cstdlib>
+#include <cstdio>
 
 #include "usbh_diskio.h"
 #include "usbh_conf.h"

@@ -113,3 +113,10 @@ void FDrive::PressDown()
 {
     Items::PressDown();
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::PressEnter()
+{
+    Message message(Command::FDrive_LoadToFPGA, (uint8)Items::NumberCurrentFile(), FDrive::directory);
+    Interface::Send(&message);
+}

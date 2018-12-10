@@ -289,6 +289,46 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ReadFloats(float values[4096], char *name)
+{
+    FIL fp;
+    if (f_open(&fp, name, FA_READ) == FR_OK)
+    {
+        char buffer[255];
+        f_gets(buffer, 255, &fp);
+        if (std::strcmp(buffer, "Rigol Technologies,Inc. Save analog waveform to text files.\r\n") == 0)
+        {
+            char *pointer = 0;
+            int counter = 0;
+            do
+            {
+                pointer = f_gets(buffer, 255, &fp);
+                counter++;
+            } while ((std::strcmp(buffer, " 0 \r\n") != 0) && (pointer[0] == buffer[0]));
+
+            if (pointer[0] == buffer[0])
+            {
+                for (int i = 0; i < 4096; i++)
+                {
+                    f_gets(buffer, 255, &fp);
+#ifndef WIN32
+                    char *ptr = std::strchr(buffer, ',');
+                    if (ptr != 0)
+                    {
+                        *ptr = '.';
+                    }
+                    std::sscanf(buffer, "%e", &values[i]);
+#endif
+
+                    f_gets(buffer, 255, &fp);
+                }
+            }
+        }
+        f_close(&fp);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Handler::Processing(Message *msg)
 {
     msg->ResetPointer();
@@ -335,6 +375,19 @@ void FDrive::Handler::Processing(Message *msg)
             Message *answer = new Message(6, Command::FDrive_RequestFileSize, (uint8)numFile, size);
 
             Interface::AddMessageForTransmit(answer);
+        }
+    }
+    else if (com == Command::FDrive_LoadToFPGA)
+    {
+        StructForReadDir srd;
+        char fullName[255];
+        int numFile = (int)msg->TakeByte();
+        std::strcpy(fullName, msg->String(2));
+        std::strcat(fullName, "\\");
+        if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)], &srd))
+        {
+            float values[4096];
+            ReadFloats(values, fullName);
         }
     }
     else if (com == Command::FDrive_RequestFileString)

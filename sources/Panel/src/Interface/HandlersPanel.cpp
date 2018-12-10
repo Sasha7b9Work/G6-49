@@ -55,7 +55,8 @@ bool Handlers::Processing(Message *msg)
         /* SetKoeffCalibration     */ Handlers::E,
         /* GetKoeffCalibration     */ Handlers::E,
         /* FDrive_RequestFileSize  */ FDrive::Handler::Processing,
-        /* FDrive_RequestFileString*/ FDrive::Handler::Processing
+        /* FDrive_RequestFileString*/ FDrive::Handler::Processing,
+        /* FDrive_LoadToFPGA       */ FDrive::Handler::Processing
     };
 
     uint8 command = msg->TakeByte();

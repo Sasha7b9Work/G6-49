@@ -629,6 +629,9 @@
     <ClInclude Include="..\..\Panel\src\FDrive\File.h">
       <Filter>FDrive</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cstdio">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\Display\font\font5.inc">

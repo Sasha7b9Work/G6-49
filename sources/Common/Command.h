@@ -102,8 +102,9 @@ struct Command
          //                          5 - DDS_MIN          ...
 /* <-  */   SetKoeffCalibration,        ///< Установка калибровочного коэффициента
 /* ->  */   GetKoeffCalibration,        ///< Запрос установленного калибровочного коэффициента
-/* ->  */   FDrive_RequestFileSize,     ///< Запрос размера файла
-/* ->  */   FDrive_RequestFileString,   ///< Считать строку из файла
+/* <-> */   FDrive_RequestFileSize,     ///< Запрос размера файла
+/* <-> */   FDrive_RequestFileString,   ///< Считать строку из файла
+/* ->  */   FDrive_LoadToFPGA,          ///< Загрузить файл произвольного сигнала
             Number
     } value;
     Command(E v) : value(v) {};
