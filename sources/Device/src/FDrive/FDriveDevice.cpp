@@ -297,12 +297,15 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 static void ReadFloats(float values[4096], char *name)
 {
     FIL fp;
-    if (f_open(&fp, name, FA_READ) == FR_OK)
+    FRESULT result = f_open(&fp, name, FA_READ);
+    if (result == FR_OK)
     {
+        LOG_WRITE("Файл открыт");
         char buffer[255];
         f_gets(buffer, 255, &fp);
         if (std::strcmp(buffer, "Rigol Technologies,Inc. Save analog waveform to text files.\r\n") == 0)
         {
+            LOG_WRITE("Файл правильный. Читаю");
             char *pointer = 0;
             int counter = 0;
             do
@@ -329,7 +332,15 @@ static void ReadFloats(float values[4096], char *name)
                 }
             }
         }
+        else
+        {
+            LOG_WRITE("%s", buffer);
+        }
         f_close(&fp);
+    }
+    else
+    {
+        LOG_WRITE("Файл %s не открыт %d", name, result);
     }
 }
 
@@ -392,11 +403,17 @@ void FDrive::Handler::Processing(Message *msg)
         std::strcat(fullName, "\\");
         if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)], &srd))
         {
+            LOG_WRITE("Читаю данные");
             float values[4096];
-            ReadFloats(values, fullName);
-            uint8 data[8129 * 2];
+            ReadFloats(values, &fullName[1]);
+            uint8 data[FPGA_NUM_POINTS * 2];
             TransformDataToCode(values, data);
-            std::memcpy(FPGA::DataDDS(ch), data, 8192 * 2);
+
+            // 1
+            Generator::EnableChannel(ch, true);
+
+            // 26
+            std::memcpy(FPGA::DataDDS(ch), data, FPGA_NUM_POINTS * 2);
             Generator::SetFormWave(ch, Form::DDS);
         }
     }
@@ -434,11 +451,46 @@ void FDrive::Handler::Processing(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void TransformDataToCode(float d[4095], uint8 code[FPGA_NUM_POINTS * 2])
+static void Normalize(float d[4096])
 {
+    float min = 0.0f;
+    float max = 0.0f;
+
+    for (int i = 0; i < 4096; i++)
+    {
+        if (d[i] < min)
+        {
+            min = d[i];
+        }
+        if (d[i] > max)
+        {
+            max = d[i];
+        }
+    }
+
+    max = std::fabsf(max);
+
+    if (std::fabsf(min) > max)
+    {
+        max = std::fabsf(min);
+    }
+
+    float scale = max;
+
+    for (int i = 0; i < 4096; i++)
+    {
+        d[i] /= scale;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void TransformDataToCode(float d[4096], uint8 code[FPGA_NUM_POINTS * 2])
+{
+    Normalize(d);
+    
     int max = 0x1fff;
 
-    for (int i = 0; i < 4095; i++)
+    for (int i = 0; i < 4096; i++)
     {
         uint16 c = (uint16)(std::fabsf(d[i]) * max);
 

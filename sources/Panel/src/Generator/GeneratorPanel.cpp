@@ -217,6 +217,15 @@ void Generator::SetAmplitude(Chan::E ch, float amplitude)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Generator::SetFrequency(Chan::E ch, float frequency)
+{
+    /// \todo √овнокод - запись параметра из двух мест
+    Message message(10, Command::SetFrequency, (uint8)ch, ParamValue(frequency).ToUINT64());
+
+    Interface::Send(&message);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterValue *param)
 {
     DEF_STRUCT(StructCommand, Command::E) commands[ParameterValue::Number] =

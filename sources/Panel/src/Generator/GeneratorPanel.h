@@ -34,6 +34,8 @@ public:
 
     static void SetParameter(ParameterChoice *param);
 
+    static void SetFrequency(Chan::E ch, float freq);
+
     static void SetOffset(Chan::E ch, float offset);
 
     static void SetAmplitude(Chan::E ch, float amplitude);

@@ -120,4 +120,8 @@ void FDrive::PressEnter()
 {
     Message message(Command::FDrive_LoadToFPGA, (uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::directory);
     Interface::Send(&message);
+
+    Generator::SetFrequency(CURRENT_CHANNEL, 1000.0f);
+    Generator::SetAmplitude(CURRENT_CHANNEL, 5.0f);
+    Generator::SetOffset(CURRENT_CHANNEL, 0.0f);
 }

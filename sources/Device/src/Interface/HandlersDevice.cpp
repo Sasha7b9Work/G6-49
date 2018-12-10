@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "structs.h"
 #include "Command.h"
 #include "Transceiver.h"
@@ -64,7 +65,12 @@ void Handlers::Processing(Message *msg)
         /* FDrive_LoadToFPGA       */ FDrive::Handler::Processing
     };
 
-    uint com = msg->TakeByte();
+    uint8 com = msg->TakeByte();
+
+    if (com != 0 && com != 29 && com != 32)
+    {
+    //    LOG_WRITE("%d", com);
+    }
 
     commands[com].val(msg);
 }
