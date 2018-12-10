@@ -356,6 +356,7 @@
     <ClInclude Include="..\..\common\_VS\string.h" />
     <ClInclude Include="..\..\common\_VS\tchar.h" />
     <ClInclude Include="..\..\common\_VS\windows.h" />
+    <ClInclude Include="..\..\common\_VS\cmath" />
     <ClInclude Include="..\..\Panel\src\defines.h" />
     <ClInclude Include="..\..\Panel\src\Display\Colors.h" />
     <ClInclude Include="..\..\Panel\src\Display\Console.h" />

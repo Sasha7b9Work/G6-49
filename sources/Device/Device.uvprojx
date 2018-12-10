@@ -1297,29 +1297,9 @@
           <GroupName>Generator</GroupName>
           <Files>
             <File>
-              <FileName>AD9952.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\AD9952.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD5697.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\AD5697.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FPGA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\FPGA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GeneratorSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\GeneratorSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AD9952.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\AD9952.h</FilePath>
             </File>
             <File>
               <FileName>AD5697.h</FileName>
@@ -1327,9 +1307,39 @@
               <FilePath>.\src\Generator\AD5697.h</FilePath>
             </File>
             <File>
+              <FileName>AD9952.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\AD9952.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>AD9952.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\AD9952.h</FilePath>
+            </File>
+            <File>
+              <FileName>FPGA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\FPGA.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FPGA.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\FPGA.h</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorDevice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\GeneratorDevice.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorDevice.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\GeneratorDevice.h</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\GeneratorSettings.cpp</FilePath>
             </File>
             <File>
               <FileName>GeneratroSettings.h</FileName>
@@ -1345,16 +1355,6 @@
               <FileName>Multiplexor.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Multiplexor.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GeneratorDevice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\GeneratorDevice.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GeneratorDevice.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\GeneratorDevice.h</FilePath>
             </File>
           </Files>
         </Group>

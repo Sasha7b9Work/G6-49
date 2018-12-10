@@ -632,6 +632,9 @@
     <ClInclude Include="..\..\common\_VS\cstdio">
       <Filter>common\_VS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cmath">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Panel\src\Display\font\font5.inc">

@@ -34,7 +34,7 @@
 #include "Utils/Queue.h"
 
 #include <limits>
-#include <math.h>
+#include <cmath>
 #include <cstdarg>
 #include <cstring>
 #include <cstdlib>

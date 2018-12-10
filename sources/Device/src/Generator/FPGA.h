@@ -13,6 +13,7 @@ class FPGA
 {
 friend class Interface;
 friend class Handlers;
+friend class FDrive;
 
 public:
     static void Init();

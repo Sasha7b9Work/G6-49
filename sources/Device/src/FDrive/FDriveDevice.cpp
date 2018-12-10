@@ -5,7 +5,10 @@
 #include "structs.h"
 #include "FDriveDevice.h"
 #include "Interface/InterfaceDevice.h"
+#include "Generator/FPGA.h"
+#include "Generator/GeneratorDevice.h"
 #include "Hardware/CPU.h"
+#include "Utils/Math.h"
 #include "Utils/String.h"
 #include "usbh_diskio.h"
 #include "usbh_conf.h"
@@ -58,6 +61,8 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 //static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
 /// Получить имя numFile-го файла из каталога fullPath
 //static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
+/// Трансформировать точки в пригодный для записи в ПЛИС вид
+static void TransformDataToCode(float d[4095], uint8 code[FPGA_NUM_POINTS * 2]);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -389,6 +394,10 @@ void FDrive::Handler::Processing(Message *msg)
         {
             float values[4096];
             ReadFloats(values, fullName);
+            uint8 data[8129 * 2];
+            TransformDataToCode(values, data);
+            std::memcpy(FPGA::DataDDS(ch), data, 8192 * 2);
+            Generator::SetFormWave(ch, Form::DDS);
         }
     }
     else if (com == Command::FDrive_RequestFileString)
@@ -421,5 +430,24 @@ void FDrive::Handler::Processing(Message *msg)
 
         Interface::AddMessageForTransmit(answer);
         */
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void TransformDataToCode(float d[4095], uint8 code[FPGA_NUM_POINTS * 2])
+{
+    int max = 0x1fff;
+
+    for (int i = 0; i < 4095; i++)
+    {
+        uint16 c = (uint16)(std::fabsf(d[i]) * max);
+
+        if (Sign(d[i]) == -1)
+        {
+            SetBit(c, 13);
+        }
+
+        code[i * 2] = code[i * 2 + 1] = (uint8)c;
+        code[i * 2 + FPGA_NUM_POINTS] = code[i * 2 + FPGA_NUM_POINTS + 1] = (uint8)(c >> 8);
     }
 }

@@ -173,7 +173,7 @@ void AD9952::WriteASF(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    float FTWf = (setDDS.ad9952[ch].frequency / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8f : 1e6f)) * powf(2, 32);
+    float FTWf = (setDDS.ad9952[ch].frequency / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8f : 1e6f)) * std::powf(2, 32);
 
     WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5f));
 }
