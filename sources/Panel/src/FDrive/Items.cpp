@@ -16,13 +16,13 @@
 /// Запрос имени файла с порядковым номером number
 static void SendRequestForNameFile(int number);
 /// Запрос размера файла с порядковым номером number
-static void SendRequestForSizeFile(int number);
+//static void SendRequestForSizeFile(int number);
 /// Нарисовать i-й итем
 static void DrawItem(int i, int x, int y, bool highlight);
 /// Возвращает имя i-го итема
 static String GetNameItem(int i);
 /// Возвращает размер i-го итема
-static int GetSizeItem(int i);
+//static int GetSizeItem(int i);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Количество файлов в текущем каталоге
@@ -140,6 +140,7 @@ static void SendRequestForNameFile(int number)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static bool EqualsRequestSizeFile(Task *task1, Task *task2)
 {
     Message *msg1 = task1->GetMessage();
@@ -152,8 +153,10 @@ static bool EqualsRequestSizeFile(Task *task1, Task *task2)
             (com == msg2->TakeByte()) &&
             (msg1->TakeByte() == msg2->TakeByte());
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static void SendRequestForSizeFile(int number)
 {
     Message *message = new Message(Command::FDrive_RequestFileSize, (uint8)number, FDrive::directory);
@@ -162,6 +165,7 @@ static void SendRequestForSizeFile(int number)
     
     Interface::AddTask(task);
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String GetNameItem(int i)
@@ -175,6 +179,7 @@ String GetNameItem(int i)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static int GetSizeItem(int i)
 {
     if (files[i].size == -1)
@@ -184,15 +189,12 @@ static int GetSizeItem(int i)
 
     return files[i].size;
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Items::NumberDirs()
 {
     return numDirs;
-}
-
-static void OpenFile()
-{
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

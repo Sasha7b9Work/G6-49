@@ -381,6 +381,7 @@ void FDrive::Handler::Processing(Message *msg)
     {
         StructForReadDir srd;
         char fullName[255];
+        Chan::E ch = (Chan::E)msg->TakeByte();
         int numFile = (int)msg->TakeByte();
         std::strcpy(fullName, msg->String(2));
         std::strcat(fullName, "\\");

@@ -40,6 +40,12 @@ Message::Message(uint8 v0, uint8 v1, char *string) : allocated(0), buffer(0), us
     Create(v0, v1, string);
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::Message(uint8 v0, uint8 v1, uint8 v2, char *string) : allocated(0), buffer(0), used(0), taken(0)
+{
+    Create(v0, v1, v2, string);
+}
+
 Message::Message(uint8 d0, uint d1, char *string) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(d0, d1, string);
@@ -174,6 +180,19 @@ void Message::Create(uint8 v0, uint8 v1, char *string)
         PutByte(v0);
         PutByte(v1);
         std::strcpy(String(2), string);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::Create(uint8 v0, uint8 v1, uint8 v2, char *string)
+{
+    uint size = 1 + 1 + 1 + std::strlen(string) + 1;
+    if (AllocateMemory(size))
+    {
+        PutByte(v0);
+        PutByte(v1);
+        PutByte(v2);
+        std::strcpy(String(3), string);
     }
 }
 

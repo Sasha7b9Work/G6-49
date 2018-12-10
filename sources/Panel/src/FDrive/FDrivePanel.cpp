@@ -10,6 +10,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h" 
 #include "Interface/InterfacePanel.h"
+#include "Settings/Settings.h"
 #include <cstdlib>
 #endif
 
@@ -117,6 +118,6 @@ void FDrive::PressDown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::PressEnter()
 {
-    Message message(Command::FDrive_LoadToFPGA, (uint8)Items::NumberCurrentFile(), FDrive::directory);
+    Message message(Command::FDrive_LoadToFPGA, (uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::directory);
     Interface::Send(&message);
 }
