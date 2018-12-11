@@ -44,25 +44,16 @@ void Console::Draw()
         return;
     }
 
-    DEBUG_POINT;
-
     Text::SetUpperCase(false);
 
     int y = 1;
     for (int i = 0; i < numStrings; i++)
     {
-        DEBUG_POINT;
         int length = Font::GetLengthText(&buffer[i][0]);
-        DEBUG_POINT;
         Painter::FillRegion(2, y, length, 9, Color::GREEN_25);
-        DEBUG_POINT;
         String(&buffer[i][0]).Draw(2, y, Color::FILL);
-        DEBUG_POINT;
-
         y += 9;
     }
 
     Text::SetUpperCase(true);
-
-    DEBUG_POINT;
 }
