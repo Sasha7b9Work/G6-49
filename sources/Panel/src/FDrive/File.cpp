@@ -8,9 +8,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define NUM_STRINGS 10
-/// Здесь хранятся строки файла
-static String strings[NUM_STRINGS];
 /// Полное имя файла
 static String name;
 
@@ -19,23 +16,11 @@ static String name;
 extern void SendRequestForString(int i);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void File::Draw(int x, int y)
+void File::Draw(int /*x*/, int /*y*/)
 {
     if (name.IsEmpty())
     {
         return;
-    }
-
-    for (int i = 0; i < NUM_STRINGS; i++)
-    {
-        if (strings[i].IsEmpty())
-        {
-            FileRequests::SendRequestForString(&name, i);
-        }
-        else
-        {
-            strings[i].Draw(x, y + i * 10);
-        }
     }
 }
 
@@ -58,9 +43,4 @@ String File::FullName()
 void File::Close()
 {
     name.Release();
-
-    for (int i = 0; i < NUM_STRINGS; i++)
-    {
-        strings[i].Release();
-    }
 }

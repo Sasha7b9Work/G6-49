@@ -30,8 +30,6 @@ public:
     /// Возвращает номер текущего файла
     static int NumberCurrentFile();
 
-    static File *CurrentFile();
-
     class Handler
     {
     public:

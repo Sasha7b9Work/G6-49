@@ -48,6 +48,8 @@ static int numDirs = -1;
 /// Теукущий файл
 static File file;
 
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Items::Init()
 {
@@ -96,11 +98,9 @@ bool Items::Handler::Processing(Message *msg)
 
         if (num == curItem)
         {
-            //String fileName("%s\\%s", FDrive::directory, files[num].name);
+            String fileName("%s\\%s", FDrive::directory, files[num].name);
 
-            //LOG_WRITE("%s", fileName.CString());
-            
-            //file.Open(fileName.CString());
+            file.Open(fileName.CString());
         }
 
         return true;
@@ -241,10 +241,9 @@ static void DrawItem(int i, int x, int y, bool highlight)
     }
     GetNameItem(i).Draw(x, y, color);
     //String("%d", GetSizeItem(i)).Draw(x + 180, y);
-}
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-File *Items::CurrentFile()
-{
-    return &file;
+    if (highlight)                                          // Нужно вывести изображения файла
+    {
+
+    }
 }
