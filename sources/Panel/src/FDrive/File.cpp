@@ -47,8 +47,10 @@ void File::Draw(int /*x*/, int /*y*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool File::Handler(Message * /*msg*/)
+bool File::Handler(Message *msg)
 {
+    LOG_WRITE("Получено сообщение %d", msg->TakeByte());
+
     return true;
 }
 
@@ -70,7 +72,7 @@ void File::Open(int _num)
 {
     Close();
 
-    Message *message = new Message(Command::FDrive_GetPictureDDS, (uint8)_num);
+    Message *message = new Message(2, Command::FDrive_GetPictureDDS, (uint8)_num);
 
     Task *task = new Task(message, File::Handler, EqualsRequestPicture);
 

@@ -116,6 +116,12 @@ void FDrive::Handler::Processing(Message *msg)
             Generator::SetFormWave(ch, Form::DDS);
         }
     }
+    else if (com == Command::FDrive_GetPictureDDS)
+    {
+        LOG_WRITE("Получен запрос на содержимое %d файла", msg->TakeByte());
+        Message *answer = new Message(2, Command::FDrive_GetPictureDDS, msg->TakeByte());
+        Interface::AddMessageForTransmit(answer);
+    }
     else if (com == Command::FDrive_RequestFileString)
     {
         LOG_WRITE("Запрос на строку %d", msg->TakeWord());
