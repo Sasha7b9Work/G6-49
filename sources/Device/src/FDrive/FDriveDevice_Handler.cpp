@@ -31,7 +31,7 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
 
 static uint GetFileSize(char *fullPath);
 
-static void ReadFloats(float values[4096], char *name);
+static bool ReadFloats(float values[4096], char *name);
 /// Трансформировать точки в пригодный для записи в ПЛИС вид
 static void TransformDataToCode(float d[4096], uint8 code[FPGA_NUM_POINTS * 2]);
 
@@ -42,6 +42,8 @@ static void FindMinMax(float d[4096], float *_min, float *_max);
 static float FindScale(float min, float max);
 
 static void ToScale(float d[4096], float scale);
+/// Заполнить массив picture данными для отрисовки сигнала на экране
+static void FillPicture(uint8 *picture, uint size, float values[4096]);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,16 +116,28 @@ void FDrive::Handler::Processing(Message *msg)
     }
     else if (com == Command::FDrive_GetPictureDDS)
     {
-        /*
+        const uint SIZE = 240;
+        uint8 data[SIZE];
+        std::memset(data, 0, SIZE);
+
         int numFile = (int)msg->TakeByte();
+
         char fullName[255];
         std::strcpy(fullName, msg->String(2));
         std::strcpy(fullName, "\\");
-        if(GetNameFile(msg->String()))
+        
+        if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
+        {
+            float values[4096];
+            if (ReadFloats(values, &fullName[1]))
+            {
+                FillPicture(data, SIZE, values);
+            }
+        }
 
-        Message *answer = new Message(2, Command::FDrive_GetPictureDDS, msg->TakeByte());
+        Message *answer = new Message(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
+        std::memcpy(answer->Data(2), data, SIZE);
         Interface::AddMessageForTransmit(answer);
-        */
     }
     else if (com == Command::FDrive_RequestFileString)
     {
@@ -268,11 +282,13 @@ static uint GetFileSize(char *fullPath)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ReadFloats(float values[4096], char *name)
+static bool ReadFloats(float values[4096], char *name)
 {
+    bool result = false;
+
     FIL fp;
-    FRESULT result = f_open(&fp, name, FA_READ);
-    if (result == FR_OK)
+    FRESULT res = f_open(&fp, name, FA_READ);
+    if (res == FR_OK)
     {
         char buffer[255];
         f_gets(buffer, 255, &fp);
@@ -302,6 +318,8 @@ static void ReadFloats(float values[4096], char *name)
 
                     f_gets(buffer, 255, &fp);
                 }
+
+                result = true;
             }
         }
         f_close(&fp);
@@ -309,8 +327,10 @@ static void ReadFloats(float values[4096], char *name)
     else
     {
         LOG_ERROR("Произошла ошибка при открытии файла %s", name);
-        LOG_ERROR("%s", FatFS::ErrorString(result).CString());
+        LOG_ERROR("%s", FatFS::ErrorString(res).CString());
     }
+
+    return result;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -388,5 +408,22 @@ static void ToScale(float d[4096], float scale)
     for (int i = 0; i < 4096; i++)
     {
         d[i] *= scale;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void FillPicture(uint8 *picture, uint size, float values[4096])
+{
+    Normalize(values);
+
+    uint8 aveValue = 127;
+
+    float step = 4096.0f / size;
+
+    for (uint i = 0; i < size; i++)
+    {
+        float val = values[(int)(i * step)];
+
+        picture[i] = (uint8)(aveValue + val * 125);
     }
 }

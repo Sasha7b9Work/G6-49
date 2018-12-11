@@ -17,7 +17,7 @@ static struct Picture
     uint8 data[300];
     void Clear()
     {
-        std::memset(data, 0, 300);
+        std::memset(data, 300, 0);
     }
 } picture;
 
@@ -50,7 +50,7 @@ void File::Draw(int x, int y)
 
     Painter::SetColor(Color::FILL);
 
-    for (int i = 0; i < 230; i++)
+    for (int i = 0; i < 240; i++)
     {
         Painter::SetPoint(x + i, (int)(y - picture.data[i] * scale));
     }
@@ -61,6 +61,11 @@ bool File::Handler(Message *msg)
 {
     msg->TakeByte();
     num = msg->TakeByte();
+
+    for (int i = 0; i < 300; i++)
+    {
+        picture.data[i] = msg->Data(2)[i];
+    }
 
     return true;
 }
