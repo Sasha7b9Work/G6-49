@@ -27,7 +27,7 @@ struct StructForReadDir
 /// Получает количество каталогов и файлов в данной директории
 static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
 /// Получить имя numFile-го файла из каталога fullPath
-static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
+static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
 
 static uint GetFileSize(char *fullPath);
 
@@ -64,13 +64,11 @@ void FDrive::Handler::Processing(Message *msg)
     }
     else if (com == Command::FDrive_RequestFile)
     {
-        StructForReadDir srd;
-
         char name[255];
 
         int numFile = (int)msg->TakeByte();
 
-        if (GetNameFile(msg->String(2), numFile, name, &srd))
+        if (GetNameFile(msg->String(2), numFile, name))
         {
             Message *answer = new Message(Command::FDrive_RequestFile, (uint8)numFile, name);
 
@@ -79,10 +77,9 @@ void FDrive::Handler::Processing(Message *msg)
     }
     else if (com == Command::FDrive_RequestFileSize)
     {
-        StructForReadDir srd;
         char name[255];
         int numFile = (int)msg->TakeByte();
-        if (GetNameFile(msg->String(2), numFile, name, &srd))           // Получаем имя файла
+        if (GetNameFile(msg->String(2), numFile, name))           // Получаем имя файла
         {
             String fullPath("%s\\%s", msg->String(2), name);
 
@@ -95,13 +92,12 @@ void FDrive::Handler::Processing(Message *msg)
     }
     else if (com == Command::FDrive_LoadToFPGA)
     {
-        StructForReadDir srd;
         char fullName[255];
         Chan::E ch = (Chan::E)msg->TakeByte();
         int numFile = (int)msg->TakeByte();
         std::strcpy(fullName, msg->String(2));
         std::strcat(fullName, "\\");
-        if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)], &srd))
+        if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
         {
             float values[4096];
             ReadFloats(values, &fullName[1]);
@@ -118,8 +114,16 @@ void FDrive::Handler::Processing(Message *msg)
     }
     else if (com == Command::FDrive_GetPictureDDS)
     {
+        /*
+        int numFile = (int)msg->TakeByte();
+        char fullName[255];
+        std::strcpy(fullName, msg->String(2));
+        std::strcpy(fullName, "\\");
+        if(GetNameFile(msg->String()))
+
         Message *answer = new Message(2, Command::FDrive_GetPictureDDS, msg->TakeByte());
         Interface::AddMessageForTransmit(answer);
+        */
     }
     else if (com == Command::FDrive_RequestFileString)
     {
@@ -204,14 +208,16 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
+static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 {
-    std::memcpy(s->nameDir, (void *)fullPath, std::strlen(fullPath));
-    s->nameDir[std::strlen(fullPath)] = '\0';
+    StructForReadDir srd;
 
-    DIR *pDir = &s->dir;
-    FILINFO *pFNO = &s->fno;
-    if (f_opendir(pDir, s->nameDir) == FR_OK)
+    std::memcpy(srd.nameDir, (void *)fullPath, std::strlen(fullPath));
+    srd.nameDir[std::strlen(fullPath)] = '\0';
+
+    DIR *pDir = &srd.dir;
+    FILINFO *pFNO = &srd.fno;
+    if (f_opendir(pDir, srd.nameDir) == FR_OK)
     {
         int numFiles = 0;
         bool alreadyNull = false;
