@@ -64,9 +64,9 @@ void FPGA::SetWaveForm(Chan::E ch, Form form)
     DEF_STRUCT(StructFunc, pFuncFpgaVU8) func[Form::Number] =
     {
         SetModeSine,            ///< Здесь включается режим амплитудной манипуляции
-        SetModeDDS,
-        SetModeDDS,
-        SetModeDDS,
+        SetModeRampPlus,
+        SetModeRampMinus,
+        SetModeTriangle,
         SetModeMeander,
         SetModeImpulse,
         SetModePackedImpulse,
@@ -114,7 +114,28 @@ void FPGA::SetModeSine(Chan::E ch)
 void FPGA::SetModeDDS(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
-    SendData();
+    SendData(&dataFlash[Chan::A][0]);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetModeRampPlus(Chan::E ch)
+{
+    modeWork[ch] = ModeWork::DDS;
+    SendData(&dataDDS[Chan::A][0]);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetModeRampMinus(Chan::E ch)
+{
+    modeWork[ch] = ModeWork::DDS;
+    SendData(&dataDDS[Chan::A][0]);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SetModeTriangle(Chan::E ch)
+{
+    modeWork[ch] = ModeWork::DDS;
+    SendData(&dataDDS[Chan::A][0]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -388,21 +409,19 @@ bool FPGA::Start()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SendData()
+void FPGA::SendData(uint8 *data)
 {
     WriteRegister(RG::_0_Control, 0);
     
-    uint8 *pointer = dataDDS[0];
+    uint8 *pointer = data;
 
     /// \todo Это временно так задержка организована
     __IO int i = 0;
 
     for(i = 0; i < 10; i++)
     {
-        pointer = dataDDS[0];
+        *pointer = data[0];
     }
-
-//    Console::AddString("");
 
     for(i = 0; i < FPGA_NUM_POINTS * 4; i++)
     {

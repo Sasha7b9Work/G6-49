@@ -52,8 +52,8 @@ public:
 
 private:
     static const int FPGA_NUM_POINTS = 8 * 1024;
-
-    static void SetFormDDS(Form *form);
+    /// Загружает форму произвольного сигнала
+    static void LoadFormDDS(Form *form);
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
     static void TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2]);
 };

@@ -247,8 +247,6 @@ void Handlers::LoadFormDDS(Message *message)
     Chan::E ch = (Chan::E)message->TakeByte();
 
     std::memcpy(FPGA::DataDDS(ch), message->Data(2), FPGA_NUM_POINTS * 2);
-
-    Generator::SetFormWave(ch, Form::DDS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

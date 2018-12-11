@@ -155,7 +155,13 @@ private:
     };
 
     static void SetModeSine(Chan::E ch);
-    /// Установить режим произвольного сигнала по каналу ch
+    /// Установить режим Пила+
+    static void SetModeRampPlus(Chan::E ch);
+    /// Установить режим Пила-
+    static void SetModeRampMinus(Chan::E ch);
+    /// Установить режим Треугольник
+    static void SetModeTriangle(Chan::E ch);
+    /// Установить режим произвольного сигнала, загруженного с флешки
     static void SetModeDDS(Chan::E ch);
     /// Возвращает указатель на точки произвольного сигнала (программно определёного)
     static uint8 *DataDDS(Chan::E ch);
@@ -170,7 +176,7 @@ private:
 
     static void EmptyFunc(Chan ch);
     /// Заслать рассчитанные точки в плис
-    static void SendData();
+    static void SendData(uint8 *data);
     /// Записать байт в ПЛИС
     static void WriteByte(uint8 byte);
     /// Записать значение в регистр

@@ -71,14 +71,11 @@ void Generator::SetFormWave(Wave *w)
 
     if(FORM(ch)->IsDDS())
     {
-        SetFormDDS(FORM(ch));
+        LoadFormDDS(FORM(ch));
     }
-    else
-    {
-        Message message(3, Command::SetFormWave, (uint8)ch, form);
+    Message message(3, Command::SetFormWave, (uint8)ch, form);
 
-        Interface::Send(&message);
-    }
+    Interface::Send(&message);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +89,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormDDS(Form *form)
+void Generator::LoadFormDDS(Form *form)
 {
     Chan::E ch = form->GetWave()->GetChannel();
 
