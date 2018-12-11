@@ -280,14 +280,14 @@ static void ReadFloats(float values[4096], char *name)
                 for (int i = 0; i < 4096; i++)
                 {
                     f_gets(buffer, 255, &fp);
-#ifndef WIN32
+
                     char *ptr = std::strchr(buffer, ',');
                     if (ptr != 0)
                     {
                         *ptr = '.';
                     }
+
                     std::sscanf(buffer, "%e", &values[i]);
-#endif
 
                     f_gets(buffer, 255, &fp);
                 }

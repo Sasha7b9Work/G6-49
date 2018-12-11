@@ -8,6 +8,8 @@ class String;
 class File
 {
 public:
+    File();
+    ~File();
     /// Открывает файл
     void Open(char *fullName);
     /// Отображает содержимое
