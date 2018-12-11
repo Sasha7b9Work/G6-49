@@ -42,19 +42,31 @@ DEF_BUTTON( bChoose,                                                            
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool OnKey(Control)
+static bool OnKey(Control event)
 {
-    LOG_FUNC_ENTER();
+    if (event.value == Control::RegLeft)
+    {
+        FDrive::PressDown();
+        return true;
+    }
+    else if (event.value == Control::RegRight)
+    {
+        FDrive::PressUp();
+        return true;
+    }
+
     return false;
 }
 
 DEF_PAGE_4( pageLoad,                                                                                                                                //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ ----
     "«¿√–”« ¿", "LOAD",
     "", "",
-    &bUp,       ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬‚Âı
-    &bDown,     ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬ÌËÁ
+    //&bUp,       ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬‚Âı
+    //&bDown,     ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬ÌËÁ
     //&bEnter,    ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - Enter
     &bChoose,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ”ÒÚ‡ÌÓ‚ËÚ¸
+    0,
+    0,
     0,
     Page::Settings_Load, PageSignals::pointer, FuncActive, FuncPress, OnKey, FDrive::Draw
 )
