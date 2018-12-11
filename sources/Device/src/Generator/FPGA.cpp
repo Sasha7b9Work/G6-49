@@ -22,7 +22,6 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FPGA::ModeWork::E       FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
-uint8                   FPGA::dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
 float                   FPGA::amplitude[Chan::Number] = {10.0f, 10.0f};
 float                   FPGA::offset[Chan::Number] = {5.0f, 5.0f};
 FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
@@ -30,6 +29,12 @@ uint64                  FPGA::registers[FPGA::RG::Number] = {0};
 StartMode               FPGA::startMode[Chan::Number] = {StartMode::Auto, StartMode::Auto};
 ParamValue              FPGA::PacketImpulse::periodImpulse((uint64)0);
 ParamValue              FPGA::PacketImpulse::durationImpulse((uint64)0);
+
+/// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
+/// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
+static uint8 dataDDS[Chan::Number][FPGA_NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
+/// Здесь хранятся данные сигнала, загруженные с флешки
+static uint8 dataFlash[Chan::Number][FPGA_NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -543,4 +548,10 @@ void FPGA::SetOffset(Chan::E ch, ParamValue off)
 uint8 *FPGA::DataDDS(Chan::E ch)
 {
     return &dataDDS[ch][0];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *FPGA::DataFlash(Chan::E ch)
+{
+    return &dataFlash[ch][0];
 }

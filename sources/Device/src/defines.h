@@ -1,6 +1,6 @@
 #pragma once
-#include <stm32f4xx.h>
 
+#include <stm32f4xx.h>
 #include <usbd_def.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +31,10 @@ typedef void(*pFuncVI)(int);
 #define BINARY_U8( bits ) _bitset(0##bits)
 
 #define BINARY_U16(bits1, bits0) ((BINARY_U8(bits1) << 8) | (BINARY_U8(bits0)))
+
+#ifdef WIN32
+#define __attribute__(x)
+#endif
 
 #ifdef _CONSOLE
 

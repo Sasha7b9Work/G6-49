@@ -157,8 +157,10 @@ private:
     static void SetModeSine(Chan::E ch);
     /// Установить режим произвольного сигнала по каналу ch
     static void SetModeDDS(Chan::E ch);
-    /// Возвращает указатель на точки произвольного сигнала
+    /// Возвращает указатель на точки произвольного сигнала (программно определёного)
     static uint8 *DataDDS(Chan::E ch);
+    /// Возвращает указатель на точки сигнала, загружаемого из флешки
+    static uint8 *DataFlash(Chan::E ch);
 
     static void SetModeMeander(Chan::E ch);
 
@@ -191,9 +193,6 @@ private:
     static StartMode startMode[Chan::Number];
     /// Режим работы ПЛИС
     static ModeWork::E modeWork[Chan::Number];
-    /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
-    /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
-    static uint8 dataDDS[Chan::Number][FPGA_NUM_POINTS * 2];
 
     static float amplitude[Chan::Number];
 
