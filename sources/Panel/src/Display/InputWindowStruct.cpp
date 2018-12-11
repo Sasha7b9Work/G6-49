@@ -399,9 +399,9 @@ void StructValue::PressKey(Control key)
 {
     static const struct StrControl
     {
-        Control control;
-        char    symbol;
-        uint8   nu[3];
+        Control::E control;
+        char       symbol;
+        uint8      nu[3];
     }
     command[] =
     {

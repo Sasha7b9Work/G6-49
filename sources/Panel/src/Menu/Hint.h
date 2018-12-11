@@ -27,7 +27,7 @@ private:
     ///  онтрол, дл€ которого нужно выводить подсказку
     static const Item *item;
     /// ќрган управлени€, дл€ которого нужно выводить подсказку
-    static Control control;
+    static Control::E control;
     ///  оличество страниц в подсказке
     static int numPages;
     /// “екуща€ отрисовываема€ страница

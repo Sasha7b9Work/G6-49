@@ -268,11 +268,11 @@ void InputWindow::ProcessContorl(Control key)
             iws.PressKey(key);
         }
     }
-    else if (key.Is(Control::Reg::Left))
+    else if (key.Is(Control::RegLeft))
     {
         iws.RegLeft();
     }
-    else if (key.Is(Control::Reg::Right))
+    else if (key.Is(Control::RegRight))
     {
         iws.RegRight();
     }

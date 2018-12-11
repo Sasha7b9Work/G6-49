@@ -23,7 +23,7 @@ static void(*callbackKeyboard)() = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void FillCommand(Control control, Control::Action::E action);
+static void FillCommand(Control::E control, Control::Action::E action);
 static void DetectRegulator();
 
 #define SL0 (1 << 12)
@@ -47,11 +47,11 @@ static void DetectRegulator();
 static uint timePress[5][6];
 
                                      //          SL0          SL1          SL2             SL3             S4             SL5
-static const Control controls[5][6] = {{Control::_0, Control::_5, Control::Dot,   Control::Esc,   Control::F1,   Control::None},    // RL0
-                                       {Control::_1, Control::_6, Control::Minus, Control::Left,  Control::F2,   Control::None},    // RL1
-                                       {Control::_2, Control::_7, Control::None,  Control::Right, Control::F3,   Control::None},    // RL2
-                                       {Control::_3, Control::_8, Control::On1,   Control::None,  Control::F4,   Control::None},    // RL3
-                                       {Control::_4, Control::_9, Control::On2,   Control::None,  Control::None, Control::None}};   // RL4
+static const Control::E controls[5][6] = {{Control::_0, Control::_5, Control::Dot,   Control::Esc,   Control::F1,   Control::None},    // RL0
+                                         {Control::_1, Control::_6, Control::Minus, Control::Left,  Control::F2,   Control::None},    // RL1
+                                         {Control::_2, Control::_7, Control::None,  Control::Right, Control::F3,   Control::None},    // RL2
+                                         {Control::_3, Control::_8, Control::On1,   Control::None,  Control::F4,   Control::None},    // RL3
+                                         {Control::_4, Control::_9, Control::On2,   Control::None,  Control::None, Control::None}};   // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
@@ -104,7 +104,7 @@ void CPU::Keyboard::Update()
         {
             bool state = READ_RL(rl);
 
-            Control control =  controls[rl][sl];
+            Control::E control =  controls[rl][sl];
 
             if (control != Control::None)
             {
@@ -164,7 +164,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // ≈сли нажатие длитс€ более 0.5 сек
         {
-            FillCommand(Control::Reg::Button, Control::Action::Long);                                     // посылаем длинное нажатие
+            FillCommand(Control::RegButton, Control::Action::Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -176,7 +176,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                FillCommand(Control::Reg::Button, Control::Action::Down);
+                FillCommand(Control::RegButton, Control::Action::Down);
             }
         }
         else                                                                // ≈ксли копка была нажата ранее
@@ -185,7 +185,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    FillCommand(Control::Reg::Button, Control::Action::Up);
+                    FillCommand(Control::RegButton, Control::Action::Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -206,20 +206,20 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        FillCommand(Control::Reg::Left, Control::Action::Down);
+        FillCommand(Control::RegLeft, Control::Action::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        FillCommand(Control::Reg::Right, Control::Action::Down);
+        FillCommand(Control::RegRight, Control::Action::Down);
         prevStatesIsOne = false;
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillCommand(Control key, Control::Action::E action)
+static void FillCommand(Control::E key, Control::Action::E action)
 {
-    commands[pointer++] = Control(key.value, action);
+    commands[pointer++] = Control(key, action);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool        Hint::show = false;
 const Item *Hint::item = 0;
-Control     Hint::control = Control::None;
+Control::E  Hint::control = Control::None;
 int         Hint::numPages = 0;
 int         Hint::currentPage = 0;
 int         Hint::firstItemOnSecondPage = 0;
@@ -46,7 +46,7 @@ bool Hint::ProcessControl(Control key)
         {
             if(numPages > 1)
             {
-                if(key.Is(Control::Reg::Left))
+                if(key.Is(Control::RegLeft))
                 {
                     if(currentPage > 1)
                     {
