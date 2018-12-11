@@ -201,6 +201,7 @@ void Items::PressUp()
     if (curItem > 0)
     {
         curItem--;
+        file.Open(curItem);
     }
 }
 
@@ -211,6 +212,7 @@ void Items::PressDown()
     if (curItem < numFiles - 1)
     {
         curItem++;
+        file.Open(curItem);
     }
 }
 
@@ -224,6 +226,8 @@ void Items::Draw(int x, int y)
         DrawItem(i, x, y, (curItem == i));
         y += 10;
     }
+
+    file.Draw(5, 235);
 
     Text::SetUpperCase(true);
 }
@@ -239,9 +243,4 @@ static void DrawItem(int i, int x, int y, bool highlight)
     }
     GetNameItem(i).Draw(x, y, color);
     //String("%d", GetSizeItem(i)).Draw(x + 180, y);
-
-    if (highlight)                                          // Нужно вывести изображения файла
-    {
-
-    }
 }

@@ -4,6 +4,7 @@
 #include "log.h"
 #include "File.h"
 #include "Command.h"
+#include "Display/Painter.h"
 #include "Interface/InterfacePanel.h"
 #include "Utils/String.h"
 #include <cstring>
@@ -38,18 +39,28 @@ File::~File()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void File::Draw(int /*x*/, int /*y*/)
+void File::Draw(int x, int y)
 {
     if (num == -1)
     {
         return;
+    }
+
+    float scale = 100.0f / 255.0f;
+
+    Painter::SetColor(Color::FILL);
+
+    for (int i = 0; i < 230; i++)
+    {
+        Painter::SetPoint(x + i, (int)(y - picture.data[i] * scale));
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool File::Handler(Message *msg)
 {
-    LOG_WRITE("Получено сообщение %d", msg->TakeByte());
+    msg->TakeByte();
+    num = msg->TakeByte();
 
     return true;
 }
@@ -63,8 +74,7 @@ static bool EqualsRequestPicture(Task *request, Task *answer)
     uint8 com = Command::FDrive_GetPictureDDS;
 
     return  (com == send->TakeByte()) &&
-            (com == recv->TakeByte()) &&
-            (send->TakeByte() == recv->TakeByte());
+            (com == recv->TakeByte());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

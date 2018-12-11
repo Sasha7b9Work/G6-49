@@ -118,7 +118,6 @@ void FDrive::Handler::Processing(Message *msg)
     }
     else if (com == Command::FDrive_GetPictureDDS)
     {
-        LOG_WRITE("Получен запрос на содержимое %d файла", msg->TakeByte());
         Message *answer = new Message(2, Command::FDrive_GetPictureDDS, msg->TakeByte());
         Interface::AddMessageForTransmit(answer);
     }
