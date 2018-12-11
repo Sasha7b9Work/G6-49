@@ -171,6 +171,8 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case FDrive_LoadToFPGA:
             break;
+        case FDrive_GetPictureDDS:
+            break;
         case Number:
             break;
     }

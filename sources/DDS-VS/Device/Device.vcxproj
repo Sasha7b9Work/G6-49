@@ -259,7 +259,12 @@
     <ClCompile Include="..\..\common\Message.cpp" />
     <ClCompile Include="..\..\common\Transceiver.cpp" />
     <ClCompile Include="..\..\Common\Wave.cpp" />
-    <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice.cpp" />
+    <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice_Handler.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\Device\src\FreqMeter\FreqMeter.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>

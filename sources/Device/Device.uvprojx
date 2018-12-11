@@ -1286,6 +1286,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\FDrive\FDriveDevice.h</FilePath>
             </File>
+            <File>
+              <FileName>FDriveDevice_Handler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\FDriveDevice_Handler.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1487,14 +1492,14 @@
               <FilePath>.\src\Interface\InterfaceDevice.cpp</FilePath>
             </File>
             <File>
-              <FileName>Transceiver_407.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Interface\Transceiver_407.cpp</FilePath>
-            </File>
-            <File>
               <FileName>InterfaceDevice.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Interface\InterfaceDevice.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver_407.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Interface\Transceiver_407.cpp</FilePath>
             </File>
           </Files>
         </Group>

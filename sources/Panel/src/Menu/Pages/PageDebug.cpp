@@ -22,9 +22,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pRegisters;
 extern const PageBase pDebug;
-extern const ButtonBase bBackspace;
-extern const ButtonBase bCancel;
-extern const ButtonBase bSave;
+extern volatile const ButtonBase bBackspace;
+extern volatile const ButtonBase bCancel;
+extern volatile const ButtonBase bSave;
 
 static Item emptyItem = {Item::Type::None};
 

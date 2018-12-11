@@ -452,6 +452,9 @@
     <ClCompile Include="..\..\Device\src\libs\FatFS\FatFS.cpp">
       <Filter>libs\FatFS</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice_Handler.cpp">
+      <Filter>FDrive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f407xx.s">
