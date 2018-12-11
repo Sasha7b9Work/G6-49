@@ -50,7 +50,8 @@ pString Command::Name() const
         "GetKoeffCalibration",
         "FDrive_RequestFileSize",
         "FDrive_RequestFileString",
-        "FDrive_LoadToFPGA"
+        "FDrive_LoadToFPGA",
+        "FDrive_GetPictureDDS"
     };
     if(value < Number)
     {

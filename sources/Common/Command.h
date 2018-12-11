@@ -105,6 +105,7 @@ struct Command
 /* <-> */   FDrive_RequestFileSize,     ///< Запрос размера файла
 /* <-> */   FDrive_RequestFileString,   ///< Считать строку из файла
 /* ->  */   FDrive_LoadToFPGA,          ///< Загрузить файл произвольного сигнала
+/* <-> */   FDrive_GetPictureDDS,       ///< Получить изображение формы сигнала
             Number
     } value;
     Command(E v) : value(v) {};
