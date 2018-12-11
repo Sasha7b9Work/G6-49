@@ -98,9 +98,7 @@ bool Items::Handler::Processing(Message *msg)
 
         if (num == curItem)
         {
-            String fileName("%s\\%s", FDrive::directory, files[num].name);
-
-            file.Open(fileName.CString());
+            file.Open(num);
         }
 
         return true;
