@@ -450,13 +450,20 @@ void FDrive::Handler::Processing(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FindMinMax(float d[4096], float *min, float *max)
+static float FindScale(float min, float max)
 {
+    max = std::fabsf(max);
 
+    if (std::fabsf(min) > max)
+    {
+        max = std::fabsf(min);
+    }
+
+    return 1.0f / max;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Normalize(float d[4096])
+static void FindMinMax(float d[4096], float *_min, float *_max)
 {
     float min = 0.0f;
     float max = 0.0f;
@@ -473,22 +480,33 @@ static void Normalize(float d[4096])
         }
     }
 
-    max = std::fabsf(max);
+    *_min = min;
+    *_max = max;
+}
 
-    if (std::fabsf(min) > max)
-    {
-        max = std::fabsf(min);
-    }
-
-    float scale = max;
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ToScale(float d[4096], float scale)
+{
     for (int i = 0; i < 4096; i++)
     {
-        d[i] /= scale;
+        d[i] *= scale;
     }
-
-
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void Normalize(float d[4096])
+{
+    float min = 0.0f;
+    float max = 0.0f;
+
+    FindMinMax(d, &min, &max);
+
+    float scale = FindScale(min, max);
+
+    ToScale(d, scale);
+}
+
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void TransformDataToCode(float d[4096], uint8 code[FPGA_NUM_POINTS * 2])
