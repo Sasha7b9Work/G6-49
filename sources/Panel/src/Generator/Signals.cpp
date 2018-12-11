@@ -98,13 +98,13 @@ static ParameterBase *params_RampMinusA[] =
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
-static ParameterValue  param_TriangleA_Amplitude(ParameterValue::Amplitude, 0.0f, 10.0f, "10000",  1, Order::One);
-static ParameterValue  param_TriangleA_Offset   (ParameterValue::Offset,    0.0f, 10.0f, "50000",  0, Order::One);
+static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue  param_TriangleA_Amplitude(ParameterValue::Amplitude,  0.0f, 10.0f, "10000",  1, Order::One);
+static ParameterValue  param_TriangleA_Offset   (ParameterValue::Offset,     0.0f, 10.0f, "50000",  0, Order::One);
 static ParameterChoice param_TriangleA_ModeStart(ParameterChoice::ModeStart, " Авто",   " Auto",
-                                                                                 " Однокр", " Single",
-                                                                                 " Комп А", " Comp A",
-                                                                                 " Форм B", " Shaper B");
+                                                                             " Однокр", " Single",
+                                                                             " Комп А", " Comp A",
+                                                                             " Форм B", " Shaper B");
 
 static ParameterBase *params_TriangleA[] =
 {
@@ -112,6 +112,25 @@ static ParameterBase *params_TriangleA[] =
     &param_TriangleA_Amplitude,
     &param_TriangleA_Offset,
     &param_TriangleA_ModeStart,
+    0
+};
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue  param_DDSA_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue  param_DDSA_Amplitude(ParameterValue::Amplitude,  0.0f, 10.0f, "10000", 1, Order::One);
+static ParameterValue  param_DDSA_Offset   (ParameterValue::Offset,     0.0f, 10.0f, "50000", 0, Order::One);
+static ParameterChoice param_DDSA_ModeStart(ParameterChoice::ModeStart, " Авто",   " Auto",
+                                                                        " Однокр", " Single",
+                                                                        " Комп А", " Comp A",
+                                                                        " Форм B", " Shaper B");
+
+static ParameterBase *params_DDSA[] =
+{
+    &param_DDSA_Frequency,
+    &param_DDSA_Amplitude,
+    &param_DDSA_Offset,
+    &param_DDSA_ModeStart,
     0
 };
 
@@ -209,7 +228,8 @@ static Form formsA[] =
     Form(Form::Triangle,        params_TriangleA,  &wave[Chan::A]),
     Form(Form::Meander,         params_MeanderA,   &wave[Chan::A]),
     Form(Form::Impulse,         params_ImpulseA,   &wave[Chan::A]),
-    Form(Form::PacketImpuls,    params_PacketA,    &wave[Chan::A])
+    Form(Form::PacketImpuls,    params_PacketA,    &wave[Chan::A]),
+    Form(Form::DDS,             params_DDSA,       &wave[Chan::A])
 };
 
 
@@ -292,7 +312,7 @@ static ParameterBase *params_RampMinusB[] =
 static ParameterValue  param_TriangleB_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue  param_TriangleB_Amplitude(ParameterValue::Amplitude,  0.0f, 10.0f,  "50000", 0, Order::One);
 static ParameterValue  param_TriangleB_Offset   (ParameterValue::Offset,     0.0f, 10.0f,  "50000", 0, Order::One);
-static ParameterChoice param_TriangleB_ModeStart(ParameterChoice::ModeStart, " Авто", " Auto",
+static ParameterChoice param_TriangleB_ModeStart(ParameterChoice::ModeStart, " Авто",   " Auto",
                                                                              " Однокр", " Single",
                                                                              " Комп А", " Comp A",
                                                                              " Форм B", " Shaper B");
@@ -303,6 +323,25 @@ static ParameterBase *params_TriangleB[] =
     &param_TriangleB_Amplitude,
     &param_TriangleB_Offset,
     &param_TriangleB_ModeStart,
+    0
+};
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static ParameterValue  param_DDSB_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
+static ParameterValue  param_DDSB_Amplitude(ParameterValue::Amplitude,  0.0f, 10.0f,  "50000", 0, Order::One);
+static ParameterValue  param_DDSB_Offset   (ParameterValue::Offset,     0.0f, 10.0f,  "50000", 0, Order::One);
+static ParameterChoice param_DDSB_ModeStart(ParameterChoice::ModeStart, " Авто",   " Auto",
+                                                                        " Однокр", " Single",
+                                                                        " Комп А", " Comp A",
+                                                                        " Форм B", " Shaper B");
+
+static ParameterBase *params_DDSB[] =
+{
+    &param_DDSB_Frequency,
+    &param_DDSB_Amplitude,
+    &param_DDSB_Offset,
+    &param_DDSB_ModeStart,
     0
 };
 
@@ -354,7 +393,8 @@ static Form formsB[] =
     Form(Form::RampMinus,    params_RampMinusB, &wave[Chan::B]),
     Form(Form::Triangle,     params_TriangleB,  &wave[Chan::B]),
     Form(Form::Meander,      params_MeanderB,   &wave[Chan::B]),
-    Form(Form::Impulse,      params_ImpulseB,   &wave[Chan::B])
+    Form(Form::Impulse,      params_ImpulseB,   &wave[Chan::B]),
+    Form(Form::DDS,          params_DDSB,   &wave[Chan::B])
 };
 
 

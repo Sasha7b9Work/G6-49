@@ -20,7 +20,7 @@ static int numForm = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2( cChannel,                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
+DEF_CHOICE_2( cChannel,                                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
     "КАНАЛ", "CHANNEL",
     "Выбор канала для настройки.",
     "Selecting a channel to set up.",
@@ -33,7 +33,7 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_7( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+DEF_CHOICE_8( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
@@ -44,10 +44,11 @@ DEF_CHOICE_7( cFormA,                                                           
     FORM_RU(Form::Meander),      FORM_EN(Form::Meander),      "Меандр",           "Meander",
     FORM_RU(Form::Impulse),      FORM_EN(Form::Impulse),      "Треугольник",      "Triangle",
     FORM_RU(Form::PacketImpuls), FORM_EN(Form::PacketImpuls), "Пакеты",           "Packets",
+    FORM_RU(Form::DDS),          FORM_EN(Form::DDS),          "Произвольный",     "Free",
     numForm, pageSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
-DEF_CHOICE_6( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
+DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала.",
     "Select waveform.",
@@ -57,6 +58,7 @@ DEF_CHOICE_6( cFormB,                                                           
     FORM_RU(Form::Triangle),  FORM_RU(Form::Triangle),  "Треугольник",      "Triangle",
     FORM_RU(Form::Meander),   FORM_EN(Form::Meander),   "Меандр",           "Meander",
     FORM_RU(Form::Impulse),   FORM_EN(Form::Impulse),   "Треугольник",      "Triangle",
+    FORM_RU(Form::DDS),       FORM_EN(Form::DDS),       "Произвольный",     "Free",
     numForm, pageSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
