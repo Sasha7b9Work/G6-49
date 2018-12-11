@@ -611,5 +611,8 @@ ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Form::IsDDS() const
 {
-    return value == RampPlus || value == RampMinus || value == Triangle || value == DDS;
+    return  (value == RampPlus) || 
+            (value == RampMinus) ||
+            (value == Triangle) ||
+            (value == DDS);
 }

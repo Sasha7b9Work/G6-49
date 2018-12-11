@@ -103,15 +103,7 @@ void FDrive::Handler::Processing(Message *msg)
         {
             float values[4096];
             ReadFloats(values, &fullName[1]);
-            uint8 data[FPGA_NUM_POINTS * 2];
-            TransformDataToCode(values, data);
-
-            // 1
-            Generator::EnableChannel(ch, true);
-
-            // 26
-            std::memcpy(FPGA::DataDDS(ch), data, FPGA_NUM_POINTS * 2);
-            Generator::SetFormWave(ch, Form::DDS);
+            TransformDataToCode(values, FPGA::DataFlash(ch));
         }
     }
     else if (com == Command::FDrive_GetPictureDDS)
