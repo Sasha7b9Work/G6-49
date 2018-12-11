@@ -331,10 +331,6 @@ static void ReadFloats(float values[4096], char *name)
                 }
             }
         }
-        else
-        {
-            LOG_WRITE("%s", buffer);
-        }
         f_close(&fp);
     }
     else
