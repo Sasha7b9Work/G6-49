@@ -10,6 +10,7 @@
 #include "structs.h"
 #include "Message.h"
 #include "Transceiver.h"
+#include "CommonTypes.h"
 
 #include "Display/Console.h"
 #include "Display/Display.h"

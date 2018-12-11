@@ -6,6 +6,7 @@
 #include "Command.h"
 #include "Display/Painter.h"
 #include "Interface/InterfacePanel.h"
+#include "Settings/Settings.h"
 #include "Utils/String.h"
 #include <cstring>
 #endif
@@ -66,6 +67,8 @@ bool File::Handler(Message *msg)
     {
         picture.data[i] = msg->Data(2)[i];
     }
+
+    Form::SetFormFlash(CURRENT_CHANNEL, msg->Data(2));
 
     return true;
 }

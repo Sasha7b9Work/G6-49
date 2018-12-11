@@ -3,6 +3,7 @@
 #include "Command.h"
 #include "defines.h"
 #include "Log.h"
+#include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Display/InputWindow.h"
 #include "Display/Symbols.h"
@@ -13,7 +14,12 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/AddPageInput.h"
 #include <cstdio>
+#include <cstdlib>
 #endif
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static uint8 formFlash[Chan::Number][300];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -615,4 +621,190 @@ bool Form::IsDDS() const
             (value == RampMinus) ||
             (value == Triangle) ||
             (value == DDS);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawUGO(Chan::E ch, int y0)
+{
+    y0 += 30;
+    int height = 50;
+    int width = 90;
+    int aveY = y0 + 5 + height / 2;
+    int minY = y0 + 5;
+    int maxY = minY + height;
+    int x0 = 10;
+
+
+    static bool first = true;
+
+    static volatile int yNoise[100];
+    static volatile int yExp[100];
+
+    if (first)
+    {
+        std::srand(2);
+        for (int i = 0; i < 100; i++)
+        {
+            yNoise[i] = aveY - (std::rand() % 50 - 25);
+
+            yExp[i] = aveY - (int)(std::expf(i / 12.5f) + 0.5f) + 1;
+        }
+
+        first = false;
+    }
+
+    Painter::DrawVLine(x0, minY - 3, maxY + 3);
+    Painter::DrawHLine(aveY, x0, x0 + width);
+
+    typedef void(*pFuncIIII)(Chan::E, int, int, int, int);
+
+    DEF_STRUCT(StructFunc, pFuncIIII) func[Form::Number] =
+    {
+        DrawSine,
+        DrawRampPlus,
+        DrawRampMinus,
+        DrawTriangle,
+        DrawMeander,
+        DrawImpulse,
+        DrawPacketImpulse,
+        DrawDDS
+    };
+
+    func[value].val(ch, x0, minY, width, height);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawSine(Chan::E, int x0, int y0, int width, int height)
+{
+    float speed = 0.2f;
+    int delta = 1;
+    y0 += height / 2;
+
+    for (int i = delta; i < width; i++)
+    {
+        int y1 = y0 - (int)(std::sinf((i - delta) * speed) * height / 2.0f);
+        int y2 = y0 - (int)(std::sinf(i * speed) * height / 2.0f);
+
+        Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawRampPlus(Chan::E, int x0, int y0, int, int height)
+{
+    y0 += height;
+    int dX = 28;
+    for (int x = x0; x < x0 + 80; x += dX)
+    {
+        Painter::DrawLine(x, y0, x + dX, y0 - height);
+        Painter::DrawLine(x + dX, y0, x + dX, y0 - height);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
+{
+    int aveY = y0 + height / 2;
+    int dX = 28;
+    int dY = 20;
+    for (int x = x0; x < x0 + 80; x += dX)
+    {
+        Painter::DrawLine(x, aveY - dY, x + dX, aveY + dY);
+        Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawTriangle(Chan::E, int x, int y, int width, int height)
+{
+    int min = y + height;
+    Painter::DrawLine(x, min, x + width / 2, y);
+    Painter::DrawLine(x + width / 2, y, x + width, y + height);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawMeander(Chan::E, int x0, int y0, int, int height)
+{
+    int dX = 40;
+    int dY = 20;
+    int aveY = y0 + height / 2;
+    for (int x = x0; x < x0 + 80; x += dX)
+    {
+        Painter::DrawHLine(aveY - dY, x, x + dX / 2);
+        Painter::DrawVLine(x + dX / 2, aveY - dY, aveY + dY);
+        Painter::DrawHLine(aveY + dY, x + dX / 2, x + dX);
+        Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
+{
+    int minY = y0;
+    int maxY = y0 + height;
+
+    ParameterChoice *param = (ParameterChoice *)WAVE(ch).GetCurrentForm()->FindParameter(ParameterChoice::Polarity);
+
+    if (param->GetChoice() == 1)
+    {
+        minY = maxY;
+        maxY = y0;
+    }
+
+    int deltaX = 20;
+
+    for (int i = 0; i < 5; i++)
+    {
+        Painter::DrawVLine(x0, minY, maxY);
+        Painter::DrawVLine(x0 + 5, minY, maxY);
+        Painter::DrawHLine(minY, x0, x0 + 5);
+        Painter::DrawHLine(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
+        x0 += deltaX;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
+{
+    int minY = y0;
+    int maxY = y0 + height;
+    int deltaX = 8;
+    for (int j = 0; j < 2; j++)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Painter::DrawVLine(x0, minY, maxY);
+            Painter::DrawHLine(minY, x0, x0 + 4);
+            Painter::DrawVLine(x0 + 4, minY, maxY);
+            Painter::DrawHLine(maxY, x0 + 4, x0 + deltaX);
+            x0 += deltaX;
+        }
+
+        if (j == 0)
+        {
+            Painter::DrawHLine(maxY, x0, x0 + 35);
+        }
+
+        x0 += 37;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
+{
+    int numPoints = 240;
+
+    float sX = width / (float)numPoints;
+    float sY = height / 255.0f;
+
+    for (int i = 0; i < numPoints; i++)
+    {
+        Painter::SetPoint((int)(x0 + sX * i), (int)(y0 + height - formFlash[ch][i] * sY));
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Form::SetFormFlash(Chan::E ch, uint8 data[300])
+{
+    std::memcpy(&formFlash[ch][0], data, 300);
 }

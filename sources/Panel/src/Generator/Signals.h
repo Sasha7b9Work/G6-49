@@ -5,7 +5,7 @@
 
 
 /// Текущий сигнал
-#define WAVE(ch)                        (wave[ch])
+#define WAVE(ch)                        (waves[ch])
 #define WAVE_CURRENT                    (WAVE(CURRENT_CHANNEL))
 
 #define FORM(ch)                        (WAVE(ch).GetCurrentForm())
@@ -15,4 +15,4 @@
 #define PARAM_CURRENT                   (PARAM(FORM_CURRENT))
 #define PARAM_CURRENT_IS_MANIPULATION   (((ParameterValue *)CurrentParameter())->Is(ParameterValue::Manipulation))
 
-extern Wave wave[Chan::Number];
+extern Wave waves[Chan::Number];

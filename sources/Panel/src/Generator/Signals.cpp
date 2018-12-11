@@ -218,18 +218,18 @@ static ParameterBase *params_PacketA[] =
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-extern Wave wave[Chan::Number];
+extern Wave waves[Chan::Number];
 
 static Form formsA[] =
 {
-    Form(Form::Sine,            params_SineA,      &wave[Chan::A]),
-    Form(Form::RampPlus,        params_RampPlusA,  &wave[Chan::A]),
-    Form(Form::RampMinus,       params_RampMinusA, &wave[Chan::A]),
-    Form(Form::Triangle,        params_TriangleA,  &wave[Chan::A]),
-    Form(Form::Meander,         params_MeanderA,   &wave[Chan::A]),
-    Form(Form::Impulse,         params_ImpulseA,   &wave[Chan::A]),
-    Form(Form::PacketImpuls,    params_PacketA,    &wave[Chan::A]),
-    Form(Form::DDS,             params_DDSA,       &wave[Chan::A])
+    Form(Form::Sine,            params_SineA,      &waves[Chan::A]),
+    Form(Form::RampPlus,        params_RampPlusA,  &waves[Chan::A]),
+    Form(Form::RampMinus,       params_RampMinusA, &waves[Chan::A]),
+    Form(Form::Triangle,        params_TriangleA,  &waves[Chan::A]),
+    Form(Form::Meander,         params_MeanderA,   &waves[Chan::A]),
+    Form(Form::Impulse,         params_ImpulseA,   &waves[Chan::A]),
+    Form(Form::PacketImpuls,    params_PacketA,    &waves[Chan::A]),
+    Form(Form::DDS,             params_DDSA,       &waves[Chan::A])
 };
 
 
@@ -384,22 +384,22 @@ static ParameterBase *params_ImpulseB[] =
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-extern Wave wave[Chan::Number];
+extern Wave waves[Chan::Number];
 
 static Form formsB[] =
 {
-    Form(Form::Sine,         params_SineB,      &wave[Chan::B]),
-    Form(Form::RampPlus,     params_RampPlusB,  &wave[Chan::B]),
-    Form(Form::RampMinus,    params_RampMinusB, &wave[Chan::B]),
-    Form(Form::Triangle,     params_TriangleB,  &wave[Chan::B]),
-    Form(Form::Meander,      params_MeanderB,   &wave[Chan::B]),
-    Form(Form::Impulse,      params_ImpulseB,   &wave[Chan::B]),
-    Form(Form::DDS,          params_DDSB,   &wave[Chan::B])
+    Form(Form::Sine,         params_SineB,      &waves[Chan::B]),
+    Form(Form::RampPlus,     params_RampPlusB,  &waves[Chan::B]),
+    Form(Form::RampMinus,    params_RampMinusB, &waves[Chan::B]),
+    Form(Form::Triangle,     params_TriangleB,  &waves[Chan::B]),
+    Form(Form::Meander,      params_MeanderB,   &waves[Chan::B]),
+    Form(Form::Impulse,      params_ImpulseB,   &waves[Chan::B]),
+    Form(Form::DDS,          params_DDSB,       &waves[Chan::B])
 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Wave wave[Chan::Number] =
+Wave waves[Chan::Number] =
 {
     Wave(Chan::A, formsA, 7),
     Wave(Chan::B, formsB, 6)

@@ -292,6 +292,11 @@ public:
     void ChangeParameter();
     /// «акрывает открытый параметр, если таковой имеетс€ и возвращает true в этом случае
     bool CloseOpenedParameter();
+    /// Ќарисовать изображение сигнала
+    void DrawUGO(Chan::E ch, int y0);
+    /// ”становить данные произвольного сигнала дл€ отрисовки
+    static void SetFormFlash(Chan::E ch, uint8 data[300]);
+
 private:
     /// Ќаходит требуемый параметр. ¬озвращает 0, если такого параметра нет
     ParameterBase *FindParameter(ParameterValue::E p);
@@ -316,6 +321,24 @@ private:
     int oldNumParams;
     /// ќтноситс€ к oldParams
     int oldCurrentParams;
+
+    static void DrawSine(Chan::E ch, int x, int y, int width, int height);
+
+    static void DrawRampPlus(Chan::E ch, int x, int y, int width, int height);
+
+    static void DrawRampMinus(Chan::E ch, int x, int y, int width, int height);
+
+    static void DrawTriangle(Chan::E ch, int x, int y, int width, int height);
+
+    static void DrawMeander(Chan::E ch, int x, int y, int width, int height);
+
+    static void DrawImpulse(Chan::E ch, int x, int y, int width, int height);
+
+    static void DrawPacketImpulse(Chan::E ch, int x, int y, int width, int height);
+
+    static void DrawDDS(Chan::E ch, int x, int y, int width, int height);
+
+
 };
 
 
@@ -364,24 +387,6 @@ public:
         /// ¬ысота области отрисовки сигнала
         static int Height();
     private:
-
-        static void DrawUGO(Chan::E chan, int y0);
-
-        static void DrawSine(Chan::E ch, int x, int y, int width, int height);
-
-        static void DrawRampPlus(Chan::E ch, int x, int y, int width, int height);
-
-        static void DrawRampMinus(Chan::E ch, int x, int y, int width, int height);
-
-        static void DrawTriangle(Chan::E ch, int x, int y, int width, int height);
-
-        static void DrawMeander(Chan::E ch, int x, int y, int width, int height);
-
-        static void DrawImpulse(Chan::E ch, int x, int y, int width, int height);
-
-        static void DrawPacketImpulse(Chan::E ch, int x, int y, int width, int height);
-
-        static void DrawDDS(Chan::E ch, int x, int y, int width, int height);
 
         static void DrawParameters(Chan::E chan, int y0);
 
