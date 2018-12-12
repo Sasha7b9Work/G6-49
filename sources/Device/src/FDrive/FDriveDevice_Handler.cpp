@@ -2,15 +2,16 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
-#include "ffconf.h"
-#include "ff.h"
-#include "FatFS.h"
+#include "libs/FatFS/ffconf.h"
+#include "libs/FatFS/FatFS.h"
 #include "FDrive/FDriveDevice.h"
 #include "Generator/FPGA.h"
 #include "Generator/GeneratorDevice.h"
 #include "Interface/InterfaceDevice.h"
+#include "Utils/Buffer.h"
 #include "Utils/Math.h"
 #include "Utils/String.h"
+#include <ff.h>
 #endif
 
 
@@ -101,9 +102,9 @@ void FDrive::Handler::Processing(Message *msg)
         std::strcat(fullName, "\\");
         if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
         {
-            float values[4096];
-            ReadFloats(values, &fullName[1]);
-            TransformDataToCode(values, FPGA::DataFlash(ch));
+            Buffer buffer(4096 * sizeof(float));
+            ReadFloats(buffer.DataFloat(), &fullName[1]);
+            TransformDataToCode(buffer.DataFloat(), FPGA::DataFlash(ch));
         }
     }
     else if (com == Command::FDrive_GetPictureDDS)

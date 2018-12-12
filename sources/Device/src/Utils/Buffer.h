@@ -13,6 +13,7 @@ public:
     ~Buffer();
     bool ReSize(uint size);
     void *Data();
+    float *DataFloat();
     uint   Size() const;
 private:
     void Allocate(uint size);
