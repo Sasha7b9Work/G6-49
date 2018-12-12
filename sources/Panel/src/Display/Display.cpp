@@ -46,7 +46,9 @@ uint8 *Display::GetBuffer()
 void Display::Update()
 {
     Statistics::BeginFrame();
+
     Painter::BeginScene(Color::BACK);
+
     Wave::Graphics::Draw(Chan::A);
     Wave::Graphics::Draw(Chan::B);
     Menu::Draw();
@@ -57,6 +59,8 @@ void Display::Update()
     Statistics::Show();
     Console::Draw();
     CPU::Keyboard::Draw();
+
     Painter::EndScene();
+
     Statistics::EndFrame();
 }

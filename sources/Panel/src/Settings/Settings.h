@@ -46,7 +46,7 @@ extern const PageBase pInput;
 #define FREQ_RESIST             ((FreqResist)BIT_FL1(BIT_FREQ_RESIST))
 #define FREQ_COUPLE             ((FreqCouple)BIT_FL1(BIT_FREQ_COUPLE))
 #define FREQ_FILTR              ((FreqFiltr)BIT_FL1(BIT_FREQ_FILTR))
-#define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED))
+#define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED) != 0)
 #define FREQ_INTERVAL           ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
 #define FREQ_MEASURE            ((FreqMeasure)BIT_FL1(BIT_FREQ_MEASURE))
 #define FREQ_MEASURE_IS_FREQ    (FREQ_MEASURE == FreqMeasure::Freq)

@@ -85,7 +85,10 @@ void InputWindow::DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    Text::DrawBigText(x, y, 3, param->Name());
+    if (!FREQ_ENABLED)
+    {
+        Text::DrawBigText(x, y, 3, param->Name());
+    }
 
     char buf[2] = "0";
 
