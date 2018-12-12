@@ -102,7 +102,7 @@ void FDrive::Handler::Processing(Message *msg)
         std::strcat(fullName, "\\");
         if (GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
         {
-            Buffer buffer(4096 * sizeof(float));
+            Buffer buffer(8 * 1024 * sizeof(float));
             ReadFloats(buffer.DataFloat(), &fullName[1]);
             TransformDataToCode(buffer.DataFloat(), FPGA::DataFlash(ch));
         }
