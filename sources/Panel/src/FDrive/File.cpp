@@ -5,6 +5,7 @@
 #include "File.h"
 #include "Command.h"
 #include "Display/Painter.h"
+#include "Generator/Signals.h"
 #include "Interface/InterfacePanel.h"
 #include "Settings/Settings.h"
 #include "Utils/String.h"
@@ -47,6 +48,10 @@ void File::Draw(int x, int y)
         return;
     }
 
+    Painter::SetColor(Color::GRAY_10);
+    
+    WAVE(CURRENT_CHANNEL).GetForm(Form::DDS)->DrawUGO(CURRENT_CHANNEL, 120);
+    
     float scale = 100.0f / 255.0f;
 
     Painter::SetColor(Color::FILL);

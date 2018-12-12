@@ -59,6 +59,7 @@ static ParameterBase *params_SineA[] =
     0
 };
 
+static Form formSineA(Form::Sine, params_SineA, &waves[Chan::A]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampPlusA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000",  0, Order::Kilo);
@@ -78,6 +79,7 @@ static ParameterBase *params_RampPlusA[] =
     0
 };
 
+static Form formRampPlusA(Form::RampPlus, params_RampPlusA, &waves[Chan::A]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampMinusA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -97,6 +99,8 @@ static ParameterBase *params_RampMinusA[] =
     0
 };
 
+static Form formRampMinusA(Form::RampMinus, params_RampMinusA, &waves[Chan::A]);
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
 static ParameterValue  param_TriangleA_Amplitude(ParameterValue::Amplitude,  0.0f, 10.0f, "10000",  1, Order::One);
@@ -115,6 +119,7 @@ static ParameterBase *params_TriangleA[] =
     0
 };
 
+static Form formTriangleA(Form::Triangle, params_TriangleA, &waves[Chan::A]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_DDSA_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -134,6 +139,8 @@ static ParameterBase *params_DDSA[] =
     0
 };
 
+static Form formDDSA(Form::DDS, params_DDSA, &waves[Chan::A]);
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue param_MeanderA_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -147,6 +154,8 @@ static ParameterBase *params_MeanderA[] =
     &param_MeanderA_Offset,
     0
 };
+
+static Form formMeanderA(Form::Meander, params_MeanderA, &waves[Chan::A]);
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,6 +198,8 @@ static ParameterBase *params_ImpulseA[] =
     0
 };
 
+static Form formImpulseA(Form::Impulse, params_ImpulseA, &waves[Chan::A]);
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_PacketA_Period      (ParameterValue::Period,       0.0f, 100e6f, "02000", 0, Order::Milli);
@@ -216,20 +227,23 @@ static ParameterBase *params_PacketA[] =
     0
 };
 
+static Form formPacketImpulseA(Form::PacketImpuls, params_PacketA, &waves[Chan::A]);
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 extern Wave waves[Chan::Number];
 
-static Form formsA[] =
+static Form *formsA[] =
 {
-    Form(Form::Sine,            params_SineA,      &waves[Chan::A]),
-    Form(Form::RampPlus,        params_RampPlusA,  &waves[Chan::A]),
-    Form(Form::RampMinus,       params_RampMinusA, &waves[Chan::A]),
-    Form(Form::Triangle,        params_TriangleA,  &waves[Chan::A]),
-    Form(Form::Meander,         params_MeanderA,   &waves[Chan::A]),
-    Form(Form::Impulse,         params_ImpulseA,   &waves[Chan::A]),
-    Form(Form::PacketImpuls,    params_PacketA,    &waves[Chan::A]),
-    Form(Form::DDS,             params_DDSA,       &waves[Chan::A])
+    &formSineA,
+    &formRampPlusA,
+    &formRampMinusA,
+    &formTriangleA,
+    &formMeanderA,
+    &formImpulseA,
+    &formPacketImpulseA,
+    &formDDSA,
+    0
 };
 
 
@@ -269,6 +283,7 @@ static ParameterBase *params_SineB[] =
     0
 };
 
+static Form formSineB(Form::Sine, params_SineB, &waves[Chan::B]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampPlusB_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -288,6 +303,7 @@ static ParameterBase *params_RampPlusB[] =
     0
 };
 
+static Form formRampPlusB(Form::RampPlus, params_RampPlusB, &waves[Chan::B]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_RampMinusB_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -307,6 +323,7 @@ static ParameterBase *params_RampMinusB[] =
     0
 };
 
+static Form formRampMinusB(Form::RampMinus, params_RampMinusB, &waves[Chan::B]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_TriangleB_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -326,6 +343,7 @@ static ParameterBase *params_TriangleB[] =
     0
 };
 
+static Form formTriangleB(Form::Triangle, params_TriangleB, &waves[Chan::B]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue  param_DDSB_Frequency(ParameterValue::Frequency,  0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -345,6 +363,7 @@ static ParameterBase *params_DDSB[] =
     0
 };
 
+static Form formDDSB(Form::DDS, params_DDSB, &waves[Chan::B]);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static ParameterValue param_MeanderB_Frequency(ParameterValue::Frequency, 0.1f, 100e6f, "10000", 0, Order::Kilo);
@@ -358,6 +377,8 @@ static ParameterBase *params_MeanderB[] =
     &param_MeanderB_Offset,
     0
 };
+
+static Form formMeanderB(Form::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -382,25 +403,28 @@ static ParameterBase *params_ImpulseB[] =
     0
 };
 
+static Form formImpulseB(Form::Impulse, params_ImpulseB, &waves[Chan::B]);
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 extern Wave waves[Chan::Number];
 
-static Form formsB[] =
+static Form *formsB[] =
 {
-    Form(Form::Sine,         params_SineB,      &waves[Chan::B]),
-    Form(Form::RampPlus,     params_RampPlusB,  &waves[Chan::B]),
-    Form(Form::RampMinus,    params_RampMinusB, &waves[Chan::B]),
-    Form(Form::Triangle,     params_TriangleB,  &waves[Chan::B]),
-    Form(Form::Meander,      params_MeanderB,   &waves[Chan::B]),
-    Form(Form::Impulse,      params_ImpulseB,   &waves[Chan::B]),
-    Form(Form::DDS,          params_DDSB,       &waves[Chan::B])
+    &formSineB,
+    &formRampPlusB,
+    &formRampMinusB,
+    &formTriangleB,
+    &formMeanderB,
+    &formImpulseB,
+    &formDDSB,
+    0
 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Wave waves[Chan::Number] =
 {
-    Wave(Chan::A, formsA, 7),
-    Wave(Chan::B, formsB, 6)
+    Wave(Chan::A, formsA),
+    Wave(Chan::B, formsB)
 };

@@ -347,7 +347,7 @@ class Wave
 {
 public:
 
-    Wave(Chan::E ch, Form *forms, int numForms);
+    Wave(Chan::E ch, Form **forms);
     /// ¬озвращает установленную форму
     Form *GetCurrentForm();
     /// ”становить текущей следующую форму
@@ -356,6 +356,8 @@ public:
     int NumberOfForms() const;
 
     Form *GetForm(int i);
+
+    Form *GetForm(Form::E form);
 
     Chan::E GetChannel() const { return channel; };
     /// ¬озвращает true, если установлен ручной режим запуска
@@ -367,7 +369,7 @@ private:
     /// “екуща€ форма сигнала - указывает на номер сигнала в массиве
     int currentForm;
     /// —писок форм, которые могут быть назначены
-    Form *forms;
+    Form **forms;
     ///  оличество возможных форм
     int numForms;
 
