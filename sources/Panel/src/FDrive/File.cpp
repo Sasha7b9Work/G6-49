@@ -65,17 +65,22 @@ void File::Draw(int x, int y)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool File::Handler(Message *msg)
 {
-    msg->TakeByte();
-    num = msg->TakeByte();
-
-    for (int i = 0; i < 300; i++)
+    uint8 com = msg->TakeByte();
+    if (com == Command::FDrive_GetPictureDDS)
     {
-        picture.data[i] = msg->Data(2)[i];
+        num = msg->TakeByte();
+
+        for (int i = 0; i < 300; i++)
+        {
+            picture.data[i] = msg->Data(2)[i];
+        }
+
+        Form::SetFormFlash(CURRENT_CHANNEL, msg->Data(2));
+
+        return true;
     }
 
-    Form::SetFormFlash(CURRENT_CHANNEL, msg->Data(2));
-
-    return true;
+    return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -30,14 +30,14 @@ DEF_BUTTON( bDown,                                                              
 DEF_BUTTON( bEnter,                                                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - Enter ---
     "¬˚·Ó", "Enter",
     "", "",
-    pageLoad, FuncActive, FDrive::PressEnter, FuncDraw
+    pageLoad, FuncActive, FuncPress, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_BUTTON( bChoose,                                                                                                                     //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ”ÒÚ‡ÌÓ‚ËÚ¸ ---
     "¬˚·‡Ú¸", "Choose",
     "", "",
-    pageLoad, FuncActive, FDrive::PressEnter, FuncDraw
+    pageLoad, FuncActive, FDrive::PressChoose, FuncDraw
 )
 
 

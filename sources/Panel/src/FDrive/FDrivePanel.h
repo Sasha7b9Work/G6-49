@@ -24,8 +24,8 @@ public:
     static void PressUp();
     /// Обработка нажатия кнопки "Вниз"
     static void PressDown();
-    /// Обработка нажатия кнопки "Ввод"
-    static void PressEnter();
+    /// Обработка нажатия кнопки "Выбрать"
+    static void PressChoose();
 
     class Handler
     {
