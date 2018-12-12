@@ -5,10 +5,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define FPGA_NUM_POINTS (1024 * 8)
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FPGA
 {
 friend class Interface;
@@ -16,6 +12,9 @@ friend class Handlers;
 friend class FDrive;
 
 public:
+    
+    static const uint NUM_POINTS = 1024 * 8;
+
     static void Init();
 
 
@@ -186,7 +185,7 @@ private:
     /// Запись управляющего регистра
     static void WriteControlRegister();
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-    static void TransformDataToCode(float data[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2]);
+    static void TransformDataToCode(float data[FPGA::NUM_POINTS], uint8 code[FPGA::NUM_POINTS * 2]);
     /// Записывает коды, соответствующие максимальному и минимальному значению
     static void WriteMaxAmplitude(Chan::E ch);
 

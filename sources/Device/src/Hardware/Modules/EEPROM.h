@@ -11,5 +11,7 @@ public:
 
     static void LoadSettings(CalibrationSettings *settings);
 
-    static void SaveSignal(Chan::E ch, float *data, uint size);
+    static void SaveSignal(Chan::E ch, float *data);
+
+    static float *GetSignal(Chan::E ch);
 };

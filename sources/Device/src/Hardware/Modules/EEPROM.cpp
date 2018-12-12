@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "EEPROM.h"
+#include "Generator/FPGA.h"
 #endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,11 +41,13 @@ static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
 /// —тирает сектор с начальным адресом startAddress
 static void EraseSector(uint startAddress);
 /// «аписывает size байт из массива data по адресу address
-static void WriteData(uint address, void *data, uint size);
+static void WriteData(uint dest, void *src, uint size);
 /// ¬озвращает системный идентификатор сектора с начальным адресом address. ≈жели такового нету, возвращает -1
 static uint GetSector(uint address);
 /// ¬озвращает размер сектора с данным начальным адресом
 static uint SizeSector(uint address);
+/// ¬озвращает адрес EEPROM, куда надо сохран€ть данные этого канала
+static uint AddressForData(Chan::E ch);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +186,7 @@ static uint GetSector(uint address)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void WriteData(uint address, void *data, uint size)
+static void WriteData(uint dest, void *src, uint size)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -191,9 +194,55 @@ static void WriteData(uint address, void *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, ((uint8 *)data)[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, dest++, ((uint8 *)src)[i]);
     }
 
     HAL_FLASH_Lock();
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void EEPROM::SaveSignal(Chan::E ch, float *data)
+{
+    uint sizeData = FPGA::NUM_POINTS * sizeof(float);
+
+    EraseSector(SECTOR_TEMP_10);                                                        // ќбнул€ем сектор дл€ временных данных дл€ временного сохранени€ тех данных, которые не нужно перезаписывать
+    WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Number);  // —охран€ем существующие данные
+    EraseSector(SECTOR_SIGNAL_FPGA_11);                                                 // —тираем сектор дл€ хранени€ данных
+    WriteData(AddressForData(ch), data, sizeData);                                      // «аписываем данные канала
+
+    ch = (ch == Chan::A) ? Chan::B : Chan::A;
+
+    data = (float *)SECTOR_TEMP_10;
+
+    if (ch == Chan::B)
+    {
+        data += FPGA::NUM_POINTS;                                                        // ¬ычисл€ем указатель на данные канала, который не требуетс€ перезаписывать
+    }
+
+    WriteData(AddressForData(ch), data, sizeData);                                      // » сохран€ем их
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint AddressForData(Chan::E ch)
+{
+    uint result = SECTOR_SIGNAL_FPGA_11;
+    if (ch == Chan::B)
+    {
+        result += FPGA::NUM_POINTS * sizeof(float);
+    }
+
+    return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float *EEPROM::GetSignal(Chan::E ch)
+{
+    float *result = (float *)(SECTOR_SIGNAL_FPGA_11);
+
+    if (ch == Chan::B)
+    {
+        result += FPGA::NUM_POINTS;
+    }
+
+    return result;
+}

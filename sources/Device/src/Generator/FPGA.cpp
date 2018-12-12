@@ -32,9 +32,9 @@ ParamValue              FPGA::PacketImpulse::durationImpulse((uint64)0);
 
 /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
 /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
-static uint8 dataDDS[Chan::Number][FPGA_NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
+static uint8 dataDDS[Chan::Number][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
 /// Здесь хранятся данные сигнала, загруженные с флешки
-static uint8 dataFlash[Chan::Number][FPGA_NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
+static uint8 dataFlash[Chan::Number][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -423,7 +423,7 @@ void FPGA::SendData(uint8 *data)
         *pointer = data[0];
     }
 
-    for(i = 0; i < FPGA_NUM_POINTS * 4; i++)
+    for(i = 0; i < FPGA::NUM_POINTS * 4; i++)
     {
         WriteByte(*pointer++);
 
@@ -509,11 +509,11 @@ uint8 FPGA::RegisterForDuration(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2])
+void FPGA::TransformDataToCode(float d[FPGA::NUM_POINTS], uint8 code[FPGA::NUM_POINTS * 2])
 {
     int max = 0x1fff;
 
-    for(int i = 0; i < FPGA_NUM_POINTS; i++)
+    for(int i = 0; i < FPGA::NUM_POINTS; i++)
     {
         uint16 c = (uint16)(std::fabs(d[i]) * max);
 
@@ -523,7 +523,7 @@ void FPGA::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POI
         }
 
         code[i] = (uint8)c;
-        code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
+        code[i + FPGA::NUM_POINTS] = (uint8)(c >> 8);
     }
 }
 

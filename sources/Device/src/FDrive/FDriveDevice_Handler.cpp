@@ -33,7 +33,7 @@ static uint GetFileSize(char *fullPath);
 
 static bool ReadFloats(float values[4096], char *name);
 /// Трансформировать точки в пригодный для записи в ПЛИС вид
-static void TransformDataToCode(float d[4096], uint8 code[FPGA_NUM_POINTS * 2]);
+static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
 
 static void Normalize(float d[4096]);
 
@@ -326,7 +326,7 @@ static bool ReadFloats(float values[4096], char *name)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void TransformDataToCode(float d[4096], uint8 code[FPGA_NUM_POINTS * 2])
+static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
 {
     Normalize(d);
 
@@ -342,7 +342,7 @@ static void TransformDataToCode(float d[4096], uint8 code[FPGA_NUM_POINTS * 2])
         }
 
         code[i * 2] = code[i * 2 + 1] = (uint8)c;
-        code[i * 2 + FPGA_NUM_POINTS] = code[i * 2 + FPGA_NUM_POINTS + 1] = (uint8)(c >> 8);
+        code[i * 2 + FPGA::NUM_POINTS] = code[i * 2 + FPGA::NUM_POINTS + 1] = (uint8)(c >> 8);
     }
 }
 

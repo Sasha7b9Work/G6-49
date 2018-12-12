@@ -246,7 +246,7 @@ void Handlers::LoadFormDDS(Message *message)
 {
     Chan::E ch = (Chan::E)message->TakeByte();
 
-    std::memcpy(FPGA::DataDDS(ch), message->Data(2), FPGA_NUM_POINTS * 2);
+    std::memcpy(FPGA::DataDDS(ch), message->Data(2), FPGA::NUM_POINTS * 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
