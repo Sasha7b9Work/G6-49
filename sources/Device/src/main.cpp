@@ -8,6 +8,7 @@
 #include "Interface/InterfaceDevice.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Modules/EEPROM.h"
 #include "FreqMeter/FreqMeter.h"
 #include <stm32f4xx_hal.h>
 #endif
@@ -19,6 +20,7 @@ int main()
     Timer::PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
     Generator::Init();
     FDrive::Init();
+    EEPROM::Init();
   
     while (1)
     {

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #ifndef WIN32
+#include "log.h"
 #include "EEPROM.h"
 #include "Generator/FPGA.h"
 #endif
@@ -245,4 +246,31 @@ float *EEPROM::GetSignal(Chan::E ch)
     }
 
     return result;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void EEPROM::Init()
+{
+    uint *data = (uint *)SECTOR_SIGNAL_FPGA_11;
+
+    for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Number); i++)
+    {
+        if (data[i] != (uint)(-1))
+        {
+            return;
+        }
+    }
+
+    LOG_WRITE("Данные не записаны. Обнуляю");
+
+    float *address = (float *)SECTOR_SIGNAL_FPGA_11;
+
+    float value = 0.0f;
+
+    for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Number); i++)
+    {
+        WriteData((uint)address, &value, 4);
+    }
+
+    LOG_WRITE("Обнулено");
 }

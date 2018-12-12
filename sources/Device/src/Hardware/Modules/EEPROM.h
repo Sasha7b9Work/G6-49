@@ -7,6 +7,8 @@ class EEPROM
 {
 public:
 
+    static void Init();
+
     static void SaveSettings(CalibrationSettings *settings);
 
     static void LoadSettings(CalibrationSettings *settings);
