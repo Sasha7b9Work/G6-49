@@ -6,20 +6,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-#define ADDR_SECTOR_0   ((uint)0x08000000)  // 16k  Загрузчик
-#define ADDR_SECTOR_1   ((uint)0x08004000)  // 16k
-#define ADDR_SECTOR_2   ((uint)0x08008000)  // 16k
-#define ADDR_SECTOR_3   ((uint)0x0800c000)  // 16k
-#define ADDR_SECTOR_4   ((uint)0x08010000)  // 64k  SettingsCalibration
-#define ADDR_SECTOR_CALIBRATION ADDR_SECTOR_4
-#define SIZE_SECTOR_CALIBRATION (64 * 1024)
-#define ADDR_SECTOR_5   ((uint)0x08020000)  // 128k Основная прошивка 1
-#define ADDR_SECTOR_6   ((uint)0x08040000)  // 128k Основная прошивка 2
-#define ADDR_SECTOR_7   ((uint)0x08060000)  // 128k Основная прошивка 3
-#define ADDR_SECTOR_8   ((uint)0x08080000)  // 128k
-#define ADDR_SECTOR_9   ((uint)0x080a0000)  // 128k
-#define ADDR_SECTOR_10  ((uint)0x080c0000)  // 128k
-#define ADDR_SECTOR_11  ((uint)0x080e0000)  // 128k
+#define SECTOR_0                    ((uint)0x08000000)          // 16k  Загрузчик
+#define SECTOR_1                    ((uint)0x08004000)          // 16k
+#define SECTOR_2                    ((uint)0x08008000)          // 16k
+#define SECTOR_3                    ((uint)0x0800c000)          // 16k
+#define SECTOR_CALIBRATION_4        ((uint)0x08010000)          // 64k  SettingsCalibration
+#define SIZE_SECTOR_CALIBRATION     (64 * 1024)
+#define SECTOR_5                    ((uint)0x08020000)          // 128k Основная прошивка 1
+#define SECTOR_6                    ((uint)0x08040000)          // 128k Основная прошивка 2
+#define SECTOR_7                    ((uint)0x08060000)          // 128k Основная прошивка 3
+#define SECTOR_8                    ((uint)0x08080000)          // 128k
+#define SECTOR_9                    ((uint)0x080a0000)          // 128k
+#define SECTOR_TEMP_10              ((uint)0x080c0000)          // 128k
+#define SIZE_SECTOR_TEMP            (128 * 1024)
+#define SECTOR_SIGNAL_FPGA_11       ((uint)0x080e0000)          // Сигнал с флешки здесь записан
+#define SIZE_SECTOR_SIGNAL_FPGA     (128 * 1024)
 
 #define CLEAR_FLASH_FLAGS \
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP    |  /* end of operation flag              */   \
@@ -42,26 +43,47 @@ static void EraseSector(uint startAddress);
 static void WriteData(uint address, void *data, uint size);
 /// Возвращает системный идентификатор сектора с начальным адресом address. Ежели такового нету, возвращает -1
 static uint GetSector(uint address);
+/// Возвращает размер сектора с данным начальным адресом
+static uint SizeSector(uint address);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void EEPROM::SaveSettings(CalibrationSettings *settings)
 {
-    uint address = FindFirstFreeRecord(ADDR_SECTOR_CALIBRATION, SIZE_SECTOR_CALIBRATION, sizeof(CalibrationSettings));
+    uint address = FindFirstFreeRecord(SECTOR_CALIBRATION_4, SizeSector(SECTOR_CALIBRATION_4), sizeof(CalibrationSettings));
 
     if (address == 0)
     {
-        EraseSector(ADDR_SECTOR_CALIBRATION);
-        address = ADDR_SECTOR_CALIBRATION;
+        EraseSector(SECTOR_CALIBRATION_4);
+        address = SECTOR_CALIBRATION_4;
     }
 
     WriteData(address, settings, sizeof(CalibrationSettings));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static uint SizeSector(uint address)
+{
+    if (address == SECTOR_CALIBRATION_4)
+    {
+        return SIZE_SECTOR_CALIBRATION;
+    }
+    else if (address == SECTOR_TEMP_10)
+    {
+        return SIZE_SECTOR_TEMP;
+    }
+    else if (address == SECTOR_SIGNAL_FPGA_11)
+    {
+        return SIZE_SECTOR_SIGNAL_FPGA;
+    }
+
+    return (16 * 1024);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void EEPROM::LoadSettings(CalibrationSettings *settings)
 {
-    uint address = FindLastOccupiedRecord(ADDR_SECTOR_CALIBRATION, SIZE_SECTOR_CALIBRATION, sizeof(CalibrationSettings));
+    uint address = FindLastOccupiedRecord(SECTOR_CALIBRATION_4, SizeSector(SECTOR_CALIBRATION_4), sizeof(CalibrationSettings));
 
     if (address)                                            // Если нашли сохранённую запись
     {
@@ -141,7 +163,9 @@ static uint GetSector(uint address)
 
     static const StructSector sectors[] =
     {
-        {FLASH_SECTOR_4, ADDR_SECTOR_CALIBRATION},
+        {FLASH_SECTOR_4,  SECTOR_CALIBRATION_4},
+        {FLASH_SECTOR_10, SECTOR_TEMP_10},
+        {FLASH_SECTOR_11, SECTOR_SIGNAL_FPGA_11},
         {}
     };
 
@@ -172,3 +196,4 @@ static void WriteData(uint address, void *data, uint size)
 
     HAL_FLASH_Lock();
 }
+

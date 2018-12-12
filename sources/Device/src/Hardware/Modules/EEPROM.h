@@ -10,4 +10,6 @@ public:
     static void SaveSettings(CalibrationSettings *settings);
 
     static void LoadSettings(CalibrationSettings *settings);
+
+    static void SaveSignal(Chan::E ch, float *data, uint size);
 };
