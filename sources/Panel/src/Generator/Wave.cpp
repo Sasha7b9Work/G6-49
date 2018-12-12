@@ -19,7 +19,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static uint8 formFlash[Chan::Number][300];
+#define SIZE_BUFFER     300
+static uint8 formFlash[Chan::Number][SIZE_BUFFER];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,6 +146,11 @@ Form::Form(E v, ParameterBase *parameters[], Wave *w) : value(v), wave(w), param
     for(int i = 0; i < numParams; i++)
     {
         params[i]->form = this;
+    }
+
+    if (v == DDS)
+    {
+        std::memset(&formFlash[0][0], 127, SIZE_BUFFER * 2);
     }
 }
 
@@ -836,7 +842,13 @@ void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Form::SetFormFlash(Chan::E ch, uint8 data[300])
+void Form::SetFormFlash(Chan::E ch, uint8 data[SIZE_BUFFER])
 {
-    std::memcpy(&formFlash[ch][0], data, 300);
+    std::memcpy(&formFlash[ch][0], data, SIZE_BUFFER);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *Form::GetFormFlash(Chan::E ch)
+{
+    return &formFlash[ch][0];
 }

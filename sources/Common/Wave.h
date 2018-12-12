@@ -296,6 +296,8 @@ public:
     void DrawUGO(Chan::E ch, int y0);
     /// ”становить данные произвольного сигнала дл€ отрисовки
     static void SetFormFlash(Chan::E ch, uint8 data[300]);
+    /// ¬озвращает указатель на данные произвольного сигнала дл€ отрисовки
+    static uint8 *GetFormFlash(Chan::E ch);
 
 private:
     /// Ќаходит требуемый параметр. ¬озвращает 0, если такого параметра нет

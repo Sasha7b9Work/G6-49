@@ -50,9 +50,14 @@ void File::Draw(int x, int y)
 
     Painter::SetColor(Color::GRAY_10);
     
-    WAVE(CURRENT_CHANNEL).GetForm(Form::DDS)->DrawUGO(CURRENT_CHANNEL, 120);
-    
     float scale = 100.0f / 255.0f;
+
+    Painter::SetColor(Color::GRAY_25);
+
+    for (int i = 0; i < 240; i++)
+    {
+        Painter::SetPoint(x + i, (int)(y - Form::GetFormFlash(CURRENT_CHANNEL)[i] * scale));
+    }
 
     Painter::SetColor(Color::FILL);
 
