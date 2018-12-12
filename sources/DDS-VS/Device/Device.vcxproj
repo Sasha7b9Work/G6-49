@@ -214,6 +214,7 @@
     <ClInclude Include="..\..\Device\src\Settings\SettingsTypes.h" />
     <ClInclude Include="..\..\Device\src\stdafx.h" />
     <ClInclude Include="..\..\Device\src\structs.h" />
+    <ClInclude Include="..\..\Device\src\Utils\Buffer.h" />
     <ClInclude Include="..\..\Device\src\Utils\Debug.h" />
     <ClInclude Include="..\..\Device\src\Utils\Math.h" />
     <ClInclude Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h">
@@ -361,6 +362,7 @@
     <ClCompile Include="..\..\Device\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp" />
     <ClCompile Include="..\..\Device\src\Utils\Debug.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>

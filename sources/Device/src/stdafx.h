@@ -29,6 +29,7 @@
 
 #include "SCPI/SCPI.h"
 
+#include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include "Utils/String.h"

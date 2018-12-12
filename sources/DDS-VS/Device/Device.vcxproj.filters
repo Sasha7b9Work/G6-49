@@ -285,6 +285,9 @@
     <ClInclude Include="..\..\Device\src\libs\FatFS\FatFS.h">
       <Filter>libs\FatFS</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Device\src\Utils\Buffer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c">
@@ -454,6 +457,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\FDrive\FDriveDevice_Handler.cpp">
       <Filter>FDrive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -33,17 +33,15 @@ typedef void(*pFuncVI)(int);
 #define BINARY_U16(bits1, bits0) ((BINARY_U8(bits1) << 8) | (BINARY_U8(bits0)))
 
 #ifdef WIN32
+
 #define __attribute__(x)
-#endif
 
-#ifdef _CONSOLE
+#else
 
-#ifndef __IO
-#define __IO volatile
-#endif
-#define uint32_t uint
+#define nullptr NULL
 
 #endif
+
 
 #define MAX_UINT ((uint)-1)
 
