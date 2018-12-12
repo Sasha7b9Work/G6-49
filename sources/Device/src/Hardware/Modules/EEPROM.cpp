@@ -3,6 +3,7 @@
 #include "log.h"
 #include "EEPROM.h"
 #include "Generator/FPGA.h"
+#include "Hardware/Timer.h"
 #endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,7 +262,7 @@ void EEPROM::Init()
         }
     }
 
-    LOG_WRITE("Данные не записаны. Обнуляю");
+    EraseSector(SECTOR_SIGNAL_FPGA_11);
 
     float *address = (float *)SECTOR_SIGNAL_FPGA_11;
 
@@ -271,6 +272,4 @@ void EEPROM::Init()
     {
         WriteData((uint)address, &value, 4);
     }
-
-    LOG_WRITE("Обнулено");
 }
