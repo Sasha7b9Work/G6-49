@@ -107,7 +107,7 @@ static Item * items##name[] = {                                                 
     (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
     (Item *)&item8, (Item *)&item9, (Item *)&item10};                                                                                       \
 const PageBase name = { Item::Type::Page, 10, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},    \
-    items##name, funcPress, funcDraw, funcOnKey};
+    items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_11(name, titleRU, titleEN, hintRU, hintEN,                                                                                 \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, namePage, keeper, funcActive, funcPress, funcOnKey)      \
@@ -196,7 +196,7 @@ static const SButtonBase name = { Item_SmallButton, 0, false, Page::NoPage, &kee
 static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2};                                                                        \
 static pString hints##name##Ru[] = {hintRu1, hintRu2};                                                                                      \
 static pString hints##name##En[] = {hintEn1, hintEn2};                                                                                      \
-static const ChoiceBase name = { Item::Type::Choice, 2, true, (uint8)numBit, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},       \
+volatile static const ChoiceBase name = { Item::Type::Choice, 2, true, (uint8)numBit, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},       \
     (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 #define DEF_CHOICE_3(name, titleRU, titleEN, hintRU, hintEN,                                                                                \

@@ -234,7 +234,7 @@ DEF_GOVERNOR( gHysteresis,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_12( pFrequencyCounter,                                                                                                                                          //--- ЧАСТОТОМЕР ---
+DEF_PAGE_10( pFrequencyCounter,                                                                                                                                          //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
@@ -248,8 +248,8 @@ DEF_PAGE_12( pFrequencyCounter,                                                 
     cAvePeriod,     ///< ЧАСТОТОМЕР - Число периодов
     cTimeStamps,    ///< ЧАСТОТОМЕР - Метки времени
     cTest,          ///< ЧАСТОТОМЕР - Тест
-    gHysteresis,    ///< ЧАСТОТОМЕР - Гистерезис
-    cInterval,      ///< ЧАСТОТОМЕР - Интервал запуска
+    //gHysteresis,    ///< ЧАСТОТОМЕР - Гистерезис
+    //cInterval,      ///< ЧАСТОТОМЕР - Интервал запуска
     Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
 )
 
