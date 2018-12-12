@@ -69,20 +69,10 @@ void EEPROM::SaveSettings(CalibrationSettings *settings)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint SizeSector(uint address)
 {
-    if (address == SECTOR_CALIBRATION_4)
-    {
-        return SIZE_SECTOR_CALIBRATION;
-    }
-    else if (address == SECTOR_TEMP_10)
-    {
-        return SIZE_SECTOR_TEMP;
-    }
-    else if (address == SECTOR_SIGNAL_FPGA_11)
-    {
-        return SIZE_SECTOR_SIGNAL_FPGA;
-    }
+    if (GetSector(address) < 4)       { return (16 * 1024); }
+    else if (GetSector(address) == 4) { return (64 * 1024); }
 
-    return (16 * 1024);
+    return (128 * 1024);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
