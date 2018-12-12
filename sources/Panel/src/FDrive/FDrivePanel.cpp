@@ -119,5 +119,5 @@ void FDrive::PressChoose()
     Message message(Command::FDrive_LoadToFPGA, (uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::directory);
     Interface::Send(&message);
 
-
+    File::SetDataToWave();
 }

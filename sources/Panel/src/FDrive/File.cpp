@@ -66,6 +66,7 @@ void File::Draw(int x, int y)
 bool File::Handler(Message *msg)
 {
     uint8 com = msg->TakeByte();
+
     if (com == Command::FDrive_GetPictureDDS)
     {
         num = msg->TakeByte();
@@ -75,12 +76,16 @@ bool File::Handler(Message *msg)
             picture.data[i] = msg->Data(2)[i];
         }
 
-        Form::SetFormFlash(CURRENT_CHANNEL, msg->Data(2));
-
         return true;
     }
 
     return false;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void File::SetDataToWave()
+{
+    Form::SetFormFlash(CURRENT_CHANNEL, picture.data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
