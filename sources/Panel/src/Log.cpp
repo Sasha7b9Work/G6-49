@@ -41,6 +41,7 @@ void Log::Write(TypeTrace::E type, char *format, ...)
     char buffer[SIZE_BUFFER_LOG];
     char *pointer = buffer;
 
+    /*
     if (type == TypeTrace::Error)
     {
         buffer[0] = 0;
@@ -48,6 +49,7 @@ void Log::Write(TypeTrace::E type, char *format, ...)
         while (*pointer++) {};
         ++pointer;
     }
+    */
     std::va_list args;
     va_start(args, format);
     std::vsprintf(pointer, format, args);
