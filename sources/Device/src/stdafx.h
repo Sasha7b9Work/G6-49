@@ -46,4 +46,6 @@
 #include "usbh_diskio.h"
 #include "usbh_conf.h"
 
+#include <usbd_cdc.h>
+
 #endif

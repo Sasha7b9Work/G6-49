@@ -36,7 +36,7 @@ void Log::Trace(TypeTrace::E, const char *, const char *, int, char *, ...)
 #ifndef OPEN
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::Write(TypeTrace::E type, char *format, ...)
+void Log::Write(TypeTrace::E, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
     char *pointer = buffer;
