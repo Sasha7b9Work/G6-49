@@ -457,6 +457,11 @@
           <GroupName>libs/HAL</GroupName>
           <Files>
             <File>
+              <FileName>stm32f4xx_hal_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_hal.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h</FilePath>
@@ -987,11 +992,6 @@
               </FileOption>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
@@ -1445,6 +1445,11 @@
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_PCD.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU_PCD.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -41,8 +41,6 @@ public:
 
     static USBD_HandleTypeDef handleUSBD;
 
-    static PCD_HandleTypeDef handlePCD;
-
     static bool connectedToUSB;
 
     static bool cableUSBisConnected;

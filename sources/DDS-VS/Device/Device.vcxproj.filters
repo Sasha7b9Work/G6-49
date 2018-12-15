@@ -461,6 +461,9 @@
     <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp">
       <Filter>libs\USBD</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_PCD.cpp">
+      <Filter>Hardware</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Device\src\libs\CMSIS\startup_stm32f407xx.s">

@@ -290,6 +290,7 @@
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU_HCD.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\CPU_IT.cpp" />
+    <ClCompile Include="..\..\Device\src\Hardware\CPU_PCD.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Modules\EEPROM.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\Modules\SPI.cpp" />
     <ClCompile Include="..\..\Device\src\Hardware\stm32.cpp" />

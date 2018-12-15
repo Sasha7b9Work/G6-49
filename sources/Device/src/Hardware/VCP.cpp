@@ -14,7 +14,6 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 USBD_HandleTypeDef VCP::handleUSBD;
-PCD_HandleTypeDef  VCP::handlePCD;
 bool               VCP::cableUSBisConnected = false;
 bool               VCP::connectedToUSB = false;
 
@@ -22,30 +21,7 @@ bool               VCP::connectedToUSB = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void VCP::Init()
 {
-    __GPIOB_CLK_ENABLE();
-    __USB_OTG_HS_CLK_ENABLE();
-    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
-    __SYSCFG_CLK_ENABLE();
-
-    GPIO_InitTypeDef isGPIO =
-    {
-        GPIO_PIN_14 | GPIO_PIN_15,
-        GPIO_MODE_AF_PP,
-        GPIO_NOPULL,
-        GPIO_SPEED_FREQ_VERY_HIGH,
-        GPIO_AF12_OTG_HS_FS
-    };
-
-    HAL_GPIO_Init(GPIOB, &isGPIO);
-
-    isGPIO.Pin = GPIO_PIN_12;
-    isGPIO.Pin = GPIO_MODE_INPUT;
-
-    HAL_GPIO_Init(GPIOB, &isGPIO);
-
-    HAL_NVIC_SetPriority(OTG_HS_IRQn, 0, 0);
-
-    HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
+    CPU::PCD::Init();
 
     USBD_Init(&handleUSBD, &VCP_Desc, DEVICE_FS);
     USBD_RegisterClass(&handleUSBD, &USBD_CDC);
