@@ -231,15 +231,6 @@
     <ClInclude Include="..\..\Device\src\SCPI\SCPI.h">
       <Filter>SCPI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h">
-      <Filter>libs\USBD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h">
-      <Filter>libs\USBD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h">
-      <Filter>libs\USBD</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Device\src\Hardware\stm32.h">
       <Filter>Hardware</Filter>
     </ClInclude>
@@ -287,6 +278,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Device\src\Utils\Buffer.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_conf.h">
+      <Filter>libs\USBD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Device\src\libs\USBD\usbd_desc.h">
+      <Filter>libs\USBD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -395,18 +395,6 @@
     <ClCompile Include="..\..\Device\src\SCPI\SCPI.cpp">
       <Filter>SCPI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.cpp">
-      <Filter>libs\USBD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp">
-      <Filter>libs\USBD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp">
-      <Filter>libs\USBD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp">
-      <Filter>libs\USBD</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Device\src\Hardware\CPU.cpp">
       <Filter>Hardware</Filter>
     </ClCompile>
@@ -460,6 +448,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Device\src\Utils\Buffer.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_cdc_interface.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_conf.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_core.cpp">
+      <Filter>libs\USBD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Device\src\libs\USBD\usbd_desc.cpp">
+      <Filter>libs\USBD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

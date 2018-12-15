@@ -85,14 +85,6 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
     USBD_LL_Suspend((USBD_HandleTypeDef *)hpcd->pData);
-//      __HAL_PCD_GATE_PHYCLOCK(hpcd);
-//  /* Enter in STOP mode. */
-//  /* USER CODE BEGIN 2 */
-//  if (hpcd->Init.low_power_enable)
-//  {
-//    /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register. */
-//    SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
-//  }
 }
 
 void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
@@ -134,7 +126,7 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
         VCP::handlePCD.pData = pdev;
         pdev->pData = &VCP::handlePCD;
 
-        VCP::handlePCD.Instance = USB_OTG_FS;
+        VCP::handlePCD.Instance = USB_OTG_HS;
         VCP::handlePCD.Init.dev_endpoints = 4;
         VCP::handlePCD.Init.speed = PCD_SPEED_FULL;
         VCP::handlePCD.Init.dma_enable = DISABLE;
