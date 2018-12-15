@@ -12,7 +12,7 @@ public:
     Buffer(uint size);
     ~Buffer();
     bool ReSize(uint size);
-    void *Data();
+    uint8 *Data();
     float *DataFloat();
     uint   Size() const;
 private:

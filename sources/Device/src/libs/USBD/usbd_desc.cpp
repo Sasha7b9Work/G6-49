@@ -1,7 +1,10 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
 #include "usbd_conf.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -43,6 +46,7 @@ USBD_DescriptorsTypeDef VCP_Desc = {
 };
 
 #ifdef WIN32
+#undef __ALIGN_BEGIN
 #define __ALIGN_BEGIN
 #define __ALIGN_END
 #endif

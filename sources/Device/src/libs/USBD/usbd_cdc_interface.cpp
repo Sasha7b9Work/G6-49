@@ -1,13 +1,17 @@
+#include "stdafx.h"
+#ifndef WIN32
+//#include "main.h"
 #include "defines.h"
 #include "SCPI/SCPI.h"
+#include "Log.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-
 #include <usbd_cdc.h>
+#endif
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static USBD_CDC_LineCodingTypeDef LineCoding =
 {
     115200, /* baud rate*/
@@ -16,59 +20,55 @@ static USBD_CDC_LineCodingTypeDef LineCoding =
     0x08    /* nb. of bits 8*/
 };
 
-#define APP_RX_DATA_SIZE  32
+#define APP_RX_DATA_SIZE  64
 static uint8_t UserRxBuffer[APP_RX_DATA_SIZE];/* Received Data over USB are stored in this buffer */
 
 
 static int8_t CDC_Itf_Init     ();
 static int8_t CDC_Itf_DeInit   ();
-static int8_t CDC_Itf_Control  (uint8_t cmd, uint8_t* pbuf, uint16_t length);
-static int8_t CDC_Itf_Receive  (uint8_t* pbuf, uint32_t *Len);
+static int8_t CDC_Itf_Control  (uint8 cmd, uint8* pbuf, uint16 length);
+static int8_t CDC_Itf_Receive  (uint8* pbuf, uint *Len);
 
 
 USBD_CDC_ItfTypeDef USBD_CDC_fops = 
 {
-  CDC_Itf_Init,
-  CDC_Itf_DeInit,
-  CDC_Itf_Control,
-  CDC_Itf_Receive
+    CDC_Itf_Init,
+    CDC_Itf_DeInit,
+    CDC_Itf_Control,
+    CDC_Itf_Receive
 };
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void SetAttributeConnected()
 {
-    //CABLE_USB_IS_CONNECTED = true;
-    //CONNECTED_TO_USB = false;
+    CABLE_USB_IS_CONNECTED = true;
+    CONNECTED_TO_USB = false;
 }
-*/
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Init()
 {
     USBD_CDC_SetRxBuffer(&VCP::handleUSBD, UserRxBuffer);
-    
-    // Timer::SetAndStartOnce(kUSB, SetAttributeConnected, 100);   /** \todo Задержка введена для того, чтобы не было ложных срабатываний в 
-    //                                                              usbd_conf.c:HAL_PCD_SetupStageCallback при определении подключения хоста */
-    
+    Timer::SetAndStartOnce(Timer::Type::USB, SetAttributeConnected, 100);   /** \todo Задержка введена для того, чтобы не было ложных срабатываний в 
+                                                                 usbd_conf.c:HAL_PCD_SetupStageCallback при определении подключения хоста */
     return (USBD_OK);
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_DeInit()
 {
-//    CABLE_USB_IS_CONNECTED = false;
-//    CONNECTED_TO_USB = false;
+    CABLE_USB_IS_CONNECTED = false;
+    CONNECTED_TO_USB = false;
 
     return (USBD_OK);
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static int8_t CDC_Itf_Control (uint8_t cmd, uint8_t* pbuf, uint16_t)
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 { 
     switch (cmd)
     {
@@ -127,7 +127,7 @@ static int8_t CDC_Itf_Control (uint8_t cmd, uint8_t* pbuf, uint16_t)
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length)
 {
     SCPI::AddNewData(buffer, *length);

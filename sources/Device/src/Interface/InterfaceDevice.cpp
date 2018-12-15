@@ -19,7 +19,6 @@
 #include "Utils/StringUtils.h"
 #include "Command.h"
 #include "structs.h"
-#include <string.h>
 #include <cstdlib>
 #endif
 

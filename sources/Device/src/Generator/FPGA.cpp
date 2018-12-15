@@ -9,7 +9,6 @@
 #include "Utils/Math.h"
 #include "Generator/GeneratorDevice.h"
 #include "Settings/CalibrationSettings.h"
-#include <string.h>
 #include <stdio.h>
 #include <cstdlib>
 #include <math.h>

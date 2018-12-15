@@ -1,14 +1,13 @@
+#include "stdafx.h"
+#ifndef WIN32
 #include "defines.h"
 #include "usbd_core.h"
-#ifdef STM32F407xx
+#include "Log.h"
 #include <stm32f4xx_hal.h>
-#endif
-#ifdef STM32F746xx
-#include <stm32f7xx_hal.h>
-#endif
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
+#endif
 
 
 /*******************************************************************************
@@ -27,20 +26,15 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
                                                                     //
     if (request.wLength == 0)                                       //
     {                                                               //
-//        if (CABLE_USB_IS_CONNECTED)                               //
-        {                                                           //
-            if (prevLength != 0)                                    //
-            {                                                       //
-                //CABLE_USB_IS_CONNECTED = true;  // Это потому, что при включении прибора с подключенным шнуром
-                //CONNECTED_TO_USB = true;                            // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
-            }                                                       //
-            else                                                    //
-            {                                                       //
-                //CONNECTED_TO_USB = false;                           //
-                //Settings::Save();                                   // При отконнекчивании сохраняем настройки
-            }                                                       /// \todo Возможно, это не нужно делать
-            //CONNECTED_TO_USB = prevLength != 0;                   // 
-        }                                                           //
+        if (prevLength != 0)                                    //
+        {                                                       //
+            CABLE_USB_IS_CONNECTED = true;  // Это потому, что при включении прибора с подключенным шнуром
+            CONNECTED_TO_USB = true;                           // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
+        }                                                       //
+        else                                                    //
+        {                                                       //
+            CONNECTED_TO_USB = false;                           //
+        }                                                       /// \todo Возможно, это не нужно делать
     }                                                               //
     prevLength = request.wLength;                                   //
     
@@ -91,6 +85,14 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
     USBD_LL_Suspend((USBD_HandleTypeDef *)hpcd->pData);
+//      __HAL_PCD_GATE_PHYCLOCK(hpcd);
+//  /* Enter in STOP mode. */
+//  /* USER CODE BEGIN 2 */
+//  if (hpcd->Init.low_power_enable)
+//  {
+//    /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register. */
+//    SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+//  }
 }
 
 void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
@@ -124,30 +126,33 @@ void HAL_PCD_DisconnectCallback(PCD_HandleTypeDef *hpcd)
 
 USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
-    /* Change Systick prioity */
     NVIC_SetPriority (SysTick_IRQn, 0);  
   
-    /*Set LL Driver parameters */
+    if(pdev->id == VCP::DEVICE_FS)
+    {
+        // Link The driver to the stack
+        VCP::handlePCD.pData = pdev;
+        pdev->pData = &VCP::handlePCD;
 
-    VCP::handlePCD.Instance = USB_OTG_HS;
-    VCP::handlePCD.Init.speed = PCD_SPEED_HIGH_IN_FULL;
-    VCP::handlePCD.Init.dev_endpoints = 6; 
-    VCP::handlePCD.Init.use_dedicated_ep1 = 0;
-    VCP::handlePCD.Init.ep0_mps = 0x40;  
-    VCP::handlePCD.Init.dma_enable = 0;
-    VCP::handlePCD.Init.low_power_enable = 0;
-    VCP::handlePCD.Init.phy_itface = PCD_PHY_EMBEDDED; 
-    VCP::handlePCD.Init.Sof_enable = 0;
-    VCP::handlePCD.Init.vbus_sensing_enable = 0;
-    /* Link The driver to the stack */
-    VCP::handlePCD.pData = pdev;
-    pdev->pData = &VCP::handlePCD;
-    /*Initialize LL Driver */
-    HAL_PCD_Init(&VCP::handlePCD);
-  
-    HAL_PCD_SetRxFiFo(&VCP::handlePCD, 0x200);
-    HAL_PCD_SetTxFiFo(&VCP::handlePCD, 0, 0x80);
-    HAL_PCD_SetTxFiFo(&VCP::handlePCD, 1, 0x174); 
+        VCP::handlePCD.Instance = USB_OTG_FS;
+        VCP::handlePCD.Init.dev_endpoints = 4;
+        VCP::handlePCD.Init.speed = PCD_SPEED_FULL;
+        VCP::handlePCD.Init.dma_enable = DISABLE;
+        VCP::handlePCD.Init.ep0_mps = DEP0CTL_MPS_64;
+        VCP::handlePCD.Init.phy_itface = PCD_PHY_EMBEDDED;
+        VCP::handlePCD.Init.Sof_enable = DISABLE;
+        VCP::handlePCD.Init.low_power_enable = DISABLE;
+        VCP::handlePCD.Init.lpm_enable = DISABLE;
+        VCP::handlePCD.Init.vbus_sensing_enable = ENABLE;
+        VCP::handlePCD.Init.use_dedicated_ep1 = DISABLE;
+    
+        // Initialize LL Driver
+        HAL_PCD_Init(&VCP::handlePCD);
+    
+        HAL_PCDEx_SetRxFiFo(&VCP::handlePCD, 0x80);
+        HAL_PCDEx_SetTxFiFo(&VCP::handlePCD, 0, 0x40);
+        HAL_PCDEx_SetTxFiFo(&VCP::handlePCD, 1, 0x80); 
+    }
 
     return USBD_OK;
 }
