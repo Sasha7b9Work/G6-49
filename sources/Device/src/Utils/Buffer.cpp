@@ -2,7 +2,6 @@
 #ifndef WIN32
 #include "defines.h"
 #include "Utils/Buffer.h"
-#include <stdlib.h>
 #endif
 
 

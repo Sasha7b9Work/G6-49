@@ -123,7 +123,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
     if (CONNECTED_TO_USB)
     {
         static char buffer[200];
-        va_list args;
+        std::va_list args;
         va_start(args, format);
         std::vsprintf(buffer, format, args);
         va_end(args);

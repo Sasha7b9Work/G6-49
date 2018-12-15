@@ -5,7 +5,6 @@
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include <cstdlib>
-#include "stdlib.h"
 #endif
 
 
