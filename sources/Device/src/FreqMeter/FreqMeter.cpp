@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
+#include "log.h"
 #include "FreqMeter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -45,6 +46,8 @@ void FreqMeter::Update()
 {
     if(CPU::ReadPin(GeneratorReadPin::FREQ_METER_DRY))
     {
+        LOG_WRITE("Получено новое значение");
+
         uint frequency = 0;
         for(int i = 30; i >= 0; i--)
         {
