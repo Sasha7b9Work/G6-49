@@ -120,13 +120,6 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
     NVIC_SetPriority (SysTick_IRQn, 0);  
   
-    // Initialize LL Driver
-    HAL_PCD_Init(&CPU::PCD::handle);
-
-    // Link The driver to the stack
-    CPU::PCD::handle.pData = pdev;
-    pdev->pData = &CPU::PCD::handle;
-
     CPU::PCD::handle.Instance = USB_OTG_HS;
     CPU::PCD::handle.Init.dev_endpoints = 6;
     CPU::PCD::handle.Init.speed = PCD_SPEED_FULL;
@@ -138,7 +131,13 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
     CPU::PCD::handle.Init.lpm_enable = DISABLE;
     CPU::PCD::handle.Init.vbus_sensing_enable = ENABLE;
     CPU::PCD::handle.Init.use_dedicated_ep1 = DISABLE;
-    
+
+    // Link The driver to the stack
+    CPU::PCD::handle.pData = pdev;
+    pdev->pData = &CPU::PCD::handle;
+    // Initialize LL Driver
+    HAL_PCD_Init(&CPU::PCD::handle);
+
     HAL_PCDEx_SetRxFiFo(&CPU::PCD::handle, 0x80);
     HAL_PCDEx_SetTxFiFo(&CPU::PCD::handle, 0, 0x40);
     HAL_PCDEx_SetTxFiFo(&CPU::PCD::handle, 1, 0x80); 

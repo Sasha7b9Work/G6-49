@@ -27,9 +27,11 @@ void CPU::PCD::Init()
 
     HAL_GPIO_Init(GPIOB, &isGPIO);
 
+    /*
     isGPIO.Pin = GPIO_PIN_13;
     isGPIO.Mode = GPIO_MODE_INPUT;
     HAL_GPIO_Init(GPIOB, &isGPIO);
+    */
 
     HAL_NVIC_SetPriority(OTG_HS_IRQn, 6, 1);
 
