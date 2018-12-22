@@ -32,6 +32,7 @@
 #include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
+#include "Utils/Memory.h"
 #include "Utils/String.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Queue.h"

@@ -1577,6 +1577,16 @@
               <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
+              <FileName>Memory.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Memory.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Memory.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Memory.h</FilePath>
+            </File>
+            <File>
               <FileName>Queue.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Queue.cpp</FilePath>
