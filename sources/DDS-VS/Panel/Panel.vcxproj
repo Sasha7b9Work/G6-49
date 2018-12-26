@@ -44,7 +44,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\libs;..\..\common;src\include\CMSIS;src\include\HAL;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\libs;..\..\common;$(IncludePath)</IncludePath>
     <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
