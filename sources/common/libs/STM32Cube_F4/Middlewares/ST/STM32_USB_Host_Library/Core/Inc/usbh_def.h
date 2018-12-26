@@ -62,9 +62,9 @@
 #endif
 
 
-#define ValBit(VAR,POS)                               (VAR & (1 << POS))
-#define SetBit(VAR,POS)                               (VAR |= (1 << POS))
-#define ClrBit(VAR,POS)                               (VAR &= ((1 << POS)^255))
+#define ValBit(VAR,POS)                               ((VAR) &  (1 << (POS)))
+#define SetBit(VAR,POS)                               ((VAR) |= (1 << (POS)))
+#define ClrBit(VAR,POS)                               ((VAR) &= ((1 << (POS)) ^ 255))
 
 #define  LE16(addr)             (((uint16_t)(*((uint8_t *)(addr))))\
                                 + (((uint16_t)(*(((uint8_t *)(addr)) + 1))) << 8))
@@ -402,7 +402,7 @@ USBH_OSEventTypeDef;
 
 /* Control request structure */
 typedef struct 
-{
+{										// -V802
   uint8_t               pipe_in; 
   uint8_t               pipe_out; 
   uint8_t               pipe_size;  

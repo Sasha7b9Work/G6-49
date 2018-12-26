@@ -21,26 +21,28 @@ struct Block
 {
     uint8 *address;   /// Адрес выделенного блока памяти
     uint size;      /// Размер выделенного блока памяти
+    Block *Next() { return 0; };
 };
 
 
 #define SIZE_POOL (1 * 1024)
 static uint8 pool[SIZE_POOL];
-static uint8 *begin = pool;
+//static uint8 *begin = pool;
 static Block *firstBlock = ((Block *)&pool[SIZE_POOL]) - 1;
+//static Block *lastBlock = nullptr;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Найти свободный участок памяти. Если памяти нет - возвращает ноль.
 static uint8 *FindRegion(uint size);
 /// Возвращает указатель на блок, отвечающий за адрес address
-static Block *FindBlockWithAddress(uint8 *address);
+//static Block *FindBlockWithAddress(const uint8 *address);
 /// Вставить структуру Block в массив
 static void InsertBlock(Block *block);
 /// Возвращает адрес первого (по адресу) выделенного блока памяти
 static Block *FirstBlock();
 /// Возвращает адрес последнего (по адресу) выделенного блока памяти. LastBlokc() < FirstBlock()
-static Block *LastBlock();
+//static Block *LastBlock();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,32 +66,35 @@ void *Memory::Allocate(uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void InsertBlock(Block *block)
+static void InsertBlock(Block * /*block*/)
 {
-    Block *first = FirstBlock();
-    Block *last = LastBlock();
+    //Block *first = FirstBlock();
+    //Block *last = LastBlock();
 }
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Memory::Free(void *address)
+void Memory::Free(void * /*address*/)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint8 *FindRegion(uint size)
+static uint8 *FindRegion(uint /*size*/)
 {
     Block *block = FirstBlock();
 
     while (block->address != 0)
     {
-
+        block = block->Next();
     }
+    
+    return 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static Block *FindBlockWithAddress(uint8 *address)
+/*
+static Block *FindBlockWithAddress(const uint8 *address)
 {
     Block *block = lastBlock;
     while (block->address != 0)
@@ -102,6 +107,7 @@ static Block *FindBlockWithAddress(uint8 *address)
 
     return 0;
 }
+*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static Block *FirstBlock()
@@ -115,6 +121,7 @@ static Block *FirstBlock()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 static Block *LastBlock()
 {
     if (!FirstBlock())
@@ -126,8 +133,9 @@ static Block *LastBlock()
 
     do
     {
-        block--;
+        block--;														// -V769
     } while (block->address != 0);
 
     return block + 1;
 }
+*/

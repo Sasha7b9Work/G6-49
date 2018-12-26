@@ -261,6 +261,8 @@ public:
     Form(E v = Number) :
         value(v),
         wave(0),
+		params(nullptr),
+		numParams(0),
         currentParam(0),
         oldParams(0),
         oldNumParams(0),

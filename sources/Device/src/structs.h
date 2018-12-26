@@ -38,7 +38,7 @@ union BitSet32
         uint16 halfWord0;
         uint16 halfWord1;
     };
-    uint8   byte[4];
+    uint8   byte[sizeof(uint)];
     struct
     {
         uint8 byte0;
@@ -53,7 +53,7 @@ union BitSet32
     {
         if (buffer)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < sizeof(uint); i++)
             {
                 byte[i] = buffer[i];
             }
@@ -61,7 +61,7 @@ union BitSet32
     }
     void WriteToBuffer(uint8 buffer[4])
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < sizeof(uint); i++)
         {
             buffer[i] = byte[i];
         }
