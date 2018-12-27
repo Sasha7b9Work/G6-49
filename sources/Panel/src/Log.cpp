@@ -77,7 +77,7 @@ void Log::Trace(TypeTrace::E type, const char *module, const char *func, int num
     char message[SIZE_BUFFER_LOG];
     std::va_list args;
     va_start(args, format);
-    vsprintf(buffer, format, args);
+    std::vsprintf(buffer, format, args);
     va_end(args);
     const int SIZE = 20;
     char numBuffer[SIZE];

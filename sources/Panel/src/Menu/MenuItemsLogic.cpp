@@ -576,12 +576,12 @@ String Item::FullPath()
     do
     {
         pointer--;
-        strcat(buffer, titles[pointer]);
-        strcat(buffer, " - ");
+        std::strcat(buffer, titles[pointer]);
+        std::strcat(buffer, " - ");
         
     } while(pointer > 0);
 
-    buffer[strlen(buffer) - 3] = 0;
+    buffer[std::strlen(buffer) - 3] = 0;
 
     return String(buffer);
 }

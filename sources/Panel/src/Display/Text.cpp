@@ -89,7 +89,7 @@ int Text::DrawText(int x, int y, pString text, Color color)
 {
     Painter::SetColor(color);
 
-    uint numSymbols = strlen(text);
+    uint numSymbols = std::strlen(text);
     for (uint i = 0; i < numSymbols; ++i)
     {
         x = DrawChar(x, y, text[i]);
@@ -131,7 +131,7 @@ bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
 bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height)
 {
     char buffer[20];
-    int numSymbols = (int)strlen(text);
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;
@@ -255,7 +255,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
             {
                 Text::DrawText(x, y, subString);
             }
-            return (int)strlen(subString) - 1;
+            return (int)std::strlen(subString) - 1;
         }
     }
 
@@ -274,7 +274,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
     int right = left + width;
 
     char buffer[20];
-    int numSymbols = (int)strlen(text);
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;
@@ -316,7 +316,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
                 {
                     curSymbol += length;
 
-                    for (uint i = 0; i < strlen(word); ++i)
+                    for (uint i = 0; i < std::strlen(word); ++i)
                     {
                         if(inverse && word[i] == '\"')
                         {
@@ -355,7 +355,7 @@ int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int
     int right = left + width;
 
     char buffer[20];
-    int numSymbols = (int)strlen(text);
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;
@@ -419,15 +419,15 @@ int8 *Text::BreakWord(char *word)
         num++;
     }
     lengthSyllables[num + 1] = 0;
-    if (strcmp(word, "структуру") == 0)
+    if (std::strcmp(word, "структуру") == 0)
     {
         int8 lengths[] = {5, 2, 2, 0};
-        memcpy(lengthSyllables, lengths, 4);
+        std::memcpy(lengthSyllables, lengths, 4);
     }
-    else if (strcmp(word, "соответствующей") == 0)
+    else if (std::strcmp(word, "соответствующей") == 0)
     {
         int8 lenghts[] = {4, 3, 4, 5, 3, 0};
-        memcpy(lengthSyllables, lenghts, 6);
+        std::memcpy(lengthSyllables, lenghts, 6);
     }
     return lengthSyllables;
 }
@@ -440,7 +440,7 @@ char *Text::PartWordForTransfer(char *word, int8 *lengthSyllables, int numSyllab
     {
         length += (size_t)lengthSyllables[i];
     }
-    memcpy((void *)buffer, (void *)word, length);
+    std::memcpy((void *)buffer, (void *)word, length);
     buffer[length] = '-';
     buffer[length + 1] = '\0';
     return buffer;
@@ -453,8 +453,8 @@ bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    * lettersInSyllable = (int8)strlen(letters);
-    if (strlen(letters) <= 3)
+    * lettersInSyllable = (int8)std::strlen(letters);
+    if (std::strlen(letters) <= 3)
     {
         return false;
     }
@@ -470,7 +470,7 @@ bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 
     bool consonant[20];
 
-    int size = (int)strlen(letters);
+    int size = (int)std::strlen(letters);
     for (int i = 0; i < size; i++)
     {
         consonant[i] = IsConsonant(letters[i]);
@@ -486,7 +486,7 @@ bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
         *lettersInSyllable = 2;
         return true;
     }
-    if (strlen(letters) < 5)
+    if (std::strlen(letters) < 5)
     {
         return false;
     }
@@ -496,7 +496,7 @@ bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
         *lettersInSyllable = 3;
         return true;
     }
-    if (strlen(letters) < 6)
+    if (std::strlen(letters) < 6)
     {
         return false;
     }
@@ -590,7 +590,7 @@ void Text::DrawBigText(int eX, int eY, int size, pString text, Color color)
 {
     Painter::SetColor(color);
 
-    uint numSymbols = strlen(text);
+    uint numSymbols = std::strlen(text);
 
     int x = eX;
 
@@ -693,7 +693,7 @@ int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString t
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
     std::va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    std::vsprintf(buffer, text, args);
     va_end(args);
 
     return DrawTextInColumnWithTransfers(x, y, width, buffer);
@@ -706,7 +706,7 @@ int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width,
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
     std::va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    std::vsprintf(buffer, text, args);
     va_end(args);
 
     return DrawTextInColumnWithTransfersDiffColors(x, y, width, buffer, color);
@@ -719,7 +719,7 @@ int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pStr
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
     std::va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    std::vsprintf(buffer, text, args);
     va_end(args);
 
     return DrawStringInCenterRect(x, y, width, height, buffer);
@@ -732,7 +732,7 @@ int Text::DrawFormatText(int x, int y, pString text, ...)
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
     std::va_list args;
     va_start(args, text);
-    vsprintf(buffer, text, args);
+    std::vsprintf(buffer, text, args);
     va_end(args);
     return DrawText(x, y, buffer);
 }

@@ -649,7 +649,7 @@ ParameterComplex::ParameterComplex(ParameterBase *param[]) : ParameterBase(Compl
 ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(Value),
     value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), min(_min), max(_max), inNumLockMode(false)
 {
-    strcpy(buffer, buf);
+    std::strcpy(buffer, buf);
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -683,7 +683,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
         std::srand(2);
         for (int i = 0; i < 100; i++)
         {
-            yNoise[i] = aveY - (std::rand() % 50 - 25);
+            yNoise[i] = aveY - (int)(std::rand() % 50 - 25);
 
             yExp[i] = aveY - (int)(std::expf(i / 12.5f) + 0.5f) + 1;
         }

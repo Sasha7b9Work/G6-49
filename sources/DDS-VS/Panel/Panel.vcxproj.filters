@@ -25,9 +25,6 @@
     <Filter Include="libs\CMSIS">
       <UniqueIdentifier>{e8b8c361-53c2-455d-8e2b-95244c53e9e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libs\HAL">
-      <UniqueIdentifier>{08b0c125-9162-4ad7-ad4e-a3f13afa9481}</UniqueIdentifier>
-    </Filter>
     <Filter Include="common">
       <UniqueIdentifier>{3d9bfc4d-8e9c-4db0-bc72-6b565edf6c6d}</UniqueIdentifier>
     </Filter>
@@ -57,9 +54,6 @@
     </Filter>
     <Filter Include="Hardware\Modules">
       <UniqueIdentifier>{8bfb3e5f-a80f-4a42-9509-8f5be2678f38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libs\HAL\legacy">
-      <UniqueIdentifier>{9720fb9c-0dd7-4b11-9cda-705afc5de2cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Menu\Pages\PageSignals">
       <UniqueIdentifier>{e855aef2-fcf8-4c67-b1c8-39efa0e9dca6}</UniqueIdentifier>
@@ -219,59 +213,8 @@
     <ClCompile Include="..\..\Panel\src\Hardware\Modules\SPI.cpp">
       <Filter>Hardware\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_cortex.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_crc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dma.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash_ex.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_gpio.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rcc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_spi.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim_ex.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_ll_fmc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rcc_ex.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_ltdc.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dma2d.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
     <ClCompile Include="src\include\CMSIS\system_stm32f4xx.cpp">
       <Filter>libs\CMSIS</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_pwr.cpp">
-      <Filter>libs\HAL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_sram.cpp">
-      <Filter>libs\HAL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Panel\src\Menu\Pages\PageSignals\PageSignals.cpp">
       <Filter>Menu\Pages\PageSignals</Filter>
@@ -533,72 +476,6 @@
     <ClInclude Include="src\include\CMSIS\system_stm32f4xx.h">
       <Filter>libs\CMSIS</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_cortex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_crc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_def.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dma.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dma2d.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_ltdc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_spi.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_sram.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim_ex.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\stm32f4xx_ll_fmc.h">
-      <Filter>libs\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\include\HAL\Legacy\stm32_hal_legacy.h">
-      <Filter>libs\HAL\legacy</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\common\Message.h">
       <Filter>common</Filter>
     </ClInclude>
@@ -633,6 +510,9 @@
       <Filter>common\_VS</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\_VS\cmath">
+      <Filter>common\_VS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\_VS\cctype">
       <Filter>common\_VS</Filter>
     </ClInclude>
   </ItemGroup>

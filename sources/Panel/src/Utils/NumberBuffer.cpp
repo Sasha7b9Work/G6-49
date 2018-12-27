@@ -71,7 +71,7 @@ void NumberBuffer::ProcessRegulator(Control key)
 
     // Сохраняем старое значение, чтобы восстановить его в случае, если при изменении оно превысит максимальное
     char temp[32];
-    memcpy(temp, buffer, (uint)size);
+    std::memcpy(temp, buffer, (uint)size);
 
     if (key.Is(Control::RegRight))
     {
@@ -85,7 +85,7 @@ void NumberBuffer::ProcessRegulator(Control key)
     // Восстанавливаем старое значение, если новое вышло за пределы
     if(max != 0 && ToUINT() > (uint)max)
     {
-        memcpy(buffer, temp, (uint)size);
+        std::memcpy(buffer, temp, (uint)size);
     }
 }
 

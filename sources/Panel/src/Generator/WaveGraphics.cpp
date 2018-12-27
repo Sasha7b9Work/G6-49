@@ -74,7 +74,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
     {
         ParameterBase *param = form->GetParameter(i);
         
-        if ((ch == CURRENT_CHANNEL) && strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
+        if ((ch == CURRENT_CHANNEL) && std::strcmp(PARAM_CURRENT->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::pointer)
         {
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }

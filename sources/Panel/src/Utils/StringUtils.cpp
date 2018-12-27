@@ -26,7 +26,7 @@ char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 {
     if (IsEquals(voltage, ERROR_VALUE_FLOAT))
     {
-        strcpy(buffer, ERROR_STRING_VALUE);
+        std::strcpy(buffer, ERROR_STRING_VALUE);
         return buffer;
     }
 
@@ -50,8 +50,8 @@ char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 
     Float2String(voltage * factor[num], alwaysSign, 4, bufferOut);
 
-    strcpy(buffer, bufferOut);
-    strcat(buffer, suf[LANG][num]);
+    std::strcpy(buffer, bufferOut);
+    std::strcat(buffer, suf[LANG][num]);
     return buffer;
 }
 
@@ -60,7 +60,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
 {
     if (IsEquals(value, ERROR_VALUE_FLOAT))
     {
-        strcpy(bufferOut, ERROR_STRING_VALUE);
+        std::strcpy(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
 
@@ -106,9 +106,9 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
     }
 
     bool signExist = alwaysSign || value < 0;
-    while (strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))
+    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))
     {
-        strcat(bufferOut, "0");
+        std::strcat(bufferOut, "0");
     }
 
     return bufferOut;
@@ -119,7 +119,7 @@ char *Time2String(float time, bool alwaysSign, char buffer[20])
 {
     if (IsEquals(time, ERROR_VALUE_FLOAT))
     {
-        strcpy(buffer, ERROR_STRING_VALUE);
+        std::strcpy(buffer, ERROR_STRING_VALUE);
         return buffer;
     }
     
@@ -141,8 +141,8 @@ char *Time2String(float time, bool alwaysSign, char buffer[20])
     else                                 { num = 3; }
 
     char bufferOut[20];
-    strcpy(buffer, Float2String(time * factor[num], alwaysSign, 4, bufferOut));
-    strcat(buffer, suffix[LANG][num]);
+    std::strcpy(buffer, Float2String(time * factor[num], alwaysSign, 4, bufferOut));
+    std::strcat(buffer, suffix[LANG][num]);
     return buffer;
 }
 
@@ -153,7 +153,7 @@ char *Freq2String(float freq, bool, char bufferOut[20])
     const char *suffix = 0;
     if (IsEquals(freq, ERROR_VALUE_FLOAT))
     {
-        strcat(bufferOut, ERROR_STRING_VALUE);
+        std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
     if (freq >= 1e6f)
@@ -171,8 +171,8 @@ char *Freq2String(float freq, bool, char bufferOut[20])
         suffix = LANG_RU ? "ร๖" : "Hz";
     }
     char buffer[20];
-    strcat(bufferOut, Float2String(freq, false, 4, buffer));
-    strcat(bufferOut, suffix);
+    std::strcat(bufferOut, Float2String(freq, false, 4, buffer));
+    std::strcat(bufferOut, suffix);
     return bufferOut;
 }
 
@@ -197,7 +197,7 @@ char *Freq2StringAccuracy(float freq, char bufferOut[20], int numDigits)
     const char *suffix = LANG_RU ? "ร๖" : "Hz";
     if (IsEquals(freq, ERROR_VALUE_FLOAT))
     {
-        strcat(bufferOut, ERROR_STRING_VALUE);
+        std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
     if (freq >= 1e6f)
@@ -211,8 +211,8 @@ char *Freq2StringAccuracy(float freq, char bufferOut[20], int numDigits)
         freq /= 1e3f;
     }
     char buffer[20];
-    strcat(bufferOut, Float2String(freq, false, numDigits, buffer));
-    strcat(bufferOut, suffix);
+    std::strcat(bufferOut, Float2String(freq, false, numDigits, buffer));
+    std::strcat(bufferOut, suffix);
     return bufferOut;
 }
 
@@ -231,9 +231,9 @@ char *Bin2String(uint8 value, char buffer[9])
 char *Bin2String16(uint16 value, char valBuffer[19])
 {
     char buffer[9];
-    strcpy(valBuffer, Bin2String((uint8)(value >> 8), buffer));
+    std::strcpy(valBuffer, Bin2String((uint8)(value >> 8), buffer));
     valBuffer[8] = ' ';
-    strcpy(valBuffer + 9, Bin2String((uint8)value, buffer));
+    std::strcpy(valBuffer + 9, Bin2String((uint8)value, buffer));
     valBuffer[18] = '\0';
     return valBuffer;
 }
@@ -285,7 +285,7 @@ static char *Int2String(int value, bool alwaysSign, int numMinFields, char *buff
     const int SIZE = 20;
     char format[SIZE] = "%";
     snprintf(&(format[1]), SIZE, "0%d", numMinFields);
-    strcat(format, "d");
+    std::strcat(format, "d");
     if (alwaysSign && value >= 0)
     {
         buf[0] = '+';
@@ -365,7 +365,7 @@ uint StringToBin32(char buffer[33])
 {
     uint result = 0;
 
-    uint size = strlen(buffer);
+    uint size = std::strlen(buffer);
 
     char *pointer = buffer;
 
@@ -388,7 +388,7 @@ bool String2Int(char *str, int *value)
     {
         str++;
     }
-    uint length = strlen(str);
+    uint length = std::strlen(str);
     if (length == 0)
     {
         return false;
@@ -419,7 +419,7 @@ bool String2Int(char *str, int *value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool String2UInt64(char *str, uint64 *value)
 {
-    uint length = strlen(str);
+    uint length = std::strlen(str);
     if(length == 0)
     {
         return false;
@@ -446,7 +446,7 @@ bool String2UInt64(char *str, uint64 *value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool String2UInt(char *str, uint *value)
 {
-    uint length = strlen(str);
+    uint length = std::strlen(str);
     if (length == 0)
     {
         return false;
@@ -480,7 +480,7 @@ char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numD
 
     if (IsEquals(time, ERROR_VALUE_FLOAT))
     {
-        strcat(buffer, ERROR_STRING_VALUE);
+        std::strcat(buffer, ERROR_STRING_VALUE);
         return buffer;
     }
     else if (fabsTime + 0.5e-10f < 1e-6f)
@@ -500,8 +500,8 @@ char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numD
     }
 
     char bufferOut[20];
-    strcat(buffer, Float2String(time, alwaysSign, numDigits, bufferOut));
-    strcat(buffer, suffix);
+    std::strcat(buffer, Float2String(time, alwaysSign, numDigits, bufferOut));
+    std::strcat(buffer, suffix);
 
     return buffer;
 }
@@ -511,8 +511,8 @@ char *Db2String(float value, int numDigits, char bufferOut[20])
 {
     bufferOut[0] = 0;
     char buffer[20];
-    strcat(bufferOut, Float2String(value, false, numDigits, buffer));
-    strcat(bufferOut, "ไม");
+    std::strcat(bufferOut, Float2String(value, false, numDigits, buffer));
+    std::strcat(bufferOut, "ไม");
     return bufferOut;
 }
 
@@ -745,7 +745,7 @@ bool EqualsStrings(char *str1, char *str2, int size)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool EqualsStrings(char *str1, char *str2)
 {
-    uint size = strlen(str1);
+    uint size = std::strlen(str1);
 
     for (uint i = 0; i < size; i++)
     {
@@ -795,7 +795,7 @@ char SU::ToUpper(char symbol)
 void SU::ConcatenateSymbol(char *str, char symbol)
 {
     char con[2] = {symbol, 0};
-    strcat(str, con);
+    std::strcat(str, con);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

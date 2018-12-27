@@ -47,11 +47,11 @@ void Statistics::Show()
     {
         Painter::DrawFilledRectangle(0, SCREEN_HEIGHT - 12, 60, 10, Color::BACK, Color::FILL);
         char buffer[100] = {0};
-        strcpy(buffer, Int2String((int)(CPU::GetFPS() + 0.5f), false, 3).CString());
-        strcat(buffer, "/");
-        strcat(buffer, Int2String(timeFrame, false, 3).CString());
-        strcat(buffer, "/");
-        strcat(buffer, Int2String(timeAllFrames, false, 3).CString());
+        std::strcpy(buffer, Int2String((int)(CPU::GetFPS() + 0.5f), false, 3).CString());
+        std::strcat(buffer, "/");
+        std::strcat(buffer, Int2String(timeFrame, false, 3).CString());
+        std::strcat(buffer, "/");
+        std::strcat(buffer, Int2String(timeAllFrames, false, 3).CString());
         String(buffer).Draw(2, SCREEN_HEIGHT - 11, Color::FILL);
     }
 }

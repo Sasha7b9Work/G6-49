@@ -18,7 +18,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -44,7 +44,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\libs;..\..\common;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\Panel\src;..\..\Panel\src\libs\HAL;..\..\Panel\src\libs;..\..\common;..\..\common\_VS;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc</IncludePath>
     <OutDir>.\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -57,7 +57,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>STM32F429xx;WIN32;USE_HAL_DRIVER;PANEL</PreprocessorDefinitions>
       <SDLCheck>false</SDLCheck>
-      <DisableSpecificWarnings>4626;4710;4774;4996;5027;5045</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4626;4710;4774;4820;4996;5027;5045</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
       <MinimalRebuild>false</MinimalRebuild>
       <BufferSecurityCheck>true</BufferSecurityCheck>
@@ -244,23 +244,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\include\CMSIS\system_stm32f4xx.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_cortex.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_crc.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dma.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_dma2d.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_flash_ex.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_gpio.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_ltdc.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_pwr.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rcc.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_rcc_ex.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_spi.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_sram.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_hal_tim_ex.cpp" />
-    <ClCompile Include="src\include\HAL\stm32f4xx_ll_fmc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Command.h" />
@@ -268,6 +251,7 @@
     <ClInclude Include="..\..\common\Message.h" />
     <ClInclude Include="..\..\common\Transceiver.h" />
     <ClInclude Include="..\..\common\Wave.h" />
+    <ClInclude Include="..\..\common\_VS\cctype" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc.h" />
     <ClInclude Include="..\..\common\_VS\cmsis_armcc_V6.h" />
     <ClInclude Include="..\..\common\_VS\core_cm4.h" />
@@ -345,28 +329,6 @@
     <ClInclude Include="src\include\CMSIS\core_cm4.h" />
     <ClInclude Include="src\include\CMSIS\stm32f429xx.h" />
     <ClInclude Include="src\include\CMSIS\system_stm32f4xx.h" />
-    <ClInclude Include="src\include\HAL\Legacy\stm32_hal_legacy.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_cortex.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_crc.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_def.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dma.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_dma2d.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_flash_ex.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_gpio_ex.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_ltdc.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_pwr_ex.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_rcc_ex.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_spi.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_sram.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_hal_tim_ex.h" />
-    <ClInclude Include="src\include\HAL\stm32f4xx_ll_fmc.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\common\_VS\algorithm" />
