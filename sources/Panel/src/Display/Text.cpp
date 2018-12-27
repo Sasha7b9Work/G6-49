@@ -181,7 +181,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text
     }
 
     *height = y - top + 4;
-    LIMITATION(*height, 0, 239);
+    LIMITATION(*height, 0, 239);    // -V2516
 
     return curSymbol == numSymbols;
 }
@@ -316,7 +316,9 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
                 {
                     curSymbol += length;
 
-                    for (uint i = 0; i < std::strlen(word); ++i)
+                    uint size = std::strlen(word);
+
+                    for (uint i = 0; i < size; ++i)
                     {
                         if(inverse && word[i] == '\"')
                         {
@@ -429,11 +431,15 @@ int8 *Text::BreakWord(char *word)
         int8 lenghts[] = {4, 3, 4, 5, 3, 0};
         std::memcpy(lengthSyllables, lenghts, 6);
     }
+    else
+    {
+        // ничего делать не нужно
+    }
     return lengthSyllables;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Text::PartWordForTransfer(char *word, int8 *lengthSyllables, int numSyllable, char buffer[30])
+char *Text::PartWordForTransfer(char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30])
 {
     size_t length = 0;
     for (int i = 0; i <= numSyllable; i++)
@@ -629,7 +635,7 @@ void Text::DrawTextInColumn(int x, int y, int width, pString t)
         text += numSymbols;
         x += length;
         x = DrawSpaces(x, y, text, &numSymbols);
-        text += numSymbols;
+        text += numSymbols;     // -V102
     }
 }
 

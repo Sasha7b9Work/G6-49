@@ -13,7 +13,7 @@ private:
 
 public:
 
-    static void SetColors(uint clut[], uint8 numColors);
+    static void SetColors(uint *clut, uint8 numColors);
 
     static void ToggleBuffers();
 

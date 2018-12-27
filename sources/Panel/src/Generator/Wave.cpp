@@ -131,7 +131,7 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), forms(f)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, ParameterBase *parameters[], Wave *w) : value(v), wave(w), params(parameters), currentParam(0)
+Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0)
 {
     numParams = 0;
 
@@ -394,7 +394,7 @@ pString ParameterComplex::GetStringValue() const
             {" Off",  " On"}
         };
 
-        ParameterValue *pointer = (ParameterValue *)this;
+        ParameterValue *pointer = (ParameterValue *)this;   // -V1027
         return values[LANG][SINE_MANIPULATION_ENABLED(pointer->GetForm()->GetWave()->GetChannel()) ? 1 : 0];
     }
 
@@ -842,7 +842,7 @@ void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Form::SetFormFlash(Chan::E ch, uint8 data[SIZE_BUFFER])
+void Form::SetFormFlash(Chan::E ch, const uint8 data[SIZE_BUFFER])
 {
     std::memcpy(&formFlash[ch][0], data, SIZE_BUFFER);
 }

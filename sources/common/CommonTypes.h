@@ -83,7 +83,7 @@ struct StartMode
         ShaperB         ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
     } value;
 
-    StartMode(float v) : value((E)((int)(v + 0.5f))) {};
+    StartMode(float v) : value((E)((int)(v + 0.5F))) {};
     operator uint8() const { return (uint8)value; };
     bool Is(StartMode start) const { return start.value == value; };
 };

@@ -61,9 +61,9 @@ char* UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int fo
 /// Преобразует двоичное число ,представленное строкой из нулей и единиц, в uint
 uint StringToBin32(char buffer[33]);
 /// Сравнивает две строки. Число символов берётся из str1
-bool EqualsStrings(char *str1, char *str2);
+bool EqualsStrings(const char *str1, const char *str2);
 
-bool EqualsStrings(char *str1, char *str2, int size);
+bool EqualsStrings(const char *str1, const char *str2, int size);
 
 bool EqualsZeroStrings(char *str1, char *str2);
 
@@ -96,9 +96,9 @@ private:
 
 bool String2Int(char *str, int *value);
 
-bool String2UInt64(char *str, uint64 *value);
+bool String2UInt64(const char *str, uint64 *value);
 
-bool String2UInt(char *str, uint *value);
+bool String2UInt(const char *str, uint *value);
 /// @brief Преобразует time секунд в текстовую строку
 char* Time2StringAccuracy(float time,           ///< время в секундах. Может быть отрицательным
                           bool alwaysSign,      ///< если true, знак показывается даже если time > 0

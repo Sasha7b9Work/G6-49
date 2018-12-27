@@ -21,7 +21,7 @@ extern const PageBase pInput;
 #define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
 
-#define BIT_FL1(numBit)         ((FLAG_1 >> numBit) & 0x01)
+#define BIT_FL1(numBit)         ((FLAG_1 >> (numBit)) & 0x01)
 
 #define CONSOLE_ENABLED         (BIT_FL1(BIT_CONSOLE))
 #define DEBUG_MODE_ENABLED      (BIT_FL1(BIT_DBG_MODE))
@@ -32,7 +32,7 @@ extern const PageBase pInput;
 #define PARITY                  ((Parity)BIT_FL1(BIT_PARITY))
 #define DEBUG_SHOW_SENDS        (BIT_FL1(BIT_SHOW_SENDS))
 
-#define CHANNEL_ENABLED(ch)     ((FLAG_1 >> (ch + BIT_CHAN_A)) & 0x01)
+#define CHANNEL_ENABLED(ch)     ((FLAG_1 >> ((ch) + BIT_CHAN_A)) & 0x01)
 #define SWITCH_CHANNEL_A        (FLAG_1 ^= (1 << (BIT_CHAN_A)))
 #define SWITCH_CHANNEL_B        (FLAG_1 ^= (1 << (BIT_CHAN_B)))
 #define LANG                    ((Language::E)BIT_FL1(BIT_LANG))

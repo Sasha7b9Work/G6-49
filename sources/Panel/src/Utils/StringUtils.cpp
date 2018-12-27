@@ -106,7 +106,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
     }
 
     bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))
+    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))  // -V201
     {
         std::strcat(bufferOut, "0");
     }
@@ -417,7 +417,7 @@ bool String2Int(char *str, int *value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool String2UInt64(char *str, uint64 *value)
+bool String2UInt64(const char *str, uint64 *value)
 {
     uint length = std::strlen(str);
     if(length == 0)
@@ -444,7 +444,7 @@ bool String2UInt64(char *str, uint64 *value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool String2UInt(char *str, uint *value)
+bool String2UInt(const char *str, uint *value)
 {
     uint length = std::strlen(str);
     if (length == 0)
@@ -562,11 +562,6 @@ char *SU::GetWord(char *string, int n, char *out, int size)
         return 0;
     }
 
-    if (n == 1)
-    {
-        n = 1;
-    }
-
     // Находим начало искомого слова
     int currentWord = 0;
     do
@@ -601,7 +596,7 @@ char *SU::GetWord(char *string, int n, char *out, int size)
 
     if (length + 1 > size)
     {
-        return (char *)0xffffffff;              // Не хватит места в выходном буфере - выходим с соответствующим кодом
+        return (char *)0xffffffff;  // -V566           // Не хватит места в выходном буфере - выходим с соответствующим кодом
     }
 
     for (int i = 0; i < length; i++)
@@ -730,7 +725,7 @@ bool EqualsZeroStrings(char *str1, char *str2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool EqualsStrings(char *str1, char *str2, int size)
+bool EqualsStrings(const char *str1, const char *str2, int size)
 {
     for (int i = 0; i < size; i++)
     {
@@ -743,7 +738,7 @@ bool EqualsStrings(char *str1, char *str2, int size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool EqualsStrings(char *str1, char *str2)
+bool EqualsStrings(const char *str1, const char *str2)
 {
     uint size = std::strlen(str1);
 

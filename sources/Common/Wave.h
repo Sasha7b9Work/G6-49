@@ -135,7 +135,7 @@ public:
         Number
     } value;
 
-    ParameterComplex(ParameterBase *param[]);
+    ParameterComplex(ParameterBase **param);
 
     pString Name() const;
     
@@ -269,7 +269,7 @@ public:
         oldCurrentParams(0)
     { };
 
-    Form(E v, ParameterBase *param[], Wave *w);
+    Form(E v, ParameterBase **param, Wave *w);
     /// ¬озвращает человеческое название формы сигнала
     pString Name(Language::E lang) const;
     /// ¬озвращает ссылку на текущий параметр
@@ -297,7 +297,7 @@ public:
     /// Ќарисовать изображение сигнала
     void DrawUGO(Chan::E ch, int y0);
     /// ”становить данные произвольного сигнала дл€ отрисовки
-    static void SetFormFlash(Chan::E ch, uint8 data[300]);
+    static void SetFormFlash(Chan::E ch, const uint8 data[300]);
     /// ¬озвращает указатель на данные произвольного сигнала дл€ отрисовки
     static uint8 *GetFormFlash(Chan::E ch);
 
