@@ -50,11 +50,16 @@ struct Control
     } action;
 
     explicit Control(E v = None, Action::E a = Action::Down) : value(v), action(a) {};
-    Control operator=(Control rval)
+    Control &operator=(Control rval)
     {
         value = rval.value;
         action = rval.action;
         return *this;
+    }
+    Control(const Control &c)
+    {
+        value = c.value;
+        action = c.action;
     }
     operator uint8() const { return (uint8)value; };
     bool Is(Control::E c) { return c == value; };
