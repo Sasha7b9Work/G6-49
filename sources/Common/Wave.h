@@ -184,13 +184,14 @@ public:
         hightLightDigit(0),
         posComma(0),
         sign('+'),
-        /// \todo Не получается так почему-то
-        //min(std::numeric_limits<float>::min()),
-        //max(std::numeric_limits<float>::max()),
-        //min(-1e30f),
-        //max(1e30f),
+        min(-1e30F),
+        max(1e30F),
         inNumLockMode(false)
-    {};
+    {
+        std::memset(buffer, 0, NUM_DIGITS + 1);
+        std::memset(nu0, 0, 3);
+        std::memset(nu1, 0, 3);
+    };
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 

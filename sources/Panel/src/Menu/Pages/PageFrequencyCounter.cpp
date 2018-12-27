@@ -251,13 +251,13 @@ static void Tune_Page()
 
     if (FREQ_METER_MEASURE_IS_FREQ)
     {
-        page->items[2] = (Item *)&cBillingTime;
+        page->items[2] = (Item *)&cBillingTime; // -V641
         page->items[3] = 0;
     }
     else if (FREQ_METER_MEASURE_IS_PERIOD)
     {
-        page->items[2] = (Item *)&cTimeStamps;
-        page->items[3] = (Item *)&cAvePeriod;
+        page->items[2] = (Item *)&cTimeStamps;  // -V641
+        page->items[3] = (Item *)&cAvePeriod;   // -V641
     }
     else
     {
@@ -286,11 +286,11 @@ void PageFrequencyCounter::WriteRegisterRG9()
 
     static const uint maskAvePeriod[5] =
     {
-        BINARY_U8(00000000),    // 1
-        BINARY_U8(00000010),    // 10
-        BINARY_U8(00000110),    // 100
-        BINARY_U8(00001010),    // 1000
-        BINARY_U8(00001110)     // 10000
+        BINARY_U8(00000000),    // -V2501   // 1
+        BINARY_U8(00000010),    // -V2501   // 10
+        BINARY_U8(00000110),    // -V2501   // 100
+        BINARY_U8(00001010),    // -V2501   // 1000
+        BINARY_U8(00001110)     // -V2501   // 10000
     };
     data |= maskAvePeriod[FREQ_AVE_PERIOD];
 
@@ -298,8 +298,8 @@ void PageFrequencyCounter::WriteRegisterRG9()
 
     static const uint maskInterval[2] =
     {
-        BINARY_U8(00000000),
-        BINARY_U8(00010000)
+        BINARY_U8(00000000),    // -V2501
+        BINARY_U8(00010000)     // -V2501
     };
     data |= maskInterval[FREQ_INTERVAL];
 
@@ -307,11 +307,11 @@ void PageFrequencyCounter::WriteRegisterRG9()
 
     static const uint maskTime[5] =
     {
-        BINARY_U8(00000000),    // 1 לס
-        BINARY_U8(00100000),    // 10 לס
-        BINARY_U8(01000000),    // 100 לס
-        BINARY_U8(01100000),    // 1 ס
-        BINARY_U8(10000000)     // 10 ס
+        BINARY_U8(00000000),    // -V2501               // 1 לס
+        BINARY_U8(00100000),    // -V2501               // 10 לס
+        BINARY_U8(01000000),    // -V2501   // -V536    // 100 לס
+        BINARY_U8(01100000),    // -V2501               // 1 ס
+        BINARY_U8(10000000)     // -V2501               // 10 ס
     };
     data |= maskTime[FREQ_BILLING_TIME];
 
@@ -319,11 +319,11 @@ void PageFrequencyCounter::WriteRegisterRG9()
 
     static const uint maskTimeStamp[5] =
     {
-        BINARY_U8(00001010),    // 1 ךÃצ
-        BINARY_U8(00000110),    // 10 ךÃצ
-        BINARY_U8(00000010),    // 100 ךÃצ
-        BINARY_U8(00000001),    // 1 ÌÃצ
-        BINARY_U8(00000000)     // 10 ÌÃצ
+        BINARY_U8(00001010),    // -V2501    // 1 ךÃצ
+        BINARY_U8(00000110),    // -V2501    // 10 ךÃצ
+        BINARY_U8(00000010),    // -V2501    // 100 ךÃצ
+        BINARY_U8(00000001),    // -V2501    // 1 ÌÃצ
+        BINARY_U8(00000000)     // -V2501    // 10 ÌÃצ
     };
 
     data |= (maskTimeStamp[FREQ_TIME_STAMPS] << 8);
