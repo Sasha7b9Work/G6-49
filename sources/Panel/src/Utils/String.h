@@ -14,6 +14,8 @@ public:
 
     void From(const char *format, ...);
 
+    void From(const String &s);
+
     char *CString() const;
     /// Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
@@ -21,6 +23,12 @@ public:
     bool IsEmpty() const { return buffer == 0; };
     /// Освободить память, занимаемую строкой
     void Release();
+
+    String &operator=(const String &s)
+    {
+        From(s);
+        return *this;
+    }
 
 private:
 
