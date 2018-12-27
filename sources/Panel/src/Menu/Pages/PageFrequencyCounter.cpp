@@ -228,15 +228,15 @@ DEF_PAGE_9( pFrequencyCounter,  // -V641 // -V1027                              
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
-    cMeasure,       ///< ЧАСТОТОМЕР - Измерение
-    gLevel,         ///< ЧАСТОТОМЕР - Уровень
-    cBillingTime,   ///< ЧАСТОТОМЕР - Время счёта
-    cResist,        ///< ЧАСТОТОМЕР - Сопротивление
-    cCouple,        ///< ЧАСТОТОМЕР - Вход
-    cFiltr,         ///< ЧАСТОТОМЕР - ФНЧ
-    cAvePeriod,     ///< ЧАСТОТОМЕР - Число периодов
-    cTimeStamps,    ///< ЧАСТОТОМЕР - Метки времени
-    cTest,          ///< ЧАСТОТОМЕР - Тест
+    &cMeasure,       ///< ЧАСТОТОМЕР - Измерение
+    &gLevel,         ///< ЧАСТОТОМЕР - Уровень
+    &cBillingTime,   ///< ЧАСТОТОМЕР - Время счёта
+    &cResist,        ///< ЧАСТОТОМЕР - Сопротивление
+    &cCouple,        ///< ЧАСТОТОМЕР - Вход
+    &cFiltr,         ///< ЧАСТОТОМЕР - ФНЧ
+    &cAvePeriod,     ///< ЧАСТОТОМЕР - Число периодов
+    &cTimeStamps,    ///< ЧАСТОТОМЕР - Метки времени
+    &cTest,          ///< ЧАСТОТОМЕР - Тест
     //gHysteresis,    ///< ЧАСТОТОМЕР - Гистерезис
     //cInterval,      ///< ЧАСТОТОМЕР - Интервал запуска
     Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, FuncDrawPage

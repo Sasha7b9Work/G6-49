@@ -96,8 +96,8 @@ const PageBase name = { Item::Type::Page, 8, false, namePage, (const PageBase *)
 #define DEF_PAGE_9(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)            \
 static Item * items##name[] = {                                                                                                             \
-    (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
-    (Item *)&item8, (Item *)&item9};                                                                                                        \
+    (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7,                                \
+    (Item *)item8, (Item *)item9};                                                                                                          \
 const PageBase name = { Item::Type::Page, 9, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},     \
     items##name, funcPress, funcDraw, funcOnKey};
 
