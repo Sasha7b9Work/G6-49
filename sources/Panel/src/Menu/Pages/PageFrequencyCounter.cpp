@@ -11,7 +11,9 @@
 extern const PageBase pFrequencyCounter;
 Page *PageFrequencyCounter::pointer = (Page *)&pFrequencyCounter;
 
-static void OnPress_Measure(bool);
+
+/// Настроить вид страницы в соответствии с режимом измерения
+static void Tune_Page();
 static void OnPress_Interval(bool);
 static void OnPress_BillingTime(bool);
 static void OnPress_Resist(bool);
@@ -22,8 +24,13 @@ static void OnPress_TimeStamps(bool);
 static void OnPress_AvePeriod(bool);
 
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static void OnPress_Measure(bool)
+{
+    Tune_Page();
+    PageFrequencyCounter::WriteRegisterRG9();
+}
+
 DEF_CHOICE_3( cMeasure,                                                                                                                                      //--- ЧАСТОТОМЕР - Измерение ---
     "Измерение", "Measure",
     "Установка режима работы",
@@ -36,11 +43,6 @@ DEF_CHOICE_3( cMeasure,                                                         
                             "Period measurement",
     FREQ_METER_MEASURE, pFrequencyCounter, FuncActive, OnPress_Measure, FuncDraw
 )
-
-static void OnPress_Measure(bool)
-{
-    PageFrequencyCounter::WriteRegisterRG9();
-}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_2(cInterval,                                                                                                                               //--- ЧАСТОТОМЕР - Интервал запуска ---
@@ -224,23 +226,45 @@ DEF_GOVERNOR( gHysteresis,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_9( pFrequencyCounter,  // -V641 // -V1027                                                                                                                       //--- ЧАСТОТОМЕР ---
+DEF_PAGE_8( pFrequencyCounter,  // -V641 // -V1027                                                                                                                       //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
     &cMeasure,       ///< ЧАСТОТОМЕР - Измерение
     &gLevel,         ///< ЧАСТОТОМЕР - Уровень
-    &cBillingTime,   ///< ЧАСТОТОМЕР - Время счёта
+    0,
+    0,
+    //&cBillingTime,   ///< ЧАСТОТОМЕР - Время счёта
     &cResist,        ///< ЧАСТОТОМЕР - Сопротивление
     &cCouple,        ///< ЧАСТОТОМЕР - Вход
     &cFiltr,         ///< ЧАСТОТОМЕР - ФНЧ
-    &cAvePeriod,     ///< ЧАСТОТОМЕР - Число периодов
-    &cTimeStamps,    ///< ЧАСТОТОМЕР - Метки времени
+    //&cAvePeriod,     ///< ЧАСТОТОМЕР - Число периодов
+    //&cTimeStamps,    ///< ЧАСТОТОМЕР - Метки времени
     &cTest,          ///< ЧАСТОТОМЕР - Тест
-    //gHysteresis,    ///< ЧАСТОТОМЕР - Гистерезис
-    //cInterval,      ///< ЧАСТОТОМЕР - Интервал запуска
     Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )
+
+
+static void Tune_Page()
+{
+    PageBase *page = (PageBase *)&pFrequencyCounter;
+
+    if (FREQ_METER_MEASURE_IS_FREQ)
+    {
+        page->items[2] = (Item *)&cBillingTime;
+        page->items[3] = 0;
+    }
+    else if (FREQ_METER_MEASURE_IS_PERIOD)
+    {
+        page->items[2] = (Item *)&cTimeStamps;
+        page->items[3] = (Item *)&cAvePeriod;
+    }
+    else
+    {
+        page->items[2] = 0;
+        page->items[3] = 0;
+    }
+}
 
 #ifdef WIN32
 #pragma warning(push)
