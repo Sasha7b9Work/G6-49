@@ -85,7 +85,7 @@ void InputWindow::DrawDigits(int x, int y)
 #define WIDTH_DIGIT     (4 * SIZE_TEXT - 1)
 #define HEIGHT_DIGIT    (7 * SIZE_TEXT - 1)
 
-    if (!FREQ_ENABLED)
+    if (!FREQ_METER_ENABLED)
     {
         Text::DrawBigText(x, y, 3, param->Name());
     }

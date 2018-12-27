@@ -24,27 +24,17 @@ static void OnPress_AvePeriod(bool);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_CHOICE_2( cEnable,                                                                                                                                     //--- ЧАСТОТОМЕР - Отображение ---
-    "Отображение", "Display",
-    "Включает и выключает вывод частотомера.",
-    "Turns the frequency meter output on and off.",
-    DISABLED_RU, DISABLED_EN, "Отображение показаний частотомера отключено.",
-                              "Display of frequency meter readings is disabled.",
-    ENABLED_RU,  ENABLED_EN,  "В нижней части экрана выводятся показания частотомера.",
-                              "The bottom of the screen displays the frequency meter.",
-    FLAG_1, BIT_FREQ_ENABLED, pFrequencyCounter, FuncActive, FuncChangedChoice, FuncDraw
-)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( cMeasure,                                                                                                                                      //--- ЧАСТОТОМЕР - Измерение ---
+DEF_CHOICE_3( cMeasure,                                                                                                                                      //--- ЧАСТОТОМЕР - Измерение ---
     "Измерение", "Measure",
     "Установка режима работы",
     "Setting the operating mode",
+    "Отключено", "Disabled", "Измерения отключены",
+                            "Measures disabled",
     "Частота", "Frequency", "Измерение частоты",
                             "Frequency measurement",
     "Период", "Period",     "Измерение периода",
                             "Period measurement",
-    FLAG_1, BIT_FREQ_MEASURE, pFrequencyCounter, FuncActive, OnPress_Measure, FuncDraw
+    FREQ_METER_MEASURE, pFrequencyCounter, FuncActive, OnPress_Measure, FuncDraw
 )
 
 static void OnPress_Measure(bool)
@@ -234,11 +224,10 @@ DEF_GOVERNOR( gHysteresis,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_10( pFrequencyCounter,                                                                                                                                          //--- ЧАСТОТОМЕР ---
+DEF_PAGE_9( pFrequencyCounter,                                                                                                                                           //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQUENCY METER",
     "Управление фукнциями частотомера.",
     "Control of frequency meter functions.",
-    cEnable,        ///< ЧАСТОТОМЕР - Отображение
     cMeasure,       ///< ЧАСТОТОМЕР - Измерение
     gLevel,         ///< ЧАСТОТОМЕР - Уровень
     cBillingTime,   ///< ЧАСТОТОМЕР - Время счёта
@@ -250,7 +239,7 @@ DEF_PAGE_10( pFrequencyCounter,                                                 
     cTest,          ///< ЧАСТОТОМЕР - Тест
     //gHysteresis,    ///< ЧАСТОТОМЕР - Гистерезис
     //cInterval,      ///< ЧАСТОТОМЕР - Интервал запуска
-    Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey
+    Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
 )
 
 #ifdef WIN32
@@ -264,9 +253,10 @@ void PageFrequencyCounter::WriteRegisterRG9()
     uint data = 0;
 
     //----------- Режим работы ------------------
-
-    static const uint maskMeasure[2] = {0, 1};
-    data |= maskMeasure[FREQ_MEASURE];
+    if(FREQ_METER_MEASURE_IS_PERIOD)
+    {
+        data |= 1;
+    }
 
     //----------- Число усредняемых периодов ----
 

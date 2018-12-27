@@ -691,8 +691,8 @@ int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, pString
     int y = eY + (eHeight - height) / 2;
     return DrawText(x, y, text);
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+//-------------------------------------------------------   ------------------------------------------------------------------------------------------------------------------------------------
 int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200

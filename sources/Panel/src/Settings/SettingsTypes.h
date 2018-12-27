@@ -48,10 +48,11 @@ struct FreqMeasure
 {
     enum E
     {
+        Disable,
         Freq,
         Period
     } value;
-    FreqMeasure(uint v) : value((E)v) {};
+    explicit FreqMeasure(uint v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
 };
 

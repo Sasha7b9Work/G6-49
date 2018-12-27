@@ -43,19 +43,20 @@ extern const PageBase pInput;
 #define SIZE_BYTE               ((SizeByte)BIT_FL1(BIT_SIZE_BYTE))
 #define STOP_BIT                ((StopBit)BIT_FL1(BIT_STOP_BIT))
 
-#define FREQ_RESIST             ((FreqResist)BIT_FL1(BIT_FREQ_RESIST))
-#define FREQ_COUPLE             ((FreqCouple)BIT_FL1(BIT_FREQ_COUPLE))
-#define FREQ_FILTR              ((FreqFiltr)BIT_FL1(BIT_FREQ_FILTR))
-#define FREQ_ENABLED            (BIT_FL1(BIT_FREQ_ENABLED) != 0)
-#define FREQ_INTERVAL           ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
-#define FREQ_MEASURE            ((FreqMeasure)BIT_FL1(BIT_FREQ_MEASURE))
-#define FREQ_MEASURE_IS_FREQ    (FREQ_MEASURE == FreqMeasure::Freq)
-#define FREQ_AVE_PERIOD         (set.freq_avePeriod)
-#define FREQ_BILLING_TIME       (set.freq_billingTime)
-#define FREQ_TIME_STAMPS        (set.freq_timeStamps)
-#define FREQ_TEST               ((FreqTest)BIT_FL1(BIT_FREQ_TEST))
-#define FREQ_LEVEL              (set.freq_level)
-#define FREQ_HYSTERESIS         (set.freq_hysteresis)
+#define FREQ_RESIST                 ((FreqResist)BIT_FL1(BIT_FREQ_RESIST))
+#define FREQ_COUPLE                 ((FreqCouple)BIT_FL1(BIT_FREQ_COUPLE))
+#define FREQ_FILTR                  ((FreqFiltr)BIT_FL1(BIT_FREQ_FILTR))
+#define FREQ_INTERVAL               ((FreqInterval)BIT_FL1(BIT_FREQ_INTERVAL))
+#define FREQ_METER_MEASURE          (set.freq_measure)
+#define FREQ_METER_MEASURE_IS_FREQ   (FREQ_METER_MEASURE == FreqMeasure::Freq)
+#define FREQ_METER_MEASURE_IS_PERIOD (FREQ_METER_MEASURE == FreqMeasure::Period)
+#define FREQ_METER_ENABLED           (FREQ_METER_MEASURE != FreqMeasure::Disable)
+#define FREQ_AVE_PERIOD             (set.freq_avePeriod)
+#define FREQ_BILLING_TIME           (set.freq_billingTime)
+#define FREQ_TIME_STAMPS            (set.freq_timeStamps)
+#define FREQ_TEST                   ((FreqTest)BIT_FL1(BIT_FREQ_TEST))
+#define FREQ_LEVEL                  (set.freq_level)
+#define FREQ_HYSTERESIS             (set.freq_hysteresis)
 
 #define BIG_SYMBOLS             ((BIT_FL1(BIT_BIG_SYMBOLS)))
 
@@ -85,6 +86,7 @@ public:
     FrequencyMeter::BillingTime freq_billingTime;                           ///< Время счёта
     FrequencyMeter::AvePeriod   freq_avePeriod;                             ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps              freq_timeStamps;                            ///< Метки времени
+    FreqMeasure::E              freq_measure;                               ///< Режим измерения частотомера
     int16                       freq_level;                                 ///< Уровень синхронизации
     int16                       freq_hysteresis;                            ///< Величина гистерезиса
     bool                        sine_ManipulationEnabled[Chan::Number];     ///< true, если включена модуляция синусоиды пилой
@@ -98,7 +100,7 @@ public:
 #define BIT_BACK_BLACK    3   ///<          - если 1, то цвет фона - чёрный
 #define BIT_TUNE_FULL     4   ///<          - если 1, то засылка параметра происходит непрерывно во время настройки
 #define BIT_DBG_MODE      5   ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
-#define BIT_FREQ_ENABLED  6   ///<          - если 1, то отображаются показания частотомера
+
 #define BIT_STATISTICS    7   ///<          - если 1, то показывать статистику
 #define BIT_LANG          8   ///< Language - выбранный язык
 #define BIT_CHAN_A        9   ///<          - бит, отвечающий за включённый канал A
@@ -109,7 +111,7 @@ public:
 #define BIT_FREQ_RESIST   14  ///< FreqResist - сопротивление входа частотомера
 #define BIT_FREQ_COUPLE   15  ///< FreqCouple - открытый/закрытый вход частотомера
 #define BIT_FREQ_FILTR    16  ///< FreqFiltr   - ФНЧ частотомера
-#define BIT_FREQ_MEASURE  17  ///< FreqMeasure - измерение частоты или измерение периода
+
 #define BIT_FREQ_TEST     18  ///< FreqTest    - включение тестового режима
 #define BIT_BIG_SYMBOLS   19  ///< Если 1, то символы выводятся чуть увеличенными
 #define BIT_SHOW_SENDS    20  ///< Если 1, то нужно показывать засылаемые настройки

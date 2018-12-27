@@ -17,7 +17,7 @@ bool FrequencyMeter::inactive = true;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FrequencyMeter::Draw()
 {
-    if (!FREQ_ENABLED)
+    if (!FREQ_METER_ENABLED)
     {
         return;
     }
@@ -29,7 +29,7 @@ void FrequencyMeter::Draw()
     char buffer[20];
     char text[50];
 
-    if(FREQ_MEASURE_IS_FREQ)
+    if(FREQ_METER_MEASURE_IS_FREQ)
     {
         sprintf(text, "%sêÃö", UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
     }
