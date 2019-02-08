@@ -184,8 +184,6 @@ public:
         hightLightDigit(0),
         posComma(0),
         sign('+'),
-        min(-1e30F),
-        max(1e30F),
         inNumLockMode(false)
     {
         std::memset(buffer, 0, NUM_DIGITS + 1);
