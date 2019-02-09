@@ -554,7 +554,7 @@ void FPGA::SetAmplitude(Chan::E ch, ParamValue ampl)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SetOffset(Chan::E ch, ParamValue off)
 {
-    offset[ch] = off.ToFloat();
+    offset[ch] = -off.ToFloat();
 
     uint nA = OffsetToCode(ch);
     uint nB = OffsetToCode(ch);
