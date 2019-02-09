@@ -1,0 +1,29 @@
+#pragma once
+
+
+
+class IntValue
+{
+public:
+    IntValue(const char *buffer, int posComma);
+    void Sub(IntValue &sub, char *bufferOut);
+private:
+    /// Целая часть
+    int whole;
+    /// Дробная часть - количество 1/1000 частей в числе
+    int fract1000;
+
+    int posComma;
+    /// Преобразует в целоей число
+    int ToWhole(char *buffer);
+    /// Преобразует в дробную часть
+    int ToFract1000(char *buffer);
+    
+    void ToString(char *buffer);
+    /// Записывает целое число в буфер. Ширина поля для записи - numDigits
+    void WholeToString(char *buffer, int numDigits);
+
+    void Fract1000toString(char *buffer, int numDigits);
+    /// Возвращает цифру из позиции pos дробной части
+    int DigitFromFract1000(int pos);
+};

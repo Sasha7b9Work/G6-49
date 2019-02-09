@@ -87,9 +87,9 @@ static void TransformOffset(char *buffer, int posComma)
 
     char number[] = { '5', '0', '0', '0', '0' };
 
-    //IntValue sub(number, 0);
+    IntValue sub(number, 0);
 
-    //value.Sub(sub, buffer);
+    value.Sub(sub, buffer);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
