@@ -6,12 +6,15 @@ class IntValue
 {
 public:
     IntValue(const char *buffer, int posComma);
-    void Sub(IntValue &sub, char *bufferOut, int *posComma);
+    /// Отнимает от числа 5
+    void Sub5(char *bufferOut, int *posComma);
 private:
     /// Целая часть
     int whole;
     /// Дробная часть - количество 1/1000 частей в числе
     int fract1000;
+
+    int sign;
 
     int posComma;
     /// Преобразует в целоей число
@@ -26,6 +29,4 @@ private:
     void Fract1000toString(char *buffer, int numDigits);
     /// Возвращает цифру из позиции pos дробной части
     int DigitFromFract1000(int pos);
-
-    int Sign();
 };

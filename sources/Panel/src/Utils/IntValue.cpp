@@ -23,8 +23,20 @@ IntValue::IntValue(const char *buffer, int _posComma)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void IntValue::Sub(IntValue & /*sub*/, char *bufferOut, int *_posComma)
+void IntValue::Sub5(char *bufferOut, int *_posComma)
 {
+    if (whole >= 5)
+    {
+        whole -= 5;
+        sign = 1;
+    }
+    else
+    {
+        whole -= (fract1000 == 0) ? 5 : 4;
+        fract1000 = 10000 - fract1000;
+        sign = -1;
+    }
+
     ToString(bufferOut);
     *_posComma = posComma + 1;
 }
@@ -66,7 +78,7 @@ int IntValue::ToFract1000(char *buffer)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void IntValue::ToString(char *buffer)
 {
-    buffer[0] = Sign() ? '+' : '-';
+    buffer[0] = (sign > 0) ? '+' : '-';
 
     WholeToString(buffer + 1, posComma + 1);
     Fract1000toString(buffer + posComma + 1 + 1, 4 - posComma);
@@ -75,7 +87,7 @@ void IntValue::ToString(char *buffer)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void IntValue::WholeToString(char *buffer, int numDigits)
 {
-    int number = whole;
+    int number = (whole > 0) ? whole : -whole;
 
     for (int i = numDigits - 1; i >= 0; i--)
     {
@@ -107,20 +119,4 @@ int IntValue::DigitFromFract1000(int pos)
     }
 
     return number % 10;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int IntValue::Sign()
-{
-    if (whole < 0)
-    {
-        return -1;
-    }
-
-    if (whole == 0 && fract1000 < 0)
-    {
-        return -1;
-    }
-
-    return 1;
 }
