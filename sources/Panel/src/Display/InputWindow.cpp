@@ -10,6 +10,7 @@
 #include "Display/Symbols.h"
 #include <cstdio>
 #endif
+#include "Utils/IntValue.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +80,19 @@ void InputWindow::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Преобразовать строку смещения
+static void TransformOffset(char *buffer, int posComma)
+{
+    IntValue value(buffer, posComma);
+
+    char number[] = { '5', '0', '0', '0', '0' };
+
+    //IntValue sub(number, 0);
+
+    //value.Sub(sub, buffer);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::DrawDigits(int x, int y)
 {
 #define SIZE_TEXT       5
@@ -97,6 +111,12 @@ void InputWindow::DrawDigits(int x, int y)
     if(param->sign != ' ')
     {
         Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, param->sign);
+    }
+
+    if (param->Is(ParameterValue::Offset))
+    {
+        TransformOffset(param->buffer, param->posComma);
+        x -= 24;
     }
 
     for (int i = 0; i < NUM_DIGITS; i++)

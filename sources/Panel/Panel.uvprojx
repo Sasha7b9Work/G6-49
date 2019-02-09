@@ -2296,6 +2296,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Statistics.h</FilePath>
             </File>
+            <File>
+              <FileName>IntValue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\IntValue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IntValue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\IntValue.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
