@@ -81,15 +81,15 @@ void InputWindow::Draw()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Преобразовать строку смещения
-static void TransformOffset(char *buffer, int posComma)
+static void TransformOffset(char *buffer, int *posComma)
 {
-    IntValue value(buffer, posComma);
+    IntValue value(buffer, *posComma);
 
     char number[] = { '5', '0', '0', '0', '0' };
 
     IntValue sub(number, 0);
 
-    value.Sub(sub, buffer);
+    value.Sub(sub, buffer, posComma);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,10 +113,18 @@ void InputWindow::DrawDigits(int x, int y)
         Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, param->sign);
     }
 
+    char text[10];
+    std::strcpy(text, param->buffer);
+
+    int posComma = param->posComma;
+
+    int8 hightLightDigit = param->hightLightDigit;
+
     if (param->Is(ParameterValue::Offset))
     {
-        TransformOffset(param->buffer, param->posComma);
+        TransformOffset(text, &posComma);
         x -= 24;
+        hightLightDigit++;
     }
 
     for (int i = 0; i < NUM_DIGITS; i++)
@@ -125,7 +133,7 @@ void InputWindow::DrawDigits(int x, int y)
 
         Painter::SetColor(Color::FILL);
 
-        if (i == param->hightLightDigit)
+        if (i == hightLightDigit)
         {
             Font::SetType(Font::Type::_8);
             Text::Draw4SymbolsInRect(x + 2, y - 10, Ideograph::_8::FillDown);
@@ -133,15 +141,15 @@ void InputWindow::DrawDigits(int x, int y)
             Font::SetType(Font::Type::_7);
         }
 
-        if (param->buffer[i])
+        if (text[i])
         {
-            buf[0] = param->buffer[i];
+            buf[0] = text[i];
             Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
         }
 
         x += 24;
 
-        if (param->posComma == i)
+        if (posComma == i)
         {
             Painter::FillRegion(x - 3, y + HEIGHT_DIGIT - 2, SIZE_TEXT, SIZE_TEXT + 1);
             x += 4;

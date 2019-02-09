@@ -6,7 +6,7 @@ class IntValue
 {
 public:
     IntValue(const char *buffer, int posComma);
-    void Sub(IntValue &sub, char *bufferOut);
+    void Sub(IntValue &sub, char *bufferOut, int *posComma);
 private:
     /// Целая часть
     int whole;
@@ -26,4 +26,6 @@ private:
     void Fract1000toString(char *buffer, int numDigits);
     /// Возвращает цифру из позиции pos дробной части
     int DigitFromFract1000(int pos);
+
+    int Sign();
 };
