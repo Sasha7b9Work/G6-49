@@ -14,6 +14,7 @@
 #include <string.h>
 #include <cmath>
 #endif
+#include "Utils/IntValue.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,13 +130,28 @@ char *StructValue::StringValue()
     static char buf[20];
     buf[0] = '\0';
 
+
+
+    char text[20];
+    std::strcpy(text, param->buffer);
+    int numDigits = NUM_DIGITS;
+    int posComma = POS_COMMA;
+
+
+    if (param->Is(ParameterValue::Offset))
+    {
+        IntValue value(text, posComma);
+        value.Sub5(text, &posComma);
+    }
+
+
     SU::ConcatenateSymbol(buf, SIGN);
 
-    for (int i = 0; i < NUM_DIGITS; i++)
+    for (int i = 0; i < numDigits; i++)
     {
-        SU::ConcatenateSymbol(buf, DIGIT(i));
+        SU::ConcatenateSymbol(buf, text[i]);
 
-        if (POS_COMMA == i)
+        if (posComma == i)
         {
             SU::ConcatenateSymbol(buf, '.');
         }

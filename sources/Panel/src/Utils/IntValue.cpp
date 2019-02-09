@@ -17,9 +17,6 @@ IntValue::IntValue(const char *buffer, int _posComma)
     temp[posComma + 1] = 0;
 
     whole = ToWhole(temp);
-
-    Text::DrawFormatText(100, 100, "Whole = %d", whole);
-    Text::DrawFormatText(100, 110, "Fract = %d", fract1000);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,6 +36,22 @@ void IntValue::Sub5(char *bufferOut, int *_posComma)
 
     ToString(bufferOut);
     *_posComma = posComma + 1;
+
+    if (whole >= 5)
+    {
+        /*
+        *_posComma = posComma;
+        for (int i = 2; i < 10; i++)
+        {
+            char symbol = bufferOut[i];
+            bufferOut[i - 1] = symbol;
+            if (symbol == 0)
+            {
+                break;
+            }
+        }
+        */
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
