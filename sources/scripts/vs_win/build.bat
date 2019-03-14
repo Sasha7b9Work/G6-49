@@ -3,7 +3,7 @@
 @echo .
 @echo %TIME%   Building GUI version ...
 
-MSBuild.exe ..\..\generated\Win32\Device\Device57.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
+MSBuild.exe ..\..\generated\Win32\G6-49.sln -clp:ErrorsOnly;WarningsOnly -nologo /m
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Succsess
 
