@@ -29,6 +29,10 @@ typedef unsigned char       uchar;
 typedef signed char         int8;
 typedef unsigned int        col_val;
 
+#ifdef WIN32
+typedef unsigned int        uint32_t;
+#endif
+
 #define MAX_UINT ((uint)-1)
 
 typedef void (*pFuncVV)();

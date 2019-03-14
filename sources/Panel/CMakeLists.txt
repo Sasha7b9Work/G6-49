@@ -6,7 +6,9 @@ include_directories( src
                      src/libs/HAL
                      src/Hardware
                      ../common
-                     ../common/_VS
+#                     ../common/_VS/CMSIS
+#                     ../common/_VS/HAL
+                     ../common/_VS/std_includes
                      ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
                      ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc

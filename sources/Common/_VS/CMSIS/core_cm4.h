@@ -2,7 +2,11 @@
 
 #define __CC_ARM
 
-#include "stdint.h"
+#ifndef __IO
+#define __IO
+#endif
+
+#include <stdint.h>
 
 #undef __ASM
 #define __ASM()
@@ -16,3 +20,9 @@ struct SysTickStruct
 #define SysTick    ((SysTickStruct *)0)
 
 #define NVIC_SetPriority(x, y)
+
+
+extern struct structSCB
+{
+    unsigned VTOR;
+} SCB;
