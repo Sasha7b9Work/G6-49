@@ -2,9 +2,7 @@
 
 @echo .
 
-@echo %TIME%   Building Win32 version
-
-@echo %TIME%   Building Device ...
+@echo %TIME%   Building VS-Keil version
 
 MSBuild.exe ..\..\generated\Keil\G6-49.sln -clp:ErrorsOnly;WarningsOnly -nologo /m
 set BUILD_STATUS=%ERRORLEVEL%

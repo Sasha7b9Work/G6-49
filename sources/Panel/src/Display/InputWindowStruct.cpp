@@ -282,7 +282,7 @@ void StructValue::ShiftToLeft()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Order::Name() const
 {
-    DEF_STRUCT(StructName, pString) names[Order::Number][2] =
+    DEF_STRUCT(StructName, const char *) names[Order::Number][2] =
     {
         {"ם",   "n"},
         {"לך",  "u"},

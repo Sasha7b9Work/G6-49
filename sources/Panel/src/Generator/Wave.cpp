@@ -26,7 +26,7 @@ static uint8 formFlash[Chan::Number][SIZE_BUFFER];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name(Language::E lang) const
 {
-    DEF_STRUCT(StructName, pString) names[Form::Number][2] =
+    DEF_STRUCT(StructName, const char *) names[Form::Number][2] =
     {
         {"Синус",        "Sine"},
         {"Пила+",        "Ramp+"},
@@ -44,7 +44,7 @@ pString Form::Name(Language::E lang) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Register::Name() const
 {
-    DEF_STRUCT(StrName, pString) names[Register::Number] =
+    DEF_STRUCT(StrName, const char *) names[Register::Number] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",
@@ -74,7 +74,7 @@ pString Register::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::Name() const
 {
-    DEF_STRUCT(StructName, pString) nameParameter[ParameterValue::Number][2] =
+    DEF_STRUCT(StructName, const char *) nameParameter[ParameterValue::Number][2] =
     {
         {"Частота",        "Frequency"},
         {"Период",         "Period"},
@@ -404,7 +404,7 @@ pString ParameterComplex::GetStringValue() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::NameUnit(char buf[10]) const
 {
-    DEF_STRUCT(StructName, pString) names[ParameterValue::Number][2] =
+    DEF_STRUCT(StructName, const char *) names[ParameterValue::Number][2] =
     {
         {"Гц",  "Hz"},
         {"с",   "s"},
@@ -448,7 +448,7 @@ bool ParameterValue::IsOpened()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterChoice::Name() const
 {
-    DEF_STRUCT(StructName, pString) namesParam[ParameterChoice::Number][2] =
+    DEF_STRUCT(StructName, const char *) namesParam[ParameterChoice::Number][2] =
     {
         {"Полярность",  "Polarity"},
         {"Запуск",      "Mode start"},
@@ -462,7 +462,7 @@ pString ParameterChoice::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterComplex::Name() const
 {
-    DEF_STRUCT(StructName, pString) namesParams[ParameterComplex::Number][2] =
+    DEF_STRUCT(StructName, const char *) namesParams[ParameterComplex::Number][2] =
     {
         {"Манипуляция", "Manipulation"}
     };
