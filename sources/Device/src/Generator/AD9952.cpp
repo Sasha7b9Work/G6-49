@@ -187,7 +187,7 @@ void AD9952::WriteARR(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString AD9952::Register::Name() const
 {
-    DEF_STRUCT(StructName, pString) names[Number]=
+    DEF_STRUCT(StructName, const char *) names[Number]=
     {
         "CFR1",
         "CFR2",

@@ -12,6 +12,9 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <math.h>
+#else
+#pragma warning(push)
+#pragma warning(disable:4310)
 #endif
 
 
@@ -573,3 +576,7 @@ uint8 *FPGA::DataFlash(Chan::E ch)
 {
     return &dataFlash[ch][0];
 }
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

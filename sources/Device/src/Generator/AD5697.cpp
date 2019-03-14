@@ -7,6 +7,9 @@
 #include "FPGA.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
+#else
+#pragma warning(push)
+#pragma warning(disable:4310)
 #endif
 
 
@@ -81,7 +84,10 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
 
     uint16 value = (uint16)((uint16)code << 4);
 
-    uint8 data[3] = {(uint8)(BINARY_U8(00010000) | (ch == Chan::A ? 0x01 : 0x08)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] = {
+        (uint8)(BINARY_U8(00010000) 
+        | (ch == Chan::A ? 0x01 : 0x08)), 
+            (uint8)(value >> 8), (uint8)value};
 
     WriteParameter(BINARY_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
 }
@@ -152,3 +158,7 @@ GeneratorWritePin AD5697::PinLDAC(Chan::E ch)
 
     return pinLDAC[ch];
 }
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif

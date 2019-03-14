@@ -1,1 +1,1 @@
-start ..\..\generated\Keil\S8-57.sln
+start ..\..\generated\Keil\G6-49.sln

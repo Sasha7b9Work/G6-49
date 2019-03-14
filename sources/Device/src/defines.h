@@ -49,9 +49,9 @@ typedef void(*pFuncVI)(int);
 #define ERROR_STRING_VALUE  "--.--"
 
 
-#define DEF_STRUCT(name, type)  \
-static const struct name        \
-{                               \
-    type val;                   \
-    name(type v) : val(v) {};   \
+#define DEF_STRUCT(name, type)                      \
+static const struct name                            \
+{                                                   \
+    type val;                                       \
+    name(type v) : val(v) {};                       \
 }
