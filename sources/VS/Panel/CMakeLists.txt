@@ -56,3 +56,12 @@ file(GLOB SOURCES   ../../Panel/src/*
                     )
 
 add_library(Panel ${SOURCES})
+
+target_link_libraries(Panel "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
+target_link_libraries(Panel "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
+
+target_link_libraries(Panel "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
+
+target_link_libraries(Panel WinMM.lib)
+target_link_libraries(Panel version.lib)
+target_link_libraries(Panel Imm32.Lib)
