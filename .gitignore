@@ -15,6 +15,8 @@ doc/doxygen/KornetDDS/*
 sources/.vs/*
 sources/DDS-VS/Panel/.vs/*
 
+sources/ThirdParty/*
+
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*

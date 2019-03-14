@@ -1,0 +1,1 @@
+cmake ..\..\ThirdParty\wxWidgets\CMakeLists.txt -B..\..\ThirdParty\wxWidgets\generated
