@@ -1766,6 +1766,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Text.h</FilePath>
             </File>
+            <File>
+              <FileName>Display_429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Display_429.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
