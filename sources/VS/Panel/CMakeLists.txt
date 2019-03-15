@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project (Panel)
+project (G6-49)
 
 include_directories(../../Panel/src
                     ../../Panel/src/libs/HAL/
@@ -126,13 +126,13 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../Panel/src/Utils/*
                     )
 
-add_executable(Panel ${SOURCES})
+add_executable(G6-49 ${SOURCES})
 
-target_link_libraries(Panel "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
-target_link_libraries(Panel "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
+target_link_libraries(G6-49 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
+target_link_libraries(G6-49 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
 
-target_link_libraries(Panel "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
+target_link_libraries(G6-49 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
 
-target_link_libraries(Panel WinMM.lib)
-target_link_libraries(Panel version.lib)
-target_link_libraries(Panel Imm32.Lib)
+target_link_libraries(G6-49 WinMM.lib)
+target_link_libraries(G6-49 version.lib)
+target_link_libraries(G6-49 Imm32.Lib)
