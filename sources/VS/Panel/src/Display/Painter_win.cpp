@@ -24,7 +24,6 @@
 
 #pragma warning(pop)
 
-
 #undef uint   
 #undef int8   
 #undef uint8  
@@ -38,6 +37,7 @@
 #include "defines.h"
 #include "Menu/Menu.h"
 #include "Utils/Math.h"
+#include "Settings/Settings.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,51 +355,66 @@ void Frame::OnUp(wxCommandEvent & /*event*/)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::FillRegion(int /*x*/, int /*y*/, int /*width*/, int /*height*/, Color /*color*/ /* = Color::NUMBER */)
+void Painter::FillRegion(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
 {
-
+    SetColor(color);
+    SDL_Rect rect = { x, y, width + 1, height + 1 };
+    SDL_RenderFillRect(renderer, &rect);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetPoint(int /*x*/, int /*y*/)
+void Painter::SetPoint(int x, int y)
 {
-
+    SDL_RenderDrawPoint(renderer, x, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::SetColor(Color /*color*/)
+void Painter::SetColor(Color color)
 {
-
+    if (color != Color::NUMBER)
+    {
+        uint value = COLOR(color.value);
+        uint8 blue = (uint8)value;
+        uint8 green = (uint8)(value >> 8);
+        uint8 red = (uint8)(value >> 16);
+        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawRectangle(int /*x*/, int /*y*/, int /*width*/, int /*height*/, Color /*color*/ /* = Color::NUMBER */)
+void Painter::DrawRectangle(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
 {
-
+    SetColor(color);
+    SDL_Rect rect = { x, y, width + 1, height + 1 };
+    SDL_RenderDrawRect(renderer, &rect);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawVLine(int /*x*/, int /*y0*/, int /*y1*/, Color /*color*/ /* = Color::NUMBER */)
+void Painter::DrawVLine(int x, int y0, int y1, Color color /* = Color::NUMBER */)
 {
-
+    SetColor(color);
+    SDL_RenderDrawLine(renderer, x, y0, x, y1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawHLine(int /*y*/, int /*x0*/, int /*x1*/, Color /*color*/ /* = Color::NUMBER */)
+void Painter::DrawHLine(int y, int x0, int x1, Color color /* = Color::NUMBER */)
 {
-
+    SetColor(color);
+    SDL_RenderDrawLine(renderer, x0, y, x1, y);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawLine(int /*x0*/, int /*y0*/, int /*x1*/, int /*y1*/, Color /*color*/ /* = Color::NUMBER */)
+void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 {
-
+    SetColor(color);
+    SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Painter::DrawFilledRectangle(int /*x*/, int /*y*/, int /*width*/, int /*height*/, Color /*colorFill*/, Color /*colorRect*/)
+void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
-
+    DrawRectangle(x, y, width, height, colorRect);
+    FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

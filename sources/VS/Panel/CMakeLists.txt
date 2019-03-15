@@ -49,9 +49,6 @@ source_group(src                      FILES              ../../Panel/src/defines
                                                                      src/Application.cpp
                                                                      src/Application.h
                                                                      src/main_win.cpp)
-                                                                     
-source_group(Display                  REGULAR_EXPRESSION ../Panel/src/Display/*.*)
-
 source_group(Display                  FILES              ../../Panel/src/Display/Colors.cpp
                                                          ../../Panel/src/Display/Colors.h
                                                          ../../Panel/src/Display/Console.cpp
@@ -67,12 +64,7 @@ source_group(Display                  FILES              ../../Panel/src/Display
                                                                      src/Display/Painter_win.cpp
                                                          ../../Panel/src/Display/Symbols.h
                                                          ../../Panel/src/Display/Text.cpp
-                                                         ../../Panel/src/Display/Text.h)
-
-source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*.*)
-source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*.*)
-source_group(FrequencyMeter           REGULAR_EXPRESSION ../Panel/src/FrequencyMeter/*.*)
-source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*.*)
+                                                         ../../Panel/src/Display/Text.h)                                                                     
 source_group(Hardware                 FILES              ../../Panel/src/Hardware/Controls.cpp
                                                          ../../Panel/src/Hardware/Controls.h
                                                          ../../Panel/src/Hardware/CPU.h
@@ -90,12 +82,15 @@ source_group(Hardware                 FILES              ../../Panel/src/Hardwar
 source_group(Hardware\\Modules        FILES              ../../Panel/src/Hardware/Modules/EEPROM.h
                                                                      src/Hardware/Modules/EEPROM_win.cpp
                                                          ../../Panel/src/Hardware/Modules/SPI.h)
-                                                         
 source_group(Interface                FILES              ../../Panel/src/Interface/HandlersPanel.cpp
                                                          ../../Panel/src/Interface/HandlersPanel.h
                                                          ../../Panel/src/Interface/InterfacePanel.cpp
                                                          ../../Panel/src/Interface/InterfacePanel.h
                                                                      src/Interface/Transceiver_429_win.cpp)
+source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*.*)
+source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*.*)
+source_group(FrequencyMeter           REGULAR_EXPRESSION ../Panel/src/FrequencyMeter/*.*)
+source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*.*)
 source_group(libs\\CMSIS              REGULAR_EXPRESSION ../Panel/src/libs/CMSIS/*.*)
 source_group(libs\\HAL                REGULAR_EXPRESSION ../Panel/src/libs/HAL/*.*)
 source_group(Menu                     REGULAR_EXPRESSION ../Panel/src/Menu/*.*)
@@ -115,19 +110,13 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../common/Transceiver.cpp
                     ../../common/Transceiver.h
                     ../../common/Wave.h
-                                                         
                     ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp
-                    
                     ../../Panel/src/defines.h
                     ../../Panel/src/Log.cpp
                     ../../Panel/src/Log.h
                     ../../Panel/src/stdafx.cpp
                     ../../Panel/src/stdafx.h
                     ../../Panel/src/structs.h
-                                src/Application.cpp
-                                src/Application.h
-                                src/main_win.cpp
-                    
                     ../../Panel/src/Display/Colors.cpp
                     ../../Panel/src/Display/Colors.h
                     ../../Panel/src/Display/Console.cpp
@@ -140,42 +129,40 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../Panel/src/Display/InputWindowStruct.cpp
                     ../../Panel/src/Display/Painter.cpp
                     ../../Panel/src/Display/Painter.h
-                                src/Display/Painter_win.cpp
                     ../../Panel/src/Display/Symbols.h
                     ../../Panel/src/Display/Text.cpp
                     ../../Panel/src/Display/Text.h
-                    
-                    ../../Panel/src/Display/font/*
-                    ../../Panel/src/FDrive/*
-                    ../../Panel/src/FrequencyMeter/*
-                    ../../Panel/src/Generator/*
-                    
                     ../../Panel/src/Hardware/Controls.cpp
                     ../../Panel/src/Hardware/Controls.h
                     ../../Panel/src/Hardware/CPU.h
-                                src/Hardware/CPU_win.cpp
-                                src/Hardware/CPU_Keyboard_win.cpp
                     ../../Panel/src/Hardware/LTDC.h
-                                src/Hardware/LTDC_win.cpp
                     ../../Panel/src/Hardware/stm429.h
                     ../../Panel/src/Hardware/Timer.cpp
                     ../../Panel/src/Hardware/Timer.h
                     ../../Panel/src/Hardware/Timer4XX.h
-                                src/Hardware/Timer4XX_win.cpp
                     ../../Panel/src/Hardware/VCP.cpp
                     ../../Panel/src/Hardware/VCP.h
-                    
                     ../../Panel/src/Hardware/Modules/EEPROM.h
-                                src/Hardware/Modules/EEPROM_win.cpp
                     ../../Panel/src/Hardware/Modules/SPI.h
-                    
                     ../../Panel/src/Interface/HandlersPanel.cpp
                     ../../Panel/src/Interface/HandlersPanel.h
                     ../../Panel/src/Interface/InterfacePanel.cpp
                     ../../Panel/src/Interface/InterfacePanel.h
-                                src/Interface/Transceiver_429_win.cpp
-                    
                     ../../Panel/src/libs/CMSIS/startup_stm32f429xx.s
+                                src/Application.cpp
+                                src/Application.h
+                                src/main_win.cpp
+                                src/Display/Painter_win.cpp
+                                src/Hardware/CPU_win.cpp
+                                src/Hardware/CPU_Keyboard_win.cpp
+                                src/Hardware/LTDC_win.cpp
+                                src/Hardware/Timer4XX_win.cpp
+                                src/Hardware/Modules/EEPROM_win.cpp
+                                src/Interface/Transceiver_429_win.cpp
+                    ../../Panel/src/Display/font/*
+                    ../../Panel/src/FDrive/*
+                    ../../Panel/src/FrequencyMeter/*
+                    ../../Panel/src/Generator/*
                     ../../Panel/src/libs/HAL/*
                     ../../Panel/src/Menu/*
                     ../../Panel/src/Menu/Pages/*
