@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 project (Device)
 
-include_directories(../common/_VS/CMSIS
-                    ../common/_VS/HAL
+include_directories(../common/_VS_KEIL/CMSIS
                     ../common/_VS/std_includes
                     src
                     ../common

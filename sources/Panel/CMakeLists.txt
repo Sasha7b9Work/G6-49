@@ -6,7 +6,7 @@ include_directories( src
                      src/libs/HAL
                      src/Hardware
                      ../common
-#                     ../common/_VS/CMSIS
+                     ../common/_VS_KEIL/CMSIS
 #                     ../common/_VS/HAL
                      ../common/_VS/std_includes
                      ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
@@ -18,7 +18,12 @@ add_definitions(-DSTM32F429xx)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4201 /wd4514 /wd4623 /wd4774 /wd4820 /wd5039 /wd5045)
+add_compile_options(/wd4514)    # unreferenced inline function has been removed
+add_compile_options(/wd4710)    # function not inlined
+add_compile_options(/wd4774)    # format string expected in argument N is not a string literal
+add_compile_options(/wd4820)    # 'N' bytes padding added after data member
+add_compile_options(/wd4996)    # This function or variable may be unsafe
+add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
 source_group(src                      REGULAR_EXPRESSION src/*.*)
 source_group(Display                  REGULAR_EXPRESSION src/Display/*.*)
