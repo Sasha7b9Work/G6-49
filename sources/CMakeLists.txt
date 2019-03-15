@@ -19,5 +19,5 @@ project (G6-49)
 
 set (TARGET_NAME G6-49)
 
-add_subdirectory(Device)
-#add_subdirectory(Panel)
+#add_subdirectory(Device)
+add_subdirectory(Panel)
