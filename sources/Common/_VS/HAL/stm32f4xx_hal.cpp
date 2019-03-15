@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "stm32f4xx_hal.h"
 #ifdef USE_SDL2
+#define SDL_DEPRECATED
 #include <SDL_timer.h>
 #endif
 

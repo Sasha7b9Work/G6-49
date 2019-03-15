@@ -16,9 +16,12 @@ add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4201 /wd4514 /wd4623 /wd4774 /wd4820 /wd5039 /wd5045)
+add_compile_options(/wd4514)    # unreferenced inline function has been removed
 add_compile_options(/wd4710)    # function not inlined
+add_compile_options(/wd4774)    # format string expected in argument 3 is not a string literal
+add_compile_options(/wd4820)    # 'N' bytes padding added after data member
 add_compile_options(/wd4996)    # function or variable may be unsafe
+add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
 source_group(common                   FILES              ../../common/Command.cpp
                                                          ../../common/Command.h
