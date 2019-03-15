@@ -2,15 +2,15 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Panel)
 
-include_directories("..\\..\\Panel\\src\\"
-                    "..\\..\\Panel\\src\\libs\\HAL\\"
-                    "..\\..\\Panel\\src\\Hardware\\"
-                    "..\\..\\common\\"
-                    "..\\..\\common\\_VS\\"
-                    "..\\..\\common\\_VS\\CMSIS\\"
-                    "..\\..\\common\\_VS\\HAL\\"
-                    "..\\..\\Panel\\src\\libs\\HAL"
-                    "..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\include\\")
+include_directories(../../Panel/src
+                    ../../Panel/src/libs/HAL/
+                    ../../Panel/src/Hardware/
+                    ../../common
+                    ../../common/_VS
+                    ../../common/_VS/CMSIS
+                    ../../common/_VS/HAL
+                    ../../Panel/src/libs/HAL
+                    ../../ThirdParty/SDL2/SDL2-2.0.9/include)
 
 add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2)
 
