@@ -6,9 +6,9 @@ include_directories(../../Panel/src
                     ../../Panel/src/libs/HAL/
                     ../../Panel/src/Hardware/
                     ../../common
-                    ../../common/_VS
-                    ../../common/_VS/CMSIS
-                    ../../common/_VS/HAL
+                    ../../common/_VS_GUI
+                    ../../common/_VS_GUI/CMSIS
+                    ../../common/_VS_GUI/HAL
                     ../../Panel/src/libs/HAL
                     ../../ThirdParty/SDL2/SDL2-2.0.9/include)
 
@@ -33,7 +33,7 @@ source_group(common                   FILES              ../../common/Command.cp
                                                          ../../common/Transceiver.cpp
                                                          ../../common/Transceiver.h
                                                          ../../common/Wave.h)
-source_group(common\\_VS\\HAL         FILES              ../../common/_VS/HAL/stm32f4xx_hal.cpp)
+source_group(common\\_VS\\HAL         FILES              ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp)
 source_group(src                      REGULAR_EXPRESSION ../Panel/src/*.*)
 source_group(Display                  REGULAR_EXPRESSION ../Panel/src/Display/*.*)
 source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*.*)
@@ -83,7 +83,7 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../common/Transceiver.h
                     ../../common/Wave.h
                                                          
-                    ../../common/_VS/HAL/stm32f4xx_hal.cpp
+                    ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp
                     ../../Panel/src/*
                     ../../Panel/src/Display/*
                     ../../Panel/src/Display/font/*
