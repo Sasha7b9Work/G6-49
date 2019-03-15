@@ -10,6 +10,8 @@ include_directories(../../Panel/src
                     ../../common/_VS_GUI/CMSIS
                     ../../common/_VS_GUI/HAL
                     ../../Panel/src/libs/HAL
+                    ../../ThirdParty/wxWidgets/include
+                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud
                     ../../ThirdParty/SDL2/SDL2-2.0.9/include)
 
 add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2)
@@ -17,6 +19,7 @@ add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(/wd4514)    # unreferenced inline function has been removed
+add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
 add_compile_options(/wd4710)    # function not inlined
 add_compile_options(/wd4774)    # format string expected in argument 3 is not a string literal
 add_compile_options(/wd4820)    # 'N' bytes padding added after data member
@@ -34,7 +37,15 @@ source_group(common                   FILES              ../../common/Command.cp
                                                          ../../common/Transceiver.h
                                                          ../../common/Wave.h)
 source_group(common\\_VS\\HAL         FILES              ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp)
-source_group(src                      REGULAR_EXPRESSION ../Panel/src/*.*)
+source_group(src                      FILES              ../../Panel/src/defines.h
+                                                         ../../Panel/src/Log.cpp
+                                                         ../../Panel/src/Log.h
+                                                         ../../Panel/src/stdafx.cpp
+                                                         ../../Panel/src/stdafx.h
+                                                         ../../Panel/src/structs.h
+                                                                     src/Application.cpp
+                                                                     src/Application.h
+                                                                     src/main_win.cpp)
 source_group(Display                  REGULAR_EXPRESSION ../Panel/src/Display/*.*)
 source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*.*)
 source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*.*)
@@ -84,7 +95,17 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../common/Wave.h
                                                          
                     ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp
-                    ../../Panel/src/*
+                    
+                    ../../Panel/src/defines.h
+                    ../../Panel/src/Log.cpp
+                    ../../Panel/src/Log.h
+                    ../../Panel/src/stdafx.cpp
+                    ../../Panel/src/stdafx.h
+                    ../../Panel/src/structs.h
+                                src/Application.cpp
+                                src/Application.h
+                                src/main_win.cpp
+                    
                     ../../Panel/src/Display/*
                     ../../Panel/src/Display/font/*
                     ../../Panel/src/FDrive/*

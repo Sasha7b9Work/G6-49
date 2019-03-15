@@ -59,6 +59,8 @@
 #include "Utils/String.h"
 #include "Utils/StringUtils.h"
 
+#pragma warning(disable:5039)
+
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
