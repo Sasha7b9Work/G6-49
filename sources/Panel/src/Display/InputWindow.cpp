@@ -266,7 +266,7 @@ void InputWindow::OrderUp()
 {
     if(param->order < Order::Number - 1)
     {
-        param->order++;
+        param->order++; //-V803
     }
 }
 
@@ -275,7 +275,7 @@ void InputWindow::OrderDown()
 {
     if(param->order > 0)
     {
-        param->order--;
+        param->order--; //-V803
     }
 }
 
@@ -321,5 +321,9 @@ void InputWindow::ProcessContorl(Control key)
     else if(key.Is(Control::Esc, Control::Action::Up))
     {
         Menu::ResetAdditionPage();
+    }
+    else
+    {
+        // здесь ничего нету
     }
 }
