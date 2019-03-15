@@ -1,7 +1,7 @@
 @echo off
 
 @echo .
-@echo %TIME%   Rebuild S8-57
+@echo %TIME%   Rebuild G6-49
 
 call rebuild_device.bat
 

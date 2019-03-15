@@ -1,7 +1,7 @@
 @echo off
 
 @echo .
-@echo %TIME%   Rebuild Win Device
+@echo %TIME%   Rebuild VS-Keil version
 
 MSBuild.exe ..\..\generated\Keil\G6-49.sln -t:rebuild -clp:ErrorsOnly;WarningsOnly -nologo /m
 set BUILD_STATUS=%ERRORLEVEL%

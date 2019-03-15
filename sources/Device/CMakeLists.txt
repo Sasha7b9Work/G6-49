@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project (Device)
 
 include_directories(../common/_VS_KEIL/CMSIS
-                    ../common/_VS/std_includes
+                    ../common/_VS_KEIL/std_includes
                     src
                     ../common
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
