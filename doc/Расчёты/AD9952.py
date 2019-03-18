@@ -3,9 +3,9 @@ def Frequency(N):
       return 1e8 / (1 << 32) * N;
 
 for n in range((1 << 32) - 30, (1 << 32) - 1):
-      print n,
-      print Frequency(n),
-      print Frequency(n) - Frequency(n-1)
+      print (n),
+      print (Frequency(n)),
+      print ("delta F = ", Frequency(n) - Frequency(n-1))
 #'''
 
 '''
