@@ -79,7 +79,7 @@ void FDrive::Init()
 {
     CPU::HCD::Init();
 
-    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK)
+    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK) //-V2001
     {
         USBH_StatusTypeDef res = USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
         res = USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
@@ -114,6 +114,10 @@ void FDrive::Update()
         Interface::AddMessageForTransmit(message);
 
         state = State::Disconnected;
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 

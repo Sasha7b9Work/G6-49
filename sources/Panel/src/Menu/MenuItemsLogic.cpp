@@ -160,6 +160,10 @@ Item *Choice::Press(Control key)
                 Menu::ResetOpenedItem();
             }
         }
+        else
+        {
+            // здесь ничего
+        }
     }
     else
     {
@@ -311,6 +315,10 @@ float Governor::Step()
                 delta = 0.0f;
                 tsGovernor.address = 0;
             }
+        }
+        else
+        {
+            // здесь ничего
         }
     }
     return delta;

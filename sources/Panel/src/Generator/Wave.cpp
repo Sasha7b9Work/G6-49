@@ -570,6 +570,10 @@ void ParameterChoice::NextChoice()
         {
             SINE_MANIPULATION_MODE(ch) = (uint8)choice;
         }
+        else
+        {
+            // здесь ничего
+        }
         Generator::TuneChannel(ch);
     }
 }

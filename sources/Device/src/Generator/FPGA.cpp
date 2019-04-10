@@ -402,6 +402,10 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
             Bit::Set(data, RG0::_13_StartMode0);
             Bit::Set(data, RG0::_14_StartMode1);
         }
+        else
+        {
+            // здесь ничего
+        }
     }
 
     return data;
