@@ -89,6 +89,10 @@ void Menu::ProcessContorl(Control control)
     else if (CURRENT_PAGE->Press(control))
     {
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,6 +117,10 @@ bool Menu::ProcessOutputs(Control control)
             }
             Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
             return true;
+        }
+        else
+        {
+            // здесь ничего
         }
     }
 

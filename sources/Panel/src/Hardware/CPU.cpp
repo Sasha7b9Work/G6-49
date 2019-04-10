@@ -276,16 +276,21 @@ uint CPU::CRC32::Calculate(void *data, uint size)
         ++sizeBuffer;
     }
 
+    uint result = 0;
+
     uint *buffer = (uint *)std::malloc(sizeBuffer);      // Выделяем память для нового буфера
 
-    std::memcpy(buffer, data, size);                     // Копируем данные в новый буфер
-    
-    for(uint i = size; i < sizeBuffer; i++)          // Заполняем оставшееся место нулями
+    if (buffer)
     {
-        buffer[i] = 0;
-    }
+        std::memcpy(buffer, data, size);                     // Копируем данные в новый буфер
 
-    uint result = HAL_CRC_Calculate(&handleCRC, buffer, sizeBuffer / 4);
+        for (uint i = size; i < sizeBuffer; i++)          // Заполняем оставшееся место нулями
+        {
+            buffer[i] = 0;
+        }
+
+        result = HAL_CRC_Calculate(&handleCRC, buffer, sizeBuffer / 4);
+    }
 
     std::free(buffer);
 

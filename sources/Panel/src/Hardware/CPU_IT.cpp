@@ -60,11 +60,11 @@ extern "C" {
         char *file = Debug::file;
         int line = Debug::line;
         
-        while (1)
+        while (1) //-V776
         {
             TRACE_HANDLER;
-            file = file;
-            line = line;
+            file = file; //-V570
+            line = line; //-V570
         }
     }
 

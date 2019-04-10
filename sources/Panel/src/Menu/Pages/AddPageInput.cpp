@@ -90,7 +90,7 @@ static bool OnControl(Control key)
 
 Page *AddPageInput::pointer = (Page *)&pInput;
 
-DEF_PAGE_SB( pInput,
+DEF_PAGE_SB( pInput, //-V641 //-V1027
     "ббнд гмювемхъ", "VALUE ENTRY",
     "",
     "",

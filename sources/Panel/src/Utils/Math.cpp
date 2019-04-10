@@ -43,25 +43,28 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
     float *buffer = (float *)std::malloc((size_t)(numPoints * (int)sizeof(float)));
     int  *num = (int *)std::malloc((size_t)(numPoints * (int)sizeof(int)));
 
-    for (int i = 1; i < numPoints; i++)
+    if ((buffer != nullptr) && (num != nullptr))
     {
-        buffer[i] = 0.0f;
-
-        num[i] = 0;
-        for (int j = -numSmooth / 2; j < numSmooth / 2; j++)
+        for (int i = 1; i < numPoints; i++)
         {
-            int index = i + j;
-            if (index >= 1 && index < numPoints)
+            buffer[i] = 0.0f;
+
+            num[i] = 0;
+            for (int j = -numSmooth / 2; j < numSmooth / 2; j++)
             {
-                buffer[i] += data[index];
-                ++num[i];
+                int index = i + j;
+                if (index >= 1 && index < numPoints)
+                {
+                    buffer[i] += data[index];
+                    ++num[i];
+                }
             }
         }
-    }
-    
-    for (int i = 1; i < numPoints; i++)
-    {
-        data[i] = (uint8)(buffer[i] / num[i] + 0.5f);
+
+        for (int i = 1; i < numPoints; i++)
+        {
+            data[i] = (uint8)(buffer[i] / num[i] + 0.5f);
+        }
     }
 
     std::free(buffer);

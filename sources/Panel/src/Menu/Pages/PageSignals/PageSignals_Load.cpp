@@ -54,11 +54,15 @@ static bool OnKey(Control event)
         FDrive::PressUp();
         return true;
     }
+    else
+    {
+        // Á‰ÂÒ¸ ÌË˜Â„Ó
+    }
 
     return false;
 }
 
-DEF_PAGE_4( pageLoad,                                                                                                                                //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ ----
+DEF_PAGE_4( pageLoad,                                                                                                                                //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ ---- //-V641 //-V1027
     "«¿√–”« ¿", "LOAD",
     "", "",
     //&bUp,       ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬‚Âı

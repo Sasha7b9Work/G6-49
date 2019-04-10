@@ -46,6 +46,10 @@ static void SetParameter(Chan::E ch, KoeffCal::E koeff)
     {
         Generator::SetOffset(ch, 0.0f);
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,6 +118,10 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
             // 1. Записать в RG::3 (RG::4) значения, соответствующие максумуму
 
             Generator::LoadRegister(registers[ch], MAX_VALUE);
+        }
+        else
+        {
+            // здесь ничего
         }
     }
     else
