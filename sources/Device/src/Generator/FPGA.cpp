@@ -305,7 +305,7 @@ void FPGA::WriteControlRegister()
         }
     }
 
-    switch((uint8)modeWork[Chan::A])
+    switch((uint8)modeWork[Chan::A]) //-V2520
     {
         case ModeWork::Meander:     
             Bit::Set(data, RG0::_8_MeanderA);
@@ -316,7 +316,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    switch((uint8)modeWork[Chan::B])
+    switch((uint8)modeWork[Chan::B]) //-V2520
     {
         case ModeWork::Meander:   
             Bit::Set(data, RG0::_9_MeanderB);
@@ -571,8 +571,8 @@ void FPGA::SetOffset(Chan::E ch, ParamValue off)
 {
     offset[ch] = -off.ToFloat();
 
-    uint nA = OffsetToCode(ch);
-    uint nB = OffsetToCode(ch);
+    uint nA = OffsetToCode(Chan::A);
+    uint nB = OffsetToCode(Chan::B);
     
     WriteRegister(RG::_10_Offset, nA + (nB << 14));
 }

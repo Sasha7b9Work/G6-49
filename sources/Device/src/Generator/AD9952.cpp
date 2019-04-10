@@ -95,7 +95,7 @@ void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 void AD9952::SetPhase(Chan::E ch, ParamValue phase)
 {
     setDDS.ad9952[ch].phase = phase.ToFloat();
-    if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency)
+    if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency) //-V550
     {
         WriteRegister(ch, Register::POW);
     }
