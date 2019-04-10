@@ -5,7 +5,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-IntValue::IntValue(const char *buffer, int _posComma)
+IntValue::IntValue(const char *buffer, int _posComma) : sign(1)
 {
     posComma = _posComma;
 
@@ -79,7 +79,9 @@ int IntValue::ToFract1000(char *buffer)
 
     int result = 0;
 
-    for (uint i = 0; i < std::strlen(buffer); i++)
+    uint size = std::strlen(buffer);
+
+    for (uint i = 0; i < size; i++)
     {
         result += pow * (buffer[i] & 0x0f);
         pow /= 10;

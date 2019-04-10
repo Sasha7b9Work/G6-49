@@ -37,8 +37,6 @@ void Transceiver::Transmit(Message *message)
             uint newSize = 0;
             SPI4_::Receive(&newSize, 4, 10);                                    // Теперь принимаем размер данных, которые хочет передать нам устройство
 
-            result = (newSize == message->Size());
-
             uint trashedBytes = SPI4_::ReceiveAndCompare(message->Data(), message->Size());
 
             result = (trashedBytes == 0);

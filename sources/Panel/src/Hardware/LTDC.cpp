@@ -130,7 +130,7 @@ void LTDC_::SetBuffers(uint front, uint back)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void LTDC_::SetColors(uint clut[], uint8 numColors)
+void LTDC_::SetColors(uint *clut, uint8 numColors)
 {
     HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
     

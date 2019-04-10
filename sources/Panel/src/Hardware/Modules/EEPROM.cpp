@@ -78,7 +78,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 
     while (address < end)
     {
-        if (*((uint *)address) == 0xffffffff)
+        if (*((uint *)address) == 0xffffffffU)
         {
             return address;
         }

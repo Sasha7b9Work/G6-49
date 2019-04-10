@@ -81,20 +81,18 @@ void Log::Trace(TypeTrace::E type, const char *module, const char *func, int num
     va_end(args);
     const int SIZE = 20;
     char numBuffer[SIZE];
-    snprintf(numBuffer, 100, ":%d", numLine);
+    snprintf(numBuffer, SIZE, ":%d", numLine);
     message[0] = 0;
+
     if (type == TypeTrace::Error)
     {
         std::strcat(message, "!!!ERROR!!! ");
     }
-    else if (type == TypeTrace::Info)
+    else // if (type == TypeTrace::Info)
     {
         std::strcat(message, "            ");
     }
-    else
-    {
-        // здесь ничего
-    }
+
     std::strcat(message, module);
     std::strcat(message, " ");
     std::strcat(message, func);

@@ -102,7 +102,7 @@ void Number::ChangeInPositiveInteger(int position, Step step)
         {
             if(AllLeftZeroInInteger(position))
             {
-                if(GetValue() == 0.0f)
+                if(GetValue() == 0.0f) //-V550
                 {
                     integer[pos] = 1;
                     sign = '-';

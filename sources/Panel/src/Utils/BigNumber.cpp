@@ -113,7 +113,7 @@ void BigNumber::ChangeIntegerNegative(int position, Step step)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void BigNumber::ChangeIntegerNegativeMinus(int position)
+void BigNumber::ChangeIntegerNegativeMinus(int position) //-V524
 {
     integer.value += Pow10(position);
 }

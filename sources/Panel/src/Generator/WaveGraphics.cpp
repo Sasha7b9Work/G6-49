@@ -81,11 +81,6 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
         
         String(param->Name()).Draw(x0 + 1, y0, Color::FILL);
         
-        if(i == 3 && Chan(ch).IsA())
-        {
-            i = i;
-        }
-        
         DrawParameterValue(param, x0 + 80, y0);
         y0 += 11;
     }
