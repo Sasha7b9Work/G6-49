@@ -193,7 +193,7 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
     }
     else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
     {
-        if (ch == Chan::B && ModeWork::Impulse2)
+        if ((ch == Chan::B) && (modeWork[ch] == ModeWork::Impulse2))
         {
             modeWork[ch] = ModeWork::Impulse;
             WriteControlRegister();
