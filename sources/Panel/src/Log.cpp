@@ -91,6 +91,10 @@ void Log::Trace(TypeTrace::E type, const char *module, const char *func, int num
     {
         std::strcat(message, "            ");
     }
+    else
+    {
+        // здесь ничего
+    }
     std::strcat(message, module);
     std::strcat(message, " ");
     std::strcat(message, func);

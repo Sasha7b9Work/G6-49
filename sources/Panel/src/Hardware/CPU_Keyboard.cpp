@@ -122,6 +122,10 @@ void CPU::Keyboard::Update()
                         timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
                         FillCommand(controls[rl][sl], Control::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
+                    else
+                    {
+                        // здесь ничего
+                    }
                 }
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
                 {
@@ -131,6 +135,10 @@ void CPU::Keyboard::Update()
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
                     timePress[rl][sl] = 0;
+                }
+                else
+                {
+                    // здесь ничего
                 }
             }
         }

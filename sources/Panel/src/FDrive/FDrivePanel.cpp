@@ -54,6 +54,10 @@ void FDrive::Draw()
         Text::DrawBigText(30, 110, 2, "Флешка неисправна", Color::FILL);
         return;
     }
+    else
+    {
+        // здесь ничего
+    }
 
     if (Items::NumberDirs() == -1)
     {
@@ -63,6 +67,10 @@ void FDrive::Draw()
     else if (Items::WaitAnswer())
     {
         return;
+    }
+    else
+    {
+        // здесь ничего
     }
 
     Items::Draw(x + 5, y + 5);
@@ -96,6 +104,10 @@ bool FDrive::Handler::Processing(Message *msg)
     else if (command == Command::FDrive_RequestFileSize)
     {
         return Items::Handler::Processing(msg);
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return false;

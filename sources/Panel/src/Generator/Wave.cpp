@@ -485,6 +485,10 @@ pString ParameterBase::Name() const
     {
         return ((ParameterComplex *)this)->Name();
     }
+    else
+    {
+        // здесь ничего
+    }
 
     return "";
 }
@@ -503,6 +507,10 @@ pString ParameterBase::GetStringValue() const
     else if(IsComplex())
     {
         return ((ParameterComplex *)this)->GetStringValue();
+    }
+    else
+    {
+        // здесь ничего
     }
     return "";
 }
@@ -534,6 +542,10 @@ void Form::ChangeParameter()
     else if (param->IsComplex())
     {
         OpenCurrentParameter();
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 
