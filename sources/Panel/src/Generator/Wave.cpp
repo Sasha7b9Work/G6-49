@@ -131,7 +131,7 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), currentForm(0), forms(f)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0)
+Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), oldParams(nullptr), oldNumParams(0), oldCurrentParams(0)
 {
     numParams = 0;
 

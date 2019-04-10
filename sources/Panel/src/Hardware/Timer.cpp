@@ -64,7 +64,7 @@ static void ElapsedCallback();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool Timer::IsRun(Type type)
 {
-    return TIME_NEXT(type) != UINT_MAX;
+    return TIME_NEXT(type) != UINT_MAX; //-V2523
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ void Timer::Init()
 {
     for(uint i = 0; i < Timer::Type::Number; i++)
     {
-        timers[i].timeNextMS = UINT_MAX;
+        timers[i].timeNextMS = UINT_MAX; //-V2523
     }
    
     tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1);
@@ -121,7 +121,7 @@ static void ElapsedCallback()
             }
             else
             {
-                timer->timeNextMS = UINT_MAX;
+                timer->timeNextMS = UINT_MAX; //-V2523
             }
         }
     }
@@ -184,14 +184,14 @@ static void TuneTIM(Timer::Type type)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::Disable(Type type)
 {
-    timers[type].timeNextMS = UINT_MAX;
+    timers[type].timeNextMS = UINT_MAX; //-V2523
     timers[type].repeat = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static uint NearestTime()
 {
-    uint time = UINT_MAX;
+    uint time = UINT_MAX; //-V2523
 
     for(uint type = 0; type < Timer::Type::Number; type++)
     {
@@ -209,7 +209,7 @@ static void StartTIM(uint timeStopMS)
 {
     StopTIM();
 
-    if(timeStopMS == UINT_MAX)
+    if(timeStopMS == UINT_MAX) //-V2523
     {
         return;
     }
@@ -234,7 +234,7 @@ void Timer::PauseOnTime(uint timeMS)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::PauseOnTicks(uint numTicks)
 {
-    uint startTicks = TIME_TICKS;
+    volatile uint startTicks = TIME_TICKS;
     while (TIME_TICKS - startTicks < numTicks)
     {
     };
@@ -267,8 +267,8 @@ uint Timer::LogPointUS(char *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint Timer::LogPointMS(char *)
 {
-    uint interval = TIME_TICKS - timePrevPoint;
-    timePrevPoint = TIME_TICKS;
+    uint interval = TIME_MS - timePrevPoint;
+    timePrevPoint = TIME_MS;
     //LOG_WRITE("%s %.2f ms", name, interval / 120e3);
     return interval;
 }
