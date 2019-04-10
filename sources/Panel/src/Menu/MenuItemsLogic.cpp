@@ -105,6 +105,10 @@ float Choice::Step()
             }
             CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
         }
+        else
+        {
+            // здесь ничего
+        }
 
         if(isPageSB)
         {
@@ -157,6 +161,10 @@ Item *Choice::Press(Control key)
             }
         }
     }
+    else
+    {
+        // здесь ничего
+    }
 
     return Menu::GetOpenedItem();
 }
@@ -203,6 +211,10 @@ void Governor::Press(Control control)
                 funcOfChanged();
             }
         }
+        else
+        {
+            // здесь ничего
+        }
     }
     else if(control.action.Is(Control::Action::Up))
     {
@@ -210,6 +222,10 @@ void Governor::Press(Control control)
         {
             Menu::ResetCurrentItem();
         }
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 

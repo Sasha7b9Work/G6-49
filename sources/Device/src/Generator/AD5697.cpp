@@ -74,6 +74,10 @@ static float CalculateOffset(Chan::E ch, ParamValue offset)
 
         return neg - scale * (5.0f + offset.ToFloat());
     }
+    else
+    {
+        // здесь ничего
+    }
     return zero;
 }
 

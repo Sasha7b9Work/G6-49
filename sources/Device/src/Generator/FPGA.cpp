@@ -201,6 +201,10 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
         uint N = (uint)(1e8f / frequency.ToFloat() + 0.5f);
         WriteRegister(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -365,6 +369,10 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
         {
             Bit::Set(data, RG0::_13_StartMode0);
             Bit::Set(data, RG0::_14_StartMode1);
+        }
+        else
+        {
+            // здесь ничего
         }
     }
 

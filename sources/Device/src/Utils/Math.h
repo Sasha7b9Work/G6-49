@@ -131,8 +131,18 @@ template<class T> static void LimitationDecrease(T *value, T min) { if (*value >
 
 template<class T> static void Limitation(T *value, T min, T max)
 {
-    if (*value < min)      { *value = min; }
-    else if (*value > max) { *value = max; }
+    if (*value < min)
+    {
+        *value = min;
+    }
+    else if (*value > max)
+    {
+        *value = max;
+    }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 template<class T> static T LimitationRet(T value, T min, T max)

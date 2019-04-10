@@ -71,6 +71,10 @@ static uint SizeSector(uint address)
 {
     if (GetSector(address) < 4)       { return (16 * 1024); }
     else if (GetSector(address) == 4) { return (64 * 1024); }
+    else
+    {
+        // здесь ничего
+    }
 
     return (128 * 1024);
 }
@@ -94,7 +98,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 
     while (address < end)
     {
-        if (*(uint *)address == 0xffffffff)
+        if (*(uint *)address == 0xffffffffU)
         {
             return address;
         }

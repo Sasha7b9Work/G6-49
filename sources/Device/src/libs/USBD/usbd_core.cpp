@@ -168,6 +168,10 @@ USBD_StatusTypeDef USBD_LL_DataOutStage(USBD_HandleTypeDef *pdev , uint8_t epnum
     {
         pdev->pClass->DataOut(pdev, epnum);
     }
+    else
+    {
+        // здесь ничего
+    }
     return USBD_OK;
 }
 
@@ -223,6 +227,10 @@ USBD_StatusTypeDef USBD_LL_DataInStage(USBD_HandleTypeDef *pdev ,uint8_t epnum, 
         (pdev->dev_state == USBD_STATE_CONFIGURED))
     {
         pdev->pClass->DataIn(pdev, epnum);
+    }
+    else
+    {
+        // здесь ничего
     }
     return USBD_OK;
 }
