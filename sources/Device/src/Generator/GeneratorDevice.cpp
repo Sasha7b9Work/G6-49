@@ -39,11 +39,11 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Chan::E ch, Form form)
+void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
-    if(ch < Chan::Number && form.value < Form::Number)
+    if(ch < Chan::Number && form < Form::Number)
     {
-        waveIsSine = form.Is(Form::Sine);
+        waveIsSine = form == Form::Sine;
 
         FPGA::SetWaveForm(ch, form);
     }

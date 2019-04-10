@@ -122,7 +122,7 @@ void Handlers::SetFormWave(Message *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
-    Form form = (Form::E)msg->TakeByte();
+    Form::E form = (Form::E)msg->TakeByte();
 
     Generator::SetFormWave(ch, form);
 }

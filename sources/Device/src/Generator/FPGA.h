@@ -19,7 +19,7 @@ public:
 
 
 
-    static void SetWaveForm(Chan::E ch, Form form);
+    static void SetWaveForm(Chan::E ch, Form::E form);
 
     static void SetFrequency(Chan::E ch, ParamValue frequency);
 

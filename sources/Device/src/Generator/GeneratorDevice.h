@@ -15,7 +15,7 @@ public:
 
     static void EnableChannel(Chan::E ch, bool enable);
 
-    static void SetFormWave(Chan::E ch, Form form);
+    static void SetFormWave(Chan::E ch, Form::E form);
 
     static void SetOffset(Chan::E ch, ParamValue offset);
 

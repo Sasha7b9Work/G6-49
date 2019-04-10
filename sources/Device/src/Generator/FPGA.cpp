@@ -59,7 +59,7 @@ void FPGA::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::SetWaveForm(Chan::E ch, Form form)
+void FPGA::SetWaveForm(Chan::E ch, Form::E form)
 {
     typedef void(*pFuncFpgaVU8)(Chan::E);
 
@@ -75,7 +75,7 @@ void FPGA::SetWaveForm(Chan::E ch, Form form)
         SetModeDDS
     };
     
-    func[form.value].val(ch);
+    func[form].val(ch);
     
     Multiplexor::SetMode(ch, form);
 
