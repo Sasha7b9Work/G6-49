@@ -186,7 +186,7 @@ bool StructValue::IncreaseDigit(int num)
         if (DIGIT(num) > '9')
         {
             DIGIT(num) = '0';
-            if(!IncreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1))
+            if(!IncreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1)) //-V557
             {
                 *this = temp;
                 return false;
@@ -216,14 +216,14 @@ bool StructValue::DecreaseDigit(int num)
         return false;
     }
 
-    StructValue temp = *this;
+    StructValue temp = *this; //-V821
 
     DIGIT(num)--;
 
     if (DIGIT(num) < '0')
     {
         DIGIT(num) = '9';
-        DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1);
+        DecreaseDigit(DIGIT(num - 1) == '.' ? num - 2 : num - 1); //-V557
     }
 
     if(ValueNano().ToFloat() < param->MinValue() || ValueNano().ToFloat() > param->MaxValue())

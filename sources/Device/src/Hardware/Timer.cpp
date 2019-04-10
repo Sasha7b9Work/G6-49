@@ -228,7 +228,7 @@ void Timer::PauseOnTime(uint timeMS)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Timer::PauseOnTicks(uint numTicks)
 {
-    uint startTicks = TIME_TICKS;
+    volatile uint startTicks = TIME_TICKS;
     while (TIME_TICKS - startTicks < numTicks)
     {
     };

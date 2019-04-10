@@ -202,13 +202,13 @@ void EEPROM::SaveSignal(Chan::E ch, float *data)
     uint sizeData = FPGA::NUM_POINTS * sizeof(float);
 
     EraseSector(SECTOR_TEMP_10);                                                        // ќбнул€ем сектор дл€ временных данных дл€ временного сохранени€ тех данных, которые не нужно перезаписывать
-    WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Number);  // —охран€ем существующие данные
+    WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Number);  // —охран€ем существующие данные //-V566
     EraseSector(SECTOR_SIGNAL_FPGA_11);                                                 // —тираем сектор дл€ хранени€ данных
     WriteData(AddressForData(ch), data, sizeData);                                      // «аписываем данные канала
 
     ch = (ch == Chan::A) ? Chan::B : Chan::A;
 
-    data = (float *)SECTOR_TEMP_10;
+    data = (float *)SECTOR_TEMP_10; //-V566
 
     if (ch == Chan::B)
     {
@@ -233,7 +233,7 @@ static uint AddressForData(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float *EEPROM::GetSignal(Chan::E ch)
 {
-    float *result = (float *)(SECTOR_SIGNAL_FPGA_11);
+    float *result = (float *)(SECTOR_SIGNAL_FPGA_11); //-V566
 
     if (ch == Chan::B)
     {
@@ -246,7 +246,7 @@ float *EEPROM::GetSignal(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void EEPROM::Init()
 {
-    uint *data = (uint *)SECTOR_SIGNAL_FPGA_11;
+    uint *data = (uint *)SECTOR_SIGNAL_FPGA_11; //-V566
 
     for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Number); i++)
     {
@@ -258,7 +258,7 @@ void EEPROM::Init()
 
     EraseSector(SECTOR_SIGNAL_FPGA_11);
 
-    float *address = (float *)SECTOR_SIGNAL_FPGA_11;
+    float *address = (float *)SECTOR_SIGNAL_FPGA_11; //-V566
 
     float value = 0.0f;
 

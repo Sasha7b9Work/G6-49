@@ -13,7 +13,6 @@ void CPU::PCD::Init()
 {
     __GPIOB_CLK_ENABLE();
     __USB_OTG_HS_CLK_ENABLE();
-    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
     __SYSCFG_CLK_ENABLE();
 
     GPIO_InitTypeDef isGPIO =
