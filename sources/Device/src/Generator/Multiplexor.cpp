@@ -18,7 +18,7 @@
 #define PIN_MX2_A0  GPIO_PIN_2
 
 
-Form FPGA::Multiplexor::mode[Chan::Number] = {Form::Sine, Form::Sine};
+Form::E FPGA::Multiplexor::mode[Chan::Number] = {Form::Sine, Form::Sine};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ void FPGA::Multiplexor::WriteRegister(Register::E reg, uint value)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FPGA::Multiplexor::SetMode(Chan::E ch, Form form)
+void FPGA::Multiplexor::SetMode(Chan::E ch, Form::E form)
 {
     mode[ch] = form;
 
@@ -66,7 +66,7 @@ void FPGA::Multiplexor::SetMode(Chan::E ch, Form form)
         PIN_MX2_A0
     };
 
-    if(form.Is(Form::Sine))
+    if(form == Form::Sine)
     {
         SetPin(PIN_MX(ch));
     }

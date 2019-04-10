@@ -140,7 +140,7 @@ private:
         /// Первоначальная инициализация
         static void Init();
         /// Скоммутировать мультиплексор в соответствии с формой устанавливаемого сигнала на данном канале
-        static void SetMode(Chan::E ch, Form form);
+        static void SetMode(Chan::E ch, Form::E form);
 
         static Form GetMode(Chan::E ch);
 
@@ -150,7 +150,7 @@ private:
 
         static void WriteRegister(Register::E reg, uint value);
 
-        static Form mode[Chan::Number];
+        static Form::E mode[Chan::Number];
     };
 
     static void SetModeSine(Chan::E ch);
