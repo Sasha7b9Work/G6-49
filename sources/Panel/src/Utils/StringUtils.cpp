@@ -76,6 +76,10 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
     {
         *pBuffer++ = '+';
     }
+    else
+    {
+        // здесь ничего
+    }
 
     char format[10] = "%4.2f\0\0";
 
@@ -92,7 +96,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
     float absValue = std::fabsf(value);
     sprintf(pBuffer, format, (double)absValue);
 
-    float val = (float)std::atof(pBuffer);
+    float val = (float)std::atof(pBuffer); //-V2508
 
     if (Math::DigitsInIntPart(val) != numDigitsInInt)
     {
@@ -209,6 +213,10 @@ char *Freq2StringAccuracy(float freq, char bufferOut[20], int numDigits)
     {
         suffix = LANG_RU ? "кГц" : "kHz";
         freq /= 1e3f;
+    }
+    else
+    {
+        // здесь ничего
     }
     char buffer[20];
     std::strcat(bufferOut, Float2String(freq, false, numDigits, buffer));
@@ -498,6 +506,10 @@ char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numD
         suffix = LANG_RU ? "мс" : "ms";
         time *= 1e3f;
     }
+    else
+    {
+        // здесь ничего
+    }
 
     char bufferOut[20];
     std::strcat(buffer, Float2String(time, alwaysSign, numDigits, bufferOut));
@@ -596,7 +608,7 @@ char *SU::GetWord(char *string, int n, char *out, int size)
 
     if (length + 1 > size)
     {
-        return (char *)0xffffffff;  // -V566           // Не хватит места в выходном буфере - выходим с соответствующим кодом
+        return (char *)0xffffffffU;           // Не хватит места в выходном буфере - выходим с соответствующим кодом //-V566
     }
 
     for (int i = 0; i < length; i++)
@@ -771,17 +783,21 @@ int SU::FindSymbol(const char *string, char symbol)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char SU::ToUpper(char symbol)
 {
-    if(symbol >= 0xe0)
+    if(symbol >= 0xe0) //-V547
     {
         return symbol - 0x20;
     }
-    else if (symbol == 0xb8)
+    else if (symbol == 0xb8) //-V547
     {
         return symbol - 0x10;
     }
     else if (symbol <= 0x7a)
     {
         return (char)std::toupper(symbol);
+    }
+    else
+    {
+        // здесь ничего
     }
     return symbol;
 }

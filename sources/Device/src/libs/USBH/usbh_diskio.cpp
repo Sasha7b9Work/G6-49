@@ -171,7 +171,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
     case GET_SECTOR_COUNT :
         if(USBH_MSC_GetLUNInfo(&FDrive::hUSB_Host, lun, &info) == USBH_OK)
         {
-        *static_cast<DWORD*>(buff) = info.capacity.block_nbr;
+        *static_cast<DWORD*>(buff) = info.capacity.block_nbr; //-V525
         res = RES_OK;
         }
         else
@@ -209,6 +209,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
     
     default:
         res = RES_PARERR;
+        break;
     }
     
     return res;
