@@ -500,11 +500,11 @@ DEF_BUTTON(bNext,                                                               
 static void OnPress_Send()
 {
     showInputWindow = true;
-    std::memset(buffer, 0, MAX_SIZE_BUFFER);
+    std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
 
-    pRegisters.items[0] = (Item *)&bBackspace;
-    pRegisters.items[1] = (Item *)&bCancel;
-    pRegisters.items[2] = (Item *)&bSave;
+    pRegisters.items[0] = (Item *)&bBackspace; //-V641
+    pRegisters.items[1] = (Item *)&bCancel; //-V641
+    pRegisters.items[2] = (Item *)&bSave; //-V641
 
     int position = 0;
 
@@ -522,7 +522,7 @@ static void OnPress_Send()
             Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
             position = (int)std::strlen(buffer);
         }
-        else if (type == Uint10_Uint10 || type == Uint14_Uint14)
+        else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
         {
             uint mask = type == Uint10_Uint10 ? 0x3ffU : 0x3fffU;
             int numBits = type == Uint10_Uint10 ? 10 : 14;
@@ -538,7 +538,7 @@ static void OnPress_Send()
     else
     {
         position = 0;
-        std::memset(buffer, 0, MAX_SIZE_BUFFER);
+        std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
         VALUE(position) = 0;
     }
 
@@ -589,10 +589,10 @@ DEF_BUTTON(bSave,                                                               
 static void OnPress_Cancel()
 {
     showInputWindow = false;
-    std::memset(buffer, 0, MAX_SIZE_BUFFER);
-    pRegisters.items[0] = (Item *)&bPrev;
-    pRegisters.items[1] = (Item *)&bNext;
-    pRegisters.items[2] = (Item *)&bSend;
+    std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
+    pRegisters.items[0] = (Item *)&bPrev; //-V641
+    pRegisters.items[1] = (Item *)&bNext; //-V641
+    pRegisters.items[2] = (Item *)&bSend; //-V641
 }
 
 static void OnDraw_Cancel(int x, int y)
@@ -600,7 +600,7 @@ static void OnDraw_Cancel(int x, int y)
     Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Delete, Color::FILL);
 }
 
-DEF_BUTTON(bCancel,                                                                                         //--- РЕГИСТРЫ - Input window - Отмена ---
+DEF_BUTTON( bCancel,                                                                                                                               //--- РЕГИСТРЫ - Input window - Отмена ---
     "Отмена", "Cancel",
     "Отменяет засылку значения в регистр и закрывает окно ввода",
     "Cancels the sending of values into the register and closes the input window",
@@ -608,7 +608,7 @@ DEF_BUTTON(bCancel,                                                             
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_4_VAR(pRegisters,                                                                                                          //--- РЕГИСТРЫ ---
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                        //--- РЕГИСТРЫ --- //-V641
     "РЕГИСТРЫ", "REGISTERS",
     "",
     "",
@@ -620,7 +620,7 @@ DEF_PAGE_4_VAR(pRegisters,                                                      
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_5( pDebug,                                                                                                                  //--- ОТЛАДКА ---
+DEF_PAGE_5( pDebug,                                                                                                                                        //--- ОТЛАДКА --- //-V641 //-V1027
     "ОТЛАДКА", "DEBUG",
     "", "",
     &pRegisters,     ///< ОТЛАДКА - Регистры
