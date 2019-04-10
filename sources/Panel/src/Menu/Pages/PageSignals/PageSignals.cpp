@@ -105,7 +105,7 @@ static bool OnKey(Control key)
     return false;
 }
 
-DEF_PAGE_8( pageSignals,
+DEF_PAGE_8( pageSignals, //-V641 //-V1027
     "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬", "SIGNAL SETTINGS",
     "", "",
     &cChannel,                                      ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
@@ -128,7 +128,7 @@ void PageSignals::Init()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::OnPress_Form(bool)
 {
-    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];
+    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1]; //-V1027
 
     WAVE_CURRENT.SetForm(choice->CurrentIndex());
 
@@ -142,5 +142,5 @@ void PageSignals::OnPress_Channel(bool)
 {
     cParameters.form = FORM_CURRENT;
     numForm = FORM_CURRENT->value;
-    pageSignals.items[1] = Chan(CURRENT_CHANNEL).IsA() ? (Item *)&cFormA : (Item *)&cFormB;
+    pageSignals.items[1] = Chan(CURRENT_CHANNEL).IsA() ? (Item *)&cFormA : (Item *)&cFormB; //-V641
 }

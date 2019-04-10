@@ -263,7 +263,7 @@ Control CPU::Keyboard::GetNextControl()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::InitInputs(uint16 sl[], char portSL[], int numSL, uint16 rl[], char portRL[], int numRL)
+void CPU::Keyboard::InitInputs(uint16 *sl, char *portSL, int numSL, uint16 *rl, char *portRL, int numRL)
 {
     GPIO_InitTypeDef isGPIO;
 

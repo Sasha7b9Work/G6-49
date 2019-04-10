@@ -192,9 +192,17 @@ void Governor::Press(Control control)
             {
                 Menu::ResetCurrentItem();
             }
+            else
+            {
+                // здесь ничего
+            }
         }
         else if(control.action.Is(Control::Action::Long))
         {
+        }
+        else
+        {
+            // здесь ничего
         }
     }
     else if(control.IsRotate())
@@ -203,7 +211,7 @@ void Governor::Press(Control control)
         {
             if(*cell > minValue)
             {
-                *cell = (*cell)--;
+                *cell = *cell - 1;
                 funcOfChanged();
             }
         }
@@ -211,7 +219,7 @@ void Governor::Press(Control control)
         {
             if(*cell < maxValue)
             {
-                *cell = (*cell)++;
+                *cell = *cell + 1;
                 funcOfChanged();
             }
         }
@@ -535,6 +543,10 @@ Item *ChoiceParameter::Press(Control::Action action)
     {
         return this;
     }
+    else
+    {
+        // здесь ничего
+    }
 
     return 0;
 }
@@ -586,7 +598,7 @@ pString ChoiceParameter::NameCurrentSubItem() const
 String Item::FullPath()
 {
     String title = GetTitle();
-    const char *titles[5] = {title.CString()};
+    const char *titles[5] = {title.CString(), 0, 0, 0, 0};
     int pointer = 1;
 
     Page *parent = Keeper();
@@ -655,11 +667,19 @@ bool Page::Press(Control control)
             GetItem(control)->Press(control);
             return true;
         }
+        else
+        {
+            // здесь ничего
+        }
     }
     else if (control.action.IsRelease())
     {
         CURRENT_PAGE = this;
         return true;
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return false;

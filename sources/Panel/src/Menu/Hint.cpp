@@ -57,6 +57,10 @@ bool Hint::ProcessControl(Control key)
                 {
                     currentPage++;
                 }
+                else
+                {
+                    // здесь ничего
+                }
             }
         }
         else
@@ -100,7 +104,7 @@ void Hint::Draw()
             Painter::SetColor(Color::GREEN_50);
             Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->GetTitle().CString());
             Painter::SetColor(Color::GREEN);
-            y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5;
+            y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5; //-V2007
             if (item->GetType().Is(Item::Type::Choice))
             {
                 Choice *choice = (Choice *)item;
@@ -127,6 +131,10 @@ void Hint::Draw()
                     else if(currentPage == 2)
                     {
                         DrawDetailedHint(choice, x0, y0, width, firstItemOnSecondPage, choice->NumSubItems() - 1);
+                    }
+                    else
+                    {
+                        // здесь ничего
                     }
                 }
             }
