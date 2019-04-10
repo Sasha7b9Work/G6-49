@@ -171,6 +171,10 @@ static bool OnKey(Control key)
             return OnRegulator(key);
         }
     }
+    else
+    {
+        // здесь ничего
+    }
 
     return false;
 }

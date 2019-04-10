@@ -649,6 +649,8 @@ ParameterChoice::ParameterChoice(E v, pString var0ru, pString var0en, pString va
     names[2][1] = (char *)var2en;
     names[3][0] = (char *)var3ru;
     names[3][1] = (char *)var3en;
+
+    func[0] = func[1] = func[2] = func[3] = nullptr;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

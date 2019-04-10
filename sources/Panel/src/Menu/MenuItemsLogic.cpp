@@ -449,6 +449,10 @@ void Item::Press(Control key)
         {
             ((Governor *)this)->Press(key);
         }
+        else
+        {
+            // здесь ничего
+        }
     }
 }
 
@@ -482,6 +486,10 @@ int8 Choice::CurrentIndex()
         Form *form = param->form;
 
         retValue = (int8)((ParameterValue *)form->CurrentParameter())->value;
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return retValue;
