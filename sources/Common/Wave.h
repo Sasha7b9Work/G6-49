@@ -189,8 +189,6 @@ public:
         inNumLockMode(false)
     {
         std::memset(buffer, 0, NUM_DIGITS + 1);
-        std::memset(_nu0, 0, 3);
-        std::memset(nu1, 0, 3);
     };
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
@@ -228,15 +226,11 @@ public:
     char sign;
 private:
 
-    uint8 _nu0[3];
-
     float min;
 
     float max;
     /// Если true, то находимся в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
-
-    uint8 nu1[3];
 };
 
 
