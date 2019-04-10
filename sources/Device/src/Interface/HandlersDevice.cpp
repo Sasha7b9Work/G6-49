@@ -362,6 +362,7 @@ void Handlers::WriteRegister(Message *msg)
     case Register::Multiplexor1:
     case Register::Multiplexor2:
     default:
+        // Здесь ничего
         break;
     }
 }

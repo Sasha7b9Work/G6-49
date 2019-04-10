@@ -43,7 +43,7 @@ enum TypeInput
     Uint,           ///< Десятичное число. Можно ввести значение до 2^64.
     Binary,         ///< Последовательность нулей и единиц
     Uint10_Uint10,  ///< Два восьмибитных числа в десятичном виде.
-    Uint14_Uint14,  ///< Два числа, максимум 2^14, в десятичном виде
+    Uint14_Uint14   ///< Два числа, максимум 2^14, в десятичном виде
 };
 
 struct DescInput
@@ -141,7 +141,7 @@ static bool OnKey(Control key)
         {
             SENDING(currentRegister) = false;
             OnPress_Send();
-            std::memset(buffer, 0, MAX_SIZE_BUFFER);
+            std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
             buffer[0] = key.ToChar();
             NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel ||
                                                            currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
@@ -270,6 +270,10 @@ static uint64 BufferToValue()
 
         result = first + (second << numBits);
     }
+    else
+    {
+        // здесь ничего.
+    }
 
     return result;
 }
@@ -305,6 +309,10 @@ static bool AllowableSymbol(Control key)
             }
             return true;
         }
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return false;

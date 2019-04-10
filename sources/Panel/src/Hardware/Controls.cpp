@@ -21,6 +21,10 @@ char Control::ToChar() const
     {
         return '.';
     }
+    else
+    {
+        // здесь ничего
+    }
 
     return '\0';
 }

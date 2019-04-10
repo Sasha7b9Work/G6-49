@@ -19,7 +19,7 @@ static struct Picture
     uint8 data[300];
     void Clear()
     {
-        std::memset(data, 300, 0);
+        std::memset(data, 0, 300);
     }
 } picture;
 
