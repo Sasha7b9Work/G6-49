@@ -189,7 +189,7 @@ public:
         inNumLockMode(false)
     {
         std::memset(buffer, 0, NUM_DIGITS + 1);
-        std::memset(nu0, 0, 3);
+        std::memset(_nu0, 0, 3);
         std::memset(nu1, 0, 3);
     };
 
@@ -228,7 +228,7 @@ public:
     char sign;
 private:
 
-    uint8 nu0[3];
+    uint8 _nu0[3];
 
     float min;
 

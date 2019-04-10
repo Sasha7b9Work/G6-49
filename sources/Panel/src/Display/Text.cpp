@@ -263,7 +263,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color color)
+int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color color) //-V801
 {
     bool inverse = false;               // Установленное в true значение означает, что сейчас идёт вывод инверсным цветом
 
@@ -350,7 +350,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color)
+int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color) //-V801
 {
     Painter::SetColor(color);
 
@@ -459,7 +459,7 @@ bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    * lettersInSyllable = (int8)std::strlen(letters);
+    * lettersInSyllable = (int8)std::strlen(letters); //-V1029
     if (std::strlen(letters) <= 3)
     {
         return false;

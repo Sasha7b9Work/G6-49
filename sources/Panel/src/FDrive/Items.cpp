@@ -36,7 +36,7 @@ struct StructFile
     char name[50];
     uint8 nutUsed[2];
     int size;
-    StructFile() : size(-1) { name[0] = 0; }
+    StructFile() : size(-1) { name[0] = 0; } //-V730
     void Clear() { name[0] = 0; size = -1; }
 }
 files[NUM_ITEMS];
@@ -87,7 +87,7 @@ bool Items::Handler::Processing(Message *msg)
     if (command == Command::FDrive_NumDirsAndFiles)
     {
         numDirs = (int)msg->TakeWord();
-        numFiles = (int)msg->TakeWord();
+        numFiles = (int)msg->TakeWord(); //-V656
         requestIsSend = false;
         return true;
     }
@@ -108,6 +108,10 @@ bool Items::Handler::Processing(Message *msg)
         int num = msg->TakeByte();
         files[num].size = (int)msg->TakeWord();
         return true;
+    }
+    else
+    {
+        // здесь ничего
     }
 
     return false;

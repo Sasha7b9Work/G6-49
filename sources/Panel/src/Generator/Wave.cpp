@@ -117,7 +117,7 @@ int Wave::NumberOfForms() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Wave::Wave(Chan::E ch, Form **f) : channel(ch), forms(f)
+Wave::Wave(Chan::E ch, Form **f) : channel(ch), currentForm(0), forms(f)
 {
     numForms = 0;
     
