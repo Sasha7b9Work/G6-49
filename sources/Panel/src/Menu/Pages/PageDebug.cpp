@@ -261,7 +261,8 @@ static uint64 BufferToValue()
     {
         result = StringToBin32(buffer);
     }
-    else if (type == Uint10_Uint10 || type == Uint14_Uint14)
+    //else if (type == Uint10_Uint10 || type == Uint14_Uint14)
+    else
     {
         int numBits = type == Uint10_Uint10 ? 10 : 14;
 
@@ -269,10 +270,6 @@ static uint64 BufferToValue()
         uint64 second = SecondValue();
 
         result = first + (second << numBits);
-    }
-    else
-    {
-        // здесь ничего.
     }
 
     return result;
@@ -291,7 +288,7 @@ static bool AllowableSymbol(Control key)
     {
         return key.Is(Control::_0) || key.Is(Control::_1);
     }
-    else if (type == Uint10_Uint10 || type == Uint14_Uint14)
+    else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
     {
         if (key.IsDigit())
         {
@@ -309,10 +306,6 @@ static bool AllowableSymbol(Control key)
             }
             return true;
         }
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return false;
@@ -367,7 +360,9 @@ void PageDebug::PageRegisters::DrawInputWindow()
 
     int position = NumberBuffer::PositionCursor();
 
-    for (int i = 0; i < (int)std::strlen(buffer); i++)
+    int size = (int)std::strlen(buffer);
+
+    for (int i = 0; i < size; i++)
     {
         if (i == position)
         {
@@ -406,7 +401,7 @@ static void DrawValue(int x, int y, uint8 i)
 
         Text::DrawFormatText(x, y, Bin2StringN((uint)VALUE(i), buf, SizeBuffer(name)));
     }
-    else if (type == Uint10_Uint10 || type == Uint14_Uint14)
+    else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
     {
         uint mask = type == Uint10_Uint10 ? 0x3ffU : 0x3fffU;
         int numBits = type == Uint10_Uint10 ? 10 : 14;
