@@ -278,7 +278,14 @@ void InputWindow::OrderDown()
 {
     if (param->NeedChangeOrder())
     {
-        if (param->order > 0)
+        Order::E min = Order::Nano;
+
+        if (param->value == ParameterValue::Frequency)
+        {
+            min = Order::Micro;
+        }
+
+        if (param->order > min)
         {
             param->order--; //-V803
         }
