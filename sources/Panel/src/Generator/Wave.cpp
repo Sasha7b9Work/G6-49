@@ -401,7 +401,7 @@ void ParameterValue::IncreaseOrder()
     {
         if (order < Order::Max(this))
         {
-            order++;
+            order++; //-V803
         }
     }
 }
@@ -413,7 +413,7 @@ void ParameterValue::DecreaseOrder()
     {
         if (order > Order::Min(this))
         {
-            order--;
+            order--; //-V803
         }
     }
 }
@@ -710,7 +710,7 @@ ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(C
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ParameterValue::ParameterValue(int v) : ParameterBase(Value),
+ParameterValue::ParameterValue(int v) : ParameterBase(Value), //-V730
     value((E)v), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
 {
     std::memset(buffer, 0, NUM_DIGITS + 1);
@@ -958,13 +958,17 @@ ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Form::GetOffset()
 {
-    return GetParameterValue(ParameterValue::Offset)->GetValueNano().ToFloat() - 5.0F;
+    ParameterValue *parameter = GetParameterValue(ParameterValue::Offset);
+
+    return (parameter) ? parameter->GetValueNano().ToFloat() - 5.0F : 0.0F;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 float Form::GetAmplitude()
 {
-    return GetParameterValue(ParameterValue::Amplitude)->GetValueNano().ToFloat();
+    ParameterValue *parameter = GetParameterValue(ParameterValue::Amplitude);
+
+    return (parameter) ? parameter->GetValueNano().ToFloat() : 0.0F;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
