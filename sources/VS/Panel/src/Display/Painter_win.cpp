@@ -1,6 +1,6 @@
 #include "defines.h"
 #pragma warning(push)
-#pragma warning(disable:4018 4076 4091 4189 4365 4459 4571 4625 4668 5026 5027 5039)
+#pragma warning(disable:4018 4076 4091 4189 4365 4459 4548 4571 4625 4668 5026 5027 5039)
 #undef CRC
 
 #include "Application.h"

@@ -142,7 +142,7 @@ void Message::Create(uint size, uint8 v0, uint v1, uint v2)
 {
     if (AllocateMemory(size))
     {
-        PutByte(v0);
+        PutByte(v0); //-V525
         PutWord(v1);
         PutWord(v2);
     }
@@ -249,7 +249,7 @@ bool Message::CreateAllocate(uint8 *_buffer, uint _size)
 {
     if (AllocateMemory(_size))
     {
-        std::memcpy(buffer, _buffer, _size);
+        std::memcpy(buffer, _buffer, _size); //-V595
         used = _size;
     }
 
@@ -261,7 +261,7 @@ bool Message::CreateFromMessage(Message *message)
 {
     if (AllocateMemory(message->Size()))
     {
-        std::memcpy(buffer, message->Data(), message->Size());
+        std::memcpy(buffer, message->Data(), message->Size()); //-V595
         used = message->Size();
     }
 
@@ -382,10 +382,7 @@ void Message::FreeMemory()
 {
     allocated = 0;
     used = 0;
-    if (buffer)
-    {
-        std::free(buffer);
-    };
+    std::free(buffer);
     buffer = 0;
 }
 

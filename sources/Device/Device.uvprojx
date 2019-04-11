@@ -1252,11 +1252,6 @@
               <FilePath>..\common\Message.h</FilePath>
             </File>
             <File>
-              <FileName>Transceiver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>

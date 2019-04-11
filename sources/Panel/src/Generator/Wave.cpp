@@ -941,7 +941,7 @@ ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
     {
         ParameterBase *param = GetParameter(i);
 
-        if (param->IsValue())
+        if (param && param->IsValue())
         {
             ParameterValue *paramValue = (ParameterValue *)param;
 
