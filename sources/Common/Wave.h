@@ -27,7 +27,7 @@ struct Order
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define NUM_DIGITS 5
+//#define NUM_DIGITS 5
 
 class Form;
 class Wave;
@@ -156,6 +156,8 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class ParameterValue : public ParameterBase
 {
+private:
+    static int const NUM_DIGITS = 5;
 public:
     friend class Form;
 
@@ -186,6 +188,7 @@ public:
         hightLightDigit(0),
         posComma(0),
         sign('+'),
+        numDigits(NUM_DIGITS),
         inNumLockMode(false)
     {
         std::memset(buffer, 0, NUM_DIGITS + 1);
@@ -226,6 +229,8 @@ public:
     char buffer[NUM_DIGITS + 1];
     /// Знак числа. ' ' в случае, если число знака не имеет - строго положительное
     char sign;
+
+    int numDigits;
 private:
 
     float min;

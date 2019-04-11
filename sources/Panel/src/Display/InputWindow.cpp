@@ -121,7 +121,7 @@ void InputWindow::DrawDigits(int x, int y)
         hightLightDigit++;
     }
 
-    for (int i = 0; i < NUM_DIGITS; i++)
+    for (int i = 0; i < param->numDigits; i++)
     {
         Painter::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, Color::BACK);
 

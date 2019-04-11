@@ -31,7 +31,7 @@ void StructValue::Set(ParameterValue *param_)
 {
     param = param_;
 
-	for (int i = NUM_DIGITS - 1; i > 0; --i)
+	for (int i = param->numDigits - 1; i > 0; --i)
 	{
 		if (DIGIT(i) == 0)
 		{
@@ -63,7 +63,7 @@ void StructValue::KeyLeft()
 	}
     else
     {
-        if (!OnlyOneRigthDigit() && (POS_COMMA != NUM_DIGITS - 1))
+        if (!OnlyOneRigthDigit() && (POS_COMMA != param->numDigits - 1))
         {
             ShiftToRight();
         }
@@ -73,9 +73,10 @@ void StructValue::KeyLeft()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::KeyRight()
 {
-	if (param->hightLightDigit < (NUM_DIGITS - 1))
+	if (param->hightLightDigit < (param->numDigits - 1))
 	{
-		if ((param->hightLightDigit == NUM_DIGITS - 2) && param->buffer[NUM_DIGITS - 1] == '.')
+		if ((param->hightLightDigit == param->numDigits - 2) &&
+            param->buffer[param->numDigits - 1] == '.')
 		{
 			return;
 		}
@@ -173,7 +174,7 @@ char *StructValue::StringValue()
 
     SU::ConcatenateSymbol(buf, SIGN);
 
-    for (int i = 0; i < NUM_DIGITS; i++)
+    for (int i = 0; i < param->numDigits; i++)
     {
         SU::ConcatenateSymbol(buf, text[i]);
 
@@ -189,7 +190,7 @@ char *StructValue::StringValue()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool StructValue::IncreaseDigit(int num)
 {
-    if (num < 0 || num >= NUM_DIGITS)
+    if (num < 0 || num >= param->numDigits)
     {
         return false;
     }
@@ -228,7 +229,7 @@ bool StructValue::IncreaseDigit(int num)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool StructValue::DecreaseDigit(int num)
 {
-    if (num < 0 || num >= NUM_DIGITS)
+    if (num < 0 || num >= param->numDigits)
     {
         return false;
     }
@@ -286,7 +287,7 @@ bool StructValue::All9LeftWithThis(int num)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::ShiftToRight()
 {
-    for (int i = NUM_DIGITS - 2; i >= 0; i--)
+    for (int i = param->numDigits - 2; i >= 0; i--)
     {
         DIGIT(i + 1) = DIGIT(i);
     }
@@ -297,11 +298,11 @@ void StructValue::ShiftToRight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::ShiftToLeft()
 {
-    for (int i = 1; i < NUM_DIGITS; i++)
+    for (int i = 1; i < param->numDigits; i++)
     {
         DIGIT(i - 1) = DIGIT(i);
     }
-    DIGIT(NUM_DIGITS - 1) = '0';
+    DIGIT(param->numDigits - 1) = '0';
     --POS_COMMA;
 }
 
@@ -324,9 +325,9 @@ pString Order::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool StructValue::OnlyOneRigthDigit()
 {
-    char digitLast = DIGIT(NUM_DIGITS - 1);
+    char digitLast = DIGIT(param->numDigits - 1);
 
-    if (digitLast != '0' && All0LeftWithThis(NUM_DIGITS - 2))
+    if (digitLast != '0' && All0LeftWithThis(param->numDigits - 2))
     {
         return true;
     }
@@ -369,7 +370,7 @@ uint64 StructValue::ValueAfterCommaInNano()
     //         123123123
     uint64 pow = 100000000;
 
-    for (int i = POS_COMMA + 1; i < NUM_DIGITS; i++)    // Проходим все знакоместа, начиная с того, что после запятой
+    for (int i = POS_COMMA + 1; i < param->numDigits; i++)    // Проходим все знакоместа, начиная с того, что после запятой
     {
         result += (DIGIT(i) & 0x0f) * pow;
         pow /= 10;
