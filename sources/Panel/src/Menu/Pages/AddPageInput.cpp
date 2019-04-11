@@ -107,5 +107,5 @@ DEF_PAGE_SB( pInput, //-V641 //-V1027
     &sbEnter,           ///< ÎÊÍÎ ÂÂÎÄÀ - ÂÂÎÄ
     0,
     0,
-    Page::SB_Input, 0, FuncActive, FuncPress, FuncDrawPage, OnControl
+    Page::SB_Input, 0, FuncActive, FuncPress, Page::FuncDraw, OnControl
 )

@@ -108,5 +108,5 @@ DEF_PAGE_4( pService,                                                           
     &cLanguage,              ///< ÑÅÐÂÈÑ - ßÇÛÊ
     &pUSB,
     &pDebug,
-    Page::Service, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
+    Page::Service, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )

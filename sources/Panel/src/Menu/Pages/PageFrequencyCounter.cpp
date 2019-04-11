@@ -241,7 +241,7 @@ DEF_PAGE_8( pFrequencyCounter,  // -V641 // -V1027                              
     //&cAvePeriod,     ///< ×ÀÑÒÎÒÎÌÅÐ - ×èñëî ïåðèîäîâ
     //&cTimeStamps,    ///< ×ÀÑÒÎÒÎÌÅÐ - Ìåòêè âðåìåíè
     &cTest,          ///< ×ÀÑÒÎÒÎÌÅÐ - Òåñò
-    Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
+    Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 
 

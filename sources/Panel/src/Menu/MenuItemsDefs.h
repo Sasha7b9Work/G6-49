@@ -1,7 +1,6 @@
 #pragma once
 #include "Utils/CommonFunctions.h"
 #define FuncDraw            EmptyFuncVII
-#define FuncDrawPage        EmptyFuncVV
 #define FuncActive          EmptyFuncBV
 #define FuncOnKey           EmptyFuncBKey
 #define FuncPress           EmptyFuncVV
@@ -43,7 +42,7 @@ const PageBase name = { Item::Type::Page, 6, true, namePage, keeper, funcActive,
 #define DEF_PAGE_1(name, titleRU, titleEN, hintRU, hintEN, item1, namePage, keeper, funcActive, funcPress)                                  \
 static Item * items##name[] = {(Item *)&item1};                                                                                             \
 const PageBase name = { Item::Type::Page, 1, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                       \
-    items##name, funcPress, FuncDrawPage, FuncRegSetPage};
+    items##name, funcPress, Page::FuncDraw, FuncRegSetPage};
 
 #define DEF_PAGE_2(name, titleRU, titleEN, hintRU, hintEN, item1, item2, namePage, keeper, funcActive, funcPress)                           \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2};                                                                             \
@@ -53,7 +52,7 @@ const PageBase name = { Item::Type::Page, 2, false, namePage, keeper, funcActive
 #define DEF_PAGE_3(name, titleRU, titleEN, hintRU, hintEN, item1, item2, item3, namePage, keeper, funcActive, funcPress, funcOnKey)         \
 static Item * items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3};                                                             \
 const PageBase name = { Item::Type::Page, 3, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},     \
-    items##name, funcPress, FuncDrawPage, funcOnKey};
+    items##name, funcPress, Page::FuncDraw, funcOnKey};
 
 #define DEF_PAGE_4(name, titleRU, titleEN, hintRU, hintEN,                                                                                  \
     item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)                                               \

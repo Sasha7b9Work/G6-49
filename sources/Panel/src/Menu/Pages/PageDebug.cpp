@@ -629,7 +629,7 @@ DEF_PAGE_5( pDebug,                                                             
     &cShowSends,     ///< ÎÒËÀÄÊÀ - Ïîêàçûâàòü ïàðàìåòðû
     &bSaveSettings,  ///< ÎÒËÀÄÊÀ - Ñîõðàíèòü íàñòðîéêè
 //    cBigSymbols,    ///< ÎÒËÀÄÊÀ - Áîëüùèå ñèìâîëû
-    Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
+    Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 
 

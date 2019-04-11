@@ -168,5 +168,5 @@ DEF_PAGE_7( pageCalibrationA,                                                   
     //&gMinDDS,               ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ A - DDS -5Â
     &gMaxDDS,               ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ A - DDS +5Â
     &gTrigLev,              ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ À - Óð-íü ñèíõð
-    Page::Settings_CalibrationA, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, FuncDrawPage
+    Page::Settings_CalibrationA, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
