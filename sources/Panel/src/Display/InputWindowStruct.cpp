@@ -158,25 +158,29 @@ char *StructValue::StringValue()
     static char buf[20];
     buf[0] = '\0';
 
-
-
     char text[20];
     std::strcpy(text, param->buffer);
     int posComma = POS_COMMA;
 
+    char *pointer = text;
 
     if (param->Is(ParameterValue::Offset))
     {
         IntValue value(text, posComma);
         value.Sub5(text, &posComma);
+        posComma--;
+        SU::ConcatenateSymbol(buf, ' ');
+        SU::ConcatenateSymbol(buf, text[0]);
+        pointer++;
     }
-
-
-    SU::ConcatenateSymbol(buf, SIGN);
+    else
+    {
+        SU::ConcatenateSymbol(buf, SIGN);
+    }
 
     for (int i = 0; i < param->numDigits; i++)
     {
-        SU::ConcatenateSymbol(buf, text[i]);
+        SU::ConcatenateSymbol(buf, pointer[i]);
 
         if (posComma == i)
         {
