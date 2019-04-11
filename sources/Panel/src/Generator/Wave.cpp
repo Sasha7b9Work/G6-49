@@ -686,10 +686,27 @@ ParameterComplex::ParameterComplex(ParameterBase *param[]) : ParameterBase(Compl
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ParameterValue::ParameterValue(int v) : ParameterBase(Value),
+    value((E)v), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
+{
+    std::memset(buffer, 0, NUM_DIGITS + 1);
+
+    if (v == Amplitude || v == Offset)
+    {
+        numDigits = 3;
+    }
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(Value),
     value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
 {
     std::strcpy(buffer, buf);
+
+    if (v == Amplitude || v == Offset)
+    {
+        numDigits = 3;
+    }
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

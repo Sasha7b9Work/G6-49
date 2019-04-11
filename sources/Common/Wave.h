@@ -183,16 +183,7 @@ public:
         Number
     } value;
 
-    ParameterValue(int v = Number) : ParameterBase(Value),
-        value((E)v),
-        hightLightDigit(0),
-        posComma(0),
-        sign('+'),
-        numDigits(NUM_DIGITS),
-        inNumLockMode(false)
-    {
-        std::memset(buffer, 0, NUM_DIGITS + 1);
-    };
+    ParameterValue(int v = Number);
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 

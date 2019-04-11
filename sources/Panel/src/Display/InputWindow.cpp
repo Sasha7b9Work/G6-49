@@ -151,7 +151,7 @@ void InputWindow::DrawDigits(int x, int y)
     }
 
     char buffer[10] = {0};
-    Text::DrawBigText(x, y - 1, SIZE_TEXT, param->NameUnit(buffer));
+    Text::DrawBigText(x + 5, y - 1, SIZE_TEXT, param->NameUnit(buffer));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
