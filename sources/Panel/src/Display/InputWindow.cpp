@@ -264,18 +264,24 @@ void InputWindow::KeyRight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::OrderUp()
 {
-    if(param->order < Order::Number - 1)
+    if (param->NeedChangeOrder())
     {
-        param->order++; //-V803
+        if (param->order < Order::Number - 1)
+        {
+            param->order++; //-V803
+        }
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::OrderDown()
 {
-    if(param->order > 0)
+    if (param->NeedChangeOrder())
     {
-        param->order--; //-V803
+        if (param->order > 0)
+        {
+            param->order--; //-V803
+        }
     }
 }
 

@@ -7,7 +7,7 @@ if %BUILD_STATUS%==0 goto Exit
 
 echo ERROR!!! Device    failed!!!
 
-type ..\..\Device\DeviceOSC.out
+type ..\..\Device\Device.out
 
 :Exit
 

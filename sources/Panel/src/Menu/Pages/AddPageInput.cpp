@@ -4,6 +4,7 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
+#include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
@@ -18,8 +19,11 @@ extern const PageBase pInput;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void Draw_Left(int x, int y)
 {
-    String("Порядок").Draw(x + 14, y + 12);
-    Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillUp);
+    if (FORM_CURRENT->CurrentParameter()->NeedChangeOrder())
+    {
+        String("Порядок").Draw(x + 14, y + 12);
+        Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillUp);
+    }
 }
 
 DEF_SMALL_BUTTON(sbOrderUp,                                                                                           //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
@@ -32,8 +36,11 @@ DEF_SMALL_BUTTON(sbOrderUp,                                                     
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Right(int x, int y)
 {
-    String("Порядок").Draw(x + 14, y + 12);
-    Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillDown);
+    if (FORM_CURRENT->CurrentParameter()->NeedChangeOrder())
+    {
+        String("Порядок").Draw(x + 14, y + 12);
+        Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillDown);
+    }
 }
 
 DEF_SMALL_BUTTON(sbOrderDown,                                                                                         //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---

@@ -6,7 +6,7 @@ set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Exit
 
 echo ERROR!!! Panel    failed!!!
-type ..\..\Panel\PanelOSC.out
+type ..\..\Panel\Panel.out
 
 :Exit
 

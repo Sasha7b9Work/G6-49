@@ -66,6 +66,8 @@ public:
     pString GetStringValue() const;
 
     pString NameUnit(char buffer[10]) const;
+    /// Возвращает true, если параметру можно изменить порядок
+    bool NeedChangeOrder() const;
 
 protected:
     /// Указатель на фрорму, которой принадлежит параметр
@@ -200,6 +202,8 @@ public:
     ParamValue GetValueNano() const;
 
     pString GetStringValue() const;
+    /// Возвращает true, если порядок величины параметра может быть изменён
+    bool NeedChangeOrder() const;
 
     pString Name() const;
     /// Возвращает true, если является параметром типа e
