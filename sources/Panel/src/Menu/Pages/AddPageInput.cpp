@@ -101,10 +101,10 @@ DEF_PAGE_SB( pInput, //-V641 //-V1027
     "ббнд гмювемхъ", "VALUE ENTRY",
     "",
     "",
-    &sbOrderUp,     ///< нймн ббндю - яхлбнк бкебн
-    &sbOrderDown,    ///< нймн ббндю - яхлбнк бопюбн
-    &sbCancel,   ///< нймн ббндю - нрлемю
-    &sbEnter,    ///< нймн ббндю - ббнд
+    &sbOrderUp,         ///< нймн ббндю - яхлбнк бкебн
+    &sbOrderDown,       ///< нймн ббндю - яхлбнк бопюбн
+    &sbCancel,          ///< нймн ббндю - нрлемю
+    &sbEnter,           ///< нймн ббндю - ббнд
     0,
     0,
     Page::SB_Input, 0, FuncActive, FuncPress, FuncDrawPage, OnControl

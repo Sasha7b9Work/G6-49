@@ -287,6 +287,8 @@ public:
     Wave *GetWave() { return wave; };
     /// Возвращает true, если текущий параметр сложный и открыт.
     bool ParameterIsOpened() const;
+
+    ParameterValue *GetParameterValue(ParameterValue::E value);
     /// Функция вызывается при нажатии кнопки "Изменить параметр". Фактически активизирует текущий параметр
     void ChangeParameter();
     /// Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
@@ -297,6 +299,10 @@ public:
     static void SetFormFlash(Chan::E ch, const uint8 data[300]);
     /// Возвращает указатель на данные произвольного сигнала для отрисовки
     static uint8 *GetFormFlash(Chan::E ch);
+    /// Получить смещение сигнала
+    float GetOffset();
+    /// Получить размах сигнала
+    float GetAmplitude();
 
 private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет

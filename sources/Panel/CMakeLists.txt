@@ -27,7 +27,11 @@ add_compile_options(/wd4996)    # This function or variable may be unsafe
 add_compile_options(/wd5027)    # 'xxx': move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
-source_group(common                   REGULAR_EXPRESSION ../common/*.*)
+source_group(common                   FILES ../common/Command.cpp ../common/Command.h
+                                            ../common/Common.cpp  ../common/Common.h
+                                            ../common/Message.cpp ../common/Message.h
+                                            ../common/Transceiver.cpp ../common/Transceiver.h
+                                            ../common/Wave.h)
 source_group(src                      REGULAR_EXPRESSION src/*.*)
 source_group(Display                  REGULAR_EXPRESSION src/Display/*.*)
 source_group(Display\\font            REGULAR_EXPRESSION src/Display/font/*.*)
@@ -46,7 +50,11 @@ source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION src/Menu/Pages/PageSign
 source_group(Settings                 REGULAR_EXPRESSION src/Settings/*.*)
 source_group(Utils                    REGULAR_EXPRESSION src/Utils/*.*)
 
-file(GLOB SOURCES   ../common/*
+file(GLOB SOURCES   ../common/Command.cpp     ../common/Command.h
+                    ../common/Common.cpp      ../common/Common.h
+                    ../common/Message.cpp     ../common/Message.h
+                    ../common/Transceiver.cpp ../common/Transceiver.h
+                    ../common/Wave.h
                     src/*
                     src/Display/*
                     src/Display/font/*

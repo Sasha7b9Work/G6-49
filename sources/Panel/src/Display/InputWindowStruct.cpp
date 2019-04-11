@@ -96,8 +96,25 @@ void StructValue::KeyRight()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void StructValue::SetParameterIfUnderLimit(ParameterValue &_param)
+{
+    if (param->Is(ParameterValue::Offset) || param->Is(ParameterValue::Amplitude))
+    {
+        float offset = ((int)(FORM_CURRENT->GetOffset() * 100.0F)) / 100.0F;
+        float amplitude = ((int)(FORM_CURRENT->GetAmplitude() * 100.0F)) / 100.0F;
+
+        if ((std::fabsf(offset) + amplitude / 2.0F) > 5.0F)
+        {
+            *param = _param;
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::RegLeft()
 {
+    ParameterValue old = *param;        // Сохраняем предыдущее значение параметра
+
     if(DecreaseDigit(param->hightLightDigit))
     {
         if (TUNE_FULL)
@@ -105,11 +122,15 @@ void StructValue::RegLeft()
             SendToGenerator();
         }
     }
+
+    SetParameterIfUnderLimit(old);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::RegRight()
 {
+    ParameterValue old = *param;
+
     if(IncreaseDigit(param->hightLightDigit))
     {
         if(ValueBeforeComma() > 999)
@@ -121,6 +142,8 @@ void StructValue::RegRight()
             SendToGenerator();
         }
     }
+
+    SetParameterIfUnderLimit(old);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

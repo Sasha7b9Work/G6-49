@@ -58,6 +58,8 @@ private:
     void IncreaseOrder();
     /// «аслать текущее значение в генератор
     void SendToGenerator();
+    /// ¬осстановить значение параметра, если превышение offset + amplitude
+    void SetParameterIfUnderLimit(ParameterValue &param);
 };
 
 

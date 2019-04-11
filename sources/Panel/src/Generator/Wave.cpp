@@ -892,3 +892,36 @@ uint8 *Form::GetFormFlash(Chan::E ch)
 {
     return &formFlash[ch][0];
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
+{
+    for (int i = 0; i < NumParameters(); i++)
+    {
+        ParameterBase *param = GetParameter(i);
+
+        if (param->IsValue())
+        {
+            ParameterValue *paramValue = (ParameterValue *)param;
+
+            if (paramValue->Is(_value))
+            {
+                return paramValue;
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Form::GetOffset()
+{
+    return GetParameterValue(ParameterValue::Offset)->GetValueNano().ToFloat() - 5.0F;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+float Form::GetAmplitude()
+{
+    return GetParameterValue(ParameterValue::Amplitude)->GetValueNano().ToFloat();
+}
