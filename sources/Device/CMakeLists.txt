@@ -25,7 +25,10 @@ add_definitions(-DSTM32F407xx)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(/wd4201 /wd4514 /wd4623 /wd4820 /wd5039 /wd5045)
+add_compile_options(/wd4626)
+add_compile_options(/wd5027)
 
+source_group(common             REGULAR_EXPRESSION ../common/*.*)
 source_group(src                REGULAR_EXPRESSION src/*.*)
 source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*.*)
 source_group(FreqMeter          REGULAR_EXPRESSION src/FreqMeter/*.*)
@@ -43,7 +46,8 @@ source_group(SCPI               REGULAR_EXPRESSION src/SCPI/*.*)
 source_group(Settings           REGULAR_EXPRESSION src/Settings/*.*)
 source_group(Utils              REGULAR_EXPRESSION src/Utils/*.*)
 
-file(GLOB SOURCES   src/*
+file(GLOB SOURCES   ../common/*
+                    src/*
                     src/FDrive/*
                     src/FreqMeter/*
                     src/Generator/*

@@ -25,6 +25,7 @@ add_compile_options(/wd4820)    # 'N' bytes padding added after data member
 add_compile_options(/wd4996)    # This function or variable may be unsafe
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
+source_group(common                   REGULAR_EXPRESSION ../common/*.*)
 source_group(src                      REGULAR_EXPRESSION src/*.*)
 source_group(Display                  REGULAR_EXPRESSION src/Display/*.*)
 source_group(Display\\font            REGULAR_EXPRESSION src/Display/font/*.*)
@@ -43,7 +44,8 @@ source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION src/Menu/Pages/PageSign
 source_group(Settings                 REGULAR_EXPRESSION src/Settings/*.*)
 source_group(Utils                    REGULAR_EXPRESSION src/Utils/*.*)
 
-file(GLOB SOURCES   src/*
+file(GLOB SOURCES   ../common/*
+                    src/*
                     src/Display/*
                     src/Display/font/*
                     src/FDrive/*
