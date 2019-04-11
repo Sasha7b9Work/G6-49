@@ -95,8 +95,9 @@ public:
     struct Title
     {
         static const int HEIGHT = 12;
-
     };
+
+    static bool FuncActive() { return true; }
 };
 
 

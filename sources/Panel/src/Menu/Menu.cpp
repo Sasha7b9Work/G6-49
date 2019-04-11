@@ -33,7 +33,7 @@ DEF_PAGE_3( mainPageMenu,
     *PageSignals::pointer,
     *PageFrequencyCounter::pointer,
     *PageService::pointer,
-    Page::Main, 0, FuncActive, FuncPress, FuncOnKey
+    Page::Main, 0, Item::FuncActive, FuncPress, FuncOnKey
 )
 
 Page *Menu::mainPage = (Page *)&mainPageMenu;

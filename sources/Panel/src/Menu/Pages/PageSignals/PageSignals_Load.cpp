@@ -16,28 +16,28 @@ Page *PageSignals::PageLoad::pointer = (Page *)&pageLoad;
 DEF_BUTTON( bUp,                                                                                                                              //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬‚Âı ---
     "¬‚Âı", "¬ÌËÁ",
     "", "",
-    pageLoad, FuncActive, FDrive::PressUp, FuncDraw
+    pageLoad, Item::FuncActive, FDrive::PressUp, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_BUTTON( bDown,                                                                                                                             //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬ÌËÁ ---
     "¬ÌËÁ", "Down",
     "", "",
-    pageLoad, FuncActive, FDrive::PressDown, FuncDraw
+    pageLoad, Item::FuncActive, FDrive::PressDown, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_BUTTON( bEnter,                                                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - Enter ---
     "¬˚·Ó", "Enter",
     "", "",
-    pageLoad, FuncActive, FuncPress, FuncDraw
+    pageLoad, Item::FuncActive, FuncPress, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_BUTTON( bChoose,                                                                                                                     //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ”ÒÚ‡ÌÓ‚ËÚ¸ ---
     "¬˚·‡Ú¸", "Choose",
     "", "",
-    pageLoad, FuncActive, FDrive::PressChoose, FuncDraw
+    pageLoad, Item::FuncActive, FDrive::PressChoose, FuncDraw
 )
 
 
@@ -62,7 +62,7 @@ static bool OnKey(Control event)
     return false;
 }
 
-DEF_PAGE_4( pageLoad,                                                                                                                                //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ ---- //-V641 //-V1027
+DEF_PAGE_4( pageLoad, //-V641 //-V1027                                                                                                                //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ ---
     "«¿√–”« ¿", "LOAD",
     "", "",
     //&bUp,       ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬‚Âı
@@ -72,5 +72,5 @@ DEF_PAGE_4( pageLoad,                                                           
     0,
     0,
     0,
-    Page::Settings_Load, PageSignals::pointer, FuncActive, FuncPress, OnKey, FDrive::Draw
+    Page::Settings_Load, PageSignals::pointer, Item::FuncActive, FuncPress, OnKey, FDrive::Draw
 )

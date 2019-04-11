@@ -30,7 +30,7 @@ DEF_SMALL_BUTTON(sbOrderUp,                                                     
     "Порядок больше", "Order up",
     "Увеличить порядок единицы измерения",
     "Increase the unit order",
-    pInput, FuncActive, InputWindow::OrderUp, Draw_Left
+    pInput, Item::FuncActive, InputWindow::OrderUp, Draw_Left
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ DEF_SMALL_BUTTON(sbOrderDown,                                                   
     "Порядок меньшше", "Order down",
     "Уменьшить порядок единицы измерения",
     "Reduce the unit order",
-    pInput, FuncActive, InputWindow::OrderDown, Draw_Right
+    pInput, Item::FuncActive, InputWindow::OrderDown, Draw_Right
 )
 
 
@@ -67,7 +67,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
     "ЕДИНИЦЫ ИЗМЕРЕНИЯ", "UNITS",
     "Отказаться от ввода нового значения",
     "Unsubscribe from the new value",
-    pInput, FuncActive, OnPress_Cancel, Draw_Cancel
+    pInput, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
     "ВВОД", "ENTER",
     "Подтвердить ввод нового значения",
     "Confirm the new value",
-    pInput, FuncActive, InputWindow::KeyEnter, Draw_Enter
+    pInput, Item::FuncActive, InputWindow::KeyEnter, Draw_Enter
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,5 +107,5 @@ DEF_PAGE_SB( pInput, //-V641 //-V1027
     &sbEnter,           ///< ОКНО ВВОДА - ВВОД
     0,
     0,
-    Page::SB_Input, 0, FuncActive, FuncPress, Page::FuncDraw, OnControl
+    Page::SB_Input, 0, Item::FuncActive, FuncPress, Page::FuncDraw, OnControl
 )

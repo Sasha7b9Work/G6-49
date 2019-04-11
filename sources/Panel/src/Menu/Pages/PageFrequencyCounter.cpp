@@ -41,7 +41,7 @@ DEF_CHOICE_3( cMeasure,                                                         
                             "Frequency measurement",
     "Период", "Period",     "Измерение периода",
                             "Period measurement",
-    FREQ_METER_MEASURE, pFrequencyCounter, FuncActive, OnPress_Measure, FuncDraw
+    FREQ_METER_MEASURE, pFrequencyCounter, Item::FuncActive, OnPress_Measure, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ DEF_CHOICE_2(cInterval,                                                         
                     "The measurement of the frequency meter is started at intervals of 1 second.",
     "10 с", "10 s", "Запуск процесса измерения частомера производится с интервалом 10 секунда.",
                     "The process of measuring the frequency meter is started at intervals of 10 seconds.",
-    FLAG_1, BIT_FREQ_INTERVAL, pFrequencyCounter, FuncActive, OnPress_Interval, FuncDraw
+    FLAG_1, BIT_FREQ_INTERVAL, pFrequencyCounter, Item::FuncActive, OnPress_Interval, FuncDraw
 )
 
 static void OnPress_Interval(bool)
@@ -76,7 +76,7 @@ DEF_CHOICE_5(cBillingTime,                                                      
                             "The measurement duration is 1000 milliseconds.",
     "10000 мс", "10000 ms", "Длительность измерения 10000 миллисекунд.",
                             "The measurement duration is 10,000 milliseconds.",
-    FREQ_BILLING_TIME, pFrequencyCounter, FuncActive, OnPress_BillingTime, FuncDraw
+    FREQ_BILLING_TIME, pFrequencyCounter, Item::FuncActive, OnPress_BillingTime, FuncDraw
 )
 
 static void OnPress_BillingTime(bool)
@@ -93,7 +93,7 @@ DEF_CHOICE_2(cResist,                                                           
                         "Input Impedance 1 MOhm",
     "50 Ом", "50 Ohm",  "Сопротивление входа 50 Ом",
                         "Input Impedance 50 Ohm",
-    FLAG_1, BIT_FREQ_RESIST, pFrequencyCounter, FuncActive, OnPress_Resist, FuncDraw
+    FLAG_1, BIT_FREQ_RESIST, pFrequencyCounter, Item::FuncActive, OnPress_Resist, FuncDraw
 )
 
 static void OnPress_Resist(bool)
@@ -110,7 +110,7 @@ DEF_CHOICE_2(cCouple,                                                           
                     "The DC component is fed to the frequency meter input",
     "Пост", "DC",   "Постоянная составляющая не поступает на вход частотомера",
                     "The DC component is not input to the frequency meter input",
-    FLAG_1, BIT_FREQ_COUPLE, pFrequencyCounter, FuncActive, OnPress_Couple, FuncDraw
+    FLAG_1, BIT_FREQ_COUPLE, pFrequencyCounter, Item::FuncActive, OnPress_Couple, FuncDraw
 )
 
 static void OnPress_Couple(bool)
@@ -127,7 +127,7 @@ DEF_CHOICE_2(cFiltr,                                                            
                                 "LPF at the frequency meter input is disabled",
     ENABLED_RU, ENABLED_EN,     "ФНЧ на входе частотомера водключен",
                                 "LPF at the input of the frequency meter is turned on",
-    FLAG_1, BIT_FREQ_FILTR, pFrequencyCounter, FuncActive, OnPress_Filtr, FuncDraw
+    FLAG_1, BIT_FREQ_FILTR, pFrequencyCounter, Item::FuncActive, OnPress_Filtr, FuncDraw
 )
 
 static void OnPress_Filtr(bool)
@@ -149,7 +149,7 @@ DEF_CHOICE_5(cAvePeriod,                                                        
                         "Measure to produce for a thousand periods",
     "10000", "10000",   "Измерения производить по десяти тысячам периодов",
                         "Measurements are made for ten thousand periods",
-    FREQ_AVE_PERIOD, pFrequencyCounter, FuncActive, OnPress_AvePeriod, FuncDraw
+    FREQ_AVE_PERIOD, pFrequencyCounter, Item::FuncActive, OnPress_AvePeriod, FuncDraw
 )
 
 static void OnPress_AvePeriod(bool)
@@ -172,7 +172,7 @@ DEF_CHOICE_5(cTimeStamps,                                                       
                             "",
     "10 МГц",   "10 MHz",   "", 
                             "",
-    FREQ_TIME_STAMPS, pFrequencyCounter, FuncActive, OnPress_TimeStamps, FuncDraw
+    FREQ_TIME_STAMPS, pFrequencyCounter, Item::FuncActive, OnPress_TimeStamps, FuncDraw
 )
 
 static void OnPress_TimeStamps(bool)
@@ -189,7 +189,7 @@ DEF_CHOICE_2(cTest,                                                             
                                 "",
     ENABLED_RU, ENABLED_EN,     "",
                                 "",
-    FLAG_1, BIT_FREQ_TEST, pFrequencyCounter, FuncActive, OnPress_Test, FuncDraw
+    FLAG_1, BIT_FREQ_TEST, pFrequencyCounter, Item::FuncActive, OnPress_Test, FuncDraw
 )
 
 static void OnPress_Test(bool)
@@ -208,7 +208,7 @@ DEF_GOVERNOR( gLevel,                                                           
     "Уровень", "Level",
     "Подстройка уровня синхронизации",
     "Synchronization level adjustment",
-    FREQ_LEVEL, -100, 100, pFrequencyCounter, FuncActive, OnChange_FreqLevel, EmptyFuncVV, 0
+    FREQ_LEVEL, -100, 100, pFrequencyCounter, Item::FuncActive, OnChange_FreqLevel, EmptyFuncVV, 0
 )
 
 
@@ -222,7 +222,7 @@ DEF_GOVERNOR( gHysteresis,                                                      
     "Гистерезис", "Hysteresis",
     "Задаёт гистерезис для уменьшения влияния помех на точность измерений",
     "Sets hysteresis to reduce the effect of interference on measurement accuracy",
-    FREQ_HYSTERESIS, 0, 100, pFrequencyCounter, FuncActive, OnChange_Hysteresis, EmptyFuncVV, 0
+    FREQ_HYSTERESIS, 0, 100, pFrequencyCounter, Item::FuncActive, OnChange_Hysteresis, EmptyFuncVV, 0
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -241,7 +241,7 @@ DEF_PAGE_8( pFrequencyCounter,  // -V641 // -V1027                              
     //&cAvePeriod,     ///< ЧАСТОТОМЕР - Число периодов
     //&cTimeStamps,    ///< ЧАСТОТОМЕР - Метки времени
     &cTest,          ///< ЧАСТОТОМЕР - Тест
-    Page::FrequencyCounter, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::FrequencyCounter, Menu::mainPage, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 
 

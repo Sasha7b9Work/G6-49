@@ -28,7 +28,7 @@ DEF_CHOICE_2( cChannel,                                                         
               "Controlling the signal parameters at output A.",
     "B", "B", "Управление параметрами сигнала на выходе B.",
               "Controlling the signal parameters at output B.",
-    FLAG_1, BIT_CHANNEL, pageSignals, FuncActive, PageSignals::OnPress_Channel, FuncDraw
+    FLAG_1, BIT_CHANNEL, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
@@ -45,7 +45,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(Form::Impulse),      FORM_EN(Form::Impulse),      "Треугольник",      "Triangle",
     FORM_RU(Form::PacketImpuls), FORM_EN(Form::PacketImpuls), "Пакеты",           "Packets",
     FORM_RU(Form::DDS),          FORM_EN(Form::DDS),          "Произвольный",     "Free",
-    numForm, pageSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
+    numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -59,7 +59,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(Form::Meander),   FORM_EN(Form::Meander),   "Меандр",           "Meander",
     FORM_RU(Form::Impulse),   FORM_EN(Form::Impulse),   "Треугольник",      "Triangle",
     FORM_RU(Form::DDS),       FORM_EN(Form::DDS),       "Произвольный",     "Free",
-    numForm, pageSignals, FuncActive, PageSignals::OnPress_Form, FuncDraw
+    numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -72,14 +72,14 @@ DEF_BUTTON( bChangeParameter,                                                   
     "Изменить", "Change",
     "Открывает окно ввода параметра.",
     "Opens the parameter input window.",
-    pageSignals, FuncActive, OnPress_ChnageParameter, FuncDraw
+    pageSignals, Item::FuncActive, OnPress_ChnageParameter, FuncDraw
 )
 
 DEF_CHOICE_PARAMETER(cParameters,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки.",
     "Choosing a setting for customization.",
-    pageSignals, FuncActive, OnPress_ChnageParameter, WAVE(Chan::A).GetForm(0)
+    pageSignals, Item::FuncActive, OnPress_ChnageParameter, WAVE(Chan::A).GetForm(0)
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ DEF_CHOICE_2(cTypeTune,                                                         
                                     "The signal settings are sent once, after you press the confirm button.",
     "НЕПРЕРЫВНО", "CONTINUOUSLY",   "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
                                     "Sending of signal settings occurs synchronously with changing information on the screen.",
-    FLAG_1, BIT_TUNE_FULL, pageSignals, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_TUNE_FULL, pageSignals, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +116,7 @@ DEF_PAGE_8( pageSignals, //-V641 //-V1027
     &cTypeTune,                                     ///< НАСТРОЙКИ СИГНАЛОВ - Засылки
     PageSignals::PageCalibration::PageA::pointer,   ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A
     PageSignals::PageCalibration::PageB::pointer,   ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B
-    Page::Settings, Menu::mainPage, FuncActive, FuncPress, OnKey, FuncBeforeDraw
+    Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

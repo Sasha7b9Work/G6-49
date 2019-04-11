@@ -26,7 +26,7 @@ DEF_GOVERNOR(gNegativeAD9952,                                                   
     "AD9952 -5В", "AD9952 -5V",
     "Настройка уровня -5В AD9952",
     "Level setting -5V AD9952",
-    CAL_AD9952_OFFSET_NEG(Chan::A), 3000, 4095, pageCalibrationA, FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
+    CAL_AD9952_OFFSET_NEG(Chan::A), 3000, 4095, pageCalibrationA, Item::FuncActive, OnChange_NegativeAD9952, EmptyFuncVV, OnPress_NegativeAD9952
 )
 
 
@@ -45,7 +45,7 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
     "AD9952 +5В", "AD9952 +5V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_POS(Chan::A), 0, 1000, pageCalibrationA, FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
+    CAL_AD9952_OFFSET_POS(Chan::A), 0, 1000, pageCalibrationA, Item::FuncActive, OnChange_PositiveAD9952, EmptyFuncVV, OnPress_PositiveAD9952
 )
 
 
@@ -64,7 +64,7 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
     "AD9952 0В", "AD9952 0V",
     "Настройка уровня +5В AD9952",
     "Level settings +5V AD9952",
-    CAL_AD9952_OFFSET_ZERO(Chan::A), 1000, 3000, pageCalibrationA, FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9952
+    CAL_AD9952_OFFSET_ZERO(Chan::A), 1000, 3000, pageCalibrationA, Item::FuncActive, OnChange_ZeroAD9952, EmptyFuncVV, OnPress_ZeroAD9952
 )
 
 
@@ -83,7 +83,7 @@ DEF_GOVERNOR(gAmplitudeAD9952,                                                  
     "AD9952 Размах", "AD9952 Amplitude",
     "Настройка размаха AD9952",
     "Amplitude settings AD9952",
-    CAL_AD9952_AMPLITUDE(Chan::A), -2000, 2000, pageCalibrationA, FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
+    CAL_AD9952_AMPLITUDE(Chan::A), -2000, 2000, pageCalibrationA, Item::FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ DEF_GOVERNOR( gOffsetDDS,                                                       
     "DDS 0В", "DDS 0V",
     "Установка нулевого смещения формирователя произвольных сигналов",
     "Setting zero offset shaper arbitrary signals",
-    CAL_DDS_OFFSET(Chan::A), 1000, 3000, pageCalibrationA, FuncActive, OnChange_OffsetDDS, FuncBeforeDraw, OnPress_OffsetDDS
+    CAL_DDS_OFFSET(Chan::A), 1000, 3000, pageCalibrationA, Item::FuncActive, OnChange_OffsetDDS, FuncBeforeDraw, OnPress_OffsetDDS
 )
 
 
@@ -120,7 +120,7 @@ DEF_GOVERNOR( gMinDDS,                                                          
     "DDS -5В", "DDS -5V",
     "Установка минимального выходного уровня формирователя произвольных сигналов",
     "Setting the minimum output level shaper arbitrary signals",
-    CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, FuncActive, OnChange_MinDDS, FuncBeforeDraw, OnPress_MinDDS
+    CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, Item::FuncActive, OnChange_MinDDS, FuncBeforeDraw, OnPress_MinDDS
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ DEF_GOVERNOR( gMaxDDS,                                                          
     "DDS +5В", "DDS +5V",
     "Установка минимального выходного уровня формирователя произвольных сигналов",
     "Setting the minimum output level shaper arbitrary signals",
-    CAL_DDS_MAX(Chan::A), -1000, 0, pageCalibrationA, FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
+    CAL_DDS_MAX(Chan::A), -1000, 0, pageCalibrationA, Item::FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ DEF_GOVERNOR( gTrigLev,                                                         
     "Ур-нь синхр", "Trig lev",
     "Установка уровня синхронизации частотомера",
     "Setting the synchronization level of the frequency counter",
-    CAL_FREQ_LEVEL_TRIG, -10000, 10000, pageCalibrationA, FuncActive, OnChange_TrigLev, FuncBeforeDraw, EmptyFuncVB
+    CAL_FREQ_LEVEL_TRIG, -10000, 10000, pageCalibrationA, Item::FuncActive, OnChange_TrigLev, FuncBeforeDraw, EmptyFuncVB
 )
 
 
@@ -168,5 +168,5 @@ DEF_PAGE_7( pageCalibrationA,                                                   
     //&gMinDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS -5В
     &gMaxDDS,               ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A - DDS +5В
     &gTrigLev,              ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА А - Ур-нь синхр
-    Page::Settings_CalibrationA, PageSignals::pointer, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Settings_CalibrationA, PageSignals::pointer, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )

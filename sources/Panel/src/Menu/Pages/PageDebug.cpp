@@ -428,7 +428,7 @@ DEF_CHOICE_2(cConsole,                                                          
                               "Console display enabled",
     ENABLED_RU,  ENABLED_EN,  "Отображение консоли выключено",
                               "Console display disabled",
-    FLAG_1, BIT_CONSOLE, pDebug, FuncActive, OnPress_DebugMode, FuncDraw
+    FLAG_1, BIT_CONSOLE, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -441,7 +441,7 @@ DEF_BUTTON( bSaveSettings,                                                      
     "СОХРАНИТЬ НАСТРОЙКИ", "SAVE SETTINGS",
     "Сохранить текущие настройки",
     "Save current settings",
-    pDebug, FuncActive, OnPress_SaveSettings, FuncDraw
+    pDebug, Item::FuncActive, OnPress_SaveSettings, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -455,7 +455,7 @@ DEF_CHOICE_2( cStatistics,                                                      
                               "Statistics show on",
     ENABLED_RU, ENABLED_EN,   "Показ статистики выключен",
                               "Statistics showing off",
-    FLAG_1, BIT_STATISTICS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_STATISTICS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -467,7 +467,7 @@ DEF_CHOICE_2(   cShowSends,                                                     
                               "Parameter display enabled",
     ENABLED_RU, ENABLED_EN, "Показ параметров выключен",
                             "Parameter display disabled",
-    FLAG_1, BIT_SHOW_SENDS, pDebug, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_SHOW_SENDS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -480,7 +480,7 @@ DEF_BUTTON(bPrev,                                                               
     "Предыдущий", "Previous",
     "Переход к предыдущему регистру",
     "Go to the previous register",
-    pRegisters, FuncActive, OnPress_Prev, FuncDraw
+    pRegisters, Item::FuncActive, OnPress_Prev, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -493,7 +493,7 @@ DEF_BUTTON(bNext,                                                               
     "Следующий", "Next",
     "Переход к следующему регистру",
     "Go to the next register",
-    pRegisters, FuncActive, OnPress_Next, FuncDraw
+    pRegisters, Item::FuncActive, OnPress_Next, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -550,7 +550,7 @@ DEF_BUTTON(bSend,                                                               
     "Заслать", "Send",
     "Открывает окно ввода значения регистра",
     "Opens the register value entry window",
-    pRegisters, FuncActive, OnPress_Send, FuncDraw
+    pRegisters, Item::FuncActive, OnPress_Send, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -563,7 +563,7 @@ DEF_BUTTON(bBackspace,                                                          
     "Backspace", "Backspace",
     "Удаляет последний введённый символ",
     "Deletes the last character you typed",
-    pRegisters, FuncActive, NumberBuffer::PressBackspace, OnDraw_Backspace
+    pRegisters, Item::FuncActive, NumberBuffer::PressBackspace, OnDraw_Backspace
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -582,7 +582,7 @@ DEF_BUTTON(bSave,                                                               
     "Заслать", "Send",
     "Записывает значение в выбранный регистр",
     "Writes a value to the selected register",
-    pRegisters, FuncActive, OnPress_Save, OnDraw_Save
+    pRegisters, Item::FuncActive, OnPress_Save, OnDraw_Save
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -604,7 +604,7 @@ DEF_BUTTON( bCancel,                                                            
     "Отмена", "Cancel",
     "Отменяет засылку значения в регистр и закрывает окно ввода",
     "Cancels the sending of values into the register and closes the input window",
-    pRegisters, FuncActive, OnPress_Cancel, OnDraw_Cancel
+    pRegisters, Item::FuncActive, OnPress_Cancel, OnDraw_Cancel
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -616,7 +616,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     bNext,
     bSend,
     emptyItem,
-    Page::Registers, &pDebug, FuncActive, FuncPress, OnKey, FuncBeforeDraw
+    Page::Registers, &pDebug, Item::FuncActive, FuncPress, OnKey, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -629,7 +629,7 @@ DEF_PAGE_5( pDebug,                                                             
     &cShowSends,     ///< ОТЛАДКА - Показывать параметры
     &bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
 //    cBigSymbols,    ///< ОТЛАДКА - Больщие символы
-    Page::Debug, PageService::pointer, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Debug, PageService::pointer, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 
 

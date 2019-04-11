@@ -36,7 +36,7 @@ DEF_BUTTON(bReset,                                                              
     "СБРОС", "RESET",
     "Сброс настроек на значения по умолчанию",
     "Resetting settings to default values",
-    pService, FuncActive, OnPress_Reset, FuncDraw
+    pService, Item::FuncActive, OnPress_Reset, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ DEF_CHOICE_2( cLanguage,                                                        
                              "Menu language - Russian",
     "АНГЛИЙСКИЙ", "ENGLISH", "Язык меню - английский",
                              "Menu language - English",
-    FLAG_1, BIT_LANG, pService, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_LANG, pService, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ DEF_CHOICE_2(cSizeByte,                                                         
     "7 bits in byte",
     "8 бит", "8 bits", "8 бит в байте",
     "8 bits in byte",
-    FLAG_1, BIT_SIZE_BYTE, pUSB, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_SIZE_BYTE, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ DEF_CHOICE_2(cStopBit,                                                          
     "1 stop bit at the end of the byte",
     "2", "2", "2 стоп-бита в конце байта",
     "2 stop bits at the end of the byte",
-    FLAG_1, BIT_STOP_BIT, pUSB, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_STOP_BIT, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ DEF_CHOICE_2(cParity,                                                           
     "Parity check enabled",
     "НЕ ПРОВЕРЯТЬ", "NOT VERIFY", "Проверка чётности выключена",
     "Parity check off",
-    FLAG_1, BIT_PARITY, pUSB, FuncActive, FuncChangedChoice, FuncDraw
+    FLAG_1, BIT_PARITY, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ DEF_PAGE_3(pUSB,                                                                
     cSizeByte,              ///< USB - РАЗМЕР БАЙТА
     cStopBit,               ///< USB - СТОП-БИТ
     cParity,                ///< USB - ЧЁТНОСТЬ
-    Page::USB, &pService, FuncActive, FuncPress, FuncOnKey
+    Page::USB, &pService, Item::FuncActive, FuncPress, FuncOnKey
 )
 
 
@@ -108,5 +108,5 @@ DEF_PAGE_4( pService,                                                           
     &cLanguage,              ///< СЕРВИС - ЯЗЫК
     &pUSB,
     &pDebug,
-    Page::Service, Menu::mainPage, FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Service, Menu::mainPage, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
