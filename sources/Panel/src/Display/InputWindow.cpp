@@ -70,6 +70,7 @@ void InputWindow::Draw()
     };
 
     x += 40;
+
     y += 10;
 
     DrawDigits(x, y);
@@ -266,7 +267,14 @@ void InputWindow::OrderUp()
 {
     if (param->NeedChangeOrder())
     {
-        if (param->order < Order::Number - 1)
+        Order::E max = Order::One;
+
+        if (param->value == ParameterValue::Frequency)
+        {
+            max = Order::Mega;
+        }
+
+        if (param->order < max)
         {
             param->order++; //-V803
         }
