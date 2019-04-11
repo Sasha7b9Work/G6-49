@@ -972,10 +972,10 @@ Order::E Order::Min(ParameterValue *param)
 {
     if (param->value == ParameterValue::Frequency)
     {
-        return Order::Mega;
+        return Order::Micro;
     }
 
-    return Order::One;
+    return Order::Nano;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -983,8 +983,8 @@ Order::E Order::Max(ParameterValue *param)
 {
     if (param->value == ParameterValue::Frequency)
     {
-        return Order::Micro;
+        return Order::Mega;
     }
 
-    return Order::Nano;
+    return Order::One;
 }
