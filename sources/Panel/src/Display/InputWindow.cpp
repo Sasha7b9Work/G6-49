@@ -100,8 +100,6 @@ void InputWindow::DrawDigits(int x, int y)
         Text::DrawBigText(x, y, 3, param->Name());
     }
 
-    char buf[2] = "0";
-
     y += 40;
 
     if(param->sign != ' ')
@@ -139,7 +137,7 @@ void InputWindow::DrawDigits(int x, int y)
 
         if (text[i])
         {
-            buf[0] = text[i];
+            char buf[2] = { text[i], 0 };
             Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
         }
 

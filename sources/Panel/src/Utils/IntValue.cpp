@@ -36,22 +36,6 @@ void IntValue::Sub5(char *bufferOut, int *_posComma)
 
     ToString(bufferOut);
     *_posComma = posComma + 1;
-
-    if (whole >= 5)
-    {
-        /*
-        *_posComma = posComma;
-        for (int i = 2; i < 10; i++)
-        {
-            char symbol = bufferOut[i];
-            bufferOut[i - 1] = symbol;
-            if (symbol == 0)
-            {
-                break;
-            }
-        }
-        */
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
