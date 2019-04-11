@@ -102,11 +102,6 @@ void InputWindow::DrawDigits(int x, int y)
 
     y += 40;
 
-    if(param->sign != ' ')
-    {
-        Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, param->sign);
-    }
-
     char text[10];
     std::strcpy(text, param->buffer);
 
@@ -114,11 +109,21 @@ void InputWindow::DrawDigits(int x, int y)
 
     int8 hightLightDigit = param->hightLightDigit;
 
+    char *pointer = text;
+
     if (param->Is(ParameterValue::Offset))
     {
         TransformOffset(text, &posComma);
-        x -= 24;
-        hightLightDigit++;
+        pointer++;
+        posComma--;
+        Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, text[0]);
+    }
+    else
+    {
+        if (param->sign != ' ')
+        {
+            Text::DrawBigChar(x - 24, y - 1, SIZE_TEXT, param->sign);
+        }
     }
 
     for (int i = 0; i < param->numDigits; i++)
@@ -135,11 +140,8 @@ void InputWindow::DrawDigits(int x, int y)
             Font::SetType(Font::Type::_7);
         }
 
-        if (text[i])
-        {
-            char buf[2] = { text[i], 0 };
-            Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
-        }
+        char buf[2] = { pointer[i], 0 };
+        Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
 
         x += 24;
 
