@@ -640,7 +640,7 @@ bool Wave::StartModeIsSingle()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool ParameterBase::AssumeArbitaryOrder() const
 {
-    if (type == Value)
+    if (IsValue())
     {
         return ((ParameterValue *)this)->AssumeArbitaryOrder();
     }

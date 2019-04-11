@@ -199,8 +199,6 @@ public:
     ParamValue GetValueNano() const;
 
     pString GetStringValue() const;
-    /// ¬озвращает true, если пор€док величины параметра может быть разным
-    bool AssumeArbitaryOrder() const;
     /// ”величить пор€док
     void IncreaseOrder();
     /// ”меньшить пор€док
@@ -229,7 +227,11 @@ public:
     char sign;
 
     int numDigits;
+
+    /// ¬озвращает true, если пор€док величины параметра может быть разным
+    bool AssumeArbitaryOrder() const;
 private:
+   
 
     float min;
 
