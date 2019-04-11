@@ -137,7 +137,7 @@ public:
         Number
     } value;
 
-    ParameterComplex(ParameterBase **param);
+    ParameterComplex(E v, ParameterBase **param);
 
     pString Name() const;
     

@@ -676,7 +676,7 @@ ParameterChoice::ParameterChoice(E v, pString var0ru, pString var0en, pString va
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ParameterComplex::ParameterComplex(ParameterBase *param[]) : ParameterBase(Complex), value(Number), params(param) //-V2504
+ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(Complex), value(v), params(param) //-V2504
 {
     numParams = 0;
     while (params[numParams])
