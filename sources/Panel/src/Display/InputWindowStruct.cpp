@@ -63,7 +63,7 @@ void StructValue::KeyLeft()
 	}
     else
     {
-        if (!OnlyOneRigthDigit() && POS_COMMA != NUM_DIGITS - 1)
+        if (!OnlyOneRigthDigit() && (POS_COMMA != NUM_DIGITS - 1))
         {
             ShiftToRight();
         }
@@ -73,9 +73,9 @@ void StructValue::KeyLeft()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::KeyRight()
 {
-	if (param->hightLightDigit < NUM_DIGITS - 1)
+	if (param->hightLightDigit < (NUM_DIGITS - 1))
 	{
-		if (param->hightLightDigit == NUM_DIGITS - 2 && param->buffer[NUM_DIGITS - 1] == '.')
+		if ((param->hightLightDigit == NUM_DIGITS - 2) && param->buffer[NUM_DIGITS - 1] == '.')
 		{
 			return;
 		}
@@ -161,7 +161,6 @@ char *StructValue::StringValue()
 
     char text[20];
     std::strcpy(text, param->buffer);
-    int numDigits = NUM_DIGITS;
     int posComma = POS_COMMA;
 
 
@@ -174,7 +173,7 @@ char *StructValue::StringValue()
 
     SU::ConcatenateSymbol(buf, SIGN);
 
-    for (int i = 0; i < numDigits; i++)
+    for (int i = 0; i < NUM_DIGITS; i++)
     {
         SU::ConcatenateSymbol(buf, text[i]);
 
