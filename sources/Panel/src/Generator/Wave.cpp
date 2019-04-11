@@ -384,7 +384,7 @@ pString ParameterValue::GetStringValue() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool ParameterValue::NeedChangeOrder() const
+bool ParameterValue::AssumeArbitaryOrder() const
 {
     if (value == Offset || value == Amplitude)
     {
@@ -392,6 +392,30 @@ bool ParameterValue::NeedChangeOrder() const
     }
 
     return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void ParameterValue::IncreaseOrder()
+{
+    if (AssumeArbitaryOrder())
+    {
+        if (order < Order::Max(this))
+        {
+            order++;
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void ParameterValue::DecreaseOrder()
+{
+    if (AssumeArbitaryOrder())
+    {
+        if (order > Order::Min(this))
+        {
+            order--;
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -614,11 +638,11 @@ bool Wave::StartModeIsSingle()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool ParameterBase::NeedChangeOrder() const
+bool ParameterBase::AssumeArbitaryOrder() const
 {
     if (type == Value)
     {
-        return ((ParameterValue *)this)->NeedChangeOrder();
+        return ((ParameterValue *)this)->AssumeArbitaryOrder();
     }
 
     return true;
@@ -941,4 +965,26 @@ float Form::GetOffset()
 float Form::GetAmplitude()
 {
     return GetParameterValue(ParameterValue::Amplitude)->GetValueNano().ToFloat();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Order::E Order::Min(ParameterValue *param)
+{
+    if (param->value == ParameterValue::Frequency)
+    {
+        return Order::Mega;
+    }
+
+    return Order::One;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Order::E Order::Max(ParameterValue *param)
+{
+    if (param->value == ParameterValue::Frequency)
+    {
+        return Order::Micro;
+    }
+
+    return Order::Nano;
 }

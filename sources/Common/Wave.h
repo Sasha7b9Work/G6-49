@@ -5,6 +5,9 @@
 #include "Common.h"
 
 
+class ParameterValue;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Order
 {
@@ -23,12 +26,12 @@ struct Order
     pString Name() const;
     Order& operator++(int);
     Order& operator--(int);
+    static Order::E Min(ParameterValue *param);
+    static Order::E Max(ParameterValue *param);
 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//#define NUM_DIGITS 5
-
 class Form;
 class Wave;
 
@@ -67,7 +70,7 @@ public:
 
     pString NameUnit(char buffer[10]) const;
     /// Возвращает true, если параметру можно изменить порядок
-    bool NeedChangeOrder() const;
+    bool AssumeArbitaryOrder() const;
 
 protected:
     /// Указатель на фрорму, которой принадлежит параметр
@@ -196,8 +199,12 @@ public:
     ParamValue GetValueNano() const;
 
     pString GetStringValue() const;
-    /// Возвращает true, если порядок величины параметра может быть изменён
-    bool NeedChangeOrder() const;
+    /// Возвращает true, если порядок величины параметра может быть разным
+    bool AssumeArbitaryOrder() const;
+    /// Увеличить порядок
+    void IncreaseOrder();
+    /// Уменьшить порядок
+    void DecreaseOrder();
 
     pString Name() const;
     /// Возвращает true, если является параметром типа e

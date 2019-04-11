@@ -265,39 +265,13 @@ void InputWindow::KeyRight()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::OrderUp()
 {
-    if (param->NeedChangeOrder())
-    {
-        Order::E max = Order::One;
-
-        if (param->value == ParameterValue::Frequency)
-        {
-            max = Order::Mega;
-        }
-
-        if (param->order < max)
-        {
-            param->order++; //-V803
-        }
-    }
+    param->IncreaseOrder();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::OrderDown()
 {
-    if (param->NeedChangeOrder())
-    {
-        Order::E min = Order::Nano;
-
-        if (param->value == ParameterValue::Frequency)
-        {
-            min = Order::Micro;
-        }
-
-        if (param->order > min)
-        {
-            param->order--; //-V803
-        }
-    }
+    param->DecreaseOrder();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
