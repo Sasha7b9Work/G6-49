@@ -448,6 +448,15 @@ void StructValue::SaveValue()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::PressKey(Control key)
 {
+    if (key.value == Control::Dot)
+    {
+        POS_COMMA = CURRENT_POS - 1;
+
+        return;
+    }
+
+
+
     static const struct StrControl
     {
         Control::E control;
