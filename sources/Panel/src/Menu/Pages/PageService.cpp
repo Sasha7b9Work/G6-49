@@ -39,18 +39,6 @@ DEF_BUTTON(bReset,                                                              
     pService, Item::FuncActive, OnPress_Reset, FuncDraw
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( cLanguage,                                                                                               //--- СЕРВИС - ЯЗЫК ---
-    "ЯЗЫК", "LANGUAGE",
-    "Выбор языка меню",
-    "Selecting the menu language",
-    "РУССКИЙ",    "RUSSIAN", "Язык меню - русский",
-                             "Menu language - Russian",
-    "АНГЛИЙСКИЙ", "ENGLISH", "Язык меню - английский",
-                             "Menu language - English",
-    FLAG_1, BIT_LANG, pService, Item::FuncActive, FuncChangedChoice, FuncDraw
-)
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_CHOICE_2(cSizeByte,                                                                                                   //--- USB - РАЗМЕР БАЙТА ---
     "РАЗМЕР БАЙТА", "SIZE BYTE",
@@ -100,13 +88,12 @@ DEF_PAGE_3(pUSB,                                                                
 extern const PageBase pDebug;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_PAGE_4( pService,                                                                                                                 //--- СЕРВИС --- //-V641 //-V1027
+DEF_PAGE_3( pService,                                                                                                                 //--- СЕРВИС --- //-V641 //-V1027
     "СЕРВИС", "SERVICE",
     "Сервисные функции",
     "Service functions",
-    &bReset,
-    &cLanguage,              ///< СЕРВИС - ЯЗЫК
-    &pUSB,
-    &pDebug,
-    Page::Service, Menu::mainPage, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    bReset,
+    pUSB,
+    pDebug,
+    Page::Service, Menu::mainPage, Item::FuncActive, FuncPress, FuncOnKey
 )

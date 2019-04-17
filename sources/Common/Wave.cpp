@@ -3,21 +3,21 @@
 #include "Wave.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-pString Form::Name(Language::E lang) const
+pString Form::Name() const
 {
-    DEF_STRUCT(StructName, pString) names[Form::Number][2] =
+    DEF_STRUCT(StructName, pString) names[Form::Number] =
     {
-        {"Синус",        "Sine"},
-        {"Пила+",        "Ramp+"},
-        {"Пила-",        "Ramp-"},
-        {"Треугольник",  "Triangle"},
-        {"Меандр",       "Meander"},
-        {"Импульс",      "Impulse"},
-        {"Пакет",        "Message"},
-        {"Произвольный", "Hand"}
+        "Синус",
+        "Пила+",
+        "Пила-",
+        "Треугольник",
+        "Меандр",
+        "Импульс",
+        "Пакет",
+        "Произвольный"
     };
 
-    return names[value][lang].val;
+    return names[value].val;
 }
 
 

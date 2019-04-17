@@ -84,15 +84,9 @@ void Hint::Draw()
         int width = 319 - Item::WIDTH;
 
         y0 = Text::DrawTextInBoundedRectWithTransfers(x0, y0, width,
-            LANG_RU ?
             "Включён режим подсказок.\n"
             "Для получения информации по элементу меню или назначению кнопки используйте соответствующий орган управления.\n"
-            "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC."
-            :
-            "Prompt mode is enabled.\n"
-            "For information about the menu item or the purpose of the button, use the appropriate control.\n"
-            "To exit the prompt mode, press and hold the ESC key."
-            ,
+            "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC.",
             Color::BACK, Color::FILL, Color::GRAY_50);
 
         Painter::DrawFilledRectangle(x0, y0, width, 239 - y0 - 1, Color::BACK, Color::FILL);
@@ -161,7 +155,7 @@ int Hint::DrawDetailedHint(Choice *choice, int x0, int y0, int width, int start,
     for (int i = start; i <= end; i++)
     {
         y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width, colorGreen, "%d. \"%s\" %s", number++,
-            choice->NameSubItem(i).CString(), LANG_RU ? choice->hintsRu[i] : choice->hintsEn[i]) + 5;
+            choice->NameSubItem(i).CString(), choice->hintsRu[i]) + 5;
 
     }
 

@@ -605,7 +605,7 @@ String Item::FullPath()
 
     while(parent)
     {
-        titles[pointer++] = parent->titleHint[LANG];
+        titles[pointer++] = parent->titleHint[0];
         parent = parent->Keeper();
     }
 

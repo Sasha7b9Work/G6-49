@@ -35,8 +35,6 @@ extern const PageBase pInput;
 #define CHANNEL_ENABLED(ch)     ((FLAG_1 >> ((ch) + BIT_CHAN_A)) & 0x01)
 #define SWITCH_CHANNEL_A        (FLAG_1 ^= (1 << (BIT_CHAN_A)))
 #define SWITCH_CHANNEL_B        (FLAG_1 ^= (1 << (BIT_CHAN_B)))
-#define LANG                    ((Language::E)BIT_FL1(BIT_LANG))
-#define LANG_RU                 (LANG == Language::RU)
 #define CURRENT_CHANNEL         ((Chan::E)BIT_FL1(BIT_CHANNEL))
 #define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == Chan::A)
 #define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == Chan::B)
@@ -94,7 +92,7 @@ public:
 #define BIT_DBG_MODE      5   ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
 
 #define BIT_STATISTICS    7   ///<          - если 1, то показывать статистику
-#define BIT_LANG          8   ///< Language - выбранный язык
+#define BIT_NOT_USED      8
 #define BIT_CHAN_A        9   ///<          - бит, отвечающий за включённый канал A
 #define BIT_CHAN_B        10  ///<          - бит, отвечающий за включённый канал B
 #define BIT_CHANNEL       11  ///< Chan  - текущий выбранный канал

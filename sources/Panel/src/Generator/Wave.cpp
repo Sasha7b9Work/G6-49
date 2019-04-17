@@ -24,21 +24,21 @@ static uint8 formFlash[Chan::Number][SIZE_BUFFER];
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-pString Form::Name(Language::E lang) const
+pString Form::Name() const
 {
-    DEF_STRUCT(StructName, const char *) names[Form::Number][2] =
+    DEF_STRUCT(StructName, const char *) names[Form::Number] =
     {
-        {"Синус",        "Sine"},
-        {"Пила+",        "Ramp+"},
-        {"Пила-",        "Ramp-"},
-        {"Треугольник",  "Triangle"},
-        {"Меандр",       "Meander"},
-        {"Импульс",      "Impulse"},
-        {"Пакет",        "Message"},
-        {"Произвольный", "Hand"}
+        "Синус",
+        "Пила+",
+        "Пила-",
+        "Треугольник",
+        "Меандр",
+        "Импульс",
+        "Пакет",
+        "Произвольный"
     };
 
-    return names[value][lang].val;
+    return names[value].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -74,28 +74,28 @@ pString Register::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::Name() const
 {
-    DEF_STRUCT(StructName, const char *) nameParameter[ParameterValue::Number][2] =
+    DEF_STRUCT(StructName, const char *) nameParameter[ParameterValue::Number] =
     {
-        {"Частота",        "Frequency"},
-        {"Период",         "Period"},
-        {"Размах",         "Amplitude"},
-        {"Смещение",       "Offset"},
-        {"Длительность",   "Duration"},
-        {"Скважность",     "Duty ratio"},
-        {"Фаза",           "Phapse"},
-        {"Задержка",       "Delay"},
-        {"Вр нарастания",  "Build-up time"},
-        {"Вр спада",       "Release time"},
-        {"Вр пика",        "Peak time"},
-        {"Коэфф заполн",   "Duty factor"},
-        {"Длительность",   "Duration"},
-        {"Период",         "Period"},
-        {"Период пакета",  "Message period"},
-        {"Кол-во имп",     "Num of puls"},
-        {"     Выход ( ESC )", "     Exit ( ESC )"}
+        "Частота",
+        "Период",
+        "Размах",
+        "Смещение",
+        "Длительность",
+        "Скважность",
+        "Фаза",
+        "Задержка",
+        "Вр нарастания",
+        "Вр спада",
+        "Вр пика",
+        "Коэфф заполн",
+        "Длительность",
+        "Период",
+        "Период пакета",
+        "Кол-во имп",
+        "     Выход ( ESC )"
     };
 
-    return nameParameter[value][LANG].val;
+    return nameParameter[value].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -423,14 +423,13 @@ pString ParameterComplex::GetStringValue() const
 {
     if(Is(Manipulation))
     {
-        static const char *values[2][2] =
+        static const char *values[2] =
         {
-            {" Откл", " Вкл"},
-            {" Off",  " On"}
+            " Откл", " Вкл"
         };
 
         ParameterValue *pointer = (ParameterValue *)this;   // -V1027
-        return values[LANG][SINE_MANIPULATION_ENABLED(pointer->GetForm()->GetWave()->GetChannel()) ? 1 : 0];
+        return values[SINE_MANIPULATION_ENABLED(pointer->GetForm()->GetWave()->GetChannel()) ? 1 : 0];
     }
 
     return "";
@@ -439,28 +438,28 @@ pString ParameterComplex::GetStringValue() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::NameUnit(char buf[10]) const
 {
-    DEF_STRUCT(StructName, const char *) names[ParameterValue::Number][2] =
+    DEF_STRUCT(StructName, const char *) names[ParameterValue::Number] =
     {
-        {"Гц",  "Hz"},
-        {"с",   "s"},
-        {"В",   "V"},
-        {"В",   "V"},
-        {"с",   "s"},
-        {"",    ""},
-        {"\x7b","\x7b"},
-        {"с",   "s"},
-        {"",    ""},
-        {"",    ""},
-        {"",    ""},
-        {"",    ""},
-        {"c",   "s"},
-        {"c",   "s"},
-        {"c",   "s"},
-        {"",    ""},
-        {"",    ""}
+        "Гц",
+        "с",
+        "В",
+        "В",
+        "с",
+        "",
+        "\x7b",
+        "с",
+        "",
+        "",
+        "",
+        "",
+        "c",
+        "c",
+        "c",
+        "",
+        ""
     };
 
-    sprintf(buf, "%s%s", order.Name(), names[value][LANG].val);
+    sprintf(buf, "%s%s", order.Name(), names[value].val);
     return buf;
 }
 
@@ -483,26 +482,26 @@ bool ParameterValue::IsOpened()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterChoice::Name() const
 {
-    DEF_STRUCT(StructName, const char *) namesParam[ParameterChoice::Number][2] =
+    DEF_STRUCT(StructName, const char *) namesParam[ParameterChoice::Number] =
     {
-        {"Полярность",  "Polarity"},
-        {"Запуск",      "Mode start"},
-        {"Вид",         "Type"},
-        {"Манипуляция", "Manipulation"}
+        "Полярность",
+        "Запуск",
+        "Вид",
+        "Манипуляция"
     };
 
-    return namesParam[value][LANG].val;
+    return namesParam[value].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterComplex::Name() const
 {
-    DEF_STRUCT(StructName, const char *) namesParams[ParameterComplex::Number][2] =
+    DEF_STRUCT(StructName, const char *) namesParams[ParameterComplex::Number] =
     {
-        {"Манипуляция", "Manipulation"}
+        "Манипуляция"
     };
 
-    return namesParams[value][LANG].val;
+    return namesParams[value].val;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -553,7 +552,7 @@ pString ParameterBase::GetStringValue() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterChoice::GetStringValue() const
 {
-    return names[choice][LANG];
+    return names[choice][0];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
