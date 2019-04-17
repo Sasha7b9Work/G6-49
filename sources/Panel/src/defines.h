@@ -58,9 +58,7 @@ typedef void (*pFuncVB)(bool);
 #define ClearBit(value, bit) ((value) &= (~(1 << (bit))))
 
 #define ENABLED_RU  "Вкл"
-#define ENABLED_EN  "On"
 #define DISABLED_RU "Откл"
-#define DISABLED_EN "Off"
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \

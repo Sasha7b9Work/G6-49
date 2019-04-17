@@ -103,10 +103,9 @@ public:
 
     pString Name() const;
 
-    ParameterChoice(E v, pString var0ru, pString var0en, pString var1ru, pString var1en, funcDraw func0 = 0, funcDraw func1 = 0);
+    ParameterChoice(E v, pString var0, pString var1, funcDraw func0 = 0, funcDraw func1 = 0);
 
-    ParameterChoice(E v, pString var0ru, pString var0en, pString var1ru, pString var1en, 
-                         pString var2ru, pString var2en, pString var3ru, pString var3en);
+    ParameterChoice(E v, pString var0, pString var1, pString var2, pString var3);
 
     pString GetStringValue() const;
 
@@ -122,7 +121,7 @@ private:
     /// Количество вариантов
     int num;
     /// Варианты на русском языке
-    char *names[4][2];
+    char *names[4];
 
     funcDraw func[4];
 };

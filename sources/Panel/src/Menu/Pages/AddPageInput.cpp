@@ -27,9 +27,8 @@ static void Draw_Left(int x, int y)
 }
 
 DEF_SMALL_BUTTON(sbOrderUp,                                                                                           //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
-    "Порядок больше", "Order up",
+    "Порядок больше",
     "Увеличить порядок единицы измерения",
-    "Increase the unit order",
     pInput, Item::FuncActive, InputWindow::OrderUp, Draw_Left
 )
 
@@ -44,9 +43,8 @@ static void Draw_Right(int x, int y)
 }
 
 DEF_SMALL_BUTTON(sbOrderDown,                                                                                         //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
-    "Порядок меньшше", "Order down",
+    "Порядок меньшше",
     "Уменьшить порядок единицы измерения",
-    "Reduce the unit order",
     pInput, Item::FuncActive, InputWindow::OrderDown, Draw_Right
 )
 
@@ -64,9 +62,8 @@ static void Draw_Cancel(int x, int y)
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                               //--- ОКНО ВВОДА - ОТМЕНА ---
-    "ЕДИНИЦЫ ИЗМЕРЕНИЯ", "UNITS",
+    "ЕДИНИЦЫ ИЗМЕРЕНИЯ",
     "Отказаться от ввода нового значения",
-    "Unsubscribe from the new value",
     pInput, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
 
@@ -78,9 +75,8 @@ static void Draw_Enter(int x, int y)
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                  //--- ОКНО ВВОДА - ВВОД ---
-    "ВВОД", "ENTER",
+    "ВВОД",
     "Подтвердить ввод нового значения",
-    "Confirm the new value",
     pInput, Item::FuncActive, InputWindow::KeyEnter, Draw_Enter
 )
 
@@ -98,8 +94,7 @@ static bool OnControl(Control key)
 Page *AddPageInput::pointer = (Page *)&pInput;
 
 DEF_PAGE_SB( pInput, //-V641 //-V1027
-    "ВВОД ЗНАЧЕНИЯ", "VALUE ENTRY",
-    "",
+    "ВВОД ЗНАЧЕНИЯ",
     "",
     &sbOrderUp,         ///< ОКНО ВВОДА - СИМВОЛ ВЛЕВО
     &sbOrderDown,       ///< ОКНО ВВОДА - СИМВОЛ ВПРАВО

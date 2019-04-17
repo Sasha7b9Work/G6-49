@@ -420,14 +420,11 @@ static void OnPress_DebugMode(bool)
     Generator::SetDebugMode(DEBUG_MODE_ENABLED);
 }
 
-DEF_CHOICE_2(cConsole,                                                                                                     //--- ОТЛАДКА - КОНСОЛЬ ---
-    "КОНСОЛЬ", "CONSOLE",
+DEF_CHOICE_2( cConsole,                                                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ ---
+    "КОНСОЛЬ",
     "Включает и выключает отображение отладочной консоли",
-    "Turns on or off the display of the debug console",
-    DISABLED_RU, DISABLED_EN, "Отображение консоли включено",
-                              "Console display enabled",
-    ENABLED_RU,  ENABLED_EN,  "Отображение консоли выключено",
-                              "Console display disabled",
+    DISABLED_RU, "Отображение консоли включено",
+    ENABLED_RU,  "Отображение консоли выключено",
     FLAG_1, BIT_CONSOLE, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
 )
 
@@ -437,36 +434,29 @@ static void OnPress_SaveSettings()
     set.Save();
 }
 
-DEF_BUTTON( bSaveSettings,                                                                                     //--- ОТЛАДКА - СОХРАНИТЬ НАСТРОЙКИ ---
-    "СОХРАНИТЬ НАСТРОЙКИ", "SAVE SETTINGS",
+DEF_BUTTON( bSaveSettings,                                                                                                                            //--- ОТЛАДКА - СОХРАНИТЬ НАСТРОЙКИ ---
+    "СОХРАНИТЬ НАСТРОЙКИ",
     "Сохранить текущие настройки",
-    "Save current settings",
     pDebug, Item::FuncActive, OnPress_SaveSettings, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2( cStatistics,                                                                                              //--- ОТЛАДКА - Статистика ---
-    "СТАТИСТИКА", "STATISTICS",
-    "Включает/отключает показ на экране статистики по частоте кадров в виде ФПС / время отрисовки одного кадра / время, потраченое на отрисовку за "
-    "весь кадр",
-    "Enables / disables the display of statistics on the frame rate in the form of FPS / time of drawing one frame / time spent on rendering for the "
-    "whole frame",
-    DISABLED_RU, DISABLED_EN, "Показ статистики включён",
-                              "Statistics show on",
-    ENABLED_RU, ENABLED_EN,   "Показ статистики выключен",
-                              "Statistics showing off",
+DEF_CHOICE_2( cStatistics,                                                                                                                                     //--- ОТЛАДКА - Статистика ---
+    "СТАТИСТИКА",
+    "Включает/отключает показ на экране статистики по частоте кадров в виде ФПС / время отрисовки одного кадра / время, потраченое на отрисовку за весь кадр"
+    ,
+    DISABLED_RU, "Показ статистики включён",
+    ENABLED_RU,  "Показ статистики выключен",
     FLAG_1, BIT_STATISTICS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(   cShowSends,                                                                                   //--- ОТЛАДКА - Показывать параметры ---
-    "Показывать параметры", "Show parameters",
-    "Показывает параметры, засылаемые в ПЛИС",
-    "Shows the parameters sent to the FPGA",
-    DISABLED_RU, DISABLED_EN, "Показ параметров включён",
-                              "Parameter display enabled",
-    ENABLED_RU, ENABLED_EN, "Показ параметров выключен",
-                            "Parameter display disabled",
+DEF_CHOICE_2( cShowSends,                                                                                                                            //--- ОТЛАДКА - Показывать параметры ---
+    "Показывать параметры",
+    "Показывает параметры, засылаемые в ПЛИС"
+    ,
+    DISABLED_RU, "Показ параметров включён",
+    ENABLED_RU,  "Показ параметров выключен",
     FLAG_1, BIT_SHOW_SENDS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -476,10 +466,9 @@ static void OnPress_Prev()
     CircleDecrease<uint8>((uint8 *)&currentRegister, 0, Register::Number - 1);
 }
 
-DEF_BUTTON(bPrev,                                                                                                     //--- РЕГИСТРЫ - Предыдущий ---
-    "Предыдущий", "Previous",
+DEF_BUTTON( bPrev,                                                                                                                                            //--- РЕГИСТРЫ - Предыдущий ---
+    "Предыдущий",
     "Переход к предыдущему регистру",
-    "Go to the previous register",
     pRegisters, Item::FuncActive, OnPress_Prev, FuncDraw
 )
 
@@ -489,10 +478,9 @@ static void OnPress_Next()
     CircleIncrease<uint8>((uint8 *)&currentRegister, 0, Register::Number - 1);
 }
 
-DEF_BUTTON(bNext,                                                                                                       //--- РЕГИСТРЫ - Следующий ---
-    "Следующий", "Next",
+DEF_BUTTON( bNext,                                                                                                                                             //--- РЕГИСТРЫ - Следующий ---
+    "Следующий",
     "Переход к следующему регистру",
-    "Go to the next register",
     pRegisters, Item::FuncActive, OnPress_Next, FuncDraw
 )
 
@@ -546,10 +534,9 @@ static void OnPress_Send()
                                                                      currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
 }
 
-DEF_BUTTON(bSend,                                                                                                         //--- РЕГИСТРЫ - Заслать ---
-    "Заслать", "Send",
+DEF_BUTTON( bSend,                                                                                                                                               //--- РЕГИСТРЫ - Заслать ---
+    "Заслать",
     "Открывает окно ввода значения регистра",
-    "Opens the register value entry window",
     pRegisters, Item::FuncActive, OnPress_Send, FuncDraw
 )
 
@@ -559,10 +546,9 @@ static void OnDraw_Backspace(int x, int y)
     Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Left, Color::FILL);
 }
 
-DEF_BUTTON(bBackspace,                                                                                   //--- РЕГИСТРЫ - Input window - Backspace ---
-    "Backspace", "Backspace",
+DEF_BUTTON( bBackspace,                                                                                                                         //--- РЕГИСТРЫ - Input window - Backspace ---
+    "Backspace",
     "Удаляет последний введённый символ",
-    "Deletes the last character you typed",
     pRegisters, Item::FuncActive, NumberBuffer::PressBackspace, OnDraw_Backspace
 )
 
@@ -578,10 +564,9 @@ static void OnDraw_Save(int x, int y)
     Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Save, Color::FILL);
 }
 
-DEF_BUTTON(bSave,                                                                                          //--- РЕГИСТРЫ - Окно ввода --- Заслать ---
-    "Заслать", "Send",
+DEF_BUTTON( bSave,                                                                                                                                //--- РЕГИСТРЫ - Окно ввода --- Заслать ---
+    "Заслать",
     "Записывает значение в выбранный регистр",
-    "Writes a value to the selected register",
     pRegisters, Item::FuncActive, OnPress_Save, OnDraw_Save
 )
 
@@ -601,16 +586,14 @@ static void OnDraw_Cancel(int x, int y)
 }
 
 DEF_BUTTON( bCancel,                                                                                                                               //--- РЕГИСТРЫ - Input window - Отмена ---
-    "Отмена", "Cancel",
+    "Отмена",
     "Отменяет засылку значения в регистр и закрывает окно ввода",
-    "Cancels the sending of values into the register and closes the input window",
     pRegisters, Item::FuncActive, OnPress_Cancel, OnDraw_Cancel
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_4_VAR( pRegisters,                                                                                                                                        //--- РЕГИСТРЫ --- //-V641
-    "РЕГИСТРЫ", "REGISTERS",
-    "",
+    "РЕГИСТРЫ",
     "",
     bPrev,
     bNext,
@@ -621,14 +604,13 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_PAGE_5( pDebug,                                                                                                                                        //--- ОТЛАДКА --- //-V641 //-V1027
-    "ОТЛАДКА", "DEBUG",
-    "", "",
+    "ОТЛАДКА",
+    "",
     &pRegisters,     ///< ОТЛАДКА - Регистры
     &cConsole,       ///< ОТЛАДКА - Консоль
     &cStatistics,    ///< ОТЛАДКА - Статистика
     &cShowSends,     ///< ОТЛАДКА - Показывать параметры
     &bSaveSettings,  ///< ОТЛАДКА - Сохранить настройки
-//    cBigSymbols,    ///< ОТЛАДКА - Больщие символы
     Page::Debug, PageService::pointer, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 

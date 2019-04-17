@@ -21,44 +21,42 @@ static int numForm = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_CHOICE_2( cChannel,                                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
-    "КАНАЛ", "CHANNEL",
-    "Выбор канала для настройки.",
-    "Selecting a channel to set up.",
-    "A", "A", "Управление параметрами сигнала на выходе A.",
-              "Controlling the signal parameters at output A.",
-    "B", "B", "Управление параметрами сигнала на выходе B.",
-              "Controlling the signal parameters at output B.",
+    "КАНАЛ",
+    "Выбор канала для настройки."
+    ,
+    "A", "Управление параметрами сигнала на выходе A.",
+    "B", "Управление параметрами сигнала на выходе B.",
     FLAG_1, BIT_CHANNEL, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 DEF_CHOICE_8( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
-    "ФОРМА", "FORM",
-    "Выбор формы сигнала.",
-    "Select waveform.",
-    FORM_RU(Form::Sine),         FORM_RU(Form::Sine),         "Синус",            "Sinus",
-    FORM_RU(Form::RampPlus),     FORM_RU(Form::RampPlus),     "Нарастающая пила", "Growing saw",
-    FORM_RU(Form::RampMinus),    FORM_RU(Form::RampMinus),    "Убывающая пила",   "Wrecking saw",
-    FORM_RU(Form::Triangle),     FORM_RU(Form::Triangle),     "Треугольник",      "Triangle",
-    FORM_RU(Form::Meander),      FORM_RU(Form::Meander),      "Меандр",           "Meander",
-    FORM_RU(Form::Impulse),      FORM_RU(Form::Impulse),      "Треугольник",      "Triangle",
-    FORM_RU(Form::PacketImpuls), FORM_RU(Form::PacketImpuls), "Пакеты",           "Packets",
-    FORM_RU(Form::DDS),          FORM_RU(Form::DDS),          "Произвольный",     "Free",
+    "ФОРМА",
+    "Выбор формы сигнала."
+    ,
+    FORM_RU(Form::Sine),         "Синус",
+    FORM_RU(Form::RampPlus),     "Нарастающая пила",
+    FORM_RU(Form::RampMinus),    "Убывающая пила",
+    FORM_RU(Form::Triangle),     "Треугольник",
+    FORM_RU(Form::Meander),      "Меандр",
+    FORM_RU(Form::Impulse),      "Треугольник",
+    FORM_RU(Form::PacketImpuls), "Пакеты",
+    FORM_RU(Form::DDS),          "Произвольный",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
-    "ФОРМА", "FORM",
-    "Выбор формы сигнала.",
-    "Select waveform.",
-    FORM_RU(Form::Sine),      FORM_RU(Form::Sine),      "Синус",            "Sinus",
-    FORM_RU(Form::RampPlus),  FORM_RU(Form::RampPlus),  "Нарастающая пила", "Growing saw",
-    FORM_RU(Form::RampMinus), FORM_RU(Form::RampMinus), "Убывающая пила",   "Wrecking saw",
-    FORM_RU(Form::Triangle),  FORM_RU(Form::Triangle),  "Треугольник",      "Triangle",
-    FORM_RU(Form::Meander),   FORM_RU(Form::Meander),   "Меандр",           "Meander",
-    FORM_RU(Form::Impulse),   FORM_RU(Form::Impulse),   "Треугольник",      "Triangle",
-    FORM_RU(Form::DDS),       FORM_RU(Form::DDS),       "Произвольный",     "Free",
+    "ФОРМА",
+    "Выбор формы сигнала."
+    ,
+    FORM_RU(Form::Sine),      "Синус",
+    FORM_RU(Form::RampPlus),  "Нарастающая пила",
+    FORM_RU(Form::RampMinus), "Убывающая пила",
+    FORM_RU(Form::Triangle),  "Треугольник",
+    FORM_RU(Form::Meander),   "Меандр",
+    FORM_RU(Form::Impulse),   "Треугольник",
+    FORM_RU(Form::DDS),       "Произвольный",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -69,28 +67,23 @@ static void OnPress_ChnageParameter()
 }
 
 DEF_BUTTON( bChangeParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
-    "Изменить", "Change",
+    "Изменить",
     "Открывает окно ввода параметра.",
-    "Opens the parameter input window.",
     pageSignals, Item::FuncActive, OnPress_ChnageParameter, FuncDraw
 )
 
-DEF_CHOICE_PARAMETER(cParameters,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
-    "ПАРАМЕТР", "PARAMETER",
+DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
+    "ПАРАМЕТР",
     "Выбор параметра для настройки.",
-    "Choosing a setting for customization.",
     pageSignals, Item::FuncActive, OnPress_ChnageParameter, WAVE(Chan::A).GetForm(0)
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DEF_CHOICE_2(cTypeTune,                                                                                                                                //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
-    "ЗАСЫЛКА", "SENDING",
+DEF_CHOICE_2( cTypeTune,                                                                                                                               //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
+    "ЗАСЫЛКА",
     "Определяет периодичность засылки настроек сигналов в устройство управления.",
-    "Specifies the frequency of sending signal settings to the control device.",
-    "ОДНОКРАТНО", "SINGLE",         "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
-                                    "The signal settings are sent once, after you press the confirm button.",
-    "НЕПРЕРЫВНО", "CONTINUOUSLY",   "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
-                                    "Sending of signal settings occurs synchronously with changing information on the screen.",
+    "ОДНОКРАТНО", "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
+    "НЕПРЕРЫВНО", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
     FLAG_1, BIT_TUNE_FULL, pageSignals, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -106,8 +99,8 @@ static bool OnKey(Control key)
 }
 
 DEF_PAGE_8( pageSignals, //-V641 //-V1027
-    "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",
-    "", "",
+    "НАСТРОЙКИ СИГНАЛОВ",
+    "",
     &cChannel,                                      ///< НАСТРОЙКИ СИГНАЛОВ - Канал
     &cFormA,                                        ///< НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,                                   ///< НАСТРОЙКИ СИГНАЛОВ - Параметр

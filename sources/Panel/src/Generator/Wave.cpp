@@ -552,7 +552,7 @@ pString ParameterBase::GetStringValue() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterChoice::GetStringValue() const
 {
-    return names[choice][0];
+    return names[choice];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -668,32 +668,24 @@ Order& Order::operator--(int)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ParameterChoice::ParameterChoice(E v, pString var0ru, pString var0en,
-                                pString var1ru, pString var1en, funcDraw func0, funcDraw func1) :
+ParameterChoice::ParameterChoice(E v, pString var0, pString var1, funcDraw func0, funcDraw func1) :
     ParameterBase(Choice), value(v), choice(0), num(2)
 {
-    names[0][0] = (char *)var0ru;
-    names[0][1] = (char *)var0en;
-    names[1][0] = (char *)var1ru;
-    names[1][1] = (char *)var1en;
+    names[0] = (char *)var0;
+    names[1] = (char *)var1;
 
     func[0] = func0;
     func[1] = func1;
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ParameterChoice::ParameterChoice(E v, pString var0ru, pString var0en, pString var1ru, pString var1en, 
-                                      pString var2ru, pString var2en, pString var3ru, pString var3en) : 
+ParameterChoice::ParameterChoice(E v, pString var0, pString var1, pString var2, pString var3) : 
     ParameterBase(Choice), value(v), choice(0), num(4)
 {
-    names[0][0] = (char *)var0ru;
-    names[0][1] = (char *)var0en;
-    names[1][0] = (char *)var1ru;
-    names[1][1] = (char *)var1en;
-    names[2][0] = (char *)var2ru;
-    names[2][1] = (char *)var2en;
-    names[3][0] = (char *)var3ru;
-    names[3][1] = (char *)var3en;
+    names[0] = (char *)var0;
+    names[1] = (char *)var1;
+    names[2] = (char *)var2;
+    names[3] = (char *)var3;
 
     func[0] = func[1] = func[2] = func[3] = nullptr;
 }
