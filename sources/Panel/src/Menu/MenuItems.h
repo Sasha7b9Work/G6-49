@@ -331,7 +331,7 @@ public:
     /// Подсказки для каждого варианта на русском языке
     pString *hints;
     /// Функция должна вызываться после изменения значения элемента.
-    pFuncVB	 funcOnChanged;
+    pFuncVB	 _funcOnChanged;
     /// Функция вызывается после отрисовки элемента. 
     pFuncVII funcForDraw;
 
@@ -342,13 +342,11 @@ class Choice : public Item
 {
 public:
 
-    int8 * cell;
+    int8 *cell;
     /// Варианты выбора на русском и английском языках.
     pString *names;
     /// Подсказки для каждого варианта на русском языке
-    pString *hintsRu;
-    /// Подсказки для каждого варианта на английском языке
-    pString *hintsEn;
+    pString *hints;
     /// Функция должна вызываться после изменения значения элемента.
     pFuncVB	 funcOnChanged;
     /// Функция вызывается после отрисовки элемента. 
@@ -512,13 +510,6 @@ public:
 
     int8 *year;
 };
-
-#define CHOICE_RUN_FUNC_CHANGED(c, val)     \
-    if(c->funcOnChanged)                    \
-    {                                       \
-        c->funcOnChanged(val);              \
-    }
-
 
 typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15

@@ -56,7 +56,7 @@ void Choice::StartChange(int delta) const
     }
     if (!IsActive())
     {
-        CHOICE_RUN_FUNC_CHANGED(this, false);
+        funcOnChanged(false);
     }
     else
     {
@@ -121,7 +121,9 @@ float Choice::Step()
         }
 
         tsChoice.address = 0;
-        CHOICE_RUN_FUNC_CHANGED(this, IsActive());
+
+        funcOnChanged(IsActive());
+
         tsChoice.dir = NONE;
         return 0.0f;
     }

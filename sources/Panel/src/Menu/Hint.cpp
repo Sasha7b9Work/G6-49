@@ -155,7 +155,7 @@ int Hint::DrawDetailedHint(Choice *choice, int x0, int y0, int width, int start,
     for (int i = start; i <= end; i++)
     {
         y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width, colorGreen, "%d. \"%s\" %s", number++,
-            choice->NameSubItem(i).CString(), choice->hintsRu[i]) + 5;
+            choice->NameSubItem(i).CString(), choice->hints[i]) + 5;
 
     }
 
