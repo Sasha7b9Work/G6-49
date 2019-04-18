@@ -21,21 +21,6 @@ volatile static bool loggerUSB = false;
 #define SIZE_BUFFER_LOG 200
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef OPEN
-void Log::Write(TypeTrace::E, char *, ...)
-{
-}
-
-void Log::Trace(TypeTrace::E, const char *, const char *, int, char *, ...)
-{
-}
-
-#endif
-
-
-#ifndef OPEN
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Log::Write(TypeTrace::E, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
@@ -120,4 +105,3 @@ void Log::EnableLoggerUSB(bool enable)
 {
     loggerUSB = enable;
 }
-#endif

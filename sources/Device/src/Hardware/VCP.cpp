@@ -77,44 +77,49 @@ void VCP::Flush()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendDataSynch(const void *_buffer, uint size)
 {
-    if (CONNECTED_TO_USB)
+    char *buffer = (char *)_buffer;
+    if (size == 0)
     {
-        char *buffer = (char *)_buffer;
-        if (size == 0)
-        {
-            size = std::strlen(buffer);
-        }
-
-        volatile USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
-    
-        do 
-        {
-            if (sizeBuffer + size > SIZE_BUFFER_VCP)
-            {
-                int reqBytes = SIZE_BUFFER_VCP - sizeBuffer;
-                LIMITATION(reqBytes, 0, (int)size);
-                while (pCDC->TxState == 1) {};
-                std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)reqBytes);
-                USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, SIZE_BUFFER_VCP);
-                USBD_CDC_TransmitPacket(&handleUSBD);
-                size -= reqBytes;
-                buffer += reqBytes;
-                sizeBuffer = 0;
-            }
-            else
-            {
-                std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)size);
-                sizeBuffer += size;
-                size = 0;
-            }
-        } while (size);
+        size = std::strlen(buffer);
     }
+    
+    volatile USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
+    
+    do 
+    {
+        if (sizeBuffer + size > SIZE_BUFFER_VCP)
+        {
+            int reqBytes = SIZE_BUFFER_VCP - sizeBuffer;
+            LIMITATION(reqBytes, 0, (int)size);
+            while (pCDC->TxState == 1) {};
+            std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)reqBytes);
+            USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, SIZE_BUFFER_VCP);
+            USBD_CDC_TransmitPacket(&handleUSBD);
+            size -= reqBytes;
+            buffer += reqBytes;
+            sizeBuffer = 0;
+        }
+        else
+        {
+            std::memcpy(buffSend + sizeBuffer, (void *)buffer, (uint)size);
+            sizeBuffer += size;
+            size = 0;
+        }
+    } while (size);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendStringAsynch(char *data)
 {
     SendDataAsynch((uint8 *)data, std::strlen(data));
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void VCP::SendStringAsynchEOF(char *data)
+{
+    SendStringAsynch(data);
+    //static uint8 eof = 0x0d;
+    //SendDataAsynch(&eof, 1);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

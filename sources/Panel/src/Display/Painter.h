@@ -59,24 +59,11 @@ public:
 
     static bool SaveScreenToFlashDrive();
 
-#ifdef OPEN
-
-    /// ≈сли true, рисоватьс€ будет в двойном размере
-    static void SetDoubleSize(bool enable) { doubleSize = enable; };
-
-#endif
-
 private:
 
     static Color currentColor;
 
     static Font::Type currentTypeFont;
-
-#ifdef OPEN
-
-    static bool doubleSize;
-
-#endif
 };
 
 /** @} @}

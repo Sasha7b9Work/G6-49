@@ -20,8 +20,6 @@ DMA2D_HandleTypeDef LTDC_::hDMA2D;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void LTDC_::Init(uint front, uint back)
 {
-    
-#ifndef OPEN
     GPIO_InitTypeDef isGPIO =
     {
         //  R3         R6
@@ -83,7 +81,6 @@ void LTDC_::Init(uint front, uint back)
     HAL_GPIO_Init(GPIOB, &initStr);
 
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
-#endif
 
     SetBuffers(front, back);
 

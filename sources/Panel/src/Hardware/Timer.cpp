@@ -3,26 +3,15 @@
 #include "defines.h"
 #include "Timer.h"
 #include "Log.h"
-#ifdef OPEN
-#include <stm32f7xx.h>
-#include "Hardware/Timer7XX.h"
-#else
-#include <stm32f4xx.h>
-#include "Hardware/Timer4XX.h"
-#endif
 #include <limits>
 #include "Hardware/CPU.h"
+#include "Hardware/Timer4XX.h"
 #endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifdef OPEN
-static Timer7XX tim2;   // Для тиков
-static Timer7XX tim3;   // Для таймеров
-#else
 static Timer4XX tim2;   // Для тиков
 static Timer4XX tim3;   // Для таймеров
-#endif
 
 
 typedef struct
