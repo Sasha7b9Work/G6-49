@@ -17,6 +17,11 @@ USBD_HandleTypeDef VCP::handleUSBD;
 bool               VCP::cableUSBisConnected = false;
 bool               VCP::connectedToUSB = false;
 
+namespace VCP
+{
+    bool PrevSendingComplete();
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void VCP::Init()

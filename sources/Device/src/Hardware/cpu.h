@@ -91,10 +91,8 @@ public:
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     class PCD
     {
-        friend class VCP;
-    private:
-        static void Init();
     public:
+        static void Init();
         static PCD_HandleTypeDef handle;
     };
 
