@@ -8,6 +8,7 @@
 #include "Display/Console.h"
 #include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
+#include "SCPI/SCPI.h"
 #endif
 
 
@@ -58,7 +59,7 @@ bool Handlers::Processing(Message *msg)
         /* FDrive_RequestFileString*/ FDrive::Handler::Processing,
         /* FDrive_LoadToFPGA       */ FDrive::Handler::Processing,
         /* FDrive_GetPictureDDS    */ FDrive::Handler::Processing,
-        /* SCPI_Data               */ Handlers::E
+        /* SCPI_Data               */ SCPI::Handler::Processing
     };
 
     uint8 command = msg->TakeByte();

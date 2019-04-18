@@ -45,6 +45,7 @@
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/Include/PageSignals.h"
 
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Settings/CalibrationSettings.h"
 

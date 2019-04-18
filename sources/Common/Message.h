@@ -66,19 +66,18 @@ public:
     char *String(int pos);
 
     pString Trace();
+    /// Положить слово
+    void PutWord(uint data);
 
 private:
     /// Положить байт
     void PutByte(uint8 data);
     /// Положить половину слова
     void PutHalfWord(int16 data);
+
     void PutHalfWord(uint16 data);
-    /// Положить слово
-    void PutWord(uint data);
     /// Положить float
     void PutFloat(float data);
-
-
     /// Размер выделенной памяти
     uint allocated;
     /// Адрес начала данных, либо 0, если память не выделена

@@ -47,6 +47,7 @@ source_group(Menu                     REGULAR_EXPRESSION src/Menu/*.*)
 source_group(Menu\\Pages              REGULAR_EXPRESSION src/Menu/Pages/*.*)
 source_group(Menu\\Pages\\Include     REGULAR_EXPRESSION src/Menu/Pages/Include/*.*)
 source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION src/Menu/Pages/PageSignals/*.*)
+source_group(SCPI                     REGULAR_EXPRESSION src/SCPI/*.*)
 source_group(Settings                 REGULAR_EXPRESSION src/Settings/*.*)
 source_group(Utils                    REGULAR_EXPRESSION src/Utils/*.*)
 
@@ -70,6 +71,7 @@ file(GLOB SOURCES   ../common/Command.cpp     ../common/Command.h
                     src/Menu/Pages/*
                     src/Menu/Pages/Include/*
                     src/Menu/Pages/PageSignals/*
+                    src/SCPI/*
                     src/Settings/*
                     src/Utils/*
                     )
