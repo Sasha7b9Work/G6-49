@@ -51,7 +51,8 @@ pString Command::Name() const
         "FDrive_RequestFileSize",
         "FDrive_RequestFileString",
         "FDrive_LoadToFPGA",
-        "FDrive_GetPictureDDS"
+        "FDrive_GetPictureDDS",
+        "SCPI_Data"
     };
     if(value < Number)
     {
@@ -172,6 +173,8 @@ pString Command::Trace(const uint8 *buffer) const
         case FDrive_LoadToFPGA:
             break;
         case FDrive_GetPictureDDS:
+            break;
+        case SCPI_Data:
             break;
         case Number:
             break;

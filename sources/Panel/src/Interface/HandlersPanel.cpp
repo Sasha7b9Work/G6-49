@@ -57,7 +57,8 @@ bool Handlers::Processing(Message *msg)
         /* FDrive_RequestFileSize  */ FDrive::Handler::Processing,
         /* FDrive_RequestFileString*/ FDrive::Handler::Processing,
         /* FDrive_LoadToFPGA       */ FDrive::Handler::Processing,
-        /* FDrive_GetPictureDDS    */ FDrive::Handler::Processing
+        /* FDrive_GetPictureDDS    */ FDrive::Handler::Processing,
+        /* SCPI_Data               */ Handlers::E
     };
 
     uint8 command = msg->TakeByte();

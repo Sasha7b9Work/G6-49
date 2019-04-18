@@ -106,6 +106,7 @@ struct Command
 /* <-> */   FDrive_RequestFileString,   ///< Считать строку из файла
 /* ->  */   FDrive_LoadToFPGA,          ///< Загрузить файл произвольного сигнала
 /* <-> */   FDrive_GetPictureDDS,       ///< Получить изображение формы сигнала
+/* <-> */   SCPI_Data,                  ///< От VCP приняты данные либо в VCP нужно передать данные
             Number
     } value;
     Command(E v) : value(v) {};
