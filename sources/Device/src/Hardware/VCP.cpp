@@ -42,20 +42,6 @@ bool VCP::PrevSendingComplete()
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendDataAsynch(uint8 *buffer, uint size)
-{
-#define SIZE_BUFFER 64U
-    static uint8 trBuf[SIZE_BUFFER];
-
-    size = Min(size, SIZE_BUFFER);
-    while (!PrevSendingComplete())  {};
-    std::memcpy(trBuf, buffer, (uint)size);
-
-    USBD_CDC_SetTxBuffer(&handleUSBD, trBuf, (uint16)size);
-    USBD_CDC_TransmitPacket(&handleUSBD);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 #define SIZE_BUFFER_VCP 256     /// \todo если поставить размер буфера 512, то на ТЕ207 глюки
 static uint8 buffSend[SIZE_BUFFER_VCP];
 static int sizeBuffer = 0;
@@ -85,38 +71,9 @@ void VCP::SendData(const void *_buffer, uint size)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendStringAsynch(char *data)
-{
-    SendDataAsynch((uint8 *)data, std::strlen(data));
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendStringAsynchEOF(char *data)
-{
-    SendStringAsynch(data);
-    //static uint8 eof = 0x0d;
-    //SendDataAsynch(&eof, 1);
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendString(char *data)
 {
     SendData((uint8 *)data, std::strlen(data));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendFormatStringAsynch(char *format, ...)
-{
-    if (CONNECTED_TO_USB)
-    {
-        static char buffer[200];
-        std::va_list args;
-        va_start(args, format);
-        std::vsprintf(buffer, format, args);
-        va_end(args);
-        std::strcat(buffer, "\r\n");
-        SendDataAsynch((uint8 *)buffer, std::strlen(buffer));
-    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

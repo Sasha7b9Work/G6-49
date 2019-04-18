@@ -123,7 +123,7 @@ USBD_StatusTypeDef USBD_LL_SetupStage(USBD_HandleTypeDef *pdev, uint8_t *psetup)
 
     case USB_REQ_RECIPIENT_INTERFACE:
         USBD_StdItfReq(pdev, &pdev->request);
-        CONNECTED_TO_USB = false;
+        VCP::connectedToUSB = false;
         break;
 
     case USB_REQ_RECIPIENT_ENDPOINT:
@@ -271,8 +271,8 @@ USBD_StatusTypeDef USBD_LL_SetSpeed(USBD_HandleTypeDef  *pdev, USBD_SpeedTypeDef
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 USBD_StatusTypeDef USBD_LL_Suspend(USBD_HandleTypeDef  *pdev)
 {
-    CABLE_USB_IS_CONNECTED = false;
-    CONNECTED_TO_USB = false;
+    VCP::cableUSBisConnected = false;
+    VCP::connectedToUSB = false;
     pdev->dev_old_state = pdev->dev_state;
     pdev->dev_state = USBD_STATE_SUSPENDED;
     return USBD_OK;
@@ -313,8 +313,8 @@ USBD_StatusTypeDef USBD_LL_IsoOUTIncomplete(USBD_HandleTypeDef  *, uint8_t)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 USBD_StatusTypeDef USBD_LL_DevConnected(USBD_HandleTypeDef  *)
 {
-    CABLE_USB_IS_CONNECTED = true;
-    CONNECTED_TO_USB = false;
+    VCP::cableUSBisConnected = true;
+    VCP::connectedToUSB = false;
     return USBD_OK;
 }
 
