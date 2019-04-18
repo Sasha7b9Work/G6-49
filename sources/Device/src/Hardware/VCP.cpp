@@ -47,20 +47,6 @@ static uint8 buffSend[SIZE_BUFFER_VCP];
 static int sizeBuffer = 0;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::Flush()
-{
-    if (sizeBuffer)
-    {
-        USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
-        while (pCDC->TxState == 1) {}; //-V712
-        USBD_CDC_SetTxBuffer(&handleUSBD, buffSend, (uint16)sizeBuffer);
-        USBD_CDC_TransmitPacket(&handleUSBD);
-        while (pCDC->TxState == 1) {}; //-V654
-    }
-    sizeBuffer = 0;
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendData(const void *_buffer, uint size)
 {
     volatile USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
@@ -74,18 +60,6 @@ void VCP::SendData(const void *_buffer, uint size)
 void VCP::SendString(char *data)
 {
     SendData((uint8 *)data, std::strlen(data));
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------
-void VCP::SendFormatStringSynch(char *format, ...)
-{
-    char buffer[200];
-    std::va_list args;
-    va_start(args, format);
-    std::vsprintf(buffer, format, args);
-    va_end(args);
-    std::strcat(buffer, "\r\n");
-    SendData((uint8 *)buffer, std::strlen(buffer));
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

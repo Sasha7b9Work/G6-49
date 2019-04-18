@@ -14,12 +14,8 @@ namespace VCP
     void SendData(const void *data, uint size = 0);
     /// Передаётся строка без завершающего нуля
     void SendString(char *data);
-    /// Эта строка передаётся с завершающими символами \\r\\n
-    void SendFormatStringSynch(char *format, ...);
 
     void SendByte(uint8 data);
-
-    void Flush();
 
     extern USBD_HandleTypeDef handleUSBD;
 
