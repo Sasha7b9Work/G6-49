@@ -92,3 +92,9 @@ bool Interface::AddMessageForTransmit(Message *message)
 
     return true;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::Transmit()
+{
+    Interface::AddMessageForTransmit(this);
+}

@@ -7,7 +7,6 @@
 #include "FDrive/FDriveDevice.h"
 #include "Generator/FPGA.h"
 #include "Generator/GeneratorDevice.h"
-#include "Interface/InterfaceDevice.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
 #include "Utils/String.h"
@@ -63,7 +62,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         Message *answer = new Message(9, Command::FDrive_NumDirsAndFiles, numDirs, numFiles);
 
-        Interface::AddMessageForTransmit(answer);
+        answer->Transmit();
     }
     else if (com == Command::FDrive_RequestFile)
     {
@@ -75,7 +74,7 @@ void FDrive::Handler::Processing(Message *msg)
         {
             Message *answer = new Message(Command::FDrive_RequestFile, (uint8)numFile, name);
 
-            Interface::AddMessageForTransmit(answer);
+            answer->Transmit();
         }
     }
     else if (com == Command::FDrive_RequestFileSize)
@@ -90,7 +89,7 @@ void FDrive::Handler::Processing(Message *msg)
 
             Message *answer = new Message(6, Command::FDrive_RequestFileSize, (uint8)numFile, size);
 
-            Interface::AddMessageForTransmit(answer);
+            answer->Transmit();
         }
     }
     else if (com == Command::FDrive_LoadToFPGA)
@@ -130,7 +129,8 @@ void FDrive::Handler::Processing(Message *msg)
 
         Message *answer = new Message(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
         std::memcpy(answer->Data(2), data, SIZE);
-        Interface::AddMessageForTransmit(answer);
+
+        answer->Transmit();
     }
     else if (com == Command::FDrive_RequestFileString)
     {

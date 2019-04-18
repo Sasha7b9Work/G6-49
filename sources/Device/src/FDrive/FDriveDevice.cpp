@@ -3,7 +3,6 @@
 #include "defines.h"
 #include "log.h"
 #include "FDriveDevice.h"
-#include "Interface/InterfaceDevice.h"
 #include "Generator/GeneratorDevice.h"
 #include "usbh_diskio.h"
 #endif
@@ -101,7 +100,7 @@ void FDrive::Update()
         FRESULT result = f_mount(&FatFS, USBDISKPath, 0);
 
         Message *message = new Message(2, Command::FDrive_Mount, (result == FR_OK) ? (uint8)1 : (uint8)2);
-        Interface::AddMessageForTransmit(message);
+        message->Transmit();
 
         state = State::Connected;
 
@@ -111,7 +110,7 @@ void FDrive::Update()
         f_mount(0, "", 0);
 
         Message *message = new Message(2, Command::FDrive_Mount, (uint8)0);
-        Interface::AddMessageForTransmit(message);
+        message->Transmit();
 
         state = State::Disconnected;
     }

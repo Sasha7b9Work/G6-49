@@ -26,7 +26,7 @@ static List<Task> tasks;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Interface::Send(Message *message)
+void Interface::AddMessageForTransmit(Message *message)
 {
     Transceiver::Transmit(message);
 }
@@ -64,9 +64,9 @@ void Interface::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::AddTask(Task *task)
 {
-    if(!tasks.IsMember(task))                     // Если задания ещё нет в очереди
+    if(!tasks.IsMember(task))                   // Если задания ещё нет в очереди
     {
-        Send(task->message);                    // То посылаем сообщение
+        task->message->Transmit();              // То посылаем сообщение
         task->timeLast = TIME_MS;               // запоминаем время посылки
         tasks.Append(task);                     // и добавляем в очередь сообщений для повторной отправки
     }
@@ -83,7 +83,7 @@ void Interface::SendTasks()
 
         if (!PassedLittleTimeAfterSend(task))
         {
-            Send(task->message);
+            task->message->Transmit();
             task->timeLast = TIME_MS;
         }
 
@@ -158,4 +158,10 @@ Message *Task::GetMessage()
 {
     message->ResetPointer();
     return message;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::Transmit()
+{
+    Interface::AddMessageForTransmit(this);
 }

@@ -34,16 +34,16 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Interface
 {
+    friend class Message;
 public:
 
     /// Для приёма сообщений от устройства
     static void Update();
-
-    static void Send(Message *message);
     /// Добавляеет задание. Если не получилось, возвращает false
     static void AddTask(Task *task);
 
 private:
+    static void AddMessageForTransmit(Message *message);
     /// Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
     static bool ProcessTask(Message *answer);
     /// Обрабатывает очередь заданий, засылая сообщения тех из них, которые необходимо заслать

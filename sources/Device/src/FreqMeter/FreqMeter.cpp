@@ -2,10 +2,10 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
+#include "Message.h"
 #include "FreqMeter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Interface/InterfaceDevice.h"
 #include "Utils/Debug.h"
 #endif
 
@@ -67,7 +67,7 @@ void FreqMeter::Update()
 
         Message *msg = new Message(5, Command::FreqMeasure, frequency);
 
-        Interface::AddMessageForTransmit(msg);
+        msg->Transmit();
     }
 }
 

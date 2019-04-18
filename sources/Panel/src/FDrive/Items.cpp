@@ -72,7 +72,7 @@ void Items::SendRequest()
 {
     Message message(Command::FDrive_NumDirsAndFiles, FDrive::directory);
 
-    Interface::Send(&message);
+    message.Transmit();
 
     requestIsSend = true;
 }

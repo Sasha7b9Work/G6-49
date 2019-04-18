@@ -3,7 +3,6 @@
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
-#include "Interface/InterfacePanel.h"
 #include "CalibrationSettings.h"
 #include "Hardware/Modules/EEPROM.h"
 #endif
@@ -37,7 +36,7 @@ void CalibrationSettings::Load()
         {
             Message message;
             CreateMessage(&message, (Chan::E)ch, (KoeffCal::E)k);
-            Interface::Send(&message);
+            message.Transmit();
         }
     }
 }

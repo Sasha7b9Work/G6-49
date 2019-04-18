@@ -68,6 +68,8 @@ public:
     pString Trace();
     /// Положить слово
     void PutWord(uint data);
+    /// Передать сообщение получателю
+    void Transmit();
 
 private:
     /// Положить байт

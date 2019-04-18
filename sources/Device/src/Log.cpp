@@ -2,7 +2,6 @@
 #ifndef WIN32
 #include "log.h"
 #include "Message.h"
-#include "Interface/InterfaceDevice.h"
 #include <cstdarg>
 #endif
 
@@ -19,5 +18,5 @@ void Log::AddString(char *format, ...)
 
     Message *msg = new Message(Command::Log, string);
 
-    Interface::AddMessageForTransmit(msg);
+    msg->Transmit();
 }

@@ -4,7 +4,6 @@
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Generator/GeneratorPanel.h"
 #include "Generator/Signals.h"
-#include "Interface/InterfacePanel.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/CalibrationSettings.h"
 #endif
@@ -78,7 +77,7 @@ void PageSignals::PageCalibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
     Message message;
     setCal.CreateMessage(&message, ch, koeff);
 
-    Interface::Send(&message);
+    message.Transmit();
 
     setCal.Save();
 

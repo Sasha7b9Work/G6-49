@@ -2,8 +2,8 @@
 #ifndef WIN32
 #include "defines.h"
 #include "GeneratorPanel.h"
-#include "Interface/InterfacePanel.h"
 #include "Log.h"
+#include "Message.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -26,41 +26,31 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan::E ch, bool enable)
 {
-    Message message(3, Command::EnableChannel, (uint8)ch, (uint8)(enable ? 1u : 0u));
-
-    Interface::Send(&message);
+    Message(3, Command::EnableChannel, (uint8)ch, (uint8)(enable ? 1u : 0u)).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadStartMode(Chan::E ch, int mode)
 {
-    Message message(3, Command::SetStartMode, (uint8)ch, (uint8)mode);
-
-    Interface::Send(&message);
+    Message(3, Command::SetStartMode, (uint8)ch, (uint8)mode).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadRegister(Register::E reg, uint64 value)
 {
-    Message message(10, Command::WriteRegister, (uint8)reg, value);
-
-    Interface::Send(&message);
+    Message(10, Command::WriteRegister, (uint8)reg, value).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetDebugMode(bool enable)
 {
-    Message message(2, Command::ModeDebug, (uint8)(enable ? 1u : 0u));
-
-    Interface::Send(&message);
+    Message(2, Command::ModeDebug, (uint8)(enable ? 1u : 0u)).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Reset()
 {
-    Message message(1, Command::RunReset);
-
-    Interface::Send(&message);
+    Message(1, Command::RunReset).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -73,9 +63,8 @@ void Generator::SetFormWave(Wave *w)
     {
         LoadFormDDS(FORM(ch));
     }
-    Message message(3, Command::SetFormWave, (uint8)ch, form);
 
-    Interface::Send(&message);
+    Message(3, Command::SetFormWave, (uint8)ch, form).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,9 +72,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
     /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
-    Message message(3, Command::SetFormWave, (uint8)ch, (uint8)form);
-
-    Interface::Send(&message);
+    Message(3, Command::SetFormWave, (uint8)ch, (uint8)form).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -112,7 +99,7 @@ void Generator::LoadFormDDS(Form *form)
 
                 TransformDataToCode(data, points);
 
-                Interface::Send(&message);
+                message.Transmit();
             }
             break;
         case Form::RampMinus:
@@ -126,7 +113,7 @@ void Generator::LoadFormDDS(Form *form)
 
                 TransformDataToCode(data, points);
 
-                Interface::Send(&message);
+                message.Transmit();
             }
             break;
         case Form::Triangle:
@@ -145,7 +132,7 @@ void Generator::LoadFormDDS(Form *form)
 
                 TransformDataToCode(data, points);
 
-                Interface::Send(&message);
+                message.Transmit();
             }
             break;
         case Form::Meander:
@@ -192,34 +179,28 @@ void Generator::SetParameter(ParameterChoice *param)
         (uint8)param->GetForm()->GetWave()->GetChannel(),
         (uint8)param->GetChoice());
 
-    Interface::Send(&message);
+    message.Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetOffset(Chan::E ch, float offset)
 {
     /// \todo Говнокод - запись параметра из двух мест
-    Message message(10, Command::SetOffset, (uint8)ch, ParamValue(offset).ToUINT64());
-
-    Interface::Send(&message);
+    Message(10, Command::SetOffset, (uint8)ch, ParamValue(offset).ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetAmplitude(Chan::E ch, float amplitude)
 {
     /// \todo Говнокод - запись параметра из двух мест
-    Message message(10, Command::SetAmplitude, (uint8)ch, ParamValue(amplitude).ToUINT64());
-
-    Interface::Send(&message);
+    Message(10, Command::SetAmplitude, (uint8)ch, ParamValue(amplitude).ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFrequency(Chan::E ch, float frequency)
 {
     /// \todo Говнокод - запись параметра из двух мест
-    Message message(10, Command::SetFrequency, (uint8)ch, ParamValue(frequency).ToUINT64());
-
-    Interface::Send(&message);
+    Message(10, Command::SetFrequency, (uint8)ch, ParamValue(frequency).ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -257,9 +238,7 @@ void Generator::SetParameter(ParameterValue *param)
 
     Command com = commands[param->value].val;
 
-    Message message(10, com, (uint8)ch, value.ToUINT64());
-
-    Interface::Send(&message);
+    Message(10, com, (uint8)ch, value.ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
