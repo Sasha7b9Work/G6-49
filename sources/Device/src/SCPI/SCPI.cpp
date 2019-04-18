@@ -21,6 +21,6 @@ void SCPI::AddNewData(uint8 *buffer, uint length)
     if (SU::EqualsStrings(buffer, "*IDN?", 5))
     {
         char *answer = "MNIPI, G6-49, DDS V.1.3";
-        VCP::SendStringSynch(answer);
+        VCP::SendString(answer);
     }
 }

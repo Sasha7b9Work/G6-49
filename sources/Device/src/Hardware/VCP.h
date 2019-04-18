@@ -24,13 +24,13 @@ namespace VCP
 
     void SendDataAsynch(uint8 *data, uint size);
 
-    void SendDataSynch(const void *data, uint size = 0);
+    void SendData(const void *data, uint size = 0);
     /// Передаётся строка без символа окончания строки
     void SendStringAsynch(char *data);
     /// Передаётся строка с символом окончания строки
     void SendStringAsynchEOF(char *data);
     /// Передаётся строка без завершающего нуля
-    void SendStringSynch(char *data);
+    void SendString(char *data);
     /// Эта строка передаётся с завершающими символами \\r\\n
     void SendFormatStringAsynch(char *format, ...);
     /// Эта строка передаётся с завершающими символами \\r\\n
