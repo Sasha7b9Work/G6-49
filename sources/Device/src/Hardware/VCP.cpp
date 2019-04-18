@@ -43,8 +43,8 @@ bool VCP::PrevSendingComplete()
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 #define SIZE_BUFFER_VCP 256     /// \todo если поставить размер буфера 512, то на ТЕ207 глюки
-static uint8 buffSend[SIZE_BUFFER_VCP];
-static int sizeBuffer = 0;
+//static uint8 buffSend[SIZE_BUFFER_VCP];
+//static int sizeBuffer = 0;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendData(const void *_buffer, uint size)
