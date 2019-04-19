@@ -206,7 +206,7 @@ void Generator::SetAmplitude(Chan::E ch, float amplitude)
 void Generator::SetFrequency(Chan::E ch, float frequency)
 {
     /// \todo √овнокод - запись параметра из двух мест
-    MessageSetFrequency((uint8)ch, ParamValue(frequency).ToUINT64()).Transmit();
+    Message::Set::Frequency((uint8)ch, ParamValue(frequency).ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
