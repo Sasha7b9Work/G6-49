@@ -16,5 +16,5 @@ void Log::AddString(char *format, ...)
     std::vsprintf(string, format, args);
     va_end(args);
 
-    MessageLog(string).Transmit();
+    Message::Log(string).Transmit();
 }

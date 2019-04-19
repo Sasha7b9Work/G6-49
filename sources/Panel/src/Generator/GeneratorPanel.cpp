@@ -40,13 +40,13 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadStartMode(Chan::E ch, int mode)
 {
-    MessageStartMode((uint8)ch, (uint8)mode).Transmit();
+    Message::StartMode((uint8)ch, (uint8)mode).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadRegister(Register::E reg, uint64 value)
 {
-    MessageWriteRegister((uint8)reg, value).Transmit();
+    Message::WriteRegister((uint8)reg, value).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -244,7 +244,7 @@ void Generator::SetParameter(ParameterValue *param)
 
     Command::E com = commands[param->value].val;
 
-    MessageParameter(com, (uint8)ch, value.ToUINT64()).Transmit();
+    Message::Set::Parameter(com, (uint8)ch, value.ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

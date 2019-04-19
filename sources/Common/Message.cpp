@@ -526,7 +526,7 @@ Message::FDrive::FileSize::FileSize(uint8 numFile, uint size) : SimpleMessage(6,
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageLog::MessageLog(char *string) : SimpleMessage()
+Message::Log::Log(char *string) : SimpleMessage()
 {
     //          v0 | string              | завершающий_ноль
     uint size = 1 + std::strlen(string) + 1;
@@ -538,14 +538,14 @@ MessageLog::MessageLog(char *string) : SimpleMessage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageStartMode::MessageStartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::SetStartMode)
+Message::StartMode::StartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::SetStartMode)
 {
     PutByte(ch);
     PutByte(mode);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageWriteRegister::MessageWriteRegister(uint8 reg, uint64 data) : SimpleMessage(10, Command::WriteRegister)
+Message::WriteRegister::WriteRegister(uint8 reg, uint64 data) : SimpleMessage(10, Command::WriteRegister)
 {
     PutByte(reg);
     PutDoubleWord(data);
@@ -564,7 +564,7 @@ MessageReset::MessageReset() : SimpleMessage(1, Command::RunReset)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageParameter::MessageParameter(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
+Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
 {
     PutByte(ch);
     PutDoubleWord(value);
