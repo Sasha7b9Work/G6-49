@@ -121,9 +121,7 @@ void FDrive::Handler::Processing(SimpleMessage *msg)
             }
         }
 
-        SimpleMessage answer(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
-        answer.PutData(data, SIZE);
-        answer.Transmit();
+        Message::FDrive::PictureDDS((uint8)numFile, data).Transmit();
     }
     else if (com == Command::FDrive_RequestFileString)
     {

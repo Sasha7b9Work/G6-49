@@ -207,6 +207,16 @@ namespace Message
         public:
             FileSize(uint8 numFile, uint size);
         };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        class PictureDDS : public SimpleMessage
+        {
+        public:
+            /// Запрос
+            PictureDDS(uint8 numFile);
+            /// Ответ
+            PictureDDS(uint8 numFile, uint8 *data);
+        };
     }
 
     namespace Set

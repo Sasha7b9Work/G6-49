@@ -581,3 +581,16 @@ Message::FDrive::LoadToFPGA::LoadToFPGA(uint8 ch, uint8 numFile, char *directory
     PutByte(numFile);
     std::strcpy((char *)&buffer[3], directory);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::FDrive::PictureDDS::PictureDDS(uint8 numFile, uint8 *data) : SimpleMessage(242, Command::FDrive_GetPictureDDS)
+{
+    PutByte(numFile);
+    std::memcpy(buffer + 2, data, 240);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Command::FDrive_GetPictureDDS)
+{
+    PutByte(numFile);
+}
