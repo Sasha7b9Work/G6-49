@@ -127,9 +127,7 @@ void FDrive::PressDown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::PressChoose()
 {
-    Message message(Command::FDrive_LoadToFPGA, (uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::directory);
-
-    message.Transmit();
+    MessageFDriveLoadToFPGA((uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::directory).Transmit();
 
     File::SetDataToWave();
 }

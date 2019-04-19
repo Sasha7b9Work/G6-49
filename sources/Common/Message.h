@@ -243,3 +243,11 @@ class MessageParameter : public Message
 public:
     MessageParameter(Command::E param, uint8 ch, uint64 value);
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Загрузить выбранный файл в FPGA
+class MessageFDriveLoadToFPGA : public Message
+{
+public:
+    MessageFDriveLoadToFPGA(uint8 ch, uint8 numFile, char *directory);
+};

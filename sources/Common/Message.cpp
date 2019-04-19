@@ -569,3 +569,15 @@ MessageParameter::MessageParameter(Command::E param, uint8 ch, uint64 value) : M
     PutByte(ch);
     PutDoubleWord(value);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageFDriveLoadToFPGA::MessageFDriveLoadToFPGA(uint8 ch, uint8 numFile, char *directory) : Message()
+{
+    //          com ch  numFile directory                 завершающий_ноль
+    uint size = 1 + 1 + 1 +      std::strlen(directory) + 1;
+    AllocateMemory(size);
+    PutByte(Command::FDrive_LoadToFPGA);
+    PutByte(ch);
+    PutByte(numFile);
+    std::strcpy((char *)&buffer[3], directory);
+}
