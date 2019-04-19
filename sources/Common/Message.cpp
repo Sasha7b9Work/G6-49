@@ -550,3 +550,9 @@ MessageWriteRegister::MessageWriteRegister(uint8 reg, uint64 data) : Message(10,
     PutByte(reg);
     PutDoubleWord(data);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageDebugMode::MessageDebugMode(uint8 mode) : Message(2, Command::ModeDebug)
+{
+    PutByte(mode);
+}

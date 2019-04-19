@@ -96,7 +96,7 @@ protected:
     /// На какой позиции указатель. Используется для Take
     uint taken;
 
-    Message(const Message &) {};
+    Message(const Message &) : allocated(0), buffer(0), used(0), taken(0) {};
 };
 
 
@@ -216,4 +216,13 @@ class MessageWriteRegister : public Message
 {
 public:
     MessageWriteRegister(uint8 reg, uint64 data);
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Установка отладочного режима
+class MessageDebugMode : public Message
+{
+public:
+    /// mode == 1/0 - включить/отключить режим отладки
+    MessageDebugMode(uint8 mode);
 };
