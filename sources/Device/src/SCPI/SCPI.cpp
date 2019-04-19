@@ -15,7 +15,7 @@ void SCPI::AddNewData(uint8 *buffer, uint length)
 {
     uint size = length + 1 + 4;
 
-    Message message(size, Command::SCPI_Data);
+    SimpleMessage message(size, Command::SCPI_Data);
 
     message.PutWord(length);
 

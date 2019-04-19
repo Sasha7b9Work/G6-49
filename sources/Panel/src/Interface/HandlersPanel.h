@@ -4,11 +4,11 @@
 class Handlers
 {
 public:
-    static bool Processing(Message *message);
+    static bool Processing(SimpleMessage *message);
 
 private:
-    static bool E(Message *);
-    static bool Request(Message *);
-    static bool FreqMeasure(Message *);
-    static bool Log(Message *);
+    static bool E(SimpleMessage *);
+    static bool Request(SimpleMessage *);
+    static bool FreqMeasure(SimpleMessage *);
+    static bool Log(SimpleMessage *);
 };

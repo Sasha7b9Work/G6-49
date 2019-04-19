@@ -10,31 +10,31 @@ struct Task
 {
 friend class Interface;
 
-    Task(Message *msg, bool (*process)(Message *), bool (*equal)(Task *, Task *));
+    Task(SimpleMessage *msg, bool (*process)(SimpleMessage *), bool (*equal)(Task *, Task *));
     /// Деструктор. В нём нужно удалить сообщение
     ~Task();
     /// Функция сравнения
     bool Equals(Task *, Task *);
     /// Соообщение для пересылки
-    Message *message;
+    SimpleMessage *message;
     /// Возвращает указатель на готовое к использованию (со сброщенным указателем) сообщение
-    Message *GetMessage();
+    SimpleMessage *GetMessage();
 private:
     /// Этот конструктор может использоваться только в Interface для сравнения
-    Task(Message *msg);
+    Task(SimpleMessage *msg);
     /// Время последней передачи сообщения
     uint timeLast;
     /// Функция сравнения
     bool (*funcEqual)(Task *, Task *);
     /// Функция обработки ответа
-    bool (*funcProcess)(Message *);
+    bool (*funcProcess)(SimpleMessage *);
 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Interface
 {
-    friend class Message;
+    friend class SimpleMessage;
 public:
 
     /// Для приёма сообщений от устройства
@@ -43,14 +43,14 @@ public:
     static void AddTask(Task *task);
 
 private:
-    static void AddMessageForTransmit(Message *message);
+    static void AddMessageForTransmit(SimpleMessage *message);
     /// Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
-    static bool ProcessTask(Message *answer);
+    static bool ProcessTask(SimpleMessage *answer);
     /// Обрабатывает очередь заданий, засылая сообщения тех из них, которые необходимо заслать
     static void SendTasks();
     /// Возвращает true, если прошло слишком мало времени после предыдущей засылки сообщения
     static bool PassedLittleTimeAfterSend(Task *task);
     /// Обработать ответ на задание
-    static void RunAnswer(ListElement<Task> *element, Message *answer);
+    static void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
 
 };

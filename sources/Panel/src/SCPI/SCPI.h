@@ -9,6 +9,6 @@ public:
     class Handler
     {
     public:
-        static bool Processing(Message *msg);
+        static bool Processing(SimpleMessage *msg);
     };
 };

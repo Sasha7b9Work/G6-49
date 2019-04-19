@@ -5,61 +5,61 @@
 class Handlers
 {
 public:
-    static void Processing(Message *message);
+    static void Processing(SimpleMessage *message);
 
 private:
 
-    static void E(Message *);
+    static void E(SimpleMessage *);
 
-    static void SendData(Message *);
+    static void SendData(SimpleMessage *);
 
-    static void EnableChannel(Message *);
+    static void EnableChannel(SimpleMessage *);
 
-    static void SetFormWave(Message *);
+    static void SetFormWave(SimpleMessage *);
 
-    static void SetFrequency(Message *);
+    static void SetFrequency(SimpleMessage *);
 
-    static void SetAmplitude(Message *);
+    static void SetAmplitude(SimpleMessage *);
 
-    static void SetOffset(Message *);
+    static void SetOffset(SimpleMessage *);
 
-    static void SetDuration(Message *);
+    static void SetDuration(SimpleMessage *);
 
-    static void SetDutyRatio(Message *);
+    static void SetDutyRatio(SimpleMessage *);
 
-    static void SetPhase(Message *);
+    static void SetPhase(SimpleMessage *);
 
-    static void RunReset(Message *);
+    static void RunReset(SimpleMessage *);
 
-    static void ModeDebug(Message *);
+    static void ModeDebug(SimpleMessage *);
 
-    static void SetDelay(Message *);
+    static void SetDelay(SimpleMessage *);
 
-    static void WriteRegister(Message *);
+    static void WriteRegister(SimpleMessage *);
 
-    static void SetManipulation(Message *);
+    static void SetManipulation(SimpleMessage *);
 
-    static void SetManipulationDuration(Message *);
+    static void SetManipulationDuration(SimpleMessage *);
 
-    static void SetManipulationPeriod(Message *);
+    static void SetManipulationPeriod(SimpleMessage *);
 
-    static void SetPacketPeriod(Message *);
+    static void SetPacketPeriod(SimpleMessage *);
 
-    static void SetPacketNumber(Message *);
+    static void SetPacketNumber(SimpleMessage *);
 
-    static void SetStartMode(Message *);
+    static void SetStartMode(SimpleMessage *);
 
-    static void SetPeriod(Message *);
+    static void SetPeriod(SimpleMessage *);
 
-    static void SetPolarity(Message *);
+    static void SetPolarity(SimpleMessage *);
 
-    static void SetManipulationMode(Message *);
+    static void SetManipulationMode(SimpleMessage *);
 
-    static void LoadFormDDS(Message *);
+    static void LoadFormDDS(SimpleMessage *);
 
-    static void Test(Message *);
+    static void Test(SimpleMessage *);
 
-    static void SetKoeffCalibration(Message *);
+    static void SetKoeffCalibration(SimpleMessage *);
 
-    static void GetKoeffCalibration(Message *);
+    static void GetKoeffCalibration(SimpleMessage *);
 };

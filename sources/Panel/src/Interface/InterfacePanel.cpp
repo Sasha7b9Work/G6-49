@@ -26,7 +26,7 @@ static List<Task> tasks;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Interface::AddMessageForTransmit(Message *message)
+void Interface::AddMessageForTransmit(SimpleMessage *message)
 {
     Transceiver::Transmit(message);
 }
@@ -98,7 +98,7 @@ bool Interface::PassedLittleTimeAfterSend(Task *task)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::ProcessTask(Message *answer)
+bool Interface::ProcessTask(SimpleMessage *answer)
 {
     ListElement<Task> *element = tasks.First();
 
@@ -122,7 +122,7 @@ bool Interface::ProcessTask(Message *answer)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Interface::RunAnswer(ListElement<Task> *element, Message *answer)
+void Interface::RunAnswer(ListElement<Task> *element, SimpleMessage *answer)
 {
     element->Get()->funcProcess(answer);
     tasks.Remove(element->Get());
@@ -136,13 +136,13 @@ bool Task::Equals(Task *task1, Task *task2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Task::Task(Message *msg) : timeLast(0), funcEqual(nullptr), funcProcess(nullptr)
+Task::Task(SimpleMessage *msg) : timeLast(0), funcEqual(nullptr), funcProcess(nullptr)
 {
     message = msg->Clone();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Task::Task(Message *msg, bool(*process)(Message *), bool(*equal)(Task *, Task *)) : timeLast(0), funcEqual(equal), funcProcess(process)
+Task::Task(SimpleMessage *msg, bool(*process)(SimpleMessage *), bool(*equal)(Task *, Task *)) : timeLast(0), funcEqual(equal), funcProcess(process)
 {
     message = msg->Clone();
 }
@@ -154,14 +154,14 @@ Task::~Task()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message *Task::GetMessage()
+SimpleMessage *Task::GetMessage()
 {
     message->ResetPointer();
     return message;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Transmit()
+void SimpleMessage::Transmit()
 {
     Interface::AddMessageForTransmit(this);
 }

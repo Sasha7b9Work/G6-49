@@ -18,9 +18,9 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Handlers::Processing(Message *msg)
+void Handlers::Processing(SimpleMessage *msg)
 {
-    typedef void(*pFuncInterfaceVpM)(Message *);
+    typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
     DEF_STRUCT(FuncInterface, pFuncInterfaceVpM) commands[Command::Number] =
     {
@@ -78,7 +78,7 @@ void Handlers::Processing(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SendData(Message *)
+void Handlers::SendData(SimpleMessage *)
 {
     CPU::SetBusy();
 
@@ -109,7 +109,7 @@ void Handlers::SendData(Message *)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::EnableChannel(Message *message)
+void Handlers::EnableChannel(SimpleMessage *message)
 {
     Chan::E ch = (Chan::E)message->TakeByte();
 
@@ -119,7 +119,7 @@ void Handlers::EnableChannel(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetFormWave(Message *msg)
+void Handlers::SetFormWave(SimpleMessage *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
@@ -129,7 +129,7 @@ void Handlers::SetFormWave(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SetGeneratorParameter(Message *msg, void(*func)(Chan::E, ParamValue))
+static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, ParamValue))
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
     ParamValue value(msg->TakeDoubleWord());
@@ -137,79 +137,79 @@ static void SetGeneratorParameter(Message *msg, void(*func)(Chan::E, ParamValue)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetFrequency(Message *msg)
+void Handlers::SetFrequency(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetFrequency);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetPeriod(Message *msg)
+void Handlers::SetPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPeriod);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetAmplitude(Message *msg)
+void Handlers::SetAmplitude(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetAmplitude);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetOffset(Message *msg)
+void Handlers::SetOffset(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetOffset);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetDuration(Message *msg)
+void Handlers::SetDuration(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetDuration);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetDutyRatio(Message *msg)
+void Handlers::SetDutyRatio(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetDutyRatio);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetPhase(Message *msg)
+void Handlers::SetPhase(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPhase);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetDelay(Message *msg)
+void Handlers::SetDelay(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetDelay);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetManipulationDuration(Message *msg)
+void Handlers::SetManipulationDuration(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetManipulationDuration);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetManipulationPeriod(Message *msg)
+void Handlers::SetManipulationPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetManipulationPeriod);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetPacketPeriod(Message *msg)
+void Handlers::SetPacketPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPacketPeriod);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetPacketNumber(Message *msg)
+void Handlers::SetPacketNumber(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPacketNumber);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetManipulation(Message *msg)
+void Handlers::SetManipulation(SimpleMessage *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
@@ -217,7 +217,7 @@ void Handlers::SetManipulation(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetStartMode(Message *msg)
+void Handlers::SetStartMode(SimpleMessage *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
@@ -227,7 +227,7 @@ void Handlers::SetStartMode(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetPolarity(Message *message)
+void Handlers::SetPolarity(SimpleMessage *message)
 {
     Chan::E ch = (Chan::E)message->TakeByte();
 
@@ -235,7 +235,7 @@ void Handlers::SetPolarity(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetManipulationMode(Message *msg)
+void Handlers::SetManipulationMode(SimpleMessage *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
@@ -243,7 +243,7 @@ void Handlers::SetManipulationMode(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::LoadFormDDS(Message *message)
+void Handlers::LoadFormDDS(SimpleMessage *message)
 {
     Chan::E ch = (Chan::E)message->TakeByte();
 
@@ -251,7 +251,7 @@ void Handlers::LoadFormDDS(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::SetKoeffCalibration(Message *msg)
+void Handlers::SetKoeffCalibration(SimpleMessage *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
@@ -273,12 +273,12 @@ void Handlers::SetKoeffCalibration(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::GetKoeffCalibration(Message *)
+void Handlers::GetKoeffCalibration(SimpleMessage *)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::WriteRegister(Message *msg)
+void Handlers::WriteRegister(SimpleMessage *msg)
 {
     Register::E reg = (Register::E)msg->TakeByte();
 
@@ -369,7 +369,7 @@ void Handlers::WriteRegister(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::RunReset(Message *)
+void Handlers::RunReset(SimpleMessage *)
 {
 #ifndef WIN32
 
@@ -384,18 +384,18 @@ void Handlers::RunReset(Message *)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Handlers::Test(Message *)
+void Handlers::Test(SimpleMessage *)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::ModeDebug(Message *)
+void Handlers::ModeDebug(SimpleMessage *)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::E(Message *)
+void Handlers::E(SimpleMessage *)
 {
 
 }

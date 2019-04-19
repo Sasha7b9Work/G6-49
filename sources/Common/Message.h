@@ -3,24 +3,24 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Message																	// -V690
+class SimpleMessage  // -V690
 {
     friend class Transceiver;
 public:
-    explicit Message();
-    explicit Message(uint size, uint8);
-    explicit Message(uint size, uint8, uint8);
-    explicit Message(uint size, uint8, uint8, uint);
-    explicit Message(uint size, uint8, uint, uint);
-    explicit Message(uint size, uint8, uint8, uint8);
-    explicit Message(uint size, uint8, uint8, float);
-    explicit Message(uint size, uint8, uint8, uint64);
-    explicit Message(uint8, char*);
-    explicit Message(uint8, uint8, char *);
-    explicit Message(uint8, uint8, uint8, char *);
-    explicit Message(uint8, uint, char*);
+    explicit SimpleMessage();
+    explicit SimpleMessage(uint size, uint8);
+    explicit SimpleMessage(uint size, uint8, uint8);
+    explicit SimpleMessage(uint size, uint8, uint8, uint);
+    explicit SimpleMessage(uint size, uint8, uint, uint);
+    explicit SimpleMessage(uint size, uint8, uint8, uint8);
+    explicit SimpleMessage(uint size, uint8, uint8, float);
+    explicit SimpleMessage(uint size, uint8, uint8, uint64);
+    explicit SimpleMessage(uint8, char*);
+    explicit SimpleMessage(uint8, uint8, char *);
+    explicit SimpleMessage(uint8, uint8, uint8, char *);
+    explicit SimpleMessage(uint8, uint, char*);
 
-    ~Message();
+    ~SimpleMessage();
 
     void Create(uint size, uint8);
     void Create(uint size, uint8, uint8);
@@ -33,11 +33,11 @@ public:
     void Create(uint8, uint, char *);
     void Create(uint size, uint8 com, uint8 d0, uint d1);
     /// Возвращает указатель на созданную копию
-    Message *Clone();
+    SimpleMessage *Clone();
     /// Сбрасывает указатель извлечённой информации.
     void ResetPointer() { taken = 0; };
 
-    bool CreateFromMessage(Message *message);
+    bool CreateFromMessage(SimpleMessage *message);
     /// Создать сообщение с выделением памяти
     bool CreateAllocate(uint8 *buffer, uint size);
     /// Выделить необходимое количество памяти
@@ -65,7 +65,7 @@ public:
     /// Возвращает true, если это null-пакет (память не выделена)
     bool IsEmpty() const;
     /// Возвращает true, если сообщения одинаковы
-    bool IsEquals(const Message *message) const;
+    bool IsEquals(const SimpleMessage *message) const;
     /// Возвращает указатель на pos-й элемент. Удобно для копирования строк
     char *String(int pos);
 
@@ -97,13 +97,13 @@ protected:
     /// На какой позиции указатель. Используется для Take
     uint taken;
 
-    Message(const Message &) : allocated(0), buffer(0), used(0), taken(0) {};
+    SimpleMessage(const SimpleMessage &) : allocated(0), buffer(0), used(0), taken(0) {};
 };
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Служебное сообщение - для обмена между процессорами
-class MessageRequestData : public Message
+class MessageRequestData : public SimpleMessage
 {
 public:
     MessageRequestData();
@@ -111,7 +111,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Включить/выключить канал
-class MessageEnableChannel : public Message
+class MessageEnableChannel : public SimpleMessage
 {
 public:
     /// ch : 0 - A, 1 - B
@@ -121,7 +121,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Установка формы сигнала
-class MessageSetFromWave : public Message
+class MessageSetFromWave : public SimpleMessage
 {
 public:
     MessageSetFromWave(uint8 ch, uint8 form);
@@ -129,7 +129,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Установка частоты
-class MessageSetFrequency : public Message
+class MessageSetFrequency : public SimpleMessage
 {
 public:
     MessageSetFrequency(uint8 ch, uint64 frequency);
@@ -137,7 +137,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Установка амплитуды
-class MessageSetAmplitude : public Message
+class MessageSetAmplitude : public SimpleMessage
 {
 public:
     MessageSetAmplitude(uint8 ch, uint64 amplitude);
@@ -145,7 +145,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Установка смещения сигнала на канале
-class MessageSetOffset : public Message
+class MessageSetOffset : public SimpleMessage
 {
 public:
     MessageSetOffset(uint8 ch, uint64 offset);
@@ -153,7 +153,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Сообщение измерения частотомера
-class MessageFreqMeasure : public Message
+class MessageFreqMeasure : public SimpleMessage
 {
 public:
     MessageFreqMeasure(uint frequency);
@@ -161,7 +161,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Сообщение о примонтировании/отмонтировании диска
-class MessageFDriveMount : public Message
+class MessageFDriveMount : public SimpleMessage
 {
 public:
     /// mount :
@@ -173,7 +173,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Число каталогов и файлов в текущем каталоге
-class MessageFDriveNumDirsAndFiles : public Message
+class MessageFDriveNumDirsAndFiles : public SimpleMessage
 {
 public:
     MessageFDriveNumDirsAndFiles(uint numDirs, uint numFiles);
@@ -181,7 +181,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Запрос имени файла
-class MessageFDriveFileName : public Message
+class MessageFDriveFileName : public SimpleMessage
 {
 public:
     MessageFDriveFileName(uint8 numFile, char *name);
@@ -189,7 +189,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Запрос размера файла
-class MessageFDriveFileSize : public Message
+class MessageFDriveFileSize : public SimpleMessage
 {
 public:
     MessageFDriveFileSize(uint8 numFile, uint size);
@@ -197,7 +197,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Сообщение в консоль
-class MessageLog : public Message
+class MessageLog : public SimpleMessage
 {
 public:
     MessageLog(char *string);
@@ -205,7 +205,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Установка режима запуска
-class MessageStartMode : public Message
+class MessageStartMode : public SimpleMessage
 {
 public:
     MessageStartMode(uint8 ch, uint8 mode);
@@ -213,7 +213,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Запись в регистр
-class MessageWriteRegister : public Message
+class MessageWriteRegister : public SimpleMessage
 {
 public:
     MessageWriteRegister(uint8 reg, uint64 data);
@@ -221,7 +221,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Установка отладочного режима
-class MessageDebugMode : public Message
+class MessageDebugMode : public SimpleMessage
 {
 public:
     /// mode == 1/0 - включить/отключить режим отладки
@@ -230,7 +230,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Сброс состояния
-class MessageReset : public Message
+class MessageReset : public SimpleMessage
 {
 public:
     MessageReset();
@@ -238,7 +238,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Универсальное сособщение для засылки параметра
-class MessageParameter : public Message
+class MessageParameter : public SimpleMessage
 {
 public:
     MessageParameter(Command::E param, uint8 ch, uint64 value);
@@ -246,7 +246,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Загрузить выбранный файл в FPGA
-class MessageFDriveLoadToFPGA : public Message
+class MessageFDriveLoadToFPGA : public SimpleMessage
 {
 public:
     MessageFDriveLoadToFPGA(uint8 ch, uint8 numFile, char *directory);

@@ -34,7 +34,7 @@ void CalibrationSettings::Load()
     {
         for (int k = 0; k < KoeffCal::Number; k++)
         {
-            Message message;
+            SimpleMessage message;
             CreateMessage(&message, (Chan::E)ch, (KoeffCal::E)k);
             message.Transmit();
         }
@@ -56,7 +56,7 @@ CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CalibrationSettings::CreateMessage(Message *message, Chan::E ch, KoeffCal::E koeff)
+void CalibrationSettings::CreateMessage(SimpleMessage *message, Chan::E ch, KoeffCal::E koeff)
 {
     DEF_STRUCT(StructCal, int16 *) values[KoeffCal::Number] =
     {

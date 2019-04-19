@@ -9,7 +9,7 @@ class Transceiver
     friend class Handlers;
 private:
 
-    static void Transmit(Message *message);
+    static void Transmit(SimpleMessage *message);
 
-    static bool Receive(Message *message);
+    static bool Receive(SimpleMessage *message);
 };

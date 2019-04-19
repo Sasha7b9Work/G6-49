@@ -13,9 +13,9 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Handlers::Processing(Message *msg)
+bool Handlers::Processing(SimpleMessage *msg)
 {
-    typedef bool(*pFuncBpM)(Message *);
+    typedef bool(*pFuncBpM)(SimpleMessage *);
 
     DEF_STRUCT(StructFunc, pFuncBpM) functions[Command::Number] =
     {
@@ -78,26 +78,26 @@ bool Handlers::Processing(Message *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Handlers::E(Message *)
+bool Handlers::E(SimpleMessage *)
 {
     return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Handlers::Request(Message *)
+bool Handlers::Request(SimpleMessage *)
 {
     return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Handlers::FreqMeasure(Message *msg)
+bool Handlers::FreqMeasure(SimpleMessage *msg)
 {
     FrequencyMeter::SetMeasure(msg->TakeWord());
     return true;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Handlers::Log(Message *msg)
+bool Handlers::Log(SimpleMessage *msg)
 {
     Console::AddString(msg->String(1));
     return true;

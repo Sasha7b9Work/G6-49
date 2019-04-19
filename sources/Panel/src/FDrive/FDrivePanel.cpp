@@ -76,7 +76,7 @@ void FDrive::Draw()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool FDrive::Handler::Processing(Message *msg)
+bool FDrive::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 

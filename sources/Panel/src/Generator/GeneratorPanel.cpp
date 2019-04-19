@@ -28,7 +28,7 @@ static const int FPGA_NUM_POINTS = 8 * 1024;
 /// Загружает форму произвольного сигнала
 static void LoadFormDDS(Form *form);
 /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-static void TransformDataToCode(float data[FPGA_NUM_POINTS], Message *message);
+static void TransformDataToCode(float data[FPGA_NUM_POINTS], SimpleMessage *message);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ void LoadFormDDS(Form *form)
 
     float data[FPGA_NUM_POINTS];
 
-    Message message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, (uint8)ch);
+    SimpleMessage message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, (uint8)ch);
 
     switch (form->value)
     {
@@ -146,7 +146,7 @@ void LoadFormDDS(Form *form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TransformDataToCode(float d[FPGA_NUM_POINTS], Message *message)
+void TransformDataToCode(float d[FPGA_NUM_POINTS], SimpleMessage *message)
 {
     uint8 code[FPGA_NUM_POINTS * 2];
 
@@ -181,7 +181,7 @@ void Generator::SetParameter(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    Message message(3, (uint8)commands[param->value].val,
+    SimpleMessage message(3, (uint8)commands[param->value].val,
         (uint8)param->GetForm()->GetWave()->GetChannel(),
         (uint8)param->GetChoice());
 

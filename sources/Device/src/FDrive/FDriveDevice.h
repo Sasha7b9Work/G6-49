@@ -17,6 +17,6 @@ public:
     class Handler
     {
         friend class Handlers;
-        static void Processing(Message *msg);
+        static void Processing(SimpleMessage *msg);
     };
 };

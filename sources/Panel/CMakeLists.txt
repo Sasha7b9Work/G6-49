@@ -29,7 +29,7 @@ add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for me
 
 source_group(common                   FILES ../common/Command.cpp ../common/Command.h
                                             ../common/Common.cpp  ../common/Common.h
-                                            ../common/Message.cpp ../common/Message.h
+                                            ../common/SimpleMessage.cpp ../common/SimpleMessage.h
                                             ../common/Transceiver.cpp ../common/Transceiver.h
                                             ../common/Wave.h)
 source_group(src                      REGULAR_EXPRESSION src/*.*)
@@ -53,7 +53,7 @@ source_group(Utils                    REGULAR_EXPRESSION src/Utils/*.*)
 
 file(GLOB SOURCES   ../common/Command.cpp     ../common/Command.h
                     ../common/Common.cpp      ../common/Common.h
-                    ../common/Message.cpp     ../common/Message.h
+                    ../common/SimpleMessage.cpp     ../common/SimpleMessage.h
                     ../common/Transceiver.cpp ../common/Transceiver.h
                     ../common/Wave.h
                     src/*

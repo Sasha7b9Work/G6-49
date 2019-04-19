@@ -30,7 +30,7 @@ public:
     class Handler
     {
     friend class Handlers;
-        static bool Processing(Message *msg);
+        static bool Processing(SimpleMessage *msg);
     };
 
     /// Путь к текущему каталогу

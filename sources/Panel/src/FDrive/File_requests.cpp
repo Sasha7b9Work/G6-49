@@ -15,8 +15,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool EqualsRequestString(Task *task1, Task *task2)
 {
-    Message *msg1 = task1->GetMessage();
-    Message *msg2 = task2->GetMessage();
+    SimpleMessage *msg1 = task1->GetMessage();
+    SimpleMessage *msg2 = task2->GetMessage();
 
     uint8 com = Command::FDrive_RequestFileString;
 
@@ -27,7 +27,7 @@ static bool EqualsRequestString(Task *task1, Task *task2)
 
 void FileRequests::SendRequestForString(String *name, int numString)
 {
-    Message message(Command::FDrive_RequestFileString, (uint)numString, name->CString());
+    SimpleMessage message(Command::FDrive_RequestFileString, (uint)numString, name->CString());
 
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestString);
 

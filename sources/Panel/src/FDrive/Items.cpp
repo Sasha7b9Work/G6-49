@@ -70,7 +70,7 @@ int Items::NumberCurrentFile()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Items::SendRequest()
 {
-    Message message(Command::FDrive_NumDirsAndFiles, FDrive::directory);
+    SimpleMessage message(Command::FDrive_NumDirsAndFiles, FDrive::directory);
 
     message.Transmit();
 
@@ -78,7 +78,7 @@ void Items::SendRequest()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Items::Handler::Processing(Message *msg)
+bool Items::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 
@@ -120,9 +120,9 @@ bool Items::Handler::Processing(Message *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool EqualsRequestNameFile(Task *task1, Task *task2)
 {
-    Message *msg1 = task1->GetMessage();
+    SimpleMessage *msg1 = task1->GetMessage();
 
-    Message *msg2 = task2->GetMessage();
+    SimpleMessage *msg2 = task2->GetMessage();
 
     uint8 com = Command::FDrive_RequestFile;
 
@@ -134,7 +134,7 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendRequestForNameFile(int number)
 {
-    Message message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
+    SimpleMessage message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
     
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestNameFile);
     

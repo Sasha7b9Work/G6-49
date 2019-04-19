@@ -36,8 +36,8 @@ void Interface::Update()
 
     if (SPI1_::Receive(&size, 4, 10))                                                           // ”знаЄм размер принимаемого сообщени€
     {
-        Message first;              // —юда принимаем первое сообщение
-        Message second;             // —юда принимаем второе сообщение
+        SimpleMessage first;              // —юда принимаем первое сообщение
+        SimpleMessage second;             // —юда принимаем второе сообщение
 
         uint timeout = size > 100U ? 200U : 10U;
 
@@ -80,9 +80,9 @@ void Interface::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::AddMessageForTransmit(Message *message)
+bool Interface::AddMessageForTransmit(SimpleMessage *message)
 {
-    Message *clone = message->Clone();
+    SimpleMessage *clone = message->Clone();
 
     if (!messages.Push(clone))
     {
@@ -96,7 +96,7 @@ bool Interface::AddMessageForTransmit(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Transmit()
+void SimpleMessage::Transmit()
 {
     Interface::AddMessageForTransmit(this);
 }

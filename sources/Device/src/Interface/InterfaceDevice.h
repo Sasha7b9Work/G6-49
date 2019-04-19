@@ -7,7 +7,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Interface
 {
-    friend class Message;
+    friend class SimpleMessage;
     friend class Handlers;
 
 public:
@@ -16,7 +16,7 @@ public:
     
 private:
     /// Добавляет сообщение в очередь отправки. Если очередь заполнена, сообщение удаляется и функция возвращает false
-    static bool AddMessageForTransmit(Message *message);
+    static bool AddMessageForTransmit(SimpleMessage *message);
     /// Очередь сообщений, ожидающих отправки
     static Queue messages;
     /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение

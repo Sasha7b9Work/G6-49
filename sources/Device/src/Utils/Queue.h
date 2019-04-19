@@ -7,9 +7,9 @@ class Queue
 public:
     Queue();
 
-    Message *Front();
+    SimpleMessage *Front();
 
-    bool Push(Message *message);
+    bool Push(SimpleMessage *message);
 
     void Pop();
 
@@ -22,5 +22,5 @@ private:
 
     static const uint SIZE = 100U;
 
-    Message *storage[SIZE];
+    SimpleMessage *storage[SIZE];
 };

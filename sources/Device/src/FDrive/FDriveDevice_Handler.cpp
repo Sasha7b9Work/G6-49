@@ -47,7 +47,7 @@ static void FillPicture(uint8 *picture, uint size, float values[4096]);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FDrive::Handler::Processing(Message *msg)
+void FDrive::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 
@@ -121,7 +121,7 @@ void FDrive::Handler::Processing(Message *msg)
             }
         }
 
-        Message answer(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
+        SimpleMessage answer(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
         answer.PutData(data, SIZE);
         answer.Transmit();
     }
@@ -151,7 +151,7 @@ void FDrive::Handler::Processing(Message *msg)
             string[0] = 0;
         }
 
-        Message *answer = new Mess age(Command::FDrive_RequestFileString, numString, string);
+        SimpleMessage *answer = new Mess age(Command::FDrive_RequestFileString, numString, string);
 
         Interface::AddMessageForTransmit(answer);
         */

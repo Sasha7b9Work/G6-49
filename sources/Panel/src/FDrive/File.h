@@ -18,7 +18,7 @@ public:
     /// Закрывает файл и освобождает память
     void Close();
 
-    static bool Handler(Message *msg);
+    static bool Handler(SimpleMessage *msg);
     /// Сохранить данные как данные формы
     static void SetDataToWave();
 };

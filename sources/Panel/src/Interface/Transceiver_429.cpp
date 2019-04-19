@@ -10,7 +10,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Transceiver::Transmit(Message *message)
+void Transceiver::Transmit(SimpleMessage *message)
 {
     if (message->Size() == 0)
     {
@@ -56,7 +56,7 @@ void Transceiver::Transmit(Message *message)
     };
 }
 
-bool Transceiver::Receive(Message *message)
+bool Transceiver::Receive(SimpleMessage *message)
 {
     SPI4_::WaitFalling();
 

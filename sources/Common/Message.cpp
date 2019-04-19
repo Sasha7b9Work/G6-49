@@ -12,19 +12,19 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Message::Message() : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage() : allocated(0), buffer(0), used(0), taken(0)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::~Message()
+SimpleMessage::~SimpleMessage()
 {
     FreeMemory();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint8 v0, char *string) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint8 v0, char *string) : allocated(0), buffer(0), used(0), taken(0)
 {
     //          v0 | string              | завершающий_ноль
     uint size = 1 +  std::strlen(string) + 1;
@@ -35,60 +35,60 @@ Message::Message(uint8 v0, char *string) : allocated(0), buffer(0), used(0), tak
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint8 v0, uint8 v1, char *string) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint8 v0, uint8 v1, char *string) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(v0, v1, string);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint8 v0, uint8 v1, uint8 v2, char *string) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint8 v0, uint8 v1, uint8 v2, char *string) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(v0, v1, v2, string);
 }
 
-Message::Message(uint8 d0, uint d1, char *string) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint8 d0, uint d1, char *string) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(d0, d1, string);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint size, uint8 v0) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint size, uint8 v0) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, v0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint size, uint8 v0, uint v1, uint v2) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint size, uint8 v0, uint v1, uint v2) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, v0, v1, v2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint size, uint8 com, uint8 d0, uint d1) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint size, uint8 com, uint8 d0, uint d1) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, com, d0, d1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint size, uint8 v0, uint8 v1) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1) : allocated(0), buffer(0), used(0), taken(0)
 {   
     Create(size, v0, v1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint size, uint8 v0, uint8 v1, uint8 v2) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, uint8 v2) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, v0, v1, v2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint size, uint8 v0, uint8 v1, float v2) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, float v2) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, v0, v1, v2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::Message(uint size, uint8 v0, uint8 v1, uint64 v2) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, uint64 v2) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, v0, v1);
 
@@ -101,9 +101,9 @@ Message::Message(uint size, uint8 v0, uint8 v1, uint64 v2) : allocated(0), buffe
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message *Message::Clone()
+SimpleMessage *SimpleMessage::Clone()
 {
-    Message *result = new Message();
+    SimpleMessage *result = new SimpleMessage();
     if (result->AllocateMemory(Size()))
     {
         std::memcpy(result->buffer, buffer, allocated);
@@ -115,7 +115,7 @@ Message *Message::Clone()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint size, uint8 v0)
+void SimpleMessage::Create(uint size, uint8 v0)
 {
     if (AllocateMemory(size))
     {
@@ -124,7 +124,7 @@ void Message::Create(uint size, uint8 v0)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint size, uint8 v0, uint v1, uint v2)
+void SimpleMessage::Create(uint size, uint8 v0, uint v1, uint v2)
 {
     if (AllocateMemory(size))
     {
@@ -135,7 +135,7 @@ void Message::Create(uint size, uint8 v0, uint v1, uint v2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint size, uint8 com, uint8 d0, uint d1)
+void SimpleMessage::Create(uint size, uint8 com, uint8 d0, uint d1)
 {
     if (AllocateMemory(size))
     {
@@ -146,7 +146,7 @@ void Message::Create(uint size, uint8 com, uint8 d0, uint d1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint size, uint8 v0, uint8 v1)
+void SimpleMessage::Create(uint size, uint8 v0, uint8 v1)
 {
     if (AllocateMemory(size))
     {
@@ -156,7 +156,7 @@ void Message::Create(uint size, uint8 v0, uint8 v1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint8 v0, uint8 v1, char *string)
+void SimpleMessage::Create(uint8 v0, uint8 v1, char *string)
 {
     //          v0 | v1 | string              | завершающий_ноль
     uint size = 1 +  1 +  std::strlen(string) + 1;
@@ -170,7 +170,7 @@ void Message::Create(uint8 v0, uint8 v1, char *string)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint8 v0, uint8 v1, uint8 v2, char *string)
+void SimpleMessage::Create(uint8 v0, uint8 v1, uint8 v2, char *string)
 {
     uint size = 1 + 1 + 1 + std::strlen(string) + 1;
     if (AllocateMemory(size))
@@ -183,7 +183,7 @@ void Message::Create(uint8 v0, uint8 v1, uint8 v2, char *string)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint8 v0, uint v1, char *string)
+void SimpleMessage::Create(uint8 v0, uint v1, char *string)
 {
     //          v0 | v1 | string              | завершающий_ноль
     uint size = 1 + 1 + std::strlen(string) + 1;
@@ -197,7 +197,7 @@ void Message::Create(uint8 v0, uint v1, char *string)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint size, uint8 v0, uint8 v1, uint8 v2)
+void SimpleMessage::Create(uint size, uint8 v0, uint8 v1, uint8 v2)
 {
     if (AllocateMemory(size))
     {
@@ -208,7 +208,7 @@ void Message::Create(uint size, uint8 v0, uint8 v1, uint8 v2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint size, uint8 v0, uint8 v1, float v2)
+void SimpleMessage::Create(uint size, uint8 v0, uint8 v1, float v2)
 {
     if (AllocateMemory(size))
     {
@@ -219,7 +219,7 @@ void Message::Create(uint size, uint8 v0, uint8 v1, float v2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::Create(uint size, uint8 value0, uint8 value1, uint8 value2, uint16 value3)
+void SimpleMessage::Create(uint size, uint8 value0, uint8 value1, uint8 value2, uint16 value3)
 {
     if (AllocateMemory(size))
     {
@@ -231,7 +231,7 @@ void Message::Create(uint size, uint8 value0, uint8 value1, uint8 value2, uint16
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Message::CreateAllocate(uint8 *_buffer, uint _size)
+bool SimpleMessage::CreateAllocate(uint8 *_buffer, uint _size)
 {
     if (AllocateMemory(_size))
     {
@@ -243,7 +243,7 @@ bool Message::CreateAllocate(uint8 *_buffer, uint _size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Message::CreateFromMessage(Message *message)
+bool SimpleMessage::CreateFromMessage(SimpleMessage *message)
 {
     if (AllocateMemory(message->Size()))
     {
@@ -255,14 +255,14 @@ bool Message::CreateFromMessage(Message *message)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::PutByte(uint8 data)
+void SimpleMessage::PutByte(uint8 data)
 {
      buffer[used] = data;
      used += sizeof(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::PutDoubleWord(uint64 data)
+void SimpleMessage::PutDoubleWord(uint64 data)
 {
     BitSet64 bs(data);
     PutWord(bs.word0);
@@ -270,13 +270,13 @@ void Message::PutDoubleWord(uint64 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::PutHalfWord(int16 data)
+void SimpleMessage::PutHalfWord(int16 data)
 {
     PutHalfWord((uint16)data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::PutHalfWord(uint16 data)
+void SimpleMessage::PutHalfWord(uint16 data)
 {
     BitSet16 bs(data);
     bs.WriteToBuffer(buffer + used);
@@ -284,7 +284,7 @@ void Message::PutHalfWord(uint16 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::PutWord(uint data)
+void SimpleMessage::PutWord(uint data)
 {
      BitSet32 bs(data);
      bs.WriteToBuffer(buffer + used);
@@ -292,14 +292,14 @@ void Message::PutWord(uint data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::PutData(uint8 *data, uint length)
+void SimpleMessage::PutData(uint8 *data, uint length)
 {
     std::memcpy(buffer + used, data, length);
     used += length;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::PutFloat(float data)
+void SimpleMessage::PutFloat(float data)
 {
     BitSet32 bs(data);
     bs.WriteToBuffer(buffer + used);
@@ -307,7 +307,7 @@ void Message::PutFloat(float data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 Message::TakeByte()
+uint8 SimpleMessage::TakeByte()
 {
     uint8 result = buffer[taken];
     taken += sizeof(result);
@@ -316,7 +316,7 @@ uint8 Message::TakeByte()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint16 Message::TakeHalfWord()
+uint16 SimpleMessage::TakeHalfWord()
 {
     BitSet16 bs(buffer + taken);
     uint16 result = bs.halfWord;
@@ -326,7 +326,7 @@ uint16 Message::TakeHalfWord()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Message::TakeWord()
+uint SimpleMessage::TakeWord()
 {
     BitSet32 bs(buffer + taken);
     uint result = bs.word;
@@ -336,7 +336,7 @@ uint Message::TakeWord()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint64 Message::TakeDoubleWord()
+uint64 SimpleMessage::TakeDoubleWord()
 {
     BitSet64 bs(buffer + taken);
     uint64 result = bs.dword;
@@ -346,7 +346,7 @@ uint64 Message::TakeDoubleWord()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float Message::TakeFloat()
+float SimpleMessage::TakeFloat()
 {
     BitSet32 bs(buffer + taken);
     float result = bs.floatValue;
@@ -356,7 +356,7 @@ float Message::TakeFloat()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::TakeRemainigData(uint8 *data)
+void SimpleMessage::TakeRemainigData(uint8 *data)
 {
     uint size = allocated - taken;
     std::memcpy(data, buffer, size);
@@ -364,13 +364,13 @@ void Message::TakeRemainigData(uint8 *data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Message::RemainingData() const
+uint8 *SimpleMessage::RemainingData() const
 {
     return &buffer[taken];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Message::AllocateMemory(uint size)
+bool SimpleMessage::AllocateMemory(uint size)
 {
     FreeMemory();
 
@@ -393,7 +393,7 @@ bool Message::AllocateMemory(uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Message::FreeMemory()
+void SimpleMessage::FreeMemory()
 {
     allocated = 0;
     used = 0;
@@ -402,25 +402,25 @@ void Message::FreeMemory()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint8 *Message::Data(int pos)
+uint8 *SimpleMessage::Data(int pos)
 {
     return buffer + pos;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint Message::Size() const
+uint SimpleMessage::Size() const
 {
     return allocated;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Message::IsEmpty() const
+bool SimpleMessage::IsEmpty() const
 {
     return buffer != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Message::IsEquals(const Message *message) const
+bool SimpleMessage::IsEquals(const SimpleMessage *message) const
 {
     if (Size() != message->Size())
     {
@@ -431,13 +431,13 @@ bool Message::IsEquals(const Message *message) const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-char *Message::String(int pos)
+char *SimpleMessage::String(int pos)
 {
     return (char *)&buffer[pos];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-pString Message::Trace()
+pString SimpleMessage::Trace()
 {
     if (Size() == 0)
     {
@@ -449,66 +449,66 @@ pString Message::Trace()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFreqMeasure::MessageFreqMeasure(uint frequency) : Message(5, Command::FreqMeasure)
+MessageFreqMeasure::MessageFreqMeasure(uint frequency) : SimpleMessage(5, Command::FreqMeasure)
 {
     PutWord(frequency);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageRequestData::MessageRequestData() : Message(1, Command::RequestData)
+MessageRequestData::MessageRequestData() : SimpleMessage(1, Command::RequestData)
 {
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageEnableChannel::MessageEnableChannel(uint8 ch, uint8 enable) : Message(3, Command::EnableChannel)
+MessageEnableChannel::MessageEnableChannel(uint8 ch, uint8 enable) : SimpleMessage(3, Command::EnableChannel)
 {
     PutByte(ch);
     PutByte(enable);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageSetFromWave::MessageSetFromWave(uint8 ch, uint8 form) : Message(3, Command::SetFormWave)
+MessageSetFromWave::MessageSetFromWave(uint8 ch, uint8 form) : SimpleMessage(3, Command::SetFormWave)
 {
     PutByte(ch);
     PutByte(form);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageSetFrequency::MessageSetFrequency(uint8 ch, uint64 frequency) : Message(10, Command::SetFrequency)
+MessageSetFrequency::MessageSetFrequency(uint8 ch, uint64 frequency) : SimpleMessage(10, Command::SetFrequency)
 {
     PutByte(ch);
     PutDoubleWord(frequency);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageSetAmplitude::MessageSetAmplitude(uint8 ch, uint64 amplitude) : Message(10, Command::SetAmplitude)
+MessageSetAmplitude::MessageSetAmplitude(uint8 ch, uint64 amplitude) : SimpleMessage(10, Command::SetAmplitude)
 {
     PutByte(ch);
     PutDoubleWord(amplitude);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageSetOffset::MessageSetOffset(uint8 ch, uint64 offset) : Message(10, Command::SetOffset)
+MessageSetOffset::MessageSetOffset(uint8 ch, uint64 offset) : SimpleMessage(10, Command::SetOffset)
 {
     PutByte(ch);
     PutDoubleWord(offset);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveMount::MessageFDriveMount(uint8 mount) : Message(2, Command::FDrive_Mount)
+MessageFDriveMount::MessageFDriveMount(uint8 mount) : SimpleMessage(2, Command::FDrive_Mount)
 {
     PutByte(mount);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveNumDirsAndFiles::MessageFDriveNumDirsAndFiles(uint numDirs, uint numFiles) : Message(9, Command::FDrive_NumDirsAndFiles)
+MessageFDriveNumDirsAndFiles::MessageFDriveNumDirsAndFiles(uint numDirs, uint numFiles) : SimpleMessage(9, Command::FDrive_NumDirsAndFiles)
 {
     PutWord(numDirs);
     PutWord(numFiles);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveFileName::MessageFDriveFileName(uint8 numFile, char *name) : Message()
+MessageFDriveFileName::MessageFDriveFileName(uint8 numFile, char *name) : SimpleMessage()
 {
     //          v0 | v1 | string |              завершающий_ноль
     uint size = 1 +  1 +  std::strlen(name) + 1;
@@ -519,14 +519,14 @@ MessageFDriveFileName::MessageFDriveFileName(uint8 numFile, char *name) : Messag
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveFileSize::MessageFDriveFileSize(uint8 numFile, uint size) : Message(6, Command::FDrive_RequestFileSize)
+MessageFDriveFileSize::MessageFDriveFileSize(uint8 numFile, uint size) : SimpleMessage(6, Command::FDrive_RequestFileSize)
 {
     PutByte(numFile);
     PutWord(size);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageLog::MessageLog(char *string) : Message()
+MessageLog::MessageLog(char *string) : SimpleMessage()
 {
     //          v0 | string              | завершающий_ноль
     uint size = 1 + std::strlen(string) + 1;
@@ -538,40 +538,40 @@ MessageLog::MessageLog(char *string) : Message()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageStartMode::MessageStartMode(uint8 ch, uint8 mode) : Message(3, Command::SetStartMode)
+MessageStartMode::MessageStartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::SetStartMode)
 {
     PutByte(ch);
     PutByte(mode);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageWriteRegister::MessageWriteRegister(uint8 reg, uint64 data) : Message(10, Command::WriteRegister)
+MessageWriteRegister::MessageWriteRegister(uint8 reg, uint64 data) : SimpleMessage(10, Command::WriteRegister)
 {
     PutByte(reg);
     PutDoubleWord(data);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageDebugMode::MessageDebugMode(uint8 mode) : Message(2, Command::ModeDebug)
+MessageDebugMode::MessageDebugMode(uint8 mode) : SimpleMessage(2, Command::ModeDebug)
 {
     PutByte(mode);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageReset::MessageReset() : Message(1, Command::RunReset)
+MessageReset::MessageReset() : SimpleMessage(1, Command::RunReset)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageParameter::MessageParameter(Command::E param, uint8 ch, uint64 value) : Message(10, (uint8)param)
+MessageParameter::MessageParameter(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
 {
     PutByte(ch);
     PutDoubleWord(value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveLoadToFPGA::MessageFDriveLoadToFPGA(uint8 ch, uint8 numFile, char *directory) : Message()
+MessageFDriveLoadToFPGA::MessageFDriveLoadToFPGA(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
 {
     //          com ch  numFile directory                 завершающий_ноль
     uint size = 1 + 1 + 1 +      std::strlen(directory) + 1;

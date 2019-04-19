@@ -68,7 +68,7 @@ void File::Draw(int x, int y)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool File::Handler(Message *msg)
+bool File::Handler(SimpleMessage *msg)
 {
     uint8 com = msg->TakeByte();
 
@@ -93,8 +93,8 @@ void File::SetDataToWave()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool EqualsRequestPicture(Task *request, Task *answer)
 {
-    Message *send = request->GetMessage();
-    Message *recv = answer->GetMessage();
+    SimpleMessage *send = request->GetMessage();
+    SimpleMessage *recv = answer->GetMessage();
 
     uint8 com = Command::FDrive_GetPictureDDS;
 
@@ -107,7 +107,7 @@ void File::Open(int _num)
 {
     Close();
 
-    Message message(2, Command::FDrive_GetPictureDDS, (uint8)_num);
+    SimpleMessage message(2, Command::FDrive_GetPictureDDS, (uint8)_num);
 
     Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
 
