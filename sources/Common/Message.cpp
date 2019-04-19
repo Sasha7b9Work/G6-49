@@ -522,3 +522,15 @@ MessageFDriveFileSize::MessageFDriveFileSize(uint8 numFile, uint size) : Message
     PutByte(numFile);
     PutWord(size);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageLog::MessageLog(char *string) : Message()
+{
+    //          v0 | string              | завершающий_ноль
+    uint size = 1 + std::strlen(string) + 1;
+
+    AllocateMemory(size);
+    PutByte(Command::Log);
+
+    std::strcpy((char *)(buffer + 1), string);
+}
