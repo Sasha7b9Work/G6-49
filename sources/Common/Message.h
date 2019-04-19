@@ -9,7 +9,6 @@ public:
     explicit Message();
     explicit Message(uint size, uint8);
     explicit Message(uint size, uint8, uint8);
-    explicit Message(uint size, uint8, uint);
     explicit Message(uint size, uint8, uint8, uint);
     explicit Message(uint size, uint8, uint, uint);
     explicit Message(uint size, uint8, uint8, uint8);
@@ -24,7 +23,6 @@ public:
 
     void Create(uint size, uint8);
     void Create(uint size, uint8, uint8);
-    void Create(uint size, uint8, uint);
     void Create(uint size, uint8, uint, uint);
     void Create(uint size, uint8, uint8, uint8);
     void Create(uint size, uint8, uint8, float);
