@@ -263,7 +263,7 @@ bool Message::CreateFromMessage(Message *message)
 {
     if (AllocateMemory(message->Size()))
     {
-        std::memcpy(buffer, message->buffer, message->allocated);
+        std::memcpy(buffer, message->buffer, message->allocated); //-V595
         used = message->used;
     }
 
