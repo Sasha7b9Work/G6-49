@@ -34,7 +34,7 @@ static void TransformDataToCode(float data[FPGA_NUM_POINTS], Message *message);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan::E ch, bool enable)
 {
-    Message(3, Command::EnableChannel, (uint8)ch, (uint8)(enable ? 1u : 0u)).Transmit();
+    MessageEnableChannel((uint8)ch, (uint8)(enable ? 1U : 0U)).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

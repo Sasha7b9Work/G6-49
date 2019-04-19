@@ -454,3 +454,12 @@ MessageRequestData::MessageRequestData() : Message()
     AllocateMemory(1);
     PutByte(Command::RequestData);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageEnableChannel::MessageEnableChannel(uint8 ch, uint8 enable) : Message()
+{
+    AllocateMemory(3);
+    PutByte(Command::EnableChannel);
+    PutByte(ch);
+    PutByte(enable);
+}
