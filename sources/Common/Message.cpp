@@ -508,7 +508,7 @@ MessageFDriveNumDirsAndFiles::MessageFDriveNumDirsAndFiles(uint numDirs, uint nu
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveFileName::MessageFDriveFileName(uint8 numFile, char *name) : SimpleMessage()
+Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 {
     //          v0 | v1 | string |              завершающий_ноль
     uint size = 1 +  1 +  std::strlen(name) + 1;
