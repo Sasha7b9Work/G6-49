@@ -76,10 +76,7 @@ bool File::Handler(Message *msg)
     {
         num = msg->TakeByte();
 
-        for (int i = 0; i < 300; i++)
-        {
-            picture.data[i] = msg->Data(2)[i];
-        }
+        msg->TakeRemainigData(picture.data);
 
         return true;
     }

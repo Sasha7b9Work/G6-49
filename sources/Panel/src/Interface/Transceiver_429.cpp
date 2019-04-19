@@ -40,11 +40,6 @@ void Transceiver::Transmit(Message *message)
             uint trashedBytes = SPI4_::ReceiveAndCompare(message->Data(), message->Size());
 
             result = (trashedBytes == 0);
-
-            if (trashedBytes > 0)
-            {
-                //LOG_WRITE("Дефектная передача. Искажено %d байт - %.1f %%", trashedBytes, trashedBytes * 100.0f / message->Size());
-            }
         }
 
         static uint all = 0;

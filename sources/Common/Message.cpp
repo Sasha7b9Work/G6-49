@@ -112,8 +112,9 @@ Message *Message::Clone()
     Message *result = new Message();
     if (result->AllocateMemory(Size()))
     {
-        *result = *this;
         std::memcpy(result->buffer, buffer, allocated);
+        result->used = used;
+        result->taken = taken;
     }
     
     return result;
@@ -262,8 +263,9 @@ bool Message::CreateFromMessage(Message *message)
 {
     if (AllocateMemory(message->Size()))
     {
-        *this = *message;
         std::memcpy(buffer, message->buffer, message->allocated);
+        used = message->used;
+        taken = message->taken;
     }
 
     return buffer != 0;
@@ -368,6 +370,12 @@ void Message::TakeRemainigData(uint8 *data)
     uint size = allocated - taken;
     std::memcpy(data, buffer, size);
     taken = allocated;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *Message::RemainingData() const
+{
+    return &buffer[taken];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
