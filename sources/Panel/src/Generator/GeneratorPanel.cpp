@@ -84,8 +84,6 @@ void Generator::LoadFormDDS(Form *form)
 
     Message message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, (uint8)ch);
 
-    uint8 points[FPGA_NUM_POINTS * 2];
-
     switch (form->value)
     {
         case Form::RampPlus:
@@ -97,11 +95,7 @@ void Generator::LoadFormDDS(Form *form)
                     data[i] = -1.0f + step * i;
                 }
 
-                TransformDataToCode(data, points);
-
-                message.PutData(points, FPGA_NUM_POINTS * 2);
-
-                message.Transmit();
+                TransformDataToCode(data, &message);
             }
             break;
         case Form::RampMinus:
@@ -113,11 +107,7 @@ void Generator::LoadFormDDS(Form *form)
                     data[i] = 1.0f - step * i;
                 }
 
-                TransformDataToCode(data, points);
-
-                message.PutData(points, FPGA_NUM_POINTS * 2);
-
-                message.Transmit();
+                TransformDataToCode(data, &message);
             }
             break;
         case Form::Triangle:
@@ -134,11 +124,7 @@ void Generator::LoadFormDDS(Form *form)
                     data[i] = 1.0f - step * (i - FPGA_NUM_POINTS / 2);
                 }
 
-                TransformDataToCode(data, points);
-
-                message.PutData(points, FPGA_NUM_POINTS * 2);
-
-                message.Transmit();
+                TransformDataToCode(data, &message);
             }
             break;
         case Form::Meander:
@@ -152,8 +138,10 @@ void Generator::LoadFormDDS(Form *form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NUM_POINTS * 2])
+void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], Message *message)
 {
+    uint8 code[FPGA_NUM_POINTS * 2];
+
     int max = 0x1fff;
 
     for (int i = 0; i < FPGA_NUM_POINTS; i++)
@@ -168,6 +156,10 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], uint8 code[FPGA_NU
         code[i] = (uint8)c;
         code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
     }
+
+    message->PutData(code, FPGA_NUM_POINTS * 2);
+
+    message->Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
