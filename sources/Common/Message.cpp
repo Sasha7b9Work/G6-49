@@ -449,7 +449,7 @@ pString SimpleMessage::Trace()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFreqMeasure::MessageFreqMeasure(uint frequency) : SimpleMessage(5, Command::FreqMeasure)
+Message::FreqMeter::Measure::Measure(uint frequency) : SimpleMessage(5, Command::FreqMeasure)
 {
     PutWord(frequency);
 }
@@ -460,7 +460,7 @@ Message::RequestData::RequestData() : SimpleMessage(1, Command::RequestData)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageEnableChannel::MessageEnableChannel(uint8 ch, uint8 enable) : SimpleMessage(3, Command::EnableChannel)
+Message::EnableChannel::EnableChannel(uint8 ch, uint8 enable) : SimpleMessage(3, Command::EnableChannel)
 {
     PutByte(ch);
     PutByte(enable);
@@ -552,13 +552,13 @@ Message::WriteRegister::WriteRegister(uint8 reg, uint64 data) : SimpleMessage(10
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageDebugMode::MessageDebugMode(uint8 mode) : SimpleMessage(2, Command::ModeDebug)
+Message::DebugMode::DebugMode(uint8 mode) : SimpleMessage(2, Command::ModeDebug)
 {
     PutByte(mode);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageReset::MessageReset() : SimpleMessage(1, Command::RunReset)
+Message::Reset::Reset() : SimpleMessage(1, Command::RunReset)
 {
 
 }
