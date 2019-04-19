@@ -464,3 +464,12 @@ MessageSetFromWave::MessageSetFromWave(uint8 ch, uint8 form) : Message(3, Comman
     PutByte(ch);
     PutByte(form);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageSetFrequency::MessageSetFrequency(uint8 ch, uint64 frequency) : Message(10, Command::SetFrequency)
+{
+    PutByte(ch);
+    BitSet64 bs(frequency);
+    PutWord(bs.word0);
+    PutWord(bs.word1);
+}
