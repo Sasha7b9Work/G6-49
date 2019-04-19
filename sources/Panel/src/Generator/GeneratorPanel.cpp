@@ -192,14 +192,14 @@ void Generator::SetParameter(ParameterChoice *param)
 void Generator::SetOffset(Chan::E ch, float offset)
 {
     /// \todo √овнокод - запись параметра из двух мест
-    MessageSetOffset((uint8)ch, ParamValue(offset).ToUINT64()).Transmit();
+    Message::Set::Offset((uint8)ch, ParamValue(offset).ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetAmplitude(Chan::E ch, float amplitude)
 {
     /// \todo √овнокод - запись параметра из двух мест
-    MessageSetAmplitude((uint8)ch, ParamValue(amplitude).ToUINT64()).Transmit();
+    Message::Set::Amplitude((uint8)ch, ParamValue(amplitude).ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

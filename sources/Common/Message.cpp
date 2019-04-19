@@ -481,14 +481,14 @@ Message::Set::Frequency::Frequency(uint8 ch, uint64 frequency) : SimpleMessage(1
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageSetAmplitude::MessageSetAmplitude(uint8 ch, uint64 amplitude) : SimpleMessage(10, Command::SetAmplitude)
+Message::Set::Amplitude::Amplitude(uint8 ch, uint64 amplitude) : SimpleMessage(10, Command::SetAmplitude)
 {
     PutByte(ch);
     PutDoubleWord(amplitude);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageSetOffset::MessageSetOffset(uint8 ch, uint64 offset) : SimpleMessage(10, Command::SetOffset)
+Message::Set::Offset::Offset(uint8 ch, uint64 offset) : SimpleMessage(10, Command::SetOffset)
 {
     PutByte(ch);
     PutDoubleWord(offset);
