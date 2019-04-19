@@ -497,3 +497,10 @@ MessageFDriveMount::MessageFDriveMount(uint8 mount) : Message(2, Command::FDrive
 {
     PutByte(mount);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageNumDirsAndFiles::MessageNumDirsAndFiles(uint numDirs, uint numFiles) : Message(9, Command::FDrive_NumDirsAndFiles)
+{
+    PutWord(numDirs);
+    PutWord(numFiles);
+}
