@@ -441,25 +441,26 @@ pString Message::Trace()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFrequency::MessageFrequency(uint frequency) : Message()
+MessageFrequency::MessageFrequency(uint frequency) : Message(5, Command::FreqMeasure)
 {
-    AllocateMemory(5);
-    PutByte(Command::FreqMeasure);
     PutWord(frequency);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageRequestData::MessageRequestData() : Message()
+MessageRequestData::MessageRequestData() : Message(1, Command::RequestData)
 {
-    AllocateMemory(1);
-    PutByte(Command::RequestData);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageEnableChannel::MessageEnableChannel(uint8 ch, uint8 enable) : Message()
+MessageEnableChannel::MessageEnableChannel(uint8 ch, uint8 enable) : Message(3, Command::EnableChannel)
 {
-    AllocateMemory(3);
-    PutByte(Command::EnableChannel);
     PutByte(ch);
     PutByte(enable);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageSetFromWave::MessageSetFromWave(uint8 ch, uint8 form) : Message(3, Command::SetFormWave)
+{
+    PutByte(ch);
+    PutByte(form);
 }

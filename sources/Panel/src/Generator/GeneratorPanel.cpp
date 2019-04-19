@@ -72,7 +72,7 @@ void Generator::SetFormWave(Wave *w)
         LoadFormDDS(FORM(ch));
     }
 
-    Message(3, Command::SetFormWave, (uint8)ch, form).Transmit();
+    MessageSetFromWave((uint8)ch, form).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
     /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
-    Message(3, Command::SetFormWave, (uint8)ch, (uint8)form).Transmit();
+    MessageSetFromWave((uint8)ch, (uint8)form).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
