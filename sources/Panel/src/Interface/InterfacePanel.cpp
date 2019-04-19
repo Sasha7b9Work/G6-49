@@ -43,7 +43,7 @@ void Interface::Update()
 
     time = TIME_MS;
 
-    MessageRequestData message;
+    Message::RequestData message;
 
     Transceiver::Transmit(&message);
     

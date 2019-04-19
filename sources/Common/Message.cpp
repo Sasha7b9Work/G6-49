@@ -455,7 +455,7 @@ MessageFreqMeasure::MessageFreqMeasure(uint frequency) : SimpleMessage(5, Comman
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageRequestData::MessageRequestData() : SimpleMessage(1, Command::RequestData)
+Message::RequestData::RequestData() : SimpleMessage(1, Command::RequestData)
 {
 }
 
