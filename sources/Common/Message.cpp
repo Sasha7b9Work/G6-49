@@ -447,3 +447,10 @@ MessageFrequency::MessageFrequency(uint frequency) : Message()
     PutByte(Command::FreqMeasure);
     PutWord(frequency);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageRequestData::MessageRequestData() : Message()
+{
+    AllocateMemory(1);
+    PutByte(Command::RequestData);
+}

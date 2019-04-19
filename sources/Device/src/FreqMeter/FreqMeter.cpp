@@ -46,8 +46,6 @@ void FreqMeter::Update()
 {
     if(CPU::ReadPin(GeneratorReadPin::FREQ_METER_DRY))
     {
-        //LOG_WRITE("Получено новое значение");
-
         uint frequency = 0;
         for(int i = 30; i >= 0; i--)
         {

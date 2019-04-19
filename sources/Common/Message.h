@@ -104,3 +104,9 @@ public:
     MessageFrequency(uint frequency);
 };
 
+class MessageRequestData : public Message
+{
+public:
+    MessageRequestData();
+};
+

@@ -96,7 +96,7 @@ void Handlers::SendData(Message *)
     }
     else
     {
-        Message message(1, Command::RequestData);
+        MessageRequestData message;
 
         Timer::PauseOnTime(2);
 
