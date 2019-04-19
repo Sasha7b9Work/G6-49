@@ -504,3 +504,14 @@ MessageNumDirsAndFiles::MessageNumDirsAndFiles(uint numDirs, uint numFiles) : Me
     PutWord(numDirs);
     PutWord(numFiles);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageRequestFile::MessageRequestFile(uint8 numFile, char *name) : Message()
+{
+    //          v0 | v1 | string |              завершающий_ноль
+    uint size = 1 +  1 +  std::strlen(name) + 1;
+    AllocateMemory(size);
+    PutByte(Command::FDrive_RequestFile);
+    PutByte(numFile);
+    std::strcpy((char *)(buffer + 2), name);
+}

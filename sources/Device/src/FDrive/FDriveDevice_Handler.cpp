@@ -70,7 +70,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         if (GetNameFile(msg->String(2), numFile, name))
         {
-            Message(Command::FDrive_RequestFile, (uint8)numFile, name).Transmit();
+            MessageRequestFile((uint8)numFile, name).Transmit();
         }
     }
     else if (com == Command::FDrive_RequestFileSize)
