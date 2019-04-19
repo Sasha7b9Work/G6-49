@@ -60,7 +60,7 @@ void FDrive::Handler::Processing(SimpleMessage *msg)
 
         GetNumDirsAndFiles(msg->String(1), &numDirs, &numFiles);
 
-        MessageFDriveNumDirsAndFiles(numDirs, numFiles).Transmit();
+        Message::FDrive::NumDirsAndFiles(numDirs, numFiles).Transmit();
     }
     else if (com == Command::FDrive_RequestFile)
     {

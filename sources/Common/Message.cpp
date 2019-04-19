@@ -501,7 +501,7 @@ MessageFDriveMount::MessageFDriveMount(uint8 mount) : SimpleMessage(2, Command::
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveNumDirsAndFiles::MessageFDriveNumDirsAndFiles(uint numDirs, uint numFiles) : SimpleMessage(9, Command::FDrive_NumDirsAndFiles)
+Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(uint numDirs, uint numFiles) : SimpleMessage(9, Command::FDrive_NumDirsAndFiles)
 {
     PutWord(numDirs);
     PutWord(numFiles);
