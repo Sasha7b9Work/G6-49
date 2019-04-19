@@ -262,6 +262,14 @@ void Message::PutByte(uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::PutDoubleWord(uint64 data)
+{
+    BitSet64 bs(data);
+    PutWord(bs.word0);
+    PutWord(bs.word1);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Message::PutHalfWord(int16 data)
 {
     PutHalfWord((uint16)data);
@@ -469,27 +477,21 @@ MessageSetFromWave::MessageSetFromWave(uint8 ch, uint8 form) : Message(3, Comman
 MessageSetFrequency::MessageSetFrequency(uint8 ch, uint64 frequency) : Message(10, Command::SetFrequency)
 {
     PutByte(ch);
-    BitSet64 bs(frequency);
-    PutWord(bs.word0);
-    PutWord(bs.word1);
+    PutDoubleWord(frequency);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 MessageSetAmplitude::MessageSetAmplitude(uint8 ch, uint64 amplitude) : Message(10, Command::SetAmplitude)
 {
     PutByte(ch);
-    BitSet64 bs(amplitude);
-    PutWord(bs.word0);
-    PutWord(bs.word1);
+    PutDoubleWord(amplitude);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 MessageSetOffset::MessageSetOffset(uint8 ch, uint64 offset) : Message(10, Command::SetOffset)
 {
     PutByte(ch);
-    BitSet64 bs(offset);
-    PutWord(bs.word0);
-    PutWord(bs.word1);
+    PutDoubleWord(offset);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -533,4 +535,18 @@ MessageLog::MessageLog(char *string) : Message()
     PutByte(Command::Log);
 
     std::strcpy((char *)(buffer + 1), string);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageStartMode::MessageStartMode(uint8 ch, uint8 mode) : Message(3, Command::SetStartMode)
+{
+    PutByte(ch);
+    PutByte(mode);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageWriteRegister::MessageWriteRegister(uint8 reg, uint64 data) : Message(10, Command::WriteRegister)
+{
+    PutByte(reg);
+    PutDoubleWord(data);
 }

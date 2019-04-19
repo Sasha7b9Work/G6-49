@@ -82,6 +82,8 @@ protected:
     /// Положить половину слова
     void PutHalfWord(int16 data);
 
+    void PutDoubleWord(uint64 data);
+
     void PutHalfWord(uint16 data);
     /// Положить float
     void PutFloat(float data);
@@ -198,4 +200,20 @@ class MessageLog : public Message
 {
 public:
     MessageLog(char *string);
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Установка режима запуска
+class MessageStartMode : public Message
+{
+public:
+    MessageStartMode(uint8 ch, uint8 mode);
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Запись в регистр
+class MessageWriteRegister : public Message
+{
+public:
+    MessageWriteRegister(uint8 reg, uint64 data);
 };

@@ -23,15 +23,18 @@ bool SCPI::Handler::Processing(Message *msg)
 
         char *data = (char *)std::malloc(length);
 
-        data[0] = '\0';
-
-        for (; length > 0; length--)
+        if (data)
         {
-            char cat[2] = { (char)msg->TakeByte(), 0 };
-            std::strcat(data, cat);
-        }
+            data[0] = '\0';
 
-        AddString(data);
+            for (; length > 0; length--)
+            {
+                char cat[2] = { (char)msg->TakeByte(), 0 };
+                std::strcat(data, cat);
+            }
+
+            AddString(data);
+        }
 
         std::free(data);
     }
