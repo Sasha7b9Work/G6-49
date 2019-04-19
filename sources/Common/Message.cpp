@@ -571,7 +571,7 @@ MessageParameter::MessageParameter(Command::E param, uint8 ch, uint64 value) : S
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveLoadToFPGA::MessageFDriveLoadToFPGA(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
+Message::FDrive::LoadToFPGA::LoadToFPGA(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
 {
     //          com ch  numFile directory                 завершающий_ноль
     uint size = 1 + 1 + 1 +      std::strlen(directory) + 1;

@@ -110,6 +110,17 @@ namespace Message
     public:
         RequestData();
     };
+
+    namespace FDrive
+    {
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// Загрузить выбранный файл в FPGA
+        class LoadToFPGA : public SimpleMessage
+        {
+        public:
+            LoadToFPGA(uint8 ch, uint8 numFile, char *directory);
+        };
+    }
 }
 
 
@@ -248,12 +259,4 @@ class MessageParameter : public SimpleMessage
 {
 public:
     MessageParameter(Command::E param, uint8 ch, uint64 value);
-};
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Загрузить выбранный файл в FPGA
-class MessageFDriveLoadToFPGA : public SimpleMessage
-{
-public:
-    MessageFDriveLoadToFPGA(uint8 ch, uint8 numFile, char *directory);
 };
