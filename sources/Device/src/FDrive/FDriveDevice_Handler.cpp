@@ -60,9 +60,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         GetNumDirsAndFiles(msg->String(1), &numDirs, &numFiles);
 
-        Message *answer = new Message(9, Command::FDrive_NumDirsAndFiles, numDirs, numFiles);
-
-        answer->Transmit();
+        Message(9, Command::FDrive_NumDirsAndFiles, numDirs, numFiles).Transmit();
     }
     else if (com == Command::FDrive_RequestFile)
     {
@@ -72,9 +70,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         if (GetNameFile(msg->String(2), numFile, name))
         {
-            Message *answer = new Message(Command::FDrive_RequestFile, (uint8)numFile, name);
-
-            answer->Transmit();
+            Message(Command::FDrive_RequestFile, (uint8)numFile, name).Transmit();
         }
     }
     else if (com == Command::FDrive_RequestFileSize)
@@ -87,9 +83,7 @@ void FDrive::Handler::Processing(Message *msg)
 
             uint size = GetFileSize(fullPath.CString());
 
-            Message *answer = new Message(6, Command::FDrive_RequestFileSize, (uint8)numFile, size);
-
-            answer->Transmit();
+            Message(6, Command::FDrive_RequestFileSize, (uint8)numFile, size).Transmit();
         }
     }
     else if (com == Command::FDrive_LoadToFPGA)
@@ -127,9 +121,9 @@ void FDrive::Handler::Processing(Message *msg)
             }
         }
 
-        Message *answer = new Message(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
-        answer->PutData(data, SIZE);
-        answer->Transmit();
+        Message answer(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
+        answer.PutData(data, SIZE);
+        answer.Transmit();
     }
     else if (com == Command::FDrive_RequestFileString)
     {

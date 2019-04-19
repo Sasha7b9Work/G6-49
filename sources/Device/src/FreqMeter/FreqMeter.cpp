@@ -65,9 +65,7 @@ void FreqMeter::Update()
             }
         }
 
-        Message *msg = new Message(5, Command::FreqMeasure, frequency);
-
-        msg->Transmit();
+        Message(5, Command::FreqMeasure, frequency).Transmit();
     }
 }
 
