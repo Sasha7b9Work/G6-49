@@ -4,6 +4,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Message																	// -V690
 {
+    friend class Transceiver;
 public:
     explicit Message();
     explicit Message(uint size, uint8);
@@ -52,6 +53,8 @@ public:
     uint64 TakeDoubleWord();
 
     float TakeFloat();
+    /// Взять оставшиеся данные. После вызова этой функции забирать из сообщения больше нечего
+    void TakeRemainigData(uint8 *data);
     /// Освободить память
     void FreeMemory();
     /// Возвращает указатель на данные

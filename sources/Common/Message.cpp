@@ -112,7 +112,8 @@ Message *Message::Clone()
     Message *result = new Message();
     if (result->AllocateMemory(Size()))
     {
-        result->PutData(Data(), Size());
+        *result = *this;
+        std::memcpy(result->buffer, buffer, allocated);
     }
     
     return result;
@@ -261,8 +262,8 @@ bool Message::CreateFromMessage(Message *message)
 {
     if (AllocateMemory(message->Size()))
     {
-        PutData(message->Data(), message->Size());
-        used = message->Size();
+        *this = *message;
+        std::memcpy(buffer, message->buffer, message->allocated);
     }
 
     return buffer != 0;
@@ -362,6 +363,14 @@ float Message::TakeFloat()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::TakeRemainigData(uint8 *data)
+{
+    uint size = allocated - taken;
+    std::memcpy(data, buffer, size);
+    taken = allocated;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Message::AllocateMemory(uint size)
 {
     FreeMemory();
@@ -419,13 +428,13 @@ bool Message::IsEquals(const Message *message) const
         return false;
     }
 
-    return std::memcmp(((Message *)message)->Data(), ((Message *)this)->Data(), Size()) == 0;
+    return std::memcmp(message->buffer, buffer, allocated) == 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char *Message::String(int pos)
 {
-    return (char *)Data(pos);
+    return (char *)&buffer[pos];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -436,6 +445,6 @@ pString Message::Trace()
         return "";
     }
 
-    static Command command(Data()[0]);
+    static Command command(buffer[0]);
     return command.Trace(0);
 }
