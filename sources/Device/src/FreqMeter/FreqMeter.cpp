@@ -63,7 +63,7 @@ void FreqMeter::Update()
             }
         }
 
-        MessageFrequency(frequency).Transmit();
+        MessageFreqMeasure(frequency).Transmit();
     }
 }
 

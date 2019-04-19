@@ -441,7 +441,7 @@ pString Message::Trace()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFrequency::MessageFrequency(uint frequency) : Message(5, Command::FreqMeasure)
+MessageFreqMeasure::MessageFreqMeasure(uint frequency) : Message(5, Command::FreqMeasure)
 {
     PutWord(frequency);
 }
