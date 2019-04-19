@@ -491,3 +491,9 @@ MessageSetOffset::MessageSetOffset(uint8 ch, uint64 offset) : Message(10, Comman
     PutWord(bs.word0);
     PutWord(bs.word1);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageFDriveMount::MessageFDriveMount(uint8 mount) : Message(2, Command::FDrive_Mount)
+{
+    PutByte(mount);
+}
