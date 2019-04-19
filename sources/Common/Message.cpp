@@ -515,3 +515,10 @@ MessageFDriveFileName::MessageFDriveFileName(uint8 numFile, char *name) : Messag
     PutByte(numFile);
     std::strcpy((char *)(buffer + 2), name);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageFDriveFileSize::MessageFDriveFileSize(uint8 numFile, uint size) : Message(6, Command::FDrive_RequestFileSize)
+{
+    PutByte(numFile);
+    PutWord(size);
+}
