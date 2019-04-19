@@ -265,7 +265,6 @@ bool Message::CreateFromMessage(Message *message)
     {
         std::memcpy(buffer, message->buffer, message->allocated);
         used = message->used;
-        taken = message->taken;
     }
 
     return buffer != 0;

@@ -84,7 +84,7 @@ void Generator::LoadFormDDS(Form *form)
 
     Message message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, (uint8)ch);
 
-    uint8 *points = message.Data(2);
+    uint8 points[FPGA_NUM_POINTS * 2];
 
     switch (form->value)
     {
@@ -99,6 +99,8 @@ void Generator::LoadFormDDS(Form *form)
 
                 TransformDataToCode(data, points);
 
+                message.PutData(points, FPGA_NUM_POINTS * 2);
+
                 message.Transmit();
             }
             break;
@@ -112,6 +114,8 @@ void Generator::LoadFormDDS(Form *form)
                 }
 
                 TransformDataToCode(data, points);
+
+                message.PutData(points, FPGA_NUM_POINTS * 2);
 
                 message.Transmit();
             }
@@ -131,6 +135,8 @@ void Generator::LoadFormDDS(Form *form)
                 }
 
                 TransformDataToCode(data, points);
+
+                message.PutData(points, FPGA_NUM_POINTS * 2);
 
                 message.Transmit();
             }
