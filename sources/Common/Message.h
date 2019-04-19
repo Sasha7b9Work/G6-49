@@ -78,7 +78,7 @@ public:
     /// Передать сообщение получателю
     void Transmit();
 
-private:
+protected:
     /// Положить байт
     void PutByte(uint8 data);
     /// Положить половину слова
@@ -98,3 +98,11 @@ private:
 
     Message(const Message &) {};
 };
+
+
+class MessageFrequency : public Message
+{
+public:
+    MessageFrequency(uint frequency);
+};
+

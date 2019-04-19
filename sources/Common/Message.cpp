@@ -455,3 +455,11 @@ pString Message::Trace()
     static Command command(buffer[0]);
     return command.Trace(0);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageFrequency::MessageFrequency(uint frequency) : Message()
+{
+    AllocateMemory(5);
+    PutByte(Command::FreqMeasure);
+    PutWord(frequency);
+}
