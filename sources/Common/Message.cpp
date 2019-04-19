@@ -473,3 +473,21 @@ MessageSetFrequency::MessageSetFrequency(uint8 ch, uint64 frequency) : Message(1
     PutWord(bs.word0);
     PutWord(bs.word1);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageSetAmplitude::MessageSetAmplitude(uint8 ch, uint64 amplitude) : Message(10, Command::SetAmplitude)
+{
+    PutByte(ch);
+    BitSet64 bs(amplitude);
+    PutWord(bs.word0);
+    PutWord(bs.word1);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageSetOffset::MessageSetOffset(uint8 ch, uint64 offset) : Message(10, Command::SetOffset)
+{
+    PutByte(ch);
+    BitSet64 bs(offset);
+    PutWord(bs.word0);
+    PutWord(bs.word1);
+}
