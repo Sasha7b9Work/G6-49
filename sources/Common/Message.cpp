@@ -556,3 +556,16 @@ MessageDebugMode::MessageDebugMode(uint8 mode) : Message(2, Command::ModeDebug)
 {
     PutByte(mode);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageReset::MessageReset() : Message(1, Command::RunReset)
+{
+
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MessageParameter::MessageParameter(Command::E param, uint8 ch, uint64 value) : Message(10, (uint8)param)
+{
+    PutByte(ch);
+    PutDoubleWord(value);
+}

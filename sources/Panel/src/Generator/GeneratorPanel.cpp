@@ -58,7 +58,7 @@ void Generator::SetDebugMode(bool enable)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::Reset()
 {
-    Message(1, Command::RunReset).Transmit();
+    MessageReset().Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -242,9 +242,9 @@ void Generator::SetParameter(ParameterValue *param)
 
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
-    Command com = commands[param->value].val;
+    Command::E com = commands[param->value].val;
 
-    Message(10, com, (uint8)ch, value.ToUINT64()).Transmit();
+    MessageParameter(com, (uint8)ch, value.ToUINT64()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
