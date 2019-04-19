@@ -467,7 +467,7 @@ MessageEnableChannel::MessageEnableChannel(uint8 ch, uint8 enable) : SimpleMessa
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageSetFromWave::MessageSetFromWave(uint8 ch, uint8 form) : SimpleMessage(3, Command::SetFormWave)
+Message::Set::FormWave::FormWave(uint8 ch, uint8 form) : SimpleMessage(3, Command::SetFormWave)
 {
     PutByte(ch);
     PutByte(form);
