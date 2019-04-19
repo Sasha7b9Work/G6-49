@@ -499,14 +499,14 @@ MessageFDriveMount::MessageFDriveMount(uint8 mount) : Message(2, Command::FDrive
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageNumDirsAndFiles::MessageNumDirsAndFiles(uint numDirs, uint numFiles) : Message(9, Command::FDrive_NumDirsAndFiles)
+MessageFDriveNumDirsAndFiles::MessageFDriveNumDirsAndFiles(uint numDirs, uint numFiles) : Message(9, Command::FDrive_NumDirsAndFiles)
 {
     PutWord(numDirs);
     PutWord(numFiles);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageRequestFile::MessageRequestFile(uint8 numFile, char *name) : Message()
+MessageFDriveFileName::MessageFDriveFileName(uint8 numFile, char *name) : Message()
 {
     //          v0 | v1 | string |              завершающий_ноль
     uint size = 1 +  1 +  std::strlen(name) + 1;

@@ -60,7 +60,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         GetNumDirsAndFiles(msg->String(1), &numDirs, &numFiles);
 
-        MessageNumDirsAndFiles(numDirs, numFiles).Transmit();
+        MessageFDriveNumDirsAndFiles(numDirs, numFiles).Transmit();
     }
     else if (com == Command::FDrive_RequestFile)
     {
@@ -70,7 +70,7 @@ void FDrive::Handler::Processing(Message *msg)
 
         if (GetNameFile(msg->String(2), numFile, name))
         {
-            MessageRequestFile((uint8)numFile, name).Transmit();
+            MessageFDriveFileName((uint8)numFile, name).Transmit();
         }
     }
     else if (com == Command::FDrive_RequestFileSize)
