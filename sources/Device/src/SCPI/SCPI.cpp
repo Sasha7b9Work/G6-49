@@ -7,7 +7,6 @@
 #include "Hardware/VCP.h"
 #include "Utils/Buffer.h"
 #include "Utils/StringUtils.h"
-#include <cstring>
 #endif
 
 
@@ -20,7 +19,7 @@ void SCPI::AddNewData(uint8 *buffer, uint length)
 
     message->PutWord(length);
 
-    std::memcpy(message->Data(5), buffer, length);
+    message->PutData(buffer, length);
 
     message->Transmit();
 }

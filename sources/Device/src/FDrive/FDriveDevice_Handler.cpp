@@ -128,8 +128,7 @@ void FDrive::Handler::Processing(Message *msg)
         }
 
         Message *answer = new Message(2 + SIZE, Command::FDrive_GetPictureDDS, (uint8)numFile);
-        std::memcpy(answer->Data(2), data, SIZE);
-
+        answer->PutData(data, SIZE);
         answer->Transmit();
     }
     else if (com == Command::FDrive_RequestFileString)

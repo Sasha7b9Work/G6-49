@@ -112,7 +112,7 @@ Message *Message::Clone()
     Message *result = new Message();
     if (result->AllocateMemory(Size()))
     {
-        std::memcpy(result->Data(), Data(), Size());
+        result->PutData(Data(), Size());
     }
     
     return result;
@@ -261,7 +261,7 @@ bool Message::CreateFromMessage(Message *message)
 {
     if (AllocateMemory(message->Size()))
     {
-        std::memcpy(buffer, message->Data(), message->Size()); //-V595
+        PutData(message->Data(), message->Size());
         used = message->Size();
     }
 
@@ -295,6 +295,13 @@ void Message::PutWord(uint data)
      BitSet32 bs(data);
      bs.WriteToBuffer(buffer + used);
      used += sizeof(data);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Message::PutData(uint8 *data, uint length)
+{
+    std::memcpy(buffer + used, data, length);
+    used += length;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
