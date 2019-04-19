@@ -20,7 +20,7 @@ void SCPI::AddNewData(uint8 *buffer, uint length)
 
     message->PutWord(length);
 
-    std::memcpy(message->Data(1), buffer, length);
+    std::memcpy(message->Data(5), buffer, length);
 
     message->Transmit();
 }
