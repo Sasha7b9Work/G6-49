@@ -99,7 +99,7 @@ void FDrive::Update()
     {
         FRESULT result = f_mount(&FatFS, USBDISKPath, 0);
 
-        MessageFDriveMount((result == FR_OK) ? (uint8)1 : (uint8)2).Transmit();
+        Message::FDrive::Mount((result == FR_OK) ? (uint8)1 : (uint8)2).Transmit();
 
         state = State::Connected;
 
@@ -108,7 +108,7 @@ void FDrive::Update()
     {
         f_mount(0, "", 0);
 
-        MessageFDriveMount(0).Transmit();
+        Message::FDrive::Mount(0).Transmit();
 
         state = State::Disconnected;
     }

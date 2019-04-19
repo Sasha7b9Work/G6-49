@@ -83,7 +83,7 @@ void FDrive::Handler::Processing(SimpleMessage *msg)
 
             uint size = GetFileSize(fullPath.CString());
 
-            MessageFDriveFileSize((uint8)numFile, size).Transmit();
+            Message::FDrive::FileSize((uint8)numFile, size).Transmit();
         }
     }
     else if (com == Command::FDrive_LoadToFPGA)

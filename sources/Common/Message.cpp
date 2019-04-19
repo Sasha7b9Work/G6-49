@@ -495,7 +495,7 @@ Message::Set::Offset::Offset(uint8 ch, uint64 offset) : SimpleMessage(10, Comman
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveMount::MessageFDriveMount(uint8 mount) : SimpleMessage(2, Command::FDrive_Mount)
+Message::FDrive::Mount::Mount(uint8 mount) : SimpleMessage(2, Command::FDrive_Mount)
 {
     PutByte(mount);
 }
@@ -519,7 +519,7 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-MessageFDriveFileSize::MessageFDriveFileSize(uint8 numFile, uint size) : SimpleMessage(6, Command::FDrive_RequestFileSize)
+Message::FDrive::FileSize::FileSize(uint8 numFile, uint size) : SimpleMessage(6, Command::FDrive_RequestFileSize)
 {
     PutByte(numFile);
     PutWord(size);
