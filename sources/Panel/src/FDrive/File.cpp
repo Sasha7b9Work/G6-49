@@ -107,9 +107,9 @@ void File::Open(int _num)
 {
     Close();
 
-    Message *message = new Message(2, Command::FDrive_GetPictureDDS, (uint8)_num);
+    Message message(2, Command::FDrive_GetPictureDDS, (uint8)_num);
 
-    Task *task = new Task(message, File::Handler, EqualsRequestPicture);
+    Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
 
     Interface::AddTask(task);
 }

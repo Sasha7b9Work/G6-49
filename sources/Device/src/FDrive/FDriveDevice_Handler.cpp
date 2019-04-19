@@ -151,7 +151,7 @@ void FDrive::Handler::Processing(Message *msg)
             string[0] = 0;
         }
 
-        Message *answer = new Message(Command::FDrive_RequestFileString, numString, string);
+        Message *answer = new Mess age(Command::FDrive_RequestFileString, numString, string);
 
         Interface::AddMessageForTransmit(answer);
         */

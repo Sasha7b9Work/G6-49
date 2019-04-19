@@ -142,9 +142,9 @@ Task::Task(Message *msg) : timeLast(0), funcEqual(nullptr), funcProcess(nullptr)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Task::Task(Message *msg, bool(*process)(Message *), bool(*equal)(Task *, Task *)) : message(msg), timeLast(0), funcEqual(equal), funcProcess(process)
+Task::Task(Message *msg, bool(*process)(Message *), bool(*equal)(Task *, Task *)) : timeLast(0), funcEqual(equal), funcProcess(process)
 {
-
+    message = msg->Clone();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

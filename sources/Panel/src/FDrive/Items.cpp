@@ -134,40 +134,12 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendRequestForNameFile(int number)
 {
-    Message *message = new Message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
+    Message message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
     
-    Task *task = new Task(message, Items::Handler::Processing, EqualsRequestNameFile);
-    
-    Interface::AddTask(task);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static bool EqualsRequestSizeFile(Task *task1, Task *task2)
-{
-    Message *msg1 = task1->GetMessage();
-
-    Message *msg2 = task2->GetMessage();
-
-    uint8 com = Command::FDrive_RequestFileSize;
-
-    return  (com == msg1->TakeByte()) &&
-            (com == msg2->TakeByte()) &&
-            (msg1->TakeByte() == msg2->TakeByte());
-}
-*/
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static void SendRequestForSizeFile(int number)
-{
-    Message *message = new Message(Command::FDrive_RequestFileSize, (uint8)number, FDrive::directory);
-    
-    Task *task = new Task(message, Items::Handler::Processing, EqualsRequestSizeFile);
+    Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestNameFile);
     
     Interface::AddTask(task);
 }
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String GetNameItem(int i)
@@ -179,19 +151,6 @@ String GetNameItem(int i)
     
     return String(files[i].name);
 }
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-static int GetSizeItem(int i)
-{
-    if (files[i].size == -1)
-    {
-        SendRequestForSizeFile(i);
-    }
-
-    return files[i].size;
-}
-*/
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int Items::NumberDirs()
