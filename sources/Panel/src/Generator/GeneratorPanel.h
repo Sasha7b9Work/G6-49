@@ -14,41 +14,33 @@ class Message;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Generator
+namespace Generator
 {
-public:
-    static void Reset();
+    void Reset();
 
-    static void EnableChannel(Chan::E ch, bool enable);
+    void EnableChannel(Chan::E ch, bool enable);
 
-    static void SetFormWave(Wave *w);
+    void SetFormWave(Wave *w);
 
-    static void SetFormWave(Chan::E ch, Form::E form);
+    void SetFormWave(Chan::E ch, Form::E form);
 
-    static void SetParameter(ParameterValue *param);
+    void SetParameter(ParameterValue *param);
 
-    static void SetParameter(ParameterChoice *param);
+    void SetParameter(ParameterChoice *param);
 
-    static void SetFrequency(Chan::E ch, float freq);
+    void SetFrequency(Chan::E ch, float freq);
 
-    static void SetOffset(Chan::E ch, float offset);
+    void SetOffset(Chan::E ch, float offset);
 
-    static void SetAmplitude(Chan::E ch, float amplitude);
+    void SetAmplitude(Chan::E ch, float amplitude);
 
-    static void SetDebugMode(bool enable);
+    void SetDebugMode(bool enable);
 
-    static void LoadRegister(Register::E reg, uint64 value);
+    void LoadRegister(Register::E reg, uint64 value);
 
-    static void LoadSettings();
+    void LoadSettings();
 
-    static void TuneChannel(Chan::E ch);
+    void TuneChannel(Chan::E ch);
     /// Загружает режим запуска из set в аппаратуру
-    static void LoadStartMode(Chan::E ch, int mode);
-
-private:
-    static const int FPGA_NUM_POINTS = 8 * 1024;
-    /// Загружает форму произвольного сигнала
-    static void LoadFormDDS(Form *form);
-    /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-    static void TransformDataToCode(float data[FPGA_NUM_POINTS], Message *message);
+    void LoadStartMode(Chan::E ch, int mode);
 };

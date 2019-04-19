@@ -24,6 +24,14 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static const int FPGA_NUM_POINTS = 8 * 1024;
+/// Загружает форму произвольного сигнала
+static void LoadFormDDS(Form *form);
+/// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
+static void TransformDataToCode(float data[FPGA_NUM_POINTS], Message *message);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Generator::EnableChannel(Chan::E ch, bool enable)
 {
     Message(3, Command::EnableChannel, (uint8)ch, (uint8)(enable ? 1u : 0u)).Transmit();
@@ -76,7 +84,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::LoadFormDDS(Form *form)
+void LoadFormDDS(Form *form)
 {
     Chan::E ch = form->GetWave()->GetChannel();
 
@@ -138,7 +146,7 @@ void Generator::LoadFormDDS(Form *form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], Message *message)
+void TransformDataToCode(float d[FPGA_NUM_POINTS], Message *message)
 {
     uint8 code[FPGA_NUM_POINTS * 2];
 
