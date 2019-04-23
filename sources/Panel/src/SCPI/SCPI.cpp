@@ -2,12 +2,20 @@
 #include "SCPI.h"
 #include "Command.h"
 #include "Display/Console.h"
+#include "SCPI/Commands.h"
 #include <cstdlib>
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//static void AddNewData(uint8 *data, uint size);
-static void AddString(char *string);
+#define SIZE_BUFFER (1024)
+static uint8 buffer[SIZE_BUFFER];
+
+static uint pointer = 0;
+
+/// Добавление нового байта данных
+static void AddByte(uint8 byte);
+/// Исполнить команду из буфера, если таковая имеется
+static void RunBuffer();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,40 +23,61 @@ bool SCPI::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 
-    Command::E command = (Command::E)msg->TakeByte();
+    ::Command::E command = (::Command::E)msg->TakeByte();
 
-    if (command == Command::SCPI_Data)
+    if (command == ::Command::SCPI_Data)
     {
         uint length = msg->TakeWord();
 
-        char *data = (char *)std::malloc(length);
-
-        if (data)
+        for (uint i = 0; i < length; i++)
         {
-            data[0] = '\0';
+            AddByte(msg->TakeByte());
 
-            for (; length > 0; length--)
-            {
-                char cat[2] = { (char)msg->TakeByte(), 0 };
-                std::strcat(data, cat);
-            }
-
-            AddString(data);
+            RunBuffer();
         }
-
-        std::free(data);
     }
 
     return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void AddString(char *string)
+static void AddByte(uint8 byte)
 {
-    Console::AddString(string);
+    buffer[pointer++] = byte;
+
+    if (pointer == SIZE_BUFFER)
+    {
+        pointer = SIZE_BUFFER - 1;
+
+        std::memcpy(buffer, buffer + 1, SIZE_BUFFER - 1);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//static void AddNewData(uint8 *, uint)
-//{
-//}
+void RunBuffer()
+{
+    static const StructCommand commands[] =
+    {
+        {"*IDN?", SCPI::ProcessIDN},
+        {nullptr, nullptr}
+    };
+
+    uint8 *addressLast = SCPI::ProcessingCommand(commands, buffer);
+
+    if (addressLast)
+    {
+
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 *SCPI::ProcessingCommand(const StructCommand * /*commands*/, uint8 * /*data*/)
+{
+    return nullptr;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool SCPI::ProcessIDN(uint8 * /*data*/)
+{
+    return false;
+}

@@ -2166,6 +2166,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
+            <File>
+              <FileName>Commands.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Commands.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Commands.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Commands.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

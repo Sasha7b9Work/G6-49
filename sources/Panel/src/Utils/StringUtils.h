@@ -86,6 +86,8 @@ public:
 
     static char ToUpper(char symbol);
 
+    static char *ToUpper(void *_str, uint size);
+
     static void ConcatenateSymbol(char *str, char symbol);
 private:
     /// Возвращает false, если выбор невозможен - строка кончилась.

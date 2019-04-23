@@ -828,3 +828,16 @@ float Buffer2Float(const uint8 *buffer)
 {
     return BitSet32(buffer).floatValue;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char *SU::ToUpper(void *_str, uint size)
+{
+    char *str = (char *)_str;
+
+    for (uint i = 0; i < size; i++)
+    {
+        str[i] = (char)std::toupper(str[i]);
+    }
+
+    return str;
+}
