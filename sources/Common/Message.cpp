@@ -23,22 +23,10 @@ SimpleMessage::~SimpleMessage()
     FreeMemory();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint8 v0, uint8 v1, char *string) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(v0, v1, string);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint8 v0, uint8 v1, uint8 v2, char *string) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(v0, v1, v2, string);
-}
-
-SimpleMessage::SimpleMessage(uint8 d0, uint d1, char *string) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(d0, d1, string);
-}
+//SimpleMessage::SimpleMessage(uint8 d0, uint d1, char *string) : allocated(0), buffer(0), used(0), taken(0)
+//{
+//    Create(d0, d1, string);
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SimpleMessage::SimpleMessage(uint size, uint8 v0) : allocated(0), buffer(0), used(0), taken(0)
@@ -514,6 +502,17 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
     PutByte(Command::FDrive_RequestFile);
     PutByte(numFile);
     std::strcpy((char *)(buffer + 2), name);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::FDrive::FileString::FileString(uint numString, char *nameFile) : SimpleMessage()
+{
+    //          commmand  numString  nameFile                завершающий_ноль
+    uint size = 1 +       1 +        std::strlen(nameFile) + 1;
+    AllocateMemory(size);
+    PutByte(Command::FDrive_RequestFileString);
+    PutByte(numString);
+    std::strcpy((char *)(buffer + 2), nameFile);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ static bool EqualsRequestString(Task *task1, Task *task2)
 
 void FileRequests::SendRequestForString(String *name, int numString)
 {
-    SimpleMessage message(Command::FDrive_RequestFileString, (uint)numString, name->CString());
+    Message::FDrive::FileString message((uint)numString, name->CString());
 
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestString);
 

@@ -15,9 +15,7 @@ public:
     explicit SimpleMessage(uint size, uint8, uint8, uint8);
     explicit SimpleMessage(uint size, uint8, uint8, float);
     explicit SimpleMessage(uint size, uint8, uint8, uint64);
-    explicit SimpleMessage(uint8, uint8, char *);
-    explicit SimpleMessage(uint8, uint8, uint8, char *);
-    explicit SimpleMessage(uint8, uint, char*);
+    //explicit SimpleMessage(uint8, uint, char*);
 
     ~SimpleMessage();
 
@@ -177,6 +175,13 @@ namespace Message
         {
         public:
             FileName(uint8 numFile, char *name);
+        };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        class FileString : public SimpleMessage
+        {
+        public:
+            FileString(uint numString, char *nameFile);
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

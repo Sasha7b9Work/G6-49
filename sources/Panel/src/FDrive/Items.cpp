@@ -132,7 +132,7 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendRequestForNameFile(int number)
 {
-    SimpleMessage message(Command::FDrive_RequestFile, (uint8)number, FDrive::directory);
+    Message::FDrive::FileName message((uint8)number, FDrive::directory);
     
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestNameFile);
     
