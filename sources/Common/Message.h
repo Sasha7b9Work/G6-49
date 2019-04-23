@@ -14,9 +14,7 @@ public:
     explicit SimpleMessage(uint size, uint8, uint, uint);
     explicit SimpleMessage(uint size, uint8, uint8, uint8);
     explicit SimpleMessage(uint size, uint8, uint8, float);
-    explicit SimpleMessage(uint size, uint8, uint8, uint64);
-    //explicit SimpleMessage(uint8, uint, char*);
-
+ 
     ~SimpleMessage();
 
     void Create(uint size, uint8);

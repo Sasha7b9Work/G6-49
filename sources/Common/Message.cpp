@@ -23,11 +23,6 @@ SimpleMessage::~SimpleMessage()
     FreeMemory();
 }
 
-//SimpleMessage::SimpleMessage(uint8 d0, uint d1, char *string) : allocated(0), buffer(0), used(0), taken(0)
-//{
-//    Create(d0, d1, string);
-//}
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SimpleMessage::SimpleMessage(uint size, uint8 v0) : allocated(0), buffer(0), used(0), taken(0)
 {
@@ -62,19 +57,6 @@ SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, uint8 v2) : allocate
 SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, float v2) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, v0, v1, v2);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, uint64 v2) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(size, v0, v1);
-
-    BitSet64 bs(v2);
-
-    for (int i = 0; i < 8; i++)
-    {
-        PutByte(bs.byte[i]);
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -511,7 +493,7 @@ Message::FDrive::FileString::FileString(uint numString, char *nameFile) : Simple
     uint size = 1 +       1 +        std::strlen(nameFile) + 1;
     AllocateMemory(size);
     PutByte(Command::FDrive_RequestFileString);
-    PutByte(numString);
+    PutByte((uint8)numString);
     std::strcpy((char *)(buffer + 2), nameFile);
 }
 
