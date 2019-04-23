@@ -476,3 +476,15 @@ Message::Calibrate::Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command:
     PutByte(koeff);
     PutHalfWord((uint16)values[koeff].val[ch]);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::SCPI::Data::Data(uint8 *data, uint length) : SimpleMessage()
+{
+    //          command sizeof(length)   command 
+    uint size = 1 +     4 +              length;
+
+    AllocateMemory(size);
+    PutByte(Command::SCPI_Data);
+    PutWord(length);
+    PutData(data, length);
+}

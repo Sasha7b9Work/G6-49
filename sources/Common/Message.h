@@ -53,12 +53,13 @@ public:
     pString Trace();
     /// Положить слово
     void PutWord(uint data);
-    /// Положить данные
-    void PutData(uint8 *data, uint length);
+    
     /// Передать сообщение получателю
     void Transmit();
 
 protected:
+    /// Положить данные
+    void PutData(uint8 *data, uint length);
     /// Положить байт
     void PutByte(uint8 data);
     /// Положить половину слова
@@ -267,6 +268,17 @@ namespace Message
         {
         public:
             Measure(uint frequency);
+        };
+    }
+
+    namespace SCPI
+    {
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// Данные SCPI
+        class Data : public SimpleMessage
+        {
+        public:
+            Data(uint8 *data, uint length);
         };
     }
 
