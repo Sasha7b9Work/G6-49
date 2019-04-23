@@ -18,8 +18,6 @@ public:
     void Create(uint size, uint8, uint8, uint8);
     void Create(uint size, uint8, uint8, float);
     void Create(uint size, uint8, uint8, uint8, uint16);
-    void Create(uint8, uint8, uint8, char *string);
-    void Create(uint8, uint8, char *string);
     /// Возвращает указатель на созданную копию
     SimpleMessage *Clone();
     /// Сбрасывает указатель извлечённой информации.

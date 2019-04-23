@@ -74,33 +74,6 @@ void SimpleMessage::Create(uint size, uint8 v0, uint8 v1)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SimpleMessage::Create(uint8 v0, uint8 v1, char *string)
-{
-    //          v0 | v1 | string              | завершающий_ноль
-    uint size = 1 +  1 +  std::strlen(string) + 1;
-
-    if (AllocateMemory(size))
-    {
-        PutByte(v0);
-        PutByte(v1);
-        std::strcpy(String(2), string);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SimpleMessage::Create(uint8 v0, uint8 v1, uint8 v2, char *string)
-{
-    uint size = 1 + 1 + 1 + std::strlen(string) + 1;
-    if (AllocateMemory(size))
-    {
-        PutByte(v0);
-        PutByte(v1);
-        PutByte(v2);
-        std::strcpy(String(3), string);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SimpleMessage::Create(uint size, uint8 v0, uint8 v1, uint8 v2)
 {
     if (AllocateMemory(size))
