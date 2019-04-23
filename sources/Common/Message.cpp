@@ -64,17 +64,6 @@ void SimpleMessage::Create(uint size, uint8 v0, uint v1, uint v2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SimpleMessage::Create(uint size, uint8 com, uint8 d0, uint d1)
-{
-    if (AllocateMemory(size))
-    {
-        PutByte(com);
-        PutByte(d0);
-        PutWord(d1);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SimpleMessage::Create(uint size, uint8 v0, uint8 v1)
 {
     if (AllocateMemory(size))
