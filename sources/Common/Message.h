@@ -9,10 +9,6 @@ class SimpleMessage  // -V690
 public:
     explicit SimpleMessage();
     explicit SimpleMessage(uint size, uint8);
-    explicit SimpleMessage(uint size, uint8, uint8);
-    //explicit SimpleMessage(uint size, uint8, uint8, uint);
-    //explicit SimpleMessage(uint size, uint8, uint, uint);
-    //explicit SimpleMessage(uint size, uint8, uint8, uint8);
  
     ~SimpleMessage();
 
@@ -154,6 +150,13 @@ namespace Message
         /// ch : 0 - A, 1 - B
         /// enable : 0 - выключено, 1 - включено
         EnableChannel(uint8 ch, uint8 enable);
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class LoadFromDDS : public SimpleMessage
+    {
+    public:
+        LoadFromDDS(uint8 ch, uint8 data[8 * 1024]);
     };
 
     namespace FDrive
