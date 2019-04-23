@@ -30,16 +30,16 @@ SimpleMessage::SimpleMessage(uint size, uint8 v0) : allocated(0), buffer(0), use
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint size, uint8 v0, uint v1, uint v2) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(size, v0, v1, v2);
-}
+//SimpleMessage::SimpleMessage(uint size, uint8 v0, uint v1, uint v2) : allocated(0), buffer(0), used(0), taken(0)
+//{
+//    Create(size, v0, v1, v2);
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint size, uint8 com, uint8 d0, uint d1) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(size, com, d0, d1);
-}
+//SimpleMessage::SimpleMessage(uint size, uint8 com, uint8 d0, uint d1) : allocated(0), buffer(0), used(0), taken(0)
+//{
+//    Create(size, com, d0, d1);
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1) : allocated(0), buffer(0), used(0), taken(0)
@@ -48,16 +48,10 @@ SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1) : allocated(0), buff
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, uint8 v2) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(size, v0, v1, v2);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, float v2) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(size, v0, v1, v2);
-}
+//SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1, uint8 v2) : allocated(0), buffer(0), used(0), taken(0)
+//{
+//    Create(size, v0, v1, v2);
+//}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SimpleMessage *SimpleMessage::Clone()
@@ -547,6 +541,13 @@ Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint64 value) : S
 {
     PutByte(ch);
     PutDoubleWord(value);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint8 value) : SimpleMessage(3, (uint8)param)
+{
+    PutByte(ch);
+    PutByte(value);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

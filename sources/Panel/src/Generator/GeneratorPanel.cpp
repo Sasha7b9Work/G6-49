@@ -181,11 +181,9 @@ void Generator::SetParameter(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    SimpleMessage message(3, (uint8)commands[param->value].val,
+    Message::Set::Parameter(commands[param->value].val,
         (uint8)param->GetForm()->GetWave()->GetChannel(),
-        (uint8)param->GetChoice());
-
-    message.Transmit();
+        (uint8)param->GetChoice()).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

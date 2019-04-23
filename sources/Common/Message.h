@@ -10,10 +10,9 @@ public:
     explicit SimpleMessage();
     explicit SimpleMessage(uint size, uint8);
     explicit SimpleMessage(uint size, uint8, uint8);
-    explicit SimpleMessage(uint size, uint8, uint8, uint);
-    explicit SimpleMessage(uint size, uint8, uint, uint);
-    explicit SimpleMessage(uint size, uint8, uint8, uint8);
-    explicit SimpleMessage(uint size, uint8, uint8, float);
+    //explicit SimpleMessage(uint size, uint8, uint8, uint);
+    //explicit SimpleMessage(uint size, uint8, uint, uint);
+    //explicit SimpleMessage(uint size, uint8, uint8, uint8);
  
     ~SimpleMessage();
 
@@ -262,7 +261,10 @@ namespace Message
         {
         public:
             Parameter(Command::E param, uint8 ch, uint64 value);
+            Parameter(Command::E param, uint8 ch, uint8 choice);
         };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     namespace FreqMeter
