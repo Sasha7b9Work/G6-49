@@ -6,6 +6,7 @@
 #include "Message.h"
 #include "Hardware/CPU.h"
 #include "log.h"
+#include "Settings/CalibrationSettings.h"
 #include <cstring>
 #include <cstdlib>
 #endif
@@ -49,18 +50,6 @@ void SimpleMessage::Create(uint size, uint8 v0)
     if (AllocateMemory(size))
     {
         PutByte(v0);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SimpleMessage::Create(uint size, uint8 value0, uint8 value1, uint8 value2, uint16 value3)
-{
-    if (AllocateMemory(size))
-    {
-        PutByte(value0);
-        PutByte(value1);
-        PutByte(value2);
-        PutHalfWord(value3);
     }
 }
 
@@ -461,4 +450,29 @@ Message::FDrive::PictureDDS::PictureDDS(uint8 numFile, uint8 *data) : SimpleMess
 Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Command::FDrive_GetPictureDDS)
 {
     PutByte(numFile);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::Calibrate::Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command::SetKoeffCalibration)
+{
+    DEF_STRUCT(StructCal, int16 *) values[KoeffCal::Number] =
+    {
+        &CAL_AD9952_OFFSET_NEG(Chan::A),
+        &CAL_AD9952_OFFSET_ZERO(Chan::A),
+        &CAL_AD9952_OFFSET_POS(Chan::A),
+        &CAL_AD9952_AMPLITUDE(Chan::A),
+        &CAL_DDS_MAX(Chan::A),
+        &CAL_DDS_MIN(Chan::A),
+        &CAL_DDS_OFFSET(Chan::A),
+        &CAL_FREQ_LEVEL_TRIG
+    };
+
+    if (ch == Chan::B && koeff == KoeffCal::FREQ_LEVEL_TRIG)
+    {
+        ch = Chan::A;
+    }
+
+    PutByte(ch);
+    PutByte(koeff);
+    PutHalfWord((uint16)values[koeff].val[ch]);
 }

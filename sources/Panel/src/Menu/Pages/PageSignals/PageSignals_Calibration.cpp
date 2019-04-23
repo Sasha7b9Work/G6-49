@@ -74,10 +74,7 @@ void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan::E ch, bool ente
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageSignals::PageCalibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
 {
-    SimpleMessage message;
-    setCal.CreateMessage(&message, ch, koeff);
-
-    message.Transmit();
+    Message::Calibrate((uint8)ch, (uint8)koeff).Transmit();
 
     setCal.Save();
 

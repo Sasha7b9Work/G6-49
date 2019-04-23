@@ -34,9 +34,7 @@ void CalibrationSettings::Load()
     {
         for (int k = 0; k < KoeffCal::Number; k++)
         {
-            SimpleMessage message;
-            CreateMessage(&message, (Chan::E)ch, (KoeffCal::E)k);
-            message.Transmit();
+            Message::Calibrate((uint8)ch, (uint8)k).Transmit();
         }
     }
 }
@@ -53,27 +51,4 @@ CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &
     std::memcpy(this, rhs.unused, sizeof(*this));
 
     return *this;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CalibrationSettings::CreateMessage(SimpleMessage *message, Chan::E ch, KoeffCal::E koeff)
-{
-    DEF_STRUCT(StructCal, int16 *) values[KoeffCal::Number] =
-    {
-        &CAL_AD9952_OFFSET_NEG(Chan::A),
-        &CAL_AD9952_OFFSET_ZERO(Chan::A),
-        &CAL_AD9952_OFFSET_POS(Chan::A),
-        &CAL_AD9952_AMPLITUDE(Chan::A),
-        &CAL_DDS_MAX(Chan::A),
-        &CAL_DDS_MIN(Chan::A),
-        &CAL_DDS_OFFSET(Chan::A),
-        &CAL_FREQ_LEVEL_TRIG
-    };
-
-    if (ch == Chan::B && koeff == KoeffCal::FREQ_LEVEL_TRIG)
-    {
-        ch = Chan::A;
-    }
-
-    message->Create(5, (uint8)Command::SetKoeffCalibration, (uint8)ch, (uint8)koeff, (uint16)values[koeff].val[ch]);
 }

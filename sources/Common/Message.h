@@ -13,7 +13,6 @@ public:
     ~SimpleMessage();
 
     void Create(uint size, uint8);
-    void Create(uint size, uint8, uint8, uint8, uint16);
     /// Возвращает указатель на созданную копию
     SimpleMessage *Clone();
     /// Сбрасывает указатель извлечённой информации.
@@ -258,8 +257,6 @@ namespace Message
             Parameter(Command::E param, uint8 ch, uint64 value);
             Parameter(Command::E param, uint8 ch, uint8 choice);
         };
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     namespace FreqMeter
@@ -272,4 +269,11 @@ namespace Message
             Measure(uint frequency);
         };
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    class Calibrate : public SimpleMessage
+    {
+    public:
+        Calibrate(uint8 ch, uint8 koeff);
+    };
 }
