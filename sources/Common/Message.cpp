@@ -24,17 +24,6 @@ SimpleMessage::~SimpleMessage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint8 v0, char *string) : allocated(0), buffer(0), used(0), taken(0)
-{
-    //          v0 | string              | завершающий_ноль
-    uint size = 1 +  std::strlen(string) + 1;
-
-    Create(size, v0);
-
-    std::strcpy(String(1), string);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SimpleMessage::SimpleMessage(uint8 v0, uint8 v1, char *string) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(v0, v1, string);
@@ -505,6 +494,15 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(uint numDirs, uint numFiles) :
 {
     PutWord(numDirs);
     PutWord(numFiles);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessage()
+{   //          name | string                   | завершающий ноль
+    uint size = 1 +    std::strlen(directory) + 1;
+    AllocateMemory(size);
+    PutByte(Command::FDrive_NumDirsAndFiles);
+    std::strcpy((char *)(buffer + 1), directory);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

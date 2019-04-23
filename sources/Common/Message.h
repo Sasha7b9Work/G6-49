@@ -15,7 +15,6 @@ public:
     explicit SimpleMessage(uint size, uint8, uint8, uint8);
     explicit SimpleMessage(uint size, uint8, uint8, float);
     explicit SimpleMessage(uint size, uint8, uint8, uint64);
-    explicit SimpleMessage(uint8, char*);
     explicit SimpleMessage(uint8, uint8, char *);
     explicit SimpleMessage(uint8, uint8, uint8, char *);
     explicit SimpleMessage(uint8, uint, char*);
@@ -186,6 +185,7 @@ namespace Message
         {
         public:
             NumDirsAndFiles(uint numDirs, uint numFiles);
+            NumDirsAndFiles(char *directory);
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

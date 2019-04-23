@@ -70,9 +70,7 @@ int Items::NumberCurrentFile()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Items::SendRequest()
 {
-    SimpleMessage message(Command::FDrive_NumDirsAndFiles, FDrive::directory);
-
-    message.Transmit();
+    Message::FDrive::NumDirsAndFiles(FDrive::directory).Transmit();
 
     requestIsSend = true;
 }
