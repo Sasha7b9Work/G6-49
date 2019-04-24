@@ -15,9 +15,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-volatile static bool loggerUSB = false;
-
-
 #define SIZE_BUFFER_LOG 200
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,25 +22,11 @@ void Log::Write(TypeTrace::E, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
     char *pointer = buffer;
-
-    /*
-    if (type == TypeTrace::Error)
-    {
-        buffer[0] = 0;
-        std::strcat(buffer, "!!! ERROR !!! 1111111111111111111111111");
-        while (*pointer++) {};
-        ++pointer;
-    }
-    */
     std::va_list args;
     va_start(args, format);
     std::vsprintf(pointer, format, args);
     va_end(args);
     Console::AddString(buffer);
-    if(loggerUSB)
-    {
-        VCP::SendFormatStringAsynch(buffer);
-    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -84,24 +67,4 @@ void Log::Trace(TypeTrace::E type, const char *module, const char *func, int num
     std::strcat(message, numBuffer);
     Console::AddString(message);
     Console::AddString(buffer);
-    if(loggerUSB)
-    {
-        VCP::SendFormatStringAsynch(message);
-        VCP::SendFormatStringAsynch(buffer);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::DisconnectLoggerUSB()
-{
-    //static uint8 data = 20;
-    //Log_Write("посылаю %d", data);
-    //VCP_SendData(&data, 1);
-}
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Log::EnableLoggerUSB(bool enable)
-{
-    loggerUSB = enable;
 }

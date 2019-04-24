@@ -22,6 +22,7 @@ template ListElement<Task> *ListElement<Task>::Next();
 template                    List<String>::List();
 template void               List<String>::Clear();
 template void               List<String>::Append(String *);
+template void               List<String>::Remove(String *);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

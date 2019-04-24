@@ -1,5 +1,7 @@
 #include "defines.h"
 #include "SCPI/Runner.h"
+#include "SCPI/Parser.h"
+#include "Hardware/VCP.h"
 #include <cstring>
 
 
@@ -36,6 +38,27 @@ bool ProcessStructs(const StructCommand *commands)
 {
     uint maxLength = FindMaxLength(commands);
 
+    String *word = SCPI::Parser::GetWord();
+
+    if (std::strlen(word->CString()) > maxLength)
+    {
+        return true;
+    }
+
+    const StructCommand *command = commands;
+
+    while (command)
+    {
+        if (std::strcmp(word->CString(), command->symbols) == 0)
+        {
+            command->func();
+            return true;
+        }
+
+        command++;
+    }
+
+
     return false;
 }
 
@@ -52,6 +75,8 @@ uint FindMaxLength(const StructCommand *commands)
         {
             result = std::strlen(current->symbols);
         }
+
+        current++;
     }
 
     return result;
@@ -60,7 +85,7 @@ uint FindMaxLength(const StructCommand *commands)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SCPI::Runner::Process::IDN()
 {
-
+    VCP::Send("Test ID");
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

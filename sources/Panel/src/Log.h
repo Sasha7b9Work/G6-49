@@ -53,7 +53,4 @@ public:
     static void Trace(TypeTrace::E type, const char *module, const char *func, int numLine, char *format, ...);
     static void Write(TypeTrace::E type, char *format, ...);
     static void Finalize();
-    static void DisconnectLoggerUSB();
-    static void EnableLoggerUSB(bool enable);
-    static int GetNumStrings();
 };
