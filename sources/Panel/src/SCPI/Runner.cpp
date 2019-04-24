@@ -2,6 +2,7 @@
 #include "Display/Console.h"
 #include "SCPI/Runner.h"
 #include "SCPI/Parser.h"
+#include "SCPI/Errors.h"
 #include "Hardware/VCP.h"
 #include <cstring>
 
@@ -60,7 +61,7 @@ bool SCPI::Runner::ProcessStructs(const StructCommand *commands)
         command++;
     }
 
-    HandlerUnknownCommand();
+    Error::UnknownCommand();
 
     Parser::ClearList();
 
@@ -72,11 +73,11 @@ void SCPI::Runner::ProcessError(Result::E error)
 {
     if (error == Result::InvalidSyntax)
     {
-        HandlerInvalidSyntax();
+        Error::Syntax::Invalid();
     }
     else if (error == Result::UnknownCommand)
     {
-        HandlerUnknownCommand();
+        Error::UnknownCommand();
     }
 }
 
@@ -116,17 +117,5 @@ SCPI::Runner::Result::E SCPI::Runner::Process::Form()
 SCPI::Runner::Result::E SCPI::Runner::Process::Amplitude()
 {
     return Result::Count;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::HandlerInvalidSyntax()
-{
-    VCP::Send("Invalid syntax");
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::HandlerUnknownCommand()
-{
-    VCP::Send("Unknown command");
 }
 

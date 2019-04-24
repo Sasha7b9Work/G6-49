@@ -2196,6 +2196,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Runner.h</FilePath>
             </File>
+            <File>
+              <FileName>Errors.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Errors.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Errors.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Errors.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
