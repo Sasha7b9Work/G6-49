@@ -20,6 +20,8 @@ template Task              *ListElement<Task>::Get();
 template ListElement<Task> *ListElement<Task>::Next();
 
 template                    List<String>::List();
+template void               List<String>::Clear();
+template void               List<String>::Append(String *);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,5 +171,16 @@ uint List<T>::Size() const
     }
 
     return size;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+template <class T>
+void List<T>::Clear()
+{
+    while (Size() != 0U)
+    {
+        ListElement<T> *first = First();
+        delete first->Get();
+    }
 }
 

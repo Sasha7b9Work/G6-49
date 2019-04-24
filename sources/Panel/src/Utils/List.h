@@ -48,6 +48,8 @@ public:
     /// Возвращает размер
     uint Size() const;
 
+    void Clear();
+
 private:
     /// Возвращает указатель на последний элемент списка
     ListElement<T> *Last();

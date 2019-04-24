@@ -15,5 +15,7 @@ namespace SCPI
     private:
         static void ParseStar();
         static void ParseColon();
+        /// Создаёт строку, где first - индекс первого символа, а last - индекс последнего символа и возвращает указатель на неё
+        static String *CreateString(uint first, uint last);
     };
 }

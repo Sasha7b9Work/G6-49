@@ -7,6 +7,8 @@ class String
 {
 public:
     explicit String();
+    /// Резервиврует для строки size символов
+    explicit String(uint size);
              String(const String &);
     explicit String(char symbol);
     explicit String(const char *format, ...);
@@ -29,6 +31,8 @@ public:
         From(s);
         return *this;
     }
+
+    char &operator[] (int i) { return buffer[i]; };
 
 private:
 

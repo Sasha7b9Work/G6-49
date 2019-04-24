@@ -2186,6 +2186,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Parser.h</FilePath>
             </File>
+            <File>
+              <FileName>Runner.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Runner.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Runner.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Runner.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
