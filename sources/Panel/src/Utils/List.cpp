@@ -180,8 +180,9 @@ void List<T>::Clear()
 {
     while (Size() != 0U)
     {
-        ListElement<T> *first = First();
-        delete first->Get();
+        T *elem = First()->Get();
+        Remove(elem);
+        delete elem;
     }
 }
 

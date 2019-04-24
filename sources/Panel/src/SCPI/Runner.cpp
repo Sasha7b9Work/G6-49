@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Display/Console.h"
 #include "SCPI/Runner.h"
 #include "SCPI/Parser.h"
 #include "Hardware/VCP.h"
@@ -6,15 +7,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct StructCommand
+namespace SCPI
 {
-    char   *symbols;
-    void   (*func)();
-};
-
-static bool ProcessStructs(const StructCommand *commands);
-/// ¬озвращает длину самой длиной команды из массива
-static uint FindMaxLength(const StructCommand *commands);
+    namespace Runner
+    {
+        static bool ProcessStructs(const StructCommand *commands);
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool SCPI::Runner::Execute()
@@ -27,93 +26,107 @@ bool SCPI::Runner::Execute()
         {"FREQUENCY",   Process::Frequency},
         {"FORM",        Process::Form},
         {"AMPLITUDE",   Process::Amplitude},
-        {nullptr, nullptr}
+        {"", nullptr}
     };
 
     return ProcessStructs(commands);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool ProcessStructs(const StructCommand *commands)
+bool SCPI::Runner::ProcessStructs(const StructCommand *commands)
 {
-    uint maxLength = FindMaxLength(commands);
-
-    String *word = SCPI::Parser::GetWord();
-
-    if (std::strlen(word->CString()) > maxLength)
+    if(Parser::words.Size() == 0U)
     {
-        return true;
+        return false;
     }
+    
+    String *word = SCPI::Parser::GetWord();
 
     const StructCommand *command = commands;
 
-    while (command)
+    while (std::strlen(command->symbols) != 0)
     {
         if (std::strcmp(word->CString(), command->symbols) == 0)
         {
-            command->func();
+            Parser::RemoveWord(word);
+
+            Result::E result = command->func();
+
+            ProcessError(result);
+    
             return true;
         }
 
         command++;
     }
 
+    HandlerUnknownCommand();
+
+    Parser::ClearList();
 
     return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint FindMaxLength(const StructCommand *commands)
+void SCPI::Runner::ProcessError(Result::E error)
 {
-    const StructCommand *current = commands;
-
-    uint result = 0;
-
-    while (current)
+    if (error == Result::InvalidSyntax)
     {
-        if (std::strlen(current->symbols) > result)
-        {
-            result = std::strlen(current->symbols);
-        }
-
-        current++;
+        HandlerInvalidSyntax();
     }
-
-    return result;
+    else if (error == Result::UnknownCommand)
+    {
+        HandlerUnknownCommand();
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::Process::IDN()
+SCPI::Runner::Result::E SCPI::Runner::Process::IDN()
 {
-    VCP::Send("Test ID");
+    VCP::Send(Parser::GetWord()->CString());
+
+    return Result::IsOk;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::Process::RST()
+SCPI::Runner::Result::E SCPI::Runner::Process::RST()
 {
-
+    return Result::Count;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::Process::Channel()
+SCPI::Runner::Result::E SCPI::Runner::Process::Channel()
 {
-
+    return Result::Count;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::Process::Frequency()
+SCPI::Runner::Result::E SCPI::Runner::Process::Frequency()
 {
-
+    return Result::Count;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::Process::Form()
+SCPI::Runner::Result::E SCPI::Runner::Process::Form()
 {
-
+    return Result::Count;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::Runner::Process::Amplitude()
+SCPI::Runner::Result::E SCPI::Runner::Process::Amplitude()
 {
-
+    return Result::Count;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void SCPI::Runner::HandlerInvalidSyntax()
+{
+    VCP::Send("Invalid syntax");
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void SCPI::Runner::HandlerUnknownCommand()
+{
+    VCP::Send("Unknown command");
+}
+

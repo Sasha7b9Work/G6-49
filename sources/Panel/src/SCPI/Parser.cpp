@@ -35,6 +35,13 @@ void SCPI::Parser::ClearList()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 String *SCPI::Parser::GetWord()
 {
+    static String string("ERROR!!! List is empty");
+
+    if (words.Size() == 0U)
+    {
+        return &string;
+    }
+
     return words.First()->Get();
 }
 
