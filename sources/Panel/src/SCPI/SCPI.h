@@ -46,8 +46,9 @@ namespace SCPI
         static bool ProcessStructs(const StructCommand *commands);
 
         static const int SIZE_BUFFER = 1024;
-        static uint8 data[SIZE_BUFFER];
-        static int   used;
+        static uint8 data[SIZE_BUFFER]; ///< Здесь принятые данные хранятся
+        static int   used;              ///< Количество готовых к обработке байт - первый обработываемый байт имеет индекс 0, последний = used - 1
+        static int   start;             ///< Индекс первого байта обрабатываемого шага. Если первый байт команды всегда имеет индекс 0, то 
     };
 
     extern Buffer buffer;

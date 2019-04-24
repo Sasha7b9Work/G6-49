@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FDrive\FDriveDevice.cpp</Filename>
+          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\50</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FDrive\FDriveDevice.cpp</Filename>
+          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\54</Expression>
         </Bp>
@@ -196,7 +196,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FDrive\FDriveDevice.cpp</Filename>
+          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\59</Expression>
         </Bp>
@@ -212,7 +212,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FDrive\FDriveDevice.cpp</Filename>
+          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\63</Expression>
         </Bp>
@@ -228,7 +228,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FDrive\FDriveDevice.cpp</Filename>
+          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\68</Expression>
         </Bp>
@@ -244,7 +244,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Hardware\CPU_IT.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\CPU_IT.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/Hardware/CPU_IT.cpp\39</Expression>
         </Bp>

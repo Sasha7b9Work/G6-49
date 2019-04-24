@@ -2176,6 +2176,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\Commands.h</FilePath>
             </File>
+            <File>
+              <FileName>Parser.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\Parser.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\Parser.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
