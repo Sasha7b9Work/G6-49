@@ -4,6 +4,7 @@
 #include "Display/Console.h"
 #include "SCPI/Commands.h"
 #include "SCPI/Parser.h"
+#include "SCPI/Runner.h"
 #include <cstdlib>
 
 
@@ -29,7 +30,10 @@ bool SCPI::Handler::Processing(SimpleMessage *msg)
     {
         Buffer::AddData(msg);
 
-        Parser::Parse();
+        do 
+        {
+            Parser::Parse();
+        } while (Runner::Execute());
     }
 
     return false;

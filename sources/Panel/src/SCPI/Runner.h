@@ -6,6 +6,6 @@ namespace SCPI
     namespace Runner
     {
         /// Выполняет команду из SCPI::Parser::words
-        void Execute();
+        bool Execute();
     }
 }
