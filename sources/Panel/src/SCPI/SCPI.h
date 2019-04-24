@@ -16,12 +16,6 @@ namespace SCPI
         };
     };
 
-    struct StructCommand
-    {
-        char       *symbols;
-        Result::E (*func)();
-    };
-
     void Init();
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,8 +32,6 @@ namespace SCPI
         static void Clear();
         /// ƒобавл€ет данные из сообщени€ в буфер
         static void AddData(SimpleMessage *msg);
-        /// ¬ыполн€ет команду, если она есть в буфере, и удал€ет использованные и неверные данные
-        static bool RunAndCompress();
         /// ¬озвращает байт в позиции i
         static uint8 GetByte(uint i);
 
@@ -51,8 +43,6 @@ namespace SCPI
 
     private:
         static void AddByte(uint8 byte);
-        /// ќбрабатывает массив стуктур commands. ¬озвращает true, если одна из структур обработана - команда выполнена, либо ошибочный параметр
-        static bool ProcessStructs(const StructCommand *commands);
         /// —двинуть содержимое буфера на один байт влево. —амый первый байт при этом тер€етс€
         static bool ShiftToLeft();
 
@@ -61,17 +51,4 @@ namespace SCPI
         static int   used;              ///<  оличество готовых к обработке байт - первый обработываемый байт имеет индекс 0, последний = used - 1
         static int   start;             ///< »ндекс первого байта обрабатываемого шага. ≈сли первый байт команды всегда имеет индекс 0, то 
     };
-
-    extern Buffer buffer;
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    namespace Process
-    {
-        Result::E IDN();
-        Result::E RST();
-        Result::E Channel();
-        Result::E Frequency();
-        Result::E Form();
-        Result::E Amplitude();
-    }
 };
