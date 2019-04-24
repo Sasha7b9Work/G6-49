@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "List.h"
 #include "Interface/InterfacePanel.h"
+#include "Utils/String.h"
 #endif
 
 
@@ -17,6 +18,8 @@ template uint               List<Task>::Size() const;
 template                    ListElement<Task>::~ListElement();
 template Task              *ListElement<Task>::Get();
 template ListElement<Task> *ListElement<Task>::Next();
+
+template                    List<String>::List();
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

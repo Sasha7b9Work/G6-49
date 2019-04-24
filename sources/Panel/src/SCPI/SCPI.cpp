@@ -3,6 +3,7 @@
 #include "Command.h"
 #include "Display/Console.h"
 #include "SCPI/Commands.h"
+#include "SCPI/Parser.h"
 #include <cstdlib>
 
 
@@ -28,18 +29,43 @@ bool SCPI::Handler::Processing(SimpleMessage *msg)
     {
         Buffer::AddData(msg);
 
-        while (Buffer::RunAndCompress())
-        {
-
-        }
+        Parser::Parse();
     }
 
     return false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void SCPI::Buffer::RemoveBadSymbols()
+{
+    while (data[0] != ':' && data[0] != '*')
+    {
+        if (!ShiftToLeft())
+        {
+            break;
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool SCPI::Buffer::ShiftToLeft()
+{
+    if (used == 0)
+    {
+        return false;
+    }
+
+    std::memmove(data, data + 1, SIZE_BUFFER - 1);
+    used--;
+
+    return true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SCPI::Buffer::AddData(SimpleMessage *msg)
 {
+    Buffer::RemoveBadSymbols();                     // Сначала удаляем неиспользуемые символы из начала строки
+
     uint length = msg->TakeWord();
 
     for (uint i = 0; i < length; i++)
@@ -54,8 +80,7 @@ void SCPI::Buffer::AddByte(uint8 byte)
     data[used++] = byte;
     if (used == SIZE_BUFFER)
     {
-        used = SIZE_BUFFER - 1;
-        std::memcpy(data, data + 1, SIZE_BUFFER - 1);
+        ShiftToLeft();
     }
 }
 
@@ -122,4 +147,10 @@ SCPI::Result::E SCPI::Process::Amplitude()
 void SCPI::Buffer::Clear()
 {
     used = 0;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint8 SCPI::Buffer::GetByte(int i)
+{
+    return data[i];
 }

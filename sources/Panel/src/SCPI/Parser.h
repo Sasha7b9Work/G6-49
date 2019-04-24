@@ -1,22 +1,19 @@
 #pragma once
 #include "Utils/String.h"
+#include "Utils/List.h"
 
 
 namespace SCPI
 {
-    namespace Parser
+    class Parser
     {
-
-        //struct LinkString
-        //{
-        //    String string;
-        //    LinkString *next;
-        //};
-        //
-        ///// После разбора буфрера в этой структуре будет находиться разобранная команда
-        //struct Struct
-        //{
-        //    LinkString *head;
-        //};
-    }
+    public:
+        /// Попытка разобрать первую команду из SCPI::Buffer на составляющие. После разора в words хранятся составляющие
+        static void Parse();
+        static void ClearList();
+        static List<String> words;
+    private:
+        static void ParseStar();
+        static void ParseColon();
+    };
 }

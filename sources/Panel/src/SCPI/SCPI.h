@@ -40,10 +40,16 @@ namespace SCPI
         static void AddData(SimpleMessage *msg);
         /// Выполняет команду, если она есть в буфере, и удаляет использованные и неверные данные
         static bool RunAndCompress();
+        /// Возвращает байт в позиции i
+        static uint8 GetByte(int i);
     private:
         static void AddByte(uint8 byte);
         /// Обрабатывает массив стуктур commands. Возвращает true, если одна из структур обработана - команда выполнена, либо ошибочный параметр
         static bool ProcessStructs(const StructCommand *commands);
+        /// Удалить неправльные символы из начала буфера
+        static void RemoveBadSymbols();
+        /// Сдвинуть содержимое буфера на один байт влево. Самый первый байт при этом теряется
+        static bool ShiftToLeft();
 
         static const int SIZE_BUFFER = 1024;
         static uint8 data[SIZE_BUFFER]; ///< Здесь принятые данные хранятся
