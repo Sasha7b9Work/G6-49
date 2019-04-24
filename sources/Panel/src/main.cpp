@@ -9,6 +9,7 @@
 #include "Settings/Settings.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Debug.h"
+#include "SCPI/SCPI.h"
 #include <cstdlib>
 #include <cstdio>
 #endif
@@ -49,6 +50,8 @@ int main()
     set.Load();
 
     Menu::Init();
+
+    SCPI::Init();
 
     while (1)
     {
