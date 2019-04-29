@@ -84,7 +84,7 @@ void SCPI::Runner::ProcessError(Result::E error)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SCPI::Runner::Result::E SCPI::Runner::Process::IDN()
 {
-    VCP::Send(Parser::GetWord()->CString());
+    //VCP::Send()
 
     return Result::IsOk;
 }

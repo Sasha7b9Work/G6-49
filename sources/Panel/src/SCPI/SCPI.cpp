@@ -2,7 +2,6 @@
 #include "SCPI.h"
 #include "Command.h"
 #include "Display/Console.h"
-#include "SCPI/Commands.h"
 #include "SCPI/Parser.h"
 #include "SCPI/Runner.h"
 #include <cstdlib>
