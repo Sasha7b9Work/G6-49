@@ -42,7 +42,6 @@ source_group(libs\\FatFS        REGULAR_EXPRESSION src/libs/FatFS/*.*)
 source_group(libs\\HAL          REGULAR_EXPRESSION src/libs/HAL/*.*)
 source_group(libs\\USBD         REGULAR_EXPRESSION src/libs/USBD/*.*)
 source_group(libs\\USBH         REGULAR_EXPRESSION src/libs/USBH/*.*)
-source_group(SCPI               REGULAR_EXPRESSION src/SCPI/*.*)
 source_group(Settings           REGULAR_EXPRESSION src/Settings/*.*)
 source_group(Utils              REGULAR_EXPRESSION src/Utils/*.*)
 
@@ -60,7 +59,6 @@ file(GLOB SOURCES   ../common/*
                     src/libs/HAL/*
                     src/libs/USBD/*
                     src/libs/USBH/*
-                    src/SCPI/*
                     src/Settings/*
                     src/Utils/*)
 

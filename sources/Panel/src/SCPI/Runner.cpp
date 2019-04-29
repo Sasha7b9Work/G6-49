@@ -3,7 +3,7 @@
 #include "SCPI/Runner.h"
 #include "SCPI/Parser.h"
 #include "SCPI/Errors.h"
-#include "Hardware/VCP.h"
+#include "SCPI/VCP.h"
 #include <cstring>
 
 

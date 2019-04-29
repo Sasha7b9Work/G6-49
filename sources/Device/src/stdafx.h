@@ -27,8 +27,6 @@
 
 #include "Settings/CalibrationSettings.h"
 
-#include "SCPI/SCPI.h"
-
 #include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"

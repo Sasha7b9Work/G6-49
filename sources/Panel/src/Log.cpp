@@ -6,7 +6,7 @@
 #include "Display/Painter.h"
 #include <Display/Display.h>
 #include <Hardware/CPU.h>
-#include "Hardware/VCP.h"
+#include "SCPI/VCP.h"
 #include "Settings/Settings.h"
 #include <cstdarg>
 #include <cstring>

@@ -1,9 +1,13 @@
-#pragma once
+#include "stdafx.h"
+#ifndef WIN32
+#include "defines.h"
+#include "SCPI/VCP.h"
+#include "Display/Console.h"
+#endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class SCPI
+void VCP::Send(char *data)
 {
-public:
-    static void AddNewData(uint8 *buffer, uint length);
-};
+    Console::AddString(data);
+}

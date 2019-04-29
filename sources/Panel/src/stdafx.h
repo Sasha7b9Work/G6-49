@@ -30,7 +30,6 @@
 #include "Hardware/LTDC.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Timer4XX.h"
-#include "Hardware/VCP.h"
 #include "Hardware/Modules/EEPROM.h"
 #include "Hardware/Modules/SPI.h"
 
@@ -46,6 +45,7 @@
 #include "Menu/Pages/Include/PageSignals.h"
 
 #include "SCPI/SCPI.h"
+#include "SCPI/VCP.h"
 #include "Settings/Settings.h"
 #include "Settings/CalibrationSettings.h"
 
