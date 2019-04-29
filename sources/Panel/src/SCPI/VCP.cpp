@@ -19,5 +19,5 @@ void VCP::Send(char *data)
     std::memcpy(buffer.Data() + 1, data, size);
     buffer.Data()[size + 1] = 0x0d;
 
-    Message::SCPI::Data(buffer.Data(), buffer.Size());
+    Message::SCPI::Data(buffer.Data(), buffer.Size()).Transmit();
 }

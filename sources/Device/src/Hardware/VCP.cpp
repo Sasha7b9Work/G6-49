@@ -79,7 +79,5 @@ void VCP::SendByte(uint8 byte)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::Handler::Processing(SimpleMessage *msg)
 {
-    volatile uint8 *data = msg->Data();
-
-    data[0] = data[0];
+    VCP::SendData(msg->Data(5), msg->TakeWord());
 }
