@@ -3,6 +3,7 @@
 #include "usbd_cdc_interface.h"
 #ifndef WIN32
 #include "defines.h"
+#include "Message.h"
 #include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
 #include "usbd_desc.h"
@@ -73,4 +74,12 @@ void VCP::SendStringEOF(char *data)
 void VCP::SendByte(uint8 byte)
 {
     SendData(&byte, 1);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void VCP::Handler::Processing(SimpleMessage *msg)
+{
+    volatile uint8 *data = msg->Data();
+
+    data[0] = data[0];
 }

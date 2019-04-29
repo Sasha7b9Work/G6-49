@@ -3,6 +3,9 @@
 #include <usbd_def.h>
 
 
+class SimpleMessage;
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace VCP
 {
@@ -24,4 +27,9 @@ namespace VCP
     extern bool connectedToUSB;
 
     extern bool cableUSBisConnected;
+
+    namespace Handler
+    {
+        void Processing(SimpleMessage *msg);
+    }
 };

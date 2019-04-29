@@ -12,6 +12,7 @@
 #include "InterfaceDevice.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/VCP.h"
 #include "Hardware/Modules/SPI.h"
 #include "Settings/CalibrationSettings.h"
 #endif
@@ -64,7 +65,7 @@ void Handlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestFileString*/ FDrive::Handler::Processing,
         /* FDrive_LoadToFPGA       */ FDrive::Handler::Processing,
         /* FDrive_GetPictureDDS    */ FDrive::Handler::Processing,
-        /* SCPI_RecvData           */ Handlers::E
+        /* SCPI_RecvData           */ VCP::Handler::Processing
     };
 
     uint8 com = msg->TakeByte();
