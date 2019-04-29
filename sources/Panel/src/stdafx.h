@@ -50,6 +50,7 @@
 #include "Settings/CalibrationSettings.h"
 
 #include "Utils/BigNumber.h"
+#include "Utils/Buffer.h"
 #include "Utils/Debug.h"
 #include "Utils/List.h"
 #include "Utils/Math.h"

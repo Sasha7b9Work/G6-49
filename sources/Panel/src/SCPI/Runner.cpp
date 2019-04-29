@@ -84,7 +84,7 @@ void SCPI::Runner::ProcessError(Result::E error)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SCPI::Runner::Result::E SCPI::Runner::Process::IDN()
 {
-    //VCP::Send()
+    VCP::Send("MNIPI, G6-49, DDS V.1.2");
 
     return Result::IsOk;
 }

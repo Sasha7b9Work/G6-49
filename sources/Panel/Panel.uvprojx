@@ -2351,6 +2351,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Utils\IntValue.h</FilePath>
             </File>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Buffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Buffer.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
