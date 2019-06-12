@@ -182,7 +182,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
     
     /* Get R/W sector size (WORD) */
     case GET_SECTOR_SIZE :
-        if(USBH_MSC_GetLUNInfo(&FDrive::hUSB_Host, lun, &info) == USBH_OK)
+        if(USBH_MSC_GetLUNInfo(&FDrive::hUSB_Host, lun, &info) == USBH_OK) //-V1037
         {
         *static_cast<DWORD*>(buff) = info.capacity.block_size;
         res = RES_OK;

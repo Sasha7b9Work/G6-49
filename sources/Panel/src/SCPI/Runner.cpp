@@ -45,7 +45,7 @@ bool SCPI::Runner::ProcessStructs(const StructCommand *commands)
 
     const StructCommand *command = commands;
 
-    while (std::strlen(command->symbols) != 0)
+    while (std::strlen(command->symbols) != 0) //-V805
     {
         if (std::strcmp(word->CString(), command->symbols) == 0)
         {
@@ -78,6 +78,10 @@ void SCPI::Runner::ProcessError(Result::E error)
     else if (error == Result::UnknownCommand)
     {
         Error::UnknownCommand();
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 

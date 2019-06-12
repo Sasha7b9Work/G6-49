@@ -177,7 +177,8 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
     {
         int numReadingElements = 0;
         bool alreadyNull = false;
-        while (true)
+
+        while (true) //-V2530
         {
             if (f_readdir(&dir, &fno) != FR_OK)
             {
@@ -205,6 +206,7 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
                 }
             }
         }
+
         f_closedir(&dir);
     }
 }
