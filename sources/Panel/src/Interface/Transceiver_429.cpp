@@ -22,9 +22,10 @@ void Transceiver::Transmit(SimpleMessage *message)
     uint timeout = (message->Size() > 1000U) ? 100U : 10U;
 
     bool result = false;
+    
+    uint failed = 0;
 
     while (!result)
-
     {
         SPI4_::WaitFalling();                                                   // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
@@ -42,17 +43,15 @@ void Transceiver::Transmit(SimpleMessage *message)
             result = (trashedBytes == 0);
         }
 
-        static uint all = 0;
-        static uint failed = 0;
-        all++;
-
-
         if (!result)
         {
+            /// \todo Затычка на то, что при быстром нажатии кнопки ФОРМА происходит зависание. По хорошему надо бы разобраться в чем дело.
             failed++;
-            //LOG_WRITE("%d/%d %.1f %% потерь", failed, all, (float)failed / all * 100.0f);
+            if(failed > 5)
+            {
+                break;
+            }
         }
-
     };
 }
 
