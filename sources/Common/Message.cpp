@@ -433,17 +433,17 @@ Message::FDrive::LoadToFPGA::LoadToFPGA(uint8 ch, uint8 numFile, char *directory
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::LoadFromDDS::LoadFromDDS(uint8 ch, uint8 data[8 * 1024]) : SimpleMessage(8 * 1024, Command::LoadFormDDS)
+Message::LoadFromDDS::LoadFromDDS(uint8 ch, uint8 data[8 * 1024]) : SimpleMessage(2 + 8 * 1024, Command::LoadFormDDS)
 {
     PutByte(ch);
-    std::memcpy(buffer + 2, data, 8 * 1024);
+    PutData(data, 8 * 1024);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Message::FDrive::PictureDDS::PictureDDS(uint8 numFile, uint8 *data) : SimpleMessage(242, Command::FDrive_GetPictureDDS)
 {
     PutByte(numFile);
-    std::memcpy(buffer + 2, data, 240);
+    PutData(data, 240);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
