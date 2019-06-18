@@ -171,7 +171,7 @@ void Generator::TransformDataToCodeAndTransmit(float d[DDS_NUM_POINTS], Form *fo
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterChoice *param)
 {
-    DEF_STRUCT(StructCommand, Command::E) commands[ParameterChoice::Number] =
+    static const Command::E commands[ParameterChoice::Number] =
     {
         Command::SetPolarity,
         Command::SetStartMode,
@@ -179,7 +179,7 @@ void Generator::SetParameter(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    Message::Set::Parameter(commands[param->value].val,
+    Message::Set::Parameter(commands[param->value],
         (uint8)param->GetForm()->GetWave()->GetChannel(),
         (uint8)param->GetChoice()).Transmit();
 }
@@ -208,7 +208,7 @@ void Generator::SetFrequency(Chan::E ch, float frequency)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterValue *param)
 {
-    DEF_STRUCT(StructCommand, Command::E) commands[ParameterValue::Number] =
+    static const Command::E commands[ParameterValue::Number] =
     {
         Command::SetFrequency,
         Command::SetPeriod,                     // 
@@ -238,7 +238,7 @@ void Generator::SetParameter(ParameterValue *param)
 
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
-    Command::E com = commands[param->value].val;
+    Command::E com = commands[param->value];
 
     Message::Set::Parameter(com, (uint8)ch, value.ToUINT64()).Transmit();
 }

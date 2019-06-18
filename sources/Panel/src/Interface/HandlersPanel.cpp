@@ -17,7 +17,7 @@ bool Handlers::Processing(SimpleMessage *msg)
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
 
-    DEF_STRUCT(StructFunc, pFuncBpM) functions[Command::Number] =
+    static const pFuncBpM funcs[Command::Number] =
     {
         /* RequestData             */ Handlers::Request,
         /* EnableChannel           */ Handlers::E,
@@ -67,7 +67,7 @@ bool Handlers::Processing(SimpleMessage *msg)
     if (command < Command::Number)
     {
         /// —юда сообщение передаЄтс€ уже без первого байта
-        return functions[command].val(msg);
+        return funcs[command](msg);
     }
     else
     {

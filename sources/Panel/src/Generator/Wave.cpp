@@ -26,7 +26,7 @@ static uint8 formFlash[Chan::Number][SIZE_BUFFER];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name() const
 {
-    DEF_STRUCT(StructName, const char *) names[Form::Number] =
+    static const pString names[Form::Number] =
     {
         "Синус",
         "Пила+",
@@ -38,13 +38,13 @@ pString Form::Name() const
         "Произвольный"
     };
 
-    return names[value].val;
+    return names[value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Register::Name() const
 {
-    DEF_STRUCT(StrName, const char *) names[Register::Number] =
+    static const pString names[Register::Number] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",
@@ -68,13 +68,13 @@ pString Register::Name() const
         "Частотомер - фильтр"
     };
 
-    return names[value].val;
+    return names[value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::Name() const
 {
-    DEF_STRUCT(StructName, const char *) nameParameter[ParameterValue::Number] =
+    static const pString nameParameter[ParameterValue::Number] =
     {
         "Частота",
         "Период",
@@ -95,7 +95,7 @@ pString ParameterValue::Name() const
         "     Выход ( ESC )"
     };
 
-    return nameParameter[value].val;
+    return nameParameter[value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -438,7 +438,7 @@ pString ParameterComplex::GetStringValue() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::NameUnit(char buf[10]) const
 {
-    DEF_STRUCT(StructName, const char *) names[ParameterValue::Number] =
+    static const pString names[ParameterValue::Number] =
     {
         "Гц",
         "с",
@@ -459,7 +459,7 @@ pString ParameterValue::NameUnit(char buf[10]) const
         ""
     };
 
-    sprintf(buf, "%s%s", order.Name(), names[value].val);
+    sprintf(buf, "%s%s", order.Name(), names[value]);
     return buf;
 }
 
@@ -482,7 +482,7 @@ bool ParameterValue::IsOpened()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterChoice::Name() const
 {
-    DEF_STRUCT(StructName, const char *) namesParam[ParameterChoice::Number] =
+    static const pString namesParam[ParameterChoice::Number] =
     {
         "Полярность",
         "Запуск",
@@ -490,18 +490,18 @@ pString ParameterChoice::Name() const
         "Манипуляция"
     };
 
-    return namesParam[value].val;
+    return namesParam[value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterComplex::Name() const
 {
-    DEF_STRUCT(StructName, const char *) namesParams[ParameterComplex::Number] =
+    static const pString namesParams[ParameterComplex::Number] =
     {
         "Манипуляция"
     };
 
-    return namesParams[value].val;
+    return namesParams[value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -768,7 +768,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
 
     typedef void(*pFuncIIII)(Chan::E, int, int, int, int);
 
-    DEF_STRUCT(StructFunc, pFuncIIII) func[Form::Number] =
+    static const pFuncIIII funcs[Form::Number] =
     {
         DrawSine,
         DrawRampPlus,
@@ -780,7 +780,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
         DrawDDS
     };
 
-    func[value].val(ch, x0, minY, width, height);
+    funcs[value](ch, x0, minY, width, height);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
