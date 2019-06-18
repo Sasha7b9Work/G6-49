@@ -361,8 +361,8 @@ public:
     Wave(Chan::E ch, Form **forms);
     /// Возвращает установленную форму
     Form *GetCurrentForm();
-    /// Установить текущей следующую форму
-    void SetForm(int8 num);
+    /// Установить индекс текущей формы сигнала.
+    void SetIndexForm(int8 num);
 
     int NumberOfForms() const;
 

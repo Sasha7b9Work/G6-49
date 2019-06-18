@@ -99,7 +99,7 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
             Form *form = WAVE(ch).GetForm(i);
             if (form->Is(Form::Meander))
             {
-                WAVE(ch).SetForm(i);
+                WAVE(ch).SetIndexForm(i);
                 Generator::TuneChannel(ch);
                 break;
             }
