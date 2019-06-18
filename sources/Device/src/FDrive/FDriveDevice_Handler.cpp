@@ -45,7 +45,7 @@ namespace FDrive
         void RequestFileSize();
         void LoadToFPGA();
         void GetPictureDDS();
-        void RequestFileString();
+        void E();
     }
 
     /// Трансформировать точки в пригодный для записи в ПЛИС вид
@@ -72,34 +72,57 @@ void FDrive::Handler::Processing(SimpleMessage *message)
 
     uint8 com = msg->TakeByte();
 
-    if (com == Command::FDrive_NumDirsAndFiles)
+    static const struct StructFunc
     {
-        GetNumDirsAndFiles();
+        pFuncVV value;
+        StructFunc(pFuncVV v) : value(v) {};
     }
-    else if (com == Command::FDrive_RequestFile)
+    funcs[Command::Number] =
     {
-        RequestFile();
-    }
-    else if (com == Command::FDrive_RequestFileSize)
-    {
-        RequestFileSize();
-    }
-    else if (com == Command::FDrive_LoadToFPGA)
-    {
-        LoadToFPGA();
-    }
-    else if (com == Command::FDrive_GetPictureDDS)
-    {
-        GetPictureDDS();
-    }
-    else if (com == Command::FDrive_RequestFileString)
-    {
-        RequestFileString();
-    }
-    else
-    {
-        // здесь ничего
-    }
+        /* RequestData             */ EmptyFuncVV,
+        /* EnableChannel           */ EmptyFuncVV,
+        /* SetFormWave             */ EmptyFuncVV,
+        /* SetFrequency            */ EmptyFuncVV,
+        /* SetAmplitude            */ EmptyFuncVV,
+        /* SetOffset               */ EmptyFuncVV,
+        /* SetDuration             */ EmptyFuncVV,
+        /* SetDutyRatio            */ EmptyFuncVV,
+        /* SetPhase                */ EmptyFuncVV,
+        /* RunReset                */ EmptyFuncVV,
+        /* ModeDebug               */ EmptyFuncVV,
+        /* SetDelay                */ EmptyFuncVV,
+        /* WriteRegister           */ EmptyFuncVV,
+        /* SetDurationRise         */ EmptyFuncVV,
+        /* SetDurationFall         */ EmptyFuncVV,
+        /* SetDurationStady        */ EmptyFuncVV,
+        /* SetDutyFactor           */ EmptyFuncVV,
+        /* SetManipulation         */ EmptyFuncVV,
+        /* SetManipulationDuration */ EmptyFuncVV,
+        /* SetManipulationPeriod   */ EmptyFuncVV,
+        /* SetPacketPeriod         */ EmptyFuncVV,
+        /* SetPacketNumber         */ EmptyFuncVV,
+        /* SetStartMode            */ EmptyFuncVV,
+        /* SetPeriod               */ EmptyFuncVV,
+        /* SetPolarity             */ EmptyFuncVV,
+        /* SetManipulationMode     */ EmptyFuncVV,
+        /* LoadFromDDS             */ EmptyFuncVV,
+        /* FreqMeasure             */ EmptyFuncVV,
+        /* Log                     */ EmptyFuncVV,
+        /* FDrive_NumDirsAndFiles  */ Handler::GetNumDirsAndFiles,
+        /* FDrive_Mount            */ Handler::E,
+        /* FDrive_RequestDir       */ Handler::E,
+        /* FDrive_RequestFile      */ Handler::RequestFile,
+        /* Test                    */ EmptyFuncVV,
+        /* SetKoeffCalibration     */ EmptyFuncVV,
+        /* GetKoeffCalibration     */ EmptyFuncVV,
+        /* FDrive_RequestFileSize  */ Handler::RequestFileSize,
+        /* FDrive_RequestFileString*/ Handler::E,
+        /* FDrive_LoadToFPGA       */ Handler::LoadToFPGA,
+        /* FDrive_GetPictureDDS    */ Handler::GetPictureDDS,
+        /* SCPI_RecvData           */ EmptyFuncVV
+    };
+
+    funcs[com].value();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -183,7 +206,7 @@ void FDrive::Handler::GetPictureDDS()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::Handler::RequestFileString()
+void FDrive::Handler::E()
 {
 
 }

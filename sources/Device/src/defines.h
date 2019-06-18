@@ -16,6 +16,8 @@ typedef const char * const pString;
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);
 
+inline void EmptyFuncVV() {};
+
 #define _bitset(bits)                               \
   ((uint8)(                                         \
   (((uint8)((uint)bits / 01)        % 010) << 0) |  \
