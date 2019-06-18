@@ -28,7 +28,7 @@ static const int FPGA_NUM_POINTS = 8 * 1024;
 /// Загружает форму произвольного сигнала
 static void LoadFormDDS(Form *form);
 /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-static void TransformDataToCode(float data[FPGA_NUM_POINTS], Chan::E ch);
+static void TransformDataToCode(float data[FPGA_NUM_POINTS], Form *form);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,8 +86,6 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void LoadFormDDS(Form *form)
 {
-    Chan::E ch = form->GetWave()->GetChannel();
-
     float data[FPGA_NUM_POINTS];
 
     switch (form->value)
@@ -101,7 +99,7 @@ void LoadFormDDS(Form *form)
                     data[i] = -1.0f + step * i;
                 }
 
-                TransformDataToCode(data, ch);
+                TransformDataToCode(data, form);
             }
             break;
         case Form::RampMinus:
@@ -113,7 +111,7 @@ void LoadFormDDS(Form *form)
                     data[i] = 1.0f - step * i;
                 }
 
-                TransformDataToCode(data, ch);
+                TransformDataToCode(data, form);
             }
             break;
         case Form::Triangle:
@@ -130,7 +128,7 @@ void LoadFormDDS(Form *form)
                     data[i] = 1.0f - step * (i - FPGA_NUM_POINTS / 2);
                 }
 
-                TransformDataToCode(data, ch);
+                TransformDataToCode(data, form);
             }
             break;
         case Form::Meander:
@@ -144,8 +142,10 @@ void LoadFormDDS(Form *form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void TransformDataToCode(float d[FPGA_NUM_POINTS], Chan::E ch)
+void TransformDataToCode(float d[FPGA_NUM_POINTS], Form *form)
 {
+    Chan::E ch = form->GetWave()->GetChannel();
+
     SimpleMessage message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, (uint8)ch);
 
     uint8 code[FPGA_NUM_POINTS * 2];
