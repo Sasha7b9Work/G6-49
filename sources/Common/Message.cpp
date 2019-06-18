@@ -31,6 +31,12 @@ SimpleMessage::SimpleMessage(uint size, uint8 v0) : allocated(0), buffer(0), use
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1) : allocated(0), buffer(0), used(0), taken(0)
+{
+    Create(size, v0, v1);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SimpleMessage *SimpleMessage::Clone()
 {
     SimpleMessage *result = new SimpleMessage();
@@ -50,6 +56,16 @@ void SimpleMessage::Create(uint size, uint8 v0)
     if (AllocateMemory(size))
     {
         PutByte(v0);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void SimpleMessage::Create(uint size, uint8 v0, uint8 v1)
+{
+    if (AllocateMemory(size))
+    {
+        PutByte(v0);
+        PutByte(v1);
     }
 }
 

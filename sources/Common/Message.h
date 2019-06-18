@@ -9,10 +9,12 @@ class SimpleMessage  // -V690
 public:
     explicit SimpleMessage();
     explicit SimpleMessage(uint size, uint8);
+    explicit SimpleMessage(uint size, uint8, uint8);
  
     ~SimpleMessage();
 
     void Create(uint size, uint8);
+    void Create(uint size, uint8, uint8);
     /// Возвращает указатель на созданную копию
     SimpleMessage *Clone();
     /// Сбрасывает указатель извлечённой информации.
@@ -56,10 +58,9 @@ public:
     
     /// Передать сообщение получателю
     void Transmit();
-
-protected:
     /// Положить данные
     void PutData(uint8 *data, uint length);
+protected:
     /// Положить байт
     void PutByte(uint8 data);
     /// Положить половину слова
