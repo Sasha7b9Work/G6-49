@@ -29,7 +29,7 @@ namespace Generator
     /// Загружает форму произвольного сигнала
     static void LoadFormDDS(Form *form);
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-    static void TransformDataToCode(float data[FPGA_NUM_POINTS], Form *form);
+    static void TransformDataToCodeAndTransmit(float data[FPGA_NUM_POINTS], Form *form);
 }
 
 
@@ -101,7 +101,7 @@ void Generator::LoadFormDDS(Form *form)
                     data[i] = -1.0f + step * i;
                 }
 
-                TransformDataToCode(data, form);
+                TransformDataToCodeAndTransmit(data, form);
             }
             break;
         case Form::RampMinus:
@@ -113,7 +113,7 @@ void Generator::LoadFormDDS(Form *form)
                     data[i] = 1.0f - step * i;
                 }
 
-                TransformDataToCode(data, form);
+                TransformDataToCodeAndTransmit(data, form);
             }
             break;
         case Form::Triangle:
@@ -130,7 +130,7 @@ void Generator::LoadFormDDS(Form *form)
                     data[i] = 1.0f - step * (i - FPGA_NUM_POINTS / 2);
                 }
 
-                TransformDataToCode(data, form);
+                TransformDataToCodeAndTransmit(data, form);
             }
             break;
         case Form::Meander:
@@ -144,9 +144,11 @@ void Generator::LoadFormDDS(Form *form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], Form *form)
+void Generator::TransformDataToCodeAndTransmit(float d[FPGA_NUM_POINTS], Form *form)
 {
-    uint8 code[FPGA_NUM_POINTS * 2];
+    uint16 buffer[FPGA_NUM_POINTS];
+
+    uint8 *code = (uint8 *)buffer;
 
     int max = 0x1fff;
 
@@ -163,7 +165,7 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], Form *form)
         code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
     }
 
-    Message::LoadFormDDS((uint8)form->GetWave()->GetChannel(), code).Transmit();
+    Message::LoadFormDDS((uint8)form->GetWave()->GetChannel(), buffer).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

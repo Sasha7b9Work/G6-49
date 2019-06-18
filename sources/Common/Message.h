@@ -152,7 +152,7 @@ namespace Message
     class LoadFormDDS : public SimpleMessage
     {
     public:
-        LoadFormDDS(uint8 ch, uint8 data[Generator::FPGA_NUM_POINTS * 2]);
+        LoadFormDDS(uint8 ch, uint16 data[Generator::FPGA_NUM_POINTS]);
     };
 
     namespace FDrive
