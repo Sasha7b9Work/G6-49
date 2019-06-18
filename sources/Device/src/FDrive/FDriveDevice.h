@@ -4,19 +4,16 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class FDrive
+namespace FDrive
 {
-public:
+    void Init();
 
-    static void Init();
+    void Update();
 
-    static void Update();
+    extern USBH_HandleTypeDef hUSB_Host;
 
-    static USBH_HandleTypeDef hUSB_Host;
-
-    class Handler
+    namespace Handler
     {
-        friend class Handlers;
-        static void Processing(SimpleMessage *msg);
+        void Processing(SimpleMessage *msg);
     };
 };

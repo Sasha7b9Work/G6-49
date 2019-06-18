@@ -80,10 +80,8 @@ public:
     //------------------------------------------------------------------------------------------------------------------------------------------------
     class HCD
     {
-        friend class FDrive;
-    private:
-        static void Init();
     public:
+        static void Init();
 
         static HCD_HandleTypeDef handle;
     };

@@ -9,8 +9,6 @@ class FPGA
 {
 friend class Interface;
 friend class Handlers;
-friend class FDrive;
-
 public:
     
     static const uint NUM_POINTS = 1024 * 8;
@@ -82,6 +80,8 @@ public:
     static ClockFrequency::E clock;
 
     static ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
+    /// Возвращает указатель на точки сигнала, загружаемого из флешки
+    static uint8 *DataFlash(Chan::E ch);
 
 private:
 
@@ -164,8 +164,6 @@ private:
     static void SetModeDDS(Chan::E ch);
     /// Возвращает указатель на точки произвольного сигнала (программно определёного)
     static uint8 *DataDDS(Chan::E ch);
-    /// Возвращает указатель на точки сигнала, загружаемого из флешки
-    static uint8 *DataFlash(Chan::E ch);
 
     static void SetModeMeander(Chan::E ch);
 
