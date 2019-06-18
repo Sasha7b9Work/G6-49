@@ -34,10 +34,16 @@ DEF_BUTTON( bEnter,                                                             
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void OnPress_Choose()
+{
+    FDrive::PressChoose();
+    PageSignals::OnPress_Form(true);
+}
+
 DEF_BUTTON( bChoose,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Установить ---
     "Выбрать",
     "",
-    pageLoad, Item::FuncActive, FDrive::PressChoose, FuncDraw
+    pageLoad, Item::FuncActive, OnPress_Choose, FuncDraw
 )
 
 
