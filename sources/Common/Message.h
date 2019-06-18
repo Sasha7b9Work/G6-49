@@ -14,12 +14,10 @@ class SimpleMessage  // -V690
 public:
     explicit SimpleMessage();
     explicit SimpleMessage(uint size, uint8);
-    explicit SimpleMessage(uint size, uint8, uint8);
  
     ~SimpleMessage();
 
     void Create(uint size, uint8);
-    void Create(uint size, uint8, uint8);
     /// Возвращает указатель на созданную копию
     SimpleMessage *Clone();
     /// Сбрасывает указатель извлечённой информации.
@@ -151,10 +149,10 @@ namespace Message
     };
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    class LoadFromDDS : public SimpleMessage
+    class LoadFormDDS : public SimpleMessage
     {
     public:
-        LoadFromDDS(uint8 ch, uint8 data[Generator::FPGA_NUM_POINTS * 2]);
+        LoadFormDDS(uint8 ch, uint8 data[Generator::FPGA_NUM_POINTS * 2]);
     };
 
     namespace FDrive

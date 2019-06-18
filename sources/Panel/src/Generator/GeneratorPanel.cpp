@@ -146,10 +146,6 @@ void Generator::LoadFormDDS(Form *form)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], Form *form)
 {
-    Chan::E ch = form->GetWave()->GetChannel();
-
-    SimpleMessage message(FPGA_NUM_POINTS * 2 + 2, Command::LoadFormDDS, (uint8)ch);
-
     uint8 code[FPGA_NUM_POINTS * 2];
 
     int max = 0x1fff;
@@ -167,9 +163,7 @@ void Generator::TransformDataToCode(float d[FPGA_NUM_POINTS], Form *form)
         code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
     }
 
-    message.PutData(code, FPGA_NUM_POINTS * 2);
-
-    message.Transmit();
+    Message::LoadFormDDS((uint8)form->GetWave()->GetChannel(), code).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

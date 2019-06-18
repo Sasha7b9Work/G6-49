@@ -31,12 +31,6 @@ SimpleMessage::SimpleMessage(uint size, uint8 v0) : allocated(0), buffer(0), use
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SimpleMessage::SimpleMessage(uint size, uint8 v0, uint8 v1) : allocated(0), buffer(0), used(0), taken(0)
-{
-    Create(size, v0, v1);
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SimpleMessage *SimpleMessage::Clone()
 {
     SimpleMessage *result = new SimpleMessage();
@@ -56,16 +50,6 @@ void SimpleMessage::Create(uint size, uint8 v0)
     if (AllocateMemory(size))
     {
         PutByte(v0);
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SimpleMessage::Create(uint size, uint8 v0, uint8 v1)
-{
-    if (AllocateMemory(size))
-    {
-        PutByte(v0);
-        PutByte(v1);
     }
 }
 
@@ -449,7 +433,7 @@ Message::FDrive::LoadToFPGA::LoadToFPGA(uint8 ch, uint8 numFile, char *directory
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::LoadFromDDS::LoadFromDDS(uint8 ch, uint8 data[Generator::FPGA_NUM_POINTS * 2]) : SimpleMessage(2 + Generator::FPGA_NUM_POINTS * 2, Command::LoadFormDDS)
+Message::LoadFormDDS::LoadFormDDS(uint8 ch, uint8 data[Generator::FPGA_NUM_POINTS * 2]) : SimpleMessage(2 + Generator::FPGA_NUM_POINTS * 2, Command::LoadFormDDS)
 {
     PutByte(ch);
     PutData(data, Generator::FPGA_NUM_POINTS * 2);
