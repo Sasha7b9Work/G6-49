@@ -50,7 +50,7 @@ pString Command::Name() const
         "GetKoeffCalibration",
         "FDrive_RequestFileSize",
         "FDrive_RequestFileString",
-        "FDrive_LoadToFPGA",
+        "FDrive_LoadFromExtStorage",
         "FDrive_GetPictureDDS",
         "SCPI_Data"
     };
@@ -170,7 +170,7 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case FDrive_RequestFileString:
             break;
-        case FDrive_LoadToFPGA:
+        case FDrive_LoadFromExtStorage:
             break;
         case FDrive_GetPictureDDS:
             break;

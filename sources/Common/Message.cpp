@@ -421,12 +421,12 @@ Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint8 value) : Si
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::FDrive::LoadToFPGA::LoadToFPGA(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
+Message::FDrive::LoadFromExtStorage::LoadFromExtStorage(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
 {
     //          com ch  numFile directory                 завершающий_ноль
     uint size = 1 + 1 + 1 +      std::strlen(directory) + 1;
     AllocateMemory(size);
-    PutByte(Command::FDrive_LoadToFPGA);
+    PutByte(Command::FDrive_LoadFromExtStorage);
     PutByte(ch);
     PutByte(numFile);
     std::strcpy((char *)&buffer[3], directory);
