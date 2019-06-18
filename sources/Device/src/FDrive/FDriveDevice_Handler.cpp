@@ -24,26 +24,32 @@ struct StructForReadDir
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Получает количество каталогов и файлов в данной директории
-static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
-/// Получить имя numFile-го файла из каталога fullPath
-static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
+namespace FDrive
+{
+    namespace Handler
+    {
+        /// Получает количество каталогов и файлов в данной директории
+        void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
+        /// Получить имя numFile-го файла из каталога fullPath
+        bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
 
-static uint GetFileSize(char *fullPath);
+        uint GetFileSize(char *fullPath);
 
-static bool ReadFloats(float values[4096], char *name);
-/// Трансформировать точки в пригодный для записи в ПЛИС вид
-static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
+        bool ReadFloats(float values[4096], char *name);
+        /// Трансформировать точки в пригодный для записи в ПЛИС вид
+        void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
 
-static void Normalize(float d[4096]);
+        void Normalize(float d[4096]);
 
-static void FindMinMax(float d[4096], float *_min, float *_max);
+        void FindMinMax(float d[4096], float *_min, float *_max);
 
-static float FindScale(float min, float max);
+        float FindScale(float min, float max);
 
-static void ToScale(float d[4096], float scale);
-/// Заполнить массив picture данными для отрисовки сигнала на экране
-static void FillPicture(uint8 *picture, uint size, float values[4096]);
+        void ToScale(float d[4096], float scale);
+        /// Заполнить массив picture данными для отрисовки сигнала на экране
+        void FillPicture(uint8 *picture, uint size, float values[4096]);
+    }
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,7 +167,7 @@ void FDrive::Handler::Processing(SimpleMessage *msg)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
+void FDrive::Handler::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
 {
     FILINFO fno;
     DIR dir;
@@ -212,7 +218,7 @@ static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFil
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
+bool FDrive::Handler::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 {
     StructForReadDir srd;
 
@@ -258,7 +264,7 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static uint GetFileSize(char *fullPath)
+uint FDrive::Handler::GetFileSize(char *fullPath)
 {
     FIL fp;
     if (f_open(&fp, fullPath, FA_READ) == FR_OK)
@@ -272,7 +278,7 @@ static uint GetFileSize(char *fullPath)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool ReadFloats(float values[4096], char *name)
+bool FDrive::Handler::ReadFloats(float values[4096], char *name)
 {
     bool result = false;
 
@@ -324,7 +330,7 @@ static bool ReadFloats(float values[4096], char *name)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
+void FDrive::Handler::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
 {
     Normalize(d);
 
@@ -345,7 +351,7 @@ static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Normalize(float d[4096])
+void FDrive::Handler::Normalize(float d[4096])
 {
     float min = 0.0f;
     float max = 0.0f;
@@ -358,7 +364,7 @@ static void Normalize(float d[4096])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FindMinMax(float d[4096], float *_min, float *_max)
+void FDrive::Handler::FindMinMax(float d[4096], float *_min, float *_max)
 {
     float min = 0.0f;
     float max = 0.0f;
@@ -380,7 +386,7 @@ static void FindMinMax(float d[4096], float *_min, float *_max)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static float FindScale(float min, float max)
+float FDrive::Handler::FindScale(float min, float max)
 {
     max = std::fabsf(max);
 
@@ -393,7 +399,7 @@ static float FindScale(float min, float max)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ToScale(float d[4096], float scale)
+void FDrive::Handler::ToScale(float d[4096], float scale)
 {
     for (int i = 0; i < 4096; i++)
     {
@@ -402,7 +408,7 @@ static void ToScale(float d[4096], float scale)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void FillPicture(uint8 *picture, uint size, float values[4096])
+void FDrive::Handler::FillPicture(uint8 *picture, uint size, float values[4096])
 {
     Normalize(values);
 
