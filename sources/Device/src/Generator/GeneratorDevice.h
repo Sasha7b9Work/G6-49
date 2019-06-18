@@ -10,7 +10,7 @@
 
 namespace Generator
 {
-    static const int FPGA_NUM_POINTS = 8 * 1024;
+    static const int DDS_NUM_POINTS = 8 * 1024;
 
     void Init();
 

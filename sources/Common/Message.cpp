@@ -433,10 +433,10 @@ Message::FDrive::LoadToFPGA::LoadToFPGA(uint8 ch, uint8 numFile, char *directory
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Message::LoadFormDDS::LoadFormDDS(uint8 ch, uint16 data[Generator::FPGA_NUM_POINTS]) : SimpleMessage(2 + Generator::FPGA_NUM_POINTS * 2, Command::LoadFormDDS)
+Message::LoadFormDDS::LoadFormDDS(uint8 ch, uint16 data[Generator::DDS_NUM_POINTS]) : SimpleMessage(2 + Generator::DDS_NUM_POINTS * 2, Command::LoadFormDDS)
 {
     PutByte(ch);
-    PutData((uint8*)data, sizeof(data[0]) * Generator::FPGA_NUM_POINTS);
+    PutData((uint8*)data, sizeof(data[0]) * Generator::DDS_NUM_POINTS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

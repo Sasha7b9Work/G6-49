@@ -29,7 +29,7 @@ namespace Generator
     /// Загружает форму произвольного сигнала
     static void LoadFormDDS(Form *form);
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-    static void TransformDataToCodeAndTransmit(float data[FPGA_NUM_POINTS], Form *form);
+    static void TransformDataToCodeAndTransmit(float data[DDS_NUM_POINTS], Form *form);
 }
 
 
@@ -88,15 +88,15 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::LoadFormDDS(Form *form)
 {
-    float data[FPGA_NUM_POINTS];
+    float data[DDS_NUM_POINTS];
 
     switch (form->value)
     {
         case Form::RampPlus:
             {
-                float step = 2.0f / FPGA_NUM_POINTS;
+                float step = 2.0f / DDS_NUM_POINTS;
 
-                for(int i = 0; i < FPGA_NUM_POINTS; i++)
+                for(int i = 0; i < DDS_NUM_POINTS; i++)
                 {
                     data[i] = -1.0f + step * i;
                 }
@@ -106,9 +106,9 @@ void Generator::LoadFormDDS(Form *form)
             break;
         case Form::RampMinus:
             {
-                float step = 2.0f / FPGA_NUM_POINTS;
+                float step = 2.0f / DDS_NUM_POINTS;
 
-                for (int i = 0; i < FPGA_NUM_POINTS; i++)
+                for (int i = 0; i < DDS_NUM_POINTS; i++)
                 {
                     data[i] = 1.0f - step * i;
                 }
@@ -118,16 +118,16 @@ void Generator::LoadFormDDS(Form *form)
             break;
         case Form::Triangle:
             {
-                float step = 2.0f / (FPGA_NUM_POINTS / 2);
+                float step = 2.0f / (DDS_NUM_POINTS / 2);
 
-                for (int i = 0; i < FPGA_NUM_POINTS / 2; i++)
+                for (int i = 0; i < DDS_NUM_POINTS / 2; i++)
                 {
                     data[i] = - 1.0f + step * i;
                 }
 
-                for(int i = FPGA_NUM_POINTS / 2; i < FPGA_NUM_POINTS; i++)
+                for(int i = DDS_NUM_POINTS / 2; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0f - step * (i - FPGA_NUM_POINTS / 2);
+                    data[i] = 1.0f - step * (i - DDS_NUM_POINTS / 2);
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -144,15 +144,15 @@ void Generator::LoadFormDDS(Form *form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TransformDataToCodeAndTransmit(float d[FPGA_NUM_POINTS], Form *form)
+void Generator::TransformDataToCodeAndTransmit(float d[DDS_NUM_POINTS], Form *form)
 {
-    uint16 buffer[FPGA_NUM_POINTS];
+    uint16 buffer[DDS_NUM_POINTS];
 
     uint8 *code = (uint8 *)buffer;
 
     int max = 0x1fff;
 
-    for (int i = 0; i < FPGA_NUM_POINTS; i++)
+    for (int i = 0; i < DDS_NUM_POINTS; i++)
     {
         uint16 c = (uint16)(std::fabs(d[i]) * max);
 
@@ -162,7 +162,7 @@ void Generator::TransformDataToCodeAndTransmit(float d[FPGA_NUM_POINTS], Form *f
         }
 
         code[i] = (uint8)c;
-        code[i + FPGA_NUM_POINTS] = (uint8)(c >> 8);
+        code[i + DDS_NUM_POINTS] = (uint8)(c >> 8);
     }
 
     Message::LoadFormDDS((uint8)form->GetWave()->GetChannel(), buffer).Transmit();
