@@ -72,7 +72,7 @@ void FDrive::Handler::Processing(SimpleMessage *message)
 
     uint8 com = msg->TakeByte();
 
-    DEF_STRUCT(StructFunc, pFuncVV) funcs[Command::Number] =
+    static const pFuncVV funcs[Command::Number] =
     {
         /* RequestData             */ EmptyFuncVV,
         /* EnableChannel           */ EmptyFuncVV,
@@ -117,7 +117,7 @@ void FDrive::Handler::Processing(SimpleMessage *message)
         /* SCPI_RecvData           */ EmptyFuncVV
     };
 
-    funcs[com].val();
+    funcs[com]();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

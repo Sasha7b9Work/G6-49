@@ -23,7 +23,7 @@ void Handlers::Processing(SimpleMessage *msg)
 {
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
-    DEF_STRUCT(FuncInterface, pFuncInterfaceVpM) commands[Command::Number] =
+    static const pFuncInterfaceVpM funcs[Command::Number] =
     {
         /* RequestData             */ Handlers::SendData,
         /* EnableChannel           */ Handlers::EnableChannel,
@@ -70,12 +70,7 @@ void Handlers::Processing(SimpleMessage *msg)
 
     uint8 com = msg->TakeByte();
 
-    if (com != 0 && com != 29 && com != 32)
-    {
-    //    LOG_WRITE("%d", com);
-    }
-
-    commands[com].val(msg);
+    funcs[com](msg);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
