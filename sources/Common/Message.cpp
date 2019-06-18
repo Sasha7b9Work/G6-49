@@ -455,7 +455,7 @@ Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Comman
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Message::Calibrate::Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command::SetKoeffCalibration)
 {
-    DEF_STRUCT(StructCal, int16 *) values[KoeffCal::Number] =
+    static const int16 *values[KoeffCal::Number] =
     {
         &CAL_AD9952_OFFSET_NEG(Chan::A),
         &CAL_AD9952_OFFSET_ZERO(Chan::A),
@@ -474,7 +474,7 @@ Message::Calibrate::Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command:
 
     PutByte(ch);
     PutByte(koeff);
-    PutHalfWord((uint16)values[koeff].val[ch]);
+    PutHalfWord((uint16)values[koeff][ch]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

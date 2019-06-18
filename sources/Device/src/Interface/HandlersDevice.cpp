@@ -251,7 +251,7 @@ void Handlers::SetKoeffCalibration(SimpleMessage *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
-    DEF_STRUCT(StructCal, int16 *) values[KoeffCal::Number] =
+    static int16 * const values[KoeffCal::Number] =
     {
         &CAL_AD9952_OFFSET_NEG(Chan::A),
         &CAL_AD9952_OFFSET_ZERO(Chan::A),
@@ -263,7 +263,7 @@ void Handlers::SetKoeffCalibration(SimpleMessage *msg)
         &CAL_FREQ_LEVEL_TRIG
     };
 
-    int16 *koeff = values[msg->TakeByte()].val;
+    int16 *koeff = values[msg->TakeByte()];
 
     koeff[ch] = (int16)msg->TakeHalfWord();
 }

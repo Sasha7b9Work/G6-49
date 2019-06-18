@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name() const
 {
-    DEF_STRUCT(StructName, pString) names[Form::Number] =
+    static const pString names[Form::Number] =
     {
         "Синус",
         "Пила+",
@@ -17,7 +17,7 @@ pString Form::Name() const
         "Произвольный"
     };
 
-    return names[value].val;
+    return names[value];
 }
 
 

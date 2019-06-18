@@ -63,7 +63,7 @@ void FPGA::SetWaveForm(Chan::E ch, Form::E form)
 {
     typedef void(*pFuncFpgaVU8)(Chan::E);
 
-    DEF_STRUCT(StructFunc, pFuncFpgaVU8) func[Form::Number] =
+    static const pFuncFpgaVU8 funcs[Form::Number] =
     {
         SetModeSine,            ///< Здесь включается режим амплитудной манипуляции
         SetModeRampPlus,
@@ -75,7 +75,7 @@ void FPGA::SetWaveForm(Chan::E ch, Form::E form)
         SetModeDDS
     };
     
-    func[form].val(ch);
+    funcs[form](ch);
     
     Multiplexor::SetMode(ch, form);
 
@@ -464,7 +464,7 @@ void FPGA::WriteByte(uint8 byte)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(RG::E reg, uint64 value)
 {
-    DEF_STRUCT(StructBits, int) numBits[RG::Number] =
+    static const int numBits[RG::Number] =
     {
         16, // _0_Control,
         40, // _1_Freq,
@@ -486,7 +486,7 @@ void FPGA::WriteRegister(RG::E reg, uint64 value)
 
     for(int i = 0; i < 2; i++)
     {
-        for (int bit = numBits[reg].val - 1; bit >= 0; bit--)
+        for (int bit = numBits[reg] - 1; bit >= 0; bit--)
         {
             CPU::WritePin(GeneratorWritePin::FPGA_DT_RG, Bit::Get(value, bit));     // Устанавливаем или сбрасываем соответствующий бит
             CPU::WritePin(GeneratorWritePin::FPGA_CLK_RG, true);                    // И записываем его в ПЛИС
