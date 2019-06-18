@@ -8,36 +8,37 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Generator
+namespace Generator
 {
-public:
-    static void Init();
+    static const int FPGA_NUM_POINTS = 8 * 1024;
 
-    static void EnableChannel(Chan::E ch, bool enable);
+    void Init();
 
-    static void SetFormWave(Chan::E ch, Form::E form);
+    void EnableChannel(Chan::E ch, bool enable);
 
-    static void SetOffset(Chan::E ch, ParamValue offset);
+    void SetFormWave(Chan::E ch, Form::E form);
 
-    static void SetFrequency(Chan::E ch, ParamValue frequency);
+    void SetOffset(Chan::E ch, ParamValue offset);
 
-    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
+    void SetFrequency(Chan::E ch, ParamValue frequency);
 
-    static void SetDuration(Chan::E ch, ParamValue duration);
+    void SetAmplitude(Chan::E ch, ParamValue amplitude);
 
-    static void SetDutyRatio(Chan::E ch, ParamValue dutyRatio);
+    void SetDuration(Chan::E ch, ParamValue duration);
 
-    static void SetPhase(Chan::E ch, ParamValue phase);
+    void SetDutyRatio(Chan::E ch, ParamValue dutyRatio);
 
-    static void SetDelay(Chan::E ch, ParamValue duration);
+    void SetPhase(Chan::E ch, ParamValue phase);
 
-    static void SetManipulationDuration(Chan::E ch, ParamValue duration);
+    void SetDelay(Chan::E ch, ParamValue duration);
 
-    static void SetManipulationPeriod(Chan::E ch, ParamValue period);
+    void SetManipulationDuration(Chan::E ch, ParamValue duration);
 
-    static void SetPacketPeriod(Chan::E ch, ParamValue duration);
+    void SetManipulationPeriod(Chan::E ch, ParamValue period);
 
-    static void SetPacketNumber(Chan::E ch, ParamValue number);
+    void SetPacketPeriod(Chan::E ch, ParamValue duration);
 
-    static void SetPeriod(Chan::E ch, ParamValue period);
+    void SetPacketNumber(Chan::E ch, ParamValue number);
+
+    void SetPeriod(Chan::E ch, ParamValue period);
 };

@@ -1,5 +1,10 @@
 #pragma once
 #include "Command.h"
+#ifdef PANEL
+#include "Generator/GeneratorPanel.h"
+#else
+#include "Generator/GeneratorDevice.h"
+#endif
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,7 +154,7 @@ namespace Message
     class LoadFromDDS : public SimpleMessage
     {
     public:
-        LoadFromDDS(uint8 ch, uint8 data[8 * 1024]);
+        LoadFromDDS(uint8 ch, uint8 data[Generator::FPGA_NUM_POINTS * 2]);
     };
 
     namespace FDrive
