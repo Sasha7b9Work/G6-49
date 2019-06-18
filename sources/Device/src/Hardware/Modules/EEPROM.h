@@ -3,17 +3,15 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class EEPROM
+namespace EEPROM
 {
-public:
+    void Init();
 
-    static void Init();
+    void SaveSettings(CalibrationSettings *settings);
 
-    static void SaveSettings(CalibrationSettings *settings);
+    void LoadSettings(CalibrationSettings *settings);
 
-    static void LoadSettings(CalibrationSettings *settings);
+    void SaveSignal(Chan::E ch, float *data);
 
-    static void SaveSignal(Chan::E ch, float *data);
-
-    static float *GetSignal(Chan::E ch);
+    float *GetSignal(Chan::E ch);
 };
