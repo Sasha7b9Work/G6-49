@@ -37,6 +37,17 @@ namespace FDrive
         bool ReadFloats(float values[4096], char *name);
     }
 
+    namespace Handler
+    {
+        SimpleMessage *msg = nullptr;
+        void GetNumDirsAndFiles();
+        void RequestFile();
+        void RequestFileSize();
+        void LoadToFPGA();
+        void GetPictureDDS();
+        void RequestFileString();
+    }
+
     /// Трансформировать точки в пригодный для записи в ПЛИС вид
     void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
 
@@ -53,117 +64,128 @@ namespace FDrive
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void FDrive::Handler::Processing(SimpleMessage *msg)
+void FDrive::Handler::Processing(SimpleMessage *message)
 {
+    msg = message;
+
     msg->ResetPointer();
 
     uint8 com = msg->TakeByte();
 
     if (com == Command::FDrive_NumDirsAndFiles)
     {
-        uint numDirs = 0;
-        uint numFiles = 0;
-
-        FileSystem::GetNumDirsAndFiles(msg->String(1), &numDirs, &numFiles);
-
-        Message::FDrive::NumDirsAndFiles(numDirs, numFiles).Transmit();
+        GetNumDirsAndFiles();
     }
     else if (com == Command::FDrive_RequestFile)
     {
-        char name[255];
-
-        int numFile = (int)msg->TakeByte();
-
-        if (FileSystem::GetNameFile(msg->String(2), numFile, name))
-        {
-            Message::FDrive::FileName((uint8)numFile, name).Transmit();
-        }
+        RequestFile();
     }
     else if (com == Command::FDrive_RequestFileSize)
     {
-        char name[255];
-        int numFile = (int)msg->TakeByte();
-        if (FileSystem::GetNameFile(msg->String(2), numFile, name))           // Получаем имя файла
-        {
-            String fullPath("%s\\%s", msg->String(2), name);
-
-            uint size = FileSystem::GetFileSize(fullPath.CString());
-
-            Message::FDrive::FileSize((uint8)numFile, size).Transmit();
-        }
+        RequestFileSize();
     }
     else if (com == Command::FDrive_LoadToFPGA)
     {
-        char fullName[255];
-        Chan::E ch = (Chan::E)msg->TakeByte();
-        int numFile = (int)msg->TakeByte();
-        std::strcpy(fullName, msg->String(2));
-        std::strcat(fullName, "\\");
-        if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
-        {
-            Buffer buffer(Generator::DDS_NUM_POINTS * sizeof(float));
-            FileSystem::ReadFloats(buffer.DataFloat(), &fullName[1]);
-            TransformDataToCode(buffer.DataFloat(), FPGA::DataFlash(ch));
-        }
+        LoadToFPGA();
     }
     else if (com == Command::FDrive_GetPictureDDS)
     {
-        const uint SIZE = 240;
-        uint8 data[SIZE];
-        std::memset(data, 0, SIZE);
-
-        int numFile = (int)msg->TakeByte();
-
-        char fullName[255];
-        std::strcpy(fullName, msg->String(2));
-        std::strcpy(fullName, "\\");
-        
-        if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
-        {
-            float values[4096];
-            if (FileSystem::ReadFloats(values, &fullName[1]))
-            {
-                FillPicture(data, SIZE, values);
-            }
-        }
-
-        Message::FDrive::PictureDDS((uint8)numFile, data).Transmit();
+        GetPictureDDS();
     }
     else if (com == Command::FDrive_RequestFileString)
     {
-        LOG_WRITE("Запрос на строку %d", msg->TakeWord());
-
-        /*
-        uint numString = msg->TakeWord();
-
-        char string[256];                                   // Здесь будет ответ
-
-        char *out = 0;
-
-        FIL fp;
-        if(f_open(&fp, msg->String(2), FA_READ) == FR_OK)
-        {
-            for (uint i = 0; i < numString; i++)
-            {
-                out = f_gets(string, 256, &fp);
-            }
-            f_close(&fp);
-        }
-
-        if (out != &string[0])
-        {
-            string[0] = 0;
-        }
-
-        SimpleMessage *answer = new Mess age(Command::FDrive_RequestFileString, numString, string);
-
-        Interface::AddMessageForTransmit(answer);
-        */
+        RequestFileString();
     }
     else
     {
         // здесь ничего
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::Handler::GetNumDirsAndFiles()
+{
+    uint numDirs = 0;
+    uint numFiles = 0;
+
+    FileSystem::GetNumDirsAndFiles(msg->String(1), &numDirs, &numFiles);
+
+    Message::FDrive::NumDirsAndFiles(numDirs, numFiles).Transmit();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::Handler::RequestFile()
+{
+    char name[255];
+
+    int numFile = (int)msg->TakeByte();
+
+    if (FileSystem::GetNameFile(msg->String(2), numFile, name))
+    {
+        Message::FDrive::FileName((uint8)numFile, name).Transmit();
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::Handler::RequestFileSize()
+{
+    char name[255];
+    int numFile = (int)msg->TakeByte();
+    if (FileSystem::GetNameFile(msg->String(2), numFile, name))           // Получаем имя файла
+    {
+        String fullPath("%s\\%s", msg->String(2), name);
+
+        uint size = FileSystem::GetFileSize(fullPath.CString());
+
+        Message::FDrive::FileSize((uint8)numFile, size).Transmit();
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::Handler::LoadToFPGA()
+{
+    char fullName[255];
+    Chan::E ch = (Chan::E)msg->TakeByte();
+    int numFile = (int)msg->TakeByte();
+    std::strcpy(fullName, msg->String(2));
+    std::strcat(fullName, "\\");
+    if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
+    {
+        Buffer buffer(Generator::DDS_NUM_POINTS * sizeof(float));
+        FileSystem::ReadFloats(buffer.DataFloat(), &fullName[1]);
+        TransformDataToCode(buffer.DataFloat(), FPGA::DataFlash(ch));
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::Handler::GetPictureDDS()
+{
+    const uint SIZE = 240;
+    uint8 data[SIZE];
+    std::memset(data, 0, SIZE);
+
+    int numFile = (int)msg->TakeByte();
+
+    char fullName[255];
+    std::strcpy(fullName, msg->String(2));
+    std::strcpy(fullName, "\\");
+
+    if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
+    {
+        float values[4096];
+        if (FileSystem::ReadFloats(values, &fullName[1]))
+        {
+            FillPicture(data, SIZE, values);
+        }
+    }
+
+    Message::FDrive::PictureDDS((uint8)numFile, data).Transmit();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FDrive::Handler::RequestFileString()
+{
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
