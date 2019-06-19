@@ -11,6 +11,53 @@
 #endif
 
 
+namespace AD9952
+{
+    struct Register
+    {
+        enum E
+        {
+            CFR1,
+            CFR2,
+            ASF,
+            ARR,
+            FTW0,
+            POW,
+            Number
+        } value;
+        Register(E v) : value(v) { };
+        operator uint8() const { return (uint8)value; };
+        pString Name() const;
+        bool Is(E v) const { return value == v; };
+    };
+
+    void WriteToHardware(Chan::E ch, Register reg, uint value);
+    GeneratorWritePin ChipSelect(Chan::E ch);
+    void Reset();
+    void WriteRegister(Chan::E ch, Register reg);
+    void WriteCFR1(Chan::E ch);
+    void WriteCFR2(Chan::E ch);
+    void WriteARR(Chan::E ch);
+    void WriteASF(Chan::E ch);
+    void WriteFTW0(Chan::E ch);
+    void WritePOW(Chan::E ch);
+
+    struct ClockFrequency
+    {
+        enum E
+        {
+            _100MHz,
+            _1MHz
+        } value;
+        explicit ClockFrequency(E v) : value(v) {};
+    };
+
+    ClockFrequency::E clock = ClockFrequency::_100MHz;
+
+    Manipulation::Type::E   Manipulation::type[Chan::Number] = { Manipulation::Type::OSK, Manipulation::Type::OSK };
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static SPI_HandleTypeDef hSPI3 =
 {
@@ -32,8 +79,6 @@ static SPI_HandleTypeDef hSPI3 =
 };
 
 bool                            AD9952::Manipulation::enabled[Chan::Number] = {false, false};
-AD9952::Manipulation::Type::E   AD9952::Manipulation::type[Chan::Number] = {AD9952::Manipulation::Type::OSK, AD9952::Manipulation::Type::OSK};
-AD9952::ClockFrequency::E       AD9952::clock = AD9952::ClockFrequency::_100MHz;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
