@@ -70,7 +70,7 @@ int Items::NumberCurrentFile()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Items::SendRequest()
 {
-    Message::FDrive::NumDirsAndFiles(FDrive::directory).Transmit();
+    Message::FDrive::NumDirsAndFiles(FDrive::CurrentDirectory()).Transmit();
 
     requestIsSend = true;
 }
@@ -132,7 +132,7 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SendRequestForNameFile(int number)
 {
-    Message::FDrive::FileName message((uint8)number, FDrive::directory);
+    Message::FDrive::FileName message((uint8)number, FDrive::CurrentDirectory());
     
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestNameFile);
     

@@ -39,7 +39,7 @@ enum Mount
 
 static Mount mounted = Disconnect;
 
-char FDrive::directory[255] = "\\";
+static char directory[255];
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FDrive::Init()
@@ -93,10 +93,6 @@ void FDrive::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FDrive::Handler::Processing(SimpleMessage *message)
 {
-    msg = message;
-    
-    msg->ResetPointer();
-
     static const pFuncBV funcs[Command::Number] =
     {
         /* RequestData                  */ EmptyFuncBV,
@@ -141,6 +137,10 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* FDrive_GetPictureDDS         */ Handler::E,
         /* SCPI_RecvData                */ EmptyFuncBV
     };
+
+    msg = message;
+
+    msg->ResetPointer();
 
     Command::E com = (Command::E)msg->TakeByte();
 
@@ -200,7 +200,13 @@ void FDrive::PressDown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::PressChoose()
 {
-    Message::FDrive::LoadFromExtStorage((uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::directory).Transmit();
+    Message::FDrive::LoadFromExtStorage((uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::CurrentDirectory()).Transmit();
 
     File::SetDataToWave();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+char *FDrive::CurrentDirectory()
+{
+    return directory;
 }

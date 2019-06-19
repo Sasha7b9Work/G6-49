@@ -26,11 +26,10 @@ namespace FDrive
     /// Обработка нажатия кнопки "Выбрать"
     void PressChoose();
 
+    char *CurrentDirectory();
+
     namespace Handler
     {
         bool Processing(SimpleMessage *msg);
     };
-
-    /// Путь к текущему каталогу
-    extern char directory[255];
 };
