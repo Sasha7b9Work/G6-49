@@ -5,46 +5,40 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class FPGA
+namespace FPGA
 {
-friend class Handlers;
-public:
-    
     static const uint NUM_POINTS = 1024 * 8;
 
-    static void Init();
+    void Init();
 
+    void SetWaveForm(Chan::E ch, Form::E form);
 
+    void SetFrequency(Chan::E ch, ParamValue frequency);
 
-    static void SetWaveForm(Chan::E ch, Form::E form);
+    void SetAmplitude(Chan::E ch, ParamValue amplitude);
 
-    static void SetFrequency(Chan::E ch, ParamValue frequency);
+    void SetOffset(Chan::E ch, ParamValue offset);
 
-    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
+    void SetDurationImpulse(Chan::E ch, ParamValue duration);
 
-    static void SetOffset(Chan::E ch, ParamValue offset);
+    void SetPeriodImpulse(Chan::E ch, ParamValue period);
 
-    static void SetDurationImpulse(Chan::E ch, ParamValue duration);
+    void SetPolarity(Chan::E ch, uint8 polarity);
 
-    static void SetPeriodImpulse(Chan::E ch, ParamValue period);
-
-    static void SetPolarity(Chan::E ch, uint8 polarity);
-
-    static void SetStartMode(Chan::E ch, StartMode mode);
+    void SetStartMode(Chan::E ch, StartMode mode);
     /// Делает однократный запуск. Возвращает true в случае успеха (если установлены соответствующие настройки)
-    static bool Start();
+    bool Start();
 
-    class PacketImpulse
+    namespace PacketImpulse
     {
-    public:
         /// Устанавливает число импульсов в пачке
-        static void SetNumberImpules(uint n);
+        void SetNumberImpules(uint n);
         /// Устанавливает период следования пачки
-        static void SetPeriodPacket(ParamValue period);
+        void SetPeriodPacket(ParamValue period);
 
-        static ParamValue periodImpulse;
+        extern ParamValue periodImpulse;
 
-        static ParamValue durationImpulse;
+        extern ParamValue durationImpulse;
     };
 
     struct ModeWork
@@ -74,16 +68,6 @@ public:
         explicit ClockFrequency(E v) : value(v) {};
     };
 
-    static void SetClockAD992(ClockFrequency::E clock);
-
-    static ClockFrequency::E clock;
-
-    static ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
-    /// Возвращает указатель на точки сигнала, загружаемого из флешки
-    static uint8 *DataFlash(Chan::E ch);
-
-private:
-
     ///< Регистры ПЛИС
     struct RG
     {
@@ -109,96 +93,35 @@ private:
         explicit RG(E v) : value(v) { };
     };
 
-    struct RG0
-    {
-        enum E
-        {
-            _0_WriteData,           ///< В этот бит записываем 0, перед загрузкой данных сигнала в ПЛИС
-            _1_ImpulseA,            ///< 1, если в канале А ПЛИС формирует импульсы/прямоугольник
-            _2_ImpulseB,            ///< 1, если в канале B ПЛИС формирует импульсы/прямоугольник
-            _3_ManipulationOSK2,    ///< Здесь 0, если синус канала 1 должен манипулироваться сигналом OSK2 ("пилой" от AD9952 второго канала)
-            _4_ManipulationFPGA1,   ///< Здесь 0, если синус канала 1 должен манипулироваться формирователем импульсов канала 1
-            _5_ManipulationOSK1,    ///< Здесь 0, если синус канала 2 должен манипулироваться сигналом OSK1 ("пилой" от AD9952 первого канала)
-            _6_ManipulationFPGA2,   ///< Здесь 0, есил синус канала 2 должен манипулироваться формирователем импульсов канала 2
-            _7_Freq_MHz,            ///< 1, если тактовая частота 1МГц
-            _8_MeanderA,            ///< 1, если меандр по каналу A
-            _9_MeanderB,            ///< 1, если меандр по каналу B
-            _10_HandStartA,         ///< Если бит установлен в 1, то ручной режим запуска
-            _11_HandStartB,
-            _12_HandStartPacket,    ///< 1, если включён пакетный режим импульсов
-            _13_StartMode0,         ///< Младший бит управления режимом запуска
-            _14_StartMode1          ///< Старший бит управления режимом запуска
-        };
-    };
+    void SetClockAD992(ClockFrequency::E clock);
 
-    class Multiplexor
-    {
-        friend class Interface;
-    public:
-
-        /// Первоначальная инициализация
-        static void Init();
-        /// Скоммутировать мультиплексор в соответствии с формой устанавливаемого сигнала на данном канале
-        static void SetMode(Chan::E ch, Form::E form);
-
-        static Form GetMode(Chan::E ch);
-
-    private:
-        static void SetPin(uint16 pin);
-        static void ResetPin(uint16 pin);
-
-        static void WriteRegister(Register::E reg, uint value);
-
-        static Form::E mode[Chan::Number];
-    };
-
-    static void SetModeSine(Chan::E ch);
-    /// Установить режим Пила+
-    static void SetModeRampPlus(Chan::E ch);
-    /// Установить режим Пила-
-    static void SetModeRampMinus(Chan::E ch);
-    /// Установить режим Треугольник
-    static void SetModeTriangle(Chan::E ch);
-    /// Установить режим произвольного сигнала, загруженного с флешки
-    static void SetModeDDS(Chan::E ch);
-    /// Возвращает указатель на точки произвольного сигнала (программно определёного)
-    static uint8 *DataDDS(Chan::E ch);
-
-    static void SetModeMeander(Chan::E ch);
-
-    static void SetModeImpulse(Chan::E ch);
-
-    static void SetModePackedImpulse(Chan::E ch);
-
-    static void EmptyFunc(Chan ch);
-    /// Заслать рассчитанные точки в плис
-    static void SendData(uint8 *data);
-    /// Записать байт в ПЛИС
-    static void WriteByte(uint8 byte);
-    /// Записать значение в регистр
-    static void WriteRegister(RG::E reg, uint64 value);
-    /// Установить на A0_RG...A3_RG адрес, соответсвующй регистру
-    static void WriteAddress(RG::E reg);
-    /// Запись управляющего регистра
-    static void WriteControlRegister();
-    /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-    static void TransformDataToCode(float data[FPGA::NUM_POINTS], uint8 code[FPGA::NUM_POINTS * 2]);
-    /// Записывает коды, соответствующие максимальному и минимальному значению
-    static void WriteMaxAmplitude(Chan::E ch);
-
-    static uint8 RegisterForDuration(Chan::E ch);
-    /// Преобразует смещение в прямой код, пригодный для записи в альтеру
-    static uint OffsetToCode(Chan::E ch);
-    /// Установить биты, соответствующие режиму запуска
-    static uint16 SetBitsStartMode(uint16 data);
-    /// Режим запуска
-    static StartMode startMode[Chan::Number];
+    extern ClockFrequency::E clock;
     /// Режим работы ПЛИС
-    static ModeWork::E modeWork[Chan::Number];
+    extern ModeWork::E modeWork[Chan::Number];
 
-    static float amplitude[Chan::Number];
+    inline ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
+    /// Возвращает указатель на точки сигнала, загружаемого из флешки
+    uint8 *DataFlash(Chan::E ch);
+    /// Возвращает указатель на точки произвольного сигнала (программно определёного)
+    uint8 *DataDDS(Chan::E ch);
+    /// Записать значение в регистр
+    void WriteRegister(RG::E reg, uint64 value);
 
-    static float offset[Chan::Number];
-    /// Здесь хранятся записанные в регистры значения
-    static uint64 registers[RG::Number];
+    namespace Multiplexor
+    {
+        /// Первоначальная инициализация
+        void Init();
+        /// Скоммутировать мультиплексор в соответствии с формой устанавливаемого сигнала на данном канале
+        void SetMode(Chan::E ch, Form::E form);
+
+        Form GetMode(Chan::E ch);
+
+        void SetPin(uint16 pin);
+
+        void ResetPin(uint16 pin);
+
+        void WriteRegister(Register::E reg, uint value);
+
+        extern Form::E mode[Chan::Number];
+    };
 };
