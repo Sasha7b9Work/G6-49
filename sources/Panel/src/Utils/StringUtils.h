@@ -68,32 +68,26 @@ bool EqualsStrings(const char *str1, const char *str2, int size);
 bool EqualsZeroStrings(char *str1, char *str2);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class SU
+namespace SU
 {
-public:
     /// Возвращает число слов в строке string
-    static int NumWords(const char *string);
+    int NumWords(const char *string);
     /// Возвращает указатель на n слово в строке. Если char == 0 - слова нет, если ret value == 0xffffffff - выходной буфер слишком мал
-    static char *GetWord(char *string, int n, char *out, int size);
+    char *GetWord(char *string, int n, char *out, int size);
     /// Вычисляет число разрядов в целом типа int.
-    static int NumDigitsInNumber(int value);
+    int NumDigitsInNumber(int value);
     /// Эта команда сразу преобразует к верхенму регистру слово.
-    static bool GetWord(const char *string, Word *word, const int numWord);
+    bool GetWord(const char *string, Word *word, const int numWord);
 
-    static bool WordEqualZeroString(Word *word, char* string);
+    bool WordEqualZeroString(Word *word, char* string);
 
-    static int FindSymbol(const char *string, char symbol);
+    int FindSymbol(const char *string, char symbol);
 
-    static char ToUpper(char symbol);
+    char ToUpper(char symbol);
 
-    static char *ToUpper(void *_str, uint size);
+    char *ToUpper(void *_str, uint size);
 
-    static void ConcatenateSymbol(char *str, char symbol);
-private:
-    /// Возвращает false, если выбор невозможен - строка кончилась.
-    static bool ChooseSymbols(const char **string);
-    /// Возвращает false, если выбор невозможен - строка кончилась.
-    static bool ChooseSpaces(const char **string);
+    void ConcatenateSymbol(char *str, char symbol);
 };
 
 bool String2Int(char *str, int *value);
