@@ -3,11 +3,9 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class EEPROM
+namespace EEPROM
 {
-public:
+    void SaveSettings(CalibrationSettings *settings);
 
-    static void SaveSettings(CalibrationSettings *settings);
-
-    static void LoadSettings(CalibrationSettings *settings);
+    void LoadSettings(CalibrationSettings *settings);
 };
