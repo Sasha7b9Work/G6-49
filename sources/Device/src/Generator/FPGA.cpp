@@ -6,6 +6,7 @@
 #include "structs.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Modules/EEPROM.h"
 #include "Utils/Math.h"
 #include "Generator/GeneratorDevice.h"
 #include "Settings/CalibrationSettings.h"
@@ -95,8 +96,6 @@ ParamValue              FPGA::PacketImpulse::durationImpulse((uint64)0);
 /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
 /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
 static uint8 dataDDS[Chan::Number][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
-/// Здесь хранятся данные сигнала, загруженные с флешки
-static uint8 dataFlash[Chan::Number][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,7 +170,7 @@ void FPGA::SetModeSine(Chan::E ch)
 void FPGA::SetModeDDS(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
-    SendData(&dataFlash[Chan::A][0]);
+    SendData(DataFlash(ch));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -616,7 +615,7 @@ uint8 *FPGA::DataDDS(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 *FPGA::DataFlash(Chan::E ch)
 {
-    return &dataFlash[ch][0];
+    return (uint8 *)EEPROM::Signal::Get(ch);
 }
 
 #ifdef WIN32
