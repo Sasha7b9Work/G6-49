@@ -618,6 +618,12 @@ uint8 *FPGA::DataFlash(Chan::E ch)
     return (uint8 *)EEPROM::Signal::Get(ch);
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void FPGA::SaveExtSignal(Chan::E ch, uint8 *data)
+{
+    EEPROM::Signal::Save(ch, (uint16 *)data);
+}
+
 #ifdef WIN32
 #pragma warning(pop)
 #endif

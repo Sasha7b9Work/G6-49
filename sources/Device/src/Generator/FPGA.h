@@ -1,7 +1,8 @@
 #pragma once
-#include "defines.h"
+#include "Generator/GeneratorDevice.h"
 #include "Command.h"
 #include "GeneratorSettingsTypes.h"
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,6 +103,8 @@ namespace FPGA
     inline ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
     /// Возвращает указатель на точки сигнала, загружаемого из флешки
     uint8 *DataFlash(Chan::E ch);
+    /// Сохранить данные сигнала, загруженного с флешки
+    void SaveExtSignal(Chan::E ch, uint8 *data);
     /// Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(Chan::E ch);
     /// Записать значение в регистр

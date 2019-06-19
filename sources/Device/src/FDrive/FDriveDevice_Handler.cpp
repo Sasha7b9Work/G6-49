@@ -172,7 +172,9 @@ void FDrive::Handler::LoadFromExtStorage()
     {
         Buffer buffer(Generator::DDS_NUM_POINTS * sizeof(float));
         FileSystem::ReadFloats(buffer.DataFloat(), &fullName[1]);
-        TransformDataToCode(buffer.DataFloat(), FPGA::DataFlash(ch));
+        uint8 code[Generator::DDS_NUM_POINTS * 2];
+        TransformDataToCode(buffer.DataFloat(), code);
+        FPGA::SaveExtSignal(ch, code);
     }
 }
 
