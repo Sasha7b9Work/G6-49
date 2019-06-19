@@ -175,6 +175,8 @@ void FDrive::Handler::LoadFromExtStorage()
         uint8 code[Generator::DDS_NUM_POINTS * 2];
         TransformDataToCode(buffer.DataFloat(), code);
         FPGA::SaveExtSignal(ch, code);
+
+        Message::FDrive::LoadFromExtStorage(ch, numFile, 0);    // ѕосылаем признак того, что сохранение завершено
     }
 }
 

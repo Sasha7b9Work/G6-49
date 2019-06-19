@@ -104,7 +104,7 @@ struct Command
 /* ->  */   GetKoeffCalibration,        ///< Запрос установленного калибровочного коэффициента
 /* <-> */   FDrive_RequestFileSize,     ///< Запрос размера файла
 /* <-> */   FDrive_RequestFileString,   ///< Считать строку из файла
-/* ->  */   FDrive_LoadFromExtStorage,  ///< Загрузить сигнал с флешки
+/* <-> */   FDrive_LoadFromExtStorage,  ///< Загрузить сигнал с флешки. Получив это сообщение, устройство начинает загрузку сигнала, а по окончании возвращает это же сообщение
 /* <-> */   FDrive_GetPictureDDS,       ///< Получить изображение формы сигнала
          // 0           1...5     6.....
          // SCPI_Data   sizeData  data 

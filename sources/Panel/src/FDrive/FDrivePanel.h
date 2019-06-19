@@ -3,11 +3,10 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class FDrive
+namespace FDrive
 {
-public:
     /// Начальная инициализация
-    static void Init();
+    void Init();
 
     /// Что показываем - каталоги или файлы
     enum View
@@ -16,23 +15,22 @@ public:
         Files
     };
     
-    static View view;
+    extern View view;
 
     /// Отрисовка файло-менеджера
-    static void Draw();
+    void Draw();
     /// Обработка нажатия кнопки "Вверх"
-    static void PressUp();
+    void PressUp();
     /// Обработка нажатия кнопки "Вниз"
-    static void PressDown();
+    void PressDown();
     /// Обработка нажатия кнопки "Выбрать"
-    static void PressChoose();
+    void PressChoose();
 
-    class Handler
+    namespace Handler
     {
-    friend class Handlers;
-        static bool Processing(SimpleMessage *msg);
+        bool Processing(SimpleMessage *msg);
     };
 
     /// Путь к текущему каталогу
-    static char directory[255];
+    extern char directory[255];
 };
