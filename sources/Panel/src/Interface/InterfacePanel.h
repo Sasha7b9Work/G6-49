@@ -35,23 +35,10 @@ private:
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Interface
+namespace Interface
 {
-    friend class SimpleMessage;
-public:
-
     /// Для приёма сообщений от устройства
-    static void Update();
+    void Update();
     /// Добавляеет задание. Если не получилось, возвращает false
-    static void AddTask(Task *task);
-
-private:
-    static void AddMessageForTransmit(SimpleMessage *message);
-    /// Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
-    static bool ProcessTask(SimpleMessage *answer);
-    /// Обрабатывает очередь заданий, засылая сообщения тех из них, которые необходимо заслать
-    static void SendTasks();
-    /// Обработать ответ на задание
-    static void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
-
+    void AddTask(Task *task);
 };
