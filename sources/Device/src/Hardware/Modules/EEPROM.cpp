@@ -197,9 +197,9 @@ static void WriteData(uint dest, void *src, uint size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void EEPROM::SaveSignal(Chan::E ch, float *data)
+void EEPROM::Signal::Save(Chan::E ch, uint16 data[Generator::DDS_NUM_POINTS])
 {
-    uint sizeData = FPGA::NUM_POINTS * sizeof(float);
+    uint sizeData = FPGA::NUM_POINTS * sizeof(data[0]);
 
     EraseSector(SECTOR_TEMP_10);                                                        // Обнуляем сектор для временных данных для временного сохранения тех данных, которые не нужно перезаписывать
     WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Number);  // Сохраняем существующие данные //-V566
@@ -208,7 +208,7 @@ void EEPROM::SaveSignal(Chan::E ch, float *data)
 
     ch = (ch == Chan::A) ? Chan::B : Chan::A;
 
-    data = (float *)SECTOR_TEMP_10; //-V566
+    data = (uint16 *)SECTOR_TEMP_10; //-V566
 
     if (ch == Chan::B)
     {
@@ -231,9 +231,9 @@ static uint AddressForData(Chan::E ch)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-float *EEPROM::GetSignal(Chan::E ch)
+uint16 *EEPROM::Signal::Get(Chan::E ch)
 {
-    float *result = (float *)(SECTOR_SIGNAL_FPGA_11); //-V566
+    uint16 *result = (uint16 *)(SECTOR_SIGNAL_FPGA_11); //-V566
 
     if (ch == Chan::B)
     {

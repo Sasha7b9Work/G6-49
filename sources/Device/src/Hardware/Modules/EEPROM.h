@@ -11,7 +11,10 @@ namespace EEPROM
 
     void LoadSettings(CalibrationSettings *settings);
 
-    void SaveSignal(Chan::E ch, float *data);
+    namespace Signal
+    {
+        void Save(Chan::E ch, uint16 data[Generator::DDS_NUM_POINTS]);
 
-    float *GetSignal(Chan::E ch);
+        uint16 *Get(Chan::E ch);
+    }
 };
