@@ -176,7 +176,7 @@ void FDrive::Handler::LoadFromExtStorage()
         TransformDataToCode(buffer.DataFloat(), code);
         FPGA::SaveExtSignal(ch, code);
 
-        Message::FDrive::LoadFromExtStorage(ch, numFile, 0);    // ѕосылаем признак того, что сохранение завершено
+        Message::FDrive::LoadFromExtStorage((uint8)ch, (uint8)numFile, 0).Transmit();     // ѕосылаем признак того, что сохранение завершено
     }
 }
 

@@ -10,10 +10,12 @@
 #include "Display/Painter.h"
 #include "Display/Text.h" 
 #include "Settings/Settings.h"
+#include "Hardware/Timer.h"
 #include <cstdlib>
 #endif
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace FDrive
 {
     namespace Handler
@@ -37,9 +39,14 @@ enum Mount
     Failed
 };
 
-static Mount mounted = Disconnect;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Текущее состояние флешки
+static Mount mounted = Disconnect;
+/// Путь к текущему каталогу
 static char directory[255];
+/// Если true - идёт загрузка сигнала с флешки в память
+static bool inStateWaitCompleteLoad = false;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void FDrive::Init()
@@ -88,6 +95,16 @@ void FDrive::Draw()
     }
 
     Items::Draw(x + 5, y + 5);
+
+    if (inStateWaitCompleteLoad)
+    {
+        width = 200;
+        height = 100;
+        x = (SCREEN_WIDTH - width) / 2;
+        y = (SCREEN_HEIGHT - height) / 2;
+
+        Painter::DrawFilledRectangle(x, y, width, height, Color::BACK, Color::FILL);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -182,6 +199,8 @@ bool FDrive::Handler::RequestFileSize()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FDrive::Handler::LoadFromExtStorage()
 {
+    inStateWaitCompleteLoad = false;
+
     return true;
 }
 
@@ -200,6 +219,8 @@ void FDrive::PressDown()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::PressChoose()
 {
+    inStateWaitCompleteLoad = true;
+
     Message::FDrive::LoadFromExtStorage((uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::CurrentDirectory()).Transmit();
 
     File::SetDataToWave();

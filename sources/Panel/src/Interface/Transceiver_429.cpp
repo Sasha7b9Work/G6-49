@@ -12,13 +12,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Transceiver::Transmit(SimpleMessage *message)
 {
-    if (message->Size() == 0)
-    {
-        LOG_ERROR("Пустое сообщение для засылки");
-        return;
-    }
-
-
     uint timeout = (message->Size() > 1000U) ? 100U : 10U;
 
     bool result = false;
@@ -55,6 +48,7 @@ void Transceiver::Transmit(SimpleMessage *message)
     };
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Transceiver::Receive(SimpleMessage *message)
 {
     SPI4_::WaitFalling();
@@ -70,4 +64,3 @@ bool Transceiver::Receive(SimpleMessage *message)
 
     return message->Size() != 0;
 }
-
