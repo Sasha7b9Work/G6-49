@@ -13,6 +13,21 @@
 #endif
 
 
+namespace AD5697
+{
+    void Reset(Chan::E ch);
+    /// Запись непосредственно в DAC
+    void TransmitI2C(uint8 address, uint8 data[3]);
+    /// Записать три байта данных по данному адресу
+    void WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin);
+
+    GeneratorWritePin PinLDAC(Chan::E ch);
+
+    uint8 CreateCommandByte(ParameterValue param);
+
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static I2C_HandleTypeDef hI2C =
 {
