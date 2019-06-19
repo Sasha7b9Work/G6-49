@@ -16,18 +16,15 @@
 #define BUFFER_HEIGHT   SCREEN_HEIGHT   /* Высота буфера для рисования */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Display
+namespace Display
 {
-public:
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
-    static uint8 *GetBuffer();
-
-private:
+    uint8 *GetBuffer();
     /// Экран
-    static uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+    extern uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
     /// Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
-    static uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+    extern uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 };

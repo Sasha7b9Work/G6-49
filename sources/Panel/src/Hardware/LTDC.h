@@ -3,25 +3,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class LTDC_
+namespace LTDC_
 {
-friend class Display;
+    void Init(uint frontBuffer, uint backBuffer);
 
-private:
+    void SetColors(uint *clut, uint8 numColors);
 
-    static void Init(uint frontBuffer, uint backBuffer);
+    void ToggleBuffers();
 
-public:
-
-    static void SetColors(uint *clut, uint8 numColors);
-
-    static void ToggleBuffers();
-
-    static void FillRegion(int x, int y, int width, int height, Color color);
-
-private:
-
-    static void SetBuffers(uint frontBuffer, uint backBuffer);
-
-    static DMA2D_HandleTypeDef hDMA2D;
+    void FillRegion(int x, int y, int width, int height, Color color);
 };
