@@ -8,22 +8,16 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Debug
+namespace Debug
 {
-public:
-    static void StartProfiling();
-    static void PointProfiling(char *name);
+    void StartProfiling();
+    void PointProfiling(char *name);
 
-    static void ClearTimeCounter();
-    static void StartIncreaseCounter();
-    static void StopIncreaseCounter();
-    static uint GetTimeCounterUS();
+    void ClearTimeCounter();
+    void StartIncreaseCounter();
+    void StopIncreaseCounter();
+    uint GetTimeCounterUS();
 
-    static int line;
-    static char *file;
-
-private:
-    static uint timeStart;
-    static uint timeCounter;
-    static uint timeStartCounter;
+    extern int line;
+    extern char *file;
 };
