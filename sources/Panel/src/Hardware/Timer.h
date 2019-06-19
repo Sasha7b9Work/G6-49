@@ -18,10 +18,8 @@
 #define TIME_US    (TIM2->CNT / 90)
 #define TIME_MS    HAL_GetTick()
 
-class Timer
+namespace Timer
 {
-public:
-
     struct Type
     {
         enum E
@@ -47,35 +45,35 @@ public:
         operator uint8() const { return (uint8)value; };
     };
 
-    static void Init();
+    void Init();
 
-    static void DeInit();
+    void DeInit();
     /// Назначает таймеру timer функцию и время срабатывания
-    static void Set(Type type, pFuncVV func, uint dTms);
+    void Set(Type type, pFuncVV func, uint dTms);
 
-    static void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
+    void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
 
-    static void SetAndEnable(Type type, pFuncVV func, uint dTms);
+    void SetAndEnable(Type type, pFuncVV func, uint dTms);
 
-    static void StartOnce(Type type);
+    void StartOnce(Type type);
 
-    static void Enable(Type type);
+    void Enable(Type type);
 
-    static void Disable(Type type);
+    void Disable(Type type);
 
-    static bool IsRun(Type type);
+    bool IsRun(Type type);
 
-    static void PauseOnTime(uint timeMS);
+    void PauseOnTime(uint timeMS);
 
-    static void PauseOnTicks(uint numTicks);
+    void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
-    static void StartMultiMeasurement();
+    void StartMultiMeasurement();
     /// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
-    static void StartLogging();
+    void StartLogging();
 
-    static uint LogPointUS(char *name);
+    uint LogPointUS(char *name);
 
-    static uint LogPointMS(char *name);
+    uint LogPointMS(char *name);
 };
 
 
