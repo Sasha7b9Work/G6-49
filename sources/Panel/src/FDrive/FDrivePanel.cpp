@@ -94,10 +94,8 @@ void FDrive::Draw()
 bool FDrive::Handler::Processing(SimpleMessage *message)
 {
     msg = message;
-
+    
     msg->ResetPointer();
-
-    Command::E com = (Command::E)msg->TakeByte();
 
     static const pFuncBV funcs[Command::Number] =
     {
@@ -144,7 +142,9 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* SCPI_RecvData                */ EmptyFuncBV
     };
 
-    return funcs[com];
+    Command::E com = (Command::E)msg->TakeByte();
+
+    return funcs[com]();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
