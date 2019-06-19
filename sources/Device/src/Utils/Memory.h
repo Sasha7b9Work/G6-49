@@ -1,10 +1,8 @@
 #pragma once
 
 
-class Memory
+namespace Memory
 {
-public:
-
     void Init();
     /// Выделяет участок памяти размером size байт и возращает указатель на него
     void *Allocate(uint size);
