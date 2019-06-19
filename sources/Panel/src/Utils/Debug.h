@@ -9,27 +9,21 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Debug
+namespace Debug
 {
-public:
-    static void StartProfiling();
-    static void PointProfiling(char *name);
+    void StartProfiling();
+    void PointProfiling(char *name);
 
-    static void ClearTimeCounter();
-    static void StartIncreaseCounter();
-    static void StopIncreaseCounter();
-    static uint GetTimeCounterUS();
+    void ClearTimeCounter();
+    void StartIncreaseCounter();
+    void StopIncreaseCounter();
+    uint GetTimeCounterUS();
 
-    static bool ShowSends();
+    bool ShowSends();
 
-    static int line;
-    static char *file;
+    extern int line;
+    extern char *file;
 
     /// ¬озвращает размер свободной пам€ти в куче
-    static uint FreeHeap();
-
-private:
-    static uint timeStart;
-    static uint timeCounter;
-    static uint timeStartCounter;
+    uint FreeHeap();
 };
