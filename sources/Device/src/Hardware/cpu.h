@@ -82,29 +82,26 @@ namespace CPU
     void ErrorHandler();
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    class HCD
+    namespace HCD
     {
-    public:
-        static void Init();
+        void Init();
 
-        static HCD_HandleTypeDef handle;
+        extern HCD_HandleTypeDef handle;
     };
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    class PCD
+    namespace PCD
     {
-    public:
-        static void Init();
-        static PCD_HandleTypeDef handle;
+        void Init();
+        extern PCD_HandleTypeDef handle;
     };
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    class CRC32
+    namespace CRC32
     {
-    public:
-        static uint Calculate(uint8 *address, uint size);
+        uint Calculate(uint8 *address, uint size);
 
-        static void Init();
+        void Init();
     };
 };
 
