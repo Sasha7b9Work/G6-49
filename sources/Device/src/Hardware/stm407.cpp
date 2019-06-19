@@ -81,3 +81,12 @@ void STM407::SystemClockConfig()
     /* SysTick_IRQn interrupt configuration */
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void STM407::ErrorHandler()
+{
+    while (true)
+    {
+
+    }
+}
