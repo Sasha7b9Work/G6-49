@@ -64,12 +64,18 @@ void Interface::Update()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Interface::AddTask(Task *task)
 {
-    if(!tasks.IsMember(task))                   // Если задания ещё нет в очереди
+    if(!tasks.IsMember(task))               // Если задания ещё нет в очереди
     {
-        task->message->Transmit();              // То посылаем сообщение
-        task->timeLast = TIME_MS;               // запоминаем время посылки
-        tasks.Append(task);                     // и добавляем в очередь сообщений для повторной отправки
+        task->TransmitMessage();            // То посылаем его сообщение
+        tasks.Append(task);                 // и добавляем в очередь сообщений для повторной отправки
     }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void Task::TransmitMessage()
+{
+    message->Transmit();    // Посылаем сообщение
+    timeLast = TIME_MS;     // запоминаем время посылки
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,10 +87,9 @@ void Interface::SendTasks()
     {
         Task *task = element->Get();
 
-        if (!PassedLittleTimeAfterSend(task))
+        if (!task->PassedLittleTimeAfterSend())
         {
-            task->message->Transmit();
-            task->timeLast = TIME_MS;
+            task->TransmitMessage();
         }
 
         element = element->Next();
@@ -92,9 +97,9 @@ void Interface::SendTasks()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Interface::PassedLittleTimeAfterSend(Task *task)
+bool Task::PassedLittleTimeAfterSend()
 {
-    return (TIME_MS - task->timeLast) < 1000;
+    return (TIME_MS - timeLast) < 1000;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,13 +141,13 @@ bool Task::Equals(Task *task1, Task *task2)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Task::Task(SimpleMessage *msg) : timeLast(0), funcEqual(nullptr), funcProcess(nullptr)
+Task::Task(SimpleMessage *msg) : funcProcess(nullptr), timeLast(0), funcEqual(nullptr)
 {
     message = msg->Clone();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Task::Task(SimpleMessage *msg, bool(*process)(SimpleMessage *), bool(*equal)(Task *, Task *)) : timeLast(0), funcEqual(equal), funcProcess(process)
+Task::Task(SimpleMessage *msg, bool(*process)(SimpleMessage *), bool(*equal)(Task *, Task *)) :funcProcess(process), timeLast(0), funcEqual(equal)
 {
     message = msg->Clone();
 }

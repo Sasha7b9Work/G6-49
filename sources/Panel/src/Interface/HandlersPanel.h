@@ -1,14 +1,8 @@
 #pragma once
 
 
-class Handlers
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+namespace Handlers
 {
-public:
-    static bool Processing(SimpleMessage *message);
-
-private:
-    static bool E(SimpleMessage *);
-    static bool Request(SimpleMessage *);
-    static bool FreqMeasure(SimpleMessage *);
-    static bool Log(SimpleMessage *);
+    bool Processing(SimpleMessage *message);
 };

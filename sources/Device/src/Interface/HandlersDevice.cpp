@@ -78,17 +78,17 @@ void Handlers::SendData(SimpleMessage *)
 {
     CPU::SetBusy();
 
-    if (Interface::messages.Size() != 0)
+    if (Interface::GetMessages().Size() != 0)
     {
         Timer::PauseOnTime(2);
 
         CPU::SetReady();
 
-        Transceiver::Transmit(Interface::messages.Front());
+        Transceiver::Transmit(Interface::GetMessages().Front());
 
         CPU::SetBusy();
 
-        Interface::messages.Pop();
+        Interface::GetMessages().Pop();
     }
     else
     {
@@ -336,7 +336,7 @@ void Handlers::WriteRegister(SimpleMessage *msg)
 
     case Register::FPGA_RG9_FreqMeter:
         FPGA::WriteRegister(FPGA::RG::_9_FreqMeter, value);
-        Interface::freqForSend = MAX_UINT;
+        Interface::ResetFreqForSend();
         break;
 
     case Register::FPGA_RG10_Offset:

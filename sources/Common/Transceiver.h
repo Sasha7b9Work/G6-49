@@ -3,13 +3,9 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Transceiver
+namespace Transceiver
 {
-    friend class Interface;
-    friend class Handlers;
-private:
+    void Transmit(SimpleMessage *message);
 
-    static void Transmit(SimpleMessage *message);
-
-    static bool Receive(SimpleMessage *message);
+    bool Receive(SimpleMessage *message);
 };

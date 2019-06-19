@@ -8,7 +8,8 @@
 /// Структура содержит данные для элементарного задания, передаваемого в Interface
 struct Task
 {
-friend class Interface;
+    /// Этот конструктор может использоваться только в Interface для сравнения
+    Task(SimpleMessage *msg);
 
     Task(SimpleMessage *msg, bool (*process)(SimpleMessage *), bool (*equal)(Task *, Task *));
     /// Деструктор. В нём нужно удалить сообщение
@@ -19,15 +20,17 @@ friend class Interface;
     SimpleMessage *message;
     /// Возвращает указатель на готовое к использованию (со сброщенным указателем) сообщение
     SimpleMessage *GetMessage();
+    /// Послать сообщение задания
+    void TransmitMessage();
+    /// Возвращает true, если прошло слишком мало времени после предыдущей засылки сообщения
+    bool PassedLittleTimeAfterSend();
+    /// Функция обработки ответа
+    bool(*funcProcess)(SimpleMessage *);
 private:
-    /// Этот конструктор может использоваться только в Interface для сравнения
-    Task(SimpleMessage *msg);
     /// Время последней передачи сообщения
     uint timeLast;
     /// Функция сравнения
     bool (*funcEqual)(Task *, Task *);
-    /// Функция обработки ответа
-    bool (*funcProcess)(SimpleMessage *);
 };
 
 
@@ -48,8 +51,6 @@ private:
     static bool ProcessTask(SimpleMessage *answer);
     /// Обрабатывает очередь заданий, засылая сообщения тех из них, которые необходимо заслать
     static void SendTasks();
-    /// Возвращает true, если прошло слишком мало времени после предыдущей засылки сообщения
-    static bool PassedLittleTimeAfterSend(Task *task);
     /// Обработать ответ на задание
     static void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
 
