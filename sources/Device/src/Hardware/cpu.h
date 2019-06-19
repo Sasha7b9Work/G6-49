@@ -67,20 +67,19 @@ struct GeneratorReadPin
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class CPU
+namespace CPU
 {
-public:
-    static void Init();
+    void Init();
     /// Установить на PA2 признак того, что процессор занят
-    static void SetBusy();
+    void SetBusy();
     /// Установить на PA2 признак того, что процессор свободен
-    static void SetReady();
+    void SetReady();
     
-    static  void WritePin(GeneratorWritePin pin, bool set);
+     void WritePin(GeneratorWritePin pin, bool set);
 
-    static bool ReadPin(GeneratorReadPin pin);
+    bool ReadPin(GeneratorReadPin pin);
 
-    static void ErrorHandler();
+    void ErrorHandler();
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     class HCD
@@ -105,19 +104,8 @@ public:
     public:
         static uint Calculate(uint8 *address, uint size);
 
-    private:
-        friend class CPU;
-
         static void Init();
     };
-
-private:
-
-    static void EnablePeriphery();
-
-    static void InitGPIOS();
-    /// Начальная инициализация управляющих выводов
-    static void InitPins();
 };
 
 
