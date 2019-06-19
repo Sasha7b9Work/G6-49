@@ -1392,16 +1392,6 @@
               <FilePath>.\src\Hardware\CPU_HCD.cpp</FilePath>
             </File>
             <File>
-              <FileName>stm407.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm407.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm407.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm407.h</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
