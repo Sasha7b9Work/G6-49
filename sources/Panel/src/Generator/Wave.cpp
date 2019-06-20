@@ -44,7 +44,7 @@ pString Form::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Register::Name() const
 {
-    static const pString names[Register::Number] =
+    static const pString names[Register::Count] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",

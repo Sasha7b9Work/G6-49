@@ -145,7 +145,7 @@ struct Register
         FreqMeter_Resist,
         FreqMeter_Couple,
         FreqMeter_Filtr,
-        Number
+        Count
     } value;
     explicit Register(E v) : value(v) {};
     pString Name() const;

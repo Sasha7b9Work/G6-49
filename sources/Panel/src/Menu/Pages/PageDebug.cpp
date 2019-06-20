@@ -58,7 +58,7 @@ struct DescInput
 #define VALUE(i)   (desc[i].value)
 #define SENDING(i) (desc[i].sending)
 
-static DescInput desc[Register::Number] =
+static DescInput desc[Register::Count] =
 {
     {2,  Uint          , false, 0 }, // Multiplexor1,
     {2,  Uint          , false, 0 }, // Multiplexor2,
@@ -86,9 +86,9 @@ static DescInput desc[Register::Number] =
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Возвращает размер буфера для регистра i
-static int SizeBuffer(Register::E name = Register::Number);
+static int SizeBuffer(Register::E name = Register::Count);
 /// Возвращает тип ввода для регистра i
-static TypeInput TypeBuffer(Register::E name = Register::Number);
+static TypeInput TypeBuffer(Register::E name = Register::Count);
 /// Возращает true, если символ является корректным для данного типа ввода
 static bool AllowableSymbol(Control key);
 /// Выводит значение регистра i
@@ -182,7 +182,7 @@ static bool OnKey(Control key)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static int SizeBuffer(Register::E name)
 {
-    name = (name == Register::Number) ? currentRegister : name;
+    name = (name == Register::Count) ? currentRegister : name;
 
     return desc[name].size;
 }
@@ -190,7 +190,7 @@ static int SizeBuffer(Register::E name)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static TypeInput TypeBuffer(Register::E name)
 {
-    name = (name == Register::Number) ? currentRegister : name;
+    name = (name == Register::Count) ? currentRegister : name;
 
     return desc[name].type;
 }
@@ -329,7 +329,7 @@ void PageDebug::PageRegisters::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void PageDebug::PageRegisters::DrawRegisters(int x, int y)
 {
-    for (uint8 i = 0; i < Register::Number; i++)
+    for (uint8 i = 0; i < Register::Count; i++)
     {
         Register reg((Register::E)i);
         Color color = Color::FILL;
@@ -463,7 +463,7 @@ DEF_CHOICE_2( cShowSends,                                                       
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void OnPress_Prev()
 {
-    CircleDecrease<uint8>((uint8 *)&currentRegister, 0, Register::Number - 1);
+    CircleDecrease<uint8>((uint8 *)&currentRegister, 0, Register::Count - 1);
 }
 
 DEF_BUTTON( bPrev,                                                                                                                                            //--- РЕГИСТРЫ - Предыдущий ---
@@ -475,7 +475,7 @@ DEF_BUTTON( bPrev,                                                              
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Next()
 {
-    CircleIncrease<uint8>((uint8 *)&currentRegister, 0, Register::Number - 1);
+    CircleIncrease<uint8>((uint8 *)&currentRegister, 0, Register::Count - 1);
 }
 
 DEF_BUTTON( bNext,                                                                                                                                             //--- РЕГИСТРЫ - Следующий ---

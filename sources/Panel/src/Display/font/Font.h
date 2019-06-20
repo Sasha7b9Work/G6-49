@@ -19,7 +19,7 @@ struct Font
             _5,
             _7,
             _8,
-            Number,
+            Count,
             None
         } value;
         Type(E v) : value(v) {};
@@ -39,7 +39,7 @@ struct Font
 
 
 extern const Font *font;
-extern const Font *fonts[Font::Type::Number];
+extern const Font *fonts[Font::Type::Count];
 
 extern const uchar font5display[3080];
 extern const uchar font8display[3080];

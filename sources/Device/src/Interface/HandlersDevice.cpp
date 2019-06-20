@@ -414,7 +414,7 @@ void Handlers::WriteRegister(SimpleMessage *msg)
         FreqMeter::SetFiltr((FreqFiltr::E)value);
         break;
 
-    case Register::Number:
+    case Register::Count:
     case Register::Multiplexor1:
     case Register::Multiplexor2:
     default:
