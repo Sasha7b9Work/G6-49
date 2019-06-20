@@ -641,12 +641,9 @@ int Choice::GetHeightOpened() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Page::Press(Control &control)
 {
-    if (funcOnKey)
+    if(funcOnKey(control))
     {
-        if(funcOnKey(control))
-        {
-            return true;
-        }
+        return true;
     }
 
     if (CURRENT_PAGE == this)

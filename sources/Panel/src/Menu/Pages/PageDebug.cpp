@@ -133,7 +133,7 @@ static bool OnRegulator(Control key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnKey_PageRegisters(Control key)
+static bool OnKey_PageRegisters(Control &key)
 {
     if (!showInputWindow)
     {

@@ -88,7 +88,7 @@ DEF_CHOICE_2( cTypeTune,                                                        
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnKey(Control key)
+static bool OnKey_PageSignals(Control &key)
 {
     if(key.Is(Control::Esc) && key.action.IsRelease())
     {
@@ -109,7 +109,7 @@ DEF_PAGE_8( pageSignals, //-V641 //-V1027
     &cTypeTune,                                     ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - Çàñûëêè
     PageSignals::PageCalibration::PageA::pointer,   ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ A
     PageSignals::PageCalibration::PageB::pointer,   ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ B
-    Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey, FuncBeforeDraw
+    Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey_PageSignals, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

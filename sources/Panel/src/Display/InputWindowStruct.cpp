@@ -446,7 +446,7 @@ void StructValue::SaveValue()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void StructValue::PressKey(Control key)
+void StructValue::PressKey(Control &key)
 {
     if (key.value == Control::Dot)
     {

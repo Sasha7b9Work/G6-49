@@ -27,7 +27,7 @@ public:
 
     void RegRight();
 
-    void PressKey(Control key);
+    void PressKey(Control &key);
 
     void SaveValue();
 
