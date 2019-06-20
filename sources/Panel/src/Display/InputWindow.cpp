@@ -48,7 +48,7 @@ void InputWindow::Draw()
         pFuncVII func;
         StructFunc(pFuncVII f) : func(f) {};
     }
-    func[ParameterValue::Number] =
+    func[ParameterValue::Count] =
     {
         DrawFrequency,
         DrawPeriod,

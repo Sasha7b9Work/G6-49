@@ -313,7 +313,7 @@ void StructValue::ShiftToLeft()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString Order::Name() const
 {
-    static const pString names[Order::Number] =
+    static const pString names[Order::Count] =
     {
         "ם",
         "לך",
@@ -386,7 +386,7 @@ uint64 StructValue::ValueAfterCommaInNano()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void StructValue::IncreaseOrder()
 {
-    if (ORDER < Order::Number - 1)
+    if (ORDER < Order::Count - 1)
     {
         ORDER = (Order)(Order::E)(ORDER + 1);
 

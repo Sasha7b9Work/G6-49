@@ -19,9 +19,9 @@ struct Order
         One,        // единицы
         Kilo,       // кило
         Mega,       // мега
-        Number
+        Count
     } value;
-    Order(E v = Number) : value(v)  { };
+    Order(E v = Count) : value(v)  { };
     operator uint8() const { return (uint8)value; };
     pString Name() const;
     Order& operator++(int);
@@ -101,7 +101,7 @@ public:
         ModeStart,              ///< –ежим запуска сигналов DDS и импульсных
         ManipulationMode,       ///< –ежим амплитудной манипул€ции - со сглаживанием фронта или без
         ManipulationEnabled,    ///< ¬ключен или выключен режим манипул€ции
-        Number
+        Count
     } value;
 
     pString Name() const;
@@ -199,10 +199,10 @@ public:
         PacketPeriod,           ///< ѕериод следовани€ пачек импульсов в пакетном режиме
         PacketNumber,           ///< „исло импульсов в пачке пакетного режима
         Exit,                   ///< Ётот параметр закрывает открытый параметр
-        Number
+        Count
     } value;
 
-    ParameterValue(int v = Number);
+    ParameterValue(int v = Count);
 
     ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 

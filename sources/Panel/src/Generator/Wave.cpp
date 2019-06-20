@@ -74,7 +74,7 @@ pString Register::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::Name() const
 {
-    static const pString nameParameter[ParameterValue::Number] =
+    static const pString nameParameter[ParameterValue::Count] =
     {
         "Частота",
         "Период",
@@ -438,7 +438,7 @@ pString ParameterComplex::GetStringValue() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterValue::NameUnit(char buf[10]) const
 {
-    static const pString names[ParameterValue::Number] =
+    static const pString names[ParameterValue::Count] =
     {
         "Гц",
         "с",
@@ -482,7 +482,7 @@ bool ParameterValue::IsOpened()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterChoice::Name() const
 {
-    static const pString namesParam[ParameterChoice::Number] =
+    static const pString namesParam[ParameterChoice::Count] =
     {
         "Полярность",
         "Запуск",

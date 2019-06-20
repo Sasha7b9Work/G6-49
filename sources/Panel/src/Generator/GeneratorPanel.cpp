@@ -171,7 +171,7 @@ void Generator::TransformDataToCodeAndTransmit(float d[DDS_NUM_POINTS], Form *fo
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterChoice *param)
 {
-    static const Command::E commands[ParameterChoice::Number] =
+    static const Command::E commands[ParameterChoice::Count] =
     {
         Command::SetPolarity,
         Command::SetStartMode,
@@ -208,7 +208,7 @@ void Generator::SetFrequency(Chan::E ch, float frequency)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetParameter(ParameterValue *param)
 {
-    static const Command::E commands[ParameterValue::Number] =
+    static const Command::E commands[ParameterValue::Count] =
     {
         Command::SetFrequency,
         Command::SetPeriod,                     // 

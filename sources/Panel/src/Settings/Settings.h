@@ -67,19 +67,19 @@ extern const PageBase pInput;
 class Settings // -V690
 {
 public:
-    uint16              size;                           ///< Размер структуры Settings
+    uint16                      size;                                       ///< Размер структуры Settings
     col_val                     disp_Colors[32];                            ///< Цвета
-    ParameterValue              sig_parameter[Form::Count];                ///< Текущий выбранный параметр сигнала
+    ParameterValue              sig_parameter[Form::Count];                 ///< Текущий выбранный параметр сигнала
     Page*                       menu_currentPage;                           ///< Адрес открытой страницы меню. 0, если открыта главная страница
-    int8                        menu_posActItem[Page::Number];              ///< Позиция активного пункта меню для каждой страницы
-    int8                        menu_currentSubPage[Page::Number];          ///< Номер текущей подстраницы для каждой страницы
+    int8                        menu_posActItem[Page::Count];              ///< Позиция активного пункта меню для каждой страницы
+    int8                        menu_currentSubPage[Page::Count];          ///< Номер текущей подстраницы для каждой страницы
     FrequencyMeter::BillingTime freq_billingTime;                           ///< Время счёта
     FrequencyMeter::AvePeriod   freq_avePeriod;                             ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps              freq_timeStamps;                            ///< Метки времени
     FreqMeasure::E              freq_measure;                               ///< Режим измерения частотомера
     int16                       freq_level;                                 ///< Уровень синхронизации
     int16                       freq_hysteresis;                            ///< Величина гистерезиса
-    bool                        sine_ManipulationEnabled[Chan::Count];     ///< true, если включена модуляция синусоиды пилой
+    bool                        sine_ManipulationEnabled[Chan::Count];      ///< true, если включена модуляция синусоиды пилой
     uint8                       sine_ManipulationMode[Chan::Count];
 
 #define FLAG_1      set.flag1
