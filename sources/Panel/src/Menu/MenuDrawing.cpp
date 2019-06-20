@@ -7,7 +7,6 @@
 #include "Display/Text.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
-#include "Utils/Debug.h"
 #include "Display/InputWindow.h"
 #include <cmath>
 #endif
@@ -23,10 +22,8 @@ void Menu::Draw()
     {
         GetOpenedItem()->Draw(true);
     }
-    if(oldPage)
-    {
-        InputWindow::Draw();
-    }
+
+    InputWindow::Draw();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

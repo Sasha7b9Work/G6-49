@@ -14,8 +14,54 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-StructValue InputWindow::iws;
-ParameterValue  *InputWindow::param = 0;
+namespace InputWindow
+{
+    void KeyLeft();
+
+    void KeyRight();
+
+    void DrawAmplitude(int x, int y);
+
+    void DrawFrequency(int x, int y);
+
+    void DrawOffset(int x, int y);
+
+    void DrawPhase(int x, int y);
+
+    void DrawDelay(int x, int y);
+
+    void DrawPeriod(int x, int y);
+
+    void DrawDutyRatio(int x, int y);
+
+    void DrawDuration(int x, int y);
+
+    void DrawDigits(int x, int y);
+
+    void DrawDurationRise(int x, int y);
+
+    void DrawDurationFall(int x, int y);
+
+    void DrawDurationStady(int x, int y);
+
+    void DrawDutyFactor(int x, int y);
+
+    void DrawRampSineDuration(int x, int y);
+
+    void DrawRampSineAmplitude(int x, int y);
+
+    void DrawPacketPeriod(int x, int y);
+
+    void DrawPacketNumber(int x, int y);
+
+    void DrawExit(int x, int y);
+
+    ParameterValue *param = 0;
+
+    StructValue iws;
+
+    bool isVisible = false;
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,11 +69,23 @@ void InputWindow::Init()
 {
     param = (ParameterValue *)PARAM_CURRENT;
     iws.Set(param);
+    isVisible = true;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void InputWindow::DeInit()
+{
+    isVisible = false;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void InputWindow::Draw()
 {
+    if (!isVisible)
+    {
+        return;
+    }
+
     Font::SetType(Font::Type::_7);
 
     int x = 0;

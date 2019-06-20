@@ -65,64 +65,19 @@ private:
 
 
 /// Окно редактирования численного значения параметра
-class InputWindow
+namespace InputWindow
 {
-public:
-    static void Init();
+    void Init();
 
-    static void Draw();
+    void DeInit();
 
-    static void OrderUp();
+    void Draw();
 
-    static void OrderDown();
+    void OrderUp();
 
-    static void KeyEnter();
+    void OrderDown();
 
-    static void ProcessContorl(Control &control);
+    void KeyEnter();
 
-private:
-
-    static void KeyLeft();
-
-    static void KeyRight();
-
-    static void DrawAmplitude(int x, int y);
-
-    static void DrawFrequency(int x, int y);
-
-    static void DrawOffset(int x, int y);
-
-    static void DrawPhase(int x, int y);
-
-    static void DrawDelay(int x, int y);
-
-    static void DrawPeriod(int x, int y);
-
-    static void DrawDutyRatio(int x, int y);
-
-    static void DrawDuration(int x, int y);
-
-    static void DrawDigits(int x, int y);
-
-    static void DrawDurationRise(int x, int y);
-
-    static void DrawDurationFall(int x, int y);
-
-    static void DrawDurationStady(int x, int y);
-
-    static void DrawDutyFactor(int x, int y);
-
-    static void DrawRampSineDuration(int x, int y);
-
-    static void DrawRampSineAmplitude(int x, int y);
-
-    static void DrawPacketPeriod(int x, int y);
-
-    static void DrawPacketNumber(int x, int y);
-
-    static void DrawExit(int x, int y);
-
-    static ParameterValue *param;
-
-    static StructValue iws;
+    void ProcessContorl(Control &control);
 };

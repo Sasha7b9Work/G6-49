@@ -98,14 +98,13 @@ static bool OnKey_PageSignals(Control &key)
     return false;
 }
 
-DEF_PAGE_8( pageSignals, //-V641 //-V1027
+DEF_PAGE_7( pageSignals, //-V641 //-V1027
     "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬",
     "",
     &cChannel,                                      ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
     &cFormA,                                        ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘ÓÏ‡
     &cParameters,                                   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
     &bChangeParameter,                              ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
-    PageSignals::PageLoad::pointer,                 ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿
     &cTypeTune,                                     ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «‡Ò˚ÎÍË
     PageSignals::PageCalibration::PageA::pointer,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
     PageSignals::PageCalibration::PageB::pointer,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B

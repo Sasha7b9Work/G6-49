@@ -516,6 +516,12 @@ pString ParameterPage::Name() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void ParameterPage::OpenPage()
+{
+    Menu::SetAdditionPage((::Page *)page);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterBase::Name() const
 {
     if(IsValue())
@@ -591,6 +597,10 @@ void Form::ChangeParameter()
     else if (param->IsComplex())
     {
         OpenCurrentParameter();
+    }
+    else if(param->IsPage())
+    {
+        ((ParameterPage *)param)->OpenPage();
     }
     else
     {

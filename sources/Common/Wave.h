@@ -177,6 +177,8 @@ public:
 
 private:
     PageBase *page;
+
+    void OpenPage();
 };
 
 

@@ -35,7 +35,7 @@ namespace Menu
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Item *Menu::pressedItem = nullptr;
-Page *Menu::oldPage = nullptr;
+static Page *oldPage = nullptr;
 
 extern const PageBase pSignals;
 
@@ -142,7 +142,7 @@ bool Menu::ProcessOutputs(Control &control)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Menu::RegIsControlSubPages()
 {
-    return GetOpenedItem() == 0 && oldPage == 0 && CURRENT_PAGE && CURRENT_PAGE->NumSubPages() != 0;
+    return (GetOpenedItem() == nullptr) && (oldPage == nullptr) && (CURRENT_PAGE) && (CURRENT_PAGE->NumSubPages() != 0);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +177,8 @@ void Menu::SetAdditionPage(Page *page)
 void Menu::ResetAdditionPage()
 {
     CURRENT_PAGE = oldPage;
-    oldPage = 0;
+    oldPage = nullptr;
+    InputWindow::DeInit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

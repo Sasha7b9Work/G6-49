@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
+#include "Utils/Debug.h"
 #include <cstdlib>
 #endif
 

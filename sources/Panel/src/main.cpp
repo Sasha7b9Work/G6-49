@@ -8,7 +8,6 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Settings/CalibrationSettings.h"
-#include "Utils/Debug.h"
 #include "SCPI/SCPI.h"
 #include <cstdlib>
 #include <cstdio>
