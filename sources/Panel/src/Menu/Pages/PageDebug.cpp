@@ -133,7 +133,7 @@ static bool OnRegulator(Control key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnKey(Control key)
+static bool OnKey_PageRegisters(Control key)
 {
     if (!showInputWindow)
     {
@@ -599,7 +599,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     bNext,
     bSend,
     emptyItem,
-    Page::Registers, &pDebug, Item::FuncActive, FuncPress, OnKey, FuncBeforeDraw
+    Page::Registers, &pDebug, Item::FuncActive, FuncPress, OnKey_PageRegisters, FuncBeforeDraw
 )
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
