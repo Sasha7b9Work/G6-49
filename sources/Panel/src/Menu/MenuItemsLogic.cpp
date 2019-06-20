@@ -131,7 +131,7 @@ float Choice::Step()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Choice::Press(Control key)
+Item *Choice::Press(Control &key)
 {   
     if((key.Is(Control::Right) && key.action.IsRelease()) || key.Is(Control::RegRight))
     {
@@ -176,7 +176,7 @@ Item *Choice::Press(Control key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::Press(Control control)
+void Governor::Press(Control &control)
 {
     if(control.IsFunctional() && Keeper()->GetItem(control) == this)
     {
@@ -415,7 +415,7 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::Press(Control key)
+void Item::Press(Control &key)
 {
     if(key.action.Is(Control::Action::Long))
     {
@@ -639,7 +639,7 @@ int Choice::GetHeightOpened() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::Press(Control control)
+bool Page::Press(Control &control)
 {
     if (funcOnKey)
     {

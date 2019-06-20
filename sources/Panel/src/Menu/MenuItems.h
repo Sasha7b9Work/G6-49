@@ -74,7 +74,7 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    void Press(Control control);
+    void Press(Control &control);
 
     Type GetType() const;
 
@@ -179,7 +179,7 @@ public:
 
     void ChangeSubPage(int delta);
     /// ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    bool Press(Control control);
+    bool Press(Control &control);
 
     struct Title
     {
@@ -317,7 +317,7 @@ public:
 
     void DrawValue(int x, int y) const;
     /// ќбработка воздействи€
-    void Press(Control control);
+    void Press(Control &control);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
@@ -371,7 +371,7 @@ public:
     /// ¬озвращает им€ варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     String NameSubItem(int i) const;
     /// ¬озвращает указатель на себ€, если находитс€ ы открытом состо€нии, и 0, если в закрытом
-    Item *Press(Control control);
+    Item *Press(Control &control);
 
     int8 CurrentIndex();
 };

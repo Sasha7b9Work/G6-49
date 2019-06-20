@@ -306,7 +306,7 @@ void CPU::Keyboard::InitInputs(uint16 *sl, char *portSL, int numSL, uint16 *rl, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const char *PanelControlName(Control control)
+const char *PanelControlName(Control &control)
 {
     static const char *names[] =
     {

@@ -9,7 +9,7 @@ public:
     /// Отрисовка подсказки
     static void Draw();
     /// Орган упралвения. Возвращает false, если обработка не произошла
-    static bool ProcessControl(Control control);
+    static bool ProcessControl(Control &control);
 
 private:
     /// \brief Отрисовывает подсказки с пояснениями

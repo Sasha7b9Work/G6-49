@@ -23,9 +23,9 @@
 namespace Menu
 {
     /// ќбработать управл€ющее воздействие control
-    static void ProcessContorl(Control control);
+    static void ProcessContorl(Control &control);
     /// ќбрабатывает состо€ние выходов. ¬озвращает true, если состо€ние вывода изменилось
-    static bool ProcessOutputs(Control control);
+    static bool ProcessOutputs(Control &control);
     /// ≈сли какой-то итем раскрыт, то здесь его адрес
     static Item *openedItem = nullptr;
 
@@ -82,7 +82,7 @@ void Menu::Update()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Menu::ProcessContorl(Control control)
+void Menu::ProcessContorl(Control &control)
 {
     if(ProcessOutputs(control))
     {
@@ -108,7 +108,7 @@ void Menu::ProcessContorl(Control control)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Menu::ProcessOutputs(Control control)
+bool Menu::ProcessOutputs(Control &control)
 {
     if (control.action.IsRelease())
     {

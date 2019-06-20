@@ -78,7 +78,7 @@ public:
 
     static void KeyEnter();
 
-    static void ProcessContorl(Control control);
+    static void ProcessContorl(Control &control);
 
 private:
 

@@ -281,7 +281,7 @@ void InputWindow::KeyEnter()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::ProcessContorl(Control key)
+void InputWindow::ProcessContorl(Control &key)
 {
     if (key.IsDigit() || key.Is(Control::Dot) || key.Is(Control::Minus))
     {
