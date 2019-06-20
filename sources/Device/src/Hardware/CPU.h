@@ -59,7 +59,7 @@ struct GeneratorReadPin
     {
         FREQ_METER_DRY,     ///< Пин чтения готовности частотомера к выдаче данных
         FREQ_METER_DATA,    ///< Пин чтения данных
-        Number
+        Count
     } value;
     GeneratorReadPin(E v) : value(v) {};
     operator uint8() const { return (uint8)value; };

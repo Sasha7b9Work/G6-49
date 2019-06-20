@@ -40,7 +40,7 @@ namespace Timer
             kTimerStartP2P,             ///< Таймер для запуска следующего цикла поточечного чтения
             kTimerDisplay,              ///< Таймер на ручную отрисовку экрана
             kTemp,
-            Number
+            Count
         } value;
         operator uint8() const { return (uint8)value; };
     };

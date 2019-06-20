@@ -42,7 +42,7 @@ namespace Timer
             kTimerDisplay,              ///< Таймер на ручную отрисовку экрана
             USB,
             kTemp,
-            Number
+            Count
         } value;
         Type(E v) : value(v) {};
         operator uint8() const { return (uint8)value; };
