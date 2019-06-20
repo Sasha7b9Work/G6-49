@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Command::Name() const
 {
-    static const pString names[Number] =
+    static const pString names[Count] =
     {
         "RequestData",
         "EnableChannel",
@@ -54,7 +54,7 @@ pString Command::Name() const
         "FDrive_GetPictureDDS",
         "SCPI_Data"
     };
-    if(value < Number)
+    if(value < Count)
     {
         return names[value];
     }
@@ -176,7 +176,7 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case SCPI_Data:
             break;
-        case Number:
+        case Count:
             break;
     }
 

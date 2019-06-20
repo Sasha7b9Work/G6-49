@@ -26,7 +26,7 @@ bool Handlers::Processing(SimpleMessage *msg)
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
 
-    static const pFuncBpM funcs[Command::Number] =
+    static const pFuncBpM funcs[Command::Count] =
     {
         /* RequestData               */ Handlers::Request,
         /* EnableChannel             */ Handlers::E,
@@ -73,7 +73,7 @@ bool Handlers::Processing(SimpleMessage *msg)
 
     uint8 command = msg->TakeByte();
 
-    if (command < Command::Number)
+    if (command < Command::Count)
     {
         /// —юда сообщение передаЄтс€ уже без первого байта
         return funcs[command](msg);

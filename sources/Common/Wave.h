@@ -273,10 +273,10 @@ public:
         Impulse,        ///< Импульсы
         PacketImpuls,   ///< Пачка импульсов
         DDS,            ///< Произвольный сигнал
-        Number
+        Count
     } value;
 
-    Form(E v = Number) :
+    Form(E v = Count) :
         value(v),
         wave(0),
 		params(nullptr),

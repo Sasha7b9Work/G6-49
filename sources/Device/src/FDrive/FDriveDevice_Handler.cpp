@@ -73,7 +73,7 @@ void FDrive::Handler::Processing(SimpleMessage *message)
 
     uint8 com = msg->TakeByte();
 
-    static const pFuncVV funcs[Command::Number] =
+    static const pFuncVV funcs[Command::Count] =
     {
         /* RequestData                  */ EmptyFuncVV,
         /* EnableChannel                */ EmptyFuncVV,

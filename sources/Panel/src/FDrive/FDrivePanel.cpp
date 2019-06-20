@@ -110,7 +110,7 @@ void FDrive::Draw()
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool FDrive::Handler::Processing(SimpleMessage *message)
 {
-    static const pFuncBV funcs[Command::Number] =
+    static const pFuncBV funcs[Command::Count] =
     {
         /* RequestData                  */ EmptyFuncBV,
         /* EnableChannel                */ EmptyFuncBV,

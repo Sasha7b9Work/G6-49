@@ -109,7 +109,7 @@ struct Command
          // 0           1...5     6.....
          // SCPI_Data   sizeData  data 
 /* <-> */   SCPI_Data,                  ///< От VCP приняты данные либо в VCP нужно передать данные
-            Number
+            Count
     } value;
     Command(E v) : value(v) {};
     Command(const uint8 v) : value((E)v) {};

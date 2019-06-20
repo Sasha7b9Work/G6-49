@@ -82,7 +82,7 @@ void Handlers::Processing(SimpleMessage *msg)
 {
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
-    static const pFuncInterfaceVpM funcs[Command::Number] =
+    static const pFuncInterfaceVpM funcs[Command::Count] =
     {
         /* RequestData               */ Handlers::SendData,
         /* EnableChannel             */ Handlers::EnableChannel,

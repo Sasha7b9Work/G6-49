@@ -26,7 +26,7 @@ static uint8 formFlash[Chan::Count][SIZE_BUFFER];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 pString Form::Name() const
 {
-    static const pString names[Form::Number] =
+    static const pString names[Form::Count] =
     {
         "Синус",
         "Пила+",
@@ -768,7 +768,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
 
     typedef void(*pFuncIIII)(Chan::E, int, int, int, int);
 
-    static const pFuncIIII funcs[Form::Number] =
+    static const pFuncIIII funcs[Form::Count] =
     {
         DrawSine,
         DrawRampPlus,

@@ -41,7 +41,7 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
-    if(ch < Chan::Count && form < Form::Number)
+    if(ch < Chan::Count && form < Form::Count)
     {
         waveIsSine = (form == Form::Sine);
 

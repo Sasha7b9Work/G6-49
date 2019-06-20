@@ -138,7 +138,7 @@ void Generator::LoadFormDDS(Form *form)
         case Form::Impulse:
         case Form::PacketImpuls:
         case Form::DDS:
-        case Form::Number:
+        case Form::Count:
             break;
     }
 }
