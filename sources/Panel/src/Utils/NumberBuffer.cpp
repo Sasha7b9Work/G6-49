@@ -24,20 +24,20 @@ void NumberBuffer::Set(char *buf, int s, int p, int maxValue)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void NumberBuffer::ProcessKey(Control &key)
+void NumberBuffer::ProcessKey(KeyEvent &key)
 {
-    if (key == Control::RegRight || key == Control::RegLeft)
+    if (key == KeyEvent::RegRight || key == KeyEvent::RegLeft)
     {
         ProcessRegulator(key);
     }
-    else if(key == Control::Left)
+    else if(key == KeyEvent::Left)
     {
         if(position > 0)
         {
             --position;
         }
     }
-    else if(key == Control::Right)
+    else if(key == KeyEvent::Right)
     {
         if(position < NumSymbols())
         {
@@ -55,9 +55,9 @@ void NumberBuffer::ProcessKey(Control &key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool NumberBuffer::AllowableSymbol(Control &key)
+bool NumberBuffer::AllowableSymbol(KeyEvent &key)
 {
-    if(key.IsDigit() || key.Is(Control::Dot) || key.Is(Control::Minus))
+    if(key.IsDigit() || key.Is(KeyEvent::Dot) || key.Is(KeyEvent::Minus))
     {
         return true;
     }
@@ -66,7 +66,7 @@ bool NumberBuffer::AllowableSymbol(Control &key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void NumberBuffer::ProcessRegulator(Control &key)
+void NumberBuffer::ProcessRegulator(KeyEvent &key)
 {
     if(NumSymbols() == 0)                           // Если буфер пуст -
     {
@@ -77,11 +77,11 @@ void NumberBuffer::ProcessRegulator(Control &key)
     char temp[32];
     std::memcpy(temp, buffer, (uint)size);
 
-    if (key.Is(Control::RegRight))
+    if (key.Is(KeyEvent::RegRight))
     {
         IncreaseDigit(PositionSymbolForChange());
     }
-    else if(key.Is(Control::RegLeft))
+    else if(key.Is(KeyEvent::RegLeft))
     {
         DecreaseDigit(PositionSymbolForChange());
     }

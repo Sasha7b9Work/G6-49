@@ -47,9 +47,9 @@ const char *Choice::NamePrevSubItem()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Page::GetItem(Control &key) const
+Item *Page::GetItem(KeyEvent &key) const
 {
-    return (Item *)items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Control::F1)];
+    return (Item *)items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - KeyEvent::F1)];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

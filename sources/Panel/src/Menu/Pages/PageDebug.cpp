@@ -90,7 +90,7 @@ static int SizeBuffer(Register::E name = Register::Count);
 /// Возвращает тип ввода для регистра i
 static TypeInput TypeBuffer(Register::E name = Register::Count);
 /// Возращает true, если символ является корректным для данного типа ввода
-static bool AllowableSymbol(Control key);
+static bool AllowableSymbol(KeyEvent key);
 /// Выводит значение регистра i
 static void DrawValue(int x, int y, uint8 i);
 /// Возвращает из буфера значение, предшествующее точке
@@ -117,7 +117,7 @@ static void LoadRegister()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnRegulator(Control key)
+static bool OnRegulator(KeyEvent key)
 {
     if (TypeBuffer(currentRegister) == Uint)
     {
@@ -133,7 +133,7 @@ static bool OnRegulator(Control key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool OnKey_PageRegisters(Control &key)
+static bool OnKey_PageRegisters(KeyEvent &key)
 {
     if (!showInputWindow)
     {
@@ -148,7 +148,7 @@ static bool OnKey_PageRegisters(Control &key)
             return true;
         }
     }
-    else if (key.action.Is(Control::Action::Down))
+    else if (key.action.Is(KeyEvent::Action::Down))
     {
         if (AllowableSymbol(key))
         {
@@ -161,7 +161,7 @@ static bool OnKey_PageRegisters(Control &key)
             NumberBuffer::ProcessKey(key);
             return true;
         }
-        else if (key.Is(Control::Esc))
+        else if (key.Is(KeyEvent::Esc))
         {
             OnPress_Cancel();
             return true;
@@ -276,7 +276,7 @@ static uint64 BufferToValue()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static bool AllowableSymbol(Control key)
+static bool AllowableSymbol(KeyEvent key)
 {
     TypeInput type = TypeBuffer(currentRegister);
 
@@ -286,7 +286,7 @@ static bool AllowableSymbol(Control key)
     }
     else if (type == Binary)
     {
-        return key.Is(Control::_0) || key.Is(Control::_1);
+        return key.Is(KeyEvent::_0) || key.Is(KeyEvent::_1);
     }
     else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
     {
@@ -295,7 +295,7 @@ static bool AllowableSymbol(Control key)
             return true;
         }
 
-        if (key.Is(Control::Dot))
+        if (key.Is(KeyEvent::Dot))
         {
             for (int i = 0; i < sizeof(buffer); i++)
             {

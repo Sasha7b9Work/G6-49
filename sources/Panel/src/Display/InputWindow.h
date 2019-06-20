@@ -27,7 +27,7 @@ public:
 
     void RegRight();
 
-    void PressKey(Control &key);
+    void PressKey(KeyEvent &key);
 
     void SaveValue();
 
@@ -79,5 +79,5 @@ namespace InputWindow
 
     void KeyEnter();
 
-    void ProcessContorl(Control &control);
+    void ProcessContorl(KeyEvent &control);
 };

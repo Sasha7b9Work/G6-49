@@ -13,7 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool        Hint::show = false;
 const Item *Hint::item = 0;
-Control::E  Hint::control = Control::None;
+KeyEvent::E  Hint::control = KeyEvent::None;
 int         Hint::numPages = 0;
 int         Hint::currentPage = 0;
 int         Hint::firstItemOnSecondPage = 0;
@@ -21,13 +21,13 @@ bool        Hint::needCalculate = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Hint::ProcessControl(Control &key)
+bool Hint::ProcessControl(KeyEvent &key)
 {
-    if (key.Is(Control::Esc, Control::Action::Long))
+    if (key.Is(KeyEvent::Esc, KeyEvent::Action::Long))
     {
         show = !show;
         item = 0;
-        control = Control::None;
+        control = KeyEvent::None;
         numPages = 0;
     }
 
@@ -39,14 +39,14 @@ bool Hint::ProcessControl(Control &key)
             {
                 item = CURRENT_PAGE->GetItem(key);
             }
-            control = Control::None;
+            control = KeyEvent::None;
             needCalculate = true;
         }
         else if (key.IsRotate())
         {
             if(numPages > 1)
             {
-                if(key.Is(Control::RegLeft))
+                if(key.Is(KeyEvent::RegLeft))
                 {
                     if(currentPage > 1)
                     {

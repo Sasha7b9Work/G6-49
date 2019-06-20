@@ -3,7 +3,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-struct Control
+struct KeyEvent
 {
     enum E
     {
@@ -49,21 +49,21 @@ struct Control
         bool IsRelease() const;
     } action;
 
-    explicit Control(E v = None, Action::E a = Action::Down) : value(v), action(a) {};
-    Control &operator=(Control rval)
+    explicit KeyEvent(E v = None, Action::E a = Action::Down) : value(v), action(a) {};
+    KeyEvent &operator=(KeyEvent rval)
     {
         value = rval.value;
         action = rval.action;
         return *this;
     }
-    Control(const Control &c)
+    KeyEvent(const KeyEvent &c)
     {
         value = c.value;
         action = c.action;
     }
     operator uint8() const { return (uint8)value; };
-    bool Is(Control::E c) { return c == value; };
-    bool Is(Control::E c, Action::E a) { return value == c && action == a; };
+    bool Is(KeyEvent::E c) { return c == value; };
+    bool Is(KeyEvent::E c, Action::E a) { return value == c && action == a; };
     bool IsDigit() const;
     char ToChar() const;
     pString Name() const;

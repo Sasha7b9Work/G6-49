@@ -150,7 +150,7 @@ DRESULT USBH_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
 /**
   * @brief  I/O control operation
   * @param  lun : lun id
-  * @param  cmd: Control code
+  * @param  cmd: KeyEvent code
   * @param  *buff: Buffer to send/receive control data
   * @retval DRESULT: Operation result
   */

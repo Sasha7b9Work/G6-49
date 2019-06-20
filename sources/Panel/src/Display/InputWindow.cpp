@@ -339,39 +339,39 @@ void InputWindow::KeyEnter()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void InputWindow::ProcessContorl(Control &key)
+void InputWindow::ProcessContorl(KeyEvent &key)
 {
-    if (key.IsDigit() || key.Is(Control::Dot) || key.Is(Control::Minus))
+    if (key.IsDigit() || key.Is(KeyEvent::Dot) || key.Is(KeyEvent::Minus))
     {
-        if (key.action.Is(Control::Action::Down))
+        if (key.action.Is(KeyEvent::Action::Down))
         {
             iws.PressKey(key);
         }
     }
-    else if (key.Is(Control::RegLeft))
+    else if (key.Is(KeyEvent::RegLeft))
     {
         iws.RegLeft();
     }
-    else if (key.Is(Control::RegRight))
+    else if (key.Is(KeyEvent::RegRight))
     {
         iws.RegRight();
     }
-    else if (key.IsFunctional() && key.action.Is(Control::Action::Up))
+    else if (key.IsFunctional() && key.action.Is(KeyEvent::Action::Up))
     {
         if(CURRENT_PAGE)
         {
             CURRENT_PAGE->GetItem(key)->Press(key);
         }
     }
-    else if(key.Is(Control::Left, Control::Action::Up))
+    else if(key.Is(KeyEvent::Left, KeyEvent::Action::Up))
     {
         KeyLeft();
     }
-    else if(key.Is(Control::Right, Control::Action::Up))
+    else if(key.Is(KeyEvent::Right, KeyEvent::Action::Up))
     {
         KeyRight();
     }
-    else if(key.Is(Control::Esc, Control::Action::Up))
+    else if(key.Is(KeyEvent::Esc, KeyEvent::Action::Up))
     {
         Menu::ResetAdditionPage();
     }

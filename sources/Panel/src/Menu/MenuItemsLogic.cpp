@@ -131,27 +131,27 @@ float Choice::Step()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Choice::Press(Control &key)
+Item *Choice::Press(KeyEvent &key)
 {   
-    if((key.Is(Control::Right) && key.action.IsRelease()) || key.Is(Control::RegRight))
+    if((key.Is(KeyEvent::Right) && key.action.IsRelease()) || key.Is(KeyEvent::RegRight))
     {
         StartChange(-1);
     }
-    else if((key.Is(Control::Left) && key.action.IsRelease()) || key.Is(Control::RegLeft))
+    else if((key.Is(KeyEvent::Left) && key.action.IsRelease()) || key.Is(KeyEvent::RegLeft))
     {
         StartChange(1);
     }
-    else if(key.Is(Control::Esc) && key.action.IsRelease())
+    else if(key.Is(KeyEvent::Esc) && key.action.IsRelease())
     {
         Menu::ResetOpenedItem();
     }
     else if(Keeper()->GetItem(key))
     {
-        if(key.action.Is(Control::Action::Up))
+        if(key.action.Is(KeyEvent::Action::Up))
         {
             StartChange(1);
         }
-        else if(key.action.Is(Control::Action::Long))
+        else if(key.action.Is(KeyEvent::Action::Long))
         {
             if(Menu::GetOpenedItem() == 0)
             {
@@ -176,11 +176,11 @@ Item *Choice::Press(Control &key)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Governor::Press(Control &control)
+void Governor::Press(KeyEvent &control)
 {
     if(control.IsFunctional() && Keeper()->GetItem(control) == this)
     {
-        if(control.action.Is(Control::Action::Up))
+        if(control.action.Is(KeyEvent::Action::Up))
         {
             if (!Menu::GetCurrentItem())
             {
@@ -199,7 +199,7 @@ void Governor::Press(Control &control)
                 // здесь ничего
             }
         }
-        else if(control.action.Is(Control::Action::Long))
+        else if(control.action.Is(KeyEvent::Action::Long))
         {
         }
         else
@@ -209,7 +209,7 @@ void Governor::Press(Control &control)
     }
     else if(control.IsRotate())
     {
-        if(control.Is(Control::RegLeft))
+        if(control.Is(KeyEvent::RegLeft))
         {
             if(*cell > minValue)
             {
@@ -217,7 +217,7 @@ void Governor::Press(Control &control)
                 funcOfChanged();
             }
         }
-        else if(control.Is(Control::RegRight))
+        else if(control.Is(KeyEvent::RegRight))
         {
             if(*cell < maxValue)
             {
@@ -230,9 +230,9 @@ void Governor::Press(Control &control)
             // здесь ничего
         }
     }
-    else if(control.action.Is(Control::Action::Up))
+    else if(control.action.Is(KeyEvent::Action::Up))
     {
-        if(control.Is(Control::Esc))
+        if(control.Is(KeyEvent::Esc))
         {
             Menu::ResetCurrentItem();
         }
@@ -415,11 +415,11 @@ void GovernorColor::ChangeValue(int delta)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Item::Press(Control &key)
+void Item::Press(KeyEvent &key)
 {
-    if(key.action.Is(Control::Action::Long))
+    if(key.action.Is(KeyEvent::Action::Long))
     {
-        if (IsOpened() || key.Is(Control::RegButton) || key.Is(Control::Esc))
+        if (IsOpened() || key.Is(KeyEvent::RegButton) || key.Is(KeyEvent::Esc))
         {
             Menu::ResetOpenedItem();
             return;
@@ -431,9 +431,9 @@ void Item::Press(Control &key)
         return;
     }
 
-    if(CURRENT_PAGE->GetItem(key) == this || key.IsRotate() || key.Is(Control::Esc) || key.IsCursors())
+    if(CURRENT_PAGE->GetItem(key) == this || key.IsRotate() || key.Is(KeyEvent::Esc) || key.IsCursors())
     {
-        Menu::pressedItem = (key.action.Is(Control::Action::Down)) && !IsOpened() ? this : 0;
+        Menu::pressedItem = (key.action.Is(KeyEvent::Action::Down)) && !IsOpened() ? this : 0;
 
         if (type == Item::Type::Choice)
         {
@@ -535,13 +535,13 @@ int Item::PositionOnPage()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Item *ChoiceParameter::Press(Control::Action action)
+Item *ChoiceParameter::Press(KeyEvent::Action action)
 {
-    if (action.Is(Control::Action::Up))
+    if (action.Is(KeyEvent::Action::Up))
     {
         form->SetNextParameter();
     }
-    else if (action.Is(Control::Action::Long))
+    else if (action.Is(KeyEvent::Action::Long))
     {
         return this;
     }
@@ -554,9 +554,9 @@ Item *ChoiceParameter::Press(Control::Action action)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Item *SButton::Press(Control::Action action)
+Item *SButton::Press(KeyEvent::Action action)
 {
-    if(action.Is(Control::Action::Down))
+    if(action.Is(KeyEvent::Action::Down))
     {
         Menu::pressedItem = this;
         return this;
@@ -574,9 +574,9 @@ Item *SButton::Press(Control::Action action)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Item *Button::Press(Control::Action action)
+Item *Button::Press(KeyEvent::Action action)
 {
-    if (action.Is(Control::Action::Up))
+    if (action.Is(KeyEvent::Action::Up))
     {
         funcOnPress();
     }
@@ -639,7 +639,7 @@ int Choice::GetHeightOpened() const
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool Page::Press(Control &control)
+bool Page::Press(KeyEvent &control)
 {
     if(funcOnKey(control))
     {
@@ -650,10 +650,10 @@ bool Page::Press(Control &control)
     {
         if (control.IsRotate() && Menu::RegIsControlSubPages())
         {
-            ChangeSubPage(control.Is(Control::RegLeft) ? -1 : 1);
+            ChangeSubPage(control.Is(KeyEvent::RegLeft) ? -1 : 1);
             return true;
         }
-        else if (control.Is(Control::Esc) && control.action.Is(Control::Action::Up))
+        else if (control.Is(KeyEvent::Esc) && control.action.Is(KeyEvent::Action::Up))
         {
             if (Keeper())
             {
