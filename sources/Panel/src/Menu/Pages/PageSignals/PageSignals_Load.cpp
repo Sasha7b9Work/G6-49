@@ -2,6 +2,7 @@
 #ifndef WIN32
 #include "defines.h"
 #include "log.h"
+#include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Display/Painter.h"
 #include "FDrive/FDrivePanel.h"
@@ -48,16 +49,21 @@ DEF_BUTTON( bChoose,                                                            
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static bool OnKey(Control &event)
+static bool OnKey(Control &control)
 {
-    if (event.value == Control::RegLeft)
+    if (control.value == Control::RegLeft)
     {
         FDrive::PressDown();
         return true;
     }
-    else if (event.value == Control::RegRight)
+    else if (control.value == Control::RegRight)
     {
         FDrive::PressUp();
+        return true;
+    }
+    else if (control.Is(Control::Esc, Control::Action::Up))
+    {
+        Menu::ResetAdditionPage();
         return true;
     }
     else
