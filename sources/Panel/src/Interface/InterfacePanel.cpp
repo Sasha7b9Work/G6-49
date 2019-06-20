@@ -62,8 +62,7 @@ void Interface::Update()
     
     if (Transceiver::Receive(&message))
     {
-        if (
-            ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
+        if (ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
             Handlers::Processing(&message))     // или просто обрабатываем в обратном случае
         {
             time = 0;
