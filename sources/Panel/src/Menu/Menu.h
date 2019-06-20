@@ -3,55 +3,45 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Menu
+namespace Menu
 {
-public:
     /// Столько элементов меню помещается на дисплее одновременно
-    static const int NUM_ITEMS_ON_DISPLAY = 4;
+    const int NUM_ITEMS_ON_DISPLAY = 4;
 
-    static void Init();
-        
-    static void Update();
+    void Init();
+    
+    void Update();
 
-    static void Draw();
+    void Draw();
+    /// Наризовать загол
+    int DrawTitle();
+
+    void DrawPagesUGO(int x);
     /// Возвращает true, если ручка управляет переклюичением подстраниц меню
-    static bool RegIsControlSubPages();
+    bool RegIsControlSubPages();
     /// Возвращает адрес открытого элемента меню
-    static Item* GetOpenedItem() { return openedItem; };
+    Item* GetOpenedItem();
     /// Установить Item, который будет считаться открытым
-    static void SetOpenedItem(Item *item) { openedItem = item; };
+    void SetOpenedItem(Item *item);
     /// Установить текущий Item - именно к нему будут приходить события ручки и ESC
-    static void SetCurrentItem(Item *item) { currentItem = item; };
+    void SetCurrentItem(Item *item);
     /// Сброс текущего Item - текущего Item'a больше нет
-    static void ResetCurrentItem() { currentItem = 0; };
+    void ResetCurrentItem();
     /// Возвращает текущий Item
-    static Item* GetCurrentItem() { return currentItem; };
+    Item* GetCurrentItem();
     /// Обнулить открытый итем - итем закрыт
-    static void ResetOpenedItem() { openedItem = 0; };
+    void ResetOpenedItem();
+    /// Возвращает позицию страницы на страницы. Только если страница принадлежит главному меню. Иначе -1
+    int GetPosition(Page *page);
+    /// Устанавливает для отрисовки дополнительноую страницу
+    void SetAdditionPage(Page *page);
+    /// Синмает дополнительную страницу с отрисовки
+    void ResetAdditionPage();
+    /// Указатель на главную страницу
+    extern Page *mainPage;
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [F1..F4], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
-    static Item *pressedItem;
-    /// Возвращает позицию страницы на страницы. Только если страница принадлежит главному меню. Иначе -1
-    static int GetPosition(Page *page);
-    /// Устанавливает для отрисовки дополнительноую страницу
-    static void SetAdditionPage(Page *page);
-    /// Синмает дополнительную страницу с отрисовки
-    static void ResetAdditionPage();
-    /// Указатель на главную страницу
-    static Page *mainPage;
-private:
-    /// Наризовать загол
-    static int DrawTitle();
-    /// Обработать управляющее воздействие control
-    static void ProcessContorl(Control control);
-    /// Обрабатывает состояние выходов. Возвращает true, если состояние вывода изменилось
-    static bool ProcessOutputs(Control control);
-
-    static void DrawPagesUGO(int x);
-    /// Если какой-то итем раскрыт, то здесь его адрес
-    static Item *openedItem;
+    extern Item *pressedItem;
     /// Сюда помещается указатель на страницу основного меню в случае, если нужна отрисовка дополнительной страницы
-    static Page *oldPage;
-
-    static Item *currentItem;
+    extern Page *oldPage;
 };
