@@ -69,11 +69,11 @@ static bool OnKey(Control &event)
 }
 
 DEF_PAGE_4( pageLoad, //-V641 //-V1027                                                                                                                //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА ---
-    "ЗАГРУЗКА",
-    "",
+    "ВЫБОР",
+    "Страница выбора формы произвольного сигнала для загрузки с флешки",
     &bChoose,   ///< НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Установить
     0,
     0,
     0,
-    Page::Settings_Load, PageSignals::pointer, Item::FuncActive, FuncPress, OnKey, FDrive::Draw
+    Page::Settings_Load, nullptr, Item::FuncActive, FuncPress, OnKey, FDrive::Draw
 )
