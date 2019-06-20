@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #ifndef WIN32
+#include "defines.h"
 #include "Signals.h"
 #include "Display/Painter.h"
-#include "defines.h"
+#include "Menu/Pages/Include/PageSignals.h"
 #endif
 
 
@@ -114,6 +115,7 @@ static ParameterValue  param_DDSA_Frequency(ParameterValue::Frequency,  0.1F, 10
 static ParameterValue  param_DDSA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F, "10000", 1, Order::One);
 static ParameterValue  param_DDSA_Offset   (ParameterValue::Offset,     0.0F, 10.0F, "50000", 0, Order::One);
 static ParameterChoice param_DDSA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterPage   param_DDSA_Choice   (ParameterPage::ChoiceForm, (PageBase *)PageSignals::PageLoad::pointer);
 
 static ParameterBase *params_DDSA[] =
 {
@@ -121,6 +123,7 @@ static ParameterBase *params_DDSA[] =
     &param_DDSA_Amplitude,
     &param_DDSA_Offset,
     &param_DDSA_ModeStart,
+    &param_DDSA_Choice,
     0
 };
 
@@ -317,6 +320,7 @@ static ParameterValue  param_DDSB_Frequency(ParameterValue::Frequency,  0.1F, 10
 static ParameterValue  param_DDSB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  "50000", 0, Order::One);
 static ParameterValue  param_DDSB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  "50000", 0, Order::One);
 static ParameterChoice param_DDSB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterPage   param_DDSB_Choice   (ParameterPage::ChoiceForm, (PageBase *)PageSignals::PageLoad::pointer);
 
 static ParameterBase *params_DDSB[] =
 {
@@ -324,6 +328,7 @@ static ParameterBase *params_DDSB[] =
     &param_DDSB_Amplitude,
     &param_DDSB_Offset,
     &param_DDSB_ModeStart,
+    &param_DDSB_Choice,
     0
 };
 

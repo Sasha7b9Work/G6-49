@@ -496,12 +496,23 @@ pString ParameterChoice::Name() const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 pString ParameterComplex::Name() const
 {
-    static const pString namesParams[ParameterComplex::Count] =
+    static const pString names[ParameterComplex::Count] =
     {
-        "Ìàíèïóëÿöèÿ"
+        "ÌÀÍÈÏÓËßÖÈß"
     };
 
-    return namesParams[value];
+    return names[value];
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pString ParameterPage::Name() const
+{
+    static const pString names[ParameterPage::Count] =
+    {
+        "ÂÛÁÎÐ"
+    };
+
+    return names[value];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -518,6 +529,10 @@ pString ParameterBase::Name() const
     else if(IsComplex())
     {
         return ((ParameterComplex *)this)->Name();
+    }
+    else if(IsPage())
+    {
+        return ((ParameterPage *)this)->Name();
     }
     else
     {

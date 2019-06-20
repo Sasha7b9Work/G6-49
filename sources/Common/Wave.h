@@ -139,7 +139,7 @@ public:
 
     enum E
     {
-        Manipulation,       ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ / ÏÀÐÀÌÅÒÐ / ÌÀÍÈÏÓËßÖÈß íà ôîðìå ÑÈÍÓÑ
+        Manipulation,       ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ / Ïàðàìåòð / ÌÀÍÈÏÓËßÖÈß íà ôîðìå ÑÈÍÓÑ
         Count
     } value;
 
@@ -167,10 +167,15 @@ public:
 
     enum E
     {
-        ChoiceForm,
+        ChoiceForm,         ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ / Ïàðàìåòð / ÂÛÁÎÐ íà ôîðìå ÏÐÎÈÇÂÎËÜÍÛÉ
         Count
-    };
+    } value;
 
+    ParameterPage(E v, PageBase *p) : ParameterBase(Page), value(v), page(p) {};
+
+    pString Name() const;
+
+private:
     PageBase *page;
 };
 
