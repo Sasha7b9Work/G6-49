@@ -137,17 +137,17 @@ void Handlers::SendData(SimpleMessage *)
 {
     CPU::SetBusy();
 
-    if (Interface::GetMessages().Size() != 0)
+    if (Interface::GetOutbox().Size() != 0)
     {
         Timer::PauseOnTime(2);
 
         CPU::SetReady();
 
-        Transceiver::Transmit(Interface::GetMessages().Front());
+        Transceiver::Transmit(Interface::GetOutbox().Front());
 
         CPU::SetBusy();
 
-        Interface::GetMessages().Pop();
+        Interface::GetOutbox().Pop();
     }
     else
     {

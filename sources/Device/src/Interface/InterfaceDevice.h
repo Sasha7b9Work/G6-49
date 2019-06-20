@@ -8,8 +8,8 @@
 namespace Interface
 {
     void Update();
-
-    Queue &GetMessages();
+    /// Возвращает ссылку на очередь сообщений, ожидающих отправки
+    Queue &GetOutbox();
 
     void ResetFreqForSend();
 };
