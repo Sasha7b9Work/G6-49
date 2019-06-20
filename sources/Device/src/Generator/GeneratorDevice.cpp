@@ -31,7 +31,7 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 {
     if(!FPGA::Start())
     {
-        static const GeneratorWritePin pin[Chan::Number] = { GeneratorWritePin::Pin_P3_OutA, GeneratorWritePin::Pin_P4_OutB };
+        static const GeneratorWritePin pin[Chan::Count] = { GeneratorWritePin::Pin_P3_OutA, GeneratorWritePin::Pin_P4_OutB };
 
         CPU::WritePin(pin[ch], !enable);
     }
@@ -41,7 +41,7 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
-    if(ch < Chan::Number && form < Form::Number)
+    if(ch < Chan::Count && form < Form::Number)
     {
         waveIsSine = (form == Form::Sine);
 

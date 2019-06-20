@@ -30,9 +30,9 @@ void CalibrationSettings::Load()
     *this = defSet;                     // Сначала заполняем значениями по умолчанию - вдруг сохранённых настроек нету
     EEPROM::LoadSettings(this);
 
-    for (int ch = 0; ch < Chan::Number; ch++)
+    for (int ch = 0; ch < Chan::Count; ch++)
     {
-        for (int k = 0; k < KoeffCal::Number; k++)
+        for (int k = 0; k < KoeffCal::Count; k++)
         {
             Message::Calibrate((uint8)ch, (uint8)k).Transmit();
         }

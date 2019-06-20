@@ -73,11 +73,11 @@ namespace FPGA
     /// Установить биты, соответствующие режиму запуска
     uint16 SetBitsStartMode(uint16 data);
     /// Режим запуска
-    StartMode startMode[Chan::Number] = { StartMode::Auto, StartMode::Auto };
+    StartMode startMode[Chan::Count] = { StartMode::Auto, StartMode::Auto };
 
-    float amplitude[Chan::Number] = { 10.0f, 10.0f };
+    float amplitude[Chan::Count] = { 10.0f, 10.0f };
 
-    float offset[Chan::Number] = { 5.0f, 5.0f };
+    float offset[Chan::Count] = { 5.0f, 5.0f };
     /// Здесь хранятся записанные в регистры значения
     uint64 registers[RG::Number] = { 0 };
 }
@@ -88,14 +88,14 @@ namespace FPGA
 #define MIN_VALUE (0)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-FPGA::ModeWork::E       FPGA::modeWork[Chan::Number] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+FPGA::ModeWork::E       FPGA::modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
 FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
 ParamValue              FPGA::PacketImpulse::periodImpulse((uint64)0);
 ParamValue              FPGA::PacketImpulse::durationImpulse((uint64)0);
 
 /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
 /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
-static uint8 dataDDS[Chan::Number][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
+static uint8 dataDDS[Chan::Count][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,7 +155,7 @@ void FPGA::WriteMaxAmplitude(Chan::E ch)
 
     uint64 data = ((uint64)(16383) << 14) + (8191);
 
-    static const RG::E regs[Chan::Number] = { RG::_3_RectA, RG::_4_RectB };
+    static const RG::E regs[Chan::Count] = { RG::_3_RectA, RG::_4_RectB };
 
     WriteRegister(regs[ch], data);
 }
@@ -217,7 +217,7 @@ void FPGA::SetPolarity(Chan::E ch, uint8 polarity)
         data = (16383 << 14) + 8191;        // Отрицательная полярность
     }
 
-    static const RG::E regs[Chan::Number] = {RG::_3_RectA, RG::_4_RectB};
+    static const RG::E regs[Chan::Count] = {RG::_3_RectA, RG::_4_RectB};
 
     WriteRegister(regs[ch], data);
 }

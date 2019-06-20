@@ -14,7 +14,7 @@ struct Chan
     {
         A,
         B,
-        Number
+        Count
     } value;
     explicit Chan(E v) : value(v) {};
     bool IsA() const { return value == A; };
@@ -90,7 +90,7 @@ struct KoeffCal
         DDS_MIN,            ///< Код, соответствующий уровню -5В DDS
         DDS_OFFSET,         ///< Код, соотвествующий нулевому уровню смещения DDS
         FREQ_LEVEL_TRIG,    ///< Калибровочный коэффициент уровня синхронизации частотомера
-        Number
+        Count
     } value;
 };
 

@@ -48,19 +48,22 @@ public:
         Value,
         Exit,
         Choice,
-        Complex
+        Complex,
+        Page
     };
 
     /// Возвращает указатель на форму, параметром которой является
-    Form *GetForm() { return form; };
+    Form *GetForm() { return form; }
     /// Возвращает адрес родительского параметра
-    ParameterBase *GetParent() { return parent; };
+    ParameterBase *GetParent() { return parent; }
 
     bool IsValue() const { return type == Value; }
 
     bool IsChoice() const { return type == Choice; }
     
-    bool IsComplex() const { return type == Complex; };
+    bool IsComplex() const { return type == Complex; }
+
+    bool IsPage() const { return type == Page; }
 
     bool IsExit() const;
 
@@ -135,8 +138,8 @@ public:
 
     enum E
     {
-        Manipulation,
-        Number
+        Manipulation,       ///< НАСТРОЙКИ СИГНАЛОВ / ПАРАМЕТР / МАНИПУЛЯЦИЯ на форме СИНУС
+        Count
     } value;
 
     ParameterComplex(E v, ParameterBase **param);
@@ -152,6 +155,20 @@ private:
     ParameterBase **params;
     /// Число дополнительных параметров. 0, если таковых не имеется
     int numParams;
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class ParameterPage : public ParameterBase
+{
+    friend class Form;
+public:
+
+    enum E
+    {
+        ChoiceForm,
+        Count
+    };
 };
 
 

@@ -162,7 +162,7 @@ void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::Reset(Chan::E ch)
 {
-    static const GeneratorWritePin pinRS[Chan::Number] = {GeneratorWritePin::AD5697_D_RSA, GeneratorWritePin::AD5697_D_RSB};
+    static const GeneratorWritePin pinRS[Chan::Count] = {GeneratorWritePin::AD5697_D_RSA, GeneratorWritePin::AD5697_D_RSB};
 
     CPU::WritePin(PinLDAC(ch), true);
     CPU::WritePin(pinRS[ch], true);
@@ -173,7 +173,7 @@ void AD5697::Reset(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 GeneratorWritePin AD5697::PinLDAC(Chan::E ch)
 {
-    static const GeneratorWritePin pinLDAC[Chan::Number] = {GeneratorWritePin::AD5697_Offset, GeneratorWritePin::AD5697_Freq};
+    static const GeneratorWritePin pinLDAC[Chan::Count] = {GeneratorWritePin::AD5697_Offset, GeneratorWritePin::AD5697_Freq};
 
     return pinLDAC[ch];
 }

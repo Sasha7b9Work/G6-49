@@ -15,4 +15,4 @@
 #define PARAM_CURRENT                   (PARAM(FORM_CURRENT))
 #define PARAM_CURRENT_IS_MANIPULATION   (((ParameterValue *)CurrentParameter())->Is(ParameterValue::Manipulation))
 
-extern Wave waves[Chan::Number];
+extern Wave waves[Chan::Count];

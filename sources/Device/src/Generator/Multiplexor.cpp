@@ -18,7 +18,7 @@
 #define PIN_MX2_A0  GPIO_PIN_2
 
 
-Form::E FPGA::Multiplexor::mode[Chan::Number] = {Form::Sine, Form::Sine};
+Form::E FPGA::Multiplexor::mode[Chan::Count] = {Form::Sine, Form::Sine};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ void FPGA::Multiplexor::SetMode(Chan::E ch, Form::E form)
 
 #define PIN_MX(ch) pins[ch]
 
-    static const uint16 pins[Chan::Number] =
+    static const uint16 pins[Chan::Count] =
     {
         PIN_MX1_A0,
         PIN_MX2_A0

@@ -202,7 +202,7 @@ void EEPROM::Signal::Save(Chan::E ch, uint16 data[Generator::DDS_NUM_POINTS])
     uint sizeData = FPGA::NUM_POINTS * sizeof(data[0]);
 
     EraseSector(SECTOR_TEMP_10);                                                        // ќбнул€ем сектор дл€ временных данных дл€ временного сохранени€ тех данных, которые не нужно перезаписывать
-    WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Number);  // —охран€ем существующие данные //-V566
+    WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Count);  // —охран€ем существующие данные //-V566
     EraseSector(SECTOR_SIGNAL_FPGA_11);                                                 // —тираем сектор дл€ хранени€ данных
     WriteData(AddressForData(ch), data, sizeData);                                      // «аписываем данные канала
 
@@ -248,7 +248,7 @@ void EEPROM::Init()
 {
     uint *data = (uint *)SECTOR_SIGNAL_FPGA_11; //-V566
 
-    for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Number); i++)
+    for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
         if (data[i] != (uint)(-1))
         {
@@ -262,7 +262,7 @@ void EEPROM::Init()
 
     float value = 0.0f;
 
-    for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Number); i++)
+    for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
         WriteData((uint)address, &value, 4);
     }

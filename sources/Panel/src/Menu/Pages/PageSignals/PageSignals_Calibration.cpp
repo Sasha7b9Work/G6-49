@@ -87,7 +87,7 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
 #define MAX_VALUE   (((uint64)(8191) << 14) + 8191)
 #define WORK_VALUE  (((uint64)(16383) << 14) + 8191)
 
-    static const Register::E registers[Chan::Number] =
+    static const Register::E registers[Chan::Count] =
     {
         Register::FPGA_RG3_RectA, Register::FPGA_RG4_RectB
     };

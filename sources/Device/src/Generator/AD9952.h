@@ -20,7 +20,7 @@ namespace AD9952
     namespace Manipulation
     {
         /// True означает, что манипул€ци€ включена
-        extern bool enabled[Chan::Number];
+        extern bool enabled[Chan::Count];
         struct Type
         {
             enum E
@@ -29,7 +29,7 @@ namespace AD9952
                 FPGA    ///< ћанипул€ци€ пр€моугольными импульсами
             } value;
         };
-        extern Type::E type[Chan::Number];
+        extern Type::E type[Chan::Count];
         /// ”становить/отменить модулирование синусоиды сигналом "пилы"
         void SetEnabled(Chan::E ch, bool enable);
         inline bool IsEnabled(Chan::E ch) { return enabled[ch]; };

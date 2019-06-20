@@ -310,7 +310,7 @@ void Handlers::SetKoeffCalibration(SimpleMessage *msg)
 {
     Chan::E ch = (Chan::E)msg->TakeByte();
 
-    static int16 * const values[KoeffCal::Number] =
+    static int16 * const values[KoeffCal::Count] =
     {
         &CAL_AD9952_OFFSET_NEG(Chan::A),
         &CAL_AD9952_OFFSET_ZERO(Chan::A),

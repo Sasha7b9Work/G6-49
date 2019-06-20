@@ -79,8 +79,8 @@ public:
     FreqMeasure::E              freq_measure;                               ///< –ежим измерени€ частотомера
     int16                       freq_level;                                 ///< ”ровень синхронизации
     int16                       freq_hysteresis;                            ///< ¬еличина гистерезиса
-    bool                        sine_ManipulationEnabled[Chan::Number];     ///< true, если включена модул€ци€ синусоиды пилой
-    uint8                       sine_ManipulationMode[Chan::Number];
+    bool                        sine_ManipulationEnabled[Chan::Count];     ///< true, если включена модул€ци€ синусоиды пилой
+    uint8                       sine_ManipulationMode[Chan::Count];
 
 #define FLAG_1      set.flag1
     uint            flag1;

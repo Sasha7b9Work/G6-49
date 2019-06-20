@@ -36,13 +36,13 @@ struct CalibrationSettings
         struct
         {
             const   uint marker;                                ///< По этому значению загрузчик настроек определяет, что они есть
-            int16   cal_AD9952_Offset_Negative[Chan::Number];   ///< Калибровочный коэффициент AD9952 на -5В
-            int16   cal_AD9952_Offset_Zero[Chan::Number];       ///< Калибровочный коэффициент AD9952 на 0В
-            int16   cal_AD9952_Offset_Positive[Chan::Number];   ///< Калибровочный коэффициент AD9952 на +5В
-            int16   cal_AD9952_Amplitude[Chan::Number];         ///< Калибровочный коэффициент AD9952 размаха
-            int16   cal_DDS_MAX[Chan::Number];
-            int16   cal_DDS_MIN[Chan::Number];
-            int16   cal_DDS_Offset[Chan::Number];
+            int16   cal_AD9952_Offset_Negative[Chan::Count];   ///< Калибровочный коэффициент AD9952 на -5В
+            int16   cal_AD9952_Offset_Zero[Chan::Count];       ///< Калибровочный коэффициент AD9952 на 0В
+            int16   cal_AD9952_Offset_Positive[Chan::Count];   ///< Калибровочный коэффициент AD9952 на +5В
+            int16   cal_AD9952_Amplitude[Chan::Count];         ///< Калибровочный коэффициент AD9952 размаха
+            int16   cal_DDS_MAX[Chan::Count];
+            int16   cal_DDS_MIN[Chan::Count];
+            int16   cal_DDS_Offset[Chan::Count];
             int16   cal_FREQ_Level_Trig;                        ///< Калибровочный коэффициенрт уровня синхронизации
             uint8   nu[2];
         };

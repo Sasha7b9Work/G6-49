@@ -98,7 +98,7 @@ namespace FPGA
 
     extern ClockFrequency::E clock;
     /// Режим работы ПЛИС
-    extern ModeWork::E modeWork[Chan::Number];
+    extern ModeWork::E modeWork[Chan::Count];
 
     inline ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
     /// Возвращает указатель на точки сигнала, загружаемого из флешки
@@ -125,6 +125,6 @@ namespace FPGA
 
         void WriteRegister(Register::E reg, uint value);
 
-        extern Form::E mode[Chan::Number];
+        extern Form::E mode[Chan::Count];
     };
 };

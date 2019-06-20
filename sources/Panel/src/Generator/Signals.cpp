@@ -26,7 +26,7 @@ static void DrawRectangleImpulse(int x, int y)
 }
 
 static ParameterChoice param_SineModulationA_Manipulation        (ParameterChoice::ManipulationEnabled, DISABLED_RU, ENABLED_RU);
-static ParameterChoice param_SineModulationA_ManipulationMode    (ParameterChoice::ManipulationMode, "", "", DrawRawImpulse, DrawRectangleImpulse);
+static ParameterChoice param_SineModulationA_ManipulationMode    (ParameterChoice::ManipulationMode,    "", "", DrawRawImpulse, DrawRectangleImpulse);
 static ParameterValue  param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  "5000", 0, Order::Milli);
 static ParameterValue  param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  "2500", 1, Order::Milli);
 static ParameterValue  param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
@@ -210,7 +210,7 @@ static Form formPacketImpulseA(Form::PacketImpuls, params_PacketA, &waves[Chan::
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-extern Wave waves[Chan::Number];
+extern Wave waves[Chan::Count];
 
 static Form *formsA[] =
 {
@@ -368,7 +368,7 @@ static Form formImpulseB(Form::Impulse, params_ImpulseB, &waves[Chan::B]);
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-extern Wave waves[Chan::Number];
+extern Wave waves[Chan::Count];
 
 static Form *formsB[] =
 {
@@ -384,7 +384,7 @@ static Form *formsB[] =
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Wave waves[Chan::Number] =
+Wave waves[Chan::Count] =
 {
     Wave(Chan::A, formsA),
     Wave(Chan::B, formsB)
