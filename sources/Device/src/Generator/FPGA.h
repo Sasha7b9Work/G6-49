@@ -89,7 +89,7 @@ namespace FPGA
             _9_FreqMeter,
             _10_Offset,
             _11_Start,
-            Number
+            Count
         } value;
         explicit RG(E v) : value(v) { };
     };

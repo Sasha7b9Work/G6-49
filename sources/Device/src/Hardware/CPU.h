@@ -46,7 +46,7 @@ struct GeneratorWritePin
         D6,
         D7,
         FPGA_WR_DATA,
-        Number
+        Count
     } value;
     GeneratorWritePin(E v) : value(v) {};
     operator uint8() const { return (uint8)value; };

@@ -79,7 +79,7 @@ namespace FPGA
 
     float offset[Chan::Count] = { 5.0f, 5.0f };
     /// «десь хран€тс€ записанные в регистры значени€
-    uint64 registers[RG::Number] = { 0 };
+    uint64 registers[RG::Count] = { 0 };
 }
 
 
@@ -518,7 +518,7 @@ void FPGA::WriteByte(uint8 byte)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteRegister(RG::E reg, uint64 value)
 {
-    static const int numBits[RG::Number] =
+    static const int numBits[RG::Count] =
     {
         16, // _0_Control,
         40, // _1_Freq,

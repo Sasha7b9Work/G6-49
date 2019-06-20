@@ -33,7 +33,7 @@ struct StructPort
     uint16        pin;
 };
 
-static const StructPort registers[GeneratorWritePin::Number] =
+static const StructPort registers[GeneratorWritePin::Count] =
 {
     {GPIOF, GPIO_PIN_6},    // AD9952_SPI3_CSA
     {GPIOF, GPIO_PIN_7},    // AD9952_SPI3_CSB
@@ -177,7 +177,7 @@ void CPU::InitPins()
         0
     };
 
-    for (int i = 0; i < GeneratorWritePin::Number; ++i)
+    for (int i = 0; i < GeneratorWritePin::Count; ++i)
     {
         isGPIO.Pin = registers[i].pin;
         HAL_GPIO_Init(registers[i].port, &isGPIO);
