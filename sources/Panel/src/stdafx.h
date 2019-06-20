@@ -39,7 +39,8 @@
 
 #include "Menu/Menu.h"
 #include "Menu/Hint.h"
-#include "Menu/Pages/AddPageInput.h"
+#include "Menu/Pages/Addition/PageInput.h"
+#include "Menu/Pages/Addition/PageLoadForm.h"
 #include "Menu/Pages/PageDebug.h"
 #include "Menu/Pages/PageFrequencyCounter.h"
 #include "Menu/Pages/PageService.h"

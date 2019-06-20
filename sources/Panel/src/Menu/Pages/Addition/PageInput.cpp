@@ -8,7 +8,7 @@
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
-#include "AddPageInput.h"
+#include "PageInput.h"
 #endif
 
 
@@ -91,7 +91,7 @@ static bool OnControl(KeyEvent &key)
     return false;
 }
 
-Page *AddPageInput::pointer = (Page *)&pInput;
+Page *PageInput::pointer = (Page *)&pInput;
 
 DEF_PAGE_SB( pInput, //-V641 //-V1027
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß",

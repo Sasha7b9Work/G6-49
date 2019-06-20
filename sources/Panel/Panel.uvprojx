@@ -2052,16 +2052,6 @@
           <GroupName>Menu/Pages</GroupName>
           <Files>
             <File>
-              <FileName>AddPageInput.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\AddPageInput.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>AddPageInput.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\AddPageInput.h</FilePath>
-            </File>
-            <File>
               <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug.cpp</FilePath>
@@ -2104,6 +2094,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Menu/Pages/Addition</GroupName>
+          <Files>
+            <File>
+              <FileName>PageInput.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\Addition\PageInput.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageInput.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\Addition\PageInput.h</FilePath>
+            </File>
+            <File>
+              <FileName>PageLoadForm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\Addition\PageLoadForm.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Menu/Pages/PageSignals</GroupName>
           <Files>
             <File>
@@ -2125,11 +2135,6 @@
               <FileName>PageSignals_CalibrationB.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_CalibrationB.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSignals_Load.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_Load.cpp</FilePath>
             </File>
           </Files>
         </Group>

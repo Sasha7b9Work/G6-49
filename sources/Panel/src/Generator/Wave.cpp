@@ -12,7 +12,7 @@
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/AddPageInput.h"
+#include "Menu/Pages/Addition/PageInput.h"
 #include <cstdio>
 #include <cstdlib>
 #endif
@@ -588,7 +588,7 @@ void Form::ChangeParameter()
     else if(param->IsValue() && ((ParameterValue *)param)->IsInputValue())
     {
         InputWindow::Init();
-        Menu::SetAdditionPage((Page *)AddPageInput::pointer);
+        Menu::SetAdditionPage((Page *)PageInput::pointer);
     }
     else if (param->IsExit())
     {

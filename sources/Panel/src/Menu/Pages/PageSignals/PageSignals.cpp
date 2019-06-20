@@ -3,7 +3,7 @@
 #include "Display/InputWindow.h"
 #include "Settings/Settings.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/AddPageInput.h"
+#include "Menu/Pages/Addition/PageInput.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Generator/Signals.h"
 #include "Generator/GeneratorPanel.h"

@@ -13,7 +13,7 @@
 #include "Menu/Pages/PageFrequencyCounter.h"
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/PageDebug.h"
-#include "Menu/Pages/AddPageInput.h"
+#include "Menu/Pages/Addition/PageInput.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
 #endif

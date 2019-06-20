@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/Addition/PageLoadForm.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Display/Painter.h"
 #include "FDrive/FDrivePanel.h"
@@ -11,7 +12,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern const PageBase pageLoad;
-Page *PageSignals::PageLoad::pointer = (Page *)&pageLoad;
+Page *PageLoadForm::pointer = (Page *)&pageLoad;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DEF_BUTTON( bUp,                                                                                                                              //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬‚Âı ---
