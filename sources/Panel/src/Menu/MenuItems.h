@@ -34,6 +34,7 @@ typedef bool (*pFuncBKey)(Control);
 
 class PageBase;
 class Page;
+class Form;
 
    
 class Item
