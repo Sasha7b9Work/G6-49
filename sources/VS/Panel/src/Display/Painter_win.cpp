@@ -215,29 +215,15 @@ static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, cons
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Frame::OnDown(wxCommandEvent & /*event*/)
+void Frame::OnDown(wxCommandEvent &event)
 {
-    /*
-    Key::E key = (Key::E)event.GetId();
-
-    std::cout << "down " << Key(key).Name() << std::endl;
     event.Skip();
-
-    Menu::ButtonEvent(KeyEvent(key, TypePress::Press));
-    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Frame::OnUp(wxCommandEvent & /*event*/)
+void Frame::OnUp(wxCommandEvent &event)
 {
-    /*
-    Key::E key = (Key::E)event.GetId();
-
-    std::cout << "up   " << Key(key).Name() << std::endl;
     event.Skip();
-
-    Menu::ButtonEvent(KeyEvent(key, TypePress::Release));
-    */
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

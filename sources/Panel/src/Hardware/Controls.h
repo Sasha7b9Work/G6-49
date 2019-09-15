@@ -27,11 +27,11 @@ struct KeyEvent
         Esc       = 0x11,
         Left      = 0x12,
         Right     = 0x13,
-        On1       = 0x15,
-        On2       = 0x16,
-        RegLeft   = 0x17,
-        RegRight  = 0x18,
-        RegButton = 0x19
+        On1       = 0x14,
+        On2       = 0x15,
+        RegLeft   = 0x16,
+        RegRight  = 0x17,
+        RegButton = 0x18
     } value;
 
     struct Action

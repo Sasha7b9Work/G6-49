@@ -57,7 +57,6 @@ pString KeyEvent::Name() const
         "F2",
         "F3",
         "F4",
-        "F5",
         "0",
         "1",
         "2",
@@ -71,17 +70,13 @@ pString KeyEvent::Name() const
         ".",
         "-",
         "Esc",
-        "left",
-        "right",
-        "Ch",
-        "WF",
-        "M",
-        "U",
-        "ON1",
-        "ON2",
-        "Reg Left",
-        "Reg right",
-        "Reg кнопка"
+        "Left",
+        "Right",
+        "On1",
+        "On2",
+        "RegLeft",
+        "RegRight",
+        "RegButton"
     };
 
     return names[value];
