@@ -4,8 +4,8 @@ project (G6-49)
 
 include_directories(src
                     ../../Panel/src
-                    ../../Panel/src/libs/HAL/
-                    ../../Panel/src/Hardware/
+                    ../../Panel/src/libs/HAL
+                    ../../Panel/src/Hardware
                     ../../common
                     ../../common/_VS_GUI
                     ../../common/_VS_GUI/CMSIS
@@ -13,9 +13,9 @@ include_directories(src
                     ../../Panel/src/libs/HAL
                     ../../ThirdParty/wxWidgets/include
                     ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud
-                    ../../ThirdParty/SDL2/SDL2-2.0.9/include)
+                    ../../ThirdParty/SDL2/SDL2-2.0.10/include)
 
-add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2)
+add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2 -DPANEL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
@@ -87,19 +87,20 @@ source_group(Interface                FILES              ../../Panel/src/Interfa
                                                          ../../Panel/src/Interface/InterfacePanel.cpp
                                                          ../../Panel/src/Interface/InterfacePanel.h
                                                                      src/Interface/Transceiver_429_win.cpp)
-source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*.*)
-source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*.*)
-source_group(FrequencyMeter           REGULAR_EXPRESSION ../Panel/src/FrequencyMeter/*.*)
-source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*.*)
-source_group(libs\\CMSIS              REGULAR_EXPRESSION ../Panel/src/libs/CMSIS/*.*)
-source_group(libs\\HAL                REGULAR_EXPRESSION ../Panel/src/libs/HAL/*.*)
-source_group(Menu                     REGULAR_EXPRESSION ../Panel/src/Menu/*.*)
-source_group(Menu\\Pages              REGULAR_EXPRESSION ../Panel/src/Menu/Pages/*.*)
-source_group(Menu\\Pages\\Include     REGULAR_EXPRESSION ../Panel/src/Menu/Pages/Include/*.*)
-source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION ../Panel/src/Menu/Pages/PageSignals/*.*)
-source_group(SCPI                     REGULAR_EXPRESSION ../Panel/src/SCPI/*.*)
-source_group(Settings                 REGULAR_EXPRESSION ../Panel/src/Settings/*.*)
-source_group(Utils                    REGULAR_EXPRESSION ../Panel/src/Utils/*.*)
+source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*)
+source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*)
+source_group(FrequencyMeter           REGULAR_EXPRESSION ../Panel/src/FrequencyMeter/*)
+source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*)
+source_group(libs\\CMSIS              REGULAR_EXPRESSION ../Panel/src/libs/CMSIS/*)
+source_group(libs\\HAL                REGULAR_EXPRESSION ../Panel/src/libs/HAL/*)
+source_group(Menu                     REGULAR_EXPRESSION ../Panel/src/Menu/*)
+source_group(Menu\\Pages              REGULAR_EXPRESSION ../Panel/src/Menu/Pages/*)
+source_group(Menu\\Pages\\Addition    REGULAR_EXPRESSION ../Panel/src/Menu/Pages/Addition/*)
+source_group(Menu\\Pages\\Include     REGULAR_EXPRESSION ../Panel/src/Menu/Pages/Include/*)
+source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION ../Panel/src/Menu/Pages/PageSignals/*)
+source_group(SCPI                     REGULAR_EXPRESSION ../Panel/src/SCPI/*)
+source_group(Settings                 REGULAR_EXPRESSION ../Panel/src/Settings/*)
+source_group(Utils                    REGULAR_EXPRESSION ../Panel/src/Utils/*)
 
 file(GLOB SOURCES   ../../common/Command.cpp
                     ../../common/Command.h
@@ -167,6 +168,7 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../Panel/src/libs/HAL/*
                     ../../Panel/src/Menu/*
                     ../../Panel/src/Menu/Pages/*
+                    ../../Panel/src/Menu/Pages/Addition/*
                     ../../Panel/src/Menu/Pages/Include/*
                     ../../Panel/src/Menu/Pages/PageSignals/*
                     ../../Panel/src/SCPI/*
@@ -176,11 +178,11 @@ file(GLOB SOURCES   ../../common/Command.cpp
 
 add_executable(G6-49 ${SOURCES})
 
-target_link_libraries(G6-49 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxbase31ud.lib")
-target_link_libraries(G6-49 "..\\..\\..\\ThirdParty\\wxWidgets\\generated\\lib\\vc_dll\\wxmsw31ud_core.lib")
-
-target_link_libraries(G6-49 "..\\..\\..\\ThirdParty\\SDL2\\SDL2-2.0.9\\generated\\Debug\\SDL2-staticd.lib")
+target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
+target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(G6-49 ../../../ThirdParty/SDL2/SDL2-2.0.10/generated/Debug/SDL2-staticd)
 
 target_link_libraries(G6-49 WinMM.lib)
 target_link_libraries(G6-49 version.lib)
 target_link_libraries(G6-49 Imm32.Lib)
+target_link_libraries(G6-49 Setupapi.lib)
