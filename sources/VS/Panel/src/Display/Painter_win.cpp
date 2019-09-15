@@ -24,6 +24,8 @@
 
 #pragma warning(pop)
 
+#include "Hardware/CPU.h"
+
 #undef uint   
 #undef int8   
 #undef uint8  
@@ -44,6 +46,8 @@
 SDL_Renderer *renderer = nullptr;
 static SDL_Window *window = nullptr;
 static SDL_Texture *texture = nullptr;
+
+static wxButton *buttons[KeyEvent::Count];
 
 /// Здесь хранятся указатели на кнопки
 //static wxButton *buttons[Key::Number] = { nullptr };
@@ -211,19 +215,7 @@ static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, cons
     button->Connect((wxWindowID)key, wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnDown));
     button->Connect((wxWindowID)key, wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnUp));
 
-//    buttons[key] = button;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Frame::OnDown(wxCommandEvent &event)
-{
-    event.Skip();
-}
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Frame::OnUp(wxCommandEvent &event)
-{
-    event.Skip();
+    buttons[key] = button;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -294,3 +286,5 @@ void Painter::LoadPalette()
 {
 
 }
+
+#include "Hardware/CPU_Keyboard_win.h"
