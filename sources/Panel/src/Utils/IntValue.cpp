@@ -39,7 +39,7 @@ void IntValue::Sub5(char *bufferOut, int *_posComma)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int IntValue::ToWhole(char *buffer)
+int IntValue::ToWhole(const char *buffer)
 {
     int numDigits = (int)std::strlen(buffer);
 
@@ -57,7 +57,7 @@ int IntValue::ToWhole(char *buffer)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int IntValue::ToFract1000(char *buffer)
+int IntValue::ToFract1000(const char *buffer)
 {
     int pow = 1000;
 

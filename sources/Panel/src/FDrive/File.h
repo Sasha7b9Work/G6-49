@@ -27,5 +27,5 @@ public:
 struct FileRequests
 {
     /// —читать строку из файла
-    static void SendRequestForString(String *name, int numString);
+    static void SendRequestForString(const String *name, int numString);
 };

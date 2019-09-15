@@ -29,7 +29,7 @@ namespace Generator
     /// Загружает форму произвольного сигнала
     static void LoadFormDDS(Form *form);
     /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-    static void TransformDataToCodeAndTransmit(float data[DDS_NUM_POINTS], Form *form);
+    static void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
 }
 
 
@@ -64,7 +64,7 @@ void Generator::Reset()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::SetFormWave(Wave *w)
+void Generator::SetFormWave(const Wave *w)
 {
     Chan::E ch = w->GetChannel();
     uint8 form = (uint8)FORM(ch)->value;
@@ -144,7 +144,7 @@ void Generator::LoadFormDDS(Form *form)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Generator::TransformDataToCodeAndTransmit(float d[DDS_NUM_POINTS], Form *form)
+void Generator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Form *form)
 {
     uint16 buffer[DDS_NUM_POINTS];
 

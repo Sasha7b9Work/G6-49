@@ -164,7 +164,7 @@ void Choice::Draw(bool opened, int x, int y)
         GetTitle().Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Painter::SetColor(Color::BACK);
-        if (step == 0.0f) //-V550
+        if (step == 0.0f) //-V550 //-V2550
         {
             Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem());
         }

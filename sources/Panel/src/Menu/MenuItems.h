@@ -173,7 +173,7 @@ public:
     /// Устанавливает позицию активного пункта меню
     void SetPosActItem(int pos);
     /// Возвращает адрес элемента меню, соответствующего данного функциональной клавише
-    Item *GetItem(KeyEvent &key) const;
+    Item *GetItem(const KeyEvent &key) const;
     /// Возвращает позицию текущего элемента странцы page
     int8 PosCurrentItem() const;
 

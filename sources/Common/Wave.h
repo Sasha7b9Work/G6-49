@@ -26,8 +26,8 @@ struct Order
     pString Name() const;
     Order& operator++(int);
     Order& operator--(int);
-    static Order::E Min(ParameterValue *param);
-    static Order::E Max(ParameterValue *param);
+    static Order::E Min(const ParameterValue *param);
+    static Order::E Max(const ParameterValue *param);
 };
 
 

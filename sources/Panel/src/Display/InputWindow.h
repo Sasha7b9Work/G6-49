@@ -27,7 +27,7 @@ public:
 
     void RegRight();
 
-    void PressKey(KeyEvent &key);
+    void PressKey(const KeyEvent &key);
 
     void SaveValue();
 
@@ -59,7 +59,7 @@ private:
     /// «аслать текущее значение в генератор
     void SendToGenerator();
     /// ¬осстановить значение параметра, если превышение offset + amplitude
-    void SetParameterIfUnderLimit(ParameterValue &param);
+    void SetParameterIfUnderLimit(const ParameterValue &param);
 };
 
 

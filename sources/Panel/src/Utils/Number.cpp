@@ -40,7 +40,7 @@ float Number::GetValue()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint64 Number::GetInteger(char *buffer)
+uint64 Number::GetInteger(const char *buffer)
 {
     uint64 result = 0;
 
@@ -102,7 +102,7 @@ void Number::ChangeInPositiveInteger(int position, Step step)
         {
             if(AllLeftZeroInInteger(position))
             {
-                if(GetValue() == 0.0f) //-V550
+                if(GetValue() == 0.0f) //-V550 //-V2550
                 {
                     integer[pos] = 1;
                     sign = '-';

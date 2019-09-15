@@ -64,7 +64,7 @@ namespace Math
 
     void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
     /// Найти первый элемент массива, не соотвествующий заданному
-    int FindAnotherElement(uint8 *data, uint8 value, int numElements);
+    int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
 
     int DigitsInIntPart(float value);
     /// \brief Округляет число с плавающей точкой. numDigits - полное число знаков, по которым производится округление.

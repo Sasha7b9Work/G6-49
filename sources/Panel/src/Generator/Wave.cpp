@@ -988,7 +988,7 @@ float Form::GetAmplitude()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Order::E Order::Min(ParameterValue *param)
+Order::E Order::Min(const ParameterValue *param)
 {
     if (param->value == ParameterValue::Frequency)
     {
@@ -999,7 +999,7 @@ Order::E Order::Min(ParameterValue *param)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Order::E Order::Max(ParameterValue *param)
+Order::E Order::Max(const ParameterValue *param)
 {
     if (param->value == ParameterValue::Frequency)
     {

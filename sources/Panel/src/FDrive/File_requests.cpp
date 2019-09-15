@@ -25,7 +25,7 @@ static bool EqualsRequestString(Task *task1, Task *task2)
             (msg1->TakeByte() == msg2->TakeByte());
 }
 
-void FileRequests::SendRequestForString(String *name, int numString)
+void FileRequests::SendRequestForString(const String *name, int numString)
 {
     Message::FDrive::FileString message((uint)numString, name->CString());
 

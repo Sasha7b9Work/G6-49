@@ -22,9 +22,9 @@ public:
     /// Сбрасывает указатель извлечённой информации.
     void ResetPointer() { taken = 0; };
 
-    bool CreateFromMessage(SimpleMessage *message);
+    bool CreateFromMessage(const SimpleMessage *message);
     /// Создать сообщение с выделением памяти
-    bool CreateAllocate(uint8 *buffer, uint size);
+    bool CreateAllocate(const uint8 *buffer, uint size);
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
     /// Взять байт
@@ -61,7 +61,7 @@ public:
     /// Передать сообщение получателю
     void Transmit();
     /// Положить данные
-    void PutData(uint8 *data, uint length);
+    void PutData(const uint8 *data, uint length);
 protected:
     /// Положить байт
     void PutByte(uint8 data);

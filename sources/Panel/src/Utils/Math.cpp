@@ -321,7 +321,7 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-int Math::FindAnotherElement(uint8 *data, uint8 value, int numElements)
+int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
 {
     for (int i = 0; i < numElements; i++)
     {

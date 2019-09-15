@@ -97,7 +97,7 @@ void StructValue::KeyRight()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void StructValue::SetParameterIfUnderLimit(ParameterValue &_param)
+void StructValue::SetParameterIfUnderLimit(const ParameterValue &_param)
 {
     if (param->Is(ParameterValue::Offset) || param->Is(ParameterValue::Amplitude))
     {
@@ -243,7 +243,7 @@ bool StructValue::DecreaseDigit(int num)
         return false;
     }
 
-    StructValue temp = *this; //-V821
+    StructValue temp = *this; //-V821 //-V2551
 
     DIGIT(num)--;
 
@@ -446,7 +446,7 @@ void StructValue::SaveValue()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void StructValue::PressKey(KeyEvent &key)
+void StructValue::PressKey(const KeyEvent &key)
 {
     if (key.value == KeyEvent::Dot)
     {

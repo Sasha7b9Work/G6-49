@@ -54,7 +54,7 @@ void SimpleMessage::Create(uint size, uint8 v0)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SimpleMessage::CreateAllocate(uint8 *_buffer, uint _size)
+bool SimpleMessage::CreateAllocate(const uint8 *_buffer, uint _size)
 {
     if (AllocateMemory(_size))
     {
@@ -66,7 +66,7 @@ bool SimpleMessage::CreateAllocate(uint8 *_buffer, uint _size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool SimpleMessage::CreateFromMessage(SimpleMessage *message)
+bool SimpleMessage::CreateFromMessage(const SimpleMessage *message)
 {
     if (AllocateMemory(message->Size()))
     {
@@ -115,7 +115,7 @@ void SimpleMessage::PutWord(uint data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SimpleMessage::PutData(uint8 *data, uint length)
+void SimpleMessage::PutData(const uint8 *data, uint length)
 {
     std::memcpy(buffer + used, data, length);
     used += length;

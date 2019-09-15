@@ -22,7 +22,7 @@ namespace Generator
 
     void EnableChannel(Chan::E ch, bool enable);
 
-    void SetFormWave(Wave *w);
+    void SetFormWave(const Wave *w);
 
     void SetFormWave(Chan::E ch, Form::E form);
 
