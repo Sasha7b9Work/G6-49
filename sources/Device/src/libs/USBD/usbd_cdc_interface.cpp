@@ -128,7 +128,7 @@ static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length)
+static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length) //-V2009
 {
     Message::SCPI::Data(buffer, *length).Transmit();
 

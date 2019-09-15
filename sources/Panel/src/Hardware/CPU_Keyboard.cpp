@@ -259,7 +259,7 @@ KeyEvent CPU::Keyboard::GetNextControl()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void CPU::Keyboard::InitInputs(uint16 *sl, char *portSL, int numSL, uint16 *rl, char *portRL, int numRL)
+void CPU::Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL)
 {
     GPIO_InitTypeDef isGPIO;
 
@@ -306,7 +306,7 @@ void CPU::Keyboard::InitInputs(uint16 *sl, char *portSL, int numSL, uint16 *rl, 
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const char *PanelControlName(KeyEvent &control)
+const char *PanelControlName(const KeyEvent &control)
 {
     static const char *names[] =
     {

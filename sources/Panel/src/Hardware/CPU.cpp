@@ -211,7 +211,7 @@ void CPU::CRC32::Init()
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint CPU::CRC32::Calculate(void *data, uint size)
+uint CPU::CRC32::Calculate(const void *data, uint size)
 {
     uint sizeBuffer = size;
     while(sizeBuffer % 4)                           // Увеличиваем до ближайшего кратного четырём

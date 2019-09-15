@@ -35,7 +35,7 @@ public:
         /// Установка каллбэка для клавиатуры
         static void SetCallback(void(*func)());
 
-        static void InitInputs(uint16 *sl, char *portSL, int numSL, uint16 *rl, char *portRL, int numRL);
+        static void InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL);
         /// Возвращает true, если буфер пуст
         static bool BufferIsEmpty();
         /// Возвращает следующий орган управления, если таковой имеется
@@ -83,7 +83,7 @@ public:
     class CRC32
     {
     public:
-        static uint Calculate(void *address, uint size);
+        static uint Calculate(const void *address, uint size);
 
     private:
         friend class CPU;

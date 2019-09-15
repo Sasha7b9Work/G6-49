@@ -28,7 +28,7 @@ namespace FDrive
 {
     namespace FileSystem
     {
-        uint GetFileSize(char *fullPath);
+        uint GetFileSize(const char *fullPath);
         /// Получает количество каталогов и файлов в данной директории
         void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
         /// Получить имя numFile-го файла из каталога fullPath
@@ -54,7 +54,7 @@ namespace FDrive
 
     void Normalize(float d[4096]);
 
-    void FindMinMax(float d[4096], float *_min, float *_max);
+    void FindMinMax(const float d[4096], float *_min, float *_max);
 
     float FindScale(float min, float max);
 
@@ -309,7 +309,7 @@ bool FDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *na
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-uint FDrive::FileSystem::GetFileSize(char *fullPath)
+uint FDrive::FileSystem::GetFileSize(const char *fullPath)
 {
     FIL fp;
     if (f_open(&fp, fullPath, FA_READ) == FR_OK)
@@ -409,7 +409,7 @@ void FDrive::Normalize(float d[4096])
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void FDrive::FindMinMax(float d[4096], float *_min, float *_max)
+void FDrive::FindMinMax(const float d[4096], float *_min, float *_max)
 {
     float min = 0.0f;
     float max = 0.0f;

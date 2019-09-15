@@ -99,7 +99,7 @@ namespace CPU
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     namespace CRC32
     {
-        uint Calculate(uint8 *address, uint size);
+        uint Calculate(const uint8 *address, uint size);
 
         void Init();
     };
