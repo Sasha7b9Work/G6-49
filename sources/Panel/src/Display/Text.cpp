@@ -91,7 +91,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
         symbol = SU::ToUpper(symbol);
     }
 
-    int8 width = (int8)font->symbol[symbol].width;
+    int8 width = (int8)font->symbol[(uint8)symbol].width;
     int8 height = (int8)font->height;
 
     for (int b = 0; b < height; b++)
@@ -103,7 +103,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (BitInFontIsExist((uint8)symbol, b, bit))
                 {
                     Painter::SetPoint(x, y);
                 }
@@ -138,7 +138,7 @@ bool Text::ByteFontNotEmpty(int eChar, int byte)
     if (eChar != prevChar)
     {
         prevChar = eChar;
-        bytes = font->symbol[prevChar].bytes;
+        bytes = font->symbol[(uint8)prevChar].bytes;
     }
     return bytes[byte];
 }
