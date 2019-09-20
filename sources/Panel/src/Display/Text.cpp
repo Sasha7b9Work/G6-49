@@ -140,7 +140,7 @@ bool Text::ByteFontNotEmpty(int eChar, int byte)
         prevChar = eChar;
         bytes = font->symbol[(uint8)prevChar].bytes;
     }
-    return bytes[byte];
+    return bytes[byte] != 0;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

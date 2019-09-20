@@ -623,7 +623,7 @@ void ParameterChoice::NextChoice()
     {
         if(value == ManipulationEnabled)
         {
-            SINE_MANIPULATION_ENABLED(ch) = choice;
+            SINE_MANIPULATION_ENABLED(ch) = (choice != 0);
         }
         else if(value == ManipulationMode)
         {
