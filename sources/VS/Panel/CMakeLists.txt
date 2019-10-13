@@ -11,9 +11,9 @@ include_directories(src
                     ../../common/_VS_GUI/CMSIS
                     ../../common/_VS_GUI/HAL
                     ../../Panel/src/libs/HAL
-                    ../../ThirdParty/wxWidgets/include
-                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud
-                    ../../ThirdParty/SDL2/SDL2-2.0.10/include)
+                    ../../../../ThirdParty/wxWidgets/include
+                    ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud
+                    ../../../../ThirdParty/SDL2/SDL2-2.0.10/include)
 
 add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2 -DPANEL)
 
@@ -178,9 +178,9 @@ file(GLOB SOURCES   ../../common/Command.cpp
 
 add_executable(G6-49 ${SOURCES})
 
-target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
-target_link_libraries(G6-49 ../../../ThirdParty/SDL2/SDL2-2.0.10/generated/Debug/SDL2-staticd)
+target_link_libraries(G6-49 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
+target_link_libraries(G6-49 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(G6-49 ../../../../../ThirdParty/SDL2/SDL2-2.0.10/generated/Debug/SDL2-staticd)
 
 target_link_libraries(G6-49 WinMM.lib)
 target_link_libraries(G6-49 version.lib)
