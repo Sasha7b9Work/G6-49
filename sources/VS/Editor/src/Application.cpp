@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "Russian");
 
-    if (SDL_Init(SDL_INIT_EVENTS) != 0U)
+    if (SDL_Init(SDL_INIT_EVENTS) != 0U) //-V2517
     {
         std::cout << "SDL_Init Error:" << SDL_GetError() << std::endl;
     }

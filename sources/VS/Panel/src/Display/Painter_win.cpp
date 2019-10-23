@@ -92,7 +92,7 @@ void Display::Init()
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::BeginScene(Color color)
 {
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, 320, 240);
@@ -102,7 +102,7 @@ void Painter::BeginScene(Color color)
     SDL_RenderClear(renderer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::EndScene()
 {
     SDL_SetRenderTarget(renderer, NULL);
@@ -113,7 +113,7 @@ void Painter::EndScene()
     SDL_RenderPresent(renderer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void SetSizeAndPosition(Frame *frame)
 {
     wxSize size = { 680, 307 };
@@ -127,7 +127,7 @@ static void SetSizeAndPosition(Frame *frame)
     frame->SetPosition({ rect.width / 2 - size.GetWidth() / 2, rect.height / 2 - size.GetHeight() / 2 });
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static wxRect GetMaxDisplay()
 {
     wxRect result = {0, 0, 0, 0};
@@ -147,7 +147,7 @@ static wxRect GetMaxDisplay()
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static HANDLE CreateFrame()
 {
     Frame *frame = new Frame("");
@@ -170,7 +170,7 @@ static HANDLE CreateFrame()
     return button->GetHandle();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void CreateButtons(Frame *frame)
 {
     static const KeyEvent::E keys[5][5] =
@@ -202,7 +202,7 @@ static void CreateButtons(Frame *frame)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, const wxSize &size)
 {
     if (key == KeyEvent::None)
@@ -218,7 +218,7 @@ static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, cons
     buttons[key] = button;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::FillRegion(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
@@ -226,13 +226,13 @@ void Painter::FillRegion(int x, int y, int width, int height, Color color /* = C
     SDL_RenderFillRect(renderer, &rect);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::SetPoint(int x, int y)
 {
     SDL_RenderDrawPoint(renderer, x, y);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::SetColor(Color color)
 {
     if (color != Color::NUMBER)
@@ -245,7 +245,7 @@ void Painter::SetColor(Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawRectangle(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
@@ -253,35 +253,35 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color color /* 
     SDL_RenderDrawRect(renderer, &rect);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawVLine(int x, int y0, int y1, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
     SDL_RenderDrawLine(renderer, x, y0, x, y1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawHLine(int y, int x0, int x1, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
     SDL_RenderDrawLine(renderer, x0, y, x1, y);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 {
     SetColor(color);
     SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
     DrawRectangle(x, y, width, height, colorRect);
     FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::LoadPalette()
 {
 
