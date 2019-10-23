@@ -148,7 +148,7 @@ struct Register
         Count
     } value;
     explicit Register(E v) : value(v) {};
-    explicit Register(uint8 v) { Register(static_cast<E>(v)); };
+    explicit Register(uint8 v) : value(static_cast<E>(v)) {};
     pString Name() const;
     operator E() { return value; }
 };

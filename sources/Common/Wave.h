@@ -286,20 +286,30 @@ public:
         Count
     } value;
 
-    Form(E v = Count) :
-        value(v),
-        wave(0),
-		params(nullptr),
-		numParams(0),
-        currentParam(0),
-        oldParams(0),
-        oldNumParams(0),
-        oldCurrentParams(0)
-    { };
+    Form(E v = Count)
+    {
+        Init(v);
+    };
 
-    Form(uint8 v) { Form(static_cast<E>(v)); };
+    Form(uint8 v)
+    {
+        Init(static_cast<E>(v));
+    };
 
     Form(E v, ParameterBase **param, Wave *w);
+
+    void Init(E v)
+    {
+        value = v;
+        wave = 0;
+        params = nullptr;
+        numParams = 0;
+        currentParam = 0;
+        oldParams = 0;
+        oldNumParams = 0;
+        oldCurrentParams = 0;
+    };
+
     /// ¬озвращает человеческое название формы сигнала
     pString Name() const;
     /// ¬озвращает ссылку на текущий параметр

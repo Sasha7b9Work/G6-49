@@ -178,7 +178,7 @@ void Handlers::SetFormWave(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
-    Form form(msg->TakeByte());
+    Form form(msg->TakeByte()); //-V656
 
     Generator::SetFormWave(ch, form);
 }
@@ -324,7 +324,7 @@ void Handlers::SetKoeffCalibration(SimpleMessage *msg)
 
     int16 *koeff = values[msg->TakeByte()];
 
-    koeff[ch] = (int16)msg->TakeHalfWord();
+    koeff[ch] = static_cast<int16>(msg->TakeHalfWord());
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -342,19 +342,19 @@ void Handlers::WriteRegister(SimpleMessage *msg)
     switch (reg)
     {
     case Register::OffsetA:
-        AD5697::SetOffset(Chan::A, ParamValue((float)value));
+        AD5697::SetOffset(Chan::A, ParamValue(static_cast<float>(value)));
         break;
 
     case Register::OffsetB:
-        AD5697::SetOffset(Chan::B, ParamValue((float)value));
+        AD5697::SetOffset(Chan::B, ParamValue(static_cast<float>(value)));
         break;
 
     case Register::FreqMeterLevel:
-        AD5697::SetFreqLevel((float)value);
+        AD5697::SetFreqLevel(static_cast<float>(value));
         break;
 
     case Register::FreqMeterHYS:
-        AD5697::SetFreqHysteresys((float)value);
+        AD5697::SetFreqHysteresys(static_cast<float>(value));
         break;
 
     case Register::FPGA_RG0_Control:
@@ -403,15 +403,15 @@ void Handlers::WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FreqMeter_Resist:
-        FreqMeter::SetResist((FreqResist::E)value);
+        FreqMeter::SetResist(static_cast<FreqResist::E>(value));
         break;
 
     case Register::FreqMeter_Couple:
-        FreqMeter::SetCouple((FreqCouple::E)value);
+        FreqMeter::SetCouple(static_cast<FreqCouple::E>(value));
         break;
 
     case Register::FreqMeter_Filtr:
-        FreqMeter::SetFiltr((FreqFiltr::E)value);
+        FreqMeter::SetFiltr(static_cast<FreqFiltr::E>(value));
         break;
 
     case Register::Count:

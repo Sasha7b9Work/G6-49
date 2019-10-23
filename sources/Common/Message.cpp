@@ -95,7 +95,7 @@ void SimpleMessage::PutDoubleWord(uint64 data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void SimpleMessage::PutHalfWord(int16 data)
 {
-    PutHalfWord((uint16)data);
+    PutHalfWord(static_cast<uint16>(data));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ bool SimpleMessage::AllocateMemory(uint size)
         return false;
     }
 
-    buffer = (uint8 *)std::malloc(size);
+    buffer = static_cast<uint8 *>(std::malloc(size));
     if (buffer)
     {
         allocated = size;
@@ -256,7 +256,7 @@ bool SimpleMessage::IsEquals(const SimpleMessage *message) const
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 char *SimpleMessage::String(int pos)
 {
-    return (char *)&buffer[pos];
+    return reinterpret_cast<char *>(&buffer[pos]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -336,7 +336,7 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessa
     uint size = 1 +    std::strlen(directory) + 1;
     AllocateMemory(size);
     PutByte(Command::FDrive_NumDirsAndFiles);
-    std::strcpy((char *)(buffer + 1), directory);
+    std::strcpy(reinterpret_cast<char *>(buffer + 1), directory);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -347,7 +347,7 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
     AllocateMemory(size);
     PutByte(Command::FDrive_RequestFile);
     PutByte(numFile);
-    std::strcpy((char *)(buffer + 2), name);
+    std::strcpy(reinterpret_cast<char *>(buffer + 2), name);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -357,8 +357,8 @@ Message::FDrive::FileString::FileString(uint numString, char *nameFile) : Simple
     uint size = 1 +       1 +        std::strlen(nameFile) + 1;
     AllocateMemory(size);
     PutByte(Command::FDrive_RequestFileString);
-    PutByte((uint8)numString);
-    std::strcpy((char *)(buffer + 2), nameFile);
+    PutByte(static_cast<uint8>(numString));
+    std::strcpy(reinterpret_cast<char *>(buffer + 2), nameFile);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -377,7 +377,7 @@ Message::Log::Log(char *string) : SimpleMessage()
     AllocateMemory(size);
     PutByte(Command::Log);
 
-    std::strcpy((char *)(buffer + 1), string);
+    std::strcpy(reinterpret_cast<char *>(buffer + 1), string);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -429,14 +429,14 @@ Message::FDrive::LoadFromExtStorage::LoadFromExtStorage(uint8 ch, uint8 numFile,
     PutByte(Command::FDrive_LoadFromExtStorage);
     PutByte(ch);
     PutByte(numFile);
-    std::strcpy((char *)&buffer[3], directory);
+    std::strcpy(reinterpret_cast<char *>(&buffer[3]), directory);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Message::LoadFormDDS::LoadFormDDS(uint8 ch, uint16 data[Generator::DDS_NUM_POINTS]) : SimpleMessage(2 + Generator::DDS_NUM_POINTS * 2, Command::LoadFormDDS)
 {
     PutByte(ch);
-    PutData((uint8*)data, sizeof(data[0]) * Generator::DDS_NUM_POINTS);
+    PutData(reinterpret_cast<uint8*>(data), sizeof(data[0]) * Generator::DDS_NUM_POINTS);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -474,7 +474,7 @@ Message::Calibrate::Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command:
 
     PutByte(ch);
     PutByte(koeff);
-    PutHalfWord((uint16)values[koeff][ch]);
+    PutHalfWord(static_cast<uint16>(values[koeff][ch]));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
