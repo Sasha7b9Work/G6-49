@@ -77,17 +77,17 @@ static float CalculateOffset(Chan::E ch, ParamValue offset)
     float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
     float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095
 
-    if (offset.ToFloat() > 0.0f)
+    if (offset.ToFloat() > 0.0F)
     {
-        float scale = (zero - pos) / 5.0f;
+        float scale = (zero - pos) / 5.0F;
 
-        return pos + scale * (5.0f - offset.ToFloat());
+        return pos + scale * (5.0F - offset.ToFloat());
     }
-    else if(offset.ToFloat() < 0.0f)
+    else if(offset.ToFloat() < 0.0F)
     {
-        float scale = (neg - zero) / 5.0f;
+        float scale = (neg - zero) / 5.0F;
 
-        return neg - scale * (5.0f + offset.ToFloat());
+        return neg - scale * (5.0F + offset.ToFloat());
     }
     else
     {
@@ -101,12 +101,12 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
 {
     float code = CalculateOffset(ch, offset);
 
-    uint16 value = (uint16)((uint16)code << 4);
+    uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
     uint8 data[3] = {
-        (uint8)(BINARY_U8(00010000) 
+        static_cast<uint8>(BINARY_U8(00010000)
         | (ch == Chan::A ? 0x01 : 0x08)), 
-            (uint8)(value >> 8), (uint8)value};
+            static_cast<uint8>(value >> 8), static_cast<uint8>(value)};
 
     WriteParameter(BINARY_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
 }
