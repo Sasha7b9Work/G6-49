@@ -104,11 +104,11 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
     uint8 data[3] = {
-        static_cast<uint8>(BINARY_U8(00010000)
+        static_cast<uint8>(BIN_U8(00010000)
         | (ch == Chan::A ? 0x01 : 0x08)), 
             static_cast<uint8>(value >> 8), static_cast<uint8>(value)};
 
-    WriteParameter(BINARY_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
+    WriteParameter(BIN_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -118,9 +118,9 @@ void AD5697::SetFreqHysteresys(float hyst)
 
     uint16 value = (uint16)((uint16)hyst << 4);
 
-    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x08)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] = {((uint8)(BIN_U8(00010000) | 0x08)), (uint8)(value >> 8), (uint8)value};
 
-    WriteParameter(BINARY_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
+    WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -132,15 +132,15 @@ void AD5697::SetFreqLevel(float level)
 
     uint16 value = (uint16)((uint16)level << 4);
 
-    uint8 data[3] = {((uint8)(BINARY_U8(00010000) | 0x01)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] = {((uint8)(BIN_U8(00010000) | 0x01)), (uint8)(value >> 8), (uint8)value};
 
-    WriteParameter(BINARY_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
+    WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 AD5697::CreateCommandByte(ParameterValue param)
 {
-    return (uint8)(BINARY_U8(00010000) | (param.Is(ParameterValue::Amplitude) ? 0x01 : 0x08));
+    return (uint8)(BIN_U8(00010000) | (param.Is(ParameterValue::Amplitude) ? 0x01 : 0x08));
 }
 
 

@@ -20,18 +20,23 @@ inline void EmptyFuncVV() {};
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \
-  (((uint8)((uint)bits / 01)        % 010) << 0) |  \
-  (((uint8)((uint)bits / 010)       % 010) << 1) |  \
-  (((uint8)((uint)bits / 0100)      % 010) << 2) |  \
-  (((uint8)((uint)bits / 01000)     % 010) << 3) |  \
-  (((uint8)((uint)bits / 010000)    % 010) << 4) |  \
-  (((uint8)((uint)bits / 0100000)   % 010) << 5) |  \
-  (((uint8)((uint)bits / 01000000)  % 010) << 6) |  \
-  (((uint8)((uint)bits / 010000000) % 010) << 7)))
+  (((uint8)((uint)bits / 0x000001) % 0x08) << 0) |  \
+  (((uint8)((uint)bits / 0x000008) % 0x08) << 1) |  \
+  (((uint8)((uint)bits / 0x000040) % 0x08) << 2) |  \
+  (((uint8)((uint)bits / 0x000200) % 0x08) << 3) |  \
+  (((uint8)((uint)bits / 0x001000) % 0x08) << 4) |  \
+  (((uint8)((uint)bits / 0x008000) % 0x08) << 5) |  \
+  (((uint8)((uint)bits / 0x040000) % 0x08) << 6) |  \
+  (((uint8)((uint)bits / 0x200000) % 0x08) << 7)))
 
-#define BINARY_U8( bits ) _bitset(0##bits)
+#define BIN_U8(bits) (_bitset(0##bits))
 
-#define BINARY_U16(bits1, bits0) ((BINARY_U8(bits1) << 8) | (BINARY_U8(bits0)))
+#define BIN_U16(bits1, bits0) ((BIN_U8(bits1) << 8) | (BIN_U8(bits0)))
+
+#define BIN_U32(bits3, bits2, bits1, bits0) (BIN_U8(bits3) << 24 | BIN_U8(bits2) << 16 | BIN_U8(bits1) << 8 | BIN_U8(bits0))
+
+#define HEX_FROM_2(hex1, hex0) ((uint)(0x##hex1) << 16 | (uint)0x##hex0)
+
 
 #ifdef WIN32
 
