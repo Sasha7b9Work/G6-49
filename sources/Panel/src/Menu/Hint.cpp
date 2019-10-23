@@ -101,7 +101,7 @@ void Hint::Draw()
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5; //-V2007
             if (item->GetType().Is(Item::Type::Choice))
             {
-                Choice *choice = (Choice *)item;
+                const Choice *choice = static_cast<const Choice *>(item);
                 width -= 10;
 
                 if(needCalculate)
@@ -138,7 +138,7 @@ void Hint::Draw()
 }
 
 
-int Hint::DrawDetailedHint(Choice *choice, int x0, int y0, int width, int start, int end, bool calculate)
+int Hint::DrawDetailedHint(const Choice *choice, int x0, int y0, int width, int start, int end, bool calculate)
 {
     Color colorWhite = Color::WHITE;
     Color colorGreen = Color::GREEN;
@@ -163,7 +163,7 @@ int Hint::DrawDetailedHint(Choice *choice, int x0, int y0, int width, int start,
 }
 
 
-int Hint::NumPagesInHint(Choice *choice, int x, int y, int width)
+int Hint::NumPagesInHint(const Choice *choice, int x, int y, int width)
 {
     if(DrawDetailedHint(choice, x, y, width, 0, choice->NumSubItems(), true) < SCREEN_HEIGHT)
     {
@@ -174,7 +174,7 @@ int Hint::NumPagesInHint(Choice *choice, int x, int y, int width)
 }
 
 
-void Hint::Calcualte(Choice *choice, int x, int y, int width)
+void Hint::Calcualte(const Choice *choice, int x, int y, int width)
 {
     numPages = NumPagesInHint(choice, x, y, width);
     currentPage = 1;
@@ -212,7 +212,7 @@ void Hint::DrawPagesUGO(const int xRight, const int y0)
         {
             Painter::FillRegion(x, y0, size, size, Color::FILL);
             Font::SetType(Font::Type::_5);
-            Text::DrawChar(x + 2, y0 - 3, (char)(currentPage + 0x30), Color::BACK);
+            Text::DrawChar(x + 2, y0 - 3, static_cast<char>(currentPage + 0x30), Color::BACK);
             Font::SetType(Font::Type::_8);
         }
         else

@@ -84,8 +84,8 @@ bool Items::Handler::Processing(SimpleMessage *msg)
 
     if (command == Command::FDrive_NumDirsAndFiles)
     {
-        numDirs = (int)msg->TakeWord();
-        numFiles = (int)msg->TakeWord(); //-V656
+        numDirs = static_cast<int>(msg->TakeWord());
+        numFiles = static_cast<int>(msg->TakeWord()); //-V656
         requestIsSend = false;
         return true;
     }
@@ -104,7 +104,7 @@ bool Items::Handler::Processing(SimpleMessage *msg)
     else if (command == Command::FDrive_RequestFileSize)
     {
         int num = msg->TakeByte();
-        files[num].size = (int)msg->TakeWord();
+        files[num].size = static_cast<int>(msg->TakeWord());
         return true;
     }
     else
@@ -132,7 +132,7 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 
 static void SendRequestForNameFile(int number)
 {
-    Message::FDrive::FileName message((uint8)number, FDrive::CurrentDirectory());
+    Message::FDrive::FileName message(static_cast<uint8>(number), FDrive::CurrentDirectory());
     
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestNameFile);
     

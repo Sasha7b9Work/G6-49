@@ -15,11 +15,11 @@ private:
     /// \brief Отрисовывает подсказки с пояснениями
     /// start, end - начальный и конечный пункты choice для выводв
     /// calculate - если true, то отрисовка не производится - только расчёт значений
-    static int DrawDetailedHint(Choice *choice, int x, int y, int width, int start, int end, bool calculate = false);
+    static int DrawDetailedHint(const Choice *choice, int x, int y, int width, int start, int end, bool calculate = false);
     /// Возвращает число страниц в подсказке
-    static int NumPagesInHint(Choice *choice, int x, int y, int width);
+    static int NumPagesInHint(const Choice *choice, int x, int y, int width);
     /// Рассчитывает данные, необходимые для разбивки подсказки на страницы
-    static void Calcualte(Choice *choice, int x, int y, int width);
+    static void Calcualte(const Choice *choice, int x, int y, int width);
     /// Рисует УГО страниц в многостраничной подсказке
     static void DrawPagesUGO(const int xRight, const int y);
     /// Если true - нужно выводить подсказку на экран
