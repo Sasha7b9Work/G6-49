@@ -48,7 +48,7 @@ DEF_PAGE_3( mainPageMenu,
     Page::Main, 0, Item::FuncActive, FuncPress, FuncOnKey
 )
 
-Page *Menu::mainPage = (Page *)&mainPageMenu;
+Page *Menu::mainPage = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPageMenu));
 
 
 
@@ -146,7 +146,7 @@ bool Menu::RegIsControlSubPages()
 }
 
 
-int Menu::GetPosition(Page *page)
+int Menu::GetPosition(const Page *page)
 {
     Page *keeper = page->Keeper();
 

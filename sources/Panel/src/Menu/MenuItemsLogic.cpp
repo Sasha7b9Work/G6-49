@@ -491,11 +491,11 @@ int8 Choice::CurrentIndex() const
     }
     else if (type == Item::Type::ChoiceParameter)
     {
-        ChoiceParameter *param = (ChoiceParameter *)this;
+        const ChoiceParameter *param = reinterpret_cast<const ChoiceParameter *>(this);
 
         Form *form = param->form;
 
-        retValue = (int8)((ParameterValue *)form->CurrentParameter())->value;
+        retValue = static_cast<int8>(static_cast<const ParameterValue *>(form->CurrentParameter())->value);
     }
     else
     {
@@ -520,7 +520,7 @@ int Item::PositionOnPage() const
 {
     if(Keeper() == 0)                       // Если у страницы нет хранителя - она принадлежит главному меню
     {
-        return Menu::GetPosition((Page *)this);
+        return Menu::GetPosition(static_cast<const Page *>(this));
     }
 
     for(int i = 0; i < Keeper()->NumItems(); i++)
@@ -587,7 +587,7 @@ Item *Button::Press(KeyEvent::Action action)
 
 pString ChoiceParameter::NameSubItem(int number) const
 {
-    return ((ParameterValue *)(form->GetParameter(number)))->Name();
+    return static_cast<ParameterValue *>(form->GetParameter(number))->Name();
 }
 
 

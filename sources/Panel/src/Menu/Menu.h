@@ -32,7 +32,7 @@ namespace Menu
     /// Обнулить открытый итем - итем закрыт
     void ResetOpenedItem();
     /// Возвращает позицию страницы на страницы. Только если страница принадлежит главному меню. Иначе -1
-    int GetPosition(Page *page);
+    int GetPosition(const Page *page);
     /// Устанавливает для отрисовки дополнительноую страницу
     void SetAdditionPage(Page *page);
     /// Синмает дополнительную страницу с отрисовки
