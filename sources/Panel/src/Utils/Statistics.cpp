@@ -34,7 +34,7 @@ void Statistics::EndFrame()
 
     if (TIME_MS >= timeStartFrames + 1000)
     {
-        timeAllFrames = (int)timeAccumFrames;
+        timeAllFrames = static_cast<int>(timeAccumFrames);
         timeStartFrames = TIME_MS;
         timeAccumFrames = 0;
     }
@@ -47,7 +47,7 @@ void Statistics::Show()
     {
         Painter::DrawFilledRectangle(0, SCREEN_HEIGHT - 12, 60, 10, Color::BACK, Color::FILL);
         char buffer[100] = {0};
-        std::strcpy(buffer, Int2String((int)(CPU::GetFPS() + 0.5f), false, 3).CString());
+        std::strcpy(buffer, Int2String(static_cast<int>(CPU::GetFPS() + 0.5F), false, 3).CString());
         std::strcat(buffer, "/");
         std::strcat(buffer, Int2String(timeFrame, false, 3).CString());
         std::strcat(buffer, "/");

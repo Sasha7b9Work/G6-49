@@ -23,7 +23,7 @@ struct Font
             None
         } value;
         Type(E v) : value(v) {};
-        operator uint8() const { return (uint8)value; };
+        operator uint8() const { return static_cast<uint8>(value); };
     };
 
     static int GetSize();

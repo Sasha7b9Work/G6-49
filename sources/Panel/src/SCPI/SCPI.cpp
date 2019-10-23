@@ -22,7 +22,7 @@ bool SCPI::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 
-    ::Command::E command = (::Command::E)msg->TakeByte();
+    ::Command command(msg->TakeByte());
 
     if (command == ::Command::SCPI_Data)
     {

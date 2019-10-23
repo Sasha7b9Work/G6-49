@@ -12,7 +12,7 @@
 
 #endif
 
-union BitSet16
+union BitSet16 //-V2514
 {
     uint16 halfWord;
     uint8  byte[2];
@@ -32,7 +32,7 @@ union BitSet16
 };
 
 
-union BitSet32
+union BitSet32 //-V2514
 {
     uint    word;
     float   floatValue;
@@ -73,7 +73,7 @@ union BitSet32
 };
 
 
-union BitSet64
+union BitSet64 //-V2514
 {
     uint64 dword;
     uint   word[2];

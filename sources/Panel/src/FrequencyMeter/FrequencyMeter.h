@@ -27,7 +27,7 @@ namespace FrequencyMeter
             _1000ms,
             _10000ms
         } value;
-        operator uint8() const { return (uint8)value; };
+        operator uint8() const { return static_cast<uint8>(value); };
     };
 
     /// Число усредняемых период в режиме измерения периода сигнала
@@ -41,6 +41,6 @@ namespace FrequencyMeter
             _1000,
             _10000
         } value;
-        operator uint8() const { return (uint8)value; };
+        operator uint8() const { return static_cast<uint8>(value); };
     };
 };

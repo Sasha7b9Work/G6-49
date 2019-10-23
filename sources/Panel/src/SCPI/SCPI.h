@@ -35,7 +35,7 @@ namespace SCPI
         /// Возвращает байт в позиции i
         static uint8 GetByte(uint i);
 
-        static uint Size() { return (uint)used; };
+        static uint Size() { return static_cast<uint>(used); };
         /// Удалить неправльные символы из начала буфера
         static void RemoveBadSymbols();
 

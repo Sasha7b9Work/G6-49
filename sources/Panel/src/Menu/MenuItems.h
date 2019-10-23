@@ -57,8 +57,8 @@ public:
             Number
         } value;
         Type(E v) : value(v) {};
-        operator uint8() const { return (uint8)value; };
-        bool Is(E v) const     { return v == value;   };
+        operator uint8() const { return static_cast<uint8>(value); };
+        bool Is(E v) const     { return (v == value); };
     };
     /// \brief Возвращает true, если элемент меню control затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
     /// раскрывающийся элемент меню вроде Choice или Governor
@@ -85,7 +85,7 @@ public:
     /// Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
     int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
 
-    Page *Keeper() { return (Page *)keeper_; };
+    Page *Keeper() { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper_)); };
 
     bool IsActive() const { return funcOfActive(); };
 

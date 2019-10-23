@@ -44,7 +44,7 @@ struct KeyEvent
             Up
         } value;
         Action(E v = Down) : value(v) {};
-        operator uint8() const { return (uint8)value; };
+        operator uint8() const { return static_cast<uint8>(value); };
         bool Is(Action a) const { return a.value == value; };
         /// Возвращает true, если Up или Long
         bool IsRelease() const;
@@ -62,8 +62,8 @@ struct KeyEvent
         value = c.value;
         action = c.action;
     }
-    operator uint8() const { return (uint8)value; };
-    bool Is(KeyEvent::E c) { return c == value; };
+    operator uint8() const { return static_cast<uint8>(value); };
+    bool Is(KeyEvent::E c) { return (c == value); };
     bool Is(KeyEvent::E c, Action::E a) { return value == c && action == a; };
     bool IsDigit() const;
     char ToChar() const;
