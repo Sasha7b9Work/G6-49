@@ -26,7 +26,7 @@ void Frame::OnDown(wxCommandEvent &event)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Frame::OnUp(wxCommandEvent &event)
+void Frame::OnUp(wxCommandEvent &event) //-V524
 {
     event.Skip();
 }

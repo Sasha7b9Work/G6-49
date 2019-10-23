@@ -210,10 +210,10 @@ static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, cons
         return;
     }
 
-    wxButton *button = new wxButton(frame, (wxWindowID)key, KeyEvent(key).Name(), pos, size);
+    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), KeyEvent(key).Name(), pos, size);
 
-    button->Connect((wxWindowID)key, wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnDown));
-    button->Connect((wxWindowID)key, wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnUp));
+    button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnDown));
+    button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnUp));
 
     buttons[key] = button;
 }
@@ -238,9 +238,9 @@ void Painter::SetColor(Color color)
     if (color != Color::NUMBER)
     {
         uint value = COLOR(color.value);
-        uint8 blue = (uint8)value;
-        uint8 green = (uint8)(value >> 8);
-        uint8 red = (uint8)(value >> 16);
+        uint8 blue = static_cast<uint8>(value);
+        uint8 green = static_cast<uint8>(value >> 8);
+        uint8 red = static_cast<uint8>(value >> 16);
         SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
     }
 }
