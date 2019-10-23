@@ -81,13 +81,13 @@ void FrequencyMeter::LoadLevel()
 {
     int max = 4 * 1024;
 
-    float step = max / 200.0f;
+    float step = max / 200.0F;
 
     int value = (int)(max / 2 + FREQ_LEVEL * step);
 
     Limitation(&value, 0, max - 1);
 
-    Generator::LoadRegister(Register::FreqMeterLevel, (uint64)value);
+    Generator::LoadRegister(Register::FreqMeterLevel, static_cast<uint64>(value));
 }
 
 
@@ -95,13 +95,13 @@ void FrequencyMeter::LoadHysteresis()
 {
     int max = 4 * 1024;
 
-    float step = max / 100.0f;
+    float step = max / 100.0F;
 
     int value = (int)(step * FREQ_HYSTERESIS);
 
     Limitation(&value, 0, max - 1);
 
-    Generator::LoadRegister(Register::FreqMeterHYS, (uint64)value);
+    Generator::LoadRegister(Register::FreqMeterHYS, static_cast<uint64>(value));
 }
 
 

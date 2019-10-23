@@ -15,7 +15,7 @@ char KeyEvent::ToChar() const
 {
     if(IsDigit())
     {
-        return (char)((value - _0) | 0x30);
+        return static_cast<char>((value - _0) | 0x30);
     }
     else if(value == Dot)
     {

@@ -284,7 +284,7 @@ void CPU::Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, 
 
     handleTIM4.Instance = TIM4;
     handleTIM4.Init.Period = TIME_UPDATE * 10 - 1;
-    handleTIM4.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
+    handleTIM4.Init.Prescaler = static_cast<uint>((SystemCoreClock / 2) / 10000) - 1;
     handleTIM4.Init.ClockDivision = 0;
     handleTIM4.Init.CounterMode = TIM_COUNTERMODE_UP;
 
@@ -348,7 +348,7 @@ const char *PanelControlName(const KeyEvent &control)
 
 void CPU::Keyboard::TIM4_::ElapsedCallback(void *htim)
 {
-    if ((TIM_HandleTypeDef *)htim == &handleTIM4 && callbackKeyboard)
+    if (static_cast<TIM_HandleTypeDef *>(htim) == &handleTIM4 && callbackKeyboard)
     {
         callbackKeyboard();
     }

@@ -57,7 +57,7 @@ int Font::GetHeightSymbol(char)
 
 int Font::GetLengthSymbol(char symbol)
 {
-    return font->symbol[(uint8)(Text::IsUpperCase() ? SU::ToUpper(symbol) : symbol)].width + 1;
+    return font->symbol[static_cast<uint8>(Text::IsUpperCase() ? SU::ToUpper(symbol) : symbol)].width + 1;
 }
 
 
