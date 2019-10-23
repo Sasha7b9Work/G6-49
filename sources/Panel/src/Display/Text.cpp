@@ -26,12 +26,12 @@ namespace Text
     /// Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
     int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
 
-    int8 *BreakWord(char *word);
+    uint *BreakWord(char *word);
     /// Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-    char *PartWordForTransfer(char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30]);
+    char *PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
     /// \brief Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
     /// найденном слоге. Если слово закончилось, функция возвращает false
-    bool FindNextTransfer(const char *letters, int8 *lettersInSyllable);
+    bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
 
     bool IsConsonant(char symbol);
 
@@ -91,8 +91,8 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
         symbol = SU::ToUpper(symbol);
     }
 
-    int8 width = (int8)font->symbol[(uint8)symbol].width;
-    int8 height = (int8)font->height;
+    int8 width = static_cast<int8>(font->symbol[static_cast<uint8>(symbol)].width);
+    int8 height = static_cast<int8>(font->height);
 
     for (int b = 0; b < height; b++)
     {
@@ -103,7 +103,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist((uint8)symbol, b, bit))
+                if (BitInFontIsExist(static_cast<uint8>(symbol), b, bit))
                 {
                     Painter::SetPoint(x, y);
                 }
@@ -138,7 +138,7 @@ bool Text::ByteFontNotEmpty(int eChar, int byte)
     if (eChar != prevChar)
     {
         prevChar = eChar;
-        bytes = font->symbol[(uint8)prevChar].bytes;
+        bytes = font->symbol[static_cast<uint8>(prevChar)].bytes;
     }
     return bytes[byte] != 0;
 }
@@ -162,7 +162,7 @@ bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
 bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height)
 {
     char buffer[20];
-    int numSymbols = (int)std::strlen(text);
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -258,13 +258,13 @@ bool Text::IsLetter(char symbol)
  /* 0xf0 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true
     };
 
-    return isLetter[(uint8)symbol];
+    return isLetter[static_cast<uint8>(symbol)];
 }
 
 
 int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 {
-    int8 *lengthSyllables = BreakWord(word);
+    uint *lengthSyllables = BreakWord(word);
     int numSyllabels = 0;
     char buffer[30];
     for (int i = 0; i < 10; i++)
@@ -286,7 +286,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
             {
                 Text::DrawText(x, y, subString);
             }
-            return (int)std::strlen(subString) - 1;
+            return static_cast<int>(std::strlen(subString)) - 1;
         }
     }
 
@@ -305,7 +305,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
     int right = left + width;
 
     char buffer[20];
-    int numSymbols = (int)std::strlen(text);
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -388,7 +388,7 @@ int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int
     int right = left + width;
 
     char buffer[20];
-    int numSymbols = (int)std::strlen(text);
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -441,10 +441,10 @@ int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int
 }
 
 
-int8 *Text::BreakWord(char *word)
+uint *Text::BreakWord(char *word)
 {
     int num = 0;
-    static int8 lengthSyllables[10];
+    static uint lengthSyllables[10];
     char *position = word;
     while (FindNextTransfer(position, &(lengthSyllables[num])))
     {
@@ -470,27 +470,27 @@ int8 *Text::BreakWord(char *word)
 }
 
 
-char *Text::PartWordForTransfer(char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30])
+char *Text::PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30])
 {
     size_t length = 0;
     for (int i = 0; i <= numSyllable; i++)
     {
-        length += (size_t)lengthSyllables[i];
+        length += static_cast<size_t>(lengthSyllables[i]);
     }
-    std::memcpy((void *)buffer, (void *)word, length);
+    std::memcpy(buffer, word, length);
     buffer[length] = '-';
     buffer[length + 1] = '\0';
     return buffer;
 }
 
 
-bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
+bool Text::FindNextTransfer(const char *letters, uint *lettersInSyllable)
 {
 
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    * lettersInSyllable = (int8)std::strlen(letters); //-V1029
+    * lettersInSyllable = std::strlen(letters);
     if (std::strlen(letters) <= 3)
     {
         return false;
