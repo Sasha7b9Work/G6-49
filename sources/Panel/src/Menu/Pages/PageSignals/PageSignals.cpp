@@ -13,7 +13,7 @@
 
 
 extern const PageBase pageSignals;
-Page *PageSignals::pointer = (Page *)&pageSignals;
+Page *PageSignals::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
 extern ChoiceParameterBase cParameters;
 /// Ќомер текущей формы сигнал
 static int numForm = 0;
@@ -120,7 +120,7 @@ void PageSignals::Init()
 
 void PageSignals::OnPress_Form(bool)
 {
-    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];    // ”казатель на ChoiceBase, хран€щий индекс выбранной формы текущего канала                        //-V1027     
+    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);    // ”казатель на ChoiceBase, хран€щий индекс выбранной формы текущего канала
 
     WAVE_CURRENT.SetIndexForm(choice->CurrentIndex());          // ”становить дл€ текущего сигнала индекс формы из ChoiceBase
 
@@ -134,5 +134,6 @@ void PageSignals::OnPress_Channel(bool)
 {
     cParameters.form = FORM_CURRENT;
     numForm = FORM_CURRENT->value;
-    pageSignals.items[1] = Chan(CURRENT_CHANNEL).IsA() ? (Item *)&cFormA : (Item *)&cFormB; //-V641
+
+    pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
 }

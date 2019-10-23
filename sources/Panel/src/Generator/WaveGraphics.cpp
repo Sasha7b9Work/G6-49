@@ -89,7 +89,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
 
 void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
 {
-    if(param->IsChoice() && ((ParameterChoice *)param)->DrawChoice(x + 6, y))
+    if(param->IsChoice() && static_cast<ParameterChoice *>(param)->DrawChoice(x + 6, y))
     {
         return;
     }

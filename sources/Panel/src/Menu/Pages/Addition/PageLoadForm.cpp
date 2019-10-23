@@ -12,7 +12,7 @@
 
 
 extern const PageBase pageLoad;
-Page *PageLoadForm::pointer = (Page *)&pageLoad;
+Page *PageLoadForm::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageLoad));
 
 
 DEF_BUTTON( bUp,                                                                                                                              //--- ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃĞÓÇÊÀ - Ââåğõ ---

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #ifndef WIN32
 #include "Display/InputWindow.h"
 #include "Display/Painter.h"
@@ -91,7 +92,7 @@ static bool OnControl(KeyEvent &key)
     return false;
 }
 
-Page *PageInput::pointer = (Page *)&pInput;
+Page *PageInput::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
 
 DEF_PAGE_SB( pInput, //-V641 //-V1027
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß",
