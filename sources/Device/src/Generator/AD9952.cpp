@@ -26,7 +26,7 @@ namespace AD9952
             Number
         } value;
         Register(E v) : value(v) { };
-        operator uint8() const { return (uint8)value; };
+        operator uint8() const { return static_cast<uint8>(value); };
         pString Name() const;
         bool Is(E v) const { return value == v; };
     };
@@ -130,7 +130,7 @@ void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 {
     float freq = frequency.ToFloat();
 
-    FPGA::SetClockAD992(freq < 0.1f ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
+    FPGA::SetClockAD992(freq < 0.1F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
 
     setDDS.ad9952[ch].frequency = frequency.ToFloat();
     WriteRegister(ch, Register::FTW0);
@@ -149,7 +149,7 @@ void AD9952::SetPhase(Chan::E ch, ParamValue phase)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::SetAmplitude(Chan::E ch, ParamValue amplitude)
 {
-    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * 0.8f * (1.0f + CAL_AD9952_AMPLITUDE(ch) / 1000.0f);    // 0.8f в этой формуле оттуда, что схема устройства настроена на то, что 100% максимальной
+    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * 0.8F * (1.0F + CAL_AD9952_AMPLITUDE(ch) / 1000.0F);    // 0.8f в этой формуле оттуда, что схема устройства настроена на то, что 100% максимальной
                                                                                                     // амплитуды сигнала на выходе получаются при засылке 80% кода от максимального
     WriteRegister(ch, Register::ASF);
 }
@@ -202,14 +202,14 @@ void AD9952::WriteCFR2(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WritePOW(Chan::E ch)
 {
-    uint value = (uint)(setDDS.ad9952[Chan::B].phase / 360.0f * (1 << 13) + 0.5f);
+    uint value = static_cast<uint>(setDDS.ad9952[Chan::B].phase / 360.0F * (1 << 13) + 0.5F);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteASF(Chan::E ch)
 {
-    uint value = (((uint)((setDDS.ad9952[ch].amplitude / 5.0f) * ((1 << 7) - 1))) << 7) / 2;
+    uint value = ((static_cast<uint>((setDDS.ad9952[ch].amplitude / 5.0F) * ((1 << 7) - 1))) << 7) / 2;
     Bit::Set(value, 14);  // \ Это биты множителя скорости
     Bit::Set(value, 15);  // / нарастания фронта 
     WriteToHardware(ch, Register::ASF, value);
@@ -218,9 +218,9 @@ void AD9952::WriteASF(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    float FTWf = (setDDS.ad9952[ch].frequency / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8f : 1e6f)) * std::powf(2, 32);
+    float FTWf = (setDDS.ad9952[ch].frequency / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2, 32);
 
-    WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5f));
+    WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -254,19 +254,19 @@ void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
     };
 
     uint8 buffer[5];
-    buffer[0] = (uint8)reg;
+    buffer[0] = static_cast<uint8>(reg);
     int pointer = 1;                    // В это место буфера будем записывать каждый следующий байт
 
     int curByte = numBytes[reg] - 1;    // Здесь будем перебирать байты value от старшего к младшему
     while (curByte >= 0)
     {
-        buffer[pointer++] = (uint8)(value >> (curByte * 8));
+        buffer[pointer++] = static_cast<uint8>(value >> (curByte * 8));
         --curByte;
     }
     
     CPU::WritePin(ChipSelect(ch), false);
 
-    HAL_SPI_Transmit(&hSPI3, buffer, (uint16)(numBytes[reg] + 1), 1);
+    HAL_SPI_Transmit(&hSPI3, buffer, static_cast<uint16>(numBytes[reg] + 1), 1);
     
     CPU::WritePin(GeneratorWritePin::AD9952_IO_UPD, true);
     volatile int i = 0;
@@ -281,7 +281,7 @@ void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 GeneratorWritePin AD9952::ChipSelect(Chan::E ch)
 {
-    return (GeneratorWritePin::E)(ch == Chan::A ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
+    return static_cast<GeneratorWritePin::E>(ch == Chan::A ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
