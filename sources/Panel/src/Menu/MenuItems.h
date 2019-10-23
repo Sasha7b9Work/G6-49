@@ -212,7 +212,7 @@ public:
     /// Обрабатывает нажатие кнопки. Возвращает ноль, потому что не может находиться в открытом состоянии.
     Item *Press(KeyEvent::Action action);
 
-    void Draw(int x, int y);
+    void Draw(int x, int y) const;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// SButton ///
@@ -263,7 +263,7 @@ public:
     /// Обрабатывает нажатие кнопки. Возвращает 0, потому что не может находиться в открытом состоянии
     Item *Press(KeyEvent::Action action);
 
-    void Draw(int x, int y);
+    void Draw(int x, int y) const;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
@@ -401,7 +401,7 @@ public:
 
     pString NameCurrentSubItem() const;
 
-    void Draw(bool opened, int x, int y);
+    void Draw(bool opened, int x, int y) const;
 };
 
 

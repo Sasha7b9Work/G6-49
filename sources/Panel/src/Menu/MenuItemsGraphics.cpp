@@ -20,23 +20,23 @@ void Item::Draw(bool opened, int x, int y) const
     }
     else if (type == Item::Type::Button)
     {
-        ((Button *)this)->Draw(x, y);
+        static_cast<const Button *>(this)->Draw(x, y);
     }
     else if (type == Item::Type::ChoiceParameter)
     {
-        ((ChoiceParameter *)this)->Draw(opened, x, y);
+        static_cast<const ChoiceParameter *>(this)->Draw(opened, x, y);
     }
     else if (type == Item::Type::SmallButton)
     {
-        ((SButton *)this)->Draw(x, y);
+        static_cast<const SButton *>(this)->Draw(x, y);
     }
     else if(type == Item::Type::Governor)
     {
-        ((Governor *)this)->Draw(x, y);
+        static_cast<const Governor *>(this)->Draw(x, y);
     }
     else if(type == Item::Type::Page)
     {
-        ((Page *)this)->DrawClosed(x, y);
+        static_cast<const Page *>(this)->DrawClosed(x, y);
     }
     else
     {
@@ -45,7 +45,7 @@ void Item::Draw(bool opened, int x, int y) const
 }
 
 
-void SButton::Draw(int x, int y)
+void SButton::Draw(int x, int y) const
 {
     if(Menu::pressedItem == this)
     {
@@ -56,7 +56,7 @@ void SButton::Draw(int x, int y)
 }
 
 
-void Button::Draw(int x, int y)
+void Button::Draw(int x, int y) const
 {
     bool isShade = IsShade();
 
@@ -89,7 +89,7 @@ void Page::DrawClosed(int x, int y) const
 }
 
 
-void ChoiceParameter::Draw(bool opened, int x, int y)
+void ChoiceParameter::Draw(bool opened, int x, int y) const
 {
     if(opened)
     {
@@ -112,7 +112,7 @@ void Choice::Draw(bool opened, int x, int y) const
 {
     Choice *choice = const_cast<Choice *>(this);
 
-    int step = (int)(choice->Step() + 0.5f);
+    int step = static_cast<int>(choice->Step() + 0.5F);
 
     if(opened)
     {
@@ -166,7 +166,7 @@ void Choice::Draw(bool opened, int x, int y) const
         GetTitle().Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Painter::SetColor(Color::BACK);
-        if (step == 0.0f) //-V550 //-V2550
+        if (step == 0.0F) //-V2550 //-V550
         {
             Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem());
         }
