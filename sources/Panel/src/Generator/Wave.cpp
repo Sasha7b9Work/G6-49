@@ -200,7 +200,7 @@ Form *Wave::GetForm(Form::E form)
         }
     }
     
-    LOG_ERROR("Не найдена форма %d", (int)form);
+    LOG_ERROR("Не найдена форма %d", static_cast<int>(form));
     
     return nullptr;
 }
@@ -282,7 +282,7 @@ ParameterBase *Form::FindParameter(ParameterValue::E p)
     {
         ParameterBase *param = params[i];
 
-        if(param->IsValue() && ((ParameterValue *)param)->value == p)
+        if(param->IsValue() && (static_cast<ParameterValue *>(param))->value == p)
         {
             return param;
         }
@@ -296,7 +296,7 @@ ParameterBase *Form::FindParameter(ParameterChoice::E p)
     for(int i = 0; i < numParams; i++)
     {
         ParameterBase *param = params[i];
-        if(param->IsChoice() && ((ParameterChoice *)param)->value == p)
+        if(param->IsChoice() && (static_cast<ParameterChoice *>(param))->value == p)
         {
             return param;
         }
@@ -310,7 +310,7 @@ void Form::SendParameterToGenerator(ParameterValue::E p)
     ParameterBase *param = FindParameter(p);
     if (param)
     {
-        Generator::SetParameter((ParameterValue *)param);
+        Generator::SetParameter(static_cast<ParameterValue *>(param));
     }
 }
 
@@ -320,7 +320,7 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
     ParameterBase *param = FindParameter(p);
     if(param)
     {
-        Generator::SetParameter((ParameterChoice *)param);
+        Generator::SetParameter(static_cast<ParameterChoice *>(param));
     }
 }
 
@@ -336,7 +336,7 @@ void Form::OpenCurrentParameter()
     oldNumParams = numParams;
     oldCurrentParams = currentParam;
 
-    ParameterComplex *parent = (ParameterComplex *)CurrentParameter();
+    ParameterComplex *parent = static_cast<ParameterComplex *>(CurrentParameter());
 
     numParams = parent->numParams;
     params = parent->params;
@@ -372,14 +372,14 @@ bool Form::ParameterIsOpened() const
 
 ParamValue ParameterValue::GetValueNano() const
 {
-    StructValue input((ParameterValue *)this);
+    StructValue input(const_cast<ParameterValue *>(this));
     return input.ValueNano();
 }
 
 
 pString ParameterValue::GetStringValue() const
 {
-    StructValue input((ParameterValue *)this);
+    StructValue input(const_cast<ParameterValue *>(this));
     return input.StringValue();
 }
 
@@ -428,7 +428,7 @@ pString ParameterComplex::GetStringValue() const
             " Откл", " Вкл"
         };
 
-        ParameterValue *pointer = (ParameterValue *)this;   // -V1027
+        ParameterValue *pointer = reinterpret_cast<ParameterValue *>(const_cast<ParameterComplex *>(this));
         return values[SINE_MANIPULATION_ENABLED(pointer->GetForm()->GetWave()->GetChannel()) ? 1 : 0];
     }
 
@@ -468,7 +468,7 @@ pString ParameterBase::NameUnit(char buffer[10]) const
 {
     if(IsValue())
     {
-        return ((ParameterValue *)this)->NameUnit(buffer);
+        return (static_cast<const ParameterValue *>(this))->NameUnit(buffer);
     }
     return "";
 }
@@ -518,7 +518,7 @@ pString ParameterPage::Name() const
 
 void ParameterPage::OpenPage()
 {
-    Menu::SetAdditionPage((::Page *)page);
+    Menu::SetAdditionPage(reinterpret_cast< ::Page *>(page));
 }
 
 
@@ -526,19 +526,19 @@ pString ParameterBase::Name() const
 {
     if(IsValue())
     {
-        return ((ParameterValue *)this)->Name();
+        return (static_cast<const ParameterValue *>(this))->Name();
     }
     else if(IsChoice())
     {
-        return ((ParameterChoice *)this)->Name();
+        return (static_cast<const ParameterChoice *>(this))->Name();
     }
     else if(IsComplex())
     {
-        return ((ParameterComplex *)this)->Name();
+        return (static_cast<const ParameterComplex *>(this))->Name();
     }
     else if(IsPage())
     {
-        return ((ParameterPage *)this)->Name();
+        return (static_cast<const ParameterPage *>(this))->Name();
     }
     else
     {
@@ -553,15 +553,15 @@ pString ParameterBase::GetStringValue() const
 {
     if(IsValue())
     {
-        return ((ParameterValue *)this)->GetStringValue();
+        return (static_cast<const ParameterValue *>(this))->GetStringValue();
     }
     else if(IsChoice())
     {
-        return ((ParameterChoice *)this)->GetStringValue();
+        return (static_cast<const ParameterChoice *>(this))->GetStringValue();
     }
     else if(IsComplex())
     {
-        return ((ParameterComplex *)this)->GetStringValue();
+        return (static_cast<const ParameterComplex *>(this))->GetStringValue();
     }
     else
     {
@@ -583,12 +583,12 @@ void Form::ChangeParameter()
 
     if(param->IsChoice())
     {
-        ((ParameterChoice *)param)->NextChoice();
+        static_cast<ParameterChoice *>(param)->NextChoice();
     }
-    else if(param->IsValue() && ((ParameterValue *)param)->IsInputValue())
+    else if(param->IsValue() && static_cast<ParameterValue *>(param)->IsInputValue())
     {
         InputWindow::Init();
-        Menu::SetAdditionPage((Page *)PageInput::pointer);
+        Menu::SetAdditionPage(static_cast<Page *>(PageInput::pointer));
     }
     else if (param->IsExit())
     {
@@ -600,7 +600,7 @@ void Form::ChangeParameter()
     }
     else if(param->IsPage())
     {
-        ((ParameterPage *)param)->OpenPage();
+        static_cast<ParameterPage *>(param)->OpenPage();
     }
     else
     {
@@ -627,7 +627,7 @@ void ParameterChoice::NextChoice()
         }
         else if(value == ManipulationMode)
         {
-            SINE_MANIPULATION_MODE(ch) = (uint8)choice;
+            SINE_MANIPULATION_MODE(ch) = static_cast<uint8>(choice);
         }
         else
         {
@@ -651,7 +651,7 @@ bool ParameterChoice::DrawChoice(int x, int y)
 
 bool Wave::StartModeIsSingle()
 {
-    ParameterChoice* param = (ParameterChoice *)GetCurrentForm()->FindParameter(ParameterChoice::ModeStart);
+    ParameterChoice* param = static_cast<ParameterChoice *>(GetCurrentForm()->FindParameter(ParameterChoice::ModeStart));
 
     if(param)
     {
@@ -666,7 +666,7 @@ bool ParameterBase::AssumeArbitaryOrder() const
 {
     if (IsValue())
     {
-        return ((ParameterValue *)this)->AssumeArbitaryOrder();
+        return static_cast<const ParameterValue *>(this)->AssumeArbitaryOrder();
     }
 
     return true;
@@ -675,20 +675,20 @@ bool ParameterBase::AssumeArbitaryOrder() const
 
 bool ParameterBase::IsExit() const
 {
-    return IsValue() && ((ParameterValue *)this)->IsExit();
+    return IsValue() && static_cast<const ParameterValue *>(this)->IsExit();
 }
 
 
 Order& Order::operator++(int)
 {
-    value = (E)(value + 1);
+    value = static_cast<E>(value + 1);
     return *this;
 }
 
 
 Order& Order::operator--(int)
 {
-    value = (E)(value - 1);
+    value = static_cast<E>(value - 1);
     return *this;
 }
 
@@ -696,8 +696,8 @@ Order& Order::operator--(int)
 ParameterChoice::ParameterChoice(E v, pString var0, pString var1, funcDraw func0, funcDraw func1) :
     ParameterBase(Choice), value(v), choice(0), num(2)
 {
-    names[0] = (char *)var0;
-    names[1] = (char *)var1;
+    names[0] = const_cast<char *>(var0);
+    names[1] = const_cast<char *>(var1);
 
     func[0] = func0;
     func[1] = func1;
@@ -707,10 +707,10 @@ ParameterChoice::ParameterChoice(E v, pString var0, pString var1, funcDraw func0
 ParameterChoice::ParameterChoice(E v, pString var0, pString var1, pString var2, pString var3) : 
     ParameterBase(Choice), value(v), choice(0), num(4)
 {
-    names[0] = (char *)var0;
-    names[1] = (char *)var1;
-    names[2] = (char *)var2;
-    names[3] = (char *)var3;
+    names[0] = const_cast<char *>(var0);
+    names[1] = const_cast<char *>(var1);
+    names[2] = const_cast<char *>(var2);
+    names[3] = const_cast<char *>(var3);
 
     func[0] = func[1] = func[2] = func[3] = nullptr;
 }
@@ -727,7 +727,7 @@ ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(C
 
 
 ParameterValue::ParameterValue(int v) : ParameterBase(Value), //-V730
-    value((E)v), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
+    value(static_cast<E>(v)), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
 {
     std::memset(buffer, 0, NUM_DIGITS + 1);
 
@@ -739,7 +739,7 @@ ParameterValue::ParameterValue(int v) : ParameterBase(Value), //-V730
 
 
 ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(Value),
-    value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
+    value(static_cast<E>(v)), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
 {
     std::strcpy(buffer, buf);
 
@@ -780,9 +780,9 @@ void Form::DrawUGO(Chan::E ch, int y0)
         std::srand(2);
         for (int i = 0; i < 100; i++)
         {
-            yNoise[i] = aveY - (int)(std::rand() % 50 - 25);
+            yNoise[i] = aveY - static_cast<int>(std::rand() % 50 - 25);
 
-            yExp[i] = aveY - (int)(std::expf(i / 12.5f) + 0.5f) + 1;
+            yExp[i] = aveY - static_cast<int>(std::expf(i / 12.5F) + 0.5F) + 1;
         }
 
         first = false;
@@ -811,14 +811,14 @@ void Form::DrawUGO(Chan::E ch, int y0)
 
 void Form::DrawSine(Chan::E, int x0, int y0, int width, int height)
 {
-    float speed = 0.2f;
+    float speed = 0.2F;
     int delta = 1;
     y0 += height / 2;
 
     for (int i = delta; i < width; i++)
     {
-        int y1 = y0 - (int)(std::sinf((i - delta) * speed) * height / 2.0f);
-        int y2 = y0 - (int)(std::sinf(i * speed) * height / 2.0f);
+        int y1 = y0 - static_cast<int>(std::sinf((i - delta) * speed) * height / 2.0F);
+        int y2 = y0 - static_cast<int>(std::sinf(i * speed) * height / 2.0F);
 
         Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
     }
@@ -929,12 +929,12 @@ void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
 {
     int numPoints = 240;
 
-    float sX = width / (float)numPoints;
-    float sY = height / 255.0f;
+    float sX = width / static_cast<float>(numPoints);
+    float sY = height / 255.0F;
 
     for (int i = 0; i < numPoints; i++)
     {
-        Painter::SetPoint((int)(x0 + sX * i), (int)(y0 + height - formFlash[ch][i] * sY));
+        Painter::SetPoint(static_cast<int>(x0 + sX * i), static_cast<int>(y0 + height - formFlash[ch][i] * sY));
     }
 }
 
@@ -959,7 +959,7 @@ ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
 
         if (param && param->IsValue())
         {
-            ParameterValue *paramValue = (ParameterValue *)param;
+            ParameterValue *paramValue = static_cast<ParameterValue *>(param);
 
             if (paramValue->Is(_value))
             {

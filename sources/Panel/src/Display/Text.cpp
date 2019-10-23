@@ -507,8 +507,8 @@ bool Text::FindNextTransfer(const char *letters, uint *lettersInSyllable)
 
     bool consonant[20];
 
-    int size = (int)std::strlen(letters);
-    for (int i = 0; i < size; i++)
+    uint size = std::strlen(letters);
+    for (uint i = 0; i < size; i++)
     {
         consonant[i] = IsConsonant(letters[i]);
     }
@@ -573,7 +573,7 @@ bool Text::IsConsonant(char symbol)
         true, true, true, false, true, true, true, true, true, true, true, false, true, false, false, false
     };
 
-    return isConsonat[(uint8)symbol];
+    return isConsonat[static_cast<uint8>(symbol)];
 }
 
 
@@ -592,8 +592,8 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 
 int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 {
-    int8 width = (int8)font->symbol[symbol].width;
-    int8 height = (int8)font->height;
+    int8 width = static_cast<int8>(font->symbol[symbol].width);
+    int8 height = static_cast<int8>(font->height);
 
     for (int b = 0; b < height; b++)
     {
