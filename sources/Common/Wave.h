@@ -313,7 +313,7 @@ public:
     /// ¬озвращает человеческое название формы сигнала
     pString Name() const;
     /// ¬озвращает ссылку на текущий параметр
-    ParameterBase *CurrentParameter();
+    ParameterBase *CurrentParameter() const;
     /// ¬озвращает количество доступных параметров
     int NumParameters() const;
     /// ¬озвращает ссылку на i-ый параметр из массива params

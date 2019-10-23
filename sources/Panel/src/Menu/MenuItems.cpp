@@ -49,7 +49,7 @@ const char *Choice::NamePrevSubItem()
 
 Item *Page::GetItem(const KeyEvent &key) const
 {
-    return (Item *)items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - KeyEvent::F1)];
+    return const_cast<Item *>(items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - KeyEvent::F1)]);
 }
 
 
@@ -98,7 +98,7 @@ bool Item::IsOpened() const
 {
     if (type == Item::Type::Page)
     {
-        return ((Item *)this)->Keeper()->CurrentItemIsOpened();
+        return Keeper()->CurrentItemIsOpened();
     }
     return Menu::GetOpenedItem() == this;
 }
@@ -139,13 +139,13 @@ int Page::CurrentSubPage() const
 
 void Page::SetPosActItem(int pos)
 {
-    MENU_POS_ACT_ITEM(nameOrNumBit) = (int8)pos;
+    MENU_POS_ACT_ITEM(nameOrNumBit) = static_cast<int8>(pos);
 }
 
 
 void Page::SetCurrentSubPage(int pos)
 {
-    MENU_CURRENT_SUBPAGE(nameOrNumBit) = (int8)pos;
+    MENU_CURRENT_SUBPAGE(nameOrNumBit) = static_cast<int8>(pos);
 }
 
 

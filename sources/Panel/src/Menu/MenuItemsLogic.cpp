@@ -77,14 +77,14 @@ void Choice::StartChange(int delta) const
 
 float Choice::Step()
 {
-    static const float speed = 0.3f;
+    static const float speed = 0.3F;
     static const int numLines = 60;
     if (tsChoice.address == this)
     {
         float delta = speed * (TIME_MS - tsChoice.timeStart);
-        if (delta == 0.0f)  // -V550 //-V2550 //-V550
+        if (delta == 0.0F)  // -V550 //-V2550 //-V550
         {
-            delta = 0.001f; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
+            delta = 0.001F; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
         }
         int8 index = CurrentIndex();
         if (tsChoice.dir == INCREASE)
@@ -93,7 +93,7 @@ float Choice::Step()
             {
                 return delta;
             }
-            CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
+            CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
         else if (tsChoice.dir == DECREASE)
         {
@@ -103,7 +103,7 @@ float Choice::Step()
             {
                 return delta;
             }
-            CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
+            CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
         else
         {
@@ -112,8 +112,8 @@ float Choice::Step()
 
         if(isPageSB)
         {
-            uint *address = (uint *)cell;
-            *address ^= (1 << (int)nameOrNumBit);
+            uint *address = reinterpret_cast<uint *>(cell);
+            *address ^= (1 << static_cast<int>(nameOrNumBit));
         }
         else
         {
@@ -125,9 +125,9 @@ float Choice::Step()
         funcOnChanged(IsActive());
 
         tsChoice.dir = NONE;
-        return 0.0f;
+        return 0.0F;
     }
-    return 0.0f;
+    return 0.0F;
 }
 
 
@@ -283,18 +283,18 @@ int16 Governor::PrevValue() const
 
 float Governor::Step()
 {
-    static const float speed = 0.05f;
+    static const float speed = 0.05F;
     static const int numLines = 10;
-    float delta = 0.0f;
+    float delta = 0.0F;
     if (tsGovernor.address == this)
     {
         delta = speed * (TIME_MS - tsGovernor.timeStart);
         if (tsGovernor.dir == DECREASE)
         {
-            delta *= -1.0f;
-            if (delta == 0.0f)  // -V550 //-V2550 //-V550
+            delta *= -1.0F;
+            if (delta == 0.0F)  // -V550 //-V2550 //-V550
             {
-                return -0.001f;
+                return -0.001F;
             }
             if (delta < -numLines)
             {
@@ -304,15 +304,15 @@ float Governor::Step()
                 {
                     funcOfChanged();
                 }
-                delta = 0.0f;
+                delta = 0.0F;
                 tsGovernor.address = 0;
             }
         }
         else if (tsGovernor.dir == INCREASE)
         {
-            if (delta == 0.0f)  // -V550 //-V2550 //-V550
+            if (delta == 0.0F)  // -V550 //-V2550 //-V550
             {
-                return 0.001f;
+                return 0.001F;
             }
             if (delta > numLines)
             {
@@ -322,7 +322,7 @@ float Governor::Step()
                 {
                     funcOfChanged();
                 }
-                delta = 0.0f;
+                delta = 0.0F;
                 tsGovernor.address = 0;
             }
         }
@@ -338,7 +338,7 @@ float Governor::Step()
 void Governor::ChangeValue(int delta)
 {
     int16 oldValue = *cell;
-    *cell += (int16)(Sign(delta) * Pow10(gCurDigit));
+    *cell += static_cast<int16>(Sign(delta) * Pow10(gCurDigit));
     LIMITATION(*cell, minValue, maxValue);
     if (*cell != oldValue)
     {
@@ -354,7 +354,7 @@ void Governor::NextPosition()
 {
     if (Menu::GetOpenedItem() == this)
     {
-        CircleIncrease<int8>(&gCurDigit, 0, (int8)(NumDigits() - 1));
+        CircleIncrease<int8>(&gCurDigit, 0, static_cast<int8>(NumDigits() - 1));
     }
 }
 
@@ -437,27 +437,27 @@ void Item::Press(KeyEvent &key)
 
         if (type == Item::Type::Choice)
         {
-            ((Choice *)this)->Press(key);
+            static_cast<Choice *>(this)->Press(key);
         }
         else if (type == Item::Type::Button)
         {
-            ((Button *)this)->Press(key.action);
+            static_cast<Button *>(this)->Press(key.action);
         }
         else if (type == Item::Type::ChoiceParameter)
         {
-            ((ChoiceParameter *)this)->Press(key.action);
+            static_cast<ChoiceParameter *>(this)->Press(key.action);
         }
         else if (type == Item::Type::SmallButton)
         {
-            ((SButton *)this)->Press(key.action);
+            static_cast<SButton *>(this)->Press(key.action);
         }
         else if(type == Item::Type::Page)
         {
-            ((Page *)this)->Press(key);
+            static_cast<Page *>(this)->Press(key);
         }
         else if(type == Item::Type::Governor)
         {
-            ((Governor *)this)->Press(key);
+            static_cast<Governor *>(this)->Press(key);
         }
         else
         {
@@ -469,7 +469,7 @@ void Item::Press(KeyEvent &key)
 
 Item::Type Item::GetType() const
 {
-    return (Item::Type::E)type;
+    return static_cast<Item::Type::E>(type);
 }
 
 
@@ -481,8 +481,8 @@ int8 Choice::CurrentIndex() const
     {
         if(isPageSB)
         {
-            uint *address = (uint *)cell;
-            retValue = (int8)((*address >> nameOrNumBit) & 0x01);
+            uint *address = reinterpret_cast<uint *>(cell);
+            retValue = static_cast<int8>((*address >> nameOrNumBit) & 0x01);
         }
         else
         {

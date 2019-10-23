@@ -155,7 +155,7 @@ Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params
 }
 
 
-ParameterBase *Form::CurrentParameter()
+ParameterBase *Form::CurrentParameter() const
 {
     return params[currentParam];
 }
