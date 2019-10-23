@@ -36,25 +36,25 @@ namespace Generator
 
 void Generator::EnableChannel(Chan::E ch, bool enable)
 {
-    Message::EnableChannel((uint8)ch, (uint8)(enable ? 1U : 0U)).Transmit();
+    Message::EnableChannel(static_cast<uint8>(ch), static_cast<uint8>(enable ? 1U : 0U)).Transmit();
 }
 
 
 void Generator::LoadStartMode(Chan::E ch, int mode)
 {
-    Message::StartMode((uint8)ch, (uint8)mode).Transmit();
+    Message::StartMode(static_cast<uint8>(ch), static_cast<uint8>(mode)).Transmit();
 }
 
 
 void Generator::LoadRegister(Register::E reg, uint64 value)
 {
-    Message::WriteRegister((uint8)reg, value).Transmit();
+    Message::WriteRegister(static_cast<uint8>(reg), value).Transmit();
 }
 
 
 void Generator::SetDebugMode(bool enable)
 {
-    Message::DebugMode((uint8)(enable ? 1 : 0)).Transmit();
+    Message::DebugMode(static_cast<uint8>(enable ? 1 : 0)).Transmit();
 }
 
 
@@ -67,14 +67,14 @@ void Generator::Reset()
 void Generator::SetFormWave(const Wave *w)
 {
     Chan::E ch = w->GetChannel();
-    uint8 form = (uint8)FORM(ch)->value;
+    uint8 form = static_cast<uint8>(FORM(ch)->value);
 
     if(FORM(ch)->IsDDS())
     {
         LoadFormDDS(FORM(ch));
     }
 
-    Message::Set::FormWave((uint8)ch, form).Transmit();
+    Message::Set::FormWave(static_cast<uint8>(ch), form).Transmit();
 }
 
 
@@ -82,7 +82,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
     /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
-    Message::Set::FormWave((uint8)ch, (uint8)form).Transmit();
+    Message::Set::FormWave(static_cast<uint8>(ch), static_cast<uint8>(form)).Transmit();
 }
 
 
@@ -94,11 +94,11 @@ void Generator::LoadFormDDS(Form *form)
     {
         case Form::RampPlus:
             {
-                float step = 2.0f / DDS_NUM_POINTS;
+                float step = 2.0F / DDS_NUM_POINTS;
 
                 for(int i = 0; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = -1.0f + step * i;
+                    data[i] = -1.0F + step * i;
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -106,11 +106,11 @@ void Generator::LoadFormDDS(Form *form)
             break;
         case Form::RampMinus:
             {
-                float step = 2.0f / DDS_NUM_POINTS;
+                float step = 2.0F / DDS_NUM_POINTS;
 
                 for (int i = 0; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0f - step * i;
+                    data[i] = 1.0F - step * i;
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -118,16 +118,16 @@ void Generator::LoadFormDDS(Form *form)
             break;
         case Form::Triangle:
             {
-                float step = 2.0f / (DDS_NUM_POINTS / 2);
+                float step = 2.0F / (DDS_NUM_POINTS / 2);
 
                 for (int i = 0; i < DDS_NUM_POINTS / 2; i++)
                 {
-                    data[i] = - 1.0f + step * i;
+                    data[i] = - 1.0F + step * i;
                 }
 
                 for(int i = DDS_NUM_POINTS / 2; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0f - step * (i - DDS_NUM_POINTS / 2);
+                    data[i] = 1.0F - step * (i - DDS_NUM_POINTS / 2);
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -148,24 +148,24 @@ void Generator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Fo
 {
     uint16 buffer[DDS_NUM_POINTS];
 
-    uint8 *code = (uint8 *)buffer;
+    uint8 *code = reinterpret_cast<uint8 *>(buffer);
 
     int max = 0x1fff;
 
     for (int i = 0; i < DDS_NUM_POINTS; i++)
     {
-        uint16 c = (uint16)(std::fabs(d[i]) * max);
+        uint16 c = static_cast<uint16>(std::fabs(d[i]) * max);
 
         if (Sign(d[i]) == -1)
         {
             SetBit(c, 13);
         }
 
-        code[i] = (uint8)c;
-        code[i + DDS_NUM_POINTS] = (uint8)(c >> 8);
+        code[i] = static_cast<uint8>(c);
+        code[i + DDS_NUM_POINTS] = static_cast<uint8>(c >> 8);
     }
 
-    Message::LoadFormDDS((uint8)form->GetWave()->GetChannel(), buffer).Transmit();
+    Message::LoadFormDDS(static_cast<uint8>(form->GetWave()->GetChannel()), buffer).Transmit();
 }
 
 
@@ -180,29 +180,29 @@ void Generator::SetParameter(ParameterChoice *param)
     };
 
     Message::Set::Parameter(commands[param->value],
-        (uint8)param->GetForm()->GetWave()->GetChannel(),
-        (uint8)param->GetChoice()).Transmit();
+        static_cast<uint8>(param->GetForm()->GetWave()->GetChannel()),
+        static_cast<uint8>(param->GetChoice())).Transmit();
 }
 
 
 void Generator::SetOffset(Chan::E ch, float offset)
 {
     /// \todo Говнокод - запись параметра из двух мест
-    Message::Set::Offset((uint8)ch, ParamValue(offset).ToUINT64()).Transmit();
+    Message::Set::Offset(static_cast<uint8>(ch), ParamValue(offset).ToUINT64()).Transmit();
 }
 
 
 void Generator::SetAmplitude(Chan::E ch, float amplitude)
 {
     /// \todo Говнокод - запись параметра из двух мест
-    Message::Set::Amplitude((uint8)ch, ParamValue(amplitude).ToUINT64()).Transmit();
+    Message::Set::Amplitude(static_cast<uint8>(ch), ParamValue(amplitude).ToUINT64()).Transmit();
 }
 
 
 void Generator::SetFrequency(Chan::E ch, float frequency)
 {
     /// \todo Говнокод - запись параметра из двух мест
-    Message::Set::Frequency((uint8)ch, ParamValue(frequency).ToUINT64()).Transmit();
+    Message::Set::Frequency(static_cast<uint8>(ch), ParamValue(frequency).ToUINT64()).Transmit();
 }
 
 
@@ -233,14 +233,14 @@ void Generator::SetParameter(ParameterValue *param)
 
     if (param->Is(ParameterValue::Offset))
     {
-        value.Add(-5.0f);
+        value.Add(-5.0F);
     }
 
-    Chan::E ch = param->GetForm()->GetWave()->GetChannel();
+    Chan ch(param->GetForm()->GetWave()->GetChannel());
 
-    Command::E com = commands[param->value];
+    Command com(commands[param->value]);
 
-    Message::Set::Parameter(com, (uint8)ch, value.ToUINT64()).Transmit();
+    Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
 }
 
 
