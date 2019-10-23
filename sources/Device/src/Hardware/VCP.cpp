@@ -38,7 +38,7 @@ void VCP::Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 bool VCP::PrevSendingComplete()
 {
-    USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
+    USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(handleUSBD.pClassData);
     return pCDC->TxState == 0;
 }
 
@@ -50,17 +50,17 @@ bool VCP::PrevSendingComplete()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendData(const void *_buffer, uint size)
 {
-    volatile USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
+    volatile USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(handleUSBD.pClassData);
 
     while (pCDC->TxState == 1) {};
-    USBD_CDC_SetTxBuffer(&handleUSBD, (uint8 *)_buffer, (uint16)size);
+    USBD_CDC_SetTxBuffer(&handleUSBD, static_cast<uint8 *>(const_cast<void *>(_buffer)), static_cast<uint16>(size));
     USBD_CDC_TransmitPacket(&handleUSBD);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 void VCP::SendString(char *data)
 {
-    SendData((uint8 *)data, std::strlen(data));
+    SendData(reinterpret_cast<uint8 *>(data), std::strlen(data));
 }
 
 

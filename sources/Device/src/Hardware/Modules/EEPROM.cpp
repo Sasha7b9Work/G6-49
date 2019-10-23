@@ -86,7 +86,7 @@ void EEPROM::LoadSettings(CalibrationSettings *settings)
 
     if (address)                                            // Если нашли сохранённую запись
     {
-        *settings = *((CalibrationSettings *)address);      // То запишем её в целевой объект
+        *settings = *(reinterpret_cast<CalibrationSettings *>(address));      // То запишем её в целевой объект
     }
 }
 
@@ -98,7 +98,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 
     while (address < end)
     {
-        if (*(uint *)address == 0xffffffffU)
+        if (*reinterpret_cast<uint *>(address) == 0xffffffffU)
         {
             return address;
         }
@@ -129,7 +129,7 @@ static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
 
 static void EraseSector(uint startAddress)
 {
-    if (GetSector(startAddress) == (uint)-1)
+    if (GetSector(startAddress) == static_cast<uint>(-1))
     {
         return;
     }
@@ -178,7 +178,7 @@ static uint GetSector(uint address)
         i++;
     }
 
-    return (uint)(-1);
+    return static_cast<uint>(-1);
 }
 
 
@@ -190,7 +190,7 @@ static void WriteData(uint dest, void *src, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, dest++, ((uint8 *)src)[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, dest++, (reinterpret_cast<uint8 *>(src))[i]);
     }
 
     HAL_FLASH_Lock();
@@ -250,7 +250,7 @@ void EEPROM::Init()
 
     for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
-        if (data[i] != (uint)(-1))
+        if (data[i] != static_cast<uint>(-1))
         {
             return;
         }
@@ -260,10 +260,10 @@ void EEPROM::Init()
 
     float *address = (float *)SECTOR_SIGNAL_FPGA_11; //-V566
 
-    float value = 0.0f;
+    float value = 0.0F;
 
     for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
-        WriteData((uint)address, &value, 4);
+        WriteData(reinterpret_cast<uint>(address), &value, 4);
     }
 }

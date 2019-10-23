@@ -20,13 +20,13 @@ Buffer::~Buffer()
 
 uint8 *Buffer::Data()
 {
-    return (uint8 *)buffer;
+    return static_cast<uint8 *>(buffer);
 }
 
 
 float *Buffer::DataFloat()
 {
-    return (float *)Data();
+    return reinterpret_cast<float *>(Data());
 }
 
 
