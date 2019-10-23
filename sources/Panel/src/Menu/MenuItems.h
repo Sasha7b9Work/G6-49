@@ -79,13 +79,13 @@ public:
     Type GetType() const;
 
     /// Возвращает порядковый номер пункта меню на странице
-    int PositionOnPage();
+    int PositionOnPage() const;
     /// Возвращает полный путь к элементу меню
     String FullPath();
     /// Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
     int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
 
-    Page *Keeper() { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper_)); };
+    Page *Keeper() const { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper_)); };
 
     bool IsActive() const { return funcOfActive(); };
 
@@ -359,11 +359,11 @@ public:
     /// Возвращает количество вариантов выбора в элементе по адресу choice
     int8 NumSubItems() const;
 
-    void Draw(bool opened, int x = -1, int y = -1);
+    void Draw(bool opened, int x = -1, int y = -1) const;
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameCurrentSubItem();
+    const char *NameCurrentSubItem() const;
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
-    String NameNextSubItem();
+    String NameNextSubItem() const;
     /// Возвращает высоту раскрытого
     int GetHeightOpened() const;
 
@@ -373,7 +373,7 @@ public:
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
     Item *Press(KeyEvent &control);
 
-    int8 CurrentIndex();
+    int8 CurrentIndex() const;
 };
 
 

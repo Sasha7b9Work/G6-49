@@ -473,7 +473,7 @@ Item::Type Item::GetType() const
 }
 
 
-int8 Choice::CurrentIndex()
+int8 Choice::CurrentIndex() const
 {
     int8 retValue = 0;
 
@@ -516,7 +516,7 @@ int8 ChoiceBase::CurrentIndex() const
 }
 
 
-int Item::PositionOnPage()
+int Item::PositionOnPage() const
 {
     if(Keeper() == 0)                       // Если у страницы нет хранителя - она принадлежит главному меню
     {

@@ -16,7 +16,7 @@ void Item::Draw(bool opened, int x, int y) const
 {
     if (type == Item::Type::Choice)
     {
-        ((Choice *)this)->Draw(opened, x, y);
+        static_cast<const Choice *>(this)->Draw(opened, x, y);
     }
     else if (type == Item::Type::Button)
     {
@@ -108,9 +108,11 @@ void ChoiceParameter::Draw(bool opened, int x, int y)
 }
 
 
-void Choice::Draw(bool opened, int x, int y)
+void Choice::Draw(bool opened, int x, int y) const
 {
-    int step = (int)(Step() + 0.5f);
+    Choice *choice = const_cast<Choice *>(this);
+
+    int step = (int)(choice->Step() + 0.5f);
 
     if(opened)
     {

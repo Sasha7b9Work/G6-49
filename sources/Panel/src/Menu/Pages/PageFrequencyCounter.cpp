@@ -9,7 +9,7 @@
 
 
 extern const PageBase pFrequencyCounter;
-Page *PageFrequencyCounter::pointer = (Page *)&pFrequencyCounter;
+Page *PageFrequencyCounter::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pFrequencyCounter));
 
 
 /// Настроить вид страницы в соответствии с режимом измерения
@@ -214,17 +214,17 @@ DEF_PAGE_8( pFrequencyCounter,  // -V641 // -V1027                              
 
 static void Tune_Page()
 {
-    PageBase *page = (PageBase *)&pFrequencyCounter;
+    PageBase *page = const_cast<PageBase *>(&pFrequencyCounter);
 
     if (FREQ_METER_MEASURE_IS_FREQ)
     {
-        page->items[2] = (Item *)&cBillingTime; // -V641
+        page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cBillingTime));
         page->items[3] = 0;
     }
     else if (FREQ_METER_MEASURE_IS_PERIOD)
     {
-        page->items[2] = (Item *)&cTimeStamps;  // -V641
-        page->items[3] = (Item *)&cAvePeriod;   // -V641
+        page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cTimeStamps));
+        page->items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cAvePeriod));
     }
     else
     {

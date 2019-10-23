@@ -17,13 +17,13 @@
 
 
 
-const char *Choice::NameCurrentSubItem()
+const char *Choice::NameCurrentSubItem() const
 {
     return NAME_FROM_INDEX(CurrentIndex());
 }
 
 
-String Choice::NameNextSubItem()
+String Choice::NameNextSubItem() const
 {
     int8 nextIndex = CurrentIndex() + 1;
 
