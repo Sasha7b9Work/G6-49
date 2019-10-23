@@ -47,14 +47,14 @@ char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
         {"\x10uV",  "\x10mV", "\x10V", "\x10kV"}
     };
 
-    static const float factor[4] = {1e6f, 1e3f, 1.0f, 1e-3f};
+    static const float factor[4] = {1e6F, 1e3F, 1.0F, 1e-3F};
 
     int num = 0;
-    float absValue = std::fabsf(voltage) + 0.5e-4f;
+    float absValue = std::fabsf(voltage) + 0.5e-4F;
 
-    if      (absValue < 1e-3f) { num = 0; }
-    else if (absValue < 1.0f)  { num = 1; }
-    else if (absValue < 1e3f)  { num = 2; }
+    if      (absValue < 1e-3F) { num = 0; }
+    else if (absValue < 1.0F)  { num = 1; }
+    else if (absValue < 1e3F)  { num = 2; }
     else                       { num = 3; }
 
     CHAR_BUF(bufferOut, 20);
@@ -94,34 +94,34 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
 
     char format[10] = "%4.2f\0\0";
 
-    format[1] = (char)numDigits + 0x30;
+    format[1] = static_cast<char>(numDigits) + 0x30;
 
     int numDigitsInInt = Math::DigitsInIntPart(value);
 
-    format[3] = (char)((numDigits - numDigitsInInt) + 0x30);
+    format[3] = static_cast<char>((numDigits - numDigitsInInt) + 0x30);
     if (numDigits == numDigitsInInt)
     {
         format[5] = '.';
     }
 
     float absValue = std::fabsf(value);
-    sprintf(pBuffer, format, (double)absValue);
+    sprintf(pBuffer, format, static_cast<double>(absValue));
 
-    float val = (float)std::atof(pBuffer); //-V2508
+    float val = static_cast<float>(std::atof(pBuffer)); //-V2508
 
     if (Math::DigitsInIntPart(val) != numDigitsInInt)
     {
         numDigitsInInt = Math::DigitsInIntPart(val);
-        format[3] = (char)((numDigits - numDigitsInInt) + 0x30);
+        format[3] = static_cast<char>((numDigits - numDigitsInInt) + 0x30);
         if (numDigits == numDigitsInInt)
         {
             format[5] = '.';
         }
-        sprintf(pBuffer, format, (double)value);
+        sprintf(pBuffer, format, static_cast<double>(value));
     }
 
     bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < (size_t)(numDigits + (signExist ? 2 : 1)))  // -V201
+    while (std::strlen(bufferOut) < static_cast<size_t>(numDigits + (signExist ? 2 : 1)))
     {
         std::strcat(bufferOut, "0");
     }
@@ -144,15 +144,15 @@ char *Time2String(float time, bool alwaysSign, char buffer[20])
         {"ns", "us",  "ms", "s"}
     };
 
-    static const float factor[4] = {1e9f, 1e6f, 1e3f, 1.0f};
+    static const float factor[4] = {1e9F, 1e6F, 1e3F, 1.0F};
 
     float absTime = std::fabsf(time);
 
     int num = 0;
 
-    if      (absTime + 0.5e-10f < 1e-6f) {          }
-    else if (absTime + 0.5e-7f < 1e-3f)  { num = 1; }
-    else if (absTime + 0.5e-3f < 1.0f)   { num = 2; }
+    if      (absTime + 0.5e-10F < 1e-6F) {          }
+    else if (absTime + 0.5e-7F < 1e-3F)  { num = 1; }
+    else if (absTime + 0.5e-3F < 1.0F)   { num = 2; }
     else                                 { num = 3; }
 
     char bufferOut[20];
@@ -171,15 +171,15 @@ char *Freq2String(float freq, bool, char bufferOut[20])
         std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
-    if (freq >= 1e6f)
+    if (freq >= 1e6F)
     {
         suffix = LANG_RU ? "ћ√ц" : "MHz";
-        freq /= 1e6f;
+        freq /= 1e6F;
     }
-    else if (freq >= 1e3f)
+    else if (freq >= 1e3F)
     {
         suffix = LANG_RU ? "к√ц" : "kHz";
-        freq /= 1e3f;
+        freq /= 1e3F;
     }
     else
     {
@@ -215,15 +215,15 @@ char *Freq2StringAccuracy(float freq, char bufferOut[20], int numDigits)
         std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
     }
-    if (freq >= 1e6f)
+    if (freq >= 1e6F)
     {
         suffix = LANG_RU ? "ћ√ц" : "MHz";
-        freq /= 1e6f;
+        freq /= 1e6F;
     }
-    else if (freq >= 1e3f)
+    else if (freq >= 1e3F)
     {
         suffix = LANG_RU ? "к√ц" : "kHz";
-        freq /= 1e3f;
+        freq /= 1e3F;
     }
     else
     {
@@ -250,9 +250,9 @@ char *Bin2String(uint8 value, char buffer[9])
 char *Bin2String16(uint16 value, char valBuffer[19])
 {
     char buffer[9];
-    std::strcpy(valBuffer, Bin2String((uint8)(value >> 8), buffer));
+    std::strcpy(valBuffer, Bin2String(static_cast<uint8>(value >> 8), buffer));
     valBuffer[8] = ' ';
-    std::strcpy(valBuffer + 9, Bin2String((uint8)value, buffer));
+    std::strcpy(valBuffer + 9, Bin2String(static_cast<uint8>(value), buffer));
     valBuffer[18] = '\0';
     return valBuffer;
 }
@@ -370,7 +370,7 @@ char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int fo
 
         value /= 10;
 
-        *pointer = (char)digit | 0x30;
+        *pointer = static_cast<char>(digit) | 0x30;
 
         pointer--;
     }
@@ -388,7 +388,7 @@ uint StringToBin32(char buffer[33])
 
     char *pointer = buffer;
 
-    for(int i = (int)size - 1; i >= 0; i--)
+    for(int i = static_cast<int>(size) - 1; i >= 0; i--)
     {
         if(*pointer++ != '0')
         {
@@ -502,20 +502,20 @@ char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numD
         std::strcat(buffer, ERROR_STRING_VALUE);
         return buffer;
     }
-    else if (fabsTime + 0.5e-10f < 1e-6f)
+    else if (fabsTime + 0.5e-10F < 1e-6F)
     {
         suffix = LANG_RU ? "нс" : "ns";
-        time *= 1e9f;
+        time *= 1e9F;
     }
-    else if (fabsTime + 0.5e-7f < 1e-3f)
+    else if (fabsTime + 0.5e-7F < 1e-3F)
     {
         suffix = LANG_RU ? "мкс" : "us";
-        time *= 1e6f;
+        time *= 1e6F;
     }
-    else if (fabsTime + 0.5e-3f < 1.0f)
+    else if (fabsTime + 0.5e-3F < 1.0F)
     {
         suffix = LANG_RU ? "мс" : "ms";
-        time *= 1e3f;
+        time *= 1e3F;
     }
     else
     {
@@ -619,7 +619,7 @@ char *SU::GetWord(char *string, int n, char *out, int size)
 
     if (length + 1 > size)
     {
-        return (char *)0xffffffffU;           // Ќе хватит места в выходном буфере - выходим с соответствующим кодом //-V566
+        return reinterpret_cast<char *>(0xffffffffU);           // Ќе хватит места в выходном буфере - выходим с соответствующим кодом //-V566
     }
 
     for (int i = 0; i < length; i++)
@@ -690,15 +690,15 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
     {
         if (currentWord == numWord)
         {
-            word->address = (char *)string;
+            word->address = const_cast<char *>(string);
             ChooseSymbols(&string);
-            word->numSymbols = (int8)(string - word->address);
+            word->numSymbols = static_cast<int8>(string - word->address);
 
             char *pointer = word->address;
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = (char)std::toupper(*pointer);
+                *pointer = static_cast<char>(std::toupper(*pointer));
                 pointer++;
             }
             return true;
@@ -719,7 +719,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
 bool SU::WordEqualZeroString(Word *word, char* string)
 {
     char *ch = string;
-    char *w = (char*)(word->address);
+    char *w = static_cast<char*>(word->address);
 
     while (*ch != 0)
     {
@@ -804,7 +804,7 @@ char SU::ToUpper(char symbol)
     }
     else if (symbol <= 0x7a)
     {
-        return (char)std::toupper(symbol);
+        return static_cast<char>(std::toupper(symbol));
     }
     else
     {
@@ -841,13 +841,13 @@ float Buffer2Float(const uint8 *buffer)
 }
 
 
-char *SU::ToUpper(void *_str, uint size)
+char *SU::ToUpper(void *s, uint size)
 {
-    char *str = (char *)_str;
+    char *str = static_cast<char *>(s);
 
     for (uint i = 0; i < size; i++)
     {
-        str[i] = (char)std::toupper(str[i]);
+        str[i] = static_cast<char>(std::toupper(str[i]));
     }
 
     return str;

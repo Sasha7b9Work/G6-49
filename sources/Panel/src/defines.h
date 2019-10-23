@@ -49,7 +49,7 @@ typedef void (*pFuncVB)(bool);
 #define _SET_BIT(value, bit)        ((value) |= (1 << (bit)))
 #define _CLEAR_BIT(value, bit)      ((value) &= (~(1 << (bit))))
 
-#define ERROR_VALUE_FLOAT   1.111e29f
+#define ERROR_VALUE_FLOAT   1.111e29F
 #define ERROR_VALUE_UINT8   255
 #define ERROR_STRING_VALUE  "--.--"
 

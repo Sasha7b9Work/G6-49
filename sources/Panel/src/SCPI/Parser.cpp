@@ -82,7 +82,7 @@ String *SCPI::Parser::CreateString(uint first, uint last)
 
     for (uint i = first; i <= last; i++)
     {
-        (*result)[count++] = (char)Buffer::GetByte(i);
+        (*result)[count++] = static_cast<char>(Buffer::GetByte(i));
     }
 
     (*result)[count] = '\0';

@@ -8,7 +8,7 @@
 
 
 extern const PageBase pageCalibrationB;
-Page *PageSignals::PageCalibration::PageB::pointer = (Page *)&pageCalibrationB;
+Page *PageSignals::PageCalibration::PageB::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageCalibrationB));
 
 
 

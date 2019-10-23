@@ -42,13 +42,13 @@ static const Settings defSet =
         MAKE_COLOR(0xc0, 0x00, 0x00)    // RED_75
     },
     { 
-        ParameterValue::Frequency,           // sig_parameter[NumForms]
+        ParameterValue::Frequency,      // sig_parameter[NumForms]
         ParameterValue::Frequency,
         ParameterValue::Frequency,
         ParameterValue::Frequency,
         ParameterValue::Frequency
     },
-    (Page *)Menu::mainPage,             // menu_page
+    static_cast<Page *>(Menu::mainPage),// menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
     FrequencyMeter::BillingTime::_1ms,  // freq_billingTime
