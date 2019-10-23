@@ -19,6 +19,7 @@ struct Chan
     explicit Chan(uint8 v) : value(static_cast<E>(v)) {};
     explicit Chan(E v) : value(v) {};
     bool IsA() const { return value == A; };
+    operator uint8() { return static_cast<uint8>(value); }
     operator int() { return static_cast<int>(value); }
     operator E() { return value; }
 };

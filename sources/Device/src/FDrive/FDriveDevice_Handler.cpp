@@ -137,11 +137,11 @@ void FDrive::Handler::RequestFile()
 {
     char name[255];
 
-    int numFile = (int)msg->TakeByte();
+    int numFile = static_cast<int>(msg->TakeByte());
 
     if (FileSystem::GetNameFile(msg->String(2), numFile, name))
     {
-        Message::FDrive::FileName((uint8)numFile, name).Transmit();
+        Message::FDrive::FileName(static_cast<uint8>(numFile), name).Transmit();
     }
 }
 
@@ -149,14 +149,14 @@ void FDrive::Handler::RequestFile()
 void FDrive::Handler::RequestFileSize()
 {
     char name[255];
-    int numFile = (int)msg->TakeByte();
+    int numFile = static_cast<int>(msg->TakeByte());
     if (FileSystem::GetNameFile(msg->String(2), numFile, name))           // Получаем имя файла
     {
         String fullPath("%s\\%s", msg->String(2), name);
 
         uint size = FileSystem::GetFileSize(fullPath.CString());
 
-        Message::FDrive::FileSize((uint8)numFile, size).Transmit();
+        Message::FDrive::FileSize(static_cast<uint8>(numFile), size).Transmit();
     }
 }
 
@@ -164,8 +164,8 @@ void FDrive::Handler::RequestFileSize()
 void FDrive::Handler::LoadFromExtStorage()
 {
     char fullName[255];
-    Chan::E ch = (Chan::E)msg->TakeByte();
-    int numFile = (int)msg->TakeByte();
+    Chan ch(msg->TakeByte());
+    int numFile = static_cast<int>(msg->TakeByte());
     std::strcpy(fullName, msg->String(2));
     std::strcat(fullName, "\\");
     if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
@@ -176,7 +176,7 @@ void FDrive::Handler::LoadFromExtStorage()
         TransformDataToCode(buffer.DataFloat(), code);
         FPGA::SaveExtSignal(ch, code);
 
-        Message::FDrive::LoadFromExtStorage((uint8)ch, (uint8)numFile, 0).Transmit();     // Посылаем признак того, что сохранение завершено
+        Message::FDrive::LoadFromExtStorage(ch, static_cast<uint8>(numFile), 0).Transmit();     // Посылаем признак того, что сохранение завершено
     }
 }
 
@@ -187,7 +187,7 @@ void FDrive::Handler::GetPictureDDS()
     uint8 data[SIZE];
     std::memset(data, 0, SIZE);
 
-    int numFile = (int)msg->TakeByte();
+    int numFile = static_cast<int>(msg->TakeByte());
 
     char fullName[255];
     std::strcpy(fullName, msg->String(2));
@@ -202,7 +202,7 @@ void FDrive::Handler::GetPictureDDS()
         }
     }
 
-    Message::FDrive::PictureDDS((uint8)numFile, data).Transmit();
+    Message::FDrive::PictureDDS(static_cast<uint8>(numFile), data).Transmit();
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,7 +221,7 @@ void FDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs,
     *numFiles = 0;
 
     char nameDir[_MAX_LFN + 1];
-    std::memcpy(nameDir, (void *)fullPath, std::strlen(fullPath));
+    std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath));
     nameDir[std::strlen(fullPath)] = '\0';
 
     if (f_opendir(&dir, nameDir) == FR_OK)
@@ -267,7 +267,7 @@ bool FDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *na
 {
     StructForReadDir srd;
 
-    std::memcpy(srd.nameDir, (void *)fullPath, std::strlen(fullPath));
+    std::memcpy(srd.nameDir, const_cast<char *>(fullPath), std::strlen(fullPath));
     srd.nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &srd.dir;
@@ -319,7 +319,7 @@ uint FDrive::FileSystem::GetFileSize(const char *fullPath)
         return size;
     }
 
-    return (uint)-1;
+    return static_cast<uint>(-1);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -383,23 +383,23 @@ void FDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]
 
     for (int i = 0; i < 4096; i++)
     {
-        uint16 c = (uint16)(std::fabsf(d[i]) * max);
+        uint16 c = static_cast<uint16>(std::fabsf(d[i]) * max);
 
         if (Sign(d[i]) == -1)
         {
             SetBit(c, 13);
         }
 
-        code[i * 2] = code[i * 2 + 1] = (uint8)c;
-        code[i * 2 + FPGA::NUM_POINTS] = code[i * 2 + FPGA::NUM_POINTS + 1] = (uint8)(c >> 8);
+        code[i * 2] = code[i * 2 + 1] = static_cast<uint8>(c);
+        code[i * 2 + FPGA::NUM_POINTS] = code[i * 2 + FPGA::NUM_POINTS + 1] = static_cast<uint8>(c >> 8);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::Normalize(float d[4096])
 {
-    float min = 0.0f;
-    float max = 0.0f;
+    float min = 0.0F;
+    float max = 0.0F;
 
     FindMinMax(d, &min, &max);
 
@@ -411,8 +411,8 @@ void FDrive::Normalize(float d[4096])
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FDrive::FindMinMax(const float d[4096], float *_min, float *_max)
 {
-    float min = 0.0f;
-    float max = 0.0f;
+    float min = 0.0F;
+    float max = 0.0F;
 
     for (int i = 0; i < 4096; i++)
     {
@@ -440,7 +440,7 @@ float FDrive::FindScale(float min, float max)
         max = std::fabsf(min);
     }
 
-    return 1.0f / max;
+    return 1.0F / max;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -459,12 +459,12 @@ void FDrive::FillPicture(uint8 *picture, uint size, float values[4096])
 
     uint8 aveValue = 127;
 
-    float step = 4096.0f / size;
+    float step = 4096.0F / size;
 
     for (uint i = 0; i < size; i++)
     {
-        float val = values[(int)(i * step)];
+        float val = values[static_cast<int>(i * step)];
 
-        picture[i] = (uint8)(aveValue + val * 125);
+        picture[i] = static_cast<uint8>(aveValue + val * 125);
     }
 }

@@ -103,10 +103,12 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
-    uint8 data[3] = {
-        static_cast<uint8>(BIN_U8(00010000)
-        | (ch == Chan::A ? 0x01 : 0x08)), 
-            static_cast<uint8>(value >> 8), static_cast<uint8>(value)};
+    uint8 data[3] =
+    {
+        static_cast<uint8>(BIN_U8(00010000) | (ch == Chan::A ? 0x01 : 0x08)), 
+        static_cast<uint8>(value >> 8),
+        static_cast<uint8>(value)
+    };
 
     WriteParameter(BIN_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
 }
@@ -114,11 +116,16 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void AD5697::SetFreqHysteresys(float hyst)
 {
-    Limitation(&hyst, 0.0f, 4095.0f);
+    Limitation(&hyst, 0.0F, 4095.0F);
 
-    uint16 value = (uint16)((uint16)hyst << 4);
+    uint16 value = static_cast<uint16>(static_cast<uint16>(hyst) << 4);
 
-    uint8 data[3] = {((uint8)(BIN_U8(00010000) | 0x08)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] =
+    {
+        static_cast<uint8>(BIN_U8(00010000) | 0x08),
+        static_cast<uint8>(value >> 8),
+        static_cast<uint8>(value)
+    };
 
     WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
 }
@@ -128,11 +135,16 @@ void AD5697::SetFreqLevel(float level)
 {
     level += (float)CAL_FREQ_LEVEL_TRIG;
 
-    Limitation(&level, 0.0f, 4095.0f);
+    Limitation(&level, 0.0F, 4095.0F);
 
-    uint16 value = (uint16)((uint16)level << 4);
+    uint16 value = static_cast<uint16>(static_cast<uint16>(level) << 4);
 
-    uint8 data[3] = {((uint8)(BIN_U8(00010000) | 0x01)), (uint8)(value >> 8), (uint8)value};
+    uint8 data[3] =
+    {
+        static_cast<uint8>(BIN_U8(00010000) | 0x01),
+        static_cast<uint8>(value >> 8),
+        static_cast<uint8>(value)
+    };
 
     WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
 }
@@ -156,7 +168,7 @@ void AD5697::WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin)
 void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 {
     // Смещение на один бит влево - страшная штука. Если не знать, можно потерять много времени
-    HAL_I2C_Master_Transmit(&hI2C, (uint16)(address << 1), data, 3, 100);
+    HAL_I2C_Master_Transmit(&hI2C, static_cast<uint16>(address << 1), data, 3, 100);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -86,7 +86,7 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case SetFormWave:
             {
-                Form form((Form::E)buffer[2]);
+                Form form(buffer[2]);
                 std::strcat(result, form.Name());
             }
             break;

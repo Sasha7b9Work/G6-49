@@ -99,7 +99,7 @@ void FDrive::Update()
     {
         FRESULT result = f_mount(&FatFS, USBDISKPath, 0);
 
-        Message::FDrive::Mount((result == FR_OK) ? (uint8)1 : (uint8)2).Transmit();
+        Message::FDrive::Mount((result == FR_OK) ? static_cast<uint8>(1) : static_cast<uint8>(2)).Transmit();
 
         state = State::Connected;
 

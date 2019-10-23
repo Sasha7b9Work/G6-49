@@ -75,9 +75,9 @@ namespace FPGA
     /// Режим запуска
     StartMode startMode[Chan::Count] = { StartMode::Auto, StartMode::Auto };
 
-    float amplitude[Chan::Count] = { 10.0f, 10.0f };
+    float amplitude[Chan::Count] = { 10.0F, 10.0F };
 
-    float offset[Chan::Count] = { 5.0f, 5.0f };
+    float offset[Chan::Count] = { 5.0F, 5.0F };
     /// Здесь хранятся записанные в регистры значения
     uint64 registers[RG::Count] = { 0 };
 }
@@ -90,8 +90,8 @@ namespace FPGA
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FPGA::ModeWork::E       FPGA::modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
 FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
-ParamValue              FPGA::PacketImpulse::periodImpulse((uint64)0);
-ParamValue              FPGA::PacketImpulse::durationImpulse((uint64)0);
+ParamValue              FPGA::PacketImpulse::periodImpulse(static_cast<uint64>(0));
+ParamValue              FPGA::PacketImpulse::durationImpulse(static_cast<uint64>(0));
 
 /// \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
 /// Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
@@ -153,7 +153,7 @@ void FPGA::WriteMaxAmplitude(Chan::E ch)
 {
     // Записать максимальный размах сигнала в регистры
 
-    uint64 data = ((uint64)(16383) << 14) + (8191);
+    uint64 data = (static_cast<uint64>(16383) << 14) + (8191);
 
     static const RG::E regs[Chan::Count] = { RG::_3_RectA, RG::_4_RectB };
 
@@ -242,7 +242,7 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
     }
     else if (modeWork[ch] == ModeWork::DDS)
     {
-        uint64 N = (uint64)((frequency.ToFloat() * ((uint64)1 << 40)) / 1e8f);
+        uint64 N = static_cast<uint64>((frequency.ToFloat() * (static_cast<uint64>(1) << 40)) / 1E8F);
         WriteRegister(RG::_1_Freq, N);
     }
     else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
@@ -252,7 +252,7 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
             modeWork[ch] = ModeWork::Impulse;
             WriteControlRegister();
         }
-        uint N = (uint)(1e8f / frequency.ToFloat() + 0.5f);
+        uint N = static_cast<uint>(1E8F / frequency.ToFloat() + 0.5F);
         WriteRegister(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
     }
     else
@@ -288,7 +288,7 @@ void FPGA::PacketImpulse::SetPeriodPacket(ParamValue period)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::PacketImpulse::SetNumberImpules(uint value)
 {
-    uint64 n = (uint64)(((value - 1) * periodImpulse.ToFloat() + durationImpulse.ToFloat()) / 10e-9f);
+    uint64 n = static_cast<uint64>(((value - 1) * periodImpulse.ToFloat() + durationImpulse.ToFloat()) / 10E-9F);
 
     WriteRegister(RG::_6_DurationImpulseA, n);
 }
@@ -359,7 +359,7 @@ void FPGA::WriteControlRegister()
         }
     }
 
-    switch((uint8)modeWork[Chan::A]) //-V2520
+    switch(static_cast<uint8>(modeWork[Chan::A])) //-V2520
     {
         case ModeWork::Meander:     
             Bit::Set(data, RG0::_8_MeanderA);
@@ -370,7 +370,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    switch((uint8)modeWork[Chan::B]) //-V2520
+    switch(static_cast<uint8>(modeWork[Chan::B])) //-V2520
     {
         case ModeWork::Meander:   
             Bit::Set(data, RG0::_9_MeanderB);
@@ -509,10 +509,10 @@ void FPGA::SendData(uint8 *data)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::WriteByte(uint8 byte)
 {
-    //                                                        биты 0,1                          биты 2,3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)byte & 0x03) << 14) + (((uint16)(byte & 0x0c)) >> 2);;
-    //                                                        биты 4,5,6
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)byte & 0xf0) << 3);
+    //                                                                                 биты 0,1                                    биты 2,3
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(byte) & 0x03) << 14) + ((static_cast<uint16>(byte & 0x0c)) >> 2);;
+    //                                                                                биты 4,5,6
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(byte) & 0xf0) << 3);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -577,11 +577,11 @@ uint FPGA::OffsetToCode(Chan::E ch)
 
     uint max = 0x1fff;
 
-    float k = 1.0f + CAL_DDS_MAX(ch) / 1023.0f;
+    float k = 1.0F + CAL_DDS_MAX(ch) / 1023.0F;
 
-    int code = ~((int)(off / 5.0f * max * k)) + 1;
+    int code = ~(static_cast<int>(off / 5.0F * max * k)) + 1;
 
-    return (uint)(code & 0x3fff);
+    return static_cast<uint>(code & 0x3fff);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -615,13 +615,13 @@ uint8 *FPGA::DataDDS(Chan::E ch)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 uint8 *FPGA::DataFlash(Chan::E ch)
 {
-    return (uint8 *)EEPROM::Signal::Get(ch);
+    return reinterpret_cast<uint8 *>(EEPROM::Signal::Get(ch));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void FPGA::SaveExtSignal(Chan::E ch, uint8 *data)
 {
-    EEPROM::Signal::Save(ch, (uint16 *)data);
+    EEPROM::Signal::Save(ch, reinterpret_cast<uint16 *>(data));
 }
 
 #ifdef WIN32
