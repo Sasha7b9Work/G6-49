@@ -16,8 +16,11 @@ struct Chan
         B,
         Count
     } value;
+    explicit Chan(uint8 v) : value(static_cast<E>(v)) {};
     explicit Chan(E v) : value(v) {};
     bool IsA() const { return value == A; };
+    operator int() { return static_cast<int>(value); }
+    operator E() { return value; }
 };
 
 /// Сопротивление входа частотомера
@@ -30,8 +33,8 @@ struct FreqResist
     } value;
     bool Is(E v) const { return value == v; };
     FreqResist(E v) : value(v) {};
-    FreqResist(uint v) : value((E)v) {};
-    operator uint() const { return (uint)value; };
+    FreqResist(uint v) : value(static_cast<E>(v)) {};
+    operator uint() const { return static_cast<uint>(value); };
 };
 
 /// Открытый/закрытый вход частотомера
@@ -43,9 +46,9 @@ struct FreqCouple
         DC
     } value;
     FreqCouple(E v) : value(v) {};
-    FreqCouple(uint v) : value((E)v) {};
+    FreqCouple(uint v) : value(static_cast<E>(v)) {};
     bool Is(E v) const { return v == value; };
-    operator uint() const { return (uint)value; };
+    operator uint() const { return static_cast<uint>(value); };
 };
 
 /// ФНЧ частотомера
@@ -57,9 +60,9 @@ struct FreqFiltr
         Disable
     } value;
     FreqFiltr(E v) : value(v) {};
-    FreqFiltr(uint v) : value((E)v) {};
+    FreqFiltr(uint v) : value(static_cast<E>(v)) {};
     bool Is(E v) const { return v == value; };
-    operator uint() const { return (uint)value; };
+    operator uint() const { return static_cast<uint>(value); };
 };
 
 /// Режим запуска
@@ -73,8 +76,8 @@ struct StartMode
         ShaperB         ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
     } value;
 
-    StartMode(float v) : value((E)((int)(v + 0.5F))) {};
-    operator uint8() const { return (uint8)value; };
+    StartMode(float v) : value(static_cast<E>(static_cast<int>(v + 0.5F))) {};
+    operator uint8() const { return static_cast<uint8>(value); };
     bool Is(StartMode start) const { return start.value == value; };
 };
 

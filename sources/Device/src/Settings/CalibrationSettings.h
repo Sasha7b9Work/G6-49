@@ -22,7 +22,7 @@
 
 struct CalibrationSettings
 {
-    union
+    union //-V2514
     {
         struct
         {

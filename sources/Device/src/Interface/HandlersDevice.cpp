@@ -164,11 +164,11 @@ void Handlers::SendData(SimpleMessage *)
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::EnableChannel(SimpleMessage *message)
+void Handlers::EnableChannel(SimpleMessage *msg)
 {
-    Chan::E ch = (Chan::E)message->TakeByte();
+    Chan ch(msg->TakeByte());
 
-    bool enable = (message->TakeByte() == 1);
+    bool enable = (msg->TakeByte() == 1);
 
     Generator::EnableChannel(ch, enable);
 }
@@ -176,9 +176,9 @@ void Handlers::EnableChannel(SimpleMessage *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetFormWave(SimpleMessage *msg)
 {
-    Chan::E ch = (Chan::E)msg->TakeByte();
+    Chan ch(msg->TakeByte());
 
-    Form::E form = (Form::E)msg->TakeByte();
+    Form form(msg->TakeByte());
 
     Generator::SetFormWave(ch, form);
 }
@@ -186,7 +186,7 @@ void Handlers::SetFormWave(SimpleMessage *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, ParamValue))
 {
-    Chan::E ch = (Chan::E)msg->TakeByte();
+    Chan ch(msg->TakeByte());
     ParamValue value(msg->TakeDoubleWord());
     func(ch, value);
 }
@@ -266,7 +266,7 @@ void Handlers::SetPacketNumber(SimpleMessage *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetManipulation(SimpleMessage *msg)
 {
-    Chan::E ch = (Chan::E)msg->TakeByte();
+    Chan ch(msg->TakeByte());
 
     AD9952::Manipulation::SetEnabled(ch, msg->TakeByte() != 0);
 }
@@ -274,9 +274,9 @@ void Handlers::SetManipulation(SimpleMessage *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetStartMode(SimpleMessage *msg)
 {
-    Chan::E ch = (Chan::E)msg->TakeByte();
+    Chan ch(msg->TakeByte());
 
-    StartMode mode = (StartMode)msg->TakeByte();
+    StartMode mode = static_cast<StartMode>(msg->TakeByte());
 
     FPGA::SetStartMode(ch, mode);
 }
@@ -284,7 +284,7 @@ void Handlers::SetStartMode(SimpleMessage *msg)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetPolarity(SimpleMessage *message)
 {
-    Chan::E ch = (Chan::E)message->TakeByte();
+    Chan ch(message->TakeByte());
 
     FPGA::SetPolarity(ch, message->TakeByte());
 }
@@ -292,23 +292,23 @@ void Handlers::SetPolarity(SimpleMessage *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetManipulationMode(SimpleMessage *msg)
 {
-    Chan::E ch = (Chan::E)msg->TakeByte();
+    Chan ch(msg->TakeByte());
 
-    AD9952::Manipulation::SetType(ch, (AD9952::Manipulation::Type::E)msg->TakeByte());
+    AD9952::Manipulation::SetType(ch.value, static_cast<AD9952::Manipulation::Type::E>(msg->TakeByte()));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Handlers::LoadFormDDS(SimpleMessage *message)
+void Handlers::LoadFormDDS(SimpleMessage *msg)
 {
-    Chan::E ch = (Chan::E)message->TakeByte();
+    Chan ch(msg->TakeByte());
 
-    message->TakeRemainigData(FPGA::DataDDS(ch));
+    msg->TakeRemainigData(FPGA::DataDDS(ch));
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::SetKoeffCalibration(SimpleMessage *msg)
 {
-    Chan::E ch = (Chan::E)msg->TakeByte();
+    Chan ch(msg->TakeByte());
 
     static int16 * const values[KoeffCal::Count] =
     {
@@ -335,7 +335,7 @@ void Handlers::GetKoeffCalibration(SimpleMessage *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Handlers::WriteRegister(SimpleMessage *msg)
 {
-    Register::E reg = (Register::E)msg->TakeByte();
+    Register reg(msg->TakeByte());
 
     uint64 value = msg->TakeDoubleWord();
 

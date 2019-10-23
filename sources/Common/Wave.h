@@ -22,7 +22,7 @@ struct Order
         Count
     } value;
     Order(E v = Count) : value(v)  { };
-    operator uint8() const { return (uint8)value; };
+    operator uint8() const { return static_cast<uint8>(value); };
     pString Name() const;
     Order& operator++(int);
     Order& operator--(int);
@@ -297,6 +297,8 @@ public:
         oldCurrentParams(0)
     { };
 
+    Form(uint8 v) { Form(static_cast<E>(v)); };
+
     Form(E v, ParameterBase **param, Wave *w);
     /// Возвращает человеческое название формы сигнала
     pString Name() const;
@@ -334,6 +336,8 @@ public:
     float GetOffset();
     /// Получить размах сигнала
     float GetAmplitude();
+
+    operator E() { return value; }
 
 private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет

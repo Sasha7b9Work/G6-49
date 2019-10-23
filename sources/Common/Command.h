@@ -112,8 +112,8 @@ struct Command
             Count
     } value;
     Command(E v) : value(v) {};
-    Command(const uint8 v) : value((E)v) {};
-    operator uint8() const { return (uint8)value; };
+    Command(const uint8 v) : value(static_cast<E>(v)) {};
+    operator uint8() const { return static_cast<uint8>(value); };
     pString Name() const;
     pString Trace(const uint8 *buffer) const;
 private:
@@ -148,7 +148,9 @@ struct Register
         Count
     } value;
     explicit Register(E v) : value(v) {};
+    explicit Register(uint8 v) { Register(static_cast<E>(v)); };
     pString Name() const;
+    operator E() { return value; }
 };
 
 
