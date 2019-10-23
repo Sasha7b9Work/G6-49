@@ -34,7 +34,7 @@ void CalibrationSettings::Load()
     {
         for (int k = 0; k < KoeffCal::Count; k++)
         {
-            Message::Calibrate((uint8)ch, (uint8)k).Transmit();
+            Message::Calibrate(static_cast<uint8>(ch), static_cast<uint8>(k)).Transmit();
         }
     }
 }

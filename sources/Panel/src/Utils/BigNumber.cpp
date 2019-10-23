@@ -256,9 +256,9 @@ void BigNumber::ChangeFractNegativePlus(int position)
 
 float BigNumber::GetValue()
 {
-    float result = (float)integer.value + (float)fract.value / Pow10(fract.numSymbols);
+    float result = static_cast<float>(integer.value) + static_cast<float>(fract.value) / Pow10(fract.numSymbols);
 
-    float mul = (sign == '-') ? -1.0f : 1.0f;
+    float mul = (sign == '-') ? -1.0F : 1.0F;
 
     return result * mul;
 }

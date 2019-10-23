@@ -17,7 +17,7 @@ static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 
 uint  CPU::timeStartMeasFPS = 0;
 int   CPU::numFrames = 0;
-float CPU::fps = 0.0f;
+float CPU::fps = 0.0F;
 
 static CRC_HandleTypeDef handleCRC = {CRC};
 
@@ -176,8 +176,7 @@ void CPU::FSMC::Init()
         HAL_UNLOCKED, HAL_SRAM_STATE_RESET, 0
     };
 
-    if (HAL_SRAM_Init((SRAM_HandleTypeDef*)(&sramHandle), (FMC_NORSRAM_TimingTypeDef*)(&sramTiming),
-        (FMC_NORSRAM_TimingTypeDef*)(&sramTiming)) != HAL_OK)
+    if (HAL_SRAM_Init(const_cast<SRAM_HandleTypeDef*>(&sramHandle), const_cast<FMC_NORSRAM_TimingTypeDef*>(&sramTiming), const_cast<FMC_NORSRAM_TimingTypeDef*>(&sramTiming)) != HAL_OK)
     {
         ERROR_HANDLER();
     };
@@ -189,7 +188,7 @@ void CPU::Update()
     ++numFrames;
     if(TIME_MS >= timeStartMeasFPS + 1000)  // Если прошло более 1 секунды с начала 1-сек отрезка
     {                                       // рассчитываем ФПС
-        fps = (float)numFrames / (TIME_MS - timeStartMeasFPS) * 1e3f;
+        fps = static_cast<float>(numFrames) / (TIME_MS - timeStartMeasFPS) * 1e3F;
         numFrames = 0;
         timeStartMeasFPS = TIME_MS;
     }
@@ -221,13 +220,13 @@ uint CPU::CRC32::Calculate(const void *data, uint size)
 
     uint result = 0;
 
-    uint *buffer = (uint *)std::malloc(sizeBuffer);      // Выделяем память для нового буфера
+    uint *buffer = static_cast<uint *>(std::malloc(sizeBuffer));    // Выделяем память для нового буфера
 
     if (buffer)
     {
-        std::memcpy(buffer, data, size);                     // Копируем данные в новый буфер
+        std::memcpy(buffer, data, size);                            // Копируем данные в новый буфер
 
-        for (uint i = size; i < sizeBuffer; i++)          // Заполняем оставшееся место нулями
+        for (uint i = size; i < sizeBuffer; i++)                    // Заполняем оставшееся место нулями
         {
             buffer[i] = 0;
         }
