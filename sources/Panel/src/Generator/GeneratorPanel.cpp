@@ -39,31 +39,31 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
     Message::EnableChannel((uint8)ch, (uint8)(enable ? 1U : 0U)).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::LoadStartMode(Chan::E ch, int mode)
 {
     Message::StartMode((uint8)ch, (uint8)mode).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::LoadRegister(Register::E reg, uint64 value)
 {
     Message::WriteRegister((uint8)reg, value).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetDebugMode(bool enable)
 {
     Message::DebugMode((uint8)(enable ? 1 : 0)).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::Reset()
 {
     Message::Reset().Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetFormWave(const Wave *w)
 {
     Chan::E ch = w->GetChannel();
@@ -77,7 +77,7 @@ void Generator::SetFormWave(const Wave *w)
     Message::Set::FormWave((uint8)ch, form).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
     /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
@@ -85,7 +85,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
     Message::Set::FormWave((uint8)ch, (uint8)form).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::LoadFormDDS(Form *form)
 {
     float data[DDS_NUM_POINTS];
@@ -143,7 +143,7 @@ void Generator::LoadFormDDS(Form *form)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Form *form)
 {
     uint16 buffer[DDS_NUM_POINTS];
@@ -168,7 +168,7 @@ void Generator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Fo
     Message::LoadFormDDS((uint8)form->GetWave()->GetChannel(), buffer).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetParameter(ParameterChoice *param)
 {
     static const Command::E commands[ParameterChoice::Count] =
@@ -184,28 +184,28 @@ void Generator::SetParameter(ParameterChoice *param)
         (uint8)param->GetChoice()).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetOffset(Chan::E ch, float offset)
 {
     /// \todo Говнокод - запись параметра из двух мест
     Message::Set::Offset((uint8)ch, ParamValue(offset).ToUINT64()).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetAmplitude(Chan::E ch, float amplitude)
 {
     /// \todo Говнокод - запись параметра из двух мест
     Message::Set::Amplitude((uint8)ch, ParamValue(amplitude).ToUINT64()).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetFrequency(Chan::E ch, float frequency)
 {
     /// \todo Говнокод - запись параметра из двух мест
     Message::Set::Frequency((uint8)ch, ParamValue(frequency).ToUINT64()).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::SetParameter(ParameterValue *param)
 {
     static const Command::E commands[ParameterValue::Count] =
@@ -243,7 +243,7 @@ void Generator::SetParameter(ParameterValue *param)
     Message::Set::Parameter(com, (uint8)ch, value.ToUINT64()).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::TuneChannel(Chan::E ch)
 {
     EnableChannel(ch, CHANNEL_ENABLED(ch));
@@ -251,7 +251,7 @@ void Generator::TuneChannel(Chan::E ch)
     FORM(ch)->TuneGenerator(ch);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Generator::LoadSettings()
 {
     Generator::TuneChannel(Chan::A);

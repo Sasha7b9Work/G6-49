@@ -65,7 +65,7 @@ void AD5697::Init()
     HAL_I2C_Init(&hI2C);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static float CalculateOffset(Chan::E ch, ParamValue offset)
 {
     if (FPGA::CurrentMode(ch) != FPGA::ModeWork::Sine)
@@ -96,7 +96,7 @@ static float CalculateOffset(Chan::E ch, ParamValue offset)
     return zero;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD5697::SetOffset(Chan::E ch, ParamValue offset)
 {
     float code = CalculateOffset(ch, offset);
@@ -113,7 +113,7 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
     WriteParameter(BIN_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD5697::SetFreqHysteresys(float hyst)
 {
     Limitation(&hyst, 0.0F, 4095.0F);
@@ -130,7 +130,7 @@ void AD5697::SetFreqHysteresys(float hyst)
     WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD5697::SetFreqLevel(float level)
 {
     level += (float)CAL_FREQ_LEVEL_TRIG;
@@ -149,14 +149,14 @@ void AD5697::SetFreqLevel(float level)
     WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 AD5697::CreateCommandByte(ParameterValue param)
 {
     return (uint8)(BIN_U8(00010000) | (param.Is(ParameterValue::Amplitude) ? 0x01 : 0x08));
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD5697::WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin)
 {
     TransmitI2C(address, data);
@@ -164,14 +164,14 @@ void AD5697::WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin)
     CPU::WritePin(pin, true);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 {
     // Смещение на один бит влево - страшная штука. Если не знать, можно потерять много времени
     HAL_I2C_Master_Transmit(&hI2C, static_cast<uint16>(address << 1), data, 3, 100);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD5697::Reset(Chan::E ch)
 {
     static const GeneratorWritePin pinRS[Chan::Count] = {GeneratorWritePin::AD5697_D_RSA, GeneratorWritePin::AD5697_D_RSB};
@@ -182,7 +182,7 @@ void AD5697::Reset(Chan::E ch)
     CPU::WritePin(pinRS[ch], true);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 GeneratorWritePin AD5697::PinLDAC(Chan::E ch)
 {
     static const GeneratorWritePin pinLDAC[Chan::Count] = {GeneratorWritePin::AD5697_Offset, GeneratorWritePin::AD5697_Freq};

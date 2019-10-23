@@ -74,7 +74,7 @@ bool Hint::ProcessControl(KeyEvent &key)
     return false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Hint::Draw()
 {
     if (show)
@@ -137,7 +137,7 @@ void Hint::Draw()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Hint::DrawDetailedHint(Choice *choice, int x0, int y0, int width, int start, int end, bool calculate)
 {
     Color colorWhite = Color::WHITE;
@@ -162,7 +162,7 @@ int Hint::DrawDetailedHint(Choice *choice, int x0, int y0, int width, int start,
     return y0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Hint::NumPagesInHint(Choice *choice, int x, int y, int width)
 {
     if(DrawDetailedHint(choice, x, y, width, 0, choice->NumSubItems(), true) < SCREEN_HEIGHT)
@@ -173,7 +173,7 @@ int Hint::NumPagesInHint(Choice *choice, int x, int y, int width)
     return 2;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Hint::Calcualte(Choice *choice, int x, int y, int width)
 {
     numPages = NumPagesInHint(choice, x, y, width);
@@ -193,7 +193,7 @@ void Hint::Calcualte(Choice *choice, int x, int y, int width)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Hint::DrawPagesUGO(const int xRight, const int y0)
 {
     if(numPages < 2)

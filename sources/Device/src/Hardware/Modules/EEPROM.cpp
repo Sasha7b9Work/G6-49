@@ -66,7 +66,7 @@ void EEPROM::SaveSettings(CalibrationSettings *settings)
     WriteData(address, settings, sizeof(CalibrationSettings));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint SizeSector(uint address)
 {
     if (GetSector(address) < 4)       { return (16 * 1024); }
@@ -79,7 +79,7 @@ static uint SizeSector(uint address)
     return (128 * 1024);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void EEPROM::LoadSettings(CalibrationSettings *settings)
 {
     uint address = FindLastOccupiedRecord(SECTOR_CALIBRATION_4, SizeSector(SECTOR_CALIBRATION_4), sizeof(CalibrationSettings));
@@ -90,7 +90,7 @@ void EEPROM::LoadSettings(CalibrationSettings *settings)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 {
     uint address = start;
@@ -108,7 +108,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
     return 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
 {
     uint address = FindFirstFreeRecord(start, sizeSector, sizeRecord);
@@ -126,7 +126,7 @@ static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
     return address - sizeRecord;                    // ¬о всех остальных случа€х возвращаем адрес записи, предыдущей по отношению к первой свободной
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void EraseSector(uint startAddress)
 {
     if (GetSector(startAddress) == (uint)-1)
@@ -151,7 +151,7 @@ static void EraseSector(uint startAddress)
     HAL_FLASH_Lock();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint GetSector(uint address)
 {
     struct StructSector
@@ -181,7 +181,7 @@ static uint GetSector(uint address)
     return (uint)(-1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void WriteData(uint dest, void *src, uint size)
 {
     CLEAR_FLASH_FLAGS;
@@ -196,7 +196,7 @@ static void WriteData(uint dest, void *src, uint size)
     HAL_FLASH_Lock();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void EEPROM::Signal::Save(Chan::E ch, uint16 data[Generator::DDS_NUM_POINTS])
 {
     uint sizeData = FPGA::NUM_POINTS * sizeof(data[0]);
@@ -218,7 +218,7 @@ void EEPROM::Signal::Save(Chan::E ch, uint16 data[Generator::DDS_NUM_POINTS])
     WriteData(AddressForData(ch), data, sizeData);                                      // » сохран€ем их
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint AddressForData(Chan::E ch)
 {
     uint result = SECTOR_SIGNAL_FPGA_11;
@@ -230,7 +230,7 @@ static uint AddressForData(Chan::E ch)
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint16 *EEPROM::Signal::Get(Chan::E ch)
 {
     uint16 *result = (uint16 *)(SECTOR_SIGNAL_FPGA_11); //-V566
@@ -243,7 +243,7 @@ uint16 *EEPROM::Signal::Get(Chan::E ch)
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void EEPROM::Init()
 {
     uint *data = (uint *)SECTOR_SIGNAL_FPGA_11; //-V566

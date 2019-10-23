@@ -19,7 +19,7 @@ IntValue::IntValue(const char *buffer, int _posComma) : sign(1)
     whole = ToWhole(temp);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void IntValue::Sub5(char *bufferOut, int *_posComma)
 {
     if (whole >= 5)
@@ -38,7 +38,7 @@ void IntValue::Sub5(char *bufferOut, int *_posComma)
     *_posComma = posComma + 1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int IntValue::ToWhole(const char *buffer)
 {
     int numDigits = (int)std::strlen(buffer);
@@ -56,7 +56,7 @@ int IntValue::ToWhole(const char *buffer)
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int IntValue::ToFract1000(const char *buffer)
 {
     int pow = 1000;
@@ -74,7 +74,7 @@ int IntValue::ToFract1000(const char *buffer)
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void IntValue::ToString(char *buffer)
 {
     buffer[0] = (sign > 0) ? '+' : '-';
@@ -83,7 +83,7 @@ void IntValue::ToString(char *buffer)
     Fract1000toString(buffer + posComma + 1 + 1, 4 - posComma);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void IntValue::WholeToString(char *buffer, int numDigits)
 {
     int number = (whole > 0) ? whole : -whole;
@@ -95,7 +95,7 @@ void IntValue::WholeToString(char *buffer, int numDigits)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void IntValue::Fract1000toString(char *buffer, int numDigits)
 {
     for (int i = 0; i < 4; i++)
@@ -107,7 +107,7 @@ void IntValue::Fract1000toString(char *buffer, int numDigits)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int IntValue::DigitFromFract1000(int pos)
 {
     int number = fract1000;

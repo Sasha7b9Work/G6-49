@@ -23,25 +23,25 @@ void FreqMeter::Init()
 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FreqMeter::SetResist(FreqResist resist)
 {
     CPU::WritePin(GeneratorWritePin::FREQ_METER_RESIST, resist.Is(FreqResist::_50Ohm));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FreqMeter::SetCouple(FreqCouple couple)
 {
     CPU::WritePin(GeneratorWritePin::FREQ_METER_COUPLE, couple.Is(FreqCouple::DC));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FreqMeter::SetFiltr(FreqFiltr filtr)
 {
     CPU::WritePin(GeneratorWritePin::FREQ_METER_FILTR, filtr.Is(FreqFiltr::Disable));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FreqMeter::Update()
 {
     if(CPU::ReadPin(GeneratorReadPin::FREQ_METER_DRY))

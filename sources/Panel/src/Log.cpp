@@ -29,7 +29,7 @@ void Log::Write(TypeTrace::E, char *format, ...)
     Console::AddString(buffer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Log::Finalize()
 {
     Painter::BeginScene(Color::BACK);
@@ -38,7 +38,7 @@ void Log::Finalize()
 }
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Log::Trace(TypeTrace::E type, const char *module, const char *func, int numLine, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];

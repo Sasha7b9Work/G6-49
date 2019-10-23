@@ -109,7 +109,7 @@ void AD9952::Init()
     WriteARR(Chan::B);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 {
     enabled[ch] = enable;
@@ -118,14 +118,14 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
     FPGA::SetWaveForm(ch, Form::Sine);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::Manipulation::SetType(Chan::E ch, Type::E t)
 {
     Manipulation::type[ch] = t;
     FPGA::SetWaveForm(ch, Form::Sine);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 {
     float freq = frequency.ToFloat();
@@ -136,7 +136,7 @@ void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
     WriteRegister(ch, Register::FTW0);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::SetPhase(Chan::E ch, ParamValue phase)
 {
     setDDS.ad9952[ch].phase = phase.ToFloat();
@@ -146,7 +146,7 @@ void AD9952::SetPhase(Chan::E ch, ParamValue phase)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::SetAmplitude(Chan::E ch, ParamValue amplitude)
 {
     setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * 0.8F * (1.0F + CAL_AD9952_AMPLITUDE(ch) / 1000.0F);    // 0.8f в этой формуле оттуда, что схема устройства настроена на то, что 100% максимальной
@@ -154,7 +154,7 @@ void AD9952::SetAmplitude(Chan::E ch, ParamValue amplitude)
     WriteRegister(ch, Register::ASF);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WriteRegister(Chan::E ch, Register reg)
 {
     typedef void(*pFuncVCh)(Chan::E);
@@ -169,7 +169,7 @@ void AD9952::WriteRegister(Chan::E ch, Register reg)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WriteCFR1(Chan::E ch)
 {
     uint value = 0;
@@ -191,7 +191,7 @@ void AD9952::WriteCFR1(Chan::E ch)
     WriteToHardware(ch, Register::CFR1, value);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WriteCFR2(Chan::E ch)
 {
     uint value = 0;
@@ -199,14 +199,14 @@ void AD9952::WriteCFR2(Chan::E ch)
     WriteToHardware(ch, Register::CFR2, value);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WritePOW(Chan::E ch)
 {
     uint value = static_cast<uint>(setDDS.ad9952[Chan::B].phase / 360.0F * (1 << 13) + 0.5F);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WriteASF(Chan::E ch)
 {
     uint value = ((static_cast<uint>((setDDS.ad9952[ch].amplitude / 5.0F) * ((1 << 7) - 1))) << 7) / 2;
@@ -215,7 +215,7 @@ void AD9952::WriteASF(Chan::E ch)
     WriteToHardware(ch, Register::ASF, value);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WriteFTW0(Chan::E ch)
 {
     float FTWf = (setDDS.ad9952[ch].frequency / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2, 32);
@@ -223,13 +223,13 @@ void AD9952::WriteFTW0(Chan::E ch)
     WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WriteARR(Chan::E ch)
 {
     WriteToHardware(ch, Register::ARR, 1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString AD9952::Register::Name() const
 {
     static const pString names[Number] =
@@ -245,7 +245,7 @@ pString AD9952::Register::Name() const
     return names[value];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
 {
     static const int numBytes[] =               // Число байт данных для передачи
@@ -278,13 +278,13 @@ void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
     CPU::WritePin(ChipSelect(ch), true);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 GeneratorWritePin AD9952::ChipSelect(Chan::E ch)
 {
     return static_cast<GeneratorWritePin::E>(ch == Chan::A ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void AD9952::Reset()
 {
     CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);

@@ -32,7 +32,7 @@ DEF_SMALL_BUTTON(sbOrderUp,                                                     
     pInput, Item::FuncActive, InputWindow::OrderUp, Draw_Left
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Draw_Right(int x, int y)
 {
     if (FORM_CURRENT->CurrentParameter()->AssumeArbitaryOrder())
@@ -49,7 +49,7 @@ DEF_SMALL_BUTTON(sbOrderDown,                                                   
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnPress_Cancel()
 {
     Menu::ResetAdditionPage();
@@ -67,7 +67,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
     pInput, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void Draw_Enter(int x, int y)
 {
     String("Подтвердить").Draw(x + 3, y + 12);
@@ -80,7 +80,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
     pInput, Item::FuncActive, InputWindow::KeyEnter, Draw_Enter
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static bool OnControl(KeyEvent &key)
 {
     if(!key.IsFunctional())

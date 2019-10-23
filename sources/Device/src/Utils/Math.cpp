@@ -27,7 +27,7 @@ int LowSignedBit(uint value)
     return -1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
 {
     if (numSmooth == 0 || numSmooth == 1)
@@ -66,13 +66,13 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
     std::free(num);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool IntInRange(int value, int min, int max)
 {
     return (value >= min) && (value <= max);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float MaxFloat(float val1, float val2, float val3)
 {
     float retValue = val1;
@@ -87,7 +87,7 @@ float MaxFloat(float val1, float val2, float val3)
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::MinFrom2Int(int val0, int val1)
 {
     if (val0 < val1)
@@ -97,7 +97,7 @@ int Math::MinFrom2Int(int val0, int val1)
     return val1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Pow10(int pow)
 {
     int retValue = 1;
@@ -110,7 +110,7 @@ int Pow10(int pow)
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MaxFromArray(const uint8 *data, int firstPoint, int lastPoint)
 {
 
@@ -135,7 +135,7 @@ uint8 Math::MaxFromArray(const uint8 *data, int firstPoint, int lastPoint)
     return max;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
 {
 
@@ -160,14 +160,14 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
     return min;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float RandFloat(float min, float max)
 {
     float delta = max - min;
     return min + ((std::rand() / (float)RAND_MAX) * delta);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine)
 {
     if (y0 == y1)
@@ -178,7 +178,7 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
     return (yHorLine - y0) / ((float)(y1 - y0) / (float)(x1 - x0)) + x0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing)
 {
     if (numSmoothing < 2)
@@ -215,7 +215,7 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
     return (uint8)(sum / (float)count);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing)
 {
     if (numSmoothing < 2)
@@ -258,7 +258,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 {
     uint8 max = 0;
@@ -287,7 +287,7 @@ uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     return max;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 {
     uint8 min = 255;
@@ -315,7 +315,7 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     return min;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
 {
     for (int i = 0; i < numElements; i++)
@@ -329,7 +329,7 @@ int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
     return -1;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Math::DigitsInIntPart(float value)
 {
     float absValue = std::fabsf(value);
@@ -345,7 +345,7 @@ int Math::DigitsInIntPart(float value)
     return num;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Math::RoundFloat(float value, int numDigits)
 {
     float absValue = std::fabsf(value);
@@ -361,13 +361,13 @@ float Math::RoundFloat(float value, int numDigits)
     return value > 0.0f ? absValue : -absValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool IsEquals(float x, float y)
 {
     return std::fabsf(x - y) < std::numeric_limits<float>::epsilon();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool FloatsIsEquals(float value0, float value1, float epsilonPart)
 {
     float max = std::fabsf(value0) > std::fabsf(value1) ? std::fabsf(value0) : std::fabsf(value1);

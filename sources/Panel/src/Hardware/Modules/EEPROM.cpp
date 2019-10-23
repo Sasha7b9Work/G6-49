@@ -59,7 +59,7 @@ void EEPROM::SaveSettings(CalibrationSettings *settings)
     WriteData(address, settings, sizeof(CalibrationSettings));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void EEPROM::LoadSettings(CalibrationSettings *settings)
 {
     uint address = FindLastOccupiedRecord(ADDR_SECTOR_CALIBRATION, SIZE_SECTOR_CALIBRATION, sizeof(CalibrationSettings));
@@ -70,7 +70,7 @@ void EEPROM::LoadSettings(CalibrationSettings *settings)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 {
     uint address = start;
@@ -88,7 +88,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
     return 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
 {
     uint address = FindFirstFreeRecord(start, sizeSector, sizeRecord);
@@ -106,7 +106,7 @@ static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
     return address - sizeRecord;                    // ¬о всех остальных случа€х возвращаем адрес записи, предыдущей по отношению к первой свободной
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void EraseSector(uint startAddress)
 {
     if (GetSector(startAddress) == (uint)-1)
@@ -131,7 +131,7 @@ static void EraseSector(uint startAddress)
     HAL_FLASH_Lock();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static uint GetSector(uint address)
 {
     struct StructSector
@@ -159,7 +159,7 @@ static uint GetSector(uint address)
     return (uint)(-1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void WriteData(uint address, void *data, uint size)
 {
     CLEAR_FLASH_FLAGS;

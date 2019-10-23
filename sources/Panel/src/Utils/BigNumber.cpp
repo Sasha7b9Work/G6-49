@@ -22,7 +22,7 @@ void BigNumber::Set(char integer_[SIZE], char fract_[SIZE], char sign_)
     sign = sign_;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::FillValue(char buffer[SIZE], Number &number)
 {
     number.Clear();
@@ -39,7 +39,7 @@ void BigNumber::FillValue(char buffer[SIZE], Number &number)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeDigit(int position, Step step)
 {
     if (position < 0)
@@ -54,7 +54,7 @@ void BigNumber::ChangeDigit(int position, Step step)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeInteger(int position, Step step)
 {
     if (sign == '-')
@@ -67,7 +67,7 @@ void BigNumber::ChangeInteger(int position, Step step)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeFract(int position, Step step)
 {
     if (sign == '-')
@@ -80,7 +80,7 @@ void BigNumber::ChangeFract(int position, Step step)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeIntegerPositive(int position, Step step)
 {
     if (step.IsPlus())
@@ -93,13 +93,13 @@ void BigNumber::ChangeIntegerPositive(int position, Step step)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeIntegerPositivePlus(int position)
 {
     integer.value += Pow10(position);                       // Просто прибавляем одно значение, соответствующее данному разряду
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeIntegerNegative(int position, Step step)
 {
     if (step.IsPlus())
@@ -112,13 +112,13 @@ void BigNumber::ChangeIntegerNegative(int position, Step step)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeIntegerNegativeMinus(int position) //-V524
 {
     integer.value += Pow10(position);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeFractPositive(int position, Step step)
 {
     if(step.IsPlus())
@@ -131,7 +131,7 @@ void BigNumber::ChangeFractPositive(int position, Step step)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeIntegerNegativePlus(int position)
 {
     if (integer.value == 0 && fract.value == 0)
@@ -149,7 +149,7 @@ void BigNumber::ChangeIntegerNegativePlus(int position)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeIntegerPositiveMinus(int position)
 {
     if (integer.value == 0 && fract.value == 0)             // Если нулевое значение, то прибавляем значение, соответствующее данному разряду.
@@ -167,7 +167,7 @@ void BigNumber::ChangeIntegerPositiveMinus(int position)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeFractNegative(int position, Step step)
 {
     if(step.IsPlus())
@@ -179,7 +179,7 @@ void BigNumber::ChangeFractNegative(int position, Step step)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeFractPositivePlus(int position)
 {
     fract.value += Pow10(position);
@@ -190,7 +190,7 @@ void BigNumber::ChangeFractPositivePlus(int position)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeFractNegativeMinus(int position)
 {
     fract.value += Pow10(position);
@@ -201,7 +201,7 @@ void BigNumber::ChangeFractNegativeMinus(int position)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeFractPositiveMinus(int position)
 {
     if (integer.value == 0 && fract.value == 0)
@@ -227,7 +227,7 @@ void BigNumber::ChangeFractPositiveMinus(int position)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::ChangeFractNegativePlus(int position)
 {
     if(integer.value == 0 && fract.value == 0)
@@ -253,7 +253,7 @@ void BigNumber::ChangeFractNegativePlus(int position)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float BigNumber::GetValue()
 {
     float result = (float)integer.value + (float)fract.value / Pow10(fract.numSymbols);
@@ -263,7 +263,7 @@ float BigNumber::GetValue()
     return result * mul;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void BigNumber::Get(char /*integer_*/[SIZE], char /*fract_*/[SIZE], char * /*sign_*/)
 {
     //*sign_ = sign;

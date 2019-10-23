@@ -26,7 +26,7 @@ void Painter::BeginScene(Color col)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::SetColorValue(Color color, col_val value)
 {
     COLOR(color.value) = value;
@@ -34,7 +34,7 @@ void Painter::SetColorValue(Color color, col_val value)
     LoadPalette();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::LoadPalette()
 {
     LTDC_::SetColors(&COLOR(0), Color::NUMBER.value);
@@ -42,13 +42,13 @@ void Painter::LoadPalette()
     Color::InitGlobalColors();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::EndScene()
 {
     LTDC_::ToggleBuffers();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawHLine(int y, int x0, int x1, Color col)
 {
     SetColor(col);
@@ -67,7 +67,7 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawVLine(int x, int y0, int y1, Color col)
 {
     if(y1 < y0)
@@ -92,7 +92,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 {
     SetColor(col);
@@ -145,7 +145,7 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 {
     SetColor(col);
@@ -156,14 +156,14 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
     DrawVLine(x + width, y, y + height);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
     FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
     DrawRectangle(x, y, width, height, colorRect);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::FillRegion(int x, int y, int width, int height, Color col)
 {
     SetColor(col);
@@ -174,7 +174,7 @@ void Painter::FillRegion(int x, int y, int width, int height, Color col)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::SetColor(Color color)
 {
     if (color != Color::NUMBER)
@@ -183,7 +183,7 @@ void Painter::SetColor(Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Painter::SetPoint(int x, int y)
 {
     uint8 *buffer = Display::GetBuffer() + y * BUFFER_WIDTH + x;
@@ -194,7 +194,7 @@ void Painter::SetPoint(int x, int y)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 col_val Painter::ReduceBrightness(col_val colorValue, float newBrightness)
 {
     int red = (int)(R_FROM_COLOR(colorValue) * newBrightness);

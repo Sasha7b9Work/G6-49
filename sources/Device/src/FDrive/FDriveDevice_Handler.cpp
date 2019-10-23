@@ -121,7 +121,7 @@ void FDrive::Handler::Processing(SimpleMessage *message)
     funcs[com]();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::Handler::GetNumDirsAndFiles()
 {
     uint numDirs = 0;
@@ -132,7 +132,7 @@ void FDrive::Handler::GetNumDirsAndFiles()
     Message::FDrive::NumDirsAndFiles(numDirs, numFiles).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::Handler::RequestFile()
 {
     char name[255];
@@ -145,7 +145,7 @@ void FDrive::Handler::RequestFile()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::Handler::RequestFileSize()
 {
     char name[255];
@@ -160,7 +160,7 @@ void FDrive::Handler::RequestFileSize()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::Handler::LoadFromExtStorage()
 {
     char fullName[255];
@@ -180,7 +180,7 @@ void FDrive::Handler::LoadFromExtStorage()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::Handler::GetPictureDDS()
 {
     const uint SIZE = 240;
@@ -205,13 +205,13 @@ void FDrive::Handler::GetPictureDDS()
     Message::FDrive::PictureDDS(static_cast<uint8>(numFile), data).Transmit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::Handler::E()
 {
 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
 {
     FILINFO fno;
@@ -262,7 +262,7 @@ void FDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs,
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool FDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 {
     StructForReadDir srd;
@@ -308,7 +308,7 @@ bool FDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *na
     return false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint FDrive::FileSystem::GetFileSize(const char *fullPath)
 {
     FIL fp;
@@ -322,7 +322,7 @@ uint FDrive::FileSystem::GetFileSize(const char *fullPath)
     return static_cast<uint>(-1);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool FDrive::FileSystem::ReadFloats(float values[4096], char *name)
 {
     bool result = false;
@@ -374,7 +374,7 @@ bool FDrive::FileSystem::ReadFloats(float values[4096], char *name)
     return result;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
 {
     Normalize(d);
@@ -395,7 +395,7 @@ void FDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::Normalize(float d[4096])
 {
     float min = 0.0F;
@@ -408,7 +408,7 @@ void FDrive::Normalize(float d[4096])
     ToScale(d, scale);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::FindMinMax(const float d[4096], float *_min, float *_max)
 {
     float min = 0.0F;
@@ -430,7 +430,7 @@ void FDrive::FindMinMax(const float d[4096], float *_min, float *_max)
     *_max = max;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float FDrive::FindScale(float min, float max)
 {
     max = std::fabsf(max);
@@ -443,7 +443,7 @@ float FDrive::FindScale(float min, float max)
     return 1.0F / max;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::ToScale(float d[4096], float scale)
 {
     for (int i = 0; i < 4096; i++)
@@ -452,7 +452,7 @@ void FDrive::ToScale(float d[4096], float scale)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void FDrive::FillPicture(uint8 *picture, uint size, float values[4096])
 {
     Normalize(values);

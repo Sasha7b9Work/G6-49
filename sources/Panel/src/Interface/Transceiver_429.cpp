@@ -48,7 +48,7 @@ void Transceiver::Transmit(SimpleMessage *message)
     };
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Transceiver::Receive(SimpleMessage *message)
 {
     SPI4_::WaitFalling();

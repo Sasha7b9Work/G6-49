@@ -21,7 +21,7 @@ static const CalibrationSettings defSet =
 
 CalibrationSettings setCal = defSet;
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &rhs)
 {
     std::memcpy(this, rhs.unused, sizeof(*this));

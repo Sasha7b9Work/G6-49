@@ -53,7 +53,7 @@ void Text::SetUpperCase(bool upper)
     upperCase = upper;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
     Painter::SetColor(color);
@@ -70,7 +70,7 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText)
 {
     int height = 0;
@@ -81,7 +81,7 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString te
     return y + height;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawChar(int eX, int eY, char symbol, Color color)
 {
     Painter::SetColor(color);
@@ -115,7 +115,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
     return eX + width;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawText(int x, int y, pString text, Color color)
 {
     Painter::SetColor(color);
@@ -130,7 +130,7 @@ int Text::DrawText(int x, int y, pString text, Color color)
     return x;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::ByteFontNotEmpty(int eChar, int byte)
 {
     static const uint8 *bytes = 0;
@@ -143,7 +143,7 @@ bool Text::ByteFontNotEmpty(int eChar, int byte)
     return bytes[byte] != 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
 {
     static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
@@ -158,7 +158,7 @@ bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
     return prevByte & (1 << bit);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height)
 {
     char buffer[20];
@@ -217,7 +217,7 @@ bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text
     return curSymbol == numSymbols;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char *Text::GetWord(const char *firstSymbol, int *length, char buffer[20])
 {
     int pointer = 0;
@@ -235,7 +235,7 @@ char *Text::GetWord(const char *firstSymbol, int *length, char buffer[20])
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::IsLetter(char symbol)
 {
     static const bool isLetter[256] =
@@ -261,7 +261,7 @@ bool Text::IsLetter(char symbol)
     return isLetter[(uint8)symbol];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 {
     int8 *lengthSyllables = BreakWord(word);
@@ -293,7 +293,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     return 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color color) //-V801
 {
     bool inverse = false;               // Установленное в true значение означает, что сейчас идёт вывод инверсным цветом
@@ -380,7 +380,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
     return y;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color) //-V801
 {
     Painter::SetColor(color);
@@ -440,7 +440,7 @@ int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int
     return y;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int8 *Text::BreakWord(char *word)
 {
     int num = 0;
@@ -469,7 +469,7 @@ int8 *Text::BreakWord(char *word)
     return lengthSyllables;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 char *Text::PartWordForTransfer(char *word, const int8 *lengthSyllables, int numSyllable, char buffer[30])
 {
     size_t length = 0;
@@ -483,7 +483,7 @@ char *Text::PartWordForTransfer(char *word, const int8 *lengthSyllables, int num
     return buffer;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 {
 
@@ -550,7 +550,7 @@ bool Text::FindNextTransfer(const char *letters, int8 *lettersInSyllable)
     return false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::IsConsonant(char symbol)
 {
     static const bool isConsonat[256] =
@@ -576,7 +576,7 @@ bool Text::IsConsonant(char symbol)
     return isConsonat[(uint8)symbol];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 {
     for (int i = 0; i < numElems; i++)
@@ -589,7 +589,7 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
     return true;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 {
     int8 width = (int8)font->symbol[symbol].width;
@@ -622,7 +622,7 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
     return eX + width * size;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::DrawBigText(int eX, int eY, int size, pString text, Color color)
 {
     Painter::SetColor(color);
@@ -638,14 +638,14 @@ void Text::DrawBigText(int eX, int eY, int size, pString text, Color color)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::DrawTextRelativelyRight(int xRight, int y, pString text, Color color)
 {
     int lenght = Font::GetLengthText(text);
     DrawText(xRight - lenght, y, text, color);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::DrawTextInColumn(int x, int y, int width, pString t)
 {
     int xStart = x;
@@ -670,7 +670,7 @@ void Text::DrawTextInColumn(int x, int y, int width, pString t)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawSubString(int x, int y, pString t)
 {
     const char *text = t;
@@ -684,7 +684,7 @@ int Text::DrawSubString(int x, int y, pString t)
     return numSymbols;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::GetLenghtSubString(pString t)
 {
     const char *text = t;
@@ -698,7 +698,7 @@ int Text::GetLenghtSubString(pString t)
     return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
 {
     const char *text = t;
@@ -712,7 +712,7 @@ int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
     return x;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, pString text, Color color)
 {
     Painter::SetColor(color);
@@ -736,7 +736,7 @@ int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString t
     return DrawTextInColumnWithTransfers(x, y, width, buffer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
@@ -749,7 +749,7 @@ int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width,
     return DrawTextInColumnWithTransfersDiffColors(x, y, width, buffer, color);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
@@ -762,7 +762,7 @@ int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pStr
     return DrawStringInCenterRect(x, y, width, height, buffer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawFormatText(int x, int y, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
@@ -774,7 +774,7 @@ int Text::DrawFormatText(int x, int y, pString text, ...)
     return DrawText(x, y, buffer);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
                                                   Color colorBackground)
 {
@@ -786,7 +786,7 @@ void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int heigh
     DrawStringInCenterRect(x, y, width, height, text, colorText);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill)
 {
     Painter::DrawRectangle(x, y, width, height, colorFill);
@@ -795,14 +795,14 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
     return DrawStringInCenterRect(x, y, width, height, text);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2)
 {
     DrawChar(x, y, symbol1, color1);
     DrawChar(x, y, symbol2, color2);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Text::Draw10SymbolsInRect(int x, int y, char eChar)
 {
     for (char i = 0; i < 5; i++)
@@ -812,7 +812,7 @@ void Text::Draw10SymbolsInRect(int x, int y, char eChar)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Text::IsUpperCase()
 {
     return upperCase;

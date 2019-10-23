@@ -132,7 +132,7 @@ void Handlers::Processing(SimpleMessage *msg)
     funcs[com](msg);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SendData(SimpleMessage *)
 {
     CPU::SetBusy();
@@ -163,7 +163,7 @@ void Handlers::SendData(SimpleMessage *)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::EnableChannel(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -173,7 +173,7 @@ void Handlers::EnableChannel(SimpleMessage *msg)
     Generator::EnableChannel(ch, enable);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetFormWave(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -183,7 +183,7 @@ void Handlers::SetFormWave(SimpleMessage *msg)
     Generator::SetFormWave(ch, form);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, ParamValue))
 {
     Chan ch(msg->TakeByte());
@@ -191,79 +191,79 @@ static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, Param
     func(ch, value);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetFrequency(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetFrequency);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPeriod);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetAmplitude(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetAmplitude);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetOffset(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetOffset);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetDuration(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetDuration);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetDutyRatio(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetDutyRatio);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetPhase(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPhase);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetDelay(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetDelay);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetManipulationDuration(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetManipulationDuration);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetManipulationPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetManipulationPeriod);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetPacketPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPacketPeriod);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetPacketNumber(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, Generator::SetPacketNumber);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetManipulation(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -271,7 +271,7 @@ void Handlers::SetManipulation(SimpleMessage *msg)
     AD9952::Manipulation::SetEnabled(ch, msg->TakeByte() != 0);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetStartMode(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -281,7 +281,7 @@ void Handlers::SetStartMode(SimpleMessage *msg)
     FPGA::SetStartMode(ch, mode);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetPolarity(SimpleMessage *message)
 {
     Chan ch(message->TakeByte());
@@ -289,7 +289,7 @@ void Handlers::SetPolarity(SimpleMessage *message)
     FPGA::SetPolarity(ch, message->TakeByte());
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetManipulationMode(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -297,7 +297,7 @@ void Handlers::SetManipulationMode(SimpleMessage *msg)
     AD9952::Manipulation::SetType(ch.value, static_cast<AD9952::Manipulation::Type::E>(msg->TakeByte()));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::LoadFormDDS(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -305,7 +305,7 @@ void Handlers::LoadFormDDS(SimpleMessage *msg)
     msg->TakeRemainigData(FPGA::DataDDS(ch));
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::SetKoeffCalibration(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -327,12 +327,12 @@ void Handlers::SetKoeffCalibration(SimpleMessage *msg)
     koeff[ch] = static_cast<int16>(msg->TakeHalfWord());
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::GetKoeffCalibration(SimpleMessage *)
 {
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::WriteRegister(SimpleMessage *msg)
 {
     Register reg(msg->TakeByte());
@@ -423,7 +423,7 @@ void Handlers::WriteRegister(SimpleMessage *msg)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::RunReset(SimpleMessage *)
 {
 #ifndef WIN32
@@ -444,12 +444,12 @@ void Handlers::Test(SimpleMessage *)
 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::ModeDebug(SimpleMessage *)
 {
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Handlers::E(SimpleMessage *)
 {
 

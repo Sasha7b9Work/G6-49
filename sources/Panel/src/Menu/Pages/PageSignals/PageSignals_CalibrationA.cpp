@@ -29,7 +29,7 @@ DEF_GOVERNOR( gNegativeAD9952,                                                  
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_PositiveAD9952()
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::AD9952_POS);
@@ -47,7 +47,7 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_ZeroAD9952()
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::AD9952_ZERO);
@@ -65,7 +65,7 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_AmplitudeAD9952()
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::AD9952_AMPL);
@@ -82,7 +82,7 @@ DEF_GOVERNOR( gAmplitudeAD9952,                                                 
     CAL_AD9952_AMPLITUDE(Chan::A), -2000, 2000, pageCalibrationA, Item::FuncActive, OnChange_AmplitudeAD9952, EmptyFuncVV, OnPress_AmplitudeAD9952
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_OffsetDDS()
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::DDS_OFFSET);
@@ -100,7 +100,7 @@ DEF_GOVERNOR( gOffsetDDS,                                                       
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_MinDDS()
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::DDS_MIN);
@@ -117,7 +117,7 @@ DEF_GOVERNOR( gMinDDS,                                                          
     CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, Item::FuncActive, OnChange_MinDDS, FuncBeforeDraw, OnPress_MinDDS
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_MaxDDS()
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::DDS_MAX);
@@ -134,7 +134,7 @@ DEF_GOVERNOR( gMaxDDS,                                                          
     CAL_DDS_MAX(Chan::A), -1000, 0, pageCalibrationA, Item::FuncActive, OnChange_MaxDDS, FuncBeforeDraw, OnPress_MaxDDS
 )
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 static void OnChange_TrigLev()
 {
     PageSignals::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::FREQ_LEVEL_TRIG);

@@ -41,7 +41,7 @@ pString Form::Name() const
     return names[value];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString Register::Name() const
 {
     static const pString names[Register::Count] =
@@ -71,7 +71,7 @@ pString Register::Name() const
     return names[value];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterValue::Name() const
 {
     static const pString nameParameter[ParameterValue::Count] =
@@ -98,25 +98,25 @@ pString ParameterValue::Name() const
     return nameParameter[value];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Form *Wave::GetCurrentForm()
 {
     return forms[indexCurrentForm];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Wave::SetIndexForm(int8 num)
 {
     indexCurrentForm = num;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Wave::NumberOfForms() const
 {
     return numForms;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f)
 {
     numForms = 0;
@@ -130,7 +130,7 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), oldParams(nullptr), oldNumParams(0), oldCurrentParams(0)
 {
     numParams = 0;
@@ -154,19 +154,19 @@ Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterBase *Form::CurrentParameter()
 {
     return params[currentParam];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 int Form::NumParameters() const 
 {
     return numParams;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterBase *Form::GetParameter(int i)
 {
     if(i < numParams)
@@ -176,7 +176,7 @@ ParameterBase *Form::GetParameter(int i)
     return 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Form *Wave::GetForm(int i)
 {
     if(i < numForms)
@@ -189,7 +189,7 @@ Form *Wave::GetForm(int i)
     return nullptr;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Form *Wave::GetForm(Form::E form)
 {
     for(int i = 0; i < numForms; i++)
@@ -205,7 +205,7 @@ Form *Wave::GetForm(Form::E form)
     return nullptr;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::SetNextParameter()
 {
     currentParam++;
@@ -215,7 +215,7 @@ void Form::SetNextParameter()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::TuneGenerator(Chan::E ch)
 {
     Generator::SetFormWave(GetWave());
@@ -275,7 +275,7 @@ void Form::TuneGenerator(Chan::E ch)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterBase *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
@@ -290,7 +290,7 @@ ParameterBase *Form::FindParameter(ParameterValue::E p)
     return 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterBase *Form::FindParameter(ParameterChoice::E p)
 {
     for(int i = 0; i < numParams; i++)
@@ -304,7 +304,7 @@ ParameterBase *Form::FindParameter(ParameterChoice::E p)
     return 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::SendParameterToGenerator(ParameterValue::E p)
 {
     ParameterBase *param = FindParameter(p);
@@ -314,7 +314,7 @@ void Form::SendParameterToGenerator(ParameterValue::E p)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::SendParameterToGenerator(ParameterChoice::E p)
 {
     ParameterBase *param = FindParameter(p);
@@ -324,7 +324,7 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::OpenCurrentParameter()
 {
     if(!CurrentParameter()->IsComplex())
@@ -349,7 +349,7 @@ void Form::OpenCurrentParameter()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Form::CloseOpenedParameter()
 {
     if (ParameterIsOpened())
@@ -363,27 +363,27 @@ bool Form::CloseOpenedParameter()
     return false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Form::ParameterIsOpened() const
 {
     return params[0]->parent != 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParamValue ParameterValue::GetValueNano() const
 {
     StructValue input((ParameterValue *)this);
     return input.ValueNano();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterValue::GetStringValue() const
 {
     StructValue input((ParameterValue *)this);
     return input.StringValue();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool ParameterValue::AssumeArbitaryOrder() const
 {
     if (value == Offset || value == Amplitude)
@@ -394,7 +394,7 @@ bool ParameterValue::AssumeArbitaryOrder() const
     return true;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void ParameterValue::IncreaseOrder()
 {
     if (AssumeArbitaryOrder())
@@ -406,7 +406,7 @@ void ParameterValue::IncreaseOrder()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void ParameterValue::DecreaseOrder()
 {
     if (AssumeArbitaryOrder())
@@ -418,7 +418,7 @@ void ParameterValue::DecreaseOrder()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterComplex::GetStringValue() const
 {
     if(Is(Manipulation))
@@ -435,7 +435,7 @@ pString ParameterComplex::GetStringValue() const
     return "";
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterValue::NameUnit(char buf[10]) const
 {
     static const pString names[ParameterValue::Count] =
@@ -463,7 +463,7 @@ pString ParameterValue::NameUnit(char buf[10]) const
     return buf;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterBase::NameUnit(char buffer[10]) const
 {
     if(IsValue())
@@ -473,13 +473,13 @@ pString ParameterBase::NameUnit(char buffer[10]) const
     return "";
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool ParameterValue::IsOpened()
 {
     return IsComplex() && GetForm()->ParameterIsOpened();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterChoice::Name() const
 {
     static const pString namesParam[ParameterChoice::Count] =
@@ -493,7 +493,7 @@ pString ParameterChoice::Name() const
     return namesParam[value];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterComplex::Name() const
 {
     static const pString names[ParameterComplex::Count] =
@@ -504,7 +504,7 @@ pString ParameterComplex::Name() const
     return names[value];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterPage::Name() const
 {
     static const pString names[ParameterPage::Count] =
@@ -515,13 +515,13 @@ pString ParameterPage::Name() const
     return names[value];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void ParameterPage::OpenPage()
 {
     Menu::SetAdditionPage((::Page *)page);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterBase::Name() const
 {
     if(IsValue())
@@ -548,7 +548,7 @@ pString ParameterBase::Name() const
     return "";
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterBase::GetStringValue() const
 {
     if(IsValue())
@@ -570,13 +570,13 @@ pString ParameterBase::GetStringValue() const
     return "";
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 pString ParameterChoice::GetStringValue() const
 {
     return names[choice];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::ChangeParameter()
 {
     ParameterBase *param = CurrentParameter();
@@ -608,7 +608,7 @@ void Form::ChangeParameter()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void ParameterChoice::NextChoice()
 {
     CircleIncrease(&choice, 0, num - 1);
@@ -637,7 +637,7 @@ void ParameterChoice::NextChoice()
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool ParameterChoice::DrawChoice(int x, int y)
 {
     if(func[choice])
@@ -648,7 +648,7 @@ bool ParameterChoice::DrawChoice(int x, int y)
     return func[choice] != 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Wave::StartModeIsSingle()
 {
     ParameterChoice* param = (ParameterChoice *)GetCurrentForm()->FindParameter(ParameterChoice::ModeStart);
@@ -661,7 +661,7 @@ bool Wave::StartModeIsSingle()
     return false;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool ParameterBase::AssumeArbitaryOrder() const
 {
     if (IsValue())
@@ -672,27 +672,27 @@ bool ParameterBase::AssumeArbitaryOrder() const
     return true;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool ParameterBase::IsExit() const
 {
     return IsValue() && ((ParameterValue *)this)->IsExit();
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Order& Order::operator++(int)
 {
     value = (E)(value + 1);
     return *this;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Order& Order::operator--(int)
 {
     value = (E)(value - 1);
     return *this;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterChoice::ParameterChoice(E v, pString var0, pString var1, funcDraw func0, funcDraw func1) :
     ParameterBase(Choice), value(v), choice(0), num(2)
 {
@@ -703,7 +703,7 @@ ParameterChoice::ParameterChoice(E v, pString var0, pString var1, funcDraw func0
     func[1] = func1;
 };
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterChoice::ParameterChoice(E v, pString var0, pString var1, pString var2, pString var3) : 
     ParameterBase(Choice), value(v), choice(0), num(4)
 {
@@ -715,7 +715,7 @@ ParameterChoice::ParameterChoice(E v, pString var0, pString var1, pString var2, 
     func[0] = func[1] = func[2] = func[3] = nullptr;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(Complex), value(v), params(param) //-V2504
 {
     numParams = 0;
@@ -725,7 +725,7 @@ ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(C
     }
 };
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterValue::ParameterValue(int v) : ParameterBase(Value), //-V730
     value((E)v), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
 {
@@ -737,7 +737,7 @@ ParameterValue::ParameterValue(int v) : ParameterBase(Value), //-V730
     }
 };
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(Value),
     value((E)v), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
 {
@@ -749,7 +749,7 @@ ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 
     }
 };
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool Form::IsDDS() const
 {
     return  (value == RampPlus) || 
@@ -758,7 +758,7 @@ bool Form::IsDDS() const
             (value == DDS);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawUGO(Chan::E ch, int y0)
 {
     y0 += 30;
@@ -808,7 +808,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
     funcs[value](ch, x0, minY, width, height);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawSine(Chan::E, int x0, int y0, int width, int height)
 {
     float speed = 0.2f;
@@ -824,7 +824,7 @@ void Form::DrawSine(Chan::E, int x0, int y0, int width, int height)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawRampPlus(Chan::E, int x0, int y0, int, int height)
 {
     y0 += height;
@@ -836,7 +836,7 @@ void Form::DrawRampPlus(Chan::E, int x0, int y0, int, int height)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
 {
     int aveY = y0 + height / 2;
@@ -849,7 +849,7 @@ void Form::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawTriangle(Chan::E, int x, int y, int width, int height)
 {
     int min = y + height;
@@ -857,7 +857,7 @@ void Form::DrawTriangle(Chan::E, int x, int y, int width, int height)
     Painter::DrawLine(x + width / 2, y, x + width, y + height);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawMeander(Chan::E, int x0, int y0, int, int height)
 {
     int dX = 40;
@@ -872,7 +872,7 @@ void Form::DrawMeander(Chan::E, int x0, int y0, int, int height)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
 {
     int minY = y0;
@@ -898,7 +898,7 @@ void Form::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
 {
     int minY = y0;
@@ -924,7 +924,7 @@ void Form::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
 {
     int numPoints = 240;
@@ -938,19 +938,19 @@ void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 void Form::SetFormFlash(Chan::E ch, const uint8 data[SIZE_BUFFER])
 {
     std::memcpy(&formFlash[ch][0], data, SIZE_BUFFER);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 uint8 *Form::GetFormFlash(Chan::E ch)
 {
     return &formFlash[ch][0];
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
 {
     for (int i = 0; i < NumParameters(); i++)
@@ -971,7 +971,7 @@ ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
     return nullptr;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Form::GetOffset()
 {
     ParameterValue *parameter = GetParameterValue(ParameterValue::Offset);
@@ -979,7 +979,7 @@ float Form::GetOffset()
     return (parameter) ? parameter->GetValueNano().ToFloat() - 5.0F : 0.0F;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 float Form::GetAmplitude()
 {
     ParameterValue *parameter = GetParameterValue(ParameterValue::Amplitude);
@@ -987,7 +987,7 @@ float Form::GetAmplitude()
     return (parameter) ? parameter->GetValueNano().ToFloat() : 0.0F;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Order::E Order::Min(const ParameterValue *param)
 {
     if (param->value == ParameterValue::Frequency)
@@ -998,7 +998,7 @@ Order::E Order::Min(const ParameterValue *param)
     return Order::Nano;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Order::E Order::Max(const ParameterValue *param)
 {
     if (param->value == ParameterValue::Frequency)
