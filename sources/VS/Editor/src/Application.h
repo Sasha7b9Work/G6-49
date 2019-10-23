@@ -14,6 +14,12 @@ class Frame : public wxFrame
 public:
     Frame(const wxString &title);
 
+    void OnQuit(wxCommandEvent &event);
+    void OnTimer(wxTimerEvent &event);
+
 private:
+    wxTimer timer;
     wxDECLARE_EVENT_TABLE();
+
+    void HandlerEvents();
 };
