@@ -32,9 +32,9 @@ float Buffer2Float(const uint8 *buffer)
 }
 
 
-char *SU::ToUpper(void *_str, uint size)
+char *SU::ToUpper(void *s, uint size)
 {
-    char *str = (char *)_str;
+    char *str = reinterpret_cast<char *>(s);
 
     for(uint i = 0; i < size; i++)
     {
@@ -47,14 +47,14 @@ char *SU::ToUpper(void *_str, uint size)
 
 bool SU::EqualsStrings(uint8 *str1, char *str2, uint size)
 {
-    return EqualsStrings((void *)str1, (void *)str2, size);
+    return EqualsStrings(static_cast<void *>(str1), static_cast<void *>(str2), size);
 }
 
 
-bool SU::EqualsStrings(void *_str1, void *_str2, uint size)
+bool SU::EqualsStrings(void *s1, void *s2, uint size)
 {
-    char *str1 = (char *)_str1;
-    char *str2 = (char *)_str2;
+    char *str1 = static_cast<char *>(s1);
+    char *str2 = static_cast<char *>(s2);
 
     for (uint i = 0; i < size; i++)
     {

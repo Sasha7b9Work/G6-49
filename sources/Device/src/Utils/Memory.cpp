@@ -62,7 +62,7 @@ void *Memory::Allocate(uint size)
         InsertBlock(&block);
     }
 
-    return (void *)mem;
+    return static_cast<void *>(mem);
 }
 
 

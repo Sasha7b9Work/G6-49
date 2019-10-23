@@ -16,7 +16,7 @@ int LowSignedBit(uint value)
 
     for (int i = 0; i < 32; i++)
     {
-        if (verValue & ((int)value))
+        if (verValue & (static_cast<int>(value)))
         {
             return i;
         }
@@ -35,14 +35,14 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
         return;
     }
 
-    float *buffer = (float *)std::malloc((size_t)(numPoints * (int)sizeof(float)));
-    int  *num = (int *)std::malloc((size_t)(numPoints * (int)sizeof(int)));
+    float *buffer = static_cast<float *>(std::malloc(static_cast<size_t>(numPoints * sizeof(float))));
+    int  *num = static_cast<int *>(std::malloc(static_cast<size_t>(numPoints * sizeof(int))));
 
     if (buffer != 0 && num != 0)
     {
         for (int i = 1; i < numPoints; i++)
         {
-            buffer[i] = 0.0f;
+            buffer[i] = 0.0F;
 
             num[i] = 0;
             for (int j = -numSmooth / 2; j < numSmooth / 2; j++)
@@ -58,7 +58,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
 
         for (int i = 1; i < numPoints; i++)
         {
-            data[i] = (uint8)(buffer[i] / num[i] + 0.5f);
+            data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F);
         }
     }
 
@@ -172,10 +172,10 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
 {
     if (y0 == y1)
     {
-        return (float)x1;
+        return static_cast<float>(x1);
     }
 
-    return (yHorLine - y0) / ((float)(y1 - y0) / (float)(x1 - x0)) + x0;
+    return (yHorLine - y0) / (static_cast<float>(y1 - y0) / static_cast<float>(x1 - x0)) + x0;
 }
 
 
@@ -212,7 +212,7 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
         }
     }
 
-    return (uint8)(sum / (float)count);
+    return static_cast<uint8>(sum / static_cast<float>(count));
 }
 
 
@@ -220,7 +220,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
 {
     if (numSmoothing < 2)
     {
-        std::memcpy(dataOut, dataIn, (size_t)numPoints);
+        std::memcpy(dataOut, dataIn, static_cast<size_t>(numPoints));
     }
     else
     {
@@ -253,7 +253,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
                 }
             }
 
-            dataOut[i] = (uint8)(sum / (float)count);
+            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count));
         }
     }
 }
@@ -271,13 +271,13 @@ uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     {
         uint16 d16 = *pointer++;
 
-        uint8 d8 = (uint8)d16;
+        uint8 d8 = static_cast<uint8>(d16);
         if (d8 > max)
         {
             max = d8;
         }
 
-        d8 = (uint8)(d16 >> 8);
+        d8 = static_cast<uint8>(d16 >> 8);
         if (d8 > max)
         {
             max = d8;
@@ -300,12 +300,12 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
     {
         uint16 d16 = *pointer++;
 
-        uint8 d8 = (uint8)d16;
+        uint8 d8 = static_cast<uint8>(d16);
         if (d8 < min)
         {
             min = d8;
         }
-        d8 = (uint8)(d16 >> 8);
+        d8 = static_cast<uint8>(d16 >> 8);
         if (d8 < min)
         {
             min = d8;
@@ -339,8 +339,8 @@ int Math::DigitsInIntPart(float value)
     do
     {
         ++num;
-        absValue /= 10.0f;
-    } while (absValue >= 1.0f);
+        absValue /= 10.0F;
+    } while (absValue >= 1.0F);
 
     return num;
 }
@@ -355,10 +355,10 @@ float Math::RoundFloat(float value, int numDigits)
     if (digsInInt < numDigits)  // Подстрахуемся
     {
         int pow = Pow10(numDigits - digsInInt);
-        absValue = ((int)(absValue * pow + 0.5f)) / (float)pow;
+        absValue = (static_cast<int>(absValue * pow + 0.5F)) / static_cast<float>(pow);
     }
 
-    return value > 0.0f ? absValue : -absValue;
+    return value > 0.0F ? absValue : -absValue;
 }
 
 
