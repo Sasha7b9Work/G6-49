@@ -104,7 +104,7 @@ void Generator::SetOffset(Chan::E ch, ParamValue offset)
     }
     else
     {
-        AD5697::SetOffset(ch, ParamValue(0.0f));
+        AD5697::SetOffset(ch, ParamValue(0.0F));
         FPGA::SetOffset(ch, offset);
     }
 }
@@ -118,7 +118,7 @@ void Generator::SetPhase(Chan::E ch, ParamValue phase)
 
 void Generator::SetPacketNumber(Chan::E, ParamValue number)
 {
-    FPGA::PacketImpulse::SetNumberImpules((uint)(number.ToFloat() + 0.5f));
+    FPGA::PacketImpulse::SetNumberImpules(static_cast<uint>(number.ToFloat() + 0.5F));
 }
 
 

@@ -226,7 +226,7 @@ uint CPU::CRC32::Calculate(const uint8 *data, uint size)
         ++sizeBuffer;
     }
 
-    uint *buffer = (uint *)std::malloc(sizeBuffer);      // Выделяем память для нового буфера
+    uint *buffer = static_cast<uint *>(std::malloc(sizeBuffer));      // Выделяем память для нового буфера
 
     uint result = 0U;
 
