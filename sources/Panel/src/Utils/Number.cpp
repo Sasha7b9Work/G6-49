@@ -29,11 +29,11 @@ float Number::GetValue()
     uint64 intValue = GetInteger(integer);
     uint64 fractValue = GetInteger(fract);
 
-    float result = (float)intValue + (float)fractValue / Pow10(SIZE_PART);
+    float result = static_cast<float>(intValue) + static_cast<float>(fractValue) / Pow10(SIZE_PART);
 
     if(sign == '-')
     {
-        result *= -1.0f;
+        result *= -1.0F;
     }
 
     return result;
@@ -102,7 +102,7 @@ void Number::ChangeInPositiveInteger(int position, Step step)
         {
             if(AllLeftZeroInInteger(position))
             {
-                if(GetValue() == 0.0f) //-V550 //-V2550
+                if(GetValue() == 0.0F) //-V550 //-V2550
                 {
                     integer[pos] = 1;
                     sign = '-';

@@ -592,7 +592,7 @@ DEF_BUTTON( bCancel,                                                            
 )
 
 
-DEF_PAGE_4_VAR( pRegisters,                                                                                                                                        //--- –≈√»—“–€ --- //-V641
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                        //--- –≈√»—“–€ --- //-V641 //-V1027
     "–≈√»—“–€",
     "",
     bPrev,
