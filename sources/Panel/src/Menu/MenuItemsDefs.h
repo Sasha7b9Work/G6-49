@@ -10,27 +10,27 @@
 #define FuncRegSetPage      EmptyFuncVI
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                              \
 volatile const ButtonBase name = { Item::Type::Button, 0, false, Page::NoPage, &keeper, funcActive, {title, hint},                          \
     funcPress, funcDraw };
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_TIME(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, cur, h, mi, s, mo, d, y)                                       \
 static const TimeBase name = { TypeItem::E::Time, 0, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},          \
     &cur, &h, &mi, &s, &mo, &d, &y };
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw, funcPress)                         \
 volatile static const GovernorBase name = { Item::Type::Governor, 0, false, Page::NoPage, &keeper, funcActive,                              \
     {title, hint}, min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw, funcPress};
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_GOVERNOR_COLOR(name, titleRU, titleEN, hintRU, hintEN, colorType, keeper)                                                       \
 static const GovernorColorBase name = { TypeItem::E::GovernorColor, 0, false, Page::NoPage, &keeper, FuncActive,                            \
     {titleRU, titleEN, hintRU, hintEN}, &colorType, 0};
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_PAGE_SB(name, title, hint, item0, item1, item2, item3, item4, item5,                                                            \
     namePage, keeper, funcActive, funcPress, funcDraw, funcOnKey)                                                                           \
 static Item * items##name[] = {(Item *)item0, (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5};                   \
@@ -147,13 +147,13 @@ const PageBase name = { Item_Page, 15, false, namePage, keeper, funcActive, {tit
     items##name, funcPress, FuncDrawPage, FuncRegSetPage};
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_CHOICE_PARAMETER(name, title, hint, keeper, funcActive, funcPress, form)                                                        \
 ChoiceParameterBase name = { Item::Type::ChoiceParameter, 0, false, Page::NoPage, &keeper, funcActive, {title, hint} ,                      \
     funcPress, form};
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_SMALL_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                        \
 static const SButtonBase name = { Item::Type::SmallButton, 0, false, Page::NoPage, &keeper, funcActive, {title, hint},                      \
     funcPress, funcDraw, 0, 0};
@@ -184,7 +184,7 @@ static const SButtonBase name = { Item_SmallButton, 0, false, Page::NoPage, &kee
     funcPress, funcDraw, hints##name, 5};
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define DEF_CHOICE_2(name, title, hint, name1, hint1, name2, hint2, cell, numBit, keeper, funcActive, funcChanged, funcDraw)                        \
 static pString hints##name[] = {name1, name2};                                                                                                      \
 static pString hints##name##Ru[] = {hint1, hint2};                                                                                                  \
