@@ -66,7 +66,7 @@ void EEPROM::LoadSettings(CalibrationSettings *settings)
 
     if (address)                                            // Если нашли сохранённую запись
     {
-        *settings = *((CalibrationSettings *)address);      // То запишем её в целевой объект
+        *settings = *(reinterpret_cast<CalibrationSettings *>(address));      // То запишем её в целевой объект
     }
 }
 
@@ -78,7 +78,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 
     while (address < end)
     {
-        if (*((uint *)address) == 0xffffffffU)
+        if (*(reinterpret_cast<uint *>(address)) == 0xffffffffU)
         {
             return address;
         }
@@ -109,7 +109,7 @@ static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
 
 static void EraseSector(uint startAddress)
 {
-    if (GetSector(startAddress) == (uint)-1)
+    if (GetSector(startAddress) == static_cast<uint>(-1))
     {
         return;
     }
@@ -156,7 +156,7 @@ static uint GetSector(uint address)
         i++;
     }
 
-    return (uint)(-1);
+    return static_cast<uint>(-1);
 }
 
 
@@ -168,7 +168,7 @@ static void WriteData(uint address, void *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, ((uint8 *)data)[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, (static_cast<uint8 *>(data))[i]);
     }
 
     HAL_FLASH_Lock();

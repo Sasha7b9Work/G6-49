@@ -45,7 +45,7 @@ void File::Draw(int x, int y)
 {
     Painter::SetColor(Color::GRAY_10);
 
-    float scale = 100.0f / 255.0f;
+    float scale = 100.0F / 255.0F;
 
     Painter::SetColor(Color::GRAY_25);
 
@@ -63,7 +63,7 @@ void File::Draw(int x, int y)
 
     for (int i = 0; i < 240; i++)
     {
-        Painter::SetPoint(x + i, (int)(y - picture.data[i] * scale));
+        Painter::SetPoint(x + i, static_cast<int>(y - picture.data[i] * scale));
     }
 }
 
@@ -103,11 +103,11 @@ static bool EqualsRequestPicture(Task *request, Task *answer)
 }
 
 
-void File::Open(int _num)
+void File::Open(int n)
 {
     Close();
 
-    Message::FDrive::PictureDDS message((uint8)_num);
+    Message::FDrive::PictureDDS message(static_cast<uint8>(n));
 
     Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
 

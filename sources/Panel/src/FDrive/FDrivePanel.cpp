@@ -159,7 +159,7 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
     msg->ResetPointer();
 
-    Command::E com = (Command::E)msg->TakeByte();
+    Command com(msg->TakeByte());
 
     return funcs[com]();
 }
@@ -167,7 +167,7 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
 bool FDrive::Handler::IsMount()
 {
-    mounted = (Mount)msg->TakeByte();
+    mounted = static_cast<Mount>(msg->TakeByte());
     Init();
     return true;
 }
@@ -221,7 +221,7 @@ void FDrive::PressChoose()
 {
     inStateWaitCompleteLoad = true;
 
-    Message::FDrive::LoadFromExtStorage((uint8)CURRENT_CHANNEL, (uint8)Items::NumberCurrentFile(), FDrive::CurrentDirectory()).Transmit();
+    Message::FDrive::LoadFromExtStorage(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(Items::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
 
     File::SetDataToWave();
 }

@@ -341,7 +341,7 @@ bool StructValue::OnlyOneRigthDigit()
 
 int StructValue::ValueBeforeComma()
 {
-    return (int)(ValueBeforeCommaInNano() / (1000 * 1000 * 1000));
+    return static_cast<int>(ValueBeforeCommaInNano() / (1000 * 1000 * 1000));
 }
 
 

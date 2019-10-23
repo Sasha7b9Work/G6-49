@@ -7,7 +7,7 @@
 
 void Display::Init()
 {
-    LTDC_::Init((uint)frontBuffer, (uint)backBuffer);
+    LTDC_::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
 
     Text::SetUpperCase(true);
 
