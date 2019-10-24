@@ -116,11 +116,21 @@ void Frame::HandlerEvents()
                 Close(true);
             }
             break;
+
         case SDL_MOUSEBUTTONDOWN:
+            if (event.button.button == 1)               // "1" соотвествует ЛКМ
             {
                 TheForm->SetPoint(event.button.x, event.button.y);
             }
+            else if (event.button.button == 3)          // "3" соответствует ПКМ
+            {
+                if (TheForm->ExistPoint(event.button.x, event.button.y))
+                {
+
+                }
+            }
             break;
+
         default:
             // ничего не делать
             break;

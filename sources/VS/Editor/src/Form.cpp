@@ -14,6 +14,8 @@ Form *TheForm = nullptr;
 #define MAX_VALUE   ((1 << 12) - 1)
 #define AVE_VALUE   ((MAX_VALUE) / 2)
 
+#define SIZE_POINT  (5)
+
 // Данные, готовые для передачи в прибор
 uint16 data[NUM_POINTS];
 
@@ -78,6 +80,12 @@ void Form::SetPoint(int mouseX, int mouseY)
 }
 
 
+bool Form::ExistPoint(int mouseX, int mouseY)
+{
+    return true;
+}
+
+
 void CalculateNeighboringPoints(const Point &point)
 {
     uint index = 0;                     // Здесь будет индекс point в векторе points
@@ -118,7 +126,7 @@ void Form::Draw()
         int x = Round<int>(scaleX * point.pos);
         int y = Round<int>(scaleY * point.data);
 
-        TheCanvas->SetPoint(x, y, 6);
+        TheCanvas->SetPoint(x, y, SIZE_POINT);
     }
 }
 
