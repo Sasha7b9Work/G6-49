@@ -2,6 +2,7 @@
 #include "Canvas.h"
 #include "Form.h"
 #include "MyMath.h"
+#include <vector>
 
 
 using namespace MyMath;
@@ -16,6 +17,31 @@ Form *TheForm = nullptr;
 // Данные, готовые для передачи в прибор
 uint16 data[NUM_POINTS];
 
+struct Point
+{
+    Point(uint16 p, uint16 d) : pos(p), data(d) {};
+    uint16 pos;
+    uint16 data;
+    bool operator < (const Point &point) const
+    {
+        return (pos < point.pos);
+    }
+};
+
+
+bool operator==(const Point &left, const Point &right)
+{
+    return (left.pos == right.pos) && (left.data == right.data);
+}
+
+
+std::vector<Point> points;
+
+/// Рассчитать соседние с point точки
+static void CalculateNeighboringPoints(const Point &point);
+/// Линейно интерполировать точки, расположенные между pos1 и pos2
+static void LinearInterpolation(int pos1, int pos2);
+
 
 Form::Form()
 {
@@ -23,6 +49,8 @@ Form::Form()
     {
         data[i] = AVE_VALUE;
     }
+
+    points.clear();
 }
 
 
@@ -30,11 +58,45 @@ void Form::SetPoint(int mouseX, int mouseY)
 {
     wxSize size = TheCanvas->GetSize();
 
-    int x = Round<int>(static_cast<float>(NUM_POINTS) / size.x * mouseX);
+    uint16 x = Round<uint16>(static_cast<float>(NUM_POINTS) / size.x * mouseX);
 
     uint16 y = Round<uint16>(static_cast<float>(MAX_VALUE) / size.y * mouseY);
 
     data[x] = static_cast<uint16>(y);
+
+    Point point(x, y);
+
+    points.push_back(point);
+
+    std::sort(points.begin(), points.end());
+
+    CalculateNeighboringPoints(point);
+}
+
+
+void CalculateNeighboringPoints(const Point &point)
+{
+    uint index = 0;
+
+    for (; index < points.size(); index++)
+    {
+        if (point == points[index])
+        {
+            break;
+        }
+    }
+
+    if (index == 0)                     // Если точка самая первая
+    {
+        if (point.pos > 0)
+        {
+            LinearInterpolation(0, point.pos);
+        }
+    }
+    else if (index < points.size())
+    {
+        LinearInterpolation(points[index - 1].pos, point.pos);
+    }
 }
 
 
@@ -53,5 +115,29 @@ void Form::Draw()
         int y = Round<int>(scaleY * data[i]);
 
         TheCanvas->SetPoint(x, y, 5);
+    }
+}
+
+
+static void LinearInterpolation(int pos1, int pos2)
+{
+    uint16 data1 = data[pos1];
+    uint16 data2 = data[pos2];
+
+    if (data2 > data1)
+    {
+        float delta = static_cast<float>(data2 - data1) / (pos2 - pos1);  // Разность значений между соседними точками
+
+        float value = data[pos1] + delta;               // Значение в текущей позиции
+
+        for (int i = pos1 + 1; i < pos2; i++)
+        {
+            data[i] = Round<uint16>(value);
+            value += delta;
+        }
+    }
+    else
+    {
+
     }
 }
