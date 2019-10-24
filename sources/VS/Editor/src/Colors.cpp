@@ -21,10 +21,7 @@ const uint colors[255]
 };
 
 
-Color::Color(uint8 v) : value(v)
-{
-
-}
+Color::Color(uint8 v) : value(v) {}
 
 
 bool operator!=(const Color &left, const Color &right)

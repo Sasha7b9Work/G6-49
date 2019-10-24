@@ -98,7 +98,10 @@ void Canvas::EndScene()
 
     SDL_Rect rect = { 0, 0, size.x, size.y };
 
-    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    if (texture)
+    {
+        SDL_RenderCopy(renderer, texture, NULL, &rect);
+    }
 
     SDL_RenderPresent(renderer);
 }
