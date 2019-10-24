@@ -12,6 +12,7 @@ add_definitions(-DWXUSINGDLL -DUSE_SDL2)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 
+add_compile_options(/wd4355)    # 'this': used in base member initializer list
 add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
 add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
 add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted

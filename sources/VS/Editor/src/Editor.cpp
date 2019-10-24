@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "Editor.h"
 #pragma warning(push, 0)
 #include <SDL.h>
 #include <wx/display.h>
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "Russian");
 
-    if (SDL_Init(SDL_INIT_EVENTS) != 0U) //-V2517
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0U) //-V2517
     {
         std::cout << "SDL_Init Error:" << SDL_GetError() << std::endl;
     }
@@ -80,7 +80,7 @@ Frame::Frame(const wxString &title)
 
     SetSizeAndPosition();
 
-    TheCanvas = new Canvas(this, 640, 480);
+    Show(true);
 
     timer.Start(0);
 }
@@ -88,12 +88,12 @@ Frame::Frame(const wxString &title)
 
 void Frame::OnTimer(wxTimerEvent &)
 {
-    update();
     HandlerEvents();
+    update();
 }
 
 
-void Frame::OnResize(wxSizeEvent &event)
+void Frame::OnResize(wxSizeEvent &)
 {
     TheCanvas->Resize(this->GetClientSize());
 }
@@ -106,13 +106,23 @@ void Frame::HandlerEvents()
     while (SDL_PollEvent(&event))
     {
         SDL_PumpEvents();
-        //switch (event.type)
-        //{
-        //    break;
-        //default:
-        //    // ничего не делать
-        //    break;
-        //}
+        switch (event.type)
+        {
+        case SDL_KEYDOWN:
+            if (event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                Close(true);
+            }
+            break;
+        case SDL_MOUSEMOTION:
+        {
+            volatile int i = 0;
+        }
+            break;
+        default:
+            // ничего не делать
+            break;
+        }
     }
 }
 
