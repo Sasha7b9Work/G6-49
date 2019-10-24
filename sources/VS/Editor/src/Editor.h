@@ -33,4 +33,8 @@ private:
     void DrawFPS();
 
     void ShowContextMenu(const wxPoint &pos);
+
+    void CreateMenu();
+
+    void OnDeletePoint(wxCommandEvent &event);
 };

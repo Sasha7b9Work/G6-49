@@ -18,7 +18,9 @@ extern void init();
 
 enum
 {
-    MENU_FILE_QUIT = wxID_EXIT
+    MENU_FILE_QUIT = wxID_EXIT,
+
+    CONTEXT_MENU_DELETE = wxID_HIGHEST + 1
 };
 
 enum
@@ -28,13 +30,15 @@ enum
 
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
-EVT_TIMER(TIMER_ID, Frame::OnTimer)
-EVT_SIZE(Frame::OnResize)
+    EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
+    EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
+    EVT_TIMER(TIMER_ID, Frame::OnTimer)
+    EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
 
 
-SDL_Cursor *cursorHand = nullptr;
+/// Курсор в виде руки
+static SDL_Cursor *cursorHand = nullptr;
 
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
@@ -74,13 +78,7 @@ Frame::Frame(const wxString &title)
 {
     SetIcon(wxICON(sample));
 
-    wxMenu *fileMenu = new wxMenu;
-    fileMenu->Append(MENU_FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
-
-    wxMenuBar *menuBar = new wxMenuBar();
-    menuBar->Append(fileMenu, "&File");
-
-    SetMenuBar(menuBar);
+    CreateMenu();
 
     CreateStatusBar(2);
 
@@ -222,9 +220,31 @@ void Frame::DrawFPS()
 }
 
 
+void Frame::CreateMenu()
+{
+    wxMenu *fileMenu = new wxMenu;
+    fileMenu->Append(MENU_FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
+
+    wxMenuBar *menuBar = new wxMenuBar();
+    menuBar->Append(fileMenu, "&File");
+
+    SetMenuBar(menuBar);
+}
+
+
 void Frame::ShowContextMenu(const wxPoint &pos)
 {
     wxMenu menu;
+
+    menu.Append(CONTEXT_MENU_DELETE, "Удалить");
+
     menu.AppendSeparator();
+
     PopupMenu(&menu, pos.x, pos.y);
+}
+
+
+void Frame::OnDeletePoint(wxCommandEvent &)
+{
+    TheForm->RemovePoint();
 }

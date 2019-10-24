@@ -44,6 +44,11 @@ bool operator==(const Point &left, const Point &right)
 
 std::vector<Point> points;
 
+
+/// Здесь хранится индекс точки, подлежащей удалению
+uint indexRemovedPoint = 0;
+
+
 /// Рассчитать соседние с point точки
 static void CalculateNeighboringPoints(const Point &point);
 /// Линейно интерполировать точки, расположенные между pos1 и pos2
@@ -65,6 +70,9 @@ Form::Form()
     }
 
     points.clear();
+
+    points.push_back(Point(0, AVE_VALUE));
+    points.push_back(Point(NUM_POINTS - 1, AVE_VALUE));
 }
 
 
@@ -88,15 +96,27 @@ void Form::SetPoint(int mouseX, int mouseY)
 }
 
 
+void Form::RemovePoint()
+{
+    if (indexRemovedPoint != 0 && indexRemovedPoint != points.size() - 1)
+    {
+        points.erase(points.begin() + static_cast<const int>(indexRemovedPoint));
+
+        LinearInterpolationLeft(indexRemovedPoint);
+    }
+}
+
+
 bool Form::ExistPoint(int mouseX, int mouseY)
 {
     float scaleX = ScaleX();
     float scaleY = ScaleY();
 
-    for (Point &point : points)
+    for (uint i = 0; i < points.size(); i++)
     {
-        if (point.UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
+        if (points[i].UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
         {
+            indexRemovedPoint = i;
             return true;
         }
     }
