@@ -95,8 +95,8 @@ Form::Form()
 
     wxSize size = TheCanvas->GetSize();
 
-    points.push_back(Point(0, AVE_VALUE));
-    points.push_back(Point(size.x - 1, AVE_VALUE));
+    SetPoint(0, size.y / 2);
+    SetPoint(size.x - 1, size.y / 2);
 }
 
 
@@ -127,18 +127,18 @@ void Form::RemovePoint()
 
 void Form::MovePoint(int mouseX, int mouseY)
 {
-    //if (indexRemovedPoint == 0)                         // Для первой точки. Её позиция всегда 0
-    //{
-    //
-    //}
-    //else if (indexRemovedPoint == points.size() - 1)    // Для последнией точки. Её позиция всегда NUM_POINTS - 1
-    //{
-    //
-    //}
-    //else
-    //{
-    ////    Point point()
-    //}
+//    if (indexRemovedPoint == 0)                         // Для первой точки. Её позиция всегда 0
+//    {
+//    
+//    }
+//    else if (indexRemovedPoint == points.size() - 1)    // Для последнией точки. Её позиция всегда NUM_POINTS - 1
+//    {
+//    
+//    }
+//    else
+//    {
+//        Point point()
+//    }
 
     RemovePoint();
     SetPoint(mouseX, mouseY);
