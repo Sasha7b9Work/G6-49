@@ -11,6 +11,12 @@ Canvas::Canvas(wxWindow *parent, int width, int height)
 {
     wxButton *button = new wxButton(parent, wxID_ANY, "", { 10, 10 }, { 320, 240 });
     button->SetMaxSize({ width, height });
+
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    sizer->Add(button);
+
+    parent->SetSizer(sizer);
 }
 
 
