@@ -115,9 +115,6 @@ void Frame::HandlerEvents()
             }
             break;
         case SDL_MOUSEMOTION:
-        {
-            volatile int i = 0;
-        }
             break;
         default:
             // ничего не делать

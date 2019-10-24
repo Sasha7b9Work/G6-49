@@ -10,9 +10,8 @@ Canvas *TheCanvas = nullptr;
 
 wxButton *button = nullptr;
 
-static SDL_Window *window = nullptr;
-
-SDL_Renderer *renderer = nullptr;
+static SDL_Renderer *renderer = nullptr;
+static SDL_Texture *texture = nullptr;
 
 
 Canvas::Canvas(wxWindow *parent, int width, int height)
@@ -26,7 +25,7 @@ Canvas::Canvas(wxWindow *parent, int width, int height)
 
     parent->SetSizer(sizer);
 
-    window = SDL_CreateWindowFrom((HANDLE)button->GetHandle());
+    SDL_Window *window = SDL_CreateWindowFrom((HANDLE)button->GetHandle());
 
     if (window == nullptr)
     {
@@ -52,12 +51,39 @@ void Canvas::Resize(const wxSize &size)
 
 void Canvas::BeginScene()
 {
+    wxSize size = button->GetSize();
 
+    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_RENDERER_ACCELERATED, size.x, size.y);
+    
+    SDL_SetRenderTarget(renderer, texture);
+    SetColor(Color::BLACK);
+    SDL_RenderClear(renderer);
 }
 
 
 void Canvas::EndScene()
 {
+    SDL_SetRenderTarget(renderer, NULL);
 
+    wxSize size = button->GetSize();
+
+    SDL_Rect rect = { 0, 0, size.x, size.y };
+
+    SDL_RenderCopy(renderer, texture, NULL, &rect);
+
+    SDL_RenderPresent(renderer);
+}
+
+
+void Canvas::SetColor(Color &color)
+{
+    if (color != Color::NUMBER)
+    {
+        uint value = COLOR(color.value);
+        uint8 blue = static_cast<uint8>(value);
+        uint8 green = static_cast<uint8>(value >> 8);
+        uint8 red = static_cast<uint8>(value >> 16);
+        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
+    }
 }
 
