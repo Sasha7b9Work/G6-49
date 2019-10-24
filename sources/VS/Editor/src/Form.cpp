@@ -41,6 +41,10 @@ std::vector<Point> points;
 static void CalculateNeighboringPoints(const Point &point);
 /// Линейно интерполировать точки, расположенные между pos1 и pos2
 static void LinearInterpolation(uint16 pos1, uint16 pos2);
+/// Интерполировать точки слева от точки с индексом index из points
+static void LinearInterpolationLeft(uint index);
+/// Интерполировать точки справа от точки с индексом index из points
+static void LinearInterpolationRight(uint index);
 
 
 Form::Form()
@@ -76,7 +80,7 @@ void Form::SetPoint(int mouseX, int mouseY)
 
 void CalculateNeighboringPoints(const Point &point)
 {
-    uint index = 0;
+    uint index = 0;                     // Здесь будет индекс point в векторе points
 
     for (; index < points.size(); index++)
     {
@@ -86,17 +90,9 @@ void CalculateNeighboringPoints(const Point &point)
         }
     }
 
-    if (index == 0)                     // Если точка самая первая
-    {
-        if (point.pos > 0)
-        {
-            LinearInterpolation(0, point.pos);
-        }
-    }
-    else if (index < points.size())
-    {
-        LinearInterpolation(points[index - 1].pos, point.pos);
-    }
+    LinearInterpolationLeft(index);
+
+    LinearInterpolationRight(index);
 }
 
 
@@ -134,3 +130,41 @@ static void LinearInterpolation(uint16 pos1, uint16 pos2)
         value += delta;
     }
 }
+
+
+static void LinearInterpolationLeft(uint index)
+{
+    Point point = points[index];
+
+    if (index == 0)                     // Если точка самая первая
+    {
+        if (point.pos > 0)
+        {
+            LinearInterpolation(0, point.pos);
+        }
+    }
+    else
+    {
+        LinearInterpolation(points[index - 1].pos, point.pos);
+    }
+
+}
+
+
+static void LinearInterpolationRight(uint index)
+{
+    Point point = points[index];
+
+    if (index == points.size() - 1)
+    {
+        if (point.pos < NUM_POINTS - 1)
+        {
+            LinearInterpolation(point.pos, NUM_POINTS - 1);
+        }
+    }
+    else
+    {
+        LinearInterpolation(point.pos, points[index + 1].pos);
+    }
+}
+
