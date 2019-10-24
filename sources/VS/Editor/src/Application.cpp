@@ -1,10 +1,14 @@
-#pragma warning(push)
-#pragma warning(disable:4018 4189 4355 4365 4459 4548 4571 4625 4668 4774 5026 5027)
 #include "Application.h"
+#pragma warning(push, 0)
 #include <SDL.h>
+#include <wx/display.h>
 #pragma warning(pop)
 
 #undef main
+
+
+#include "defines.h"
+#include "Canvas.h"
 
 
 extern void update();
@@ -13,20 +17,19 @@ extern void init();
 
 enum
 {
-    Minimal_Quit = wxID_EXIT,
-    Minimal_Resize = wxID_HIGHEST + 1
+    MENU_FILE_QUIT = wxID_EXIT
 };
 
 enum
 {
-    TIMER_ID = 1,
-    RESIZE_ID = 2
+    TIMER_ID = 1
 };
 
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-    EVT_MENU(Minimal_Quit, Frame::OnQuit)
+    EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
+    EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
 
 
@@ -66,7 +69,7 @@ Frame::Frame(const wxString &title)
     SetIcon(wxICON(sample));
 
     wxMenu *fileMenu = new wxMenu;
-    fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
+    fileMenu->Append(MENU_FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
 
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "&File");
@@ -74,6 +77,10 @@ Frame::Frame(const wxString &title)
     SetMenuBar(menuBar);
 
     CreateStatusBar(2);
+
+    SetSizeAndPosition();
+
+    TheCanvas = new Canvas(this, 640, 480);
 
     timer.Start(0);
 }
@@ -86,23 +93,26 @@ void Frame::OnTimer(wxTimerEvent &)
 }
 
 
+void Frame::OnResize(wxSizeEvent &)
+{
+
+}
+
+
 void Frame::HandlerEvents()
 {
     SDL_Event event;
 
     while (SDL_PollEvent(&event))
     {
-        //SDL_PumpEvents();
-        switch (event.type)
-        {
-        case SDL_WINDOWEVENT:
-        {
-            int i = 0;
-        }
-            break;
-        default:
-            break;
-        }
+        SDL_PumpEvents();
+        //switch (event.type)
+        //{
+        //    break;
+        //default:
+        //    // ничего не делать
+        //    break;
+        //}
     }
 }
 
@@ -110,4 +120,38 @@ void Frame::HandlerEvents()
 void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
+}
+
+
+void Frame::SetSizeAndPosition()
+{
+    wxSize size = { 1024, 768 };
+
+    SetSize(size);
+    SetMinSize(size);
+    SetMaxSize(size);
+
+    wxRect rect = GetMaxDisplay();
+
+    SetPosition({ rect.width / 2 - size.GetWidth() / 2, rect.height / 2 - size.GetHeight() / 2 });
+}
+
+
+wxRect Frame::GetMaxDisplay()
+{
+    wxRect result = { 0, 0, 0, 0 };
+
+    for (uint i = 0; i < wxDisplay::GetCount(); i++)
+    {
+        wxDisplay display(i);
+
+        wxRect rect = display.GetClientArea();
+        if (rect.width > result.width)
+        {
+            result.width = rect.width;
+            result.height = rect.height;
+        }
+    }
+
+    return result;
 }

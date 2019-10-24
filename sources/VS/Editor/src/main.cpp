@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Canvas.h"
 
 
 void init()
@@ -10,5 +11,6 @@ void init()
 
 void update()
 {
-
+    TheCanvas->BeginScene();
+    TheCanvas->EndScene();
 }

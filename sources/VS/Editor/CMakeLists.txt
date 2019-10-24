@@ -9,6 +9,16 @@ include_directories(src
                     
 add_definitions(-DWXUSINGDLL -DUSE_SDL2)
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
+
+
+add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
+add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
+add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
+add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
+add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+
+
 source_group(src REGULAR_EXPRESSION src/*)
 
 file(GLOB SOURCES src/*)
