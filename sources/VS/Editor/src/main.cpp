@@ -5,11 +5,11 @@
 
 void init()
 {
-    TheForm = new Form();
-
     Frame *frame = new Frame("");
 
     TheCanvas = new Canvas(frame, 640, 480);
+
+    TheForm = new Form();
 }
 
 void update()

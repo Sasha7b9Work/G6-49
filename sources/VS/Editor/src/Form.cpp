@@ -21,7 +21,13 @@ uint16 data[NUM_POINTS];
 
 struct Point
 {
-    Point(uint16 p, uint16 d) : pos(p), data(d) {};
+//    Point(uint16 p, uint16 d) : pos(p), data(d) {};
+    Point(int mouseX, int mouseY)
+    {
+        pos = Round<uint16>(mouseX / ScaleX());
+
+        data = Round<uint16>(mouseY / ScaleY());
+    }
     uint16 pos;
     uint16 data;
     bool operator < (const Point &point) const
@@ -32,6 +38,26 @@ struct Point
     bool UnderMouse(int mouseX, int mouseY)
     {
         return (Abs(mouseX - static_cast<int>(pos)) <= SIZE_POINT * 5) && (Abs(mouseY - static_cast<int>(data)) <= SIZE_POINT * 5);
+    }
+
+    int CanvasX()
+    {
+        return Round<int>(pos * ScaleX());
+    }
+
+    int CanvasY()
+    {
+        return Round<int>(data * ScaleY());
+    }
+    /// Масштаб по горизонтали
+    static float ScaleX()
+    {
+        return TheCanvas->GetSize().x / static_cast<float>(NUM_POINTS);
+    }
+    /// Масштаб по вертикали
+    static float ScaleY()
+    {
+        return TheCanvas->GetSize().y / static_cast<float>(MAX_VALUE);
     }
 };
 
@@ -57,10 +83,6 @@ static void LinearInterpolation(uint16 pos1, uint16 pos2);
 static void LinearInterpolationLeft(uint index);
 /// Интерполировать точки справа от точки с индексом index из points
 static void LinearInterpolationRight(uint index);
-/// Масштаб по горизонтали
-static float ScaleX();
-/// Масштаб по вертикали
-static float ScaleY();
 
 Form::Form()
 {
@@ -71,22 +93,18 @@ Form::Form()
 
     points.clear();
 
+    wxSize size = TheCanvas->GetSize();
+
     points.push_back(Point(0, AVE_VALUE));
-    points.push_back(Point(NUM_POINTS - 1, AVE_VALUE));
+    points.push_back(Point(size.x - 1, AVE_VALUE));
 }
 
 
 void Form::SetPoint(int mouseX, int mouseY)
 {
-    wxSize size = TheCanvas->GetSize();
+    Point point(mouseX, mouseY);
 
-    uint16 x = Round<uint16>(mouseX / ScaleX());
-
-    uint16 y = Round<uint16>(mouseY / ScaleY());
-
-    data[x] = static_cast<uint16>(y);
-
-    Point point(x, y);
+    data[point.pos] = point.data;
 
     points.push_back(point);
 
@@ -109,6 +127,19 @@ void Form::RemovePoint()
 
 void Form::MovePoint(int mouseX, int mouseY)
 {
+    //if (indexRemovedPoint == 0)                         // Для первой точки. Её позиция всегда 0
+    //{
+    //
+    //}
+    //else if (indexRemovedPoint == points.size() - 1)    // Для последнией точки. Её позиция всегда NUM_POINTS - 1
+    //{
+    //
+    //}
+    //else
+    //{
+    ////    Point point()
+    //}
+
     RemovePoint();
     SetPoint(mouseX, mouseY);
 }
@@ -116,8 +147,8 @@ void Form::MovePoint(int mouseX, int mouseY)
 
 bool Form::ExistPoint(int mouseX, int mouseY)
 {
-    float scaleX = ScaleX();
-    float scaleY = ScaleY();
+    float scaleX = Point::ScaleX();
+    float scaleY = Point::ScaleY();
 
     for (uint i = 0; i < points.size(); i++)
     {
@@ -154,8 +185,8 @@ void Form::Draw()
 {
     TheCanvas->SetColor(Color::WHITE);
 
-    float scaleX = ScaleX();
-    float scaleY = ScaleY();
+    float scaleX = Point::ScaleX();
+    float scaleY = Point::ScaleY();
 
     for (int i = 1; i < NUM_POINTS; i++)
     {
@@ -231,16 +262,4 @@ static void LinearInterpolationRight(uint index)
     {
         LinearInterpolation(point.pos, points[index + 1].pos);
     }
-}
-
-
-static float ScaleX()
-{
-    return TheCanvas->GetSize().x / static_cast<float>(NUM_POINTS);
-}
-
-
-static float ScaleY()
-{
-    return TheCanvas->GetSize().y / static_cast<float>(MAX_VALUE);
 }
