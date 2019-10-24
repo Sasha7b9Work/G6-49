@@ -40,7 +40,7 @@ std::vector<Point> points;
 /// Рассчитать соседние с point точки
 static void CalculateNeighboringPoints(const Point &point);
 /// Линейно интерполировать точки, расположенные между pos1 и pos2
-static void LinearInterpolation(int pos1, int pos2);
+static void LinearInterpolation(uint16 pos1, uint16 pos2);
 
 
 Form::Form()
@@ -119,25 +119,18 @@ void Form::Draw()
 }
 
 
-static void LinearInterpolation(int pos1, int pos2)
+static void LinearInterpolation(uint16 pos1, uint16 pos2)
 {
     uint16 data1 = data[pos1];
     uint16 data2 = data[pos2];
 
-    if (data2 > data1)
+    float delta = static_cast<float>(data2 - data1) / (pos2 - pos1);  // Разность значений между соседними точками
+    
+    float value = data[pos1] + delta;                                  // Значение в текущей позиции
+    
+    for (int i = pos1 + 1; i < pos2; i++)
     {
-        float delta = static_cast<float>(data2 - data1) / (pos2 - pos1);  // Разность значений между соседними точками
-
-        float value = data[pos1] + delta;               // Значение в текущей позиции
-
-        for (int i = pos1 + 1; i < pos2; i++)
-        {
-            data[i] = Round<uint16>(value);
-            value += delta;
-        }
-    }
-    else
-    {
-
+        data[i] = Round<uint16>(value);
+        value += delta;
     }
 }

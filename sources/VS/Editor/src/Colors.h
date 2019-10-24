@@ -19,4 +19,5 @@ bool operator!=(const Color &left, const Color &right);
 
 
 extern const unsigned int colors[255];
-#define COLOR(color) (colors[color])
+template<typename T>
+constexpr auto COLOR(T color) { return (colors[color]); }
