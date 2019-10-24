@@ -9,10 +9,15 @@ class Canvas
 {
 public:
     Canvas(wxWindow *parent, int width, int height);
+    void Draw();
+    void Resize(const wxSize &size);
+    const wxSize GetSize() const;
+    void SetColor(const Color &color = Color::NUMBER);
+    void SetPoint(int x, int y, const Color &color = Color::NUMBER);
+
+private:
     void BeginScene();
     void EndScene();
-    void Resize(const wxSize &size);
-    void SetColor(Color &color = Color::NUMBER);
 };
 
 

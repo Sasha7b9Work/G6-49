@@ -9,6 +9,7 @@
 
 #include "defines.h"
 #include "Canvas.h"
+#include "Form.h"
 
 
 extern void update();
@@ -114,7 +115,10 @@ void Frame::HandlerEvents()
                 Close(true);
             }
             break;
-        case SDL_MOUSEMOTION:
+        case SDL_MOUSEBUTTONDOWN:
+            {
+                TheForm->SetPoint(event.button.x, event.button.y);
+            }
             break;
         default:
             // ничего не делать

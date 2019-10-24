@@ -1,4 +1,6 @@
+#include "defines.h"
 #include "Canvas.h"
+#include "Form.h"
 #pragma warning(push, 0)
 #include <SDL.h>
 #include <wx/wx.h>
@@ -25,7 +27,7 @@ Canvas::Canvas(wxWindow *parent, int width, int height)
 
     parent->SetSizer(sizer);
 
-    SDL_Window *window = SDL_CreateWindowFrom((HANDLE)button->GetHandle());
+    SDL_Window *window = SDL_CreateWindowFrom(button->GetHandle());
 
     if (window == nullptr)
     {
@@ -61,6 +63,23 @@ void Canvas::BeginScene()
 }
 
 
+void Canvas::SetPoint(int x, int y, const Color &color)
+{
+    SetColor(color);
+    SDL_RenderDrawPoint(renderer, x, y);
+}
+
+
+void Canvas::Draw()
+{
+    BeginScene();
+
+    TheForm->Draw();
+
+    EndScene();
+}
+
+
 void Canvas::EndScene()
 {
     SDL_SetRenderTarget(renderer, NULL);
@@ -75,7 +94,7 @@ void Canvas::EndScene()
 }
 
 
-void Canvas::SetColor(Color &color)
+void Canvas::SetColor(const Color &color)
 {
     if (color != Color::NUMBER)
     {
@@ -85,5 +104,11 @@ void Canvas::SetColor(Color &color)
         uint8 red = static_cast<uint8>(value >> 16);
         SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
     }
+}
+
+
+const wxSize Canvas::GetSize() const
+{
+    return button->GetSize();
 }
 

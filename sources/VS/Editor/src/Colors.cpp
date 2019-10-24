@@ -1,4 +1,5 @@
 #include "Colors.h"
+#include "defines.h"
 
 
 Color Color::WHITE(0);

@@ -1,10 +1,9 @@
 #pragma once
-#include "defines.h"
 
 
 struct Color
 {
-    Color(uint8 v);
+    Color(unsigned char v);
     static Color WHITE;
     static Color BLACK;
     static Color RED;
@@ -13,11 +12,11 @@ struct Color
 
     static Color NUMBER;
 
-    uint8 value;
+    unsigned char value;
 };
 
 bool operator!=(const Color &left, const Color &right);
 
 
-extern const uint colors[255];
+extern const unsigned int colors[255];
 #define COLOR(color) (colors[color])
