@@ -10,6 +10,7 @@ class Form
 public:
     Form();
     void SetPoint(int mouseX, int mouseY);
+    /// Возвращает true, если курсор мыши находится над поставленной точкой
     bool ExistPoint(int mouseX, int mouseY);
     void Draw();
 };

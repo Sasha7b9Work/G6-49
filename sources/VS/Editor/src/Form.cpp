@@ -28,6 +28,11 @@ struct Point
     {
         return (pos < point.pos);
     }
+    /// Возвращает true, если курсор мыши находится над этой точкой
+    bool UnderMouse(int mouseX, int mouseY)
+    {
+        return (Abs(mouseX - static_cast<int>(pos)) <= SIZE_POINT * 5) && (Abs(mouseY - static_cast<int>(data)) <= SIZE_POINT * 5);
+    }
 };
 
 
@@ -47,7 +52,10 @@ static void LinearInterpolation(uint16 pos1, uint16 pos2);
 static void LinearInterpolationLeft(uint index);
 /// Интерполировать точки справа от точки с индексом index из points
 static void LinearInterpolationRight(uint index);
-
+/// Масштаб по горизонтали
+static float ScaleX();
+/// Масштаб по вертикали
+static float ScaleY();
 
 Form::Form()
 {
@@ -64,9 +72,9 @@ void Form::SetPoint(int mouseX, int mouseY)
 {
     wxSize size = TheCanvas->GetSize();
 
-    uint16 x = Round<uint16>(static_cast<float>(NUM_POINTS) / size.x * mouseX);
+    uint16 x = Round<uint16>(mouseX / ScaleX());
 
-    uint16 y = Round<uint16>(static_cast<float>(MAX_VALUE) / size.y * mouseY);
+    uint16 y = Round<uint16>(mouseY / ScaleY());
 
     data[x] = static_cast<uint16>(y);
 
@@ -82,7 +90,18 @@ void Form::SetPoint(int mouseX, int mouseY)
 
 bool Form::ExistPoint(int mouseX, int mouseY)
 {
-    return true;
+    float scaleX = ScaleX();
+    float scaleY = ScaleY();
+
+    for (Point &point : points)
+    {
+        if (point.UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
@@ -108,10 +127,8 @@ void Form::Draw()
 {
     TheCanvas->SetColor(Color::WHITE);
 
-    wxSize size = TheCanvas->GetSize();
-
-    float scaleX = size.x / static_cast<float>(NUM_POINTS);
-    float scaleY = size.y / static_cast<float>(MAX_VALUE);
+    float scaleX = ScaleX();
+    float scaleY = ScaleY();
 
     for (int i = 0; i < NUM_POINTS; i++)
     {
@@ -120,6 +137,8 @@ void Form::Draw()
 
         TheCanvas->SetPoint(x, y);
     }
+
+    TheCanvas->SetColor(Color::GREEN);
 
     for (Point point : points)
     {
@@ -184,3 +203,14 @@ static void LinearInterpolationRight(uint index)
     }
 }
 
+
+static float ScaleX()
+{
+    return TheCanvas->GetSize().x / static_cast<float>(NUM_POINTS);
+}
+
+
+static float ScaleY()
+{
+    return TheCanvas->GetSize().y / static_cast<float>(MAX_VALUE);
+}

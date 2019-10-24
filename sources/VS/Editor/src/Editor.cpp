@@ -28,10 +28,13 @@ enum
 
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-    EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
-    EVT_TIMER(TIMER_ID, Frame::OnTimer)
-    EVT_SIZE(Frame::OnResize)
+EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
+EVT_TIMER(TIMER_ID, Frame::OnTimer)
+EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
+
+
+SDL_Cursor *cursorHand = nullptr;
 
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
@@ -58,6 +61,8 @@ bool Application::OnInit()
     }
 
     init();
+
+    cursorHand = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
 
     return true;
 }
@@ -105,9 +110,12 @@ void Frame::HandlerEvents()
 {
     SDL_Event event;
 
+    static int mouseX = 0;
+    static int mouseY = 0;
+
     while (SDL_PollEvent(&event))
     {
-        SDL_PumpEvents();
+        //SDL_PumpEvents();
         switch (event.type)
         {
         case SDL_KEYDOWN:
@@ -117,29 +125,38 @@ void Frame::HandlerEvents()
             }
             break;
 
-        case SDL_MOUSEBUTTONDOWN:
-        {
-            int x = event.button.x;
-            int y = event.button.y;
+        case SDL_MOUSEMOTION:
+            mouseX = event.motion.x;
+            mouseY = event.motion.y;
 
+            break;
+
+        case SDL_MOUSEBUTTONDOWN:
+            mouseX = event.button.x;
+            mouseY = event.button.y;
+                
             if (event.button.button == 1)               // "1" соотвествует ЛКМ
             {
-                TheForm->SetPoint(x, y);
+                TheForm->SetPoint(mouseX, mouseY);
             }
             else if (event.button.button == 3)          // "3" соответствует ПКМ
             {
-                if (TheForm->ExistPoint(x, y))
+                if (TheForm->ExistPoint(mouseX, mouseY))
                 {
-                    ShowContextMenu({ x, y });
+                    ShowContextMenu({ mouseX, mouseY });
                 }
             }
             break;
-        }
 
         default:
             // ничего не делать
             break;
         }
+    }
+
+    if (TheForm->ExistPoint(mouseX, mouseY))
+    {
+        SDL_SetCursor(cursorHand);
     }
 }
 

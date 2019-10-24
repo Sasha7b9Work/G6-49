@@ -14,4 +14,10 @@ namespace MyMath
         *value0 = *value1;
         *value1 = temp;
     }
+
+    template<class T>
+    T Abs(T value)
+    {
+        return (value < static_cast<T>(0)) ? -value : value;
+    }
 }
