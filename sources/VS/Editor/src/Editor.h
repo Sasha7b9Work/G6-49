@@ -29,4 +29,6 @@ private:
     void SetSizeAndPosition();
 
     wxRect GetMaxDisplay();
+
+    void DrawFPS();
 };

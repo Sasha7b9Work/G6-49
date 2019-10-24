@@ -70,6 +70,16 @@ void Canvas::SetPoint(int x, int y, const Color &color)
 }
 
 
+void Canvas::SetPoint(int x, int y, int size, const Color &color)
+{
+    SetColor(color);
+
+    SDL_Rect rect = { x - size / 2, y - size / 2, size, size };
+
+    SDL_RenderFillRect(renderer, &rect);
+}
+
+
 void Canvas::Draw()
 {
     BeginScene();

@@ -52,6 +52,6 @@ void Form::Draw()
         int x = Round<int>(scaleX * i);
         int y = Round<int>(scaleY * data[i]);
 
-        TheCanvas->SetPoint(x, y);
+        TheCanvas->SetPoint(x, y, 5);
     }
 }

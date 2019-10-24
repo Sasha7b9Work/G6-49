@@ -14,6 +14,7 @@ public:
     const wxSize GetSize() const;
     void SetColor(const Color &color = Color::NUMBER);
     void SetPoint(int x, int y, const Color &color = Color::NUMBER);
+    void SetPoint(int x, int y, int size, const Color &color = Color::NUMBER);
 
 private:
     void BeginScene();

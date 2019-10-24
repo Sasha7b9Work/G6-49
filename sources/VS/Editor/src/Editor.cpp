@@ -91,6 +91,7 @@ void Frame::OnTimer(wxTimerEvent &)
 {
     HandlerEvents();
     update();
+    DrawFPS();
 }
 
 
@@ -164,4 +165,26 @@ wxRect Frame::GetMaxDisplay()
     }
 
     return result;
+}
+
+
+void Frame::DrawFPS()
+{
+    static int count = 0;
+    static unsigned int prevTime = 0;
+
+    count++;
+
+    if (SDL_GetTicks() - prevTime > 1000)
+    {
+        float fps = static_cast<float>(count) / (SDL_GetTicks() - prevTime) * 1000.0F;
+
+        char buffer[100];
+        sprintf(buffer, "fps %f", fps);
+
+        SetStatusText(buffer);
+
+        prevTime = SDL_GetTicks();
+        count = 0;
+    }
 }
