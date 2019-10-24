@@ -93,9 +93,9 @@ void Frame::OnTimer(wxTimerEvent &)
 }
 
 
-void Frame::OnResize(wxSizeEvent &)
+void Frame::OnResize(wxSizeEvent &event)
 {
-
+    TheCanvas->Resize(this->GetClientSize());
 }
 
 
@@ -128,8 +128,7 @@ void Frame::SetSizeAndPosition()
     wxSize size = { 1024, 768 };
 
     SetSize(size);
-    SetMinSize(size);
-    SetMaxSize(size);
+    SetMinSize({ 640, 480 });
 
     wxRect rect = GetMaxDisplay();
 

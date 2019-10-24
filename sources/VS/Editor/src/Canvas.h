@@ -10,6 +10,7 @@ public:
     Canvas(wxWindow *parent, int width, int height);
     void BeginScene();
     void EndScene();
+    void Resize(const wxSize &size);
 };
 
 
