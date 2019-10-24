@@ -31,4 +31,6 @@ private:
     wxRect GetMaxDisplay();
 
     void DrawFPS();
+
+    void ShowContextMenu(const wxPoint &pos);
 };

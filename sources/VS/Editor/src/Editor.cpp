@@ -118,18 +118,23 @@ void Frame::HandlerEvents()
             break;
 
         case SDL_MOUSEBUTTONDOWN:
+        {
+            int x = event.button.x;
+            int y = event.button.y;
+
             if (event.button.button == 1)               // "1" соотвествует ЛКМ
             {
-                TheForm->SetPoint(event.button.x, event.button.y);
+                TheForm->SetPoint(x, y);
             }
             else if (event.button.button == 3)          // "3" соответствует ПКМ
             {
-                if (TheForm->ExistPoint(event.button.x, event.button.y))
+                if (TheForm->ExistPoint(x, y))
                 {
-
+                    ShowContextMenu({ x, y });
                 }
             }
             break;
+        }
 
         default:
             // ничего не делать
@@ -197,4 +202,12 @@ void Frame::DrawFPS()
         prevTime = SDL_GetTicks();
         count = 0;
     }
+}
+
+
+void Frame::ShowContextMenu(const wxPoint &pos)
+{
+    wxMenu menu;
+    menu.AppendSeparator();
+    PopupMenu(&menu, pos.x, pos.y);
 }
