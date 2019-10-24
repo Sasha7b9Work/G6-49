@@ -39,6 +39,8 @@ wxEND_EVENT_TABLE()
 
 /// Курсор в виде руки
 static SDL_Cursor *cursorHand = nullptr;
+/// true, если ЛКМ находится в нажатом положении
+static bool mouseIsDown = false;
 
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
@@ -127,6 +129,11 @@ void Frame::HandlerEvents()
             mouseX = event.motion.x;
             mouseY = event.motion.y;
 
+            if (mouseIsDown)
+            {
+                TheForm->MovePoint(mouseX, mouseY);
+            }
+
             break;
 
         case SDL_MOUSEBUTTONDOWN:
@@ -135,15 +142,29 @@ void Frame::HandlerEvents()
                 
             if (event.button.button == 1)               // "1" соотвествует ЛКМ
             {
-                TheForm->SetPoint(mouseX, mouseY);
+                if (TheForm->ExistPoint(mouseX, mouseY))
+                {
+                    mouseIsDown = true;
+                }
+                else
+                {
+                    TheForm->SetPoint(mouseX, mouseY);
+                }
+                
             }
             else if (event.button.button == 3)          // "3" соответствует ПКМ
             {
+                mouseIsDown = false;
+
                 if (TheForm->ExistPoint(mouseX, mouseY))
                 {
                     ShowContextMenu({ mouseX, mouseY });
                 }
             }
+            break;
+
+        case SDL_MOUSEBUTTONUP:
+            mouseIsDown = false;
             break;
 
         default:

@@ -107,6 +107,13 @@ void Form::RemovePoint()
 }
 
 
+void Form::MovePoint(int mouseX, int mouseY)
+{
+    RemovePoint();
+    SetPoint(mouseX, mouseY);
+}
+
+
 bool Form::ExistPoint(int mouseX, int mouseY)
 {
     float scaleX = ScaleX();
@@ -150,12 +157,15 @@ void Form::Draw()
     float scaleX = ScaleX();
     float scaleY = ScaleY();
 
-    for (int i = 0; i < NUM_POINTS; i++)
+    for (int i = 1; i < NUM_POINTS; i++)
     {
-        int x = Round<int>(scaleX * i);
-        int y = Round<int>(scaleY * data[i]);
+        int x0 = Round<int>(scaleX * (i - 1));
+        int y0 = Round<int>(scaleY * data[i - 1]);
 
-        TheCanvas->SetPoint(x, y);
+        int x1 = Round<int>(scaleX * i);
+        int y1 = Round<int>(scaleY * data[i]);
+
+        TheCanvas->DrawLine(x0, y0, x1, y1);
     }
 
     TheCanvas->SetColor(Color::GREEN);

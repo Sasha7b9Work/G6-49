@@ -80,6 +80,14 @@ void Canvas::SetPoint(int x, int y, int size, const Color &color)
 }
 
 
+void Canvas::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
+{
+    SetColor(color);
+
+    SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
+}
+
+
 void Canvas::Draw()
 {
     BeginScene();

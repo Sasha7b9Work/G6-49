@@ -14,6 +14,8 @@ public:
     bool ExistPoint(int mouseX, int mouseY);
     /// Удалить точку в позиции мыши
     void RemovePoint();
+    /// Переместить точку в новую позицию
+    void MovePoint(int mouseX, int mouseY);
 
     void Draw();
 };
