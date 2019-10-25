@@ -36,7 +36,13 @@ private:
 
     void CreateMenu();
 
+    void OnAlignLeft(wxCommandEvent &);
+
+    void OnAlignRight(wxCommandEvent &);
+
     void OnDeletePoint(wxCommandEvent &);
+
+    void OnParametersPoint(wxCommandEvent &);
 
     void OnClearForm(wxCommandEvent &);
 };

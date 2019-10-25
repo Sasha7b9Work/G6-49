@@ -21,8 +21,12 @@ enum
     MENU_FILE_QUIT = wxID_EXIT,
 
     CONTEXT_MENU_DELETE = wxID_HIGHEST + 1,     // Удалить точку
+    CONTEXT_MENU_PARAMETERS,                    // Параметры точки
 
-    CONTEXT_MENU_CLEAR                          // Очистить форму
+    CONTEXT_MENU_CLEAR,                         // Очистить форму
+
+    ALIGN_LEFT,                                 // Выровнять точку по левой
+    ALIGN_RIGHT                                 // Выровнять точку по правой
 };
 
 enum
@@ -34,7 +38,10 @@ enum
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
     EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
+    EVT_MENU(CONTEXT_MENU_PARAMETERS, Frame::OnParametersPoint)
     EVT_MENU(CONTEXT_MENU_CLEAR, Frame::OnClearForm)
+    EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
+    EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
@@ -259,20 +266,34 @@ void Frame::CreateMenu()
 
 void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
 {
-    wxMenu menu;
+    static wxMenu *menuAlign = nullptr;
+
+    if (menuAlign == nullptr)
+    {
+        menuAlign = new wxMenu();
+
+        menuAlign->Append(ALIGN_LEFT, "По левой точкке");
+        menuAlign->Append(ALIGN_RIGHT, "По правой точке");
+    }
 
     if (underPoint)
     {
-        menu.Append(CONTEXT_MENU_DELETE, "Удалить");
+        wxMenu menu;
 
-        //menu.AppendSeparator();
+        menu.Append(CONTEXT_MENU_DELETE, "Удалить");
+        menu.Append(CONTEXT_MENU_PARAMETERS, "Параметры");
+        menu.AppendSubMenu(menuAlign, "Выровнять");
+
+        PopupMenu(&menu, pos.x, pos.y);
     }
     else
     {
-        menu.Append(CONTEXT_MENU_CLEAR, "Очистить");
-    }
+        wxMenu menu;
 
-    PopupMenu(&menu, pos.x, pos.y);
+        menu.Append(CONTEXT_MENU_CLEAR, "Очистить");
+
+        PopupMenu(&menu, pos.x, pos.y);
+    }
 }
 
 
@@ -285,4 +306,22 @@ void Frame::OnDeletePoint(wxCommandEvent &)
 void Frame::OnClearForm(wxCommandEvent &)
 {
     TheForm->Clear();
+}
+
+
+void Frame::OnParametersPoint(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnAlignLeft(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnAlignRight(wxCommandEvent &)
+{
+
 }
