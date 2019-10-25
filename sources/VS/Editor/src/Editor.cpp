@@ -161,6 +161,10 @@ void Frame::HandlerEvents()
                     ShowContextMenu({ mouseX, mouseY });
                 }
             }
+            else
+            {
+                // остальные кнопки не обрабатывем
+            }
             break;
 
         case SDL_MOUSEBUTTONUP:

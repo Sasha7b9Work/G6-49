@@ -11,8 +11,8 @@ using namespace MyMath;
 Form *TheForm = nullptr;
 
 #define NUM_POINTS  (8192)
-#define MAX_VALUE   ((1 << 12) - 1)
-#define AVE_VALUE   ((MAX_VALUE) / 2)
+#define MAX_VALUE   static_cast<uint16>((1 << 12) - 1)
+#define AVE_VALUE   static_cast<uint16>((MAX_VALUE) / 2)
 
 #define SIZE_POINT  (5)
 
@@ -25,9 +25,14 @@ struct Point
     Point(int mouseX, int mouseY)
     {
         pos = Round<uint16>(mouseX / ScaleX());
-
         data = Round<uint16>(mouseY / ScaleY());
     }
+    Point(uint16 p, uint16 d) : pos(p), data(d) {};
+    void SetY(int mouseY)
+    {
+        data = Round<uint16>(mouseY / ScaleY());
+    }
+
     uint16 pos;
     uint16 data;
     bool operator < (const Point &point) const
@@ -38,16 +43,6 @@ struct Point
     bool UnderMouse(int mouseX, int mouseY)
     {
         return (Abs(mouseX - static_cast<int>(pos)) <= SIZE_POINT * 5) && (Abs(mouseY - static_cast<int>(data)) <= SIZE_POINT * 5);
-    }
-
-    int CanvasX()
-    {
-        return Round<int>(pos * ScaleX());
-    }
-
-    int CanvasY()
-    {
-        return Round<int>(data * ScaleY());
     }
     /// Масштаб по горизонтали
     static float ScaleX()
@@ -71,8 +66,8 @@ bool operator==(const Point &left, const Point &right)
 std::vector<Point> points;
 
 
-/// Здесь хранится индекс точки, подлежащей удалению
-uint indexRemovedPoint = 0;
+/// Здесь хранится индекс точки, которой управляем в текущий момент
+uint indexPointUnderMouse = 0;
 
 
 /// Рассчитать соседние с point точки
@@ -83,6 +78,10 @@ static void LinearInterpolation(uint16 pos1, uint16 pos2);
 static void LinearInterpolationLeft(uint index);
 /// Интерполировать точки справа от точки с индексом index из points
 static void LinearInterpolationRight(uint index);
+/// Заносит точку куда следует
+static void SetPoint(Point point);
+/// Возвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
+static uint PointInPosition(uint16 pos);
 
 Form::Form()
 {
@@ -95,8 +94,43 @@ Form::Form()
 
     wxSize size = TheCanvas->GetSize();
 
-    SetPoint(0, size.y / 2);
-    SetPoint(size.x - 1, size.y / 2);
+    SetPoint(static_cast<uint16>(0), AVE_VALUE);
+    SetPoint(static_cast<uint16>(NUM_POINTS - 1), AVE_VALUE);
+}
+
+
+static uint PointInPosition(uint16 pos)
+{
+    for (uint i = 0; i < points.size(); i++)
+    {
+        if (points[i].pos == pos)
+        {
+            return i;
+        }
+    }
+
+    return static_cast<uint>(-1);
+}
+
+
+static void SetPoint(Point point)
+{
+    data[point.pos] = point.data;
+
+    uint index = PointInPosition(point.pos);
+
+    if (index != static_cast<uint>(-1))
+    {
+        points[index] = point;
+    }
+    else
+    {
+        points.push_back(point);
+
+        std::sort(points.begin(), points.end());
+    }
+
+    CalculateNeighboringPoints(point);
 }
 
 
@@ -104,44 +138,43 @@ void Form::SetPoint(int mouseX, int mouseY)
 {
     Point point(mouseX, mouseY);
 
-    data[point.pos] = point.data;
+    ::SetPoint(point);
+}
 
-    points.push_back(point);
 
-    std::sort(points.begin(), points.end());
+void Form::SetPoint(uint16 pos, uint16 dat)
+{
+    Point point(pos, dat);
 
-    CalculateNeighboringPoints(point);
+    ::SetPoint(point);
 }
 
 
 void Form::RemovePoint()
 {
-    if (indexRemovedPoint != 0 && indexRemovedPoint != points.size() - 1)
+    if (indexPointUnderMouse != 0 && indexPointUnderMouse != points.size())
     {
-        points.erase(points.begin() + static_cast<const int>(indexRemovedPoint));
+        points.erase(points.begin() + static_cast<const int>(indexPointUnderMouse));
 
-        LinearInterpolationLeft(indexRemovedPoint);
+        LinearInterpolationLeft(indexPointUnderMouse);
     }
 }
 
 
 void Form::MovePoint(int mouseX, int mouseY)
 {
-//    if (indexRemovedPoint == 0)                         // Для первой точки. Её позиция всегда 0
-//    {
-//    
-//    }
-//    else if (indexRemovedPoint == points.size() - 1)    // Для последнией точки. Её позиция всегда NUM_POINTS - 1
-//    {
-//    
-//    }
-//    else
-//    {
-//        Point point()
-//    }
-
-    RemovePoint();
-    SetPoint(mouseX, mouseY);
+    if (indexPointUnderMouse == 0)
+    {
+        points[0].SetY(mouseY);
+        data[0] = points[0].data;
+        LinearInterpolationRight(0);
+    }
+    else if (indexPointUnderMouse == points.size() - 1)
+    {
+        points[indexPointUnderMouse].SetY(mouseY);
+        data[NUM_POINTS - 1] = points[indexPointUnderMouse].data;
+        LinearInterpolationLeft(indexPointUnderMouse);
+    }
 }
 
 
@@ -154,7 +187,7 @@ bool Form::ExistPoint(int mouseX, int mouseY)
     {
         if (points[i].UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
         {
-            indexRemovedPoint = i;
+            indexPointUnderMouse = i;
             return true;
         }
     }

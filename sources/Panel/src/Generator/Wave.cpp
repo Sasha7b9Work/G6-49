@@ -224,7 +224,7 @@ void Form::TuneGenerator(Chan::E ch)
     {
         if(CurrentParameter()->GetParent())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
         {
-            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
+            SendParameterToGenerator(ParameterChoice::ManipulationEnabled); //-V525
             SendParameterToGenerator(ParameterValue::ManipulationDuration);
             SendParameterToGenerator(ParameterValue::ManipulationPeriod);
 
@@ -244,7 +244,7 @@ void Form::TuneGenerator(Chan::E ch)
         {
             OpenCurrentParameter();
 
-            SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
+            SendParameterToGenerator(ParameterChoice::ManipulationEnabled); //-V525
             SendParameterToGenerator(ParameterValue::ManipulationDuration);
             SendParameterToGenerator(ParameterValue::ManipulationPeriod);
 
