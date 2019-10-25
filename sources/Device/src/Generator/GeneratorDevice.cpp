@@ -13,9 +13,77 @@
 #endif
 
 
+struct Filtr
+{
+    struct Type
+    {
+        enum E
+        {
+            None,
+            Chebyshev,
+            Bessel,
+            Count
+        };
+    };
+
+    static void Init()
+    {
+        GPIO_InitTypeDef isGPIO;
+        isGPIO.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;
+        isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
+        isGPIO.Pull = GPIO_NOPULL;
+        HAL_GPIO_Init(GPIOE, &isGPIO);
+
+        isGPIO.Pin = GPIO_PIN_4;
+        HAL_GPIO_Init(GPIOF, &isGPIO);
+    }
+
+    static void Tune(Chan::E ch, Form::E form)
+    {
+        if (form == Form::Sine)
+        {
+            SetType(ch, Type::Chebyshev);
+        }
+        else if (form == Form::Meander)
+        {
+            SetType(ch, Type::Bessel);
+        }
+        else
+        {
+            SetType(ch, Type::None);
+        }
+    }
+
+private:
+
+    static void SetType(Chan::E ch, Type::E type)
+    {
+        static GPIO_TypeDef *const gpio1[Chan::Count] = { GPIOE, GPIOF };
+
+        static const uint16 pin0[Chan::Count] = { GPIO_PIN_12, GPIO_PIN_13 };
+        static const uint16 pin1[Chan::Count] = { GPIO_PIN_14, GPIO_PIN_4 };
+
+        static const GPIO_PinState state0[Type::Count] =
+        {
+            GPIO_PIN_SET,
+            GPIO_PIN_SET,
+            GPIO_PIN_RESET,
+        };
+
+        static const GPIO_PinState state1[Type::Count] =
+        {
+            GPIO_PIN_SET,
+            GPIO_PIN_RESET,
+            GPIO_PIN_RESET
+        };
+
+        HAL_GPIO_WritePin(GPIOE, pin0[ch], state0[type]);
+        HAL_GPIO_WritePin(gpio1[ch], pin1[ch], state1[type]);
+    }
+};
+
 
 static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту в правильное место - ПЛИС или AD9952
-
 
 
 void Generator::Init()
@@ -27,6 +95,7 @@ void Generator::Init()
     FPGA::Init();
     FreqMeter::Init();
     Amplifier::Init();
+    Filtr::Init();
 }
 
 
@@ -44,6 +113,8 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 
 void Generator::SetFormWave(Chan::E ch, Form::E form)
 {
+    Filtr::Tune(ch, form);
+
     if(ch < Chan::Count && form < Form::Count)
     {
         waveIsSine = (form == Form::Sine);
