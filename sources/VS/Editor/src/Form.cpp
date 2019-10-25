@@ -85,6 +85,12 @@ static uint PointInPosition(uint16 pos);
 
 Form::Form()
 {
+    Clear();
+}
+
+
+void Form::Clear()
+{
     for (int i = 0; i < NUM_POINTS; i++)
     {
         data[i] = AVE_VALUE;

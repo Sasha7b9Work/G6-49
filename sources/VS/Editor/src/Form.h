@@ -10,6 +10,8 @@ class Form
 {
 public:
     Form();
+    /// Очистить сигнал
+    void Clear();
     /// Добавить точку с координатами мыши
     void SetPoint(int mouseX, int mouseY);
     /// Добавить точку с абсолютными значениями

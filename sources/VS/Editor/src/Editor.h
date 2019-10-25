@@ -16,9 +16,9 @@ class Frame : public wxFrame
 public:
     Frame(const wxString &title);
 
-    void OnQuit(wxCommandEvent &event);
-    void OnTimer(wxTimerEvent &event);
-    void OnResize(wxSizeEvent &event);
+    void OnQuit(wxCommandEvent &);
+    void OnTimer(wxTimerEvent &);
+    void OnResize(wxSizeEvent &);
 
 private:
     wxTimer timer;
@@ -32,9 +32,11 @@ private:
 
     void DrawFPS();
 
-    void ShowContextMenu(const wxPoint &pos);
+    void ShowContextMenu(const wxPoint &pos, bool underPoint);
 
     void CreateMenu();
 
-    void OnDeletePoint(wxCommandEvent &event);
+    void OnDeletePoint(wxCommandEvent &);
+
+    void OnClearForm(wxCommandEvent &);
 };

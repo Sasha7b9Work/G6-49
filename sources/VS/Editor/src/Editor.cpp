@@ -20,7 +20,9 @@ enum
 {
     MENU_FILE_QUIT = wxID_EXIT,
 
-    CONTEXT_MENU_DELETE = wxID_HIGHEST + 1
+    CONTEXT_MENU_DELETE = wxID_HIGHEST + 1,     // Удалить точку
+
+    CONTEXT_MENU_CLEAR                          // Очистить форму
 };
 
 enum
@@ -32,6 +34,7 @@ enum
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
     EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
+    EVT_MENU(CONTEXT_MENU_CLEAR, Frame::OnClearForm)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
@@ -156,10 +159,7 @@ void Frame::HandlerEvents()
             {
                 mouseIsDown = false;
 
-                if (TheForm->ExistPoint(mouseX, mouseY, false))
-                {
-                    ShowContextMenu({ mouseX, mouseY});
-                }
+                ShowContextMenu({ mouseX, mouseY}, TheForm->ExistPoint(mouseX, mouseY, false));
             }
             else
             {
@@ -257,13 +257,20 @@ void Frame::CreateMenu()
 }
 
 
-void Frame::ShowContextMenu(const wxPoint &pos)
+void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
 {
     wxMenu menu;
 
-    menu.Append(CONTEXT_MENU_DELETE, "Удалить");
+    if (underPoint)
+    {
+        menu.Append(CONTEXT_MENU_DELETE, "Удалить");
 
-    menu.AppendSeparator();
+        //menu.AppendSeparator();
+    }
+    else
+    {
+        menu.Append(CONTEXT_MENU_CLEAR, "Очистить");
+    }
 
     PopupMenu(&menu, pos.x, pos.y);
 }
@@ -272,4 +279,10 @@ void Frame::ShowContextMenu(const wxPoint &pos)
 void Frame::OnDeletePoint(wxCommandEvent &)
 {
     TheForm->RemovePoint();
+}
+
+
+void Frame::OnClearForm(wxCommandEvent &)
+{
+    TheForm->Clear();
 }
