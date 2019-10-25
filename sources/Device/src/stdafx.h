@@ -12,7 +12,6 @@
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
 
-#include "Generator/Amplifier.h"
 #include "Generator/GeneratorDevice.h"
 #include "Generator/GeneratroSettings.h"
 
