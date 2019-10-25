@@ -29,9 +29,9 @@ namespace FPGA
             _1_ImpulseA,            ///< 1, если в канале А ПЛИС формирует импульсы/прямоугольник
             _2_ImpulseB,            ///< 1, если в канале B ПЛИС формирует импульсы/прямоугольник
             _3_ManipulationOSK2,    ///< Здесь 0, если синус канала 1 должен манипулироваться сигналом OSK2 ("пилой" от AD9952 второго канала)
-            _4_ManipulationFPGA1,   ///< Здесь 0, если синус канала 1 должен манипулироваться формирователем импульсов канала 1
+            deleted__4_ManipulationFPGA1,   ///< Здесь 0, если синус канала 1 должен манипулироваться формирователем импульсов канала 1
             _5_ManipulationOSK1,    ///< Здесь 0, если синус канала 2 должен манипулироваться сигналом OSK1 ("пилой" от AD9952 первого канала)
-            _6_ManipulationFPGA2,   ///< Здесь 0, есил синус канала 2 должен манипулироваться формирователем импульсов канала 2
+            deleted_6_ManipulationFPGA2,   ///< Здесь 0, есил синус канала 2 должен манипулироваться формирователем импульсов канала 2
             _7_Freq_MHz,            ///< 1, если тактовая частота 1МГц
             _8_MeanderA,            ///< 1, если меандр по каналу A
             _9_MeanderB,            ///< 1, если меандр по каналу B
@@ -331,28 +331,12 @@ void FPGA::WriteControlRegister()
 
     if((modeWork[Chan::A] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
     {
-        switch(AD9952::Manipulation::GetType(Chan::A))
-        {
-            case AD9952::Manipulation::Type::OSK:
-                Bit::Clear(data, RG0::_3_ManipulationOSK2);
-                break;
-            case AD9952::Manipulation::Type::FPGA:
-                Bit::Clear(data, RG0::_4_ManipulationFPGA1);
-                break;
-        }
+        Bit::Clear(data, RG0::_3_ManipulationOSK2);
     }
 
     if ((modeWork[Chan::B] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::B))
     {
-        switch (AD9952::Manipulation::GetType(Chan::B))
-        {
-            case AD9952::Manipulation::Type::OSK:
-                Bit::Clear(data, RG0::_5_ManipulationOSK1);
-                break;
-            case AD9952::Manipulation::Type::FPGA:
-                Bit::Clear(data, RG0::_6_ManipulationFPGA2);
-                break;
-        }
+        Bit::Clear(data, RG0::_5_ManipulationOSK1);
     }
 
     switch(static_cast<uint8>(modeWork[Chan::A])) //-V2520

@@ -58,7 +58,6 @@ static const Settings defSet =
     0,                                  // freq_level
     0,                                  // freq_hysteresis
     {false, false},                     // sine_ManipulationEnabled
-    {0, 0},                             // sine_ManipulationMode
 
     BINARY_U32(00000000, 00000000, 00010110, 00011100), // flag1
 //                          ||| |  ||||||||  | ||||||------ 0  BIT_PARITY         Parity_Off

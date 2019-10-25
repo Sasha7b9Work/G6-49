@@ -53,8 +53,6 @@ namespace AD9952
     };
 
     ClockFrequency::E clock = ClockFrequency::_100MHz;
-
-    Manipulation::Type::E   Manipulation::type[Chan::Count] = { Manipulation::Type::OSK, Manipulation::Type::OSK };
 }
 
 
@@ -119,13 +117,6 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 }
 
 
-void AD9952::Manipulation::SetType(Chan::E ch, Type::E t)
-{
-    Manipulation::type[ch] = t;
-    FPGA::SetWaveForm(ch, Form::Sine);
-}
-
-
 void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 {
     float freq = frequency.ToFloat();
@@ -181,7 +172,7 @@ void AD9952::WriteCFR1(Chan::E ch)
     }
     Bit::Set(value, 9);       // ќднонаправленный режим
     Bit::Set(value, 13);
-    if(Manipulation::enabled[ch] && (Manipulation::type[ch] == Manipulation::Type::OSK))
+    if(Manipulation::enabled[ch])
     {
         Bit::Set(value, 24);  // ”станавливаем режим манипул€ции
     }

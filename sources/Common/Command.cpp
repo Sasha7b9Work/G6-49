@@ -142,9 +142,6 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case SetPolarity:
             break;
-        case SetManipulationMode:
-            std::strcat(result, buffer[2] ? "1" : "0");
-            break;
         case LoadFormDDS:
             std::strcat(result, "точки");
             break;
@@ -176,6 +173,7 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case SCPI_Data:
             break;
+        case deleted_SetManipulationMode:
         case Count:
             break;
     }

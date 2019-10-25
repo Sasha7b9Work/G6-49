@@ -65,7 +65,7 @@ struct Command
              SetPolarity,
           // 0                   1        2
           // SetManipulationMode NUM_CHAN mode
-             SetManipulationMode,
+             deleted_SetManipulationMode,
           // 0            1       3...
           // LoadFormDDS, NumChan Points
              LoadFormDDS,               ///< «агружает точки сигнала произовольной формы

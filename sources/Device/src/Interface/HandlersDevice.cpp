@@ -65,8 +65,6 @@ namespace Handlers
 
     void SetPolarity(SimpleMessage *);
 
-    void SetManipulationMode(SimpleMessage *);
-
     void LoadFormDDS(SimpleMessage *);
 
     void Test(SimpleMessage *);
@@ -109,7 +107,7 @@ void Handlers::Processing(SimpleMessage *msg)
         /* SetStartMode              */ Handlers::SetStartMode,
         /* SetPeriod                 */ Handlers::SetPeriod,
         /* SetPolarity               */ Handlers::SetPolarity,
-        /* SetManipulationMode       */ Handlers::SetManipulationMode,
+        /* SetManipulationMode       */ Handlers::E,
         /* LoadFromDDS               */ Handlers::LoadFormDDS,
         /* FreqMeasure               */ Handlers::E,
         /* Log                       */ Handlers::E,
@@ -287,14 +285,6 @@ void Handlers::SetPolarity(SimpleMessage *message)
     Chan ch(message->TakeByte());
 
     FPGA::SetPolarity(ch, message->TakeByte());
-}
-
-
-void Handlers::SetManipulationMode(SimpleMessage *msg)
-{
-    Chan ch(msg->TakeByte());
-
-    AD9952::Manipulation::SetType(ch.value, static_cast<AD9952::Manipulation::Type::E>(msg->TakeByte()));
 }
 
 

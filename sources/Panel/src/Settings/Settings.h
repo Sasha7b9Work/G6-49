@@ -80,7 +80,6 @@ public:
     int16                       freq_level;                                 ///< Уровень синхронизации
     int16                       freq_hysteresis;                            ///< Величина гистерезиса
     bool                        sine_ManipulationEnabled[Chan::Count];      ///< true, если включена модуляция синусоиды пилой
-    uint8                       sine_ManipulationMode[Chan::Count];
 
 #define FLAG_1      set.flag1
     uint            flag1;

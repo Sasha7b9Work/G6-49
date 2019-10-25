@@ -9,26 +9,7 @@
 
 
 
-static void DrawRawImpulse(int x, int y)
-{
-    Painter::DrawHLine(y + 8, x, x + 8);
-    Painter::DrawLine(x + 12, y, x + 8, y + 8);
-    Painter::DrawHLine(y, x + 12, x + 20);
-    Painter::DrawLine(x + 20, y, x + 24, y + 8);
-    Painter::DrawHLine(y + 8, x + 24, x + 32);
-}
-
-static void DrawRectangleImpulse(int x, int y)
-{
-    Painter::DrawHLine(y + 8, x, x + 8);
-    Painter::DrawVLine(x + 8, y, y + 8);
-    Painter::DrawHLine(y, x + 8, x + 24);
-    Painter::DrawVLine(x + 24, y, y + 8);
-    Painter::DrawHLine(y + 8, x + 24, x + 32);
-}
-
 static ParameterChoice param_SineModulationA_Manipulation        (ParameterChoice::ManipulationEnabled, DISABLED_RU, ENABLED_RU);
-static ParameterChoice param_SineModulationA_ManipulationMode    (ParameterChoice::ManipulationMode,    "", "", DrawRawImpulse, DrawRectangleImpulse);
 static ParameterValue  param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  "5000", 0, Order::Milli);
 static ParameterValue  param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  "2500", 1, Order::Milli);
 static ParameterValue  param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
@@ -37,7 +18,6 @@ static ParameterValue  param_SineModulationA_Exit                (ParameterValue
 static ParameterBase *params_SineModulationA[] =
 {
     &param_SineModulationA_Manipulation,
-    &param_SineModulationA_ManipulationMode,
     &param_SineModulationA_ManipulationDuration,
     &param_SineModulationA_ManipulationPeriod,
     &param_SineModulationA_Exit,
@@ -232,7 +212,6 @@ static Form *formsA[] =
 
 
 static ParameterChoice param_SineModulationB_Manipulation        (ParameterChoice::ManipulationEnabled, DISABLED_RU, ENABLED_RU);
-static ParameterChoice param_SineModulationB_ManipulationMode    (ParameterChoice::ManipulationMode, "", "", DrawRawImpulse, DrawRectangleImpulse);
 static ParameterValue  param_SineModulationB_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  "5000", 0, Order::Milli);
 static ParameterValue  param_SineModulationB_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  "2500", 1, Order::Milli);
 static ParameterValue  param_SineModulationB_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
@@ -240,7 +219,6 @@ static ParameterValue  param_SineModulationB_Exit                (ParameterValue
 static ParameterBase *params_SineModulationB[] =
 {
     &param_SineModulationB_Manipulation,
-    &param_SineModulationB_ManipulationMode,
     &param_SineModulationB_ManipulationDuration,
     &param_SineModulationB_ManipulationPeriod,
     &param_SineModulationB_Exit,

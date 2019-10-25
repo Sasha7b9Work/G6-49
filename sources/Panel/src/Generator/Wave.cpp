@@ -224,7 +224,6 @@ void Form::TuneGenerator(Chan::E ch)
     {
         if(CurrentParameter()->GetParent())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
         {
-            SendParameterToGenerator(ParameterChoice::ManipulationMode);
             SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
             SendParameterToGenerator(ParameterValue::ManipulationDuration);
             SendParameterToGenerator(ParameterValue::ManipulationPeriod);
@@ -245,7 +244,6 @@ void Form::TuneGenerator(Chan::E ch)
         {
             OpenCurrentParameter();
 
-            SendParameterToGenerator(ParameterChoice::ManipulationMode);
             SendParameterToGenerator(ParameterChoice::ManipulationEnabled);
             SendParameterToGenerator(ParameterValue::ManipulationDuration);
             SendParameterToGenerator(ParameterValue::ManipulationPeriod);
@@ -624,14 +622,6 @@ void ParameterChoice::NextChoice()
         if(value == ManipulationEnabled)
         {
             SINE_MANIPULATION_ENABLED(ch) = (choice != 0);
-        }
-        else if(value == ManipulationMode)
-        {
-            SINE_MANIPULATION_MODE(ch) = static_cast<uint8>(choice);
-        }
-        else
-        {
-            // здесь ничего
         }
         Generator::TuneChannel(ch);
     }

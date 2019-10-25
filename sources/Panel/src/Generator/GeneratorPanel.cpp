@@ -175,7 +175,7 @@ void Generator::SetParameter(ParameterChoice *param)
     {
         Command::SetPolarity,
         Command::SetStartMode,
-        Command::SetManipulationMode,
+        Command::deleted_SetManipulationMode,
         Command::SetManipulation
     };
 
