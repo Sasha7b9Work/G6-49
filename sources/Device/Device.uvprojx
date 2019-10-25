@@ -160,7 +160,7 @@
             <ldmm>1</ldmm>
             <ldXref>1</ldXref>
             <BigEnd>0</BigEnd>
-            <AdsALst>0</AdsALst>
+            <AdsALst>1</AdsALst>
             <AdsACrf>1</AdsACrf>
             <AdsANop>0</AdsANop>
             <AdsANot>0</AdsANot>
@@ -173,8 +173,8 @@
             <AdsLsun>1</AdsLsun>
             <AdsLven>1</AdsLven>
             <AdsLsxf>1</AdsLsxf>
-            <RvctClst>0</RvctClst>
-            <GenPPlst>0</GenPPlst>
+            <RvctClst>1</RvctClst>
+            <GenPPlst>1</GenPPlst>
             <AdsCpuType>"Cortex-M4"</AdsCpuType>
             <RvctDeviceName></RvctDeviceName>
             <mOS>0</mOS>
@@ -1307,14 +1307,19 @@
           <GroupName>Generator</GroupName>
           <Files>
             <File>
+              <FileName>AD5697.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\AD5697.h</FilePath>
+            </File>
+            <File>
               <FileName>AD5697.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\AD5697.cpp</FilePath>
             </File>
             <File>
-              <FileName>AD5697.h</FileName>
+              <FileName>AD9952.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Generator\AD5697.h</FilePath>
+              <FilePath>.\src\Generator\AD9952.h</FilePath>
             </File>
             <File>
               <FileName>AD9952.cpp</FileName>
@@ -1322,9 +1327,14 @@
               <FilePath>.\src\Generator\AD9952.cpp</FilePath>
             </File>
             <File>
-              <FileName>AD9952.h</FileName>
+              <FileName>Amplifier.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Generator\AD9952.h</FilePath>
+              <FilePath>.\src\Generator\Amplifier.h</FilePath>
+            </File>
+            <File>
+              <FileName>Amplifier.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Amplifier.cpp</FilePath>
             </File>
             <File>
               <FileName>FPGA.cpp</FileName>
@@ -1337,24 +1347,24 @@
               <FilePath>.\src\Generator\FPGA.h</FilePath>
             </File>
             <File>
-              <FileName>GeneratorDevice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\GeneratorDevice.cpp</FilePath>
-            </File>
-            <File>
               <FileName>GeneratorDevice.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\GeneratorDevice.h</FilePath>
             </File>
             <File>
-              <FileName>GeneratorSettings.cpp</FileName>
+              <FileName>GeneratorDevice.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Generator\GeneratorSettings.cpp</FilePath>
+              <FilePath>.\src\Generator\GeneratorDevice.cpp</FilePath>
             </File>
             <File>
               <FileName>GeneratroSettings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\GeneratroSettings.h</FilePath>
+            </File>
+            <File>
+              <FileName>GeneratorSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\GeneratorSettings.cpp</FilePath>
             </File>
             <File>
               <FileName>GeneratorSettingsTypes.h</FileName>

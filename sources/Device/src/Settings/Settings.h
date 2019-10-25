@@ -4,7 +4,8 @@
 
 struct Settings
 {
-    ParamValue offset[Chan::Count];      ///< Смещение для обоих каналов
+    ParamValue amplitude[Chan::Count];  ///< Размах для обоих каналов
+    ParamValue offset[Chan::Count];     ///< Смещение для обоих каналов
 };
 
 

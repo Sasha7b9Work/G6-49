@@ -4,6 +4,7 @@
 #include "FPGA.h"
 #include "GeneratorDevice.h"
 #include "GeneratorSettingsTypes.h"
+#include "Generator/Amplifier.h"
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Settings/CalibrationSettings.h"
@@ -25,6 +26,7 @@ void Generator::Init()
     AD5697::Init();
     FPGA::Init();
     FreqMeter::Init();
+    Amplifier::Init();
 }
 
 
@@ -86,6 +88,8 @@ void Generator::SetPeriod(Chan::E ch, ParamValue period)
 
 void Generator::SetAmplitude(Chan::E ch, ParamValue amplitude)
 {
+    Amplifier::Tune(ch);
+
     if (waveIsSine)
     {
         AD9952::SetAmplitude(ch, amplitude);
@@ -100,6 +104,8 @@ void Generator::SetAmplitude(Chan::E ch, ParamValue amplitude)
 void Generator::SetOffset(Chan::E ch, ParamValue offset)
 {
     set.offset[ch] = offset;
+
+    Amplifier::Tune(ch);
 
     if(waveIsSine)
     {
