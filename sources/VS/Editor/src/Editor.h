@@ -40,6 +40,14 @@ private:
 
     void OnAlignRight(wxCommandEvent &);
 
+    void OnAlignLeftTop(wxCommandEvent &);
+
+    void OnAlignLeftDown(wxCommandEvent &);
+
+    void OnAlignRightTop(wxCommandEvent &);
+
+    void OnAlignRightDown(wxCommandEvent &);
+
     void OnDeletePoint(wxCommandEvent &);
 
     void OnParametersPoint(wxCommandEvent &);

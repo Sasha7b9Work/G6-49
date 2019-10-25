@@ -26,7 +26,11 @@ enum
     CONTEXT_MENU_CLEAR,                         // Очистить форму
 
     ALIGN_LEFT,                                 // Выровнять точку по левой
-    ALIGN_RIGHT                                 // Выровнять точку по правой
+    ALIGN_RIGHT,                                // Выровнять точку по правой
+    ALIGN_LEFT_TOP,                             // Выровнять точку по левой верхней
+    ALIGN_LEFT_DOWN,                            // Выровнять точку по левой нижней
+    ALIGN_RIGHT_TOP,                            // Выровнять точку по правой верхней
+    ALIGN_RIGHT_DOWN,                           // Выровнять точку по правой нижней
 };
 
 enum
@@ -42,6 +46,10 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(CONTEXT_MENU_CLEAR, Frame::OnClearForm)
     EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
     EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
+    EVT_MENU(ALIGN_LEFT_TOP, Frame::OnAlignLeftTop)
+    EVT_MENU(ALIGN_LEFT_DOWN, Frame::OnAlignLeftDown)
+    EVT_MENU(ALIGN_RIGHT_TOP, Frame::OnAlignRightTop)
+    EVT_MENU(ALIGN_RIGHT_DOWN, Frame::OnAlignRightDown)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
@@ -266,34 +274,29 @@ void Frame::CreateMenu()
 
 void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
 {
+    static wxMenu menuPoint;
+    static wxMenu menuContext;
     static wxMenu *menuAlign = nullptr;
 
     if (menuAlign == nullptr)
     {
         menuAlign = new wxMenu();
 
-        menuAlign->Append(ALIGN_LEFT, "По левой точкке");
-        menuAlign->Append(ALIGN_RIGHT, "По правой точке");
+        menuAlign->Append(ALIGN_LEFT, "Слева");
+        menuAlign->Append(ALIGN_RIGHT, "Справа");
+        menuAlign->Append(ALIGN_LEFT_TOP, "Слева вверху");
+        menuAlign->Append(ALIGN_LEFT_DOWN, "Слева внизу");
+        menuAlign->Append(ALIGN_RIGHT_TOP, "Справа вверху");
+        menuAlign->Append(ALIGN_RIGHT_DOWN, "Справа внизу");
+
+        menuPoint.Append(CONTEXT_MENU_DELETE, "Удалить");
+        menuPoint.Append(CONTEXT_MENU_PARAMETERS, "Параметры");
+        menuPoint.AppendSubMenu(menuAlign, "Выровнять");
+
+        menuContext.Append(CONTEXT_MENU_CLEAR, "Очистить");
     }
 
-    if (underPoint)
-    {
-        wxMenu menu;
-
-        menu.Append(CONTEXT_MENU_DELETE, "Удалить");
-        menu.Append(CONTEXT_MENU_PARAMETERS, "Параметры");
-        menu.AppendSubMenu(menuAlign, "Выровнять");
-
-        PopupMenu(&menu, pos.x, pos.y);
-    }
-    else
-    {
-        wxMenu menu;
-
-        menu.Append(CONTEXT_MENU_CLEAR, "Очистить");
-
-        PopupMenu(&menu, pos.x, pos.y);
-    }
+    PopupMenu(underPoint ? &menuPoint : &menuContext, pos.x, pos.y);
 }
 
 
@@ -322,6 +325,29 @@ void Frame::OnAlignLeft(wxCommandEvent &)
 
 
 void Frame::OnAlignRight(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnAlignLeftTop(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnAlignLeftDown(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnAlignRightTop(wxCommandEvent &)
+{
+
+}
+
+void Frame::OnAlignRightDown(wxCommandEvent &)
 {
 
 }
