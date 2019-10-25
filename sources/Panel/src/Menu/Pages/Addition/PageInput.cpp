@@ -94,8 +94,8 @@ static bool OnControl(KeyEvent &key)
 
 Page *PageInput::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
 
-DEF_PAGE_SB( pInput, //-V641 //-V1027
-    "ббнд гмювемхъ",
+DEF_PAGE_SB( pInput,
+    "ббнд гмювемхъ", //-V641
     "",
     &sbOrderUp,         ///< нймн ббндю - яхлбнк бкебн
     &sbOrderDown,       ///< нймн ббндю - яхлбнк бопюбн

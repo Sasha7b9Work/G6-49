@@ -133,7 +133,7 @@ void Frame::HandlerEvents()
 
     while (SDL_PollEvent(&event))
     {
-        //SDL_PumpEvents();
+        SDL_PumpEvents();
         switch (event.type)
         {
         case SDL_KEYDOWN:
@@ -270,10 +270,10 @@ void Frame::CreateMenu()
 
     SetMenuBar(menuBar);
 
-    wxBitmap undo(wxT("undo.png"));
-    wxToolBar *toolBar = CreateToolBar();
-    toolBar->AddTool(wxID_EDIT, wxT("Отменить"), undo);
-    toolBar->Realize();
+    //wxBitmap undo(wxT("undo.png"));
+    //wxToolBar *toolBar = CreateToolBar();
+    //toolBar->AddTool(wxID_EDIT, wxT("Отменить"), undo);
+    //toolBar->Realize();
 }
 
 

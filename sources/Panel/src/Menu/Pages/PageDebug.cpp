@@ -592,8 +592,8 @@ DEF_BUTTON( bCancel,                                                            
 )
 
 
-DEF_PAGE_4_VAR( pRegisters,                                                                                                                                        //--- –≈√»—“–€ --- //-V641 //-V1027
-    "–≈√»—“–€",
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                                //--- –≈√»—“–€ ---
+    "–≈√»—“–€", //-V641
     "",
     bPrev,
     bNext,
@@ -603,8 +603,8 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 )
 
 
-DEF_PAGE_5( pDebug,                                                                                                                                        //--- Œ“À¿ƒ ¿ --- //-V641 //-V1027
-    "Œ“À¿ƒ ¿",
+DEF_PAGE_5( pDebug,                                                                                                                                                         //--- Œ“À¿ƒ ¿ ---
+    "Œ“À¿ƒ ¿", //-V641
     "",
     &pRegisters,     ///< Œ“À¿ƒ ¿ - –Â„ËÒÚ˚
     &cConsole,       ///< Œ“À¿ƒ ¿ -  ÓÌÒÓÎ¸
@@ -622,7 +622,7 @@ static void OnPress_BigSymbols(bool)
     Font::ToggleCharacterSize();
 }
 
-DEF_CHOICE_2 (  cBigSymbols,                                                                                       //--- Œ“À¿ƒ ¿ - ¡ÓÎ¸¯ËÂ ÒËÏ‚ÓÎ˚ ---
+DEF_CHOICE_2 (  cBigSymbols,                                                                                                                              //--- Œ“À¿ƒ ¿ - ¡ÓÎ¸¯ËÂ ÒËÏ‚ÓÎ˚ ---
     "¡ÓÎ¸¯ËÂ ÒËÏ‚ÓÎ˚", "Large characters",
     "ŒÚÓ·‡ÊÂÌËÂ ËÌÙÓÏ‡ˆËË ·ÓÎÂÂ ÍÛÔÌ˚ÏË ÒËÏ‚ÓÎ‡ÏË",
     "Display information with larger characters",
