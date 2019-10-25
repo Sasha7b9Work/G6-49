@@ -1,7 +1,9 @@
 #include "Editor.h"
 #pragma warning(push, 0)
 #include <SDL.h>
-#include <wx/display.h>
+//#include <wx/display.h>
+#include <wx/wx.h>
+#include <wx/mstream.h>
 #pragma warning(pop)
 
 #undef main
@@ -10,6 +12,7 @@
 #include "defines.h"
 #include "Canvas.h"
 #include "Form.h"
+#include "resource.h"
 
 
 extern void update();
@@ -270,7 +273,27 @@ void Frame::CreateMenu()
 
     SetMenuBar(menuBar);
 
-    //wxBitmap undo(wxT("undo.png"));
+	HMODULE handle = GetModuleHandle(NULL);
+	HBITMAP hBMP = (HBITMAP)LoadBitmap(handle, MAKEINTRESOURCEW(IDB_BITMAP1));
+
+
+	BITMAP bm;
+	GetObject(hBMP, sizeof(BITMAP), (LPSTR)&bm);
+
+	hBMP = hBMP;
+
+
+	//HMODULE handle = GetModuleHandle(NULL);
+	//HRSRC rc = FindResource(handle, MAKEINTRESOURCE(IDB_BITMAP1), MAKEINTRESOURCE(RT_BITMAP));
+	//HGLOBAL rcData = LoadResource(handle, rc);
+	//DWORD size = SizeofResource(handle, rc);
+	//const char* data = static_cast<const char*>(LockResource(rcData));
+	//
+	//wxMemoryInputStream stream(data, size);
+	//
+	//wxImage image(stream, wxBITMAP_TYPE_BMP);
+	//
+    //wxBitmap undo(image);
     //wxToolBar *toolBar = CreateToolBar();
     //toolBar->AddTool(wxID_EDIT, wxT("Отменить"), undo);
     //toolBar->Realize();
