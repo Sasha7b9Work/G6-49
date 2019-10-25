@@ -11,7 +11,3 @@ cd..
 cd vs_win
 call rebuild.bat
 cd..
-
-cd Editor
-call rebuild.bat
-cd..

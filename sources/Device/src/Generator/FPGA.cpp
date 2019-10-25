@@ -111,8 +111,6 @@ void FPGA::Init()
     CPU::WritePin(GeneratorWritePin::FPGA_A2_RG, false);
     CPU::WritePin(GeneratorWritePin::FPGA_A3_RG, false);
 
-    Multiplexor::Init();
-
     WriteMaxAmplitude(Chan::A);
     WriteMaxAmplitude(Chan::B);
 }
@@ -136,8 +134,6 @@ void FPGA::SetWaveForm(Chan::E ch, Form::E form)
     
     funcs[form](ch);
     
-    Multiplexor::SetMode(ch, form);
-
     WriteControlRegister();
 }
 

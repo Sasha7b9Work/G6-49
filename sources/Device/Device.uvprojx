@@ -1361,11 +1361,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\GeneratorSettingsTypes.h</FilePath>
             </File>
-            <File>
-              <FileName>Multiplexor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Multiplexor.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

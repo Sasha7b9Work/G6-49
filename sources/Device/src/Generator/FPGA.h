@@ -109,22 +109,4 @@ namespace FPGA
     uint8 *DataDDS(Chan::E ch);
     /// Записать значение в регистр
     void WriteRegister(RG::E reg, uint64 value);
-
-    namespace Multiplexor
-    {
-        /// Первоначальная инициализация
-        void Init();
-        /// Скоммутировать мультиплексор в соответствии с формой устанавливаемого сигнала на данном канале
-        void SetMode(Chan::E ch, Form::E form);
-
-        Form GetMode(Chan::E ch);
-
-        void SetPin(uint16 pin);
-
-        void ResetPin(uint16 pin);
-
-        void WriteRegister(Register::E reg, uint value);
-
-        extern Form::E mode[Chan::Count];
-    };
 };
