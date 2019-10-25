@@ -136,17 +136,13 @@ static void SetPoint(Point point)
 
 void Form::SetPoint(int mouseX, int mouseY)
 {
-    Point point(mouseX, mouseY);
-
-    ::SetPoint(point);
+    ::SetPoint(Point(mouseX, mouseY));
 }
 
 
 void Form::SetPoint(uint16 pos, uint16 dat)
 {
-    Point point(pos, dat);
-
-    ::SetPoint(point);
+    ::SetPoint(Point(pos, dat));
 }
 
 
@@ -157,6 +153,8 @@ void Form::RemovePoint()
         points.erase(points.begin() + static_cast<const int>(indexPointUnderMouse));
 
         LinearInterpolationLeft(indexPointUnderMouse);
+
+        indexPointUnderMouse = static_cast<uint>(-1);
     }
 }
 
@@ -175,10 +173,35 @@ void Form::MovePoint(int mouseX, int mouseY)
         data[NUM_POINTS - 1] = points[indexPointUnderMouse].data;
         LinearInterpolationLeft(indexPointUnderMouse);
     }
+    else
+    {
+        Point point(mouseX, mouseY);
+
+        Point left = points[indexPointUnderMouse - 1];
+
+        Point right = points[indexPointUnderMouse + 1];
+
+        if (point.pos <= left.pos)
+        {
+            point.pos = static_cast<uint16>(left.pos + 1);
+        }
+        else if (point.pos >= right.pos)
+        {
+            point.pos = static_cast<uint16>(right.pos - 1);
+        }
+
+        uint tempIndex = indexPointUnderMouse;
+
+        RemovePoint();
+
+        indexPointUnderMouse = tempIndex;
+
+        ::SetPoint(point);
+    }
 }
 
 
-bool Form::ExistPoint(int mouseX, int mouseY)
+bool Form::ExistPoint(int mouseX, int mouseY, bool pressed)
 {
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
@@ -190,6 +213,11 @@ bool Form::ExistPoint(int mouseX, int mouseY)
             indexPointUnderMouse = i;
             return true;
         }
+    }
+
+    if (!pressed)
+    {
+        indexPointUnderMouse = static_cast<uint>(-1);
     }
 
     return false;
@@ -240,6 +268,11 @@ void Form::Draw()
         int y = Round<int>(scaleY * point.data);
 
         TheCanvas->SetPoint(x, y, SIZE_POINT);
+    }
+
+    if (indexPointUnderMouse != static_cast<uint>(-1))
+    {
+        TheCanvas->SetPoint(Round<int>(scaleX * points[indexPointUnderMouse].pos), Round<int>(scaleY * points[indexPointUnderMouse].data), SIZE_POINT * 3);
     }
 }
 

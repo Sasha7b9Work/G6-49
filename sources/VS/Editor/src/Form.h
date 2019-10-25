@@ -14,8 +14,8 @@ public:
     void SetPoint(int mouseX, int mouseY);
     /// ƒобавить точку с абсолютными значени€ми
     void SetPoint(uint16 pos, uint16 data);
-    /// ¬озвращает true, если курсор мыши находитс€ над поставленной точкой
-    bool ExistPoint(int mouseX, int mouseY);
+    /// ¬озвращает true, если курсор мыши находитс€ над поставленной точкой. Pressed - нажата ли кнопка мыши
+    bool ExistPoint(int mouseX, int mouseY, bool pressed);
     /// ”далить точку в позиции мыши
     void RemovePoint();
     /// ѕереместить точку в новую позицию

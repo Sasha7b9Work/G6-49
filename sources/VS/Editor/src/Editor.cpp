@@ -142,7 +142,7 @@ void Frame::HandlerEvents()
                 
             if (event.button.button == 1)               // "1" соотвествует ЛКМ
             {
-                if (TheForm->ExistPoint(mouseX, mouseY))
+                if (TheForm->ExistPoint(mouseX, mouseY, false))
                 {
                     mouseIsDown = true;
                 }
@@ -156,9 +156,9 @@ void Frame::HandlerEvents()
             {
                 mouseIsDown = false;
 
-                if (TheForm->ExistPoint(mouseX, mouseY))
+                if (TheForm->ExistPoint(mouseX, mouseY, false))
                 {
-                    ShowContextMenu({ mouseX, mouseY });
+                    ShowContextMenu({ mouseX, mouseY});
                 }
             }
             else
@@ -177,7 +177,7 @@ void Frame::HandlerEvents()
         }
     }
 
-    if (TheForm->ExistPoint(mouseX, mouseY))
+    if (TheForm->ExistPoint(mouseX, mouseY, mouseIsDown))
     {
         SDL_SetCursor(cursorHand);
     }
