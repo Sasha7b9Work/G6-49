@@ -38,7 +38,7 @@ void FreqMeter::SetCouple(FreqCouple couple)
 
 void FreqMeter::SetFiltr(FreqFiltr filtr)
 {
-    CPU::WritePin(GeneratorWritePin::FREQ_METER_FILTR, filtr.Is(FreqFiltr::Disable));
+    CPU::WritePin(GeneratorWritePin::FREQ_METER_FILTR, filtr.Is(FreqFiltr::Enable));
 }
 
 
