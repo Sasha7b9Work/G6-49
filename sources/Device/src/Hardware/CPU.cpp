@@ -43,8 +43,8 @@ static const StructPort registers[GeneratorWritePin::Count] =
     {GPIOC, GPIO_PIN_8},    // AD9952_RES_DDS
     {GPIOE, GPIO_PIN_12},   // Pin_P1_AmplifierA
     {GPIOE, GPIO_PIN_13},   // Pin_P2_AmplifierB
-    {GPIOE, GPIO_PIN_12},   // Pin_P3_OutA
-    {GPIOE, GPIO_PIN_13},   // Pin_P4_OutB
+    {GPIOF, GPIO_PIN_1},    // Pin_OutA
+    {GPIOC, GPIO_PIN_15},   // Pin_OutB
     {GPIOC, GPIO_PIN_2},    // AD5697_Offset
     {GPIOC, GPIO_PIN_3},    // AD5697_Freq
     {GPIOC, GPIO_PIN_5},    // AD5697_D_RSA
@@ -93,8 +93,8 @@ void CPU::Init()
 
     InitPins();
 
-    WritePin(GeneratorWritePin::Pin_P3_OutA, false);
-    WritePin(GeneratorWritePin::Pin_P4_OutB, false);
+    WritePin(GeneratorWritePin::Pin_OutA, true);
+    WritePin(GeneratorWritePin::Pin_OutB, true);
 
     SPI1_::Init();
 

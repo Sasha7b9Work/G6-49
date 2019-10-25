@@ -34,9 +34,9 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 {
     if(!FPGA::Start())
     {
-        static const GeneratorWritePin pin[Chan::Count] = { GeneratorWritePin::Pin_P3_OutA, GeneratorWritePin::Pin_P4_OutB };
+        static const GeneratorWritePin pin[Chan::Count] = { GeneratorWritePin::Pin_OutA, GeneratorWritePin::Pin_OutB };
 
-        CPU::WritePin(pin[ch], !enable);
+        CPU::WritePin(pin[ch], enable);
     }
 }
 

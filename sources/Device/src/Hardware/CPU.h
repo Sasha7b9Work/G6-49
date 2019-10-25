@@ -20,8 +20,8 @@ struct GeneratorWritePin
         AD9952_RES_DDS,
         Pin_P1_AmplifierA,
         Pin_P2_AmplifierB,
-        Pin_P3_OutA,
-        Pin_P4_OutB,
+        Pin_OutA,
+        Pin_OutB,
         AD5697_Offset,      ///< ”правление смещением выхода AD9952
         AD5697_Freq,        ///< ”правление параметрами частотомера
         AD5697_D_RSA,
