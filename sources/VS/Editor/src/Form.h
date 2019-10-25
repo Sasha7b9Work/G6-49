@@ -6,6 +6,20 @@
 */
 
 
+struct Align
+{
+    enum E
+    {
+        Left,
+        Right,
+        LeftTop,
+        LeftDown,
+        RightTop,
+        RightDown
+    };
+};
+
+
 class Form
 {
 public:
@@ -22,6 +36,8 @@ public:
     void RemovePoint();
     /// Переместить точку в новую позицию
     void MovePoint(int mouseX, int mouseY);
+    /// Выровнять точку
+    void AlignPoint(Align::E align);
 
     void Draw();
 };

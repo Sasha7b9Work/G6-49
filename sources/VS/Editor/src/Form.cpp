@@ -67,7 +67,7 @@ std::vector<Point> points;
 
 
 /// «десь хранитс€ индекс точки, которой управл€ем в текущий момент
-uint indexPointUnderMouse = 0;
+uint iCurPoint = 0;
 
 
 /// –ассчитать соседние с point точки
@@ -154,38 +154,38 @@ void Form::SetPoint(uint16 pos, uint16 dat)
 
 void Form::RemovePoint()
 {
-    if (indexPointUnderMouse != 0 && indexPointUnderMouse != points.size())
+    if (iCurPoint != 0 && iCurPoint != points.size())
     {
-        points.erase(points.begin() + static_cast<const int>(indexPointUnderMouse));
+        points.erase(points.begin() + static_cast<const int>(iCurPoint));
 
-        LinearInterpolationLeft(indexPointUnderMouse);
+        LinearInterpolationLeft(iCurPoint);
 
-        indexPointUnderMouse = static_cast<uint>(-1);
+        iCurPoint = static_cast<uint>(-1);
     }
 }
 
 
 void Form::MovePoint(int mouseX, int mouseY)
 {
-    if (indexPointUnderMouse == 0)
+    if (iCurPoint == 0)
     {
         points[0].SetY(mouseY);
         data[0] = points[0].data;
         LinearInterpolationRight(0);
     }
-    else if (indexPointUnderMouse == points.size() - 1)
+    else if (iCurPoint == points.size() - 1)
     {
-        points[indexPointUnderMouse].SetY(mouseY);
-        data[NUM_POINTS - 1] = points[indexPointUnderMouse].data;
-        LinearInterpolationLeft(indexPointUnderMouse);
+        points[iCurPoint].SetY(mouseY);
+        data[NUM_POINTS - 1] = points[iCurPoint].data;
+        LinearInterpolationLeft(iCurPoint);
     }
     else
     {
         Point point(mouseX, mouseY);
 
-        Point left = points[indexPointUnderMouse - 1];
+        Point left = points[iCurPoint - 1];
 
-        Point right = points[indexPointUnderMouse + 1];
+        Point right = points[iCurPoint + 1];
 
         if (point.pos <= left.pos)
         {
@@ -196,13 +196,95 @@ void Form::MovePoint(int mouseX, int mouseY)
             point.pos = static_cast<uint16>(right.pos - 1);
         }
 
-        uint tempIndex = indexPointUnderMouse;
+        uint tempIndex = iCurPoint;
 
         RemovePoint();
 
-        indexPointUnderMouse = tempIndex;
+        iCurPoint = tempIndex;
 
         ::SetPoint(point);
+    }
+}
+
+
+static bool CompareLess(Point left, Point right)
+{
+    return left.data < right.data;
+}
+
+
+static bool CompareMore(Point left, Point right)
+{
+    return left.data > right.data;
+}
+
+
+typedef bool (*pFuncCompare)(Point, Point);
+
+
+void Form::AlignPoint(Align::E align)
+{
+    uint index = static_cast<uint>(-1);
+
+    Point point = points[iCurPoint];
+
+    if (align == Align::Left || align == Align::LeftTop || align == Align::LeftDown)
+    {
+        if (iCurPoint > 0)
+        {
+            if(align == Align::Left)
+            {
+                index = iCurPoint - 1;
+            }
+            else
+            {
+                uint i = iCurPoint - 1;
+
+                pFuncCompare func = (align == Align::LeftTop) ? CompareLess : CompareMore;
+
+                while (i < points.size())
+                {
+                    if(func(points[i], point))
+                    {
+                        index = i;
+                        break;
+                    }
+                    i--;
+                }
+            }
+        }
+    }
+    else
+    {
+        if (iCurPoint < points.size() - 1)
+        {
+            if (align == Align::Right)
+            {
+                index = iCurPoint + 1;
+            }
+            else
+            {
+                uint i = iCurPoint + 1;
+
+                pFuncCompare func = (align == Align::RightTop) ? CompareMore : CompareLess;
+
+                while (i < points.size() - 1)
+                {
+                    if (func(point, points[i]))
+                    {
+                        index = i;
+                        break;
+                    }
+                    i++;
+                }
+            }
+        }
+    }
+
+    if (index != static_cast<uint>(-1))
+    {
+        points[iCurPoint].data = points[index].data;
+        ::SetPoint(points[iCurPoint]);
     }
 }
 
@@ -216,14 +298,14 @@ bool Form::ExistPoint(int mouseX, int mouseY, bool pressed)
     {
         if (points[i].UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
         {
-            indexPointUnderMouse = i;
+            iCurPoint = i;
             return true;
         }
     }
 
     if (!pressed)
     {
-        indexPointUnderMouse = static_cast<uint>(-1);
+        iCurPoint = static_cast<uint>(-1);
     }
 
     return false;
@@ -276,9 +358,9 @@ void Form::Draw()
         TheCanvas->SetPoint(x, y, SIZE_POINT);
     }
 
-    if (indexPointUnderMouse != static_cast<uint>(-1))
+    if (iCurPoint != static_cast<uint>(-1))
     {
-        TheCanvas->SetPoint(Round<int>(scaleX * points[indexPointUnderMouse].pos), Round<int>(scaleY * points[indexPointUnderMouse].data), SIZE_POINT * 3);
+        TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * points[iCurPoint].data), SIZE_POINT * 3);
     }
 }
 

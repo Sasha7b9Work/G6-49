@@ -320,34 +320,34 @@ void Frame::OnParametersPoint(wxCommandEvent &)
 
 void Frame::OnAlignLeft(wxCommandEvent &)
 {
-
+    TheForm->AlignPoint(Align::Left);
 }
 
 
 void Frame::OnAlignRight(wxCommandEvent &)
 {
-
+    TheForm->AlignPoint(Align::Right);
 }
 
 
 void Frame::OnAlignLeftTop(wxCommandEvent &)
 {
-
+    TheForm->AlignPoint(Align::LeftTop);
 }
 
 
 void Frame::OnAlignLeftDown(wxCommandEvent &)
 {
-
+    TheForm->AlignPoint(Align::LeftDown);
 }
 
 
 void Frame::OnAlignRightTop(wxCommandEvent &)
 {
-
+    TheForm->AlignPoint(Align::RightTop);
 }
 
 void Frame::OnAlignRightDown(wxCommandEvent &)
 {
-
+    TheForm->AlignPoint(Align::RightDown);
 }
