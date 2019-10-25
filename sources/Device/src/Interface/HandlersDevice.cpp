@@ -414,9 +414,9 @@ void Handlers::WriteRegister(SimpleMessage *msg)
         FreqMeter::SetFiltr(static_cast<FreqFiltr::E>(value));
         break;
 
+    case Register::deleted_Multiplexor1:
+    case Register::deleted_Multiplexor2:
     case Register::Count:
-    case Register::Multiplexor1:
-    case Register::Multiplexor2:
     default:
         // Здесь ничего
         break;

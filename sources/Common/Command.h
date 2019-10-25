@@ -127,8 +127,8 @@ struct Register
 {
     enum E
     {
-        Multiplexor1,
-        Multiplexor2,
+        deleted_Multiplexor1,   /// \todo Это надо удалить
+        deleted_Multiplexor2,
         OffsetA,
         OffsetB,
         FreqMeterLevel,

@@ -26,6 +26,7 @@
 #include "Interface/InterfaceDevice.h"
 
 #include "Settings/CalibrationSettings.h"
+#include "Settings/Settings.h"
 
 #include "Utils/Buffer.h"
 #include "Utils/Debug.h"

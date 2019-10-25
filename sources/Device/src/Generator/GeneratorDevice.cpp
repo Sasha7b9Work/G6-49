@@ -7,6 +7,7 @@
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Settings/CalibrationSettings.h"
+#include "Settings/Settings.h"
 #include "CommonTypes.h"
 #endif
 
@@ -98,6 +99,8 @@ void Generator::SetAmplitude(Chan::E ch, ParamValue amplitude)
 
 void Generator::SetOffset(Chan::E ch, ParamValue offset)
 {
+    set.offset[ch] = offset;
+
     if(waveIsSine)
     {
         AD5697::SetOffset(ch, offset);

@@ -8,37 +8,37 @@
 
 
 
-namespace Generator
+struct Generator
 {
     static const int DDS_NUM_POINTS = 8 * 1024;
 
-    void Init();
+    static void Init();
 
-    void EnableChannel(Chan::E ch, bool enable);
+    static void EnableChannel(Chan::E ch, bool enable);
 
-    void SetFormWave(Chan::E ch, Form::E form);
+    static void SetFormWave(Chan::E ch, Form::E form);
 
-    void SetOffset(Chan::E ch, ParamValue offset);
+    static void SetOffset(Chan::E ch, ParamValue offset);
 
-    void SetFrequency(Chan::E ch, ParamValue frequency);
+    static void SetFrequency(Chan::E ch, ParamValue frequency);
 
-    void SetAmplitude(Chan::E ch, ParamValue amplitude);
+    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
 
-    void SetDuration(Chan::E ch, ParamValue duration);
+    static void SetDuration(Chan::E ch, ParamValue duration);
 
-    void SetDutyRatio(Chan::E ch, ParamValue dutyRatio);
+    static void SetDutyRatio(Chan::E ch, ParamValue dutyRatio);
 
-    void SetPhase(Chan::E ch, ParamValue phase);
+    static void SetPhase(Chan::E ch, ParamValue phase);
 
-    void SetDelay(Chan::E ch, ParamValue duration);
+    static void SetDelay(Chan::E ch, ParamValue duration);
 
-    void SetManipulationDuration(Chan::E ch, ParamValue duration);
+    static void SetManipulationDuration(Chan::E ch, ParamValue duration);
 
-    void SetManipulationPeriod(Chan::E ch, ParamValue period);
+    static void SetManipulationPeriod(Chan::E ch, ParamValue period);
 
-    void SetPacketPeriod(Chan::E ch, ParamValue duration);
+    static void SetPacketPeriod(Chan::E ch, ParamValue duration);
 
-    void SetPacketNumber(Chan::E ch, ParamValue number);
+    static void SetPacketNumber(Chan::E ch, ParamValue number);
 
-    void SetPeriod(Chan::E ch, ParamValue period);
+    static void SetPeriod(Chan::E ch, ParamValue period);
 };

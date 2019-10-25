@@ -54,7 +54,7 @@ namespace FPGA
             Meander,
             PackedImpulse,  ///< Пакеты импульсов
             Sine,
-            Number
+            Count
         } value;
         explicit ModeWork(E v) : value(v) {};
     };
