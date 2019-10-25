@@ -269,6 +269,11 @@ void Frame::CreateMenu()
     menuBar->Append(fileMenu, "&File");
 
     SetMenuBar(menuBar);
+
+    wxBitmap undo(wxT("undo.png"));
+    wxToolBar *toolBar = CreateToolBar();
+    toolBar->AddTool(wxID_EDIT, wxT("Отменить"), undo);
+    toolBar->Realize();
 }
 
 
