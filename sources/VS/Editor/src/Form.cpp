@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Canvas.h"
 #include "Form.h"
+#include "History.h"
 
 
 using namespace MyMath;
@@ -75,6 +76,29 @@ void Form::SetPoint(Point point)
 void Form::SetPoint(int mouseX, int mouseY)
 {
     SetPoint(Point(mouseX, mouseY));
+	History::Add(TheForm);
+}
+
+
+void Form::UndoHistory()
+{	
+	Form* form = History::Prev();
+
+	if (form)
+	{
+		*TheForm = *form;
+	}
+}
+
+
+void Form::RedoHistory()
+{
+	Form* form = History::Next();
+
+	if (form)
+	{
+		*TheForm = *form;
+	}
 }
 
 

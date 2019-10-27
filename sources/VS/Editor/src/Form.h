@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include "Canvas.h"
 #include "MyMath.h"
 #include <vector>
 
@@ -86,6 +87,10 @@ public:
     void AlignPoint(Align::E align);
 
     void Draw();
+
+	void UndoHistory();
+
+	void RedoHistory();
 
 private:
 

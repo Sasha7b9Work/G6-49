@@ -370,8 +370,10 @@ void Frame::OnAlignRightDown(wxCommandEvent &)
 
 void Frame::OnUndo(wxCommandEvent&)
 {
+	TheForm->UndoHistory();
 }
 
 void Frame::OnRedo(wxCommandEvent&)
 {
+	TheForm->RedoHistory();
 }
