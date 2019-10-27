@@ -268,14 +268,13 @@ wxBitmap* GetBitmapFromMemory(const char* t_data, const DWORD t_size)
 	return new wxBitmap(wxImage(a_is), -1);
 }
 
-static bool LoadDataFromResource(char*& t_data, DWORD& t_dataSize, const wxString& t_name)
+static bool LoadDataFromResource(char*& t_data, DWORD& t_dataSize, int name)
 {
 	bool     r_result = false;
 	HGLOBAL  a_resHandle = 0;
 	HRSRC    a_resource;
 
-	//a_resource = FindResource(GetModuleHandle(NULL), t_name.wchar_str(), RT_RCDATA);
-	a_resource = FindResource(GetModuleHandle(NULL), MAKEINTRESOURCE(IDB_BMP_UNDO), RT_RCDATA);
+	a_resource = FindResource(GetModuleHandle(NULL), MAKEINTRESOURCE(name), RT_RCDATA);
 
 	if (0 != a_resource)
 	{
@@ -291,14 +290,14 @@ static bool LoadDataFromResource(char*& t_data, DWORD& t_dataSize, const wxStrin
 	return r_result;
 }
 
-static wxBitmap* CreateBitmapFromPngResource(const wxString& t_name)
+static wxBitmap* CreateBitmapFromPngResource(int name)
 {
 	wxBitmap* r_bitmapPtr = 0;
 
 	char* a_data = 0;
 	DWORD       a_dataSize = 0;
 
-	if (LoadDataFromResource(a_data, a_dataSize, t_name))
+	if (LoadDataFromResource(a_data, a_dataSize, name))
 	{
 		r_bitmapPtr = GetBitmapFromMemory(a_data, a_dataSize);
 	}
@@ -316,12 +315,12 @@ void Frame::CreateMenu()
 
     SetMenuBar(menuBar);
 
-	wxBitmap *imgUNDO = CreateBitmapFromPngResource(wxT("IDB_BMP_UNDO"));
-	//wxBitmap* imgREDO = CreateBitmapFromPngResource(wxT("IDB_BMP_REDO"));
+	wxBitmap *imgUNDO = CreateBitmapFromPngResource(IDB_BMP_UNDO);
+	wxBitmap* imgREDO = CreateBitmapFromPngResource(IDB_BMP_REDO);
 
 	wxToolBar* toolBar = CreateToolBar();
 	toolBar->AddTool(wxID_EDIT, wxT("Отменить"), *imgUNDO);
-	//toolBar->AddTool(wxID_EXIT, wxT("Восстановить"), *imgREDO);
+	toolBar->AddTool(wxID_EXIT, wxT("Восстановить"), *imgREDO);
 	toolBar->Realize();
 }
 
