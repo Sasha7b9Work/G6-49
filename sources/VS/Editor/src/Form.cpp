@@ -1,8 +1,6 @@
 #include "defines.h"
 #include "Canvas.h"
 #include "Form.h"
-#include "MyMath.h"
-#include <vector>
 
 
 using namespace MyMath;
@@ -10,78 +8,12 @@ using namespace MyMath;
 
 Form *TheForm = nullptr;
 
-#define NUM_POINTS  (8192)
-#define MAX_VALUE   static_cast<uint16>((1 << 12) - 1)
-#define AVE_VALUE   static_cast<uint16>((MAX_VALUE) / 2)
-
-#define SIZE_POINT  (5)
-
-// Данные, готовые для передачи в прибор
-uint16 data[NUM_POINTS];
-
-struct Point
-{
-//    Point(uint16 p, uint16 d) : pos(p), data(d) {};
-    Point(int mouseX, int mouseY)
-    {
-        pos = Round<uint16>(mouseX / ScaleX());
-        data = Round<uint16>(mouseY / ScaleY());
-    }
-    Point(uint16 p, uint16 d) : pos(p), data(d) {};
-    void SetY(int mouseY)
-    {
-        data = Round<uint16>(mouseY / ScaleY());
-    }
-
-    uint16 pos;
-    uint16 data;
-    bool operator < (const Point &point) const
-    {
-        return (pos < point.pos);
-    }
-    /// Возвращает true, если курсор мыши находится над этой точкой
-    bool UnderMouse(int mouseX, int mouseY)
-    {
-        return (Abs(mouseX - static_cast<int>(pos)) <= SIZE_POINT * 5) && (Abs(mouseY - static_cast<int>(data)) <= SIZE_POINT * 5);
-    }
-    /// Масштаб по горизонтали
-    static float ScaleX()
-    {
-        return TheCanvas->GetSize().x / static_cast<float>(NUM_POINTS);
-    }
-    /// Масштаб по вертикали
-    static float ScaleY()
-    {
-        return TheCanvas->GetSize().y / static_cast<float>(MAX_VALUE);
-    }
-};
-
 
 bool operator==(const Point &left, const Point &right)
 {
     return (left.pos == right.pos) && (left.data == right.data);
 }
 
-
-std::vector<Point> points;
-
-
-/// Здесь хранится индекс точки, которой управляем в текущий момент
-uint iCurPoint = 0;
-
-
-/// Рассчитать соседние с point точки
-static void CalculateNeighboringPoints(const Point &point);
-/// Линейно интерполировать точки, расположенные между pos1 и pos2
-static void LinearInterpolation(uint16 pos1, uint16 pos2);
-/// Интерполировать точки слева от точки с индексом index из points
-static void LinearInterpolationLeft(uint index);
-/// Интерполировать точки справа от точки с индексом index из points
-static void LinearInterpolationRight(uint index);
-/// Заносит точку куда следует
-static void SetPoint(Point point);
-/// Возвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
-static uint PointInPosition(uint16 pos);
 
 Form::Form()
 {
@@ -91,21 +23,21 @@ Form::Form()
 
 void Form::Clear()
 {
-    for (int i = 0; i < NUM_POINTS; i++)
+    for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        data[i] = AVE_VALUE;
+        data[i] = Point::AVE_VALUE;
     }
 
     points.clear();
 
     wxSize size = TheCanvas->GetSize();
 
-    SetPoint(static_cast<uint16>(0), AVE_VALUE);
-    SetPoint(static_cast<uint16>(NUM_POINTS - 1), AVE_VALUE);
+    SetPoint(static_cast<uint16>(0), Point::AVE_VALUE);
+    SetPoint(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE_VALUE);
 }
 
 
-static uint PointInPosition(uint16 pos)
+uint Form::PointInPosition(uint16 pos)
 {
     for (uint i = 0; i < points.size(); i++)
     {
@@ -119,7 +51,7 @@ static uint PointInPosition(uint16 pos)
 }
 
 
-static void SetPoint(Point point)
+void Form::SetPoint(Point point)
 {
     data[point.pos] = point.data;
 
@@ -142,13 +74,13 @@ static void SetPoint(Point point)
 
 void Form::SetPoint(int mouseX, int mouseY)
 {
-    ::SetPoint(Point(mouseX, mouseY));
+    SetPoint(Point(mouseX, mouseY));
 }
 
 
 void Form::SetPoint(uint16 pos, uint16 dat)
 {
-    ::SetPoint(Point(pos, dat));
+    SetPoint(Point(pos, dat));
 }
 
 
@@ -176,7 +108,7 @@ void Form::MovePoint(int mouseX, int mouseY)
     else if (iCurPoint == points.size() - 1)
     {
         points[iCurPoint].SetY(mouseY);
-        data[NUM_POINTS - 1] = points[iCurPoint].data;
+        data[Point::NUM_POINTS - 1] = points[iCurPoint].data;
         LinearInterpolationLeft(iCurPoint);
     }
     else
@@ -202,7 +134,7 @@ void Form::MovePoint(int mouseX, int mouseY)
 
         iCurPoint = tempIndex;
 
-        ::SetPoint(point);
+        SetPoint(point);
     }
 }
 
@@ -284,7 +216,7 @@ void Form::AlignPoint(Align::E align)
     if (index != static_cast<uint>(-1))
     {
         points[iCurPoint].data = points[index].data;
-        ::SetPoint(points[iCurPoint]);
+        SetPoint(points[iCurPoint]);
     }
 }
 
@@ -312,7 +244,7 @@ bool Form::ExistPoint(int mouseX, int mouseY, bool pressed)
 }
 
 
-void CalculateNeighboringPoints(const Point &point)
+void Form::CalculateNeighboringPoints(const Point &point)
 {
     uint index = 0;                     // Здесь будет индекс point в векторе points
 
@@ -337,7 +269,7 @@ void Form::Draw()
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
 
-    for (int i = 1; i < NUM_POINTS; i++)
+    for (int i = 1; i < Point::NUM_POINTS; i++)
     {
         int x0 = Round<int>(scaleX * (i - 1));
         int y0 = Round<int>(scaleY * data[i - 1]);
@@ -355,17 +287,17 @@ void Form::Draw()
         int x = Round<int>(scaleX * point.pos);
         int y = Round<int>(scaleY * point.data);
 
-        TheCanvas->SetPoint(x, y, SIZE_POINT);
+        TheCanvas->SetPoint(x, y, Point::SIZE);
     }
 
     if (iCurPoint != static_cast<uint>(-1))
     {
-        TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * points[iCurPoint].data), SIZE_POINT * 3);
+        TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * points[iCurPoint].data), Point::SIZE * 3);
     }
 }
 
 
-static void LinearInterpolation(uint16 pos1, uint16 pos2)
+void Form::LinearInterpolation(uint16 pos1, uint16 pos2)
 {
     uint16 data1 = data[pos1];
     uint16 data2 = data[pos2];
@@ -382,7 +314,7 @@ static void LinearInterpolation(uint16 pos1, uint16 pos2)
 }
 
 
-static void LinearInterpolationLeft(uint index)
+void Form::LinearInterpolationLeft(uint index)
 {
     Point point = points[index];
 
@@ -401,15 +333,15 @@ static void LinearInterpolationLeft(uint index)
 }
 
 
-static void LinearInterpolationRight(uint index)
+void Form::LinearInterpolationRight(uint index)
 {
     Point point = points[index];
 
     if (index == points.size() - 1)
     {
-        if (point.pos < NUM_POINTS - 1)
+        if (point.pos < Point::NUM_POINTS - 1)
         {
-            LinearInterpolation(point.pos, NUM_POINTS - 1);
+            LinearInterpolation(point.pos, Point::NUM_POINTS - 1);
         }
     }
     else

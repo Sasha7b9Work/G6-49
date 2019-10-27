@@ -53,4 +53,8 @@ private:
     void OnParametersPoint(wxCommandEvent &);
 
     void OnClearForm(wxCommandEvent &);
+
+	void OnUndo(wxCommandEvent &);
+
+	void OnRedo(wxCommandEvent &);
 };

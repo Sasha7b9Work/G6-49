@@ -1,7 +1,6 @@
 #include "Editor.h"
 #pragma warning(push, 0)
 #include <SDL.h>
-//#include <wx/display.h>
 #include <wx/wx.h>
 #include <wx/mstream.h>
 #pragma warning(pop)
@@ -12,7 +11,6 @@
 #include "defines.h"
 #include "Canvas.h"
 #include "Form.h"
-#include "resource.h"
 
 
 extern void update();
@@ -34,6 +32,9 @@ enum
     ALIGN_LEFT_DOWN,                            // Выровнять точку по левой нижней
     ALIGN_RIGHT_TOP,                            // Выровнять точку по правой верхней
     ALIGN_RIGHT_DOWN,                           // Выровнять точку по правой нижней
+
+	UNDO,
+	REDO
 };
 
 enum
@@ -43,16 +44,18 @@ enum
 
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-    EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
-    EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
-    EVT_MENU(CONTEXT_MENU_PARAMETERS, Frame::OnParametersPoint)
-    EVT_MENU(CONTEXT_MENU_CLEAR, Frame::OnClearForm)
-    EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
-    EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
-    EVT_MENU(ALIGN_LEFT_TOP, Frame::OnAlignLeftTop)
-    EVT_MENU(ALIGN_LEFT_DOWN, Frame::OnAlignLeftDown)
-    EVT_MENU(ALIGN_RIGHT_TOP, Frame::OnAlignRightTop)
-    EVT_MENU(ALIGN_RIGHT_DOWN, Frame::OnAlignRightDown)
+	EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
+	EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
+	EVT_MENU(CONTEXT_MENU_PARAMETERS, Frame::OnParametersPoint)
+	EVT_MENU(CONTEXT_MENU_CLEAR, Frame::OnClearForm)
+	EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
+	EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
+	EVT_MENU(ALIGN_LEFT_TOP, Frame::OnAlignLeftTop)
+	EVT_MENU(ALIGN_LEFT_DOWN, Frame::OnAlignLeftDown)
+	EVT_MENU(ALIGN_RIGHT_TOP, Frame::OnAlignRightTop)
+	EVT_MENU(ALIGN_RIGHT_DOWN, Frame::OnAlignRightDown)
+	EVT_MENU(UNDO, Frame::OnUndo)
+	EVT_MENU(REDO, Frame::OnRedo)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
@@ -315,12 +318,12 @@ void Frame::CreateMenu()
 
     SetMenuBar(menuBar);
 
-	wxBitmap *imgUNDO = CreateBitmapFromPngResource(IDB_BMP_UNDO);
-	wxBitmap* imgREDO = CreateBitmapFromPngResource(IDB_BMP_REDO);
+	wxBitmap* imgUNDO = new wxBitmap(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
+	wxBitmap* imgREDO = new wxBitmap(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
 
 	wxToolBar* toolBar = CreateToolBar();
-	toolBar->AddTool(wxID_EDIT, wxT("Отменить"), *imgUNDO);
-	toolBar->AddTool(wxID_EXIT, wxT("Восстановить"), *imgREDO);
+	toolBar->AddTool(UNDO, wxT("Отменить"), *imgUNDO);
+	toolBar->AddTool(REDO, wxT("Восстановить"), *imgREDO);
 	toolBar->Realize();
 }
 
@@ -403,4 +406,12 @@ void Frame::OnAlignRightTop(wxCommandEvent &)
 void Frame::OnAlignRightDown(wxCommandEvent &)
 {
     TheForm->AlignPoint(Align::RightDown);
+}
+
+void Frame::OnUndo(wxCommandEvent&)
+{
+}
+
+void Frame::OnRedo(wxCommandEvent&)
+{
 }
