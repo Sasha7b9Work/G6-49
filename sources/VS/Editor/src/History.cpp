@@ -21,24 +21,18 @@ Form* History::Prev()
 	{
 		next.push_back(pred.back());
 		pred.pop_back();
-
-		return (pred.size()) ? &pred.back() : nullptr;
 	}
 
-	return nullptr;
+	return (pred.size()) ? &pred.back() : nullptr;
 }
 
 Form* History::Next()
 {
 	if (next.size())
 	{
-		static Form form = next.back();
-
 		pred.push_back(next.back());
 		next.pop_back();
-
-		return &form;
 	}
 
-	return nullptr;
+	return (pred.size()) ? &pred.back() : nullptr;
 }
