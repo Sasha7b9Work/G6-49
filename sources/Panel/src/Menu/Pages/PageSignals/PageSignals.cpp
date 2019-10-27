@@ -99,7 +99,7 @@ static bool OnKey_PageSignals(KeyEvent &key)
 }
 
 DEF_PAGE_7( pageSignals,
-    "ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ", //-V641
+    "ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ", //-V641 //-V1027
     "",
     &cChannel,                                      ///< ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - Êàíàë
     &cFormA,                                        ///< ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - Ôîğìà

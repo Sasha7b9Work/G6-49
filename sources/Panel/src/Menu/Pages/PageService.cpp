@@ -70,7 +70,7 @@ DEF_CHOICE_2( cParity,                                                          
 
 
 DEF_PAGE_3( pUSB,                                                                                                                                                               //--- USB ---
-    "USB",
+    "USB", //-V1027
     "Настройки параметров связи по интерфейсу USB",
     cSizeByte,              ///< USB - РАЗМЕР БАЙТА
     cStopBit,               ///< USB - СТОП-БИТ
@@ -84,7 +84,7 @@ extern const PageBase pDebug;
 
 
 DEF_PAGE_3( pService,                                                                                                                                                        //--- СЕРВИС ---
-    "СЕРВИС", //-V641
+    "СЕРВИС", //-V641 //-V1027
     "Сервисные функции",
     bReset,
     pUSB,

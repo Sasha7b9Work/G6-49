@@ -278,12 +278,12 @@ void Frame::CreateMenu()
 
     SetMenuBar(menuBar);
 
-	wxBitmap* imgUNDO = new wxBitmap(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
-	wxBitmap* imgREDO = new wxBitmap(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
+	wxBitmap imgUNDO(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
+	wxBitmap imgREDO(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
 
 	wxToolBar* toolBar = CreateToolBar();
-	toolBar->AddTool(UNDO, wxT("Отменить"), *imgUNDO);
-	toolBar->AddTool(REDO, wxT("Восстановить"), *imgREDO);
+	toolBar->AddTool(UNDO, wxT("Отменить"), imgUNDO);
+	toolBar->AddTool(REDO, wxT("Восстановить"), imgREDO);
 	toolBar->Realize();
 }
 

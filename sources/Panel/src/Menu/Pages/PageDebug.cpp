@@ -593,7 +593,7 @@ DEF_BUTTON( bCancel,                                                            
 
 
 DEF_PAGE_4_VAR( pRegisters,                                                                                                                                                //--- –≈√»—“–€ ---
-    "–≈√»—“–€", //-V641
+    "–≈√»—“–€", //-V641 //-V1027
     "",
     bPrev,
     bNext,
@@ -604,7 +604,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 
 
 DEF_PAGE_5( pDebug,                                                                                                                                                         //--- Œ“À¿ƒ ¿ ---
-    "Œ“À¿ƒ ¿", //-V641
+    "Œ“À¿ƒ ¿", //-V641 //-V1027
     "",
     &pRegisters,     ///< Œ“À¿ƒ ¿ - –Â„ËÒÚ˚
     &cConsole,       ///< Œ“À¿ƒ ¿ -  ÓÌÒÓÎ¸
