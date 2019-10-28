@@ -149,7 +149,7 @@ DEF_GOVERNOR( gTrigLev,                                                         
 
 
 
-DEF_PAGE_7( pageCalibrationA,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю A --- //-V641
+DEF_PAGE_7( pageCalibrationA,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю A --- 
     "йюкхапнбйю A",
     "",
     &gPositiveAD9952,       ///< мюярпнийх яхцмюкнб - йюкхапнбйю A - AD9952 +5б

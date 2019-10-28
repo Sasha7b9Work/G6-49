@@ -151,7 +151,7 @@ DEF_GOVERNOR( gTrigLev,                                                         
 
 
 
-DEF_PAGE_8( pageCalibrationB,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю B --- //-V641
+DEF_PAGE_8( pageCalibrationB,                                                                                                                     //--- мюярпнийх яхцмюкнб - йюкхапнбйю B --- 
     "йюкхапнбйю B",
     ""
     ,
