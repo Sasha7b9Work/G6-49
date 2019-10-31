@@ -57,4 +57,12 @@ private:
 	void OnUndo(wxCommandEvent &);
 
 	void OnRedo(wxCommandEvent &);
+
+    void OnOpenFile(wxCommandEvent &);
+
+    void OnSaveFile(wxCommandEvent &);
+
+    void OnNewFile(wxCommandEvent &);
+
+    void CreateSine(wxCommandEvent &);
 };

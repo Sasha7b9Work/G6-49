@@ -33,8 +33,13 @@ enum
     ALIGN_RIGHT_TOP,                            // Выровнять точку по правой верхней
     ALIGN_RIGHT_DOWN,                           // Выровнять точку по правой нижней
 
+    FILE_OPEN,
+    FILE_SAVE,
+    FILE_NEW,
 	UNDO,
-	REDO
+	REDO,
+
+    CREATE_SINE
 };
 
 enum
@@ -54,8 +59,12 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(ALIGN_LEFT_DOWN, Frame::OnAlignLeftDown)
 	EVT_MENU(ALIGN_RIGHT_TOP, Frame::OnAlignRightTop)
 	EVT_MENU(ALIGN_RIGHT_DOWN, Frame::OnAlignRightDown)
+    EVT_MENU(FILE_OPEN, Frame::OnOpenFile)
+    EVT_MENU(FILE_SAVE, Frame::OnSaveFile)
+    EVT_MENU(FILE_NEW, Frame::OnNewFile)
 	EVT_MENU(UNDO, Frame::OnUndo)
 	EVT_MENU(REDO, Frame::OnRedo)
+    EVT_MENU(CREATE_SINE, Frame::CreateSine)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
@@ -266,8 +275,6 @@ void Frame::DrawFPS()
 }
 
 
-
-
 void Frame::CreateMenu()
 {
     wxMenu *fileMenu = new wxMenu;
@@ -278,14 +285,24 @@ void Frame::CreateMenu()
 
     SetMenuBar(menuBar);
 
-	wxBitmap imgUNDO(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
-	wxBitmap imgREDO(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgOpen(wxImage(wxT("icons/open.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgSave(wxImage(wxT("icons/save.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgNew(wxImage(wxT("icons/new.bmp"), wxBITMAP_TYPE_BMP));
+	wxBitmap imgUndo(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
+	wxBitmap imgRedo(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgCreateSine(wxImage(wxT("icons/sine.bmp"), wxBITMAP_TYPE_BMP));
 
 	wxToolBar* toolBar = CreateToolBar();
+    toolBar->AddTool(FILE_OPEN, wxT("Открыть"), imgOpen, wxT("Загрузить ранее созданный сигнал из файла"));
+    toolBar->AddTool(FILE_SAVE, wxT("Сохранить"), imgSave, wxT("Сохранить сигнал в файла"));
+    toolBar->AddTool(FILE_NEW, wxT("Новый"), imgNew, wxT("Создать новый сигнал"));
+
     toolBar->AddSeparator();
-	toolBar->AddTool(UNDO, wxT("Отменить"), imgUNDO);
-	toolBar->AddTool(REDO, wxT("Восстановить"), imgREDO);
+	toolBar->AddTool(UNDO, wxT("Отменить"), imgUndo, wxT("Отменить предыдущее действие"));
+	toolBar->AddTool(REDO, wxT("Восстановить"), imgRedo, wxT("Восстановить следующее действие"));
+
     toolBar->AddSeparator();
+    toolBar->AddTool(CREATE_SINE, wxT("Синусоида"), imgCreateSine, wxT("Создать новый сигнал в форме синусоиды"));
 	toolBar->Realize();
 }
 
@@ -378,4 +395,24 @@ void Frame::OnUndo(wxCommandEvent&)
 void Frame::OnRedo(wxCommandEvent&)
 {
 	TheForm->RedoHistory();
+}
+
+void Frame::OnOpenFile(wxCommandEvent &)
+{
+
+}
+
+void Frame::OnSaveFile(wxCommandEvent &)
+{
+
+}
+
+void Frame::OnNewFile(wxCommandEvent &)
+{
+
+}
+
+void Frame::CreateSine(wxCommandEvent &)
+{
+
 }
