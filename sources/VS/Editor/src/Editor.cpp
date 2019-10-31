@@ -24,8 +24,6 @@ enum
     CONTEXT_MENU_DELETE = wxID_HIGHEST + 1,     // Удалить точку
     CONTEXT_MENU_PARAMETERS,                    // Параметры точки
 
-    CONTEXT_MENU_CLEAR,                         // Очистить форму
-
     ALIGN_LEFT,                                 // Выровнять точку по левой
     ALIGN_RIGHT,                                // Выровнять точку по правой
     ALIGN_LEFT_TOP,                             // Выровнять точку по левой верхней
@@ -35,7 +33,7 @@ enum
 
     FILE_OPEN,
     FILE_SAVE,
-    FILE_NEW,
+    FILE_NEW,                                   // Очистить форму
 	UNDO,
 	REDO,
 
@@ -54,7 +52,6 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
 	EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
 	EVT_MENU(CONTEXT_MENU_PARAMETERS, Frame::OnParametersPoint)
-	EVT_MENU(CONTEXT_MENU_CLEAR, Frame::OnClearForm)
 	EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
 	EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
 	EVT_MENU(ALIGN_LEFT_TOP, Frame::OnAlignLeftTop)
@@ -336,7 +333,7 @@ void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
         menuPoint.Append(CONTEXT_MENU_PARAMETERS, "Параметры");
         menuPoint.AppendSubMenu(menuAlign, "Выровнять");
 
-        menuContext.Append(CONTEXT_MENU_CLEAR, "Очистить");
+        menuContext.Append(FILE_NEW, "Очистить");
     }
 
     PopupMenu(underPoint ? &menuPoint : &menuContext, pos.x, pos.y);
@@ -346,12 +343,6 @@ void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
 void Frame::OnDeletePoint(wxCommandEvent &)
 {
     TheForm->RemovePoint();
-}
-
-
-void Frame::OnClearForm(wxCommandEvent &)
-{
-    TheForm->Clear();
 }
 
 
@@ -417,7 +408,7 @@ void Frame::OnSaveFile(wxCommandEvent &)
 
 void Frame::OnNewFile(wxCommandEvent &)
 {
-
+    TheForm->Clear();
 }
 
 void Frame::CreateSine(wxCommandEvent &)
