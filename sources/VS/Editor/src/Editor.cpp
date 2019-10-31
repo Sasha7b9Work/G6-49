@@ -39,7 +39,9 @@ enum
 	UNDO,
 	REDO,
 
-    CREATE_SINE
+    CREATE_SINE,
+    CREATE_TRIANGLE,
+    CREATE_TRAPEZE
 };
 
 enum
@@ -65,6 +67,8 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(UNDO, Frame::OnUndo)
 	EVT_MENU(REDO, Frame::OnRedo)
     EVT_MENU(CREATE_SINE, Frame::CreateSine)
+    EVT_MENU(CREATE_TRIANGLE, Frame::CreateTriangle)
+    EVT_MENU(CREATE_TRAPEZE, Frame::CreateTrapeze)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
@@ -291,6 +295,8 @@ void Frame::CreateMenu()
 	wxBitmap imgUndo(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
 	wxBitmap imgRedo(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateSine(wxImage(wxT("icons/sine.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgCreateTriangle(wxImage(wxT("icons/triangle.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgCreateTrapeze(wxImage(wxT("icons/trapeze.bmp"), wxBITMAP_TYPE_BMP));
 
 	wxToolBar* toolBar = CreateToolBar();
     toolBar->AddTool(FILE_OPEN, wxT("Открыть"), imgOpen, wxT("Загрузить ранее созданный сигнал из файла"));
@@ -303,6 +309,8 @@ void Frame::CreateMenu()
 
     toolBar->AddSeparator();
     toolBar->AddTool(CREATE_SINE, wxT("Синусоида"), imgCreateSine, wxT("Создать новый сигнал в форме синусоиды"));
+    toolBar->AddTool(CREATE_TRIANGLE, wxT("Треугольник"), imgCreateTriangle, wxT("Создать новый сигнал в форме треугольника"));
+    toolBar->AddTool(CREATE_TRAPEZE, wxT("Трапеция"), imgCreateTrapeze, wxT("Создать новый сигнал в форме трапеции"));
 	toolBar->Realize();
 }
 
@@ -413,6 +421,16 @@ void Frame::OnNewFile(wxCommandEvent &)
 }
 
 void Frame::CreateSine(wxCommandEvent &)
+{
+
+}
+
+void Frame::CreateTriangle(wxCommandEvent &)
+{
+
+}
+
+void Frame::CreateTrapeze(wxCommandEvent &)
 {
 
 }

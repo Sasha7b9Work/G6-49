@@ -65,4 +65,8 @@ private:
     void OnNewFile(wxCommandEvent &);
 
     void CreateSine(wxCommandEvent &);
+
+    void CreateTriangle(wxCommandEvent &);
+
+    void CreateTrapeze(wxCommandEvent &);
 };
