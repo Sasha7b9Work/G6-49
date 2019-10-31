@@ -22,9 +22,8 @@
 
 extern const PageBase pRegisters;
 extern const PageBase pDebug;
-extern volatile const ButtonBase bBackspace;
-extern volatile const ButtonBase bCancel;
-extern volatile const ButtonBase bSave;
+extern const ButtonBase bSend;
+
 
 static Item emptyItem = {Item::Type::None};
 
@@ -485,59 +484,24 @@ DEF_BUTTON( bNext,                                                              
 )
 
 
-static void OnPress_Send()
+static void OnPress_Cancel()
 {
-    showInputWindow = true;
+    showInputWindow = false;
     std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
-
-    pRegisters.items[0] = reinterpret_cast<Item *>(const_cast<ButtonBase *>(&bBackspace));
-    pRegisters.items[1] = reinterpret_cast<Item *>(const_cast<ButtonBase *>(&bCancel));
-    pRegisters.items[2] = reinterpret_cast<Item *>(const_cast<ButtonBase *>(&bSave));
-
-    int position = 0;
-
-    if (SENDING(currentRegister))
-    {
-        TypeInput type = TypeBuffer();
-
-        if (type == Uint)
-        {
-            UInt64_2String(VALUE(currentRegister), buffer);
-            position = static_cast<int>(std::strlen(buffer));
-        }
-        else if (type == Binary)
-        {
-            Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
-            position = static_cast<int>(std::strlen(buffer));
-        }
-        else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
-        {
-            uint mask = type == Uint10_Uint10 ? 0x3ffU : 0x3fffU;
-            int numBits = type == Uint10_Uint10 ? 10 : 14;
-
-            uint first = VALUE(currentRegister) & mask;
-            uint second = (VALUE(currentRegister) >> numBits) & mask;
-
-            std::strcpy(buffer, UInt2String(first));
-            std::strcat(buffer, ".");
-            std::strcat(buffer, UInt2String(second));
-        }
-    }
-    else
-    {
-        position = 0;
-        std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
-        VALUE(position) = 0;
-    }
-
-    NumberBuffer::Set(buffer, desc[currentRegister].size, position, (currentRegister == Register::FreqMeterLevel ||
-                                                                     currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
+    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bPrev));
+    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bNext));
+    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSend));
 }
 
-DEF_BUTTON( bSend,                                                                                                                                               //--- РЕГИСТРЫ - Заслать ---
-    "Заслать",
-    "Открывает окно ввода значения регистра",
-    pRegisters, Item::FuncActive, OnPress_Send, FuncDraw
+static void OnDraw_Cancel(int x, int y)
+{
+    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Delete, Color::FILL);
+}
+
+DEF_BUTTON( bCancel,                                                                                                                               //--- РЕГИСТРЫ - Input window - Отмена ---
+    "Отмена",
+    "Отменяет засылку значения в регистр и закрывает окно ввода",
+    pRegisters, Item::FuncActive, OnPress_Cancel, OnDraw_Cancel
 )
 
 
@@ -571,29 +535,64 @@ DEF_BUTTON( bSave,                                                              
 )
 
 
-static void OnPress_Cancel()
+static void OnPress_Send()
 {
-    showInputWindow = false;
+    showInputWindow = true;
     std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
-    pRegisters.items[0] = reinterpret_cast<Item *>(const_cast<ButtonBase *>(&bPrev));
-    pRegisters.items[1] = reinterpret_cast<Item *>(const_cast<ButtonBase *>(&bNext));
-    pRegisters.items[2] = reinterpret_cast<Item *>(const_cast<ButtonBase *>(&bSend));
+
+    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bBackspace));
+    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bCancel));
+    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSave));
+
+    int position = 0;
+
+    if (SENDING(currentRegister))
+    {
+        TypeInput type = TypeBuffer();
+
+        if (type == Uint)
+        {
+            UInt64_2String(VALUE(currentRegister), buffer);
+            position = static_cast<int>(std::strlen(buffer));
+        }
+        else if (type == Binary)
+        {
+            Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
+            position = static_cast<int>(std::strlen(buffer));
+        }
+        else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
+        {
+            uint mask = type == Uint10_Uint10 ? 0x3ffU : 0x3fffU;
+            int numBits = type == Uint10_Uint10 ? 10 : 14;
+
+            uint first = VALUE(currentRegister) & mask;
+            uint second = (VALUE(currentRegister) >> numBits)& mask;
+
+            std::strcpy(buffer, UInt2String(first));
+            std::strcat(buffer, ".");
+            std::strcat(buffer, UInt2String(second));
+        }
+    }
+    else
+    {
+        position = 0;
+        std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
+        VALUE(position) = 0;
+    }
+
+    NumberBuffer::Set(buffer, desc[currentRegister].size, position, (currentRegister == Register::FreqMeterLevel ||
+        currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
 }
 
-static void OnDraw_Cancel(int x, int y)
-{
-    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Delete, Color::FILL);
-}
-
-DEF_BUTTON( bCancel,                                                                                                                               //--- РЕГИСТРЫ - Input window - Отмена ---
-    "Отмена",
-    "Отменяет засылку значения в регистр и закрывает окно ввода",
-    pRegisters, Item::FuncActive, OnPress_Cancel, OnDraw_Cancel
+DEF_BUTTON( bSend,                                                                                                                                               //--- РЕГИСТРЫ - Заслать ---
+    "Заслать",
+    "Открывает окно ввода значения регистра",
+    pRegisters, Item::FuncActive, OnPress_Send, FuncDraw
 )
 
 
-DEF_PAGE_4_VAR( pRegisters, //-V1027 //-V641                                                                                                                               //--- РЕГИСТРЫ ---
-    "РЕГИСТРЫ",  //-V1027
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                                //--- РЕГИСТРЫ ---
+    "РЕГИСТРЫ",  
     "",
     bPrev,
     bNext,
@@ -603,8 +602,8 @@ DEF_PAGE_4_VAR( pRegisters, //-V1027 //-V641                                    
 )
 
 
-DEF_PAGE_5( pDebug, //-V1027 //-V641                                                                                                                                        //--- ОТЛАДКА ---
-    "ОТЛАДКА",  //-V1027
+DEF_PAGE_5( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
+    "ОТЛАДКА",  
     "",
     &pRegisters,     ///< ОТЛАДКА - Регистры
     &cConsole,       ///< ОТЛАДКА - Консоль

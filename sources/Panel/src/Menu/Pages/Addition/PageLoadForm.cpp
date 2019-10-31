@@ -21,6 +21,8 @@ DEF_BUTTON( bUp,                                                                
     pageLoad, Item::FuncActive, FDrive::PressUp, FuncDraw
 )
 
+volatile const ButtonBase *pbUp = &bUp;
+
 
 DEF_BUTTON( bDown,                                                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Вниз ---
     "Вниз",
@@ -28,12 +30,16 @@ DEF_BUTTON( bDown,                                                              
     pageLoad, Item::FuncActive, FDrive::PressDown, FuncDraw
 )
 
+volatile const ButtonBase *pbDown = &bDown;
+
 
 DEF_BUTTON( bEnter,                                                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Enter ---
     "Выбор",
     "",
     pageLoad, Item::FuncActive, FuncPress, FuncDraw
 )
+
+volatile const ButtonBase *pbEnter = &bEnter;
 
 
 static void OnPress_Choose()
@@ -75,8 +81,8 @@ static bool OnKey(KeyEvent &control)
     return false;
 }
 
-DEF_PAGE_4( pageLoad, //-V1027 //-V641                                                                                                                //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА ---
-    "ВЫБОР",  //-V1027
+DEF_PAGE_4( pageLoad,                                                                                                                                 //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА ---
+    "ВЫБОР",  
     "Страница выбора формы произвольного сигнала для загрузки с флешки",
     &bChoose,   ///< НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Установить
     0,

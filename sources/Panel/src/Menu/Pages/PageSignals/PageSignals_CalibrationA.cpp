@@ -117,6 +117,8 @@ DEF_GOVERNOR( gMinDDS,                                                          
     CAL_DDS_MIN(Chan::A), -10000, 10000, pageCalibrationA, Item::FuncActive, OnChange_MinDDS, FuncBeforeDraw, OnPress_MinDDS
 )
 
+volatile const GovernorBase *pgMinDDS = &gMinDDS;
+
 
 static void OnChange_MaxDDS()
 {

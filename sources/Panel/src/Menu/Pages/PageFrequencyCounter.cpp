@@ -24,7 +24,6 @@ static void OnPress_TimeStamps(bool);
 static void OnPress_AvePeriod(bool);
 
 
-
 static void OnPress_Measure(bool)
 {
     Tune_Page();
@@ -50,6 +49,8 @@ DEF_CHOICE_2( cInterval,                                                        
     "10 с", "Запуск процесса измерения частомера производится с интервалом 10 секунда.",
     FLAG_1, BIT_FREQ_INTERVAL, pFrequencyCounter, Item::FuncActive, OnPress_Interval, FuncDraw
 )
+
+volatile const ChoiceBase *pcInterval = &cInterval;
 
 static void OnPress_Interval(bool)
 {
@@ -195,15 +196,17 @@ DEF_GOVERNOR( gHysteresis,                                                      
     FREQ_HYSTERESIS, 0, 100, pFrequencyCounter, Item::FuncActive, OnChange_Hysteresis, EmptyFuncVV, 0
 )
 
+volatile const GovernorBase *pgHysteresis = &gHysteresis;
 
-DEF_PAGE_8( pFrequencyCounter,  // -V641 // -V1027                                                                                                                       //--- ЧАСТОТОМЕР ---
-    "ЧАСТОТОМЕР", //-V1027
+
+DEF_PAGE_8( pFrequencyCounter,                                                                                                                                           //--- ЧАСТОТОМЕР ---
+    "ЧАСТОТОМЕР", 
     "Управление фукнциями частотомера."
     ,
     &cMeasure,       ///< ЧАСТОТОМЕР - Измерение
     &gLevel,         ///< ЧАСТОТОМЕР - Уровень
-    0,
-    0,
+    nullptr,
+    nullptr,
     &cResist,        ///< ЧАСТОТОМЕР - Сопротивление
     &cCouple,        ///< ЧАСТОТОМЕР - Вход
     &cFiltr,         ///< ЧАСТОТОМЕР - ФНЧ
