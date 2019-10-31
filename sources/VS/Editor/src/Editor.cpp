@@ -282,8 +282,10 @@ void Frame::CreateMenu()
 	wxBitmap imgREDO(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
 
 	wxToolBar* toolBar = CreateToolBar();
+    toolBar->AddSeparator();
 	toolBar->AddTool(UNDO, wxT("Отменить"), imgUNDO);
 	toolBar->AddTool(REDO, wxT("Восстановить"), imgREDO);
+    toolBar->AddSeparator();
 	toolBar->Realize();
 }
 

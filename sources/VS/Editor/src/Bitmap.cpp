@@ -17,14 +17,14 @@ static bool LoadDataFromResource(char*& t_data, DWORD& t_dataSize, int name)
 	HGLOBAL  a_resHandle = 0;
 	HRSRC    a_resource;
 
-	a_resource = FindResource(GetModuleHandle(NULL), MAKEINTRESOURCE(name), RT_RCDATA);
+	a_resource = FindResource(GetModuleHandle(NULL), MAKEINTRESOURCE(name), RT_RCDATA); //-V2001
 
 	if (0 != a_resource)
 	{
 		a_resHandle = LoadResource(NULL, a_resource);
 		if (0 != a_resHandle)
 		{
-			t_data = (char*)LockResource(a_resHandle);
+			t_data = static_cast<char*>(LockResource(a_resHandle));
 			t_dataSize = SizeofResource(NULL, a_resource);
 			r_result = true;
 		}

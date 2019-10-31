@@ -27,7 +27,7 @@ static void Draw_Left(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON(sbOrderUp,                                                                                           //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
+DEF_SMALL_BUTTON(sbOrderUp,                                                                                                                               //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
     "Порядок больше",
     "Увеличить порядок единицы измерения",
     pInput, Item::FuncActive, InputWindow::OrderUp, Draw_Left
@@ -43,7 +43,7 @@ static void Draw_Right(int x, int y)
     }
 }
 
-DEF_SMALL_BUTTON(sbOrderDown,                                                                                         //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
+DEF_SMALL_BUTTON(sbOrderDown,                                                                                                                            //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
     "Порядок меньшше",
     "Уменьшить порядок единицы измерения",
     pInput, Item::FuncActive, InputWindow::OrderDown, Draw_Right
@@ -62,7 +62,7 @@ static void Draw_Cancel(int x, int y)
     Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Delete);
 }
 
-DEF_SMALL_BUTTON(sbCancel,                                                                                               //--- ОКНО ВВОДА - ОТМЕНА ---
+DEF_SMALL_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
     "ЕДИНИЦЫ ИЗМЕРЕНИЯ",
     "Отказаться от ввода нового значения",
     pInput, Item::FuncActive, OnPress_Cancel, Draw_Cancel
@@ -75,7 +75,7 @@ static void Draw_Enter(int x, int y)
     Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Save);
 }
 
-DEF_SMALL_BUTTON(sbEnter,                                                                                                  //--- ОКНО ВВОДА - ВВОД ---
+DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
     "ВВОД",
     "Подтвердить ввод нового значения",
     pInput, Item::FuncActive, InputWindow::KeyEnter, Draw_Enter
@@ -94,7 +94,7 @@ static bool OnControl(KeyEvent &key)
 
 Page *PageInput::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
 
-DEF_PAGE_SB( pInput, //-V1027
+DEF_PAGE_SB( pInput, //-V1027 //-V641
     "ВВОД ЗНАЧЕНИЯ",  //-V1027
     "",
     &sbOrderUp,         ///< ОКНО ВВОДА - СИМВОЛ ВЛЕВО

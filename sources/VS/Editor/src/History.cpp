@@ -8,7 +8,7 @@ std::vector<Form> pred;
 std::vector<Form> next;
 
 
-void History::Add(Form* form)
+void History::Add(const Form* form)
 {
 	pred.push_back(*form);
 	next.clear();

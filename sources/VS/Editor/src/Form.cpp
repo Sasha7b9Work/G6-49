@@ -151,6 +151,10 @@ void Form::MovePoint(int mouseX, int mouseY)
         {
             point.pos = static_cast<uint16>(right.pos - 1);
         }
+        else
+        {
+            // здесь ничего
+        }
 
         uint tempIndex = iCurPoint;
 
