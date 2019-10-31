@@ -398,12 +398,20 @@ void Frame::OnRedo(wxCommandEvent&)
 
 void Frame::OnOpenFile(wxCommandEvent &)
 {
+    wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, _("*.*"), wxFD_MULTIPLE);
+    if (openDialog.ShowModal() == wxID_OK)
+    {
 
+    }
 }
 
 void Frame::OnSaveFile(wxCommandEvent &)
 {
+    wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.*"), wxFD_SAVE);
+    if (saveDialog.ShowModal() == wxID_OK)
+    {
 
+    }
 }
 
 void Frame::OnNewFile(wxCommandEvent &)
