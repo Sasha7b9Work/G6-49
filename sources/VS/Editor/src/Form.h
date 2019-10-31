@@ -92,6 +92,8 @@ public:
 
 	void RedoHistory();
 
+    void CreateSine();
+
 private:
 
 	/// Данные, готовые для передачи в прибор

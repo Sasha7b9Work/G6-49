@@ -398,10 +398,11 @@ void Frame::OnRedo(wxCommandEvent&)
 
 void Frame::OnOpenFile(wxCommandEvent &)
 {
-    wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, _("*.*"), wxFD_MULTIPLE);
+    wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, wxT("*.*"), wxFD_OPEN);
     if (openDialog.ShowModal() == wxID_OK)
     {
-
+        wxString path = openDialog.GetPath();
+        std::cout << path.c_str() << std::endl;
     }
 }
 
@@ -410,7 +411,8 @@ void Frame::OnSaveFile(wxCommandEvent &)
     wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.*"), wxFD_SAVE);
     if (saveDialog.ShowModal() == wxID_OK)
     {
-
+        wxString path = saveDialog.GetPath();
+        std::cout << path.c_str() << std::endl;
     }
 }
 
@@ -421,7 +423,7 @@ void Frame::OnNewFile(wxCommandEvent &)
 
 void Frame::CreateSine(wxCommandEvent &)
 {
-
+    TheForm->CreateSine();
 }
 
 void Frame::CreateTriangle(wxCommandEvent &)

@@ -377,3 +377,9 @@ void Form::LinearInterpolationRight(uint index)
         LinearInterpolation(point.pos, points[index + 1].pos);
     }
 }
+
+
+void Form::CreateSine()
+{
+
+}
