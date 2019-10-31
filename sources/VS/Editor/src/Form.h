@@ -97,7 +97,7 @@ public:
 private:
 
 	/// ƒанные, готовые дл€ передачи в прибор
-	uint16 data[8192];
+	uint16 data[Point::NUM_POINTS];
 
 	std::vector<Point> points;
 	/// «десь хранитс€ индекс точки, которой управл€ем в текущий момент
