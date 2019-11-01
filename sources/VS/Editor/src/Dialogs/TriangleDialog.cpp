@@ -62,13 +62,11 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 
     sb = new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
 
-    int y = 20, x = 10, dY = 2, dX = 55;
+    int y = 20, x = 10;
 
-    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent));
-    text = new wxStaticText(panel, wxID_ANY, wxT("Верхний"), wxPoint(x + dX, y + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
+    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Верхний"));
 
-    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent));
-    text = new wxStaticText(panel, wxID_ANY, wxT("Нижний"), wxPoint(x + dX, y + 26 + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
+    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Нижний"));
 
     return panel;
 }
@@ -81,8 +79,7 @@ static wxPanel *CreatePanelCenter(wxDialog *dlg)
 
     sb = new wxStaticBox(panel, wxID_ANY, wxT("Центр"), wxDefaultPosition, wxSize(216, 50));
 
-    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), -100, 100, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent));
-    text = new wxStaticText(panel, wxID_ANY, wxT("Смещение"), wxPoint(x + 55, y + 2), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
+    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), -100, 100, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Смещение"));
 
     return panel;
 }

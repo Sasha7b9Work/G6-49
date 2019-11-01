@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Form.h"
 #include "Dialogs/ExponentDialog.h"
+#include "Dialogs/SpinControl.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
@@ -27,11 +28,11 @@ static wxStaticText *text = nullptr;
 
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
-static wxSpinCtrl *scUp = nullptr;
-static wxSpinCtrl *scDown = nullptr;
+static SpinControl *scUp = nullptr;
+static SpinControl *scDown = nullptr;
 
-static wxSpinCtrl *scFrontDelay = nullptr;      // Задержка перед началом экспоненциального импульса
-static wxSpinCtrl *scFrontTime = nullptr;       // Время от начала экспоненциального импульса до начала спада
+static SpinControl *scFrontDelay = nullptr;      // Задержка перед началом экспоненциального импульса
+static SpinControl *scFrontTime = nullptr;       // Время от начала экспоненциального импульса до начала спада
 static wxTextCtrl *tcFrontK = nullptr;          // Коэффициент экспоненты
 
 
@@ -68,14 +69,10 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 
     sb = new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
 
-    int y = 20, x = 10, dY = 2, dX = 55;
+    int y = 20, x = 10;
 
-    scUp = new wxSpinCtrl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, 100);
-    dlg->Connect(ID_SPINCTRL_UP, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(ExponentDialog::OnControlEvent));
-    text = new wxStaticText(panel, wxID_ANY, wxT("Верхний"), wxPoint(x + dX, y + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
-    scDown = new wxSpinCtrl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -100);
-    dlg->Connect(ID_SPINCTRL_DONW, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(ExponentDialog::OnControlEvent));
-    text = new wxStaticText(panel, wxID_ANY, wxT("Нижний"), wxPoint(x + dX, y + 26 + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
+    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Верхний"));
+    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Нижний"));
 
     return panel;
 }
@@ -87,11 +84,9 @@ static wxPanel *CreatePanelFront(wxDialog *dlg)
 
     sb = new wxStaticBox(panel, wxID_ANY, wxT("Нарастание"), wxDefaultPosition, wxSize(125, 75));
 
-    int y = 20, x = 10, dY = 2, dX = 55;
+    int y = 20, x = 10;
 
-    scFrontDelay = new wxSpinCtrl(panel, ID_SPINCTRL_FRONT_DELAY, wxT("-100"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -100);
-    dlg->Connect(ID_SPINCTRL_FRONT_DELAY, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(ExponentDialog::OnControlEvent));
-    text = new wxStaticText(panel, wxID_ANY, wxT("Задержка"), wxPoint(x + dX, y + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
+    scFrontDelay = new SpinControl(panel, ID_SPINCTRL_FRONT_DELAY, wxT("-100"), wxPoint(x, y), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Задержка"));
 
     return panel;
 }
