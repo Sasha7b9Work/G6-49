@@ -8,4 +8,5 @@ class TriangleDialog : public wxDialog
 {
 public:
     TriangleDialog();
+    ~TriangleDialog();
 };

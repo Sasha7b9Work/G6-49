@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Form.h"
 #include "TriangleDialog.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
@@ -13,6 +14,14 @@ enum
 };
 
 
+static wxRadioButton *rbDirect = nullptr;
+static wxRadioButton *rbBack = nullptr;
+
+
+/// Послать форму
+static void SendForm();
+
+
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
@@ -21,13 +30,11 @@ static wxPanel *CreatePanelPolarity(wxDialog *dlg)
     int y = 25;
     int x = 5;
 
-    wxRadioButton *rbDirect = new wxRadioButton(panel, wxID_ANY, wxT("Прямая"), wxPoint(x, y));
+    rbDirect = new wxRadioButton(panel, wxID_ANY, wxT("Прямая"), wxPoint(x, y));
     rbDirect->SetValue(true);
-    wxRadioButton *rbBack = new wxRadioButton(panel, wxID_ANY, wxT("Обратная"), wxPoint(x, y + 25));
+    rbBack = new wxRadioButton(panel, wxID_ANY, wxT("Обратная"), wxPoint(x, y + 25));
 
     sb = sb;
-    rbDirect = rbDirect;
-    rbBack = rbBack;
 
     return panel;
 }
@@ -80,4 +87,60 @@ TriangleDialog::TriangleDialog() : wxDialog(nullptr, -1, wxT("Параметры треуголь
     SetSizer(vBox);
     
     Centre();
+
+    SendForm();
+}
+
+
+TriangleDialog::~TriangleDialog()
+{
+    TheForm->SetAdditionForm(nullptr);
+}
+
+
+static void DrawLine(uint16 data[Point::NUM_POINTS], int x1, int y1, int x2, int y2)
+{
+    float dX = static_cast<float>(x2 - x1);
+
+    float dY = std::fabsf(static_cast<float>(y2 - y1));
+
+    float k = dY / dX;
+
+    if (y2 > y1)
+    {
+        for (int x = x1; x <= x2; x++)
+        {
+            data[x] = static_cast<uint16>(y1 + (x - x1) * k + 0.5F);
+        }
+    }
+    else
+    {       
+        for (int x = x1; x <= x2; x++)
+        {
+            data[x] = static_cast<uint16>(y1 - (x - x1) * k + 0.5F);
+        }
+    }
+}
+
+
+static void SendForm()
+{
+    static uint16 data[Point::NUM_POINTS];
+
+    int center = Point::NUM_POINTS / 2;
+
+    int min = Point::MAX_VALUE;
+    int max = Point::MIN_VALUE;
+
+    if (rbBack->GetValue())
+    {
+        min = Point::MIN_VALUE;
+        max = Point::MAX_VALUE;
+    }
+
+    DrawLine(data, 0, min, center, max);
+
+    DrawLine(data, center, max, Point::NUM_POINTS - 1, min);
+
+    TheForm->SetAdditionForm(data);
 }

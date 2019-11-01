@@ -27,6 +27,7 @@ struct Point
 {
 	static const uint SIZE = 5;
 
+    static const uint16 MIN_VALUE = static_cast<uint16>(0);
 	static const uint16 MAX_VALUE = static_cast<uint16>((1 << 12) - 1);
 	static const uint16 AVE_VALUE = static_cast<uint16>((MAX_VALUE) / 2);
 
@@ -94,6 +95,8 @@ public:
 	void RedoHistory();
 
     void CreateSine();
+    /// Установить дополнительную форму, которая будет рисоваться поверх основной. 
+    void SetAdditionForm(uint16 data[Point::NUM_POINTS]);
 
 private:
 

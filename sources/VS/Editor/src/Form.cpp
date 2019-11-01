@@ -10,6 +10,10 @@ using namespace MyMath;
 Form *TheForm = nullptr;
 
 
+static uint16 addData[Point::NUM_POINTS];
+static bool drawAdditionData = false;
+
+
 bool operator==(const Point &left, const Point &right)
 {
     return (left.pos == right.pos) && (left.data == right.data);
@@ -296,12 +300,12 @@ void Form::CalculateNeighboringPoints(const Point &point)
 }
 
 
-void Form::Draw()
+static void DrawForm(uint16 data[Point::NUM_POINTS], Color color)
 {
-    TheCanvas->SetColor(Color::WHITE);
-
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
+
+    TheCanvas->SetColor(color);
 
     for (int i = 1; i < Point::NUM_POINTS; i++)
     {
@@ -313,6 +317,15 @@ void Form::Draw()
 
         TheCanvas->DrawLine(x0, y0, x1, y1);
     }
+}
+
+
+void Form::Draw()
+{
+    float scaleX = Point::ScaleX();
+    float scaleY = Point::ScaleY();
+
+    DrawForm(data, Color::WHITE);
 
     TheCanvas->SetColor(Color::GREEN);
 
@@ -327,6 +340,11 @@ void Form::Draw()
     if (iCurPoint != static_cast<uint>(-1))
     {
         TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * points[iCurPoint].data), Point::SIZE * 3);
+    }
+
+    if (drawAdditionData)
+    {
+        DrawForm(addData, Color::BLUE);
     }
 }
 
@@ -395,4 +413,18 @@ void Form::CreateSine()
     }
 
     History::Add(TheForm);
+}
+
+
+void Form::SetAdditionForm(uint16 d[Point::NUM_POINTS])
+{
+    if (d)
+    {
+        std::memcpy(addData, d, Point::NUM_POINTS * 2);
+        drawAdditionData = true;
+    }
+    else
+    {
+        drawAdditionData = false;
+    }
 }
