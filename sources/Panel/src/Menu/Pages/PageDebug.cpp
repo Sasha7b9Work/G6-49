@@ -591,7 +591,7 @@ DEF_BUTTON( bSend,                                                              
 )
 
 
-DEF_PAGE_4_VAR( pRegisters,                                                                                                                                                //--- –≈√»—“–€ ---
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                                //--- –≈√»—“–€ --- //-V641
     "–≈√»—“–€",  
     "",
     bPrev,
@@ -602,7 +602,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 )
 
 
-DEF_PAGE_5( pDebug,                                                                                                                                                         //--- Œ“À¿ƒ ¿ ---
+DEF_PAGE_5( pDebug,                                                                                                                                                         //--- Œ“À¿ƒ ¿ --- //-V641
     "Œ“À¿ƒ ¿",  
     "",
     &pRegisters,     ///< Œ“À¿ƒ ¿ - –Â„ËÒÚ˚

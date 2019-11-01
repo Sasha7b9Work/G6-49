@@ -100,8 +100,8 @@ static Item * items##name[] = {                                                 
     (Item *)reinterpret_cast<const Item *>(item3),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item4),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item5),                                                                                          \
-    (Item *)item6,                                                                                                                          \
-    (Item *)item7};                                                                                                                         \
+    (Item *)reinterpret_cast<const Item *>(item6),                                                                                                                          \
+    (Item *)reinterpret_cast<const Item *>(item7)};                                                                                                                         \
 const PageBase name = { Item::Type::Page, 7, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                          \
     items##name, funcPress, funcDraw, funcOnKey};
 

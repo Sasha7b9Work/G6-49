@@ -83,7 +83,7 @@ DEF_PAGE_3( pUSB,                                                               
 extern const PageBase pDebug;
 
 
-DEF_PAGE_3( pService,                                                                                                                                                        //--- СЕРВИС ---
+DEF_PAGE_3( pService,                                                                                                                                                        //--- СЕРВИС --- //-V641
     "СЕРВИС",   
     "Сервисные функции",
     bReset,

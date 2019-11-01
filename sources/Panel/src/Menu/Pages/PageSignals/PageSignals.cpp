@@ -98,7 +98,7 @@ static bool OnKey_PageSignals(KeyEvent &key)
     return false;
 }
 
-DEF_PAGE_7( pageSignals,  
+DEF_PAGE_7( pageSignals,   //-V641
     "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬",  
     "",
     &cChannel,                                      ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î

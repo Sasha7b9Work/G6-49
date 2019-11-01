@@ -94,14 +94,14 @@ static bool OnControl(KeyEvent &key)
 
 Page *PageInput::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
 
-DEF_PAGE_SB( pInput,  
+DEF_PAGE_SB( pInput,   //-V641
     "ббнд гмювемхъ",   
     "",
     &sbOrderUp,         ///< нймн ббндю - яхлбнк бкебн
     &sbOrderDown,       ///< нймн ббндю - яхлбнк бопюбн
     &sbCancel,          ///< нймн ббндю - нрлемю
     &sbEnter,           ///< нймн ббндю - ббнд
-    0,
-    0,
+    nullptr,
+    nullptr,
     Page::SB_Input, 0, Item::FuncActive, FuncPress, Page::FuncDraw, OnControl
 )
