@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "Canvas.h"
 #include "Form.h"
+#include "Dialogs/ExponentDialog.h"
 #include "Dialogs/TrapezeDialog.h"
 #include "Dialogs/TriangleDialog.h"
 
@@ -454,5 +455,7 @@ void Frame::CreateTrapeze(wxCommandEvent &)
 
 void Frame::CreateExponent(wxCommandEvent &)
 {
+    ExponentDialog dialog;
 
+    dialog.ShowModal();
 }
