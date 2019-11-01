@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Form.h"
+#include "SpinControl.h"
 #include "TriangleDialog.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
@@ -24,9 +25,9 @@ static wxStaticText *text = nullptr;
 
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
-static wxSpinCtrl *scUp = nullptr;
-static wxSpinCtrl *scDown = nullptr;
-static wxSpinCtrl *scCenter = nullptr;
+static SpinControl *scUp = nullptr;
+static SpinControl *scDown = nullptr;
+static SpinControl *scCenter = nullptr;
 
 
 /// Послать форму для ознакомительной отрисовки
@@ -63,11 +64,10 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 
     int y = 20, x = 10, dY = 2, dX = 55;
 
-    scUp = new wxSpinCtrl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, 100);
-    dlg->Connect(ID_SPINCTRL_UP, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TriangleDialog::OnControlEvent));
+    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent));
     text = new wxStaticText(panel, wxID_ANY, wxT("Верхний"), wxPoint(x + dX, y + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
-    scDown = new wxSpinCtrl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -100);
-    dlg->Connect(ID_SPINCTRL_DONW, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TriangleDialog::OnControlEvent));
+
+    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent));
     text = new wxStaticText(panel, wxID_ANY, wxT("Нижний"), wxPoint(x + dX, y + 26 + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
     return panel;
@@ -81,8 +81,7 @@ static wxPanel *CreatePanelCenter(wxDialog *dlg)
 
     sb = new wxStaticBox(panel, wxID_ANY, wxT("Центр"), wxDefaultPosition, wxSize(216, 50));
 
-    scCenter = new wxSpinCtrl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, 0);
-    dlg->Connect(ID_SPINCTRL_CENTER, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TriangleDialog::OnControlEvent));
+    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), -100, 100, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent));
     text = new wxStaticText(panel, wxID_ANY, wxT("Смещение"), wxPoint(x + 55, y + 2), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
     return panel;

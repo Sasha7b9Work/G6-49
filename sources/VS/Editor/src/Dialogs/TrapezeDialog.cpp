@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Form.h"
+#include "Dialogs/SpinControl.h"
 #include "Dialogs/TrapezeDialog.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
@@ -26,10 +27,10 @@ static wxStaticText *text = nullptr;
 
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
-static wxSpinCtrl *scUp = nullptr;
-static wxSpinCtrl *scDown = nullptr;
-static wxSpinCtrl *scVertex1 = nullptr;
-static wxSpinCtrl *scVertex2 = nullptr;
+static SpinControl *scUp = nullptr;
+static SpinControl *scDown = nullptr;
+static SpinControl *scVertex1 = nullptr;
+static SpinControl *scVertex2 = nullptr;
 
 
 /// Послать форму для ознакомительной отрисовки
@@ -67,11 +68,9 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 
     int y = 20, x = 10, dY = 2, dX = 55;
 
-    scUp = new wxSpinCtrl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, 100);
-    dlg->Connect(ID_SPINCTRL_UP, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
+    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
     text = new wxStaticText(panel, wxID_ANY, wxT("Верхний"), wxPoint(x + dX, y + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
-    scDown = new wxSpinCtrl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -100);
-    dlg->Connect(ID_SPINCTRL_DONW, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
+    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
     text = new wxStaticText(panel, wxID_ANY, wxT("Нижний"), wxPoint(x + dX, y + 26 + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
     return panel;
@@ -85,14 +84,12 @@ static wxPanel *CreatePanelVertexes(wxDialog *dlg)
 
     sb = new wxStaticBox(panel, wxID_ANY, wxT("Вершины"), wxDefaultPosition, wxSize(216, 73));
 
-    scVertex1 = new wxSpinCtrl(panel, ID_SPINCTRL_VERTEX_1, wxT("-50"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -50);
-    dlg->Connect(ID_SPINCTRL_VERTEX_1, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
+    scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, wxT("-50"), wxPoint(x, y), wxSize(50, 20), -100, 100, -50, dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
     text = new wxStaticText(panel, wxID_ANY, wxT("Смещение лево"), wxPoint(x + 55, y + 2), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
     y += 26;
 
-    scVertex2 = new wxSpinCtrl(panel, ID_SPINCTRL_VERTEX_2, wxT("50"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -50);
-    dlg->Connect(ID_SPINCTRL_VERTEX_2, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
+    scVertex2 = new SpinControl(panel, ID_SPINCTRL_VERTEX_2, wxT("50"), wxPoint(x, y), wxSize(50, 20), -100, 100, -50, dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
     text = new wxStaticText(panel, wxID_ANY, wxT("Смещение право"), wxPoint(x + 55, y + 2), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
     return panel;
