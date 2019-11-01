@@ -16,6 +16,9 @@ static SDL_Renderer *renderer = nullptr;
 static SDL_Texture *texture = nullptr;
 
 
+static void DrawGrid();
+
+
 Canvas::Canvas(wxWindow *parent, int width, int height)
 {
     button = new wxButton(parent, wxID_ANY, "", wxDefaultPosition, { width, height } );
@@ -65,6 +68,8 @@ void Canvas::BeginScene()
     SDL_SetRenderTarget(renderer, texture);
     SetColor(Color::BLACK);
     SDL_RenderClear(renderer);
+
+    DrawGrid();
 }
 
 
@@ -138,3 +143,27 @@ const wxSize Canvas::GetSize() const
     return button->GetSize();
 }
 
+
+static void DrawGrid()
+{
+    int width = TheCanvas->GetSize().x;
+    int height = TheCanvas->GetSize().y;
+
+    float stepX = width / 20.0F;
+    float stepY = height / 20.0F;
+
+    float x = stepX;
+    float y = stepY;
+
+    for (int i = 0; i < 19; i++)
+    {
+        TheCanvas->DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::DARK_GREEN_1F);
+        TheCanvas->DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
+
+        x += stepX;
+        y += stepY;
+    }
+
+    TheCanvas->DrawLine(width / 2, 0, width / 2, height, Color::DARK_GREEN_3F);
+    TheCanvas->DrawLine(0, height / 2, width, height / 2);
+}
