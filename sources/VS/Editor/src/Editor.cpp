@@ -218,6 +218,10 @@ void Frame::HandlerEvents()
 void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
+
+    delete TheForm;
+
+    delete TheCanvas;
 }
 
 

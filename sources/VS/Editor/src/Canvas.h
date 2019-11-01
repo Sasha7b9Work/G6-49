@@ -9,6 +9,7 @@ class Canvas
 {
 public:
     Canvas(wxWindow *parent, int width, int height);
+    ~Canvas();
     void Draw();
     void Resize(const wxSize &size);
     const wxSize GetSize() const;

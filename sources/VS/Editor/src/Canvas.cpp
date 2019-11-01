@@ -39,6 +39,11 @@ Canvas::Canvas(wxWindow *parent, int width, int height)
     }
 }
 
+Canvas::~Canvas()
+{
+    delete button;
+}
+
 
 void Canvas::Resize(const wxSize &size)
 {

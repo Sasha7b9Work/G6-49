@@ -22,6 +22,12 @@ Form::Form()
 }
 
 
+Form::~Form()
+{
+    points.clear();
+}
+
+
 void Form::Clear()
 {
     for (int i = 0; i < Point::NUM_POINTS; i++)
@@ -381,8 +387,10 @@ void Form::LinearInterpolationRight(uint index)
 
 void Form::CreateSine()
 {
+    Clear();
+
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        data[i] = Point::AVE_VALUE - std::sin(static_cast<float>(i) / Point::NUM_POINTS * 2 * 3.14) * Point::AVE_VALUE;
+        data[i] = static_cast<uint16>(Point::AVE_VALUE - std::sin(static_cast<float>(i) / Point::NUM_POINTS * 2 * 3.14) * Point::AVE_VALUE);
     }
 }
