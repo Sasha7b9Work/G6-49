@@ -298,7 +298,7 @@ void Form::CalculateNeighboringPoints(const Point &point)
 }
 
 
-static void DrawForm(uint16 data[Point::NUM_POINTS], Color color)
+static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
 {
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
@@ -401,7 +401,7 @@ void Form::LinearInterpolationRight(uint index)
 }
 
 
-void Form::SetMainForm(uint16 dat[Point::NUM_POINTS])
+void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS])
 {
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
@@ -419,7 +419,7 @@ void Form::SetMainForm(uint16 dat[Point::NUM_POINTS])
 }
 
 
-void Form::SetAdditionForm(uint16 d[Point::NUM_POINTS])
+void Form::SetAdditionForm(const uint16 d[Point::NUM_POINTS])
 {
     if (d)
     {
