@@ -7,8 +7,22 @@
 #pragma warning(pop)
 
 
+enum
+{
+    ID_SPINCTRL_DONW,
+    ID_SPINCTRL_UP,
+    ID_RADIOBUTTON_DIRECT,
+    ID_RADIOBUTTON_BACK
+};
+
+
+
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
+
+
+/// Послать форму для ознакомительной отрисовки
+static void SendForm();
 
 
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
@@ -20,8 +34,11 @@ static wxPanel *CreatePanelPolarity(wxDialog *dlg)
     int x = 5;
 
     rbDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
+    dlg->Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(TriangleDialog::OnControlEvent));
     rbDirect->SetValue(true);
+
     rbBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
+    dlg->Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(TriangleDialog::OnControlEvent));
 
     sb = sb;
 
@@ -112,7 +129,7 @@ static void DrawLine(uint16 data[Point::NUM_POINTS], int x1, int y1, int x2, int
 }
 
 
-void TriangleDialog::SendForm()
+static void SendForm()
 {
     static uint16 data[Point::NUM_POINTS];
 
@@ -132,4 +149,9 @@ void TriangleDialog::SendForm()
     DrawLine(data, center, max, Point::NUM_POINTS - 1, min);
 
     TheForm->SetAdditionForm(data);
+}
+
+void TriangleDialog::OnControlEvent(wxCommandEvent &)
+{
+    SendForm();
 }

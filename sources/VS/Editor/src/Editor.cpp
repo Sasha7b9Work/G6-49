@@ -68,8 +68,6 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(CREATE_TRIANGLE, Frame::CreateTriangle)
     EVT_MENU(CREATE_TRAPEZE, Frame::CreateTrapeze)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
-    EVT_RADIOBUTTON(ID_RADIOBUTTON_DIRECT, Frame::OnEventTriangleDialog)
-    EVT_RADIOBUTTON(ID_RADIOBUTTON_BACK, Frame::OnEventTriangleDialog)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
 
@@ -439,9 +437,4 @@ void Frame::CreateTriangle(wxCommandEvent &)
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
 
-}
-
-void Frame::OnEventTriangleDialog(wxCommandEvent &)
-{
-    TriangleDialog::SendForm();
 }
