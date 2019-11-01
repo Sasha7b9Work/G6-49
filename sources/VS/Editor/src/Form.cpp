@@ -393,4 +393,6 @@ void Form::CreateSine()
     {
         data[i] = static_cast<uint16>(Point::AVE_VALUE - std::sin(static_cast<float>(i) / Point::NUM_POINTS * 2 * 3.14) * Point::AVE_VALUE);
     }
+
+    History::Add(TheForm);
 }
