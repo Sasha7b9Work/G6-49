@@ -22,8 +22,10 @@ add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for me
 
 
 source_group(src REGULAR_EXPRESSION src/*)
+source_group(Dialogs REGULAR_EXPRESSION src/Dialogs/*)
 
-file(GLOB SOURCES src/*)
+file(GLOB SOURCES src/*
+                  src/Dialogs/*)
 
 add_executable(Editor ${SOURCES})
 

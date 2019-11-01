@@ -10,6 +10,7 @@
 
 #include "defines.h"
 #include "Canvas.h"
+#include "Dialogs/TriangleDialog.h"
 #include "Form.h"
 
 
@@ -218,10 +219,6 @@ void Frame::HandlerEvents()
 void Frame::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
-
-    delete TheForm;
-
-    delete TheCanvas;
 }
 
 
@@ -432,7 +429,9 @@ void Frame::CreateSine(wxCommandEvent &)
 
 void Frame::CreateTriangle(wxCommandEvent &)
 {
+    TriangleDialog dialog;
 
+    dialog.ShowModal();
 }
 
 void Frame::CreateTrapeze(wxCommandEvent &)
