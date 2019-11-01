@@ -10,9 +10,9 @@
 
 #include "defines.h"
 #include "Canvas.h"
-#include "Dialogs/TriangleDialog.h"
 #include "Form.h"
-
+#include "Dialogs/TrapezeDialog.h"
+#include "Dialogs/TriangleDialog.h"
 
 extern void update();
 extern void init();
@@ -443,5 +443,7 @@ void Frame::CreateTriangle(wxCommandEvent &)
 
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
+    TrapezeDialog dialog;
 
+    dialog.ShowModal();
 }

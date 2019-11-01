@@ -79,6 +79,8 @@ public:
     void SetPoint(int mouseX, int mouseY);
     /// Добавить точку с абсолютными значениями
     void SetPoint(uint16 pos, uint16 data);
+    /// Заносит точку куда следует
+    void SetPoint(Point point);
     /// Возвращает true, если курсор мыши находится над поставленной точкой. Pressed - нажата ли кнопка мыши
     bool ExistPoint(int mouseX, int mouseY, bool pressed);
     /// Удалить точку в позиции мыши
@@ -108,8 +110,6 @@ private:
 	uint iCurPoint = 0;
 	/// Возвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
 	uint PointInPosition(uint16 pos);
-	/// Заносит точку куда следует
-	void SetPoint(Point point);
 	/// Рассчитать соседние с point точки
 	void CalculateNeighboringPoints(const Point& point);
 	/// Линейно интерполировать точки, расположенные между pos1 и pos2
