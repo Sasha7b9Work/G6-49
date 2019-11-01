@@ -19,6 +19,8 @@ enum
 
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
+static wxSpinCtrl *scUp = nullptr;
+static wxSpinCtrl *scDown = nullptr;
 
 
 /// Послать форму для ознакомительной отрисовки
@@ -58,14 +60,14 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
     int dY = 2;
     int dX = 55;
 
-    wxSpinCtrl *scUp = new wxSpinCtrl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, 100);
+    scUp = new wxSpinCtrl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, 100);
+    dlg->Connect(ID_SPINCTRL_UP, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TriangleDialog::OnControlEvent));
     wxStaticText *textUp = new wxStaticText(panel, wxID_ANY, wxT("Верхний"), wxPoint(x + dX, y + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
-    wxSpinCtrl *scDown = new wxSpinCtrl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -100);
+    scDown = new wxSpinCtrl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), wxSP_ARROW_KEYS, -100, 100, -100);
+    dlg->Connect(ID_SPINCTRL_DONW, wxEVT_COMMAND_SPINCTRL_UPDATED, wxCommandEventHandler(TriangleDialog::OnControlEvent));
     wxStaticText *textDown = new wxStaticText(panel, wxID_ANY, wxT("Нижний"), wxPoint(x + dX, y + 26 + dY), wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
     sb = sb;
-    scUp = scUp;
-    scDown = scDown;
     textUp = textUp;
     textDown = textDown;
 
@@ -135,13 +137,16 @@ static void SendForm()
 
     int center = Point::NUM_POINTS / 2;
 
-    int min = Point::MAX_VALUE;
-    int max = Point::MIN_VALUE;
+    int levelHI = Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scUp->GetValue() / 100.0F;
+    int levelLOW = Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scDown->GetValue() / 100.0F;
+
+    int min = levelLOW;
+    int max = levelHI;
 
     if (rbBack->GetValue())
     {
-        min = Point::MIN_VALUE;
-        max = Point::MAX_VALUE;
+        min = levelHI;
+        max = levelLOW;
     }
 
     DrawLine(data, 0, min, center, max);
