@@ -424,7 +424,14 @@ void Frame::OnNewFile(wxCommandEvent &)
 
 void Frame::CreateSine(wxCommandEvent &)
 {
-    TheForm->CreateSine();
+    uint16 data[Point::NUM_POINTS];
+
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        data[i] = static_cast<uint16>(Point::AVE_VALUE - std::sin(static_cast<float>(i) / Point::NUM_POINTS * 2 * 3.14) *Point::AVE_VALUE);
+    }
+
+    TheForm->SetMainForm(data);
 }
 
 void Frame::CreateTriangle(wxCommandEvent &)

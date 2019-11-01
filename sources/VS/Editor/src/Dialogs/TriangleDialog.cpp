@@ -12,7 +12,9 @@ enum
     ID_SPINCTRL_DONW,
     ID_SPINCTRL_UP,
     ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK
+    ID_RADIOBUTTON_BACK,
+    ID_BUTTON_OK,
+    ID_BUTTON_CANCEL
 };
 
 
@@ -25,6 +27,8 @@ static wxSpinCtrl *scDown = nullptr;
 
 /// Послать форму для ознакомительной отрисовки
 static void SendForm();
+
+static uint16 data[Point::NUM_POINTS];
 
 
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
@@ -77,8 +81,10 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 
 TriangleDialog::TriangleDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 135))
 {
-    wxButton *btnOk = new wxButton(this, -1, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
-    wxButton *btnClose = new wxButton(this, -1, wxT("Закрыть"), wxDefaultPosition, BUTTON_SIZE);
+    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(TriangleDialog::OnButtonOk));
+    wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отмена"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(TriangleDialog::OnButtonCancel));
 
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL);
@@ -106,7 +112,7 @@ TriangleDialog::~TriangleDialog()
 }
 
 
-static void DrawLine(uint16 data[Point::NUM_POINTS], int x1, int y1, int x2, int y2)
+static void DrawLine(int x1, int y1, int x2, int y2)
 {
     float dX = static_cast<float>(x2 - x1);
 
@@ -133,12 +139,10 @@ static void DrawLine(uint16 data[Point::NUM_POINTS], int x1, int y1, int x2, int
 
 static void SendForm()
 {
-    static uint16 data[Point::NUM_POINTS];
-
     int center = Point::NUM_POINTS / 2;
 
-    int levelHI = Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scUp->GetValue() / 100.0F;
-    int levelLOW = Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scDown->GetValue() / 100.0F;
+    int levelHI = static_cast<int>(Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scUp->GetValue() / 100.0F);
+    int levelLOW = static_cast<int>(Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scDown->GetValue() / 100.0F);
 
     int min = levelLOW;
     int max = levelHI;
@@ -149,14 +153,28 @@ static void SendForm()
         max = levelLOW;
     }
 
-    DrawLine(data, 0, min, center, max);
+    DrawLine(0, min, center, max);
 
-    DrawLine(data, center, max, Point::NUM_POINTS - 1, min);
+    DrawLine(center, max, Point::NUM_POINTS - 1, min);
 
     TheForm->SetAdditionForm(data);
 }
 
+
 void TriangleDialog::OnControlEvent(wxCommandEvent &)
 {
     SendForm();
+}
+
+
+void TriangleDialog::OnButtonOk(wxCommandEvent &)
+{
+    TheForm->SetMainForm(data);
+    Destroy();
+}
+
+
+void TriangleDialog::OnButtonCancel(wxCommandEvent &)
+{
+    Destroy();
 }

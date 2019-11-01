@@ -41,8 +41,6 @@ void Form::Clear()
 
     points.clear();
 
-    wxSize size = TheCanvas->GetSize();
-
     SetPoint(static_cast<uint16>(0), Point::AVE_VALUE);
     SetPoint(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE_VALUE);
 }
@@ -403,14 +401,19 @@ void Form::LinearInterpolationRight(uint index)
 }
 
 
-void Form::CreateSine()
+void Form::SetMainForm(uint16 dat[Point::NUM_POINTS])
 {
-    Clear();
-
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        data[i] = static_cast<uint16>(Point::AVE_VALUE - std::sin(static_cast<float>(i) / Point::NUM_POINTS * 2 * 3.14) * Point::AVE_VALUE);
+        data[i] = Point::AVE_VALUE;
     }
+
+    points.clear();
+
+    SetPoint(static_cast<uint16>(0), dat[0]);
+    SetPoint(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
+
+    std::memcpy(data, dat, Point::NUM_POINTS * 2);
 
     History::Add(TheForm);
 }

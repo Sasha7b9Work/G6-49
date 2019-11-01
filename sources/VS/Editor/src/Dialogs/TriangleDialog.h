@@ -11,4 +11,8 @@ public:
     ~TriangleDialog();
 
     void OnControlEvent(wxCommandEvent &);
+
+    void OnButtonOk(wxCommandEvent &);
+
+    void OnButtonCancel(wxCommandEvent &);
 };

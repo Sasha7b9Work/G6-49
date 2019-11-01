@@ -93,10 +93,10 @@ public:
 	void UndoHistory();
 
 	void RedoHistory();
-
-    void CreateSine();
     /// Установить дополнительную форму, которая будет рисоваться поверх основной. 
     void SetAdditionForm(uint16 data[Point::NUM_POINTS]);
+    /// Установить основную форму
+    void SetMainForm(uint16 data[Point::NUM_POINTS]);
 
 private:
 
