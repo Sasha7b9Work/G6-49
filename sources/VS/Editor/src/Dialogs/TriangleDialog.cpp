@@ -7,19 +7,8 @@
 #pragma warning(pop)
 
 
-enum
-{
-    ID_SPINCTRL_DONW = wxID_HIGHEST + 1,
-    ID_SPINCTRL_UP
-};
-
-
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
-
-
-/// Послать форму
-static void SendForm();
 
 
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
@@ -30,9 +19,9 @@ static wxPanel *CreatePanelPolarity(wxDialog *dlg)
     int y = 25;
     int x = 5;
 
-    rbDirect = new wxRadioButton(panel, wxID_ANY, wxT("Прямая"), wxPoint(x, y));
+    rbDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
     rbDirect->SetValue(true);
-    rbBack = new wxRadioButton(panel, wxID_ANY, wxT("Обратная"), wxPoint(x, y + 25));
+    rbBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
 
     sb = sb;
 
@@ -123,7 +112,7 @@ static void DrawLine(uint16 data[Point::NUM_POINTS], int x1, int y1, int x2, int
 }
 
 
-static void SendForm()
+void TriangleDialog::SendForm()
 {
     static uint16 data[Point::NUM_POINTS];
 

@@ -67,4 +67,6 @@ private:
     void CreateTriangle(wxCommandEvent &);
 
     void CreateTrapeze(wxCommandEvent &);
+
+    void OnEventTriangleDialog(wxCommandEvent &);
 };

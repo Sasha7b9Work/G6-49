@@ -50,24 +50,26 @@ enum
 
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-	EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
-	EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
-	EVT_MENU(CONTEXT_MENU_PARAMETERS, Frame::OnParametersPoint)
-	EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
-	EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
-	EVT_MENU(ALIGN_LEFT_TOP, Frame::OnAlignLeftTop)
-	EVT_MENU(ALIGN_LEFT_DOWN, Frame::OnAlignLeftDown)
-	EVT_MENU(ALIGN_RIGHT_TOP, Frame::OnAlignRightTop)
-	EVT_MENU(ALIGN_RIGHT_DOWN, Frame::OnAlignRightDown)
+    EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
+    EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
+    EVT_MENU(CONTEXT_MENU_PARAMETERS, Frame::OnParametersPoint)
+    EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
+    EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
+    EVT_MENU(ALIGN_LEFT_TOP, Frame::OnAlignLeftTop)
+    EVT_MENU(ALIGN_LEFT_DOWN, Frame::OnAlignLeftDown)
+    EVT_MENU(ALIGN_RIGHT_TOP, Frame::OnAlignRightTop)
+    EVT_MENU(ALIGN_RIGHT_DOWN, Frame::OnAlignRightDown)
     EVT_MENU(FILE_OPEN, Frame::OnOpenFile)
     EVT_MENU(FILE_SAVE, Frame::OnSaveFile)
     EVT_MENU(FILE_NEW, Frame::OnNewFile)
-	EVT_MENU(UNDO, Frame::OnUndo)
-	EVT_MENU(REDO, Frame::OnRedo)
+    EVT_MENU(UNDO, Frame::OnUndo)
+    EVT_MENU(REDO, Frame::OnRedo)
     EVT_MENU(CREATE_SINE, Frame::CreateSine)
     EVT_MENU(CREATE_TRIANGLE, Frame::CreateTriangle)
     EVT_MENU(CREATE_TRAPEZE, Frame::CreateTrapeze)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
+    EVT_RADIOBUTTON(ID_RADIOBUTTON_DIRECT, Frame::OnEventTriangleDialog)
+    EVT_RADIOBUTTON(ID_RADIOBUTTON_BACK, Frame::OnEventTriangleDialog)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
 
@@ -437,4 +439,9 @@ void Frame::CreateTriangle(wxCommandEvent &)
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
 
+}
+
+void Frame::OnEventTriangleDialog(wxCommandEvent &)
+{
+    TriangleDialog::SendForm();
 }
