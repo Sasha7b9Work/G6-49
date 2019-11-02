@@ -177,7 +177,7 @@ static void SendAdditionForm()
     }
 
     double backK = std::atof(tcFrontK->GetValue());
-
+    
     if(backK == 0.0)
     {
         backK = oldBackK;
@@ -196,6 +196,33 @@ static void SendAdditionForm()
     }
 
     DrawLine(0, min, scDelay->GetValue(), min);
+
+    int start = scDelay->GetValue();
+
+    int duration = static_cast<int>(Point::NUM_POINTS) - start;
+
+    int topX = static_cast<int>(start + duration / 2 + duration / 2.0F * scFrontTime->GetValue() / 100.0F);
+
+    for(int i = start + 1; i < topX; i++)
+    {
+        double param = (i - start) / frontK;
+
+        double d = min - std::log((i - start) / frontK * 1e-1) * 500;
+
+        if(d < Point::MIN_VALUE)
+        {
+            d = static_cast<double>(Point::MIN_VALUE);
+        }
+
+        if(d > Point::MAX_VALUE)
+        {
+            d = static_cast<double>(Point::MAX_VALUE);
+        }
+
+        uint16 value = static_cast<uint16>(d);
+
+        data[i] = value;
+    }
 
     TheForm->SetAdditionForm(data);
 }
