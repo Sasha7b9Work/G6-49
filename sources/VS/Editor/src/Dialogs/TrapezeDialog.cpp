@@ -22,9 +22,6 @@ enum
 };
 
 
-static wxStaticBox *sb = nullptr;
-static wxStaticText *text = nullptr;
-
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
 static SpinControl *scUp = nullptr;
@@ -45,7 +42,7 @@ static std::vector<Point> points;
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
 
     int y = 25, x = 5;
 
@@ -64,7 +61,7 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
 
     int y = 20, x = 10;
 
@@ -80,7 +77,7 @@ static wxPanel *CreatePanelVertexes(wxDialog *dlg)
 
     int y = 20, x = 10;
 
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Вершины"), wxDefaultPosition, wxSize(216, 73));
+    new wxStaticBox(panel, wxID_ANY, wxT("Вершины"), wxDefaultPosition, wxSize(216, 73));
 
     scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, wxT("-50"), wxPoint(x, y), wxSize(50, 20), -100, 100, -50, dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Смещение лево"));
 

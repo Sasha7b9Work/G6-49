@@ -69,4 +69,6 @@ private:
     void CreateTrapeze(wxCommandEvent &);
 
     void CreateExponent(wxCommandEvent &);
+
+    void InsertPoints(wxCommandEvent&);
 };

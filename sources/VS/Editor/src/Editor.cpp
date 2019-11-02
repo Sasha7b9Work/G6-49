@@ -12,6 +12,7 @@
 #include "Canvas.h"
 #include "Form.h"
 #include "Dialogs/ExponentDialog.h"
+#include "Dialogs/InsertPointsDialog.h"
 #include "Dialogs/TrapezeDialog.h"
 #include "Dialogs/TriangleDialog.h"
 
@@ -42,7 +43,8 @@ enum
     CREATE_SINE,
     CREATE_TRIANGLE,
     CREATE_TRAPEZE,
-    CREATE_EXPONENT
+    CREATE_EXPONENT,
+    INSERT_POINTS
 };
 
 enum
@@ -70,6 +72,7 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(CREATE_TRIANGLE, Frame::CreateTriangle)
     EVT_MENU(CREATE_TRAPEZE, Frame::CreateTrapeze)
     EVT_MENU(CREATE_EXPONENT, Frame::CreateExponent)
+    EVT_MENU(INSERT_POINTS, Frame::InsertPoints)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
 wxEND_EVENT_TABLE()
@@ -299,6 +302,7 @@ void Frame::CreateMenu()
     wxBitmap imgCreateTriangle(wxImage(wxT("icons/triangle.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateTrapeze(wxImage(wxT("icons/trapeze.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateExponent(wxImage(wxT("icons/exponent.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
 
 	wxToolBar* toolBar = CreateToolBar();
     toolBar->AddTool(FILE_OPEN, wxT("Открыть"), imgOpen, wxT("Загрузить ранее созданный сигнал из файла"));
@@ -314,6 +318,9 @@ void Frame::CreateMenu()
     toolBar->AddTool(CREATE_TRIANGLE, wxT("Треугольник"), imgCreateTriangle, wxT("Создать новый сигнал в форме треугольника"));
     toolBar->AddTool(CREATE_TRAPEZE, wxT("Трапеция"), imgCreateTrapeze, wxT("Создать новый сигнал в форме трапеции"));
     toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"), imgCreateExponent, wxT("Создать новый экспоненциальный сигнал"));
+
+    toolBar->AddSeparator();
+    toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить точки"));
 	toolBar->Realize();
 }
 
@@ -456,6 +463,13 @@ void Frame::CreateTrapeze(wxCommandEvent &)
 void Frame::CreateExponent(wxCommandEvent &)
 {
     ExponentDialog dialog;
+
+    dialog.ShowModal();
+}
+
+void Frame::InsertPoints(wxCommandEvent &)
+{
+    InsertPointsDialog dialog;
 
     dialog.ShowModal();
 }

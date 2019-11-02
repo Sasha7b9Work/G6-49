@@ -20,9 +20,6 @@ enum
 };
 
 
-static wxStaticBox *sb = nullptr;
-static wxStaticText *text = nullptr;
-
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
 static SpinControl *scUp = nullptr;
@@ -41,7 +38,7 @@ static Point point(static_cast<uint16>(0), 0U);
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
 
     int y = 25, x = 5;
 
@@ -60,7 +57,7 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
 
     int y = 20, x = 10;
 
@@ -77,7 +74,7 @@ static wxPanel *CreatePanelCenter(wxDialog *dlg)
 
     int y = 20, x = 10;
 
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Центр"), wxDefaultPosition, wxSize(216, 50));
+    new wxStaticBox(panel, wxID_ANY, wxT("Центр"), wxDefaultPosition, wxSize(216, 50));
 
     scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), -100, 100, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Смещение"));
 

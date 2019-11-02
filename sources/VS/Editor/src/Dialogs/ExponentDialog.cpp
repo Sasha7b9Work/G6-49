@@ -23,9 +23,6 @@ enum
 };
 
 
-static wxStaticBox *sb = nullptr;
-static wxStaticText *text = nullptr;
-
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
 static SpinControl *scUp = nullptr;
@@ -48,7 +45,7 @@ static std::vector<Point> points;
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
 
     int y = 25, x = 5;
 
@@ -67,7 +64,7 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
 
     int y = 20, x = 10;
 
@@ -82,7 +79,7 @@ static wxPanel *CreatePanelFront(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    sb = new wxStaticBox(panel, wxID_ANY, wxT("Нарастание"), wxDefaultPosition, wxSize(125, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Нарастание"), wxDefaultPosition, wxSize(125, 75));
 
     int y = 20, x = 10;
 

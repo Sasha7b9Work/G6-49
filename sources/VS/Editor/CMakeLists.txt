@@ -37,3 +37,4 @@ target_link_libraries(Editor WinMM.lib)
 target_link_libraries(Editor version.lib)
 target_link_libraries(Editor Imm32.Lib)
 target_link_libraries(Editor Setupapi.lib)
+
