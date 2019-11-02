@@ -7,6 +7,8 @@
 #include <wx/statline.h>
 #pragma warning(pop)
 #include <vector>
+#include <iomanip>
+#include <sstream>
 
 
 enum
@@ -15,7 +17,8 @@ enum
     ID_SPINCTRL_UP,
     ID_SPINCTRL_FRONT_DELAY,
     ID_SPINCTRL_FRONT_TIME,
-    ID_SPINCTRL_FRONT_K,
+    ID_TEXTCTRL_FRONT_K,
+    ID_TEXTCTRL_BACK_K,
     ID_RADIOBUTTON_DIRECT,
     ID_RADIOBUTTON_BACK,
     ID_BUTTON_OK,
@@ -23,18 +26,23 @@ enum
 };
 
 
+static double oldFrontK = 1.0;
+static double oldBackK = 1.0;
+
+
 static wxRadioButton *rbDirect = nullptr;
 static wxRadioButton *rbBack = nullptr;
 static SpinControl *scUp = nullptr;
 static SpinControl *scDown = nullptr;
 
-static SpinControl *scFrontDelay = nullptr;      // Задержка перед началом экспоненциального импульса
-static SpinControl *scFrontTime = nullptr;       // Время от начала экспоненциального импульса до начала спада
+static SpinControl *scDelay = nullptr;          // Задержка перед началом экспоненциального импульса
+static SpinControl *scFrontTime = nullptr;      // Время от начала экспоненциального импульса до начала спада
 static wxTextCtrl *tcFrontK = nullptr;          // Коэффициент экспоненты
+static wxTextCtrl *tcBackK = nullptr;
 
 
 /// Послать форму для ознакомительной отрисовки
-static void SendForm();
+static void SendAdditionForm();
 
 static uint16 data[Point::NUM_POINTS];
 
@@ -68,28 +76,39 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 
     int y = 20, x = 10;
 
-    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Верхний"));
-    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Нижний"));
+    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Верхний, %"));
+    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Нижний, %"));
 
     return panel;
 }
 
 
-static wxPanel *CreatePanelFront(wxDialog *dlg)
+static wxPanel *CreatePanelParameters(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Нарастание"), wxDefaultPosition, wxSize(125, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Параметры"), wxDefaultPosition, wxSize(125, 75 + 26 * 2));
 
-    int y = 20, x = 10;
+    int y = 20, x = 10, dY = 26;
 
-    scFrontDelay = new SpinControl(panel, ID_SPINCTRL_FRONT_DELAY, wxT("-100"), wxPoint(x, y), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Задержка"));
+    scDelay = new SpinControl(panel, ID_SPINCTRL_FRONT_DELAY, wxT("0"), wxPoint(x, y), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Задержка, точки"));
+    scFrontTime = new SpinControl(panel, ID_SPINCTRL_FRONT_TIME, wxT("0"), wxPoint(x, y + dY), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Время нарастания, %"));
+
+    std::stringstream streamFront;
+    streamFront << std::fixed << std::setprecision(5) << oldFrontK;
+    tcFrontK = new wxTextCtrl(panel, ID_TEXTCTRL_FRONT_K, streamFront.str().c_str(), wxPoint(x, y + 2 * dY), wxSize(75, 20));
+    dlg->Connect(ID_TEXTCTRL_FRONT_K, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ExponentDialog::OnControlEvent));
+
+    std::stringstream streamBack;
+    streamBack << std::fixed << std::setprecision(5) << oldBackK;
+    tcBackK = new wxTextCtrl(panel, ID_TEXTCTRL_BACK_K, streamBack.str().c_str(), wxPoint(x, y + 3 * dY), wxSize(75, 20));
+    dlg->Connect(ID_TEXTCTRL_BACK_K, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ExponentDialog::OnControlEvent));
 
     return panel;
 }
 
 
-ExponentDialog::ExponentDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 200))
+ExponentDialog::ExponentDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 252))
 {
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(ExponentDialog::OnButtonOk));
@@ -106,14 +125,14 @@ ExponentDialog::ExponentDialog() : wxDialog(nullptr, -1, wxT("Параметры треуголь
     hBoxButtons->Add(btnOk);
     hBoxButtons->Add(btnClose);
     vBox->Add(hBoxPanels);
-    vBox->Add(CreatePanelFront(this));
+    vBox->Add(CreatePanelParameters(this));
     vBox->Add(hBoxButtons);
     
     SetSizer(vBox);
     
     Centre();
 
-    SendForm();
+    SendAdditionForm();
 }
 
 
@@ -123,15 +142,68 @@ ExponentDialog::~ExponentDialog()
 }
 
 
-static void SendForm()
+static void DrawLine(int x1, int y1, int x2, int y2)
 {
+    float dX = static_cast<float>(x2 - x1);
 
+    float dY = std::fabsf(static_cast<float>(y2 - y1));
+
+    float k = dY / dX;
+
+    if(y2 > y1)
+    {
+        for(int x = x1; x <= x2; x++)
+        {
+            data[x] = static_cast<uint16>(y1 + (x - x1) * k + 0.5F);
+        }
+    }
+    else
+    {
+        for(int x = x1; x <= x2; x++)
+        {
+            data[x] = static_cast<uint16>(y1 - (x - x1) * k + 0.5F);
+        }
+    }
+}
+
+
+static void SendAdditionForm()
+{
+    double frontK = std::atof(tcFrontK->GetValue());
+
+    if(frontK == 0.0)
+    {
+        frontK = oldFrontK;
+    }
+
+    double backK = std::atof(tcFrontK->GetValue());
+
+    if(backK == 0.0)
+    {
+        backK = oldBackK;
+    }
+
+    int levelHI = static_cast<int>(Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scUp->GetValue() / 100.0F); //-V2007
+    int levelLOW = static_cast<int>(Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scDown->GetValue() / 100.0F); //-V2007
+
+    int min = levelLOW;
+    int max = levelHI;
+
+    if(rbBack->GetValue())
+    {
+        min = levelHI;
+        max = levelLOW;
+    }
+
+    DrawLine(0, min, scDelay->GetValue(), min);
+
+    TheForm->SetAdditionForm(data);
 }
 
 
 void ExponentDialog::OnControlEvent(wxCommandEvent &)
 {
-    SendForm();
+    SendAdditionForm();
 }
 
 
