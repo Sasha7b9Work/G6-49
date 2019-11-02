@@ -100,7 +100,7 @@ public:
     /// Установить дополнительную форму, которая будет рисоваться поверх основной. 
     void SetAdditionForm(const uint16 data[Point::NUM_POINTS]);
     /// Установить основную форму
-    void SetMainForm(const uint16 data[Point::NUM_POINTS]);
+    void SetMainForm(const uint16 data[Point::NUM_POINTS], const std::vector<Point> *points = nullptr);
 
 private:
 

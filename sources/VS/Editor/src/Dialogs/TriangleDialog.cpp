@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Form.h"
+#include "History.h"
 #include "SpinControl.h"
 #include "TriangleDialog.h"
 #pragma warning(push, 0)
@@ -13,6 +14,7 @@ enum
     ID_SPINCTRL_DONW,
     ID_SPINCTRL_UP,
     ID_SPINCTRL_CENTER,
+    ID_SPINCTRL_DELAY,
     ID_RADIOBUTTON_DIRECT,
     ID_RADIOBUTTON_BACK,
     ID_BUTTON_OK,
@@ -25,14 +27,15 @@ static wxRadioButton *rbBack = nullptr;
 static SpinControl *scUp = nullptr;
 static SpinControl *scDown = nullptr;
 static SpinControl *scCenter = nullptr;
+static SpinControl *scDelay = nullptr;
 
 
 /// Послать форму для ознакомительной отрисовки
-static void SendForm();
+static void SendAdditionForm();
 
 static uint16 data[Point::NUM_POINTS];
 
-static Point point(static_cast<uint16>(0), 0U);
+static std::vector<Point> points;
 
 
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
@@ -68,21 +71,22 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
     return panel;
 }
 
-static wxPanel *CreatePanelCenter(wxDialog *dlg)
+static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
     int y = 20, x = 10;
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Центр"), wxDefaultPosition, wxSize(216, 50));
+    new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(216, 75));
 
-    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), -100, 100, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Смещение"));
+    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), -100, 100, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр"));
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxT("0"), wxPoint(x, y + 26), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка"));
 
     return panel;
 }
 
 
-TriangleDialog::TriangleDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 185))
+TriangleDialog::TriangleDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 210))
 {
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(TriangleDialog::OnButtonOk));
@@ -99,14 +103,14 @@ TriangleDialog::TriangleDialog() : wxDialog(nullptr, -1, wxT("Параметры треуголь
     hBoxButtons->Add(btnOk);
     hBoxButtons->Add(btnClose);
     vBox->Add(hBoxPanels);
-    vBox->Add(CreatePanelCenter(this));
+    vBox->Add(CreatePanelOffsets(this));
     vBox->Add(hBoxButtons);
     
     SetSizer(vBox);
     
     Centre();
 
-    SendForm();
+    SendAdditionForm();
 }
 
 
@@ -141,9 +145,13 @@ static void DrawLine(int x1, int y1, int x2, int y2)
 }
 
 
-static void SendForm()
+static void SendAdditionForm()
 {
-    int center = static_cast<int>(Point::NUM_POINTS / 2 + Point::NUM_POINTS / 2.0F * scCenter->GetValue() / 100.0F);
+    int start = scDelay->GetValue();
+
+    int pointsInTriangle = static_cast<int>(Point::NUM_POINTS) - start;
+
+    int top = static_cast<int>(start + pointsInTriangle / 2 + pointsInTriangle / 2.0F * scCenter->GetValue() / 100.0F);
 
     int levelHI = static_cast<int>(Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scUp->GetValue() / 100.0F); //-V2007
     int levelLOW = static_cast<int>(Point::AVE_VALUE - (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scDown->GetValue() / 100.0F); //-V2007
@@ -157,27 +165,31 @@ static void SendForm()
         max = levelLOW;
     }
 
-    DrawLine(0, min, center, max);
+    DrawLine(0, min, start, min);
 
-    DrawLine(center, max, Point::NUM_POINTS - 1, min);
+    DrawLine(start, min, top, max);
+
+    DrawLine(top, max, Point::NUM_POINTS - 1, min);
 
     TheForm->SetAdditionForm(data);
 
-    point.pos = static_cast<uint16>(center);
-    point.data = static_cast<uint16>(max);
+    points.clear();
+
+    points.push_back(Point(static_cast<uint16>(start), static_cast<uint16>(min)));
+    points.push_back(Point(static_cast<uint16>(top), static_cast<uint16>(max)));
 }
 
 
 void TriangleDialog::OnControlEvent(wxCommandEvent &)
 {
-    SendForm();
+    SendAdditionForm();
 }
 
 
 void TriangleDialog::OnButtonOk(wxCommandEvent &)
 {
-    TheForm->SetMainForm(data);
-    TheForm->SetPoint(point);
+    TheForm->SetMainForm(data, &points);
+
     Destroy();
 }
 
