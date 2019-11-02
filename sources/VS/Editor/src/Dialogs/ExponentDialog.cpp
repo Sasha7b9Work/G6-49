@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Form.h"
+#include "Utils.h"
 #include "Dialogs/ExponentDialog.h"
 #include "Dialogs/SpinControl.h"
 #pragma warning(push, 0)
@@ -7,8 +8,6 @@
 #include <wx/statline.h>
 #pragma warning(pop)
 #include <vector>
-#include <iomanip>
-#include <sstream>
 
 
 enum
@@ -94,14 +93,10 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
     scDelay = new SpinControl(panel, ID_SPINCTRL_FRONT_DELAY, wxT("0"), wxPoint(x, y), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Задержка, точки"));
     scFrontTime = new SpinControl(panel, ID_SPINCTRL_FRONT_TIME, wxT("4095"), wxPoint(x, y + dY), wxSize(50, 20), 0, Point::NUM_POINTS, Point::NUM_POINTS / 2, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Время нарастания, точки"));
 
-    std::stringstream streamFront;
-    streamFront << std::fixed << std::setprecision(5) << oldFrontK;
-    tcFrontK = new wxTextCtrl(panel, ID_TEXTCTRL_FRONT_K, streamFront.str().c_str(), wxPoint(x, y + 2 * dY), wxSize(75, 20));
+    tcFrontK = new wxTextCtrl(panel, ID_TEXTCTRL_FRONT_K, Utils::DoubleToString(oldFrontK), wxPoint(x, y + 2 * dY), wxSize(75, 20));
     dlg->Connect(ID_TEXTCTRL_FRONT_K, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ExponentDialog::OnControlEvent));
 
-    std::stringstream streamBack;
-    streamBack << std::fixed << std::setprecision(5) << oldBackK;
-    tcBackK = new wxTextCtrl(panel, ID_TEXTCTRL_BACK_K, streamBack.str().c_str(), wxPoint(x, y + 3 * dY), wxSize(75, 20));
+    tcBackK = new wxTextCtrl(panel, ID_TEXTCTRL_BACK_K, Utils::DoubleToString(oldBackK), wxPoint(x, y + 3 * dY), wxSize(75, 20));
     dlg->Connect(ID_TEXTCTRL_BACK_K, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ExponentDialog::OnControlEvent));
 
     return panel;
@@ -169,14 +164,14 @@ static void DrawLine(int x1, int y1, int x2, int y2)
 
 static void SendAdditionForm()
 {
-    double frontK = std::atof(tcFrontK->GetValue());
+    double frontK = Utils::StringToDouble(tcFrontK->GetValue());
 
     if(frontK == 0.0)
     {
         frontK = oldFrontK;
     }
 
-    double backK = std::atof(tcFrontK->GetValue());
+    double backK = Utils::StringToDouble(tcBackK->GetValue());
     
     if(backK == 0.0)
     {
@@ -205,16 +200,16 @@ static void SendAdditionForm()
     {
         double param = (i - start) * frontK;
 
-        double d = min - std::log(param) * 500 * frontK;
+        double d = min + std::log(param) * 500 * frontK;
 
-        if(d < Point::MIN_VALUE)
+        if(d < min)
         {
-            d = static_cast<double>(Point::MIN_VALUE);
+            d = static_cast<double>(min);
         }
 
-        if(d > Point::MAX_VALUE)
+        if(d > max)
         {
-            d = static_cast<double>(Point::MAX_VALUE);
+            d = static_cast<double>(max);
         }
 
         uint16 value = static_cast<uint16>(d);
