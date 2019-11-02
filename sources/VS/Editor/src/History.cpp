@@ -10,6 +10,11 @@ std::vector<Form> next;
 
 void History::Add(const Form* form)
 {
+    if(!pred.empty() && pred[pred.size() - 1].IsEquals(form))
+    {
+        return;
+    }
+
 	pred.push_back(*form);
 	next.clear();
 }

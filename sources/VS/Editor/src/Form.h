@@ -51,9 +51,13 @@ struct Point
 		return (pos < point.pos);
 	}
 	/// Возвращает true, если курсор мыши находится над этой точкой
-	bool UnderMouse(int mouseX, int mouseY)
+	double DistanceFromMouse(int mouseX, int mouseY)
 	{
-		return (MyMath::Abs(mouseX - static_cast<int>(pos)) <= SIZE * 5) && (MyMath::Abs(mouseY - static_cast<int>(Point::MAX_VALUE - data)) <= SIZE * 5);
+        int dX = mouseX - static_cast<int>(pos);
+
+        int dY = mouseY - static_cast<int>(Point::MAX_VALUE - data);
+
+        return std::sqrt(dX * dX + dY * dY);
 	}
 	/// Масштаб по горизонтали
 	static float ScaleX()
@@ -101,6 +105,8 @@ public:
     void SetAdditionForm(const uint16 data[Point::NUM_POINTS]);
     /// Установить основную форму
     void SetMainForm(const uint16 data[Point::NUM_POINTS], const std::vector<Point> *points);
+
+    bool IsEquals(const Form *form) const;
 
 private:
 

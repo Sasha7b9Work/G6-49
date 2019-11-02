@@ -281,16 +281,27 @@ bool Form::ExistPoint(int mouseX, int mouseY, bool pressed)
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
 
+    uint positionNearestPoint = static_cast<uint>(-1);
+    double nearestDistance = 1e10;
+
     for(uint i = 0; i < points.size(); i++)
     {
-        if(points[i].UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
+        double distance = points[i].DistanceFromMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY));
+
+        if(distance < nearestDistance)
         {
-            if(iCurPoint == static_cast<uint>(-1) || !pressed)
-            {
-                iCurPoint = i;
-            }
-            return true;
+            nearestDistance = distance;
+            positionNearestPoint = i;
         }
+    }
+
+    if(nearestDistance < Point::SIZE * 5)
+    {
+        if(iCurPoint == static_cast<uint>(-1) || !pressed)
+        {
+            iCurPoint = positionNearestPoint;
+        }
+        return true;
     }
 
     if (!pressed)
@@ -460,4 +471,23 @@ void Form::SetAdditionForm(const uint16 d[Point::NUM_POINTS])
     {
         drawAdditionData = false;
     }
+}
+
+
+bool Form::IsEquals(const Form *form) const
+{
+    if(points != form->points)
+    {
+        return false;
+    }
+
+    for(int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        if(data[i] != form->data[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
 }

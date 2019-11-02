@@ -11,6 +11,7 @@
 #include "defines.h"
 #include "Canvas.h"
 #include "Form.h"
+#include "History.h"
 #include "Dialogs/ExponentDialog.h"
 #include "Dialogs/InsertPointsDialog.h"
 #include "Dialogs/TrapezeDialog.h"
@@ -207,6 +208,7 @@ void Frame::HandlerEvents()
 
         case SDL_MOUSEBUTTONUP:
             mouseIsDown = false;
+            History::Add(TheForm);
             break;
 
         default:
@@ -432,6 +434,8 @@ void Frame::OnSaveFile(wxCommandEvent &)
 void Frame::OnNewFile(wxCommandEvent &)
 {
     TheForm->Clear();
+
+    History::Add(TheForm);
 }
 
 void Frame::CreateSine(wxCommandEvent &)
