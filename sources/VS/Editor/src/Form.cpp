@@ -281,11 +281,14 @@ bool Form::ExistPoint(int mouseX, int mouseY, bool pressed)
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
 
-    for (uint i = 0; i < points.size(); i++)
+    for(uint i = 0; i < points.size(); i++)
     {
-        if (points[i].UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
+        if(points[i].UnderMouse(Round<int>(mouseX / scaleX), Round<int>(mouseY / scaleY)))
         {
-            iCurPoint = i;
+            if(iCurPoint == static_cast<uint>(-1) || !pressed)
+            {
+                iCurPoint = i;
+            }
             return true;
         }
     }
@@ -327,10 +330,10 @@ static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
     for (int i = 1; i < Point::NUM_POINTS; i++)
     {
         int x0 = Round<int>(scaleX * (i - 1));
-        int y0 = Round<int>(scaleY * data[i - 1]);
+        int y0 = Round<int>(scaleY * (Point::MAX_VALUE - data[i - 1]));
 
         int x1 = Round<int>(scaleX * i);
-        int y1 = Round<int>(scaleY * data[i]);
+        int y1 = Round<int>(scaleY * (Point::MAX_VALUE - data[i]));
 
         TheCanvas->DrawLine(x0, y0, x1, y1);
     }
@@ -349,14 +352,14 @@ void Form::Draw()
     for (Point point : points)
     {
         int x = Round<int>(scaleX * point.pos);
-        int y = Round<int>(scaleY * point.data);
+        int y = Round<int>(scaleY * (Point::MAX_VALUE - point.data));
 
         TheCanvas->SetPoint(x, y, Point::SIZE);
     }
 
     if (iCurPoint != static_cast<uint>(-1))
     {
-        TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * points[iCurPoint].data), Point::SIZE * 3);
+        TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * (Point::MAX_VALUE - points[iCurPoint].data)), Point::SIZE * 3);
     }
 
     if (drawAdditionData)

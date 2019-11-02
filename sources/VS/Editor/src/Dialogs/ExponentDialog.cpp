@@ -92,7 +92,7 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
     int y = 20, x = 10, dY = 26;
 
     scDelay = new SpinControl(panel, ID_SPINCTRL_FRONT_DELAY, wxT("0"), wxPoint(x, y), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Задержка, точки"));
-    scFrontTime = new SpinControl(panel, ID_SPINCTRL_FRONT_TIME, wxT("0"), wxPoint(x, y + dY), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Время нарастания, %"));
+    scFrontTime = new SpinControl(panel, ID_SPINCTRL_FRONT_TIME, wxT("4095"), wxPoint(x, y + dY), wxSize(50, 20), 0, Point::NUM_POINTS, Point::NUM_POINTS / 2, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Время нарастания, точки"));
 
     std::stringstream streamFront;
     streamFront << std::fixed << std::setprecision(5) << oldFrontK;
@@ -199,15 +199,13 @@ static void SendAdditionForm()
 
     int start = scDelay->GetValue();
 
-    int duration = static_cast<int>(Point::NUM_POINTS) - start;
-
-    int topX = static_cast<int>(start + duration / 2 + duration / 2.0F * scFrontTime->GetValue() / 100.0F);
+    int topX = static_cast<int>(start + scFrontTime->GetValue());
 
     for(int i = start + 1; i < topX; i++)
     {
-        double param = (i - start) / frontK;
+        double param = (i - start) * frontK;
 
-        double d = min - std::log((i - start) / frontK * 1e-1) * 500;
+        double d = min - std::log(param) * 500 * frontK;
 
         if(d < Point::MIN_VALUE)
         {

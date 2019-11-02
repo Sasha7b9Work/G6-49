@@ -36,12 +36,12 @@ struct Point
 	Point(int mouseX, int mouseY)
 	{
 		pos = MyMath::Round<uint16>(mouseX / ScaleX());
-		data = MyMath::Round<uint16>(mouseY / ScaleY());
+		data = Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY());
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
 	void SetY(int mouseY)
 	{
-		data = MyMath::Round<uint16>(mouseY / ScaleY());
+		data = Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY());
 	}
 
 	uint16 pos;
@@ -53,7 +53,7 @@ struct Point
 	/// Возвращает true, если курсор мыши находится над этой точкой
 	bool UnderMouse(int mouseX, int mouseY)
 	{
-		return (MyMath::Abs(mouseX - static_cast<int>(pos)) <= SIZE * 5) && (MyMath::Abs(mouseY - static_cast<int>(data)) <= SIZE * 5);
+		return (MyMath::Abs(mouseX - static_cast<int>(pos)) <= SIZE * 5) && (MyMath::Abs(mouseY - static_cast<int>(Point::MAX_VALUE - data)) <= SIZE * 5);
 	}
 	/// Масштаб по горизонтали
 	static float ScaleX()
