@@ -137,13 +137,8 @@ void ExponentDialog::OnControlEvent(wxCommandEvent &)
 
 void ExponentDialog::OnButtonOk(wxCommandEvent &)
 {
-    TheForm->SetMainForm(data);
+    TheForm->SetMainForm(data, &points);
     
-    for (Point point : points)
-    {
-        TheForm->SetPoint(point);
-    }
-
     Destroy();
 }
 

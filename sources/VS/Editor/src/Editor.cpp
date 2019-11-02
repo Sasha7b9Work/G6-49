@@ -320,7 +320,7 @@ void Frame::CreateMenu()
     toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"), imgCreateExponent, wxT("Создать новый экспоненциальный сигнал"));
 
     toolBar->AddSeparator();
-    toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить точки"));
+    toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить маркеры"));
 	toolBar->Realize();
 }
 
@@ -443,7 +443,7 @@ void Frame::CreateSine(wxCommandEvent &)
         data[i] = static_cast<uint16>(Point::AVE_VALUE - (std::sin(static_cast<float>(i) / Point::NUM_POINTS * 2 * 3.14) * Point::AVE_VALUE));
     }
 
-    TheForm->SetMainForm(data);
+    TheForm->SetMainForm(data, nullptr);
 }
 
 void Frame::CreateTriangle(wxCommandEvent &)
