@@ -273,6 +273,8 @@ void Form::AlignPoint(Align::E align)
         points[iCurPoint].data = points[index].data;
         SetPoint(points[iCurPoint]);
     }
+
+    History::Add(TheForm);
 }
 
 

@@ -3,20 +3,17 @@
 
 
 /// Предыдущие элементы
-std::vector<Form> pred;
+static std::vector<Form> pred;
 /// Слеюдующие элементы
-std::vector<Form> next;
+static std::vector<Form> next;
 
 
 void History::Add(const Form* form)
 {
-    if(!pred.empty() && pred[pred.size() - 1].IsEquals(form))
+    if(pred.empty() || !pred[pred.size() - 1].IsEquals(form))
     {
-        return;
+        pred.push_back(*form);
     }
-
-	pred.push_back(*form);
-	next.clear();
 }
 
 
@@ -38,6 +35,6 @@ Form* History::Next()
 		pred.push_back(next.back());
 		next.pop_back();
 	}
-
+     
 	return pred.size() ? &pred.back() : nullptr;
 }
