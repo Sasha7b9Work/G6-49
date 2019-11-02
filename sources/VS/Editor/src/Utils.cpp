@@ -48,5 +48,5 @@ double Utils::StringToDouble(const char *value)
         p++;
     }
 
-    return std::atof(buffer);
+    return std::atof(buffer); //-V2508
 }

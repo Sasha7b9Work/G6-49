@@ -166,14 +166,14 @@ static void SendAdditionForm()
 {
     double frontK = Utils::StringToDouble(tcFrontK->GetValue());
 
-    if(frontK == 0.0)
+    if(frontK == 0.0) //-V2550 //-V550
     {
         frontK = oldFrontK;
     }
 
     double backK = Utils::StringToDouble(tcBackK->GetValue());
     
-    if(backK == 0.0)
+    if(backK == 0.0) //-V2550 //-V550
     {
         backK = oldBackK;
     }
