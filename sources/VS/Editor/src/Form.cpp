@@ -116,6 +116,25 @@ void Form::SetPoint(uint16 pos, uint16 dat)
 }
 
 
+void Form::SetPoint(uint16 pos)
+{
+    Point point(pos, data[pos]);
+
+    uint index = PointInPosition(point.pos);
+
+    if(index != static_cast<uint>(-1))
+    {
+        points[index] = point;
+    }
+    else
+    {
+        points.push_back(point);
+
+        std::sort(points.begin(), points.end());
+    }
+}
+
+
 void Form::RemovePoint()
 {
     if (iCurPoint != 0 && iCurPoint != points.size())

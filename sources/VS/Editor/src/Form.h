@@ -81,6 +81,8 @@ public:
     void SetPoint(uint16 pos, uint16 data);
     /// Заносит точку куда следует
     void SetPoint(Point point);
+    /// Вставить точку в позицию pos
+    void SetPoint(uint16 pos);
     /// Возвращает true, если курсор мыши находится над поставленной точкой. Pressed - нажата ли кнопка мыши
     bool ExistPoint(int mouseX, int mouseY, bool pressed);
     /// Удалить точку в позиции мыши

@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Form.h"
+#include "History.h"
 #include "Dialogs/SpinControl.h"
 #include "Dialogs/InsertPointsDialog.h"
 #pragma warning(push, 0)
@@ -54,6 +55,13 @@ void InsertPointsDialog::OnControlNumPoints(wxCommandEvent &)
 
 void InsertPointsDialog::OnButtonOk(wxCommandEvent &)
 {
+    for(uint16 i = 0; i < Point::NUM_POINTS; i += static_cast<uint16>(scDelta->GetValue()))
+    {
+        TheForm->SetPoint(i);
+    }
+
+    History::Add(TheForm);
+
     Destroy();
 }
 
