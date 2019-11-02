@@ -36,12 +36,12 @@ struct Point
 	Point(int mouseX, int mouseY)
 	{
 		pos = MyMath::Round<uint16>(mouseX / ScaleX());
-		data = Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY());
+		data = static_cast<uint16>(Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY()));
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
 	void SetY(int mouseY)
 	{
-		data = Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY());
+		data = static_cast<uint16>(Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY()));
 	}
 
 	uint16 pos;
