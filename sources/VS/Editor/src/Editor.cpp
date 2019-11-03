@@ -76,6 +76,7 @@ wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(INSERT_POINTS, Frame::InsertPoints)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
     EVT_SIZE(Frame::OnResize)
+    EVT_PAINT(Frame::OnRepaint)
 wxEND_EVENT_TABLE()
 
 
@@ -148,6 +149,12 @@ void Frame::OnResize(wxSizeEvent &)
 }
 
 
+void Frame::OnRepaint(wxPaintEvent &)
+{
+    TheCanvas->Redraw();
+}
+
+
 void Frame::HandlerEvents()
 {
     SDL_Event event;
@@ -175,6 +182,8 @@ void Frame::HandlerEvents()
             {
                 TheForm->MovePoint(mouseX, mouseY);
             }
+
+            TheCanvas->Redraw();
 
             break;
 

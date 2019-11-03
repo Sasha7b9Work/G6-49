@@ -9,9 +9,9 @@
 
 Canvas *TheCanvas = nullptr;
 
+static bool needRedraw = true;
 
-wxButton *button = nullptr;
-
+static wxButton *button = nullptr;
 static SDL_Renderer *renderer = nullptr;
 static SDL_Texture *texture = nullptr;
 
@@ -56,6 +56,8 @@ void Canvas::Resize(const wxSize &size)
         button->SetSize(size);
         button->SetMinSize(size);
     }
+
+    needRedraw = true;
 }
 
 
@@ -100,11 +102,16 @@ void Canvas::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
 
 void Canvas::Draw()
 {
-    BeginScene();
+    if(needRedraw)
+    {
+        BeginScene();
 
-    TheForm->Draw();
+        TheForm->Draw();
 
-    EndScene();
+        EndScene();
+
+        needRedraw = false;
+    }
 }
 
 
@@ -166,4 +173,10 @@ static void DrawGrid()
 
     TheCanvas->DrawLine(width / 2, 0, width / 2, height, Color::DARK_GREEN_3F);
     TheCanvas->DrawLine(0, height / 2, width, height / 2);
+}
+
+
+void Canvas::Redraw()
+{
+    needRedraw = true;
 }

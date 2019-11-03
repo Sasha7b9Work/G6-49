@@ -89,7 +89,7 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 }
 
 
-TrapezeDialog::TrapezeDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 226))
+TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры треугольного сигнала"), wxSize(225, 226))
 {
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(TrapezeDialog::OnButtonOk));
@@ -114,12 +114,6 @@ TrapezeDialog::TrapezeDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольно
     Centre();
 
     SendForm();
-}
-
-
-TrapezeDialog::~TrapezeDialog()
-{
-    TheForm->SetAdditionForm(nullptr);
 }
 
 

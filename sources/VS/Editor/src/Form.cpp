@@ -191,6 +191,8 @@ void Form::MovePoint(int mouseX, int mouseY)
 
         SetPoint(point);
     }
+
+    TheCanvas->Redraw();
 }
 
 

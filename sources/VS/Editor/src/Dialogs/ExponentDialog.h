@@ -1,14 +1,11 @@
 #pragma once
-#pragma warning(push, 0)
-#include <wx/wx.h>
-#pragma warning(pop)
+#include "Dialog.h"
 
 
-class ExponentDialog : public wxDialog
+class ExponentDialog : public Dialog
 {
 public:
     ExponentDialog();
-    ~ExponentDialog();
 
     void OnControlEvent(wxCommandEvent &);
 

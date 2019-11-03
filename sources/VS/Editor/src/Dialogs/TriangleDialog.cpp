@@ -86,7 +86,7 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 }
 
 
-TriangleDialog::TriangleDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 210))
+TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"), wxSize(225, 210))
 {
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(TriangleDialog::OnButtonOk));
@@ -111,12 +111,6 @@ TriangleDialog::TriangleDialog() : wxDialog(nullptr, -1, wxT("Параметры треуголь
     Centre();
 
     SendAdditionForm();
-}
-
-
-TriangleDialog::~TriangleDialog()
-{
-    TheForm->SetAdditionForm(nullptr);
 }
 
 

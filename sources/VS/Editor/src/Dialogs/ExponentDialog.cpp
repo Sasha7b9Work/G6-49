@@ -103,7 +103,7 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
 }
 
 
-ExponentDialog::ExponentDialog() : wxDialog(nullptr, -1, wxT("Параметры треугольного сигнала"), wxDefaultPosition, wxSize(225, 252))
+ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигнала"), wxSize(225, 252))
 {
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(ExponentDialog::OnButtonOk));
@@ -128,12 +128,6 @@ ExponentDialog::ExponentDialog() : wxDialog(nullptr, -1, wxT("Параметры треуголь
     Centre();
 
     SendAdditionForm();
-}
-
-
-ExponentDialog::~ExponentDialog()
-{
-    TheForm->SetAdditionForm(nullptr);
 }
 
 

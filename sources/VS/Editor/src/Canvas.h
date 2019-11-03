@@ -17,6 +17,7 @@ public:
     void SetPoint(int x, int y, const Color &color = Color::NUMBER);
     void SetPoint(int x, int y, int size, const Color &color = Color::NUMBER);
     void DrawLine(int x0, int y0, int x1, int y1, const Color &color = Color::NUMBER);
+    void Redraw();
 
 private:
     void BeginScene();

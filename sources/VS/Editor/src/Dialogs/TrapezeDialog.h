@@ -1,14 +1,11 @@
 #pragma once
-#pragma warning(push, 0)
-#include <wx/wx.h>
-#pragma warning(pop)
+#include "Dialogs/Dialog.h"
 
 
-class TrapezeDialog : public wxDialog
+class TrapezeDialog : public Dialog
 {
 public:
     TrapezeDialog();
-    ~TrapezeDialog();
 
     void OnControlEvent(wxCommandEvent &);
 

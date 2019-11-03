@@ -1,14 +1,11 @@
 #pragma once
-#pragma warning(push, 0)
-#include <wx/wx.h>
-#pragma warning(pop)
+#include "Dialogs/Dialog.h"
 
 
-class TriangleDialog : public wxDialog
+class TriangleDialog : public Dialog
 {
 public:
     TriangleDialog();
-    ~TriangleDialog();
 
     void OnControlEvent(wxCommandEvent &);
 

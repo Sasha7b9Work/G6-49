@@ -10,6 +10,8 @@ static std::vector<Form> next;
 
 void History::Add(const Form* form)
 {
+    TheCanvas->Redraw();
+
     if(pred.empty() || !pred[pred.size() - 1].IsEquals(form))
     {
         pred.push_back(*form);
@@ -19,6 +21,8 @@ void History::Add(const Form* form)
 
 Form* History::Prev()
 {
+    TheCanvas->Redraw();
+
 	if (pred.size() > 1)
 	{
 		next.push_back(pred.back());
@@ -30,11 +34,13 @@ Form* History::Prev()
 
 Form* History::Next()
 {
-	if (next.size())
+    TheCanvas->Redraw();
+
+    if (next.size())
 	{
 		pred.push_back(next.back());
 		next.pop_back();
 	}
-     
+
 	return pred.size() ? &pred.back() : nullptr;
 }
