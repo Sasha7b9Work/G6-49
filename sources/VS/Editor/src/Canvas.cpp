@@ -102,6 +102,13 @@ void Canvas::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
 
 void Canvas::Draw()
 {
+    static uint time = 0;
+
+    if(SDL_GetTicks() - time > 1000)
+    {
+        needRedraw = true;
+    }
+
     if(needRedraw)
     {
         BeginScene();
@@ -111,6 +118,8 @@ void Canvas::Draw()
         EndScene();
 
         needRedraw = false;
+
+        time = SDL_GetTicks();
     }
 }
 

@@ -475,6 +475,8 @@ void Form::SetAdditionForm(const uint16 d[Point::NUM_POINTS])
     {
         drawAdditionData = false;
     }
+
+    TheCanvas->Redraw();
 }
 
 

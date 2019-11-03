@@ -89,7 +89,7 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 }
 
 
-TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры треугольного сигнала"), wxSize(225, 226))
+TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала"), wxSize(225, 226))
 {
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(TrapezeDialog::OnButtonOk));
