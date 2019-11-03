@@ -6,6 +6,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Math.h"
 #include "Log.h"
+#include <cstdio>
 #endif
 
 
@@ -31,7 +32,7 @@ void FrequencyMeter::Draw()
 
     if(FREQ_METER_MEASURE_IS_FREQ)
     {
-        sprintf(text, "%sêÃö", UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
+        std::sprintf(text, "%sêÃö", UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
     }
     else
     {
@@ -51,7 +52,7 @@ void FrequencyMeter::Draw()
 
         StrOut str = strs[FREQ_AVE_PERIOD][FREQ_TIME_STAMPS];
 
-        sprintf(text, "%s%s", UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix);
+        std::sprintf(text, "%s%s", UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix);
     }
 
     Text::DrawBigText(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10, 3, text);

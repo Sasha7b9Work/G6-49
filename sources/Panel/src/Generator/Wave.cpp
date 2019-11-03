@@ -457,7 +457,7 @@ pString ParameterValue::NameUnit(char buf[10]) const
         ""
     };
 
-    sprintf(buf, "%s%s", order.Name(), names[value]);
+    std::sprintf(buf, "%s%s", order.Name(), names[value]);
     return buf;
 }
 

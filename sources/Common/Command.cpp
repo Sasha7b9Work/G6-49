@@ -4,6 +4,7 @@
 #include "Command.h"
 #include "structs.h"
 #include "Utils/StringUtils.h"
+#include <cstdio>
 #endif
 
 
@@ -63,7 +64,7 @@ pString Command::Name() const
     /// Возможно, это происходит из-за использования CCM RAM
     const int SIZE = 23;
     static char buffer[SIZE + 1];
-    snprintf(buffer, SIZE, "Неправильный параметр %d", value);
+    std::snprintf(buffer, SIZE, "Неправильный параметр %d", value);
 
     return buffer;
 }
@@ -75,7 +76,7 @@ pString Command::Trace(const uint8 *buffer) const
     static const int SIZE = 28;
     static char result[SIZE];
   
-    snprintf(result, SIZE - 1, "%s %d ", Name(), buffer[1] + 1);
+    std::snprintf(result, SIZE - 1, "%s %d ", Name(), buffer[1] + 1);
    
     switch(value)
     {

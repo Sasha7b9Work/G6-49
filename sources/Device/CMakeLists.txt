@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.13)
 
 project (Device)
 
-include_directories(../common/_VS_KEIL/CMSIS
+include_directories(../common/_VS_KEIL
+                    ../common/_VS_KEIL/CMSIS
                     ../common/_VS_KEIL/std_includes
                     src
                     ../common

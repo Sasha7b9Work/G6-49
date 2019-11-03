@@ -15,7 +15,7 @@ template<class T> void LoggingArray(T *data, char *format, int num)
     for (int i = 0; i < num; i++)
     {
         char buffer[50];
-        snprintf(buffer, 49, format, data[i]);
+			  std::snprintf(buffer, 49, format, data[i]);
         std::strcat(message, buffer);
     }
 }

@@ -3,6 +3,7 @@
 #include "log.h"
 #include "Message.h"
 #include <cstdarg>
+#include <cstdio>
 #endif
 
 

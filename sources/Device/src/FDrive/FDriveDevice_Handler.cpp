@@ -11,6 +11,7 @@
 #include "Utils/Math.h"
 #include "Utils/String.h"
 #include <ff.h>
+#include <cstdio>
 #endif
 
 

@@ -15,7 +15,7 @@
 char *Float2String(float value)
 {
     static char result[100];
-    sprintf(result, "%f", value);
+    std::sprintf(result, "%f", value);
     return result;
 }
 

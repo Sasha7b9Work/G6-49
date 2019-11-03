@@ -105,7 +105,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
     }
 
     float absValue = std::fabsf(value);
-    sprintf(pBuffer, format, static_cast<double>(absValue));
+    std::sprintf(pBuffer, format, static_cast<double>(absValue));
 
     float val = static_cast<float>(std::atof(pBuffer)); //-V2508
 
@@ -117,7 +117,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
         {
             format[5] = '.';
         }
-        sprintf(pBuffer, format, static_cast<double>(value));
+        std::sprintf(pBuffer, format, static_cast<double>(value));
     }
 
     bool signExist = alwaysSign || value < 0;
@@ -201,7 +201,7 @@ char *FloatFract2String(float value, bool alwaysSign, char bufferOut[20])
 char *Phase2String(float phase, bool, char bufferOut[20])
 {
     char buffer[20];
-    sprintf(bufferOut, "%s\xa8", Float2String(phase, false, 4, buffer));
+    std::sprintf(bufferOut, "%s\xa8", Float2String(phase, false, 4, buffer));
     return bufferOut;
 }
 
@@ -274,21 +274,21 @@ char *Bin2StringN(uint value, char buffer[33], int n)
 
 char *Hex8toString(uint8 value, char buffer[3])
 {
-    sprintf(buffer, "%02X", value);
+    std::sprintf(buffer, "%02X", value);
     return buffer;
 }
 
 
 char *Hex16toString(uint16 value, char buffer[5])
 {
-    sprintf(buffer, "%04X", value);
+    std::sprintf(buffer, "%04X", value);
     return buffer;
 }
 
 
 char *Hex32toString(uint value, char buffer[9], bool upper)
 {
-    sprintf(buffer, upper ? "%08X" : "%08x", value);
+    std::sprintf(buffer, upper ? "%08X" : "%08x", value);
     return buffer;
 }
 
@@ -303,16 +303,16 @@ static char *Int2String(int value, bool alwaysSign, int numMinFields, char *buff
 
     const int SIZE = 20;
     char format[SIZE] = "%";
-    snprintf(&(format[1]), SIZE, "0%d", numMinFields);
+    std::snprintf(&(format[1]), SIZE, "0%d", numMinFields);
     std::strcat(format, "d");
     if (alwaysSign && value >= 0)
     {
         buf[0] = '+';
-        snprintf(buf + 1, SIZE - 1, format, value);
+        std::snprintf(buf + 1, SIZE - 1, format, value);
     }
     else
     {
-        snprintf(buf, SIZE, format, value);
+        std::snprintf(buf, SIZE, format, value);
     }
     return buf;
 }
@@ -331,7 +331,7 @@ char *UInt2String(uint value, char buffer[20])
     
     char *retValue = buffer ? buffer : buf;
 
-    sprintf(retValue, "%u", value);
+    std::sprintf(retValue, "%u", value);
     return retValue;
 }
 
@@ -342,7 +342,7 @@ char *UInt64_2String(uint64 value, char buffer[20])
 
     char *retValue = buffer ? buffer : buf;
 
-    sprintf(retValue, "%llu", value);
+    std::sprintf(retValue, "%llu", value);
     return retValue;
 }
 
@@ -824,7 +824,7 @@ void SU::ConcatenateSymbol(char *str, char symbol)
 char *Float2String(float value)
 {
     static char result[100];
-    sprintf(result, "%f", value);
+    std::sprintf(result, "%f", value);
     return result;
 }
 

@@ -34,7 +34,7 @@ void Console::AddString(const char *string)
         }
         numStrings--;
     }
-    sprintf(&buffer[numStrings][0], "%d ", fullNumber);
+    std::sprintf(&buffer[numStrings][0], "%d ", fullNumber);
     std::strcat(&buffer[numStrings][0], string);
     numStrings++;
     fullNumber++;

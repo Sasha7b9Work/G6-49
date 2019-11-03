@@ -49,7 +49,7 @@ void Log::Trace(TypeTrace::E type, const char *module, const char *func, int num
     va_end(args);
     const int SIZE = 20;
     char numBuffer[SIZE];
-    snprintf(numBuffer, SIZE, ":%d", numLine);
+    std::snprintf(numBuffer, SIZE, ":%d", numLine);
     message[0] = 0;
 
     if (type == TypeTrace::Error)
