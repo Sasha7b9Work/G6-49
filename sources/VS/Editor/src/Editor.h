@@ -15,6 +15,7 @@ class Frame : public wxFrame
 {
 public:
     Frame(const wxString &title);
+    ~Frame();
 
     void OnQuit(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);

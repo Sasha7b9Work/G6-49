@@ -135,6 +135,13 @@ Frame::Frame(const wxString &title)
 }
 
 
+Frame::~Frame()
+{
+    delete TheForm;
+    delete TheCanvas;
+}
+
+
 void Frame::OnTimer(wxTimerEvent &)
 {
     HandlerEvents();
