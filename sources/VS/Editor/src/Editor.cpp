@@ -250,6 +250,14 @@ void Frame::SetSizeAndPosition()
 {
     wxSize size = { 1024, 768 };
 
+	wxSize displaySize = wxGetDisplaySize();
+	displaySize.y -= 40;
+
+	if (displaySize.y < size.y)
+	{
+		size.y = displaySize.y;
+	}
+
     SetSize(size);
     SetMinSize({ 640, 480 });
 
