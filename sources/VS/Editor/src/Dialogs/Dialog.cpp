@@ -4,9 +4,10 @@
 #include "Form.h"
 
 
-Dialog::Dialog(const wxString &title, const wxSize &size) : wxDialog(nullptr, wxID_ANY, title, wxDefaultPosition, size)
+Dialog::Dialog(const wxString &title, const wxSize &size) : wxDialog(nullptr, wxID_ANY, title)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
+	SetClientSize(size);
 }
 
 
