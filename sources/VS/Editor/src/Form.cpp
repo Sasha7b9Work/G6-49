@@ -229,7 +229,7 @@ void Form::AlignPoint(Align::E align)
             {
                 uint i = iCurPoint - 1;
 
-                pFuncCompare func = (align == Align::LeftTop) ? CompareLess : CompareMore;
+                pFuncCompare func = (align == Align::LeftDown) ? CompareLess : CompareMore;
 
                 while (i < points.size())
                 {
@@ -255,7 +255,7 @@ void Form::AlignPoint(Align::E align)
             {
                 uint i = iCurPoint + 1;
 
-                pFuncCompare func = (align == Align::RightTop) ? CompareMore : CompareLess;
+                pFuncCompare func = (align == Align::RightDown) ? CompareMore : CompareLess;
 
                 while (i < points.size() - 1)
                 {

@@ -117,11 +117,11 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
     hBoxPanels->Add(CreatePanelPolarity(this));
     hBoxPanels->AddStretchSpacer();
     hBoxPanels->Add(CreatePanelLevels(this));
-    hBoxButtons->Add(btnOk);
-    hBoxButtons->Add(btnClose);
+    hBoxButtons->Add(btnOk, 1, wxALIGN_CENTER);
+    hBoxButtons->Add(btnClose, 1, wxALIGN_CENTER);
     vBox->Add(hBoxPanels);
     vBox->Add(CreatePanelParameters(this));
-    vBox->Add(hBoxButtons);
+    vBox->Add(hBoxButtons, 0, wxALIGN_RIGHT | wxRIGHT | wxBOTTOM, 10);
     
     SetSizer(vBox);
     
