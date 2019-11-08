@@ -11,6 +11,8 @@ public:
     Dialog(const wxString &title, const wxSize &size);
     virtual ~Dialog();
 
+    void OnControlEvent(wxCommandEvent &);
+
 protected:
     /// ѕослать форму дл€ ознакомительной отрисовки
     virtual void SendAdditionForm() {};

@@ -16,7 +16,7 @@ uint16 Dialog::data[Point::NUM_POINTS];
 std::vector<Point> Dialog::points;
 
 
-Dialog::Dialog(const wxString &title, const wxSize &size) : wxDialog(nullptr, wxID_ANY, title)
+Dialog::Dialog(const wxString &title, const wxSize &) : wxDialog(nullptr, wxID_ANY, title)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
@@ -77,4 +77,10 @@ void Dialog::OnButtonOk(wxCommandEvent &)
 void Dialog::OnButtonCancel(wxCommandEvent &)
 {
     Destroy();
+}
+
+
+void Dialog::OnControlEvent(wxCommandEvent &)
+{
+    SendAdditionForm();
 }

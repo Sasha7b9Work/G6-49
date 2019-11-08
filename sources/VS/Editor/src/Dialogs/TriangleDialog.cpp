@@ -176,7 +176,7 @@ static void SendAdditionForm()
 
 void TriangleDialog::OnControlEvent(wxCommandEvent &)
 {
-    SendAdditionForm();
+    ::SendAdditionForm();
 }
 
 

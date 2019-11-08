@@ -46,11 +46,11 @@ static wxPanel *CreatePanelPolarity(wxDialog *dlg)
     int y = 25, x = 5;
 
     rbDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
-    dlg->Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(ExponentDialog::OnControlEvent));
+    dlg->Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
     rbDirect->SetValue(true);
 
     rbBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
-    dlg->Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(ExponentDialog::OnControlEvent));
+    dlg->Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
 
     return panel;
 }
@@ -188,10 +188,4 @@ void ExponentDialog::SendAdditionForm()
     }
 
     TheForm->SetAdditionForm(data);
-}
-
-
-void ExponentDialog::OnControlEvent(wxCommandEvent &)
-{
-    SendAdditionForm();
 }

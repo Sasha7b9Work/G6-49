@@ -7,8 +7,6 @@ class ExponentDialog : public Dialog
 public:
     ExponentDialog();
 
-    void OnControlEvent(wxCommandEvent &);
-
 protected:
 
     virtual void SendAdditionForm();
