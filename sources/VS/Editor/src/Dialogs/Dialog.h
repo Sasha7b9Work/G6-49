@@ -5,10 +5,13 @@
 #pragma warning(pop)
 
 
+class SpinControl;
+
+
 class Dialog : public wxDialog
 {
 public:
-    Dialog(const wxString &title, const wxSize &size);
+    Dialog(const wxString &title);
     virtual ~Dialog();
 
     void OnControlEvent(wxCommandEvent &);
@@ -19,9 +22,17 @@ protected:
 
     void SetBoxSizer(wxBoxSizer *sizer, wxSize size);
 
+    void DrawLine(int x1, int y1, int x2, int y2);
+    /// Создаёт панель уровней сигнала
+    wxPanel *CreatePanelLevels();
+    /// Сигнал для засылки в TheForm
     static uint16 data[Point::NUM_POINTS];
-
+    /// Дополнительные точки для засылки в TheForm
     static std::vector<Point> points;
+    /// Установка максимального уровня сигнала
+    SpinControl *scLevelUp = nullptr;
+    /// Установка минимального уровня сигнала
+    SpinControl *scLevelDown = nullptr;
 
 private:
     wxBoxSizer *panelBox = nullptr;

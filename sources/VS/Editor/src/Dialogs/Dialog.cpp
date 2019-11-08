@@ -1,11 +1,14 @@
 #include "defines.h"
 #include "Canvas.h"
-#include "Dialog.h"
 #include "Form.h"
+#include "Dialogs/Dialog.h"
+#include "Dialogs/SpinControl.h"
 
 
 enum
 {
+    ID_SPINCTRL_DONW,
+    ID_SPINCTRL_UP,
     ID_BUTTON_OK,
     ID_BUTTON_CANCEL
 };
@@ -16,7 +19,7 @@ uint16 Dialog::data[Point::NUM_POINTS];
 std::vector<Point> Dialog::points;
 
 
-Dialog::Dialog(const wxString &title, const wxSize &) : wxDialog(nullptr, wxID_ANY, title)
+Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
@@ -34,7 +37,7 @@ Dialog::Dialog(const wxString &title, const wxSize &) : wxDialog(nullptr, wxID_A
     hBox->AddSpacer(20);
     hBox->Add(btnCancel, 1, wxALIGN_CENTER);
     vBox->AddSpacer(10);
-    vBox->Add(hBox, 0, wxALIGN_CENTER | wxRIGHT | wxBOTTOM, 10);
+    vBox->Add(hBox, 0, wxALIGN_CENTER);
 
     SetSizer(vBox);
 }
@@ -43,6 +46,46 @@ Dialog::Dialog(const wxString &title, const wxSize &) : wxDialog(nullptr, wxID_A
 Dialog::~Dialog()
 {
     TheForm->SetAdditionForm(nullptr);
+}
+
+
+wxPanel *Dialog::CreatePanelLevels()
+{
+    wxPanel *panel = new wxPanel(this);
+
+    new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(130, 75));
+
+    int y = 20, x = 10;
+
+    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
+    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
+
+    return panel;
+}
+
+
+void Dialog::DrawLine(int x1, int y1, int x2, int y2)
+{
+    float dX = static_cast<float>(x2 - x1);
+
+    float dY = std::fabsf(static_cast<float>(y2 - y1));
+
+    float k = dY / dX;
+
+    if(y2 > y1)
+    {
+        for(int x = x1; x <= x2; x++)
+        {
+            data[x] = static_cast<uint16>(y1 + (x - x1) * k + 0.5F);
+        }
+    }
+    else
+    {
+        for(int x = x1; x <= x2; x++)
+        {
+            data[x] = static_cast<uint16>(y1 - (x - x1) * k + 0.5F);
+        }
+    }
 }
 
 

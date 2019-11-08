@@ -89,7 +89,7 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 }
 
 
-TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала"), wxSize(225, 226))
+TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала"))
 {
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(TrapezeDialog::OnButtonOk));
@@ -102,7 +102,7 @@ TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала")
 
     hBoxPanels->Add(CreatePanelPolarity(this));
     hBoxPanels->AddStretchSpacer();
-    hBoxPanels->Add(CreatePanelLevels(this));
+    hBoxPanels->Add(CreatePanelLevels());
     hBoxButtons->Add(btnOk);
     hBoxButtons->Add(btnClose);
     vBox->Add(hBoxPanels);

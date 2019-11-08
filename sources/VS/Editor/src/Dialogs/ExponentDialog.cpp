@@ -12,8 +12,6 @@
 
 enum
 {
-    ID_SPINCTRL_DONW,
-    ID_SPINCTRL_UP,
     ID_SPINCTRL_FRONT_DELAY,
     ID_SPINCTRL_FRONT_TIME,
     ID_TEXTCTRL_FRONT_K,
@@ -56,21 +54,6 @@ static wxPanel *CreatePanelPolarity(wxDialog *dlg)
 }
 
 
-static wxPanel *CreatePanelLevels(wxDialog *dlg)
-{
-    wxPanel *panel = new wxPanel(dlg);
-
-    new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(130, 75));
-
-    int y = 20, x = 10;
-
-    scUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Верхний, %"));
-    scDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, dlg, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT("Нижний, %"));
-
-    return panel;
-}
-
-
 static wxPanel *CreatePanelParameters(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
@@ -92,43 +75,18 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
 }
 
 
-ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигнала"), wxSize(225, 252))
+ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигнала"))
 {
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
     hBoxPanels->Add(CreatePanelPolarity(this));
     hBoxPanels->AddStretchSpacer();
-    hBoxPanels->Add(CreatePanelLevels(this));
+    hBoxPanels->Add(CreatePanelLevels());
     vBox->Add(hBoxPanels);
     vBox->Add(CreatePanelParameters(this));
 
     SetBoxSizer(vBox, { 221, 203 });
-}
-
-
-void ExponentDialog::DrawLine(int x1, int y1, int x2, int y2)
-{
-    float dX = static_cast<float>(x2 - x1);
-
-    float dY = std::fabsf(static_cast<float>(y2 - y1));
-
-    float k = dY / dX;
-
-    if(y2 > y1)
-    {
-        for(int x = x1; x <= x2; x++)
-        {
-            data[x] = static_cast<uint16>(y1 + (x - x1) * k + 0.5F);
-        }
-    }
-    else
-    {
-        for(int x = x1; x <= x2; x++)
-        {
-            data[x] = static_cast<uint16>(y1 - (x - x1) * k + 0.5F);
-        }
-    }
 }
 
 

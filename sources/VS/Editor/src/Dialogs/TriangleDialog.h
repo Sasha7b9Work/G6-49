@@ -7,9 +7,7 @@ class TriangleDialog : public Dialog
 public:
     TriangleDialog();
 
-    void OnControlEvent(wxCommandEvent &);
+protected:
 
-    void OnButtonOk(wxCommandEvent &);
-
-    void OnButtonCancel(wxCommandEvent &);
+    virtual void SendAdditionForm();
 };
