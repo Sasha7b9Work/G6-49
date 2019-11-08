@@ -73,7 +73,7 @@ wxPanel *Dialog::CreatePanelLevels()
 }
 
 
-wxPanel *Dialog::CreatePanelPolarity()
+wxPanel *Dialog::CreatePanelPolarity() 
 {
     wxPanel *panel = new wxPanel(this);
     new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));

@@ -121,4 +121,6 @@ void ExponentDialog::SendAdditionForm()
     }
 
     TheForm->SetAdditionForm(data);
+
+    points.clear();
 }
