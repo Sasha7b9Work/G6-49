@@ -54,32 +54,6 @@ enum
 };
 
 
-wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-    EVT_MENU(MENU_FILE_QUIT, Frame::OnQuit)
-    EVT_MENU(CONTEXT_MENU_DELETE, Frame::OnDeletePoint)
-    EVT_MENU(CONTEXT_MENU_PARAMETERS, Frame::OnParametersPoint)
-    EVT_MENU(ALIGN_LEFT, Frame::OnAlignLeft)
-    EVT_MENU(ALIGN_RIGHT, Frame::OnAlignRight)
-    EVT_MENU(ALIGN_LEFT_TOP, Frame::OnAlignLeftTop)
-    EVT_MENU(ALIGN_LEFT_DOWN, Frame::OnAlignLeftDown)
-    EVT_MENU(ALIGN_RIGHT_TOP, Frame::OnAlignRightTop)
-    EVT_MENU(ALIGN_RIGHT_DOWN, Frame::OnAlignRightDown)
-    EVT_MENU(FILE_OPEN, Frame::OnOpenFile)
-    EVT_MENU(FILE_SAVE, Frame::OnSaveFile)
-    EVT_MENU(FILE_NEW, Frame::OnNewFile)
-    EVT_MENU(UNDO, Frame::OnUndo)
-    EVT_MENU(REDO, Frame::OnRedo)
-    EVT_MENU(CREATE_SINE, Frame::CreateSine)
-    EVT_MENU(CREATE_TRIANGLE, Frame::CreateTriangle)
-    EVT_MENU(CREATE_TRAPEZE, Frame::CreateTrapeze)
-    EVT_MENU(CREATE_EXPONENT, Frame::CreateExponent)
-    EVT_MENU(INSERT_POINTS, Frame::InsertPoints)
-    EVT_TIMER(TIMER_ID, Frame::OnTimer)
-    EVT_SIZE(Frame::OnResize)
-    EVT_PAINT(Frame::OnRepaint)
-wxEND_EVENT_TABLE()
-
-
 /// Курсор в виде руки
 static SDL_Cursor *cursorHand = nullptr;
 /// true, если ЛКМ находится в нажатом положении
@@ -128,6 +102,29 @@ Frame::Frame(const wxString &title)
     CreateStatusBar(2);
 
     SetSizeAndPosition();
+
+    Bind(wxEVT_MENU, &Frame::OnQuit, this, MENU_FILE_QUIT);
+    Bind(wxEVT_MENU, &Frame::OnDeletePoint, this, CONTEXT_MENU_DELETE);
+    Bind(wxEVT_MENU, &Frame::OnParametersPoint, this, CONTEXT_MENU_PARAMETERS);
+    Bind(wxEVT_MENU, &Frame::OnAlignLeft, this, ALIGN_LEFT);
+    Bind(wxEVT_MENU, &Frame::OnAlignRight, this, ALIGN_RIGHT);
+    Bind(wxEVT_MENU, &Frame::OnAlignLeftTop, this, ALIGN_LEFT_TOP);
+    Bind(wxEVT_MENU, &Frame::OnAlignLeftDown, this, ALIGN_LEFT_DOWN);
+    Bind(wxEVT_MENU, &Frame::OnAlignRightTop, this, ALIGN_RIGHT_TOP);
+    Bind(wxEVT_MENU, &Frame::OnAlignRightDown, this, ALIGN_RIGHT_DOWN);
+    Bind(wxEVT_MENU, &Frame::OnOpenFile, this, FILE_OPEN);
+    Bind(wxEVT_MENU, &Frame::OnSaveFile, this, FILE_SAVE);
+    Bind(wxEVT_MENU, &Frame::OnNewFile, this, FILE_NEW);
+    Bind(wxEVT_MENU, &Frame::OnUndo, this, UNDO);
+    Bind(wxEVT_MENU, &Frame::OnRedo, this, REDO);
+    Bind(wxEVT_MENU, &Frame::CreateSine, this, CREATE_SINE);
+    Bind(wxEVT_MENU, &Frame::CreateTriangle, this, CREATE_TRIANGLE);
+    Bind(wxEVT_MENU, &Frame::CreateTrapeze, this, CREATE_TRAPEZE);
+    Bind(wxEVT_MENU, &Frame::CreateExponent, this, CREATE_EXPONENT);
+    Bind(wxEVT_MENU, &Frame::InsertPoints, this, INSERT_POINTS);
+    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_SIZE, &Frame::OnResize, this);
+    Bind(wxEVT_PAINT, &Frame::OnRepaint, this);
 
     Show(true);
 
