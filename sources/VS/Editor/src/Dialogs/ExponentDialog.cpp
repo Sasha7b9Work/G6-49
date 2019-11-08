@@ -33,7 +33,7 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Параметры"), wxDefaultPosition, wxSize(220, 75 + 26 * 2));
+    new wxStaticBox(panel, wxID_ANY, wxT("Параметры"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 75 + 26 * 2));
 
     int y = 20, x = 10, dY = 26;
 

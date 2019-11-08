@@ -28,7 +28,7 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 
     int y = 20, x = 10;
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(216, 73 + 26));
+    new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 73 + 26));
 
     scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxT("0"), wxPoint(x, y), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"));
     scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, wxT("-50"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -50, dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"));
