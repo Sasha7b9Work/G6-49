@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Canvas.h"
+#include "Editor.h"
 #include "Form.h"
 #include "Dialogs/Dialog.h"
 #include "Dialogs/SpinControl.h"
@@ -29,6 +30,12 @@ Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonApply));
     wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
+
+    Bind(wxEVT_KEY_DOWN, &Dialog::OnKeyDown, this);
+    Bind(wxEVT_KEY_UP, &Dialog::OnKeyDown, this);
+
+    Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(Dialog::OnKeyDown));
+    Connect(wxEVT_KEY_UP, wxKeyEventHandler(Dialog::OnKeyDown));
 
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     panelBox = new wxBoxSizer(wxVERTICAL);
@@ -120,6 +127,8 @@ void Dialog::SetBoxSizer(wxBoxSizer *sizer, wxSize size)
     Centre();
 
     SendAdditionForm();
+
+    SetFocus();
 }
 
 
@@ -146,4 +155,10 @@ void Dialog::OnButtonCancel(wxCommandEvent &)
 void Dialog::OnControlEvent(wxCommandEvent &)
 {
     SendAdditionForm();
+}
+
+
+void Dialog::OnKeyDown(wxKeyEvent &event)
+{
+    std::cout << event.m_keyCode << std::endl;
 }

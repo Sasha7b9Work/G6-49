@@ -48,4 +48,6 @@ private:
     void OnButtonApply(wxCommandEvent &);
 
     void OnButtonCancel(wxCommandEvent &);
+
+    void OnKeyDown(wxKeyEvent &);
 };
