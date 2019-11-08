@@ -19,7 +19,6 @@ std::vector<Point> Dialog::points;
 Dialog::Dialog(const wxString &title, const wxSize &size) : wxDialog(nullptr, wxID_ANY, title)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
-	SetClientSize(size);
 
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonOk));
@@ -34,12 +33,10 @@ Dialog::Dialog(const wxString &title, const wxSize &size) : wxDialog(nullptr, wx
     hBox->Add(btnOk, 1, wxALIGN_CENTER);
     hBox->AddSpacer(20);
     hBox->Add(btnCancel, 1, wxALIGN_CENTER);
-    //vBox->AddSpacer(20);
+    vBox->AddSpacer(10);
     vBox->Add(hBox, 0, wxALIGN_CENTER | wxRIGHT | wxBOTTOM, 10);
 
     SetSizer(vBox);
-
-    Centre();
 }
 
 
@@ -49,9 +46,15 @@ Dialog::~Dialog()
 }
 
 
-void Dialog::SetBoxSizer(wxBoxSizer *sizer)
+void Dialog::SetBoxSizer(wxBoxSizer *sizer, wxSize size)
 {
     panelBox->Add(sizer);
+
+    size.y += 50;
+
+    SetClientSize(size);
+
+    Centre();
 
     SendAdditionForm();
 }

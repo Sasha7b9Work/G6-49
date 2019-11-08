@@ -15,7 +15,7 @@ protected:
     /// ѕослать форму дл€ ознакомительной отрисовки
     virtual void SendAdditionForm() {};
 
-    void SetBoxSizer(wxBoxSizer *sizer);
+    void SetBoxSizer(wxBoxSizer *sizer, wxSize size);
 
     static uint16 data[Point::NUM_POINTS];
 

@@ -60,7 +60,7 @@ static wxPanel *CreatePanelLevels(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(125, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Уровни"), wxDefaultPosition, wxSize(130, 75));
 
     int y = 20, x = 10;
 
@@ -75,7 +75,7 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Параметры"), wxDefaultPosition, wxSize(125, 75 + 26 * 2));
+    new wxStaticBox(panel, wxID_ANY, wxT("Параметры"), wxDefaultPosition, wxSize(220, 75 + 26 * 2));
 
     int y = 20, x = 10, dY = 26;
 
@@ -103,7 +103,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
     vBox->Add(hBoxPanels);
     vBox->Add(CreatePanelParameters(this));
 
-    SetBoxSizer(vBox);
+    SetBoxSizer(vBox, { 221, 203 });
 }
 
 
@@ -194,18 +194,4 @@ void ExponentDialog::SendAdditionForm()
 void ExponentDialog::OnControlEvent(wxCommandEvent &)
 {
     SendAdditionForm();
-}
-
-
-void ExponentDialog::OnButtonOk(wxCommandEvent &)
-{
-    TheForm->SetMainForm(data, &points);
-    
-    Destroy();
-}
-
-
-void ExponentDialog::OnButtonCancel(wxCommandEvent &)
-{
-    Destroy();
 }
