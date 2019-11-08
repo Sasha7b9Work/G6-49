@@ -36,13 +36,13 @@ void Form::Clear()
 {
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        data[i] = Point::AVE_VALUE;
+        data[i] = Point::AVE;
     }
 
     points.clear();
 
-    SetPoint(static_cast<uint16>(0), Point::AVE_VALUE);
-    SetPoint(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE_VALUE);
+    SetPoint(static_cast<uint16>(0), Point::AVE);
+    SetPoint(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE);
 }
 
 
@@ -345,10 +345,10 @@ static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
     for (int i = 1; i < Point::NUM_POINTS; i++)
     {
         int x0 = Round<int>(scaleX * (i - 1));
-        int y0 = Round<int>(scaleY * (Point::MAX_VALUE - data[i - 1]));
+        int y0 = Round<int>(scaleY * (Point::MAX - data[i - 1]));
 
         int x1 = Round<int>(scaleX * i);
-        int y1 = Round<int>(scaleY * (Point::MAX_VALUE - data[i]));
+        int y1 = Round<int>(scaleY * (Point::MAX - data[i]));
 
         TheCanvas->DrawLine(x0, y0, x1, y1);
     }
@@ -367,14 +367,14 @@ void Form::Draw()
     for (Point point : points)
     {
         int x = Round<int>(scaleX * point.pos);
-        int y = Round<int>(scaleY * (Point::MAX_VALUE - point.data));
+        int y = Round<int>(scaleY * (Point::MAX - point.data));
 
         TheCanvas->SetPoint(x, y, Point::SIZE);
     }
 
     if (iCurPoint != static_cast<uint>(-1))
     {
-        TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * (Point::MAX_VALUE - points[iCurPoint].data)), Point::SIZE * 3);
+        TheCanvas->SetPoint(Round<int>(scaleX * points[iCurPoint].pos), Round<int>(scaleY * (Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
     }
 
     if (drawAdditionData)
@@ -442,7 +442,7 @@ void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Po
 {
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        data[i] = Point::AVE_VALUE;
+        data[i] = Point::AVE;
     }
 
     points.clear();

@@ -20,7 +20,7 @@ public:
 
 protected:
     /// ѕослать форму дл€ ознакомительной отрисовки
-    virtual void SendAdditionForm() {};
+    virtual void SendAdditionForm() = 0;
 
     void SetBoxSizer(wxBoxSizer *sizer, wxSize size);
 

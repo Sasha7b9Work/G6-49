@@ -27,21 +27,21 @@ struct Point
 {
 	static const uint SIZE = 5;
 
-    static const uint16 MIN_VALUE = static_cast<uint16>(0);
-	static const uint16 MAX_VALUE = static_cast<uint16>((1 << 12) - 1);
-	static const uint16 AVE_VALUE = static_cast<uint16>((MAX_VALUE) / 2);
+    static const uint16 MIN = static_cast<uint16>(0);
+	static const uint16 MAX = static_cast<uint16>((1 << 12) - 1);
+	static const uint16 AVE = static_cast<uint16>((MAX) / 2);
 
 	static const uint NUM_POINTS = 8192;
 
 	Point(int mouseX, int mouseY)
 	{
 		pos = MyMath::Round<uint16>(mouseX / ScaleX());
-		data = static_cast<uint16>(Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY()));
+		data = static_cast<uint16>(Point::MAX - MyMath::Round<uint16>(mouseY / ScaleY()));
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
 	void SetY(int mouseY)
 	{
-		data = static_cast<uint16>(Point::MAX_VALUE - MyMath::Round<uint16>(mouseY / ScaleY()));
+		data = static_cast<uint16>(Point::MAX - MyMath::Round<uint16>(mouseY / ScaleY()));
 	}
 
 	uint16 pos;
@@ -55,7 +55,7 @@ struct Point
 	{
         int dX = mouseX - static_cast<int>(pos);
 
-        int dY = mouseY - static_cast<int>(Point::MAX_VALUE - data);
+        int dY = mouseY - static_cast<int>(Point::MAX - data);
 
         return std::sqrt(dX * dX + dY * dY);
 	}
@@ -67,7 +67,7 @@ struct Point
 	/// Масштаб по вертикали
 	static float ScaleY()
 	{
-		return TheCanvas->GetSize().y / static_cast<float>(MAX_VALUE);
+		return TheCanvas->GetSize().y / static_cast<float>(MAX);
 	}
 };
 
