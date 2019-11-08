@@ -19,9 +19,7 @@ enum
     ID_TEXTCTRL_FRONT_K,
     ID_TEXTCTRL_BACK_K,
     ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK,
-    ID_BUTTON_OK,
-    ID_BUTTON_CANCEL
+    ID_RADIOBUTTON_BACK
 };
 
 
@@ -38,15 +36,6 @@ static SpinControl *scDelay = nullptr;          // Задержка перед началом экспон
 static SpinControl *scFrontTime = nullptr;      // Время от начала экспоненциального импульса до начала спада
 static wxTextCtrl *tcFrontK = nullptr;          // Коэффициент экспоненты
 static wxTextCtrl *tcBackK = nullptr;
-
-
-/// Послать форму для ознакомительной отрисовки
-static void SendAdditionForm();
-
-static uint16 data[Point::NUM_POINTS];
-
-
-static std::vector<Point> points;
 
 
 static wxPanel *CreatePanelPolarity(wxDialog *dlg)
@@ -105,33 +94,20 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
 
 ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигнала"), wxSize(225, 252))
 {
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Ok"), wxDefaultPosition, BUTTON_SIZE);
-    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(ExponentDialog::OnButtonOk));
-    wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отмена"), wxDefaultPosition, BUTTON_SIZE);
-    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(ExponentDialog::OnButtonCancel));
-
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
-    wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
     hBoxPanels->Add(CreatePanelPolarity(this));
     hBoxPanels->AddStretchSpacer();
     hBoxPanels->Add(CreatePanelLevels(this));
-    hBoxButtons->Add(btnOk, 1, wxALIGN_CENTER);
-    hBoxButtons->Add(btnClose, 1, wxALIGN_CENTER);
     vBox->Add(hBoxPanels);
     vBox->Add(CreatePanelParameters(this));
-    vBox->Add(hBoxButtons, 0, wxALIGN_RIGHT | wxRIGHT | wxBOTTOM, 10);
-    
-    SetSizer(vBox);
-    
-    Centre();
 
-    SendAdditionForm();
+    SetBoxSizer(vBox);
 }
 
 
-static void DrawLine(int x1, int y1, int x2, int y2)
+void ExponentDialog::DrawLine(int x1, int y1, int x2, int y2)
 {
     float dX = static_cast<float>(x2 - x1);
 
@@ -156,7 +132,7 @@ static void DrawLine(int x1, int y1, int x2, int y2)
 }
 
 
-static void SendAdditionForm()
+void ExponentDialog::SendAdditionForm()
 {
     double frontK = Utils::StringToDouble(tcFrontK->GetValue());
 

@@ -4,10 +4,42 @@
 #include "Form.h"
 
 
+enum
+{
+    ID_BUTTON_OK,
+    ID_BUTTON_CANCEL
+};
+
+
+uint16 Dialog::data[Point::NUM_POINTS];
+
+std::vector<Point> Dialog::points;
+
+
 Dialog::Dialog(const wxString &title, const wxSize &size) : wxDialog(nullptr, wxID_ANY, title)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 	SetClientSize(size);
+
+    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonOk));
+    wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
+    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
+
+    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
+    panelBox = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer *hBox = new wxBoxSizer(wxHORIZONTAL);
+
+    vBox->Add(panelBox);
+    hBox->Add(btnOk, 1, wxALIGN_CENTER);
+    hBox->AddSpacer(20);
+    hBox->Add(btnCancel, 1, wxALIGN_CENTER);
+    //vBox->AddSpacer(20);
+    vBox->Add(hBox, 0, wxALIGN_CENTER | wxRIGHT | wxBOTTOM, 10);
+
+    SetSizer(vBox);
+
+    Centre();
 }
 
 
@@ -17,7 +49,29 @@ Dialog::~Dialog()
 }
 
 
+void Dialog::SetBoxSizer(wxBoxSizer *sizer)
+{
+    panelBox->Add(sizer);
+
+    SendAdditionForm();
+}
+
+
 void Dialog::OnMove(wxMoveEvent &)
 {
     TheCanvas->Redraw();
+}
+
+
+void Dialog::OnButtonOk(wxCommandEvent &)
+{
+    TheForm->SetMainForm(data, &points);
+
+    Destroy();
+}
+
+
+void Dialog::OnButtonCancel(wxCommandEvent &)
+{
+    Destroy();
 }
