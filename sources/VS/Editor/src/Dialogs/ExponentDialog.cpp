@@ -15,9 +15,7 @@ enum
     ID_SPINCTRL_FRONT_DELAY,
     ID_SPINCTRL_FRONT_TIME,
     ID_TEXTCTRL_FRONT_K,
-    ID_TEXTCTRL_BACK_K,
-    ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK
+    ID_TEXTCTRL_BACK_K
 };
 
 
@@ -25,33 +23,10 @@ static double oldFrontK = 1.0;
 static double oldBackK = 1.0;
 
 
-static wxRadioButton *rbDirect = nullptr;
-static wxRadioButton *rbBack = nullptr;
-static SpinControl *scUp = nullptr;
-static SpinControl *scDown = nullptr;
-
 static SpinControl *scDelay = nullptr;          // Задержка перед началом экспоненциального импульса
 static SpinControl *scFrontTime = nullptr;      // Время от начала экспоненциального импульса до начала спада
 static wxTextCtrl *tcFrontK = nullptr;          // Коэффициент экспоненты
 static wxTextCtrl *tcBackK = nullptr;
-
-
-static wxPanel *CreatePanelPolarity(wxDialog *dlg)
-{
-    wxPanel *panel = new wxPanel(dlg);
-    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
-
-    int y = 25, x = 5;
-
-    rbDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
-    dlg->Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
-    rbDirect->SetValue(true);
-
-    rbBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
-    dlg->Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
-
-    return panel;
-}
 
 
 static wxPanel *CreatePanelParameters(wxDialog *dlg)
@@ -80,7 +55,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
-    hBoxPanels->Add(CreatePanelPolarity(this));
+    hBoxPanels->Add(CreatePanelPolarity());
     hBoxPanels->AddStretchSpacer();
     hBoxPanels->Add(CreatePanelLevels());
     vBox->Add(hBoxPanels);
@@ -106,13 +81,13 @@ void ExponentDialog::SendAdditionForm()
         backK = oldBackK;
     }
 
-    int levelHI = static_cast<int>(Point::AVE_VALUE + (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scUp->GetValue() / 100.0F); //-V2007
-    int levelLOW = static_cast<int>(Point::AVE_VALUE + (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scDown->GetValue() / 100.0F); //-V2007
+    int levelHI = static_cast<int>(Point::AVE_VALUE + (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scLevelUp->GetValue() / 100.0F); //-V2007
+    int levelLOW = static_cast<int>(Point::AVE_VALUE + (Point::MAX_VALUE + Point::MIN_VALUE) / 2.0F * scLevelDown->GetValue() / 100.0F); //-V2007
 
     int min = levelLOW;
     int max = levelHI;
 
-    if(rbBack->GetValue())
+    if(rbPolarityBack->GetValue())
     {
         min = levelHI;
         max = levelLOW;

@@ -13,37 +13,13 @@ enum
 {
     ID_SPINCTRL_DELAY,
     ID_SPINCTRL_VERTEX_1,
-    ID_SPINCTRL_VERTEX_2,
-    ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK,
-    ID_BUTTON_OK,
-    ID_BUTTON_CANCEL
+    ID_SPINCTRL_VERTEX_2
 };
 
 
-static wxRadioButton *rbDirect = nullptr;
-static wxRadioButton *rbBack = nullptr;
 static SpinControl *scDelay = nullptr;
 static SpinControl *scVertex1 = nullptr;
 static SpinControl *scVertex2 = nullptr;
-
-
-static wxPanel *CreatePanelPolarity(wxDialog *dlg)
-{
-    wxPanel *panel = new wxPanel(dlg);
-    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
-
-    int y = 25, x = 5;
-
-    rbDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
-    dlg->Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
-    rbDirect->SetValue(true);
-
-    rbBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
-    dlg->Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(TrapezeDialog::OnControlEvent));
-
-    return panel;
-}
 
 
 static wxPanel *CreatePanelOffsets(wxDialog *dlg)
@@ -67,7 +43,7 @@ TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала")
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
-    hBoxPanels->Add(CreatePanelPolarity(this));
+    hBoxPanels->Add(CreatePanelPolarity());
     hBoxPanels->AddStretchSpacer();
     hBoxPanels->Add(CreatePanelLevels());
     vBox->Add(hBoxPanels);
@@ -94,7 +70,7 @@ void TrapezeDialog::SendAdditionForm()
     int min = levelLOW;
     int max = levelHI;
 
-    if (rbBack->GetValue())
+    if (rbPolarityBack->GetValue())
     {
         min = levelHI;
         max = levelLOW;

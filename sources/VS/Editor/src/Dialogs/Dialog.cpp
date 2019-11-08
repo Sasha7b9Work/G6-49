@@ -10,7 +10,9 @@ enum
     ID_SPINCTRL_DONW,
     ID_SPINCTRL_UP,
     ID_BUTTON_OK,
-    ID_BUTTON_CANCEL
+    ID_BUTTON_CANCEL,
+    ID_RADIOBUTTON_DIRECT,
+    ID_RADIOBUTTON_BACK
 };
 
 
@@ -59,6 +61,24 @@ wxPanel *Dialog::CreatePanelLevels()
 
     scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
     scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
+
+    return panel;
+}
+
+
+wxPanel *Dialog::CreatePanelPolarity()
+{
+    wxPanel *panel = new wxPanel(this);
+    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
+
+    int y = 25, x = 5;
+
+    rbPolarityDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
+    Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbPolarityDirect->SetValue(true);
+
+    rbPolarityBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
+    Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
 
     return panel;
 }

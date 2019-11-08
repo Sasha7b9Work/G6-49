@@ -25,14 +25,16 @@ protected:
     void DrawLine(int x1, int y1, int x2, int y2);
     /// Создаёт панель уровней сигнала
     wxPanel *CreatePanelLevels();
+    SpinControl *scLevelUp = nullptr;
+    SpinControl *scLevelDown = nullptr;
+    /// Создаёт панель полярности сигнала
+    wxPanel *CreatePanelPolarity();
+    wxRadioButton *rbPolarityDirect = nullptr;
+    wxRadioButton *rbPolarityBack = nullptr;
     /// Сигнал для засылки в TheForm
     static uint16 data[Point::NUM_POINTS];
     /// Дополнительные точки для засылки в TheForm
     static std::vector<Point> points;
-    /// Установка максимального уровня сигнала
-    SpinControl *scLevelUp = nullptr;
-    /// Установка минимального уровня сигнала
-    SpinControl *scLevelDown = nullptr;
 
 private:
     wxBoxSizer *panelBox = nullptr;

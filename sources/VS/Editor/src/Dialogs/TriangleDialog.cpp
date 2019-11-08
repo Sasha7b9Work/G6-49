@@ -12,34 +12,12 @@
 enum
 {
     ID_SPINCTRL_CENTER,
-    ID_SPINCTRL_DELAY,
-    ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK
+    ID_SPINCTRL_DELAY
 };
 
 
-static wxRadioButton *rbDirect = nullptr;
-static wxRadioButton *rbBack = nullptr;
 static SpinControl *scCenter = nullptr;
 static SpinControl *scDelay = nullptr;
-
-
-static wxPanel *CreatePanelPolarity(wxDialog *dlg)
-{
-    wxPanel *panel = new wxPanel(dlg);
-    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
-
-    int y = 25, x = 5;
-
-    rbDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
-    dlg->Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(TriangleDialog::OnControlEvent));
-    rbDirect->SetValue(true);
-
-    rbBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
-    dlg->Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(TriangleDialog::OnControlEvent));
-
-    return panel;
-}
 
 
 static wxPanel *CreatePanelOffsets(wxDialog *dlg)
@@ -62,7 +40,7 @@ TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"))
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
-    hBoxPanels->Add(CreatePanelPolarity(this));
+    hBoxPanels->Add(CreatePanelPolarity());
     hBoxPanels->AddStretchSpacer();
     hBoxPanels->Add(CreatePanelLevels());
     vBox->Add(hBoxPanels);
@@ -86,7 +64,7 @@ void TriangleDialog::SendAdditionForm()
     int min = levelLOW;
     int max = levelHI;
 
-    if (rbBack->GetValue())
+    if (rbPolarityBack->GetValue())
     {
         min = levelHI;
         max = levelLOW;
