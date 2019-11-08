@@ -45,7 +45,7 @@ private:
 
     void OnMove(wxMoveEvent &);
 
-    void OnButtonOk(wxCommandEvent &);
+    void OnButtonApply(wxCommandEvent &);
 
     void OnButtonCancel(wxCommandEvent &);
 };

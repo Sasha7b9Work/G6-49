@@ -26,7 +26,7 @@ Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE);
-    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonOk));
+    Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonApply));
     wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
 
@@ -129,7 +129,7 @@ void Dialog::OnMove(wxMoveEvent &)
 }
 
 
-void Dialog::OnButtonOk(wxCommandEvent &)
+void Dialog::OnButtonApply(wxCommandEvent &)
 {
     TheForm->SetMainForm(data, &points);
 
