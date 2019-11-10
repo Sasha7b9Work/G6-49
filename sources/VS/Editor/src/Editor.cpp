@@ -448,6 +448,8 @@ void Frame::OnOpenFile(wxCommandEvent &)
             file.Open();
 
             TheForm->LoadFromFile(file);
+
+            file.Close();
         }
     }
 }

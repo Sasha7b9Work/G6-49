@@ -31,7 +31,6 @@ add_compile_options(/wd4946)    # reinterpret_cast used between related classes:
 add_compile_options(/wd4996)    # function or variable may be unsafe
 add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
-add_compile_options(/wd5039)    # pointer or reference to potentially throwing function passed to extern C function under -EHc
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
 source_group(common                   FILES              ../../common/Command.cpp

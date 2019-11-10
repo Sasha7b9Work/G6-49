@@ -23,6 +23,9 @@ static bool drawAdditionData = false;
 static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *val2);
 /// Преобразует подстроку в целое число. Возвращает false в случае неудачи
 static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint endPos, uint16 *value, unsigned long max);
+/// Вывод сообщения об ошибке
+static void ErrorMessage(const wxString &text);
+static void ErrorMessage(uint numString);
 
 
 bool operator==(const Point &left, const Point &right)
@@ -516,6 +519,15 @@ void Form::SaveToFile(wxTextFile &file)
 
     file.AddLine(LABEL_FILE);
 
+    file.AddLine(wxT("points"));
+
+    for(Point &point : points)
+    {
+        file.AddLine(wxString::Format(wxT("%i %i"), point.pos, point.data));
+    }
+    
+    file.AddLine(wxT("lines"));
+
     for(int i = 0; i < Point::NUM_POINTS; i++)
     {
         file.AddLine(wxString::Format(wxT("%i %i"), i, data[i]));
@@ -529,8 +541,34 @@ void Form::LoadFromFile(wxTextFile &file)
 
     if(line.Cmp(LABEL_FILE) != 0)
     {
-        wxMessageBox(wxT("Файл повреждён либо не является файлом данных."));
-        return;
+        return ErrorMessage(wxT("Файл не является файлом данных."));
+    }
+
+    if(file.GetNextLine().Cmp(wxT("points")) != 0)
+    {
+        return ErrorMessage(file.GetCurrentLine());
+    }
+
+    std::vector<Point> _points;
+    uint16 _data[Point::NUM_POINTS];
+
+    while(true)
+    {
+        line = file.GetNextLine();
+        if(line.Cmp("lines") == 0)
+        {
+            break;
+        }
+
+        uint16 index = 0;
+        uint16 d = 0;
+
+        if(!ConvertStringToTwoShort(line, &index, &d))
+        {
+            return ErrorMessage(file.GetCurrentLine());
+        }
+
+        _points.push_back(Point(index, d));
     }
 
     for(int i = 0; i < Point::NUM_POINTS; i++)
@@ -542,12 +580,32 @@ void Form::LoadFromFile(wxTextFile &file)
 
         if(!ConvertStringToTwoShort(line, &index, &d))
         {
-            wxMessageBox(wxString::Format(wxT("Ошибка данных в строке %i"), file.GetCurrentLine()));
-            break;
+            return ErrorMessage(file.GetCurrentLine());
         }
 
-        data[i] = d;
+        _data[i] = d;
     }
+
+    points.clear();
+
+    for(Point &point : _points)
+    {
+        points.push_back(point);
+    }
+
+    std::memcpy(data, _data, Point::NUM_POINTS * sizeof(uint16));
+}
+
+
+static void ErrorMessage(const wxString &text)
+{
+    wxMessageBox(text);
+}
+
+
+static void ErrorMessage(uint numString)
+{
+    wxMessageBox(wxString::Format(wxT("Ошибка данных в строке %i"), numString));
 }
 
 
