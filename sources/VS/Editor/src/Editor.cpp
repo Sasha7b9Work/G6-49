@@ -126,6 +126,7 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_SIZE, &Frame::OnResize, this);
     Bind(wxEVT_PAINT, &Frame::OnRepaint, this);
+    Bind(wxEVT_KEY_DOWN, &Frame::OnKeyDown, this);
 
     Show(true);
 
@@ -144,7 +145,6 @@ void Frame::OnTimer(wxTimerEvent &)
 {
     HandlerEvents();
     update();
-    DrawFPS();
 }
 
 
@@ -172,13 +172,6 @@ void Frame::HandlerEvents()
         SDL_PumpEvents();
         switch (event.type)
         {
-        case SDL_KEYDOWN:
-            if (event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                Close(true);
-            }
-            break;
-
         case SDL_MOUSEMOTION:
             mouseX = event.motion.x;
             mouseY = event.motion.y;
@@ -285,35 +278,16 @@ wxRect Frame::GetMaxDisplay()
 }
 
 
-void Frame::DrawFPS()
-{
-    static int count = 0;
-    static unsigned int prevTime = 0;
-
-    count++;
-
-    if (SDL_GetTicks() - prevTime > 1000)
-    {
-        float fps = static_cast<float>(count) / (SDL_GetTicks() - prevTime) * 1000.0F;
-
-        char buffer[100];
-        sprintf(buffer, "fps %f", fps);
-
-        SetStatusText(buffer);
-
-        prevTime = SDL_GetTicks();
-        count = 0;
-    }
-}
-
-
 void Frame::CreateMenu()
 {
     wxMenu *fileMenu = new wxMenu;
-    fileMenu->Append(MENU_FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
+    fileMenu->Append(FILE_OPEN, wxT("Загрузить\tCtrl+O"), wxT("Загрузить данные из файла"));
+    fileMenu->Append(FILE_SAVE, wxT("Сохранить\tCtrl+S"), wxT("Сохранить данные в файл"));
+    fileMenu->AppendSeparator();
+    fileMenu->Append(MENU_FILE_QUIT, wxT("Выход\tAlt+X"), wxT("Закрыть редактор"));
 
     wxMenuBar *menuBar = new wxMenuBar();
-    menuBar->Append(fileMenu, "&File");
+    menuBar->Append(fileMenu, wxT("Файл"));
 
     SetMenuBar(menuBar);
 
@@ -528,4 +502,16 @@ void Frame::InsertPoints(wxCommandEvent &)
     InsertPointsDialog dialog;
 
     dialog.ShowModal();
+}
+
+
+void Frame::OnKeyDown(wxKeyEvent &)
+{
+//    if(event.GetKeyCode() == 'x' || event.GetKeyCode() == 'X')
+//    {
+//        if(event.ControlDown())
+//        {
+//            Close(true);
+//        }
+//    }
 }

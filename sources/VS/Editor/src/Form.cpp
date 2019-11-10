@@ -526,7 +526,7 @@ void Form::SaveToFile(wxTextFile &file)
         file.AddLine(wxString::Format(wxT("%i %i"), point.pos, point.data));
     }
     
-    file.AddLine(wxT("lines"));
+    file.AddLine(wxT("data"));
 
     for(int i = 0; i < Point::NUM_POINTS; i++)
     {
@@ -555,7 +555,7 @@ void Form::LoadFromFile(wxTextFile &file)
     while(true)
     {
         line = file.GetNextLine();
-        if(line.Cmp("lines") == 0)
+        if(line.Cmp("data") == 0)
         {
             break;
         }

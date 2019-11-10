@@ -31,8 +31,6 @@ private:
 
     wxRect GetMaxDisplay();
 
-    void DrawFPS();
-
     void ShowContextMenu(const wxPoint &pos, bool underPoint);
 
     void CreateMenu();
@@ -71,5 +69,7 @@ private:
 
     void CreateExponent(wxCommandEvent &);
 
-    void InsertPoints(wxCommandEvent&);
+    void InsertPoints(wxCommandEvent &);
+
+    void OnKeyDown(wxKeyEvent &);
 };
