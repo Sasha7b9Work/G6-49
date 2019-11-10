@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <wx/wx.h>
 #include <wx/mstream.h>
+#include <wx/textfile.h>
 #pragma warning(pop)
 
 #undef main
@@ -329,7 +330,7 @@ void Frame::CreateMenu()
 
     wxToolBar* toolBar = CreateToolBar();
     toolBar->AddTool(FILE_OPEN, wxT("Открыть"), imgOpen, wxT("Загрузить ранее созданный сигнал из файла"));
-    toolBar->AddTool(FILE_SAVE, wxT("Сохранить"), imgSave, wxT("Сохранить сигнал в файла"));
+    toolBar->AddTool(FILE_SAVE, wxT("Сохранить"), imgSave, wxT("Сохранить сигнал в файл"));
     toolBar->AddTool(FILE_NEW, wxT("Новый"), imgNew, wxT("Создать новый сигнал"));
 
     toolBar->AddSeparator();
@@ -434,7 +435,7 @@ void Frame::OnRedo(wxCommandEvent&)
 
 void Frame::OnOpenFile(wxCommandEvent &)
 {
-    wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, wxT("*.*"), wxFD_OPEN);
+    wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, wxT("*.txt"), wxFD_OPEN);
     if (openDialog.ShowModal() == wxID_OK)
     {
         wxString path = openDialog.GetPath();
@@ -444,11 +445,40 @@ void Frame::OnOpenFile(wxCommandEvent &)
 
 void Frame::OnSaveFile(wxCommandEvent &)
 {
-    wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.*"), wxFD_SAVE);
+    wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.txt"), wxFD_SAVE);
     if (saveDialog.ShowModal() == wxID_OK)
     {
-        wxString path = saveDialog.GetPath();
-        std::cout << path.c_str() << std::endl;
+        wxString fileName = saveDialog.GetPath();
+        
+        wxTextFile file(fileName);
+
+        if(file.Exists())
+        {
+            wxMessageDialog message(this, wxT("Файл с таким именем уже существует. Вы уверены, что хотите перезаписать его?"), wxMessageBoxCaptionStr, wxOK | wxCANCEL | wxCENTRE);
+            if(message.ShowModal() == wxID_CANCEL)
+            {
+                return;
+            }
+        }
+        
+        file.Create();
+
+        file.AddLine(wxT("Data file G6-49"));
+
+        uint16 data[Point::NUM_POINTS];
+
+        TheForm->Save(data);
+
+        for(int i = 0; i < Point::NUM_POINTS; i++)
+        {
+            wxString str = wxString::Format(wxT("%i %i"), i, data[i]);
+
+            file.AddLine(str);
+        }
+
+        file.Write();
+
+        file.Close();
     }
 }
 

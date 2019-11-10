@@ -108,6 +108,8 @@ public:
 
     bool IsEquals(const Form *form) const;
 
+    void Save(uint16 data[Point::NUM_POINTS]);
+
 private:
 
 	/// Данные, готовые для передачи в прибор

@@ -497,3 +497,9 @@ bool Form::IsEquals(const Form *form) const
 
     return true;
 }
+
+
+void Form::Save(uint16 d[Point::NUM_POINTS])
+{
+    std::memcpy(d, data, Point::NUM_POINTS * sizeof(uint16));
+}
