@@ -113,6 +113,8 @@ public:
 
     void SaveToFile(wxTextFile &file);
 
+    void LoadFromFile(wxTextFile &file);
+
 private:
 
 	/// Данные, готовые для передачи в прибор

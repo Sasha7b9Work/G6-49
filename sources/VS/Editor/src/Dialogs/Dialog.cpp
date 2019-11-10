@@ -158,7 +158,6 @@ void Dialog::OnControlEvent(wxCommandEvent &)
 }
 
 
-void Dialog::OnKeyDown(wxKeyEvent &event)
+void Dialog::OnKeyDown(wxKeyEvent &)
 {
-    std::cout << event.m_keyCode << std::endl;
 }

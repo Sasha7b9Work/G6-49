@@ -2,6 +2,9 @@
 #include "Canvas.h"
 #include "Form.h"
 #include "History.h"
+#pragma warning(push, 0)
+#include <wx/msgdlg.h>
+#pragma warning(pop)
 
 
 using namespace MyMath;
@@ -12,6 +15,14 @@ Form *TheForm = nullptr;
 
 static uint16 addData[Point::NUM_POINTS];
 static bool drawAdditionData = false;
+
+#define LABEL_FILE  wxT("Data file G6-49")
+
+
+/// Преобразует строку в два целых числа и возвращает true в качестве успеха
+static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *val2);
+/// Преобразует подстроку в целое число. Возвращает false в случае неудачи
+static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint endPos, uint16 *value, unsigned long max);
 
 
 bool operator==(const Point &left, const Point &right)
@@ -503,10 +514,78 @@ void Form::SaveToFile(wxTextFile &file)
 {
     file.Clear();
 
-    file.AddLine(wxT("Data file G6-49"));
+    file.AddLine(LABEL_FILE);
 
     for(int i = 0; i < Point::NUM_POINTS; i++)
     {
         file.AddLine(wxString::Format(wxT("%i %i"), i, data[i]));
     }
+}
+
+
+void Form::LoadFromFile(wxTextFile &file)
+{
+    wxString line = file.GetFirstLine();
+
+    if(line.Cmp(LABEL_FILE) != 0)
+    {
+        wxMessageBox(wxT("Файл повреждён либо не является файлом данных."));
+        return;
+    }
+
+    for(int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        line = file.GetNextLine();
+
+        uint16 index = 0;
+        uint16 d = 0;
+
+        if(!ConvertStringToTwoShort(line, &index, &d))
+        {
+            wxMessageBox(wxString::Format(wxT("Ошибка данных в строке %i"), file.GetCurrentLine()));
+            break;
+        }
+
+        data[i] = d;
+    }
+}
+
+
+static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *val2)
+{
+    int pos = line.Find(' ');
+
+    if(pos == -1)
+    {
+        return false;
+    }
+
+    if(!ConvertSubStringToShort(line, 0, static_cast<uint>(pos - 1), val1, Point::NUM_POINTS))
+    {
+        return false;
+    }
+
+    if(!ConvertSubStringToShort(line, static_cast<uint>(pos + 1), line.size() - 1, val2, Point::MAX))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+
+static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint endPos, uint16 *value, unsigned long max)
+{
+    wxString str = line.SubString(startPos, endPos);
+
+    unsigned long val = 0;
+
+    if(!str.ToULong(&val) || val > max)
+    {
+        return false;
+    }
+
+    *value = static_cast<uint16>(val);
+
+    return true;
 }

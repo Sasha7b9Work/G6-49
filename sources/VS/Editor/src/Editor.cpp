@@ -439,8 +439,16 @@ void Frame::OnOpenFile(wxCommandEvent &)
 
     if (openDialog.ShowModal() == wxID_OK)
     {
-        wxString path = openDialog.GetPath();
-        std::cout << path.c_str() << std::endl;
+        wxString fileName = openDialog.GetPath();
+
+        wxTextFile file(fileName);
+
+        if(file.Exists())
+        {
+            file.Open();
+
+            TheForm->LoadFromFile(file);
+        }
     }
 }
 
