@@ -499,7 +499,14 @@ bool Form::IsEquals(const Form *form) const
 }
 
 
-void Form::Save(uint16 d[Point::NUM_POINTS])
+void Form::SaveToFile(wxTextFile &file)
 {
-    std::memcpy(d, data, Point::NUM_POINTS * sizeof(uint16));
+    file.Clear();
+
+    file.AddLine(wxT("Data file G6-49"));
+
+    for(int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        file.AddLine(wxString::Format(wxT("%i %i"), i, data[i]));
+    }
 }

@@ -3,6 +3,9 @@
 #include "Canvas.h"
 #include "MyMath.h"
 #include <vector>
+#pragma warning(push, 0)
+#include <wx/textfile.h>
+#pragma warning(pop)
 
 /*
     Класс представления формы сигнала
@@ -108,7 +111,7 @@ public:
 
     bool IsEquals(const Form *form) const;
 
-    void Save(uint16 data[Point::NUM_POINTS]);
+    void SaveToFile(wxTextFile &file);
 
 private:
 

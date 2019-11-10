@@ -436,6 +436,7 @@ void Frame::OnRedo(wxCommandEvent&)
 void Frame::OnOpenFile(wxCommandEvent &)
 {
     wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, wxT("*.txt"), wxFD_OPEN);
+
     if (openDialog.ShowModal() == wxID_OK)
     {
         wxString path = openDialog.GetPath();
@@ -446,6 +447,7 @@ void Frame::OnOpenFile(wxCommandEvent &)
 void Frame::OnSaveFile(wxCommandEvent &)
 {
     wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.txt"), wxFD_SAVE);
+
     if (saveDialog.ShowModal() == wxID_OK)
     {
         wxString fileName = saveDialog.GetPath();
@@ -454,7 +456,7 @@ void Frame::OnSaveFile(wxCommandEvent &)
 
         if(file.Exists())
         {
-            wxMessageDialog message(this, wxT("Файл с таким именем уже существует. Вы уверены, что хотите перезаписать его?"), wxMessageBoxCaptionStr, wxOK | wxCANCEL | wxCENTRE);
+            wxMessageDialog message(this, wxT("Файл с таким именем уже существует. Перезаписать?"), wxMessageBoxCaptionStr, wxOK | wxCANCEL | wxCENTRE);
             if(message.ShowModal() == wxID_CANCEL)
             {
                 return;
@@ -463,18 +465,7 @@ void Frame::OnSaveFile(wxCommandEvent &)
         
         file.Create();
 
-        file.AddLine(wxT("Data file G6-49"));
-
-        uint16 data[Point::NUM_POINTS];
-
-        TheForm->Save(data);
-
-        for(int i = 0; i < Point::NUM_POINTS; i++)
-        {
-            wxString str = wxString::Format(wxT("%i %i"), i, data[i]);
-
-            file.AddLine(str);
-        }
+        TheForm->SaveToFile(file);
 
         file.Write();
 
