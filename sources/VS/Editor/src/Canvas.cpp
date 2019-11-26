@@ -2,7 +2,6 @@
 #include "Canvas.h"
 #include "Form.h"
 #pragma warning(push, 0)
-#include <SDL.h>
 #include <wx/wx.h>
 #pragma warning(pop)
 
@@ -12,8 +11,6 @@ Canvas *TheCanvas = nullptr;
 static bool needRedraw = true;
 
 static wxButton *button = nullptr;
-static SDL_Renderer *renderer = nullptr;
-static SDL_Texture *texture = nullptr;
 
 
 static void DrawGrid();
@@ -29,17 +26,6 @@ Canvas::Canvas(wxWindow *parent, int width, int height)
     sizer->Add(button);
 
     parent->SetSizer(sizer);
-
-    SDL_Window *window = SDL_CreateWindowFrom(button->GetHandle());
-
-    if (window == nullptr)
-    {
-        std::cout << "SDL_CreateWindowFrom() Error: " << SDL_GetError() << std::endl;
-    }
-    else
-    {
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    }
 }
 
 Canvas::~Canvas()

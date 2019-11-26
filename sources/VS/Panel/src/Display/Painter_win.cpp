@@ -17,7 +17,6 @@
 #include "Display/Text.h"
 
 #pragma warning(push, 0)
-#include <SDL.h>
 #include <wx/display.h>
 #pragma warning(pop)
 

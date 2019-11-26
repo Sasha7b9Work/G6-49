@@ -72,4 +72,12 @@ private:
     void InsertPoints(wxCommandEvent &);
 
     void OnKeyDown(wxKeyEvent &);
+
+    void OnMouseMove(wxMouseEvent &);
+
+    void OnMouseLeftDown(wxMouseEvent &);
+
+    void OnMouseRightDown(wxMouseEvent &);
+
+    void OnMouseUp(wxMouseEvent &);
 };

@@ -1,6 +1,5 @@
 #include "Editor.h"
 #pragma warning(push, 0)
-#include <SDL.h>
 #include <wx/wx.h>
 #include <wx/mstream.h>
 #include <wx/textfile.h>
@@ -55,10 +54,11 @@ enum
 };
 
 
-/// Курсор в виде руки
-static SDL_Cursor *cursorHand = nullptr;
 /// true, если ЛКМ находится в нажатом положении
 static bool mouseIsDown = false;
+
+static int mouseX = 0;
+static int mouseY = 0;
 
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
@@ -67,11 +67,6 @@ wxIMPLEMENT_APP_NO_MAIN(Application);
 int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "Russian");
-
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0U) //-V2517
-    {
-        std::cout << "SDL_Init Error:" << SDL_GetError() << std::endl;
-    }
 
     return wxEntry(argc, argv);
 }
@@ -85,8 +80,6 @@ bool Application::OnInit()
     }
 
     init();
-
-    cursorHand = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
 
     return true;
 }
@@ -127,6 +120,11 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_SIZE, &Frame::OnResize, this);
     Bind(wxEVT_PAINT, &Frame::OnRepaint, this);
     Bind(wxEVT_KEY_DOWN, &Frame::OnKeyDown, this);
+    Bind(wxEVT_MOTION, &Frame::OnMouseMove, this);
+    Bind(wxEVT_LEFT_DOWN, &Frame::OnMouseLeftDown, this);
+    Bind(wxEVT_RIGHT_DOWN, &Frame::OnMouseRightDown, this);
+    Bind(wxEVT_LEFT_UP, &Frame::OnMouseUp, this);
+    Bind(wxEVT_RIGHT_UP, &Frame::OnMouseUp, this);
 
     Show(true);
 
@@ -160,73 +158,55 @@ void Frame::OnRepaint(wxPaintEvent &)
 }
 
 
-void Frame::HandlerEvents()
+void Frame::OnMouseMove(wxMouseEvent &event)
 {
-    SDL_Event event;
+    event.GetPosition(&mouseX, &mouseY);
 
-    static int mouseX = 0;
-    static int mouseY = 0;
-
-    while (SDL_PollEvent(&event))
+    if(mouseIsDown)
     {
-        SDL_PumpEvents();
-        switch (event.type)
-        {
-        case SDL_MOUSEMOTION:
-            mouseX = event.motion.x;
-            mouseY = event.motion.y;
-
-            if (mouseIsDown)
-            {
-                TheForm->MovePoint(mouseX, mouseY);
-            }
-
-            TheCanvas->Redraw();
-
-            break;
-
-        case SDL_MOUSEBUTTONDOWN:
-            mouseX = event.button.x;
-            mouseY = event.button.y;
-                
-            if (event.button.button == 1)               // "1" соотвествует ЛКМ
-            {
-                if (TheForm->ExistPoint(mouseX, mouseY, false))
-                {
-                    mouseIsDown = true;
-                }
-                else
-                {
-                    TheForm->SetPoint(mouseX, mouseY);
-                }
-                
-            }
-            else if (event.button.button == 3)          // "3" соответствует ПКМ
-            {
-                mouseIsDown = false;
-
-                ShowContextMenu({ mouseX, mouseY}, TheForm->ExistPoint(mouseX, mouseY, false));
-            }
-            else
-            {
-                // остальные кнопки не обрабатывем
-            }
-            break;
-
-        case SDL_MOUSEBUTTONUP:
-            mouseIsDown = false;
-            History::Add(TheForm);
-            break;
-
-        default:
-            // ничего не делать
-            break;
-        }
+        TheForm->MovePoint(mouseX, mouseY);
     }
 
+    TheCanvas->Redraw();
+}
+
+void Frame::OnMouseLeftDown(wxMouseEvent &event)
+{
+    event.GetPosition(&mouseX, &mouseY);
+
+    if(TheForm->ExistPoint(mouseX, mouseY, false))
+    {
+        mouseIsDown = true;
+    }
+    else
+    {
+        TheForm->SetPoint(mouseX, mouseY);
+    }
+}
+
+
+void Frame::OnMouseRightDown(wxMouseEvent &event)
+{
+    event.GetPosition(&mouseX, &mouseY);
+
+    mouseIsDown = false;
+
+    ShowContextMenu({ mouseX, mouseY }, TheForm->ExistPoint(mouseX, mouseY, false));
+}
+
+
+void Frame::OnMouseUp(wxMouseEvent &)
+{
+    mouseIsDown = false;
+    History::Add(TheForm);
+}
+
+
+void Frame::HandlerEvents()
+{
     if (TheForm->ExistPoint(mouseX, mouseY, mouseIsDown))
     {
-        SDL_SetCursor(cursorHand);
+        //SDL_SetCursor(cursorHand);
     }
 }
 
