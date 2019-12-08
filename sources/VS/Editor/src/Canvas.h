@@ -9,6 +9,7 @@ class Canvas : public wxPanel
 {
 public:
     Canvas(wxWindow *parent);
+    ~Canvas();
     void Draw();
     void SetColor(const Color &color = Color::NUMBER);
     void SetPoint(int x, int y, const Color &color = Color::NUMBER);

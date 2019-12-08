@@ -22,6 +22,12 @@ Canvas::Canvas(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 }
 
 
+Canvas::~Canvas()
+{
+    delete bitmapButton;
+}
+
+
 void Canvas::OnPaint(wxPaintEvent &)
 {
     wxPaintDC dc(this);
