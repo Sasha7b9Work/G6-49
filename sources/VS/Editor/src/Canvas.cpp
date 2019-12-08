@@ -215,6 +215,8 @@ void Canvas::OnMouseUp(wxMouseEvent &event)
 
     mouseIsDown = false;
     History::Add(TheForm);
+
+    SetMouseCursor();
 }
 
 
