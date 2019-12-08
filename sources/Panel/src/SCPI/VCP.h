@@ -3,5 +3,5 @@
 
 namespace VCP
 {
-    void Send(const char *data);
+    void SendStringAsynch(const char *data);
 }

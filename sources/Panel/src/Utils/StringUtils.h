@@ -88,6 +88,10 @@ namespace SU
     char *ToUpper(void *_str, uint size);
 
     void ConcatenateSymbol(char *str, char symbol);
+
+    char *ToUpper(char *str);
+
+    char ToLower(char symbol);
 };
 
 bool String2Int(char *str, int *value);

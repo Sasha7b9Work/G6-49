@@ -852,3 +852,30 @@ char *SU::ToUpper(void *s, uint size)
 
     return str;
 }
+
+
+char *SU::ToUpper(char *str)
+{
+    return ToUpper(str, std::strlen(str));
+}
+
+
+char SU::ToLower(char symbol)
+{
+    uint8 s = static_cast<uint8>(symbol);
+
+    if(s >= 0x41 && s <= 0x5a)
+    {
+        return static_cast<char>(s + 0x20);
+    }
+    else if(s >= 0xc0 && s < 0xE0)
+    {
+        return static_cast<char>(s + 0x20);
+    }
+    else
+    {
+        // здесь ничего
+    }
+
+    return symbol;
+}

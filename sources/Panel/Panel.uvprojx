@@ -2142,9 +2142,14 @@
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
-              <FileName>SCPI.cpp</FileName>
+              <FileName>HeadSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\HeadSCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>HeadSCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+              <FilePath>.\src\SCPI\HeadSCPI.cpp</FilePath>
             </File>
             <File>
               <FileName>SCPI.h</FileName>
@@ -2152,44 +2157,19 @@
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
             <File>
-              <FileName>Parser.cpp</FileName>
+              <FileName>SCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\SCPI\Parser.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Parser.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\Parser.h</FilePath>
-            </File>
-            <File>
-              <FileName>Runner.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\Runner.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Runner.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\Runner.h</FilePath>
-            </File>
-            <File>
-              <FileName>Errors.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\Errors.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Errors.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\Errors.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\VCP.cpp</FilePath>
+              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
             </File>
             <File>
               <FileName>VCP.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\VCP.h</FilePath>
+            </File>
+            <File>
+              <FileName>VCP.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\VCP.cpp</FilePath>
             </File>
           </Files>
         </Group>

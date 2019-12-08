@@ -1,54 +1,95 @@
 #pragma once
-#include "Message.h"
 
+
+/*
+    Формат команды.
+    1. Команда всегда начинается с символа ':'.
+    2. Узлы разделяются символами ':'.
+    3. Пробелы допускаются только перед параметром в количестве 1 шт.
+    4. Команда должна заканчиваться символом с кодом 0x0D.
+*/
+
+class String;
+class SimpleMessage;
+
+typedef const char *(*FuncSCPI)(const char *);
+typedef bool (*FuncTestSCPI)();
+typedef void (*FuncHint)(String *);
+
+
+/// Структура, соотвествующая узлу дерева.
+struct StructSCPI
+{
+    const char *key;            /// Ключевое слово узла (морфема)
+
+    const StructSCPI *strct;    /// Если структура имеет тип Node, то здесь хранится массив потомков - StructSCPI *structs.
+
+    FuncSCPI  func;             /// Если структура имеет тип Leaf, то здесь хранится функция - обработчик листа типа FuncSCPI
+
+    FuncTestSCPI test;
+
+    const char *hint;
+
+    FuncHint funcHint;
+
+    bool IsEmpty() const { return key[0] == '\0'; };
+    bool IsNode() const { return strct != nullptr; };   /// Структура является "узлом" дерева, нужно идти дальше по дереву через structs
+    bool IsLeaf() const { return func != nullptr; };    /// Стурктура является "листом" дерева, нужно выполнять функцию func
+};
+
+
+#define SCPI_NODE(key, strct)                      {key, strct,   nullptr, nullptr, nullptr}
+#define SCPI_LEAF(key, func, test, hint, funcHint) {key, nullptr, func,    test,    hint,   funcHint}
+#define SCPI_EMPTY() {""}
+
+#define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) { SCPI::SendBadSymbols();
+#define SCPI_EPILOG(t)  return t; } return nullptr;
+
+#define SCPI_RUN_IF_END(func) if(end) { SCPI_PROLOG(end) func; SCPI_EPILOG(end) }
+
+#define SCPI_REQUEST(func)                          \
+    const char *end = SCPI::BeginWith(buffer, "?"); \
+    SCPI_RUN_IF_END(func)
+
+#define SCPI_PROCESS_ARRAY(names, func)             \
+    for(int i = 0; i < names[i][0] != 0; i++)       \
+    {                                               \
+        end = SCPI::BeginWith(buffer, names[i]);    \
+        SCPI_RUN_IF_END(func)                       \
+    }                                               \
+    return nullptr;
+
+#define SCPI_EXIT_ERROR()   LOG_WRITE("Ошибка теста SCPI %s:%d", __FILE__, __LINE__); return false;
+
+#define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), std::strlen(string.c_str())); SCPI::Update()
 
 
 namespace SCPI
 {
-    struct Result
+    /// Символ-разделить морфем команды
+    const char SEPARATOR = ':';
+
+    const int SIZE_SEPARATOR = 1;
+
+    void AppendNewData(const char *buffer, uint length);
+
+    void Update();
+    /// Возвращает true, если указатель указывает на завершающую последовательность
+    bool IsLineEnding(const char **bufer);
+    /// Послать ответ
+    void SendAnswer(const char *message);
+    /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
+    /// Иначе возвращает nullptr.
+    const char *BeginWith(const char *buffer, const char *word);
+    /// Послать сообщение об ошибочных символах, если таковые имеются
+    void SendBadSymbols();
+
+    bool Test();
+
+    void ProcessHint(String *message, const char *const names[]);
+
+    namespace Handler
     {
-        enum E
-        {
-            Done,               ///< Успешно выполнено
-            IncompleteCommand,  ///< Команда не принята полностью
-            InvalidParameter,   ///< Неправильный параметр
-            Count
-        };
-    };
-
-    void Init();
-
-
-    class Handler
-    {
-    public:
-        static bool Processing(SimpleMessage *msg);
-    };
-
-
-    struct Buffer
-    {
-        /// Очистка буфера - подготовка к работе
-        static void Clear();
-        /// Добавляет данные из сообщения в буфер
-        static void AddData(SimpleMessage *msg);
-        /// Возвращает байт в позиции i
-        static uint8 GetByte(uint i);
-
-        static uint Size() { return static_cast<uint>(used); };
-        /// Удалить неправльные символы из начала буфера
-        static void RemoveBadSymbols();
-
-        static void MarkFirstSymbolAsBad() { data[0] = '\0'; };
-
-    private:
-        static void AddByte(uint8 byte);
-        /// Сдвинуть содержимое буфера на один байт влево. Самый первый байт при этом теряется
-        static bool ShiftToLeft();
-
-        static const int SIZE_BUFFER = 1024;
-        static uint8 data[SIZE_BUFFER]; ///< Здесь принятые данные хранятся
-        static int   used;              ///< Количество готовых к обработке байт - первый обработываемый байт имеет индекс 0, последний = used - 1
-        static int   start;             ///< Индекс первого байта обрабатываемого шага. Если первый байт команды всегда имеет индекс 0, то 
-    };
+        bool Processing(SimpleMessage *message);
+    }
 };

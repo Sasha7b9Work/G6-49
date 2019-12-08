@@ -10,14 +10,9 @@
 
 
 
-void VCP::Send(const char *data)
+void VCP::SendStringAsynch(const char *data)
 {
-    uint size = std::strlen(data);
+    char *mes = const_cast<char *>(data);
 
-    Buffer buffer(size + 2);
-    buffer.Data()[0] = ':';
-    std::memcpy(buffer.Data() + 1, data, size);
-    buffer.Data()[size + 1] = 0x0d;
-
-    Message::SCPI::Data(buffer.Data(), buffer.Size()).Transmit();
+    Message::SCPI::Data(reinterpret_cast<uint8 *>(mes), std::strlen(data)).Transmit();
 }

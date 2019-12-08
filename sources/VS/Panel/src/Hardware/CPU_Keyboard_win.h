@@ -53,6 +53,7 @@ void Frame::OnKeyDown(wxCommandEvent &event)
 {
     KeyEvent e(static_cast<KeyEvent::E>(event.GetId()), KeyEvent::Action::Down);
     AddKeyboardEvent(e);
+    event.Skip();
 }
 
 
@@ -60,4 +61,5 @@ void Frame::OnKeyUp(wxCommandEvent &event) //-V524
 {
     KeyEvent e(static_cast<KeyEvent::E>(event.GetId()), KeyEvent::Action::Up);
     AddKeyboardEvent(e);
+    event.Skip();
 }

@@ -50,8 +50,6 @@ int main()
 
     Menu::Init();
 
-    SCPI::Init();
-
     while (1)
     {
         CPU::Update();

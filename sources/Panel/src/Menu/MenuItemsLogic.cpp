@@ -600,7 +600,7 @@ pString ChoiceParameter::NameCurrentSubItem() const
 String Item::FullPath()
 {
     String title = GetTitle();
-    const char *titles[5] = {title.CString(), 0, 0, 0, 0};
+    const char *titles[5] = {title.c_str(), 0, 0, 0, 0};
     int pointer = 1;
 
     Page *parent = Keeper();

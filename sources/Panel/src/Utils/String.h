@@ -2,42 +2,51 @@
 #include "Display/Colors.h"
 
 
+struct TypeConversionString
+{
+    enum E
+    {
+        None,           // Преобразование строки не производится
+        FirstUpper      // Первый символ - в вернем регистре, остальные - в нижнем
+    };
+};
 
-class String
+
+class String // -V690
 {
 public:
     explicit String();
-    /// Резервиврует для строки size символов
-    explicit String(uint size);
              String(const String &);
     explicit String(char symbol);
     explicit String(const char *format, ...);
     ~String();
 
-    void From(const char *format, ...);
+    void Set(TypeConversionString::E conv, const char *format, ...);
 
-    void From(const String &s);
-
-    char *CString() const;
+    char *c_str() const;
     /// Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
-    /// Возвращает true, если строка ничего не содержит (не равно строке нулевой длины)
-    bool IsEmpty() const { return buffer == 0; };
-    /// Освободить память, занимаемую строкой
-    void Release();
 
-    String &operator=(const String &s)
-    {
-        From(s);
-        return *this;
-    }
+    void Free();
 
-    char &operator[] (int i) { return buffer[i]; };
+    void Append(const char *str);
+
+    void Append(const char *str, uint numSymbols);
+
+    void Append(char symbol);
+    /// Удаляет numSymbols из начала строки
+    void RemoveFromBegin(uint numSymbols);
+
+    void RemoveFromEnd();
+
+    uint Size() const;
+
+    char &operator[](uint i);
 
 private:
 
     bool Allocate(uint size);
-    void Free();
+    void Conversion(TypeConversionString::E conv);
 
     char *buffer;
 };

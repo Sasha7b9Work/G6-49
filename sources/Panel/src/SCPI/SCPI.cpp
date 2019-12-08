@@ -1,99 +1,283 @@
 #include "defines.h"
-#include "SCPI.h"
-#include "Command.h"
-#include "Display/Console.h"
-#include "SCPI/Parser.h"
-#include "SCPI/Runner.h"
-#include <cstdlib>
+#include "SCPI/HeadSCPI.h"
+#include "SCPI/SCPI.h"
+#include "SCPI/VCP.h"
+#include "Utils/Buffer.h"
+#include "Utils/StringUtils.h"
+#include <cstring>
 
 
+/// Рекурсивная функция обработки массива структур StructSCPI.
+/// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
+/// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
+static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
+/// Рекурсивная функция тестирования
+static bool ProcessTest(const StructSCPI strct[]); //-V2504
+/// Обработка узла дерева node
+static const char *ProcessNode(const char *begin, const StructSCPI *node);
+/// Обработка листа node
+static const char *ProcessLeaf(const char *begin, const StructSCPI *node);
+/// Возвращает true, если символ является началом комнады - разделителем или '*'
+static bool IsBeginCommand(const char &symbol);
+/// Удаляет неправильные символы из начала строки
+static void RemoveBadSymbolsFromBegin();
+/// Удалить последовательность разделителей из начала строки до последнего имеющегося
+static bool RemoveSeparatorsSequenceFromBegin();
+/// Удалить все символы до первого разделителя
+static bool RemoveSymbolsBeforeSeparator();
 
-uint8        SCPI::Buffer::data[SIZE_BUFFER];
-int          SCPI::Buffer::used = 0;
+static String data;
+
+static String badSymbols;
 
 
-void SCPI::Init()
+void SCPI::AppendNewData(const char *buffer, uint size)
 {
-    Buffer::Clear();
+    data.Append(buffer, size);
+
+    SU::ToUpper(data.c_str());
+
+    RemoveBadSymbolsFromBegin();
+
+    if (data.Size() == 0)
+    {
+        SendBadSymbols();
+    }
 }
 
 
-bool SCPI::Handler::Processing(SimpleMessage *msg)
+void SCPI::Update()
 {
-    msg->ResetPointer();
+    RemoveBadSymbolsFromBegin();
 
-    ::Command command(msg->TakeByte());
-
-    if (command == ::Command::SCPI_Data)
+    if(data.Size() == 0)
     {
-        Buffer::AddData(msg);
-
-        do 
-        {
-            Parser::Parse();
-        } while (Runner::Execute());
+        SendBadSymbols();
+        return;
     }
 
-    return false;
+    const char *end = Process(data.c_str(), head);
+
+    if(end)
+    {
+        data.RemoveFromBegin(static_cast<uint>(end - data.c_str()));
+    }
 }
 
 
-void SCPI::Buffer::RemoveBadSymbols()
+static const char *Process(const char *buffer, const StructSCPI strct[]) //-V2504
 {
-    while (data[0] != ':' && data[0] != '*')
+    while (!strct->IsEmpty())
     {
-        if (!ShiftToLeft())
+        const char *end = SCPI::BeginWith(buffer, strct->key);
+
+        if (end)
+        {
+            if (strct->IsNode())
+            {
+                return ProcessNode(end, strct);
+            }
+            else if (strct->IsLeaf())
+            {
+                return ProcessLeaf(end, strct);
+            }
+            else
+            {
+                LOG_WRITE("Сюда мы попасть ну никак не можем");
+            }
+        }
+
+        strct++;
+    }
+
+    badSymbols.Append(*buffer);         // Перебрали все ключи в strct и не нашли ни одного соответствия. Поэтому помещаем начальный разделитель в бракованные символыа
+
+    return buffer + 1;
+}
+
+
+const char *SCPI::BeginWith(const char *buffer, const char *word)
+{
+    while (*word)
+    {
+        if (*buffer == '\0')
+        {
+            return nullptr;
+        }
+
+        if (*word == *buffer)
+        {
+            ++word;
+            ++buffer;
+        }
+        else
         {
             break;
         }
     }
+
+    return (*word == '\0') ? buffer : nullptr;
 }
 
 
-bool SCPI::Buffer::ShiftToLeft()
+static const char *ProcessNode(const char *begin, const StructSCPI *node)
 {
-    if (used == 0)
+    return Process(begin, node->strct);
+}
+
+
+static const char *ProcessLeaf(const char *begin, const StructSCPI *node)
+{
+    if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
-        return false;
+        return nullptr;
     }
 
-    std::memmove(data, data + 1, SIZE_BUFFER - 1);
-    used--;
+    const char *result = node->func(begin);
+
+    if (result)
+    {
+        return result;
+    }
+
+    badSymbols.Append(*begin);
+
+    return begin + 1;
+}
+
+
+bool SCPI::IsLineEnding(const char **buffer)
+{
+    bool result = (**buffer == 0x0D);
+
+    if (result)
+    {
+        *(*buffer)++; //-V532
+    }
+
+    return result;
+}
+
+
+void SCPI::SendBadSymbols()
+{
+    if (badSymbols.Size())
+    {
+        String message("!!! ERROR !!! Invalid sequency : %s", badSymbols.c_str());
+        SCPI::SendAnswer(message.c_str());
+        badSymbols.Free();
+    }
+}
+
+
+static void RemoveBadSymbolsFromBegin()
+{
+    while (RemoveSymbolsBeforeSeparator() || RemoveSeparatorsSequenceFromBegin())  { }
+}
+
+
+static bool RemoveSymbolsBeforeSeparator()
+{
+    bool result = false;
+
+    while (data.Size() && !IsBeginCommand(data[0]))
+    {
+        badSymbols.Append(data[0]);
+        data.RemoveFromBegin(1);
+        result = true;
+    }
+
+    return result;
+}
+
+
+static bool RemoveSeparatorsSequenceFromBegin()
+{
+    bool result = false;
+
+    while (data.Size() > 1 && IsBeginCommand(data[0]) && IsBeginCommand(data[1]))
+    {
+        badSymbols.Append(data[0]);
+        data.RemoveFromBegin(1);
+        result = true;
+    }
+
+    return result;
+}
+
+
+void SCPI::SendAnswer(const char *message)
+{
+    if(message[std::strlen(message) - 1] != 0x0D)
+    {
+        String msg(message);
+        msg.Append(0x0D);
+        VCP::SendStringAsynch(msg.c_str());
+    }
+    else
+    {
+        VCP::SendStringAsynch(message);
+    }
+}
+
+
+static bool IsBeginCommand(const char &symbol)
+{
+    return (symbol == SCPI::SEPARATOR) || (symbol == '*');
+}
+
+
+bool SCPI::Test()
+{
+    return ProcessTest(head);
+}
+
+
+static bool ProcessTest(const StructSCPI strct[]) //-V2504
+{
+    while(!strct->IsEmpty())
+    {
+        if(strct->IsNode())
+        {
+            if(!ProcessTest(strct->strct))
+            {
+                return false;
+            }
+        }
+        else if(strct->IsLeaf())
+        {
+            if(!strct->test())
+            {
+                return false;
+            }
+        }
+        else
+        {
+            // здесь ничего не нужно делать
+        }
+
+        strct++;
+    }
 
     return true;
 }
 
 
-void SCPI::Buffer::AddData(SimpleMessage *msg)
+void SCPI::ProcessHint(String *message, const char *const names[])
 {
-    Buffer::RemoveBadSymbols();                     // Сначала удаляем неиспользуемые символы из начала строки
-
-    uint length = msg->TakeWord();
-
-    for (uint i = 0; i < length; i++)
+    message->Append(" {");
+    for(int i = 0; i < names[i][0] != 0; i++)
     {
-        AddByte(msg->TakeByte());
+        message->Append(names[i]);
+        message->Append(" |");
     }
+    message->RemoveFromEnd();
+    message->Append('}');
+    SCPI::SendAnswer(message->c_str());
 }
 
 
-void SCPI::Buffer::AddByte(uint8 byte)
+bool SCPI::Handler::Processing(SimpleMessage *)
 {
-    data[used++] = byte;
-    if (used == SIZE_BUFFER)
-    {
-        ShiftToLeft();
-    }
-}
-
-
-void SCPI::Buffer::Clear()
-{
-    used = 0;
-}
-
-
-uint8 SCPI::Buffer::GetByte(uint i)
-{
-    return data[i];
+    return true;
 }
