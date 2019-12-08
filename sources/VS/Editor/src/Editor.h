@@ -19,7 +19,6 @@ public:
 
     void OnQuit(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);
-    void OnResize(wxSizeEvent &);
     void OnRepaint(wxPaintEvent &);
 
 private:

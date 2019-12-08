@@ -118,7 +118,6 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU, &Frame::CreateExponent, this, CREATE_EXPONENT);
     Bind(wxEVT_MENU, &Frame::InsertPoints, this, INSERT_POINTS);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
-    Bind(wxEVT_SIZE, &Frame::OnResize, this);
     Bind(wxEVT_PAINT, &Frame::OnRepaint, this);
     Bind(wxEVT_KEY_DOWN, &Frame::OnKeyDown, this);
     Bind(wxEVT_MOTION, &Frame::OnMouseMove, this);
@@ -144,12 +143,6 @@ void Frame::OnTimer(wxTimerEvent &)
 {
     HandlerEvents();
     update();
-}
-
-
-void Frame::OnResize(wxSizeEvent &)
-{
-    TheCanvas->Resize(this->GetClientSize());
 }
 
 
