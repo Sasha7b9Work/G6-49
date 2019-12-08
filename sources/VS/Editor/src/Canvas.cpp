@@ -209,7 +209,7 @@ void Canvas::OnMouseRightDown(wxMouseEvent &event) //-V2009
 }
 
 
-void Canvas::OnMouseUp(wxMouseEvent &event)
+void Canvas::OnMouseUp(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 

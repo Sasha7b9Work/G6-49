@@ -1,16 +1,12 @@
 #include "stdafx.h"
 #include "stm32f4xx_hal.h"
-#ifdef USE_SDL2
-#define SDL_DEPRECATED
-#include <SDL_timer.h>
-#endif
-
+#include <ctime>
 
 
 uint32_t HAL_GetTick()
 {
 #ifdef USE_SDL2
-    return SDL_GetTicks();
+    return static_cast<uint>(clock());
 #else
     return 0;
 #endif

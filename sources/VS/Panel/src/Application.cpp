@@ -34,11 +34,6 @@ int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "Russian");
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0U) //-V2517
-    {
-        std::cout << "SDL_Init Error:" << SDL_GetError() << std::endl;
-    }
-
     return wxEntry(argc, argv);
 }
 
@@ -96,21 +91,6 @@ void Frame::OnTimer(wxTimerEvent&)
 
 void Frame::HandlerEvents()
 {
-    SDL_Event event;
-
-    while (SDL_PollEvent(&event))
-    {
-        SDL_PumpEvents();
-        switch (event.type)
-        {
-        case SDL_KEYDOWN:
-            if (event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                Close(true);
-            }
-            break;
-        }
-    }
 }
 
 
@@ -121,16 +101,16 @@ void Frame::DrawFPS()
 
     count++;
 
-    if (SDL_GetTicks() - prevTime > 1000)
+    if (TIME_MS - prevTime > 1000)
     {
-        float fps = static_cast<float>(count) / (SDL_GetTicks() - prevTime) * 1000.0F;
+        float fps = static_cast<float>(count) / (TIME_MS - prevTime) * 1000.0F;
 
         char buffer[100];
         sprintf(buffer, "fps %f", fps);
 
         SetStatusText(buffer);
 
-        prevTime = SDL_GetTicks();
+        prevTime = TIME_MS;
         count = 0;
     }
 }

@@ -38,23 +38,18 @@
 #include "Settings/Settings.h"
 
 
-
-SDL_Renderer *renderer = nullptr;
-static SDL_Window *window = nullptr;
-static SDL_Texture *texture = nullptr;
+/// Здесь будем рисовать
+static wxBitmap bitmapButton(320, 240);
+/// Контекст рисования
+wxMemoryDC memDC;
 
 static wxButton *buttons[KeyEvent::Count];
-
-/// Здесь хранятся указатели на кнопки
-//static wxButton *buttons[Key::Number] = { nullptr };
 
 /// Цвета
 static uint colors[256];
 
-
-
 /// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
-static HANDLE CreateFrame();
+static void CreateFrame();
 /// Установить оптимальную позицию для окна приложения
 static void SetSizeAndPosition(Frame *frame);
 /// Получить разрешение максимального имеющегося в системе монитора
@@ -65,6 +60,29 @@ static void CreateButtons(Frame *frame);
 static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, const wxSize &size);
 
 
+class Screen : public wxPanel
+{
+public:
+    Screen(wxWindow *parent) : wxPanel(parent)
+    {
+        SetDoubleBuffered(true);
+        Bind(wxEVT_PAINT, &Screen::OnPaint, this);
+    }
+
+    void OnPaint(wxPaintEvent &)
+    {
+        wxPaintDC dc(this);
+        wxImage image = bitmapButton.ConvertToImage();
+        image = image.Rescale(640, 480);
+        wxBitmap bitmap(image);
+        dc.DrawBitmap(bitmap, 0, 0);
+    }
+};
+
+
+static Screen *screen = nullptr;
+
+
 
 void Display::Init()
 {
@@ -72,45 +90,23 @@ void Display::Init()
 
     Font::SetType(Font::Type::_8);
 
-    HANDLE handle = CreateFrame();
-
-    window = SDL_CreateWindowFrom(handle);
-
-    if (window == nullptr)
-    {
-        std::cout << "SDL_CreateWindowFrom() Error: " << SDL_GetError() << std::endl;
-    }
-    else
-    {
-        std::cout << "Create SDL window is ok" << std::endl;
-    }
-
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    CreateFrame();
 }
 
 
 void Painter::BeginScene(Color color)
 {
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_RENDERER_ACCELERATED, 320, 240);
-
-    SDL_SetRenderTarget(renderer, texture);
-    Painter::SetColor(color);
-    SDL_RenderClear(renderer);
+    memDC.SelectObject(bitmapButton);
+    wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
+    memDC.SetBrush(brush);
+    FillRegion(0, 0, 320, 240, color);
 }
 
 
 void Painter::EndScene()
 {
-    SDL_SetRenderTarget(renderer, NULL);
-
-    SDL_Rect rect = {0, 0, 320, 240};
-
-    if (texture)
-    {
-        SDL_RenderCopy(renderer, texture, NULL, &rect); //-V2001
-    }
-
-    SDL_RenderPresent(renderer);
+    memDC.SelectObject(wxNullBitmap);
+    screen->Refresh();
 }
 
 
@@ -148,7 +144,7 @@ static wxRect GetMaxDisplay()
 }
 
 
-static HANDLE CreateFrame()
+static void CreateFrame()
 {
     Frame *frame = new Frame("");
 
@@ -156,10 +152,9 @@ static HANDLE CreateFrame()
 
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxButton *button = new wxButton(frame, wxID_ANY, "", {10, 10}, {320, 240});
-    button->SetMaxSize({320, 240});
+    screen = new Screen(frame);
 
-    sizer->Add(button);
+    sizer->Add(screen);
 
     frame->SetSizer(sizer);
 
@@ -167,7 +162,6 @@ static HANDLE CreateFrame()
 
     frame->Show(true);
 
-    return button->GetHandle();
 }
 
 
@@ -222,26 +216,33 @@ static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, cons
 void Painter::FillRegion(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
-    SDL_Rect rect = { x, y, width + 1, height + 1 };
-    SDL_RenderFillRect(renderer, &rect);
+
+    wxBrush brush = memDC.GetBrush();
+    wxPen pen = memDC.GetPen();
+    memDC.SetBrush(wxBrush(pen.GetColour()));
+    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
+    memDC.SetBrush(brush);
 }
 
 
 void Painter::SetPoint(int x, int y)
 {
-    SDL_RenderDrawPoint(renderer, x, y);
+    memDC.DrawPoint({ x, y });
 }
 
 
-void Painter::SetColor(Color color)
+void Painter::SetColor(Color _color)
 {
-    if (color != Color::NUMBER)
+    if (_color != Color::NUMBER)
     {
-        uint value = COLOR(color.value);
-        uint8 blue = static_cast<uint8>(value);
-        uint8 green = static_cast<uint8>(value >> 8);
-        uint8 red = static_cast<uint8>(value >> 16);
-        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
+        uint color = COLOR(_color.value);
+        uint8 b = static_cast<uint8>(color);
+        uint8 g = static_cast<uint8>(color >> 8);
+        uint8 r = static_cast<uint8>(color >> 16);
+
+        wxColour colorDraw = wxColour(r, g, b);
+
+        memDC.SetPen(wxPen(colorDraw));
     }
 }
 
@@ -249,29 +250,28 @@ void Painter::SetColor(Color color)
 void Painter::DrawRectangle(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
-    SDL_Rect rect = { x, y, width + 1, height + 1 };
-    SDL_RenderDrawRect(renderer, &rect);
+    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
 }
 
 
 void Painter::DrawVLine(int x, int y0, int y1, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
-    SDL_RenderDrawLine(renderer, x, y0, x, y1);
+    memDC.DrawLine({ x, y0 }, { x, y1 });
 }
 
 
 void Painter::DrawHLine(int y, int x0, int x1, Color color /* = Color::NUMBER */)
 {
     SetColor(color);
-    SDL_RenderDrawLine(renderer, x0, y, x1, y);
+    memDC.DrawLine({ x0, y }, { x1, y });
 }
 
 
 void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 {
     SetColor(color);
-    SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
+    memDC.DrawLine({ x0, y0 }, { x1, y1 });
 }
 
 
