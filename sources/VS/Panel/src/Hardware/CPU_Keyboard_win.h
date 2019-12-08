@@ -1,32 +1,63 @@
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static KeyEvent commands[10];
+static int pointer = 0;
+
+
+static void AddKeyboardEvent(KeyEvent &event)
+{
+    commands[pointer++] = event;
+}
+
+
+
+void CPU::Keyboard::Init()
+{
+
+}
+
+
 void CPU::Keyboard::Draw()
 {
 
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 bool CPU::Keyboard::BufferIsEmpty()
 {
-    return true;
+    return pointer == 0;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 KeyEvent CPU::Keyboard::GetNextControl()
 {
-    KeyEvent control;
-    return control;
+    KeyEvent retValue;
+
+    if(BufferIsEmpty())
+    {
+        retValue.value = KeyEvent::None;
+    }
+    else
+    {
+        retValue = commands[0];
+        for(int i = 1; i < pointer; i++)
+        {
+            commands[i - 1] = commands[i];
+        }
+        --pointer;
+    }
+
+    return retValue;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Frame::OnDown(wxCommandEvent &event)
+
+void Frame::OnKeyDown(wxCommandEvent &event)
 {
-    event.Skip();
-
-
+    KeyEvent e(static_cast<KeyEvent::E>(event.GetId()), KeyEvent::Action::Down);
+    AddKeyboardEvent(e);
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void Frame::OnUp(wxCommandEvent &event) //-V524
+
+void Frame::OnKeyUp(wxCommandEvent &event) //-V524
 {
-    event.Skip();
+    KeyEvent e(static_cast<KeyEvent::E>(event.GetId()), KeyEvent::Action::Up);
+    AddKeyboardEvent(e);
 }

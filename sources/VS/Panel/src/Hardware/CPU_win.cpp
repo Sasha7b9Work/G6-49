@@ -11,7 +11,7 @@ float CPU::GetFPS()
 
 void CPU::Init()
 {
-
+    Keyboard::Init();
 }
 
 
