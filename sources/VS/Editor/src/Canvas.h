@@ -1,18 +1,16 @@
 #pragma once
 #pragma warning(push, 0)
-#include <wx/display.h>
+#include <wx/wx.h>
 #pragma warning(pop)
 #include "Colors.h"
 
 
-class Canvas
+class Canvas : public wxPanel
 {
 public:
-    Canvas(wxWindow *parent, int width, int height);
-    ~Canvas();
+    Canvas(wxWindow *parent);
     void Draw();
     void Resize(const wxSize &size);
-    const wxSize GetSize() const;
     void SetColor(const Color &color = Color::NUMBER);
     void SetPoint(int x, int y, const Color &color = Color::NUMBER);
     void SetPoint(int x, int y, int size, const Color &color = Color::NUMBER);
@@ -22,6 +20,8 @@ public:
 private:
     void BeginScene();
     void EndScene();
+    void DrawGrid();
+    void OnPaint(wxPaintEvent &);
 };
 
 

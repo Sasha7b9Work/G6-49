@@ -1,47 +1,54 @@
 #include "defines.h"
 #include "Canvas.h"
 #include "Form.h"
-#pragma warning(push, 0)
-#include <wx/wx.h>
-#pragma warning(pop)
+#include <ctime>
 
 
 Canvas *TheCanvas = nullptr;
 
 static bool needRedraw = true;
+/// Эту кнопку используем для рисования
+static wxBitmap bitmapButton(640, 480);
+/// Контекст рисования
+static wxMemoryDC memDC;
 
-static wxButton *button = nullptr;
 
-
-static void DrawGrid();
-
-
-Canvas::Canvas(wxWindow *parent, int width, int height)
+Canvas::Canvas(wxWindow *parent) : wxPanel(parent)
 {
-    button = new wxButton(parent, wxID_ANY, "", wxDefaultPosition, { width, height } );
-    Resize({ width, height });
+    SetMinSize({ 640, 480 });
+    SetDoubleBuffered(true);
+    Bind(wxEVT_PAINT, &Canvas::OnPaint, this);
 
-    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    //button = new wxButton(parent, wxID_ANY, "", wxDefaultPosition, { width, height } );
+    //Resize({ width, height });
+    //
+    //wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    //
+    //sizer->Add(button);
+    //
+    //parent->SetSizer(sizer);
 
-    sizer->Add(button);
-
-    parent->SetSizer(sizer);
 }
 
-Canvas::~Canvas()
+
+void Canvas::OnPaint(wxPaintEvent &)
 {
-    delete button;
+    wxPaintDC dc(this);
+    wxImage image = bitmapButton.ConvertToImage();
+    image = image.Rescale(GetSize().x, GetSize().y);
+    wxBitmap bitmap(image);
+    dc.DrawBitmap(bitmap, 0, 0);
 }
 
 
-void Canvas::Resize(const wxSize &size)
+void Canvas::Resize(const wxSize &)
 {
-    if (button)
-    {
-        button->SetMaxSize(size);
-        button->SetSize(size);
-        button->SetMinSize(size);
-    }
+    //if (button)
+    //{
+    //    button->SetMaxSize(size);
+    //    button->SetSize(size);
+    //    button->SetMinSize(size);
+    //}
 
     needRedraw = true;
 }
@@ -49,22 +56,27 @@ void Canvas::Resize(const wxSize &size)
 
 void Canvas::BeginScene()
 {
-    wxSize size = button->GetSize();
+    //wxSize size = button->GetSize();
+    //
+    //texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_RENDERER_ACCELERATED, size.x, size.y);
+    //
+    //SDL_SetRenderTarget(renderer, texture);
+    //SetColor(Color::BLACK);
+    //SDL_RenderClear(renderer);
+    //
+    //DrawGrid();
 
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_RENDERER_ACCELERATED, size.x, size.y);
-    
-    SDL_SetRenderTarget(renderer, texture);
-    SetColor(Color::BLACK);
-    SDL_RenderClear(renderer);
-
-    DrawGrid();
+    memDC.SelectObject(bitmapButton);
+    wxBrush brush({ 0, 0, 0 }, wxBRUSHSTYLE_TRANSPARENT);
+    memDC.SetBrush(brush);
+    memDC.Clear();
 }
 
 
 void Canvas::SetPoint(int x, int y, const Color &color)
 {
     SetColor(color);
-    SDL_RenderDrawPoint(renderer, x, y);
+    memDC.DrawPoint({ x, y });
 }
 
 
@@ -72,9 +84,10 @@ void Canvas::SetPoint(int x, int y, int size, const Color &color)
 {
     SetColor(color);
 
-    SDL_Rect rect = { x - size / 2, y - size / 2, size, size };
+    x -= size / 2;
+    y -= size / 2;
 
-    SDL_RenderFillRect(renderer, &rect);
+    memDC.DrawRectangle({ x, y, size, size });
 }
 
 
@@ -82,15 +95,15 @@ void Canvas::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
 {
     SetColor(color);
 
-    SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
+    memDC.DrawLine(x0, y0, x1, y1);
 }
 
 
 void Canvas::Draw()
 {
-    static uint time = 0;
+    static clock_t time = 0;
 
-    if(SDL_GetTicks() - time > 1000)
+    if(clock() - time > 1000)
     {
         needRedraw = true;
     }
@@ -105,25 +118,28 @@ void Canvas::Draw()
 
         needRedraw = false;
 
-        time = SDL_GetTicks();
+        time = clock();
     }
 }
 
 
 void Canvas::EndScene()
 {
-    SDL_SetRenderTarget(renderer, NULL);
+    memDC.SelectObject(wxNullBitmap);
+    Refresh();
 
-    wxSize size = button->GetSize();
-
-    SDL_Rect rect = { 0, 0, size.x, size.y };
-
-    if (texture)
-    {
-        SDL_RenderCopy(renderer, texture, NULL, &rect);
-    }
-
-    SDL_RenderPresent(renderer);
+    //SDL_SetRenderTarget(renderer, NULL);
+    //
+    //wxSize size = button->GetSize();
+    //
+    //SDL_Rect rect = { 0, 0, size.x, size.y };
+    //
+    //if (texture)
+    //{
+    //    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    //}
+    //
+    //SDL_RenderPresent(renderer);
 }
 
 
@@ -132,24 +148,21 @@ void Canvas::SetColor(const Color &color)
     if (color != Color::NUMBER)
     {
         uint value = COLOR(color.value);
-        uint8 blue = static_cast<uint8>(value);
-        uint8 green = static_cast<uint8>(value >> 8);
-        uint8 red = static_cast<uint8>(value >> 16);
-        SDL_SetRenderDrawColor(renderer, red, green, blue, 0x00);
+        uint8 b = static_cast<uint8>(value);
+        uint8 g = static_cast<uint8>(value >> 8);
+        uint8 r = static_cast<uint8>(value >> 16);
+
+        wxColour colorDraw = wxColour(r, g, b);
+
+        memDC.SetPen(wxPen(colorDraw));
     }
 }
 
 
-const wxSize Canvas::GetSize() const
+void Canvas::DrawGrid()
 {
-    return button->GetSize();
-}
-
-
-static void DrawGrid()
-{
-    int width = TheCanvas->GetSize().x;
-    int height = TheCanvas->GetSize().y;
+    int width = GetSize().x;
+    int height = GetSize().y;
 
     float stepX = width / 20.0F;
     float stepY = height / 20.0F;
@@ -159,15 +172,15 @@ static void DrawGrid()
 
     for (int i = 0; i < 19; i++)
     {
-        TheCanvas->DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::DARK_GREEN_1F);
-        TheCanvas->DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
+        DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::DARK_GREEN_1F);
+        DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
 
         x += stepX;
         y += stepY;
     }
 
-    TheCanvas->DrawLine(width / 2, 0, width / 2, height, Color::DARK_GREEN_3F);
-    TheCanvas->DrawLine(0, height / 2, width, height / 2);
+    DrawLine(width / 2, 0, width / 2, height, Color::DARK_GREEN_3F);
+    DrawLine(0, height / 2, width, height / 2);
 }
 
 

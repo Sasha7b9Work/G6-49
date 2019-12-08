@@ -1,6 +1,7 @@
 #include "Editor.h"
 #pragma warning(push, 0)
 #include <wx/wx.h>
+#include <wx/display.h>
 #include <wx/mstream.h>
 #include <wx/textfile.h>
 #pragma warning(pop)

@@ -8,7 +8,7 @@ void init()
 {
     Frame *frame = new Frame("");
 
-    TheCanvas = new Canvas(frame, 640, 480);
+    TheCanvas = new Canvas(frame);
 
     TheForm = new Form();
 
