@@ -39,9 +39,9 @@
 
 
 /// Здесь будем рисовать
-static wxBitmap bitmapButton(320, 240);
+static wxBitmap bitmap(320, 240);
 /// Контекст рисования
-wxMemoryDC memDC;
+static wxMemoryDC memDC;
 
 static wxButton *buttons[KeyEvent::Count];
 
@@ -63,8 +63,9 @@ static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, cons
 class Screen : public wxPanel
 {
 public:
-    Screen(wxWindow *parent) : wxPanel(parent)
+    Screen(wxWindow *parent) : wxPanel(parent, 320)
     {
+        SetMinSize({ 320, 240 });
         SetDoubleBuffered(true);
         Bind(wxEVT_PAINT, &Screen::OnPaint, this);
     }
@@ -72,9 +73,6 @@ public:
     void OnPaint(wxPaintEvent &)
     {
         wxPaintDC dc(this);
-        wxImage image = bitmapButton.ConvertToImage();
-        image = image.Rescale(640, 480);
-        wxBitmap bitmap(image);
         dc.DrawBitmap(bitmap, 0, 0);
     }
 };
@@ -96,7 +94,7 @@ void Display::Init()
 
 void Painter::BeginScene(Color color)
 {
-    memDC.SelectObject(bitmapButton);
+    memDC.SelectObject(bitmap);
     wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
     memDC.SetBrush(brush);
     FillRegion(0, 0, 320, 240, color);
