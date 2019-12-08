@@ -4,6 +4,9 @@
 #include "Form.h"
 #include "History.h"
 #include <ctime>
+#pragma warning(push, 0)
+#include <wx/msw/private.h>
+#pragma warning(pop)
 
 
 Canvas *TheCanvas = nullptr;
@@ -170,7 +173,9 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
     {
         TheForm->MovePoint(mouseX, mouseY);
     }
-    
+
+    SetMouseCursor();
+
     Redraw();
 }
 
@@ -187,6 +192,8 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
     {
         TheForm->SetPoint(mouseX, mouseY);
     }
+
+    SetMouseCursor();
 }
 
 
@@ -197,11 +204,26 @@ void Canvas::OnMouseRightDown(wxMouseEvent &event) //-V2009
     mouseIsDown = false;
 
     (static_cast<Frame* >(parent))->ShowContextMenu({ mouseX, mouseY }, TheForm->ExistPoint(mouseX, mouseY, false));
+
+    SetMouseCursor();
 }
 
 
-void Canvas::OnMouseUp(wxMouseEvent &)
+void Canvas::OnMouseUp(wxMouseEvent &event)
 {
+    event.GetPosition(&mouseX, &mouseY);
+
     mouseIsDown = false;
     History::Add(TheForm);
+}
+
+
+void Canvas::SetMouseCursor()
+{
+    if(TheForm->ExistPoint(mouseX, mouseY, mouseIsDown))
+    {
+        HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
+        ::SetCursor(cursor);
+        ::ShowCursor(true);
+    }
 }
