@@ -152,7 +152,7 @@ void Frame::OnRepaint(wxPaintEvent &)
 }
 
 
-void Frame::OnMouseMove(wxMouseEvent &event)
+void Frame::OnMouseMove(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
@@ -164,7 +164,7 @@ void Frame::OnMouseMove(wxMouseEvent &event)
     TheCanvas->Redraw();
 }
 
-void Frame::OnMouseLeftDown(wxMouseEvent &event)
+void Frame::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
@@ -179,7 +179,7 @@ void Frame::OnMouseLeftDown(wxMouseEvent &event)
 }
 
 
-void Frame::OnMouseRightDown(wxMouseEvent &event)
+void Frame::OnMouseRightDown(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 

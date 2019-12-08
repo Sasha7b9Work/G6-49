@@ -35,7 +35,7 @@ void Canvas::OnPaint(wxPaintEvent &)
 }
 
 
-void Canvas::OnResize(wxSizeEvent &event)
+void Canvas::OnResize(wxSizeEvent &event) //-V2009
 {
     delete bitmapButton;
     bitmapButton = new wxBitmap(event.GetSize());
