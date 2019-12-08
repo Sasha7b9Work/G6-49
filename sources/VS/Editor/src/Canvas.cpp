@@ -40,8 +40,8 @@ void Canvas::OnResize(wxSizeEvent &event)
 void Canvas::BeginScene()
 {
     memDC.SelectObject(*bitmapButton);
-    wxBrush brush({ 0, 0, 0 }, wxBRUSHSTYLE_TRANSPARENT);
-    memDC.SetBrush(brush);
+    wxBrush brush(*wxBLACK, wxBRUSHSTYLE_SOLID);
+    memDC.SetBackground(brush);
     memDC.Clear();
     DrawGrid();
 }
@@ -92,7 +92,7 @@ void Canvas::Draw()
     {
         BeginScene();
 
-        //TheForm->Draw();
+        TheForm->Draw();
 
         EndScene();
 
