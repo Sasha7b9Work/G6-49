@@ -21,6 +21,7 @@ private:
     void EndScene();
     void DrawGrid();
     void OnPaint(wxPaintEvent &);
+    void OnResize(wxSizeEvent &);
 };
 
 

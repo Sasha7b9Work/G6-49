@@ -7,41 +7,49 @@
 Canvas *TheCanvas = nullptr;
 
 static bool needRedraw = true;
-/// Эту кнопку используем для рисования
-static wxBitmap bitmapButton(640, 480);
+/// Здесь рисуем
+static wxBitmap *bitmapButton = nullptr;
 /// Контекст рисования
 static wxMemoryDC memDC;
 
 
 Canvas::Canvas(wxWindow *parent) : wxPanel(parent, wxID_ANY)
 {
+    bitmapButton = new wxBitmap(parent->GetClientSize());
     SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &Canvas::OnPaint, this);
+    Bind(wxEVT_SIZE, &Canvas::OnResize, this);
 }
 
 
 void Canvas::OnPaint(wxPaintEvent &)
 {
     wxPaintDC dc(this);
-    wxImage image = bitmapButton.ConvertToImage();
-    image = image.Rescale(GetSize().x, GetSize().y);
-    wxBitmap bitmap(image);
-    dc.DrawBitmap(bitmap, 0, 0);
+    dc.DrawBitmap(*bitmapButton, 0, 0);
+}
 
-    wxSize size = GetSize();
 
-    size = size;
-
+void Canvas::OnResize(wxSizeEvent &event)
+{
+    delete bitmapButton;
+    bitmapButton = new wxBitmap(event.GetSize());
+    Refresh();
 }
 
 
 void Canvas::BeginScene()
 {
-    memDC.SelectObject(bitmapButton);
+    memDC.SelectObject(*bitmapButton);
     wxBrush brush({ 0, 0, 0 }, wxBRUSHSTYLE_TRANSPARENT);
     memDC.SetBrush(brush);
     memDC.Clear();
     DrawGrid();
+}
+
+void Canvas::EndScene()
+{
+    memDC.SelectObject(wxNullBitmap);
+    Refresh();
 }
 
 
@@ -84,7 +92,7 @@ void Canvas::Draw()
     {
         BeginScene();
 
-        TheForm->Draw();
+        //TheForm->Draw();
 
         EndScene();
 
@@ -93,14 +101,6 @@ void Canvas::Draw()
         time = clock();
     }
 }
-
-
-void Canvas::EndScene()
-{
-    memDC.SelectObject(wxNullBitmap);
-    Refresh();
-}
-
 
 void Canvas::SetColor(const Color &color)
 {
