@@ -18,11 +18,21 @@ public:
     void Redraw();
 
 private:
+    /// true, если ЛКМ находится в нажатом положении
+    bool mouseIsDown = false;
+    int mouseX = 0;
+    int mouseY = 0;
+    wxWindow *parent;
+
     void BeginScene();
     void EndScene();
     void DrawGrid();
     void OnPaint(wxPaintEvent &);
     void OnResize(wxSizeEvent &);
+    void OnMouseMove(wxMouseEvent &);
+    void OnMouseLeftDown(wxMouseEvent &);
+    void OnMouseRightDown(wxMouseEvent &);
+    void OnMouseUp(wxMouseEvent &);
 };
 
 

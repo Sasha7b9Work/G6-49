@@ -20,17 +20,14 @@ public:
     void OnQuit(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);
     void OnRepaint(wxPaintEvent &);
+    void ShowContextMenu(const wxPoint &pos, bool underPoint);
 
 private:
     wxTimer timer;
 
-    void HandlerEvents();
-
     void SetSizeAndPosition();
 
     wxRect GetMaxDisplay();
-
-    void ShowContextMenu(const wxPoint &pos, bool underPoint);
 
     void CreateMenu();
 
@@ -71,12 +68,4 @@ private:
     void InsertPoints(wxCommandEvent &);
 
     void OnKeyDown(wxKeyEvent &);
-
-    void OnMouseMove(wxMouseEvent &);
-
-    void OnMouseLeftDown(wxMouseEvent &);
-
-    void OnMouseRightDown(wxMouseEvent &);
-
-    void OnMouseUp(wxMouseEvent &);
 };

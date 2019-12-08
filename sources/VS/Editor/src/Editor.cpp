@@ -55,13 +55,6 @@ enum
 };
 
 
-/// true, если ЛКМ находится в нажатом положении
-static bool mouseIsDown = false;
-
-static int mouseX = 0;
-static int mouseY = 0;
-
-
 wxIMPLEMENT_APP_NO_MAIN(Application);
 
 
@@ -120,11 +113,6 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_PAINT, &Frame::OnRepaint, this);
     Bind(wxEVT_KEY_DOWN, &Frame::OnKeyDown, this);
-    Bind(wxEVT_MOTION, &Frame::OnMouseMove, this);
-    Bind(wxEVT_LEFT_DOWN, &Frame::OnMouseLeftDown, this);
-    Bind(wxEVT_RIGHT_DOWN, &Frame::OnMouseRightDown, this);
-    Bind(wxEVT_LEFT_UP, &Frame::OnMouseUp, this);
-    Bind(wxEVT_RIGHT_UP, &Frame::OnMouseUp, this);
 
     Show(true);
 
@@ -141,7 +129,6 @@ Frame::~Frame()
 
 void Frame::OnTimer(wxTimerEvent &)
 {
-    HandlerEvents();
     update();
 }
 
@@ -149,59 +136,6 @@ void Frame::OnTimer(wxTimerEvent &)
 void Frame::OnRepaint(wxPaintEvent &)
 {
     TheCanvas->Redraw();
-}
-
-
-void Frame::OnMouseMove(wxMouseEvent &event) //-V2009
-{
-    event.GetPosition(&mouseX, &mouseY);
-
-    if(mouseIsDown)
-    {
-        TheForm->MovePoint(mouseX, mouseY);
-    }
-
-    TheCanvas->Redraw();
-}
-
-void Frame::OnMouseLeftDown(wxMouseEvent &event) //-V2009
-{
-    event.GetPosition(&mouseX, &mouseY);
-
-    if(TheForm->ExistPoint(mouseX, mouseY, false))
-    {
-        mouseIsDown = true;
-    }
-    else
-    {
-        TheForm->SetPoint(mouseX, mouseY);
-    }
-}
-
-
-void Frame::OnMouseRightDown(wxMouseEvent &event) //-V2009
-{
-    event.GetPosition(&mouseX, &mouseY);
-
-    mouseIsDown = false;
-
-    ShowContextMenu({ mouseX, mouseY }, TheForm->ExistPoint(mouseX, mouseY, false));
-}
-
-
-void Frame::OnMouseUp(wxMouseEvent &)
-{
-    mouseIsDown = false;
-    History::Add(TheForm);
-}
-
-
-void Frame::HandlerEvents()
-{
-    if (TheForm->ExistPoint(mouseX, mouseY, mouseIsDown))
-    {
-        //SDL_SetCursor(cursorHand);
-    }
 }
 
 

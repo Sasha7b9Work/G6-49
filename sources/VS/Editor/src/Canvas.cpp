@@ -1,6 +1,8 @@
 #include "defines.h"
 #include "Canvas.h"
+#include "Editor.h"
 #include "Form.h"
+#include "History.h"
 #include <ctime>
 
 
@@ -13,12 +15,17 @@ static wxBitmap *bitmapButton = nullptr;
 static wxMemoryDC memDC;
 
 
-Canvas::Canvas(wxWindow *parent) : wxPanel(parent, wxID_ANY)
+Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)
 {
     bitmapButton = new wxBitmap(parent->GetClientSize());
     SetDoubleBuffered(true);
-    Bind(wxEVT_PAINT, &Canvas::OnPaint, this);
-    Bind(wxEVT_SIZE, &Canvas::OnResize, this);
+    Bind(wxEVT_PAINT,      &Canvas::OnPaint,          this);
+    Bind(wxEVT_SIZE,       &Canvas::OnResize,         this);
+    Bind(wxEVT_MOTION,     &Canvas::OnMouseMove,      this);
+    Bind(wxEVT_LEFT_DOWN,  &Canvas::OnMouseLeftDown,  this);
+    Bind(wxEVT_RIGHT_DOWN, &Canvas::OnMouseRightDown, this);
+    Bind(wxEVT_LEFT_UP,    &Canvas::OnMouseUp,        this);
+    Bind(wxEVT_RIGHT_UP,   &Canvas::OnMouseUp,        this);
 }
 
 
@@ -152,4 +159,49 @@ void Canvas::DrawGrid()
 void Canvas::Redraw()
 {
     needRedraw = true;
+}
+
+
+void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
+{
+    event.GetPosition(&mouseX, &mouseY);
+    
+    if(mouseIsDown)
+    {
+        TheForm->MovePoint(mouseX, mouseY);
+    }
+    
+    Redraw();
+}
+
+
+void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
+{
+    event.GetPosition(&mouseX, &mouseY);
+
+    if(TheForm->ExistPoint(mouseX, mouseY, false))
+    {
+        mouseIsDown = true;
+    }
+    else
+    {
+        TheForm->SetPoint(mouseX, mouseY);
+    }
+}
+
+
+void Canvas::OnMouseRightDown(wxMouseEvent &event) //-V2009
+{
+    event.GetPosition(&mouseX, &mouseY);
+
+    mouseIsDown = false;
+
+    (static_cast<Frame* >(parent))->ShowContextMenu({ mouseX, mouseY }, TheForm->ExistPoint(mouseX, mouseY, false));
+}
+
+
+void Canvas::OnMouseUp(wxMouseEvent &)
+{
+    mouseIsDown = false;
+    History::Add(TheForm);
 }

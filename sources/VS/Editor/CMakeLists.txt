@@ -15,6 +15,7 @@ add_compile_options(/wd4355)    # 'this': used in base member initializer list
 add_compile_options(/wd4514)    # 'xxx': unreferenced inline function has been removed
 add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
 add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
+add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
 add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
