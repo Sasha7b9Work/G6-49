@@ -1,7 +1,7 @@
 #include "defines.h"
 #undef CRC
 
-#include "Application.h"
+#include "GUI/Application.h"
 
 
 #define uint    unsigned int

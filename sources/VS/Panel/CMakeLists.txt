@@ -48,10 +48,7 @@ source_group(src                      FILES              ../../Panel/src/defines
                                                          ../../Panel/src/Log.h
                                                          ../../Panel/src/stdafx.cpp
                                                          ../../Panel/src/stdafx.h
-                                                         ../../Panel/src/structs.h
-                                                                     src/Application.cpp
-                                                                     src/Application.h
-                                                                     src/main_win.cpp)
+                                                         ../../Panel/src/structs.h)
 source_group(Display                  FILES              ../../Panel/src/Display/Colors.cpp
                                                          ../../Panel/src/Display/Colors.h
                                                          ../../Panel/src/Display/Console.cpp
@@ -94,6 +91,7 @@ source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/fo
 source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*)
 source_group(FrequencyMeter           REGULAR_EXPRESSION ../Panel/src/FrequencyMeter/*)
 source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*)
+source_group(GUI                      REGULAR_EXPRESSION src/GUI/*)
 source_group(libs\\CMSIS              REGULAR_EXPRESSION ../Panel/src/libs/CMSIS/*)
 source_group(libs\\HAL                REGULAR_EXPRESSION ../Panel/src/libs/HAL/*)
 source_group(Menu                     REGULAR_EXPRESSION ../Panel/src/Menu/*)
@@ -154,9 +152,7 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../Panel/src/Interface/InterfacePanel.cpp
                     ../../Panel/src/Interface/InterfacePanel.h
                     ../../Panel/src/libs/CMSIS/startup_stm32f429xx.s
-                                src/Application.cpp
-                                src/Application.h
-                                src/main_win.cpp
+                                src/GUI/*
                                 src/Display/Painter_win.cpp
                                 src/Hardware/CPU_win.cpp
                                 src/Hardware/CPU_Keyboard_win.cpp
