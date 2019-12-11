@@ -34,25 +34,26 @@ source_group(common                   FILES ../common/Command.cpp ../common/Comm
                                             ../common/Message.cpp ../common/Message.h
                                             ../common/Transceiver.h
                                             ../common/Wave.h)
-source_group(src                      REGULAR_EXPRESSION src/*.*)
-source_group(Display                  REGULAR_EXPRESSION src/Display/*.*)
-source_group(Display\\font            REGULAR_EXPRESSION src/Display/font/*.*)
-source_group(FDrive                   REGULAR_EXPRESSION src/FDrive/*.*)
-source_group(FrequencyMeter           REGULAR_EXPRESSION src/FrequencyMeter/*.*)
-source_group(Generator                REGULAR_EXPRESSION src/Generator/*.*)
-source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*.*)
-source_group(Hardware\\Modules        REGULAR_EXPRESSION src/Hardware/Modules/*.*)
-source_group(Interface                REGULAR_EXPRESSION src/Interface/*.*)
-source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*.*)
-source_group(libs\\HAL                REGULAR_EXPRESSION src/libs/HAL/*.*)
-source_group(Menu                     REGULAR_EXPRESSION src/Menu/*.*)
-source_group(Menu\\Pages              REGULAR_EXPRESSION src/Menu/Pages/*.*)
-source_group(Menu\\Pages\\Include     REGULAR_EXPRESSION src/Menu/Pages/Include/*.*)
-source_group(Menu\\Pages\\Addition    REGULAR_EXPRESSION src/Menu/Pages/Addition/*.*)
-source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION src/Menu/Pages/PageSignals/*.*)
-source_group(SCPI                     REGULAR_EXPRESSION src/SCPI/*.*)
-source_group(Settings                 REGULAR_EXPRESSION src/Settings/*.*)
-source_group(Utils                    REGULAR_EXPRESSION src/Utils/*.*)
+source_group(src                      REGULAR_EXPRESSION src/*)
+source_group(Display                  REGULAR_EXPRESSION src/Display/*)
+source_group(Display\\font            REGULAR_EXPRESSION src/Display/font/*)
+source_group(FDrive                   REGULAR_EXPRESSION src/FDrive/*)
+source_group(FrequencyMeter           REGULAR_EXPRESSION src/FrequencyMeter/*)
+source_group(Generator                REGULAR_EXPRESSION src/Generator/*)
+source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*)
+source_group(Hardware\\HAL            REGULAR_EXPRESSION src/Hardware/HAL/*)
+source_group(Hardware\\Modules        REGULAR_EXPRESSION src/Hardware/Modules/*)
+source_group(Interface                REGULAR_EXPRESSION src/Interface/*)
+source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*)
+source_group(libs\\HAL                REGULAR_EXPRESSION src/libs/HAL/*)
+source_group(Menu                     REGULAR_EXPRESSION src/Menu/*)
+source_group(Menu\\Pages              REGULAR_EXPRESSION src/Menu/Pages/*)
+source_group(Menu\\Pages\\Include     REGULAR_EXPRESSION src/Menu/Pages/Include/*)
+source_group(Menu\\Pages\\Addition    REGULAR_EXPRESSION src/Menu/Pages/Addition/*)
+source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION src/Menu/Pages/PageSignals/*)
+source_group(SCPI                     REGULAR_EXPRESSION src/SCPI/*)
+source_group(Settings                 REGULAR_EXPRESSION src/Settings/*)
+source_group(Utils                    REGULAR_EXPRESSION src/Utils/*)
 
 file(GLOB SOURCES   ../common/Command.cpp ../common/Command.h
                     ../common/Common.cpp  ../common/Common.h
@@ -66,6 +67,7 @@ file(GLOB SOURCES   ../common/Command.cpp ../common/Command.h
                     src/FrequencyMeter/*
                     src/Generator/*
                     src/Hardware/*
+                    src/Hardware/HAL/*
                     src/Hardware/Modules/*
                     src/Interface/*
                     src/libs/CMSIS/startup_stm32f429xx.s
