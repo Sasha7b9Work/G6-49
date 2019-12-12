@@ -47,6 +47,8 @@ void Interface::AddMessageForTransmit(SimpleMessage *message)
 
 void Interface::Update()
 {
+    return;
+    
     static uint time = 0;
 
     if (TIME_MS - time < 100)
