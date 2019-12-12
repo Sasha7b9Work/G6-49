@@ -159,38 +159,6 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
 }
 
 
-void Beeper::Bell::On()
-{
-    if (!bellIsEnabled)
-    {
-        Beeper::WaitForCompletion();
-
-
-        frequency = 2000.0F;
-        amplitude = 1.0F;
-        typeWave = TypeWave::Sine;
-
-        Stop();
-
-        SetWave();
-
-        HAL_DAC2::StartDMA(points, POINTS_IN_PERIOD_SOUND);
-
-        Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 1000000U);
-
-        bellIsEnabled = true;
-    }
-}
-
-
-void Beeper::Bell::Off()
-{
-    Stop();
-
-    bellIsEnabled = false;
-}
-
-
 void Beeper::WaitForCompletion()
 {
     while (isBeep)

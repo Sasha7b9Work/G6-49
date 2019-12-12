@@ -4,7 +4,7 @@
 #include <stm32f4xx.h>
 
 
-static DAC_HandleTypeDef handle = { DAC };
+static DAC_HandleTypeDef handleDAC = { DAC };
 
 
 void HAL_DAC2::Init()
@@ -45,7 +45,7 @@ void HAL_DAC2::Init()
 
 	HAL_DMA_Init(&hdmaDAC2);
 
-	__HAL_LINKDMA(&handle, DMA_Handle1, hdmaDAC2);
+	__HAL_LINKDMA(&handleDAC, DMA_Handle1, hdmaDAC2);
 
 	HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, PRIORITY_SOUND_DMA1_STREAM5);
 	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
@@ -57,23 +57,23 @@ void HAL_DAC2::Init()
 		DAC_OUTPUTBUFFER_ENABLE
 	};
 
-	HAL_DAC_DeInit(&handle);
+	HAL_DAC_DeInit(&handleDAC);
 
-	HAL_DAC_Init(&handle);
+	HAL_DAC_Init(&handleDAC);
 
-	HAL_DAC_ConfigChannel(&handle, &config, DAC_CHANNEL_2);
+	HAL_DAC_ConfigChannel(&handleDAC, &config, DAC_CHANNEL_2);
 }
 
 
 void HAL_DAC2::StartDMA(void* points, uint numPoints)
 {
-	HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_2, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
+	HAL_DAC_Start_DMA(&handleDAC, DAC_CHANNEL_2, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
 }
 
 
 void HAL_DAC2::StopDMA()
 {
-	HAL_DAC_Stop_DMA(&handle, DAC_CHANNEL_2);
+	HAL_DAC_Stop_DMA(&handleDAC, DAC_CHANNEL_2);
 }
 
 
@@ -104,13 +104,13 @@ void HAL_DAC2::ConfigTIM7(uint16 prescaler, uint16 period)
 
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 
 void DMA1_Stream5_IRQHandler()
 {
-	HAL_DMA_IRQHandler(handle.DMA_Handle1);
+	HAL_DMA_IRQHandler(handleDAC.DMA_Handle1);
 }
 
 #ifdef __cplusplus
