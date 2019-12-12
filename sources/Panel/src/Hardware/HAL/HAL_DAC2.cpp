@@ -50,24 +50,54 @@ void HAL_DAC2::Init()
 	HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, PRIORITY_SOUND_DMA1_STREAM5);
 	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 
+	ConfigTIM7();
+}
 
+
+void HAL_DAC2::StartDMA()
+{
 	DAC_ChannelConfTypeDef config =
 	{
 		DAC_TRIGGER_T7_TRGO,
 		DAC_OUTPUTBUFFER_ENABLE
 	};
 
-	HAL_DAC_DeInit(&handleDAC);
+	/*##-1- Initialize the DAC peripheral ######################################*/
+	if(HAL_DAC_Init(&handleDAC) != HAL_OK)
+	{
+		ERROR_HANDLER();
+	}
 
-	HAL_DAC_Init(&handleDAC);
+	/*##-2- DAC channel2 Configuration #########################################*/
+	config.DAC_Trigger = DAC_TRIGGER_T7_TRGO;
+	config.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
 
-	HAL_DAC_ConfigChannel(&handleDAC, &config, DAC_CHANNEL_2);
-}
+	if(HAL_DAC_ConfigChannel(&handleDAC, &config, DAC_CHANNEL_2) != HAL_OK)
+	{
+		/* Channel configuration Error */
+		ERROR_HANDLER();
+	}
 
+	/*##-3- DAC channel2 Triangle Wave generation configuration ################*/
+	if(HAL_DACEx_TriangleWaveGenerate(&handleDAC, DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095) != HAL_OK)
+	{
+		/* Triangle wave generation Error */
+		ERROR_HANDLER();
+	}
 
-void HAL_DAC2::StartDMA(void* points, uint numPoints)
-{
-	HAL_DAC_Start_DMA(&handleDAC, DAC_CHANNEL_2, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
+	/*##-4- Enable DAC Channel1 ################################################*/
+	if(HAL_DAC_Start(&handleDAC, DAC_CHANNEL_2) != HAL_OK)
+	{
+		/* Start Error */
+		ERROR_HANDLER();
+	}
+
+	/*##-5- Set DAC channel1 DHR12RD register ##################################*/
+	if(HAL_DAC_SetValue(&handleDAC, DAC_CHANNEL_2, DAC_ALIGN_12B_R, (1 << 12) - 1) != HAL_OK)
+	{
+		/* Setting value Error */
+		ERROR_HANDLER();
+	}
 }
 
 
@@ -77,28 +107,28 @@ void HAL_DAC2::StopDMA()
 }
 
 
-void HAL_DAC2::ConfigTIM7(uint16 prescaler, uint16 period)
+void HAL_DAC2::ConfigTIM7()
 {
-	static TIM_HandleTypeDef htim =
-	{
-		TIM7, {}, HAL_TIM_ACTIVE_CHANNEL_1, {}, HAL_UNLOCKED, HAL_TIM_STATE_RESET
-	};
+	static TIM_HandleTypeDef htim;
+	TIM_MasterConfigTypeDef  sMasterConfig;
 
-	htim.Init.Prescaler = prescaler;
-	htim.Init.Period = period;
-	htim.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	/*##-1- Configure the TIM peripheral #######################################*/
+	/* Time base configuration */
+	htim.Instance = TIM7;
 
+	htim.Init.Period = 0x1;
+	htim.Init.Prescaler = 0;
+	htim.Init.ClockDivision = 0;
+	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
 	HAL_TIM_Base_Init(&htim);
 
-	TIM_MasterConfigTypeDef masterConfig =
-	{
-		TIM_TRGO_UPDATE,
-		TIM_MASTERSLAVEMODE_DISABLE
-	};
+	/* TIM6 TRGO selection */
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
 
-	HAL_TIMEx_MasterConfigSynchronization(&htim, &masterConfig);
+	HAL_TIMEx_MasterConfigSynchronization(&htim, &sMasterConfig);
 
-	HAL_TIM_Base_Stop(&htim);
+	/*##-2- Enable TIM peripheral counter ######################################*/
 	HAL_TIM_Base_Start(&htim);
 }
 
