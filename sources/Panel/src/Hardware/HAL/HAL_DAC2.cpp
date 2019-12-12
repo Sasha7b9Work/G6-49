@@ -23,7 +23,7 @@ void HAL_DAC2::Init()
 
 	HAL_GPIO_Init(GPIOA, &structGPIO);
 
-	static DMA_HandleTypeDef hdmaDAC1 =
+	static DMA_HandleTypeDef hdmaDAC2 =
 	{
 		DMA1_Stream5,
 		{
@@ -43,9 +43,9 @@ void HAL_DAC2::Init()
 		HAL_UNLOCKED, HAL_DMA_STATE_RESET, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	};
 
-	HAL_DMA_Init(&hdmaDAC1);
+	HAL_DMA_Init(&hdmaDAC2);
 
-	__HAL_LINKDMA(&handle, DMA_Handle1, hdmaDAC1);
+	__HAL_LINKDMA(&handle, DMA_Handle1, hdmaDAC2);
 
 	HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, PRIORITY_SOUND_DMA1_STREAM5);
 	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
@@ -61,19 +61,19 @@ void HAL_DAC2::Init()
 
 	HAL_DAC_Init(&handle);
 
-	HAL_DAC_ConfigChannel(&handle, &config, DAC_CHANNEL_1);
+	HAL_DAC_ConfigChannel(&handle, &config, DAC_CHANNEL_2);
 }
 
 
 void HAL_DAC2::StartDMA(void* points, uint numPoints)
 {
-	HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
+	HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_2, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
 }
 
 
 void HAL_DAC2::StopDMA()
 {
-	HAL_DAC_Stop_DMA(&handle, DAC_CHANNEL_1);
+	HAL_DAC_Stop_DMA(&handle, DAC_CHANNEL_2);
 }
 
 
