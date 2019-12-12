@@ -7,7 +7,7 @@
 static DAC_HandleTypeDef handle = { DAC };
 
 
-void HAL_DAC1::Init()
+void HAL_DAC2::Init()
 {
 	__DMA1_CLK_ENABLE();
 	__TIM7_CLK_ENABLE();
@@ -15,7 +15,7 @@ void HAL_DAC1::Init()
 
 	GPIO_InitTypeDef structGPIO =
 	{
-		GPIO_PIN_4,
+		GPIO_PIN_5,
 		GPIO_MODE_ANALOG,
 		GPIO_NOPULL,
 		0, 0
@@ -65,19 +65,19 @@ void HAL_DAC1::Init()
 }
 
 
-void HAL_DAC1::StartDMA(void* points, uint numPoints)
+void HAL_DAC2::StartDMA(void* points, uint numPoints)
 {
 	HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
 }
 
 
-void HAL_DAC1::StopDMA()
+void HAL_DAC2::StopDMA()
 {
 	HAL_DAC_Stop_DMA(&handle, DAC_CHANNEL_1);
 }
 
 
-void HAL_DAC1::ConfigTIM7(uint16 prescaler, uint16 period)
+void HAL_DAC2::ConfigTIM7(uint16 prescaler, uint16 period)
 {
 	static TIM_HandleTypeDef htim =
 	{

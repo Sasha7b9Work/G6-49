@@ -1,7 +1,7 @@
 #pragma once
 
 
-struct HAL_DAC1
+struct HAL_DAC2
 {
 	static void Init();
 	static void StartDMA(void* points, uint numPoints);

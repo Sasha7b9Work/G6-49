@@ -3,6 +3,7 @@
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "Display/Display.h"
+#include "Hardware/Beeper.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #endif
@@ -228,6 +229,8 @@ static void DetectRegulator()
 static void FillCommand(KeyEvent::E key, KeyEvent::Action::E action)
 {
     commands[pointer++] = KeyEvent(key, action);
+
+    Beeper::Beep(action);
 }
 
 
