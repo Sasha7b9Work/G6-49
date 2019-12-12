@@ -41,7 +41,8 @@ struct KeyEvent
         {
             Down,
             Long,
-            Up
+            Up,
+            Count
         } value;
         Action(E v = Down) : value(v) {};
         operator uint8() const { return static_cast<uint8>(value); };

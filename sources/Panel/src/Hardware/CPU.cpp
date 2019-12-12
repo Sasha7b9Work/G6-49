@@ -5,6 +5,7 @@
 #include "LTDC.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
+#include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Modules/SPI.h"
 #include "Log.h"
@@ -54,6 +55,8 @@ void CPU::Init()
     Keyboard::Init();
 
     CRC32::Init();
+
+    Beeper::Init();
 }
 
 

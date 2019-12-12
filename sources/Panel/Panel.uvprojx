@@ -164,7 +164,7 @@
             <AdsACrf>1</AdsACrf>
             <AdsANop>0</AdsANop>
             <AdsANot>0</AdsANot>
-            <AdsLLst>1</AdsLLst>
+            <AdsLLst>0</AdsLLst>
             <AdsLmap>1</AdsLmap>
             <AdsLcgr>1</AdsLcgr>
             <AdsLsym>1</AdsLsym>
@@ -1601,6 +1601,26 @@
               <FileType>5</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fmc.h</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_dac.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dac_ex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac_ex.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dac_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dac_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1887,9 +1907,14 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>Controls.cpp</FileName>
+              <FileName>Beeper.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Beeper.h</FilePath>
+            </File>
+            <File>
+              <FileName>Beeper.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Controls.cpp</FilePath>
+              <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
             </File>
             <File>
               <FileName>Controls.h</FileName>
@@ -1897,14 +1922,19 @@
               <FilePath>.\src\Hardware\Controls.h</FilePath>
             </File>
             <File>
-              <FileName>CPU.cpp</FileName>
+              <FileName>Controls.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
+              <FilePath>.\src\Hardware\Controls.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CPU.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_IT.cpp</FileName>
@@ -1917,14 +1947,14 @@
               <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
             </File>
             <File>
+              <FileName>LTDC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\LTDC.h</FilePath>
+            </File>
+            <File>
               <FileName>LTDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\LTDC.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>
@@ -1932,14 +1962,39 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>Timer4XX.cpp</FileName>
+              <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer4XX.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/HAL</GroupName>
+          <Files>
+            <File>
+              <FileName>HAL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_DAC1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_DAC1.cpp</FilePath>
             </File>
           </Files>
         </Group>

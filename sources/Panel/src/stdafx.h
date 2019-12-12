@@ -27,6 +27,7 @@
 
 #include "Generator/Signals.h"
 
+#include "Hardware/Beeper.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
 #include "Hardware/Timer.h"

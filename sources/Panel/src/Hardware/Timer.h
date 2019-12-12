@@ -39,9 +39,11 @@ namespace Timer
             kStrNaviAutoHide,           ///< Прятать строку навигации меню
             kTimerStartP2P,             ///< Таймер для запуска следующего цикла поточечного чтения
             kTimerDisplay,              ///< Таймер на ручную отрисовку экрана
+            StopSound,
             kTemp,
             Count
         } value;
+        Type(E v) : value(v) {};
         operator uint8() const { return static_cast<uint8>(value); };
     };
 

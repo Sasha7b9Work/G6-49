@@ -155,7 +155,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
 
     HAL_DAC1::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
-    Timer::SetAndStartOnce(TypeTimer::StopSound, Stop, static_cast<uint>(newDuration));
+    Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, static_cast<uint>(newDuration));
 }
 
 
@@ -176,7 +176,7 @@ void Beeper::Bell::On()
 
         HAL_DAC1::StartDMA(points, POINTS_IN_PERIOD_SOUND);
 
-        Timer::SetAndStartOnce(TypeTimer::StopSound, Stop, 1000000U);
+        Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 1000000U);
 
         bellIsEnabled = true;
     }
@@ -256,23 +256,16 @@ void Beeper::WarnBeepGood()
 }
 
 
-static void EmptyFunc()
+void Beeper::Beep(KeyEvent::Action::E type)
 {
-}
-
-
-void Beeper::Beep(TypePress::E type)
-{
-    static const pFuncVV func[TypePress::Count] =
+    static const pFuncVV func[KeyEvent::Action::Count] =
     {
         Beeper::ButtonPress,
-        EmptyFunc,
         Beeper::ButtonRelease,
-        EmptyFunc,
-        EmptyFunc
+        Beeper::ButtonRelease
     };
 
-    if (type < TypePress::Count)
+    if (type < KeyEvent::Action::Count)
     {
         func[type]();
     }
@@ -293,5 +286,5 @@ void Beeper::Test()
 
 uint8 Beeper::Volume()
 {
-    return set.serv.soundVolume;
+    return 255;
 }

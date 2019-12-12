@@ -44,6 +44,8 @@ float RandFloat(float min, float max);
 
 namespace Math
 {
+    const float PI_F = 3.141592653589793F;
+
     void Smoothing(uint8 *data, int numPoints, int numSmooth);
     
     int MinFrom2Int(int val0, int val1);
