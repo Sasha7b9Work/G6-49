@@ -2,17 +2,6 @@
 #include "Settings/Settings.h"
 
 
-struct TypeWave
-{
-    enum E
-    {
-        Sine,
-        Meandr,
-        Triangle
-    } value;
-};
-
-
 struct Beeper
 {
     static void Init();

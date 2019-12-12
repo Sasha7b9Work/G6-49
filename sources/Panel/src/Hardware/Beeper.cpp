@@ -7,11 +7,6 @@
 
 
 
-#define POINTS_IN_PERIOD_SOUND 10
-static uint8 points[POINTS_IN_PERIOD_SOUND] = {0};
-static float frequency = 0.0F;
-static float amplitude = 0.0F;
-static TypeWave::E typeWave = TypeWave::Sine;
 static bool soundWarnIsBeep = false;
 static bool buttonIsPressed = false;    ///< \brief Когда запускается звук нажатой кнопки, устанавливается этот флаг, чтобы знать, проигрывать ли знак 
                                         ///< отпускания
@@ -20,10 +15,8 @@ static volatile bool isBeep = false;
 static bool bellIsEnabled = false;
 
 
-
-static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration);
-
 static void Stop();
+
 
 void Beeper::Init()
 {
@@ -39,7 +32,7 @@ static void Stop()
 }
 
 
-static void Beep(const TypeWave::E, const float, const float, const int)
+static void Beep()
 {
     HAL_DAC2::StartDMA();
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 50);
@@ -56,7 +49,7 @@ void Beeper::WaitForCompletion()
 
 void Beeper::ButtonPress()
 {
-    ::Beep(TypeWave::Sine, 2000.0F, 0.75F, 50);
+    ::Beep();
     buttonIsPressed = true;
 }
 
@@ -65,7 +58,7 @@ void Beeper::ButtonRelease()
 {
     if (buttonIsPressed)
     {
-        ::Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
+        ::Beep();
         buttonIsPressed = false;
     }
 }
@@ -74,7 +67,7 @@ void Beeper::ButtonRelease()
 
 void Beeper::GovernorChangedValue()
 {
-    ::Beep(TypeWave::Sine, 1000.0F, 0.5F, 50);
+    ::Beep();
     buttonIsPressed = false;
 }
 
@@ -82,7 +75,7 @@ void Beeper::GovernorChangedValue()
 
 void Beeper::RegulatorShiftRotate()
 {
-    ::Beep(TypeWave::Sine, 1.0F, 0.2F, 3);
+    ::Beep();
     buttonIsPressed = false;
 }
 
@@ -90,7 +83,7 @@ void Beeper::RegulatorShiftRotate()
 
 void Beeper::RegulatorSwitchRotate()
 {
-    ::Beep(TypeWave::Sine, 500.0F, 0.5F, 75);
+    ::Beep();
     buttonIsPressed = false;
 }
 
@@ -98,7 +91,7 @@ void Beeper::RegulatorSwitchRotate()
 
 void Beeper::WarnBeepBad()
 {
-    ::Beep(TypeWave::Meandr, 500.0F, 1.0F, 500);
+    ::Beep();
     soundWarnIsBeep = true;
     buttonIsPressed = false;
 }
@@ -106,7 +99,7 @@ void Beeper::WarnBeepBad()
 
 void Beeper::WarnBeepGood()
 {
-    ::Beep(TypeWave::Triangle, 1000.0F, 1.0F, 500);
+    ::Beep();
     buttonIsPressed = false;
 }
 
