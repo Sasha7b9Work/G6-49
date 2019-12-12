@@ -134,6 +134,8 @@ static void SetWave()
 
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
+    return;2
+    
     if (bellIsEnabled || soundWarnIsBeep || Beeper::Volume() == 0)
     {
         return;
