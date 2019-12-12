@@ -12,15 +12,9 @@ struct Beeper
 
     static void GovernorChangedValue();
     
-    static void RegulatorShiftRotate();
-
-    static void RegulatorSwitchRotate();
-
     static void WarnBeepBad();
 
     static void WarnBeepGood();
-    /// Эту функцию надо вызывать перед записью/стиранием ППЗУ. Звук конфликтует с ППЗУ.
-    static void WaitForCompletion();
 
     static void Beep(KeyEvent::Action::E type);
 

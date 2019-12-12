@@ -276,7 +276,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Beeper.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\Device\src\Hardware\Beeper.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -292,7 +292,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Beeper.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\Device\src\Hardware\Beeper.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -308,7 +308,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Beeper.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\Device\src\Hardware\Beeper.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -324,7 +324,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_DAC2.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\Device\src\Hardware\HAL\HAL_DAC2.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -340,7 +340,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_DAC2.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\Device\src\Hardware\HAL\HAL_DAC2.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -356,7 +356,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Beeper.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\Device\src\Hardware\Beeper.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>

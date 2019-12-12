@@ -50,12 +50,14 @@ void HAL_DAC2::Init()
 	HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, PRIORITY_SOUND_DMA1_STREAM5);
 	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 
-	ConfigTIM7();
+	ConfigTIM7(0xff);
 }
 
 
-void HAL_DAC2::StartDMA()
+void HAL_DAC2::StartDMA(uint prescaler)
 {
+	ConfigTIM7(prescaler);
+
 	DAC_ChannelConfTypeDef config =
 	{
 		DAC_TRIGGER_T7_TRGO,
@@ -107,7 +109,7 @@ void HAL_DAC2::StopDMA()
 }
 
 
-void HAL_DAC2::ConfigTIM7()
+void HAL_DAC2::ConfigTIM7(uint period)
 {
 	static TIM_HandleTypeDef htim;
 	TIM_MasterConfigTypeDef  sMasterConfig;
@@ -116,7 +118,7 @@ void HAL_DAC2::ConfigTIM7()
 	/* Time base configuration */
 	htim.Instance = TIM7;
 
-	htim.Init.Period = 0x1;
+	htim.Init.Period = period;
 	htim.Init.Prescaler = 0;
 	htim.Init.ClockDivision = 0;
 	htim.Init.CounterMode = TIM_COUNTERMODE_UP;

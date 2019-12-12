@@ -6,15 +6,6 @@
 #include <cmath>
 
 
-
-static bool soundWarnIsBeep = false;
-static bool buttonIsPressed = false;    ///< \brief Когда запускается звук нажатой кнопки, устанавливается этот флаг, чтобы знать, проигрывать ли знак 
-                                        ///< отпускания
-static volatile bool isBeep = false;
-
-static bool bellIsEnabled = false;
-
-
 static void Stop();
 
 
@@ -27,80 +18,43 @@ void Beeper::Init()
 static void Stop()
 {
     HAL_DAC2::StopDMA();
-    isBeep = false;
-    soundWarnIsBeep = false;
 }
 
 
-static void Beep()
+static void Beep(uint period)
 {
-    HAL_DAC2::StartDMA();
+    HAL_DAC2::StartDMA(period);
     Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 50);
-}
-
-
-void Beeper::WaitForCompletion()
-{
-    while (isBeep)
-    {
-    };
 }
 
 
 void Beeper::ButtonPress()
 {
-    ::Beep();
-    buttonIsPressed = true;
+    ::Beep(0x2);
 }
 
 
 void Beeper::ButtonRelease()
 {
-    if (buttonIsPressed)
-    {
-        ::Beep();
-        buttonIsPressed = false;
-    }
+    ::Beep(0xf);
 }
-
 
 
 void Beeper::GovernorChangedValue()
 {
-    ::Beep();
-    buttonIsPressed = false;
+    ::Beep(0x5);
 }
-
-
-
-void Beeper::RegulatorShiftRotate()
-{
-    ::Beep();
-    buttonIsPressed = false;
-}
-
-
-
-void Beeper::RegulatorSwitchRotate()
-{
-    ::Beep();
-    buttonIsPressed = false;
-}
-
 
 
 void Beeper::WarnBeepBad()
 {
-    ::Beep();
-    soundWarnIsBeep = true;
-    buttonIsPressed = false;
+    ::Beep(0xff);
 }
  
 
 void Beeper::WarnBeepGood()
 {
-    ::Beep();
-    buttonIsPressed = false;
+    ::Beep(0xff);
 }
 
 
@@ -125,8 +79,6 @@ void Beeper::Test()
     ButtonPress();
     ButtonRelease();
     GovernorChangedValue();
-    RegulatorShiftRotate();
-    RegulatorSwitchRotate();
     WarnBeepBad();
     WarnBeepGood();
 }
