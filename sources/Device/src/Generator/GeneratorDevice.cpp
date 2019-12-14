@@ -207,9 +207,9 @@ private:
 
         static const GPIO_PinState state1[Type::Count] =
         {
-            GPIO_PIN_SET,
             GPIO_PIN_RESET,
-            GPIO_PIN_RESET
+            GPIO_PIN_SET,
+            GPIO_PIN_SET
         };
 
         HAL_GPIO_WritePin(GPIOE, pin0[ch], state0[type]);
