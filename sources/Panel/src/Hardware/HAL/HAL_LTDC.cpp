@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "LTDC.h"
 #include "CPU.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
