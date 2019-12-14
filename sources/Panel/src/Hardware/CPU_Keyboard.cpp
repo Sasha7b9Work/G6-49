@@ -48,10 +48,10 @@ static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
 static uint16 rls[] =             {RL0,   RL1,   RL2,   RL3,   RL4};
 static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 
-#define SET_SL(n)       CPU::GPIO_::WritePin(slsAsciiPorts[n], sls[n], true)
-#define SET_ALL_SL      CPU::GPIO_::WritePin('B', SL0 | SL1 | SL2 | SL3, true); CPU::GPIO_::WritePin('D', SL4 | SL5, true);
-#define RESET_SL(n)     CPU::GPIO_::WritePin(slsAsciiPorts[n], sls[n], false)
-#define READ_RL(n)      CPU::GPIO_::ReadPin(rlsAsciiPorts[n], rls[n])
+#define SET_SL(n)       HAL_GPIO::WritePin(slsAsciiPorts[n], sls[n], true)
+#define SET_ALL_SL      HAL_GPIO::WritePin('B', SL0 | SL1 | SL2 | SL3, true); HAL_GPIO::WritePin('D', SL4 | SL5, true);
+#define RESET_SL(n)     HAL_GPIO::WritePin(slsAsciiPorts[n], sls[n], false)
+#define READ_RL(n)      HAL_GPIO::ReadPin(rlsAsciiPorts[n], rls[n])
 
 static bool init = false;
 
@@ -148,7 +148,7 @@ static void DetectRegulator()
     static uint timePrevPress = 0;
     static bool needDetectButton = true;
     
-    bool press = CPU::GPIO_::ReadPin('C', GPIO_PIN_2) ? false : true;
+    bool press = HAL_GPIO::ReadPin('C', GPIO_PIN_2) ? false : true;
 
     if(!press)
     {
@@ -194,8 +194,8 @@ static void DetectRegulator()
     // Детектируем поворот
     static bool prevStatesIsOne = false;
 
-    bool stateLeft = CPU::GPIO_::ReadPin('C', GPIO_PIN_0);
-    bool stateRight = CPU::GPIO_::ReadPin('C', GPIO_PIN_1);
+    bool stateLeft = HAL_GPIO::ReadPin('C', GPIO_PIN_0);
+    bool stateRight = HAL_GPIO::ReadPin('C', GPIO_PIN_1);
 
     if (stateLeft && stateRight)
     {

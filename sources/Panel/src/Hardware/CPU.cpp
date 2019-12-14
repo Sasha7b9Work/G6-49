@@ -9,8 +9,6 @@
 #include <cstdlib>
 
 
-static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
-
 uint  CPU::timeStartMeasFPS = 0;
 int   CPU::numFrames = 0;
 float CPU::fps = 0.0F;
@@ -31,18 +29,6 @@ void CPU::Init()
     HAL_CRC32::Init();
 
     Beeper::Init();
-}
-
-
-void CPU::GPIO_::WritePin(char port, uint16 maskPin, bool state)
-{
-    HAL_GPIO_WritePin(ports[port - 'A'], maskPin, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
-}
-
-
-bool CPU::GPIO_::ReadPin(char port, uint16 maskPin)
-{
-    return HAL_GPIO_ReadPin(ports[port - 'A'], maskPin) == GPIO_PIN_SET;
 }
 
 

@@ -42,14 +42,6 @@ public:
         static void Update();
     };
 
-    //-------------------------------------------------------------------------------------------------------------------------------------- GPIO ----
-    class GPIO_
-    {
-    public:
-        static void WritePin(char port, uint16 maskPin, bool state);
-
-        static bool ReadPin(char port, uint16 maskPin);
-    };
 
 private:
     /// Время начала замера ФПС (время начала очередного 1-секундного отрезка времени)

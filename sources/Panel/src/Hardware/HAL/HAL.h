@@ -51,6 +51,14 @@ struct HAL_FSMC
 };
 
 
+struct HAL_GPIO
+{
+    static void WritePin(char port, uint16 maskPin, bool state);
+
+    static bool ReadPin(char port, uint16 maskPin);
+};
+
+
 struct HAL_SPI4
 {
     static void Init();
