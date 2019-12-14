@@ -1,2 +1,2 @@
-call make.bat
+call remake.bat
 call rebuild.bat
