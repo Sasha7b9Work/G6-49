@@ -6,7 +6,6 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Log.h"
-#include <stm32f4xx.h>
 #include <cstdlib>
 
 
