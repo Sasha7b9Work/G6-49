@@ -19,9 +19,6 @@ struct HAL_CRC32
 {
     static uint Calculate(const void *address, uint size);
 
-private:
-    friend class CPU;
-
     static void Init();
 };
 

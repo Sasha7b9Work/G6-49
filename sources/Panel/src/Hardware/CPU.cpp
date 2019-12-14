@@ -20,13 +20,7 @@ void CPU::Init()
 
     HAL::Init();
 
-    HAL_FSMC::Init();
-
-    HAL_SPI4::Init();
-
     Keyboard::Init();
-
-    HAL_CRC32::Init();
 
     Beeper::Init();
 }
