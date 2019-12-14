@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Log.h"
 #include "Utils/StringUtils.h"
@@ -12,7 +10,6 @@
 #include <string.h>
 #include <cstdio>
 #include <cctype>
-#endif
 
 
 #ifndef LANG

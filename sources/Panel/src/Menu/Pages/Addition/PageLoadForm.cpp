@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "Menu/Menu.h"
@@ -7,8 +5,6 @@
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Display/Painter.h"
 #include "FDrive/FDrivePanel.h"
-#endif
-
 
 
 extern const PageBase pageLoad;

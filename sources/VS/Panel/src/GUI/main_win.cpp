@@ -1,9 +1,11 @@
-#pragma warning(push)
-#pragma warning(disable:5039)
-#include "stdafx.h"
 #include "defines.h"
-#pragma warning(pop)
-
+#include "Display/Display.h"
+#include "Interface/InterfacePanel.h"
+#include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
+#include "Menu/Menu.h"
+#include "Settings/CalibrationSettings.h"
+#include "Settings/Settings.h"
 
 
 void init()

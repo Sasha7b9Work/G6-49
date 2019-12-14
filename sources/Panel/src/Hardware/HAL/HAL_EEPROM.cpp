@@ -1,10 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
-#endif
-
 
 
 /// \todo Занести это в структуру и обращаться только через структуру, чтобы исключить или уменьшить ошибки в функциях вроде GetSector  

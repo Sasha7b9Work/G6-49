@@ -1,11 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Command.h"
 #include "structs.h"
 #include "Utils/StringUtils.h"
 #include <cstdio>
-#endif
 
 
 

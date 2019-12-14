@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Text.h"
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
@@ -9,7 +7,6 @@
 #include <cstdio>
 #include <string.h>
 #include <cctype>
-#endif
 
 
 namespace Text

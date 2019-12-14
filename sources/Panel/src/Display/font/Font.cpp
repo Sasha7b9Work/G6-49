@@ -1,12 +1,10 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Text.h"
 #include "Font.h"
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
-#endif
+
 
 #include "font7.inc"
 #include "font5.inc"

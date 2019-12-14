@@ -1,10 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "BigNumber.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Math.h"
-#endif
-
 
 
 BigNumber::Number BigNumber::integer;

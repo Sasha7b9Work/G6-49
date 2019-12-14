@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "GeneratorPanel.h"
 #include "Log.h"
@@ -20,8 +18,6 @@
 #include <cmath>
 #include <string.h>
 #include <cstdlib>
-#endif
-
 
 
 namespace Generator

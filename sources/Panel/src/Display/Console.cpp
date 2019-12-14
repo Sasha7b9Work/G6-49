@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Console.h"
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
@@ -9,8 +7,6 @@
 #include "Utils/String.h"
 #include <cstring>
 #include <cstdio>
-#endif
-
 
 
 static const int MAX_STRINGS = 20;

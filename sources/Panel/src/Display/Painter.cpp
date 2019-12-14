@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Log.h"
 #include "Painter.h"
@@ -8,7 +6,6 @@
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#endif
 
 
 namespace Painter

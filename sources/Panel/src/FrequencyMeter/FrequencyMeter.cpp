@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Display/Text.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
@@ -7,8 +5,6 @@
 #include "Utils/Math.h"
 #include "Log.h"
 #include <cstdio>
-#endif
-
 
 
 static uint valueFreq = 0;

@@ -1,13 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Debug.h"
 #include "Log.h"
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
 #include <cstdlib>
-#endif
-
 
 
 volatile static uint timeStart = 0;

@@ -1,6 +1,3 @@
-#include "stdafx.h"
-
-#ifndef WIN32
 #include "Display/InputWindow.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
@@ -10,8 +7,6 @@
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
 #include "PageInput.h"
-#endif
-
 
 
 extern const PageBase pInput;

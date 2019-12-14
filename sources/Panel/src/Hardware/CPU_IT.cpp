@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include <stm32f4xx.h>
 #include "log.h"
@@ -7,7 +5,7 @@
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Utils/Debug.h"
-#endif
+
 
 #define TRACE_HANDLER                               \
     LOG_FUNC_ENTER();                               \

@@ -1,11 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "List.h"
 #include "Interface/InterfacePanel.h"
 #include "Utils/String.h"
-#endif
-
 
 
 template void               List<Task>::Append(Task *);

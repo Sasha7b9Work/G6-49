@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Console.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Display/Painter.h"
@@ -12,8 +10,6 @@
 #include "Menu/Pages/PageDebug.h"
 #include "Utils/Statistics.h"
 #include <cstdlib>
-#endif
-
 
 
 uint8 Display::frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];

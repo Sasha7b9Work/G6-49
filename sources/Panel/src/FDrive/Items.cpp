@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "Display/Painter.h"
@@ -9,8 +7,6 @@
 #include "File.h"
 #include "Interface/InterfacePanel.h"
 #include <cstring>
-#endif
-
 
 
 /// Запрос имени файла с порядковым номером number

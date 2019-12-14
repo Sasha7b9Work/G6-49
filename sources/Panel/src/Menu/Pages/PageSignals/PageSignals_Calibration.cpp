@@ -1,13 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Generator/GeneratorPanel.h"
 #include "Generator/Signals.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/CalibrationSettings.h"
-#endif
-
 
 
 /// ”становить нужный дл€ данной калибровки параметр

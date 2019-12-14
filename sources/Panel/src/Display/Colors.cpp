@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Colors.h"
 #include "Log.h"
@@ -7,8 +5,6 @@
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#endif
-
 
 
 Color Color::BLACK(COLOR_BLACK);

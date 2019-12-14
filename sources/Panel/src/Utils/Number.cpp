@@ -1,9 +1,5 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Number.h"
 #include "Utils/Math.h"
-#endif
-
 
 
 char *Number::integer = 0;

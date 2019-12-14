@@ -1,13 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "log.h"
 #include "Hardware/HAL/HAL.h"
-#endif
-
 
 
 /// Для связи с основным процессором

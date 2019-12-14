@@ -1,16 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Command.h"
 #include "Message.h"
 #include "File.h"
 #include "Items.h"
 #include "Interface/InterfacePanel.h"
-#endif
-
-
-
-
 
 
 static bool EqualsRequestString(Task *task1, Task *task2)

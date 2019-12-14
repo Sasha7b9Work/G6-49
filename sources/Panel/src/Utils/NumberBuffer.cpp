@@ -1,11 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "NumberBuffer.h"
 #include "Utils/StringUtils.h"
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
-#endif
-
 
 
 char *NumberBuffer::buffer = 0;

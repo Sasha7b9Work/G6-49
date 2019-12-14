@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Signals.h"
 #include "Wave.h"
 #include "Display/DisplayTypes.h"
@@ -12,8 +10,6 @@
 #include <cmath>
 #include <string.h>
 #include <cstdlib>
-#endif
-
 
 
 void Wave::Graphics::Draw(Chan::E ch)

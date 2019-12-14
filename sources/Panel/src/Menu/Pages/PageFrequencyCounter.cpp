@@ -1,11 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "PageFrequencyCounter.h"
 #include "Settings/Settings.h"
 #include "Menu/Menu.h"
 #include "Log.h"
-#endif
-
 
 
 extern const PageBase pFrequencyCounter;

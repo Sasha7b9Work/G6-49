@@ -1,12 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
 #include "CalibrationSettings.h"
 #include "Hardware/HAL/HAL.h"
-#endif
-
 
 
 static const CalibrationSettings defSet =

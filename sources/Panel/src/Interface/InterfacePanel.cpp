@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "Transceiver.h"
@@ -18,8 +16,6 @@
 #include "HandlersPanel.h"
 #include "InterfacePanel.h"
 #include <cstdlib>
-#endif
-
 
 
 namespace Interface

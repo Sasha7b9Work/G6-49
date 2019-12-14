@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
@@ -12,8 +10,6 @@
 #include "Settings/Settings.h"
 #include "Hardware/Timer.h"
 #include <cstdlib>
-#endif
-
 
 
 namespace FDrive

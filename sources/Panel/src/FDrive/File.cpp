@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "File.h"
@@ -10,8 +8,6 @@
 #include "Settings/Settings.h"
 #include "Utils/String.h"
 #include <cstring>
-#endif
-
 
 
 static struct Picture

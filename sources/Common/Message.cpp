@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "structs.h"
 #include "Command.h"
@@ -9,8 +7,6 @@
 #include "Settings/CalibrationSettings.h"
 #include <cstring>
 #include <cstdlib>
-#endif
-
 
 
 SimpleMessage::SimpleMessage() : allocated(0), buffer(0), used(0), taken(0)

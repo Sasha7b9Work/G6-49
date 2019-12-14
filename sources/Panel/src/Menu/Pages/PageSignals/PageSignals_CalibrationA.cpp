@@ -1,10 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/CalibrationSettings.h"
-#endif
-
 
 
 extern const PageBase pageCalibrationA;

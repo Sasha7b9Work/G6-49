@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Generator/Signals.h"
 #include "InputWindow.h"
 #include "DisplayTypes.h"
@@ -8,9 +6,8 @@
 #include "Menu/Menu.h"
 #include "Settings/Settings.h"
 #include "Display/Symbols.h"
-#include <cstdio>
-#endif
 #include "Utils/IntValue.h"
+#include <cstdio>
 
 
 

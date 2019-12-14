@@ -1,11 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Settings.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
-#endif
 
 
 #ifdef WIN32

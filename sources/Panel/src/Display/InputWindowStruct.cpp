@@ -1,11 +1,10 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Log.h"
 #include "Generator/Signals.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Generator/GeneratorPanel.h"
 #include "Menu/Menu.h"
+#include "Utils/IntValue.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
@@ -13,8 +12,6 @@
 #include <cstdlib>
 #include <string.h>
 #include <cmath>
-#endif
-#include "Utils/IntValue.h"
 
 
 

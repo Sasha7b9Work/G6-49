@@ -1,11 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "CommonFunctions.h"
 #include "Log.h"
 #include <cstdio>
-#include <string.h>
-#endif
-
+#include <cstring>
 
 
 template<class T> void LoggingArray(T *data, char *format, int num)

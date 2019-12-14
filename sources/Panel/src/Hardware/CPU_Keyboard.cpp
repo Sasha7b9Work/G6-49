@@ -1,13 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include <stm32f4xx.h>
 #include "defines.h"
 #include "Display/Display.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#endif
-
 
 
 #define TIME_UPDATE 2   ///< Время между опросами клавиатуры

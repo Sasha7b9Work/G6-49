@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Display/Colors.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
@@ -13,8 +11,6 @@
 #include "Utils/NumberBuffer.h"
 #include "Utils/Math.h"
 #include "Display/Symbols.h"
-#endif
-
 
 
 extern const PageBase pUSB;

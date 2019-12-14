@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Command.h"
 #include "defines.h"
 #include "Log.h"
@@ -15,8 +13,7 @@
 #include "Menu/Pages/Addition/PageInput.h"
 #include <cstdio>
 #include <cstdlib>
-#endif
-
+#include <cmath>
 
 
 #define SIZE_BUFFER     300

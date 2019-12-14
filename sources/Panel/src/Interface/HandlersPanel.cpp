@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "Command.h"
@@ -9,7 +7,6 @@
 #include "FDrive/FDrivePanel.h"
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "SCPI/SCPI.h"
-#endif
 
 
 namespace Handlers

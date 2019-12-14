@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include <stm32f4xx.h>
 #include "CPU.h"
 #include "LTDC.h"
@@ -10,8 +8,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Log.h"
 #include <cstdlib>
-#endif
-
 
 
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};

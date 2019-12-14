@@ -1,13 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Timer.h"
 #include "Log.h"
 #include <limits>
 #include "Hardware/CPU.h"
 #include "Hardware/Timer4XX.h"
-#endif
-
 
 
 static Timer4XX tim2;   // Для тиков

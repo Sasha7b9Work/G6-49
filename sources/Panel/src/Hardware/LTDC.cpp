@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "LTDC.h"
 #include "CPU.h"
@@ -7,8 +5,6 @@
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include <string.h>
-#endif
-
 
 
 static LTDC_HandleTypeDef handleLTDC;

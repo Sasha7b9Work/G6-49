@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Menu.h"
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
@@ -16,8 +14,6 @@
 #include "Menu/Pages/Addition/PageInput.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
-#endif
-
 
 
 namespace Menu

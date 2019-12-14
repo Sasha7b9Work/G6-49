@@ -1,11 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Message.h"
 #include "Interface/InterfacePanel.h"
 #include "Utils/Queue.h"
-#endif
-
 
 
 template Queue<Task>::Queue();

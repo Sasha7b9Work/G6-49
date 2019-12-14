@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Menu.h"
 #include "Menu/MenuItems.h"
@@ -9,8 +7,6 @@
 #include "Utils/StringUtils.h"
 #include "Display/InputWindow.h"
 #include <cmath>
-#endif
-
 
 
 void Menu::Draw()
