@@ -1937,11 +1937,6 @@
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
-              <FileName>CPU_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CPU_Keyboard.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
@@ -2015,6 +2010,11 @@
               <FileName>HAL_GPIO.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_GPIO.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_SPI4.cpp</FileName>
