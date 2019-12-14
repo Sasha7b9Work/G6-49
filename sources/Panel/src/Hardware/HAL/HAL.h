@@ -59,3 +59,15 @@ struct HAL_SPI4
     static void WaitFalling();
 };
 
+
+class HAL_TIM4
+{
+public:
+    static void Init(void (*func)());
+    /// Завести таймер, который остановится в timeStop мс
+    static void Start(uint timeStopMS);
+
+    static void Stop();
+
+    static void ElapsedCallback();
+};

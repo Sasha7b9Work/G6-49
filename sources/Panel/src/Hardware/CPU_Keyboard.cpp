@@ -7,14 +7,9 @@
 #include "Hardware/HAL/HAL.h"
 
 
-#define TIME_UPDATE 2   ///< Время между опросами клавиатуры
 static KeyEvent commands[10];
 static int pointer = 0;
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
-/// Таймер для опроса клавиатуры
-static TIM_HandleTypeDef handleTIM4;
-static void(*callbackKeyboard)() = 0;
-
 
 
 static void FillCommand(KeyEvent::E control, KeyEvent::Action::E action);
@@ -73,7 +68,7 @@ void CPU::Keyboard::Init()
 
     pointer = 0;
 
-    CPU::Keyboard::SetCallback(&Keyboard::Update);
+    HAL_TIM4::Init(&Keyboard::Update);
 
     CPU::Keyboard::InitInputs(sls, slsAsciiPorts, 6, rls, rlsAsciiPorts, 5);
 
@@ -277,27 +272,6 @@ void CPU::Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, 
         HAL_GPIO_Init(ports[portSL[i] - 'A'], &isGPIO);
     }
 
-    // Инициализируем таймер, по прерываниям которого будем опрашивать клавиатуру
-    HAL_NVIC_SetPriority(TIM4_IRQn, 0, 1);
-
-    HAL_NVIC_EnableIRQ(TIM4_IRQn);
-
-    handleTIM4.Instance = TIM4;
-    handleTIM4.Init.Period = TIME_UPDATE * 10 - 1;
-    handleTIM4.Init.Prescaler = static_cast<uint>((SystemCoreClock / 2) / 10000) - 1;
-    handleTIM4.Init.ClockDivision = 0;
-    handleTIM4.Init.CounterMode = TIM_COUNTERMODE_UP;
-
-    if (HAL_TIM_Base_Init(&handleTIM4) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
-    if (HAL_TIM_Base_Start_IT(&handleTIM4) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
-
     // Инициализируем ручку
     isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2;
     isGPIO.Mode = GPIO_MODE_INPUT;
@@ -346,45 +320,6 @@ const char *PanelControlName(const KeyEvent &control)
 }
 
 
-void CPU::Keyboard::TIM4_::ElapsedCallback(void *htim)
-{
-    if (static_cast<TIM_HandleTypeDef *>(htim) == &handleTIM4 && callbackKeyboard)
-    {
-        callbackKeyboard();
-    }
-}
-
-
-void CPU::Keyboard::SetCallback(void(*func)())
-{
-    callbackKeyboard = func;
-}
-
-
-void CPU::Keyboard::TIM4_::Start(uint timeStopMS)
-{
-    Stop();
-
-    if (timeStopMS == MAX_UINT)
-    {
-        return;
-    }
-
-    uint dT = timeStopMS - TIME_MS;
-
-    handleTIM4.Init.Period = (dT * 2) - 1;  // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
-
-    HAL_TIM_Base_Init(&handleTIM4);
-    HAL_TIM_Base_Start_IT(&handleTIM4);
-}
-
-
-void CPU::Keyboard::TIM4_::Stop()
-{
-    HAL_TIM_Base_Stop_IT(&handleTIM4);
-}
-
-
 void CPU::Keyboard::Draw()
 {
 } 
@@ -401,7 +336,7 @@ extern "C" {
             if ((TIM4->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
             {
                 TIM4->SR = ~TIM_DIER_UIE;
-                CPU::Keyboard::TIM4_::ElapsedCallback(&handleTIM4);
+                HAL_TIM4::ElapsedCallback();
             }
         }
     }

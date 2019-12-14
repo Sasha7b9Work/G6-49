@@ -32,9 +32,6 @@ public:
         static void Init();
 
     public:
-        /// Установка каллбэка для клавиатуры
-        static void SetCallback(void(*func)());
-
         static void InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL);
         /// Возвращает true, если буфер пуст
         static bool BufferIsEmpty();
@@ -42,18 +39,6 @@ public:
         static KeyEvent GetNextControl();
         /// Функция-заглушка. Для эмулятора, на котором нет физической клавиатуры и нужно её рисовать на экране
         static void Draw();
-
-        //----------------------------------------------------------------------------------------------------------------------------------- TIM4 ---
-        class TIM4_
-        {
-        public:
-            /// Завести таймер, который остановится в timeStop мс
-            static void Start(uint timeStopMS);
-
-            static void Stop();
-
-            static void ElapsedCallback(void *htim);
-        };
 
     private:
 
