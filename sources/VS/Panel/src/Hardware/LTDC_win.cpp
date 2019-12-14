@@ -1,21 +1,21 @@
 #include "defines.h"
-#include "Hardware/LTDC.h"
+#include "Hardware/HAL/HAL.h"
 
 
 
-void LTDC_::Init(uint, uint)
+void HAL_LTDC::Init(uint, uint)
 {
 
 }
 
 
-void LTDC_::SetColors(uint *, uint8)
+void HAL_LTDC::SetColors(uint *, uint8)
 {
 
 }
 
 
-void LTDC_::ToggleBuffers()
+void HAL_LTDC::ToggleBuffers()
 {
 
 }
