@@ -59,28 +59,3 @@ private:
 
     static float fps;
 };
-
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-    /// Прерывание на таймер. Timer.cpp
-    void TIM3_IRQHandler();
-    /// Прерывание на опрос клавиатуры. CPU_Keyboard.cpp
-    void TIM4_IRQHandler();
-
-    void NMI_Handler();
-    void HardFault_Handler();
-    void MemManage_Handler();
-    void BusFault_Handler();
-    void UsageFault_Handler();
-    void SVC_Handler();
-    void DebugMon_Handler();
-    void PendSV_Handler();
-    void SysTick_Handler();
-    
-#ifdef __cplusplus
-}
-#endif
