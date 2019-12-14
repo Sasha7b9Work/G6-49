@@ -42,7 +42,6 @@ source_group(FrequencyMeter           REGULAR_EXPRESSION src/FrequencyMeter/*)
 source_group(Generator                REGULAR_EXPRESSION src/Generator/*)
 source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\HAL            REGULAR_EXPRESSION src/Hardware/HAL/*)
-source_group(Hardware\\Modules        REGULAR_EXPRESSION src/Hardware/Modules/*)
 source_group(Interface                REGULAR_EXPRESSION src/Interface/*)
 source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*)
 source_group(libs\\HAL                REGULAR_EXPRESSION src/libs/HAL/*)
@@ -68,7 +67,6 @@ file(GLOB SOURCES   ../common/Command.cpp ../common/Command.h
                     src/Generator/*
                     src/Hardware/*
                     src/Hardware/HAL/*
-                    src/Hardware/Modules/*
                     src/Interface/*
                     src/libs/CMSIS/startup_stm32f429xx.s
                     src/libs/HAL/*

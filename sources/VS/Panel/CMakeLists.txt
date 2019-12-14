@@ -79,9 +79,6 @@ source_group(Hardware                 FILES              ../../Panel/src/Hardwar
                                                                      src/Hardware/Timer4XX_win.cpp
                                                          ../../Panel/src/Hardware/VCP.cpp
                                                          ../../Panel/src/Hardware/VCP.h)
-source_group(Hardware\\Modules        FILES              ../../Panel/src/Hardware/Modules/EEPROM.h
-                                                                     src/Hardware/Modules/EEPROM_win.cpp
-                                                         ../../Panel/src/Hardware/Modules/SPI.h)
 source_group(Interface                FILES              ../../Panel/src/Interface/HandlersPanel.cpp
                                                          ../../Panel/src/Interface/HandlersPanel.h
                                                          ../../Panel/src/Interface/InterfacePanel.cpp
@@ -145,8 +142,6 @@ file(GLOB SOURCES   ../../common/Command.cpp
                     ../../Panel/src/Hardware/Timer4XX.h
                     ../../Panel/src/Hardware/VCP.cpp
                     ../../Panel/src/Hardware/VCP.h
-                    ../../Panel/src/Hardware/Modules/EEPROM.h
-                    ../../Panel/src/Hardware/Modules/SPI.h
                     ../../Panel/src/Interface/HandlersPanel.cpp
                     ../../Panel/src/Interface/HandlersPanel.h
                     ../../Panel/src/Interface/InterfacePanel.cpp
