@@ -8,7 +8,7 @@
 #define RTC_GET_PACKED_TIME() {}
 #define RTC_SET_TIME_AND_DATA(d, m, y, h, min, s)
 
-#define ERROR_HANDLER() CPU::ErrorHandler()
+
 
 
 
@@ -21,8 +21,6 @@ public:
     static void Update();
 
     static float GetFPS();
-
-    static void ErrorHandler();
 
     //----------------------------------------------------------------------------------------------------------------------------------- Keyboard ---
     class Keyboard

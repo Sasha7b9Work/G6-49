@@ -4,6 +4,7 @@
 #include "Hardware/Beeper.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 
 
 #define TIME_UPDATE 2   ///< Время между опросами клавиатуры

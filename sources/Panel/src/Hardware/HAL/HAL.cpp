@@ -5,3 +5,11 @@
 void HAL::Init()
 {
 }
+
+__attribute((noreturn)) void HAL::ErrorHandler()
+{
+    while(true)
+    {
+
+    }
+}

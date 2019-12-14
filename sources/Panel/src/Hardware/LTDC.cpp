@@ -3,6 +3,7 @@
 #include "CPU.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include <string.h>
 

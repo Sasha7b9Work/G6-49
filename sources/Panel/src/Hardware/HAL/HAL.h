@@ -1,12 +1,17 @@
 #pragma once
 
 
+#define ERROR_HANDLER() HAL::ErrorHandler()
+
+
 struct CalibrationSettings;
 
 
 struct HAL
 {
 	static void Init();
+
+    static void ErrorHandler();
 };
 
 

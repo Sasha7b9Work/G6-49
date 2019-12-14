@@ -214,12 +214,3 @@ void HAL_MspInit()
     /* SysTick_IRQn interrupt configuration */
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
-
-
-__attribute((noreturn)) void CPU::ErrorHandler()
-{
-    while (true)
-    {
-
-    }
-}
