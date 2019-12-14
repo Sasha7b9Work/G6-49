@@ -3,6 +3,7 @@
 #include "Display/Display.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Keyboard.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 
@@ -56,7 +57,7 @@ static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
 static bool init = false;
 
 
-void CPU::Keyboard::Init()
+void Keyboard::Init()
 {
     for (int i = 0; i < 5; i++)
     {
@@ -70,13 +71,13 @@ void CPU::Keyboard::Init()
 
     HAL_TIM4::Init(&Keyboard::Update);
 
-    CPU::Keyboard::InitInputs(sls, slsAsciiPorts, 6, rls, rlsAsciiPorts, 5);
+    Keyboard::InitInputs(sls, slsAsciiPorts, 6, rls, rlsAsciiPorts, 5);
 
     init = true;
 }
 
 
-void CPU::Keyboard::Update()
+void Keyboard::Update()
 {
     if(!init)
     {
@@ -226,13 +227,13 @@ static void FillCommand(KeyEvent::E key, KeyEvent::Action::E action)
 }
 
 
-bool CPU::Keyboard::BufferIsEmpty()
+bool Keyboard::BufferIsEmpty()
 {
     return pointer == 0;
 }
 
 
-KeyEvent CPU::Keyboard::GetNextControl()
+KeyEvent Keyboard::GetNextControl()
 {
     KeyEvent retValue;
 
@@ -254,7 +255,7 @@ KeyEvent CPU::Keyboard::GetNextControl()
 }
 
 
-void CPU::Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL)
+void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL)
 {
     GPIO_InitTypeDef isGPIO;
 
@@ -320,7 +321,7 @@ const char *PanelControlName(const KeyEvent &control)
 }
 
 
-void CPU::Keyboard::Draw()
+void Keyboard::Draw()
 {
 } 
 

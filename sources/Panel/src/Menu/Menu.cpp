@@ -5,6 +5,7 @@
 #include "Generator/GeneratorPanel.h"
 #include "Generator/Signals.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Keyboard.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
 #include "Menu/Pages/Include/PageSignals.h"
@@ -59,9 +60,9 @@ void Menu::Update()
 {
     static uint timePress = 0;  // Время наступления последнего события. Если равно нулю, то настройки уже сохранены и сохранять их не требуется
 
-    while (!CPU::Keyboard::BufferIsEmpty())
+    while (!Keyboard::BufferIsEmpty())
     {
-        KeyEvent control = CPU::Keyboard::GetNextControl();
+        KeyEvent control = Keyboard::GetNextControl();
 
         ProcessContorl(control);
 

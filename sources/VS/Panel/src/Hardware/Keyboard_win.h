@@ -1,3 +1,5 @@
+#include "Hardware/Keyboard.h"
+
 static KeyEvent commands[10];
 static int pointer = 0;
 
@@ -9,25 +11,25 @@ static void AddKeyboardEvent(KeyEvent &event)
 
 
 
-void CPU::Keyboard::Init()
+void Keyboard::Init()
 {
 
 }
 
 
-void CPU::Keyboard::Draw()
+void Keyboard::Draw()
 {
 
 }
 
 
-bool CPU::Keyboard::BufferIsEmpty()
+bool Keyboard::BufferIsEmpty()
 {
     return pointer == 0;
 }
 
 
-KeyEvent CPU::Keyboard::GetNextControl()
+KeyEvent Keyboard::GetNextControl()
 {
     KeyEvent retValue;
 

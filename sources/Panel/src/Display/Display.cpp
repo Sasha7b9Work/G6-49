@@ -3,6 +3,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Keyboard.h"
 #include "Hardware/HAL/HAL.h"
 #include "InputWindow.h"
 #include "Menu/Hint.h"
@@ -37,7 +38,7 @@ void Display::Update()
     Hint::Draw();
     Statistics::Show();
     Console::Draw();
-    CPU::Keyboard::Draw();
+    Keyboard::Draw();
     Painter::EndScene();
     Statistics::EndFrame();
 }

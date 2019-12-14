@@ -285,4 +285,4 @@ void Painter::LoadPalette()
 
 }
 
-#include "Hardware/CPU_Keyboard_win.h"
+#include "Hardware/Keyboard_win.h"

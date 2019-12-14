@@ -69,7 +69,7 @@ source_group(Hardware                 FILES              ../../Panel/src/Hardwar
                                                          ../../Panel/src/Hardware/Controls.h
                                                          ../../Panel/src/Hardware/CPU.h
                                                                      src/Hardware/CPU_win.cpp
-                                                                     src/Hardware/CPU_Keyboard_win.cpp
+                                                                     src/Hardware/Keyboard_win.h
                                                          ../../Panel/src/Hardware/LTDC.h
                                                                      src/Hardware/LTDC_win.cpp
                                                          ../../Panel/src/Hardware/stm429.h
@@ -150,7 +150,7 @@ file(GLOB SOURCES   ../../common/Command.cpp
                                 src/GUI/*
                                 src/Display/Painter_win.cpp
                                 src/Hardware/CPU_win.cpp
-                                src/Hardware/CPU_Keyboard_win.cpp
+                                src/Hardware/Keyboard_win.h
                                 src/Hardware/LTDC_win.cpp
                                 src/Hardware/Timer4XX_win.cpp
                                 src/Hardware/Modules/EEPROM_win.cpp
