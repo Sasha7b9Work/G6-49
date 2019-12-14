@@ -33,7 +33,6 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Timer4XX.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Modules/EEPROM.h"
 
 #include "Interface/HandlersPanel.h"
 #include "Interface/InterfacePanel.h"

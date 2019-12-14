@@ -1,6 +1,9 @@
 #pragma once
 
 
+struct CalibrationSettings;
+
+
 struct HAL
 {
 	static void Init();
@@ -15,6 +18,15 @@ struct HAL_DAC2
 private:
 	static void ConfigTIM7(uint prescaler);
 };
+
+
+struct HAL_EEPROM
+{
+    static void SaveSettings(CalibrationSettings *settings);
+
+    static void LoadSettings(CalibrationSettings *settings);
+};
+
 
 struct HAL_SPI4
 {

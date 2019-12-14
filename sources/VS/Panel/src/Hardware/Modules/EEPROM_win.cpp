@@ -1,15 +1,15 @@
 #include "defines.h"
-#include "Hardware/Modules/EEPROM.h"
+#include "Hardware/HAL/HAL.h"
 
 
 
-void EEPROM::SaveSettings(CalibrationSettings *)
+void HAL_EEPROM::SaveSettings(CalibrationSettings *)
 {
 
 }
 
 
-void EEPROM::LoadSettings(CalibrationSettings *)
+void HAL_EEPROM::LoadSettings(CalibrationSettings *)
 {
 
 }

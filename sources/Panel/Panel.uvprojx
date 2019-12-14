@@ -1997,24 +1997,14 @@
               <FilePath>.\src\Hardware\HAL\HAL_DAC2.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_SPI4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI4.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Hardware/Modules</GroupName>
-          <Files>
-            <File>
-              <FileName>EEPROM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Modules\EEPROM.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>EEPROM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Modules\EEPROM.h</FilePath>
             </File>
           </Files>
         </Group>

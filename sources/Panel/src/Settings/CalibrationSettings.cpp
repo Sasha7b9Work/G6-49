@@ -4,7 +4,7 @@
 #include "log.h"
 #include "structs.h"
 #include "CalibrationSettings.h"
-#include "Hardware/Modules/EEPROM.h"
+#include "Hardware/HAL/HAL.h"
 #endif
 
 
@@ -28,7 +28,7 @@ CalibrationSettings setCal = defSet;
 void CalibrationSettings::Load()
 {
     *this = defSet;                     // Сначала заполняем значениями по умолчанию - вдруг сохранённых настроек нету
-    EEPROM::LoadSettings(this);
+    HAL_EEPROM::LoadSettings(this);
 
     for (int ch = 0; ch < Chan::Count; ch++)
     {
@@ -42,7 +42,7 @@ void CalibrationSettings::Load()
 
 void CalibrationSettings::Save()
 {
-    EEPROM::SaveSettings(this);
+    HAL_EEPROM::SaveSettings(this);
 }
 
 

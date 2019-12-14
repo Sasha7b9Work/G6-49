@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #ifndef WIN32
-#include "EEPROM.h"
+#include "defines.h"
+#include "Hardware/HAL/HAL.h"
+#include "Settings/CalibrationSettings.h"
 #endif
 
 
@@ -46,7 +48,7 @@ static uint GetSector(uint address);
 
 
 
-void EEPROM::SaveSettings(CalibrationSettings *settings)
+void HAL_EEPROM::SaveSettings(CalibrationSettings *settings)
 {
     uint address = FindFirstFreeRecord(ADDR_SECTOR_CALIBRATION, SIZE_SECTOR_CALIBRATION, sizeof(CalibrationSettings));
 
@@ -60,7 +62,7 @@ void EEPROM::SaveSettings(CalibrationSettings *settings)
 }
 
 
-void EEPROM::LoadSettings(CalibrationSettings *settings)
+void HAL_EEPROM::LoadSettings(CalibrationSettings *settings)
 {
     uint address = FindLastOccupiedRecord(ADDR_SECTOR_CALIBRATION, SIZE_SECTOR_CALIBRATION, sizeof(CalibrationSettings));
 

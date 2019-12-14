@@ -3,7 +3,7 @@
 #include "Settings.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
-#include "Hardware/Modules/EEPROM.h"
+#include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
 #endif
 
