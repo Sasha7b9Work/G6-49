@@ -1996,6 +1996,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_DAC2.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_SPI4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI4.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2010,16 +2015,6 @@
               <FileName>EEPROM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Modules\EEPROM.h</FilePath>
-            </File>
-            <File>
-              <FileName>SPI.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Modules\SPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Modules\SPI.h</FilePath>
             </File>
           </Files>
         </Group>

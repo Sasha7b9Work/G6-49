@@ -5,7 +5,7 @@
 #include "Transceiver.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Modules/SPI.h"
+#include "Hardware/HAL/HAL.h"
 #endif
 
 
@@ -20,18 +20,18 @@ void Transceiver::Transmit(SimpleMessage *message)
 
     while (!result)
     {
-        SPI4_::WaitFalling();                                                   // Ожидаем перехода флага готовности прибора в состояние "свободен"
+        HAL_SPI4::WaitFalling();                                                // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
         for (int i = 0; i < 2; i++)
         {
-            SPI4_::Transmit(message->Size(), 10);                               // Передаём размер передаваемых данных
+            HAL_SPI4::Transmit(message->Size(), 10);                               // Передаём размер передаваемых данных
 
-            SPI4_::Transmit(message->Data(), message->Size(), timeout);         // Передаём непосредственно данные
+            HAL_SPI4::Transmit(message->Data(), message->Size(), timeout);         // Передаём непосредственно данные
 
             uint newSize = 0;
-            SPI4_::Receive(&newSize, 4, 10);                                    // Теперь принимаем размер данных, которые хочет передать нам устройство
+            HAL_SPI4::Receive(&newSize, 4, 10);                                    // Теперь принимаем размер данных, которые хочет передать нам устройство
 
-            uint trashedBytes = SPI4_::ReceiveAndCompare(message->Data(), message->Size());
+            uint trashedBytes = HAL_SPI4::ReceiveAndCompare(message->Data(), message->Size());
 
             result = (trashedBytes == 0);
         }
@@ -51,14 +51,14 @@ void Transceiver::Transmit(SimpleMessage *message)
 
 bool Transceiver::Receive(SimpleMessage *message)
 {
-    SPI4_::WaitFalling();
+    HAL_SPI4::WaitFalling();
 
     uint size = 0;
-    SPI4_::Receive(&size, 4, 10);
+    HAL_SPI4::Receive(&size, 4, 10);
 
     if (message->AllocateMemory(size))
     {
-        SPI4_::Receive(message->Data(), message->Size(), 50);
+        HAL_SPI4::Receive(message->Data(), message->Size(), 50);
         return true;
     }
 

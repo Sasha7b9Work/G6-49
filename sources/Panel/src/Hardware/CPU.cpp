@@ -7,7 +7,7 @@
 #include "Display/Painter.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Modules/SPI.h"
+#include "Hardware/HAL/HAL.h"
 #include "Log.h"
 #include <cstdlib>
 #endif
@@ -50,7 +50,7 @@ void CPU::Init()
 
     FSMC::Init();
 
-    SPI4_::Init();
+    HAL_SPI4::Init();
 
     Keyboard::Init();
 

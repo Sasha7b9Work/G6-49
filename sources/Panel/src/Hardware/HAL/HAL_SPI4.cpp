@@ -5,7 +5,7 @@
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "log.h"
-#include "SPI.h"
+#include "Hardware/HAL/HAL.h"
 #endif
 
 
@@ -32,7 +32,7 @@ static SPI_HandleTypeDef handleSPI4 =
 
 
 
-void SPI4_::Init()
+void HAL_SPI4::Init()
 {
 	GPIO_InitTypeDef isGPIO =
 	{   //  CLK         MI           MO
@@ -55,7 +55,7 @@ void SPI4_::Init()
 }
 
 
-bool SPI4_::Transmit(const void *buffer, uint size, uint timeout)
+bool HAL_SPI4::Transmit(const void *buffer, uint size, uint timeout)
 {
 	if (HAL_SPI_Transmit(&handleSPI4, static_cast<uint8 *>(const_cast<void *>(buffer)), static_cast<uint16>(size), timeout) != HAL_OK)
 	{
@@ -66,13 +66,13 @@ bool SPI4_::Transmit(const void *buffer, uint size, uint timeout)
 }
 
 
-bool SPI4_::Transmit(uint value, uint timeout)
+bool HAL_SPI4::Transmit(uint value, uint timeout)
 {
     return Transmit(&value, 4, timeout);
 }
 
 
-bool SPI4_::Receive(void *recv, uint size, uint timeout)
+bool HAL_SPI4::Receive(void *recv, uint size, uint timeout)
 {
 	if (HAL_SPI_Receive(&handleSPI4, static_cast<uint8 *>(recv), static_cast<uint16>(size), timeout) != HAL_OK)
 	{
@@ -83,7 +83,7 @@ bool SPI4_::Receive(void *recv, uint size, uint timeout)
 }
 
 
-uint SPI4_::ReceiveAndCompare(const void *compared, uint size)
+uint HAL_SPI4::ReceiveAndCompare(const void *compared, uint size)
 {
     uint result = 0;
 
@@ -104,7 +104,7 @@ uint SPI4_::ReceiveAndCompare(const void *compared, uint size)
 
 
 
-void SPI4_::WaitFreedom()
+void HAL_SPI4::WaitFreedom()
 {
 	while (!IsReady())
 	{
@@ -112,7 +112,7 @@ void SPI4_::WaitFreedom()
 }
 
 
-void SPI4_::WaitFalling()
+void HAL_SPI4::WaitFalling()
 {
     while (IsReady())
     {
@@ -125,7 +125,7 @@ void SPI4_::WaitFalling()
 
 
 
-bool SPI4_::IsReady()
+bool HAL_SPI4::IsReady()
 {
 	return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_SET;
 }

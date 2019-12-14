@@ -12,7 +12,7 @@
 #include "FrequencyMeter/FrequencyMeter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Modules/SPI.h"
+#include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
 #include "Utils/Queue.h"
 #include "HandlersPanel.h"
