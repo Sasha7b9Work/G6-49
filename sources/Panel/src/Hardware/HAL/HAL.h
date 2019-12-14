@@ -28,6 +28,13 @@ struct HAL_EEPROM
 };
 
 
+// Шина для связи с ПЛИС
+struct HAL_FSMC
+{
+    static void Init();
+};
+
+
 struct HAL_SPI4
 {
     static void Init();
