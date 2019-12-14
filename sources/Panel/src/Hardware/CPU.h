@@ -9,9 +9,6 @@
 #define RTC_SET_TIME_AND_DATA(d, m, y, h, min, s)
 
 
-
-
-
 class CPU
 {
 public:
@@ -55,8 +52,6 @@ public:
     };
 
 private:
-
-    static void SystemClockConfig();
     /// Время начала замера ФПС (время начала очередного 1-секундного отрезка времени)
     static uint timeStartMeasFPS;
     /// Сколько фреймов насчитано с начала очередного 1-секундного отрезка времени
