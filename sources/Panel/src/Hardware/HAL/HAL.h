@@ -1,4 +1,5 @@
 #pragma once
+#include "Display/Colors.h"
 
 
 #define ERROR_HANDLER() HAL::ErrorHandler()
@@ -53,6 +54,18 @@ struct HAL_GPIO
     static void WritePin(char port, uint16 maskPin, bool state);
 
     static bool ReadPin(char port, uint16 maskPin);
+};
+
+
+struct HAL_LTDC
+{
+    static void Init(uint frontBuffer, uint backBuffer);
+
+    static void SetColors(uint *clut, uint8 numColors);
+
+    static void ToggleBuffers();
+
+    static void FillRegion(int x, int y, int width, int height, Color color);
 };
 
 

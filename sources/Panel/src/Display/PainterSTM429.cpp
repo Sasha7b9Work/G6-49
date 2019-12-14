@@ -1,11 +1,11 @@
 #include "Painter.h"
 #include "Hardware/CPU.h"
-#include "Hardware/LTDC.h"
 #include "Utils/Math.h"
 #include "Utils/Debug.h"
 #include "Colors.h"
 #include "Settings/Settings.h"
 #include "Display/Display.h"
+#include "Hardware/HAL/HAL.h"
 #include <cmath>
 #include <cstdio>
 
@@ -33,7 +33,7 @@ void Painter::SetColorValue(Color color, col_val value)
 
 void Painter::LoadPalette()
 {
-    LTDC_::SetColors(&COLOR(0), Color::NUMBER.value);
+    HAL_LTDC::SetColors(&COLOR(0), Color::NUMBER.value);
     
     Color::InitGlobalColors();
 }
@@ -41,7 +41,7 @@ void Painter::LoadPalette()
 
 void Painter::EndScene()
 {
-    LTDC_::ToggleBuffers();
+    HAL_LTDC::ToggleBuffers();
 }
 
 

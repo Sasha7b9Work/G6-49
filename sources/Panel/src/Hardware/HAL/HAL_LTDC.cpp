@@ -19,7 +19,7 @@ static uint backBuffer = 0;
 static void SetBuffers(uint frontBuffer, uint backBuffer);
 
 
-void LTDC_::Init(uint front, uint back)
+void HAL_LTDC::Init(uint front, uint back)
 {
     GPIO_InitTypeDef isGPIO =
     {
@@ -128,7 +128,7 @@ static void SetBuffers(uint front, uint back)
 }
 
 
-void LTDC_::SetColors(uint *clut, uint8 numColors)
+void HAL_LTDC::SetColors(uint *clut, uint8 numColors)
 {
     HAL_LTDC_ConfigCLUT(&handleLTDC, clut, numColors, 0);
     
@@ -136,7 +136,7 @@ void LTDC_::SetColors(uint *clut, uint8 numColors)
 }
 
 
-void LTDC_::ToggleBuffers()
+void HAL_LTDC::ToggleBuffers()
 {
     hDMA2D.Init.Mode = DMA2D_M2M;
 
@@ -153,7 +153,7 @@ void LTDC_::ToggleBuffers()
 }
 
 
-void LTDC_::FillRegion(int, int, int, int, Color color)
+void HAL_LTDC::FillRegion(int, int, int, int, Color color)
 {
     /// \todo Не работает функция
 

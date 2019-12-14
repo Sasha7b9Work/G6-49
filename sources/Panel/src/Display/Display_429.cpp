@@ -1,13 +1,13 @@
 #include "defines.h"
 #include "Display/Display.h"
-#include "Hardware/LTDC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Display/Text.h"
 
 
 
 void Display::Init()
 {
-    LTDC_::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
+    HAL_LTDC::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
 
     Text::SetUpperCase(true);
 

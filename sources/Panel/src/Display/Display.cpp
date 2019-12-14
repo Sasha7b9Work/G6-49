@@ -3,7 +3,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Hardware/CPU.h"
-#include "Hardware/LTDC.h"
+#include "Hardware/HAL/HAL.h"
 #include "InputWindow.h"
 #include "Menu/Hint.h"
 #include "Menu/Menu.h"

@@ -1942,16 +1942,6 @@
               <FilePath>.\src\Hardware\CPU_Keyboard.cpp</FilePath>
             </File>
             <File>
-              <FileName>LTDC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\LTDC.h</FilePath>
-            </File>
-            <File>
-              <FileName>LTDC.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\LTDC.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
@@ -2015,6 +2005,11 @@
               <FileName>HAL_IT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_LTDC.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_LTDC.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_SPI4.cpp</FileName>

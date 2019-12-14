@@ -1,5 +1,4 @@
 #include "CPU.h"
-#include "LTDC.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Hardware/Beeper.h"
