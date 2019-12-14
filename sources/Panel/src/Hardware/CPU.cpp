@@ -1,4 +1,3 @@
-#include <stm32f4xx.h>
 #include "CPU.h"
 #include "LTDC.h"
 #include "Display/Console.h"
@@ -7,6 +6,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Log.h"
+#include <stm32f4xx.h>
 #include <cstdlib>
 
 
