@@ -54,19 +54,6 @@ public:
         static bool ReadPin(char port, uint16 maskPin);
     };
 
-    //-------------------------------------------------------------------------------------------------------------------------------------- CRC32 ---
-    class CRC32
-    {
-    public:
-        static uint Calculate(const void *address, uint size);
-
-    private:
-        friend class CPU;
-
-        static void Init();
-    };
-
-
 private:
 
     static void SystemClockConfig();
