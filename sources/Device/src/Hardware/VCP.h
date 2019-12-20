@@ -6,30 +6,32 @@
 class SimpleMessage;
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-namespace VCP
+struct VCP
 {
-    const int DEVICE_FS = 0;
+    static const int DEVICE_FS = 0;
 
     /// Инициализация
-    void Init();
+    static void Init();
 
-    void SendData(const void *data, uint size = 0);
+    static void SendData(const void *data, uint size = 0);
     /// Передаётся строка без завершающего символа
-    void SendString(char *data);
+    static void SendString(char *data);
     /// Передача строки с символом конца строки
-    void SendStringEOF(char *data);
+    static void SendStringEOF(char *data);
 
-    void SendByte(uint8 data);
+    static void SendByte(uint8 data);
 
-    extern USBD_HandleTypeDef handleUSBD;
+    static USBD_HandleTypeDef handleUSBD;
 
-    extern bool connectedToUSB;
+    static bool connectedToUSB;
 
-    extern bool cableUSBisConnected;
+    static bool cableUSBisConnected;
 
-    namespace Handler
+    struct Handler
     {
-        void Processing(SimpleMessage *msg);
-    }
+        static void Processing(SimpleMessage *msg);
+    };
+
+private:
+    bool PrevSendingComplete();
 };
