@@ -207,7 +207,7 @@ uint64 FirstValue()
 
             uint64 result = 0;
 
-            if (String2UInt64(buff, &result))
+            if (SU::String2UInt64(buff, &result))
             {
                 return result;
             }
@@ -227,7 +227,7 @@ uint64 SecondValue()
         {
             uint64 result = 0;
 
-            if (String2UInt64(&buffer[i + 1], &result))
+            if (SU::String2UInt64(&buffer[i + 1], &result))
             {
                 return result;
             }
@@ -247,14 +247,14 @@ static uint64 BufferToValue()
 
     if (type == Uint)
     {
-        if (!String2UInt64(buffer, &result))
+        if (!SU::String2UInt64(buffer, &result))
         {
             result = 0;
         }
     }
     else if (type == Binary)
     {
-        result = StringToBin32(buffer);
+        result = SU::StringToBin32(buffer);
     }
     //else if (type == Uint10_Uint10 || type == Uint14_Uint14)
     else
@@ -388,13 +388,13 @@ static void DrawValue(int x, int y, uint8 i)
 
     if (type == Uint)
     {
-        Text::DrawFormatText(x, y, UInt64_2String(VALUE(i)));
+        Text::DrawFormatText(x, y, SU::UInt64_2String(VALUE(i)));
     }
     else if (type == Binary)
     {
         char buf[33];
 
-        Text::DrawFormatText(x, y, Bin2StringN((uint)VALUE(i), buf, SizeBuffer(name)));
+        Text::DrawFormatText(x, y, SU::Bin2StringN((uint)VALUE(i), buf, SizeBuffer(name)));
     }
     else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
     {
@@ -403,9 +403,9 @@ static void DrawValue(int x, int y, uint8 i)
 
         uint first = VALUE(i) & mask;
         uint second = (VALUE(i) >> numBits) & mask;
-        x = Text::DrawFormatText(x, y, UInt2String(first));
+        x = Text::DrawFormatText(x, y, SU::UInt2String(first));
         x = Text::DrawFormatText(x, y, ".");
-        Text::DrawFormatText(x, y, UInt2String(second));
+        Text::DrawFormatText(x, y, SU::UInt2String(second));
     }
 }
 
@@ -548,12 +548,12 @@ static void OnPress_Send()
 
         if (type == Uint)
         {
-            UInt64_2String(VALUE(currentRegister), buffer);
+            SU::UInt64_2String(VALUE(currentRegister), buffer);
             position = static_cast<int>(std::strlen(buffer));
         }
         else if (type == Binary)
         {
-            Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
+            SU::Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
             position = static_cast<int>(std::strlen(buffer));
         }
         else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
@@ -564,9 +564,9 @@ static void OnPress_Send()
             uint first = VALUE(currentRegister) & mask;
             uint second = (VALUE(currentRegister) >> numBits)& mask;
 
-            std::strcpy(buffer, UInt2String(first));
+            std::strcpy(buffer, SU::UInt2String(first));
             std::strcat(buffer, ".");
-            std::strcat(buffer, UInt2String(second));
+            std::strcat(buffer, SU::UInt2String(second));
         }
     }
     else

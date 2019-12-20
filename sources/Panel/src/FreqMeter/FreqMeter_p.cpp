@@ -28,7 +28,7 @@ void PFreqMeter::Draw()
 
     if(FREQ_METER_MEASURE_IS_FREQ)
     {
-        std::sprintf(text, "%sêÃö", UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
+        std::sprintf(text, "%sêÃö", SU::UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
     }
     else
     {
@@ -48,7 +48,7 @@ void PFreqMeter::Draw()
 
         StrOut str = strs[FREQ_AVE_PERIOD][FREQ_TIME_STAMPS];
 
-        std::sprintf(text, "%s%s", UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix);
+        std::sprintf(text, "%s%s", SU::UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix);
     }
 
     Text::DrawBigText(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10, 3, text);

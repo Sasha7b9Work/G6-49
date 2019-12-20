@@ -44,7 +44,7 @@ char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 
     CHAR_BUF(bufferOut, 20);
 
-    Float2String(voltage * factor[num], alwaysSign, 4, bufferOut);
+    SU::Float2String(voltage * factor[num], alwaysSign, 4, bufferOut);
 
     std::strcpy(buffer, bufferOut);
     std::strcat(buffer, suf[LANG][num]);
@@ -52,7 +52,7 @@ char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 }
 
 
-char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20])
+char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
     if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
     {
@@ -141,7 +141,7 @@ char *Time2String(float time, bool alwaysSign, char buffer[20])
     else                                 { num = 3; }
 
     char bufferOut[20];
-    std::strcpy(buffer, Float2String(time * factor[num], alwaysSign, 4, bufferOut));
+    std::strcpy(buffer, SU::Float2String(time * factor[num], alwaysSign, 4, bufferOut));
     std::strcat(buffer, suffix[LANG][num]);
     return buffer;
 }
@@ -171,7 +171,7 @@ char *Freq2String(float freq, bool, char bufferOut[20])
         suffix = LANG_RU ? "Гц" : "Hz";
     }
     char buffer[20];
-    std::strcat(bufferOut, Float2String(freq, false, 4, buffer));
+    std::strcat(bufferOut, SU::Float2String(freq, false, 4, buffer));
     std::strcat(bufferOut, suffix);
     return bufferOut;
 }
@@ -179,14 +179,14 @@ char *Freq2String(float freq, bool, char bufferOut[20])
 
 char *FloatFract2String(float value, bool alwaysSign, char bufferOut[20])
 {
-    return Float2String(value, alwaysSign, 4, bufferOut);
+    return SU::Float2String(value, alwaysSign, 4, bufferOut);
 }
 
 
 char *Phase2String(float phase, bool, char bufferOut[20])
 {
     char buffer[20];
-    std::sprintf(bufferOut, "%s\xa8", Float2String(phase, false, 4, buffer));
+    std::sprintf(bufferOut, "%s\xa8", SU::Float2String(phase, false, 4, buffer));
     return bufferOut;
 }
 
@@ -215,7 +215,7 @@ char *Freq2StringAccuracy(float freq, char bufferOut[20], int numDigits)
         // здесь ничего
     }
     char buffer[20];
-    std::strcat(bufferOut, Float2String(freq, false, numDigits, buffer));
+    std::strcat(bufferOut, SU::Float2String(freq, false, numDigits, buffer));
     std::strcat(bufferOut, suffix);
     return bufferOut;
 }
@@ -243,7 +243,7 @@ char *Bin2String16(uint16 value, char valBuffer[19])
 }
 
 
-char *Bin2StringN(uint value, char buffer[33], int n)
+char *SU::Bin2StringN(uint value, char buffer[33], int n)
 {
     buffer[n] = '\0';
 
@@ -278,10 +278,7 @@ char *Hex32toString(uint value, char buffer[9], bool upper)
 }
 
 
-/// @brief Преобразует value в текстовую строку
-/// @attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопировать себе
-/// \param numMinFields минимальное число занимаемых знакомест. Если для вывода числа столько не требуется, лишние заполняются нулями
-static char *Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
+char *SU::Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
 {
     static char statBuf[20];
     char *buf = buffer ? buffer : statBuf;
@@ -303,14 +300,14 @@ static char *Int2String(int value, bool alwaysSign, int numMinFields, char *buff
 }
 
 
-String Int2String(int value, bool alwaysSign, int numMinFields)
+String SU::Int2String(int value, bool alwaysSign, int numMinFields)
 {
     char buffer[20];
     return String(Int2String(value, alwaysSign, numMinFields, buffer));
 }
 
 
-char *UInt2String(uint value, char buffer[20])
+char *SU::UInt2String(uint value, char buffer[20])
 {
     static char buf[20];
     
@@ -321,7 +318,7 @@ char *UInt2String(uint value, char buffer[20])
 }
 
 
-char *UInt64_2String(uint64 value, char buffer[20])
+char *SU::UInt64_2String(uint64 value, char buffer[20])
 {
     static char buf[20];
 
@@ -332,7 +329,7 @@ char *UInt64_2String(uint64 value, char buffer[20])
 }
 
 
-char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
+char *Int2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
 {
     int allSymbols = allDigits + 1;         // Всего символов на 1 больше, чем десятичных знаков - ещё одно место занимает точка
     
@@ -365,7 +362,7 @@ char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int fo
 
 
 
-uint StringToBin32(char buffer[33])
+uint SU::StringToBin32(char buffer[33])
 {
     uint result = 0;
 
@@ -421,7 +418,7 @@ bool String2Int(char *str, int *value)
 }
 
 
-bool String2UInt64(const char *str, uint64 *value)
+bool SU::String2UInt64(const char *str, uint64 *value)
 {
     uint length = std::strlen(str);
     if(length == 0)
@@ -448,7 +445,7 @@ bool String2UInt64(const char *str, uint64 *value)
 }
 
 
-bool String2UInt(const char *str, uint *value)
+bool SU::String2UInt(const char *str, uint *value)
 {
     uint length = std::strlen(str);
     if (length == 0)
@@ -508,7 +505,7 @@ char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numD
     }
 
     char bufferOut[20];
-    std::strcat(buffer, Float2String(time, alwaysSign, numDigits, bufferOut));
+    std::strcat(buffer, SU::Float2String(time, alwaysSign, numDigits, bufferOut));
     std::strcat(buffer, suffix);
 
     return buffer;
@@ -519,7 +516,7 @@ char *Db2String(float value, int numDigits, char bufferOut[20])
 {
     bufferOut[0] = 0;
     char buffer[20];
-    std::strcat(bufferOut, Float2String(value, false, numDigits, buffer));
+    std::strcat(bufferOut, SU::Float2String(value, false, numDigits, buffer));
     std::strcat(bufferOut, "дБ");
     return bufferOut;
 }
@@ -807,7 +804,7 @@ void SU::ConcatenateSymbol(char *str, char symbol)
 }
 
 
-char *Float2String(float value)
+char *SU::Float2String(float value)
 {
     static char result[100];
     std::sprintf(result, "%f", value);
@@ -821,7 +818,7 @@ char *SU::Buffer2FloatString(const uint8 *buffer)
 }
 
 
-float Buffer2Float(const uint8 *buffer)
+float SU::Buffer2Float(const uint8 *buffer)
 {
     return BitSet32(buffer).floatValue;
 }
@@ -864,4 +861,35 @@ char SU::ToLower(char symbol)
     }
 
     return symbol;
+}
+
+char *SU::UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
+{
+    int allSymbols = allDigits + 1;         // Всего символов на 1 больше, чем десятичных знаков - ещё одно место занимает точка
+
+    char *start = bufferOut;
+
+    char *pointer = start + allSymbols; // Выводить символы будем начиная с конца
+
+    *pointer-- = 0;                         // Пишем ноль в конец строки как символ её конца
+
+    while(pointer >= bufferOut)
+    {
+        if(forFract == 0)
+        {
+            *pointer = '.';
+            pointer--;
+        }
+        forFract--;
+
+        uint digit = value % 10;             // Находим текущую выводимую цифру как остаток от деления на 10
+
+        value /= 10;
+
+        *pointer = static_cast<char>(digit) | 0x30;
+
+        pointer--;
+    }
+
+    return bufferOut;
 }

@@ -55,6 +55,6 @@ void Menu::DrawPagesUGO(int x)
 
         Painter::FillRegion(x + 5 + numPage * delta, 5, delta, 9, Color::FILL);
 
-        Int2String(numPage + 1, false, 2).Draw(x + 6 + numPage * delta, 5, Color::BACK);
+        SU::Int2String(numPage + 1, false, 2).Draw(x + 6 + numPage * delta, 5, Color::BACK);
     }
 }

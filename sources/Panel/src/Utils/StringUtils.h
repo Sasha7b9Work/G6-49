@@ -11,28 +11,33 @@ struct Word
     uint8   notUsed2;
 };
 
-/// \brief Переводит число с плавающей точкой в текстовый вид. numDigits - число цифровых знакомест
-/// \attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопироавать себе.
-/// \retval указатель на строку с числом.
-char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20]);
-
-float Buffer2Float(const uint8 *buffer);
-
-String Int2String(int value, bool alwaysSign, int numMinFields);
-
-char* UInt64_2String(uint64 value, char bufferOut[20] = 0);
-
-char* UInt2String(uint value,                     ///< значение
-                 char bufferOut[20] = 0         ///< сюда записывается возвращаемое значение
-);
-/// Перевести десятичное число в символьную строку длиной allDigits. После точка отстоит на forFract символов от конца
-char* UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract);
-/// Преобразует двоичное число ,представленное строкой из нулей и единиц, в uint
-uint StringToBin32(char buffer[33]);
-
 
 struct SU
 {
+    static char *Float2String(float value);
+    /// \brief Переводит число с плавающей точкой в текстовый вид. numDigits - число цифровых знакомест
+    /// \attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопироавать себе.
+    /// \retval указатель на строку с числом.
+    static char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20]);
+
+    static float Buffer2Float(const uint8 *buffer);
+
+    static String Int2String(int value, bool alwaysSign, int numMinFields);
+    /// @brief Преобразует value в текстовую строку
+    /// @attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопировать себе
+    /// \param numMinFields минимальное число занимаемых знакомест. Если для вывода числа столько не требуется, лишние заполняются нулями
+    static char *Int2String(int value, bool alwaysSign, int numMinFields, char *buffer);
+
+    static char *UInt64_2String(uint64 value, char bufferOut[20] = 0);
+
+    static char *UInt2String(uint value,                ///< значение
+                             char bufferOut[20] = 0     ///< сюда записывается возвращаемое значение
+    );
+    /// Перевести десятичное число в символьную строку длиной allDigits. После точка отстоит на forFract символов от конца
+    static char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract);
+    /// Преобразует двоичное число ,представленное строкой из нулей и единиц, в uint
+    static uint StringToBin32(char buffer[33]);
+
     static char *Buffer2FloatString(const uint8 *buffer);
     /// Возвращает число слов в строке string
     static int NumWords(const char *string);
@@ -56,15 +61,16 @@ struct SU
     static char *ToUpper(char *str);
 
     static char ToLower(char symbol);
+
+    static bool String2UInt64(const char *str, uint64 *value);
+
+    static bool String2UInt(const char *str, uint *value);
+    /// Переводит числов в двоичный вид с заданный количеством разрядов
+    static char *Bin2StringN(uint value, char buffer[33], int n);
+
 private:
     /// Возвращает false, если выбор невозможен - строка кончилась.
     static bool ChooseSymbols(const char **string);
     /// Возвращает false, если выбор невозможен - строка кончилась.
     static bool ChooseSpaces(const char **string);
 };
-
-bool String2UInt64(const char *str, uint64 *value);
-
-bool String2UInt(const char *str, uint *value);
-/// Переводит числов в двоичный вид с заданный количеством разрядов
-char *Bin2StringN(uint value, char buffer[33], int n);

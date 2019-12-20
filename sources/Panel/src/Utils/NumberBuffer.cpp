@@ -202,7 +202,7 @@ int NumberBuffer::PositionCursor()
 uint NumberBuffer::ToUINT()
 {
     uint result = static_cast<uint>(-1);
-    if(!String2UInt(buffer, &result))
+    if(!SU::String2UInt(buffer, &result))
     {
         return static_cast<uint>(-1);
     }
