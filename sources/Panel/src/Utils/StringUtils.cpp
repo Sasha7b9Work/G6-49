@@ -18,40 +18,6 @@
 #endif
 
 
-char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
-{
-    if (Math::IsEquals(voltage, ERROR_VALUE_FLOAT))
-    {
-        std::strcpy(buffer, ERROR_STRING_VALUE);
-        return buffer;
-    }
-
-    pString suf[2][4] =
-    {
-        {"\x10мк¬", "\x10м¬", "\x10¬", "\x10к¬"},
-        {"\x10uV",  "\x10mV", "\x10V", "\x10kV"}
-    };
-
-    static const float factor[4] = {1e6F, 1e3F, 1.0F, 1e-3F};
-
-    int num = 0;
-    float absValue = std::fabsf(voltage) + 0.5e-4F;
-
-    if      (absValue < 1e-3F) { num = 0; }
-    else if (absValue < 1.0F)  { num = 1; }
-    else if (absValue < 1e3F)  { num = 2; }
-    else                       { num = 3; }
-
-    CHAR_BUF(bufferOut, 20);
-
-    SU::Float2String(voltage * factor[num], alwaysSign, 4, bufferOut);
-
-    std::strcpy(buffer, bufferOut);
-    std::strcat(buffer, suf[LANG][num]);
-    return buffer;
-}
-
-
 char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
     if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
@@ -115,134 +81,6 @@ char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferO
 }
 
 
-char *Time2String(float time, bool alwaysSign, char buffer[20])
-{
-    if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
-    {
-        std::strcpy(buffer, ERROR_STRING_VALUE);
-        return buffer;
-    }
-    
-    pString suffix[2][4] =
-    {
-        {"нс", "мкс", "мс", "с"},
-        {"ns", "us",  "ms", "s"}
-    };
-
-    static const float factor[4] = {1e9F, 1e6F, 1e3F, 1.0F};
-
-    float absTime = std::fabsf(time);
-
-    int num = 0;
-
-    if      (absTime + 0.5e-10F < 1e-6F) {          }
-    else if (absTime + 0.5e-7F < 1e-3F)  { num = 1; }
-    else if (absTime + 0.5e-3F < 1.0F)   { num = 2; }
-    else                                 { num = 3; }
-
-    char bufferOut[20];
-    std::strcpy(buffer, SU::Float2String(time * factor[num], alwaysSign, 4, bufferOut));
-    std::strcat(buffer, suffix[LANG][num]);
-    return buffer;
-}
-
-
-char *Freq2String(float freq, bool, char bufferOut[20])
-{
-    bufferOut[0] = 0;
-    const char *suffix = 0;
-    if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
-    {
-        std::strcat(bufferOut, ERROR_STRING_VALUE);
-        return bufferOut;
-    }
-    if (freq >= 1e6F)
-    {
-        suffix = LANG_RU ? "ћ√ц" : "MHz";
-        freq /= 1e6F;
-    }
-    else if (freq >= 1e3F)
-    {
-        suffix = LANG_RU ? "к√ц" : "kHz";
-        freq /= 1e3F;
-    }
-    else
-    {
-        suffix = LANG_RU ? "√ц" : "Hz";
-    }
-    char buffer[20];
-    std::strcat(bufferOut, SU::Float2String(freq, false, 4, buffer));
-    std::strcat(bufferOut, suffix);
-    return bufferOut;
-}
-
-
-char *FloatFract2String(float value, bool alwaysSign, char bufferOut[20])
-{
-    return SU::Float2String(value, alwaysSign, 4, bufferOut);
-}
-
-
-char *Phase2String(float phase, bool, char bufferOut[20])
-{
-    char buffer[20];
-    std::sprintf(bufferOut, "%s\xa8", SU::Float2String(phase, false, 4, buffer));
-    return bufferOut;
-}
-
-
-char *Freq2StringAccuracy(float freq, char bufferOut[20], int numDigits)
-{
-    bufferOut[0] = 0;
-    const char *suffix = LANG_RU ? "√ц" : "Hz";
-    if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
-    {
-        std::strcat(bufferOut, ERROR_STRING_VALUE);
-        return bufferOut;
-    }
-    if (freq >= 1e6F)
-    {
-        suffix = LANG_RU ? "ћ√ц" : "MHz";
-        freq /= 1e6F;
-    }
-    else if (freq >= 1e3F)
-    {
-        suffix = LANG_RU ? "к√ц" : "kHz";
-        freq /= 1e3F;
-    }
-    else
-    {
-        // здесь ничего
-    }
-    char buffer[20];
-    std::strcat(bufferOut, SU::Float2String(freq, false, numDigits, buffer));
-    std::strcat(bufferOut, suffix);
-    return bufferOut;
-}
-
-
-char *Bin2String(uint8 value, char buffer[9])
-{
-    for (int bit = 0; bit < 8; bit++)
-    {
-        buffer[7 - bit] = _GET_BIT(value, bit) ? '1' : '0';
-    }
-    buffer[8] = '\0';
-    return buffer;
-}
-
-
-char *Bin2String16(uint16 value, char valBuffer[19])
-{
-    char buffer[9];
-    std::strcpy(valBuffer, Bin2String(static_cast<uint8>(value >> 8), buffer));
-    valBuffer[8] = ' ';
-    std::strcpy(valBuffer + 9, Bin2String(static_cast<uint8>(value), buffer));
-    valBuffer[18] = '\0';
-    return valBuffer;
-}
-
-
 char *SU::Bin2StringN(uint value, char buffer[33], int n)
 {
     buffer[n] = '\0';
@@ -253,27 +91,6 @@ char *SU::Bin2StringN(uint value, char buffer[33], int n)
         value >>= 1;
     }
 
-    return buffer;
-}
-
-
-char *Hex8toString(uint8 value, char buffer[3])
-{
-    std::sprintf(buffer, "%02X", value);
-    return buffer;
-}
-
-
-char *Hex16toString(uint16 value, char buffer[5])
-{
-    std::sprintf(buffer, "%04X", value);
-    return buffer;
-}
-
-
-char *Hex32toString(uint value, char buffer[9], bool upper)
-{
-    std::sprintf(buffer, upper ? "%08X" : "%08x", value);
     return buffer;
 }
 
@@ -329,39 +146,6 @@ char *SU::UInt64_2String(uint64 value, char buffer[20])
 }
 
 
-char *Int2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
-{
-    int allSymbols = allDigits + 1;         // ¬сего символов на 1 больше, чем дес€тичных знаков - ещЄ одно место занимает точка
-    
-    char *start = bufferOut;
-
-    char *pointer = start + allSymbols; // ¬ыводить символы будем начина€ с конца
-
-    *pointer-- = 0;                         // ѕишем ноль в конец строки как символ еЄ конца
-
-    while(pointer >= bufferOut)
-    {
-        if(forFract == 0)
-        {
-            *pointer = '.';
-            pointer--;
-        }
-        forFract--;
-
-        uint digit = value % 10;             // Ќаходим текущую выводимую цифру как остаток от делени€ на 10
-
-        value /= 10;
-
-        *pointer = static_cast<char>(digit) | 0x30;
-
-        pointer--;
-    }
-
-    return bufferOut;
-}
-
-
-
 uint SU::StringToBin32(char buffer[33])
 {
     uint result = 0;
@@ -379,42 +163,6 @@ uint SU::StringToBin32(char buffer[33])
     }
 
     return result;
-}
-
-
-bool String2Int(char *str, int *value)
-{
-    int sign = str[0] == '-' ? -1 : 1;
-    if (str[0] < '0' || str[0] > '9')
-    {
-        str++;
-    }
-    uint length = std::strlen(str);
-    if (length == 0)
-    {
-        return false;
-    }
-
-    *value = 0;
-    int pow = 1;
-    uint i = length;
-    do
-    {
-        --i;
-        int val = str[i] & (~(0x30));
-        if (val < 0 || val > 9)
-        {
-            return false;
-        }
-        *value += val * pow;
-        pow *= 10;
-    } while (i > 0);
-
-    if (sign == -1)
-    {
-        *value *= -1;
-    }
-    return true;
 }
 
 
@@ -469,73 +217,6 @@ bool SU::String2UInt(const char *str, uint *value)
     } while (i > 0);
 
     return true;
-}
-
-
-char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numDigits)
-{
-    buffer[0] = 0;
-    const char *suffix = LANG_RU ? "с" : "s";
-
-    float fabsTime = std::fabsf(time);
-
-    if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
-    {
-        std::strcat(buffer, ERROR_STRING_VALUE);
-        return buffer;
-    }
-    else if (fabsTime + 0.5e-10F < 1e-6F)
-    {
-        suffix = LANG_RU ? "нс" : "ns";
-        time *= 1e9F;
-    }
-    else if (fabsTime + 0.5e-7F < 1e-3F)
-    {
-        suffix = LANG_RU ? "мкс" : "us";
-        time *= 1e6F;
-    }
-    else if (fabsTime + 0.5e-3F < 1.0F)
-    {
-        suffix = LANG_RU ? "мс" : "ms";
-        time *= 1e3F;
-    }
-    else
-    {
-        // здесь ничего
-    }
-
-    char bufferOut[20];
-    std::strcat(buffer, SU::Float2String(time, alwaysSign, numDigits, bufferOut));
-    std::strcat(buffer, suffix);
-
-    return buffer;
-}
-
-
-char *Db2String(float value, int numDigits, char bufferOut[20])
-{
-    bufferOut[0] = 0;
-    char buffer[20];
-    std::strcat(bufferOut, SU::Float2String(value, false, numDigits, buffer));
-    std::strcat(bufferOut, "дЅ");
-    return bufferOut;
-}
-
-
-int BCD2Int(uint bcd)
-{
-    uint pow = 1;
-
-    int value = 0;
-
-    for (int i = 0; i < 8; i++)
-    {
-        value += (bcd & 0x0f) * pow;
-        pow *= 10;
-        bcd = bcd >> 4;
-    }
-
-    return value;
 }
 
 
@@ -713,49 +394,6 @@ bool SU::WordEqualZeroString(Word *word, char* string)
     }
 
     return (ch - string) == word->numSymbols;
-}
-
-
-bool EqualsZeroStrings(char *str1, char *str2)
-{
-    while ((*str1) == (*str2))
-    {
-        if ((*str1) == '\0')
-        {
-            return true;
-        }
-        str1++;
-        str2++;
-    }
-    return false;
-}
-
-
-bool EqualsStrings(const char *str1, const char *str2, int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        if (str1[i] != str2[i])
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-
-bool EqualsStrings(const char *str1, const char *str2)
-{
-    uint size = std::strlen(str1);
-
-    for (uint i = 0; i < size; i++)
-    {
-        if (str1[i] != str2[i])
-        {
-            return false;
-        }
-    }
-    return true;
 }
 
 
