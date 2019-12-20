@@ -18,7 +18,7 @@
 #define TIME_US    (TIM2->CNT / 90)
 #define TIME_MS    HAL_GetTick()
 
-namespace Timer
+struct Timer
 {
     struct Type
     {
@@ -47,17 +47,17 @@ namespace Timer
         operator uint8() const { return static_cast<uint8>(value); };
     };
 
-    void Init();
+    static void Init();
 
     void DeInit();
     /// Назначает таймеру timer функцию и время срабатывания
-    void Set(Type type, pFuncVV func, uint dTms);
+    static void Set(Type type, pFuncVV func, uint dTms);
 
-    void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
+    static void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
 
     void SetAndEnable(Type type, pFuncVV func, uint dTms);
 
-    void StartOnce(Type type);
+    static void StartOnce(Type type);
 
     void Enable(Type type);
 
@@ -65,7 +65,7 @@ namespace Timer
 
     bool IsRun(Type type);
 
-    void PauseOnTime(uint timeMS);
+    static void PauseOnTime(uint timeMS);
 
     void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
