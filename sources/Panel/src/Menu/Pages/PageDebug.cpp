@@ -108,7 +108,7 @@ static void LoadRegister()
 
     VALUE(currentRegister) = value;
     SENDING(currentRegister) = true;
-    Generator::LoadRegister(currentRegister, VALUE(currentRegister));
+    PGenerator::LoadRegister(currentRegister, VALUE(currentRegister));
 }
 
 
@@ -412,7 +412,7 @@ static void DrawValue(int x, int y, uint8 i)
 
 static void OnPress_DebugMode(bool)
 {
-    Generator::SetDebugMode(DEBUG_MODE_ENABLED);
+    PGenerator::SetDebugMode(DEBUG_MODE_ENABLED);
 }
 
 DEF_CHOICE_2( cConsole,                                                                                                                                           //--- Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ ---

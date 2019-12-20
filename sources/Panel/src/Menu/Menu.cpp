@@ -115,7 +115,7 @@ bool Menu::ProcessOutputs(KeyEvent &control)
             {
                 SWITCH_CHANNEL_A;
             }
-            Generator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
+            PGenerator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
             return true;
         }
         else if (control.Is(KeyEvent::On2))
@@ -124,7 +124,7 @@ bool Menu::ProcessOutputs(KeyEvent &control)
             {
                 SWITCH_CHANNEL_B;
             }
-            Generator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
+            PGenerator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
             return true;
         }
         else

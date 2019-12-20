@@ -83,7 +83,7 @@ DEF_CHOICE_2(cResist,                                                           
 
 static void OnPress_Resist(bool)
 {
-    Generator::LoadRegister(Register::FreqMeter_Resist, (uint)FREQ_RESIST);
+    PGenerator::LoadRegister(Register::FreqMeter_Resist, (uint)FREQ_RESIST);
 }
 
 
@@ -98,7 +98,7 @@ DEF_CHOICE_2(cCouple,                                                           
 
 static void OnPress_Couple(bool)
 {
-    Generator::LoadRegister(Register::FreqMeter_Couple, (uint)FREQ_COUPLE);
+    PGenerator::LoadRegister(Register::FreqMeter_Couple, (uint)FREQ_COUPLE);
 }
 
 
@@ -113,7 +113,7 @@ DEF_CHOICE_2(cFiltr,                                                            
 
 static void OnPress_Filtr(bool)
 {
-    Generator::LoadRegister(Register::FreqMeter_Filtr, (uint)FREQ_FILTR);
+    PGenerator::LoadRegister(Register::FreqMeter_Filtr, (uint)FREQ_FILTR);
 }
 
 DEF_CHOICE_5(cAvePeriod,                                                                                                                                //--- вюярнрнлеп - вхякн оепхнднб ---
@@ -299,7 +299,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
         _SET_BIT(data, 12);
     }
 
-    Generator::LoadRegister(Register::FPGA_RG9_FreqMeter, data);
+    PGenerator::LoadRegister(Register::FPGA_RG9_FreqMeter, data);
     FrequencyMeter::SetInactive();
 }
 

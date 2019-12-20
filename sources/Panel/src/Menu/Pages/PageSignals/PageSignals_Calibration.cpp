@@ -11,19 +11,19 @@ static void SetParameter(Chan::E ch, KoeffCal::E koeff)
 {
     if (koeff == KoeffCal::AD9952_ZERO)
     {
-        Generator::SetOffset(ch, 0.0F);
+        PGenerator::SetOffset(ch, 0.0F);
     }
     else if (koeff == KoeffCal::AD9952_NEG)
     {
-        Generator::SetOffset(ch, -5.0F);
+        PGenerator::SetOffset(ch, -5.0F);
     }
     else if (koeff == KoeffCal::AD9952_POS)
     {
-        Generator::SetOffset(ch, +5.0F);
+        PGenerator::SetOffset(ch, +5.0F);
     }
     else if (koeff == KoeffCal::AD9952_AMPL)
     {
-        Generator::SetAmplitude(ch, 10.0F);
+        PGenerator::SetAmplitude(ch, 10.0F);
     }
     else if (koeff == KoeffCal::FREQ_LEVEL_TRIG)
     {
@@ -31,15 +31,15 @@ static void SetParameter(Chan::E ch, KoeffCal::E koeff)
     }
     else if (koeff == KoeffCal::DDS_MAX)
     {
-        Generator::SetAmplitude(ch, 10.0F);
+        PGenerator::SetAmplitude(ch, 10.0F);
     }
     else if (koeff == KoeffCal::DDS_MIN)
     {
-        Generator::SetAmplitude(ch, -10.0F);
+        PGenerator::SetAmplitude(ch, -10.0F);
     }
     else if (koeff == KoeffCal::DDS_OFFSET)
     {
-        Generator::SetOffset(ch, 0.0F);
+        PGenerator::SetOffset(ch, 0.0F);
     }
     else
     {
@@ -52,7 +52,7 @@ void PageSignals::PageCalibration::OnPress_OffsetAD9952(Chan::E ch, bool enter, 
 {
     if (enter)
     {
-        Generator::SetAmplitude(ch, 0.0F);
+        PGenerator::SetAmplitude(ch, 0.0F);
         SetParameter(ch, koeff);
     }
 }
@@ -62,7 +62,7 @@ void PageSignals::PageCalibration::OnPress_AmplitudeAD9952(Chan::E ch, bool ente
 {
     if (enter)
     {
-        Generator::SetOffset(ch, 0.0F);
+        PGenerator::SetOffset(ch, 0.0F);
         SetParameter(ch, koeff);
     }
 }
@@ -96,20 +96,20 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
             if (form->Is(Form::Meander))
             {
                 WAVE(ch).SetIndexForm(i);
-                Generator::TuneChannel(ch);
+                PGenerator::TuneChannel(ch);
                 break;
             }
         }
 
         if (koeff == KoeffCal::DDS_OFFSET)
         {
-            Generator::SetAmplitude(ch, 0.0F);
+            PGenerator::SetAmplitude(ch, 0.0F);
         }
         else if(koeff == KoeffCal::DDS_MAX || koeff == KoeffCal::DDS_MIN)
         {
             // 1. «аписать в RG::3 (RG::4) значени€, соответствующие максумуму
 
-            Generator::LoadRegister(registers[ch], MAX_VALUE);
+            PGenerator::LoadRegister(registers[ch], MAX_VALUE);
         }
         else
         {
@@ -122,7 +122,7 @@ void PageSignals::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal:
         {
             // 1. «аписать в RG::3 (RG::4) рабочие значени€
 
-            Generator::LoadRegister(registers[ch], WORK_VALUE);
+            PGenerator::LoadRegister(registers[ch], WORK_VALUE);
         }
     }
 }

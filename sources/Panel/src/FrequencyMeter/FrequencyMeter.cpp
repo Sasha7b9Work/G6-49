@@ -84,7 +84,7 @@ void FrequencyMeter::LoadLevel()
 
     Limitation(&value, 0, max - 1);
 
-    Generator::LoadRegister(Register::FreqMeterLevel, static_cast<uint64>(value));
+    PGenerator::LoadRegister(Register::FreqMeterLevel, static_cast<uint64>(value));
 }
 
 
@@ -98,7 +98,7 @@ void FrequencyMeter::LoadHysteresis()
 
     Limitation(&value, 0, max - 1);
 
-    Generator::LoadRegister(Register::FreqMeterHYS, static_cast<uint64>(value));
+    PGenerator::LoadRegister(Register::FreqMeterHYS, static_cast<uint64>(value));
 }
 
 

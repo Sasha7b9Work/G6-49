@@ -488,6 +488,6 @@ void StructValue::SendToGenerator()
     }
     else
     {
-        Generator::SetParameter(param);
+        PGenerator::SetParameter(param);
     }
 }

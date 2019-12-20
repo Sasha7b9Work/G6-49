@@ -215,7 +215,7 @@ void Form::SetNextParameter()
 
 void Form::TuneGenerator(Chan::E ch)
 {
-    Generator::SetFormWave(GetWave());
+    PGenerator::SetFormWave(GetWave());
 
     if(value == Form::Sine)
     {
@@ -305,7 +305,7 @@ void Form::SendParameterToGenerator(ParameterValue::E p)
     ParameterBase *param = FindParameter(p);
     if (param)
     {
-        Generator::SetParameter(static_cast<ParameterValue *>(param));
+        PGenerator::SetParameter(static_cast<ParameterValue *>(param));
     }
 }
 
@@ -315,7 +315,7 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
     ParameterBase *param = FindParameter(p);
     if(param)
     {
-        Generator::SetParameter(static_cast<ParameterChoice *>(param));
+        PGenerator::SetParameter(static_cast<ParameterChoice *>(param));
     }
 }
 
@@ -612,7 +612,7 @@ void ParameterChoice::NextChoice()
 
     if(value == ModeStart)
     {
-        Generator::LoadStartMode(ch, choice);
+        PGenerator::LoadStartMode(ch, choice);
     }
     else
     {
@@ -620,7 +620,7 @@ void ParameterChoice::NextChoice()
         {
             SINE_MANIPULATION_ENABLED(ch) = (choice != 0);
         }
-        Generator::TuneChannel(ch);
+        PGenerator::TuneChannel(ch);
     }
 }
 

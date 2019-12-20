@@ -106,7 +106,7 @@ void Settings::Load(bool _default)
       //  EEPROM::LoadSettings(this);
     }
 
-    Generator::LoadSettings();
+    PGenerator::LoadSettings();
 
     FrequencyMeter::LoadSettings();
     

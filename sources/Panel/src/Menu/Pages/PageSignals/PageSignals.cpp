@@ -122,7 +122,7 @@ void PageSignals::OnPress_Form(bool)
 
     cParameters.form = FORM_CURRENT;
 
-    Generator::TuneChannel(CURRENT_CHANNEL);
+    PGenerator::TuneChannel(CURRENT_CHANNEL);
 }
 
 

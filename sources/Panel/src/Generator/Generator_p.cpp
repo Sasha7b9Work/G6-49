@@ -20,7 +20,7 @@
 #include <cstdlib>
 
 
-namespace Generator
+namespace PGenerator
 {
     /// Загружает форму произвольного сигнала
     static void LoadFormDDS(Form *form);
@@ -30,37 +30,37 @@ namespace Generator
 
 
 
-void Generator::EnableChannel(Chan::E ch, bool enable)
+void PGenerator::EnableChannel(Chan::E ch, bool enable)
 {
     Message::EnableChannel(static_cast<uint8>(ch), static_cast<uint8>(enable ? 1U : 0U)).Transmit();
 }
 
 
-void Generator::LoadStartMode(Chan::E ch, int mode)
+void PGenerator::LoadStartMode(Chan::E ch, int mode)
 {
     Message::StartMode(static_cast<uint8>(ch), static_cast<uint8>(mode)).Transmit();
 }
 
 
-void Generator::LoadRegister(Register::E reg, uint64 value)
+void PGenerator::LoadRegister(Register::E reg, uint64 value)
 {
     Message::WriteRegister(static_cast<uint8>(reg), value).Transmit();
 }
 
 
-void Generator::SetDebugMode(bool enable)
+void PGenerator::SetDebugMode(bool enable)
 {
     Message::DebugMode(static_cast<uint8>(enable ? 1 : 0)).Transmit();
 }
 
 
-void Generator::Reset()
+void PGenerator::Reset()
 {
     Message::Reset().Transmit();
 }
 
 
-void Generator::SetFormWave(const Wave *w)
+void PGenerator::SetFormWave(const Wave *w)
 {
     Chan::E ch = w->GetChannel();
     uint8 form = static_cast<uint8>(FORM(ch)->value);
@@ -74,7 +74,7 @@ void Generator::SetFormWave(const Wave *w)
 }
 
 
-void Generator::SetFormWave(Chan::E ch, Form::E form)
+void PGenerator::SetFormWave(Chan::E ch, Form::E form)
 {
     /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
@@ -82,7 +82,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 }
 
 
-void Generator::LoadFormDDS(Form *form)
+void PGenerator::LoadFormDDS(Form *form)
 {
     float data[DDS_NUM_POINTS];
 
@@ -140,7 +140,7 @@ void Generator::LoadFormDDS(Form *form)
 }
 
 
-void Generator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Form *form)
+void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Form *form)
 {
     uint16 buffer[DDS_NUM_POINTS];
 
@@ -165,7 +165,7 @@ void Generator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Fo
 }
 
 
-void Generator::SetParameter(ParameterChoice *param)
+void PGenerator::SetParameter(ParameterChoice *param)
 {
     static const Command::E commands[ParameterChoice::Count] =
     {
@@ -181,28 +181,28 @@ void Generator::SetParameter(ParameterChoice *param)
 }
 
 
-void Generator::SetOffset(Chan::E ch, float offset)
+void PGenerator::SetOffset(Chan::E ch, float offset)
 {
     /// \todo Говнокод - запись параметра из двух мест
     Message::Set::Offset(static_cast<uint8>(ch), ParamValue(offset).ToUINT64()).Transmit();
 }
 
 
-void Generator::SetAmplitude(Chan::E ch, float amplitude)
+void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
 {
     /// \todo Говнокод - запись параметра из двух мест
     Message::Set::Amplitude(static_cast<uint8>(ch), ParamValue(amplitude).ToUINT64()).Transmit();
 }
 
 
-void Generator::SetFrequency(Chan::E ch, float frequency)
+void PGenerator::SetFrequency(Chan::E ch, float frequency)
 {
     /// \todo Говнокод - запись параметра из двух мест
     Message::Set::Frequency(static_cast<uint8>(ch), ParamValue(frequency).ToUINT64()).Transmit();
 }
 
 
-void Generator::SetParameter(ParameterValue *param)
+void PGenerator::SetParameter(ParameterValue *param)
 {
     static const Command::E commands[ParameterValue::Count] =
     {
@@ -240,7 +240,7 @@ void Generator::SetParameter(ParameterValue *param)
 }
 
 
-void Generator::TuneChannel(Chan::E ch)
+void PGenerator::TuneChannel(Chan::E ch)
 {
     EnableChannel(ch, CHANNEL_ENABLED(ch));
 
@@ -248,8 +248,8 @@ void Generator::TuneChannel(Chan::E ch)
 }
 
 
-void Generator::LoadSettings()
+void PGenerator::LoadSettings()
 {
-    Generator::TuneChannel(Chan::A);
-    Generator::TuneChannel(Chan::B);
+    PGenerator::TuneChannel(Chan::A);
+    PGenerator::TuneChannel(Chan::B);
 }

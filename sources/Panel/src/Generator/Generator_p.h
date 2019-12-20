@@ -3,7 +3,6 @@
 #include "Command.h"
 
 
-
 #define START_MODE(ch)          (set.fpga_startMode[ch])
 #define START_MODE_A            START_MODE(Chan::A)
 #define START_MODE_B            START_MODE(Chan::B)
@@ -13,8 +12,7 @@
 class SimpleMessage;
 
 
-
-namespace Generator
+namespace PGenerator
 {
     static const int DDS_NUM_POINTS = 8 * 1024;
 

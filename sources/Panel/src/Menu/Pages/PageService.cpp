@@ -23,7 +23,7 @@ Page *PageService::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pS
 
 static void OnPress_Reset()
 {
-    Generator::Reset();
+    PGenerator::Reset();
     Timer::PauseOnTime(100);
     set.Load(true);
 }
