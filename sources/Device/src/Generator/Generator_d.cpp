@@ -231,7 +231,7 @@ void DGenerator::Init()
     AD9952::Init();
     AD5697::Init();
     FPGA::Init();
-    FreqMeter::Init();
+    DFreqMeter::Init();
     Amplifier::Init();
     Filtr::Init();
 }

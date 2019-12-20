@@ -2,7 +2,7 @@
 #include "CommonTypes.h"
 
 
-namespace FreqMeter
+namespace DFreqMeter
 {
     void Init();
 

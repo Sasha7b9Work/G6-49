@@ -389,15 +389,15 @@ void DHandlers::WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FreqMeter_Resist:
-        FreqMeter::SetResist(static_cast<FreqResist::E>(value));
+        DFreqMeter::SetResist(static_cast<FreqResist::E>(value));
         break;
 
     case Register::FreqMeter_Couple:
-        FreqMeter::SetCouple(static_cast<FreqCouple::E>(value));
+        DFreqMeter::SetCouple(static_cast<FreqCouple::E>(value));
         break;
 
     case Register::FreqMeter_Filtr:
-        FreqMeter::SetFiltr(static_cast<FreqFiltr::E>(value));
+        DFreqMeter::SetFiltr(static_cast<FreqFiltr::E>(value));
         break;
 
     case Register::deleted_Multiplexor1:

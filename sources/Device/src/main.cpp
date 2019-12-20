@@ -23,7 +23,7 @@ int main()
   
     while (1)
     {
-        FreqMeter::Update();
+        DFreqMeter::Update();
         DDrive::Update();
         Interface::Update();
     }

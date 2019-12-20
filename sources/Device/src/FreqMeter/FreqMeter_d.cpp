@@ -7,7 +7,7 @@
 #include "Utils/Debug.h"
 
 
-void FreqMeter::Init()
+void DFreqMeter::Init()
 {
     /*
         PE14 - сопротивление 1 ћќм/50 ќм
@@ -20,25 +20,25 @@ void FreqMeter::Init()
 }
 
 
-void FreqMeter::SetResist(FreqResist resist)
+void DFreqMeter::SetResist(FreqResist resist)
 {
     CPU::WritePin(GeneratorWritePin::FREQ_METER_RESIST, resist.Is(FreqResist::_50Ohm));
 }
 
 
-void FreqMeter::SetCouple(FreqCouple couple)
+void DFreqMeter::SetCouple(FreqCouple couple)
 {
     CPU::WritePin(GeneratorWritePin::FREQ_METER_COUPLE, couple.Is(FreqCouple::DC));
 }
 
 
-void FreqMeter::SetFiltr(FreqFiltr filtr)
+void DFreqMeter::SetFiltr(FreqFiltr filtr)
 {
     CPU::WritePin(GeneratorWritePin::FREQ_METER_FILTR, filtr.Is(FreqFiltr::Enable));
 }
 
 
-void FreqMeter::Update()
+void DFreqMeter::Update()
 {
     if(CPU::ReadPin(GeneratorReadPin::FREQ_METER_DRY))
     {
