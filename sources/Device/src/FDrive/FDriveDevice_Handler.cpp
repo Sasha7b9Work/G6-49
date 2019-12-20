@@ -391,8 +391,11 @@ void FDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]
             SetBit(c, 13);
         }
 
-        code[i * 2] = code[i * 2 + 1] = static_cast<uint8>(c);
-        code[i * 2 + FPGA::NUM_POINTS] = code[i * 2 + FPGA::NUM_POINTS + 1] = static_cast<uint8>(c >> 8);
+        code[i * 2]     = static_cast<uint8>(c);
+        code[i * 2 + 1] = static_cast<uint8>(c);
+
+        code[i * 2 + FPGA::NUM_POINTS]     = static_cast<uint8>(c >> 8);
+        code[i * 2 + FPGA::NUM_POINTS + 1] = static_cast<uint8>(c >> 8);
     }
 }
 

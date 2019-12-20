@@ -97,8 +97,8 @@ USBH_StatusTypeDef USBH_LL_Start(USBH_HandleTypeDef *phost)
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_Stop(USBH_HandleTypeDef *phost)
 {
-  HAL_HCD_Stop(static_cast<HCD_HandleTypeDef *>(phost->pData));
-  return USBH_OK; 
+    HAL_HCD_Stop(static_cast<HCD_HandleTypeDef *>(phost->pData));
+    return USBH_OK;
 }
 
 
@@ -107,27 +107,22 @@ USBH_StatusTypeDef USBH_LL_Stop(USBH_HandleTypeDef *phost)
   * @retval USBH Speeds  */
 USBH_SpeedTypeDef USBH_LL_GetSpeed(USBH_HandleTypeDef *phost)
 {
-  USBH_SpeedTypeDef speed = USBH_SPEED_FULL;
-    
-  switch (HAL_HCD_GetCurrentSpeed(static_cast<HCD_HandleTypeDef *>(phost->pData)))
-  {
-  case 0: 
-    speed = USBH_SPEED_HIGH;
-    break;
+    USBH_SpeedTypeDef speed = USBH_SPEED_FULL;
 
-  case 1: 
-    speed = USBH_SPEED_FULL;    
-    break;
-    
-  case 2: 
-    speed = USBH_SPEED_LOW;   
-    break;
-    
-   default:  
-    speed = USBH_SPEED_FULL;    
-    break;    
-  }
-  return speed;
+    switch(HAL_HCD_GetCurrentSpeed(static_cast<HCD_HandleTypeDef *>(phost->pData)))
+    {
+    case 0:
+        speed = USBH_SPEED_HIGH;
+        break;
+
+    case 1:
+        break;
+
+    case 2:
+        speed = USBH_SPEED_LOW;
+        break;
+    }
+    return speed;
 }
 
 

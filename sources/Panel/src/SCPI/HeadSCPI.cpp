@@ -19,7 +19,7 @@ static void HintHelp(String *);
 // :TEST
 static const char *FuncTest(const char *);
 static bool TestTest();
-static void Process(const StructSCPI strct[], String message);
+static void Process(const StructSCPI strct[], String message); //-V2504
 static void HintTest(String *);
 
 
@@ -43,7 +43,7 @@ static const char *FuncIDN(const char *buffer)
 }
 
 
-static void HintIDN(String *message)
+static void HintIDN(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -57,7 +57,7 @@ static const char *FuncReset(const char *buffer)
 }
 
 
-static void HintReset(String *message)
+static void HintReset(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -75,7 +75,7 @@ static const char *FuncHelp(const char *buffer)
 }
 
 
-static void HintHelp(String *message)
+static void HintHelp(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -104,7 +104,7 @@ static const char *FuncTest(const char *buffer)
 }
 
 
-static void HintTest(String *message)
+static void HintTest(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -134,7 +134,7 @@ static bool TestTest()
 }
 
 
-static void Process(const StructSCPI strct[], String msg)
+static void Process(const StructSCPI strct[], String msg) //-V2504
 {
     while(!strct->IsEmpty())
     {
@@ -146,7 +146,7 @@ static void Process(const StructSCPI strct[], String msg)
         }
         else if(strct->IsLeaf())
         {
-            String message(msg);
+            String message(msg); //-V820
             message.Append(strct->key);
             SCPI::SendAnswer(strct->hint);
             strct->funcHint(&message);

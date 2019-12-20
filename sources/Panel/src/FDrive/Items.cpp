@@ -49,8 +49,10 @@ static File file;
 
 void Items::Init()
 {
-    numDirs = numFiles = -1;
+    numDirs = -1;
+    numFiles = -1;
     requestIsSend = false;
+
     for (int i = 0; i < NUM_ITEMS; i++)
     {
         files[i].Clear();

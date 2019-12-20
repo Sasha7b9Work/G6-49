@@ -21,7 +21,8 @@ void Queue::Pop()
         first++;
         if (first == last)
         {
-            first = last = 0;
+            first = 0;
+            last = 0;
         }
     }
 }

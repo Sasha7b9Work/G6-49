@@ -141,7 +141,8 @@ void BigNumber::ChangeIntegerNegativePlus(int position)
     }
     else
     {
-        integer.value = fract.value = 0;
+        integer.value = 0;
+        fract.value = 0;
     }
 }
 
@@ -159,7 +160,8 @@ void BigNumber::ChangeIntegerPositiveMinus(int position)
     }
     else                                                    // Это выбирается, когда должны перескочить в другой знак
     {
-        integer.value = fract.value = 0;                    // В этом случае просто обнуляем число
+        integer.value = 0;
+        fract.value = 0;                    // В этом случае просто обнуляем число
     }
 }
 

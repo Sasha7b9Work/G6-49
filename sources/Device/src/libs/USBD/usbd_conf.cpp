@@ -69,11 +69,6 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
         break;
     
     case PCD_SPEED_FULL:
-        speed = USBD_SPEED_FULL;    
-        break;
-	
-	default:
-        speed = USBD_SPEED_FULL;    
         break;
     }
     USBD_LL_SetSpeed(static_cast<USBD_HandleTypeDef *>(hpcd->pData), speed);

@@ -73,18 +73,20 @@ static float CalculateOffset(Chan::E ch, ParamValue offset)
         return CAL_DDS_OFFSET(ch);
     }
 
-    float zero = CAL_AD9952_OFFSET_ZERO(ch);    // 2048
-    float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
-    float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095
-
+    float zero = CAL_AD9952_OFFSET_ZERO(ch);        // 2048
+    
     if (offset.ToFloat() > 0.0F)
     {
+        float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
+
         float scale = (zero - pos) / 5.0F;
 
         return pos + scale * (5.0F - offset.ToFloat());
     }
     else if(offset.ToFloat() < 0.0F)
     {
+        float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095
+
         float scale = (neg - zero) / 5.0F;
 
         return neg - scale * (5.0F + offset.ToFloat());

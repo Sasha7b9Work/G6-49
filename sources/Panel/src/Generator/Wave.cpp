@@ -699,7 +699,10 @@ ParameterChoice::ParameterChoice(E v, pString var0, pString var1, pString var2, 
     names[2] = const_cast<char *>(var2);
     names[3] = const_cast<char *>(var3);
 
-    func[0] = func[1] = func[2] = func[3] = nullptr;
+    func[0] = nullptr;
+    func[1] = nullptr;
+    func[2] = nullptr;
+    func[3] = nullptr;
 }
 
 
