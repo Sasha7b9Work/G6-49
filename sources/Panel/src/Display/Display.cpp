@@ -34,7 +34,7 @@ void Display::Update()
     Menu::Draw();
     PageDebug::PageRegisters::Draw();
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
-    FreqMeter::Draw();
+    PFreqMeter::Draw();
     Hint::Draw();
     Statistics::Show();
     Console::Draw();

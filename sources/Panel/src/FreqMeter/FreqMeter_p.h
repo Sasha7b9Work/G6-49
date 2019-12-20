@@ -2,7 +2,7 @@
 #include "defines.h"
 
 
-struct FreqMeter
+struct PFreqMeter
 {
     /// Загрузить настройки в частотомер
     static void LoadSettings();

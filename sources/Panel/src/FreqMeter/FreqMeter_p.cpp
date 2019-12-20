@@ -12,7 +12,7 @@ static bool inactive = true;
 
 
 
-void FreqMeter::Draw()
+void PFreqMeter::Draw()
 {
     if (!FREQ_METER_ENABLED)
     {
@@ -57,7 +57,7 @@ void FreqMeter::Draw()
 }
 
 
-void FreqMeter::SetMeasure(uint value)
+void PFreqMeter::SetMeasure(uint value)
 {
     if(value == MAX_UINT)
     {
@@ -68,13 +68,13 @@ void FreqMeter::SetMeasure(uint value)
 }
 
 
-void FreqMeter::SetInactive()
+void PFreqMeter::SetInactive()
 {
     inactive = true;
 }
 
 
-void FreqMeter::LoadLevel()
+void PFreqMeter::LoadLevel()
 {
     int max = 4 * 1024;
 
@@ -88,7 +88,7 @@ void FreqMeter::LoadLevel()
 }
 
 
-void FreqMeter::LoadHysteresis()
+void PFreqMeter::LoadHysteresis()
 {
     int max = 4 * 1024;
 
@@ -102,7 +102,7 @@ void FreqMeter::LoadHysteresis()
 }
 
 
-void FreqMeter::LoadSettings()
+void PFreqMeter::LoadSettings()
 {
     LoadLevel();
     LoadHysteresis();

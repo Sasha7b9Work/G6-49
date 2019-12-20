@@ -170,7 +170,7 @@ static void OnPress_Test(bool)
 
 static void OnChange_FreqLevel()
 {
-    FreqMeter::LoadLevel();
+    PFreqMeter::LoadLevel();
 }
 
 DEF_GOVERNOR( gLevel,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
@@ -183,7 +183,7 @@ DEF_GOVERNOR( gLevel,                                                           
 
 static void OnChange_Hysteresis()
 {
-    FreqMeter::LoadHysteresis();
+    PFreqMeter::LoadHysteresis();
 }
 
 DEF_GOVERNOR( gHysteresis,                                                                                                                                  //--- ЧАСТОТОМЕР - Гистерезис ---
@@ -300,7 +300,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
     }
 
     PGenerator::LoadRegister(Register::FPGA_RG9_FreqMeter, data);
-    FreqMeter::SetInactive();
+    PFreqMeter::SetInactive();
 }
 
 #ifdef WIN32
