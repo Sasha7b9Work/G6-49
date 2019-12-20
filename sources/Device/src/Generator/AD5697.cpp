@@ -6,6 +6,11 @@
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
 
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4310)   // cast truncates constant value
+#endif
+
 
 namespace AD5697
 {
@@ -185,6 +190,7 @@ GeneratorWritePin AD5697::PinLDAC(Chan::E ch)
 
     return pinLDAC[ch];
 }
+
 
 #ifdef WIN32
 #pragma warning(pop)
