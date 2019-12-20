@@ -1222,19 +1222,14 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
-              <FileName>Command.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Common\Command.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Common\Command.h</FilePath>
             </File>
             <File>
-              <FileName>Common.cpp</FileName>
+              <FileName>Command.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Common.cpp</FilePath>
+              <FilePath>..\Common\Command.cpp</FilePath>
             </File>
             <File>
               <FileName>Common.h</FileName>
@@ -1242,9 +1237,9 @@
               <FilePath>..\common\Common.h</FilePath>
             </File>
             <File>
-              <FileName>Message.cpp</FileName>
+              <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Message.cpp</FilePath>
+              <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
               <FileName>Message.h</FileName>
@@ -1252,19 +1247,24 @@
               <FilePath>..\common\Message.h</FilePath>
             </File>
             <File>
+              <FileName>Message.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Message.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
             <File>
-              <FileName>Wave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Common\Wave.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Wave.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Wave.h</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Wave.cpp</FilePath>
             </File>
           </Files>
         </Group>

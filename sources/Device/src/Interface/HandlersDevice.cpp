@@ -164,7 +164,7 @@ void Handlers::EnableChannel(SimpleMessage *msg)
 
     bool enable = (msg->TakeByte() == 1);
 
-    Generator::EnableChannel(ch, enable);
+    DGenerator::EnableChannel(ch, enable);
 }
 
 
@@ -174,7 +174,7 @@ void Handlers::SetFormWave(SimpleMessage *msg)
 
     Form form(msg->TakeByte()); //-V656
 
-    Generator::SetFormWave(ch, form);
+    DGenerator::SetFormWave(ch, form);
 }
 
 
@@ -188,73 +188,73 @@ static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, Param
 
 void Handlers::SetFrequency(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetFrequency);
+    SetGeneratorParameter(msg, DGenerator::SetFrequency);
 }
 
 
 void Handlers::SetPeriod(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetPeriod);
+    SetGeneratorParameter(msg, DGenerator::SetPeriod);
 }
 
 
 void Handlers::SetAmplitude(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetAmplitude);
+    SetGeneratorParameter(msg, DGenerator::SetAmplitude);
 }
 
 
 void Handlers::SetOffset(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetOffset);
+    SetGeneratorParameter(msg, DGenerator::SetOffset);
 }
 
 
 void Handlers::SetDuration(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetDuration);
+    SetGeneratorParameter(msg, DGenerator::SetDuration);
 }
 
 
 void Handlers::SetDutyRatio(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetDutyRatio);
+    SetGeneratorParameter(msg, DGenerator::SetDutyRatio);
 }
 
 
 void Handlers::SetPhase(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetPhase);
+    SetGeneratorParameter(msg, DGenerator::SetPhase);
 }
 
 
 void Handlers::SetDelay(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetDelay);
+    SetGeneratorParameter(msg, DGenerator::SetDelay);
 }
 
 
 void Handlers::SetManipulationDuration(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetManipulationDuration);
+    SetGeneratorParameter(msg, DGenerator::SetManipulationDuration);
 }
 
 
 void Handlers::SetManipulationPeriod(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetManipulationPeriod);
+    SetGeneratorParameter(msg, DGenerator::SetManipulationPeriod);
 }
 
 
 void Handlers::SetPacketPeriod(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetPacketPeriod);
+    SetGeneratorParameter(msg, DGenerator::SetPacketPeriod);
 }
 
 
 void Handlers::SetPacketNumber(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, Generator::SetPacketNumber);
+    SetGeneratorParameter(msg, DGenerator::SetPacketNumber);
 }
 
 

@@ -218,7 +218,7 @@ private:
 static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту в правильное место - ПЛИС или AD9952
 
 
-void Generator::Init()
+void DGenerator::Init()
 {
     EnableChannel(Chan::A, false);
     EnableChannel(Chan::B, false);
@@ -231,7 +231,7 @@ void Generator::Init()
 }
 
 
-void Generator::EnableChannel(Chan::E ch, bool enable)
+void DGenerator::EnableChannel(Chan::E ch, bool enable)
 {
     if(!FPGA::Start())
     {
@@ -243,7 +243,7 @@ void Generator::EnableChannel(Chan::E ch, bool enable)
 
 
 
-void Generator::SetFormWave(Chan::E ch, Form::E form)
+void DGenerator::SetFormWave(Chan::E ch, Form::E form)
 {
     Filtr::Tune(ch, form);
 
@@ -256,7 +256,7 @@ void Generator::SetFormWave(Chan::E ch, Form::E form)
 }
 
 
-void Generator::SetFrequency(Chan::E ch, ParamValue frequency)
+void DGenerator::SetFrequency(Chan::E ch, ParamValue frequency)
 {
     if (waveIsSine)
     {
@@ -269,27 +269,27 @@ void Generator::SetFrequency(Chan::E ch, ParamValue frequency)
 }
 
 
-void Generator::SetManipulationPeriod(Chan::E ch, ParamValue period)
+void DGenerator::SetManipulationPeriod(Chan::E ch, ParamValue period)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void Generator::SetManipulationDuration(Chan::E ch, ParamValue duration)
+void DGenerator::SetManipulationDuration(Chan::E ch, ParamValue duration)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetDurationImpulse(ch, duration);
 }
 
 
-void Generator::SetPeriod(Chan::E ch, ParamValue period)
+void DGenerator::SetPeriod(Chan::E ch, ParamValue period)
 {
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void Generator::SetAmplitude(Chan::E ch, ParamValue amplitude)
+void DGenerator::SetAmplitude(Chan::E ch, ParamValue amplitude)
 {
     Amplifier::Tune(ch);
 
@@ -304,7 +304,7 @@ void Generator::SetAmplitude(Chan::E ch, ParamValue amplitude)
 }
 
 
-void Generator::SetOffset(Chan::E ch, ParamValue offset)
+void DGenerator::SetOffset(Chan::E ch, ParamValue offset)
 {
     set.offset[ch] = offset;
 
@@ -322,36 +322,36 @@ void Generator::SetOffset(Chan::E ch, ParamValue offset)
 }
 
 
-void Generator::SetPhase(Chan::E ch, ParamValue phase)
+void DGenerator::SetPhase(Chan::E ch, ParamValue phase)
 {
     AD9952::SetPhase(ch, phase);
 }
 
 
-void Generator::SetPacketNumber(Chan::E, ParamValue number)
+void DGenerator::SetPacketNumber(Chan::E, ParamValue number)
 {
     FPGA::PacketImpulse::SetNumberImpules(static_cast<uint>(number.ToFloat() + 0.5F));
 }
 
 
-void Generator::SetPacketPeriod(Chan::E, ParamValue period)
+void DGenerator::SetPacketPeriod(Chan::E, ParamValue period)
 {
     FPGA::PacketImpulse::SetPeriodPacket(period);
 }
 
 
-void Generator::SetDutyRatio(Chan::E, ParamValue)
+void DGenerator::SetDutyRatio(Chan::E, ParamValue)
 {
 
 }
 
 
-void Generator::SetDuration(Chan::E ch, ParamValue value)
+void DGenerator::SetDuration(Chan::E ch, ParamValue value)
 {
     FPGA::SetDurationImpulse(ch, value);
 }
 
 
-void Generator::SetDelay(Chan::E, ParamValue)
+void DGenerator::SetDelay(Chan::E, ParamValue)
 {
 }

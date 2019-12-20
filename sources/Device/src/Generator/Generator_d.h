@@ -6,9 +6,7 @@
 #include "Command.h"
 
 
-
-
-struct Generator
+struct DGenerator
 {
     static const int DDS_NUM_POINTS = 8 * 1024;
 

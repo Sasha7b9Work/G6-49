@@ -17,7 +17,7 @@ int main()
     CPU::Init();
     Timer::PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
     VCP::Init();
-    Generator::Init();
+    DGenerator::Init();
     FDrive::Init();
     EEPROM::Init();
   

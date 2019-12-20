@@ -34,7 +34,15 @@ add_compile_options(/wd5027)
 add_compile_options(/wd5039)
 add_compile_options(/wd5045)
 
-source_group(common             REGULAR_EXPRESSION ../common/*)
+source_group(common             FILES ../common/Command.h
+                                      ../common/Command.cpp
+                                      ../common/Common.h
+                                      ../common/Common.cpp
+                                      ../common/Message.h
+                                      ../common/Message.cpp
+                                      ../common/Transceiver.h
+                                      ../common/Wave.h
+                                      ../common/Wave.cpp)
 source_group(src                REGULAR_EXPRESSION src/*)
 source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
 source_group(FreqMeter          REGULAR_EXPRESSION src/FreqMeter/*)
@@ -51,7 +59,15 @@ source_group(libs\\USBH         REGULAR_EXPRESSION src/libs/USBH/*)
 source_group(Settings           REGULAR_EXPRESSION src/Settings/*)
 source_group(Utils              REGULAR_EXPRESSION src/Utils/*)
 
-file(GLOB SOURCES   ../common/*
+file(GLOB SOURCES   ../common/Command.h
+                    ../common/Command.cpp
+                    ../common/Common.h
+                    ../common/Common.cpp
+                    ../common/Message.h
+                    ../common/Message.cpp
+                    ../common/Transceiver.h
+                    ../common/Wave.h
+                    ../common/Wave.cpp
                     src/*
                     src/FDrive/*
                     src/FreqMeter/*

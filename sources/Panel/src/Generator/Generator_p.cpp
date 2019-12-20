@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Generator_p.h"
 #include "Log.h"
-#include "Message.h"
+#include "Message_p.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"

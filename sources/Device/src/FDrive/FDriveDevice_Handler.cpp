@@ -168,9 +168,9 @@ void FDrive::Handler::LoadFromExtStorage()
     std::strcat(fullName, "\\");
     if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
     {
-        Buffer buffer(Generator::DDS_NUM_POINTS * sizeof(float));
+        Buffer buffer(DGenerator::DDS_NUM_POINTS * sizeof(float));
         FileSystem::ReadFloats(buffer.DataFloat(), &fullName[1]);
-        uint8 code[Generator::DDS_NUM_POINTS * 2];
+        uint8 code[DGenerator::DDS_NUM_POINTS * 2];
         TransformDataToCode(buffer.DataFloat(), code);
         FPGA::SaveExtSignal(ch, code);
 

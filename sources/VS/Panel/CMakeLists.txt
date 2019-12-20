@@ -32,15 +32,17 @@ add_compile_options(/wd5026)    # move constructor was implicitly defined as del
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
-source_group(common                   FILES              ../../common/Command.cpp
-                                                         ../../common/Command.h
-                                                         ../../common/Common.cpp
+source_group(common                   FILES              ../../common/Command.h
+                                                         ../../common/Command.cpp
                                                          ../../common/Common.h
+                                                         ../../common/Common.cpp
                                                          ../../common/CommonTypes.h
-                                                         ../../common/Message.cpp
                                                          ../../common/Message.h
-                                                         ../../common/Transceiver.cpp
+                                                         ../../common/Message.cpp
+                                                         ../../common/Message_p.h
+                                                         ../../common/Message_p.cpp
                                                          ../../common/Transceiver.h
+                                                         ../../common/Transceiver.cpp
                                                          ../../common/Wave.h)
 source_group(common\\_VS\\HAL         FILES              ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp)
 source_group(src                      FILES              ../../Panel/src/defines.h
@@ -100,15 +102,17 @@ source_group(SCPI                     REGULAR_EXPRESSION ../Panel/src/SCPI/*)
 source_group(Settings                 REGULAR_EXPRESSION ../Panel/src/Settings/*)
 source_group(Utils                    REGULAR_EXPRESSION ../Panel/src/Utils/*)
 
-file(GLOB SOURCES   ../../common/Command.cpp
-                    ../../common/Command.h
-                    ../../common/Common.cpp
+file(GLOB SOURCES   ../../common/Command.h
+                    ../../common/Command.cpp
                     ../../common/Common.h
+                    ../../common/Common.cpp
                     ../../common/CommonTypes.h
-                    ../../common/Message.cpp
                     ../../common/Message.h
-                    ../../common/Transceiver.cpp
+                    ../../common/Message.cpp
+                    ../../common/Message_p.h
+                    ../../common/Message_p.cpp
                     ../../common/Transceiver.h
+                    ../../common/Transceiver.cpp
                     ../../common/Wave.h
                     ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp
                     ../../Panel/src/defines.h

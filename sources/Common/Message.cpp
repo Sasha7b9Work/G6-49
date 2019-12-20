@@ -429,13 +429,6 @@ Message::FDrive::LoadFromExtStorage::LoadFromExtStorage(uint8 ch, uint8 numFile,
 }
 
 
-Message::LoadFormDDS::LoadFormDDS(uint8 ch, uint16 data[Generator::DDS_NUM_POINTS]) : SimpleMessage(2 + Generator::DDS_NUM_POINTS * 2, Command::LoadFormDDS)
-{
-    PutByte(ch);
-    PutData(reinterpret_cast<uint8*>(data), sizeof(data[0]) * Generator::DDS_NUM_POINTS);
-}
-
-
 Message::FDrive::PictureDDS::PictureDDS(uint8 numFile, uint8 *data) : SimpleMessage(242, Command::FDrive_GetPictureDDS)
 {
     PutByte(numFile);

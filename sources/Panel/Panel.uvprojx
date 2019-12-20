@@ -1657,14 +1657,14 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
-              <FileName>Command.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Common\Command.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Common\Command.h</FilePath>
+            </File>
+            <File>
+              <FileName>Command.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Command.cpp</FilePath>
             </File>
             <File>
               <FileName>Common.h</FileName>
@@ -1677,14 +1677,24 @@
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
+              <FileName>Message.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Message.h</FilePath>
+            </File>
+            <File>
               <FileName>Message.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\common\Message.cpp</FilePath>
             </File>
             <File>
-              <FileName>Message.h</FileName>
+              <FileName>Message_p.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Message.h</FilePath>
+              <FilePath>..\common\Message_p.h</FilePath>
+            </File>
+            <File>
+              <FileName>Message_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Message_p.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver.h</FileName>

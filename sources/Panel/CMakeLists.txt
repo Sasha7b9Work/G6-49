@@ -29,9 +29,14 @@ add_compile_options(/wd4996)    # This function or variable may be unsafe
 add_compile_options(/wd5027)    # 'xxx': move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
-source_group(common                   FILES ../common/Command.cpp ../common/Command.h
-                                            ../common/Common.cpp  ../common/Common.h
-                                            ../common/Message.cpp ../common/Message.h
+source_group(common                   FILES ../common/Command.h
+                                            ../common/Command.cpp
+                                            ../common/Common.h
+                                            ../common/Common.cpp
+                                            ../common/Message.h
+                                            ../common/Message.cpp
+                                            ../common/Message_p.h
+                                            ../common/Message_p.cpp
                                             ../common/Transceiver.h
                                             ../common/Wave.h)
 source_group(src                      REGULAR_EXPRESSION src/*)
@@ -54,9 +59,14 @@ source_group(SCPI                     REGULAR_EXPRESSION src/SCPI/*)
 source_group(Settings                 REGULAR_EXPRESSION src/Settings/*)
 source_group(Utils                    REGULAR_EXPRESSION src/Utils/*)
 
-file(GLOB SOURCES   ../common/Command.cpp ../common/Command.h
-                    ../common/Common.cpp  ../common/Common.h
-                    ../common/Message.cpp ../common/Message.h
+file(GLOB SOURCES   ../common/Command.h
+                    ../common/Command.cpp
+                    ../common/Common.h
+                    ../common/Common.cpp
+                    ../common/Message.h
+                    ../common/Message.cpp
+                    ../common/Message_p.h
+                    ../common/Message_p.cpp
                     ../common/Transceiver.h
                     ../common/Wave.h
                     src/*

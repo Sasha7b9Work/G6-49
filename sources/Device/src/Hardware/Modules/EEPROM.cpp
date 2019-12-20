@@ -192,7 +192,7 @@ static void WriteData(uint dest, void *src, uint size)
 }
 
 
-void EEPROM::Signal::Save(Chan::E ch, uint16 data[Generator::DDS_NUM_POINTS])
+void EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS])
 {
     uint sizeData = FPGA::NUM_POINTS * sizeof(data[0]);
 

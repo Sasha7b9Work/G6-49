@@ -14,7 +14,7 @@ namespace EEPROM
 
     namespace Signal
     {
-        void Save(Chan::E ch, uint16 data[Generator::DDS_NUM_POINTS]);
+        void Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS]);
 
         uint16 *Get(Chan::E ch);
     }
