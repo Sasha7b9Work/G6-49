@@ -147,17 +147,6 @@ struct Amplifier
 
 struct Filtr
 {
-    struct Type
-    {
-        enum E
-        {
-            None,
-            Chebyshev,
-            Bessel,
-            Count
-        };
-    };
-
     static void Init()
     {
         GPIO_InitTypeDef isGPIO;
@@ -178,34 +167,42 @@ struct Filtr
         }
         else if(form == Form::Impulse || form == Form::PacketImpuls)
         {
-            SetType(ch, Type::Bessel);
+            SetType(ch, Type::None);
         }
         else
         {
-            SetType(ch, Type::None);
+            SetType(ch, Type::Bessel);
         }
     }
 
 private:
 
+    struct Type
+    {
+        enum E
+        {
+            None,
+            Chebyshev,
+            Bessel,
+            Count
+        };
+    };
+
     static void SetType(Chan::E ch, Type::E type)
     {
-        /*
-                     
-        +-----------+---------+---------+
-        |           | Канал А | Канал B |
-        +-----------+----+----+----+----+
-        |           |PE12|PE14|PE13|PF4 |
-        |  Сигнал   | p1 | p3 | p2 | p8 |
-        +-----------+----+----+----+----+
-        | Синус     | X    1  | X    1  |
-        +-----------+---------+---------+
-        | Импульс   | 0    0  | 0    0  |
-        | Пакет     |         |         |
-        +-----------+---------+---------+
-        | остальные | 1    0  | 1    0  |
-        +-----------+---------+---------+
-
+        /*  +-----------+---------+---------+
+            |           | Канал А | Канал B |
+            +-----------+----+----+----+----+
+            |           |PE12|PE14|PE13|PF4 |
+            |  Сигнал   | p1 | p3 | p2 | p8 |
+            +-----------+----+----+----+----+
+            | Синус     | X    1  | X    1  |
+            +-----------+---------+---------+
+            | Импульс   | 0    0  | 0    0  |
+            | Пакет     |         |         |
+            +-----------+---------+---------+
+            | остальные | 1    0  | 1    0  |
+            +-----------+---------+---------+
         */
 
         static GPIO_TypeDef *const gpio0[Chan::Count] = { GPIOE, GPIOE };
@@ -213,20 +210,10 @@ private:
 
         static const uint16 pin0[Chan::Count] = { GPIO_PIN_12, GPIO_PIN_13 };
         static const uint16 pin1[Chan::Count] = { GPIO_PIN_14, GPIO_PIN_4 };
-
-        static const GPIO_PinState state0[Type::Count] =
-        {
-            GPIO_PIN_SET,
-            GPIO_PIN_SET,       // Чебышев
-            GPIO_PIN_RESET
-        };
-
-        static const GPIO_PinState state1[Type::Count] =
-        {
-            GPIO_PIN_RESET,
-            GPIO_PIN_SET,       // Чебышев
-            GPIO_PIN_SET
-        };
+        
+        //                                                   нет             Чебышев       Бессель
+        static const GPIO_PinState state0[Type::Count] = { GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_SET   };
+        static const GPIO_PinState state1[Type::Count] = { GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_RESET };
 
         HAL_GPIO_WritePin(gpio0[ch], pin0[ch], state0[type]);
         HAL_GPIO_WritePin(gpio1[ch], pin1[ch], state1[type]);

@@ -18,13 +18,13 @@ int main()
     Timer::PauseOnTime(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
     VCP::Init();
     DGenerator::Init();
-    FDrive::Init();
+    DDrive::Init();
     EEPROM::Init();
   
     while (1)
     {
         FreqMeter::Update();
-        FDrive::Update();
+        DDrive::Update();
         Interface::Update();
     }
 }

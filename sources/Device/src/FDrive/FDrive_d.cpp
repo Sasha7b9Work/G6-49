@@ -5,7 +5,7 @@
 #include "usbh_diskio.h"
 
 
-USBH_HandleTypeDef FDrive::hUSB_Host;
+USBH_HandleTypeDef DDrive::hUSB_Host;
 
 static FATFS FatFS;
 
@@ -70,7 +70,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 }
 
 
-void FDrive::Init()
+void DDrive::Init()
 {
     CPU::HCD::Init();
 
@@ -87,7 +87,7 @@ void FDrive::Init()
 }
 
 
-void FDrive::Update()
+void DDrive::Update()
 {
     USBH_Process(&hUSB_Host);
 

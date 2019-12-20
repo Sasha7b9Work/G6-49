@@ -22,7 +22,7 @@ struct StructForReadDir
 
 
 
-namespace FDrive
+namespace DDrive
 {
     namespace FileSystem
     {
@@ -63,7 +63,7 @@ namespace FDrive
 
 
 
-void FDrive::Handler::Processing(SimpleMessage *message)
+void DDrive::Handler::Processing(SimpleMessage *message)
 {
     msg = message;
 
@@ -120,7 +120,7 @@ void FDrive::Handler::Processing(SimpleMessage *message)
 }
 
 
-void FDrive::Handler::GetNumDirsAndFiles()
+void DDrive::Handler::GetNumDirsAndFiles()
 {
     uint numDirs = 0;
     uint numFiles = 0;
@@ -131,7 +131,7 @@ void FDrive::Handler::GetNumDirsAndFiles()
 }
 
 
-void FDrive::Handler::RequestFile()
+void DDrive::Handler::RequestFile()
 {
     char name[255];
 
@@ -144,7 +144,7 @@ void FDrive::Handler::RequestFile()
 }
 
 
-void FDrive::Handler::RequestFileSize()
+void DDrive::Handler::RequestFileSize()
 {
     char name[255];
     int numFile = static_cast<int>(msg->TakeByte());
@@ -159,7 +159,7 @@ void FDrive::Handler::RequestFileSize()
 }
 
 
-void FDrive::Handler::LoadFromExtStorage()
+void DDrive::Handler::LoadFromExtStorage()
 {
     char fullName[255];
     Chan ch(msg->TakeByte());
@@ -179,7 +179,7 @@ void FDrive::Handler::LoadFromExtStorage()
 }
 
 
-void FDrive::Handler::GetPictureDDS()
+void DDrive::Handler::GetPictureDDS()
 {
     const uint SIZE = 240;
     uint8 data[SIZE];
@@ -204,13 +204,13 @@ void FDrive::Handler::GetPictureDDS()
 }
 
 
-void FDrive::Handler::E()
+void DDrive::Handler::E()
 {
 
 }
 
 
-void FDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
+void DDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
 {
     FILINFO fno;
     DIR dir;
@@ -261,7 +261,7 @@ void FDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs,
 }
 
 
-bool FDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
+bool DDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 {
     StructForReadDir srd;
 
@@ -307,7 +307,7 @@ bool FDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *na
 }
 
 
-uint FDrive::FileSystem::GetFileSize(const char *fullPath)
+uint DDrive::FileSystem::GetFileSize(const char *fullPath)
 {
     FIL fp;
     if (f_open(&fp, fullPath, FA_READ) == FR_OK)
@@ -321,7 +321,7 @@ uint FDrive::FileSystem::GetFileSize(const char *fullPath)
 }
 
 
-bool FDrive::FileSystem::ReadFloats(float values[4096], char *name)
+bool DDrive::FileSystem::ReadFloats(float values[4096], char *name)
 {
     bool result = false;
 
@@ -373,7 +373,7 @@ bool FDrive::FileSystem::ReadFloats(float values[4096], char *name)
 }
 
 
-void FDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
+void DDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
 {
     Normalize(d);
 
@@ -397,7 +397,7 @@ void FDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]
 }
 
 
-void FDrive::Normalize(float d[4096])
+void DDrive::Normalize(float d[4096])
 {
     float min = 0.0F;
     float max = 0.0F;
@@ -410,7 +410,7 @@ void FDrive::Normalize(float d[4096])
 }
 
 
-void FDrive::FindMinMax(const float d[4096], float *_min, float *_max)
+void DDrive::FindMinMax(const float d[4096], float *_min, float *_max)
 {
     float min = 0.0F;
     float max = 0.0F;
@@ -432,7 +432,7 @@ void FDrive::FindMinMax(const float d[4096], float *_min, float *_max)
 }
 
 
-float FDrive::FindScale(float min, float max)
+float DDrive::FindScale(float min, float max)
 {
     max = std::fabsf(max);
 
@@ -445,7 +445,7 @@ float FDrive::FindScale(float min, float max)
 }
 
 
-void FDrive::ToScale(float d[4096], float scale)
+void DDrive::ToScale(float d[4096], float scale)
 {
     for (int i = 0; i < 4096; i++)
     {
@@ -454,7 +454,7 @@ void FDrive::ToScale(float d[4096], float scale)
 }
 
 
-void FDrive::FillPicture(uint8 *picture, uint size, float values[4096])
+void DDrive::FillPicture(uint8 *picture, uint size, float values[4096])
 {
     Normalize(values);
 
