@@ -21,20 +21,20 @@ struct StructForReadDir
 };
 
 
+namespace FileSystem
+{
+    uint GetFileSize(const char *fullPath);
+    /// Получает количество каталогов и файлов в данной директории
+    void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
+    /// Получить имя numFile-го файла из каталога fullPath
+    bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
+    /// Читает значения отсчётов сигнала из файла name
+    bool ReadFloats(float values[4096], char *name);
+}
+
 
 namespace DDrive
 {
-    namespace FileSystem
-    {
-        uint GetFileSize(const char *fullPath);
-        /// Получает количество каталогов и файлов в данной директории
-        void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
-        /// Получить имя numFile-го файла из каталога fullPath
-        bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
-        /// Читает значения отсчётов сигнала из файла name
-        bool ReadFloats(float values[4096], char *name);
-    }
-
     namespace Handler
     {
         SimpleMessage *msg = nullptr;
@@ -210,7 +210,7 @@ void DDrive::Handler::E()
 }
 
 
-void DDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
+void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
 {
     FILINFO fno;
     DIR dir;
@@ -261,7 +261,7 @@ void DDrive::FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs,
 }
 
 
-bool DDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
+bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 {
     StructForReadDir srd;
 
@@ -307,7 +307,7 @@ bool DDrive::FileSystem::GetNameFile(const char *fullPath, int numFile, char *na
 }
 
 
-uint DDrive::FileSystem::GetFileSize(const char *fullPath)
+uint FileSystem::GetFileSize(const char *fullPath)
 {
     FIL fp;
     if (f_open(&fp, fullPath, FA_READ) == FR_OK)
@@ -321,7 +321,7 @@ uint DDrive::FileSystem::GetFileSize(const char *fullPath)
 }
 
 
-bool DDrive::FileSystem::ReadFloats(float values[4096], char *name)
+bool FileSystem::ReadFloats(float values[4096], char *name)
 {
     bool result = false;
 
