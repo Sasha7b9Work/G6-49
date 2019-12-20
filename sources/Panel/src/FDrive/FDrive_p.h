@@ -40,4 +40,18 @@ struct FDrive
         static bool RequestFileSize();
         static bool LoadFromExtStorage();
     };
+
+private:
+    enum Mount
+    {
+        Disconnect,
+        Mounted,
+        Failed
+    };
+    /// Текущее состояние флешки
+    static Mount mounted;
+    /// Путь к текущему каталогу
+    static char directory[255];
+    /// Если true - идёт загрузка сигнала с флешки в память
+    static bool inStateWaitCompleteLoad;
 };

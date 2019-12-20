@@ -16,20 +16,9 @@ FDrive::View   FDrive::view;
 SimpleMessage *FDrive::Handler::msg = nullptr;
 
 
-enum Mount
-{
-    Disconnect,
-    Mounted,
-    Failed
-};
-
-
-/// Текущее состояние флешки
-static Mount mounted = Disconnect;
-/// Путь к текущему каталогу
-static char directory[255];
-/// Если true - идёт загрузка сигнала с флешки в память
-static bool inStateWaitCompleteLoad = false;
+FDrive::Mount FDrive::mounted = Disconnect;
+char          FDrive::directory[255];
+bool          FDrive::inStateWaitCompleteLoad = false;
 
 
 void FDrive::Init()
