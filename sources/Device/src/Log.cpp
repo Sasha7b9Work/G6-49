@@ -1,11 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "log.h"
 #include "Message.h"
 #include <cstdarg>
 #include <cstdio>
-#endif
-
 
 
 void Log::AddString(char *format, ...)

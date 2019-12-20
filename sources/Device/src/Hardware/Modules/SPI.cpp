@@ -1,9 +1,5 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "SPI.h"
-#endif
-
 
 
 static SPI_HandleTypeDef handle =                                   // Для связи с панелью

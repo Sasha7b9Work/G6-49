@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "usbd_core.h"
 #include "Log.h"
@@ -7,7 +5,6 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-#endif
 
 
 /*******************************************************************************

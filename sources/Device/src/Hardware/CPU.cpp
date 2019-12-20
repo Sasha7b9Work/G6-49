@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include <stm32f4xx.h>
 #include "CPU.h"
@@ -7,7 +5,6 @@
 #include "Hardware/Modules/SPI.h"
 #include <cstdlib>
 #include <cstring>
-#endif
 
 
 namespace CPU

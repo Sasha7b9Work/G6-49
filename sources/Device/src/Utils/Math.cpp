@@ -1,13 +1,9 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Math.h"
-#include <math.h>
+#include <cmath>
 #include <cstdlib>
 #include <cstring>
 #include <limits>
-#endif
-
 
 
 int LowSignedBit(uint value)

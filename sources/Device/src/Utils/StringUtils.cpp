@@ -1,15 +1,12 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "StringUtils.h"
 #include "Utils/Math.h"
 #include "structs.h"
 #include <math.h>
 #include <cstdlib>
-#include <stdio.h>
-#include <ctype.h>
-#endif
-
+#include <cstdio>
+#include <cctype>
+#include <cstring>
 
 
 char *Float2String(float value)

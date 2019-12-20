@@ -1,12 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Command.h"
 #include "log.h"    
 #include "Transceiver.h"
 #include "Hardware/Modules/SPI.h"
-#endif
-
 
 
 void Transceiver::Transmit(SimpleMessage *message)

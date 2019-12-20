@@ -1,12 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "FDriveDevice.h"
 #include "Generator/Generator_d.h"
 #include "usbh_diskio.h"
-#endif
-
 
 
 USBH_HandleTypeDef FDrive::hUSB_Host;

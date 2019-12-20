@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "Message.h"
@@ -7,8 +5,6 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Debug.h"
-#endif
-
 
 
 void FreqMeter::Init()

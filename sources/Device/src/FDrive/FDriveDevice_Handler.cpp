@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "libs/FatFS/ffconf.h"
@@ -12,8 +10,7 @@
 #include "Utils/String.h"
 #include <ff.h>
 #include <cstdio>
-#endif
-
+#include <cmath>
 
 
 struct StructForReadDir

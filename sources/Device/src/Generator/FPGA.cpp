@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "FPGA.h"
 #include "defines.h"
 #include "log.h"
@@ -13,10 +11,6 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <math.h>
-#else
-#pragma warning(push)
-#pragma warning(disable:4310)
-#endif
 
 
 namespace FPGA

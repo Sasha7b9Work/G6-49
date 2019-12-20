@@ -1,10 +1,8 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
 #include "usbd_conf.h"
-#endif
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

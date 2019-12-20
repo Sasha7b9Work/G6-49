@@ -1,9 +1,5 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include <stm32f4xx.h>
 #include "Timer4XX.h"
-#endif
-
 
 
 void Timer4XX::Init(TIM_TypeDef *instance, uint prescaler, uint counterMode, uint period, uint clcDiv)

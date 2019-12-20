@@ -1,12 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "CPU.h"
-#endif
-
 
 
 PCD_HandleTypeDef CPU::PCD::handle;
-
 
 
 void CPU::PCD::Init()

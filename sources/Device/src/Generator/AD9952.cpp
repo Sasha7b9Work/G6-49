@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "AD9952.h"
 #include "defines.h"
 #include "GeneratroSettings.h"
@@ -7,8 +5,7 @@
 #include "FPGA.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
-#include <math.h>
-#endif
+#include <cmath>
 
 
 namespace AD9952

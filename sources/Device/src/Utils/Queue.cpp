@@ -1,10 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Message.h"
 #include "Queue.h"
-#endif
-
 
 
 Queue::Queue() : first(0), last(0)

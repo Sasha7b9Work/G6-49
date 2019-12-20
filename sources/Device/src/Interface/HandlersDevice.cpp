@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
@@ -15,8 +13,6 @@
 #include "Hardware/VCP.h"
 #include "Hardware/Modules/SPI.h"
 #include "Settings/CalibrationSettings.h"
-#endif
-
 
 
 namespace Handlers

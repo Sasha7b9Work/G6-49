@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "AD5697.h"
@@ -7,10 +5,6 @@
 #include "FPGA.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
-#else
-#pragma warning(push)
-#pragma warning(disable:4310)
-#endif
 
 
 namespace AD5697

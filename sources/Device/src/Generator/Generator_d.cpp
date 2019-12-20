@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "AD5697.h"
 #include "FPGA.h"
 #include "Generator_d.h"
@@ -9,7 +7,6 @@
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "CommonTypes.h"
-#endif
 
 
 struct Attenuation

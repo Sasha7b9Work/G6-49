@@ -1,9 +1,5 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "Debug.h"
 #include "Hardware/Timer.h"
-#endif
-
 
 
 volatile static uint timeStart = 0;

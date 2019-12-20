@@ -1,9 +1,5 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Utils/Buffer.h"
-#endif
-
 
 
 Buffer::Buffer(uint _size) : buffer(0), size(0)

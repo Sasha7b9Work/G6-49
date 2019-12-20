@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "FDrive/FDriveDevice.h"
@@ -12,7 +10,6 @@
 #include "Hardware/Modules/EEPROM.h"
 #include "FreqMeter/FreqMeter.h"
 #include <stm32f4xx_hal.h>
-#endif
 
 
 int main()

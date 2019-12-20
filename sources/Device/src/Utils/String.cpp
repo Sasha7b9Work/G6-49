@@ -1,5 +1,3 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "log.h"
 #include "String.h"
@@ -7,8 +5,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
-#endif
-
 
 
 String::String(const String &rhs) : buffer(0)

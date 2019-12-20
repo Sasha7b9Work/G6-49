@@ -1,12 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "log.h"
 #include "EEPROM.h"
 #include "Generator/FPGA.h"
 #include "Hardware/Timer.h"
-#endif
-
-
 
 
 #define SECTOR_0                    ((uint)0x08000000)          // 16k  Загрузчик

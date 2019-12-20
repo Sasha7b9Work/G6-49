@@ -1,8 +1,4 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "GeneratroSettings.h"
-#endif
-
 
 
 SettingsGenerator setDDS =

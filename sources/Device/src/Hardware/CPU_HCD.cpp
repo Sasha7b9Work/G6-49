@@ -1,12 +1,7 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "CPU.h"
-#endif
 
 
-
-    HCD_HandleTypeDef CPU::HCD::handle;
-
+HCD_HandleTypeDef CPU::HCD::handle;
 
 
 void CPU::HCD::Init()

@@ -1,9 +1,6 @@
-#include "stdafx.h"
-#ifndef WIN32
 #include "defines.h"
 #include "Memory.h"
 #include <cstring>
-#endif
 
 
 /*
