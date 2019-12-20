@@ -5,8 +5,6 @@
 #include "Settings/SettingsTypes.h"
 
 
-
-
 #define DISPLAY_SHOW_WARNING(warn)
 
 #define SCREEN_WIDTH    320
@@ -16,15 +14,15 @@
 #define BUFFER_HEIGHT   SCREEN_HEIGHT   /* Высота буфера для рисования */
 
 
-namespace Display
+struct Display
 {
-    void Init();
+    static void Init();
 
-    void Update();
+    static void Update();
 
-    uint8 *GetBuffer();
+    static uint8 *GetBuffer();
     /// Экран
-    extern uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+    static uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
     /// Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
-    extern uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+    static uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 };
