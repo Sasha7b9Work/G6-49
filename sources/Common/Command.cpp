@@ -89,20 +89,20 @@ pString Command::Trace(const uint8 *buffer) const
             }
             break;
         case SetFrequency:
-            std::strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
         case SetAmplitude:
-            std::strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
         case SetOffset:
-            std::strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
         case SetDuration:
             break;
         case SetDutyRatio:
             break;
         case SetPhase:
-            std::strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
         case RunReset:
             break;
@@ -124,13 +124,13 @@ pString Command::Trace(const uint8 *buffer) const
             std::strcat(result, buffer[2] == 0 ? "false" : "true");
             break;
         case SetManipulationDuration:
-            std::strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
         case SetManipulationPeriod:
-            std::strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
         case SetPacketPeriod:
-            std::strcat(result, Buffer2FloatString(buffer + 2));
+            std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
         case SetPacketNumber:
             break;

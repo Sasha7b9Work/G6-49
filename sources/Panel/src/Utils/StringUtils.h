@@ -25,8 +25,6 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
 
 char *Float2String(float value);
 
-char *Buffer2FloatString(const uint8 *buffer);
-
 float Buffer2Float(const uint8 *buffer);
 /// @brief Преобразует time секунд в текстовую строку
 char* Time2String(float time,           ///< время в секундах. Может быть отрицательным
@@ -70,6 +68,7 @@ bool EqualsZeroStrings(char *str1, char *str2);
 
 struct SU
 {
+    static char *Buffer2FloatString(const uint8 *buffer);
     /// Возвращает число слов в строке string
     static int NumWords(const char *string);
     /// Возвращает указатель на n слово в строке. Если char == 0 - слова нет, если ret value == 0xffffffff - выходной буфер слишком мал

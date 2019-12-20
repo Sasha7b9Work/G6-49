@@ -815,7 +815,7 @@ char *Float2String(float value)
 }
 
 
-char *Buffer2FloatString(const uint8 *buffer)
+char *SU::Buffer2FloatString(const uint8 *buffer)
 {
     return Float2String(Buffer2Float(buffer));
 }
