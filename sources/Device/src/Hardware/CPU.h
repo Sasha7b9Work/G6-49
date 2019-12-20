@@ -67,42 +67,51 @@ struct GeneratorReadPin
 
 
 
-namespace CPU
+struct CPU
 {
-    void Init();
+    static void Init();
     /// Установить на PA2 признак того, что процессор занят
-    void SetBusy();
+    static void SetBusy();
     /// Установить на PA2 признак того, что процессор свободен
-    void SetReady();
+    static void SetReady();
     
-     void WritePin(GeneratorWritePin pin, bool set);
+    static void WritePin(GeneratorWritePin pin, bool set);
 
-    bool ReadPin(GeneratorReadPin pin);
+    static bool ReadPin(GeneratorReadPin pin);
 
-    void ErrorHandler();
+    static void ErrorHandler();
 
     
-    namespace HCD
+    struct HCD
     {
-        void Init();
+        static void Init();
 
-        extern HCD_HandleTypeDef handle;
+        static HCD_HandleTypeDef handle;
     };
 
     
-    namespace PCD
+    struct PCD
     {
-        void Init();
-        extern PCD_HandleTypeDef handle;
+        static void Init();
+
+        static PCD_HandleTypeDef handle;
     };
 
     
-    namespace CRC32
+    struct CRC32
     {
-        uint Calculate(const uint8 *address, uint size);
+        static uint Calculate(const uint8 *address, uint size);
 
-        void Init();
+        static void Init();
     };
+
+private:
+
+    static void EnablePeriphery();
+
+    static void InitGPIOS();
+    /// Начальная инициализация управляющих выводов
+    static void InitPins();
 };
 
 

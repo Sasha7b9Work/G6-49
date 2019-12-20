@@ -7,19 +7,7 @@
 #include <cstring>
 
 
-namespace CPU
-{
-    void EnablePeriphery();
-
-    void InitGPIOS();
-    /// Ќачальна€ инициализаци€ управл€ющих выводов
-    void InitPins();
-}
-
-
-
 static void SystemClockConfig();
-
 
 
 static CRC_HandleTypeDef handleCRC = {CRC};
