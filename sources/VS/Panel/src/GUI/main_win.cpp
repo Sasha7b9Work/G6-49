@@ -35,6 +35,6 @@ void update()
 
     Display::Update();
 
-    Interface::Update();
+    PInterface::Update();
 }
 
