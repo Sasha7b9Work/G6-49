@@ -260,10 +260,3 @@ float BigNumber::GetValue()
 
     return result * mul;
 }
-
-
-void BigNumber::Get(char /*integer_*/[SIZE], char /*fract_*/[SIZE], char * /*sign_*/)
-{
-    //*sign_ = sign;
-
-}

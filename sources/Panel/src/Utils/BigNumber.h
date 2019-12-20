@@ -26,8 +26,6 @@ public:
 
     static float GetValue();
 
-    static void Get(char integer[SIZE], char fract[SIZE], char *sign);
-
 private:
 
     struct Number
