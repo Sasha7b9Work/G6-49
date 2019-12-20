@@ -7,8 +7,8 @@
 
 void Transceiver::Transmit(SimpleMessage *message)
 {
-    SPI1_::Transmit(message->Size(), 10);
+    HAL_SPI1::Transmit(message->Size(), 10);
 
-    SPI1_::Transmit(message->Data(), message->Size(), 
+    HAL_SPI1::Transmit(message->Data(), message->Size(), 
         (message->Size() > 100U) ? 200U : 10U);
 }

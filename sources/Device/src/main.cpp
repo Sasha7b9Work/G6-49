@@ -19,7 +19,7 @@ int main()
     VCP::Init();
     DGenerator::Init();
     DDrive::Init();
-    EEPROM::Init();
+    HAL_EEPROM::Init();
   
     while (1)
     {

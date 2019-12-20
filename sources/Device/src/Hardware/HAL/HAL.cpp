@@ -26,7 +26,7 @@ static SPI_HandleTypeDef handle =                                   // Для связи
 
 
 
-void SPI1_::Init()
+void HAL_SPI1::Init()
 {
     GPIO_InitTypeDef isGPIOA =
     {   //  SCK         MI           MO
@@ -42,19 +42,19 @@ void SPI1_::Init()
 }
 
 
-bool SPI1_::Receive(void *buffer, uint size, uint timeout)
+bool HAL_SPI1::Receive(void *buffer, uint size, uint timeout)
 {
     return HAL_SPI_Receive(&handle, static_cast<uint8 *>(buffer), static_cast<uint16>(size), timeout) == HAL_OK;
 }
 
 
-bool SPI1_::Transmit(void *buffer, uint size, uint timeout)
+bool HAL_SPI1::Transmit(void *buffer, uint size, uint timeout)
 {
     return HAL_SPI_Transmit(&handle, static_cast<uint8 *>(buffer), static_cast<uint16>(size), timeout) == HAL_OK;
 }
 
 
-bool SPI1_::Transmit(uint value, uint timeout)
+bool HAL_SPI1::Transmit(uint value, uint timeout)
 {
     return Transmit(&value, 4, timeout);
 }

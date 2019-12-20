@@ -48,7 +48,7 @@ static uint AddressForData(Chan::E ch);
 
 
 
-void EEPROM::SaveSettings(CalibrationSettings *settings)
+void HAL_EEPROM::SaveSettings(CalibrationSettings *settings)
 {
     uint address = FindFirstFreeRecord(SECTOR_CALIBRATION_4, SizeSector(SECTOR_CALIBRATION_4), sizeof(CalibrationSettings));
 
@@ -75,7 +75,7 @@ static uint SizeSector(uint address)
 }
 
 
-void EEPROM::LoadSettings(CalibrationSettings *settings)
+void HAL_EEPROM::LoadSettings(CalibrationSettings *settings)
 {
     uint address = FindLastOccupiedRecord(SECTOR_CALIBRATION_4, SizeSector(SECTOR_CALIBRATION_4), sizeof(CalibrationSettings));
 
@@ -192,7 +192,7 @@ static void WriteData(uint dest, void *src, uint size)
 }
 
 
-void EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS])
+void HAL_EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS])
 {
     uint sizeData = FPGA::NUM_POINTS * sizeof(data[0]);
 
@@ -226,7 +226,7 @@ static uint AddressForData(Chan::E ch)
 }
 
 
-uint16 *EEPROM::Signal::Get(Chan::E ch)
+uint16 *HAL_EEPROM::Signal::Get(Chan::E ch)
 {
     uint16 *result = (uint16 *)(SECTOR_SIGNAL_FPGA_11); //-V566
 
@@ -239,7 +239,7 @@ uint16 *EEPROM::Signal::Get(Chan::E ch)
 }
 
 
-void EEPROM::Init()
+void HAL_EEPROM::Init()
 {
     uint *data = (uint *)SECTOR_SIGNAL_FPGA_11; //-V566
 

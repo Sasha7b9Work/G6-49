@@ -4,7 +4,7 @@
 
 
 
-struct EEPROM
+struct HAL_EEPROM
 {
     static void Init();
 

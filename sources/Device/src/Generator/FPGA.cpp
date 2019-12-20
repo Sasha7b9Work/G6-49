@@ -534,13 +534,13 @@ uint8 *FPGA::DataDDS(Chan::E ch)
 
 uint8 *FPGA::DataFlash(Chan::E ch)
 {
-    return reinterpret_cast<uint8 *>(EEPROM::Signal::Get(ch));
+    return reinterpret_cast<uint8 *>(HAL_EEPROM::Signal::Get(ch));
 }
 
 
 void FPGA::SaveExtSignal(Chan::E ch, uint8 *data)
 {
-    EEPROM::Signal::Save(ch, reinterpret_cast<uint16 *>(data));
+    HAL_EEPROM::Signal::Save(ch, reinterpret_cast<uint16 *>(data));
 }
 
 #ifdef WIN32

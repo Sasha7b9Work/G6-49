@@ -81,7 +81,7 @@ void CPU::Init()
     WritePin(GeneratorWritePin::Pin_OutA, true);
     WritePin(GeneratorWritePin::Pin_OutB, true);
 
-    SPI1_::Init();
+    HAL_SPI1::Init();
 
     CRC32::Init();
 }

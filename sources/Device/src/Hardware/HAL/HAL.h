@@ -2,13 +2,13 @@
 
 
 
-namespace SPI1_
+struct HAL_SPI1
 {
-    void Init();
+    static void Init();
 
-    bool Receive(void *buffer, uint size, uint timeout);
+    static bool Receive(void *buffer, uint size, uint timeout);
 
-    bool Transmit(void *buffer, uint size, uint timeout);
+    static bool Transmit(void *buffer, uint size, uint timeout);
 
-    bool Transmit(uint value, uint timeout);
+    static bool Transmit(uint value, uint timeout);
 };
