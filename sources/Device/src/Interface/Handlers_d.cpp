@@ -3,11 +3,11 @@
 #include "structs.h"
 #include "Command.h"
 #include "Transceiver.h"
-#include "HandlersDevice.h"
+#include "Handlers_d.h"
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Generator/Generator_d.h"
-#include "InterfaceDevice.h"
+#include "Interface_d.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
@@ -15,7 +15,7 @@
 #include "Settings/CalibrationSettings.h"
 
 
-namespace Handlers
+namespace DHandlers
 {
     void E(SimpleMessage *);
 
@@ -78,42 +78,42 @@ void Handlers::Processing(SimpleMessage *msg)
 
     static const pFuncInterfaceVpM funcs[Command::Count] =
     {
-        /* RequestData               */ Handlers::SendData,
-        /* EnableChannel             */ Handlers::EnableChannel,
-        /* SetFormWave               */ Handlers::SetFormWave,
-        /* SetFrequency              */ Handlers::SetFrequency,
-        /* SetAmplitude              */ Handlers::SetAmplitude,
-        /* SetOffset                 */ Handlers::SetOffset,
-        /* SetDuration               */ Handlers::SetDuration,
-        /* SetDutyRatio              */ Handlers::SetDutyRatio,
-        /* SetPhase                  */ Handlers::SetPhase,
-        /* RunReset                  */ Handlers::RunReset,
-        /* ModeDebug                 */ Handlers::ModeDebug,
-        /* SetDelay                  */ Handlers::SetDelay,
-        /* WriteRegister             */ Handlers::WriteRegister,
-        /* SetDurationRise           */ Handlers::E,
-        /* SetDurationFall           */ Handlers::E,
-        /* SetDurationStady          */ Handlers::E,
-        /* SetDutyFactor             */ Handlers::E,
-        /* SetManipulation           */ Handlers::SetManipulation,
-        /* SetManipulationDuration   */ Handlers::SetManipulationDuration,
-        /* SetManipulationPeriod     */ Handlers::SetManipulationPeriod,
-        /* SetPacketPeriod           */ Handlers::SetPacketPeriod,
-        /* SetPacketNumber           */ Handlers::SetPacketNumber,
-        /* SetStartMode              */ Handlers::SetStartMode,
-        /* SetPeriod                 */ Handlers::SetPeriod,
-        /* SetPolarity               */ Handlers::SetPolarity,
-        /* SetManipulationMode       */ Handlers::E,
-        /* LoadFromDDS               */ Handlers::LoadFormDDS,
-        /* FreqMeasure               */ Handlers::E,
-        /* Log                       */ Handlers::E,
+        /* RequestData               */ DHandlers::SendData,
+        /* EnableChannel             */ DHandlers::EnableChannel,
+        /* SetFormWave               */ DHandlers::SetFormWave,
+        /* SetFrequency              */ DHandlers::SetFrequency,
+        /* SetAmplitude              */ DHandlers::SetAmplitude,
+        /* SetOffset                 */ DHandlers::SetOffset,
+        /* SetDuration               */ DHandlers::SetDuration,
+        /* SetDutyRatio              */ DHandlers::SetDutyRatio,
+        /* SetPhase                  */ DHandlers::SetPhase,
+        /* RunReset                  */ DHandlers::RunReset,
+        /* ModeDebug                 */ DHandlers::ModeDebug,
+        /* SetDelay                  */ DHandlers::SetDelay,
+        /* WriteRegister             */ DHandlers::WriteRegister,
+        /* SetDurationRise           */ DHandlers::E,
+        /* SetDurationFall           */ DHandlers::E,
+        /* SetDurationStady          */ DHandlers::E,
+        /* SetDutyFactor             */ DHandlers::E,
+        /* SetManipulation           */ DHandlers::SetManipulation,
+        /* SetManipulationDuration   */ DHandlers::SetManipulationDuration,
+        /* SetManipulationPeriod     */ DHandlers::SetManipulationPeriod,
+        /* SetPacketPeriod           */ DHandlers::SetPacketPeriod,
+        /* SetPacketNumber           */ DHandlers::SetPacketNumber,
+        /* SetStartMode              */ DHandlers::SetStartMode,
+        /* SetPeriod                 */ DHandlers::SetPeriod,
+        /* SetPolarity               */ DHandlers::SetPolarity,
+        /* SetManipulationMode       */ DHandlers::E,
+        /* LoadFromDDS               */ DHandlers::LoadFormDDS,
+        /* FreqMeasure               */ DHandlers::E,
+        /* Log                       */ DHandlers::E,
         /* FDrive_NumDirsAndFiles    */ FDrive::Handler::Processing,
         /* FDrive_Mount              */ FDrive::Handler::Processing,
         /* FDrive_RequestDir         */ FDrive::Handler::Processing,
         /* FDrive_RequestFile        */ FDrive::Handler::Processing,
-        /* Test                      */ Handlers::Test,
-        /* SetKoeffCalibration       */ Handlers::SetKoeffCalibration,
-        /* GetKoeffCalibration       */ Handlers::GetKoeffCalibration,
+        /* Test                      */ DHandlers::Test,
+        /* SetKoeffCalibration       */ DHandlers::SetKoeffCalibration,
+        /* GetKoeffCalibration       */ DHandlers::GetKoeffCalibration,
         /* FDrive_RequestFileSize    */ FDrive::Handler::Processing,
         /* FDrive_RequestFileString  */ FDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ FDrive::Handler::Processing,
@@ -127,7 +127,7 @@ void Handlers::Processing(SimpleMessage *msg)
 }
 
 
-void Handlers::SendData(SimpleMessage *)
+void DHandlers::SendData(SimpleMessage *)
 {
     CPU::SetBusy();
 
@@ -158,7 +158,7 @@ void Handlers::SendData(SimpleMessage *)
 }
 
 
-void Handlers::EnableChannel(SimpleMessage *msg)
+void DHandlers::EnableChannel(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
@@ -168,7 +168,7 @@ void Handlers::EnableChannel(SimpleMessage *msg)
 }
 
 
-void Handlers::SetFormWave(SimpleMessage *msg)
+void DHandlers::SetFormWave(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
@@ -186,79 +186,79 @@ static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, Param
 }
 
 
-void Handlers::SetFrequency(SimpleMessage *msg)
+void DHandlers::SetFrequency(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetFrequency);
 }
 
 
-void Handlers::SetPeriod(SimpleMessage *msg)
+void DHandlers::SetPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetPeriod);
 }
 
 
-void Handlers::SetAmplitude(SimpleMessage *msg)
+void DHandlers::SetAmplitude(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetAmplitude);
 }
 
 
-void Handlers::SetOffset(SimpleMessage *msg)
+void DHandlers::SetOffset(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetOffset);
 }
 
 
-void Handlers::SetDuration(SimpleMessage *msg)
+void DHandlers::SetDuration(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetDuration);
 }
 
 
-void Handlers::SetDutyRatio(SimpleMessage *msg)
+void DHandlers::SetDutyRatio(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetDutyRatio);
 }
 
 
-void Handlers::SetPhase(SimpleMessage *msg)
+void DHandlers::SetPhase(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetPhase);
 }
 
 
-void Handlers::SetDelay(SimpleMessage *msg)
+void DHandlers::SetDelay(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetDelay);
 }
 
 
-void Handlers::SetManipulationDuration(SimpleMessage *msg)
+void DHandlers::SetManipulationDuration(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetManipulationDuration);
 }
 
 
-void Handlers::SetManipulationPeriod(SimpleMessage *msg)
+void DHandlers::SetManipulationPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetManipulationPeriod);
 }
 
 
-void Handlers::SetPacketPeriod(SimpleMessage *msg)
+void DHandlers::SetPacketPeriod(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetPacketPeriod);
 }
 
 
-void Handlers::SetPacketNumber(SimpleMessage *msg)
+void DHandlers::SetPacketNumber(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetPacketNumber);
 }
 
 
-void Handlers::SetManipulation(SimpleMessage *msg)
+void DHandlers::SetManipulation(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
@@ -266,7 +266,7 @@ void Handlers::SetManipulation(SimpleMessage *msg)
 }
 
 
-void Handlers::SetStartMode(SimpleMessage *msg)
+void DHandlers::SetStartMode(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
@@ -276,7 +276,7 @@ void Handlers::SetStartMode(SimpleMessage *msg)
 }
 
 
-void Handlers::SetPolarity(SimpleMessage *message)
+void DHandlers::SetPolarity(SimpleMessage *message)
 {
     Chan ch(message->TakeByte());
 
@@ -284,7 +284,7 @@ void Handlers::SetPolarity(SimpleMessage *message)
 }
 
 
-void Handlers::LoadFormDDS(SimpleMessage *msg)
+void DHandlers::LoadFormDDS(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
@@ -292,7 +292,7 @@ void Handlers::LoadFormDDS(SimpleMessage *msg)
 }
 
 
-void Handlers::SetKoeffCalibration(SimpleMessage *msg)
+void DHandlers::SetKoeffCalibration(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
@@ -314,12 +314,12 @@ void Handlers::SetKoeffCalibration(SimpleMessage *msg)
 }
 
 
-void Handlers::GetKoeffCalibration(SimpleMessage *)
+void DHandlers::GetKoeffCalibration(SimpleMessage *)
 {
 }
 
 
-void Handlers::WriteRegister(SimpleMessage *msg)
+void DHandlers::WriteRegister(SimpleMessage *msg)
 {
     Register reg(msg->TakeByte());
 
@@ -410,7 +410,7 @@ void Handlers::WriteRegister(SimpleMessage *msg)
 }
 
 
-void Handlers::RunReset(SimpleMessage *)
+void DHandlers::RunReset(SimpleMessage *)
 {
 #ifndef WIN32
 
@@ -425,18 +425,18 @@ void Handlers::RunReset(SimpleMessage *)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void Handlers::Test(SimpleMessage *)
+void DHandlers::Test(SimpleMessage *)
 {
 
 }
 
 
-void Handlers::ModeDebug(SimpleMessage *)
+void DHandlers::ModeDebug(SimpleMessage *)
 {
 }
 
 
-void Handlers::E(SimpleMessage *)
+void DHandlers::E(SimpleMessage *)
 {
 
 }

@@ -3,7 +3,7 @@
 #include "FDrive/FDriveDevice.h"
 #include "Generator/Generator_d.h"
 #include "Generator/AD5697.h"
-#include "Interface/InterfaceDevice.h"
+#include "Interface/Interface_d.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"

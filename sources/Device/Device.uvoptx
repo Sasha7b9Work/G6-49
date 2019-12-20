@@ -1358,7 +1358,7 @@
 
   <Group>
     <GroupName>common</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1893,48 +1893,48 @@
     <File>
       <GroupNumber>13</GroupNumber>
       <FileNumber>123</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Interface\HandlersDevice.cpp</PathWithFileName>
-      <FilenameWithoutPath>HandlersDevice.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Interface\Handlers_d.h</PathWithFileName>
+      <FilenameWithoutPath>Handlers_d.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
       <FileNumber>124</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Interface\HandlersDevice.h</PathWithFileName>
-      <FilenameWithoutPath>HandlersDevice.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Interface\Handlers_d.cpp</PathWithFileName>
+      <FilenameWithoutPath>Handlers_d.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
       <FileNumber>125</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Interface\InterfaceDevice.cpp</PathWithFileName>
-      <FilenameWithoutPath>InterfaceDevice.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Interface\Interface_d.h</PathWithFileName>
+      <FilenameWithoutPath>Interface_d.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
       <FileNumber>126</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Interface\InterfaceDevice.h</PathWithFileName>
-      <FilenameWithoutPath>InterfaceDevice.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Interface\Interface_d.cpp</PathWithFileName>
+      <FilenameWithoutPath>Interface_d.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1945,8 +1945,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Interface\Transceiver_407.cpp</PathWithFileName>
-      <FilenameWithoutPath>Transceiver_407.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Interface\Transceiver_d.cpp</PathWithFileName>
+      <FilenameWithoutPath>Transceiver_d.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

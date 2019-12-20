@@ -1,7 +1,7 @@
 #include <stm32f4xx.h>
 #include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
-#include "Interface/InterfaceDevice.h"
+#include "Interface/Interface_d.h"
 #include "Utils/Debug.h"
 
 
