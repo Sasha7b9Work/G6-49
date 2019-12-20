@@ -2,44 +2,13 @@
 #include "defines.h"
 
 
-
-#define PI 3.141592653589793f
-
-#define LIMIT_BELOW(x, min)                 if((x) < (min)) { x = (min); }
-
-#define LIMIT_ABOVE(x, max)                 if((x) > (max)) { x = (max); }
-
-#define SET_MIN_IF_LESS(x, min)             if((x) < (min)) { (min) = (x); }
-
-#define SET_MAX_IF_LARGER(x, max)           if((x) > (max)) { (max) = (x); }
-
-#define LIMITATION_BOUND(var, min, max)     if((var) < (min)) { (min) = (var); }; if((var) > (max)) { (max) = (var); };
-
-#define ROUND(x) ((x) += 0.5f, (x))
-
-#define SET_IF_LARGER(x, max, newValue)     if((x) > (max)) { (x) = (newValue); }
-
-#define LIMITATION_ABOVE(var, value, max)   var = (value); if((var) > (max)) { (var) = (max); }
-
 #define LIMITATION(var, min, max)           if(var < (min)) { (var) = (min); } else if(var > (max)) { var = (max); } else { var = var; };
 
-#define IN_RANGE(x, min, max)               ((x) >= (min) && (x) <= (max))
 
-
-/// Возвращает true, если value входит в диапазон [min; max]
-bool IntInRange(int value, int min, int max);
-/// Возвращает номер младшего бита, равного единице
-int LowSignedBit(uint value);
-/// Возвращает максимальное значение из трёх
+///// Возвращает максимальное значение из трёх
 float MaxFloat(float val1, float val2, float val3);
-/// \brief Сравнивает два числа. Возвращает true, если числа отличаются друг от друга не более, чем на epsilonPart. При этом для расчёта epsilonPart 
-/// используется большее в смысле модуля число.
-bool FloatsIsEquals(float value0, float value1, float epsilonPart);
 
 bool IsEquals(float x, float y);
-
-float RandFloat(float min, float max);
-
 
 
 struct Math

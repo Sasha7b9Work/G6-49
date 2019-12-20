@@ -2,7 +2,6 @@
 #include "Utils/String.h"
 
 
-
 struct Word
 {
     char   *address;
