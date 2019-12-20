@@ -8,51 +8,8 @@
 #include <cmath>
 
 
-namespace AD9952
-{
-    struct Register
-    {
-        enum E
-        {
-            CFR1,
-            CFR2,
-            ASF,
-            ARR,
-            FTW0,
-            POW,
-            Number
-        } value;
-        Register(E v) : value(v) { };
-        operator uint8() const { return static_cast<uint8>(value); };
-        pString Name() const;
-        bool Is(E v) const { return value == v; };
-    };
-
-    void WriteToHardware(Chan::E ch, Register reg, uint value);
-    GeneratorWritePin ChipSelect(Chan::E ch);
-    void Reset();
-    void WriteRegister(Chan::E ch, Register reg);
-    void WriteCFR1(Chan::E ch);
-    void WriteCFR2(Chan::E ch);
-    void WriteARR(Chan::E ch);
-    void WriteASF(Chan::E ch);
-    void WriteFTW0(Chan::E ch);
-    void WritePOW(Chan::E ch);
-
-    struct ClockFrequency
-    {
-        enum E
-        {
-            _100MHz,
-            _1MHz
-        } value;
-        explicit ClockFrequency(E v) : value(v) {};
-    };
-
-    ClockFrequency::E clock = ClockFrequency::_100MHz;
-}
-
-
+AD9952::ClockFrequency::E AD9952::clock = ClockFrequency::_100MHz;
+    
 
 static SPI_HandleTypeDef hSPI3 =
 {
