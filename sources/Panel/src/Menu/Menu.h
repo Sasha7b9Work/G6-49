@@ -3,43 +3,53 @@
 
 
 
-namespace Menu
+struct Menu
 {
     /// Столько элементов меню помещается на дисплее одновременно
-    const int NUM_ITEMS_ON_DISPLAY = 4;
+    static const int NUM_ITEMS_ON_DISPLAY = 4;
 
-    void Init();
+    static void Init();
     
-    void Update();
+    static void Update();
 
-    void Draw();
+    static void Draw();
     /// Наризовать загол
-    int DrawTitle();
+    static int DrawTitle();
 
-    void DrawPagesUGO(int x);
+    static void DrawPagesUGO(int x);
     /// Возвращает true, если ручка управляет переклюичением подстраниц меню
-    bool RegIsControlSubPages();
+    static bool RegIsControlSubPages();
     /// Возвращает адрес открытого элемента меню
-    Item* GetOpenedItem();
+    static Item* GetOpenedItem();
     /// Установить Item, который будет считаться открытым
-    void SetOpenedItem(Item *item);
+    static void SetOpenedItem(Item *item);
     /// Установить текущий Item - именно к нему будут приходить события ручки и ESC
-    void SetCurrentItem(Item *item);
+    static void SetCurrentItem(Item *item);
     /// Сброс текущего Item - текущего Item'a больше нет
-    void ResetCurrentItem();
+    static void ResetCurrentItem();
     /// Возвращает текущий Item
-    Item* GetCurrentItem();
+    static Item* GetCurrentItem();
     /// Обнулить открытый итем - итем закрыт
-    void ResetOpenedItem();
+    static void ResetOpenedItem();
     /// Возвращает позицию страницы на страницы. Только если страница принадлежит главному меню. Иначе -1
-    int GetPosition(const Page *page);
+    static int GetPosition(const Page *page);
     /// Устанавливает для отрисовки дополнительноую страницу
-    void SetAdditionPage(Page *page);
+    static void SetAdditionPage(Page *page);
     /// Синмает дополнительную страницу с отрисовки
-    void ResetAdditionPage();
+    static void ResetAdditionPage();
     /// Указатель на главную страницу
-    extern Page *mainPage;
+    static Page *mainPage;
     ///\brief  Здесь хранится адрес элемента меню, соответствующего функциональной клавише [F1..F4], если она находится в нижнем положении, и 0, 
     /// если ни одна кнопка не нажата.
-    extern Item *pressedItem;
+    static Item *pressedItem;
+
+private:
+    /// Обработать управляющее воздействие control
+    static void ProcessContorl(KeyEvent &control);
+    /// Обрабатывает состояние выходов. Возвращает true, если состояние вывода изменилось
+    static bool ProcessOutputs(KeyEvent &control);
+    /// Если какой-то итем раскрыт, то здесь его адрес
+    static Item *openedItem;
+
+    static Item *currentItem;
 };

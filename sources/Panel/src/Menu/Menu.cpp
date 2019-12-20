@@ -17,22 +17,10 @@
 #include "Utils/Debug.h"
 
 
-namespace Menu
-{
-    /// ќбработать управл€ющее воздействие control
-    static void ProcessContorl(KeyEvent &control);
-    /// ќбрабатывает состо€ние выходов. ¬озвращает true, если состо€ние вывода изменилось
-    static bool ProcessOutputs(KeyEvent &control);
-    /// ≈сли какой-то итем раскрыт, то здесь его адрес
-    static Item *openedItem = nullptr;
-
-    static Item *currentItem = nullptr;
-}
-
-
-
 Item *Menu::pressedItem = nullptr;
 static Page *oldPage = nullptr;
+Item *Menu::openedItem = nullptr;
+Item *Menu::currentItem = nullptr;
 
 extern const PageBase pSignals;
 
@@ -48,12 +36,10 @@ DEF_PAGE_3( mainPageMenu,
 Page *Menu::mainPage = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPageMenu));
 
 
-
 void Menu::Init()
 {
     PageSignals::Init();
 }
-
 
 
 void Menu::Update()
