@@ -53,7 +53,7 @@ int main()
         CPU::Update();
         Menu::Update();
         Display::Update();
-        Interface::Update();
+        PInterface::Update();
     }
 }
 

@@ -35,7 +35,7 @@ private:
 
 
 
-namespace Interface
+namespace PInterface
 {
     /// Для приёма сообщений от устройства
     void Update();

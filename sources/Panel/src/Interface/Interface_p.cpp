@@ -18,7 +18,7 @@
 #include <cstdlib>
 
 
-namespace Interface
+namespace PInterface
 {
     void AddMessageForTransmit(SimpleMessage *message);
     /// Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
@@ -35,13 +35,13 @@ static List<Task> tasks;
 
 
 
-void Interface::AddMessageForTransmit(SimpleMessage *message)
+void PInterface::AddMessageForTransmit(SimpleMessage *message)
 {
     Transceiver::Transmit(message);
 }
 
 
-void Interface::Update()
+void PInterface::Update()
 {
     static uint time = 0;
 
@@ -70,7 +70,7 @@ void Interface::Update()
 }
 
 
-void Interface::AddTask(Task *task)
+void PInterface::AddTask(Task *task)
 {
     if(!tasks.IsMember(task))                   // Если задания ещё нет в очереди
     {
@@ -87,7 +87,7 @@ void Task::TransmitMessage()
 }
 
 
-void Interface::SendTasks()
+void PInterface::SendTasks()
 {
     ListElement<Task> *element = tasks.First();
 
@@ -111,7 +111,7 @@ bool Task::PassedLittleTimeAfterSend()
 }
 
 
-bool Interface::ProcessTask(SimpleMessage *answer)
+bool PInterface::ProcessTask(SimpleMessage *answer)
 {
     ListElement<Task> *element = tasks.First();
 
@@ -135,7 +135,7 @@ bool Interface::ProcessTask(SimpleMessage *answer)
 }
 
 
-void Interface::RunAnswer(ListElement<Task> *element, SimpleMessage *answer)
+void PInterface::RunAnswer(ListElement<Task> *element, SimpleMessage *answer)
 {
     element->Get()->funcProcess(answer);
     tasks.Remove(element->Get());
@@ -176,5 +176,5 @@ SimpleMessage *Task::GetMessage()
 
 void SimpleMessage::Transmit()
 {
-    Interface::AddMessageForTransmit(this);
+    PInterface::AddMessageForTransmit(this);
 }

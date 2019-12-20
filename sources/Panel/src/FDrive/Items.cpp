@@ -134,7 +134,7 @@ static void SendRequestForNameFile(int number)
     
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestNameFile);
     
-    Interface::AddTask(task);
+    PInterface::AddTask(task);
 }
 
 

@@ -107,7 +107,7 @@ void File::Open(int n)
 
     Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
 
-    Interface::AddTask(task);
+    PInterface::AddTask(task);
 }
 
 

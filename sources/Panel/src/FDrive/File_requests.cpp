@@ -24,5 +24,5 @@ void FileRequests::SendRequestForString(const String *name, int numString)
 
     Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestString);
 
-    Interface::AddTask(task);
+    PInterface::AddTask(task);
 }
