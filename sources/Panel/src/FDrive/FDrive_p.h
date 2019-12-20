@@ -3,10 +3,10 @@
 
 
 
-namespace FDrive
+struct FDrive
 {
     /// Начальная инициализация
-    void Init();
+    static void Init();
 
     /// Что показываем - каталоги или файлы
     enum View
@@ -15,21 +15,29 @@ namespace FDrive
         Files
     };
     
-    extern View view;
+    static View view;
 
     /// Отрисовка файло-менеджера
-    void Draw();
+    static void Draw();
     /// Обработка нажатия кнопки "Вверх"
-    void PressUp();
+    static void PressUp();
     /// Обработка нажатия кнопки "Вниз"
-    void PressDown();
+    static void PressDown();
     /// Обработка нажатия кнопки "Выбрать"
-    void PressChoose();
+    static void PressChoose();
 
-    char *CurrentDirectory();
+    static char *CurrentDirectory();
 
-    namespace Handler
+    struct Handler
     {
-        bool Processing(SimpleMessage *msg);
+        static bool Processing(SimpleMessage *msg);
+    private:
+        static SimpleMessage *msg;
+        static bool E();
+        static bool IsMount();
+        static bool GetNumDirsAndFiles();
+        static bool RequestFile();
+        static bool RequestFileSize();
+        static bool LoadFromExtStorage();
     };
 };

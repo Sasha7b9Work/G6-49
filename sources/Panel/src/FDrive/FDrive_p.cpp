@@ -12,20 +12,8 @@
 #include <cstdlib>
 
 
-namespace FDrive
-{
-    namespace Handler
-    {
-        SimpleMessage *msg = nullptr;
-        bool E();
-        bool IsMount();
-        bool GetNumDirsAndFiles();
-        bool RequestFile();
-        bool RequestFileSize();
-        bool LoadFromExtStorage();
-    }
-}
-
+FDrive::View   FDrive::view;
+SimpleMessage *FDrive::Handler::msg = nullptr;
 
 
 enum Mount
@@ -34,7 +22,6 @@ enum Mount
     Mounted,
     Failed
 };
-
 
 
 /// Текущее состояние флешки
