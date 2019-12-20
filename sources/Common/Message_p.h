@@ -9,5 +9,4 @@ namespace Message
     public:
         LoadFormDDS(uint8 ch, uint16 data[PGenerator::DDS_NUM_POINTS]);
     };
-
 }
