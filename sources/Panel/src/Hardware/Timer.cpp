@@ -24,14 +24,10 @@ typedef struct
 
 
 static TimerStruct timers[Timer::Type::Count];
-static uint timeStartLogging = 0;
-static uint timePrevPoint = 0;
-
 
 
 #undef TIME_NEXT
 #define TIME_NEXT(type) (timers[type].timeNextMS)
-
 
 
 /// Завести таймр, который остановится в timeStop мс
@@ -44,7 +40,6 @@ static uint NearestTime();
 static void TuneTIM(Timer::Type type);
 /// Вызывается при срабатывании таймера
 static void ElapsedCallback();
-
 
 
 bool Timer::IsRun(Type type)
