@@ -2,7 +2,7 @@
 #include "log.h"
 #include "libs/FatFS/ffconf.h"
 #include "libs/FatFS/FatFS.h"
-#include "FDrive/FDriveDevice.h"
+#include "FDrive/FDrive_d.h"
 #include "Generator/FPGA.h"
 #include "Generator/Generator_d.h"
 #include "Utils/Buffer.h"

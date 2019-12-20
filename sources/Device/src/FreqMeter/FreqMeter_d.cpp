@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Message.h"
-#include "FreqMeter.h"
+#include "FreqMeter_d.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Debug.h"

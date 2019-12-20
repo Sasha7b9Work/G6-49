@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "log.h"
-#include "FDrive/FDriveDevice.h"
+#include "FDrive/FDrive_d.h"
 #include "Generator/Generator_d.h"
 #include "Generator/AD5697.h"
 #include "Interface/Interface_d.h"
@@ -8,7 +8,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Hardware/Modules/EEPROM.h"
-#include "FreqMeter/FreqMeter.h"
+#include "FreqMeter/FreqMeter_d.h"
 #include <stm32f4xx_hal.h>
 
 

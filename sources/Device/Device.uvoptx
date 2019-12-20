@@ -1474,31 +1474,31 @@
 
   <Group>
     <GroupName>FDrive</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>92</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\FDriveDevice.cpp</PathWithFileName>
-      <FilenameWithoutPath>FDriveDevice.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\FDrive_d.h</PathWithFileName>
+      <FilenameWithoutPath>FDrive_d.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>93</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\FDriveDevice.h</PathWithFileName>
-      <FilenameWithoutPath>FDriveDevice.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\FDrive_d.cpp</PathWithFileName>
+      <FilenameWithoutPath>FDrive_d.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1509,8 +1509,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\FDriveDevice_Handler.cpp</PathWithFileName>
-      <FilenameWithoutPath>FDriveDevice_Handler.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\FDrive_d_Handler.cpp</PathWithFileName>
+      <FilenameWithoutPath>FDrive_d_Handler.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1518,31 +1518,31 @@
 
   <Group>
     <GroupName>FreqMeter</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>9</GroupNumber>
       <FileNumber>95</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FreqMeter\FreqMeter.cpp</PathWithFileName>
-      <FilenameWithoutPath>FreqMeter.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FreqMeter\FreqMeter_d.h</PathWithFileName>
+      <FilenameWithoutPath>FreqMeter_d.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>9</GroupNumber>
       <FileNumber>96</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FreqMeter\FreqMeter.h</PathWithFileName>
-      <FilenameWithoutPath>FreqMeter.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\FreqMeter\FreqMeter_d.cpp</PathWithFileName>
+      <FilenameWithoutPath>FreqMeter_d.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

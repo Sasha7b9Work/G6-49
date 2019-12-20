@@ -1272,19 +1272,19 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
-              <FileName>FDriveDevice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDriveDevice.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FDriveDevice.h</FileName>
+              <FileName>FDrive_d.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FDrive\FDriveDevice.h</FilePath>
+              <FilePath>.\src\FDrive\FDrive_d.h</FilePath>
             </File>
             <File>
-              <FileName>FDriveDevice_Handler.cpp</FileName>
+              <FileName>FDrive_d.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDriveDevice_Handler.cpp</FilePath>
+              <FilePath>.\src\FDrive\FDrive_d.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FDrive_d_Handler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\FDrive_d_Handler.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1292,14 +1292,14 @@
           <GroupName>FreqMeter</GroupName>
           <Files>
             <File>
-              <FileName>FreqMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FreqMeter\FreqMeter.cpp</FilePath>
+              <FileName>FreqMeter_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter_d.h</FilePath>
             </File>
             <File>
-              <FileName>FreqMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FreqMeter\FreqMeter.h</FilePath>
+              <FileName>FreqMeter_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter_d.cpp</FilePath>
             </File>
           </Files>
         </Group>

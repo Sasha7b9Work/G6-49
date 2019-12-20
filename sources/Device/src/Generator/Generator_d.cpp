@@ -3,7 +3,7 @@
 #include "Generator_d.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
-#include "FreqMeter/FreqMeter.h"
+#include "FreqMeter/FreqMeter_d.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "CommonTypes.h"
