@@ -5,53 +5,86 @@
 #include "Display/Font/Font.h"
 
 
-namespace Text
+struct Text
 {
     /// Устанавливает верхний регистр выводимых символов
-    void SetUpperCase(bool upper);
+    static void SetUpperCase(bool upper);
     
-    int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
+    static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
-    void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
+    static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
-    int DrawBigChar(int eX, int eY, int size, char symbol);
+    static int DrawBigChar(int eX, int eY, int size, char symbol);
 
-    void DrawBigText(int x, int y, int size, pString text, Color color = Color::NUMBER);
+    static void DrawBigText(int x, int y, int size, pString text, Color color = Color::NUMBER);
 
-    void DrawTextRelativelyRight(int xRight, int y, pString text, Color color = Color::NUMBER);
+    static void DrawTextRelativelyRight(int xRight, int y, pString text, Color color = Color::NUMBER);
     
-    void Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
+    static void Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
-    void Draw10SymbolsInRect(int x, int y, char eChar);
+    static void Draw10SymbolsInRect(int x, int y, char eChar);
 
     /***************** Вывод форматированного текста ***********************/
     /// Пишет строку в позиции x, y
-    int DrawFormatText(int x, int y, pString text, ...);
+    static int DrawFormatText(int x, int y, pString text, ...);
 
     /*************** Вывод текста в области экрана **************************/
 
-    void DrawTextInColumn(int x, int y, int width, pString text);
+    static void DrawTextInColumn(int x, int y, int width, pString text);
     /// Возвращает нижнюю координату прямоугольника
-    int DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText);
+    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText);
     /// Пишет текст с переносами
-    int DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
+    static int DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
 
-    int DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif,
+    static int DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif,
                                                        const Color = Color::NUMBER);
 
-    int DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...);
+    static int DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...);
     /// Выводит форматированный текст в столбик шириной width. При этом слов, заключённое в двойные кавычки, выводится цветом color
-    int DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...);
+    static int DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...);
 
-    int DrawStringInCenterRect(int x, int y, int width, int height, pString text, Color color = Color::NUMBER);
+    static int DrawStringInCenterRect(int x, int y, int width, int height, pString text, Color color = Color::NUMBER);
 
-    int DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...);
+    static int DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...);
     /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
-    void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
+    static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
                                                     Color colorBackground);
-    int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
+    static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
     /// Если true, то все буквы выводятся в верхнем регистре
-    bool IsUpperCase();
+    static bool IsUpperCase();
 
-    int DrawText(int x, int y, pString text, Color color = Color::NUMBER);
+    static int DrawText(int x, int y, pString text, Color color = Color::NUMBER);
+
+private:
+
+    static bool ByteFontNotEmpty(int eChar, int byte);
+
+    static bool BitInFontIsExist(int eChar, int numByte, int bit);
+    /// Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
+    static bool GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height);
+
+    static char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
+
+    static bool IsLetter(char symbol);
+    /// Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
+    static int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
+
+    static uint *BreakWord(char *word);
+    /// Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
+    static char *PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
+    /// \brief Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
+    /// найденном слоге. Если слово закончилось, функция возвращает false
+    static bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
+
+    static bool IsConsonant(char symbol);
+
+    static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
+
+    static int GetLenghtSubString(pString text);
+
+    static int DrawSubString(int x, int y, pString text);
+
+    static int DrawSpaces(int x, int y, pString text, int *numSymbols);
+
+    static bool upperCase;
 };

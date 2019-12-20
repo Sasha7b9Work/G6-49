@@ -9,40 +9,7 @@
 #include <cctype>
 
 
-namespace Text
-{
-    bool ByteFontNotEmpty(int eChar, int byte);
-
-    bool BitInFontIsExist(int eChar, int numByte, int bit);
-    /// Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
-    bool GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height);
-
-    char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
-
-    bool IsLetter(char symbol);
-    /// Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
-    int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
-
-    uint *BreakWord(char *word);
-    /// Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-    char *PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
-    /// \brief Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
-    /// найденном слоге. Если слово закончилось, функция возвращает false
-    bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
-
-    bool IsConsonant(char symbol);
-
-    bool CompareArrays(const bool *array1, const bool *array2, int numElems);
-
-    int GetLenghtSubString(pString text);
-
-    int DrawSubString(int x, int y, pString text);
-
-    int DrawSpaces(int x, int y, pString text, int *numSymbols);
-
-    bool upperCase = false;
-}
-
+bool Text::upperCase = false;
 
 
 void Text::SetUpperCase(bool upper)
