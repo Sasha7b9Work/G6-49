@@ -43,7 +43,6 @@ void Menu::DrawPagesUGO(int x)
     static const int delta = 12;
 
     int numSubPages = CURRENT_PAGE->NumSubPages();
-    int numPage = CURRENT_PAGE->CurrentSubPage();
 
     if (RegIsControlSubPages() && numSubPages > 1)
     {
@@ -51,6 +50,8 @@ void Menu::DrawPagesUGO(int x)
         {
             Painter::DrawRectangle(x + 5 + i * delta, 5, delta, 9, Color::GRAY_25);
         }
+
+        int numPage = CURRENT_PAGE->CurrentSubPage();
 
         Painter::FillRegion(x + 5 + numPage * delta, 5, delta, 9, Color::FILL);
 

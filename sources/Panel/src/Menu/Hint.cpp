@@ -141,7 +141,8 @@ int Hint::DrawDetailedHint(const Choice *choice, int x0, int y0, int width, int 
 
     if(calculate)
     {
-        colorWhite = colorGreen = Color::BACK;
+        colorWhite = Color::BACK;
+        colorGreen = Color::BACK;
     }
 
     Painter::SetColor(colorWhite);

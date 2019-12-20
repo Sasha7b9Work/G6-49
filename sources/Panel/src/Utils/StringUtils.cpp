@@ -631,11 +631,12 @@ char *SU::GetWord(char *string, int n, char *out, int size)
 
 int SU::NumDigitsInNumber(int value)
 {
-    value = Abs(value);
+    value = Abs(value) / 10;
     int num = 1;
-    while ((value /= 10) > 0)
+    while (value > 0)
     {
         num++;
+        value /= 10;
     }
     return num;
 }
