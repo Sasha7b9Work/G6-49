@@ -7,7 +7,7 @@
 #include "HandlersDevice.h"
 #include "InterfaceDevice.h"
 #include "FDrive/FDriveDevice.h"
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"

@@ -2,7 +2,7 @@
 #ifndef WIN32
 #include "AD5697.h"
 #include "FPGA.h"
-#include "GeneratorDevice.h"
+#include "Generator_d.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "FreqMeter/FreqMeter.h"

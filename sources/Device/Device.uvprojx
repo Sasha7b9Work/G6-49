@@ -1337,14 +1337,14 @@
               <FilePath>.\src\Generator\FPGA.h</FilePath>
             </File>
             <File>
-              <FileName>GeneratorDevice.h</FileName>
+              <FileName>Generator_d.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Generator\GeneratorDevice.h</FilePath>
+              <FilePath>.\src\Generator\Generator_d.h</FilePath>
             </File>
             <File>
-              <FileName>GeneratorDevice.cpp</FileName>
+              <FileName>Generator_d.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Generator\GeneratorDevice.cpp</FilePath>
+              <FilePath>.\src\Generator\Generator_d.cpp</FilePath>
             </File>
             <File>
               <FileName>GeneratroSettings.h</FileName>

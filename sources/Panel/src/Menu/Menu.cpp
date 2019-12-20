@@ -2,7 +2,7 @@
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
 #include "Display/InputWindow.h"
-#include "Generator/GeneratorPanel.h"
+#include "Generator/Generator_p.h"
 #include "Generator/Signals.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Keyboard.h"

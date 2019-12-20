@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "log.h"
 #include "FDrive/FDriveDevice.h"
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "Generator/AD5697.h"
 #include "Interface/InterfaceDevice.h"
 #include "Hardware/CPU.h"

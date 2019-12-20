@@ -3,7 +3,7 @@
 #include "defines.h"
 #include "log.h"
 #include "FDriveDevice.h"
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "usbh_diskio.h"
 #endif
 

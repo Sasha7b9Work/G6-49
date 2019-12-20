@@ -12,7 +12,7 @@
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
 
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "Generator/GeneratroSettings.h"
 
 #include "Hardware/Timer.h"

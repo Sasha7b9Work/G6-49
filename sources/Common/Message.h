@@ -1,9 +1,9 @@
 #pragma once
 #include "Command.h"
 #ifdef PANEL
-#include "Generator/GeneratorPanel.h"
+#include "Generator/Generator_p.h"
 #else
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #endif
 
 

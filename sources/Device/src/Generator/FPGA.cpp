@@ -8,7 +8,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Modules/EEPROM.h"
 #include "Utils/Math.h"
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "Settings/CalibrationSettings.h"
 #include <stdio.h>
 #include <cstdlib>

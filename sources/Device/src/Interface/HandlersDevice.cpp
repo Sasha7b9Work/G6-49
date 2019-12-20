@@ -8,7 +8,7 @@
 #include "HandlersDevice.h"
 #include "FDrive/FDriveDevice.h"
 #include "FreqMeter/FreqMeter.h"
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "InterfaceDevice.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"

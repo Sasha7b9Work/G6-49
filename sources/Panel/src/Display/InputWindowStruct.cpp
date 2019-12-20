@@ -2,7 +2,7 @@
 #include "Generator/Signals.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Generator/GeneratorPanel.h"
+#include "Generator/Generator_p.h"
 #include "Menu/Menu.h"
 #include "Utils/IntValue.h"
 #include "Utils/Math.h"

@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "GeneratorPanel.h"
+#include "Generator_p.h"
 #include "Log.h"
 #include "Message.h"
 #include "Menu/MenuItems.h"

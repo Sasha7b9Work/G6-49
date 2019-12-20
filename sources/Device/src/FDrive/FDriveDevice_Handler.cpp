@@ -6,7 +6,7 @@
 #include "libs/FatFS/FatFS.h"
 #include "FDrive/FDriveDevice.h"
 #include "Generator/FPGA.h"
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
 #include "Utils/String.h"

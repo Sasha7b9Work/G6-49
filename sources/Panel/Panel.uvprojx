@@ -1872,6 +1872,26 @@
           <GroupName>Generator</GroupName>
           <Files>
             <File>
+              <FileName>Generator_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Generator_p.h</FilePath>
+            </File>
+            <File>
+              <FileName>Generator_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Generator_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Signals.h</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Signals.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Wave.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Wave.cpp</FilePath>
@@ -1880,26 +1900,6 @@
               <FileName>WaveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\WaveGraphics.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Signals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Signals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Signals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Signals.h</FilePath>
-            </File>
-            <File>
-              <FileName>GeneratorPanel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\GeneratorPanel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GeneratorPanel.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\GeneratorPanel.h</FilePath>
             </File>
           </Files>
         </Group>

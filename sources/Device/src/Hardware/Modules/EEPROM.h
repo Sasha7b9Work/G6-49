@@ -1,6 +1,6 @@
 #pragma once
 #include "Settings/CalibrationSettings.h"
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 
 
 

@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "FrequencyMeter/FrequencyMeter.h"
-#include "Generator/GeneratorPanel.h"
+#include "Generator/Generator_p.h"
 #include "Generator/Signals.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Settings/CalibrationSettings.h"

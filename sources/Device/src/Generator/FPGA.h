@@ -1,5 +1,5 @@
 #pragma once
-#include "Generator/GeneratorDevice.h"
+#include "Generator/Generator_d.h"
 #include "Command.h"
 #include "GeneratorSettingsTypes.h"
 

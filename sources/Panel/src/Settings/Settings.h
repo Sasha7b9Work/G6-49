@@ -3,7 +3,7 @@
 #include "SettingsTypes.h"
 #include "Menu/MenuItems.h"
 #include "FrequencyMeter/FrequencyMeter.h"
-#include "Generator/GeneratorPanel.h"
+#include "Generator/Generator_p.h"
 
 
 #ifdef WIN32
