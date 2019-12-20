@@ -234,30 +234,6 @@ void Timer::StartMultiMeasurement()
 }
 
 
-void Timer::StartLogging()
-{
-    timeStartLogging = TIME_TICKS;
-    timePrevPoint = timeStartLogging;
-}
-
-
-uint Timer::LogPointUS(char *)
-{
-    uint interval = TIME_TICKS - timePrevPoint;
-    timePrevPoint = TIME_TICKS;
-    //LOG_WRITE("%s %.2f us", name, interval / 120.0);
-    return interval;
-}
-
-
-uint Timer::LogPointMS(char *)
-{
-    uint interval = TIME_MS - timePrevPoint;
-    timePrevPoint = TIME_MS;
-    //LOG_WRITE("%s %.2f ms", name, interval / 120e3);
-    return interval;
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif
