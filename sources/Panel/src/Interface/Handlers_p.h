@@ -1,7 +1,14 @@
 #pragma once
 
 
-namespace PHandlers
+struct PHandlers
 {
-    bool Processing(SimpleMessage *message);
+    static bool Processing(SimpleMessage *message);
+
+private:
+
+    static bool E(SimpleMessage *);
+    static bool Request(SimpleMessage *);
+    static bool FreqMeasure(SimpleMessage *);
+    static bool Log(SimpleMessage *);
 };

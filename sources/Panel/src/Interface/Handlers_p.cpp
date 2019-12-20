@@ -9,16 +9,6 @@
 #include "SCPI/SCPI.h"
 
 
-namespace PHandlers
-{
-    bool E(SimpleMessage *);
-    bool Request(SimpleMessage *);
-    bool FreqMeasure(SimpleMessage *);
-    bool Log(SimpleMessage *);
-}
-
-
-
 bool PHandlers::Processing(SimpleMessage *msg)
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
