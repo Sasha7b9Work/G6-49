@@ -90,7 +90,7 @@ float Choice::Step()
             {
                 return delta;
             }
-            CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
+            Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
         else if (tsChoice.dir == DECREASE)
         {
@@ -100,7 +100,7 @@ float Choice::Step()
             {
                 return delta;
             }
-            CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
+            Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
         else
         {
@@ -335,7 +335,7 @@ float Governor::Step()
 void Governor::ChangeValue(int delta)
 {
     int16 oldValue = *cell;
-    *cell += static_cast<int16>(Sign(delta) * Pow10(gCurDigit));
+    *cell += static_cast<int16>(Math::Sign(delta) * Math::Pow10(gCurDigit));
     LIMITATION(*cell, minValue, maxValue);
     if (*cell != oldValue)
     {
@@ -351,15 +351,15 @@ void Governor::NextPosition()
 {
     if (Menu::GetOpenedItem() == this)
     {
-        CircleIncrease<int8>(&gCurDigit, 0, static_cast<int8>(NumDigits() - 1));
+        Math::CircleIncrease<int8>(&gCurDigit, 0, static_cast<int8>(NumDigits() - 1));
     }
 }
 
 
 int Governor::NumDigits() const
 {
-    int min = SU::NumDigitsInNumber(Abs(minValue));
-    int max = SU::NumDigitsInNumber(Abs(maxValue));
+    int min = SU::NumDigitsInNumber(Math::Abs(minValue));
+    int max = SU::NumDigitsInNumber(Math::Abs(maxValue));
     if (min > max)
     {
         max = min;

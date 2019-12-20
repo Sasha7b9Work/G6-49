@@ -619,7 +619,7 @@ char *SU::GetWord(char *string, int n, char *out, int size)
 
 int SU::NumDigitsInNumber(int value)
 {
-    value = Abs(value) / 10;
+    value = Math::Abs(value) / 10;
     int num = 1;
     while (value > 0)
     {

@@ -606,7 +606,7 @@ void Form::ChangeParameter()
 
 void ParameterChoice::NextChoice()
 {
-    CircleIncrease(&choice, 0, num - 1);
+    Math::CircleIncrease(&choice, 0, num - 1);
 
     Chan::E ch = form->GetWave()->GetChannel();
 

@@ -458,7 +458,7 @@ DEF_CHOICE_2( cShowSends,                                                       
 
 static void OnPress_Prev()
 {
-    CircleDecrease<uint8>(reinterpret_cast<uint8 *>(&currentRegister), 0, Register::Count - 1);
+    Math::CircleDecrease<uint8>(reinterpret_cast<uint8 *>(&currentRegister), 0, Register::Count - 1);
 }
 
 DEF_BUTTON( bPrev,                                                                                                                                            //--- РЕГИСТРЫ - Предыдущий ---
@@ -470,7 +470,7 @@ DEF_BUTTON( bPrev,                                                              
 
 static void OnPress_Next()
 {
-    CircleIncrease<uint8>(reinterpret_cast<uint8 *>(&currentRegister), 0, Register::Count - 1);
+    Math::CircleIncrease<uint8>(reinterpret_cast<uint8 *>(&currentRegister), 0, Register::Count - 1);
 }
 
 DEF_BUTTON( bNext,                                                                                                                                             //--- РЕГИСТРЫ - Следующий ---

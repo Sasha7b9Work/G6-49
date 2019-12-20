@@ -142,7 +142,7 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
     {
         uint16 c = static_cast<uint16>(std::fabs(d[i]) * max);
 
-        if (Sign(d[i]) == -1)
+        if (Math::Sign(d[i]) == -1)
         {
             SetBit(c, 13);
         }

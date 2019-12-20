@@ -92,7 +92,7 @@ void BigNumber::ChangeIntegerPositive(int position, Step step)
 
 void BigNumber::ChangeIntegerPositivePlus(int position)
 {
-    integer.value += Pow10(position);                       // ѕросто прибавл€ем одно значение, соответствующее данному разр€ду
+    integer.value += Math::Pow10(position);                       // ѕросто прибавл€ем одно значение, соответствующее данному разр€ду
 }
 
 
@@ -111,7 +111,7 @@ void BigNumber::ChangeIntegerNegative(int position, Step step)
 
 void BigNumber::ChangeIntegerNegativeMinus(int position) //-V524
 {
-    integer.value += Pow10(position);
+    integer.value += Math::Pow10(position);
 }
 
 
@@ -132,12 +132,12 @@ void BigNumber::ChangeIntegerNegativePlus(int position)
 {
     if (integer.value == 0 && fract.value == 0)
     {
-        integer.value = Pow10(position);
+        integer.value = Math::Pow10(position);
         sign = '+';
     }
-    else if (integer.value >= Pow10(position))
+    else if (integer.value >= Math::Pow10(position))
     {
-        integer.value -= Pow10(position);
+        integer.value -= Math::Pow10(position);
     }
     else
     {
@@ -151,12 +151,12 @@ void BigNumber::ChangeIntegerPositiveMinus(int position)
 {
     if (integer.value == 0 && fract.value == 0)             // ≈сли нулевое значение, то прибавл€ем значение, соответствующее данному разр€ду.
     {                                                       // » мен€ем знак на минус. Ёто будет означать уменьшение
-        integer.value = Pow10(position);
+        integer.value = Math::Pow10(position);
         sign = '-';
     }
-    else if (integer.value >= Pow10(position))          // ≈сли можем спокойно отн€ть
+    else if (integer.value >= Math::Pow10(position))          // ≈сли можем спокойно отн€ть
     {
-        integer.value -= Pow10(position);               // —покойно отнимаем
+        integer.value -= Math::Pow10(position);               // —покойно отнимаем
     }
     else                                                    // Ёто выбираетс€, когда должны перескочить в другой знак
     {
@@ -180,7 +180,7 @@ void BigNumber::ChangeFractNegative(int position, Step step)
 
 void BigNumber::ChangeFractPositivePlus(int position)
 {
-    fract.value += Pow10(position);
+    fract.value += Math::Pow10(position);
     if (fract.value > fract.Max())
     {
         ChangeInteger(0, Step::Plus);
@@ -191,7 +191,7 @@ void BigNumber::ChangeFractPositivePlus(int position)
 
 void BigNumber::ChangeFractNegativeMinus(int position)
 {
-    fract.value += Pow10(position);
+    fract.value += Math::Pow10(position);
     if(fract.value > fract.Max())
     {
         ChangeInteger(0, Step::Minus);
@@ -204,12 +204,12 @@ void BigNumber::ChangeFractPositiveMinus(int position)
 {
     if (integer.value == 0 && fract.value == 0)
     {
-        fract.value += Pow10(position);
+        fract.value += Math::Pow10(position);
         sign = '-';
     }
-    else if (fract.value >= Pow10(position))
+    else if (fract.value >= Math::Pow10(position))
     {
-        fract.value -= Pow10(position);
+        fract.value -= Math::Pow10(position);
     }
     else
     {
@@ -220,7 +220,7 @@ void BigNumber::ChangeFractPositiveMinus(int position)
         else
         {
             ChangeInteger(0, Step::Minus);
-            fract.value = fract.Max() + 1 - Pow10(position);
+            fract.value = fract.Max() + 1 - Math::Pow10(position);
         }
     }
 }
@@ -230,12 +230,12 @@ void BigNumber::ChangeFractNegativePlus(int position)
 {
     if(integer.value == 0 && fract.value == 0)
     {
-        fract.value += Pow10(position);
+        fract.value += Math::Pow10(position);
         sign = '+';
     }
-    else if(fract.value >= Pow10(position))
+    else if(fract.value >= Math::Pow10(position))
     {
-        fract.value -= Pow10(position);
+        fract.value -= Math::Pow10(position);
     }
     else
     {
@@ -246,7 +246,7 @@ void BigNumber::ChangeFractNegativePlus(int position)
         else
         {
             ChangeInteger(0, Step::Plus);
-            fract.value = fract.Max() + 1 - Pow10(position);
+            fract.value = fract.Max() + 1 - Math::Pow10(position);
         }
     }
 }
@@ -254,7 +254,7 @@ void BigNumber::ChangeFractNegativePlus(int position)
 
 float BigNumber::GetValue()
 {
-    float result = static_cast<float>(integer.value) + static_cast<float>(fract.value) / Pow10(fract.numSymbols);
+    float result = static_cast<float>(integer.value) + static_cast<float>(fract.value) / Math::Pow10(fract.numSymbols);
 
     float mul = (sign == '-') ? -1.0F : 1.0F;
 

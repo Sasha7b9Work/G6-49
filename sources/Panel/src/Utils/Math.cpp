@@ -12,30 +12,6 @@
 #include <limits>
 
 
-int LowSignedBit(uint value)
-{
-    int verValue = 1;
-
-    for (int i = 0; i < 32; i++)
-    {
-        if (verValue & static_cast<int>(value))
-        {
-            return i;
-        }
-
-        verValue <<= 1;
-    }
-
-    return -1;
-}
-
-
-bool IntInRange(int value, int min, int max)
-{
-    return (value >= min) && (value <= max);
-}
-
-
 float Math::MaxFloat(float val1, float val2, float val3)
 {
     float retValue = val1;
@@ -51,7 +27,7 @@ float Math::MaxFloat(float val1, float val2, float val3)
 }
 
 
-uint Pow10(int pow)
+uint Math::Pow10(int pow)
 {
     uint result = 1;
 
@@ -61,13 +37,6 @@ uint Pow10(int pow)
     }
 
     return result;
-}
-
-
-float RandFloat(float min, float max)
-{
-    float delta = max - min;
-    return min + ((std::rand() / (float)RAND_MAX) * delta);
 }
 
 
@@ -95,7 +64,7 @@ float Math::RoundFloat(float value, int numDigits)
 
     if (digsInInt < numDigits)  // Подстрахуемся
     {
-        uint pow = Pow10(numDigits - digsInInt);
+        uint pow = Math::Pow10(numDigits - digsInInt);
         absValue = static_cast<int>(absValue * pow + 0.5F) / static_cast<float>(pow);
     }
 
@@ -106,14 +75,4 @@ float Math::RoundFloat(float value, int numDigits)
 bool Math::IsEquals(float x, float y)
 {
     return std::fabsf(x - y) < std::numeric_limits<float>::epsilon();
-}
-
-
-bool FloatsIsEquals(float value0, float value1, float epsilonPart)
-{
-    float max = std::fabsf(value0) > std::fabsf(value1) ? std::fabsf(value0) : std::fabsf(value1);
-
-    float epsilonAbs = max * epsilonPart;
-
-    return std::fabsf(value0 - value1) < epsilonAbs;
 }

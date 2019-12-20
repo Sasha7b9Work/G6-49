@@ -82,7 +82,7 @@ void PFreqMeter::LoadLevel()
 
     int value = (int)(max / 2 + FREQ_LEVEL * step);
 
-    Limitation(&value, 0, max - 1);
+    Math::Limitation(&value, 0, max - 1);
 
     PGenerator::LoadRegister(Register::FreqMeterLevel, static_cast<uint64>(value));
 }
@@ -96,7 +96,7 @@ void PFreqMeter::LoadHysteresis()
 
     int value = (int)(step * FREQ_HYSTERESIS);
 
-    Limitation(&value, 0, max - 1);
+    Math::Limitation(&value, 0, max - 1);
 
     PGenerator::LoadRegister(Register::FreqMeterHYS, static_cast<uint64>(value));
 }

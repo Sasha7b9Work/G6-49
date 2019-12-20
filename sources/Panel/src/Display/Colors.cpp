@@ -192,7 +192,7 @@ void ColorType::BrightnessChange(int delta)
         return;
     }
 
-    int sign = Sign(delta);
+    int sign = Math::Sign(delta);
 
     brightness += sign * 0.01F;
     LIMITATION(brightness, 0.0F, 1.0F); // -V2516
@@ -234,8 +234,8 @@ void ColorType::ComponentChange(int delta)
 
     if (index >= 1 && index <= 3)
     {
-        *(pointers[index]) += static_cast<float>(Sign(delta));
-        Limitation<float>(pointers[index], 0.0F, maxs[index]);
+        *(pointers[index]) += static_cast<float>(Math::Sign(delta));
+        Math::Limitation<float>(pointers[index], 0.0F, maxs[index]);
     }
 
     SetColor();

@@ -43,7 +43,7 @@ private:
 
         void AddValue(char digit, int pow) { value += (digit - 0x30) * pow; numSymbols++; };
         /// ¬озвращает максимально возможное число, которое можно хранить
-        uint Max() { return Pow10(numSymbols) - 1; };
+        uint Max() { return Math::Pow10(numSymbols) - 1; };
     };
 
     /// «десь число из строки целого

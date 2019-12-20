@@ -68,7 +68,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
 {
     if(y1 < y0)
     {
-        Swap(&y0, &y1);
+        Math::Swap(&y0, &y1);
     }
 
     SetColor(col);
@@ -101,8 +101,8 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
     int y = y1;
     int dx = static_cast<int>(std::fabsf(static_cast<float>(x2 - x1)));
     int dy = static_cast<int>(std::fabsf(static_cast<float>(y2 - y1)));
-    int s1 = Sign(x2 - x1);
-    int s2 = Sign(y2 - y1);
+    int s1 = Math::Sign(x2 - x1);
+    int s2 = Math::Sign(y2 - y1);
     int temp;
     int exchange = 0;
     if (dy > dx)
