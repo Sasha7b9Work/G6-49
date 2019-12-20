@@ -1424,27 +1424,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Hardware/Modules</GroupName>
+          <GroupName>Hardware/HAL</GroupName>
           <Files>
-            <File>
-              <FileName>EEPROM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Modules\EEPROM.cpp</FilePath>
-            </File>
             <File>
               <FileName>EEPROM.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Modules\EEPROM.h</FilePath>
+              <FilePath>.\src\Hardware\HAL\EEPROM.h</FilePath>
             </File>
             <File>
-              <FileName>SPI.cpp</FileName>
+              <FileName>EEPROM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Modules\SPI.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\EEPROM.cpp</FilePath>
             </File>
             <File>
-              <FileName>SPI.h</FileName>
+              <FileName>HAL.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Modules\SPI.h</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
             </File>
           </Files>
         </Group>

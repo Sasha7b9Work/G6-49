@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "SPI.h"
+#include "Hardware/HAL/HAL.h"
 
 
 static SPI_HandleTypeDef handle =                                   // Для связи с панелью

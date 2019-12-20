@@ -48,7 +48,7 @@ source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
 source_group(FreqMeter          REGULAR_EXPRESSION src/FreqMeter/*)
 source_group(Generator          REGULAR_EXPRESSION src/Generator/*)
 source_group(Hardware           REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\Modules  REGULAR_EXPRESSION src/Hardware/Modules/*)
+source_group(Hardware\\HAL      REGULAR_EXPRESSION src/Hardware/HAL/*)
 source_group(Interface          REGULAR_EXPRESSION src/Interface/*)
 source_group(libs               REGULAR_EXPRESSION src/libs/*)
 source_group(libs\\CMSIS        REGULAR_EXPRESSION src/libs/CMSIS/*)
@@ -73,7 +73,7 @@ file(GLOB SOURCES   ../common/Command.h
                     src/FreqMeter/*
                     src/Generator/*
                     src/Hardware/*
-                    src/Hardware/Modules/*
+                    src/Hardware/HAL/*
                     src/Interface/*
                     src/libs/*
                     src/libs/CMSIS/startup_stm32f407xx.s

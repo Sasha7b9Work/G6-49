@@ -2,7 +2,7 @@
 #include "Command.h"
 #include "log.h"    
 #include "Transceiver.h"
-#include "Hardware/Modules/SPI.h"
+#include "Hardware/HAL/HAL.h"
 
 
 void Transceiver::Transmit(SimpleMessage *message)

@@ -11,7 +11,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-#include "Hardware/Modules/SPI.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
 
 

@@ -2,7 +2,7 @@
 #include <stm32f4xx.h>
 #include "CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Modules/SPI.h"
+#include "Hardware/HAL/HAL.h"
 #include <cstdlib>
 #include <cstring>
 

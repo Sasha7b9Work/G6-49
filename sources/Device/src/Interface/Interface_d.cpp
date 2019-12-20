@@ -9,7 +9,7 @@
 #include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Modules/SPI.h"
+#include "Hardware/HAL/HAL.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Debug.h"

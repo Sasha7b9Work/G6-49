@@ -1829,7 +1829,7 @@
   </Group>
 
   <Group>
-    <GroupName>Hardware/Modules</GroupName>
+    <GroupName>Hardware/HAL</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -1837,48 +1837,48 @@
     <File>
       <GroupNumber>12</GroupNumber>
       <FileNumber>119</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Modules\EEPROM.cpp</PathWithFileName>
-      <FilenameWithoutPath>EEPROM.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>120</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Modules\EEPROM.h</PathWithFileName>
+      <PathWithFileName>.\src\Hardware\HAL\EEPROM.h</PathWithFileName>
       <FilenameWithoutPath>EEPROM.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
-      <FileNumber>121</FileNumber>
+      <FileNumber>120</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Modules\SPI.cpp</PathWithFileName>
-      <FilenameWithoutPath>SPI.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\HAL\EEPROM.cpp</PathWithFileName>
+      <FilenameWithoutPath>EEPROM.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>12</GroupNumber>
+      <FileNumber>121</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Hardware\HAL\HAL.h</PathWithFileName>
+      <FilenameWithoutPath>HAL.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
       <FileNumber>122</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Modules\SPI.h</PathWithFileName>
-      <FilenameWithoutPath>SPI.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\HAL\HAL.cpp</PathWithFileName>
+      <FilenameWithoutPath>HAL.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
