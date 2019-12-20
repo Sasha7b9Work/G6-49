@@ -1,35 +1,10 @@
-#include "defines.h"
-#include "log.h"
-#include "Interface/Interface_p.h"
+#include "Display/Display.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Interface/Interface_p.h"
 #include "Menu/Menu.h"
-#include "Settings/Settings.h"
 #include "Settings/CalibrationSettings.h"
-#include "SCPI/SCPI.h"
-#include <cstdlib>
-#include <cstdio>
-
-
-//namespace std
-//{
-//    struct __FILE
-//    {
-//        int handle;
-//    };
-//    
-//    //FILE  __stdout;
-//}
-//
-//int fputs(int ch, FILE *f)
-//{
-//    LOG_WRITE("%c", ch);
-//    return (ch);
-//}
-
-/** @defgroup Panel
- *  @{
- */
+#include "Settings/Settings.h"
 
 
 int main()
@@ -56,6 +31,3 @@ int main()
         PInterface::Update();
     }
 }
-
-
-/** @} */
