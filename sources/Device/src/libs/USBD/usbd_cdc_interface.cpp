@@ -43,7 +43,6 @@ static void SetAttributeConnected()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Init()
 {
     USBD_CDC_SetRxBuffer(&VCP::handleUSBD, UserRxBuffer);
@@ -53,7 +52,6 @@ static int8_t CDC_Itf_Init()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_DeInit()
 {
     VCP::cableUSBisConnected = false;
@@ -63,7 +61,6 @@ static int8_t CDC_Itf_DeInit()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 { 
     switch (cmd)
@@ -124,7 +121,6 @@ static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length) //-V2009 //-V2558
 {
     Message::SCPI::Data(buffer, *length).Transmit();
