@@ -101,7 +101,7 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
 
 void AD5697::SetFreqHysteresys(float hyst)
 {
-    Limitation(&hyst, 0.0F, 4095.0F);
+    Math::Limitation(&hyst, 0.0F, 4095.0F);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(hyst) << 4);
 
@@ -120,7 +120,7 @@ void AD5697::SetFreqLevel(float level)
 {
     level += (float)CAL_FREQ_LEVEL_TRIG;
 
-    Limitation(&level, 0.0F, 4095.0F);
+    Math::Limitation(&level, 0.0F, 4095.0F);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(level) << 4);
 

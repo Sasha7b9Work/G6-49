@@ -24,21 +24,24 @@ struct Bit
 };
 
 
-template<class T> int Sign(T x) { if (x > (T)(0)) { return 1; } if (x < (T)(0)) { return -1; } return 0; }
-
-
-template<class T> static void Limitation(T *value, T min, T max)
+struct Math
 {
-    if (*value < min)
+    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; }
+
+
+    template<class T> static void Limitation(T *value, T min, T max)
     {
-        *value = min;
+        if(*value < min)
+        {
+            *value = min;
+        }
+        else if(*value > max)
+        {
+            *value = max;
+        }
+        else
+        {
+            // здесь ничего
+        }
     }
-    else if (*value > max)
-    {
-        *value = max;
-    }
-    else
-    {
-        // здесь ничего
-    }
-}
+};

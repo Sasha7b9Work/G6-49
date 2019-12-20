@@ -356,7 +356,7 @@ void DDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]
     {
         uint16 c = static_cast<uint16>(std::fabsf(d[i]) * max);
 
-        if (Sign(d[i]) == -1)
+        if (Math::Sign(d[i]) == -1)
         {
             SetBit(c, 13);
         }

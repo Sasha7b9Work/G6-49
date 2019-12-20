@@ -2077,18 +2077,6 @@
     <File>
       <GroupNumber>15</GroupNumber>
       <FileNumber>137</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Utils\Math.cpp</PathWithFileName>
-      <FilenameWithoutPath>Math.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>15</GroupNumber>
-      <FileNumber>138</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2100,7 +2088,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>139</FileNumber>
+      <FileNumber>138</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2112,7 +2100,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>140</FileNumber>
+      <FileNumber>139</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2124,7 +2112,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>141</FileNumber>
+      <FileNumber>140</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2136,7 +2124,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>142</FileNumber>
+      <FileNumber>141</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2148,7 +2136,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>143</FileNumber>
+      <FileNumber>142</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2160,7 +2148,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>144</FileNumber>
+      <FileNumber>143</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2172,7 +2160,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>145</FileNumber>
+      <FileNumber>144</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2184,7 +2172,7 @@
     </File>
     <File>
       <GroupNumber>15</GroupNumber>
-      <FileNumber>146</FileNumber>
+      <FileNumber>145</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
