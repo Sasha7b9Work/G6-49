@@ -42,36 +42,36 @@ float RandFloat(float min, float max);
 
 
 
-namespace Math
+struct Math
 {
-    const float PI_F = 3.141592653589793F;
+    static const float PI_F;
 
-    void Smoothing(uint8 *data, int numPoints, int numSmooth);
+    static void Smoothing(uint8 *data, int numPoints, int numSmooth);
     
-    int MinFrom2Int(int val0, int val1);
+    static int MinFrom2Int(int val0, int val1);
 
-    uint8 MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
+    static uint8 MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
 
-    uint8 MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
+    static uint8 MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
 
-    uint8 MaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
+    static uint8 MaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
 
-    uint8 MinFromArray(const uint8 *data, int firstPoint, int lastPoint);
+    static uint8 MinFromArray(const uint8 *data, int firstPoint, int lastPoint);
 
     /// \brief Возвращает координату x пересечения линии, проходящей через (x0, y0), (x1, y1), с горизонтальной линией, проходящей через точку с 
     /// ординатой yHorLine.
-    float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
+    static float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
     
-    uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
+    static uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
 
-    void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
+    static void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
     /// Найти первый элемент массива, не соотвествующий заданному
-    int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
+    static int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
 
-    int DigitsInIntPart(float value);
+    static int DigitsInIntPart(float value);
     /// \brief Округляет число с плавающей точкой. numDigits - полное число знаков, по которым производится округление.
     /// Например, RoundFloat(12.37137, 4) округлит до 12.40)
-    float RoundFloat(float value, int numDigits);
+    static float RoundFloat(float value, int numDigits);
 };
 
 

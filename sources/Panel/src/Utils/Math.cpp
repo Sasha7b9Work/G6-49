@@ -12,6 +12,9 @@
 #include <limits>
 
 
+const float Math::PI_F = 3.141592653589793F;
+
+
 int LowSignedBit(uint value)
 {
     int verValue = 1;
