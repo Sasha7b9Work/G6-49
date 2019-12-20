@@ -15,64 +15,7 @@
 #include "Settings/CalibrationSettings.h"
 
 
-namespace DHandlers
-{
-    void E(SimpleMessage *);
-
-    void SendData(SimpleMessage *);
-
-    void EnableChannel(SimpleMessage *);
-
-    void SetFormWave(SimpleMessage *);
-
-    void SetFrequency(SimpleMessage *);
-
-    void SetAmplitude(SimpleMessage *);
-
-    void SetOffset(SimpleMessage *);
-
-    void SetDuration(SimpleMessage *);
-
-    void SetDutyRatio(SimpleMessage *);
-
-    void SetPhase(SimpleMessage *);
-
-    void RunReset(SimpleMessage *);
-
-    void ModeDebug(SimpleMessage *);
-
-    void SetDelay(SimpleMessage *);
-
-    void WriteRegister(SimpleMessage *);
-
-    void SetManipulation(SimpleMessage *);
-
-    void SetManipulationDuration(SimpleMessage *);
-
-    void SetManipulationPeriod(SimpleMessage *);
-
-    void SetPacketPeriod(SimpleMessage *);
-
-    void SetPacketNumber(SimpleMessage *);
-
-    void SetStartMode(SimpleMessage *);
-
-    void SetPeriod(SimpleMessage *);
-
-    void SetPolarity(SimpleMessage *);
-
-    void LoadFormDDS(SimpleMessage *);
-
-    void Test(SimpleMessage *);
-
-    void SetKoeffCalibration(SimpleMessage *);
-
-    void GetKoeffCalibration(SimpleMessage *);
-}
-
-
-
-void Handlers::Processing(SimpleMessage *msg)
+void DHandlers::Processing(SimpleMessage *msg)
 {
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 

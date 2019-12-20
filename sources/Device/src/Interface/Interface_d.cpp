@@ -71,7 +71,7 @@ void DInterface::Update()
                                         {
                                             if (second.IsEquals(&first))                        // ѕровер€ем, совпали ли оба прин€тых сообщени€
                                             {
-                                                Handlers::Processing(&first);
+                                                DHandlers::Processing(&first);
                                             }
                                         }
                                     }
