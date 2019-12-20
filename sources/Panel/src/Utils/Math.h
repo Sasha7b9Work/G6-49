@@ -13,29 +13,6 @@ bool IsEquals(float x, float y);
 
 struct Math
 {
-    static const float PI_F;
-
-    static void Smoothing(uint8 *data, int numPoints, int numSmooth);
-    
-    static int MinFrom2Int(int val0, int val1);
-
-    static uint8 MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
-
-    static uint8 MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
-
-    static uint8 MaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
-
-    static uint8 MinFromArray(const uint8 *data, int firstPoint, int lastPoint);
-
-    /// \brief Возвращает координату x пересечения линии, проходящей через (x0, y0), (x1, y1), с горизонтальной линией, проходящей через точку с 
-    /// ординатой yHorLine.
-    static float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
-    
-    static uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
-
-    static void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
-    /// Найти первый элемент массива, не соотвествующий заданному
-    static int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
 
     static int DigitsInIntPart(float value);
     /// \brief Округляет число с плавающей точкой. numDigits - полное число знаков, по которым производится округление.
