@@ -18,18 +18,6 @@
 #endif
 
 
-
-namespace SU
-{
-    /// Возвращает false, если выбор невозможен - строка кончилась.
-    bool ChooseSymbols(const char **string);
-    /// Возвращает false, если выбор невозможен - строка кончилась.
-    bool ChooseSpaces(const char **string);
-
-}
-
-
-
 char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 {
     if (IsEquals(voltage, ERROR_VALUE_FLOAT))
