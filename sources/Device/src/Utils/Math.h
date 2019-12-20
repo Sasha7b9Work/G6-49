@@ -2,45 +2,6 @@
 #include "defines.h"
 
 
-
-#define PI 3.141592653589793f
-
-#define LIMIT_BELOW(x, min)                 if((x) < (min)) { x = (min); }
-
-#define LIMIT_ABOVE(x, max)                 if((x) > (max)) { x = (max); }
-
-#define SET_MIN_IF_LESS(x, min)             if((x) < (min)) { (min) = (x); }
-
-#define SET_MAX_IF_LARGER(x, max)           if((x) > (max)) { (max) = (x); }
-
-#define LIMITATION_BOUND(var, min, max)     if((var) < (min)) { (min) = (var); }; if((var) > (max)) { (max) = (var); };
-
-#define ROUND(x) ((x) += 0.5f, (x))
-
-#define SET_IF_LARGER(x, max, newValue)     if((x) > (max)) { (x) = (newValue); }
-
-#define LIMITATION_ABOVE(var, value, max)   var = (value); if((var) > (max)) { (var) = (max); }
-
-#define LIMITATION(var, min, max)           if(var < (min)) { (var) = (min); } else if(var > (max)) { var = (max); } else { var = var; };
-
-#define IN_RANGE(x, min, max)               ((x) >= (min) && (x) <= (max))
-
-
-/// ¬озвращает true, если value входит в диапазон [min; max]
-bool IntInRange(int value, int min, int max);
-/// ¬озвращает номер младшего бита, равного единице
-int LowSignedBit(uint value);
-/// ¬озвращает максимальное значение из трЄх
-float MaxFloat(float val1, float val2, float val3);
-/// \brief —равнивает два числа. ¬озвращает true, если числа отличаютс€ друг от друга не более, чем на epsilonPart. ѕри этом дл€ расчЄта epsilonPart 
-/// используетс€ большее в смысле модул€ число.
-bool FloatsIsEquals(float value0, float value1, float epsilonPart);
-
-bool IsEquals(float x, float y);
-
-float RandFloat(float min, float max);
-    
-    
 struct Bit
 {
     template<typename T>
@@ -63,39 +24,8 @@ struct Bit
 };
 
 
-
-struct Math
-{
-    static void Smoothing(uint8 *data, int numPoints, int numSmooth);
-    
-    static int MinFrom2Int(int val0, int val1);
-
-    static uint8 MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
-
-    static uint8 MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
-
-    static uint8 MaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
-
-    static uint8 MinFromArray(const uint8 *data, int firstPoint, int lastPoint);
-
-    /// \brief ¬озвращает координату x пересечени€ линии, проход€щей через (x0, y0), (x1, y1), с горизонтальной линией, проход€щей через точку с 
-    /// ординатой yHorLine.
-    static float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
-    
-    static uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
-
-    static void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
-    /// Ќайти первый элемент массива, не соотвествующий заданному
-    static int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
-
-    static int DigitsInIntPart(float value);
-    /// \brief ќкругл€ет число с плавающей точкой. numDigits - полное число знаков, по которым производитс€ округление.
-    /// Ќапример, RoundFloat(12.37137, 4) округлит до 12.40)
-    static float RoundFloat(float value, int numDigits);
-};
-
-
 template<class T> int Sign(T x) { if (x > (T)(0)) { return 1; } if (x < (T)(0)) { return -1; } return 0; }
+
 
 template<class T> static void Limitation(T *value, T min, T max)
 {
