@@ -24,16 +24,16 @@ struct StructForReadDir
 };
 
 
-namespace FileSystem
+struct FileSystem
 {
-    uint GetFileSize(const char *fullPath);
+    static uint GetFileSize(const char *fullPath);
     /// Получает количество каталогов и файлов в данной директории
-    void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
+    static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
     /// Получить имя numFile-го файла из каталога fullPath
-    bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
+    static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
     /// Читает значения отсчётов сигнала из файла name
-    bool ReadFloats(float values[4096], char *name);
-}
+    static bool ReadFloats(float values[4096], char *name);
+};
 
 
 void DDrive::Handler::Processing(SimpleMessage *message)
