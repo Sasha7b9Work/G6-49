@@ -12,7 +12,6 @@
 
 #define DEBUG
 
-#include <stm32f4xx.h>
 #include <stm32f4xx_hal.h>
 
 #ifndef __cplusplus
