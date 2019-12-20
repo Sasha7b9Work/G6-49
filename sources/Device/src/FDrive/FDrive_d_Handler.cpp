@@ -13,6 +13,9 @@
 #include <cmath>
 
 
+SimpleMessage *DDrive::Handler::msg = nullptr;
+
+
 struct StructForReadDir
 {
     char nameDir[_MAX_LFN + 1];
@@ -31,36 +34,6 @@ namespace FileSystem
     /// Читает значения отсчётов сигнала из файла name
     bool ReadFloats(float values[4096], char *name);
 }
-
-
-namespace DDrive
-{
-    namespace Handler
-    {
-        SimpleMessage *msg = nullptr;
-        void GetNumDirsAndFiles();
-        void RequestFile();
-        void RequestFileSize();
-        /// Загрузить сигнал с флешки
-        void LoadFromExtStorage();
-        void GetPictureDDS();
-        void E();
-    }
-
-    /// Трансформировать точки в пригодный для записи в ПЛИС вид
-    void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
-
-    void Normalize(float d[4096]);
-
-    void FindMinMax(const float d[4096], float *_min, float *_max);
-
-    float FindScale(float min, float max);
-
-    void ToScale(float d[4096], float scale);
-    /// Заполнить массив picture данными для отрисовки сигнала на экране
-    void FillPicture(uint8 *picture, uint size, float values[4096]);
-}
-
 
 
 void DDrive::Handler::Processing(SimpleMessage *message)
