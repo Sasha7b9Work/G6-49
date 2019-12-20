@@ -4,18 +4,18 @@
 
 
 
-namespace EEPROM
+struct EEPROM
 {
-    void Init();
+    static void Init();
 
-    void SaveSettings(CalibrationSettings *settings);
+    static void SaveSettings(CalibrationSettings *settings);
 
-    void LoadSettings(CalibrationSettings *settings);
+    static void LoadSettings(CalibrationSettings *settings);
 
-    namespace Signal
+    struct Signal
     {
-        void Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS]);
+        static void Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS]);
 
-        uint16 *Get(Chan::E ch);
-    }
+        static uint16 *Get(Chan::E ch);
+    };
 };
