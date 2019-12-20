@@ -4,7 +4,7 @@
 #include "Menu/Pages/Addition/PageLoadForm.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "Display/Painter.h"
-#include "FDrive/FDrivePanel.h"
+#include "FDrive/FDrive_p.h"
 
 
 extern const PageBase pageLoad;

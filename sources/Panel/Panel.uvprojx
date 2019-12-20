@@ -1827,14 +1827,19 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
-              <FileName>FDrivePanel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDrivePanel.cpp</FilePath>
+              <FileName>FDrive_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FDrive\FDrive_p.h</FilePath>
             </File>
             <File>
-              <FileName>FDrivePanel.h</FileName>
+              <FileName>FDrive_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\FDrive_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>File.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FDrive\FDrivePanel.h</FilePath>
+              <FilePath>.\src\FDrive\File.h</FilePath>
             </File>
             <File>
               <FileName>File.cpp</FileName>
@@ -1847,34 +1852,29 @@
               <FilePath>.\src\FDrive\File_requests.cpp</FilePath>
             </File>
             <File>
-              <FileName>File.h</FileName>
+              <FileName>Items.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FDrive\File.h</FilePath>
+              <FilePath>.\src\FDrive\Items.h</FilePath>
             </File>
             <File>
               <FileName>Items.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FDrive\Items.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Items.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FDrive\Items.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>FrequencyMeter</GroupName>
+          <GroupName>FreqMeter</GroupName>
           <Files>
             <File>
-              <FileName>FrequencyMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FrequencyMeter\FrequencyMeter.cpp</FilePath>
+              <FileName>FreqMeter_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter_p.h</FilePath>
             </File>
             <File>
-              <FileName>FrequencyMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FrequencyMeter\FrequencyMeter.h</FilePath>
+              <FileName>FreqMeter_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter_p.cpp</FilePath>
             </File>
           </Files>
         </Group>

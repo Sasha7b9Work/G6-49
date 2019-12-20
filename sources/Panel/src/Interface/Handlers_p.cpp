@@ -4,8 +4,8 @@
 #include "Message.h"
 #include "Handlers_p.h"
 #include "Display/Console.h"
-#include "FDrive/FDrivePanel.h"
-#include "FrequencyMeter/FrequencyMeter.h"
+#include "FDrive/FDrive_p.h"
+#include "FreqMeter/FreqMeter_p.h"
 #include "SCPI/SCPI.h"
 
 

@@ -88,7 +88,7 @@ source_group(Interface                FILES              ../../Panel/src/Interfa
                                                                      src/Interface/Transceiver_p_win.cpp)
 source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*)
 source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*)
-source_group(FrequencyMeter           REGULAR_EXPRESSION ../Panel/src/FrequencyMeter/*)
+source_group(FreqMeter                REGULAR_EXPRESSION ../Panel/src/FreqMeter/*)
 source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*)
 source_group(GUI                      REGULAR_EXPRESSION src/GUI/*)
 source_group(libs\\CMSIS              REGULAR_EXPRESSION ../Panel/src/libs/CMSIS/*)
@@ -161,7 +161,7 @@ file(GLOB SOURCES   ../../common/Command.h
                                 src/Hardware/Modules/EEPROM_win.cpp
                     ../../Panel/src/Display/font/*
                     ../../Panel/src/FDrive/*
-                    ../../Panel/src/FrequencyMeter/*
+                    ../../Panel/src/FreqMeter/*
                     ../../Panel/src/Generator/*
                     ../../Panel/src/libs/HAL/*
                     ../../Panel/src/Menu/*

@@ -5,7 +5,7 @@
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "FrequencyMeter/FrequencyMeter.h"
+#include "FreqMeter/FreqMeter_p.h"
 #include "Settings/Settings.h"
 #include "Display/Console.h"
 #include "Signals.h"

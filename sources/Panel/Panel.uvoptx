@@ -1335,61 +1335,37 @@
 
   <Group>
     <GroupName>FDrive</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>7</GroupNumber>
       <FileNumber>84</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\FDrivePanel.cpp</PathWithFileName>
-      <FilenameWithoutPath>FDrivePanel.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\FDrive_p.h</PathWithFileName>
+      <FilenameWithoutPath>FDrive_p.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
       <FileNumber>85</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\FDrivePanel.h</PathWithFileName>
-      <FilenameWithoutPath>FDrivePanel.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\FDrive_p.cpp</PathWithFileName>
+      <FilenameWithoutPath>FDrive_p.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
       <FileNumber>86</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\File.cpp</PathWithFileName>
-      <FilenameWithoutPath>File.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>7</GroupNumber>
-      <FileNumber>87</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\File_requests.cpp</PathWithFileName>
-      <FilenameWithoutPath>File_requests.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>7</GroupNumber>
-      <FileNumber>88</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1401,19 +1377,31 @@
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>89</FileNumber>
+      <FileNumber>87</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FDrive\Items.cpp</PathWithFileName>
-      <FilenameWithoutPath>Items.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FDrive\File.cpp</PathWithFileName>
+      <FilenameWithoutPath>File.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>7</GroupNumber>
-      <FileNumber>90</FileNumber>
+      <FileNumber>88</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\FDrive\File_requests.cpp</PathWithFileName>
+      <FilenameWithoutPath>File_requests.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>89</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1423,35 +1411,47 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>90</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\FDrive\Items.cpp</PathWithFileName>
+      <FilenameWithoutPath>Items.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
   </Group>
 
   <Group>
-    <GroupName>FrequencyMeter</GroupName>
-    <tvExp>0</tvExp>
+    <GroupName>FreqMeter</GroupName>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>91</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FrequencyMeter\FrequencyMeter.cpp</PathWithFileName>
-      <FilenameWithoutPath>FrequencyMeter.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\FreqMeter\FreqMeter_p.h</PathWithFileName>
+      <FilenameWithoutPath>FreqMeter_p.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>92</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\FrequencyMeter\FrequencyMeter.h</PathWithFileName>
-      <FilenameWithoutPath>FrequencyMeter.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\FreqMeter\FreqMeter_p.cpp</PathWithFileName>
+      <FilenameWithoutPath>FreqMeter_p.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1831,7 +1831,7 @@
 
   <Group>
     <GroupName>Interface</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

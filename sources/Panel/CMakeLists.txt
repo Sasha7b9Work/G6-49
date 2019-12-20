@@ -43,7 +43,7 @@ source_group(src                      REGULAR_EXPRESSION src/*)
 source_group(Display                  REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\font            REGULAR_EXPRESSION src/Display/font/*)
 source_group(FDrive                   REGULAR_EXPRESSION src/FDrive/*)
-source_group(FrequencyMeter           REGULAR_EXPRESSION src/FrequencyMeter/*)
+source_group(FreqMeter                REGULAR_EXPRESSION src/FreqMeter/*)
 source_group(Generator                REGULAR_EXPRESSION src/Generator/*)
 source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\HAL            REGULAR_EXPRESSION src/Hardware/HAL/*)
@@ -73,7 +73,7 @@ file(GLOB SOURCES   ../common/Command.h
                     src/Display/*
                     src/Display/font/*
                     src/FDrive/*
-                    src/FrequencyMeter/*
+                    src/FreqMeter/*
                     src/Generator/*
                     src/Hardware/*
                     src/Hardware/HAL/*

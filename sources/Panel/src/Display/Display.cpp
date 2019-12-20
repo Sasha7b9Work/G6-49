@@ -1,5 +1,5 @@
 #include "Console.h"
-#include "FrequencyMeter/FrequencyMeter.h"
+#include "FreqMeter/FreqMeter_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Hardware/CPU.h"

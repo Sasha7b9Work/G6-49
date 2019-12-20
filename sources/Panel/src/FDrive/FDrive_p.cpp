@@ -2,7 +2,7 @@
 #include "log.h"
 #include "structs.h"
 #include "Command.h"
-#include "FDrivePanel.h"
+#include "FDrive_p.h"
 #include "Items.h"
 #include "File.h"
 #include "Display/Painter.h"
