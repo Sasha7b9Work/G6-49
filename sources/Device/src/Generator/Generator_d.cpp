@@ -176,7 +176,7 @@ struct Filtr
         {
             SetType(ch, Type::Chebyshev);
         }
-        else if (form == Form::Meander)
+        else if(form == Form::Impulse || form == Form::PacketImpuls)
         {
             SetType(ch, Type::Bessel);
         }
