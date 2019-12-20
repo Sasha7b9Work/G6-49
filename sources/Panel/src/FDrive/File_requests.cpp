@@ -3,7 +3,7 @@
 #include "Message.h"
 #include "File.h"
 #include "Items.h"
-#include "Interface/InterfacePanel.h"
+#include "Interface/Interface_p.h"
 
 
 static bool EqualsRequestString(Task *task1, Task *task2)

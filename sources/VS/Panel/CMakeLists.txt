@@ -81,11 +81,11 @@ source_group(Hardware                 FILES              ../../Panel/src/Hardwar
                                                                      src/Hardware/Timer4XX_win.cpp
                                                          ../../Panel/src/Hardware/VCP.cpp
                                                          ../../Panel/src/Hardware/VCP.h)
-source_group(Interface                FILES              ../../Panel/src/Interface/HandlersPanel.cpp
-                                                         ../../Panel/src/Interface/HandlersPanel.h
-                                                         ../../Panel/src/Interface/InterfacePanel.cpp
-                                                         ../../Panel/src/Interface/InterfacePanel.h
-                                                                     src/Interface/Transceiver_429_win.cpp)
+source_group(Interface                FILES              ../../Panel/src/Interface/Handlers_p.cpp
+                                                         ../../Panel/src/Interface/Handlers_p.h
+                                                         ../../Panel/src/Interface/Interface_p.cpp
+                                                         ../../Panel/src/Interface/Interface_p.h
+                                                                     src/Interface/Transceiver_p_win.cpp)
 source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*)
 source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*)
 source_group(FrequencyMeter           REGULAR_EXPRESSION ../Panel/src/FrequencyMeter/*)
@@ -146,10 +146,11 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/Hardware/Timer4XX.h
                     ../../Panel/src/Hardware/VCP.cpp
                     ../../Panel/src/Hardware/VCP.h
-                    ../../Panel/src/Interface/HandlersPanel.cpp
-                    ../../Panel/src/Interface/HandlersPanel.h
-                    ../../Panel/src/Interface/InterfacePanel.cpp
-                    ../../Panel/src/Interface/InterfacePanel.h
+                    ../../Panel/src/Interface/Handlers_p.cpp
+                    ../../Panel/src/Interface/Handlers_p.h
+                    ../../Panel/src/Interface/Interface_p.cpp
+                    ../../Panel/src/Interface/Interface_p.h
+                                src/Interface/Transceiver_p_win.cpp
                     ../../Panel/src/libs/CMSIS/startup_stm32f429xx.s
                                 src/GUI/*
                                 src/Display/Painter_win.cpp
@@ -158,7 +159,6 @@ file(GLOB SOURCES   ../../common/Command.h
                                 src/Hardware/LTDC_win.cpp
                                 src/Hardware/Timer4XX_win.cpp
                                 src/Hardware/Modules/EEPROM_win.cpp
-                                src/Interface/Transceiver_429_win.cpp
                     ../../Panel/src/Display/font/*
                     ../../Panel/src/FDrive/*
                     ../../Panel/src/FrequencyMeter/*

@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "List.h"
-#include "Interface/InterfacePanel.h"
+#include "Interface/Interface_p.h"
 #include "Utils/String.h"
 
 

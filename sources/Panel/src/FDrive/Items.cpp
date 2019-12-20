@@ -5,7 +5,7 @@
 #include "FDrivePanel.h"
 #include "Items.h"
 #include "File.h"
-#include "Interface/InterfacePanel.h"
+#include "Interface/Interface_p.h"
 #include <cstring>
 
 

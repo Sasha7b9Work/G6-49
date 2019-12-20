@@ -4,7 +4,7 @@
 #include "Command.h"
 #include "Display/Painter.h"
 #include "Generator/Signals.h"
-#include "Interface/InterfacePanel.h"
+#include "Interface/Interface_p.h"
 #include "Settings/Settings.h"
 #include "Utils/String.h"
 #include <cstring>

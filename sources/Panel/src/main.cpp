@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "log.h"
-#include "Interface/InterfacePanel.h"
+#include "Interface/Interface_p.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"

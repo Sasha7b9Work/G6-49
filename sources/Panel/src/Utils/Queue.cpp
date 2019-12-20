@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Message.h"
-#include "Interface/InterfacePanel.h"
+#include "Interface/Interface_p.h"
 #include "Utils/Queue.h"
 
 

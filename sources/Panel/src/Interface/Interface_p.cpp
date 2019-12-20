@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Transceiver.h"
-#include "InterfacePanel.h"
+#include "Interface_p.h"
 #include "Command.h"
 #include "structs.h"
 #include "Display/Console.h"
@@ -13,8 +13,8 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
 #include "Utils/Queue.h"
-#include "HandlersPanel.h"
-#include "InterfacePanel.h"
+#include "Handlers_p.h"
+#include "Interface_p.h"
 #include <cstdlib>
 
 
@@ -59,7 +59,7 @@ void Interface::Update()
     if (Transceiver::Receive(&message))
     {
         if (ProcessTask(&message) ||            // ќбрабатываем сообщение, если запрос на него есть в очереди заданий
-            Handlers::Processing(&message))     // или просто обрабатываем в обратном случае
+            PHandlers::Processing(&message))    // или просто обрабатываем в обратном случае
         {
             time = 0;
             Update();
@@ -72,10 +72,10 @@ void Interface::Update()
 
 void Interface::AddTask(Task *task)
 {
-    if(!tasks.IsMember(task))               // ≈сли задани€ ещЄ нет в очереди
+    if(!tasks.IsMember(task))                   // ≈сли задани€ ещЄ нет в очереди
     {
-        task->TransmitMessage();            // “о посылаем его сообщение
-        tasks.Append(task);                 // и добавл€ем в очередь сообщений дл€ повторной отправки
+        task->TransmitMessage();                // “о посылаем его сообщение
+        tasks.Append(task);                     // и добавл€ем в очередь сообщений дл€ повторной отправки
     }
 }
 
