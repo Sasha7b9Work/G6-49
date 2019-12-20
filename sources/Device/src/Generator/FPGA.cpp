@@ -4,7 +4,7 @@
 #include "structs.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/HAL/EEPROM.h"
+#include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include "Generator/Generator_d.h"
 #include "Settings/CalibrationSettings.h"

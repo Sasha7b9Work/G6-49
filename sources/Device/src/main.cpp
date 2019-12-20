@@ -7,7 +7,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-#include "Hardware/HAL/EEPROM.h"
+#include "Hardware/HAL/HAL.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include <stm32f4xx_hal.h>
 

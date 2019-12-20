@@ -1,5 +1,4 @@
 #include "CalibrationSettings.h"
-#include "Hardware/HAL/EEPROM.h"
 
 
 static const CalibrationSettings defSet =

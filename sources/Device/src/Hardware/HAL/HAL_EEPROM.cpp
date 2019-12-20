@@ -1,7 +1,8 @@
 #include "log.h"
-#include "EEPROM.h"
 #include "Generator/FPGA.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Settings/CalibrationSettings.h"
 
 
 #define SECTOR_0                    ((uint)0x08000000)          // 16k  Загрузчик

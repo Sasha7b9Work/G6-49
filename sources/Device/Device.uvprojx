@@ -1427,16 +1427,6 @@
           <GroupName>Hardware/HAL</GroupName>
           <Files>
             <File>
-              <FileName>EEPROM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\EEPROM.h</FilePath>
-            </File>
-            <File>
-              <FileName>EEPROM.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\EEPROM.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
@@ -1445,6 +1435,11 @@
               <FileName>HAL.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_EEPROM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
             </File>
           </Files>
         </Group>
