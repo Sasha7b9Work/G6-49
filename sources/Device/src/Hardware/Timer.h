@@ -2,16 +2,6 @@
 #include "defines.h"
 
 
-
-
-
-/** @addtogroup Hardware
- *  @{
- *  @defgroup Timer
- *  @brief Разные таймеры
- *  @{
- */
-
  /// @brief Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
  /// В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
  /// Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
@@ -19,7 +9,7 @@
 #define TIME_US    (TIM2->CNT / 90)
 #define TIME_MS    HAL_GetTick()
 
-namespace Timer
+struct Timer
 {
     struct Type
     {
@@ -48,37 +38,33 @@ namespace Timer
         operator uint8() const { return static_cast<uint8>(value); };
     };
 
-    void Init();
+    static void Init();
 
-    void DeInit();
+    static void DeInit();
     /// Назначает таймеру timer функцию и время срабатывания
-    void Set(Type type, pFuncVV func, uint dTms);
+    static void Set(Type type, pFuncVV func, uint dTms);
 
-    void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
+    static void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
 
-    void SetAndEnable(Type type, pFuncVV func, uint dTms);
+    static void SetAndEnable(Type type, pFuncVV func, uint dTms);
 
-    void StartOnce(Type type);
+    static void StartOnce(Type type);
 
-    void Enable(Type type);
+    static void Enable(Type type);
 
-    void Disable(Type type);
+    static void Disable(Type type);
 
-    bool IsRun(Type type);
+    static bool IsRun(Type type);
 
-    void PauseOnTime(uint timeMS);
+    static void PauseOnTime(uint timeMS);
 
-    void PauseOnTicks(uint numTicks);
+    static void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
-    void StartMultiMeasurement();
+    static void StartMultiMeasurement();
     /// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
-    void StartLogging();
+    static void StartLogging();
 
-    uint LogPointUS(char *name);
+    static uint LogPointUS(char *name);
 
-    uint LogPointMS(char *name);
+    static uint LogPointMS(char *name);
 };
-
-
-/** @}  @}
- */
