@@ -2,20 +2,20 @@
 #include "defines.h"
 
 
-namespace FreqMeter
+struct FreqMeter
 {
     /// Загрузить настройки в частотомер
-    void LoadSettings();
+    static void LoadSettings();
 
-    void Draw();
+    static void Draw();
     /// Установить выводимое значение частоты
-    void SetMeasure(uint value);
+    static void SetMeasure(uint value);
     /// Этот метод вызывают для того, чтобу указать, что показания индикатора неактивны.
-    void SetInactive();
+    static void SetInactive();
     /// Заслать в ПЛИС значение уровня
-    void LoadLevel();
+    static void LoadLevel();
     /// Заслать в ПЛИС значение гистерезиса
-    void LoadHysteresis();
+    static void LoadHysteresis();
 
     struct BillingTime
     {
