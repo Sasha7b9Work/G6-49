@@ -20,16 +20,6 @@
 #include <cstdlib>
 
 
-namespace PGenerator
-{
-    /// Загружает форму произвольного сигнала
-    static void LoadFormDDS(Form *form);
-    /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
-    static void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
-}
-
-
-
 void PGenerator::EnableChannel(Chan::E ch, bool enable)
 {
     Message::EnableChannel(static_cast<uint8>(ch), static_cast<uint8>(enable ? 1U : 0U)).Transmit();

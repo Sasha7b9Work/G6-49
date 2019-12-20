@@ -12,35 +12,40 @@
 class SimpleMessage;
 
 
-namespace PGenerator
+struct PGenerator
 {
     static const int DDS_NUM_POINTS = 8 * 1024;
 
-    void Reset();
+    static void Reset();
 
-    void EnableChannel(Chan::E ch, bool enable);
+    static void EnableChannel(Chan::E ch, bool enable);
 
-    void SetFormWave(const Wave *w);
+    static void SetFormWave(const Wave *w);
 
-    void SetFormWave(Chan::E ch, Form::E form);
+    static void SetFormWave(Chan::E ch, Form::E form);
 
-    void SetParameter(ParameterValue *param);
+    static void SetParameter(ParameterValue *param);
 
-    void SetParameter(ParameterChoice *param);
+    static void SetParameter(ParameterChoice *param);
 
-    void SetFrequency(Chan::E ch, float freq);
+    static void SetFrequency(Chan::E ch, float freq);
 
-    void SetOffset(Chan::E ch, float offset);
+    static void SetOffset(Chan::E ch, float offset);
 
-    void SetAmplitude(Chan::E ch, float amplitude);
+    static void SetAmplitude(Chan::E ch, float amplitude);
 
-    void SetDebugMode(bool enable);
+    static void SetDebugMode(bool enable);
 
-    void LoadRegister(Register::E reg, uint64 value);
+    static void LoadRegister(Register::E reg, uint64 value);
 
-    void LoadSettings();
+    static void LoadSettings();
 
-    void TuneChannel(Chan::E ch);
+    static void TuneChannel(Chan::E ch);
     /// Загружает режим запуска из set в аппаратуру
-    void LoadStartMode(Chan::E ch, int mode);
+    static void LoadStartMode(Chan::E ch, int mode);
+private:
+    /// Загружает форму произвольного сигнала
+    static void LoadFormDDS(Form *form);
+    /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
+    static void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
 };
