@@ -36,7 +36,7 @@ bool IntInRange(int value, int min, int max)
 }
 
 
-float MaxFloat(float val1, float val2, float val3)
+float Math::MaxFloat(float val1, float val2, float val3)
 {
     float retValue = val1;
     if (val2 > retValue)
@@ -103,7 +103,7 @@ float Math::RoundFloat(float value, int numDigits)
 }
 
 
-bool IsEquals(float x, float y)
+bool Math::IsEquals(float x, float y)
 {
     return std::fabsf(x - y) < std::numeric_limits<float>::epsilon();
 }

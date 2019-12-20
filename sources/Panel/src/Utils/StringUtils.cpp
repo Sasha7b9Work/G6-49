@@ -20,7 +20,7 @@
 
 char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 {
-    if (IsEquals(voltage, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(voltage, ERROR_VALUE_FLOAT))
     {
         std::strcpy(buffer, ERROR_STRING_VALUE);
         return buffer;
@@ -54,7 +54,7 @@ char *Voltage2String(float voltage, bool alwaysSign, char buffer[20])
 
 char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
-    if (IsEquals(value, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
     {
         std::strcpy(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
@@ -117,7 +117,7 @@ char *Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[2
 
 char *Time2String(float time, bool alwaysSign, char buffer[20])
 {
-    if (IsEquals(time, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
         std::strcpy(buffer, ERROR_STRING_VALUE);
         return buffer;
@@ -151,7 +151,7 @@ char *Freq2String(float freq, bool, char bufferOut[20])
 {
     bufferOut[0] = 0;
     const char *suffix = 0;
-    if (IsEquals(freq, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
     {
         std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
@@ -195,7 +195,7 @@ char *Freq2StringAccuracy(float freq, char bufferOut[20], int numDigits)
 {
     bufferOut[0] = 0;
     const char *suffix = LANG_RU ? "Ãö" : "Hz";
-    if (IsEquals(freq, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(freq, ERROR_VALUE_FLOAT))
     {
         std::strcat(bufferOut, ERROR_STRING_VALUE);
         return bufferOut;
@@ -482,7 +482,7 @@ char *Time2StringAccuracy(float time, bool alwaysSign, char buffer[20], int numD
 
     float fabsTime = std::fabsf(time);
 
-    if (IsEquals(time, ERROR_VALUE_FLOAT))
+    if (Math::IsEquals(time, ERROR_VALUE_FLOAT))
     {
         std::strcat(buffer, ERROR_STRING_VALUE);
         return buffer;
