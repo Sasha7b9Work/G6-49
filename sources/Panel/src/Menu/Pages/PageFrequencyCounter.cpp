@@ -242,13 +242,13 @@ void PageFrequencyCounter::WriteRegisterRG9()
 {
     uint data = 0;
 
-    //----------- Режим работы ------------------
+     //--- Режим работы ------------------
     if(FREQ_METER_MEASURE_IS_PERIOD)
     {
         data |= 1;
     }
 
-    //----------- Число усредняемых периодов ----
+    //--- Число усредняемых периодов ----
 
     static const uint maskAvePeriod[5] =
     {

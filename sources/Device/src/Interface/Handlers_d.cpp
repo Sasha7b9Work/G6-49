@@ -367,7 +367,7 @@ void DHandlers::RunReset(SimpleMessage *)
 #endif
 }
 
-//---------------------------------------------------------------------------------------------------------------------
+
 void DHandlers::Test(SimpleMessage *)
 {
 
