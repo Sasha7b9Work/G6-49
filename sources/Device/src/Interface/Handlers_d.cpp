@@ -131,17 +131,17 @@ void DHandlers::SendData(SimpleMessage *)
 {
     CPU::SetBusy();
 
-    if (Interface::GetOutbox().Size() != 0)
+    if (DInterface::GetOutbox().Size() != 0)
     {
         Timer::PauseOnTime(2);
 
         CPU::SetReady();
 
-        Transceiver::Transmit(Interface::GetOutbox().Front());
+        Transceiver::Transmit(DInterface::GetOutbox().Front());
 
         CPU::SetBusy();
 
-        Interface::GetOutbox().Pop();
+        DInterface::GetOutbox().Pop();
     }
     else
     {
@@ -381,7 +381,7 @@ void DHandlers::WriteRegister(SimpleMessage *msg)
 
     case Register::FPGA_RG9_FreqMeter:
         FPGA::WriteRegister(FPGA::RG::_9_FreqMeter, value);
-        Interface::ResetFreqForSend();
+        DInterface::ResetFreqForSend();
         break;
 
     case Register::FPGA_RG10_Offset:

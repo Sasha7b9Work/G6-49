@@ -20,31 +20,23 @@
 #include <cstdlib>
 
 
-namespace Interface
-{
-    /// Добавляет сообщение в очередь отправки. Если очередь заполнена, сообщение удаляется и функция возвращает false
-    bool AddMessageForTransmit(SimpleMessage *message);
-    /// Очередь сообщений, ожидающих отправки
-    Queue outbox;
-    /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
-    uint freqForSend = MAX_UINT;
-};
+uint  DInterface::freqForSend = MAX_UINT;
+Queue DInterface::outbox;
 
 
-
-Queue &Interface::GetOutbox()
+Queue &DInterface::GetOutbox()
 {
     return outbox;
 }
 
 
-void Interface::ResetFreqForSend()
+void DInterface::ResetFreqForSend()
 {
     freqForSend = MAX_UINT;
 }
 
 
-void Interface::Update()
+void DInterface::Update()
 {
     CPU::SetReady();
 
@@ -96,7 +88,7 @@ void Interface::Update()
 }
 
 
-bool Interface::AddMessageForTransmit(SimpleMessage *message)
+bool DInterface::AddMessageForTransmit(SimpleMessage *message)
 {
     SimpleMessage *clone = message->Clone();
 
@@ -114,5 +106,5 @@ bool Interface::AddMessageForTransmit(SimpleMessage *message)
 
 void SimpleMessage::Transmit()
 {
-    Interface::AddMessageForTransmit(this);
+    DInterface::AddMessageForTransmit(this);
 }

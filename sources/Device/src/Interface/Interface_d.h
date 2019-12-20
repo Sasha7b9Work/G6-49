@@ -4,12 +4,18 @@
 #include "Utils/Queue.h"
 
 
-
-namespace Interface
+struct DInterface
 {
-    void Update();
+    static void Update();
     /// Возвращает ссылку на очередь сообщений, ожидающих отправки
-    Queue &GetOutbox();
+    static Queue &GetOutbox();
 
-    void ResetFreqForSend();
+    static void ResetFreqForSend();
+    /// Добавляет сообщение в очередь отправки. Если очередь заполнена, сообщение удаляется и функция возвращает false
+    static bool AddMessageForTransmit(SimpleMessage *message);
+private:
+    /// Очередь сообщений, ожидающих отправки
+    static Queue outbox;
+    /// Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
+    static uint freqForSend;
 };

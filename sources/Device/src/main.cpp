@@ -25,6 +25,6 @@ int main()
     {
         DFreqMeter::Update();
         DDrive::Update();
-        Interface::Update();
+        DInterface::Update();
     }
 }
