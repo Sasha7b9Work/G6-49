@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace VCP
+struct VCP
 {
-    void SendStringAsynch(const char *data);
-}
+    static void SendStringAsynch(const char *data);
+};
