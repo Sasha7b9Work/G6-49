@@ -73,8 +73,8 @@ public:
     Page*                       menu_currentPage;                           ///< Адрес открытой страницы меню. 0, если открыта главная страница
     int8                        menu_posActItem[Page::Count];              ///< Позиция активного пункта меню для каждой страницы
     int8                        menu_currentSubPage[Page::Count];          ///< Номер текущей подстраницы для каждой страницы
-    FrequencyMeter::BillingTime freq_billingTime;                           ///< Время счёта
-    FrequencyMeter::AvePeriod   freq_avePeriod;                             ///< Число усредняемых периодов в режиме измерения периода
+    FreqMeter::BillingTime freq_billingTime;                           ///< Время счёта
+    FreqMeter::AvePeriod   freq_avePeriod;                             ///< Число усредняемых периодов в режиме измерения периода
     FreqTimeStamps              freq_timeStamps;                            ///< Метки времени
     FreqMeasure::E              freq_measure;                               ///< Режим измерения частотомера
     int16                       freq_level;                                 ///< Уровень синхронизации

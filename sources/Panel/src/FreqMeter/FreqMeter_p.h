@@ -2,7 +2,7 @@
 #include "defines.h"
 
 
-namespace FrequencyMeter
+namespace FreqMeter
 {
     /// Загрузить настройки в частотомер
     void LoadSettings();

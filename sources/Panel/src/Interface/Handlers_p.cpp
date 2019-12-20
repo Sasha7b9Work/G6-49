@@ -98,7 +98,7 @@ bool PHandlers::Request(SimpleMessage *)
 
 bool PHandlers::FreqMeasure(SimpleMessage *msg)
 {
-    FrequencyMeter::SetMeasure(msg->TakeWord());
+    FreqMeter::SetMeasure(msg->TakeWord());
     return true;
 }
 

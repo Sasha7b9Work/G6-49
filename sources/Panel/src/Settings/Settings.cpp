@@ -48,8 +48,8 @@ static const Settings defSet =
     static_cast<Page *>(Menu::mainPage),// menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
-    FrequencyMeter::BillingTime::_1ms,  // freq_billingTime
-    FrequencyMeter::AvePeriod::_1,      // freq_avePeriod
+    FreqMeter::BillingTime::_1ms,  // freq_billingTime
+    FreqMeter::AvePeriod::_1,      // freq_avePeriod
     FreqTimeStamps::_10MHz,             // freq_timeStamps
     FreqMeasure::Disable,               // freq_measure
     0,                                  // freq_level
@@ -108,7 +108,7 @@ void Settings::Load(bool _default)
 
     PGenerator::LoadSettings();
 
-    FrequencyMeter::LoadSettings();
+    FreqMeter::LoadSettings();
     
     Painter::LoadPalette();
 }

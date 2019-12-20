@@ -27,7 +27,7 @@ static void SetParameter(Chan::E ch, KoeffCal::E koeff)
     }
     else if (koeff == KoeffCal::FREQ_LEVEL_TRIG)
     {
-        FrequencyMeter::LoadLevel();
+        FreqMeter::LoadLevel();
     }
     else if (koeff == KoeffCal::DDS_MAX)
     {
