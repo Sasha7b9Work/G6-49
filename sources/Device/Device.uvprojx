@@ -1387,14 +1387,14 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>VCP.cpp</FileName>
+              <FileName>VCP_d.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\VCP.cpp</FilePath>
+              <FilePath>.\src\Hardware\VCP_d.cpp</FilePath>
             </File>
             <File>
-              <FileName>VCP.h</FileName>
+              <FileName>VCP_d.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\VCP.h</FilePath>
+              <FilePath>.\src\Hardware\VCP_d.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -1976,6 +1976,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
             </File>
+            <File>
+              <FileName>VCP_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\VCP_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>VCP_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\VCP_p.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2230,16 +2240,6 @@
               <FileName>SCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\VCP.h</FilePath>
-            </File>
-            <File>
-              <FileName>VCP.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\VCP.cpp</FilePath>
             </File>
           </Files>
         </Group>

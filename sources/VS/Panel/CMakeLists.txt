@@ -79,8 +79,8 @@ source_group(Hardware                 FILES              ../../Panel/src/Hardwar
                                                          ../../Panel/src/Hardware/Timer.h
                                                          ../../Panel/src/Hardware/Timer4XX.h
                                                                      src/Hardware/Timer4XX_win.cpp
-                                                         ../../Panel/src/Hardware/VCP.cpp
-                                                         ../../Panel/src/Hardware/VCP.h)
+                                                         ../../Panel/src/Hardware/VCP_p.cpp
+                                                         ../../Panel/src/Hardware/VCP_p.h)
 source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp)
 source_group(Interface                FILES              ../../Panel/src/Interface/Handlers_p.cpp
                                                          ../../Panel/src/Interface/Handlers_p.h
@@ -145,8 +145,8 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/Hardware/Timer.cpp
                     ../../Panel/src/Hardware/Timer.h
                     ../../Panel/src/Hardware/Timer4XX.h
-                    ../../Panel/src/Hardware/VCP.cpp
-                    ../../Panel/src/Hardware/VCP.h
+                    ../../Panel/src/Hardware/VCP_p.cpp
+                    ../../Panel/src/Hardware/VCP_p.h
                     ../../Panel/src/Interface/Handlers_p.cpp
                     ../../Panel/src/Interface/Handlers_p.h
                     ../../Panel/src/Interface/Interface_p.cpp
