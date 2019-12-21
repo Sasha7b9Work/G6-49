@@ -1,4 +1,3 @@
-#include "Hardware/Timer4XX.h"
 #include "Hardware/HAL/HAL.h"
 
 
@@ -18,14 +17,4 @@ void HAL_TIM2::Init()
     HAL_TIM_Base_Init(&handler);
 
     HAL_TIM_Base_Start(&handler);
-}
-
-
-void HAL_TIM2::DeInit()
-{
-    HAL_TIM_Base_Stop(&handler);
-
-    HAL_TIM_Base_DeInit(&handler);
-
-    __HAL_RCC_TIM2_CLK_DISABLE();
 }

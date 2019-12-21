@@ -1387,16 +1387,6 @@
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
             <File>
-              <FileName>Timer4XX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
-            </File>
-            <File>
               <FileName>VCP.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\VCP.cpp</FilePath>
@@ -1455,6 +1445,11 @@
               <FileName>HAL_TIM2.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
             </File>
           </Files>
         </Group>

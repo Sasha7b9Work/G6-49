@@ -77,5 +77,14 @@ struct HAL_TIM2
 {
     static void Init();
 
-    static void DeInit();
+};
+
+
+struct HAL_TIM3
+{
+    static void Init();
+
+    static void StartIT(uint period);
+
+    static void StopIT();
 };

@@ -40,7 +40,6 @@ struct Timer
 
     static void Init();
 
-    static void DeInit();
     /// Назначает таймеру timer функцию и время срабатывания
     static void Set(Type type, pFuncVV func, uint dTms);
 

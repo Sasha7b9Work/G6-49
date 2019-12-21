@@ -2,18 +2,9 @@
 #include "log.h"
 #include "Timer.h"
 #include <stm32f4xx.h>
-#include "Timer4XX.h"
 #include <limits>
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
-
-
-#if defined  STM32F407xx
-
-
-static Timer4XX tim3;   // Для таймеров
-
-#endif
 
 
 struct TimerStruct
@@ -65,21 +56,9 @@ void Timer::Init()
     {
         timers[i].timeNextMS = UINT_MAX;
     }
-   
-    tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1);
-    tim3.EnabledIRQ(1, 1);
 
     HAL_TIM2::Init();
-}
-
-
-void Timer::DeInit()
-{
-    HAL_TIM2::DeInit();
-
-    tim3.DisableIRQ();
-    tim3.StopIT();
-    tim3.DeInit();
+    HAL_TIM3::Init();
 }
 
 
@@ -205,13 +184,14 @@ static void StartTIM(uint timeStopMS)
 
     uint dT = timeStopMS - TIME_MS;
 
-    tim3.StartIT((dT * 2) - 1);             // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
+    // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
+    HAL_TIM3::StartIT((dT * 2) - 1);
 }
 
 
 static void StopTIM()
 {
-    tim3.StopIT();
+    HAL_TIM3::StopIT();
 }
 
 
