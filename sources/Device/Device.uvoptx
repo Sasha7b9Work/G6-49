@@ -1841,8 +1841,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\HAL\HAL.cpp</PathWithFileName>
-      <FilenameWithoutPath>HAL.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\HAL\HAL_EEPROM.cpp</PathWithFileName>
+      <FilenameWithoutPath>HAL_EEPROM.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1853,8 +1853,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\HAL\HAL_EEPROM.cpp</PathWithFileName>
-      <FilenameWithoutPath>HAL_EEPROM.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\HAL\HAL_HCD.cpp</PathWithFileName>
+      <FilenameWithoutPath>HAL_HCD.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1865,8 +1865,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\HAL\HAL_HCD.cpp</PathWithFileName>
-      <FilenameWithoutPath>HAL_HCD.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\HAL\HAL_SPI1.cpp</PathWithFileName>
+      <FilenameWithoutPath>HAL_SPI1.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
