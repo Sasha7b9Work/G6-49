@@ -23,19 +23,19 @@ void DFreqMeter::Init()
 
 void DFreqMeter::SetResist(FreqResist resist)
 {
-    CPU::WritePin(GeneratorWritePin::FREQ_METER_RESIST, resist.Is(FreqResist::_50Ohm));
+    HAL_PIO::Write(WR_FREQ_METER_RESIST, resist.Is(FreqResist::_50Ohm));
 }
 
 
 void DFreqMeter::SetCouple(FreqCouple couple)
 {
-    CPU::WritePin(GeneratorWritePin::FREQ_METER_COUPLE, couple.Is(FreqCouple::DC));
+    HAL_PIO::Write(WR_FREQ_METER_COUPLE, couple.Is(FreqCouple::DC));
 }
 
 
 void DFreqMeter::SetFiltr(FreqFiltr filtr)
 {
-    CPU::WritePin(GeneratorWritePin::FREQ_METER_FILTR, filtr.Is(FreqFiltr::Enable));
+    HAL_PIO::Write(WR_FREQ_METER_FILTR, filtr.Is(FreqFiltr::Enable));
 }
 
 
@@ -46,13 +46,13 @@ void DFreqMeter::Update()
         uint frequency = 0;
         for(int i = 30; i >= 0; i--)
         {
-            CPU::WritePin(GeneratorWritePin::FREQ_METER_CLK, true);
+            HAL_PIO::Set(WR_FREQ_METER_CLK);
             volatile int j = 0;
             while(j < 25)
             {
                 j++;
             }
-            CPU::WritePin(GeneratorWritePin::FREQ_METER_CLK, false);
+            HAL_PIO::Reset(WR_FREQ_METER_CLK);
             Timer::PauseOnTime(1);
             if (HAL_PIO::Read(RD_FREQ_METER_DATA))
             {

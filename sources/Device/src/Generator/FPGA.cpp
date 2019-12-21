@@ -5,6 +5,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include "Utils/Math.h"
 #include "Generator/Generator_d.h"
 #include "Settings/CalibrationSettings.h"
@@ -417,9 +418,9 @@ void FPGA::SendData(uint8 *data)
         /// \todo Это временно так задержка организована
         __IO int j = 0;
         for(j = 0; j < 10; j++) {}
-        CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, true);
+        HAL_PIO::Set(WR_FPGA_WR_DATA);
         for(j = 0; j < 10; j++) {}
-        CPU::WritePin(GeneratorWritePin::FPGA_WR_DATA, false);
+        HAL_PIO::Reset(WR_FPGA_WR_DATA);
     }
 
     WriteRegister(RG::_0_Control, 1);

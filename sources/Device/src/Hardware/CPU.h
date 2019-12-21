@@ -28,19 +28,6 @@ struct GeneratorWritePin
         FPGA_A1_RG,
         FPGA_A2_RG,
         FPGA_A3_RG,
-        FREQ_METER_RESIST,
-        FREQ_METER_COUPLE,
-        FREQ_METER_FILTR,
-        FREQ_METER_CLK,     
-        D0,
-        D1,
-        D2,
-        D3,
-        D4,
-        D5,
-        D6,
-        D7,
-        FPGA_WR_DATA,
         Count
     } value;
     GeneratorWritePin(E v) : value(v) {};

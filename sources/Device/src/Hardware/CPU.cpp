@@ -36,20 +36,7 @@ static const StructPort registers[GeneratorWritePin::Count] =
     {GPIOG, GPIO_PIN_5},    // FPGA_A0_RG
     {GPIOG, GPIO_PIN_6},    // FPGA_A1_RG
     {GPIOG, GPIO_PIN_7},    // FPGA_A2_RG
-    {GPIOG, GPIO_PIN_8},    // FPGA_A3_RG
-    {GPIOG, GPIO_PIN_12},   // FREQ_METER_RESIST
-    {GPIOG, GPIO_PIN_13},   // FREQ_METER_COUPLE
-    {GPIOG, GPIO_PIN_14},   // FREQ_METER_FILTR
-    {GPIOC, GPIO_PIN_1},    // FREQ_METER_CLK
-    {GPIOD, GPIO_PIN_14},   // D0
-    {GPIOD, GPIO_PIN_15},   // D1
-    {GPIOD, GPIO_PIN_0},    // D2
-    {GPIOD, GPIO_PIN_1},    // D3
-    {GPIOE, GPIO_PIN_7},    // D4
-    {GPIOE, GPIO_PIN_8},    // D5
-    {GPIOE, GPIO_PIN_9},    // D6
-    {GPIOE, GPIO_PIN_10},   // D7
-    {GPIOD, GPIO_PIN_5}     // FPGA_WR_DATA
+    {GPIOG, GPIO_PIN_8}     // FPGA_A3_RG
 };
 
 
