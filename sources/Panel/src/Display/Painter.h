@@ -38,6 +38,4 @@ struct Painter
     static void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
 
     static void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade);
-
-    static col_val ReduceBrightness(col_val colorValue, float newBrightness);
 };
