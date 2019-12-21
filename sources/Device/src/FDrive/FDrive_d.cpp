@@ -2,6 +2,7 @@
 #include "log.h"
 #include "FDrive_d.h"
 #include "Generator/Generator_d.h"
+#include "Hardware/HAL/HAL.h"
 #include "usbh_diskio.h"
 
 
@@ -72,7 +73,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 
 void DDrive::Init()
 {
-    CPU::HCD::Init();
+    HAL_HCD::Init();
 
     if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK) //-V2001
     {

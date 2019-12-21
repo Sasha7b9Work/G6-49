@@ -82,14 +82,6 @@ struct CPU
     static void ErrorHandler();
 
     
-    struct HCD
-    {
-        static void Init();
-
-        static HCD_HandleTypeDef handle;
-    };
-
-    
     struct PCD
     {
         static void Init();

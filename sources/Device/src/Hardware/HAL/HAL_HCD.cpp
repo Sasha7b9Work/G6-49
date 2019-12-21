@@ -1,10 +1,10 @@
-#include "CPU.h"
+#include "Hardware/HAL/HAL.h"
 
 
-HCD_HandleTypeDef CPU::HCD::handle;
+HCD_HandleTypeDef HAL_HCD::handle;
 
 
-void CPU::HCD::Init()
+void HAL_HCD::Init()
 {
     GPIO_InitTypeDef isGPIO =
     {

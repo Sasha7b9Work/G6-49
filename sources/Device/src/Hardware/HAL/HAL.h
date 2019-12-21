@@ -22,6 +22,13 @@ struct HAL_EEPROM
 };
 
 
+struct HAL_HCD
+{
+    static void Init();
+
+    static HCD_HandleTypeDef handle;
+};
+
 
 struct HAL_SPI1
 {

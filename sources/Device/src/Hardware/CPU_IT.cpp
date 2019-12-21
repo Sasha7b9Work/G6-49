@@ -1,6 +1,6 @@
 #include <stm32f4xx.h>
-#include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
+#include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_d.h"
 #include "Utils/Debug.h"
 
@@ -33,7 +33,7 @@ extern "C" {
     void OTG_FS_IRQHandler()
     {
         // Флешка
-        HAL_HCD_IRQHandler(&CPU::HCD::handle);
+        HAL_HCD_IRQHandler(&HAL_HCD::handle);
     }
 
     

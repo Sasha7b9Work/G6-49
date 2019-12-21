@@ -1382,11 +1382,6 @@
               <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
             </File>
             <File>
-              <FileName>CPU_HCD.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_HCD.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
@@ -1440,6 +1435,11 @@
               <FileName>HAL_EEPROM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_HCD.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_HCD.cpp</FilePath>
             </File>
           </Files>
         </Group>
