@@ -1772,11 +1772,6 @@
               <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
-              <FileName>PainterSTM429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterSTM429.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Symbols.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Symbols.h</FilePath>
@@ -1795,6 +1790,11 @@
               <FileName>Display_429.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Display_429.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Painter_429.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Painter_429.cpp</FilePath>
             </File>
           </Files>
         </Group>
