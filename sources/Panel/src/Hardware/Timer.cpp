@@ -4,9 +4,9 @@
 #include <limits>
 #include "Hardware/CPU.h"
 #include "Hardware/Timer4XX.h"
+#include "Hardware/HAL/HAL.h"
 
 
-static Timer4XX tim2;   // Для тиков
 static Timer4XX tim3;   // Для таймеров
 
 
@@ -58,15 +58,13 @@ void Timer::Init()
     tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1);
     tim3.EnabledIRQ(1, 1);
 
-    tim2.Init(TIM2, 0, TIM_COUNTERMODE_UP, static_cast<uint>(-1), TIM_CLOCKDIVISION_DIV1);
-    tim2.Start();
+    HAL_TIM2::Init();
 }
 
 
 void Timer::DeInit()
 {
-    tim2.Stop();
-    tim2.DeInit();
+    HAL_TIM2::DeInit();
     
     tim3.DisableIRQ();
     tim3.StopIT();

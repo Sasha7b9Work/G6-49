@@ -79,6 +79,8 @@ source_group(Hardware                 FILES                          src/Hardwar
                                                                      src/Hardware/VCP_p_win.cpp)
 source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp
                                                                      src/Hardware/HAL/HAL_GPIO_win.cpp
+                                                                     src/Hardware/HAL/HAL_TIM2_win.cpp
+                                                                     src/Hardware/HAL/HAL_TIM3_win.cpp
                                                                      src/Hardware/HAL/HAL_TIM4_win.cpp)
 source_group(Keyboard                 FILES              ../../Panel/src/Keyboard/Controls.h
                                                          ../../Panel/src/Keyboard/Controls.cpp
@@ -160,6 +162,8 @@ file(GLOB SOURCES   ../../common/Command.h
 
                                 src/Hardware/HAL/HAL_EEPROM_win.cpp
                                 src/Hardware/HAL/HAL_GPIO_win.cpp
+                                src/Hardware/HAL/HAL_TIM2_win.cpp
+                                src/Hardware/HAL/HAL_TIM3_win.cpp
                                 src/Hardware/HAL/HAL_TIM4_win.cpp
                                 
                                 

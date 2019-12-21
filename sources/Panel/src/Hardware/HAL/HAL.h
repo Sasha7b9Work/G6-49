@@ -89,9 +89,17 @@ struct HAL_SPI4
 };
 
 
-class HAL_TIM4
+// Используетя для тиков
+struct HAL_TIM2
 {
-public:
+    static void Init();
+
+    static void DeInit();
+};
+
+
+struct HAL_TIM4
+{
     static void Init(void (*func)());
     /// Завести таймер, который остановится в timeStop мс
     static void Start(uint timeStopMS);
