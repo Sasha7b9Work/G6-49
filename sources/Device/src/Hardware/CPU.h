@@ -13,10 +13,6 @@ struct GeneratorWritePin
         AD9952_IOSYNA,
         AD9952_IOSYNB,
         AD9952_RES_DDS,
-        Pin_P1_AmplifierA,
-        Pin_P2_AmplifierB,
-        Pin_OutA,
-        Pin_OutB,
         Count
     } value;
     GeneratorWritePin(E v) : value(v) {};

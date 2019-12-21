@@ -22,10 +22,6 @@ static const StructPort registers[GeneratorWritePin::Count] =
     {GPIOF, GPIO_PIN_8},    // AD9952_IOSYNA
     {GPIOF, GPIO_PIN_9},    // AD9952_IOSYNB
     {GPIOC, GPIO_PIN_8},    // AD9952_RES_DDS
-    {GPIOE, GPIO_PIN_12},   // Pin_P1_AmplifierA
-    {GPIOE, GPIO_PIN_13},   // Pin_P2_AmplifierB
-    {GPIOF, GPIO_PIN_1},    // Pin_OutA
-    {GPIOC, GPIO_PIN_15},   // Pin_OutB
 };
 
 
@@ -39,8 +35,8 @@ void CPU::Init()
 
     InitGPIOS();
 
-    WritePin(GeneratorWritePin::Pin_OutA, true);
-    WritePin(GeneratorWritePin::Pin_OutB, true);
+    HAL_PIO::Set(WR_OUT_A);
+    HAL_PIO::Set(WR_OUT_B);
 }
 
 

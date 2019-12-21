@@ -3,6 +3,7 @@
 #include "Generator_d.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
@@ -241,9 +242,9 @@ void DGenerator::EnableChannel(Chan::E ch, bool enable)
 {
     if(!FPGA::Start())
     {
-        static const GeneratorWritePin pin[Chan::Count] = { GeneratorWritePin::Pin_OutA, GeneratorWritePin::Pin_OutB };
+        StructPIN pins[Chan::Count] = { {WR_OUT_A}, {WR_OUT_B} };
 
-        CPU::WritePin(pin[ch], enable);
+        HAL_PIO::Write(pins[ch].port, pins[ch].pin, enable);
     }
 }
 
