@@ -1377,11 +1377,6 @@
               <FilePath>.\src\Hardware\CPU.h</FilePath>
             </File>
             <File>
-              <FileName>CPU_IT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_IT.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Timer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
@@ -1440,6 +1435,11 @@
               <FileName>HAL_SPI1.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_IT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
             </File>
           </Files>
         </Group>
