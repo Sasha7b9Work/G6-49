@@ -19,7 +19,6 @@ public:
     Frame(const wxString& title);
 
     void OnQuit(wxCommandEvent &);
-    void OnAbout(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);
 
 private:

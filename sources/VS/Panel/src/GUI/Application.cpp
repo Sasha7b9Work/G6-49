@@ -11,8 +11,7 @@ extern void init();
 
 enum
 {
-    Minimal_Quit = wxID_EXIT,
-    Minimal_About = wxID_ABOUT
+    Minimal_Quit = wxID_EXIT
 };
 
 enum
@@ -22,7 +21,6 @@ enum
 
 wxBEGIN_EVENT_TABLE(Frame, wxFrame)
     EVT_MENU(Minimal_Quit, Frame::OnQuit)
-    EVT_MENU(Minimal_About, Frame::OnAbout)
     EVT_TIMER(TIMER_ID, Frame::OnTimer)
 wxEND_EVENT_TABLE()
 
@@ -61,14 +59,10 @@ Frame::Frame(const wxString& title)
 
     wxMenu *fileMenu = new wxMenu;
 
-    wxMenu *helpMenu = new wxMenu;
-    helpMenu->Append(Minimal_About, "&About\tF1", "Show about dialog");
-
     fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
 
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "&File");
-    menuBar->Append(helpMenu, "&Help");
 
     SetMenuBar(menuBar);
 
@@ -119,21 +113,4 @@ void Frame::DrawFPS()
 void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);
-}
-
-
-void Frame::OnAbout(wxCommandEvent& WXUNUSED(event))
-{
-    wxMessageBox(wxString::Format
-    (
-        "Welcome to %s!\n"
-        "\n"
-        "This is the minimal wxWidgets sample\n"
-        "running under %s.",
-        wxVERSION_STRING,
-        wxGetOsDescription()
-    ),
-        "About wxWidgets minimal sample",
-        wxOK | wxICON_INFORMATION,
-        this);
 }
