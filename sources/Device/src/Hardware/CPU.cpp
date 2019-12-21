@@ -3,6 +3,7 @@
 #include "CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include <cstdlib>
 #include <cstring>
 
@@ -67,7 +68,8 @@ void CPU::Init()
 
     InitGPIOS();
 
-    InitPins();
+
+    HAL_PIO::Init();
 
     WritePin(GeneratorWritePin::Pin_OutA, true);
     WritePin(GeneratorWritePin::Pin_OutB, true);
@@ -117,35 +119,6 @@ void CPU::SetReady()
     };
 
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
-}
-
-
-void CPU::InitPins()
-{
-    GPIO_InitTypeDef isGPIO =
-    {
-        GPIO_PIN_0,
-        GPIO_MODE_OUTPUT_PP,
-        GPIO_NOPULL,
-        GPIO_SPEED_FREQ_HIGH,
-        0
-    };
-
-    for (int i = 0; i < GeneratorWritePin::Count; ++i)
-    {
-        isGPIO.Pin = registers[i].pin;
-        HAL_GPIO_Init(registers[i].port, &isGPIO);
-        HAL_GPIO_WritePin(registers[i].port, registers[i].pin, GPIO_PIN_RESET);
-    }
-
-    isGPIO.Mode = GPIO_MODE_INPUT;
-    isGPIO.Pull = GPIO_PULLDOWN;
-
-    for(int i = 0; i < GeneratorReadPin::Count; ++i)
-    {
-        isGPIO.Pin = registersRead[i].pin;
-        HAL_GPIO_Init(registersRead[i].port, &isGPIO);
-    }
 }
 
 

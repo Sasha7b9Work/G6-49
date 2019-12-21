@@ -99,6 +99,7 @@ struct HAlternate
 
 struct HAL_PIO
 {
+    /// Начальная инициализация управляющих выводов
     static void Init();
 
     static void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
@@ -108,8 +109,4 @@ struct HAL_PIO
     static void Reset(HPort::E port, uint16 pin);
     static void Write(HPort::E port, uint16 pin, HState::E state);
     static uint8 Read(HPort::E port, uint16 pin);
-
-    static void EXTI_CLEAR_IT_BIT(uint16 pin);
-    /// Инициализировать пины данных для приёма из панели
-    static void TuneDataPinsToReceive();
 };

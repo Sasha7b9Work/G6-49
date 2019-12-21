@@ -77,6 +77,4 @@ struct CPU
 private:
 
     static void InitGPIOS();
-    /// Ќачальна€ инициализаци€ управл€ющих выводов
-    static void InitPins();
 };
