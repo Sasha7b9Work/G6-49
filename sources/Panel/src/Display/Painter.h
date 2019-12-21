@@ -48,6 +48,4 @@ struct Painter
     static col_val ReduceBrightness(col_val colorValue, float newBrightness);
 
     static Color currentColor;
-
-    static TypeFont::E currentTypeFont;
 };
