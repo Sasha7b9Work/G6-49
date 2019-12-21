@@ -17,6 +17,8 @@ struct HAL
 private:
 
     static void SystemClockConfig();
+
+    static void EnablePeriphery();
 };
 
 

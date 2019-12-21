@@ -5,6 +5,8 @@ void HAL::Init()
 {
     SystemClockConfig();
 
+    EnablePeriphery();
+
     HAL_Init();
 
     HAL_SPI1::Init();
@@ -56,6 +58,24 @@ void HAL::SystemClockConfig()
 
     /* SysTick_IRQn interrupt configuration */
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+}
+
+
+void HAL::EnablePeriphery()
+{
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOE_CLK_ENABLE();
+    __HAL_RCC_GPIOF_CLK_ENABLE();
+    __HAL_RCC_GPIOG_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
+
+    __HAL_RCC_FSMC_CLK_ENABLE();
+    __HAL_RCC_I2C1_CLK_ENABLE();
+    __HAL_RCC_SPI1_CLK_ENABLE();
+    __HAL_RCC_SPI3_CLK_ENABLE();    // AD9952
 }
 
 

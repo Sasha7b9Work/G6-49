@@ -65,32 +65,12 @@ void CPU::Init()
 {
     HAL::Init();
 
-    EnablePeriphery();
-
     InitGPIOS();
 
     InitPins();
 
     WritePin(GeneratorWritePin::Pin_OutA, true);
     WritePin(GeneratorWritePin::Pin_OutB, true);
-}
-
-
-void CPU::EnablePeriphery()
-{
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-    __HAL_RCC_GPIOF_CLK_ENABLE();
-    __HAL_RCC_GPIOG_CLK_ENABLE();
-    __HAL_RCC_GPIOH_CLK_ENABLE();
-
-    __HAL_RCC_FSMC_CLK_ENABLE();
-    __HAL_RCC_I2C1_CLK_ENABLE();
-    __HAL_RCC_SPI1_CLK_ENABLE();
-    __HAL_RCC_SPI3_CLK_ENABLE();    // AD9952
 }
 
 
