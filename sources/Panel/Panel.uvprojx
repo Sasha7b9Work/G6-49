@@ -1972,16 +1972,6 @@
               <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer4XX.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.h</FilePath>
-            </File>
-            <File>
-              <FileName>Timer4XX.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer4XX.cpp</FilePath>
-            </File>
-            <File>
               <FileName>VCP_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\VCP_p.cpp</FilePath>

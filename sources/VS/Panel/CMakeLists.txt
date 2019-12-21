@@ -71,11 +71,9 @@ source_group(Hardware                 FILES                          src/Hardwar
                                                          ../../Panel/src/Hardware/CPU.h
                                                          ../../Panel/src/Hardware/Timer.h
                                                          ../../Panel/src/Hardware/Timer.cpp
-                                                         ../../Panel/src/Hardware/Timer4XX.h
                                                          ../../Panel/src/Hardware/VCP_p.h
                                                                      src/Hardware/CPU_win.cpp
                                                                      src/Hardware/LTDC_win.cpp
-                                                                     src/Hardware/Timer4XX_win.cpp
                                                                      src/Hardware/VCP_p_win.cpp)
 source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp
                                                                      src/Hardware/HAL/HAL_GPIO_win.cpp
@@ -151,13 +149,11 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/Hardware/Keyboard.cpp
                     ../../Panel/src/Hardware/Timer.h
                     ../../Panel/src/Hardware/Timer.cpp
-                    ../../Panel/src/Hardware/Timer4XX.h
                     ../../Panel/src/Hardware/VCP_p.h
                                 src/Hardware/Beeper_win.cpp
                                 src/Hardware/CPU_win.cpp
                                 src/Hardware/Keyboard_win.h
                                 src/Hardware/LTDC_win.cpp
-                                src/Hardware/Timer4XX_win.cpp
                                 src/Hardware/VCP_p_win.cpp
 
                                 src/Hardware/HAL/HAL_EEPROM_win.cpp
