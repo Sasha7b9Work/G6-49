@@ -16,7 +16,7 @@ void init()
 
     Display::Init();
 
-    Timer::PauseOnTime(1000);
+    Timer::PauseOnTime(1);
 
     setCal.Load();
 

@@ -115,7 +115,7 @@ bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
     static int prevNumByte = -1;
     if (prevNumByte != numByte || prevChar != eChar)
     {
-        prevByte = font->symbol[eChar].bytes[numByte];
+        prevByte = font->symbol[static_cast<uint8>(eChar)].bytes[numByte];
         prevChar = eChar;
         prevNumByte = numByte;
     }
@@ -556,7 +556,7 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 
 int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 {
-    int8 width = static_cast<int8>(font->symbol[symbol].width);
+    int8 width = static_cast<int8>(font->symbol[static_cast<uint8>(symbol)].width);
     int8 height = static_cast<int8>(font->height);
 
     for (int b = 0; b < height; b++)
