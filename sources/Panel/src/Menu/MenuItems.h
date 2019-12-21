@@ -1,9 +1,8 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Display/Display.h"
-#include "Hardware/Controls.h"
+#include "Keyboard/Controls.h"
 #include "MenuItemsDefs.h"
-#include "Hardware/Controls.h"
 #include "Command.h"
 #include "Utils/String.h"
 

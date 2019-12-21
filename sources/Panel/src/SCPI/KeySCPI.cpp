@@ -1,6 +1,5 @@
 #include "defines.h"
-#include "Hardware/Controls.h"
-#include "Hardware/Keyboard.h"
+#include "Keyboard/Keyboard.h"
 #include "SCPI/KeySCPI.h"
 
 

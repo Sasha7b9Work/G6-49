@@ -47,6 +47,7 @@ source_group(FreqMeter                REGULAR_EXPRESSION src/FreqMeter/*)
 source_group(Generator                REGULAR_EXPRESSION src/Generator/*)
 source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\HAL            REGULAR_EXPRESSION src/Hardware/HAL/*)
+source_group(Keyboard                 REGULAR_EXPRESSION src/Keyboard/*)
 source_group(Interface                REGULAR_EXPRESSION src/Interface/*)
 source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*)
 source_group(libs\\HAL                REGULAR_EXPRESSION src/libs/HAL/*)
@@ -77,6 +78,7 @@ file(GLOB SOURCES   ../common/Command.h
                     src/Generator/*
                     src/Hardware/*
                     src/Hardware/HAL/*
+                    src/Keyboard/*
                     src/Interface/*
                     src/libs/CMSIS/startup_stm32f429xx.s
                     src/libs/HAL/*

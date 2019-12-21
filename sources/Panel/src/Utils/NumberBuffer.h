@@ -1,6 +1,7 @@
 #pragma once
 #include "defines.h"
-#include "Hardware/Controls.h"
+#include "Keyboard/Controls.h"
+
 
 /*
     Агрегатирует функции для работы с символьным буфером, в котором хранится числовое значение.

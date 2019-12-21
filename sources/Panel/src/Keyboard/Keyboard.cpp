@@ -3,9 +3,9 @@
 #include "Display/Display.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/CPU.h"
-#include "Hardware/Keyboard.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Keyboard/Keyboard.h"
 
 
 static KeyEvent commands[10];

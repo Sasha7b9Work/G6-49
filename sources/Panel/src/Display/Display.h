@@ -1,7 +1,7 @@
 #pragma once
 #include "DisplayTypes.h"
 #include "defines.h"
-#include "Hardware/Controls.h"
+#include "Keyboard/Controls.h"
 #include "Settings/SettingsTypes.h"
 
 

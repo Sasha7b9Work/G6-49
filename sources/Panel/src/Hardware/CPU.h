@@ -1,5 +1,5 @@
 #pragma once
-#include "Hardware/Controls.h"
+#include "defines.h"
 
 
 #define PRIORITY_SOUND_DMA1_STREAM5 5, 0

@@ -68,23 +68,23 @@ source_group(Display                  FILES              ../../Panel/src/Display
                                                          ../../Panel/src/Display/Text.cpp
                                                          ../../Panel/src/Display/Text.h)                                                                     
 source_group(Hardware                 FILES                          src/Hardware/Beeper_win.cpp
-                                                         ../../Panel/src/Hardware/Controls.h
-                                                         ../../Panel/src/Hardware/Controls.cpp
                                                          ../../Panel/src/Hardware/CPU.h
-                                                         ../../Panel/src/Hardware/Keyboard.h
-                                                         ../../Panel/src/Hardware/Keyboard.cpp
                                                          ../../Panel/src/Hardware/Timer.h
                                                          ../../Panel/src/Hardware/Timer.cpp
                                                          ../../Panel/src/Hardware/Timer4XX.h
                                                          ../../Panel/src/Hardware/VCP_p.h
                                                                      src/Hardware/CPU_win.cpp
-                                                                     src/Hardware/Keyboard_win.h
                                                                      src/Hardware/LTDC_win.cpp
                                                                      src/Hardware/Timer4XX_win.cpp
                                                                      src/Hardware/VCP_p_win.cpp)
 source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp
                                                                      src/Hardware/HAL/HAL_GPIO_win.cpp
                                                                      src/Hardware/HAL/HAL_TIM4_win.cpp)
+source_group(Keyboard                 FILES              ../../Panel/src/Keyboard/Controls.h
+                                                         ../../Panel/src/Keyboard/Controls.cpp
+                                                         ../../Panel/src/Keyboard/Keyboard.h
+                                                         ../../Panel/src/Keyboard/Keyboard.cpp
+                                                                     src/Keyboard/Keyboard_win.h)
 source_group(Interface                FILES              ../../Panel/src/Interface/Handlers_p.cpp
                                                          ../../Panel/src/Interface/Handlers_p.h
                                                          ../../Panel/src/Interface/Interface_p.cpp
@@ -161,6 +161,13 @@ file(GLOB SOURCES   ../../common/Command.h
                                 src/Hardware/HAL/HAL_EEPROM_win.cpp
                                 src/Hardware/HAL/HAL_GPIO_win.cpp
                                 src/Hardware/HAL/HAL_TIM4_win.cpp
+                                
+                                
+                    ../../Panel/src/Keyboard/Controls.h
+                    ../../Panel/src/Keyboard/Controls.cpp
+                    ../../Panel/src/Keyboard/Keyboard.h
+                    ../../Panel/src/Keyboard/Keyboard.cpp
+                                src/Keyboard/Keyboard_win.h
                     
                     ../../Panel/src/Interface/Handlers_p.cpp
                     ../../Panel/src/Interface/Handlers_p.h

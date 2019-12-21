@@ -1,6 +1,5 @@
 #pragma once
 #include "Menu/MenuItems.h"
-#include "Hardware/Controls.h"
 
 
 class Hint

@@ -1952,16 +1952,6 @@
               <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
             </File>
             <File>
-              <FileName>Controls.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Controls.h</FilePath>
-            </File>
-            <File>
-              <FileName>Controls.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Controls.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CPU.h</FilePath>
@@ -1970,16 +1960,6 @@
               <FileName>CPU.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Keyboard.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Keyboard.h</FilePath>
-            </File>
-            <File>
-              <FileName>Keyboard.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Keyboard.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>
@@ -2070,6 +2050,31 @@
               <FileName>HAL_TIM4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM4.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Keyboard</GroupName>
+          <Files>
+            <File>
+              <FileName>Controls.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\Controls.h</FilePath>
+            </File>
+            <File>
+              <FileName>Controls.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\Controls.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\Keyboard.h</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\Keyboard.cpp</FilePath>
             </File>
           </Files>
         </Group>
