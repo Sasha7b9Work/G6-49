@@ -57,7 +57,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::ByteNotEmpty(s, b))
+        if (Font::RowNotEmpty(s, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
@@ -530,7 +530,7 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::ByteNotEmpty(symbol, b))
+        if (Font::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;

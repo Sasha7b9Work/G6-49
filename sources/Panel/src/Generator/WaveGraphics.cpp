@@ -25,7 +25,12 @@ void Wave::Graphics::Draw(Chan::E ch)
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
-        Text::DrawBigText(x0 + 5, y0 + 5, 2, ch == Chan::A ? "A" : "B", Color::Chan(ch));
+
+        Font::Store();
+        Font::SetType(TypeFont::_GOST28);
+        Text::DrawText(x0 + 5, y0 + 5, (ch == Chan::A) ? "A" : "B", Color::Chan(ch));
+        Font::Restore();
+
         FORM(ch)->DrawUGO(ch, y0);
         DrawParameters(ch, y0);
     }

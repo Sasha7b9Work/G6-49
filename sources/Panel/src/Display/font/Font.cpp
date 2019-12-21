@@ -1,7 +1,8 @@
 #include "defines.h"
 #include "Display/DisplayTypes.h"
 #include "Display/Text.h"
-#include "Font.h"
+#include "Display/Font/AdvancedFont.h"
+#include "Display/Font/Font.h"
 #include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
 
@@ -15,7 +16,8 @@ static const Font *fonts[TypeFont::Count] = {&font5, &font7, &font8};
 static const Font *font = &font7;
 
 
-static TypeFont::E type = TypeFont::_5;
+TypeFont::E Font::type = TypeFont::_5;
+TypeFont::E Font::savedFont = TypeFont::Count;
 
 
 int Font::GetSize()
@@ -61,7 +63,16 @@ int Font::GetLengthSymbol(char symbol)
 void Font::SetType(TypeFont::E typeFont)
 {
     type = typeFont;
-    font = fonts[type];
+
+    if(type >= TypeFont::_GOST28)
+    {
+        AdvancedFont::Set(type);
+        font = nullptr;
+    }
+    else
+    {
+        font = fonts[type];
+    }
 }
 
 
@@ -73,18 +84,33 @@ int8 Font::Width(char symbol)
 
 int8 Font::Width(uint8 symbol)
 {
+    if(IsAdvanced())
+    {
+        return static_cast<int8>(AdvancedFont::GetWidth(symbol));
+    }
+
     return static_cast<int8>(font->symbol[symbol].width);
 }
 
 
 int8 Font::Height()
 {
+    if(IsAdvanced())
+    {
+        return static_cast<int8>(AdvancedFont::GetHeight());
+    }
+
     return static_cast<int8>(font->height);
 }
 
 
-bool Font::ByteNotEmpty(int s, int byte)
+bool Font::RowNotEmpty(int s, int row)
 {
+    if(IsAdvanced())
+    {
+        return AdvancedFont::RowNotEmpty(static_cast<uint8>(s), row);
+    }
+
     static const uint8 *bytes = 0;
     static int prevChar = -1;
     if(s != prevChar)
@@ -92,20 +118,43 @@ bool Font::ByteNotEmpty(int s, int byte)
         prevChar = s;
         bytes = font->symbol[static_cast<uint8>(prevChar)].bytes;
     }
-    return bytes[byte] != 0;
+    return bytes[row] != 0;
 }
 
 
-bool Font::BitIsExist(int s, int byte, int bit)
+bool Font::BitIsExist(int s, int row, int bit)
 {
+    if(IsAdvanced())
+    {
+        return AdvancedFont::BitIsExist(static_cast<uint8>(s), row, bit);
+    }
+
     static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
     static int prevChar = -1;
     static int prevNumByte = -1;
-    if(prevNumByte != byte || prevChar != s)
+    if(prevNumByte != row || prevChar != s)
     {
-        prevByte = font->symbol[static_cast<uint8>(s)].bytes[byte];
+        prevByte = font->symbol[static_cast<uint8>(s)].bytes[row];
         prevChar = s;
-        prevNumByte = byte;
+        prevNumByte = row;
     }
     return prevByte & (1 << bit);
+}
+
+
+void Font::Store()
+{
+    savedFont = type;
+}
+
+
+void Font::Restore()
+{
+    SetType(savedFont);
+}
+
+
+bool Font::IsAdvanced()
+{
+    return (type >= TypeFont::_GOST28);
 }

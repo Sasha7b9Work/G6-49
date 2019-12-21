@@ -38,11 +38,11 @@ TypeFont::E AdvancedFont::currentType = TypeFont::Count;
 static const unsigned char * font = nullptr;
 
 
-AdvancedFont::AdvancedFont(TypeFont::E t)
+void AdvancedFont::Set(TypeFont::E type)
 {
-    currentType = t;
-    
-    if(currentType == TypeFont::_GOST28)
+    currentType = type;
+
+    if(type == TypeFont::_GOST28)
     {
         font = fontGOST28;
     }
