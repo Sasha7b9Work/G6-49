@@ -4,6 +4,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
+#include "SCPI/SCPI.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 
@@ -36,5 +37,7 @@ void update()
     Display::Update();
 
     PInterface::Update();
+
+    SCPI::Update();
 }
 
