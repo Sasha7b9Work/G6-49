@@ -2,11 +2,6 @@
 #include "defines.h"
 
 
-
-#define ERROR_HANDLER() CPU::ErrorHandler()
-
-
-
 /// Порты записи
 struct GeneratorWritePin
 {
@@ -79,9 +74,6 @@ struct CPU
 
     static bool ReadPin(GeneratorReadPin pin);
 
-    static void ErrorHandler();
-
-   
 private:
 
     static void EnablePeriphery();
@@ -90,26 +82,3 @@ private:
     /// Начальная инициализация управляющих выводов
     static void InitPins();
 };
-
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-    /// Прерывание на таймер
-    void TIM3_IRQHandler();
-
-    void NMI_Handler();
-    void HardFault_Handler();
-    void MemManage_Handler();
-    void BusFault_Handler();
-    void UsageFault_Handler();
-    void SVC_Handler();
-    void DebugMon_Handler();
-    void PendSV_Handler();
-    void SysTick_Handler();
-
-#ifdef __cplusplus
-}
-#endif

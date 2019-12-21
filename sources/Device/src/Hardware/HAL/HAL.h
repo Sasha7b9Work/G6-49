@@ -5,6 +5,21 @@
 struct CalibrationSettings;
 
 
+#define ERROR_HANDLER() HAL::ErrorHandler()
+
+
+struct HAL
+{
+    static void Init();
+
+    static void ErrorHandler();
+
+private:
+
+    static void SystemClockConfig();
+};
+
+
 struct HAL_CRC32
 {
     static uint Calculate(const uint8 *address, uint size);

@@ -1446,6 +1446,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_CRC32.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
