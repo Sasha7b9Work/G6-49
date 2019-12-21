@@ -143,17 +143,15 @@ void InputWindow::DrawDigits(int x, int y)
     {
         Painter::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, Color::BACK);
 
-        Color::FILL.SetAsCurrent();
-
         if (i == hightLightDigit)
         {
-            HighlightPosition(x, y);
+            HighlightPosition(x + 5, y);
         }
 
         char buf[2] = { pointer[i], 0 };
 
         Font::Set(TypeFont::_GOST28);
-        Text::Draw(x + 2, y + 4, buf);
+        Text::Draw(x + 2, y + 4, buf, Color::FILL);
 
         x += 18;
 
@@ -181,8 +179,8 @@ void InputWindow::DrawUnits(int x, int y)
 void InputWindow::HighlightPosition(int x, int y)
 {
     Font::Set(TypeFont::_8);
-    Text::Draw4SymbolsInRect(x + 2, y - 10, Ideograph::_8::FillDown);
-    Text::Draw4SymbolsInRect(x + 2, y + 35, Ideograph::_8::FillUp);
+    Text::Draw4SymbolsInRect(x, y - 7, Ideograph::_8::FillDown, Color::GRAY_75);
+    Text::Draw4SymbolsInRect(x, y + 30, Ideograph::_8::FillUp);
     Font::Set(TypeFont::_7);
 }
 

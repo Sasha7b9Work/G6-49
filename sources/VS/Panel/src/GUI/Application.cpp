@@ -11,7 +11,9 @@ extern void init();
 
 enum
 {
-    Minimal_Quit = wxID_EXIT
+    FILE_QUIT = wxID_EXIT,
+
+    TOOL_SCPI
 };
 
 enum
@@ -19,13 +21,8 @@ enum
     TIMER_ID = 1
 };
 
-wxBEGIN_EVENT_TABLE(Frame, wxFrame)
-    EVT_MENU(Minimal_Quit, Frame::OnQuit)
-    EVT_TIMER(TIMER_ID, Frame::OnTimer)
-wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
-
 
 
 int main(int argc, char **argv)
@@ -58,16 +55,24 @@ Frame::Frame(const wxString& title)
     SetIcon(wxICON(sample));
 
     wxMenu *fileMenu = new wxMenu;
+    wxMenu *toolsMenu = new wxMenu;
 
-    fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
+    fileMenu->Append(FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
+
+    toolsMenu->Append(TOOL_SCPI, "SCPI");
 
     wxMenuBar *menuBar = new wxMenuBar();
-    menuBar->Append(fileMenu, "&File");
+    menuBar->Append(fileMenu, "Файл");
+    menuBar->Append(toolsMenu, "Инструменты");
 
     SetMenuBar(menuBar);
 
     CreateStatusBar(2);
     SetStatusText("Welcome to wxWidgets!");
+
+    Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
+    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
+    Bind(wxEVT_MENU, &Frame::OnSCPI, this, TOOL_SCPI);
 
     timer.Start(0);
 }
@@ -113,4 +118,10 @@ void Frame::DrawFPS()
 void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);
+}
+
+
+void Frame::OnSCPI(wxCommandEvent &)
+{
+
 }

@@ -20,10 +20,10 @@ public:
 
     void OnQuit(wxCommandEvent &);
     void OnTimer(wxTimerEvent &);
+    void OnSCPI(wxCommandEvent &);
 
 private:
     wxTimer timer;
-    wxDECLARE_EVENT_TABLE(); //-V2504
 
     void DrawFPS();
     void HandlerEvents();
