@@ -112,10 +112,10 @@ struct HAL_PIO
     static void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
     /// Установка в "1"
     static void Set(HPort::E port, uint16 pin);
-    static void Set(StructPIN &pin);
+    static void Set(const StructPIN &pin);
     /// Установка в "0"
     static void Reset(HPort::E port, uint16 pin);
-    static void Reset(StructPIN &pin);
+    static void Reset(const StructPIN &pin);
 
     static void Write(HPort::E port, uint16 pin, HState::E state);
     static void Write(HPort::E port, uint16 pin, bool state);

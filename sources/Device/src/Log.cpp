@@ -4,7 +4,7 @@
 #include <cstdio>
 
 
-void Log::AddString(char *format, ...)
+void Log::AddString(char *format, ...) //-V2560
 {
     char string[100];
 
