@@ -49,7 +49,7 @@ struct HAL_FSMC
 };
 
 
-struct HAL_GPIO
+struct HAL_PIO
 {
     static void WritePin(char port, uint16 maskPin, bool state);
 

@@ -2,13 +2,13 @@
 #include "Hardware/HAL/HAL.h"
 
 
-void HAL_GPIO::WritePin(char, uint16, bool)
+void HAL_PIO::WritePin(char, uint16, bool)
 {
 
 }
 
 
-bool HAL_GPIO::ReadPin(char, uint16)
+bool HAL_PIO::ReadPin(char, uint16)
 {
     return true;
 }

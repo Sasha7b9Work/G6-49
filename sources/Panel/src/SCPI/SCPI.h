@@ -1,4 +1,5 @@
 #pragma once
+#include "CommonTypes.h"
 
 
 /*
@@ -92,4 +93,6 @@ namespace SCPI
     {
         bool Processing(SimpleMessage *message);
     }
+    /// ѕо этому каналу сейчас происходит упраление
+    extern Chan::E controlChannel;
 };

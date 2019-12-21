@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "SCPI/ChannelSCPI.h"
 #include "SCPI/KeySCPI.h"
 #include "SCPI/HeadSCPI.h"
 #include "Utils/String.h"
@@ -29,6 +30,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF("*RST",      FuncReset,      TestReset, "Reset settings to default values", HintReset),
     SCPI_LEAF(":HELP",     FuncHelp,       TestHelp,  "Output of this help",              HintHelp),
     SCPI_LEAF(":TEST",     FuncTest,       TestTest,  "Run all tests",                    HintTest),
+    SCPI_NODE(":CHANNEL",  SCPI::channel),
     SCPI_NODE(":KEY",      SCPI::key),
     SCPI_EMPTY()
 };

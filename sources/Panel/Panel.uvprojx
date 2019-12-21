@@ -2017,11 +2017,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_GPIO.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_GPIO.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_IT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
@@ -2030,6 +2025,11 @@
               <FileName>HAL_LTDC.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_LTDC.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PIO.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PIO.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_SPI4.cpp</FileName>
