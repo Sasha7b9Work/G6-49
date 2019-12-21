@@ -15,9 +15,9 @@ if (COMMAND cmake_policy)
 endif ()
 
 # Set project name
-project (G6-49)
+project (G6-49_GUI)
 
-set (TARGET_NAME G6-49)
+set (TARGET_NAME G6-49_GUI)
 
 add_subdirectory(Panel)
 add_subdirectory(Editor)
