@@ -14,6 +14,7 @@ struct Timer
         enum E
         {
             StopSound,      ///< Выключить звук
+            Temp,
             Count
         } value;
         Type(E v) : value(v) {};

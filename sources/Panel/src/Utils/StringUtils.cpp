@@ -415,17 +415,19 @@ int SU::FindSymbol(const char *string, char symbol)
 
 char SU::ToUpper(char symbol)
 {
-    if(symbol >= 0xe0) //-V547
+    uint8 s = static_cast<uint8>(symbol);
+
+    if(s >= 0xe0) //-V547
     {
-        return symbol - 0x20;
+        return s - 0x20;
     }
-    else if (symbol == 0xb8) //-V547
+    else if (s == 0xb8) //-V547
     {
-        return symbol - 0x10;
+        return s - 0x10;
     }
-    else if (symbol <= 0x7a)
+    else if (s <= 0x7a)
     {
-        return static_cast<char>(std::toupper(symbol));
+        return static_cast<char>(std::toupper(s));
     }
     else
     {

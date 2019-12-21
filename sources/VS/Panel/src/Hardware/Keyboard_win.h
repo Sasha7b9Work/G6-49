@@ -4,7 +4,7 @@ static KeyEvent commands[10];
 static int pointer = 0;
 
 
-static void AddKeyboardEvent(KeyEvent &event)
+static void AddKeyboardEvent(const KeyEvent &event)
 {
     commands[pointer++] = event;
 }

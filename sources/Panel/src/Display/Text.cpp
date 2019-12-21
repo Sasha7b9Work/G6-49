@@ -22,15 +22,10 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
     Painter::SetColor(color);
 
-    __IO char symbols[4];
-    int pointer = 0;
-
     for (char i = 0; i < 2; i++)
     {
         DrawChar(x + 8 * i, y, eChar + i);
-        symbols[pointer++] = eChar + i;
         DrawChar(x + 8 * i, y + 8, eChar + i + 16);
-        symbols[pointer++] = eChar + i + 16;
     }
 }
 
@@ -55,19 +50,21 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
         symbol = SU::ToUpper(symbol);
     }
 
-    int8 width = static_cast<int8>(font->symbol[static_cast<uint8>(symbol)].width);
+    uint8 s = static_cast<uint8>(symbol);
+
+    int8 width = static_cast<int8>(font->symbol[s].width);
     int8 height = static_cast<int8>(font->height);
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (ByteFontNotEmpty(s, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(static_cast<uint8>(symbol), b, bit))
+                if (BitInFontIsExist(s, b, bit))
                 {
                     Painter::SetPoint(x, y);
                 }
