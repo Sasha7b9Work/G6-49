@@ -106,9 +106,11 @@ void InputWindow::DrawDigits(int x, int y)
 
     if (!FREQ_METER_ENABLED)
     {
+        Font::Store();
         Font::Set(TypeFont::_GOSTB20);
         Text::SetUpperCase(false);
         Text::Draw(x, y, param->Name());
+        Font::Restore();
     }
 
     y += 40;
