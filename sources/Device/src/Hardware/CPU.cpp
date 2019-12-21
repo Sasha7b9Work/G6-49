@@ -25,15 +25,9 @@ void CPU::Init()
 
 void CPU::InitGPIOS()
 {
-    GPIO_InitTypeDef isGPIO;
-
-    // Ќа этом пине будем выставл€ть зан€тость генератора
-    isGPIO.Pin = GPIO_PIN_2;
-    isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-    isGPIO.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &isGPIO);
-
     SetBusy();
+
+    GPIO_InitTypeDef isGPIO;
 
     isGPIO.Pin = GPIO_PIN_12 | GPIO_PIN_14 | GPIO_PIN_15;
     isGPIO.Mode = GPIO_MODE_AF_PP;
@@ -53,7 +47,7 @@ void CPU::InitGPIOS()
 
 void CPU::SetBusy()
 {
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+    HAL_PIO::Reset(WR_CPU_BUSY);
 
     timeBusy = TIME_MS;
 }
@@ -65,5 +59,5 @@ void CPU::SetReady()
     {
     };
 
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
+    HAL_PIO::Set(WR_CPU_BUSY);
 }

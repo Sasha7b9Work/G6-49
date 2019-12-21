@@ -28,6 +28,7 @@
 #define WR_FREQ_METER_COUPLE    HPort::_G, HPin::_13
 #define WR_FREQ_METER_FILTR     HPort::_G, HPin::_14
 #define WR_FREQ_METER_CLK       HPort::_C, HPin::_1     ///< Пин формирования тактов чтения измеренного значения
+#define WR_CPU_BUSY             HPort::_A, HPin::_2     ///< Сигнал занятости процессора. 0 - процессор занят
 
 
 // Пины чтения

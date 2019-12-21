@@ -161,6 +161,7 @@ void HAL_PIO::Init()
         {WR_FREQ_METER_COUPLE},
         {WR_FREQ_METER_FILTR },
         {WR_FREQ_METER_CLK   },
+        {WR_CPU_BUSY         },
         {HPort::Count, 0}
     };
 
