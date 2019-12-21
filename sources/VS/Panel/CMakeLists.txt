@@ -67,21 +67,24 @@ source_group(Display                  FILES              ../../Panel/src/Display
                                                          ../../Panel/src/Display/Symbols.h
                                                          ../../Panel/src/Display/Text.cpp
                                                          ../../Panel/src/Display/Text.h)                                                                     
-source_group(Hardware                 FILES              ../../Panel/src/Hardware/Controls.cpp
+source_group(Hardware                 FILES                          src/Hardware/Beeper_win.cpp
                                                          ../../Panel/src/Hardware/Controls.h
+                                                         ../../Panel/src/Hardware/Controls.cpp
                                                          ../../Panel/src/Hardware/CPU.h
+                                                         ../../Panel/src/Hardware/Keyboard.h
+                                                         ../../Panel/src/Hardware/Keyboard.cpp
+                                                         ../../Panel/src/Hardware/Timer.h
+                                                         ../../Panel/src/Hardware/Timer.cpp
+                                                         ../../Panel/src/Hardware/Timer4XX.h
+                                                         ../../Panel/src/Hardware/VCP_p.h
                                                                      src/Hardware/CPU_win.cpp
                                                                      src/Hardware/Keyboard_win.h
-                                                         ../../Panel/src/Hardware/LTDC.h
                                                                      src/Hardware/LTDC_win.cpp
-                                                         ../../Panel/src/Hardware/stm429.h
-                                                         ../../Panel/src/Hardware/Timer.cpp
-                                                         ../../Panel/src/Hardware/Timer.h
-                                                         ../../Panel/src/Hardware/Timer4XX.h
                                                                      src/Hardware/Timer4XX_win.cpp
-                                                                     src/Hardware/VCP_p_win.cpp
-                                                         ../../Panel/src/Hardware/VCP_p.h)
-source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp)
+                                                                     src/Hardware/VCP_p_win.cpp)
+source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp
+                                                                     src/Hardware/HAL/HAL_GPIO_win.cpp
+                                                                     src/Hardware/HAL/HAL_TIM4_win.cpp)
 source_group(Interface                FILES              ../../Panel/src/Interface/Handlers_p.cpp
                                                          ../../Panel/src/Interface/Handlers_p.h
                                                          ../../Panel/src/Interface/Interface_p.cpp
@@ -122,6 +125,7 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/stdafx.cpp
                     ../../Panel/src/stdafx.h
                     ../../Panel/src/structs.h
+                    
                     ../../Panel/src/Display/Colors.cpp
                     ../../Panel/src/Display/Colors.h
                     ../../Panel/src/Display/Console.cpp
@@ -137,29 +141,37 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/Display/Symbols.h
                     ../../Panel/src/Display/Text.cpp
                     ../../Panel/src/Display/Text.h
-                    ../../Panel/src/Hardware/Controls.cpp
+                    
                     ../../Panel/src/Hardware/Controls.h
+                    ../../Panel/src/Hardware/Controls.cpp
                     ../../Panel/src/Hardware/CPU.h
-                    ../../Panel/src/Hardware/LTDC.h
-                    ../../Panel/src/Hardware/stm429.h
-                    ../../Panel/src/Hardware/Timer.cpp
+                    ../../Panel/src/Hardware/Keyboard.h
+                    ../../Panel/src/Hardware/Keyboard.cpp
                     ../../Panel/src/Hardware/Timer.h
+                    ../../Panel/src/Hardware/Timer.cpp
                     ../../Panel/src/Hardware/Timer4XX.h
-                                src/Hardware/VCP_p_win.cpp
                     ../../Panel/src/Hardware/VCP_p.h
+                                src/Hardware/Beeper_win.cpp
+                                src/Hardware/CPU_win.cpp
+                                src/Hardware/Keyboard_win.h
+                                src/Hardware/LTDC_win.cpp
+                                src/Hardware/Timer4XX_win.cpp
+                                src/Hardware/VCP_p_win.cpp
+
+                                src/Hardware/HAL/HAL_EEPROM_win.cpp
+                                src/Hardware/HAL/HAL_GPIO_win.cpp
+                                src/Hardware/HAL/HAL_TIM4_win.cpp
+                    
                     ../../Panel/src/Interface/Handlers_p.cpp
                     ../../Panel/src/Interface/Handlers_p.h
                     ../../Panel/src/Interface/Interface_p.cpp
                     ../../Panel/src/Interface/Interface_p.h
                                 src/Interface/Transceiver_p_win.cpp
+                                
                     ../../Panel/src/libs/CMSIS/startup_stm32f429xx.s
                                 src/GUI/*
                                 src/Display/Painter_win.cpp
-                                src/Hardware/CPU_win.cpp
-                                src/Hardware/Keyboard_win.h
-                                src/Hardware/LTDC_win.cpp
-                                src/Hardware/Timer4XX_win.cpp
-                                src/Hardware/HAL/HAL_EEPROM_win.cpp
+
                     ../../Panel/src/Display/font/*
                     ../../Panel/src/FDrive/*
                     ../../Panel/src/FreqMeter/*

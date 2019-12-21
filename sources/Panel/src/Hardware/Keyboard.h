@@ -1,13 +1,10 @@
 #pragma once
+#include "Hardware/Controls.h"
 
 
 struct Keyboard
 {
     friend class CPU;
-
-private:
-
-    static void Init();
 
 public:
     static void InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL);
@@ -18,7 +15,11 @@ public:
     /// Функция-заглушка. Для эмулятора, на котором нет физической клавиатуры и нужно её рисовать на экране
     static void Draw();
 
+    static void AppendEvent(KeyEvent::E key, KeyEvent::Action::E action);
+
 private:
+
+    static void Init();
 
     static void Update();
 };

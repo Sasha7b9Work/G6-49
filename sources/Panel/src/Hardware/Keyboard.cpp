@@ -13,7 +13,6 @@ static int pointer = 0;
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 
 
-static void FillCommand(KeyEvent::E control, KeyEvent::Action::E action);
 static void DetectRegulator();
 
 #define SL0 (1 << 12)
@@ -104,13 +103,13 @@ void Keyboard::Update()
                     if(delta > 500)                                             // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        FillCommand(controls[rl][sl], KeyEvent::Action::Long);   // это будет длинное нажатие
+                        AppendEvent(controls[rl][sl], KeyEvent::Action::Long);   // это будет длинное нажатие
                     }
                     else if (delta > 100 &&                                     // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                                // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
-                        FillCommand(controls[rl][sl], KeyEvent::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
+                        AppendEvent(controls[rl][sl], KeyEvent::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
                     else
                     {
@@ -120,7 +119,7 @@ void Keyboard::Update()
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
                 {
                     timePress[rl][sl] = time;                                       // то сохраняем время её нажатия
-                    FillCommand(controls[rl][sl], KeyEvent::Action::Down);
+                    AppendEvent(controls[rl][sl], KeyEvent::Action::Down);
                 }
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
@@ -162,7 +161,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
         {
-            FillCommand(KeyEvent::RegButton, KeyEvent::Action::Long);                                     // посылаем длинное нажатие
+            Keyboard::AppendEvent(KeyEvent::RegButton, KeyEvent::Action::Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -174,7 +173,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                FillCommand(KeyEvent::RegButton, KeyEvent::Action::Down);
+                Keyboard::AppendEvent(KeyEvent::RegButton, KeyEvent::Action::Down);
             }
         }
         else                                                                // Ексли копка была нажата ранее
@@ -183,7 +182,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    FillCommand(KeyEvent::RegButton, KeyEvent::Action::Up);
+                    Keyboard::AppendEvent(KeyEvent::RegButton, KeyEvent::Action::Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -204,12 +203,12 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        FillCommand(KeyEvent::RegLeft, KeyEvent::Action::Down);
+        Keyboard::AppendEvent(KeyEvent::RegLeft, KeyEvent::Action::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        FillCommand(KeyEvent::RegRight, KeyEvent::Action::Down);
+        Keyboard::AppendEvent(KeyEvent::RegRight, KeyEvent::Action::Down);
         prevStatesIsOne = false;
     }
     else
@@ -219,7 +218,7 @@ static void DetectRegulator()
 }
 
 
-static void FillCommand(KeyEvent::E key, KeyEvent::Action::E action)
+void Keyboard::AppendEvent(KeyEvent::E key, KeyEvent::Action::E action)
 {
     commands[pointer++] = KeyEvent(key, action);
 
@@ -254,7 +253,9 @@ KeyEvent Keyboard::GetNextControl()
     return retValue;
 }
 
-
+#ifdef WIN32
+void Keyboard::InitInputs(const uint16 *, const char *, int, const uint16 *, const char *, int) {}
+#else
 void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL)
 {
     GPIO_InitTypeDef isGPIO;
@@ -279,6 +280,7 @@ void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const
     isGPIO.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(GPIOC, &isGPIO);
 }
+#endif
 
 
 const char *PanelControlName(const KeyEvent &control)

@@ -2257,6 +2257,16 @@
               <FilePath>.\src\SCPI\HeadSCPI.cpp</FilePath>
             </File>
             <File>
+              <FileName>KeySCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\KeySCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>KeySCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\KeySCPI.cpp</FilePath>
+            </File>
+            <File>
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
