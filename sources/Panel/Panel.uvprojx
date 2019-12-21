@@ -1802,9 +1802,24 @@
           <GroupName>Display/Font</GroupName>
           <Files>
             <File>
+              <FileName>AdvancedFont.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Font\AdvancedFont.h</FilePath>
+            </File>
+            <File>
+              <FileName>AdvancedFont.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Font\AdvancedFont.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\font\Font.h</FilePath>
+            </File>
+            <File>
+              <FileName>Font.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\font\Font.cpp</FilePath>
             </File>
             <File>
               <FileName>font5.inc</FileName>
@@ -1812,14 +1827,19 @@
               <FilePath>.\src\Display\font\font5.inc</FilePath>
             </File>
             <File>
+              <FileName>font7.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Font\font7.inc</FilePath>
+            </File>
+            <File>
               <FileName>font8.inc</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\font\font8.inc</FilePath>
             </File>
             <File>
-              <FileName>Font.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\font\Font.cpp</FilePath>
+              <FileName>fontGOST28.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Font\fontGOST28.inc</FilePath>
             </File>
           </Files>
         </Group>
