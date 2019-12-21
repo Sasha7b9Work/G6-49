@@ -6,7 +6,7 @@
 #include <cstring>
 
 
-void VCP::SendStringAsynch(const char *data)
+void PVCP::SendStringAsynch(const char *data)
 {
     char *mes = const_cast<char *>(data);
 
