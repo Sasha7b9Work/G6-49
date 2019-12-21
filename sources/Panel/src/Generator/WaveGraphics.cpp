@@ -25,7 +25,7 @@ void Wave::Graphics::Draw(Chan::E ch)
     if (CHANNEL_ENABLED(ch))
     {
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
-        Text::DrawBigText(x0 + 5, y0 + 5, 2, ch == Chan::A ? "A" : "B", Color::FILL);
+        Text::DrawBigText(x0 + 5, y0 + 5, 2, ch == Chan::A ? "A" : "B", Color::Chan(ch));
         FORM(ch)->DrawUGO(ch, y0);
         DrawParameters(ch, y0);
     }
@@ -64,7 +64,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
 
     y0 += 5;
 
-    String(form->Name()).Draw(22, y0 + 3, Color::FILL);
+    String(form->Name()).Draw(22, y0 + 3, Color::Chan(ch));
     
     for (int i = 0; i < form->NumParameters(); i++)
     {
@@ -75,7 +75,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
             Painter::FillRegion(x0, y0, 139, 9, Color::GRAY_25);
         }
         
-        String(param->Name()).Draw(x0 + 1, y0, Color::FILL);
+        String(param->Name()).Draw(x0 + 1, y0, Color::Chan(ch));
         
         DrawParameterValue(param, x0 + 80, y0);
         y0 += 11;

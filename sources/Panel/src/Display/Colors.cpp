@@ -28,6 +28,8 @@ Color Color::RED(COLOR_RED);
 Color Color::RED_25(COLOR_RED_25);
 Color Color::RED_50(COLOR_RED_50);
 Color Color::RED_75(COLOR_RED_75);
+Color Color::CHAN_A(COLOR_CHAN_A);
+Color Color::CHAN_B(COLOR_CHAN_B);
 
 Color Color::NUMBER(COLOR_NUMBER);
 
@@ -248,4 +250,10 @@ Color& Color::operator=(const Color &color)
 {
     value = color.value;
     return *this;
+}
+
+
+Color Color::Chan(Chan::E ch)
+{
+    return (ch == Chan::A) ? CHAN_A : CHAN_B;
 }

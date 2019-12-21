@@ -28,6 +28,8 @@ public:
     static Color RED_25;
     static Color RED_50;
     static Color RED_75;
+    static Color CHAN_A;
+    static Color CHAN_B;
     
     static Color NUMBER;
 
@@ -50,6 +52,7 @@ public:
     static Color BorderMenu(bool shade);    ///< Цвет окантовки меню
     static Color LightShadingText();        ///< Светлый цвет в тени.
     static Color Contrast(Color color);     ///< Возвращает цвет, контрастный к color. Может быть белым или чёрным.
+    static Color Chan(Chan::E ch);
     
     uint8 value;
 
@@ -82,6 +85,8 @@ private:
         COLOR_RED_25,
         COLOR_RED_50,
         COLOR_RED_75,
+        COLOR_CHAN_A,
+        COLOR_CHAN_B,
 
         COLOR_NUMBER,
 
