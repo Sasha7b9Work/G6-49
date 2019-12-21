@@ -11,12 +11,12 @@
 
 
 
-USBD_HandleTypeDef VCP::handleUSBD;
-bool               VCP::cableUSBisConnected = false;
-bool               VCP::connectedToUSB = false;
+USBD_HandleTypeDef DVCP::handleUSBD;
+bool               DVCP::cableUSBisConnected = false;
+bool               DVCP::connectedToUSB = false;
 
 
-void VCP::Init()
+void DVCP::Init()
 {
     HAL_PCD::Init();
 
@@ -27,7 +27,7 @@ void VCP::Init()
 } 
 
 
-bool VCP::PrevSendingComplete()
+bool DVCP::PrevSendingComplete()
 {
     USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(handleUSBD.pClassData);
     return pCDC->TxState == 0;
@@ -39,7 +39,7 @@ bool VCP::PrevSendingComplete()
 //static int sizeBuffer = 0;
 
 
-void VCP::SendData(const void *_buffer, uint size)
+void DVCP::SendData(const void *_buffer, uint size)
 {
     volatile USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(handleUSBD.pClassData);
 
@@ -49,26 +49,26 @@ void VCP::SendData(const void *_buffer, uint size)
 }
 
 
-void VCP::SendString(char *data)
+void DVCP::SendString(char *data)
 {
     SendData(reinterpret_cast<uint8 *>(data), std::strlen(data));
 }
 
 
-void VCP::SendStringEOF(char *data)
+void DVCP::SendStringEOF(char *data)
 {
     SendString(data);
     //SendByte(0x0d);
 }
 
 
-void VCP::SendByte(uint8 byte)
+void DVCP::SendByte(uint8 byte)
 {
     SendData(&byte, 1);
 }
 
 
-void VCP::Handler::Processing(SimpleMessage *msg)
+void DVCP::Handler::Processing(SimpleMessage *msg)
 {
-    VCP::SendData(msg->Data(5), msg->TakeWord());
+    DVCP::SendData(msg->Data(5), msg->TakeWord());
 }

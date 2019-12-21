@@ -61,7 +61,7 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestFileString  */ DDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ DDrive::Handler::Processing,
         /* FDrive_GetPictureDDS      */ DDrive::Handler::Processing,
-        /* SCPI_RecvData             */ VCP::Handler::Processing
+        /* SCPI_RecvData             */ DVCP::Handler::Processing
     };
 
     uint8 com = msg->TakeByte();

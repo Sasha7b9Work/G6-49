@@ -6,7 +6,7 @@
 class SimpleMessage;
 
 
-struct VCP
+struct DVCP
 {
     static const int DEVICE_FS = 0;
 

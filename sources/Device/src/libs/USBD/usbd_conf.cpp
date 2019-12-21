@@ -25,12 +25,12 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
     {                                                               //
         if (prevLength != 0)                                        //
         {                                                           //
-            VCP::cableUSBisConnected = true;                        // Ёто потому, что при включении прибора с подключенным шнуром
-            VCP::connectedToUSB = true;                             // GOVNOCODE “аким вот замысловатым образом определ€ем, что к нам подконнектилс€ хост (
+            DVCP::cableUSBisConnected = true;                       // Ёто потому, что при включении прибора с подключенным шнуром
+            DVCP::connectedToUSB = true;                            // GOVNOCODE “аким вот замысловатым образом определ€ем, что к нам подконнектилс€ хост (
         }                                                           //
         else                                                        //
         {                                                           //
-            VCP::connectedToUSB = false;                            //
+            DVCP::connectedToUSB = false;                           //
         }                                                           /// \todo ¬озможно, это не нужно делать
     }                                                               //
     prevLength = request.wLength;                                   //
