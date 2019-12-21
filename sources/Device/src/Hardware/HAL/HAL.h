@@ -59,7 +59,7 @@ struct HAL_PCD
 {
     static void Init();
 
-    static PCD_HandleTypeDef handle;
+    static PCD_HandleTypeDef _handle;
 };
 
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Hardware/HAL/HAL_PINS.h"
 
 
 struct HPort
