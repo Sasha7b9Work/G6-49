@@ -189,7 +189,7 @@ int String::Draw(int x, int y, Color color) const
 {
     color.SetAsCurrent();
 
-    return Text::DrawText(x, y, c_str());
+    return Text::Draw(x, y, c_str());
 }
 
 

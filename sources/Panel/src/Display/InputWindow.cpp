@@ -108,7 +108,7 @@ void InputWindow::DrawDigits(int x, int y)
     {
         Font::SetType(TypeFont::_GOSTB20);
         Text::SetUpperCase(false);
-        Text::DrawText(x, y, param->Name());
+        Text::Draw(x, y, param->Name());
     }
 
     y += 40;
@@ -170,7 +170,7 @@ void InputWindow::DrawUnits(int x, int y)
 
     Font::SetType(TypeFont::_GOST28);
     Text::SetUpperCase(false);
-    Text::DrawText(x + 5, y - 1, param->NameUnit(buffer));
+    Text::Draw(x + 5, y - 1, param->NameUnit(buffer));
 }
 
 

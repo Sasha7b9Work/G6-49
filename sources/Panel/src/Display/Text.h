@@ -53,7 +53,7 @@ struct Text
     /// Если true, то все буквы выводятся в верхнем регистре
     static bool IsUpperCase();
 
-    static int DrawText(int x, int y, pString text, Color color = Color::NUMBER);
+    static int Draw(int x, int y, pString text, Color color = Color::NUMBER);
 
 private:
     /// Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
