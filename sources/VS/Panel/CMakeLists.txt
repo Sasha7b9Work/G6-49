@@ -81,6 +81,7 @@ source_group(Hardware                 FILES              ../../Panel/src/Hardwar
                                                                      src/Hardware/Timer4XX_win.cpp
                                                          ../../Panel/src/Hardware/VCP.cpp
                                                          ../../Panel/src/Hardware/VCP.h)
+source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp)
 source_group(Interface                FILES              ../../Panel/src/Interface/Handlers_p.cpp
                                                          ../../Panel/src/Interface/Handlers_p.h
                                                          ../../Panel/src/Interface/Interface_p.cpp
@@ -158,7 +159,7 @@ file(GLOB SOURCES   ../../common/Command.h
                                 src/Hardware/Keyboard_win.h
                                 src/Hardware/LTDC_win.cpp
                                 src/Hardware/Timer4XX_win.cpp
-                                src/Hardware/Modules/EEPROM_win.cpp
+                                src/Hardware/HAL/HAL_EEPROM_win.cpp
                     ../../Panel/src/Display/font/*
                     ../../Panel/src/FDrive/*
                     ../../Panel/src/FreqMeter/*
