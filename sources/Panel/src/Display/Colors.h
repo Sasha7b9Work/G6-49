@@ -58,9 +58,15 @@ public:
 
     static void InitGlobalColors();
 
+    void SetAsCurrent() const;
+    static Color GetCurrent();
+    static uint8 CurrentValue();
+
     Color& operator=(const Color &color);
 
 private:
+
+    static Color current;
 
     enum
     {

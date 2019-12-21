@@ -20,7 +20,7 @@ void Text::SetUpperCase(bool upper)
 
 void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     for (char i = 0; i < 2; i++)
     {
@@ -43,7 +43,7 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString te
 
 int Text::DrawChar(int eX, int eY, char symbol, Color color)
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     if (upperCase)
     {
@@ -79,7 +79,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
 
 int Text::DrawText(int x, int y, pString text, Color color)
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     uint numSymbols = std::strlen(text);
     for (uint i = 0; i < numSymbols; ++i)
@@ -259,9 +259,9 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
 {
     bool inverse = false;               // Установленное в true значение означает, что сейчас идёт вывод инверсным цветом
 
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
-    Color colorDraw = Painter::GetColor();
+    Color colorDraw = Color::GetCurrent();
 
     int right = left + width;
 
@@ -314,7 +314,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
                     {
                         if(inverse && word[i] == '\"')
                         {
-                            Painter::SetColor(colorDraw);
+                            colorDraw.SetAsCurrent();
                             inverse = false;
                             x = DrawChar(x, y, word[i]);
                         }
@@ -323,7 +323,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
                             x = DrawChar(x, y, word[i]);
                             if (!inverse && word[i] == '\"')
                             {
-                                Painter::SetColor(colorDif);
+                                colorDif.SetAsCurrent();
                                 inverse = true;
                             }
                         }
@@ -336,7 +336,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
         y += 9;
     }
 
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     return y;
 }
@@ -344,7 +344,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
 
 int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color) //-V801
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     int right = left + width;
 
@@ -586,7 +586,7 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 
 void Text::DrawBigText(int eX, int eY, int size, pString text, Color color)
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     uint numSymbols = std::strlen(text);
 
@@ -676,11 +676,13 @@ int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
 
 int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, pString text, Color color)
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
+
     int lenght = Font::GetLengthText(text);
     int height = Font::GetHeightSymbol(text[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
+
     return DrawText(x, y, text);
 }
     
@@ -752,7 +754,8 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
 {
     Painter::DrawRectangle(x, y, width, height, colorFill);
     Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
-    Painter::SetColor(colorFill);
+    colorFill.SetAsCurrent();
+
     return DrawStringInCenterRect(x, y, width, height, text);
 }
 

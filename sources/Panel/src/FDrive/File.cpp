@@ -39,11 +39,11 @@ File::~File()
 
 void File::Draw(int x, int y)
 {
-    Painter::SetColor(Color::GRAY_10);
+    Color::GRAY_10.SetAsCurrent();
 
     float scale = 100.0F / 255.0F;
 
-    Painter::SetColor(Color::GRAY_25);
+    Color::GRAY_25.SetAsCurrent();
 
     for (int i = 0; i < 240; i++)
     {
@@ -55,7 +55,7 @@ void File::Draw(int x, int y)
         return;
     }
 
-    Painter::SetColor(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     for (int i = 0; i < 240; i++)
     {

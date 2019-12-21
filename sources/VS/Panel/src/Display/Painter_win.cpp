@@ -213,7 +213,7 @@ static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, cons
 
 void Painter::FillRegion(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
 {
-    SetColor(color);
+    color.SetAsCurrent();
 
     wxBrush brush = memDC.GetBrush();
     wxPen pen = memDC.GetPen();
@@ -229,11 +229,13 @@ void Painter::SetPoint(int x, int y)
 }
 
 
-void Painter::SetColor(Color _color)
+void Color::SetAsCurrent() const
 {
-    if (_color != Color::NUMBER)
+    current.value = value;
+
+    if(value != COLOR_NUMBER)
     {
-        uint color = COLOR(_color.value);
+        uint color = COLOR(value);
         uint8 b = static_cast<uint8>(color);
         uint8 g = static_cast<uint8>(color >> 8);
         uint8 r = static_cast<uint8>(color >> 16);
@@ -245,30 +247,30 @@ void Painter::SetColor(Color _color)
 }
 
 
-void Painter::DrawRectangle(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
+void Painter::DrawRectangle(int x, int y, int width, int height, Color color)
 {
-    SetColor(color);
+    color.SetAsCurrent();
     memDC.DrawRectangle({ x, y, width + 1, height + 1 });
 }
 
 
-void Painter::DrawVLine(int x, int y0, int y1, Color color /* = Color::NUMBER */)
+void Painter::DrawVLine(int x, int y0, int y1, Color color)
 {
-    SetColor(color);
+    color.SetAsCurrent();
     memDC.DrawLine({ x, y0 }, { x, y1 });
 }
 
 
-void Painter::DrawHLine(int y, int x0, int x1, Color color /* = Color::NUMBER */)
+void Painter::DrawHLine(int y, int x0, int x1, Color color)
 {
-    SetColor(color);
+    color.SetAsCurrent();
     memDC.DrawLine({ x0, y }, { x1, y });
 }
 
 
 void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 {
-    SetColor(color);
+    color.SetAsCurrent();
     memDC.DrawLine({ x0, y0 }, { x1, y1 });
 }
 

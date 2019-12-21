@@ -8,9 +8,6 @@
 #include "Utils/Math.h"
 
 
-Color       Painter::currentColor = Color::NUMBER;
-
-
 void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
 {
     for (int x = x0; x <= x1; x += static_cast<int>(delta))
@@ -102,10 +99,4 @@ void Painter::DrawVolumeButton(int x, int y, int width, int height, int thicknes
             DrawHLine(y + height - i, x + 1 + i, x + width - i);
         }
     }
-}
-
-
-Color Painter::GetColor()
-{
-    return currentColor;
 }

@@ -362,7 +362,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
         if (i == position)
         {
             Painter::DrawFilledRectangle(x - 2, Y_INPUT + 19, 19, 31, Color::GRAY_10, Color::BLUE);
-            Painter::SetColor(Color::FILL);
+            Color::FILL.SetAsCurrent();
         }
         x = Text::DrawBigChar(x, Y_INPUT + 20, 4, buffer[i]) + 3;
     }
@@ -380,7 +380,7 @@ static void DrawValue(int x, int y, uint8 i)
         return;
     }
 
-    Painter::SetColor(Color::FILL);
+    Color::FILL.SetAsCurrent();
 
     Register name(i);
 

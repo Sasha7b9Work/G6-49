@@ -46,7 +46,7 @@ void SButton::Draw(int x, int y) const
     if(Menu::pressedItem == this)
     {
         Painter::FillRegion(x + 1, y + 1, Item::WIDTH - 2, Item::HEIGHT - 2, Color::FILL);
-        Painter::SetColor(Color::BACK);
+        Color::BACK.SetAsCurrent();
     }
     funcForDraw(x, y);
 }
@@ -57,7 +57,16 @@ void Button::Draw(int x, int y) const
     bool isShade = IsShade();
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, isShade ? Color::GRAY_10 : Color::GREEN_10);
-    Painter::SetColor(isShade ? Color::GRAY_25 : Color::FILL);
+
+    if(isShade)
+    {
+        Color::GRAY_25.SetAsCurrent();
+    }
+    else
+    {
+        Color::FILL.SetAsCurrent();
+    }
+
     Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle().c_str());
     funcForDraw(x, y);
 }
@@ -80,7 +89,16 @@ void Page::DrawClosed(int x, int y) const
     }
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, color);
-    Painter::SetColor(IsShade() ? Color::GRAY_25 : Color::FILL);
+
+    if(IsShade())
+    {
+        Color::GRAY_25.SetAsCurrent();
+    }
+    else
+    {
+        Color::FILL.SetAsCurrent();
+    }
+
     Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle().c_str());
 }
 
@@ -161,7 +179,8 @@ void Choice::Draw(bool opened, int x, int y) const
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
         GetTitle().Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
-        Painter::SetColor(Color::BACK);
+        Color::BACK.SetAsCurrent();
+
         if (step == 0.0F) //-V2550 //-V550
         {
             Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem());
@@ -197,7 +216,7 @@ void Governor::Draw(int x, int y) const
     GetTitle().Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
     Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
 
-    Painter::SetColor(Color::BACK);
+    Color::BACK.SetAsCurrent();
 
     DrawValue(x + 15, y + 30);
 }

@@ -147,7 +147,7 @@ void Page::SetCurrentSubPage(int pos)
 
 int Item::DrawHint(int x, int y, int width, Color color) const
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     return Text::DrawTextInColumnWithTransfers(x, y, width, titleHint[1], color);
 }

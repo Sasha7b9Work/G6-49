@@ -187,7 +187,7 @@ bool String::Allocate(uint size)
 
 int String::Draw(int x, int y, Color color) const
 {
-    Painter::SetColor(color);
+    color.SetAsCurrent();
 
     return Text::DrawText(x, y, c_str());
 }

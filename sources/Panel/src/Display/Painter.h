@@ -11,10 +11,6 @@ struct Painter
     static void BeginScene(Color color);
     /// Вызывается в конце отрисовки каждого кадра. Переносит содержимое буфера на экран
     static void EndScene();
-    /// Установить цвет рисования
-    static void SetColor(Color color);
-    /// Возвращает текущий цвет рисования
-    static Color GetColor();
     /// Устанавливает цвету заданное значение. Загружается в дисплей LoadPalette() или SetPalette()
     static void SetColorValue(Color color, col_val value);
     /// Загружает в дисплей все цвета
@@ -46,6 +42,4 @@ struct Painter
     static void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade);
 
     static col_val ReduceBrightness(col_val colorValue, float newBrightness);
-
-    static Color currentColor;
 };

@@ -139,7 +139,7 @@ void InputWindow::DrawDigits(int x, int y)
     {
         Painter::FillRegion(x, y, WIDTH_DIGIT, HEIGHT_DIGIT, Color::BACK);
 
-        Painter::SetColor(Color::FILL);
+        Color::FILL.SetAsCurrent();
 
         if (i == hightLightDigit)
         {

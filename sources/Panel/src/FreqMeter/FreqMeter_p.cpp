@@ -21,7 +21,14 @@ void PFreqMeter::Draw()
 
     Text::SetUpperCase(false);
 
-    Painter::SetColor(inactive ? Color::BLUE_50 : Color::FILL);
+    if(inactive)
+    {
+        Color::BLUE_50.SetAsCurrent();
+    }
+    else
+    {
+        Color::FILL.SetAsCurrent();
+    }
 
     char buffer[20];
     char text[50];

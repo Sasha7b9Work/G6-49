@@ -44,6 +44,8 @@ Color Color::FILL(COLOR_WHITE);
 Color Color::BACK(COLOR_BLACK);
 
 
+Color Color::current = Color::FILL;
+
 
 Color::Color(const uint8 val) : value(val)
 {
@@ -257,3 +259,28 @@ Color Color::Chan(Chan::E ch)
 {
     return (ch == Chan::A) ? CHAN_A : CHAN_B;
 }
+
+
+Color Color::GetCurrent()
+{
+    return current;
+}
+
+
+uint8 Color::CurrentValue()
+{
+    return current.value;
+}
+
+
+#ifndef WIN32
+
+void Color::SetAsCurrent() const
+{
+    if(value != COLOR_NUMBER)
+    {
+        current.value = value;
+    }
+}
+
+#endif

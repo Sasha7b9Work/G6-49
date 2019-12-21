@@ -12,7 +12,8 @@
 
 void Painter::BeginScene(Color col)
 {   
-    SetColor(col);
+    col.SetAsCurrent();
+
     uint *address = reinterpret_cast<uint *>(Display::GetBuffer());
     uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
     uint value = static_cast<uint>(col.value) + static_cast<uint>(col.value << 8) + static_cast<uint>(col.value << 16) + static_cast<uint>(col.value << 24);
@@ -47,12 +48,12 @@ void Painter::EndScene()
 
 void Painter::DrawHLine(int y, int x0, int x1, Color col)
 {
-    SetColor(col);
+    col.SetAsCurrent();
 
     uint8 *address = Display::GetBuffer() + x0 + y * BUFFER_WIDTH;
     uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
 
-    uint8 value = currentColor.value;
+    uint8 value = Color::CurrentValue();
 
     for (int x = x0; x <= x1; ++x)
     {
@@ -71,12 +72,12 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
         Math::Swap(&y0, &y1);
     }
 
-    SetColor(col);
+    col.SetAsCurrent();
 
     uint8 *address = Display::GetBuffer() + x + y0 * BUFFER_WIDTH;
     uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
 
-    uint8 value = currentColor.value;
+    uint8 value = Color::CurrentValue();
 
     for (int y = y0; y < y1; ++y)
     {
@@ -91,7 +92,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
 
 void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 {
-    SetColor(col);
+    col.SetAsCurrent();
 
     if ((x2 - x1) == 0 && (y2 - y1) == 0)
     {
@@ -144,7 +145,7 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 
 void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 {
-    SetColor(col);
+    col.SetAsCurrent();
 
     DrawHLine(y, x, x + width);
     DrawHLine(y + height, x, x + width);
@@ -162,20 +163,11 @@ void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color col
 
 void Painter::FillRegion(int x, int y, int width, int height, Color col)
 {
-    SetColor(col);
+    col.SetAsCurrent();
 
     for (int i = y; i <= y + height; ++i)
     {
         DrawHLine(i, x, x + width);
-    }
-}
-
-
-void Painter::SetColor(Color color)
-{
-    if (color != Color::NUMBER)
-    {
-        currentColor = color;
     }
 }
 
@@ -186,7 +178,7 @@ void Painter::SetPoint(int x, int y)
 
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {
-        *buffer = currentColor.value;
+        *buffer = Color::CurrentValue();
     }
 }
 
