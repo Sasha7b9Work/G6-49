@@ -124,6 +124,8 @@ private:
     /// "Подсветить" текущую позицию
     static void HighlightPosition(int x, int y);
 
+    static void DrawUnits(int x, int y);
+
     static ParameterValue *param;
 
     static StructValue iws;

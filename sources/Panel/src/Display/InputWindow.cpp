@@ -106,7 +106,9 @@ void InputWindow::DrawDigits(int x, int y)
 
     if (!FREQ_METER_ENABLED)
     {
-        Text::DrawBigText(x, y, 3, param->Name());
+        Font::SetType(TypeFont::_GOSTB20);
+        Text::SetUpperCase(false);
+        Text::DrawText(x, y, param->Name());
     }
 
     y += 40;
@@ -158,8 +160,17 @@ void InputWindow::DrawDigits(int x, int y)
         }
     }
 
-    char buffer[10] = {0};
-    Text::DrawBigText(x + 5, y - 1, SIZE_TEXT, param->NameUnit(buffer));
+    DrawUnits(x, y);
+}
+
+
+void InputWindow::DrawUnits(int x, int y)
+{
+    char buffer[10] = { 0 };
+
+    Font::SetType(TypeFont::_GOST28);
+    Text::SetUpperCase(false);
+    Text::DrawText(x + 5, y - 1, param->NameUnit(buffer));
 }
 
 
