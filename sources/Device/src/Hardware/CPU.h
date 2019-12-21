@@ -21,13 +21,6 @@ struct GeneratorWritePin
         AD5697_Freq,        
         AD5697_D_RSA,
         AD5697_D_RSB,
-        FPGA_WR_RG,
-        FPGA_CLK_RG,
-        FPGA_DT_RG,
-        FPGA_A0_RG,
-        FPGA_A1_RG,
-        FPGA_A2_RG,
-        FPGA_A3_RG,
         Count
     } value;
     GeneratorWritePin(E v) : value(v) {};
