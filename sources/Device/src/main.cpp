@@ -6,7 +6,7 @@
 #include "Interface/Interface_d.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/VCP.h"
+#include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include <stm32f4xx_hal.h>

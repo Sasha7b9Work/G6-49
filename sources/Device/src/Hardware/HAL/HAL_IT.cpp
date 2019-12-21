@@ -1,5 +1,4 @@
 #include <stm32f4xx.h>
-#include "Hardware/VCP.h"
 #include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_d.h"
 #include "Utils/Debug.h"

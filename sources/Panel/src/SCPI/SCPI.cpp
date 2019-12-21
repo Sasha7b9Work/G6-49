@@ -1,7 +1,7 @@
 #include "defines.h"
+#include "VCP_p.h"
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/SCPI.h"
-#include "SCPI/VCP.h"
 #include "Utils/Buffer.h"
 #include "Utils/StringUtils.h"
 #include <cstring>

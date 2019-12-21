@@ -3,7 +3,7 @@
 #include "Message.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/VCP.h"
+#include "Hardware/VCP_d.h"
 #include <usbd_cdc.h>
 
 

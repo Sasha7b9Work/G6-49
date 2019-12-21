@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Message.h"
-#include "SCPI/VCP.h"
+#include "Hardware/VCP_p.h"
 #include "Display/Console.h"
 #include "Utils/Buffer.h"
 #include <cstring>

@@ -1,7 +1,7 @@
 #include "usbd_core.h"
 #include "defines.h"
 #include "Hardware/CPU.h"
-#include "Hardware/VCP.h"
+#include "Hardware/VCP_d.h"
 
 
 

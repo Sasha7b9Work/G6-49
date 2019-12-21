@@ -2,7 +2,7 @@
 #include "usbd_cdc_interface.h"
 #include "defines.h"
 #include "Message.h"
-#include "Hardware/VCP.h"
+#include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "usbd_desc.h"
 #include "Utils/Math.h"

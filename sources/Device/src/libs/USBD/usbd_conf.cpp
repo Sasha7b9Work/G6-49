@@ -3,7 +3,7 @@
 #include "Log.h"
 #include <stm32f4xx_hal.h>
 #include "Hardware/Timer.h"
-#include "Hardware/VCP.h"
+#include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 
 

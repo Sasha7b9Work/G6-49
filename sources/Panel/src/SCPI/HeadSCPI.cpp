@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "SCPI/HeadSCPI.h"
-#include "SCPI/VCP.h"
 #include "Utils/String.h"
 
 

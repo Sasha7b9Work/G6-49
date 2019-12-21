@@ -2,9 +2,9 @@
 #include "log.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
-#include <Display/Display.h>
-#include <Hardware/CPU.h>
-#include "SCPI/VCP.h"
+#include "Display/Display.h"
+#include "Hardware/CPU.h"
+#include "Hardware/VCP_p.h"
 #include "Settings/Settings.h"
 #include <cstdarg>
 #include <cstring>
