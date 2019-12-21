@@ -68,9 +68,6 @@ void CPU::Init()
 
     InitGPIOS();
 
-
-    HAL_PIO::Init();
-
     WritePin(GeneratorWritePin::Pin_OutA, true);
     WritePin(GeneratorWritePin::Pin_OutB, true);
 }

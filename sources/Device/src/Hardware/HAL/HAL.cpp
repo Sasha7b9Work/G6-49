@@ -1,4 +1,5 @@
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 
 
 void HAL::Init()
@@ -12,6 +13,8 @@ void HAL::Init()
     HAL_SPI1::Init();
 
     HAL_CRC32::Init();
+
+    HAL_PIO::Init();
 }
 
 

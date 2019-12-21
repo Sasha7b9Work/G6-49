@@ -17,8 +17,8 @@ struct GeneratorWritePin
         Pin_P2_AmplifierB,
         Pin_OutA,
         Pin_OutB,
-        AD5697_Offset,      ///< Управление смещением выхода AD9952
-        AD5697_Freq,        ///< Управление параметрами частотомера
+        AD5697_Offset,      
+        AD5697_Freq,        
         AD5697_D_RSA,
         AD5697_D_RSB,
         FPGA_WR_RG,
@@ -31,7 +31,7 @@ struct GeneratorWritePin
         FREQ_METER_RESIST,
         FREQ_METER_COUPLE,
         FREQ_METER_FILTR,
-        FREQ_METER_CLK,     ///< Пин формирования тактов чтения измеренного значения
+        FREQ_METER_CLK,     
         D0,
         D1,
         D2,
@@ -52,8 +52,8 @@ struct GeneratorReadPin
 {
     enum E
     {
-        FREQ_METER_DRY,     ///< Пин чтения готовности частотомера к выдаче данных
-        FREQ_METER_DATA,    ///< Пин чтения данных
+        FREQ_METER_DRY,     
+        FREQ_METER_DATA,    
         Count
     } value;
     GeneratorReadPin(E v) : value(v) {};
