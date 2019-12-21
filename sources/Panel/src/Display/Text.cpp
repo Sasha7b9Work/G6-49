@@ -52,19 +52,19 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
 
     uint8 s = static_cast<uint8>(symbol);
 
-    int8 width = static_cast<int8>(font->symbol[s].width);
-    int8 height = static_cast<int8>(font->height);
+    int8 width = Font::Width(s);
+    int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(s, b))
+        if (Font::ByteNotEmpty(s, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(s, b, bit))
+                if (Font::BitIsExist(s, b, bit))
                 {
                     Painter::SetPoint(x, y);
                 }
@@ -89,34 +89,6 @@ int Text::DrawText(int x, int y, pString text, Color color)
     }
 
     return x;
-}
-
-
-bool Text::ByteFontNotEmpty(int eChar, int byte)
-{
-    static const uint8 *bytes = 0;
-    static int prevChar = -1;
-    if (eChar != prevChar)
-    {
-        prevChar = eChar;
-        bytes = font->symbol[static_cast<uint8>(prevChar)].bytes;
-    }
-    return bytes[byte] != 0;
-}
-
-
-bool Text::BitInFontIsExist(int eChar, int numByte, int bit)
-{
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
-    static int prevChar = -1;
-    static int prevNumByte = -1;
-    if (prevNumByte != numByte || prevChar != eChar)
-    {
-        prevByte = font->symbol[static_cast<uint8>(eChar)].bytes[numByte];
-        prevChar = eChar;
-        prevNumByte = numByte;
-    }
-    return prevByte & (1 << bit);
 }
 
 
@@ -553,19 +525,19 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 
 int Text::DrawBigChar(int eX, int eY, int size, char symbol)
 {
-    int8 width = static_cast<int8>(font->symbol[static_cast<uint8>(symbol)].width);
-    int8 height = static_cast<int8>(font->height);
+    int8 width = Font::Width(symbol);
+    int8 height = Font::Height();
 
     for (int b = 0; b < height; b++)
     {
-        if (ByteFontNotEmpty(symbol, b))
+        if (Font::ByteNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (BitInFontIsExist(symbol, b, bit))
+                if (Font::BitIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {
