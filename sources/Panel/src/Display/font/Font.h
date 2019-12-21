@@ -19,9 +19,7 @@ struct TypeFont
         _8,
         Count,
         None
-    } value;
-    TypeFont(E v) : value(v) {};
-    operator uint8() const { return static_cast<uint8>(value); };
+    };
 };
 
 
