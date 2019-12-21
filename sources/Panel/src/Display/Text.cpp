@@ -55,20 +55,39 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
     int8 width = Font::Width(s);
     int8 height = Font::Height();
 
-    for (int b = 0; b < height; b++)
+    if(Font::IsAdvanced())
     {
-        if (Font::RowNotEmpty(s, b))
+        for(int row = 0; row < height; row++)
         {
-            int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
+            if(Font::RowNotEmpty(s, row))
             {
-                if (Font::BitIsExist(s, b, bit))
+                for(int col = 0; col < width; col++)
                 {
-                    Painter::SetPoint(x, y);
+                    if(Font::BitIsExist(s, row, col))
+                    {
+                        Painter::SetPoint(eX + col, eY + row);
+                    }
                 }
-                x++;
+            }
+        }
+    }
+    else
+    {
+        for(int b = 0; b < height; b++)
+        {
+            if(Font::RowNotEmpty(s, b))
+            {
+                int x = eX;
+                int y = eY + b + 9 - height;
+                int endBit = 8 - width;
+                for(int bit = 7; bit >= endBit; bit--)
+                {
+                    if(Font::BitIsExist(s, b, bit))
+                    {
+                        Painter::SetPoint(x, y);
+                    }
+                    x++;
+                }
             }
         }
     }

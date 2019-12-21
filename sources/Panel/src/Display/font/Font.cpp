@@ -64,7 +64,7 @@ void Font::SetType(TypeFont::E typeFont)
 {
     type = typeFont;
 
-    if(type >= TypeFont::_GOST28)
+    if(type > TypeFont::_8)
     {
         AdvancedFont::Set(type);
         font = nullptr;
@@ -156,5 +156,5 @@ void Font::Restore()
 
 bool Font::IsAdvanced()
 {
-    return (type >= TypeFont::_GOST28);
+    return (type > TypeFont::_8);
 }

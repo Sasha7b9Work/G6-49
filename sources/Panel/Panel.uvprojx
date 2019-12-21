@@ -1841,6 +1841,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Display\Font\fontGOST28.inc</FilePath>
             </File>
+            <File>
+              <FileName>fontGOSTB20.inc</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Font\fontGOSTB20.inc</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

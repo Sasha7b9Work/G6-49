@@ -17,6 +17,7 @@ struct TypeFont
         _5,
         _7,
         _8,
+        _GOSTB20,
         _GOST28,
         Count
     };
@@ -36,6 +37,7 @@ struct Font
     static int8 Height();
     static bool RowNotEmpty(int s, int row);
     static bool BitIsExist(int s, int row, int bit);
+    static bool IsAdvanced();
 
     /// Сохранить текущий шрифт
     static void Store();
@@ -46,7 +48,6 @@ struct Font
     Symbol symbol[256];
 
 private:
-    static bool IsAdvanced();
 
     static TypeFont::E savedFont;
 

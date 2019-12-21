@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "AdvancedFont.h"
+#include "fontGOSTB20.inc"
 #include "fontGOST28.inc"
 
 
@@ -42,7 +43,11 @@ void AdvancedFont::Set(TypeFont::E type)
 {
     currentType = type;
 
-    if(type == TypeFont::_GOST28)
+    if(type == TypeFont::_GOSTB20)
+    {
+        font = fontGOSTB20;
+    }
+    else if(type == TypeFont::_GOST28)
     {
         font = fontGOST28;
     }
