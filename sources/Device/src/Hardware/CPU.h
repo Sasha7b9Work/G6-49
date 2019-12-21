@@ -17,10 +17,6 @@ struct GeneratorWritePin
         Pin_P2_AmplifierB,
         Pin_OutA,
         Pin_OutB,
-        AD5697_Offset,      
-        AD5697_Freq,        
-        AD5697_D_RSA,
-        AD5697_D_RSB,
         Count
     } value;
     GeneratorWritePin(E v) : value(v) {};

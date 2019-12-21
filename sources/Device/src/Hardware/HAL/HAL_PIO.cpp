@@ -121,12 +121,6 @@ uint8 HAL_PIO::Read(HPort::E port, uint16 pin)
 
 void HAL_PIO::Init()
 {
-    struct StructPIN
-    {
-        HPort::E port;
-        uint16   pin;
-    };
-
     StructPIN writePins[] =
     {
         {WR_AD9952_SPI3_CSA  },

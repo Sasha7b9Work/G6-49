@@ -3,6 +3,7 @@
 #include "defines.h"
 #include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL_PIO.h"
 
 
 struct AD5697
@@ -20,9 +21,9 @@ private:
     /// Запись непосредственно в DAC
     static void TransmitI2C(uint8 address, uint8 data[3]);
     /// Записать три байта данных по данному адресу
-    static void WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin);
+    static void WriteParameter(uint8 address, uint8 data[3], HPort::E port, uint16 pin);
 
-    static GeneratorWritePin PinLDAC(Chan::E ch);
+    static StructPIN PinLDAC(Chan::E ch);
 
     static uint8 CreateCommandByte(ParameterValue param);
 };

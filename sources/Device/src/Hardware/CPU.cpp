@@ -26,10 +26,6 @@ static const StructPort registers[GeneratorWritePin::Count] =
     {GPIOE, GPIO_PIN_13},   // Pin_P2_AmplifierB
     {GPIOF, GPIO_PIN_1},    // Pin_OutA
     {GPIOC, GPIO_PIN_15},   // Pin_OutB
-    {GPIOC, GPIO_PIN_2},    // AD5697_Offset
-    {GPIOC, GPIO_PIN_3},    // AD5697_Freq
-    {GPIOC, GPIO_PIN_5},    // AD5697_D_RSA
-    {GPIOB, GPIO_PIN_0},    // AD5697_D_RSB
 };
 
 

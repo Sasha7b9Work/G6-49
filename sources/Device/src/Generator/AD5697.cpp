@@ -95,7 +95,7 @@ void AD5697::SetOffset(Chan::E ch, ParamValue offset)
         static_cast<uint8>(value)
     };
 
-    WriteParameter(BIN_U8(00001100), data, GeneratorWritePin::AD5697_Offset);
+    WriteParameter(BIN_U8(00001100), data, WR_AD5697_OFFSET);
 }
 
 
@@ -112,7 +112,7 @@ void AD5697::SetFreqHysteresys(float hyst)
         static_cast<uint8>(value)
     };
 
-    WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
+    WriteParameter(BIN_U8(00001101), data, WR_AD5697_FREQ);
 }
 
 
@@ -131,7 +131,7 @@ void AD5697::SetFreqLevel(float level)
         static_cast<uint8>(value)
     };
 
-    WriteParameter(BIN_U8(00001101), data, GeneratorWritePin::AD5697_Freq);
+    WriteParameter(BIN_U8(00001101), data, WR_AD5697_FREQ);
 }
 
 
@@ -142,11 +142,11 @@ uint8 AD5697::CreateCommandByte(ParameterValue param)
 
 
 
-void AD5697::WriteParameter(uint8 address, uint8 data[3], GeneratorWritePin pin)
+void AD5697::WriteParameter(uint8 address, uint8 data[3], HPort::E port, uint16 pin)
 {
     TransmitI2C(address, data);
-    CPU::WritePin(pin, false);
-    CPU::WritePin(pin, true);
+    HAL_PIO::Reset(port, pin);
+    HAL_PIO::Set(port, pin);
 }
 
 
@@ -159,20 +159,26 @@ void AD5697::TransmitI2C(uint8 address, uint8 data[3])
 
 void AD5697::Reset(Chan::E ch)
 {
-    static const GeneratorWritePin pinRS[Chan::Count] = {GeneratorWritePin::AD5697_D_RSA, GeneratorWritePin::AD5697_D_RSB};
+    StructPIN str = PinLDAC(ch);
 
-    CPU::WritePin(PinLDAC(ch), true);
-    CPU::WritePin(pinRS[ch], true);
-    CPU::WritePin(pinRS[ch], false);
-    CPU::WritePin(pinRS[ch], true);
+    HAL_PIO::Set(str.port, str.pin);
+
+    static const StructPIN structs[Chan::Count] = { {WR_AD5697_D_RSA}, {WR_AD5697_D_RSB} };
+
+    HPort::E port = structs[ch].port;
+    uint16 pin = structs[ch].pin;
+
+    HAL_PIO::Set(port, pin);
+    HAL_PIO::Reset(port, pin);
+    HAL_PIO::Set(port, pin);
 }
 
 
-GeneratorWritePin AD5697::PinLDAC(Chan::E ch)
+StructPIN AD5697::PinLDAC(Chan::E ch)
 {
-    static const GeneratorWritePin pinLDAC[Chan::Count] = {GeneratorWritePin::AD5697_Offset, GeneratorWritePin::AD5697_Freq};
+    static const StructPIN strLDAC[Chan::Count] = { {WR_AD5697_OFFSET}, {WR_AD5697_FREQ} };
 
-    return pinLDAC[ch];
+    return strLDAC[ch];
 }
 
 

@@ -39,6 +39,13 @@ struct HPin
 };
 
 
+struct StructPIN
+{
+    HPort::E port;
+    uint16   pin;
+};
+
+
 struct HState
 {
     enum E
