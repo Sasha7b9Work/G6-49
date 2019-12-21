@@ -121,6 +121,8 @@ private:
     static void DrawPacketNumber(int x, int y);
 
     static void DrawExit(int x, int y);
+    /// "Подсветить" текущую позицию
+    static void HighlightPosition(int x, int y);
 
     static ParameterValue *param;
 

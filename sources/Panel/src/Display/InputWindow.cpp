@@ -143,10 +143,7 @@ void InputWindow::DrawDigits(int x, int y)
 
         if (i == hightLightDigit)
         {
-            Font::SetType(Font::Type::_8);
-            Text::Draw4SymbolsInRect(x + 2, y - 10, Ideograph::_8::FillDown);
-            Text::Draw4SymbolsInRect(x + 2, y + 35, Ideograph::_8::FillUp);
-            Font::SetType(Font::Type::_7);
+            HighlightPosition(x, y);
         }
 
         char buf[2] = { pointer[i], 0 };
@@ -163,6 +160,15 @@ void InputWindow::DrawDigits(int x, int y)
 
     char buffer[10] = {0};
     Text::DrawBigText(x + 5, y - 1, SIZE_TEXT, param->NameUnit(buffer));
+}
+
+
+void InputWindow::HighlightPosition(int x, int y)
+{
+    Font::SetType(Font::Type::_8);
+    Text::Draw4SymbolsInRect(x + 2, y - 10, Ideograph::_8::FillDown);
+    Text::Draw4SymbolsInRect(x + 2, y + 35, Ideograph::_8::FillUp);
+    Font::SetType(Font::Type::_7);
 }
 
 
