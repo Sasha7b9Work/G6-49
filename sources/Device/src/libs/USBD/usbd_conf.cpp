@@ -2,9 +2,9 @@
 #include "usbd_core.h"
 #include "Log.h"
 #include <stm32f4xx_hal.h>
-#include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
+#include "Hardware/HAL/HAL.h"
 
 
 /*******************************************************************************
@@ -112,27 +112,27 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
     NVIC_SetPriority (SysTick_IRQn, 0);  
   
-    CPU::PCD::handle.Instance = USB_OTG_HS;
-    CPU::PCD::handle.Init.dev_endpoints = 6;
-    CPU::PCD::handle.Init.speed = PCD_SPEED_FULL;
-    CPU::PCD::handle.Init.dma_enable = DISABLE;
-    CPU::PCD::handle.Init.ep0_mps = 0x40;
-    CPU::PCD::handle.Init.phy_itface = PCD_PHY_EMBEDDED;
-    CPU::PCD::handle.Init.Sof_enable = DISABLE;
-    CPU::PCD::handle.Init.low_power_enable = DISABLE;
-    CPU::PCD::handle.Init.lpm_enable = DISABLE;
-    CPU::PCD::handle.Init.vbus_sensing_enable = ENABLE;
-    CPU::PCD::handle.Init.use_dedicated_ep1 = DISABLE;
+    HAL_PCD::handle.Instance = USB_OTG_HS;
+    HAL_PCD::handle.Init.dev_endpoints = 6;
+    HAL_PCD::handle.Init.speed = PCD_SPEED_FULL;
+    HAL_PCD::handle.Init.dma_enable = DISABLE;
+    HAL_PCD::handle.Init.ep0_mps = 0x40;
+    HAL_PCD::handle.Init.phy_itface = PCD_PHY_EMBEDDED;
+    HAL_PCD::handle.Init.Sof_enable = DISABLE;
+    HAL_PCD::handle.Init.low_power_enable = DISABLE;
+    HAL_PCD::handle.Init.lpm_enable = DISABLE;
+    HAL_PCD::handle.Init.vbus_sensing_enable = ENABLE;
+    HAL_PCD::handle.Init.use_dedicated_ep1 = DISABLE;
 
     // Link The driver to the stack
-    CPU::PCD::handle.pData = pdev;
-    pdev->pData = &CPU::PCD::handle;
+    HAL_PCD::handle.pData = pdev;
+    pdev->pData = &HAL_PCD::handle;
     // Initialize LL Driver
-    HAL_PCD_Init(&CPU::PCD::handle);
+    HAL_PCD_Init(&HAL_PCD::handle);
 
-    HAL_PCDEx_SetRxFiFo(&CPU::PCD::handle, 0x80);
-    HAL_PCDEx_SetTxFiFo(&CPU::PCD::handle, 0, 0x40);
-    HAL_PCDEx_SetTxFiFo(&CPU::PCD::handle, 1, 0x80); 
+    HAL_PCDEx_SetRxFiFo(&HAL_PCD::handle, 0x80);
+    HAL_PCDEx_SetTxFiFo(&HAL_PCD::handle, 0, 0x40);
+    HAL_PCDEx_SetTxFiFo(&HAL_PCD::handle, 1, 0x80); 
 
     return USBD_OK;
 }

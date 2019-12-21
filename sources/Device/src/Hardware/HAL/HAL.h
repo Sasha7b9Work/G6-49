@@ -30,6 +30,14 @@ struct HAL_HCD
 };
 
 
+struct HAL_PCD
+{
+    static void Init();
+
+    static PCD_HandleTypeDef handle;
+};
+
+
 struct HAL_SPI1
 {
     static void Init();

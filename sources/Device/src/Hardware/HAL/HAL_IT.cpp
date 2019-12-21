@@ -40,7 +40,7 @@ extern "C" {
     void OTG_HS_IRQHandler()
     {
         // VCP
-        HAL_PCD_IRQHandler(&CPU::PCD::handle);
+        HAL_PCD_IRQHandler(&HAL_PCD::handle);
     }
     
     

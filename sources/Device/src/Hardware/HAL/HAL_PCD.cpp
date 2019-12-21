@@ -1,10 +1,10 @@
-#include "CPU.h"
+#include "Hardware/HAL/HAL.h"
 
 
-PCD_HandleTypeDef CPU::PCD::handle;
+PCD_HandleTypeDef HAL_PCD::handle;
 
 
-void CPU::PCD::Init()
+void HAL_PCD::Init()
 {
     __GPIOB_CLK_ENABLE();
     __USB_OTG_HS_CLK_ENABLE();

@@ -2,8 +2,8 @@
 #include "usbd_cdc_interface.h"
 #include "defines.h"
 #include "Message.h"
-#include "Hardware/CPU.h"
 #include "Hardware/VCP.h"
+#include "Hardware/HAL/HAL.h"
 #include "usbd_desc.h"
 #include "Utils/Math.h"
 #include <stdarg.h>
@@ -18,7 +18,7 @@ bool               VCP::connectedToUSB = false;
 
 void VCP::Init()
 {
-    CPU::PCD::Init();
+    HAL_PCD::Init();
 
     USBD_Init(&handleUSBD, &VCP_Desc, DEVICE_FS);
     USBD_RegisterClass(&handleUSBD, &USBD_CDC);

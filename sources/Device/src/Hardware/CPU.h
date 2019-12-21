@@ -81,15 +81,7 @@ struct CPU
 
     static void ErrorHandler();
 
-    
-    struct PCD
-    {
-        static void Init();
-
-        static PCD_HandleTypeDef handle;
-    };
-
-    
+   
     struct CRC32
     {
         static uint Calculate(const uint8 *address, uint size);
