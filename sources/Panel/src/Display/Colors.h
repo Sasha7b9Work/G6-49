@@ -62,6 +62,9 @@ public:
     static Color GetCurrent();
     static uint8 CurrentValue();
 
+    /// Устанавливает цвету заданное значение. Загружается в дисплей LoadPalette() или SetPalette()
+    void SetValueRGB(col_val rgb);
+
     Color& operator=(const Color &color);
 
 private:

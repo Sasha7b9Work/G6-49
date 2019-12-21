@@ -273,6 +273,13 @@ uint8 Color::CurrentValue()
 }
 
 
+void Color::SetValueRGB(col_val rgb)
+{
+    COLOR(value) = rgb;
+    Painter::LoadPalette();
+}
+
+
 #ifndef WIN32
 
 void Color::SetAsCurrent() const

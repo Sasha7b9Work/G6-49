@@ -24,14 +24,6 @@ void Painter::BeginScene(Color col)
 }
 
 
-void Painter::SetColorValue(Color color, col_val value)
-{
-    COLOR(color.value) = value;
-
-    LoadPalette();
-}
-
-
 void Painter::LoadPalette()
 {
     HAL_LTDC::SetColors(&COLOR(0), Color::NUMBER.value);

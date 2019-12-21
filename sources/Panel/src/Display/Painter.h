@@ -11,8 +11,6 @@ struct Painter
     static void BeginScene(Color color);
     /// Вызывается в конце отрисовки каждого кадра. Переносит содержимое буфера на экран
     static void EndScene();
-    /// Устанавливает цвету заданное значение. Загружается в дисплей LoadPalette() или SetPalette()
-    static void SetColorValue(Color color, col_val value);
     /// Загружает в дисплей все цвета
     static void LoadPalette();
     /// Нарисовать точку текущим цветом
