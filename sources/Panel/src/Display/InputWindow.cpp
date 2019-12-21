@@ -36,7 +36,7 @@ void InputWindow::Draw()
         return;
     }
 
-    Font::SetType(Font::Type::_7);
+    Font::SetType(TypeFont::_7);
 
     int x = 0;
     int y = Page::Title::HEIGHT;
@@ -85,7 +85,7 @@ void InputWindow::Draw()
 
     func[param->value].func(x + 10, y + 10);
 
-    Font::SetType(Font::Type::_8);
+    Font::SetType(TypeFont::_8);
 }
 
 
@@ -165,10 +165,10 @@ void InputWindow::DrawDigits(int x, int y)
 
 void InputWindow::HighlightPosition(int x, int y)
 {
-    Font::SetType(Font::Type::_8);
+    Font::SetType(TypeFont::_8);
     Text::Draw4SymbolsInRect(x + 2, y - 10, Ideograph::_8::FillDown);
     Text::Draw4SymbolsInRect(x + 2, y + 35, Ideograph::_8::FillUp);
-    Font::SetType(Font::Type::_7);
+    Font::SetType(TypeFont::_7);
 }
 
 

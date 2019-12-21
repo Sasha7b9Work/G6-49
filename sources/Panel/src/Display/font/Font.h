@@ -10,27 +10,28 @@ struct Symbol
 };
 
 
+struct TypeFont
+{
+    enum E
+    {
+        _5,
+        _7,
+        _8,
+        Count,
+        None
+    } value;
+    TypeFont(E v) : value(v) {};
+    operator uint8() const { return static_cast<uint8>(value); };
+};
+
+
 struct Font
 {
-    struct Type
-    {
-        enum E
-        {
-            _5,
-            _7,
-            _8,
-            Count,
-            None
-        } value;
-        Type(E v) : value(v) {};
-        operator uint8() const { return static_cast<uint8>(value); };
-    };
-
     static int GetSize();
     static int GetLengthText(const char *text);
     static int GetHeightSymbol(char symbol);
     static int GetLengthSymbol(char symbol);
-    static void SetType(Type typeFont);
+    static void SetType(TypeFont::E typeFont);
     static void ToggleCharacterSize();
     
     int height;
@@ -39,7 +40,7 @@ struct Font
 
 
 extern const Font *font;
-extern const Font *fonts[Font::Type::Count];
+extern const Font *fonts[TypeFont::Count];
 
 extern const uchar font5display[3080];
 extern const uchar font8display[3080];

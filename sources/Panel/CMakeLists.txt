@@ -41,7 +41,7 @@ source_group(common                   FILES ../common/Command.h
                                             ../common/Wave.h)
 source_group(src                      REGULAR_EXPRESSION src/*)
 source_group(Display                  REGULAR_EXPRESSION src/Display/*)
-source_group(Display\\font            REGULAR_EXPRESSION src/Display/font/*)
+source_group(Display\\Font            REGULAR_EXPRESSION src/Display/ont/*)
 source_group(FDrive                   REGULAR_EXPRESSION src/FDrive/*)
 source_group(FreqMeter                REGULAR_EXPRESSION src/FreqMeter/*)
 source_group(Generator                REGULAR_EXPRESSION src/Generator/*)

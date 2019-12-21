@@ -12,11 +12,11 @@
 
 
 
-const Font *fonts[Font::Type::Count] = {&font5, &font7, &font8};
+const Font *fonts[TypeFont::Count] = {&font5, &font7, &font8};
 const Font *font = &font7;
 
 
-static Font::Type type = Font::Type::_5;
+static TypeFont::E type = TypeFont::_5;
 
 
 int Font::GetSize()
@@ -29,7 +29,7 @@ void Font::ToggleCharacterSize()
 {
     const Font *f = BIG_SYMBOLS ? (&font8) : (&font7);
 
-    fonts[Type::_7] = f;
+    fonts[TypeFont::_7] = f;
 
     SetType(type);
 }
@@ -59,7 +59,7 @@ int Font::GetLengthSymbol(char symbol)
 }
 
 
-void Font::SetType(Type typeFont)
+void Font::SetType(TypeFont::E typeFont)
 {
     type = typeFont;
     font = fonts[type];

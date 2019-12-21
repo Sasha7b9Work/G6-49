@@ -86,7 +86,7 @@ source_group(Interface                FILES              ../../Panel/src/Interfa
                                                          ../../Panel/src/Interface/Interface_p.cpp
                                                          ../../Panel/src/Interface/Interface_p.h
                                                                      src/Interface/Transceiver_p_win.cpp)
-source_group(Display\\font            REGULAR_EXPRESSION ../Panel/src/Display/font/*)
+source_group(Display\\Font            REGULAR_EXPRESSION ../Panel/src/Display/Font/*)
 source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*)
 source_group(FreqMeter                REGULAR_EXPRESSION ../Panel/src/FreqMeter/*)
 source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*)

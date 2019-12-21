@@ -11,5 +11,5 @@ void Display::Init()
 
     Text::SetUpperCase(true);
 
-    Font::SetType(Font::Type::_8);
+    Font::SetType(TypeFont::_8);
 }

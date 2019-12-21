@@ -49,5 +49,5 @@ struct Painter
 
     static Color currentColor;
 
-    static Font::Type currentTypeFont;
+    static TypeFont::E currentTypeFont;
 };

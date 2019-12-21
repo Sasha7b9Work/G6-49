@@ -8,8 +8,8 @@
 #include "Utils/Math.h"
 
 
-Color      Painter::currentColor = Color::NUMBER;
-Font::Type Painter::currentTypeFont = Font::Type::None;
+Color       Painter::currentColor = Color::NUMBER;
+TypeFont::E Painter::currentTypeFont = TypeFont::None;
 
 
 void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
