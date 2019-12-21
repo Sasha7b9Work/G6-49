@@ -213,12 +213,12 @@ void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
 
     HAL_SPI_Transmit(&hSPI3, buffer, static_cast<uint16>(numBytes[reg] + 1), 1);
     
-    CPU::WritePin(GeneratorWritePin::AD9952_IO_UPD, true);
+    HAL_PIO::Set(WR_AD9952_IO_UPD);
     volatile int i = 0;
     for (; i < 1000; ++i)
     {
     };
-    CPU::WritePin(GeneratorWritePin::AD9952_IO_UPD, false);
+    HAL_PIO::Reset(WR_AD9952_IO_UPD);
 
     CPU::WritePin(ChipSelect(ch), true);
 }
@@ -232,17 +232,17 @@ GeneratorWritePin AD9952::ChipSelect(Chan::E ch)
 
 void AD9952::Reset()
 {
-    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
-    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, true);
-    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
+    HAL_PIO::Reset(WR_AD9952_RES_DDS);
+    HAL_PIO::Set(WR_AD9952_RES_DDS);
+    HAL_PIO::Reset(WR_AD9952_RES_DDS);
 
     CPU::WritePin(GeneratorWritePin::AD9952_SPI3_CSA, true);
     CPU::WritePin(GeneratorWritePin::AD9952_SPI3_CSB, true);
-    CPU::WritePin(GeneratorWritePin::AD9952_IO_UPD, false);
-    CPU::WritePin(GeneratorWritePin::AD9952_IOSYNA, false);
-    CPU::WritePin(GeneratorWritePin::AD9952_IOSYNB, false);
+    HAL_PIO::Reset(WR_AD9952_IO_UPD);
+    HAL_PIO::Reset(WR_AD9952_IOSYNA);
+    HAL_PIO::Reset(WR_AD9952_IOSYNB);
 
-    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
-    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, true);
-    CPU::WritePin(GeneratorWritePin::AD9952_RES_DDS, false);
+    HAL_PIO::Reset(WR_AD9952_RES_DDS);
+    HAL_PIO::Set(WR_AD9952_RES_DDS);
+    HAL_PIO::Reset(WR_AD9952_RES_DDS);
 }

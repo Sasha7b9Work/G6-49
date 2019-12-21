@@ -18,10 +18,10 @@ static const StructPort registers[GeneratorWritePin::Count] =
 {
     {GPIOF, GPIO_PIN_6},    // AD9952_SPI3_CSA
     {GPIOF, GPIO_PIN_7},    // AD9952_SPI3_CSB
-    {GPIOC, GPIO_PIN_7},    // AD9952_IO_UPD
-    {GPIOF, GPIO_PIN_8},    // AD9952_IOSYNA
-    {GPIOF, GPIO_PIN_9},    // AD9952_IOSYNB
-    {GPIOC, GPIO_PIN_8},    // AD9952_RES_DDS
+//    {GPIOC, GPIO_PIN_7},    // AD9952_IO_UPD
+//    {GPIOF, GPIO_PIN_8},    // AD9952_IOSYNA
+//    {GPIOF, GPIO_PIN_9},    // AD9952_IOSYNB
+//    {GPIOC, GPIO_PIN_8},    // AD9952_RES_DDS
 };
 
 
