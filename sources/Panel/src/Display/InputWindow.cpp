@@ -153,13 +153,13 @@ void InputWindow::DrawDigits(int x, int y)
         char buf[2] = { pointer[i], 0 };
 
         Font::Set(TypeFont::_GOST28);
-        Text::Draw(x, y + 2, buf);
+        Text::Draw(x + 2, y + 4, buf);
 
-        x += 20;
+        x += 18;
 
         if (posComma == i)
         {
-            Painter::FillRegion(x - 3, y + HEIGHT_DIGIT - 2, SIZE_TEXT, SIZE_TEXT + 1);
+            Painter::FillRegion(x, y + 26, 2, 2);
             x += 4;
         }
     }
@@ -174,7 +174,7 @@ void InputWindow::DrawUnits(int x, int y)
 
     Font::Set(TypeFont::_GOST28);
     Text::SetUpperCase(false);
-    Text::Draw(x + 5, y - 1, param->NameUnit(buffer));
+    Text::Draw(x + 5, y + 4, param->NameUnit(buffer));
 }
 
 
