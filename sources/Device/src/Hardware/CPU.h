@@ -82,13 +82,6 @@ struct CPU
     static void ErrorHandler();
 
    
-    struct CRC32
-    {
-        static uint Calculate(const uint8 *address, uint size);
-
-        static void Init();
-    };
-
 private:
 
     static void EnablePeriphery();

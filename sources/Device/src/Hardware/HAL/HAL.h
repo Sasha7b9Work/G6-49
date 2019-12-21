@@ -5,6 +5,14 @@
 struct CalibrationSettings;
 
 
+struct HAL_CRC32
+{
+    static uint Calculate(const uint8 *address, uint size);
+
+    static void Init();
+};
+
+
 struct HAL_EEPROM
 {
     static void Init();
