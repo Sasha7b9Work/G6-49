@@ -18,9 +18,8 @@ class Frame : public wxFrame
 public:
     Frame(const wxString& title);
 
-    void OnQuit(wxCommandEvent &);
-    void OnTimer(wxTimerEvent &);
-    void OnSCPI(wxCommandEvent &);
+    void OnKeyDown(wxCommandEvent &);
+    void OnKeyUp(wxCommandEvent &);
 
 private:
     wxTimer timer;
@@ -28,7 +27,9 @@ private:
     void DrawFPS();
     void HandlerEvents();
 
-public:
-    void OnKeyDown(wxCommandEvent &);
-    void OnKeyUp(wxCommandEvent &);
+    void OnQuit(wxCommandEvent &);
+    void OnTimer(wxTimerEvent &);
+    void OnSCPI(wxCommandEvent &);
+    void OnClose(wxCloseEvent &);
+
 };

@@ -1,4 +1,7 @@
+#include "defines.h"
+#undef CRC
 #include "Application.h"
+#include "ConsoleSCPI.h"
 
 #undef main
 
@@ -11,7 +14,7 @@ extern void init();
 
 enum
 {
-    FILE_QUIT = wxID_EXIT,
+    FILE_QUIT = wxID_HIGHEST + 1,
 
     TOOL_SCPI
 };
@@ -68,11 +71,13 @@ Frame::Frame(const wxString& title)
     SetMenuBar(menuBar);
 
     CreateStatusBar(2);
-    SetStatusText("Welcome to wxWidgets!");
 
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_MENU, &Frame::OnSCPI, this, TOOL_SCPI);
+    Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
+
+    ConsoleSCPI::Self()->Show();
 
     timer.Start(0);
 }
@@ -121,7 +126,15 @@ void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void Frame::OnClose(wxCloseEvent &event)
+{
+    ConsoleSCPI::Self()->Destroy();
+
+    event.Skip();
+}
+
+
 void Frame::OnSCPI(wxCommandEvent &)
 {
-
+    ConsoleSCPI::Self()->SwitchVisibility();
 }
