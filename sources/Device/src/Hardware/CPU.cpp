@@ -52,11 +52,6 @@ static const StructPort registers[GeneratorWritePin::Count] =
     {GPIOD, GPIO_PIN_5}     // FPGA_WR_DATA
 };
 
-static const StructPort registersRead[GeneratorReadPin::Count] =
-{
-    {GPIOC, GPIO_PIN_0},    // FREQ_METER_DRY
-    {GPIOB, GPIO_PIN_12}    // FREQ_METER_DATA
-};
 
 /// ¬рем€ последней установки состо€ни€ "зан€то"
 static uint timeBusy = 0;
@@ -122,12 +117,4 @@ void CPU::SetReady()
 void CPU::WritePin(GeneratorWritePin pin, bool st)
 {
     HAL_GPIO_WritePin(registers[pin].port, registers[pin].pin, st ? GPIO_PIN_SET : GPIO_PIN_RESET);
-}
-
-
-bool CPU::ReadPin(GeneratorReadPin pin)
-{
-    GPIO_PinState state = HAL_GPIO_ReadPin(registersRead[pin].port, registersRead[pin].pin);
-
-    return state == GPIO_PIN_SET;
 }

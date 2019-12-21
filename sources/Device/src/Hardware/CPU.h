@@ -47,20 +47,6 @@ struct GeneratorWritePin
     operator uint8() const { return static_cast<uint8>(value); };
 };
 
-/// Порты чтения
-struct GeneratorReadPin
-{
-    enum E
-    {
-        FREQ_METER_DRY,     
-        FREQ_METER_DATA,    
-        Count
-    } value;
-    GeneratorReadPin(E v) : value(v) {};
-    operator uint8() const { return static_cast<uint8>(value); };
-};
-
-
 
 struct CPU
 {
@@ -71,8 +57,6 @@ struct CPU
     static void SetReady();
     
     static void WritePin(GeneratorWritePin pin, bool set);
-
-    static bool ReadPin(GeneratorReadPin pin);
 
 private:
 

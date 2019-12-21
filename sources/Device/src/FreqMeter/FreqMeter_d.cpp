@@ -4,6 +4,7 @@
 #include "FreqMeter_d.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include "Utils/Debug.h"
 
 
@@ -40,7 +41,7 @@ void DFreqMeter::SetFiltr(FreqFiltr filtr)
 
 void DFreqMeter::Update()
 {
-    if(CPU::ReadPin(GeneratorReadPin::FREQ_METER_DRY))
+    if(HAL_PIO::Read(RD_FREQ_METER_DRY))
     {
         uint frequency = 0;
         for(int i = 30; i >= 0; i--)
@@ -53,7 +54,7 @@ void DFreqMeter::Update()
             }
             CPU::WritePin(GeneratorWritePin::FREQ_METER_CLK, false);
             Timer::PauseOnTime(1);
-            if (CPU::ReadPin(GeneratorReadPin::FREQ_METER_DATA))
+            if (HAL_PIO::Read(RD_FREQ_METER_DATA))
             {
                 frequency += (1 << i);
             }
