@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Common.h"
 #include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include "GeneratorSettingsTypes.h"
 
 
@@ -46,7 +47,7 @@ private:
     };
 
     static void WriteToHardware(Chan::E ch, Register reg, uint value);
-    static GeneratorWritePin ChipSelect(Chan::E ch);
+    static StructPIN ChipSelect(Chan::E ch);
     static void Reset();
     static void WriteRegister(Chan::E ch, Register reg);
     static void WriteCFR1(Chan::E ch);

@@ -8,23 +8,6 @@
 #include <cstring>
 
 
-struct StructPort
-{
-    GPIO_TypeDef *port;
-    uint16        pin;
-};
-
-static const StructPort registers[GeneratorWritePin::Count] =
-{
-    {GPIOF, GPIO_PIN_6},    // AD9952_SPI3_CSA
-    {GPIOF, GPIO_PIN_7},    // AD9952_SPI3_CSB
-//    {GPIOC, GPIO_PIN_7},    // AD9952_IO_UPD
-//    {GPIOF, GPIO_PIN_8},    // AD9952_IOSYNA
-//    {GPIOF, GPIO_PIN_9},    // AD9952_IOSYNB
-//    {GPIOC, GPIO_PIN_8},    // AD9952_RES_DDS
-};
-
-
 /// ¬рем€ последней установки состо€ни€ "зан€то"
 static uint timeBusy = 0;
 
@@ -83,10 +66,4 @@ void CPU::SetReady()
     };
 
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
-}
-
-
-void CPU::WritePin(GeneratorWritePin pin, bool st)
-{
-    HAL_GPIO_WritePin(registers[pin].port, registers[pin].pin, st ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }

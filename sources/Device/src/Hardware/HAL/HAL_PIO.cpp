@@ -95,9 +95,21 @@ void HAL_PIO::Set(HPort::E port, uint16 pin)
 }
 
 
+void HAL_PIO::Set(StructPIN &pin)
+{
+    HAL_GPIO_WritePin(PORT(pin.port), pin.pin, GPIO_PIN_SET);
+}
+
+
 void HAL_PIO::Reset(HPort::E port, uint16 pin)
 {
     HAL_GPIO_WritePin(PORT(port), pin, GPIO_PIN_RESET);
+}
+
+
+void HAL_PIO::Reset(StructPIN &pin)
+{
+    HAL_GPIO_WritePin(PORT(pin.port), pin.pin, GPIO_PIN_RESET);
 }
 
 

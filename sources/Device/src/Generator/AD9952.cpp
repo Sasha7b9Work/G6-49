@@ -208,8 +208,10 @@ void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
         buffer[pointer++] = static_cast<uint8>(value >> (curByte * 8));
         --curByte;
     }
+
+    StructPIN cs = ChipSelect(ch);
     
-    CPU::WritePin(ChipSelect(ch), false);
+    HAL_PIO::Reset(cs);
 
     HAL_SPI_Transmit(&hSPI3, buffer, static_cast<uint16>(numBytes[reg] + 1), 1);
     
@@ -220,13 +222,15 @@ void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
     };
     HAL_PIO::Reset(WR_AD9952_IO_UPD);
 
-    CPU::WritePin(ChipSelect(ch), true);
+    HAL_PIO::Set(cs);
 }
 
 
-GeneratorWritePin AD9952::ChipSelect(Chan::E ch)
+StructPIN AD9952::ChipSelect(Chan::E ch)
 {
-    return static_cast<GeneratorWritePin::E>(ch == Chan::A ? GeneratorWritePin::AD9952_SPI3_CSA : GeneratorWritePin::AD9952_SPI3_CSB);
+    static const StructPIN cs[Chan::Count] = { {WR_AD9952_SPI3_CSA}, {WR_AD9952_SPI3_CSB} };
+
+    return cs[ch];
 }
 
 
@@ -236,8 +240,9 @@ void AD9952::Reset()
     HAL_PIO::Set(WR_AD9952_RES_DDS);
     HAL_PIO::Reset(WR_AD9952_RES_DDS);
 
-    CPU::WritePin(GeneratorWritePin::AD9952_SPI3_CSA, true);
-    CPU::WritePin(GeneratorWritePin::AD9952_SPI3_CSB, true);
+    HAL_PIO::Set(WR_AD9952_SPI3_CSA);
+    HAL_PIO::Set(WR_AD9952_SPI3_CSB);
+
     HAL_PIO::Reset(WR_AD9952_IO_UPD);
     HAL_PIO::Reset(WR_AD9952_IOSYNA);
     HAL_PIO::Reset(WR_AD9952_IOSYNB);
