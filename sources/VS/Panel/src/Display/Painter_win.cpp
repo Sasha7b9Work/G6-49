@@ -86,7 +86,7 @@ void Display::Init()
 {
     Text::SetUpperCase(true);
 
-    Font::SetType(TypeFont::_8);
+    Font::Set(TypeFont::_8);
 
     CreateFrame();
 }

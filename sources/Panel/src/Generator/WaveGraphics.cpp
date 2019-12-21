@@ -27,7 +27,7 @@ void Wave::Graphics::Draw(Chan::E ch)
         Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
 
         Font::Store();
-        Font::SetType(TypeFont::_GOSTB20);
+        Font::Set(TypeFont::_GOSTB20);
         Text::Draw(x0 + 5, y0 + 5, (ch == Chan::A) ? "A" : "B", Color::Chan(ch));
         Font::Restore();
 

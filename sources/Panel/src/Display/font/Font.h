@@ -30,7 +30,7 @@ struct Font
     static int GetLengthText(const char *text);
     static int GetHeightSymbol(char symbol);
     static int GetLengthSymbol(char symbol);
-    static void SetType(TypeFont::E typeFont);
+    static void Set(TypeFont::E typeFont);
     static void ToggleCharacterSize();
     static int8 Width(char symbol);
     static int8 Width(uint8 symbol);

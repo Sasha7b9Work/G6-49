@@ -32,7 +32,7 @@ void Font::ToggleCharacterSize()
 
     fonts[TypeFont::_7] = f;
 
-    SetType(type);
+    Set(type);
 }
 
 
@@ -60,7 +60,7 @@ int Font::GetLengthSymbol(char symbol)
 }
 
 
-void Font::SetType(TypeFont::E typeFont)
+void Font::Set(TypeFont::E typeFont)
 {
     type = typeFont;
 
@@ -150,7 +150,7 @@ void Font::Store()
 
 void Font::Restore()
 {
-    SetType(savedFont);
+    Set(savedFont);
 }
 
 

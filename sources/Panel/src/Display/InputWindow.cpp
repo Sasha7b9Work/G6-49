@@ -36,7 +36,7 @@ void InputWindow::Draw()
         return;
     }
 
-    Font::SetType(TypeFont::_7);
+    Font::Set(TypeFont::_7);
 
     int x = 0;
     int y = Page::Title::HEIGHT;
@@ -85,7 +85,7 @@ void InputWindow::Draw()
 
     func[param->value].func(x + 10, y + 10);
 
-    Font::SetType(TypeFont::_8);
+    Font::Set(TypeFont::_8);
 }
 
 
@@ -106,7 +106,7 @@ void InputWindow::DrawDigits(int x, int y)
 
     if (!FREQ_METER_ENABLED)
     {
-        Font::SetType(TypeFont::_GOSTB20);
+        Font::Set(TypeFont::_GOSTB20);
         Text::SetUpperCase(false);
         Text::Draw(x, y, param->Name());
     }
@@ -168,7 +168,7 @@ void InputWindow::DrawUnits(int x, int y)
 {
     char buffer[10] = { 0 };
 
-    Font::SetType(TypeFont::_GOST28);
+    Font::Set(TypeFont::_GOST28);
     Text::SetUpperCase(false);
     Text::Draw(x + 5, y - 1, param->NameUnit(buffer));
 }
@@ -176,10 +176,10 @@ void InputWindow::DrawUnits(int x, int y)
 
 void InputWindow::HighlightPosition(int x, int y)
 {
-    Font::SetType(TypeFont::_8);
+    Font::Set(TypeFont::_8);
     Text::Draw4SymbolsInRect(x + 2, y - 10, Ideograph::_8::FillDown);
     Text::Draw4SymbolsInRect(x + 2, y + 35, Ideograph::_8::FillUp);
-    Font::SetType(TypeFont::_7);
+    Font::Set(TypeFont::_7);
 }
 
 
