@@ -71,3 +71,11 @@ struct HAL_SPI1
 
     static bool Transmit(uint value, uint timeout);
 };
+
+
+struct HAL_TIM2
+{
+    static void Init();
+
+    static void DeInit();
+};
