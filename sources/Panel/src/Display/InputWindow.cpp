@@ -151,9 +151,11 @@ void InputWindow::DrawDigits(int x, int y)
         }
 
         char buf[2] = { pointer[i], 0 };
-        Text::DrawBigText(x, y - 1, SIZE_TEXT, buf);
 
-        x += 24;
+        Font::Set(TypeFont::_GOST28);
+        Text::Draw(x, y + 2, buf);
+
+        x += 20;
 
         if (posComma == i)
         {
