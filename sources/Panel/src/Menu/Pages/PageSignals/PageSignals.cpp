@@ -22,7 +22,7 @@ DEF_CHOICE_2( cChannel,                                                         
     ,
     "A", "Управление параметрами сигнала на выходе A.",
     "B", "Управление параметрами сигнала на выходе B.",
-    FLAG_1, BIT_CHANNEL, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
+    FLAG, BIT_CHANNEL, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
@@ -80,7 +80,7 @@ DEF_CHOICE_2( cTypeTune,                                                        
     "Определяет периодичность засылки настроек сигналов в устройство управления.",
     "ОДНОКРАТНО", "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
     "НЕПРЕРЫВНО", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
-    FLAG_1, BIT_TUNE_FULL, pageSignals, Item::FuncActive, FuncChangedChoice, FuncDraw
+    FLAG, BIT_TUNE_FULL, pageSignals, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -139,10 +139,10 @@ void PageSignals::SetCurrentChanenl(Chan::E ch)
 {
     if(ch == Chan::A)
     {
-        CLEAR_BIT_FL1(BIT_CHANNEL);
+        CLEAR_FL(BIT_CHANNEL);
     }
     else
     {
-        SET_BIT_FL1(BIT_CHANNEL);
+        SET_FL(BIT_CHANNEL);
     }
 }

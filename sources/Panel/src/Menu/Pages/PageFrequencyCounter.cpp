@@ -43,7 +43,7 @@ DEF_CHOICE_2( cInterval,                                                        
     ,
     "1 c", "Запуск процесса измерения частомера производится с интервалом 1 секунда.",
     "10 с", "Запуск процесса измерения частомера производится с интервалом 10 секунда.",
-    FLAG_1, BIT_FREQ_INTERVAL, pFrequencyCounter, Item::FuncActive, OnPress_Interval, FuncDraw
+    FLAG, BIT_FREQ_INTERVAL, pFrequencyCounter, Item::FuncActive, OnPress_Interval, FuncDraw
 )
 
 volatile const ChoiceBase *pcInterval = &cInterval;
@@ -78,7 +78,7 @@ DEF_CHOICE_2(cResist,                                                           
     ,
     "1 МОм", "Сопротивление входа 1 МОм",
     "50 Ом", "Сопротивление входа 50 Ом",
-    FLAG_1, BIT_FREQ_RESIST, pFrequencyCounter, Item::FuncActive, OnPress_Resist, FuncDraw
+    FLAG, BIT_FREQ_RESIST, pFrequencyCounter, Item::FuncActive, OnPress_Resist, FuncDraw
 )
 
 static void OnPress_Resist(bool)
@@ -93,7 +93,7 @@ DEF_CHOICE_2(cCouple,                                                           
     ,
     "Перем","Постоянная составляющая поступает на вход частотомера",
     "Пост", "Постоянная составляющая не поступает на вход частотомера",
-    FLAG_1, BIT_FREQ_COUPLE, pFrequencyCounter, Item::FuncActive, OnPress_Couple, FuncDraw
+    FLAG, BIT_FREQ_COUPLE, pFrequencyCounter, Item::FuncActive, OnPress_Couple, FuncDraw
 )
 
 static void OnPress_Couple(bool)
@@ -108,7 +108,7 @@ DEF_CHOICE_2(cFiltr,                                                            
     ,
     DISABLED_RU, "ФНЧ на входе частотомера отключен",
     ENABLED_RU,  "ФНЧ на входе частотомера водключен",
-    FLAG_1, BIT_FREQ_FILTR, pFrequencyCounter, Item::FuncActive, OnPress_Filtr, FuncDraw
+    FLAG, BIT_FREQ_FILTR, pFrequencyCounter, Item::FuncActive, OnPress_Filtr, FuncDraw
 )
 
 static void OnPress_Filtr(bool)
@@ -158,7 +158,7 @@ DEF_CHOICE_2(cTest,                                                             
     ,
     DISABLED_RU, "",
     ENABLED_RU,  "",
-    FLAG_1, BIT_FREQ_TEST, pFrequencyCounter, Item::FuncActive, OnPress_Test, FuncDraw
+    FLAG, BIT_FREQ_TEST, pFrequencyCounter, Item::FuncActive, OnPress_Test, FuncDraw
 )
 
 static void OnPress_Test(bool)

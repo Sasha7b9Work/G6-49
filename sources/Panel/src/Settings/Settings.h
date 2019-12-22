@@ -21,9 +21,9 @@ extern const PageBase pInput;
 #define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
 
-#define FL(numBit)              ((FLAG_1 >> (numBit)) & 0x01)
-#define SET_BIT_FL1(numBit)     ((FLAG_1) |= (1 << (numBit)))
-#define CLEAR_BIT_FL1(numBit)   ((FLAG_1) &= (~(1 << (numBit))))
+#define FL(numBit)              ((FLAG >> (numBit)) & 0x01)
+#define SET_FL(numBit)          ((FLAG) |= (1 << (numBit)))
+#define CLEAR_FL(numBit)        ((FLAG) &= (~(1 << (numBit))))
 
 #define CONSOLE_ENABLED         (FL(BIT_CONSOLE))
 #define DEBUG_MODE_ENABLED      (FL(BIT_DBG_MODE))
@@ -34,9 +34,9 @@ extern const PageBase pInput;
 #define PARITY                  ((Parity)FL(BIT_PARITY))
 #define DEBUG_SHOW_SENDS        (FL(BIT_SHOW_SENDS))
 
-#define CHANNEL_ENABLED(ch)     ((FLAG_1 >> ((ch) + BIT_CHAN_A)) & 0x01)
-#define SWITCH_CHANNEL_A        (FLAG_1 ^= (1 << (BIT_CHAN_A)))
-#define SWITCH_CHANNEL_B        (FLAG_1 ^= (1 << (BIT_CHAN_B)))
+#define CHANNEL_ENABLED(ch)     ((FLAG >> ((ch) + BIT_CHAN_A)) & 0x01)
+#define SWITCH_CHANNEL_A        (FLAG ^= (1 << (BIT_CHAN_A)))
+#define SWITCH_CHANNEL_B        (FLAG ^= (1 << (BIT_CHAN_B)))
 #define CURRENT_CHANNEL         ((Chan::E)FL(BIT_CHANNEL))
 #define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == Chan::A)
 #define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == Chan::B)
@@ -83,7 +83,7 @@ public:
     int16                       freq_hysteresis;                            ///< Величина гистерезиса
     bool                        sine_ManipulationEnabled[Chan::Count];      ///< true, если включена модуляция синусоиды пилой
 
-#define FLAG_1      set.flag1
+#define FLAG        set.flag1
     uint            flag1;
 #define BIT_PARITY        0   ///< Parity   - флаг чётности Parity
 #define BIT_FREQ_INTERVAL 1   ///< Interval - интервал запуска измерений

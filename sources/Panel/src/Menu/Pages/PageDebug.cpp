@@ -420,7 +420,7 @@ DEF_CHOICE_2( cConsole,                                                         
     "Включает и выключает отображение отладочной консоли",
     DISABLED_RU, "Отображение консоли включено",
     ENABLED_RU,  "Отображение консоли выключено",
-    FLAG_1, BIT_CONSOLE, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
+    FLAG, BIT_CONSOLE, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
 )
 
 
@@ -442,7 +442,7 @@ DEF_CHOICE_2( cStatistics,                                                      
     ,
     DISABLED_RU, "Показ статистики включён",
     ENABLED_RU,  "Показ статистики выключен",
-    FLAG_1, BIT_STATISTICS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    FLAG, BIT_STATISTICS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -452,7 +452,7 @@ DEF_CHOICE_2( cShowSends,                                                       
     ,
     DISABLED_RU, "Показ параметров включён",
     ENABLED_RU,  "Показ параметров выключен",
-    FLAG_1, BIT_SHOW_SENDS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    FLAG, BIT_SHOW_SENDS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -625,6 +625,6 @@ DEF_CHOICE_2 (  cBigSymbols,                                                    
                                 "Displaying information with standard symbols",
     ENABLED_RU, ENABLED_EN,     "Отображение информации увеличенными символами",
                                 "Displaying information with enlarged symbols",
-    FLAG_1, BIT_BIG_SYMBOLS, pDebug, FuncActive, OnPress_BigSymbols, FuncDraw
+    FLAG, BIT_BIG_SYMBOLS, pDebug, FuncActive, OnPress_BigSymbols, FuncDraw
 )
 */

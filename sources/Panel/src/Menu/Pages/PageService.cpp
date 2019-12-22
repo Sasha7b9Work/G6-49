@@ -41,7 +41,7 @@ DEF_CHOICE_2( cSizeByte,                                                        
     ,
     "7 бит", "7 бит в байте",
     "8 бит", "8 бит в байте",
-    FLAG_1, BIT_SIZE_BYTE, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
+    FLAG, BIT_SIZE_BYTE, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -51,7 +51,7 @@ DEF_CHOICE_2( cStopBit,                                                         
     ,
     "1", "1 стоп-бит в конце байта",
     "2", "2 стоп-бита в конце байта",
-    FLAG_1, BIT_STOP_BIT, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
+    FLAG, BIT_STOP_BIT, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -61,7 +61,7 @@ DEF_CHOICE_2( cParity,                                                          
     ,
     "ПРОВЕРЯТЬ",    "Проверка чётности включена",
     "НЕ ПРОВЕРЯТЬ", "Проверка чётности выключена",
-    FLAG_1, BIT_PARITY, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
+    FLAG, BIT_PARITY, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
