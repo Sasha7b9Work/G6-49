@@ -14,6 +14,8 @@ public:
 
     static void OnPress_Form(bool);
 
+    static void SetForm(Form::E form);
+
     static Page *pointer;
 
     

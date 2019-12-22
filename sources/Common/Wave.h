@@ -282,7 +282,7 @@ public:
         Meander,        ///< Меандр
         Impulse,        ///< Импульсы
         PacketImpuls,   ///< Пачка импульсов
-        DDS,            ///< Произвольный сигнал
+        Free,           ///< Произвольный сигнал
         Count
     } value;
 

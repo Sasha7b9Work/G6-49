@@ -38,7 +38,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(Form::Meander),      "Меандр",
     FORM_RU(Form::Impulse),      "Треугольник",
     FORM_RU(Form::PacketImpuls), "Пакеты",
-    FORM_RU(Form::DDS),          "Произвольный",
+    FORM_RU(Form::Free),         "Произвольный",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -52,7 +52,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(Form::Triangle),  "Треугольник",
     FORM_RU(Form::Meander),   "Меандр",
     FORM_RU(Form::Impulse),   "Треугольник",
-    FORM_RU(Form::DDS),       "Произвольный",
+    FORM_RU(Form::Free),      "Произвольный",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -123,6 +123,18 @@ void PageSignals::OnPress_Form(bool)
     cParameters.form = FORM_CURRENT;
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);
+}
+
+
+void PageSignals::SetForm(Form::E form)
+{
+    if(form == Form::Free && CURRENT_CHANNEL_IS_B)
+    {
+        return;
+    }
+
+    numForm = form;
+    OnPress_Form(true);
 }
 
 

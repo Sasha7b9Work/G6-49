@@ -145,7 +145,7 @@ Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params
         params[i]->form = this;
     }
 
-    if (v == DDS)
+    if (v == Free)
     {
         std::memset(&formFlash[0][0], 127, SIZE_BUFFER * 2);
     }
@@ -745,7 +745,7 @@ bool Form::IsDDS() const
     return  (value == RampPlus) || 
             (value == RampMinus) ||
             (value == Triangle) ||
-            (value == DDS);
+            (value == Free);
 }
 
 

@@ -123,7 +123,7 @@ void PGenerator::LoadFormDDS(Form *form)
         case Form::Sine:
         case Form::Impulse:
         case Form::PacketImpuls:
-        case Form::DDS:
+        case Form::Free:
         case Form::Count:
             break;
     }

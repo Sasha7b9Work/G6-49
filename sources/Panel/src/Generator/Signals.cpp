@@ -88,23 +88,23 @@ static ParameterBase *params_TriangleA[] =
 static Form formTriangleA(Form::Triangle, params_TriangleA, &waves[Chan::A]);
 
 
-static ParameterValue  param_DDSA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_DDSA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F, "10000", 1, Order::One);
-static ParameterValue  param_DDSA_Offset   (ParameterValue::Offset,     0.0F, 10.0F, "50000", 0, Order::One);
-static ParameterChoice param_DDSA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
-static ParameterPage   param_DDSA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
+static ParameterValue  param_FreeA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
+static ParameterValue  param_FreeA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F, "10000", 1, Order::One);
+static ParameterValue  param_FreeA_Offset   (ParameterValue::Offset,     0.0F, 10.0F, "50000", 0, Order::One);
+static ParameterChoice param_FreeA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterPage   param_FreeA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
-static ParameterBase *params_DDSA[] =
+static ParameterBase *params_FreeA[] =
 {
-    &param_DDSA_Frequency,
-    &param_DDSA_Amplitude,
-    &param_DDSA_Offset,
-    &param_DDSA_ModeStart,
-    &param_DDSA_Choice,
+    &param_FreeA_Frequency,
+    &param_FreeA_Amplitude,
+    &param_FreeA_Offset,
+    &param_FreeA_ModeStart,
+    &param_FreeA_Choice,
     0
 };
 
-static Form formDDSA(Form::DDS, params_DDSA, &waves[Chan::A]);
+static Form formFreeA(Form::Free, params_FreeA, &waves[Chan::A]);
 
 
 
@@ -201,7 +201,7 @@ static Form *formsA[] =
     &formMeanderA,
     &formImpulseA,
     &formPacketImpulseA,
-    &formDDSA,
+    &formFreeA,
     0
 };
 
@@ -291,23 +291,23 @@ static ParameterBase *params_TriangleB[] =
 static Form formTriangleB(Form::Triangle, params_TriangleB, &waves[Chan::B]);
 
 
-static ParameterValue  param_DDSB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_DDSB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  "50000", 0, Order::One);
-static ParameterValue  param_DDSB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  "50000", 0, Order::One);
-static ParameterChoice param_DDSB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
-static ParameterPage   param_DDSB_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
+static ParameterValue  param_FreeB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
+static ParameterValue  param_FreeB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_FreeB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterChoice param_FreeB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterPage   param_FreeB_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
-static ParameterBase *params_DDSB[] =
+static ParameterBase *params_FreeB[] =
 {
-    &param_DDSB_Frequency,
-    &param_DDSB_Amplitude,
-    &param_DDSB_Offset,
-    &param_DDSB_ModeStart,
-    &param_DDSB_Choice,
+    &param_FreeB_Frequency,
+    &param_FreeB_Amplitude,
+    &param_FreeB_Offset,
+    &param_FreeB_ModeStart,
+    &param_FreeB_Choice,
     0
 };
 
-static Form formDDSB(Form::DDS, params_DDSB, &waves[Chan::B]);
+static Form formFreeB(Form::Free, params_FreeB, &waves[Chan::B]);
 
 
 static ParameterValue param_MeanderB_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -358,7 +358,7 @@ static Form *formsB[] =
     &formTriangleB,
     &formMeanderB,
     &formImpulseB,
-    &formDDSB,
+    &formFreeB,
     0
 };
 

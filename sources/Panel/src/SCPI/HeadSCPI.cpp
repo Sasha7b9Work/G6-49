@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Generator/Signals.h"
 #include "Menu/Pages/Include/PageSignals.h"
 #include "SCPI/KeySCPI.h"
 #include "SCPI/HeadSCPI.h"
@@ -128,11 +129,11 @@ static const char *const formNames[Form::Count + 1] =
     ""
 };
 
-static const char *FuncForm(const char *)
+static const char *FuncForm(const char *buffer)
 {
-    //SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FO))
+    SCPI_REQUEST(SCPI::SendAnswer(formNames[*FORM_CURRENT]));
 
-    return nullptr;
+    SCPI_PROCESS_ARRAY(formNames, PageSignals::SetForm(static_cast<Form::E>(i)));
 }
 
 
