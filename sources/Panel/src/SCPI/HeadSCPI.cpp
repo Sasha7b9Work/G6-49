@@ -6,29 +6,22 @@
 
 // *IDN?
 static const char *FuncIDN(const char *);
-static bool TestIDN();
 static void HintIDN(String *);
 // *RST
 static const char *FuncReset(const char *);
-static bool TestReset();
 static void HintReset(String *);
 // :HELP
 static const char *FuncHelp(const char *);
-static bool TestHelp();
 static void HintHelp(String *);
-// :TEST
-static const char *FuncTest(const char *);
-static bool TestTest();
+
 static void Process(const StructSCPI strct[], String message); //-V2504
-static void HintTest(String *);
 
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",     FuncIDN,        TestIDN,   "ID request",                       HintIDN),
-    SCPI_LEAF("*RST",      FuncReset,      TestReset, "Reset settings to default values", HintReset),
-    SCPI_LEAF(":HELP",     FuncHelp,       TestHelp,  "Output of this help",              HintHelp),
-    SCPI_LEAF(":TEST",     FuncTest,       TestTest,  "Run all tests",                    HintTest),
+    SCPI_LEAF("*IDN?",     FuncIDN,    "ID request",                       HintIDN),
+    SCPI_LEAF("*RST",      FuncReset,  "Reset settings to default values", HintReset),
+    SCPI_LEAF(":HELP",     FuncHelp,   "Output of this help",              HintHelp),
     SCPI_NODE(":KEY",      SCPI::key),
     SCPI_EMPTY()
 };
@@ -79,59 +72,6 @@ static const char *FuncHelp(const char *buffer)
 static void HintHelp(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
-}
-
-
-static const char *FuncTest(const char *buffer)
-{
-    static const char *const modes[2] =
-    {
-        " FULL",
-        " FAST"
-    };
-
-    for (int i = 0; i < 2; i++)
-    {
-        const char *end = SCPI::BeginWith(buffer, modes[i]);
-        if (end)
-        {
-            SCPI_PROLOG(end)
-
-            SCPI_EPILOG(end)
-        }
-    }
-
-    return nullptr;
-}
-
-
-static void HintTest(String *message) //-V2009 //-V2558
-{
-    SCPI::SendAnswer(message->c_str());
-}
-
-
-static bool TestIDN()
-{
-    return true;
-}
-
-
-static bool TestReset()
-{
-    return true;
-}
-
-
-static bool TestHelp()
-{
-    return true;
-}
-
-
-static bool TestTest()
-{
-    return true;
 }
 
 

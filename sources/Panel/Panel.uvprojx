@@ -2281,6 +2281,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
             </File>
+            <File>
+              <FileName>MacrosesSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\MacrosesSCPI.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

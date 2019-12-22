@@ -1,14 +1,13 @@
 #include "defines.h"
 #include "Keyboard/Keyboard.h"
 #include "SCPI/KeySCPI.h"
+#include "SCPI/SCPI.h"
 
 
 // :KEY:PRESS:
 static const char *FuncKeyPress(const char *);
-static bool TestKeyPress();
 // :KEY:LONG:
 static const char *FuncKeyLong(const char *);
-static bool TestKeyLong();
 
 static void HintKey(String *);
 
@@ -46,8 +45,8 @@ static const char *const keyNames[KeyEvent::Count + 1] =
 
 const StructSCPI SCPI::key[] =
 {
-    SCPI_LEAF(":PRESS", FuncKeyPress, TestKeyPress, "Button press",            HintKey),
-    SCPI_LEAF(":LONG",  FuncKeyLong,  TestKeyLong,  "Press and hold a button", HintKey),
+    SCPI_LEAF(":PRESS", FuncKeyPress, "Button press",            HintKey),
+    SCPI_LEAF(":LONG",  FuncKeyLong,  "Press and hold a button", HintKey),
     SCPI_EMPTY()
 };
 
@@ -95,16 +94,4 @@ static const char *FuncKeyLong(const char *buffer)
     }
 
     return nullptr;
-}
-
-
-static bool TestKeyPress()
-{
-    return true;
-}
-
-
-static bool TestKeyLong()
-{
-    return true;
 }
