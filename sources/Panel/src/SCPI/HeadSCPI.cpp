@@ -13,8 +13,8 @@ static void HintReset(String *);
 // :HELP
 static const char *FuncHelp(const char *);
 static void HintHelp(String *);
-
-static void Process(const StructSCPI strct[], String message); //-V2504
+/// Рекурсивная функция формирования сообщения подсказки
+static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
 
 
 const StructSCPI SCPI::head[] =
@@ -63,7 +63,7 @@ static const char *FuncHelp(const char *buffer)
     
     String message;
 
-    Process(SCPI::head, message);
+    ProcessHelp(SCPI::head, message);
 
     SCPI_EPILOG(buffer);
 }
@@ -75,7 +75,7 @@ static void HintHelp(String *message) //-V2009 //-V2558
 }
 
 
-static void Process(const StructSCPI strct[], String msg) //-V2504
+static void ProcessHelp(const StructSCPI strct[], String msg) //-V2504
 {
     while(!strct->IsEmpty())
     {
@@ -83,7 +83,7 @@ static void Process(const StructSCPI strct[], String msg) //-V2504
         {
             String message(msg);
             message.Append(strct->key);
-            Process(strct->strct, message);
+            ProcessHelp(strct->strct, message);
         }
         else if(strct->IsLeaf())
         {
