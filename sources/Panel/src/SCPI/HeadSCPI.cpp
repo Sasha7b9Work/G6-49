@@ -100,17 +100,11 @@ static const char *const channelNames[] =
 };
 
 
-static void FuncSetChannel(int i)
-{
-    PageSignals::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A'));
-}
-
-
 static const char *FuncChannel(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(channelNames[CURRENT_CHANNEL]));
 
-    SCPI_PROCESS_ARRAY(channelNames, FuncSetChannel(i));
+    SCPI_PROCESS_ARRAY(channelNames, PageSignals::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A')));
 }
 
 
@@ -136,6 +130,8 @@ static const char *const formNames[Form::Count + 1] =
 
 static const char *FuncForm(const char *)
 {
+    //SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FO))
+
     return nullptr;
 }
 

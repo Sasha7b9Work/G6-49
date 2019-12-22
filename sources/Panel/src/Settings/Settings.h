@@ -82,9 +82,10 @@ public:
     int16                       freq_level;                                 ///< Уровень синхронизации
     int16                       freq_hysteresis;                            ///< Величина гистерезиса
     bool                        sine_ManipulationEnabled[Chan::Count];      ///< true, если включена модуляция синусоиды пилой
+    uint                        flag;
 
-#define FLAG        set.flag1
-    uint            flag1;
+#define FLAG                    set.flag
+
 #define BIT_PARITY        0   ///< Parity   - флаг чётности Parity
 #define BIT_FREQ_INTERVAL 1   ///< Interval - интервал запуска измерений
 #define BIT_CONSOLE       2   ///<          - показ отладочной консоли
