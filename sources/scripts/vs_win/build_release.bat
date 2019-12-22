@@ -1,3 +1,5 @@
+@echo off
+
 cd ../..
 
 rmdir "generated/Win32" /s /q
@@ -17,7 +19,8 @@ goto Exit
 :Succsess
 @echo %TIME%   Complete
 
-:Exit
-
 call copy_wxWidgets_dlls.bat
 call copy_resources.bat
+
+:Exit
+
