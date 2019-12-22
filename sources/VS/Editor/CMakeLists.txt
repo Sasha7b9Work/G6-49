@@ -8,7 +8,40 @@ include_directories(src
                     
 add_definitions(-DWXUSINGDLL)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MTd")
+
+
+# Older cmake versions don't support string(APPEND ...) provide a workaround
+macro(wx_string_append var str)
+    set(${var} ${${var}}${str})
+endmacro()
+
+set(MSVC_LIB_USE "/MDd")
+set(MSVC_LIB_REPLACE "/MTd")
+if(CONF_RELEASE)
+    set(MSVC_LIB_USE "/MTd")
+    set(MSVC_LIB_REPLACE "/MDd")
+endif()
+# Set MSVC runtime flags for all configurations
+foreach(cfg "" ${CMAKE_CONFIGURATION_TYPES})
+    set(c_flag_var CMAKE_C_FLAGS)
+    set(cxx_flag_var CMAKE_CXX_FLAGS)
+    if(cfg)
+        string(TOUPPER ${cfg} cfg_upper)
+        wx_string_append(c_flag_var "_${cfg_upper}")
+        wx_string_append(cxx_flag_var "_${cfg_upper}")
+    endif()
+    if(${c_flag_var} MATCHES ${MSVC_LIB_REPLACE})
+        string(REPLACE ${MSVC_LIB_REPLACE} ${MSVC_LIB_USE} ${c_flag_var} "${${c_flag_var}}")
+        set(${c_flag_var} ${${c_flag_var}} CACHE STRING
+          "Flags used by the C compiler during ${cfg_upper} builds." FORCE)
+    endif()
+    if(${cxx_flag_var} MATCHES ${MSVC_LIB_REPLACE})
+        string(REPLACE ${MSVC_LIB_REPLACE} ${MSVC_LIB_USE} ${cxx_flag_var} "${${cxx_flag_var}}")
+        set(${cxx_flag_var} ${${cxx_flag_var}} CACHE STRING
+          "Flags used by the CXX compiler during ${cfg_upper} builds." FORCE)
+    endif()
+endforeach()
 
 
 add_compile_options(/wd4355)    # 'this': used in base member initializer list
@@ -36,4 +69,3 @@ target_link_libraries(Editor WinMM.lib)
 target_link_libraries(Editor version.lib)
 target_link_libraries(Editor Imm32.Lib)
 target_link_libraries(Editor Setupapi.lib)
-
