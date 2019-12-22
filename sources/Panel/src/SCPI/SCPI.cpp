@@ -29,6 +29,9 @@ static String data;
 static String badSymbols;
 
 
+Chan::E SCPI::controlChannel = Chan::A;
+
+
 void SCPI::AppendNewData(const char *buffer, uint size)
 {
     data.Append(buffer, size);

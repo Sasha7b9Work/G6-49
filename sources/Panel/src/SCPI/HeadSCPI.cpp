@@ -13,6 +13,10 @@ static void HintReset(String *);
 // :HELP
 static const char *FuncHelp(const char *);
 static void HintHelp(String *);
+// :CHANNEL
+static const char *FuncChannel(const char *);
+static void HintChannel(String *);
+
 /// Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
 
@@ -22,6 +26,8 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF("*IDN?",     FuncIDN,    "ID request",                       HintIDN),
     SCPI_LEAF("*RST",      FuncReset,  "Reset settings to default values", HintReset),
     SCPI_LEAF(":HELP",     FuncHelp,   "Output of this help",              HintHelp),
+
+    SCPI_LEAF(":CHANNEL",  FuncChannel, "Set active channel",              HintChannel),
     SCPI_NODE(":KEY",      SCPI::key),
     SCPI_EMPTY()
 };
@@ -72,6 +78,34 @@ static const char *FuncHelp(const char *buffer)
 static void HintHelp(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
+}
+
+
+static const char *const channelNames[] =
+{
+    " A",
+    " B",
+    ""
+};
+
+
+static void FuncSetChannel(int i)
+{
+    SCPI::controlChannel = static_cast<Chan::E>(channelNames[i][1] - 'A');
+}
+
+
+static const char *FuncChannel(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(channelNames[SCPI::controlChannel]));
+
+    SCPI_PROCESS_ARRAY(channelNames, FuncSetChannel(i));
+}
+
+
+static void HintChannel(String *message)
+{
+    SCPI::ProcessHint(message, channelNames);
 }
 
 
