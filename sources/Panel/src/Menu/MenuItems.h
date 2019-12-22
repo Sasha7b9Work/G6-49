@@ -15,7 +15,7 @@
  *  @{
  */
 
-typedef bool (*pFuncBKey)(KeyEvent&);
+typedef bool (*pFuncBKey)(Key&);
 
 
 
@@ -73,7 +73,7 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
-    void Press(KeyEvent &control);
+    void Press(Key &control);
 
     Type GetType() const;
 
@@ -172,13 +172,13 @@ public:
     /// Устанавливает позицию активного пункта меню
     void SetPosActItem(int pos);
     /// Возвращает адрес элемента меню, соответствующего данного функциональной клавише
-    Item *GetItem(const KeyEvent &key) const;
+    Item *GetItem(const Key &key) const;
     /// Возвращает позицию текущего элемента странцы page
     int8 PosCurrentItem() const;
 
     void ChangeSubPage(int delta);
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
-    bool Press(KeyEvent &control);
+    bool Press(Key &control);
 
     struct Title
     {
@@ -209,7 +209,7 @@ public:
     /// Функция будет вызываться во время отрисовки кнопки.
     pFuncVII    funcForDraw;
     /// Обрабатывает нажатие кнопки. Возвращает ноль, потому что не может находиться в открытом состоянии.
-    Item *Press(KeyEvent::Action action);
+    Item *Press(Key::Action action);
 
     void Draw(int x, int y) const;
 };
@@ -260,7 +260,7 @@ public:
 
     int                             numHints;
     /// Обрабатывает нажатие кнопки. Возвращает 0, потому что не может находиться в открытом состоянии
-    Item *Press(KeyEvent::Action action);
+    Item *Press(Key::Action action);
 
     void Draw(int x, int y) const;
 };
@@ -316,7 +316,7 @@ public:
 
     void DrawValue(int x, int y) const;
     /// Обработка воздействия
-    void Press(KeyEvent &control);
+    void Press(Key &control);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
@@ -370,7 +370,7 @@ public:
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     String NameSubItem(int i) const;
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
-    Item *Press(KeyEvent &control);
+    Item *Press(Key &control);
 
     int8 CurrentIndex() const;
 };
@@ -394,7 +394,7 @@ public:
     pFuncVV     funcOnPress;
     Form  *form;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии и 0 в противном.
-    Item *Press(KeyEvent::Action action);
+    Item *Press(Key::Action action);
 
     pString NameSubItem(int num) const;
 

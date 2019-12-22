@@ -48,7 +48,7 @@ void Menu::Update()
 
     while (!Keyboard::BufferIsEmpty())
     {
-        KeyEvent control = Keyboard::GetNextControl();
+        Key control = Keyboard::GetNextControl();
 
         ProcessContorl(control);
 
@@ -65,7 +65,7 @@ void Menu::Update()
 }
 
 
-void Menu::ProcessContorl(KeyEvent &control)
+void Menu::ProcessContorl(Key &control)
 {
     if(ProcessOutputs(control))
     {
@@ -91,11 +91,11 @@ void Menu::ProcessContorl(KeyEvent &control)
 }
 
 
-bool Menu::ProcessOutputs(KeyEvent &control)
+bool Menu::ProcessOutputs(Key &control)
 {
     if (control.action.IsRelease())
     {
-        if (control.Is(KeyEvent::On1))
+        if (control.Is(Key::On1))
         {
             if (!WAVE(Chan::A).StartModeIsSingle())
             {
@@ -104,7 +104,7 @@ bool Menu::ProcessOutputs(KeyEvent &control)
             PGenerator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
             return true;
         }
-        else if (control.Is(KeyEvent::On2))
+        else if (control.Is(Key::On2))
         {
             if (!WAVE(Chan::B).StartModeIsSingle())
             {

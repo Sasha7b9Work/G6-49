@@ -8,7 +8,7 @@ public:
     /// Отрисовка подсказки
     static void Draw();
     /// Орган упралвения. Возвращает false, если обработка не произошла
-    static bool ProcessControl(KeyEvent &control);
+    static bool ProcessControl(Key &control);
 
 private:
     /// \brief Отрисовывает подсказки с пояснениями
@@ -26,7 +26,7 @@ private:
     /// Контрол, для которого нужно выводить подсказку
     static const Item *item;
     /// Орган управления, для которого нужно выводить подсказку
-    static KeyEvent::E control;
+    static Key::E control;
     /// Количество страниц в подсказке
     static int numPages;
     /// Текущая отрисовываемая страница

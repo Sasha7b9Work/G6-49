@@ -1,13 +1,13 @@
 #include "Controls.h"
 
 
-bool KeyEvent::IsDigit() const
+bool Key::IsDigit() const
 {
     return (value >= _0 && value <= _9);
 }
 
 
-char KeyEvent::ToChar() const
+char Key::ToChar() const
 {
     if(IsDigit())
     {
@@ -26,25 +26,25 @@ char KeyEvent::ToChar() const
 }
 
 
-bool KeyEvent::IsFunctional() const
+bool Key::IsFunctional() const
 {
     return value >= F1 && value <= F4;
 }
 
 
-bool KeyEvent::IsRotate() const
+bool Key::IsRotate() const
 {
     return value == RegLeft || value == RegRight;
 }
 
 
-bool KeyEvent::Action::IsRelease() const
+bool Key::Action::IsRelease() const
 {
     return value == Up || value == Long;
 }
 
 
-pString KeyEvent::Name() const
+pString Key::Name() const
 {
     static const char *names[] =
     {

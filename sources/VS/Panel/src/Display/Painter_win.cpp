@@ -43,7 +43,7 @@ static wxBitmap bitmap(320, 240);
 /// Контекст рисования
 static wxMemoryDC memDC;
 
-static wxButton *buttons[KeyEvent::Count];
+static wxButton *buttons[Key::Count];
 
 /// Цвета
 static uint colors[256];
@@ -57,7 +57,7 @@ static wxRect GetMaxDisplay();
 /// Создаёт все кнопки
 static void CreateButtons(Frame *frame);
 /// Создаёт одну кнопку
-static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, const wxSize &size);
+static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size);
 
 
 class Screen : public wxPanel
@@ -165,13 +165,13 @@ static void CreateFrame()
 
 static void CreateButtons(Frame *frame)
 {
-    static const KeyEvent::E keys[5][5] =
+    static const Key::E keys[5][5] =
     {
-        {KeyEvent::F1,   KeyEvent::_1,      KeyEvent::_2,        KeyEvent::_3,       KeyEvent::Esc},
-        {KeyEvent::F2,   KeyEvent::_4,      KeyEvent::_5,        KeyEvent::_6,       KeyEvent::Left},
-        {KeyEvent::F3,   KeyEvent::_7,      KeyEvent::_8,        KeyEvent::_9,       KeyEvent::Right},
-        {KeyEvent::F4,   KeyEvent::Dot,     KeyEvent::_0,        KeyEvent::Minus,    KeyEvent::On1},
-        {KeyEvent::None, KeyEvent::RegLeft, KeyEvent::RegButton, KeyEvent::RegRight, KeyEvent::On2}
+        {Key::F1,   Key::_1,      Key::_2,        Key::_3,       Key::Esc},
+        {Key::F2,   Key::_4,      Key::_5,        Key::_6,       Key::Left},
+        {Key::F3,   Key::_7,      Key::_8,        Key::_9,       Key::Right},
+        {Key::F4,   Key::Dot,     Key::_0,        Key::Minus,    Key::On1},
+        {Key::None, Key::RegLeft, Key::RegButton, Key::RegRight, Key::On2}
     };
 
     int x0 = 340;
@@ -195,14 +195,14 @@ static void CreateButtons(Frame *frame)
 }
 
 
-static void CreateButton(KeyEvent::E key, Frame *frame, const wxPoint &pos, const wxSize &size)
+static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size)
 {
-    if (key == KeyEvent::None)
+    if (key == Key::None)
     {
         return;
     }
 
-    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), KeyEvent(key).Name(), pos, size);
+    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), Key(key).Name(), pos, size);
 
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnKeyDown));
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnKeyUp));

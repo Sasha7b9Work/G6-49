@@ -443,9 +443,9 @@ void StructValue::SaveValue()
 }
 
 
-void StructValue::PressKey(const KeyEvent &key)
+void StructValue::PressKey(const Key &key)
 {
-    if (key.value == KeyEvent::Dot)
+    if (key.value == Key::Dot)
     {
         POS_COMMA = CURRENT_POS - 1;
 
@@ -456,19 +456,19 @@ void StructValue::PressKey(const KeyEvent &key)
 
     static const struct StrControl
     {
-        KeyEvent::E control;
+        Key::E control;
         char       symbol;
         uint8      nu[3];
     }
     command[] =
     {
-        {KeyEvent::_1, '1'}, {KeyEvent::_2, '2'}, {KeyEvent::_3, '3'}, {KeyEvent::_4, '4'}, {KeyEvent::_5, '5'},
-        {KeyEvent::_6, '6'}, {KeyEvent::_7, '7'}, {KeyEvent::_8, '8'}, {KeyEvent::_9, '9'}, {KeyEvent::_0, '0'},
-        {KeyEvent::None, '.'}
+        {Key::_1, '1'}, {Key::_2, '2'}, {Key::_3, '3'}, {Key::_4, '4'}, {Key::_5, '5'},
+        {Key::_6, '6'}, {Key::_7, '7'}, {Key::_8, '8'}, {Key::_9, '9'}, {Key::_0, '0'},
+        {Key::None, '.'}
     };
 
     int i = 0;
-    while(command[i].control != KeyEvent::None)
+    while(command[i].control != Key::None)
     {
         if(command[i].control == key)
         {

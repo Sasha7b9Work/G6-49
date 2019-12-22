@@ -43,9 +43,9 @@ const char *Choice::NamePrevSubItem()
 }
 
 
-Item *Page::GetItem(const KeyEvent &key) const
+Item *Page::GetItem(const Key &key) const
 {
-    return const_cast<Item *>(items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - KeyEvent::F1)]);
+    return const_cast<Item *>(items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Key::F1)]);
 }
 
 

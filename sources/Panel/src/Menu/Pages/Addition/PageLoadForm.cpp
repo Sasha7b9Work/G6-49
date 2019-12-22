@@ -52,19 +52,19 @@ DEF_BUTTON( bChoose,                                                            
 
 
 
-static bool OnKey(KeyEvent &control)
+static bool OnKey(Key &control)
 {
-    if (control.value == KeyEvent::RegLeft)
+    if (control.value == Key::RegLeft)
     {
         FDrive::PressDown();
         return true;
     }
-    else if (control.value == KeyEvent::RegRight)
+    else if (control.value == Key::RegRight)
     {
         FDrive::PressUp();
         return true;
     }
-    else if (control.Is(KeyEvent::Esc, KeyEvent::Action::Up))
+    else if (control.Is(Key::Esc, Key::Action::Up))
     {
         Menu::ResetAdditionPage();
         return true;

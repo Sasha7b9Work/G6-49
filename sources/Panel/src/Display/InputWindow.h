@@ -26,7 +26,7 @@ public:
 
     void RegRight();
 
-    void PressKey(const KeyEvent &key);
+    void PressKey(const Key &key);
 
     void SaveValue();
 
@@ -78,7 +78,7 @@ struct InputWindow
 
     static void KeyEnter();
 
-    static void ProcessContorl(KeyEvent &control);
+    static void ProcessContorl(Key &control);
 
 private:
     static void KeyLeft();

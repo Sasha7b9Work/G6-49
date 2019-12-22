@@ -84,9 +84,9 @@ DEF_CHOICE_2( cTypeTune,                                                        
 )
 
 
-static bool OnKey_PageSignals(KeyEvent &key)
+static bool OnKey_PageSignals(Key &key)
 {
-    if(key.Is(KeyEvent::Esc) && key.action.IsRelease())
+    if(key.Is(Key::Esc) && key.action.IsRelease())
     {
         return FORM_CURRENT->CloseOpenedParameter();
     }

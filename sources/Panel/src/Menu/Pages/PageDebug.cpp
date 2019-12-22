@@ -85,7 +85,7 @@ static int SizeBuffer(Register::E name = Register::Count);
 /// Возвращает тип ввода для регистра i
 static TypeInput TypeBuffer(Register::E name = Register::Count);
 /// Возращает true, если символ является корректным для данного типа ввода
-static bool AllowableSymbol(KeyEvent key);
+static bool AllowableSymbol(Key key);
 /// Выводит значение регистра i
 static void DrawValue(int x, int y, uint8 i);
 /// Возвращает из буфера значение, предшествующее точке
@@ -112,7 +112,7 @@ static void LoadRegister()
 }
 
 
-static bool OnRegulator(KeyEvent key)
+static bool OnRegulator(Key key)
 {
     if (TypeBuffer(currentRegister) == Uint)
     {
@@ -128,7 +128,7 @@ static bool OnRegulator(KeyEvent key)
 }
 
 
-static bool OnKey_PageRegisters(KeyEvent &key)
+static bool OnKey_PageRegisters(Key &key)
 {
     if (!showInputWindow)
     {
@@ -143,7 +143,7 @@ static bool OnKey_PageRegisters(KeyEvent &key)
             return true;
         }
     }
-    else if (key.action.Is(KeyEvent::Action::Down))
+    else if (key.action.Is(Key::Action::Down))
     {
         if (AllowableSymbol(key))
         {
@@ -156,7 +156,7 @@ static bool OnKey_PageRegisters(KeyEvent &key)
             NumberBuffer::ProcessKey(key);
             return true;
         }
-        else if (key.Is(KeyEvent::Esc))
+        else if (key.Is(Key::Esc))
         {
             OnPress_Cancel();
             return true;
@@ -271,7 +271,7 @@ static uint64 BufferToValue()
 }
 
 
-static bool AllowableSymbol(KeyEvent key)
+static bool AllowableSymbol(Key key)
 {
     TypeInput type = TypeBuffer(currentRegister);
 
@@ -281,7 +281,7 @@ static bool AllowableSymbol(KeyEvent key)
     }
     else if (type == Binary)
     {
-        return key.Is(KeyEvent::_0) || key.Is(KeyEvent::_1);
+        return key.Is(Key::_0) || key.Is(Key::_1);
     }
     else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
     {
@@ -290,7 +290,7 @@ static bool AllowableSymbol(KeyEvent key)
             return true;
         }
 
-        if (key.Is(KeyEvent::Dot))
+        if (key.Is(Key::Dot))
         {
             for (int i = 0; i < sizeof(buffer); i++)
             {

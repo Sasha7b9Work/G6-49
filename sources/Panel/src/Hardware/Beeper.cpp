@@ -58,16 +58,16 @@ void Beeper::WarnBeepGood()
 }
 
 
-void Beeper::Beep(KeyEvent::Action::E type)
+void Beeper::Beep(Key::Action::E type)
 {
-    static const pFuncVV func[KeyEvent::Action::Count] =
+    static const pFuncVV func[Key::Action::Count] =
     {
         Beeper::ButtonPress,
         Beeper::ButtonRelease,
         Beeper::ButtonRelease
     };
 
-    if (type < KeyEvent::Action::Count)
+    if (type < Key::Action::Count)
     {
         func[type]();
     }

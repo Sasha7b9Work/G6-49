@@ -8,7 +8,7 @@
 #include "Keyboard/Keyboard.h"
 
 
-static KeyEvent commands[10];
+static Key commands[10];
 static int pointer = 0;
 static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 
@@ -36,11 +36,11 @@ static void DetectRegulator();
 static uint timePress[5][6];
 
                                      //          SL0          SL1          SL2             SL3             S4             SL5
-static const KeyEvent::E controls[5][6] = {{KeyEvent::_0, KeyEvent::_5, KeyEvent::Dot,   KeyEvent::Esc,   KeyEvent::F1,   KeyEvent::None},    // RL0
-                                          {KeyEvent::_1, KeyEvent::_6, KeyEvent::Minus, KeyEvent::Left,  KeyEvent::F2,   KeyEvent::None},    // RL1
-                                          {KeyEvent::_2, KeyEvent::_7, KeyEvent::None,  KeyEvent::Right, KeyEvent::F3,   KeyEvent::None},    // RL2
-                                          {KeyEvent::_3, KeyEvent::_8, KeyEvent::On1,   KeyEvent::None,  KeyEvent::F4,   KeyEvent::None},    // RL3
-                                          {KeyEvent::_4, KeyEvent::_9, KeyEvent::On2,   KeyEvent::None,  KeyEvent::None, KeyEvent::None}};   // RL4
+static const Key::E controls[5][6] = {{Key::_0, Key::_5, Key::Dot,   Key::Esc,   Key::F1,   Key::None},    // RL0
+                                          {Key::_1, Key::_6, Key::Minus, Key::Left,  Key::F2,   Key::None},    // RL1
+                                          {Key::_2, Key::_7, Key::None,  Key::Right, Key::F3,   Key::None},    // RL2
+                                          {Key::_3, Key::_8, Key::On1,   Key::None,  Key::F4,   Key::None},    // RL3
+                                          {Key::_4, Key::_9, Key::On2,   Key::None,  Key::None, Key::None}};   // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
@@ -93,9 +93,9 @@ void Keyboard::Update()
         {
             bool state = READ_RL(rl);
 
-            KeyEvent::E control =  controls[rl][sl];
+            Key::E control =  controls[rl][sl];
 
-            if (control != KeyEvent::None)
+            if (control != Key::None)
             {
                 if (timePress[rl][sl] && timePress[rl][sl] != MAX_UINT)         // Если клавиша находится в нажатом положении
                 {
@@ -103,13 +103,13 @@ void Keyboard::Update()
                     if(delta > 500)                                             // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        AppendEvent(controls[rl][sl], KeyEvent::Action::Long);   // это будет длинное нажатие
+                        AppendEvent(controls[rl][sl], Key::Action::Long);   // это будет длинное нажатие
                     }
                     else if (delta > 100 &&                                     // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                                // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
-                        AppendEvent(controls[rl][sl], KeyEvent::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
+                        AppendEvent(controls[rl][sl], Key::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
                     else
                     {
@@ -119,7 +119,7 @@ void Keyboard::Update()
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
                 {
                     timePress[rl][sl] = time;                                       // то сохраняем время её нажатия
-                    AppendEvent(controls[rl][sl], KeyEvent::Action::Down);
+                    AppendEvent(controls[rl][sl], Key::Action::Down);
                 }
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
@@ -161,7 +161,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
         {
-            Keyboard::AppendEvent(KeyEvent::RegButton, KeyEvent::Action::Long);                                     // посылаем длинное нажатие
+            Keyboard::AppendEvent(Key::RegButton, Key::Action::Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -173,7 +173,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                Keyboard::AppendEvent(KeyEvent::RegButton, KeyEvent::Action::Down);
+                Keyboard::AppendEvent(Key::RegButton, Key::Action::Down);
             }
         }
         else                                                                // Ексли копка была нажата ранее
@@ -182,7 +182,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    Keyboard::AppendEvent(KeyEvent::RegButton, KeyEvent::Action::Up);
+                    Keyboard::AppendEvent(Key::RegButton, Key::Action::Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -203,12 +203,12 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        Keyboard::AppendEvent(KeyEvent::RegLeft, KeyEvent::Action::Down);
+        Keyboard::AppendEvent(Key::RegLeft, Key::Action::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        Keyboard::AppendEvent(KeyEvent::RegRight, KeyEvent::Action::Down);
+        Keyboard::AppendEvent(Key::RegRight, Key::Action::Down);
         prevStatesIsOne = false;
     }
     else
@@ -218,9 +218,9 @@ static void DetectRegulator()
 }
 
 
-void Keyboard::AppendEvent(KeyEvent::E key, KeyEvent::Action::E action)
+void Keyboard::AppendEvent(Key::E key, Key::Action::E action)
 {
-    commands[pointer++] = KeyEvent(key, action);
+    commands[pointer++] = Key(key, action);
 
     Beeper::Beep(action);
 }
@@ -232,13 +232,13 @@ bool Keyboard::BufferIsEmpty()
 }
 
 
-KeyEvent Keyboard::GetNextControl()
+Key Keyboard::GetNextControl()
 {
-    KeyEvent retValue;
+    Key retValue;
 
     if (BufferIsEmpty())
     {
-        retValue.value = KeyEvent::None;
+        retValue.value = Key::None;
     }
     else
     {
@@ -283,7 +283,7 @@ void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const
 #endif
 
 
-const char *PanelControlName(const KeyEvent &control)
+const char *PanelControlName(const Key &control)
 {
     static const char *names[] =
     {

@@ -18,7 +18,7 @@ public:
     /// максимальное значение, которое может храниться в буфере.
     static void Set(char *buffer, int size, int position, int maxValue);
     /// Обработка клавиши
-    static void ProcessKey(KeyEvent &key);
+    static void ProcessKey(Key &key);
     /// Обработка Backspace
     static void PressBackspace();
     /// Возвращает номер разряда, в котором находится курсор
@@ -34,7 +34,7 @@ private:
     /// Возвращает количество символов в буфере (без учёта завершающего нуля).
     static int NumSymbols();
     /// Обработка поворота ручки
-    static void ProcessRegulator(KeyEvent &key);
+    static void ProcessRegulator(Key &key);
     /// Увеличить значение в заданном разряде. Возвращает true, если действие произошло
     static bool IncreaseDigit(int pos);
     /// Уменьшить значение в заданном разряде. Возвращает true, если действие произошло
@@ -42,7 +42,7 @@ private:
     /// Возвращает позицию символа для изменения
     static int PositionSymbolForChange();
     /// Является ли допустимым данный символ
-    static bool AllowableSymbol(KeyEvent &key);
+    static bool AllowableSymbol(Key &key);
     /// Возвращает числовое значение, представленное в буфере
     static uint ToUINT();
     /// Возвращает true, если в числе все девятки

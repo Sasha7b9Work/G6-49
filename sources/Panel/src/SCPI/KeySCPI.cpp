@@ -12,7 +12,7 @@ static const char *FuncKeyLong(const char *);
 static void HintKey(String *);
 
 
-static const char *const keyNames[KeyEvent::Count + 1] =
+static const char *const keyNames[Key::Count + 1] =
 {
     " NONE",       // None
     " F1",         // F1
@@ -53,15 +53,15 @@ const StructSCPI SCPI::key[] =
 
 static const char *FuncKeyPress(const char *buffer)
 {
-    for(int i = 0; i < KeyEvent::Count; i++)
+    for(int i = 0; i < Key::Count; i++)
     {
         const char *end = SCPI::BeginWith(buffer, keyNames[i]);
         if(end)
         {
             SCPI_PROLOG(end)
 
-            Keyboard::AppendEvent(static_cast<KeyEvent::E>(i), KeyEvent::Action::Down);
-            Keyboard::AppendEvent(static_cast<KeyEvent::E>(i), KeyEvent::Action::Up);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Action::Down);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Action::Up);
 
             SCPI_EPILOG(end)
         }
@@ -79,15 +79,15 @@ static void HintKey(String *message)
 
 static const char *FuncKeyLong(const char *buffer)
 {
-    for(int i = 0; i < KeyEvent::Count; i++)
+    for(int i = 0; i < Key::Count; i++)
     {
         const char *end = SCPI::BeginWith(buffer, keyNames[i]);
         if(end)
         {
             SCPI_PROLOG(end)
 
-            Keyboard::AppendEvent(static_cast<KeyEvent::E>(i), KeyEvent::Action::Down);
-            Keyboard::AppendEvent(static_cast<KeyEvent::E>(i), KeyEvent::Action::Long);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Action::Down);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Action::Long);
 
             SCPI_EPILOG(end)
         }

@@ -77,7 +77,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 
-static bool OnControl(KeyEvent &key)
+static bool OnControl(Key &key)
 {
     if(!key.IsFunctional())
     {
