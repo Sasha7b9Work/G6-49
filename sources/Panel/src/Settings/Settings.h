@@ -22,6 +22,8 @@ extern const PageBase pInput;
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
 
 #define BIT_FL1(numBit)         ((FLAG_1 >> (numBit)) & 0x01)
+#define SET_BIT_FL1(numBit)     ((FLAG_1) |= (1 << (numBit)))
+#define CLEAR_BIT_FL1(numBit)   ((FLAG_1) &= (~(1 << (numBit))))
 
 #define CONSOLE_ENABLED         (BIT_FL1(BIT_CONSOLE))
 #define DEBUG_MODE_ENABLED      (BIT_FL1(BIT_DBG_MODE))

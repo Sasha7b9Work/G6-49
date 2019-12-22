@@ -133,3 +133,16 @@ void PageSignals::OnPress_Channel(bool)
 
     pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
 }
+
+
+void PageSignals::SetCurrentChanenl(Chan::E ch)
+{
+    if(ch == Chan::A)
+    {
+        CLEAR_BIT_FL1(BIT_CHANNEL);
+    }
+    else
+    {
+        SET_BIT_FL1(BIT_CHANNEL);
+    }
+}

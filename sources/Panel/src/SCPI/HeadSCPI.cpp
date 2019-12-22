@@ -1,7 +1,10 @@
 #include "defines.h"
+#include "Menu/Pages/Include/PageSignals.h"
 #include "SCPI/KeySCPI.h"
 #include "SCPI/HeadSCPI.h"
+#include "Settings/Settings.h"
 #include "Utils/String.h"
+#include "Wave.h"
 
 
 // *IDN?
@@ -16,6 +19,9 @@ static void HintHelp(String *);
 // :CHANNEL
 static const char *FuncChannel(const char *);
 static void HintChannel(String *);
+// :FORM
+static const char *FuncForm(const char *);
+static void HintForm(String *);
 
 /// Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
@@ -23,16 +29,18 @@ static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",     FuncIDN,    "ID request",                       HintIDN),
-    SCPI_LEAF("*RST",      FuncReset,  "Reset settings to default values", HintReset),
-    SCPI_LEAF(":HELP",     FuncHelp,   "Output of this help",              HintHelp),
+    SCPI_LEAF("*IDN?",     FuncIDN,     "ID request",                       HintIDN),
+    SCPI_LEAF("*RST",      FuncReset,   "Reset settings to default values", HintReset),
+    SCPI_LEAF(":HELP",     FuncHelp,    "Output of this help",              HintHelp),
 
-    SCPI_LEAF(":CHANNEL",  FuncChannel, "Set active channel",              HintChannel),
+    SCPI_LEAF(":CHANNEL",  FuncChannel, "Set active channel",               HintChannel),
+    SCPI_LEAF(":FORM",     FuncForm,    "Set form wave on output",          HintForm),
     SCPI_NODE(":KEY",      SCPI::key),
     SCPI_EMPTY()
 };
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncIDN(const char *buffer)
 {
     SCPI_PROLOG(buffer)
@@ -49,6 +57,7 @@ static void HintIDN(String *message) //-V2009 //-V2558
 }
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncReset(const char *buffer)
 {
     SCPI_PROLOG(buffer)
@@ -63,6 +72,7 @@ static void HintReset(String *message) //-V2009 //-V2558
 }
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncHelp(const char *buffer)
 {
     SCPI_PROLOG(buffer);
@@ -81,6 +91,7 @@ static void HintHelp(String *message) //-V2009 //-V2558
 }
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *const channelNames[] =
 {
     " A",
@@ -91,13 +102,13 @@ static const char *const channelNames[] =
 
 static void FuncSetChannel(int i)
 {
-    SCPI::controlChannel = static_cast<Chan::E>(channelNames[i][1] - 'A');
+    PageSignals::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A'));
 }
 
 
 static const char *FuncChannel(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(channelNames[SCPI::controlChannel]));
+    SCPI_REQUEST(SCPI::SendAnswer(channelNames[CURRENT_CHANNEL]));
 
     SCPI_PROCESS_ARRAY(channelNames, FuncSetChannel(i));
 }
@@ -109,6 +120,33 @@ static void HintChannel(String *message)
 }
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *const formNames[Form::Count + 1] =
+{
+    " SINE",
+    " RAMP+",
+    " RAMP-",
+    " TRIANGLE",
+    " MEANDER",
+    " IMPULSE",
+    " PACKET",
+    " FREE",
+    ""
+};
+
+static const char *FuncForm(const char *)
+{
+    return nullptr;
+}
+
+
+static void HintForm(String *message)
+{
+    SCPI::ProcessHint(message, formNames);
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void ProcessHelp(const StructSCPI strct[], String msg) //-V2504
 {
     while(!strct->IsEmpty())
