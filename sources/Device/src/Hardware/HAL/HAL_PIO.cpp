@@ -187,5 +187,7 @@ void HAL_PIO::Init()
     while(str->port != HPort::Count)
     {
         Init(str->port, str->pin, HMode::Input, HPull::Down);
+        
+        str++;
     }
 }
