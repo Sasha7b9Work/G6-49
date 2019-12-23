@@ -37,8 +37,8 @@ static const Settings defSet =
         MAKE_COLOR(0x40, 0x00, 0x00),   // RED_25
         MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
         MAKE_COLOR(0xc0, 0x00, 0x00),   // RED_75
-        MAKE_COLOR(0xFF, 0xB0, 0xB0),   // CHAN_A
-        MAKE_COLOR(0xB0, 0xB0, 0xFF)    // CHAN_B
+        MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
+        MAKE_COLOR(0x40, 0x40, 0xFF)    // CHAN_B
     },
     { 
         ParameterValue::Frequency,      // sig_parameter[NumForms]
