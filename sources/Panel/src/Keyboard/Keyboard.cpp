@@ -35,12 +35,12 @@ static void DetectRegulator();
 /// При обнаружении нажатия кнопки сюда записывается время нажатия
 static uint timePress[5][6];
 
-                                     //          SL0          SL1          SL2             SL3             S4             SL5
+//                                         SL0      SL1       SL2          SL3        S4          SL5
 static const Key::E controls[5][6] = {{Key::_0, Key::_5, Key::Dot,   Key::Esc,   Key::F1,   Key::None},    // RL0
-                                          {Key::_1, Key::_6, Key::Minus, Key::Left,  Key::F2,   Key::None},    // RL1
-                                          {Key::_2, Key::_7, Key::None,  Key::Right, Key::F3,   Key::None},    // RL2
-                                          {Key::_3, Key::_8, Key::On1,   Key::None,  Key::F4,   Key::None},    // RL3
-                                          {Key::_4, Key::_9, Key::On2,   Key::None,  Key::None, Key::None}};   // RL4
+                                      {Key::_1, Key::_6, Key::Minus, Key::Right, Key::F2,   Key::None},    // RL1
+                                      {Key::_2, Key::_7, Key::None,  Key::Left,  Key::F3,   Key::None},    // RL2
+                                      {Key::_3, Key::_8, Key::On1,   Key::None,  Key::F4,   Key::None},    // RL3
+                                      {Key::_4, Key::_9, Key::On2,   Key::None,  Key::None, Key::None}};   // RL4
 
 static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
 static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
