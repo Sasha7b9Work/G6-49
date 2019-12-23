@@ -29,7 +29,14 @@
 #define WR_FREQ_METER_FILTR     HPort::_G, HPin::_14
 #define WR_FREQ_METER_CLK       HPort::_C, HPin::_1     ///< Пин формирования тактов чтения измеренного значения
 #define WR_CPU_BUSY             HPort::_A, HPin::_2     ///< Сигнал занятости процессора. 0 - процессор занят
-
+#define WR_D0                   HPort::_D, HPin::_14
+#define WR_D1                   HPort::_D, HPin::_15
+#define WR_D2                   HPort::_D, HPin::_0
+#define WR_D3                   HPort::_D, HPin::_1
+#define WR_D4                   HPort::_E, HPin::_7
+#define WR_D5                   HPort::_E, HPin::_8
+#define WR_D6                   HPort::_E, HPin::_9
+#define WR_D7                   HPort::_E, HPin::_10
 
 // Пины чтения
 #define RD_FREQ_METER_DRY       HPort::_C, HPin::_0     ///< Пин чтения готовности частотомера к выдаче данных

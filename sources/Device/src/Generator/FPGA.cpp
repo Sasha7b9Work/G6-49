@@ -41,6 +41,15 @@ static uint8 dataDDS[Chan::Count][FPGA::NUM_POINTS * 2] __attribute__((section("
 
 void FPGA::Init()
 {
+    HAL_PIO::Init(WR_D0, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(WR_D1, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(WR_D2, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(WR_D3, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(WR_D4, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(WR_D5, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(WR_D6, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(WR_D7, HMode::Output_PP, HPull::Down);
+
     // Настраиваем выходы для записи в регистры ПЛИС
 
     HAL_PIO::Reset(WR_FPGA_WR_RG);
