@@ -51,11 +51,6 @@ void AD5697::Init()
 
 static float CalculateOffset(Chan::E ch, ParamValue offset)
 {
-    if (FPGA::CurrentMode(ch) != FPGA::ModeWork::Sine)
-    {
-        return CAL_DDS_OFFSET(ch);
-    }
-
     float zero = CAL_AD9952_OFFSET_ZERO(ch);        // 2048
     
     if (offset.ToFloat() > 0.0F)

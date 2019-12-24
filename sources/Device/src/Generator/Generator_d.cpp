@@ -317,15 +317,7 @@ void DGenerator::SetOffset(Chan::E ch, ParamValue offset)
 
     Amplifier::Tune(ch);
 
-    if(waveIsSine)
-    {
-        AD5697::SetOffset(ch, offset);
-    }
-    else
-    {
-        AD5697::SetOffset(ch, ParamValue(0.0F));
-        FPGA::SetOffset(ch, offset);
-    }
+    AD5697::SetOffset(ch, offset);
 }
 
 
