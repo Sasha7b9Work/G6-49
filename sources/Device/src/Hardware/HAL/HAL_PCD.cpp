@@ -13,7 +13,7 @@ void HAL_PCD::Init()
 
     GPIO_InitTypeDef isGPIO =
     {
-        GPIO_PIN_14 | GPIO_PIN_15,
+        GPIO_PIN_12 | GPIO_PIN_14 | GPIO_PIN_15,
         GPIO_MODE_AF_PP,
         GPIO_NOPULL,
         GPIO_SPEED_HIGH,

@@ -1471,6 +1471,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PIO.h</FilePath>
             </File>
+            <File>
+              <FileName>HAL_SPI3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI3.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
