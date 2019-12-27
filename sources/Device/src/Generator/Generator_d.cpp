@@ -28,30 +28,30 @@ struct Attenuator
 {
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation)
     {
-        static GPIO_TypeDef *const gpio0[Chan::Count] = { GPIOE, GPIOF };
-        static GPIO_TypeDef *const gpio1[Chan::Count] = { GPIOB, GPIOC };
+        static HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
+        static HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
 
-        static const uint16 pin0[Chan::Count] = { GPIO_PIN_15, GPIO_PIN_5 };
-        static const uint16 pin1[Chan::Count] = { GPIO_PIN_5, GPIO_PIN_13 };
+        static const uint16 pin0[Chan::Count] = { HPin::_15, HPin::_5 };
+        static const uint16 pin1[Chan::Count] = { HPin::_5,  HPin::_13 };
 
-        static const GPIO_PinState state0[Attenuation::Count] =
+        static const HState::E state0[Attenuation::Count] =
         {
-            GPIO_PIN_RESET,
-            GPIO_PIN_SET,
-            GPIO_PIN_RESET,
-            GPIO_PIN_SET
+            HState::Disabled,
+            HState::Enabled,
+            HState::Disabled,
+            HState::Enabled
         };
 
-        static const GPIO_PinState state1[Attenuation::Count] =
+        static const HState::E state1[Attenuation::Count] =
         {
-            GPIO_PIN_RESET,
-            GPIO_PIN_RESET,
-            GPIO_PIN_SET,
-            GPIO_PIN_SET
+            HState::Disabled,
+            HState::Disabled,
+            HState::Enabled,
+            HState::Enabled
         };
 
-        HAL_GPIO_WritePin(gpio0[ch], pin0[ch], state0[attenuation]);
-        HAL_GPIO_WritePin(gpio1[ch], pin1[ch], state1[attenuation]);
+        HAL_PIO::Write(gpio0[ch], pin0[ch], state0[attenuation]);
+        HAL_PIO::Write(gpio1[ch], pin1[ch], state1[attenuation]);
     }
 
     static void Init()
