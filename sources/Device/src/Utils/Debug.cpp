@@ -1,6 +1,5 @@
 #include "Debug.h"
 #include "Hardware/Timer.h"
-#include <stm32f4xx_hal.h>
 
 
 volatile static uint timeStart = 0;
@@ -12,7 +11,7 @@ int   Debug::line = 0;
 
 void Debug::StartProfiling()
 {
-    timeStart = TIME_US;
+    timeStart = Timer::TimeUS();
 }
 
 
@@ -30,13 +29,13 @@ void Debug::ClearTimeCounter()
 
 void Debug::StartIncreaseCounter()
 {
-    timeStartCounter = TIME_US;
+    timeStartCounter = Timer::TimeUS();
 }
 
 
 void Debug::StopIncreaseCounter()
 {
-    timeCounter += (TIME_US - timeStartCounter);
+    timeCounter += (Timer::TimeUS() - timeStartCounter);
 }
 
 

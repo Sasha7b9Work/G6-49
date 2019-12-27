@@ -9,7 +9,6 @@
 #include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "FreqMeter/FreqMeter_d.h"
-#include <stm32f4xx_hal.h>
 
 
 int main()

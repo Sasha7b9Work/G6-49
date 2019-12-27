@@ -248,6 +248,13 @@ uint Timer::TimeMS()
     return HAL_GetTick();
 }
 
+
+uint Timer::TimeUS()
+{
+    return (TIM2->CNT / 90);
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
