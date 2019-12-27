@@ -133,7 +133,7 @@ source_group(libs\\HAL                REGULAR_EXPRESSION ../Panel/src/libs/HAL/*
 source_group(Menu                     REGULAR_EXPRESSION ../Panel/src/Menu/*)
 source_group(Menu\\Pages              REGULAR_EXPRESSION ../Panel/src/Menu/Pages/*)
 source_group(Menu\\Pages\\Addition    REGULAR_EXPRESSION ../Panel/src/Menu/Pages/Addition/*)
-source_group(Menu\\Pages\\Include     REGULAR_EXPRESSION ../Panel/src/Menu/Pages/Include/*)
+source_group(Menu\\Pages\\PageDebug   REGULAR_EXPRESSION ../Panel/src/Menu/Pages/PageDebug/*)
 source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION ../Panel/src/Menu/Pages/PageSignals/*)
 source_group(SCPI                     REGULAR_EXPRESSION ../Panel/src/SCPI/*)
 source_group(Settings                 REGULAR_EXPRESSION ../Panel/src/Settings/*)
@@ -220,8 +220,8 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/Menu/*
                     ../../Panel/src/Menu/Pages/*
                     ../../Panel/src/Menu/Pages/Addition/*
-                    ../../Panel/src/Menu/Pages/Include/*
                     ../../Panel/src/Menu/Pages/PageSignals/*
+                    ../../Panel/src/Menu/Pages/PageDebug/*
                     ../../Panel/src/SCPI/*
                     ../../Panel/src/Settings/*
                     ../../Panel/src/Utils/*

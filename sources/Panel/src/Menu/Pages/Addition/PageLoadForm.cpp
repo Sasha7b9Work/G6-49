@@ -2,7 +2,7 @@
 #include "log.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Addition/PageLoadForm.h"
-#include "Menu/Pages/Include/PageSignals.h"
+#include "Menu/Pages/PageSignals/PageSignals.h"
 #include "Display/Painter.h"
 #include "FDrive/FDrive_p.h"
 

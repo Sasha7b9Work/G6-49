@@ -53,8 +53,8 @@ source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*)
 source_group(libs\\HAL                REGULAR_EXPRESSION src/libs/HAL/*)
 source_group(Menu                     REGULAR_EXPRESSION src/Menu/*)
 source_group(Menu\\Pages              REGULAR_EXPRESSION src/Menu/Pages/*)
-source_group(Menu\\Pages\\Include     REGULAR_EXPRESSION src/Menu/Pages/Include/*)
 source_group(Menu\\Pages\\Addition    REGULAR_EXPRESSION src/Menu/Pages/Addition/*)
+source_group(Menu\\Pages\\PageDebug   REGULAR_EXPRESSION src/Menu/Pages/PageDebug/*)
 source_group(Menu\\Pages\\PageSignals REGULAR_EXPRESSION src/Menu/Pages/PageSignals/*)
 source_group(SCPI                     REGULAR_EXPRESSION src/SCPI/*)
 source_group(Settings                 REGULAR_EXPRESSION src/Settings/*)
@@ -84,8 +84,8 @@ file(GLOB SOURCES   ../common/Command.h
                     src/libs/HAL/*
                     src/Menu/*
                     src/Menu/Pages/*
-                    src/Menu/Pages/Include/*
                     src/Menu/Pages/Addition/*
+                    src/Menu/Pages/PageDebug/*
                     src/Menu/Pages/PageSignals/*
                     src/SCPI/*
                     src/Settings/*

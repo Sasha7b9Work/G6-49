@@ -19,4 +19,9 @@ public:
 
         static void DrawInputWindow();
     };
+
+    class SubRange
+    {
+        static Page *self;
+    };
 };

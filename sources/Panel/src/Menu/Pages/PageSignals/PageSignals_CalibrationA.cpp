@@ -1,5 +1,5 @@
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/Include/PageSignals.h"
+#include "Menu/Pages/PageSignals/PageSignals.h"
 #include "Settings/CalibrationSettings.h"
 
 

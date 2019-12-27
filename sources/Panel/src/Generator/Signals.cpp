@@ -2,7 +2,7 @@
 #include "Signals.h"
 #include "Display/Painter.h"
 #include "Menu/Pages/Addition/PageLoadForm.h"
-#include "Menu/Pages/Include/PageSignals.h"
+#include "Menu/Pages/PageSignals/PageSignals.h"
 
 
 static ParameterChoice param_SineModulationA_Manipulation        (ParameterChoice::ManipulationEnabled, DISABLED_RU, ENABLED_RU);

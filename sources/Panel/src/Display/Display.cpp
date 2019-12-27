@@ -8,7 +8,7 @@
 #include "InputWindow.h"
 #include "Menu/Hint.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/PageDebug.h"
+#include "Menu/Pages/PageDebug/PageDebug.h"
 #include "Utils/Statistics.h"
 #include <cstdlib>
 

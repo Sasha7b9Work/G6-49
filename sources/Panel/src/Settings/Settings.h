@@ -83,8 +83,17 @@ public:
     int16                       freq_hysteresis;                            ///< Величина гистерезиса
     bool                        sine_ManipulationEnabled[Chan::Count];      ///< true, если включена модуляция синусоиды пилой
     uint                        flag;
+    uint                        flagDBG;
 
 #define FLAG                    set.flag
+#define FLAG_DBG                set.flagDBG;
+
+#define BIT_PE15            0
+#define BIT_PB10            1
+#define BIT_PF0             2
+#define BIT_PF5             3
+#define BIT_PC13            4
+#define BIT_PC14            5
 
 #define BIT_PARITY        0   ///< Parity   - флаг чётности Parity
 #define BIT_FREQ_INTERVAL 1   ///< Interval - интервал запуска измерений

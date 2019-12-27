@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Generator/Signals.h"
-#include "Menu/Pages/Include/PageSignals.h"
+#include "Menu/Pages/PageSignals/PageSignals.h"
 #include "SCPI/KeySCPI.h"
 #include "SCPI/HeadSCPI.h"
 #include "Settings/Settings.h"
