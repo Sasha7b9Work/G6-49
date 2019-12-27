@@ -1,5 +1,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include <stm32f4xx_hal.h>
 
 
 void HAL::Init()

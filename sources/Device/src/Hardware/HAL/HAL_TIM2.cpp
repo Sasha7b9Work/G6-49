@@ -1,4 +1,5 @@
 #include "Hardware/HAL/HAL.h"
+#include <stm32f4xx_hal.h>
 
 
 static TIM_HandleTypeDef handler;

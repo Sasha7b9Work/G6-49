@@ -9,9 +9,7 @@
 #include "Utils/Math.h"
 #include "Generator/Generator_d.h"
 #include "Settings/CalibrationSettings.h"
-#include <stdio.h>
-#include <cstdlib>
-#include <math.h>
+#include <stm32f4xx_hal.h>
 
 
 #ifdef WIN32
@@ -413,7 +411,7 @@ void FPGA::SendData(uint8 *data)
     uint8 *pointer = data;
 
     /// \todo Это временно так задержка организована
-    __IO int i = 0;
+    volatile int i = 0;
 
     for(i = 0; i < 10; i++)
     {
@@ -425,7 +423,7 @@ void FPGA::SendData(uint8 *data)
         WriteByte(*pointer++);
 
         /// \todo Это временно так задержка организована
-        __IO int j = 0;
+        volatile int j = 0;
         for(j = 0; j < 10; j++) {}
         HAL_PIO::Set(WR_FPGA_WR_DATA);
         for(j = 0; j < 10; j++) {}

@@ -3,6 +3,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
+#include <stm32f4xx_hal.h>
 
 
 #define SECTOR_0                    ((uint)0x08000000)          // 16k  Загрузчик

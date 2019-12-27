@@ -1,7 +1,7 @@
-#include <stm32f4xx.h>
 #include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_d.h"
 #include "Utils/Debug.h"
+#include <stm32f4xx_hal.h>
 
 
 #define TRACE_HANDLER                   

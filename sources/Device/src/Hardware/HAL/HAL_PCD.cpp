@@ -2,7 +2,7 @@
 #include <usbd_core.h>
 
 
-PCD_HandleTypeDef HAL_PCD::handle;
+static PCD_HandleTypeDef handle;
 
 
 void HAL_PCD::Init()

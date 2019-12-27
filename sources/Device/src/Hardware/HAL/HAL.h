@@ -1,6 +1,6 @@
 #pragma once
 #include "Generator/Generator_d.h"
-#include <stm32f4xx_hal.h>
+//#include <stm32f4xx_hal.h>
 
 
 struct CalibrationSettings;
@@ -67,8 +67,6 @@ struct HAL_PCD
     static void Init();
 
     static void IRQHandler();
-
-    static PCD_HandleTypeDef handle;
 
     static int USBD_LL_Init(void *usbd_HandleTypeDef);
 };

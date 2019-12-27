@@ -1,10 +1,10 @@
 #include "defines.h"
 #include "log.h"
 #include "Timer.h"
-#include <stm32f4xx.h>
-#include <limits>
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
+#include <stm32f4xx_hal.h>
+#include <limits>
 
 
 struct TimerStruct
