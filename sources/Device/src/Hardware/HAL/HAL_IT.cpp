@@ -32,7 +32,7 @@ extern "C" {
     void OTG_FS_IRQHandler()
     {
         // Флешка
-        HAL_HCD_IRQHandler(&HAL_HCD::handle);
+        HAL_HCD::IRQHandler();
     }
 
     

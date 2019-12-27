@@ -49,26 +49,7 @@ void HAL_HCD_HC_NotifyURBChange_Callback(HCD_HandleTypeDef *, uint8_t, HCD_URBSt
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
 {  
-    /* Set the LL driver parameters */
-    HAL_HCD::handle.Instance = USB_OTG_FS;
-    HAL_HCD::handle.Init.speed = HCD_SPEED_FULL;
-    HAL_HCD::handle.Init.Host_channels = 11; 
-    HAL_HCD::handle.Init.dma_enable = 0;
-    HAL_HCD::handle.Init.low_power_enable = 0;
-    HAL_HCD::handle.Init.phy_itface = HCD_PHY_EMBEDDED; 
-    HAL_HCD::handle.Init.Sof_enable = 0;
-    HAL_HCD::handle.Init.vbus_sensing_enable = 0;
-    HAL_HCD::handle.Init.use_external_vbus = 0;  
-
-    /* Link the driver to the stack */
-    HAL_HCD::handle.pData = phost;
-    phost->pData = &HAL_HCD::handle;
-    /* Initialize the LL driver */
-    HAL_HCD_Init(&HAL_HCD::handle);
- 
-    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&HAL_HCD::handle));
-  
-    return USBH_OK;
+    return (USBH_StatusTypeDef)HAL_HCD::USBH_LL_Init(phost);
 }
 
 
@@ -244,15 +225,7 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *, uint8_t)
   * @retval USBH Status  */
 USBH_StatusTypeDef USBH_LL_SetToggle(USBH_HandleTypeDef *, uint8_t pipe, uint8_t toggle)   
 {
-    if(HAL_HCD::handle.hc[pipe].ep_is_in)
-    {
-        HAL_HCD::handle.hc[pipe].toggle_in = toggle;
-    }
-    else
-    {
-        HAL_HCD::handle.hc[pipe].toggle_out = toggle;
-    }
-    return USBH_OK; 
+    return (USBH_StatusTypeDef)HAL_HCD::USBH_LL_SetToggle(pipe, toggle);
 }
 
 /** @brief  Returns the current toggle of a pipe.
@@ -260,17 +233,7 @@ USBH_StatusTypeDef USBH_LL_SetToggle(USBH_HandleTypeDef *, uint8_t pipe, uint8_t
   * @retval toggle (0/1) */
 uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)   
 {
-    uint8_t toggle = 0;
-
-    if(HAL_HCD::handle.hc[pipe].ep_is_in)
-    {
-        toggle = HAL_HCD::handle.hc[pipe].toggle_in;
-    }
-    else
-    {
-        toggle = HAL_HCD::handle.hc[pipe].toggle_out;
-    }
-    return toggle; 
+    return HAL_HCD::USBH_LL_GetToggle(pipe);
 }
 
 /**

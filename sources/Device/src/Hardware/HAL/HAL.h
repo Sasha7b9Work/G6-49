@@ -52,7 +52,13 @@ struct HAL_HCD
 {
     static void Init();
 
-    static HCD_HandleTypeDef handle;
+    static void IRQHandler();
+
+    static int USBH_LL_Init(void *usbh_HandleTypeDef);
+
+    static int USBH_LL_SetToggle(uint8 pipe, uint8 toggle);
+
+    static uint8 USBH_LL_GetToggle(uint8 pipe);
 };
 
 
