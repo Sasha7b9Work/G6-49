@@ -191,18 +191,18 @@ private:
             +-----------+---------+---------+
         */
 
-        static GPIO_TypeDef *const gpio0[Chan::Count] = { GPIOE, GPIOE };
-        static GPIO_TypeDef *const gpio1[Chan::Count] = { GPIOE, GPIOF };
+        static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_E };
+        static const HPort::E gpio1[Chan::Count] = { HPort::_E, HPort::_F };
 
-        static const uint16 pin0[Chan::Count] = { GPIO_PIN_12, GPIO_PIN_13 };
-        static const uint16 pin1[Chan::Count] = { GPIO_PIN_14, GPIO_PIN_4 };
+        static const uint16 pin0[Chan::Count] = { HPin::_12, HPin::_13 };
+        static const uint16 pin1[Chan::Count] = { HPin::_14, HPin::_4 };
         
-        //                                                   нет             Чебышев       Бессель
-        static const GPIO_PinState state0[Type::Count] = { GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_SET   };
-        static const GPIO_PinState state1[Type::Count] = { GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_RESET };
+        //                                                   нет         Чебышев      Бессель
+        static const HState::E state0[Type::Count] = { HState::Reset, HState::Set, HState::Set   };
+        static const HState::E state1[Type::Count] = { HState::Reset, HState::Set, HState::Reset };
 
-        HAL_GPIO_WritePin(gpio0[ch], pin0[ch], state0[type]);
-        HAL_GPIO_WritePin(gpio1[ch], pin1[ch], state1[type]);
+        HAL_PIO::Write(gpio0[ch], pin0[ch], state0[type]);
+        HAL_PIO::Write(gpio1[ch], pin1[ch], state1[type]);
     }
 };
 
