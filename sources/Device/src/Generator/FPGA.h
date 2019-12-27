@@ -148,8 +148,6 @@ private:
     static void SetModePackedImpulse(Chan::E ch);
     /// Заслать рассчитанные точки в плис
     static void SendData(uint8 *data);
-    /// Записать байт в ПЛИС
-    static void WriteByte(uint8 byte);
     /// Установить на A0_RG...A3_RG адрес, соответсвующй регистру
     static void WriteAddress(RG::E reg);
     /// Запись управляющего регистра

@@ -120,4 +120,7 @@ struct HAL_PIO
     static void Write(HPort::E port, uint16 pin, HState::E state);
     static void Write(HPort::E port, uint16 pin, bool state);
     static uint8 Read(HPort::E port, uint16 pin);
+
+    /// Запись байта в ПЛИС
+    static void WriteFPGA(uint8 byte);
 };

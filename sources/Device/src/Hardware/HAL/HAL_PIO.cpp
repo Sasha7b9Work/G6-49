@@ -191,3 +191,12 @@ void HAL_PIO::Init()
         str++;
     }
 }
+
+
+void HAL_PIO::WriteFPGA(uint8 byte)
+{
+    //                                                                                 биты 0,1                                    биты 2,3
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(byte) & 0x03) << 14) + ((static_cast<uint16>(byte & 0x0c)) >> 2);;
+    //                                                                                биты 4,5,6
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(byte) & 0xf0) << 3);
+}

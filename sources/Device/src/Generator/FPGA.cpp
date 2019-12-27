@@ -9,7 +9,6 @@
 #include "Utils/Math.h"
 #include "Generator/Generator_d.h"
 #include "Settings/CalibrationSettings.h"
-#include <stm32f4xx_hal.h>
 
 
 #ifdef WIN32
@@ -420,7 +419,7 @@ void FPGA::SendData(uint8 *data)
 
     for(i = 0; i < FPGA::NUM_POINTS * 4; i++)
     {
-        WriteByte(*pointer++);
+        HAL_PIO::WriteFPGA(*pointer++);
 
         /// \todo Это временно так задержка организована
         volatile int j = 0;
@@ -431,15 +430,6 @@ void FPGA::SendData(uint8 *data)
     }
 
     WriteRegister(RG::_0_Control, 1);
-}
-
-
-void FPGA::WriteByte(uint8 byte)
-{
-    //                                                                                 биты 0,1                                    биты 2,3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(byte) & 0x03) << 14) + ((static_cast<uint16>(byte & 0x0c)) >> 2);;
-    //                                                                                биты 4,5,6
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(byte) & 0xf0) << 3);
 }
 
 
