@@ -92,6 +92,14 @@ struct HAL_SPI1
 };
 
 
+struct HAL_SPI3
+{
+    static void Init();
+
+    static void Transmit(uint8 *buffer, uint16 num);
+};
+
+
 struct HAL_TIM2
 {
     static void Init();
