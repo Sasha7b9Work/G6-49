@@ -28,8 +28,8 @@ struct Attenuator
 {
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation)
     {
-        static HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
-        static HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
+        static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
+        static const HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
 
         static const uint16 pin0[Chan::Count] = { HPin::_15, HPin::_5 };
         static const uint16 pin1[Chan::Count] = { HPin::_5,  HPin::_13 };
@@ -124,10 +124,10 @@ struct Amplifier
 
     static void SetState(Chan::E ch, bool state)
     {
-        static GPIO_TypeDef *const gpio[Chan::Count] = { GPIOF, GPIOC };
-        static const uint16         pin[Chan::Count] = { GPIO_PIN_0, GPIO_PIN_14 };
+        static const HPort::E gpio[Chan::Count] = { HPort::_F, HPort::_C };
+        static const uint16   pin[Chan::Count]  = { HPin::_0,  HPin::_14 };
 
-        HAL_GPIO_WritePin(gpio[ch], pin[ch], state ? GPIO_PIN_SET : GPIO_PIN_RESET);
+        HAL_PIO::Write(gpio[ch], pin[ch], state);
     }
 
 };
