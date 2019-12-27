@@ -1,5 +1,4 @@
 #pragma once
-#include <usbd_def.h>
 
 
 typedef unsigned int       uint;

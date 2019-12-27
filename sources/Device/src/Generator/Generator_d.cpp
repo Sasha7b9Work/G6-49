@@ -8,6 +8,7 @@
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "CommonTypes.h"
+#include <stm32f4xx_hal.h>
 
 
 struct Attenuation

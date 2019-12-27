@@ -1,6 +1,8 @@
 #include "Hardware/HAL/HAL.h"
-static CRC_HandleTypeDef handleCRC = { CRC };
+#include <cstdlib>
 
+
+static CRC_HandleTypeDef handleCRC = { CRC };
 
 
 void HAL_CRC32::Init()

@@ -1,5 +1,6 @@
 #include "Debug.h"
 #include "Hardware/Timer.h"
+#include <stm32f4xx_hal.h>
 
 
 volatile static uint timeStart = 0;

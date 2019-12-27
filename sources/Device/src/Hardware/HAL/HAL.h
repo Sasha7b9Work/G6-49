@@ -1,5 +1,6 @@
 #pragma once
 #include "Generator/Generator_d.h"
+#include <stm32f4xx_hal.h>
 
 
 struct CalibrationSettings;

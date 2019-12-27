@@ -1,5 +1,7 @@
 #include "defines.h"
 #include "Utils/Buffer.h"
+#include <stm32f4xx_hal.h>
+#include <cstdlib>
 
 
 Buffer::Buffer(uint _size) : buffer(0), size(0)

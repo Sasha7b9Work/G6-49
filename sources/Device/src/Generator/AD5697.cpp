@@ -5,6 +5,7 @@
 #include "FPGA.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
+#include <stm32f4xx_hal.h>
 
 #ifdef WIN32
 #pragma warning(push)
