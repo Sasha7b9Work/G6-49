@@ -36,18 +36,18 @@ struct Attenuator
 
         static const HState::E state0[Attenuation::Count] =
         {
-            HState::Disabled,
-            HState::Enabled,
-            HState::Disabled,
-            HState::Enabled
+            HState::Reset,
+            HState::Set,
+            HState::Reset,
+            HState::Set
         };
 
         static const HState::E state1[Attenuation::Count] =
         {
-            HState::Disabled,
-            HState::Disabled,
-            HState::Enabled,
-            HState::Enabled
+            HState::Reset,
+            HState::Reset,
+            HState::Set,
+            HState::Set
         };
 
         HAL_PIO::Write(gpio0[ch], pin0[ch], state0[attenuation]);

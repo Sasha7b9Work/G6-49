@@ -50,8 +50,8 @@ struct HState
 {
     enum E
     {
-        Disabled,
-        Enabled,
+        Reset,
+        Set,
         Count
     };
 };

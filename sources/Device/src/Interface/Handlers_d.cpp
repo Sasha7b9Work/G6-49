@@ -254,7 +254,7 @@ void DHandlers::SetPin(SimpleMessage *message)
         HPin::_15
     };
 
-    HAL_PIO::Write(static_cast<HPort::E>(port), pins[pin], state ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(static_cast<HPort::E>(port), pins[pin], state ? HState::Set : HState::Reset);
 }
 
 
