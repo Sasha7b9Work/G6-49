@@ -137,14 +137,11 @@ struct Filtr
 {
     static void Init()
     {
-        GPIO_InitTypeDef isGPIO;
-        isGPIO.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;
-        isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-        isGPIO.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOE, &isGPIO);
+        HAL_PIO::Init(HPort::_E, HPin::_12, HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_E, HPin::_13, HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_E, HPin::_14, HMode::Output_PP, HPull::No);
 
-        isGPIO.Pin = GPIO_PIN_4;
-        HAL_GPIO_Init(GPIOF, &isGPIO);
+        HAL_PIO::Init(HPort::_F, HPin::_4, HMode::Output_PP, HPull::No);
     }
 
     static void Tune(Chan::E ch, Form::E form)
