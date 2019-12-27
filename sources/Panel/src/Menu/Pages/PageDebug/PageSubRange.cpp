@@ -6,7 +6,7 @@
 
 static void OnPress_PE15(bool)
 {
-    Message::RegCPU(5, 15, FL_DBG(BIT_PE15)).Transmit();
+    Message::RegCPU(4, 15, FL_DBG(BIT_PE15)).Transmit();
 }
 
 DEF_CHOICE_2( cPE15,
@@ -20,7 +20,7 @@ DEF_CHOICE_2( cPE15,
 
 static void OnPress_PB10(bool)
 {
-    Message::RegCPU(2, 10, FL_DBG(BIT_PB10)).Transmit();
+    Message::RegCPU(1, 10, FL_DBG(BIT_PB10)).Transmit();
 }
 
 DEF_CHOICE_2( cPB10,
@@ -34,7 +34,7 @@ DEF_CHOICE_2( cPB10,
 
 static void OnPress_PF0(bool)
 {
-    Message::RegCPU(6, 0, FL_DBG(BIT_PF0)).Transmit();
+    Message::RegCPU(5, 0, FL_DBG(BIT_PF0)).Transmit();
 }
 
 DEF_CHOICE_2( cPF0,
@@ -48,7 +48,7 @@ DEF_CHOICE_2( cPF0,
 
 static void OnPress_PF5(bool)
 {
-    Message::RegCPU(6, 5, FL_DBG(BIT_PF5)).Transmit();
+    Message::RegCPU(5, 5, FL_DBG(BIT_PF5)).Transmit();
 }
 
 DEF_CHOICE_2( cPF5,
@@ -62,7 +62,7 @@ DEF_CHOICE_2( cPF5,
 
 static void OnPress_PC13(bool)
 {
-    Message::RegCPU(3, 15, FL_DBG(BIT_PC13)).Transmit();
+    Message::RegCPU(2, 15, FL_DBG(BIT_PC13)).Transmit();
 }
 
 DEF_CHOICE_2( cPC13,
@@ -76,7 +76,7 @@ DEF_CHOICE_2( cPC13,
 
 static void OnPress_PC14(bool)
 {
-    Message::RegCPU(3, 14, FL_DBG(BIT_PC14)).Transmit();
+    Message::RegCPU(2, 14, FL_DBG(BIT_PC14)).Transmit();
 }
 
 DEF_CHOICE_2(cPC14,

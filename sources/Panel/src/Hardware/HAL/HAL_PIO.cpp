@@ -2,7 +2,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-static GPIO_TypeDef *const ports[] = { GPIOA, GPIOB, GPIOC, GPIOD, GPIOE };
+static GPIO_TypeDef *const ports[] = { GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOF, GPIOG, GPIOH, GPIOI, GPIOJ, GPIOK };
 
 
 void HAL_PIO::WritePin(char port, uint16 maskPin, bool state)
