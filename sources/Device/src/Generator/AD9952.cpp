@@ -94,8 +94,8 @@ void AD9952::SetPhase(Chan::E ch, ParamValue phase)
 
 void AD9952::SetAmplitude(Chan::E ch, ParamValue amplitude)
 {
-    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * 0.8F * (1.0F + CAL_AD9952_AMPLITUDE(ch) / 1000.0F);    // 0.8f в этой формуле оттуда, что схема устройства настроена на то, что 100% максимальной
-                                                                                                    // амплитуды сигнала на выходе получаются при засылке 80% кода от максимального
+    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * (1.0F + CAL_AD9952_AMPLITUDE(ch) / 1000.0F);
+
     WriteRegister(ch, Register::ASF);
 }
 
