@@ -66,7 +66,7 @@ void ParamValue::SetSign(int sign)
 {
     if (sign > 0)
     {
-        value &= 0x8000000000000000U;
+        value &= 0x8000000000000000U;       /// \todo как это может работать?
     }
     else
     {

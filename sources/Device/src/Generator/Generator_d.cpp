@@ -55,10 +55,13 @@ struct Attenuator
 
     static void Init()
     {
-        HAL_PIO::Init(HPort::_E, HPin::_15, HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_E, HPin::_15, HMode::Output_PP, HPull::No); //-V525
+
         HAL_PIO::Init(HPort::_B, HPin::_10, HMode::Output_PP, HPull::No);
+
         HAL_PIO::Init(HPort::_F, HPin::_0,  HMode::Output_PP, HPull::No);
         HAL_PIO::Init(HPort::_F, HPin::_5,  HMode::Output_PP, HPull::No);
+
         HAL_PIO::Init(HPort::_C, HPin::_13, HMode::Output_PP, HPull::No);
         HAL_PIO::Init(HPort::_C, HPin::_14, HMode::Output_PP, HPull::No);
     }
@@ -182,8 +185,9 @@ private:
             +-----------+----+----+----+----+
             | Синус     | X    1  | X    1  |
             +-----------+---------+---------+
-            | Импульс   | 0    0  | 0    0  |
-            | Пакет     |         |         |
+            | Импульс   |         |         |
+            | Пакет     | 0    0  | 0    0  |
+            | Меандр    |         |         |
             +-----------+---------+---------+
             | остальные | 1    0  | 1    0  |
             +-----------+---------+---------+
