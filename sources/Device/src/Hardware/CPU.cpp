@@ -3,7 +3,6 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
-#include <stm32f4xx_hal.h>
 #include <cstdlib>
 #include <cstring>
 
@@ -33,13 +32,13 @@ void CPU::SetBusy()
 {
     HAL_PIO::Reset(WR_CPU_BUSY);
 
-    timeBusy = TIME_MS;
+    timeBusy = Timer::TimeMS();
 }
 
 
 void CPU::SetReady()
 {
-    while (TIME_MS - timeBusy < 2)
+    while (Timer::TimeMS() - timeBusy < 2)
     {
     };
 

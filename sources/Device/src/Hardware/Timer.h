@@ -66,4 +66,6 @@ struct Timer
     static uint LogPointUS(char *name);
 
     static uint LogPointMS(char *name);
+
+    static uint TimeMS();
 };

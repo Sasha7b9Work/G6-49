@@ -242,6 +242,12 @@ uint Timer::LogPointMS(char * name)
     return interval;
 }
 
+
+uint Timer::TimeMS()
+{
+    return HAL_GetTick();
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
