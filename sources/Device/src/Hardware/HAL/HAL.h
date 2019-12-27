@@ -66,7 +66,11 @@ struct HAL_PCD
 {
     static void Init();
 
+    static void IRQHandler();
+
     static PCD_HandleTypeDef handle;
+
+    static int USBD_LL_Init(void *usbd_HandleTypeDef);
 };
 
 
