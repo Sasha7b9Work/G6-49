@@ -1417,6 +1417,11 @@
               <FilePath>.\src\Hardware\HAL\HAL_HCD.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_I2C1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_I2C1.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_SPI1.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>

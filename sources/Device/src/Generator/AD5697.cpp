@@ -3,9 +3,9 @@
 #include "AD5697.h"
 #include "Command.h"
 #include "FPGA.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
-#include <stm32f4xx_hal.h>
 
 #ifdef WIN32
 #pragma warning(push)
@@ -13,40 +13,12 @@
 #endif
 
 
-static I2C_HandleTypeDef hI2C =
-{
-    I2C1,
-    {
-        100000,                     // ClockSpeed
-        I2C_DUTYCYCLE_2,            // DutyCycle
-        0,                          // OwnAddress1
-        I2C_ADDRESSINGMODE_7BIT,    // AddressingMode
-        I2C_DUALADDRESS_DISABLE,    // DualAddressMode
-        0,                          // OwnAddress2
-        I2C_GENERALCALL_DISABLE,    // GeneralCallMode
-        I2C_NOSTRETCH_DISABLE       // NoStretchMode
-    },
-    0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_I2C_STATE_RESET, HAL_I2C_MODE_NONE, 0, 0, 0, 0, 0
-};
-
-
-
 void AD5697::Init()
 {
     Reset(Chan::A);
     Reset(Chan::B);
-    
-    GPIO_InitTypeDef isGPIO =
-    {//    SCL          SDA
-        GPIO_PIN_6 | GPIO_PIN_7,
-        GPIO_MODE_AF_OD,
-        GPIO_PULLUP,
-        GPIO_SPEED_FREQ_VERY_HIGH,
-        GPIO_AF4_I2C1
-    };
-    HAL_GPIO_Init(GPIOB, &isGPIO);
 
-    HAL_I2C_Init(&hI2C);
+    HAL_I2C1::Init();
 }
 
 
@@ -140,16 +112,9 @@ uint8 AD5697::CreateCommandByte(ParameterValue param)
 
 void AD5697::WriteParameter(uint8 address, uint8 data[3], HPort::E port, uint16 pin)
 {
-    TransmitI2C(address, data);
+    HAL_I2C1::Transmit(address, data);
     HAL_PIO::Reset(port, pin);
     HAL_PIO::Set(port, pin);
-}
-
-
-void AD5697::TransmitI2C(uint8 address, uint8 data[3])
-{
-    // Смещение на один бит влево - страшная штука. Если не знать, можно потерять много времени
-    HAL_I2C_Master_Transmit(&hI2C, static_cast<uint16>(address << 1), data, 3, 100);
 }
 
 

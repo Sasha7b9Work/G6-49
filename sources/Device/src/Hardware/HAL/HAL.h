@@ -62,6 +62,14 @@ struct HAL_HCD
 };
 
 
+struct HAL_I2C1
+{
+    static void Init();
+
+    static void Transmit(uint8 address, uint8 data[3]);
+};
+
+
 struct HAL_PCD
 {
     static void Init();
