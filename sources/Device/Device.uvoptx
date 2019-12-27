@@ -155,98 +155,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>50</LineNumber>
+          <LineNumber>257</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134260286</Address>
+          <Address>134283060</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\My\Work\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Interface\Handlers_d.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\50</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>54</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134260288</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\My\Work\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\54</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>59</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134260296</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\My\Work\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\59</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>63</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134260298</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\My\Work\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\63</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>68</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134260306</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\My\Work\stm32\G6-49\sources\Panel\src\FDrive\FDriveDevice.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/FDrive/FDriveDevice.cpp\68</Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>86</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134285620</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\My\Work\stm32\G6-49\sources\Panel\src\Interface\InterfaceDevice.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/Interface/InterfaceDevice.cpp\86</Expression>
+          <Expression>\\Generator\src/Interface/Handlers_d.cpp\257</Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>
@@ -1550,7 +1470,7 @@
 
   <Group>
     <GroupName>Generator</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1690,7 +1610,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1934,7 +1854,7 @@
 
   <Group>
     <GroupName>Interface</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

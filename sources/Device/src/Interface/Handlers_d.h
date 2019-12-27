@@ -51,6 +51,8 @@ private:
 
     static void SetPolarity(SimpleMessage *);
 
+    static void SetPin(SimpleMessage *);
+
     static void LoadFormDDS(SimpleMessage *);
 
     static void Test(SimpleMessage *);

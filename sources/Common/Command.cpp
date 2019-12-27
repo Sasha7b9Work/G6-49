@@ -171,6 +171,8 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case SCPI_Data:
             break;
+        case PortCPU:
+            break;
         case deleted_SetManipulationMode:
         case Count:
             break;

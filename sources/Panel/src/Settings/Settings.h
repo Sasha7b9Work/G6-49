@@ -22,6 +22,7 @@ extern const PageBase pInput;
 #define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
 
 #define FL(numBit)              ((FLAG >> (numBit)) & 0x01)
+#define FL_DBG(numBit)          ((FLAG_DBG >> (numBit)) & 0x01)
 #define SET_FL(numBit)          ((FLAG) |= (1 << (numBit)))
 #define CLEAR_FL(numBit)        ((FLAG) &= (~(1 << (numBit))))
 
@@ -86,7 +87,7 @@ public:
     uint                        flagDBG;
 
 #define FLAG                    set.flag
-#define FLAG_DBG                set.flagDBG;
+#define FLAG_DBG                set.flagDBG
 
 #define BIT_PE15            0
 #define BIT_PB10            1

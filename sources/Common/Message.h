@@ -147,6 +147,13 @@ namespace Message
         EnableChannel(uint8 ch, uint8 enable);
     };
 
+    /// Выставить порт регистра
+    class RegCPU : public SimpleMessage
+    {
+    public:
+        RegCPU(uint8 port, uint8 pin, uint8 state);
+    };
+
 
     namespace FDrive
     {

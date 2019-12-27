@@ -109,6 +109,7 @@ struct Command
          // 0           1...5     6.....
          // SCPI_Data   sizeData  data 
 /* <-> */   SCPI_Data,                  ///< От VCP приняты данные либо в VCP нужно передать данные
+            PortCPU,
             Count
     } value;
     Command(E v) : value(v) {};

@@ -23,7 +23,7 @@ extern const ButtonBase bSend;
 
 static Item emptyItem = {Item::Type::None};
 
-Page *PageDebug::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pDebug));
+Page *PageDebug::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pDebug));
 /// Регистр, в который будет производится занесение значения по нажатию кнопки ЗАСЛАТЬ
 Register::E currentRegister = Register::FreqMeterLevel;
 /// Флаг показа окна ввода
@@ -598,10 +598,11 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 )
 
 
-DEF_PAGE_5( pDebug,                                                                                                                                                         //--- ОТЛАДКА --- //-V641
+DEF_PAGE_6( pDebug,                                                                                                                                                         //--- ОТЛАДКА --- //-V641
     "ОТЛАДКА",  
     "",
     &pRegisters,     ///< ОТЛАДКА - Регистры
+    PageDebug::SubRange::self,
     &cConsole,       ///< ОТЛАДКА - Консоль
     &cStatistics,    ///< ОТЛАДКА - Статистика
     &cShowSends,     ///< ОТЛАДКА - Показывать параметры

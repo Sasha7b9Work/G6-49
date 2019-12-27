@@ -5,7 +5,7 @@
 class PageDebug
 {
 public:
-    static Page * pointer;
+    static Page *self;
 
     class PageRegisters
     {
@@ -22,6 +22,7 @@ public:
 
     class SubRange
     {
+    public:
         static Page *self;
     };
 };

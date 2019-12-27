@@ -286,6 +286,14 @@ Message::EnableChannel::EnableChannel(uint8 ch, uint8 enable) : SimpleMessage(3,
 }
 
 
+Message::RegCPU::RegCPU(uint8 port, uint8 pin, uint8 state) : SimpleMessage(4, Command::PortCPU)
+{
+    PutByte(port);
+    PutByte(pin);
+    PutByte(state);
+}
+
+
 Message::Set::FormWave::FormWave(uint8 ch, uint8 form) : SimpleMessage(3, Command::SetFormWave)
 {
     PutByte(ch);

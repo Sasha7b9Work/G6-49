@@ -142,6 +142,7 @@ public:
          Settings_Load,
          Settings_CalibrationA,
          Settings_CalibrationB,
+         SubRanges,
          Count
     };
     

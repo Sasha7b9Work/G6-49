@@ -61,7 +61,8 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestFileString  */ DDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ DDrive::Handler::Processing,
         /* FDrive_GetPictureDDS      */ DDrive::Handler::Processing,
-        /* SCPI_RecvData             */ DVCP::Handler::Processing
+        /* SCPI_RecvData             */ DVCP::Handler::Processing,
+        /* PortCPU                   */ DHandlers::SetPin
     };
 
     uint8 com = msg->TakeByte();
@@ -224,6 +225,36 @@ void DHandlers::SetPolarity(SimpleMessage *message)
     Chan ch(message->TakeByte());
 
     FPGA::SetPolarity(ch, message->TakeByte());
+}
+
+
+void DHandlers::SetPin(SimpleMessage *message)
+{
+    uint8 port = message->TakeByte();
+    uint8 pin = message->TakeByte();
+    uint8 state = message->TakeByte();
+
+    static const uint16 pins[] =
+    {
+        HPin::_0,
+        HPin::_1,
+        HPin::_2,
+        HPin::_3,
+        HPin::_4,
+        HPin::_5,
+        HPin::_6,
+        HPin::_7,
+        HPin::_8,
+        HPin::_9,
+        HPin::_10,
+        HPin::_11,
+        HPin::_12,
+        HPin::_13,
+        HPin::_14,
+        HPin::_15
+    };
+
+    HAL_PIO::Write(static_cast<HPort::E>(port), pins[pin], state ? HState::Enabled : HState::Disabled);
 }
 
 

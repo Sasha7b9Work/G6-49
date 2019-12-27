@@ -55,20 +55,12 @@ struct Attenuator
 
     static void Init()
     {
-        GPIO_InitTypeDef isGPIO;
-        isGPIO.Pin = GPIO_PIN_15;
-        isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-        isGPIO.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOE, &isGPIO);
-
-        isGPIO.Pin = GPIO_PIN_10;
-        HAL_GPIO_Init(GPIOB, &isGPIO);
-
-        isGPIO.Pin = GPIO_PIN_5;
-        HAL_GPIO_Init(GPIOF, &isGPIO);
-
-        isGPIO.Pin = GPIO_PIN_13;
-        HAL_GPIO_Init(GPIOC, &isGPIO);
+        HAL_PIO::Init(HPort::_E, HPin::_15, HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_B, HPin::_10, HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_F, HPin::_0,  HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_F, HPin::_5,  HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_C, HPin::_13, HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(HPort::_C, HPin::_14, HMode::Output_PP, HPull::No);
     }
 };
 
@@ -77,15 +69,6 @@ struct Amplifier
 {
     static void Init()
     {
-        GPIO_InitTypeDef isGPIO;
-        isGPIO.Pin = GPIO_PIN_0;
-        isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-        isGPIO.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOF, &isGPIO);
-
-        isGPIO.Pin = GPIO_PIN_14;
-        HAL_GPIO_Init(GPIOC, &isGPIO);
-
         Attenuator::Init();
     }
 
