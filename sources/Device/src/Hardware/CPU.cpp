@@ -32,13 +32,13 @@ void CPU::SetBusy()
 {
     HAL_PIO::Reset(WR_CPU_BUSY);
 
-    timeBusy = Timer::TimeMS();
+    timeBusy = HAL_TIM::TimeMS();
 }
 
 
 void CPU::SetReady()
 {
-    while (Timer::TimeMS() - timeBusy < 2)
+    while (HAL_TIM::TimeMS() - timeBusy < 2)
     {
     };
 

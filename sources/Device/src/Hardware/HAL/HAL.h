@@ -95,14 +95,14 @@ struct HAL_SPI1
 struct HAL_SPI3
 {
     static void Init();
-
+    /// Запускает счётчик для измерения малых отрезков времени
     static void Transmit(uint8 *buffer, uint16 num);
 };
 
 
 struct HAL_TIM
 {
-    static uint GetTick();
+    static uint TimeMS();
 
     static void Delay(uint timeMS);
 };
@@ -112,6 +112,9 @@ struct HAL_TIM2
 {
     static void Init();
 
+    static uint GetTicks();
+
+    static void StartMultiMeasurement();
 };
 
 

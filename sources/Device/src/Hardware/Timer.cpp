@@ -204,14 +204,6 @@ void Timer::PauseOnTicks(uint numTicks)
 }
 
 
-void Timer::StartMultiMeasurement()
-{
-    TIM2->CR1 &= (uint)~TIM_CR1_CEN;
-    TIM2->CNT = 0;
-    TIM2->CR1 |= TIM_CR1_CEN;
-}
-
-
 void Timer::StartLogging()
 {
     timeStartLogging = TIME_TICKS;
@@ -234,12 +226,6 @@ uint Timer::LogPointMS(char * name)
     timePrevPoint = TIME_TICKS;
     LOG_WRITE("%s %.2f ms", name, interval / 120e3);
     return interval;
-}
-
-
-uint Timer::TimeMS()
-{
-    return HAL_GetTick();
 }
 
 
