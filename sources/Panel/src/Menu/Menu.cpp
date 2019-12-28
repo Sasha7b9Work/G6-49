@@ -15,6 +15,7 @@
 #include "Menu/Pages/Addition/PageInput.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
+#include <stm32f4xx_hal.h>
 
 
 Item *Menu::pressedItem = nullptr;

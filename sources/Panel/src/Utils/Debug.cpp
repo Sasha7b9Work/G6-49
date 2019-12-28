@@ -3,6 +3,7 @@
 #include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
+#include <stm32f4xx_hal.h>
 #include <cstdlib>
 
 

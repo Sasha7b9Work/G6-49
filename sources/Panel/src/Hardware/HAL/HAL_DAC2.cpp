@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f4xx.h>
+#include <stm32f4xx_hal.h>
 
 
 static DAC_HandleTypeDef handleDAC = { DAC };

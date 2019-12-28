@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
+#include <stm32f4xx_hal.h>
 
 
 /// \todo Занести это в структуру и обращаться только через структуру, чтобы исключить или уменьшить ошибки в функциях вроде GetSector  

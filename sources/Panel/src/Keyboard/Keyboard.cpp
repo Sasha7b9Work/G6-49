@@ -1,4 +1,3 @@
-#include <stm32f4xx.h>
 #include "defines.h"
 #include "Display/Display.h"
 #include "Hardware/Beeper.h"
@@ -6,6 +5,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/Keyboard.h"
+#include <stm32f4xx_hal.h>
 
 
 static Key commands[10];

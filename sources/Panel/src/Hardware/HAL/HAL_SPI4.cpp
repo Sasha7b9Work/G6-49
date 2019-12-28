@@ -4,6 +4,7 @@
 #include "Hardware/Timer.h"
 #include "log.h"
 #include "Hardware/HAL/HAL.h"
+#include <stm32f4xx_hal.h>
 
 
 /// Для связи с основным процессором

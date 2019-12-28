@@ -1,10 +1,10 @@
 #include "defines.h"
-#include <stm32f4xx.h>
 #include "log.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Utils/Debug.h"
+#include <stm32f4xx_hal.h>
 
 
 #define TRACE_HANDLER                               \

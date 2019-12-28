@@ -6,6 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/Keyboard.h"
 #include "Log.h"
+#include <stm32f4xx_hal.h>
 #include <cstdlib>
 
 

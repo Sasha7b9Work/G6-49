@@ -1,9 +1,10 @@
 #include "defines.h"
 #include "Timer.h"
 #include "Log.h"
-#include <limits>
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
+#include <stm32f4xx_hal.h>
+#include <limits>
 
 
 typedef struct

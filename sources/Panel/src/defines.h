@@ -6,13 +6,14 @@
 
 #else
 
+#ifndef NULL
+#define NULL 0
+#endif
 #define nullptr NULL    
 
 #endif
 
 #define DEBUG
-
-#include <stm32f4xx_hal.h>
 
 #ifndef __cplusplus
 typedef int bool;

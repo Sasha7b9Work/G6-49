@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include <stm32f4xx_hal.h>
 
 
 #define TIME_UPDATE 2   ///< Время между опросами клавиатуры
