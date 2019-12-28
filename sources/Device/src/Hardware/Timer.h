@@ -62,4 +62,6 @@ struct Timer
     static uint LogPointUS(char *name);
 
     static uint LogPointMS(char *name);
+    /// Вызывается при срабатывании таймера
+    static void ElapsedCallback();
 };
