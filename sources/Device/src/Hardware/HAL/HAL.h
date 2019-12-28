@@ -15,6 +15,10 @@ struct HAL
 
     static void ErrorHandler();
 
+    static uint GetTick();
+
+    static void Delay(uint timeMS);
+
 private:
 
     static void SystemClockConfig();

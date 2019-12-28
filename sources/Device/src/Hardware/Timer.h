@@ -7,7 +7,7 @@
  /// Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
 #define TIME_TICKS (TIM2->CNT)
 #define TIME_US    (TIM2->CNT / 90)
-#define TIME_MS    HAL_GetTick()
+#define TIME_MS    HAL::GetTick()
 
 struct Timer
 {
@@ -54,8 +54,6 @@ struct Timer
     static void Disable(Type type);
 
     static bool IsRun(Type type);
-
-    static void PauseOnTime(uint timeMS);
 
     static void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени

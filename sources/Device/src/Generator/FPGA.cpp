@@ -467,7 +467,7 @@ void FPGA::WriteRegister(RG::E reg, uint64 value)
 
     HAL_PIO::Set(WR_FPGA_WR_RG);                                    // Теперь переписываем данные из сдвиговоого регистра в FPGA
     HAL_PIO::Reset(WR_FPGA_WR_RG);
-    Timer::PauseOnTime(10);                                         // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
+    HAL::Delay(10);                                         // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
 }
 
 

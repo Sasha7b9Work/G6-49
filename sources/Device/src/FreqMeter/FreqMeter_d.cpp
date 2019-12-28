@@ -4,6 +4,7 @@
 #include "FreqMeter_d.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Utils/Debug.h"
 
@@ -53,7 +54,7 @@ void DFreqMeter::Update()
                 j++;
             }
             HAL_PIO::Reset(WR_FREQ_METER_CLK);
-            Timer::PauseOnTime(1);
+            HAL::Delay(1);
             if (HAL_PIO::Read(RD_FREQ_METER_DATA))
             {
                 frequency += (1 << i);

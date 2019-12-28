@@ -195,12 +195,6 @@ static void StopTIM()
 }
 
 
-void Timer::PauseOnTime(uint timeMS)
-{
-    HAL_Delay(timeMS);
-}
-
-
 void Timer::PauseOnTicks(uint numTicks)
 {
     volatile uint startTicks = TIME_TICKS;
