@@ -206,14 +206,6 @@ void Timer::PauseOnTicks(uint numTicks)
 }
 
 
-void Timer::StartMultiMeasurement()
-{
-    TIM2->CR1 &= (uint)~TIM_CR1_CEN;
-    TIM2->CNT = 0;
-    TIM2->CR1 |= TIM_CR1_CEN;
-}
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif

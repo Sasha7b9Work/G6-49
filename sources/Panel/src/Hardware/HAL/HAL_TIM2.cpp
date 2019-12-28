@@ -27,6 +27,20 @@ uint HAL_TIM2::TimeUS()
 }
 
 
+uint HAL_TIM2::GetTicks()
+{
+    return TIM2->CNT;
+}
+
+
+void HAL_TIM2::StartMultiMeasurement()
+{
+    TIM2->CR1 &= (uint)~TIM_CR1_CEN;
+    TIM2->CNT = 0;
+    TIM2->CR1 |= TIM_CR1_CEN;
+}
+
+
 void HAL_TIM2::DeInit()
 {
     HAL_TIM_Base_Stop(&handler);

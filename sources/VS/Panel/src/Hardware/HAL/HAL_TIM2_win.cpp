@@ -18,5 +18,10 @@ void HAL_TIM2::DeInit()
 
 uint HAL_TIM2::TimeUS()
 {
-    return 0;
+    return TIM2->CNT / 90;
+}
+
+uint HAL_TIM2::GetTicks()
+{
+    return TIM2->CNT;
 }

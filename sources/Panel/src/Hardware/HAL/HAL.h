@@ -97,6 +97,10 @@ struct HAL_TIM2
     static void DeInit();
 
     static uint TimeUS();
+
+    static uint GetTicks();
+    /// Запускает счётчик для измерения малых отрезков времени
+    static void StartMultiMeasurement();
 };
 
 

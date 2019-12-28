@@ -2,7 +2,7 @@
 #include "defines.h"
 
 
-#define TIME_TICKS (TIM2->CNT)
+#define TIME_TICKS HAL_TIM2::GetTicks()
 #define TIME_US    HAL_TIM2::TimeUS()
 #define TIME_MS    HAL_TIM::TimeMS()
 
@@ -40,6 +40,4 @@ struct Timer
     bool IsRun(Type type);
 
     void PauseOnTicks(uint numTicks);
-    /// Запускает счётчик для измерения малых отрезков времени
-    void StartMultiMeasurement();
 };
