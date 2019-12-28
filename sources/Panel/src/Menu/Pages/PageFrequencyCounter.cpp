@@ -201,8 +201,8 @@ DEF_PAGE_8( pFrequencyCounter,                                                  
     ,
     &cMeasure,       ///< ×ÀÑÒÎÒÎÌÅÐ - Èçìåðåíèå
     &gLevel,         ///< ×ÀÑÒÎÒÎÌÅÐ - Óðîâåíü
-    nullptr,
-    nullptr,
+    Item::Empty(),
+    Item::Empty(),
     &cResist,        ///< ×ÀÑÒÎÒÎÌÅÐ - Ñîïðîòèâëåíèå
     &cCouple,        ///< ×ÀÑÒÎÒÎÌÅÐ - Âõîä
     &cFiltr,         ///< ×ÀÑÒÎÒÎÌÅÐ - ÔÍ×
@@ -218,7 +218,7 @@ static void Tune_Page()
     if (FREQ_METER_MEASURE_IS_FREQ)
     {
         page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cBillingTime));
-        page->items[3] = 0;
+        page->items[3] = Item::Empty();
     }
     else if (FREQ_METER_MEASURE_IS_PERIOD)
     {
@@ -227,8 +227,8 @@ static void Tune_Page()
     }
     else
     {
-        page->items[2] = 0;
-        page->items[3] = 0;
+        page->items[2] = Item::Empty();
+        page->items[3] = Item::Empty();
     }
 }
 
