@@ -3,7 +3,7 @@
 
 
 #define TIME_TICKS (TIM2->CNT)
-#define TIME_US    (TIM2->CNT / 90)
+#define TIME_US    HAL_TIM2::TimeUS()
 #define TIME_MS    HAL_TIM::TimeMS()
 
 

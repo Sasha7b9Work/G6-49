@@ -15,7 +15,6 @@
 #include "Utils/Queue.h"
 #include "Handlers_p.h"
 #include "Interface_p.h"
-#include <stm32f4xx_hal.h>
 #include <cstdlib>
 
 

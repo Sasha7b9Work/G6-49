@@ -21,6 +21,12 @@ void HAL_TIM2::Init()
 }
 
 
+uint HAL_TIM2::TimeUS()
+{
+    return (TIM2->CNT / 90);
+}
+
+
 void HAL_TIM2::DeInit()
 {
     HAL_TIM_Base_Stop(&handler);

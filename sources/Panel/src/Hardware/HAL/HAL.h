@@ -101,6 +101,8 @@ struct HAL_TIM2
     static void Init();
 
     static void DeInit();
+
+    static uint TimeUS();
 };
 
 

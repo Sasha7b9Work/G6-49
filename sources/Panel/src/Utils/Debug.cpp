@@ -1,9 +1,9 @@
 #include "Debug.h"
 #include "Log.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
-#include <stm32f4xx_hal.h>
 #include <cstdlib>
 
 
