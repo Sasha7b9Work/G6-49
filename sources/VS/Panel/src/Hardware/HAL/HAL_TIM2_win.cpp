@@ -14,3 +14,9 @@ void HAL_TIM2::Init()
 void HAL_TIM2::DeInit()
 {
 }
+
+
+uint HAL_TIM2::TimeUS()
+{
+    return 0;
+}
