@@ -242,7 +242,8 @@ void Page::DrawOpened() const
         int x = SCREEN_WIDTH - Item::WIDTH - 1;
         int y = Page::Title::HEIGHT + (i % Menu::NUM_ITEMS_ON_DISPLAY) * Item::HEIGHT;
         Painter::DrawRectangle(x, y, Item::WIDTH, Item::HEIGHT, Color::FILL);
-        if(i < num)
+
+        if(i < num && items[i])
         {
             items[i]->Draw(false, x, y);
         }

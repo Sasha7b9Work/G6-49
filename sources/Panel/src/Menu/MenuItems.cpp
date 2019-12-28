@@ -12,6 +12,13 @@
 #define NAME_FROM_INDEX(index) (names[index])
 
 
+static Item empty = { Item::Type::None };
+
+
+Item *Item::Empty()
+{
+    return &empty;
+}
 
 const char *Choice::NameCurrentSubItem() const
 {
@@ -45,7 +52,9 @@ const char *Choice::NamePrevSubItem()
 
 Item *Page::GetItem(const Key &key) const
 {
-    return const_cast<Item *>(items[CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Key::F1)]);
+    int index = CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Key::F1);
+
+    return (index < NumItems()) ? const_cast<Item *>(items[index]) : Item::Empty();
 }
 
 
