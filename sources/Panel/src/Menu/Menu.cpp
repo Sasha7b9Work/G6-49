@@ -28,10 +28,10 @@ extern const PageBase pSignals;
 DEF_PAGE_3( mainPageMenu,
     "лемч",
     "",
-    *PageSignals::pointer,
-    *PageFrequencyCounter::pointer,
-    *PageService::pointer,
-    Page::Main, 0, Item::FuncActive, FuncPress, FuncOnKey
+    PageSignals::pointer,
+    PageFrequencyCounter::pointer,
+    PageService::pointer,
+    Page::Main, 0, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 
 Page *Menu::mainPage = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPageMenu));

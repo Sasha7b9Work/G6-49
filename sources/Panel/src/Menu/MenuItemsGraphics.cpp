@@ -74,7 +74,7 @@ void Button::Draw(int x, int y) const
 
 void Page::DrawClosed(int x, int y) const
 {
-    Color color = Color::GREEN_25;
+    Color color = Color::MENU_ITEM;
     if(IsShade())
     {
         color = Color::GRAY_10;

@@ -587,7 +587,7 @@ DEF_BUTTON( bSend,                                                              
 )
 
 
-DEF_PAGE_4_VAR( pRegisters,                                                                                                                                                //--- –≈√»—“–€ --- //-V641
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                        //--- –≈√»—“–€ --- //-V641
     "–≈√»—“–€",  
     "",
     bPrev,
@@ -598,11 +598,12 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 )
 
 
-DEF_PAGE_6( pDebug,                                                                                                                                                         //--- Œ“À¿ƒ ¿ --- //-V641
+DEF_PAGE_7( pDebug,                                                                                                                                                 //--- Œ“À¿ƒ ¿ --- //-V641
     "Œ“À¿ƒ ¿",  
     "",
     &pRegisters,     ///< Œ“À¿ƒ ¿ - –Â„ËÒÚ˚
     PageDebug::SubRange::self,
+    PageDebug::Colors::self,
     &cConsole,       ///< Œ“À¿ƒ ¿ -  ÓÌÒÓÎ¸
     &cStatistics,    ///< Œ“À¿ƒ ¿ - —Ú‡ÚËÒÚËÍ‡
     &cShowSends,     ///< Œ“À¿ƒ ¿ - œÓÍ‡Á˚‚‡Ú¸ Ô‡‡ÏÂÚ˚

@@ -145,6 +145,10 @@ public:
          Settings_CalibrationA,
          Settings_CalibrationB,
          SubRanges,
+         Colors,
+         Color_ChanA,
+         Color_ChanB,
+         Color_Menu,
          Count
     };
     

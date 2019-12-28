@@ -2,15 +2,12 @@
 #include "Menu/MenuItems.h"
 
 
-class PageDebug
+struct PageDebug
 {
-public:
     static Page *self;
 
-    class PageRegisters
+    struct PageRegisters
     {
-    public:
-
         static void Draw();
 
     private:
@@ -20,9 +17,28 @@ public:
         static void DrawInputWindow();
     };
 
-    class SubRange
+    struct SubRange
     {
-    public:
         static Page *self;
+    };
+
+    struct Colors
+    {
+        static Page *self;
+
+        struct ChanA
+        {
+            static Page *self;
+        };
+
+        struct ChanB
+        {
+            static Page *self;
+        };
+
+        struct Menu
+        {
+            static Page *self;
+        };
     };
 };

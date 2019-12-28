@@ -69,10 +69,10 @@ DEF_CHOICE_2( cParity,                                                          
 DEF_PAGE_3( pUSB,                                                                                                                                                               //--- USB ---
     "USB", 
     "Настройки параметров связи по интерфейсу USB",
-    cSizeByte,              ///< USB - РАЗМЕР БАЙТА
-    cStopBit,               ///< USB - СТОП-БИТ
-    cParity,                ///< USB - ЧЁТНОСТЬ
-    Page::USB, &pService, Item::FuncActive, FuncPress, FuncOnKey
+    &cSizeByte,              ///< USB - РАЗМЕР БАЙТА
+    &cStopBit,               ///< USB - СТОП-БИТ
+    &cParity,                ///< USB - ЧЁТНОСТЬ
+    Page::USB, &pService, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -83,8 +83,8 @@ extern const PageBase pDebug;
 DEF_PAGE_3( pService,                                                                                                                                                        //--- СЕРВИС --- //-V641
     "СЕРВИС",   
     "Сервисные функции",
-    bReset,
-    pUSB,
-    pDebug,
-    Page::Service, Menu::mainPage, Item::FuncActive, FuncPress, FuncOnKey
+    &bReset,
+    &pUSB,
+    &pDebug,
+    Page::Service, Menu::mainPage, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
