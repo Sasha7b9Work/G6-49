@@ -40,4 +40,6 @@ struct Timer
     bool IsRun(Type type);
 
     void PauseOnTicks(uint numTicks);
+    /// Вызывается при срабатывании таймера
+    static void ElapsedCallback();
 };

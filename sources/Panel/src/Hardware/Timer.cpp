@@ -3,7 +3,6 @@
 #include "Log.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
-#include <stm32f4xx_hal.h>
 #include <limits>
 
 
@@ -35,8 +34,6 @@ static void StopTIM();
 static uint NearestTime();
 /// Настроить систему на таймер
 static void TuneTIM(Timer::Type type);
-/// Вызывается при срабатывании таймера
-static void ElapsedCallback();
 
 
 bool Timer::IsRun(Type type)
@@ -65,7 +62,7 @@ void Timer::DeInit()
 }
 
 
-static void ElapsedCallback()
+void Timer::ElapsedCallback()
 {
     uint time = TIME_MS;
 
@@ -204,28 +201,6 @@ void Timer::PauseOnTicks(uint numTicks)
     {
     };
 }
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-    
-    void TIM3_IRQHandler()
-    {
-        if ((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF)
-        {
-            if((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
-            {
-                TIM3->SR = ~TIM_DIER_UIE;
-                ElapsedCallback();
-            }
-        }
-    }
-
-#ifdef __cplusplus
-}
-#endif
 
 
 #undef TIME_NEXT
