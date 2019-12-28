@@ -6,7 +6,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Keyboard/Keyboard.h"
-#include <stm32f4xx_hal.h>
 
 
 static Key commands[10];
@@ -23,7 +22,7 @@ static void DetectRegulator();
 #define SL5 (1 << 9)
 #define NUM_SL 6
 
-#define RL0 (1 << 8)
+#define RL0 (1 << 8) 
 #define RL1 (1 << 9)
 #define RL2 (1 << 10)
 #define RL3 (1 << 13)
@@ -258,8 +257,6 @@ void Keyboard::InitInputs(const uint16 *, const char *, int, const uint16 *, con
 #else
 void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL)
 {
-    GPIO_InitTypeDef isGPIO;
-
     for (int i = 0; i < numRL; i++)
     {
         HAL_PIO::Init(portRL[i], rl[i], HMode::Input, HPull::No);
@@ -271,10 +268,9 @@ void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const
     }
 
     // Инициализируем ручку
-    isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2;
-    isGPIO.Mode = GPIO_MODE_INPUT;
-    isGPIO.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(GPIOC, &isGPIO);
+    HAL_PIO::Init('C', HPin::_0, HMode::Input, HPull::Up);
+    HAL_PIO::Init('C', HPin::_1, HMode::Input, HPull::Up);
+    HAL_PIO::Init('C', HPin::_2, HMode::Input, HPull::Up);
 }
 #endif
 
