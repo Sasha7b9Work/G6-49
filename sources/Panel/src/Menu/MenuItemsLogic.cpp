@@ -11,7 +11,6 @@
 #include "Utils/StringUtils.h"
 #include "Wave.h"
 #include "Generator/Signals.h"
-#include <stm32f4xx_hal.h>
 #include <string.h>
 
 
