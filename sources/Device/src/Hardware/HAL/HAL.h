@@ -115,6 +115,8 @@ struct HAL_TIM2
     static uint GetTicks();
 
     static void StartMultiMeasurement();
+
+    static uint TimeUS();
 };
 
 

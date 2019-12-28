@@ -33,3 +33,9 @@ void HAL_TIM2::StartMultiMeasurement()
     TIM2->CNT = 0;
     TIM2->CR1 |= TIM_CR1_CEN;
 }
+
+
+uint HAL_TIM2::TimeUS()
+{
+    return (TIM2->CNT / 90);
+}

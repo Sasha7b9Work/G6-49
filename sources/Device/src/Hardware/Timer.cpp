@@ -229,11 +229,6 @@ uint Timer::LogPointMS(char * name)
 }
 
 
-uint Timer::TimeUS()
-{
-    return (TIM2->CNT / 90);
-}
-
 
 #ifdef __cplusplus
 extern "C" {
