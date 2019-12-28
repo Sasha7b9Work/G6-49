@@ -4,13 +4,13 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include "Keyboard/Keyboard.h"
 #include <stm32f4xx_hal.h>
 
 
 static Key commands[10];
 static int pointer = 0;
-static GPIO_TypeDef * const ports[] = {GPIOA, GPIOB, GPIOC, GPIOD, GPIOE};
 
 
 static void DetectRegulator();
@@ -148,7 +148,7 @@ static void DetectRegulator()
     static uint timePrevPress = 0;
     static bool needDetectButton = true;
     
-    bool press = HAL_PIO::ReadPin('C', GPIO_PIN_2) ? false : true;
+    bool press = HAL_PIO::ReadPin('C', HPin::_2) ? false : true;
 
     if(!press)
     {
@@ -194,8 +194,8 @@ static void DetectRegulator()
     // Детектируем поворот
     static bool prevStatesIsOne = false;
 
-    bool stateLeft = HAL_PIO::ReadPin('C', GPIO_PIN_0);
-    bool stateRight = HAL_PIO::ReadPin('C', GPIO_PIN_1);
+    bool stateLeft = HAL_PIO::ReadPin('C', HPin::_0);
+    bool stateRight = HAL_PIO::ReadPin('C', HPin::_1);
 
     if (stateLeft && stateRight)
     {
@@ -262,16 +262,12 @@ void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const
 
     for (int i = 0; i < numRL; i++)
     {
-        isGPIO.Pin = rl[i];
-        isGPIO.Mode = GPIO_MODE_INPUT;
-        HAL_GPIO_Init(ports[portRL[i] - 'A'], &isGPIO);
+        HAL_PIO::Init(portRL[i], rl[i], HMode::Input, HPull::No);
     }
 
     for (int i = 0; i < numSL; i++)
     {
-        isGPIO.Pin = sl[i];
-        isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-        HAL_GPIO_Init(ports[portSL[i] - 'A'], &isGPIO);
+        HAL_PIO::Init(portSL[i], sl[i], HMode::Output_PP, HPull::No);
     }
 
     // Инициализируем ручку
@@ -326,24 +322,3 @@ const char *PanelControlName(const Key &control)
 void Keyboard::Draw()
 {
 } 
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-    
-    void TIM4_IRQHandler()
-    {
-        if ((TIM4->SR & TIM_SR_UIF) == TIM_SR_UIF)
-        {
-            if ((TIM4->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
-            {
-                TIM4->SR = ~TIM_DIER_UIE;
-                HAL_TIM4::ElapsedCallback();
-            }
-        }
-    }
-
-#ifdef __cplusplus
-}
-#endif

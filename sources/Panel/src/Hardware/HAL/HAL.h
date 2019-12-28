@@ -49,14 +49,6 @@ struct HAL_FSMC
 };
 
 
-struct HAL_PIO
-{
-    static void WritePin(char port, uint16 maskPin, bool state);
-
-    static bool ReadPin(char port, uint16 maskPin);
-};
-
-
 struct HAL_LTDC
 {
     static void Init(uint frontBuffer, uint backBuffer);

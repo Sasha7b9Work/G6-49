@@ -3,6 +3,7 @@
 #include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
+#include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 
@@ -93,6 +94,18 @@ extern "C" {
     void DebugMon_Handler()
     {
         TRACE_HANDLER;
+    }
+
+    void TIM4_IRQHandler()
+    {
+        if((TIM4->SR & TIM_SR_UIF) == TIM_SR_UIF)
+        {
+            if((TIM4->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+            {
+                TIM4->SR = ~TIM_DIER_UIE;
+                HAL_TIM4::ElapsedCallback();
+            }
+        }
     }
 
 #ifdef __cplusplus
