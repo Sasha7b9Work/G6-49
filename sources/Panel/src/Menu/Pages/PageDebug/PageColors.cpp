@@ -1,24 +1,45 @@
 #include "defines.h"
+#include "Display/Painter.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
 #include "Settings/Settings.h"
 
 
-static int16 redChanA = static_cast<int16>(R_FROM_COLOR(COLOR(Color::CHAN_A.value)));
-static int16 greenChanA = static_cast<int16>(G_FROM_COLOR(COLOR(Color::CHAN_A.value)));
-static int16 blueChanA = static_cast<int16>(B_FROM_COLOR(COLOR(Color::CHAN_A.value)));
+static int16 redChanA = 0;
+static int16 greenChanA = 0;
+static int16 blueChanA = 0;
 
-static int16 redChanB = static_cast<int16>(R_FROM_COLOR(COLOR(Color::CHAN_B.value)));
-static int16 greenChanB = static_cast<int16>(G_FROM_COLOR(COLOR(Color::CHAN_B.value)));
-static int16 blueChanB = static_cast<int16>(B_FROM_COLOR(COLOR(Color::CHAN_B.value)));
+static int16 redChanB = 0;
+static int16 greenChanB = 0;
+static int16 blueChanB = 0;
 
-static int16 redMenu = static_cast<int16>(R_FROM_COLOR(COLOR(Color::MENU_ITEM.value)));
-static int16 greenMenu = static_cast<int16>(G_FROM_COLOR(COLOR(Color::MENU_ITEM.value)));
-static int16 blueMenu = static_cast<int16>(B_FROM_COLOR(COLOR(Color::MENU_ITEM.value)));
+static int16 redMenu = 0;
+static int16 greenMenu = 0;
+static int16 blueMenu = 0;
+
+
+void PageDebug::Colors::Init()
+{
+    redChanA = static_cast<int16>(R_FROM_COLOR(Color::CHAN_A.GetRGB()));
+    greenChanA = static_cast<int16>(G_FROM_COLOR(Color::CHAN_A.GetRGB()));
+    blueChanA = static_cast<int16>(B_FROM_COLOR(Color::CHAN_A.GetRGB()));
+
+    redChanB = static_cast<int16>(R_FROM_COLOR(Color::CHAN_B.GetRGB()));
+    greenChanB = static_cast<int16>(G_FROM_COLOR(Color::CHAN_B.GetRGB()));
+    blueChanB = static_cast<int16>(B_FROM_COLOR(Color::CHAN_B.GetRGB()));
+
+    redMenu = static_cast<int16>(R_FROM_COLOR(Color::MENU_ITEM.GetRGB()));
+    greenMenu = static_cast<int16>(G_FROM_COLOR(Color::MENU_ITEM.GetRGB()));
+    blueMenu = static_cast<int16>(B_FROM_COLOR(Color::MENU_ITEM.GetRGB()));
+}
 
 
 static void OnChanged()
 {
+    COLOR(Color::CHAN_A.value) = MAKE_COLOR(redChanA, greenChanA, blueChanA);
+    COLOR(Color::CHAN_B.value) = MAKE_COLOR(redChanB, greenChanB, blueChanB);
+    COLOR(Color::MENU_ITEM.value) = MAKE_COLOR(redMenu, greenMenu, blueMenu);
 
+    Painter::LoadPalette();
 }
 
 
@@ -69,7 +90,7 @@ DEF_GOVERNOR(gBlueChanB,
 
 
 DEF_PAGE_3(pChanB,
-    "Канал 1",
+    "Канал 2",
     "",
     &gRedChanB,
     &gGreenChanB,
@@ -97,7 +118,7 @@ DEF_GOVERNOR(gBlueMenu,
 
 
 DEF_PAGE_3(pMenu,
-    "Канал 1",
+    "Меню",
     "",
     &gRedMenu,
     &gGreenMenu,

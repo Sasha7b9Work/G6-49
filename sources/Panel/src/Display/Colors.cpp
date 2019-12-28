@@ -273,6 +273,12 @@ uint8 Color::CurrentValue()
 }
 
 
+col_val Color::GetRGB()
+{
+    return COLOR(value);
+}
+
+
 #ifndef WIN32
 
 void Color::SetAsCurrent() const

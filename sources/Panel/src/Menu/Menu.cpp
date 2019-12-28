@@ -40,6 +40,7 @@ Page *Menu::mainPage = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPa
 void Menu::Init()
 {
     PageSignals::Init();
+    PageDebug::Colors::Init();
 }
 
 

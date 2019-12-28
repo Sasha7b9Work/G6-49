@@ -61,6 +61,7 @@ public:
     void SetAsCurrent() const;
     static Color GetCurrent();
     static uint8 CurrentValue();
+    col_val GetRGB();
 
     Color& operator=(const Color &color);
 

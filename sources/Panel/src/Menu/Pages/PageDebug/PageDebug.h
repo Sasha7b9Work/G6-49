@@ -24,6 +24,8 @@ struct PageDebug
 
     struct Colors
     {
+        static void Init();
+
         static Page *self;
 
         struct ChanA
