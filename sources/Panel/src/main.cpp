@@ -1,6 +1,7 @@
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_p.h"
 #include "Menu/Menu.h"
 #include "Settings/CalibrationSettings.h"
@@ -15,7 +16,7 @@ int main()
     
     Display::Init();
 
-    Timer::PauseOnTime(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
+    HAL_TIM::Delay(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
 
     setCal.Load();
 

@@ -84,6 +84,8 @@ struct HAL_SPI4
 struct HAL_TIM
 {
     static uint TimeMS();
+
+    static void Delay(uint timeMS);
 };
 
 

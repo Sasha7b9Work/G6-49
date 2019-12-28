@@ -6,3 +6,9 @@ uint HAL_TIM::TimeMS()
 {
     return HAL_GetTick();
 }
+
+
+void HAL_TIM::Delay(uint timeMS)
+{
+    HAL_Delay(timeMS);
+}

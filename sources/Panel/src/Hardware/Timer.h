@@ -39,8 +39,6 @@ struct Timer
 
     bool IsRun(Type type);
 
-    static void PauseOnTime(uint timeMS);
-
     void PauseOnTicks(uint numTicks);
     /// Запускает счётчик для измерения малых отрезков времени
     void StartMultiMeasurement();

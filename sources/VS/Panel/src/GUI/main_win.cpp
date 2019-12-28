@@ -3,6 +3,7 @@
 #include "Interface/Interface_p.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
 #include "SCPI/SCPI.h"
 #include "Settings/CalibrationSettings.h"
@@ -17,7 +18,7 @@ void init()
 
     Display::Init();
 
-    Timer::PauseOnTime(1);
+    HAL_TIM::Delay(1);
 
     setCal.Load();
 

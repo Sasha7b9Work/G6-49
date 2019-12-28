@@ -4,6 +4,7 @@
 #include "Display/Text.h"
 #include "Generator/Generator_p.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "PageService.h"
 #include "Menu/Menu.h"
@@ -24,7 +25,7 @@ Page *PageService::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pS
 static void OnPress_Reset()
 {
     PGenerator::Reset();
-    Timer::PauseOnTime(100);
+    HAL_TIM::Delay(100);
     set.Load(true);
 }
 
