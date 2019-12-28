@@ -26,11 +26,6 @@ static const GovernorBase name = { Item::Type::Governor, 0, false, Page::NoPage,
     {title, hint}, min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw, funcPress};
 
 
-#define DEF_GOVERNOR_COLOR(name, titleRU, titleEN, hintRU, hintEN, colorType, keeper)                                                       \
-static const GovernorColorBase name = { TypeItem::E::GovernorColor, 0, false, Page::NoPage, &keeper, FuncActive,                            \
-    {titleRU, titleEN, hintRU, hintEN}, &colorType, 0};
-
-
 #define DEF_PAGE_SB(name, title, hint, item0, item1, item2, item3, item4, item5,                                                            \
     namePage, keeper, funcActive, funcPress, funcDraw, funcOnKey)                                                                           \
 static Item * items##name[] = {                                                                                                             \

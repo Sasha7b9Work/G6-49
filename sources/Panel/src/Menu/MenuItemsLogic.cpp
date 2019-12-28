@@ -398,21 +398,6 @@ int Page::NumItems() const
 }
 
 
-void GovernorColor::ChangeValue(int delta)
-{
-    if (ct->currentField == 0)
-    {
-        ct->BrightnessChange(delta);
-    }
-    else
-    {
-        ct->ComponentChange(delta);
-    }
-
-    Color::InitGlobalColors();
-}
-
-
 void Item::Press(Key &key)
 {
     if(key.action.Is(Key::Action::Long))
