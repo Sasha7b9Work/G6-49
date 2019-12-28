@@ -1476,6 +1476,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI3.cpp</FilePath>
             </File>
+            <File>
+              <FileName>HAL_TIM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

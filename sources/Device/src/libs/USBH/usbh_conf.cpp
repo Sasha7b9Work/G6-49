@@ -216,7 +216,7 @@ USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef *phost, uint8_t pipe
   * @retval USBH Status  */
 USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *, uint8_t)
 {
-    HAL::Delay(200);
+    HAL_TIM::Delay(200);
     return USBH_OK;  
 }
 
@@ -244,7 +244,7 @@ uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)
   */
 void USBH_Delay(uint32_t Delay)
 {
-    HAL::Delay(Delay);  
+    HAL_TIM::Delay(Delay);  
 }
 
 #if (USBH_DEBUG_LEVEL > 1)

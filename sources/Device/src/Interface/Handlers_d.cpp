@@ -77,7 +77,7 @@ void DHandlers::SendData(SimpleMessage *)
 
     if (DInterface::GetOutbox().Size() != 0)
     {
-        HAL::Delay(2);
+        HAL_TIM::Delay(2);
 
         CPU::SetReady();
 
@@ -91,7 +91,7 @@ void DHandlers::SendData(SimpleMessage *)
     {
         Message::RequestData message;
 
-        HAL::Delay(2);
+        HAL_TIM::Delay(2);
 
         CPU::SetReady();
 

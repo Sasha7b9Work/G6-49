@@ -19,18 +19,6 @@ void HAL::Init()
 }
 
 
-uint HAL::GetTick()
-{
-    return HAL_GetTick();
-}
-
-
-void HAL::Delay(uint timeMS)
-{
-    HAL_Delay(timeMS);
-}
-
-
 void HAL::SystemClockConfig()
 {
     RCC_OscInitTypeDef RCC_OscInitStruct;

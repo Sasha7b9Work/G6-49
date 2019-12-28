@@ -54,7 +54,7 @@ void DFreqMeter::Update()
                 j++;
             }
             HAL_PIO::Reset(WR_FREQ_METER_CLK);
-            HAL::Delay(1);
+            HAL_TIM::Delay(1);
             if (HAL_PIO::Read(RD_FREQ_METER_DATA))
             {
                 frequency += (1 << i);

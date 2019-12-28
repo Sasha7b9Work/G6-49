@@ -15,10 +15,6 @@ struct HAL
 
     static void ErrorHandler();
 
-    static uint GetTick();
-
-    static void Delay(uint timeMS);
-
 private:
 
     static void SystemClockConfig();
@@ -101,6 +97,14 @@ struct HAL_SPI3
     static void Init();
 
     static void Transmit(uint8 *buffer, uint16 num);
+};
+
+
+struct HAL_TIM
+{
+    static uint GetTick();
+
+    static void Delay(uint timeMS);
 };
 
 
