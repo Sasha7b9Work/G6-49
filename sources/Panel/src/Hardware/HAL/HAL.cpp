@@ -8,6 +8,8 @@ static void SystemClockConfig();
 
 void HAL::Init()
 {
+    HAL_Init();
+
     HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     /* System interrupt init*/

@@ -108,7 +108,8 @@ source_group(Hardware                 FILES                          src/Hardwar
                                                                      src/Hardware/CPU_win.cpp
                                                                      src/Hardware/LTDC_win.cpp
                                                                      src/Hardware/VCP_p_win.cpp)
-source_group(Hardware\\HAL            FILES                          src/Hardware/HAL/HAL_EEPROM_win.cpp
+source_group(Hardware\\HAL            FILES              ../../Panel/src/Hardware/HAL/HAL_TIM.cpp
+                                                                     src/Hardware/HAL/HAL_EEPROM_win.cpp
                                                                      src/Hardware/HAL/HAL_PIO_win.cpp
                                                                      src/Hardware/HAL/HAL_TIM2_win.cpp
                                                                      src/Hardware/HAL/HAL_TIM3_win.cpp
@@ -189,6 +190,7 @@ file(GLOB SOURCES   ../../common/Command.h
                                 src/Hardware/LTDC_win.cpp
                                 src/Hardware/VCP_p_win.cpp
 
+                    ../../Panel/src/Hardware/HAL/HAL_TIM.cpp
                                 src/Hardware/HAL/HAL_EEPROM_win.cpp
                                 src/Hardware/HAL/HAL_PIO_win.cpp
                                 src/Hardware/HAL/HAL_TIM2_win.cpp

@@ -6,6 +6,7 @@
 #include "Generator/Signals.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Math.h"
 #include "Menu/Pages/PageSignals/PageSignals.h"

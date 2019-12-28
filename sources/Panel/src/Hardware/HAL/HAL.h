@@ -89,6 +89,12 @@ struct HAL_SPI4
 };
 
 
+struct HAL_TIM
+{
+    static uint TimeMS();
+};
+
+
 // Используетя для тиков
 struct HAL_TIM2
 {
