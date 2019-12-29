@@ -52,6 +52,11 @@ void Menu::Update()
     {
         Key control = Keyboard::GetNextControl();
 
+        if(control.IsUp())
+        {
+            int i = 0;
+        }
+
         ProcessContorl(control);
 
         timePress = TIME_MS;

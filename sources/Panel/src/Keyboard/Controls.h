@@ -67,6 +67,7 @@ struct Key
     bool Is(Key::E c) { return (c == value); };
     bool Is(Key::E c, Action::E a) { return value == c && action == a; };
     bool IsDigit() const;
+    bool IsUp() const { return action == Action::Up; }
     char ToChar() const;
     pString Name() const;
     bool IsFunctional() const;

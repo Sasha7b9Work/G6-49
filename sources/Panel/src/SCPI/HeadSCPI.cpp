@@ -34,6 +34,10 @@ static void HintAmplitude(String *);
 // :OFFSET
 static const char *FuncOffset(const char *);
 static void HintOffset(String *);
+// :MODESTART
+static const char *FuncModeStart(const char *);
+static void HintModeStart(String *);
+
 
 /// Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
@@ -49,6 +53,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":CHANNEL",   FuncChannel,   "Set active channel",               HintChannel),
     SCPI_LEAF(":FORM",      FuncForm,      "Set form wave on output",          HintForm),
     SCPI_LEAF(":FREQUENCY", FuncFrequency, "Set frequency of wave",            HintFrequency),
+    SCPI_LEAF(":MODESTART", FuncModeStart, "Set mode start of wave",           HintModeStart),
     SCPI_LEAF(":OFFSET",    FuncOffset,    "Set offset of wave",               HintOffset),
     SCPI_NODE(":KEY",       SCPI::key),
     SCPI_EMPTY()
@@ -254,6 +259,20 @@ static const char *FuncOffset(const char *buffer)
 
 
 static void HintOffset(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncModeStart(const char *buffer)
+{
+    //SCPI_REQUEST()
+    return nullptr;
+}
+
+
+static void HintModeStart(String *)
 {
 
 }
