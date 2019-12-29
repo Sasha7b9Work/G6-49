@@ -22,7 +22,7 @@ void AD5697::Init()
 }
 
 
-static float CalculateOffset(Chan::E ch, ParamValue offset)
+static float CalculateOffset(Chan::E ch, FloatValue offset)
 {
     float zero = CAL_AD9952_OFFSET_ZERO(ch);        // 2048
     
@@ -50,7 +50,7 @@ static float CalculateOffset(Chan::E ch, ParamValue offset)
 }
 
 
-void AD5697::SetOffset(Chan::E ch, ParamValue offset)
+void AD5697::SetOffset(Chan::E ch, FloatValue offset)
 {
     float code = CalculateOffset(ch, offset);
 

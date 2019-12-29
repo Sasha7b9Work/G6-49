@@ -435,7 +435,7 @@ void ParameterValue::SetValue(float val)
     else
     {
         order = Order::Nano;
-        val *= 1e9;
+        val *= 1e9F;
     }
 
     FillBuffer(val);

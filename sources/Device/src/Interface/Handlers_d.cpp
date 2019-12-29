@@ -122,10 +122,10 @@ void DHandlers::SetFormWave(SimpleMessage *msg)
 }
 
 
-static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, ParamValue))
+static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, FloatValue))
 {
     Chan ch(msg->TakeByte());
-    ParamValue value(msg->TakeDoubleWord());
+    FloatValue value(msg->TakeDoubleWord());
     func(ch, value);
 }
 
@@ -302,11 +302,11 @@ void DHandlers::WriteRegister(SimpleMessage *msg)
     switch (reg)
     {
     case Register::OffsetA:
-        AD5697::SetOffset(Chan::A, ParamValue(static_cast<float>(value)));
+        AD5697::SetOffset(Chan::A, FloatValue(static_cast<float>(value)));
         break;
 
     case Register::OffsetB:
-        AD5697::SetOffset(Chan::B, ParamValue(static_cast<float>(value)));
+        AD5697::SetOffset(Chan::B, FloatValue(static_cast<float>(value)));
         break;
 
     case Register::FreqMeterLevel:

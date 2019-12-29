@@ -16,27 +16,27 @@ struct DGenerator
 
     static void SetFormWave(Chan::E ch, Form::E form);
 
-    static void SetOffset(Chan::E ch, ParamValue offset);
+    static void SetOffset(Chan::E ch, FloatValue offset);
 
-    static void SetFrequency(Chan::E ch, ParamValue frequency);
+    static void SetFrequency(Chan::E ch, FloatValue frequency);
 
-    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
+    static void SetAmplitude(Chan::E ch, FloatValue amplitude);
 
-    static void SetDuration(Chan::E ch, ParamValue duration);
+    static void SetDuration(Chan::E ch, FloatValue duration);
 
-    static void SetDutyRatio(Chan::E ch, ParamValue dutyRatio);
+    static void SetDutyRatio(Chan::E ch, FloatValue dutyRatio);
 
-    static void SetPhase(Chan::E ch, ParamValue phase);
+    static void SetPhase(Chan::E ch, FloatValue phase);
 
-    static void SetDelay(Chan::E ch, ParamValue duration);
+    static void SetDelay(Chan::E ch, FloatValue duration);
 
-    static void SetManipulationDuration(Chan::E ch, ParamValue duration);
+    static void SetManipulationDuration(Chan::E ch, FloatValue duration);
 
-    static void SetManipulationPeriod(Chan::E ch, ParamValue period);
+    static void SetManipulationPeriod(Chan::E ch, FloatValue period);
 
-    static void SetPacketPeriod(Chan::E ch, ParamValue duration);
+    static void SetPacketPeriod(Chan::E ch, FloatValue duration);
 
-    static void SetPacketNumber(Chan::E ch, ParamValue number);
+    static void SetPacketNumber(Chan::E ch, FloatValue number);
 
-    static void SetPeriod(Chan::E ch, ParamValue period);
+    static void SetPeriod(Chan::E ch, FloatValue period);
 };

@@ -12,15 +12,15 @@ struct FPGA
 
     static void SetWaveForm(Chan::E ch, Form::E form);
 
-    static void SetFrequency(Chan::E ch, ParamValue frequency);
+    static void SetFrequency(Chan::E ch, FloatValue frequency);
 
-    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
+    static void SetAmplitude(Chan::E ch, FloatValue amplitude);
 
-    static void SetOffset(Chan::E ch, ParamValue offset);
+    static void SetOffset(Chan::E ch, FloatValue offset);
 
-    static void SetDurationImpulse(Chan::E ch, ParamValue duration);
+    static void SetDurationImpulse(Chan::E ch, FloatValue duration);
 
-    static void SetPeriodImpulse(Chan::E ch, ParamValue period);
+    static void SetPeriodImpulse(Chan::E ch, FloatValue period);
 
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
@@ -33,11 +33,11 @@ struct FPGA
         /// Устанавливает число импульсов в пачке
         static void SetNumberImpules(uint n);
         /// Устанавливает период следования пачки
-        static void SetPeriodPacket(ParamValue period);
+        static void SetPeriodPacket(FloatValue period);
 
-        static ParamValue periodImpulse;
+        static FloatValue periodImpulse;
 
-        static ParamValue durationImpulse;
+        static FloatValue durationImpulse;
     };
 
     struct ModeWork

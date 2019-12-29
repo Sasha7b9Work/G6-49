@@ -23,8 +23,8 @@
 
 FPGA::ModeWork::E       FPGA::modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
 FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
-ParamValue              FPGA::PacketImpulse::periodImpulse(static_cast<uint64>(0));
-ParamValue              FPGA::PacketImpulse::durationImpulse(static_cast<uint64>(0));
+FloatValue              FPGA::PacketImpulse::periodImpulse(static_cast<uint64>(0));
+FloatValue              FPGA::PacketImpulse::durationImpulse(static_cast<uint64>(0));
 StartMode               FPGA::startMode[Chan::Count] = { StartMode::Auto, StartMode::Auto };
 float                   FPGA::amplitude[Chan::Count] = { 10.0F, 10.0F };
 float                   FPGA::offset[Chan::Count] = { 5.0F, 5.0F };
@@ -174,7 +174,7 @@ void FPGA::SetModeImpulse(Chan::E ch)
 }
 
 
-void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
+void FPGA::SetFrequency(Chan::E ch, FloatValue frequency)
 {
     WriteControlRegister();
     
@@ -204,7 +204,7 @@ void FPGA::SetFrequency(Chan::E ch, ParamValue frequency)
 }
 
 
-void FPGA::SetDurationImpulse(Chan::E ch, ParamValue duration)
+void FPGA::SetDurationImpulse(Chan::E ch, FloatValue duration)
 {
     PacketImpulse::durationImpulse = duration;
 
@@ -220,7 +220,7 @@ void FPGA::SetDurationImpulse(Chan::E ch, ParamValue duration)
 }
 
 
-void FPGA::PacketImpulse::SetPeriodPacket(ParamValue period)
+void FPGA::PacketImpulse::SetPeriodPacket(FloatValue period)
 {
     uint64 value = period.ToUINT64() / 10 - 2;
 
@@ -236,7 +236,7 @@ void FPGA::PacketImpulse::SetNumberImpules(uint value)
 }
 
 
-void FPGA::SetPeriodImpulse(Chan::E ch, ParamValue period)
+void FPGA::SetPeriodImpulse(Chan::E ch, FloatValue period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
@@ -494,7 +494,7 @@ uint FPGA::OffsetToCode(Chan::E ch)
 }
 
 
-void FPGA::SetAmplitude(Chan::E ch, ParamValue ampl)
+void FPGA::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
     amplitude[ch] = ampl.ToFloat();
 
@@ -505,7 +505,7 @@ void FPGA::SetAmplitude(Chan::E ch, ParamValue ampl)
 }
 
 
-void FPGA::SetOffset(Chan::E ch, ParamValue off)
+void FPGA::SetOffset(Chan::E ch, FloatValue off)
 {
     offset[ch] = -off.ToFloat();
 

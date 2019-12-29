@@ -247,7 +247,7 @@ void DGenerator::SetFormWave(Chan::E ch, Form::E form)
 }
 
 
-void DGenerator::SetFrequency(Chan::E ch, ParamValue frequency)
+void DGenerator::SetFrequency(Chan::E ch, FloatValue frequency)
 {
     if (waveIsSine)
     {
@@ -260,27 +260,27 @@ void DGenerator::SetFrequency(Chan::E ch, ParamValue frequency)
 }
 
 
-void DGenerator::SetManipulationPeriod(Chan::E ch, ParamValue period)
+void DGenerator::SetManipulationPeriod(Chan::E ch, FloatValue period)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void DGenerator::SetManipulationDuration(Chan::E ch, ParamValue duration)
+void DGenerator::SetManipulationDuration(Chan::E ch, FloatValue duration)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetDurationImpulse(ch, duration);
 }
 
 
-void DGenerator::SetPeriod(Chan::E ch, ParamValue period)
+void DGenerator::SetPeriod(Chan::E ch, FloatValue period)
 {
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void DGenerator::SetAmplitude(Chan::E ch, ParamValue amplitude)
+void DGenerator::SetAmplitude(Chan::E ch, FloatValue amplitude)
 {
     Amplifier::Tune(ch);
 
@@ -295,7 +295,7 @@ void DGenerator::SetAmplitude(Chan::E ch, ParamValue amplitude)
 }
 
 
-void DGenerator::SetOffset(Chan::E ch, ParamValue offset)
+void DGenerator::SetOffset(Chan::E ch, FloatValue offset)
 {
     set.offset[ch] = offset;
 
@@ -305,36 +305,36 @@ void DGenerator::SetOffset(Chan::E ch, ParamValue offset)
 }
 
 
-void DGenerator::SetPhase(Chan::E ch, ParamValue phase)
+void DGenerator::SetPhase(Chan::E ch, FloatValue phase)
 {
     AD9952::SetPhase(ch, phase);
 }
 
 
-void DGenerator::SetPacketNumber(Chan::E, ParamValue number)
+void DGenerator::SetPacketNumber(Chan::E, FloatValue number)
 {
     FPGA::PacketImpulse::SetNumberImpules(static_cast<uint>(number.ToFloat() + 0.5F));
 }
 
 
-void DGenerator::SetPacketPeriod(Chan::E, ParamValue period)
+void DGenerator::SetPacketPeriod(Chan::E, FloatValue period)
 {
     FPGA::PacketImpulse::SetPeriodPacket(period);
 }
 
 
-void DGenerator::SetDutyRatio(Chan::E, ParamValue)
+void DGenerator::SetDutyRatio(Chan::E, FloatValue)
 {
 
 }
 
 
-void DGenerator::SetDuration(Chan::E ch, ParamValue value)
+void DGenerator::SetDuration(Chan::E ch, FloatValue value)
 {
     FPGA::SetDurationImpulse(ch, value);
 }
 
 
-void DGenerator::SetDelay(Chan::E, ParamValue)
+void DGenerator::SetDelay(Chan::E, FloatValue)
 {
 }

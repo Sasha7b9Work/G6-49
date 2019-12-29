@@ -10,11 +10,11 @@ struct AD9952
 {
     static void Init();
 
-    static void SetFrequency(Chan::E ch, ParamValue frequency);
+    static void SetFrequency(Chan::E ch, FloatValue frequency);
 
-    static void SetAmplitude(Chan::E ch, ParamValue amplitude);
+    static void SetAmplitude(Chan::E ch, FloatValue amplitude);
 
-    static void SetPhase(Chan::E ch, ParamValue phase);
+    static void SetPhase(Chan::E ch, FloatValue phase);
 
     /// Манипуляция
     struct Manipulation

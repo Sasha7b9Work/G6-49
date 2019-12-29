@@ -110,6 +110,8 @@ union BitSet64 //-V2514
 
     explicit BitSet64(uint64 v) : dword(v) {}
 
+    explicit BitSet64(uint v0, uint v1) : word0(v0), word1(v1) {}
+
     explicit BitSet64(const uint8 *buffer = 0) : dword(0)
     {
         if (buffer)

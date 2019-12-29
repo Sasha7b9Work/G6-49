@@ -10,7 +10,7 @@ struct AD5697
 {
     static void Init();
 
-    static void SetOffset(Chan::E ch, ParamValue offset);
+    static void SetOffset(Chan::E ch, FloatValue offset);
 
     static void SetFreqLevel(float level);
 

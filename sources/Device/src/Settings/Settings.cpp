@@ -3,6 +3,6 @@
 
 Settings set =
 {
-    { ParamValue(10.0F), ParamValue(10.0F) },   // amplitude
-    { ParamValue(0.0F), ParamValue(0.0F) }      // offset
+    { FloatValue(10.0F), FloatValue(10.0F) },   // amplitude
+    { FloatValue(0.0F), FloatValue(0.0F) }      // offset
 };

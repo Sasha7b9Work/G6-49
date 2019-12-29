@@ -40,7 +40,7 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 }
 
 
-void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
+void AD9952::SetFrequency(Chan::E ch, FloatValue frequency)
 {
     float freq = frequency.ToFloat();
 
@@ -51,7 +51,7 @@ void AD9952::SetFrequency(Chan::E ch, ParamValue frequency)
 }
 
 
-void AD9952::SetPhase(Chan::E ch, ParamValue phase)
+void AD9952::SetPhase(Chan::E ch, FloatValue phase)
 {
     setDDS.ad9952[ch].phase = phase.ToFloat();
     if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency) //-V550 //-V2550
@@ -61,7 +61,7 @@ void AD9952::SetPhase(Chan::E ch, ParamValue phase)
 }
 
 
-void AD9952::SetAmplitude(Chan::E ch, ParamValue amplitude)
+void AD9952::SetAmplitude(Chan::E ch, FloatValue amplitude)
 {
     setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * (1.0F + CAL_AD9952_AMPLITUDE(ch) / 1000.0F);
 
