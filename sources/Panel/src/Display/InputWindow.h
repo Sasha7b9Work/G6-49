@@ -18,7 +18,7 @@ public:
 
     float Value();
 
-    ParamValue ValueNano();
+    FloatValue ValueNano();
 
     void KeyLeft();
 

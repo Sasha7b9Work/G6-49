@@ -2,11 +2,11 @@
 #include "defines.h"
 
 
-struct ParamValue
+struct FloatValue
 {
-    explicit ParamValue(uint64 v) : value(v) {}
+    explicit FloatValue(uint64 v) : value(v) {}
 
-    explicit ParamValue(float v);
+    explicit FloatValue(float v);
 
     float ToFloat() const;
 

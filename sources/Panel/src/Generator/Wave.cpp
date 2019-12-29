@@ -365,7 +365,7 @@ bool Form::ParameterIsOpened() const
 }
 
 
-ParamValue ParameterValue::GetValueNano() const
+FloatValue ParameterValue::GetValueNano() const
 {
     StructValue input(const_cast<ParameterValue *>(this));
     return input.ValueNano();
@@ -444,7 +444,7 @@ void ParameterValue::SetValue(float val)
 
 void ParameterValue::FillBuffer(float)
 {
-//    ParamValue (val);
+//    FloatValue (val);
 }
 
 

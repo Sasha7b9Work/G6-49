@@ -12,13 +12,13 @@
 
 
 
-ParamValue::ParamValue(float v)
+FloatValue::FloatValue(float v)
 {
     FromFloat(v);
 }
 
 
-void ParamValue::FromFloat(float v)
+void FloatValue::FromFloat(float v)
 {
     int sign = (v < 0.0F) ? -1 : 1;
 
@@ -31,38 +31,38 @@ void ParamValue::FromFloat(float v)
 }
 
 
-float ParamValue::ToFloat() const
+float FloatValue::ToFloat() const
 {
     return Abs() / 1E9F * static_cast<float>(Sign());
 }
 
 
-int ParamValue::Sign() const
+int FloatValue::Sign() const
 {
     //    fedcba9876543210
     return (value & 0x8000000000000000U) ? -1 : 1;
 }
 
 
-uint64 ParamValue::Abs() const
+uint64 FloatValue::Abs() const
 {               //    fedcba9876543210
     return (value & 0x7fffffffffffffff);
 }
 
 
-void ParamValue::Divide(uint div)
+void FloatValue::Divide(uint div)
 {
     value /= div;
 }
 
 
-void ParamValue::Multiplie(uint mul)
+void FloatValue::Multiplie(uint mul)
 {
     value *= mul;
 }
 
 
-void ParamValue::SetSign(int sign)
+void FloatValue::SetSign(int sign)
 {
     if (sign > 0)
     {
@@ -76,7 +76,7 @@ void ParamValue::SetSign(int sign)
 }
 
 
-void ParamValue::Add(float v)
+void FloatValue::Add(float v)
 {
     FromFloat(ToFloat() + v);
 }

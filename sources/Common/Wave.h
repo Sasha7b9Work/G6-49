@@ -226,7 +226,7 @@ public:
 
     void SetValue(float value);
 
-    ParamValue GetValueNano() const;
+    FloatValue GetValueNano() const;
 
     pString GetStringDigits() const;
 

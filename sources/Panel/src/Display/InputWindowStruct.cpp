@@ -392,12 +392,12 @@ void StructValue::IncreaseOrder()
 }
 
 
-ParamValue StructValue::ValueNano()
+FloatValue StructValue::ValueNano()
 {
     uint64 beforeNS = ValueBeforeCommaInNano();     // Здесь число до запятой, в нано-единицах
     uint64 afterNS = ValueAfterCommaInNano();       // Здесь число после запятой, в нано-единицах
 
-    ParamValue result(beforeNS + afterNS);          // Теперь здесь количество нано-единиц в предпоожении, что размерность - One
+    FloatValue result(beforeNS + afterNS);          // Теперь здесь количество нано-единиц в предпоожении, что размерность - One
 
     // Скорректируем значение в соответствии с реальной размерностью
 
@@ -437,7 +437,7 @@ ParamValue StructValue::ValueNano()
 
 float StructValue::Value()
 {
-    ParamValue value = ValueNano();
+    FloatValue value = ValueNano();
 
     return value.ToFloat();
 }

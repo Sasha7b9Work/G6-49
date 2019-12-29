@@ -175,7 +175,7 @@ static const char *FuncFrequency(const char *buffer)
 }
 
 
-static void HintFrequency(String *message)
+static void HintFrequency(String *)
 {
 
 }

@@ -174,21 +174,21 @@ void PGenerator::SetParameter(ParameterChoice *param)
 void PGenerator::SetOffset(Chan::E ch, float offset)
 {
     /// \todo √овнокод - запись параметра из двух мест
-    Message::Set::Offset(static_cast<uint8>(ch), ParamValue(offset).ToUINT64()).Transmit();
+    Message::Set::Offset(static_cast<uint8>(ch), FloatValue(offset).ToUINT64()).Transmit();
 }
 
 
 void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
 {
     /// \todo √овнокод - запись параметра из двух мест
-    Message::Set::Amplitude(static_cast<uint8>(ch), ParamValue(amplitude).ToUINT64()).Transmit();
+    Message::Set::Amplitude(static_cast<uint8>(ch), FloatValue(amplitude).ToUINT64()).Transmit();
 }
 
 
 void PGenerator::SetFrequency(Chan::E ch, float frequency)
 {
     /// \todo √овнокод - запись параметра из двух мест
-    Message::Set::Frequency(static_cast<uint8>(ch), ParamValue(frequency).ToUINT64()).Transmit();
+    Message::Set::Frequency(static_cast<uint8>(ch), FloatValue(frequency).ToUINT64()).Transmit();
 }
 
 
@@ -215,7 +215,7 @@ void PGenerator::SetParameter(ParameterValue *param)
         Command::RequestData
     };
 
-    ParamValue value = param->GetValueNano();
+    FloatValue value = param->GetValueNano();
 
     if (param->Is(ParameterValue::Offset))
     {
