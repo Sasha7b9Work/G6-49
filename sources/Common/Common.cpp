@@ -20,9 +20,11 @@ FloatValue::FloatValue(float v)
 
 void FloatValue::FromFloat(float v)
 {
-    _value.dword = static_cast<uint64>(std::fabsf(v) * 1.E9F);
+    int sign = (v < 0.0F) ? -1 : 1;
 
-    if (v < 0.0F)
+    value = static_cast<uint64>(std::fabsf(v) * 1.E9F);
+
+    if (sign < 0)
     {
         SetSign(-1);
     }
@@ -37,45 +39,26 @@ float FloatValue::ToFloat() const
 
 int FloatValue::Sign() const
 {
-    //                    76543210
-    return (Integer() & 0x80000000U) ? -1 : 1;
+    //    fedcba9876543210
+    return (value & 0x8000000000000000U) ? -1 : 1;
 }
 
 
 uint64 FloatValue::Abs() const
-{
-    //    fedcba9876543210
-    return (_value.dword & 0x7fffffffffffffff);
+{               //    fedcba9876543210
+    return (value & 0x7fffffffffffffff);
 }
 
 
 void FloatValue::Divide(uint div)
 {
-    int sign = Sign();
-
-    SetSign(1);
-
-    _value.dword /= div;
-
-    if(sign < 0)
-    {
-        SetSign(-1);
-    }
+    value /= div;
 }
 
 
 void FloatValue::Multiplie(uint mul)
 {
-    int sign = Sign();
-
-    SetSign(1);
-
-    _value.dword *= mul;
-
-    if(sign < 0)
-    {
-        SetSign(-1);
-    }
+    value *= mul;
 }
 
 
@@ -83,12 +66,12 @@ void FloatValue::SetSign(int sign)
 {
     if (sign > 0)
     {
-        _value.word1 &= 0x7fffffff;     // Обнуляем признак отрицательного числа
+        value &= 0x8000000000000000U;       /// \todo как это может работать?
     }
     else
     {
-        //                76543210
-        _value.word1 |= 0x80000000U;    // Устанавливаем признак отрицательного числа
+        //         fedcba9876543210
+        value |= 0x8000000000000000U;           // Устанавливаем признак отрицательного числа
     }
 }
 

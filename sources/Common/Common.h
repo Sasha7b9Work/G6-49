@@ -1,14 +1,10 @@
 #pragma once
 #include "defines.h"
-#include "structs.h"
 
 
 struct FloatValue
 {
-    explicit FloatValue(uint64 v)
-    {
-        FromUINT64(v);
-    }
+    explicit FloatValue(uint64 v) : value(v) {}
 
     explicit FloatValue(float v);
 
@@ -16,15 +12,9 @@ struct FloatValue
 
     void FromFloat(float v);
 
-    void FromUINT64(uint64 v)
-    {
-        _value.dword = v;
-    }
+    void FromUINT64(uint64 v) { value = v; }
 
-    uint64 ToUINT64() const
-    {
-        return _value.dword;
-    }
+    uint64 ToUINT64() const { return value; }
 
     int Sign() const;
 
@@ -38,17 +28,7 @@ struct FloatValue
 
     void SetSign(int sign);
 
-    uint Integer() const
-    {
-        return _value.word1;
-    }
-
-    uint Fract() const
-    {
-        return _value.word0;
-    }
-
 private:
-    /// ¬ младшей половине хранитс€ дробна€ часть, в старшей - цела€. —тарший бит целой части отвечает за знак.
-    BitSet64 _value;
+
+    uint64 value;       // «начение параметра в единицах измерени€ "нано". ”становленный в "1" старший бит означает, что число отрицательное
 };
