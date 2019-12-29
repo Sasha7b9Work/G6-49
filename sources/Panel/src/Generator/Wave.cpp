@@ -417,7 +417,7 @@ void ParameterValue::SetValue(float val)
     else if(val >= 1e3F)
     {
         order = Order::Kilo;
-        val /= 1e6F;
+        val /= 1e3F;
     }
     else if(val >= 1.0F)
     {
@@ -464,7 +464,7 @@ void ParameterValue::FillBuffer(float val)
     String strInteger = SU::Int2String(integer, false, 1);
     String strFract = SU::Int2String(fract, false, 1);
 
-    int pos = 0;
+    int8 pos = 0;
 
     for(uint i = 0; i < strInteger.Size(); i++)
     {
