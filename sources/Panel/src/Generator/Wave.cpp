@@ -406,6 +406,48 @@ float ParameterValue::Value() const
 }
 
 
+void ParameterValue::SetValue(float val)
+{
+    if(val >= 1e6F)
+    {
+        order = Order::Mega;
+        val /= 1e6F;
+    }
+    else if(val >= 1e3F)
+    {
+        order = Order::Kilo;
+        val /= 1e6F;
+    }
+    else if(val >= 1.0F)
+    {
+        order = Order::One;
+    }
+    else if(val >= 1e-3F)
+    {
+        order = Order::Milli;
+        val *= 1e3F;
+    }
+    else if(val >= 1e-6F)
+    {
+        order = Order::Micro;
+        val *= 1e6F;
+    }
+    else
+    {
+        order = Order::Nano;
+        val *= 1e9;
+    }
+
+    FillBuffer(val);
+}
+
+
+void ParameterValue::FillBuffer(float)
+{
+//    ParamValue (val);
+}
+
+
 bool ParameterValue::AssumeArbitaryOrder() const
 {
     if (value == Offset || value == Amplitude)
@@ -441,7 +483,7 @@ void ParameterValue::DecreaseOrder()
 }
 
 
-pString ParameterComplex::GetStringValue() const
+pString ParameterComplex::GetStringDigits() const
 {
     if(Is(Manipulation))
     {
@@ -571,19 +613,19 @@ pString ParameterBase::Name() const
 }
 
 
-pString ParameterBase::GetStringValue() const
+pString ParameterBase::GetStringDigits() const
 {
     if(IsValue())
     {
-        return (static_cast<const ParameterValue *>(this))->GetStringValue();
+        return (static_cast<const ParameterValue *>(this))->GetStringDigits();
     }
     else if(IsChoice())
     {
-        return (static_cast<const ParameterChoice *>(this))->GetStringValue();
+        return (static_cast<const ParameterChoice *>(this))->GetStringDigits();
     }
     else if(IsComplex())
     {
-        return (static_cast<const ParameterComplex *>(this))->GetStringValue();
+        return (static_cast<const ParameterComplex *>(this))->GetStringDigits();
     }
     else
     {
@@ -593,7 +635,7 @@ pString ParameterBase::GetStringValue() const
 }
 
 
-pString ParameterChoice::GetStringValue() const
+pString ParameterChoice::GetStringDigits() const
 {
     return names[choice];
 }

@@ -158,10 +158,20 @@ static const char *FuncFrequency(const char *buffer)
 
     float frequency = 0.0F;
 
-    if(SU::String2Float(buffer, &frequency))
+    char *end_str = nullptr;
+
+    if(SU::String2Float(buffer, &frequency, &end_str))
     {
-        PGenerator::SetFrequency(CURRENT_CHANNEL, frequency);
+        ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Frequency);
+
+        param->SetValue(frequency);
+
+        PGenerator::SetParameter(param);
+
+        return end_str + 1;
     }
+
+    return nullptr;
 }
 
 

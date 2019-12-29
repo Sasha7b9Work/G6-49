@@ -70,7 +70,7 @@ public:
 
     pString Name() const;
 
-    pString GetStringValue() const;
+    pString GetStringDigits() const;
 
     pString NameUnit(char buffer[10]) const;
     /// ¬озвращает true, если параметру можно изменить пор€док
@@ -111,7 +111,7 @@ public:
 
     ParameterChoice(E v, pString var0, pString var1, pString var2, pString var3);
 
-    pString GetStringValue() const;
+    pString GetStringDigits() const;
 
     void NextChoice();
 
@@ -147,7 +147,7 @@ public:
 
     pString Name() const;
     
-    pString GetStringValue() const;
+    pString GetStringDigits() const;
 
     bool Is(E v) const { return value == v; };
 
@@ -224,6 +224,8 @@ public:
 
     float Value() const;
 
+    void SetValue(float value);
+
     ParamValue GetValueNano() const;
 
     pString GetStringDigits() const;
@@ -269,6 +271,8 @@ private:
     bool inNumLockMode;
 
     pString Units() const;
+    /// «аполнить buffer в соответствии с val
+    void FillBuffer(float val);
 };
 
 

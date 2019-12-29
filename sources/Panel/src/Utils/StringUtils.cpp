@@ -72,7 +72,7 @@ char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferO
     }
 
     bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < static_cast<size_t>(numDigits + (signExist ? 2 : 1)))
+    while (std::strlen(bufferOut) < static_cast<uint>(numDigits + (signExist ? 2 : 1)))
     {
         std::strcat(bufferOut, "0");
     }
@@ -464,13 +464,11 @@ float SU::Buffer2Float(const uint8 *buffer)
 }
 
 
-bool SU::String2Float(const char *buffer, float *value)
+bool SU::String2Float(const char *buffer, float *value, char **end)
 {
-    char *end = nullptr;
+    *value = std::strtof(buffer, end);
 
-    *value = std::strtof(buffer, &end);
-
-    return (end != buffer);
+    return (*end != buffer);
 }
 
 
