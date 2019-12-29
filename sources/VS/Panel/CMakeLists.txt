@@ -214,7 +214,7 @@ file(GLOB SOURCES   ../../common/Command.h
                                 src/GUI/*
                                 src/Display/Painter_win.cpp
 
-                    ../../Panel/src/Display/font/*
+                    ../../Panel/src/Display/Font/*
                     ../../Panel/src/FDrive/*
                     ../../Panel/src/FreqMeter/*
                     ../../Panel/src/Generator/*

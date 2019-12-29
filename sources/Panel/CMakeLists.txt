@@ -72,7 +72,7 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Wave.h
                     src/*
                     src/Display/*
-                    src/Display/font/*
+                    src/Display/Font/*
                     src/FDrive/*
                     src/FreqMeter/*
                     src/Generator/*
