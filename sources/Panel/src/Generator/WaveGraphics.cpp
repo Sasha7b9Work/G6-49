@@ -95,10 +95,6 @@ void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
         return;
     }
 
-    if(param->IsChoice())
-    {
-        param = param;
-    }
     x = String(param->GetStringDigits()).Draw(x, y);
 
     char buffer[10];

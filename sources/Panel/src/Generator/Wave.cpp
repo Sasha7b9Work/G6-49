@@ -471,13 +471,16 @@ void ParameterValue::FillBuffer(float val)
         buffer[pos++] = strInteger.c_str()[i];
     }
 
-    buffer[pos] = '.';
-    posComma = pos;
-    pos++;
+    posComma = pos - 1;
 
     for(uint i = 0; i < strFract.Size(); i++)
     {
         buffer[pos++] = strFract.c_str()[i];
+    }
+
+    while(pos < numDigits)
+    {
+        buffer[pos++] = '0';
     }
 }
 
