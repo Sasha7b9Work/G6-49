@@ -2,8 +2,7 @@
 
 
 
-class PageInput
+struct PageInput
 {
-public:
-    static Page *pointer;
+    static Page *self;
 };

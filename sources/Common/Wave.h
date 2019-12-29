@@ -222,6 +222,8 @@ public:
 
     float MaxValue() const { return max; };
 
+    float Value() const;
+
     ParamValue GetValueNano() const;
 
     pString GetStringValue() const;

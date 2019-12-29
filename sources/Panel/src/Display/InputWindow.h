@@ -16,6 +16,8 @@ public:
 
     char *StringValue();
 
+    float Value();
+
     ParamValue ValueNano();
 
     void KeyLeft();

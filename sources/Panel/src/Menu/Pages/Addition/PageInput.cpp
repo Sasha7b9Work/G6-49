@@ -87,7 +87,7 @@ static bool OnControl(Key &key)
     return false;
 }
 
-Page *PageInput::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
+Page *PageInput::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
 
 DEF_PAGE_SB( pInput,   //-V641
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß",   

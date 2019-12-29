@@ -23,6 +23,9 @@ static void HintChannel(String *);
 // :FORM
 static const char *FuncForm(const char *);
 static void HintForm(String *);
+// :FREQUENCY
+static const char *FuncFrequency(const char *);
+static void HintFrequency(String *);
 
 /// Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
@@ -30,13 +33,14 @@ static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",     FuncIDN,     "ID request",                       HintIDN),
-    SCPI_LEAF("*RST",      FuncReset,   "Reset settings to default values", HintReset),
-    SCPI_LEAF(":HELP",     FuncHelp,    "Output of this help",              HintHelp),
+    SCPI_LEAF("*IDN?",      FuncIDN,       "ID request",                       HintIDN),
+    SCPI_LEAF("*RST",       FuncReset,     "Reset settings to default values", HintReset),
+    SCPI_LEAF(":HELP",      FuncHelp,      "Output of this help",              HintHelp),
 
-    SCPI_LEAF(":CHANNEL",  FuncChannel, "Set active channel",               HintChannel),
-    SCPI_LEAF(":FORM",     FuncForm,    "Set form wave on output",          HintForm),
-    SCPI_NODE(":KEY",      SCPI::key),
+    SCPI_LEAF(":CHANNEL",   FuncChannel,   "Set active channel",               HintChannel),
+    SCPI_LEAF(":FORM",      FuncForm,      "Set form wave on output",          HintForm),
+    SCPI_LEAF(":FREQUENCY", FuncFrequency, "Set frequency of wave",            HintFrequency),
+    SCPI_NODE(":KEY",       SCPI::key),
     SCPI_EMPTY()
 };
 
@@ -140,6 +144,34 @@ static const char *FuncForm(const char *buffer)
 static void HintForm(String *message)
 {
     SCPI::ProcessHint(message, formNames);
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void SendFrequency()
+{
+    Form *form = FORM_CURRENT;
+
+    ParameterValue *param = form->GetParameterValue(ParameterValue::Frequency);
+
+    char buffer[100];
+    std::snprintf(buffer, 99, "%E Hz", param->Value());
+
+    SCPI::SendAnswer(buffer);
+}
+
+
+static const char *FuncFrequency(const char *buffer)
+{
+    SCPI_REQUEST(SendFrequency());
+
+    return nullptr;
+}
+
+
+static void HintFrequency(String *message)
+{
+
 }
 
 

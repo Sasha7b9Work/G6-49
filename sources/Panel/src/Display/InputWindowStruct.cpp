@@ -435,6 +435,14 @@ ParamValue StructValue::ValueNano()
 }
 
 
+float StructValue::Value()
+{
+    ParamValue value = ValueNano();
+
+    return value.ToFloat();
+}
+
+
 void StructValue::SaveValue()
 {
     SendToGenerator();

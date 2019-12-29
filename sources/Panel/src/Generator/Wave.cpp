@@ -379,6 +379,13 @@ pString ParameterValue::GetStringValue() const
 }
 
 
+float ParameterValue::Value() const
+{
+    StructValue input(const_cast<ParameterValue *>(this));
+    return input.Value();
+}
+
+
 bool ParameterValue::AssumeArbitaryOrder() const
 {
     if (value == Offset || value == Amplitude)
@@ -583,7 +590,7 @@ void Form::ChangeParameter()
     else if(param->IsValue() && static_cast<ParameterValue *>(param)->IsInputValue())
     {
         InputWindow::Init();
-        Menu::SetAdditionPage(static_cast<Page *>(PageInput::pointer));
+        Menu::SetAdditionPage(static_cast<Page *>(PageInput::self));
     }
     else if (param->IsExit())
     {
@@ -716,7 +723,7 @@ ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(C
 };
 
 
-ParameterValue::ParameterValue(int v) : ParameterBase(Value), //-V730
+ParameterValue::ParameterValue(int v) : ParameterBase(Type::Value), //-V730
     value(static_cast<E>(v)), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
 {
     std::memset(buffer, 0, NUM_DIGITS + 1);
@@ -728,7 +735,7 @@ ParameterValue::ParameterValue(int v) : ParameterBase(Value), //-V730
 };
 
 
-ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(Value),
+ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(Type::Value),
     value(static_cast<E>(v)), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
 {
     std::strcpy(buffer, buf);
