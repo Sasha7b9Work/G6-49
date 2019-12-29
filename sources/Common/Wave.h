@@ -6,6 +6,32 @@
 
 
 class ParameterValue;
+
+
+
+struct Order
+{
+    enum E
+    {
+        Nano,       // нано
+        Micro,      // микро
+        Milli,      // милли
+        One,        // единицы
+        Kilo,       // кило
+        Mega,       // мега
+        Count
+    } value;
+    Order(E v = Count) : value(v)  { };
+    operator uint8() const { return static_cast<uint8>(value); };
+    pString Name() const;
+    Order& operator++(int);
+    Order& operator--(int);
+    static Order::E Min(const ParameterValue *param);
+    static Order::E Max(const ParameterValue *param);
+};
+
+
+
 class Form;
 class Wave;
 class PageBase;
@@ -188,7 +214,7 @@ public:
 
     ParameterValue(int v = Count);
 
-    ParameterValue(int v, float _min, float _max, float val, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
+    ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd = NUM_DIGITS - 1, char s = ' ');
 
     bool Is(ParameterValue::E v) { return value == v; };
 
@@ -227,6 +253,8 @@ public:
     int8 hightLightDigit;
     /// После какой цифры воводить запятую
     int8 posComma;
+    /// В этом буфере хранится знак числа, а затем цифры с точкой
+    char buffer[NUM_DIGITS + 1];
     /// Знак числа. ' ' в случае, если число знака не имеет - строго положительное
     char sign;
 
@@ -234,9 +262,6 @@ public:
 
     /// Возвращает true, если порядок величины параметра может быть разным
     bool AssumeArbitaryOrder() const;
-
-    FloatValue floatValue;
-
 private:
 
     float min;

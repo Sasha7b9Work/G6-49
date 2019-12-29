@@ -20,7 +20,12 @@ FloatValue::FloatValue(float v)
 
 void FloatValue::FromFloat(float v)
 {
-    FillBufferFromNano(static_cast<uint64>(std::fabsf(v) * 1E9F), v < 0.0F);
+    _value.dword = static_cast<uint64>(std::fabsf(v) * 1.E9F);
+
+    if (v < 0.0F)
+    {
+        SetSign(-1);
+    }
 }
 
 
@@ -39,121 +44,56 @@ int FloatValue::Sign() const
 
 uint64 FloatValue::Abs() const
 {
-    //                     fedcba9876543210
-    return (ToUINT64() & 0x7fffffffffffffff);
+    //    fedcba9876543210
+    return (_value.dword & 0x7fffffffffffffff);
 }
 
 
-void FloatValue::DividePow10(uint)
+void FloatValue::Divide(uint div)
 {
-//    int s = Sign();
-//
-//    SetSign(1);
-//
-//    value.dword /= div;
-//
-//    if(s < 0)
-//    {
-//        SetSign(-1);
-//    }
+    int sign = Sign();
+
+    SetSign(1);
+
+    _value.dword /= div;
+
+    if(sign < 0)
+    {
+        SetSign(-1);
+    }
 }
 
 
-void FloatValue::MultipliePow10(uint)
+void FloatValue::Multiplie(uint mul)
 {
-//    int sign = Sign();
-//
-//    SetSign(1);
-//
-//    value.dword *= mul;
-//
-//    if(sign < 0)
-//    {
-//        SetSign(-1);
-//    }
+    int sign = Sign();
+
+    SetSign(1);
+
+    _value.dword *= mul;
+
+    if(sign < 0)
+    {
+        SetSign(-1);
+    }
 }
 
 
-void FloatValue::SetSign(int)
+void FloatValue::SetSign(int sign)
 {
-//    if (sign > 0)
-//    {
-//        value.word1 &= 0x7fffffff;     // ќбнул€ем признак отрицательного числа
-//    }
-//    else
-//    {
-//        //                76543210
-//        value.word1 |= 0x80000000U;    // ”станавливаем признак отрицательного числа
-//    }
+    if (sign > 0)
+    {
+        _value.word1 &= 0x7fffffff;     // ќбнул€ем признак отрицательного числа
+    }
+    else
+    {
+        //                76543210
+        _value.word1 |= 0x80000000U;    // ”станавливаем признак отрицательного числа
+    }
 }
 
 
 void FloatValue::Add(float v)
 {
     FromFloat(ToFloat() + v);
-}
-
-
-pString FloatValue::ToStringDigits(Order, int) const
-{
-//    static char buffer[40];
-//
-//    int sign = Sign();
-//
-//    uint intPart = value.word1 & 0x7fffffff;
-//    uint fractPart = value.word0;
-//
-//    if(order == Order::Nano)
-//    {
-//
-//    }
-//    else if(order == Order::Micro)
-//    {
-//
-//    }
-//    else if(order == Order::Milli)
-//    {
-//
-//    }
-//    else if(order == Order::One)
-//    {
-//
-//    }
-//    else if(order == Order::Kilo)
-//    {
-//        fractPart = (fractPart / 1000) + 
-//
-//        intPart /= 1000;
-//
-//    }
-//    else if(order == Order::Mega)
-//    {
-//        intPart /= (1000 * 1000);
-//    }
-
-    return "";
-}
-
-
-void FloatValue::FromUINT64(uint64)
-{
-
-}
-
-
-uint64 FloatValue::ToUINT64() const
-{
-    return 0;
-}
-
-
-uint FloatValue::Integer() const
-{
-    return 0;
-}
-
-
-void FloatValue::FillBufferFromNano(uint64 value, bool negative)
-{
-
 }
