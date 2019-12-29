@@ -31,6 +31,9 @@ static void HintFrequency(String *);
 // :AMPLITUDE
 static const char *FuncAmplitude(const char *);
 static void HintAmplitude(String *);
+// :OFFSET
+static const char *FuncOffset(const char *);
+static void HintOffset(String *);
 
 /// Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
@@ -46,6 +49,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":CHANNEL",   FuncChannel,   "Set active channel",               HintChannel),
     SCPI_LEAF(":FORM",      FuncForm,      "Set form wave on output",          HintForm),
     SCPI_LEAF(":FREQUENCY", FuncFrequency, "Set frequency of wave",            HintFrequency),
+    SCPI_LEAF(":OFFSET",    FuncOffset,    "Set offset of wave",               HintOffset),
     SCPI_NODE(":KEY",       SCPI::key),
     SCPI_EMPTY()
 };
@@ -215,6 +219,41 @@ static const char *FuncAmplitude(const char *buffer)
 
 
 static void HintAmplitude(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncOffset(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Offset)->GetStringValue()));
+
+    buffer++;
+
+    float offset = 0.0F;
+
+    char *end_str = nullptr;
+
+    if(SU::String2Float(buffer, &offset, &end_str))
+    {
+        if(offset >= -5.0F && offset <= 5.0F)
+        {
+            ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Offset);
+
+            param->SetValue(offset);
+
+            PGenerator::SetParameter(param);
+
+            return end_str + 1;
+        }
+    }
+
+    return nullptr;
+}
+
+
+static void HintOffset(String *)
 {
 
 }
