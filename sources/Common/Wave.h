@@ -261,13 +261,14 @@ public:
     /// Возвращает true, если порядок величины параметра может быть разным
     bool AssumeArbitaryOrder() const;
 private:
-   
 
     float min;
 
     float max;
     /// Если true, то находимся в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
+
+    pString Units() const;
 };
 
 

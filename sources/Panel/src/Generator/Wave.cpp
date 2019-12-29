@@ -383,9 +383,20 @@ pString ParameterValue::GetStringValue() const
 {
     static char buf[100];
 
-    std::snprintf(buf, 99, "%E", GetValueNano().ToFloat());
+    std::snprintf(buf, 99, "%E %s", GetValueNano().ToFloat(), Units());
 
     return buf;
+}
+
+
+pString ParameterValue::Units() const
+{
+    if(value == Frequency)
+    {
+        return "Hz";
+    }
+
+    return "";
 }
 
 
