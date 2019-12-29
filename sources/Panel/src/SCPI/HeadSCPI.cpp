@@ -28,6 +28,9 @@ static void HintForm(String *);
 // :FREQUENCY
 static const char *FuncFrequency(const char *);
 static void HintFrequency(String *);
+// :AMPLITUDE
+static const char *FuncAmplitude(const char *);
+static void HintAmplitude(String *);
 
 /// Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
@@ -39,6 +42,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF("*RST",       FuncReset,     "Reset settings to default values", HintReset),
     SCPI_LEAF(":HELP",      FuncHelp,      "Output of this help",              HintHelp),
 
+    SCPI_LEAF(":AMPLITUDE", FuncAmplitude, "Set amplitue of wave",             HintAmplitude),
     SCPI_LEAF(":CHANNEL",   FuncChannel,   "Set active channel",               HintChannel),
     SCPI_LEAF(":FORM",      FuncForm,      "Set form wave on output",          HintForm),
     SCPI_LEAF(":FREQUENCY", FuncFrequency, "Set frequency of wave",            HintFrequency),
@@ -176,6 +180,38 @@ static const char *FuncFrequency(const char *buffer)
 
 
 static void HintFrequency(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncAmplitude(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Amplitude)->GetStringValue()));
+
+    buffer++;
+
+    float amplitude = 0.0F;
+
+    char *end_str = nullptr;
+
+    if(SU::String2Float(buffer, &amplitude, &end_str))
+    {
+        ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Amplitude);
+
+        param->SetValue(amplitude);
+
+        PGenerator::SetParameter(param);
+
+        return end_str + 1;
+    }
+
+    return nullptr;
+}
+
+
+static void HintAmplitude(String *)
 {
 
 }
