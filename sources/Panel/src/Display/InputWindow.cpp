@@ -116,7 +116,7 @@ void InputWindow::DrawDigits(int x, int y)
     y += 40;
 
     char text[10];
-    std::strcpy(text, param->buffer);
+    std::strcpy(text, param->GetStringDigits());
 
     int posComma = param->posComma;
 

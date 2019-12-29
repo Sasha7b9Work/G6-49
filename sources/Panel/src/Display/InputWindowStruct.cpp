@@ -14,10 +14,12 @@
 #include <cmath>
 
 
+static char buffer[20];
+
 
 #define CURRENT_POS         (param->hightLightDigit)
-#define DIGIT(num)          (param->buffer[num])
-#define CURRENT_DIGIT       (param->buffer[CURRENT_POS])
+#define DIGIT(num)          (buffer[num])
+#define CURRENT_DIGIT       (buffer[CURRENT_POS])
 #define POS_COMMA           (param->posComma)
 #define ORDER               (param->order)
 #define SIGN                (param->sign)
@@ -27,6 +29,8 @@
 void StructValue::Set(ParameterValue *param_)
 {
     param = param_;
+
+    std::strcpy(buffer, param->GetStringDigits());
 
 	for (int i = param->numDigits - 1; i > 0; --i)
 	{
@@ -73,7 +77,7 @@ void StructValue::KeyRight()
 	if (param->hightLightDigit < (param->numDigits - 1))
 	{
 		if ((param->hightLightDigit == param->numDigits - 2) &&
-            param->buffer[param->numDigits - 1] == '.')
+            buffer[param->numDigits - 1] == '.')
 		{
 			return;
 		}
@@ -156,7 +160,7 @@ char *StructValue::StringDigits()
     buf[0] = '\0';
 
     char text[20];
-    std::strcpy(text, param->buffer);
+    std::strcpy(text, param->floatValue.ToStringDigits(param->order, param->numDigits));
     int posComma = POS_COMMA;
 
     char *pointer = text;
@@ -403,23 +407,23 @@ FloatValue StructValue::ValueNano()
 
     if (ORDER == Order::Milli)
     {
-        result.Divide(1000);
+        result.DividePow10(3);
     }
     else if (ORDER == Order::Micro)
     {
-        result.Divide(1000 * 1000);
+        result.DividePow10(6);
     }
     else if (ORDER == Order::Nano)
     {
-        result.Divide(1000 * 1000 * 1000);
+        result.DividePow10(9);
     }
     else if (ORDER == Order::Kilo)
     {
-        result.Multiplie(1000);
+        result.MultipliePow10(3);
     }
     else if (ORDER == Order::Mega)
     {
-        result.Multiplie(1000 * 1000);
+        result.MultipliePow10(6);
     }
     else
     {

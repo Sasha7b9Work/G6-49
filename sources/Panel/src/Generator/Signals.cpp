@@ -6,9 +6,9 @@
 
 
 static ParameterChoice param_SineModulationA_Manipulation        (ParameterChoice::ManipulationEnabled, DISABLED_RU, ENABLED_RU);
-static ParameterValue  param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  "5000", 0, Order::Milli);
-static ParameterValue  param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  "2500", 1, Order::Milli);
-static ParameterValue  param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
+static ParameterValue  param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  5e-3F,   0, Order::Milli);
+static ParameterValue  param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  2.5e-3F, 1, Order::Milli);
+static ParameterValue  param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   0.0F,    0, Order::One);
 
 
 static ParameterBase *params_SineModulationA[] =
@@ -20,9 +20,9 @@ static ParameterBase *params_SineModulationA[] =
     0
 };
 
-static ParameterValue   param_SineA_Frequency   (ParameterValue::Frequency,      0.1F,  100e6F, "10000", 0, Order::Kilo);
-static ParameterValue   param_SineA_Amplitude   (ParameterValue::Amplitude,      0.0F,  10.0F,  "50000", 0, Order::One);
-static ParameterValue   param_SineA_Offset      (ParameterValue::Offset,         0.0F,  10.0F,  "50000", 0, Order::One);
+static ParameterValue   param_SineA_Frequency   (ParameterValue::Frequency,      0.1F,  100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue   param_SineA_Amplitude   (ParameterValue::Amplitude,      0.0F,  10.0F,  5.0F, 0, Order::One);
+static ParameterValue   param_SineA_Offset      (ParameterValue::Offset,         0.0F,  10.0F,  5.0F, 0, Order::One);
 static ParameterComplex param_SineA_Manipulation(ParameterComplex::Manipulation, params_SineModulationA);
 
 static ParameterBase *params_SineA[] =
@@ -37,9 +37,9 @@ static ParameterBase *params_SineA[] =
 static Form formSineA(Form::Sine, params_SineA, &waves[Chan::A]);
 
 
-static ParameterValue  param_RampPlusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000",  0, Order::Kilo);
-static ParameterValue  param_RampPlusA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  "10000",  1, Order::One);
-static ParameterValue  param_RampPlusA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  "50000",  0, Order::One);
+static ParameterValue  param_RampPlusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, 1e3F,  0, Order::Kilo);
+static ParameterValue  param_RampPlusA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  1.0F,  1, Order::One);
+static ParameterValue  param_RampPlusA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  5.0F,  0, Order::One);
 static ParameterChoice param_RampPlusA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 
 static ParameterBase *params_RampPlusA[] =
@@ -54,9 +54,9 @@ static ParameterBase *params_RampPlusA[] =
 static Form formRampPlusA(Form::RampPlus, params_RampPlusA, &waves[Chan::A]);
 
 
-static ParameterValue  param_RampMinusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_RampMinusA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  "10000", 1, Order::One);
-static ParameterValue  param_RampMinusA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_RampMinusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue  param_RampMinusA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  1.0F, 1, Order::One);
+static ParameterValue  param_RampMinusA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  5.0F, 0, Order::One);
 static ParameterChoice param_RampMinusA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 
 static ParameterBase *params_RampMinusA[] =
@@ -71,9 +71,9 @@ static ParameterBase *params_RampMinusA[] =
 static Form formRampMinusA(Form::RampMinus, params_RampMinusA, &waves[Chan::A]);
 
 
-static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_TriangleA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F, "10000",  1, Order::One);
-static ParameterValue  param_TriangleA_Offset   (ParameterValue::Offset,     0.0F, 10.0F, "50000",  0, Order::One);
+static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue  param_TriangleA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  1.0F, 1, Order::One);
+static ParameterValue  param_TriangleA_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  5.0F, 0, Order::One);
 static ParameterChoice param_TriangleA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 
 static ParameterBase *params_TriangleA[] =
@@ -88,9 +88,9 @@ static ParameterBase *params_TriangleA[] =
 static Form formTriangleA(Form::Triangle, params_TriangleA, &waves[Chan::A]);
 
 
-static ParameterValue  param_FreeA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_FreeA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F, "10000", 1, Order::One);
-static ParameterValue  param_FreeA_Offset   (ParameterValue::Offset,     0.0F, 10.0F, "50000", 0, Order::One);
+static ParameterValue  param_FreeA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue  param_FreeA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  1.0F, 1, Order::One);
+static ParameterValue  param_FreeA_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  5.0F, 0, Order::One);
 static ParameterChoice param_FreeA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 static ParameterPage   param_FreeA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
@@ -108,9 +108,9 @@ static Form formFreeA(Form::Free, params_FreeA, &waves[Chan::A]);
 
 
 
-static ParameterValue param_MeanderA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue param_MeanderA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  "10000", 1, Order::One);
-static ParameterValue param_MeanderA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue param_MeanderA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue param_MeanderA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  1.0F, 1, Order::One);
+static ParameterValue param_MeanderA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  5.0F, 0, Order::One);
 
 static ParameterBase *params_MeanderA[] =
 {
@@ -142,10 +142,10 @@ static void DrawMinus(int x, int y)
     Painter::DrawHLine(y, x + 16, x + 24);
 }
 
-static ParameterValue  param_ImpulseA_Period   (ParameterValue::Period,    3.3e-8F, 10e6F,  "10000", 0, Order::Milli);
-static ParameterValue  param_ImpulseA_Duration (ParameterValue::Duration,  0.0F,    100e6F, "01000", 0, Order::Milli);
-static ParameterValue  param_ImpulseA_Amplitude(ParameterValue::Amplitude, 0.0F,    10.0F,  "10000", 1, Order::One);
-static ParameterValue  param_ImpulseA_Offset   (ParameterValue::Offset,    0.0F,    10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_ImpulseA_Period   (ParameterValue::Period,    3.3e-8F, 10e6F,  1e-3F,   0, Order::Milli);
+static ParameterValue  param_ImpulseA_Duration (ParameterValue::Duration,  0.0F,    100e6F, 0.1e-3F, 0, Order::Milli);
+static ParameterValue  param_ImpulseA_Amplitude(ParameterValue::Amplitude, 0.0F,    10.0F,  10.0F,   1, Order::One);
+static ParameterValue  param_ImpulseA_Offset   (ParameterValue::Offset,    0.0F,    10.0F,  5.0F,    0, Order::One);
 static ParameterChoice param_ImpulseA_Polarity (ParameterChoice::Polarity, "", "", DrawPlus, DrawMinus);
 static ParameterChoice param_ImpulseA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 
@@ -164,12 +164,12 @@ static Form formImpulseA(Form::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
 
-static ParameterValue  param_PacketA_Period      (ParameterValue::Period,       0.0F, 100e6F, "02000", 0, Order::Milli);
-static ParameterValue  param_PacketA_Duration    (ParameterValue::Duration,     0.0F, 100e6F, "01000", 0, Order::Milli);
-static ParameterValue  param_PacketA_PacketNumber(ParameterValue::PacketNumber, 0.0F, 100e6F, "30000", 0, Order::One);
-static ParameterValue  param_PacketA_PacketPeriod(ParameterValue::PacketPeriod, 0.0F, 100e6F, "10000", 0, Order::Milli);
-static ParameterValue  param_PacketA_Amplitude   (ParameterValue::Amplitude,    0.0F, 10.0F,  "10000", 1, Order::One);
-static ParameterValue  param_PacketA_Offset      (ParameterValue::Offset,       0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_PacketA_Period      (ParameterValue::Period,       0.0F, 100e6F, 0.2e-3F, 0, Order::Milli);
+static ParameterValue  param_PacketA_Duration    (ParameterValue::Duration,     0.0F, 100e6F, 0.1e-3F, 0, Order::Milli);
+static ParameterValue  param_PacketA_PacketNumber(ParameterValue::PacketNumber, 0.0F, 100e6F, 3.0F,    0, Order::One);
+static ParameterValue  param_PacketA_PacketPeriod(ParameterValue::PacketPeriod, 0.0F, 100e6F, 1e-3F,   0, Order::Milli);
+static ParameterValue  param_PacketA_Amplitude   (ParameterValue::Amplitude,    0.0F, 10.0F,  1.0F,    1, Order::One);
+static ParameterValue  param_PacketA_Offset      (ParameterValue::Offset,       0.0F, 10.0F,  5.0F,    0, Order::One);
 static ParameterChoice param_PacketA_Polarity    (ParameterChoice::Polarity,    "", "", DrawPlus, DrawMinus);
 static ParameterChoice param_PacketA_ModeStart   (ParameterChoice::ModeStart,   " Авто", " Однокр", " Комп А", " Форм B");
 
@@ -208,9 +208,9 @@ static Form *formsA[] =
 
 
 static ParameterChoice param_SineModulationB_Manipulation        (ParameterChoice::ManipulationEnabled, DISABLED_RU, ENABLED_RU);
-static ParameterValue  param_SineModulationB_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  "5000", 0, Order::Milli);
-static ParameterValue  param_SineModulationB_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  "2500", 1, Order::Milli);
-static ParameterValue  param_SineModulationB_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
+static ParameterValue  param_SineModulationB_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  5e-3F,  0, Order::Milli);
+static ParameterValue  param_SineModulationB_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  25e-3F, 1, Order::Milli);
+static ParameterValue  param_SineModulationB_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   0.0F,   0, Order::One);
 
 static ParameterBase *params_SineModulationB[] =
 {
@@ -221,10 +221,10 @@ static ParameterBase *params_SineModulationB[] =
     0
 };
 
-static ParameterValue   param_SineB_Frequency   (ParameterValue::Frequency,      0.1F,  100e6F, "10000", 0, Order::Kilo);
-static ParameterValue   param_SineB_Amplitude   (ParameterValue::Amplitude,      0.0F,  10.0F,  "10000", 1, Order::One);
-static ParameterValue   param_SineB_Offset      (ParameterValue::Offset,         0.0F,  10.0F,  "50000", 0, Order::One);
-static ParameterValue   param_SineB_Phase       (ParameterValue::Phase,          0.0F,  360.0F, "00000", 0, Order::One);
+static ParameterValue   param_SineB_Frequency   (ParameterValue::Frequency,      0.1F,  100e6F, 1e3F,  0, Order::Kilo);
+static ParameterValue   param_SineB_Amplitude   (ParameterValue::Amplitude,      0.0F,  10.0F,  10.0F, 1, Order::One);
+static ParameterValue   param_SineB_Offset      (ParameterValue::Offset,         0.0F,  10.0F,  5.0F,  0, Order::One);
+static ParameterValue   param_SineB_Phase       (ParameterValue::Phase,          0.0F,  360.0F, 0.0F,  0, Order::One);
 static ParameterComplex param_SineB_Manipulation(ParameterComplex::Manipulation, params_SineModulationB);
 
 static ParameterBase *params_SineB[] =
@@ -240,9 +240,9 @@ static ParameterBase *params_SineB[] =
 static Form formSineB(Form::Sine, params_SineB, &waves[Chan::B]);
 
 
-static ParameterValue  param_RampPlusB_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_RampPlusB_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  "50000", 0, Order::One);
-static ParameterValue  param_RampPlusB_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_RampPlusB_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue  param_RampPlusB_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  5.0F, 0, Order::One);
+static ParameterValue  param_RampPlusB_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  5.0F, 0, Order::One);
 static ParameterChoice param_RampPlusB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 
 static ParameterBase *params_RampPlusB[] =
@@ -257,9 +257,9 @@ static ParameterBase *params_RampPlusB[] =
 static Form formRampPlusB(Form::RampPlus, params_RampPlusB, &waves[Chan::B]);
 
 
-static ParameterValue  param_RampMinusB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_RampMinusB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  "50000", 0, Order::One);
-static ParameterValue  param_RampMinusB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_RampMinusB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue  param_RampMinusB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  5.0F, 0, Order::One);
+static ParameterValue  param_RampMinusB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  5.0F, 0, Order::One);
 static ParameterChoice param_RampMinusB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 
 static ParameterBase *params_RampMinusB[] =
@@ -274,9 +274,9 @@ static ParameterBase *params_RampMinusB[] =
 static Form formRampMinusB(Form::RampMinus, params_RampMinusB, &waves[Chan::B]);
 
 
-static ParameterValue  param_TriangleB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_TriangleB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  "50000", 0, Order::One);
-static ParameterValue  param_TriangleB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_TriangleB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue  param_TriangleB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  5.0F, 0, Order::One);
+static ParameterValue  param_TriangleB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  5.0F, 0, Order::One);
 static ParameterChoice param_TriangleB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 
 static ParameterBase *params_TriangleB[] =
@@ -291,9 +291,9 @@ static ParameterBase *params_TriangleB[] =
 static Form formTriangleB(Form::Triangle, params_TriangleB, &waves[Chan::B]);
 
 
-static ParameterValue  param_FreeB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_FreeB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  "50000", 0, Order::One);
-static ParameterValue  param_FreeB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_FreeB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, 1e3F, 0, Order::Kilo);
+static ParameterValue  param_FreeB_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F,  5.0F, 0, Order::One);
+static ParameterValue  param_FreeB_Offset   (ParameterValue::Offset,     0.0F, 10.0F,  5.0F, 0, Order::One);
 static ParameterChoice param_FreeB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 static ParameterPage   param_FreeB_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
@@ -310,9 +310,9 @@ static ParameterBase *params_FreeB[] =
 static Form formFreeB(Form::Free, params_FreeB, &waves[Chan::B]);
 
 
-static ParameterValue param_MeanderB_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue param_MeanderB_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  "10000", 1, Order::One);
-static ParameterValue param_MeanderB_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  "50000", 0, Order::One);
+static ParameterValue param_MeanderB_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, 1e3F,  0, Order::Kilo);
+static ParameterValue param_MeanderB_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  10.0F, 1, Order::One);
+static ParameterValue param_MeanderB_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  5.0F,  0, Order::One);
 
 static ParameterBase *params_MeanderB[] =
 {
@@ -326,10 +326,10 @@ static Form formMeanderB(Form::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 
-static ParameterValue  param_ImpulseB_Period   (ParameterValue::Period,    3.3e-8F, 10e6F,  "10000", 0, Order::Milli);
-static ParameterValue  param_ImpulseB_Duration (ParameterValue::Duration,  0.0F,    100e6F, "01000", 0, Order::Milli);
-static ParameterValue  param_ImpulseB_Amplitude(ParameterValue::Amplitude, 0.0F,    10.0F,  "10000", 1, Order::One);
-static ParameterValue  param_ImpulseB_Offset   (ParameterValue::Offset,    0.0F,    10.0F,  "50000", 0, Order::One);
+static ParameterValue  param_ImpulseB_Period   (ParameterValue::Period,    3.3e-8F, 10e6F,  1e-3F,   0, Order::Milli);
+static ParameterValue  param_ImpulseB_Duration (ParameterValue::Duration,  0.0F,    100e6F, 0.1e-3F, 0, Order::Milli);
+static ParameterValue  param_ImpulseB_Amplitude(ParameterValue::Amplitude, 0.0F,    10.0F,  10.0F,   1, Order::One);
+static ParameterValue  param_ImpulseB_Offset   (ParameterValue::Offset,    0.0F,    10.0F,  5.0F,    0, Order::One);
 static ParameterChoice param_ImpulseB_Polarity (ParameterChoice::Polarity,  "", "", DrawPlus, DrawMinus);
 static ParameterChoice param_ImpulseB_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
 

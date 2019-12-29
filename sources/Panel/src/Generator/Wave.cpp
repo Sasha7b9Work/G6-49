@@ -786,10 +786,8 @@ ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(C
 
 
 ParameterValue::ParameterValue(int v) : ParameterBase(ParameterBase::Value), //-V730
-    value(static_cast<E>(v)), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
+    value(static_cast<E>(v)), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), floatValue(0.0F), inNumLockMode(false)
 {
-    std::memset(buffer, 0, NUM_DIGITS + 1);
-
     if (v == Amplitude || v == Offset)
     {
         numDigits = 3;
@@ -797,11 +795,9 @@ ParameterValue::ParameterValue(int v) : ParameterBase(ParameterBase::Value), //-
 };
 
 
-ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(ParameterBase::Value),
-    value(static_cast<E>(v)), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
+ParameterValue::ParameterValue(int v, float _min, float _max, float val, int8 pos, Order o, int8 hd, char s) : ParameterBase(ParameterBase::Value),
+    value(static_cast<E>(v)), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), floatValue(val), min(_min), max(_max), inNumLockMode(false)
 {
-    std::strcpy(buffer, buf);
-
     if (v == Amplitude || v == Offset)
     {
         numDigits = 3;
