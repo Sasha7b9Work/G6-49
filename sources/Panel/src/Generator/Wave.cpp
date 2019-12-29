@@ -379,10 +379,19 @@ pString ParameterValue::GetStringDigits() const
 }
 
 
+pString ParameterValue::GetStringValue() const
+{
+    static char buf[100];
+
+    std::snprintf(buf, 99, "%E", GetValueNano().ToFloat());
+
+    return buf;
+}
+
+
 float ParameterValue::Value() const
 {
-    StructValue input(const_cast<ParameterValue *>(this));
-    return input.Value();
+    return GetValueNano().ToFloat();
 }
 
 

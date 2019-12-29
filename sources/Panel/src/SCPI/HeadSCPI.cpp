@@ -149,22 +149,9 @@ static void HintForm(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void SendFrequency()
-{
-    Form *form = FORM_CURRENT;
-
-    ParameterValue *param = form->GetParameterValue(ParameterValue::Frequency);
-
-    char buffer[100];
-    std::snprintf(buffer, 99, "%E Hz", param->Value());
-
-    SCPI::SendAnswer(buffer);
-}
-
-
 static const char *FuncFrequency(const char *buffer)
 {
-    SCPI_REQUEST(SendFrequency());
+    SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Frequency)->GetStringValue()));
 
     return nullptr;
 }
