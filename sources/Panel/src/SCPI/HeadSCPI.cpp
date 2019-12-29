@@ -198,13 +198,16 @@ static const char *FuncAmplitude(const char *buffer)
 
     if(SU::String2Float(buffer, &amplitude, &end_str))
     {
-        ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Amplitude);
+        if(amplitude >= 0.0F && amplitude <= 10.0F)
+        {
+            ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Amplitude);
 
-        param->SetValue(amplitude);
+            param->SetValue(amplitude);
 
-        PGenerator::SetParameter(param);
+            PGenerator::SetParameter(param);
 
-        return end_str + 1;
+            return end_str + 1;
+        }
     }
 
     return nullptr;
