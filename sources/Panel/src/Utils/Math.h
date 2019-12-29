@@ -13,6 +13,8 @@ struct Math
     static bool IsEquals(float x, float y);
 
     static int DigitsInIntPart(float value);
+
+    static int DigitsInInt(int value);
     /// \brief Округляет число с плавающей точкой. numDigits - полное число знаков, по которым производится округление.
     /// Например, RoundFloat(12.37137, 4) округлит до 12.40)
     static float RoundFloat(float value, int numDigits);

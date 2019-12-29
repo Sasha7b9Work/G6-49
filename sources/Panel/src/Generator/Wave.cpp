@@ -11,6 +11,7 @@
 #include "Utils/Math.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Addition/PageInput.h"
+#include "Utils/StringUtils.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
@@ -442,9 +443,42 @@ void ParameterValue::SetValue(float val)
 }
 
 
-void ParameterValue::FillBuffer(float)
+void ParameterValue::FillBuffer(float val)
 {
-//    FloatValue (val);
+    FloatValue floatValue(val);
+
+    int integer = floatValue.Integer();
+
+    int fract = floatValue.Fract(numDigits - Math::DigitsInInt(integer));
+
+    if(sign != ' ')
+    {
+        sign = (integer < 0) ? '-' : '+';
+    }
+
+    if(integer < 0)
+    {
+        integer = -integer;
+    }
+
+    String strInteger = SU::Int2String(integer, false, 1);
+    String strFract = SU::Int2String(fract, false, 1);
+
+    int pos = 0;
+
+    for(uint i = 0; i < strInteger.Size(); i++)
+    {
+        buffer[pos++] = strInteger.c_str()[i];
+    }
+
+    buffer[pos] = '.';
+    posComma = pos;
+    pos++;
+
+    for(uint i = 0; i < strFract.Size(); i++)
+    {
+        buffer[pos++] = strFract.c_str()[i];
+    }
 }
 
 

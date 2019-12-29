@@ -1,8 +1,9 @@
 #include "defines.h"
 #include "Log.h"
-#include "Utils/StringUtils.h"
+#include "Utils/Buffer.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
 #include "structs.h"
 #include <cmath>
@@ -466,9 +467,30 @@ float SU::Buffer2Float(const uint8 *buffer)
 
 bool SU::String2Float(const char *buffer, float *value, char **end)
 {
-    *value = std::strtof(buffer, end);
+    Buffer string(std::strlen(buffer) + 1);
 
-    return (*end != buffer);
+    std::strcpy(reinterpret_cast<char *>(string.Data()), buffer);
+
+    for(uint i = 0; i < string.Size(); i++)
+    {
+        if(string.Data()[i] == '.')
+        {
+            string.Data()[i] = ',';
+        }
+    }
+
+    *value = std::strtof(reinterpret_cast<char *>(string.Data()), end);
+
+    if(*end == reinterpret_cast<char *>(string.Data()))
+    {
+        *end = const_cast<char *>(buffer);
+    }
+    else
+    {
+        *end = const_cast<char *>(buffer) + (*end - reinterpret_cast<char *>(string.Data()));
+    }
+
+    return (*end != const_cast<char *>(buffer));
 }
 
 

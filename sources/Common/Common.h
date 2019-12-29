@@ -27,6 +27,10 @@ struct FloatValue
     void Add(float v);
 
     void SetSign(int sign);
+    /// Возвращает целую часть числа
+    int Integer() const;
+    /// Возвращает дробную часть числа. numDigits - требуемое количество знакомест после запятой
+    int Fract(int numDigits) const;
 
 private:
 

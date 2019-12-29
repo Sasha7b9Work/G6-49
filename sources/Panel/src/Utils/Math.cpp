@@ -56,6 +56,25 @@ int Math::DigitsInIntPart(float value)
 }
 
 
+int Math::DigitsInInt(int value)
+{
+    if(value < 0)
+    {
+        value = -value;
+    }
+
+    int result = 0;
+
+    do 
+    {
+        result++;
+        value /= 10;
+    } while(value > 0);
+
+    return result;
+}
+
+
 float Math::RoundFloat(float value, int numDigits)
 {
     float absValue = std::fabsf(value);

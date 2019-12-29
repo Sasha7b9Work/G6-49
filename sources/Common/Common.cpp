@@ -4,6 +4,7 @@
 #endif
 
 #include "Common.h"
+#include "Utils/Math.h"
 #include <cmath>
 
 #ifdef WIN32
@@ -79,4 +80,20 @@ void FloatValue::SetSign(int sign)
 void FloatValue::Add(float v)
 {
     FromFloat(ToFloat() + v);
+}
+
+
+int FloatValue::Integer() const
+{
+    float abs = std::fabsf(ToFloat());
+
+    return Sign() * static_cast<int>(abs);
+}
+
+
+int FloatValue::Fract(int numDigits) const
+{
+    float fract = ToFloat() - Integer();
+
+    return static_cast<int>(fract * Math::Pow10(numDigits));
 }
