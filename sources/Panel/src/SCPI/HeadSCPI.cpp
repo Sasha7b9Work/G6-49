@@ -6,6 +6,7 @@
 #include "Settings/Settings.h"
 #include "Utils/String.h"
 #include "Wave.h"
+#include <cstdio>
 
 
 // *IDN?

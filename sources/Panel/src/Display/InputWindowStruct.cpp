@@ -145,7 +145,7 @@ void StructValue::RegRight()
 }
 
 
-char *StructValue::StringValue()
+char *StructValue::StringDigits()
 {
     if(!param->IsInputValue())
     {

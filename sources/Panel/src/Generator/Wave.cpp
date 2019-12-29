@@ -372,10 +372,10 @@ ParamValue ParameterValue::GetValueNano() const
 }
 
 
-pString ParameterValue::GetStringValue() const
+pString ParameterValue::GetStringDigits() const
 {
     StructValue input(const_cast<ParameterValue *>(this));
-    return input.StringValue();
+    return input.StringDigits();
 }
 
 
@@ -723,7 +723,7 @@ ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(C
 };
 
 
-ParameterValue::ParameterValue(int v) : ParameterBase(Type::Value), //-V730
+ParameterValue::ParameterValue(int v) : ParameterBase(ParameterBase::Value), //-V730
     value(static_cast<E>(v)), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
 {
     std::memset(buffer, 0, NUM_DIGITS + 1);
@@ -735,7 +735,7 @@ ParameterValue::ParameterValue(int v) : ParameterBase(Type::Value), //-V730
 };
 
 
-ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(Type::Value),
+ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(ParameterBase::Value),
     value(static_cast<E>(v)), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
 {
     std::strcpy(buffer, buf);

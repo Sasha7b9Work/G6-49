@@ -226,7 +226,7 @@ public:
 
     ParamValue GetValueNano() const;
 
-    pString GetStringValue() const;
+    pString GetStringDigits() const;
     /// Увеличить порядок
     void IncreaseOrder();
     /// Уменьшить порядок

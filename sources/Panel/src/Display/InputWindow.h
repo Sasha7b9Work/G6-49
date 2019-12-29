@@ -14,7 +14,7 @@ public:
 
     void Set(ParameterValue *param);
 
-    char *StringValue();
+    char *StringDigits();
 
     float Value();
 
