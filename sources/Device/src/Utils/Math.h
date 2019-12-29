@@ -26,8 +26,10 @@ struct Bit
 
 struct Math
 {
-    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; }
+    /// Вычисление 10**pow.
+    static uint Pow10(int pow);
 
+    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; }
 
     template<class T> static void Limitation(T *value, T min, T max)
     {

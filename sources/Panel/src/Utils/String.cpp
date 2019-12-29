@@ -148,7 +148,10 @@ void String::Append(char symbol)
 
 String::~String()
 {
-    Free();
+    if(buffer)
+    {
+        std::free(buffer);
+    }
 }
 
 
