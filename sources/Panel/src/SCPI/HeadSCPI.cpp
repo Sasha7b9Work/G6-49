@@ -5,6 +5,7 @@
 #include "SCPI/HeadSCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/String.h"
+#include "Utils/StringUtils.h"
 #include "Wave.h"
 #include <cstdio>
 
@@ -153,7 +154,14 @@ static const char *FuncFrequency(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Frequency)->GetStringValue()));
 
-    return nullptr;
+    buffer++;
+
+    float frequency = 0.0F;
+
+    if(SU::String2Float(buffer, &frequency))
+    {
+        PGenerator::SetFrequency(CURRENT_CHANNEL, frequency);
+    }
 }
 
 

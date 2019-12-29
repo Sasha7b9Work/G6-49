@@ -22,6 +22,8 @@ struct SU
 
     static float Buffer2Float(const uint8 *buffer);
 
+    static bool String2Float(const char *buffer, float *value);
+
     static String Int2String(int value, bool alwaysSign, int numMinFields);
     /// @brief Преобразует value в текстовую строку
     /// @attention Строка будет храниться до следующего вызова функции. Если результат нужен большее количество времени, то его нужно скопировать себе

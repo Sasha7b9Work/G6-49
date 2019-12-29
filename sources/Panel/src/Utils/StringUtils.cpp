@@ -7,7 +7,7 @@
 #include "structs.h"
 #include <cmath>
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #include <cstdio>
 #include <cctype>
 
@@ -461,6 +461,16 @@ char *SU::Buffer2FloatString(const uint8 *buffer)
 float SU::Buffer2Float(const uint8 *buffer)
 {
     return BitSet32(buffer).floatValue;
+}
+
+
+bool SU::String2Float(const char *buffer, float *value)
+{
+    char *end = nullptr;
+
+    *value = std::strtof(buffer, &end);
+
+    return (end != buffer);
 }
 
 
