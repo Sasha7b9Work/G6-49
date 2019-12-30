@@ -15,7 +15,7 @@ class ParameterValue;
 class String;
 class SimpleMessage;
 
-typedef const char *(*FuncSCPI)(pcChar);
+typedef const char *(*FuncSCPI)(pCHAR);
 typedef bool (*FuncTestSCPI)();
 typedef void (*FuncHint)(String *);
 
@@ -46,16 +46,16 @@ namespace SCPI
 
     const int SIZE_SEPARATOR = 1;
 
-    void AppendNewData(pcChar buffer, uint length);
+    void AppendNewData(pCHAR buffer, uint length);
 
     void Update();
     /// Возвращает true, если указатель указывает на завершающую последовательность
-    bool IsLineEnding(pcChar *bufer);
+    bool IsLineEnding(pCHAR *bufer);
     /// Послать ответ
-    void SendAnswer(pcChar message);
+    void SendAnswer(pCHAR message);
     /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
     /// Иначе возвращает nullptr.
-    const char *BeginWith(pcChar buffer, pcChar word);
+    const char *BeginWith(pCHAR buffer, pCHAR word);
     /// Послать сообщение об ошибочных символах, если таковые имеются
     void SendBadSymbols();
 
@@ -63,9 +63,9 @@ namespace SCPI
 
     void ProcessRequestParameterValue(const ParameterValue *param);
 
-    const char *ProcessParameterValue(pcChar buffer, ParameterValue::E value);
+    pCHAR ProcessParameterValue(pCHAR buffer, ParameterValue::E value);
 
-    const char *ProcessParameterChoice(pcChar buffer, ParameterChoice::E choice, pString *names);
+    pCHAR ProcessParameterChoice(pCHAR buffer, ParameterChoice::E choice, pString *names);
 
     namespace Handler
     {

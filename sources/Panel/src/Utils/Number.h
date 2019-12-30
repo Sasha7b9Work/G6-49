@@ -39,7 +39,7 @@ public:
 
 private:
     /// Возвращает значение, содержащееся в integer
-    static uint64 GetInteger(pcChar buffer);
+    static uint64 GetInteger(pCHAR buffer);
     /// Изменение положительного числа
     static void ChangeInPositiveInteger(int position, Step step);
 
