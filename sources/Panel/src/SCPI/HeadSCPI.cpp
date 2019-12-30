@@ -47,9 +47,12 @@ static void HintOffset(String *);
 // :PERIOD
 static const char *FuncPeriod(const char *);
 static void HintPeriod(String *);
-// :PERIOD:PACKET
+// :PERIODPACKET
 static const char *FuncPeriodPacket(const char *);
 static void HintPeriodPacket(String *);
+// :POLARITY
+static const char *FuncPolarity(const char *);
+static void HintPolarity(String *);
 
 
 /// Рекурсивная функция формирования сообщения подсказки
@@ -72,6 +75,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":OFFSET",        FuncOffset,        "Set offset of wave",               HintOffset),
     SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket,  "Set packet following period",      HintPeriodPacket),
     SCPI_LEAF(":PERIOD",        FuncPeriod,        "Set period of wave",               HintPeriod),
+    SCPI_LEAF(":POLARITY",      FuncPolarity,      "Set polarity of wave",             HintPolarity),
     SCPI_NODE(":KEY",           SCPI::key),
     SCPI_EMPTY()
 };
@@ -217,6 +221,29 @@ static const char *FuncModeStart(const char *buffer)
 static void HintModeStart(String *message)
 {
     SCPI::ProcessHint(message, modeStartNames);
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *const polarityNames[] =
+{
+    " +",
+    " -",
+    ""
+};
+
+
+static const char *FuncPolarity(const char *)
+{
+//    ParameterChoice = CURRENT_FORM->FindParameter()
+
+    return nullptr;
+}
+
+
+static void HintPolarity(String *)
+{
+
 }
 
 
