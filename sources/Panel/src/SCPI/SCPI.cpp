@@ -275,12 +275,6 @@ const char *SCPI::ProcessParameterValue(const char *buffer, ParameterValue::E va
 }
 
 
-static void SetChoice(ParameterChoice *param, int i)
-{
-    param->SetAndLoadChoice(i);
-}
-
-
 const char *SCPI::ProcessParameterChoice(const char *buffer, ParameterChoice::E choice, const char *const *names)
 {
     ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
@@ -292,7 +286,7 @@ const char *SCPI::ProcessParameterChoice(const char *buffer, ParameterChoice::E 
 
     SCPI_REQUEST(SCPI::SendAnswer(names[param->GetChoice()]));
 
-    SCPI_PROCESS_ARRAY(names, SetChoice(param, i));
+    SCPI_PROCESS_ARRAY(names, param->SetAndLoadChoice(i));
 }
 
 
