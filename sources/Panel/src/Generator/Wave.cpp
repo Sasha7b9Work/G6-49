@@ -292,6 +292,18 @@ ParameterValue *Form::FindParameter(ParameterValue::E p)
         {
             return reinterpret_cast<ParameterValue *>(param);
         }
+
+        if(param->IsComplex())
+        {
+            ParameterComplex *complex = reinterpret_cast<ParameterComplex *>(param);
+
+            ParameterValue *val = complex->FindParameter(p);
+
+            if(val)
+            {
+                return val;
+            }
+        }
     }
 
     return nullptr;
@@ -333,6 +345,22 @@ ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
         if(param->IsChoice() && (static_cast<ParameterChoice *>(param))->value == p)
         {
             return reinterpret_cast<ParameterChoice *>(param);
+        }
+    }
+
+    return nullptr;
+}
+
+
+ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
+{
+    for(int i = 0; i < numParams; i++)
+    {
+        ParameterBase *param = params[i];
+
+        if(param->IsValue() && (static_cast<ParameterValue *>(param))->value == p)
+        {
+            return reinterpret_cast<ParameterValue *>(param);
         }
     }
 

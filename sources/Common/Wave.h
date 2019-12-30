@@ -135,36 +135,6 @@ private:
 
 
 
-class ParameterComplex : public ParameterBase
-{
-    friend class Form;
-public:
-
-    enum E
-    {
-        Manipulation,       ///< НАСТРОЙКИ СИГНАЛОВ / Параметр / МАНИПУЛЯЦИЯ на форме СИНУС
-        Count
-    } value;
-
-    ParameterComplex(E v, ParameterBase **param);
-
-    pString Name() const;
-    
-    pString GetStringDigits() const;
-
-    bool Is(E v) const { return value == v; };
-
-    ParameterChoice *FindParameter(ParameterChoice::E p);
-
-private:
-    /// Здесь находятся дополнительные параметры в случае, если они требуются
-    ParameterBase **params;
-    /// Число дополнительных параметров. 0, если таковых не имеется
-    int numParams;
-};
-
-
-
 class ParameterPage : public ParameterBase
 {
     friend class Form;
@@ -282,6 +252,36 @@ private:
     void FillBuffer(float val);
 };
 
+
+class ParameterComplex : public ParameterBase
+{
+    friend class Form;
+public:
+
+    enum E
+    {
+        Manipulation,       ///< НАСТРОЙКИ СИГНАЛОВ / Параметр / МАНИПУЛЯЦИЯ на форме СИНУС
+        Count
+    } value;
+
+    ParameterComplex(E v, ParameterBase **param);
+
+    pString Name() const;
+
+    pString GetStringDigits() const;
+
+    bool Is(E v) const { return value == v; };
+
+    ParameterChoice *FindParameter(ParameterChoice::E p);
+
+    ParameterValue *FindParameter(ParameterValue::E p);
+
+private:
+    /// Здесь находятся дополнительные параметры в случае, если они требуются
+    ParameterBase **params;
+    /// Число дополнительных параметров. 0, если таковых не имеется
+    int numParams;
+};
 
 
 class Form
