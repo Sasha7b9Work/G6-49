@@ -277,7 +277,7 @@ void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const
 
 const char *PanelControlName(const Key &control)
 {
-    static const char *names[] =
+    static pCHAR names[] =
     {
         "None",
         "F1",

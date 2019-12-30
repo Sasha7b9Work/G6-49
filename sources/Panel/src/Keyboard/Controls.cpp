@@ -46,7 +46,7 @@ bool Key::Action::IsRelease() const
 
 pString Key::Name() const
 {
-    static const char *names[] =
+    static pCHAR names[] =
     {
         "None",
         "F1",

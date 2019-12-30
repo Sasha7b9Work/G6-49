@@ -616,7 +616,7 @@ pString ParameterComplex::GetStringDigits() const
 {
     if(Is(Manipulation))
     {
-        static const char *values[2] =
+        static pCHAR values[2] =
         {
             " Откл", " Вкл"
         };

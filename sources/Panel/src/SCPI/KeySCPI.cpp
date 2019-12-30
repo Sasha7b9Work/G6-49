@@ -4,14 +4,14 @@
 
 
 // :KEY:PRESS:
-static const char *FuncKeyPress(pCHAR);
+static pCHAR FuncKeyPress(pCHAR);
 // :KEY:LONG:
-static const char *FuncKeyLong(pCHAR);
+static pCHAR FuncKeyLong(pCHAR);
 
 static void HintKey(String *);
 
 
-static const char *const keyNames[Key::Count + 1] =
+static pCHAR const keyNames[Key::Count + 1] =
 {
     " NONE",       // None
     " F1",         // F1
@@ -50,7 +50,7 @@ const StructSCPI SCPI::key[] =
 };
 
 
-static const char *FuncKeyPress(pCHAR buffer)
+static pCHAR FuncKeyPress(pCHAR buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
@@ -76,7 +76,7 @@ static void HintKey(String *message)
 }
 
 
-static const char *FuncKeyLong(pCHAR buffer)
+static pCHAR FuncKeyLong(pCHAR buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
