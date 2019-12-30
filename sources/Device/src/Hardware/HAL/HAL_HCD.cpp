@@ -70,7 +70,7 @@ int HAL_HCD::USBH_LL_Init(void *usbh_HandleTypeDef)
 
     USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handle));
 
-    return (int)USBH_OK;
+    return static_cast<int>(USBH_OK);
 }
 
 

@@ -148,10 +148,7 @@ void String::Append(char symbol)
 
 String::~String()
 {
-    if(buffer)
-    {
-        std::free(buffer);
-    }
+    std::free(buffer);
 }
 
 

@@ -228,7 +228,7 @@ static void Tune_Page()
     else
     {
         page->items[2] = Item::Empty();
-        page->items[3] = Item::Empty();
+        page->items[3] = Item::Empty(); //-V656
     } //-V656
 }
 

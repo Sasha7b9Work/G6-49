@@ -110,7 +110,7 @@ void HAL_PCD_DisconnectCallback(PCD_HandleTypeDef *hpcd)
 
 USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 {
-    return (USBD_StatusTypeDef)HAL_PCD::USBD_LL_Init(pdev);
+    return static_cast<USBD_StatusTypeDef>(HAL_PCD::USBD_LL_Init(pdev));
 }
 
 USBD_StatusTypeDef USBD_LL_DeInit(USBD_HandleTypeDef *pdev)

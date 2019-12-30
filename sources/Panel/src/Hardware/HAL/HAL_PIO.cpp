@@ -58,7 +58,7 @@ static const uint alternates[HAlternate::Count] =
 #define PULL(p)      (pulles[p])
 #define SPEED(s)     (speedes[s])
 #define ALTERNATE(a) (alternates[a])
-#define PORT(p)      (ports[p - 'A'])
+#define PORT(p)      (ports[(p) - 'A'])
 
 
 void HAL_PIO::WritePin(char port, uint16 maskPin, bool state)

@@ -60,7 +60,7 @@ namespace SCPI
 
     void ProcessHint(String *message, const char *const names[]); //-V2504
 
-    void ProcessRequestParameterValue(ParameterValue *param);
+    void ProcessRequestParameterValue(const ParameterValue *param);
 
     namespace Handler
     {

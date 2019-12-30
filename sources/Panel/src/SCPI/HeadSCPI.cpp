@@ -283,7 +283,7 @@ static void HintAmplitude(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessRequestParameterValue(ParameterValue *param)
+void SCPI::ProcessRequestParameterValue(const ParameterValue *param)
 {
     if(param == nullptr)
     {

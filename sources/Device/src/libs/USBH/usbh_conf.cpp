@@ -50,7 +50,7 @@ void HAL_HCD_HC_NotifyURBChange_Callback(HCD_HandleTypeDef *, uint8_t, HCD_URBSt
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
 {  
-    return (USBH_StatusTypeDef)HAL_HCD::USBH_LL_Init(phost);
+    return static_cast<USBH_StatusTypeDef>(HAL_HCD::USBH_LL_Init(phost));
 }
 
 
@@ -226,7 +226,7 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *, uint8_t)
   * @retval USBH Status  */
 USBH_StatusTypeDef USBH_LL_SetToggle(USBH_HandleTypeDef *, uint8_t pipe, uint8_t toggle)   
 {
-    return (USBH_StatusTypeDef)HAL_HCD::USBH_LL_SetToggle(pipe, toggle);
+    return static_cast<USBH_StatusTypeDef>(HAL_HCD::USBH_LL_SetToggle(pipe, toggle));
 }
 
 /** @brief  Returns the current toggle of a pipe.
