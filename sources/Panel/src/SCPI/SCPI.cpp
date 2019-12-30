@@ -275,6 +275,28 @@ const char *SCPI::ProcessParameterValue(const char *buffer, ParameterValue::E va
 }
 
 
+static void SetChoice(ParameterChoice *param, int i)
+{
+    param->SetChoice(i);
+    PGenerator::SetParameter(param);
+}
+
+
+const char *SCPI::ProcessParameterChoice(const char *buffer, ParameterChoice::E choice, const char *const *names)
+{
+    ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
+
+    if(param == nullptr)
+    {
+        return nullptr;
+    }
+
+    SCPI_REQUEST(SCPI::SendAnswer(names[param->GetChoice()]));
+
+    SCPI_PROCESS_ARRAY(names, SetChoice(param, i));
+}
+
+
 void SCPI::ProcessRequestParameterValue(const ParameterValue *param)
 {
     if(param == nullptr)

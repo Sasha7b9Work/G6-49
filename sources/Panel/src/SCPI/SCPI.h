@@ -65,6 +65,8 @@ namespace SCPI
 
     const char *ProcessParameterValue(const char *buffer, ParameterValue::E value);
 
+    const char *ProcessParameterChoice(const char *buffer, ParameterChoice::E choice, const char *const* names);
+
     namespace Handler
     {
         bool Processing(SimpleMessage *message);

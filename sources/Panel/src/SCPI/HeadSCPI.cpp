@@ -231,25 +231,9 @@ static const char *const polarityNames[] =
 };
 
 
-static void SetPolarity(ParameterChoice *param, int i)
-{
-    param->SetChoice(i);
-    PGenerator::SetParameter(param);
-}
-
-
 static const char *FuncPolarity(const char *buffer)
 {
-    ParameterChoice *param = CURRENT_FORM->FindParameter(ParameterChoice::Polarity);
-
-    if(param == nullptr)
-    {
-        return nullptr;
-    }
-
-    SCPI_REQUEST(SCPI::SendAnswer(polarityNames[param->GetChoice()]));
-
-    SCPI_PROCESS_ARRAY(polarityNames, SetPolarity(param, i));
+    return SCPI::ProcessParameterChoice(buffer, ParameterChoice::Polarity, polarityNames);
 }
 
 
