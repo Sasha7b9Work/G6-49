@@ -19,19 +19,19 @@
 typedef int bool;
 #endif
 
-typedef const char *const   pString;
-typedef const char *        pcChar;
-typedef unsigned int        uint;
-typedef unsigned short int  uint16;
+typedef const char *const      pString;
+typedef const char *           pcChar;
+typedef unsigned int           uint;
+typedef unsigned short int     uint16;
 typedef unsigned long long int uint64;
-typedef signed short int    int16;
-typedef unsigned char       uint8;
-typedef unsigned char       uchar;
-typedef signed char         int8;
-typedef unsigned int        col_val;
+typedef signed short int       int16;
+typedef unsigned char          uint8;
+typedef unsigned char          uchar;
+typedef signed char            int8;
+typedef unsigned int           col_val;
 
 #ifdef WIN32
-typedef unsigned int        uint32_t;
+typedef unsigned int           uint32_t;
 #endif
 
 #define MAX_UINT ((uint)-1)

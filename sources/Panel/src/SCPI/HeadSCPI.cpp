@@ -90,7 +90,7 @@ const StructSCPI SCPI::head[] =
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncIDN(const char *buffer)
+static const char *FuncIDN(pcChar buffer)
 {
     SCPI_PROLOG(buffer)
 
@@ -107,7 +107,7 @@ static void HintIDN(String *message) //-V2009 //-V2558
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncReset(const char *buffer)
+static const char *FuncReset(pcChar buffer)
 {
     SCPI_PROLOG(buffer)
         
@@ -122,7 +122,7 @@ static void HintReset(String *message) //-V2009 //-V2558
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncHelp(const char *buffer)
+static const char *FuncHelp(pcChar buffer)
 {
     SCPI_PROLOG(buffer);
     
@@ -149,7 +149,7 @@ static const char *const channelNames[] =
 };
 
 
-static const char *FuncChannel(const char *buffer)
+static const char *FuncChannel(pcChar buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(channelNames[CURRENT_CHANNEL]));
 
@@ -177,7 +177,7 @@ static const char *const formNames[Form::Count + 1] =
     ""
 };
 
-static const char *FuncForm(const char *buffer)
+static const char *FuncForm(pcChar buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(formNames[*CURRENT_FORM]));
 
@@ -202,7 +202,7 @@ static const char *const modeStartNames[] =
 };
 
 
-static const char *FuncModeStart(const char *buffer)
+static const char *FuncModeStart(pcChar buffer)
 {
     return SCPI::ProcessParameterChoice(buffer, ParameterChoice::ModeStart, modeStartNames);
 }
@@ -223,7 +223,7 @@ static const char *const polarityNames[] =
 };
 
 
-static const char *FuncPolarity(const char *buffer)
+static const char *FuncPolarity(pcChar buffer)
 {
     return SCPI::ProcessParameterChoice(buffer, ParameterChoice::Polarity, polarityNames);
 }
@@ -236,7 +236,7 @@ static void HintPolarity(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncNumberImpulse(const char *buffer)
+static const char *FuncNumberImpulse(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::PacketNumber);
 }
@@ -249,7 +249,7 @@ static void HintNumberImpulse(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncFrequency(const char *buffer)
+static const char *FuncFrequency(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::Frequency);
 }
@@ -262,7 +262,7 @@ static void HintFrequency(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncAmplitude(const char *buffer)
+static const char *FuncAmplitude(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::Amplitude);
 }
@@ -275,7 +275,7 @@ static void HintAmplitude(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncPeriod(const char *buffer)
+static const char *FuncPeriod(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::Period);
 }
@@ -288,7 +288,7 @@ static void HintPeriod(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncPhase(const char *buffer)
+static const char *FuncPhase(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::Phase);
 }
@@ -301,7 +301,7 @@ static void HintPhase(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncDuration(const char *buffer)
+static const char *FuncDuration(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::Duration);
 }
@@ -314,7 +314,7 @@ static void HintDuration(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncPeriodPacket(const char *buffer)
+static const char *FuncPeriodPacket(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::PacketPeriod);
 }
@@ -327,7 +327,7 @@ static void HintPeriodPacket(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncOffset(const char *buffer)
+static const char *FuncOffset(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::Offset);
 }

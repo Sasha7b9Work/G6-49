@@ -33,7 +33,7 @@ static const char *const enabledNames[] =
     ""
 };
 
-static const char *FuncEnabled(const char *buffer)
+static const char *FuncEnabled(pcChar buffer)
 {
     return SCPI::ProcessParameterChoice(buffer, ParameterChoice::ManipulationEnabled, enabledNames);
 }
@@ -45,7 +45,7 @@ static void HintEnabled(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncDuration(const char *buffer)
+static const char *FuncDuration(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::ManipulationDuration);
 }
@@ -56,7 +56,7 @@ static void HintDuration(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncPeriod(const char *buffer)
+static const char *FuncPeriod(pcChar buffer)
 {
     return SCPI::ProcessParameterValue(buffer, ParameterValue::ManipulationPeriod);
 }

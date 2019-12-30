@@ -52,7 +52,7 @@ bool ComPort::IsOpened()
 }
 
 
-void ComPort::Send(const char *buffer)
+void ComPort::Send(pcChar buffer)
 {
     if (IsOpened())
     {

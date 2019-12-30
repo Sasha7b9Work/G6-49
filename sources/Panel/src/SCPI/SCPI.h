@@ -46,26 +46,26 @@ namespace SCPI
 
     const int SIZE_SEPARATOR = 1;
 
-    void AppendNewData(const char *buffer, uint length);
+    void AppendNewData(pcChar buffer, uint length);
 
     void Update();
     /// Возвращает true, если указатель указывает на завершающую последовательность
-    bool IsLineEnding(const char **bufer);
+    bool IsLineEnding(pcChar *bufer);
     /// Послать ответ
-    void SendAnswer(const char *message);
+    void SendAnswer(pcChar message);
     /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
     /// Иначе возвращает nullptr.
-    const char *BeginWith(const char *buffer, const char *word);
+    const char *BeginWith(pcChar buffer, pcChar word);
     /// Послать сообщение об ошибочных символах, если таковые имеются
     void SendBadSymbols();
 
-    void ProcessHint(String *message, const char *const names[]); //-V2504
+    void ProcessHint(String *message, pString names[]); //-V2504
 
     void ProcessRequestParameterValue(const ParameterValue *param);
 
-    const char *ProcessParameterValue(const char *buffer, ParameterValue::E value);
+    const char *ProcessParameterValue(pcChar buffer, ParameterValue::E value);
 
-    const char *ProcessParameterChoice(const char *buffer, ParameterChoice::E choice, const char *const* names);
+    const char *ProcessParameterChoice(pcChar buffer, ParameterChoice::E choice, pString *names);
 
     namespace Handler
     {

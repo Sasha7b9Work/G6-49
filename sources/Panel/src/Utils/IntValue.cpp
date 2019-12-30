@@ -39,7 +39,7 @@ void IntValue::Sub5(char *bufferOut, int *_posComma)
 }
 
 
-int IntValue::ToWhole(const char *buffer)
+int IntValue::ToWhole(pcChar buffer)
 {
     int numDigits = static_cast<int>(std::strlen(buffer));
 
@@ -57,7 +57,7 @@ int IntValue::ToWhole(const char *buffer)
 }
 
 
-int IntValue::ToFract1000(const char *buffer)
+int IntValue::ToFract1000(pcChar buffer)
 {
     int pow = 1000;
 

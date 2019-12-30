@@ -18,9 +18,9 @@ private:
 
     int posComma;
     /// Преобразует в целоей число
-    int ToWhole(const char *buffer);
+    int ToWhole(pcChar buffer);
     /// Преобразует в дробную часть
-    int ToFract1000(const char *buffer);
+    int ToFract1000(pcChar buffer);
     
     void ToString(char *buffer);
     /// Записывает целое число в буфер. Ширина поля для записи - numDigits

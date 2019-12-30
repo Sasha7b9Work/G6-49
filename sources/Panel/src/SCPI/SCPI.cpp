@@ -11,11 +11,11 @@
 /// Рекурсивная функция обработки массива структур StructSCPI.
 /// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 /// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
-static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
+static const char *Process(pcChar buffer, const StructSCPI structs[]); //-V2504
 /// Обработка узла дерева node
-static const char *ProcessNode(const char *begin, const StructSCPI *node);
+static const char *ProcessNode(pcChar begin, const StructSCPI *node);
 /// Обработка листа node
-static const char *ProcessLeaf(const char *begin, const StructSCPI *node);
+static const char *ProcessLeaf(pcChar begin, const StructSCPI *node);
 /// Возвращает true, если символ является началом комнады - разделителем или '*'
 static bool IsBeginCommand(const char &symbol);
 /// Удаляет неправильные символы из начала строки
@@ -30,7 +30,7 @@ static String data;
 static String badSymbols;
 
 
-void SCPI::AppendNewData(const char *buffer, uint size)
+void SCPI::AppendNewData(pcChar buffer, uint size)
 {
     data.Append(buffer, size);
 

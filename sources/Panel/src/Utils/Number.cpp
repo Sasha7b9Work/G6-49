@@ -36,7 +36,7 @@ float Number::GetValue()
 }
 
 
-uint64 Number::GetInteger(const char *buffer)
+uint64 Number::GetInteger(pcChar buffer)
 {
     uint64 result = 0;
 
