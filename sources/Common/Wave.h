@@ -225,8 +225,8 @@ public:
     float MaxValue() const { return max; };
 
     float Value() const;
-
-    void SetValue(float value);
+    /// Установить значение параметра и загрузить его в генератор
+    bool SetAndLoadValue(float value);
 
     FloatValue GetValueNano() const;
 

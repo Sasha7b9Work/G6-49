@@ -407,8 +407,13 @@ float ParameterValue::Value() const
 }
 
 
-void ParameterValue::SetValue(float val)
+bool ParameterValue::SetAndLoadValue(float val)
 {
+    if(!InRange(val))
+    {
+        return false;
+    }
+
     if(val >= 1e6F)
     {
         order = Order::Mega;
@@ -440,6 +445,10 @@ void ParameterValue::SetValue(float val)
     }
 
     FillBuffer(val);
+
+    PGenerator::SetParameter(this);
+
+    return true;
 }
 
 

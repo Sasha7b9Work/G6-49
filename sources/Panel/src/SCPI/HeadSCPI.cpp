@@ -231,12 +231,8 @@ static const char *FuncFrequency(const char *buffer)
     {
         ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Frequency);
 
-        if(param->InRange(frequency))
+        if(param->SetAndLoadValue(frequency))
         {
-            param->SetValue(frequency);
-
-            PGenerator::SetParameter(param);
-
             return end_str + 1;
         }
     }
@@ -266,12 +262,8 @@ static const char *FuncAmplitude(const char *buffer)
     {
         ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Amplitude);
 
-        if(param->InRange(amplitude))
+        if(param->SetAndLoadValue(amplitude))
         {
-            param->SetValue(amplitude);
-
-            PGenerator::SetParameter(param);
-
             return end_str + 1;
         }
     }
@@ -319,12 +311,8 @@ static const char *FuncPeriod(const char *buffer)
 
     if(SU::String2Float(buffer, &period, &end_str))
     {
-        if(param->InRange(period))
+        if(param->SetAndLoadValue(period))
         {
-            param->SetValue(period);
-
-            PGenerator::SetParameter(param);
-
             return end_str + 1;
         }
     }
@@ -359,12 +347,8 @@ static const char *FuncDuration(const char *buffer)
 
     if(SU::String2Float(buffer, &duration, &end_str))
     {
-        if(param->InRange(duration))
+        if(param->SetAndLoadValue(duration))
         {
-            param->SetValue(duration);
-
-            PGenerator::SetParameter(param);
-
             return end_str + 1;
         }
     }
@@ -399,12 +383,8 @@ static const char *FuncPeriodPacket(const char *buffer)
 
     if(SU::String2Float(buffer, &period, &end_str))
     {
-        if(param->InRange(period))
+        if(param->SetAndLoadValue(period))
         {
-            param->SetValue(period);
-
-            PGenerator::SetParameter(param);
-
             return end_str + 1;
         }
     }
@@ -434,12 +414,8 @@ static const char *FuncOffset(const char *buffer)
     {
         ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Offset);
 
-        if(param->InRange(offset))
+        if(param->SetAndLoadValue(offset))
         {
-            param->SetValue(offset);
-
-            PGenerator::SetParameter(param);
-
             return end_str + 1;
         }
     }
