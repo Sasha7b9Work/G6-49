@@ -4,15 +4,15 @@
 
 
 // :MANIPULATION:DURATION
-static const char *FuncDuration(const char *);
+static const char *FuncDuration(pcChar);
 static void HintDuration(String *);
 
 // :MANIPULATION:ENABLED
-static const char *FuncEnabled(const char *);
+static const char *FuncEnabled(pcChar);
 static void HintEnabled(String *);
 
 // :MANIPULATION:PERIOD
-static const char *FuncPeriod(const char *);
+static const char *FuncPeriod(pcChar);
 static void HintPeriod(String *);
 
 

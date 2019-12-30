@@ -15,7 +15,7 @@ class ParameterValue;
 class String;
 class SimpleMessage;
 
-typedef const char *(*FuncSCPI)(const char *);
+typedef const char *(*FuncSCPI)(pcChar);
 typedef bool (*FuncTestSCPI)();
 typedef void (*FuncHint)(String *);
 

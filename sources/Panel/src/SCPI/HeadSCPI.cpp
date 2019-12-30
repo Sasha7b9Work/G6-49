@@ -13,50 +13,50 @@
 
 
 // *IDN?
-static const char *FuncIDN(const char *);
+static const char *FuncIDN(pcChar);
 static void HintIDN(String *);
 // *RST
-static const char *FuncReset(const char *);
+static const char *FuncReset(pcChar);
 static void HintReset(String *);
 // :HELP
-static const char *FuncHelp(const char *);
+static const char *FuncHelp(pcChar);
 static void HintHelp(String *);
 
 // :AMPLITUDE
-static const char *FuncAmplitude(const char *);
+static const char *FuncAmplitude(pcChar);
 static void HintAmplitude(String *);
 // :CHANNEL
-static const char *FuncChannel(const char *);
+static const char *FuncChannel(pcChar);
 static void HintChannel(String *);
 // :DURATION
-static const char *FuncDuration(const char *);
+static const char *FuncDuration(pcChar);
 static void HintDuration(String *);
 // :FORM
-static const char *FuncForm(const char *);
+static const char *FuncForm(pcChar);
 static void HintForm(String *);
 // :FREQUENCY
-static const char *FuncFrequency(const char *);
+static const char *FuncFrequency(pcChar);
 static void HintFrequency(String *);
 // :MODESTART
-static const char *FuncModeStart(const char *);
+static const char *FuncModeStart(pcChar);
 static void HintModeStart(String *);
 // :NUMBERIMPULSE
-static const char *FuncNumberImpulse(const char *);
+static const char *FuncNumberImpulse(pcChar);
 static void HintNumberImpulse(String *);
 // :OFFSET
-static const char *FuncOffset(const char *);
+static const char *FuncOffset(pcChar);
 static void HintOffset(String *);
 // :PERIOD
-static const char *FuncPeriod(const char *);
+static const char *FuncPeriod(pcChar);
 static void HintPeriod(String *);
 // :Phase
-static const char *FuncPhase(const char *);
+static const char *FuncPhase(pcChar);
 static void HintPhase(String *);
 // :PERIODPACKET
-static const char *FuncPeriodPacket(const char *);
+static const char *FuncPeriodPacket(pcChar);
 static void HintPeriodPacket(String *);
 // :POLARITY
-static const char *FuncPolarity(const char *);
+static const char *FuncPolarity(pcChar);
 static void HintPolarity(String *);
 
 

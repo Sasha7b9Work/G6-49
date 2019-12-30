@@ -20,6 +20,7 @@ typedef int bool;
 #endif
 
 typedef const char *const   pString;
+typedef const char *        pcChar;
 typedef unsigned int        uint;
 typedef unsigned short int  uint16;
 typedef unsigned long long int uint64;
