@@ -119,6 +119,8 @@ public:
     /// Нарисовать текущий вариант в указанных координатах
     bool DrawChoice(int x, int y);
 
+    void SetChoice(int ch) { if(ch >= 0 && ch < num) { choice = ch; }};
+
 private:
     /// Текущий вариант
     int choice;

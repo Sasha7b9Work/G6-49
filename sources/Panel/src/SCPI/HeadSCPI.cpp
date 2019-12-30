@@ -163,7 +163,7 @@ static void HintForm(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *const startModeNames[] =
+static const char *const modeStartNames[] =
 {
     " AUTO",
     " SINGLE",
@@ -171,6 +171,13 @@ static const char *const startModeNames[] =
     " FORMB",
     ""
 };
+
+
+static void SetModeStart(ParameterChoice *param, int i)
+{
+    param->SetChoice(i);
+    PGenerator::SetParameter(param);
+}
 
 
 static const char *FuncModeStart(const char *buffer)
@@ -184,15 +191,15 @@ static const char *FuncModeStart(const char *buffer)
 
     ParameterChoice *choice = reinterpret_cast<ParameterChoice *>(param);
 
-    SCPI_REQUEST(SCPI::SendAnswer(startModeNames[choice->GetChoice()]));
+    SCPI_REQUEST(SCPI::SendAnswer(modeStartNames[choice->GetChoice()]));
 
-    return nullptr;
+    SCPI_PROCESS_ARRAY(modeStartNames, SetModeStart(choice, i));
 }
 
 
 static void HintModeStart(String *message)
 {
-    SCPI::ProcessHint(message, startModeNames);
+    SCPI::ProcessHint(message, modeStartNames);
 }
 
 
