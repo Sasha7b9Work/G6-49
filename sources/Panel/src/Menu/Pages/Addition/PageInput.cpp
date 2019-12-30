@@ -15,7 +15,7 @@ extern const PageBase pInput;
 
 static void Draw_Left(int x, int y)
 {
-    if (FORM_CURRENT->CurrentParameter()->AssumeArbitaryOrder())
+    if (CURRENT_FORM->CurrentParameter()->AssumeArbitaryOrder())
     {
         String("Порядок").Draw(x + 14, y + 12);
         Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillUp);
@@ -31,7 +31,7 @@ DEF_SMALL_BUTTON(sbOrderUp,                                                     
 
 static void Draw_Right(int x, int y)
 {
-    if (FORM_CURRENT->CurrentParameter()->AssumeArbitaryOrder())
+    if (CURRENT_FORM->CurrentParameter()->AssumeArbitaryOrder())
     {
         String("Порядок").Draw(x + 14, y + 12);
         Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillDown);

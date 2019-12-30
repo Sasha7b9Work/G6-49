@@ -98,8 +98,8 @@ void StructValue::SetParameterIfUnderLimit(const ParameterValue &_param)
 {
     if (param->Is(ParameterValue::Offset) || param->Is(ParameterValue::Amplitude))
     {
-        float offset = ((int)(FORM_CURRENT->GetOffset() * 100.0F)) / 100.0F;
-        float amplitude = ((int)(FORM_CURRENT->GetAmplitude() * 100.0F)) / 100.0F;
+        float offset = ((int)(CURRENT_FORM->GetOffset() * 100.0F)) / 100.0F;
+        float amplitude = ((int)(CURRENT_FORM->GetAmplitude() * 100.0F)) / 100.0F;
 
         if ((std::fabsf(offset) + amplitude / 2.0F) > 5.0F)
         {

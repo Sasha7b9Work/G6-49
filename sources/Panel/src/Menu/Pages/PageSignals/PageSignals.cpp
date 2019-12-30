@@ -59,7 +59,7 @@ DEF_CHOICE_7( cFormB,                                                           
 
 static void OnPress_ChnageParameter()
 {
-    FORM_CURRENT->ChangeParameter();
+    CURRENT_FORM->ChangeParameter();
 }
 
 DEF_BUTTON( bChangeParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
@@ -88,7 +88,7 @@ static bool OnKey_PageSignals(Key &key)
 {
     if(key.Is(Key::Esc) && key.action.IsRelease())
     {
-        return FORM_CURRENT->CloseOpenedParameter();
+        return CURRENT_FORM->CloseOpenedParameter();
     }
 
     return false;
@@ -120,7 +120,7 @@ void PageSignals::OnPress_Form(bool)
 
     CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());          // Установить для текущего сигнала индекс формы из ChoiceBase
 
-    cParameters.form = FORM_CURRENT;
+    cParameters.form = CURRENT_FORM;
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);
 }
@@ -140,8 +140,8 @@ void PageSignals::SetForm(Form::E form)
 
 void PageSignals::OnPress_Channel(bool)
 {
-    cParameters.form = FORM_CURRENT;
-    numForm = FORM_CURRENT->value;
+    cParameters.form = CURRENT_FORM;
+    numForm = CURRENT_FORM->value;
 
     pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
 }

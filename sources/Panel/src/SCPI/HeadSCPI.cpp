@@ -150,7 +150,7 @@ static const char *const formNames[Form::Count + 1] =
 
 static const char *FuncForm(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(formNames[*FORM_CURRENT]));
+    SCPI_REQUEST(SCPI::SendAnswer(formNames[*CURRENT_FORM]));
 
     SCPI_PROCESS_ARRAY(formNames, PageSignals::SetForm(static_cast<Form::E>(i)));
 }
@@ -179,7 +179,7 @@ static void HintModeStart(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncFrequency(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Frequency)->GetStringValue()));
+    SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FORM->GetParameterValue(ParameterValue::Frequency)->GetStringValue()));
 
     buffer++;
 
@@ -189,7 +189,7 @@ static const char *FuncFrequency(const char *buffer)
 
     if(SU::String2Float(buffer, &frequency, &end_str))
     {
-        ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Frequency);
+        ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Frequency);
 
         param->SetValue(frequency);
 
@@ -211,7 +211,7 @@ static void HintFrequency(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncAmplitude(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Amplitude)->GetStringValue()));
+    SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FORM->GetParameterValue(ParameterValue::Amplitude)->GetStringValue()));
 
     buffer++;
 
@@ -223,7 +223,7 @@ static const char *FuncAmplitude(const char *buffer)
     {
         if(amplitude >= 0.0F && amplitude <= 10.0F)
         {
-            ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Amplitude);
+            ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Amplitude);
 
             param->SetValue(amplitude);
 
@@ -246,7 +246,7 @@ static void HintAmplitude(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncOffset(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Offset)->GetStringValue()));
+    SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FORM->GetParameterValue(ParameterValue::Offset)->GetStringValue()));
 
     buffer++;
 
@@ -258,7 +258,7 @@ static const char *FuncOffset(const char *buffer)
     {
         if(offset >= -5.0F && offset <= 5.0F)
         {
-            ParameterValue *param = FORM_CURRENT->GetParameterValue(ParameterValue::Offset);
+            ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Offset);
 
             param->SetValue(offset);
 
