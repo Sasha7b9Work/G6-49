@@ -38,6 +38,9 @@ static void HintFrequency(String *);
 // :MODESTART
 static const char *FuncModeStart(const char *);
 static void HintModeStart(String *);
+// :NUMBERIMPULSE
+static const char *FuncNumberImpulse(const char *);
+static void HintNumberImpulse(String *);
 // :OFFSET
 static const char *FuncOffset(const char *);
 static void HintOffset(String *);
@@ -55,19 +58,20 @@ static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",          FuncIDN,          "ID request",                       HintIDN),
-    SCPI_LEAF("*RST",           FuncReset,        "Reset settings to default values", HintReset),
-    SCPI_LEAF(":HELP",          FuncHelp,         "Output of this help",              HintHelp),
+    SCPI_LEAF("*IDN?",          FuncIDN,           "ID request",                       HintIDN),
+    SCPI_LEAF("*RST",           FuncReset,         "Reset settings to default values", HintReset),
+    SCPI_LEAF(":HELP",          FuncHelp,          "Output of this help",              HintHelp),
 
-    SCPI_LEAF(":AMPLITUDE",     FuncAmplitude,    "Set amplitue of wave",             HintAmplitude),
-    SCPI_LEAF(":CHANNEL",       FuncChannel,      "Set active channel",               HintChannel),
-    SCPI_LEAF(":DURATION",      FuncDuration,     "Set duraction of impulse",         HintDuration),
-    SCPI_LEAF(":FORM",          FuncForm,         "Set form wave on output",          HintForm),
-    SCPI_LEAF(":FREQUENCY",     FuncFrequency,    "Set frequency of wave",            HintFrequency),
-    SCPI_LEAF(":MODESTART",     FuncModeStart,    "Set mode start of wave",           HintModeStart),
-    SCPI_LEAF(":OFFSET",        FuncOffset,       "Set offset of wave",               HintOffset),
-    SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket, "Set packet following period",      HintPeriodPacket),
-    SCPI_LEAF(":PERIOD",        FuncPeriod,       "Set period of wave",               HintPeriod),
+    SCPI_LEAF(":AMPLITUDE",     FuncAmplitude,     "Set amplitue of wave",             HintAmplitude),
+    SCPI_LEAF(":CHANNEL",       FuncChannel,       "Set active channel",               HintChannel),
+    SCPI_LEAF(":DURATION",      FuncDuration,      "Set duraction of impulse",         HintDuration),
+    SCPI_LEAF(":FORM",          FuncForm,          "Set form wave on output",          HintForm),
+    SCPI_LEAF(":FREQUENCY",     FuncFrequency,     "Set frequency of wave",            HintFrequency),
+    SCPI_LEAF(":MODESTART",     FuncModeStart,     "Set mode start of wave",           HintModeStart),
+    SCPI_LEAF(":NUMBERIMPULSE", FuncNumberImpulse, "Set number of impulses in packet", HintNumberImpulse),
+    SCPI_LEAF(":OFFSET",        FuncOffset,        "Set offset of wave",               HintOffset),
+    SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket,  "Set packet following period",      HintPeriodPacket),
+    SCPI_LEAF(":PERIOD",        FuncPeriod,        "Set period of wave",               HintPeriod),
     SCPI_NODE(":KEY",           SCPI::key),
     SCPI_EMPTY()
 };
@@ -213,6 +217,19 @@ static const char *FuncModeStart(const char *buffer)
 static void HintModeStart(String *message)
 {
     SCPI::ProcessHint(message, modeStartNames);
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncNumberImpulse(const char *buffer)
+{
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::PacketNumber);
+}
+
+
+static void HintNumberImpulse(String *)
+{
+
 }
 
 
