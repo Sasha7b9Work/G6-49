@@ -358,13 +358,14 @@ public:
 
     operator E() { return value; }
 
-private:
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
     ParameterBase *FindParameter(ParameterValue::E p);
     ParameterBase *FindParameter(ParameterChoice::E p);
     /// Засыалет параметр в генератор
     void SendParameterToGenerator(ParameterValue::E p);
     void SendParameterToGenerator(ParameterChoice::E p);
+
+private:
     /// Раскрывает страницу текущего параметра
     void OpenCurrentParameter();
     /// Wave, к которому относится данный Form

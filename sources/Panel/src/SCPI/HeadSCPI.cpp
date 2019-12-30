@@ -163,6 +163,20 @@ static void HintForm(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncModeStart(const char *)
+{
+    //SCPI_REQUEST()
+    return nullptr;
+}
+
+
+static void HintModeStart(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncFrequency(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(FORM_CURRENT->GetParameterValue(ParameterValue::Frequency)->GetStringValue()));
@@ -259,20 +273,6 @@ static const char *FuncOffset(const char *buffer)
 
 
 static void HintOffset(String *)
-{
-
-}
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncModeStart(const char *buffer)
-{
-    //SCPI_REQUEST()
-    return nullptr;
-}
-
-
-static void HintModeStart(String *)
 {
 
 }
