@@ -364,7 +364,7 @@ public:
     operator E() { return value; }
 
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    ParameterBase *FindParameter(ParameterValue::E p);
+    ParameterValue *FindParameter(ParameterValue::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
     /// Засыалет параметр в генератор
     void SendParameterToGenerator(ParameterValue::E p);

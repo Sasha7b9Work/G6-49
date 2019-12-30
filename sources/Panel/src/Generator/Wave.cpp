@@ -272,7 +272,7 @@ void Form::TuneGenerator(Chan::E ch)
 }
 
 
-ParameterBase *Form::FindParameter(ParameterValue::E p)
+ParameterValue *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -280,7 +280,7 @@ ParameterBase *Form::FindParameter(ParameterValue::E p)
 
         if(param->IsValue() && (static_cast<ParameterValue *>(param))->value == p)
         {
-            return param;
+            return reinterpret_cast<ParameterValue *>(param);
         }
     }
     return 0;
