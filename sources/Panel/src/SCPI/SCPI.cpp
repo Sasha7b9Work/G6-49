@@ -95,7 +95,7 @@ static pCHAR Process(pCHAR buffer, const StructSCPI strct[]) //-V2504
 }
 
 
-const char *SCPI::BeginWith(const char *buffer, const char *word)
+pCHAR SCPI::BeginWith(pCHAR buffer, pCHAR word)
 {
     while (*word)
     {
@@ -119,13 +119,13 @@ const char *SCPI::BeginWith(const char *buffer, const char *word)
 }
 
 
-static const char *ProcessNode(const char *begin, const StructSCPI *node)
+static pCHAR ProcessNode(pCHAR begin, const StructSCPI *node)
 {
     return Process(begin, node->strct);
 }
 
 
-static const char *ProcessLeaf(const char *begin, const StructSCPI *node)
+static pCHAR ProcessLeaf(pCHAR begin, const StructSCPI *node)
 {
     if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
@@ -145,7 +145,7 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node)
 }
 
 
-bool SCPI::IsLineEnding(const char **buffer)
+bool SCPI::IsLineEnding(pCHAR *buffer)
 {
     bool result = (**buffer == 0x0D);
 
@@ -205,7 +205,7 @@ static bool RemoveSeparatorsSequenceFromBegin()
 }
 
 
-void SCPI::SendAnswer(const char *message)
+void SCPI::SendAnswer(pCHAR message)
 {
     if(message[std::strlen(message) - 1] != 0x0D)
     {
@@ -226,7 +226,7 @@ static bool IsBeginCommand(const char &symbol)
 }
 
 
-void SCPI::ProcessHint(String *message, const char *const names[]) //-V2504
+void SCPI::ProcessHint(String *message, pString names[]) //-V2504
 {
     message->Append(" {");
     for(int i = 0; i < names[i][0] != 0; i++)
@@ -246,7 +246,7 @@ bool SCPI::Handler::Processing(SimpleMessage *)
 }
 
 
-const char *SCPI::ProcessParameterValue(const char *buffer, ParameterValue::E value)
+pCHAR SCPI::ProcessParameterValue(pCHAR buffer, ParameterValue::E value)
 {
     ParameterValue *param = CURRENT_FORM->FindParameter(value);
 
@@ -275,7 +275,7 @@ const char *SCPI::ProcessParameterValue(const char *buffer, ParameterValue::E va
 }
 
 
-const char *SCPI::ProcessParameterChoice(const char *buffer, ParameterChoice::E choice, const char *const *names)
+pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoice::E choice, pString *names)
 {
     ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
 

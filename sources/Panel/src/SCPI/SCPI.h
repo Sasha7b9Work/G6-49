@@ -55,7 +55,7 @@ namespace SCPI
     void SendAnswer(pCHAR message);
     /// Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
     /// Иначе возвращает nullptr.
-    const char *BeginWith(pCHAR buffer, pCHAR word);
+    pCHAR BeginWith(pCHAR buffer, pCHAR word);
     /// Послать сообщение об ошибочных символах, если таковые имеются
     void SendBadSymbols();
 
