@@ -477,7 +477,7 @@ pString ParameterValue::MainUnits(Language::E lang) const
         {"",   ""},     // ManipulationPeriod
         {"",   ""},     // PacketPeriod
         {"",   ""},     // PacketNumber
-        {""    ""}      // Exit
+        {"",   ""}      // Exit
     };
 
     return units[value][lang];
@@ -1078,7 +1078,7 @@ void Form::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
     int minY = y0;
     int maxY = y0 + height;
 
-    ParameterChoice *param = (ParameterChoice *)WAVE(ch).GetCurrentForm()->FindParameter(ParameterChoice::Polarity);
+    ParameterChoice *param = WAVE(ch).GetCurrentForm()->FindParameter(ParameterChoice::Polarity);
 
     if (param->GetChoice() == 1)
     {
