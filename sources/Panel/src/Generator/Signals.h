@@ -6,7 +6,7 @@
 
 /// Текущий сигнал
 #define WAVE(ch)                        (waves[ch])
-#define WAVE_CURRENT                    (WAVE(CURRENT_CHANNEL))
+#define CURRENT_WAVE                    (WAVE(CURRENT_CHANNEL))
 
 #define FORM(ch)                        (WAVE(ch).GetCurrentForm())
 #define FORM_CURRENT                    (FORM(CURRENT_CHANNEL))

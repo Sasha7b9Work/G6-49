@@ -118,7 +118,7 @@ void PageSignals::OnPress_Form(bool)
 {
     ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);    // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
-    WAVE_CURRENT.SetIndexForm(choice->CurrentIndex());          // Установить для текущего сигнала индекс формы из ChoiceBase
+    CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());          // Установить для текущего сигнала индекс формы из ChoiceBase
 
     cParameters.form = FORM_CURRENT;
 
