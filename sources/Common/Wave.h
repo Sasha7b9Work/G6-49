@@ -365,7 +365,7 @@ public:
 
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
     ParameterBase *FindParameter(ParameterValue::E p);
-    ParameterBase *FindParameter(ParameterChoice::E p);
+    ParameterChoice *FindParameter(ParameterChoice::E p);
     /// Засыалет параметр в генератор
     void SendParameterToGenerator(ParameterValue::E p);
     void SendParameterToGenerator(ParameterChoice::E p);

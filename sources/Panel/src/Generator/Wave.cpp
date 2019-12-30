@@ -287,14 +287,14 @@ ParameterBase *Form::FindParameter(ParameterValue::E p)
 }
 
 
-ParameterBase *Form::FindParameter(ParameterChoice::E p)
+ParameterChoice *Form::FindParameter(ParameterChoice::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
         ParameterBase *param = params[i];
         if(param->IsChoice() && (static_cast<ParameterChoice *>(param))->value == p)
         {
-            return param;
+            return reinterpret_cast<ParameterChoice *>(param);
         }
     }
     return 0;

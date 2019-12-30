@@ -203,18 +203,16 @@ static void SetModeStart(ParameterChoice *param, int i)
 
 static const char *FuncModeStart(const char *buffer)
 {
-    ParameterBase *param = CURRENT_FORM->FindParameter(ParameterChoice::ModeStart);
+    ParameterChoice *param = CURRENT_FORM->FindParameter(ParameterChoice::ModeStart);
 
     if(param == nullptr)
     {
         return nullptr;
     }
 
-    ParameterChoice *choice = reinterpret_cast<ParameterChoice *>(param);
+    SCPI_REQUEST(SCPI::SendAnswer(modeStartNames[param->GetChoice()]));
 
-    SCPI_REQUEST(SCPI::SendAnswer(modeStartNames[choice->GetChoice()]));
-
-    SCPI_PROCESS_ARRAY(modeStartNames, SetModeStart(choice, i));
+    SCPI_PROCESS_ARRAY(modeStartNames, SetModeStart(param, i));
 }
 
 
