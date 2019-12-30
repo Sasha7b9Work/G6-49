@@ -163,16 +163,36 @@ static void HintForm(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static const char *FuncModeStart(const char *)
+static const char *const startModeNames[] =
 {
-    //SCPI_REQUEST()
+    " AUTO",
+    " SINGLE",
+    " COMPARATORA",
+    " FORMB",
+    ""
+};
+
+
+static const char *FuncModeStart(const char *buffer)
+{
+    ParameterBase *param = CURRENT_FORM->FindParameter(ParameterChoice::ModeStart);
+
+    if(param == nullptr)
+    {
+        return nullptr;
+    }
+
+    ParameterChoice *choice = reinterpret_cast<ParameterChoice *>(param);
+
+    SCPI_REQUEST(SCPI::SendAnswer(startModeNames[choice->GetChoice()]));
+
     return nullptr;
 }
 
 
-static void HintModeStart(String *)
+static void HintModeStart(String *message)
 {
-
+    SCPI::ProcessHint(message, startModeNames);
 }
 
 
