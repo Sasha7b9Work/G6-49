@@ -253,9 +253,9 @@ static const char *FuncPolarity(const char *buffer)
 }
 
 
-static void HintPolarity(String *)
+static void HintPolarity(String *message)
 {
-
+    SCPI::ProcessHint(message, polarityNames);
 }
 
 
