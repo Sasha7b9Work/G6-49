@@ -2267,6 +2267,16 @@
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
+              <FileName>FreqMeterSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\FreqMeterSCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>FreqMeterSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\FreqMeterSCPI.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HeadSCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\HeadSCPI.h</FilePath>
@@ -2287,6 +2297,21 @@
               <FilePath>.\src\SCPI\KeySCPI.cpp</FilePath>
             </File>
             <File>
+              <FileName>MacrosesSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\MacrosesSCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>ManipulationSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\ManipulationSCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>ManipulationSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\ManipulationSCPI.cpp</FilePath>
+            </File>
+            <File>
               <FileName>SCPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\SCPI.h</FilePath>
@@ -2295,21 +2320,6 @@
               <FileName>SCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MacrosesSCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\MacrosesSCPI.h</FilePath>
-            </File>
-            <File>
-              <FileName>ManipulationSCPI.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\ManipulationSCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ManipulationSCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\ManipulationSCPI.h</FilePath>
             </File>
           </Files>
         </Group>

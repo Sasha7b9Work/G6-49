@@ -2321,6 +2321,30 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>.\src\SCPI\FreqMeterSCPI.h</PathWithFileName>
+      <FilenameWithoutPath>FreqMeterSCPI.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>19</GroupNumber>
+      <FileNumber>161</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\SCPI\FreqMeterSCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>FreqMeterSCPI.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>19</GroupNumber>
+      <FileNumber>162</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>.\src\SCPI\HeadSCPI.h</PathWithFileName>
       <FilenameWithoutPath>HeadSCPI.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -2328,7 +2352,7 @@
     </File>
     <File>
       <GroupNumber>19</GroupNumber>
-      <FileNumber>161</FileNumber>
+      <FileNumber>163</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2340,7 +2364,7 @@
     </File>
     <File>
       <GroupNumber>19</GroupNumber>
-      <FileNumber>162</FileNumber>
+      <FileNumber>164</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2352,37 +2376,13 @@
     </File>
     <File>
       <GroupNumber>19</GroupNumber>
-      <FileNumber>163</FileNumber>
+      <FileNumber>165</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\SCPI\KeySCPI.cpp</PathWithFileName>
       <FilenameWithoutPath>KeySCPI.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>19</GroupNumber>
-      <FileNumber>164</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\SCPI\SCPI.h</PathWithFileName>
-      <FilenameWithoutPath>SCPI.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>19</GroupNumber>
-      <FileNumber>165</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\SCPI\SCPI.cpp</PathWithFileName>
-      <FilenameWithoutPath>SCPI.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2401,6 +2401,18 @@
     <File>
       <GroupNumber>19</GroupNumber>
       <FileNumber>167</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\SCPI\ManipulationSCPI.h</PathWithFileName>
+      <FilenameWithoutPath>ManipulationSCPI.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>19</GroupNumber>
+      <FileNumber>168</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2412,13 +2424,25 @@
     </File>
     <File>
       <GroupNumber>19</GroupNumber>
-      <FileNumber>168</FileNumber>
+      <FileNumber>169</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\SCPI\ManipulationSCPI.h</PathWithFileName>
-      <FilenameWithoutPath>ManipulationSCPI.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\SCPI\SCPI.h</PathWithFileName>
+      <FilenameWithoutPath>SCPI.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>19</GroupNumber>
+      <FileNumber>170</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\SCPI\SCPI.cpp</PathWithFileName>
+      <FilenameWithoutPath>SCPI.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2432,7 +2456,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>20</GroupNumber>
-      <FileNumber>169</FileNumber>
+      <FileNumber>171</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2444,7 +2468,7 @@
     </File>
     <File>
       <GroupNumber>20</GroupNumber>
-      <FileNumber>170</FileNumber>
+      <FileNumber>172</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2456,7 +2480,7 @@
     </File>
     <File>
       <GroupNumber>20</GroupNumber>
-      <FileNumber>171</FileNumber>
+      <FileNumber>173</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2468,7 +2492,7 @@
     </File>
     <File>
       <GroupNumber>20</GroupNumber>
-      <FileNumber>172</FileNumber>
+      <FileNumber>174</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2480,7 +2504,7 @@
     </File>
     <File>
       <GroupNumber>20</GroupNumber>
-      <FileNumber>173</FileNumber>
+      <FileNumber>175</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2500,7 +2524,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>174</FileNumber>
+      <FileNumber>176</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2512,7 +2536,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>175</FileNumber>
+      <FileNumber>177</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2524,7 +2548,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>176</FileNumber>
+      <FileNumber>178</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2536,7 +2560,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>177</FileNumber>
+      <FileNumber>179</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2548,7 +2572,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>178</FileNumber>
+      <FileNumber>180</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2560,7 +2584,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>179</FileNumber>
+      <FileNumber>181</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2572,7 +2596,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>180</FileNumber>
+      <FileNumber>182</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2584,7 +2608,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>181</FileNumber>
+      <FileNumber>183</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2596,7 +2620,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>182</FileNumber>
+      <FileNumber>184</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2608,7 +2632,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>183</FileNumber>
+      <FileNumber>185</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2620,7 +2644,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>184</FileNumber>
+      <FileNumber>186</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2632,7 +2656,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>185</FileNumber>
+      <FileNumber>187</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2644,7 +2668,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>186</FileNumber>
+      <FileNumber>188</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2656,7 +2680,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>187</FileNumber>
+      <FileNumber>189</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2668,7 +2692,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>188</FileNumber>
+      <FileNumber>190</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2680,7 +2704,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>189</FileNumber>
+      <FileNumber>191</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2692,7 +2716,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>190</FileNumber>
+      <FileNumber>192</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2704,7 +2728,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>191</FileNumber>
+      <FileNumber>193</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2716,7 +2740,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>192</FileNumber>
+      <FileNumber>194</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2728,7 +2752,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>193</FileNumber>
+      <FileNumber>195</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2740,7 +2764,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>194</FileNumber>
+      <FileNumber>196</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2752,7 +2776,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>195</FileNumber>
+      <FileNumber>197</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2764,7 +2788,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>196</FileNumber>
+      <FileNumber>198</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2776,7 +2800,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>197</FileNumber>
+      <FileNumber>199</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2788,7 +2812,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>198</FileNumber>
+      <FileNumber>200</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2800,7 +2824,7 @@
     </File>
     <File>
       <GroupNumber>21</GroupNumber>
-      <FileNumber>199</FileNumber>
+      <FileNumber>201</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
