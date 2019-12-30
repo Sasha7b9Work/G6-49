@@ -26,6 +26,9 @@ static void HintAmplitude(String *);
 // :CHANNEL
 static const char *FuncChannel(const char *);
 static void HintChannel(String *);
+// :DURATION
+static const char *FuncDuration(const char *);
+static void HintDuration(String *);
 // :FORM
 static const char *FuncForm(const char *);
 static void HintForm(String *);
@@ -58,11 +61,12 @@ const StructSCPI SCPI::head[] =
 
     SCPI_LEAF(":AMPLITUDE",     FuncAmplitude,    "Set amplitue of wave",             HintAmplitude),
     SCPI_LEAF(":CHANNEL",       FuncChannel,      "Set active channel",               HintChannel),
+    SCPI_LEAF(":DURATION",      FuncDuration,     "Set duraction of impulse",         HintDuration),
     SCPI_LEAF(":FORM",          FuncForm,         "Set form wave on output",          HintForm),
     SCPI_LEAF(":FREQUENCY",     FuncFrequency,    "Set frequency of wave",            HintFrequency),
     SCPI_LEAF(":MODESTART",     FuncModeStart,    "Set mode start of wave",           HintModeStart),
     SCPI_LEAF(":OFFSET",        FuncOffset,       "Set offset of wave",               HintOffset),
-    SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket, "Setting packet following period",  HintPeriodPacket),
+    SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket, "Set packet following period",      HintPeriodPacket),
     SCPI_LEAF(":PERIOD",        FuncPeriod,       "Set period of wave",               HintPeriod),
     SCPI_NODE(":KEY",           SCPI::key),
     SCPI_EMPTY()
@@ -330,6 +334,46 @@ static const char *FuncPeriod(const char *buffer)
 
 
 static void HintPeriod(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncDuration(const char *buffer)
+{
+    ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Duration);
+
+    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
+
+    if(param == nullptr)
+    {
+        return nullptr;
+    }
+
+    buffer++;
+
+    float duration = 0.0F;
+
+    char *end_str = nullptr;
+
+    if(SU::String2Float(buffer, &duration, &end_str))
+    {
+        if(param->InRange(duration))
+        {
+            param->SetValue(duration);
+
+            PGenerator::SetParameter(param);
+
+            return end_str + 1;
+        }
+    }
+
+    return nullptr;
+}
+
+
+static void HintDuration(String *)
 {
 
 }
