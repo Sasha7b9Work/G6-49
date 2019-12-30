@@ -346,8 +346,6 @@ public:
     Wave *GetWave() { return wave; };
     /// Возвращает true, если текущий параметр сложный и открыт.
     bool ParameterIsOpened() const;
-
-    ParameterValue *GetParameterValue(ParameterValue::E value);
     /// Функция вызывается при нажатии кнопки "Изменить параметр". Фактически активизирует текущий параметр
     void ChangeParameter();
     /// Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае

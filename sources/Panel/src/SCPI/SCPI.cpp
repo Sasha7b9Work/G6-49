@@ -248,7 +248,7 @@ bool SCPI::Handler::Processing(SimpleMessage *)
 
 const char *SCPI::ProcessParameterValue(const char *buffer, ParameterValue::E value)
 {
-    ParameterValue *param = CURRENT_FORM->GetParameterValue(value);
+    ParameterValue *param = CURRENT_FORM->FindParameter(value);
 
     SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
