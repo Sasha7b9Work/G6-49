@@ -1,8 +1,9 @@
 #pragma once
 #include "defines.h"
+#include "Common.h"
+#include "Settings/SettingsTypes.h"
 #include <cstring>
 #include <limits>
-#include "Common.h"
 
 
 class ParameterValue;
@@ -232,7 +233,7 @@ public:
 
     pString GetStringDigits() const;
 
-    pString GetStringValue() const;
+    pString GetStringValue(Language::E lang) const;
     /// Увеличить порядок
     void IncreaseOrder();
     /// Уменьшить порядок
@@ -273,8 +274,8 @@ private:
     float max;
     /// Если true, то находимся в режиме клавиатурного ввода (кнопками 1...9)
     bool inNumLockMode;
-
-    pString Units() const;
+    /// Возвращает основную единицу параметра
+    pString MainUnits(Language::E lang) const;
     /// Заполнить buffer в соответствии с val
     void FillBuffer(float val);
 };

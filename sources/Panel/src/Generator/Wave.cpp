@@ -380,24 +380,40 @@ pString ParameterValue::GetStringDigits() const
 }
 
 
-pString ParameterValue::GetStringValue() const
+pString ParameterValue::GetStringValue(Language::E lang) const
 {
     static char buf[100];
 
-    std::snprintf(buf, 99, "%E %s", GetValueNano().ToFloat(), Units());
+    std::snprintf(buf, 99, "%E %s", GetValueNano().ToFloat(), MainUnits(lang));
 
     return buf;
 }
 
 
-pString ParameterValue::Units() const
+pString ParameterValue::MainUnits(Language::E lang) const
 {
-    if(value == Frequency)
+    static const pString units[ParameterValue::Count][Language::Count] =
     {
-        return "Hz";
-    }
+        {"Ãö", "Hz"},   // Frequency
+        {"ñ",  "s"},    // Period
+        {"Â",  "V"},    // Amplitude
+        {"Â",  "V"},    // Offset
+        {"ñ",  "s"},    // Duration
+        {"",   ""},     // DutyRatio
+        {"",   ""},     // Phase
+        {"ñ",  "s"},    // Delay
+        {"ñ",  "s"},    // DurationRise
+        {"ñ",  "s"},    // DurationFall
+        {"ñ",  "s"},    // DurationStady
+        {"",   ""},     // DutyFactor
+        {"",   ""},     // ManipulationDuration
+        {"",   ""},     // ManipulationPeriod
+        {"",   ""},     // PacketPeriod
+        {"",   ""},     // PacketNumber
+        {""    ""}      // Exit
+    };
 
-    return "";
+    return units[value][lang];
 }
 
 
