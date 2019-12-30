@@ -279,19 +279,6 @@ static void HintAmplitude(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void SCPI::ProcessRequestParameterValue(const ParameterValue *param)
-{
-    if(param == nullptr)
-    {
-        SCPI_SEND_PARAMETER_DOES_NOT_EXIST;
-    }
-    else
-    {
-        SCPI::SendAnswer(param->GetStringValue());
-    }
-}
-
-
 static const char *FuncPeriod(const char *buffer)
 {
     ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Period);
@@ -366,30 +353,7 @@ static void HintDuration(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncPeriodPacket(const char *buffer)
 {
-    ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::PacketPeriod);
-
-    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
-
-    if(param == nullptr)
-    {
-        return nullptr;
-    }
-
-    buffer++;
-
-    float period = 0.0F;
-
-    char *end_str = nullptr;
-
-    if(SU::String2Float(buffer, &period, &end_str))
-    {
-        if(param->SetAndLoadValue(period))
-        {
-            return end_str + 1;
-        }
-    }
-
-    return nullptr;
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::PacketPeriod);
 }
 
 

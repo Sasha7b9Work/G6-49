@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "VCP_p.h"
+#include "Generator/Signals.h"
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/SCPI.h"
 #include "Utils/Buffer.h"
@@ -242,4 +243,46 @@ void SCPI::ProcessHint(String *message, const char *const names[]) //-V2504
 bool SCPI::Handler::Processing(SimpleMessage *)
 {
     return true;
+}
+
+
+const char *SCPI::ProcessParameterValue(const char *buffer, ParameterValue::E value)
+{
+    ParameterValue *param = CURRENT_FORM->GetParameterValue(value);
+
+    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
+
+    if(param == nullptr)
+    {
+        return nullptr;
+    }
+
+    buffer++;
+
+    float paramValue = 0.0F;
+
+    char *end_str = nullptr;
+
+    if(SU::String2Float(buffer, &paramValue, &end_str))
+    {
+        if(param->SetAndLoadValue(paramValue))
+        {
+            return end_str + 1;
+        }
+    }
+
+    return nullptr;
+}
+
+
+void SCPI::ProcessRequestParameterValue(const ParameterValue *param)
+{
+    if(param == nullptr)
+    {
+        SCPI_SEND_PARAMETER_DOES_NOT_EXIST;
+    }
+    else
+    {
+        SCPI::SendAnswer(param->GetStringValue());
+    }
 }

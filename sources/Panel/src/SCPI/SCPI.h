@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonTypes.h"
+#include "Wave.h"
 #include "SCPI/MacrosesSCPI.h"
 
 /*
@@ -61,6 +62,8 @@ namespace SCPI
     void ProcessHint(String *message, const char *const names[]); //-V2504
 
     void ProcessRequestParameterValue(const ParameterValue *param);
+
+    const char *ProcessParameterValue(const char *buffer, ParameterValue::E value);
 
     namespace Handler
     {
