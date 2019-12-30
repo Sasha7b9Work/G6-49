@@ -17,7 +17,7 @@ StructValue     InputWindow::iws;
 
 void InputWindow::Init()
 {
-    param = (ParameterValue *)PARAM_CURRENT;
+    param = (ParameterValue *)CURRENT_PARAM;
     iws.Set(param);
     isVisible = true;
 }
