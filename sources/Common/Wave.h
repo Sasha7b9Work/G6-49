@@ -264,6 +264,8 @@ public:
 
     /// Возвращает true, если порядок величины параметра может быть разным
     bool AssumeArbitaryOrder() const;
+
+    bool InRange(float val) const { return val >= min && val <= max; };
 private:
 
     float min;

@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Keyboard/Keyboard.h"
 #include "SCPI/KeySCPI.h"
-#include "SCPI/SCPI.h"
 
 
 // :KEY:PRESS:

@@ -41,7 +41,9 @@ static void HintOffset(String *);
 // :PERIOD
 static const char *FuncPeriod(const char *);
 static void HintPeriod(String *);
-
+// :PERIOD:PACKET
+static const char *FuncPeriodPacket(const char *);
+static void HintPeriodPacket(String *);
 
 
 /// Рекурсивная функция формирования сообщения подсказки
@@ -50,18 +52,19 @@ static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",      FuncIDN,       "ID request",                       HintIDN),
-    SCPI_LEAF("*RST",       FuncReset,     "Reset settings to default values", HintReset),
-    SCPI_LEAF(":HELP",      FuncHelp,      "Output of this help",              HintHelp),
+    SCPI_LEAF("*IDN?",          FuncIDN,          "ID request",                       HintIDN),
+    SCPI_LEAF("*RST",           FuncReset,        "Reset settings to default values", HintReset),
+    SCPI_LEAF(":HELP",          FuncHelp,         "Output of this help",              HintHelp),
 
-    SCPI_LEAF(":AMPLITUDE", FuncAmplitude, "Set amplitue of wave",             HintAmplitude),
-    SCPI_LEAF(":CHANNEL",   FuncChannel,   "Set active channel",               HintChannel),
-    SCPI_LEAF(":FORM",      FuncForm,      "Set form wave on output",          HintForm),
-    SCPI_LEAF(":FREQUENCY", FuncFrequency, "Set frequency of wave",            HintFrequency),
-    SCPI_LEAF(":MODESTART", FuncModeStart, "Set mode start of wave",           HintModeStart),
-    SCPI_LEAF(":OFFSET",    FuncOffset,    "Set offset of wave",               HintOffset),
-    SCPI_LEAF(":PERIOD",    FuncPeriod,    "Set period of wave",               HintPeriod),
-    SCPI_NODE(":KEY",       SCPI::key),
+    SCPI_LEAF(":AMPLITUDE",     FuncAmplitude,    "Set amplitue of wave",             HintAmplitude),
+    SCPI_LEAF(":CHANNEL",       FuncChannel,      "Set active channel",               HintChannel),
+    SCPI_LEAF(":FORM",          FuncForm,         "Set form wave on output",          HintForm),
+    SCPI_LEAF(":FREQUENCY",     FuncFrequency,    "Set frequency of wave",            HintFrequency),
+    SCPI_LEAF(":MODESTART",     FuncModeStart,    "Set mode start of wave",           HintModeStart),
+    SCPI_LEAF(":OFFSET",        FuncOffset,       "Set offset of wave",               HintOffset),
+    SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket, "Setting packet following period",  HintPeriodPacket),
+    SCPI_LEAF(":PERIOD",        FuncPeriod,       "Set period of wave",               HintPeriod),
+    SCPI_NODE(":KEY",           SCPI::key),
     SCPI_EMPTY()
 };
 
@@ -224,11 +227,14 @@ static const char *FuncFrequency(const char *buffer)
     {
         ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Frequency);
 
-        param->SetValue(frequency);
+        if(param->InRange(frequency))
+        {
+            param->SetValue(frequency);
 
-        PGenerator::SetParameter(param);
+            PGenerator::SetParameter(param);
 
-        return end_str + 1;
+            return end_str + 1;
+        }
     }
 
     return nullptr;
@@ -254,10 +260,10 @@ static const char *FuncAmplitude(const char *buffer)
 
     if(SU::String2Float(buffer, &amplitude, &end_str))
     {
-        if(amplitude >= 0.0F && amplitude <= 10.0F)
-        {
-            ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Amplitude);
+        ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Amplitude);
 
+        if(param->InRange(amplitude))
+        {
             param->SetValue(amplitude);
 
             PGenerator::SetParameter(param);
@@ -277,11 +283,11 @@ static void HintAmplitude(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void ProcessRequestPeriod(ParameterValue *param)
+void SCPI::ProcessRequestParameterValue(ParameterValue *param)
 {
     if(param == nullptr)
     {
-        SCPI::SendAnswer("PARAMETER DOES NOT EXIST");
+        SCPI_SEND_PARAMETER_DOES_NOT_EXIST;
     }
     else
     {
@@ -294,7 +300,7 @@ static const char *FuncPeriod(const char *buffer)
 {
     ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Period);
 
-    SCPI_REQUEST(ProcessRequestPeriod(param));
+    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
     if(param == nullptr)
     {
@@ -309,7 +315,7 @@ static const char *FuncPeriod(const char *buffer)
 
     if(SU::String2Float(buffer, &period, &end_str))
     {
-        if(period >= 10e-9F && period <= 10e3F)
+        if(param->InRange(period))
         {
             param->SetValue(period);
 
@@ -330,6 +336,46 @@ static void HintPeriod(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncPeriodPacket(const char *buffer)
+{
+    ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::PacketPeriod);
+
+    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
+
+    if(param == nullptr)
+    {
+        return nullptr;
+    }
+
+    buffer++;
+
+    float period = 0.0F;
+
+    char *end_str = nullptr;
+
+    if(SU::String2Float(buffer, &period, &end_str))
+    {
+        if(param->InRange(period))
+        {
+            param->SetValue(period);
+
+            PGenerator::SetParameter(param);
+
+            return end_str + 1;
+        }
+    }
+
+    return nullptr;
+}
+
+
+static void HintPeriodPacket(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncOffset(const char *buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FORM->GetParameterValue(ParameterValue::Offset)->GetStringValue()));
@@ -342,10 +388,10 @@ static const char *FuncOffset(const char *buffer)
 
     if(SU::String2Float(buffer, &offset, &end_str))
     {
-        if(offset >= -5.0F && offset <= 5.0F)
-        {
-            ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Offset);
+        ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Offset);
 
+        if(param->InRange(offset))
+        {
             param->SetValue(offset);
 
             PGenerator::SetParameter(param);

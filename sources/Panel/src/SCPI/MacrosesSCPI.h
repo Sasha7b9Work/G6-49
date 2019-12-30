@@ -25,3 +25,5 @@
 #define SCPI_EXIT_ERROR()   LOG_WRITE("Ошибка теста SCPI %s:%d", __FILE__, __LINE__); return false;
 
 #define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), std::strlen(string.c_str())); SCPI::Update()
+
+#define SCPI_SEND_PARAMETER_DOES_NOT_EXIST SCPI::SendAnswer("PARAMETER DOES NOT EXIST")

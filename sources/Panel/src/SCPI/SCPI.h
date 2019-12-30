@@ -10,6 +10,7 @@
     4. Команда должна заканчиваться символом с кодом 0x0D.
 */
 
+class ParameterValue;
 class String;
 class SimpleMessage;
 
@@ -58,6 +59,8 @@ namespace SCPI
     void SendBadSymbols();
 
     void ProcessHint(String *message, const char *const names[]); //-V2504
+
+    void ProcessRequestParameterValue(ParameterValue *param);
 
     namespace Handler
     {
