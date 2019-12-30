@@ -47,6 +47,9 @@ static void HintOffset(String *);
 // :PERIOD
 static const char *FuncPeriod(const char *);
 static void HintPeriod(String *);
+// :Phase
+static const char *FuncPhase(const char *);
+static void HintPhase(String *);
 // :PERIODPACKET
 static const char *FuncPeriodPacket(const char *);
 static void HintPeriodPacket(String *);
@@ -75,6 +78,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":OFFSET",        FuncOffset,        "Set offset of wave",               HintOffset),
     SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket,  "Set packet following period",      HintPeriodPacket),
     SCPI_LEAF(":PERIOD",        FuncPeriod,        "Set period of wave",               HintPeriod),
+    SCPI_LEAF(":PHASE",         FuncPhase,         "Set phase of wave",                HintPhase),
     SCPI_LEAF(":POLARITY",      FuncPolarity,      "Set polarity of wave",             HintPolarity),
     SCPI_NODE(":KEY",           SCPI::key),
     SCPI_EMPTY()
@@ -274,6 +278,19 @@ static const char *FuncPeriod(const char *buffer)
 
 
 static void HintPeriod(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static const char *FuncPhase(const char *buffer)
+{
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::Phase);
+}
+
+
+static void HintPhase(String *)
 {
 
 }
