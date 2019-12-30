@@ -219,25 +219,7 @@ static void HintModeStart(String *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncFrequency(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FORM->GetParameterValue(ParameterValue::Frequency)->GetStringValue()));
-
-    buffer++;
-
-    float frequency = 0.0F;
-
-    char *end_str = nullptr;
-
-    if(SU::String2Float(buffer, &frequency, &end_str))
-    {
-        ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Frequency);
-
-        if(param->SetAndLoadValue(frequency))
-        {
-            return end_str + 1;
-        }
-    }
-
-    return nullptr;
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::Frequency);
 }
 
 
@@ -250,25 +232,7 @@ static void HintFrequency(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncAmplitude(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FORM->GetParameterValue(ParameterValue::Amplitude)->GetStringValue()));
-
-    buffer++;
-
-    float amplitude = 0.0F;
-
-    char *end_str = nullptr;
-
-    if(SU::String2Float(buffer, &amplitude, &end_str))
-    {
-        ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Amplitude);
-
-        if(param->SetAndLoadValue(amplitude))
-        {
-            return end_str + 1;
-        }
-    }
-
-    return nullptr;
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::Amplitude);
 }
 
 
@@ -281,30 +245,7 @@ static void HintAmplitude(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncPeriod(const char *buffer)
 {
-    ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Period);
-
-    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
-
-    if(param == nullptr)
-    {
-        return nullptr;
-    }
-
-    buffer++;
-
-    float period = 0.0F;
-
-    char *end_str = nullptr;
-
-    if(SU::String2Float(buffer, &period, &end_str))
-    {
-        if(param->SetAndLoadValue(period))
-        {
-            return end_str + 1;
-        }
-    }
-
-    return nullptr;
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::Period);
 }
 
 
@@ -317,30 +258,7 @@ static void HintPeriod(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncDuration(const char *buffer)
 {
-    ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Duration);
-
-    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
-
-    if(param == nullptr)
-    {
-        return nullptr;
-    }
-
-    buffer++;
-
-    float duration = 0.0F;
-
-    char *end_str = nullptr;
-
-    if(SU::String2Float(buffer, &duration, &end_str))
-    {
-        if(param->SetAndLoadValue(duration))
-        {
-            return end_str + 1;
-        }
-    }
-
-    return nullptr;
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::Duration);
 }
 
 
@@ -366,25 +284,7 @@ static void HintPeriodPacket(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static const char *FuncOffset(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(CURRENT_FORM->GetParameterValue(ParameterValue::Offset)->GetStringValue()));
-
-    buffer++;
-
-    float offset = 0.0F;
-
-    char *end_str = nullptr;
-
-    if(SU::String2Float(buffer, &offset, &end_str))
-    {
-        ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Offset);
-
-        if(param->SetAndLoadValue(offset))
-        {
-            return end_str + 1;
-        }
-    }
-
-    return nullptr;
+    return SCPI::ProcessParameterValue(buffer, ParameterValue::Offset);
 }
 
 
