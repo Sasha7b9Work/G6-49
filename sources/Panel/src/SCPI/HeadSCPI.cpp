@@ -196,8 +196,7 @@ static const char *const modeStartNames[] =
 
 static void SetModeStart(ParameterChoice *param, int i)
 {
-    param->SetChoice(i);
-    PGenerator::SetParameter(param);
+    param->SetAndLoadChoice(i);
 }
 
 

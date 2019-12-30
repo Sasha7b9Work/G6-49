@@ -767,6 +767,21 @@ bool ParameterChoice::DrawChoice(int x, int y)
 }
 
 
+bool ParameterChoice::SetAndLoadChoice(int ch)
+{
+    if(ch < 0 || ch >= num)
+    {
+        return false;
+    }
+
+    choice = ch;
+
+    PGenerator::SetParameter(this);
+
+    return true;
+}
+
+
 bool Wave::StartModeIsSingle()
 {
     ParameterChoice* param = static_cast<ParameterChoice *>(GetCurrentForm()->FindParameter(ParameterChoice::ModeStart));

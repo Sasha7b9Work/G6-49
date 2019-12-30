@@ -277,8 +277,7 @@ const char *SCPI::ProcessParameterValue(const char *buffer, ParameterValue::E va
 
 static void SetChoice(ParameterChoice *param, int i)
 {
-    param->SetChoice(i);
-    PGenerator::SetParameter(param);
+    param->SetAndLoadChoice(i);
 }
 
 
