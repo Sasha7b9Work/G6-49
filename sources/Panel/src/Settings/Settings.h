@@ -59,9 +59,7 @@ extern const PageBase pInput;
 #define FREQ_LEVEL                  (set.freq_level)
 #define FREQ_HYSTERESIS             (set.freq_hysteresis)
 
-#define BIG_SYMBOLS             ((FL(BIT_BIG_SYMBOLS)))
-
-#define SINE_MANIPULATION_ENABLED(ch)   (set.sine_ManipulationEnabled[ch])
+#define BIG_SYMBOLS                 ((FL(BIT_BIG_SYMBOLS)))
 
 
 #pragma pack(push, 1)
@@ -81,7 +79,6 @@ public:
     FreqMeasure::E              freq_measure;                           ///< Режим измерения частотомера
     int16                       freq_level;                             ///< Уровень синхронизации
     int16                       freq_hysteresis;                        ///< Величина гистерезиса
-    bool                        sine_ManipulationEnabled[Chan::Count];  ///< true, если включена модуляция синусоиды пилой
     uint                        flag;
     uint                        flagDBG;
 

@@ -592,8 +592,9 @@ pString ParameterComplex::GetStringDigits() const
             " Откл", " Вкл"
         };
 
-        ParameterValue *pointer = reinterpret_cast<ParameterValue *>(const_cast<ParameterComplex *>(this));
-        return values[SINE_MANIPULATION_ENABLED(pointer->GetForm()->GetWave()->GetChannel()) ? 1 : 0];
+        ParameterChoice *enabled = const_cast<ParameterComplex *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
+
+        return values[enabled->GetChoice()];
     }
 
     return "";
@@ -785,10 +786,6 @@ void ParameterChoice::NextChoice()
     }
     else
     {
-        if(value == ManipulationEnabled)
-        {
-            SINE_MANIPULATION_ENABLED(ch) = (choice != 0);
-        }
         PGenerator::TuneChannel(ch);
     }
 }
