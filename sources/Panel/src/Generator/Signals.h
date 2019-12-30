@@ -13,6 +13,5 @@
 
 #define PARAM(form)                     ((form)->CurrentParameter())
 #define CURRENT_PARAM                   (PARAM(CURRENT_FORM))
-#define PARAM_CURRENT_IS_MANIPULATION   (((ParameterValue *)CurrentParameter())->Is(ParameterValue::Manipulation))
 
 extern Wave waves[Chan::Count];
