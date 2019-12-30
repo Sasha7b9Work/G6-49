@@ -185,13 +185,6 @@ void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
 }
 
 
-void PGenerator::SetFrequency(Chan::E ch, float frequency)
-{
-    /// \todo √овнокод - запись параметра из двух мест
-    Message::Set::Frequency(static_cast<uint8>(ch), FloatValue(frequency).ToUINT64()).Transmit();
-}
-
-
 void PGenerator::SetParameter(ParameterValue *param)
 {
     static const Command::E commands[ParameterValue::Count] =
