@@ -62,7 +62,6 @@ extern const PageBase pInput;
 #define BIG_SYMBOLS             ((FL(BIT_BIG_SYMBOLS)))
 
 #define SINE_MANIPULATION_ENABLED(ch)   (set.sine_ManipulationEnabled[ch])
-#define SINE_MANIPULATION_MODE(ch)      (set.sine_ManipulationMode[ch])
 
 
 #pragma pack(push, 1)
