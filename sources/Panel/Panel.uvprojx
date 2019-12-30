@@ -2301,6 +2301,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\SCPI\MacrosesSCPI.h</FilePath>
             </File>
+            <File>
+              <FileName>ManipulationSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\ManipulationSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ManipulationSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\ManipulationSCPI.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

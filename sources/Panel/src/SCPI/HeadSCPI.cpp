@@ -3,6 +3,7 @@
 #include "Menu/Pages/PageSignals/PageSignals.h"
 #include "SCPI/KeySCPI.h"
 #include "SCPI/HeadSCPI.h"
+#include "SCPI/ManipulationSCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/String.h"
 #include "Utils/StringUtils.h"
@@ -81,6 +82,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":PHASE",         FuncPhase,         "Set phase of wave",                HintPhase),
     SCPI_LEAF(":POLARITY",      FuncPolarity,      "Set polarity of wave",             HintPolarity),
     SCPI_NODE(":KEY",           SCPI::key),
+    SCPI_NODE(":MANIPULATION",  SCPI::manipulation),
     SCPI_EMPTY()
 };
 

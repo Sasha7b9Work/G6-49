@@ -144,6 +144,16 @@ Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params
     for(int i = 0; i < numParams; i++)
     {
         params[i]->form = this;
+
+        if(params[i]->IsComplex())
+        {
+            ParameterComplex *complex = reinterpret_cast<ParameterComplex *>(params[i]);
+
+            for(int j = 0; j < complex->numParams; j++)
+            {
+                complex->params[j]->form = this;
+            }
+        }
     }
 
     if (v == Free)
@@ -296,8 +306,36 @@ ParameterChoice *Form::FindParameter(ParameterChoice::E p)
         {
             return reinterpret_cast<ParameterChoice *>(param);
         }
+        
+        if(param->IsComplex())
+        {
+            ParameterComplex *complex = reinterpret_cast<ParameterComplex *>(param);
+
+            ParameterChoice *choice = complex->FindParameter(p);
+
+            if(choice)
+            {
+                return choice;
+            }
+        }
     }
-    return 0;
+    return nullptr;
+}
+
+
+ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
+{
+    for(int i = 0; i < numParams; i++)
+    {
+        ParameterBase *param = params[i];
+
+        if(param->IsChoice() && (static_cast<ParameterChoice *>(param))->value == p)
+        {
+            return reinterpret_cast<ParameterChoice *>(param);
+        }
+    }
+
+    return nullptr;
 }
 
 

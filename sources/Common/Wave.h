@@ -154,6 +154,8 @@ public:
 
     bool Is(E v) const { return value == v; };
 
+    ParameterChoice *FindParameter(ParameterChoice::E p);
+
 private:
     /// Здесь находятся дополнительные параметры в случае, если они требуются
     ParameterBase **params;
