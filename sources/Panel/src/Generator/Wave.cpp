@@ -297,6 +297,27 @@ ParameterValue *Form::FindParameter(ParameterValue::E p)
 }
 
 
+ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
+{
+    for(int i = 0; i < NumParameters(); i++)
+    {
+        ParameterBase *param = GetParameter(i);
+
+        if(param && param->IsValue())
+        {
+            ParameterValue *paramValue = static_cast<ParameterValue *>(param);
+
+            if(paramValue->Is(_value))
+            {
+                return paramValue;
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+
 ParameterChoice *Form::FindParameter(ParameterChoice::E p)
 {
     for(int i = 0; i < numParams; i++)
@@ -1119,27 +1140,6 @@ void Form::SetFormFlash(Chan::E ch, const uint8 data[SIZE_BUFFER])
 uint8 *Form::GetFormFlash(Chan::E ch)
 {
     return &formFlash[ch][0];
-}
-
-
-ParameterValue *Form::GetParameterValue(ParameterValue::E _value)
-{
-    for (int i = 0; i < NumParameters(); i++)
-    {
-        ParameterBase *param = GetParameter(i);
-
-        if (param && param->IsValue())
-        {
-            ParameterValue *paramValue = static_cast<ParameterValue *>(param);
-
-            if (paramValue->Is(_value))
-            {
-                return paramValue;
-            }
-        }
-    }
-
-    return nullptr;
 }
 
 
