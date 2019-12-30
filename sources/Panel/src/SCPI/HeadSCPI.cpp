@@ -19,6 +19,10 @@ static void HintReset(String *);
 // :HELP
 static const char *FuncHelp(const char *);
 static void HintHelp(String *);
+
+// :AMPLITUDE
+static const char *FuncAmplitude(const char *);
+static void HintAmplitude(String *);
 // :CHANNEL
 static const char *FuncChannel(const char *);
 static void HintChannel(String *);
@@ -28,15 +32,16 @@ static void HintForm(String *);
 // :FREQUENCY
 static const char *FuncFrequency(const char *);
 static void HintFrequency(String *);
-// :AMPLITUDE
-static const char *FuncAmplitude(const char *);
-static void HintAmplitude(String *);
-// :OFFSET
-static const char *FuncOffset(const char *);
-static void HintOffset(String *);
 // :MODESTART
 static const char *FuncModeStart(const char *);
 static void HintModeStart(String *);
+// :OFFSET
+static const char *FuncOffset(const char *);
+static void HintOffset(String *);
+// :PERIOD
+static const char *FuncPeriod(const char *);
+static void HintPeriod(String *);
+
 
 
 /// Рекурсивная функция формирования сообщения подсказки
@@ -55,6 +60,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":FREQUENCY", FuncFrequency, "Set frequency of wave",            HintFrequency),
     SCPI_LEAF(":MODESTART", FuncModeStart, "Set mode start of wave",           HintModeStart),
     SCPI_LEAF(":OFFSET",    FuncOffset,    "Set offset of wave",               HintOffset),
+    SCPI_LEAF(":PERIOD",    FuncPeriod,    "Set period of wave",               HintPeriod),
     SCPI_NODE(":KEY",       SCPI::key),
     SCPI_EMPTY()
 };
@@ -265,6 +271,59 @@ static const char *FuncAmplitude(const char *buffer)
 
 
 static void HintAmplitude(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static void ProcessRequestPeriod(ParameterValue *param)
+{
+    if(param == nullptr)
+    {
+        SCPI::SendAnswer("PARAMETER DOES NOT EXIST");
+    }
+    else
+    {
+        SCPI::SendAnswer(param->GetStringValue());
+    }
+}
+
+
+static const char *FuncPeriod(const char *buffer)
+{
+    ParameterValue *param = CURRENT_FORM->GetParameterValue(ParameterValue::Period);
+
+    SCPI_REQUEST(ProcessRequestPeriod(param));
+
+    if(param == nullptr)
+    {
+        return nullptr;
+    }
+
+    buffer++;
+
+    float period = 0.0F;
+
+    char *end_str = nullptr;
+
+    if(SU::String2Float(buffer, &period, &end_str))
+    {
+        if(period >= 10e-9F && period <= 10e3F)
+        {
+            param->SetValue(period);
+
+            PGenerator::SetParameter(param);
+
+            return end_str + 1;
+        }
+    }
+
+    return nullptr;
+}
+
+
+static void HintPeriod(String *)
 {
 
 }
