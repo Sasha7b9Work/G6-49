@@ -301,13 +301,6 @@ Message::Set::FormWave::FormWave(uint8 ch, uint8 form) : SimpleMessage(3, Comman
 }
 
 
-Message::Set::Frequency::Frequency(uint8 ch, uint64 frequency) : SimpleMessage(10, Command::SetFrequency)
-{
-    PutByte(ch);
-    PutDoubleWord(frequency);
-}
-
-
 Message::Set::Amplitude::Amplitude(uint8 ch, uint64 amplitude) : SimpleMessage(10, Command::SetAmplitude)
 {
     PutByte(ch);

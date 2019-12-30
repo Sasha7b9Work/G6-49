@@ -231,14 +231,6 @@ namespace Message
         };
 
 
-        /// Установка частоты
-        class Frequency : public SimpleMessage
-        {
-        public:
-            Frequency(uint8 ch, uint64 frequency);
-        };
-
-
         /// Установка амплитуды
         class Amplitude : public SimpleMessage
         {
