@@ -15,6 +15,7 @@ GovernorGUI::GovernorGUI(wxWindow *parent, const wxPoint &position) : wxPanel(pa
     SetDoubleBuffered(true);
     Bind(wxEVT_PAINT, &GovernorGUI::OnPaint, this);
     Bind(wxEVT_LEFT_DOWN, &GovernorGUI::OnMouseLeftDown, this);
+    Bind(wxEVT_MOTION, &GovernorGUI::OnMouseMove, this);
     Bind(wxEVT_TIMER, &GovernorGUI::OnTimer, this);
 
     timer.Start(0);
@@ -49,6 +50,15 @@ void GovernorGUI::OnMouseLeftDown(wxMouseEvent &event)
 
         cursor.state = ::GetKeyState(VK_LBUTTON);
 
+        ::SetCursor(LoadCursor(NULL, IDC_HAND));
+    }
+}
+
+
+void GovernorGUI::OnMouseMove(wxMouseEvent &event)
+{
+    if(MouseOnGovernor(event))
+    {
         ::SetCursor(LoadCursor(NULL, IDC_HAND));
     }
 }
@@ -92,4 +102,34 @@ void GovernorGUI::OnTimer(wxTimerEvent &)
     }
 
     ::SetCursor(LoadCursor(NULL, IDC_HAND));
+
+    POINT position;
+
+    if(cursor.PositionEqualsCurrent(&position))
+    {
+        return;
+    }
+
+    cursor.CalculateDeltas(&position);
+
+    angle += - cursor.dX * 3 + cursor.dY * 3;
+
+    cursor.position = position;
+
+    Refresh();
+}
+
+
+bool GovernorGUI::StructCursor::PositionEqualsCurrent(POINT *newPosition)
+{
+    ::GetCursorPos(newPosition);
+
+    return (newPosition->x == position.x) && (newPosition->y == position.y);
+}
+
+
+void GovernorGUI::StructCursor::CalculateDeltas(POINT *newPosition)
+{
+    dX = newPosition->x - position.x;
+    dY = newPosition->y - position.y;
 }

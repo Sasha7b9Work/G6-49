@@ -24,10 +24,18 @@ private:
         POINT position;
         /// —осто€ние VK_LBUTTON
         int state;
+
+        int dX;
+        int dY;
+        /// ¬озвращает true, если position совпадает с текущими координатами курсора
+        bool PositionEqualsCurrent(POINT *newPosition);
+        /// –ассчитывает dX и dY между position и newPosition
+        void CalculateDeltas(POINT *newPosition);
     } cursor;
 
     void OnPaint(wxPaintEvent &);
     void OnMouseLeftDown(wxMouseEvent &);
+    void OnMouseMove(wxMouseEvent &);
     void OnTimer(wxTimerEvent &);
 
     /// ¬озвращает true, если курсор мыши находитс€ над изображением ручки
