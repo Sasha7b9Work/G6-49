@@ -2,6 +2,7 @@
 #undef CRC
 
 #include "GUI/Application.h"
+#include "GUI/GovernorGUI.h"
 
 
 #define uint    unsigned int
@@ -44,6 +45,8 @@ static wxBitmap bitmap(320, 240);
 static wxMemoryDC memDC;
 
 static wxButton *buttons[Key::Count];
+
+static GovernorGUI *governor = nullptr;
 
 /// Цвета
 static uint colors[256];
@@ -192,6 +195,8 @@ static void CreateButtons(Frame *frame)
             CreateButton(keys[i][j], frame, { x0 + j * (width + dX), y0 + i * (height + dY) }, size);
         }
     }
+
+    governor = new GovernorGUI(frame, { 450, 170 });
 }
 
 
