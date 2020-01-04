@@ -31,6 +31,8 @@ private:
         bool PositionEqualsCurrent(POINT *newPosition);
         /// Рассчитывает dX и dY между position и newPosition
         void CalculateDeltas(POINT *newPosition);
+        /// Возвращает true, если сейчас нажата левая кнопка мыши
+        bool LeftIsDown();
     } cursor;
 
     void OnPaint(wxPaintEvent &);

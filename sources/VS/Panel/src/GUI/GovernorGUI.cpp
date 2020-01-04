@@ -89,14 +89,7 @@ float GovernorGUI::Cos(float grad)
 
 void GovernorGUI::OnTimer(wxTimerEvent &)
 {
-    int state = ::GetKeyState(VK_LBUTTON);
-
-    if(state != cursor.state)
-    {
-        cursor.leftIsDown = false;
-    }
-
-    if(!cursor.leftIsDown)
+    if(!cursor.LeftIsDown())
     {
         return;
     }
@@ -112,11 +105,22 @@ void GovernorGUI::OnTimer(wxTimerEvent &)
 
     cursor.CalculateDeltas(&position);
 
-    angle += - cursor.dX * 3 + cursor.dY * 3;
+    angle += 2.5F * (cursor.dY - cursor.dX);
 
     cursor.position = position;
 
     Refresh();
+}
+
+
+bool GovernorGUI::StructCursor::LeftIsDown()
+{
+    if(::GetKeyState(VK_LBUTTON) != state)
+    {
+        leftIsDown = false;
+    }
+
+    return leftIsDown;
 }
 
 
