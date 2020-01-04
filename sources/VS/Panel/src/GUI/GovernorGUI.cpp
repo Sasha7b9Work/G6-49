@@ -33,8 +33,8 @@ void GovernorGUI::OnPaint(wxPaintEvent &)
 
     float r = radius * 0.6F;
 
-    float x = radius + Sin(angle) * r;
-    float y = radius + Cos(angle) * r;
+    float x = radius + Sin(static_cast<int>(angle) * stepAngle) * r;
+    float y = radius + Cos(static_cast<int>(angle) * stepAngle) * r;
 
     dc.DrawCircle(static_cast<int>(x), static_cast<int>(y), radius / 5);
 }
@@ -71,13 +71,13 @@ bool GovernorGUI::MouseOnGovernor(wxMouseEvent &event) //-V2009
 }
 
 
-float GovernorGUI::Sin(float grad)
+float GovernorGUI::Sin(int grad)
 {
     return sinf(grad * 3.1415926F / 180.0F);
 }
 
 
-float GovernorGUI::Cos(float grad)
+float GovernorGUI::Cos(int grad)
 {
     return cosf(grad * 3.1415926F / 180.0F);
 }
@@ -93,7 +93,7 @@ void GovernorGUI::OnTimer(wxTimerEvent &)
 
         if(delta != 0)
         {
-            angle += 2.5F * delta;
+            angle += 0.1F * delta;
 
             Refresh();
         }

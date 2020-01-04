@@ -14,7 +14,7 @@ private:
     /// Угол поворота ручки
     float angle = 0.0F;
     /// Через столько градусов переключается ручка
-    const float stepAngle = 360.0F / 6.0F;
+    const int stepAngle = 60;
 
     wxTimer timer;
 
@@ -42,6 +42,6 @@ private:
     /// Возвращает true, если курсор мыши находится над изображением ручки
     bool MouseOnGovernor(wxMouseEvent &);
 
-    float Sin(float grad);
-    float Cos(float grad);
+    float Sin(int grad);
+    float Cos(int grad);
 };
