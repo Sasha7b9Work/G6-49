@@ -24,13 +24,8 @@ private:
         POINT position;
         /// Состояние VK_LBUTTON
         int state;
-
-        int dX;
-        int dY;
-        /// Возвращает true, если position совпадает с текущими координатами курсора
-        bool PositionEqualsCurrent(POINT *newPosition);
         /// Рассчитывает dX и dY между position и newPosition
-        void CalculateDeltas(POINT *newPosition);
+        int CalculateDelta(POINT *newPosition);
         /// Возвращает true, если сейчас нажата левая кнопка мыши
         bool LeftIsDown();
     } cursor;

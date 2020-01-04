@@ -89,32 +89,35 @@ float GovernorGUI::Cos(float grad)
 
 void GovernorGUI::OnTimer(wxTimerEvent &)
 {
-    if(!cursor.LeftIsDown())
+    if(cursor.LeftIsDown())
     {
-        return;
+        ::SetCursor(LoadCursor(NULL, IDC_HAND));
+
+        POINT position;
+
+        ::GetCursorPos(&position);
+
+        int delta = cursor.CalculateDelta(&position);
+
+        if(delta != 0)
+        {
+            angle += 2.5F * delta;
+
+            cursor.position = position;
+
+            Refresh();
+        }
     }
-
-    ::SetCursor(LoadCursor(NULL, IDC_HAND));
-
-    POINT position;
-
-    if(cursor.PositionEqualsCurrent(&position))
-    {
-        return;
-    }
-
-    cursor.CalculateDeltas(&position);
-
-    angle += 2.5F * (cursor.dY - cursor.dX);
-
-    cursor.position = position;
-
-    Refresh();
 }
 
 
 bool GovernorGUI::StructCursor::LeftIsDown()
 {
+    if(!leftIsDown)
+    {
+        return false;
+    }
+
     if(::GetKeyState(VK_LBUTTON) != state)
     {
         leftIsDown = false;
@@ -124,16 +127,7 @@ bool GovernorGUI::StructCursor::LeftIsDown()
 }
 
 
-bool GovernorGUI::StructCursor::PositionEqualsCurrent(POINT *newPosition)
+int GovernorGUI::StructCursor::CalculateDelta(POINT *newPosition)
 {
-    ::GetCursorPos(newPosition);
-
-    return (newPosition->x == position.x) && (newPosition->y == position.y);
-}
-
-
-void GovernorGUI::StructCursor::CalculateDeltas(POINT *newPosition)
-{
-    dX = newPosition->x - position.x;
-    dY = newPosition->y - position.y;
+    return (newPosition->y - position.y) - (newPosition->x - position.x);
 }
