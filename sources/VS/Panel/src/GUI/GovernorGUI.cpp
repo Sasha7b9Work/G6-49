@@ -44,13 +44,9 @@ void GovernorGUI::OnMouseLeftDown(wxMouseEvent &event)
 {
     if(MouseOnGovernor(event))
     {
-        cursor.leftIsDown = true;
-
-        ::GetCursorPos(&cursor.position);
-
-        cursor.state = ::GetKeyState(VK_LBUTTON);
-
         ::SetCursor(LoadCursor(NULL, IDC_HAND));
+
+        cursor.OnPressLeftButton();
     }
 }
 
@@ -107,12 +103,7 @@ void GovernorGUI::OnTimer(wxTimerEvent &)
 
 bool GovernorGUI::StructCursor::LeftIsDown()
 {
-    if(!leftIsDown)
-    {
-        return false;
-    }
-
-    if(::GetKeyState(VK_LBUTTON) != state)
+    if(leftIsDown && (::GetKeyState(VK_LBUTTON) != state))
     {
         leftIsDown = false;
     }
@@ -132,4 +123,14 @@ int GovernorGUI::StructCursor::CalculateDelta()
     position = pos;
 
     return delta;
+}
+
+
+void GovernorGUI::StructCursor::OnPressLeftButton()
+{
+    leftIsDown = true;
+
+    ::GetCursorPos(&position);
+
+    state = ::GetKeyState(VK_LBUTTON);
 }

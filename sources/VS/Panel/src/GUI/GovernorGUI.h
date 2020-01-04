@@ -30,6 +30,8 @@ private:
         int CalculateDelta();
         /// Возвращает true, если сейчас нажата левая кнопка мыши
         bool LeftIsDown();
+        /// Вызывается при нажатии левой кнопки мыши
+        void OnPressLeftButton();
     } cursor;
 
     void OnPaint(wxPaintEvent &);
