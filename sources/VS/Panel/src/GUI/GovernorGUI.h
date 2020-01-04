@@ -14,12 +14,14 @@ private:
     bool leftIsDown = false;
 
     POINT positionDown;
+    /// ”гол поворота ручки
+    float angle = 0.0F;
 
     void OnPaint(wxPaintEvent &);
     void OnMouseMove(wxMouseEvent &);
     void OnMouseLeftDown(wxMouseEvent &);
     void OnMouseLeftUp(wxMouseEvent &);
-    void OnMouseLeave(wxMouseEvent &);
+    void OnMouseLeaveEnter(wxMouseEvent &);
     /// ”становить курсор в виде руки
     void SetMouseCursorHand();
     /// ¬озвращает true, если курсор мыши находитс€ над изображением ручки

@@ -10,7 +10,8 @@ GovernorGUI::GovernorGUI(wxWindow *parent, const wxPoint &position) : wxPanel(pa
     Bind(wxEVT_MOTION, &GovernorGUI::OnMouseMove, this);
     Bind(wxEVT_LEFT_DOWN, &GovernorGUI::OnMouseLeftDown, this);
     Bind(wxEVT_LEFT_UP, &GovernorGUI::OnMouseLeftUp, this);
-    Bind(wxEVT_LEAVE_WINDOW, &GovernorGUI::OnMouseLeave, this);
+    Bind(wxEVT_LEAVE_WINDOW, &GovernorGUI::OnMouseLeaveEnter, this);
+    Bind(wxEVT_ENTER_WINDOW, &GovernorGUI::OnMouseLeaveEnter, this);
 }
 
 
@@ -30,9 +31,10 @@ void GovernorGUI::OnMouseMove(wxMouseEvent &event)
     if(leftIsDown)
     {
         ::SetCursorPos(positionDown.x, positionDown.y);
-    }
 
-    if(leftIsDown || MouseOnGovernor(event))
+        ::ShowCursor(false);
+    }
+    else if(MouseOnGovernor(event))
     {
         SetMouseCursorHand();
     }
@@ -47,7 +49,7 @@ void GovernorGUI::OnMouseLeftDown(wxMouseEvent &event)
 
         ::GetCursorPos(&positionDown);
 
-        SetMouseCursorHand();
+        ::ShowCursor(false);
     }
 }
 
@@ -55,26 +57,26 @@ void GovernorGUI::OnMouseLeftDown(wxMouseEvent &event)
 void GovernorGUI::OnMouseLeftUp(wxMouseEvent &)
 {
     leftIsDown = false;
+
     SetMouseCursorHand();
 }
 
 
-void GovernorGUI::OnMouseLeave(wxMouseEvent &)
+void GovernorGUI::OnMouseLeaveEnter(wxMouseEvent &)
 {
     if(leftIsDown)
     {
         ::SetCursorPos(positionDown.x, positionDown.y);
 
-        SetMouseCursorHand();
+        ::ShowCursor(false);
     }
 }
 
 
 void GovernorGUI::SetMouseCursorHand()
 {
-    HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
+    ::SetCursor(LoadCursor(NULL, IDC_HAND));
 
-    ::SetCursor(cursor);
     ::ShowCursor(true);
 }
 
