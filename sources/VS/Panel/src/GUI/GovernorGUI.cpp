@@ -93,17 +93,11 @@ void GovernorGUI::OnTimer(wxTimerEvent &)
     {
         ::SetCursor(LoadCursor(NULL, IDC_HAND));
 
-        POINT position;
-
-        ::GetCursorPos(&position);
-
-        int delta = cursor.CalculateDelta(&position);
+        int delta = cursor.CalculateDelta();
 
         if(delta != 0)
         {
             angle += 2.5F * delta;
-
-            cursor.position = position;
 
             Refresh();
         }
@@ -127,7 +121,15 @@ bool GovernorGUI::StructCursor::LeftIsDown()
 }
 
 
-int GovernorGUI::StructCursor::CalculateDelta(POINT *newPosition)
+int GovernorGUI::StructCursor::CalculateDelta()
 {
-    return (newPosition->y - position.y) - (newPosition->x - position.x);
+    POINT pos;
+
+    ::GetCursorPos(&pos);
+
+    int delta = (pos.y - position.y) - (pos.x - position.x);
+
+    position = pos;
+
+    return delta;
 }

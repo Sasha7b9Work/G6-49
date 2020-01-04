@@ -13,6 +13,8 @@ private:
     const int radius = 20;
     /// Угол поворота ручки
     float angle = 0.0F;
+    /// Через столько градусов переключается ручка
+    const float stepAngle = 360.0F / 6.0F;
 
     wxTimer timer;
 
@@ -24,8 +26,8 @@ private:
         POINT position;
         /// Состояние VK_LBUTTON
         int state;
-        /// Рассчитывает dX и dY между position и newPosition
-        int CalculateDelta(POINT *newPosition);
+        /// Рассчитывает dX и dY между position и текущей позицией
+        int CalculateDelta();
         /// Возвращает true, если сейчас нажата левая кнопка мыши
         bool LeftIsDown();
     } cursor;
