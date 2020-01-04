@@ -8,22 +8,31 @@ class GovernorGUI : public wxPanel
 {
 public:
     GovernorGUI(wxWindow *parent, const wxPoint &position);
+
 private:
     const int radius = 20;
-
-    bool leftIsDown = false;
-
-    POINT positionDown;
     /// Угол поворота ручки
     float angle = 0.0F;
 
+    wxTimer timer;
+
+    struct StructCursor
+    {
+        /// true, если левая кнопка нажата
+        bool leftIsDown;
+        /// Позиция курсора
+        POINT position;
+        /// Состояние VK_LBUTTON
+        int state;
+    } cursor;
+
     void OnPaint(wxPaintEvent &);
-    void OnMouseMove(wxMouseEvent &);
     void OnMouseLeftDown(wxMouseEvent &);
-    void OnMouseLeftUp(wxMouseEvent &);
-    void OnMouseLeaveEnter(wxMouseEvent &);
-    /// Установить курсор в виде руки
-    void SetMouseCursorHand();
+    void OnTimer(wxTimerEvent &);
+
     /// Возвращает true, если курсор мыши находится над изображением ручки
     bool MouseOnGovernor(wxMouseEvent &);
+
+    float Sin(float grad);
+    float Cos(float grad);
 };
