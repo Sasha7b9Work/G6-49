@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Message_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
@@ -17,22 +18,34 @@ static uint8 range = 0;
 static int16 *k = nullptr;
 
 
-/// Вызывается при изменении калибруемого параметра
-static void OnChange_Parameters(bool)
+static void LoadK()
 {
     k = setCal.GetK(channel, signal, range, parameter);
 }
 
+static void SendMessage()
+{
+    Message::CalibrateSet(channel, signal, range, parameter).Transmit();
+}
+
+/// Вызывается при изменении калибруемого параметра
+static void OnChange_Parameters(bool)
+{
+    LoadK();
+    SendMessage();
+}
+
 void PageDebug::Calibartion::Init()
 {
-    OnChange_Parameters(true);
+    LoadK();
 }
 
 /// Вызывается при изменении источника сигнал
 static void OnChange_Source(bool)
 {
-    k = setCal.GetK(channel, signal, range, parameter);
+    LoadK();
     OnChange_Parameters(true);
+    SendMessage();
 }
 
 DEF_CHOICE_3(cChannel,

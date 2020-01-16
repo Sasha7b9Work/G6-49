@@ -62,7 +62,9 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* FDrive_LoadFromExtStorage */ DDrive::Handler::Processing,
         /* FDrive_GetPictureDDS      */ DDrive::Handler::Processing,
         /* SCPI_RecvData             */ DVCP::Handler::Processing,
-        /* PortCPU                   */ DHandlers::SetPin
+        /* PortCPU                   */ DHandlers::SetPin,
+        /* CalibrationLoad           */ DHandlers::CalibrationLoad,
+        /* CalibrationSet            */ DHandlers::CalibrationSet
     };
 
     uint8 com = msg->TakeByte();
@@ -266,6 +268,11 @@ void DHandlers::LoadFormDDS(SimpleMessage *msg)
 }
 
 
+void DHandlers::_GetKoeffCalibration(SimpleMessage *)
+{
+}
+
+
 void DHandlers::_SetKoeffCalibration(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
@@ -288,8 +295,25 @@ void DHandlers::_SetKoeffCalibration(SimpleMessage *msg)
 }
 
 
-void DHandlers::_GetKoeffCalibration(SimpleMessage *)
+void DHandlers::CalibrationLoad(SimpleMessage *msg)
 {
+    for(int i = 0; i < 4; i++)
+    {
+        msg->TakeByte();
+    }
+
+    msg->TakeHalfWord();
+}
+
+
+void DHandlers::CalibrationSet(SimpleMessage *msg)
+{
+    for(int i = 0; i < 4; i++)
+    {
+        msg->TakeByte();
+    }
+
+    msg->TakeHalfWord();
 }
 
 

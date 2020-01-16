@@ -60,4 +60,8 @@ private:
     static void _SetKoeffCalibration(SimpleMessage *);
 
     static void _GetKoeffCalibration(SimpleMessage *);
+
+    static void CalibrationLoad(SimpleMessage *);
+
+    static void CalibrationSet(SimpleMessage *);
 };
