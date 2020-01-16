@@ -94,7 +94,7 @@ static bool OnKey_PageSignals(Key &key)
     return false;
 }
 
-DEF_PAGE_7( pageSignals,   //-V641
+DEF_PAGE_5( pageSignals,   //-V641
     "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬",  
     "",
     &cChannel,                                      ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
@@ -102,8 +102,6 @@ DEF_PAGE_7( pageSignals,   //-V641
     &cParameters,                                   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
     &bChangeParameter,                              ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
     &cTypeTune,                                     ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «‡Ò˚ÎÍË
-    PageSignals::PageCalibration::PageA::pointer,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
-    PageSignals::PageCalibration::PageB::pointer,   ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B
     Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey_PageSignals, FuncBeforeDraw
 )
 

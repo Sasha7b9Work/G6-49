@@ -43,4 +43,25 @@ struct PageDebug
             static Page *self;
         };
     };
+
+    struct PageCalibration
+    {
+        struct PageA
+        {
+            static Page *pointer;
+        };
+
+        struct PageB
+        {
+            static Page *pointer;
+        };
+
+        static void OnPress_OffsetAD9952(Chan::E ch, bool enter, KoeffCal::E koeff);
+
+        static void OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E koeff);
+
+        static void OnPress_AmplitudeAD9952(Chan::E ch, bool enter, KoeffCal::E koeff);
+
+        static void WriteKoeffCal(Chan::E ch, KoeffCal::E koeff);
+    };
 };
