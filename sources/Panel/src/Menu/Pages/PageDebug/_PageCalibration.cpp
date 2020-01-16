@@ -49,7 +49,7 @@ static void SetParameter(Chan::E ch, KoeffCal::E koeff)
 }
 
 
-void PageDebug::PageCalibration::OnPress_OffsetAD9952(Chan::E ch, bool enter, KoeffCal::E koeff)
+void PageDebug::Calibration::OnPress_OffsetAD9952(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
     if (enter)
     {
@@ -59,7 +59,7 @@ void PageDebug::PageCalibration::OnPress_OffsetAD9952(Chan::E ch, bool enter, Ko
 }
 
 
-void PageDebug::PageCalibration::OnPress_AmplitudeAD9952(Chan::E ch, bool enter, KoeffCal::E koeff)
+void PageDebug::Calibration::OnPress_AmplitudeAD9952(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
     if (enter)
     {
@@ -69,7 +69,7 @@ void PageDebug::PageCalibration::OnPress_AmplitudeAD9952(Chan::E ch, bool enter,
 }
 
 
-void PageDebug::PageCalibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
+void PageDebug::Calibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
 {
     Message::Calibrate(static_cast<uint8>(ch), static_cast<uint8>(koeff)).Transmit();
 
@@ -79,7 +79,7 @@ void PageDebug::PageCalibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
 }
 
 
-void PageDebug::PageCalibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E koeff)
+void PageDebug::Calibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E koeff)
 {
 #define MAX_VALUE   (((uint64)(8191) << 14) + 8191)
 #define WORK_VALUE  (((uint64)(16383) << 14) + 8191)

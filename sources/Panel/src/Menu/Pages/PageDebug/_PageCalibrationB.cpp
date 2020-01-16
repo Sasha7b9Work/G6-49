@@ -4,18 +4,18 @@
 
 
 extern const PageBase pageCalibrationB;
-Page *PageDebug::PageCalibration::PageB::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageCalibrationB));
+Page *PageDebug::Calibration::PageB::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageCalibrationB));
 
 
 
 static void OnChange_NegativeAD9952()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_NEG);
+    PageDebug::Calibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_NEG);
 }
 
 static void OnPress_NegativeAD9952(bool enter)
 {
-    PageDebug::PageCalibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_NEG);
+    PageDebug::Calibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_NEG);
 }
 
 DEF_GOVERNOR( gNegativeAD9952,                                                                                                       //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 -5¬ ---
@@ -28,12 +28,12 @@ DEF_GOVERNOR( gNegativeAD9952,                                                  
 
 static void OnChange_PositiveAD9952()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_POS);
+    PageDebug::Calibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_POS);
 }
 
 static void OnPress_PositiveAD9952(bool enter)
 {
-    PageDebug::PageCalibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_POS);
+    PageDebug::Calibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_POS);
 }
 
 DEF_GOVERNOR( gPositiveAD9952,                                                                                                       //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 +5¬ ---
@@ -46,12 +46,12 @@ DEF_GOVERNOR( gPositiveAD9952,                                                  
 
 static void OnChange_ZeroAD9952()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_ZERO);
+    PageDebug::Calibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_ZERO);
 }
 
 static void OnPress_ZeroAD9952(bool enter)
 {
-    PageDebug::PageCalibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_ZERO);
+    PageDebug::Calibration::OnPress_OffsetAD9952(Chan::B, enter, KoeffCal::AD9952_ZERO);
 }
 
 DEF_GOVERNOR( gZeroAD9952,                                                                                                            //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 0¬ ---
@@ -64,12 +64,12 @@ DEF_GOVERNOR( gZeroAD9952,                                                      
 
 static void OnChange_AmplitudeAD9952()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_AMPL);
+    PageDebug::Calibration::WriteKoeffCal(Chan::B, KoeffCal::AD9952_AMPL);
 }
 
 static void OnPress_AmplitudeAD9952(bool enter)
 {
-    PageDebug::PageCalibration::OnPress_AmplitudeAD9952(Chan::B, enter, KoeffCal::AD9952_AMPL);
+    PageDebug::Calibration::OnPress_AmplitudeAD9952(Chan::B, enter, KoeffCal::AD9952_AMPL);
 }
 
 DEF_GOVERNOR( gAmplitudeAD9952,                                                                                                   //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - AD9952 –‡ÁÏ‡ı ---
@@ -82,12 +82,12 @@ DEF_GOVERNOR( gAmplitudeAD9952,                                                 
 
 static void OnChange_OffsetDDS()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::DDS_OFFSET);
+    PageDebug::Calibration::WriteKoeffCal(Chan::B, KoeffCal::DDS_OFFSET);
 }
 
 static void OnPress_OffsetDDS(bool enter)
 {
-    PageDebug::PageCalibration::OnPress_DDS(Chan::B, enter, KoeffCal::DDS_OFFSET);
+    PageDebug::Calibration::OnPress_DDS(Chan::B, enter, KoeffCal::DDS_OFFSET);
 }
 
 DEF_GOVERNOR( gOffsetDDS,                                                                                                                //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - DDS 0¬ ---
@@ -100,12 +100,12 @@ DEF_GOVERNOR( gOffsetDDS,                                                       
 
 static void OnChange_MinDDS()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::DDS_MIN);
+    PageDebug::Calibration::WriteKoeffCal(Chan::B, KoeffCal::DDS_MIN);
 }
 
 static void OnPress_MinDDS(bool enter)
 {
-    PageDebug::PageCalibration::OnPress_DDS(Chan::B, enter, KoeffCal::DDS_MIN);
+    PageDebug::Calibration::OnPress_DDS(Chan::B, enter, KoeffCal::DDS_MIN);
 }
 
 DEF_GOVERNOR( gMinDDS,                                                                                                                  //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - DDS -5¬ ---
@@ -117,12 +117,12 @@ DEF_GOVERNOR( gMinDDS,                                                          
 
 static void OnChange_MaxDDS()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::B, KoeffCal::DDS_MAX);
+    PageDebug::Calibration::WriteKoeffCal(Chan::B, KoeffCal::DDS_MAX);
 }
 
 static void OnPress_MaxDDS(bool enter)
 {
-    PageDebug::PageCalibration::OnPress_DDS(Chan::B, enter, KoeffCal::DDS_MAX);
+    PageDebug::Calibration::OnPress_DDS(Chan::B, enter, KoeffCal::DDS_MAX);
 }
 
 DEF_GOVERNOR( gMaxDDS,                                                                                                                  //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - DDS +5¬ ---
@@ -135,7 +135,7 @@ DEF_GOVERNOR( gMaxDDS,                                                          
 
 static void OnChange_TrigLev()
 {
-    PageDebug::PageCalibration::WriteKoeffCal(Chan::A, KoeffCal::FREQ_LEVEL_TRIG);
+    PageDebug::Calibration::WriteKoeffCal(Chan::A, KoeffCal::FREQ_LEVEL_TRIG);
 }
 
 DEF_GOVERNOR( gTrigLev,                                                                                                             //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - ”-Ì¸ ÒËÌı ---
@@ -159,5 +159,5 @@ DEF_PAGE_8( pageCalibrationB,                                                   
     &gMinDDS,               ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - DDS -5¬
     &gMaxDDS,               ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - DDS +5¬
     &gTrigLev,              ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B - ”-Ì¸ ÒËÌı
-    Page::Settings_CalibrationB, PageSignals::pointer, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Settings_CalibrationB, PageDebug::self, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )

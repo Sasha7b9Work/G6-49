@@ -44,16 +44,16 @@ struct PageDebug
         };
     };
 
-    struct PageCalibration
+    struct Calibration
     {
         struct PageA
         {
-            static Page *pointer;
+            static Page *self;
         };
 
         struct PageB
         {
-            static Page *pointer;
+            static Page *self;
         };
 
         static void OnPress_OffsetAD9952(Chan::E ch, bool enter, KoeffCal::E koeff);

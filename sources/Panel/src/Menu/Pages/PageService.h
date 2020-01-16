@@ -4,5 +4,5 @@
 class PageService
 {
 public:
-    static Page *pointer;
+    static Page *self;
 };

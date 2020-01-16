@@ -28,9 +28,9 @@ extern const PageBase pSignals;
 DEF_PAGE_3( mainPageMenu,
     "лемч",
     "",
-    PageSignals::pointer,
-    PageFrequencyCounter::pointer,
-    PageService::pointer,
+    PageSignals::self,
+    PageFrequencyCounter::self,
+    PageService::self,
     Page::Main, 0, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 

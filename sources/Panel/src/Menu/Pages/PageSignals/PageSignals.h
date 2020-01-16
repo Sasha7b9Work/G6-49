@@ -16,5 +16,5 @@ public:
 
     static void SetForm(Form::E form);
 
-    static Page *pointer;
+    static Page *self;
 };

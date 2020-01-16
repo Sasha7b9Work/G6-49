@@ -601,8 +601,8 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 DEF_PAGE_9( pDebug,                                                                                                                                                 //--- Œ“À¿ƒ ¿ --- //-V641
     "Œ“À¿ƒ ¿",  
     "",
-    PageDebug::PageCalibration::PageA::pointer, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
-    PageDebug::PageCalibration::PageB::pointer, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B
+    PageDebug::Calibration::PageA::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
+    PageDebug::Calibration::PageB::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B
     &pRegisters,                                ///< Œ“À¿ƒ ¿ - –Â„ËÒÚ˚
     PageDebug::SubRange::self,
     PageDebug::Colors::self,
@@ -610,7 +610,7 @@ DEF_PAGE_9( pDebug,                                                             
     &cStatistics,                               ///< Œ“À¿ƒ ¿ - —Ú‡ÚËÒÚËÍ‡
     &cShowSends,                                ///< Œ“À¿ƒ ¿ - œÓÍ‡Á˚‚‡Ú¸ Ô‡‡ÏÂÚ˚
     &bSaveSettings,                             ///< Œ“À¿ƒ ¿ - —Óı‡ÌËÚ¸ Ì‡ÒÚÓÈÍË
-    Page::Debug, PageService::pointer, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Debug, PageService::self, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
 )
 
 
