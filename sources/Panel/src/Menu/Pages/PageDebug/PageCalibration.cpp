@@ -42,6 +42,7 @@ static void SendMessage()
         prevK = *k;
 
         Message::CalibrateSet(channel, signal, range, parameter).Transmit();
+        setCal.Save();
     }
 }
 
