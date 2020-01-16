@@ -44,7 +44,7 @@ struct PageDebug
         };
     };
 
-    struct Calibration
+    struct _Calibration
     {
         struct PageA
         {
