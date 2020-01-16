@@ -443,7 +443,7 @@ Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Comman
 }
 
 
-Message::Calibrate::Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command::SetKoeffCalibration)
+Message::_Calibrate::_Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command::SetKoeffCalibration)
 {
     static const int16 *values[KoeffCal::Count] =
     {

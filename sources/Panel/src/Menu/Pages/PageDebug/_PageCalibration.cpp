@@ -71,7 +71,7 @@ void PageDebug::_Calibration::OnPress_AmplitudeAD9952(Chan::E ch, bool enter, Ko
 
 void PageDebug::_Calibration::WriteKoeffCal(Chan::E ch, KoeffCal::E koeff)
 {
-    Message::Calibrate(static_cast<uint8>(ch), static_cast<uint8>(koeff)).Transmit();
+    Message::_Calibrate(static_cast<uint8>(ch), static_cast<uint8>(koeff)).Transmit();
 
     setCal.Save();
 

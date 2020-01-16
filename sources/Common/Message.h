@@ -279,9 +279,9 @@ namespace Message
     }
 
 
-    class Calibrate : public SimpleMessage
+    class _Calibrate : public SimpleMessage
     {
     public:
-        Calibrate(uint8 ch, uint8 koeff);
+        _Calibrate(uint8 ch, uint8 koeff);
     };
 }
