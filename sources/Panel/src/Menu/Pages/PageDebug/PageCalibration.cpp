@@ -1,7 +1,10 @@
 #include "defines.h"
+#include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
 #include "Menu/Pages/PageDebug/StructCalibration.h"
 #include "Settings/Settings.h"
+#include "Utils/StringUtils.h"
 
 
 extern const PageBase pCalibration;
@@ -14,6 +17,11 @@ static uint8 range = 0;
 
 static int16 *k = nullptr;
 
+
+void PageDebug::Calibartion::Init()
+{
+    k = StructCalibration::GetK(channel, signal, range, parameter);
+}
 
 /// Âûçûâàåòñÿ ïğè èçìåíåíèè êàëèáğóåìîãî ïàğàìåòğà
 static void OnChange_Parameters(bool)
@@ -70,6 +78,29 @@ DEF_CHOICE_4(cParameter,
 )
 
 
+static void DrawPage()
+{
+    Painter::FillRegion(10, 10, 100, 100, Color::WHITE);
+
+    char buffer[30];
+
+    SU::Int2String(*k, true, 1, buffer);
+
+    Text::Draw(20, 20, buffer, Color::BLACK);
+}
+
+
+static bool FuncOnKeyPage(Key &key)
+{
+    if(key.IsRotate())
+    {
+        return true;
+    }
+
+    return false;
+}
+
+
 DEF_PAGE_6( pCalibration,
     "ÊÀËÈÁĞÎÂÊÀ",
     "",
@@ -79,7 +110,7 @@ DEF_PAGE_6( pCalibration,
     &cParameter,
     PageDebug::_Calibration::PageA::self, ///< ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁĞÎÂÊÀ A
     PageDebug::_Calibration::PageB::self, ///< ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁĞÎÂÊÀ B
-    Page::Calibration, PageDebug::self, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Calibration, PageDebug::self, Item::FuncActive, FuncPress, FuncOnKeyPage, DrawPage
 )
 
 Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pCalibration));

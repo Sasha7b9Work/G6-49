@@ -41,6 +41,7 @@ void Menu::Init()
 {
     PageSignals::Init();
     PageDebug::Colors::Init();
+    PageDebug::Calibartion::Init();
 }
 
 
