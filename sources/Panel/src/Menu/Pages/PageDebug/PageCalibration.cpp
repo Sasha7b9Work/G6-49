@@ -1,41 +1,50 @@
 #include "defines.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
+#include "Menu/Pages/PageDebug/StructCalibration.h"
+#include "Settings/Settings.h"
 
 
 extern const PageBase pCalibration;
 
 
-static uint flag = 0;
-#define FLAG_K flag
-#define B_CHANNEL   0
-#define B_SIGNAL    1
-#define B_PARAMETER 2
-
+static uint8 channel = 0;
+static uint8 signal = 0;
 static uint8 parameter = 0;
 static uint8 range = 0;
 
+static int16 *k = nullptr;
 
-/// Вызывается при изменении параметров калибровки
+
+/// Вызывается при изменении калибруемого параметра
 static void OnChange_Parameters(bool)
 {
 
 }
 
 
-DEF_CHOICE_2(cChannel,
+/// Вызывается при изменении источника сигнал
+static void OnChange_Source(bool)
+{
+    k = StructCalibration::GetK(channel, signal, range, parameter);
+    OnChange_Parameters(true);
+}
+
+DEF_CHOICE_3(cChannel,
     "КАНАЛ",
     "",
     "A", "",
     "B", "",
-    FLAG_K, B_CHANNEL, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
+    "", "",
+    channel, pCalibration, Item::FuncActive, OnChange_Source, FuncDraw
 )
 
-DEF_CHOICE_2(cSignal,
+DEF_CHOICE_3(cSignal,
     "СИГНАЛ",
     "",
     "Синус", "",
     "DDS", "",
-    FLAG_K, B_SIGNAL, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
+    "", "",
+    signal, pCalibration, Item::FuncActive, OnChange_Source, FuncDraw
 )
 
 DEF_CHOICE_6(cRange,
