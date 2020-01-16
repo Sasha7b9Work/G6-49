@@ -155,18 +155,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>257</LineNumber>
+          <LineNumber>320</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134283088</Address>
+          <Address>134283160</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\My\Work\stm32\G6-49\sources\Panel\src\Interface\Handlers_d.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Interface\Handlers_d.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Generator\src/Interface/Handlers_d.cpp\257</Expression>
+          <Expression>\\Generator\src/Interface/Handlers_d.cpp\320</Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>
@@ -1958,7 +1958,7 @@
 
   <Group>
     <GroupName>Settings</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

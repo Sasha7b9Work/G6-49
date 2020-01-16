@@ -297,23 +297,27 @@ void DHandlers::_SetKoeffCalibration(SimpleMessage *msg)
 
 void DHandlers::CalibrationLoad(SimpleMessage *msg)
 {
-    for(int i = 0; i < 4; i++)
-    {
-        msg->TakeByte();
-    }
-
-    msg->TakeHalfWord();
+    uint8 channel = msg->TakeByte();
+    uint8 signal = msg->TakeByte();
+    uint8 range = msg->TakeByte();
+    uint8 param = msg->TakeByte();
+    
+    int16 k = static_cast<int16>(msg->TakeHalfWord());
+    
+    *setCal.GetK(channel, signal, range, param) = k;
 }
 
 
 void DHandlers::CalibrationSet(SimpleMessage *msg)
 {
-    for(int i = 0; i < 4; i++)
-    {
-        msg->TakeByte();
-    }
-
-    msg->TakeHalfWord();
+    uint8 channel = msg->TakeByte();
+    uint8 signal = msg->TakeByte();
+    uint8 range = msg->TakeByte();
+    uint8 param = msg->TakeByte();
+    
+    int16 k = static_cast<int16>(msg->TakeHalfWord());
+    
+    *setCal.GetK(channel, signal, range, param) = k;
 }
 
 

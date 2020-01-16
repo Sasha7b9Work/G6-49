@@ -25,7 +25,24 @@ static void LoadK()
 
 static void SendMessage()
 {
-    Message::CalibrateSet(channel, signal, range, parameter).Transmit();
+    static uint8 prevChannel = 255;
+    static uint8 prevSignal = 255;
+    static uint8 prevRange = 255;
+    static uint8 prevParameter = 255;
+    static int16 *prevPointerK = nullptr;
+    static int16 prevK = 0;
+
+    if(channel != prevChannel || prevSignal != signal || prevRange != range || prevParameter != parameter || prevPointerK != k || prevK != *k)
+    {
+        prevChannel = channel;
+        prevSignal = signal;
+        prevRange = range;
+        prevParameter = parameter;
+        prevPointerK = k;
+        prevK = *k;
+
+        Message::CalibrateSet(channel, signal, range, parameter).Transmit();
+    }
 }
 
 /// Вызывается при изменении калибруемого параметра
@@ -110,10 +127,12 @@ static bool FuncOnKeyPage(Key &key)
             if(key.value == Key::RegLeft)
             {
                 setCal.ReduceK();
+                SendMessage();
             }
             else
             {
                 setCal.IncreaseK();
+                SendMessage();
             }
         }
 
