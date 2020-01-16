@@ -1,6 +1,7 @@
 #include "AD9952.h"
 #include "defines.h"
 #include "GeneratroSettings.h"
+#include "Generator/Calibrator.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 #include "FPGA.h"
@@ -63,7 +64,7 @@ void AD9952::SetPhase(Chan::E ch, FloatValue phase)
 
 void AD9952::SetAmplitude(Chan::E ch, FloatValue amplitude)
 {
-    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * (1.0F + CAL_AD9952_AMPLITUDE(ch) / 1000.0F);
+    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * Calibrator::GetAmplitudeK(ch, Form::Sine, amplitude.ToFloat());
 
     WriteRegister(ch, Register::ASF);
 }
