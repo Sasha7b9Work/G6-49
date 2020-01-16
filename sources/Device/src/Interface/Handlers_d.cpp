@@ -6,6 +6,7 @@
 #include "Handlers_d.h"
 #include "FDrive/FDrive_d.h"
 #include "FreqMeter/FreqMeter_d.h"
+#include "Generator/Calibrator.h"
 #include "Generator/Generator_d.h"
 #include "Interface_d.h"
 #include "Hardware/CPU.h"
@@ -304,7 +305,7 @@ void DHandlers::CalibrationLoad(SimpleMessage *msg)
     
     int16 k = static_cast<int16>(msg->TakeHalfWord());
     
-    *setCal.GetK(channel, signal, range, param) = k;
+    Calibrator::SetK(channel, signal, range, param, k);
 }
 
 

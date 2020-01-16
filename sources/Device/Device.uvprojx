@@ -1361,6 +1361,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\GeneratorSettingsTypes.h</FilePath>
             </File>
+            <File>
+              <FileName>Calibrator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Calibrator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Calibrator.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
