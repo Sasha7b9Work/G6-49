@@ -2246,6 +2246,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug\_PageCalibrationB.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageCalibration.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageCalibration.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -44,6 +44,11 @@ struct PageDebug
         };
     };
 
+    struct Calibartion
+    {
+        static Page *self;
+    };
+
     struct _Calibration
     {
         struct PageA

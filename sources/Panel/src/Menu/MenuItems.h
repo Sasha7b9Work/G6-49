@@ -144,6 +144,7 @@ public:
          Settings_Load,
          Settings_CalibrationA,
          Settings_CalibrationB,
+         Calibration,
          SubRanges,
          Colors,
          Color_ChanA,

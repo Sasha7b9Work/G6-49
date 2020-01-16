@@ -598,11 +598,10 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 )
 
 
-DEF_PAGE_9( pDebug,                                                                                                                                                 //--- Œ“À¿ƒ ¿ --- //-V641
+DEF_PAGE_8( pDebug,                                                                                                                                                 //--- Œ“À¿ƒ ¿ --- //-V641
     "Œ“À¿ƒ ¿",  
     "",
-    PageDebug::_Calibration::PageA::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
-    PageDebug::_Calibration::PageB::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B
+    PageDebug::Calibartion::self,
     &pRegisters,                                ///< Œ“À¿ƒ ¿ - –Â„ËÒÚ˚
     PageDebug::SubRange::self,
     PageDebug::Colors::self,
