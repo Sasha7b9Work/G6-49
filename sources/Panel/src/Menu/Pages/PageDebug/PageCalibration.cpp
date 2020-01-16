@@ -5,12 +5,14 @@
 extern const PageBase pCalibration;
 
 
-static uint flag;
-
+static uint flag = 0;
 #define FLAG_K flag
-
 #define B_CHANNEL   0
 #define B_SIGNAL    1
+#define B_PARAMETER 2
+
+static uint8 parameter = 0;
+static uint8 range = 0;
 
 
 /// Вызывается при изменении параметров калибровки
@@ -36,12 +38,36 @@ DEF_CHOICE_2(cSignal,
     FLAG_K, B_SIGNAL, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
+DEF_CHOICE_6(cRange,
+    "Диапазон",
+    "",
+    "30 мВ", "",
+    "100 мВ", "",
+    "300 мВ", "",
+    "1 В", "",
+    "3 В", "",
+    "10 В", "",
+    range, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
+)
 
-DEF_PAGE_4(pCalibration,
+DEF_CHOICE_4(cParameter,
+    "Параметр",
+    "",
+    "Амплитуда", "",
+    "+5В", "",
+    "0В", "",
+    "-5В", "",
+    parameter, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
+)
+
+
+DEF_PAGE_6( pCalibration,
     "КАЛИБРОВКА",
     "",
     &cChannel,
     &cSignal,
+    &cRange,
+    &cParameter,
     PageDebug::_Calibration::PageA::self, ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА A
     PageDebug::_Calibration::PageB::self, ///< НАСТРОЙКИ СИГНАЛОВ - КАЛИБРОВКА B
     Page::Calibration, PageDebug::self, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
