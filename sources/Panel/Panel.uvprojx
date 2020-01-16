@@ -2231,6 +2231,21 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug\PageColors.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageCalibration.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageCalibration.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageCalibrationA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageCalibrationA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageCalibrationB.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageCalibrationB.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2245,21 +2260,6 @@
               <FileName>PageSignals.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageSignals\PageSignals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSignals_Calibration.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_Calibration.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSignals_CalibrationA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_CalibrationA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageSignals_CalibrationB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals_CalibrationB.cpp</FilePath>
             </File>
           </Files>
         </Group>
