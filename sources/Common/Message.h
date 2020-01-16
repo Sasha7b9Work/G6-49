@@ -284,4 +284,16 @@ namespace Message
     public:
         _Calibrate(uint8 ch, uint8 koeff);
     };
+
+    class CalibrateSet : public SimpleMessage
+    {
+    public:
+        CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 parameter);
+    };
+
+    class CalibrateLoad : public SimpleMessage
+    {
+    public:
+        CalibrateLoad(uint8 ch, uint8 signal, uint8 range, uint8 parameter);
+    };
 }

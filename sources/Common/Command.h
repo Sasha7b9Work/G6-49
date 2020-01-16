@@ -100,8 +100,8 @@ struct Command
          //                          3 - AD9952_Amplitude ...
          //                          4 - DDS_MAX          ...
          //                          5 - DDS_MIN          ...
-/* <-  */   SetKoeffCalibration,        ///< Установка калибровочного коэффициента
-/* ->  */   GetKoeffCalibration,        ///< Запрос установленного калибровочного коэффициента
+/* <-  */   _SetKoeffCalibration,        ///< Установка калибровочного коэффициента
+/* ->  */   _GetKoeffCalibration,        ///< Запрос установленного калибровочного коэффициента
 /* <-> */   FDrive_RequestFileSize,     ///< Запрос размера файла
 /* <-> */   FDrive_RequestFileString,   ///< Считать строку из файла
 /* <-> */   FDrive_LoadFromExtStorage,  ///< Загрузить сигнал с флешки. Получив это сообщение, устройство начинает загрузку сигнала, а по окончании возвращает это же сообщение
@@ -110,6 +110,8 @@ struct Command
          // SCPI_Data   sizeData  data 
 /* <-> */   SCPI_Data,                  ///< От VCP приняты данные либо в VCP нужно передать данные
             PortCPU,
+            CalibrationLoad,
+            CalibrationSet,
             Count
     } value;
     Command(E v) : value(v) {};

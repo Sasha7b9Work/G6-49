@@ -55,8 +55,8 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestDir         */ DDrive::Handler::Processing,
         /* FDrive_RequestFile        */ DDrive::Handler::Processing,
         /* Test                      */ DHandlers::Test,
-        /* SetKoeffCalibration       */ DHandlers::SetKoeffCalibration,
-        /* GetKoeffCalibration       */ DHandlers::GetKoeffCalibration,
+        /* SetKoeffCalibration       */ DHandlers::_SetKoeffCalibration,
+        /* GetKoeffCalibration       */ DHandlers::_GetKoeffCalibration,
         /* FDrive_RequestFileSize    */ DDrive::Handler::Processing,
         /* FDrive_RequestFileString  */ DDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ DDrive::Handler::Processing,
@@ -266,7 +266,7 @@ void DHandlers::LoadFormDDS(SimpleMessage *msg)
 }
 
 
-void DHandlers::SetKoeffCalibration(SimpleMessage *msg)
+void DHandlers::_SetKoeffCalibration(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
@@ -288,7 +288,7 @@ void DHandlers::SetKoeffCalibration(SimpleMessage *msg)
 }
 
 
-void DHandlers::GetKoeffCalibration(SimpleMessage *)
+void DHandlers::_GetKoeffCalibration(SimpleMessage *)
 {
 }
 

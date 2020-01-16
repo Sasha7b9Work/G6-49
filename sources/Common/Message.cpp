@@ -443,7 +443,7 @@ Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Comman
 }
 
 
-Message::_Calibrate::_Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command::SetKoeffCalibration)
+Message::_Calibrate::_Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command::_SetKoeffCalibration)
 {
     static const int16 *values[KoeffCal::Count] =
     {
@@ -465,6 +465,26 @@ Message::_Calibrate::_Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Comman
     PutByte(ch);
     PutByte(koeff);
     PutHalfWord(static_cast<uint16>(values[koeff][ch]));
+}
+
+
+Message::CalibrateSet::CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 parameter) : SimpleMessage(7, Command::CalibrationSet)
+{
+    PutByte(ch);
+    PutByte(signal);
+    PutByte(range);
+    PutByte(parameter);
+    PutHalfWord(*setCal.GetK(ch, signal, range, parameter));
+}
+
+
+Message::CalibrateLoad::CalibrateLoad(uint8 ch, uint8 signal, uint8 range, uint8 parameter) : SimpleMessage(7, Command::CalibrationLoad)
+{
+    PutByte(ch);
+    PutByte(signal);
+    PutByte(range);
+    PutByte(parameter);
+    PutHalfWord(*setCal.GetK(ch, signal, range, parameter));
 }
 
 

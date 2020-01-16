@@ -20,6 +20,8 @@ static const CalibrationSettings defSet =
 
 CalibrationSettings setCal = defSet;
 
+static int16 *currentCAL = CalibrationSettings::GetK(0, 0, 0, 0);
+
 
 void CalibrationSettings::Load()
 {
@@ -31,6 +33,25 @@ void CalibrationSettings::Load()
         for (int k = 0; k < KoeffCal::Count; k++)
         {
             Message::_Calibrate(static_cast<uint8>(ch), static_cast<uint8>(k)).Transmit();
+        }
+    }
+
+    for(int ch = 0; ch < NUM_CHAN; ch++)
+    {
+        for(int sig = 0; sig < NUM_SIGNALS; sig++)
+        {
+            for(int range = 0; range < NUM_RANGES; range++)
+            {
+                for(int param = 0; param < NUM_PARAMETERS; param++)
+                {
+                    Message::CalibrateLoad(
+                        static_cast<uint8>(ch),
+                        static_cast<uint8>(sig),
+                        static_cast<uint8>(range),
+                        static_cast<uint8>(param)
+                    ).Transmit();
+                }
+            }
         }
     }
 }
@@ -50,11 +71,7 @@ CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &
 }
 
 
-static int16 *currentCAL = CalibrationSettings::GetK(0, 0, 0, 0);
-
-
-
-int16 *CalibrationSettings::GetK(int channel, int signal, int range, uint8 parameter)
+int16 *CalibrationSettings::GetK(uint8 channel, uint8 signal, uint8 range, uint8 parameter)
 {
     if(channel > 1)
     {

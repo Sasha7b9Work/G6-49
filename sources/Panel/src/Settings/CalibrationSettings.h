@@ -60,7 +60,7 @@ struct CalibrationSettings
 
     CalibrationSettings& operator =(const CalibrationSettings &);
 
-    static int16 *GetK(int channel, int signal, int range, uint8 parameter);
+    static int16 *GetK(uint8 channel, uint8 signal, uint8 range, uint8 parameter);
     /// Уменьшить текущий к
     void ReduceK();
     /// Увеличить текущий к

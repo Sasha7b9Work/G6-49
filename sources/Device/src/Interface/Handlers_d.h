@@ -57,7 +57,7 @@ private:
 
     static void Test(SimpleMessage *);
 
-    static void SetKoeffCalibration(SimpleMessage *);
+    static void _SetKoeffCalibration(SimpleMessage *);
 
-    static void GetKoeffCalibration(SimpleMessage *);
+    static void _GetKoeffCalibration(SimpleMessage *);
 };
