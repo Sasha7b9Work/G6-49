@@ -106,5 +106,5 @@ float Calibrator::GetAmplitudeK(Chan::E ch, Form::E form, float amplitude)
 
     int16 k = *setCal.GetK(static_cast<uint8>(ch), form == Form::Sine ? 0U : 1U, range, 0U);
 
-    return k / 10.0F;
+    return 1.0F + k / 1000.0F;
 }
