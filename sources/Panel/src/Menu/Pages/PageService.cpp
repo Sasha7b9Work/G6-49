@@ -6,6 +6,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 #include "PageService.h"
 #include "Menu/Menu.h"
 #include "Utils/StringUtils.h"
@@ -26,6 +27,7 @@ static void OnPress_Reset()
 {
     PGenerator::Reset();
     HAL_TIM::Delay(100);
+    setCal.Load();
     set.Load(true);
 }
 
