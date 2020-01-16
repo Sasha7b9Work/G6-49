@@ -305,7 +305,7 @@ void DHandlers::CalibrationLoad(SimpleMessage *msg)
     
     int16 k = static_cast<int16>(msg->TakeHalfWord());
     
-    Calibrator::SetK(channel, signal, range, param, k);
+    *setCal.GetK(channel, signal, range, param) = k;
 }
 
 
@@ -318,7 +318,7 @@ void DHandlers::CalibrationSet(SimpleMessage *msg)
     
     int16 k = static_cast<int16>(msg->TakeHalfWord());
     
-    *setCal.GetK(channel, signal, range, param) = k;
+    Calibrator::SetK(channel, signal, range, param, k);
 }
 
 
