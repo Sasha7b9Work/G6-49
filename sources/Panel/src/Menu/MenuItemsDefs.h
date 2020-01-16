@@ -60,7 +60,11 @@ const PageBase name = { Item::Type::Page, 3, false, namePage, (const PageBase *)
 
 #define DEF_PAGE_4(name, title, hint,                                                                                                       \
     item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)                                               \
-static Item * items##name[] = {(Item *)reinterpret_cast<const Item *>(item1), (Item *)item2, (Item *)item3, (Item *)item4};                 \
+static Item * items##name[] = {                                                                                                             \
+    (Item *)reinterpret_cast<const Item *>(item1),                                                                                          \
+    (Item *)item2,                                                                                                                          \
+    (Item *)item3,                                                                                                                          \
+    (Item *)item4};                                                                                                                         \
 const PageBase name = { Item::Type::Page, 4, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                          \
     items##name, funcPress, funcDraw, funcOnKey};
 
