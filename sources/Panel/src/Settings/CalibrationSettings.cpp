@@ -48,3 +48,43 @@ CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &
 
     return *this;
 }
+
+
+static int16 *currentCAL = CalibrationSettings::GetK(0, 0, 0, 0);
+
+
+
+int16 *CalibrationSettings::GetK(int channel, int signal, int range, uint8 parameter)
+{
+    if(channel > 1)
+    {
+        channel = 1;
+    }
+
+    if(signal > 1)
+    {
+        signal = 1;
+    }
+
+    currentCAL = &setCal.cal[channel][signal][range][parameter];
+
+    return currentCAL;
+}
+
+
+void CalibrationSettings::ReduceK()
+{
+    if(*currentCAL > -1024)
+    {
+        *currentCAL = *currentCAL - 1;
+    }
+}
+
+
+void CalibrationSettings::IncreaseK()
+{
+    if(*currentCAL < 1024)
+    {
+        *currentCAL = *currentCAL + 1;
+    }
+}

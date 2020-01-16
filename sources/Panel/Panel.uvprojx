@@ -2251,16 +2251,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug\PageCalibration.cpp</FilePath>
             </File>
-            <File>
-              <FileName>StructCalibration.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\StructCalibration.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StructCalibration.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\StructCalibration.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

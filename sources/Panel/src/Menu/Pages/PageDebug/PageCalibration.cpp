@@ -2,8 +2,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
-#include "Menu/Pages/PageDebug/StructCalibration.h"
-#include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 #include "Utils/StringUtils.h"
 
 
@@ -18,22 +17,21 @@ static uint8 range = 0;
 static int16 *k = nullptr;
 
 
-void PageDebug::Calibartion::Init()
-{
-    k = StructCalibration::GetK(channel, signal, range, parameter);
-}
-
 /// Вызывается при изменении калибруемого параметра
 static void OnChange_Parameters(bool)
 {
-
+    k = setCal.GetK(channel, signal, range, parameter);
 }
 
+void PageDebug::Calibartion::Init()
+{
+    OnChange_Parameters(true);
+}
 
 /// Вызывается при изменении источника сигнал
 static void OnChange_Source(bool)
 {
-    k = StructCalibration::GetK(channel, signal, range, parameter);
+    k = setCal.GetK(channel, signal, range, parameter);
     OnChange_Parameters(true);
 }
 
@@ -80,13 +78,13 @@ DEF_CHOICE_4(cParameter,
 
 static void DrawPage()
 {
-    Painter::FillRegion(10, 10, 100, 100, Color::WHITE);
+    Painter::FillRegion(10, 10, 200, 50, Color::WHITE);
 
     char buffer[30];
 
     SU::Int2String(*k, true, 1, buffer);
 
-    Text::Draw(20, 20, buffer, Color::BLACK);
+    Text::DrawBigText(20, 20, 3, buffer, Color::BLACK);
 }
 
 
@@ -94,6 +92,18 @@ static bool FuncOnKeyPage(Key &key)
 {
     if(key.IsRotate())
     {
+        if(key.action == Key::Action::Down)
+        {
+            if(key.value == Key::RegLeft)
+            {
+                setCal.ReduceK();
+            }
+            else
+            {
+                setCal.IncreaseK();
+            }
+        }
+
         return true;
     }
 

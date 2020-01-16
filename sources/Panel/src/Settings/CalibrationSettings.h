@@ -45,6 +45,12 @@ struct CalibrationSettings
             int16   cal_DDS_Offset[Chan::Count];
             int16   cal_FREQ_Level_Trig;                        ///< Калибровочный коэффициенрт уровня синхронизации
             uint8   nu[2];
+
+#define NUM_CHAN       2
+#define NUM_SIGNALS    2
+#define NUM_RANGES     6
+#define NUM_PARAMETERS 4
+            int16 cal[NUM_CHAN][NUM_SIGNALS][NUM_RANGES][NUM_PARAMETERS];
         };
         uint8 unused[512];
     };
@@ -53,6 +59,12 @@ struct CalibrationSettings
     void Load();
 
     CalibrationSettings& operator =(const CalibrationSettings &);
+
+    static int16 *GetK(int channel, int signal, int range, uint8 parameter);
+    /// Уменьшить текущий к
+    void ReduceK();
+    /// Увеличить текущий к
+    void IncreaseK();
 };
 
 
