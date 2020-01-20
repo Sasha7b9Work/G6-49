@@ -2,9 +2,13 @@
 #include "Generator/Parameters.h"
 
 
-ParameterAmplitude::ParameterAmplitude(int minVolts, int maxVolts, int val) : Parameter()
+void Parameter::SetForm(Form *f)
 {
-    min = FloatValue(minVolts, 0);
-    max = FloatValue(maxVolts, 0);
-    value = FloatValue(val, 0);
+    form = f;
+}
+
+
+void ParameterComplex::SetForm(Form *f)
+{
+
 }

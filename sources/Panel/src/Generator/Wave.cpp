@@ -70,33 +70,6 @@ pString Register::Name() const
 }
 
 
-pString ParameterValue::Name() const
-{
-    static const pString nameParameter[ParameterValue::Count] =
-    {
-        "Частота",
-        "Период",
-        "Размах",
-        "Смещение",
-        "Длительность",
-        "Скважность",
-        "Фаза",
-        "Задержка",
-        "Вр нарастания",
-        "Вр спада",
-        "Вр пика",
-        "Коэфф заполн",
-        "Длительность",
-        "Период",
-        "Период пакета",
-        "Кол-во имп",
-        "     Выход ( ESC )"
-    };
-
-    return nameParameter[value];
-}
-
-
 Form *Wave::GetCurrentForm()
 {
     return forms[indexCurrentForm];
@@ -129,7 +102,7 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f)
 }
 
 
-Form::Form(TypeForm::E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), oldParams(nullptr), oldNumParams(0), oldCurrentParams(0)
+Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), oldParams(nullptr), oldNumParams(0), oldCurrentParams(0)
 {
     numParams = 0;
 
@@ -926,8 +899,8 @@ ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(C
 };
 
 
-ParameterValue::ParameterValue(int v) : ParameterBase(ParameterBase::Value), //-V730
-    value(static_cast<E>(v)), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
+ParameterValue::ParameterValue(E v) : ParameterBase(ParameterBase::Value), //-V730
+    value(v), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
 {
     std::memset(buffer, 0, NUM_DIGITS + 1);
 
@@ -938,8 +911,8 @@ ParameterValue::ParameterValue(int v) : ParameterBase(ParameterBase::Value), //-
 };
 
 
-ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(ParameterBase::Value),
-    value(static_cast<E>(v)), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
+ParameterValue::ParameterValue(E v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(ParameterBase::Value),
+    value(v), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
 {
     std::strcpy(buffer, buf);
 

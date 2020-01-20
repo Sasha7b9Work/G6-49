@@ -2,19 +2,40 @@
 #include "common/Common.h"
 
 
+class Form;
+
+
 class Parameter
 {
+public:
+    virtual pString Name() const = 0;
 
+    virtual void SetForm(Form *form);
+
+private:
+    /// Форма, для которой зада этот параметр
+    Form *form;
 };
 
 
-class ParameterAmplitude : public Parameter
+class ParameterValue : public Parameter
 {
 public:
-    ParameterAmplitude(int minVolts, int maxVolts, int value);
+    virtual pString Name() const override
+    {
+        return "";
+    }
+};
 
-private:
-    FloatValue min;
-    FloatValue max;
-    FloatValue value;
+
+class ParameterComplex : public Parameter
+{
+public:
+    virtual void SetForm(Form *form) override;
+};
+
+
+class ParameterChoice : public Parameter
+{
+
 };
