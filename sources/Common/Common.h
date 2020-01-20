@@ -2,6 +2,23 @@
 #include "defines.h"
 
 
+struct TypeForm
+{
+    enum E
+    {
+        Sine,           ///< Синус
+        RampPlus,       ///< Пила+
+        RampMinus,      ///< Пила-
+        Triangle,       ///< Треугольник
+        Meander,        ///< Меандр
+        Impulse,        ///< Импульсы
+        PacketImpuls,   ///< Пачка импульсов
+        Free,           ///< Произвольный сигнал
+        Count
+    };
+};
+
+
 struct FloatValue
 {
     explicit FloatValue(uint64 v) : value(v) {}

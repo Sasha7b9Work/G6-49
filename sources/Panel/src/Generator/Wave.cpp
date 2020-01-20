@@ -24,7 +24,7 @@ static uint8 formFlash[Chan::Count][SIZE_BUFFER];
 
 pString Form::Name() const
 {
-    static const pString names[Form::Count] =
+    static const pString names[TypeForm::Count] =
     {
         "—инус",
         "ѕила+",
@@ -129,7 +129,7 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f)
 }
 
 
-Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), oldParams(nullptr), oldNumParams(0), oldCurrentParams(0)
+Form::Form(TypeForm::E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), oldParams(nullptr), oldNumParams(0), oldCurrentParams(0)
 {
     numParams = 0;
 
@@ -156,7 +156,7 @@ Form::Form(E v, ParameterBase **parameters, Wave *w) : value(v), wave(w), params
         }
     }
 
-    if (v == Free)
+    if (v == TypeForm::Free)
     {
         std::memset(&formFlash[0][0], 127, SIZE_BUFFER * 2);
     }
@@ -198,7 +198,7 @@ Form *Wave::GetForm(int i)
 }
 
 
-Form *Wave::GetForm(Form::E form)
+Form *Wave::GetForm(TypeForm::E form)
 {
     for(int i = 0; i < numForms; i++)
     {
@@ -228,7 +228,7 @@ void Form::TuneGenerator(Chan::E ch)
 {
     PGenerator::SetFormWave(GetWave());
 
-    if(value == Form::Sine)
+    if(value == TypeForm::Sine)
     {
         if(CurrentParameter()->GetParent())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
         {
@@ -952,10 +952,10 @@ ParameterValue::ParameterValue(int v, float _min, float _max, pString buf, int8 
 
 bool Form::IsDDS() const
 {
-    return  (value == RampPlus) || 
-            (value == RampMinus) ||
-            (value == Triangle) ||
-            (value == Free);
+    return  (value == TypeForm::RampPlus) || 
+            (value == TypeForm::RampMinus) ||
+            (value == TypeForm::Triangle) ||
+            (value == TypeForm::Free);
 }
 
 
@@ -993,7 +993,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
 
     typedef void(*pFuncIIII)(Chan::E, int, int, int, int);
 
-    static const pFuncIIII funcs[Form::Count] =
+    static const pFuncIIII funcs[TypeForm::Count] =
     {
         DrawSine,
         DrawRampPlus,

@@ -164,7 +164,7 @@ static void HintChannel(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const formNames[Form::Count + 1] =
+static pCHAR const formNames[TypeForm::Count + 1] =
 {
     " SINE",
     " RAMP+",
@@ -181,7 +181,7 @@ static pCHAR FuncForm(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(formNames[*CURRENT_FORM]));
 
-    SCPI_PROCESS_ARRAY(formNames, PageSignals::SetForm(static_cast<Form::E>(i)));
+    SCPI_PROCESS_ARRAY(formNames, PageSignals::SetForm(static_cast<TypeForm::E>(i)));
 }
 
 

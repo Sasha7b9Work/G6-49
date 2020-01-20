@@ -37,7 +37,7 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
     enabled[ch] = enable;
     WriteCFR1(ch);
 
-    FPGA::SetWaveForm(ch, Form::Sine);
+    FPGA::SetWaveForm(ch, TypeForm::Sine);
 }
 
 
@@ -64,7 +64,7 @@ void AD9952::SetPhase(Chan::E ch, FloatValue phase)
 
 void AD9952::SetAmplitude(Chan::E ch, FloatValue amplitude)
 {
-    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * Calibrator::GetAmplitudeK(ch, Form::Sine, amplitude.ToFloat());
+    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * Calibrator::GetAmplitudeK(ch, TypeForm::Sine, amplitude.ToFloat());
 
     WriteRegister(ch, Register::ASF);
 }

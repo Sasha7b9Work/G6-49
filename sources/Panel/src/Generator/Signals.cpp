@@ -34,7 +34,7 @@ static ParameterBase *params_SineA[] =
     0
 };
 
-static Form formSineA(Form::Sine, params_SineA, &waves[Chan::A]);
+static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 
 static ParameterValue  param_RampPlusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000",  0, Order::Kilo);
@@ -51,7 +51,7 @@ static ParameterBase *params_RampPlusA[] =
     0
 };
 
-static Form formRampPlusA(Form::RampPlus, params_RampPlusA, &waves[Chan::A]);
+static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A]);
 
 
 static ParameterValue  param_RampMinusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -68,7 +68,7 @@ static ParameterBase *params_RampMinusA[] =
     0
 };
 
-static Form formRampMinusA(Form::RampMinus, params_RampMinusA, &waves[Chan::A]);
+static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::A]);
 
 
 static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -85,7 +85,7 @@ static ParameterBase *params_TriangleA[] =
     0
 };
 
-static Form formTriangleA(Form::Triangle, params_TriangleA, &waves[Chan::A]);
+static Form formTriangleA(TypeForm::Triangle, params_TriangleA, &waves[Chan::A]);
 
 
 static ParameterValue  param_FreeA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -104,7 +104,7 @@ static ParameterBase *params_FreeA[] =
     0
 };
 
-static Form formFreeA(Form::Free, params_FreeA, &waves[Chan::A]);
+static Form formFreeA(TypeForm::Free, params_FreeA, &waves[Chan::A]);
 
 
 
@@ -120,7 +120,7 @@ static ParameterBase *params_MeanderA[] =
     0
 };
 
-static Form formMeanderA(Form::Meander, params_MeanderA, &waves[Chan::A]);
+static Form formMeanderA(TypeForm::Meander, params_MeanderA, &waves[Chan::A]);
 
 
 
@@ -160,7 +160,7 @@ static ParameterBase *params_ImpulseA[] =
     0
 };
 
-static Form formImpulseA(Form::Impulse, params_ImpulseA, &waves[Chan::A]);
+static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
 
@@ -186,7 +186,7 @@ static ParameterBase *params_PacketA[] =
     0
 };
 
-static Form formPacketImpulseA(Form::PacketImpuls, params_PacketA, &waves[Chan::A]);
+static Form formPacketImpulseA(TypeForm::PacketImpuls, params_PacketA, &waves[Chan::A]);
 
 
 
@@ -237,7 +237,7 @@ static ParameterBase *params_SineB[] =
     0
 };
 
-static Form formSineB(Form::Sine, params_SineB, &waves[Chan::B]);
+static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 
 
 static ParameterValue  param_RampPlusB_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -254,7 +254,7 @@ static ParameterBase *params_RampPlusB[] =
     0
 };
 
-static Form formRampPlusB(Form::RampPlus, params_RampPlusB, &waves[Chan::B]);
+static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B]);
 
 
 static ParameterValue  param_RampMinusB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -271,7 +271,7 @@ static ParameterBase *params_RampMinusB[] =
     0
 };
 
-static Form formRampMinusB(Form::RampMinus, params_RampMinusB, &waves[Chan::B]);
+static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::B]);
 
 
 static ParameterValue  param_TriangleB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -288,7 +288,7 @@ static ParameterBase *params_TriangleB[] =
     0
 };
 
-static Form formTriangleB(Form::Triangle, params_TriangleB, &waves[Chan::B]);
+static Form formTriangleB(TypeForm::Triangle, params_TriangleB, &waves[Chan::B]);
 
 
 static ParameterValue  param_FreeB_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -307,7 +307,7 @@ static ParameterBase *params_FreeB[] =
     0
 };
 
-static Form formFreeB(Form::Free, params_FreeB, &waves[Chan::B]);
+static Form formFreeB(TypeForm::Free, params_FreeB, &waves[Chan::B]);
 
 
 static ParameterValue param_MeanderB_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
@@ -322,7 +322,7 @@ static ParameterBase *params_MeanderB[] =
     0
 };
 
-static Form formMeanderB(Form::Meander, params_MeanderB, &waves[Chan::B]);
+static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 
@@ -344,7 +344,7 @@ static ParameterBase *params_ImpulseB[] =
     0
 };
 
-static Form formImpulseB(Form::Impulse, params_ImpulseB, &waves[Chan::B]);
+static Form formImpulseB(TypeForm::Impulse, params_ImpulseB, &waves[Chan::B]);
 
 
 

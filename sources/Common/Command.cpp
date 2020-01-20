@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Command.h"
 #include "structs.h"
-#include "Generator/Wave.h"
 #include "Utils/StringUtils.h"
 #include <cstdio>
 #include <cstring>
@@ -85,10 +84,6 @@ pString Command::Trace(const uint8 *buffer) const
             std::strcat(result, buffer[2] ? "true" : "false");
             break;
         case SetFormWave:
-            {
-                Form form(buffer[2]);
-                std::strcat(result, form.Name());
-            }
             break;
         case SetFrequency:
             std::strcat(result, SU::Buffer2FloatString(buffer + 2));

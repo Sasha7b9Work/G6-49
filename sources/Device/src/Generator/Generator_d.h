@@ -15,7 +15,7 @@ struct DGenerator
 
     static void EnableChannel(Chan::E ch, bool enable);
 
-    static void SetFormWave(Chan::E ch, Form::E form);
+    static void SetFormWave(Chan::E ch, TypeForm::E form);
 
     static void SetOffset(Chan::E ch, FloatValue offset);
 

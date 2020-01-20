@@ -15,7 +15,7 @@ public:
 
     static void OnPress_Form(bool);
 
-    static void SetForm(Form::E form);
+    static void SetForm(TypeForm::E form);
 
     static Page *self;
 };

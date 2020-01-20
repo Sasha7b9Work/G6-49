@@ -42,7 +42,10 @@ inline void EmptyFuncVV() {};
 
 #else
 
-#define nullptr NULL
+#ifndef NULL
+#define NULL 0
+#endif
+#define nullptr NULL  
 
 #endif
 

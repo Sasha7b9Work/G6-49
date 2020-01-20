@@ -103,10 +103,10 @@ void AD5697::SetFreqLevel(float level)
 }
 
 
-uint8 AD5697::CreateCommandByte(ParameterValue param)
-{
-    return (uint8)(BIN_U8(00010000) | (param.Is(ParameterValue::Amplitude) ? 0x01 : 0x08));
-}
+//uint8 AD5697::CreateCommandByte(ParameterValue param)
+//{
+//    return (uint8)(BIN_U8(00010000) | (param.Is(ParameterValue::Amplitude) ? 0x01 : 0x08));
+//}
 
 
 

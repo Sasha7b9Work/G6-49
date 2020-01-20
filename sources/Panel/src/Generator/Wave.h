@@ -289,32 +289,21 @@ class Form
     friend class Wave;
 
 public:
-    enum E
-    {
-        Sine,           ///< Синус
-        RampPlus,       ///< Пила+
-        RampMinus,      ///< Пила-
-        Triangle,       ///< Треугольник
-        Meander,        ///< Меандр
-        Impulse,        ///< Импульсы
-        PacketImpuls,   ///< Пачка импульсов
-        Free,           ///< Произвольный сигнал
-        Count
-    } value;
+    TypeForm::E value;
 
-    Form(E v = Count)
+    Form(TypeForm::E v = TypeForm::Count)
     {
         Init(v);
     };
 
     Form(uint8 v)
     {
-        Init(static_cast<E>(v));
+        Init(static_cast<TypeForm::E>(v));
     };
 
-    Form(E v, ParameterBase **param, Wave *w);
+    Form(TypeForm::E v, ParameterBase **param, Wave *w);
 
-    void Init(E v)
+    void Init(TypeForm::E v)
     {
         value = v;
         wave = 0;
@@ -339,7 +328,7 @@ public:
     /// Настраивает генератор в соответствии с установленными параметрами
     void TuneGenerator(Chan::E ch);
     /// Возвращает true, если тип формы сигнала соответствует e
-    bool Is(Form::E e) const { return e == value; };
+    bool Is(TypeForm::E e) const { return e == value; };
     /// Возвращает true, если форма сигнала реализуется с помощью ПЛИС
     bool IsDDS() const;
     /// Возвращает указатель на родительский Wave
@@ -361,7 +350,7 @@ public:
     /// Получить размах сигнала
     float GetAmplitude();
 
-    operator E() { return value; }
+    operator TypeForm::E() { return value; }
 
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
     ParameterValue *FindParameter(ParameterValue::E p);
@@ -424,7 +413,7 @@ public:
 
     Form *GetForm(int i);
 
-    Form *GetForm(Form::E form);
+    Form *GetForm(TypeForm::E form);
 
     Chan::E GetChannel() const { return channel; };
     /// Возвращает true, если установлен ручной режим запуска

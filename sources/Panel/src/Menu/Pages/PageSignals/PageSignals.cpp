@@ -31,14 +31,14 @@ DEF_CHOICE_8( cFormA,                                                           
     "ФОРМА",
     "Выбор формы сигнала."
     ,
-    FORM_RU(Form::Sine),         "Синус",
-    FORM_RU(Form::RampPlus),     "Нарастающая пила",
-    FORM_RU(Form::RampMinus),    "Убывающая пила",
-    FORM_RU(Form::Triangle),     "Треугольник",
-    FORM_RU(Form::Meander),      "Меандр",
-    FORM_RU(Form::Impulse),      "Треугольник",
-    FORM_RU(Form::PacketImpuls), "Пакеты",
-    FORM_RU(Form::Free),         "Произвольный",
+    FORM_RU(TypeForm::Sine),         "Синус",
+    FORM_RU(TypeForm::RampPlus),     "Нарастающая пила",
+    FORM_RU(TypeForm::RampMinus),    "Убывающая пила",
+    FORM_RU(TypeForm::Triangle),     "Треугольник",
+    FORM_RU(TypeForm::Meander),      "Меандр",
+    FORM_RU(TypeForm::Impulse),      "Треугольник",
+    FORM_RU(TypeForm::PacketImpuls), "Пакеты",
+    FORM_RU(TypeForm::Free),         "Произвольный",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -46,13 +46,13 @@ DEF_CHOICE_7( cFormB,                                                           
     "ФОРМА",
     "Выбор формы сигнала."
     ,
-    FORM_RU(Form::Sine),      "Синус",
-    FORM_RU(Form::RampPlus),  "Нарастающая пила",
-    FORM_RU(Form::RampMinus), "Убывающая пила",
-    FORM_RU(Form::Triangle),  "Треугольник",
-    FORM_RU(Form::Meander),   "Меандр",
-    FORM_RU(Form::Impulse),   "Треугольник",
-    FORM_RU(Form::Free),      "Произвольный",
+    FORM_RU(TypeForm::Sine),      "Синус",
+    FORM_RU(TypeForm::RampPlus),  "Нарастающая пила",
+    FORM_RU(TypeForm::RampMinus), "Убывающая пила",
+    FORM_RU(TypeForm::Triangle),  "Треугольник",
+    FORM_RU(TypeForm::Meander),   "Меандр",
+    FORM_RU(TypeForm::Impulse),   "Треугольник",
+    FORM_RU(TypeForm::Free),      "Произвольный",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
@@ -124,9 +124,9 @@ void PageSignals::OnPress_Form(bool)
 }
 
 
-void PageSignals::SetForm(Form::E form)
+void PageSignals::SetForm(TypeForm::E form)
 {
-    if(form == Form::Free && CURRENT_CHANNEL_IS_B)
+    if(form == TypeForm::Free && CURRENT_CHANNEL_IS_B)
     {
         return;
     }

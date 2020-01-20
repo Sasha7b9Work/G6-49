@@ -21,13 +21,13 @@ struct Filtr
         HAL_PIO::Init(HPort::_F, HPin::_4, HMode::Output_PP, HPull::No);
     }
 
-    static void Tune(Chan::E ch, Form::E form)
+    static void Tune(Chan::E ch, TypeForm::E form)
     {
-        if (form == Form::Sine)
+        if (form == TypeForm::Sine)
         {
             SetType(ch, Type::Chebyshev);
         }
-        else if(form == Form::Impulse || form == Form::PacketImpuls || form == Form::Meander)
+        else if(form == TypeForm::Impulse || form == TypeForm::PacketImpuls || form == TypeForm::Meander)
         {
             SetType(ch, Type::None);
         }
@@ -112,13 +112,13 @@ void DGenerator::EnableChannel(Chan::E ch, bool enable)
 
 
 
-void DGenerator::SetFormWave(Chan::E ch, Form::E form)
+void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 {
     Filtr::Tune(ch, form);
 
-    if(ch < Chan::Count && form < Form::Count)
+    if(ch < Chan::Count && form < TypeForm::Count)
     {
-        waveIsSine = (form == Form::Sine);
+        waveIsSine = (form == TypeForm::Sine);
 
         FPGA::SetWaveForm(ch, form);
     }

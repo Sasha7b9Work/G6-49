@@ -10,7 +10,7 @@ struct FPGA
 
     static void Init();
 
-    static void SetWaveForm(Chan::E ch, Form::E form);
+    static void SetWaveForm(Chan::E ch, TypeForm::E form);
 
     static void SetFrequency(Chan::E ch, FloatValue frequency);
 

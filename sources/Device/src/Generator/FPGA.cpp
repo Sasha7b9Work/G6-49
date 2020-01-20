@@ -62,11 +62,11 @@ void FPGA::Init()
 }
 
 
-void FPGA::SetWaveForm(Chan::E ch, Form::E form)
+void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
 {
     typedef void(*pFuncFpgaVU8)(Chan::E);
 
-    static const pFuncFpgaVU8 funcs[Form::Count] =
+    static const pFuncFpgaVU8 funcs[TypeForm::Count] =
     {
         SetModeSine,            ///< Здесь включается режим амплитудной манипуляции
         SetModeRampPlus,

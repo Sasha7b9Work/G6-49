@@ -10,11 +10,11 @@ static void SetFormWave(Chan::E ch, uint8 signal)
 {
     if(signal == 0)
     {
-        DGenerator::SetFormWave(ch, Form::Sine);
+        DGenerator::SetFormWave(ch, TypeForm::Sine);
     }
     else
     {
-        DGenerator::SetFormWave(ch, Form::Meander);
+        DGenerator::SetFormWave(ch, TypeForm::Meander);
     }
 }
 
@@ -100,11 +100,11 @@ uint8 Calibrator::CalculateRange(float amplitude)
 }
 
 
-float Calibrator::GetAmplitudeK(Chan::E ch, Form::E form, float amplitude)
+float Calibrator::GetAmplitudeK(Chan::E ch, TypeForm::E form, float amplitude)
 {
     uint8 range = CalculateRange(amplitude);
 
-    int16 k = *setCal.GetK(static_cast<uint8>(ch), form == Form::Sine ? 0U : 1U, range, 0U);
+    int16 k = *setCal.GetK(static_cast<uint8>(ch), form == TypeForm::Sine ? 0U : 1U, range, 0U);
 
     return 1.0F + k / 1000.0F;
 }

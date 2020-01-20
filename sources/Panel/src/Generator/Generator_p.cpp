@@ -64,7 +64,7 @@ void PGenerator::SetFormWave(const Wave *w)
 }
 
 
-void PGenerator::SetFormWave(Chan::E ch, Form::E form)
+void PGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 {
     /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
@@ -78,7 +78,7 @@ void PGenerator::LoadFormDDS(Form *form)
 
     switch (form->value)
     {
-        case Form::RampPlus:
+        case TypeForm::RampPlus:
             {
                 float step = 2.0F / DDS_NUM_POINTS;
 
@@ -90,7 +90,7 @@ void PGenerator::LoadFormDDS(Form *form)
                 TransformDataToCodeAndTransmit(data, form);
             }
             break;
-        case Form::RampMinus:
+        case TypeForm::RampMinus:
             {
                 float step = 2.0F / DDS_NUM_POINTS;
 
@@ -102,7 +102,7 @@ void PGenerator::LoadFormDDS(Form *form)
                 TransformDataToCodeAndTransmit(data, form);
             }
             break;
-        case Form::Triangle:
+        case TypeForm::Triangle:
             {
                 float step = 2.0F / (DDS_NUM_POINTS / 2);
 
@@ -119,12 +119,12 @@ void PGenerator::LoadFormDDS(Form *form)
                 TransformDataToCodeAndTransmit(data, form);
             }
             break;
-        case Form::Meander:
-        case Form::Sine:
-        case Form::Impulse:
-        case Form::PacketImpuls:
-        case Form::Free:
-        case Form::Count:
+        case TypeForm::Meander:
+        case TypeForm::Sine:
+        case TypeForm::Impulse:
+        case TypeForm::PacketImpuls:
+        case TypeForm::Free:
+        case TypeForm::Count:
             break;
     }
 }

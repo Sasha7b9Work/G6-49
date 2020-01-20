@@ -119,9 +119,7 @@ void DHandlers::SetFormWave(SimpleMessage *msg)
 {
     Chan ch(msg->TakeByte());
 
-    Form form(msg->TakeByte()); //-V656
-
-    DGenerator::SetFormWave(ch, form);
+    DGenerator::SetFormWave(ch, static_cast<TypeForm::E>(msg->TakeByte()));
 }
 
 

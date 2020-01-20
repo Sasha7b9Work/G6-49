@@ -1,4 +1,5 @@
 #pragma once
+#include "Common.h"
 #include "Command.h"
 #include "defines.h"
 #include "GeneratorSettingsTypes.h"
@@ -23,5 +24,5 @@ private:
 
     static StructPIN PinLDAC(Chan::E ch);
 
-    static uint8 CreateCommandByte(ParameterValue param);
+//    static uint8 CreateCommandByte(ParameterValue param);
 };

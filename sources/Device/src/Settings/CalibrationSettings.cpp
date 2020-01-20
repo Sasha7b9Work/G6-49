@@ -1,4 +1,5 @@
 #include "CalibrationSettings.h"
+#include <cstring>
 
 
 static const CalibrationSettings defSet =

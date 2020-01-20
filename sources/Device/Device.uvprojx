@@ -1256,16 +1256,6 @@
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
-            <File>
-              <FileName>Wave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Wave.h</FilePath>
-            </File>
-            <File>
-              <FileName>Wave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Common\Wave.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

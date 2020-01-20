@@ -94,7 +94,7 @@ void PageDebug::_Calibration::OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E ko
         for (int8 i = 0; i < WAVE(ch).NumberOfForms(); i++)
         {
             Form *form = WAVE(ch).GetForm(i);
-            if (form->Is(Form::Meander))
+            if (form->Is(TypeForm::Meander))
             {
                 WAVE(ch).SetIndexForm(i);
                 PGenerator::TuneChannel(ch);
