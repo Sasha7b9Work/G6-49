@@ -22,9 +22,9 @@ struct TypeForm
 struct FloatValue
 {
     /// «начение, выраженное в единицах (units) и наноединицах (nanoUnits)
-    explicit FloatValue(uint units, uint nanoUnits);
+    explicit FloatValue(int units, uint nanoUnits);
 
-    explicit FloatValue(uint64 v) : value(v) {}
+    explicit FloatValue(uint64 v = 0) : value(v) {}
 
     explicit FloatValue(float v);
 

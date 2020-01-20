@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Signals.h"
 #include "Display/Painter.h"
+#include "Generator/Parameters.h"
 #include "Menu/Pages/Addition/PageLoadForm.h"
 #include "Menu/Pages/PageSignals/PageSignals.h"
 
@@ -22,6 +23,7 @@ static ParameterBase *params_SineModulationA[] =
 
 static ParameterValue   param_SineA_Frequency   (ParameterValue::Frequency,      0.1F,  100e6F, "10000", 0, Order::Kilo);
 static ParameterValue   param_SineA_Amplitude   (ParameterValue::Amplitude,      0.0F,  10.0F,  "50000", 0, Order::One);
+static ParameterAmplitude paramAmplitudeSineA(0, 10, 10);
 static ParameterValue   param_SineA_Offset      (ParameterValue::Offset,         0.0F,  10.0F,  "50000", 0, Order::One);
 static ParameterComplex param_SineA_Manipulation(ParameterComplex::Manipulation, params_SineModulationA);
 

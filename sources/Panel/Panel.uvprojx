@@ -1936,6 +1936,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Wave.h</FilePath>
             </File>
+            <File>
+              <FileName>Parameters.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Parameters.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parameters.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Parameters.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
