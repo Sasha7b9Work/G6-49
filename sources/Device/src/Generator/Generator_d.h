@@ -3,7 +3,7 @@
 #include "AD9952.h"
 #include "AD5697.h"
 #include "FPGA.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "Settings/Settings.h"
 
 

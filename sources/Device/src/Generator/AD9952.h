@@ -1,6 +1,6 @@
 #pragma once
 #include "defines.h"
-#include "Common.h"
+#include "common/Common.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "GeneratorSettingsTypes.h"

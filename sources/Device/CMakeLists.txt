@@ -6,7 +6,7 @@ include_directories(../common/_VS_KEIL
                     ../common/_VS_KEIL/CMSIS
                     ../common/_VS_KEIL/std_includes
                     src
-                    ../common
+                    ..
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc

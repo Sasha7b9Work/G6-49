@@ -7,7 +7,7 @@
 #include "FreqMeter/FreqMeter_d.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
-#include "CommonTypes.h"
+#include "common/CommonTypes.h"
 
 
 struct Filtr

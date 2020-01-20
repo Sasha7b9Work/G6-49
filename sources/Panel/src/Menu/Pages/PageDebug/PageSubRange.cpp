@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Message.h"
+#include "common/Message.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
 #include "Settings/Settings.h"
 

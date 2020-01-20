@@ -1,8 +1,8 @@
 #pragma once
-#include "Command.h"
-#include "CommonTypes.h"
+#include "common/Command.h"
+#include "common/CommonTypes.h"
 #include "Menu/Pages/PageSignals/PageSignals.h"
-#include "Message.h"
+#include "common/Message.h"
 
 
 

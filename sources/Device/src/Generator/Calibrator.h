@@ -1,6 +1,6 @@
 #pragma once
-#include "Common.h"
-#include "CommonTypes.h"
+#include "common/Common.h"
+#include "common/CommonTypes.h"
 
 
 struct Calibrator

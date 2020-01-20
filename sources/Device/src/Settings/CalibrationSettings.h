@@ -1,6 +1,6 @@
 #pragma once
-#include "Command.h"
-#include "CommonTypes.h"
+#include "common/Command.h"
+#include "common/CommonTypes.h"
 
 
 

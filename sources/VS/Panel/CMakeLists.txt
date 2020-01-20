@@ -6,7 +6,7 @@ include_directories(src
                     ../../Panel/src
                     ../../Panel/src/libs/HAL
                     ../../Panel/src/Hardware
-                    ../../common
+                    ../..
                     ../../common/_VS_GUI
                     ../../common/_VS_GUI/CMSIS
                     ../../common/_VS_GUI/HAL

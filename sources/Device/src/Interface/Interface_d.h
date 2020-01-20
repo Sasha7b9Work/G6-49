@@ -1,6 +1,6 @@
 #pragma once
-#include "Command.h"
-#include "Message.h"
+#include "common/Command.h"
+#include "common/Message.h"
 #include "Utils/Queue.h"
 
 

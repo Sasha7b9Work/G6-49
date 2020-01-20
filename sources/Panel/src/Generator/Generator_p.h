@@ -1,7 +1,6 @@
 #pragma once
-#include "Settings/SettingsTypes.h"
 #include "Generator/Wave.h"
-#include "Command.h"
+#include "common/Command.h"
 
 
 #define START_MODE(ch)          (set.fpga_startMode[ch])

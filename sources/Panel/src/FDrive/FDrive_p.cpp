@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "FDrive_p.h"
 #include "Items.h"
 #include "File.h"

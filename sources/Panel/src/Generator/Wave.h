@@ -1,6 +1,6 @@
 #pragma once
 #include "defines.h"
-#include "Common.h"
+#include "common/Common.h"
 #include "Settings/SettingsTypes.h"
 #include <cstring>
 #include <limits>

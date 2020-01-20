@@ -1,6 +1,6 @@
 #pragma once
-#include "Common.h"
-#include "Command.h"
+#include "common/Common.h"
+#include "common/Command.h"
 
 
 struct Settings

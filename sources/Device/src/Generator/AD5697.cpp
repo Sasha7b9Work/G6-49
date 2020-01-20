@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "AD5697.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"

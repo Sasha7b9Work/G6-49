@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "File.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "Display/Painter.h"
 #include "Generator/Signals.h"
 #include "Interface/Interface_p.h"

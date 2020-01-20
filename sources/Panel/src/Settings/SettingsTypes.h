@@ -1,7 +1,6 @@
 #pragma once
 #include "defines.h"
-#include "CommonTypes.h"
-
+#include "common/CommonTypes.h"
 
 
 struct SizeByte

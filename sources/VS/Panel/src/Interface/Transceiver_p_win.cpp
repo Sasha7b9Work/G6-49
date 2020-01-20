@@ -1,6 +1,5 @@
 #include "defines.h"
-#include "Transceiver.h"
-
+#include "common/Transceiver.h"
 
 
 void Transceiver::Transmit(SimpleMessage *)

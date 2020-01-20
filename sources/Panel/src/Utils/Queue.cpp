@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Message.h"
+#include "common/Message.h"
 #include "Interface/Interface_p.h"
 #include "Utils/Queue.h"
 

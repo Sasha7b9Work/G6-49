@@ -3,20 +3,11 @@
 #include "Display/Display.h"
 #include "Keyboard/Controls.h"
 #include "MenuItemsDefs.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "Utils/String.h"
 
 
-
-
-/** @addtogroup Menu
- *  @{
- *  @defgroup MenuItems Menu Items
- *  @{
- */
-
 typedef bool (*pFuncBKey)(Key&);
-
 
 
 /// Общая часть для всех типов элементов меню
@@ -500,7 +491,3 @@ public:
 typedef void * pVOID;
 #define MAX_NUM_ITEMS_IN_PAGE 15
 typedef pVOID arrayItems[MAX_NUM_ITEMS_IN_PAGE];
-
-
-/** @}  @}
- */

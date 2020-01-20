@@ -1,9 +1,10 @@
 #pragma once
 #include "defines.h"
-#include "SettingsTypes.h"
+#include "common/CommonTypes.h"
 #include "Menu/MenuItems.h"
 #include "FreqMeter/FreqMeter_p.h"
 #include "Generator/Generator_p.h"
+#include "Settings/SettingsTypes.h"
 
 
 #ifdef WIN32

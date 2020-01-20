@@ -5,7 +5,7 @@ project (Panel)
 include_directories( src
                      src/libs/HAL
                      src/Hardware
-                     ../common
+                     ..
                      ../common/_VS_KEIL/CMSIS
 #                     ../common/_VS/HAL
                      ../common/_VS/std_includes

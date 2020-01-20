@@ -1,6 +1,6 @@
 #pragma once
 #include "Generator/Generator_d.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "GeneratorSettingsTypes.h"
 
 

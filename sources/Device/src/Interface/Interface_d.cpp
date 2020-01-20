@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
-#include "Message.h"
-#include "Transceiver.h"
+#include "common/Message.h"
+#include "common/Transceiver.h"
 #include "Handlers_d.h"
 #include "Interface_d.h"
 #include "FDrive/FDrive_d.h"
@@ -15,7 +15,7 @@
 #include "Utils/Debug.h"
 #include "Utils/Queue.h"
 #include "Utils/StringUtils.h"
-#include "Command.h"
+#include "common/Command.h"
 #include "structs.h"
 #include <cstdlib>
 

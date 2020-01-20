@@ -1,4 +1,4 @@
-#include "Command.h"
+#include "common/Command.h"
 #include "defines.h"
 #include "Log.h"
 #include "Display/Painter.h"

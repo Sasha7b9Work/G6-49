@@ -2,7 +2,6 @@
 #include "DisplayTypes.h"
 #include "defines.h"
 #include "Keyboard/Controls.h"
-#include "Settings/SettingsTypes.h"
 
 
 #define DISPLAY_SHOW_WARNING(warn)

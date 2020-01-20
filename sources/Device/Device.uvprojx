@@ -337,7 +337,7 @@
               <MiscControls>--cpp</MiscControls>
               <Define>USE_HAL_DRIVER, DEBUG, STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\common;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;.\src\libs\FatFS;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;.\src\libs\USBH;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;.\src\libs\USBD;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc</IncludePath>
+              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;.\src\libs\FatFS;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;.\src\libs\USBH;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;.\src\libs\USBD;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\sources</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
