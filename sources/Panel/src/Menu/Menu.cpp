@@ -70,7 +70,7 @@ void Menu::Update()
 
 void Menu::ProcessContorl(Key &control)
 {
-    if(ProcessOutputs(control))
+    if(ProcessOutputs(control))                     // Обработка включения/отключения каналов
     {
     }
     else if (GetOpenedItem())
