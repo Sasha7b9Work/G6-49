@@ -124,7 +124,11 @@ void AD9952::WritePOW(Chan::E ch)
 
 void AD9952::WriteASF(Chan::E ch)
 {
-    uint value = ((static_cast<uint>((setDDS.ad9952[ch].amplitude / 5.0F) * ((1 << 7) - 1))) << 7) / 2;
+    float amplitude = setDDS.ad9952[ch].amplitude;
+
+    // uint value = ((static_cast<uint>((amplitude / 5.0F) * ((1 << 7) - 1))) << 7) / 2;    Первоначальный неправильный расчёт
+    uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);
+    
     Bit::Set(value, 14);  // \ Это биты множителя скорости
     Bit::Set(value, 15);  // / нарастания фронта 
     WriteToHardware(ch, Register::ASF, value);
