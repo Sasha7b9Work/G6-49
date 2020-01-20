@@ -12,6 +12,13 @@
 #endif
 
 
+FloatValue::FloatValue(uint units, uint nanoUnits)
+{
+    value = units;
+    value *= 1000 * 1000 * 1000;
+    value += nanoUnits;
+}
+
 
 FloatValue::FloatValue(float v)
 {
@@ -67,7 +74,7 @@ void FloatValue::SetSign(int sign)
 {
     if (sign > 0)
     {
-        value &= 0x8000000000000000U;       /// \todo как это может работать?
+        value &= 0x7FFFFFFFFFFFFFFFU;       /// \todo как это может работать?
     }
     else
     {
