@@ -3,7 +3,6 @@
 #include "Log.h"
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
-#include "Display/InputWindow.h"
 #include "Display/Symbols.h"
 #include "Generator_p.h"
 #include "Signals.h"
@@ -116,17 +115,7 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
 
     for(int i = 0; i < numParams; i++)
     {
-        params[i]->form = this;
-
-        if(params[i]->IsComplex())
-        {
-            ParameterComplex *complex = reinterpret_cast<ParameterComplex *>(params[i]);
-
-            for(int j = 0; j < complex->numParams; j++)
-            {
-                complex->params[j]->form = this;
-            }
-        }
+        params[i]->SetForm(this);
     }
 
     if (v == TypeForm::Free)
@@ -136,7 +125,7 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
 }
 
 
-ParameterBase *Form::CurrentParameter() const
+Parameter *Form::CurrentParameter() const
 {
     return params[currentParam];
 }
@@ -148,7 +137,7 @@ int Form::NumParameters() const
 }
 
 
-ParameterBase *Form::GetParameter(int i)
+Parameter *Form::GetParameter(int i)
 {
     if(i < numParams)
     {
@@ -255,22 +244,26 @@ void Form::TuneGenerator(Chan::E ch)
 }
 
 
-ParameterValue *Form::FindParameter(ParameterValue::E p)
+Parameter *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
-        ParameterBase *param = params[i];
+        Parameter *param = params[i];
 
-        if(param->IsValue() && (static_cast<ParameterValue *>(param))->value == p)
+        if(param->IsValue())
         {
-            return reinterpret_cast<ParameterValue *>(param);
+            ParameterValue *parameter = static_cast<ParameterValue *>(param);
+
+            if (parameter->Type() == p)
+            {
+                return parameter;
+            }
         }
-
-        if(param->IsComplex())
+        else if(param->IsComplex())
         {
-            ParameterComplex *complex = reinterpret_cast<ParameterComplex *>(param);
+            ParameterComplex *parameter = static_cast<ParameterComplex *>(param);
 
-            ParameterValue *val = complex->FindParameter(p);
+            ParameterValue *val = parameter->FindParameter(p);
 
             if(val)
             {
@@ -283,14 +276,20 @@ ParameterValue *Form::FindParameter(ParameterValue::E p)
 }
 
 
-ParameterChoice *Form::FindParameter(ParameterChoice::E p)
+Parameter *Form::FindParameter(ParameterChoice::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
-        ParameterBase *param = params[i];
-        if(param->IsChoice() && (static_cast<ParameterChoice *>(param))->value == p)
+        Parameter *param = params[i];
+
+        if(param->IsChoice())
         {
-            return reinterpret_cast<ParameterChoice *>(param);
+            ParameterChoice *parameter = static_cast<ParameterChoice *>(param);
+
+            if (parameter->Value() == p)
+            {
+                return parameter;
+            }
         }
         
         if(param->IsComplex())
@@ -305,6 +304,7 @@ ParameterChoice *Form::FindParameter(ParameterChoice::E p)
             }
         }
     }
+
     return nullptr;
 }
 
@@ -313,11 +313,16 @@ ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
-        ParameterBase *param = params[i];
+        Parameter *param = params[i];
 
-        if(param->IsChoice() && (static_cast<ParameterChoice *>(param))->value == p)
+        if(param->IsChoice())
         {
-            return reinterpret_cast<ParameterChoice *>(param);
+            ParameterChoice *parameter = static_cast<ParameterChoice *>(param);
+
+            if (parameter->Value() == p)
+            {
+                return parameter;
+            }
         }
     }
 
@@ -329,11 +334,16 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
-        ParameterBase *param = params[i];
+        Parameter *param = params[i];
 
-        if(param->IsValue() && (static_cast<ParameterValue *>(param))->value == p)
+        if(param->IsValue())
         {
-            return reinterpret_cast<ParameterValue *>(param);
+            ParameterValue *parameter = static_cast<ParameterValue *>(param);
+
+            if (parameter->Type() == p)
+            {
+                return parameter;
+            }
         }
     }
 
@@ -343,20 +353,22 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
 
 void Form::SendParameterToGenerator(ParameterValue::E p)
 {
-    ParameterBase *param = FindParameter(p);
+    Parameter *param = FindParameter(p);
+
     if (param)
     {
-        PGenerator::SetParameter(static_cast<ParameterValue *>(param));
+        PGenerator::SetParameter(param);
     }
 }
 
 
 void Form::SendParameterToGenerator(ParameterChoice::E p)
 {
-    ParameterBase *param = FindParameter(p);
+    Parameter *param = FindParameter(p);
+
     if(param)
     {
-        PGenerator::SetParameter(static_cast<ParameterChoice *>(param));
+        PGenerator::SetParameter(param);
     }
 }
 
@@ -374,21 +386,21 @@ void Form::OpenCurrentParameter()
 
     ParameterComplex *parent = static_cast<ParameterComplex *>(CurrentParameter());
 
-    numParams = parent->numParams;
-    params = parent->params;
+    numParams = parent->NumParams();
+    params = parent->Params();
     currentParam = 0;
 
     for(int i = 0; i < numParams; i++)
     {
-        params[i]->form = this;
-        params[i]->parent = parent;
+        params[i]->SetForm(this);
+        params[i]->SetParent(parent);
     }
 }
 
 
 bool Form::CloseOpenedParameter()
 {
-    if (ParameterIsOpened())
+    if (params[0]->IsOpened())
     {
         params = oldParams;
         numParams = oldNumParams;
@@ -400,31 +412,11 @@ bool Form::CloseOpenedParameter()
 }
 
 
-bool Form::ParameterIsOpened() const
-{
-    return params[0]->parent != 0;
-}
-
-
-FloatValue ParameterValue::GetValueNano() const
-{
-    StructValue input(const_cast<ParameterValue *>(this));
-    return input.ValueNano();
-}
-
-
-pString ParameterValue::GetStringDigits() const
-{
-    StructValue input(const_cast<ParameterValue *>(this));
-    return input.StringDigits();
-}
-
-
 pString ParameterValue::GetStringValue(Language::E lang) const
 {
     static char buf[100];
 
-    std::snprintf(buf, 99, "%E %s", GetValueNano().ToFloat(), MainUnits(lang));
+    std::snprintf(buf, 99, "%E %s", GetValue().ToFloat(), MainUnits(lang));
 
     return buf;
 }
@@ -443,23 +435,17 @@ pString ParameterValue::MainUnits(Language::E lang) const
         {"",   ""},     // Phase
         {"ñ",  "s"},    // Delay
         {"ñ",  "s"},    // DurationRise
-        {"ñ",  "s"},    // DurationFall
-        {"ñ",  "s"},    // DurationStady
-        {"",   ""},     // DutyFactor
-        {"",   ""},     // ManipulationDuration
-        {"",   ""},     // ManipulationPeriod
-        {"",   ""},     // PacketPeriod
-        {"",   ""},     // PacketNumber
-        {"",   ""}      // Exit
+        {"ñ",  "s"}    // DurationFall
+//        {"ñ",  "s"},    // DurationStady
+//        {"",   ""},     // DutyFactor
+//        {"",   ""},     // ManipulationDuration
+//        {"",   ""},     // ManipulationPeriod
+//        {"",   ""},     // PacketPeriod
+//        {"",   ""},     // PacketNumber
+//        {"",   ""}      // Exit
     };
 
-    return units[value][lang];
-}
-
-
-float ParameterValue::Value() const
-{
-    return GetValueNano().ToFloat();
+    return units[Type()][lang];
 }
 
 
@@ -470,92 +456,9 @@ bool ParameterValue::SetAndLoadValue(float val)
         return false;
     }
 
-    if(val >= 1e6F)
-    {
-        order = Order::Mega;
-        val /= 1e6F;
-    }
-    else if(val >= 1e3F)
-    {
-        order = Order::Kilo;
-        val /= 1e3F;
-    }
-    else if(val >= 1.0F)
-    {
-        order = Order::One;
-    }
-    else if(val >= 1e-3F)
-    {
-        order = Order::Milli;
-        val *= 1e3F;
-    }
-    else if(val >= 1e-6F)
-    {
-        order = Order::Micro;
-        val *= 1e6F;
-    }
-    else
-    {
-        order = Order::Nano;
-        val *= 1e9F;
-    }
-
-    FillBuffer(val);
+    value.FromFloat(val);
 
     PGenerator::SetParameter(this);
-
-    return true;
-}
-
-
-void ParameterValue::FillBuffer(float val)
-{
-    FloatValue floatValue(val);
-
-    int integer = floatValue.Integer();
-
-    int fract = floatValue.Fract(numDigits - Math::DigitsInInt(integer));
-
-    if(sign != ' ')
-    {
-        sign = (integer < 0) ? '-' : '+';
-    }
-
-    if(integer < 0)
-    {
-        integer = -integer;
-    }
-
-    String strInteger = SU::Int2String(integer, false, 1);
-    String strFract = SU::Int2String(fract, false, 1);
-
-    int8 pos = 0;
-
-    for(uint i = 0; i < strInteger.Size(); i++)
-    {
-        buffer[pos++] = strInteger.c_str()[i];
-    }
-
-    posComma = pos - 1;
-
-    for(uint i = 0; i < strFract.Size(); i++)
-    {
-        buffer[pos++] = strFract.c_str()[i];
-    }
-
-    while(pos < numDigits)
-    {
-        buffer[pos++] = '0';
-    }
-}
-
-
-bool ParameterValue::AssumeArbitaryOrder() const
-{
-    if (value == Offset || value == Amplitude)
-    {
-        return false;
-    }
 
     return true;
 }

@@ -6,27 +6,27 @@
 #include "Menu/Pages/PageSignals/PageSignals.h"
 
 
-static ParameterChoice param_SineModulationA_Manipulation        (ParameterChoice::ManipulationEnabled, DISABLED_RU, ENABLED_RU);
-static ParameterValue  param_SineModulationA_ManipulationDuration(ParameterValue::ManipulationDuration, 0.0F,  10e3F,  "5000", 0, Order::Milli);
-static ParameterValue  param_SineModulationA_ManipulationPeriod  (ParameterValue::ManipulationPeriod,   0.0F,  10e3F,  "2500", 1, Order::Milli);
-static ParameterValue  param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
+static ParameterManipulationEnabled   param_SineModulationA_Manipulation        (DISABLED_RU, ENABLED_RU);
+static ParameterManipulationDuration  param_SineModulationA_ManipulationDuration(FloatValue(0, 0), FloatValue(10,    0), FloatValue(5, 0));
+static ParameterManipulationPeriod    param_SineModulationA_ManipulationPeriod  (FloatValue(0, 0), FloatValue(10000, 0), FloatValue(0, 2, 500));
+//static ParameterValue  param_SineModulationA_Exit                (ParameterValue::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
 
 
-static ParameterBase *params_SineModulationA[] =
+static Parameter *params_SineModulationA[] =
 {
     &param_SineModulationA_Manipulation,
     &param_SineModulationA_ManipulationDuration,
     &param_SineModulationA_ManipulationPeriod,
-    &param_SineModulationA_Exit,
+//    &param_SineModulationA_Exit,
     0
 };
 
-static ParameterValue   param_SineA_Frequency   (ParameterValue::Frequency,      0.1F,  100e6F, "10000", 0, Order::Kilo);
-static ParameterValue   param_SineA_Amplitude   (ParameterValue::Amplitude,      0.0F,  10.0F,  "50000", 0, Order::One);
-static ParameterValue   param_SineA_Offset      (ParameterValue::Offset,         0.0F,  10.0F,  "50000", 0, Order::One);
-static ParameterComplex param_SineA_Manipulation(ParameterComplex::Manipulation, params_SineModulationA);
+static ParameterFrequency    param_SineA_Frequency;
+static ParameterAmplitude    param_SineA_Amplitude;
+static ParameterOffset       param_SineA_Offset;
+static ParameterManipulation param_SineA_Manipulation(params_SineModulationA);
 
-static ParameterBase *params_SineA[] =
+static Parameter *params_SineA[] =
 {
     &param_SineA_Frequency,
     &param_SineA_Amplitude,
@@ -38,12 +38,12 @@ static ParameterBase *params_SineA[] =
 static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 
-static ParameterValue  param_RampPlusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000",  0, Order::Kilo);
-static ParameterValue  param_RampPlusA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  "10000",  1, Order::One);
-static ParameterValue  param_RampPlusA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  "50000",  0, Order::One);
-static ParameterChoice param_RampPlusA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterFrequency  param_RampPlusA_Frequency;
+static ParameterAmplitude  param_RampPlusA_Amplitude;
+static ParameterOffset     param_RampPlusA_Offset;
+static ParameterStartMode  param_RampPlusA_ModeStart;
 
-static ParameterBase *params_RampPlusA[] =
+static Parameter *params_RampPlusA[] =
 {
     &param_RampPlusA_Frequency,
     &param_RampPlusA_Amplitude,
@@ -55,12 +55,12 @@ static ParameterBase *params_RampPlusA[] =
 static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A]);
 
 
-static ParameterValue  param_RampMinusA_Frequency(ParameterValue::Frequency, 0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_RampMinusA_Amplitude(ParameterValue::Amplitude, 0.0F, 10.0F,  "10000", 1, Order::One);
-static ParameterValue  param_RampMinusA_Offset   (ParameterValue::Offset,    0.0F, 10.0F,  "50000", 0, Order::One);
-static ParameterChoice param_RampMinusA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterFrequency  param_RampMinusA_Frequency;
+static ParameterAmplitude  param_RampMinusA_Amplitude;
+static ParameterOffset     param_RampMinusA_Offset;
+static ParameterStartMode  param_RampMinusA_ModeStart;
 
-static ParameterBase *params_RampMinusA[] =
+static Parameter *params_RampMinusA[] =
 {
     &param_RampMinusA_Frequency,
     &param_RampMinusA_Amplitude,
@@ -72,12 +72,12 @@ static ParameterBase *params_RampMinusA[] =
 static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::A]);
 
 
-static ParameterValue  param_TriangleA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_TriangleA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F, "10000",  1, Order::One);
-static ParameterValue  param_TriangleA_Offset   (ParameterValue::Offset,     0.0F, 10.0F, "50000",  0, Order::One);
-static ParameterChoice param_TriangleA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterFrequency param_TriangleA_Frequency;
+static ParameterAmplitude param_TriangleA_Amplitude;
+static ParameterOffset    param_TriangleA_Offset;
+static ParameterChoice    param_TriangleA_ModeStart;
 
-static ParameterBase *params_TriangleA[] =
+static Parameter *params_TriangleA[] =
 {
     &param_TriangleA_Frequency,
     &param_TriangleA_Amplitude,
@@ -89,10 +89,10 @@ static ParameterBase *params_TriangleA[] =
 static Form formTriangleA(TypeForm::Triangle, params_TriangleA, &waves[Chan::A]);
 
 
-static ParameterValue  param_FreeA_Frequency(ParameterValue::Frequency,  0.1F, 100e6F, "10000", 0, Order::Kilo);
-static ParameterValue  param_FreeA_Amplitude(ParameterValue::Amplitude,  0.0F, 10.0F, "10000", 1, Order::One);
-static ParameterValue  param_FreeA_Offset   (ParameterValue::Offset,     0.0F, 10.0F, "50000", 0, Order::One);
-static ParameterChoice param_FreeA_ModeStart(ParameterChoice::ModeStart, " Авто", " Однокр", " Комп А", " Форм B");
+static ParameterFrequency  param_FreeA_Frequency;
+static ParameterAmplitude  param_FreeA_Amplitude;
+static ParameterOffset     param_FreeA_Offset;
+static ParameterStartMode  param_FreeA_ModeStart;
 static ParameterPage   param_FreeA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
 static ParameterBase *params_FreeA[] =

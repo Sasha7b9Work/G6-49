@@ -1,4 +1,3 @@
-#include "Display/InputWindow.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"

@@ -56,8 +56,6 @@ public:
     bool IsDDS() const;
     /// Возвращает указатель на родительский Wave
     Wave *GetWave() { return wave; };
-    /// Возвращает true, если текущий параметр сложный и открыт.
-    bool ParameterIsOpened() const;
     /// Функция вызывается при нажатии кнопки "Изменить параметр". Фактически активизирует текущий параметр
     void ChangeParameter();
     /// Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
@@ -74,6 +72,12 @@ public:
     float GetAmplitude();
 
     operator TypeForm::E() { return value; }
+    /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
+    Parameter *FindParameter(ParameterValue::E p);
+    Parameter *FindParameter(ParameterChoice::E p);
+    /// Засылает параметр в генератор
+    void SendParameterToGenerator(ParameterValue::E p);
+    void SendParameterToGenerator(ParameterChoice::E p);
 
 private:
     /// Раскрывает страницу текущего параметра

@@ -165,7 +165,7 @@ void PGenerator::SetParameter(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    Message::Set::Parameter(commands[param->value],
+    Message::Set::Parameter(commands[param->Type()],
         static_cast<uint8>(param->GetForm()->GetWave()->GetChannel()),
         static_cast<uint8>(param->GetChoice())).Transmit();
 }
