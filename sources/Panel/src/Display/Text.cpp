@@ -5,7 +5,7 @@
 #include "Utils/StringUtils.h"
 #include <cstdarg>
 #include <cstdio>
-#include <string.h>
+#include <cstring>
 #include <cctype>
 
 
@@ -424,10 +424,10 @@ uint *Text::BreakWord(char *word)
 
 char *Text::PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30])
 {
-    size_t length = 0;
+    uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
     {
-        length += static_cast<size_t>(lengthSyllables[i]);
+        length += static_cast<uint>(lengthSyllables[i]);
     }
     std::memcpy(buffer, word, length);
     buffer[length] = '-';

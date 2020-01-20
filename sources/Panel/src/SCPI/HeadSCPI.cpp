@@ -8,7 +8,7 @@
 #include "Settings/Settings.h"
 #include "Utils/String.h"
 #include "Utils/StringUtils.h"
-#include "Wave.h"
+#include "Generator/Wave.h"
 #include <cstdio>
 
 

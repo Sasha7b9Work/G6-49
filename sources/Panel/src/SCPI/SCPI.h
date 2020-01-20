@@ -1,6 +1,6 @@
 #pragma once
 #include "CommonTypes.h"
-#include "Wave.h"
+#include "Generator/Wave.h"
 #include "SCPI/MacrosesSCPI.h"
 
 /*

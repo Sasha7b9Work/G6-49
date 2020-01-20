@@ -10,17 +10,6 @@
 #endif
 
 
-#include "Wave.h"
-
-
-/** @addtogroup Panel
- *  @{
- *  @addtogroup Interface
- *  @{
- */
-
-
-
 /// Возможные команды для передачи в основной процессор
 struct Command
 {
@@ -168,8 +157,6 @@ struct Register
 #define NAME_FORM(form)  Form(form).Name()
 #define FORM_RU(form) NAME_FORM(form)
 
-
-/** @}  @} */
 
 #ifdef WIN32
 #pragma warning(pop)

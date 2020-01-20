@@ -1,4 +1,5 @@
 #pragma once
+#include "Generator/Wave.h"
 #include "Menu/MenuItems.h"
 
 

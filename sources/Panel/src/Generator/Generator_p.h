@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
+#include "Generator/Wave.h"
 #include "Command.h"
 
 

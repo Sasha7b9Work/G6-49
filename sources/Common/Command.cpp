@@ -1,8 +1,10 @@
 #include "defines.h"
 #include "Command.h"
 #include "structs.h"
+#include "Generator/Wave.h"
 #include "Utils/StringUtils.h"
 #include <cstdio>
+#include <cstring>
 
 
 

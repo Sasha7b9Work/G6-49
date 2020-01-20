@@ -9,7 +9,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
-#include "Wave.h"
+#include "Generator/Wave.h"
 #include "Generator/Signals.h"
 #include <string.h>
 

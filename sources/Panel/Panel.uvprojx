@@ -1701,11 +1701,6 @@
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
-            <File>
-              <FileName>Wave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Wave.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1935,6 +1930,11 @@
               <FileName>WaveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\WaveGraphics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Wave.h</FilePath>
             </File>
           </Files>
         </Group>
