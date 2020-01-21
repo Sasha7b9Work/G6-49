@@ -73,7 +73,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
     
     for (int i = 0; i < form->NumParameters(); i++)
     {
-        ParameterBase *param = form->GetParameter(i);
+        Parameter *param = form->GetParameter(i);
         
         if ((ch == CURRENT_CHANNEL) && std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::self)
         {
@@ -88,7 +88,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
 }
 
 
-void Wave::Graphics::DrawParameterValue(ParameterBase *param, int x, int y)
+void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
 {
     if(param->IsChoice() && static_cast<ParameterChoice *>(param)->DrawChoice(x + 6, y))
     {

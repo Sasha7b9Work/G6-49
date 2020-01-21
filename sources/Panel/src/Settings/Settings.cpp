@@ -40,13 +40,6 @@ static const Settings defSet =
         MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
         MAKE_COLOR(0x40, 0x40, 0xFF)    // CHAN_B
     },
-    { 
-        ParameterValue::Frequency,      // sig_parameter[NumForms]
-        ParameterValue::Frequency,
-        ParameterValue::Frequency,
-        ParameterValue::Frequency,
-        ParameterValue::Frequency
-    },
     static_cast<Page *>(Menu::mainPage),// menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]

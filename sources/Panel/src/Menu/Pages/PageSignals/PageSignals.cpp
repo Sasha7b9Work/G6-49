@@ -1,4 +1,3 @@
-#include "Display/InputWindow.h"
 #include "Settings/Settings.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Addition/PageInput.h"

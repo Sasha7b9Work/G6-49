@@ -7,6 +7,9 @@
 #include <limits>
 
 
+class Wave;
+
+
 class Form
 {
     friend class Wave;
@@ -73,8 +76,8 @@ public:
 
     operator TypeForm::E() { return value; }
     /// Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    Parameter *FindParameter(ParameterValue::E p);
-    Parameter *FindParameter(ParameterChoice::E p);
+    ParameterValue *FindParameter(ParameterValue::E p);
+    ParameterChoice *FindParameter(ParameterChoice::E p);
     /// Засылает параметр в генератор
     void SendParameterToGenerator(ParameterValue::E p);
     void SendParameterToGenerator(ParameterChoice::E p);

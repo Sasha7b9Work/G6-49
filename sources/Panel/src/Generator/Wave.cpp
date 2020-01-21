@@ -244,7 +244,7 @@ void Form::TuneGenerator(Chan::E ch)
 }
 
 
-Parameter *Form::FindParameter(ParameterValue::E p)
+ParameterValue *Form::FindParameter(ParameterValue::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -276,7 +276,7 @@ Parameter *Form::FindParameter(ParameterValue::E p)
 }
 
 
-Parameter *Form::FindParameter(ParameterChoice::E p)
+ParameterChoice *Form::FindParameter(ParameterChoice::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -301,48 +301,6 @@ Parameter *Form::FindParameter(ParameterChoice::E p)
             if(choice)
             {
                 return choice;
-            }
-        }
-    }
-
-    return nullptr;
-}
-
-
-ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
-{
-    for(int i = 0; i < numParams; i++)
-    {
-        Parameter *param = params[i];
-
-        if(param->IsChoice())
-        {
-            ParameterChoice *parameter = static_cast<ParameterChoice *>(param);
-
-            if (parameter->Type() == p)
-            {
-                return parameter;
-            }
-        }
-    }
-
-    return nullptr;
-}
-
-
-ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
-{
-    for(int i = 0; i < numParams; i++)
-    {
-        Parameter *param = params[i];
-
-        if(param->IsValue())
-        {
-            ParameterValue *parameter = static_cast<ParameterValue *>(param);
-
-            if (parameter->Type() == p)
-            {
-                return parameter;
             }
         }
     }
@@ -412,289 +370,25 @@ bool Form::CloseOpenedParameter()
 }
 
 
-pString ParameterValue::GetStringValue(Language::E lang) const
-{
-    static char buf[100];
-
-    std::snprintf(buf, 99, "%E %s", GetValue().ToFloat(), MainUnits(lang));
-
-    return buf;
-}
-
-
-pString ParameterValue::MainUnits(Language::E lang) const
-{
-    static const pString units[ParameterValue::Count][Language::Count] =
-    {
-        {"Гц", "Hz"},   // Frequency
-        {"с",  "s"},    // Period
-        {"В",  "V"},    // Amplitude
-        {"В",  "V"},    // Offset
-        {"с",  "s"},    // Duration
-        {"",   ""},     // DutyRatio
-        {"",   ""},     // Phase
-        {"с",  "s"},    // Delay
-        {"с",  "s"},    // DurationRise
-        {"с",  "s"}    // DurationFall
-//        {"с",  "s"},    // DurationStady
-//        {"",   ""},     // DutyFactor
-//        {"",   ""},     // ManipulationDuration
-//        {"",   ""},     // ManipulationPeriod
-//        {"",   ""},     // PacketPeriod
-//        {"",   ""},     // PacketNumber
-//        {"",   ""}      // Exit
-    };
-
-    return units[Type()][lang];
-}
-
-
-bool ParameterValue::SetAndLoadValue(float val)
-{
-    if(!InRange(val))
-    {
-        return false;
-    }
-
-    value.FromFloat(val);
-
-    PGenerator::SetParameter(this);
-
-    return true;
-}
-
-
-pString ParameterComplex::GetStringDigits() const
-{
-    if(type == Manipulation)
-    {
-        static pCHAR values[2] =
-        {
-            " Откл", " Вкл"
-        };
-
-        ParameterChoice *enabled = const_cast<ParameterComplex *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
-
-        return values[enabled->GetChoice()];
-    }
-
-    return "";
-}
-
-
-pString ParameterValue::NameUnit(char buf[10]) const
-{
-    static const pString names[ParameterValue::Count] =
-    {
-        "Гц",
-        "с",
-        "В",
-        "В",
-        "с",
-        "",
-        "\x7b",
-        "с",
-        "",
-        "",
-        "",
-        "",
-        "c",
-        "c",
-        "c",
-        "",
-        ""
-    };
-
-    std::sprintf(buf, "%s%s", order.Name(), names[value]);
-    return buf;
-}
-
-
-pString ParameterBase::NameUnit(char buffer[10]) const
-{
-    if(IsValue())
-    {
-        return (static_cast<const ParameterValue *>(this))->NameUnit(buffer);
-    }
-    return "";
-}
-
-
-bool ParameterValue::IsOpened()
-{
-    return IsComplex() && GetForm()->ParameterIsOpened();
-}
-
-
-pString ParameterChoice::Name() const
-{
-    static const pString namesParam[ParameterChoice::Count] =
-    {
-        "Полярность",
-        "Запуск",
-        "Вид",
-        "Манипуляция"
-    };
-
-    return namesParam[value];
-}
-
-
-pString ParameterComplex::Name() const
-{
-    static const pString names[ParameterComplex::Count] =
-    {
-        "МАНИПУЛЯЦИЯ"
-    };
-
-    return names[value];
-}
-
-
-pString ParameterPage::Name() const
-{
-    static const pString names[ParameterPage::Count] =
-    {
-        "ВЫБОР"
-    };
-
-    return names[value];
-}
-
-
-void ParameterPage::OpenPage()
-{
-    Menu::SetAdditionPage(reinterpret_cast< ::Page *>(page));
-}
-
-
-pString ParameterBase::Name() const
-{
-    if(IsValue())
-    {
-        return (static_cast<const ParameterValue *>(this))->Name();
-    }
-    else if(IsChoice())
-    {
-        return (static_cast<const ParameterChoice *>(this))->Name();
-    }
-    else if(IsComplex())
-    {
-        return (static_cast<const ParameterComplex *>(this))->Name();
-    }
-    else if(IsPage())
-    {
-        return (static_cast<const ParameterPage *>(this))->Name();
-    }
-    else
-    {
-        // здесь ничего
-    }
-
-    return "";
-}
-
-
-pString ParameterBase::GetStringDigits() const
-{
-    if(IsValue())
-    {
-        return (static_cast<const ParameterValue *>(this))->GetStringDigits();
-    }
-    else if(IsChoice())
-    {
-        return (static_cast<const ParameterChoice *>(this))->GetStringDigits();
-    }
-    else if(IsComplex())
-    {
-        return (static_cast<const ParameterComplex *>(this))->GetStringDigits();
-    }
-    else
-    {
-        // здесь ничего
-    }
-    return "";
-}
-
-
-pString ParameterChoice::GetStringDigits() const
-{
-    return names[choice];
-}
-
-
 void Form::ChangeParameter()
 {
-    ParameterBase *param = CurrentParameter();
+    Parameter *param = CurrentParameter();
 
     if(param->IsChoice())
     {
         static_cast<ParameterChoice *>(param)->NextChoice();
     }
-    else if(param->IsValue() && static_cast<ParameterValue *>(param)->IsInputValue())
+    else if(param->IsValue())
     {
-        InputWindow::Init();
-        Menu::SetAdditionPage(static_cast<Page *>(PageInput::self));
-    }
-    else if (param->IsExit())
-    {
-        CloseOpenedParameter();
     }
     else if (param->IsComplex())
     {
         OpenCurrentParameter();
     }
-    else if(param->IsPage())
-    {
-        static_cast<ParameterPage *>(param)->OpenPage();
-    }
     else
     {
         // здесь ничего
     }
-}
-
-
-void ParameterChoice::NextChoice()
-{
-    Math::CircleIncrease(&choice, 0, num - 1);
-
-    Chan::E ch = form->GetWave()->GetChannel();
-
-    if(value == ModeStart)
-    {
-        PGenerator::LoadStartMode(ch, choice);
-    }
-    else
-    {
-        PGenerator::TuneChannel(ch);
-    }
-}
-
-
-bool ParameterChoice::DrawChoice(int x, int y)
-{
-    if(func[choice])
-    {
-        func[choice](x, y);
-    }
-
-    return func[choice] != 0;
-}
-
-
-bool ParameterChoice::SetAndLoadChoice(int ch)
-{
-    if(ch < 0 || ch >= num)
-    {
-        return false;
-    }
-
-    choice = ch;
-
-    PGenerator::SetParameter(this);
-
-    return true;
 }
 
 
@@ -709,97 +403,6 @@ bool Wave::StartModeIsSingle()
 
     return false;
 }
-
-
-bool ParameterBase::AssumeArbitaryOrder() const
-{
-    if (IsValue())
-    {
-        return static_cast<const ParameterValue *>(this)->AssumeArbitaryOrder();
-    }
-
-    return true;
-}
-
-
-bool ParameterBase::IsExit() const
-{
-    return IsValue() && static_cast<const ParameterValue *>(this)->IsExit();
-}
-
-
-Order& Order::operator++(int)
-{
-    value = static_cast<E>(value + 1);
-    return *this;
-}
-
-
-Order& Order::operator--(int)
-{
-    value = static_cast<E>(value - 1);
-    return *this;
-}
-
-
-ParameterChoice::ParameterChoice(E v, pString var0, pString var1, funcDraw func0, funcDraw func1) :
-    ParameterBase(Choice), value(v), choice(0), num(2)
-{
-    names[0] = const_cast<char *>(var0);
-    names[1] = const_cast<char *>(var1);
-
-    func[0] = func0;
-    func[1] = func1;
-};
-
-
-ParameterChoice::ParameterChoice(E v, pString var0, pString var1, pString var2, pString var3) : 
-    ParameterBase(Choice), value(v), choice(0), num(4)
-{
-    names[0] = const_cast<char *>(var0);
-    names[1] = const_cast<char *>(var1);
-    names[2] = const_cast<char *>(var2);
-    names[3] = const_cast<char *>(var3);
-
-    func[0] = nullptr;
-    func[1] = nullptr;
-    func[2] = nullptr;
-    func[3] = nullptr;
-}
-
-
-ParameterComplex::ParameterComplex(E v, ParameterBase **param) : ParameterBase(Complex), value(v), params(param) //-V2504
-{
-    numParams = 0;
-    while (params[numParams])
-    {
-        numParams++;
-    }
-};
-
-
-ParameterValue::ParameterValue(E v) : ParameterBase(ParameterBase::Value), //-V730
-    value(v), hightLightDigit(0), posComma(0), sign('+'), numDigits(NUM_DIGITS), inNumLockMode(false)
-{
-    std::memset(buffer, 0, NUM_DIGITS + 1);
-
-    if (v == Amplitude || v == Offset)
-    {
-        numDigits = 3;
-    }
-};
-
-
-ParameterValue::ParameterValue(E v, float _min, float _max, pString buf, int8 pos, Order o, int8 hd, char s) : ParameterBase(ParameterBase::Value),
-    value(v), order(o), hightLightDigit(hd), posComma(pos), sign(s), numDigits(NUM_DIGITS), min(_min), max(_max), inNumLockMode(false)
-{
-    std::strcpy(buffer, buf);
-
-    if (v == Amplitude || v == Offset)
-    {
-        numDigits = 3;
-    }
-};
 
 
 bool Form::IsDDS() const
@@ -1007,7 +610,7 @@ float Form::GetOffset()
 {
     ParameterValue *parameter = FindParameter(ParameterValue::Offset);
 
-    return (parameter) ? parameter->GetValueNano().ToFloat() - 5.0F : 0.0F;
+    return (parameter) ? parameter->GetValue().ToFloat() : 0.0F;
 }
 
 
@@ -1015,27 +618,5 @@ float Form::GetAmplitude()
 {
     ParameterValue *parameter = FindParameter(ParameterValue::Amplitude);
 
-    return (parameter) ? parameter->GetValueNano().ToFloat() : 0.0F;
-}
-
-
-Order::E Order::Min(const ParameterValue *param)
-{
-    if (param->value == ParameterValue::Frequency)
-    {
-        return Order::Micro;
-    }
-
-    return Order::Nano;
-}
-
-
-Order::E Order::Max(const ParameterValue *param)
-{
-    if (param->value == ParameterValue::Frequency)
-    {
-        return Order::Mega;
-    }
-
-    return Order::One;
+    return (parameter) ? parameter->GetValue().ToFloat() : 0.0F;
 }

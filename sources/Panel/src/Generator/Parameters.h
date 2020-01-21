@@ -29,7 +29,9 @@ public:
 
     Form *GetForm() { return form; }
 
-private:
+    pString NameUnit(char buffer[10]);
+
+protected:
     /// Форма, для которой зада этот параметр
     Form *form;
     /// Если параметр вложенный, то здесь адрес родителя
@@ -65,7 +67,7 @@ public:
 
     ParameterValue(const FloatValue &min, const FloatValue &max, const FloatValue &value);
 
-    virtual pString Name() const override
+    virtual pString Name() const
     {
         return "";
     }
@@ -182,10 +184,24 @@ public:
 
     int GetChoice() const;
 
+    virtual pString Name() const;
+
+    virtual pString GetStringDigits() const;
+
+    void NextChoice();
+
+    bool SetAndLoadChoice(int ch);
+
+    bool DrawChoice(int x, int y) const;
+
 private:
 	E type;
     /// Текущий выбор
     int choice;
+
+    const char **names;
+    /// Количество вариантов выбора
+    int NumChoices() const;
 };
 
 
@@ -200,7 +216,7 @@ class ParameterManipulationEnabled : public ParameterChoice
 {
 public:
     ParameterManipulationEnabled(pString choice0, pString choice1);
-    virtual pString Name() const override { return "Манипуляция"; }
+    virtual pString Name() const { return "Манипуляция"; }
 };
 
 
@@ -220,12 +236,14 @@ public:
         Count
     } value;
 
-    virtual void SetForm(Form *form) override;
+    virtual void SetForm(Form *form);
+
+    virtual pString Name() const;
 
     int NumParams() const { return numParams; }
     Parameter **Params() { return params; }
 
-    pString GetStringDigits() const override;
+    virtual pString GetStringDigits() const;
 
     ParameterValue *FindParameter(ParameterValue::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);

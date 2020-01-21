@@ -5,7 +5,6 @@
 #include "Display/Text.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
-#include "Display/InputWindow.h"
 #include <cmath>
 
 
@@ -18,8 +17,6 @@ void Menu::Draw()
     {
         GetOpenedItem()->Draw(true);
     }
-
-    InputWindow::Draw();
 }
 
 

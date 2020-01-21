@@ -70,7 +70,6 @@ class Settings // -V690
 public:
     uint16                      size;                                   ///< –азмер структуры Settings
     col_val                     disp_Colors[32];                        ///< ÷вета
-    ParameterValue              sig_parameter[TypeForm::Count];         ///< “екущий выбранный параметр сигнала
     Page*                       menu_currentPage;                       ///< јдрес открытой страницы меню. 0, если открыта главна€ страница
     int8                        menu_posActItem[Page::Count];           ///< ѕозици€ активного пункта меню дл€ каждой страницы
     int8                        menu_currentSubPage[Page::Count];       ///< Ќомер текущей подстраницы дл€ каждой страницы

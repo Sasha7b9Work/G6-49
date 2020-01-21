@@ -12,35 +12,35 @@ extern const PageBase pInput;
 
 
 
-static void Draw_Left(int x, int y)
+static void Draw_Left(int, int)
 {
-    if (CURRENT_FORM->CurrentParameter()->AssumeArbitaryOrder())
-    {
-        String("Порядок").Draw(x + 14, y + 12);
-        Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillUp);
-    }
+}
+
+static void OnPress_OrderUp()
+{
+
 }
 
 DEF_SMALL_BUTTON(sbOrderUp,                                                                                                                               //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
     "Порядок больше",
     "Увеличить порядок единицы измерения",
-    pInput, Item::FuncActive, InputWindow::OrderUp, Draw_Left
+    pInput, Item::FuncActive, OnPress_OrderUp, Draw_Left
 )
 
 
-static void Draw_Right(int x, int y)
+static void Draw_Right(int, int)
 {
-    if (CURRENT_FORM->CurrentParameter()->AssumeArbitaryOrder())
-    {
-        String("Порядок").Draw(x + 14, y + 12);
-        Text::Draw4SymbolsInRect(x + 26, y + 30, Ideograph::_8::FillDown);
-    }
+}
+
+static void OnPress_OrderDown()
+{
+
 }
 
 DEF_SMALL_BUTTON(sbOrderDown,                                                                                                                            //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
     "Порядок меньшше",
     "Уменьшить порядок единицы измерения",
-    pInput, Item::FuncActive, InputWindow::OrderDown, Draw_Right
+    pInput, Item::FuncActive, OnPress_OrderDown, Draw_Right
 )
 
 
@@ -69,20 +69,20 @@ static void Draw_Enter(int x, int y)
     Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Save);
 }
 
+static void OnPress_Enter()
+{
+
+}
+
 DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
     "ВВОД",
     "Подтвердить ввод нового значения",
-    pInput, Item::FuncActive, InputWindow::KeyEnter, Draw_Enter
+    pInput, Item::FuncActive, OnPress_Enter, Draw_Enter
 )
 
 
-static bool OnControl(Key &key)
+static bool OnControl(Key &)
 {
-    if(!key.IsFunctional())
-    {
-        InputWindow::ProcessContorl(key);
-        return true;
-    }
     return false;
 }
 

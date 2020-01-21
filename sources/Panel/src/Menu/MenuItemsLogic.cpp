@@ -478,7 +478,7 @@ int8 Choice::CurrentIndex() const
 
         Form *form = param->form;
 
-        retValue = static_cast<int8>(static_cast<const ParameterValue *>(form->CurrentParameter())->value);
+        retValue = static_cast<int8>(static_cast<const ParameterValue *>(form->CurrentParameter())->Type());
     }
     else
     {
