@@ -232,7 +232,14 @@ void PGenerator::LoadSettings()
     PGenerator::TuneChannel(Chan::B);
 }
 
-void PGenerator::SetParameter(Parameter *)
+void PGenerator::SetParameter(Parameter *parameter)
 {
-
+    if(parameter->IsValue())
+    {
+        SetParameter(static_cast<ParameterValue *>(parameter));
+    }
+    else if(parameter->IsChoice())
+    {
+        SetParameter(static_cast<ParameterValue *>(parameter));
+    }
 }
