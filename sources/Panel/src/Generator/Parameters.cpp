@@ -133,30 +133,6 @@ pString ParameterComplex::GetStringDigits() const
     return "";
 }
 
-pString ParameterChoice::Name() const
-{
-    static const pString namesParam[ParameterChoice::Count] =
-    {
-        "Полярность",
-        "Запуск",
-        "Вид",
-        "Манипуляция"
-    };
-
-    return namesParam[type];
-}
-
-
-pString ParameterComplex::Name() const
-{
-    static const pString names[ParameterComplex::Count] =
-    {
-        "МАНИПУЛЯЦИЯ"
-    };
-
-    return names[value];
-}
-
 
 pString ParameterChoice::GetStringDigits() const
 {
@@ -214,7 +190,7 @@ pString Parameter::NameUnit(char [10]) const
 }
 
 
-ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComplex(ParameterComplex::Manipulation, parameters)
+ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComplex(ParameterComplex::Manipulation, "Манипуляция", parameters)
 {
 
 }
