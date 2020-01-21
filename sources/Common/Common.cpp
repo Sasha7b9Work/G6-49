@@ -203,15 +203,15 @@ int FloatValue::Math::GetDigit(const FloatValue &_value, int position)
 }
 
 
-pString FloatValue::GetStringDigits(int numDigits) const
+pString FloatValue::Math::GetStringDigits(const FloatValue &value, int numDigits, Order::E *order)
 {
     static char buffer[20];
 
     buffer[numDigits + 1] = '\0';
 
-    int position = FloatValue::Math::GetPositionFirstDigit(*this);
+    int position = FloatValue::Math::GetPositionFirstDigit(value);
 
-    int posComma = FloatValue::Math::PositionComma(position);
+    int posComma = FloatValue::Math::PositionComma(position, order);
 
     for(int i = 0; i <= numDigits; i++)
     {
@@ -221,7 +221,7 @@ pString FloatValue::GetStringDigits(int numDigits) const
         }
         else
         {
-            buffer[i] = static_cast<char>(FloatValue::Math::GetDigit(*this, position)) | 0x30;
+            buffer[i] = static_cast<char>(FloatValue::Math::GetDigit(value, position)) | 0x30;
             position--;
         }
     }
@@ -231,8 +231,33 @@ pString FloatValue::GetStringDigits(int numDigits) const
 }
 
 
-int FloatValue::Math::PositionComma(int posFirstDigit)
+int FloatValue::Math::PositionComma(int posFirstDigit, Order::E *order)
 {
+    if(posFirstDigit > 5)
+    {
+        *order = Order::Mega;
+    }
+    else if(posFirstDigit > 2)
+    {
+        *order = Order::Kilo;
+    }
+    else if(posFirstDigit > -1)
+    {
+        *order = Order::One;
+    }
+    else if(posFirstDigit > -4)
+    {
+        *order = Order::Milli;
+    }
+    else if(posFirstDigit > -7)
+    {
+        *order = Order::Micro;
+    }
+    else
+    {
+        *order = Order::Nano;
+    }
+
     int result = posFirstDigit - 5;
 
     while(result < 1)

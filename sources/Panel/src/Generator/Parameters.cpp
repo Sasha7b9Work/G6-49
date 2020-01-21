@@ -210,5 +210,10 @@ int ParameterChoice::NumChoices() const
 
 pString ParameterValue::GetStringValue() const
 {
-    return value.GetStringDigits(5);
+    Order::E order = Order::Count;
+
+    static char buffer[30];
+    std::strcpy(buffer, FloatValue::Math::GetStringDigits(value, 5, &order));
+
+    return buffer;
 }
