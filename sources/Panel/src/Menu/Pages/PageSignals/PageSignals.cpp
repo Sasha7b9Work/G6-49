@@ -74,17 +74,22 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-DEF_CHOICE_2( cTypeTune,                                                                                                                               //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
-    "ЗАСЫЛКА",
-    "Определяет периодичность засылки настроек сигналов в устройство управления.",
-    "ОДНОКРАТНО", "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
-    "НЕПРЕРЫВНО", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
-    FLAG, BIT_TUNE_FULL, pageSignals, Item::FuncActive, FuncChangedChoice, FuncDraw
-)
+//DEF_CHOICE_2( cTypeTune,                                                                                                                               //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
+//    "ЗАСЫЛКА",
+//    "Определяет периодичность засылки настроек сигналов в устройство управления.",
+//    "ОДНОКРАТНО", "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
+//    "НЕПРЕРЫВНО", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
+//    FLAG, BIT_TUNE_FULL, pageSignals, Item::FuncActive, FuncChangedChoice, FuncDraw
+//)
 
 
 static bool OnKey_PageSignals(Key &key)
 {
+    if(key.Is(Key::F4))
+    {
+        return true;
+    }
+
     if(key.Is(Key::Esc) && key.action.IsRelease())
     {
         return CURRENT_FORM->CloseOpenedParameter();
@@ -93,14 +98,13 @@ static bool OnKey_PageSignals(Key &key)
     return false;
 }
 
-DEF_PAGE_5( pageSignals,   //-V641
+DEF_PAGE_4( pageSignals,   //-V641
     "НАСТРОЙКИ СИГНАЛОВ",  
     "",
     &cChannel,                                      ///< НАСТРОЙКИ СИГНАЛОВ - Канал
     &cFormA,                                        ///< НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,                                   ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
     &bChangeParameter,                              ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
-    &cTypeTune,                                     ///< НАСТРОЙКИ СИГНАЛОВ - Засылки
     Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey_PageSignals, FuncBeforeDraw
 )
 

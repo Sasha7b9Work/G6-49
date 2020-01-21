@@ -4,9 +4,8 @@
 
 
 
-class PageSignals
+struct PageSignals
 {
-public:
     static void Init();
 
     static void SetCurrentChanenl(Chan::E ch);
