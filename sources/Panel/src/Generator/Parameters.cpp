@@ -197,12 +197,9 @@ pString ParameterValue::GetStringValue() const
     Order order = { Order::Count };
 
     static char buffer[30];
-    std::strcpy(buffer, MathFloatValue::GetStringValue(value, 5, &order.value));
-
+    std::strcpy(buffer, MathFloatValue::GetStringValue(value, IsSigned(), 5, &order.value, (type == Offset || type == Amplitude) ? 1 : 255));
     std::strcat(buffer, " ");
-
     std::strcat(buffer, order.Suffix(Language::RU));
-
     std::strcat(buffer, MainUnits(Language::RU));
 
     return buffer;
@@ -281,25 +278,32 @@ int MathFloatValue::GetDigit(const FloatValue &_value, int position)
 }
 
 
-pString MathFloatValue::GetStringValue(const FloatValue &value, int numDigits, Order::E *order)
+pString MathFloatValue::GetStringValue(const FloatValue &value, bool sign, int numDigits, Order::E *order, int posFirst)
 {
     static char buffer[20];
 
-    buffer[numDigits + 1] = '\0';
+    buffer[numDigits + (sign ? 2 : 1)] = '\0';
 
-    int position = GetPositionFirstDigit(value);
+    int position = (posFirst == 255) ? GetPositionFirstDigit(value) : posFirst;
 
     int posComma = PositionComma(position, order);
+
+    if(sign)
+    {
+        buffer[0] = value.Sign() == 1 ? '+' : '-';
+    }
+
+#define POS(i) (sign ? (i + 1) : i)
 
     for(int i = 0; i <= numDigits; i++)
     {
         if(i == posComma)
         {
-            buffer[i] = '.';
+            buffer[POS(i)] = '.';
         }
         else
         {
-            buffer[i] = static_cast<char>(GetDigit(value, position)) | 0x30;
+            buffer[POS(i)] = static_cast<char>(GetDigit(value, position)) | 0x30;
             position--;
         }
     }

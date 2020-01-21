@@ -98,7 +98,7 @@ void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
     Text::SetUpperCase(false);
     if(param->IsValue() && static_cast<ParameterValue *>(param)->IsSigned())
     {
-        x -= 5;
+        x -= 4;
     }
     String(param->GetStringValue()).Draw(x, y);
     Text::SetUpperCase(true);
