@@ -113,6 +113,11 @@ public:
     virtual pString GetStringValue() const;
 
     bool SetAndLoadValue(float val);
+    /// ¬озвращает true, если параметр имеет знак
+    bool IsSigned() const
+    {
+        return (type == Offset);
+    }
 
 private:
     E type;
