@@ -197,7 +197,7 @@ pString ParameterValue::GetStringValue() const
     Order order = { Order::Count };
 
     static char buffer[30];
-    std::strcpy(buffer, MathFloatValue::GetStringDigits(value, 5, &order.value));
+    std::strcpy(buffer, MathFloatValue::GetStringValue(value, 5, &order.value));
 
     std::strcat(buffer, " ");
 
@@ -281,7 +281,7 @@ int MathFloatValue::GetDigit(const FloatValue &_value, int position)
 }
 
 
-pString MathFloatValue::GetStringDigits(const FloatValue &value, int numDigits, Order::E *order)
+pString MathFloatValue::GetStringValue(const FloatValue &value, int numDigits, Order::E *order)
 {
     static char buffer[20];
 
