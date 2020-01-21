@@ -65,8 +65,6 @@ public:
 
     Form *GetForm() { return form; }
 
-    pString NameUnit(char buffer[10]) const;
-
 protected:
     /// Форма, для которой зада этот параметр
     Form *form;

@@ -174,12 +174,6 @@ bool ParameterChoice::DrawChoice(int, int) const
 }
 
 
-pString Parameter::NameUnit(char [10]) const
-{
-    return "";
-}
-
-
 ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComplex(ParameterComplex::Manipulation, "Манипуляция", parameters)
 {
 
@@ -200,12 +194,16 @@ int ParameterChoice::NumChoices() const
 
 pString ParameterValue::GetStringValue() const
 {
-    Order::E order = Order::Count;
+    Order order = { Order::Count };
 
     static char buffer[30];
-    std::strcpy(buffer, MathFloatValue::GetStringDigits(value, 5, &order));
+    std::strcpy(buffer, MathFloatValue::GetStringDigits(value, 5, &order.value));
 
     std::strcat(buffer, " ");
+
+    std::strcat(buffer, order.Suffix(Language::RU));
+
+    std::strcat(buffer, MainUnits(Language::RU));
 
     return buffer;
 }
@@ -346,4 +344,20 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
     }
 
     return result;
+}
+
+
+pString Order::Suffix(Language::E lang) const
+{
+    static const pString suf[Count][2] =
+    {
+        {"М", "M"},
+        {"к",  "k"},
+        {"",   ""},
+        {"м",  "m"},
+        {"мк", "u"},
+        {"н",  "n"}
+    };
+
+    return suf[value][lang];
 }

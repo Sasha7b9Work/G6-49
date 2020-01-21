@@ -95,10 +95,7 @@ void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
         return;
     }
 
-    x = String(param->GetStringValue()).Draw(x, y);
-
-    char buffer[10];
     Text::SetUpperCase(false);
-    String(param->NameUnit(buffer)).Draw(x + 2, y);
+    x = String(param->GetStringValue()).Draw(x, y);
     Text::SetUpperCase(true);
 }
