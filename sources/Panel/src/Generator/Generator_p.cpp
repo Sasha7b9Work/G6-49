@@ -231,3 +231,8 @@ void PGenerator::LoadSettings()
     PGenerator::TuneChannel(Chan::A);
     PGenerator::TuneChannel(Chan::B);
 }
+
+void PGenerator::SetParameter(Parameter *)
+{
+
+}

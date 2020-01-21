@@ -194,3 +194,45 @@ bool ParameterChoice::SetAndLoadChoice(int ch)
 
     return true;
 }
+
+
+int ParameterChoice::GetChoice() const
+{
+    return 0;
+}
+
+
+bool ParameterChoice::DrawChoice(int, int) const
+{
+    return true;
+}
+
+
+pString Parameter::NameUnit(char [10]) const
+{
+    return "";
+}
+
+
+ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComplex(ParameterComplex::Manipulation, parameters)
+{
+
+}
+
+
+pString Parameter::GetStringDigits() const
+{
+    return "";
+}
+
+
+bool ParameterValue::InRange(float) const
+{
+    return false;
+}
+
+
+int ParameterChoice::NumChoices() const
+{
+    return 1;
+}

@@ -75,7 +75,7 @@ static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::
 static ParameterFrequency param_TriangleA_Frequency;
 static ParameterAmplitude param_TriangleA_Amplitude;
 static ParameterOffset    param_TriangleA_Offset;
-static ParameterChoice    param_TriangleA_ModeStart;
+static ParameterModeStart param_TriangleA_ModeStart;
 
 static Parameter *params_TriangleA[] =
 {
@@ -128,7 +128,7 @@ static ParameterPeriod    param_ImpulseA_Period   (FloatValue(0, 0, 0, 33), Floa
 static ParameterDuration  param_ImpulseA_Duration (FloatValue(0, 0),        FloatValue(100 * 1000 * 1000, 0), FloatValue(0, 0, 100));
 static ParameterAmplitude param_ImpulseA_Amplitude;
 static ParameterOffset    param_ImpulseA_Offset;
-static ParameterChoice    param_ImpulseA_Polarity;
+static ParameterPolarity  param_ImpulseA_Polarity;
 static ParameterModeStart param_ImpulseA_ModeStart;
 
 static Parameter *params_ImpulseA[] =
@@ -148,7 +148,7 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 static ParameterPeriod       param_PacketA_Period       (FloatValue(0, 0), FloatValue(100 * 1000 * 1000, 0), FloatValue(0, 0, 200));
 static ParameterDuration     param_PacketA_Duration     (FloatValue(0, 0), FloatValue(100 * 1000 * 1000, 0), FloatValue(0, 0, 100));
-static ParameterValue        param_PacketA_PacketNumber (FloatValue(0, 0), FloatValue(100 * 1000 * 1000, 0), FloatValue(3, 0));
+static ParameterValue        param_PacketA_PacketNumber (ParameterValue::PacketNumber, FloatValue(0, 0), FloatValue(100 * 1000 * 1000, 0), FloatValue(3, 0));
 static ParameterPacketPeriod param_PacketA_PacketPeriod (FloatValue(0, 0), FloatValue(100 * 1000 * 1000, 0), FloatValue(0, 1));
 static ParameterAmplitude    param_PacketA_Amplitude;
 static ParameterOffset       param_PacketA_Offset;
