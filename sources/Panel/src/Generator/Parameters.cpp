@@ -212,3 +212,9 @@ int ParameterChoice::NumChoices() const
 {
     return 1;
 }
+
+
+pString ParameterValue::GetStringDigits() const
+{
+    return "";
+}

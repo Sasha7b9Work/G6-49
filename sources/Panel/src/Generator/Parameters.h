@@ -99,6 +99,8 @@ public:
 
     pString GetStringValue(Language::E lang) const;
 
+    virtual pString GetStringDigits() const;
+
     bool SetAndLoadValue(float val);
 
 private:
@@ -111,6 +113,8 @@ private:
     pString MainUnits(Language::E lang) const;
     /// Возвращает true, если параметр может принимать значение v
     bool InRange(float v) const;
+
+
 };
 
 

@@ -23,8 +23,6 @@ struct FloatValue
 {
     explicit FloatValue(int units, uint mUnits, uint uUnits = 0, uint nUnits = 0);
 
-    explicit FloatValue(uint64 v = 0) : value(v) {}
-
     explicit FloatValue(float v);
 
     float ToFloat() const;

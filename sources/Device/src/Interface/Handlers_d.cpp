@@ -126,7 +126,10 @@ void DHandlers::SetFormWave(SimpleMessage *msg)
 static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, FloatValue))
 {
     Chan ch(msg->TakeByte());
-    FloatValue value(msg->TakeDoubleWord());
+
+    FloatValue value(0.0F);
+    value.FromUINT64(msg->TakeDoubleWord());
+
     func(ch, value);
 }
 
