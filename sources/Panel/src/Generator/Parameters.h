@@ -25,7 +25,7 @@ public:
     /// Возвращает true, если параметр сложный и открыт
     bool IsOpened() const { return parent != 0; }
 
-    pString GetStringDigits() const;
+    virtual pString GetStringDigits() const;
 
     Form *GetForm() { return form; }
 
@@ -43,18 +43,27 @@ public:
 
     enum E
     {
-        ManipulationDuration,
-        ManipulationPeriod,
-        Frequency,
-        Amplitude,
-        Offset,
-        Phase,
-        Period,
-        Duration,
-        PacketNumber,
-        PacketPeriod,
+        Frequency,              ///< Частота
+        Period,                 ///< Период
+        Amplitude,              ///< Амплитуда
+        Offset,                 ///< Смещение
+        Duration,               ///< Длительность
+        DutyRatio,              ///< Скважность
+        Phase,                  ///< Сдвиг фазы
+        Delay,                  ///< Задержка
+        DurationRise,           ///< Длительность нарастания
+        DurationFall,           ///< Длительность спада
+        DurationStady,          ///< Длительность установившего значения
+        DutyFactor,             ///< Коэффициент заполнения
+        ManipulationDuration,   ///< Длительность импульсов в режиме манипуляции
+        ManipulationPeriod,     ///< Период следования импульсов в режиме манипуляции
+        PacketPeriod,           ///< Период следования пачек импульсов в пакетном режиме
+        PacketNumber,           ///< Число импульсов в пачке пакетного режима
+        Exit,                   ///< Этот параметр закрывает открытый параметр
         Count
     };
+
+    ParameterValue(const FloatValue &min, const FloatValue &max, const FloatValue &value);
 
     virtual pString Name() const override
     {
@@ -83,6 +92,7 @@ private:
 class ParameterVoltage : public ParameterValue
 {
 public:
+    ParameterVoltage(const FloatValue &min, const FloatValue &max, const FloatValue &value);
 };
 
 
@@ -109,7 +119,36 @@ public:
 
 class ParameterTime : public ParameterValue
 {
+public:
+    ParameterTime(const FloatValue &min, const FloatValue &max, const FloatValue &value);
+};
 
+
+class ParameterPhase : public ParameterValue
+{
+public:
+    ParameterPhase();
+};
+
+
+class ParameterPacketPeriod : public ParameterTime
+{
+public:
+    ParameterPacketPeriod(const FloatValue &min, const FloatValue &max, const FloatValue &value);
+};
+
+
+class ParameterPeriod : public ParameterTime
+{
+public:
+    ParameterPeriod(const FloatValue &min, const FloatValue &max, const FloatValue &value);
+};
+
+
+class ParameterDuration : public ParameterTime
+{
+public:
+    ParameterDuration(const FloatValue &min, const FloatValue &max, const FloatValue &value);
 };
 
 
@@ -132,10 +171,10 @@ class ParameterChoice : public Parameter
 public:
 	enum E
 	{
-        Polarity,
-        StartMode,
-        deleted_SetManipulationMode,
-		ManipulationEnabled,
+        Polarity,                   ///< Полярность импульсов
+        ModeStart,                  ///< Режим запуска сигналов DDS и импульсных
+        deleted_ManipulationMode,   ///< Режим амплитудной манипуляции - со сглаживанием фронта или без
+        ManipulationEnabled,        ///< Включен или выключен режим манипуляции
         Count
 	};
 
@@ -150,10 +189,10 @@ private:
 };
 
 
-class ParameterStartMode : public ParameterChoice
+class ParameterModeStart : public ParameterChoice
 {
 public:
-    ParameterStartMode(pString choice0 = " Авто", pString choice1 = " Однокр", pString choice2 = " Комп А", pString choice3 = " Форм B");
+    ParameterModeStart(pString choice0 = " Авто", pString choice1 = " Однокр", pString choice2 = " Комп А", pString choice3 = " Форм B");
 };
 
 
@@ -165,13 +204,28 @@ public:
 };
 
 
+class ParameterPolarity : public ParameterChoice
+{
+public:
+    ParameterPolarity();
+};
+
+
 class ParameterComplex : public Parameter
 {
 public:
+    enum E
+    {
+        Manipulation,       ///< НАСТРОЙКИ СИГНАЛОВ / Параметр / МАНИПУЛЯЦИЯ на форме СИНУС
+        Count
+    } value;
+
     virtual void SetForm(Form *form) override;
 
     int NumParams() const { return numParams; }
     Parameter **Params() { return params; }
+
+    pString GetStringDigits() const override;
 
     ParameterValue *FindParameter(ParameterValue::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
@@ -180,6 +234,8 @@ private:
     Parameter **params;
     /// Число дополнительных параметров или 0, если таковых не имеется
     int numParams;
+
+    E type;
 };
 
 

@@ -12,7 +12,7 @@
 #endif
 
 
-FloatValue::FloatValue(int units, uint nanoUnits)
+FloatValue::FloatValue(int units, uint mUnits, uint uUnits, uint nUnits)
 {
     int sign = 1;
 
@@ -22,9 +22,10 @@ FloatValue::FloatValue(int units, uint nanoUnits)
         units = -units;
     }
 
-    value = static_cast<uint16>(units);
+    value = static_cast<uint>(units);
     value *= 1000 * 1000 * 1000;
-    value += nanoUnits;
+    
+    value += nUnits + uUnits * 1000 + mUnits * 1000 * 1000;
 
     if(sign < 0)
     {

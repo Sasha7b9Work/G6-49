@@ -286,7 +286,7 @@ Parameter *Form::FindParameter(ParameterChoice::E p)
         {
             ParameterChoice *parameter = static_cast<ParameterChoice *>(param);
 
-            if (parameter->Value() == p)
+            if (parameter->Type() == p)
             {
                 return parameter;
             }
@@ -319,7 +319,7 @@ ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
         {
             ParameterChoice *parameter = static_cast<ParameterChoice *>(param);
 
-            if (parameter->Value() == p)
+            if (parameter->Type() == p)
             {
                 return parameter;
             }
@@ -464,33 +464,9 @@ bool ParameterValue::SetAndLoadValue(float val)
 }
 
 
-void ParameterValue::IncreaseOrder()
-{
-    if (AssumeArbitaryOrder())
-    {
-        if (order < Order::Max(this))
-        {
-            order++; //-V803
-        }
-    }
-}
-
-
-void ParameterValue::DecreaseOrder()
-{
-    if (AssumeArbitaryOrder())
-    {
-        if (order > Order::Min(this))
-        {
-            order--; //-V803
-        }
-    }
-}
-
-
 pString ParameterComplex::GetStringDigits() const
 {
-    if(Is(Manipulation))
+    if(type == Manipulation)
     {
         static pCHAR values[2] =
         {

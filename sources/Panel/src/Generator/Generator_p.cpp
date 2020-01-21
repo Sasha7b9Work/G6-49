@@ -208,16 +208,11 @@ void PGenerator::SetParameter(ParameterValue *param)
         Command::RequestData
     };
 
-    FloatValue value = param->GetValueNano();
-
-    if (param->Is(ParameterValue::Offset))
-    {
-        value.Add(-5.0F);
-    }
+    FloatValue value = param->GetValue();
 
     Chan ch(param->GetForm()->GetWave()->GetChannel());
 
-    Command com(commands[param->value]);
+    Command com(commands[param->Type()]);
 
     Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
 }
