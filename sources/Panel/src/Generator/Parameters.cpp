@@ -64,16 +64,6 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
 }
 
 
-pString ParameterValue::GetStringValue(Language::E lang) const
-{
-    static char buf[100];
-
-    std::snprintf(buf, 99, "%E %s", GetValue().ToFloat(), MainUnits(lang));
-
-    return buf;
-}
-
-
 pString ParameterValue::MainUnits(Language::E lang) const
 {
     static const pString units[ParameterValue::Count][Language::Count] =
@@ -214,6 +204,8 @@ pString ParameterValue::GetStringValue() const
 
     static char buffer[30];
     std::strcpy(buffer, MathFloatValue::GetStringDigits(value, 5, &order));
+
+    std::strcat(buffer, " ");
 
     return buffer;
 }

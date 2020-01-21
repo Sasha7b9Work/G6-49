@@ -298,6 +298,6 @@ void SCPI::ProcessRequestParameterValue(const ParameterValue *param)
     }
     else
     {
-        SCPI::SendAnswer(param->GetStringValue(Language::EN));
+        SCPI::SendAnswer(param->GetStringValue());
     }
 }

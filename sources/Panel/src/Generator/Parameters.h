@@ -18,7 +18,7 @@ struct Order
         Count
     } value;
 
-    //pString Suffix(Language::E lang) const;
+    pString Suffix(Language::E lang) const;
 };
 
 class Parameter
@@ -111,8 +111,6 @@ public:
     E Type() const { return type; }
 
     FloatValue GetValue() const { return value; };
-
-    pString GetStringValue(Language::E lang) const;
 
     virtual pString GetStringValue() const;
 
@@ -313,6 +311,7 @@ public:
 
 struct MathFloatValue
 {
+    /// Возвращает числовое представление FloatValue с numDigits значащими цифрами и запятой. В order сохраняется порядок числа относительно запятой
     static pString GetStringDigits(const FloatValue &value, int numDigits, Order::E *order);
     /// Возвращает позицию первого ненулевого символа
     /// "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
