@@ -116,7 +116,7 @@ bool ParameterValue::SetAndLoadValue(float val)
 }
 
 
-pString ParameterComplex::GetStringDigits() const
+pString ParameterComplex::GetStringValue() const
 {
     if(type == Manipulation)
     {
@@ -134,7 +134,7 @@ pString ParameterComplex::GetStringDigits() const
 }
 
 
-pString ParameterChoice::GetStringDigits() const
+pString ParameterChoice::GetStringValue() const
 {
     return names[choice];
 }
@@ -196,12 +196,6 @@ ParameterManipulation::ParameterManipulation(Parameter **parameters) : Parameter
 }
 
 
-pString Parameter::GetStringDigits() const
-{
-    return "";
-}
-
-
 bool ParameterValue::InRange(float) const
 {
     return false;
@@ -214,7 +208,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-pString ParameterValue::GetStringDigits() const
+pString ParameterValue::GetStringValue() const
 {
     return value.GetStringDigits();
 }

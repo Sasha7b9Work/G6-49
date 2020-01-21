@@ -46,7 +46,7 @@ public:
     /// Возвращает true, если параметр сложный и открыт
     bool IsOpened() const { return parent != 0; }
 
-    virtual pString GetStringDigits() const;
+    virtual pString GetStringValue() const = 0;
 
     Form *GetForm() { return form; }
 
@@ -99,7 +99,7 @@ public:
 
     pString GetStringValue(Language::E lang) const;
 
-    virtual pString GetStringDigits() const;
+    virtual pString GetStringValue() const;
 
     bool SetAndLoadValue(float val);
 
@@ -217,13 +217,13 @@ public:
 
     int GetChoice() const;
 
-    virtual pString GetStringDigits() const;
-
     void NextChoice();
 
     bool SetAndLoadChoice(int ch);
 
     bool DrawChoice(int x, int y) const;
+
+    virtual pString GetStringValue() const;
 
 private:
 	E type;
@@ -275,10 +275,10 @@ public:
     int NumParams() const { return numParams; }
     Parameter **Params() { return params; }
 
-    virtual pString GetStringDigits() const;
-
     ParameterValue *FindParameter(ParameterValue::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
+
+    virtual pString GetStringValue() const;
 private:
     /// Здесь находятся дополнительные параметры в случае, если они требуются
     Parameter **params;
