@@ -106,9 +106,9 @@ void FloatValue::Add(float v)
 
 int FloatValue::Integer() const
 {
-    float abs = std::fabsf(ToFloat());
+    uint64 val = Abs();
 
-    return Sign() * static_cast<int>(abs);
+    return static_cast<int>(val / (1000 * 1000 * 1000)) * Sign();
 }
 
 
@@ -116,5 +116,109 @@ int FloatValue::Fract(int numDigits) const
 {
     float fract = ToFloat() - Integer();
 
-    return static_cast<int>(fract * Math::Pow10(numDigits));
+    return static_cast<int>(fract * ::Math::Pow10(numDigits));
+}
+
+
+int FloatValue::FractNano() const
+{
+    FloatValue val = *this;
+    val.SetSign(1);
+
+    int whole = val.Integer();
+
+    return static_cast<int>(val.value - whole * 1000 * 1000 * 1000);
+}
+
+
+int FloatValue::Math::GetPositionFirstDigit(const FloatValue &_value)
+{
+    FloatValue value = _value;
+    value.SetSign(1);
+
+    int result = 0;
+
+    if(value.Integer() > 0)
+    {
+        int whole = value.Integer();        // Целая часть числа
+
+        while(whole > 9)
+        {
+            whole /= 10;
+            result++;
+        }
+    }
+    else
+    {
+        int fract = value.FractNano();
+        
+        if(fract == 0)
+        {
+            return 0;
+        }
+
+        do 
+        {
+            result--;
+            fract *= 10;
+        } while (fract < (1000 * 1000 * 1000));
+    }
+
+    return result;
+}
+
+
+int FloatValue::Math::GetDigit(const FloatValue &_value, int position)
+{
+    FloatValue value = _value;
+    value.SetSign(1);
+
+    if(position < 0)
+    {
+        int divider = 100 * 1000 * 1000;       /// На это число будем делить количество наносекунд
+
+        int fract = value.FractNano();
+
+        while(position < -1)
+        {
+            divider /= 10;
+            fract %= divider;
+            position++;
+        }
+
+        return value.FractNano() / divider;
+    }
+    else
+    {
+        int whole = value.Integer();
+
+        while(position > 0)
+        {
+            whole /= 10;
+            position--;
+        }
+
+        return (whole % 10);
+    }
+}
+
+
+pString FloatValue::GetStringDigits() const
+{
+    static const int NUM_DIGITS = 5;
+
+    static char buffer[NUM_DIGITS + 1];
+
+    buffer[NUM_DIGITS] = '\0';
+
+    int position = FloatValue::Math::GetPositionFirstDigit(*this);
+
+    for(int i = 0; i < NUM_DIGITS; i++)
+    {
+        buffer[i] = static_cast<char>(FloatValue::Math::GetDigit(*this, position)) | 0x30;
+        position--;
+    }
+
+    return buffer;
+
 }

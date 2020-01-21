@@ -216,5 +216,5 @@ int ParameterChoice::NumChoices() const
 
 pString ParameterValue::GetStringDigits() const
 {
-    return "";
+    return value.GetStringDigits();
 }
