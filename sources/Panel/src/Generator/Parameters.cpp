@@ -213,7 +213,145 @@ pString ParameterValue::GetStringValue() const
     Order::E order = Order::Count;
 
     static char buffer[30];
-    std::strcpy(buffer, FloatValue::Math::GetStringDigits(value, 5, &order));
+    std::strcpy(buffer, MathFloatValue::GetStringDigits(value, 5, &order));
 
     return buffer;
+}
+
+
+int MathFloatValue::GetPositionFirstDigit(const FloatValue &_value)
+{
+    FloatValue value = _value;
+    value.SetSign(1);
+
+    int result = 0;
+
+    if(value.Integer() > 0)
+    {
+        int whole = value.Integer();        // Целая часть числа
+
+        while(whole > 9)
+        {
+            whole /= 10;
+            result++;
+        }
+    }
+    else
+    {
+        int fract = value.FractNano();
+
+        if(fract == 0)
+        {
+            return 0;
+        }
+
+        do
+        {
+            result--;
+            fract *= 10;
+        } while(fract < (1000 * 1000 * 1000));
+    }
+
+    return result;
+}
+
+
+int MathFloatValue::GetDigit(const FloatValue &_value, int position)
+{
+    FloatValue value = _value;
+    value.SetSign(1);
+
+    if(position < 0)
+    {
+        int divider = 100 * 1000 * 1000;       /// На это число будем делить количество наносекунд
+
+        int fract = value.FractNano();
+
+        while(position < -1)
+        {
+            divider /= 10;
+            fract %= divider;
+            position++;
+        }
+
+        return value.FractNano() / divider;
+    }
+    else
+    {
+        int whole = value.Integer();
+
+        while(position > 0)
+        {
+            whole /= 10;
+            position--;
+        }
+
+        return (whole % 10);
+    }
+}
+
+
+pString MathFloatValue::GetStringDigits(const FloatValue &value, int numDigits, Order::E *order)
+{
+    static char buffer[20];
+
+    buffer[numDigits + 1] = '\0';
+
+    int position = GetPositionFirstDigit(value);
+
+    int posComma = PositionComma(position, order);
+
+    for(int i = 0; i <= numDigits; i++)
+    {
+        if(i == posComma)
+        {
+            buffer[i] = '.';
+        }
+        else
+        {
+            buffer[i] = static_cast<char>(GetDigit(value, position)) | 0x30;
+            position--;
+        }
+    }
+
+    return buffer;
+
+}
+
+
+int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
+{
+    if(posFirstDigit > 5)
+    {
+        *order = Order::Mega;
+    }
+    else if(posFirstDigit > 2)
+    {
+        *order = Order::Kilo;
+    }
+    else if(posFirstDigit > -1)
+    {
+        *order = Order::One;
+    }
+    else if(posFirstDigit > -4)
+    {
+        *order = Order::Milli;
+    }
+    else if(posFirstDigit > -7)
+    {
+        *order = Order::Micro;
+    }
+    else
+    {
+        *order = Order::Nano;
+    }
+
+    int result = posFirstDigit - 5;
+
+    while(result < 1)
+    {
+        result += 3;
+    }
+
+    return result;
 }
