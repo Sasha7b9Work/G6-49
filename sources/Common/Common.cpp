@@ -203,22 +203,42 @@ int FloatValue::Math::GetDigit(const FloatValue &_value, int position)
 }
 
 
-pString FloatValue::GetStringDigits() const
+pString FloatValue::GetStringDigits(int numDigits) const
 {
-    static const int NUM_DIGITS = 5;
+    static char buffer[20];
 
-    static char buffer[NUM_DIGITS + 1];
-
-    buffer[NUM_DIGITS] = '\0';
+    buffer[numDigits + 1] = '\0';
 
     int position = FloatValue::Math::GetPositionFirstDigit(*this);
 
-    for(int i = 0; i < NUM_DIGITS; i++)
+    int posComma = FloatValue::Math::PositionComma(position);
+
+    for(int i = 0; i <= numDigits; i++)
     {
-        buffer[i] = static_cast<char>(FloatValue::Math::GetDigit(*this, position)) | 0x30;
-        position--;
+        if(i == posComma)
+        {
+            buffer[i] = '.';
+        }
+        else
+        {
+            buffer[i] = static_cast<char>(FloatValue::Math::GetDigit(*this, position)) | 0x30;
+            position--;
+        }
     }
 
     return buffer;
 
+}
+
+
+int FloatValue::Math::PositionComma(int posFirstDigit)
+{
+    int result = posFirstDigit - 5;
+
+    while(result < 1)
+    {
+        result += 3;
+    }
+
+    return result;
 }

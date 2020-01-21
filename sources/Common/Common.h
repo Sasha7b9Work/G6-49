@@ -51,7 +51,7 @@ struct FloatValue
     /// Возвращает количество наночастиц в дробной части
     int FractNano() const;
 
-    pString GetStringDigits() const;
+    pString GetStringDigits(int numDigits) const;
 
     struct Math
     {
@@ -60,6 +60,8 @@ struct FloatValue
         static int GetPositionFirstDigit(const FloatValue &value);
         /// Возвращает цифру в позиции position
         static int GetDigit(const FloatValue &value, int position);
+
+        static int PositionComma(int posFirstDigit);
     };
 
 private:

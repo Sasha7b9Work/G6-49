@@ -6,6 +6,20 @@
 class Form;
 
 
+struct Order
+{
+    enum E
+    {
+        Mega,
+        Kilo,
+        One,
+        Milli,
+        Micro,
+        Nano
+    };
+};
+
+
 class Parameter
 {
 public:
