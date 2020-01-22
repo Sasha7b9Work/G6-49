@@ -82,6 +82,8 @@ public:
     {
         return editor.ProcessKey(this, key);
     }
+    /// Обработчик нажатия кнопки "Изменить"
+    virtual void ProcessButtonChange() { };
 
 protected:
     /// Форма, для которой зада этот параметр
@@ -138,6 +140,8 @@ public:
     {
         return (type == Offset);
     }
+
+    virtual void ProcessButtonChange();
 
 private:
     E type;
@@ -259,6 +263,8 @@ public:
 
     virtual pString GetStringValue() const;
 
+    virtual void ProcessButtonChange();
+
 private:
 	E type;
     /// Текущий выбор
@@ -313,6 +319,8 @@ public:
     ParameterChoice *FindParameter(ParameterChoice::E p);
 
     virtual pString GetStringValue() const;
+
+    virtual void ProcessButtonChange();
 private:
     /// Здесь находятся дополнительные параметры в случае, если они требуются
     Parameter **params;

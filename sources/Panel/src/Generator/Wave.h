@@ -59,8 +59,6 @@ public:
     bool IsDDS() const;
     /// Возвращает указатель на родительский Wave
     Wave *GetWave() { return wave; };
-    /// Функция вызывается при нажатии кнопки "Изменить параметр". Фактически активизирует текущий параметр
-    void ChangeParameter();
     /// Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
     bool CloseOpenedParameter();
     /// Нарисовать изображение сигнала
@@ -82,9 +80,9 @@ public:
     void SendParameterToGenerator(ParameterValue::E p);
     void SendParameterToGenerator(ParameterChoice::E p);
 
-private:
     /// Раскрывает страницу текущего параметра
     void OpenCurrentParameter();
+private:
     /// Wave, к которому относится данный Form
     Wave *wave;
     /// Здесь хранятся параметры

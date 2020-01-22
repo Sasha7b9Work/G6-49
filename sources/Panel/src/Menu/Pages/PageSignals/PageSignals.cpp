@@ -58,7 +58,7 @@ DEF_CHOICE_7( cFormB,                                                           
 
 static void OnPress_TuneParameter()
 {
-    CURRENT_FORM->ChangeParameter();
+    CURRENT_PARAM->ProcessButtonChange();
 }
 
 DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
@@ -97,10 +97,10 @@ static bool OnKey_PageSignals(Key &)
 DEF_PAGE_4( pageSignals,   //-V641
     "НАСТРОЙКИ СИГНАЛОВ",  
     "",
-    &cChannel,               ///< НАСТРОЙКИ СИГНАЛОВ - Канал
-    &cFormA,                 ///< НАСТРОЙКИ СИГНАЛОВ - Форма
-    &cParameters,            ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
-    &bTuneParameter,       ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
+    &cChannel,              ///< НАСТРОЙКИ СИГНАЛОВ - Канал
+    &cFormA,                ///< НАСТРОЙКИ СИГНАЛОВ - Форма
+    &cParameters,           ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
+    &bTuneParameter,        ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
     Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey_PageSignals, FuncBeforeDraw
 )
 

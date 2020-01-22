@@ -374,29 +374,6 @@ bool Form::CloseOpenedParameter()
 }
 
 
-void Form::ChangeParameter()
-{
-    Parameter *param = CurrentParameter();
-
-    if(param->IsChoice())
-    {
-        static_cast<ParameterChoice *>(param)->NextChoice();
-    }
-    else if(param->IsValue())
-    {
-
-    }
-    else if (param->IsComplex())
-    {
-        OpenCurrentParameter();
-    }
-    else
-    {
-        // здесь ничего
-    }
-}
-
-
 bool Wave::StartModeIsSingle()
 {
     ParameterChoice* param = static_cast<ParameterChoice *>(GetCurrentForm()->FindParameter(ParameterChoice::ModeStart));

@@ -371,3 +371,21 @@ bool ParameterEditor::ProcessKey(Parameter *, Key &)
 {
     return false;
 }
+
+
+void ParameterChoice::ProcessButtonChange()
+{
+    NextChoice();
+}
+
+
+void ParameterValue::ProcessButtonChange()
+{
+
+}
+
+
+void ParameterComplex::ProcessButtonChange()
+{
+    form->OpenCurrentParameter();
+}
