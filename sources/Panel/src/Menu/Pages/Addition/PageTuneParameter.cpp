@@ -5,7 +5,7 @@
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
-#include "PageInput.h"
+#include "PageTuneParameter.h"
 
 
 extern const PageBase pInput;
@@ -86,7 +86,7 @@ static bool OnControl(Key &)
     return false;
 }
 
-Page *PageInput::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
+Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
 
 DEF_PAGE_SB( pInput,   //-V641
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß",   

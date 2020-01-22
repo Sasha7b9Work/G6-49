@@ -9,7 +9,7 @@
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/Addition/PageInput.h"
+#include "Menu/Pages/Addition/PageTuneParameter.h"
 #include "Utils/StringUtils.h"
 #include <cstdio>
 #include <cstdlib>

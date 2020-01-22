@@ -2,7 +2,7 @@
 
 
 
-struct PageInput
+struct PageTuneParameter
 {
     static Page *self;
 };

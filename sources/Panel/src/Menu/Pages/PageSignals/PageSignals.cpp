@@ -1,6 +1,6 @@
 #include "Settings/Settings.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/Addition/PageInput.h"
+#include "Menu/Pages/Addition/PageTuneParameter.h"
 #include "Menu/Pages/PageSignals/PageSignals.h"
 #include "Generator/Signals.h"
 #include "Generator/Generator_p.h"
@@ -56,21 +56,21 @@ DEF_CHOICE_7( cFormB,                                                           
 )
 
 
-static void OnPress_ChnageParameter()
+static void OnPress_TuneParameter()
 {
     CURRENT_FORM->ChangeParameter();
 }
 
-DEF_BUTTON( bChangeParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
+DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
     "Изменить",
     "Открывает окно ввода параметра.",
-    pageSignals, Item::FuncActive, OnPress_ChnageParameter, FuncDraw
+    pageSignals, Item::FuncActive, OnPress_TuneParameter, FuncDraw
 )
 
 DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР",
     "Выбор параметра для настройки.",
-    pageSignals, Item::FuncActive, OnPress_ChnageParameter, WAVE(Chan::A).GetForm(0)
+    pageSignals, Item::FuncActive, OnPress_TuneParameter, WAVE(Chan::A).GetForm(0)
 )
 
 
@@ -83,28 +83,24 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 //)
 
 
-static bool OnKey_PageSignals(Key &key)
+static bool OnKey_PageSignals(Key &)
 {
-    if(key.Is(Key::F4))
-    {
-        return true;
-    }
-
-    if(key.Is(Key::Esc) && key.action.IsRelease())
-    {
-        return CURRENT_FORM->CloseOpenedParameter();
-    }
-
     return false;
+//    if(CURRENT_PAGE != PageSignals::self)
+//    {
+//        return false;
+//    }
+//
+//    return CURRENT_PARAM->ProcessKey(key);
 }
 
 DEF_PAGE_4( pageSignals,   //-V641
     "НАСТРОЙКИ СИГНАЛОВ",  
     "",
-    &cChannel,                                      ///< НАСТРОЙКИ СИГНАЛОВ - Канал
-    &cFormA,                                        ///< НАСТРОЙКИ СИГНАЛОВ - Форма
-    &cParameters,                                   ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
-    &bChangeParameter,                              ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
+    &cChannel,               ///< НАСТРОЙКИ СИГНАЛОВ - Канал
+    &cFormA,                 ///< НАСТРОЙКИ СИГНАЛОВ - Форма
+    &cParameters,            ///< НАСТРОЙКИ СИГНАЛОВ - Параметр
+    &bTuneParameter,       ///< НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
     Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey_PageSignals, FuncBeforeDraw
 )
 

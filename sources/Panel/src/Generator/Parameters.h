@@ -4,6 +4,9 @@
 
 
 class Form;
+struct Key;
+class Parameter;
+
 
 struct Order
 {
@@ -20,6 +23,16 @@ struct Order
 
     pString Suffix(Language::E lang) const;
 };
+
+
+class ParameterEditor
+{
+public:
+    bool ProcessKey(Parameter *param, Key &);
+private:
+    Parameter *param;
+};
+
 
 class Parameter
 {
@@ -65,6 +78,11 @@ public:
 
     Form *GetForm() { return form; }
 
+    bool ProcessKey(Key &key)
+    {
+        return editor.ProcessKey(this, key);
+    }
+
 protected:
     /// Форма, для которой зада этот параметр
     Form *form;
@@ -74,6 +92,8 @@ protected:
     E kind;
 
     const char *name;
+    /// Эта структура занимается редактированием параметра
+    ParameterEditor editor;
 };
 
 
@@ -129,8 +149,6 @@ private:
     pString MainUnits(Language::E lang) const;
     /// Возвращает true, если параметр может принимать значение v
     bool InRange(float v) const;
-
-
 };
 
 

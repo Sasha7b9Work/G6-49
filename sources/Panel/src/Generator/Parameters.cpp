@@ -365,3 +365,9 @@ pString Order::Suffix(Language::E lang) const
 
     return suf[value][lang];
 }
+
+
+bool ParameterEditor::ProcessKey(Parameter *, Key &)
+{
+    return false;
+}
