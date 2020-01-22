@@ -105,7 +105,7 @@ public:
     /// 0 - B_Menu, 1...5 - B_F1...B_F5
     Item **items;
     /// Будет вызываться при нажатии на свёрнутую страницу
-    pFuncVV funcOnPress;
+    pFuncVV funcEnter;
     /// Будет вызываться после отрисовки кнопок
     pFuncVV funcOnDraw;
 
@@ -151,7 +151,7 @@ public:
     /// 0 - B_Menu,  1...5 - B_F1...B_F5
     const Item * const *items;   
     /// Будет вызываться при нажатии на свёрнутую страницу
-    pFuncVV  funcOnPress;
+    pFuncVV  funcEnter;
     /// Будет вызываться после отрисовки кнопок
     pFuncVV  funcOnDraw;
     /// В странице малых кнопок вызывается при повороте ручки установка

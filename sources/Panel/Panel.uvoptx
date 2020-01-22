@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Generator\WaveGraphics.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Generator\WaveGraphics.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelDDS\src/Generator/WaveGraphics.cpp\98</Expression>
         </Bp>
