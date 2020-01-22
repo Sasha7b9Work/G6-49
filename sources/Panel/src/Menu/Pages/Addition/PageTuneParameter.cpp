@@ -8,7 +8,7 @@
 #include "PageTuneParameter.h"
 
 
-extern const PageBase pInput;
+extern const PageBase pTuneParameter;
 
 
 static Parameter *parameter = nullptr;
@@ -32,7 +32,7 @@ static void OnPress_OrderUp()
 DEF_SMALL_BUTTON(sbOrderUp,                                                                                                                               //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
     "Порядок больше",
     "Увеличить порядок единицы измерения",
-    pInput, Item::FuncActive, OnPress_OrderUp, Draw_Left
+    pTuneParameter, Item::FuncActive, OnPress_OrderUp, Draw_Left
 )
 
 
@@ -48,7 +48,7 @@ static void OnPress_OrderDown()
 DEF_SMALL_BUTTON(sbOrderDown,                                                                                                                            //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
     "Порядок меньшше",
     "Уменьшить порядок единицы измерения",
-    pInput, Item::FuncActive, OnPress_OrderDown, Draw_Right
+    pTuneParameter, Item::FuncActive, OnPress_OrderDown, Draw_Right
 )
 
 
@@ -68,7 +68,7 @@ static void Draw_Cancel(int x, int y)
 DEF_SMALL_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
     "ЕДИНИЦЫ ИЗМЕРЕНИЯ",
     "Отказаться от ввода нового значения",
-    pInput, Item::FuncActive, OnPress_Cancel, Draw_Cancel
+    pTuneParameter, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
 
 
@@ -86,7 +86,7 @@ static void OnPress_Enter()
 DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
     "ВВОД",
     "Подтвердить ввод нового значения",
-    pInput, Item::FuncActive, OnPress_Enter, Draw_Enter
+    pTuneParameter, Item::FuncActive, OnPress_Enter, Draw_Enter
 )
 
 
@@ -95,9 +95,8 @@ static bool OnControl(Key &)
     return false;
 }
 
-Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pInput));
 
-DEF_PAGE_SB( pInput,   //-V641
+DEF_PAGE_SB( pTuneParameter,   //-V641
     "ВВОД ЗНАЧЕНИЯ",   
     "",
     &sbOrderUp,         ///< ОКНО ВВОДА - СИМВОЛ ВЛЕВО
@@ -108,3 +107,5 @@ DEF_PAGE_SB( pInput,   //-V641
     nullptr,
     Page::SB_Input, 0, Item::FuncActive, FuncEnter, Page::FuncDraw, OnControl
 )
+
+Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));

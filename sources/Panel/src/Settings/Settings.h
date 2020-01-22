@@ -13,9 +13,6 @@
 #endif
 
 
-
-extern const PageBase pInput;
-
 #define COLOR(x)                (set.disp_Colors[x])
 #define CURRENT_PAGE            (set.menu_currentPage)
 
