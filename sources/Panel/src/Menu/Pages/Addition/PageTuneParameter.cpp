@@ -90,8 +90,21 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 
-static bool OnControl_TuneParameter(Key &)
+static bool OnControl_TuneParameter(Key &key)
 {
+    if(key.IsUp())
+    {
+        if(key.value == Key::Left)
+        {
+            support.SetActivePrev();
+            return true;
+        }
+        else if(key.value == Key::Right)
+        {
+            support.SetActiveNext();
+        }
+    }
+
     return false;
 }
 

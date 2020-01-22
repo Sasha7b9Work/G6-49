@@ -249,6 +249,8 @@ void ParameterPainterSupporting::SetParameter(Parameter *param)
     int length = X(NumSymbols() + 1);
 
     x0 = Width() / 2 - length / 2 + X0();
+
+    positionActive = PositionFirstUnit() - 1;
 }
 
 
@@ -313,4 +315,16 @@ int ParameterPainterSupporting::Width() const
 int ParameterPainterSupporting::Y0() const
 {
     return Wave::Graphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
+}
+
+
+void ParameterPainterSupporting::SetActiveNext()
+{
+
+}
+
+
+void ParameterPainterSupporting::SetActivePrev()
+{
+
 }

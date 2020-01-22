@@ -10,7 +10,7 @@ class Parameter;
 class ParameterPainterSupporting
 {
 public:
-    ParameterPainterSupporting() : parameter(nullptr), x0(0)
+    ParameterPainterSupporting() : parameter(nullptr), x0(0), positionActive(0)
     {
         buffer[0] = '\0';
     }
@@ -25,14 +25,22 @@ public:
     int X0() const;
     int Y0() const;
     int Width() const;
-    int Height() const;
     Parameter *parameter;
+    /// Сделать активным следующий символ
+    void SetActiveNext();
+    /// Сделать активным предыдущий символ
+    void SetActivePrev();
+    /// Возвращает позицию активного символа
+    int GetPositionActive() const { return positionActive; };
+
 public:
     char buffer[50];
     /// Возвращает позицию первого символа единиц измерения
     uint PositionFirstUnit() const;
     /// Позиция первого символа
     int x0;
+    /// Позиция активного символа
+    int positionActive;
 };
 
 
