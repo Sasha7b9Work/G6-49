@@ -199,8 +199,9 @@ ChoiceParameterBase name = { Item::Type::ChoiceParameter, 0, false, Page::NoPage
 
 
 #define DEF_SMALL_BUTTON(name, title, hint, keeper, funcActive, funcPress, funcDraw)                                                        \
-static const SButtonBase name = { Item::Type::SmallButton, 0, false, Page::NoPage, &keeper, funcActive, {title, hint},                      \
-    funcPress, funcDraw, 0, 0};
+static const SButtonBase name = { Item::Type::SmallButton, 0, false, Page::NoPage,                                                          \
+    reinterpret_cast<const PageBase *>(const_cast<const Page*>(&keeper)),                                                                   \
+    funcActive, {title, hint}, funcPress, funcDraw, 0, 0};
 
 #define DEF_SMALL_BUTTON_EXIT(name, keeper, funcActive, funcPress, funcDraw)                                                                \
 static const SButtonBase name = { Item_SmallButton, 0, false, Page::NoPage, &keeper, funcActive, {"Выход", "Exit",                          \

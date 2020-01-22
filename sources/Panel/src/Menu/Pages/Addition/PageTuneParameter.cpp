@@ -8,9 +8,6 @@
 #include "PageTuneParameter.h"
 
 
-extern const PageBase pTuneParameter;
-
-
 static Parameter *parameter = nullptr;
 
 
@@ -32,7 +29,7 @@ static void OnPress_OrderUp()
 DEF_SMALL_BUTTON(sbOrderUp,                                                                                                                               //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
     "Порядок больше",
     "Увеличить порядок единицы измерения",
-    pTuneParameter, Item::FuncActive, OnPress_OrderUp, Draw_Left
+    *PageTuneParameter::self, Item::FuncActive, OnPress_OrderUp, Draw_Left
 )
 
 
@@ -48,7 +45,7 @@ static void OnPress_OrderDown()
 DEF_SMALL_BUTTON(sbOrderDown,                                                                                                                            //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
     "Порядок меньшше",
     "Уменьшить порядок единицы измерения",
-    pTuneParameter, Item::FuncActive, OnPress_OrderDown, Draw_Right
+    *PageTuneParameter::self, Item::FuncActive, OnPress_OrderDown, Draw_Right
 )
 
 
@@ -68,7 +65,7 @@ static void Draw_Cancel(int x, int y)
 DEF_SMALL_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
     "ЕДИНИЦЫ ИЗМЕРЕНИЯ",
     "Отказаться от ввода нового значения",
-    pTuneParameter, Item::FuncActive, OnPress_Cancel, Draw_Cancel
+    *PageTuneParameter::self, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
 
 
@@ -86,7 +83,7 @@ static void OnPress_Enter()
 DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
     "ВВОД",
     "Подтвердить ввод нового значения",
-    pTuneParameter, Item::FuncActive, OnPress_Enter, Draw_Enter
+    *PageTuneParameter::self, Item::FuncActive, OnPress_Enter, Draw_Enter
 )
 
 
