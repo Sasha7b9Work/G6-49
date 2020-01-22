@@ -1,6 +1,8 @@
 #include "defines.h"
 #include "Generator/Generator_p.h"
 #include "Generator/Parameters.h"
+#include "Menu/Menu.h"
+#include "Menu/Pages/Addition/PageTuneParameter.h"
 #include "Utils/Math.h"
 #include <cstdio>
 
@@ -381,7 +383,7 @@ void ParameterChoice::ProcessButtonChange()
 
 void ParameterValue::ProcessButtonChange()
 {
-
+    Menu::SetAdditionPage(PageTuneParameter::self);
 }
 
 
