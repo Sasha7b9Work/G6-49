@@ -11,6 +11,14 @@
 extern const PageBase pInput;
 
 
+static Parameter *parameter = nullptr;
+
+
+void PageTuneParameter::SetParameter(Parameter *param)
+{
+    parameter = param;
+}
+
 
 static void Draw_Left(int, int)
 {
@@ -47,6 +55,7 @@ DEF_SMALL_BUTTON(sbOrderDown,                                                   
 
 static void OnPress_Cancel()
 {
+    parameter = nullptr;
     Menu::ResetAdditionPage();
 }
 

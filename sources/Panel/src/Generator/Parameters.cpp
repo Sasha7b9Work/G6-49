@@ -383,6 +383,7 @@ void ParameterChoice::ProcessButtonChange()
 
 void ParameterValue::ProcessButtonChange()
 {
+    PageTuneParameter::SetParameter(this);
     Menu::SetAdditionPage(PageTuneParameter::self);
 }
 
