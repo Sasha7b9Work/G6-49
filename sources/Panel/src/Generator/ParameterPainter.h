@@ -6,6 +6,26 @@ struct FloatValue;
 class Parameter;
 
 
+/// Вспомогательный класс для отрисовки значения параметра
+class ParameterPainterSupporting
+{
+public:
+    ParameterPainterSupporting(Parameter *param);
+    /// Возращает количество отрисовываемых символов
+    uint NumSymbols() const;
+    /// Возвращает позицию символа на позиции pos относительно 0-го символа
+    int X(uint pos) const;
+    /// Возвращает символ в позиции pos
+    char Symbol(uint pos) const;
+private:
+    Parameter *parameter;
+    char buffer[50];
+    /// Возвращает позицию первого символа единиц измерения
+    uint PositionFirstUnit() const;
+};
+
+
+/// Структура используется для отрисовки значения параметра
 class ParameterPainter
 {
 public:
@@ -17,14 +37,16 @@ public:
     /// Возвращает строку значения параметра со знаком для редактитрования
     static pString DigitsWithSign();
     /// Возвращает строку с единицами измерения
-    static pString Units();
+    static pString Units(Language::E lang = Language::RU);
 
 private:
     static Parameter *parameter;
-    /// Возвращает строку значения смещения
-    static pString DigitsWithSignOffset();
     /// Возвращает строку значения параметра ParameterValue
     static pString DigitsWithSignValue();
+    /// Возвращает строку значения смещения
+    static pString DigitsWithSignOffset();
+    /// Возвращает единицы измерения ParameterValue
+    static pString UnitsValue(Language::E lang = Language::RU);
 };
 
 

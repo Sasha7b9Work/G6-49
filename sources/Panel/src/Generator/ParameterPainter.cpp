@@ -1,6 +1,8 @@
 #include "defines.h"
+#include "Display/Font/Font.h"
 #include "Generator/Parameters.h"
 #include "Generator/ParameterPainter.h"
+#include <cstring>
 
 
 Parameter *ParameterPainter::parameter = nullptr;
@@ -17,9 +19,14 @@ pString ParameterPainter::DigitsWithSign()
 }
 
 
-pString ParameterPainter::Units()
+pString ParameterPainter::Units(Language::E lang)
 {
-    return "0";
+    if(parameter->IsValue())
+    {
+        return UnitsValue(lang);
+    }
+
+    return "";
 }
 
 
@@ -30,6 +37,19 @@ pString ParameterPainter::DigitsWithSignValue()
     if(value->Type() == ParameterValue::Offset)
     {
         return DigitsWithSignOffset();
+    }
+
+    return "";
+}
+
+
+pString ParameterPainter::UnitsValue(Language::E lang)
+{
+    ParameterValue *value = static_cast<ParameterValue *>(parameter);
+
+    if(value->Type() == ParameterValue::Offset || value->Type() == ParameterValue::Amplitude)
+    {
+        return (lang == Language::RU) ? "Â" : "V";
     }
 
     return "";
@@ -212,4 +232,59 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
     }
 
     return result;
+}
+
+
+ParameterPainterSupporting::ParameterPainterSupporting(Parameter *param) : parameter(param)
+{
+    ParameterPainter::SetPatameter(parameter);
+    buffer[0] = '\0';
+    std::strcpy(buffer, ParameterPainter::DigitsWithSign());
+    std::strcat(buffer, ParameterPainter::Units());
+}
+
+
+uint ParameterPainterSupporting::NumSymbols() const
+{
+    return std::strlen(buffer);
+}
+
+
+int ParameterPainterSupporting::X(uint pos) const
+{
+    int delta = 2;
+
+    int result = 0;
+
+    for(uint i = 0; i < pos; i++)
+    {
+        result += Font::GetLengthSymbol(buffer[i]) + delta;
+    }
+
+    if(pos >= PositionFirstUnit())
+    {
+        result += 5;
+    }
+
+    return result;
+}
+
+
+char ParameterPainterSupporting::Symbol(uint pos) const
+{
+    return buffer[pos];
+}
+
+
+uint ParameterPainterSupporting::PositionFirstUnit() const
+{
+    for(uint i = 0; i < NumSymbols(); i++)
+    {
+        if(static_cast<uint8>(Symbol(i)) >= static_cast<uint8>('A'))
+        {
+            return i;
+        }
+    }
+
+    return static_cast<uint>(-1);
 }
