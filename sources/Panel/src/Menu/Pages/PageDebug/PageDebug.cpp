@@ -587,8 +587,8 @@ DEF_BUTTON( bSend,                                                              
 )
 
 
-DEF_PAGE_4_VAR( pRegisters,                                                                                                                                        //--- –≈√»—“–€ --- //-V641
-    "–≈√»—“–€",  
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                       //--- –≈√»—“–€ --- //-V641
+    "–≈√»—“–€",   //-V641
     "",
     bPrev,
     bNext,
@@ -599,7 +599,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 
 
 DEF_PAGE_8( pDebug,                                                                                                                                                 //--- Œ“À¿ƒ ¿ --- //-V641
-    "Œ“À¿ƒ ¿",  
+    "Œ“À¿ƒ ¿",   //-V641
     "",
     PageDebug::Calibartion::self,
     &pRegisters,                                ///< Œ“À¿ƒ ¿ - –Â„ËÒÚ˚

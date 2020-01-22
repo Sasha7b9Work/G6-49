@@ -113,15 +113,11 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 
 static void DrawNameParameter(int x, int y, int width)
 {
-    Font::Store();
-    Font::Set(TypeFont::_GOSTB20);
-    Text::SetUpperCase(false);
     int length = Font::GetLengthText(parameter->Name());
 
     int pos = x + width / 2 - length / 2;
 
     Text::Draw(pos, y + 10, parameter->Name(), Color::WHITE);
-    Font::Restore();
 }
 
 
@@ -132,6 +128,10 @@ static void OnDraw_TuneParameter()
         return;
     }
 
+    Font::Store();
+    Font::Set(TypeFont::_GOSTB20);
+    Text::SetUpperCase(false);
+
     int x = Wave::Graphics::X();
     int y = Wave::Graphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
     int width = Wave::Graphics::Width() - 1;
@@ -141,5 +141,7 @@ static void OnDraw_TuneParameter()
 
     DrawNameParameter(x, y, width);
 
-    Text::Draw(x + 10, y + 20, ParameterPainter::DigitsWithSign(), Color::FILL);
+    Text::Draw(x + 10, y + 40, ParameterPainter::DigitsWithSign(), Color::FILL);
+
+    Font::Restore();
 }

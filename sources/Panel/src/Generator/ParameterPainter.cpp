@@ -38,9 +38,29 @@ pString ParameterPainter::DigitsWithSignValue()
 
 pString ParameterPainter::DigitsWithSignOffset()
 {
-    //const int NUM_SYMBOLS = 1 + 1 + 1 + 3 + 1;
+    //ParameterValue *value = static_cast<ParameterValue *>(parameter);
 
-    return "";
+    FloatValue value = static_cast<ParameterValue *>(parameter)->value;
+
+    const int NUM_SYMBOLS = 1 + 1 + 1 + 3 + 1;
+
+    static char buffer[NUM_SYMBOLS];
+
+    buffer[0] = (value.Sign() < 0) ? '-' : '+';
+
+    buffer[NUM_SYMBOLS - 1] = '\0';
+
+    buffer[1] = MathFloatValue::GetChar(value, 0);
+
+    buffer[2] = ',';
+
+    buffer[3] = MathFloatValue::GetChar(value, -1);
+
+    buffer[4] = MathFloatValue::GetChar(value, -2);
+
+    buffer[5] = MathFloatValue::GetChar(value, -3);
+
+    return buffer;
 }
 
 
@@ -69,7 +89,7 @@ pString MathFloatValue::GetStringValue(const FloatValue &value, bool sign, int n
         }
         else
         {
-            buffer[POS(i)] = static_cast<char>(GetDigit(value, position)) | 0x30;
+            buffer[POS(i)] = GetChar(value, position);
             position--;
         }
     }
@@ -129,12 +149,12 @@ int MathFloatValue::GetDigit(const FloatValue &_value, int position)
 
         while(position < -1)
         {
-            divider /= 10;
             fract %= divider;
+            divider /= 10;
             position++;
         }
 
-        return value.FractNano() / divider;
+        return fract / divider;
     }
     else
     {
@@ -148,6 +168,12 @@ int MathFloatValue::GetDigit(const FloatValue &_value, int position)
 
         return (whole % 10);
     }
+}
+
+
+char MathFloatValue::GetChar(const FloatValue &value, int postition)
+{
+    return static_cast<char>(GetDigit(value, postition) | 0x30);
 }
 
 

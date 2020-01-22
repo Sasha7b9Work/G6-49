@@ -68,6 +68,7 @@ protected:
 
 class ParameterValue : public Parameter
 {
+    friend class ParameterPainter;
 public:
 
     enum E
@@ -141,7 +142,7 @@ public:
 class ParameterOffset : public ParameterVoltage
 {
 public:
-    ParameterOffset(const FloatValue &min = FloatValue(-5, 0), const FloatValue &max = FloatValue(5, 0), const FloatValue &value = FloatValue(0, 0)) :
+    ParameterOffset(const FloatValue &min = FloatValue(-5, 0), const FloatValue &max = FloatValue(5, 0), const FloatValue &value = FloatValue(1, 234)) :
         ParameterVoltage(ParameterValue::Offset, "Смещение", min, max, value) { }
 };
 

@@ -54,6 +54,8 @@ struct MathFloatValue
     static int GetPositionFirstDigit(const FloatValue &value);
     /// Возвращает цифру в позиции position
     static int GetDigit(const FloatValue &value, int position);
+    /// Возвращает символ в позиции position
+    static char GetChar(const FloatValue &value, int postition);
     /// Возвращает позицию запятой относительно позиции первого значащего символа
     static int PositionComma(int posFirstDigit, Order::E *order);
 };
