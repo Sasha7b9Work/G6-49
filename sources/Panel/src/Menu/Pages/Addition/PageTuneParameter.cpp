@@ -1,6 +1,7 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
+#include "Generator/ParameterPainter.h"
 #include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
@@ -17,6 +18,7 @@ static void OnDraw_TuneParameter();
 void PageTuneParameter::SetParameter(Parameter *param)
 {
     parameter = param;
+    ParameterPainter::SetPatameter(parameter);
 }
 
 
@@ -108,6 +110,21 @@ DEF_PAGE_SB( pTuneParameter,   //-V641
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));
 
+
+static void DrawNameParameter(int x, int y, int width)
+{
+    Font::Store();
+    Font::Set(TypeFont::_GOSTB20);
+    Text::SetUpperCase(false);
+    int length = Font::GetLengthText(parameter->Name());
+
+    int pos = x + width / 2 - length / 2;
+
+    Text::Draw(pos, y + 10, parameter->Name(), Color::WHITE);
+    Font::Restore();
+}
+
+
 static void OnDraw_TuneParameter()
 {
     if(parameter == nullptr)
@@ -122,5 +139,7 @@ static void OnDraw_TuneParameter()
 
     Painter::FillRegion(x, y, width, height, Color::BLACK);
 
-    Text::Draw(x + 10, y + 10, parameter->Name(), Color::WHITE);
+    DrawNameParameter(x, y, width);
+
+    Text::Draw(x + 10, y + 20, ParameterPainter::DigitsWithSign(), Color::FILL);
 }

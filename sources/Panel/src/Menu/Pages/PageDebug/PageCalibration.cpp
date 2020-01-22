@@ -15,12 +15,12 @@ static uint8 signal = 0;
 static uint8 parameter = 0;
 static uint8 range = 0;
 
-static int16 *k = nullptr;
+static int16 *calK = nullptr;
 
 
 static void LoadK()
 {
-    k = setCal.GetK(channel, signal, range, parameter);
+    calK = setCal.GetK(channel, signal, range, parameter);
 }
 
 static void SendMessage()
@@ -32,14 +32,14 @@ static void SendMessage()
     static int16 *prevPointerK = nullptr;
     static int16 prevK = 0;
 
-    if(channel != prevChannel || prevSignal != signal || prevRange != range || prevParameter != parameter || prevPointerK != k || prevK != *k)
+    if(channel != prevChannel || prevSignal != signal || prevRange != range || prevParameter != parameter || prevPointerK != calK || prevK != *calK)
     {
         prevChannel = channel;
         prevSignal = signal;
         prevRange = range;
         prevParameter = parameter;
-        prevPointerK = k;
-        prevK = *k;
+        prevPointerK = calK;
+        prevK = *calK;
 
         Message::CalibrateSet(channel, signal, range, parameter).Transmit();
         setCal.Save();
@@ -113,7 +113,7 @@ static void DrawPage()
 
     char buffer[30];
 
-    SU::Int2String(*k, true, 1, buffer);
+    SU::Int2String(*calK, true, 1, buffer);
 
     Text::DrawBigText(20, 20, 3, buffer, Color::BLACK);
 }

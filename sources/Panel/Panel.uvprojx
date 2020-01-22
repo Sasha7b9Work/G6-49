@@ -1897,6 +1897,26 @@
               <FilePath>.\src\Generator\Generator_p.cpp</FilePath>
             </File>
             <File>
+              <FileName>ParameterPainter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\ParameterPainter.h</FilePath>
+            </File>
+            <File>
+              <FileName>ParameterPainter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\ParameterPainter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parameters.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Parameters.h</FilePath>
+            </File>
+            <File>
+              <FileName>Parameters.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Parameters.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Signals.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Signals.h</FilePath>
@@ -1907,6 +1927,11 @@
               <FilePath>.\src\Generator\Signals.cpp</FilePath>
             </File>
             <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Wave.h</FilePath>
+            </File>
+            <File>
               <FileName>Wave.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Wave.cpp</FilePath>
@@ -1915,21 +1940,6 @@
               <FileName>WaveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\WaveGraphics.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Wave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Wave.h</FilePath>
-            </File>
-            <File>
-              <FileName>Parameters.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Parameters.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Parameters.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Parameters.h</FilePath>
             </File>
           </Files>
         </Group>
