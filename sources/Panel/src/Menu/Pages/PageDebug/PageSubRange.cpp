@@ -97,7 +97,7 @@ DEF_PAGE_6(pSubRanges,
     &cPF5,
     &cPC13,
     &cPC14,
-    Page::SubRanges, PageDebug::self, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::SubRanges, PageDebug::self, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 Page *PageDebug::SubRange::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pSubRanges));

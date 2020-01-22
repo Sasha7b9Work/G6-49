@@ -153,7 +153,7 @@ DEF_PAGE_6( pCalibration,
     &cParameter,
     PageDebug::_Calibration::PageA::self, ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ A
     PageDebug::_Calibration::PageB::self, ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - ÊÀËÈÁÐÎÂÊÀ B
-    Page::Calibration, PageDebug::self, Item::FuncActive, FuncPress, FuncOnKeyPage, DrawPage
+    Page::Calibration, PageDebug::self, Item::FuncActive, FuncEnter, FuncOnKeyPage, DrawPage
 )
 
 Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pCalibration));

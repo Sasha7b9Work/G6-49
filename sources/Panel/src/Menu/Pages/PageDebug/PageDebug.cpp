@@ -594,7 +594,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     bNext,
     bSend,
     emptyItem,
-    Page::Registers, &pDebug, Item::FuncActive, FuncPress, OnKey_PageRegisters, FuncBeforeDraw
+    Page::Registers, &pDebug, Item::FuncActive, FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 
 
@@ -609,7 +609,7 @@ DEF_PAGE_8( pDebug,                                                             
     &cStatistics,                               ///< ÎÒËÀÄÊÀ - Ñòàòèñòèêà
     &cShowSends,                                ///< ÎÒËÀÄÊÀ - Ïîêàçûâàòü ïàðàìåòðû
     &bSaveSettings,                             ///< ÎÒËÀÄÊÀ - Ñîõðàíèòü íàñòðîéêè
-    Page::Debug, PageService::self, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Debug, PageService::self, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 

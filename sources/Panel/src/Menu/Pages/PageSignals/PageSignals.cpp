@@ -101,7 +101,7 @@ DEF_PAGE_4( pageSignals,   //-V641
     &cFormA,                ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - Ôîðìà
     &cParameters,           ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - Ïàðàìåòð
     &bTuneParameter,        ///< ÍÀÑÒÐÎÉÊÈ ÑÈÃÍÀËÎÂ - Ââåñòè çíà÷åíèå ïàðàìåòðà
-    Page::Settings, Menu::mainPage, Item::FuncActive, FuncPress, OnKey_PageSignals, FuncBeforeDraw
+    Page::Settings, Menu::mainPage, Item::FuncActive, FuncEnter, OnKey_PageSignals, FuncBeforeDraw
 )
 
 

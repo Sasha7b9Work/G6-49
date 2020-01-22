@@ -2,7 +2,7 @@
 #include "Utils/CommonFunctions.h"
 #define FuncDraw            EmptyFuncVII
 #define FuncOnKey           EmptyFuncBKey
-#define FuncPress           EmptyFuncVV
+#define FuncEnter           EmptyFuncVV
 #define EmptyPressPage      EmptyFuncVV
 #define FuncChanged         EmptyFuncVV
 #define FuncChangedChoice   EmptyFuncVB

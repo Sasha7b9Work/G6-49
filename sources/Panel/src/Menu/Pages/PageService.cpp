@@ -74,7 +74,7 @@ DEF_PAGE_3( pUSB,                                                               
     &cSizeByte,              ///< USB - ÐÀÇÌÅÐ ÁÀÉÒÀ
     &cStopBit,               ///< USB - ÑÒÎÏ-ÁÈÒ
     &cParity,                ///< USB - ×¨ÒÍÎÑÒÜ
-    Page::USB, &pService, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::USB, &pService, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -88,5 +88,5 @@ DEF_PAGE_3( pService,                                                           
     &bReset,
     &pUSB,
     &pDebug,
-    Page::Service, Menu::mainPage, Item::FuncActive, FuncPress, FuncOnKey, Page::FuncDraw
+    Page::Service, Menu::mainPage, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
 )

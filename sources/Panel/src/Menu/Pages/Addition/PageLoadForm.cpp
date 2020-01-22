@@ -32,7 +32,7 @@ volatile const ButtonBase *pbDown = &bDown;
 DEF_BUTTON( bEnter,                                                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - Enter ---
     "¬˚·Ó",
     "",
-    pageLoad, Item::FuncActive, FuncPress, FuncDraw
+    pageLoad, Item::FuncActive, FuncEnter, FuncDraw
 )
 
 volatile const ButtonBase *pbEnter = &bEnter;
@@ -84,5 +84,5 @@ DEF_PAGE_4( pageLoad,                                                           
     0,
     0,
     0,
-    Page::Settings_Load, nullptr, Item::FuncActive, FuncPress, OnKey, FDrive::Draw
+    Page::Settings_Load, nullptr, Item::FuncActive, FuncEnter, OnKey, FDrive::Draw
 )
