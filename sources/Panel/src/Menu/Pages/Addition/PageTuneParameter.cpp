@@ -110,18 +110,18 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 
 
 /// Отобразить название параметра
-static void DrawNameParameter(int x, int y, int width)
+static void DrawNameParameter()
 {
     int length = Font::GetLengthText(support.parameter->Name());
 
-    int pos = x + width / 2 - length / 2;
+    int pos = support.X0() + support.Width() / 2 - length / 2;
 
-    Text::Draw(pos, y + 15, support.parameter->Name(), Color::WHITE);
+    Text::Draw(pos, support.Y0() + 15, support.parameter->Name(), Color::WHITE);
 }
 
 
 /// Отобразить значение параметра
-static void DrawParameter(int y)
+static void DrawParameter()
 {
     Color::WHITE.SetAsCurrent();
 
@@ -130,7 +130,7 @@ static void DrawParameter(int y)
     for(uint i = 0; i < support.NumSymbols(); i++)
     {
         buffer[0] = support.Symbol(i);
-        Text::Draw(support.X(i), y, buffer);
+        Text::Draw(support.X(i), support.Y0() + 60, buffer);
     }
 }
 
@@ -150,9 +150,9 @@ static void OnDraw_TuneParameter()
 
     Painter::FillRegion(support.X0(), support.Y0(), support.Width(), height, Color::BLACK);
 
-    DrawNameParameter(support.X0(), support.Y0(), support.Width());
+    DrawNameParameter();
 
-    DrawParameter(support.Y0() + 60);
+    DrawParameter();
 
     Font::Restore();
 }

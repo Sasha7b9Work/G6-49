@@ -246,8 +246,7 @@ void ParameterPainterSupporting::SetParameter(Parameter *param)
     std::strcpy(buffer, ParameterPainter::DigitsWithSign());
     std::strcat(buffer, ParameterPainter::Units());
 
-    x0 = 0;
-    int length = X(NumSymbols() + 1) - x0;
+    int length = X(NumSymbols() + 1);
 
     x0 = Width() / 2 - length / 2 + X0();
 }

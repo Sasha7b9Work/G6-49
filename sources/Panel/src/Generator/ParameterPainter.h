@@ -10,7 +10,10 @@ class Parameter;
 class ParameterPainterSupporting
 {
 public:
-    ParameterPainterSupporting() : parameter(nullptr) { }
+    ParameterPainterSupporting() : parameter(nullptr), x0(0)
+    {
+        buffer[0] = '\0';
+    }
     void SetParameter(Parameter *param);
     /// Возращает количество отрисовываемых символов
     uint NumSymbols() const;
@@ -28,7 +31,7 @@ public:
     char buffer[50];
     /// Возвращает позицию первого символа единиц измерения
     uint PositionFirstUnit() const;
-    /// Позиция X первого символа
+    /// Позиция первого символа
     int x0;
 };
 
