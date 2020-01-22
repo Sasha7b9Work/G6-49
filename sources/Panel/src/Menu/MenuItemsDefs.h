@@ -22,20 +22,18 @@ static const TimeBase name = { TypeItem::E::Time, 0, false, Page::NoPage, &keepe
 
 
 #define DEF_GOVERNOR(name, title, hint, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw, funcPress)                         \
-static const GovernorBase name = { Item::Type::Governor, 0, false, Page::NoPage, (const PageBase *)&keeper, funcActive,                                       \
+static const GovernorBase name = { Item::Type::Governor, 0, false, Page::NoPage, (const PageBase *)&keeper, funcActive,                     \
     {title, hint}, min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw, funcPress};
 
 
-#define DEF_PAGE_SB(name, title, hint, item0, item1, item2, item3, item4, item5,                                                            \
+#define DEF_PAGE_SB(name, title, hint, item0, item1, item2, item3,                                                                          \
     namePage, keeper, funcActive, funcPress, funcDraw, funcOnKey)                                                                           \
 static Item * items##name[] = {                                                                                                             \
     (Item *)reinterpret_cast<const Item *>(item0),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item1),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item2),                                                                                          \
-    (Item *)reinterpret_cast<const Item *>(item3),                                                                                          \
-    (Item *)reinterpret_cast<const Item *>(item4),                                                                                          \
-    (Item *)reinterpret_cast<const Item *>(item5)};                                                                                         \
-const PageBase name = { Item::Type::Page, 6, true, namePage, keeper, funcActive, {title, hint},                                             \
+    (Item *)reinterpret_cast<const Item *>(item3)};                                                                                         \
+const PageBase name = { Item::Type::Page, 4, true, namePage, keeper, funcActive, {title, hint},                                             \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_1(name, titleRU, titleEN, hintRU, hintEN, item1, namePage, keeper, funcActive, funcPress)                                  \

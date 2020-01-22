@@ -97,14 +97,12 @@ static bool OnControl_TuneParameter(Key &)
 
 
 DEF_PAGE_SB( pTuneParameter,   //-V641
-    "ббнд гмювемхъ",
+    "ббнд гмювемхъ", //-V641
     "",
     &sbOrderUp,         ///< нймн ббндю - яхлбнк бкебн
     &sbOrderDown,       ///< нймн ббндю - яхлбнк бопюбн
     &sbCancel,          ///< нймн ббндю - нрлемю
     &sbEnter,           ///< нймн ббндю - ббнд
-    nullptr,
-    nullptr,
     Page::SB_Input, 0, Item::FuncActive, FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
@@ -123,4 +121,6 @@ static void OnDraw_TuneParameter()
     int height = Wave::Graphics::Height() - 4;
 
     Painter::FillRegion(x, y, width, height, Color::BLACK);
+
+    Text::Draw(x + 10, y + 10, parameter->Name(), Color::WHITE);
 }
