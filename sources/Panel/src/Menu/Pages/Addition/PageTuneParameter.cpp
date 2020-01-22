@@ -9,15 +9,15 @@
 #include "PageTuneParameter.h"
 
 
-static Parameter *parameter = nullptr;
+static ParameterPainterSupporting support;
 
 
 static void OnDraw_TuneParameter();
 
 
-void PageTuneParameter::SetParameter(Parameter *param)
+void PageTuneParameter::SetParameter(Parameter *parameter)
 {
-    parameter = param;
+    support.SetParameter(parameter);
 }
 
 
@@ -56,7 +56,6 @@ DEF_SMALL_BUTTON(sbOrderDown,                                                   
 
 static void OnPress_Cancel()
 {
-    parameter = nullptr;
     Menu::ResetAdditionPage();
 }
 
@@ -113,16 +112,16 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 /// Отобразить название параметра
 static void DrawNameParameter(int x, int y, int width)
 {
-    int length = Font::GetLengthText(parameter->Name());
+    int length = Font::GetLengthText(support.parameter->Name());
 
     int pos = x + width / 2 - length / 2;
 
-    Text::Draw(pos, y + 15, parameter->Name(), Color::WHITE);
+    Text::Draw(pos, y + 15, support.parameter->Name(), Color::WHITE);
 }
 
 
 /// Отобразить значение параметра
-static void DrawParameter(const ParameterPainterSupporting &support, int y)
+static void DrawParameter(int y)
 {
     Color::WHITE.SetAsCurrent();
 
@@ -138,7 +137,7 @@ static void DrawParameter(const ParameterPainterSupporting &support, int y)
 
 static void OnDraw_TuneParameter()
 {
-    if(parameter == nullptr)
+    if(support.parameter == nullptr)
     {
         return;
     }
@@ -147,18 +146,13 @@ static void OnDraw_TuneParameter()
     Font::Set(TypeFont::_GOSTB20);
     Text::SetUpperCase(false);
 
-    int x = Wave::Graphics::X();
-    int y = Wave::Graphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
-    int width = Wave::Graphics::Width() - 1;
     int height = Wave::Graphics::Height() - 4;
 
-    Painter::FillRegion(x, y, width, height, Color::BLACK);
+    Painter::FillRegion(support.X0(), support.Y0(), support.Width(), height, Color::BLACK);
 
-    DrawNameParameter(x, y, width);
+    DrawNameParameter(support.X0(), support.Y0(), support.Width());
 
-    ParameterPainterSupporting support(parameter, x, width);
-
-    DrawParameter(support, y + 60);
+    DrawParameter(support.Y0() + 60);
 
     Font::Restore();
 }

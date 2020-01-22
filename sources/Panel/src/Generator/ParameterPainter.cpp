@@ -2,6 +2,8 @@
 #include "Display/Font/Font.h"
 #include "Generator/Parameters.h"
 #include "Generator/ParameterPainter.h"
+#include "Generator/Signals.h"
+#include "Generator/Wave.h"
 #include <cstring>
 
 
@@ -235,16 +237,19 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
 }
 
 
-ParameterPainterSupporting::ParameterPainterSupporting(Parameter *param, int x, int width) : parameter(param), x0(0)
+void ParameterPainterSupporting::SetParameter(Parameter *param)
 {
+    parameter = param;
+
     ParameterPainter::SetPatameter(parameter);
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::DigitsWithSign());
     std::strcat(buffer, ParameterPainter::Units());
 
+    x0 = 0;
     int length = X(NumSymbols() + 1) - x0;
 
-    x0 = width / 2 - length / 2 + x;
+    x0 = Width() / 2 - length / 2 + X0();
 }
 
 
@@ -291,4 +296,22 @@ uint ParameterPainterSupporting::PositionFirstUnit() const
     }
 
     return static_cast<uint>(-1);
+}
+
+
+int ParameterPainterSupporting::X0() const
+{
+    return Wave::Graphics::X();
+}
+
+
+int ParameterPainterSupporting::Width() const
+{
+    return Wave::Graphics::Width() - 1;
+}
+
+
+int ParameterPainterSupporting::Y0() const
+{
+    return Wave::Graphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
 }
