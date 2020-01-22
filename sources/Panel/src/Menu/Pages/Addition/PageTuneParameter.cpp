@@ -11,6 +11,9 @@
 static Parameter *parameter = nullptr;
 
 
+static void OnDraw_TuneParameter();
+
+
 void PageTuneParameter::SetParameter(Parameter *param)
 {
     parameter = param;
@@ -87,7 +90,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 
-static bool OnControl(Key &)
+static bool OnControl_TuneParameter(Key &)
 {
     return false;
 }
@@ -102,7 +105,17 @@ DEF_PAGE_SB( pTuneParameter,   //-V641
     &sbEnter,           ///< ÎÊÍÎ ÂÂÎÄÀ - ÂÂÎÄ
     nullptr,
     nullptr,
-    Page::SB_Input, 0, Item::FuncActive, FuncEnter, Page::FuncDraw, OnControl
+    Page::SB_Input, 0, Item::FuncActive, FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));
+
+static void OnDraw_TuneParameter()
+{
+    int x = Wave::Graphics::X();
+    int y = Wave::Graphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
+    int width = Wave::Graphics::Width() - 1;
+    int height = Wave::Graphics::Height() - 4;
+
+    Painter::FillRegion(x, y, width, height, Color::BLACK);
+}

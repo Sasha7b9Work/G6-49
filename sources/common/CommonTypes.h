@@ -22,6 +22,7 @@ struct Chan
     operator uint8() { return static_cast<uint8>(value); }
     operator int() { return static_cast<int>(value); }
     operator E() { return value; }
+    static E GetInverse(Chan::E ch) { return (ch == A) ? B : A; }
 };
 
 /// Сопротивление входа частотомера
