@@ -235,12 +235,16 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
 }
 
 
-ParameterPainterSupporting::ParameterPainterSupporting(Parameter *param) : parameter(param)
+ParameterPainterSupporting::ParameterPainterSupporting(Parameter *param, int x, int width) : parameter(param), x0(0)
 {
     ParameterPainter::SetPatameter(parameter);
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::DigitsWithSign());
     std::strcat(buffer, ParameterPainter::Units());
+
+    int length = X(NumSymbols() + 1) - x0;
+
+    x0 = width / 2 - length / 2 + x;
 }
 
 
@@ -266,7 +270,7 @@ int ParameterPainterSupporting::X(uint pos) const
         result += 5;
     }
 
-    return result;
+    return x0 + result;
 }
 
 

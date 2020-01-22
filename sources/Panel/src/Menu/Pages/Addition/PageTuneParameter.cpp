@@ -117,12 +117,12 @@ static void DrawNameParameter(int x, int y, int width)
 
     int pos = x + width / 2 - length / 2;
 
-    Text::Draw(pos, y + 10, parameter->Name(), Color::WHITE);
+    Text::Draw(pos, y + 15, parameter->Name(), Color::WHITE);
 }
 
 
 /// Отобразить значение параметра
-static void DrawParameter(const ParameterPainterSupporting &support, int x, int y)
+static void DrawParameter(const ParameterPainterSupporting &support, int y)
 {
     Color::WHITE.SetAsCurrent();
 
@@ -131,7 +131,7 @@ static void DrawParameter(const ParameterPainterSupporting &support, int x, int 
     for(uint i = 0; i < support.NumSymbols(); i++)
     {
         buffer[0] = support.Symbol(i);
-        Text::Draw(x + support.X(i), y, buffer);
+        Text::Draw(support.X(i), y, buffer);
     }
 }
 
@@ -156,9 +156,9 @@ static void OnDraw_TuneParameter()
 
     DrawNameParameter(x, y, width);
 
-    ParameterPainterSupporting support(parameter);
+    ParameterPainterSupporting support(parameter, x, width);
 
-    DrawParameter(support, x + 10, y + 40);
+    DrawParameter(support, y + 60);
 
     Font::Restore();
 }
