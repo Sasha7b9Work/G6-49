@@ -97,7 +97,7 @@ static bool OnControl_TuneParameter(Key &)
 
 
 DEF_PAGE_SB( pTuneParameter,   //-V641
-    "ббнд гмювемхъ",   
+    "ббнд гмювемхъ",
     "",
     &sbOrderUp,         ///< нймн ббндю - яхлбнк бкебн
     &sbOrderDown,       ///< нймн ббндю - яхлбнк бопюбн
@@ -112,6 +112,11 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 
 static void OnDraw_TuneParameter()
 {
+    if(parameter == nullptr)
+    {
+        return;
+    }
+
     int x = Wave::Graphics::X();
     int y = Wave::Graphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
     int width = Wave::Graphics::Width() - 1;

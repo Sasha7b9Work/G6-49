@@ -25,15 +25,6 @@ struct Order
 };
 
 
-class ParameterEditor
-{
-public:
-    bool ProcessKey(Parameter *param, Key &);
-private:
-    Parameter *param;
-};
-
-
 class Parameter
 {
 public:
@@ -47,7 +38,7 @@ public:
         Page
     };
 
-    Parameter(E k, const char *n) : kind(k), name(n) { }
+    Parameter(E k, const char *n) : form(nullptr), parent(nullptr), kind(k), name(n) { }
 
     pString Name() const { return name; }
 
@@ -77,11 +68,6 @@ public:
     virtual pString GetStringValue() const = 0;
 
     Form *GetForm() { return form; }
-
-    bool ProcessKey(Key &key)
-    {
-        return editor.ProcessKey(this, key);
-    }
     /// Обработчик нажатия кнопки "Изменить"
     virtual void ProcessButtonChange() { };
 
@@ -94,8 +80,6 @@ protected:
     E kind;
 
     const char *name;
-    /// Эта структура занимается редактированием параметра
-    ParameterEditor editor;
 };
 
 
@@ -249,7 +233,7 @@ public:
         Count
 	};
 
-    ParameterChoice(E t, const char *name) : Parameter(Parameter::Choice, name), type(t) { }
+    ParameterChoice(E t, const char *name) : Parameter(Parameter::Choice, name), type(t), choice(0), names(nullptr) { }
 
 	E Type() { return type; }
 
@@ -308,7 +292,7 @@ public:
         Count
     } value;
 
-    ParameterComplex(E v, const char *name, Parameter **parameters) : Parameter(Parameter::Complex, name), params(parameters), type(v) { }
+    ParameterComplex(E v, const char *name, Parameter **parameters) : Parameter(Parameter::Complex, name), value(Count), params(parameters), numParams(0), type(v) { }
 
     virtual void SetForm(Form *form);
 

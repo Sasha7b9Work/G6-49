@@ -369,12 +369,6 @@ pString Order::Suffix(Language::E lang) const
 }
 
 
-bool ParameterEditor::ProcessKey(Parameter *, Key &)
-{
-    return false;
-}
-
-
 void ParameterChoice::ProcessButtonChange()
 {
     NextChoice();
