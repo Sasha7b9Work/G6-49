@@ -10,11 +10,11 @@
 Parameter *ParameterPainter::parameter = nullptr;
 
 
-pString ParameterPainter::DigitsWithSign()
+pString ParameterPainter::DigitsWithSign(int8 *indexes)
 {
     if(parameter->IsValue())
     {
-        return DigitsWithSignValue();
+        return DigitsWithSignValue(indexes);
     }
 
     return "";
@@ -32,13 +32,13 @@ pString ParameterPainter::Units(Language::E lang)
 }
 
 
-pString ParameterPainter::DigitsWithSignValue()
+pString ParameterPainter::DigitsWithSignValue(int8 *indexes)
 {
     ParameterValue *value = static_cast<ParameterValue *>(parameter);
 
     if(value->Type() == ParameterValue::Offset)
     {
-        return DigitsWithSignOffset();
+        return DigitsWithSignOffset(indexes);
     }
 
     return "";
@@ -58,7 +58,7 @@ pString ParameterPainter::UnitsValue(Language::E lang)
 }
 
 
-pString ParameterPainter::DigitsWithSignOffset()
+pString ParameterPainter::DigitsWithSignOffset(int8 *indexes)
 {
     //ParameterValue *value = static_cast<ParameterValue *>(parameter);
 
@@ -73,14 +73,18 @@ pString ParameterPainter::DigitsWithSignOffset()
     buffer[NUM_SYMBOLS - 1] = '\0';
 
     buffer[1] = MathFloatValue::GetChar(value, 0);
+    indexes[1] = 0;
 
     buffer[2] = ',';
 
     buffer[3] = MathFloatValue::GetChar(value, -1);
+    indexes[3] = -1;
 
     buffer[4] = MathFloatValue::GetChar(value, -2);
+    indexes[4] = -2;
 
     buffer[5] = MathFloatValue::GetChar(value, -3);
+    indexes[5] = -3;
 
     return buffer;
 }
@@ -237,20 +241,35 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
 }
 
 
+ParameterPainterSupporting::ParameterPainterSupporting() : parameter(nullptr), x0(0), positionActive(0)
+{
+    std::memset(buffer, 0, NUM_SYMBOLS);
+    std::memset(indexes, 127, NUM_SYMBOLS);
+}
+
+
 void ParameterPainterSupporting::SetParameter(Parameter *param)
 {
+    std::memset(indexes, 127, NUM_SYMBOLS);
+
     parameter = param;
 
     ParameterPainter::SetPatameter(parameter);
     buffer[0] = '\0';
-    std::strcpy(buffer, ParameterPainter::DigitsWithSign());
+    std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
     std::strcat(buffer, ParameterPainter::Units());
 
     int length = X(NumSymbols() + 1);
 
     x0 = Width() / 2 - length / 2 + X0();
 
-    positionActive = PositionFirstUnit() - 1;
+    InitPositionActive();
+}
+
+
+void ParameterPainterSupporting::InitPositionActive()
+{
+    positionActive = static_cast<int>(PositionFirstUnit()) - 1;
 }
 
 
@@ -320,11 +339,52 @@ int ParameterPainterSupporting::Y0() const
 
 void ParameterPainterSupporting::SetActiveNext()
 {
+    for(int i = positionActive + 1; i < NUM_SYMBOLS; i++)
+    {
+        if(PositionMayBeActived(i))
+        {
+            positionActive = i;
+            return;
+        }
+    }
 
+    for(int i = 0; i < NUM_SYMBOLS; i++)
+    {
+        if(PositionMayBeActived(i))
+        {
+            positionActive = i;
+            return;
+        }
+    }
 }
 
 
 void ParameterPainterSupporting::SetActivePrev()
 {
+    if(positionActive != 0)
+    {
+        for(int i = positionActive - 1; i >= 0; i--)
+        {
+            if(PositionMayBeActived(i))
+            {
+                positionActive = i;
+                return;
+            }
+        }
+    }
 
+    for(int i = NUM_SYMBOLS - 1; i > 0; i--)
+    {
+        if(PositionMayBeActived(i))
+        {
+            positionActive = i;
+            return;
+        }
+    }
+}
+
+
+bool ParameterPainterSupporting::PositionMayBeActived(int pos)
+{
+    return (indexes[pos] != 127) || (pos == 0 && buffer[pos] == '-') || (pos == 0 && buffer[pos] == '+');
 }

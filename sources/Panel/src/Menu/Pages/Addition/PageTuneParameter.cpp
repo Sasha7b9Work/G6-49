@@ -145,6 +145,8 @@ static void DrawParameter()
         buffer[0] = support.Symbol(i);
         Text::Draw(support.X(i), support.Y0() + 60, buffer);
     }
+
+
 }
 
 
@@ -166,6 +168,13 @@ static void OnDraw_TuneParameter()
     DrawNameParameter();
 
     DrawParameter();
+
+    int x = support.X(support.GetPositionActive());
+
+    Font::Set(TypeFont::_8);
+
+    Text::Draw4SymbolsInRect(x, support.Y0() + 50, Ideograph::_8::FillDown, Color::GRAY_75);
+    Text::Draw4SymbolsInRect(x, support.Y0() + 77, Ideograph::_8::FillUp);
 
     Font::Restore();
 }

@@ -10,37 +10,48 @@ class Parameter;
 class ParameterPainterSupporting
 {
 public:
-    ParameterPainterSupporting() : parameter(nullptr), x0(0), positionActive(0)
-    {
-        buffer[0] = '\0';
-    }
+    ParameterPainterSupporting();
+    /// Назначение обрарбатываемого параметра
     void SetParameter(Parameter *param);
     /// Возращает количество отрисовываемых символов
     uint NumSymbols() const;
-    /// Возвращает позицию символа на позиции pos относительно 0-го символа
+    /// Возвращает позицию X символа на позиции pos относительно 0-го символа
     int X(uint pos) const;
+    /// Возвращает позицию Y символов
+    int Y() const;
     /// Возвращает символ в позиции pos
     char Symbol(uint pos) const;
-
+    /// Координата Х верхнего левого угла обласити вывода
     int X0() const;
+    /// Координата Y верхнего левого угла области вывода
     int Y0() const;
+    /// Ширина области вывода
     int Width() const;
+    /// Обрабатываемый параметр
     Parameter *parameter;
     /// Сделать активным следующий символ
     void SetActiveNext();
     /// Сделать активным предыдущий символ
     void SetActivePrev();
     /// Возвращает позицию активного символа
-    int GetPositionActive() const { return positionActive; };
+    uint GetPositionActive() const { return static_cast<uint>(positionActive); };
 
 public:
-    char buffer[50];
-    /// Возвращает позицию первого символа единиц измерения
-    uint PositionFirstUnit() const;
+    static const int NUM_SYMBOLS = 50;
+    /// Здесь хранятся отрисовываемые символы
+    char buffer[NUM_SYMBOLS];
+    /// Здесь хранятся позиции символов из FloatValue, соответствующие цифровым символам в buffer. Для нецифровых символов == 255;
+    int8 indexes[NUM_SYMBOLS];
     /// Позиция первого символа
     int x0;
     /// Позиция активного символа
     int positionActive;
+    /// Возвращает позицию первого символа единиц измерения
+    uint PositionFirstUnit() const;
+    /// Инициалзировать позицию активного символа
+    void InitPositionActive();
+    /// Возвращает true, если символ в данной позиции может быть подсвечен
+    bool PositionMayBeActived(int pos);
 };
 
 
@@ -53,17 +64,17 @@ public:
         parameter = param;
     }
 
-    /// Возвращает строку значения параметра со знаком для редактитрования
-    static pString DigitsWithSign();
+    /// Возвращает строку значения параметра со знаком для редактитрования. В массиве indexes сохраняются позиции символов относительно точки (в предположении, что точка стоит после символа в нулевой позиции)
+    static pString DigitsWithSign(int8 *indexes);
     /// Возвращает строку с единицами измерения
     static pString Units(Language::E lang = Language::RU);
 
 private:
     static Parameter *parameter;
     /// Возвращает строку значения параметра ParameterValue
-    static pString DigitsWithSignValue();
+    static pString DigitsWithSignValue(int8 *indexes);
     /// Возвращает строку значения смещения
-    static pString DigitsWithSignOffset();
+    static pString DigitsWithSignOffset(int8 *indexes);
     /// Возвращает единицы измерения ParameterValue
     static pString UnitsValue(Language::E lang = Language::RU);
 };
