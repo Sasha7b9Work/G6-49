@@ -467,7 +467,7 @@ bool LogicFloatValue::ChangedSign()
 
 void LogicFloatValue::ChangeDigit(int pos, int delta)
 {
-    FloatValue old = *value;                // Сохраняем значение
+    //FloatValue old = *value;                // Сохраняем значение
 
     uint64 nanos = 1000 * 1000 * 1000;      // Это количество наноединиц в 1 единице
 

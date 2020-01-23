@@ -133,26 +133,43 @@ int FloatValue::FractNano() const
 
 void FloatValue::Add(FloatValue add)
 {
-    if(Sign() > 0)
+    int sign = Sign();
+    int signAdd = add.Sign();
+
+    SetSign(1);
+    add.SetSign(1);
+
+    if(sign > 0 && signAdd > 0)
     {
-        if(add.Sign() > 0)
+        value += add.value;
+    }
+    else if(sign < 0 && signAdd < 0)
+    {
+        value += add.value;
+        SetSign(-1);
+    }
+    else if(sign > 0 && signAdd < 0)
+    {
+        if(value >= add.value)
         {
-            value += add.value;
+            value -= add.value;
         }
         else
         {
-
+            value = add.value - value;
+            SetSign(-1);
         }
     }
     else
     {
-        if(add.Sign() > 0)
+        if(add.value >= value)
         {
-
+            value = add.value - value;
         }
         else
         {
-
+            value -= add.value;
+            SetSign(-1);
         }
     }
 }
