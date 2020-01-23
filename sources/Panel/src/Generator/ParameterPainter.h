@@ -16,10 +16,8 @@ public:
     void SetParameter(Parameter *param);
     /// Возращает количество отрисовываемых символов
     uint NumSymbols() const;
-    /// Возвращает позицию X символа на позиции pos относительно 0-го символа
+    /// Возвращает позицию X символа с позицией pos
     int X(uint pos) const;
-    /// Возвращает позицию Y символов
-    int Y() const;
     /// Возвращает символ в позиции pos
     char Symbol(uint pos) const;
     /// Координата Х верхнего левого угла обласити вывода
@@ -32,6 +30,7 @@ public:
     Parameter *parameter;
     /// Возвращает позицию активного символа
     uint GetPositionActive() const { return static_cast<uint>(positionActive); };
+
     /// Сделать активным следующий символ
     void SetActiveNext();
     /// Сделать активным предыдущий символ
@@ -40,6 +39,10 @@ public:
     void IncreaseInCurrentPosition();
     /// Уменьшить значение в текущем разрядe
     void DecreaseInCurrentPosition();
+    /// Ширина поля разряда
+    int WidthDigit() const { return 11; };
+    /// Высотал поля разряда
+    int HeightDigit() const { return 17; }
 
 public:
     static const int NUM_SYMBOLS = 50;

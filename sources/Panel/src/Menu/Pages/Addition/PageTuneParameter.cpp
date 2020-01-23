@@ -148,13 +148,15 @@ static void DrawParameter()
 
     char buffer[2] = { 0, 0 };
 
+    int y = support.Y0() + 60;
+
     for(uint i = 0; i < support.NumSymbols(); i++)
     {
         buffer[0] = support.Symbol(i);
-        Text::Draw(support.X(i), support.Y0() + 60, buffer);
+        int x = support.X(i);
+        Painter::FillRegion(x, y, support.WidthDigit()- 1, support.HeightDigit(), Color::GRAY_10);
+        Text::Draw(x, y, buffer, Color::WHITE);
     }
-
-
 }
 
 

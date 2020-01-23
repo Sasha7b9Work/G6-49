@@ -291,7 +291,7 @@ int ParameterPainterSupporting::X(uint pos) const
 
     for(uint i = 0; i < pos; i++)
     {
-        result += Font::GetLengthSymbol(buffer[i]) + delta;
+        result += WidthDigit() + delta;
     }
 
     if(pos >= PositionFirstUnit())
