@@ -92,7 +92,15 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 
 static bool OnControl_TuneParameter(Key &key)
 {
-    if(key.IsUp())
+    if(key.value == Key::RegLeft)
+    {
+        support.DecreaseInCurrentPosition();
+    }
+    else if(key.value == Key::RegRight)
+    {
+        support.IncreaseInCurrentPosition();
+    }
+    else if(key.IsUp())
     {
         if(key.value == Key::Left)
         {

@@ -69,6 +69,7 @@ protected:
 class ParameterValue : public Parameter
 {
     friend class ParameterPainter;
+    friend struct LogicFloatValue;
 public:
 
     enum E

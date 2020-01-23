@@ -9,6 +9,8 @@
 
 Parameter *ParameterPainter::parameter = nullptr;
 
+ParameterValue *LogicFloatValue::parameter = nullptr;
+FloatValue *LogicFloatValue::value = nullptr;
 
 pString ParameterPainter::DigitsWithSign(int8 *indexes)
 {
@@ -255,6 +257,8 @@ void ParameterPainterSupporting::SetParameter(Parameter *param)
     parameter = param;
 
     ParameterPainter::SetPatameter(parameter);
+    LogicFloatValue::SetParameter(parameter);
+
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
     std::strcat(buffer, ParameterPainter::Units());
@@ -390,4 +394,68 @@ bool ParameterPainterSupporting::PositionMayBeActived(int pos)
         (indexes[pos] != 127) || 
         (pos == 0 && buffer[pos] == '-') || 
         (pos == 0 && buffer[pos] == '+');
+}
+
+
+void ParameterPainterSupporting::IncreaseInCurrentPosition()
+{
+    if(!ChangedSign())
+    {
+
+    }
+}
+
+
+void ParameterPainterSupporting::DecreaseInCurrentPosition()
+{
+    if(!ChangedSign())
+    {
+    }
+}
+
+
+bool ParameterPainterSupporting::ChangedSign()
+{
+    if(positionActive == 0 && (buffer[0] == '-' || buffer[0] == '+'))
+    {
+        if(LogicFloatValue::ChangedSign())
+        {
+            buffer[0] = '\0';
+            std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
+            std::strcat(buffer, ParameterPainter::Units());
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+void LogicFloatValue::SetParameter(Parameter *param)
+{
+    if(param->IsValue())
+    {
+        parameter = static_cast<ParameterValue *>(param);
+
+        value = &parameter->value;
+    }
+    else
+    {
+        parameter = nullptr;
+        value = nullptr;
+    }
+}
+
+
+bool LogicFloatValue::ChangedSign()
+{
+    if(parameter->Type() == ParameterValue::Offset)
+    {
+        value->SetSign(-value->Sign());
+
+        return true;
+    }
+
+    return false;
 }

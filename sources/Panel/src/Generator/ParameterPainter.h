@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
+#include "Generator/Parameters.h"
 
 
 struct FloatValue;
@@ -29,12 +30,16 @@ public:
     int Width() const;
     /// Обрабатываемый параметр
     Parameter *parameter;
+    /// Возвращает позицию активного символа
+    uint GetPositionActive() const { return static_cast<uint>(positionActive); };
     /// Сделать активным следующий символ
     void SetActiveNext();
     /// Сделать активным предыдущий символ
     void SetActivePrev();
-    /// Возвращает позицию активного символа
-    uint GetPositionActive() const { return static_cast<uint>(positionActive); };
+    /// Увеличить значение в текущем разряде
+    void IncreaseInCurrentPosition();
+    /// Уменьшить значение в текущем разрядe
+    void DecreaseInCurrentPosition();
 
 public:
     static const int NUM_SYMBOLS = 50;
@@ -52,6 +57,8 @@ public:
     void InitPositionActive();
     /// Возвращает true, если символ в данной позиции может быть подсвечен
     bool PositionMayBeActived(int pos);
+    /// Делает попытку изменить знак числа и, если удалось возвращает true
+    bool ChangedSign();
 };
 
 
@@ -110,4 +117,18 @@ struct MathFloatValue
     static char GetChar(const FloatValue &value, int postition);
     /// Возвращает позицию запятой относительно позиции первого значащего символа
     static int PositionComma(int posFirstDigit, Order::E *order);
+};
+
+
+struct LogicFloatValue
+{
+    static void SetParameter(Parameter *param);
+    /// Делает попытку изменить знак и возвращает true, если это возможно
+    static bool ChangedSign();
+
+private:
+    
+    static FloatValue *value;
+
+    static ParameterValue *parameter;
 };
