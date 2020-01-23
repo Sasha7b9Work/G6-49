@@ -386,5 +386,8 @@ void ParameterPainterSupporting::SetActivePrev()
 
 bool ParameterPainterSupporting::PositionMayBeActived(int pos)
 {
-    return (indexes[pos] != 127) || (pos == 0 && buffer[pos] == '-') || (pos == 0 && buffer[pos] == '+');
+    return 
+        (indexes[pos] != 127) || 
+        (pos == 0 && buffer[pos] == '-') || 
+        (pos == 0 && buffer[pos] == '+');
 }
