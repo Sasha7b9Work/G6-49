@@ -43,6 +43,8 @@ struct FloatValue
     /// Увеличить на заданное значение
     void Add(float v);
 
+    void Add(FloatValue value);
+
     void SetSign(int sign);
     /// Возвращает целую часть числа
     int Integer() const;

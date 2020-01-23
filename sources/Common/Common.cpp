@@ -129,3 +129,31 @@ int FloatValue::FractNano() const
 
     return static_cast<int>(val.value - whole * 1000 * 1000 * 1000);
 }
+
+
+void FloatValue::Add(FloatValue add)
+{
+    if(Sign() > 0)
+    {
+        if(add.Sign() > 0)
+        {
+            value += add.value;
+        }
+        else
+        {
+
+        }
+    }
+    else
+    {
+        if(add.Sign() > 0)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+}
+

@@ -125,6 +125,8 @@ struct LogicFloatValue
     static void SetParameter(Parameter *param);
     /// Делает попытку изменить знак и возвращает true, если это возможно
     static bool ChangedSign();
+    /// Изменить значение числа в позиции pos, где pos - номер десятичного разряда, начиная от 10e0
+    static void ChangeDigit(int pos, int delta);
 
 private:
     

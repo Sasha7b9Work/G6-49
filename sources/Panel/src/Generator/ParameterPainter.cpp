@@ -401,8 +401,13 @@ void ParameterPainterSupporting::IncreaseInCurrentPosition()
 {
     if(!ChangedSign())
     {
-
+        LogicFloatValue::ChangeDigit(indexes[positionActive], +1);
     }
+
+    buffer[0] = '\0';
+    std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
+    std::strcat(buffer, ParameterPainter::Units());
+
 }
 
 
@@ -410,7 +415,13 @@ void ParameterPainterSupporting::DecreaseInCurrentPosition()
 {
     if(!ChangedSign())
     {
+        LogicFloatValue::ChangeDigit(indexes[positionActive], -1);
     }
+
+    buffer[0] = '\0';
+    std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
+    std::strcat(buffer, ParameterPainter::Units());
+
 }
 
 
@@ -418,14 +429,7 @@ bool ParameterPainterSupporting::ChangedSign()
 {
     if(positionActive == 0 && (buffer[0] == '-' || buffer[0] == '+'))
     {
-        if(LogicFloatValue::ChangedSign())
-        {
-            buffer[0] = '\0';
-            std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
-            std::strcat(buffer, ParameterPainter::Units());
-
-            return true;
-        }
+        return LogicFloatValue::ChangedSign();
     }
 
     return false;
@@ -458,4 +462,40 @@ bool LogicFloatValue::ChangedSign()
     }
 
     return false;
+}
+
+
+void LogicFloatValue::ChangeDigit(int pos, int delta)
+{
+    FloatValue old = *value;                // Сохраняем значение
+
+    uint64 nanos = 1000 * 1000 * 1000;      // Это количество наноединиц в 1 единице
+
+    if(pos > 0)
+    {
+        while(pos > 0)
+        {
+            nanos *= 10;
+            pos--;
+        }
+    }
+    else if(pos < 0)
+    {
+        while(pos < 0)
+        {
+            nanos /= 10;
+            pos++;
+        }
+    }
+
+    FloatValue add(0, 0);                   // Это число будем прибавлять
+
+    add.FromUINT64(nanos);
+
+    if(delta < 0)
+    {
+        add.SetSign(-1);
+    }
+
+    value->Add(add);
 }
