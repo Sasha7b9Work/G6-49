@@ -55,7 +55,7 @@ bool EmptyFuncBV()
 }
 
 
-bool EmptyFuncBKey(Key&)
+bool EmptyFuncBKey(const Key&)
 {
     return false;
 }

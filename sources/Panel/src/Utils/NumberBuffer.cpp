@@ -20,7 +20,7 @@ void NumberBuffer::Set(char *buf, int s, int p, int maxValue)
 }
 
 
-void NumberBuffer::ProcessKey(Key &key)
+void NumberBuffer::ProcessKey(const Key &key)
 {
     if (key == Key::RegRight || key == Key::RegLeft)
     {
@@ -51,7 +51,7 @@ void NumberBuffer::ProcessKey(Key &key)
 }
 
 
-bool NumberBuffer::AllowableSymbol(Key &key)
+bool NumberBuffer::AllowableSymbol(const Key &key)
 {
     if(key.IsDigit() || key.Is(Key::Dot) || key.Is(Key::Minus))
     {
@@ -62,7 +62,7 @@ bool NumberBuffer::AllowableSymbol(Key &key)
 }
 
 
-void NumberBuffer::ProcessRegulator(Key &key)
+void NumberBuffer::ProcessRegulator(const Key &key)
 {
     if(NumSymbols() == 0)                           // Если буфер пуст -
     {

@@ -45,9 +45,9 @@ struct Menu
 
 private:
     /// ќбработать управл€ющее воздействие control
-    static void ProcessContorl(Key &control);
+    static void ProcessKey(const Key &key);
     /// ќбрабатывает состо€ние выходов. ¬озвращает true, если состо€ние вывода изменилось
-    static bool ProcessOutputs(Key &control);
+    static bool ProcessOutputs(const Key &key);
     /// ≈сли какой-то итем раскрыт, то здесь его адрес
     static Item *openedItem;
 

@@ -13,7 +13,7 @@ void EmptyFuncVI(int);
 
 bool EmptyFuncBV();
 
-bool EmptyFuncBKey(Key&);
+bool EmptyFuncBKey(const Key&);
 
 void EmptyFuncVB(bool);
 

@@ -119,7 +119,7 @@ static void DrawPage()
 }
 
 
-static bool FuncOnKeyPage(Key &key) //-V2009
+static bool FuncOnKeyPage(const Key &key) //-V2009
 {
     if(key.IsRotate())
     {

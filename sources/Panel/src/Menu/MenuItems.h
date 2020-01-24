@@ -7,7 +7,7 @@
 #include "Utils/String.h"
 
 
-typedef bool (*pFuncBKey)(Key&);
+typedef bool (*pFuncBKey)(const Key&);
 
 
 /// ќбща€ часть дл€ всех типов элементов меню
@@ -64,7 +64,7 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    void Press(Key &control);
+    void Press(const Key &control);
 
     Type GetType() const;
 
@@ -177,7 +177,7 @@ public:
 
     void ChangeSubPage(int delta);
     /// ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    bool Press(Key &control);
+    bool Press(const Key &key);
 
     struct Title
     {
@@ -316,7 +316,7 @@ public:
 
     void DrawValue(int x, int y) const;
     /// ќбработка воздействи€
-    void Press(Key &control);
+    void Press(const Key &key);
 };
 
 
@@ -371,7 +371,7 @@ public:
     /// ¬озвращает им€ варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     String NameSubItem(int i) const;
     /// ¬озвращает указатель на себ€, если находитс€ ы открытом состо€нии, и 0, если в закрытом
-    Item *Press(Key &control);
+    Item *Press(const Key &key);
 
     int8 CurrentIndex() const;
 };

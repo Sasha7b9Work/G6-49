@@ -45,9 +45,9 @@ void Menu::Update()
 
     while (!Keyboard::BufferIsEmpty())
     {
-        Key control = Keyboard::GetNextControl();
+        Key key = Keyboard::GetNextControl();
 
-        ProcessContorl(control);
+        ProcessKey(key);
 
         timePress = TIME_MS;
     }
@@ -62,23 +62,23 @@ void Menu::Update()
 }
 
 
-void Menu::ProcessContorl(Key &control)
+void Menu::ProcessKey(const Key &key)
 {
-    if(ProcessOutputs(control))                     // Обработка включения/отключения каналов
+    if(ProcessOutputs(key))                     // Обработка включения/отключения каналов
     {
     }
     else if (GetOpenedItem())
     {
-        GetOpenedItem()->Press(control);
+        GetOpenedItem()->Press(key);
     }
-    else if (Hint::ProcessControl(control))
+    else if (Hint::ProcessControl(key))
     {
     }
     else if(Menu::GetCurrentItem())
     {
-        Menu::GetCurrentItem()->Press(control);
+        Menu::GetCurrentItem()->Press(key);
     }
-    else if (CURRENT_PAGE->Press(control))
+    else if (CURRENT_PAGE->Press(key))
     {
     }
     else
@@ -88,11 +88,11 @@ void Menu::ProcessContorl(Key &control)
 }
 
 
-bool Menu::ProcessOutputs(Key &control)
+bool Menu::ProcessOutputs(const Key &key)
 {
-    if (control.action.IsRelease())
+    if (key.action.IsRelease())
     {
-        if (control.Is(Key::On1))
+        if (key.Is(Key::On1))
         {
             if (!WAVE(Chan::A).StartModeIsSingle())
             {
@@ -101,7 +101,7 @@ bool Menu::ProcessOutputs(Key &control)
             PGenerator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
             return true;
         }
-        else if (control.Is(Key::On2))
+        else if (key.Is(Key::On2))
         {
             if (!WAVE(Chan::B).StartModeIsSingle())
             {

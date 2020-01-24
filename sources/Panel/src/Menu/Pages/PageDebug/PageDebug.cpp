@@ -128,7 +128,7 @@ static bool OnRegulator(Key key)
 }
 
 
-static bool OnKey_PageRegisters(Key &key)
+static bool OnKey_PageRegisters(const Key &key)
 {
     if (!showInputWindow)
     {
@@ -147,8 +147,7 @@ static bool OnKey_PageRegisters(Key &key)
     {
         if (AllowableSymbol(key))
         {
-            NumberBuffer::ProcessKey(key
-            );
+            NumberBuffer::ProcessKey(key);
             return true;
         }
         else if (key.IsCursors())

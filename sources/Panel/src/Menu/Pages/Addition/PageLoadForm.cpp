@@ -52,7 +52,7 @@ DEF_BUTTON( bChoose,                                                            
 
 
 
-static bool OnKey(Key &control)
+static bool OnKey(const Key &control)
 {
     if (control.value == Key::RegLeft)
     {

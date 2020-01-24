@@ -8,7 +8,7 @@ public:
     /// Отрисовка подсказки
     static void Draw();
     /// Орган упралвения. Возвращает false, если обработка не произошла
-    static bool ProcessControl(Key &control);
+    static bool ProcessControl(const Key &key);
 
 private:
     /// \brief Отрисовывает подсказки с пояснениями

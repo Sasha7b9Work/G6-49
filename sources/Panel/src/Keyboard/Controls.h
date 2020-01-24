@@ -64,8 +64,8 @@ struct Key
         action = c.action;
     }
     operator uint8() const { return static_cast<uint8>(value); };
-    bool Is(Key::E c) { return (c == value); };
-    bool Is(Key::E c, Action::E a) { return value == c && action == a; };
+    bool Is(Key::E c) const { return (c == value); };
+    bool Is(Key::E c, Action::E a) const { return value == c && action == a; };
     bool IsDigit() const;
     bool IsUp() const { return action == Action::Up; }
     char ToChar() const;

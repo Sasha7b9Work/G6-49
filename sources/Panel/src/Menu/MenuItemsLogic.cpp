@@ -129,7 +129,7 @@ float Choice::Step()
 }
 
 
-Item *Choice::Press(Key &key)
+Item *Choice::Press(const Key &key)
 {   
     if((key.Is(Key::Right) && key.action.IsRelease()) || key.Is(Key::RegRight))
     {
@@ -174,11 +174,11 @@ Item *Choice::Press(Key &key)
 }
 
 
-void Governor::Press(Key &control)
+void Governor::Press(const Key &key)
 {
-    if(control.IsFunctional() && Keeper()->GetItem(control) == this)
+    if(key.IsFunctional() && Keeper()->GetItem(key) == this)
     {
-        if(control.action.Is(Key::Action::Up))
+        if(key.action.Is(Key::Action::Up))
         {
             if (!Menu::GetCurrentItem())
             {
@@ -197,7 +197,7 @@ void Governor::Press(Key &control)
                 // здесь ничего
             }
         }
-        else if(control.action.Is(Key::Action::Long))
+        else if(key.action.Is(Key::Action::Long))
         {
         }
         else
@@ -205,9 +205,9 @@ void Governor::Press(Key &control)
             // здесь ничего
         }
     }
-    else if(control.IsRotate())
+    else if(key.IsRotate())
     {
-        if(control.Is(Key::RegLeft))
+        if(key.Is(Key::RegLeft))
         {
             if(*cell > minValue)
             {
@@ -215,7 +215,7 @@ void Governor::Press(Key &control)
                 funcOfChanged();
             }
         }
-        else if(control.Is(Key::RegRight))
+        else if(key.Is(Key::RegRight))
         {
             if(*cell < maxValue)
             {
@@ -228,9 +228,9 @@ void Governor::Press(Key &control)
             // здесь ничего
         }
     }
-    else if(control.action.Is(Key::Action::Up))
+    else if(key.action.Is(Key::Action::Up))
     {
-        if(control.Is(Key::Esc))
+        if(key.Is(Key::Esc))
         {
             Menu::ResetCurrentItem();
         }
@@ -398,7 +398,7 @@ int Page::NumItems() const
 }
 
 
-void Item::Press(Key &key)
+void Item::Press(const Key &key)
 {
     if(key.action.Is(Key::Action::Long))
     {
@@ -622,21 +622,21 @@ int Choice::GetHeightOpened() const
 }
 
 
-bool Page::Press(Key &control)
+bool Page::Press(const Key &key)
 {
-    if(funcOnKey(control))
+    if(funcOnKey(key))
     {
         return true;
     }
 
     if (CURRENT_PAGE == this)
     {
-        if (control.IsRotate() && Menu::RegIsControlSubPages())
+        if (key.IsRotate() && Menu::RegIsControlSubPages())
         {
-            ChangeSubPage(control.Is(Key::RegLeft) ? -1 : 1);
+            ChangeSubPage(key.Is(Key::RegLeft) ? -1 : 1);
             return true;
         }
-        else if (control.Is(Key::Esc) && control.action.Is(Key::Action::Up))
+        else if (key.Is(Key::Esc) && key.action.Is(Key::Action::Up))
         {
             if (Keeper())
             {
@@ -644,9 +644,9 @@ bool Page::Press(Key &control)
                 return true;
             }
         }
-        else if (control.IsFunctional())
+        else if (key.IsFunctional())
         {
-            GetItem(control)->Press(control);
+            GetItem(key)->Press(key);
             return true;
         }
         else
@@ -654,7 +654,7 @@ bool Page::Press(Key &control)
             // здесь ничего
         }
     }
-    else if (control.action.IsRelease())
+    else if (key.action.IsRelease())
     {
         CURRENT_PAGE = this;
         return true;
