@@ -10,6 +10,37 @@
 #include <cstring>
 
 
+typedef void (*f)();
+
+struct StructSupport
+{
+    f func;
+    pString u[2];
+};
+
+
+static const StructSupport support[ParameterValue::Count] =
+{
+    { ParameterPainter::DigitsFrequency, {} },
+    { ParameterPainter::DigitsPeriod, {} },
+    { ParameterPainter::DigitsAmplitude, {} },
+    { ParameterPainter::DigitsOffset, {} },
+    { ParameterPainter::DigitsDuration, {} },
+    { ParameterPainter::DigitsDutyRatio, {} },
+    { ParameterPainter::DigitsPhase, {} },
+    { ParameterPainter::DigitsDelay, {} },
+    { ParameterPainter::DigitsDurationRise, {} },
+    { ParameterPainter::DigitsDurationFail, {} },
+    { ParameterPainter::DigitsDurationStady, {} },
+    { ParameterPainter::DigitsDutyFactor, {} },
+    { ParameterPainter::DigitsManipulationDuration, {} },
+    { ParameterPainter::DigitsManipulationPeriod, {} },
+    { ParameterPainter::DigitsPacketPeriod, {} },
+    { ParameterPainter::DigitsPacketNumber, {} },
+    { ParameterPainter::DigitsEmpty, {} }
+};
+
+
 ParameterValue *ParameterPainter::parameter = nullptr;
 FloatValue     *ParameterPainter::value = nullptr;
 char            ParameterPainter::buffer[ParameterPainter::SIZE_BUFFER];
@@ -33,34 +64,11 @@ pString ParameterPainter::Digits(int8 *ind)
 {
     indexes = ind;
 
-    typedef void (*f)();
-
-    static const f func[ParameterValue::Count] =
-    {
-        DigitsFrequency,
-        DigitsPeriod,
-        DigitsAmplitude,
-        DigitsOffset,
-        DigitsDuration,
-        DigitsDutyRatio,
-        DigitsPhase,
-        DigitsDelay,
-        DigitsDurationRise,
-        DigitsDurationFail,
-        DigitsDurationStady,
-        DigitsDutyFactor,
-        DigitsManipulationDuration,
-        DigitsManipulationPeriod,
-        DigitsPacketPeriod,
-        DigitsPacketNumber,
-        DigitsEmpty
-    };
-
     std::memset(buffer, 0, SIZE_BUFFER);
 
     buffer[0] = '1';
 
-    func[parameter->Type()]();
+    support[parameter->Type()].func();
 
     return buffer;
 }
@@ -68,12 +76,28 @@ pString ParameterPainter::Digits(int8 *ind)
 
 pString ParameterPainter::Units(Language::E lang)
 {
-    if(parameter->Type() == ParameterValue::Offset || parameter->Type() == ParameterValue::Amplitude)
+    static const pString u[ParameterValue::Count][2] =
     {
-        return (lang == Language::RU) ? "Â" : "V";
-    }
+        {"Ãö", "Hz"},
+        {"ñ", "s"},
+        {"Â", "V"},
+        {"Â", "V"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"},
+        {"ñ", "s"}
+    };
 
-    return "Â";
+    return u[parameter->Type()][lang];
 }
 
 

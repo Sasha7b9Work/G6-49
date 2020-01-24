@@ -105,6 +105,11 @@ private:
     static char buffer[SIZE_BUFFER];
     static int8 *indexes;
 
+    /// Записать в posBuffer буфера символ, соответствующий цифре с позиции indexDigit FloatValue
+    static void SetChar(int posBuffer, int8 indexDigit);
+    static void SetChars(int posBuffer, int8 indexDigit, int8 numDigits);
+
+public:
     static void DigitsFrequency();
     static void DigitsPeriod();
     static void DigitsAmplitude();
@@ -122,10 +127,6 @@ private:
     static void DigitsPacketPeriod();
     static void DigitsPacketNumber();
     static void DigitsEmpty();
-
-    /// Записать в posBuffer буфера символ, соответствующий цифре с позиции indexDigit FloatValue
-    static void SetChar(int posBuffer, int8 indexDigit);
-    static void SetChars(int posBuffer, int8 indexDigit, int8 numDigits);
 };
 
 
