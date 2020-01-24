@@ -108,6 +108,8 @@ private:
     static pString DigitsOffset(int8 *indexes);
     /// Возвращает единицы измерения ParameterValue
     static pString UnitsValue(Language::E lang = Language::RU);
+
+    static void SetChar(FloatValue &value, char *buffer, int8 *indexes, int posBuffer, int8 indexDigit);
 };
 
 

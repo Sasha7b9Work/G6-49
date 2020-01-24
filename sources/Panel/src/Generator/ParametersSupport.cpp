@@ -54,8 +54,6 @@ pString ParameterPainter::UnitsValue(Language::E lang)
 
 pString ParameterPainter::DigitsOffset(int8 *indexes)
 {
-    //ParameterValue *value = static_cast<ParameterValue *>(parameter);
-
     FloatValue value = static_cast<ParameterValue *>(parameter)->value;
 
     const int NUM_SYMBOLS = 1 + 1 + 1 + 3 + 1;
@@ -66,21 +64,22 @@ pString ParameterPainter::DigitsOffset(int8 *indexes)
 
     buffer[NUM_SYMBOLS - 1] = '\0';
 
-    buffer[1] = MathFloatValue::GetChar(value, 0);
-    indexes[1] = 0;
+    SetChar(value, buffer, indexes, 1, 0);
 
     buffer[2] = ',';
 
-    buffer[3] = MathFloatValue::GetChar(value, -1);
-    indexes[3] = -1;
-
-    buffer[4] = MathFloatValue::GetChar(value, -2);
-    indexes[4] = -2;
-
-    buffer[5] = MathFloatValue::GetChar(value, -3);
-    indexes[5] = -3;
+    SetChar(value, buffer, indexes, 3, -1);
+    SetChar(value, buffer, indexes, 4, -2);
+    SetChar(value, buffer, indexes, 5, -2);
 
     return buffer;
+}
+
+
+void ParameterPainter::SetChar(FloatValue &value, char *buffer, int8 *indexes, int posBuffer, int8 indexDigit)
+{
+    buffer[posBuffer] = MathFloatValue::GetChar(value, indexDigit);
+    indexes[posBuffer] = indexDigit;
 }
 
 
