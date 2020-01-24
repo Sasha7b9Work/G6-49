@@ -53,6 +53,10 @@ struct FloatValue
     /// Возвращает количество наночастиц в дробной части
     int FractNano() const;
 
+    bool operator<(const FloatValue &);
+
+    bool operator>(const FloatValue &);
+
 private:
 
     uint64 value;       // Значение параметра в единицах измерения "нано". Установленный в "1" старший бит означает, что число отрицательное

@@ -470,8 +470,6 @@ bool LogicFloatValue::ChangedSign()
 
 void LogicFloatValue::ChangeDigit(int pos, int delta)
 {
-    //FloatValue old = *value;                // Сохраняем значение
-
     uint64 nanos = 1000 * 1000 * 1000;      // Это количество наноединиц в 1 единице
 
     if(pos > 0)
@@ -501,6 +499,15 @@ void LogicFloatValue::ChangeDigit(int pos, int delta)
     }
 
     value->Add(add);
+
+    if(*value < parameter->min)
+    {
+        *value = parameter->min;
+    }
+    else if(*value > parameter->max)
+    {
+        *value = parameter->max;
+    }
 }
 
 
@@ -554,12 +561,7 @@ void ParameterTuner::Draw()
 
     DrawParameter();
 
-    int x = support.X(support.GetPositionActive());
-
-    Font::Set(TypeFont::_8);
-
-    Text::Draw4SymbolsInRect(x, support.Y0() + 50, Ideograph::_8::FillDown, Color::GRAY_75);
-    Text::Draw4SymbolsInRect(x, support.Y0() + 77, Ideograph::_8::FillUp);
+    DrawHighlighter();
 
     Font::Restore();
 }
@@ -591,4 +593,15 @@ void ParameterTuner::DrawParameter()
         Text::Draw(x, y, buffer, Color::WHITE);
     }
 
+}
+
+
+void ParameterTuner::DrawHighlighter()
+{
+    int x = support.X(support.GetPositionActive());
+
+    Font::Set(TypeFont::_8);
+
+    Text::Draw4SymbolsInRect(x, support.Y0() + 50, Ideograph::_8::FillDown, Color::GRAY_75);
+    Text::Draw4SymbolsInRect(x, support.Y0() + 77, Ideograph::_8::FillUp);
 }

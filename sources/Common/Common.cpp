@@ -174,3 +174,14 @@ void FloatValue::Add(FloatValue add)
     }
 }
 
+
+bool FloatValue::operator<(const FloatValue &rhs)
+{
+    return ToFloat() < rhs.ToFloat();
+}
+
+
+bool FloatValue::operator>(const FloatValue &rhs)
+{
+    return ToFloat() > rhs.ToFloat();
+}

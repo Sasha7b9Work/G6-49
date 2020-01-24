@@ -79,10 +79,12 @@ public:
 
 private:
     ParameterPainterSupporting support;
-
+    /// Отрисовать имя параметра
     void DrawNameParameter();
-
+    /// Отрисовать параметр
     void DrawParameter();
+    /// Отрисовать подсвечиватель в соотвествующей позиции
+    void DrawHighlighter();
 };
 
 
