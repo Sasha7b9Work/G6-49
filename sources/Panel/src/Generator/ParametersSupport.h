@@ -97,15 +97,13 @@ public:
         parameter = param;
     }
 
-    /// ¬озвращает строку значени€ параметра со знаком дл€ редактитровани€. ¬ массиве indexes сохран€ютс€ позиции символов относительно точки (в предположении, что точка стоит после символа в нулевой позиции)
-    static pString DigitsWithSign(int8 *indexes);
+    /// ¬озвращает строку значени€ параметра (если необходимо, то со знаком) дл€ редактитровани€. ¬ массиве indexes сохран€ютс€ позиции символов относительно точки (в предположении, что точка стоит после символа в нулевой позиции)
+    static pString Digits(int8 *indexes);
     /// ¬озвращает строку с единицами измерени€
     static pString Units(Language::E lang = Language::RU);
 
 private:
     static Parameter *parameter;
-    /// ¬озвращает строку значени€ параметра ParameterValue
-    static pString DigitsWithSignValue(int8 *indexes);
     /// ¬озвращает строку значени€ смещени€
     static pString DigitsWithSignOffset(int8 *indexes);
     /// ¬озвращает единицы измерени€ ParameterValue

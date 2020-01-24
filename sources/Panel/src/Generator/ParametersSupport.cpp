@@ -15,14 +15,16 @@ Parameter *ParameterPainter::parameter = nullptr;
 ParameterValue *LogicFloatValue::parameter = nullptr;
 FloatValue *LogicFloatValue::value = nullptr;
 
-pString ParameterPainter::DigitsWithSign(int8 *indexes)
+pString ParameterPainter::Digits(int8 *indexes)
 {
-    if(parameter->IsValue())
+    ParameterValue *value = static_cast<ParameterValue *>(parameter);
+
+    if(value->Type() == ParameterValue::Offset)
     {
-        return DigitsWithSignValue(indexes);
+        return DigitsWithSignOffset(indexes);
     }
 
-    return "";
+    return "1";
 }
 
 
@@ -33,20 +35,7 @@ pString ParameterPainter::Units(Language::E lang)
         return UnitsValue(lang);
     }
 
-    return "";
-}
-
-
-pString ParameterPainter::DigitsWithSignValue(int8 *indexes)
-{
-    ParameterValue *value = static_cast<ParameterValue *>(parameter);
-
-    if(value->Type() == ParameterValue::Offset)
-    {
-        return DigitsWithSignOffset(indexes);
-    }
-
-    return "";
+    return "Â";
 }
 
 
@@ -59,7 +48,7 @@ pString ParameterPainter::UnitsValue(Language::E lang)
         return (lang == Language::RU) ? "Â" : "V";
     }
 
-    return "";
+    return "Â";
 }
 
 
@@ -263,7 +252,7 @@ void ParameterPainterSupporting::SetParameter(Parameter *param)
     LogicFloatValue::SetParameter(parameter);
 
     buffer[0] = '\0';
-    std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
+    std::strcpy(buffer, ParameterPainter::Digits(indexes));
     std::strcat(buffer, ParameterPainter::Units());
 
     int length = X(NumSymbols() + 1);
@@ -408,9 +397,8 @@ void ParameterPainterSupporting::IncreaseInCurrentPosition()
     }
 
     buffer[0] = '\0';
-    std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
+    std::strcpy(buffer, ParameterPainter::Digits(indexes));
     std::strcat(buffer, ParameterPainter::Units());
-
 }
 
 
@@ -422,9 +410,8 @@ void ParameterPainterSupporting::DecreaseInCurrentPosition()
     }
 
     buffer[0] = '\0';
-    std::strcpy(buffer, ParameterPainter::DigitsWithSign(indexes));
+    std::strcpy(buffer, ParameterPainter::Digits(indexes));
     std::strcat(buffer, ParameterPainter::Units());
-
 }
 
 
