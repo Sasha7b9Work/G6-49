@@ -1,20 +1,15 @@
-#include "Menu.h"
+#include "Menu/Menu.h"
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
-#include "Generator/Generator_p.h"
 #include "Generator/Signals.h"
-#include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/Keyboard.h"
-#include "Utils/Math.h"
 #include "Menu/Pages/PageSignals/PageSignals.h"
 #include "Menu/Pages/PageFrequencyCounter.h"
 #include "Menu/Pages/PageService.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
-#include "Menu/Pages/Addition/PageTuneParameter.h"
 #include "Settings/Settings.h"
-#include "Utils/Debug.h"
 
 
 Item *Menu::pressedItem = nullptr;
