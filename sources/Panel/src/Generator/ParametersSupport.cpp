@@ -21,7 +21,7 @@ pString ParameterPainter::Digits(int8 *indexes)
 
     if(value->Type() == ParameterValue::Offset)
     {
-        return DigitsWithSignOffset(indexes);
+        return DigitsOffset(indexes);
     }
 
     return "1";
@@ -52,7 +52,7 @@ pString ParameterPainter::UnitsValue(Language::E lang)
 }
 
 
-pString ParameterPainter::DigitsWithSignOffset(int8 *indexes)
+pString ParameterPainter::DigitsOffset(int8 *indexes)
 {
     //ParameterValue *value = static_cast<ParameterValue *>(parameter);
 

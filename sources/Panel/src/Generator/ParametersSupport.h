@@ -105,7 +105,7 @@ public:
 private:
     static Parameter *parameter;
     /// Возвращает строку значения смещения
-    static pString DigitsWithSignOffset(int8 *indexes);
+    static pString DigitsOffset(int8 *indexes);
     /// Возвращает единицы измерения ParameterValue
     static pString UnitsValue(Language::E lang = Language::RU);
 };
