@@ -13,6 +13,7 @@
 ParameterValue *ParameterPainter::parameter = nullptr;
 FloatValue     *ParameterPainter::value = nullptr;
 char            ParameterPainter::buffer[ParameterPainter::SIZE_BUFFER];
+int8           *ParameterPainter::indexes = nullptr;
 
 ParameterValue *LogicFloatValue::parameter = nullptr;
 FloatValue *LogicFloatValue::value = nullptr;
@@ -28,9 +29,11 @@ void ParameterPainter::SetPatameter(Parameter *param)
 }
 
 
-pString ParameterPainter::Digits(int8 *indexes)
+pString ParameterPainter::Digits(int8 *ind)
 {
-    typedef pString (*f)(int8 *);
+    indexes = ind;
+
+    typedef pString (*f)();
 
     static const f func[ParameterValue::Count] =
     {
@@ -55,7 +58,7 @@ pString ParameterPainter::Digits(int8 *indexes)
 
     std::memset(buffer, 0, SIZE_BUFFER);
 
-    return func[static_cast<ParameterValue *>(parameter)->Type()](indexes);
+    return func[parameter->Type()]();
 }
 
 
@@ -81,126 +84,129 @@ pString ParameterPainter::UnitsValue(Language::E lang)
 }
 
 
-pString ParameterPainter::DigitsFrequency(int8 *)
-{
-
-    return "1";
-}
-
-
-pString ParameterPainter::DigitsPeriod(int8 *)
+pString ParameterPainter::DigitsFrequency()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsAmplitude(int8 *indexes)
+pString ParameterPainter::DigitsPeriod()
 {
-    SetChar(indexes, 0, 1);
-    SetChar(indexes, 1, 0);
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsAmplitude()
+{
+    SetChars(0, 1, 2);
     buffer[2] = ',';
-    SetChar(indexes, 3, -1);
-    SetChar(indexes, 4, -2);
-    SetChar(indexes, 5, -3);
+    SetChars(3, -1, 3);
 
     return buffer;
 }
 
 
-pString ParameterPainter::DigitsOffset(int8 *indexes)
+pString ParameterPainter::DigitsOffset()
 {
     buffer[0] = (value->Sign() < 0) ? '-' : '+';
-    SetChar(indexes, 1, 0);
+    SetChar(1, 0);
     buffer[2] = ',';
-    SetChar(indexes, 3, -1);
-    SetChar(indexes, 4, -2);
-    SetChar(indexes, 5, -2);
+    SetChars(3, -1, 3);
 
     return buffer;
 }
 
 
-pString ParameterPainter::DigitsDuration(int8 *)
+pString ParameterPainter::DigitsDuration()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsDutyRatio(int8 *)
+pString ParameterPainter::DigitsDutyRatio()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsPhase(int8 *)
+pString ParameterPainter::DigitsPhase()
 {
     return "1";
 }
 
-pString ParameterPainter::DigitsDelay(int8 *)
-{
-    return "1";
-}
-
-
-pString ParameterPainter::DigitsDurationRise(int8 *)
+pString ParameterPainter::DigitsDelay()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsDurationFail(int8 *)
+pString ParameterPainter::DigitsDurationRise()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsDurationStady(int8 *)
+pString ParameterPainter::DigitsDurationFail()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsDutyFactor(int8 *)
+pString ParameterPainter::DigitsDurationStady()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsManipulationDuration(int8 *)
+pString ParameterPainter::DigitsDutyFactor()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsManipulationPeriod(int8 *)
+pString ParameterPainter::DigitsManipulationDuration()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsPacketPeriod(int8 *)
+pString ParameterPainter::DigitsManipulationPeriod()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsPacketNumber(int8 *)
+pString ParameterPainter::DigitsPacketPeriod()
 {
     return "1";
 }
 
 
-pString ParameterPainter::DigitsEmpty(int8 *)
+pString ParameterPainter::DigitsPacketNumber()
 {
     return "1";
 }
 
 
-void ParameterPainter::SetChar(int8 *indexes, int posBuffer, int8 indexDigit)
+pString ParameterPainter::DigitsEmpty()
+{
+    return "1";
+}
+
+
+void ParameterPainter::SetChar(int posBuffer, int8 indexDigit)
 {
     buffer[posBuffer] = MathFloatValue::GetChar(*value, indexDigit);
     indexes[posBuffer] = indexDigit;
+}
+
+
+void ParameterPainter::SetChars(int posBuffer, int8 indexDigit, int numDigits)
+{
+    for(int i = 0; i < numDigits; i++)
+    {
+        SetChar(posBuffer + i, indexDigit + i);
+    }
 }
 
 

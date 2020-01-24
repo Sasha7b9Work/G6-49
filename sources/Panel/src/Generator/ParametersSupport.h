@@ -103,29 +103,32 @@ private:
     static ParameterValue *parameter;
     static FloatValue *value;
     static char buffer[SIZE_BUFFER];
+    static int8 *indexes;
 
-    static pString DigitsFrequency(int8 *indexes);
-    static pString DigitsPeriod(int8 *indexes);
-    static pString DigitsAmplitude(int8 *indexes);
-    static pString DigitsOffset(int8 *indexes);
-    static pString DigitsDuration(int8 *indexes);
-    static pString DigitsDutyRatio(int8 *indexes);
-    static pString DigitsPhase(int8 *indexes);
-    static pString DigitsDelay(int8 *indexes);
-    static pString DigitsDurationRise(int8 *indexes);
-    static pString DigitsDurationFail(int8 *indexes);
-    static pString DigitsDurationStady(int8 *indexes);
-    static pString DigitsDutyFactor(int8 *indexes);
-    static pString DigitsManipulationDuration(int8 *indexes);
-    static pString DigitsManipulationPeriod(int8 *indexes);
-    static pString DigitsPacketPeriod(int8 *indexes);
-    static pString DigitsPacketNumber(int8 *indexes);
-    static pString DigitsEmpty(int8 *indexes);
+    static pString DigitsFrequency();
+    static pString DigitsPeriod();
+    static pString DigitsAmplitude();
+    static pString DigitsOffset();
+    static pString DigitsDuration();
+    static pString DigitsDutyRatio();
+    static pString DigitsPhase();
+    static pString DigitsDelay();
+    static pString DigitsDurationRise();
+    static pString DigitsDurationFail();
+    static pString DigitsDurationStady();
+    static pString DigitsDutyFactor();
+    static pString DigitsManipulationDuration();
+    static pString DigitsManipulationPeriod();
+    static pString DigitsPacketPeriod();
+    static pString DigitsPacketNumber();
+    static pString DigitsEmpty();
 
     /// Возвращает единицы измерения ParameterValue
     static pString UnitsValue(Language::E lang = Language::RU);
 
-    static void SetChar(int8 *indexes, int posBuffer, int8 indexDigit);
+    /// Записать в posBuffer буфера символ, соответствующий цифре с позиции indexDigit FloatValue
+    static void SetChar(int posBuffer, int8 indexDigit);
+    static void SetChars(int posBuffer, int8 indexDigit, int numDigits);
 };
 
 
