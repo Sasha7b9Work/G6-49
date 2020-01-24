@@ -90,6 +90,9 @@ pString ParameterPainter::UnitsValue(Language::E lang)
 
 void ParameterPainter::DigitsFrequency()
 {
+    SetChars(0, 7, 8);
+    buffer[8] = ',';
+    SetChars(9, -1, 6);
 }
 
 
