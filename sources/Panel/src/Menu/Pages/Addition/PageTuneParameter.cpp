@@ -1,15 +1,12 @@
-#include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
 #include "Generator/ParametersSupport.h"
-#include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
-#include "Settings/Settings.h"
-#include "PageTuneParameter.h"
+#include "Menu/Pages/Addition/PageTuneParameter.h"
 
 
-static ParameterPainterSupporting support;
+static ParameterTuner tuner;
 
 
 static void OnDraw_TuneParameter();
@@ -17,7 +14,7 @@ static void OnDraw_TuneParameter();
 
 void PageTuneParameter::SetParameter(Parameter *parameter)
 {
-    support.SetParameter(parameter);
+    tuner.SetParameter(parameter);
 }
 
 
@@ -92,28 +89,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 
 static bool OnControl_TuneParameter(Key &key)
 {
-    if(key.value == Key::RegLeft)
-    {
-        support.DecreaseInCurrentPosition();
-    }
-    else if(key.value == Key::RegRight)
-    {
-        support.IncreaseInCurrentPosition();
-    }
-    else if(key.IsUp())
-    {
-        if(key.value == Key::Left)
-        {
-            support.SetActivePrev();
-            return true;
-        }
-        else if(key.value == Key::Right)
-        {
-            support.SetActiveNext();
-        }
-    }
-
-    return false;
+    return tuner.ProcessControl(key);
 }
 
 
@@ -133,58 +109,21 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 /// Отобразить название параметра
 static void DrawNameParameter()
 {
-    int length = Font::GetLengthText(support.parameter->Name());
 
-    int pos = support.X0() + support.Width() / 2 - length / 2;
-
-    Text::Draw(pos, support.Y0() + 15, support.parameter->Name(), Color::WHITE);
 }
 
 
 /// Отобразить значение параметра
 static void DrawParameter()
 {
-    Color::WHITE.SetAsCurrent();
-
-    char buffer[2] = { 0, 0 };
-
-    int y = support.Y0() + 60;
-
-    for(uint i = 0; i < support.NumSymbols(); i++)
-    {
-        buffer[0] = support.Symbol(i);
-        int x = support.X(i);
-        Painter::FillRegion(x, y, support.WidthDigit()- 1, support.HeightDigit(), Color::GRAY_10);
-        Text::Draw(x, y, buffer, Color::WHITE);
-    }
 }
 
 
 static void OnDraw_TuneParameter()
 {
-    if(support.parameter == nullptr)
-    {
-        return;
-    }
-
-    Font::Store();
-    Font::Set(TypeFont::_GOSTB20);
-    Text::SetUpperCase(false);
-
-    int height = Wave::Graphics::Height() - 4;
-
-    Painter::FillRegion(support.X0(), support.Y0(), support.Width(), height, Color::BLACK);
+    tuner.Draw();
 
     DrawNameParameter();
 
     DrawParameter();
-
-    int x = support.X(support.GetPositionActive());
-
-    Font::Set(TypeFont::_8);
-
-    Text::Draw4SymbolsInRect(x, support.Y0() + 50, Ideograph::_8::FillDown, Color::GRAY_75);
-    Text::Draw4SymbolsInRect(x, support.Y0() + 77, Ideograph::_8::FillUp);
-
-    Font::Restore();
 }

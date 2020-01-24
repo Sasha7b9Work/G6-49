@@ -65,6 +65,27 @@ public:
 };
 
 
+/// Используется для настройки параметра с клавиатуры
+class ParameterTuner
+{
+public:
+    ParameterTuner() {}
+    /// Установить параметр, подлежащий настройке
+    void SetParameter(Parameter *param);
+    /// Обработать событие клавиатуры. Возвращает true, если обработано
+    bool ProcessControl(const Key &key);
+    /// Отрисовать параметр в режиме настройки
+    void Draw();
+
+private:
+    ParameterPainterSupporting support;
+
+    void DrawNameParameter();
+
+    void DrawParameter();
+};
+
+
 /// Структура используется для отрисовки значения параметра
 class ParameterPainter
 {
