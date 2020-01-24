@@ -9,9 +9,6 @@
 static ParameterTuner tuner;
 
 
-static void OnDraw_TuneParameter();
-
-
 void PageTuneParameter::SetParameter(Parameter *parameter)
 {
     tuner.SetParameter(parameter);
@@ -92,6 +89,11 @@ static bool OnControl_TuneParameter(Key &key)
     return tuner.ProcessControl(key);
 }
 
+static void OnDraw_TuneParameter()
+{
+    tuner.Draw();
+}
+
 
 DEF_PAGE_SB( pTuneParameter,   //-V641
     "ВВОД ЗНАЧЕНИЯ", //-V641
@@ -104,26 +106,3 @@ DEF_PAGE_SB( pTuneParameter,   //-V641
 )
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));
-
-
-/// Отобразить название параметра
-static void DrawNameParameter()
-{
-
-}
-
-
-/// Отобразить значение параметра
-static void DrawParameter()
-{
-}
-
-
-static void OnDraw_TuneParameter()
-{
-    tuner.Draw();
-
-    DrawNameParameter();
-
-    DrawParameter();
-}
