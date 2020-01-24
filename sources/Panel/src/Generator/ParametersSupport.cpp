@@ -21,23 +21,23 @@ struct StructSupport
 
 static const StructSupport support[ParameterValue::Count] =
 {
-    { ParameterPainter::DigitsFrequency, {} },
-    { ParameterPainter::DigitsPeriod, {} },
-    { ParameterPainter::DigitsAmplitude, {} },
-    { ParameterPainter::DigitsOffset, {} },
-    { ParameterPainter::DigitsDuration, {} },
-    { ParameterPainter::DigitsDutyRatio, {} },
-    { ParameterPainter::DigitsPhase, {} },
-    { ParameterPainter::DigitsDelay, {} },
-    { ParameterPainter::DigitsDurationRise, {} },
-    { ParameterPainter::DigitsDurationFail, {} },
-    { ParameterPainter::DigitsDurationStady, {} },
-    { ParameterPainter::DigitsDutyFactor, {} },
-    { ParameterPainter::DigitsManipulationDuration, {} },
-    { ParameterPainter::DigitsManipulationPeriod, {} },
-    { ParameterPainter::DigitsPacketPeriod, {} },
-    { ParameterPainter::DigitsPacketNumber, {} },
-    { ParameterPainter::DigitsEmpty, {} }
+    { ParameterPainter::DigitsFrequency,     {"Ãö", "Hz"} },
+    { ParameterPainter::DigitsPeriod,        { "ñ", "s" } },
+    { ParameterPainter::DigitsAmplitude,     { "Â", "V" } },
+    { ParameterPainter::DigitsOffset,        { "Â", "V" } },
+    { ParameterPainter::DigitsDuration,      { "ñ", "s" } },
+    { ParameterPainter::DigitsDutyRatio,     { "ñ", "s" } },
+    { ParameterPainter::DigitsPhase,         { "ñ", "s" } },
+    { ParameterPainter::DigitsDelay,         { "ñ", "s" } },
+    { ParameterPainter::DigitsDurationRise,  { "ñ", "s" } },
+    { ParameterPainter::DigitsDurationFail,  { "ñ", "s" } },
+    { ParameterPainter::DigitsDurationStady, { "ñ", "s" } },
+    { ParameterPainter::DigitsDutyFactor,    { "ñ", "s" } },
+    { ParameterPainter::DigitsManipDuration, { "ñ", "s" } },
+    { ParameterPainter::DigitsManipPeriod,   { "ñ", "s" } },
+    { ParameterPainter::DigitsPacketPeriod,  { "ñ", "s" } },
+    { ParameterPainter::DigitsPacketNumber,  { "ñ", "s" } },
+    { ParameterPainter::DigitsEmpty,         { "ñ", "s" } }
 };
 
 
@@ -76,28 +76,7 @@ pString ParameterPainter::Digits(int8 *ind)
 
 pString ParameterPainter::Units(Language::E lang)
 {
-    static const pString u[ParameterValue::Count][2] =
-    {
-        {"Ãö", "Hz"},
-        {"ñ", "s"},
-        {"Â", "V"},
-        {"Â", "V"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"},
-        {"ñ", "s"}
-    };
-
-    return u[parameter->Type()][lang];
+    return support[parameter->Type()].u[lang];
 }
 
 
@@ -109,8 +88,17 @@ void ParameterPainter::DigitsFrequency()
 }
 
 
+void ParameterPainter::DigitsTime()
+{
+    SetChars(0, 5, 6);
+    buffer[6] = ',';
+    SetChars(7, -1, 8);
+}
+
+
 void ParameterPainter::DigitsPeriod()
 {
+    DigitsTime();
 }
 
 
@@ -133,6 +121,7 @@ void ParameterPainter::DigitsOffset()
 
 void ParameterPainter::DigitsDuration()
 {
+    DigitsTime();
 }
 
 
@@ -147,21 +136,25 @@ void ParameterPainter::DigitsPhase()
 
 void ParameterPainter::DigitsDelay()
 {
+    DigitsTime();
 }
 
 
 void ParameterPainter::DigitsDurationRise()
 {
+    DigitsTime();
 }
 
 
 void ParameterPainter::DigitsDurationFail()
 {
+    DigitsTime();
 }
 
 
 void ParameterPainter::DigitsDurationStady()
 {
+    DigitsTime();
 }
 
 
@@ -170,18 +163,21 @@ void ParameterPainter::DigitsDutyFactor()
 }
 
 
-void ParameterPainter::DigitsManipulationDuration()
+void ParameterPainter::DigitsManipDuration()
 {
+    DigitsTime();
 }
 
 
-void ParameterPainter::DigitsManipulationPeriod()
+void ParameterPainter::DigitsManipPeriod()
 {
+    DigitsTime();
 }
 
 
 void ParameterPainter::DigitsPacketPeriod()
 {
+    DigitsTime();
 }
 
 

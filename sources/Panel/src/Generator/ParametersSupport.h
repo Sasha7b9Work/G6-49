@@ -122,11 +122,12 @@ public:
     static void DigitsDurationFail();
     static void DigitsDurationStady();
     static void DigitsDutyFactor();
-    static void DigitsManipulationDuration();
-    static void DigitsManipulationPeriod();
+    static void DigitsManipDuration();
+    static void DigitsManipPeriod();
     static void DigitsPacketPeriod();
     static void DigitsPacketNumber();
     static void DigitsEmpty();
+    static void DigitsTime();
 };
 
 
