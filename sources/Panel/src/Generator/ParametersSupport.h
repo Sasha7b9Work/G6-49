@@ -105,23 +105,23 @@ private:
     static char buffer[SIZE_BUFFER];
     static int8 *indexes;
 
-    static pString DigitsFrequency();
-    static pString DigitsPeriod();
-    static pString DigitsAmplitude();
-    static pString DigitsOffset();
-    static pString DigitsDuration();
-    static pString DigitsDutyRatio();
-    static pString DigitsPhase();
-    static pString DigitsDelay();
-    static pString DigitsDurationRise();
-    static pString DigitsDurationFail();
-    static pString DigitsDurationStady();
-    static pString DigitsDutyFactor();
-    static pString DigitsManipulationDuration();
-    static pString DigitsManipulationPeriod();
-    static pString DigitsPacketPeriod();
-    static pString DigitsPacketNumber();
-    static pString DigitsEmpty();
+    static void DigitsFrequency();
+    static void DigitsPeriod();
+    static void DigitsAmplitude();
+    static void DigitsOffset();
+    static void DigitsDuration();
+    static void DigitsDutyRatio();
+    static void DigitsPhase();
+    static void DigitsDelay();
+    static void DigitsDurationRise();
+    static void DigitsDurationFail();
+    static void DigitsDurationStady();
+    static void DigitsDutyFactor();
+    static void DigitsManipulationDuration();
+    static void DigitsManipulationPeriod();
+    static void DigitsPacketPeriod();
+    static void DigitsPacketNumber();
+    static void DigitsEmpty();
 
     /// Возвращает единицы измерения ParameterValue
     static pString UnitsValue(Language::E lang = Language::RU);

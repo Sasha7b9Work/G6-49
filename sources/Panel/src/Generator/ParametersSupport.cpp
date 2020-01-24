@@ -33,7 +33,7 @@ pString ParameterPainter::Digits(int8 *ind)
 {
     indexes = ind;
 
-    typedef pString (*f)();
+    typedef void (*f)();
 
     static const f func[ParameterValue::Count] =
     {
@@ -58,7 +58,11 @@ pString ParameterPainter::Digits(int8 *ind)
 
     std::memset(buffer, 0, SIZE_BUFFER);
 
-    return func[parameter->Type()]();
+    buffer[0] = '1';
+
+    func[parameter->Type()]();
+
+    return buffer;
 }
 
 
@@ -84,113 +88,94 @@ pString ParameterPainter::UnitsValue(Language::E lang)
 }
 
 
-pString ParameterPainter::DigitsFrequency()
+void ParameterPainter::DigitsFrequency()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsPeriod()
+void ParameterPainter::DigitsPeriod()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsAmplitude()
+void ParameterPainter::DigitsAmplitude()
 {
     SetChars(0, 1, 2);
     buffer[2] = ',';
     SetChars(3, -1, 3);
-
-    return buffer;
 }
 
 
-pString ParameterPainter::DigitsOffset()
+void ParameterPainter::DigitsOffset()
 {
     buffer[0] = (value->Sign() < 0) ? '-' : '+';
     SetChar(1, 0);
     buffer[2] = ',';
     SetChars(3, -1, 3);
-
-    return buffer;
 }
 
 
-pString ParameterPainter::DigitsDuration()
+void ParameterPainter::DigitsDuration()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsDutyRatio()
+void ParameterPainter::DigitsDutyRatio()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsPhase()
+void ParameterPainter::DigitsPhase()
 {
-    return "1";
 }
 
-pString ParameterPainter::DigitsDelay()
+void ParameterPainter::DigitsDelay()
 {
-    return "1";
-}
-
-
-pString ParameterPainter::DigitsDurationRise()
-{
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsDurationFail()
+void ParameterPainter::DigitsDurationRise()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsDurationStady()
+void ParameterPainter::DigitsDurationFail()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsDutyFactor()
+void ParameterPainter::DigitsDurationStady()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsManipulationDuration()
+void ParameterPainter::DigitsDutyFactor()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsManipulationPeriod()
+void ParameterPainter::DigitsManipulationDuration()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsPacketPeriod()
+void ParameterPainter::DigitsManipulationPeriod()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsPacketNumber()
+void ParameterPainter::DigitsPacketPeriod()
 {
-    return "1";
 }
 
 
-pString ParameterPainter::DigitsEmpty()
+void ParameterPainter::DigitsPacketNumber()
 {
-    return "1";
+}
+
+
+void ParameterPainter::DigitsEmpty()
+{
 }
 
 
