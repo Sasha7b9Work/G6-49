@@ -68,17 +68,6 @@ pString ParameterPainter::Digits(int8 *ind)
 
 pString ParameterPainter::Units(Language::E lang)
 {
-    if(parameter->IsValue())
-    {
-        return UnitsValue(lang);
-    }
-
-    return "Â";
-}
-
-
-pString ParameterPainter::UnitsValue(Language::E lang)
-{
     if(parameter->Type() == ParameterValue::Offset || parameter->Type() == ParameterValue::Amplitude)
     {
         return (lang == Language::RU) ? "Â" : "V";

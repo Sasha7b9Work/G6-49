@@ -92,7 +92,7 @@ private:
 class ParameterPainter
 {
 public:
-    static const int SIZE_BUFFER = 100;
+    static const int SIZE_BUFFER = 50;
     static void SetPatameter(Parameter *param);
     /// Возвращает строку значения параметра (если необходимо, то со знаком) для редактитрования. В массиве indexes сохраняются позиции символов относительно точки (в предположении, что точка стоит после символа в нулевой позиции)
     static pString Digits(int8 *indexes);
@@ -122,9 +122,6 @@ private:
     static void DigitsPacketPeriod();
     static void DigitsPacketNumber();
     static void DigitsEmpty();
-
-    /// Возвращает единицы измерения ParameterValue
-    static pString UnitsValue(Language::E lang = Language::RU);
 
     /// Записать в posBuffer буфера символ, соответствующий цифре с позиции indexDigit FloatValue
     static void SetChar(int posBuffer, int8 indexDigit);
