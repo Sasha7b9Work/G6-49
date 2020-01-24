@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Generator/Generator_p.h"
 #include "Generator/Parameters.h"
-#include "Generator/ParameterPainter.h"
+#include "Generator/ParametersSupport.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Addition/PageTuneParameter.h"
 #include "Utils/Math.h"

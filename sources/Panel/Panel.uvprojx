@@ -1897,16 +1897,6 @@
               <FilePath>.\src\Generator\Generator_p.cpp</FilePath>
             </File>
             <File>
-              <FileName>ParameterPainter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\ParameterPainter.h</FilePath>
-            </File>
-            <File>
-              <FileName>ParameterPainter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\ParameterPainter.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Parameters.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Parameters.h</FilePath>
@@ -1915,6 +1905,16 @@
               <FileName>Parameters.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Parameters.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ParametersSupport.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\ParametersSupport.h</FilePath>
+            </File>
+            <File>
+              <FileName>ParametersSupport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\ParametersSupport.cpp</FilePath>
             </File>
             <File>
               <FileName>Signals.h</FileName>

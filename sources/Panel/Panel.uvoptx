@@ -923,7 +923,7 @@
 
   <Group>
     <GroupName>common</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1455,7 +1455,7 @@
 
   <Group>
     <GroupName>Generator</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1490,8 +1490,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\ParameterPainter.h</PathWithFileName>
-      <FilenameWithoutPath>ParameterPainter.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\Parameters.h</PathWithFileName>
+      <FilenameWithoutPath>Parameters.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1502,8 +1502,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\ParameterPainter.cpp</PathWithFileName>
-      <FilenameWithoutPath>ParameterPainter.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\Parameters.cpp</PathWithFileName>
+      <FilenameWithoutPath>Parameters.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1514,8 +1514,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\Parameters.h</PathWithFileName>
-      <FilenameWithoutPath>Parameters.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\ParametersSupport.h</PathWithFileName>
+      <FilenameWithoutPath>ParametersSupport.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1526,8 +1526,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\Parameters.cpp</PathWithFileName>
-      <FilenameWithoutPath>Parameters.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\ParametersSupport.cpp</PathWithFileName>
+      <FilenameWithoutPath>ParametersSupport.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

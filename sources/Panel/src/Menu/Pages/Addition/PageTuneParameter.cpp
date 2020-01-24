@@ -1,7 +1,7 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
-#include "Generator/ParameterPainter.h"
+#include "Generator/ParametersSupport.h"
 #include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"

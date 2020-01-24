@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Display/Font/Font.h"
 #include "Generator/Parameters.h"
-#include "Generator/ParameterPainter.h"
+#include "Generator/ParametersSupport.h"
 #include "Generator/Signals.h"
 #include "Generator/Wave.h"
 #include <cstring>
