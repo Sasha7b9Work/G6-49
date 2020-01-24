@@ -201,11 +201,11 @@ void ParameterPainter::SetChar(int posBuffer, int8 indexDigit)
 }
 
 
-void ParameterPainter::SetChars(int posBuffer, int8 indexDigit, int numDigits)
+void ParameterPainter::SetChars(int posBuffer, int8 indexDigit, int8 numDigits)
 {
-    for(int i = 0; i < numDigits; i++)
+    for(int8 i = 0; i < numDigits; i++)
     {
-        SetChar(posBuffer + i, indexDigit + i);
+        SetChar(posBuffer + i, indexDigit - i);
     }
 }
 

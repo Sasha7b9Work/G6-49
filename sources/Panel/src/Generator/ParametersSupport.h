@@ -128,7 +128,7 @@ private:
 
     /// Записать в posBuffer буфера символ, соответствующий цифре с позиции indexDigit FloatValue
     static void SetChar(int posBuffer, int8 indexDigit);
-    static void SetChars(int posBuffer, int8 indexDigit, int numDigits);
+    static void SetChars(int posBuffer, int8 indexDigit, int8 numDigits);
 };
 
 
