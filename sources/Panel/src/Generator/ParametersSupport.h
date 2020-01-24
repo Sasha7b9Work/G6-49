@@ -92,24 +92,40 @@ private:
 class ParameterPainter
 {
 public:
-    static void SetPatameter(Parameter *param)
-    {
-        parameter = param;
-    }
-
+    static const int SIZE_BUFFER = 100;
+    static void SetPatameter(Parameter *param);
     /// ¬озвращает строку значени€ параметра (если необходимо, то со знаком) дл€ редактитровани€. ¬ массиве indexes сохран€ютс€ позиции символов относительно точки (в предположении, что точка стоит после символа в нулевой позиции)
     static pString Digits(int8 *indexes);
     /// ¬озвращает строку с единицами измерени€
     static pString Units(Language::E lang = Language::RU);
 
 private:
-    static Parameter *parameter;
-    /// ¬озвращает строку значени€ смещени€
+    static ParameterValue *parameter;
+    static FloatValue *value;
+    static char buffer[SIZE_BUFFER];
+
+    static pString DigitsFrequency(int8 *indexes);
+    static pString DigitsPeriod(int8 *indexes);
+    static pString DigitsAmplitude(int8 *indexes);
     static pString DigitsOffset(int8 *indexes);
+    static pString DigitsDuration(int8 *indexes);
+    static pString DigitsDutyRatio(int8 *indexes);
+    static pString DigitsPhase(int8 *indexes);
+    static pString DigitsDelay(int8 *indexes);
+    static pString DigitsDurationRise(int8 *indexes);
+    static pString DigitsDurationFail(int8 *indexes);
+    static pString DigitsDurationStady(int8 *indexes);
+    static pString DigitsDutyFactor(int8 *indexes);
+    static pString DigitsManipulationDuration(int8 *indexes);
+    static pString DigitsManipulationPeriod(int8 *indexes);
+    static pString DigitsPacketPeriod(int8 *indexes);
+    static pString DigitsPacketNumber(int8 *indexes);
+    static pString DigitsEmpty(int8 *indexes);
+
     /// ¬озвращает единицы измерени€ ParameterValue
     static pString UnitsValue(Language::E lang = Language::RU);
 
-    static void SetChar(FloatValue &value, char *buffer, int8 *indexes, int posBuffer, int8 indexDigit);
+    static void SetChar(int8 *indexes, int posBuffer, int8 indexDigit);
 };
 
 

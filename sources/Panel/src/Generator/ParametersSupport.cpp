@@ -10,21 +10,52 @@
 #include <cstring>
 
 
-Parameter *ParameterPainter::parameter = nullptr;
+ParameterValue *ParameterPainter::parameter = nullptr;
+FloatValue     *ParameterPainter::value = nullptr;
+char            ParameterPainter::buffer[ParameterPainter::SIZE_BUFFER];
 
 ParameterValue *LogicFloatValue::parameter = nullptr;
 FloatValue *LogicFloatValue::value = nullptr;
 
+
+void ParameterPainter::SetPatameter(Parameter *param)
+{
+    if(param->IsValue())
+    {
+        parameter = static_cast<ParameterValue *>(param);
+        value = &parameter->value;
+    }
+}
+
+
 pString ParameterPainter::Digits(int8 *indexes)
 {
-    ParameterValue *value = static_cast<ParameterValue *>(parameter);
+    typedef pString (*f)(int8 *);
 
-    if(value->Type() == ParameterValue::Offset)
+    static const f func[ParameterValue::Count] =
     {
-        return DigitsOffset(indexes);
-    }
+        DigitsFrequency,
+        DigitsPeriod,
+        DigitsAmplitude,
+        DigitsOffset,
+        DigitsDuration,
+        DigitsDutyRatio,
+        DigitsPhase,
+        DigitsDelay,
+        DigitsDurationRise,
+        DigitsDurationFail,
+        DigitsDurationStady,
+        DigitsDutyFactor,
+        DigitsManipulationDuration,
+        DigitsManipulationPeriod,
+        DigitsPacketPeriod,
+        DigitsPacketNumber,
+        DigitsEmpty
+    };
 
-    return "1";
+    std::memset(buffer, 0, SIZE_BUFFER);
+
+    return func[static_cast<ParameterValue *>(parameter)->Type()](indexes);
 }
 
 
@@ -41,9 +72,7 @@ pString ParameterPainter::Units(Language::E lang)
 
 pString ParameterPainter::UnitsValue(Language::E lang)
 {
-    ParameterValue *value = static_cast<ParameterValue *>(parameter);
-
-    if(value->Type() == ParameterValue::Offset || value->Type() == ParameterValue::Amplitude)
+    if(parameter->Type() == ParameterValue::Offset || parameter->Type() == ParameterValue::Amplitude)
     {
         return (lang == Language::RU) ? "Â" : "V";
     }
@@ -52,33 +81,125 @@ pString ParameterPainter::UnitsValue(Language::E lang)
 }
 
 
-pString ParameterPainter::DigitsOffset(int8 *indexes)
+pString ParameterPainter::DigitsFrequency(int8 *)
 {
-    FloatValue value = static_cast<ParameterValue *>(parameter)->value;
 
-    const int NUM_SYMBOLS = 1 + 1 + 1 + 3 + 1;
+    return "1";
+}
 
-    static char buffer[NUM_SYMBOLS];
 
-    buffer[0] = (value.Sign() < 0) ? '-' : '+';
+pString ParameterPainter::DigitsPeriod(int8 *)
+{
+    return "1";
+}
 
-    buffer[NUM_SYMBOLS - 1] = '\0';
 
-    SetChar(value, buffer, indexes, 1, 0);
-
+pString ParameterPainter::DigitsAmplitude(int8 *indexes)
+{
+    SetChar(indexes, 0, 1);
+    SetChar(indexes, 1, 0);
     buffer[2] = ',';
-
-    SetChar(value, buffer, indexes, 3, -1);
-    SetChar(value, buffer, indexes, 4, -2);
-    SetChar(value, buffer, indexes, 5, -2);
+    SetChar(indexes, 3, -1);
+    SetChar(indexes, 4, -2);
+    SetChar(indexes, 5, -3);
 
     return buffer;
 }
 
 
-void ParameterPainter::SetChar(FloatValue &value, char *buffer, int8 *indexes, int posBuffer, int8 indexDigit)
+pString ParameterPainter::DigitsOffset(int8 *indexes)
 {
-    buffer[posBuffer] = MathFloatValue::GetChar(value, indexDigit);
+    buffer[0] = (value->Sign() < 0) ? '-' : '+';
+    SetChar(indexes, 1, 0);
+    buffer[2] = ',';
+    SetChar(indexes, 3, -1);
+    SetChar(indexes, 4, -2);
+    SetChar(indexes, 5, -2);
+
+    return buffer;
+}
+
+
+pString ParameterPainter::DigitsDuration(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsDutyRatio(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsPhase(int8 *)
+{
+    return "1";
+}
+
+pString ParameterPainter::DigitsDelay(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsDurationRise(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsDurationFail(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsDurationStady(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsDutyFactor(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsManipulationDuration(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsManipulationPeriod(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsPacketPeriod(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsPacketNumber(int8 *)
+{
+    return "1";
+}
+
+
+pString ParameterPainter::DigitsEmpty(int8 *)
+{
+    return "1";
+}
+
+
+void ParameterPainter::SetChar(int8 *indexes, int posBuffer, int8 indexDigit)
+{
+    buffer[posBuffer] = MathFloatValue::GetChar(*value, indexDigit);
     indexes[posBuffer] = indexDigit;
 }
 
