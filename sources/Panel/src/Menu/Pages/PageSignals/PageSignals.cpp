@@ -95,7 +95,7 @@ static bool OnKey_PageSignals(const Key &)
 }
 
 DEF_PAGE_4( pageSignals,   //-V641
-    "мюярпнийх яхцмюкнб",   //-V641
+    "мюярпнийх яхцмюкнб",   //-V641 //-V1027
     "",
     &cChannel,              ///< мюярпнийх яхцмюкнб - йЮМЮК
     &cFormA,                ///< мюярпнийх яхцмюкнб - тНПЛЮ

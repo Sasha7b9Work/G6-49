@@ -222,7 +222,7 @@ pString MathFloatValue::GetStringValue(const FloatValue &value, bool sign, int n
         buffer[0] = value.Sign() == 1 ? '+' : '-';
     }
 
-#define POS(i) (sign ? (i + 1) : i)
+#define POS(i) ((sign) ? ((i) + (1)) : (i))
 
     for(int i = 0; i <= numDigits; i++)
     {
