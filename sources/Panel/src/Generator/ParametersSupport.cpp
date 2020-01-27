@@ -3,6 +3,7 @@
 #include "Display/Symbols.h"
 #include "Display/Text.h"
 #include "Display/Font/Font.h"
+#include "Display/WaveGraphics.h"
 #include "Generator/Parameters.h"
 #include "Generator/ParametersSupport.h"
 #include "Generator/Signals.h"
@@ -440,19 +441,19 @@ uint ParameterPainterSupporting::PositionFirstUnit() const
 
 int ParameterPainterSupporting::X0() const
 {
-    return Wave::Graphics::X();
+    return WaveGraphics::X();
 }
 
 
 int ParameterPainterSupporting::Width() const
 {
-    return Wave::Graphics::Width() - 1;
+    return WaveGraphics::Width() - 1;
 }
 
 
 int ParameterPainterSupporting::Y0() const
 {
-    return Wave::Graphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
+    return WaveGraphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
 }
 
 
@@ -667,7 +668,7 @@ void ParameterTuner::Draw()
     Font::Set(TypeFont::_GOSTB20);
     Text::SetUpperCase(false);
 
-    int height = Wave::Graphics::Height() - 4;
+    int height = WaveGraphics::Height() - 4;
 
     Painter::FillRegion(support.X0(), support.Y0(), support.Width(), height, Color::BLACK);
 

@@ -7,6 +7,7 @@
 #include "File.h"
 #include "Display/Painter.h"
 #include "Display/Text.h" 
+#include "Display/WaveGraphics.h"
 #include "Settings/Settings.h"
 #include "Hardware/Timer.h"
 #include <cstdlib>
@@ -30,10 +31,10 @@ void FDrive::Init()
 
 void FDrive::Draw()
 {
-    int x = Wave::Graphics::X();
-    int y = Wave::Graphics::Y(Chan::A) + 1;
-    int width = Wave::Graphics::Width() - 2;
-    int height = Wave::Graphics::Height() * 2;
+    int x = WaveGraphics::X();
+    int y = WaveGraphics::Y(Chan::A) + 1;
+    int width = WaveGraphics::Width() - 2;
+    int height = WaveGraphics::Height() * 2;
 
     Painter::FillRegion(x, y, width, height, Color::BACK);
 

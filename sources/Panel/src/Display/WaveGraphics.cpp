@@ -1,18 +1,12 @@
-#include "Signals.h"
-#include "Wave.h"
-#include "Display/DisplayTypes.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Menu/Menu.h"
+#include "Display/WaveGraphics.h"
+#include "Generator/Signals.h"
 #include "Menu/Pages/PageSignals/PageSignals.h"
 #include "Settings/Settings.h"
-#include "Utils/Debug.h"
-#include <cmath>
-#include <string.h>
-#include <cstdlib>
 
 
-void Wave::Graphics::Draw(Chan::E ch)
+void WaveGraphics::Draw(Chan::E ch)
 {
     if(FREQ_METER_ENABLED && ch != CURRENT_CHANNEL)
     {
@@ -37,31 +31,31 @@ void Wave::Graphics::Draw(Chan::E ch)
 }
 
 
-int Wave::Graphics::X()
+int WaveGraphics::X()
 {
     return 0;
 }
 
 
-int Wave::Graphics::Y(Chan::E ch)
+int WaveGraphics::Y(Chan::E ch)
 {
     return (ch == Chan::A || FREQ_METER_ENABLED) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
 }
 
 
-int Wave::Graphics::Width()
+int WaveGraphics::Width()
 {
     return SIGNAL_WIDTH;
 }
 
 
-int Wave::Graphics::Height()
+int WaveGraphics::Height()
 {
     return SIGNAL_HEIGHT;
 }
 
 
-void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
+void WaveGraphics::DrawParameters(Chan::E ch, int y0)
 {
     Form *form = FORM(ch);
 
@@ -88,7 +82,7 @@ void Wave::Graphics::DrawParameters(Chan::E ch, int y0)
 }
 
 
-void Wave::Graphics::DrawParameterValue(Parameter *param, int x, int y)
+void WaveGraphics::DrawParameterValue(Parameter *param, int x, int y)
 {
     if(param->IsChoice() && static_cast<ParameterChoice *>(param)->DrawChoice(x + 6, y))
     {

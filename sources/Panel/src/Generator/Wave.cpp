@@ -1,18 +1,9 @@
-#include "common/Command.h"
 #include "defines.h"
-#include "Log.h"
+#include "common/Command.h"
 #include "Display/Painter.h"
-#include "Settings/Settings.h"
-#include "Display/Symbols.h"
-#include "Generator_p.h"
-#include "Signals.h"
-#include "Utils/Debug.h"
-#include "Utils/Math.h"
-#include "Menu/Menu.h"
-#include "Menu/Pages/Addition/PageTuneParameter.h"
-#include "Utils/StringUtils.h"
-#include <cstdio>
-#include <cstdlib>
+#include "Generator/Generator_p.h"
+#include "Generator/Signals.h"
+#include "Generator/Wave.h"
 #include <cmath>
 
 

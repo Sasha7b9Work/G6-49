@@ -2,6 +2,7 @@
 #include "FreqMeter/FreqMeter_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
+#include "Display/WaveGraphics.h"
 #include "Generator/Wave.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
@@ -29,8 +30,8 @@ void Display::Update()
 {
     Statistics::BeginFrame();
     Painter::BeginScene(Color::BACK);
-    Wave::Graphics::Draw(Chan::A);
-    Wave::Graphics::Draw(Chan::B);
+    WaveGraphics::Draw(Chan::A);
+    WaveGraphics::Draw(Chan::B);
     Menu::Draw();
     PageDebug::PageRegisters::Draw();
     Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);

@@ -54,6 +54,7 @@ endforeach()
 add_compile_options(/wd4355)    # used in base member initializer list
 add_compile_options(/wd4211)    # nonstandard extension used: redefined extern to static
 add_compile_options(/wd4514)    # unreferenced inline function has been removed
+add_compile_options(/wd4623)    # 'xxx': default constructor was implicitly defined as deleted
 add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
 add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
 add_compile_options(/wd4710)    # function not inlined
@@ -84,22 +85,21 @@ source_group(src                      FILES              ../../Panel/src/defines
                                                          ../../Panel/src/stdafx.cpp
                                                          ../../Panel/src/stdafx.h
                                                          ../../Panel/src/structs.h)
-source_group(Display                  FILES              ../../Panel/src/Display/Colors.cpp
-                                                         ../../Panel/src/Display/Colors.h
-                                                         ../../Panel/src/Display/Console.cpp
+source_group(Display                  FILES              ../../Panel/src/Display/Colors.h
+                                                         ../../Panel/src/Display/Colors.cpp
                                                          ../../Panel/src/Display/Console.h
-                                                         ../../Panel/src/Display/Display.cpp
+                                                         ../../Panel/src/Display/Console.cpp
                                                          ../../Panel/src/Display/Display.h
+                                                         ../../Panel/src/Display/Display.cpp
                                                          ../../Panel/src/Display/DisplayTypes.h
-                                                         ../../Panel/src/Display/InputWindow.cpp
-                                                         ../../Panel/src/Display/InputWindow.h
-                                                         ../../Panel/src/Display/InputWindowStruct.cpp
-                                                         ../../Panel/src/Display/Painter.cpp
                                                          ../../Panel/src/Display/Painter.h
+                                                         ../../Panel/src/Display/Painter.cpp
                                                                      src/Display/Painter_win.cpp
                                                          ../../Panel/src/Display/Symbols.h
                                                          ../../Panel/src/Display/Text.cpp
-                                                         ../../Panel/src/Display/Text.h)                                                                     
+                                                         ../../Panel/src/Display/Text.h
+                                                         ../../Panel/src/Display/WaveGraphics.h
+                                                         ../../Panel/src/Display/WaveGraphics.cpp)
 source_group(Hardware                 FILES                          src/Hardware/Beeper_win.cpp
                                                          ../../Panel/src/Hardware/CPU.h
                                                          ../../Panel/src/Hardware/Timer.h
@@ -160,21 +160,21 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/stdafx.h
                     ../../Panel/src/structs.h
                     
-                    ../../Panel/src/Display/Colors.cpp
                     ../../Panel/src/Display/Colors.h
-                    ../../Panel/src/Display/Console.cpp
+                    ../../Panel/src/Display/Colors.cpp
                     ../../Panel/src/Display/Console.h
-                    ../../Panel/src/Display/Display.cpp
+                    ../../Panel/src/Display/Console.cpp
                     ../../Panel/src/Display/Display.h
+                    ../../Panel/src/Display/Display.cpp
                     ../../Panel/src/Display/DisplayTypes.h
-                    ../../Panel/src/Display/InputWindow.cpp
-                    ../../Panel/src/Display/InputWindow.h
-                    ../../Panel/src/Display/InputWindowStruct.cpp
-                    ../../Panel/src/Display/Painter.cpp
                     ../../Panel/src/Display/Painter.h
+                    ../../Panel/src/Display/Painter.cpp
+                                src/Display/Painter_win.cpp
                     ../../Panel/src/Display/Symbols.h
                     ../../Panel/src/Display/Text.cpp
                     ../../Panel/src/Display/Text.h
+                    ../../Panel/src/Display/WaveGraphics.h
+                    ../../Panel/src/Display/WaveGraphics.cpp
                     
                     ../../Panel/src/Hardware/Controls.h
                     ../../Panel/src/Hardware/Controls.cpp

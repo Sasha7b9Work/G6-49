@@ -3,6 +3,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Display/Symbols.h"
+#include "Display/WaveGraphics.h"
 #include "Menu/Pages/PageService.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
@@ -313,9 +314,9 @@ void PageDebug::PageRegisters::Draw()
         return;
     }
 
-    Painter::FillRegion(Wave::Graphics::X(), Wave::Graphics::Y(Chan::A) + 1, Wave::Graphics::Width() - 1, Wave::Graphics::Height() * 2, Color::BACK);
+    Painter::FillRegion(WaveGraphics::X(), WaveGraphics::Y(Chan::A) + 1, WaveGraphics::Width() - 1, WaveGraphics::Height() * 2, Color::BACK);
 
-    DrawRegisters(Wave::Graphics::X() + 4, Wave::Graphics::Y(Chan::A) + 3);
+    DrawRegisters(WaveGraphics::X() + 4, WaveGraphics::Y(Chan::A) + 3);
 
     DrawInputWindow();
 }
