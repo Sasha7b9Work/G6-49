@@ -5,6 +5,7 @@
 #include "Generator/Signals.h"
 #include "Generator/Wave.h"
 #include <cmath>
+#include <cstdlib>
 
 
 #define SIZE_BUFFER     300
