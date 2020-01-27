@@ -522,6 +522,8 @@ void ParameterPainterSupporting::IncreaseInCurrentPosition()
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::Digits(indexes));
     std::strcat(buffer, ParameterPainter::Units());
+
+    PGenerator::SetParameter(parameter);
 }
 
 
@@ -535,6 +537,8 @@ void ParameterPainterSupporting::DecreaseInCurrentPosition()
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::Digits(indexes));
     std::strcat(buffer, ParameterPainter::Units());
+
+    PGenerator::SetParameter(parameter);
 }
 
 

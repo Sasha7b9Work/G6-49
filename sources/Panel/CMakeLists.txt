@@ -20,6 +20,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(/wd4211)    # nonstandard extension used: redefined extern to static
 add_compile_options(/wd4514)    # unreferenced inline function has been removed
+add_compile_options(/wd4623)    # 'xxx': default constructor was implicitly defined as deleted
 add_compile_options(/wd4626)
 add_compile_options(/wd4710)    # function not inlined
 add_compile_options(/wd4774)    # format string expected in argument N is not a string literal
