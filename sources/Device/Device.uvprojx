@@ -1526,21 +1526,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Settings\CalibrationSettings.h</FilePath>
             </File>
-            <File>
-              <FileName>SettingsTypes.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
-            </File>
-            <File>
-              <FileName>Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Settings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

@@ -4,7 +4,6 @@
 #include "AD5697.h"
 #include "FPGA.h"
 #include "common/Command.h"
-#include "Settings/Settings.h"
 
 
 struct DGenerator
@@ -40,6 +39,18 @@ struct DGenerator
     static void SetPacketNumber(Chan::E ch, FloatValue number);
 
     static void SetPeriod(Chan::E ch, FloatValue period);
+    /// Возвращает установленную на канале амплитуду
+    static float GetAmplitude(Chan::E ch) { return amplitude[ch]; }
+    /// Возвращает установленное на канале смещение
+    static float GetOffset(Chan::E ch) { return offset[ch]; }
+
+private:
+    /// true, если на канале установлена форма сигнала "синусоида"
+    static bool waveIsSine[Chan::Count];
+    /// Текущая установленная амплитуда на канале
+    static float amplitude[Chan::Count];
+    /// Текущая установленное смещение на кнаале
+    static float offset[Chan::Count];
 };
 
 
@@ -111,7 +122,8 @@ struct Amplifier
 
     static void Tune(Chan::E ch)
     {
-        float amplitude = set.amplitude[ch].ToFloat();
+        float amplitude = DGenerator::GetAmplitude(ch);
+        float offset = DGenerator::GetOffset(ch);
 
         if(amplitude > 3.16F)              // 1 диапазон
         {
@@ -125,7 +137,7 @@ struct Amplifier
         }
         else if(amplitude > 0.316F)        // 3,4 диапазоны
         {
-            if(set.offset[ch].ToFloat() > 2.5F)
+            if(offset > 2.5F)
             {
                 SetState(ch, true);
                 Attenuator::SetAttenuation(ch, Attenuation::_20Db);

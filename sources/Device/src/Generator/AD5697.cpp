@@ -22,9 +22,9 @@ void AD5697::Init()
 }
 
 
-static float CalculateOffset(Chan::E ch, FloatValue offset)
+float AD5697::CalculateCodeOffset(Chan::E ch, FloatValue offset)
 {
-    float zero = 2048 * Calibrator::GetOffsetK_Zero(ch, TypeForm::Sine);    // 2048
+    float zero = Calibrator::GetOffsetK_Zero(ch, TypeForm::Sine);    // 2048
     
     if (offset.ToFloat() > 0.0F)
     {
@@ -52,7 +52,7 @@ static float CalculateOffset(Chan::E ch, FloatValue offset)
 
 void AD5697::SetOffset(Chan::E ch, FloatValue offset)
 {
-    float code = CalculateOffset(ch, offset);
+    float code = CalculateCodeOffset(ch, offset);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 

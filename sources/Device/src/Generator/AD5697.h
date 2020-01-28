@@ -23,6 +23,6 @@ private:
     static void WriteParameter(uint8 address, uint8 data[3], HPort::E port, uint16 pin);
 
     static StructPIN PinLDAC(Chan::E ch);
-
-//    static uint8 CreateCommandByte(ParameterValue param);
+    /// Рассчитать код смещения для смещения offset
+    static float CalculateCodeOffset(Chan::E ch, FloatValue offset);
 };

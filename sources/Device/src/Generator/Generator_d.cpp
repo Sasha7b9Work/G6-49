@@ -6,8 +6,12 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include "Settings/CalibrationSettings.h"
-#include "Settings/Settings.h"
 #include "common/CommonTypes.h"
+
+
+bool DGenerator::waveIsSine[Chan::Count] = { true, true };
+float DGenerator::amplitude[Chan::Count] = { 10.0F, 10.0F };
+float DGenerator::offset[Chan::Count] = { 0.0F, 0.0F };
 
 
 struct Filtr
@@ -84,9 +88,6 @@ private:
 };
 
 
-static bool waveIsSine = true;          // Нужно для того, чтобы писать частоту в правильное место - ПЛИС или AD9952
-
-
 void DGenerator::Init()
 {
     EnableChannel(Chan::A, false);
@@ -118,7 +119,7 @@ void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 
     if(ch < Chan::Count && form < TypeForm::Count)
     {
-        waveIsSine = (form == TypeForm::Sine);
+        waveIsSine[ch] = (form == TypeForm::Sine);
 
         FPGA::SetWaveForm(ch, form);
     }
@@ -127,7 +128,7 @@ void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 
 void DGenerator::SetFrequency(Chan::E ch, FloatValue frequency)
 {
-    if (waveIsSine)
+    if (waveIsSine[ch])
     {
         AD9952::SetFrequency(ch, frequency);
     }
@@ -158,28 +159,30 @@ void DGenerator::SetPeriod(Chan::E ch, FloatValue period)
 }
 
 
-void DGenerator::SetAmplitude(Chan::E ch, FloatValue amplitude)
+void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
+    amplitude[ch] = ampl.ToFloat();
+
     Amplifier::Tune(ch);
 
-    if (waveIsSine)
+    if (waveIsSine[ch])
     {
-        AD9952::SetAmplitude(ch, amplitude);
+        AD9952::SetAmplitude(ch, ampl);
     }
     else
     {
-        FPGA::SetAmplitude(ch, amplitude);
+        FPGA::SetAmplitude(ch, ampl);
     }
 }
 
 
-void DGenerator::SetOffset(Chan::E ch, FloatValue offset)
+void DGenerator::SetOffset(Chan::E ch, FloatValue off)
 {
-    set.offset[ch] = offset;
+    offset[ch] = off.ToFloat();
 
     Amplifier::Tune(ch);
 
-    AD5697::SetOffset(ch, offset);
+    AD5697::SetOffset(ch, off);
 }
 
 
