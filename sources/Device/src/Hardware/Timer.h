@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 
 
  /// @brief Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)

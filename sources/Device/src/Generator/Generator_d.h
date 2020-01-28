@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 #include "AD9952.h"
 #include "AD5697.h"
 #include "FPGA.h"

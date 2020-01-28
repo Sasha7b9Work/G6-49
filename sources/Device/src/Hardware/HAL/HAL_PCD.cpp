@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include <usbd_core.h>
 
