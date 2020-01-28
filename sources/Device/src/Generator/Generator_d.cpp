@@ -133,7 +133,7 @@ void DGenerator::SetFrequency(Chan::E ch, FloatValue freq)
 
     if (waveIsSine[ch])
     {
-        AD9952::SetFrequency(ch, freq);
+        AD9952::SetFrequency(ch);
     }
     else
     {

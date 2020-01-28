@@ -40,7 +40,7 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 }
 
 
-void AD9952::SetFrequency(Chan::E ch, FloatValue frequency)
+void AD9952::SetFrequency(Chan::E ch)
 {
     FPGA::SetClockAD992(DGenerator::GetFrequency(ch) < 0.1F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
 

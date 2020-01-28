@@ -173,7 +173,7 @@ void FPGA::SetFrequency(Chan::E ch, FloatValue frequency)
     
     if(modeWork[ch] == ModeWork::Meander)
     {
-        AD9952::SetFrequency(ch, frequency);
+        AD9952::SetFrequency(ch);
     }
     else if (modeWork[ch] == ModeWork::DDS)
     {
