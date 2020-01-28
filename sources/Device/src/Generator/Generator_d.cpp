@@ -185,7 +185,7 @@ void DGenerator::SetOffset(Chan::E ch, FloatValue off)
 
     Amplifier::Tune(ch);
 
-    AD5697::SetOffset(ch, off);
+    AD5697::SetOffset(ch);
 }
 
 

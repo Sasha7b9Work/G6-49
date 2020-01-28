@@ -10,7 +10,7 @@ struct AD5697
 {
     static void Init();
 
-    static void SetOffset(Chan::E ch, FloatValue offset);
+    static void SetOffset(Chan::E ch);
 
     static void SetFreqLevel(float level);
 
@@ -23,5 +23,5 @@ private:
 
     static StructPIN PinLDAC(Chan::E ch);
     /// Рассчитать код смещения для смещения offset
-    static float CalculateCodeOffset(Chan::E ch, FloatValue offset);
+    static float CalculateCodeOffset(Chan::E ch);
 };
