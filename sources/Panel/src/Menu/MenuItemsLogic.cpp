@@ -657,6 +657,7 @@ bool Page::Press(const Key &key)
     else if (key.action.IsRelease())
     {
         CURRENT_PAGE = this;
+        this->funcEnter(true);
         return true;
     }
     else

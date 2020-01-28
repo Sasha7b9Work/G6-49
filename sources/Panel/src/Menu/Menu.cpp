@@ -25,7 +25,7 @@ DEF_PAGE_3( mainPageMenu,
     PageSignals::self,
     PageFrequencyCounter::self,
     PageService::self,
-    Page::Main, 0, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Main, 0, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 Page *Menu::mainPage = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPageMenu));

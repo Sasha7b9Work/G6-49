@@ -111,7 +111,7 @@ DEF_PAGE_SB( pTuneParameter,   //-V641
     &sbOrderDown,       ///< ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂÏÐÀÂÎ
     &sbCancel,          ///< ÎÊÍÎ ÂÂÎÄÀ - ÎÒÌÅÍÀ
     &sbEnter,           ///< ÎÊÍÎ ÂÂÎÄÀ - ÂÂÎÄ
-    Page::SB_Input, 0, Item::FuncActive, FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
+    Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));

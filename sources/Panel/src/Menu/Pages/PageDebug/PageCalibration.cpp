@@ -143,6 +143,12 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
 }
 
 
+static void OnEnter_Calibration(bool)
+{
+
+}
+
+
 DEF_PAGE_6( pCalibration,
     " ¿À»¡–Œ¬ ¿",
     "",
@@ -152,7 +158,7 @@ DEF_PAGE_6( pCalibration,
     &cParameter,
     PageDebug::_Calibration::PageA::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
     PageDebug::_Calibration::PageB::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B
-    Page::Calibration, PageDebug::self, Item::FuncActive, FuncEnter, FuncOnKeyPage, DrawPage
+    Page::Calibration, PageDebug::self, Item::FuncActive, OnEnter_Calibration, FuncOnKeyPage, DrawPage
 )
 
 Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pCalibration));

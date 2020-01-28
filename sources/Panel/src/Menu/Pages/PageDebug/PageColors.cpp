@@ -66,7 +66,7 @@ DEF_PAGE_3( pChanA,
     &gRedChanA,
     &gGreenChanA,
     &gBlueChanA,
-    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -95,7 +95,7 @@ DEF_PAGE_3(pChanB,
     &gRedChanB,
     &gGreenChanB,
     &gBlueChanB,
-    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -123,7 +123,7 @@ DEF_PAGE_3(pMenu,
     &gRedMenu,
     &gGreenMenu,
     &gBlueMenu,
-    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -134,7 +134,7 @@ DEF_PAGE_3(pColors,
     PageDebug::Colors::ChanA::self,
     PageDebug::Colors::ChanB::self,
     PageDebug::Colors::Menu::self,
-    Page::Colors, PageDebug::self, Item::FuncActive, FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Colors, PageDebug::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
