@@ -151,8 +151,6 @@ private:
     static void WriteControlRegister();
     /// «аписывает коды, соответствующие максимальному и минимальному значению
     static void WriteMaxAmplitude(Chan::E ch);
-    /// ѕреобразует смещение в пр€мой код, пригодный дл€ записи в альтеру
-    static uint OffsetToCode(Chan::E ch);
     /// ”становить биты, соответствующие режиму запуска
     static uint16 SetBitsStartMode(uint16 data);
     /// –ежим запуска

@@ -473,20 +473,6 @@ void FPGA::WriteAddress(RG::E reg)
 }
 
 
-uint FPGA::OffsetToCode(Chan::E ch)
-{
-    float offset = DGenerator::GetOffset(ch);
-
-    uint max = 0x1fff;
-
-    float k = 1.0F + Calibrator::GetOffsetK_Zero(ch) / 1023.0F;
-
-    int code = ~(static_cast<int>(offset / 5.0F * max * k)) + 1;
-
-    return static_cast<uint>(code & 0x3fff);
-}
-
-
 void FPGA::SetAmplitude()
 {
     uint nA = (uint)((DGenerator::GetAmplitude(Chan::A) * (1023 + Calibrator::GetOffsetK_Zero(Chan::A))) / 10);
