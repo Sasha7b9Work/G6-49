@@ -119,9 +119,8 @@ void AD9952::WritePOW(Chan::E ch)
 
 void AD9952::WriteASF(Chan::E ch)
 {
-    float amplitude = SetGenerator::Amplitude(ch) * Calibrator::GetAmplitudeK(ch);
+    float amplitude = SetGenerator::Amplitude(ch) * Calibrator::GetAmplitudeK(ch) * Attenuator::GetAttenuation(ch).Multiplier() ;
 
-    // uint value = ((static_cast<uint>((amplitude / 5.0F) * ((1 << 7) - 1))) << 7) / 2;    Первоначальный неправильный расчёт
     uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);
     
     Bit::Set(value, 14);  // \ Это биты множителя скорости
