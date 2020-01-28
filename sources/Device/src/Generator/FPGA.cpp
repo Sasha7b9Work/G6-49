@@ -488,7 +488,7 @@ uint FPGA::OffsetToCode(Chan::E ch)
 }
 
 
-void FPGA::SetAmplitude(Chan::E)
+void FPGA::SetAmplitude()
 {
     uint nA = (uint)((DGenerator::GetAmplitude(Chan::A) * (1023 + Calibrator::GetOffsetK_Zero(Chan::A))) / 10);
     uint nB = (uint)((DGenerator::GetAmplitude(Chan::B) * (1023 + Calibrator::GetOffsetK_Zero(Chan::B))) / 10);

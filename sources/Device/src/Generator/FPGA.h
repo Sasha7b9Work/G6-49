@@ -13,7 +13,7 @@ struct FPGA
 
     static void SetFrequency(Chan::E ch);
 
-    static void SetAmplitude(Chan::E ch);
+    static void SetAmplitude();
 
     static void SetOffset(Chan::E ch, FloatValue offset);
 

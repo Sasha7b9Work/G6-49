@@ -174,7 +174,7 @@ void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
     }
     else
     {
-        FPGA::SetAmplitude(ch);
+        FPGA::SetAmplitude();
     }
 }
 
