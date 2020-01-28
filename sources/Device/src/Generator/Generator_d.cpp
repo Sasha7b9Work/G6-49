@@ -170,7 +170,7 @@ void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 
     if (waveIsSine[ch])
     {
-        AD9952::SetAmplitude(ch, ampl);
+        AD9952::SetAmplitude(ch);
     }
     else
     {

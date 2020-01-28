@@ -10,7 +10,7 @@ struct AD9952
 {
     static void Init();
 
-    static void SetAmplitude(Chan::E ch, FloatValue amplitude);
+    static void SetAmplitude(Chan::E ch);
 
     static void SetFrequency(Chan::E ch, FloatValue frequency);
 

@@ -59,7 +59,7 @@ void AD9952::SetPhase(Chan::E ch, FloatValue ph)
 }
 
 
-void AD9952::SetAmplitude(Chan::E ch, FloatValue)
+void AD9952::SetAmplitude(Chan::E ch)
 {
     WriteRegister(ch, Register::ASF);
 }
