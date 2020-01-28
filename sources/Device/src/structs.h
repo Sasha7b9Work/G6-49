@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 
 #ifndef WIN32
 #pragma anon_unions
