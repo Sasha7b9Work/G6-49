@@ -64,7 +64,7 @@ void AD9952::SetPhase(Chan::E ch, FloatValue phase)
 
 void AD9952::SetAmplitude(Chan::E ch, FloatValue amplitude)
 {
-    float k = Calibrator::GetAmplitudeK(ch, TypeForm::Sine, amplitude.ToFloat());
+    float k = Calibrator::GetAmplitudeK(ch, TypeForm::Sine);
 
     setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * k;
 

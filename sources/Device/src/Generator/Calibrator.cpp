@@ -92,9 +92,9 @@ uint8 Calibrator::CalculateRange(float amplitude)
 }
 
 
-float Calibrator::GetAmplitudeK(Chan::E ch, TypeForm::E form, float amplitude)
+float Calibrator::GetAmplitudeK(Chan::E ch, TypeForm::E form)
 {
-    uint8 range = CalculateRange(amplitude);
+    uint8 range = CalculateRange(DGenerator::GetAmplitude(ch));
 
     int16 k = *setCal.GetK(static_cast<uint8>(ch), form == TypeForm::Sine ? 0U : 1U, range, 0U);
 
