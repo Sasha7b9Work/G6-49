@@ -62,12 +62,8 @@ void AD9952::SetPhase(Chan::E ch, FloatValue phase)
 }
 
 
-void AD9952::SetAmplitude(Chan::E ch, FloatValue amplitude)
+void AD9952::SetAmplitude(Chan::E ch, FloatValue)
 {
-    float k = Calibrator::GetAmplitudeK(ch);
-
-    setDDS.ad9952[ch].amplitude = amplitude.ToFloat() * k;
-
     WriteRegister(ch, Register::ASF);
 }
 
@@ -126,7 +122,7 @@ void AD9952::WritePOW(Chan::E ch)
 
 void AD9952::WriteASF(Chan::E ch)
 {
-    float amplitude = setDDS.ad9952[ch].amplitude;
+    float amplitude = DGenerator::GetAmplitude(ch) * Calibrator::GetAmplitudeK(ch);
 
     // uint value = ((static_cast<uint>((amplitude / 5.0F) * ((1 << 7) - 1))) << 7) / 2;    Первоначальный неправильный расчёт
     uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);

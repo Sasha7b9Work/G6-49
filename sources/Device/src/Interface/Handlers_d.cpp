@@ -70,6 +70,13 @@ void DHandlers::Processing(SimpleMessage *msg)
 
     uint8 com = msg->TakeByte();
 
+    pFuncInterfaceVpM func = funcs[com];
+
+    if(func != DHandlers::E && func != DHandlers::SendData)
+    {
+        int i = 0;
+    }
+
     funcs[com](msg);
 }
 
