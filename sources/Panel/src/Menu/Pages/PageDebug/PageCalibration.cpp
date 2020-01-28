@@ -24,15 +24,16 @@ static void LoadK()
     calK = setCal.GetK(channel, signal, range, parameter);
 }
 
+static uint8 prevChannel = 255;
+static uint8 prevSignal = 255;
+static uint8 prevRange = 255;
+static uint8 prevParameter = 255;
+static int16 *prevPointerK = nullptr;
+static int16 prevK = 0;
+
+
 static void SendMessage()
 {
-    static uint8 prevChannel = 255;
-    static uint8 prevSignal = 255;
-    static uint8 prevRange = 255;
-    static uint8 prevParameter = 255;
-    static int16 *prevPointerK = nullptr;
-    static int16 prevK = 0;
-
     if(channel != prevChannel || prevSignal != signal || prevRange != range || prevParameter != parameter || prevPointerK != calK || prevK != *calK)
     {
         prevChannel = channel;
@@ -150,6 +151,13 @@ static void OnEnter_Calibration(bool enter)
     else
     {
         set.Load();
+
+        prevChannel = 255;
+        prevSignal = 255;
+        prevRange = 255;
+        prevParameter = 255;
+        prevPointerK = nullptr;
+        prevK = 0;
     }
 }
 
