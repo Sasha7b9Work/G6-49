@@ -4,6 +4,7 @@
 #include "Display/Text.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"
 #include "Settings/CalibrationSettings.h"
+#include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 
 
@@ -46,16 +47,12 @@ static void SendMessage()
     }
 }
 
+
 /// Вызывается при изменении калибруемого параметра
 static void OnChange_Parameters(bool)
 {
     LoadK();
     SendMessage();
-}
-
-void PageDebug::Calibartion::Init()
-{
-    LoadK();
 }
 
 /// Вызывается при изменении источника сигнал
@@ -143,9 +140,17 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
 }
 
 
-static void OnEnter_Calibration(bool)
+static void OnEnter_Calibration(bool enter)
 {
-
+    if(enter)
+    {
+        LoadK();
+        SendMessage();
+    }
+    else
+    {
+        set.Load();
+    }
 }
 
 

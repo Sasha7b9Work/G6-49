@@ -4,9 +4,7 @@
 #include "Settings/CalibrationSettings.h"
 
 
-
-/// Устанавливает форму сигнала для соотвествующей формы сигнала
-static void SetFormWave(Chan::E ch, uint8 signal)
+void Calibrator::SetFormWave(Chan::E ch, uint8 signal)
 {
     if(signal == 0)
     {
@@ -19,12 +17,10 @@ static void SetFormWave(Chan::E ch, uint8 signal)
 }
 
 
-/// Установить амплитуду в зависимости от выбранного диапазона
-static void SetAmplitude(Chan::E ch, uint8 range)
+void Calibrator::SetAmplitude(Chan::E ch, uint8 range)
 {
     static const float amplitude[6] =
     {
-        30e-3F,
         100e-3F,
         300e-3F,
         1.0F,
@@ -36,7 +32,7 @@ static void SetAmplitude(Chan::E ch, uint8 range)
 }
 
 
-static void SetOffset(Chan::E ch, uint8 param)
+void Calibrator::SetOffset(Chan::E ch, uint8 param)
 {
     static const float offset[4] =
     {

@@ -640,6 +640,7 @@ bool Page::Press(const Key &key)
         {
             if (Keeper())
             {
+                this->funcEnter(false);
                 CURRENT_PAGE = Keeper();
                 return true;
             }

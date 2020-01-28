@@ -47,8 +47,6 @@ struct PageDebug
     struct Calibartion
     {
         static Page *self;
-
-        static void Init();
     };
 
     struct _Calibration
