@@ -6,30 +6,6 @@
 #include "common/Command.h"
 
 
-struct SetGenerator
-{
-friend class DGenerator;
-public:
-    /// Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
-    static float Amplitude(Chan::E ch) { return amplitude[ch]; }
-    /// Возвращает установленное на канале смещение
-    static float Offset(Chan::E ch) { return offset[ch]; }
-    /// Возвращает установленную частоту на канале
-    static float Frequency(Chan::E ch) { return frequency[ch]; }
-    /// Возвращает true, если на канале ch установлена синусоидальная форма сигнала
-    static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
-private:
-    /// true, если на канале установлена форма сигнала "синусоида"
-    static bool waveIsSine[Chan::Count];
-    /// Текущая установленная амплитуда на канале
-    static float amplitude[Chan::Count];
-    /// Текущая установленное смещение на кнаале
-    static float offset[Chan::Count];
-    /// Текущая частота на канале
-    static float frequency[Chan::Count];
-};
-
-
 class DGenerator
 {
 public:
@@ -111,4 +87,40 @@ private:
     static void Tune(Chan::E ch);
 
     static void SetState(Chan::E ch, bool state);
+};
+
+
+struct SetGenerator
+{
+    friend class DGenerator;
+public:
+    /// Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
+    static float Amplitude(Chan::E ch)
+    {
+        return amplitude[ch];
+    }
+    /// Возвращает установленное на канале смещение
+    static float Offset(Chan::E ch)
+    {
+        return offset[ch];
+    }
+    /// Возвращает установленную частоту на канале
+    static float Frequency(Chan::E ch)
+    {
+        return frequency[ch];
+    }
+    /// Возвращает true, если на канале ch установлена синусоидальная форма сигнала
+    static bool FormIsSine(Chan::E ch)
+    {
+        return waveIsSine[ch];
+    }
+private:
+    /// true, если на канале установлена форма сигнала "синусоида"
+    static bool waveIsSine[Chan::Count];
+    /// Текущая установленная амплитуда на канале
+    static float amplitude[Chan::Count];
+    /// Текущая установленное смещение на кнаале
+    static float offset[Chan::Count];
+    /// Текущая частота на канале
+    static float frequency[Chan::Count];
 };
