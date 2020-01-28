@@ -88,15 +88,15 @@ struct Command
          //                          3 - AD9952_Amplitude ...
          //                          4 - DDS_MAX          ...
          //                          5 - DDS_MIN          ...
-/* <-  */   _SetKoeffCalibration,        ///< Установка калибровочного коэффициента
-/* ->  */   _GetKoeffCalibration,        ///< Запрос установленного калибровочного коэффициента
-/* <-> */   FDrive_RequestFileSize,     ///< Запрос размера файла
-/* <-> */   FDrive_RequestFileString,   ///< Считать строку из файла
-/* <-> */   FDrive_LoadFromExtStorage,  ///< Загрузить сигнал с флешки. Получив это сообщение, устройство начинает загрузку сигнала, а по окончании возвращает это же сообщение
-/* <-> */   FDrive_GetPictureDDS,       ///< Получить изображение формы сигнала
+/* <-  */   deleted_SetKoeffCalibration,    ///< Установка калибровочного коэффициента
+/* ->  */   deleted_GetKoeffCalibration,    ///< Запрос установленного калибровочного коэффициента
+/* <-> */   FDrive_RequestFileSize,         ///< Запрос размера файла
+/* <-> */   FDrive_RequestFileString,       ///< Считать строку из файла
+/* <-> */   FDrive_LoadFromExtStorage,      ///< Загрузить сигнал с флешки. Получив это сообщение, устройство начинает загрузку сигнала, а по окончании возвращает это же сообщение
+/* <-> */   FDrive_GetPictureDDS,           ///< Получить изображение формы сигнала
          // 0           1...5     6.....
          // SCPI_Data   sizeData  data 
-/* <-> */   SCPI_Data,                  ///< От VCP приняты данные либо в VCP нужно передать данные
+/* <-> */   SCPI_Data,                      ///< От VCP приняты данные либо в VCP нужно передать данные
             PortCPU,
             CalibrationLoad,
             CalibrationSet,

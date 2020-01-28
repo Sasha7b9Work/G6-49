@@ -1,8 +1,8 @@
 #include "defines.h"
-#include "log.h"
-#include "AD5697.h"
 #include "common/Command.h"
-#include "FPGA.h"
+#include "Generator/AD5697.h"
+#include "Generator/Calibrator.h"
+#include "Generator/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
@@ -24,11 +24,11 @@ void AD5697::Init()
 
 static float CalculateOffset(Chan::E ch, FloatValue offset)
 {
-    float zero = CAL_AD9952_OFFSET_ZERO(ch);        // 2048
+    float zero = 2048 * Calibrator::GetOffsetK_Zero(ch, TypeForm::Sine);    // 2048
     
     if (offset.ToFloat() > 0.0F)
     {
-        float pos = CAL_AD9952_OFFSET_POS(ch);      // 0
+        float pos = Calibrator::GetOffsetK_Positive(ch, TypeForm::Sine);    // 0
 
         float scale = (zero - pos) / 5.0F;
 
@@ -36,7 +36,7 @@ static float CalculateOffset(Chan::E ch, FloatValue offset)
     }
     else if(offset.ToFloat() < 0.0F)
     {
-        float neg = CAL_AD9952_OFFSET_NEG(ch);      // 4095
+        float neg = Calibrator::GetOffsetK_Negative(ch, TypeForm::Sine);    // 4095
 
         float scale = (neg - zero) / 5.0F;
 
@@ -86,7 +86,7 @@ void AD5697::SetFreqHysteresys(float hyst)
 
 void AD5697::SetFreqLevel(float level)
 {
-    level += (float)CAL_FREQ_LEVEL_TRIG;
+    level += Calibrator::GetFreqMeterK_Trig();
 
     Math::Limitation(&level, 0.0F, 4095.0F);
 

@@ -2247,21 +2247,6 @@
               <FilePath>.\src\Menu\Pages\PageDebug\PageColors.cpp</FilePath>
             </File>
             <File>
-              <FileName>_PageCalibration.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\_PageCalibration.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>_PageCalibrationA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\_PageCalibrationA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>_PageCalibrationB.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\_PageCalibrationB.cpp</FilePath>
-            </File>
-            <File>
               <FileName>PageCalibration.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug\PageCalibration.cpp</FilePath>

@@ -154,10 +154,6 @@ pString Command::Trace(const uint8 *buffer) const
             break;
         case Test:
             break;
-        case _SetKoeffCalibration:
-            break;
-        case _GetKoeffCalibration:
-            break;
         case FDrive_RequestFileSize:
             break;
         case FDrive_RequestFileString:
@@ -175,6 +171,8 @@ pString Command::Trace(const uint8 *buffer) const
         case CalibrationSet:
             break;
         case deleted_SetManipulationMode:
+        case deleted_SetKoeffCalibration:
+        case deleted_GetKoeffCalibration:
         case Count:
             break;
     }

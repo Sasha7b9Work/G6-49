@@ -56,8 +56,8 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestDir         */ DDrive::Handler::Processing,
         /* FDrive_RequestFile        */ DDrive::Handler::Processing,
         /* Test                      */ DHandlers::Test,
-        /* SetKoeffCalibration       */ DHandlers::_SetKoeffCalibration,
-        /* GetKoeffCalibration       */ DHandlers::_GetKoeffCalibration,
+        /* SetKoeffCalibration       */ DHandlers::E,
+        /* GetKoeffCalibration       */ DHandlers::E,
         /* FDrive_RequestFileSize    */ DDrive::Handler::Processing,
         /* FDrive_RequestFileString  */ DDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ DDrive::Handler::Processing,
@@ -267,33 +267,6 @@ void DHandlers::LoadFormDDS(SimpleMessage *msg)
     Chan ch(msg->TakeByte());
 
     msg->TakeRemainigData(FPGA::DataDDS(ch));
-}
-
-
-void DHandlers::_GetKoeffCalibration(SimpleMessage *)
-{
-}
-
-
-void DHandlers::_SetKoeffCalibration(SimpleMessage *msg)
-{
-    Chan ch(msg->TakeByte());
-
-    static int16 * const values[KoeffCal::Count] =
-    {
-        &CAL_AD9952_OFFSET_NEG(Chan::A),
-        &CAL_AD9952_OFFSET_ZERO(Chan::A),
-        &CAL_AD9952_OFFSET_POS(Chan::A),
-        &CAL_AD9952_AMPLITUDE(Chan::A),
-        &CAL_DDS_MAX(Chan::A),
-        &CAL_DDS_MIN(Chan::A),
-        &CAL_DDS_OFFSET(Chan::A),
-        &CAL_FREQ_LEVEL_TRIG
-    };
-
-    int16 *koeff = values[msg->TakeByte()];
-
-    koeff[ch] = static_cast<int16>(msg->TakeHalfWord());
 }
 
 

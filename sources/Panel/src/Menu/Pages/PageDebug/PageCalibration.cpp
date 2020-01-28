@@ -154,15 +154,13 @@ static void OnEnter_Calibration(bool enter)
 }
 
 
-DEF_PAGE_6( pCalibration,
+DEF_PAGE_4( pCalibration,
     " ¿À»¡–Œ¬ ¿",
     "",
     &cChannel,
     &cSignal,
     &cRange,
     &cParameter,
-    PageDebug::_Calibration::PageA::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ A
-    PageDebug::_Calibration::PageB::self, ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ¿À»¡–Œ¬ ¿ B
     Page::Calibration, PageDebug::self, Item::FuncActive, OnEnter_Calibration, FuncOnKeyPage, DrawPage
 )
 

@@ -269,7 +269,6 @@ namespace Message
 
     namespace SCPI
     {
-
         /// Данные SCPI
         class Data : public SimpleMessage
         {
@@ -278,19 +277,14 @@ namespace Message
         };
     }
 
-
-    class _Calibrate : public SimpleMessage
-    {
-    public:
-        _Calibrate(uint8 ch, uint8 koeff);
-    };
-
+    /// Засылка калибровочного коэффициента и установка соотвествующих настроек генератора
     class CalibrateSet : public SimpleMessage
     {
     public:
         CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 parameter);
     };
 
+    /// Засылка калибровочного коэффициента
     class CalibrateLoad : public SimpleMessage
     {
     public:

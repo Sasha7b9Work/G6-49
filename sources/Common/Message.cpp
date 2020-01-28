@@ -443,31 +443,6 @@ Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Comman
 }
 
 
-Message::_Calibrate::_Calibrate(uint8 ch, uint8 koeff) : SimpleMessage(5, Command::_SetKoeffCalibration)
-{
-    static const int16 *values[KoeffCal::Count] =
-    {
-        &CAL_AD9952_OFFSET_NEG(Chan::A),
-        &CAL_AD9952_OFFSET_ZERO(Chan::A),
-        &CAL_AD9952_OFFSET_POS(Chan::A),
-        &CAL_AD9952_AMPLITUDE(Chan::A),
-        &CAL_DDS_MAX(Chan::A),
-        &CAL_DDS_MIN(Chan::A),
-        &CAL_DDS_OFFSET(Chan::A),
-        &CAL_FREQ_LEVEL_TRIG
-    };
-
-    if (ch == Chan::B && koeff == KoeffCal::FREQ_LEVEL_TRIG)
-    {
-        ch = Chan::A;
-    }
-
-    PutByte(ch);
-    PutByte(koeff);
-    PutHalfWord(static_cast<uint16>(values[koeff][ch]));
-}
-
-
 Message::CalibrateSet::CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 parameter) : SimpleMessage(7, Command::CalibrationSet)
 {
     PutByte(ch);

@@ -9,6 +9,14 @@ struct Calibrator
     static void SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int16 k);
     /// Возвращает коэффициент калибровки амплитуды
     static float GetAmplitudeK(Chan::E ch, TypeForm::E form, float amplitude);
+    /// Возвращает калибровочный коэффициент смещения для 0В
+    static float GetOffsetK_Zero(Chan::E ch, TypeForm::E form);
+    /// Возвращает калибровочный коэффициент смещения для -5В
+    static float GetOffsetK_Negative(Chan::E ch, TypeForm::E form);
+    /// Возвращает калбировочный коэффициент смещения для +5В
+    static float GetOffsetK_Positive(Chan::E ch, TypeForm::E form);
+    /// Возвращает калибровочный коэффициент уровня синхронизации частотомера
+    static float GetFreqMeterK_Trig();
 
 private:
     static uint8 CalculateRange(float amplitude);

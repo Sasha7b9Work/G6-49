@@ -100,3 +100,34 @@ float Calibrator::GetAmplitudeK(Chan::E ch, TypeForm::E form, float amplitude)
 
     return 1.0F + k / 1000.0F;
 }
+
+
+float Calibrator::GetOffsetK_Zero(Chan::E, TypeForm::E form)
+{
+    if(form == TypeForm::Sine)
+    {
+        return 1.0F;
+    }
+    else
+    {
+        return 0.0F;
+    }
+}
+
+
+float Calibrator::GetOffsetK_Negative(Chan::E, TypeForm::E)
+{
+    return 4095.0F;
+}
+
+
+float Calibrator::GetOffsetK_Positive(Chan::E, TypeForm::E)
+{
+    return 0.0F;
+}
+
+
+float Calibrator::GetFreqMeterK_Trig()
+{
+    return 0.0F;
+}

@@ -1,14 +1,7 @@
-#include "FPGA.h"
-#include "defines.h"
-#include "log.h"
-#include "structs.h"
-#include "Hardware/CPU.h"
-#include "Hardware/Timer.h"
+#include "Generator/Calibrator.h"
+#include "Generator/FPGA.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/HAL/HAL_PIO.h"
 #include "Utils/Math.h"
-#include "Generator/Generator_d.h"
-#include "Settings/CalibrationSettings.h"
 
 
 #ifdef WIN32
@@ -486,7 +479,7 @@ uint FPGA::OffsetToCode(Chan::E ch)
 
     uint max = 0x1fff;
 
-    float k = 1.0F + CAL_DDS_MAX(ch) / 1023.0F;
+    float k = 1.0F + Calibrator::GetOffsetK_Zero(ch, TypeForm::Meander) / 1023.0F;
 
     int code = ~(static_cast<int>(off / 5.0F * max * k)) + 1;
 
@@ -498,8 +491,8 @@ void FPGA::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
     amplitude[ch] = ampl.ToFloat();
 
-    uint nA = (uint)((amplitude[Chan::A] * (1023 + CAL_DDS_MAX(Chan::A))) / 10);
-    uint nB = (uint)((amplitude[Chan::B] * (1023 + CAL_DDS_MAX(Chan::B))) / 10);
+    uint nA = (uint)((amplitude[Chan::A] * (1023 + Calibrator::GetOffsetK_Zero(Chan::A, TypeForm::Meander))) / 10);
+    uint nB = (uint)((amplitude[Chan::B] * (1023 + Calibrator::GetOffsetK_Zero(Chan::B, TypeForm::Meander))) / 10);
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }
