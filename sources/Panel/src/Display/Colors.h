@@ -1,6 +1,5 @@
 #pragma once
 #include "common/CommonTypes.h"
-#include "defines.h"
 
 
 class Color

@@ -4,8 +4,6 @@
 #define __attribute(x)
 #endif
 
-#include "defines.h"
-
 #define __weak __attribute((weak))
 
 

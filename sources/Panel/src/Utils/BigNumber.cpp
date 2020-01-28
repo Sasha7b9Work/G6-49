@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "BigNumber.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Math.h"

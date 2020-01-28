@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Number.h"
 #include "Utils/Math.h"
 

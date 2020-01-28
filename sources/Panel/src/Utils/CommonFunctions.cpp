@@ -1,5 +1,6 @@
+#include "defines.h"
 #include "CommonFunctions.h"
-#include "Log.h"
+#include "log.h"
 #include <cstdio>
 #include <cstring>
 

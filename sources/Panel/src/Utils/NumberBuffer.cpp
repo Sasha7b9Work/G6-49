@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "NumberBuffer.h"
 #include "Utils/StringUtils.h"
 #include <cstring>

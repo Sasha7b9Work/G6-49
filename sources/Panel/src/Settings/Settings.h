@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 #include "common/CommonTypes.h"
 #include "Menu/MenuItems.h"
 #include "FreqMeter/FreqMeter_p.h"

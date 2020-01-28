@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 
 
 #define LIMITATION(var, min, max)           if(var < (min)) { (var) = (min); } else if(var > (max)) { var = (max); } else { var = var; };
