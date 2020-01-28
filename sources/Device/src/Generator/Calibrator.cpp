@@ -75,21 +75,17 @@ uint8 Calibrator::CalculateRange(float amplitude)
 {
     if(amplitude > 3.16F)
     {
-        return 5;
+        return 4;
     }
     else if(amplitude > 1.0F)
     {
-        return 4;
+        return 3;
     }
     else if(amplitude > 0.316F)
     {
-        return 3;
-    }
-    else if(amplitude > 0.1F)
-    {
         return 2;
     }
-    else if(amplitude > 0.0316F)
+    else if(amplitude > 0.1F)
     {
         return 1;
     }

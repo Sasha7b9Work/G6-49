@@ -38,7 +38,7 @@ struct CalibrationSettings
             int16   cal_FREQ_Level_Trig;                        ///< Калибровочный коэффициенрт уровня синхронизации
 #define NUM_CHAN       2
 #define NUM_SIGNALS    2
-#define NUM_RANGES     6
+#define NUM_RANGES     5
 #define NUM_PARAMETERS 4
             int16 cal[NUM_CHAN][NUM_SIGNALS][NUM_RANGES][NUM_PARAMETERS];
         };

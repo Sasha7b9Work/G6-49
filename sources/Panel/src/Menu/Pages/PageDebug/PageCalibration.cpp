@@ -84,10 +84,9 @@ DEF_CHOICE_3(cSignal,
     signal, pCalibration, Item::FuncActive, OnChange_Source, FuncDraw
 )
 
-DEF_CHOICE_6(cRange,
+DEF_CHOICE_5(cRange,
     "Диапазон",
     "",
-    "30 мВ", "",
     "100 мВ", "",
     "300 мВ", "",
     "1 В", "",
