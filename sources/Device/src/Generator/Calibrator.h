@@ -19,7 +19,7 @@ struct Calibrator
     static float GetFreqMeterK_Trig();
 
 private:
-    static uint8 CalculateRange(float amplitude);
+    static uint8 CalculateRange(Chan::E ch);
     /// Устанавливает форму сигнала для соотвествующей формы сигнала
     static void SetFormWave(Chan::E ch, uint8 signal);
     /// Установить амплитуду для заданного диапазона

@@ -67,8 +67,10 @@ void Calibrator::SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int
 }
 
 
-uint8 Calibrator::CalculateRange(float amplitude)
+uint8 Calibrator::CalculateRange(Chan::E ch)
 {
+    float amplitude = DGenerator::GetAmplitude(ch);
+
     if(amplitude > 3.16F)
     {
         return 4;
@@ -94,7 +96,7 @@ uint8 Calibrator::CalculateRange(float amplitude)
 
 float Calibrator::GetAmplitudeK(Chan::E ch, TypeForm::E form)
 {
-    uint8 range = CalculateRange(DGenerator::GetAmplitude(ch));
+    uint8 range = CalculateRange(ch);
 
     int16 k = *setCal.GetK(static_cast<uint8>(ch), form == TypeForm::Sine ? 0U : 1U, range, 0U);
 
@@ -104,7 +106,7 @@ float Calibrator::GetAmplitudeK(Chan::E ch, TypeForm::E form)
 
 float Calibrator::GetOffsetK_Zero(Chan::E ch, TypeForm::E form)
 {
-    uint8 range = CalculateRange(DGenerator::GetAmplitude(ch));
+    uint8 range = CalculateRange(ch);
 
     if(form == TypeForm::Sine)
     {
