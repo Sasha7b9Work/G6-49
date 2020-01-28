@@ -19,7 +19,6 @@ FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
 FloatValue              FPGA::PacketImpulse::periodImpulse(static_cast<uint64>(0));
 FloatValue              FPGA::PacketImpulse::durationImpulse(static_cast<uint64>(0));
 StartMode               FPGA::startMode[Chan::Count] = { StartMode::Auto, StartMode::Auto };
-float                   FPGA::offset[Chan::Count] = { 5.0F, 5.0F };
 uint64                  FPGA::registers[RG::Count] = { 0 };
 
 
@@ -476,13 +475,13 @@ void FPGA::WriteAddress(RG::E reg)
 
 uint FPGA::OffsetToCode(Chan::E ch)
 {
-    float off = offset[ch];
+    float offset = DGenerator::GetOffset(ch);
 
     uint max = 0x1fff;
 
     float k = 1.0F + Calibrator::GetOffsetK_Zero(ch) / 1023.0F;
 
-    int code = ~(static_cast<int>(off / 5.0F * max * k)) + 1;
+    int code = ~(static_cast<int>(offset / 5.0F * max * k)) + 1;
 
     return static_cast<uint>(code & 0x3fff);
 }
@@ -494,17 +493,6 @@ void FPGA::SetAmplitude()
     uint nB = (uint)((DGenerator::GetAmplitude(Chan::B) * (1023 + Calibrator::GetOffsetK_Zero(Chan::B))) / 10);
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
-}
-
-
-void FPGA::SetOffset(Chan::E ch, FloatValue off)
-{
-    offset[ch] = -off.ToFloat();
-
-    uint nA = OffsetToCode(Chan::A);
-    uint nB = OffsetToCode(Chan::B);
-    
-    WriteRegister(RG::_10_Offset, nA + (nB << 14));
 }
 
 
