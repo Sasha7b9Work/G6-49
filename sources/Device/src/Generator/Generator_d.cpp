@@ -11,6 +11,7 @@
 bool DGenerator::waveIsSine[Chan::Count] = { true, true };
 float DGenerator::amplitude[Chan::Count] = { 10.0F, 10.0F };
 float DGenerator::offset[Chan::Count] = { 0.0F, 0.0F };
+Attenuation::E Attenuator::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 
 
 struct Filtr
@@ -217,4 +218,130 @@ void DGenerator::SetDuration(Chan::E ch, FloatValue value)
 
 void DGenerator::SetDelay(Chan::E, FloatValue)
 {
+}
+
+
+void Attenuator::Init()
+{
+    HAL_PIO::Init(HPort::_E, HPin::_15, HMode::Output_PP, HPull::No); //-V525
+
+    HAL_PIO::Init(HPort::_B, HPin::_10, HMode::Output_PP, HPull::No);
+
+    HAL_PIO::Init(HPort::_F, HPin::_0, HMode::Output_PP, HPull::No);
+    HAL_PIO::Init(HPort::_F, HPin::_5, HMode::Output_PP, HPull::No);
+
+    HAL_PIO::Init(HPort::_C, HPin::_13, HMode::Output_PP, HPull::No);
+    HAL_PIO::Init(HPort::_C, HPin::_14, HMode::Output_PP, HPull::No);
+}
+
+
+void Attenuator::SetAttenuation(Chan::E ch, Attenuation::E att)
+{
+    static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
+    static const HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
+
+    static const uint16 pin0[Chan::Count] = { HPin::_15, HPin::_5 };
+    static const uint16 pin1[Chan::Count] = { HPin::_5,  HPin::_13 };
+
+    static const HState::E state0[Attenuation::Count] =
+    {
+        HState::Reset,
+        HState::Set,
+        HState::Reset,
+        HState::Set
+    };
+
+    static const HState::E state1[Attenuation::Count] =
+    {
+        HState::Reset,
+        HState::Reset,
+        HState::Set,
+        HState::Set
+    };
+
+    HAL_PIO::Write(gpio0[ch], pin0[ch], state0[att]);
+    HAL_PIO::Write(gpio1[ch], pin1[ch], state1[att]);
+
+    attenuation[ch] = att;
+}
+
+
+void Amplifier::Init()
+{
+    Attenuator::Init();
+}
+
+
+void Amplifier::Tune(Chan::E ch)
+{
+    float amplitude = DGenerator::GetAmplitude(ch);
+    float offset = DGenerator::GetOffset(ch);
+
+    if(amplitude > 3.16F)              // 1 диапазон
+    {
+        SetState(ch, true);
+        Attenuator::SetAttenuation(ch, Attenuation::_0Db);
+    }
+    else if(amplitude > 1.0F)          // 2 диапазон
+    {
+        SetState(ch, true);
+        Attenuator::SetAttenuation(ch, Attenuation::_10Db);
+    }
+    else if(amplitude > 0.316F)        // 3,4 диапазоны
+    {
+        if(offset > 2.5F)
+        {
+            SetState(ch, true);
+            Attenuator::SetAttenuation(ch, Attenuation::_20Db);
+        }
+        else
+        {
+            SetState(ch, false);
+            Attenuator::SetAttenuation(ch, Attenuation::_0Db);
+        }
+    }
+    else if(amplitude > 0.100F)        // 5 диапазон
+    {
+        SetState(ch, false);
+        Attenuator::SetAttenuation(ch, Attenuation::_10Db);
+    }
+    else if(amplitude > 0.0316F)        // 6 диапазон
+    {
+        SetState(ch, false);
+        Attenuator::SetAttenuation(ch, Attenuation::_20Db);
+    }
+    else                                // 7 диапазон
+    {
+        SetState(ch, false);
+        Attenuator::SetAttenuation(ch, Attenuation::_30Db);
+    }
+}
+
+
+void Amplifier::SetState(Chan::E ch, bool state)
+{
+    static const HPort::E gpio[Chan::Count] = { HPort::_F, HPort::_C };
+    static const uint16   pin[Chan::Count] = { HPin::_0,  HPin::_14 };
+
+    HAL_PIO::Write(gpio[ch], pin[ch], state);
+}
+
+
+Attenuation Attenuator::GetAttenuation(Chan::E ch)
+{
+    return Attenuation(attenuation[ch]);
+}
+
+
+uint Attenuation::Multiplier() const
+{
+    static const uint mult[Attenuation::Count] =
+    {
+        1,
+        10,
+        100,
+        1000
+    };
+
+    return mult[value];
 }

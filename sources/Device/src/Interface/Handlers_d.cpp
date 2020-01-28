@@ -72,12 +72,7 @@ void DHandlers::Processing(SimpleMessage *msg)
 
     pFuncInterfaceVpM func = funcs[com];
 
-    if(func != DHandlers::E && func != DHandlers::SendData)
-    {
-        int i = 0;
-    }
-
-    funcs[com](msg);
+    func(msg);
 }
 
 

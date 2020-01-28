@@ -68,4 +68,6 @@ private:
     };
 
     static ClockFrequency::E clock;
+
+    static float phase[Chan::Count];
 };

@@ -4,9 +4,7 @@
 
 struct SettingsAD9952
 {
-    bool        bidirectionalMode;              ///< D9 Если true, то работает в двунаправленном режиме
     float       frequency;                      ///< Частота
-    float       phase;
 };
 
 

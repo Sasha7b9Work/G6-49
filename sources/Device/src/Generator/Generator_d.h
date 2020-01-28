@@ -6,8 +6,9 @@
 #include "common/Command.h"
 
 
-struct DGenerator
+class DGenerator
 {
+public:
     static const int DDS_NUM_POINTS = 8 * 1024;
 
     static void Init();
@@ -39,7 +40,7 @@ struct DGenerator
     static void SetPacketNumber(Chan::E ch, FloatValue number);
 
     static void SetPeriod(Chan::E ch, FloatValue period);
-    /// Возвращает установленную на канале амплитуду
+    /// Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
     static float GetAmplitude(Chan::E ch) { return amplitude[ch]; }
     /// Возвращает установленное на канале смещение
     static float GetOffset(Chan::E ch) { return offset[ch]; }
@@ -65,115 +66,39 @@ struct Attenuation
         _20Db,
         _30Db,
         Count
-    };
+    } value;
+
+    Attenuation(E v) : value(v) { };
+
+    uint Multiplier() const;
 };
 
 
-struct Attenuator
+class Attenuator
 {
-    static void SetAttenuation(Chan::E ch, Attenuation::E attenuation)
-    {
-        static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
-        static const HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
+friend class Amplifier;
 
-        static const uint16 pin0[Chan::Count] = { HPin::_15, HPin::_5 };
-        static const uint16 pin1[Chan::Count] = { HPin::_5,  HPin::_13 };
+public:
+    /// Возвращает установленный коэффициент ослабления на канале
+    static Attenuation GetAttenuation(Chan::E ch);
 
-        static const HState::E state0[Attenuation::Count] =
-        {
-            HState::Reset,
-            HState::Set,
-            HState::Reset,
-            HState::Set
-        };
+private:
+    static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
 
-        static const HState::E state1[Attenuation::Count] =
-        {
-            HState::Reset,
-            HState::Reset,
-            HState::Set,
-            HState::Set
-        };
+    static void Init();
 
-        HAL_PIO::Write(gpio0[ch], pin0[ch], state0[attenuation]);
-        HAL_PIO::Write(gpio1[ch], pin1[ch], state1[attenuation]);
-    }
-
-    static void Init()
-    {
-        HAL_PIO::Init(HPort::_E, HPin::_15, HMode::Output_PP, HPull::No); //-V525
-
-        HAL_PIO::Init(HPort::_B, HPin::_10, HMode::Output_PP, HPull::No);
-
-        HAL_PIO::Init(HPort::_F, HPin::_0, HMode::Output_PP, HPull::No);
-        HAL_PIO::Init(HPort::_F, HPin::_5, HMode::Output_PP, HPull::No);
-
-        HAL_PIO::Init(HPort::_C, HPin::_13, HMode::Output_PP, HPull::No);
-        HAL_PIO::Init(HPort::_C, HPin::_14, HMode::Output_PP, HPull::No);
-    }
+    static Attenuation::E attenuation[Chan::Count];
 };
 
 
-struct Amplifier
+class Amplifier
 {
-    static void Init()
-    {
-        Attenuator::Init();
-    }
+friend class DGenerator;
 
+private:
+    static void Init();
 
-    static void Tune(Chan::E ch)
-    {
-        float amplitude = DGenerator::GetAmplitude(ch);
-        float offset = DGenerator::GetOffset(ch);
+    static void Tune(Chan::E ch);
 
-        if(amplitude > 3.16F)              // 1 диапазон
-        {
-            SetState(ch, true);
-            Attenuator::SetAttenuation(ch, Attenuation::_0Db);
-        }
-        else if(amplitude > 1.0F)          // 2 диапазон
-        {
-            SetState(ch, true);
-            Attenuator::SetAttenuation(ch, Attenuation::_10Db);
-        }
-        else if(amplitude > 0.316F)        // 3,4 диапазоны
-        {
-            if(offset > 2.5F)
-            {
-                SetState(ch, true);
-                Attenuator::SetAttenuation(ch, Attenuation::_20Db);
-            }
-            else
-            {
-                SetState(ch, false);
-                Attenuator::SetAttenuation(ch, Attenuation::_0Db);
-            }
-        }
-        else if(amplitude > 0.100F)        // 5 диапазон
-        {
-            SetState(ch, false);
-            Attenuator::SetAttenuation(ch, Attenuation::_10Db);
-        }
-        else if(amplitude > 0.0316F)        // 6 диапазон
-        {
-            SetState(ch, false);
-            Attenuator::SetAttenuation(ch, Attenuation::_20Db);
-        }
-        else                                // 7 диапазон
-        {
-            SetState(ch, false);
-            Attenuator::SetAttenuation(ch, Attenuation::_30Db);
-        }
-    }
-
-
-    static void SetState(Chan::E ch, bool state)
-    {
-        static const HPort::E gpio[Chan::Count] = { HPort::_F, HPort::_C };
-        static const uint16   pin[Chan::Count] = { HPin::_0,  HPin::_14 };
-
-        HAL_PIO::Write(gpio[ch], pin[ch], state);
-    }
-
+    static void SetState(Chan::E ch, bool state);
 };

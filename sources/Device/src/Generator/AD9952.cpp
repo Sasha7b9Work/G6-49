@@ -11,8 +11,8 @@
 
 
 AD9952::ClockFrequency::E AD9952::clock = ClockFrequency::_100MHz;
-bool AD9952::Manipulation::enabled[Chan::Count] = {false, false};
-
+bool AD9952::Manipulation::enabled[Chan::Count] = { false, false };
+float AD9952::phase[Chan::Count] = { 0.0F, 0.0F };
 
 
 void AD9952::Init()
@@ -52,9 +52,10 @@ void AD9952::SetFrequency(Chan::E ch, FloatValue frequency)
 }
 
 
-void AD9952::SetPhase(Chan::E ch, FloatValue phase)
+void AD9952::SetPhase(Chan::E ch, FloatValue ph)
 {
-    setDDS.ad9952[ch].phase = phase.ToFloat();
+    phase[ch] = ph.ToFloat();
+
     if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency) //-V550 //-V2550
     {
         WriteRegister(ch, Register::POW);
@@ -115,7 +116,7 @@ void AD9952::WriteCFR2(Chan::E ch)
 
 void AD9952::WritePOW(Chan::E ch)
 {
-    uint value = static_cast<uint>(setDDS.ad9952[Chan::B].phase / 360.0F * (1 << 13) + 0.5F);
+    uint value = static_cast<uint>(phase[ch] / 360.0F * (1 << 13) + 0.5F);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
