@@ -70,9 +70,9 @@ void Menu::ProcessKey(const Key &key)
     {
         GetOpenedItem()->Press(key);
     }
-    else if (Hint::ProcessControl(key))
-    {
-    }
+    //else if (Hint::ProcessControl(key))
+    //{
+    //}
     else if(Menu::GetCurrentItem())
     {
         Menu::GetCurrentItem()->Press(key);
