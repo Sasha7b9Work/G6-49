@@ -1,14 +1,10 @@
 #pragma once
 #include "defines.h"
-#include "GeneratorSettingsTypes.h"
-
 
 
 struct SettingsAD9952
 {
     bool        bidirectionalMode;              ///< D9 Если true, то работает в двунаправленном режиме
-    TypeWave    typeWave;                       ///< D12 Выбор синуса или косинуса
-    
     float       frequency;                      ///< Частота
     float       amplitude;
     float       offset;

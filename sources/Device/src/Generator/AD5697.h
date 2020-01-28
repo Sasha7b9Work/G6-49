@@ -2,7 +2,6 @@
 #include "common/Common.h"
 #include "common/Command.h"
 #include "defines.h"
-#include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL_PIO.h"
 

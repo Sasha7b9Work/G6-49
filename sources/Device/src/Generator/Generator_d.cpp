@@ -1,7 +1,6 @@
 #include "AD5697.h"
 #include "FPGA.h"
 #include "Generator_d.h"
-#include "GeneratorSettingsTypes.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "FreqMeter/FreqMeter_d.h"

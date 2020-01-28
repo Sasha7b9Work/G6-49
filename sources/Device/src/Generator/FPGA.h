@@ -1,7 +1,6 @@
 #pragma once
 #include "Generator/Generator_d.h"
 #include "common/Command.h"
-#include "GeneratorSettingsTypes.h"
 
 
 struct FPGA
