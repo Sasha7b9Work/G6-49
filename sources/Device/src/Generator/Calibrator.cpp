@@ -112,7 +112,7 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch)
 
     if(isSine)
     {
-        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), isSine ? 0U : 1U, range,  2U);
+        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, range,  2U);
     }
     else
     {
