@@ -1,11 +1,8 @@
 #pragma once
-#include "defines.h"
-
 
 
 // Хорошо использовать для трассировке, если потом в HardFault_Handler() отслеживать эти переменные
 //#define DEBUG_POINT Debug::line = __LINE__; Debug::file = __FILE__;
-
 
 
 namespace Debug

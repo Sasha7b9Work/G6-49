@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Console.h"
 #include "FreqMeter/FreqMeter_p.h"
 #include "Display/Painter.h"

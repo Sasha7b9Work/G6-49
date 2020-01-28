@@ -1,6 +1,7 @@
-#include "Debug.h"
+#include "defines.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Debug.h"
 
 
 volatile static uint timeStart = 0;

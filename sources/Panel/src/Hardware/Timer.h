@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 
 
 #define TIME_TICKS HAL_TIM2::GetTicks()

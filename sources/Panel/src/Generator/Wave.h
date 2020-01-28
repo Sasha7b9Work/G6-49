@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 #include "common/Common.h"
 #include "Generator/Parameters.h"
 #include "Settings/SettingsTypes.h"
