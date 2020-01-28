@@ -137,7 +137,7 @@ void DGenerator::SetFrequency(Chan::E ch, FloatValue freq)
     }
     else
     {
-        FPGA::SetFrequency(ch, freq);
+        FPGA::SetFrequency(ch);
     }
 }
 

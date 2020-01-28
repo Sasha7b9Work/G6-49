@@ -167,9 +167,11 @@ void FPGA::SetModeImpulse(Chan::E ch)
 }
 
 
-void FPGA::SetFrequency(Chan::E ch, FloatValue frequency)
+void FPGA::SetFrequency(Chan::E ch)
 {
     WriteControlRegister();
+
+    float frequency = DGenerator::GetFrequency(ch);
     
     if(modeWork[ch] == ModeWork::Meander)
     {
@@ -177,7 +179,7 @@ void FPGA::SetFrequency(Chan::E ch, FloatValue frequency)
     }
     else if (modeWork[ch] == ModeWork::DDS)
     {
-        uint64 N = static_cast<uint64>((frequency.ToFloat() * (static_cast<uint64>(1) << 40)) / 1E8F);
+        uint64 N = static_cast<uint64>((frequency * (static_cast<uint64>(1) << 40)) / 1E8F);
         WriteRegister(RG::_1_Freq, N);
     }
     else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
@@ -187,7 +189,7 @@ void FPGA::SetFrequency(Chan::E ch, FloatValue frequency)
             modeWork[ch] = ModeWork::Impulse;
             WriteControlRegister();
         }
-        uint N = static_cast<uint>(1E8F / frequency.ToFloat() + 0.5F);
+        uint N = static_cast<uint>(1E8F / frequency + 0.5F);
         WriteRegister(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
     }
     else
