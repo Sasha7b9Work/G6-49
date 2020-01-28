@@ -7,7 +7,6 @@ include_directories( src
                      src/Hardware
                      ..
                      ../common/_VS_KEIL/CMSIS
-#                     ../common/_VS/HAL
                      ../common/_VS/std_includes
                      ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
                      ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
@@ -34,12 +33,11 @@ source_group(common                   FILES ../common/Command.h
                                             ../common/Command.cpp
                                             ../common/Common.h
                                             ../common/Common.cpp
-                                            ../common/Message.h
-                                            ../common/Message.cpp
-                                            ../common/Message_p.h
-                                            ../common/Message_p.cpp
-                                            ../common/Transceiver.h
-                                            ../common/Wave.h)
+                                            ../common/Messages.h
+                                            ../common/Messages.cpp
+                                            ../common/Messages_p.h
+                                            ../common/Messages_p.cpp
+                                            ../common/Transceiver.h)
 source_group(src                      REGULAR_EXPRESSION src/*)
 source_group(Display                  REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font            REGULAR_EXPRESSION src/Display/Font/*)
@@ -65,12 +63,11 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
                     ../common/Common.h
                     ../common/Common.cpp
-                    ../common/Message.h
-                    ../common/Message.cpp
-                    ../common/Message_p.h
-                    ../common/Message_p.cpp
+                    ../common/Messages.h
+                    ../common/Messages.cpp
+                    ../common/Messages_p.h
+                    ../common/Messages_p.cpp
                     ../common/Transceiver.h
-                    ../common/Wave.h
                     src/*
                     src/Display/*
                     src/Display/Font/*

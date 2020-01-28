@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>0</tvExp>
+        <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Interface\Handlers_d.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Interface\Handlers_d.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/Interface/Handlers_d.cpp\77</Expression>
         </Bp>
@@ -1210,7 +1210,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1337,8 +1337,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Message.h</PathWithFileName>
-      <FilenameWithoutPath>Message.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\Messages.h</PathWithFileName>
+      <FilenameWithoutPath>Messages.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1349,8 +1349,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Message.cpp</PathWithFileName>
-      <FilenameWithoutPath>Message.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\Messages.cpp</PathWithFileName>
+      <FilenameWithoutPath>Messages.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

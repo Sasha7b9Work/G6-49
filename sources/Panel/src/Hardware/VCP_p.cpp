@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "common/Message.h"
+#include "common/Messages.h"
 #include "Hardware/VCP_p.h"
 #include "Display/Console.h"
 #include "Utils/Buffer.h"

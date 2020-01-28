@@ -71,13 +71,11 @@ source_group(common                   FILES              ../../common/Command.h
                                                          ../../common/Common.h
                                                          ../../common/Common.cpp
                                                          ../../common/CommonTypes.h
-                                                         ../../common/Message.h
-                                                         ../../common/Message.cpp
-                                                         ../../common/Message_p.h
-                                                         ../../common/Message_p.cpp
-                                                         ../../common/Transceiver.h
-                                                         ../../common/Transceiver.cpp
-                                                         ../../common/Wave.h)
+                                                         ../../common/Messages.h
+                                                         ../../common/Messages.cpp
+                                                         ../../common/Messages_p.h
+                                                         ../../common/Messages_p.cpp
+                                                         ../../common/Transceiver.h)
 source_group(common\\_VS\\HAL         FILES              ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp)
 source_group(src                      FILES              ../../Panel/src/defines.h
                                                          ../../Panel/src/Log.cpp
@@ -145,14 +143,14 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../common/Common.h
                     ../../common/Common.cpp
                     ../../common/CommonTypes.h
-                    ../../common/Message.h
-                    ../../common/Message.cpp
-                    ../../common/Message_p.h
-                    ../../common/Message_p.cpp
+                    ../../common/Messages.h
+                    ../../common/Messages.cpp
+                    ../../common/Messages_p.h
+                    ../../common/Messages_p.cpp
                     ../../common/Transceiver.h
-                    ../../common/Transceiver.cpp
-                    ../../common/Wave.h
+                    
                     ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp
+                    
                     ../../Panel/src/defines.h
                     ../../Panel/src/Log.cpp
                     ../../Panel/src/Log.h

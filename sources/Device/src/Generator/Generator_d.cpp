@@ -1,12 +1,6 @@
-#include "common/Message.h"
-#include "AD5697.h"
-#include "FPGA.h"
-#include "Generator_d.h"
-#include "Hardware/CPU.h"
-#include "Hardware/HAL/HAL_PIO.h"
+#include "common/Messages.h"
+#include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
-#include "Settings/CalibrationSettings.h"
-#include "common/CommonTypes.h"
 
 
 bool SetGenerator::waveIsSine[Chan::Count] = { true, true };

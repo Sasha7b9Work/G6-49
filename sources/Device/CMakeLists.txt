@@ -38,11 +38,9 @@ source_group(common             FILES ../common/Command.h
                                       ../common/Command.cpp
                                       ../common/Common.h
                                       ../common/Common.cpp
-                                      ../common/Message.h
-                                      ../common/Message.cpp
-                                      ../common/Transceiver.h
-                                      ../common/Wave.h
-                                      ../common/Wave.cpp)
+                                      ../common/Messages.h
+                                      ../common/Messages.cpp
+                                      ../common/Transceiver.h)
 source_group(src                REGULAR_EXPRESSION src/*)
 source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
 source_group(FreqMeter          REGULAR_EXPRESSION src/FreqMeter/*)
@@ -63,11 +61,9 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
                     ../common/Common.h
                     ../common/Common.cpp
-                    ../common/Message.h
-                    ../common/Message.cpp
+                    ../common/Messages.h
+                    ../common/Messages.cpp
                     ../common/Transceiver.h
-                    ../common/Wave.h
-                    ../common/Wave.cpp
                     src/*
                     src/FDrive/*
                     src/FreqMeter/*

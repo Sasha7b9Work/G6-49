@@ -103,6 +103,7 @@ namespace Message
     public:
         Log(char *string);
         Log(char *string, float value);
+        Log(char *string, uint value);
     };
 
 

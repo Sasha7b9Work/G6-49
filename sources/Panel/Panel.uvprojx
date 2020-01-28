@@ -1677,29 +1677,29 @@
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
-              <FileName>Message.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Message.h</FilePath>
-            </File>
-            <File>
-              <FileName>Message.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Message.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Message_p.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Message_p.h</FilePath>
-            </File>
-            <File>
-              <FileName>Message_p.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Message_p.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Messages.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Messages.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Messages_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Messages_p.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Messages_p.cpp</FilePath>
             </File>
           </Files>
         </Group>

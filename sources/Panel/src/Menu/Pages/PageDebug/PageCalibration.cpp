@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "common/Message_p.h"
+#include "common/Messages_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Menu/Pages/PageDebug/PageDebug.h"

@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "Log.h"
-#include "common/Message.h"
+#include "log.h"
+#include "common/Messages.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP_d.h"

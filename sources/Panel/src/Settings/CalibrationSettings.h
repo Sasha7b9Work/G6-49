@@ -2,7 +2,7 @@
 #include "common/Command.h"
 #include "common/CommonTypes.h"
 #include "Menu/Pages/PageSignals/PageSignals.h"
-#include "common/Message.h"
+#include "common/Messages.h"
 
 
 #ifndef WIN32

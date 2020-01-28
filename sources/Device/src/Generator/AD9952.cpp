@@ -1,10 +1,7 @@
-#include "AD9952.h"
-#include "defines.h"
+#include "common/Messages.h"
+#include "Generator/AD9952.h"
 #include "Generator/Calibrator.h"
-#include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
-#include "FPGA.h"
-#include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
 #include <cmath>
 
@@ -122,6 +119,8 @@ void AD9952::WriteASF(Chan::E ch)
     float amplitude = SetGenerator::Amplitude(ch) * Calibrator::GetAmplitudeK(ch) * Attenuator::GetAttenuation(ch).Multiplier() ;
 
     uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);
+
+    Message::Log("write ot ASF %d", value).Transmit();
     
     Bit::Set(value, 14);  // \ Ёто биты множител€ скорости
     Bit::Set(value, 15);  // / нарастани€ фронта 

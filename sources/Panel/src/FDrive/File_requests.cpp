@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "common/Command.h"
-#include "common/Message.h"
+#include "common/Messages.h"
 #include "File.h"
 #include "Items.h"
 #include "Interface/Interface_p.h"

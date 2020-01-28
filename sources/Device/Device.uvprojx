@@ -1242,14 +1242,14 @@
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
-              <FileName>Message.h</FileName>
+              <FileName>Messages.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Message.h</FilePath>
+              <FilePath>..\common\Messages.h</FilePath>
             </File>
             <File>
-              <FileName>Message.cpp</FileName>
+              <FileName>Messages.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Message.cpp</FilePath>
+              <FilePath>..\common\Messages.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver.h</FileName>
