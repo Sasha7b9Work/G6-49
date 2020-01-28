@@ -1,3 +1,4 @@
+#include "common/Message.h"
 #include "AD5697.h"
 #include "FPGA.h"
 #include "Generator_d.h"
@@ -165,6 +166,8 @@ void DGenerator::SetPeriod(Chan::E ch, FloatValue period)
 void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
     SetGenerator::amplitude[ch] = ampl.ToFloat();
+
+    Message::Log("amplitude %f", SetGenerator::amplitude[ch]).Transmit();
 
     Amplifier::Tune(ch);
 

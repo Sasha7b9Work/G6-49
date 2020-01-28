@@ -7,6 +7,7 @@
 #include "Settings/CalibrationSettings.h"
 #include <cstring>
 #include <cstdlib>
+#include <cstdio>
 
 
 SimpleMessage::SimpleMessage() : allocated(0), buffer(0), used(0), taken(0)
@@ -375,6 +376,19 @@ Message::Log::Log(char *string) : SimpleMessage()
     PutByte(Command::Log);
 
     std::strcpy(reinterpret_cast<char *>(buffer + 1), string);
+}
+
+
+Message::Log::Log(char *string, float value) : SimpleMessage()
+{
+    char buf[100];
+    std::snprintf(buf, 100, string, value);
+
+    uint size = 1 + std::strlen(buf) + 1;
+    AllocateMemory(size);
+    PutByte(Command::Log);
+
+    std::strcpy(reinterpret_cast<char *>(buffer + 1), buf);
 }
 
 
