@@ -26,7 +26,7 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
 {
     float zero = Calibrator::GetOffsetK_Zero(ch);           // 2048
 
-    float offset = DGenerator::GetOffset(ch);
+    float offset = SetGenerator::Offset(ch);
     
     if (offset > 0.0F)
     {

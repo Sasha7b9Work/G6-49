@@ -169,7 +169,7 @@ void FPGA::SetFrequency(Chan::E ch)
 {
     WriteControlRegister();
 
-    float frequency = DGenerator::GetFrequency(ch);
+    float frequency = SetGenerator::Frequency(ch);
     
     if(modeWork[ch] == ModeWork::Meander)
     {
@@ -475,8 +475,8 @@ void FPGA::WriteAddress(RG::E reg)
 
 void FPGA::SetAmplitude()
 {
-    uint nA = (uint)((DGenerator::GetAmplitude(Chan::A) * (1023 + Calibrator::GetOffsetK_Zero(Chan::A))) / 10);
-    uint nB = (uint)((DGenerator::GetAmplitude(Chan::B) * (1023 + Calibrator::GetOffsetK_Zero(Chan::B))) / 10);
+    uint nA = (uint)((SetGenerator::Amplitude(Chan::A) * (1023 + Calibrator::GetOffsetK_Zero(Chan::A))) / 10);
+    uint nB = (uint)((SetGenerator::Amplitude(Chan::B) * (1023 + Calibrator::GetOffsetK_Zero(Chan::B))) / 10);
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }
