@@ -5,7 +5,6 @@ SettingsGenerator setDDS =
 {
     {
         {
-            TransmissionSequence::MSB_2_LSB,    // TransmissionSequence
             false,                              // bidirectionalMode
             TypeWave::Sin,                      // typeWave
             1e3F,                               // frequency
@@ -13,7 +12,6 @@ SettingsGenerator setDDS =
             2048.0F                             // offset
         },
         {
-            TransmissionSequence::MSB_2_LSB,    // TransmissionSequence
             false,                              // bidirectionalMode
             TypeWave::Sin,                      // typeWave
             1e3F,                               // frequency

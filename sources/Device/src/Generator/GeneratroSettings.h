@@ -6,7 +6,6 @@
 
 struct SettingsAD9952
 {
-    TransmissionSequence transmissionSequence;  ///< D8 Направление передачи бит
     bool        bidirectionalMode;              ///< D9 Если true, то работает в двунаправленном режиме
     TypeWave    typeWave;                       ///< D12 Выбор синуса или косинуса
     
