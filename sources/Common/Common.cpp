@@ -1,3 +1,4 @@
+#include "defines.h"
 #ifdef WIN32
 #pragma warning(push)
 #pragma warning(disable:4514)   // unreferenced inline function has been removed

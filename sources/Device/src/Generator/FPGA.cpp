@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Generator/Calibrator.h"
 #include "Generator/FPGA.h"
 #include "Hardware/HAL/HAL.h"
