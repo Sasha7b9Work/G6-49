@@ -1,11 +1,12 @@
-#include "CPU.h"
+#include "defines.h"
+#include "log.h"
+#include "Hardware/CPU.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/Keyboard.h"
-#include "Log.h"
 #include <cstdlib>
 
 
