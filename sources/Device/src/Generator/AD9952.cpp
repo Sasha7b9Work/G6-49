@@ -1,6 +1,5 @@
 #include "AD9952.h"
 #include "defines.h"
-#include "GeneratroSettings.h"
 #include "Generator/Calibrator.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
@@ -43,11 +42,8 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 
 void AD9952::SetFrequency(Chan::E ch, FloatValue frequency)
 {
-    float freq = frequency.ToFloat();
+    FPGA::SetClockAD992(DGenerator::GetFrequency(ch) < 0.1F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
 
-    FPGA::SetClockAD992(freq < 0.1F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
-
-    setDDS.ad9952[ch].frequency = frequency.ToFloat();
     WriteRegister(ch, Register::FTW0);
 }
 
@@ -56,7 +52,7 @@ void AD9952::SetPhase(Chan::E ch, FloatValue ph)
 {
     phase[ch] = ph.ToFloat();
 
-    if(setDDS.ad9952[Chan::A].frequency == setDDS.ad9952[Chan::B].frequency) //-V550 //-V2550
+    if(DGenerator::GetFrequency(Chan::A) == DGenerator::GetFrequency(Chan::B))
     {
         WriteRegister(ch, Register::POW);
     }
@@ -136,7 +132,7 @@ void AD9952::WriteASF(Chan::E ch)
 
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    float FTWf = (setDDS.ad9952[ch].frequency / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2, 32);
+    float FTWf = (DGenerator::GetFrequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2, 32);
 
     WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }

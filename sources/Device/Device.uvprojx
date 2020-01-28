@@ -1337,21 +1337,6 @@
               <FilePath>.\src\Generator\Generator_d.cpp</FilePath>
             </File>
             <File>
-              <FileName>GeneratroSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\GeneratroSettings.h</FilePath>
-            </File>
-            <File>
-              <FileName>GeneratorSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\GeneratorSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>GeneratorSettingsTypes.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\GeneratorSettingsTypes.h</FilePath>
-            </File>
-            <File>
               <FileName>Calibrator.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Calibrator.cpp</FilePath>

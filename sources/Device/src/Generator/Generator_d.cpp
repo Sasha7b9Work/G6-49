@@ -10,6 +10,7 @@
 
 bool DGenerator::waveIsSine[Chan::Count] = { true, true };
 float DGenerator::amplitude[Chan::Count] = { 10.0F, 10.0F };
+float DGenerator::frequency[Chan::Count] = { 1e3F, 1e3F };
 float DGenerator::offset[Chan::Count] = { 0.0F, 0.0F };
 Attenuation::E Attenuator::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 
@@ -126,15 +127,17 @@ void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 }
 
 
-void DGenerator::SetFrequency(Chan::E ch, FloatValue frequency)
+void DGenerator::SetFrequency(Chan::E ch, FloatValue freq)
 {
+    frequency[ch] = freq.ToFloat();
+
     if (waveIsSine[ch])
     {
-        AD9952::SetFrequency(ch, frequency);
+        AD9952::SetFrequency(ch, freq);
     }
     else
     {
-        FPGA::SetFrequency(ch, frequency);
+        FPGA::SetFrequency(ch, freq);
     }
 }
 

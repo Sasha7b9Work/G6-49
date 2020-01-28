@@ -44,6 +44,8 @@ public:
     static float GetAmplitude(Chan::E ch) { return amplitude[ch]; }
     /// ¬озвращает установленное на канале смещение
     static float GetOffset(Chan::E ch) { return offset[ch]; }
+    /// ¬озвращает установленную частоту на канале
+    static float GetFrequency(Chan::E ch) { return frequency[ch]; }
     /// ¬озвращает true, если на канале ch установлена синусоидальна€ форма сигнала
     static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
 
@@ -54,6 +56,8 @@ private:
     static float amplitude[Chan::Count];
     /// “екуща€ установленное смещение на кнаале
     static float offset[Chan::Count];
+    /// “екуща€ частота на канале
+    static float frequency[Chan::Count];
 };
 
 
