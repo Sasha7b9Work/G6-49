@@ -10,11 +10,11 @@ struct Calibrator
     /// Возвращает коэффициент калибровки амплитуды
     static float GetAmplitudeK(Chan::E ch);
     /// Возвращает калибровочный коэффициент смещения для 0В
-    static float GetOffsetK_Zero(Chan::E ch, TypeForm::E form);
+    static float GetOffsetK_Zero(Chan::E ch);
     /// Возвращает калибровочный коэффициент смещения для -5В
-    static float GetOffsetK_Negative(Chan::E ch, TypeForm::E form);
+    static float GetOffsetK_Negative(Chan::E ch);
     /// Возвращает калбировочный коэффициент смещения для +5В
-    static float GetOffsetK_Positive(Chan::E ch, TypeForm::E form);
+    static float GetOffsetK_Positive(Chan::E ch);
     /// Возвращает калибровочный коэффициент уровня синхронизации частотомера
     static float GetFreqMeterK_Trig();
 

@@ -24,11 +24,11 @@ void AD5697::Init()
 
 float AD5697::CalculateCodeOffset(Chan::E ch, FloatValue offset)
 {
-    float zero = Calibrator::GetOffsetK_Zero(ch, TypeForm::Sine);    // 2048
+    float zero = Calibrator::GetOffsetK_Zero(ch);           // 2048
     
     if (offset.ToFloat() > 0.0F)
     {
-        float pos = Calibrator::GetOffsetK_Positive(ch, TypeForm::Sine);    // 0
+        float pos = Calibrator::GetOffsetK_Positive(ch);    // 0
 
         float scale = (zero - pos) / 5.0F;
 
@@ -36,7 +36,7 @@ float AD5697::CalculateCodeOffset(Chan::E ch, FloatValue offset)
     }
     else if(offset.ToFloat() < 0.0F)
     {
-        float neg = Calibrator::GetOffsetK_Negative(ch, TypeForm::Sine);    // 4095
+        float neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
 
         float scale = (neg - zero) / 5.0F;
 

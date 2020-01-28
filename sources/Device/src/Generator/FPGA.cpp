@@ -479,7 +479,7 @@ uint FPGA::OffsetToCode(Chan::E ch)
 
     uint max = 0x1fff;
 
-    float k = 1.0F + Calibrator::GetOffsetK_Zero(ch, TypeForm::Meander) / 1023.0F;
+    float k = 1.0F + Calibrator::GetOffsetK_Zero(ch) / 1023.0F;
 
     int code = ~(static_cast<int>(off / 5.0F * max * k)) + 1;
 
@@ -491,8 +491,8 @@ void FPGA::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
     amplitude[ch] = ampl.ToFloat();
 
-    uint nA = (uint)((amplitude[Chan::A] * (1023 + Calibrator::GetOffsetK_Zero(Chan::A, TypeForm::Meander))) / 10);
-    uint nB = (uint)((amplitude[Chan::B] * (1023 + Calibrator::GetOffsetK_Zero(Chan::B, TypeForm::Meander))) / 10);
+    uint nA = (uint)((amplitude[Chan::A] * (1023 + Calibrator::GetOffsetK_Zero(Chan::A))) / 10);
+    uint nB = (uint)((amplitude[Chan::B] * (1023 + Calibrator::GetOffsetK_Zero(Chan::B))) / 10);
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }

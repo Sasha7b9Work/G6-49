@@ -104,13 +104,15 @@ float Calibrator::GetAmplitudeK(Chan::E ch)
 }
 
 
-float Calibrator::GetOffsetK_Zero(Chan::E ch, TypeForm::E form)
+float Calibrator::GetOffsetK_Zero(Chan::E ch)
 {
     uint8 range = CalculateRange(ch);
 
-    if(form == TypeForm::Sine)
+    bool isSine = DGenerator::FormIsSine(ch);
+
+    if(isSine)
     {
-        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), TypeForm::Sine ? 0 : 1, range,  2);
+        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), isSine ? 0U : 1U, range,  2U);
     }
     else
     {
@@ -119,13 +121,13 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch, TypeForm::E form)
 }
 
 
-float Calibrator::GetOffsetK_Negative(Chan::E, TypeForm::E)
+float Calibrator::GetOffsetK_Negative(Chan::E)
 {
     return 4095.0F;
 }
 
 
-float Calibrator::GetOffsetK_Positive(Chan::E, TypeForm::E)
+float Calibrator::GetOffsetK_Positive(Chan::E)
 {
     return 0.0F;
 }
