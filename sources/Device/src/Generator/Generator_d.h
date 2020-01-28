@@ -43,6 +43,8 @@ struct DGenerator
     static float GetAmplitude(Chan::E ch) { return amplitude[ch]; }
     /// Возвращает установленное на канале смещение
     static float GetOffset(Chan::E ch) { return offset[ch]; }
+    /// Возвращает true, если на канале ch установлена синусоидальная форма сигнала
+    static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
 
 private:
     /// true, если на канале установлена форма сигнала "синусоида"

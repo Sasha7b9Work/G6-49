@@ -94,11 +94,11 @@ uint8 Calibrator::CalculateRange(Chan::E ch)
 }
 
 
-float Calibrator::GetAmplitudeK(Chan::E ch, TypeForm::E form)
+float Calibrator::GetAmplitudeK(Chan::E ch)
 {
     uint8 range = CalculateRange(ch);
 
-    int16 k = *setCal.GetK(static_cast<uint8>(ch), form == TypeForm::Sine ? 0U : 1U, range, 0U);
+    int16 k = *setCal.GetK(static_cast<uint8>(ch), DGenerator::FormIsSine(ch) ? 0U : 1U, range, 0U);
 
     return 1.0F + k / 1000.0F;
 }
