@@ -159,9 +159,9 @@ void DGenerator::SetPeriod(Chan::E ch, FloatValue period)
 
 void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
-    SetGenerator::amplitude[ch] = ampl.ToFloat();
+    Message::Log(" ").Transmit();
 
-    Message::Log("amplitude %f", SetGenerator::amplitude[ch]).Transmit();
+    SetGenerator::amplitude[ch] = ampl.ToFloat();
 
     Amplifier::Tune(ch);
 
@@ -277,13 +277,17 @@ void Amplifier::Tune(Chan::E ch)
     float amplitude = SetGenerator::Amplitude(ch);
     float offset = SetGenerator::Offset(ch);
 
+    Message::Log("%f %f", amplitude, offset).Transmit();
+
     if(amplitude > 3.16F)              // 1 диапазон
     {
+        Message::Log("1").Transmit();
         SetState(ch, true);
         Attenuator::SetAttenuation(ch, Attenuation::_0Db);
     }
     else if(amplitude > 1.0F)          // 2 диапазон
     {
+        Message::Log("2").Transmit();
         SetState(ch, true);
         Attenuator::SetAttenuation(ch, Attenuation::_10Db);
     }
@@ -291,27 +295,32 @@ void Amplifier::Tune(Chan::E ch)
     {
         if(offset > 2.5F)
         {
+            Message::Log("3").Transmit();
             SetState(ch, true);
             Attenuator::SetAttenuation(ch, Attenuation::_20Db);
         }
         else
         {
+            Message::Log("4").Transmit();
             SetState(ch, false);
             Attenuator::SetAttenuation(ch, Attenuation::_0Db);
         }
     }
     else if(amplitude > 0.100F)        // 5 диапазон
     {
+        Message::Log("5").Transmit();
         SetState(ch, false);
         Attenuator::SetAttenuation(ch, Attenuation::_10Db);
     }
     else if(amplitude > 0.0316F)        // 6 диапазон
     {
+        Message::Log("6").Transmit();
         SetState(ch, false);
         Attenuator::SetAttenuation(ch, Attenuation::_20Db);
     }
     else                                // 7 диапазон
     {
+        Message::Log("7").Transmit();
         SetState(ch, false);
         Attenuator::SetAttenuation(ch, Attenuation::_30Db);
     }

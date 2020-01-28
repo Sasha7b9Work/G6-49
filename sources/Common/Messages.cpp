@@ -403,6 +403,19 @@ Message::Log::Log(char *string, uint value) : SimpleMessage()
 }
 
 
+Message::Log::Log(char *string, float v0, float v1) : SimpleMessage()
+{
+    char buf[100];
+    std::snprintf(buf, 100, string, v0, v1);
+
+    uint size = 1 + std::strlen(buf) + 1;
+    AllocateMemory(size);
+    PutByte(Command::Log);
+
+    std::strcpy(reinterpret_cast<char *>(buffer + 1), buf);
+}
+
+
 Message::StartMode::StartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::SetStartMode)
 {
     PutByte(ch);
