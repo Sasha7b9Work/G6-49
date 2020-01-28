@@ -13,7 +13,7 @@ struct FPGA
 
     static void SetFrequency(Chan::E ch);
 
-    static void SetAmplitude(Chan::E ch, FloatValue amplitude);
+    static void SetAmplitude(Chan::E ch);
 
     static void SetOffset(Chan::E ch, FloatValue offset);
 
@@ -159,8 +159,6 @@ private:
     static uint16 SetBitsStartMode(uint16 data);
     /// Режим запуска
     static StartMode startMode[Chan::Count];
-    
-    static float amplitude[Chan::Count];
     
     static float offset[Chan::Count];
     /// Здесь хранятся записанные в регистры значения
