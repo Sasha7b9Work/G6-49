@@ -2,6 +2,7 @@
 #include "log.h"
 #include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
+#include <cmath>
 
 
 bool SetGenerator::waveIsSine[Chan::Count] = { true, true };
@@ -220,20 +221,6 @@ void DGenerator::SetDelay(Chan::E, FloatValue)
 }
 
 
-void Attenuator::Init()
-{
-    HAL_PIO::Init(HPort::_E, HPin::_15, HMode::Output_PP, HPull::No); //-V525
-
-    HAL_PIO::Init(HPort::_B, HPin::_10, HMode::Output_PP, HPull::No);
-
-    HAL_PIO::Init(HPort::_F, HPin::_0, HMode::Output_PP, HPull::No);
-    HAL_PIO::Init(HPort::_F, HPin::_5, HMode::Output_PP, HPull::No);
-
-    HAL_PIO::Init(HPort::_C, HPin::_13, HMode::Output_PP, HPull::No);
-    HAL_PIO::Init(HPort::_C, HPin::_14, HMode::Output_PP, HPull::No);
-}
-
-
 void Attenuator::SetAttenuation(Chan::E ch, Attenuation::E att)
 {
     static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
@@ -267,7 +254,15 @@ void Attenuator::SetAttenuation(Chan::E ch, Attenuation::E att)
 
 void Amplifier::Init()
 {
-    Attenuator::Init();
+    HAL_PIO::Init(HPort::_E, HPin::_15, HMode::Output_PP, HPull::No); //-V525
+
+    HAL_PIO::Init(HPort::_B, HPin::_10, HMode::Output_PP, HPull::No);
+
+    HAL_PIO::Init(HPort::_F, HPin::_0, HMode::Output_PP, HPull::No);
+    HAL_PIO::Init(HPort::_F, HPin::_5, HMode::Output_PP, HPull::No);
+
+    HAL_PIO::Init(HPort::_C, HPin::_13, HMode::Output_PP, HPull::No);
+    HAL_PIO::Init(HPort::_C, HPin::_14, HMode::Output_PP, HPull::No);
 }
 
 
@@ -281,13 +276,13 @@ void Amplifier::Tune(Chan::E ch)
     if(amplitude > 3.16F)              // 1 диапазон
     {
         Message::Log("1").Transmit();
-        SetState(ch, true);
+        Enable(ch, true);
         Attenuator::SetAttenuation(ch, Attenuation::_0Db);
     }
     else if(amplitude > 1.0F)          // 2 диапазон
     {
         Message::Log("2").Transmit();
-        SetState(ch, true);
+        Enable(ch, true);
         Attenuator::SetAttenuation(ch, Attenuation::_10Db);
     }
     else if(amplitude > 0.316F)        // 3,4 диапазоны
@@ -295,43 +290,43 @@ void Amplifier::Tune(Chan::E ch)
         if(offset > 2.5F)
         {
             Message::Log("3").Transmit();
-            SetState(ch, true);
+            Enable(ch, false);
             Attenuator::SetAttenuation(ch, Attenuation::_20Db);
         }
         else
         {
             Message::Log("4").Transmit();
-            SetState(ch, false);
+            Enable(ch, true);
             Attenuator::SetAttenuation(ch, Attenuation::_0Db);
         }
     }
     else if(amplitude > 0.100F)        // 5 диапазон
     {
         Message::Log("5").Transmit();
-        SetState(ch, false);
+        Enable(ch, true);
         Attenuator::SetAttenuation(ch, Attenuation::_10Db);
     }
     else if(amplitude > 0.0316F)        // 6 диапазон
     {
         Message::Log("6").Transmit();
-        SetState(ch, false);
+        Enable(ch, false);
         Attenuator::SetAttenuation(ch, Attenuation::_20Db);
     }
     else                                // 7 диапазон
     {
         Message::Log("7").Transmit();
-        SetState(ch, false);
+        Enable(ch, false);
         Attenuator::SetAttenuation(ch, Attenuation::_30Db);
     }
 }
 
 
-void Amplifier::SetState(Chan::E ch, bool state)
+void Amplifier::Enable(Chan::E ch, bool enable)
 {
     static const HPort::E gpio[Chan::Count] = { HPort::_F, HPort::_C };
-    static const uint16   pin[Chan::Count] = { HPin::_0,  HPin::_14 };
+    static const uint16   pin[Chan::Count] =  { HPin::_0,  HPin::_14 };
 
-    HAL_PIO::Write(gpio[ch], pin[ch], state);
+    HAL_PIO::Write(gpio[ch], pin[ch], enable);
 }
 
 
@@ -341,14 +336,14 @@ Attenuation Attenuator::GetAttenuation(Chan::E ch)
 }
 
 
-uint Attenuation::Multiplier() const
+float Attenuation::Multiplier() const
 {
-    static const uint mult[Attenuation::Count] =
+    static const float mult[Attenuation::Count] =
     {
-        1,
-        10,
-        100,
-        1000
+        std::powf(10, 0.05F * 0),
+        std::powf(10, 0.05F * 10),
+        std::powf(10, 0.05F * 20),
+        std::powf(10, 0.05F * 30)
     };
 
     return mult[value];

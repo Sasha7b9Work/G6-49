@@ -55,7 +55,7 @@ struct Attenuation
 
     Attenuation(E v) : value(v) { };
 
-    uint Multiplier() const;
+    float Multiplier() const;
 };
 
 
@@ -70,8 +70,6 @@ public:
 private:
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
 
-    static void Init();
-
     static Attenuation::E attenuation[Chan::Count];
 };
 
@@ -84,8 +82,8 @@ private:
     static void Init();
 
     static void Tune(Chan::E ch);
-
-    static void SetState(Chan::E ch, bool state);
+    /// ¬ключить/выключить усилитель
+    static void Enable(Chan::E ch, bool enable);
 };
 
 

@@ -117,10 +117,15 @@ void AD9952::WritePOW(Chan::E ch)
 
 void AD9952::WriteASF(Chan::E ch)
 {
-    float amplitude = SetGenerator::Amplitude(ch) * Calibrator::GetAmplitudeK(ch) * Attenuator::GetAttenuation(ch).Multiplier() ;
+    float k = Calibrator::GetAmplitudeK(ch);
+
+    float mul = Attenuator::GetAttenuation(ch).Multiplier();
+
+    float amplitude = k * mul * SetGenerator::Amplitude(ch);
 
     uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);
 
+    LOG_WRITE("k = %f, mul = %f, ampl = %f", k, mul, amplitude);
     LOG_WRITE("write of ASF %d", value);
     
     Bit::Set(value, 14);  // \ Это биты множителя скорости
