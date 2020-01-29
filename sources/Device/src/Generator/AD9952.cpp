@@ -119,7 +119,7 @@ void AD9952::WriteASF(Chan::E ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
 
-    float mul = Attenuator::GetAttenuation(ch).Multiplier();
+    float mul = Amplifier::GetAttenuation(ch).Multiplier();
 
     float amplitude = k * mul * SetGenerator::Amplitude(ch);
 

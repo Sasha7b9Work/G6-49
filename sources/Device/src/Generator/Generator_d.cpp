@@ -9,7 +9,7 @@ bool SetGenerator::waveIsSine[Chan::Count] = { true, true };
 float SetGenerator::amplitude[Chan::Count] = { 10.0F, 10.0F };
 float SetGenerator::frequency[Chan::Count] = { 1e3F, 1e3F };
 float SetGenerator::offset[Chan::Count] = { 0.0F, 0.0F };
-Attenuation::E Attenuator::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
+Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 
 
 struct Filtr
@@ -221,7 +221,7 @@ void DGenerator::SetDelay(Chan::E, FloatValue)
 }
 
 
-void Attenuator::SetAttenuation(Chan::E ch, Attenuation::E att)
+void Amplifier::SetAttenuation(Chan::E ch, Attenuation::E att)
 {
     static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
     static const HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
@@ -277,13 +277,13 @@ void Amplifier::Tune(Chan::E ch)
     {
         Message::Log("1").Transmit();
         Enable(ch, true);
-        Attenuator::SetAttenuation(ch, Attenuation::_0Db);
+        SetAttenuation(ch, Attenuation::_0Db);
     }
     else if(amplitude > 1.0F)          // 2 диапазон
     {
         Message::Log("2").Transmit();
         Enable(ch, true);
-        Attenuator::SetAttenuation(ch, Attenuation::_10Db);
+        SetAttenuation(ch, Attenuation::_10Db);
     }
     else if(amplitude > 0.316F)        // 3,4 диапазоны
     {
@@ -291,32 +291,32 @@ void Amplifier::Tune(Chan::E ch)
         {
             Message::Log("3").Transmit();
             Enable(ch, false);
-            Attenuator::SetAttenuation(ch, Attenuation::_20Db);
+            SetAttenuation(ch, Attenuation::_20Db);
         }
         else
         {
             Message::Log("4").Transmit();
             Enable(ch, true);
-            Attenuator::SetAttenuation(ch, Attenuation::_0Db);
+            SetAttenuation(ch, Attenuation::_0Db);
         }
     }
     else if(amplitude > 0.100F)        // 5 диапазон
     {
         Message::Log("5").Transmit();
         Enable(ch, true);
-        Attenuator::SetAttenuation(ch, Attenuation::_10Db);
+        SetAttenuation(ch, Attenuation::_10Db);
     }
     else if(amplitude > 0.0316F)        // 6 диапазон
     {
         Message::Log("6").Transmit();
         Enable(ch, false);
-        Attenuator::SetAttenuation(ch, Attenuation::_20Db);
+        SetAttenuation(ch, Attenuation::_20Db);
     }
     else                                // 7 диапазон
     {
         Message::Log("7").Transmit();
         Enable(ch, false);
-        Attenuator::SetAttenuation(ch, Attenuation::_30Db);
+        SetAttenuation(ch, Attenuation::_30Db);
     }
 }
 
@@ -330,7 +330,7 @@ void Amplifier::Enable(Chan::E ch, bool enable)
 }
 
 
-Attenuation Attenuator::GetAttenuation(Chan::E ch)
+Attenuation Amplifier::GetAttenuation(Chan::E ch)
 {
     return Attenuation(attenuation[ch]);
 }

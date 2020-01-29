@@ -51,7 +51,7 @@ struct Attenuation
         _20Db,
         _30Db,
         Count
-    } value;
+    }value;
 
     Attenuation(E v) : value(v) { };
 
@@ -59,31 +59,22 @@ struct Attenuation
 };
 
 
-class Attenuator
+class Amplifier
 {
-friend class Amplifier;
-
 public:
+    static void Init();
+    /// Настроить усилитель в соответствии с текущими настройками
+    static void Tune(Chan::E ch);
     /// Возвращает установленный коэффициент ослабления на канале
     static Attenuation GetAttenuation(Chan::E ch);
 
 private:
+    /// Включить/выключить аппаратный усилитель усилитель
+    static void Enable(Chan::E ch, bool enable);
+
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
 
     static Attenuation::E attenuation[Chan::Count];
-};
-
-
-class Amplifier
-{
-friend class DGenerator;
-
-private:
-    static void Init();
-
-    static void Tune(Chan::E ch);
-    /// Включить/выключить усилитель
-    static void Enable(Chan::E ch, bool enable);
 };
 
 
