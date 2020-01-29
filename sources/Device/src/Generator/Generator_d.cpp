@@ -1,4 +1,4 @@
-#include "common/Messages.h"
+#include "defines.h"
 #include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include <cmath>
@@ -272,49 +272,37 @@ void Amplifier::Tune(Chan::E ch)
 
     if(amplitude > 3.16F)              // 1 диапазон
     {
-        Message::Log("1").Transmit();
-        Enable(ch, true);
         SetAttenuation(ch, Attenuation::_0Db);
     }
     else if(amplitude > 1.0F)          // 2 диапазон
     {
-        Message::Log("2").Transmit();
-        Enable(ch, true);
         SetAttenuation(ch, Attenuation::_10Db);
     }
     else if(amplitude > 0.316F)        // 3,4 диапазоны
     {
         if(offset > 2.5F)
         {
-            Message::Log("3").Transmit();
-            Enable(ch, false);
             SetAttenuation(ch, Attenuation::_20Db);
         }
         else
         {
-            Message::Log("4").Transmit();
-            Enable(ch, true);
             SetAttenuation(ch, Attenuation::_0Db);
         }
     }
     else if(amplitude > 0.100F)        // 5 диапазон
     {
-        Message::Log("5").Transmit();
-        Enable(ch, true);
         SetAttenuation(ch, Attenuation::_10Db);
     }
     else if(amplitude > 0.0316F)        // 6 диапазон
     {
-        Message::Log("6").Transmit();
-        Enable(ch, false);
         SetAttenuation(ch, Attenuation::_20Db);
     }
     else                                // 7 диапазон
     {
-        Message::Log("7").Transmit();
-        Enable(ch, false);
         SetAttenuation(ch, Attenuation::_30Db);
     }
+
+    Enable(ch, attenuation[ch] < Attenuation::_20Db);
 }
 
 
