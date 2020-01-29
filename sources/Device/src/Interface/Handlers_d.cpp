@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "structs.h"
 #include "common/Command.h"
 #include "common/Transceiver.h"
@@ -71,12 +70,6 @@ void DHandlers::Processing(SimpleMessage *msg)
     uint8 com = msg->TakeByte();
 
     pFuncInterfaceVpM func = funcs[com];
-
-    if(func != DHandlers::SendData && func != DHandlers::E)
-    {
-        LOG_WRITE(" ");
-        LOG_WRITE("%x", func);
-    }
 
     func(msg);
 }

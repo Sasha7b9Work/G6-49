@@ -38,7 +38,7 @@ String::String(const char *format, ...)
 
     if (numSymbols < 0 || numSymbols > SIZE)
     {
-        LOG_ERROR("Буфер слишком мал");
+        LOG_ERROR_FINALIZE("Буфер слишком мал");
     }
 
     if (Allocate(std::strlen(buf) + 1))

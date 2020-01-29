@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "common/Messages.h"
 #include "FreqMeter_d.h"
 #include "Hardware/CPU.h"

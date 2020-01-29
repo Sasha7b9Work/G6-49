@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "common/Messages.h"
 #include "common/Transceiver.h"
 #include "Handlers_d.h"

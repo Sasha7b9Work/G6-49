@@ -1,5 +1,4 @@
 #include "common/Messages.h"
-#include "log.h"
 #include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include <cmath>
@@ -270,8 +269,6 @@ void Amplifier::Tune(Chan::E ch)
 {
     float amplitude = SetGenerator::Amplitude(ch);
     float offset = SetGenerator::Offset(ch);
-
-    LOG_WRITE("%f %f", amplitude, offset);
 
     if(amplitude > 3.16F)              // 1 диапазон
     {

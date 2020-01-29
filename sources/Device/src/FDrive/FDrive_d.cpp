@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "FDrive_d.h"
 #include "Generator/Generator_d.h"
 #include "Hardware/HAL/HAL.h"
@@ -80,10 +79,6 @@ void DDrive::Init()
         USBH_StatusTypeDef res = USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
         res = USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
         res = USBH_Start(&hUSB_Host);
-    }
-    else
-    {
-        LOG_ERROR("Can not %s", __FUNCTION__);
     }
 }
 

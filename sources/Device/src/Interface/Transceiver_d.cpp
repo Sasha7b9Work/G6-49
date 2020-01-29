@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "common/Command.h"
-#include "log.h"    
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
 

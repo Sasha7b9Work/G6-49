@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "FDrive/FDrive_d.h"
 #include "Generator/Generator_d.h"
 #include "Generator/AD5697.h"

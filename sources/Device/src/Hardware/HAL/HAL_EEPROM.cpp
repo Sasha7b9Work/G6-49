@@ -1,4 +1,4 @@
-#include "log.h"
+#include "defines.h"
 #include "Generator/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"

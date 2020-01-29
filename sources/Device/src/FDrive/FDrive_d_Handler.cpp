@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "libs/FatFS/ffconf.h"
 #include "libs/FatFS/FatFS.h"
 #include "FDrive/FDrive_d.h"
@@ -335,11 +334,6 @@ bool FileSystem::ReadFloats(float values[4096], char *name)
             }
         }
         f_close(&fp);
-    }
-    else
-    {
-        LOG_ERROR("Произошла ошибка при открытии файла %s", name);
-        LOG_ERROR("%s", FatFS::ErrorString(res).CString());
     }
 
     return result;

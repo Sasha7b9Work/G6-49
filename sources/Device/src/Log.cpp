@@ -1,5 +1,5 @@
-#include "log.h"
 #include "common/Messages.h"
+#include "log.h"
 #include <cstdarg>
 #include <cstdio>
 

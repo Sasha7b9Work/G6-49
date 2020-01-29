@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
-#include "Timer.h"
 #include "Hardware/CPU.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include <limits>
 
