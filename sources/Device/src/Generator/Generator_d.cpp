@@ -178,8 +178,6 @@ void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 
 void DGenerator::SetOffset(Chan::E ch, FloatValue off)
 {
-    LOG_WRITE("%s", __FUNCTION__);
-
     SettingsGenerator::offset[ch] = off.ToFloat();
 
     Amplifier::Tune(ch);
@@ -271,7 +269,6 @@ void Amplifier::Init()
 void Amplifier::Tune(Chan::E ch)
 {
     float amplitude = SettingsGenerator::Amplitude(ch);
-    float offset = SettingsGenerator::Offset(ch);
 
     if(amplitude > 3.16F)              // 1 диапазон
     {
@@ -283,7 +280,7 @@ void Amplifier::Tune(Chan::E ch)
     }
     else if(amplitude > 0.316F)        // 3,4 диапазоны
     {
-        if(offset > 2.5F)
+        if(SettingsGenerator::Offset(ch) > 2.5F)
         {
             SetAttenuation(ch, Attenuation::_20Db);
         }
