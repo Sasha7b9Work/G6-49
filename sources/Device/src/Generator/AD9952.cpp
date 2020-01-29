@@ -1,4 +1,5 @@
 #include "common/Messages.h"
+#include "Log.h"
 #include "Generator/AD9952.h"
 #include "Generator/Calibrator.h"
 #include "Hardware/HAL/HAL.h"
@@ -120,7 +121,7 @@ void AD9952::WriteASF(Chan::E ch)
 
     uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);
 
-    Message::Log("write ot ASF %d", value).Transmit();
+    LOG_WRITE("write of ASF %d", value);
     
     Bit::Set(value, 14);  // \ Ёто биты множител€ скорости
     Bit::Set(value, 15);  // / нарастани€ фронта 

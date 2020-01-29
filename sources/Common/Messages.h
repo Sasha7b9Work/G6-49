@@ -102,9 +102,6 @@ namespace Message
     {
     public:
         Log(char *string);
-        Log(char *string, float value);
-        Log(char *string, uint value);
-        Log(char *string, float v0, float v1);
     };
 
 

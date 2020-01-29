@@ -72,6 +72,12 @@ void DHandlers::Processing(SimpleMessage *msg)
 
     pFuncInterfaceVpM func = funcs[com];
 
+    if(func != DHandlers::SendData && func != DHandlers::E)
+    {
+        LOG_WRITE(" ");
+        LOG_WRITE("%x", func);
+    }
+
     func(msg);
 }
 

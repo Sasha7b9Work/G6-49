@@ -1,4 +1,5 @@
 #include "common/Messages.h"
+#include "log.h"
 #include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
 
@@ -159,8 +160,6 @@ void DGenerator::SetPeriod(Chan::E ch, FloatValue period)
 
 void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
-    Message::Log(" ").Transmit();
-
     SetGenerator::amplitude[ch] = ampl.ToFloat();
 
     Amplifier::Tune(ch);
@@ -277,7 +276,7 @@ void Amplifier::Tune(Chan::E ch)
     float amplitude = SetGenerator::Amplitude(ch);
     float offset = SetGenerator::Offset(ch);
 
-    Message::Log("%f %f", amplitude, offset).Transmit();
+    LOG_WRITE("%f %f", amplitude, offset);
 
     if(amplitude > 3.16F)              // 1 диапазон
     {
