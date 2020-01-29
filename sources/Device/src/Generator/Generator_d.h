@@ -74,7 +74,7 @@ private:
 };
 
 
-struct SetGenerator
+struct SettingsGenerator
 {
     friend class DGenerator;
 public:

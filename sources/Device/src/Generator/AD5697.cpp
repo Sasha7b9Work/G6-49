@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "common/Command.h"
 #include "Generator/AD5697.h"
 #include "Generator/Calibrator.h"
@@ -26,7 +27,7 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
 {
     float zero = Calibrator::GetOffsetK_Zero(ch);           // 2048
 
-    float offset = SetGenerator::Offset(ch);
+    float offset = SettingsGenerator::Offset(ch);
     
     if (offset > 0.0F)
     {
@@ -64,6 +65,8 @@ void AD5697::SetOffset(Chan::E ch)
         static_cast<uint8>(value >> 8),
         static_cast<uint8>(value)
     };
+
+    LOG_WRITE("Пишу в регистр смещения %d", (uint)data);
 
     WriteParameter(BIN_U8(00001100), data, WR_AD5697_OFFSET);
 }

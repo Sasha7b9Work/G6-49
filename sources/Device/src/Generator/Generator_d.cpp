@@ -1,13 +1,14 @@
 #include "defines.h"
+#include "log.h"
 #include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include <cmath>
 
 
-bool SetGenerator::waveIsSine[Chan::Count] = { true, true };
-float SetGenerator::amplitude[Chan::Count] = { 10.0F, 10.0F };
-float SetGenerator::frequency[Chan::Count] = { 1e3F, 1e3F };
-float SetGenerator::offset[Chan::Count] = { 0.0F, 0.0F };
+bool SettingsGenerator::waveIsSine[Chan::Count] = { true, true };
+float SettingsGenerator::amplitude[Chan::Count] = { 10.0F, 10.0F };
+float SettingsGenerator::frequency[Chan::Count] = { 1e3F, 1e3F };
+float SettingsGenerator::offset[Chan::Count] = { 0.0F, 0.0F };
 Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 
 
@@ -116,7 +117,7 @@ void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 
     if(ch < Chan::Count && form < TypeForm::Count)
     {
-        SetGenerator::waveIsSine[ch] = (form == TypeForm::Sine);
+        SettingsGenerator::waveIsSine[ch] = (form == TypeForm::Sine);
 
         FPGA::SetWaveForm(ch, form);
     }
@@ -125,9 +126,9 @@ void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 
 void DGenerator::SetFrequency(Chan::E ch, FloatValue freq)
 {
-    SetGenerator::frequency[ch] = freq.ToFloat();
+    SettingsGenerator::frequency[ch] = freq.ToFloat();
 
-    if (SetGenerator::waveIsSine[ch])
+    if (SettingsGenerator::waveIsSine[ch])
     {
         AD9952::SetFrequency(ch);
     }
@@ -160,11 +161,11 @@ void DGenerator::SetPeriod(Chan::E ch, FloatValue period)
 
 void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 {
-    SetGenerator::amplitude[ch] = ampl.ToFloat();
+    SettingsGenerator::amplitude[ch] = ampl.ToFloat();
 
     Amplifier::Tune(ch);
 
-    if (SetGenerator::waveIsSine[ch])
+    if (SettingsGenerator::waveIsSine[ch])
     {
         AD9952::SetAmplitude(ch);
     }
@@ -177,7 +178,9 @@ void DGenerator::SetAmplitude(Chan::E ch, FloatValue ampl)
 
 void DGenerator::SetOffset(Chan::E ch, FloatValue off)
 {
-    SetGenerator::offset[ch] = off.ToFloat();
+    LOG_WRITE("%s", __FUNCTION__);
+
+    SettingsGenerator::offset[ch] = off.ToFloat();
 
     Amplifier::Tune(ch);
 
@@ -267,8 +270,8 @@ void Amplifier::Init()
 
 void Amplifier::Tune(Chan::E ch)
 {
-    float amplitude = SetGenerator::Amplitude(ch);
-    float offset = SetGenerator::Offset(ch);
+    float amplitude = SettingsGenerator::Amplitude(ch);
+    float offset = SettingsGenerator::Offset(ch);
 
     if(amplitude > 3.16F)              // 1 диапазон
     {
