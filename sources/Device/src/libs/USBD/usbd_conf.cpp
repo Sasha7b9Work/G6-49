@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"

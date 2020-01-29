@@ -330,15 +330,9 @@ void Amplifier::Enable(Chan::E ch, bool enable)
 }
 
 
-Attenuation Amplifier::GetAttenuation(Chan::E ch)
+float Amplifier::GetAttenuation(Chan::E ch)
 {
-    return Attenuation(attenuation[ch]);
-}
-
-
-float Attenuation::Multiplier() const
-{
-    static const float mult[Attenuation::Count] =
+    static const float att[Attenuation::Count] =
     {
         std::powf(10, 0.05F * 0),
         std::powf(10, 0.05F * 10),
@@ -346,5 +340,5 @@ float Attenuation::Multiplier() const
         std::powf(10, 0.05F * 30)
     };
 
-    return mult[value];
+    return att[attenuation[ch]];
 }

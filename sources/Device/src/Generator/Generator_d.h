@@ -51,11 +51,7 @@ struct Attenuation
         _20Db,
         _30Db,
         Count
-    }value;
-
-    Attenuation(E v) : value(v) { };
-
-    float Multiplier() const;
+    };
 };
 
 
@@ -65,8 +61,8 @@ public:
     static void Init();
     /// Настроить усилитель в соответствии с текущими настройками
     static void Tune(Chan::E ch);
-    /// Возвращает установленный коэффициент ослабления на канале
-    static Attenuation GetAttenuation(Chan::E ch);
+    /// Возвращает установленный коэффициент ослабления в разах
+    static float GetAttenuation(Chan::E ch);
 
 private:
     /// Включить/выключить аппаратный усилитель усилитель

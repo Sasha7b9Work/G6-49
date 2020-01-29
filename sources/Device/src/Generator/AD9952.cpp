@@ -1,5 +1,4 @@
 #include "common/Messages.h"
-#include "Log.h"
 #include "Generator/AD9952.h"
 #include "Generator/Calibrator.h"
 #include "Hardware/HAL/HAL.h"
@@ -119,14 +118,11 @@ void AD9952::WriteASF(Chan::E ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
 
-    float mul = Amplifier::GetAttenuation(ch).Multiplier();
+    float att = Amplifier::GetAttenuation(ch);
 
-    float amplitude = k * mul * SetGenerator::Amplitude(ch);
+    float amplitude = k * att * SetGenerator::Amplitude(ch);
 
     uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);
-
-    LOG_WRITE("k = %f, mul = %f, ampl = %f", k, mul, amplitude);
-    LOG_WRITE("write of ASF %d", value);
     
     Bit::Set(value, 14);  // \ Ёто биты множител€ скорости
     Bit::Set(value, 15);  // / нарастани€ фронта 
