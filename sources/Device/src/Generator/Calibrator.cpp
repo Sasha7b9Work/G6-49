@@ -42,7 +42,18 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
         -5.0F
     };
 
-    DGenerator::SetOffset(ch, FloatValue(offset[param]));
+    if(param == 0)                   // Для калибровки амплитуды просто устанавливаем смещение
+    {
+        DGenerator::SetOffset(ch, FloatValue(offset[param]));
+    }
+    else                            // А для калибровки смещений блокируем переключение аттенюаторов
+    {
+        Amplifier::Block();
+
+        DGenerator::SetOffset(ch, FloatValue(offset[param]));
+
+        Amplifier::Unblock();
+    }
 }
 
 
@@ -54,16 +65,20 @@ void Calibrator::SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int
 
     SetFormWave(ch, signal);
 
-    SetOffset(ch, param);
-
-    if(param == 0)
+    if(param == 0)                          /// Это калибровка амплитуды
     {
         SetAmplitude(ch, range);
     }
-    else
+    else                                    /// А это калибровка смещения
     {
+        Amplifier::Block();
+
         DGenerator::SetAmplitude(ch, FloatValue(0.0F));
+
+        Amplifier::Unblock();
     }
+
+    SetOffset(ch, param);
 }
 
 

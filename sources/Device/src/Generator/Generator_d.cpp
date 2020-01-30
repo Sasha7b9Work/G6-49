@@ -10,6 +10,7 @@ float SettingsGenerator::amplitude[Chan::Count] = { 10.0F, 10.0F };
 float SettingsGenerator::frequency[Chan::Count] = { 1e3F, 1e3F };
 float SettingsGenerator::offset[Chan::Count] = { 0.0F, 0.0F };
 Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
+bool Amplifier::isBlocked = false;
 
 
 struct Filtr
@@ -268,6 +269,11 @@ void Amplifier::Init()
 
 void Amplifier::Tune(Chan::E ch)
 {
+    if(isBlocked)
+    {
+        return;
+    }
+
     float amplitude = SettingsGenerator::Amplitude(ch);
 
     if(amplitude > 3.16F)              // 1 диапазон

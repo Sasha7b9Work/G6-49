@@ -63,6 +63,10 @@ public:
     static void Tune(Chan::E ch);
     /// Возвращает установленный коэффициент ослабления в разах
     static float GetAttenuation(Chan::E ch);
+    /// Заблокировать переключение
+    static void Block()   { isBlocked = true; };
+    /// Разблокировать переключение
+    static void Unblock() { isBlocked = false; };
 
 private:
     /// Включить/выключить аппаратный усилитель усилитель
@@ -71,6 +75,8 @@ private:
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
 
     static Attenuation::E attenuation[Chan::Count];
+    /// Установленное в true значение означает, что усилитель заблокирован - никакие действия в Tune() выолняться не будут
+    static bool isBlocked;
 };
 
 
