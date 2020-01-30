@@ -23,7 +23,11 @@ private:
     /// Устанавливает форму сигнала для соотвествующей формы сигнала
     static void SetFormWave(Chan::E ch, uint8 signal);
     /// Установить амплитуду для заданного диапазона
-    static void SetAmplitude(Chan::E ch, uint8 range);
+    static void SetAmplitude(Chan::E ch);
     /// Установить смещение для заданного параметра
     static void SetOffset(Chan::E ch, uint8 param);
+    /// Если true, то мы находимся в режиме калибровки, и диапазон нужно не рассчитывать, исходя из установленного значения, а брать тот, который сейчас калибруется
+    static bool inModeCalibration;
+    /// Для этого диапазона сейчас происходит калибровка
+    static uint8 range[Chan::Count];
 };

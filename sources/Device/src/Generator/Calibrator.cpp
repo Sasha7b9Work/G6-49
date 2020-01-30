@@ -4,6 +4,10 @@
 #include "Settings/CalibrationSettings.h"
 
 
+bool Calibrator::inModeCalibration = false;
+uint8 Calibrator::range[Chan::Count] = { 255, 255 };
+
+
 void Calibrator::SetFormWave(Chan::E ch, uint8 signal)
 {
     if(signal == 0)
@@ -17,7 +21,7 @@ void Calibrator::SetFormWave(Chan::E ch, uint8 signal)
 }
 
 
-void Calibrator::SetAmplitude(Chan::E ch, uint8 range)
+void Calibrator::SetAmplitude(Chan::E ch)
 {
     static const float amplitude[6] =
     {
@@ -28,7 +32,7 @@ void Calibrator::SetAmplitude(Chan::E ch, uint8 range)
         10.0F
     };
 
-    DGenerator::SetAmplitude(ch, FloatValue(amplitude[range]));
+    DGenerator::SetAmplitude(ch, FloatValue(amplitude[range[ch]]));
 }
 
 
@@ -57,9 +61,13 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
 }
 
 
-void Calibrator::SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int16 k)
+void Calibrator::SetK(uint8 channel, uint8 signal, uint8 _range, uint8 param, int16 k)
 {
-    *setCal.GetK(channel, signal, range, param) = k;
+    inModeCalibration = true;
+
+    range[channel] = _range;
+
+    *setCal.GetK(channel, signal, range[channel], param) = k;
 
     Chan::E ch = static_cast<Chan::E>(channel);
 
@@ -67,7 +75,7 @@ void Calibrator::SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int
 
     if(param == 0)                          /// Это калибровка амплитуды
     {
-        SetAmplitude(ch, range);
+        SetAmplitude(ch);
     }
     else                                    /// А это калибровка смещения
     {
@@ -79,11 +87,18 @@ void Calibrator::SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int
     }
 
     SetOffset(ch, param);
+
+    inModeCalibration = false;
 }
 
 
 uint8 Calibrator::CalculateRange(Chan::E ch)
 {
+    if(inModeCalibration)
+    {
+        return range[ch];
+    }
+
     float amplitude = SettingsGenerator::Amplitude(ch);
 
     if(amplitude > 3.16F)
@@ -111,9 +126,9 @@ uint8 Calibrator::CalculateRange(Chan::E ch)
 
 float Calibrator::GetAmplitudeK(Chan::E ch)
 {
-    uint8 range = CalculateRange(ch);
+    uint8 r = CalculateRange(ch);
 
-    int16 k = *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, range, 0U);
+    int16 k = *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 0U);
 
     return 1.0F + k / 1000.0F;
 }
@@ -121,13 +136,13 @@ float Calibrator::GetAmplitudeK(Chan::E ch)
 
 float Calibrator::GetOffsetK_Zero(Chan::E ch)
 {
-    uint8 range = CalculateRange(ch);
+    uint8 r = CalculateRange(ch);
 
     bool isSine = SettingsGenerator::FormIsSine(ch);
 
     if(isSine)
     {
-        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, range,  2U);
+        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r,  2U);
     }
     else
     {
