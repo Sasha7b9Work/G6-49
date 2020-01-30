@@ -7,7 +7,7 @@
 
 bool SettingsGenerator::waveIsSine[Chan::Count] = { true, true };
 FloatValue SettingsGenerator::amplitude[Chan::Count] = { FloatValue(10, 0), FloatValue(10, 0) };
-float SettingsGenerator::frequency[Chan::Count] = { 1e3F, 1e3F };
+FloatValue SettingsGenerator::frequency[Chan::Count] = { FloatValue(1000, 0), FloatValue(1000, 0) };
 FloatValue SettingsGenerator::offset[Chan::Count] = { FloatValue(0, 0), FloatValue(0, 0) };
 Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 bool Amplifier::isBlocked = false;
@@ -127,7 +127,7 @@ void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 
 void DGenerator::SetFrequency(Chan::E ch, FloatValue freq)
 {
-    SettingsGenerator::frequency[ch] = freq.ToFloat();
+    SettingsGenerator::frequency[ch] = freq;
 
     if (SettingsGenerator::waveIsSine[ch])
     {

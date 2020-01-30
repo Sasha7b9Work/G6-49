@@ -89,7 +89,7 @@ public:
     /// ¬озвращает установленное на канале смещение
     static float Offset(Chan::E ch)    { return offset[ch].ToFloat();     }
     /// ¬озвращает установленную частоту на канале
-    static float Frequency(Chan::E ch) { return frequency[ch];  }
+    static float Frequency(Chan::E ch) { return frequency[ch].ToFloat();  }
     /// ¬озвращает true, если на канале ch установлена синусоидальна€ форма сигнала
     static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
 private:
@@ -100,5 +100,5 @@ private:
     /// “екуща€ установленное смещение на кнаале
     static FloatValue offset[Chan::Count];
     /// “екуща€ частота на канале
-    static float frequency[Chan::Count];
+    static FloatValue frequency[Chan::Count];
 };
