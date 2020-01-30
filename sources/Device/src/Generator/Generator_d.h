@@ -85,30 +85,18 @@ struct SettingsGenerator
     friend class DGenerator;
 public:
     /// Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
-    static float Amplitude(Chan::E ch)
-    {
-        return amplitude[ch];
-    }
+    static float Amplitude(Chan::E ch) { return amplitude[ch].ToFloat();  }
     /// Возвращает установленное на канале смещение
-    static float Offset(Chan::E ch)
-    {
-        return offset[ch];
-    }
+    static float Offset(Chan::E ch)    { return offset[ch];     }
     /// Возвращает установленную частоту на канале
-    static float Frequency(Chan::E ch)
-    {
-        return frequency[ch];
-    }
+    static float Frequency(Chan::E ch) { return frequency[ch];  }
     /// Возвращает true, если на канале ch установлена синусоидальная форма сигнала
-    static bool FormIsSine(Chan::E ch)
-    {
-        return waveIsSine[ch];
-    }
+    static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
 private:
     /// true, если на канале установлена форма сигнала "синусоида"
     static bool waveIsSine[Chan::Count];
     /// Текущая установленная амплитуда на канале
-    static float amplitude[Chan::Count];
+    static FloatValue amplitude[Chan::Count];
     /// Текущая установленное смещение на кнаале
     static float offset[Chan::Count];
     /// Текущая частота на канале
