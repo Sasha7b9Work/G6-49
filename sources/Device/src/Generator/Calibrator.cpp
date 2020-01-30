@@ -95,7 +95,7 @@ uint8 Calibrator::CalculateRange(Chan::E ch)
 
     float amplitude = SettingsGenerator::Amplitude(ch);
 
-    if(amplitude > 3.16F)
+    if(amplitude > Attenuation(Attenuation::_10Db).Units())
     {
         return 4;
     }
@@ -103,7 +103,7 @@ uint8 Calibrator::CalculateRange(Chan::E ch)
     {
         return 3;
     }
-    else if(amplitude > 0.316F)
+    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10)
     {
         return 2;
     }

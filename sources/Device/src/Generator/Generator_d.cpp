@@ -276,39 +276,28 @@ void Amplifier::Tune(Chan::E ch)
 
     float amplitude = SettingsGenerator::Amplitude(ch);
 
-    if(amplitude > 3.16F)              // 1 диапазон
+    if(amplitude > Attenuation(Attenuation::_10Db).Units())                 // 1 диапазон
     {
         SetAttenuation(ch, Attenuation::_0Db);
     }
-    else if(amplitude > 1.0F)          // 2 диапазон
+    else if(amplitude > 1.0F)                                               // 2 диапазон
     {
         SetAttenuation(ch, Attenuation::_10Db);
     }
-    else if(amplitude > 0.316F)        // 3,4 диапазоны
+    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10)       // 4 диапазоны
     {
-        if(SettingsGenerator::Offset(ch) > 2.5F)
-        {
-            SetAttenuation(ch, Attenuation::_20Db);
-        }
-        else
-        {
-            SetAttenuation(ch, Attenuation::_0Db);
-        }
+        SetAttenuation(ch, Attenuation::_0Db);
     }
-    else if(amplitude > 0.100F)        // 5 диапазон
+    else if(amplitude > 0.100F)                                             // 5 диапазон
     {
         SetAttenuation(ch, Attenuation::_10Db);
     }
-    else if(amplitude > 0.0316F)        // 6 диапазон
+    else                                                                    // 6 диапазон
     {
         SetAttenuation(ch, Attenuation::_20Db);
     }
-    else                                // 7 диапазон
-    {
-        SetAttenuation(ch, Attenuation::_30Db);
-    }
 
-    Enable(ch, attenuation[ch] < Attenuation::_20Db);
+    Enable(ch, amplitude > Attenuation(Attenuation::_10Db).Units());
 }
 
 
@@ -323,7 +312,21 @@ void Amplifier::Enable(Chan::E ch, bool enable)
 
 float Amplifier::GetAttenuation(Chan::E ch)
 {
-    static const float att[Attenuation::Count] =
+    static const Attenuation att[Attenuation::Count] =
+    {
+        Attenuation(Attenuation::_0Db),
+        Attenuation(Attenuation::_10Db),
+        Attenuation(Attenuation::_20Db),
+        Attenuation(Attenuation::_30Db)
+    };
+
+    return att[attenuation[ch]].Units();
+}
+
+
+float Attenuation::Units() const
+{
+    static const float att[Count] =
     {
         std::powf(10, 0.05F * 0),
         std::powf(10, 0.05F * 10),
@@ -331,5 +334,5 @@ float Amplifier::GetAttenuation(Chan::E ch)
         std::powf(10, 0.05F * 30)
     };
 
-    return att[attenuation[ch]];
+    return att[value];
 }

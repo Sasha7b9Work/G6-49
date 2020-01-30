@@ -51,7 +51,10 @@ struct Attenuation
         _20Db,
         _30Db,
         Count
-    };
+    } value;
+
+    explicit Attenuation(Attenuation::E v) : value(v) { }
+    float Units() const;
 };
 
 
