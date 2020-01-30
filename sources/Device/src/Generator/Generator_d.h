@@ -87,7 +87,7 @@ public:
     /// Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
     static float Amplitude(Chan::E ch) { return amplitude[ch].ToFloat();  }
     /// Возвращает установленное на канале смещение
-    static float Offset(Chan::E ch)    { return offset[ch];     }
+    static float Offset(Chan::E ch)    { return offset[ch].ToFloat();     }
     /// Возвращает установленную частоту на канале
     static float Frequency(Chan::E ch) { return frequency[ch];  }
     /// Возвращает true, если на канале ch установлена синусоидальная форма сигнала
@@ -98,7 +98,7 @@ private:
     /// Текущая установленная амплитуда на канале
     static FloatValue amplitude[Chan::Count];
     /// Текущая установленное смещение на кнаале
-    static float offset[Chan::Count];
+    static FloatValue offset[Chan::Count];
     /// Текущая частота на канале
     static float frequency[Chan::Count];
 };
