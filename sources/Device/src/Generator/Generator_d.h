@@ -55,6 +55,7 @@ struct Attenuation
 
     explicit Attenuation(Attenuation::E v) : value(v) { }
     float Units() const;
+    pString Name() const;
 };
 
 
@@ -64,8 +65,8 @@ public:
     static void Init();
     /// Настроить усилитель в соответствии с текущими настройками
     static void Tune(Chan::E ch);
-    /// Возвращает установленный коэффициент ослабления в разах
-    static float GetAttenuation(Chan::E ch);
+    /// Возвращает коэффициент усиления в разах всего тракта, включая аттенюатор и усилитель. Усилитель даёт усиление 10 раз, за каждые 10 Дб нужно разделить на 3.16
+    static float GetAmplification(Chan::E ch);
     /// Заблокировать переключение
     static void Block()   { isBlocked = true; };
     /// Разблокировать переключение
@@ -80,6 +81,8 @@ private:
     static Attenuation::E attenuation[Chan::Count];
     /// Установленное в true значение означает, что усилитель заблокирован - никакие действия в Tune() выолняться не будут
     static bool isBlocked;
+    /// true, если усилитель соотвествующего канала включён
+    static bool isEnabled[Chan::Count];
 };
 
 

@@ -118,12 +118,12 @@ void AD9952::WriteASF(Chan::E ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
 
-    float att = Amplifier::GetAttenuation(ch);
+    float att = 1.0F / Amplifier::GetAmplification(ch);
 
     float amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
-    uint value = static_cast<uint>((amplitude / 10.0F) * 0x3FFF);
-    
+    uint value = static_cast<uint>(amplitude * 0x3FFF);
+
     Bit::Set(value, 14);  // \ Ёто биты множител€ скорости
     Bit::Set(value, 15);  // / нарастани€ фронта 
     WriteToHardware(ch, Register::ASF, value);

@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include <cmath>
@@ -11,6 +10,7 @@ FloatValue SettingsGenerator::frequency[Chan::Count] = { FloatValue(1000, 0), Fl
 FloatValue SettingsGenerator::offset[Chan::Count] = { FloatValue(0, 0), FloatValue(0, 0) };
 Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 bool Amplifier::isBlocked = false;
+bool Amplifier::isEnabled[Chan::Count] = { false, false };
 
 
 struct Filtr
@@ -227,8 +227,8 @@ void Amplifier::SetAttenuation(Chan::E ch, Attenuation::E att)
     static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
     static const HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
 
-    static const uint16 pin0[Chan::Count] = { HPin::_15, HPin::_5 };
-    static const uint16 pin1[Chan::Count] = { HPin::_5,  HPin::_13 };
+    static const uint16 pin0[Chan::Count]    = { HPin::_15, HPin::_5 };
+    static const uint16 pin1[Chan::Count]    = { HPin::_10,  HPin::_13 };
 
     static const HState::E state0[Attenuation::Count] =
     {
@@ -276,7 +276,7 @@ void Amplifier::Tune(Chan::E ch)
 
     float amplitude = SettingsGenerator::Amplitude(ch);
 
-    if(amplitude > Attenuation(Attenuation::_10Db).Units())                 // 1 диапазон
+    if(amplitude > Attenuation(Attenuation::_10Db).Units())                 // 1 диапазон   3.16
     {
         SetAttenuation(ch, Attenuation::_0Db);
     }
@@ -284,7 +284,7 @@ void Amplifier::Tune(Chan::E ch)
     {
         SetAttenuation(ch, Attenuation::_10Db);
     }
-    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10)       // 4 диапазоны
+    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10)       // 4 диапазоны 0.316
     {
         SetAttenuation(ch, Attenuation::_0Db);
     }
@@ -297,7 +297,7 @@ void Amplifier::Tune(Chan::E ch)
         SetAttenuation(ch, Attenuation::_20Db);
     }
 
-    Enable(ch, amplitude > Attenuation(Attenuation::_10Db).Units());
+    Enable(ch, amplitude > 1.0F);
 }
 
 
@@ -307,10 +307,12 @@ void Amplifier::Enable(Chan::E ch, bool enable)
     static const uint16   pin[Chan::Count] =  { HPin::_0,  HPin::_14 };
 
     HAL_PIO::Write(gpio[ch], pin[ch], enable);
+
+    isEnabled[ch] = enable;
 }
 
 
-float Amplifier::GetAttenuation(Chan::E ch)
+float Amplifier::GetAmplification(Chan::E ch)
 {
     static const Attenuation att[Attenuation::Count] =
     {
@@ -320,7 +322,7 @@ float Amplifier::GetAttenuation(Chan::E ch)
         Attenuation(Attenuation::_30Db)
     };
 
-    return att[attenuation[ch]].Units();
+    return (isEnabled[ch] ? 10.0F : 1.0F) / att[attenuation[ch]].Units();
 }
 
 
@@ -335,4 +337,18 @@ float Attenuation::Units() const
     };
 
     return att[value];
+}
+
+
+pString Attenuation::Name() const
+{
+    static const pString name[Count] =
+    {
+        "0",
+        "10",
+        "20",
+        "30"
+    };
+
+    return name[value];
 }
