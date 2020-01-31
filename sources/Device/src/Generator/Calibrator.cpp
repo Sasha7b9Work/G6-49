@@ -132,11 +132,9 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    bool isSine = SettingsGenerator::FormIsSine(ch);
-
-    if(isSine)
+    if(SettingsGenerator::FormIsSine(ch))
     {
-        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r,  2U);
+        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r, 2U);
     }
     else
     {
@@ -145,15 +143,33 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch)
 }
 
 
-float Calibrator::GetOffsetK_Negative(Chan::E)
+float Calibrator::GetOffsetK_Negative(Chan::E ch)
 {
-    return 4095.0F;
+    uint8 r = CalculateRange(ch);
+
+    if(SettingsGenerator::FormIsSine(ch))
+    {
+        return 4095.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r, 3U);
+    }
+    else
+    {
+        return 4095.0F;
+    }
 }
 
 
-float Calibrator::GetOffsetK_Positive(Chan::E)
+float Calibrator::GetOffsetK_Positive(Chan::E ch)
 {
-    return 0.0F;
+    uint8 r = CalculateRange(ch);
+
+    if(SettingsGenerator::FormIsSine(ch))
+    {
+        return *setCal.GetK(static_cast<uint8>(ch), 0U, r, 1U);
+    }
+    else
+    {
+        return 0.0F;
+    }
 }
 
 

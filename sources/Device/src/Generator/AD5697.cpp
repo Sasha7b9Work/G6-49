@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "common/Command.h"
 #include "Generator/AD5697.h"
 #include "Generator/Calibrator.h"
@@ -56,6 +57,8 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
 void AD5697::SetOffset(Chan::E ch)
 {
     float code = CalculateCodeOffset(ch);
+
+    LOG_WRITE("%f", code);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
