@@ -127,11 +127,11 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
 
             if(parameter == 1)
             {
-                min = 0;
+                max = 0;
             }
             else if(parameter == 3)
             {
-                max = 0;
+                min = 0;
             }
 
             if(key.value == Key::RegLeft)

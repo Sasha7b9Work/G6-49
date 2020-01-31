@@ -41,9 +41,9 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
     static const float offset[4] =
     {
         0.0F,
-        5.0F,
+        SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0F : 2.5F,
         0.0F,
-        -5.0F
+        SettingsGenerator::Amplitude(ch) > 1.0F ? -5.0F : -2.5F
     };
 
     if(param == 0)                   // Для калибровки амплитуды просто устанавливаем смещение
@@ -149,7 +149,7 @@ float Calibrator::GetOffsetK_Negative(Chan::E ch)
 
     if(SettingsGenerator::FormIsSine(ch))
     {
-        return 4095.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r, 3U);
+        return 4095.0F - *setCal.GetK(static_cast<uint8>(ch), 0U, r, 3U);
     }
     else
     {
@@ -164,7 +164,7 @@ float Calibrator::GetOffsetK_Positive(Chan::E ch)
 
     if(SettingsGenerator::FormIsSine(ch))
     {
-        return *setCal.GetK(static_cast<uint8>(ch), 0U, r, 1U);
+        return -*setCal.GetK(static_cast<uint8>(ch), 0U, r, 1U);
     }
     else
     {

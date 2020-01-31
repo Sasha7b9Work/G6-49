@@ -37,11 +37,14 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
     {
         float pos = Calibrator::GetOffsetK_Positive(ch);    // 0
 
-        LOG_WRITE("%f", pos);
-
         float scale = (zero - pos) / max;
 
-        result = 4095.0F - (pos + scale * (max - offset));
+        float before = pos + scale * (max - offset);
+
+        result = 4095.0F - before;
+
+        LOG_WRITE("pos = %d, scale = %.1f, offset = %.1f", (int)pos, scale, SettingsGenerator::Offset(ch));
+        LOG_WRITE("before = %d, result = %f", (int)before, result);
     }
     else if(offset < 0.0F)
     {
@@ -49,7 +52,12 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
 
         float scale = (neg - zero) / max;
 
-        result = 4095.0F - (neg - scale * (max + offset));
+        float before = neg - scale * (max + offset);
+
+        result = 4095.0F - before;
+
+        LOG_WRITE("neg = %d, scale = %.1f, offset = %.1f", (int)neg, scale, SettingsGenerator::Offset(ch));
+        LOG_WRITE("before = %d, result = %f", (int)before, result);
     }
     else
     {

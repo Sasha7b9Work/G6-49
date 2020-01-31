@@ -46,7 +46,7 @@ void Console::Draw()
 
     Text::SetUpperCase(false);
 
-    int y = 1;
+    int y = 50;
     for (int i = 0; i < numStrings; i++)
     {
         int length = Font::GetLengthText(&buffer[i][0]);
