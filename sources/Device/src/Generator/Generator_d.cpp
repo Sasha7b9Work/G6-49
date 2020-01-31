@@ -292,9 +292,13 @@ void Amplifier::Tune(Chan::E ch)
     {
         SetAttenuation(ch, Attenuation::_10Db);
     }
-    else                                                                    // 6 диапазон
+    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 100)                                                                   // 6 диапазон
     {
         SetAttenuation(ch, Attenuation::_20Db);
+    }
+    else
+    {
+        SetAttenuation(ch, Attenuation::_30Db);
     }
 
     Enable(ch, amplitude > 1.0F);

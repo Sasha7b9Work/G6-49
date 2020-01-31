@@ -18,18 +18,18 @@ static uint8 range = 0;
 
 static int16 *calK = nullptr;
 
-
-static void LoadK()
-{
-    calK = setCal.GetK(channel, signal, range, parameter);
-}
-
 static uint8 prevChannel = 255;
 static uint8 prevSignal = 255;
 static uint8 prevRange = 255;
 static uint8 prevParameter = 255;
 static int16 *prevPointerK = nullptr;
 static int16 prevK = 0;
+
+
+static void LoadK()
+{
+    calK = setCal.GetK(channel, signal, range, parameter);
+}
 
 
 static void SendMessage()
@@ -122,14 +122,26 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
     {
         if(key.action == Key::Action::Down)
         {
+            int16 min = -1024;
+            int16 max = 1024;
+
+            if(parameter == 1)
+            {
+                min = 0;
+            }
+            else if(parameter == 3)
+            {
+                max = 0;
+            }
+
             if(key.value == Key::RegLeft)
             {
-                setCal.ReduceK();
+                setCal.ReduceK(min);
                 SendMessage();
             }
             else
             {
-                setCal.IncreaseK();
+                setCal.IncreaseK(max);
                 SendMessage();
             }
         }

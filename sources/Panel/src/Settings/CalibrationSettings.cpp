@@ -73,18 +73,18 @@ int16 *CalibrationSettings::GetK(uint8 channel, uint8 signal, uint8 range, uint8
 }
 
 
-void CalibrationSettings::ReduceK()
+void CalibrationSettings::ReduceK(int16 min)
 {
-    if(*currentCAL > -1024)
+    if(*currentCAL > min)
     {
         *currentCAL = *currentCAL - 1;
     }
 }
 
 
-void CalibrationSettings::IncreaseK()
+void CalibrationSettings::IncreaseK(int16 max)
 {
-    if(*currentCAL < 1024)
+    if(*currentCAL < max)
     {
         *currentCAL = *currentCAL + 1;
     }
