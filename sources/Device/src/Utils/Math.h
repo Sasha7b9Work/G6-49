@@ -28,9 +28,7 @@ struct Math
     /// Вычисление 10**pow.
     static uint Pow10(int pow);
 
-    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; }
-
-    template<class T> static void Limitation(T *value, T min, T max)
+    template<class T> static T Limitation(T *value, T min, T max)
     {
         if(*value < min)
         {
@@ -40,9 +38,9 @@ struct Math
         {
             *value = max;
         }
-        else
-        {
-            // здесь ничего
-        }
+
+        return *value;
     }
+
+    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; }
 };

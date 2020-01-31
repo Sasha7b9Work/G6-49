@@ -71,6 +71,8 @@ public:
     static void Block()   { isBlocked = true; };
     /// Разблокировать переключение
     static void Unblock() { isBlocked = false; };
+    /// Возвращает true, если на данном канале включён усилитель
+    static bool IsEnabled(Chan::E ch) { return isEnabled[ch]; }
 
 private:
     /// Включить/выключить аппаратный усилитель усилитель

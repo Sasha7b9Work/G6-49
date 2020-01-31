@@ -28,37 +28,41 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
     float zero = Calibrator::GetOffsetK_Zero(ch);           // 2048
 
     float offset = SettingsGenerator::Offset(ch);
+
+    float max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0F : 2.5F;
+
+    float result = zero;
     
     if (offset > 0.0F)
     {
         float pos = Calibrator::GetOffsetK_Positive(ch);    // 0
 
-        float scale = (zero - pos) / 5.0F;
+        LOG_WRITE("%f", pos);
 
-        return pos + scale * (5.0F - offset);
+        float scale = (zero - pos) / max;
+
+        result = 4095.0F - (pos + scale * (max - offset));
     }
     else if(offset < 0.0F)
     {
         float neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
 
-        float scale = (neg - zero) / 5.0F;
+        float scale = (neg - zero) / max;
 
-        return neg - scale * (5.0F + offset);
+        result = 4095.0F - (neg - scale * (max + offset));
     }
     else
     {
         // здесь ничего
     }
 
-    return zero;
+    return Math::Limitation<float>(&result, 0.0F, 4095.0F);
 }
 
 
 void AD5697::SetOffset(Chan::E ch)
 {
     float code = CalculateCodeOffset(ch);
-
-    LOG_WRITE("%f", code);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
