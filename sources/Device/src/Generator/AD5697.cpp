@@ -43,8 +43,8 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
 
         result = 4095.0F - before;
 
-        LOG_WRITE("pos = %d, scale = %.1f, offset = %.1f", (int)pos, scale, SettingsGenerator::Offset(ch));
-        LOG_WRITE("before = %d, result = %f", (int)before, result);
+//        LOG_WRITE("pos = %d, scale = %.1f, offset = %.1f", (int)pos, scale, SettingsGenerator::Offset(ch));
+//        LOG_WRITE("before = %d, result = %f", (int)before, result);
     }
     else if(offset < 0.0F)
     {
@@ -56,8 +56,8 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
 
         result = 4095.0F - before;
 
-        LOG_WRITE("neg = %d, scale = %.1f, offset = %.1f", (int)neg, scale, SettingsGenerator::Offset(ch));
-        LOG_WRITE("before = %d, result = %f", (int)before, result);
+//        LOG_WRITE("neg = %d, scale = %.1f, offset = %.1f", (int)neg, scale, SettingsGenerator::Offset(ch));
+//        LOG_WRITE("before = %d, result = %f", (int)before, result);
     }
     else
     {

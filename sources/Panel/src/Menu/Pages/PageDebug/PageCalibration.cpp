@@ -26,6 +26,10 @@ static int16 *prevPointerK = nullptr;
 static int16 prevK = 0;
 
 
+/// Настроить органы управления в соотвествии с текущими установами
+static void TuneControls();
+
+
 static void LoadK()
 {
     calK = setCal.GetK(channel, signal, range, parameter);
@@ -52,6 +56,7 @@ static void SendMessage()
 /// Вызывается при изменении калибруемого параметра
 static void OnChange_Parameters(bool)
 {
+    TuneControls();
     LoadK();
     SendMessage();
 }
@@ -59,6 +64,7 @@ static void OnChange_Parameters(bool)
 /// Вызывается при изменении источника сигнал
 static void OnChange_Source(bool)
 {
+    TuneControls();
     LoadK();
     OnChange_Parameters(true);
     SendMessage();
@@ -93,13 +99,26 @@ DEF_CHOICE_5(cRange,
     range, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
-DEF_CHOICE_4(cParameter,
+/// Для смещения +/- 5В
+DEF_CHOICE_4(cParameterFullVoltage,
     "Параметр",
     "",
     "Амплитуда", "",
     "+5В", "",
     "0В", "",
     "-5В", "",
+    parameter, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
+)
+
+
+/// Для смещения +/- 2.5В
+DEF_CHOICE_4(cParameterHalfVoltage,
+    "Параметр",
+    "",
+    "Амплитуда", "",
+    "+2.5В", "",
+    "0В", "",
+    "-2.5В", "",
     parameter, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
@@ -157,6 +176,7 @@ static void OnEnter_Calibration(bool enter)
 {
     if(enter)
     {
+        TuneControls();
         LoadK();
         SendMessage();
     }
@@ -174,14 +194,30 @@ static void OnEnter_Calibration(bool enter)
 }
 
 
-DEF_PAGE_4( pCalibration,
+const PageBase *page = const_cast<const PageBase *>(reinterpret_cast<PageBase *>(PageDebug::self));
+
+
+DEF_PAGE_4_VAR( pCalibration,
     "КАЛИБРОВКА",
     "",
-    &cChannel,
-    &cSignal,
-    &cRange,
-    &cParameter,
-    Page::Calibration, PageDebug::self, Item::FuncActive, OnEnter_Calibration, FuncOnKeyPage, DrawPage
+    cChannel,
+    cSignal,
+    cRange,
+    cParameterFullVoltage,
+    Page::Calibration, page, Item::FuncActive, OnEnter_Calibration, FuncOnKeyPage, DrawPage
 )
 
 Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pCalibration));
+
+
+static void TuneControls()
+{
+    if(range < 2)
+    {
+        pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterHalfVoltage));
+    }
+    else
+    {
+        pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterFullVoltage));
+    }
+}
