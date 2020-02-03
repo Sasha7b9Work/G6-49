@@ -207,7 +207,7 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
         return;
     }
 
-    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), Key(key).Name(), pos, size);
+    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), Key::Name(key), pos, size);
 
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnKeyDown));
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnKeyUp));

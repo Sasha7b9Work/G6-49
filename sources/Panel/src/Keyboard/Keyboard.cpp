@@ -219,7 +219,8 @@ static void DetectRegulator()
 
 void Keyboard::AppendEvent(Key::E key, Key::Action action)
 {
-    commands[pointer++] = Key(key, action);
+    commands[pointer].value = key;
+    commands[pointer].action = action;
 
     Beeper::Beep(action);
 }

@@ -41,18 +41,6 @@ struct Key
         NumActions
     } action;
 
-    Key(E v = None, Action a = Down) : value(v), action(a) {};
-    Key &operator=(Key rval)
-    {
-        value = rval.value;
-        action = rval.action;
-        return *this;
-    }
-    Key(const Key &c)
-    {
-        value = c.value;
-        action = c.action;
-    }
     operator uint8() const            { return static_cast<uint8>(value); };
     bool Is(Key::E c) const           { return (c == value); };
     bool Is(Key::E c, Action a) const { return value == c && action == a; };
@@ -61,12 +49,12 @@ struct Key
     bool IsDown() const { return action == Down; }
     bool IsLong() const { return action == Long; }
     char ToChar() const;
-    pString Name() const;
+    static pString Name(Key::E key);
     bool IsFunctional() const;
     /// Возвращает true, если поворот ручки
     bool IsRotate() const;
     /// Возвращает true, если кнопка управления курсором (Влево-Вправо)
     bool IsCursors() const { return value == Left || value == Right; };
-
+    /// Возвращает true в случае отпускания кнопки или "длинного" нажатия
     bool IsRelease() const;
 };

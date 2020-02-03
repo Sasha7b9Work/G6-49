@@ -45,7 +45,7 @@ bool Key::IsRelease() const
 }
 
 
-pString Key::Name() const
+pString Key::Name(Key::E key)
 {
     static pCHAR names[] =
     {
@@ -76,5 +76,5 @@ pString Key::Name() const
         "RegButton"
     };
 
-    return names[value];
+    return names[key];
 }
