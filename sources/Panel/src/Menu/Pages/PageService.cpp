@@ -18,7 +18,6 @@
 extern const PageBase pUSB;
 
 
-
 extern const PageBase pService;
 Page *PageService::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pService));
 
@@ -38,55 +37,13 @@ DEF_BUTTON( bReset,                                                             
 )
 
 
-DEF_CHOICE_2( cSizeByte,                                                                                                                                         //--- USB - РАЗМЕР БАЙТА ---
-    "РАЗМЕР БАЙТА",
-    ""
-    ,
-    "7 бит", "7 бит в байте",
-    "8 бит", "8 бит в байте",
-    FLAG, BIT_SIZE_BYTE, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
-)
-
-
-DEF_CHOICE_2( cStopBit,                                                                                                                                              //--- USB - СТОП-БИТ ---
-    "СТОП-БИТ",
-    ""
-    ,
-    "1", "1 стоп-бит в конце байта",
-    "2", "2 стоп-бита в конце байта",
-    FLAG, BIT_STOP_BIT, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
-)
-
-
-DEF_CHOICE_2( cParity,                                                                                                                                               //--- USB - ЧЁТНОСТЬ ---
-    "ЧЁТНОСТЬ",
-    ""
-    ,
-    "ПРОВЕРЯТЬ",    "Проверка чётности включена",
-    "НЕ ПРОВЕРЯТЬ", "Проверка чётности выключена",
-    FLAG, BIT_PARITY, pUSB, Item::FuncActive, FuncChangedChoice, FuncDraw
-)
-
-
-DEF_PAGE_3( pUSB,                                                                                                                                                               //--- USB ---
-    "USB", 
-    "Настройки параметров связи по интерфейсу USB",
-    &cSizeByte,              ///< USB - РАЗМЕР БАЙТА
-    &cStopBit,               ///< USB - СТОП-БИТ
-    &cParity,                ///< USB - ЧЁТНОСТЬ
-    Page::USB, &pService, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
-)
-
-
-
 extern const PageBase pDebug;
 
 
-DEF_PAGE_3( pService,                                                                                                                                                        //--- СЕРВИС --- //-V641
+DEF_PAGE_2( pService,                                                                                                                                                        //--- СЕРВИС --- //-V641
     "СЕРВИС",    //-V641
     "Сервисные функции",
     &bReset,
-    &pUSB,
     &pDebug,
     Page::Service, Menu::mainPage, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
