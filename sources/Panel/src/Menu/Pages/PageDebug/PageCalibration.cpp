@@ -5,6 +5,7 @@
 #include "Menu/Pages/PageDebug/PageDebug.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 
 
@@ -160,6 +161,11 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
             }
         }
 
+        return true;
+    }
+    else if(key.value == Key::RegButton && key.action == Key::Action::Down)
+    {
+        Math::CircleIncrease<uint8>(&range, 0, 4);
         return true;
     }
 
