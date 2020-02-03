@@ -44,6 +44,8 @@ struct Menu
     static Item *pressedItem;
 
 private:
+    /// Открывает страницу отладки, если обнаружена соотвествующая клавиватурная последовательнсость
+    static bool OpenDebugPage(const Key &key);
     /// Обработать управляющее воздействие control
     static void ProcessKey(const Key &key);
     /// Обрабатывает состояние выходов. Возвращает true, если состояние вывода изменилось

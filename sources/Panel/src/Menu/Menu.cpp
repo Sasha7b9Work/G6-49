@@ -46,6 +46,11 @@ void Menu::Update()
     {
         Key key = Keyboard::GetNextControl();
 
+        if(OpenDebugPage(key))                              // Открываем страницу отладки, если распознали соотвествующую клавиатурную последовательность
+        {
+            continue;
+        }
+
         ProcessKey(key);
 
         timePress = TIME_MS;
@@ -53,7 +58,7 @@ void Menu::Update()
 
     const uint TIME_WAIT = 5000;
 
-    if(timePress && (TIME_MS  - timePress) > TIME_WAIT)      // Сохраняем настройки, если прошло более TIME_WAIT мс
+    if(timePress && (TIME_MS  - timePress) > TIME_WAIT)     // Сохраняем настройки, если прошло более TIME_WAIT мс
     {
         //Settings::Save();
         timePress = 0;
@@ -193,4 +198,32 @@ Item* Menu::GetCurrentItem()
 void Menu::ResetOpenedItem()
 {
     openedItem = nullptr;
+}
+
+
+bool Menu::OpenDebugPage(const Key &key)
+{
+    if(CURRENT_PAGE != PageService::self)
+    {
+        return false;
+    }
+
+    static const Key keys[] =
+    {
+        { Key::_1, Key::Action::Down },
+        { Key::_1, Key::Action::Up },
+        { Key::_2, Key::Action::Down },
+        { Key::_2, Key::Action::Up },
+        { Key::_3, Key::Action::Down },
+        { Key::_3, Key::Action::Up },
+        { Key::_4, Key::Action::Down },
+        { Key::_4, Key::Action::Up },
+        { Key::_8, Key::Action::Down },
+        { Key::_8, Key::Action::Up },
+        { Key::_5, Key::Action::Down },
+        { Key::_5, Key::Action::Up },
+        { Key::Count}
+    };
+
+    return Keyboard::Decoder::Decode(keys, key);
 }

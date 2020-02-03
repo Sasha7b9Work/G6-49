@@ -49,7 +49,7 @@ struct Key
         bool IsRelease() const;
     } action;
 
-    explicit Key(E v = None, Action::E a = Action::Down) : value(v), action(a) {};
+    Key(E v = None, Action::E a = Action::Down) : value(v), action(a) {};
     Key &operator=(Key rval)
     {
         value = rval.value;

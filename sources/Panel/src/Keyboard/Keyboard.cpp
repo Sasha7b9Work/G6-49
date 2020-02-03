@@ -318,3 +318,25 @@ const char *PanelControlName(const Key &control)
 void Keyboard::Draw()
 {
 } 
+
+
+bool Keyboard::Decoder::Decode(const Key keys[20], const Key &key)
+{
+    static int step = 0;        // Номер следующего проверяемого элемента массива
+
+    if(key == keys[step])
+    {
+        step++;
+        if(keys[step].value == Key::Count)
+        {
+            step = 0;
+            return true;
+        }
+
+        return false;
+    }
+
+    step = 0;
+
+    return false;
+}
