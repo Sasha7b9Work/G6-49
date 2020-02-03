@@ -95,7 +95,7 @@ void Menu::ProcessKey(const Key &key)
 
 bool Menu::ProcessOutputs(const Key &key)
 {
-    if (key.action.IsRelease())
+    if (key.IsRelease())
     {
         if (key.Is(Key::On1))
         {
@@ -211,18 +211,18 @@ bool Menu::OpenDebugPage(const Key &key)
 
     static const Key keys[] =
     {
-        { Key::_1, Key::Action::Down },
-        { Key::_1, Key::Action::Up },
-        { Key::_2, Key::Action::Down },
-        { Key::_2, Key::Action::Up },
-        { Key::_3, Key::Action::Down },
-        { Key::_3, Key::Action::Up },
-        { Key::_4, Key::Action::Down },
-        { Key::_4, Key::Action::Up },
-        { Key::_8, Key::Action::Down },
-        { Key::_8, Key::Action::Up },
-        { Key::_5, Key::Action::Down },
-        { Key::_5, Key::Action::Up },
+        { Key::_1, Key::Down },
+        { Key::_1, Key::Up },
+        { Key::_2, Key::Down },
+        { Key::_2, Key::Up },
+        { Key::_3, Key::Down },
+        { Key::_3, Key::Up },
+        { Key::_4, Key::Down },
+        { Key::_4, Key::Up },
+        { Key::_8, Key::Down },
+        { Key::_8, Key::Up },
+        { Key::_5, Key::Down },
+        { Key::_5, Key::Up },
         { Key::Count}
     };
 

@@ -19,7 +19,7 @@ bool        Hint::needCalculate = false;
 
 bool Hint::ProcessControl(const Key &key)
 {
-    if (key.Is(Key::Esc, Key::Action::Long))
+    if (key.Is(Key::Esc) && key.IsLong())
     {
         show = !show;
         item = 0;

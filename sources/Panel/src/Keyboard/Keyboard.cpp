@@ -102,13 +102,13 @@ void Keyboard::Update()
                     if(delta > 500)                                             // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        AppendEvent(controls[rl][sl], Key::Action::Long);   // это будет длинное нажатие
+                        AppendEvent(controls[rl][sl], Key::Long);   // это будет длинное нажатие
                     }
                     else if (delta > 100 &&                                     // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                                // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
-                        AppendEvent(controls[rl][sl], Key::Action::Up);     // И сохраняем отпускание кнопки в буфере команд
+                        AppendEvent(controls[rl][sl], Key::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
                     else
                     {
@@ -118,7 +118,7 @@ void Keyboard::Update()
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
                 {
                     timePress[rl][sl] = time;                                       // то сохраняем время её нажатия
-                    AppendEvent(controls[rl][sl], Key::Action::Down);
+                    AppendEvent(controls[rl][sl], Key::Down);
                 }
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
@@ -160,7 +160,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
         {
-            Keyboard::AppendEvent(Key::RegButton, Key::Action::Long);                                     // посылаем длинное нажатие
+            Keyboard::AppendEvent(Key::RegButton, Key::Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -172,7 +172,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                Keyboard::AppendEvent(Key::RegButton, Key::Action::Down);
+                Keyboard::AppendEvent(Key::RegButton, Key::Down);
             }
         }
         else                                                                // Ексли копка была нажата ранее
@@ -181,7 +181,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    Keyboard::AppendEvent(Key::RegButton, Key::Action::Up);
+                    Keyboard::AppendEvent(Key::RegButton, Key::Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -202,12 +202,12 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        Keyboard::AppendEvent(Key::RegLeft, Key::Action::Down);
+        Keyboard::AppendEvent(Key::RegLeft, Key::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        Keyboard::AppendEvent(Key::RegRight, Key::Action::Down);
+        Keyboard::AppendEvent(Key::RegRight, Key::Down);
         prevStatesIsOne = false;
     }
     else
@@ -217,7 +217,7 @@ static void DetectRegulator()
 }
 
 
-void Keyboard::AppendEvent(Key::E key, Key::Action::E action)
+void Keyboard::AppendEvent(Key::E key, Key::Action action)
 {
     commands[pointer++] = Key(key, action);
 

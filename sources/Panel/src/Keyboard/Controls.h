@@ -33,23 +33,15 @@ struct Key
         Count
     } value;
 
-    struct Action
+    enum Action
     {
-        enum E
-        {
-            Down,
-            Long,
-            Up,
-            Count
-        } value;
-        Action(E v = Down) : value(v) {};
-        operator uint8() const { return static_cast<uint8>(value); };
-        bool Is(Action a) const { return a.value == value; };
-        /// Возвращает true, если Up или Long
-        bool IsRelease() const;
+        Down,
+        Long,
+        Up,
+        NumActions
     } action;
 
-    Key(E v = None, Action::E a = Action::Down) : value(v), action(a) {};
+    Key(E v = None, Action a = Down) : value(v), action(a) {};
     Key &operator=(Key rval)
     {
         value = rval.value;
@@ -61,12 +53,13 @@ struct Key
         value = c.value;
         action = c.action;
     }
-    operator uint8() const { return static_cast<uint8>(value); };
-    bool Is(Key::E c) const { return (c == value); };
-    bool Is(Key::E c, Action::E a) const { return value == c && action == a; };
+    operator uint8() const            { return static_cast<uint8>(value); };
+    bool Is(Key::E c) const           { return (c == value); };
+    bool Is(Key::E c, Action a) const { return value == c && action == a; };
     bool IsDigit() const;
-    bool IsUp() const { return action == Action::Up; }
-    bool IsLong() const { return action == Action::Long; }
+    bool IsUp() const   { return action == Up; }
+    bool IsDown() const { return action == Down; }
+    bool IsLong() const { return action == Long; }
     char ToChar() const;
     pString Name() const;
     bool IsFunctional() const;
@@ -74,4 +67,6 @@ struct Key
     bool IsRotate() const;
     /// Возвращает true, если кнопка управления курсором (Влево-Вправо)
     bool IsCursors() const { return value == Left || value == Right; };
+
+    bool IsRelease() const;
 };

@@ -15,7 +15,7 @@ public:
     /// Функция-заглушка. Для эмулятора, на котором нет физической клавиатуры и нужно её рисовать на экране
     static void Draw();
 
-    static void AppendEvent(Key::E key, Key::Action::E action);
+    static void AppendEvent(Key::E key, Key::Action action);
 
     // Структура предназначена единственно для декодирования клавиатурных последовательностей
     struct Decoder

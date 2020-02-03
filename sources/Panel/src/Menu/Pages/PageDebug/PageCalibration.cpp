@@ -140,7 +140,7 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
 {
     if(key.IsRotate())
     {
-        if(key.action == Key::Action::Down)
+        if(key.action == Key::Down)
         {
             int16 min = -1024;
             int16 max = 1024;
@@ -163,7 +163,7 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
 
         return true;
     }
-    else if(key.value == Key::RegButton && key.action == Key::Action::Down)
+    else if(key.value == Key::RegButton && key.action == Key::Down)
     {
         Math::CircleIncrease<uint8>(&range, 0, 4);
         return true;

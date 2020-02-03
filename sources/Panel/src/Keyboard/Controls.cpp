@@ -39,7 +39,7 @@ bool Key::IsRotate() const
 }
 
 
-bool Key::Action::IsRelease() const
+bool Key::IsRelease() const
 {
     return value == Up || value == Long;
 }

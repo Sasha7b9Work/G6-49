@@ -64,7 +64,7 @@ static bool OnKey(const Key &control)
         FDrive::PressUp();
         return true;
     }
-    else if (control.Is(Key::Esc, Key::Action::Up))
+    else if (control.Is(Key::Esc, Key::Up))
     {
         Menu::ResetAdditionPage();
         return true;

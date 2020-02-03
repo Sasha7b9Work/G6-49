@@ -144,7 +144,7 @@ static bool OnKey_PageRegisters(const Key &key)
             return true;
         }
     }
-    else if (key.action.Is(Key::Action::Down))
+    else if (key.IsDown())
     {
         if (AllowableSymbol(key))
         {

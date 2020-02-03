@@ -2,7 +2,7 @@
 #include "Hardware/Beeper.h"
 
 
-void Beeper::Beep(Key::Action::E)
+void Beeper::Beep(Key::Action)
 {
 
 }

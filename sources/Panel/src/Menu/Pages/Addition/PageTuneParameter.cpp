@@ -88,7 +88,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 
 static bool OnControl_TuneParameter(const Key &key)
 {
-    if(key.action == Key::Action::Up)
+    if(key.action == Key::Up)
     {
         if(key.value == Key::Esc)
         {
