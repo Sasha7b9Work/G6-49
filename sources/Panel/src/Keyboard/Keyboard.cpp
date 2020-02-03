@@ -221,6 +221,7 @@ void Keyboard::AppendEvent(Key::E key, Key::Action action)
 {
     commands[pointer].value = key;
     commands[pointer].action = action;
+    pointer++;
 
     Beeper::Beep(action);
 }

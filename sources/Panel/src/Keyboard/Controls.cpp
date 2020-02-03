@@ -29,19 +29,19 @@ char Key::ToChar() const
 
 bool Key::IsFunctional() const
 {
-    return value >= F1 && value <= F4;
+    return (value >= F1) && (value <= F4);
 }
 
 
 bool Key::IsRotate() const
 {
-    return value == RegLeft || value == RegRight;
+    return (value == RegLeft) || (value == RegRight);
 }
 
 
 bool Key::IsRelease() const
 {
-    return value == Up || value == Long;
+    return (action == Up) || (action == Long);
 }
 
 
