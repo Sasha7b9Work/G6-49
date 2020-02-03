@@ -6,6 +6,9 @@ struct PageDebug
 {
     static Page *self;
 
+    // ¬ключить отображение страницы отладки
+    static void Enable();
+
     struct PageRegisters
     {
         static void Draw();

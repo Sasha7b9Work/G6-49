@@ -9,6 +9,7 @@
 #include "Settings/CalibrationSettings.h"
 #include "PageService.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/PageDebug/PageDebug.h"
 #include "Utils/StringUtils.h"
 #include "Utils/NumberBuffer.h"
 #include "Utils/Math.h"
@@ -40,10 +41,18 @@ DEF_BUTTON( bReset,                                                             
 extern const PageBase pDebug;
 
 
-DEF_PAGE_2( pService,                                                                                                                                                        //--- ÑÅÐÂÈÑ --- //-V641
+DEF_PAGE_4_VAR( pService,                                                                                                                                                        //--- ÑÅÐÂÈÑ --- //-V641
     "ÑÅÐÂÈÑ",    //-V641
     "Ñåðâèñíûå ôóíêöèè",
-    &bReset,
-    &pDebug,
-    Page::Service, Menu::mainPage, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    bReset,
+    *Item::Empty(),
+    *Item::Empty(),
+    *Item::Empty(),
+    Page::Service, reinterpret_cast<PageBase *>(Menu::mainPage), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
+
+
+void PageDebug::Enable()
+{
+    pService.items[1] = PageDebug::self;
+}

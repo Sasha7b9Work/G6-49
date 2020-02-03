@@ -19,12 +19,13 @@ Item *Menu::currentItem = nullptr;
 
 extern const PageBase pSignals;
 
-DEF_PAGE_3( mainPageMenu,
+DEF_PAGE_4( mainPageMenu,
     "лемч",
     "",
     PageSignals::self,
     PageFrequencyCounter::self,
     PageService::self,
+    Item::Empty(),
     Page::Main, 0, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
@@ -225,5 +226,11 @@ bool Menu::OpenDebugPage(const Key &key)
         { Key::Count}
     };
 
-    return Keyboard::Decoder::Decode(keys, key);
+    if(Keyboard::Decoder::Decode(keys, key))
+    {
+        PageDebug::Enable();
+        return true;
+    }
+
+    return false;
 }
