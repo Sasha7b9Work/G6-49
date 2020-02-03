@@ -74,7 +74,7 @@ static void Draw_Enter(int x, int y)
 
 static void OnPress_Enter()
 {
-
+    Menu::ResetAdditionPage();
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- нймн ббндю - ббнд ---
@@ -89,6 +89,11 @@ static bool OnControl_TuneParameter(const Key &key)
     if(key.action == Key::Action::Up)
     {
         if(key.value == Key::Esc)
+        {
+            Menu::ResetAdditionPage();
+            return true;
+        }
+        else if(key.value == Key::RegButton)
         {
             Menu::ResetAdditionPage();
             return true;
