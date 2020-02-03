@@ -127,7 +127,9 @@ float Calibrator::GetAmplitudeK(Chan::E ch)
 
     int16 k = *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 0U);
 
-    return 1.0F + k / 1000.0F;
+    float divider = SettingsGenerator::FormIsSine(ch) ? 1e3F : 1e4F;
+
+    return 1.0F + k / divider;
 }
 
 
@@ -135,7 +137,7 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r, 2U);
+    return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 2U);
 }
 
 
@@ -143,7 +145,7 @@ float Calibrator::GetOffsetK_Negative(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 4095.0F - *setCal.GetK(static_cast<uint8>(ch), 0U, r, 3U);
+    return 4095.0F - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U);
 }
 
 
@@ -151,7 +153,7 @@ float Calibrator::GetOffsetK_Positive(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 0.0F - *setCal.GetK(static_cast<uint8>(ch), 0U, r, 1U);
+    return 0.0F - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U);
 }
 
 
