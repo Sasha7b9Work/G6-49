@@ -474,10 +474,19 @@ void FPGA::WriteAddress(RG::E reg)
 }
 
 
+// Расчёт кода для засылки в регистр амлпитуды FPGA
+static uint CalculateCodeAmplitude(Chan::E ch)
+{
+    float relAmplitude = SettingsGenerator::Amplitude(ch) / 10.0F;
+    float fullCode = relAmplitude * 1023.0F;
+    return static_cast<uint>(fullCode * Calibrator::GetAmplitudeK(ch));
+}
+
+
 void FPGA::SetAmplitude()
 {
-    uint nA = (uint)((SettingsGenerator::Amplitude(Chan::A) * (1023 + Calibrator::GetOffsetK_Zero(Chan::A))) / 10);
-    uint nB = (uint)((SettingsGenerator::Amplitude(Chan::B) * (1023 + Calibrator::GetOffsetK_Zero(Chan::B))) / 10);
+    uint nA = CalculateCodeAmplitude(Chan::A);
+    uint nB = CalculateCodeAmplitude(Chan::B);
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }

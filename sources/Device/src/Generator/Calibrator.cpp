@@ -11,14 +11,9 @@ uint8 Calibrator::signal[Chan::Count] = { 0 , 0 };
 
 void Calibrator::SetFormWave(Chan::E ch, uint8 sig)
 {
-    if(sig == 0)
-    {
-        DGenerator::SetFormWave(ch, TypeForm::Sine);
-    }
-    else
-    {
-        DGenerator::SetFormWave(ch, TypeForm::Meander);
-    }
+    DGenerator::SetFormWave(ch, (sig == 0) ? TypeForm::Sine : TypeForm::Meander);
+
+    DGenerator::SetFrequency(ch, FloatValue(1e3F));
 }
 
 
@@ -127,9 +122,7 @@ float Calibrator::GetAmplitudeK(Chan::E ch)
 
     int16 k = *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 0U);
 
-    float divider = SettingsGenerator::FormIsSine(ch) ? 1e3F : 1e4F;
-
-    return 1.0F + k / divider;
+    return 1.0F + k / 1e3F;
 }
 
 
