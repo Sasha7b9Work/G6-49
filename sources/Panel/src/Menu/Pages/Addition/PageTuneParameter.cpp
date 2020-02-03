@@ -4,6 +4,7 @@
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Addition/PageTuneParameter.h"
+#include "Settings/Settings.h"
 
 
 static ParameterTuner tuner;
@@ -50,6 +51,7 @@ DEF_SMALL_BUTTON(sbOrderDown,                                                   
 
 static void OnPress_Cancel()
 {
+    set.Restore();
     Menu::ResetAdditionPage();
 }
 
@@ -90,7 +92,7 @@ static bool OnControl_TuneParameter(const Key &key)
     {
         if(key.value == Key::Esc)
         {
-            Menu::ResetAdditionPage();
+            OnPress_Cancel();
             return true;
         }
         else if(key.value == Key::RegButton)
@@ -109,6 +111,15 @@ static void OnDraw_TuneParameter()
 }
 
 
+static void OnEnter_TuneParameter(bool enter)
+{
+    if(enter)
+    {
+        set.Store();
+    }
+}
+
+
 DEF_PAGE_SB( pTuneParameter,   //-V641
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", //-V641
     "",
@@ -116,7 +127,7 @@ DEF_PAGE_SB( pTuneParameter,   //-V641
     &sbOrderDown,       ///< ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂÏÐÀÂÎ
     &sbCancel,          ///< ÎÊÍÎ ÂÂÎÄÀ - ÎÒÌÅÍÀ
     &sbEnter,           ///< ÎÊÍÎ ÂÂÎÄÀ - ÂÂÎÄ
-    Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
+    Page::SB_Input, 0, Item::FuncActive, OnEnter_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));

@@ -11,7 +11,6 @@
 #endif
 
 
-
 static const Settings defSet =
 {
     sizeof(Settings),
@@ -83,7 +82,7 @@ static const Settings defSet =
 
 Settings set = defSet;
 
-
+Settings Settings::stored = defSet;
 
 void Settings::Save()
 {
@@ -115,4 +114,16 @@ Settings& Settings::operator=(const Settings &rhs)
         std::memcpy(this, &rhs, sizeof(Settings));
     }
     return *this;
+}
+
+
+void Settings::Store()
+{
+    stored = set;
+}
+
+
+void Settings::Restore()
+{
+    set = stored;
 }

@@ -114,6 +114,15 @@ public:
     void Load(bool _default = false);
 
     Settings& operator=(const Settings &rhs);
+
+    // Сохраняет текущие настройки. Позднее их можно восстановить, вызвав функцию Restore()
+    void Store();
+    // Восстанавливает настройки, сохранённые функцией Store()
+    void Restore();
+
+private:
+    // Сюда можно сохранить текущие настройки функцией Store
+    static Settings stored;
 };
 
 #pragma pack(pop)
