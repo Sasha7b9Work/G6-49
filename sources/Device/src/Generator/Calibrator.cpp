@@ -6,11 +6,12 @@
 
 bool Calibrator::inModeCalibration = false;
 uint8 Calibrator::range[Chan::Count] = { 255, 255 };
+uint8 Calibrator::signal[Chan::Count] = { 0 , 0 };
 
 
-void Calibrator::SetFormWave(Chan::E ch, uint8 signal)
+void Calibrator::SetFormWave(Chan::E ch, uint8 sig)
 {
-    if(signal == 0)
+    if(sig == 0)
     {
         DGenerator::SetFormWave(ch, TypeForm::Sine);
     }
@@ -59,17 +60,19 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
 }
 
 
-void Calibrator::SetK(uint8 channel, uint8 signal, uint8 _range, uint8 param, int16 k)
+void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, int16 k)
 {
     inModeCalibration = true;
 
     range[channel] = _range;
 
-    *setCal.GetK(channel, signal, range[channel], param) = k;
+    signal[channel] = _signal;
+
+    *setCal.GetK(channel, _signal, range[channel], param) = k;
 
     Chan::E ch = static_cast<Chan::E>(channel);
 
-    SetFormWave(ch, signal);
+    SetFormWave(ch, _signal);
 
     SetAmplitude(ch);
 
@@ -132,14 +135,7 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    if(SettingsGenerator::FormIsSine(ch))
-    {
-        return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r, 2U);
-    }
-    else
-    {
-        return 0.0F;
-    }
+    return 2048.0F + *setCal.GetK(static_cast<uint8>(ch), 0U, r, 2U);
 }
 
 
@@ -147,14 +143,7 @@ float Calibrator::GetOffsetK_Negative(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    if(SettingsGenerator::FormIsSine(ch))
-    {
-        return 4095.0F - *setCal.GetK(static_cast<uint8>(ch), 0U, r, 3U);
-    }
-    else
-    {
-        return 4095.0F;
-    }
+    return 4095.0F - *setCal.GetK(static_cast<uint8>(ch), 0U, r, 3U);
 }
 
 
@@ -162,14 +151,7 @@ float Calibrator::GetOffsetK_Positive(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    if(SettingsGenerator::FormIsSine(ch))
-    {
-        return -*setCal.GetK(static_cast<uint8>(ch), 0U, r, 1U);
-    }
-    else
-    {
-        return 0.0F;
-    }
+    return 0.0F - *setCal.GetK(static_cast<uint8>(ch), 0U, r, 1U);
 }
 
 

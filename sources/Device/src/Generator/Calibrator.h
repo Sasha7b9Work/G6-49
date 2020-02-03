@@ -30,4 +30,6 @@ private:
     static bool inModeCalibration;
     /// Для этого диапазона сейчас происходит калибровка
     static uint8 range[Chan::Count];
+    /// Для этой формы сигнала происходит калибровка. 0 - синус, 1 - произвольный
+    static uint8 signal[Chan::Count];
 };

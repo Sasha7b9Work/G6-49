@@ -144,14 +144,9 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
             int16 min = -1024;
             int16 max = 1024;
 
-            if(parameter == 1)
-            {
-                max = 0;
-            }
-            else if(parameter == 3)
-            {
-                min = 0;
-            }
+            if(parameter == 1)      { max = 0; }            // для смещения +max будем ограничивать нулём сверху - можно сделать только меньше
+            else if(parameter == 3) { min = 0; }            // для смещения -max будем ограничивать нулём снизу - можно сделать только больше
+            if(parameter == 0 && signal == 1) { max = 0; }  // для амплитуды произвольного сигнала будем ограничивать нулём сверху - можно сделать только меньше
 
             if(key.value == Key::RegLeft)
             {
