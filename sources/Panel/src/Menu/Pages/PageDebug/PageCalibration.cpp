@@ -31,14 +31,30 @@ static int16 prevK = 0;
 static void TuneControls();
 
 
+static bool ChannelIsValid()
+{
+    return (channel == 0) || (channel == 1);
+}
+
+
 static void LoadK()
 {
+    if(!ChannelIsValid())
+    {
+        return;
+    }
+
     calK = setCal.GetK(channel, signal, range, parameter);
 }
 
 
 static void SendMessage()
 {
+    if(!ChannelIsValid())
+    {
+        return;
+    }
+
     if(channel != prevChannel || prevSignal != signal || prevRange != range || prevParameter != parameter || prevPointerK != calK || prevK != *calK)
     {
         prevChannel = channel;
@@ -57,6 +73,11 @@ static void SendMessage()
 /// Вызывается при изменении калибруемого параметра
 static void OnChange_Parameters(bool)
 {
+    if(!ChannelIsValid())
+    {
+        return;
+    }
+
     TuneControls();
     LoadK();
     SendMessage();
@@ -65,6 +86,11 @@ static void OnChange_Parameters(bool)
 /// Вызывается при изменении источника сигнал
 static void OnChange_Source(bool)
 {
+    if(!ChannelIsValid())
+    {
+        return;
+    }
+
     TuneControls();
     LoadK();
     OnChange_Parameters(true);
@@ -126,6 +152,11 @@ DEF_CHOICE_4(cParameterHalfVoltage,
 
 static void DrawPage()
 {
+    if(!ChannelIsValid())
+    {
+        return;
+    }
+
     Painter::FillRegion(10, 10, 200, 50, Color::WHITE);
 
     char buffer[30];
