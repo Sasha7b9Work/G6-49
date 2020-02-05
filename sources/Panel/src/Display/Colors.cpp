@@ -57,15 +57,6 @@ Color::Color(const Color &color) : value(color.value)
 }
 
 
-void Color::InitGlobalColors()
-{
-    Color::BACK.value = BACKGROUND_BLACK ? Color::BLACK.value : Color::WHITE.value;
-    Color::FILL.value = BACKGROUND_BLACK ? Color::WHITE.value : Color::BLACK.value;
-    Color::GRAY_75.value = BACKGROUND_BLACK ? Color(COLOR_GRAY_75).value : Color(COLOR_GRAY_25).value;
-    Color::GRAY_25.value = BACKGROUND_BLACK ? Color(COLOR_GRAY_25).value : Color(COLOR_GRAY_75).value;
-}
-
-
 Color Color::BorderMenu(bool shade)
 {
     return MenuTitle(shade);

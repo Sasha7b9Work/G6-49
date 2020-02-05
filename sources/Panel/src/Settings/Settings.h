@@ -29,7 +29,6 @@
 #define SHOW_STATISTICS         (FL(BIT_STATISTICS))
 /// Если true, то засылка в прибор выполняется при каждом повороте ручки
 #define TUNE_FULL               (FL(BIT_TUNE_FULL))
-#define PARITY                  ((Parity)FL(BIT_PARITY))
 #define DEBUG_SHOW_SENDS        (FL(BIT_SHOW_SENDS))
 
 #define CHANNEL_ENABLED(ch)     ((FLAG >> ((ch) + BIT_CHAN_A)) & 0x01)
@@ -38,8 +37,6 @@
 #define CURRENT_CHANNEL         ((Chan::E)FL(BIT_CHANNEL))
 #define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == Chan::A)
 #define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == Chan::B)
-#define SIZE_BYTE               ((SizeByte)FL(BIT_SIZE_BYTE))
-#define STOP_BIT                ((StopBit)FL(BIT_STOP_BIT))
 
 #define FREQ_RESIST                 ((FreqResist)FL(BIT_FREQ_RESIST))
 #define FREQ_COUPLE                 ((FreqCouple)FL(BIT_FREQ_COUPLE))
@@ -88,20 +85,15 @@ public:
 #define BIT_PC13            4
 #define BIT_PC14            5
 
-#define BIT_PARITY        0   ///< Parity   - флаг чётности Parity
+
 #define BIT_FREQ_INTERVAL 1   ///< Interval - интервал запуска измерений
 #define BIT_CONSOLE       2   ///<          - показ отладочной консоли
-#define BIT_BACK_BLACK    3   ///<          - если 1, то цвет фона - чёрный
-
 #define BIT_DBG_MODE      5   ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
-
 #define BIT_STATISTICS    7   ///<          - если 1, то показывать статистику
 #define BIT_NOT_USED      8
 #define BIT_CHAN_A        9   ///<          - бит, отвечающий за включённый канал A
 #define BIT_CHAN_B        10  ///<          - бит, отвечающий за включённый канал B
 #define BIT_CHANNEL       11  ///< Chan  - текущий выбранный канал
-#define BIT_SIZE_BYTE     12  ///< SizeByte - размер байта для связи по USB
-#define BIT_STOP_BIT      13  ///< StopBit  - количество стоп-бит
 #define BIT_FREQ_RESIST   14  ///< FreqResist - сопротивление входа частотомера
 #define BIT_FREQ_COUPLE   15  ///< FreqCouple - открытый/закрытый вход частотомера
 #define BIT_FREQ_FILTR    16  ///< FreqFiltr   - ФНЧ частотомера
@@ -115,11 +107,6 @@ public:
     void LoadToDevice();
 
     Settings& operator=(const Settings &rhs);
-
-    // Сохраняет текущие настройки. Позднее их можно восстановить, вызвав функцию Restore()
-    void Store();
-    // Восстанавливает настройки, сохранённые функцией Store()
-    void Restore();
 
 private:
     // Сюда можно сохранить текущие настройки функцией Store

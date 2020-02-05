@@ -63,13 +63,9 @@ static const Settings defSet =
 //                          ||| |  |||||||----------------- 9  BIT_CHAN_A   
 //                          ||| |  ||||||------------------ 10 BIT_CHAN_B   
 //                          ||| |  |||||------------------- 11 BIT_CHANNEL        A
-//                          ||| |  ||||-------------------- 12 BIT_SIZE_BYTE      8bit
-//                          ||| |  |||--------------------- 13 BIT_STOP_BIT       StopBit_1
 //                          ||| |  ||---------------------- 14 BIT_FREQ_RESIST
 //                          ||| |  |----------------------- 15 BIT_FREQ_COUPLE
-//                          ||| |
 //                          ||| |-------------------------- 16 BIT_FREQ_FILTR
-//                          ||| 
 //                          |||---------------------------- 18 BIT_FREQ_TEST
 //                          ||----------------------------- 19 BIT_BIG_SYMBOLS
 //                          |------------------------------ 20 BIT_SHOW_SENDS
@@ -81,8 +77,6 @@ static const Settings defSet =
 #endif
 
 Settings set = defSet;
-
-Settings Settings::stored = defSet;
 
 void Settings::SaveToMemory()
 {
@@ -120,16 +114,4 @@ Settings& Settings::operator=(const Settings &rhs)
         std::memcpy(this, &rhs, sizeof(Settings));
     }
     return *this;
-}
-
-
-void Settings::Store()
-{
-    stored = set;
-}
-
-
-void Settings::Restore()
-{
-    set = stored;
 }

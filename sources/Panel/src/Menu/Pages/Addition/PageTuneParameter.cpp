@@ -114,12 +114,9 @@ static void OnEnter_TuneParameter(bool enter)
 {
     if(enter)
     {
-        set.Store();
     }
     else
     {
-        set.Restore();
-        set.LoadToDevice();
     }
 }
 

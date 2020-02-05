@@ -54,8 +54,6 @@ public:
     
     uint8 value;
 
-    static void InitGlobalColors();
-
     void SetAsCurrent() const;
     static Color GetCurrent();
     static uint8 CurrentValue();

@@ -27,8 +27,6 @@ void Painter::BeginScene(Color col)
 void Painter::LoadPalette()
 {
     HAL_LTDC::SetColors(&COLOR(0), Color::NUMBER.value);
-    
-    Color::InitGlobalColors();
 }
 
 
