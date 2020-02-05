@@ -1,6 +1,7 @@
 #include "Display/Symbols.h"
 #include "Display/Text.h"
 #include "Generator/ParametersSupport.h"
+#include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Addition/PageTuneParameter.h"
@@ -8,10 +9,17 @@
 
 
 static ParameterTuner tuner;
+/// Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
+static ParameterValue storedParameter = ParameterAmplitude();
 
 
 void PageTuneParameter::SetParameter(Parameter *parameter)
 {
+    if(parameter->IsValue())
+    {
+        storedParameter = *reinterpret_cast<ParameterValue *>(parameter);
+    }
+
     tuner.SetParameter(parameter);
 }
 
@@ -51,6 +59,15 @@ DEF_SMALL_BUTTON(sbOrderDown,                                                   
 
 static void OnPress_Cancel()
 {
+    Parameter *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
+
+    if(parameter->IsValue())
+    {
+        *reinterpret_cast<ParameterValue *>(parameter) = storedParameter;
+    }
+
+    PGenerator::TuneChannel(CURRENT_CHANNEL);
+
     Menu::ResetAdditionPage();
 }
 
@@ -110,17 +127,6 @@ static void OnDraw_TuneParameter()
 }
 
 
-static void OnEnter_TuneParameter(bool enter)
-{
-    if(enter)
-    {
-    }
-    else
-    {
-    }
-}
-
-
 DEF_PAGE_SB( pTuneParameter,   //-V641
     "ВВОД ЗНАЧЕНИЯ", //-V641
     "",
@@ -128,7 +134,7 @@ DEF_PAGE_SB( pTuneParameter,   //-V641
     &sbOrderDown,       ///< ОКНО ВВОДА - СИМВОЛ ВПРАВО
     &sbCancel,          ///< ОКНО ВВОДА - ОТМЕНА
     &sbEnter,           ///< ОКНО ВВОДА - ВВОД
-    Page::SB_Input, 0, Item::FuncActive, OnEnter_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
+    Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));

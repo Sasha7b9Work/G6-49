@@ -77,6 +77,8 @@ public:
     /// Отрисовать параметр в режиме настройки
     void Draw();
 
+    Parameter *GetParameter();
+
 private:
     ParameterPainterSupporting support;
     /// Отрисовать имя параметра

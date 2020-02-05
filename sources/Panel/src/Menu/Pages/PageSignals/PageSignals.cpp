@@ -74,15 +74,6 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-//DEF_CHOICE_2( cTypeTune,                                                                                                                               //--- НАСТРОЙКИ СИГНАЛОВ - Засылка ---
-//    "ЗАСЫЛКА",
-//    "Определяет периодичность засылки настроек сигналов в устройство управления.",
-//    "ОДНОКРАТНО", "Засылка настроек сигнала происходит однократно, после нажатия кнопки подтверждения.",
-//    "НЕПРЕРЫВНО", "Засылка настроек сигнала происходит синхронно с изменением информации на экране.",
-//    FLAG, BIT_TUNE_FULL, pageSignals, Item::FuncActive, FuncChangedChoice, FuncDraw
-//)
-
-
 static bool OnKey_PageSignals(const Key &)
 {
     return false;

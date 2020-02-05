@@ -632,6 +632,12 @@ void ParameterTuner::SetParameter(Parameter *parameter)
 }
 
 
+Parameter *ParameterTuner::GetParameter()
+{
+    return support.parameter;
+}
+
+
 bool ParameterTuner::ProcessControl(const Key &key)
 {
     if(key.value == Key::RegLeft)

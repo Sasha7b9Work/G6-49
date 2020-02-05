@@ -25,10 +25,8 @@
 
 #define CONSOLE_ENABLED         (FL(BIT_CONSOLE))
 #define DEBUG_MODE_ENABLED      (FL(BIT_DBG_MODE))
-#define BACKGROUND_BLACK        (FL(BIT_BACK_BLACK))
 #define SHOW_STATISTICS         (FL(BIT_STATISTICS))
 /// Если true, то засылка в прибор выполняется при каждом повороте ручки
-#define TUNE_FULL               (FL(BIT_TUNE_FULL))
 #define DEBUG_SHOW_SENDS        (FL(BIT_SHOW_SENDS))
 
 #define CHANNEL_ENABLED(ch)     ((FLAG >> ((ch) + BIT_CHAN_A)) & 0x01)
