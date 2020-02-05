@@ -177,10 +177,7 @@ bool String::Allocate(uint size)
     {
         return true;
     }
-    else
-    {
-        LOG_ERROR("Не хватает памяти");
-    }
+
     return false;
 }
 

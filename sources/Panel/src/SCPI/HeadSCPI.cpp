@@ -358,10 +358,6 @@ static void ProcessHelp(const StructSCPI strct[], String msg) //-V2504
             strct->funcHint(&message);
             SCPI::SendAnswer("");
         }
-        else
-        {
-            LOG_ERROR("—юда мы не можем попасть");
-        }
 
         strct++;
     }

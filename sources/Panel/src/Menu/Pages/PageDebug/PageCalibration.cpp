@@ -138,7 +138,13 @@ static void DrawPage()
 
 static bool FuncOnKeyPage(const Key &key) //-V2009
 {
-    if(key.IsRotate())
+    if(key.value == Key::RegButton && key.action == Key::Down)
+    {
+        Math::CircleIncrease<uint8>(&range, 0, 4);
+        OnChange_Parameters(true);
+        return true;
+    }
+    else if(key.IsRotate())
     {
         if(key.action == Key::Down)
         {
@@ -161,11 +167,6 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
             }
         }
 
-        return true;
-    }
-    else if(key.value == Key::RegButton && key.action == Key::Down)
-    {
-        Math::CircleIncrease<uint8>(&range, 0, 4);
         return true;
     }
 

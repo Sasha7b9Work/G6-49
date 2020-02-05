@@ -477,9 +477,13 @@ void FPGA::WriteAddress(RG::E reg)
 // Расчёт кода для засылки в регистр амлпитуды FPGA
 static uint CalculateCodeAmplitude(Chan::E ch)
 {
-    float relAmplitude = SettingsGenerator::Amplitude(ch) / 10.0F;
-    float fullCode = relAmplitude * 1023.0F;
-    return static_cast<uint>(fullCode * Calibrator::GetAmplitudeK(ch));
+    float k = Calibrator::GetAmplitudeK(ch);
+
+    float att = 1.0F / Amplifier::GetAmplification(ch);
+
+    float amplitude = k * att * SettingsGenerator::Amplitude(ch);
+
+    return static_cast<uint>(amplitude * 1023);
 }
 
 

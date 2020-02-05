@@ -82,7 +82,7 @@ static pCHAR Process(pCHAR buffer, const StructSCPI strct[]) //-V2504
             }
             else
             {
-                LOG_WRITE("—юда мы попасть ну никак не можем");
+                // «десь ничего
             }
         }
 

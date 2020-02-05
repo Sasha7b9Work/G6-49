@@ -146,8 +146,6 @@ Form *Wave::GetForm(int i)
         return forms[i];
     }
     
-    LOG_ERROR("Неправильный индекс %d", i);
-    
     return nullptr;
 }
 
@@ -161,9 +159,7 @@ Form *Wave::GetForm(TypeForm::E form)
             return forms[i];
         }
     }
-    
-    LOG_ERROR("Не найдена форма %d", static_cast<int>(form));
-    
+   
     return nullptr;
 }
 
