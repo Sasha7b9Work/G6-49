@@ -1,4 +1,4 @@
-#include "common/Messages.h"
+#include "defines.h"
 #include "Generator/AD9952.h"
 #include "Generator/Calibrator.h"
 #include "Hardware/HAL/HAL.h"

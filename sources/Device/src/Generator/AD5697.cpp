@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "common/Command.h"
 #include "Generator/AD5697.h"
 #include "Generator/Calibrator.h"
