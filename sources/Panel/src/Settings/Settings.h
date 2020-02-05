@@ -92,7 +92,7 @@ public:
 #define BIT_FREQ_INTERVAL 1   ///< Interval - интервал запуска измерений
 #define BIT_CONSOLE       2   ///<          - показ отладочной консоли
 #define BIT_BACK_BLACK    3   ///<          - если 1, то цвет фона - чёрный
-#define BIT_TUNE_FULL     4   ///<          - если 1, то засылка параметра происходит непрерывно во время настройки
+
 #define BIT_DBG_MODE      5   ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
 
 #define BIT_STATISTICS    7   ///<          - если 1, то показывать статистику
@@ -110,8 +110,9 @@ public:
 #define BIT_BIG_SYMBOLS   19  ///< Если 1, то символы выводятся чуть увеличенными
 #define BIT_SHOW_SENDS    20  ///< Если 1, то нужно показывать засылаемые настройки
 
-    void Save();
-    void Load(bool _default = false);
+    void SaveToMemory();
+    void LoadFromMemory(bool _default);
+    void LoadToDevice();
 
     Settings& operator=(const Settings &rhs);
 

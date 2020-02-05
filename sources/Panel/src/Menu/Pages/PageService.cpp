@@ -28,7 +28,8 @@ static void OnPress_Reset()
     PGenerator::Reset();
     HAL_TIM::Delay(100);
     setCal.Load();
-    set.Load(true);
+    set.LoadFromMemory(true);
+    set.LoadToDevice();
 }
 
 DEF_BUTTON( bReset,                                                                                                                                                 //--- Œ“À¿ƒ ¿ - —¡–Œ— ---

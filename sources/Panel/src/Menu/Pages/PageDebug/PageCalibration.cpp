@@ -183,7 +183,7 @@ static void OnEnter_Calibration(bool enter)
     }
     else
     {
-        set.Load();
+        set.LoadToDevice();
 
         prevChannel = 255;
         prevSignal = 255;

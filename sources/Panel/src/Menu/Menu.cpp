@@ -52,6 +52,11 @@ void Menu::Update()
             continue;
         }
 
+        if(key.IsUp())
+        {
+            key = key;
+        }
+
         ProcessKey(key);
 
         timePress = TIME_MS;
@@ -156,11 +161,13 @@ void Menu::SetAdditionPage(Page *page)
 {
     oldPage = CURRENT_PAGE;
     CURRENT_PAGE = page;
+    CURRENT_PAGE->funcEnter(true);
 }
 
 
 void Menu::ResetAdditionPage()
 {
+    CURRENT_PAGE->funcEnter(false);
     CURRENT_PAGE = oldPage;
     oldPage = nullptr;
 }

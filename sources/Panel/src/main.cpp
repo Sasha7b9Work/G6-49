@@ -16,7 +16,8 @@ int main()
     Display::Init();
     HAL_TIM::Delay(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
     setCal.Load();
-    set.Load();
+    set.LoadFromMemory(true);
+    set.LoadToDevice();
     Menu::Init();
 
     while (1)

@@ -51,7 +51,6 @@ DEF_SMALL_BUTTON(sbOrderDown,                                                   
 
 static void OnPress_Cancel()
 {
-    set.Restore();
     Menu::ResetAdditionPage();
 }
 
@@ -116,6 +115,11 @@ static void OnEnter_TuneParameter(bool enter)
     if(enter)
     {
         set.Store();
+    }
+    else
+    {
+        set.Restore();
+        set.LoadToDevice();
     }
 }
 

@@ -84,25 +84,31 @@ Settings set = defSet;
 
 Settings Settings::stored = defSet;
 
-void Settings::Save()
+void Settings::SaveToMemory()
 {
     //EEPROM::SaveSettings(this);
 }
 
 
-void Settings::Load(bool _default)
+void Settings::LoadFromMemory(bool _default)
 {
-    set = defSet;
-
-    if(!_default)
+    if(_default)
+    {
+        set = defSet;
+    }
+    else
     {
       //  EEPROM::LoadSettings(this);
     }
+}
 
+
+void Settings::LoadToDevice()
+{
     PGenerator::LoadSettings();
 
     PFreqMeter::LoadSettings();
-    
+
     Painter::LoadPalette();
 }
 
