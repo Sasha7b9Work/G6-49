@@ -46,6 +46,6 @@ struct PGenerator
 private:
     /// Загружает форму произвольного сигнала
     static void LoadFormDDS(Form *form);
-    /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, записанные в прямом коде, пригодные для отправки в ПЛИС
+    /// Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, пригодные для отправки в ПЛИС
     static void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
 };
