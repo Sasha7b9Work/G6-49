@@ -132,6 +132,8 @@ void PageSignals::OnPress_Channel(bool)
     numForm = CURRENT_FORM->value;
 
     pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
+
+    PGenerator::TuneChannel(CURRENT_CHANNEL);
 }
 
 
