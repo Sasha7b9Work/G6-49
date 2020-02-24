@@ -177,7 +177,7 @@ float SimpleMessage::TakeFloat()
 void SimpleMessage::TakeRemainigData(uint8 *data)
 {
     uint size = allocated - taken;
-    std::memcpy(data, buffer, size);
+    std::memcpy(data, buffer + taken, size);
     taken = allocated;
 }
 

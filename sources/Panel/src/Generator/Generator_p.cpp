@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Generator_p.h"
-#include "Log.h"
 #include "common/Messages_p.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
@@ -14,7 +13,6 @@
 #include "Signals.h"
 #include "Display/Console.h"
 #include "Utils/Math.h"
-#include "Utils/Debug.h"
 #include <cmath>
 #include <string.h>
 #include <cstdlib>
@@ -132,8 +130,6 @@ void PGenerator::LoadFormDDS(Form *form)
 
 void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Form *form)
 {
-    LOG_WRITE(" ");
-
     uint16 buffer[DDS_NUM_POINTS];
 
     uint8 *code = reinterpret_cast<uint8 *>(buffer);
@@ -145,11 +141,6 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
         float value = (d[i] + 1.0F) / 2.0F;
 
         uint16 c = static_cast<uint16>(max - value * max);
-
-        if(i < 10 || i > DDS_NUM_POINTS - 10)
-        {
-            LOG_WRITE("%d : %f -> %d", i, d[i], c);
-        }
 
         code[i] = static_cast<uint8>(c);
         code[i + DDS_NUM_POINTS] = static_cast<uint8>(c >> 8);
