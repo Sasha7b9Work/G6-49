@@ -72,3 +72,15 @@ void DVCP::Handler::Processing(SimpleMessage *msg)
 {
     DVCP::SendData(msg->Data(5), msg->TakeWord());
 }
+
+
+void DVCP::SetConnectedToUSB(bool connected)
+{
+    connectedToUSB = connected;
+}
+
+
+void DVCP::SetCableUSBisConnected(bool connected)
+{
+    cableUSBisConnected = connected;
+}

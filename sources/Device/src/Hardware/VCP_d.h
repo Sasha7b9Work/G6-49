@@ -22,15 +22,19 @@ struct DVCP
 
     static USBD_HandleTypeDef handleUSBD;
 
-    static bool connectedToUSB;
-
-    static bool cableUSBisConnected;
-
     struct Handler
     {
         static void Processing(SimpleMessage *msg);
     };
 
+    static void SetConnectedToUSB(bool connected);
+
+    static void SetCableUSBisConnected(bool connected);
+
 private:
     bool PrevSendingComplete();
+
+    static bool connectedToUSB;
+
+    static bool cableUSBisConnected;
 };
