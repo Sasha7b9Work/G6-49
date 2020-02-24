@@ -58,6 +58,16 @@ bool Debug::ShowSends()
 }
 
 
+void Debug::LogBuffer16(uint16 *buffer)
+{
+    LOG_WRITE("%04x %04x %04x %04x %04x %04x %04x", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6]);
+}
+
+
+void Debug::LogBufferF(const float *buffer)
+{
+    LOG_WRITE("%5.4f %5.4f %5.4f %5.4f %5.4f %5.4f %5.4f", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6]);
+}
 
 
 uint Debug::FreeHeap()

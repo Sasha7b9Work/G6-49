@@ -132,17 +132,24 @@ void PGenerator::LoadFormDDS(Form *form)
 
 void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Form *form)
 {
+    LOG_WRITE(" ");
+
     uint16 buffer[DDS_NUM_POINTS];
 
     uint8 *code = reinterpret_cast<uint8 *>(buffer);
 
-    int max = 0x3fff;
+    int max = 0x1fff;
 
     for (int i = 0; i < DDS_NUM_POINTS; i++)
     {
         float value = (d[i] + 1.0F) / 2.0F;
 
-        uint16 c = static_cast<uint16>(value * max);
+        uint16 c = static_cast<uint16>(max - value * max);
+
+        if(i < 10 || i > DDS_NUM_POINTS - 10)
+        {
+            LOG_WRITE("%d : %f -> %d", i, d[i], c);
+        }
 
         code[i] = static_cast<uint8>(c);
         code[i + DDS_NUM_POINTS] = static_cast<uint8>(c >> 8);

@@ -23,4 +23,8 @@ namespace Debug
 
     /// ¬озвращает размер свободной пам€ти в куче
     uint FreeHeap();
+
+    void LogBuffer16(uint16 *buffer);
+
+    void LogBufferF(const float *buffer);
 };
