@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "common/Messages.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -123,6 +124,11 @@ static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length) //-V2009 //-V2558
     Message::SCPI::Data(buffer, *length).Transmit();
 
     USBD_CDC_ReceivePacket(&DVCP::handleUSBD);
+
+    for(uint i = 0; i < *length; i++)
+    {
+        LOG_WRITE("%c", static_cast<char>(*(buffer + i)));
+    }
 
     return (USBD_OK);
 }
