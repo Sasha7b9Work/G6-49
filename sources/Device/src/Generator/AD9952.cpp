@@ -102,7 +102,9 @@ void AD9952::WriteCFR1(Chan::E ch)
 void AD9952::WriteCFR2(Chan::E ch)
 {
     uint value = 0;
-    Bit::Set(value, 3);
+    Bit::Set(value, 2);
+    Bit::Set(value, 5);
+    Bit::Set(value, 7);
     WriteToHardware(ch, Register::CFR2, value);
 }
 
