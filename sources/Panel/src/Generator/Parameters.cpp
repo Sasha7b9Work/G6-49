@@ -14,6 +14,53 @@ void Parameter::SetForm(Form *f)
 }
 
 
+bool Parameter::IsValue() const
+{
+    return (kind == Value);
+}
+
+
+bool Parameter::IsComplex() const
+{
+    return (kind == Complex);
+}
+
+
+bool Parameter::IsChoice() const
+{
+    return (kind == Choice);
+}
+
+
+pString Parameter::Name() const
+{
+    return name;
+}
+
+
+void Parameter::SetParent(Parameter *p)
+{
+    parent = p;
+}
+
+
+Parameter *Parameter::GetParent()
+{
+    return parent;
+}
+
+bool Parameter::IsOpened() const
+{
+    return (parent != nullptr);
+}
+
+
+Form *Parameter::GetForm()
+{
+    return form;
+}
+
+
 void ParameterComplex::SetForm(Form *f)
 {
     Parameter::SetForm(f);

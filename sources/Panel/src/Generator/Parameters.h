@@ -23,41 +23,40 @@ public:
 
     Parameter(E k, const char *n) : form(nullptr), parent(nullptr), kind(k), name(n) { }
 
-    pString Name() const { return name; }
+    pString Name() const;
 
     virtual void SetForm(Form *form);
 
-    void SetParent(Parameter *p) { parent = p; }
-    /// Возвращает адрес родительского параметра
-    Parameter *GetParent() { return parent; }
+    void SetParent(Parameter *p);
+    
+    // Возвращает адрес родительского параметра
+    Parameter *GetParent();
 
-    bool IsValue() const
-    {
-        return (kind == Value);
-    }
+    // true, если параметр имеет тип Parameter::Value
+    bool IsValue() const;
 
-    bool IsComplex() const
-    {
-        return (kind == Complex);
-    }
+    // true, если параметр имеет тип Parameter::Complex
+    bool IsComplex() const;
 
-    bool IsChoice() const
-    {
-        return (kind == Choice);
-    }
-    /// Возвращает true, если параметр сложный и открыт
-    bool IsOpened() const { return parent != 0; }
+    // true, если параметр имеет тип Parameter::Choice
+    bool IsChoice() const;
+
+    // Возвращает true, если параметр сложный и открыт
+    bool IsOpened() const;
 
     virtual pString GetStringValue() const = 0;
 
-    Form *GetForm() { return form; }
-    /// Обработчик нажатия кнопки "Изменить"
+    Form *GetForm();
+    
+    // Обработчик нажатия кнопки "Изменить"
     virtual void ProcessButtonChange() { };
 
 protected:
-    /// Форма, для которой зада этот параметр
+    
+    // Форма, для которой зада этот параметр
     Form *form;
-    /// Если параметр вложенный, то здесь адрес родителя
+    
+    // Если параметр вложенный, то здесь адрес родителя
     Parameter *parent;
 
     E kind;
