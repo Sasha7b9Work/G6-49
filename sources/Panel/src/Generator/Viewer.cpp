@@ -7,7 +7,13 @@
 #include "Settings/Settings.h"
 
 
-void Viewer::Draw(Parameter *param, int x, int y)
+Viewer::Viewer(Parameter *_param) : param(_param)
+{
+
+}
+
+
+void Viewer::Draw(int x, int y)
 {
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
@@ -18,11 +24,11 @@ void Viewer::Draw(Parameter *param, int x, int y)
 
     String(param->Name()).Draw(x + 1, y, Color::Chan(ch));
 
-    DrawParameterValue(param, x + 80, y);
+    DrawParameterValue(x + 80, y);
 }
 
 
-void Viewer::DrawParameterValue(Parameter *param, int x, int y)
+void Viewer::DrawParameterValue(int x, int y)
 {
     if(param->IsChoice() && static_cast<ParameterChoice *>(param)->DrawChoice(x + 6, y))
     {

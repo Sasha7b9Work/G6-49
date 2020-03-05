@@ -68,9 +68,7 @@ void WaveGraphics::DrawParameters(Chan::E ch, int y0)
     
     for (int i = 0; i < form->NumParameters(); i++)
     {
-        Parameter *param = form->GetParameter(i);
-
-        param->viewer.Draw(param, x0, y0);
+        form->GetParameter(i)->viewer.Draw(x0, y0);
 
         y0 += 11;
     }

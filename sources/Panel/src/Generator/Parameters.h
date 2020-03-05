@@ -22,7 +22,7 @@ public:
         Page
     };
 
-    Parameter(E k, const char *n) : form(nullptr), parent(nullptr), kind(k), name(n) { }
+    Parameter(E k, const char *n) : viewer(this), form(nullptr), parent(nullptr), kind(k), name(n) { }
 
     pString Name() const;
 
