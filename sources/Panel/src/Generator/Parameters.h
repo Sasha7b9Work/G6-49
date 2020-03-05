@@ -1,5 +1,6 @@
 #pragma once
 #include "common/Common.h"
+#include "Generator/Viewer.h"
 #include "Settings/SettingsTypes.h"
 
 
@@ -50,6 +51,8 @@ public:
     
     // Обработчик нажатия кнопки "Изменить"
     virtual void ProcessButtonChange() { };
+
+    Viewer viewer;
 
 protected:
     
