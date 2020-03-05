@@ -1,5 +1,6 @@
 #pragma once
 #include "common/Common.h"
+#include "Generator/Tuner.h"
 #include "Generator/Viewer.h"
 #include "Settings/SettingsTypes.h"
 
@@ -53,6 +54,8 @@ public:
     virtual void ProcessButtonChange() { };
 
     Viewer viewer;
+
+    Tuner *tuner;
 
 protected:
     

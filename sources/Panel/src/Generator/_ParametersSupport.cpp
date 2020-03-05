@@ -5,7 +5,6 @@
 #include "Display/Font/Font.h"
 #include "Display/WaveGraphics.h"
 #include "Generator/Parameters.h"
-#include "Generator/ParametersSupport.h"
 #include "Generator/Signals.h"
 #include "Generator/Wave.h"
 #include <cstring>
