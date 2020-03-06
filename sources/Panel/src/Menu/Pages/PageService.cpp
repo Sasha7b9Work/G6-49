@@ -42,8 +42,8 @@ DEF_BUTTON( bReset,                                                             
 DEF_CHOICE_2(cLanguage,
     "Language", "Язык",
     "Выбор языка", "Language choice",
-    "Russian", "",
-    "Aнглийский", "",
+    "Russian",    "Russian",    "", "",
+    "Aнглийский", "Английский", "", "",
     FLAG, BIT_LANGUAGE, pService, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 

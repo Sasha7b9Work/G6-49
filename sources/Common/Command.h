@@ -152,8 +152,9 @@ struct Register
 
 #define SPI_MASTER_SYNBYTE  0xAC
 
-#define NAME_FORM(form)  Form(form).Name()
-#define FORM_RU(form) NAME_FORM(form)
+#define NAME_FORM(form, lang)  Form(form).Name(lang)
+#define FORM_RU(form) NAME_FORM(form, 0)
+#define FORM_EN(form) NAME_FORM(form, 1)
 
 
 #ifdef WIN32

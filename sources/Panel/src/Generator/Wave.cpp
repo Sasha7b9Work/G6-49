@@ -13,21 +13,21 @@ static uint8 formFlash[Chan::Count][SIZE_BUFFER];
 
 
 
-pString Form::Name() const
+pString Form::Name(uint lang) const
 {
-    static const pString names[TypeForm::Count] =
+    static const pString names[TypeForm::Count][2] =
     {
-        "Синус",
-        "Пила+",
-        "Пила-",
-        "Треугольник",
-        "Меандр",
-        "Импульс",
-        "Пакет",
-        "Произвольный"
+        {"Синус", "Sinus"},
+        {"Пила+", "Saw+"},
+        {"Пила-", "Saw-"},
+        {"Треугольник", "Triangle"},
+        {"Меандр", "Meander"},
+        {"Импульс", "Impulse"},
+        {"Пакет", "Packet"},
+        {"Произвольный", "Free"}
     };
 
-    return names[value];
+    return names[value][lang];
 }
 
 

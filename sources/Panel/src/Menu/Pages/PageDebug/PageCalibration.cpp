@@ -100,29 +100,29 @@ static void OnChange_Source(bool)
 DEF_CHOICE_3(cChannel,
     "КАНАЛ", "CHANNEL",
     "", "",
-    "A", "",
-    "B", "",
-    "", "",
+    "A", "A", "", "",
+    "B", "B", "", "",
+    "",  "",  "", "",
     channel, pCalibration, Item::FuncActive, OnChange_Source, FuncDraw
 )
 
 DEF_CHOICE_3(cSignal,
     "СИГНАЛ", "Signal",
     "", "",
-    "Синус", "",
-    "DDS", "",
-    "", "",
+    "Синус", "Sinus", "", "",
+    "DDS", "DDS", "", "",
+    "", "", "", "",
     signal, pCalibration, Item::FuncActive, OnChange_Source, FuncDraw
 )
 
 DEF_CHOICE_5(cRange,
     "Диапазон", "Range",
     "", "",
-    "100 мВ", "",
-    "300 мВ", "",
-    "1 В", "",
-    "3 В", "",
-    "10 В", "",
+    "100 мВ", "100 mV", "", "",
+    "300 мВ", "300 mv", "", "",
+    "1 В",    "1 V",    "", "",
+    "3 В",    "3 V",    "", "",
+    "10 В",   "10 V",   "", "",
     range, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
@@ -130,10 +130,10 @@ DEF_CHOICE_5(cRange,
 DEF_CHOICE_4(cParameterFullVoltage,
     "Параметр", "Parameter",
     "", "",
-    "Амплитуда", "",
-    "+5В", "",
-    "0В", "",
-    "-5В", "",
+    "Амплитуда", "Amplitude", "", "",
+    "+5В",       "+5V",       "", "",
+    "0В",        "0V",        "", "",
+    "-5В",       "-5V",       "", "",
     parameter, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
@@ -142,10 +142,10 @@ DEF_CHOICE_4(cParameterFullVoltage,
 DEF_CHOICE_4(cParameterHalfVoltage,
     "Параметр", "Parameter",
     "", "",
-    "Амплитуда", "",
-    "+2.5В", "",
-    "0В", "",
-    "-2.5В", "",
+    "Амплитуда", "Amplitude", "", "",
+    "+2.5В",     "+2.5V",     "", "",
+    "0В",        "0V",        "", "",
+    "-2.5В",     "-2.5V",     "", "",
     parameter, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 

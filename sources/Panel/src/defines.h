@@ -60,6 +60,8 @@ typedef void (*pFuncVB)(bool);
 
 #define ENABLED_RU  "Вкл"
 #define DISABLED_RU "Откл"
+#define ENABLED_EN  "On"
+#define DISABLED_EN "Off"
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \

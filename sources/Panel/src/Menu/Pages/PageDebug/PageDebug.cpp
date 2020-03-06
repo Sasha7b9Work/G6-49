@@ -418,8 +418,10 @@ static void OnPress_DebugMode(bool)
 DEF_CHOICE_2( cConsole,                                                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ ---
     "КОНСОЛЬ", "CONSOLE",
     "Включает и выключает отображение отладочной консоли", "Turns the debug console display on or off",
-    DISABLED_RU, "Отображение консоли включено",
-    ENABLED_RU,  "Отображение консоли выключено",
+    DISABLED_RU,                     DISABLED_EN,
+    "Отображение консоли выключено", "Console display off",
+    ENABLED_RU,                      ENABLED_EN,
+    "Отображение консоли включено",  "Console Display Enabled",
     FLAG, BIT_CONSOLE, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
 )
 
@@ -440,8 +442,10 @@ DEF_CHOICE_2( cStatistics,                                                      
     "СТАТИСТИКА", "STATISTICS",
     "Включает/отключает показ на экране статистики по частоте кадров в виде ФПС / время отрисовки одного кадра / время, потраченое на отрисовку за весь кадр",
     "Enables / disables the display on the screen of statistics on the frame rate in the form of FPS / time for rendering one frame / time spent on rendering for the entire frame",
-    DISABLED_RU, "Показ статистики включён",
-    ENABLED_RU,  "Показ статистики выключен",
+    DISABLED_RU,                 DISABLED_EN,
+    "Показ статистики отключён", "Show statistics disabled",
+    ENABLED_RU,                  ENABLED_EN,
+    "Показ статистики включен",  "Show statistics enabled",
     FLAG, BIT_STATISTICS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
@@ -449,8 +453,10 @@ DEF_CHOICE_2( cStatistics,                                                      
 DEF_CHOICE_2( cShowSends,                                                                                                                            //--- ОТЛАДКА - Показывать параметры ---
     "Показывать параметры", "Show options",
     "Показывает параметры, засылаемые в ПЛИС", "Shows parameters sent to FPGA",
-    DISABLED_RU, "Показ параметров включён",
-    ENABLED_RU,  "Показ параметров выключен",
+    DISABLED_RU,                 DISABLED_EN,
+    "Показ параметров отключён", "Parameter display disabled",
+    ENABLED_RU,                  ENABLED_EN,
+    "Показ параметров включён",  "Parameter display enabled",
     FLAG, BIT_SHOW_SENDS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 

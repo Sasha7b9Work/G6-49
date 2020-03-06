@@ -333,9 +333,11 @@ public:
 
     int8    *cell;
     /// Варианты выбора на русском и английском языках.
-    pString *names;
+    pString *namesRU;
+    pString *namesEN;
     /// Подсказки для каждого варианта на русском языке
-    pString *hints;
+    pString *hintsRU;
+    pString *hintsEN;
     /// Функция должна вызываться после изменения значения элемента.
     pFuncVB	 _funcOnChanged;
     /// Функция вызывается после отрисовки элемента. 

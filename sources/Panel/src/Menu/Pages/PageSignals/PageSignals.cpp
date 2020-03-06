@@ -18,8 +18,10 @@ static int numForm = 0;
 DEF_CHOICE_2( cChannel,                                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
     "КАНАЛ", "CHANNEL",
     "Выбор канала для настройки", "Channel selection for tuning",
-    "A", "Управление параметрами сигнала на выходе A.",
-    "B", "Управление параметрами сигнала на выходе B.",
+    "A",                                          "A",
+    "Управление параметрами сигнала на выходе A", "Control the parameters of the signal at output A",
+    "B",                                          "B",
+    "Управление параметрами сигнала на выходе B", "Control the parameters of the signal at output B",
     FLAG, BIT_CHANNEL, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
 )
 
@@ -28,27 +30,27 @@ DEF_CHOICE_2( cChannel,                                                         
 DEF_CHOICE_8( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала", "Waveform selection",
-    FORM_RU(TypeForm::Sine),         "Синус",
-    FORM_RU(TypeForm::RampPlus),     "Нарастающая пила",
-    FORM_RU(TypeForm::RampMinus),    "Убывающая пила",
-    FORM_RU(TypeForm::Triangle),     "Треугольник",
-    FORM_RU(TypeForm::Meander),      "Меандр",
-    FORM_RU(TypeForm::Impulse),      "Треугольник",
-    FORM_RU(TypeForm::PacketImpuls), "Пакеты",
-    FORM_RU(TypeForm::Free),         "Произвольный",
+    FORM_RU(TypeForm::Sine),         FORM_EN(TypeForm::Sine),         "Синус",            "Sinus",
+    FORM_RU(TypeForm::RampPlus),     FORM_EN(TypeForm::RampPlus),     "Нарастающая пила", "Escalating saw",
+    FORM_RU(TypeForm::RampMinus),    FORM_EN(TypeForm::RampMinus),    "Убывающая пила",   "Waning saw",
+    FORM_RU(TypeForm::Triangle),     FORM_EN(TypeForm::Triangle),     "Треугольник",      "Triangle",
+    FORM_RU(TypeForm::Meander),      FORM_EN(TypeForm::Meander),      "Меандр",           "Meander",
+    FORM_RU(TypeForm::Impulse),      FORM_EN(TypeForm::Impulse),      "Импульсы",         "Impulse",
+    FORM_RU(TypeForm::PacketImpuls), FORM_EN(TypeForm::PacketImpuls), "Пакеты",           "Packets",
+    FORM_RU(TypeForm::Free),         FORM_EN(TypeForm::Free),         "Произвольный",     "Free",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала", "Waveform selection",
-    FORM_RU(TypeForm::Sine),      "Синус",
-    FORM_RU(TypeForm::RampPlus),  "Нарастающая пила",
-    FORM_RU(TypeForm::RampMinus), "Убывающая пила",
-    FORM_RU(TypeForm::Triangle),  "Треугольник",
-    FORM_RU(TypeForm::Meander),   "Меандр",
-    FORM_RU(TypeForm::Impulse),   "Треугольник",
-    FORM_RU(TypeForm::Free),      "Произвольный",
+    FORM_RU(TypeForm::Sine),      FORM_RU(TypeForm::Sine),      "Синус",            "Sinus",
+    FORM_RU(TypeForm::RampPlus),  FORM_RU(TypeForm::RampPlus),  "Нарастающая пила", "Escalating saw",
+    FORM_RU(TypeForm::RampMinus), FORM_RU(TypeForm::RampMinus), "Убывающая пила",   "Waning saw",
+    FORM_RU(TypeForm::Triangle),  FORM_RU(TypeForm::Triangle),  "Треугольник",      "Triangle",
+    FORM_RU(TypeForm::Meander),   FORM_RU(TypeForm::Meander),   "Меандр",           "Meander",
+    FORM_RU(TypeForm::Impulse),   FORM_RU(TypeForm::Impulse),   "Импульсы",         "Impulse",
+    FORM_RU(TypeForm::Free),      FORM_RU(TypeForm::Free),      "Произвольный",     "Free",
     numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
