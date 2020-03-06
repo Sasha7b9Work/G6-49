@@ -48,7 +48,6 @@ static const Settings defSet =
     FreqMeasure::Disable,               // freq_measure
     0,                                  // freq_level
     0,                                  // freq_hysteresis
-    Language::RU,                       // Language
     BINARY_U32(00000000, 00000000, 00010110, 00011100), // flag1
 //                          ||| |  ||||||||  | ||||||------ 0  BIT_PARITY         Parity_Off
 //                          ||| |  ||||||||  | |||||------- 1  BIT_FREQ_INTERVAL  Interval_1
