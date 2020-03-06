@@ -18,7 +18,7 @@ typedef bool (*pFuncBKey)(const Key&);
                                     /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */        \
     uint8           nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                                  \
                                     /* В случае, если type == Item_Choice,  определяет номер бита */                                            \
-    const PageBase  *keeper_;       /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
+    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
     pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                                                             \
     const char      *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
 
@@ -75,7 +75,7 @@ public:
     /// Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
     int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
 
-    Page *Keeper() const { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper_)); };
+    Page *Keeper() const { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper)); };
 
     bool IsActive() const { return funcOfActive(); };
 
