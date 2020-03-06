@@ -29,6 +29,8 @@
 /// Если true, то засылка в прибор выполняется при каждом повороте ручки
 #define DEBUG_SHOW_SENDS        (FL(BIT_SHOW_SENDS))
 
+#define LANGUAGE                (FL(BIT_LANGUAGE))
+
 #define CHANNEL_ENABLED(ch)     ((FLAG >> ((ch) + BIT_CHAN_A)) & 0x01)
 #define SWITCH_CHANNEL_A        (FLAG ^= (1 << (BIT_CHAN_A)))
 #define SWITCH_CHANNEL_B        (FLAG ^= (1 << (BIT_CHAN_B)))
@@ -70,7 +72,6 @@ public:
     FreqMeasure::E              freq_measure;                           ///< Режим измерения частотомера
     int16                       freq_level;                             ///< Уровень синхронизации
     int16                       freq_hysteresis;                        ///< Величина гистерезиса
-    Language::E                 lang;
     uint                        flag;
     uint                        flagDBG;
 
@@ -85,21 +86,21 @@ public:
 #define BIT_PC14            5
 
 
-#define BIT_FREQ_INTERVAL 1   ///< Interval - интервал запуска измерений
-#define BIT_CONSOLE       2   ///<          - показ отладочной консоли
-#define BIT_DBG_MODE      5   ///<          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
-#define BIT_STATISTICS    7   ///<          - если 1, то показывать статистику
+#define BIT_FREQ_INTERVAL 1   // Interval - интервал запуска измерений
+#define BIT_CONSOLE       2   //          - показ отладочной консоли
+#define BIT_DBG_MODE      5   //          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
+#define BIT_STATISTICS    7   //          - если 1, то показывать статистику
 #define BIT_NOT_USED      8
-#define BIT_CHAN_A        9   ///<          - бит, отвечающий за включённый канал A
-#define BIT_CHAN_B        10  ///<          - бит, отвечающий за включённый канал B
-#define BIT_CHANNEL       11  ///< Chan  - текущий выбранный канал
-#define BIT_FREQ_RESIST   14  ///< FreqResist - сопротивление входа частотомера
-#define BIT_FREQ_COUPLE   15  ///< FreqCouple - открытый/закрытый вход частотомера
-#define BIT_FREQ_FILTR    16  ///< FreqFiltr   - ФНЧ частотомера
-
-#define BIT_FREQ_TEST     18  ///< FreqTest    - включение тестового режима
-#define BIT_BIG_SYMBOLS   19  ///< Если 1, то символы выводятся чуть увеличенными
-#define BIT_SHOW_SENDS    20  ///< Если 1, то нужно показывать засылаемые настройки
+#define BIT_CHAN_A        9   //          - бит, отвечающий за включённый канал A
+#define BIT_CHAN_B        10  //          - бит, отвечающий за включённый канал B
+#define BIT_CHANNEL       11  // Chan  - текущий выбранный канал
+#define BIT_FREQ_RESIST   14  // FreqResist - сопротивление входа частотомера
+#define BIT_FREQ_COUPLE   15  // FreqCouple - открытый/закрытый вход частотомера
+#define BIT_FREQ_FILTR    16  // FreqFiltr   - ФНЧ частотомера
+#define BIT_LANGUAGE      17  // Язык
+#define BIT_FREQ_TEST     18  // FreqTest    - включение тестового режима
+#define BIT_BIG_SYMBOLS   19  // Если 1, то символы выводятся чуть увеличенными
+#define BIT_SHOW_SENDS    20  // Если 1, то нужно показывать засылаемые настройки
 
     void SaveToMemory();
     void LoadFromMemory(bool _default);

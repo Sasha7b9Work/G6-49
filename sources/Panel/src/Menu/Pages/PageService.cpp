@@ -39,6 +39,15 @@ DEF_BUTTON( bReset,                                                             
 )
 
 
+DEF_CHOICE_2(cLanguage,
+    "Язык", "Language",
+    "Выбор языка", "Language choice",
+    "Russian", "",
+    "English", "",
+    FLAG, BIT_LANGUAGE, pService, Item::FuncActive, FuncChangedChoice, FuncDraw
+)
+
+
 extern const PageBase pDebug;
 
 
@@ -46,7 +55,7 @@ DEF_PAGE_4_VAR( pService,                                                       
     "СЕРВИС", "SERVICE",    //-V641
     "Сервисные функции", "Service functions",
     bReset,
-    *Item::Empty(),
+    cLanguage,
     *Item::Empty(),
     *Item::Empty(),
     Page::Service, reinterpret_cast<PageBase *>(Menu::mainPage), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
@@ -55,5 +64,5 @@ DEF_PAGE_4_VAR( pService,                                                       
 
 void PageDebug::Enable()
 {
-    pService.items[1] = PageDebug::self;
+    pService.items[2] = PageDebug::self;
 }

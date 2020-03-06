@@ -61,7 +61,7 @@ public:
 
     void Open(bool open);
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
-    String GetTitle(int lang) const;
+    String GetTitle(uint lang) const;
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае

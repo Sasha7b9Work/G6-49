@@ -115,7 +115,7 @@ void Item::Open(bool open)
 }
 
 
-String Item::GetTitle(int lang) const
+String Item::GetTitle(uint lang) const
 {
     return String(title[lang]);
 }
@@ -158,5 +158,5 @@ int Item::DrawHint(int x, int y, int width, Color color) const
 {
     color.SetAsCurrent();
 
-    return Text::DrawTextInColumnWithTransfers(x, y, width, hint[set.lang], color);
+    return Text::DrawTextInColumnWithTransfers(x, y, width, hint[LANGUAGE], color);
 }
