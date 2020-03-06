@@ -1,5 +1,6 @@
 #include "Display/Symbols.h"
 #include "Display/Text.h"
+#include "Generator/ParametersSupport.h"
 #include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
@@ -7,11 +8,9 @@
 #include "Settings/Settings.h"
 
 
-// «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
+static ParameterTuner tuner;
+/// «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
 static ParameterValue storedParameter = ParameterAmplitude();
-
-// Ќастройка данного параметра происходит в данный момент
-static Parameter *tunedParameter = nullptr;
 
 
 void PageTuneParameter::SetParameter(Parameter *parameter)
@@ -21,7 +20,7 @@ void PageTuneParameter::SetParameter(Parameter *parameter)
         storedParameter = *reinterpret_cast<ParameterValue *>(parameter);
     }
 
-    tunedParameter = parameter;
+    tuner.SetParameter(parameter);
 }
 
 
@@ -119,7 +118,7 @@ static bool OnControl_TuneParameter(const Key &key)
         }
     }
 
-    return tunedParameter->tuner->ProcessControl(key);
+    return tuner.ProcessControl(key);
 }
 
 static void OnDraw_TuneParameter()
