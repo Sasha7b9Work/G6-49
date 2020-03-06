@@ -12,8 +12,8 @@ Page *PageLoadForm::pointer = reinterpret_cast<Page *>(const_cast<PageBase *>(&p
 
 
 DEF_BUTTON( bUp,                                                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Вверх ---
-    "Вверх",
-    "",
+    "Вверх", "Up",
+    "", "",
     pageLoad, Item::FuncActive, FDrive::PressUp, FuncDraw
 )
 
@@ -21,8 +21,8 @@ volatile const ButtonBase *pbUp = &bUp;
 
 
 DEF_BUTTON( bDown,                                                                                                                             //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Вниз ---
-    "Вниз",
-    "",
+    "Вниз", "Down",
+    "", "",
     pageLoad, Item::FuncActive, FDrive::PressDown, FuncDraw
 )
 
@@ -30,8 +30,8 @@ volatile const ButtonBase *pbDown = &bDown;
 
 
 DEF_BUTTON( bEnter,                                                                                                                           //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Enter ---
-    "Выбор",
-    "",
+    "Выбор", "Choice",
+    "", "",
     pageLoad, Item::FuncActive, Button::FuncPress, FuncDraw
 )
 
@@ -45,8 +45,8 @@ static void OnPress_Choose()
 }
 
 DEF_BUTTON( bChoose,                                                                                                                     //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Установить ---
-    "Выбрать",
-    "",
+    "Выбрать", "Select",
+    "", "",
     pageLoad, Item::FuncActive, OnPress_Choose, FuncDraw
 )
 
@@ -77,9 +77,9 @@ static bool OnKey(const Key &control)
     return false;
 }
 
-DEF_PAGE_4( pageLoad,                                                                                                                                 //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА --- //-V641
-    "ВЫБОР",   //-V641
-    "Страница выбора формы произвольного сигнала для загрузки с флешки",
+DEF_PAGE_4( pageLoad,                                                                                                                         //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА --- //-V641
+    "ВЫБОР", "CHOICE",   //-V641
+    "Страница выбора формы произвольного сигнала для загрузки с флешки", "The page for choosing the shape of an arbitrary waveform to boot from a USB flash drive",
     &bChoose,   ///< НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Установить
     0,
     0,

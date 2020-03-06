@@ -10,8 +10,8 @@ static void OnPress_PE15(bool)
 }
 
 DEF_CHOICE_2( cPE15,
-    "PE15",
-    "",
+    "PE15", "PE15",
+    "", "",
     "0", "",
     "1", "",
     FLAG_DBG, BIT_PE15, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PE15, FuncDraw
@@ -24,8 +24,8 @@ static void OnPress_PB10(bool)
 }
 
 DEF_CHOICE_2( cPB10,
-   "PB10",
-    "",
+   "PB10", "PB10",
+    "", "",
     "0", "",
     "1", "",
     FLAG_DBG, BIT_PB10, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PB10, FuncDraw
@@ -38,8 +38,8 @@ static void OnPress_PF0(bool)
 }
 
 DEF_CHOICE_2( cPF0,
-    "PF0",
-    "",
+    "PF0", "PF0",
+    "", "",
     "0", "",
     "1", "",
     FLAG_DBG, BIT_PF0, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF0, FuncDraw
@@ -52,8 +52,8 @@ static void OnPress_PF5(bool)
 }
 
 DEF_CHOICE_2( cPF5,
-    "PF5",
-    "",
+    "PF5", "PF5",
+    "", "",
     "0", "",
     "1", "",
     FLAG_DBG, BIT_PF5, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF5, FuncDraw
@@ -66,8 +66,8 @@ static void OnPress_PC13(bool)
 }
 
 DEF_CHOICE_2( cPC13,
-    "PC13",
-    "",
+    "PC13", "PC13",
+    "", "",
     "0", "",
     "1", "",
     FLAG_DBG, BIT_PC13, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC13, FuncDraw
@@ -80,8 +80,8 @@ static void OnPress_PC14(bool)
 }
 
 DEF_CHOICE_2(cPC14,
-    "PC14",
-    "",
+    "PC14", "PC14",
+    "", "",
     "0", "",
     "1", "",
     FLAG_DBG, BIT_PC14, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC14, FuncDraw
@@ -89,8 +89,8 @@ DEF_CHOICE_2(cPC14,
 
 
 DEF_PAGE_6(pSubRanges,
-    "Диапазоны",
-    "",
+    "Диапазоны", "Ranges",
+    "", "",
     &cPE15,
     &cPB10,
     &cPF0,

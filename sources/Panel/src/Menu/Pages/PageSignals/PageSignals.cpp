@@ -16,9 +16,8 @@ static int numForm = 0;
 
 
 DEF_CHOICE_2( cChannel,                                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
-    "КАНАЛ",
-    "Выбор канала для настройки."
-    ,
+    "КАНАЛ", "CHANNEL",
+    "Выбор канала для настройки", "Channel selection for tuning",
     "A", "Управление параметрами сигнала на выходе A.",
     "B", "Управление параметрами сигнала на выходе B.",
     FLAG, BIT_CHANNEL, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
@@ -27,9 +26,8 @@ DEF_CHOICE_2( cChannel,                                                         
 
 
 DEF_CHOICE_8( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
-    "ФОРМА",
-    "Выбор формы сигнала."
-    ,
+    "ФОРМА", "FORM",
+    "Выбор формы сигнала", "Waveform selection",
     FORM_RU(TypeForm::Sine),         "Синус",
     FORM_RU(TypeForm::RampPlus),     "Нарастающая пила",
     FORM_RU(TypeForm::RampMinus),    "Убывающая пила",
@@ -42,9 +40,8 @@ DEF_CHOICE_8( cFormA,                                                           
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
-    "ФОРМА",
-    "Выбор формы сигнала."
-    ,
+    "ФОРМА", "FORM",
+    "Выбор формы сигнала", "Waveform selection",
     FORM_RU(TypeForm::Sine),      "Синус",
     FORM_RU(TypeForm::RampPlus),  "Нарастающая пила",
     FORM_RU(TypeForm::RampMinus), "Убывающая пила",
@@ -62,14 +59,14 @@ static void OnPress_TuneParameter()
 }
 
 DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
-    "Изменить",
-    "Открывает окно ввода параметра.",
+    "Изменить", "Change",
+    "Открывает окно ввода параметра", "Opens the parameter input window",
     pageSignals, Item::FuncActive, OnPress_TuneParameter, FuncDraw
 )
 
 DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
-    "ПАРАМЕТР",
-    "Выбор параметра для настройки.",
+    "ПАРАМЕТР", "PARAMETER",
+    "Выбор параметра для настройки", "Select an option to configure",
     pageSignals, Item::FuncActive, OnPress_TuneParameter, WAVE(Chan::A).GetForm(0)
 )
 
@@ -86,8 +83,8 @@ static bool OnKey_PageSignals(const Key &)
 }
 
 DEF_PAGE_4( pageSignals,   //-V641
-    "НАСТРОЙКИ СИГНАЛОВ",   //-V641 //-V1027
-    "",
+    "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",   //-V641 //-V1027
+    "", "",
     &cChannel,              ///< НАСТРОЙКИ СИГНАЛОВ - Канал
     &cFormA,                ///< НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,           ///< НАСТРОЙКИ СИГНАЛОВ - Параметр

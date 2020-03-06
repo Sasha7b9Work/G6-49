@@ -11,16 +11,17 @@ typedef bool (*pFuncBKey)(const Key&);
 
 
 /// Общая часть для всех типов элементов меню
-#define COMMON_PART_MENU_ITEM                                                                                                                   \
-    uint8           type;           /* Тип итема */                                                                                             \
-    int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                                \
-    bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                      \
-                                    /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */        \
-    uint8           nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                                  \
-                                    /* В случае, если type == Item_Choice,  определяет номер бита */                                            \
-    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                                \
-    pFuncBV         funcOfActive;   /* Активен ли данный элемент */                                                                             \
-    const char      *titleHint[2]   /* Название страницы на русском и английском языках. Также подсказка для режима помощи */
+#define COMMON_PART_MENU_ITEM                                                                                                               \
+    uint8           type;           /* Тип итема */                                                                                         \
+    int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                            \
+    bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                  \
+                                    /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */    \
+    uint8           nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                              \
+                                    /* В случае, если type == Item_Choice,  определяет номер бита */                                        \
+    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                            \
+    const char      *title[2];      /* Название страницы на русском и английском языках */                                                  \
+    const char      *hint[2];       /* Подсказка на русском и английском языках */                                                          \
+    pFuncBV         funcOfActive    /* Активен ли данный элемент */
 
 class PageBase;
 class Page;
@@ -60,7 +61,7 @@ public:
 
     void Open(bool open);
     /// Возвращает название элемента, как оно выглядит на дисплее прибора
-    String GetTitle() const;
+    String GetTitle(int lang) const;
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае

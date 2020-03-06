@@ -33,8 +33,8 @@ static void OnPress_Reset()
 }
 
 DEF_BUTTON( bReset,                                                                                                                                                 //--- ОТЛАДКА - СБРОС ---
-    "СБРОС",
-    "Сброс настроек на значения по умолчанию",
+    "СБРОС", "RESET",
+    "Сброс настроек на значения по умолчанию", "Reset to default",
     pService, Item::FuncActive, OnPress_Reset, FuncDraw
 )
 
@@ -42,9 +42,9 @@ DEF_BUTTON( bReset,                                                             
 extern const PageBase pDebug;
 
 
-DEF_PAGE_4_VAR( pService,                                                                                                                                                        //--- СЕРВИС --- //-V641
-    "СЕРВИС",    //-V641
-    "Сервисные функции",
+DEF_PAGE_4_VAR( pService,                                                                                                                                            //--- СЕРВИС --- //-V641
+    "СЕРВИС", "SERVICE",    //-V641
+    "Сервисные функции", "Service functions",
     bReset,
     *Item::Empty(),
     *Item::Empty(),

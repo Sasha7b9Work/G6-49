@@ -67,7 +67,7 @@ void Button::Draw(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle().c_str());
+    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle(set.lang).c_str());
     funcForDraw(x, y);
 }
 
@@ -99,7 +99,7 @@ void Page::DrawClosed(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle().c_str());
+    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle(set.lang).c_str());
 }
 
 
@@ -115,7 +115,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        GetTitle().Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        GetTitle(set.lang).Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
     }
@@ -148,7 +148,7 @@ void Choice::Draw(bool opened, int x, int y) const
         Painter::DrawRectangle(x, y, width, height, Color::FILL);
         Painter::DrawHLine(y + 12, x, x + width);
         Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
-        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle().c_str());
+        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle(set.lang).c_str());
 
         y += 14;
 
@@ -177,7 +177,7 @@ void Choice::Draw(bool opened, int x, int y) const
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        GetTitle().Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        GetTitle(set.lang).Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Color::BACK.SetAsCurrent();
 
@@ -213,7 +213,7 @@ void Governor::Draw(int x, int y) const
     bool opened = IsOpened();
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-    GetTitle().Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+    GetTitle(set.lang).Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
     Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
 
     Color::BACK.SetAsCurrent();

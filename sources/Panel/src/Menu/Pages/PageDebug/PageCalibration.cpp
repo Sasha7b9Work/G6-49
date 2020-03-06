@@ -98,8 +98,8 @@ static void OnChange_Source(bool)
 }
 
 DEF_CHOICE_3(cChannel,
-    "КАНАЛ",
-    "",
+    "КАНАЛ", "CHANNEL",
+    "", "",
     "A", "",
     "B", "",
     "", "",
@@ -107,8 +107,8 @@ DEF_CHOICE_3(cChannel,
 )
 
 DEF_CHOICE_3(cSignal,
-    "СИГНАЛ",
-    "",
+    "СИГНАЛ", "Signal",
+    "", "",
     "Синус", "",
     "DDS", "",
     "", "",
@@ -116,8 +116,8 @@ DEF_CHOICE_3(cSignal,
 )
 
 DEF_CHOICE_5(cRange,
-    "Диапазон",
-    "",
+    "Диапазон", "Range",
+    "", "",
     "100 мВ", "",
     "300 мВ", "",
     "1 В", "",
@@ -128,8 +128,8 @@ DEF_CHOICE_5(cRange,
 
 /// Для смещения +/- 5В
 DEF_CHOICE_4(cParameterFullVoltage,
-    "Параметр",
-    "",
+    "Параметр", "Parameter",
+    "", "",
     "Амплитуда", "",
     "+5В", "",
     "0В", "",
@@ -140,8 +140,8 @@ DEF_CHOICE_4(cParameterFullVoltage,
 
 /// Для смещения +/- 2.5В
 DEF_CHOICE_4(cParameterHalfVoltage,
-    "Параметр",
-    "",
+    "Параметр", "Parameter",
+    "", "",
     "Амплитуда", "",
     "+2.5В", "",
     "0В", "",
@@ -231,8 +231,8 @@ const PageBase *page = const_cast<const PageBase *>(reinterpret_cast<PageBase *>
 
 
 DEF_PAGE_4_VAR( pCalibration,
-    "КАЛИБРОВКА",
-    "",
+    "КАЛИБРОВКА", "CALIBRATION",
+    "", "",
     cChannel,
     cSignal,
     cRange,

@@ -34,8 +34,8 @@ static void OnPress_OrderUp()
 }
 
 DEF_SMALL_BUTTON(sbOrderUp,                                                                                                                               //--- ОКНО ВВОДА - СИМВОЛ ВЛЕВО ---
-    "Порядок больше",
-    "Увеличить порядок единицы измерения",
+    "Порядок больше", "Order more",
+    "Увеличить порядок единицы измерения", "Increase unit order",
     *PageTuneParameter::self, Item::FuncActive, OnPress_OrderUp, Draw_Left
 )
 
@@ -50,8 +50,8 @@ static void OnPress_OrderDown()
 }
 
 DEF_SMALL_BUTTON(sbOrderDown,                                                                                                                            //--- ОКНО ВВОДА - СИМВОЛ ВПРАВО ---
-    "Порядок меньшше",
-    "Уменьшить порядок единицы измерения",
+    "Порядок меньшше", "Order less",
+    "Уменьшить порядок единицы измерения", "Reduce unit order",
     *PageTuneParameter::self, Item::FuncActive, OnPress_OrderDown, Draw_Right
 )
 
@@ -78,8 +78,8 @@ static void Draw_Cancel(int x, int y)
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
-    "ЕДИНИЦЫ ИЗМЕРЕНИЯ",
-    "Отказаться от ввода нового значения",
+    "ОТМЕНА", "CANCEL",
+    "Отказаться от ввода нового значения", "Refuse to enter a new value",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
 
@@ -96,8 +96,8 @@ static void OnPress_Enter()
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
-    "ВВОД",
-    "Подтвердить ввод нового значения",
+    "ВВОД", "ENTER",
+    "Подтвердить ввод нового значения", "Confirm new value entry",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Enter, Draw_Enter
 )
 
@@ -128,8 +128,8 @@ static void OnDraw_TuneParameter()
 
 
 DEF_PAGE_SB( pTuneParameter,   //-V641
-    "ВВОД ЗНАЧЕНИЯ", //-V641
-    "",
+    "ВВОД ЗНАЧЕНИЯ", "ENTER VALUE", //-V641
+    "", "",
     &sbOrderUp,         ///< ОКНО ВВОДА - СИМВОЛ ВЛЕВО
     &sbOrderDown,       ///< ОКНО ВВОДА - СИМВОЛ ВПРАВО
     &sbCancel,          ///< ОКНО ВВОДА - ОТМЕНА

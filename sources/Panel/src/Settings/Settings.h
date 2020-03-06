@@ -70,6 +70,7 @@ public:
     FreqMeasure::E              freq_measure;                           ///< Режим измерения частотомера
     int16                       freq_level;                             ///< Уровень синхронизации
     int16                       freq_hysteresis;                        ///< Величина гистерезиса
+    Language::E                 lang;
     uint                        flag;
     uint                        flagDBG;
 

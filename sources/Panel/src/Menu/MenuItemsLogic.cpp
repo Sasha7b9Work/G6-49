@@ -582,15 +582,15 @@ pString ChoiceParameter::NameCurrentSubItem() const
 
 String Item::FullPath()
 {
-    String title = GetTitle();
-    const char *titles[5] = {title.c_str(), 0, 0, 0, 0};
+    String titl = GetTitle(set.lang);
+    const char *titles[5] = {titl.c_str(), 0, 0, 0, 0};
     int pointer = 1;
 
     Page *parent = Keeper();
 
     while(parent)
     {
-        titles[pointer++] = parent->titleHint[0];
+        titles[pointer++] = parent->title[set.lang];
         parent = parent->Keeper();
     }
 

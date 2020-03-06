@@ -416,8 +416,8 @@ static void OnPress_DebugMode(bool)
 }
 
 DEF_CHOICE_2( cConsole,                                                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ ---
-    "КОНСОЛЬ",
-    "Включает и выключает отображение отладочной консоли",
+    "КОНСОЛЬ", "CONSOLE",
+    "Включает и выключает отображение отладочной консоли", "Turns the debug console display on or off",
     DISABLED_RU, "Отображение консоли включено",
     ENABLED_RU,  "Отображение консоли выключено",
     FLAG, BIT_CONSOLE, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
@@ -430,16 +430,16 @@ static void OnPress_SaveSettings()
 }
 
 DEF_BUTTON( bSaveSettings,                                                                                                                            //--- ОТЛАДКА - СОХРАНИТЬ НАСТРОЙКИ ---
-    "СОХРАНИТЬ НАСТРОЙКИ",
-    "Сохранить текущие настройки",
+    "СОХРАНИТЬ НАСТРОЙКИ", "SAVE SETTINGS",
+    "Сохранить текущие настройки", "Save current settings",
     pDebug, Item::FuncActive, OnPress_SaveSettings, FuncDraw
 )
 
 
 DEF_CHOICE_2( cStatistics,                                                                                                                                     //--- ОТЛАДКА - Статистика ---
-    "СТАТИСТИКА",
-    "Включает/отключает показ на экране статистики по частоте кадров в виде ФПС / время отрисовки одного кадра / время, потраченое на отрисовку за весь кадр"
-    ,
+    "СТАТИСТИКА", "STATISTICS",
+    "Включает/отключает показ на экране статистики по частоте кадров в виде ФПС / время отрисовки одного кадра / время, потраченое на отрисовку за весь кадр",
+    "Enables / disables the display on the screen of statistics on the frame rate in the form of FPS / time for rendering one frame / time spent on rendering for the entire frame",
     DISABLED_RU, "Показ статистики включён",
     ENABLED_RU,  "Показ статистики выключен",
     FLAG, BIT_STATISTICS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
@@ -447,9 +447,8 @@ DEF_CHOICE_2( cStatistics,                                                      
 
 
 DEF_CHOICE_2( cShowSends,                                                                                                                            //--- ОТЛАДКА - Показывать параметры ---
-    "Показывать параметры",
-    "Показывает параметры, засылаемые в ПЛИС"
-    ,
+    "Показывать параметры", "Show options",
+    "Показывает параметры, засылаемые в ПЛИС", "Shows parameters sent to FPGA",
     DISABLED_RU, "Показ параметров включён",
     ENABLED_RU,  "Показ параметров выключен",
     FLAG, BIT_SHOW_SENDS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
@@ -462,8 +461,8 @@ static void OnPress_Prev()
 }
 
 DEF_BUTTON( bPrev,                                                                                                                                            //--- РЕГИСТРЫ - Предыдущий ---
-    "Предыдущий",
-    "Переход к предыдущему регистру",
+    "Предыдущий", "Previous",
+    "Переход к предыдущему регистру", "Go to previous register",
     pRegisters, Item::FuncActive, OnPress_Prev, FuncDraw
 )
 
@@ -474,8 +473,8 @@ static void OnPress_Next()
 }
 
 DEF_BUTTON( bNext,                                                                                                                                             //--- РЕГИСТРЫ - Следующий ---
-    "Следующий",
-    "Переход к следующему регистру",
+    "Следующий", "Next",
+    "Переход к следующему регистру", "Go to the next register",
     pRegisters, Item::FuncActive, OnPress_Next, FuncDraw
 )
 
@@ -495,8 +494,8 @@ static void OnDraw_Cancel(int x, int y)
 }
 
 DEF_BUTTON( bCancel,                                                                                                                               //--- РЕГИСТРЫ - Input window - Отмена ---
-    "Отмена",
-    "Отменяет засылку значения в регистр и закрывает окно ввода",
+    "Отмена", "Cancel",
+    "Отменяет засылку значения в регистр и закрывает окно ввода", "Cancels registering a value and closes the input window",
     pRegisters, Item::FuncActive, OnPress_Cancel, OnDraw_Cancel
 )
 
@@ -507,8 +506,8 @@ static void OnDraw_Backspace(int x, int y)
 }
 
 DEF_BUTTON( bBackspace,                                                                                                                         //--- РЕГИСТРЫ - Input window - Backspace ---
-    "Backspace",
-    "Удаляет последний введённый символ",
+    "Backspace", "Backspace",
+    "Удаляет последний введённый символ", "Deletes the last character entered",
     pRegisters, Item::FuncActive, NumberBuffer::PressBackspace, OnDraw_Backspace
 )
 
@@ -525,8 +524,8 @@ static void OnDraw_Save(int x, int y)
 }
 
 DEF_BUTTON( bSave,                                                                                                                                //--- РЕГИСТРЫ - Окно ввода --- Заслать ---
-    "Заслать",
-    "Записывает значение в выбранный регистр",
+    "Заслать", "Send",
+    "Записывает значение в выбранный регистр", "Writes a value to the selected register",
     pRegisters, Item::FuncActive, OnPress_Save, OnDraw_Save
 )
 
@@ -581,15 +580,15 @@ static void OnPress_Send()
 }
 
 DEF_BUTTON( bSend,                                                                                                                                               //--- РЕГИСТРЫ - Заслать ---
-    "Заслать",
-    "Открывает окно ввода значения регистра",
+    "Заслать", "Send",
+    "Открывает окно ввода значения регистра", "Opens a register value input window",
     pRegisters, Item::FuncActive, OnPress_Send, FuncDraw
 )
 
 
 DEF_PAGE_4_VAR( pRegisters,                                                                                                                                       //--- РЕГИСТРЫ --- //-V641
-    "РЕГИСТРЫ",   //-V641
-    "",
+    "РЕГИСТРЫ", "REGISTERS",   //-V641
+    "", "",
     bPrev,
     bNext,
     bSend,
@@ -599,8 +598,8 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
 
 
 DEF_PAGE_8( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641
-    "ОТЛАДКА",   //-V641
-    "",
+    "ОТЛАДКА", "DEBUG",   //-V641
+    "", "",
     PageDebug::Calibartion::self,
     &pRegisters,                                ///< ОТЛАДКА - Регистры
     PageDebug::SubRange::self,

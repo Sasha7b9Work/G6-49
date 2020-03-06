@@ -20,8 +20,8 @@ Item *Menu::currentItem = nullptr;
 extern const PageBase pSignals;
 
 DEF_PAGE_4( mainPageMenu,
-    "лемч",
-    "",
+    "лемч", "MENU",
+    "", "",
     PageSignals::self,
     PageFrequencyCounter::self,
     PageService::self,
