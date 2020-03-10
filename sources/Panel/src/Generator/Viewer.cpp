@@ -17,12 +17,12 @@ void Viewer::Draw(int x, int y)
 {
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
-    if((ch == CURRENT_CHANNEL) && std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0 && CURRENT_PAGE == PageSignals::self)
+    if((ch == CURRENT_CHANNEL) && std::strcmp(CURRENT_PARAM->Name(LANGUAGE), param->Name(LANGUAGE)) == 0 && CURRENT_PAGE == PageSignals::self)
     {
         Painter::FillRegion(x, y, 139, 9, Color::GRAY_25);
     }
 
-    String(param->Name()).Draw(x + 1, y, Color::Chan(ch));
+    String(param->Name(LANGUAGE)).Draw(x + 1, y, Color::Chan(ch));
 
     DrawParameterValue(x + 80, y);
 }

@@ -570,13 +570,13 @@ Item *Button::Press(Key::Action action)
 
 pString ChoiceParameter::NameSubItem(int number) const
 {
-    return static_cast<ParameterValue *>(form->GetParameter(number))->Name();
+    return static_cast<ParameterValue *>(form->GetParameter(number))->Name(LANGUAGE);
 }
 
 
 pString ChoiceParameter::NameCurrentSubItem() const
 {
-    return form->CurrentParameter()->Name();
+    return form->CurrentParameter()->Name(LANGUAGE);
 }
 
 

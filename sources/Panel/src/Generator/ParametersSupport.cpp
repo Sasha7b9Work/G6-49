@@ -690,11 +690,11 @@ void ParameterTuner::Draw()
 
 void ParameterTuner::DrawNameParameter()
 {
-    int length = Font::GetLengthText(support.parameter->Name());
+    int length = Font::GetLengthText(support.parameter->Name(LANGUAGE));
 
     int pos = support.X0() + support.Width() / 2 - length / 2;
 
-    Text::Draw(pos, support.Y0() + 15, support.parameter->Name(), Color::WHITE);
+    Text::Draw(pos, support.Y0() + 15, support.parameter->Name(LANGUAGE), Color::WHITE);
 }
 
 

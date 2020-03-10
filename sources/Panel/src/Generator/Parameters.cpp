@@ -32,9 +32,9 @@ bool Parameter::IsChoice() const
 }
 
 
-pString Parameter::Name() const
+pString Parameter::Name(uint lang) const
 {
-    return name;
+    return name[lang];
 }
 
 
@@ -224,7 +224,7 @@ bool ParameterChoice::DrawChoice(int, int) const
 }
 
 
-ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComplex(ParameterComplex::Manipulation, "Манипуляция", parameters)
+ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComplex(ParameterComplex::Manipulation, "Манипуляция", "Manipulation", parameters)
 {
 
 }
