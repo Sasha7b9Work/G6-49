@@ -339,7 +339,7 @@ public:
     pString *hintsRU;
     pString *hintsEN;
     /// Функция должна вызываться после изменения значения элемента.
-    pFuncVB	 _funcOnChanged;
+    pFuncVB	 funcOnChanged;
     /// Функция вызывается после отрисовки элемента. 
     pFuncVII funcForDraw;
 
@@ -352,9 +352,11 @@ public:
 
     int8 *cell;
     /// Варианты выбора на русском и английском языках.
-    pString *names;
+    pString *namesRU;
+    pString *namesEN;
     /// Подсказки для каждого варианта на русском языке
-    pString *hints;
+    pString *hintsRU;
+    pString *hintsEN;
     /// Функция должна вызываться после изменения значения элемента.
     pFuncVB	 funcOnChanged;
     /// Функция вызывается после отрисовки элемента. 
@@ -368,15 +370,15 @@ public:
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameCurrentSubItem() const;
+    const char *NameCurrentSubItem(uint lang) const;
     /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
-    String NameNextSubItem() const;
+    String NameNextSubItem(uint lang) const;
     /// Возвращает высоту раскрытого
     int GetHeightOpened() const;
 
-    const char *NamePrevSubItem();
+    const char *NamePrevSubItem(uint lang);
     /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
-    String NameSubItem(int i) const;
+    String NameSubItem(int i, uint lang) const;
     /// Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
     Item *Press(const Key &key);
 

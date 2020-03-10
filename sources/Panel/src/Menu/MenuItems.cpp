@@ -9,7 +9,7 @@
 #include "Log.h"
 
 
-#define NAME_FROM_INDEX(index) (names[index])
+#define NAME_FROM_INDEX(index, lang) ((lang) ? namesEN[index] : namesRU[index])
 
 
 static Item empty = { Item::Type::None };
@@ -20,13 +20,13 @@ Item *Item::Empty()
     return &empty;
 }
 
-const char *Choice::NameCurrentSubItem() const
+const char *Choice::NameCurrentSubItem(uint lang) const
 {
-    return NAME_FROM_INDEX(CurrentIndex());
+    return NAME_FROM_INDEX(CurrentIndex(), lang);
 }
 
 
-String Choice::NameNextSubItem() const
+String Choice::NameNextSubItem(uint lang) const
 {
     int8 nextIndex = CurrentIndex() + 1;
 
@@ -34,11 +34,11 @@ String Choice::NameNextSubItem() const
     {
         nextIndex = 0;
     }
-    return String(NAME_FROM_INDEX(nextIndex));
+    return String(NAME_FROM_INDEX(nextIndex, lang));
 }
 
 
-const char *Choice::NamePrevSubItem()
+const char *Choice::NamePrevSubItem(uint lang)
 {
     int8 prevIndex = CurrentIndex() - 1;
 
@@ -46,7 +46,7 @@ const char *Choice::NamePrevSubItem()
     {
         prevIndex = NumSubItems() - 1;
     }
-    return NAME_FROM_INDEX(prevIndex);
+    return NAME_FROM_INDEX(prevIndex, lang);
 }
 
 
@@ -58,9 +58,9 @@ Item *Page::GetItem(const Key &key) const
 }
 
 
-String Choice::NameSubItem(int i) const
+String Choice::NameSubItem(int i, uint lang) const
 {
-    return String(NAME_FROM_INDEX(i));
+    return String(NAME_FROM_INDEX(i, lang));
 }
 
 
