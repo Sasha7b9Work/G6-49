@@ -75,7 +75,7 @@ pString ParameterPainter::Digits(int8 *ind)
 }
 
 
-pString ParameterPainter::Units(Language::E lang)
+pString ParameterPainter::Units(uint lang)
 {
     return support[parameter->Type()].u[lang];
 }
@@ -377,7 +377,7 @@ void ParameterPainterSupporting::SetParameter(Parameter *param)
 
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::Digits(indexes));
-    std::strcat(buffer, ParameterPainter::Units());
+    std::strcat(buffer, ParameterPainter::Units(LANGUAGE));
 
     int length = X(NumSymbols() + 1);
 
@@ -522,7 +522,7 @@ void ParameterPainterSupporting::IncreaseInCurrentPosition()
 
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::Digits(indexes));
-    std::strcat(buffer, ParameterPainter::Units());
+    std::strcat(buffer, ParameterPainter::Units(LANGUAGE));
 
     PGenerator::SetParameter(parameter);
 }
@@ -537,7 +537,7 @@ void ParameterPainterSupporting::DecreaseInCurrentPosition()
 
     buffer[0] = '\0';
     std::strcpy(buffer, ParameterPainter::Digits(indexes));
-    std::strcat(buffer, ParameterPainter::Units());
+    std::strcat(buffer, ParameterPainter::Units(LANGUAGE));
 
     PGenerator::SetParameter(parameter);
 }
@@ -690,11 +690,11 @@ void ParameterTuner::Draw()
 
 void ParameterTuner::DrawNameParameter()
 {
-    int length = Font::GetLengthText(support.parameter->Name(LANG_IS_EN));
+    int length = Font::GetLengthText(support.parameter->Name(LANGUAGE));
 
     int pos = support.X0() + support.Width() / 2 - length / 2;
 
-    Text::Draw(pos, support.Y0() + 15, support.parameter->Name(LANG_IS_EN), Color::WHITE);
+    Text::Draw(pos, support.Y0() + 15, support.parameter->Name(LANGUAGE), Color::WHITE);
 }
 
 

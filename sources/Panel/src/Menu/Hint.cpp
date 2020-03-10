@@ -92,7 +92,7 @@ void Hint::Draw()
             int yUGO = y0 + 5;
 
             Color::GREEN_50.SetAsCurrent();
-            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->GetTitle(LANG_IS_EN).c_str());
+            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->GetTitle(LANGUAGE).c_str());
             Color::GREEN.SetAsCurrent();
 
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5; //-V2007
@@ -153,7 +153,7 @@ int Hint::DrawDetailedHint(const Choice *choice, int x0, int y0, int width, int 
     for (int i = start; i <= end; i++)
     {
         y0 = Text::DrawFormatTextInColumnWithTransfersDiffColors(x0 + 2, y0, width, colorGreen, "%d. \"%s\" %s", number++,
-            choice->NameSubItem(i, LANG_IS_EN).c_str(), LANG_IS_EN ? choice->hintsEN[i] : choice->hintsRU[i]) + 5;
+            choice->NameSubItem(i, LANGUAGE).c_str(), LANGUAGE ? choice->hintsEN[i] : choice->hintsRU[i]) + 5;
 
     }
 

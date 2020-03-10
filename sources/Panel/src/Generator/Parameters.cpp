@@ -115,9 +115,9 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
 }
 
 
-pString ParameterValue::MainUnits(Language::E lang) const
+pString ParameterValue::MainUnits(uint lang) const
 {
-    static const pString units[ParameterValue::Count][Language::Count] =
+    static const pString units[ParameterValue::Count][2] =
     {
         {"Ãö", "Hz"},   // Frequency
         {"ñ",  "s"},    // Period
@@ -173,7 +173,7 @@ pString ParameterComplex::GetStringValue() const
 
         ParameterChoice *enabled = const_cast<ParameterComplex *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
 
-        if(LANG_IS_EN)
+        if(LANGUAGE)
         {
             return valuesEN[enabled->GetChoice()];
         }
@@ -260,14 +260,14 @@ pString ParameterValue::GetStringValue() const
     static char buffer[30];
     std::strcpy(buffer, MathFloatValue::GetStringValue(value, IsSigned(), 5, &order.value, (type == Offset || type == Amplitude) ? 1 : 255));
     std::strcat(buffer, " ");
-    std::strcat(buffer, order.Suffix(Language::RU));
-    std::strcat(buffer, MainUnits(Language::RU));
+    std::strcat(buffer, order.Suffix(LANGUAGE));
+    std::strcat(buffer, MainUnits(LANGUAGE));
 
     return buffer;
 }
 
 
-pString Order::Suffix(Language::E lang) const
+pString Order::Suffix(uint lang) const
 {
     static const pString suf[Count][2] =
     {

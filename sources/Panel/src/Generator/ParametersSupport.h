@@ -99,7 +99,7 @@ public:
     /// ¬озвращает строку значени€ параметра (если необходимо, то со знаком) дл€ редактитровани€. ¬ массиве indexes сохран€ютс€ позиции символов относительно точки (в предположении, что точка стоит после символа в нулевой позиции)
     static pString Digits(int8 *indexes);
     /// ¬озвращает строку с единицами измерени€
-    static pString Units(Language::E lang = Language::RU);
+    static pString Units(uint lang);
 
 private:
     static ParameterValue *parameter;
@@ -146,7 +146,7 @@ struct Order
         Count
     } value;
 
-    pString Suffix(Language::E lang) const;
+    pString Suffix(uint lang) const;
 };
 
 

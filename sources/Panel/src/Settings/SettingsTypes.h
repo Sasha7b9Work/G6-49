@@ -79,14 +79,3 @@ struct FreqTest
     FreqTest(uint v) : value(static_cast<E>(v)) {};
     operator uint8() const { return static_cast<uint8>(value); };
 };
-
-
-struct Language
-{
-    enum E
-    {
-        RU,
-        EN,
-        Count
-    };
-};

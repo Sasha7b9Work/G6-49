@@ -125,7 +125,7 @@ private:
     FloatValue max;
     FloatValue value;
 
-    pString MainUnits(Language::E lang) const;
+    pString MainUnits(uint lang) const;
     /// Возвращает true, если параметр может принимать значение v
     bool InRange(float v) const;
 };

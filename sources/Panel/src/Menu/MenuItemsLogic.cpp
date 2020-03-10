@@ -570,19 +570,19 @@ Item *Button::Press(Key::Action action)
 
 pString ChoiceParameter::NameSubItem(int number) const
 {
-    return static_cast<ParameterValue *>(form->GetParameter(number))->Name(LANG_IS_EN);
+    return static_cast<ParameterValue *>(form->GetParameter(number))->Name(LANGUAGE);
 }
 
 
 pString ChoiceParameter::NameCurrentSubItem() const
 {
-    return form->CurrentParameter()->Name(LANG_IS_EN);
+    return form->CurrentParameter()->Name(LANGUAGE);
 }
 
 
 String Item::FullPath()
 {
-    String titl = GetTitle(LANG_IS_EN);
+    String titl = GetTitle(LANGUAGE);
     const char *titles[5] = {titl.c_str(), 0, 0, 0, 0};
     int pointer = 1;
 
@@ -590,7 +590,7 @@ String Item::FullPath()
 
     while(parent)
     {
-        titles[pointer++] = parent->title[LANG_IS_EN];
+        titles[pointer++] = parent->title[LANGUAGE];
         parent = parent->Keeper();
     }
 
