@@ -29,7 +29,7 @@
 /// Если true, то засылка в прибор выполняется при каждом повороте ручки
 #define DEBUG_SHOW_SENDS        (FL(BIT_SHOW_SENDS))
 
-#define LANGUAGE                (FL(BIT_LANGUAGE))
+#define LANG_IS_EN              (FL(BIT_LANGUAGE))
 
 #define CHANNEL_ENABLED(ch)     ((FLAG >> ((ch) + BIT_CHAN_A)) & 0x01)
 #define SWITCH_CHANNEL_A        (FLAG ^= (1 << (BIT_CHAN_A)))

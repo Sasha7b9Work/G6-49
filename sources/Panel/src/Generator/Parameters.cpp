@@ -4,6 +4,7 @@
 #include "Generator/ParametersSupport.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Addition/PageTuneParameter.h"
+#include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cstdio>
 
@@ -160,14 +161,24 @@ pString ParameterComplex::GetStringValue() const
 {
     if(type == Manipulation)
     {
-        static pCHAR values[2] =
+        static pCHAR valuesRU[2] =
         {
             " Откл", " Вкл"
         };
 
+        static pCHAR valuesEN[2] =
+        {
+            " Off", " On"
+        };
+
         ParameterChoice *enabled = const_cast<ParameterComplex *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
 
-        return values[enabled->GetChoice()];
+        if(LANG_IS_EN)
+        {
+            return valuesEN[enabled->GetChoice()];
+        }
+
+        return valuesRU[enabled->GetChoice()];
     }
 
     return "";

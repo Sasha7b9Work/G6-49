@@ -67,7 +67,7 @@ void Button::Draw(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle(LANGUAGE).c_str());
+    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle(LANG_IS_EN).c_str());
     funcForDraw(x, y);
 }
 
@@ -99,7 +99,7 @@ void Page::DrawClosed(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle(LANGUAGE).c_str());
+    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle(LANG_IS_EN).c_str());
 }
 
 
@@ -115,7 +115,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        GetTitle(LANGUAGE).Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        GetTitle(LANG_IS_EN).Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
     }
@@ -148,7 +148,7 @@ void Choice::Draw(bool opened, int x, int y) const
         Painter::DrawRectangle(x, y, width, height, Color::FILL);
         Painter::DrawHLine(y + 12, x, x + width);
         Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
-        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle(LANGUAGE).c_str());
+        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle(LANG_IS_EN).c_str());
 
         y += 14;
 
@@ -161,11 +161,11 @@ void Choice::Draw(bool opened, int x, int y) const
                 Painter::DrawVLine(x + 1, y - 1, y - 1 + 10);
                 Painter::DrawHLine(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
                 Painter::DrawVLine(x - 1 + Item::WIDTH, y - 1, y + 9);
-                NameSubItem(i, LANGUAGE).Draw(x + 3, y, Color::BACK);
+                NameSubItem(i, LANG_IS_EN).Draw(x + 3, y, Color::BACK);
             }
             else
             {
-                NameSubItem(i, LANGUAGE).Draw(x + 3, y, Color::FILL);
+                NameSubItem(i, LANG_IS_EN).Draw(x + 3, y, Color::FILL);
             }
             y += 10;
         }
@@ -177,29 +177,29 @@ void Choice::Draw(bool opened, int x, int y) const
         opened = IsOpened();
 
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        GetTitle(LANGUAGE).Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        GetTitle(LANG_IS_EN).Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Color::BACK.SetAsCurrent();
 
         if (step == 0.0F) //-V2550 //-V550
         {
-            Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(LANGUAGE));
+            Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(LANG_IS_EN));
         }
         else
         {
             int x0 = 315 - step;
 
-            Text::DrawTextRelativelyRight(x0, y + 30, NameCurrentSubItem(LANGUAGE));
+            Text::DrawTextRelativelyRight(x0, y + 30, NameCurrentSubItem(LANG_IS_EN));
 
-            int length = Font::GetLengthText(NameNextSubItem(LANGUAGE).c_str());
+            int length = Font::GetLengthText(NameNextSubItem(LANG_IS_EN).c_str());
 
             if (x0 + length > x + Item::WIDTH - 5)
             {
-                NameNextSubItem(LANGUAGE).Draw(x0, y + 30);
+                NameNextSubItem(LANG_IS_EN).Draw(x0, y + 30);
             }
             else
             {
-                Text::DrawTextRelativelyRight(315, y + 30, NameNextSubItem(LANGUAGE).c_str());
+                Text::DrawTextRelativelyRight(315, y + 30, NameNextSubItem(LANG_IS_EN).c_str());
             }
         }
     }
@@ -213,7 +213,7 @@ void Governor::Draw(int x, int y) const
     bool opened = IsOpened();
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, 15, pressed || opened ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-    GetTitle(LANGUAGE).Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+    GetTitle(LANG_IS_EN).Draw(x + 5, y + 5, pressed || opened ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
     Painter::FillRegion(x + 2, y + 19, Item::WIDTH - 5, 34, isShade ? Color::GRAY_10 : Color::GREEN_25);
 
     Color::BACK.SetAsCurrent();

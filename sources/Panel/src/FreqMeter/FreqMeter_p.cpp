@@ -35,7 +35,7 @@ void PFreqMeter::Draw()
 
     if(FREQ_METER_MEASURE_IS_FREQ)
     {
-        std::sprintf(text, "%sêÃö", SU::UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
+        std::sprintf(text, (LANG_IS_EN ? "%skHz" : "%sêÃö"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
     }
     else
     {

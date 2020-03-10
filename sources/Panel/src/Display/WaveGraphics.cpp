@@ -64,7 +64,7 @@ void WaveGraphics::DrawParameters(Chan::E ch, int y0)
 
     y0 += 5;
 
-    String(form->Name(LANGUAGE)).Draw(22, y0 + 3, Color::Chan(ch));
+    String(form->Name(LANG_IS_EN)).Draw(22, y0 + 3, Color::Chan(ch));
     
     for (int i = 0; i < form->NumParameters(); i++)
     {
