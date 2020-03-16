@@ -27,12 +27,6 @@ void ParameterPainter::SetPatameter(Parameter *param)
 }
 
 
-void ParameterPainter::DigitsTime()
-{
-    SetChars(0, 5, 6);
-    buffer[6] = ',';
-    SetChars(7, -1, 8);
-}
 
 
 
@@ -53,48 +47,6 @@ void ParameterPainter::DigitsTime()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-void ParameterPainter::DigitsDutyFactor()
-{
-}
-
-
-void ParameterPainter::DigitsManipDuration()
-{
-    DigitsTime();
-}
-
-
-void ParameterPainter::DigitsManipPeriod()
-{
-    DigitsTime();
-}
-
-
-void ParameterPainter::DigitsPacketPeriod()
-{
-    DigitsTime();
-}
-
-
-void ParameterPainter::DigitsPacketNumber()
-{
-}
-
-
-void ParameterPainter::DigitsEmpty()
-{
-}
 
 
 ParameterPainterSupporting::ParameterPainterSupporting() : parameter(nullptr), x0(0), positionActive(0)
@@ -195,13 +147,7 @@ int ParameterPainterSupporting::Y0() const
 }
 
 
-bool ParameterPainterSupporting::PositionMayBeActived(int pos)
-{
-    return 
-        (indexes[pos] != 127) || 
-        (pos == 0 && buffer[pos] == '-') || 
-        (pos == 0 && buffer[pos] == '+');
-}
+
 
 
 void LogicFloatValue::SetParameter(Parameter *param)

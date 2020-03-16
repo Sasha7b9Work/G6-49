@@ -144,6 +144,47 @@ void ParameterPainter::DigitsDurationStady()
 }
 
 
+void ParameterPainter::DigitsDutyFactor()
+{
+}
+
+
+void ParameterPainter::DigitsManipDuration()
+{
+    DigitsTime();
+}
+
+
+void ParameterPainter::DigitsManipPeriod()
+{
+    DigitsTime();
+}
+
+
+void ParameterPainter::DigitsPacketPeriod()
+{
+    DigitsTime();
+}
+
+
+void ParameterPainter::DigitsPacketNumber()
+{
+}
+
+
+void ParameterPainter::DigitsEmpty()
+{
+}
+
+
+void ParameterPainter::DigitsTime()
+{
+    SetChars(0, 5, 6);
+    buffer[6] = ',';
+    SetChars(7, -1, 8);
+}
+
+
 Tuner::Tuner(Parameter *param) : parameter(param), painter(reinterpret_cast<ParameterValue *>(param))
 {
 
@@ -265,4 +306,13 @@ bool Tuner::ChangedSign()
     }
 
     return false;
+}
+
+
+bool Tuner::PositionMayBeActived(int pos)
+{
+    return
+        (indexes[pos] != 127) ||
+        (pos == 0 && buffer[pos] == '-') ||
+        (pos == 0 && buffer[pos] == '+');
 }
