@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Generator/Generator_p.h"
+#include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
 #include "Generator/ParametersSupport.h"
 #include "Menu/Menu.h"

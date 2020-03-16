@@ -11,44 +11,10 @@
 #include <cstring>
 
 
-typedef void (*f)();
-
-struct StructSupport
-{
-    f func;
-    pString u[2];
-};
-
-
-static const StructSupport support[ParameterValue::Count] =
-{
-    { ParameterPainter::DigitsFrequency,     {"Гц", "Hz"} },
-    { ParameterPainter::DigitsPeriod,        { "с", "s" } },
-    { ParameterPainter::DigitsAmplitude,     { "В", "V" } },
-    { ParameterPainter::DigitsOffset,        { "В", "V" } },
-    { ParameterPainter::DigitsDuration,      { "с", "s" } },
-    { ParameterPainter::DigitsDutyRatio,     { "с", "s" } },
-    { ParameterPainter::DigitsPhase,         { "с", "s" } },
-    { ParameterPainter::DigitsDelay,         { "с", "s" } },
-    { ParameterPainter::DigitsDurationRise,  { "с", "s" } },
-    { ParameterPainter::DigitsDurationFail,  { "с", "s" } },
-    { ParameterPainter::DigitsDurationStady, { "с", "s" } },
-    { ParameterPainter::DigitsDutyFactor,    { "с", "s" } },
-    { ParameterPainter::DigitsManipDuration, { "с", "s" } },
-    { ParameterPainter::DigitsManipPeriod,   { "с", "s" } },
-    { ParameterPainter::DigitsPacketPeriod,  { "с", "s" } },
-    { ParameterPainter::DigitsPacketNumber,  { "с", "s" } },
-    { ParameterPainter::DigitsEmpty,         { "с", "s" } }
-};
-
-
 ParameterValue *ParameterPainter::parameter = nullptr;
 FloatValue     *ParameterPainter::value = nullptr;
 char            ParameterPainter::buffer[ParameterPainter::SIZE_BUFFER];
 int8           *ParameterPainter::indexes = nullptr;
-
-ParameterValue *LogicFloatValue::parameter = nullptr;
-FloatValue *LogicFloatValue::value = nullptr;
 
 
 void ParameterPainter::SetPatameter(Parameter *param)
@@ -61,34 +27,6 @@ void ParameterPainter::SetPatameter(Parameter *param)
 }
 
 
-pString ParameterPainter::Digits(int8 *ind)
-{
-    indexes = ind;
-
-    std::memset(buffer, 0, SIZE_BUFFER);
-
-    buffer[0] = '1';
-
-    support[parameter->Type()].func();
-
-    return buffer;
-}
-
-
-pString ParameterPainter::Units(uint lang)
-{
-    return support[parameter->Type()].u[lang];
-}
-
-
-void ParameterPainter::DigitsFrequency()
-{
-    SetChars(0, 7, 8);
-    buffer[8] = ',';
-    SetChars(9, -1, 6);
-}
-
-
 void ParameterPainter::DigitsTime()
 {
     SetChars(0, 5, 6);
@@ -97,66 +35,33 @@ void ParameterPainter::DigitsTime()
 }
 
 
-void ParameterPainter::DigitsPeriod()
-{
-    DigitsTime();
-}
 
 
-void ParameterPainter::DigitsAmplitude()
-{
-    SetChars(0, 1, 2);
-    buffer[2] = ',';
-    SetChars(3, -1, 3);
-}
 
 
-void ParameterPainter::DigitsOffset()
-{
-    buffer[0] = (value->Sign() < 0) ? '-' : '+';
-    SetChar(1, 0);
-    buffer[2] = ',';
-    SetChars(3, -1, 3);
-}
 
 
-void ParameterPainter::DigitsDuration()
-{
-    DigitsTime();
-}
 
 
-void ParameterPainter::DigitsDutyRatio()
-{
-}
 
 
-void ParameterPainter::DigitsPhase()
-{
-}
-
-void ParameterPainter::DigitsDelay()
-{
-    DigitsTime();
-}
 
 
-void ParameterPainter::DigitsDurationRise()
-{
-    DigitsTime();
-}
 
 
-void ParameterPainter::DigitsDurationFail()
-{
-    DigitsTime();
-}
 
 
-void ParameterPainter::DigitsDurationStady()
-{
-    DigitsTime();
-}
+
+
+
+
+
+
+
+
+
+
+
 
 
 void ParameterPainter::DigitsDutyFactor()
@@ -189,173 +94,6 @@ void ParameterPainter::DigitsPacketNumber()
 
 void ParameterPainter::DigitsEmpty()
 {
-}
-
-
-void ParameterPainter::SetChar(int posBuffer, int8 indexDigit)
-{
-    buffer[posBuffer] = MathFloatValue::GetChar(*value, indexDigit);
-    indexes[posBuffer] = indexDigit;
-}
-
-
-void ParameterPainter::SetChars(int posBuffer, int8 indexDigit, int8 numDigits)
-{
-    for(int8 i = 0; i < numDigits; i++)
-    {
-        SetChar(posBuffer + i, indexDigit - i);
-    }
-}
-
-
-pString MathFloatValue::GetStringValue(const FloatValue &value, bool sign, int numDigits, Order::E *order, int posFirst)
-{
-    static char buffer[20];
-
-    buffer[numDigits + (sign ? 2 : 1)] = '\0';
-
-    int position = (posFirst == 255) ? GetPositionFirstDigit(value) : posFirst;
-
-    int posComma = PositionComma(position, order);
-
-    if(sign)
-    {
-        buffer[0] = value.Sign() == 1 ? '+' : '-';
-    }
-
-#define POS(i) ((sign) ? ((i) + (1)) : (i))
-
-    for(int i = 0; i <= numDigits; i++)
-    {
-        if(i == posComma)
-        {
-            buffer[POS(i)] = '.';
-        }
-        else
-        {
-            buffer[POS(i)] = GetChar(value, position);
-            position--;
-        }
-    }
-
-    return buffer;
-
-}
-
-
-int MathFloatValue::GetPositionFirstDigit(const FloatValue &_value)
-{
-    FloatValue value = _value;
-    value.SetSign(1);
-
-    int result = 0;
-
-    if(value.Integer() > 0)
-    {
-        int whole = value.Integer();        // Целая часть числа
-
-        while(whole > 9)
-        {
-            whole /= 10;
-            result++;
-        }
-    }
-    else
-    {
-        int fract = value.FractNano();
-
-        if(fract == 0)
-        {
-            return 0;
-        }
-
-        do
-        {
-            result--;
-            fract *= 10;
-        } while(fract < (1000 * 1000 * 1000));
-    }
-
-    return result;
-}
-
-
-int MathFloatValue::GetDigit(const FloatValue &_value, int position)
-{
-    FloatValue value = _value;
-    value.SetSign(1);
-
-    if(position < 0)
-    {
-        int divider = 100 * 1000 * 1000;       /// На это число будем делить количество наносекунд
-
-        int fract = value.FractNano();
-
-        while(position < -1)
-        {
-            fract %= divider;
-            divider /= 10;
-            position++;
-        }
-
-        return fract / divider;
-    }
-    else
-    {
-        int whole = value.Integer();
-
-        while(position > 0)
-        {
-            whole /= 10;
-            position--;
-        }
-
-        return (whole % 10);
-    }
-}
-
-
-char MathFloatValue::GetChar(const FloatValue &value, int postition)
-{
-    return static_cast<char>(GetDigit(value, postition) | 0x30);
-}
-
-
-int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
-{
-    if(posFirstDigit > 5)
-    {
-        *order = Order::Mega;
-    }
-    else if(posFirstDigit > 2)
-    {
-        *order = Order::Kilo;
-    }
-    else if(posFirstDigit > -1)
-    {
-        *order = Order::One;
-    }
-    else if(posFirstDigit > -4)
-    {
-        *order = Order::Milli;
-    }
-    else if(posFirstDigit > -7)
-    {
-        *order = Order::Micro;
-    }
-    else
-    {
-        *order = Order::Nano;
-    }
-
-    int result = posFirstDigit - 5;
-
-    while(result < 1)
-    {
-        result += 3;
-    }
-
-    return result;
 }
 
 
@@ -457,100 +195,12 @@ int ParameterPainterSupporting::Y0() const
 }
 
 
-void ParameterPainterSupporting::SetActiveNext()
-{
-    for(int i = positionActive + 1; i < NUM_SYMBOLS; i++)
-    {
-        if(PositionMayBeActived(i))
-        {
-            positionActive = i;
-            return;
-        }
-    }
-
-    for(int i = 0; i < NUM_SYMBOLS; i++)
-    {
-        if(PositionMayBeActived(i))
-        {
-            positionActive = i;
-            return;
-        }
-    }
-}
-
-
-void ParameterPainterSupporting::SetActivePrev()
-{
-    if(positionActive != 0)
-    {
-        for(int i = positionActive - 1; i >= 0; i--)
-        {
-            if(PositionMayBeActived(i))
-            {
-                positionActive = i;
-                return;
-            }
-        }
-    }
-
-    for(int i = NUM_SYMBOLS - 1; i > 0; i--)
-    {
-        if(PositionMayBeActived(i))
-        {
-            positionActive = i;
-            return;
-        }
-    }
-}
-
-
 bool ParameterPainterSupporting::PositionMayBeActived(int pos)
 {
     return 
         (indexes[pos] != 127) || 
         (pos == 0 && buffer[pos] == '-') || 
         (pos == 0 && buffer[pos] == '+');
-}
-
-
-void ParameterPainterSupporting::IncreaseInCurrentPosition()
-{
-    if(!ChangedSign())
-    {
-        LogicFloatValue::ChangeDigit(indexes[positionActive], +1);
-    }
-
-    buffer[0] = '\0';
-    std::strcpy(buffer, ParameterPainter::Digits(indexes));
-    std::strcat(buffer, ParameterPainter::Units(LANGUAGE));
-
-    PGenerator::SetParameter(parameter);
-}
-
-
-void ParameterPainterSupporting::DecreaseInCurrentPosition()
-{
-    if(!ChangedSign())
-    {
-        LogicFloatValue::ChangeDigit(indexes[positionActive], -1);
-    }
-
-    buffer[0] = '\0';
-    std::strcpy(buffer, ParameterPainter::Digits(indexes));
-    std::strcat(buffer, ParameterPainter::Units(LANGUAGE));
-
-    PGenerator::SetParameter(parameter);
-}
-
-
-bool ParameterPainterSupporting::ChangedSign()
-{
-    if(positionActive == 0 && (buffer[0] == '-' || buffer[0] == '+'))
-    {
-        return LogicFloatValue::ChangedSign();
-    }
-
-    return false;
 }
 
 
@@ -570,60 +220,7 @@ void LogicFloatValue::SetParameter(Parameter *param)
 }
 
 
-bool LogicFloatValue::ChangedSign()
-{
-    if(parameter->Type() == ParameterValue::Offset)
-    {
-        value->SetSign(-value->Sign());
 
-        return true;
-    }
-
-    return false;
-}
-
-
-void LogicFloatValue::ChangeDigit(int pos, int delta)
-{
-    uint64 nanos = 1000 * 1000 * 1000;      // Это количество наноединиц в 1 единице
-
-    if(pos > 0)
-    {
-        while(pos > 0)
-        {
-            nanos *= 10;
-            pos--;
-        }
-    }
-    else if(pos < 0)
-    {
-        while(pos < 0)
-        {
-            nanos /= 10;
-            pos++;
-        }
-    }
-
-    FloatValue add(0, 0);                   // Это число будем прибавлять
-
-    add.FromUINT64(nanos);
-
-    if(delta < 0)
-    {
-        add.SetSign(-1);
-    }
-
-    value->Add(add);
-
-    if(*value < parameter->min)
-    {
-        *value = parameter->min;
-    }
-    else if(*value > parameter->max)
-    {
-        *value = parameter->max;
-    }
-}
 
 
 void ParameterTuner::SetParameter(Parameter *parameter)
@@ -635,36 +232,6 @@ void ParameterTuner::SetParameter(Parameter *parameter)
 Parameter *ParameterTuner::GetParameter()
 {
     return support.parameter;
-}
-
-
-bool ParameterTuner::ProcessControl(const Key &key)
-{
-    if(key.value == Key::RegLeft)
-    {
-        support.DecreaseInCurrentPosition();
-        return true;
-    }
-    else if(key.value == Key::RegRight)
-    {
-        support.IncreaseInCurrentPosition();
-        return true;
-    }
-    else if(key.IsUp())
-    {
-        if(key.value == Key::Left)
-        {
-            support.SetActivePrev();
-            return true;
-        }
-        else if(key.value == Key::Right)
-        {
-            support.SetActiveNext();
-            return true;
-        }
-    }
-
-    return false;
 }
 
 

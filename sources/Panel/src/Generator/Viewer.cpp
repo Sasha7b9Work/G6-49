@@ -43,3 +43,9 @@ void Viewer::DrawParameterValue(int x, int y)
     String(param->GetStringValue()).Draw(x, y);
     Text::SetUpperCase(true);
 }
+
+
+void Viewer::DrawTuned()
+{
+
+}
