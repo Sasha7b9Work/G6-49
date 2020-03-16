@@ -1,5 +1,6 @@
 #pragma once
 #include "common/Common.h"
+#include "Generator/Tuner.h"
 #include "Generator/Viewer.h"
 #include "Settings/SettingsTypes.h"
 
@@ -22,7 +23,7 @@ public:
         Page
     };
 
-    Parameter(E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
+    Parameter(E k, const char *nRU, const char *nEN) : viewer(this), tuner(this), form(nullptr), parent(nullptr), kind(k)
     {
         name[0] = nRU;
         name[1] = nEN;
@@ -57,6 +58,8 @@ public:
     virtual void ProcessButtonChange() { };
 
     Viewer viewer;
+
+    Tuner tuner;
 
 protected:
     
