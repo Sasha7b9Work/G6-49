@@ -1,11 +1,7 @@
 #include "defines.h"
-#include "log.h"
-#include "Display/Console.h"
-#include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 
 

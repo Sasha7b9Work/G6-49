@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Timer.h"
-#include "Log.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 #include <limits>

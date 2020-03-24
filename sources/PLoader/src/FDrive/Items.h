@@ -1,8 +1,6 @@
 #pragma once
 #include "common/command.h"
 #include "common/Messages.h"
-#include "Utils/String.h"
-
 
 
 class File;
@@ -25,8 +23,6 @@ public:
     static void PressUp();
     /// Обработка нажатия кнопки "Вниз"
     static void PressDown();
-    /// Нарисовать списокфайлов
-    static void Draw(int x, int y);
     /// Возвращает номер текущего файла
     static int NumberCurrentFile();
 

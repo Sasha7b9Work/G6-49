@@ -4,6 +4,7 @@
 #include "File.h"
 #include "Items.h"
 #include "Interface/Interface_p.h"
+#include "Utils/String.h"
 
 
 static bool EqualsRequestString(Task *task1, Task *task2)

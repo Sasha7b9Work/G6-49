@@ -1,11 +1,7 @@
 #include "defines.h"
-#include "log.h"
 #include "File.h"
 #include "common/Command.h"
-#include "Display/Painter.h"
-#include "Generator/Signals.h"
 #include "Interface/Interface_p.h"
-#include "Settings/Settings.h"
 #include "Utils/String.h"
 #include <cstring>
 
@@ -37,33 +33,6 @@ File::~File()
 }
 
 
-void File::Draw(int x, int y)
-{
-    Color::GRAY_10.SetAsCurrent();
-
-    float scale = 100.0F / 255.0F;
-
-    Color::GRAY_25.SetAsCurrent();
-
-    for (int i = 0; i < 240; i++)
-    {
-        Painter::SetPoint(x + i, (int)(y - Form::GetFormFlash(CURRENT_CHANNEL)[i] * scale));
-    }
-
-    if (num == -1)
-    {
-        return;
-    }
-
-    Color::FILL.SetAsCurrent();
-
-    for (int i = 0; i < 240; i++)
-    {
-        Painter::SetPoint(x + i, static_cast<int>(y - picture.data[i] * scale));
-    }
-}
-
-
 bool File::Handler(SimpleMessage *msg)
 {
     uint8 com = msg->TakeByte();
@@ -78,12 +47,6 @@ bool File::Handler(SimpleMessage *msg)
     }
 
     return false;
-}
-
-
-void File::SetDataToWave()
-{
-    Form::SetFormFlash(CURRENT_CHANNEL, picture.data);
 }
 
 

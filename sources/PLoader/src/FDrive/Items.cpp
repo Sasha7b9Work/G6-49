@@ -1,11 +1,9 @@
 #include "defines.h"
-#include "log.h"
-#include "Display/Painter.h"
-#include "Display/Text.h"
 #include "FDrive_p.h"
 #include "Items.h"
 #include "File.h"
 #include "Interface/Interface_p.h"
+#include "Utils/String.h"
 #include <cstring>
 
 
@@ -173,33 +171,4 @@ void Items::PressDown()
         curItem++;
         file.Open(curItem);
     }
-}
-
-
-void Items::Draw(int x, int y)
-{
-    Text::SetUpperCase(false);
-
-    for (int i = 0; i < numFiles; i++)
-    {
-        DrawItem(i, x, y, (curItem == i));
-        y += 10;
-    }
-
-    file.Draw(5, 235);
-
-    Text::SetUpperCase(true);
-}
-
-
-static void DrawItem(int i, int x, int y, bool highlight)
-{
-    Color color = Color::FILL;
-    if (highlight)
-    {
-        Painter::FillRegion(x - 1, y, 230, 9, color);
-        color = Color::BACK;
-    }
-    GetNameItem(i).Draw(x, y, color);
-    //String("%d", GetSizeItem(i)).Draw(x + 180, y);
 }

@@ -1,16 +1,12 @@
 #include "defines.h"
-#include "log.h"
 #include "structs.h"
 #include "common/Command.h"
-#include "FDrive_p.h"
-#include "Items.h"
+#include "FDrive/FDrive_p.h"
+#include "FDrive/Items.h"
 #include "File.h"
-#include "Display/Painter.h"
-#include "Display/Text.h" 
-#include "Display/WaveGraphics.h"
-#include "Settings/Settings.h"
 #include "Hardware/Timer.h"
 #include <cstdlib>
+#include <cstring>
 
 
 FDrive::View   FDrive::view;
@@ -26,58 +22,6 @@ void FDrive::Init()
 {
     std::strcpy(directory, "\\");
     Items::Init();
-}
-
-
-void FDrive::Draw()
-{
-    int x = WaveGraphics::X();
-    int y = WaveGraphics::Y(Chan::A) + 1;
-    int width = WaveGraphics::Width() - 2;
-    int height = WaveGraphics::Height() * 2;
-
-    Painter::FillRegion(x, y, width, height, Color::BACK);
-
-    if(mounted == Disconnect)
-    {
-        Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
-        return;
-    }
-    else if (mounted == Failed)
-    {
-        Text::DrawBigText(30, 110, 2, "Флешка неисправна", Color::FILL);
-        return;
-    }
-    else
-    {
-        // здесь ничего
-    }
-
-    if (Items::NumberDirs() == -1)
-    {
-        Items::SendRequest();
-        return;
-    }
-    else if (Items::WaitAnswer())
-    {
-        return;
-    }
-    else
-    {
-        // здесь ничего
-    }
-
-    Items::Draw(x + 5, y + 5);
-
-    if (inStateWaitCompleteLoad)
-    {
-        width = 200;
-        height = 100;
-        x = (SCREEN_WIDTH - width) / 2;
-        y = (SCREEN_HEIGHT - height) / 2;
-
-        Painter::DrawFilledRectangle(x, y, width, height, Color::BACK, Color::FILL);
-    }
 }
 
 

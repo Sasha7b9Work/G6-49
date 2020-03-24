@@ -1,12 +1,7 @@
 #include "defines.h"
-#include "log.h"
 #include "Hardware/CPU.h"
-#include "Display/Console.h"
-#include "Display/Painter.h"
-#include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Keyboard/Keyboard.h"
 #include <cstdlib>
 
 
@@ -18,10 +13,6 @@ float CPU::fps = 0.0F;
 void CPU::Init()
 {
     HAL::Init();
-
-    Keyboard::Init();
-
-    Beeper::Init();
 }
 
 

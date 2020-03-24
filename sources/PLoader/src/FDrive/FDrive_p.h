@@ -17,8 +17,6 @@ struct FDrive
     
     static View view;
 
-    /// Отрисовка файло-менеджера
-    static void Draw();
     /// Обработка нажатия кнопки "Вверх"
     static void PressUp();
     /// Обработка нажатия кнопки "Вниз"

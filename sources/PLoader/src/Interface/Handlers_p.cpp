@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "common/Command.h"
 #include "common/Messages.h"
 #include "Handlers_p.h"
