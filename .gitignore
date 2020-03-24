@@ -21,12 +21,18 @@ sources/generated/*
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*
+
 sources/DLoader/DebugConfig/*
 sources/DLoader/Listings/*
 sources/DLoader/Objects/*
+
 sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
 sources/Panel/Objects/*
+
+sources/PLoader/DebugConfig/*
+sources/PLoader/Listings/*
+sources/PLoader/Objects/*
 
 sources/VS/Panel/Debug/*
 sources/VS/Panel/x64/*
