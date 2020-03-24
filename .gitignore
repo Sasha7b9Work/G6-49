@@ -21,6 +21,9 @@ sources/generated/*
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*
+sources/DLoader/DebugConfig/*
+sources/DLoader/Listings/*
+sources/DLoader/Objects/*
 sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
 sources/Panel/Objects/*
