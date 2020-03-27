@@ -2,7 +2,6 @@
 #include "structs.h"
 #include "common/Command.h"
 #include "FDrive/FDrive_p.h"
-#include "FDrive/Items.h"
 #include "File.h"
 #include "Hardware/Timer.h"
 #include <cstdlib>
@@ -21,7 +20,11 @@ bool          FDrive::inStateWaitCompleteLoad = false;
 void FDrive::Init()
 {
     std::strcpy(directory, "\\");
-    Items::Init();
+}
+
+static bool EmptyFuncBV()
+{
+    return true;
 }
 
 
@@ -58,16 +61,16 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* LoadFromDDS                  */ EmptyFuncBV,
         /* FreqMeasure                  */ EmptyFuncBV,
         /* Log                          */ EmptyFuncBV,
-        /* FDrive_NumDirsAndFiles       */ Handler::GetNumDirsAndFiles,
+        /* FDrive_NumDirsAndFiles       */ EmptyFuncBV,
         /* FDrive_Mount                 */ Handler::IsMount,
         /* FDrive_RequestDir            */ Handler::E,
-        /* FDrive_RequestFile           */ Handler::RequestFile,
+        /* FDrive_RequestFile           */ Handler::E,
         /* Test                         */ EmptyFuncBV,
         /* SetKoeffCalibration          */ EmptyFuncBV,
         /* GetKoeffCalibration          */ EmptyFuncBV,
-        /* FDrive_RequestFileSize       */ Handler::RequestFileSize,
+        /* FDrive_RequestFileSize       */ Handler::E,
         /* FDrive_RequestFileString     */ Handler::E,
-        /* FDrive_LoadFromExtStorage    */ Handler::LoadFromExtStorage,
+        /* FDrive_LoadFromExtStorage    */ Handler::E,
         /* FDrive_GetPictureDDS         */ Handler::E,
         /* SCPI_RecvData                */ EmptyFuncBV
     };
@@ -90,57 +93,9 @@ bool FDrive::Handler::IsMount()
 }
 
 
-bool FDrive::Handler::GetNumDirsAndFiles()
-{
-    return Items::Handler::Processing(msg);
-}
-
-
 bool FDrive::Handler::E()
 {
     return false;
-}
-
-
-bool FDrive::Handler::RequestFile()
-{
-    return Items::Handler::Processing(msg);
-}
-
-
-bool FDrive::Handler::RequestFileSize()
-{
-    return Items::Handler::Processing(msg);
-}
-
-
-bool FDrive::Handler::LoadFromExtStorage()
-{
-    inStateWaitCompleteLoad = false;
-
-    return true;
-}
-
-
-void FDrive::PressUp()
-{
-    Items::PressUp();
-}
-
-
-void FDrive::PressDown()
-{
-    Items::PressDown();
-}
-
-
-void FDrive::PressChoose()
-{
-    inStateWaitCompleteLoad = true;
-
-    Message::FDrive::LoadFromExtStorage(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(Items::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
-
-    File::SetDataToWave();
 }
 
 

@@ -17,13 +17,6 @@ struct FDrive
     
     static View view;
 
-    /// Обработка нажатия кнопки "Вверх"
-    static void PressUp();
-    /// Обработка нажатия кнопки "Вниз"
-    static void PressDown();
-    /// Обработка нажатия кнопки "Выбрать"
-    static void PressChoose();
-
     static char *CurrentDirectory();
 
     struct Handler
@@ -33,10 +26,6 @@ struct FDrive
         static SimpleMessage *msg;
         static bool E();
         static bool IsMount();
-        static bool GetNumDirsAndFiles();
-        static bool RequestFile();
-        static bool RequestFileSize();
-        static bool LoadFromExtStorage();
     };
 
 private:

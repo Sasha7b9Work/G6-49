@@ -5,14 +5,6 @@
 #include <stm32f4xx_hal.h>
 
 
-#define TRACE_HANDLER                               \
-    LOG_FUNC_ENTER();                               \
-    LOG_WRITE("%s : %d", Debug::file, Debug::line); \
-    Color::FILL.SetAsCurrent();                     \
-    Console::Draw();                                \
-    Painter::EndScene();
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -27,8 +19,6 @@ extern "C" {
 
     void MemManage_Handler()
     {
-        TRACE_HANDLER;
-
         while (1)
         {
         }
@@ -37,8 +27,6 @@ extern "C" {
     
     void UsageFault_Handler()
     {
-        TRACE_HANDLER;
-        
         while (1)
         {
         }
@@ -47,23 +35,14 @@ extern "C" {
     
     void HardFault_Handler()
     {
-        TRACE_HANDLER;
-        
-        char *file = Debug::file;
-        int line = Debug::line;
-        
         while (1) //-V776
         {
-            TRACE_HANDLER;
-            file = file; //-V570
-            line = line; //-V570
         }
     }
 
     
     __attribute((noreturn)) void BusFault_Handler()
     {
-        TRACE_HANDLER;
         while (1)
         {
         }
@@ -72,25 +51,21 @@ extern "C" {
     
     void PendSV_Handler()
     {
-        TRACE_HANDLER;
     }
 
     
     void NMI_Handler()
     {
-        TRACE_HANDLER;
     }
 
     
     void SVC_Handler()
     {
-        TRACE_HANDLER;
     }
 
     
     void DebugMon_Handler()
     {
-        TRACE_HANDLER;
     }
 
     void TIM4_IRQHandler()

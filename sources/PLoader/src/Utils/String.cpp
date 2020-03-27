@@ -1,6 +1,4 @@
 #include "defines.h"
-#include "Display/Painter.h"
-#include "Display/Text.h"
 #include "Utils/StringUtils.h"
 #include <cstring>
 #include <cstdio>
@@ -179,14 +177,6 @@ bool String::Allocate(uint size)
     }
 
     return false;
-}
-
-
-int String::Draw(int x, int y, Color color) const
-{
-    color.SetAsCurrent();
-
-    return Text::Draw(x, y, c_str());
 }
 
 

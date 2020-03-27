@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Math.h"
-#include "Settings/Settings.h"
 #include <cmath>
 #if __ARMCLIB_VERSION < 6070001
 #include <cstdlib>

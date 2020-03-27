@@ -1,7 +1,6 @@
 #pragma once
 #include "common/Messages.h"
 
-
 namespace Message
 {
     class LoadFormDDS : public SimpleMessage

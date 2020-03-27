@@ -1,11 +1,15 @@
 #pragma once
 #include "Command.h"
+
 #ifdef PANEL
+#include "Generator/Generator_p.h"
+#else
+#ifdef PLOADER
 #include "Generator/Generator_p.h"
 #else
 #include "Generator/Generator_d.h"
 #endif
-
+#endif
 
 
 class SimpleMessage  // -V690

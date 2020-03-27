@@ -18,7 +18,7 @@ static struct Picture
 
 
 /// Порядковый номер файла в текущей папке
-static int num = -1;
+//static int num = -1;
 
 
 File::File()
@@ -33,50 +33,33 @@ File::~File()
 }
 
 
-bool File::Handler(SimpleMessage *msg)
+//static bool EqualsRequestPicture(Task *request, Task *answer)
+//{
+//    SimpleMessage *send = request->GetMessage();
+//    SimpleMessage *recv = answer->GetMessage();
+//
+//    uint8 com = Command::FDrive_GetPictureDDS;
+//
+//    return  (com == send->TakeByte()) &&
+//            (com == recv->TakeByte());
+//}
+
+
+void File::Open(int /*n*/)
 {
-    uint8 com = msg->TakeByte();
-
-    if (com == Command::FDrive_GetPictureDDS)
-    {
-        num = msg->TakeByte();
-
-        msg->TakeRemainigData(picture.data);
-
-        return true;
-    }
-
-    return false;
-}
-
-
-static bool EqualsRequestPicture(Task *request, Task *answer)
-{
-    SimpleMessage *send = request->GetMessage();
-    SimpleMessage *recv = answer->GetMessage();
-
-    uint8 com = Command::FDrive_GetPictureDDS;
-
-    return  (com == send->TakeByte()) &&
-            (com == recv->TakeByte());
-}
-
-
-void File::Open(int n)
-{
-    Close();
-
-    Message::FDrive::PictureDDS message(static_cast<uint8>(n));
-
-    Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
-
-    PInterface::AddTask(task);
+//    Close();
+//
+//    Message::FDrive::PictureDDS message(static_cast<uint8>(n));
+//
+//    Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
+//
+//    PInterface::AddTask(task);
 }
 
 
 void File::Close()
 {
-    num = -1;
+//    num = -1;
 
     picture.Clear();
 }

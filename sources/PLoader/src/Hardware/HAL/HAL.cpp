@@ -48,11 +48,7 @@ void HAL::Init()
 
     SystemClockConfig();
 
-    HAL_FSMC::Init();
-
     HAL_SPI4::Init();
-
-    HAL_CRC32::Init();
 }
 
 

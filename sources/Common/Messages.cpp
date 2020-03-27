@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "structs.h"
 #include "common/Messages.h"
 #include "Settings/CalibrationSettings.h"
@@ -201,10 +200,6 @@ bool SimpleMessage::AllocateMemory(uint size)
     if (buffer)
     {
         allocated = size;
-    }
-    else
-    {
-        LOG_ERROR_FINALIZE("Недостаточно памяти для %x байт", size);
     }
 
     return buffer != 0;
@@ -440,27 +435,6 @@ Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Comman
 {
     PutByte(numFile);
 }
-
-
-Message::CalibrateSet::CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 parameter) : SimpleMessage(7, Command::CalibrationSet)
-{
-    PutByte(ch);
-    PutByte(signal);
-    PutByte(range);
-    PutByte(parameter);
-    PutHalfWord(*setCal.GetK(ch, signal, range, parameter));
-}
-
-
-Message::CalibrateLoad::CalibrateLoad(uint8 ch, uint8 signal, uint8 range, uint8 parameter) : SimpleMessage(7, Command::CalibrationLoad)
-{
-    PutByte(ch);
-    PutByte(signal);
-    PutByte(range);
-    PutByte(parameter);
-    PutHalfWord(*setCal.GetK(ch, signal, range, parameter));
-}
-
 
 Message::SCPI::Data::Data(uint8 *data, uint length) : SimpleMessage()
 {

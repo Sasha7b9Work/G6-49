@@ -15,36 +15,11 @@ struct HAL
 };
 
 
-struct HAL_CRC32
-{
-    static uint Calculate(const void *address, uint size);
-
-    static void Init();
-};
-
-
-struct HAL_DAC2
-{
-	static void Init();
-	static void StartDMA(uint prescaler);
-	static void StopDMA();
-private:
-	static void ConfigTIM7(uint prescaler);
-};
-
-
 struct HAL_EEPROM
 {
-    static void SaveSettings(CalibrationSettings *settings);
+    static void SaveSettings();
 
-    static void LoadSettings(CalibrationSettings *settings);
-};
-
-
-// Шина для связи с ПЛИС
-struct HAL_FSMC
-{
-    static void Init();
+    static void LoadSettings();
 };
 
 

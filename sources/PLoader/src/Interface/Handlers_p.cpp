@@ -2,10 +2,7 @@
 #include "common/Command.h"
 #include "common/Messages.h"
 #include "Handlers_p.h"
-#include "Display/Console.h"
 #include "FDrive/FDrive_p.h"
-#include "FreqMeter/FreqMeter_p.h"
-#include "SCPI/SCPI.h"
 
 
 bool PHandlers::Processing(SimpleMessage *msg)
@@ -41,8 +38,8 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* SetPolarity               */ PHandlers::E,
         /* SetManipulationMode       */ PHandlers::E,
         /* LoadFromDDS               */ PHandlers::E,
-        /* FreqMeasure               */ PHandlers::FreqMeasure,
-        /* Log                       */ PHandlers::Log,
+        /* FreqMeasure               */ PHandlers::E,
+        /* Log                       */ PHandlers::E,
         /* FDrive_NumDirsAndFiles    */ FDrive::Handler::Processing,
         /* FDrive_Mount              */ FDrive::Handler::Processing,
         /* FDrive_RequestDir         */ FDrive::Handler::Processing,
@@ -54,7 +51,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestFileString  */ FDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ FDrive::Handler::Processing,
         /* FDrive_GetPictureDDS      */ FDrive::Handler::Processing,
-        /* SCPI_Data                 */ SCPI::Handler::Processing
+        /* SCPI_Data                 */ PHandlers::E
     };
 
     uint8 command = msg->TakeByte();
@@ -63,10 +60,6 @@ bool PHandlers::Processing(SimpleMessage *msg)
     {
         /// Сюда сообщение передаётся уже без первого байта
         return funcs[command](msg);
-    }
-    else
-    {
-        LOG_ERROR("Неправильная команда");
     }
 
     return false;
@@ -82,18 +75,4 @@ bool PHandlers::E(SimpleMessage *)
 bool PHandlers::Request(SimpleMessage *)
 {
     return false;
-}
-
-
-bool PHandlers::FreqMeasure(SimpleMessage *msg)
-{
-    PFreqMeter::SetMeasure(msg->TakeWord());
-    return true;
-}
-
-
-bool PHandlers::Log(SimpleMessage *msg)
-{
-    Console::AddString(msg->String(1));
-    return true;
 }
