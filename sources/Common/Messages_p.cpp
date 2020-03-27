@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Messages_p.h"
+#include "Settings/CalibrationSettings.h"
 
 
 Message::LoadFormDDS::LoadFormDDS(uint8 ch, uint16 data[PGenerator::DDS_NUM_POINTS]) : SimpleMessage(2 + PGenerator::DDS_NUM_POINTS * 2, Command::LoadFormDDS)

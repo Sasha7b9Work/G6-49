@@ -15,11 +15,7 @@ public:
 
     Viewer(Parameter *param);
 
-    // Отрисовать значение в "закрытом" виде
     void Draw(int x, int y);
-
-    // Отрисовать значение в режиме настройки
-    void DrawTuned();
 
 private:
 

@@ -8,7 +8,8 @@
 #include "Settings/Settings.h"
 
 
-// Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
+static ParameterTuner tuner;
+/// Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
 static ParameterValue storedParameter = ParameterAmplitude();
 
 
@@ -18,6 +19,8 @@ void PageTuneParameter::SetParameter(Parameter *parameter)
     {
         storedParameter = *reinterpret_cast<ParameterValue *>(parameter);
     }
+
+    tuner.SetParameter(parameter);
 }
 
 
@@ -115,12 +118,12 @@ static bool OnControl_TuneParameter(const Key &key)
         }
     }
 
-    return storedParameter.tuner.ProcessControl(key);
+    return tuner.ProcessControl(key);
 }
 
 static void OnDraw_TuneParameter()
 {
-    storedParameter.viewer.DrawTuned();
+    tuner.Draw();
 }
 
 
