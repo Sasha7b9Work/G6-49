@@ -5,6 +5,8 @@
 
 call build_device.bat
 
+call build_dloader.bat
+
 call build_panel.bat
 
 @echo %TIME%   Complete

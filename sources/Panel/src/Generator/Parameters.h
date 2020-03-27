@@ -29,6 +29,8 @@ public:
         name[1] = nEN;
     }
 
+    virtual ~Parameter() { }
+
     pString Name(uint lang) const;
 
     virtual void SetForm(Form *form);

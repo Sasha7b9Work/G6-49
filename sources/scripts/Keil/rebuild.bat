@@ -5,6 +5,8 @@
 
 call rebuild_device.bat
 
+call rebuild_dloader.bat
+
 call rebuild_panel.bat
 
 @echo %TIME%   Complete
