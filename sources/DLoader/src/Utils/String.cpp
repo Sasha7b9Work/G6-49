@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "String.h"
 #include <cstring>
 #include <cstdio>
@@ -36,11 +35,6 @@ String::String(const char *format, ...)
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
 
-    if (numSymbols < 0 || numSymbols > SIZE)
-    {
-        LOG_ERROR_FINALIZE("Буфер слишком мал");
-    }
-
     if (Allocate(std::strlen(buf) + 1))
     {
         std::strcpy(buffer, buf);
@@ -74,9 +68,6 @@ bool String::Allocate(uint size)
     {
         return true;
     }
-    else
-    {
-        LOG_ERROR("Не хватает памяти");
-    }
+
     return false;
 }
