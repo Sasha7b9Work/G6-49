@@ -1,0 +1,3 @@
+@echo %TIME%   Cleanup Panel Loader ...
+
+c:\Keil_v5\UV4\UV4 -c..\..\PLoader\PLoader.uvprojx -j0

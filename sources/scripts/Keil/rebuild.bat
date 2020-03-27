@@ -9,4 +9,6 @@ call rebuild_dloader.bat
 
 call rebuild_panel.bat
 
+call rebuild_ploader.bat
+
 @echo %TIME%   Complete
