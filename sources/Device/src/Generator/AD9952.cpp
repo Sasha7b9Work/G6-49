@@ -49,7 +49,7 @@ void AD9952::SetPhase(Chan::E ch, FloatValue ph)
 {
     phase[ch] = ph.ToFloat();
 
-    if(SettingsGenerator::Frequency(Chan::A) == SettingsGenerator::Frequency(Chan::B))
+    if(SettingsGenerator::Frequency(Chan::A) == SettingsGenerator::Frequency(Chan::B)) //-V550
     {
         WriteRegister(ch, Register::POW);
     }

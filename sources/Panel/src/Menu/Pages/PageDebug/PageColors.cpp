@@ -61,7 +61,7 @@ DEF_GOVERNOR(gBlueChanA,
 
 
 DEF_PAGE_3( pChanA,
-    "Канал 1", "Channel 1",
+    "Канал 1", "Channel 1", //-V641
     "", "",
     &gRedChanA,
     &gGreenChanA,
@@ -90,7 +90,7 @@ DEF_GOVERNOR(gBlueChanB,
 
 
 DEF_PAGE_3(pChanB,
-    "Канал 2", "Channel 2",
+    "Канал 2", "Channel 2", //-V641
     "", "",
     &gRedChanB,
     &gGreenChanB,
@@ -118,7 +118,7 @@ DEF_GOVERNOR(gBlueMenu,
 
 
 DEF_PAGE_3(pMenu,
-    "Меню", "Menu",
+    "Меню", "Menu", //-V641
     "", "",
     &gRedMenu,
     &gGreenMenu,

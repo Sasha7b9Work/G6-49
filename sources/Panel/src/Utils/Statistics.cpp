@@ -30,7 +30,7 @@ void Statistics::EndFrame()
 
     timeAccumFrames += timeFrame;
 
-    if (TIME_MS >= timeStartFrames + 1000)
+    if (TIME_MS >= timeStartFrames + 1000) //-V1051
     {
         timeAllFrames = static_cast<int>(timeAccumFrames);
         timeStartFrames = TIME_MS;

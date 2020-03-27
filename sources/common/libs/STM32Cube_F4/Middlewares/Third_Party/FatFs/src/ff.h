@@ -59,7 +59,7 @@ typedef WCHAR TCHAR;
 #endif
 #else						/* ANSI/OEM string */
 #ifndef _INC_TCHAR
-typedef char TCHAR;
+typedef char TCHAR; //-V677
 #define _T(x) x
 #define _TEXT(x) x
 #endif
