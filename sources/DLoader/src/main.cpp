@@ -5,14 +5,25 @@
 #include "Hardware/HAL/HAL.h"
 
 
+#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
+
+
+typedef void(*pFunction)();
+
+
 int main()
 {
-    CPU::Init();
-    HAL_TIM::Delay(500);             // Задержка нужна для того, чтобы AD9952 успел пройти внутреннюю инициализацию
-    DDrive::Init();
-    HAL_EEPROM::Init();
-  
-    while (1)
-    {
-    }
+    __disable_irq();
+    
+    pFunction JumpToApplication;
+    
+     JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+    
+    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
+    
+    __enable_irq();
+    
+    JumpToApplication();
+    
+    return 0;
 }

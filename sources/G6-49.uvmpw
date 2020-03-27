@@ -17,12 +17,11 @@
 
   <project>
     <PathAndName>.\Panel\Panel.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\PLoader\PLoader.uvprojx</PathAndName>
-    <NodeIsExpanded>1</NodeIsExpanded>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>
