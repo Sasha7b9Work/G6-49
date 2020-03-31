@@ -19,6 +19,11 @@
 typedef int bool;
 #endif
 
+#ifndef __IO
+#define __IO volatile
+#define __I volatile
+#endif
+
 typedef const char *const      pString;
 typedef const char *           pCHAR;
 typedef unsigned int           uint;

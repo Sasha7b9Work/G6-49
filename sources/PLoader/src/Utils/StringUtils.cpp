@@ -425,7 +425,7 @@ char SU::ToUpper(char symbol)
     }
     else if (s <= 0x7a)
     {
-        return static_cast<char>(std::toupper(s));
+        return static_cast<char>(std::toupper(static_cast<char>(s)));
     }
     else
     {

@@ -6,6 +6,7 @@ void free(void *);
 void srand(unsigned int);
 unsigned int rand();
 
+float strtof(char const* _String,char** _EndPtr);
 
 #define __disable_irq()
 #define __set_MSP(x)
