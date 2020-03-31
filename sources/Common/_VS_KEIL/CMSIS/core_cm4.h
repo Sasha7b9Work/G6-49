@@ -26,3 +26,8 @@ extern struct structSCB
 {
     unsigned VTOR;
 } SCB;
+
+
+#define __disable_irq()
+#define __set_MSP(x)
+#define __enable_irq()
