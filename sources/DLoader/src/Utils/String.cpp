@@ -32,7 +32,7 @@ String::String(const char *format, ...)
 
     std::va_list args;
     va_start(args, format);
-    //int numSymbols = std::vsprintf(buf, format, args);
+    std::vsprintf(buf, format, args);
     va_end(args);
 
     if (Allocate(std::strlen(buf) + 1))
