@@ -1,16 +1,33 @@
 #include "defines.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Hardware/HAL/HAL.h"
-#include "Interface/Interface_p.h"
+#include "Keyboard/Keyboard.h"
+
+
+// Эта функция запускает процедуру обновления
+static void Update();
+
 
 int main()
 {
     CPU::Init();
     Timer::Init();
-    HAL_TIM::Delay(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
+    Keyboard::Init();
 
-    while (1)
+    uint start = TIME_MS;
+
+    while (TIME_MS - start < 1000)
     {
+        if(!Keyboard::BufferIsEmpty())
+        {
+            Update();
+            break;
+        }
     }
+}
+
+
+static void Update()
+{
+
 }
