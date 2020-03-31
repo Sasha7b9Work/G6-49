@@ -206,7 +206,7 @@ void Timer::StartLogging()
 }
 
 
-uint Timer::LogPointUS(char * name)
+uint Timer::LogPointUS(char * /*name*/)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;
@@ -214,7 +214,7 @@ uint Timer::LogPointUS(char * name)
 }
 
 
-uint Timer::LogPointMS(char * name)
+uint Timer::LogPointMS(char * /*name*/)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;
