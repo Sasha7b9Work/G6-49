@@ -11,19 +11,28 @@
 typedef void(*pFunction)();
 
 
+static void JumpToMainApplication();
+
+
 int main()
 {
-    __disable_irq();
-    
-    pFunction JumpToApplication;
-    
-     JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
-    
-    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
-    
-    __enable_irq();
-    
-    JumpToApplication();
+    JumpToMainApplication();
     
     return 0;
+}
+
+
+static void JumpToMainApplication()
+{
+    __disable_irq();
+
+    pFunction JumpToApplication;
+
+    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+
+    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
+
+    __enable_irq();
+
+    JumpToApplication();
 }
