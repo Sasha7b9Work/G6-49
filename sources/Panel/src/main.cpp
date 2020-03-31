@@ -5,6 +5,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_p.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/PageService.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 
@@ -15,9 +16,7 @@ int main()
     Timer::Init();
     Display::Init();
     HAL_TIM::Delay(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
-    setCal.Load();
-    set.LoadFromMemory(true);
-    set.LoadToDevice();
+    PageService::OnPress_Reset();
     Menu::Init();
 
     while (1)

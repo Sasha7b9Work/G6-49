@@ -23,7 +23,7 @@ extern const PageBase pService;
 Page *PageService::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pService));
 
 
-static void OnPress_Reset()
+void PageService::OnPress_Reset()
 {
     PGenerator::Reset();
     HAL_TIM::Delay(100);
@@ -35,7 +35,7 @@ static void OnPress_Reset()
 DEF_BUTTON( bReset,                                                                                                                                                 //--- ОТЛАДКА - СБРОС ---
     "СБРОС", "RESET",
     "Сброс настроек на значения по умолчанию", "Reset to default",
-    pService, Item::FuncActive, OnPress_Reset, FuncDraw
+    pService, Item::FuncActive, PageService::OnPress_Reset, FuncDraw
 )
 
 
