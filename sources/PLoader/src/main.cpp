@@ -30,10 +30,12 @@ int main()
     {
         if(!Keyboard::BufferIsEmpty())
         {
-            JumpToMainApplication();
+            Update();
             break;
         }
     }
+
+    JumpToMainApplication();
 
     return 0;
 }
