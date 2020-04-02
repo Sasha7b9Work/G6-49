@@ -9,7 +9,7 @@ struct DLDrive
 
     static void Update();
 
-    static USBH_HandleTypeDef hUSB_Host;
+    static USBH_HandleTypeDef handle;
 
     struct Handler
     {
