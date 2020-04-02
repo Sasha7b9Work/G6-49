@@ -61,9 +61,9 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* CalibrationSet            */ PHandlers::E,
         /* StartApplication          */ OnStartMainApplication
     };
-
+   
     uint8 command = msg->TakeByte();
-
+    
     if (command < Command::Count)
     {
         /// —юда сообщение передаЄтс€ уже без первого байта

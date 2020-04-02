@@ -2,7 +2,7 @@
 #include "Messages_pl.h"
 
 
-Message::StartMainApplication::StartMainApplication() : SimpleMessage()
+Message::StartMainApplication::StartMainApplication() : SimpleMessage(1, Command::StartApplication)
 {
 
 }

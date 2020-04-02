@@ -19,7 +19,7 @@ int main()
 {
     CPU::Init();
 
-    HAL_TIM::Delay(500);
+    HAL_TIM::Delay(1500);
 
     Message::StartMainApplication().Transmit();     // ѕосылаем команду старта основного приложени€
 
@@ -29,8 +29,6 @@ int main()
     }
 
     JumpToMainApplication();
-    
-    return 0;
 }
 
 
