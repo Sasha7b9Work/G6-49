@@ -1812,14 +1812,14 @@
               <FilePath>.\src\Interface\Handlers_pl.cpp</FilePath>
             </File>
             <File>
-              <FileName>Interface_p.h</FileName>
+              <FileName>Interface_pl.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Interface\Interface_p.h</FilePath>
+              <FilePath>.\src\Interface\Interface_pl.h</FilePath>
             </File>
             <File>
-              <FileName>Interface_p.cpp</FileName>
+              <FileName>Interface_pl.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Interface\Interface_p.cpp</FilePath>
+              <FilePath>.\src\Interface\Interface_pl.cpp</FilePath>
             </File>
             <File>
               <FileName>Messages_pl.h</FileName>
