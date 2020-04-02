@@ -3,7 +3,7 @@
 #include "common/Messages.h"
 
 
-struct DDrive
+struct DLDrive
 {
     static void Init();
 
@@ -19,18 +19,5 @@ struct DDrive
         static void GetNumDirsAndFiles();
         static void RequestFile();
         static void RequestFileSize();
-        static void GetPictureDDS();
     };
-
-private:
-
-    static void Normalize(float d[4096]);
-
-    static void FindMinMax(const float d[4096], float *_min, float *_max);
-
-    static float FindScale(float min, float max);
-
-    static void ToScale(float d[4096], float scale);
-    /// Заполнить массив picture данными для отрисовки сигнала на экране
-    static void FillPicture(uint8 *picture, uint size, float values[4096]);
 };

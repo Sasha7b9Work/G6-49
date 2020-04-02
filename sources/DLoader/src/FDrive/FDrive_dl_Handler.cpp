@@ -11,7 +11,7 @@
 #include <cmath>
 
 
-SimpleMessage *DDrive::Handler::msg = nullptr;
+SimpleMessage *DLDrive::Handler::msg = nullptr;
 
 
 static void E()
@@ -40,7 +40,7 @@ struct FileSystem
 };
 
 
-void DDrive::Handler::Processing(SimpleMessage *message)
+void DLDrive::Handler::Processing(SimpleMessage *message)
 {
     msg = message;
 
@@ -102,7 +102,7 @@ void DDrive::Handler::Processing(SimpleMessage *message)
 }
 
 
-void DDrive::Handler::GetNumDirsAndFiles()
+void DLDrive::Handler::GetNumDirsAndFiles()
 {
     uint numDirs = 0;
     uint numFiles = 0;
@@ -113,7 +113,7 @@ void DDrive::Handler::GetNumDirsAndFiles()
 }
 
 
-void DDrive::Handler::RequestFile()
+void DLDrive::Handler::RequestFile()
 {
     char name[255];
 
@@ -126,7 +126,7 @@ void DDrive::Handler::RequestFile()
 }
 
 
-void DDrive::Handler::RequestFileSize()
+void DLDrive::Handler::RequestFileSize()
 {
     char name[255];
     int numFile = static_cast<int>(msg->TakeByte());
@@ -138,31 +138,6 @@ void DDrive::Handler::RequestFileSize()
 
         Message::FDrive::FileSize(static_cast<uint8>(numFile), size).Transmit();
     }
-}
-
-
-void DDrive::Handler::GetPictureDDS()
-{
-    const uint SIZE = 240;
-    uint8 data[SIZE];
-    std::memset(data, 0, SIZE);
-
-    int numFile = static_cast<int>(msg->TakeByte());
-
-    char fullName[255];
-    std::strcpy(fullName, msg->String(2));
-    std::strcpy(fullName, "\\");
-
-    if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
-    {
-        float values[4096];
-        if (FileSystem::ReadFloats(values, &fullName[1]))
-        {
-            FillPicture(data, SIZE, values);
-        }
-    }
-
-    Message::FDrive::PictureDDS(static_cast<uint8>(numFile), data).Transmit();
 }
 
 
@@ -321,78 +296,4 @@ bool FileSystem::ReadFloats(float values[4096], char *name)
     }
 
     return result;
-}
-
-
-void DDrive::Normalize(float d[4096])
-{
-    float min = 0.0F;
-    float max = 0.0F;
-
-    FindMinMax(d, &min, &max);
-
-    float scale = FindScale(min, max);
-
-    ToScale(d, scale);
-}
-
-
-void DDrive::FindMinMax(const float d[4096], float *_min, float *_max)
-{
-    float min = 0.0F;
-    float max = 0.0F;
-
-    for (int i = 0; i < 4096; i++)
-    {
-        if (d[i] < min)
-        {
-            min = d[i];
-        }
-        if (d[i] > max)
-        {
-            max = d[i];
-        }
-    }
-
-    *_min = min;
-    *_max = max;
-}
-
-
-float DDrive::FindScale(float min, float max)
-{
-    max = std::fabsf(max);
-
-    if (std::fabsf(min) > max)
-    {
-        max = std::fabsf(min);
-    }
-
-    return 1.0F / max;
-}
-
-
-void DDrive::ToScale(float d[4096], float scale)
-{
-    for (int i = 0; i < 4096; i++)
-    {
-        d[i] *= scale;
-    }
-}
-
-
-void DDrive::FillPicture(uint8 *picture, uint size, float values[4096])
-{
-    Normalize(values);
-
-    uint8 aveValue = 127;
-
-    float step = 4096.0F / size;
-
-    for (uint i = 0; i < size; i++)
-    {
-        float val = values[static_cast<int>(i * step)];
-
-        picture[i] = static_cast<uint8>(aveValue + val * 125);
-    }
 }
