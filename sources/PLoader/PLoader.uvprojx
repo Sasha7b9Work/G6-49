@@ -1632,14 +1632,14 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\main.cpp</FilePath>
-            </File>
-            <File>
               <FileName>structs.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\structs.h</FilePath>
+            </File>
+            <File>
+              <FileName>main_pl.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main_pl.cpp</FilePath>
             </File>
           </Files>
         </Group>
