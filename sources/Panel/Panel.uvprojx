@@ -2392,16 +2392,6 @@
               <FilePath>.\src\Utils\BigNumber.h</FilePath>
             </File>
             <File>
-              <FileName>CommonFunctions.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\CommonFunctions.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CommonFunctions.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\CommonFunctions.h</FilePath>
-            </File>
-            <File>
               <FileName>Debug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Debug.cpp</FilePath>

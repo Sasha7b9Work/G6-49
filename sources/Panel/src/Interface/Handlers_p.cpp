@@ -85,12 +85,6 @@ bool PHandlers::Processing(SimpleMessage *msg)
 }
 
 
-bool PHandlers::E(SimpleMessage *)
-{
-    return false;
-}
-
-
 bool PHandlers::Request(SimpleMessage *)
 {
     return false;

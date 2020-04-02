@@ -1,12 +1,12 @@
 #pragma once
-#include "Utils/CommonFunctions.h"
-#define FuncDraw            EmptyFuncVII
-#define FuncOnKey           EmptyFuncBKey
-#define FuncChanged         EmptyFuncVV
-#define FuncChangedChoice   EmptyFuncVB
-#define FuncBeforeDraw      EmptyFuncVV
-#define FuncRegSetPage      EmptyFuncVI
 
+inline void FuncDraw(int, int) {}
+inline bool FuncOnKey(const Key&) { return false; }
+inline void FuncChangedChoice(bool) {}
+inline void FuncChanged() {}
+inline void FuncBeforeDraw() {}
+inline void EmptyFuncVV() {}
+inline void EmptyFuncVB(bool) {}
 
 
 #define DEF_BUTTON(name, titleRU, hintRU, titleEN, hintEN, keeper, funcActive, funcPress, funcDraw)                                        \
