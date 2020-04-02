@@ -4,6 +4,7 @@
 #include "Interface/Interface_dl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
+#include "Updater.h"
 
 
 #define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
@@ -19,11 +20,7 @@ int main()
 {
     CPU::Init();
 
-    HAL_TIM::Delay(100);
-
-    Message::StartMainApplication().Transmit();     // Посылаем команду старта основного приложения
-
-    while(DInterface::GetOutbox().Size())           // И ждём его отправки
+    while(Updater::Process())
     {
         DInterface::Update();
     }

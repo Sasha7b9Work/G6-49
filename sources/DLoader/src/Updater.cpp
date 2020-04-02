@@ -1,30 +1,27 @@
 #include "defines.h"
-#include "structs.h"
 #include "common/Command.h"
-#include "common/Transceiver.h"
+#include "common/Messages.h"
 #include "Updater.h"
-#include "FDrive/FDrive_d.h"
-#include "Hardware/CPU.h"
-#include "Hardware/Timer.h"
-#include "Hardware/HAL/HAL.h"
-#include "Interface/Handlers_dl.h"
-#include "Interface/Interface_dl.h"
-#include "Settings/CalibrationSettings.h"
 
 
 static void E(SimpleMessage *);
 
-static void SendData(SimpleMessage *);
+static void OnRequestUpdate(SimpleMessage *);
 
 
+bool Updater::Process()
+{
+    return true;
+}
 
-void DHandlers::Processing(SimpleMessage *msg)
+
+void Updater::Handler(SimpleMessage *message)
 {
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
     static const pFuncInterfaceVpM funcs[Command::Count] =
     {
-        /* RequestData               */ SendData,
+        /* RequestData               */ E,
         /* EnableChannel             */ E,
         /* SetFormWave               */ E,
         /* SetFrequency              */ E,
@@ -69,52 +66,29 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* CalibrationLoad           */ E,
         /* CalibrationSet            */ E,
         /* StartApplication          */ E,
-        /* RequestUpdate             */ Updater::Handler
+        /* RequestUpdate             */ OnRequestUpdate
     };
 
-    uint8 com = msg->TakeByte();
+    message->ResetPointer();
+
+    uint8 com = message->TakeByte();
 
     if(com < Command::Count)
     {
         pFuncInterfaceVpM func = funcs[com];
 
-        func(msg);
-    }
-}
-
-
-static void SendData(SimpleMessage *)
-{
-    CPU::SetBusy();
-
-    if (DInterface::GetOutbox().Size() != 0)
-    {
-        HAL_TIM::Delay(2);
-
-        CPU::SetReady();
-
-        Transceiver::Transmit(DInterface::GetOutbox().Front());
-
-        CPU::SetBusy();
-
-        DInterface::GetOutbox().Pop();
-    }
-    else
-    {
-        Message::RequestData message;
-
-        HAL_TIM::Delay(2);
-
-        CPU::SetReady();
-
-        Transceiver::Transmit(&message);
-
-        CPU::SetBusy();
+        func(message);
     }
 }
 
 
 static void E(SimpleMessage *)
+{
+
+}
+
+
+static void OnRequestUpdate(SimpleMessage *)
 {
 
 }

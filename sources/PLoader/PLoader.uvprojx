@@ -1641,6 +1641,16 @@
               <FileType>8</FileType>
               <FilePath>.\src\main_pl.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Updater.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Updater.h</FilePath>
+            </File>
+            <File>
+              <FileName>Updater.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Updater.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
