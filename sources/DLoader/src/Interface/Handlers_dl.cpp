@@ -11,57 +11,63 @@
 #include "Settings/CalibrationSettings.h"
 
 
+static void E(SimpleMessage *);
+
+static void SendData(SimpleMessage *);
+
+
+
 void DHandlers::Processing(SimpleMessage *msg)
 {
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
     static const pFuncInterfaceVpM funcs[Command::Count] =
     {
-        /* RequestData               */ DHandlers::E,
-        /* EnableChannel             */ DHandlers::E,
-        /* SetFormWave               */ DHandlers::E,
-        /* SetFrequency              */ DHandlers::E,
-        /* SetAmplitude              */ DHandlers::E,
-        /* SetOffset                 */ DHandlers::E,
-        /* SetDuration               */ DHandlers::E,
-        /* SetDutyRatio              */ DHandlers::E,
-        /* SetPhase                  */ DHandlers::E,
-        /* RunReset                  */ DHandlers::E,
-        /* ModeDebug                 */ DHandlers::E,
-        /* SetDelay                  */ DHandlers::E,
-        /* WriteRegister             */ DHandlers::E,
-        /* SetDurationRise           */ DHandlers::E,
-        /* SetDurationFall           */ DHandlers::E,
-        /* SetDurationStady          */ DHandlers::E,
-        /* SetDutyFactor             */ DHandlers::E,
-        /* SetManipulation           */ DHandlers::E,
-        /* SetManipulationDuration   */ DHandlers::E,
-        /* SetManipulationPeriod     */ DHandlers::E,
-        /* SetPacketPeriod           */ DHandlers::E,
-        /* SetPacketNumber           */ DHandlers::E,
-        /* SetStartMode              */ DHandlers::E,
-        /* SetPeriod                 */ DHandlers::E,
-        /* SetPolarity               */ DHandlers::E,
-        /* SetManipulationMode       */ DHandlers::E,
-        /* LoadFromDDS               */ DHandlers::E,
-        /* FreqMeasure               */ DHandlers::E,
-        /* Log                       */ DHandlers::E,
-        /* FDrive_NumDirsAndFiles    */ DHandlers::E,
-        /* FDrive_Mount              */ DHandlers::E,
-        /* FDrive_RequestDir         */ DHandlers::E,
-        /* FDrive_RequestFile        */ DHandlers::E,
-        /* Test                      */ DHandlers::E,
-        /* SetKoeffCalibration       */ DHandlers::E,
-        /* GetKoeffCalibration       */ DHandlers::E,
-        /* FDrive_RequestFileSize    */ DHandlers::E,
-        /* FDrive_RequestFileString  */ DHandlers::E,
-        /* FDrive_LoadFromExtStorage */ DHandlers::E,
-        /* FDrive_GetPictureDDS      */ DHandlers::E,
-        /* SCPI_RecvData             */ DHandlers::E,
-        /* PortCPU                   */ DHandlers::E,
-        /* CalibrationLoad           */ DHandlers::E,
-        /* CalibrationSet            */ DHandlers::E,
-        /* StartApplication          */ DHandlers::E
+        /* RequestData               */ SendData,
+        /* EnableChannel             */ E,
+        /* SetFormWave               */ E,
+        /* SetFrequency              */ E,
+        /* SetAmplitude              */ E,
+        /* SetOffset                 */ E,
+        /* SetDuration               */ E,
+        /* SetDutyRatio              */ E,
+        /* SetPhase                  */ E,
+        /* RunReset                  */ E,
+        /* ModeDebug                 */ E,
+        /* SetDelay                  */ E,
+        /* WriteRegister             */ E,
+        /* SetDurationRise           */ E,
+        /* SetDurationFall           */ E,
+        /* SetDurationStady          */ E,
+        /* SetDutyFactor             */ E,
+        /* SetManipulation           */ E,
+        /* SetManipulationDuration   */ E,
+        /* SetManipulationPeriod     */ E,
+        /* SetPacketPeriod           */ E,
+        /* SetPacketNumber           */ E,
+        /* SetStartMode              */ E,
+        /* SetPeriod                 */ E,
+        /* SetPolarity               */ E,
+        /* SetManipulationMode       */ E,
+        /* LoadFromDDS               */ E,
+        /* FreqMeasure               */ E,
+        /* Log                       */ E,
+        /* FDrive_NumDirsAndFiles    */ E,
+        /* FDrive_Mount              */ E,
+        /* FDrive_RequestDir         */ E,
+        /* FDrive_RequestFile        */ E,
+        /* Test                      */ E,
+        /* SetKoeffCalibration       */ E,
+        /* GetKoeffCalibration       */ E,
+        /* FDrive_RequestFileSize    */ E,
+        /* FDrive_RequestFileString  */ E,
+        /* FDrive_LoadFromExtStorage */ E,
+        /* FDrive_GetPictureDDS      */ E,
+        /* SCPI_RecvData             */ E,
+        /* PortCPU                   */ E,
+        /* CalibrationLoad           */ E,
+        /* CalibrationSet            */ E,
+        /* StartApplication          */ E
     };
 
     uint8 com = msg->TakeByte();
@@ -77,7 +83,7 @@ void DHandlers::Processing(SimpleMessage *msg)
 }
 
 
-void DHandlers::SendData(SimpleMessage *)
+static void SendData(SimpleMessage *)
 {
     CPU::SetBusy();
 
@@ -108,7 +114,7 @@ void DHandlers::SendData(SimpleMessage *)
 }
 
 
-void DHandlers::E(SimpleMessage *)
+static void E(SimpleMessage *)
 {
 
 }
