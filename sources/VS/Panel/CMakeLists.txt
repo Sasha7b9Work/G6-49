@@ -73,8 +73,6 @@ source_group(common                   FILES              ../../common/Command.h
                                                          ../../common/CommonTypes.h
                                                          ../../common/Messages.h
                                                          ../../common/Messages.cpp
-                                                         ../../common/Messages_p.h
-                                                         ../../common/Messages_p.cpp
                                                          ../../common/Transceiver.h)
 source_group(common\\_VS\\HAL         FILES              ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp)
 source_group(src                      FILES              ../../Panel/src/defines.h
@@ -121,6 +119,8 @@ source_group(Interface                FILES              ../../Panel/src/Interfa
                                                          ../../Panel/src/Interface/Handlers_p.h
                                                          ../../Panel/src/Interface/Interface_p.cpp
                                                          ../../Panel/src/Interface/Interface_p.h
+                                                         ../../Panel/src/Interface/Messages_p.h
+                                                         ../../Panel/src/Interface/Messages_p.cpp
                                                                      src/Interface/Transceiver_p_win.cpp)
 source_group(Display\\Font            REGULAR_EXPRESSION ../Panel/src/Display/Font/*)
 source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*)
@@ -206,6 +206,8 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/Interface/Handlers_p.h
                     ../../Panel/src/Interface/Interface_p.cpp
                     ../../Panel/src/Interface/Interface_p.h
+                    ../../Panel/src/Interface/Messages_p.h
+                    ../../Panel/src/Interface/Messages_p.cpp
                                 src/Interface/Transceiver_p_win.cpp
                                 
                     ../../Panel/src/libs/CMSIS/startup_stm32f429xx.s

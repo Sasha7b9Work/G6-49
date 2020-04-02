@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Generator_p.h"
-#include "common/Messages_p.h"
+#include "Interface/Messages_p.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
