@@ -57,3 +57,6 @@ sources/DDS-Open/Generator/Listings/*
 sources/DDS-Open-VS/Panel/Debug/*
 sources/DDS-Open-VS/Panel/Release/*
 sources/DDS-Open-VS/Panel/x64/*
+
+sources/Device/*.bin
+sources/Panel/*.bin
