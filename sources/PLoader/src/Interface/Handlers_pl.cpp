@@ -3,6 +3,10 @@
 #include "common/Messages.h"
 #include "Handlers_pl.h"
 #include "FDrive/FDrive_p.h"
+#include <stm32f429xx.h>
+
+
+static bool OnStartMainApplication(SimpleMessage *message);
 
 
 bool PHandlers::Processing(SimpleMessage *msg)
@@ -55,7 +59,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* PortCPU                   */ PHandlers::E,
         /* CalibrationLoad           */ PHandlers::E,
         /* CalibrationSet            */ PHandlers::E,
-        /* StartApplication          */ PHandlers::E
+        /* StartApplication          */ OnStartMainApplication
     };
 
     uint8 command = msg->TakeByte();
@@ -79,4 +83,26 @@ bool PHandlers::E(SimpleMessage *)
 bool PHandlers::Request(SimpleMessage *)
 {
     return false;
+}
+
+
+static bool OnStartMainApplication(SimpleMessage *)
+{
+#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
+
+    typedef void(*pFunction)();
+
+    __disable_irq();
+
+    pFunction JumpToApplication;
+
+    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+
+    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
+
+    __enable_irq();
+
+    JumpToApplication();
+
+    return true;
 }
