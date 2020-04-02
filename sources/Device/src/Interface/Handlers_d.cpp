@@ -456,7 +456,7 @@ static void RunReset(SimpleMessage *)
 {
 #ifndef WIN32
 
-#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8000000
+#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
     typedef void(*pFunction)();
     __disable_irq();
     pFunction JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
