@@ -20,7 +20,6 @@ struct DDrive
         static void RequestFile();
         static void RequestFileSize();
         static void GetPictureDDS();
-        static void E();
     };
 
 private:

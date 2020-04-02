@@ -21,6 +21,11 @@ FDrive::Mount FDrive::mounted = Disconnect;
 char          FDrive::directory[255];
 bool          FDrive::inStateWaitCompleteLoad = false;
 
+static bool E()
+{
+    return false;
+}
+
 
 void FDrive::Init()
 {
@@ -85,51 +90,52 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 {
     static const pFuncBV funcs[Command::Count] =
     {
-        /* RequestData                  */ EmptyFuncBV,
-        /* EnableChannel                */ EmptyFuncBV,
-        /* SetFormWave                  */ EmptyFuncBV,
-        /* SetFrequency                 */ EmptyFuncBV,
-        /* SetAmplitude                 */ EmptyFuncBV,
-        /* SetOffset                    */ EmptyFuncBV,
-        /* SetDuration                  */ EmptyFuncBV,
-        /* SetDutyRatio                 */ EmptyFuncBV,
-        /* SetPhase                     */ EmptyFuncBV,
-        /* RunReset                     */ EmptyFuncBV,
-        /* ModeDebug                    */ EmptyFuncBV,
-        /* SetDelay                     */ EmptyFuncBV,
-        /* WriteRegister                */ EmptyFuncBV,
-        /* SetDurationRise              */ EmptyFuncBV,
-        /* SetDurationFall              */ EmptyFuncBV,
-        /* SetDurationStady             */ EmptyFuncBV,
-        /* SetDutyFactor                */ EmptyFuncBV,
-        /* SetManipulation              */ EmptyFuncBV,
-        /* SetManipulationDuration      */ EmptyFuncBV,
-        /* SetManipulationPeriod        */ EmptyFuncBV,
-        /* SetPacketPeriod              */ EmptyFuncBV,
-        /* SetPacketNumber              */ EmptyFuncBV,
-        /* SetStartMode                 */ EmptyFuncBV,
-        /* SetPeriod                    */ EmptyFuncBV,
-        /* SetPolarity                  */ EmptyFuncBV,
-        /* SetManipulationMode          */ EmptyFuncBV,
-        /* LoadFromDDS                  */ EmptyFuncBV,
-        /* FreqMeasure                  */ EmptyFuncBV,
-        /* Log                          */ EmptyFuncBV,
+        /* RequestData                  */ E,
+        /* EnableChannel                */ E,
+        /* SetFormWave                  */ E,
+        /* SetFrequency                 */ E,
+        /* SetAmplitude                 */ E,
+        /* SetOffset                    */ E,
+        /* SetDuration                  */ E,
+        /* SetDutyRatio                 */ E,
+        /* SetPhase                     */ E,
+        /* RunReset                     */ E,
+        /* ModeDebug                    */ E,
+        /* SetDelay                     */ E,
+        /* WriteRegister                */ E,
+        /* SetDurationRise              */ E,
+        /* SetDurationFall              */ E,
+        /* SetDurationStady             */ E,
+        /* SetDutyFactor                */ E,
+        /* SetManipulation              */ E,
+        /* SetManipulationDuration      */ E,
+        /* SetManipulationPeriod        */ E,
+        /* SetPacketPeriod              */ E,
+        /* SetPacketNumber              */ E,
+        /* SetStartMode                 */ E,
+        /* SetPeriod                    */ E,
+        /* SetPolarity                  */ E,
+        /* SetManipulationMode          */ E,
+        /* LoadFromDDS                  */ E,
+        /* FreqMeasure                  */ E,
+        /* Log                          */ E,
         /* FDrive_NumDirsAndFiles       */ Handler::GetNumDirsAndFiles,
         /* FDrive_Mount                 */ Handler::IsMount,
-        /* FDrive_RequestDir            */ Handler::E,
+        /* FDrive_RequestDir            */ E,
         /* FDrive_RequestFile           */ Handler::RequestFile,
-        /* Test                         */ EmptyFuncBV,
-        /* SetKoeffCalibration          */ EmptyFuncBV,
-        /* GetKoeffCalibration          */ EmptyFuncBV,
+        /* Test                         */ E,
+        /* SetKoeffCalibration          */ E,
+        /* GetKoeffCalibration          */ E,
         /* FDrive_RequestFileSize       */ Handler::RequestFileSize,
-        /* FDrive_RequestFileString     */ Handler::E,
+        /* FDrive_RequestFileString     */ E,
         /* FDrive_LoadFromExtStorage    */ Handler::LoadFromExtStorage,
-        /* FDrive_GetPictureDDS         */ Handler::E,
-        /* SCPI_RecvData                */ EmptyFuncBV,
-        /* PortCPU                      */ EmptyFuncBV,
-        /* CalibrationLoad              */ EmptyFuncBV,
-        /* CalibrationSet               */ EmptyFuncBV,
-        /* StartApplication             */ EmptyFuncBV
+        /* FDrive_GetPictureDDS         */ E,
+        /* SCPI_RecvData                */ E,
+        /* PortCPU                      */ E,
+        /* CalibrationLoad              */ E,
+        /* CalibrationSet               */ E,
+        /* StartApplication             */ E,
+        /* RequestUpdate                */ E
     };
 
     msg = message;
@@ -153,12 +159,6 @@ bool FDrive::Handler::IsMount()
 bool FDrive::Handler::GetNumDirsAndFiles()
 {
     return Items::Handler::Processing(msg);
-}
-
-
-bool FDrive::Handler::E()
-{
-    return false;
 }
 
 

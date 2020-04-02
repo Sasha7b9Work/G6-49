@@ -10,8 +10,6 @@ void EmptyFuncVII(int, int);
 
 void EmptyFuncVI(int);
 
-bool EmptyFuncBV();
-
 bool EmptyFuncBKey(const Key&);
 
 void EmptyFuncVB(bool);

@@ -50,12 +50,6 @@ void EmptyFuncVI(int)
 }
 
 
-bool EmptyFuncBV()
-{
-    return true;
-}
-
-
 bool EmptyFuncBKey(const Key&)
 {
     return false;

@@ -120,7 +120,8 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* PortCPU                   */ SetPin,
         /* CalibrationLoad           */ CalibrationLoad,
         /* CalibrationSet            */ CalibrationSet,
-        /* StartApplication          */ E
+        /* StartApplication          */ E,
+        /* RequestUpdate             */ E
     };
 
     uint8 com = msg->TakeByte();

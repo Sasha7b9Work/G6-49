@@ -33,7 +33,6 @@ struct FDrive
         static bool Processing(SimpleMessage *msg);
     private:
         static SimpleMessage *msg;
-        static bool E();
         static bool IsMount();
         static bool GetNumDirsAndFiles();
         static bool RequestFile();

@@ -22,7 +22,6 @@ struct DDrive
         /// Загрузить сигнал с флешки
         static void LoadFromExtStorage();
         static void GetPictureDDS();
-        static void E();
     };
 
 private:
