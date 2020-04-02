@@ -20,8 +20,11 @@ int main()
 {
     CPU::Init();
 
+    DLDrive::Init();
+
     while(Updater::Process())
     {
+        DLDrive::Update();
         DInterface::Update();
     }
 

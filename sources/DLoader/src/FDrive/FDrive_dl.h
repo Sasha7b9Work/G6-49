@@ -13,11 +13,8 @@ struct DLDrive
 
     struct Handler
     {
-        static void Processing(SimpleMessage *msg);
-    private:
-        static SimpleMessage *msg;
-        static void GetNumDirsAndFiles();
-        static void RequestFile();
-        static void RequestFileSize();
+        static void GetNumDirsAndFiles(char *fullPath);
+        static void RequestFile(int num, char *fullPath);
+        static void RequestFileSize(int num, char *path);
     };
 };

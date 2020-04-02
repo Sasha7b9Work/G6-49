@@ -11,15 +11,6 @@
 #include <cmath>
 
 
-SimpleMessage *DLDrive::Handler::msg = nullptr;
-
-
-static void E()
-{
-
-}
-
-
 struct StructForReadDir
 {
     char nameDir[_MAX_LFN + 1];
@@ -40,103 +31,38 @@ struct FileSystem
 };
 
 
-void DLDrive::Handler::Processing(SimpleMessage *message)
-{
-    msg = message;
-
-    msg->ResetPointer();
-
-    uint8 com = msg->TakeByte();
-
-    static const pFuncVV funcs[Command::Count] =
-    {
-        /* RequestData                  */ E,
-        /* EnableChannel                */ E,
-        /* SetFormWave                  */ E,
-        /* SetFrequency                 */ E,
-        /* SetAmplitude                 */ E,
-        /* SetOffset                    */ E,
-        /* SetDuration                  */ E,
-        /* SetDutyRatio                 */ E,
-        /* SetPhase                     */ E,
-        /* RunReset                     */ E,
-        /* ModeDebug                    */ E,
-        /* SetDelay                     */ E,
-        /* WriteRegister                */ E,
-        /* SetDurationRise              */ E,
-        /* SetDurationFall              */ E,
-        /* SetDurationStady             */ E,
-        /* SetDutyFactor                */ E,
-        /* SetManipulation              */ E,
-        /* SetManipulationDuration      */ E,
-        /* SetManipulationPeriod        */ E,
-        /* SetPacketPeriod              */ E,
-        /* SetPacketNumber              */ E,
-        /* SetStartMode                 */ E,
-        /* SetPeriod                    */ E,
-        /* SetPolarity                  */ E,
-        /* SetManipulationMode          */ E,
-        /* LoadFromDDS                  */ E,
-        /* FreqMeasure                  */ E,
-        /* Log                          */ E,
-        /* FDrive_NumDirsAndFiles       */ E,
-        /* FDrive_Mount                 */ E,
-        /* FDrive_RequestDir            */ E,
-        /* FDrive_RequestFile           */ E,
-        /* Test                         */ E,
-        /* SetKoeffCalibration          */ E,
-        /* GetKoeffCalibration          */ E,
-        /* FDrive_RequestFileSize       */ E,
-        /* FDrive_RequestFileString     */ E,
-        /* FDrive_LoadFromExtStorage    */ E,
-        /* FDrive_GetPictureDDS         */ E,
-        /* SCPI_RecvData                */ E,
-        /* PortCPU                      */ E,
-        /* CalibrationLoad              */ E,
-        /* CalibrationSet               */ E,
-        /* StartApplication             */ E,
-        /* RequestUpdate                */ E
-    };
-
-    funcs[com]();
-}
-
-
-void DLDrive::Handler::GetNumDirsAndFiles()
+void DLDrive::Handler::GetNumDirsAndFiles(char *fullPath)
 {
     uint numDirs = 0;
     uint numFiles = 0;
 
-    FileSystem::GetNumDirsAndFiles(msg->String(1), &numDirs, &numFiles);
+    FileSystem::GetNumDirsAndFiles(fullPath, &numDirs, &numFiles);
 
     Message::FDrive::NumDirsAndFiles(numDirs, numFiles).Transmit();
 }
 
 
-void DLDrive::Handler::RequestFile()
+void DLDrive::Handler::RequestFile(int num, char *fullPath)
 {
     char name[255];
 
-    int numFile = static_cast<int>(msg->TakeByte());
-
-    if (FileSystem::GetNameFile(msg->String(2), numFile, name))
+    if (FileSystem::GetNameFile(fullPath, num, name))
     {
-        Message::FDrive::FileName(static_cast<uint8>(numFile), name).Transmit();
+        Message::FDrive::FileName(static_cast<uint8>(num), name).Transmit();
     }
 }
 
 
-void DLDrive::Handler::RequestFileSize()
+void DLDrive::Handler::RequestFileSize(int num, char *path)
 {
     char name[255];
-    int numFile = static_cast<int>(msg->TakeByte());
-    if (FileSystem::GetNameFile(msg->String(2), numFile, name))           // Получаем имя файла
+    if (FileSystem::GetNameFile(path, num, name))           // Получаем имя файла
     {
-        String fullPath("%s\\%s", msg->String(2), name);
+        String fullPath("%s\\%s", path, name);
 
         uint size = FileSystem::GetFileSize(fullPath.CString());
 
-        Message::FDrive::FileSize(static_cast<uint8>(numFile), size).Transmit();
+        Message::FDrive::FileSize(static_cast<uint8>(num), size).Transmit();
     }
 }
 
