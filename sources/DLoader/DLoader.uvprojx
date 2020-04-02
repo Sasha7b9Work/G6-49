@@ -1172,19 +1172,19 @@
           <GroupName>FDrive</GroupName>
           <Files>
             <File>
-              <FileName>FDrive_d.h</FileName>
+              <FileName>FDrive_dl.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\FDrive\FDrive_d.h</FilePath>
+              <FilePath>.\src\FDrive\FDrive_dl.h</FilePath>
             </File>
             <File>
-              <FileName>FDrive_d.cpp</FileName>
+              <FileName>FDrive_dl.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDrive_d.cpp</FilePath>
+              <FilePath>.\src\FDrive\FDrive_dl.cpp</FilePath>
             </File>
             <File>
-              <FileName>FDrive_d_Handler.cpp</FileName>
+              <FileName>FDrive_dl_Handler.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDrive_d_Handler.cpp</FilePath>
+              <FilePath>.\src\FDrive\FDrive_dl_Handler.cpp</FilePath>
             </File>
           </Files>
         </Group>
