@@ -31,38 +31,32 @@ struct FileSystem
 };
 
 
-void DLDrive::Handler::GetNumDirsAndFiles(char *fullPath)
+void DLDrive::GetNumDirsAndFiles(char *fullPath)
 {
     uint numDirs = 0;
     uint numFiles = 0;
 
     FileSystem::GetNumDirsAndFiles(fullPath, &numDirs, &numFiles);
-
-    Message::FDrive::NumDirsAndFiles(numDirs, numFiles).Transmit();
 }
 
 
-void DLDrive::Handler::RequestFile(int num, char *fullPath)
+void DLDrive::RequestFile(int num, char *fullPath)
 {
     char name[255];
 
-    if (FileSystem::GetNameFile(fullPath, num, name))
-    {
-        Message::FDrive::FileName(static_cast<uint8>(num), name).Transmit();
-    }
+    FileSystem::GetNameFile(fullPath, num, name);
 }
 
 
-void DLDrive::Handler::RequestFileSize(int num, char *path)
+void DLDrive::RequestFileSize(int num, char *path)
 {
     char name[255];
+
     if (FileSystem::GetNameFile(path, num, name))           // Получаем имя файла
     {
         String fullPath("%s\\%s", path, name);
 
-        uint size = FileSystem::GetFileSize(fullPath.CString());
-
-        Message::FDrive::FileSize(static_cast<uint8>(num), size).Transmit();
+        FileSystem::GetFileSize(fullPath.CString());
     }
 }
 

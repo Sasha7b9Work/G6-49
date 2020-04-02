@@ -27,9 +27,6 @@ struct State
 };
 
 static State::E state = State::Disconnected;
-/// Здесь хранится обрабатываемая команда
-static Command command = Command::Count;
-
 
 
 /// В эту функцию попадаем при каждом событии на OTG FS
@@ -93,15 +90,11 @@ void DLDrive::Update()
     {
         FRESULT result = f_mount(&FatFS, USBDISKPath, 0);
 
-        Message::FDrive::Mount((result == FR_OK) ? static_cast<uint8>(1) : static_cast<uint8>(2)).Transmit();
-
         state = State::Connected;
     }
     else if(state == State::NeedUnmount)
     {
         f_mount(0, "", 0);
-
-        Message::FDrive::Mount(0).Transmit();
 
         state = State::Disconnected;
     }
