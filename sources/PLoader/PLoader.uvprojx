@@ -1821,16 +1821,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Interface_pl.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Messages_pl.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Messages_pl.h</FilePath>
-            </File>
-            <File>
-              <FileName>Messages_pl.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Interface\Messages_pl.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
