@@ -174,6 +174,7 @@ pString Command::Trace(const uint8 *buffer) const
         case deleted_SetKoeffCalibration:
         case deleted_GetKoeffCalibration:
         case StartApplication:
+        case RequestUpdate:
         case Count:
             break;
     }

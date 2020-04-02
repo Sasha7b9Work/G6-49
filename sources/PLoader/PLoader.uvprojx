@@ -1682,6 +1682,16 @@
               <FilePath>..\common\Messages.cpp</FilePath>
             </File>
             <File>
+              <FileName>Messages_pl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Messages_pl.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages_pl.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Messages_pl.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Transceiver_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\common\Transceiver_p.cpp</FilePath>

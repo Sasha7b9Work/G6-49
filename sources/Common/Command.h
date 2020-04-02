@@ -100,6 +100,7 @@ struct Command
             CalibrationLoad,
             CalibrationSet,
             StartApplication,               // Запуск основного приложения
+            RequestUpdate,                  // Запрос на обновление
             Count
     } value;
     Command(E v) : value(v) {};
