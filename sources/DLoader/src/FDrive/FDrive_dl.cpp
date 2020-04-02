@@ -40,7 +40,7 @@ struct StructForReadDir
 
 struct FileSystem
 {
-    static uint GetFileSize(const char *fullPath);
+    
     /// Получить имя numFile-го файла из каталога fullPath
     static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
     /// Читает значения отсчётов сигнала из файла name
@@ -138,7 +138,7 @@ void DLDrive::RequestFileSize(int num, char *path)
     {
         String fullPath("%s\\%s", path, name);
 
-        FileSystem::GetFileSize(fullPath.CString());
+        GetFileSize(fullPath.CString());
     }
 }
 
@@ -150,9 +150,6 @@ void DLDrive::GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFil
 
     FILINFO fno;
     DIR dir;
-
-    *numDirs = 0;
-    *numFiles = 0;
 
     char nameDir[_MAX_LFN + 1];
     std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath));
@@ -243,17 +240,17 @@ bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOu
 }
 
 
-uint FileSystem::GetFileSize(const char *fullPath)
+int DLDrive::GetFileSize(const char *fullPath)
 {
     FIL fp;
     if(f_open(&fp, fullPath, FA_READ) == FR_OK)
     {
         uint size = f_size(&fp);
         f_close(&fp);
-        return size;
+        return static_cast<int>(size);
     }
 
-    return static_cast<uint>(-1);
+    return -1;
 }
 
 

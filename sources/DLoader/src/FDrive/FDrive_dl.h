@@ -15,5 +15,7 @@ struct DLDrive
 
     static void RequestFileSize(int num, char *path);
 
+    static int GetFileSize(const char *fullPath);
+
     static USBH_HandleTypeDef *handle;
 };
