@@ -11,7 +11,7 @@ type ..\..\Device\Device.out
 
 :Exit
 
-copy ..\..\Device\S8-57.bin h:\
-copy ..\..\Device\S8-57.bin i:\
+copy ..\..\Device\G6-49-D.bin h:\
+
 
 @echo %TIME%   Complete
