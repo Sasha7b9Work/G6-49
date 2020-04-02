@@ -2,7 +2,7 @@
 #include "structs.h"
 #include "common/Command.h"
 #include "common/Transceiver.h"
-#include "Updater.h"
+#include "Updater_dl.h"
 #include "FDrive/FDrive_d.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -20,9 +20,9 @@ static void SendData(SimpleMessage *);
 
 void DHandlers::Processing(SimpleMessage *msg)
 {
-    typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
+    typedef void(*pFunc)(SimpleMessage *);
 
-    static const pFuncInterfaceVpM funcs[Command::Count] =
+    static const pFunc funcs[Command::Count] =
     {
         /* RequestData               */ SendData,
         /* EnableChannel             */ E,
@@ -76,7 +76,7 @@ void DHandlers::Processing(SimpleMessage *msg)
 
     if(com < Command::Count)
     {
-        pFuncInterfaceVpM func = funcs[com];
+        pFunc func = funcs[com];
 
         func(msg);
     }

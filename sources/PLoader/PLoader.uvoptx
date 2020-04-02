@@ -844,8 +844,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Updater.h</PathWithFileName>
-      <FilenameWithoutPath>Updater.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Updater_pl.h</PathWithFileName>
+      <FilenameWithoutPath>Updater_pl.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -856,8 +856,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Updater.cpp</PathWithFileName>
-      <FilenameWithoutPath>Updater.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Updater_pl.cpp</PathWithFileName>
+      <FilenameWithoutPath>Updater_pl.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

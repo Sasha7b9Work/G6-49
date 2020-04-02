@@ -1642,14 +1642,14 @@
               <FilePath>.\src\main_pl.cpp</FilePath>
             </File>
             <File>
-              <FileName>Updater.h</FileName>
+              <FileName>Updater_pl.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Updater.h</FilePath>
+              <FilePath>.\src\Updater_pl.h</FilePath>
             </File>
             <File>
-              <FileName>Updater.cpp</FileName>
+              <FileName>Updater_pl.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Updater.cpp</FilePath>
+              <FilePath>.\src\Updater_pl.cpp</FilePath>
             </File>
           </Files>
         </Group>

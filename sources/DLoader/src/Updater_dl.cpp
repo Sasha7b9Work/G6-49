@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "common/Command.h"
 #include "common/Messages.h"
-#include "Updater.h"
+#include "Updater_dl.h"
 
 
 static void E(SimpleMessage *);
@@ -17,9 +17,9 @@ bool Updater::Process()
 
 void Updater::Handler(SimpleMessage *message)
 {
-    typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
+    typedef void(*pFunc)(SimpleMessage *);
 
-    static const pFuncInterfaceVpM funcs[Command::Count] =
+    static const pFunc funcs[Command::Count] =
     {
         /* RequestData               */ E,
         /* EnableChannel             */ E,
@@ -75,7 +75,7 @@ void Updater::Handler(SimpleMessage *message)
 
     if(com < Command::Count)
     {
-        pFuncInterfaceVpM func = funcs[com];
+        pFunc func = funcs[com];
 
         func(message);
     }

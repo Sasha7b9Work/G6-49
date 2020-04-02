@@ -4,7 +4,7 @@
 #include "Interface/Interface_dl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
-#include "Updater.h"
+#include "Updater_dl.h"
 
 
 #define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
