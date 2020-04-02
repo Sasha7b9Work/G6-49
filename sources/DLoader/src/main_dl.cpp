@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "common/Messages_pl.h"
 #include "FDrive/FDrive_d.h"
 #include "Interface/Interface_d.h"
 #include "Hardware/CPU.h"
@@ -16,6 +17,16 @@ static void JumpToMainApplication();
 
 int main()
 {
+    CPU::Init();
+
+    HAL_TIM::Delay(500);
+
+    Message::StartMainApplication().Transmit();     // Посылаем команду старта основного приложения
+
+    while(DInterface::GetOutbox().Size())           // И ждём его отправки
+    {
+    }
+
     JumpToMainApplication();
     
     return 0;

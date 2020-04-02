@@ -34,12 +34,19 @@ add_compile_options(/wd5027)
 add_compile_options(/wd5039)
 add_compile_options(/wd5045)
 
+
+set_source_files_properties(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                            PROPERTIES HEADER_FILE_ONLY TRUE)
+
+
 source_group(common             FILES ../common/Command.h
                                       ../common/Command.cpp
                                       ../common/Common.h
                                       ../common/Common.cpp
                                       ../common/Messages.h
                                       ../common/Messages.cpp
+                                      ../common/Messages_pl.h
+                                      ../common/Messages_pl.cpp
                                       ../common/Transceiver.h)
 source_group(src                REGULAR_EXPRESSION src/*)
 source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
@@ -54,6 +61,8 @@ source_group(libs\\HAL          REGULAR_EXPRESSION src/libs/HAL/*)
 source_group(libs\\USBH         REGULAR_EXPRESSION src/libs/USBH/*)
 source_group(Settings           REGULAR_EXPRESSION src/Settings/*)
 source_group(Utils              REGULAR_EXPRESSION src/Utils/*)
+source_group(ThirdParty\\HAL    FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c)
 
 file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
@@ -61,6 +70,8 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Common.cpp
                     ../common/Messages.h
                     ../common/Messages.cpp
+                    ../common/Messages_pl.h
+                    ../common/Messages_pl.cpp
                     ../common/Transceiver.h
                     src/*
                     src/FDrive/*
@@ -74,7 +85,11 @@ file(GLOB SOURCES   ../common/Command.h
                     src/libs/HAL/*
                     src/libs/USBH/*
                     src/Settings/*
-                    src/Utils/*)
+                    src/Utils/*
+                    
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                    )
 
 list(REMOVE_ITEM SOURCES "src/libs/CMSIS/system_stm32f4xx.c")
                     

@@ -10,13 +10,11 @@ void HAL::Init()
 
     EnablePeriphery();
 
-//    HAL_Init();
-//
-//    HAL_PIO::Init();
-//
-//    HAL_SPI1::Init();
-//
-//    HAL_CRC32::Init();
+    HAL_Init();
+
+    HAL_PIO::Init();
+
+    HAL_SPI1::Init();
 }
 
 
