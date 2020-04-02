@@ -41,8 +41,6 @@ struct StructForReadDir
 struct FileSystem
 {
     static uint GetFileSize(const char *fullPath);
-    /// Получает количество каталогов и файлов в данной директории
-    static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
     /// Получить имя numFile-го файла из каталога fullPath
     static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
     /// Читает значения отсчётов сигнала из файла name
@@ -124,15 +122,6 @@ void DLDrive::Update()
 }
 
 
-void DLDrive::GetNumDirsAndFiles(char *fullPath)
-{
-    uint numDirs = 0;
-    uint numFiles = 0;
-
-    FileSystem::GetNumDirsAndFiles(fullPath, &numDirs, &numFiles);
-}
-
-
 void DLDrive::RequestFile(int num, char *fullPath)
 {
     char name[255];
@@ -154,8 +143,11 @@ void DLDrive::RequestFileSize(int num, char *path)
 }
 
 
-void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
+void DLDrive::GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles)
 {
+    *numDirs = 0;
+    *numFiles = 0;
+
     FILINFO fno;
     DIR dir;
 

@@ -8,7 +8,8 @@ struct DLDrive
 
     static void Update();
 
-    static void GetNumDirsAndFiles(char *fullPath);
+    // Получает количество каталогов и файлов в данной директории
+    static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles);
 
     static void RequestFile(int num, char *fullPath);
 
