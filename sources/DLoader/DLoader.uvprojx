@@ -1181,11 +1181,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\FDrive\FDrive_dl.cpp</FilePath>
             </File>
-            <File>
-              <FileName>FDrive_dl_Handler.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FDrive\FDrive_dl_Handler.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
