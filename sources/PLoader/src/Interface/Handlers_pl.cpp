@@ -9,6 +9,12 @@
 static bool OnStartMainApplication(SimpleMessage *message);
 
 
+static bool E(SimpleMessage *)
+{
+    return false;
+}
+
+
 bool PHandlers::Processing(SimpleMessage *msg)
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
@@ -16,50 +22,51 @@ bool PHandlers::Processing(SimpleMessage *msg)
     static const pFuncBpM funcs[Command::Count] =
     {
         /* RequestData               */ PHandlers::Request,
-        /* EnableChannel             */ PHandlers::E,
-        /* SetFormWave               */ PHandlers::E,
-        /* SetFrequency              */ PHandlers::E,
-        /* SetAmplitude              */ PHandlers::E,
-        /* SetOffset                 */ PHandlers::E,
-        /* SetDuration               */ PHandlers::E,
-        /* SetDutyRatio              */ PHandlers::E,
-        /* SetPhase                  */ PHandlers::E,
-        /* RunReset                  */ PHandlers::E,
-        /* ModeDebug                 */ PHandlers::E,
-        /* SetDelay                  */ PHandlers::E,
-        /* WriteRegister             */ PHandlers::E,
-        /* SetDurationRise           */ PHandlers::E,
-        /* SetDurationFall           */ PHandlers::E,
-        /* SetDurationStady          */ PHandlers::E,
-        /* SetDutyFactor             */ PHandlers::E,
-        /* SetManipulation           */ PHandlers::E,
-        /* SetManipulationDuration   */ PHandlers::E,
-        /* SetManipulationPeriod     */ PHandlers::E,
-        /* SetPacketPeriod           */ PHandlers::E,
-        /* SetPacketNumber           */ PHandlers::E,
-        /* SetStartMode              */ PHandlers::E,
-        /* SetPeriod                 */ PHandlers::E,
-        /* SetPolarity               */ PHandlers::E,
-        /* SetManipulationMode       */ PHandlers::E,
-        /* LoadFromDDS               */ PHandlers::E,
-        /* FreqMeasure               */ PHandlers::E,
-        /* Log                       */ PHandlers::E,
+        /* EnableChannel             */ E,
+        /* SetFormWave               */ E,
+        /* SetFrequency              */ E,
+        /* SetAmplitude              */ E,
+        /* SetOffset                 */ E,
+        /* SetDuration               */ E,
+        /* SetDutyRatio              */ E,
+        /* SetPhase                  */ E,
+        /* RunReset                  */ E,
+        /* ModeDebug                 */ E,
+        /* SetDelay                  */ E,
+        /* WriteRegister             */ E,
+        /* SetDurationRise           */ E,
+        /* SetDurationFall           */ E,
+        /* SetDurationStady          */ E,
+        /* SetDutyFactor             */ E,
+        /* SetManipulation           */ E,
+        /* SetManipulationDuration   */ E,
+        /* SetManipulationPeriod     */ E,
+        /* SetPacketPeriod           */ E,
+        /* SetPacketNumber           */ E,
+        /* SetStartMode              */ E,
+        /* SetPeriod                 */ E,
+        /* SetPolarity               */ E,
+        /* SetManipulationMode       */ E,
+        /* LoadFromDDS               */ E,
+        /* FreqMeasure               */ E,
+        /* Log                       */ E,
         /* FDrive_NumDirsAndFiles    */ FDrive::Handler::Processing,
         /* FDrive_Mount              */ FDrive::Handler::Processing,
         /* FDrive_RequestDir         */ FDrive::Handler::Processing,
         /* FDrive_RequestFile        */ FDrive::Handler::Processing,
-        /* Test                      */ PHandlers::E,
-        /* SetKoeffCalibration       */ PHandlers::E,
-        /* GetKoeffCalibration       */ PHandlers::E,
+        /* Test                      */ E,
+        /* SetKoeffCalibration       */ E,
+        /* GetKoeffCalibration       */ E,
         /* FDrive_RequestFileSize    */ FDrive::Handler::Processing,
         /* FDrive_RequestFileString  */ FDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ FDrive::Handler::Processing,
         /* FDrive_GetPictureDDS      */ FDrive::Handler::Processing,
-        /* SCPI_Data                 */ PHandlers::E,
-        /* PortCPU                   */ PHandlers::E,
-        /* CalibrationLoad           */ PHandlers::E,
-        /* CalibrationSet            */ PHandlers::E,
-        /* StartApplication          */ OnStartMainApplication
+        /* SCPI_Data                 */ E,
+        /* PortCPU                   */ E,
+        /* CalibrationLoad           */ E,
+        /* CalibrationSet            */ E,
+        /* StartApplication          */ OnStartMainApplication,
+        /* RequestUpdate             */ E
     };
    
     uint8 command = msg->TakeByte();
@@ -70,12 +77,6 @@ bool PHandlers::Processing(SimpleMessage *msg)
         return funcs[command](msg);
     }
 
-    return false;
-}
-
-
-bool PHandlers::E(SimpleMessage *)
-{
     return false;
 }
 

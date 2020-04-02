@@ -7,6 +7,5 @@ struct PHandlers
 
 private:
 
-    static bool E(SimpleMessage *);
     static bool Request(SimpleMessage *);
 };
