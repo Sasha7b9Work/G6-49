@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "common/Transceiver.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
