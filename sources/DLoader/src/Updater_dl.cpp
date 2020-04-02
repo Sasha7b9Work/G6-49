@@ -2,6 +2,26 @@
 #include "common/Command.h"
 #include "common/Messages.h"
 #include "Updater_dl.h"
+#include "Hardware/HAL/HAL.h"
+
+
+// ¬рем€ окончани€ работы Updater. ≈сли до этого времени не поступил запрос на обновление - будем продолжать без обновлени€
+static uint timeEnd = 0xFFFFFFFF;
+
+
+struct State
+{
+    enum E
+    {
+        Idle,       // Ќачальное состо€ние
+        Update,     // Ќаходимс€ в состо€нии обновлени€
+        Ended,      // ќбновление окончено
+        Count
+    };
+};
+
+
+static State::E state = State::Idle;
 
 
 static void E(SimpleMessage *);
@@ -11,6 +31,21 @@ static void OnRequestUpdate(SimpleMessage *);
 
 bool Updater::Process()
 {
+    if(timeEnd == 0xFFFFFFFF)
+    {
+        timeEnd = HAL_TIM::TimeMS() + 1000;
+    }
+
+    if(state == State::Idle && HAL_TIM::TimeMS() >= timeEnd)
+    {
+        return false;
+    }
+
+    if(state == State::Ended)
+    {
+        return false;
+    }
+
     return true;
 }
 
@@ -90,5 +125,4 @@ static void E(SimpleMessage *)
 
 static void OnRequestUpdate(SimpleMessage *)
 {
-
 }

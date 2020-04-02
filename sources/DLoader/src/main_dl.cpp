@@ -25,6 +25,13 @@ int main()
         DInterface::Update();
     }
 
+    Message::StartMainApplication().Transmit();
+
+    while(DInterface::GetOutbox().Size())
+    {
+        DInterface::Update();
+    }
+
     JumpToMainApplication();
 }
 
