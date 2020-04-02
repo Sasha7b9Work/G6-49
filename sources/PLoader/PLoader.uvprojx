@@ -1802,14 +1802,14 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
-              <FileName>Handlers_p.h</FileName>
+              <FileName>Handlers_pl.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Interface\Handlers_p.h</FilePath>
+              <FilePath>.\src\Interface\Handlers_pl.h</FilePath>
             </File>
             <File>
-              <FileName>Handlers_p.cpp</FileName>
+              <FileName>Handlers_pl.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Interface\Handlers_p.cpp</FilePath>
+              <FilePath>.\src\Interface\Handlers_pl.cpp</FilePath>
             </File>
             <File>
               <FileName>Interface_p.h</FileName>
@@ -1820,6 +1820,16 @@
               <FileName>Interface_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Interface_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Messages_pl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Interface\Messages_pl.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages_pl.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Interface\Messages_pl.cpp</FilePath>
             </File>
           </Files>
         </Group>
