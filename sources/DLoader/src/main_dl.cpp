@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "common/Messages_pl.h"
 #include "FDrive/FDrive_d.h"
-#include "Interface/Interface_d.h"
+#include "Interface/Interface_dl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 
@@ -25,6 +25,7 @@ int main()
 
     while(DInterface::GetOutbox().Size())           // И ждём его отправки
     {
+        DInterface::Update();
     }
 
     JumpToMainApplication();

@@ -1151,6 +1151,11 @@
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
+            <File>
+              <FileName>Transceiver_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver_d.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1282,29 +1287,24 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
-              <FileName>Handlers_d.h</FileName>
+              <FileName>Handlers_dl.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Interface\Handlers_d.h</FilePath>
+              <FilePath>.\src\Interface\Handlers_dl.h</FilePath>
             </File>
             <File>
-              <FileName>Handlers_d.cpp</FileName>
+              <FileName>Handlers_dl.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Interface\Handlers_d.cpp</FilePath>
+              <FilePath>.\src\Interface\Handlers_dl.cpp</FilePath>
             </File>
             <File>
-              <FileName>Interface_d.h</FileName>
+              <FileName>Interface_dl.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Interface\Interface_d.h</FilePath>
+              <FilePath>.\src\Interface\Interface_dl.h</FilePath>
             </File>
             <File>
-              <FileName>Interface_d.cpp</FileName>
+              <FileName>Interface_dl.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Interface\Interface_d.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Interface\Transceiver_d.cpp</FilePath>
+              <FilePath>.\src\Interface\Interface_dl.cpp</FilePath>
             </File>
           </Files>
         </Group>
