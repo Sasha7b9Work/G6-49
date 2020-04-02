@@ -52,7 +52,6 @@ int main()
 
 static void Update()
 {
-
 }
 
 static void JumpToMainApplication()

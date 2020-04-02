@@ -64,7 +64,8 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* SCPI_RecvData             */ DVCP::Handler::Processing,
         /* PortCPU                   */ DHandlers::SetPin,
         /* CalibrationLoad           */ DHandlers::CalibrationLoad,
-        /* CalibrationSet            */ DHandlers::CalibrationSet
+        /* CalibrationSet            */ DHandlers::CalibrationSet,
+        /* StartApplication          */ DHandlers::E
     };
 
     uint8 com = msg->TakeByte();

@@ -84,7 +84,11 @@ void DDrive::Handler::Processing(SimpleMessage *message)
         /* FDrive_RequestFileString     */ Handler::E,
         /* FDrive_LoadFromExtStorage    */ Handler::E,
         /* FDrive_GetPictureDDS         */ Handler::E,
-        /* SCPI_RecvData                */ EmptyFuncVV
+        /* SCPI_RecvData                */ EmptyFuncVV,
+        /* PortCPU                      */ EmptyFuncVV,
+        /* CalibrationLoad              */ EmptyFuncVV,
+        /* CalibrationSet               */ EmptyFuncVV,
+        /* StartApplication             */ EmptyFuncVV
     };
 
     funcs[com]();

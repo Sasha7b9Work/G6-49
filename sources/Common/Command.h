@@ -99,6 +99,7 @@ struct Command
             PortCPU,
             CalibrationLoad,
             CalibrationSet,
+            StartApplication,               // Запуск основного приложения
             Count
     } value;
     Command(E v) : value(v) {};

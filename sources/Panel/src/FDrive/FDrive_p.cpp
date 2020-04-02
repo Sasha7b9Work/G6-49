@@ -125,7 +125,11 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* FDrive_RequestFileString     */ Handler::E,
         /* FDrive_LoadFromExtStorage    */ Handler::LoadFromExtStorage,
         /* FDrive_GetPictureDDS         */ Handler::E,
-        /* SCPI_RecvData                */ EmptyFuncBV
+        /* SCPI_RecvData                */ EmptyFuncBV,
+        /* PortCPU                      */ EmptyFuncBV,
+        /* CalibrationLoad              */ EmptyFuncBV,
+        /* CalibrationSet               */ EmptyFuncBV,
+        /* StartApplication             */ EmptyFuncBV
     };
 
     msg = message;

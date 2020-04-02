@@ -55,7 +55,11 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestFileString  */ FDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage */ FDrive::Handler::Processing,
         /* FDrive_GetPictureDDS      */ FDrive::Handler::Processing,
-        /* SCPI_Data                 */ SCPI::Handler::Processing
+        /* SCPI_Data                 */ SCPI::Handler::Processing,
+        /* PortCPU                   */ PHandlers::E,
+        /* CalibrationLoad           */ PHandlers::E,
+        /* CalibrationSet            */ PHandlers::E,
+        /* StartApplication          */ PHandlers::E
     };
 
     uint8 command = msg->TakeByte();
