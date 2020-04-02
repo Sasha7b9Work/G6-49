@@ -38,22 +38,9 @@ struct StructForReadDir
 };
 
 
-struct FileSystem
-{
-    
-    /// Получить имя numFile-го файла из каталога fullPath
-    static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
-    /// Читает значения отсчётов сигнала из файла name
-    static bool ReadFloats(float values[4096], char *name);
-};
 
-
-
-
-/// В эту функцию попадаем при каждом событии на OTG FS
+// В эту функцию попадаем при каждом событии на OTG FS
 static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
-/// Получить имя numDir-го каталога из каталога fullPath
-//static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
 
 
 
@@ -126,7 +113,7 @@ void DLDrive::RequestFile(int num, char *fullPath)
 {
     char name[255];
 
-    FileSystem::GetNameFile(fullPath, num, name);
+    GetNameFile(fullPath, num, name);
 }
 
 
@@ -134,7 +121,7 @@ void DLDrive::RequestFileSize(int num, char *path)
 {
     char name[255];
 
-    if(FileSystem::GetNameFile(path, num, name))           // Получаем имя файла
+    if(GetNameFile(path, num, name))           // Получаем имя файла
     {
         String fullPath("%s\\%s", path, name);
 
@@ -194,7 +181,7 @@ void DLDrive::GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFil
 }
 
 
-bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
+bool DLDrive::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 {
     StructForReadDir srd;
 
@@ -254,7 +241,7 @@ int DLDrive::GetFileSize(const char *fullPath)
 }
 
 
-bool FileSystem::ReadFloats(float values[4096], char *name)
+bool DLDrive::ReadFloats(float values[4096], char *name)
 {
     bool result = false;
 
@@ -301,12 +288,10 @@ bool FileSystem::ReadFloats(float values[4096], char *name)
 }
 
 
-
-/*
-static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s)
+bool DLDrive::GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s)
 {
-    memcpy(s->nameDir, (void *)fullPath, strlen(fullPath));
-    s->nameDir[strlen(fullPath)] = '\0';
+    std::memcpy(s->nameDir, (void *)fullPath, std::strlen(fullPath));
+    s->nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &s->dir;
     if (f_opendir(pDir, s->nameDir) == FR_OK)
@@ -334,7 +319,7 @@ static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Struc
             }
             if (numDir == numDirs && (pFNO->fattrib & AM_DIR))
             {
-                strcpy(nameDirOut, pFNO->fname);
+                std::strcpy(nameDirOut, pFNO->fname);
                 return true;
             }
             if ((pFNO->fattrib & AM_DIR) && (pFNO->fname[0] != '.'))
@@ -345,4 +330,3 @@ static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Struc
     }
     return false;
 }
-*/
