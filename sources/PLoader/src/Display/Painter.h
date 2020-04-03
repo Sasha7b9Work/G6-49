@@ -2,6 +2,9 @@
 #include "Display/Colors.h"
 
 
+#define SCREEN_HEIGHT 240
+#define SCREEN_WIDTH  320
+
 struct Painter
 {
     /// Вызывается в начале отрисовки каждого кадра. Заполняет буфер цветом color

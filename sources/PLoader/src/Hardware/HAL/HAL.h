@@ -26,13 +26,15 @@ struct HAL_EEPROM
 
 struct HAL_LTDC
 {
-    static void Init(uint frontBuffer, uint backBuffer);
+    static void Init();
 
     static void SetColors(uint *clut, uint8 numColors);
 
     static void ToggleBuffers();
 
     static void FillRegion(int x, int y, int width, int height, Color color);
+
+    static uint8 *GetBuffer();
 };
 
 

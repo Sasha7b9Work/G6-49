@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Hardware/CPU.h"
-#include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -11,15 +10,15 @@
 static LTDC_HandleTypeDef handleLTDC;
 static DMA2D_HandleTypeDef hDMA2D;
 
-static uint frontBuffer = 0;
-static uint backBuffer = 0;
+static uint8 frontBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
+
+static uint8 backBuffer[SCREEN_WIDTH * SCREEN_HEIGHT];
 
 
+static void SetBuffers();
 
-static void SetBuffers(uint frontBuffer, uint backBuffer);
 
-
-void HAL_LTDC::Init(uint front, uint back)
+void HAL_LTDC::Init()
 {
     GPIO_InitTypeDef isGPIO =
     {
@@ -83,7 +82,7 @@ void HAL_LTDC::Init(uint front, uint back)
 
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);         // Включение подсветки
 
-    SetBuffers(front, back);
+    SetBuffers();
 
     hDMA2D.Init.ColorMode = DMA2D_INPUT_L8;
     hDMA2D.Init.OutputOffset = 0;
@@ -99,11 +98,8 @@ void HAL_LTDC::Init(uint front, uint back)
 }
 
 
-static void SetBuffers(uint front, uint back)
+static void SetBuffers()
 {
-    frontBuffer = front;
-    backBuffer = back;
-
     LTDC_LayerCfgTypeDef pLayerCfg;
 
     pLayerCfg.WindowX0 = 0;
@@ -115,7 +111,7 @@ static void SetBuffers(uint front, uint back)
     pLayerCfg.Alpha0 = 0xff;
     pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
     pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-    pLayerCfg.FBStartAdress = frontBuffer;
+    pLayerCfg.FBStartAdress = reinterpret_cast<uint>(frontBuffer);
     pLayerCfg.ImageWidth = SCREEN_WIDTH;
     pLayerCfg.ImageHeight = SCREEN_HEIGHT;
     pLayerCfg.Backcolor.Blue = 0;
@@ -144,7 +140,7 @@ void HAL_LTDC::ToggleBuffers()
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
+            if (HAL_DMA2D_Start(&hDMA2D, reinterpret_cast<uint>(backBuffer), reinterpret_cast<uint>(frontBuffer), SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&hDMA2D, 1);
             }
@@ -176,10 +172,16 @@ void HAL_LTDC::FillRegion(int, int, int, int, Color color)
     {
         if (HAL_DMA2D_ConfigLayer(&handle, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&handle, color.value, backBuffer, BUFFER_WIDTH, BUFFER_HEIGHT) == HAL_OK)
+            if (HAL_DMA2D_Start(&handle, color.value, reinterpret_cast<uint>(backBuffer), SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&handle, 200);
             }
         }
     }
+}
+
+
+uint8 *HAL_LTDC::GetBuffer()
+{
+    return backBuffer;
 }

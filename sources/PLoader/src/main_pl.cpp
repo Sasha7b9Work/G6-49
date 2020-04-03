@@ -14,6 +14,7 @@ int main()
 {
     CPU::Init();
     Timer::Init();
+    HAL_LTDC::Init();
     Keyboard::Init();
 
     while(1)
