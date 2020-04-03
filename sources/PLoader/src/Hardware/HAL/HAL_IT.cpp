@@ -2,6 +2,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -35,8 +36,14 @@ extern "C" {
     
     void HardFault_Handler()
     {
+        const char *file = Debug::file[0];
+        int line = Debug::line[0];
+
+
         while (1) //-V776
         {
+            file = file;
+            line = line;
         }
     }
 

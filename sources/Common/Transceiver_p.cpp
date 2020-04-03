@@ -4,6 +4,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Debug.h"
 
 
 void Transceiver::Transmit(SimpleMessage *message)
@@ -47,16 +48,28 @@ void Transceiver::Transmit(SimpleMessage *message)
 
 bool Transceiver::Receive(SimpleMessage *message)
 {
+    DEBUG_POINT_0;
+
     HAL_SPI4::WaitFalling();
+
+    DEBUG_POINT_0;
 
     uint size = 0;
     HAL_SPI4::Receive(&size, 4, 10);
 
+    DEBUG_POINT_0;
+
     if (message->AllocateMemory(size))
     {
+        DEBUG_POINT_0;
         HAL_SPI4::Receive(message->Data(), message->Size(), 50);
+
+        DEBUG_POINT_0;
+
         return true;
     }
+
+    DEBUG_POINT_0;
 
     return message->Size() != 0;
 }

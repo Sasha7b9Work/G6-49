@@ -2,6 +2,7 @@
 #include "structs.h"
 #include "common/Messages.h"
 #include "Settings/CalibrationSettings.h"
+#include "Utils/Debug.h"
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
@@ -195,20 +196,29 @@ uint8 *SimpleMessage::RemainingData() const
 
 bool SimpleMessage::AllocateMemory(uint size)
 {
+    DEBUG_POINT_0;
+
     FreeMemory();
+
+    DEBUG_POINT_0;
 
     if (size == 0)
     {
         return false;
     }
 
+    DEBUG_POINT_0;
+
     buffer = static_cast<uint8 *>(std::malloc(size));
+
+    DEBUG_POINT_0;
+
     if (buffer)
     {
         allocated = size;
     }
 
-    return buffer != 0;
+    return (buffer != 0);
 }
 
 
