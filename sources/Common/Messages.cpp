@@ -256,18 +256,6 @@ char *SimpleMessage::String(int pos)
 }
 
 
-pString SimpleMessage::Trace()
-{
-    if (Size() == 0)
-    {
-        return "";
-    }
-
-    static Command command(buffer[0]);
-    return command.Trace(0);
-}
-
-
 Message::FreqMeter::Measure::Measure(uint frequency) : SimpleMessage(5, Command::FreqMeasure)
 {
     PutWord(frequency);

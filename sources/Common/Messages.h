@@ -58,7 +58,6 @@ public:
     /// Возвращает указатель на pos-й элемент. Удобно для копирования строк
     char *String(int pos);
 
-    pString Trace();
     /// Положить слово
     void PutWord(uint data);
     void PutWord(int data);

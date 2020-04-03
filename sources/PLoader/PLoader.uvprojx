@@ -1902,16 +1902,6 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Buffer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Buffer.h</FilePath>
-            </File>
-            <File>
-              <FileName>Buffer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
-            </File>
-            <File>
               <FileName>List.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\List.h</FilePath>
@@ -1940,26 +1930,6 @@
               <FileName>Queue.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Queue.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\String.h</FilePath>
-            </File>
-            <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\String.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>StringUtils.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\StringUtils.h</FilePath>
-            </File>
-            <File>
-              <FileName>StringUtils.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\StringUtils.cpp</FilePath>
             </File>
           </Files>
         </Group>

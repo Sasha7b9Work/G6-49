@@ -107,7 +107,6 @@ struct Command
     Command(const uint8 v) : value(static_cast<E>(v)) {};
     operator uint8() const { return static_cast<uint8>(value); };
     pString Name() const;
-    pString Trace(const uint8 *buffer) const;
     operator E() const { return value; };
     operator uint8() { return static_cast<uint8>(value); }
 private:

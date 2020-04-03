@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "List.h"
 #include "Interface/Interface_pl.h"
-#include "Utils/String.h"
 
 
 template void               List<Task>::Append(Task *);
@@ -14,12 +13,6 @@ template uint               List<Task>::Size() const;
 template                    ListElement<Task>::~ListElement();
 template Task              *ListElement<Task>::Get();
 template ListElement<Task> *ListElement<Task>::Next();
-
-template                    List<String>::List();
-template void               List<String>::Clear();
-template void               List<String>::Append(String *);
-template void               List<String>::Remove(String *);
-
 
 
 template <class T>

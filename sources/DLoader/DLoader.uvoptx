@@ -159,7 +159,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Updater_dl.cpp</Filename>
+          <Filename>D:\Projects\stm32\G6-49\sources\PLoader\src\Updater_dl.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\\src/Updater_dl.cpp\163</Expression>
         </Bp>
@@ -175,7 +175,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;4&gt;.\src\Updater_pl.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\DLoader\src\Updater_pl.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -191,7 +191,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;4&gt;.\src\Updater_pl.cpp</Filename>
+          <Filename>d:\Projects\stm32\G6-49\sources\DLoader\src\Updater_pl.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
