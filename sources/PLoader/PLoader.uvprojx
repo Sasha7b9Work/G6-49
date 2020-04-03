@@ -1732,11 +1732,6 @@
               <FilePath>.\src\Display\Display.cpp</FilePath>
             </File>
             <File>
-              <FileName>Display_429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Display_429.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Painter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Display\Painter.h</FilePath>
@@ -1745,11 +1740,6 @@
               <FileName>Painter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Painter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Painter_429.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter_429.cpp</FilePath>
             </File>
           </Files>
         </Group>

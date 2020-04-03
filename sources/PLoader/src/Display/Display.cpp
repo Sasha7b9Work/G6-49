@@ -24,3 +24,9 @@ void Display::Update()
     Painter::BeginScene(Color::BACK);
     Painter::EndScene();
 }
+
+
+void Display::Init()
+{
+    HAL_LTDC::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
+}
