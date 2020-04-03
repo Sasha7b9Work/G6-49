@@ -27,60 +27,10 @@
 #define NAME_PANEL "G6-49-P.bin"
 
 
-// Время окончания работы Updater. Если до этого времени не поступил запрос на обновление - будем продолжать без обновления
-static uint timeEnd = 0xFFFFFFFF;
-
-
-struct State
-{
-    enum E
-    {
-        Idle,   // Начальное состояние
-        Update, // Находимся в состоянии обновления
-        Count
-    };
-};
-
-
-static State::E state = State::Idle;
-
+static bool needUpgrade = false;
 
 static void E(SimpleMessage *);
-
-// Обработчик запроса на обновление
 static void OnRequestUpdate(SimpleMessage *);
-
-// Обновление программного обеспечения
-static void UpdateSoftware();
-
-
-bool Updater::Process()
-{
-    if(timeEnd == 0xFFFFFFFF)
-    {
-        timeEnd = HAL_TIM::TimeMS() + 1000;
-    }
-
-    if(state == State::Idle && HAL_TIM::TimeMS() >= timeEnd)
-    {
-        return false;
-    }
-
-    if(state == State::Update)
-    {
-        if(DLDrive::IsConnected())
-        {
-            UpdateSoftware();
-            return false;
-        }
-        else if(HAL_TIM::TimeMS() > timeEnd + 9000)
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -159,11 +109,11 @@ static void E(SimpleMessage *)
 
 static void OnRequestUpdate(SimpleMessage *)
 {
-    state = State::Update;
+    needUpgrade = true;
 }
 
 
-static void UpdateSoftware()
+void Updater::Upgrade()
 {
     static const int SIZE_CHUNK = 128;    /* Размер элементарной порции данных */
 
@@ -210,4 +160,10 @@ static void UpdateSoftware()
 
         DLDrive::File::Close();
     }
+}
+
+
+bool Updater::NeedUpgrade()
+{
+    return needUpgrade;
 }

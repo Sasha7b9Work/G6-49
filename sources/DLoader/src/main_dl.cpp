@@ -20,20 +20,27 @@ int main()
 
     DLDrive::Init();
 
-    while(Updater::Process())
+    uint start = HAL_TIM::TimeMS();
+
+    while(HAL_TIM::TimeMS() - start < 1000)     // Ждём секунду
     {
+        DInterface::Update();                   // Сообщения от панели о запуске обновления
         DLDrive::Update();
-        DInterface::Update();
+        if(Updater::NeedUpgrade())              // Если дождались
+        {
+            Updater::Upgrade();                 // Производим обновление
+            break;
+        }
     }
 
-    Message::StartMainApplication().Transmit();
+    Message::StartMainApplication().Transmit(); // Посылаем команду запуска основного приложения
 
-    while(DInterface::GetOutbox().Size())
+    while(DInterface::GetOutbox().Size())       // И ждём, пока она отправится
     {
         DInterface::Update();
     }
 
-    JumpToMainApplication();
+    JumpToMainApplication();                    // И стартуем сам на основную прошивку
 } //-V591
 
 
