@@ -77,7 +77,8 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* CalibrationLoad              */ E,
         /* CalibrationSet               */ E,
         /* StartApplicataion            */ E,
-        /* RequestUpdate                */ E
+        /* RequestUpdate                */ E,
+        /* PortionUpdateDevice          */ E
     };
 
     msg = message;

@@ -101,6 +101,7 @@ struct Command
             CalibrationSet,
             StartApplication,               // Запуск основного приложения
             RequestUpdate,                  // Запрос на обновление
+            PortionUpdateDevice,            // Информация о записанной части прошивки Device
             Count
     } value;
     Command(E v) : value(v) {};

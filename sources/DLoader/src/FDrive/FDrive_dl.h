@@ -1,5 +1,4 @@
 #pragma once
-#include <ff.h>
 
 
 struct StructForReadDir;
@@ -11,5 +10,17 @@ struct DLDrive
 
     static void Update();
 
-    static USBH_HandleTypeDef *handle;
+    static bool IsConnected();
+
+    static void *handleUSBH;
+
+    struct File
+    {
+        // Открывает файл для чтения. Возвращает размер файла или -1, если файл не существует
+        static int Open(const char *name);
+
+        static int Read(int size, uint8 *buffer);
+
+        static void Close();
+    };
 };

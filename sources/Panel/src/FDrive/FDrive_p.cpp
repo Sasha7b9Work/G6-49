@@ -135,7 +135,8 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* CalibrationLoad              */ E,
         /* CalibrationSet               */ E,
         /* StartApplication             */ E,
-        /* RequestUpdate                */ E
+        /* RequestUpdate                */ E,
+        /* PortionUpdateDevice          */ E
     };
 
     msg = message;

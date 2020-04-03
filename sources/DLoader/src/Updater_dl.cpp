@@ -1,8 +1,10 @@
 #include "defines.h"
 #include "common/Command.h"
-#include "common/Messages.h"
+#include "common/Messages_pl.h"
 #include "Updater_dl.h"
+#include "FDrive/FDrive_dl.h"
 #include "Hardware/HAL/HAL.h"
+#include "Interface/Interface_dl.h"
 
 /*
 
@@ -21,6 +23,9 @@
 */
 
 
+#define NAME_DEVICE "G6-49-D.bin"
+#define NAME_PANEL "G6-49-P.bin"
+
 
 // Время окончания работы Updater. Если до этого времени не поступил запрос на обновление - будем продолжать без обновления
 static uint timeEnd = 0xFFFFFFFF;
@@ -30,9 +35,8 @@ struct State
 {
     enum E
     {
-        Idle,       // Начальное состояние
-        Update,     // Находимся в состоянии обновления
-        Ended,      // Обновление окончено
+        Idle,   // Начальное состояние
+        Update, // Находимся в состоянии обновления
         Count
     };
 };
@@ -43,7 +47,11 @@ static State::E state = State::Idle;
 
 static void E(SimpleMessage *);
 
+// Обработчик запроса на обновление
 static void OnRequestUpdate(SimpleMessage *);
+
+// Обновление программного обеспечения
+static void UpdateSoftware();
 
 
 bool Updater::Process()
@@ -58,9 +66,17 @@ bool Updater::Process()
         return false;
     }
 
-    if(state == State::Ended)
+    if(state == State::Update)
     {
-        return false;
+        if(DLDrive::IsConnected())
+        {
+            UpdateSoftware();
+            return false;
+        }
+        else if(HAL_TIM::TimeMS() > timeEnd + 9000)
+        {
+            return false;
+        }
     }
 
     return true;
@@ -118,7 +134,8 @@ void Updater::Handler(SimpleMessage *message)
         /* CalibrationLoad           */ E,
         /* CalibrationSet            */ E,
         /* StartApplication          */ E,
-        /* RequestUpdate             */ OnRequestUpdate
+        /* RequestUpdate             */ OnRequestUpdate,
+        /* PortionUpdateDevice       */ E
     };
 
     message->ResetPointer();
@@ -143,6 +160,54 @@ static void E(SimpleMessage *)
 static void OnRequestUpdate(SimpleMessage *)
 {
     state = State::Update;
+}
 
 
+static void UpdateSoftware()
+{
+    static const int SIZE_CHUNK = 128;    /* Размер элементарной порции данных */
+
+    const int fullSize = DLDrive::File::Open(NAME_DEVICE);
+
+    if(fullSize != -1)
+    {
+        int numSectors = fullSize / (128 * 1024) + 1;
+
+        HAL_EEPROM::EraseSectors(numSectors);
+
+        uint address = Updater::MAIN_PROGRAM_START_ADDRESS;
+
+        uint8 buffer[SIZE_CHUNK];
+
+        static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
+
+        int size = fullSize;
+
+        while(size > 0)
+        {
+            int readed = (size < SIZE_CHUNK) ? size : SIZE_CHUNK;
+            size -= readed;
+
+            DLDrive::File::Read(readed, buffer);
+
+            HAL_EEPROM::WriteBuffer(address, buffer, readed);
+
+            address += readed;
+
+            int portion = static_cast<int>(1.0F - static_cast<float>(size) / fullSize * 100);
+
+            if(portion != prevPortion)
+            {
+                Message::PortionUpdateDevice(portion).Transmit();
+                prevPortion = portion;
+
+                while(DInterface::GetOutbox().Size())
+                {
+                    DInterface::Update();
+                }
+            }
+        }
+
+        DLDrive::File::Close();
+    }
 }

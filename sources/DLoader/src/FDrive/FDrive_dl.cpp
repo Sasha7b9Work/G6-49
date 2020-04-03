@@ -25,11 +25,13 @@ struct StructForReadDir
 };
 
 
-static USBH_HandleTypeDef handleUSBH;
+static USBH_HandleTypeDef handle;
 
-USBH_HandleTypeDef *DLDrive::handle = &handleUSBH;
+void *DLDrive::handleUSBH = &handle;
 
 static FATFS FatFS;
+
+static FIL file;            
 
 static char USBDISKPath[4];
 
@@ -97,16 +99,16 @@ void DLDrive::Init()
 
     if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK) //-V2001
     {
-        USBH_StatusTypeDef res = USBH_Init(handle, USBH_UserProcess, 0);
-        res = USBH_RegisterClass(handle, USBH_MSC_CLASS);
-        res = USBH_Start(handle);
+        USBH_StatusTypeDef res = USBH_Init(&handle, USBH_UserProcess, 0);
+        res = USBH_RegisterClass(&handle, USBH_MSC_CLASS);
+        res = USBH_Start(&handle);
     }
 }
 
 
 void DLDrive::Update()
 {
-    USBH_Process(handle);
+    USBH_Process(&handle);
 
     if(state == State::NeedMount)
     {
@@ -123,224 +125,35 @@ void DLDrive::Update()
 }
 
 
-//static void RequestFile(int num, char *fullPath)
-//{
-//    char name[255];
-//
-//    GetNameFile(fullPath, num, name);
-//}
+bool DLDrive::IsConnected()
+{
+    return (state == State::Connected);
+}
 
 
-//static void RequestFileSize(int num, char *path)
-//{
-//    char name[255];
-//
-//    if(GetNameFile(path, num, name))           // Получаем имя файла
-//    {
-//        String fullPath("%s\\%s", path, name);
-//
-//        GetFileSize(fullPath.CString());
-//    }
-//}
+int DLDrive::File::Open(const char *name)
+{
+    if(f_open(&file, name, FA_READ) == FR_OK)
+    {
+        return (int)f_size(&file);
+    }
 
+    return -1;
+}
 
-//static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles)
-//{
-//    *numDirs = 0;
-//    *numFiles = 0;
-//
-//    FILINFO fno;
-//    DIR dir;
-//
-//    char nameDir[_MAX_LFN + 1];
-//    std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath));
-//    nameDir[std::strlen(fullPath)] = '\0';
-//
-//    if(f_opendir(&dir, nameDir) == FR_OK)
-//    {
-//        int numReadingElements = 0;
-//        bool alreadyNull = false;
-//
-//        while(true) //-V2530
-//        {
-//            if(f_readdir(&dir, &fno) != FR_OK)
-//            {
-//                break;
-//            }
-//            if(fno.fname[0] == 0)
-//            {
-//                if(alreadyNull)
-//                {
-//                    break;
-//                }
-//                alreadyNull = true;
-//                continue;
-//            }
-//            numReadingElements++;
-//            if(fno.fname[0] != '.')
-//            {
-//                if(fno.fattrib & AM_DIR)
-//                {
-//                    (*numDirs)++;
-//                }
-//                else
-//                {
-//                    (*numFiles)++;
-//                }
-//            }
-//        }
-//
-//        f_closedir(&dir);
-//    }
-//}
+int DLDrive::File::Read(int size, uint8 *buffer)
+{
+    uint readed = 0;
 
+    if(f_read(&file, buffer, static_cast<UINT>(size), &readed) == FR_OK)
+    {
+        return static_cast<int>(readed);
+    }
 
-//static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
-//{
-//    StructForReadDir srd;
-//
-//    std::memcpy(srd.nameDir, const_cast<char *>(fullPath), std::strlen(fullPath));
-//    srd.nameDir[std::strlen(fullPath)] = '\0';
-//
-//    DIR *pDir = &srd.dir;
-//    FILINFO *pFNO = &srd.fno;
-//    if(f_opendir(pDir, srd.nameDir) == FR_OK)
-//    {
-//        int numFiles = 0;
-//        bool alreadyNull = false;
-//        while(true)
-//        {
-//            if(f_readdir(pDir, pFNO) != FR_OK)
-//            {
-//                *nameFileOut = '\0';
-//                f_closedir(pDir);
-//                return false;
-//            }
-//            if(pFNO->fname[0] == 0)
-//            {
-//                if(alreadyNull)
-//                {
-//                    *nameFileOut = '\0';
-//                    f_closedir(pDir);
-//                    return false;
-//                }
-//                alreadyNull = true;
-//            }
-//            if(numFile == numFiles && (pFNO->fattrib & AM_DIR) == 0)
-//            {
-//                std::strcpy(nameFileOut, pFNO->fname);
-//                return true;
-//            }
-//            if((pFNO->fattrib & AM_DIR) == 0 && (pFNO->fname[0] != '.'))
-//            {
-//                numFiles++;
-//            }
-//        }
-//    }
-//    return false;
-//}
+    return -1;
+}
 
-
-//static int GetFileSize(const char *fullPath)
-//{
-//    FIL fp;
-//    if(f_open(&fp, fullPath, FA_READ) == FR_OK)
-//    {
-//        uint size = f_size(&fp);
-//        f_close(&fp);
-//        return static_cast<int>(size);
-//    }
-//
-//    return -1;
-//}
-
-
-//static bool ReadFloats(float values[4096], char *name)
-//{
-//    bool result = false;
-//
-//    FIL fp;
-//    FRESULT res = f_open(&fp, name, FA_READ);
-//    if(res == FR_OK)
-//    {
-//        char buffer[255];
-//        f_gets(buffer, 255, &fp);
-//        if(std::strcmp(buffer, "Rigol Technologies,Inc. Save analog waveform to text files.\r\n") == 0)
-//        {
-//            char *pointer = 0;
-//            int counter = 0;
-//            do
-//            {
-//                pointer = f_gets(buffer, 255, &fp);
-//                counter++;
-//            } while((std::strcmp(buffer, " 0 \r\n") != 0) && (pointer[0] == buffer[0]));
-//
-//            if(pointer[0] == buffer[0])
-//            {
-//                for(int i = 0; i < 4096; i++)
-//                {
-//                    f_gets(buffer, 255, &fp);
-//
-//                    char *ptr = std::strchr(buffer, ',');
-//                    if(ptr != 0)
-//                    {
-//                        *ptr = '.';
-//                    }
-//
-//                    std::sscanf(buffer, "%e", &values[i]);
-//
-//                    f_gets(buffer, 255, &fp);
-//                }
-//
-//                result = true;
-//            }
-//        }
-//        f_close(&fp);
-//    }
-//
-//    return result;
-//}
-
-
-//static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s)
-//{
-//    std::memcpy(s->nameDir, (void *)fullPath, std::strlen(fullPath));
-//    s->nameDir[std::strlen(fullPath)] = '\0';
-//
-//    DIR *pDir = &s->dir;
-//    if (f_opendir(pDir, s->nameDir) == FR_OK)
-//    {
-//        int numDirs = 0;
-//        FILINFO *pFNO = &s->fno;
-//        bool alreadyNull = false;
-//        while (true)
-//        {
-//            if (f_readdir(pDir, pFNO) != FR_OK)
-//            {
-//                *nameDirOut = '\0';
-//                f_closedir(pDir);
-//                return false;
-//            }
-//            if (pFNO->fname[0] == 0)
-//            {
-//                if (alreadyNull)
-//                {
-//                    *nameDirOut = '\0';
-//                    f_closedir(pDir);
-//                    return false;
-//                }
-//                alreadyNull = true;
-//            }
-//            if (numDir == numDirs && (pFNO->fattrib & AM_DIR))
-//            {
-//                std::strcpy(nameDirOut, pFNO->fname);
-//                return true;
-//            }
-//            if ((pFNO->fattrib & AM_DIR) && (pFNO->fname[0] != '.'))
-//            {
-//                numDirs++;
-//            }
-//        }
-//    }
-//    return false;
-//}
+void DLDrive::File::Close()
+{
+    f_close(&file);
+}

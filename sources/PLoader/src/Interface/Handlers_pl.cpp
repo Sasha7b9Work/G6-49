@@ -66,7 +66,8 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* CalibrationLoad           */ E,
         /* CalibrationSet            */ E,
         /* StartApplication          */ OnStartMainApplication,
-        /* RequestUpdate             */ E
+        /* RequestUpdate             */ E,
+        /* PortionUpdateDevice       */ E
     };
    
     uint8 command = msg->TakeByte();

@@ -22,30 +22,12 @@ private:
 };
 
 
-struct HAL_CRC32
-{
-    static uint Calculate(const uint8 *address, uint size);
-
-    static void Init();
-};
-
-
 struct HAL_EEPROM
 {
-    static void Init();
+    // Стирает count секторов, начиная со стартового адреса основной прошивки
+    static void EraseSectors(int count);
 
-    /*
-    static void SaveSettings(CalibrationSettings *settings);
-
-    static void LoadSettings(CalibrationSettings *settings);
-
-    struct Signal
-    {
-        static void Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS]);
-
-        static uint16 *Get(Chan::E ch);
-    };
-    */
+    static void WriteBuffer(uint address, uint8 *data, int size);
 };
 
 
@@ -60,14 +42,6 @@ struct HAL_HCD
     static int USBH_LL_SetToggle(uint8 pipe, uint8 toggle);
 
     static uint8 USBH_LL_GetToggle(uint8 pipe);
-};
-
-
-struct HAL_I2C1
-{
-    static void Init();
-
-    static void Transmit(uint8 address, uint8 data[3]);
 };
 
 

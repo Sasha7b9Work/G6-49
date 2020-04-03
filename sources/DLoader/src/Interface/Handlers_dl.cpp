@@ -69,7 +69,8 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* CalibrationLoad           */ E,
         /* CalibrationSet            */ E,
         /* StartApplication          */ E,
-        /* RequestUpdate             */ Updater::Handler
+        /* RequestUpdate             */ Updater::Handler,
+        /* PortionUpdateDevice       */ E
     };
 
     uint8 com = msg->TakeByte();

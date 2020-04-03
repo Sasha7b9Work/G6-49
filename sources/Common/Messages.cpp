@@ -109,6 +109,12 @@ void SimpleMessage::PutWord(uint data)
 }
 
 
+void SimpleMessage::PutWord(int data)
+{
+    PutWord(static_cast<uint>(data));
+}
+
+
 void SimpleMessage::PutData(const uint8 *data, uint length)
 {
     std::memcpy(buffer + used, data, length);

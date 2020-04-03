@@ -61,6 +61,7 @@ public:
     pString Trace();
     /// Положить слово
     void PutWord(uint data);
+    void PutWord(int data);
     
     /// Передать сообщение получателю
     void Transmit();

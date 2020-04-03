@@ -12,3 +12,9 @@ Message::StartMainApplication::StartMainApplication() : SimpleMessage(1, Command
 {
 
 }
+
+
+Message::PortionUpdateDevice::PortionUpdateDevice(int portion) : SimpleMessage(4, Command::PortionUpdateDevice)
+{
+    PutWord(portion);
+}

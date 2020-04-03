@@ -5,9 +5,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 #include "Updater_dl.h"
-
-
-#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
+#include <stm32f4xx_hal.h>
 
 
 typedef void(*pFunction)();
@@ -36,7 +34,7 @@ int main()
     }
 
     JumpToMainApplication();
-}
+} //-V591
 
 
 static void JumpToMainApplication()
@@ -45,9 +43,9 @@ static void JumpToMainApplication()
 
     pFunction JumpToApplication;
 
-    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4)); //-V566
 
-    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
+    __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
 
     __enable_irq();
 
