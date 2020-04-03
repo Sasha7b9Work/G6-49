@@ -18,16 +18,16 @@ int main()
     HAL_LTDC::Init();
     Keyboard::Init();
 
-    while(1)
+    while(true)
     {
         Updater::Update();
 
-        //if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
-        //{
-        //    alreadyRequest = true;
-        //    Message::RequestUpdate().Transmit();
-        //}
-        //
-        //PInterface::Update();
+        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
+        {
+            alreadyRequest = true;
+            Message::RequestUpdate().Transmit();
+        }
+        
+        PInterface::Update();
     }
 }

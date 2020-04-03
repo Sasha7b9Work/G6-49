@@ -9,5 +9,5 @@ class Updater
 public:
     static void Update();
 
-    static void Handler(SimpleMessage *);
+    static bool Handler(SimpleMessage *);
 };

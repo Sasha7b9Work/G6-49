@@ -1,8 +1,9 @@
 #include "defines.h"
 #include "common/Command.h"
 #include "common/Messages.h"
-#include "Handlers_pl.h"
+#include "Updater_pl.h"
 #include "FDrive/FDrive_p.h"
+#include "Interface/Handlers_pl.h"
 #include <stm32f429xx.h>
 
 
@@ -67,7 +68,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* CalibrationSet            */ E,
         /* StartApplication          */ OnStartMainApplication,
         /* RequestUpdate             */ E,
-        /* PortionUpdateDevice       */ E
+        /* PortionUpdateDevice       */ Updater::Handler
     };
    
     uint8 command = msg->TakeByte();

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "common/Messages.h"
 #include "Updater_pl.h"
 #include "Display/Painter.h"
 
@@ -41,5 +42,20 @@ static void DrawProgress(int y, float portion)
 
     Painter::DrawRectangle(x, y, width, height, Color::WHITE);
 
-    Painter::FillRegion(x, y, width * portion, height);
+    Painter::FillRegion(x, y, static_cast<int>(width * portion), height);
+}
+
+
+bool Updater::Handler(SimpleMessage *message)
+{
+    message->ResetPointer();
+
+    uint8 com = message->TakeByte();
+
+    if(com == Command::PortionUpdateDevice)
+    {
+        portionDevice = message->TakeWord() / 100.0F;
+    }
+
+    return true;
 }
