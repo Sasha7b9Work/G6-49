@@ -3,6 +3,7 @@
 #include "common/Messages_pl.h"
 #include "Updater_dl.h"
 #include "FDrive/FDrive_dl.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_dl.h"
 
@@ -115,6 +116,18 @@ static void OnRequestUpdate(SimpleMessage *)
 
 void Updater::Upgrade()
 {
+    uint start = TIME_MS;
+
+    while(TIME_MS - start < 10000 && !DLDrive::IsConnected())
+    {
+        DLDrive::Update();
+    }
+
+    if(!DLDrive::IsConnected())
+    {
+        return;
+    }
+
     static const int SIZE_CHUNK = 128;    /* Размер элементарной порции данных */
 
     const int fullSize = DLDrive::File::Open(NAME_DEVICE);

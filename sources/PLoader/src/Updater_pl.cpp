@@ -4,8 +4,8 @@
 #include "Display/Painter.h"
 
 
-static float portionDevice = 0.25F;
-static float portionPanel = 0.9F;
+static float portionDevice = 0.0F;
+static float portionPanel = 0.0F;
 
 
 static void Draw();

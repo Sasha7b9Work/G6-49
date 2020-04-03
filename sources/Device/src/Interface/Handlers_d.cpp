@@ -462,6 +462,7 @@ static void RunReset(SimpleMessage *)
     typedef void(*pFunction)();
     __disable_irq();
     pFunction JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
     __enable_irq();
     JumpToApplication();
 
