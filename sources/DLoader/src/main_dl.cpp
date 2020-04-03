@@ -22,7 +22,7 @@ int main()
 
     uint start = HAL_TIM::TimeMS();
 
-    while(HAL_TIM::TimeMS() - start < 1000)     // Ждём секунду
+    while(HAL_TIM::TimeMS() - start < 10000)     // Ждём секунду
     {
         DInterface::Update();                   // Сообщения от панели о запуске обновления
         DLDrive::Update();

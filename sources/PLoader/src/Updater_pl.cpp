@@ -54,7 +54,9 @@ bool Updater::Handler(SimpleMessage *message)
 
     if(com == Command::PortionUpdateDevice)
     {
-        portionDevice = message->TakeWord() / 100.0F;
+        uint word = message->TakeWord();
+        
+        portionDevice = word / 100.0F;
     }
 
     return true;

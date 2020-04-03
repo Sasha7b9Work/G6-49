@@ -156,7 +156,7 @@ void Updater::Upgrade()
 
             address += readed;
 
-            int portion = static_cast<int>(1.0F - static_cast<float>(size) / fullSize * 100);
+            int portion = static_cast<int>((1.0F - static_cast<float>(size) / fullSize) * 100);
 
             if(portion != prevPortion)
             {
