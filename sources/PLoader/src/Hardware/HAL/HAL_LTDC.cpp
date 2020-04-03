@@ -95,6 +95,8 @@ void HAL_LTDC::Init()
     hDMA2D.LayerCfg[0].InputOffset = 0;
     
     hDMA2D.Instance = DMA2D;
+
+    HAL_LTDC::SetColors(&COLOR(0), Color::NUMBER.value);
 }
 
 

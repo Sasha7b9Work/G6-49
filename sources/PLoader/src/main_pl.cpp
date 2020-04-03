@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Messages_pl.h"
+#include "Updater_pl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Interface/Interface_pl.h"
@@ -19,12 +20,14 @@ int main()
 
     while(1)
     {
-        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
-        {
-            alreadyRequest = true;
-            Message::RequestUpdate().Transmit();
-        }
+        Updater::Update();
 
-        PInterface::Update();
+        //if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
+        //{
+        //    alreadyRequest = true;
+        //    Message::RequestUpdate().Transmit();
+        //}
+        //
+        //PInterface::Update();
     }
 }
