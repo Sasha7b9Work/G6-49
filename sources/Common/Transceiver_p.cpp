@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Transceiver.h"
+#include "Display/Colors.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
