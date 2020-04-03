@@ -10,5 +10,3 @@ echo ERROR!!! Panel Loader   failed!!!
 type ..\..\PLoader\PLoader.out
 
 :Exit
-
-@echo %TIME%   Complete

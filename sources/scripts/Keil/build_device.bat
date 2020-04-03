@@ -12,6 +12,3 @@ type ..\..\Device\Device.out
 :Exit
 
 copy ..\..\Device\G6-49-D.bin h:\
-
-
-@echo %TIME%   Complete

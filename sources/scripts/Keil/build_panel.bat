@@ -11,6 +11,3 @@ type ..\..\Panel\Panel.out
 :Exit
 
 copy ..\..\Panel\G6-49-P.bin h:\
-
-
-@echo %TIME%   Complete
