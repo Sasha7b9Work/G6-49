@@ -101,8 +101,6 @@ pString Command::Trace(const uint8 *buffer) const
         case SetPhase:
             std::strcat(result, SU::Buffer2FloatString(buffer + 2));
             break;
-        case RunReset:
-            break;
         case ModeDebug:
             break;
         case SetDelay:

@@ -28,7 +28,6 @@ struct Command
              SetDuration,
              SetDutyRatio,
              SetPhase,
-             RunReset,                   ///< Сброс состояния
              ModeDebug,                  ///< Установка отладочного режиме - когда идут непрерывные засылки в FPGA
              SetDelay,                   ///< Задержка
           // 0             1            2...9

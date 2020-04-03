@@ -99,7 +99,6 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* SetDuration                  */ E,
         /* SetDutyRatio                 */ E,
         /* SetPhase                     */ E,
-        /* RunReset                     */ E,
         /* ModeDebug                    */ E,
         /* SetDelay                     */ E,
         /* WriteRegister                */ E,

@@ -42,12 +42,6 @@ void PGenerator::SetDebugMode(bool enable)
 }
 
 
-void PGenerator::Reset()
-{
-    Message::Reset().Transmit();
-}
-
-
 void PGenerator::SetFormWave(const Wave *w)
 {
     Chan::E ch = w->GetChannel();

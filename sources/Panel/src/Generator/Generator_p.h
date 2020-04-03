@@ -16,8 +16,6 @@ struct PGenerator
 {
     static const int DDS_NUM_POINTS = 8 * 1024;
 
-    static void Reset();
-
     static void EnableChannel(Chan::E ch, bool enable);
 
     static void SetFormWave(const Wave *w);

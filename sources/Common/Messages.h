@@ -135,14 +135,6 @@ namespace Message
     };
 
 
-    /// Сброс состояния
-    class Reset : public SimpleMessage
-    {
-    public:
-        Reset();
-    };
-
-
     /// Включить/выключить канал
     class EnableChannel : public SimpleMessage
     {

@@ -398,12 +398,6 @@ Message::DebugMode::DebugMode(uint8 mode) : SimpleMessage(2, Command::ModeDebug)
 }
 
 
-Message::Reset::Reset() : SimpleMessage(1, Command::RunReset)
-{
-
-}
-
-
 Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
 {
     PutByte(ch);

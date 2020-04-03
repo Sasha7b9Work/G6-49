@@ -35,8 +35,6 @@ static void SetDutyRatio(SimpleMessage *);
 
 static void SetPhase(SimpleMessage *);
 
-static void RunReset(SimpleMessage *);
-
 static void ModeDebug(SimpleMessage *);
 
 static void SetDelay(SimpleMessage *);
@@ -85,7 +83,6 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* SetDuration               */ SetDuration,
         /* SetDutyRatio              */ SetDutyRatio,
         /* SetPhase                  */ SetPhase,
-        /* RunReset                  */ RunReset,
         /* ModeDebug                 */ ModeDebug,
         /* SetDelay                  */ SetDelay,
         /* WriteRegister             */ WriteRegister,
@@ -451,22 +448,6 @@ static void WriteRegister(SimpleMessage *msg)
         // Здесь ничего
         break;
     }
-}
-
-
-static void RunReset(SimpleMessage *)
-{
-#ifndef WIN32
-
-#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
-    typedef void(*pFunction)();
-    __disable_irq();
-    pFunction JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
-    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
-    __enable_irq();
-    JumpToApplication();
-
-#endif
 }
 
 

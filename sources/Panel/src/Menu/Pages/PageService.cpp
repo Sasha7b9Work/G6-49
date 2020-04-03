@@ -25,7 +25,6 @@ Page *PageService::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pServ
 
 void PageService::OnPress_Reset()
 {
-    PGenerator::Reset();
     HAL_TIM::Delay(100);
     setCal.Load();
     set.LoadFromMemory(true);
