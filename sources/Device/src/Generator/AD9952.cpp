@@ -49,7 +49,7 @@ void AD9952::SetPhase(Chan::E ch, FloatValue ph)
 {
     phase[ch] = ph.ToFloat();
 
-    if(SettingsGenerator::Frequency(Chan::A) == SettingsGenerator::Frequency(Chan::B)) //-V550
+    if(SettingsGenerator::Frequency(Chan::A) == SettingsGenerator::Frequency(Chan::B)) //-V550 //-V2550
     {
         WriteRegister(ch, Register::POW);
     }
@@ -110,7 +110,7 @@ void AD9952::WriteCFR2(Chan::E ch)
 
 void AD9952::WritePOW(Chan::E ch)
 {
-    uint value = static_cast<uint>(phase[ch] / 360.0F * (1 << 13) + 0.5F);
+    uint value = static_cast<uint>(phase[ch] / 360.0F * static_cast<float>(1 << 13) + 0.5F);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
@@ -123,7 +123,7 @@ void AD9952::WriteASF(Chan::E ch)
 
     float amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
-    uint value = static_cast<uint>(amplitude * 0x3FFF);
+    uint value = static_cast<uint>(amplitude * static_cast<float>(0x3FFF));
 
     Bit::Set(value, 14);  // \ Ёто биты множител€ скорости
     Bit::Set(value, 15);  // / нарастани€ фронта 
@@ -133,7 +133,7 @@ void AD9952::WriteASF(Chan::E ch)
 
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    float FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 2e8F : 1e6F)) * std::powf(2, 32);
+    float FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 2e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
     WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }

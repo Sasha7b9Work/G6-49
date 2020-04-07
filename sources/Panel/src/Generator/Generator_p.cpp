@@ -72,11 +72,11 @@ void PGenerator::LoadFormDDS(Form *form)
     {
         case TypeForm::RampPlus:
             {
-                float step = 2.0F / DDS_NUM_POINTS;
+                float step = 2.0F / static_cast<float>(DDS_NUM_POINTS);
 
                 for(int i = 0; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = -1.0F + step * i;
+                    data[i] = -1.0F + step * static_cast<float>(i);
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -84,11 +84,11 @@ void PGenerator::LoadFormDDS(Form *form)
             break;
         case TypeForm::RampMinus:
             {
-                float step = 2.0F / DDS_NUM_POINTS;
+                float step = 2.0F / static_cast<float>(DDS_NUM_POINTS);
 
                 for (int i = 0; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0F - step * i;
+                    data[i] = 1.0F - step * static_cast<float>(i);
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -96,16 +96,16 @@ void PGenerator::LoadFormDDS(Form *form)
             break;
         case TypeForm::Triangle:
             {
-                float step = 2.0F / (DDS_NUM_POINTS / 2);
+                float step = 2.0F / static_cast<float>(DDS_NUM_POINTS / 2);
 
                 for (int i = 0; i < DDS_NUM_POINTS / 2; i++)
                 {
-                    data[i] = - 1.0F + step * i;
+                    data[i] = - 1.0F + step * static_cast<float>(i);
                 }
 
                 for(int i = DDS_NUM_POINTS / 2; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0F - step * (i - DDS_NUM_POINTS / 2);
+                    data[i] = 1.0F - step * static_cast<float>(i - DDS_NUM_POINTS / 2);
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -128,7 +128,7 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
 
     uint8 *code = reinterpret_cast<uint8 *>(buffer);
 
-    int max = 0x1fff;
+    float max = static_cast<float>(0x1fff);
 
     for (int i = 0; i < DDS_NUM_POINTS; i++)
     {

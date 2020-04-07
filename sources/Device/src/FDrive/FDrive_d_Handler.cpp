@@ -37,7 +37,7 @@ struct FileSystem
     /// Получить имя numFile-го файла из каталога fullPath
     static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
     /// Читает значения отсчётов сигнала из файла name
-    static bool ReadFloats(float values[4096], char *name);
+    static bool ReadFloats(float values[4096], const char *name);
 };
 
 
@@ -196,7 +196,7 @@ void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *n
     *numFiles = 0;
 
     char nameDir[_MAX_LFN + 1];
-    std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath));
+    std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567
     nameDir[std::strlen(fullPath)] = '\0';
 
     if (f_opendir(&dir, nameDir) == FR_OK)
@@ -242,7 +242,7 @@ bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOu
 {
     StructForReadDir srd;
 
-    std::memcpy(srd.nameDir, const_cast<char *>(fullPath), std::strlen(fullPath));
+    std::memcpy(srd.nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567
     srd.nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &srd.dir;
@@ -298,7 +298,7 @@ uint FileSystem::GetFileSize(const char *fullPath)
 }
 
 
-bool FileSystem::ReadFloats(float values[4096], char *name)
+bool FileSystem::ReadFloats(float values[4096], const char *name)
 {
     bool result = false;
 
@@ -349,7 +349,7 @@ void DDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]
 {
     Normalize(d);
 
-    int max = 0x1fff;
+    float max = static_cast<float>(0x1fff);
 
     for (int i = 0; i < 4096; i++)
     {
@@ -430,14 +430,14 @@ void DDrive::FillPicture(uint8 *picture, uint size, float values[4096])
 {
     Normalize(values);
 
-    uint8 aveValue = 127;
+    float aveValue = 127.0F;
 
-    float step = 4096.0F / size;
+    float step = 4096.0F / static_cast<float>(size);
 
     for (uint i = 0; i < size; i++)
     {
-        float val = values[static_cast<int>(i * step)];
+        float val = values[static_cast<int>(static_cast<float>(i) * step)];
 
-        picture[i] = static_cast<uint8>(aveValue + val * 125);
+        picture[i] = static_cast<uint8>(aveValue + val * 125.0F);
     }
 }
