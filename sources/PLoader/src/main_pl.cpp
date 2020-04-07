@@ -21,22 +21,14 @@ int main()
 
     while(true)
     {
-        DEBUG_POINT_0;
+//        Updater::Update();
 
-        Updater::Update();
+//        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
+//        {
+//            alreadyRequest = true;
+//            Message::RequestUpdate().Transmit();
+//        }
 
-        DEBUG_POINT_0;
-
-        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
-        {
-            DEBUG_POINT_0;
-            alreadyRequest = true;
-            Message::RequestUpdate().Transmit();
-            DEBUG_POINT_0;
-        }
-        
-        DEBUG_POINT_0;
         PInterface::Update();
-        DEBUG_POINT_0;
     }
 }

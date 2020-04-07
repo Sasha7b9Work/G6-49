@@ -56,7 +56,7 @@ void FloatValue::FromFloat(float v)
 
 float FloatValue::ToFloat() const
 {
-    return Abs() / 1E9F * static_cast<float>(Sign());
+    return static_cast<float>(Abs()) / 1E9F * static_cast<float>(Sign());
 }
 
 
@@ -115,9 +115,9 @@ int FloatValue::Integer() const
 
 int FloatValue::Fract(int numDigits) const
 {
-    float fract = ToFloat() - Integer();
+    float fract = ToFloat() - static_cast<float>(Integer());
 
-    return static_cast<int>(fract * ::Math::Pow10(numDigits));
+    return static_cast<int>(fract * static_cast<float>(::Math::Pow10(numDigits)));
 }
 
 

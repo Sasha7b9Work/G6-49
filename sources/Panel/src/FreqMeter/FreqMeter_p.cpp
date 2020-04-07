@@ -85,9 +85,9 @@ void PFreqMeter::LoadLevel()
 {
     int max = 4 * 1024;
 
-    float step = max / 200.0F;
+    float step = static_cast<float>(max) / 200.0F;
 
-    int value = (int)(max / 2 + FREQ_LEVEL * step);
+    int value = static_cast<int>(static_cast<float>(max / 2) + static_cast<float>(FREQ_LEVEL) * step);
 
     Math::Limitation(&value, 0, max - 1);
 
@@ -99,9 +99,9 @@ void PFreqMeter::LoadHysteresis()
 {
     int max = 4 * 1024;
 
-    float step = max / 100.0F;
+    float step = static_cast<float>(max) / 100.0F;
 
-    int value = (int)(step * FREQ_HYSTERESIS);
+    int value = static_cast<int>(step * static_cast<float>(FREQ_HYSTERESIS));
 
     Math::Limitation(&value, 0, max - 1);
 

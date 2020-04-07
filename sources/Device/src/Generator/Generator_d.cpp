@@ -276,23 +276,23 @@ void Amplifier::Tune(Chan::E ch)
 
     float amplitude = SettingsGenerator::Amplitude(ch);
 
-    if(amplitude > Attenuation(Attenuation::_10Db).Units())                 // 1 диапазон   3.16
+    if(amplitude > Attenuation(Attenuation::_10Db).Units())                     // 1 диапазон   3.16
     {
         SetAttenuation(ch, Attenuation::_0Db);
     }
-    else if(amplitude > 1.0F)                                               // 2 диапазон
+    else if(amplitude > 1.0F)                                                   // 2 диапазон
     {
         SetAttenuation(ch, Attenuation::_10Db);
     }
-    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10)       // 4 диапазоны 0.316
+    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10.0F)        // 4 диапазоны 0.316
     {
         SetAttenuation(ch, Attenuation::_0Db);
     }
-    else if(amplitude > 0.100F)                                             // 5 диапазон
+    else if(amplitude > 0.100F)                                                 // 5 диапазон
     {
         SetAttenuation(ch, Attenuation::_10Db);
     }
-    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 100)                                                                   // 6 диапазон
+    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 100.0F)       // 6 диапазон
     {
         SetAttenuation(ch, Attenuation::_20Db);
     }
@@ -334,10 +334,10 @@ float Attenuation::Units() const
 {
     static const float att[Count] =
     {
-        std::powf(10, 0.05F * 0),
-        std::powf(10, 0.05F * 10),
-        std::powf(10, 0.05F * 20),
-        std::powf(10, 0.05F * 30)
+        std::powf(10.0F, 0.05F * 0.0F),
+        std::powf(10.0F, 0.05F * 10.0F),
+        std::powf(10.0F, 0.05F * 20.0F),
+        std::powf(10.0F, 0.05F * 30.0F)
     };
 
     return att[value];

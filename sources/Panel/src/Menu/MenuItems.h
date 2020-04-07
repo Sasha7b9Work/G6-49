@@ -76,7 +76,7 @@ public:
     /// Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
     int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
 
-    Page *Keeper() const { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper)); };
+    Page *Keeper() const { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper)); }; //-V2567
 
     bool IsActive() const { return funcOfActive(); };
 

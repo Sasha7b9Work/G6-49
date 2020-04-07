@@ -41,7 +41,9 @@ int main()
     }
 
     JumpToMainApplication();                    // И стартуем сам на основную прошивку
-} //-V591
+
+    return 0;
+}
 
 
 static void JumpToMainApplication()
@@ -50,7 +52,7 @@ static void JumpToMainApplication()
 
     pFunction JumpToApplication;
 
-    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4)); //-V566
+    JumpToApplication = reinterpret_cast<pFunction>(*reinterpret_cast<__IO uint *>(Updater::MAIN_PROGRAM_START_ADDRESS + 4)); //-V566
 
     __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
 

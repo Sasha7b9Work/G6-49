@@ -65,24 +65,19 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
     switch(id)
     {
         case HOST_USER_SELECT_CONFIGURATION:
-            //LOG_WRITE("HOST_USER_SELECT_CONFIGURATION");
             break;
 
         case HOST_USER_CLASS_ACTIVE:
-            //LOG_WRITE("HOST_USER_CLASS_ACTIVE");
             state = State::NeedMount;
             break;
 
         case HOST_USER_CLASS_SELECTED:
-            //LOG_WRITE("HOST_USER_CLASS_SELECTED");
             break;
 
         case HOST_USER_CONNECTION:
-            //LOG_WRITE("HOST_USER_CONNECTION");
             break;
 
         case HOST_USER_DISCONNECTION:
-            //LOG_WRITE("HOST_USER_DISCONNECTION");
             state = State::NeedUnmount;
             break;
 
@@ -99,9 +94,9 @@ void DLDrive::Init()
 
     if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK) //-V2001
     {
-        USBH_StatusTypeDef res = USBH_Init(&handle, USBH_UserProcess, 0);
-        res = USBH_RegisterClass(&handle, USBH_MSC_CLASS);
-        res = USBH_Start(&handle);
+        USBH_Init(&handle, USBH_UserProcess, 0);
+        USBH_RegisterClass(&handle, USBH_MSC_CLASS);
+        USBH_Start(&handle);
     }
 }
 
