@@ -1034,6 +1034,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Generator</GroupName>
+          <Files>
+            <File>
+              <FileName>Generator_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Generator_d.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
@@ -1154,8 +1164,33 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Settings</GroupName>
+          <Files>
+            <File>
+              <FileName>CalibrationSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\CalibrationSettings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>CalibrationSettings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\CalibrationSettings.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Utils</GroupName>
           <Files>
+            <File>
+              <FileName>Debug.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Debug.h</FilePath>
+            </File>
+            <File>
+              <FileName>Debug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Debug.cpp</FilePath>
+            </File>
             <File>
               <FileName>String.cpp</FileName>
               <FileType>8</FileType>
@@ -1205,31 +1240,6 @@
               <FileName>Buffer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Buffer.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Generator</GroupName>
-          <Files>
-            <File>
-              <FileName>Generator_d.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Generator_d.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Settings</GroupName>
-          <Files>
-            <File>
-              <FileName>CalibrationSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\CalibrationSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CalibrationSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\CalibrationSettings.h</FilePath>
             </File>
           </Files>
         </Group>

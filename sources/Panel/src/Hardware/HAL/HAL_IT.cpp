@@ -53,8 +53,8 @@ extern "C" {
     {
         TRACE_HANDLER;
         
-        char *file = Debug::file;
-        int line = Debug::line;
+        const char *file = Debug::file[0];
+        int line = Debug::line[0];
         
         while (1) //-V776
         {
