@@ -3,6 +3,9 @@
 #include "common/Messages.h"
 
 
+#define SIZE_CHUNK        512            /* Размер элементарной порции данных */
+
+
 namespace Message
 {
     // Этим сообщением панель делает запрос на обновление

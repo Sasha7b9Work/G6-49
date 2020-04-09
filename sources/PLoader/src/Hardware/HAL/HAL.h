@@ -18,9 +18,10 @@ struct HAL
 
 struct HAL_EEPROM
 {
-    static void SaveSettings();
+    // Стирает count секторов, начиная со стартового адреса основной прошивки
+    static void EraseSectors(int count);
 
-    static void LoadSettings();
+    static void WriteBuffer(uint address, uint8 *data, int size);
 };
 
 

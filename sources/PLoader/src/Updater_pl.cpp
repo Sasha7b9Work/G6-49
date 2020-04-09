@@ -1,7 +1,9 @@
 #include "defines.h"
 #include "common/Messages.h"
+#include "common/Messages_pl.h"
 #include "Updater_pl.h"
 #include "Display/Painter.h"
+#include "Hardware/HAL/HAL.h"
 
 
 static float portionDevice = 0.0F;
@@ -52,11 +54,32 @@ bool Updater::Handler(SimpleMessage *message)
 
     uint8 com = message->TakeByte();
 
-    if(com == Command::PortionUpgradeDevice)
+    if(com == Command::EraseSectors)
     {
-        uint word = message->TakeWord();
-        
-        portionDevice = word / 100.0F;
+        int num = message->TakeInt();
+
+        HAL_EEPROM::EraseSectors(num);
+    }
+    else if(com == Command::PortionUpgradeDevice)
+    {
+        portionDevice = message->TakeWord() / 100.0F;
+    }
+    else if(com == Command::PortionUpgradePanel)
+    {
+        portionPanel = message->TakeWord() / 100.0F;
+
+        int num = message->TakeInt();
+
+        uint address = static_cast<uint>(MAIN_PROGRAM_START_ADDRESS + num * SIZE_CHUNK);
+
+        uint8 buffer[SIZE_CHUNK];
+
+        for(int i = 0; i < SIZE_CHUNK; i++)
+        {
+            buffer[i] = message->TakeByte();
+        }
+
+        HAL_EEPROM::WriteBuffer(address, buffer, SIZE_CHUNK);
     }
 
     return true;

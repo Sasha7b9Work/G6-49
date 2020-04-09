@@ -29,9 +29,6 @@
 #define FILE_NAME_DEVICE "G6-49-D.bin"
 #define FILE_NAME_PANEL  "G6-49-P.bin"
 
-#define SIZE_CHUNK        512            /* Размер элементарной порции данных */
-
-
 static bool needUpgrade = false;
 
 // Пустой обработчик сообщений
@@ -143,7 +140,7 @@ void Updater::UpgradeDevice()
 
         HAL_EEPROM::EraseSectors(numSectors);
 
-        uint address = Updater::MAIN_PROGRAM_START_ADDRESS;
+        uint address = MAIN_PROGRAM_START_ADDRESS;
 
         static uint8 buffer[SIZE_CHUNK];
 
@@ -170,7 +167,7 @@ void Updater::UpgradeDevice()
 
 void Updater::UpgradePanel()
 {
-    const int fullSize = DLDrive::File::Open(FILE_NAME_DEVICE);
+    const int fullSize = DLDrive::File::Open(FILE_NAME_PANEL);
 
     if(fullSize != -1)
     {

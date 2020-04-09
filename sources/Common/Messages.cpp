@@ -160,6 +160,12 @@ uint SimpleMessage::TakeWord()
 }
 
 
+int SimpleMessage::TakeInt()
+{
+    return static_cast<int>(TakeWord());
+}
+
+
 uint64 SimpleMessage::TakeDoubleWord()
 {
     BitSet64 bs(buffer + taken);
