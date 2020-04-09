@@ -96,7 +96,8 @@ void DDrive::Handler::Processing(SimpleMessage *message)
         /* CalibrationSet               */ E,
         /* StartApplication             */ E,
         /* RequestUpdate                */ E,
-        /* PortionUpdateDevice          */ E
+        /* PortionUpdateDevice          */ E,
+        /* PortionUpgradePanel          */ E
     };
 
     funcs[com]();

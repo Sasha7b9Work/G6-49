@@ -29,15 +29,7 @@
 #define FILE_NAME_DEVICE "G6-49-D.bin"
 #define FILE_NAME_PANEL  "G6-49-P.bin"
 
-
-struct Mode
-{
-    enum E
-    {
-        Device,
-        Panel
-    };
-};
+#define SIZE_CHUNK        512            /* Размер элементарной порции данных */
 
 
 static bool needUpgrade = false;
@@ -48,11 +40,8 @@ static void E(SimpleMessage *);
 // Обработчик запроса на обновление
 static void OnRequestUpdate(SimpleMessage *);
 
-// Обновить прошивку из файла fileName (прошивку device или panel)
-static void Upgrade(const char *fileName);
-
 // Послать сообщение о текущем состоянии обновления, если необходимо
-static void SendMessageToPanelIfNeed(Mode::E mode, int size, int fullSize);
+static void SendMessageAboutDevicePortion(int size, int fullSize);
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -106,7 +95,8 @@ void Updater::Handler(SimpleMessage *message)
         /* CalibrationSet            */ E,
         /* StartApplication          */ E,
         /* RequestUpdate             */ OnRequestUpdate,
-        /* PortionUpdateDevice       */ E
+        /* PortionUpdateDevice       */ E,
+        /* PortionUpgradePanel       */ E
     };
 
     message->ResetPointer();
@@ -136,23 +126,7 @@ static void OnRequestUpdate(SimpleMessage *)
 
 void Updater::UpgradeDevice()
 {
-    Upgrade(FILE_NAME_DEVICE);
-}
-
-
-void Updater::UpgradePanel()
-{
-    Upgrade(FILE_NAME_PANEL);
-}
-
-
-static void Upgrade(const char *fileName)
-{
-    Mode::E mode = (std::strcmp(fileName, FILE_NAME_DEVICE) == 0 ? Mode::Device : Mode::Panel);
-
-    static const int SIZE_CHUNK = 512;    /* Размер элементарной порции данных */
-
-    const int fullSize = DLDrive::File::Open(fileName);
+    const int fullSize = DLDrive::File::Open(FILE_NAME_DEVICE);
 
     if(fullSize != -1)
     {
@@ -177,7 +151,7 @@ static void Upgrade(const char *fileName)
 
             address += readed;
 
-            SendMessageToPanelIfNeed(mode, size, fullSize);
+            SendMessageAboutDevicePortion(size, fullSize);
         }
 
         DLDrive::File::Close();
@@ -185,7 +159,13 @@ static void Upgrade(const char *fileName)
 }
 
 
-static void SendMessageToPanelIfNeed(Mode::E mode, int size, int fullSize)
+void Updater::UpgradePanel()
+{
+
+}
+
+
+static void SendMessageAboutDevicePortion(int size, int fullSize)
 {
     static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
 
@@ -193,10 +173,7 @@ static void SendMessageToPanelIfNeed(Mode::E mode, int size, int fullSize)
 
     if(portion != prevPortion)
     {
-        if(mode == Mode::Device)
-        {
-            Message::PortionUpdateDevice(portion).Transmit();
-        }
+        Message::PortionUpdateDevice(portion).Transmit();
         
         prevPortion = portion;
 
