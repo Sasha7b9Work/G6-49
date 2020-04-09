@@ -140,13 +140,19 @@ uint8 SimpleMessage::TakeUINT8()
 }
 
 
-uint16 SimpleMessage::TakeHalfWord()
+uint16 SimpleMessage::TakeUINT16()
 {
     BitSet16 bs(buffer + taken);
     uint16 result = bs.halfWord;
     taken += sizeof(result);
 
     return result;
+}
+
+
+int16 SimpleMessage::TakeINT16()
+{
+    return static_cast<int16>(TakeUINT16());
 }
 
 

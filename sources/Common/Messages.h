@@ -34,7 +34,8 @@ public:
     /// Взять байт
     uint8 TakeUINT8();
     /// Взять полуслово
-    uint16 TakeHalfWord();
+    uint16 TakeUINT16();
+    int16 TakeINT16();
     /// Взять слово
     uint TakeUINT();
     int TakeINT();

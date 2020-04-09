@@ -340,7 +340,7 @@ static void CalibrationLoad(SimpleMessage *msg)
     uint8 range = msg->TakeUINT8();
     uint8 param = msg->TakeUINT8();
     
-    int16 k = static_cast<int16>(msg->TakeHalfWord());
+    int16 k = msg->TakeINT16();
     
     *setCal.GetK(channel, signal, range, param) = k;
 }
@@ -353,7 +353,7 @@ static void CalibrationSet(SimpleMessage *msg)
     uint8 range = msg->TakeUINT8();
     uint8 param = msg->TakeUINT8();
     
-    int16 k = static_cast<int16>(msg->TakeHalfWord());
+    int16 k = msg->TakeINT16();
     
     Calibrator::SetK(channel, signal, range, param, k);
 }
