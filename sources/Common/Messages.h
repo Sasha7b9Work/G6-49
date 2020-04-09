@@ -32,7 +32,7 @@ public:
     /// Выделить необходимое количество памяти
     bool AllocateMemory(uint size);
     /// Взять байт
-    uint8 TakeByte();
+    uint8 TakeUINT8();
     /// Взять полуслово
     uint16 TakeHalfWord();
     /// Взять слово

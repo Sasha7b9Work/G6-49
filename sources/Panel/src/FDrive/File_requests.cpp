@@ -13,9 +13,9 @@ static bool EqualsRequestString(Task *task1, Task *task2)
 
     uint8 com = Command::FDrive_RequestFileString;
 
-    return  (com == msg1->TakeByte()) &&
-            (com == msg2->TakeByte()) &&
-            (msg1->TakeByte() == msg2->TakeByte());
+    return  (com == msg1->TakeUINT8()) &&
+            (com == msg2->TakeUINT8()) &&
+            (msg1->TakeUINT8() == msg2->TakeUINT8());
 }
 
 void FileRequests::SendRequestForString(const String *name, int numString)

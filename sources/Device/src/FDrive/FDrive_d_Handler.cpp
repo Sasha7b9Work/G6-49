@@ -47,7 +47,7 @@ void DDrive::Handler::Processing(SimpleMessage *message)
 
     msg->ResetPointer();
 
-    uint8 com = msg->TakeByte();
+    uint8 com = msg->TakeUINT8();
 
     static const pFuncVV funcs[Command::Count] =
     {
@@ -120,7 +120,7 @@ void DDrive::Handler::RequestFile()
 {
     char name[255];
 
-    int numFile = static_cast<int>(msg->TakeByte());
+    int numFile = static_cast<int>(msg->TakeUINT8());
 
     if (FileSystem::GetNameFile(msg->String(2), numFile, name))
     {
@@ -132,7 +132,7 @@ void DDrive::Handler::RequestFile()
 void DDrive::Handler::RequestFileSize()
 {
     char name[255];
-    int numFile = static_cast<int>(msg->TakeByte());
+    int numFile = static_cast<int>(msg->TakeUINT8());
     if (FileSystem::GetNameFile(msg->String(2), numFile, name))           // Получаем имя файла
     {
         String fullPath("%s\\%s", msg->String(2), name);
@@ -147,8 +147,8 @@ void DDrive::Handler::RequestFileSize()
 void DDrive::Handler::LoadFromExtStorage()
 {
     char fullName[255];
-    Chan ch(msg->TakeByte());
-    int numFile = static_cast<int>(msg->TakeByte());
+    Chan ch(msg->TakeUINT8());
+    int numFile = static_cast<int>(msg->TakeUINT8());
     std::strcpy(fullName, msg->String(2));
     std::strcat(fullName, "\\");
     if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
@@ -170,7 +170,7 @@ void DDrive::Handler::GetPictureDDS()
     uint8 data[SIZE];
     std::memset(data, 0, SIZE);
 
-    int numFile = static_cast<int>(msg->TakeByte());
+    int numFile = static_cast<int>(msg->TakeUINT8());
 
     char fullName[255];
     std::strcpy(fullName, msg->String(2));

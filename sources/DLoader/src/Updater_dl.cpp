@@ -107,7 +107,7 @@ void Updater::Handler(SimpleMessage *message)
 
     message->ResetPointer();
 
-    uint8 com = message->TakeByte();
+    uint8 com = message->TakeUINT8();
 
     if(com < Command::Count)
     {

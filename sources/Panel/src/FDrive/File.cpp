@@ -66,11 +66,11 @@ void File::Draw(int x, int y)
 
 bool File::Handler(SimpleMessage *msg)
 {
-    uint8 com = msg->TakeByte();
+    uint8 com = msg->TakeUINT8();
 
     if (com == Command::FDrive_GetPictureDDS)
     {
-        num = msg->TakeByte();
+        num = msg->TakeUINT8();
 
         msg->TakeRemainigData(picture.data);
 
@@ -94,8 +94,8 @@ static bool EqualsRequestPicture(Task *request, Task *answer)
 
     uint8 com = Command::FDrive_GetPictureDDS;
 
-    return  (com == send->TakeByte()) &&
-            (com == recv->TakeByte());
+    return  (com == send->TakeUINT8()) &&
+            (com == recv->TakeUINT8());
 }
 
 

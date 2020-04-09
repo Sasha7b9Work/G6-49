@@ -124,7 +124,7 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* EraseSectors              */ E
     };
 
-    uint8 com = msg->TakeByte();
+    uint8 com = msg->TakeUINT8();
 
     pFuncInterfaceVpM func = funcs[com];
 
@@ -170,9 +170,9 @@ static void SendData(SimpleMessage *)
 
 static void EnableChannel(SimpleMessage *msg)
 {
-    Chan ch(msg->TakeByte());
+    Chan ch(msg->TakeUINT8());
 
-    bool enable = (msg->TakeByte() == 1);
+    bool enable = (msg->TakeUINT8() == 1);
 
     DGenerator::EnableChannel(ch, enable);
 }
@@ -180,15 +180,15 @@ static void EnableChannel(SimpleMessage *msg)
 
 static void SetFormWave(SimpleMessage *msg)
 {
-    Chan ch(msg->TakeByte());
+    Chan ch(msg->TakeUINT8());
 
-    DGenerator::SetFormWave(ch, static_cast<TypeForm::E>(msg->TakeByte()));
+    DGenerator::SetFormWave(ch, static_cast<TypeForm::E>(msg->TakeUINT8()));
 }
 
 
 static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, FloatValue))
 {
-    Chan ch(msg->TakeByte());
+    Chan ch(msg->TakeUINT8());
 
     FloatValue value(0.0F);
     value.FromUINT64(msg->TakeDoubleWord());
@@ -271,17 +271,17 @@ static void SetPacketNumber(SimpleMessage *msg)
 
 static void SetManipulation(SimpleMessage *msg)
 {
-    Chan ch(msg->TakeByte());
+    Chan ch(msg->TakeUINT8());
 
-    AD9952::Manipulation::SetEnabled(ch, msg->TakeByte() != 0);
+    AD9952::Manipulation::SetEnabled(ch, msg->TakeUINT8() != 0);
 }
 
 
 static void SetStartMode(SimpleMessage *msg)
 {
-    Chan ch(msg->TakeByte());
+    Chan ch(msg->TakeUINT8());
 
-    StartMode mode = static_cast<StartMode>(msg->TakeByte());
+    StartMode mode = static_cast<StartMode>(msg->TakeUINT8());
 
     FPGA::SetStartMode(ch, mode);
 }
@@ -289,17 +289,17 @@ static void SetStartMode(SimpleMessage *msg)
 
 static void SetPolarity(SimpleMessage *message)
 {
-    Chan ch(message->TakeByte());
+    Chan ch(message->TakeUINT8());
 
-    FPGA::SetPolarity(ch, message->TakeByte());
+    FPGA::SetPolarity(ch, message->TakeUINT8());
 }
 
 
 static void SetPin(SimpleMessage *message)
 {
-    uint8 port = message->TakeByte();
-    uint8 pin = message->TakeByte();
-    uint8 state = message->TakeByte();
+    uint8 port = message->TakeUINT8();
+    uint8 pin = message->TakeUINT8();
+    uint8 state = message->TakeUINT8();
 
     static const uint16 pins[] =
     {
@@ -327,7 +327,7 @@ static void SetPin(SimpleMessage *message)
 
 static void LoadFormDDS(SimpleMessage *msg)
 {
-    Chan ch(msg->TakeByte());
+    Chan ch(msg->TakeUINT8());
 
     msg->TakeRemainigData(FPGA::DataDDS(ch));
 }
@@ -335,10 +335,10 @@ static void LoadFormDDS(SimpleMessage *msg)
 
 static void CalibrationLoad(SimpleMessage *msg)
 {
-    uint8 channel = msg->TakeByte();
-    uint8 signal = msg->TakeByte();
-    uint8 range = msg->TakeByte();
-    uint8 param = msg->TakeByte();
+    uint8 channel = msg->TakeUINT8();
+    uint8 signal = msg->TakeUINT8();
+    uint8 range = msg->TakeUINT8();
+    uint8 param = msg->TakeUINT8();
     
     int16 k = static_cast<int16>(msg->TakeHalfWord());
     
@@ -348,10 +348,10 @@ static void CalibrationLoad(SimpleMessage *msg)
 
 static void CalibrationSet(SimpleMessage *msg)
 {
-    uint8 channel = msg->TakeByte();
-    uint8 signal = msg->TakeByte();
-    uint8 range = msg->TakeByte();
-    uint8 param = msg->TakeByte();
+    uint8 channel = msg->TakeUINT8();
+    uint8 signal = msg->TakeUINT8();
+    uint8 range = msg->TakeUINT8();
+    uint8 param = msg->TakeUINT8();
     
     int16 k = static_cast<int16>(msg->TakeHalfWord());
     
@@ -361,7 +361,7 @@ static void CalibrationSet(SimpleMessage *msg)
 
 static void WriteRegister(SimpleMessage *msg)
 {
-    Register reg(msg->TakeByte());
+    Register reg(msg->TakeUINT8());
 
     FloatValue value(0.0F);
     value.FromUINT64(msg->TakeDoubleWord());

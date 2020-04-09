@@ -131,7 +131,7 @@ void SimpleMessage::PutFloat(float data)
 }
 
 
-uint8 SimpleMessage::TakeByte()
+uint8 SimpleMessage::TakeUINT8()
 {
     uint8 result = buffer[taken];
     taken += sizeof(result);

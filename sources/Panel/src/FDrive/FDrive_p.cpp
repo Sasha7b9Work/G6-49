@@ -144,7 +144,7 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
     msg->ResetPointer();
 
-    Command com(msg->TakeByte());
+    Command com(msg->TakeUINT8());
 
     return funcs[com]();
 }
@@ -152,7 +152,7 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
 bool FDrive::Handler::IsMount()
 {
-    mounted = static_cast<Mount>(msg->TakeByte());
+    mounted = static_cast<Mount>(msg->TakeUINT8());
     Init();
     return true;
 }

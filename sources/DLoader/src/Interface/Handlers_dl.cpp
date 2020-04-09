@@ -74,7 +74,7 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* EraseSectors              */ E
     };
 
-    uint8 com = msg->TakeByte();
+    uint8 com = msg->TakeUINT8();
 
     if(com < Command::Count)
     {

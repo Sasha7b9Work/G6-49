@@ -72,7 +72,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* EraseSectors              */ Updater::Handler
     };
    
-    uint8 command = msg->TakeByte();
+    uint8 command = msg->TakeUINT8();
     
     if (command < Command::Count)
     {

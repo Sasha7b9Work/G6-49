@@ -52,7 +52,7 @@ bool Updater::Handler(SimpleMessage *message)
 {
     message->ResetPointer();
 
-    uint8 com = message->TakeByte();
+    uint8 com = message->TakeUINT8();
 
     if(com == Command::EraseSectors)
     {
@@ -76,7 +76,7 @@ bool Updater::Handler(SimpleMessage *message)
 
         for(int i = 0; i < SIZE_CHUNK; i++)
         {
-            buffer[i] = message->TakeByte();
+            buffer[i] = message->TakeUINT8();
         }
 
         HAL_EEPROM::WriteBuffer(address, buffer, SIZE_CHUNK);

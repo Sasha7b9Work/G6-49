@@ -78,7 +78,7 @@ bool Items::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 
-    uint8 command = msg->TakeByte();
+    uint8 command = msg->TakeUINT8();
 
     if (command == Command::FDrive_NumDirsAndFiles)
     {
@@ -89,7 +89,7 @@ bool Items::Handler::Processing(SimpleMessage *msg)
     }
     else if (command == Command::FDrive_RequestFile)
     {
-        int num = msg->TakeByte();
+        int num = msg->TakeUINT8();
         std::strcpy(files[num].name, msg->String(2));
 
         if (num == curItem)
@@ -101,7 +101,7 @@ bool Items::Handler::Processing(SimpleMessage *msg)
     }
     else if (command == Command::FDrive_RequestFileSize)
     {
-        int num = msg->TakeByte();
+        int num = msg->TakeUINT8();
         files[num].size = msg->TakeINT();
         return true;
     }
@@ -122,9 +122,9 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 
     uint8 com = Command::FDrive_RequestFile;
 
-    return  (com == msg1->TakeByte()) &&
-            (com == msg2->TakeByte()) &&
-            (msg1->TakeByte() == msg2->TakeByte());
+    return  (com == msg1->TakeUINT8()) &&
+            (com == msg2->TakeUINT8()) &&
+            (msg1->TakeUINT8() == msg2->TakeUINT8());
 }
 
 
