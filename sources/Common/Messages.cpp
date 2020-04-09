@@ -160,7 +160,7 @@ uint SimpleMessage::TakeWord()
 }
 
 
-int SimpleMessage::TakeInt()
+int SimpleMessage::TakeINT()
 {
     return static_cast<int>(TakeWord());
 }

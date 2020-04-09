@@ -56,7 +56,7 @@ bool Updater::Handler(SimpleMessage *message)
 
     if(com == Command::EraseSectors)
     {
-        int num = message->TakeInt();
+        int num = message->TakeINT();
 
         HAL_EEPROM::EraseSectors(num);
     }
@@ -68,7 +68,7 @@ bool Updater::Handler(SimpleMessage *message)
     {
         portionPanel = message->TakeWord() / 100.0F;
 
-        int num = message->TakeInt();
+        int num = message->TakeINT();
 
         uint address = static_cast<uint>(MAIN_PROGRAM_START_ADDRESS + num * SIZE_CHUNK);
 
