@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "common/Messages.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -39,11 +40,20 @@ extern "C" {
         const char *file = Debug::file[0];
         int line = Debug::line[0];
 
+        int allocated = SimpleMessage::created;
+        int destroed = SimpleMessage::destroed;
+        int allocatedSize = SimpleMessage::createdSize;
+        int destroedSize = SimpleMessage::destroedSize;
+
 
         while (1) //-V776
         {
             file = file; //-V570
             line = line; //-V570
+            allocated = allocated;
+            destroed = destroed;
+            allocatedSize = allocatedSize;
+            destroedSize = destroedSize;
         }
     }
 

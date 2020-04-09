@@ -10,7 +10,6 @@
 #include "Utils/Queue.h"
 #include "Handlers_pl.h"
 #include "Interface_pl.h"
-#include "Utils/Debug.h"
 #include <cstdlib>
 
 
@@ -34,31 +33,19 @@ void PInterface::Update()
 
     time = TIME_MS;
 
-    DEBUG_POINT_0;
-
     Message::RequestData message;
 
-    DEBUG_POINT_0;
-
     Transceiver::Transmit(&message);
-
-    DEBUG_POINT_0;
     
     if (Transceiver::Receive(&message))
     {
-        DEBUG_POINT_0;
-
         if (ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
             PHandlers::Processing(&message))    // или просто обрабатываем в обратном случае
         {
-            DEBUG_POINT_0;
             time = 0;
             Update();
-            DEBUG_POINT_0;
         }
     }
-
-    DEBUG_POINT_0;
 
     SendTasks();
 }

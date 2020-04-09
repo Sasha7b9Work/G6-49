@@ -89,6 +89,12 @@ protected:
     int taken;
 
     SimpleMessage(const SimpleMessage &) : allocated(0), buffer(0), used(0), taken(0) {};
+
+public:
+    static int created;
+    static int destroed;
+    static int createdSize;
+    static int destroedSize;
 };
 
 

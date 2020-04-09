@@ -8,6 +8,12 @@
 #include <cstring>
 
 
+int SimpleMessage::created = 0;
+int SimpleMessage::destroed = 0;
+int SimpleMessage::createdSize = 0;
+int SimpleMessage::destroedSize = 0;
+
+
 SimpleMessage::SimpleMessage() : allocated(0), buffer(0), used(0), taken(0)
 {
 
@@ -221,6 +227,9 @@ bool SimpleMessage::AllocateMemory(int size)
 
     DEBUG_POINT_0;
 
+    created++;
+    createdSize += size;
+
     buffer = static_cast<uint8 *>(std::malloc(static_cast<uint>(size)));
 
     DEBUG_POINT_0;
@@ -236,6 +245,12 @@ bool SimpleMessage::AllocateMemory(int size)
 
 void SimpleMessage::FreeMemory()
 {
+    if(allocated)
+    {
+        destroed++;
+        destroedSize += allocated;
+    }
+
     allocated = 0;
     used = 0;
     std::free(buffer);
