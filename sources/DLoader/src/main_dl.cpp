@@ -52,7 +52,7 @@ static void StartWithAutoUpgrade()
 {
     uint start = HAL_TIM::TimeMS();
 
-    while(HAL_TIM::TimeMS() - start < 10000)
+    while(HAL_TIM::TimeMS() - start < 5000)
     {
         DLDrive::Update();
         if(DLDrive::IsConnected())

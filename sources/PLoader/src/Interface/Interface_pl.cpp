@@ -24,15 +24,6 @@ void PInterface::AddMessageForTransmit(SimpleMessage *message)
 
 void PInterface::Update()
 {
-    static uint time = 0;
-
-    if (TIME_MS - time < 100)
-    {
-        return;
-    }
-
-    time = TIME_MS;
-
     Message::RequestData message;
 
     Transceiver::Transmit(&message);
@@ -42,8 +33,6 @@ void PInterface::Update()
         if (ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
             PHandlers::Processing(&message))    // или просто обрабатываем в обратном случае
         {
-            time = 0;
-            Update();
         }
     }
 
