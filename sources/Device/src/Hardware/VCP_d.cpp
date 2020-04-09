@@ -70,7 +70,7 @@ void DVCP::SendByte(uint8 byte)
 
 void DVCP::Handler::Processing(SimpleMessage *msg)
 {
-    DVCP::SendData(msg->Data(5), msg->TakeWord());
+    DVCP::SendData(msg->Data(5), msg->TakeUINT());
 }
 
 

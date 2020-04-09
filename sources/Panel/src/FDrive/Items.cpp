@@ -82,8 +82,8 @@ bool Items::Handler::Processing(SimpleMessage *msg)
 
     if (command == Command::FDrive_NumDirsAndFiles)
     {
-        numDirs = static_cast<int>(msg->TakeWord());
-        numFiles = static_cast<int>(msg->TakeWord()); //-V656
+        numDirs = msg->TakeINT();
+        numFiles = msg->TakeINT(); //-V656
         requestIsSend = false;
         return true;
     }
@@ -102,7 +102,7 @@ bool Items::Handler::Processing(SimpleMessage *msg)
     else if (command == Command::FDrive_RequestFileSize)
     {
         int num = msg->TakeByte();
-        files[num].size = static_cast<int>(msg->TakeWord());
+        files[num].size = msg->TakeINT();
         return true;
     }
     else

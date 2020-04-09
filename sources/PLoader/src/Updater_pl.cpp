@@ -62,11 +62,11 @@ bool Updater::Handler(SimpleMessage *message)
     }
     else if(com == Command::PortionUpgradeDevice)
     {
-        portionDevice = message->TakeWord() / 100.0F;
+        portionDevice = message->TakeUINT() / 100.0F;
     }
     else if(com == Command::PortionUpgradePanel)
     {
-        portionPanel = message->TakeWord() / 100.0F;
+        portionPanel = message->TakeUINT() / 100.0F;
 
         int num = message->TakeINT();
 

@@ -150,7 +150,7 @@ uint16 SimpleMessage::TakeHalfWord()
 }
 
 
-uint SimpleMessage::TakeWord()
+uint SimpleMessage::TakeUINT()
 {
     BitSet32 bs(buffer + taken);
     uint result = bs.word;
@@ -162,7 +162,7 @@ uint SimpleMessage::TakeWord()
 
 int SimpleMessage::TakeINT()
 {
-    return static_cast<int>(TakeWord());
+    return static_cast<int>(TakeUINT());
 }
 
 

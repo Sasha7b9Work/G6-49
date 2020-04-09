@@ -36,7 +36,7 @@ public:
     /// Взять полуслово
     uint16 TakeHalfWord();
     /// Взять слово
-    uint TakeWord();
+    uint TakeUINT();
     int TakeINT();
 
     uint64 TakeDoubleWord();
