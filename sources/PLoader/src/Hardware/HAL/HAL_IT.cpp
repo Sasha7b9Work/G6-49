@@ -42,8 +42,8 @@ extern "C" {
 
         while (1) //-V776
         {
-            file = file;
-            line = line;
+            file = file; //-V570
+            line = line; //-V570
         }
     }
 
