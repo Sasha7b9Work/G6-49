@@ -1,9 +1,12 @@
 #pragma once
 
 
-#define START_WITHOUT_UPDATE      0  /* Запуск без попытки обновления */
-#define START_WITH_UPDATE_AUTO    1  /* Запуск с автоматическим обновлением - попытка обновиться с флешки в течение некоторого времени */
-#define START_WITH_UPDATE_MANUAL  2  /* Запуск с обновлением по требованию - попытка обновления происходит, если загрузчик получает запрос на обновление от панели */
+#define START_WITHOUT_UPGRADE      0  /* Запуск без попытки обновления */
+#define START_WITH_AUTO_UPGRADE    1  /* Запуск с автоматическим обновлением - попытка обновиться с флешки в течение некоторого времени */
+#define START_WITH_MANUAL_UPGRADE  2  /* Запуск с обновлением по требованию - попытка обновления происходит, если загрузчик получает запрос на обновление от панели */
+
+
+#define MODE_START START_WITH_AUTO_UPGRADE
 
 
 typedef unsigned int       uint;

@@ -214,7 +214,7 @@ uint Timer::LogPointUS(char * /*name*/)
 }
 
 
-uint Timer::LogPointMS(char * /*name*/)
+uint Timer::LogPointMS(char * /*name*/) //-V524
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;

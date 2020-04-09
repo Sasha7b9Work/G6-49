@@ -24,14 +24,23 @@
 */
 
 
-#define NAME_DEVICE "G6-49-D.bin"
-#define NAME_PANEL "G6-49-P.bin"
+#define FILE_NAME_DEVICE "G6-49-D.bin"
+#define FILE_NAME_PANEL  "G6-49-P.bin"
 
 
 static bool needUpgrade = false;
 
+// Пустой обработчик сообщений
 static void E(SimpleMessage *);
+
+// Обработчик запроса на обновление
 static void OnRequestUpdate(SimpleMessage *);
+
+// Обновить прошивку из файла fileName (прошивку device или panel)
+static void Upgrade(const char *fileName);
+
+// Послать сообщение о текущем состоянии обновления, если необходимо
+static void SendMessageToPanelIfNeed(int size, int fullSize);
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -113,23 +122,23 @@ static void OnRequestUpdate(SimpleMessage *)
 }
 
 
-void Updater::Upgrade()
+void Updater::UpgradeDevice()
 {
-    uint start = TIME_MS;
+    Upgrade(FILE_NAME_DEVICE);
+}
 
-    while(TIME_MS - start < 10000 && !DLDrive::IsConnected())
-    {
-        DLDrive::Update();
-    }
 
-    if(!DLDrive::IsConnected())
-    {
-        return;
-    }
+void Updater::UpgradePanel()
+{
+    Upgrade(FILE_NAME_PANEL);
+}
 
-    static const int SIZE_CHUNK = 128;    /* Размер элементарной порции данных */
 
-    const int fullSize = DLDrive::File::Open(NAME_DEVICE);
+static void Upgrade(const char *fileName)
+{
+    static const int SIZE_CHUNK = 512;    /* Размер элементарной порции данных */
+
+    const int fullSize = DLDrive::File::Open(fileName);
 
     if(fullSize != -1)
     {
@@ -139,9 +148,7 @@ void Updater::Upgrade()
 
         uint address = Updater::MAIN_PROGRAM_START_ADDRESS;
 
-        uint8 buffer[SIZE_CHUNK];
-
-        static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
+        static uint8 buffer[SIZE_CHUNK];
 
         int size = fullSize;
 
@@ -156,21 +163,29 @@ void Updater::Upgrade()
 
             address += readed;
 
-            int portion = static_cast<int>((1.0F - static_cast<float>(size) / fullSize) * 100);
-
-            if(portion != prevPortion)
-            {
-                Message::PortionUpdateDevice(portion).Transmit();
-                prevPortion = portion;
-
-                while(DInterface::GetOutbox().Size())
-                {
-                    DInterface::Update();
-                }
-            }
+            //SendMessageToPanelIfNeed(size, fullSize);
         }
 
         DLDrive::File::Close();
+    }
+}
+
+
+static void SendMessageToPanelIfNeed(int size, int fullSize)
+{
+    static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
+
+    int portion = static_cast<int>((1.0F - static_cast<float>(size) / fullSize) * 100);
+
+    if(portion != prevPortion)
+    {
+        Message::PortionUpdateDevice(portion).Transmit();
+        prevPortion = portion;
+
+        while(DInterface::GetOutbox().Size())
+        {
+            DInterface::Update();
+        }
     }
 }
 

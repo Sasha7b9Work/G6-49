@@ -14,7 +14,8 @@ public:
     static bool NeedUpgrade();
 
     // Запуск процедуры обновления
-    static void Upgrade();
+    static void UpgradeDevice();
+    static void UpgradePanel();
 
     // Обработчик поступающих команд
     static void Handler(SimpleMessage *);

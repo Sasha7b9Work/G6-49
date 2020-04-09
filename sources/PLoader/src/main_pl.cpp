@@ -9,7 +9,7 @@
 
 
 // True будет означать, что запрос на обновление уже послан
-//static bool alreadyRequest = false;
+static bool alreadyRequest = false;
 
 
 int main()
@@ -21,13 +21,13 @@ int main()
 
     while(true)
     {
-//        Updater::Update();
+        Updater::Update();
 
-//        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
-//        {
-//            alreadyRequest = true;
-//            Message::RequestUpdate().Transmit();
-//        }
+        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
+        {
+            alreadyRequest = true;
+            Message::RequestUpdate().Transmit();
+        }
 
         PInterface::Update();
     }

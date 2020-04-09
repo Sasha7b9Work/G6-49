@@ -10,11 +10,11 @@
 
 typedef void(*pFunction)();
 
-static void WithoutUpdate();
+static void StartWithoutUpgrade();
 
-static void UpdateAuto();
+static void StartWithAutoUpgrade();
 
-static void UpdateManual();
+static void StartWithManualUpgrade();
 
 static void JumpToMainApplication();
 
@@ -25,9 +25,9 @@ int main()
 
     DLDrive::Init();
 
-    pFuncVV funcs[] = { WithoutUpdate, UpdateAuto, UpdateManual };
+    pFuncVV funcs[] = { StartWithoutUpgrade, StartWithAutoUpgrade, StartWithManualUpgrade };
 
-    funcs[START_WITHOUT_UPDATE]();
+    funcs[MODE_START]();
 
     Message::StartMainApplication().Transmit(); // Посылаем команду запуска основного приложения
 
@@ -42,29 +42,39 @@ int main()
 }
 
 
-static void WithoutUpdate()
+static void StartWithoutUpgrade()
 {
 
 }
 
 
-static void UpdateAuto()
-{
-
-}
-
-
-static void UpdateManual()
+static void StartWithAutoUpgrade()
 {
     uint start = HAL_TIM::TimeMS();
 
-    while(HAL_TIM::TimeMS() - start < 10000)     // Ждём секунду
+    while(HAL_TIM::TimeMS() - start < 10000)
     {
-        DInterface::Update();                   // Сообщения от панели о запуске обновления
         DLDrive::Update();
-        if(Updater::NeedUpgrade())              // Если дождались
+        if(DLDrive::IsConnected())
         {
-            Updater::Upgrade();                 // Производим обновление
+            Updater::UpgradeDevice();
+            //Updater::UpgradePanel();
+            break;
+        }
+    }
+}
+
+
+static void StartWithManualUpgrade()
+{
+    uint start = HAL_TIM::TimeMS();
+
+    while(HAL_TIM::TimeMS() - start < 1000)
+    {
+        DInterface::Update();               // Сообщения от панели о запуске обновления
+        if(Updater::NeedUpgrade())          // Если дождались
+        {
+            StartWithoutUpgrade();
             break;
         }
     }
