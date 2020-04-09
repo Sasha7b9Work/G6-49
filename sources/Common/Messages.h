@@ -40,7 +40,7 @@ public:
     uint TakeUINT();
     int TakeINT();
 
-    uint64 TakeDoubleWord();
+    uint64 TakeUINT64();
 
     float TakeFloat();
     /// Взять оставшиеся данные. После вызова этой функции забирать из сообщения больше нечего

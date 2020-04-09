@@ -191,7 +191,7 @@ static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, Float
     Chan ch(msg->TakeUINT8());
 
     FloatValue value(0.0F);
-    value.FromUINT64(msg->TakeDoubleWord());
+    value.FromUINT64(msg->TakeUINT64());
 
     func(ch, value);
 }
@@ -364,7 +364,7 @@ static void WriteRegister(SimpleMessage *msg)
     Register reg(msg->TakeUINT8());
 
     FloatValue value(0.0F);
-    value.FromUINT64(msg->TakeDoubleWord());
+    value.FromUINT64(msg->TakeUINT64());
 
     switch (reg)
     {

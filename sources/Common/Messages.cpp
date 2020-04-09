@@ -172,7 +172,7 @@ int SimpleMessage::TakeINT()
 }
 
 
-uint64 SimpleMessage::TakeDoubleWord()
+uint64 SimpleMessage::TakeUINT64()
 {
     BitSet64 bs(buffer + taken);
     uint64 result = bs.dword;
