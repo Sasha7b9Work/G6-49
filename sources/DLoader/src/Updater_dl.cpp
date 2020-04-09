@@ -40,8 +40,13 @@ static void E(SimpleMessage *);
 // Обработчик запроса на обновление
 static void OnRequestUpdate(SimpleMessage *);
 
-// Послать сообщение о текущем состоянии обновления, если необходимо
+// Послать сообщение о текущем состоянии обновления device
 static void SendMessageAboutDevicePortion(int size, int fullSize);
+
+// Послать сообщение о текущем состоянии обновления panel. num - номер "порции" данных, data - "порция" данных размером SIZE_CHUNK
+static void SendMessageAboutPanelPortion(int num, uint8 *data, int size, int fullSize);
+
+static int CalculatePortion(int size, int fullSize);
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -161,7 +166,32 @@ void Updater::UpgradeDevice()
 
 void Updater::UpgradePanel()
 {
+    const int fullSize = DLDrive::File::Open(FILE_NAME_DEVICE);
 
+    if(fullSize != -1)
+    {
+        int numSectors = fullSize / (128 * 1024) + 1;
+
+        HAL_EEPROM::EraseSectors(numSectors);
+
+        static uint8 buffer[SIZE_CHUNK];
+
+        int size = fullSize;
+
+        int numPortion = 0;
+
+        while(size > 0)
+        {
+            int readed = (size < SIZE_CHUNK) ? size : SIZE_CHUNK;
+            size -= readed;
+
+            DLDrive::File::Read(readed, buffer);
+
+            SendMessageAboutPanelPortion(numPortion++, buffer, size, fullSize);
+        }
+
+        DLDrive::File::Close();
+    }
 }
 
 
@@ -169,11 +199,11 @@ static void SendMessageAboutDevicePortion(int size, int fullSize)
 {
     static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
 
-    int portion = static_cast<int>((1.0F - static_cast<float>(size) / fullSize) * 100);
+    int portion = CalculatePortion(size, fullSize);
 
     if(portion != prevPortion)
     {
-        Message::PortionUpdateDevice(portion).Transmit();
+        Message::PortionUpgradeDevice(portion).Transmit();
         
         prevPortion = portion;
 
@@ -182,6 +212,20 @@ static void SendMessageAboutDevicePortion(int size, int fullSize)
             DInterface::Update();
         }
     }
+}
+
+
+static void SendMessageAboutPanelPortion(int num, uint8 *data, int size, int fullSize)
+{
+    int portion = CalculatePortion(size, fullSize);
+
+    Message::PortionUpgradePanel(num, portion, data, SIZE_CHUNK);
+}
+
+
+static int CalculatePortion(int size, int fullSize)
+{
+    return static_cast<int>((1.0F - static_cast<float>(size) / fullSize) * 100);
 }
 
 

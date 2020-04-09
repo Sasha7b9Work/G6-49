@@ -12,11 +12,18 @@ namespace Message
         RequestUpgrade();
     };
 
-    // Этим сообщением устройство сообщает размер проапгрейженой части.
-    class PortionUpdateDevice : public SimpleMessage
+    // Этим сообщением устройство сообщает размер записанной части прошивки device
+    class PortionUpgradeDevice : public SimpleMessage
     {
     public:
-        PortionUpdateDevice(int portion);
+        PortionUpgradeDevice(int portion);
+    };
+
+    // Этим сообщением устройство сообщает размер записанной части прошивки panel и также передаёт данные
+    class PortionUpgradePanel : public SimpleMessage
+    {
+    public:
+        PortionUpgradePanel(int num, int portion, uint8 *data, int size);
     };
 
     // Этим сообщением device даёт панели разрешение на запуск
