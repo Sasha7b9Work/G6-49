@@ -6,17 +6,18 @@
 namespace Message
 {
     // Этим сообщением панель делает запрос на обновление
-    class RequestUpdate : public SimpleMessage
+    class RequestUpgrade : public SimpleMessage
     {
     public:
-        RequestUpdate();
+        RequestUpgrade();
     };
 
-    // Этим сообщением устройство сообщает размер проапгрейженой части
-    class PortionUpdateDevice : public SimpleMessage
+    // Этим сообщением устройство сообщает размер проапгрейженой части.
+    // mode : 0 - производится обновление device; 1 - производится обновление panel
+    class PortionUpdate : public SimpleMessage
     {
     public:
-        PortionUpdateDevice(int portion);
+        PortionUpdate(int mode, int portion);
     };
 
     // Этим сообщением device даёт панели разрешение на запуск

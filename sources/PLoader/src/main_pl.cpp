@@ -26,7 +26,7 @@ int main()
         if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
         {
             alreadyRequest = true;
-            Message::RequestUpdate().Transmit();
+            Message::RequestUpgrade().Transmit();
         }
 
         PInterface::Update();

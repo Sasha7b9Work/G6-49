@@ -6,6 +6,8 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_dl.h"
+#include <cstring>
+
 
 /*
 
@@ -28,6 +30,16 @@
 #define FILE_NAME_PANEL  "G6-49-P.bin"
 
 
+struct Mode
+{
+    enum E
+    {
+        Device,
+        Panel
+    };
+};
+
+
 static bool needUpgrade = false;
 
 // Пустой обработчик сообщений
@@ -40,7 +52,7 @@ static void OnRequestUpdate(SimpleMessage *);
 static void Upgrade(const char *fileName);
 
 // Послать сообщение о текущем состоянии обновления, если необходимо
-static void SendMessageToPanelIfNeed(int size, int fullSize);
+static void SendMessageToPanelIfNeed(Mode::E mode, int size, int fullSize);
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -136,6 +148,8 @@ void Updater::UpgradePanel()
 
 static void Upgrade(const char *fileName)
 {
+    Mode::E mode = (std::strcmp(fileName, FILE_NAME_DEVICE) == 0 ? Mode::Device : Mode::Panel);
+
     static const int SIZE_CHUNK = 512;    /* Размер элементарной порции данных */
 
     const int fullSize = DLDrive::File::Open(fileName);
@@ -163,7 +177,7 @@ static void Upgrade(const char *fileName)
 
             address += readed;
 
-            //SendMessageToPanelIfNeed(size, fullSize);
+            SendMessageToPanelIfNeed(mode, size, fullSize);
         }
 
         DLDrive::File::Close();
@@ -171,7 +185,7 @@ static void Upgrade(const char *fileName)
 }
 
 
-static void SendMessageToPanelIfNeed(int size, int fullSize)
+static void SendMessageToPanelIfNeed(Mode::E mode, int size, int fullSize)
 {
     static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
 
@@ -179,7 +193,7 @@ static void SendMessageToPanelIfNeed(int size, int fullSize)
 
     if(portion != prevPortion)
     {
-        Message::PortionUpdateDevice(portion).Transmit();
+        Message::PortionUpdate(mode, portion).Transmit();
         prevPortion = portion;
 
         while(DInterface::GetOutbox().Size())

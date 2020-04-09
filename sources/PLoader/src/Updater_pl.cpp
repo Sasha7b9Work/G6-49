@@ -52,7 +52,7 @@ bool Updater::Handler(SimpleMessage *message)
 
     uint8 com = message->TakeByte();
 
-    if(com == Command::PortionUpdateDevice)
+    if(com == Command::PortionUpgrade)
     {
         uint word = message->TakeWord();
         
