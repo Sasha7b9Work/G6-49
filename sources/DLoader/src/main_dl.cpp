@@ -10,6 +10,11 @@
 
 typedef void(*pFunction)();
 
+static void WithoutUpdate();
+
+static void UpdateAuto();
+
+static void UpdateManual();
 
 static void JumpToMainApplication();
 
@@ -20,6 +25,37 @@ int main()
 
     DLDrive::Init();
 
+    pFuncVV funcs[] = { WithoutUpdate, UpdateAuto, UpdateManual };
+
+    funcs[START_WITHOUT_UPDATE]();
+
+    Message::StartMainApplication().Transmit(); // Посылаем команду запуска основного приложения
+
+    while(DInterface::GetOutbox().Size())       // И ждём, пока она отправится
+    {
+        DInterface::Update();
+    }
+
+    JumpToMainApplication();                    // И стартуем сам на основную прошивку
+
+    return 0;
+}
+
+
+static void WithoutUpdate()
+{
+
+}
+
+
+static void UpdateAuto()
+{
+
+}
+
+
+static void UpdateManual()
+{
     uint start = HAL_TIM::TimeMS();
 
     while(HAL_TIM::TimeMS() - start < 10000)     // Ждём секунду
@@ -32,17 +68,6 @@ int main()
             break;
         }
     }
-
-    Message::StartMainApplication().Transmit(); // Посылаем команду запуска основного приложения
-
-    while(DInterface::GetOutbox().Size())       // И ждём, пока она отправится
-    {
-        DInterface::Update();
-    }
-
-    JumpToMainApplication();                    // И стартуем сам на основную прошивку
-
-    return 0;
 }
 
 

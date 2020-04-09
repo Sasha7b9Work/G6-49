@@ -9,7 +9,7 @@
 
 
 // True будет означать, что запрос на обновление уже послан
-static bool alreadyRequest = false;
+//static bool alreadyRequest = false;
 
 
 int main()
