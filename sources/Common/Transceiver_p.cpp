@@ -54,7 +54,7 @@ bool Transceiver::Receive(SimpleMessage *message)
 
     DEBUG_POINT_0;
 
-    uint size = 0;
+    int size = 0;
     HAL_SPI4::Receive(&size, 4, 10);
 
     DEBUG_POINT_0;

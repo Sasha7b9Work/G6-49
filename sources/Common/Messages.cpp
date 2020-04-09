@@ -20,7 +20,7 @@ SimpleMessage::~SimpleMessage()
 }
 
 
-SimpleMessage::SimpleMessage(uint size, uint8 v0) : allocated(0), buffer(0), used(0), taken(0)
+SimpleMessage::SimpleMessage(int size, uint8 v0) : allocated(0), buffer(0), used(0), taken(0)
 {
     Create(size, v0);
 }
@@ -31,7 +31,7 @@ SimpleMessage *SimpleMessage::Clone()
     SimpleMessage *result = new SimpleMessage();
     if (result->AllocateMemory(Size()))
     {
-        std::memcpy(result->buffer, buffer, allocated);
+        std::memcpy(result->buffer, buffer, static_cast<uint>(allocated));
         result->used = used;
         result->taken = taken;
     }
@@ -40,7 +40,7 @@ SimpleMessage *SimpleMessage::Clone()
 }
 
 
-void SimpleMessage::Create(uint size, uint8 v0)
+void SimpleMessage::Create(int size, uint8 v0)
 {
     if (AllocateMemory(size))
     {
@@ -49,11 +49,11 @@ void SimpleMessage::Create(uint size, uint8 v0)
 }
 
 
-bool SimpleMessage::CreateAllocate(const uint8 *_buffer, uint _size)
+bool SimpleMessage::CreateAllocate(const uint8 *_buffer, int _size)
 {
     if (AllocateMemory(_size))
     {
-        std::memcpy(buffer, _buffer, _size); //-V595
+        std::memcpy(buffer, _buffer, static_cast<uint>(_size)); //-V595
         used = _size;
     }
 
@@ -65,7 +65,7 @@ bool SimpleMessage::CreateFromMessage(const SimpleMessage *message)
 {
     if (AllocateMemory(message->Size()))
     {
-        std::memcpy(buffer, message->buffer, message->allocated); //-V595
+        std::memcpy(buffer, message->buffer, static_cast<uint>(message->allocated)); //-V595
         used = message->used;
     }
 
@@ -116,9 +116,9 @@ void SimpleMessage::PutINT(int data)
 }
 
 
-void SimpleMessage::PutData(const uint8 *data, uint length)
+void SimpleMessage::PutData(const uint8 *data, int length)
 {
-    std::memcpy(buffer + used, data, length);
+    std::memcpy(buffer + used, data, static_cast<uint>(length));
     used += length;
 }
 
@@ -182,7 +182,7 @@ uint64 SimpleMessage::TakeUINT64()
 }
 
 
-float SimpleMessage::TakeFloat()
+float SimpleMessage::TakeFLOAT()
 {
     BitSet32 bs(buffer + taken);
     float result = bs.floatValue;
@@ -194,8 +194,8 @@ float SimpleMessage::TakeFloat()
 
 void SimpleMessage::TakeRemainigData(uint8 *data)
 {
-    uint size = allocated - taken;
-    std::memcpy(data, buffer + taken, size);
+    int size = allocated - taken;
+    std::memcpy(data, buffer + taken, static_cast<uint>(size));
     taken = allocated;
 }
 
@@ -206,7 +206,7 @@ uint8 *SimpleMessage::RemainingData() const
 }
 
 
-bool SimpleMessage::AllocateMemory(uint size)
+bool SimpleMessage::AllocateMemory(int size)
 {
     DEBUG_POINT_0;
 
@@ -221,7 +221,7 @@ bool SimpleMessage::AllocateMemory(uint size)
 
     DEBUG_POINT_0;
 
-    buffer = static_cast<uint8 *>(std::malloc(size));
+    buffer = static_cast<uint8 *>(std::malloc(static_cast<uint>(size)));
 
     DEBUG_POINT_0;
 
@@ -249,7 +249,7 @@ uint8 *SimpleMessage::Data(int pos)
 }
 
 
-uint SimpleMessage::Size() const
+int SimpleMessage::Size() const
 {
     return allocated;
 }
@@ -268,7 +268,7 @@ bool SimpleMessage::IsEquals(const SimpleMessage *message) const
         return false;
     }
 
-    return std::memcmp(message->buffer, buffer, allocated) == 0;
+    return std::memcmp(message->buffer, buffer, static_cast<uint>(allocated)) == 0;
 }
 
 
@@ -340,7 +340,7 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(uint numDirs, uint numFiles) :
 
 Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessage()
 {   //          name | string                   | завершающий ноль
-    uint size = 1 +    std::strlen(directory) + 1;
+    int size = 1 +    static_cast<int>(std::strlen(directory)) + 1;
     AllocateMemory(size);
     PutByte(Command::FDrive_NumDirsAndFiles);
     std::strcpy(reinterpret_cast<char *>(buffer + 1), directory);
@@ -350,7 +350,7 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessa
 Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 {
     //          v0 | v1 | string |              завершающий_ноль
-    uint size = 1 +  1 +  std::strlen(name) + 1;
+    int size = 1 +  1 +  static_cast<int>(std::strlen(name)) + 1;
     AllocateMemory(size);
     PutByte(Command::FDrive_RequestFile);
     PutByte(numFile);
@@ -361,7 +361,7 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 Message::FDrive::FileString::FileString(uint numString, char *nameFile) : SimpleMessage()
 {
     //          commmand  numString  nameFile                завершающий_ноль
-    uint size = 1 +       1 +        std::strlen(nameFile) + 1;
+    int size = 1 +       1 +        static_cast<int>(std::strlen(nameFile)) + 1;
     AllocateMemory(size);
     PutByte(Command::FDrive_RequestFileString);
     PutByte(static_cast<uint8>(numString));
@@ -379,7 +379,7 @@ Message::FDrive::FileSize::FileSize(uint8 numFile, uint size) : SimpleMessage(6,
 Message::Log::Log(char *string) : SimpleMessage()
 {
     //          v0 | string              | завершающий_ноль
-    uint size = 1 + std::strlen(string) + 1;
+    int size = 1 + static_cast<int>(std::strlen(string)) + 1;
 
     AllocateMemory(size);
     PutByte(Command::Log);
@@ -425,7 +425,7 @@ Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint8 value) : Si
 Message::FDrive::LoadFromExtStorage::LoadFromExtStorage(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
 {
     //          com ch  numFile directory                 завершающий_ноль
-    uint size = 1 + 1 + 1 +      std::strlen(directory) + 1;
+    int size = 1 + 1 + 1 +      static_cast<int>(std::strlen(directory)) + 1;
     AllocateMemory(size);
     PutByte(Command::FDrive_LoadFromExtStorage);
     PutByte(ch);
@@ -446,13 +446,13 @@ Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Comman
     PutByte(numFile);
 }
 
-Message::SCPI::Data::Data(uint8 *data, uint length) : SimpleMessage()
+Message::SCPI::Data::Data(uint8 *data, int length) : SimpleMessage()
 {
     //          command sizeof(length)   command 
-    uint size = 1 +     4 +              length;
+    int size = 1 +     4 +              length;
 
     AllocateMemory(size);
     PutByte(Command::SCPI_Data);
-    PutUINT(length);
+    PutINT(length);
     PutData(data, length);
 }

@@ -43,13 +43,14 @@ struct HAL_SPI4
 {
     static void Init();
     /// Переслать массив данных
-    static bool Transmit(const void *buffer, uint size, uint timeout);
+    static bool Transmit(const void *buffer, int size, uint timeout);
 
     static bool Transmit(uint value, uint timeout);
+    static bool Transmit(int value, uint timeout);
     /// Принять массив данных
-    static bool Receive(void *recv, uint size, uint timeout);
+    static bool Receive(void *recv, int size, uint timeout);
     /// Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
-    static uint ReceiveAndCompare(const void *compared, uint size);
+    static uint ReceiveAndCompare(const void *compared, int size);
     /// Возвращает true, если прибор готов к обмену
     static bool IsReady();
     /// Ждать пока освободится устройство

@@ -39,7 +39,7 @@ void DInterface::Update()
 {
     CPU::SetReady();
 
-    uint size = 0;
+    int size = 0;
 
     if (HAL_SPI1::Receive(&size, 4, 10))                                                           // Узнаём размер принимаемого сообщения
     {

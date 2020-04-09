@@ -16,11 +16,11 @@ class SimpleMessage  // -V690
 {
 public:
     explicit SimpleMessage();
-    explicit SimpleMessage(uint size, uint8);
+    explicit SimpleMessage(int size, uint8);
  
     ~SimpleMessage();
 
-    void Create(uint size, uint8);
+    void Create(int size, uint8);
     /// Возвращает указатель на созданную копию
     SimpleMessage *Clone();
     /// Сбрасывает указатель извлечённой информации.
@@ -28,9 +28,9 @@ public:
 
     bool CreateFromMessage(const SimpleMessage *message);
     /// Создать сообщение с выделением памяти
-    bool CreateAllocate(const uint8 *buffer, uint size);
+    bool CreateAllocate(const uint8 *buffer, int size);
     /// Выделить необходимое количество памяти
-    bool AllocateMemory(uint size);
+    bool AllocateMemory(int size);
     /// Взять байт
     uint8 TakeUINT8();
     /// Взять полуслово
@@ -42,7 +42,7 @@ public:
 
     uint64 TakeUINT64();
 
-    float TakeFloat();
+    float TakeFLOAT();
     /// Взять оставшиеся данные. После вызова этой функции забирать из сообщения больше нечего
     void TakeRemainigData(uint8 *data);
     /// Возвращает указатель на оставшиеся данные. Данные можно забрать потом
@@ -52,7 +52,7 @@ public:
     /// Возвращает указатель на данные
     uint8 *Data(int pos = 0);
     /// Возвращает размер данных
-    uint Size() const;
+    int Size() const;
     /// Возвращает true, если это null-пакет (память не выделена)
     bool IsEmpty() const;
     /// Возвращает true, если сообщения одинаковы
@@ -67,7 +67,7 @@ public:
     /// Передать сообщение получателю
     void Transmit();
     /// Положить данные
-    void PutData(const uint8 *data, uint length);
+    void PutData(const uint8 *data, int length);
 protected:
     /// Положить байт
     void PutByte(uint8 data);
@@ -80,13 +80,13 @@ protected:
     /// Положить float
     void PutFloat(float data);
     /// Размер выделенной памяти
-    uint allocated;
+    int allocated;
     /// Адрес начала данных, либо 0, если память не выделена
     uint8 *buffer;
     /// Сколько памяти занято реальными данными. Используется для Put
-    uint used;
+    int used;
     /// На какой позиции указатель. Используется для Take
-    uint taken;
+    int taken;
 
     SimpleMessage(const SimpleMessage &) : allocated(0), buffer(0), used(0), taken(0) {};
 };
@@ -271,7 +271,7 @@ namespace Message
         class Data : public SimpleMessage
         {
         public:
-            Data(uint8 *data, uint length);
+            Data(uint8 *data, int length);
         };
     }
 
