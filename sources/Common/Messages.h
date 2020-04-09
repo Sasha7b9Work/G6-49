@@ -60,8 +60,8 @@ public:
     char *String(int pos);
 
     /// Положить слово
-    void PutWord(uint data);
-    void PutWord(int data);
+    void PutUINT(uint data);
+    void PutINT(int data);
     
     /// Передать сообщение получателю
     void Transmit();

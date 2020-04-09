@@ -83,8 +83,8 @@ void SimpleMessage::PutByte(uint8 data)
 void SimpleMessage::PutDoubleWord(uint64 data)
 {
     BitSet64 bs(data);
-    PutWord(bs.word0);
-    PutWord(bs.word1);
+    PutUINT(bs.word0);
+    PutUINT(bs.word1);
 }
 
 
@@ -102,7 +102,7 @@ void SimpleMessage::PutHalfWord(uint16 data)
 }
 
 
-void SimpleMessage::PutWord(uint data)
+void SimpleMessage::PutUINT(uint data)
 {
      BitSet32 bs(data);
      bs.WriteToBuffer(buffer + used);
@@ -110,9 +110,9 @@ void SimpleMessage::PutWord(uint data)
 }
 
 
-void SimpleMessage::PutWord(int data)
+void SimpleMessage::PutINT(int data)
 {
-    PutWord(static_cast<uint>(data));
+    PutUINT(static_cast<uint>(data));
 }
 
 
@@ -274,7 +274,7 @@ char *SimpleMessage::String(int pos)
 
 Message::FreqMeter::Measure::Measure(uint frequency) : SimpleMessage(5, Command::FreqMeasure)
 {
-    PutWord(frequency);
+    PutUINT(frequency);
 }
 
 
@@ -327,8 +327,8 @@ Message::FDrive::Mount::Mount(uint8 mount) : SimpleMessage(2, Command::FDrive_Mo
 
 Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(uint numDirs, uint numFiles) : SimpleMessage(9, Command::FDrive_NumDirsAndFiles)
 {
-    PutWord(numDirs);
-    PutWord(numFiles);
+    PutUINT(numDirs);
+    PutUINT(numFiles);
 }
 
 
@@ -366,7 +366,7 @@ Message::FDrive::FileString::FileString(uint numString, char *nameFile) : Simple
 Message::FDrive::FileSize::FileSize(uint8 numFile, uint size) : SimpleMessage(6, Command::FDrive_RequestFileSize)
 {
     PutByte(numFile);
-    PutWord(size);
+    PutUINT(size);
 }
 
 
@@ -447,6 +447,6 @@ Message::SCPI::Data::Data(uint8 *data, uint length) : SimpleMessage()
 
     AllocateMemory(size);
     PutByte(Command::SCPI_Data);
-    PutWord(length);
+    PutUINT(length);
     PutData(data, length);
 }
