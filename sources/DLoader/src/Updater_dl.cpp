@@ -193,7 +193,11 @@ static void SendMessageToPanelIfNeed(Mode::E mode, int size, int fullSize)
 
     if(portion != prevPortion)
     {
-        Message::PortionUpdate(mode, portion).Transmit();
+        if(mode == Mode::Device)
+        {
+            Message::PortionUpdateDevice(portion).Transmit();
+        }
+        
         prevPortion = portion;
 
         while(DInterface::GetOutbox().Size())

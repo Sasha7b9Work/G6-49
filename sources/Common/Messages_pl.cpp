@@ -14,8 +14,7 @@ Message::StartMainApplication::StartMainApplication() : SimpleMessage(1, Command
 }
 
 
-Message::PortionUpdate::PortionUpdate(int mode, int portion) : SimpleMessage(6, Command::PortionUpgrade)
+Message::PortionUpdateDevice::PortionUpdateDevice(int portion) : SimpleMessage(5, Command::PortionUpgradeDevice)
 {
-    PutByte(static_cast<uint8>(mode));
     PutWord(portion);
 }

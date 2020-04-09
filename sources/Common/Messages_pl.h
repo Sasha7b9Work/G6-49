@@ -13,11 +13,10 @@ namespace Message
     };
 
     // Этим сообщением устройство сообщает размер проапгрейженой части.
-    // mode : 0 - производится обновление device; 1 - производится обновление panel
-    class PortionUpdate : public SimpleMessage
+    class PortionUpdateDevice : public SimpleMessage
     {
     public:
-        PortionUpdate(int mode, int portion);
+        PortionUpdateDevice(int portion);
     };
 
     // Этим сообщением device даёт панели разрешение на запуск
