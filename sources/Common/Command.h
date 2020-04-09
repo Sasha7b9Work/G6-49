@@ -103,6 +103,8 @@ struct Command
             PortionUpgradeDevice,           // Информация о записанной части прошивки Device
             // com | portion (0...100) | num (поряддковый номер части прошивки размером 128 байт для расчёта места в памяти) | 128 байт прошивки
             PortionUpgradePanel,            // Информация о записанной части прошивки Panel
+            // com | num
+            EraseSectors,                   // Сообщение о стирании секторов для записи в них новой прошивки
             Count
     } value;
     Command(E v) : value(v) {};

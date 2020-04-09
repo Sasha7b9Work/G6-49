@@ -26,6 +26,13 @@ namespace Message
         PortionUpgradePanel(int num, int portion, uint8 *data, int size);
     };
 
+
+    class EraseSectors : public SimpleMessage
+    {
+    public:
+        EraseSectors(int num);
+    };
+
     // Этим сообщением device даёт панели разрешение на запуск
     class StartMainApplication : public SimpleMessage
     {

@@ -29,3 +29,9 @@ Message::PortionUpgradePanel::PortionUpgradePanel(int num, int portion, uint8 *d
         PutByte(*data++);
     }
 }
+
+
+Message::EraseSectors::EraseSectors(int num) : SimpleMessage(5, Command::EraseSectors)
+{
+    PutWord(num);
+}

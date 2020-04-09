@@ -120,7 +120,8 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* StartApplication          */ E,
         /* RequestUpdate             */ E,
         /* PortionUpdateDevice       */ E,
-        /* PortionUpgradePanel       */ E
+        /* PortionUpgradePanel       */ E,
+        /* EraseSectors              */ E
     };
 
     uint8 com = msg->TakeByte();

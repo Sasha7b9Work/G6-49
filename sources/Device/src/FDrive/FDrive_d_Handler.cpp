@@ -97,7 +97,8 @@ void DDrive::Handler::Processing(SimpleMessage *message)
         /* StartApplication             */ E,
         /* RequestUpdate                */ E,
         /* PortionUpdateDevice          */ E,
-        /* PortionUpgradePanel          */ E
+        /* PortionUpgradePanel          */ E,
+        /* EraseSectors                 */ E
     };
 
     funcs[com]();

@@ -49,6 +49,9 @@ static void SendMessageAboutPanelPortion(int num, uint8 *data, int size, int ful
 static int CalculatePortion(int size, int fullSize);
 
 
+static void TransmitMessage(SimpleMessage *message);
+
+
 void Updater::Handler(SimpleMessage *message)
 {
     typedef void(*pFunc)(SimpleMessage *);
@@ -101,7 +104,8 @@ void Updater::Handler(SimpleMessage *message)
         /* StartApplication          */ E,
         /* RequestUpdate             */ OnRequestUpdate,
         /* PortionUpdateDevice       */ E,
-        /* PortionUpgradePanel       */ E
+        /* PortionUpgradePanel       */ E,
+        /* EraseSectors              */ E
     };
 
     message->ResetPointer();
@@ -172,7 +176,8 @@ void Updater::UpgradePanel()
     {
         int numSectors = fullSize / (128 * 1024) + 1;
 
-        HAL_EEPROM::EraseSectors(numSectors);
+        Message::EraseSectors message(numSectors);
+        TransmitMessage(&message);
 
         static uint8 buffer[SIZE_CHUNK];
 
@@ -203,14 +208,11 @@ static void SendMessageAboutDevicePortion(int size, int fullSize)
 
     if(portion != prevPortion)
     {
-        Message::PortionUpgradeDevice(portion).Transmit();
-        
         prevPortion = portion;
 
-        while(DInterface::GetOutbox().Size())
-        {
-            DInterface::Update();
-        }
+        Message::PortionUpgradeDevice message(portion);
+
+        TransmitMessage(&message);
     }
 }
 
@@ -219,7 +221,9 @@ static void SendMessageAboutPanelPortion(int num, uint8 *data, int size, int ful
 {
     int portion = CalculatePortion(size, fullSize);
 
-    Message::PortionUpgradePanel(num, portion, data, SIZE_CHUNK);
+    Message::PortionUpgradePanel message(num, portion, data, SIZE_CHUNK);
+
+    TransmitMessage(&message);
 }
 
 
@@ -232,4 +236,15 @@ static int CalculatePortion(int size, int fullSize)
 bool Updater::NeedUpgrade()
 {
     return needUpgrade;
+}
+
+
+static void TransmitMessage(SimpleMessage *message)
+{
+    message->Transmit();
+
+    while(DInterface::GetOutbox().Size())
+    {
+        DInterface::Update();
+    }
 }

@@ -67,7 +67,8 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* StartApplication          */ E,
         /* RequestUpdate             */ E,
         /* PortionUpdateDevice       */ E,
-        /* PortionUpgradePanel       */ E
+        /* PortionUpgradePanel       */ E,
+        /* EraseSectors              */ E
     };
 
     uint8 command = msg->TakeByte();
