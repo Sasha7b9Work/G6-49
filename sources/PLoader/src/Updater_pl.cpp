@@ -6,8 +6,8 @@
 #include "Hardware/HAL/HAL.h"
 
 
-static float portionDevice = 0.0F;
-static float portionPanel = 0.0F;
+static float portionDevice = -1.0F;
+static float portionPanel = -1.0F;
 
 
 static void Draw();
@@ -30,9 +30,15 @@ static void Draw()
     static const int yDevice = 50;
     static const int yPanel = 150;
 
-    DrawProgress(yDevice, portionDevice);
+    if(!(portionDevice < 0.0F))
+    {
+        DrawProgress(yDevice, portionDevice);
+    }
 
-    DrawProgress(yPanel, portionPanel);
+    if(!(portionPanel < 0.0F))
+    {
+        DrawProgress(yPanel, portionPanel);
+    }
 }
 
 

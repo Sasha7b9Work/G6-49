@@ -58,7 +58,7 @@ static void StartWithAutoUpgrade()
         if(DLDrive::IsConnected())
         {
             Updater::UpgradeDevice();
-            //Updater::UpgradePanel();
+            Updater::UpgradePanel();
             break;
         }
     }
