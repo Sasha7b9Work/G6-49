@@ -8,6 +8,13 @@
 
 namespace Message
 {
+    // Этим сообщением device даёт панели разрешение на запуск
+    class StartMainApplication : public SimpleMessage
+    {
+    public:
+        StartMainApplication();
+    };
+
     // Этим сообщением панель делает запрос на обновление
     class RequestUpgrade : public SimpleMessage
     {
@@ -22,24 +29,24 @@ namespace Message
         PortionUpgradeDevice(int portion);
     };
 
-    // Этим сообщением устройство сообщает размер записанной части прошивки panel и также передаёт данные
-    class PortionUpgradePanel : public SimpleMessage
+    // Это сообщение DLoader посылает в PLoader, если обнаружен файл прошивки Panel
+    class AnswerUpgradePanel : public SimpleMessage
     {
     public:
-        PortionUpgradePanel(int num, int portion, uint8 *data, int size);
+        AnswerUpgradePanel(uint size);
     };
 
-
-    class EraseSectors : public SimpleMessage
+    // Этим сообщением PLoader запрашивает порцию обновления размером SIZE_CHUNK
+    class RequestPortionUpgradePanel : public SimpleMessage
     {
     public:
-        EraseSectors(int num);
+        RequestPortionUpgradePanel(uint16 num);
     };
 
-    // Этим сообщением device даёт панели разрешение на запуск
-    class StartMainApplication : public SimpleMessage
+    // Этим собщением DLoader отвечат на запрос порции обновления от PLoader
+    class AnswerPortionUpgradePanel : public SimpleMessage
     {
     public:
-        StartMainApplication();
+        AnswerPortionUpgradePanel(uint16 num, uint8 data[SIZE_CHUNK]);
     };
 }

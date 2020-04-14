@@ -60,32 +60,9 @@ bool Updater::Handler(SimpleMessage *message)
 
     uint8 com = message->TakeUINT8();
 
-    if(com == Command::EraseSectors)
-    {
-        int num = message->TakeINT();
-
-        HAL_EEPROM::EraseSectors(num);
-    }
-    else if(com == Command::PortionUpgradeDevice)
+    if(com == Command::PortionUpgradeDevice)
     {
         portionDevice = message->TakeUINT() / 100.0F;
-    }
-    else if(com == Command::PortionUpgradePanel)
-    {
-        portionPanel = message->TakeUINT() / 100.0F;
-
-        int num = message->TakeINT();
-
-        uint address = static_cast<uint>(MAIN_PROGRAM_START_ADDRESS + num * SIZE_CHUNK);
-
-        uint8 buffer[SIZE_CHUNK];
-
-        for(int i = 0; i < SIZE_CHUNK; i++)
-        {
-            buffer[i] = message->TakeUINT8();
-        }
-
-        HAL_EEPROM::WriteBuffer(address, buffer, SIZE_CHUNK);
     }
 
     return true;

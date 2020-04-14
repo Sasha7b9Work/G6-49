@@ -98,13 +98,19 @@ struct Command
             PortCPU,
             CalibrationLoad,
             CalibrationSet,
-            StartApplication,               // Запуск основного приложения
+
+            // byte(com)
+            StartApplication,               // Запуск основного приложения. Этой командой Device даёт команду Panel на старт
+            // byte(com)
             RequestUpgrade,                 // Запрос на обновление
+            // byte(com) | byte(0...100)
             PortionUpgradeDevice,           // Информация о записанной части прошивки Device
-            // com | portion (0...100) | num (поряддковый номер части прошивки размером 128 байт для расчёта места в памяти) | 128 байт прошивки
-            PortionUpgradePanel,            // Информация о записанной части прошивки Panel
-            // com | num
-            EraseSectors,                   // Сообщение о стирании секторов для записи в них новой прошивки
+            // byte(com) | word(размер)
+            AnswerUpgradePanel,             // Этой командой DLoader сообщает о том, что имеется обновление Panel
+            // byte(com) | hword(num)
+            RequestPortionUpgradePanel,     // Запрос на порцию прошивки Panel
+            // byte(com) | hword(num) | word(crc32) | 512 bytes
+            AnswerPortionUpgradePanel,      // Ответ на запрос порции прошивки Panel
             Count
     } value;
     Command(E v) : value(v) {};

@@ -94,11 +94,13 @@ void DDrive::Handler::Processing(SimpleMessage *message)
         /* PortCPU                      */ E,
         /* CalibrationLoad              */ E,
         /* CalibrationSet               */ E,
+
         /* StartApplication             */ E,
-        /* RequestUpdate                */ E,
-        /* PortionUpdateDevice          */ E,
-        /* PortionUpgradePanel          */ E,
-        /* EraseSectors                 */ E
+        /* RequestUpgrade               */ E,
+        /* PortionUpgradeDevice         */ E,
+        /* AnswerUpgradePanel           */ E,
+        /* RequestPortionUpgradePanel   */ E,
+        /* AnswerPortionUpgradePanel    */ E
     };
 
     funcs[com]();
