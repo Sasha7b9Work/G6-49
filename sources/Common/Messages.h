@@ -64,8 +64,10 @@ public:
     void PutUINT(uint data);
     void PutINT(int data);
     
-    /// Передать сообщение получателю
+    // Передать сообщение получателю
     void Transmit();
+    // Передать сообщение получателю и дождаться, пока оно покинет передаточный буфер
+    void TransmitAndSend();
     /// Положить данные
     void PutData(const uint8 *data, int length);
 protected:

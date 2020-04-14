@@ -22,10 +22,25 @@ private:
 };
 
 
+
+struct HAL_CRC32
+{
+    static uint Calculate(const uint8 *address, uint size);
+
+    static void Init();
+};
+
+
 struct HAL_EEPROM
 {
+    // Адрес временного сектора, которым мы воспользуемся, чтобы записать прошивку Panel
+    static const uint ADDRESS_SECTOR_TEMP = 0x080c0000;
+
     // Стирает count секторов, начиная со стартового адреса основной прошивки
     static void EraseSectors(int count);
+
+    // Стирает временный сектор
+    static void EraseSectorTemp();
 
     static void WriteBuffer(uint address, uint8 *data, int size);
 };

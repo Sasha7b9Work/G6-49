@@ -104,3 +104,14 @@ void SimpleMessage::Transmit()
 {
     DInterface::AddMessageForTransmit(this);
 }
+
+
+void SimpleMessage::TransmitAndSend()
+{
+    Transmit();
+
+    while(DInterface::GetOutbox().Size())
+    {
+        DInterface::Update();
+    }
+}

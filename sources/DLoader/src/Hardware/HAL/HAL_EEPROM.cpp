@@ -12,6 +12,13 @@
                             FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
 
 
+#define ADDRESS_SECTOR_TEMP ((uint)0x080c0000) // Вспомогательный сектор. Сюда записывается прошивка Panel при процедуре обновления
+
+
+// Стирает count секторов, начиная с сектора start
+static void EraseSectors(uint start, uint count);
+
+
 void HAL_EEPROM::WriteBuffer(uint address, uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
@@ -30,6 +37,18 @@ void HAL_EEPROM::WriteBuffer(uint address, uint8 *data, int size)
 
 void HAL_EEPROM::EraseSectors(int count)
 {
+    ::EraseSectors(FLASH_SECTOR_5, static_cast<uint>(count));
+}
+
+
+void HAL_EEPROM::EraseSectorTemp()
+{
+    ::EraseSectors(FLASH_SECTOR_10, 1);
+}
+
+
+static void EraseSectors(uint start, uint count)
+{
     CLEAR_FLASH_FLAGS;
 
     HAL_FLASH_Unlock();
@@ -38,8 +57,8 @@ void HAL_EEPROM::EraseSectors(int count)
     {
         FLASH_TYPEERASE_SECTORS,
         0,
-        FLASH_SECTOR_5,
-        static_cast<uint>(count),
+        start,
+        count,
         FLASH_VOLTAGE_RANGE_3
     };
 

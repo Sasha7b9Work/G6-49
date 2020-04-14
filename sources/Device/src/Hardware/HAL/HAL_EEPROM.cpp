@@ -17,7 +17,7 @@
 #define SECTOR_7                    ((uint)0x08060000)          // 128k Основная прошивка 3
 #define SECTOR_8                    ((uint)0x08080000)          // 128k
 #define SECTOR_9                    ((uint)0x080a0000)          // 128k
-#define SECTOR_TEMP_10              ((uint)0x080c0000)          // 128k
+#define SECTOR_TEMP_10              ((uint)0x080c0000)          // 128k Использутся для произвольного сигнала с флешки и для обновления в DLoader
 #define SIZE_SECTOR_TEMP            (128 * 1024)
 #define SECTOR_SIGNAL_FPGA_11       ((uint)0x080e0000)          // Сигнал с флешки здесь записан
 #define SIZE_SECTOR_SIGNAL_FPGA     (128 * 1024)

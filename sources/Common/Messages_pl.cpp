@@ -18,3 +18,9 @@ Message::PortionUpgradeDevice::PortionUpgradeDevice(int portion) : SimpleMessage
 {
     PutINT(portion);
 }
+
+
+Message::AnswerUpgradePanel::AnswerUpgradePanel(int size) : SimpleMessage(5, Command::AnswerUpgradePanel)
+{
+    PutINT(size);
+}

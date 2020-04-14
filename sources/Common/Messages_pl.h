@@ -33,7 +33,7 @@ namespace Message
     class AnswerUpgradePanel : public SimpleMessage
     {
     public:
-        AnswerUpgradePanel(uint size);
+        AnswerUpgradePanel(int size);
     };
 
     // Этим сообщением PLoader запрашивает порцию обновления размером SIZE_CHUNK

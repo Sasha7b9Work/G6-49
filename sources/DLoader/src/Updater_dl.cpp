@@ -33,19 +33,25 @@
 
 static bool needUpgrade = false;
 
+// Установленное в true значение означает, что идёт процесс апгрейда panel
+volatile static bool upgradedPanel = false;
+
+// Размер прошивки Panel
+static int sizeFirmwarePanel = -1;
+
 // Пустой обработчик сообщений
 static void E(SimpleMessage *);
 
 // Обработчик запроса на обновление
 static void OnRequestUpgrade(SimpleMessage *);
 
+// Обработчик запроса на очередную порцию данных прошивки
+static void OnRequestPortionUpgradePanel(SimpleMessage *);
+
 // Послать сообщение о текущем состоянии обновления device
 static void SendMessageAboutDevicePortion(int size, int fullSize);
 
 static int CalculatePortion(int size, int fullSize);
-
-
-static void TransmitMessage(SimpleMessage *message);
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -102,7 +108,7 @@ void Updater::Handler(SimpleMessage *message)
         /* RequestUpgrade             */ OnRequestUpgrade,
         /* PortionUpgradeDevice       */ E,
         /* AnswerUpgradePanel         */ E,
-        /* RequestPortionUpgradePanel */ E,
+        /* RequestPortionUpgradePanel */ OnRequestPortionUpgradePanel,
         /* AnswerPortionUpgradePanel  */ E
     };
 
@@ -133,11 +139,11 @@ static void OnRequestUpgrade(SimpleMessage *)
 
 void Updater::UpgradeDevice()
 {
-    const int fullSize = DLDrive::File::Open(FILE_NAME_DEVICE);
+    sizeFirmwarePanel = DLDrive::File::Open(FILE_NAME_DEVICE);
 
-    if(fullSize != -1)
+    if(sizeFirmwarePanel != -1)
     {
-        int numSectors = fullSize / (128 * 1024) + 1;
+        int numSectors = sizeFirmwarePanel / (128 * 1024) + 1;
 
         HAL_EEPROM::EraseSectors(numSectors);
 
@@ -145,7 +151,7 @@ void Updater::UpgradeDevice()
 
         static uint8 buffer[SIZE_CHUNK];
 
-        int size = fullSize;
+        int size = sizeFirmwarePanel;
 
         while(size > 0)
         {
@@ -158,7 +164,7 @@ void Updater::UpgradeDevice()
 
             address += readed;
 
-            SendMessageAboutDevicePortion(size, fullSize);
+            SendMessageAboutDevicePortion(size, sizeFirmwarePanel);
         }
 
         DLDrive::File::Close();
@@ -172,25 +178,46 @@ void Updater::UpgradePanel()
 
     if(fullSize != -1)
     {
-        //int numSectors = fullSize / (128 * 1024) + 1;
+        Message::AnswerUpgradePanel(fullSize).TransmitAndSend();
 
-        static uint8 buffer[SIZE_CHUNK];
+        upgradedPanel = true;       // Устанавливаем признак обновления панели
 
-        int size = fullSize;
-
-        //int numPortion = 0;
-
-        while(size > 0)
+        while(upgradedPanel)        // И ждём, пока он не выйдет из этого состояния.
         {
-            int readed = (size < SIZE_CHUNK) ? size : SIZE_CHUNK;
-            size -= readed;
-
-            DLDrive::File::Read(readed, buffer);
-
-            //SendMessageAboutPanelPortion(numPortion++, buffer, size, fullSize);
         }
 
         DLDrive::File::Close();
+
+//        int numSectors = fullSize / (128 * 1024) + 1;
+//
+//        static uint8 buffer[SIZE_CHUNK];
+//
+//        int size = fullSize;
+//
+//        int numPortion = 0;
+//
+//        while(size > 0)
+//        {
+//            int readed = (size < SIZE_CHUNK) ? size : SIZE_CHUNK;
+//            size -= readed;
+//
+//            DLDrive::File::Read(readed, buffer);
+//
+//            SendMessageAboutPanelPortion(numPortion++, buffer, size, fullSize);
+//        }
+//
+//        DLDrive::File::Close();
+    }
+}
+
+
+static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
+{
+    uint num = msg->TakeUINT();
+
+    if(num == 0xFFFF)               // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
+    {
+        upgradedPanel = false;
     }
 }
 
@@ -205,9 +232,7 @@ static void SendMessageAboutDevicePortion(int size, int fullSize)
     {
         prevPortion = portion;
 
-        Message::PortionUpgradeDevice message(portion);
-
-        TransmitMessage(&message);
+        Message::PortionUpgradeDevice(portion).TransmitAndSend();
     }
 }
 
@@ -221,15 +246,4 @@ static int CalculatePortion(int size, int fullSize)
 bool Updater::NeedUpgrade()
 {
     return needUpgrade;
-}
-
-
-static void TransmitMessage(SimpleMessage *message)
-{
-    message->Transmit();
-
-    while(DInterface::GetOutbox().Size())
-    {
-        DInterface::Update();
-    }
 }

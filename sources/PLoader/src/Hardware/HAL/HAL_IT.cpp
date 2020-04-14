@@ -50,10 +50,10 @@ extern "C" {
         {
             file = file; //-V570
             line = line; //-V570
-            allocated = allocated;
-            destroed = destroed;
-            allocatedSize = allocatedSize;
-            destroedSize = destroedSize;
+            allocated = allocated; //-V570
+            destroed = destroed; //-V570
+            allocatedSize = allocatedSize; //-V570
+            destroedSize = destroedSize; //-V570
         }
     }
 
