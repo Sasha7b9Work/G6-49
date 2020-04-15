@@ -6,7 +6,8 @@
 #include "usbh_diskio.h"
 
 
-USBH_HandleTypeDef DDrive::hUSB_Host;
+static USBH_HandleTypeDef USB_host;
+void *DDrive::handle = &USB_host;
 
 static FATFS FatFS;
 
@@ -77,16 +78,16 @@ void DDrive::Init()
 
     if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK) //-V2001
     {
-        USBH_StatusTypeDef res = USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
-        res = USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
-        res = USBH_Start(&hUSB_Host);
+        USBH_StatusTypeDef res = USBH_Init(&USB_host, USBH_UserProcess, 0);
+        res = USBH_RegisterClass(&USB_host, USBH_MSC_CLASS);
+        res = USBH_Start(&USB_host);
     }
 }
 
 
 void DDrive::Update()
 {
-    USBH_Process(&hUSB_Host);
+    USBH_Process(&USB_host);
 
     if(state == State::NeedMount)
     {

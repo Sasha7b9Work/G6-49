@@ -1,5 +1,4 @@
 #pragma once
-#include <ff.h>
 #include "common/Messages.h"
 
 
@@ -9,7 +8,7 @@ struct DDrive
 
     static void Update();
 
-    static USBH_HandleTypeDef hUSB_Host;
+    static void *handle;
 
     struct Handler
     {

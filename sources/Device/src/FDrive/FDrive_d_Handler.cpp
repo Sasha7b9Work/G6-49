@@ -21,6 +21,7 @@ struct StructForReadDir
 
 
 static SimpleMessage *msg = nullptr;
+
 static void GetNumDirsAndFiles();
 static void RequestFile();
 static void RequestFileSize();
