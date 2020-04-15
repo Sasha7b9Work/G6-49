@@ -64,8 +64,6 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* FDrive_RequestDir          */ E,
         /* FDrive_RequestFile         */ E,
         /* Test                       */ E,
-        /* SetKoeffCalibration        */ E,
-        /* GetKoeffCalibration        */ E,
         /* FDrive_RequestFileSize     */ E,
         /* FDrive_RequestFileString   */ E,
         /* FDrive_LoadFromExtStorage  */ E,

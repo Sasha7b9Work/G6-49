@@ -53,8 +53,6 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestDir          */ FDrive::Handler::Processing,
         /* FDrive_RequestFile         */ FDrive::Handler::Processing,
         /* Test                       */ E,
-        /* SetKoeffCalibration        */ E,
-        /* GetKoeffCalibration        */ E,
         /* FDrive_RequestFileSize     */ FDrive::Handler::Processing,
         /* FDrive_RequestFileString   */ FDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage  */ FDrive::Handler::Processing,

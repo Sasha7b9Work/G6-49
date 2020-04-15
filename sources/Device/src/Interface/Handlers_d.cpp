@@ -106,8 +106,6 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* FDrive_RequestDir          */ DDrive::Handler::Processing,
         /* FDrive_RequestFile         */ DDrive::Handler::Processing,
         /* Test                       */ Test,
-        /* SetKoeffCalibration        */ E,
-        /* GetKoeffCalibration        */ E,
         /* FDrive_RequestFileSize     */ DDrive::Handler::Processing,
         /* FDrive_RequestFileString   */ DDrive::Handler::Processing,
         /* FDrive_LoadFromExtStorage  */ DDrive::Handler::Processing,

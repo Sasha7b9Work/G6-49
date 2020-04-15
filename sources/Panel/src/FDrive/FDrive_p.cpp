@@ -122,8 +122,6 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
         /* FDrive_RequestDir          */ E,
         /* FDrive_RequestFile         */ Handler::RequestFile,
         /* Test                       */ E,
-        /* SetKoeffCalibration        */ E,
-        /* GetKoeffCalibration        */ E,
         /* FDrive_RequestFileSize     */ Handler::RequestFileSize,
         /* FDrive_RequestFileString   */ E,
         /* FDrive_LoadFromExtStorage  */ Handler::LoadFromExtStorage,
