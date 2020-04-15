@@ -19,6 +19,8 @@ struct DLDrive
         // Открывает файл для чтения. Возвращает размер файла или -1, если файл не существует
         static int Open(const char *name);
 
+        static void Seek(int pos);
+
         static int Read(int size, uint8 *buffer);
 
         static void Close();

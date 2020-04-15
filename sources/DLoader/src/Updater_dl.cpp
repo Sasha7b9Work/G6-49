@@ -217,7 +217,7 @@ void Updater::UpgradePanel()
 
 static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
 {
-    uint num = msg->TakeUINT();
+    int16 num = msg->TakeINT16();
 
     if(num == 0xFFFF)               // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
     {
@@ -225,7 +225,22 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
     }
     else
     {
+        int address = num * SIZE_CHUNK;
 
+        int sector = address / (128 * 1024);
+
+        if (sector == sup.sector)
+        {
+
+        }
+        else
+        {
+            HAL_EEPROM::EraseSectorTemp();
+
+            DLDrive::File::Seek(sector * 128 * 1024);
+
+            for(int i = 0; i)
+        }
     }
 }
 
