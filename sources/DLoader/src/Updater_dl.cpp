@@ -33,11 +33,17 @@
 
 static bool needUpgrade = false;
 
-// Установленное в true значение означает, что идёт процесс апгрейда panel
-volatile static bool upgradedPanel = false;
+struct StructUpgradePanel
+{
+    StructUpgradePanel() : inProcess(false), sizeFirmware(-1) { }
 
-// Размер прошивки Panel
-static int sizeFirmwarePanel = -1;
+    bool inProcess;         // Установленное в true значение означает, что идёт процесс апгрейда panel
+    int sizeFirmware;       // Размер прошивки Panel
+};
+
+
+static StructUpgradePanel sup;
+
 
 // Пустой обработчик сообщений
 static void E(SimpleMessage *);
@@ -84,7 +90,6 @@ void Updater::Handler(SimpleMessage *message)
         /* SetStartMode               */ E,
         /* SetPeriod                  */ E,
         /* SetPolarity                */ E,
-        /* SetManipulationMode        */ E,
         /* LoadFromDDS                */ E,
         /* FreqMeasure                */ E,
         /* Log                        */ E,
@@ -139,11 +144,11 @@ static void OnRequestUpgrade(SimpleMessage *)
 
 void Updater::UpgradeDevice()
 {
-    sizeFirmwarePanel = DLDrive::File::Open(FILE_NAME_DEVICE);
+    const int fullSize = DLDrive::File::Open(FILE_NAME_DEVICE);
 
-    if(sizeFirmwarePanel != -1)
+    if(fullSize != -1)
     {
-        int numSectors = sizeFirmwarePanel / (128 * 1024) + 1;
+        int numSectors = fullSize / (128 * 1024) + 1;
 
         HAL_EEPROM::EraseSectors(numSectors);
 
@@ -151,7 +156,7 @@ void Updater::UpgradeDevice()
 
         static uint8 buffer[SIZE_CHUNK];
 
-        int size = sizeFirmwarePanel;
+        int size = fullSize;
 
         while(size > 0)
         {
@@ -164,7 +169,7 @@ void Updater::UpgradeDevice()
 
             address += readed;
 
-            SendMessageAboutDevicePortion(size, sizeFirmwarePanel);
+            SendMessageAboutDevicePortion(size, fullSize);
         }
 
         DLDrive::File::Close();
@@ -174,15 +179,15 @@ void Updater::UpgradeDevice()
 
 void Updater::UpgradePanel()
 {
-    const int fullSize = DLDrive::File::Open(FILE_NAME_PANEL);
+    sup.sizeFirmware = DLDrive::File::Open(FILE_NAME_PANEL);
 
-    if(fullSize != -1)
+    if(sup.sizeFirmware != -1)
     {
-        Message::AnswerUpgradePanel(fullSize).TransmitAndSend();
+        Message::AnswerUpgradePanel(sup.sizeFirmware).TransmitAndSend();
 
-        upgradedPanel = true;       // Устанавливаем признак обновления панели
+        sup.inProcess = true;       // Устанавливаем признак обновления панели
 
-        while(upgradedPanel)        // И ждём, пока он не выйдет из этого состояния.
+        while(sup.inProcess)        // И ждём, пока он не выйдет из этого состояния.
         {
         }
 
@@ -217,7 +222,11 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
 
     if(num == 0xFFFF)               // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
     {
-        upgradedPanel = false;
+        sup.inProcess = false;
+    }
+    else
+    {
+
     }
 }
 
