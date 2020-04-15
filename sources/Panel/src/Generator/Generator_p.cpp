@@ -150,7 +150,6 @@ void PGenerator::SetParameter(ParameterChoice *param)
     {
         Command::SetPolarity,
         Command::SetStartMode,
-        Command::deleted_SetManipulationMode,
         Command::SetManipulation
     };
 

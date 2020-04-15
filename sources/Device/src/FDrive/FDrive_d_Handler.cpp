@@ -75,7 +75,6 @@ void DDrive::Handler::Processing(SimpleMessage *message)
         /* SetStartMode                 */ E,
         /* SetPeriod                    */ E,
         /* SetPolarity                  */ E,
-        /* SetManipulationMode          */ E,
         /* LoadFromDDS                  */ E,
         /* FreqMeasure                  */ E,
         /* Log                          */ E,

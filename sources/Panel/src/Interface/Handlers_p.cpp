@@ -45,7 +45,6 @@ bool PHandlers::Processing(SimpleMessage *msg)
         /* SetStartMode               */ E,
         /* SetPeriod                  */ E,
         /* SetPolarity                */ E,
-        /* SetManipulationMode        */ E,
         /* LoadFromDDS                */ E,
         /* FreqMeasure                */ PHandlers::FreqMeasure,
         /* Log                        */ PHandlers::Log,

@@ -48,7 +48,6 @@ void DHandlers::Processing(SimpleMessage *msg)
         /* SetStartMode               */ E,
         /* SetPeriod                  */ E,
         /* SetPolarity                */ E,
-        /* SetManipulationMode        */ E,
         /* LoadFromDDS                */ E,
         /* FreqMeasure                */ E,
         /* Log                        */ E,
