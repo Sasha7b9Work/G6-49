@@ -42,7 +42,7 @@ struct StructUpgradePanel
 };
 
 
-static StructUpgradePanel sup;
+volatile static StructUpgradePanel sup;
 
 
 // Пустой обработчик сообщений
