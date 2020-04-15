@@ -11,7 +11,9 @@
 
 
 
-USBD_HandleTypeDef DVCP::handleUSBD;
+static USBD_HandleTypeDef handleUSBD;
+void *DVCP::handle = &handleUSBD;
+
 bool               DVCP::cableUSBisConnected = false;
 bool               DVCP::connectedToUSB = false;
 

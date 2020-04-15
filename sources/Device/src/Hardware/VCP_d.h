@@ -1,5 +1,4 @@
 #pragma once
-#include <usbd_def.h>
 
 
 class SimpleMessage;
@@ -20,7 +19,7 @@ struct DVCP
 
     static void SendByte(uint8 data);
 
-    static USBD_HandleTypeDef handleUSBD;
+    static void *handle;
 
     struct Handler
     {
