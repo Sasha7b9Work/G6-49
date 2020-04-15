@@ -30,28 +30,38 @@ add_compile_options(/wd4996)    # This function or variable may be unsafe
 add_compile_options(/wd5027)    # 'xxx': move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
-source_group(common                   FILES ../common/Command.h
-                                            ../common/Command.cpp
-                                            ../common/Common.h
-                                            ../common/Common.cpp
-                                            ../common/Messages.h
-                                            ../common/Messages.cpp
-                                            ../common/Messages_pl.h
-                                            ../common/Messages_pl.cpp
-                                            ../common/Transceiver.h
-                                            ../common/Transceiver_p.cpp)
-source_group(src                      REGULAR_EXPRESSION src/*)
-source_group(Display                  REGULAR_EXPRESSION src/Display/*)
-source_group(FDrive                   REGULAR_EXPRESSION src/FDrive/*)
-source_group(Generator                REGULAR_EXPRESSION src/Generator/*)
-source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\HAL            REGULAR_EXPRESSION src/Hardware/HAL/*)
-source_group(Keyboard                 REGULAR_EXPRESSION src/Keyboard/*)
-source_group(Interface                REGULAR_EXPRESSION src/Interface/*)
-source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*)
-source_group(libs\\HAL                REGULAR_EXPRESSION src/libs/HAL/*)
-source_group(Settings                 REGULAR_EXPRESSION src/Settings/*)
-source_group(Utils                    REGULAR_EXPRESSION src/Utils/*)
+
+set_source_files_properties(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
+                            PROPERTIES HEADER_FILE_ONLY TRUE)
+
+
+source_group(common             FILES ../common/Command.h
+                                      ../common/Command.cpp
+                                      ../common/Common.h
+                                      ../common/Common.cpp
+                                      ../common/Messages.h
+                                      ../common/Messages.cpp
+                                      ../common/Messages_pl.h
+                                      ../common/Messages_pl.cpp
+                                      ../common/Transceiver.h
+                                      ../common/Transceiver_p.cpp)
+source_group(src                REGULAR_EXPRESSION src/*)
+source_group(Display            REGULAR_EXPRESSION src/Display/*)
+source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
+source_group(Generator          REGULAR_EXPRESSION src/Generator/*)
+source_group(Hardware           REGULAR_EXPRESSION src/Hardware/*)
+source_group(Hardware\\HAL      REGULAR_EXPRESSION src/Hardware/HAL/*)
+source_group(Keyboard           REGULAR_EXPRESSION src/Keyboard/*)
+source_group(Interface          REGULAR_EXPRESSION src/Interface/*)
+source_group(libs\\CMSIS        REGULAR_EXPRESSION src/libs/CMSIS/*)
+source_group(libs\\HAL          REGULAR_EXPRESSION src/libs/HAL/*)
+source_group(Settings           REGULAR_EXPRESSION src/Settings/*)
+source_group(Utils              REGULAR_EXPRESSION src/Utils/*)
+source_group(ThirdParty\\HAL    FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h
+                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c)
 
 file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
@@ -75,6 +85,11 @@ file(GLOB SOURCES   ../common/Command.h
                     src/libs/HAL/*
                     src/Settings/*
                     src/Utils/*
+
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
                     )
 
 add_library(PLoader ${SOURCES})

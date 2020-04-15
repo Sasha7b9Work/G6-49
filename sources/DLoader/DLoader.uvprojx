@@ -582,6 +582,16 @@
               </FileOption>
             </File>
             <File>
+              <FileName>stm32f4xx_hal_crc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_hal_dma.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h</FilePath>
@@ -1077,6 +1087,16 @@
               <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
             </File>
             <File>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_CRC32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_CRC32.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_EEPROM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
@@ -1087,29 +1107,9 @@
               <FilePath>.\src\Hardware\HAL\HAL_HCD.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_SPI1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_IT.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HAL.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_TIM2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_TIM2.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_TIM3.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_PINS.h</FileName>
@@ -1117,14 +1117,19 @@
               <FilePath>.\src\Hardware\HAL\HAL_PINS.h</FilePath>
             </File>
             <File>
+              <FileName>HAL_PIO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PIO.h</FilePath>
+            </File>
+            <File>
               <FileName>HAL_PIO.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PIO.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_PIO.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_PIO.h</FilePath>
+              <FileName>HAL_SPI1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_SPI3.cpp</FileName>
@@ -1135,6 +1140,16 @@
               <FileName>HAL_TIM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_TIM3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
             </File>
           </Files>
         </Group>

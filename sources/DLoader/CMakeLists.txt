@@ -36,6 +36,7 @@ add_compile_options(/wd5045)
 
 
 set_source_files_properties(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 
@@ -62,7 +63,9 @@ source_group(libs\\USBH         REGULAR_EXPRESSION src/libs/USBH/*)
 source_group(Settings           REGULAR_EXPRESSION src/Settings/*)
 source_group(Utils              REGULAR_EXPRESSION src/Utils/*)
 source_group(ThirdParty\\HAL    FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
-                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c)
+                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h
+                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c)
 
 file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
@@ -89,6 +92,8 @@ file(GLOB SOURCES   ../common/Command.h
                     
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
                     )
 
 list(REMOVE_ITEM SOURCES "src/libs/CMSIS/system_stm32f4xx.c")
