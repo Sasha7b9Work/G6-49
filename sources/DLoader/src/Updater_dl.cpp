@@ -35,10 +35,11 @@ static bool needUpgrade = false;
 
 struct StructUpgradePanel
 {
-    StructUpgradePanel() : inProcess(false), sizeFirmware(-1) { }
+    StructUpgradePanel() : inProcess(false), sizeFirmware(-1), sector(-1) { }
 
-    bool inProcess;         // Установленное в true значение означает, что идёт процесс апгрейда panel
-    int sizeFirmware;       // Размер прошивки Panel
+    bool inProcess;     // Установленное в true значение означает, что идёт процесс апгрейда panel
+    int sizeFirmware;   // Размер прошивки Panel
+    int sector;         // Этот сектор прошивки Panel сейчас записан в сектор EEPROM::TEMP. -1, если сектор не записан
 };
 
 
