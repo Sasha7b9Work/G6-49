@@ -12,21 +12,35 @@
 #include <cmath>
 
 
-SimpleMessage *DDrive::Handler::msg = nullptr;
-
-
-static void E()
-{
-
-}
-
-
 struct StructForReadDir
 {
     char nameDir[_MAX_LFN + 1];
     FILINFO fno;
     DIR dir;
 };
+
+
+static SimpleMessage *msg = nullptr;
+static void GetNumDirsAndFiles();
+static void RequestFile();
+static void RequestFileSize();
+// Загрузить сигнал с флешки
+static void LoadFromExtStorage();
+static void GetPictureDDS();
+// Трансформировать точки в пригодный для записи в ПЛИС вид
+static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
+/// Заполнить массив picture данными для отрисовки сигнала на экране
+static void FillPicture(uint8 *picture, uint size, float values[4096]);
+static void Normalize(float d[4096]);
+static void FindMinMax(const float d[4096], float *_min, float *_max);
+static float FindScale(float min, float max);
+static void ToScale(float d[4096], float scale);
+
+
+static void E()
+{
+
+}
 
 
 struct FileSystem
@@ -78,15 +92,15 @@ void DDrive::Handler::Processing(SimpleMessage *message)
         /* LoadFromDDS                  */ E,
         /* FreqMeasure                  */ E,
         /* Log                          */ E,
-        /* FDrive_NumDirsAndFiles       */ Handler::GetNumDirsAndFiles,
+        /* FDrive_NumDirsAndFiles       */ GetNumDirsAndFiles,
         /* FDrive_Mount                 */ E,
         /* FDrive_RequestDir            */ E,
-        /* FDrive_RequestFile           */ Handler::RequestFile,
+        /* FDrive_RequestFile           */ RequestFile,
         /* Test                         */ E,
-        /* FDrive_RequestFileSize       */ Handler::RequestFileSize,
+        /* FDrive_RequestFileSize       */ RequestFileSize,
         /* FDrive_RequestFileString     */ E,
-        /* FDrive_LoadFromExtStorage    */ Handler::LoadFromExtStorage,
-        /* FDrive_GetPictureDDS         */ Handler::GetPictureDDS,
+        /* FDrive_LoadFromExtStorage    */ LoadFromExtStorage,
+        /* FDrive_GetPictureDDS         */ GetPictureDDS,
         /* SCPI_RecvData                */ E,
         /* PortCPU                      */ E,
         /* CalibrationLoad              */ E,
@@ -104,7 +118,7 @@ void DDrive::Handler::Processing(SimpleMessage *message)
 }
 
 
-void DDrive::Handler::GetNumDirsAndFiles()
+static void GetNumDirsAndFiles()
 {
     uint numDirs = 0;
     uint numFiles = 0;
@@ -115,7 +129,7 @@ void DDrive::Handler::GetNumDirsAndFiles()
 }
 
 
-void DDrive::Handler::RequestFile()
+static void RequestFile()
 {
     char name[255];
 
@@ -128,7 +142,7 @@ void DDrive::Handler::RequestFile()
 }
 
 
-void DDrive::Handler::RequestFileSize()
+static void RequestFileSize()
 {
     char name[255];
     int numFile = static_cast<int>(msg->TakeUINT8());
@@ -143,7 +157,7 @@ void DDrive::Handler::RequestFileSize()
 }
 
 
-void DDrive::Handler::LoadFromExtStorage()
+static void LoadFromExtStorage()
 {
     char fullName[255];
     Chan ch(msg->TakeUINT8());
@@ -163,7 +177,7 @@ void DDrive::Handler::LoadFromExtStorage()
 }
 
 
-void DDrive::Handler::GetPictureDDS()
+static void GetPictureDDS()
 {
     const uint SIZE = 240;
     uint8 data[SIZE];
@@ -346,7 +360,7 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
 }
 
 
-void DDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
+static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
 {
     Normalize(d);
 
@@ -370,7 +384,7 @@ void DDrive::TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]
 }
 
 
-void DDrive::Normalize(float d[4096])
+static void Normalize(float d[4096])
 {
     float min = 0.0F;
     float max = 0.0F;
@@ -383,7 +397,7 @@ void DDrive::Normalize(float d[4096])
 }
 
 
-void DDrive::FindMinMax(const float d[4096], float *_min, float *_max)
+static void FindMinMax(const float d[4096], float *_min, float *_max)
 {
     float min = 0.0F;
     float max = 0.0F;
@@ -405,7 +419,7 @@ void DDrive::FindMinMax(const float d[4096], float *_min, float *_max)
 }
 
 
-float DDrive::FindScale(float min, float max)
+static float FindScale(float min, float max)
 {
     max = std::fabsf(max);
 
@@ -418,7 +432,7 @@ float DDrive::FindScale(float min, float max)
 }
 
 
-void DDrive::ToScale(float d[4096], float scale)
+static void ToScale(float d[4096], float scale)
 {
     for (int i = 0; i < 4096; i++)
     {
@@ -427,7 +441,7 @@ void DDrive::ToScale(float d[4096], float scale)
 }
 
 
-void DDrive::FillPicture(uint8 *picture, uint size, float values[4096])
+static void FillPicture(uint8 *picture, uint size, float values[4096])
 {
     Normalize(values);
 
