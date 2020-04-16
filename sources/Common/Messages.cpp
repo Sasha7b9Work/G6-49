@@ -50,7 +50,7 @@ void SimpleMessage::Create(int size, uint8 v0)
 {
     if (AllocateMemory(size))
     {
-        PutByte(v0);
+        PutUINT8(v0);
     }
 }
 
@@ -79,7 +79,7 @@ bool SimpleMessage::CreateFromMessage(const SimpleMessage *message)
 }
 
 
-void SimpleMessage::PutByte(uint8 data)
+void SimpleMessage::PutUINT8(uint8 data)
 {
      buffer[used] = data;
      used += sizeof(data);
@@ -306,43 +306,43 @@ Message::RequestData::RequestData() : SimpleMessage(1, Command::RequestData)
 
 Message::EnableChannel::EnableChannel(uint8 ch, uint8 enable) : SimpleMessage(3, Command::EnableChannel)
 {
-    PutByte(ch);
-    PutByte(enable);
+    PutUINT8(ch);
+    PutUINT8(enable);
 }
 
 
 Message::RegCPU::RegCPU(uint8 port, uint8 pin, uint8 state) : SimpleMessage(4, Command::PortCPU)
 {
-    PutByte(port);
-    PutByte(pin);
-    PutByte(state);
+    PutUINT8(port);
+    PutUINT8(pin);
+    PutUINT8(state);
 }
 
 
 Message::Set::FormWave::FormWave(uint8 ch, uint8 form) : SimpleMessage(3, Command::SetFormWave)
 {
-    PutByte(ch);
-    PutByte(form);
+    PutUINT8(ch);
+    PutUINT8(form);
 }
 
 
 Message::Set::Amplitude::Amplitude(uint8 ch, uint64 amplitude) : SimpleMessage(10, Command::SetAmplitude)
 {
-    PutByte(ch);
+    PutUINT8(ch);
     PutDoubleWord(amplitude);
 }
 
 
 Message::Set::Offset::Offset(uint8 ch, uint64 offset) : SimpleMessage(10, Command::SetOffset)
 {
-    PutByte(ch);
+    PutUINT8(ch);
     PutDoubleWord(offset);
 }
 
 
 Message::FDrive::Mount::Mount(uint8 mount) : SimpleMessage(2, Command::FDrive_Mount)
 {
-    PutByte(mount);
+    PutUINT8(mount);
 }
 
 
@@ -357,7 +357,7 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessa
 {   //          name | string                   | завершающий ноль
     int size = 1 +    static_cast<int>(std::strlen(directory)) + 1;
     AllocateMemory(size);
-    PutByte(Command::FDrive_NumDirsAndFiles);
+    PutUINT8(Command::FDrive_NumDirsAndFiles);
     std::strcpy(reinterpret_cast<char *>(buffer + 1), directory);
 }
 
@@ -367,8 +367,8 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
     //          v0 | v1 | string |              завершающий_ноль
     int size = 1 +  1 +  static_cast<int>(std::strlen(name)) + 1;
     AllocateMemory(size);
-    PutByte(Command::FDrive_RequestFile);
-    PutByte(numFile);
+    PutUINT8(Command::FDrive_RequestFile);
+    PutUINT8(numFile);
     std::strcpy(reinterpret_cast<char *>(buffer + 2), name);
 }
 
@@ -378,15 +378,15 @@ Message::FDrive::FileString::FileString(uint numString, char *nameFile) : Simple
     //          commmand  numString  nameFile                завершающий_ноль
     int size = 1 +       1 +        static_cast<int>(std::strlen(nameFile)) + 1;
     AllocateMemory(size);
-    PutByte(Command::FDrive_RequestFileString);
-    PutByte(static_cast<uint8>(numString));
+    PutUINT8(Command::FDrive_RequestFileString);
+    PutUINT8(static_cast<uint8>(numString));
     std::strcpy(reinterpret_cast<char *>(buffer + 2), nameFile);
 }
 
 
 Message::FDrive::FileSize::FileSize(uint8 numFile, uint size) : SimpleMessage(6, Command::FDrive_RequestFileSize)
 {
-    PutByte(numFile);
+    PutUINT8(numFile);
     PutUINT(size);
 }
 
@@ -397,7 +397,7 @@ Message::Log::Log(char *string) : SimpleMessage()
     int size = 1 + static_cast<int>(std::strlen(string)) + 1;
 
     AllocateMemory(size);
-    PutByte(Command::Log);
+    PutUINT8(Command::Log);
 
     std::strcpy(reinterpret_cast<char *>(buffer + 1), string);
 }
@@ -405,35 +405,35 @@ Message::Log::Log(char *string) : SimpleMessage()
 
 Message::StartMode::StartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::SetStartMode)
 {
-    PutByte(ch);
-    PutByte(mode);
+    PutUINT8(ch);
+    PutUINT8(mode);
 }
 
 
 Message::WriteRegister::WriteRegister(uint8 reg, uint64 data) : SimpleMessage(10, Command::WriteRegister)
 {
-    PutByte(reg);
+    PutUINT8(reg);
     PutDoubleWord(data);
 }
 
 
 Message::DebugMode::DebugMode(uint8 mode) : SimpleMessage(2, Command::ModeDebug)
 {
-    PutByte(mode);
+    PutUINT8(mode);
 }
 
 
 Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
 {
-    PutByte(ch);
+    PutUINT8(ch);
     PutDoubleWord(value);
 }
 
 
 Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint8 value) : SimpleMessage(3, (uint8)param)
 {
-    PutByte(ch);
-    PutByte(value);
+    PutUINT8(ch);
+    PutUINT8(value);
 }
 
 
@@ -442,23 +442,23 @@ Message::FDrive::LoadFromExtStorage::LoadFromExtStorage(uint8 ch, uint8 numFile,
     //          com ch  numFile directory                 завершающий_ноль
     int size = 1 + 1 + 1 +      static_cast<int>(std::strlen(directory)) + 1;
     AllocateMemory(size);
-    PutByte(Command::FDrive_LoadFromExtStorage);
-    PutByte(ch);
-    PutByte(numFile);
+    PutUINT8(Command::FDrive_LoadFromExtStorage);
+    PutUINT8(ch);
+    PutUINT8(numFile);
     std::strcpy(reinterpret_cast<char *>(&buffer[3]), directory);
 }
 
 
 Message::FDrive::PictureDDS::PictureDDS(uint8 numFile, uint8 *data) : SimpleMessage(242, Command::FDrive_GetPictureDDS)
 {
-    PutByte(numFile);
+    PutUINT8(numFile);
     PutData(data, 240);
 }
 
 
 Message::FDrive::PictureDDS::PictureDDS(uint8 numFile) : SimpleMessage(2, Command::FDrive_GetPictureDDS)
 {
-    PutByte(numFile);
+    PutUINT8(numFile);
 }
 
 Message::SCPI::Data::Data(uint8 *data, int length) : SimpleMessage()
@@ -467,7 +467,7 @@ Message::SCPI::Data::Data(uint8 *data, int length) : SimpleMessage()
     int size = 1 +     4 +              length;
 
     AllocateMemory(size);
-    PutByte(Command::SCPI_Data);
+    PutUINT8(Command::SCPI_Data);
     PutINT(length);
     PutData(data, length);
 }

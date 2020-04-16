@@ -75,7 +75,7 @@ public:
     void PutData(const uint8 *data, int length);
 protected:
     /// Положить байт
-    void PutByte(uint8 data);
+    void PutUINT8(uint8 data);
 
     void PutDoubleWord(uint64 data);
 
