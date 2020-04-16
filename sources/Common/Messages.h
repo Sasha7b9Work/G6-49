@@ -31,26 +31,12 @@ public:
     bool CreateAllocate(const uint8 *buffer, int size);
     /// Выделить необходимое количество памяти
     bool AllocateMemory(int size);
-    /// Взять байт
-    uint8 TakeUINT8();
-    /// Взять полуслово
-    uint16 TakeUINT16();
-    int16 TakeINT16();
-    /// Взять слово
-    uint TakeUINT();
-    int TakeINT();
-
-    uint64 TakeUINT64();
-
-    float TakeFLOAT();
     /// Взять оставшиеся данные. После вызова этой функции забирать из сообщения больше нечего
     void TakeRemainigData(uint8 *data);
     /// Возвращает указатель на оставшиеся данные. Данные можно забрать потом
     uint8 *RemainingData() const;
     /// Освободить память
     void FreeMemory();
-    /// Возвращает указатель на данные
-    uint8 *Data(int pos = 0);
     /// Возвращает размер данных
     int Size() const;
     /// Возвращает true, если это null-пакет (память не выделена)
@@ -60,28 +46,31 @@ public:
     /// Возвращает указатель на pos-й элемент. Удобно для копирования строк
     char *String(int pos);
 
-    /// Положить слово
-    void PutUINT(uint data);
-    void PutINT(int data);
-
-    /// Положить половину слова
+    void PutUINT8(uint8 data);
     void PutINT16(int16 data);
-  
+    void PutUINT16(uint16 data);
+    void PutINT(int data);
+    void PutUINT(uint data);
+    void PutUINT64(uint64 data);
+    void PutFLOAT(float data);
+    void PutData(const uint8 *data, int length);
+
+    uint8  TakeUINT8();
+    int16  TakeINT16();
+    uint16 TakeUINT16();
+    int    TakeINT();
+    uint   TakeUINT();
+    uint64 TakeUINT64();
+    float  TakeFLOAT();
+    uint8 *TakeData(int pos = 0);
+
     // Передать сообщение получателю
     void Transmit();
     // Передать сообщение получателю и дождаться, пока оно покинет передаточный буфер
     void TransmitAndSend();
-    /// Положить данные
-    void PutData(const uint8 *data, int length);
+
 protected:
-    /// Положить байт
-    void PutUINT8(uint8 data);
 
-    void PutUINT64(uint64 data);
-
-    void PutUINT16(uint16 data);
-    /// Положить float
-    void PutFloat(float data);
     /// Размер выделенной памяти
     int allocated;
     /// Адрес начала данных, либо 0, если память не выделена

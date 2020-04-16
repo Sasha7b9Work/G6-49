@@ -47,23 +47,23 @@ void DInterface::Update()
 
         if (first.AllocateMemory(size))
         {
-            if (HAL_SPI1::Receive(first.Data(), first.Size(), timeout))                            // Принимаем данные
+            if (HAL_SPI1::Receive(first.TakeData(), first.Size(), timeout))                            // Принимаем данные
             {
                 if (HAL_SPI1::Transmit(&size, 4, timeout))                                         // Передаём его размер
                 {
-                    if (HAL_SPI1::Transmit(first.Data(), first.Size(), timeout))                   // И данные
+                    if (HAL_SPI1::Transmit(first.TakeData(), first.Size(), timeout))                   // И данные
                     {
                         if (HAL_SPI1::Receive(&size, 4, 10))
                         {
                             if (second.AllocateMemory(size))                                    // Второй раз сообщение будем принимать в этот буфер
                             {
-                                if (HAL_SPI1::Receive(second.Data(), second.Size(), timeout))      // Что и делаем
+                                if (HAL_SPI1::Receive(second.TakeData(), second.Size(), timeout))      // Что и делаем
                                 {
                                     size = second.Size();
 
                                     if (HAL_SPI1::Transmit(&size, 4, timeout))
                                     {
-                                        if (HAL_SPI1::Transmit(second.Data(), second.Size(), timeout))
+                                        if (HAL_SPI1::Transmit(second.TakeData(), second.Size(), timeout))
                                         {
                                             if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
                                             {

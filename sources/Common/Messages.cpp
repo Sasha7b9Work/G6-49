@@ -129,7 +129,7 @@ void SimpleMessage::PutData(const uint8 *data, int length)
 }
 
 
-void SimpleMessage::PutFloat(float data)
+void SimpleMessage::PutFLOAT(float data)
 {
     BitSet32 bs(data);
     bs.WriteToBuffer(buffer + used);
@@ -258,7 +258,7 @@ void SimpleMessage::FreeMemory()
 }
 
 
-uint8 *SimpleMessage::Data(int pos)
+uint8 *SimpleMessage::TakeData(int pos)
 {
     return buffer + pos;
 }
