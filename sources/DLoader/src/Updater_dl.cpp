@@ -60,6 +60,9 @@ static void SendMessageAboutDevicePortion(int size, int fullSize);
 
 static int CalculatePortion(int size, int fullSize);
 
+// Переписать с флешки сектор sector в EEPROM
+static void WriteSectorToEEPROM(int sector);
+
 
 void Updater::Handler(SimpleMessage *message)
 {
@@ -151,7 +154,7 @@ void Updater::UpgradeDevice()
 
         HAL_EEPROM::EraseSectors(numSectors);
 
-        uint address = MAIN_PROGRAM_START_ADDRESS;
+        int address = MAIN_PROGRAM_START_ADDRESS;
 
         static uint8 buffer[SIZE_CHUNK];
 
@@ -159,16 +162,14 @@ void Updater::UpgradeDevice()
 
         while(size > 0)
         {
-            int readed = (size < SIZE_CHUNK) ? size : SIZE_CHUNK;
-            size -= readed;
-
-            DLDrive::File::Read(readed, buffer);
+            int readed = DLDrive::File::Read(SIZE_CHUNK, buffer);
 
             HAL_EEPROM::WriteBuffer(address, buffer, readed);
 
-            address += readed;
-
             SendMessageAboutDevicePortion(size, fullSize);
+
+            size -= readed;
+            address += readed;
         }
 
         DLDrive::File::Close();
@@ -188,29 +189,10 @@ void Updater::UpgradePanel()
 
         while(sup.inProcess)        // И ждём, пока он не выйдет из этого состояния.
         {
+            DInterface::Update();
         }
 
         DLDrive::File::Close();
-
-//        int numSectors = fullSize / (128 * 1024) + 1;
-//
-//        static uint8 buffer[SIZE_CHUNK];
-//
-//        int size = fullSize;
-//
-//        int numPortion = 0;
-//
-//        while(size > 0)
-//        {
-//            int readed = (size < SIZE_CHUNK) ? size : SIZE_CHUNK;
-//            size -= readed;
-//
-//            DLDrive::File::Read(readed, buffer);
-//
-//            SendMessageAboutPanelPortion(numPortion++, buffer, size, fullSize);
-//        }
-//
-//        DLDrive::File::Close();
     }
 }
 
@@ -219,28 +201,51 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
 {
     int16 num = msg->TakeINT16();
 
-    if(num == 0xFFFF)               // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
+    if(num == 0xFFFF)                           // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
     {
         sup.inProcess = false;
     }
     else
     {
-        int address = num * SIZE_CHUNK;
+        int address = num * SIZE_CHUNK;         // Адрес относительно начала прошивки
 
-        int sector = address / (128 * 1024);
+        int sector = address / (128 * 1024);    // Порядковый номер сектора, в котором находится запрашиваемый "чанк"
 
-        if (sector == sup.sector)
+        if (sector != sup.sector)
         {
+            WriteSectorToEEPROM(sector);        // Переписываем сектор с флешки в EEPROM, если это необходимо
 
+            sup.sector = sector;
         }
-        else
-        {
-            HAL_EEPROM::EraseSectorTemp();
 
-            DLDrive::File::Seek(sector * 128 * 1024);
+        address = address - sector * (128 * 1024) + HAL_EEPROM::ADDRESS_SECTOR_TEMP;    // Теперь это адрес нашего чанка относительно начала сектора
 
-            for(int i = 0; i)
-        }
+        Message::AnswerPortionUpgradePanel(num, reinterpret_cast<uint8 *>(address)).TransmitAndSend();
+    }
+}
+
+
+static void WriteSectorToEEPROM(int sector)
+{
+    HAL_EEPROM::EraseSectorTemp();
+
+    static const int SIZE_STRING = 1024;
+
+    DLDrive::File::Seek(sector * 128 * SIZE_STRING);        // Устанавливаем указатель в файле на начало сектора
+
+    uint8 buffer[SIZE_STRING];                              // Сюда будем считывать файл сюда
+
+    int readed = SIZE_STRING;                               // Здесь будет храниться количество реально считанных байт
+
+    int address = HAL_EEPROM::ADDRESS_SECTOR_TEMP;          // С этого адреса будем сохранять сектор в EEPROM
+
+    for (int i = 0; (i < 128) && (readed == SIZE_STRING); i++)
+    {
+        readed = DLDrive::File::Read(SIZE_STRING, buffer);  // Читаем очередную порцию данных
+
+        HAL_EEPROM::WriteBuffer(address, buffer, readed);   // Записываем её в EEPROM
+
+        address += SIZE_STRING;                             // Следующую порцию данных будем записывать по этому адресу
     }
 }
 

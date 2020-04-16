@@ -45,14 +45,16 @@ static void StartWithAutoUpgrade()
 {
     uint start = HAL_TIM::TimeMS();
 
-    while(HAL_TIM::TimeMS() - start < 5000)
+    bool upgraded = false;
+
+    while((HAL_TIM::TimeMS() - start < 5000) && (!upgraded))
     {
         DLDrive::Update();
         if(DLDrive::IsConnected())
         {
             Updater::UpgradeDevice();
             Updater::UpgradePanel();
-            break;
+            upgraded = true;
         }
     }
 }
@@ -67,7 +69,7 @@ static void StartWithManualUpgrade()
         DInterface::Update();               // Сообщения от панели о запуске обновления
         if(Updater::NeedUpgrade())          // Если дождались
         {
-            StartWithoutUpgrade();
+            StartWithAutoUpgrade();
             break;
         }
     }

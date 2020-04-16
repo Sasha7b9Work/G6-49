@@ -94,7 +94,7 @@ void SimpleMessage::PutDoubleWord(uint64 data)
 }
 
 
-void SimpleMessage::PutHalfWord(int16 data)
+void SimpleMessage::PutINT16(int16 data)
 {
     PutHalfWord(static_cast<uint16>(data));
 }

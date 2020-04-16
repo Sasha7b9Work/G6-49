@@ -16,7 +16,7 @@ Message::CalibrateSet::CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 p
     PutByte(signal);
     PutByte(range);
     PutByte(parameter);
-    PutHalfWord(*setCal.GetK(ch, signal, range, parameter));
+    PutINT16(*setCal.GetK(ch, signal, range, parameter));
 }
 
 
@@ -26,5 +26,5 @@ Message::CalibrateLoad::CalibrateLoad(uint8 ch, uint8 signal, uint8 range, uint8
     PutByte(signal);
     PutByte(range);
     PutByte(parameter);
-    PutHalfWord(*setCal.GetK(ch, signal, range, parameter));
+    PutINT16(*setCal.GetK(ch, signal, range, parameter));
 }

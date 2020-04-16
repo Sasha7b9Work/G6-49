@@ -47,6 +47,6 @@ namespace Message
     class AnswerPortionUpgradePanel : public SimpleMessage
     {
     public:
-        AnswerPortionUpgradePanel(uint16 num, uint8 data[SIZE_CHUNK]);
+        AnswerPortionUpgradePanel(int16 num, uint8 data[SIZE_CHUNK]);
     };
 }

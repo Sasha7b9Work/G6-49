@@ -19,7 +19,7 @@
 static void EraseSectors(uint start, uint count);
 
 
-void HAL_EEPROM::WriteBuffer(uint address, uint8 *data, int size)
+void HAL_EEPROM::WriteBuffer(int address, uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
 
@@ -27,7 +27,7 @@ void HAL_EEPROM::WriteBuffer(uint address, uint8 *data, int size)
 
     for(int i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, static_cast<uint>(address), data[i]);
         ++address;
     }
 

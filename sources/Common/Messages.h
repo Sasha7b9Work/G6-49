@@ -63,7 +63,10 @@ public:
     /// Положить слово
     void PutUINT(uint data);
     void PutINT(int data);
-    
+
+    /// Положить половину слова
+    void PutINT16(int16 data);
+  
     // Передать сообщение получателю
     void Transmit();
     // Передать сообщение получателю и дождаться, пока оно покинет передаточный буфер
@@ -73,8 +76,6 @@ public:
 protected:
     /// Положить байт
     void PutByte(uint8 data);
-    /// Положить половину слова
-    void PutHalfWord(int16 data);
 
     void PutDoubleWord(uint64 data);
 
