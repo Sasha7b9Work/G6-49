@@ -86,7 +86,7 @@ void SimpleMessage::PutUINT8(uint8 data)
 }
 
 
-void SimpleMessage::PutDoubleWord(uint64 data)
+void SimpleMessage::PutUINT64(uint64 data)
 {
     BitSet64 bs(data);
     PutUINT(bs.word0);
@@ -96,11 +96,11 @@ void SimpleMessage::PutDoubleWord(uint64 data)
 
 void SimpleMessage::PutINT16(int16 data)
 {
-    PutHalfWord(static_cast<uint16>(data));
+    PutUINT16(static_cast<uint16>(data));
 }
 
 
-void SimpleMessage::PutHalfWord(uint16 data)
+void SimpleMessage::PutUINT16(uint16 data)
 {
     BitSet16 bs(data);
     bs.WriteToBuffer(buffer + used);
@@ -329,14 +329,14 @@ Message::Set::FormWave::FormWave(uint8 ch, uint8 form) : SimpleMessage(3, Comman
 Message::Set::Amplitude::Amplitude(uint8 ch, uint64 amplitude) : SimpleMessage(10, Command::SetAmplitude)
 {
     PutUINT8(ch);
-    PutDoubleWord(amplitude);
+    PutUINT64(amplitude);
 }
 
 
 Message::Set::Offset::Offset(uint8 ch, uint64 offset) : SimpleMessage(10, Command::SetOffset)
 {
     PutUINT8(ch);
-    PutDoubleWord(offset);
+    PutUINT64(offset);
 }
 
 
@@ -413,7 +413,7 @@ Message::StartMode::StartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::
 Message::WriteRegister::WriteRegister(uint8 reg, uint64 data) : SimpleMessage(10, Command::WriteRegister)
 {
     PutUINT8(reg);
-    PutDoubleWord(data);
+    PutUINT64(data);
 }
 
 
@@ -426,7 +426,7 @@ Message::DebugMode::DebugMode(uint8 mode) : SimpleMessage(2, Command::ModeDebug)
 Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
 {
     PutUINT8(ch);
-    PutDoubleWord(value);
+    PutUINT64(value);
 }
 
 

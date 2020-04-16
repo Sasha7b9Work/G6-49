@@ -77,9 +77,9 @@ protected:
     /// Положить байт
     void PutUINT8(uint8 data);
 
-    void PutDoubleWord(uint64 data);
+    void PutUINT64(uint64 data);
 
-    void PutHalfWord(uint16 data);
+    void PutUINT16(uint16 data);
     /// Положить float
     void PutFloat(float data);
     /// Размер выделенной памяти
