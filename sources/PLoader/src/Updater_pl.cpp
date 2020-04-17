@@ -15,10 +15,11 @@ struct StructUpgradeDevice
 
 struct StructUpgradePanel
 {
-    StructUpgradePanel() : sizeFirmware(-1), numChunk(-1), portionUpgrade(-1.0F) { }
-    int sizeFirmware;               // Общий размер прошивки
-    int numChunk;                   // Текущий обрабатываемый чанк
-    float portionUpgrade;
+    StructUpgradePanel() : sizeFirmware(-1), numChunk(-1), needRequest(false) { }
+    int sizeFirmware;                   // Общий размер прошивки
+    int16 numChunk;                     // Текущий обрабатываемый чанк
+    bool needRequest;                   // Если true, то нужно посылать запрос на numChunk "чанк"
+    float PortionUpgrade();             // Возвращает процент записанного объёма прошивки
 };
 
 
@@ -29,6 +30,9 @@ static void Draw();
 
 static void DrawProgress(int y, float portion);
 
+// Записать новвый чанк в EEPROM
+static void WriteNewChunk(int16 num, uint crc, uint8 chunk[SIZE_CHUNK]);
+
 
 void Updater::Update()
 {
@@ -37,6 +41,11 @@ void Updater::Update()
     Draw();
 
     Painter::EndScene();
+
+    if(sup.needRequest)
+    {
+        Message::RequestPortionUpgradePanel(sup.numChunk).Transmit();
+    }
 }
 
 
@@ -50,9 +59,9 @@ static void Draw()
         DrawProgress(yDevice, sud.portionUpgrade);
     }
 
-    if(!(sup.portionUpgrade < 0.0F))
+    if(!(sup.PortionUpgrade() < 0.0F))
     {
-        DrawProgress(yPanel, sup.portionUpgrade);
+        DrawProgress(yPanel, sup.PortionUpgrade());
     }
 }
 
@@ -83,11 +92,33 @@ bool Updater::Handler(SimpleMessage *message)
 
     case Command::AnswerUpgradePanel:
         sup.sizeFirmware = message->TakeINT();
+        sup.numChunk = 0;
+        sup.needRequest = true;
         break;
 
     case Command::AnswerPortionUpgradePanel:
+        int16 num = message->TakeINT16();
+        uint crc = message->TakeUINT();
+        WriteNewChunk(num, crc, message->TakeData(1 + sizeof(int16) + sizeof(uint)));
         break;
     }
 
     return true;
+}
+
+
+float StructUpgradePanel::PortionUpgrade()
+{
+    if(numChunk == -1)
+    {
+        return -1.0F;
+    }
+
+    return (numChunk * SIZE_CHUNK) / sizeFirmware * 100.0F;
+}
+
+
+static void WriteNewChunk(int16 num, uint crc, uint8 chunk[SIZE_CHUNK])
+{
+
 }

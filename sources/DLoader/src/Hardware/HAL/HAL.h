@@ -25,9 +25,9 @@ private:
 
 struct HAL_CRC32
 {
-    static uint Calculate(const uint8 *address, uint size);
-
     static void Init();
+
+    static uint CalculateALIGN32(void *address, int size);
 };
 
 

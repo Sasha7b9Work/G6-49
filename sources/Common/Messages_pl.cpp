@@ -27,11 +27,18 @@ Message::AnswerUpgradePanel::AnswerUpgradePanel(int size) : SimpleMessage(5, Com
 }
 
 
-Message::AnswerPortionUpgradePanel::AnswerPortionUpgradePanel(int16 num, uint8 data[SIZE_CHUNK]) : SimpleMessage(1 + sizeof(int16) + sizeof(uint) + SIZE_CHUNK, Command::AnswerPortionUpgradePanel)
+Message::RequestPortionUpgradePanel::RequestPortionUpgradePanel(int16 num) : SimpleMessage(3, Command::RequestPortionUpgradePanel)
+{
+    PutINT16(num);
+}
+
+
+Message::AnswerPortionUpgradePanel::AnswerPortionUpgradePanel(int16 num, uint8 data[SIZE_CHUNK]) :
+    SimpleMessage(1 + sizeof(int16) + sizeof(uint) + SIZE_CHUNK, Command::AnswerPortionUpgradePanel)
 {
     PutINT16(num);
 
-    uint crc = HAL_CRC32::Calculate(data, SIZE_CHUNK);
+    uint crc = HAL_CRC32::CalculateALIGN32(data, SIZE_CHUNK);
 
     PutUINT(crc);
 
