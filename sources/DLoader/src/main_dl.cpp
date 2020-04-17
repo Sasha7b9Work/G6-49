@@ -64,7 +64,7 @@ static void StartWithManualUpgrade()
 {
     uint start = HAL_TIM::TimeMS();
 
-    while(HAL_TIM::TimeMS() - start < 1000)
+    while(HAL_TIM::TimeMS() - start < 200)
     {
         DInterface::Update();               // Сообщения от панели о запуске обновления
         if(Updater::NeedUpgrade())          // Если дождались
