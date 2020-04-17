@@ -39,7 +39,7 @@ void PageService::OnPress_Reset()
 //)
 
 
-DEF_CHOICE_2(cLanguage,
+DEF_CHOICE_2_OLD(cLanguage,
     "Language", "язык",
     "¬ыбор €зыка", "Language choice",
     "Russian",    "Russian",    "", "",

@@ -406,7 +406,7 @@ static void DrawValue(int x, int y, uint8 i)
 
 static void OnPress_DebugMode(bool)
 {
-    PGenerator::SetDebugMode(DEBUG_MODE_ENABLED);
+    PGenerator::SetDebugMode(set.dbgModeEnabled != 0);
 }
 
 DEF_CHOICE_2( cConsole,                                                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ ---
@@ -416,7 +416,7 @@ DEF_CHOICE_2( cConsole,                                                         
     "Отображение консоли выключено", "Console display off",
     ENABLED_RU,                      ENABLED_EN,
     "Отображение консоли включено",  "Console Display Enabled",
-    FLAG, BIT_CONSOLE, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
+    set.showConsole, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
 )
 
 
@@ -440,11 +440,11 @@ DEF_CHOICE_2( cStatistics,                                                      
     "Показ статистики отключён", "Show statistics disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ статистики включен",  "Show statistics enabled",
-    FLAG, BIT_STATISTICS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.showStatistics, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
-DEF_CHOICE_2( cShowSends,                                                                                                                            //--- ОТЛАДКА - Показывать параметры ---
+DEF_CHOICE_2_OLD( cShowSends,                                                                                                                            //--- ОТЛАДКА - Показывать параметры ---
     "Показывать параметры", "Show options",
     "Показывает параметры, засылаемые в ПЛИС", "Shows parameters sent to FPGA",
     DISABLED_RU,                 DISABLED_EN,
@@ -619,7 +619,7 @@ static void OnPress_BigSymbols(bool)
     Font::ToggleCharacterSize();
 }
 
-DEF_CHOICE_2 (  cBigSymbols,                                                                                                                              //--- ОТЛАДКА - Большие символы ---
+DEF_CHOICE_2_OLD (  cBigSymbols,                                                                                                                              //--- ОТЛАДКА - Большие символы ---
     "Большие символы", "Large characters",
     "Отображение информации более крупными символами",
     "Display information with larger characters",

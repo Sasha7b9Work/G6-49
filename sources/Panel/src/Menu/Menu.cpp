@@ -102,18 +102,18 @@ bool Menu::ProcessOutputs(const Key &key)
         {
             if (!WAVE(Chan::A).StartModeIsSingle())
             {
-                SWITCH_CHANNEL_A;
+                set.enabled[Chan::A] = !set.enabled[Chan::A];
             }
-            PGenerator::EnableChannel(Chan::A, CHANNEL_ENABLED(Chan::A));
+            PGenerator::EnableChannel(Chan::A, set.enabled[Chan::A]);
             return true;
         }
         else if (key.Is(Key::On2))
         {
             if (!WAVE(Chan::B).StartModeIsSingle())
             {
-                SWITCH_CHANNEL_B;
+                set.enabled[Chan::B] = !set.enabled[Chan::B];
             }
-            PGenerator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
+            PGenerator::EnableChannel(Chan::B, set.enabled[Chan::B]);
             return true;
         }
     }

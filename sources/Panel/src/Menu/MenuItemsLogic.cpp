@@ -104,15 +104,7 @@ float Choice::Step()
             Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
 
-        if(isPageSB)
-        {
-            uint *address = reinterpret_cast<uint *>(cell);
-            *address ^= (1 << static_cast<int>(nameOrNumBit));
-        }
-        else
-        {
-            *cell = index;
-        }
+        *cell = index;
 
         tsChoice.address = 0;
 
@@ -426,15 +418,7 @@ int8 Choice::CurrentIndex() const
 
     if (type == Item::Type::Choice)
     {
-        if(isPageSB)
-        {
-            uint *address = reinterpret_cast<uint *>(cell);
-            retValue = static_cast<int8>((*address >> nameOrNumBit) & 0x01);
-        }
-        else
-        {
-            retValue = *cell;
-        }
+        retValue = *cell;
     }
     else if (type == Item::Type::ChoiceParameter)
     {

@@ -74,7 +74,7 @@ String Choice::NameSubItem(int i, uint lang) const
 
 int8 Page::PosCurrentItem() const
 {
-    return MENU_POS_ACT_ITEM(nameOrNumBit) & 0x7f;
+    return MENU_POS_ACT_ITEM(name) & 0x7f;
 }
 
 
@@ -125,7 +125,7 @@ String Item::GetTitle(uint lang) const
 }
 
 
-#define CURRENT_ITEM_IS_OPENED return _GET_BIT(MENU_POS_ACT_ITEM(nameOrNumBit), 7) == 1
+#define CURRENT_ITEM_IS_OPENED return _GET_BIT(MENU_POS_ACT_ITEM(name), 7) == 1
 
 
 bool PageBase::CurrentItemIsOpened() const
@@ -142,19 +142,19 @@ bool Page::CurrentItemIsOpened() const
 
 int Page::CurrentSubPage() const
 {
-    return MENU_CURRENT_SUBPAGE(nameOrNumBit);
+    return MENU_CURRENT_SUBPAGE(name);
 }
 
 
 void Page::SetPosActItem(int pos)
 {
-    MENU_POS_ACT_ITEM(nameOrNumBit) = static_cast<int8>(pos);
+    MENU_POS_ACT_ITEM(name) = static_cast<int8>(pos);
 }
 
 
 void Page::SetCurrentSubPage(int pos)
 {
-    MENU_CURRENT_SUBPAGE(nameOrNumBit) = static_cast<int8>(pos);
+    MENU_CURRENT_SUBPAGE(name) = static_cast<int8>(pos);
 }
 
 

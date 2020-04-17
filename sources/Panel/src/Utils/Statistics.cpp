@@ -41,7 +41,7 @@ void Statistics::EndFrame()
 
 void Statistics::Show()
 {
-    if (SHOW_STATISTICS)
+    if (set.showStatistics)
     {
         Painter::DrawFilledRectangle(0, SCREEN_HEIGHT - 12, 60, 10, Color::BACK, Color::FILL);
         char buffer[100] = {0};

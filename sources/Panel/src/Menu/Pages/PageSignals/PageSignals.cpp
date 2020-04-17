@@ -22,7 +22,7 @@ DEF_CHOICE_2( cChannel,                                                         
     "”правление параметрами сигнала на выходе A", "Control the parameters of the signal at output A",
     "B",                                          "B",
     "”правление параметрами сигнала на выходе B", "Control the parameters of the signal at output B",
-    FLAG, BIT_CHANNEL, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
+    set.current, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
@@ -115,7 +115,7 @@ void PageSignals::OnPress_Form(bool)
 
 void PageSignals::SetForm(TypeForm::E form)
 {
-    if(form == TypeForm::Free && CURRENT_CHANNEL_IS_B)
+    if(form == TypeForm::Free && CURRENT_CHANNEL_IS(Chan::B))
     {
         return;
     }
@@ -138,12 +138,5 @@ void PageSignals::OnPress_Channel(bool)
 
 void PageSignals::SetCurrentChanenl(Chan::E ch)
 {
-    if(ch == Chan::A)
-    {
-        CLEAR_FL(BIT_CHANNEL);
-    }
-    else
-    {
-        SET_FL(BIT_CHANNEL);
-    }
+    set.current = ch;
 }

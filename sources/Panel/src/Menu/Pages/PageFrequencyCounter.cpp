@@ -41,7 +41,7 @@ DEF_CHOICE_2( cInterval,                                                        
     "Выбор интервала запуска измерений частоты", "Frequency start interval selection",
     "1 c",  "1 s",  "Запуск процесса измерения частомера производится с интервалом 1 секунда",  "The process of measuring the frequency meter is started at intervals of 1 second",
     "10 с", "10 s", "Запуск процесса измерения частомера производится с интервалом 10 секунда", "The measurement process starts with a 10 second interval",
-    FLAG, BIT_FREQ_INTERVAL, pFrequencyCounter, Item::FuncActive, OnPress_Interval, FuncDraw
+    set.freq_interval, pFrequencyCounter, Item::FuncActive, OnPress_Interval, FuncDraw
 )
 
 volatile const ChoiceBase *pcInterval = &cInterval;
@@ -74,12 +74,12 @@ DEF_CHOICE_2(cResist,                                                           
     "Управление сопротивлением входа частотомера", "Frequency counter input resistance control",
     "1 МОм", "1 MOhm", "Сопротивление входа 1 МОм", "Input impedance 1 MOhm",
     "50 Ом", "50 Ohm", "Сопротивление входа 50 Ом", "50 ohm input impedance",
-    FLAG, BIT_FREQ_RESIST, pFrequencyCounter, Item::FuncActive, OnPress_Resist, FuncDraw
+    set.freq_resist, pFrequencyCounter, Item::FuncActive, OnPress_Resist, FuncDraw
 )
 
 static void OnPress_Resist(bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Resist, (uint)FREQ_RESIST);
+    PGenerator::LoadRegister(Register::FreqMeter_Resist, (uint)set.freq_resist);
 }
 
 
@@ -88,16 +88,16 @@ DEF_CHOICE_2(cCouple,                                                           
     "Пропускает/запрещает постоянную составляющую", "Skips / Disables DC",
     "Перем", "Alternate", "Постоянная составляющая поступает на вход частотомера",    "The constant component is fed to the input of the frequency counter",
     "Пост",  "Direct",    "Постоянная составляющая не поступает на вход частотомера", "The constant component does not go to the input of the frequency meter",
-    FLAG, BIT_FREQ_COUPLE, pFrequencyCounter, Item::FuncActive, OnPress_Couple, FuncDraw
+    set.freq_couple, pFrequencyCounter, Item::FuncActive, OnPress_Couple, FuncDraw
 )
 
 static void OnPress_Couple(bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Couple, (uint)FREQ_COUPLE);
+    PGenerator::LoadRegister(Register::FreqMeter_Couple, (uint)set.freq_couple);
 }
 
 
-DEF_CHOICE_2(cFiltr,                                                                                                                                               //--- ЧАСТОТОМЕР - ФНЧ ---
+DEF_CHOICE_2_OLD(cFiltr,                                                                                                                                               //--- ЧАСТОТОМЕР - ФНЧ ---
     "ФНЧ", "LPF",
     "Включает/отключает фильтр нижних частот на входе частотомера", "Enables / disables the low-pass filter at the input of the frequency meter",
     DISABLED_RU, DISABLED_EN, "ФНЧ на входе частотомера отключен",  "LPF at the input of the frequency meter is disabled",
@@ -144,7 +144,7 @@ static void OnPress_TimeStamps(bool)
 }
 
 
-DEF_CHOICE_2(cTest,                                                                                                                                               //--- ЧАСТОТОМЕР - Тест ---
+DEF_CHOICE_2_OLD(cTest,                                                                                                                                               //--- ЧАСТОТОМЕР - Тест ---
     "Тест", "Test",
     "Включение/отключение тестового режима", "Enable / disable test mode",
     DISABLED_RU, DISABLED_EN, "", "",
@@ -257,7 +257,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
         BINARY_U8(00000000),    // -V2501
         BINARY_U8(00010000)     // -V2501
     };
-    data |= maskInterval[FREQ_INTERVAL];
+    data |= maskInterval[set.freq_interval];
 
     //--------- Время счёта ---------------------
 

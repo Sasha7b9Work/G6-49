@@ -453,7 +453,7 @@ int ParameterPainterSupporting::Width() const
 
 int ParameterPainterSupporting::Y0() const
 {
-    return WaveGraphics::Y(Chan::GetInverse(CURRENT_CHANNEL)) + 1;
+    return WaveGraphics::Y(Chan::GetInverse(set.current)) + 1;
 }
 
 

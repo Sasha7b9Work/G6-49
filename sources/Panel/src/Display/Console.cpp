@@ -39,7 +39,7 @@ void Console::AddString(const char *string)
 
 void Console::Draw()
 {
-    if (!CONSOLE_ENABLED)
+    if (!set.showConsole)
     {
         return;
     }

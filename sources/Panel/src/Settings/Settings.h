@@ -23,6 +23,9 @@
 #define SET_FL(numBit)          ((FLAG) |= (1 << (numBit)))
 #define CLEAR_FL(numBit)        ((FLAG) &= (~(1 << (numBit))))
 
+#define CURRENT_CHANNEL         (set.current)
+#define CURRENT_CHANNEL_IS(ch)  (CURRENT_CHANNEL == (ch))
+
 #define CONSOLE_ENABLED         (FL(BIT_CONSOLE))
 #define DEBUG_MODE_ENABLED      (FL(BIT_DBG_MODE))
 #define SHOW_STATISTICS         (FL(BIT_STATISTICS))
@@ -31,17 +34,7 @@
 
 #define LANGUAGE                (FL(BIT_LANGUAGE))
 
-#define CHANNEL_ENABLED(ch)     ((FLAG >> ((ch) + BIT_CHAN_A)) & 0x01)
-#define SWITCH_CHANNEL_A        (FLAG ^= (1 << (BIT_CHAN_A)))
-#define SWITCH_CHANNEL_B        (FLAG ^= (1 << (BIT_CHAN_B)))
-#define CURRENT_CHANNEL         ((Chan::E)FL(BIT_CHANNEL))
-#define CURRENT_CHANNEL_IS_A    (CURRENT_CHANNEL == Chan::A)
-#define CURRENT_CHANNEL_IS_B    (CURRENT_CHANNEL == Chan::B)
-
-#define FREQ_RESIST                 ((FreqResist)FL(BIT_FREQ_RESIST))
-#define FREQ_COUPLE                 ((FreqCouple)FL(BIT_FREQ_COUPLE))
 #define FREQ_FILTR                  ((FreqFiltr)FL(BIT_FREQ_FILTR))
-#define FREQ_INTERVAL               ((FreqInterval)FL(BIT_FREQ_INTERVAL))
 #define FREQ_METER_MEASURE          (set.freq_measure)
 #define FREQ_METER_MEASURE_IS_FREQ   (FREQ_METER_MEASURE == FreqMeasure::Freq)
 #define FREQ_METER_MEASURE_IS_PERIOD (FREQ_METER_MEASURE == FreqMeasure::Period)
@@ -61,17 +54,26 @@
 class Settings // -V690
 {
 public:
-    uint16                      size;                                   ///< Размер структуры Settings
-    col_val                     disp_Colors[32];                        ///< Цвета
-    Page*                       menu_currentPage;                       ///< Адрес открытой страницы меню. 0, если открыта главная страница
-    int8                        menu_posActItem[Page::Count];           ///< Позиция активного пункта меню для каждой страницы
-    int8                        menu_currentSubPage[Page::Count];       ///< Номер текущей подстраницы для каждой страницы
-    PFreqMeter::BillingTime     freq_billingTime;                       ///< Время счёта
-    PFreqMeter::AvePeriod       freq_avePeriod;                         ///< Число усредняемых периодов в режиме измерения периода
-    FreqTimeStamps              freq_timeStamps;                        ///< Метки времени
-    FreqMeasure::E              freq_measure;                           ///< Режим измерения частотомера
-    int16                       freq_level;                             ///< Уровень синхронизации
-    int16                       freq_hysteresis;                        ///< Величина гистерезиса
+    uint16                  size;                                   // Размер структуры Settings
+    col_val                 disp_Colors[32];                        // Цвета
+    Page*                   menu_currentPage;                       // Адрес открытой страницы меню. 0, если открыта главная страница
+    int8                    menu_posActItem[Page::Count];           // Позиция активного пункта меню для каждой страницы
+    int8                    menu_currentSubPage[Page::Count];       // Номер текущей подстраницы для каждой страницы
+    PFreqMeter::BillingTime freq_billingTime;                       // Время счёта
+    PFreqMeter::AvePeriod   freq_avePeriod;                         // Число усредняемых периодов в режиме измерения периода
+    FreqTimeStamps          freq_timeStamps;                        // Метки времени
+    FreqMeasure::E          freq_measure;                           // Режим измерения частотомера
+    int16                   freq_level;                             // Уровень синхронизации
+    int16                   freq_hysteresis;                        // Величина гистерезиса
+    FreqInterval::E         freq_interval;
+    int8                    showConsole;
+    bool                    dbgModeEnabled;
+    bool                    enabled[2];
+    Chan::E                 current;
+    bool                    showStatistics;
+    FreqResist::E           freq_resist;
+    FreqCouple::E           freq_couple;
+
     uint                        flag;
     uint                        flagDBG;
 
@@ -86,16 +88,6 @@ public:
 #define BIT_PC14            5
 
 
-#define BIT_FREQ_INTERVAL 1   // Interval - интервал запуска измерений
-#define BIT_CONSOLE       2   //          - показ отладочной консоли
-#define BIT_DBG_MODE      5   //          - если 1, то включён отладочный режим - непрерывные засылки в альтеру
-#define BIT_STATISTICS    7   //          - если 1, то показывать статистику
-#define BIT_NOT_USED      8
-#define BIT_CHAN_A        9   //          - бит, отвечающий за включённый канал A
-#define BIT_CHAN_B        10  //          - бит, отвечающий за включённый канал B
-#define BIT_CHANNEL       11  // Chan  - текущий выбранный канал
-#define BIT_FREQ_RESIST   14  // FreqResist - сопротивление входа частотомера
-#define BIT_FREQ_COUPLE   15  // FreqCouple - открытый/закрытый вход частотомера
 #define BIT_FREQ_FILTR    16  // FreqFiltr   - ФНЧ частотомера
 #define BIT_LANGUAGE      17  // Язык
 #define BIT_FREQ_TEST     18  // FreqTest    - включение тестового режима

@@ -48,23 +48,27 @@ static const Settings defSet =
     FreqMeasure::Disable,               // freq_measure
     0,                                  // freq_level
     0,                                  // freq_hysteresis
-    BINARY_U32(00000000, 00000000, 00010110, 00011100), // flag1
-//                          ||| |  ||||||||  | ||||||------ 0  BIT_PARITY         Parity_Off
-//                          ||| |  ||||||||  | |||||------- 1  BIT_FREQ_INTERVAL  Interval_1
-//                          ||| |  ||||||||  | ||||-------- 2  BIT_CONSOLE      
-//                          ||| |  ||||||||  | |||--------- 3  BIT_BACK_BLACK   
-//                          ||| |  ||||||||  | |----------- 5  BIT_DBG_MODE     
-//                          ||| |  ||||||||  |------------- 7  BIT_STATISTICS   
-//                          ||| |  ||||||||---------------- 8  BIT_LANGUAGE       RU
-//                          ||| |  |||||||----------------- 9  BIT_CHAN_A   
-//                          ||| |  ||||||------------------ 10 BIT_CHAN_B   
-//                          ||| |  |||||------------------- 11 BIT_CHANNEL        A
-//                          ||| |  ||---------------------- 14 BIT_FREQ_RESIST
-//                          ||| |  |----------------------- 15 BIT_FREQ_COUPLE
-//                          ||| |-------------------------- 16 BIT_FREQ_FILTR
-//                          |||---------------------------- 18 BIT_FREQ_TEST
-//                          ||----------------------------- 19 BIT_BIG_SYMBOLS
-//                          |------------------------------ 20 BIT_SHOW_SENDS
+    FreqInterval::_1,
+    0,                                  // showConsole
+    0,                                  // dbgModeEnabled
+    {true, true},                       // enabled[2]
+    Chan::A,                            // current
+    false,                              // showStatistics
+    FreqResist::_1MOhm,
+    FreqCouple::AC,
+    BINARY_U32(00000000, 00000000, 00010000, 00010000) // flag1
+//                          ||| |  ||||||||  | |-------- 5  BIT_DBG_MODE     
+//                          ||| |  ||||||||  |---------- 7  BIT_STATISTICS   
+//                          ||| |  ||||||||------------- 8  BIT_LANGUAGE       RU
+//                          ||| |  |||||||-------------- 9  BIT_CHAN_A   
+//                          ||| |  ||||||--------------- 10 BIT_CHAN_B   
+//                          ||| |  |||||---------------- 11 BIT_CHANNEL        A
+//                          ||| |  ||------------------- 14 BIT_FREQ_RESIST
+//                          ||| |  |-------------------- 15 BIT_FREQ_COUPLE
+//                          ||| |----------------------- 16 BIT_FREQ_FILTR
+//                          |||------------------------- 18 BIT_FREQ_TEST
+//                          ||-------------------------- 19 BIT_BIG_SYMBOLS
+//                          |--------------------------- 20 BIT_SHOW_SENDS
 };
 
 

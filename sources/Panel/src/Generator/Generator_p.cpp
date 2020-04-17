@@ -208,7 +208,7 @@ void PGenerator::SetParameter(ParameterValue *param)
 
 void PGenerator::TuneChannel(Chan::E ch)
 {
-    EnableChannel(ch, CHANNEL_ENABLED(ch));
+    EnableChannel(ch, set.enabled[ch]);
 
     FORM(ch)->TuneGenerator(ch);
 }

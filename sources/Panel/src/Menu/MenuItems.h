@@ -15,8 +15,7 @@ typedef bool (*pFuncBKey)(const Key&);
     uint8           type;           /* Тип итема */                                                                                         \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                            \
     bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                  \
-                                    /* Если type == Item_Choice, то единица означает двоичный Choice - выбор строго из двух вариантов */    \
-    uint8           nameOrNumBit;   /* Имя из перечисления NamePage, если type == Item_Page */                                              \
+    uint8           name;           /* Имя из перечисления NamePage, если type == Item_Page */                                              \
                                     /* В случае, если type == Item_Choice,  определяет номер бита */                                        \
     const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                            \
     const char      *title[2];      /* Название страницы на русском и английском языках */                                                  \
