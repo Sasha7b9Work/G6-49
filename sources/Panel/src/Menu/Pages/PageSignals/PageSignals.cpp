@@ -57,7 +57,7 @@ DEF_CHOICE_7( cFormB,                                                           
 
 static void OnPress_TuneParameter()
 {
-    CURRENT_PARAM->ProcessButtonTune();
+    CURRENT_PARAM->VisualTune();
 }
 
 DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
