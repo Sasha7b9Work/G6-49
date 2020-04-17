@@ -283,32 +283,32 @@ pString Order::Suffix(uint lang) const
 }
 
 
-void ParameterChoice::VisualTune()
+void ParameterChoice::OnPressButtonTune()
 {
     NextChoice();
 }
 
 
-void ParameterValue::VisualTune()
+void ParameterValue::OnPressButtonTune()
 {
     PageTuneParameter::SetParameter(this);
     Menu::SetAdditionPage(PageTuneParameter::self);
 }
 
 
-void ParameterComplex::VisualTune()
+void ParameterComplex::OnPressButtonTune()
 {
     form->OpenComplexParameter();
 }
 
 
-void Parameter::VisualTune()
+void Parameter::OnPressButtonTune()
 {
     switch (kind)
     {
-    case Value:   reinterpret_cast<ParameterValue *>(this)->VisualTune();   break;
-    case Complex: reinterpret_cast<ParameterComplex *>(this)->VisualTune(); break;
-    case Choice:  reinterpret_cast<ParameterChoice *>(this)->VisualTune();  break;
+    case Value:   reinterpret_cast<ParameterValue *>(this)->OnPressButtonTune();   break;
+    case Complex: reinterpret_cast<ParameterComplex *>(this)->OnPressButtonTune(); break;
+    case Choice:  reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
 
     case Exit:
     case Page:
