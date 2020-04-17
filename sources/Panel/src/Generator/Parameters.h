@@ -85,23 +85,23 @@ public:
 
     enum E
     {
-        Frequency,              ///< Частота
-        Period,                 ///< Период
-        Amplitude,              ///< Амплитуда
-        Offset,                 ///< Смещение
-        Duration,               ///< Длительность
-        DutyRatio,              ///< Скважность
-        Phase,                  ///< Сдвиг фазы
-        Delay,                  ///< Задержка
-        DurationRise,           ///< Длительность нарастания
-        DurationFall,           ///< Длительность спада
-        DurationStady,          ///< Длительность установившего значения
-        DutyFactor,             ///< Коэффициент заполнения
-        ManipulationDuration,   ///< Длительность импульсов в режиме манипуляции
-        ManipulationPeriod,     ///< Период следования импульсов в режиме манипуляции
-        PacketPeriod,           ///< Период следования пачек импульсов в пакетном режиме
-        PacketNumber,           ///< Число импульсов в пачке пакетного режима
-        Exit,                   ///< Этот параметр закрывает открытый параметр
+        Frequency,              // Частота
+        Period,                 // Период
+        Amplitude,              // Амплитуда
+        Offset,                 // Смещение
+        Duration,               // Длительность
+        DutyRatio,              // Скважность
+        Phase,                  // Сдвиг фазы
+        Delay,                  // Задержка
+        DurationRise,           // Длительность нарастания
+        DurationFall,           // Длительность спада
+        DurationStady,          // Длительность установившего значения
+        DutyFactor,             // Коэффициент заполнения
+        ManipulationDuration,   // Длительность импульсов в режиме манипуляции
+        ManipulationPeriod,     // Период следования импульсов в режиме манипуляции
+        PacketPeriod,           // Период следования пачек импульсов в пакетном режиме
+        PacketNumber,           // Число импульсов в пачке пакетного режима
+        Exit,                   // Этот параметр закрывает открытый параметр
         Count
     };
 
@@ -115,7 +115,8 @@ public:
     virtual pString GetStringValue() const;
 
     bool SetAndLoadValue(float val);
-    /// Возвращает true, если параметр имеет знак
+    
+    // Возвращает true, если параметр имеет знак
     bool IsSigned() const
     {
         return (type == Offset);
@@ -131,15 +132,93 @@ private:
     FloatValue value;
 
     pString MainUnits(uint lang) const;
-    /// Возвращает true, если параметр может принимать значение v
+
+    // Возвращает true, если параметр может принимать значение v
     bool InRange(float v) const;
 };
 
 
+class ParameterChoice : public Parameter
+{
+public:
+	enum E
+	{
+        Polarity,             // Полярность импульсов
+        ModeStart,            // Режим запуска сигналов DDS и импульсных
+        ManipulationEnabled,  // Включен или выключен режим манипуляции
+        Count
+	};
+
+    ParameterChoice(E t, const char *nameRU, const char *nameEN) : Parameter(Parameter::Choice, nameRU, nameEN), type(t), choice(0), names(nullptr) { }
+
+	E Type() { return type; }
+
+    int GetChoice() const;
+
+    void NextChoice();
+
+    bool SetAndLoadChoice(int ch);
+
+    bool DrawChoice(int x, int y) const;
+
+    virtual pString GetStringValue() const;
+
+    void OnPressButtonTune();
+
+private:
+	E type;
+    
+    // Текущий выбор
+    int choice;
+
+    const char **names;
+    
+    // Количество вариантов выбора
+    int NumChoices() const;
+};
+
+
+class ParameterComplex : public Parameter
+{
+public:
+    enum E
+    {
+        Manipulation,   // НАСТРОЙКИ СИГНАЛОВ / Параметр / МАНИПУЛЯЦИЯ на форме СИНУС
+        Count
+    } value;
+
+    ParameterComplex(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
+        Parameter(Parameter::Complex, nameRU, nameEN), value(Count), params(parameters), numParams(0), type(v) { }
+
+    virtual void SetForm(Form *form);
+
+    int NumParams() const { return numParams; }
+    Parameter **Params() { return params; }
+
+    ParameterValue *FindParameter(ParameterValue::E p);
+    ParameterChoice *FindParameter(ParameterChoice::E p);
+
+    virtual pString GetStringValue() const;
+
+    void OnPressButtonTune();
+
+private:
+    
+    // Здесь находятся дополнительные параметры в случае, если они требуются
+    Parameter **params;
+    
+    // Число дополнительных параметров или 0, если таковых не имеется
+    int numParams;
+
+    E type;
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Value ///
 class ParameterVoltage : public ParameterValue
 {
 public:
-    ParameterVoltage(ParameterValue::E type, const char *nameRU, const char *nameEN, const FloatValue &min, const FloatValue &max, const FloatValue &value) :  
+    ParameterVoltage(ParameterValue::E type, const char *nameRU, const char *nameEN, const FloatValue &min, const FloatValue &max, const FloatValue &value) :
         ParameterValue(type, nameRU, nameEN, min, max, value) { }
 };
 
@@ -220,44 +299,7 @@ public:
 };
 
 
-class ParameterChoice : public Parameter
-{
-public:
-	enum E
-	{
-        Polarity,                   ///< Полярность импульсов
-        ModeStart,                  ///< Режим запуска сигналов DDS и импульсных
-        ManipulationEnabled,        ///< Включен или выключен режим манипуляции
-        Count
-	};
-
-    ParameterChoice(E t, const char *nameRU, const char *nameEN) : Parameter(Parameter::Choice, nameRU, nameEN), type(t), choice(0), names(nullptr) { }
-
-	E Type() { return type; }
-
-    int GetChoice() const;
-
-    void NextChoice();
-
-    bool SetAndLoadChoice(int ch);
-
-    bool DrawChoice(int x, int y) const;
-
-    virtual pString GetStringValue() const;
-
-    void OnPressButtonTune();
-
-private:
-	E type;
-    /// Текущий выбор
-    int choice;
-
-    const char **names;
-    /// Количество вариантов выбора
-    int NumChoices() const;
-};
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
 class ParameterModeStart : public ParameterChoice
 {
 public:
@@ -281,41 +323,10 @@ public:
 };
 
 
-class ParameterComplex : public Parameter
-{
-public:
-    enum E
-    {
-        Manipulation,       ///< НАСТРОЙКИ СИГНАЛОВ / Параметр / МАНИПУЛЯЦИЯ на форме СИНУС
-        Count
-    } value;
-
-    ParameterComplex(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
-        Parameter(Parameter::Complex, nameRU, nameEN), value(Count), params(parameters), numParams(0), type(v) { }
-
-    virtual void SetForm(Form *form);
-
-    int NumParams() const { return numParams; }
-    Parameter **Params() { return params; }
-
-    ParameterValue *FindParameter(ParameterValue::E p);
-    ParameterChoice *FindParameter(ParameterChoice::E p);
-
-    virtual pString GetStringValue() const;
-
-    void OnPressButtonTune();
-private:
-    /// Здесь находятся дополнительные параметры в случае, если они требуются
-    Parameter **params;
-    /// Число дополнительных параметров или 0, если таковых не имеется
-    int numParams;
-
-    E type;
-};
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Complex ///
 class ParameterManipulation : public ParameterComplex
 {
 public:
     ParameterManipulation(Parameter **paramaters);
 };
+
