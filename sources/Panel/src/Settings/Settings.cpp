@@ -5,16 +5,35 @@
 #include "Menu/Menu.h"
 
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4310)
-#endif
-
-
 static const Settings defSet =
 {
     sizeof(Settings),
     {
+#ifdef WIN32
+        MAKE_COLOR(0x00, 0x00, 0x00),   // BLACK
+        MAKE_COLOR(0xff, 0xff, 0xff),   // WHITE
+        MAKE_COLOR(25,   25,   25),     // GRAY_10
+        MAKE_COLOR(0x40, 0x40, 0x40),   // GRAY_25
+        MAKE_COLOR(0x80, 0x80, 0x80),   // GRAY_50
+        MAKE_COLOR(0xC0, 0xC0, 0xC0),   // GRAY_75
+        MAKE_COLOR(0x00, 0x00, 0xff),   // BLUE
+        MAKE_COLOR(0x00, 0x00, 25),     // BLUE_10
+        MAKE_COLOR(0x00, 0x00, 0x40),   // BLUE_25
+        MAKE_COLOR(0x00, 0x00, 0x80),   // BLUE_50
+        MAKE_COLOR(0x00, 0x00, 0xc0),   // BLUE_75
+        MAKE_COLOR(0x00, 0xff, 0x00),   // GREEN
+        MAKE_COLOR(0x00, 13,   0x00),   // GREEN_5
+        MAKE_COLOR(0x00, 25,   0x00),   // GREEN_10
+        MAKE_COLOR(0x00, 0x50, 0x00),   // GREEN_25
+        MAKE_COLOR(0x00, 0x80, 0x00),   // GREEN_50
+        MAKE_COLOR(0x00, 0xc0, 0x00),   // GREEN_75
+        MAKE_COLOR(0xff, 0x00, 0x00),   // RED
+        MAKE_COLOR(0x40, 0x00, 0x00),   // RED_25
+        MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
+        MAKE_COLOR(0xc0, 0x00, 0x00),   // RED_75
+        MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
+        MAKE_COLOR(0xA0, 0xA0, 0xFF)    // CHAN_B
+#else
         MAKE_COLOR(0x00, 0x00, 0x00),   // BLACK
         MAKE_COLOR(0xff, 0xff, 0xff),   // WHITE
         MAKE_COLOR(25,   25,   25),     // GRAY_10
@@ -38,6 +57,7 @@ static const Settings defSet =
         MAKE_COLOR(0xc0, 0x00, 0x00),   // RED_75
         MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
         MAKE_COLOR(0x40, 0x40, 0xFF)    // CHAN_B
+#endif
     },
     static_cast<Page *>(Menu::mainPage),// menu_page
     {0},                                // menu_posActItem[]
@@ -73,10 +93,6 @@ static const Settings defSet =
     }
 };
 
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif
 
 Settings set = defSet;
 

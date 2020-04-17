@@ -19,8 +19,10 @@ struct Display
     static void Update();
 
     static uint8 *GetBuffer();
-    /// Экран
+    
+    // Экран
     static uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
-    /// Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
+    
+    // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
     static uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 };

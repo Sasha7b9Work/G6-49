@@ -14,7 +14,7 @@ struct Menu
 
     static void Draw();
     
-    // Наризовать загол
+    // Нарисовать заголовок
     static int DrawTitle();
 
     static void DrawPagesUGO(int x);
