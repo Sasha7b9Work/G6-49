@@ -42,25 +42,28 @@ static const Settings defSet =
     static_cast<Page *>(Menu::mainPage),// menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
-    PFreqMeter::BillingTime::_1ms,      // freq_billingTime
-    PFreqMeter::AvePeriod::_1,          // freq_avePeriod
-    FreqTimeStamps::_10MHz,             // freq_timeStamps
-    FreqMeasure::Disable,               // freq_measure
-    0,                                  // freq_level
-    0,                                  // freq_hysteresis
-    FreqInterval::_1,
     0,                                  // showConsole
     0,                                  // dbgModeEnabled
     {true, true},                       // enabled[2]
     Chan::A,                            // current
     false,                              // showStatistics
-    FreqResist::_1MOhm,
-    FreqCouple::AC,
-    FreqFiltr::Disable,
     0,                                  // lang
-    FreqTest::Off,
     true,                               // bigSymbols
-    false                               // showSends
+    false,                              // showSends
+    0, 0, 0, 0, 0, 0,
+    {
+        PFreqMeter::BillingTime::_1ms,      // freq_billingTime
+        PFreqMeter::AvePeriod::_1,          // freq_avePeriod
+        FreqTimeStamps::_10MHz,             // freq_timeStamps
+        FreqMeasure::Disable,               // freq_measure
+        0,                                  // freq_level
+        0,                                  // freq_hysteresis
+        FreqInterval::_1,
+        FreqResist::_1MOhm,
+        FreqCouple::AC,
+        FreqFiltr::Disable,
+        FreqTest::Off
+    }
 };
 
 

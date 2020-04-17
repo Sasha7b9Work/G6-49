@@ -228,17 +228,6 @@ static const SButtonBase name = { Item_SmallButton, 0, false, Page::NoPage, &kee
     funcPress, funcDraw, hints##name, 5};
 
 
-
-#define DEF_CHOICE_2_OLD(name, titleRU, hintRU, titleEN, hintEN,                                                                                    \
-    name1RU, name1EN, hint1RU, hint1EN, name2RU, name2EN, hint2RU, hint2EN, cell, numBit, keeper, funcActive, funcChanged, funcDraw)                \
-static pString name##namesRU[] = {name1RU, name2RU};                                                                                                \
-static pString name##namesEN[] = {name1EN, name2EN};                                                                                                \
-static pString name##hintsRU[] = {hint1RU, hint2RU};                                                                                                \
-static pString name##hintsEN[] = {hint1EN, hint2EN};                                                                                                \
-static const ChoiceBase name = { Item::Type::Choice, 2, true, (uint8)numBit, (const PageBase *)(&keeper),                                           \
-    {titleRU, hintRU}, {titleEN, hintEN}, funcActive, (int8 *)&cell,                                                                                \
-    name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
-
 #define DEF_CHOICE_2(name, titleRU, hintRU, titleEN, hintEN,                                                                                        \
     name1RU, name1EN, hint1RU, hint1EN, name2RU, name2EN, hint2RU, hint2EN, cell, keeper, funcActive, funcChanged, funcDraw)                        \
 static pString name##namesRU[] = {name1RU, name2RU};                                                                                                \
