@@ -103,10 +103,6 @@ float Choice::Step()
             }
             Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
-        else
-        {
-            // здесь ничего
-        }
 
         if(isPageSB)
         {
@@ -160,14 +156,6 @@ Item *Choice::Press(const Key &key)
                 Menu::ResetOpenedItem();
             }
         }
-        else
-        {
-            // здесь ничего
-        }
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return Menu::GetOpenedItem();
@@ -192,17 +180,9 @@ void Governor::Press(const Key &key)
             {
                 Menu::ResetCurrentItem();
             }
-            else
-            {
-                // здесь ничего
-            }
         }
         else if(key.IsLong())
         {
-        }
-        else
-        {
-            // здесь ничего
         }
     }
     else if(key.IsRotate())
@@ -223,10 +203,6 @@ void Governor::Press(const Key &key)
                 funcOfChanged();
             }
         }
-        else
-        {
-            // здесь ничего
-        }
     }
     else if(key.IsUp())
     {
@@ -234,10 +210,6 @@ void Governor::Press(const Key &key)
         {
             Menu::ResetCurrentItem();
         }
-    }
-    else
-    {
-        // здесь ничего
     }
 }
 
@@ -323,10 +295,6 @@ float Governor::Step()
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
-        }
-        else
-        {
-            // здесь ничего
         }
     }
     return delta;
@@ -442,10 +410,6 @@ void Item::Press(const Key &key)
         {
             static_cast<Governor *>(this)->Press(key);
         }
-        else
-        {
-            // здесь ничего
-        }
     }
 }
 
@@ -479,10 +443,6 @@ int8 Choice::CurrentIndex() const
         Form *form = param->form;
 
         retValue = static_cast<int8>(static_cast<const ParameterValue *>(form->CurrentParameter())->Type());
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return retValue;
@@ -527,10 +487,6 @@ Item *ChoiceParameter::Press(Key::Action action)
     else if (action == Key::Long)
     {
         return this;
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return 0;
@@ -650,20 +606,12 @@ bool Page::Press(const Key &key)
             GetItem(key)->Press(key);
             return true;
         }
-        else
-        {
-            // здесь ничего
-        }
     }
     else if (key.IsRelease())
     {
         CURRENT_PAGE = this;
         this->funcEnter(true);
         return true;
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return false;

@@ -88,10 +88,6 @@ void Page::ChangeSubPage(int delta)
     {
         SetCurrentSubPage(CurrentSubPage() - 1);
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 

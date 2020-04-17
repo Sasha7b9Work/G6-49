@@ -105,10 +105,6 @@ bool Items::Handler::Processing(SimpleMessage *msg)
         files[num].size = msg->TakeINT();
         return true;
     }
-    else
-    {
-        // здесь ничего
-    }
 
     return false;
 }

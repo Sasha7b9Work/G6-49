@@ -53,10 +53,6 @@ bool Hint::ProcessControl(const Key &key)
                 {
                     currentPage++;
                 }
-                else
-                {
-                    // здесь ничего
-                }
             }
         }
         else
@@ -122,10 +118,6 @@ void Hint::Draw()
                     else if(currentPage == 2)
                     {
                         DrawDetailedHint(choice, x0, y0, width, firstItemOnSecondPage, choice->NumSubItems() - 1);
-                    }
-                    else
-                    {
-                        // здесь ничего
                     }
                 }
             }

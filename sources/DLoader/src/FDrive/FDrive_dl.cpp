@@ -82,7 +82,6 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             break;
 
         default:
-            // здесь ничего
             break;
     }
 }

@@ -191,10 +191,6 @@ void FPGA::SetFrequency(Chan::E ch)
         uint N = static_cast<uint>(1E8F / frequency + 0.5F);
         WriteRegister(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -344,10 +340,6 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
             Bit::Set(data, RG0::_13_StartMode0);
             Bit::Set(data, RG0::_14_StartMode1);
         }
-        else
-        {
-            // здесь ничего
-        }
     }
 
     mode = modeWork[Chan::B];
@@ -375,10 +367,6 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
         {
             Bit::Set(data, RG0::_13_StartMode0);
             Bit::Set(data, RG0::_14_StartMode1);
-        }
-        else
-        {
-            // здесь ничего
         }
     }
 

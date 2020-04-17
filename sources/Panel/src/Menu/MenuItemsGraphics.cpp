@@ -67,10 +67,6 @@ void Page::DrawClosed(int x, int y) const
     {
         color = Color::GREEN_50;
     }
-    else
-    {
-        // здесь ничего
-    }
 
     Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, color);
 

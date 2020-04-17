@@ -110,10 +110,6 @@ void Keyboard::Update()
                         timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
                         AppendEvent(controls[rl][sl], Key::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
-                    else
-                    {
-                        // здесь ничего
-                    }
                 }
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
                 {
@@ -123,10 +119,6 @@ void Keyboard::Update()
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
                     timePress[rl][sl] = 0;
-                }
-                else
-                {
-                    // здесь ничего
                 }
             }
         }
@@ -209,10 +201,6 @@ static void DetectRegulator()
     {
         Keyboard::AppendEvent(Key::RegRight, Key::Down);
         prevStatesIsOne = false;
-    }
-    else
-    {
-        // здесь ничего
     }
 }
 

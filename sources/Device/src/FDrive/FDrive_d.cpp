@@ -66,7 +66,6 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             break;
 
         default:
-            // здесь ничего
             break;
     }
 }
@@ -115,10 +114,6 @@ void DDrive::Update()
         state = State::Disconnected;
 
         LOG_WRITE("флешка отмонтирована");
-    }
-    else
-    {
-        // здесь ничего
     }
 }
 

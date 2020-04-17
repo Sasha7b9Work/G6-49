@@ -45,10 +45,6 @@ void NumberBuffer::ProcessKey(const Key &key)
     {
         buffer[position++] = key.ToChar();
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -81,10 +77,6 @@ void NumberBuffer::ProcessRegulator(const Key &key)
     else if(key.Is(Key::RegLeft))
     {
         DecreaseDigit(PositionSymbolForChange());
-    }
-    else
-    {
-        // здесь ничего
     }
 
     // Восстанавливаем старое значение, если новое вышло за пределы
@@ -165,10 +157,6 @@ bool NumberBuffer::DecreaseDigit(int pos)
             buffer[pos] = '9';
             return true;
         }
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return false;

@@ -39,10 +39,6 @@ char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferO
     {
         *pBuffer++ = '+';
     }
-    else
-    {
-        // здесь ничего
-    }
 
     char format[10] = "%4.2f\0\0";
 
@@ -430,10 +426,7 @@ char SU::ToUpper(char symbol)
     {
         return static_cast<char>(std::toupper(s));
     }
-    else
-    {
-        // здесь ничего
-    }
+
     return symbol;
 }
 
@@ -524,10 +517,6 @@ char SU::ToLower(char symbol)
     else if(s >= 0xc0 && s < 0xE0)
     {
         return static_cast<char>(s + 0x20);
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return symbol;

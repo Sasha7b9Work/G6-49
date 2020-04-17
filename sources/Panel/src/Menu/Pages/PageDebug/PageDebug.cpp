@@ -164,11 +164,7 @@ static bool OnKey_PageRegisters(const Key &key)
             return OnRegulator(key);
         }
     }
-    else
-    {
-        // здесь ничего
-    }
-
+    
     return false;
 }
 

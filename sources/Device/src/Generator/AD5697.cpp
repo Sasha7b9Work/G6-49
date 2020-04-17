@@ -58,10 +58,6 @@ float AD5697::CalculateCodeOffset(Chan::E ch)
 //        LOG_WRITE("neg = %d, scale = %.1f, offset = %.1f", (int)neg, scale, SettingsGenerator::Offset(ch));
 //        LOG_WRITE("before = %d, result = %f", (int)before, result);
     }
-    else
-    {
-        // здесь ничего
-    }
 
     return Math::Limitation<float>(&result, 0.0F, 4095.0F);
 }

@@ -91,10 +91,6 @@ void Menu::ProcessKey(const Key &key)
     else if (CURRENT_PAGE->Press(key))
     {
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -119,10 +115,6 @@ bool Menu::ProcessOutputs(const Key &key)
             }
             PGenerator::EnableChannel(Chan::B, CHANNEL_ENABLED(Chan::B));
             return true;
-        }
-        else
-        {
-            // здесь ничего
         }
     }
 

@@ -69,10 +69,6 @@ static bool OnKey(const Key &control)
         Menu::ResetAdditionPage();
         return true;
     }
-    else
-    {
-        // здесь ничего
-    }
 
     return false;
 }
