@@ -298,7 +298,7 @@ void ParameterValue::VisualTune()
 
 void ParameterComplex::VisualTune()
 {
-    form->OpenCurrentParameter();
+    form->OpenComplexParameter();
 }
 
 

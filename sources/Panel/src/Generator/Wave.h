@@ -95,9 +95,8 @@ public:
     void SendParameterToGenerator(ParameterValue::E p);
     void SendParameterToGenerator(ParameterChoice::E p);
 
-    
-    // –аскрывает страницу текущего параметра
-    void OpenCurrentParameter();
+    // –аскрывает составной параметр
+    void OpenComplexParameter();
 
 private:
     
