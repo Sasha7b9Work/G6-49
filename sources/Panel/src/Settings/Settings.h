@@ -103,7 +103,8 @@ public:
 #define BIT_SHOW_SENDS    20  // Если 1, то нужно показывать засылаемые настройки
 
     void SaveToMemory();
-    void LoadFromMemory(bool _default);
+    void LoadFromMemory();
+    void LoadDefault();
     void LoadToDevice();
 
     Settings& operator=(const Settings &rhs);

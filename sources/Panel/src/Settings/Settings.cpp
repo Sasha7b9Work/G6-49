@@ -76,20 +76,19 @@ Settings set = defSet;
 
 void Settings::SaveToMemory()
 {
-    //EEPROM::SaveSettings(this);
+    // EEPROM::SaveSettings(this);
 }
 
 
-void Settings::LoadFromMemory(bool _default)
+void Settings::LoadFromMemory()
 {
-    if(_default)
-    {
-        set = defSet;
-    }
-    else
-    {
-      //  EEPROM::LoadSettings(this);
-    }
+    // EEPROM::LoadSettings(this);
+}
+
+
+void Settings::LoadDefault()
+{
+    set = defSet;
 }
 
 

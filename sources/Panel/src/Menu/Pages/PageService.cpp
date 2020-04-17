@@ -27,8 +27,9 @@ void PageService::OnPress_Reset()
 {
     HAL_TIM::Delay(100);
     setCal.Load();
-    set.LoadFromMemory(true);
+    set.LoadDefault();
     set.LoadToDevice();
+    Menu::Init();
 }
 
 DEF_BUTTON( bReset,                                                                                                                                                 //--- ОТЛАДКА - СБРОС ---
@@ -53,8 +54,8 @@ extern const PageBase pDebug;
 DEF_PAGE_4_VAR( pService,                                                                                                                                            //--- СЕРВИС --- //-V641
     "СЕРВИС", "SERVICE",    //-V641
     "Сервисные функции", "Service functions",
-    bReset,
     cLanguage,
+    *Item::Empty(),
     *Item::Empty(),
     *Item::Empty(),
     Page::Service, reinterpret_cast<PageBase *>(Menu::mainPage), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw

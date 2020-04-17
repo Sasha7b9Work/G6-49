@@ -15,8 +15,12 @@ int main()
     CPU::Init();
     Timer::Init();
     Display::Init(); 
-    HAL_TIM::Delay(1000);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
-    PageService::OnPress_Reset();
+    HAL_TIM::Delay(500);    // Задержка введена, потому что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
+    
+    setCal.Load();
+    set.LoadDefault();
+    set.LoadToDevice();
+
     Menu::Init();
 
     while (1)
