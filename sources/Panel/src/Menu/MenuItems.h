@@ -45,10 +45,10 @@ public:
             GovernorColor,      // Позволяет выбрать цвет.
             SmallButton,        // Кнопка для режима малых кнопок
             ChoiceParameter
-        } value;
-        Type(E v) : value(v) {};
-        operator uint8() const { return static_cast<uint8>(value); };
-        bool Is(E v) const     { return (v == value); };
+        };
+        //Type(E v) : value(v) {};
+        //operator uint8() const { return static_cast<uint8>(value); };
+        //bool Is(E v) const     { return (v == value); };
     };
     /// \brief Возвращает true, если элемент меню control затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
     /// раскрывающийся элемент меню вроде Choice или Governor
@@ -66,7 +66,7 @@ public:
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
     void Press(const Key &control);
 
-    Type GetType() const;
+    Type::E GetType() const;
 
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage() const;

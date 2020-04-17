@@ -5,14 +5,14 @@ struct TypeForm
 {
     enum E
     {
-        Sine,           ///< Синус
-        RampPlus,       ///< Пила+
-        RampMinus,      ///< Пила-
-        Triangle,       ///< Треугольник
-        Meander,        ///< Меандр
-        Impulse,        ///< Импульсы
-        PacketImpuls,   ///< Пачка импульсов
-        Free,           ///< Произвольный сигнал
+        Sine,           // Синус
+        RampPlus,       // Пила+
+        RampMinus,      // Пила-
+        Triangle,       // Треугольник
+        Meander,        // Меандр
+        Impulse,        // Импульсы
+        PacketImpuls,   // Пачка импульсов
+        Free,           // Произвольный сигнал
         Count
     };
 };

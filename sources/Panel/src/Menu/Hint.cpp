@@ -92,7 +92,7 @@ void Hint::Draw()
             Color::GREEN.SetAsCurrent();
 
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5; //-V2007
-            if (item->GetType().Is(Item::Type::Choice))
+            if (item->GetType() == Item::Type::Choice)
             {
                 const Choice *choice = static_cast<const Choice *>(item);
                 width -= 10;

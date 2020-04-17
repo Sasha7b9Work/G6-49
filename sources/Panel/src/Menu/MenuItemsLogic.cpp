@@ -406,7 +406,7 @@ void Item::Press(const Key &key)
 }
 
 
-Item::Type Item::GetType() const
+Item::Type::E Item::GetType() const
 {
     return static_cast<Item::Type::E>(type);
 }
