@@ -42,15 +42,10 @@ static const Settings defSet =
     static_cast<Page *>(Menu::mainPage),// menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
-    0,                                  // showConsole
-    0,                                  // dbgModeEnabled
     {true, true},                       // enabled[2]
     Chan::A,                            // current
-    false,                              // showStatistics
     0,                                  // lang
     true,                               // bigSymbols
-    false,                              // showSends
-    0, 0, 0, 0, 0, 0,
     {
         PFreqMeter::BillingTime::_1ms,      // freq_billingTime
         PFreqMeter::AvePeriod::_1,          // freq_avePeriod
@@ -63,6 +58,13 @@ static const Settings defSet =
         FreqCouple::AC,
         FreqFiltr::Disable,
         FreqTest::Off
+    },
+    {
+        0,                                  // showConsole
+        0,                                  // dbgModeEnabled
+        false,                              // showStatistics
+        false,                              // showSends
+        0, 0, 0, 0, 0, 0,
     }
 };
 

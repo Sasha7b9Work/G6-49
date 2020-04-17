@@ -406,7 +406,7 @@ static void DrawValue(int x, int y, uint8 i)
 
 static void OnPress_DebugMode(bool)
 {
-    PGenerator::SetDebugMode(set.dbgModeEnabled != 0);
+    PGenerator::SetDebugMode(set.dbg.modeEnabled != 0);
 }
 
 DEF_CHOICE_2( cConsole,                                                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ ---
@@ -416,7 +416,7 @@ DEF_CHOICE_2( cConsole,                                                         
     "Отображение консоли выключено", "Console display off",
     ENABLED_RU,                      ENABLED_EN,
     "Отображение консоли включено",  "Console Display Enabled",
-    set.showConsole, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
+    set.dbg.showConsole, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
 )
 
 
@@ -440,7 +440,7 @@ DEF_CHOICE_2( cStatistics,                                                      
     "Показ статистики отключён", "Show statistics disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ статистики включен",  "Show statistics enabled",
-    set.showStatistics, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.dbg.showStatistics, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -451,7 +451,7 @@ DEF_CHOICE_2( cShowSends,                                                       
     "Показ параметров отключён", "Parameter display disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ параметров включён",  "Parameter display enabled",
-    set.showSends, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.dbg.showSends, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 

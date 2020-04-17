@@ -40,6 +40,21 @@ struct SettingsFreqMeter
 };
 
 
+struct SettingsDebug
+{
+    int8   showConsole;
+    bool   modeEnabled;
+    bool   showStatistics;
+    bool   showSends;
+    uint8  bitPE15;
+    uint8  bitPB10;
+    uint8  bitPF0;
+    uint8  bitPF5;
+    uint8  bitPC13;
+    uint8  bitPC14;
+};
+
+
 struct Settings // -V690
 {
     uint16    size;                             // –азмер структуры Settings
@@ -47,22 +62,13 @@ struct Settings // -V690
     Page*     menu_currentPage;                 // јдрес открытой страницы меню. 0, если открыта главна€ страница
     int8      menu_posActItem[Page::Count];     // ѕозици€ активного пункта меню дл€ каждой страницы
     int8      menu_currentSubPage[Page::Count]; // Ќомер текущей подстраницы дл€ каждой страницы
-    int8      showConsole;
-    bool      dbgModeEnabled;
     bool      enabled[2];
     Chan::E   current;
-    bool      showStatistics;
     uint8     lang;
     bool      bigSymbols;                       // ≈сли 1, то символы вывод€тс€ чуть увеличенными
-    bool      showSends;
-    uint8     bitPE15;
-    uint8     bitPB10;
-    uint8     bitPF0;
-    uint8     bitPF5;
-    uint8     bitPC13;
-    uint8     bitPC14;
 
     SettingsFreqMeter freq;
+    SettingsDebug     dbg;
 
     void SaveToMemory();
     void LoadFromMemory();

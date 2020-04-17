@@ -6,7 +6,7 @@
 
 static void OnPress_PE15(bool)
 {
-    Message::RegCPU(4, 15, set.bitPE15).Transmit();
+    Message::RegCPU(4, 15, set.dbg.bitPE15).Transmit();
 }
 
 DEF_CHOICE_2( cPE15,
@@ -14,13 +14,13 @@ DEF_CHOICE_2( cPE15,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.bitPE15, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PE15, FuncDraw
+    set.dbg.bitPE15, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PE15, FuncDraw
 )
 
 
 static void OnPress_PB10(bool)
 {
-    Message::RegCPU(1, 10, set.bitPB10).Transmit();
+    Message::RegCPU(1, 10, set.dbg.bitPB10).Transmit();
 }
 
 DEF_CHOICE_2( cPB10,
@@ -28,13 +28,13 @@ DEF_CHOICE_2( cPB10,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.bitPB10, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PB10, FuncDraw
+    set.dbg.bitPB10, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PB10, FuncDraw
 )
 
 
 static void OnPress_PF0(bool)
 {
-    Message::RegCPU(5, 0, set.bitPF0).Transmit();
+    Message::RegCPU(5, 0, set.dbg.bitPF0).Transmit();
 }
 
 DEF_CHOICE_2( cPF0,
@@ -42,13 +42,13 @@ DEF_CHOICE_2( cPF0,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.bitPF0, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF0, FuncDraw
+    set.dbg.bitPF0, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF0, FuncDraw
 )
 
 
 static void OnPress_PF5(bool)
 {
-    Message::RegCPU(5, 5, set.bitPF5).Transmit();
+    Message::RegCPU(5, 5, set.dbg.bitPF5).Transmit();
 }
 
 DEF_CHOICE_2( cPF5,
@@ -56,13 +56,13 @@ DEF_CHOICE_2( cPF5,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.bitPF5, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF5, FuncDraw
+    set.dbg.bitPF5, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF5, FuncDraw
 )
 
 
 static void OnPress_PC13(bool)
 {
-    Message::RegCPU(2, 15, set.bitPC13).Transmit();
+    Message::RegCPU(2, 15, set.dbg.bitPC13).Transmit();
 }
 
 DEF_CHOICE_2( cPC13,
@@ -70,13 +70,13 @@ DEF_CHOICE_2( cPC13,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.bitPC13, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC13, FuncDraw
+    set.dbg.bitPC13, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC13, FuncDraw
 )
 
 
 static void OnPress_PC14(bool)
 {
-    Message::RegCPU(2, 14, set.bitPC14).Transmit();
+    Message::RegCPU(2, 14, set.dbg.bitPC14).Transmit();
 }
 
 DEF_CHOICE_2(cPC14,
@@ -84,7 +84,7 @@ DEF_CHOICE_2(cPC14,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.bitPC14, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC14, FuncDraw
+    set.dbg.bitPC14, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC14, FuncDraw
 )
 
 
