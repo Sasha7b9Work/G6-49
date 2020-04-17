@@ -14,7 +14,7 @@ static bool inactive = true;
 
 void PFreqMeter::Draw()
 {
-    if (!FREQ_METER_ENABLED)
+    if (set.freq.measure == FreqMeasure::Disable)
     {
         return;
     }
@@ -33,9 +33,9 @@ void PFreqMeter::Draw()
     char buffer[20];
     char text[50];
 
-    if(FREQ_METER_MEASURE_IS_FREQ)
+    if(set.freq.measure == FreqMeasure::Freq)
     {
-        std::sprintf(text, (LANGUAGE ? "%skHz" : "%sêÃö"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, (int)FREQ_BILLING_TIME));
+        std::sprintf(text, (LANGUAGE ? "%skHz" : "%sêÃö"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, (int)set.freq.billingTime));
     }
     else
     {
@@ -53,7 +53,7 @@ void PFreqMeter::Draw()
             {{4, "ìñ"}, {5, "ìñ"}, {6, "ìñ"}, {4, "ìêñ"}, {5, "ìêñ"}}
         };
 
-        StrOut str = strs[FREQ_AVE_PERIOD][FREQ_TIME_STAMPS];
+        StrOut str = strs[set.freq.avePeriod][set.freq.timeStamps];
 
         std::sprintf(text, "%s%s", SU::UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix);
     }
@@ -87,7 +87,7 @@ void PFreqMeter::LoadLevel()
 
     float step = static_cast<float>(max) / 200.0F;
 
-    int value = static_cast<int>(static_cast<float>(max / 2) + static_cast<float>(FREQ_LEVEL) * step);
+    int value = static_cast<int>(static_cast<float>(max / 2) + static_cast<float>(set.freq.level) * step);
 
     Math::Limitation(&value, 0, max - 1);
 
@@ -101,7 +101,7 @@ void PFreqMeter::LoadHysteresis()
 
     float step = static_cast<float>(max) / 100.0F;
 
-    int value = static_cast<int>(step * static_cast<float>(FREQ_HYSTERESIS));
+    int value = static_cast<int>(step * static_cast<float>(set.freq.hysteresis));
 
     Math::Limitation(&value, 0, max - 1);
 

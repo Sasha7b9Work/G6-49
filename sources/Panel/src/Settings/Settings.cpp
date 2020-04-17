@@ -45,7 +45,8 @@ static const Settings defSet =
     {true, true},                       // enabled[2]
     Chan::A,                            // current
     0,                                  // lang
-    true,                               // bigSymbols
+    true                                // bigSymbols
+    ,                               
     {
         PFreqMeter::BillingTime::_1ms,      // freq_billingTime
         PFreqMeter::AvePeriod::_1,          // freq_avePeriod
@@ -58,13 +59,17 @@ static const Settings defSet =
         FreqCouple::AC,
         FreqFiltr::Disable,
         FreqTest::Off
-    },
+    }
+    ,
+    {
+        0, 0, 0, 0, 0, 0
+    }
+    ,
     {
         0,                                  // showConsole
         0,                                  // dbgModeEnabled
         false,                              // showStatistics
-        false,                              // showSends
-        0, 0, 0, 0, 0, 0,
+        false                               // showSends
     }
 };
 

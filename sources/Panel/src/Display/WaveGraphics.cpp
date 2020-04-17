@@ -9,7 +9,7 @@
 
 void WaveGraphics::Draw(Chan::E ch)
 {
-    if(FREQ_METER_ENABLED && !CURRENT_CHANNEL_IS(ch))
+    if((set.freq.measure != FreqMeasure::Disable) && (CURRENT_CHANNEL != ch))
     {
         return;
     }
@@ -40,7 +40,7 @@ int WaveGraphics::X()
 
 int WaveGraphics::Y(Chan::E ch)
 {
-    return (ch == Chan::A || FREQ_METER_ENABLED) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
+    return (ch == Chan::A || (set.freq.measure != FreqMeasure::Disable)) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
 }
 
 

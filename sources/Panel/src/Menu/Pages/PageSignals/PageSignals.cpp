@@ -115,7 +115,7 @@ void PageSignals::OnPress_Form(bool)
 
 void PageSignals::SetForm(TypeForm::E form)
 {
-    if(form == TypeForm::Free && CURRENT_CHANNEL_IS(Chan::B))
+    if(form == TypeForm::Free && (CURRENT_CHANNEL == Chan::B))
     {
         return;
     }

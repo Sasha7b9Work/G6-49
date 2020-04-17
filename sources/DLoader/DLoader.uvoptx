@@ -159,7 +159,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Updater_dl.cpp</Filename>
+          <Filename>.\src\Updater_dl.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/Updater_dl.cpp\75</Expression>
         </Bp>

@@ -32,7 +32,7 @@ DEF_CHOICE_3( cMeasure,                                                         
     "Отключено", "Off",       "Измерения отключены", "Measurements off",
     "Частота",   "Frequency", "Измерение частоты",   "Frequency measurement",
     "Период",    "Period",    "Измерение периода",   "Period measurement",
-    FREQ_METER_MEASURE, pFrequencyCounter, Item::FuncActive, OnPress_Measure, FuncDraw
+    set.freq.measure, pFrequencyCounter, Item::FuncActive, OnPress_Measure, FuncDraw
 )
 
 
@@ -60,7 +60,7 @@ DEF_CHOICE_5( cBillingTime,                                                     
     "100 мс",   "100 ms",   "Длительность измерения 100 миллисекунд",   "Measurement duration 100 milliseconds",
     "1000 мс",  "1000 ms",  "Длительность измерения 1000 миллисекунд",  "Measurement duration 1000 milliseconds",
     "10000 мс", "10000 ms", "Длительность измерения 10000 миллисекунд", "Measurement duration 10000 milliseconds",
-    FREQ_BILLING_TIME, pFrequencyCounter, Item::FuncActive, OnPress_BillingTime, FuncDraw
+    set.freq.billingTime, pFrequencyCounter, Item::FuncActive, OnPress_BillingTime, FuncDraw
 )
 
 static void OnPress_BillingTime(bool)
@@ -118,7 +118,7 @@ DEF_CHOICE_5(cAvePeriod,                                                        
     "100",   "100",   "Измерения производить по ста периодам",            "Measurements over a hundred periods",
     "1000",  "1000",  "Измерения производить по тысяче периодов",         "Measure over a thousand periods",
     "10000", "10000", "Измерения производить по десяти тысячам периодов", "Measure over ten thousand periods",
-    FREQ_AVE_PERIOD, pFrequencyCounter, Item::FuncActive, OnPress_AvePeriod, FuncDraw
+    set.freq.avePeriod, pFrequencyCounter, Item::FuncActive, OnPress_AvePeriod, FuncDraw
 )
 
 static void OnPress_AvePeriod(bool)
@@ -135,7 +135,7 @@ DEF_CHOICE_5(cTimeStamps,                                                       
     "100 кГц", "100 kHz", "", "",
     "1 МГц",   "1 MHz",   "", "",
     "10 МГц",  "10 MHz",  "", "",
-    FREQ_TIME_STAMPS, pFrequencyCounter, Item::FuncActive, OnPress_TimeStamps, FuncDraw
+    set.freq.timeStamps, pFrequencyCounter, Item::FuncActive, OnPress_TimeStamps, FuncDraw
 )
 
 static void OnPress_TimeStamps(bool)
@@ -167,7 +167,7 @@ static void OnChange_FreqLevel()
 DEF_GOVERNOR( gLevel,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
     "Уровень", "Level",
     "Подстройка уровня синхронизации", "Sync level adjustment",
-    FREQ_LEVEL, -100, 100, pFrequencyCounter, Item::FuncActive, OnChange_FreqLevel, EmptyFuncVV, 0
+    set.freq.level, -100, 100, pFrequencyCounter, Item::FuncActive, OnChange_FreqLevel, EmptyFuncVV, 0
 )
 
 
@@ -180,7 +180,7 @@ static void OnChange_Hysteresis()
 DEF_GOVERNOR( gHysteresis,                                                                                                                                  //--- ЧАСТОТОМЕР - Гистерезис ---
     "Гистерезис", "Hysteresis",
     "Задаёт гистерезис для уменьшения влияния помех на точность измерений", "Sets hysteresis to reduce the effect of interference on measurement accuracy",
-    FREQ_HYSTERESIS, 0, 100, pFrequencyCounter, Item::FuncActive, OnChange_Hysteresis, EmptyFuncVV, 0
+    set.freq.hysteresis, 0, 100, pFrequencyCounter, Item::FuncActive, OnChange_Hysteresis, EmptyFuncVV, 0
 )
 
 volatile const GovernorBase *pgHysteresis = &gHysteresis;
@@ -205,12 +205,12 @@ static void Tune_Page()
 {
     PageBase *page = const_cast<PageBase *>(&pFrequencyCounter);
 
-    if (FREQ_METER_MEASURE_IS_FREQ)
+    if (set.freq.measure == FreqMeasure::Freq)
     {
         page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cBillingTime));
         page->items[3] = Item::EmptyLight();
     }
-    else if (FREQ_METER_MEASURE_IS_PERIOD)
+    else if (set.freq.measure == FreqMeasure::Period)
     {
         page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cTimeStamps));
         page->items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cAvePeriod));
@@ -233,7 +233,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
     uint data = 0;
 
      //--- Режим работы ------------------
-    if(FREQ_METER_MEASURE_IS_PERIOD)
+    if(set.freq.measure == FreqMeasure::Period)
     {
         data |= 1;
     }
@@ -248,7 +248,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
         BINARY_U8(00001010),    // -V2501   // 1000
         BINARY_U8(00001110)     // -V2501   // 10000
     };
-    data |= maskAvePeriod[FREQ_AVE_PERIOD];
+    data |= maskAvePeriod[set.freq.avePeriod];
 
     //---------- Время индикации ----------------
 
@@ -269,7 +269,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
         BINARY_U8(01100000),    // -V2501               // 1 с
         BINARY_U8(10000000)     // -V2501               // 10 с
     };
-    data |= maskTime[FREQ_BILLING_TIME];
+    data |= maskTime[set.freq.billingTime];
 
     //--------- Метки времени -------------------
 
@@ -282,7 +282,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
         BINARY_U8(00000000)     // -V2501    // 10 МГц
     };
 
-    data |= (maskTimeStamp[FREQ_TIME_STAMPS] << 8);
+    data |= (maskTimeStamp[set.freq.timeStamps] << 8);
 
     if(set.freq.test == FreqTest::On)
     {

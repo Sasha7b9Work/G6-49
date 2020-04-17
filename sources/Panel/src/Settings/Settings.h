@@ -12,16 +12,6 @@
 #define MENU_POS_ACT_ITEM(x)         (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x)      (set.menu_currentSubPage[x])
 #define CURRENT_CHANNEL              (set.current)
-#define CURRENT_CHANNEL_IS(ch)       (CURRENT_CHANNEL == (ch))
-#define FREQ_METER_MEASURE           (set.freq.measure)
-#define FREQ_METER_MEASURE_IS_FREQ   (FREQ_METER_MEASURE == FreqMeasure::Freq)
-#define FREQ_METER_MEASURE_IS_PERIOD (FREQ_METER_MEASURE == FreqMeasure::Period)
-#define FREQ_METER_ENABLED           (FREQ_METER_MEASURE != FreqMeasure::Disable)
-#define FREQ_AVE_PERIOD              (set.freq.avePeriod)
-#define FREQ_BILLING_TIME            (set.freq.billingTime)
-#define FREQ_TIME_STAMPS             (set.freq.timeStamps)
-#define FREQ_LEVEL                   (set.freq.level)
-#define FREQ_HYSTERESIS              (set.freq.hysteresis)
 
 
 struct SettingsFreqMeter
@@ -46,12 +36,16 @@ struct SettingsDebug
     bool   modeEnabled;
     bool   showStatistics;
     bool   showSends;
-    uint8  bitPE15;
-    uint8  bitPB10;
-    uint8  bitPF0;
-    uint8  bitPF5;
-    uint8  bitPC13;
-    uint8  bitPC14;
+};
+
+struct SettingsRegisters
+{
+    uint8  PE15;
+    uint8  PB10;
+    uint8  PF0;
+    uint8  PF5;
+    uint8  PC13;
+    uint8  PC14;
 };
 
 
@@ -68,6 +62,7 @@ struct Settings // -V690
     bool      bigSymbols;                       // Если 1, то символы выводятся чуть увеличенными
 
     SettingsFreqMeter freq;
+    SettingsRegisters reg;
     SettingsDebug     dbg;
 
     void SaveToMemory();
