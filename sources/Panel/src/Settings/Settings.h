@@ -12,39 +12,22 @@
 #endif
 
 
-#define LANGUAGE                (set.lang)
-
-#define COLOR(x)                (set.disp_Colors[x])
-#define CURRENT_PAGE            (set.menu_currentPage)
-
-#define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
-#define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
-
-#define FL(numBit)              ((FLAG >> (numBit)) & 0x01)
-#define FL_DBG(numBit)          ((FLAG_DBG >> (numBit)) & 0x01)
-#define SET_FL(numBit)          ((FLAG) |= (1 << (numBit)))
-#define CLEAR_FL(numBit)        ((FLAG) &= (~(1 << (numBit))))
-
-#define CURRENT_CHANNEL         (set.current)
-#define CURRENT_CHANNEL_IS(ch)  (CURRENT_CHANNEL == (ch))
-
-#define CONSOLE_ENABLED         (FL(BIT_CONSOLE))
-#define DEBUG_MODE_ENABLED      (FL(BIT_DBG_MODE))
-#define SHOW_STATISTICS         (FL(BIT_STATISTICS))
-/// Если true, то засылка в прибор выполняется при каждом повороте ручки
-#define DEBUG_SHOW_SENDS        (FL(BIT_SHOW_SENDS))
-
-#define FREQ_METER_MEASURE          (set.freq_measure)
+#define LANGUAGE                     (set.lang)
+#define COLOR(x)                     (set.disp_Colors[x])
+#define CURRENT_PAGE                 (set.menu_currentPage)
+#define MENU_POS_ACT_ITEM(x)         (set.menu_posActItem[x])
+#define MENU_CURRENT_SUBPAGE(x)      (set.menu_currentSubPage[x])
+#define CURRENT_CHANNEL              (set.current)
+#define CURRENT_CHANNEL_IS(ch)       (CURRENT_CHANNEL == (ch))
+#define FREQ_METER_MEASURE           (set.freq_measure)
 #define FREQ_METER_MEASURE_IS_FREQ   (FREQ_METER_MEASURE == FreqMeasure::Freq)
 #define FREQ_METER_MEASURE_IS_PERIOD (FREQ_METER_MEASURE == FreqMeasure::Period)
 #define FREQ_METER_ENABLED           (FREQ_METER_MEASURE != FreqMeasure::Disable)
-#define FREQ_AVE_PERIOD             (set.freq_avePeriod)
-#define FREQ_BILLING_TIME           (set.freq_billingTime)
-#define FREQ_TIME_STAMPS            (set.freq_timeStamps)
-#define FREQ_LEVEL                  (set.freq_level)
-#define FREQ_HYSTERESIS             (set.freq_hysteresis)
-
-#define BIG_SYMBOLS                 ((FL(BIT_BIG_SYMBOLS)))
+#define FREQ_AVE_PERIOD              (set.freq_avePeriod)
+#define FREQ_BILLING_TIME            (set.freq_billingTime)
+#define FREQ_TIME_STAMPS             (set.freq_timeStamps)
+#define FREQ_LEVEL                   (set.freq_level)
+#define FREQ_HYSTERESIS              (set.freq_hysteresis)
 
 
 #pragma pack(push, 1)
@@ -52,17 +35,17 @@
 class Settings // -V690
 {
 public:
-    uint16                  size;                                   // Размер структуры Settings
-    col_val                 disp_Colors[32];                        // Цвета
-    Page*                   menu_currentPage;                       // Адрес открытой страницы меню. 0, если открыта главная страница
-    int8                    menu_posActItem[Page::Count];           // Позиция активного пункта меню для каждой страницы
-    int8                    menu_currentSubPage[Page::Count];       // Номер текущей подстраницы для каждой страницы
-    PFreqMeter::BillingTime freq_billingTime;                       // Время счёта
-    PFreqMeter::AvePeriod   freq_avePeriod;                         // Число усредняемых периодов в режиме измерения периода
-    FreqTimeStamps          freq_timeStamps;                        // Метки времени
-    FreqMeasure::E          freq_measure;                           // Режим измерения частотомера
-    int16                   freq_level;                             // Уровень синхронизации
-    int16                   freq_hysteresis;                        // Величина гистерезиса
+    uint16                  size;                             // Размер структуры Settings
+    col_val                 disp_Colors[32];                  // Цвета
+    Page*                   menu_currentPage;                 // Адрес открытой страницы меню. 0, если открыта главная страница
+    int8                    menu_posActItem[Page::Count];     // Позиция активного пункта меню для каждой страницы
+    int8                    menu_currentSubPage[Page::Count]; // Номер текущей подстраницы для каждой страницы
+    PFreqMeter::BillingTime freq_billingTime;                 // Время счёта
+    PFreqMeter::AvePeriod   freq_avePeriod;                   // Число усредняемых периодов в режиме измерения периода
+    FreqTimeStamps          freq_timeStamps;                  // Метки времени
+    FreqMeasure::E          freq_measure;                     // Режим измерения частотомера
+    int16                   freq_level;                       // Уровень синхронизации
+    int16                   freq_hysteresis;                  // Величина гистерезиса
     FreqInterval::E         freq_interval;
     int8                    showConsole;
     bool                    dbgModeEnabled;
@@ -74,23 +57,14 @@ public:
     FreqFiltr::E            freq_filtr;
     uint8                   lang;
     FreqTest::E             freq_test;
-
-    uint                        flag;
-    uint                        flagDBG;
-
-#define FLAG                    set.flag
-#define FLAG_DBG                set.flagDBG
-
-#define BIT_PE15            0
-#define BIT_PB10            1
-#define BIT_PF0             2
-#define BIT_PF5             3
-#define BIT_PC13            4
-#define BIT_PC14            5
-
-
-#define BIT_BIG_SYMBOLS   19  // Если 1, то символы выводятся чуть увеличенными
-#define BIT_SHOW_SENDS    20  // Если 1, то нужно показывать засылаемые настройки
+    bool                    bigSymbols;                       // Если 1, то символы выводятся чуть увеличенными
+    bool                    showSends;
+    uint8                   bitPE15;
+    uint8                   bitPB10;
+    uint8                   bitPF0;
+    uint8                   bitPF5;
+    uint8                   bitPC13;
+    uint8                   bitPC14;
 
     void SaveToMemory();
     void LoadFromMemory();

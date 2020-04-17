@@ -28,7 +28,7 @@ int Font::GetSize()
 
 void Font::ToggleCharacterSize()
 {
-    const Font *f = BIG_SYMBOLS ? (&font8) : (&font7);
+    const Font *f = set.bigSymbols ? (&font8) : (&font7);
 
     fonts[TypeFont::_7] = f;
 

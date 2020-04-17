@@ -57,19 +57,10 @@ static const Settings defSet =
     FreqResist::_1MOhm,
     FreqCouple::AC,
     FreqFiltr::Disable,
-    BINARY_U32(00000000, 00000000, 00010000, 00010000) // flag1
-//                          ||| |  ||||||||  | |-------- 5  BIT_DBG_MODE     
-//                          ||| |  ||||||||  |---------- 7  BIT_STATISTICS   
-//                          ||| |  ||||||||------------- 8  BIT_LANGUAGE       RU
-//                          ||| |  |||||||-------------- 9  BIT_CHAN_A   
-//                          ||| |  ||||||--------------- 10 BIT_CHAN_B   
-//                          ||| |  |||||---------------- 11 BIT_CHANNEL        A
-//                          ||| |  ||------------------- 14 BIT_FREQ_RESIST
-//                          ||| |  |-------------------- 15 BIT_FREQ_COUPLE
-//                          ||| |----------------------- 16 BIT_FREQ_FILTR
-//                          |||------------------------- 18 BIT_FREQ_TEST
-//                          ||-------------------------- 19 BIT_BIG_SYMBOLS
-//                          |--------------------------- 20 BIT_SHOW_SENDS
+    0,                                  // lang
+    FreqTest::Off,
+    true,                               // bigSymbols
+    false                               // showSends
 };
 
 

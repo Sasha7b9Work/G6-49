@@ -444,14 +444,14 @@ DEF_CHOICE_2( cStatistics,                                                      
 )
 
 
-DEF_CHOICE_2_OLD( cShowSends,                                                                                                                            //--- ОТЛАДКА - Показывать параметры ---
+DEF_CHOICE_2( cShowSends,                                                                                                                            //--- ОТЛАДКА - Показывать параметры ---
     "Показывать параметры", "Show options",
     "Показывает параметры, засылаемые в ПЛИС", "Shows parameters sent to FPGA",
     DISABLED_RU,                 DISABLED_EN,
     "Показ параметров отключён", "Parameter display disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ параметров включён",  "Parameter display enabled",
-    FLAG, BIT_SHOW_SENDS, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.showSends, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
