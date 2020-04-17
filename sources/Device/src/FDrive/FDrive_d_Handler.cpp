@@ -64,58 +64,28 @@ void DDrive::Handler::Processing(SimpleMessage *message)
 
     uint8 com = msg->TakeUINT8();
 
-    static const pFuncVV funcs[Command::Count] =
+    pFuncVV func = E;
+
+    switch(com)
     {
-        /* RequestData                  */ E,
-        /* EnableChannel                */ E,
-        /* SetFormWave                  */ E,
-        /* SetFrequency                 */ E,
-        /* SetAmplitude                 */ E,
-        /* SetOffset                    */ E,
-        /* SetDuration                  */ E,
-        /* SetDutyRatio                 */ E,
-        /* SetPhase                     */ E,
-        /* ModeDebug                    */ E,
-        /* SetDelay                     */ E,
-        /* WriteRegister                */ E,
-        /* SetDurationRise              */ E,
-        /* SetDurationFall              */ E,
-        /* SetDurationStady             */ E,
-        /* SetDutyFactor                */ E,
-        /* SetManipulation              */ E,
-        /* SetManipulationDuration      */ E,
-        /* SetManipulationPeriod        */ E,
-        /* SetPacketPeriod              */ E,
-        /* SetPacketNumber              */ E,
-        /* SetStartMode                 */ E,
-        /* SetPeriod                    */ E,
-        /* SetPolarity                  */ E,
-        /* LoadFromDDS                  */ E,
-        /* FreqMeasure                  */ E,
-        /* Log                          */ E,
-        /* FDrive_NumDirsAndFiles       */ GetNumDirsAndFiles,
-        /* FDrive_Mount                 */ E,
-        /* FDrive_RequestDir            */ E,
-        /* FDrive_RequestFile           */ RequestFile,
-        /* Test                         */ E,
-        /* FDrive_RequestFileSize       */ RequestFileSize,
-        /* FDrive_RequestFileString     */ E,
-        /* FDrive_LoadFromExtStorage    */ LoadFromExtStorage,
-        /* FDrive_GetPictureDDS         */ GetPictureDDS,
-        /* SCPI_RecvData                */ E,
-        /* PortCPU                      */ E,
-        /* CalibrationLoad              */ E,
-        /* CalibrationSet               */ E,
+    case Command::FDrive_NumDirsAndFiles:
+        func = GetNumDirsAndFiles;
+        break;
+    case Command::FDrive_RequestFile:
+        func = RequestFile;
+        break;
+    case Command::FDrive_RequestFileSize:
+        func = RequestFileSize;
+        break;
+    case Command::FDrive_LoadFromExtStorage:
+        func = LoadFromExtStorage;
+        break;
+    case Command::FDrive_GetPictureDDS:
+        func = GetPictureDDS;
+        break;
+    }
 
-        /* StartApplication             */ E,
-        /* RequestUpgrade               */ E,
-        /* PortionUpgradeDevice         */ E,
-        /* AnswerUpgradePanel           */ E,
-        /* RequestPortionUpgradePanel   */ E,
-        /* AnswerPortionUpgradePanel    */ E
-    };
-
-    funcs[com]();
+    func();
 }
 
 
