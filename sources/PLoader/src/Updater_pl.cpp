@@ -6,9 +6,24 @@
 #include "Hardware/HAL/HAL.h"
 
 
-static float portionDevice = -1.0F;
-static float portionPanel = -1.0F;
+struct StructUpgradeDevice
+{
+    StructUpgradeDevice() : portionUpgrade(-1.0F) { }
+    float portionUpgrade;
+};
 
+
+struct StructUpgradePanel
+{
+    StructUpgradePanel() : sizeFirmware(-1), numChunk(-1), portionUpgrade(-1.0F) { }
+    int sizeFirmware;               // Общий размер прошивки
+    int numChunk;                   // Текущий обрабатываемый чанк
+    float portionUpgrade;
+};
+
+
+static StructUpgradePanel sup;
+static StructUpgradeDevice sud;
 
 static void Draw();
 
@@ -30,14 +45,14 @@ static void Draw()
     static const int yDevice = 50;
     static const int yPanel = 150;
 
-    if(!(portionDevice < 0.0F))
+    if(!(sud.portionUpgrade < 0.0F))
     {
-        DrawProgress(yDevice, portionDevice);
+        DrawProgress(yDevice, sud.portionUpgrade);
     }
 
-    if(!(portionPanel < 0.0F))
+    if(!(sup.portionUpgrade < 0.0F))
     {
-        DrawProgress(yPanel, portionPanel);
+        DrawProgress(yPanel, sup.portionUpgrade);
     }
 }
 
@@ -60,9 +75,18 @@ bool Updater::Handler(SimpleMessage *message)
 
     uint8 com = message->TakeUINT8();
 
-    if(com == Command::PortionUpgradeDevice)
+    switch(com)
     {
-        portionDevice = message->TakeUINT() / 100.0F;
+    case Command::PortionUpgradeDevice:
+        sud.portionUpgrade = message->TakeUINT() / 100.0F;
+        break;
+
+    case Command::AnswerUpgradePanel:
+        sup.sizeFirmware = message->TakeINT();
+        break;
+
+    case Command::AnswerPortionUpgradePanel:
+        break;
     }
 
     return true;

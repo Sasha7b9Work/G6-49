@@ -27,10 +27,9 @@ bool PHandlers::Processing(SimpleMessage *msg)
     {
     case Command::StartApplication: func = OnStartMainApplication; break;
 
-    case Command::PortionUpgradeDevice:
-    case Command::AnswerUpgradePanel:
-    case Command::RequestPortionUpgradePanel:
-    case Command::AnswerPortionUpgradePanel:
+    case Command::PortionUpgradeDevice:         // Этим сообщением DLoader оповещает о процентах произведённого обновления Device
+    case Command::AnswerUpgradePanel:           // Этим сообщением DLoader сообщает размер прошивки Panel в байтах
+    case Command::AnswerPortionUpgradePanel:    // Ответ с "чанком" прошивки
         func = Updater::Handler;
         break;
     }
@@ -47,17 +46,15 @@ bool PHandlers::Processing(SimpleMessage *msg)
 
 static bool OnStartMainApplication(SimpleMessage *)
 {
-#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
-
     typedef void(*pFunction)();
 
     __disable_irq();
 
     pFunction JumpToApplication;
 
-    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4));
 
-    __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
+    __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
 
     __enable_irq();
 
