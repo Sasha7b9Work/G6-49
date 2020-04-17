@@ -48,7 +48,6 @@ source_group(common             FILES ../common/Command.h
                                       ../common/Transceiver_p.cpp)
 source_group(src                REGULAR_EXPRESSION src/*)
 source_group(Display            REGULAR_EXPRESSION src/Display/*)
-source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
 source_group(Generator          REGULAR_EXPRESSION src/Generator/*)
 source_group(Hardware           REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\HAL      REGULAR_EXPRESSION src/Hardware/HAL/*)
@@ -75,7 +74,6 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Transceiver_p.cpp
                     src/*
                     src/Display/*
-                    src/FDrive/*
                     src/Generator/*
                     src/Hardware/*
                     src/Hardware/HAL/*
