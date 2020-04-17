@@ -22,8 +22,6 @@ extern const PageBase pDebug;
 extern const ButtonBase bSend;
 
 
-static Item emptyItem = {Item::Type::None};
-
 Page *PageDebug::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pDebug));
 /// –егистр, в который будет производитс€ занесение значени€ по нажатию кнопки «ј—Ћј“№
 Register::E currentRegister = Register::FreqMeterLevel;
@@ -598,7 +596,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     bPrev,
     bNext,
     bSend,
-    emptyItem,
+    *Item::EmptyLight(),
     Page::Registers, &pDebug, Item::FuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 

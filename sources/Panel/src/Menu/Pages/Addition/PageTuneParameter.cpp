@@ -97,8 +97,8 @@ static void OnDraw_TuneParameter()
 DEF_PAGE_SB( pTuneParameter,   //-V641
     "ббнд гмювемхъ", "ENTER VALUE", //-V641
     "", "",
-    Item::EmptyLight(),         ///< нймн ббндю - яхлбнк бкебн
-    Item::EmptyLight(),       ///< нймн ббндю - яхлбнк бопюбн
+    Item::EmptyDark(),         ///< нймн ббндю - яхлбнк бкебн
+    Item::EmptyDark(),       ///< нймн ббндю - яхлбнк бопюбн
     &sbCancel,          ///< нймн ббндю - нрлемю
     &sbEnter,           ///< нймн ббндю - ббнд
     Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter

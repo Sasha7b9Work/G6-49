@@ -12,13 +12,21 @@
 #define NAME_FROM_INDEX(index, lang) ((lang) ? namesEN[index] : namesRU[index])
 
 
-static Item empty = { Item::Type::None };
+static Item emptyLight = { Item::Type::NoneLight };
+static Item emptyDark = { Item::Type::NoneDark };
 
 
 Item *Item::EmptyLight()
 {
-    return &empty;
+    return &emptyLight;
 }
+
+
+Item *Item::EmptyDark()
+{
+    return &emptyDark;
+}
+
 
 const char *Choice::NameCurrentSubItem(uint lang) const
 {

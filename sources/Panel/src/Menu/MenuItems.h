@@ -32,20 +32,20 @@ class Item
 {
 public:
     COMMON_PART_MENU_ITEM;
-    /// Разные виды пунктов меню
+    // Разные виды пунктов меню
     struct Type
     {
         enum E
         {
-            None,
-            Choice,             ///< Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
-            Button,             ///< Кнопка.
-            Page,               ///< Страница.
-            Governor,           ///< Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
-            GovernorColor,      ///< Позволяет выбрать цвет.
-            SmallButton,        ///< Кнопка для режима малых кнопок
-            ChoiceParameter,
-            Number
+            NoneLight,
+            NoneDark,
+            Choice,             // Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
+            Button,             // Кнопка.
+            Page,               // Страница.
+            Governor,           // Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
+            GovernorColor,      // Позволяет выбрать цвет.
+            SmallButton,        // Кнопка для режима малых кнопок
+            ChoiceParameter
         } value;
         Type(E v) : value(v) {};
         operator uint8() const { return static_cast<uint8>(value); };
@@ -92,6 +92,8 @@ public:
     static bool FuncActive() { return true; }
 
     static Item *EmptyLight();
+
+    static Item *EmptyDark();
 };
 
 

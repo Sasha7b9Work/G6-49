@@ -34,6 +34,10 @@ void Item::Draw(bool opened, int x, int y) const
     {
         static_cast<const Page *>(this)->DrawClosed(x, y);
     }
+    else if(type == Item::Type::NoneDark)
+    {
+
+    }
     else
     {
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, Menu::GetOpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
