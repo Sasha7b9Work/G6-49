@@ -96,6 +96,7 @@ bool Updater::Handler(SimpleMessage *message)
         sup.sizeFirmware = message->TakeINT();
         sup.numChunk = 0;
         sup.needRequest = true;
+        HAL_EEPROM::EraseSectors(sup.sizeFirmware / (128 * 1024) + 1);
         break;
 
     case Command::AnswerPortionUpgradePanel:
@@ -116,7 +117,7 @@ float StructUpgradePanel::PortionUpgrade()
         return -1.0F;
     }
 
-    return static_cast<float>(numChunk * SIZE_CHUNK) / sizeFirmware * 100.0F;
+    return static_cast<float>(numChunk * SIZE_CHUNK) / sizeFirmware;
 }
 
 
