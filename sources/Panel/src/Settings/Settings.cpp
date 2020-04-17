@@ -56,6 +56,7 @@ static const Settings defSet =
     false,                              // showStatistics
     FreqResist::_1MOhm,
     FreqCouple::AC,
+    FreqFiltr::Disable,
     BINARY_U32(00000000, 00000000, 00010000, 00010000) // flag1
 //                          ||| |  ||||||||  | |-------- 5  BIT_DBG_MODE     
 //                          ||| |  ||||||||  |---------- 7  BIT_STATISTICS   

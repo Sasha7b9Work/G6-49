@@ -97,17 +97,17 @@ static void OnPress_Couple(bool)
 }
 
 
-DEF_CHOICE_2_OLD(cFiltr,                                                                                                                                               //--- ЧАСТОТОМЕР - ФНЧ ---
+DEF_CHOICE_2(cFiltr,                                                                                                                                               //--- ЧАСТОТОМЕР - ФНЧ ---
     "ФНЧ", "LPF",
     "Включает/отключает фильтр нижних частот на входе частотомера", "Enables / disables the low-pass filter at the input of the frequency meter",
     DISABLED_RU, DISABLED_EN, "ФНЧ на входе частотомера отключен",  "LPF at the input of the frequency meter is disabled",
     ENABLED_RU,  ENABLED_EN,  "ФНЧ на входе частотомера водключен", "Low-pass filter at the input of the frequency meter",
-    FLAG, BIT_FREQ_FILTR, pFrequencyCounter, Item::FuncActive, OnPress_Filtr, FuncDraw
+    set.freq_filtr, pFrequencyCounter, Item::FuncActive, OnPress_Filtr, FuncDraw
 )
 
 static void OnPress_Filtr(bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Filtr, (uint)FREQ_FILTR);
+    PGenerator::LoadRegister(Register::FreqMeter_Filtr, (uint)set.freq_filtr);
 }
 
 DEF_CHOICE_5(cAvePeriod,                                                                                                                                //--- ЧАСТОТОМЕР - ЧИСЛО ПЕРИОДОВ ---
@@ -144,12 +144,12 @@ static void OnPress_TimeStamps(bool)
 }
 
 
-DEF_CHOICE_2_OLD(cTest,                                                                                                                                               //--- ЧАСТОТОМЕР - Тест ---
+DEF_CHOICE_2(cTest,                                                                                                                                               //--- ЧАСТОТОМЕР - Тест ---
     "Тест", "Test",
     "Включение/отключение тестового режима", "Enable / disable test mode",
     DISABLED_RU, DISABLED_EN, "", "",
     ENABLED_RU,  ENABLED_EN,  "", "",
-    FLAG, BIT_FREQ_TEST, pFrequencyCounter, Item::FuncActive, OnPress_Test, FuncDraw
+    set.freq_test, pFrequencyCounter, Item::FuncActive, OnPress_Test, FuncDraw
 )
 
 static void OnPress_Test(bool)
@@ -284,7 +284,7 @@ void PageFrequencyCounter::WriteRegisterRG9()
 
     data |= (maskTimeStamp[FREQ_TIME_STAMPS] << 8);
 
-    if(FREQ_TEST)
+    if(set.freq_test == FreqTest::On)
     {
         _SET_BIT(data, 12);
     }

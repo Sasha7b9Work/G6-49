@@ -12,6 +12,8 @@
 #endif
 
 
+#define LANGUAGE                (set.lang)
+
 #define COLOR(x)                (set.disp_Colors[x])
 #define CURRENT_PAGE            (set.menu_currentPage)
 
@@ -32,9 +34,6 @@
 /// Если true, то засылка в прибор выполняется при каждом повороте ручки
 #define DEBUG_SHOW_SENDS        (FL(BIT_SHOW_SENDS))
 
-#define LANGUAGE                (FL(BIT_LANGUAGE))
-
-#define FREQ_FILTR                  ((FreqFiltr)FL(BIT_FREQ_FILTR))
 #define FREQ_METER_MEASURE          (set.freq_measure)
 #define FREQ_METER_MEASURE_IS_FREQ   (FREQ_METER_MEASURE == FreqMeasure::Freq)
 #define FREQ_METER_MEASURE_IS_PERIOD (FREQ_METER_MEASURE == FreqMeasure::Period)
@@ -42,7 +41,6 @@
 #define FREQ_AVE_PERIOD             (set.freq_avePeriod)
 #define FREQ_BILLING_TIME           (set.freq_billingTime)
 #define FREQ_TIME_STAMPS            (set.freq_timeStamps)
-#define FREQ_TEST                   ((FreqTest)FL(BIT_FREQ_TEST))
 #define FREQ_LEVEL                  (set.freq_level)
 #define FREQ_HYSTERESIS             (set.freq_hysteresis)
 
@@ -73,6 +71,9 @@ public:
     bool                    showStatistics;
     FreqResist::E           freq_resist;
     FreqCouple::E           freq_couple;
+    FreqFiltr::E            freq_filtr;
+    uint8                   lang;
+    FreqTest::E             freq_test;
 
     uint                        flag;
     uint                        flagDBG;
@@ -88,9 +89,6 @@ public:
 #define BIT_PC14            5
 
 
-#define BIT_FREQ_FILTR    16  // FreqFiltr   - ФНЧ частотомера
-#define BIT_LANGUAGE      17  // Язык
-#define BIT_FREQ_TEST     18  // FreqTest    - включение тестового режима
 #define BIT_BIG_SYMBOLS   19  // Если 1, то символы выводятся чуть увеличенными
 #define BIT_SHOW_SENDS    20  // Если 1, то нужно показывать засылаемые настройки
 

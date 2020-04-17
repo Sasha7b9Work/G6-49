@@ -39,12 +39,12 @@ void PageService::OnPress_Reset()
 //)
 
 
-DEF_CHOICE_2_OLD(cLanguage,
+DEF_CHOICE_2(cLanguage,
     "Language", "Язык",
     "Выбор языка", "Language choice",
     "Russian",    "Russian",    "", "",
     "Aнглийский", "Английский", "", "",
-    FLAG, BIT_LANGUAGE, pService, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.lang, pService, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
