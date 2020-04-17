@@ -41,12 +41,6 @@ void HAL_EEPROM::EraseSectors(int count)
 }
 
 
-void HAL_EEPROM::EraseSectorTemp()
-{
-    ::EraseSectors(FLASH_SECTOR_10, 1);
-}
-
-
 static void EraseSectors(uint start, uint count)
 {
     CLEAR_FLASH_FLAGS;

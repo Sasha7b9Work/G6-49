@@ -33,14 +33,8 @@ struct HAL_CRC32
 
 struct HAL_EEPROM
 {
-    // Адрес временного сектора, которым мы воспользуемся, чтобы записать прошивку Panel
-    static const int ADDRESS_SECTOR_TEMP = 0x080c0000;
-
     // Стирает count секторов, начиная со стартового адреса основной прошивки
     static void EraseSectors(int count);
-
-    // Стирает временный сектор
-    static void EraseSectorTemp();
 
     static void WriteBuffer(int address, uint8 *data, int size);
 };

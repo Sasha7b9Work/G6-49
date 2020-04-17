@@ -35,11 +35,10 @@ static bool needUpgrade = false;
 
 struct StructUpgradePanel
 {
-    StructUpgradePanel() : inProcess(false), sizeFirmware(-1), sector(-1) { }
+    StructUpgradePanel() : inProcess(false), sizeFirmware(-1) { }
 
     bool inProcess;     // Установленное в true значение означает, что идёт процесс апгрейда panel
     int sizeFirmware;   // Размер прошивки Panel
-    int sector;         // Этот сектор прошивки Panel сейчас записан в сектор EEPROM::TEMP. -1, если сектор не записан
 };
 
 
@@ -59,9 +58,6 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *);
 static void SendMessageAboutDevicePortion(int size, int fullSize);
 
 static int CalculatePortion(int size, int fullSize);
-
-// Переписать с флешки сектор sector в EEPROM
-static void WriteSectorToEEPROM(int sector);
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -166,46 +162,16 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
     {
         int address = num * SIZE_CHUNK;         // Адрес относительно начала прошивки
 
-        int sector = address / (128 * 1024);    // Порядковый номер сектора, в котором находится запрашиваемый "чанк"
+        DLDrive::File::Seek(address);
 
-        if (sector != sup.sector)
-        {
-            WriteSectorToEEPROM(sector);        // Переписываем сектор с флешки в EEPROM, если это необходимо
+        uint8 buffer[1024];
+        std::memset(buffer, 0xFF, 1024);
 
-            sup.sector = sector;
-        }
+        DLDrive::File::Read(1024, buffer);
 
-        address = HAL_EEPROM::ADDRESS_SECTOR_TEMP + address - sector * (128 * 1024);    // Теперь это адрес нашего чанка относительно начала сектора
-
-        Message::AnswerPortionUpgradePanel(num, reinterpret_cast<uint8 *>(address)).TransmitAndSend();
+        Message::AnswerPortionUpgradePanel(num, buffer).TransmitAndSend();
     }
 }
-
-
-static void WriteSectorToEEPROM(int sector)
-{
-    HAL_EEPROM::EraseSectorTemp();
-
-#define _1K 1024
-
-    DLDrive::File::Seek(sector * 128 * _1K);                // Устанавливаем указатель в файле на начало сектора
-
-    uint8 buffer[_1K];                                      // Сюда будем считывать файл сюда
-
-    int readed = _1K;                                       // Здесь будет храниться количество реально считанных байт
-
-    int address = HAL_EEPROM::ADDRESS_SECTOR_TEMP;          // С этого адреса будем сохранять сектор в EEPROM
-
-    for (int i = 0; (i < 128) && (readed == _1K); i++)
-    {
-        readed = DLDrive::File::Read(_1K, buffer);          // Читаем очередную порцию данных
-
-        HAL_EEPROM::WriteBuffer(address, buffer, readed);   // Записываем её в EEPROM
-
-        address += _1K;                                     // Следующую порцию данных будем записывать по этому адресу
-    }
-}
-
 
 static void SendMessageAboutDevicePortion(int size, int fullSize)
 {
