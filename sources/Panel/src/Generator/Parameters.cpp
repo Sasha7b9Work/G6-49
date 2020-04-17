@@ -283,20 +283,20 @@ pString Order::Suffix(uint lang) const
 }
 
 
-void ParameterChoice::ProcessButtonChange()
+void ParameterChoice::ProcessButtonTune()
 {
     NextChoice();
 }
 
 
-void ParameterValue::ProcessButtonChange()
+void ParameterValue::ProcessButtonTune()
 {
     PageTuneParameter::SetParameter(this);
     Menu::SetAdditionPage(PageTuneParameter::self);
 }
 
 
-void ParameterComplex::ProcessButtonChange()
+void ParameterComplex::ProcessButtonTune()
 {
     form->OpenCurrentParameter();
 }

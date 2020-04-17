@@ -32,11 +32,11 @@ void PageService::OnPress_Reset()
     Menu::Init();
 }
 
-DEF_BUTTON( bReset,                                                                                                                                                 //--- ОТЛАДКА - СБРОС ---
-    "СБРОС", "RESET",
-    "Сброс настроек на значения по умолчанию", "Reset to default",
-    pService, Item::FuncActive, PageService::OnPress_Reset, FuncDraw
-)
+//DEF_BUTTON( bReset,                                                                                                                                                 //--- ОТЛАДКА - СБРОС ---
+//    "СБРОС", "RESET",
+//    "Сброс настроек на значения по умолчанию", "Reset to default",
+//    pService, Item::FuncActive, PageService::OnPress_Reset, FuncDraw
+//)
 
 
 DEF_CHOICE_2(cLanguage,

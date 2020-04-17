@@ -22,7 +22,7 @@ void init()
 
     setCal.Load();
 
-    set.LoadFromMemory(false);
+    set.LoadFromMemory();
     set.LoadToDevice();
 
     Menu::Init();

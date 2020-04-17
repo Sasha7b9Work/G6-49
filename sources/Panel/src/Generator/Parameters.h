@@ -57,7 +57,7 @@ public:
     Form *GetForm();
     
     // Обработчик нажатия кнопки "Изменить"
-    virtual void ProcessButtonChange() { };
+    virtual void ProcessButtonTune() { };
 
     Viewer viewer;
 
@@ -121,7 +121,7 @@ public:
         return (type == Offset);
     }
 
-    virtual void ProcessButtonChange();
+    virtual void ProcessButtonTune();   // override
 
 private:
     E type;
@@ -245,7 +245,7 @@ public:
 
     virtual pString GetStringValue() const;
 
-    virtual void ProcessButtonChange();
+    virtual void ProcessButtonTune();     // override
 
 private:
 	E type;
@@ -303,7 +303,7 @@ public:
 
     virtual pString GetStringValue() const;
 
-    virtual void ProcessButtonChange();
+    virtual void ProcessButtonTune();   // override
 private:
     /// Здесь находятся дополнительные параметры в случае, если они требуются
     Parameter **params;
