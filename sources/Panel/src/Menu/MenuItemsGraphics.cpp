@@ -10,36 +10,16 @@
 
 void Item::Draw(bool opened, int x, int y) const
 {
-    if (type == Item::Type::Choice)
+    switch(type)
     {
-        static_cast<const Choice *>(this)->Draw(opened, x, y);
-    }
-    else if (type == Item::Type::Button)
-    {
-        static_cast<const Button *>(this)->Draw(x, y);
-    }
-    else if (type == Item::Type::ChoiceParameter)
-    {
-        static_cast<const ChoiceParameter *>(this)->Draw(opened, x, y);
-    }
-    else if (type == Item::Type::SmallButton)
-    {
-        static_cast<const SButton *>(this)->Draw(x, y);
-    }
-    else if(type == Item::Type::Governor)
-    {
-        static_cast<const Governor *>(this)->Draw(x, y);
-    }
-    else if(type == Item::Type::Page)
-    {
-        static_cast<const Page *>(this)->DrawClosed(x, y);
-    }
-    else if(type == Item::Type::NoneDark)
-    {
-
-    }
-    else
-    {
+    case Item::Type::Choice:          static_cast<const Choice *>(this)->Draw(opened, x, y);          break;
+    case Item::Type::Button:          static_cast<const Button *>(this)->Draw(x, y);                  break;
+    case Item::Type::ChoiceParameter: static_cast<const ChoiceParameter *>(this)->Draw(opened, x, y); break;
+    case Item::Type::SmallButton:     static_cast<const SButton *>(this)->Draw(x, y);                 break;
+    case Item::Type::Governor:        static_cast<const Governor *>(this)->Draw(x, y);                break;
+    case Item::Type::Page:            static_cast<const Page *>(this)->DrawClosed(x, y);              break;
+    case Item::Type::NoneDark:                                                                        break;
+    default:    
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, Menu::GetOpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
     }
 }
