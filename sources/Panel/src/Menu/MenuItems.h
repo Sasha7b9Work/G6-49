@@ -12,7 +12,7 @@ typedef bool (*pFuncBKey)(const Key&);
 
 /// Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                               \
-    uint8           type;           /* Тип итема */                                                                                         \
+    TypeItem::E     type;           /* Тип итема */                                                                                         \
     int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                            \
     bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                  \
     uint8           name;           /* Имя из перечисления NamePage, если type == Item_Page */                                              \

@@ -18,7 +18,11 @@ void Item::Draw(bool opened, int x, int y) const
     case TypeItem::SmallButton:     static_cast<const SButton *>(this)->Draw(x, y);                 break;
     case TypeItem::Governor:        static_cast<const Governor *>(this)->Draw(x, y);                break;
     case TypeItem::Page:            static_cast<const Page *>(this)->DrawClosed(x, y);              break;
-    case TypeItem::NoneDark:                                                                        break;
+
+    case TypeItem::NoneLight:
+    case TypeItem::NoneDark:
+    case TypeItem::GovernorColor:
+        break;
     default:    
         Painter::FillRegion(x + 2, y + 2, Item::WIDTH - 5, Item::HEIGHT - 4, Menu::GetOpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
     }
