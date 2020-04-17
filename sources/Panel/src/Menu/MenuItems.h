@@ -26,30 +26,29 @@ class PageBase;
 class Page;
 class Form;
 
+// Разные виды пунктов меню
+struct TypeItem
+{
+    enum E
+    {
+        NoneLight,
+        NoneDark,
+        Choice,             // Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
+        Button,             // Кнопка.
+        Page,               // Страница.
+        Governor,           // Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
+        GovernorColor,      // Позволяет выбрать цвет.
+        SmallButton,        // Кнопка для режима малых кнопок
+        ChoiceParameter
+    };
+};
+
+
    
 class Item
 {
 public:
     COMMON_PART_MENU_ITEM;
-    // Разные виды пунктов меню
-    struct Type
-    {
-        enum E
-        {
-            NoneLight,
-            NoneDark,
-            Choice,             // Пункт выбора - позволяет выбрать одно из нескольких заданных значений.
-            Button,             // Кнопка.
-            Page,               // Страница.
-            Governor,           // Регулятор - позволяет выбрать любое целое числовое значение из заранее заданного диапазаона.
-            GovernorColor,      // Позволяет выбрать цвет.
-            SmallButton,        // Кнопка для режима малых кнопок
-            ChoiceParameter
-        };
-        //Type(E v) : value(v) {};
-        //operator uint8() const { return static_cast<uint8>(value); };
-        //bool Is(E v) const     { return (v == value); };
-    };
     /// \brief Возвращает true, если элемент меню control затенён (находится не на самом верхнем слое. Как правило, это означает, что раскрыт 
     /// раскрывающийся элемент меню вроде Choice или Governor
     bool IsShade() const;
@@ -66,7 +65,7 @@ public:
     /// Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
     void Press(const Key &control);
 
-    Type::E GetType() const;
+    TypeItem::E GetType() const;
 
     /// Возвращает порядковый номер пункта меню на странице
     int PositionOnPage() const;

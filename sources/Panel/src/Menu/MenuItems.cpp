@@ -12,8 +12,8 @@
 #define NAME_FROM_INDEX(index, lang) ((lang) ? namesEN[index] : namesRU[index])
 
 
-static Item emptyLight = { Item::Type::NoneLight };
-static Item emptyDark = { Item::Type::NoneDark };
+static Item emptyLight = { TypeItem::NoneLight };
+static Item emptyDark = { TypeItem::NoneDark };
 
 
 Item *Item::EmptyLight()
@@ -105,7 +105,7 @@ bool Item::IsPressed() const
 
 bool Item::IsOpened() const
 {
-    if (type == Item::Type::Page)
+    if (type == TypeItem::Page)
     {
         return Keeper()->CurrentItemIsOpened();
     }

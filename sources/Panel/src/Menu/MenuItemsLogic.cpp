@@ -378,27 +378,27 @@ void Item::Press(const Key &key)
     {
         Menu::pressedItem = (key.IsDown() && !IsOpened()) ? this : 0;
 
-        if (type == Item::Type::Choice)
+        if (type == TypeItem::Choice)
         {
             static_cast<Choice *>(this)->Press(key);
         }
-        else if (type == Item::Type::Button)
+        else if (type == TypeItem::Button)
         {
             static_cast<Button *>(this)->Press(key.action);
         }
-        else if (type == Item::Type::ChoiceParameter)
+        else if (type == TypeItem::ChoiceParameter)
         {
             static_cast<ChoiceParameter *>(this)->Press(key.action);
         }
-        else if (type == Item::Type::SmallButton)
+        else if (type == TypeItem::SmallButton)
         {
             static_cast<SButton *>(this)->Press(key.action);
         }
-        else if(type == Item::Type::Page)
+        else if(type == TypeItem::Page)
         {
             static_cast<Page *>(this)->Press(key);
         }
-        else if(type == Item::Type::Governor)
+        else if(type == TypeItem::Governor)
         {
             static_cast<Governor *>(this)->Press(key);
         }
@@ -406,9 +406,9 @@ void Item::Press(const Key &key)
 }
 
 
-Item::Type::E Item::GetType() const
+TypeItem::E Item::GetType() const
 {
-    return static_cast<Item::Type::E>(type);
+    return static_cast<TypeItem::E>(type);
 }
 
 
@@ -416,11 +416,11 @@ int8 Choice::CurrentIndex() const
 {
     int8 retValue = 0;
 
-    if (type == Item::Type::Choice)
+    if (type == TypeItem::Choice)
     {
         retValue = *cell;
     }
-    else if (type == Item::Type::ChoiceParameter)
+    else if (type == TypeItem::ChoiceParameter)
     {
         const ChoiceParameter *param = reinterpret_cast<const ChoiceParameter *>(this);
 
@@ -435,7 +435,7 @@ int8 Choice::CurrentIndex() const
 
 int8 ChoiceBase::CurrentIndex() const
 {
-    if(type == Item::Type::Choice)
+    if(type == TypeItem::Choice)
     {
         return *cell;
     }
