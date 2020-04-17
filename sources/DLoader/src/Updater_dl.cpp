@@ -69,11 +69,6 @@ void Updater::Handler(SimpleMessage *message)
     uint8 com = message->TakeUINT8();
 
     pFunc func = E;
-
-    if(com != Command::RequestUpgrade)
-    {
-        com = com;
-    }
     
     switch(com)
     {

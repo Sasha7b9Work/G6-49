@@ -28,9 +28,12 @@ void DHandlers::Processing(SimpleMessage *msg)
 
     switch(com)
     {
-    case Command::RequestData:                func = SendData;         break;
-    case Command::RequestUpgrade:             func = Updater::Handler; break;
-    case Command::RequestPortionUpgradePanel: func = Updater::Handler; break;
+    case Command::RequestData: func = SendData; break;
+
+    case Command::RequestUpgrade:
+    case Command::RequestPortionUpgradePanel:
+        func = Updater::Handler;
+        break;
     }
 
     func(msg);
