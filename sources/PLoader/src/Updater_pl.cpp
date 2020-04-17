@@ -122,7 +122,7 @@ float StructUpgradePanel::PortionUpgrade()
 
 bool StructUpgradePanel::LastChunk()
 {
-    return (sup.numChunk * SIZE_CHUNK) + SIZE_CHUNK >= sup.sizeFirmware;
+    return ((numChunk * SIZE_CHUNK) + SIZE_CHUNK) >= sizeFirmware;
 }
 
 
@@ -135,6 +135,10 @@ static void WriteNewChunk(int16 num, uint crc, uint8 chunk[SIZE_CHUNK])
         if(sup.LastChunk())
         {
             sup.numChunk = -1;
+        }
+        else
+        {
+            sup.numChunk++;
         }
     }
 

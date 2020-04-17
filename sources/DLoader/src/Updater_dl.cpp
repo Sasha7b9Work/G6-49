@@ -70,6 +70,11 @@ void Updater::Handler(SimpleMessage *message)
 
     pFunc func = E;
 
+    if(com != Command::RequestUpgrade)
+    {
+        com = com;
+    }
+    
     switch(com)
     {
     case Command::RequestUpgrade:             func = OnRequestUpgrade;             break;
@@ -169,7 +174,7 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
 
         DLDrive::File::Read(1024, buffer);
 
-        Message::AnswerPortionUpgradePanel(num, buffer).TransmitAndSend();
+        Message::AnswerPortionUpgradePanel(num, buffer).Transmit();
     }
 }
 
