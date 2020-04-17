@@ -191,8 +191,8 @@ DEF_PAGE_8( pFrequencyCounter,                                                  
     "Управление фукнциями частотомера", "Freqmeter control",
     &cMeasure,       ///< ЧАСТОТОМЕР - Измерение
     &gLevel,         ///< ЧАСТОТОМЕР - Уровень
-    Item::Empty(),
-    Item::Empty(),
+    Item::EmptyLight(),
+    Item::EmptyLight(),
     &cResist,        ///< ЧАСТОТОМЕР - Сопротивление
     &cCouple,        ///< ЧАСТОТОМЕР - Вход
     &cFiltr,         ///< ЧАСТОТОМЕР - ФНЧ
@@ -208,7 +208,7 @@ static void Tune_Page()
     if (FREQ_METER_MEASURE_IS_FREQ)
     {
         page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cBillingTime));
-        page->items[3] = Item::Empty();
+        page->items[3] = Item::EmptyLight();
     }
     else if (FREQ_METER_MEASURE_IS_PERIOD)
     {
@@ -217,8 +217,8 @@ static void Tune_Page()
     }
     else
     {
-        page->items[2] = Item::Empty();
-        page->items[3] = Item::Empty(); //-V656
+        page->items[2] = Item::EmptyLight();
+        page->items[3] = Item::EmptyLight(); //-V656
     } //-V656
 }
 

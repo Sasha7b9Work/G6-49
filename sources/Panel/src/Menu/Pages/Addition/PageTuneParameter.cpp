@@ -24,39 +24,6 @@ void PageTuneParameter::SetParameter(Parameter *parameter)
 }
 
 
-static void Draw_Left(int, int)
-{
-}
-
-static void OnPress_OrderUp()
-{
-
-}
-
-DEF_SMALL_BUTTON(sbOrderUp,                                                                                                                               //--- ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂËÅÂÎ ---
-    "Ïîğÿäîê áîëüøå", "Order more",
-    "Óâåëè÷èòü ïîğÿäîê åäèíèöû èçìåğåíèÿ", "Increase unit order",
-    *PageTuneParameter::self, Item::FuncActive, OnPress_OrderUp, Draw_Left
-)
-
-
-static void Draw_Right(int, int)
-{
-}
-
-static void OnPress_OrderDown()
-{
-
-}
-
-DEF_SMALL_BUTTON(sbOrderDown,                                                                                                                            //--- ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂÏĞÀÂÎ ---
-    "Ïîğÿäîê ìåíüøøå", "Order less",
-    "Óìåíüøèòü ïîğÿäîê åäèíèöû èçìåğåíèÿ", "Reduce unit order",
-    *PageTuneParameter::self, Item::FuncActive, OnPress_OrderDown, Draw_Right
-)
-
-
-
 static void OnPress_Cancel()
 {
     Parameter *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
@@ -130,8 +97,8 @@ static void OnDraw_TuneParameter()
 DEF_PAGE_SB( pTuneParameter,   //-V641
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", "ENTER VALUE", //-V641
     "", "",
-    &sbOrderUp,         ///< ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂËÅÂÎ
-    &sbOrderDown,       ///< ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂÏĞÀÂÎ
+    Item::EmptyLight(),         ///< ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂËÅÂÎ
+    Item::EmptyLight(),       ///< ÎÊÍÎ ÂÂÎÄÀ - ÑÈÌÂÎË ÂÏĞÀÂÎ
     &sbCancel,          ///< ÎÊÍÎ ÂÂÎÄÀ - ÎÒÌÅÍÀ
     &sbEnter,           ///< ÎÊÍÎ ÂÂÎÄÀ - ÂÂÎÄ
     Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter

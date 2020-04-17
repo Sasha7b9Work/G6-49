@@ -25,7 +25,7 @@ DEF_PAGE_4( mainPageMenu,
     PageSignals::self,
     PageFrequencyCounter::self,
     PageService::self,
-    Item::Empty(),
+    Item::EmptyLight(),
     Page::Main, 0, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 

@@ -15,7 +15,7 @@
 static Item empty = { Item::Type::None };
 
 
-Item *Item::Empty()
+Item *Item::EmptyLight()
 {
     return &empty;
 }
@@ -54,7 +54,7 @@ Item *Page::GetItem(const Key &key) const
 {
     int index = CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Key::F1);
 
-    return (index < NumItems()) ? const_cast<Item *>(items[index]) : Item::Empty();
+    return (index < NumItems()) ? const_cast<Item *>(items[index]) : Item::EmptyLight();
 }
 
 
