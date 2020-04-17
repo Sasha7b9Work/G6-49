@@ -72,65 +72,101 @@ void DHandlers::Processing(SimpleMessage *msg)
 {
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
-    static const pFuncInterfaceVpM funcs[Command::Count] =
-    {
-        /* RequestData                */ SendData,
-        /* EnableChannel              */ EnableChannel,
-        /* SetFormWave                */ SetFormWave,
-        /* SetFrequency               */ SetFrequency,
-        /* SetAmplitude               */ SetAmplitude,
-        /* SetOffset                  */ SetOffset,
-        /* SetDuration                */ SetDuration,
-        /* SetDutyRatio               */ SetDutyRatio,
-        /* SetPhase                   */ SetPhase,
-        /* ModeDebug                  */ ModeDebug,
-        /* SetDelay                   */ SetDelay,
-        /* WriteRegister              */ WriteRegister,
-        /* SetDurationRise            */ E,
-        /* SetDurationFall            */ E,
-        /* SetDurationStady           */ E,
-        /* SetDutyFactor              */ E,
-        /* SetManipulation            */ SetManipulation,
-        /* SetManipulationDuration    */ SetManipulationDuration,
-        /* SetManipulationPeriod      */ SetManipulationPeriod,
-        /* SetPacketPeriod            */ SetPacketPeriod,
-        /* SetPacketNumber            */ SetPacketNumber,
-        /* SetStartMode               */ SetStartMode,
-        /* SetPeriod                  */ SetPeriod,
-        /* SetPolarity                */ SetPolarity,
-        /* LoadFromDDS                */ LoadFormDDS,
-        /* FreqMeasure                */ E,
-        /* Log                        */ E,
-        /* FDrive_NumDirsAndFiles     */ DDrive::Handler::Processing,
-        /* FDrive_Mount               */ DDrive::Handler::Processing,
-        /* FDrive_RequestDir          */ DDrive::Handler::Processing,
-        /* FDrive_RequestFile         */ DDrive::Handler::Processing,
-        /* Test                       */ Test,
-        /* FDrive_RequestFileSize     */ DDrive::Handler::Processing,
-        /* FDrive_RequestFileString   */ DDrive::Handler::Processing,
-        /* FDrive_LoadFromExtStorage  */ DDrive::Handler::Processing,
-        /* FDrive_GetPictureDDS       */ DDrive::Handler::Processing,
-        /* SCPI_RecvData              */ DVCP::Handler::Processing,
-        /* PortCPU                    */ SetPin,
-        /* CalibrationLoad            */ CalibrationLoad,
-        /* CalibrationSet             */ CalibrationSet,
-
-        /* StartApplication           */ E,
-        /* RequestUpgrade             */ E,
-        /* PortionUpgradeDevice       */ E,
-        /* AnswerUpgradePanel         */ E,
-        /* RequestPortionUpgradePanel */ E,
-        /* AnswerPortionUpgradePanel  */ E
-    };
-
     uint8 com = msg->TakeUINT8();
 
-    pFuncInterfaceVpM func = funcs[com];
+    pFuncInterfaceVpM func = E;
 
-//    if(func != DHandlers::SendData && func != DHandlers::E)
-//    {
-//        func = func;
-//    }
+    switch(com)
+    {
+    case Command::RequestData:
+        func = SendData;
+        break;
+    case Command::EnableChannel:
+        func = EnableChannel;
+        break;
+    case Command::SetFormWave:
+        func = SetFormWave;
+        break;
+    case Command::SetFrequency:
+        func = SetFrequency;
+        break;
+    case Command::SetAmplitude:
+        func = SetAmplitude;
+        break;
+    case Command::SetOffset:
+        func = SetOffset;
+        break;
+    case Command::SetDuration:
+        func = SetDuration;
+        break;
+    case Command::SetDutyRatio:
+        func = SetDutyRatio;
+        break;
+    case Command::SetPhase:
+        func = SetPhase;
+        break;
+    case Command::ModeDebug:
+        func = ModeDebug;
+        break;
+    case Command::SetDelay:
+        func = SetDelay;
+        break;
+    case Command::WriteRegister:
+        func = WriteRegister;
+        break;
+    case Command::SetManipulation:
+        func = SetManipulation;
+        break;
+    case Command::SetManipulationDuration:
+        func = SetManipulationDuration;
+        break;
+    case Command::SetManipulationPeriod:
+        func = SetManipulationPeriod;
+        break;
+    case Command::SetPacketPeriod:
+        func = SetPacketPeriod;
+        break;
+    case Command::SetPacketNumber:
+        func = SetPacketNumber;
+        break;
+    case Command::SetStartMode:
+        func = SetStartMode;
+        break;
+    case Command::SetPeriod:
+        func = SetPeriod;
+        break;
+    case Command::SetPolarity:
+        func = SetPolarity;
+        break;
+    case Command::LoadFormDDS:
+        func = LoadFormDDS;
+        break;
+    case Command::Test:
+        func = Test;
+        break;
+    case Command::PortCPU:
+        func = SetPin;
+        break;
+    case Command::CalibrationLoad:
+        func = CalibrationLoad;
+        break;
+    case Command::CalibrationSet:
+        func = CalibrationSet;
+        break;
+    case Command::SCPI_Data:
+        func = DVCP::Handler::Processing;
+        break;
+    case Command::FDrive_NumDirsAndFiles:
+    case Command::FDrive_Mount:
+    case Command::FDrive_RequestDir:
+    case Command::FDrive_RequestFile:
+    case Command::FDrive_RequestFileString:
+    case Command::FDrive_RequestFileSize:
+    case Command::FDrive_LoadFromExtStorage:
+    case Command::FDrive_GetPictureDDS:
+        func = DDrive::Handler::Processing;
+        break;
+    }
 
     func(msg);
 }
