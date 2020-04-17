@@ -19,63 +19,32 @@ bool PHandlers::Processing(SimpleMessage *msg)
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
 
-    static const pFuncBpM funcs[Command::Count] =
-    {
-        /* RequestData                */ PHandlers::Request,
-        /* EnableChannel              */ E,
-        /* SetFormWave                */ E,
-        /* SetFrequency               */ E,
-        /* SetAmplitude               */ E,
-        /* SetOffset                  */ E,
-        /* SetDuration                */ E,
-        /* SetDutyRatio               */ E,
-        /* SetPhase                   */ E,
-        /* ModeDebug                  */ E,
-        /* SetDelay                   */ E,
-        /* WriteRegister              */ E,
-        /* SetDurationRise            */ E,
-        /* SetDurationFall            */ E,
-        /* SetDurationStady           */ E,
-        /* SetDutyFactor              */ E,
-        /* SetManipulation            */ E,
-        /* SetManipulationDuration    */ E,
-        /* SetManipulationPeriod      */ E,
-        /* SetPacketPeriod            */ E,
-        /* SetPacketNumber            */ E,
-        /* SetStartMode               */ E,
-        /* SetPeriod                  */ E,
-        /* SetPolarity                */ E,
-        /* LoadFromDDS                */ E,
-        /* FreqMeasure                */ PHandlers::FreqMeasure,
-        /* Log                        */ PHandlers::Log,
-        /* FDrive_NumDirsAndFiles     */ FDrive::Handler::Processing,
-        /* FDrive_Mount               */ FDrive::Handler::Processing,
-        /* FDrive_RequestDir          */ FDrive::Handler::Processing,
-        /* FDrive_RequestFile         */ FDrive::Handler::Processing,
-        /* Test                       */ E,
-        /* FDrive_RequestFileSize     */ FDrive::Handler::Processing,
-        /* FDrive_RequestFileString   */ FDrive::Handler::Processing,
-        /* FDrive_LoadFromExtStorage  */ FDrive::Handler::Processing,
-        /* FDrive_GetPictureDDS       */ FDrive::Handler::Processing,
-        /* SCPI_Data                  */ SCPI::Handler::Processing,
-        /* PortCPU                    */ E,
-        /* CalibrationLoad            */ E,
-        /* CalibrationSet             */ E,
-
-        /* StartApplication           */ E,
-        /* RequestUpgrade             */ E,
-        /* PortionUpgradeDevice       */ E,
-        /* AnswerUpgradePanel         */ E,
-        /* RequestPortionUpgradePanel */ E,
-        /* AnswerPortionUpgradePanel  */ E
-    };
-
     uint8 command = msg->TakeUINT8();
+
+    pFuncBpM func = E;
+
+    switch(command)
+    {
+    case Command::RequestData: func = PHandlers::Request;        break;
+    case Command::FreqMeasure: func = PHandlers::FreqMeasure;    break;
+    case Command::Log:         func = PHandlers::Log;            break;
+    case Command::SCPI_Data:   func = SCPI::Handler::Processing; break;
+
+    case Command::FDrive_NumDirsAndFiles:
+    case Command::FDrive_Mount:
+    case Command::FDrive_RequestDir:
+    case Command::FDrive_RequestFile:
+    case Command::FDrive_RequestFileSize:
+    case Command::FDrive_RequestFileString:
+    case Command::FDrive_LoadFromExtStorage:
+    case Command::FDrive_GetPictureDDS:
+        func = FDrive::Handler::Processing;
+        break;
+    }
 
     if (command < Command::Count)
     {
-        /// —юда сообщение передаЄтс€ уже без первого байта
-        return funcs[command](msg);
+        return func(msg);
     }
     else
     {
