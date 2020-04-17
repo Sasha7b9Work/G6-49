@@ -106,10 +106,6 @@ bool operator!=(const Color &left, const Color &right);
 bool operator==(const Color &left, const Color &right);
 bool operator>(const Color &left, const Color &right);
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable : 4623)
-#endif
 
 class ColorType
 {
@@ -139,9 +135,6 @@ private:
 #define DEF_COLOR_TYPE(name, r, g, b, sR, sG, sB, bright, col) ColorType name = {r, g, b, sR, sG, sB, bright, col, 0, false, false};
 #define COLOR_TYPE(r, g, b, sR, sG, sB, bright, col) {r, g, b, sR, sG, sB, bright, col, 0, false, false};
 
-#ifdef WIN32
-#pragma warning(pop)
-#endif
 
 #define MAKE_COLOR(r, g, b) ((col_val)(static_cast<uint>(b) + (static_cast<uint>(g) << 8) + (static_cast<uint>(r) << 16)))
 #define R_FROM_COLOR(color) (((col_val)(color) >> 16) & 0xff)

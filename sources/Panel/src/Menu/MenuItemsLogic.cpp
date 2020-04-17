@@ -14,13 +14,6 @@
 #include <string.h>
 
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4626 5027)
-#endif
-
-
-
 enum DIRECTION
 {
     NONE,
@@ -600,8 +593,3 @@ bool Page::Press(const Key &key)
 
     return false;
 }
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

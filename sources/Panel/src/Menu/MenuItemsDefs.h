@@ -14,11 +14,6 @@ static const ButtonBase name = { TypeItem::Button, 0, false, Page::NoPage, &keep
     funcPress, funcDraw };
 
 
-#define DEF_TIME(name, titleRU, titleEN, hintRU, hintEN, keeper, funcActive, cur, h, mi, s, mo, d, y)                                       \
-static const TimeBase name = { TypeItem::E::Time, 0, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},          \
-    &cur, &h, &mi, &s, &mo, &d, &y };
-
-
 #define DEF_GOVERNOR(name, titleRU, hintRU, titleEN, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw, funcPress)    \
 static const GovernorBase name = { TypeItem::Governor, 0, false, Page::NoPage, (const PageBase *)&keeper,                                 \
     {titleRU, hintRU}, {titleEN, hintEN}, funcActive, min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw, funcPress};

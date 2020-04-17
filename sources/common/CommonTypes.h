@@ -1,12 +1,6 @@
 #pragma once
 #include "defines.h"
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)
-#endif
-
-
 
 struct Chan
 {
@@ -98,7 +92,3 @@ struct KoeffCal
         Count
     } value;
 };
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

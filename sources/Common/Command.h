@@ -2,12 +2,6 @@
 #include "CommonTypes.h"
 
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4623)
-#endif
-
-
 /// Возможные команды для передачи в основной процессор
 struct Command
 {
@@ -153,8 +147,3 @@ struct Register
 #define NAME_FORM(form, lang)  Form(form).Name(lang)
 #define FORM_RU(form) NAME_FORM(form, 0)
 #define FORM_EN(form) NAME_FORM(form, 1)
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif

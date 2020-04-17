@@ -1,16 +1,7 @@
 #include "defines.h"
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4514)   // unreferenced inline function has been removed
-#endif
-
 #include "Common.h"
 #include "Utils/Math.h"
 #include <cmath>
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif
 
 
 FloatValue::FloatValue(int units, uint mUnits, uint uUnits, uint nUnits)
