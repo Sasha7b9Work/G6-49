@@ -20,6 +20,7 @@ struct StructUpgradePanel
     int16 numChunk;                     // Текущий обрабатываемый чанк
     bool needRequest;                   // Если true, то нужно посылать запрос на numChunk "чанк"
     float PortionUpgrade();             // Возвращает процент записанного объёма прошивки
+    bool LastChunk();                   // Возвращает true, если numChunk - последний "чанк" из прошивки
 };
 
 
@@ -45,6 +46,7 @@ void Updater::Update()
     if(sup.needRequest)
     {
         Message::RequestPortionUpgradePanel(sup.numChunk).Transmit();
+        sup.needRequest = false;
     }
 }
 
@@ -114,11 +116,27 @@ float StructUpgradePanel::PortionUpgrade()
         return -1.0F;
     }
 
-    return (numChunk * SIZE_CHUNK) / sizeFirmware * 100.0F;
+    return static_cast<float>(numChunk * SIZE_CHUNK) / sizeFirmware * 100.0F;
+}
+
+
+bool StructUpgradePanel::LastChunk()
+{
+    return (sup.numChunk * SIZE_CHUNK) + SIZE_CHUNK >= sup.sizeFirmware;
 }
 
 
 static void WriteNewChunk(int16 num, uint crc, uint8 chunk[SIZE_CHUNK])
 {
+    if(num == sup.numChunk && HAL_CRC32::CalculateALIGN32(chunk, SIZE_CHUNK) == crc)
+    {
+        HAL_EEPROM::WriteBuffer(Updater::MAIN_PROGRAM_START_ADDRESS + num * SIZE_CHUNK, chunk, SIZE_CHUNK);
 
+        if(sup.LastChunk())
+        {
+            sup.numChunk = -1;
+        }
+    }
+
+    sup.needRequest = true;
 }

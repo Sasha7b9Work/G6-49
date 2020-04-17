@@ -29,7 +29,7 @@ struct HAL_EEPROM
     // Стирает count секторов, начиная со стартового адреса основной прошивки
     static void EraseSectors(int count);
 
-    static void WriteBuffer(uint address, uint8 *data, int size);
+    static void WriteBuffer(int address, uint8 *data, int size);
 };
 
 
