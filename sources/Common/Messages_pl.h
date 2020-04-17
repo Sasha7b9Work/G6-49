@@ -40,7 +40,7 @@ namespace Message
     class RequestPortionUpgradePanel : public SimpleMessage
     {
     public:
-        RequestPortionUpgradePanel(uint16 num);
+        RequestPortionUpgradePanel(int16 num);
     };
 
     // Этим собщением DLoader отвечат на запрос порции обновления от PLoader

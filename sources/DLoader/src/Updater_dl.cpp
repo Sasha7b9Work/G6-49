@@ -102,7 +102,12 @@ void Updater::UpgradeDevice()
 
     if(fullSize != -1)
     {
-        int numSectors = fullSize / (128 * 1024) + 1;
+        int numSectors = fullSize / (128 * 1024);
+
+        if(fullSize % (128 * 1024))
+        {
+            numSectors++;
+        }
 
         HAL_EEPROM::EraseSectors(numSectors);
 
@@ -153,7 +158,7 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
 {
     int16 num = msg->TakeINT16();
 
-    if(num == 0xFFFF)                           // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
+    if(num == -1)                               // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
     {
         sup.inProcess = false;
     }
@@ -170,7 +175,7 @@ static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
             sup.sector = sector;
         }
 
-        address = address - sector * (128 * 1024) + HAL_EEPROM::ADDRESS_SECTOR_TEMP;    // Теперь это адрес нашего чанка относительно начала сектора
+        address = HAL_EEPROM::ADDRESS_SECTOR_TEMP + address - sector * (128 * 1024);    // Теперь это адрес нашего чанка относительно начала сектора
 
         Message::AnswerPortionUpgradePanel(num, reinterpret_cast<uint8 *>(address)).TransmitAndSend();
     }
@@ -181,23 +186,23 @@ static void WriteSectorToEEPROM(int sector)
 {
     HAL_EEPROM::EraseSectorTemp();
 
-    static const int SIZE_STRING = 1024;
+#define _1K 1024
 
-    DLDrive::File::Seek(sector * 128 * SIZE_STRING);        // Устанавливаем указатель в файле на начало сектора
+    DLDrive::File::Seek(sector * 128 * _1K);                // Устанавливаем указатель в файле на начало сектора
 
-    uint8 buffer[SIZE_STRING];                              // Сюда будем считывать файл сюда
+    uint8 buffer[_1K];                                      // Сюда будем считывать файл сюда
 
-    int readed = SIZE_STRING;                               // Здесь будет храниться количество реально считанных байт
+    int readed = _1K;                                       // Здесь будет храниться количество реально считанных байт
 
     int address = HAL_EEPROM::ADDRESS_SECTOR_TEMP;          // С этого адреса будем сохранять сектор в EEPROM
 
-    for (int i = 0; (i < 128) && (readed == SIZE_STRING); i++)
+    for (int i = 0; (i < 128) && (readed == _1K); i++)
     {
-        readed = DLDrive::File::Read(SIZE_STRING, buffer);  // Читаем очередную порцию данных
+        readed = DLDrive::File::Read(_1K, buffer);          // Читаем очередную порцию данных
 
         HAL_EEPROM::WriteBuffer(address, buffer, readed);   // Записываем её в EEPROM
 
-        address += SIZE_STRING;                             // Следующую порцию данных будем записывать по этому адресу
+        address += _1K;                                     // Следующую порцию данных будем записывать по этому адресу
     }
 }
 
