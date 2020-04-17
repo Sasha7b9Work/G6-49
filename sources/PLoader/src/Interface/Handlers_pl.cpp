@@ -25,7 +25,6 @@ bool PHandlers::Processing(SimpleMessage *msg)
 
     switch(com)
     {
-    case Command::RequestData:      func = PHandlers::Request;     break;
     case Command::StartApplication: func = OnStartMainApplication; break;
 
     case Command::PortionUpgradeDevice:
@@ -42,12 +41,6 @@ bool PHandlers::Processing(SimpleMessage *msg)
         return func(msg);
     }
 
-    return false;
-}
-
-
-bool PHandlers::Request(SimpleMessage *)
-{
     return false;
 }
 
