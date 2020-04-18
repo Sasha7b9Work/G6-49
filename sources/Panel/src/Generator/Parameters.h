@@ -23,7 +23,7 @@ public:
         Page
     };
 
-    Parameter(E k, const char *nRU, const char *nEN) : viewer(this), tuner(this), form(nullptr), parent(nullptr), kind(k)
+    Parameter(E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
     {
         name[0] = nRU;
         name[1] = nEN;
@@ -60,7 +60,6 @@ public:
     void OnPressButtonTune();
 
     Viewer viewer;
-    Tuner tuner;
 
 protected:
     
@@ -100,7 +99,7 @@ public:
     };
 
     ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
-        Parameter(Parameter::Value, nameRU, nameEN), type(t), min(_min), max(_max), value(_value) { }
+        Parameter(Parameter::Value, nameRU, nameEN), type(t), min(_min), max(_max), value(_value), tuner(this) { }
 
     E Type() const { return type; }
 
@@ -123,6 +122,7 @@ private:
     FloatValue min;
     FloatValue max;
     FloatValue value;
+    Tuner tuner;        // Используется для настройки 
 
     pString MainUnits(uint lang) const;
 
