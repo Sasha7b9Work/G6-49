@@ -28,8 +28,7 @@ struct MathFloatValue
     // Возвращает числовое представление FloatValue с numDigits значащими цифрами и запятой. В order сохраняется порядок числа относительно запятой
     static pString GetStringValue(const FloatValue &value, bool sign, int numDigits, Order::E *order, int posFirst = 255);
 
-    // Возвращает позицию первого ненулевого символа
-    // "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
+    // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     static int GetPositionFirstDigit(const FloatValue &value);
 
     // Возвращает цифру в позиции position

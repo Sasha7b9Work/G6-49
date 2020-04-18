@@ -1924,6 +1924,16 @@
               <FilePath>.\src\Generator\Generator_p.cpp</FilePath>
             </File>
             <File>
+              <FileName>MathSupport.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\MathSupport.h</FilePath>
+            </File>
+            <File>
+              <FileName>MathSupport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\MathSupport.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Parameters.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Parameters.h</FilePath>
@@ -1932,16 +1942,6 @@
               <FileName>Parameters.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Parameters.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ParametersSupport.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\ParametersSupport.h</FilePath>
-            </File>
-            <File>
-              <FileName>ParametersSupport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\ParametersSupport.cpp</FilePath>
             </File>
             <File>
               <FileName>Signals.h</FileName>

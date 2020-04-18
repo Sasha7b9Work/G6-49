@@ -1,6 +1,5 @@
 #include "Display/Symbols.h"
 #include "Display/Text.h"
-#include "Generator/ParametersSupport.h"
 #include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
@@ -8,9 +7,7 @@
 #include "Settings/Settings.h"
 
 
-static ParameterTuner tuner;
-// Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
-static ParameterValue storedParameter = ParameterAmplitude();
+static ParameterValue storedParameter = ParameterAmplitude();   // Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
 
 
 void PageTuneParameter::SetParameter(Parameter *parameter)
@@ -19,8 +16,6 @@ void PageTuneParameter::SetParameter(Parameter *parameter)
     {
         storedParameter = *reinterpret_cast<ParameterValue *>(parameter);
     }
-
-    tuner.SetParameter(parameter);
 }
 
 
@@ -69,28 +64,30 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 
-static bool OnControl_TuneParameter(const Key &key)
+static bool OnControl_TuneParameter(const Key &)
 {
-    if(key.action == Key::Up)
-    {
-        if(key.value == Key::Esc)
-        {
-            OnPress_Cancel();
-            return true;
-        }
-        else if(key.value == Key::RegButton)
-        {
-            Menu::ResetAdditionPage();
-            return true;
-        }
-    }
+//    if(key.action == Key::Up)
+//    {
+//        if(key.value == Key::Esc)
+//        {
+//            OnPress_Cancel();
+//            return true;
+//        }
+//        else if(key.value == Key::RegButton)
+//        {
+//            Menu::ResetAdditionPage();
+//            return true;
+//        }
+//    }
+//
+//    return tuner.ProcessControl(key);
 
-    return tuner.ProcessControl(key);
+    return false;
 }
 
 static void OnDraw_TuneParameter()
 {
-    tuner.Draw();
+    //tuner.Draw();
 }
 
 

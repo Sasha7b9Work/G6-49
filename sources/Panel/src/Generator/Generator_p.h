@@ -39,11 +39,15 @@ struct PGenerator
     static void LoadSettings();
 
     static void TuneChannel(Chan::E ch);
+
     // Загружает режим запуска из set в аппаратуру
     static void LoadStartMode(Chan::E ch, int mode);
+
 private:
+
     // Загружает форму произвольного сигнала
     static void LoadFormDDS(Form *form);
+
     // Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, пригодные для отправки в ПЛИС
     static void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
 };
