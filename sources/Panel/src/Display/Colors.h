@@ -45,11 +45,11 @@ public:
     explicit Color(const uint8 val);
     Color(const Color &color);
 
-    static Color MenuItem(bool shade);      ///< Цвет элемента меню.
-    static Color MenuTitle(bool shade);     ///< Цвет заголовка страницы. inShade == true, если страница затенена
-    static Color BorderMenu(bool shade);    ///< Цвет окантовки меню
-    static Color LightShadingText();        ///< Светлый цвет в тени.
-    static Color Contrast(Color color);     ///< Возвращает цвет, контрастный к color. Может быть белым или чёрным.
+    static Color MenuItem(bool shade);      // Цвет элемента меню.
+    static Color MenuTitle(bool shade);     // Цвет заголовка страницы. inShade == true, если страница затенена
+    static Color BorderMenu(bool shade);    // Цвет окантовки меню
+    static Color LightShadingText();        // Светлый цвет в тени.
+    static Color Contrast(Color color);     // Возвращает цвет, контрастный к color. Может быть белым или чёрным.
     static Color Chan(Chan::E ch);
     
     uint8 value;

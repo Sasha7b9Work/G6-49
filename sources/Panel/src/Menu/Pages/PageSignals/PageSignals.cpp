@@ -87,10 +87,10 @@ static bool OnKey_PageSignals(const Key &)
 DEF_PAGE_4( pageSignals,   //-V641
     "Õ¿—“–Œ… » —»√Õ¿ÀŒ¬", "SIGNAL SETTINGS",   //-V641 //-V1027
     "", "",
-    &cChannel,              ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
-    &cFormA,                ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘ÓÏ‡
-    &cParameters,           ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
-    &bTuneParameter,        ///< Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
+    &cChannel,              // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ -  ‡Ì‡Î
+    &cFormA,                // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ‘ÓÏ‡
+    &cParameters,           // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - œ‡‡ÏÂÚ
+    &bTuneParameter,        // Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - ¬‚ÂÒÚË ÁÌ‡˜ÂÌËÂ Ô‡‡ÏÂÚ‡
     Page::Settings, Menu::mainPage, Item::FuncActive, Page::FuncEnter, OnKey_PageSignals, FuncBeforeDraw
 )
 

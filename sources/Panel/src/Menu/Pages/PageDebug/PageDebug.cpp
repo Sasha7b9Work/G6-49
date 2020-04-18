@@ -34,10 +34,10 @@ static char buffer[MAX_SIZE_BUFFER + 1];
 // Тип вводимых чисел в окне ввода
 enum TypeInput
 {
-    Uint,           ///< Десятичное число. Можно ввести значение до 2^64.
-    Binary,         ///< Последовательность нулей и единиц
-    Uint10_Uint10,  ///< Два восьмибитных числа в десятичном виде.
-    Uint14_Uint14   ///< Два числа, максимум 2^14, в десятичном виде
+    Uint,           // Десятичное число. Можно ввести значение до 2^64.
+    Binary,         // Последовательность нулей и единиц
+    Uint10_Uint10,  // Два восьмибитных числа в десятичном виде.
+    Uint14_Uint14   // Два числа, максимум 2^14, в десятичном виде
 };
 
 struct DescInput
@@ -601,13 +601,13 @@ DEF_PAGE_8( pDebug,                                                             
     "ОТЛАДКА", "DEBUG",   //-V641
     "", "",
     PageDebug::Calibartion::self,
-    &pRegisters,                                ///< ОТЛАДКА - Регистры
+    &pRegisters,                                // ОТЛАДКА - Регистры
     PageDebug::SubRange::self,
     PageDebug::Colors::self,
-    &cConsole,                                  ///< ОТЛАДКА - Консоль
-    &cStatistics,                               ///< ОТЛАДКА - Статистика
-    &cShowSends,                                ///< ОТЛАДКА - Показывать параметры
-    &bSaveSettings,                             ///< ОТЛАДКА - Сохранить настройки
+    &cConsole,                                  // ОТЛАДКА - Консоль
+    &cStatistics,                               // ОТЛАДКА - Статистика
+    &cShowSends,                                // ОТЛАДКА - Показывать параметры
+    &bSaveSettings,                             // ОТЛАДКА - Сохранить настройки
     Page::Debug, PageService::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 

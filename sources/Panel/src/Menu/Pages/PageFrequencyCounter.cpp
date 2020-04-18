@@ -189,14 +189,14 @@ volatile const GovernorBase *pgHysteresis = &gHysteresis;
 DEF_PAGE_8( pFrequencyCounter,                                                                                                                                           //--- ЧАСТОТОМЕР ---
     "ЧАСТОТОМЕР", "FREQMETER", //-V641
     "Управление фукнциями частотомера", "Freqmeter control",
-    &cMeasure,       ///< ЧАСТОТОМЕР - Измерение
-    &gLevel,         ///< ЧАСТОТОМЕР - Уровень
+    &cMeasure,       // ЧАСТОТОМЕР - Измерение
+    &gLevel,         // ЧАСТОТОМЕР - Уровень
     Item::EmptyLight(),
     Item::EmptyLight(),
-    &cResist,        ///< ЧАСТОТОМЕР - Сопротивление
-    &cCouple,        ///< ЧАСТОТОМЕР - Вход
-    &cFiltr,         ///< ЧАСТОТОМЕР - ФНЧ
-    &cTest,          ///< ЧАСТОТОМЕР - Тест
+    &cResist,        // ЧАСТОТОМЕР - Сопротивление
+    &cCouple,        // ЧАСТОТОМЕР - Вход
+    &cFiltr,         // ЧАСТОТОМЕР - ФНЧ
+    &cTest,          // ЧАСТОТОМЕР - Тест
     Page::FrequencyCounter, Menu::mainPage, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 

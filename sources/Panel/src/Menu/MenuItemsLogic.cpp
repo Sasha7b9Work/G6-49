@@ -24,9 +24,9 @@ enum DIRECTION
 // Структура используется для анимации элементов ГУИ Choice и Governor
 struct TimeStruct
 {
-    const void *address;    ///< Адрес элемента. Если 0 - не движется
-    uint        timeStart;  ///< Время начала анимации в миллисекундах
-    DIRECTION   dir;        ///< Направление изменения значения
+    const void *address;    // Адрес элемента. Если 0 - не движется
+    uint        timeStart;  // Время начала анимации в миллисекундах
+    DIRECTION   dir;        // Направление изменения значения
     uint8       notUsed0;
     uint8       notUsed1;
     uint8       notUsed2;

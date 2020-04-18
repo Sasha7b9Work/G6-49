@@ -32,8 +32,8 @@ struct SU
 
     static char *UInt64_2String(uint64 value, char bufferOut[20] = 0);
 
-    static char *UInt2String(uint value,                ///< значение
-                             char bufferOut[20] = 0     ///< сюда записывается возвращаемое значение
+    static char *UInt2String(uint value,                // значение
+                             char bufferOut[20] = 0     // сюда записывается возвращаемое значение
     );
     // Перевести десятичное число в символьную строку длиной allDigits. После точка отстоит на forFract символов от конца
     static char *UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract);
