@@ -568,7 +568,7 @@ void Form::LoadFromFile(wxTextFile &file)
             return ErrorMessage(file.GetCurrentLine());
         }
 
-        _points.push_back(Point(index, d));
+        _points.emplace_back(index, d);
     }
 
     for(int i = 0; i < Point::NUM_POINTS; i++)

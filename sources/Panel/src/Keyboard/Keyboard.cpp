@@ -96,7 +96,7 @@ void Keyboard::Update()
 
             if (control != Key::None)
             {
-                if (timePress[rl][sl] && timePress[rl][sl] != MAX_UINT)         // ≈сли клавиша находитс€ в нажатом положении
+                if ((timePress[rl][sl] != 0) && (timePress[rl][sl] != MAX_UINT))         // ≈сли клавиша находитс€ в нажатом положении
                 {
                     uint delta = time - timePress[rl][sl];
                     if(delta > 500)                                             // ≈сли прошло более 500 мс с момента нажати€ -

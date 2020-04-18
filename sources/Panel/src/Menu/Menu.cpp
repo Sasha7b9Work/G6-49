@@ -64,7 +64,7 @@ void Menu::Update()
 
     const uint TIME_WAIT = 5000;
 
-    if(timePress && (TIME_MS  - timePress) > TIME_WAIT)     // Сохраняем настройки, если прошло более TIME_WAIT мс
+    if((timePress != 0) && ((TIME_MS  - timePress) > TIME_WAIT))     // Сохраняем настройки, если прошло более TIME_WAIT мс
     {
         //Settings::Save();
         timePress = 0;

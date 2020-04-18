@@ -80,6 +80,6 @@ void TriangleDialog::SendAdditionForm()
 
     points.clear();
 
-    points.push_back(Point(static_cast<uint16>(start), static_cast<uint16>(min)));
-    points.push_back(Point(static_cast<uint16>(top), static_cast<uint16>(max)));
+    points.emplace_back(static_cast<uint16>(start), static_cast<uint16>(min));
+    points.emplace_back(static_cast<uint16>(top), static_cast<uint16>(max));
 }

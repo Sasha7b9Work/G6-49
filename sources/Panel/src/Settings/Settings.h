@@ -32,7 +32,7 @@ struct SettingsFreqMeter
 
 struct SettingsDebug
 {
-    int8   showConsole;
+    bool   showConsole;
     bool   modeEnabled;
     bool   showStatistics;
     bool   showSends;

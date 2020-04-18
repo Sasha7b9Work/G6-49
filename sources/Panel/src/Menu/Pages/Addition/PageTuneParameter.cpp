@@ -64,23 +64,21 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 
-static bool OnControl_TuneParameter(const Key &)
+static bool OnControl_TuneParameter(const Key &key)
 {
-//    if(key.action == Key::Up)
-//    {
-//        if(key.value == Key::Esc)
-//        {
-//            OnPress_Cancel();
-//            return true;
-//        }
-//        else if(key.value == Key::RegButton)
-//        {
-//            Menu::ResetAdditionPage();
-//            return true;
-//        }
-//    }
-//
-//    return tuner.ProcessControl(key);
+    if(key.action == Key::Up)
+    {
+        if(key.value == Key::Esc)
+        {
+            OnPress_Cancel();
+            return true;
+        }
+        else if(key.value == Key::RegButton)
+        {
+            Menu::ResetAdditionPage();
+            return true;
+        }
+    }
 
     return false;
 }
@@ -94,10 +92,10 @@ static void OnDraw_TuneParameter()
 DEF_PAGE_SB( pTuneParameter,   //-V641
     "ббнд гмювемхъ", "ENTER VALUE", //-V641
     "", "",
-    Item::EmptyDark(),         // нймн ббндю - яхлбнк бкебн
-    Item::EmptyDark(),       // нймн ббндю - яхлбнк бопюбн
-    &sbCancel,          // нймн ббндю - нрлемю
-    &sbEnter,           // нймн ббндю - ббнд
+    Item::EmptyDark(),      // нймн ббндю - яхлбнк бкебн
+    Item::EmptyDark(),      // нймн ббндю - яхлбнк бопюбн
+    &sbCancel,              // нймн ббндю - нрлемю
+    &sbEnter,               // нймн ббндю - ббнд
     Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
