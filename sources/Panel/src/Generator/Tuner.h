@@ -17,5 +17,7 @@ public:
 
 private:
 
-    Parameter *param;
+    Parameter *param;           // Настраиваемый параметр
+
+
 };

@@ -109,9 +109,6 @@ static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
     case CDC_SEND_BREAK:
         /* Add your code here */
         break;    
-    
-    default:
-        break;
     }
   
     return (USBD_OK);

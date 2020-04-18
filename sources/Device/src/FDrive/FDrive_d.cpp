@@ -64,9 +64,6 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             //LOG_WRITE("HOST_USER_DISCONNECTION");
             state = State::NeedUnmount;
             break;
-
-        default:
-            break;
     }
 }
 

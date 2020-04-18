@@ -60,19 +60,13 @@ public:
     void OnPressButtonTune();
 
     Viewer viewer;
-
     Tuner tuner;
 
 protected:
     
-    // ‘орма, дл€ которой зада этот параметр
-    Form *form;
-    
-    // ≈сли параметр вложенный, то здесь адрес родител€
-    Parameter *parent;
-
+    Form *form;         // ‘орма, дл€ которой зада этот параметр
+    Parameter *parent;  // ≈сли параметр вложенный, то здесь адрес родител€
     E kind;
-
     const char *name[2];
 };
 
@@ -126,7 +120,6 @@ public:
 
 private:
     E type;
-
     FloatValue min;
     FloatValue max;
     FloatValue value;
@@ -167,10 +160,7 @@ public:
 
 private:
 	E type;
-    
-    // “екущий выбор
-    int choice;
-
+    int choice;             // “екущий выбор
     const char **names;
     
     //  оличество вариантов выбора
@@ -204,12 +194,8 @@ public:
 
 private:
     
-    // «десь наход€тс€ дополнительные параметры в случае, если они требуютс€
-    Parameter **params;
-    
-    // „исло дополнительных параметров или 0, если таковых не имеетс€
-    int numParams;
-
+    Parameter **params; // «десь наход€тс€ дополнительные параметры в случае, если они требуютс€
+    int numParams;      // „исло дополнительных параметров или 0, если таковых не имеетс€
     E type;
 };
 

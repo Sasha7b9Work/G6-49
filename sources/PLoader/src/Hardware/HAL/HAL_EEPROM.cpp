@@ -12,7 +12,7 @@
                             FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
 
 
-void HAL_EEPROM::WriteBuffer(int address, uint8 *data, int size)
+void HAL_EEPROM::WriteBuffer(int address, const uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
 
