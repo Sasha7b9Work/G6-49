@@ -39,17 +39,17 @@ struct FloatValue
     void Divide(uint div);
 
     void Multiplie(uint mul);
-    /// ”величить на заданное значение
+    // ”величить на заданное значение
     void Add(float v);
 
     void Add(FloatValue value);
 
     void SetSign(int sign);
-    /// ¬озвращает целую часть числа
+    // ¬озвращает целую часть числа
     int Integer() const;
-    /// ¬озвращает дробную часть числа. numDigits - требуемое количество знакомест после зап€той
+    // ¬озвращает дробную часть числа. numDigits - требуемое количество знакомест после зап€той
     int Fract(int numDigits) const;
-    /// ¬озвращает количество наночастиц в дробной части
+    // ¬озвращает количество наночастиц в дробной части
     int FractNano() const;
 
     bool operator<(const FloatValue &);

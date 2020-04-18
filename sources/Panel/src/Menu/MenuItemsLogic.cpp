@@ -21,7 +21,7 @@ enum DIRECTION
     DECREASE
 };
 
-/// Структура используется для анимации элементов ГУИ Choice и Governor
+// Структура используется для анимации элементов ГУИ Choice и Governor
 struct TimeStruct
 {
     const void *address;    ///< Адрес элемента. Если 0 - не движется

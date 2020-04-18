@@ -1,9 +1,9 @@
 #pragma once
 
 
- /// @brief Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
- /// В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
- /// Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
+ // @brief Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
+ // В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
+ // Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
 #define TIME_TICKS (HAL_TIM2::GetTicks())
 #define TIME_US    (HAL_TIM2::TimeUS())
 #define TIME_MS    (HAL_TIM::TimeMS())
@@ -39,7 +39,7 @@ struct Timer
 
     static void Init();
 
-    /// Назначает таймеру timer функцию и время срабатывания
+    // Назначает таймеру timer функцию и время срабатывания
     static void Set(Type type, pFuncVV func, uint dTms);
 
     static void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
@@ -55,12 +55,12 @@ struct Timer
     static bool IsRun(Type type);
 
     static void PauseOnTicks(uint numTicks);
-    /// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
+    // Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
     static void StartLogging();
 
     static uint LogPointUS(char *name);
 
     static uint LogPointMS(char *name);
-    /// Вызывается при срабатывании таймера
+    // Вызывается при срабатывании таймера
     static void ElapsedCallback();
 };

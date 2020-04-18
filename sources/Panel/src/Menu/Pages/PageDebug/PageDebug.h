@@ -14,7 +14,7 @@ struct PageDebug
         static void Draw();
 
     private:
-        /// Написать регистры
+        // Написать регистры
         static void DrawRegisters(int x, int y);
 
         static void DrawInputWindow();

@@ -58,7 +58,7 @@ void PGenerator::SetFormWave(const Wave *w)
 
 void PGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 {
-    /// \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
+    // \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
     Message::Set::FormWave(static_cast<uint8>(ch), static_cast<uint8>(form)).Transmit();
 }
@@ -161,14 +161,14 @@ void PGenerator::SetParameter(ParameterChoice *param)
 
 void PGenerator::SetOffset(Chan::E ch, float offset)
 {
-    /// \todo Говнокод - запись параметра из двух мест
+    // \todo Говнокод - запись параметра из двух мест
     Message::Set::Offset(static_cast<uint8>(ch), FloatValue(offset).ToUINT64()).Transmit();
 }
 
 
 void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
 {
-    /// \todo Говнокод - запись параметра из двух мест
+    // \todo Говнокод - запись параметра из двух мест
     Message::Set::Amplitude(static_cast<uint8>(ch), FloatValue(amplitude).ToUINT64()).Transmit();
 }
 

@@ -50,20 +50,20 @@ struct HAL_LTDC
 struct HAL_SPI4
 {
     static void Init();
-    /// Переслать массив данных
+    // Переслать массив данных
     static bool Transmit(const void *buffer, int size, uint timeout);
 
     static bool Transmit(uint value, uint timeout);
     static bool Transmit(int value, uint timeout);
-    /// Принять массив данных
+    // Принять массив данных
     static bool Receive(void *recv, int size, uint timeout);
-    /// Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
+    // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
     static uint ReceiveAndCompare(const void *compared, int size);
-    /// Возвращает true, если прибор готов к обмену
+    // Возвращает true, если прибор готов к обмену
     static bool IsReady();
-    /// Ждать пока освободится устройство
+    // Ждать пока освободится устройство
     static void WaitFreedom();
-    /// Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
+    // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
     static void WaitFalling();
 };
 
@@ -86,7 +86,7 @@ struct HAL_TIM2
     static uint TimeUS();
 
     static uint GetTicks();
-    /// Запускает счётчик для измерения малых отрезков времени
+    // Запускает счётчик для измерения малых отрезков времени
     static void StartMultiMeasurement();
 };
 
@@ -107,7 +107,7 @@ struct HAL_TIM3
 struct HAL_TIM4
 {
     static void Init(void (*func)());
-    /// Завести таймер, который остановится в timeStop мс
+    // Завести таймер, который остановится в timeStop мс
     static void Start(uint timeStopMS);
 
     static void Stop();

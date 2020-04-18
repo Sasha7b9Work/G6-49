@@ -25,13 +25,13 @@ static TimerStruct timers[Timer::Type::Count];
 #define TIME_NEXT(type) (timers[type].timeNextMS)
 
 
-/// Завести таймр, который остановится в timeStop мс
+// Завести таймр, который остановится в timeStop мс
 static void StartTIM(uint timeStop);
 
 static void StopTIM();
-/// Возвращает время срабатывания ближайщего таймера, либо 0, если таймеров нет
+// Возвращает время срабатывания ближайщего таймера, либо 0, если таймеров нет
 static uint NearestTime();
-/// Настроить систему на таймер
+// Настроить систему на таймер
 static void TuneTIM(Timer::Type type);
 
 

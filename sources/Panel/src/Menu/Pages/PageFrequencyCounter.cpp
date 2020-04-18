@@ -8,7 +8,7 @@ extern const PageBase pFrequencyCounter;
 Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pFrequencyCounter));
 
 
-/// Настроить вид страницы в соответствии с режимом измерения
+// Настроить вид страницы в соответствии с режимом измерения
 static void Tune_Page();
 static void OnPress_Interval(bool);
 static void OnPress_BillingTime(bool);

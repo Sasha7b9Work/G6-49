@@ -153,7 +153,7 @@ void HAL_LTDC::ToggleBuffers()
 
 void HAL_LTDC::FillRegion(int, int, int, int, Color color)
 {
-    /// \todo Не работает функция
+    // \todo Не работает функция
 
     DMA2D_HandleTypeDef handle;
 

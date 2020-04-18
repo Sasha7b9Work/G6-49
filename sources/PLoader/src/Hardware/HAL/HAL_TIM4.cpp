@@ -7,7 +7,7 @@
 #define TIME_UPDATE 2   ///< Время между опросами клавиатуры
 
 
-/// Таймер для опроса клавиатуры
+// Таймер для опроса клавиатуры
 static TIM_HandleTypeDef handleTIM4;
 
 

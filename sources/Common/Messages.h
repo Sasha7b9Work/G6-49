@@ -21,29 +21,29 @@ public:
     ~SimpleMessage();
 
     void Create(int size, uint8);
-    /// Возвращает указатель на созданную копию
+    // Возвращает указатель на созданную копию
     SimpleMessage *Clone();
-    /// Сбрасывает указатель извлечённой информации.
+    // Сбрасывает указатель извлечённой информации.
     void ResetPointer() { taken = 0; };
 
     bool CreateFromMessage(const SimpleMessage *message);
-    /// Создать сообщение с выделением памяти
+    // Создать сообщение с выделением памяти
     bool CreateAllocate(const uint8 *buffer, int size);
-    /// Выделить необходимое количество памяти
+    // Выделить необходимое количество памяти
     bool AllocateMemory(int size);
-    /// Взять оставшиеся данные. После вызова этой функции забирать из сообщения больше нечего
+    // Взять оставшиеся данные. После вызова этой функции забирать из сообщения больше нечего
     void TakeRemainigData(uint8 *data);
-    /// Возвращает указатель на оставшиеся данные. Данные можно забрать потом
+    // Возвращает указатель на оставшиеся данные. Данные можно забрать потом
     uint8 *RemainingData() const;
-    /// Освободить память
+    // Освободить память
     void FreeMemory();
-    /// Возвращает размер данных
+    // Возвращает размер данных
     int Size() const;
-    /// Возвращает true, если это null-пакет (память не выделена)
+    // Возвращает true, если это null-пакет (память не выделена)
     bool IsEmpty() const;
-    /// Возвращает true, если сообщения одинаковы
+    // Возвращает true, если сообщения одинаковы
     bool IsEquals(const SimpleMessage *message) const;
-    /// Возвращает указатель на pos-й элемент. Удобно для копирования строк
+    // Возвращает указатель на pos-й элемент. Удобно для копирования строк
     char *String(int pos);
 
     void PutUINT8(uint8 data);
@@ -71,13 +71,13 @@ public:
 
 protected:
 
-    /// Размер выделенной памяти
+    // Размер выделенной памяти
     int allocated;
-    /// Адрес начала данных, либо 0, если память не выделена
+    // Адрес начала данных, либо 0, если память не выделена
     uint8 *buffer;
-    /// Сколько памяти занято реальными данными. Используется для Put
+    // Сколько памяти занято реальными данными. Используется для Put
     int used;
-    /// На какой позиции указатель. Используется для Take
+    // На какой позиции указатель. Используется для Take
     int taken;
 
     SimpleMessage(const SimpleMessage &) : allocated(0), buffer(0), used(0), taken(0) {};
@@ -93,7 +93,7 @@ public:
 namespace Message
 {
 
-    /// Служебное сообщение - для обмена между процессорами
+    // Служебное сообщение - для обмена между процессорами
     class RequestData : public SimpleMessage
     {
     public:
@@ -101,7 +101,7 @@ namespace Message
     };
 
 
-    /// Сообщение в консоль
+    // Сообщение в консоль
     class Log : public SimpleMessage
     {
     public:
@@ -109,7 +109,7 @@ namespace Message
     };
 
 
-    /// Установка режима запуска
+    // Установка режима запуска
     class StartMode : public SimpleMessage
     {
     public:
@@ -117,7 +117,7 @@ namespace Message
     };
 
 
-    /// Запись в регистр
+    // Запись в регистр
     class WriteRegister : public SimpleMessage
     {
     public:
@@ -125,25 +125,25 @@ namespace Message
     };
 
 
-    /// Установка отладочного режима
+    // Установка отладочного режима
     class DebugMode : public SimpleMessage
     {
     public:
-        /// mode == 1/0 - включить/отключить режим отладки
+        // mode == 1/0 - включить/отключить режим отладки
         DebugMode(uint8 mode);
     };
 
 
-    /// Включить/выключить канал
+    // Включить/выключить канал
     class EnableChannel : public SimpleMessage
     {
     public:
-        /// ch : 0 - A, 1 - B
-        /// enable : 0 - выключено, 1 - включено
+        // ch : 0 - A, 1 - B
+        // enable : 0 - выключено, 1 - включено
         EnableChannel(uint8 ch, uint8 enable);
     };
 
-    /// Выставить порт регистра
+    // Выставить порт регистра
     class RegCPU : public SimpleMessage
     {
     public:
@@ -154,7 +154,7 @@ namespace Message
     namespace FDrive
     {
 
-        /// Загрузить выбранный файл в FPGA
+        // Загрузить выбранный файл в FPGA
         class LoadFromExtStorage : public SimpleMessage
         {
         public:
@@ -162,7 +162,7 @@ namespace Message
         };
 
 
-        /// Запрос имени файла
+        // Запрос имени файла
         class FileName : public SimpleMessage
         {
         public:
@@ -177,7 +177,7 @@ namespace Message
         };
 
 
-        /// Число каталогов и файлов в текущем каталоге
+        // Число каталогов и файлов в текущем каталоге
         class NumDirsAndFiles : public SimpleMessage
         {
         public:
@@ -186,19 +186,19 @@ namespace Message
         };
 
 
-        /// Сообщение о примонтировании/отмонтировании диска
+        // Сообщение о примонтировании/отмонтировании диска
         class Mount : public SimpleMessage
         {
         public:
-            /// mount :
-            /// 0 - флешка отмонтирована;
-            /// 1 - флешка удачно примонтирована
-            /// 2 - флешку прмонитровать не удалось
+            // mount :
+            // 0 - флешка отмонтирована;
+            // 1 - флешка удачно примонтирована
+            // 2 - флешку прмонитровать не удалось
             Mount(uint8 mount);
         };
 
 
-        /// Запрос размера файла
+        // Запрос размера файла
         class FileSize : public SimpleMessage
         {
         public:
@@ -209,9 +209,9 @@ namespace Message
         class PictureDDS : public SimpleMessage
         {
         public:
-            /// Запрос
+            // Запрос
             PictureDDS(uint8 numFile);
-            /// Ответ
+            // Ответ
             PictureDDS(uint8 numFile, uint8 *data);
         };
     }
@@ -219,7 +219,7 @@ namespace Message
     namespace Set
     {
 
-        /// Установка формы сигнала
+        // Установка формы сигнала
         class FormWave : public SimpleMessage
         {
         public:
@@ -227,7 +227,7 @@ namespace Message
         };
 
 
-        /// Установка амплитуды
+        // Установка амплитуды
         class Amplitude : public SimpleMessage
         {
         public:
@@ -235,7 +235,7 @@ namespace Message
         };
 
 
-        /// Установка смещения сигнала на канале
+        // Установка смещения сигнала на канале
         class Offset : public SimpleMessage
         {
         public:
@@ -243,7 +243,7 @@ namespace Message
         };
 
 
-        /// Универсальное сособщение для засылки параметра
+        // Универсальное сособщение для засылки параметра
         class Parameter : public SimpleMessage
         {
         public:
@@ -255,7 +255,7 @@ namespace Message
     namespace FreqMeter
     {
 
-        /// Сообщение измерения частотомера
+        // Сообщение измерения частотомера
         class Measure : public SimpleMessage
         {
         public:
@@ -265,7 +265,7 @@ namespace Message
 
     namespace SCPI
     {
-        /// Данные SCPI
+        // Данные SCPI
         class Data : public SimpleMessage
         {
         public:
@@ -273,14 +273,14 @@ namespace Message
         };
     }
 
-    /// Засылка калибровочного коэффициента и установка соотвествующих настроек генератора
+    // Засылка калибровочного коэффициента и установка соотвествующих настроек генератора
     class CalibrateSet : public SimpleMessage
     {
     public:
         CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 parameter);
     };
 
-    /// Засылка калибровочного коэффициента
+    // Засылка калибровочного коэффициента
     class CalibrateLoad : public SimpleMessage
     {
     public:

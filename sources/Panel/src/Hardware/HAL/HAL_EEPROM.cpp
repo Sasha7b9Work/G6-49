@@ -4,7 +4,7 @@
 #include <stm32f4xx_hal.h>
 
 
-/// \todo Занести это в структуру и обращаться только через структуру, чтобы исключить или уменьшить ошибки в функциях вроде GetSector  
+// \todo Занести это в структуру и обращаться только через структуру, чтобы исключить или уменьшить ошибки в функциях вроде GetSector  
 
 #define ADDR_SECTOR_0   ((uint)0x08000000)  // 16k  Загрузчик
 #define ADDR_SECTOR_1   ((uint)0x08004000)  // 16k
@@ -32,15 +32,15 @@
 
 
 
-/// Возвращает первый адрес, значение в котором равно 0xffffffff (можно записывать). Поиск начинается с адреса start, продолжается в участке памяти размером sizeFull. Кратно размеру sizeObject
+// Возвращает первый адрес, значение в котором равно 0xffffffff (можно записывать). Поиск начинается с адреса start, продолжается в участке памяти размером sizeFull. Кратно размеру sizeObject
 static uint FindFirstFreeRecord(uint start, uint sizeSector, uint sizeRecord);
-/// Возвращает адрес последнего блока, в котором первый байт не равен 0xffffffff (в нём сохраенены последние настройки)
+// Возвращает адрес последнего блока, в котором первый байт не равен 0xffffffff (в нём сохраенены последние настройки)
 static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord);
-/// Стирает сектор с начальным адресом startAddress
+// Стирает сектор с начальным адресом startAddress
 static void EraseSector(uint startAddress);
-/// Записывает size байт из массива data по адресу address
+// Записывает size байт из массива data по адресу address
 static void WriteData(uint address, void *data, uint size);
-/// Возвращает системный идентификатор сектора с начальным адресом address. Ежели такового нету, возвращает -1
+// Возвращает системный идентификатор сектора с начальным адресом address. Ежели такового нету, возвращает -1
 static uint GetSector(uint address);
 
 

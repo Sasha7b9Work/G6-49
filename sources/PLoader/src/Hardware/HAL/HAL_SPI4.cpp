@@ -4,7 +4,7 @@
 #include <stm32f4xx_hal.h>
 
 
-/// Для связи с основным процессором
+// Для связи с основным процессором
 static SPI_HandleTypeDef handleSPI4 =
 {
 	SPI4,

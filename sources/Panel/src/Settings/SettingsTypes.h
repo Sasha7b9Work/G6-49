@@ -29,7 +29,7 @@ struct Parity
     } value;
 };
 
-/// 
+// 
 struct FreqInterval
 {
     enum E
@@ -41,7 +41,7 @@ struct FreqInterval
     operator uint8() const { return static_cast<uint8>(value); };
 };
 
-/// Измерять частоту или период
+// Измерять частоту или период
 struct FreqMeasure
 {
     enum E
@@ -54,7 +54,7 @@ struct FreqMeasure
     operator uint8() const { return static_cast<uint8>(value); };
 };
 
-/// Метки времени
+// Метки времени
 struct FreqTimeStamps
 {
     enum E
@@ -68,7 +68,7 @@ struct FreqTimeStamps
     operator uint8() const { return static_cast<uint8>(value); };
 };
 
-/// Тестовый режим частотомера
+// Тестовый режим частотомера
 struct FreqTest
 {
     enum E

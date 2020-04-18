@@ -33,19 +33,19 @@
 
 
 
-/// ¬озвращает первый адрес, значение в котором равно 0xffffffff (можно записывать). ѕоиск начинаетс€ с адреса start, продолжаетс€ в участке пам€ти размером sizeFull.  ратно размеру sizeObject
+// ¬озвращает первый адрес, значение в котором равно 0xffffffff (можно записывать). ѕоиск начинаетс€ с адреса start, продолжаетс€ в участке пам€ти размером sizeFull.  ратно размеру sizeObject
 static uint FindFirstFreeRecord(uint start, uint sizeSector, uint sizeRecord);
-/// ¬озвращает адрес последнего блока, в котором первый байт не равен 0xffffffff (в нЄм сохраенены последние настройки)
+// ¬озвращает адрес последнего блока, в котором первый байт не равен 0xffffffff (в нЄм сохраенены последние настройки)
 static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord);
-/// —тирает сектор с начальным адресом startAddress
+// —тирает сектор с начальным адресом startAddress
 static void EraseSector(uint startAddress);
-/// «аписывает size байт из массива data по адресу address
+// «аписывает size байт из массива data по адресу address
 static void WriteData(uint dest, void *src, uint size);
-/// ¬озвращает системный идентификатор сектора с начальным адресом address. ≈жели такового нету, возвращает -1
+// ¬озвращает системный идентификатор сектора с начальным адресом address. ≈жели такового нету, возвращает -1
 static uint GetSector(uint address);
-/// ¬озвращает размер сектора с данным начальным адресом
+// ¬озвращает размер сектора с данным начальным адресом
 static uint SizeSector(uint address);
-/// ¬озвращает адрес EEPROM, куда надо сохран€ть данные этого канала
+// ¬озвращает адрес EEPROM, куда надо сохран€ть данные этого канала
 static uint AddressForData(Chan::E ch);
 
 

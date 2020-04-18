@@ -1,7 +1,7 @@
 #pragma once
 
 
-/// Пины записи
+// Пины записи
 #define WR_AD9952_SPI3_CSA      HPort::_F, HPin::_6
 #define WR_AD9952_SPI3_CSB      HPort::_F, HPin::_7
 #define WR_AD9952_IO_UPD        HPort::_C, HPin::_7

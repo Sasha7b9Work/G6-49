@@ -23,15 +23,15 @@ extern const ButtonBase bSend;
 
 
 Page *PageDebug::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pDebug));
-/// Регистр, в который будет производится занесение значения по нажатию кнопки ЗАСЛАТЬ
+// Регистр, в который будет производится занесение значения по нажатию кнопки ЗАСЛАТЬ
 Register::E currentRegister = Register::FreqMeterLevel;
-/// Флаг показа окна ввода
+// Флаг показа окна ввода
 static bool showInputWindow = false;
 #define MAX_SIZE_BUFFER 14
-/// Здесь хранятся введённые символы
+// Здесь хранятся введённые символы
 static char buffer[MAX_SIZE_BUFFER + 1];
 
-/// Тип вводимых чисел в окне ввода
+// Тип вводимых чисел в окне ввода
 enum TypeInput
 {
     Uint,           ///< Десятичное число. Можно ввести значение до 2^64.
@@ -79,19 +79,19 @@ static DescInput desc[Register::Count] =
 
 
 
-/// Возвращает размер буфера для регистра i
+// Возвращает размер буфера для регистра i
 static int SizeBuffer(Register::E name = Register::Count);
-/// Возвращает тип ввода для регистра i
+// Возвращает тип ввода для регистра i
 static TypeInput TypeBuffer(Register::E name = Register::Count);
-/// Возращает true, если символ является корректным для данного типа ввода
+// Возращает true, если символ является корректным для данного типа ввода
 static bool AllowableSymbol(Key key);
-/// Выводит значение регистра i
+// Выводит значение регистра i
 static void DrawValue(int x, int y, uint8 i);
-/// Возвращает из буфера значение, предшествующее точке
+// Возвращает из буфера значение, предшествующее точке
 static uint64 FirstValue();
-/// Возвращает из буфера значение, следующее за точкой
+// Возвращает из буфера значение, следующее за точкой
 static uint64 SecondValue();
-/// Преобразует строку из buffer в uint
+// Преобразует строку из buffer в uint
 static uint64 BufferToValue();
 
 static void OnPress_Send();

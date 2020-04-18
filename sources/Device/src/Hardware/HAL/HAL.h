@@ -94,7 +94,7 @@ struct HAL_SPI1
 struct HAL_SPI3
 {
     static void Init();
-    /// Запускает счётчик для измерения малых отрезков времени
+    // Запускает счётчик для измерения малых отрезков времени
     static void Transmit(uint8 *buffer, uint16 num);
 };
 

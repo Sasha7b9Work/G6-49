@@ -24,7 +24,7 @@ struct Timer
     static void Init();
 
     void DeInit();
-    /// Назначает таймеру timer функцию и время срабатывания
+    // Назначает таймеру timer функцию и время срабатывания
     static void Set(Type type, pFuncVV func, uint dTms);
 
     static void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
@@ -40,6 +40,6 @@ struct Timer
     bool IsRun(Type type);
 
     void PauseOnTicks(uint numTicks);
-    /// Вызывается при срабатывании таймера
+    // Вызывается при срабатывании таймера
     static void ElapsedCallback();
 };

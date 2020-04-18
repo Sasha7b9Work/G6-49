@@ -134,7 +134,7 @@ bool Font::BitIsExist(int s, int row, int bit)
         return AdvancedFont::BitIsExist(static_cast<uint8>(s), row, bit);
     }
 
-    static uint8 prevByte = 0;      /// \todo здесь точно статики нужны?
+    static uint8 prevByte = 0;      // \todo здесь точно статики нужны?
     static int prevChar = -1;
     static int prevNumByte = -1;
     if(prevNumByte != row || prevChar != s)

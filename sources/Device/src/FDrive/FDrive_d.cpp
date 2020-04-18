@@ -12,7 +12,7 @@ void *DDrive::handle = &USB_host;
 static FATFS FatFS;
 
 static char USBDISKPath[4];
-/// true, если флешка подключена
+// true, если флешка подключена
 volatile static bool isConnected = false;
 
 struct State
@@ -27,14 +27,14 @@ struct State
 };
 
 static State::E state = State::Disconnected;
-/// Здесь хранится обрабатываемая команда
+// Здесь хранится обрабатываемая команда
 static Command command = Command::Count;
 
 
 
-/// В эту функцию попадаем при каждом событии на OTG FS
+// В эту функцию попадаем при каждом событии на OTG FS
 static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
-/// Получить имя numDir-го каталога из каталога fullPath
+// Получить имя numDir-го каталога из каталога fullPath
 //static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
 
 

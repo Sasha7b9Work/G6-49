@@ -50,7 +50,7 @@ void List<T>::Remove(T *removed)
     {
         if (element->Get() == removed)
         {
-            /// Здесь надо удалить
+            // Здесь надо удалить
 
             ListElement<T> *next = element->next;
             ListElement<T> *prev = element->prev;

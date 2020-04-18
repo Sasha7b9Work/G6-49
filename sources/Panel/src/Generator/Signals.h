@@ -2,7 +2,7 @@
 #include "Settings/Settings.h"
 
 
-/// Текущий сигнал
+// Текущий сигнал
 #define WAVE(ch)                        (waves[ch])
 #define CURRENT_WAVE                    (WAVE(CURRENT_CHANNEL))
 

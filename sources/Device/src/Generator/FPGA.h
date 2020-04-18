@@ -22,14 +22,14 @@ struct FPGA
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
     static void SetStartMode(Chan::E ch, StartMode mode);
-    /// Делает однократный запуск. Возвращает true в случае успеха (если установлены соответствующие настройки)
+    // Делает однократный запуск. Возвращает true в случае успеха (если установлены соответствующие настройки)
     static bool Start();
 
     struct PacketImpulse
     {
-        /// Устанавливает число импульсов в пачке
+        // Устанавливает число импульсов в пачке
         static void SetNumberImpules(uint n);
-        /// Устанавливает период следования пачки
+        // Устанавливает период следования пачки
         static void SetPeriodPacket(FloatValue period);
 
         static FloatValue periodImpulse;
@@ -72,10 +72,10 @@ struct FPGA
             _0_Control,
             _1_Freq,
             _2_Amplitude,
-            _3_RectA,           /// \brief Регистр кода сигнала прямоугольной формы канала А. Используется для установки двух кодов. 1-й код опреде-
-                                /// ляет нижнее значение прямоугольного сигнала - смещение. 2-й код устанавливает верхнее значение сигнала - как бы
-                                /// амплитуду.
-                                /// b0...b13 - нижнее значение, b14...b27 - верхнее значение
+            _3_RectA,           // \brief Регистр кода сигнала прямоугольной формы канала А. Используется для установки двух кодов. 1-й код опреде-
+                                // ляет нижнее значение прямоугольного сигнала - смещение. 2-й код устанавливает верхнее значение сигнала - как бы
+                                // амплитуду.
+                                // b0...b13 - нижнее значение, b14...b27 - верхнее значение
             _4_RectB,           ///< Аналог _3_RectA для канала B
             _5_PeriodImpulseA,
             _6_DurationImpulseA,
@@ -92,17 +92,17 @@ struct FPGA
     static void SetClockAD992(ClockFrequency::E clock);
 
     static ClockFrequency::E clock;
-    /// Режим работы ПЛИС
+    // Режим работы ПЛИС
     static ModeWork::E modeWork[Chan::Count];
 
     static inline ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
-    /// Возвращает указатель на точки сигнала, загружаемого из флешки
+    // Возвращает указатель на точки сигнала, загружаемого из флешки
     static uint8 *DataFlash(Chan::E ch);
-    /// Сохранить данные сигнала, загруженного с флешки
+    // Сохранить данные сигнала, загруженного с флешки
     static void SaveExtSignal(Chan::E ch, uint8 *data);
-    /// Возвращает указатель на точки произвольного сигнала (программно определёного)
+    // Возвращает указатель на точки произвольного сигнала (программно определёного)
     static uint8 *DataDDS(Chan::E ch);
-    /// Записать значение в регистр
+    // Записать значение в регистр
     static void WriteRegister(RG::E reg, uint64 value);
 
 private:
@@ -129,13 +129,13 @@ private:
     };
     
     static void SetModeSine(Chan::E ch);
-    /// Установить режим Пила+
+    // Установить режим Пила+
     static void SetModeRampPlus(Chan::E ch);
-    /// Установить режим Пила-
+    // Установить режим Пила-
     static void SetModeRampMinus(Chan::E ch);
-    /// Установить режим Треугольник
+    // Установить режим Треугольник
     static void SetModeTriangle(Chan::E ch);
-    /// Установить режим произвольного сигнала, загруженного с флешки
+    // Установить режим произвольного сигнала, загруженного с флешки
     static void SetModeDDS(Chan::E ch);
     
     static void SetModeMeander(Chan::E ch);
@@ -143,18 +143,18 @@ private:
     static void SetModeImpulse(Chan::E ch);
     
     static void SetModePackedImpulse(Chan::E ch);
-    /// Заслать рассчитанные точки в плис
+    // Заслать рассчитанные точки в плис
     static void SendData(uint8 *data);
-    /// Установить на A0_RG...A3_RG адрес, соответсвующй регистру
+    // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
     static void WriteAddress(RG::E reg);
-    /// Запись управляющего регистра
+    // Запись управляющего регистра
     static void WriteControlRegister();
-    /// Записывает коды, соответствующие максимальному и минимальному значению
+    // Записывает коды, соответствующие максимальному и минимальному значению
     static void WriteMaxAmplitude(Chan::E ch);
-    /// Установить биты, соответствующие режиму запуска
+    // Установить биты, соответствующие режиму запуска
     static uint16 SetBitsStartMode(uint16 data);
-    /// Режим запуска
+    // Режим запуска
     static StartMode startMode[Chan::Count];
-    /// Здесь хранятся записанные в регистры значения
+    // Здесь хранятся записанные в регистры значения
     static uint64 registers[RG::Count];
 };

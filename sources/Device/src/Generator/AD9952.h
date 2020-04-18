@@ -15,12 +15,12 @@ struct AD9952
 
     static void SetPhase(Chan::E ch, FloatValue phase);
 
-    /// ћанипул€ци€
+    // ћанипул€ци€
     struct Manipulation
     {
-        /// True означает, что манипул€ци€ включена
+        // True означает, что манипул€ци€ включена
         static bool enabled[Chan::Count];
-        /// ”становить/отменить модулирование синусоиды сигналом "пилы"
+        // ”становить/отменить модулирование синусоиды сигналом "пилы"
         static void SetEnabled(Chan::E ch, bool enable);
         static inline bool IsEnabled(Chan::E ch) { return enabled[ch]; };
     };

@@ -25,7 +25,7 @@ struct Bit
 
 struct Math
 {
-    /// Вычисление 10**pow.
+    // Вычисление 10**pow.
     static uint Pow10(int pow);
 
     template<class T> static T Limitation(T *value, T min, T max)

@@ -2,7 +2,7 @@
 #include "CommonTypes.h"
 
 
-/// Возможные команды для передачи в основной процессор
+// Возможные команды для передачи в основной процессор
 struct Command
 {
     // Значок "->" означает, что передача ведётся от прибора к панели
@@ -109,7 +109,7 @@ struct Register
 {
     enum E
     {
-        deleted_Multiplexor1,   /// \todo Это надо удалить
+        deleted_Multiplexor1,   // \todo Это надо удалить
         deleted_Multiplexor2,
         OffsetA,
         OffsetB,

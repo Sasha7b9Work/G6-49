@@ -60,7 +60,7 @@ static pCHAR FuncPolarity(pCHAR);
 static void HintPolarity(String *);
 
 
-/// Рекурсивная функция формирования сообщения подсказки
+// Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
 
 

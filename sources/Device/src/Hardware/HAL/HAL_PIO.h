@@ -106,14 +106,14 @@ struct HAlternate
 
 struct HAL_PIO
 {
-    /// Начальная инициализация управляющих выводов
+    // Начальная инициализация управляющих выводов
     static void Init();
 
     static void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
-    /// Установка в "1"
+    // Установка в "1"
     static void Set(HPort::E port, uint16 pin);
     static void Set(const StructPIN &pin);
-    /// Установка в "0"
+    // Установка в "0"
     static void Reset(HPort::E port, uint16 pin);
     static void Reset(const StructPIN &pin);
 
@@ -121,6 +121,6 @@ struct HAL_PIO
     static void Write(HPort::E port, uint16 pin, bool state);
     static uint8 Read(HPort::E port, uint16 pin);
 
-    /// Запись байта в ПЛИС
+    // Запись байта в ПЛИС
     static void WriteFPGA(uint8 byte);
 };

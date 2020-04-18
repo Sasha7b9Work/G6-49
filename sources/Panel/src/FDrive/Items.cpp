@@ -9,19 +9,19 @@
 #include <cstring>
 
 
-/// Запрос имени файла с порядковым номером number
+// Запрос имени файла с порядковым номером number
 static void SendRequestForNameFile(int number);
-/// Запрос размера файла с порядковым номером number
+// Запрос размера файла с порядковым номером number
 //static void SendRequestForSizeFile(int number);
-/// Нарисовать i-й итем
+// Нарисовать i-й итем
 static void DrawItem(int i, int x, int y, bool highlight);
-/// Возвращает имя i-го итема
+// Возвращает имя i-го итема
 static String GetNameItem(int i);
-/// Возвращает размер i-го итема
+// Возвращает размер i-го итема
 //static int GetSizeItem(int i);
 
 
-/// Количество файлов в текущем каталоге
+// Количество файлов в текущем каталоге
 static int numFiles;
 bool Items::requestIsSend = false;
 
@@ -37,11 +37,11 @@ struct StructFile
 }
 files[NUM_ITEMS];
 
-/// Текущий файл
+// Текущий файл
 static int curItem = 0;
-/// Количество каталогов в текущем каталоге
+// Количество каталогов в текущем каталоге
 static int numDirs = -1;
-/// Теукущий файл
+// Теукущий файл
 static File file;
 
 

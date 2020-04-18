@@ -51,10 +51,10 @@ struct Key
     char ToChar() const;
     static pString Name(Key::E key);
     bool IsFunctional() const;
-    /// Возвращает true, если поворот ручки
+    // Возвращает true, если поворот ручки
     bool IsRotate() const;
-    /// Возвращает true, если кнопка управления курсором (Влево-Вправо)
+    // Возвращает true, если кнопка управления курсором (Влево-Вправо)
     bool IsCursors() const { return value == Left || value == Right; };
-    /// Возвращает true в случае отпускания кнопки или "длинного" нажатия
+    // Возвращает true в случае отпускания кнопки или "длинного" нажатия
     bool IsRelease() const;
 };

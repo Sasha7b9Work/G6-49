@@ -6,7 +6,7 @@
 
 void HAL_FSMC::Init()
 {
-    /// \todo временно изменил - возможно, на флешку не пишет из-за неправильных таймингов
+    // \todo временно изменил - возможно, на флешку не пишет из-за неправильных таймингов
     static const FMC_NORSRAM_TimingTypeDef sramTiming =
     {
         6,                  ///< FSMC_AddressSetupTime

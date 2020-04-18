@@ -80,7 +80,7 @@ void FloatValue::SetSign(int sign)
 {
     if (sign > 0)
     {
-        value &= 0x7FFFFFFFFFFFFFFFU;       /// \todo как это может работать?
+        value &= 0x7FFFFFFFFFFFFFFFU;       // \todo как это может работать?
     }
     else
     {

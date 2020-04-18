@@ -10,7 +10,7 @@
 extern const PageBase pageSignals;
 Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
 extern ChoiceParameterBase cParameters;
-/// Номер текущей формы сигнал
+// Номер текущей формы сигнал
 static int numForm = 0;
 
 

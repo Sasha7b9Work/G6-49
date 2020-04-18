@@ -11,21 +11,21 @@ class File
 public:
     File();
     ~File();
-    /// Открывает файл
+    // Открывает файл
     void Open(int num);
-    /// Отображает содержимое
+    // Отображает содержимое
     void Draw(int x, int y);
-    /// Закрывает файл и освобождает память
+    // Закрывает файл и освобождает память
     void Close();
 
     static bool Handler(SimpleMessage *msg);
-    /// Сохранить данные как данные формы
+    // Сохранить данные как данные формы
     static void SetDataToWave();
 };
 
 
 struct FileRequests
 {
-    /// Считать строку из файла
+    // Считать строку из файла
     static void SendRequestForString(const String *name, int numString);
 };

@@ -27,7 +27,7 @@ static int16 *prevPointerK = nullptr;
 static int16 prevK = 0;
 
 
-/// Настроить органы управления в соотвествии с текущими установами
+// Настроить органы управления в соотвествии с текущими установами
 static void TuneControls();
 
 
@@ -70,7 +70,7 @@ static void SendMessage()
 }
 
 
-/// Вызывается при изменении калибруемого параметра
+// Вызывается при изменении калибруемого параметра
 static void OnChange_Parameters(bool)
 {
     if(!ChannelIsValid())
@@ -83,7 +83,7 @@ static void OnChange_Parameters(bool)
     SendMessage();
 }
 
-/// Вызывается при изменении источника сигнал
+// Вызывается при изменении источника сигнал
 static void OnChange_Source(bool)
 {
     if(!ChannelIsValid())
@@ -126,7 +126,7 @@ DEF_CHOICE_5(cRange,
     range, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
-/// Для смещения +/- 5В
+// Для смещения +/- 5В
 DEF_CHOICE_4(cParameterFullVoltage,
     "Параметр", "Parameter",
     "", "",
@@ -138,7 +138,7 @@ DEF_CHOICE_4(cParameterFullVoltage,
 )
 
 
-/// Для смещения +/- 2.5В
+// Для смещения +/- 2.5В
 DEF_CHOICE_4(cParameterHalfVoltage,
     "Параметр", "Parameter",
     "", "",

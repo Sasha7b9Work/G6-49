@@ -38,9 +38,9 @@ struct CalibrationSettings
     CalibrationSettings& operator =(const CalibrationSettings &);
 
     static int16 *GetK(uint8 channel, uint8 signal, uint8 range, uint8 parameter);
-    /// Уменьшить текущий к
+    // Уменьшить текущий к
     void ReduceK(int16 min);
-    /// Увеличить текущий к
+    // Увеличить текущий к
     void IncreaseK(int16 max);
 };
 

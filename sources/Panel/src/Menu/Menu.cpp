@@ -77,18 +77,15 @@ void Menu::ProcessKey(const Key &key)
     if(ProcessOutputs(key))                     // Обработка включения/отключения каналов
     {
     }
-    else if (GetOpenedItem())
+    else if (GetOpenedItem())                   // Если раскрыт какой-либо элемент меню - передаём управление уему
     {
         GetOpenedItem()->Press(key);
     }
-    //else if (Hint::ProcessControl(key))
-    //{
-    //}
-    else if(Menu::GetCurrentItem())
+    else if(Menu::GetCurrentItem())             // Если какой-либо элемент меню является активным - передаём управление ему
     {
         Menu::GetCurrentItem()->Press(key);
     }
-    else if (CURRENT_PAGE->Press(key))
+    else if (CURRENT_PAGE->Press(key))          // Иначе передаём управление текущей странице
     {
     }
 }

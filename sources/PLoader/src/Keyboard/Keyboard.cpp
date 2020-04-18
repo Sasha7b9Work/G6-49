@@ -29,7 +29,7 @@ static void DetectRegulator();
 
 #define BUTTON_IS_PRESS(state)  ((state) == 0)
 
-/// При обнаружении нажатия кнопки сюда записывается время нажатия
+// При обнаружении нажатия кнопки сюда записывается время нажатия
 static uint timePress[5][6];
 
 //                                         SL0      SL1       SL2          SL3        S4          SL5

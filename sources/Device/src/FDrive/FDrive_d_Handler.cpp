@@ -30,7 +30,7 @@ static void LoadFromExtStorage();
 static void GetPictureDDS();
 // Трансформировать точки в пригодный для записи в ПЛИС вид
 static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
-/// Заполнить массив picture данными для отрисовки сигнала на экране
+// Заполнить массив picture данными для отрисовки сигнала на экране
 static void FillPicture(uint8 *picture, uint size, float values[4096]);
 static void Normalize(float d[4096]);
 static void FindMinMax(const float d[4096], float *_min, float *_max);
@@ -47,11 +47,11 @@ static void E()
 struct FileSystem
 {
     static uint GetFileSize(const char *fullPath);
-    /// Получает количество каталогов и файлов в данной директории
+    // Получает количество каталогов и файлов в данной директории
     static void GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles);
-    /// Получить имя numFile-го файла из каталога fullPath
+    // Получить имя numFile-го файла из каталога fullPath
     static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
-    /// Читает значения отсчётов сигнала из файла name
+    // Читает значения отсчётов сигнала из файла name
     static bool ReadFloats(float values[4096], const char *name);
 };
 

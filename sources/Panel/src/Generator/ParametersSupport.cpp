@@ -287,7 +287,7 @@ int MathFloatValue::GetDigit(const FloatValue &_value, int position)
 
     if(position < 0)
     {
-        int divider = 100 * 1000 * 1000;       /// Ќа это число будем делить количество наносекунд
+        int divider = 100 * 1000 * 1000;       // Ќа это число будем делить количество наносекунд
 
         int fract = value.FractNano();
 

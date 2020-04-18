@@ -36,7 +36,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
     
     if (com < Command::Count)
     {
-        /// —юда сообщение передаЄтс€ уже без первого байта
+        // —юда сообщение передаЄтс€ уже без первого байта
         return func(msg);
     }
 

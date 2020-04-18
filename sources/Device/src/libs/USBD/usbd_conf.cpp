@@ -30,7 +30,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
         else                                                        //
         {                                                           //
             DVCP::SetConnectedToUSB(false);                         //
-        }                                                           /// \todo Возможно, это не нужно делать
+        }                                                           // \todo Возможно, это не нужно делать
     }                                                               //
     prevLength = request.wLength;                                   //
     
@@ -45,7 +45,7 @@ void HAL_PCD_DataInStageCallback(PCD_HandleTypeDef *hpcd, uint8_t epnum)
 {
     USBD_LL_DataInStage(static_cast<USBD_HandleTypeDef *>(hpcd->pData), epnum, hpcd->IN_ep[epnum].xfer_buff);
     
-    /// \todo здесь оказываемя после каждой передачи пакета. Можно отловить момент, когда передача закончена.
+    // \todo здесь оказываемя после каждой передачи пакета. Можно отловить момент, когда передача закончена.
 }
 
 void HAL_PCD_SOFCallback(PCD_HandleTypeDef *hpcd)
