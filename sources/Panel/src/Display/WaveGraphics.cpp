@@ -23,7 +23,7 @@ void WaveGraphics::Draw(Chan::E ch)
 
     if (set.enabled[ch])
     {
-        Painter::DrawRectangle(x0, y0, Width(), Height(), Color::FILL);
+        Rectangle(Width(), Height()).Draw(x0, y0, Color::FILL);
 
         Font::Store();
         Font::Set(TypeFont::_GOSTB20);

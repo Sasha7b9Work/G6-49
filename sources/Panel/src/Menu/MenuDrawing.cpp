@@ -25,7 +25,7 @@ void Menu::Draw()
 
 int Menu::DrawTitle()
 {
-    Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, Page::Title::HEIGHT, Color::FILL);
+    Rectangle(SCREEN_WIDTH - 1, Page::Title::HEIGHT).Draw(0, 0, Color::FILL);
     Rectangle(SCREEN_WIDTH - 3, Page::Title::HEIGHT - 2).Fill(1, 1, Color::BLUE_10);
     if(Menu::GetOpenedItem())
     {
@@ -48,7 +48,7 @@ void Menu::DrawPagesUGO(int x)
     {
         for (int i = 0; i < numSubPages; i++) 
         {
-            Painter::DrawRectangle(x + 5 + i * delta, 5, delta, 9, Color::GRAY_25);
+            Rectangle(delta, 9).Draw(x + 5 + i * delta, 5, Color::GRAY_25);
         }
 
         int numPage = CURRENT_PAGE->CurrentSubPage();

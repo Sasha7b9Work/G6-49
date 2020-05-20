@@ -136,21 +136,10 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 }
 
 
-void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
-{
-    col.SetAsCurrent();
-
-    DrawHLine(y, x, x + width);
-    DrawHLine(y + height, x, x + width);
-    DrawVLine(x, y, y + height);
-    DrawVLine(x + width, y, y + height);
-}
-
-
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
     Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
-    DrawRectangle(x, y, width, height, colorRect);
+    Rectangle(width, height).Draw(x, y, colorRect);
 }
 
 
@@ -174,3 +163,15 @@ void Rectangle::Fill(int x, int y, Color color)
         Painter::DrawHLine(i, x, x + width);
     }
 }
+
+
+void Rectangle::Draw(int x, int y, Color col)
+{
+    col.SetAsCurrent();
+
+    Painter::DrawHLine(y, x, x + width);
+    Painter::DrawHLine(y + height, x, x + width);
+    Painter::DrawVLine(x, y, y + height);
+    Painter::DrawVLine(x + width, y, y + height);
+}
+

@@ -343,7 +343,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
         return;
     }
 
-    Painter::DrawRectangle(X_INPUT, Y_INPUT, WIDTH_INPUT, HEIGHT_INPUT, Color::FILL);
+    Rectangle(WIDTH_INPUT, HEIGHT_INPUT).Draw(X_INPUT, Y_INPUT, Color::FILL);
     Rectangle(WIDTH_INPUT - 2, HEIGHT_INPUT - 2).Fill(X_INPUT + 1, Y_INPUT + 1, Color::BACK);
     Register reg(currentRegister);
     Text::DrawBigText(X_INPUT + 3, Y_INPUT + 2, 2, reg.Name(), Color::FILL);

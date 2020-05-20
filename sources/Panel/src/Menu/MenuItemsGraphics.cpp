@@ -133,9 +133,11 @@ void Choice::Draw(bool opened, int x, int y) const
 
         Rectangle(width, Item::Title::HEIGHT).Fill(x, y, Color::GRAY_50);
         Rectangle(width, height - Item::Title::HEIGHT).Fill(x, y + Item::Title::HEIGHT, Color::BACK);
-        Painter::DrawRectangle(x, y, width, height, Color::FILL);
+        Rectangle(width, height).Draw(x, y, Color::FILL);
+
+
         Painter::DrawHLine(y + 12, x, x + width);
-        Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
+        Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
         Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle(LANGUAGE).c_str());
 
         y += 14;
@@ -229,7 +231,7 @@ void Page::DrawOpened() const
     {
         int x = SCREEN_WIDTH - Item::WIDTH - 1;
         int y = Page::Title::HEIGHT + (i % Menu::NUM_ITEMS_ON_DISPLAY) * Item::HEIGHT;
-        Painter::DrawRectangle(x, y, Item::WIDTH, Item::HEIGHT, Color::FILL);
+        Rectangle(Item::WIDTH, Item::HEIGHT).Draw(x, y, Color::FILL);
 
         if(i < NumItems())
         {

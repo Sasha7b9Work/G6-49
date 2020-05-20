@@ -210,7 +210,7 @@ void Hint::DrawPagesUGO(const int xRight, const int y0)
         }
         else
         {
-            Painter::DrawRectangle(x, y0, size, size, Color::FILL);
+            Rectangle(size, size).Draw(x, y0, Color::FILL);
         }
     }
 }

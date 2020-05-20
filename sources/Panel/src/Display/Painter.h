@@ -30,8 +30,6 @@ struct Painter
     // Рисует прерывистую вертикальную линию.
     static void DrawDashedVLine(int x, int y0, int y1, int dFill, int dEmpty, int dStart);
 
-    static void DrawRectangle(int x, int y, int width, int height, Color color = Color::NUMBER);
-
     static void DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect);
 
     static void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade);
@@ -45,6 +43,7 @@ namespace Primitives
     {
     public:
         Rectangle(int w, int h) : width(w), height(h) { };
+        void Draw(int x, int y, Color color = Color::NUMBER);
         void Fill(int x, int y, Color color = Color::NUMBER);
 
     private:

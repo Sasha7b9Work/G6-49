@@ -240,13 +240,6 @@ void Color::SetAsCurrent() const
 }
 
 
-void Painter::DrawRectangle(int x, int y, int width, int height, Color color)
-{
-    color.SetAsCurrent();
-    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
-}
-
-
 void Painter::DrawVLine(int x, int y0, int y1, Color color)
 {
     color.SetAsCurrent();
@@ -270,7 +263,7 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
-    DrawRectangle(x, y, width, height, colorRect);
+    Primitives::Rectangle(width, height).Draw(x, y, colorRect);
     Primitives::Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
 }
 
@@ -291,6 +284,15 @@ void Primitives::Rectangle::Fill(int x, int y, Color color)
     memDC.DrawRectangle({ x, y, width + 1, height + 1 });
     memDC.SetBrush(brush);
 }
+
+
+void Primitives::Rectangle::Draw(int x, int y, Color color)
+{
+    color.SetAsCurrent();
+
+    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
+}
+
 
 
 

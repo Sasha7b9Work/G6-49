@@ -15,6 +15,9 @@
 #include <cstdlib>
 
 
+using namespace Primitives;
+
+
 uint8 Display::frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 
 uint8 Display::backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
@@ -35,7 +38,7 @@ void Display::Update()
     WaveGraphics::Draw(Chan::B);
     Menu::Draw();
     PageDebug::PageRegisters::Draw();
-    Painter::DrawRectangle(0, 0, 318, 238, Color::FILL);
+    Rectangle(318, 238).Draw(0, 0, Color::FILL);
     PFreqMeter::Draw();
     Hint::Draw();
     Statistics::Show();
