@@ -762,16 +762,6 @@ void Text::Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, 
 }
 
 
-void Text::Draw10SymbolsInRect(int x, int y, char eChar)
-{
-    for (char i = 0; i < 5; i++)
-    {
-        Char(eChar + i).Draw(x + 8 * i, y);
-        Char(eChar + i + 16).Draw(x + 8 * i, y + 8);
-    }
-}
-
-
 bool Text::IsUpperCase()
 {
     return upperCase;

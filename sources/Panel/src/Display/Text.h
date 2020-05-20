@@ -34,8 +34,6 @@ struct Text
     
     static void Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
-    static void Draw10SymbolsInRect(int x, int y, char eChar);
-
     /*************** Вывод текста в области экрана **************************/
 
     static void DrawTextInColumn(int x, int y, int width, pString text);
