@@ -23,13 +23,6 @@ struct Painter
     
     // Нарисовать произвольную линию
     static void DrawLine(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
-    
-    // \brief Рисует прерывистую горизонтальную линию. dFill - длина штриха, dEmpty - расст. между штрихами. Линия всегда начинается со штриха. 
-    // dStart указывает смещение первой рисуемой точки относительно начала штриха.
-    static void DrawDashedHLine(int y, int x0, int x1, int dFill, int dEmpty, int dStart);
-    
-    // Рисует прерывистую вертикальную линию.
-    static void DrawDashedVLine(int x, int y0, int y1, int dFill, int dEmpty, int dStart);
 };
 
 
