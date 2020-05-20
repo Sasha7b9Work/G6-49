@@ -103,11 +103,11 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
         {
             numParams++;
         }
-    }
 
-    for(int i = 0; i < numParams; i++)
-    {
-        params[i]->SetForm(this);
+        for (int i = 0; i < numParams; i++)
+        {
+            params[i]->SetForm(this);
+        }
     }
 
     if (v == TypeForm::Free)

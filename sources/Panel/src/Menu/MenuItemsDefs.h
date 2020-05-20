@@ -10,12 +10,12 @@ inline void EmptyFuncVB(bool) {}
 
 
 #define DEF_BUTTON(name, titleRU, hintRU, titleEN, hintEN, keeper, funcActive, funcPress, funcDraw)                                        \
-static const ButtonBase name = { TypeItem::Button, 0, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,    \
+static const ButtonBase name = { TypeItem::Button, 0, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,      \
     funcPress, funcDraw };
 
 
 #define DEF_GOVERNOR(name, titleRU, hintRU, titleEN, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw, funcPress)    \
-static const GovernorBase name = { TypeItem::Governor, 0, false, Page::NoPage, (const PageBase *)&keeper,                                 \
+static const GovernorBase name = { TypeItem::Governor, 0, false, Page::NoPage, (const PageBase *)&keeper,                                   \
     {titleRU, hintRU}, {titleEN, hintEN}, funcActive, min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw, funcPress};
 
 
@@ -26,48 +26,48 @@ static Item * items##name[] = {                                                 
     (Item *)reinterpret_cast<const Item *>(item1),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item2),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item3)};                                                                                         \
-const PageBase name = { TypeItem::Page, 4, true, namePage, keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,                      \
+const PageBase name = { TypeItem::Page, 4, true, namePage, keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,                        \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_1(name, titleRU, titleEN, hintRU, hintEN, item1, namePage, keeper, funcActive, funcPress)                                  \
 static Item * items##name[] = {(Item *)&item1};                                                                                             \
-const PageBase name = { TypeItem::Page, 1, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                       \
+const PageBase name = { TypeItem::Page, 1, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                         \
     items##name, funcPress, Page::FuncDraw, FuncRegSetPage};
 
 #define DEF_PAGE_2(name, title, hint, item1, item2, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)                           \
 static Item * items##name[] = {                                                                                                             \
     (Item *)reinterpret_cast<const Item *>(item1),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item2)};                                                                                         \
-const PageBase name = { TypeItem::Page, 2, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                          \
+const PageBase name = { TypeItem::Page, 2, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                            \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_3(name, titleRU, hintRU, titleEN, hintEN, item1, item2, item3, namePage, keeper,                                           \
     funcActive, funcPress, funcOnKey, funcDraw)                                                                                             \
 static Item * items##name[] = {                                                                                                             \
-    (Item *)reinterpret_cast<const Item *>(item1),                                                                                          \
-    (Item *)reinterpret_cast<const Item *>(item2),                                                                                          \
-    (Item *)reinterpret_cast<const Item *>(item3)};                                                                                         \
-const PageBase name = { TypeItem::Page, 3, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,   \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item1)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item2)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item3))};                                                                             \
+const PageBase name = { TypeItem::Page, 3, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,     \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_4(name, titleRU, hintRU, titleEN, hintEN,                                                                                  \
     item1, item2, item3, item4, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)                                               \
 static Item * items##name[] = {                                                                                                             \
-    (Item *)reinterpret_cast<const Item *>(item1),                                                                                          \
-    (Item *)item2,                                                                                                                          \
-    (Item *)item3,                                                                                                                          \
-    (Item *)item4};                                                                                                                         \
-const PageBase name = { TypeItem::Page, 4, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,   \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item1)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item2)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item3)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item4))};                                                                             \
+const PageBase name = { TypeItem::Page, 4, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,     \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_4_VAR(name, titleRU, hintRU, titleEN, hintEN, item1, item2, item3, item4, namePage, keeper,                                \
     funcActive, funcPress, funcOnKey, funcDraw)                                                                                             \
 static Item * items##name[] = {                                                                                                             \
-    (Item *)reinterpret_cast<const Item *>(&item1),                                                                                         \
-    (Item *)reinterpret_cast<const Item *>(&item2),                                                                                         \
-    (Item *)reinterpret_cast<const Item *>(&item3),                                                                                         \
-    (Item *)reinterpret_cast<const Item *>(&item4)};                                                                                        \
-const PageBase name = { TypeItem::Page, 4, false, namePage, keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,                     \
+    const_cast<Item *>(reinterpret_cast<const Item *>(&item1)),                                                                             \
+    const_cast<Item *>(reinterpret_cast<const Item *>(&item2)),                                                                             \
+    const_cast<Item *>(reinterpret_cast<const Item *>(&item3)),                                                                             \
+    const_cast<Item *>(reinterpret_cast<const Item *>(&item4))};                                                                            \
+const PageBase name = { TypeItem::Page, 4, false, namePage, keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,                       \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_5(name, title, hint, item1, item2, item3, item4, item5, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)      \
@@ -77,7 +77,7 @@ static Item * items##name[] = {                                                 
     (Item *)reinterpret_cast<const Item *>(item3),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item4),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item5)};                                                                                         \
-const PageBase name = { TypeItem::Page, 5, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                          \
+const PageBase name = { TypeItem::Page, 5, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                            \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_6(name, titleRU, hintRU, titleEN, hintEN, item1, item2, item3, item4, item5, item6, namePage, keeper,                      \
@@ -102,7 +102,7 @@ static Item * items##name[] = {                                                 
     (Item *)reinterpret_cast<const Item *>(item5),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item6),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item7)};                                                                                         \
-const PageBase name = { TypeItem::Page, 7, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                          \
+const PageBase name = { TypeItem::Page, 7, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                            \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_8(name, titleRU, hintRU, titleEN, hintEN,                                                                                  \
@@ -116,7 +116,7 @@ static Item * items##name[] = {                                                 
     (Item *)reinterpret_cast<const Item *>(item6),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item7),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item8)};                                                                                         \
-const PageBase name = { TypeItem::Page, 8, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,   \
+const PageBase name = { TypeItem::Page, 8, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,     \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_9(name, title, hint,                                                                                                       \
@@ -131,7 +131,7 @@ static Item * items##name[] = {                                                 
     (Item *)reinterpret_cast<const Item *>(item7),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item8),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item9)};                                                                                         \
-const PageBase name = { TypeItem::Page, 9, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                          \
+const PageBase name = { TypeItem::Page, 9, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                            \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_10(name, titleRU, titleEN, hintRU, hintEN,                                                                                 \
@@ -139,7 +139,7 @@ const PageBase name = { TypeItem::Page, 9, false, namePage, (const PageBase *)ke
 static Item * items##name[] = {                                                                                                             \
     (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
     (Item *)&item8, (Item *)&item9, (Item *)&item10};                                                                                       \
-const PageBase name = { TypeItem::Page, 10, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},    \
+const PageBase name = { TypeItem::Page, 10, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},      \
     items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_11(name, titleRU, titleEN, hintRU, hintEN,                                                                                 \
@@ -147,7 +147,7 @@ const PageBase name = { TypeItem::Page, 10, false, namePage, (const PageBase *)k
 static Item * items##name[] = {                                                                                                             \
     (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
     (Item *)&item8, (Item *)&item9, (Item *)&item10, (Item *)&item11};                                                                      \
-const PageBase name = { TypeItem::Page, 11, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},    \
+const PageBase name = { TypeItem::Page, 11, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},      \
     items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_11_GLOBAL(name, titleRU, titleEN, hintRU, hintEN,                                                                          \
@@ -229,7 +229,7 @@ static pString name##namesRU[] = {name1RU, name2RU};                            
 static pString name##namesEN[] = {name1EN, name2EN};                                                                                                \
 static pString name##hintsRU[] = {hint1RU, hint2RU};                                                                                                \
 static pString name##hintsEN[] = {hint1EN, hint2EN};                                                                                                \
-static const ChoiceBase name = { TypeItem::Choice, 2, false, Page::NoPage, (const PageBase *)(&keeper),                                           \
+static const ChoiceBase name = { TypeItem::Choice, 2, false, Page::NoPage, (const PageBase *)(&keeper),                                             \
     {titleRU, hintRU}, {titleEN, hintEN}, funcActive, (int8 *)&cell,                                                                                \
     name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
@@ -240,7 +240,7 @@ static pString name##namesRU[] = {name1RU, name2RU, name3RU};                   
 static pString name##namesEN[] = {name1EN, name2EN, name3EN};                                                                                       \
 static pString name##hintsRU[] = {hint1RU, hint2RU, hint3RU};                                                                                       \
 static pString name##hintsEN[] = {hint1EN, hint2EN, hint3EN};                                                                                       \
-static const ChoiceBase name = { TypeItem::Choice, 3, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,             \
+static const ChoiceBase name = { TypeItem::Choice, 3, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
     (int8 *)&cell, name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
 #define DEF_CHOICE_4(name, titleRU, hintRU, titleEN, hintEN,                                                                                        \
@@ -250,7 +250,7 @@ static pString name##namesRU[] = {name1RU, name2RU, name3RU, name4RU};          
 static pString name##namesEN[] = {name1EN, name2EN, name3EN, name4EN};                                                                              \
 static pString name##hintsRU[] = {hint1RU, hint2RU, hint3RU, hint4RU};                                                                              \
 static pString name##hintsEN[] = {hint1EN, hint2EN, hint3EN, hint4EN};                                                                              \
-static const ChoiceBase name = { TypeItem::Choice, 4, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,             \
+static const ChoiceBase name = { TypeItem::Choice, 4, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
     (int8 *)&cell, name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
 #define DEF_CHOICE_5(name, titleRU, hintRU, titleEN, hintEN,                                                                                        \
@@ -260,14 +260,14 @@ static pString name##namesRU[] = {name1RU, name2RU, name3RU, name4RU, name5RU}; 
 static pString name##namesEN[] = {name1EN, name2EN, name3EN, name4EN, name5EN};                                                                     \
 static pString name##hintsRU[] = {hint1RU, hint2RU, hint3RU, hint4RU, hint5RU};                                                                     \
 static pString name##hintsEN[] = {hint1EN, hint2EN, hint3EN, hint4EN, hint5EN};                                                                     \
-static const ChoiceBase name = { TypeItem::Choice, 5, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,             \
+static const ChoiceBase name = { TypeItem::Choice, 5, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
     (int8 *)&cell, name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
 #define DEF_CHOICE_6(name, title, hint, name1, hint1, name2, hint2, name3, hint3, name4, hint4, name5, hint5, name6, hint6,                         \
     cell, keeper, funcActive, funcChanged, funcDraw)                                                                                                \
 static pString hints##name[] = {name1, name2, name3, name4, name5, name6};                                                                          \
 static pString hints##name##Ru[] = {hint1, hint2, hint3, hint4, hint5, hint6};                                                                      \
-static const ChoiceBase name = { TypeItem::Choice, 6, false, Page::NoPage, &keeper, funcActive, {title, hint},                                    \
+static const ChoiceBase name = { TypeItem::Choice, 6, false, Page::NoPage, &keeper, funcActive, {title, hint},                                      \
     (int8 *)&cell, hints##name, hints##name##Ru, funcChanged, funcDraw};
 
 #define DEF_CHOICE_7(name, titleRU, hintRU, titleEN, hintEN,                                                                                        \
@@ -278,7 +278,7 @@ static pString name##namesRU[] = {name1RU, name2RU, name3RU, name4RU, name5RU, n
 static pString name##namesEN[] = {name1EN, name2EN, name3EN, name4EN, name5EN, name6EN, name7EN};                                                   \
 static pString name##hintsRU[] = {hint1RU, hint2RU, hint3RU, hint4RU, hint5RU, hint6RU, hint7RU};                                                   \
 static pString name##hintsEN[] = {hint1EN, hint2EN, hint3EN, hint4EN, hint5EN, hint6EN, hint7EN};                                                   \
-static const ChoiceBase name = { TypeItem::Choice, 7, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,             \
+static const ChoiceBase name = { TypeItem::Choice, 7, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
     (int8 *)&cell, name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
 #define DEF_CHOICE_8(name, titleRU, hintRU, titleEN, hintEN,                                                                                        \
@@ -289,7 +289,7 @@ static pString name##namesRU[] = {name1RU, name2RU, name3RU, name4RU, name5RU, n
 static pString name##namesEN[] = {name1EN, name2EN, name3EN, name4EN, name5EN, name6EN, name7EN, name8EN};                                          \
 static pString name##hintsRU[] = {hint1RU, hint2RU, hint3RU, hint4RU, hint5RU, hint6RU, hint7RU, hint8RU};                                          \
 static pString name##hintsEN[] = {hint1EN, hint2EN, hint3EN, hint4EN, hint5EN, hint6EN, hint7EN, hint8EN};                                          \
-static const ChoiceBase name = { TypeItem::Choice, 8, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,             \
+static const ChoiceBase name = { TypeItem::Choice, 8, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
     (int8 *)&cell, name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
 #define DEF_CHOICE_12(name, titleRU, titleEN, hintRU, hintEN,                                                                                       \
@@ -303,7 +303,7 @@ static pString hints##name[] = {nameRu1, nameEn1, nameRu2, nameEn2, nameRu3, nam
     nameRu12, nameEn12};                                                                                                                            \
 static pString hints##name##Ru[] = {hintRu1, hintRu2, hintRu3, hintRu4, hintRu5, hintRu6, hintRu7, hintRu8, hintRu9, hintRu10, hintRu11, hintRu12}; \
 static pString hints##name##En[] = {hintEn1, hintEn2, hintEn3, hintEn4, hintEn5, hintEn6, hintEn7, hintEn8, hintEn9, hintEn10, hintEn11, hintEn12}; \
-static const ChoiceBase name = { TypeItem::Choice, 12, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},              \
+static const ChoiceBase name = { TypeItem::Choice, 12, false, Page::NoPage, &keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                \
     (int8 *)&cell, hints##name, hints##name##Ru, hints##name##En, funcChanged, funcDraw};
 
 

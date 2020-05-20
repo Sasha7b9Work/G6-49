@@ -52,11 +52,6 @@ void Menu::Update()
             continue;
         }
 
-        if(key.IsUp())
-        {
-            key = key;
-        }
-
         ProcessKey(key);
 
         timePress = TIME_MS;

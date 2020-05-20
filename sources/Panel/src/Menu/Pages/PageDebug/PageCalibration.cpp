@@ -230,7 +230,7 @@ static void OnEnter_Calibration(bool enter)
 const PageBase *page = const_cast<const PageBase *>(reinterpret_cast<PageBase *>(PageDebug::self));
 
 
-DEF_PAGE_4_VAR( pCalibration,
+DEF_PAGE_4_VAR( pCalibration, //-V641
     " ¿À»¡–Œ¬ ¿", "CALIBRATION",
     "", "",
     cChannel,
@@ -239,6 +239,7 @@ DEF_PAGE_4_VAR( pCalibration,
     cParameterFullVoltage,
     Page::Calibration, page, Item::FuncActive, OnEnter_Calibration, FuncOnKeyPage, DrawPage
 )
+
 
 Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pCalibration));
 

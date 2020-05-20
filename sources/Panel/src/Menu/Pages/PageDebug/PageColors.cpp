@@ -60,7 +60,7 @@ DEF_GOVERNOR(gBlueChanA,
     blueChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
-DEF_PAGE_3( pChanA,
+DEF_PAGE_3( pChanA, //-V641
     "Канал 1", "Channel 1", //-V641
     "", "",
     &gRedChanA,
@@ -89,7 +89,7 @@ DEF_GOVERNOR(gBlueChanB,
     blueChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
-DEF_PAGE_3(pChanB,
+DEF_PAGE_3(pChanB, //-V641
     "Канал 2", "Channel 2", //-V641
     "", "",
     &gRedChanB,
@@ -117,7 +117,7 @@ DEF_GOVERNOR(gBlueMenu,
     blueMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
-DEF_PAGE_3(pMenu,
+DEF_PAGE_3(pMenu, //-V641
     "Меню", "Menu", //-V641
     "", "",
     &gRedMenu,

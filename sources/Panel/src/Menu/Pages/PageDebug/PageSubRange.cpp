@@ -88,7 +88,7 @@ DEF_CHOICE_2(cPC14,
 )
 
 
-DEF_PAGE_6(pSubRanges,
+DEF_PAGE_6(pSubRanges, //-V641
     "Диапазоны", "Ranges",
     "", "",
     &cPE15,

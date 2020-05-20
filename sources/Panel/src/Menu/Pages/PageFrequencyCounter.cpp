@@ -79,7 +79,7 @@ DEF_CHOICE_2(cResist,                                                           
 
 static void OnPress_Resist(bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Resist, (uint)set.freq.resist);
+    PGenerator::LoadRegister(Register::FreqMeter_Resist, static_cast<uint>(set.freq.resist));
 }
 
 
@@ -93,7 +93,7 @@ DEF_CHOICE_2(cCouple,                                                           
 
 static void OnPress_Couple(bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Couple, (uint)set.freq.couple);
+    PGenerator::LoadRegister(Register::FreqMeter_Couple, static_cast<uint>(set.freq.couple));
 }
 
 
@@ -107,7 +107,7 @@ DEF_CHOICE_2(cFiltr,                                                            
 
 static void OnPress_Filtr(bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Filtr, (uint)set.freq.filtr);
+    PGenerator::LoadRegister(Register::FreqMeter_Filtr, static_cast<uint>(set.freq.filtr));
 }
 
 DEF_CHOICE_5(cAvePeriod,                                                                                                                                //--- ×ÀÑÒÎÒÎÌÅĞ - ×ÈÑËÎ ÏÅĞÈÎÄÎÂ ---
@@ -186,7 +186,7 @@ DEF_GOVERNOR( gHysteresis,                                                      
 volatile const GovernorBase *pgHysteresis = &gHysteresis;
 
 
-DEF_PAGE_8( pFrequencyCounter,                                                                                                                                           //--- ×ÀÑÒÎÒÎÌÅĞ ---
+DEF_PAGE_8( pFrequencyCounter,                                                                                                                                           //--- ×ÀÑÒÎÒÎÌÅĞ --- //-V641
     "×ÀÑÒÎÒÎÌÅĞ", "FREQMETER", //-V641
     "Óïğàâëåíèå ôóêíöèÿìè ÷àñòîòîìåğà", "Freqmeter control",
     &cMeasure,       // ×ÀÑÒÎÒÎÌÅĞ - Èçìåğåíèå
