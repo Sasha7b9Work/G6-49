@@ -545,7 +545,7 @@ bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
 }
 
 
-int Text::DrawBigChar(int eX, int eY, int size, char symbol)
+int BigChar::Draw(int eX, int eY)
 {
     int8 width = Font::Width(symbol);
     int8 height = Font::Height();
@@ -588,7 +588,7 @@ void Text::DrawBigText(int eX, int eY, int size, pString text, Color color)
 
     for (uint i = 0; i < numSymbols; i++)
     {
-        x = DrawBigChar(x, eY, size, text[i]);
+        x = BigChar(text[i], size).Draw(x, eY);
         x += size;
     }
 }

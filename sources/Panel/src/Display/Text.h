@@ -14,8 +14,6 @@ struct Text
     
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
-    static int DrawBigChar(int eX, int eY, int size, char symbol);
-
     static void DrawBigText(int x, int y, int size, pString text, Color color = Color::NUMBER);
 
     static void DrawTextRelativelyRight(int xRight, int y, pString text, Color color = Color::NUMBER);
@@ -94,3 +92,15 @@ public:
 private:
     char symbol;
 };
+
+
+class BigChar
+{
+public:
+    BigChar(char s, int _size) : symbol(s), size(_size) { }
+    int Draw(int eX, int eY);
+private:
+    char symbol;
+    int size;
+};
+

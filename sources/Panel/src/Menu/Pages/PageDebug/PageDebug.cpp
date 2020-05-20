@@ -361,7 +361,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
             Rectangle(19, 31).DrawFilled(x - 2, Y_INPUT + 19, Color::GRAY_10, Color::BLUE);
             Color::FILL.SetAsCurrent();
         }
-        x = Text::DrawBigChar(x, Y_INPUT + 20, 4, buffer[i]) + 3;
+        x = BigChar(buffer[i], 4).Draw(x, Y_INPUT + 20) + 3;
     }
     if (position == static_cast<int>(std::strlen(buffer)) && position < SizeBuffer())
     {
