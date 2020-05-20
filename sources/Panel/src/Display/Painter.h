@@ -30,8 +30,6 @@ struct Painter
     
     // Рисует прерывистую вертикальную линию.
     static void DrawDashedVLine(int x, int y0, int y1, int dFill, int dEmpty, int dStart);
-
-    static void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade);
 };
 
 
