@@ -444,7 +444,7 @@ void Form::DrawSine(Chan::E, int x0, int y0, int width, int height)
         int y1 = y0 - static_cast<int>(std::sinf((i - delta) * speed) * height / 2.0F);
         int y2 = y0 - static_cast<int>(std::sinf(i * speed) * height / 2.0F);
 
-        Painter::DrawLine(x0 + i - delta, y1, x0 + i, y2);
+        Line::Draw(x0 + i - delta, y1, x0 + i, y2);
     }
 }
 
@@ -455,8 +455,8 @@ void Form::DrawRampPlus(Chan::E, int x0, int y0, int, int height)
     int dX = 28;
     for (int x = x0; x < x0 + 80; x += dX)
     {
-        Painter::DrawLine(x, y0, x + dX, y0 - height);
-        Painter::DrawLine(x + dX, y0, x + dX, y0 - height);
+        Line::Draw(x, y0, x + dX, y0 - height);
+        Line::Draw(x + dX, y0, x + dX, y0 - height);
     }
 }
 
@@ -468,7 +468,7 @@ void Form::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
     int dY = 20;
     for (int x = x0; x < x0 + 80; x += dX)
     {
-        Painter::DrawLine(x, aveY - dY, x + dX, aveY + dY);
+        Line::Draw(x, aveY - dY, x + dX, aveY + dY);
         Painter::DrawVLine(x + dX, aveY - dY, aveY + dY);
     }
 }
@@ -477,8 +477,8 @@ void Form::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
 void Form::DrawTriangle(Chan::E, int x, int y, int width, int height)
 {
     int min = y + height;
-    Painter::DrawLine(x, min, x + width / 2, y);
-    Painter::DrawLine(x + width / 2, y, x + width, y + height);
+    Line::Draw(x, min, x + width / 2, y);
+    Line::Draw(x + width / 2, y, x + width, y + height);
 }
 
 

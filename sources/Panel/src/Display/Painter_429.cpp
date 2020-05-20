@@ -83,7 +83,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
 }
 
 
-void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
+void Primitives::Line::Draw(int x1, int y1, int x2, int y2, Color col)
 {
     col.SetAsCurrent();
 

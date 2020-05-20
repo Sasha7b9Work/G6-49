@@ -248,7 +248,7 @@ void Painter::DrawHLine(int y, int x0, int x1, Color color)
 }
 
 
-void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
+void Primitives::Line::Draw(int x0, int y0, int x1, int y1, Color color)
 {
     color.SetAsCurrent();
     memDC.DrawLine({ x0, y0 }, { x1, y1 });

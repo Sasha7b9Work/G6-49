@@ -20,9 +20,6 @@ struct Painter
     
     // Нарисовать вертикальную линию
     static void DrawVLine(int x, int y0, int y1, Color color = Color::NUMBER);
-    
-    // Нарисовать произвольную линию
-    static void DrawLine(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
 };
 
 
@@ -33,6 +30,14 @@ namespace Primitives
     public:
         void Draw(int x, int y);
     };
+
+
+    class Line
+    {
+    public:
+        static void Draw(int x0, int y0, int x1, int y1, Color color = Color::NUMBER);
+    };
+
 
     class Rectangle
     {
