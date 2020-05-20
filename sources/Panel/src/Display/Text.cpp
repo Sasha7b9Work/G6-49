@@ -578,7 +578,7 @@ int BigChar::Draw(int eX, int eY)
 }
 
 
-void Text::DrawBigText(int eX, int eY, int size, pString text, Color color)
+void BigText::Draw(int eX, int eY, Color color)
 {
     color.SetAsCurrent();
 

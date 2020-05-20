@@ -48,12 +48,12 @@ void FDrive::Draw()
 
     if(mounted == Disconnect)
     {
-        Text::DrawBigText(30, 110, 2, "Подключите флешку", Color::FILL);
+        BigText("Подключите флешку", 2).Draw(30, 110, Color::FILL);
         return;
     }
     else if (mounted == Failed)
     {
-        Text::DrawBigText(30, 110, 2, "Флешка неисправна", Color::FILL);
+        BigText("Флешка неисправна", 2).Draw(30, 110, Color::FILL);
         return;
     }
 

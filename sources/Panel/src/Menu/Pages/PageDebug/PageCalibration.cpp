@@ -166,7 +166,7 @@ static void DrawPage()
 
     SU::Int2String(*calK, true, 1, buffer);
 
-    Text::DrawBigText(20, 20, 3, buffer, Color::BLACK);
+    BigText(buffer, 3).Draw(20, 20, Color::BLACK);
 }
 
 

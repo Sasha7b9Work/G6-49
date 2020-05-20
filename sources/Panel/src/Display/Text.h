@@ -9,12 +9,12 @@ struct Text
     // Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
 
+    static int Draw(int x, int y, pString text, Color color = Color::NUMBER);
+
     // Вывод форматированного текста
     static int DrawFormat(int x, int y, pString text, ...);
     
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
-
-    static void DrawBigText(int x, int y, int size, pString text, Color color = Color::NUMBER);
 
     static void DrawTextRelativelyRight(int xRight, int y, pString text, Color color = Color::NUMBER);
     
@@ -46,8 +46,6 @@ struct Text
     
     // Если true, то все буквы выводятся в верхнем регистре
     static bool IsUpperCase();
-
-    static int Draw(int x, int y, pString text, Color color = Color::NUMBER);
 
 private:
     
@@ -101,6 +99,17 @@ public:
     int Draw(int eX, int eY);
 private:
     char symbol;
+    int size;
+};
+
+
+class BigText
+{
+public:
+    BigText(pString t, int s) : text(t), size(s) {}
+    void Draw(int x, int y, Color color = Color::NUMBER);
+private:
+    pString text;
     int size;
 };
 
