@@ -755,13 +755,6 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
 }
 
 
-void Text::Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2)
-{
-    Char(symbol1).Draw(x, y, color1);
-    Char(symbol2).Draw(x, y, color2);
-}
-
-
 bool Text::IsUpperCase()
 {
     return upperCase;
