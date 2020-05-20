@@ -136,7 +136,7 @@ void Choice::Draw(bool opened, int x, int y) const
         Rectangle(width, height).Draw(x, y, Color::FILL);
 
 
-        Painter::DrawHLine(y + 12, x, x + width);
+        HLine::Draw(y + 12, x, x + width);
         Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
         Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle(LANGUAGE).c_str());
 
@@ -147,9 +147,9 @@ void Choice::Draw(bool opened, int x, int y) const
             if (CurrentIndex() == i)
             {
                 Rectangle(Item::WIDTH - 4, 8).Fill(x + 2, y, Color::GREEN_50);
-                Painter::DrawHLine(y - 1, x + 1, x - 1 + Item::WIDTH - 1, Color::GREEN_75);
+                HLine::Draw(y - 1, x + 1, x - 1 + Item::WIDTH - 1, Color::GREEN_75);
                 VLine::Draw(x + 1, y - 1, y - 1 + 10);
-                Painter::DrawHLine(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
+                HLine::Draw(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
                 VLine::Draw(x - 1 + Item::WIDTH, y - 1, y + 9);
                 NameSubItem(i, LANGUAGE).Draw(x + 3, y, Color::BACK);
             }

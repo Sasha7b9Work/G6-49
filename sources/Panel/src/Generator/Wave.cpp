@@ -413,7 +413,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
     }
 
     VLine::Draw(x0, minY - 3, maxY + 3);
-    Painter::DrawHLine(aveY, x0, x0 + width);
+    HLine::Draw(aveY, x0, x0 + width);
 
     typedef void(*pFuncIIII)(Chan::E, int, int, int, int);
 
@@ -489,9 +489,9 @@ void Form::DrawMeander(Chan::E, int x0, int y0, int, int height)
     int aveY = y0 + height / 2;
     for (int x = x0; x < x0 + 80; x += dX)
     {
-        Painter::DrawHLine(aveY - dY, x, x + dX / 2);
+        HLine::Draw(aveY - dY, x, x + dX / 2);
         VLine::Draw(x + dX / 2, aveY - dY, aveY + dY);
-        Painter::DrawHLine(aveY + dY, x + dX / 2, x + dX);
+        HLine::Draw(aveY + dY, x + dX / 2, x + dX);
         VLine::Draw(x + dX, aveY - dY, aveY + dY);
     }
 }
@@ -516,8 +516,8 @@ void Form::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
     {
         VLine::Draw(x0, minY, maxY);
         VLine::Draw(x0 + 5, minY, maxY);
-        Painter::DrawHLine(minY, x0, x0 + 5);
-        Painter::DrawHLine(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
+        HLine::Draw(minY, x0, x0 + 5);
+        HLine::Draw(maxY, x0 + 5, x0 + (i == 4 ? 7 : deltaX));
         x0 += deltaX;
     }
 }
@@ -533,15 +533,15 @@ void Form::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
         for (int i = 0; i < 3; i++)
         {
             VLine::Draw(x0, minY, maxY);
-            Painter::DrawHLine(minY, x0, x0 + 4);
+            HLine::Draw(minY, x0, x0 + 4);
             VLine::Draw(x0 + 4, minY, maxY);
-            Painter::DrawHLine(maxY, x0 + 4, x0 + deltaX);
+            HLine::Draw(maxY, x0 + 4, x0 + deltaX);
             x0 += deltaX;
         }
 
         if (j == 0)
         {
-            Painter::DrawHLine(maxY, x0, x0 + 35);
+            HLine::Draw(maxY, x0, x0 + 35);
         }
 
         x0 += 37;

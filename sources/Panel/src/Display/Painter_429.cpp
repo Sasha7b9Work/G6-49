@@ -39,7 +39,7 @@ void Painter::EndScene()
 }
 
 
-void Painter::DrawHLine(int y, int x0, int x1, Color col)
+void Primitives::HLine::Draw(int y, int x0, int x1, Color col)
 {
     col.SetAsCurrent();
 
@@ -153,7 +153,7 @@ void Rectangle::Fill(int x, int y, Color color)
 
     for (int i = y; i <= y + height; ++i)
     {
-        Painter::DrawHLine(i, x, x + width);
+        HLine::Draw(i, x, x + width);
     }
 }
 
@@ -162,8 +162,8 @@ void Rectangle::Draw(int x, int y, Color col)
 {
     col.SetAsCurrent();
 
-    Painter::DrawHLine(y, x, x + width);
-    Painter::DrawHLine(y + height, x, x + width);
+    HLine::Draw(y, x, x + width);
+    HLine::Draw(y + height, x, x + width);
     VLine::Draw(x, y, y + height);
     VLine::Draw(x + width, y, y + height);
 }

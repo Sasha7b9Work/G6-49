@@ -14,9 +14,6 @@ struct Painter
     
     // Загружает в дисплей все цвета
     static void LoadPalette();
-   
-    // Нарисовать горизонтальную линию
-    static void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
 };
 
 
@@ -40,6 +37,13 @@ namespace Primitives
     {
     public:
         static void Draw(int x, int y0, int y1, Color color = Color::NUMBER);
+    };
+
+
+    class HLine
+    {
+    public:
+        static void Draw(int y, int x0, int x1, Color color = Color::NUMBER);
     };
 
 

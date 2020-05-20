@@ -241,7 +241,7 @@ void Primitives::VLine::Draw(int x, int y0, int y1, Color color)
 }
 
 
-void Painter::DrawHLine(int y, int x0, int x1, Color color)
+void Primitives::HLine::Draw(int y, int x0, int x1, Color color)
 {
     color.SetAsCurrent();
     memDC.DrawLine({ x0, y }, { x1, y });
