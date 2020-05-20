@@ -210,7 +210,7 @@ void PGenerator::TuneChannel(Chan::E ch)
 {
     EnableChannel(ch, set.enabled[ch]);
 
-    FORM(ch)->TuneGenerator(ch);
+    FORM(ch)->TuneGenerator();
 }
 
 

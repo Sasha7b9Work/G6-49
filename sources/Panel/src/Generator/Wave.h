@@ -56,7 +56,7 @@ public:
     void SetNextParameter();
     
     // Настраивает генератор в соответствии с установленными параметрами
-    void TuneGenerator(Chan::E ch);
+    void TuneGenerator();
     
     // Возвращает true, если тип формы сигнала соответствует e
     bool Is(TypeForm::E e) const { return e == value; };

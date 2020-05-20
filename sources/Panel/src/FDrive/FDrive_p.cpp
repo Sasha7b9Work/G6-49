@@ -41,7 +41,7 @@ void FDrive::Draw()
     int width = WaveGraphics::Width() - 2;
     int height = WaveGraphics::Height() * 2;
 
-    Painter::FillRegion(x, y, width, height, Color::BACK);
+    Region(width, height).Fill(x, y, Color::BACK);
 
     if(mounted == Disconnect)
     {

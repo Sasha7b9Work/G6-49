@@ -23,7 +23,7 @@ void Menu::Draw()
 int Menu::DrawTitle()
 {
     Painter::DrawRectangle(0, 0, SCREEN_WIDTH - 1, Page::Title::HEIGHT, Color::FILL);
-    Painter::FillRegion(1, 1, SCREEN_WIDTH - 3, Page::Title::HEIGHT - 2, Color::BLUE_10);
+    Region(SCREEN_WIDTH - 3, Page::Title::HEIGHT - 2).Fill(1, 1, Color::BLUE_10);
     if(Menu::GetOpenedItem())
     {
         return Menu::GetOpenedItem()->FullPath().Draw(5, 5, Color::FILL);
@@ -50,7 +50,7 @@ void Menu::DrawPagesUGO(int x)
 
         int numPage = CURRENT_PAGE->CurrentSubPage();
 
-        Painter::FillRegion(x + 5 + numPage * delta, 5, delta, 9, Color::FILL);
+        Region(delta, 9).Fill(x + 5 + numPage * delta, 5, Color::FILL);
 
         SU::Int2String(numPage + 1, false, 2).Draw(x + 6 + numPage * delta, 5, Color::BACK);
     }

@@ -35,7 +35,7 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString te
     int height = 0;
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
     Painter::DrawRectangle(x, y, width, height, colorRect);
-    Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBack);
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorBack);
     DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, text, colorText);
     return y + height;
 }
@@ -736,7 +736,8 @@ void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int heigh
     int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
-    Painter::FillRegion(eX - lenght - widthBorder, y - widthBorder + 1, w, h);
+    Region(w, h).Fill(eX - lenght - widthBorder, y - widthBorder + 1);
+
     DrawStringInCenterRect(x, y, width, height, text, colorText);
 }
 
@@ -744,7 +745,7 @@ void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int heigh
 int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill)
 {
     Painter::DrawRectangle(x, y, width, height, colorFill);
-    Painter::FillRegion(x + 1, y + 1, width - 2, height - 2, colorBackground);
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorBackground);
     colorFill.SetAsCurrent();
 
     return DrawStringInCenterRect(x, y, width, height, text);

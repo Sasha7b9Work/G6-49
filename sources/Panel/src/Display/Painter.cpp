@@ -78,7 +78,8 @@ void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmt
 
 void Painter::DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade)
 {
-    FillRegion(x + thickness, y + thickness, width - thickness * 2, height - thickness * 2, normal);
+    Region(width - thickness * 2, height - thickness * 2).Fill(x + thickness, y + thickness, normal);
+    
     if (isPressed && !isShade)
     {
         for (int i = 0; i < thickness; i++)

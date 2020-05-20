@@ -34,7 +34,17 @@ struct Painter
 
     static void DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect);
 
-    static void FillRegion(int x, int y, int width, int height, Color color = Color::NUMBER);
-
     static void DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade);
+};
+
+
+class Region
+{
+public:
+    Region(int w, int h) : width(w), height(h) { };
+    void Fill(int x, int y, Color color = Color::NUMBER);
+
+private:
+    int width;
+    int height;
 };

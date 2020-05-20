@@ -16,7 +16,7 @@ public:
 
     Tuner(Parameter *param);
 
-    void Draw(int x, int y);
+    void Draw();
 
     void OnKeyControl(const Key &control);
 

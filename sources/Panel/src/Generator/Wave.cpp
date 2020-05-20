@@ -174,7 +174,7 @@ void Form::SetNextParameter()
 }
 
 
-void Form::TuneGenerator(Chan::E ch)
+void Form::TuneGenerator()
 {
     PGenerator::SetFormWave(GetWave());
 
@@ -213,7 +213,7 @@ void Form::TuneGenerator(Chan::E ch)
             SendParameterToGenerator(ParameterValue::Offset);
         }
 
-        if(!Chan(ch).IsA())
+        if(GetWave()->GetChannel() != Chan::A)
         {
             SendParameterToGenerator(ParameterValue::Phase);
         }

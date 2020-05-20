@@ -99,7 +99,7 @@ public:
     };
 
     ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
-        Parameter(Parameter::Value, nameRU, nameEN), type(t), min(_min), max(_max), value(_value), tuner(this) { }
+        Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value) { }
 
     E Type() const { return type; }
 
@@ -117,12 +117,13 @@ public:
 
     void OnPressButtonTune();
 
+    Tuner tuner;        // Используется для настройки 
+
 private:
     E type;
     FloatValue min;
     FloatValue max;
     FloatValue value;
-    Tuner tuner;        // Используется для настройки 
 
     pString MainUnits(uint lang) const;
 

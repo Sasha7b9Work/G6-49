@@ -193,7 +193,7 @@ static void DrawItem(int i, int x, int y, bool highlight)
     Color color = Color::FILL;
     if (highlight)
     {
-        Painter::FillRegion(x - 1, y, 230, 9, color);
+        Region(230, 9).Fill(x - 1, y, color);
         color = Color::BACK;
     }
     GetNameItem(i).Draw(x, y, color);

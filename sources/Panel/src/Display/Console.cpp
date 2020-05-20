@@ -50,7 +50,7 @@ void Console::Draw()
     for (int i = 0; i < numStrings; i++)
     {
         int length = Font::GetLengthText(&buffer[i][0]);
-        Painter::FillRegion(2, y, length, 9, Color::GREEN_25);
+        Region(length, 9).Fill(2, y, Color::GREEN_25);
         String(&buffer[i][0]).Draw(2, y, Color::FILL);
         y += 9;
     }

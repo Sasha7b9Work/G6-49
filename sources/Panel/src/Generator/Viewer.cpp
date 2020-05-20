@@ -19,7 +19,7 @@ void Viewer::Draw(int x, int y)
 
     if((ch == CURRENT_CHANNEL) && std::strcmp(CURRENT_PARAM->Name(LANGUAGE), param->Name(LANGUAGE)) == 0 && CURRENT_PAGE == PageSignals::self)
     {
-        Painter::FillRegion(x, y, 139, 9, Color::GRAY_25);
+        Region(139, 9).Fill(x, y, Color::GRAY_25);
     }
 
     String(param->Name(LANGUAGE)).Draw(x + 1, y, Color::Chan(ch));

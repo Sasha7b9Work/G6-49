@@ -157,7 +157,7 @@ static void DrawPage()
         return;
     }
 
-    Painter::FillRegion(10, 10, 200, 50, Color::WHITE);
+    Region(200, 50).Fill(10, 10, Color::WHITE);
 
     char buffer[30];
 

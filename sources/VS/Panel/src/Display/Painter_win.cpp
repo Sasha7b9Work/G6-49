@@ -100,7 +100,7 @@ void Painter::BeginScene(Color color)
     memDC.SelectObject(bitmap);
     wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
     memDC.SetBrush(brush);
-    FillRegion(0, 0, 320, 240, color);
+    Region(320, 240).Fill(0, 0, color);
 }
 
 
@@ -216,18 +216,6 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
 }
 
 
-void Painter::FillRegion(int x, int y, int width, int height, Color color /* = Color::NUMBER */)
-{
-    color.SetAsCurrent();
-
-    wxBrush brush = memDC.GetBrush();
-    wxPen pen = memDC.GetPen();
-    memDC.SetBrush(wxBrush(pen.GetColour()));
-    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
-    memDC.SetBrush(brush);
-}
-
-
 void Painter::SetPoint(int x, int y)
 {
     memDC.DrawPoint({ x, y });
@@ -283,7 +271,7 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
     DrawRectangle(x, y, width, height, colorRect);
-    FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
 }
 
 
@@ -292,4 +280,19 @@ void Painter::LoadPalette()
 
 }
 
+
+void Region::Fill(int x, int y, Color color)
+{
+    color.SetAsCurrent();
+
+    wxBrush brush = memDC.GetBrush();
+    wxPen pen = memDC.GetPen();
+    memDC.SetBrush(wxBrush(pen.GetColour()));
+    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
+    memDC.SetBrush(brush);
+}
+
+
+
 #include "Keyboard/Keyboard_win.h"
+

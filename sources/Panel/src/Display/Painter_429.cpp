@@ -146,19 +146,8 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
-    FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
     DrawRectangle(x, y, width, height, colorRect);
-}
-
-
-void Painter::FillRegion(int x, int y, int width, int height, Color col)
-{
-    col.SetAsCurrent();
-
-    for (int i = y; i <= y + height; ++i)
-    {
-        DrawHLine(i, x, x + width);
-    }
 }
 
 
@@ -169,5 +158,16 @@ void Painter::SetPoint(int x, int y)
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {
         *buffer = Color::CurrentValue();
+    }
+}
+
+
+void Region::Fill(int x, int y, Color color)
+{
+    color.SetAsCurrent();
+
+    for (int i = y; i <= y + height; ++i)
+    {
+        Painter::DrawHLine(i, x, x + width);
     }
 }

@@ -88,7 +88,7 @@ static bool OnControl_TuneParameter(const Key &key)
 
 static void OnDraw_TuneParameter()
 {
-    //tuner.Draw();
+    tuned.tuner.Draw();
 }
 
 
