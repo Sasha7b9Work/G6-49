@@ -160,7 +160,7 @@ public:
 
     Form *GetForm(TypeForm::E form);
 
-    Chan::E GetChannel() const { return channel; };
+    Chan GetChannel() const { return channel; };
     
     // ¬озвращает true, если установлен ручной режим запуска
     bool StartModeIsSingle();
@@ -168,7 +168,7 @@ public:
 private:
     
     //  акому каналу принадлежит сигнал
-    Chan::E channel;
+    Chan channel;
     
     // “екуща€ форма сигнала - указывает на номер сигнала в массиве
     int indexCurrentForm;
