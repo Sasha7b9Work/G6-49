@@ -68,7 +68,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
                 {
                     if(Font::BitIsExist(s, row, col))
                     {
-                        Painter::SetPoint(eX + col, eY + row);
+                        Point().Draw(eX + col, eY + row);
                     }
                 }
             }
@@ -87,7 +87,7 @@ int Text::DrawChar(int eX, int eY, char symbol, Color color)
                 {
                     if(Font::BitIsExist(s, b, bit))
                     {
-                        Painter::SetPoint(x, y);
+                        Point().Draw(x, y);
                     }
                     x++;
                 }
@@ -565,7 +565,7 @@ int Text::DrawBigChar(int eX, int eY, int size, char symbol)
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            Painter::SetPoint(x + i, y + j);
+                            Point().Draw(x + i, y + j);
                         }
                     }
                 }

@@ -10,6 +10,9 @@
 #include <cstring>
 
 
+using namespace Primitives;
+
+
 static struct Picture
 {
     uint8 data[300];
@@ -47,7 +50,7 @@ void File::Draw(int x, int y)
 
     for (int i = 0; i < 240; i++)
     {
-        Painter::SetPoint(x + i, (int)(y - Form::GetFormFlash(CURRENT_CHANNEL)[i] * scale));
+        Point().Draw(x + i, (int)(y - Form::GetFormFlash(CURRENT_CHANNEL)[i] * scale));
     }
 
     if (num == -1)
@@ -59,7 +62,7 @@ void File::Draw(int x, int y)
 
     for (int i = 0; i < 240; i++)
     {
-        Painter::SetPoint(x + i, static_cast<int>(y - picture.data[i] * scale));
+        Point().Draw(x + i, static_cast<int>(y - picture.data[i] * scale));
     }
 }
 

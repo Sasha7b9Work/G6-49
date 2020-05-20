@@ -8,6 +8,9 @@
 #include <cstdlib>
 
 
+using namespace Primitives;
+
+
 #define SIZE_BUFFER     300
 static uint8 formFlash[Chan::Count][SIZE_BUFFER];
 
@@ -555,7 +558,7 @@ void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
 
     for (int i = 0; i < numPoints; i++)
     {
-        Painter::SetPoint(static_cast<int>(x0 + sX * i), static_cast<int>(y0 + height - formFlash[ch][i] * sY));
+        Point().Draw(static_cast<int>(x0 + sX * i), static_cast<int>(y0 + height - formFlash[ch][i] * sY));
     }
 }
 

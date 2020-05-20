@@ -216,12 +216,6 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
 }
 
 
-void Painter::SetPoint(int x, int y)
-{
-    memDC.DrawPoint({ x, y });
-}
-
-
 void Color::SetAsCurrent() const
 {
     current.value = value;
@@ -292,6 +286,13 @@ void Primitives::Rectangle::DrawFilled(int x, int y, Color colorFill, Color colo
     Rectangle(width, height).Draw(x, y, colorRect);
     Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
 }
+
+
+void Primitives::Point::Draw(int x, int y)
+{
+    memDC.DrawPoint({ x, y });
+}
+
 
 
 #include "Keyboard/Keyboard_win.h"

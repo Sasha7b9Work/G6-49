@@ -110,7 +110,7 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
     int i = 0;
     for (; i <= dx; i++)
     {
-        SetPoint(x, y);
+        Point().Draw(x, y);
         while (e >= 0)
         {
             if (exchange)
@@ -136,7 +136,7 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 }
 
 
-void Painter::SetPoint(int x, int y)
+void Point::Draw(int x, int y)
 {
     uint8 *buffer = Display::GetBuffer() + y * BUFFER_WIDTH + x;
 
