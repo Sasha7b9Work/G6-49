@@ -148,9 +148,9 @@ void Choice::Draw(bool opened, int x, int y) const
             {
                 Rectangle(Item::WIDTH - 4, 8).Fill(x + 2, y, Color::GREEN_50);
                 Painter::DrawHLine(y - 1, x + 1, x - 1 + Item::WIDTH - 1, Color::GREEN_75);
-                Painter::DrawVLine(x + 1, y - 1, y - 1 + 10);
+                VLine::Draw(x + 1, y - 1, y - 1 + 10);
                 Painter::DrawHLine(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
-                Painter::DrawVLine(x - 1 + Item::WIDTH, y - 1, y + 9);
+                VLine::Draw(x - 1 + Item::WIDTH, y - 1, y + 9);
                 NameSubItem(i, LANGUAGE).Draw(x + 3, y, Color::BACK);
             }
             else

@@ -58,7 +58,7 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
 }
 
 
-void Painter::DrawVLine(int x, int y0, int y1, Color col)
+void Primitives::VLine::Draw(int x, int y0, int y1, Color col)
 {
     if(y1 < y0)
     {
@@ -164,8 +164,8 @@ void Rectangle::Draw(int x, int y, Color col)
 
     Painter::DrawHLine(y, x, x + width);
     Painter::DrawHLine(y + height, x, x + width);
-    Painter::DrawVLine(x, y, y + height);
-    Painter::DrawVLine(x + width, y, y + height);
+    VLine::Draw(x, y, y + height);
+    VLine::Draw(x + width, y, y + height);
 }
 
 

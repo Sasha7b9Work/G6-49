@@ -234,7 +234,7 @@ void Color::SetAsCurrent() const
 }
 
 
-void Painter::DrawVLine(int x, int y0, int y1, Color color)
+void Primitives::VLine::Draw(int x, int y0, int y1, Color color)
 {
     color.SetAsCurrent();
     memDC.DrawLine({ x, y0 }, { x, y1 });
