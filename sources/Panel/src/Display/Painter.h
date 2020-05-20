@@ -15,12 +15,6 @@ struct Painter
     // «агружает в дисплей все цвета
     static void LoadPalette();
    
-    // Ќарисовать горизонтальную линию от x0 до x1 точками через каждые delta пикселей
-    static void DrawHPointLine(int y, int x0, int x1, float delta);
-    
-    // Ќарисовать вертикальную линию от y0 до y1 точками через каждые delta пикселей
-    static void DrawVPointLine(int x, int y0, int y1, float delta);
-    
     // Ќарисовать горизонтальную линию
     static void DrawHLine(int y, int x0, int x1, Color color = Color::NUMBER);
     
