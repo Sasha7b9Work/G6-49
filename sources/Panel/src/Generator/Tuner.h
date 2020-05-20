@@ -18,6 +18,4 @@ public:
 private:
 
     Parameter *param;           // Настраиваемый параметр
-
-
 };
