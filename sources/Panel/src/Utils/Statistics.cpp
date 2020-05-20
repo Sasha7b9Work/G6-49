@@ -10,6 +10,9 @@
 #include <string.h>
 
 
+using namespace Primitives;
+
+
 int  Statistics::timeFrame = 0;
 int  Statistics::timeAllFrames = 0;
 uint Statistics::timeStartFrames = 0;
@@ -43,7 +46,8 @@ void Statistics::Show()
 {
     if (set.dbg.showStatistics)
     {
-        Painter::DrawFilledRectangle(0, SCREEN_HEIGHT - 12, 60, 10, Color::BACK, Color::FILL);
+        Rectangle(60, 10).DrawFilled(0, SCREEN_HEIGHT - 12, Color::BACK, Color::FILL);
+
         char buffer[100] = {0};
         std::strcpy(buffer, SU::Int2String(static_cast<int>(CPU::GetFPS() + 0.5F), false, 3).c_str());
         std::strcat(buffer, "/");

@@ -136,13 +136,6 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 }
 
 
-void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
-{
-    Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
-    Rectangle(width, height).Draw(x, y, colorRect);
-}
-
-
 void Painter::SetPoint(int x, int y)
 {
     uint8 *buffer = Display::GetBuffer() + y * BUFFER_WIDTH + x;
@@ -175,3 +168,9 @@ void Rectangle::Draw(int x, int y, Color col)
     Painter::DrawVLine(x + width, y, y + height);
 }
 
+
+void Rectangle::DrawFilled(int x, int y, Color colorFill, Color colorRect)
+{
+    Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
+    Rectangle(width, height).Draw(x, y, colorRect);
+}

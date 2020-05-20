@@ -84,7 +84,7 @@ void Hint::Draw()
             "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC.",
             Color::BACK, Color::FILL, Color::GRAY_50);
 
-        Painter::DrawFilledRectangle(x0, y0, width, 239 - y0 - 1, Color::BACK, Color::FILL);
+        Rectangle(width, 239 - y0 - 1).DrawFilled(x0, y0, Color::BACK, Color::FILL);
 
         if (item)
         {

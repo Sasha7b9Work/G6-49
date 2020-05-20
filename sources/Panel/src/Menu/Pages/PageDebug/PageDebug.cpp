@@ -358,14 +358,14 @@ void PageDebug::PageRegisters::DrawInputWindow()
     {
         if (i == position)
         {
-            Painter::DrawFilledRectangle(x - 2, Y_INPUT + 19, 19, 31, Color::GRAY_10, Color::BLUE);
+            Rectangle(19, 31).DrawFilled(x - 2, Y_INPUT + 19, Color::GRAY_10, Color::BLUE);
             Color::FILL.SetAsCurrent();
         }
         x = Text::DrawBigChar(x, Y_INPUT + 20, 4, buffer[i]) + 3;
     }
     if (position == static_cast<int>(std::strlen(buffer)) && position < SizeBuffer())
     {
-        Painter::DrawFilledRectangle(x - 2, Y_INPUT + 19, 19, 31, Color::GRAY_10, Color::BLUE);
+        Rectangle(19, 31).DrawFilled(x - 2, Y_INPUT + 19, Color::GRAY_10, Color::BLUE);
     }
 }
 

@@ -76,7 +76,7 @@ void FDrive::Draw()
         x = (SCREEN_WIDTH - width) / 2;
         y = (SCREEN_HEIGHT - height) / 2;
 
-        Painter::DrawFilledRectangle(x, y, width, height, Color::BACK, Color::FILL);
+        Rectangle(width, height).DrawFilled(x, y, Color::BACK, Color::FILL);
     }
 }
 

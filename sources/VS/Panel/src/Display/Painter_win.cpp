@@ -261,13 +261,6 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 }
 
 
-void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
-{
-    Primitives::Rectangle(width, height).Draw(x, y, colorRect);
-    Primitives::Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
-}
-
-
 void Painter::LoadPalette()
 {
 
@@ -294,7 +287,11 @@ void Primitives::Rectangle::Draw(int x, int y, Color color)
 }
 
 
+void Primitives::Rectangle::DrawFilled(int x, int y, Color colorFill, Color colorRect)
+{
+    Rectangle(width, height).Draw(x, y, colorRect);
+    Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
+}
 
 
 #include "Keyboard/Keyboard_win.h"
-
