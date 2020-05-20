@@ -9,8 +9,6 @@ struct Text
     // Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
     
-    static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
-
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
     static int DrawBigChar(int eX, int eY, int size, char symbol);
@@ -82,4 +80,14 @@ private:
     static int DrawSpaces(int x, int y, pString text, int *numSymbols);
 
     static bool upperCase;
+};
+
+
+class Char
+{
+public:
+    Char(char s) : symbol(s) { }
+    int Draw(int x, int y, Color color = Color::NUMBER);
+private:
+    char symbol;
 };

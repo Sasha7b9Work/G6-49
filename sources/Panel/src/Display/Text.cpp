@@ -27,8 +27,8 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 
     for (char i = 0; i < 2; i++)
     {
-        DrawChar(x + 8 * i, y, eChar + i);
-        DrawChar(x + 8 * i, y + 8, eChar + i + 16);
+        Char(eChar + i).Draw(x + 8 * i, y);
+        Char(eChar + i + 16).Draw(x + 8 * i, y + 8);
     }
 }
 
@@ -44,11 +44,11 @@ int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString te
 }
 
 
-int Text::DrawChar(int eX, int eY, char symbol, Color color)
+int Char::Draw(int eX, int eY, Color color)
 {
     color.SetAsCurrent();
 
-    if (upperCase)
+    if (Text::IsUpperCase())
     {
         symbol = SU::ToUpper(symbol);
     }
@@ -106,7 +106,7 @@ int Text::Draw(int x, int y, pString text, Color color)
     uint numSymbols = std::strlen(text);
     for (uint i = 0; i < numSymbols; ++i)
     {
-        x = DrawChar(x, y, text[i]);
+        x = Char(text[i]).Draw(x, y);
         ++x;
     }
 
@@ -286,7 +286,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
                 {
                     continue;
                 }
-                x = DrawChar(x, y, symbol);
+                x = Char(symbol).Draw(x, y);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
@@ -310,11 +310,11 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
                         {
                             colorDraw.SetAsCurrent();
                             inverse = false;
-                            x = DrawChar(x, y, word[i]);
+                            x = Char(word[i]).Draw(x, y);
                         }
                         else
                         {
-                            x = DrawChar(x, y, word[i]);
+                            x = Char(word[i]).Draw(x, y);
                             if (!inverse && word[i] == '\"')
                             {
                                 colorDif.SetAsCurrent();
@@ -369,7 +369,7 @@ int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int
                 {
                     continue;
                 }
-                x = DrawChar(x, y, symbol);
+                x = Char(symbol).Draw(x, y);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
@@ -632,7 +632,7 @@ int Text::DrawSubString(int x, int y, pString t)
     int numSymbols = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        x = DrawChar(x, y, *text) + 1;
+        x = Char(*text).Draw(x, y) + 1;
         numSymbols++;
         text++;
     }
@@ -660,7 +660,7 @@ int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
     *numSymbols = 0;
     while (*text == ' ')
     {
-        x = DrawChar(x, y, *text);
+        x = Char(*text).Draw(x, y);
         text++;
         (*numSymbols)++;
     }
@@ -757,8 +757,8 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
 
 void Text::Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2)
 {
-    DrawChar(x, y, symbol1, color1);
-    DrawChar(x, y, symbol2, color2);
+    Char(symbol1).Draw(x, y, color1);
+    Char(symbol2).Draw(x, y, color2);
 }
 
 
@@ -766,8 +766,8 @@ void Text::Draw10SymbolsInRect(int x, int y, char eChar)
 {
     for (char i = 0; i < 5; i++)
     {
-        DrawChar(x + 8 * i, y, eChar + i);
-        DrawChar(x + 8 * i, y + 8, eChar + i + 16);
+        Char(eChar + i).Draw(x + 8 * i, y);
+        Char(eChar + i + 16).Draw(x + 8 * i, y + 8);
     }
 }
 

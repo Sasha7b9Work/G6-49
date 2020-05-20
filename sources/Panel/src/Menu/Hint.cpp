@@ -205,7 +205,7 @@ void Hint::DrawPagesUGO(const int xRight, const int y0)
         {
             Rectangle(size, size).Fill(x, y0, Color::FILL);
             Font::Set(TypeFont::_5);
-            Text::DrawChar(x + 2, y0 - 3, static_cast<char>(currentPage + 0x30), Color::BACK);
+            Char(static_cast<char>(currentPage + 0x30)).Draw(x + 2, y0 - 3, Color::BACK);
             Font::Set(TypeFont::_8);
         }
         else
