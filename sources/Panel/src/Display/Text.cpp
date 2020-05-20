@@ -720,7 +720,7 @@ int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pStr
 }
 
 
-int Text::DrawFormatText(int x, int y, pString text, ...)
+int Text::DrawFormat(int x, int y, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200
     char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];

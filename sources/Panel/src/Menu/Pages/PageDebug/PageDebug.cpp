@@ -385,13 +385,13 @@ static void DrawValue(int x, int y, uint8 i)
 
     if (type == Uint)
     {
-        Text::DrawFormatText(x, y, SU::UInt64_2String(VALUE(i)));
+        Text::DrawFormat(x, y, SU::UInt64_2String(VALUE(i)));
     }
     else if (type == Binary)
     {
         char buf[33];
 
-        Text::DrawFormatText(x, y, SU::Bin2StringN((uint)VALUE(i), buf, SizeBuffer(name)));
+        Text::DrawFormat(x, y, SU::Bin2StringN((uint)VALUE(i), buf, SizeBuffer(name)));
     }
     else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
     {
@@ -400,9 +400,9 @@ static void DrawValue(int x, int y, uint8 i)
 
         uint first = VALUE(i) & mask;
         uint second = (VALUE(i) >> numBits) & mask;
-        x = Text::DrawFormatText(x, y, SU::UInt2String(first));
-        x = Text::DrawFormatText(x, y, ".");
-        Text::DrawFormatText(x, y, SU::UInt2String(second));
+        x = Text::DrawFormat(x, y, SU::UInt2String(first));
+        x = Text::DrawFormat(x, y, ".");
+        Text::DrawFormat(x, y, SU::UInt2String(second));
     }
 }
 

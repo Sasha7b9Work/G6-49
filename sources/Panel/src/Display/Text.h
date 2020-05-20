@@ -8,6 +8,21 @@ struct Text
 {
     // Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
+
+    // Вывод форматированного текста
+    static int DrawFormat(int x, int y, pString text, ...);
+
+
+
+
+
+
+
+
+
+
+
+
     
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
@@ -20,10 +35,6 @@ struct Text
     static void Draw2Symbols(int x, int y, char symbol1, char symbol2, Color color1, Color color2);
 
     static void Draw10SymbolsInRect(int x, int y, char eChar);
-
-    /***************** Вывод форматированного текста ***********************/
-    // Пишет строку в позиции x, y
-    static int DrawFormatText(int x, int y, pString text, ...);
 
     /*************** Вывод текста в области экрана **************************/
 
