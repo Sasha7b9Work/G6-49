@@ -7,6 +7,9 @@
 #include "Settings/Settings.h"
 
 
+using namespace Primitives;
+
+
 Viewer::Viewer(Parameter *_param) : param(_param)
 {
 
@@ -19,7 +22,7 @@ void Viewer::Draw(int x, int y)
 
     if((ch == CURRENT_CHANNEL) && std::strcmp(CURRENT_PARAM->Name(LANGUAGE), param->Name(LANGUAGE)) == 0 && CURRENT_PAGE == PageSignals::self)
     {
-        Region(139, 9).Fill(x, y, Color::GRAY_25);
+        Rectangle(139, 9).Fill(x, y, Color::GRAY_25);
     }
 
     String(param->Name(LANGUAGE)).Draw(x + 1, y, Color::Chan(ch));

@@ -7,6 +7,9 @@
 #include "Settings/Settings.h"
 
 
+using namespace Primitives;
+
+
 void WaveGraphics::Draw(Chan::E ch)
 {
     if((set.freq.measure != FreqMeasure::Disable) && (CURRENT_CHANNEL != ch))
@@ -16,7 +19,7 @@ void WaveGraphics::Draw(Chan::E ch)
 
     int x0 = X();
     int y0 = Y(ch);
-    Region(Width() - 2, Height() - 2).Fill(x0 + 1, y0 + 1, Color::GREEN_5);
+    Rectangle(Width() - 2, Height() - 2).Fill(x0 + 1, y0 + 1, Color::GREEN_5);
 
     if (set.enabled[ch])
     {

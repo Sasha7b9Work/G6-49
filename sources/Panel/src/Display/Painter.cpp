@@ -8,6 +8,9 @@
 #include "Utils/Math.h"
 
 
+using namespace Primitives;
+
+
 void Painter::DrawHPointLine(int y, int x0, int x1, float delta)
 {
     for (int x = x0; x <= x1; x += static_cast<int>(delta))
@@ -78,7 +81,7 @@ void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmt
 
 void Painter::DrawVolumeButton(int x, int y, int width, int height, int thickness, Color normal, Color bright, Color dark, bool isPressed, bool isShade)
 {
-    Region(width - thickness * 2, height - thickness * 2).Fill(x + thickness, y + thickness, normal);
+    Rectangle(width - thickness * 2, height - thickness * 2).Fill(x + thickness, y + thickness, normal);
     
     if (isPressed && !isShade)
     {

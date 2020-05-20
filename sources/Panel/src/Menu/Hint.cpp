@@ -7,6 +7,9 @@
 #include "Menu/Menu.h"
 
 
+using namespace Primitives;
+
+
 bool        Hint::show = false;
 const Item *Hint::item = 0;
 Key::E  Hint::control = Key::None;
@@ -200,7 +203,7 @@ void Hint::DrawPagesUGO(const int xRight, const int y0)
 
         if (numPages + 1 - i == currentPage)
         {
-            Region(size, size).Fill(x, y0, Color::FILL);
+            Rectangle(size, size).Fill(x, y0, Color::FILL);
             Font::Set(TypeFont::_5);
             Text::DrawChar(x + 2, y0 - 3, static_cast<char>(currentPage + 0x30), Color::BACK);
             Font::Set(TypeFont::_8);

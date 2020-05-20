@@ -13,6 +13,9 @@
 #include <cstdlib>
 
 
+using namespace Primitives;
+
+
 FDrive::View   FDrive::view;
 SimpleMessage *FDrive::Handler::msg = nullptr;
 
@@ -41,7 +44,7 @@ void FDrive::Draw()
     int width = WaveGraphics::Width() - 2;
     int height = WaveGraphics::Height() * 2;
 
-    Region(width, height).Fill(x, y, Color::BACK);
+    Rectangle(width, height).Fill(x, y, Color::BACK);
 
     if(mounted == Disconnect)
     {

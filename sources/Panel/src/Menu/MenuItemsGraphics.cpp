@@ -8,6 +8,9 @@
 #include "Utils/Debug.h"
 
 
+using namespace Primitives;
+
+
 void Item::Draw(bool opened, int x, int y) const
 {
     switch(type)
@@ -24,7 +27,7 @@ void Item::Draw(bool opened, int x, int y) const
     case TypeItem::GovernorColor:
         break;
     default:    
-        Region(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, Menu::GetOpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
+        Rectangle(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, Menu::GetOpenedItem() ? Color::GRAY_10 : Color::GREEN_25);
         break;
     }
 }
@@ -34,7 +37,7 @@ void SButton::Draw(int x, int y) const
 {
     if(Menu::pressedItem == this)
     {
-        Region(Item::WIDTH - 2, Item::HEIGHT - 2).Fill(x + 1, y + 1, Color::FILL);
+        Rectangle(Item::WIDTH - 2, Item::HEIGHT - 2).Fill(x + 1, y + 1, Color::FILL);
         Color::BACK.SetAsCurrent();
     }
     funcForDraw(x, y);
@@ -45,7 +48,7 @@ void Button::Draw(int x, int y) const
 {
     bool isShade = IsShade();
 
-    Region(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, isShade ? Color::GRAY_10 : Color::GREEN_10);
+    Rectangle(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, isShade ? Color::GRAY_10 : Color::GREEN_10);
 
     if(isShade)
     {
@@ -73,7 +76,7 @@ void Page::DrawClosed(int x, int y) const
         color = Color::GREEN_50;
     }
 
-    Region(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, color);
+    Rectangle(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, color);
 
     if(IsShade())
     {
@@ -99,9 +102,9 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         bool isShade = IsShade();
         opened = IsOpened();
 
-        Region(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
+        Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
         GetTitle(LANGUAGE).Draw(x + 5, y + 5, (pressed || opened) ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
-        Region(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
+        Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
     }
 }
@@ -128,8 +131,8 @@ void Choice::Draw(bool opened, int x, int y) const
             x = SCREEN_WIDTH - Item::WIDTH - 20;
         }
 
-        Region(width, Item::Title::HEIGHT).Fill(x, y, Color::GRAY_50);
-        Region(width, height - Item::Title::HEIGHT).Fill(x, y + Item::Title::HEIGHT, Color::BACK);
+        Rectangle(width, Item::Title::HEIGHT).Fill(x, y, Color::GRAY_50);
+        Rectangle(width, height - Item::Title::HEIGHT).Fill(x, y + Item::Title::HEIGHT, Color::BACK);
         Painter::DrawRectangle(x, y, width, height, Color::FILL);
         Painter::DrawHLine(y + 12, x, x + width);
         Painter::DrawRectangle(x - 1, y - 1, width + 2, height + 2, Color::BACK);
@@ -141,7 +144,7 @@ void Choice::Draw(bool opened, int x, int y) const
         {
             if (CurrentIndex() == i)
             {
-                Region(Item::WIDTH - 4, 8).Fill(x + 2, y, Color::GREEN_50);
+                Rectangle(Item::WIDTH - 4, 8).Fill(x + 2, y, Color::GREEN_50);
                 Painter::DrawHLine(y - 1, x + 1, x - 1 + Item::WIDTH - 1, Color::GREEN_75);
                 Painter::DrawVLine(x + 1, y - 1, y - 1 + 10);
                 Painter::DrawHLine(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
@@ -161,9 +164,9 @@ void Choice::Draw(bool opened, int x, int y) const
         bool isShade = IsShade();
         opened = IsOpened();
 
-        Region(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
+        Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
         GetTitle(LANGUAGE).Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
-        Region(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
+        Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Color::BACK.SetAsCurrent();
 
         if (step == 0.0F) //-V2550 //-V550
@@ -197,9 +200,9 @@ void Governor::Draw(int x, int y) const
     bool isShade = IsShade();
     bool opened = IsOpened();
 
-    Region(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
+    Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
     GetTitle(LANGUAGE).Draw(x + 5, y + 5, (pressed || opened) ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
-    Region(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
+    Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
 
     Color::BACK.SetAsCurrent();
 

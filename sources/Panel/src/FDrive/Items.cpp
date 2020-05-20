@@ -9,6 +9,9 @@
 #include <cstring>
 
 
+using namespace Primitives;
+
+
 // Запрос имени файла с порядковым номером number
 static void SendRequestForNameFile(int number);
 // Запрос размера файла с порядковым номером number
@@ -193,7 +196,7 @@ static void DrawItem(int i, int x, int y, bool highlight)
     Color color = Color::FILL;
     if (highlight)
     {
-        Region(230, 9).Fill(x - 1, y, color);
+        Rectangle(230, 9).Fill(x - 1, y, color);
         color = Color::BACK;
     }
     GetNameItem(i).Draw(x, y, color);

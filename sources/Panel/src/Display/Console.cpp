@@ -9,6 +9,9 @@
 #include <cstdio>
 
 
+using namespace Primitives;
+
+
 static const int MAX_STRINGS = 20;
 static const int MAX_SYMBOLS_IN_STRING = 64;
 // Здесь хранятся строки консоли
@@ -50,7 +53,7 @@ void Console::Draw()
     for (int i = 0; i < numStrings; i++)
     {
         int length = Font::GetLengthText(&buffer[i][0]);
-        Region(length, 9).Fill(2, y, Color::GREEN_25);
+        Rectangle(length, 9).Fill(2, y, Color::GREEN_25);
         String(&buffer[i][0]).Draw(2, y, Color::FILL);
         y += 9;
     }

@@ -9,6 +9,9 @@
 #include "Utils/StringUtils.h"
 
 
+using namespace Primitives;
+
+
 extern const PageBase pCalibration;
 
 
@@ -157,7 +160,7 @@ static void DrawPage()
         return;
     }
 
-    Region(200, 50).Fill(10, 10, Color::WHITE);
+    Rectangle(200, 50).Fill(10, 10, Color::WHITE);
 
     char buffer[30];
 

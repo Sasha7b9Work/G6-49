@@ -100,7 +100,7 @@ void Painter::BeginScene(Color color)
     memDC.SelectObject(bitmap);
     wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
     memDC.SetBrush(brush);
-    Region(320, 240).Fill(0, 0, color);
+    Primitives::Rectangle(320, 240).Fill(0, 0, color);
 }
 
 
@@ -271,7 +271,7 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, Color color)
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
     DrawRectangle(x, y, width, height, colorRect);
-    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
+    Primitives::Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
 }
 
 
@@ -281,7 +281,7 @@ void Painter::LoadPalette()
 }
 
 
-void Region::Fill(int x, int y, Color color)
+void Primitives::Rectangle::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
 

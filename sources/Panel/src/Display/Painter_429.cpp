@@ -10,6 +10,9 @@
 #include <cstdio>
 
 
+using namespace Primitives;
+
+
 void Painter::BeginScene(Color col)
 {   
     col.SetAsCurrent();
@@ -146,7 +149,7 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 
 void Painter::DrawFilledRectangle(int x, int y, int width, int height, Color colorFill, Color colorRect)
 {
-    Region(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
+    Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorFill);
     DrawRectangle(x, y, width, height, colorRect);
 }
 
@@ -162,7 +165,7 @@ void Painter::SetPoint(int x, int y)
 }
 
 
-void Region::Fill(int x, int y, Color color)
+void Rectangle::Fill(int x, int y, Color color)
 {
     color.SetAsCurrent();
 

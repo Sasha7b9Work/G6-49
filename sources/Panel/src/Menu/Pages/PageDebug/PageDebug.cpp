@@ -10,6 +10,9 @@
 #include "Utils/NumberBuffer.h"
 
 
+using namespace Primitives;
+
+
 #define X_INPUT      5
 #define Y_INPUT      183
 #define WIDTH_INPUT  240
@@ -308,7 +311,7 @@ void PageDebug::PageRegisters::Draw()
         return;
     }
 
-    Region(WaveGraphics::Width() - 1, WaveGraphics::Height() * 2).Fill(WaveGraphics::X(), WaveGraphics::Y(Chan::A) + 1, Color::BACK);
+    Rectangle(WaveGraphics::Width() - 1, WaveGraphics::Height() * 2).Fill(WaveGraphics::X(), WaveGraphics::Y(Chan::A) + 1, Color::BACK);
 
     DrawRegisters(WaveGraphics::X() + 4, WaveGraphics::Y(Chan::A) + 3);
 
@@ -324,7 +327,7 @@ void PageDebug::PageRegisters::DrawRegisters(int x, int y)
         Color color = Color::FILL;
         if (i == currentRegister)
         {
-            Region(132, 8).Fill(x - 1, y + i * 10, Color::FILL);
+            Rectangle(132, 8).Fill(x - 1, y + i * 10, Color::FILL);
             color = Color::BACK;
         }
         String(reg.Name()).Draw(x, y + i * 10, color);
@@ -341,7 +344,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
     }
 
     Painter::DrawRectangle(X_INPUT, Y_INPUT, WIDTH_INPUT, HEIGHT_INPUT, Color::FILL);
-    Region(WIDTH_INPUT - 2, HEIGHT_INPUT - 2).Fill(X_INPUT + 1, Y_INPUT + 1, Color::BACK);
+    Rectangle(WIDTH_INPUT - 2, HEIGHT_INPUT - 2).Fill(X_INPUT + 1, Y_INPUT + 1, Color::BACK);
     Register reg(currentRegister);
     Text::DrawBigText(X_INPUT + 3, Y_INPUT + 2, 2, reg.Name(), Color::FILL);
 

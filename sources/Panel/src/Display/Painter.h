@@ -38,13 +38,18 @@ struct Painter
 };
 
 
-class Region
+namespace Primitives
 {
-public:
-    Region(int w, int h) : width(w), height(h) { };
-    void Fill(int x, int y, Color color = Color::NUMBER);
 
-private:
-    int width;
-    int height;
-};
+    class Rectangle
+    {
+    public:
+        Rectangle(int w, int h) : width(w), height(h) { };
+        void Fill(int x, int y, Color color = Color::NUMBER);
+
+    private:
+        int width;
+        int height;
+    };
+
+}
