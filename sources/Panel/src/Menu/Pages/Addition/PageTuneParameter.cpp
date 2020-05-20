@@ -7,17 +7,17 @@
 #include "Settings/Settings.h"
 
 
-static ParameterValue stored = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
+static ParameterValue stored = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
 
-static ParameterValue tuned = ParameterAmplitude();     // Ќастраиваемый параметр
+static ParameterValue tuned = ParameterAmplitude();     // Ќастраиваемый параметр //-V1054
 
 
-void PageTuneParameter::SetParameter(Parameter *parameter)
+void PageTuneParameter::SetParameter(const ParameterValue *parameter)
 {
     if(parameter->IsValue())
     {
-        stored = *reinterpret_cast<ParameterValue *>(parameter);
-        tuned = *reinterpret_cast<ParameterValue *>(parameter);
+        stored = *parameter;
+        tuned = *parameter;
     }
 }
 
