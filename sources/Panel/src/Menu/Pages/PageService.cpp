@@ -54,10 +54,10 @@ extern const PageBase pDebug;
 DEF_PAGE_4_VAR( pService,                                                                                                                                            //--- СЕРВИС --- //-V641
     "СЕРВИС", "SERVICE",    //-V641
     "Сервисные функции", "Service functions",
-    cLanguage,
-    *Item::EmptyLight(),
-    *Item::EmptyLight(),
-    *Item::EmptyLight(),
+    &cLanguage,
+    &*Item::EmptyLight(),
+    &*Item::EmptyLight(),
+    &*Item::EmptyLight(),
     Page::Service, reinterpret_cast<PageBase *>(Menu::mainPage), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 

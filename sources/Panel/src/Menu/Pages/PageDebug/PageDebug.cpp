@@ -589,10 +589,10 @@ DEF_BUTTON( bSend,                                                              
 DEF_PAGE_4_VAR( pRegisters,                                                                                                                                       //--- –≈√»—“–€ --- //-V641
     "–≈√»—“–€", "REGISTERS",   //-V641
     "", "",
-    bPrev,
-    bNext,
-    bSend,
-    *Item::EmptyLight(),
+    &bPrev,
+    &bNext,
+    &bSend,
+    &*Item::EmptyLight(),
     Page::Registers, &pDebug, Item::FuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 

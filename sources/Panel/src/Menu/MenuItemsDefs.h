@@ -30,7 +30,7 @@ const PageBase name = { TypeItem::Page, 4, true, namePage, keeper, {titleRU, hin
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_1(name, titleRU, titleEN, hintRU, hintEN, item1, namePage, keeper, funcActive, funcPress)                                  \
-static Item * items##name[] = {(Item *)&item1};                                                                                             \
+static Item * items##name[] = {(Item *)item1};                                                                                             \
 const PageBase name = { TypeItem::Page, 1, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                         \
     items##name, funcPress, Page::FuncDraw, FuncRegSetPage};
 
@@ -63,10 +63,10 @@ const PageBase name = { TypeItem::Page, 4, false, namePage, (const PageBase *)ke
 #define DEF_PAGE_4_VAR(name, titleRU, hintRU, titleEN, hintEN, item1, item2, item3, item4, namePage, keeper,                                \
     funcActive, funcPress, funcOnKey, funcDraw)                                                                                             \
 static Item * items##name[] = {                                                                                                             \
-    const_cast<Item *>(reinterpret_cast<const Item *>(&item1)),                                                                             \
-    const_cast<Item *>(reinterpret_cast<const Item *>(&item2)),                                                                             \
-    const_cast<Item *>(reinterpret_cast<const Item *>(&item3)),                                                                             \
-    const_cast<Item *>(reinterpret_cast<const Item *>(&item4))};                                                                            \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item1)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item2)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item3)),                                                                              \
+    const_cast<Item *>(reinterpret_cast<const Item *>(item4))};                                                                             \
 const PageBase name = { TypeItem::Page, 4, false, namePage, keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,                       \
     items##name, funcPress, funcDraw, funcOnKey};
 

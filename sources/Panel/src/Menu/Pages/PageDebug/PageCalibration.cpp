@@ -233,10 +233,10 @@ const PageBase *page = const_cast<const PageBase *>(reinterpret_cast<PageBase *>
 DEF_PAGE_4_VAR( pCalibration, //-V641
     " ¿À»¡–Œ¬ ¿", "CALIBRATION",
     "", "",
-    cChannel,
-    cSignal,
-    cRange,
-    cParameterFullVoltage,
+    &cChannel,
+    &cSignal,
+    &cRange,
+    &cParameterFullVoltage,
     Page::Calibration, page, Item::FuncActive, OnEnter_Calibration, FuncOnKeyPage, DrawPage
 )
 
