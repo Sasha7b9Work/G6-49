@@ -7,14 +7,17 @@
 #include "Settings/Settings.h"
 
 
-static ParameterValue storedParameter = ParameterAmplitude();   // Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
+static ParameterValue stored = ParameterAmplitude();    // Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
+
+static ParameterValue tuned = ParameterAmplitude();     // Настраиваемый параметр
 
 
 void PageTuneParameter::SetParameter(Parameter *parameter)
 {
     if(parameter->IsValue())
     {
-        storedParameter = *reinterpret_cast<ParameterValue *>(parameter);
+        stored = *reinterpret_cast<ParameterValue *>(parameter);
+        tuned = *reinterpret_cast<ParameterValue *>(parameter);
     }
 }
 
@@ -25,7 +28,7 @@ static void OnPress_Cancel()
 
     if(parameter->IsValue())
     {
-        *reinterpret_cast<ParameterValue *>(parameter) = storedParameter;
+        *reinterpret_cast<ParameterValue *>(parameter) = stored;
     }
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);

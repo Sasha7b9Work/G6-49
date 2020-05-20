@@ -27,10 +27,14 @@ struct HAL_CRC32
 struct HAL_DAC2
 {
 	static void Init();
-	static void StartDMA(uint prescaler);
-	static void StopDMA();
+
+    static void StartDMA(uint prescaler);
+	
+    static void StopDMA();
+
 private:
-	static void ConfigTIM7(uint prescaler);
+	
+    static void ConfigTIM7(uint prescaler);
 };
 
 
@@ -64,18 +68,24 @@ struct HAL_LTDC
 struct HAL_SPI4
 {
     static void Init();
+    
     // Переслать массив данных
     static bool Transmit(const void *buffer, uint size, uint timeout);
 
     static bool Transmit(uint value, uint timeout);
+    
     // Принять массив данных
     static bool Receive(void *recv, uint size, uint timeout);
+    
     // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
     static uint ReceiveAndCompare(const void *compared, uint size);
+    
     // Возвращает true, если прибор готов к обмену
     static bool IsReady();
+    
     // Ждать пока освободится устройство
     static void WaitFreedom();
+    
     // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
     static void WaitFalling();
 };
@@ -99,6 +109,7 @@ struct HAL_TIM2
     static uint TimeUS();
 
     static uint GetTicks();
+    
     // Запускает счётчик для измерения малых отрезков времени
     static void StartMultiMeasurement();
 };
@@ -120,6 +131,7 @@ struct HAL_TIM3
 struct HAL_TIM4
 {
     static void Init(void (*func)());
+    
     // Завести таймер, который остановится в timeStop мс
     static void Start(uint timeStopMS);
 

@@ -137,22 +137,22 @@ const PageBase name = { TypeItem::Page, 9, false, namePage, (const PageBase *)ke
 #define DEF_PAGE_10(name, titleRU, titleEN, hintRU, hintEN,                                                                                 \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, namePage, keeper, funcActive, funcPress, funcOnKey)              \
 static Item * items##name[] = {                                                                                                             \
-    (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
-    (Item *)&item8, (Item *)&item9, (Item *)&item10};                                                                                       \
+    (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7,                                \
+    (Item *)item8, (Item *)item9, (Item *)item10};                                                                                          \
 const PageBase name = { TypeItem::Page, 10, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},      \
     items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_11(name, titleRU, titleEN, hintRU, hintEN,                                                                                 \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, namePage, keeper, funcActive, funcPress, funcOnKey)      \
 static Item * items##name[] = {                                                                                                             \
-    (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
-    (Item *)&item8, (Item *)&item9, (Item *)&item10, (Item *)&item11};                                                                      \
+    (Item *)item1, (Item *)item2, (Item *)item3, (Item *)item4, (Item *)item5, (Item *)item6, (Item *)item7,                                \
+    (Item *)item8, (Item *)item9, (Item *)item10, (Item *)item11};                                                                          \
 const PageBase name = { TypeItem::Page, 11, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},      \
     items##name, funcPress, FuncDrawPage, funcOnKey};
 
 #define DEF_PAGE_11_GLOBAL(name, titleRU, titleEN, hintRU, hintEN,                                                                          \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, namePage, keeper, funcActive, funcPress)                 \
-static const Item * const  items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5,                 \
+static const Item * const  items##name[] = {(Item *)item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5,                 \
     (Item *)&item6, (Item *)&item7, (Item *)&item8, (Item *)&item9, (Item *)&item10, (Item *)&item11};                                      \
 const PageBase name = { Item_Page, 11, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                             \
     items##name, funcPress, FuncDrawPage, FuncRegSetPage};
@@ -161,7 +161,7 @@ const PageBase name = { Item_Page, 11, false, namePage, keeper, funcActive, {tit
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12,                                                  \
     namePage, keeper, funcActive, funcPress, funcOnKey)                                                                                     \
 static Item * items##name[] = {                                                                                                             \
-    (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
+    (Item *)item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
     (Item *)&item8, (Item *)&item9, (Item *)&item10, (Item *)&item11, (Item *)&item12};                                                     \
 const PageBase name = { TypeItem::Page, 12, false, namePage, (const PageBase *)keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},    \
     items##name, funcPress, FuncDrawPage, funcOnKey};
@@ -169,7 +169,7 @@ const PageBase name = { TypeItem::Page, 12, false, namePage, (const PageBase *)k
 #define DEF_PAGE_13(name, namePage, keeper, funcActive, funcPress, titleRU, titleEN, hintRU, hintEN,                                        \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13)                                          \
 static const Item * const  items##name[] = {                                                                                                \
-    (Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
+    (Item *)item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5, (Item *)&item6, (Item *)&item7,                         \
     (Item *)&item8, (Item *)&item9, (Item *)&item10, (Item *)&item11, (Item *)&item12, (Item *)&item13};                                    \
 const PageBase name = { Item_Page, 13, false, namePage, keeper, funcActive, {titleRU, titleEN, hintRU, hintEN},                             \
     items##name, funcPress, FuncDrawPage, FuncRegSetPage};
@@ -177,7 +177,7 @@ const PageBase name = { Item_Page, 13, false, namePage, keeper, funcActive, {tit
 #define DEF_PAGE_15(name, namePage, keeper, funcActive, funcPress, titleRU, titleEN, hintRU, hintEN,                                        \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, item10,                                                                  \
     item11, item12, item13, item14, item15)                                                                                                 \
-static const Item * const  items##name[] = {(Item *)&item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5,                 \
+static const Item * const  items##name[] = {(Item *)item1, (Item *)&item2, (Item *)&item3, (Item *)&item4, (Item *)&item5,                 \
     (Item *)&item6, (Item *)&item7, (Item *)&item8, (Item *)&item9, (Item *)&item10, (Item *)&item11, (Item *)&item12,                      \
     (Item *)&item13, (Item *)&item14,                                                                                                       \
     (Item *)&item15};                                                                                                                       \

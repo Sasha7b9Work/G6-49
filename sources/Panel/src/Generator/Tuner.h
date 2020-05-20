@@ -7,6 +7,7 @@
 
 
 class Parameter;
+struct Key;
 
 
 class Tuner
@@ -14,6 +15,10 @@ class Tuner
 public:
 
     Tuner(Parameter *param);
+
+    void Draw(int x, int y);
+
+    void OnKeyControl(const Key &control);
 
 private:
 
