@@ -13,13 +13,17 @@
 class NumberBuffer
 {
 public:
+
     // \brief Задаёт первоначальные установки. size - размер буфера c учётом завершающего нуля, position - текущая позиция курсора, maxValue - 
     // максимальное значение, которое может храниться в буфере.
     static void Set(char *buffer, int size, int position, int maxValue);
+
     // Обработка клавиши
-    static void ProcessKey(const Key &key);
+    static void ProcessKey(const Key::E key);
+
     // Обработка Backspace
     static void PressBackspace();
+
     // Возвращает номер разряда, в котором находится курсор
     static int PositionCursor();
 
@@ -32,18 +36,25 @@ private:
 
     // Возвращает количество символов в буфере (без учёта завершающего нуля).
     static int NumSymbols();
+
     // Обработка поворота ручки
-    static void ProcessRegulator(const Key &key);
+    static void ProcessRegulator(const Key::E key);
+
     // Увеличить значение в заданном разряде. Возвращает true, если действие произошло
     static bool IncreaseDigit(int pos);
+
     // Уменьшить значение в заданном разряде. Возвращает true, если действие произошло
     static bool DecreaseDigit(int pos);
+
     // Возвращает позицию символа для изменения
     static int PositionSymbolForChange();
+
     // Является ли допустимым данный символ
-    static bool AllowableSymbol(const Key &key);
+    static bool AllowableSymbol(const Key::E key);
+
     // Возвращает числовое значение, представленное в буфере
     static uint ToUINT();
+
     // Возвращает true, если в числе все девятки
     static bool All9();
 };

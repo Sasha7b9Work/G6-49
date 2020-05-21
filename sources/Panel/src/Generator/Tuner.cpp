@@ -26,7 +26,7 @@ void Tuner::Draw()
 }
 
 
-bool Tuner::OnKeyControl(const Key &)
+bool Tuner::OnKeyControl(const Control)
 {
     return false;
 }

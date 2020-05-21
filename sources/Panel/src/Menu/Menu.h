@@ -57,13 +57,13 @@ struct Menu
 private:
     
     // Открывает страницу отладки, если обнаружена соотвествующая клавиватурная последовательнсость
-    static bool OpenDebugPage(const Key &key);
+    static bool OpenDebugPage(const Control control);
     
     // Обработать управляющее воздействие control
-    static void ProcessKey(const Key &key);
+    static void ProcessKey(const Control control);
     
     // Обрабатывает состояние выходов. Возвращает true, если состояние вывода изменилось
-    static bool ProcessOutputs(const Key &key);
+    static bool ProcessOutputs(const Control control);
     
     // Если какой-то итем раскрыт, то здесь его адрес
     static Item *openedItem;

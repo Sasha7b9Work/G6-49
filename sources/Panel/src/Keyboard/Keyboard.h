@@ -7,15 +7,19 @@ struct Keyboard
     friend class CPU;
 
 public:
+    
     static void InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL);
+    
     // Возвращает true, если буфер пуст
     static bool BufferIsEmpty();
+    
     // Возвращает следующий орган управления, если таковой имеется
-    static Key GetNextControl();
+    static Control GetNextControl();
+    
     // Функция-заглушка. Для эмулятора, на котором нет физической клавиатуры и нужно её рисовать на экране
     static void Draw();
 
-    static void AppendEvent(Key::E key, Key::Action action);
+    static void AppendEvent(Key::E key, Action::E action);
 
     // Структура предназначена единственно для декодирования клавиатурных последовательностей
     struct Decoder
@@ -23,7 +27,7 @@ public:
         // Возвращает true, если распознана последовательность, заданная массивом keys. Последнй элемент элемент массива должен быть Key::Count.
         // Последовательность распознана, если предыдущие поданные события совпадали с элементами массива в порядке очереди, а предпоследний равен key.
         // Размер массива не может превышать 20
-        static bool Decode(const Key keys[20], const Key &key);
+        static bool Decode(const Control controls[20], const Control &control);
     };
 
 private:

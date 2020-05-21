@@ -7,7 +7,7 @@
 #include "Utils/String.h"
 
 
-typedef bool (*pFuncBKey)(const Key&);
+typedef bool (*pFuncBKey)(const Control);
 
 
 // Общая часть для всех типов элементов меню
@@ -67,7 +67,7 @@ public:
     void Draw(bool opened, int x = -1, int y = -1) const;
     
     // Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
-    void Press(const Key &control);
+    void Press(const Control control);
 
     TypeItem::E GetType() const;
 
@@ -184,7 +184,7 @@ public:
     void SetPosActItem(int pos);
     
     // Возвращает адрес элемента меню, соответствующего данного функциональной клавише
-    Item *GetItem(const Key &key) const;
+    Item *GetItem(const Key::E key) const;
     
     // Возвращает позицию текущего элемента странцы page
     int8 PosCurrentItem() const;
@@ -192,7 +192,7 @@ public:
     void ChangeSubPage(int delta);
     
     // Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
-    bool Press(const Key &key);
+    bool Press(const Control control);
 
     struct Title
     {
@@ -224,7 +224,7 @@ public:
     pFuncVII    funcForDraw;    // Функция будет вызываться во время отрисовки кнопки.
     
     // Обрабатывает нажатие кнопки. Возвращает ноль, потому что не может находиться в открытом состоянии.
-    Item *Press(Key::Action action);
+    Item *Press(Action::E action);
 
     void Draw(int x, int y) const;
 
@@ -264,7 +264,7 @@ public:
     int                             numHints;
     
     // Обрабатывает нажатие кнопки. Возвращает 0, потому что не может находиться в открытом состоянии
-    Item *Press(Key::Action action);
+    Item *Press(Action::E action);
 
     void Draw(int x, int y) const;
 };
@@ -324,7 +324,7 @@ public:
     void DrawValue(int x, int y) const;
     
     // Обработка воздействия
-    void Press(const Key &key);
+    void Press(const Control control);
 };
 
 
@@ -382,7 +382,7 @@ public:
     String NameSubItem(int i, uint lang) const;
     
     // Возвращает указатель на себя, если находится ы открытом состоянии, и 0, если в закрытом
-    Item *Press(const Key &key);
+    Item *Press(const Control control);
 
     int8 CurrentIndex() const;
 };
@@ -405,7 +405,7 @@ public:
     Form  *form;
     
     // Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии и 0 в противном.
-    Item *Press(Key::Action action);
+    Item *Press(Action::E action);
 
     pString NameSubItem(int num) const;
 

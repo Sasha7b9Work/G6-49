@@ -1,4 +1,5 @@
 #pragma once
+#include "Keyboard/Controls.h"
 
 
 /*
@@ -7,7 +8,6 @@
 
 
 class Parameter;
-struct Key;
 
 
 class Tuner
@@ -18,7 +18,7 @@ public:
 
     void Draw();
 
-    bool OnKeyControl(const Key &control);
+    bool OnKeyControl(const Control control);
 
 private:
 

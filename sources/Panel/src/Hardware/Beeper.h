@@ -16,7 +16,7 @@ struct Beeper
 
     static void WarnBeepGood();
 
-    static void Beep(Key::Action type);
+    static void Beep(Action::E action);
 
     static void Test();
 

@@ -87,7 +87,7 @@ static int SizeBuffer(Register::E name = Register::Count);
 // Возвращает тип ввода для регистра i
 static TypeInput TypeBuffer(Register::E name = Register::Count);
 // Возращает true, если символ является корректным для данного типа ввода
-static bool AllowableSymbol(Key key);
+static bool AllowableSymbol(Key::E key);
 // Выводит значение регистра i
 static void DrawValue(int x, int y, uint8 i);
 // Возвращает из буфера значение, предшествующее точке
@@ -114,13 +114,13 @@ static void LoadRegister()
 }
 
 
-static bool OnRegulator(Key key)
+static bool OnRegulator(Control control)
 {
     if (TypeBuffer(currentRegister) == Uint)
     {
-        if (key.IsRotate())
+        if (control.IsRotate())
         {
-            NumberBuffer::ProcessKey(key);
+            NumberBuffer::ProcessKey(control.key);
             LoadRegister();
             return true;
         }
@@ -130,41 +130,41 @@ static bool OnRegulator(Key key)
 }
 
 
-static bool OnKey_PageRegisters(const Key &key)
+static bool OnKey_PageRegisters(const Control control)
 {
     if (!showInputWindow)
     {
-        if (AllowableSymbol(key))
+        if (AllowableSymbol(control.key))
         {
             SENDING(currentRegister) = false;
             OnPress_Send();
             std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
-            buffer[0] = key.ToChar();
+            buffer[0] = Key(control.key).ToChar();
             NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel ||
                                                            currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
             return true;
         }
     }
-    else if (key.IsDown())
+    else if (control.IsDown())
     {
-        if (AllowableSymbol(key))
+        if (AllowableSymbol(control.key))
         {
-            NumberBuffer::ProcessKey(key);
+            NumberBuffer::ProcessKey(control.key);
             return true;
         }
-        else if (key.IsCursors())
+        else if (control.IsCursors())
         {
-            NumberBuffer::ProcessKey(key);
+            NumberBuffer::ProcessKey(control.key);
             return true;
         }
-        else if (key.Is(Key::Esc))
+        else if (control.Is(Key::Esc))
         {
             OnPress_Cancel();
             return true;
         }
         else
         {
-            return OnRegulator(key);
+            return OnRegulator(control);
         }
     }
     
@@ -268,26 +268,26 @@ static uint64 BufferToValue()
 }
 
 
-static bool AllowableSymbol(Key key)
+static bool AllowableSymbol(Key::E key)
 {
     TypeInput type = TypeBuffer(currentRegister);
 
     if (type == Uint)
     {
-        return key.IsDigit();
+        return Key(key).IsDigit();
     }
     else if (type == Binary)
     {
-        return key.Is(Key::_0) || key.Is(Key::_1);
+        return (key == Key::_0) || (key == Key::_1);
     }
     else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
     {
-        if (key.IsDigit())
+        if (Key(key).IsDigit())
         {
             return true;
         }
 
-        if (key.Is(Key::Dot))
+        if (key == Key::Dot)
         {
             for (int i = 0; i < sizeof(buffer); i++)
             {

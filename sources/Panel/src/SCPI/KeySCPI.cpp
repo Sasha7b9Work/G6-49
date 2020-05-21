@@ -59,8 +59,8 @@ static pCHAR FuncKeyPress(pCHAR buffer)
         {
             SCPI_PROLOG(end)
 
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Down);
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Up);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Down);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Up);
 
             SCPI_EPILOG(end)
         }
@@ -85,8 +85,8 @@ static pCHAR FuncKeyLong(pCHAR buffer)
         {
             SCPI_PROLOG(end)
 
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Down);
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Key::Long);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Down);
+            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Long);
 
             SCPI_EPILOG(end)
         }

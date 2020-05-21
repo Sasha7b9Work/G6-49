@@ -67,23 +67,23 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 
-static bool OnControl_TuneParameter(const Key &key)
+static bool OnControl_TuneParameter(const Control control)
 {
-    if(key.action == Key::Up)
+    if(control.IsUp())
     {
-        if(key.value == Key::Esc)
+        if(control.Is(Key::Esc))
         {
             OnPress_Cancel();
             return true;
         }
-        else if(key.value == Key::RegButton)
+        else if(control.Is(Key::RegButton))
         {
             Menu::ResetAdditionPage();
             return true;
         }
         else
         {
-            return tuned.tuner.OnKeyControl(key);
+            return tuned.tuner.OnKeyControl(control);
         }
     }
 

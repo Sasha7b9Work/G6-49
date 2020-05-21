@@ -170,17 +170,17 @@ static void DrawPage()
 }
 
 
-static bool FuncOnKeyPage(const Key &key) //-V2009
+static bool FuncOnKeyPage(const Control control) //-V2009
 {
-    if(key.value == Key::RegButton && key.action == Key::Down)
+    if(control.Is(Key::RegButton, Action::Down))
     {
         Math::CircleIncrease<uint8>(&range, 0, 4);
         OnChange_Parameters(true);
         return true;
     }
-    else if(key.IsRotate())
+    else if(control.IsRotate())
     {
-        if(key.action == Key::Down)
+        if(control.IsDown())
         {
             int16 min = -1024;
             int16 max = 1024;
@@ -189,7 +189,7 @@ static bool FuncOnKeyPage(const Key &key) //-V2009
             else if(parameter == 3) { min = 0; }            // для смещения -max будем ограничивать нулём снизу - можно сделать только больше
             if(parameter == 0 && signal == 1) { max = 0; }  // для амплитуды произвольного сигнала будем ограничивать нулём сверху - можно сделать только меньше
 
-            if(key.value == Key::RegLeft)
+            if(control.Is(Key::RegLeft))
             {
                 setCal.ReduceK(min);
                 SendMessage();

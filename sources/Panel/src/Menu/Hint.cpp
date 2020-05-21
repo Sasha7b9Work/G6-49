@@ -12,7 +12,7 @@ using namespace Primitives;
 
 bool        Hint::show = false;
 const Item *Hint::item = 0;
-Key::E  Hint::control = Key::None;
+Key::E      Hint::key = Key::None;
 int         Hint::numPages = 0;
 int         Hint::currentPage = 0;
 int         Hint::firstItemOnSecondPage = 0;
@@ -20,32 +20,32 @@ bool        Hint::needCalculate = false;
 
 
 
-bool Hint::ProcessControl(const Key &key)
+bool Hint::ProcessControl(const Control control)
 {
-    if (key.Is(Key::Esc) && key.IsLong())
+    if (control.Is(Key::Esc) && control.IsLong())
     {
         show = !show;
         item = 0;
-        control = Key::None;
+        key = Key::None;
         numPages = 0;
     }
 
     if (show)
     {
-        if (key.IsFunctional())
+        if (control.IsFunctional())
         {
             if(CURRENT_PAGE)
             {
                 item = CURRENT_PAGE->GetItem(key);
             }
-            control = Key::None;
+            key = Key::None;
             needCalculate = true;
         }
-        else if (key.IsRotate())
+        else if (control.IsRotate())
         {
             if(numPages > 1)
             {
-                if(key.Is(Key::RegLeft))
+                if(control.Is(Key::RegLeft))
                 {
                     if(currentPage > 1)
                     {

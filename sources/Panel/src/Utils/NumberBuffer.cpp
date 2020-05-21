@@ -21,7 +21,7 @@ void NumberBuffer::Set(char *buf, int s, int p, int maxValue)
 }
 
 
-void NumberBuffer::ProcessKey(const Key &key)
+void NumberBuffer::ProcessKey(const Key::E key)
 {
     if (key == Key::RegRight || key == Key::RegLeft)
     {
@@ -43,14 +43,14 @@ void NumberBuffer::ProcessKey(const Key &key)
     }
     else if(AllowableSymbol(key) && position < NumSymbols())                    // Символьная кнопка
     {
-        buffer[position++] = key.ToChar();
+        buffer[position++] = Key(key).ToChar();
     }
 }
 
 
-bool NumberBuffer::AllowableSymbol(const Key &key)
+bool NumberBuffer::AllowableSymbol(const Key::E key)
 {
-    if(key.IsDigit() || key.Is(Key::Dot) || key.Is(Key::Minus))
+    if(Key(key).IsDigit() || (key == Key::Dot) || (key == Key::Minus))
     {
         return true;
     }
@@ -59,7 +59,7 @@ bool NumberBuffer::AllowableSymbol(const Key &key)
 }
 
 
-void NumberBuffer::ProcessRegulator(const Key &key)
+void NumberBuffer::ProcessRegulator(const Key::E key)
 {
     if(NumSymbols() == 0)                           // Если буфер пуст -
     {
@@ -70,11 +70,11 @@ void NumberBuffer::ProcessRegulator(const Key &key)
     char temp[32];
     std::memcpy(temp, buffer, static_cast<uint>(size));
 
-    if (key.Is(Key::RegRight))
+    if (key == Key::RegRight)
     {
         IncreaseDigit(PositionSymbolForChange());
     }
-    else if(key.Is(Key::RegLeft))
+    else if(key == Key::RegLeft)
     {
         DecreaseDigit(PositionSymbolForChange());
     }

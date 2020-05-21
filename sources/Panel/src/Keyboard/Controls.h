@@ -31,30 +31,60 @@ struct Key
         RegRight,
         RegButton,
         Count
-    } value;
+    };
 
-    enum Action
+    Key(E v) : value(v) { }
+
+    char ToChar() const;
+
+    bool IsDigit() const;
+
+    E value;
+};
+
+
+struct Action
+{
+    enum E
     {
         Down,
         Long,
         Up,
-        NumActions
-    } action;
+        Count
+    };
+};
 
-    operator uint8() const            { return static_cast<uint8>(value); };
-    bool Is(Key::E c) const           { return (c == value); };
-    bool Is(Key::E c, Action a) const { return value == c && action == a; };
-    bool IsDigit() const;
-    bool IsUp() const   { return action == Up; }
-    bool IsDown() const { return action == Down; }
-    bool IsLong() const { return action == Long; }
-    char ToChar() const;
+
+struct Control
+{
+    Key::E key;
+    Action::E action;
+
+    bool Is(Key::E c) const           { return (c == key); };
+    
+    bool Is(Key::E c, Action::E a) const { return (key == c) && (action == a); };
+       
+    bool IsUp() const   { return (action == Action::Up); }
+    
+    bool IsDown() const { return (action == Action::Down); }
+    
+    bool IsLong() const { return (action == Action::Long); }
+    
     static pString Name(Key::E key);
+    
     bool IsFunctional() const;
+    
     // Возвращает true, если поворот ручки
     bool IsRotate() const;
+
     // Возвращает true, если кнопка управления курсором (Влево-Вправо)
-    bool IsCursors() const { return value == Left || value == Right; };
+    bool IsCursors() const { return (key == Key::Left) || (key == Key::Right); };
+
     // Возвращает true в случае отпускания кнопки или "длинного" нажатия
     bool IsRelease() const;
+
+    bool operator==(const Control &rhl) const
+    {
+        return (rhl.key == key) && (rhl.action == action);
+    }
 };

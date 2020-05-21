@@ -45,14 +45,14 @@ void Menu::Update()
 
     while (!Keyboard::BufferIsEmpty())
     {
-        Key key = Keyboard::GetNextControl();
+        Control control = Keyboard::GetNextControl();
 
-        if(OpenDebugPage(key))                              // Открываем страницу отладки, если распознали соотвествующую клавиатурную последовательность
+        if(OpenDebugPage(control))                              // Открываем страницу отладки, если распознали соотвествующую клавиатурную последовательность
         {
             continue;
         }
 
-        ProcessKey(key);
+        ProcessKey(control);
 
         timePress = TIME_MS;
     }
@@ -67,30 +67,30 @@ void Menu::Update()
 }
 
 
-void Menu::ProcessKey(const Key &key)
+void Menu::ProcessKey(const Control control)
 {
-    if(ProcessOutputs(key))                     // Обработка включения/отключения каналов
+    if(ProcessOutputs(control))                     // Обработка включения/отключения каналов
     {
     }
     else if (GetOpenedItem())                   // Если раскрыт какой-либо элемент меню - передаём управление уему
     {
-        GetOpenedItem()->Press(key);
+        GetOpenedItem()->Press(control);
     }
     else if(Menu::GetCurrentItem())             // Если какой-либо элемент меню является активным - передаём управление ему
     {
-        Menu::GetCurrentItem()->Press(key);
+        Menu::GetCurrentItem()->Press(control);
     }
-    else if (CURRENT_PAGE->Press(key))          // Иначе передаём управление текущей странице
+    else if (CURRENT_PAGE->Press(control))          // Иначе передаём управление текущей странице
     {
     }
 }
 
 
-bool Menu::ProcessOutputs(const Key &key)
+bool Menu::ProcessOutputs(const Control control)
 {
-    if (key.IsRelease())
+    if (control.IsRelease())
     {
-        if (key.Is(Key::On1))
+        if (control.Is(Key::On1))
         {
             if (!WAVE(Chan::A).StartModeIsSingle())
             {
@@ -99,7 +99,7 @@ bool Menu::ProcessOutputs(const Key &key)
             PGenerator::EnableChannel(Chan::A, set.enabled[Chan::A]);
             return true;
         }
-        else if (key.Is(Key::On2))
+        else if (control.Is(Key::On2))
         {
             if (!WAVE(Chan::B).StartModeIsSingle())
             {
@@ -193,31 +193,31 @@ void Menu::ResetOpenedItem()
 }
 
 
-bool Menu::OpenDebugPage(const Key &key)
+bool Menu::OpenDebugPage(const Control control)
 {
     if(CURRENT_PAGE != PageService::self)
     {
         return false;
     }
 
-    static const Key keys[] =
+    static const Control controls[] =
     {
-        { Key::_1, Key::Down },
-        { Key::_1, Key::Up },
-        { Key::_2, Key::Down },
-        { Key::_2, Key::Up },
-        { Key::_3, Key::Down },
-        { Key::_3, Key::Up },
-        { Key::_4, Key::Down },
-        { Key::_4, Key::Up },
-        { Key::_8, Key::Down },
-        { Key::_8, Key::Up },
-        { Key::_5, Key::Down },
-        { Key::_5, Key::Up },
+        { Key::_1, Action::Down },
+        { Key::_1, Action::Up },
+        { Key::_2, Action::Down },
+        { Key::_2, Action::Up },
+        { Key::_3, Action::Down },
+        { Key::_3, Action::Up },
+        { Key::_4, Action::Down },
+        { Key::_4, Action::Up },
+        { Key::_8, Action::Down },
+        { Key::_8, Action::Up },
+        { Key::_5, Action::Down },
+        { Key::_5, Action::Up },
         { Key::Count}
     };
 
-    if(Keyboard::Decoder::Decode(keys, key))
+    if(Keyboard::Decoder::Decode(controls, control))
     {
         PageDebug::Enable();
         return true;

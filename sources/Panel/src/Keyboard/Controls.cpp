@@ -4,7 +4,7 @@
 
 bool Key::IsDigit() const
 {
-    return (value >= _0 && value <= _9);
+    return (value >= Key::_0 && value <= Key::_9);
 }
 
 
@@ -12,9 +12,9 @@ char Key::ToChar() const
 {
     if(IsDigit())
     {
-        return static_cast<char>((value - _0) | 0x30);
+        return static_cast<char>((value - Key::_0) | 0x30);
     }
-    else if(value == Dot)
+    else if(value == Key::Dot)
     {
         return '.';
     }
@@ -23,25 +23,25 @@ char Key::ToChar() const
 }
 
 
-bool Key::IsFunctional() const
+bool Control::IsFunctional() const
 {
-    return (value >= F1) && (value <= F4);
+    return (key >= Key::F1) && (key <= Key::F4);
 }
 
 
-bool Key::IsRotate() const
+bool Control::IsRotate() const
 {
-    return (value == RegLeft) || (value == RegRight);
+    return (key == Key::RegLeft) || (key == Key::RegRight);
 }
 
 
-bool Key::IsRelease() const
+bool Control::IsRelease() const
 {
-    return (action == Up) || (action == Long);
+    return (action == Action::Up) || (action == Action::Long);
 }
 
 
-pString Key::Name(Key::E key)
+pString Control::Name(Key::E key)
 {
     static pCHAR names[] =
     {

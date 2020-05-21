@@ -8,7 +8,7 @@
 #include "Keyboard/Keyboard.h"
 
 
-static Key commands[10];
+static Control commands[10];
 static int pointer = 0;
 
 
@@ -35,7 +35,7 @@ static void DetectRegulator();
 static uint timePress[5][6];
 
 //                                         SL0      SL1       SL2          SL3        S4          SL5
-static const Key::E controls[5][6] = {{Key::_0, Key::_5, Key::Dot,   Key::Esc,   Key::F1,   Key::None},    // RL0
+static const Key::E keys[5][6] =     {{Key::_0, Key::_5, Key::Dot,   Key::Esc,   Key::F1,   Key::None},    // RL0
                                       {Key::_1, Key::_6, Key::Minus, Key::Right, Key::F2,   Key::None},    // RL1
                                       {Key::_2, Key::_7, Key::None,  Key::Left,  Key::F3,   Key::None},    // RL2
                                       {Key::_3, Key::_8, Key::On1,   Key::None,  Key::F4,   Key::None},    // RL3
@@ -92,9 +92,9 @@ void Keyboard::Update()
         {
             bool state = READ_RL(rl);
 
-            Key::E control =  controls[rl][sl];
+            Key::E key = keys[rl][sl];
 
-            if (control != Key::None)
+            if (key != Key::None)
             {
                 if ((timePress[rl][sl] != 0) && (timePress[rl][sl] != MAX_UINT))         // Если клавиша находится в нажатом положении
                 {
@@ -102,19 +102,19 @@ void Keyboard::Update()
                     if(delta > 500)                                             // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        AppendEvent(controls[rl][sl], Key::Long);   // это будет длинное нажатие
+                        AppendEvent(keys[rl][sl], Action::Long);   // это будет длинное нажатие
                     }
                     else if (delta > 100 &&                                     // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                                // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
-                        AppendEvent(controls[rl][sl], Key::Up);     // И сохраняем отпускание кнопки в буфере команд
+                        AppendEvent(keys[rl][sl], Action::Up);     // И сохраняем отпускание кнопки в буфере команд
                     }
                 }
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
                 {
                     timePress[rl][sl] = time;                                       // то сохраняем время её нажатия
-                    AppendEvent(controls[rl][sl], Key::Down);
+                    AppendEvent(keys[rl][sl], Action::Down);
                 }
                 else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
@@ -152,7 +152,7 @@ static void DetectRegulator()
 
         if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
         {
-            Keyboard::AppendEvent(Key::RegButton, Key::Long);                                     // посылаем длинное нажатие
+            Keyboard::AppendEvent(Key::RegButton, Action::Long);                                     // посылаем длинное нажатие
             needDetectButton = false;
             prevPressButton = false;
             timePrevPress = 0;
@@ -164,7 +164,7 @@ static void DetectRegulator()
             {
                 timePrevPress = time;
                 prevPressButton = true;
-                Keyboard::AppendEvent(Key::RegButton, Key::Down);
+                Keyboard::AppendEvent(Key::RegButton, Action::Down);
             }
         }
         else                                                                // Ексли копка была нажата ранее
@@ -173,7 +173,7 @@ static void DetectRegulator()
             {                                                               // во избежание дребезга контактов
                 if(!press)
                 {
-                    Keyboard::AppendEvent(Key::RegButton, Key::Up);
+                    Keyboard::AppendEvent(Key::RegButton, Action::Up);
                     timePrevPress = 0;
                     prevPressButton = false;
                 }
@@ -194,20 +194,20 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        Keyboard::AppendEvent(Key::RegLeft, Key::Down);
+        Keyboard::AppendEvent(Key::RegLeft, Action::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        Keyboard::AppendEvent(Key::RegRight, Key::Down);
+        Keyboard::AppendEvent(Key::RegRight, Action::Down);
         prevStatesIsOne = false;
     }
 }
 
 
-void Keyboard::AppendEvent(Key::E key, Key::Action action)
+void Keyboard::AppendEvent(Key::E key, Action::E action)
 {
-    commands[pointer].value = key;
+    commands[pointer].key = key;
     commands[pointer].action = action;
     pointer++;
 
@@ -221,17 +221,17 @@ bool Keyboard::BufferIsEmpty()
 }
 
 
-Key Keyboard::GetNextControl()
+Control Keyboard::GetNextControl()
 {
-    Key retValue;
+    Control control;
 
     if (BufferIsEmpty())
     {
-        retValue.value = Key::None;
+        control.key = Key::None;
     }
     else
     {
-        retValue = commands[0];
+        control = commands[0];
         for (int i = 1; i < pointer; i++)
         {
             commands[i - 1] = commands[i];
@@ -239,7 +239,7 @@ Key Keyboard::GetNextControl()
         --pointer;
     }
 
-    return retValue;
+    return control;
 }
 
 #ifdef WIN32
@@ -265,7 +265,7 @@ void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const
 #endif
 
 
-const char *PanelControlName(const Key &control)
+const char *PanelControlName(const Key::E key)
 {
     static pCHAR names[] =
     {
@@ -301,7 +301,7 @@ const char *PanelControlName(const Key &control)
         "Reg кнопка"
     };
 
-    return names[control];
+    return names[key];
 }
 
 
@@ -310,14 +310,14 @@ void Keyboard::Draw()
 } 
 
 
-bool Keyboard::Decoder::Decode(const Key keys[20], const Key &key)
+bool Keyboard::Decoder::Decode(const Control controls[20], const Control &control)
 {
     static int step = 0;        // Номер следующего проверяемого элемента массива
 
-    if(key == keys[step])
+    if(control == controls[step])
     {
         step++;
-        if(keys[step].value == Key::Count)
+        if(controls[step].key == Key::Count)
         {
             step = 0;
             return true;
