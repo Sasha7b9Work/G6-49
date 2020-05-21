@@ -2,6 +2,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Display/WaveGraphics.h"
+#include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
 #include "Generator/Tuner.h"
 #include "Generator/Wave.h"
@@ -40,7 +41,7 @@ void Indicator::Draw()
 
     DrawTitle(x, y, WaveGraphics::Width());
 
-    DrawValue();
+    DrawValue(x, y + 50);
 }
 
 
@@ -56,7 +57,11 @@ void Indicator::DrawTitle(int x, int y, int width)
 }
 
 
-void Indicator::DrawValue()
+void Indicator::DrawValue(int x, int y)
 {
-    //pString = MathFloatValue::GetStringValue(param->Value()
+    Order::E order = Order::One;
+
+    pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
+
+    Text(str).Draw(x, y);
 }

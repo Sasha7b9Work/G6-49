@@ -40,7 +40,7 @@ private:
 
     void DrawTitle(int x, int y, int width);
 
-    void DrawValue();
+    void DrawValue(int x, int y);
 };
 
 

@@ -42,6 +42,23 @@ struct MathFloatValue
 };
 
 
+struct MathParameterValue
+{
+    static void SetParameterValue(ParameterValue *parameter) { param = parameter; };
+
+    // ¬озвращает количество значащих знакомест перед зап€той (исключа€ знаковый разр€д)
+    static int GetNumberDigitsBeforeComma();
+
+    // ¬озвращает количество значащих знакомест после зап€той
+    static int GetNumberDigitsAfterComma();
+
+private:
+
+    // —обственно параметр, по которому будут производитс€ вычислеин€
+    static ParameterValue *param;
+};
+
+
 struct LogicFloatValue
 {
     static void SetParameter(Parameter *param);

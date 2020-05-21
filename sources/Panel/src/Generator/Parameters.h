@@ -72,8 +72,10 @@ protected:
 
 class ParameterValue : public Parameter
 {
-    friend class ParameterPainter;
     friend struct LogicFloatValue;
+    friend class Indicator;
+    friend class Tuner;
+
 public:
 
     enum E
@@ -101,19 +103,16 @@ public:
     ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
         Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value) { }
 
+    virtual pString GetStringValue() const;
+
     E Type() const { return type; }
 
     FloatValue GetValue() const { return value; };
 
-    virtual pString GetStringValue() const;
-
     bool SetAndLoadValue(float val);
     
     // ¬озвращает true, если параметр имеет знак
-    bool IsSigned() const
-    {
-        return (type == Offset);
-    }
+    bool IsSigned() const { return (type == Offset); }
 
     void OnPressButtonTune();
 

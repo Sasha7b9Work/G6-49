@@ -8,6 +8,36 @@
 //ParameterValue *LogicFloatValue::parameter = nullptr;
 
 
+// Здесь хранится количество значащих цифр перед (индекс 0) и после (индекс 1) запятой. Знак не учитывается
+static const int numberDigits[ParameterValue::Count][2] =
+{
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10},
+    {10, 10}
+};
+
+ParameterValue *MathParameterValue::param = nullptr;
+
+
 pString MathFloatValue::GetStringValue(const FloatValue &value, bool sign, int numDigits, Order::E *order, int posFirst)
 {
     static char buffer[20];
@@ -156,6 +186,18 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
     }
 
     return result;
+}
+
+
+int MathParameterValue::GetNumberDigitsBeforeComma()
+{
+    return numberDigits[param->Type()][0];
+}
+
+
+int MathParameterValue::GetNumberDigitsAfterComma()
+{
+    return numberDigits[param->Type()][1];
 }
 
 
