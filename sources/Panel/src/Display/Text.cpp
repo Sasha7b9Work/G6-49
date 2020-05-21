@@ -668,7 +668,7 @@ int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
 }
 
 
-int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, pString text, Color color)
+int Text::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
 {
     color.SetAsCurrent();
 
@@ -716,7 +716,7 @@ int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pStr
     std::vsprintf(buffer, text, args);
     va_end(args);
 
-    return DrawStringInCenterRect(x, y, width, height, buffer);
+    return Text(buffer).DrawInCenterRect(x, y, width, height);
 }
 
 
@@ -737,12 +737,12 @@ void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int heigh
                                                   Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
-    int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
+    int eX = Text(text).DrawInCenterRect(x, y, width, height, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
     Rectangle(w, h).Fill(eX - lenght - widthBorder, y - widthBorder + 1);
 
-    DrawStringInCenterRect(x, y, width, height, text, colorText);
+    Text(text).DrawInCenterRect(x, y, width, height, colorText);
 }
 
 
@@ -752,7 +752,7 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
     Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorBackground);
     colorFill.SetAsCurrent();
 
-    return DrawStringInCenterRect(x, y, width, height, text);
+    return Text(text).DrawInCenterRect(x, y, width, height);
 }
 
 

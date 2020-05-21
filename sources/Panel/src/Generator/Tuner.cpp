@@ -36,7 +36,7 @@ void Indicator::Draw()
     int x = WaveGraphics::X();
     int y = WaveGraphics::Y(ch.GetInverse());
 
-    Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).Fill(x, y, Color::BLUE_10);
+    Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).DrawFilled(x, y, Color::BLUE_10, Color::WHITE);
 
     DrawTitle(x, y, WaveGraphics::Width());
 
@@ -44,13 +44,13 @@ void Indicator::Draw()
 }
 
 
-void Indicator::DrawTitle(int x, int y, int)
+void Indicator::DrawTitle(int x, int y, int width)
 {
     Font::Store();
 
     Font::Set(TypeFont::_GOSTB20);
 
-    Text(param->Name(LANGUAGE)).Draw(x, y, Color::WHITE);
+    Text(param->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 
     Font::Restore();
 }

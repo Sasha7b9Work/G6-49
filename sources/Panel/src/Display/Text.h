@@ -10,6 +10,8 @@ struct Text
 
     int Draw(int x, int y, Color color = Color::NUMBER);
 
+    int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
+
     // Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
 
@@ -36,8 +38,6 @@ struct Text
 
     // Выводит форматированный текст в столбик шириной width. При этом слов, заключённое в двойные кавычки, выводится цветом color
     static int DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...);
-
-    static int DrawStringInCenterRect(int x, int y, int width, int height, pString text, Color color = Color::NUMBER);
 
     static int DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...);
     
