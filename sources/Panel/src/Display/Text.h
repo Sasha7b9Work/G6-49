@@ -6,10 +6,12 @@
 
 struct Text
 {
+    Text(pString t) : text(t) { };
+
+    int Draw(int x, int y, Color color = Color::NUMBER);
+
     // Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
-
-    static int Draw(int x, int y, pString text, Color color = Color::NUMBER);
 
     // Вывод форматированного текста
     static int DrawFormat(int x, int y, pString text, ...);
@@ -79,6 +81,10 @@ private:
     static int DrawSpaces(int x, int y, pString text, int *numSymbols);
 
     static bool upperCase;
+
+    pString text;
+
+private:
 };
 
 

@@ -27,7 +27,7 @@ void WaveGraphics::Draw(Chan::E ch)
 
         Font::Store();
         Font::Set(TypeFont::_GOSTB20);
-        Text::Draw(x0 + 5, y0 + 5, (ch == Chan::A) ? "A" : "B", Color::Chan(ch));
+        Text((ch == Chan::A) ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
         Font::Restore();
 
         FORM(ch)->DrawUGO(ch, y0);

@@ -99,7 +99,7 @@ int Char::Draw(int eX, int eY, Color color)
 }
 
 
-int Text::Draw(int x, int y, pString text, Color color)
+int Text::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
@@ -239,7 +239,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
         {
             if (draw)
             {
-                Text::Draw(x, y, subString);
+                Text(subString).Draw(x, y);
             }
             return static_cast<int>(std::strlen(subString)) - 1;
         }
@@ -384,7 +384,7 @@ int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int
                 else
                 {
                     curSymbol += length;
-                    x = Draw(x, y, word) + 1;
+                    x = Text(word).Draw(x, y) + 1;
                 }
             }
         }
@@ -597,7 +597,7 @@ void BigText::Draw(int eX, int eY, Color color)
 void Text::DrawTextRelativelyRight(int xRight, int y, pString text, Color color)
 {
     int lenght = Font::GetLengthText(text);
-    Draw(xRight - lenght, y, text, color);
+    Text(text).Draw(xRight - lenght, y, color);
 }
 
 
@@ -677,7 +677,7 @@ int Text::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, pString
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
 
-    return Draw(x, y, text);
+    return Text(text).Draw(x, y);
 }
     
 
@@ -728,7 +728,8 @@ int Text::DrawFormat(int x, int y, pString text, ...)
     va_start(args, text); //-V2567
     std::vsprintf(buffer, text, args);
     va_end(args);
-    return Draw(x, y, buffer);
+
+    return Text(buffer).Draw(x, y);
 }
 
 

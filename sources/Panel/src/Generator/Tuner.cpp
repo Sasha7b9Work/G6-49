@@ -50,7 +50,7 @@ void Indicator::DrawTitle(int x, int y, int)
 
     Font::Set(TypeFont::_GOSTB20);
 
-    Text::Draw(x, y, param->Name(LANGUAGE), Color::WHITE);
+    Text(param->Name(LANGUAGE)).Draw(x, y, Color::WHITE);
 
     Font::Restore();
 }

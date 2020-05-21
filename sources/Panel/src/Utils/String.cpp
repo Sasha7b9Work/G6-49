@@ -178,7 +178,7 @@ int String::Draw(int x, int y, Color color) const
 {
     color.SetAsCurrent();
 
-    return Text::Draw(x, y, c_str());
+    return Text(c_str()).Draw(x, y);
 }
 
 
