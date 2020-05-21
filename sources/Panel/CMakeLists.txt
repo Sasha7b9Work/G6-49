@@ -21,7 +21,7 @@ add_compile_options(/wd4211)    # nonstandard extension used: redefined extern t
 add_compile_options(/wd4355)    # 'this': used in base member initializer list
 add_compile_options(/wd4514)    # unreferenced inline function has been removed
 add_compile_options(/wd4623)    # 'xxx': default constructor was implicitly defined as deleted
-add_compile_options(/wd4626)
+add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
 add_compile_options(/wd4710)    # function not inlined
 add_compile_options(/wd4774)    # format string expected in argument N is not a string literal
 add_compile_options(/wd4820)    # 'N' bytes padding added after data member
@@ -29,6 +29,8 @@ add_compile_options(/wd4946)    # reinterpret_cast used between related classes:
 add_compile_options(/wd4996)    # This function or variable may be unsafe
 add_compile_options(/wd5027)    # 'xxx': move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
+
 
 source_group(common                   FILES ../common/Command.h
                                             ../common/Command.cpp

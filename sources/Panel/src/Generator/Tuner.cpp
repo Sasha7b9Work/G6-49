@@ -12,7 +12,7 @@
 using namespace Primitives;
 
 
-Tuner::Tuner(ParameterValue *_param) : param(_param), indicator(param)
+Tuner::Tuner(ParameterValue *_param) : param(_param), display(param)
 {
 
 }
@@ -20,7 +20,7 @@ Tuner::Tuner(ParameterValue *_param) : param(_param), indicator(param)
 
 void Tuner::Draw()
 {
-    indicator.Draw();
+    display.Draw();
 }
 
 
@@ -30,7 +30,7 @@ bool Tuner::OnKeyControl(const Control)
 }
 
 
-void Indicator::Draw()
+void TunerDisplay::Draw()
 {
     Chan ch = param->GetForm()->GetWave()->GetChannel();
 
@@ -45,7 +45,7 @@ void Indicator::Draw()
 }
 
 
-void Indicator::DrawTitle(int x, int y, int width)
+void TunerDisplay::DrawTitle(int x, int y, int width)
 {
     Font::Store();
 
@@ -57,11 +57,17 @@ void Indicator::DrawTitle(int x, int y, int width)
 }
 
 
-void Indicator::DrawValue(int x, int y)
+void TunerDisplay::DrawValue(int x, int y)
 {
+    Font::Store();
+
+    Font::Set(TypeFont::_GOSTB20);
+
     Order::E order = Order::One;
 
     pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
 
     Text(str).Draw(x, y);
+
+    Font::Restore();
 }

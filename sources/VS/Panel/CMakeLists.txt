@@ -65,6 +65,7 @@ add_compile_options(/wd4996)    # function or variable may be unsafe
 add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
 
 source_group(common                   FILES              ../../common/Command.h
                                                          ../../common/Command.cpp

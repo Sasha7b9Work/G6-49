@@ -73,8 +73,8 @@ protected:
 class ParameterValue : public Parameter
 {
     friend struct LogicFloatValue;
-    friend class Indicator;
     friend class Tuner;
+    friend class TunerDisplay;
 
 public:
 

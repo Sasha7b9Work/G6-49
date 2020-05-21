@@ -19,13 +19,16 @@ public:
 class Digit
 {
 public:
+    Digit(char v = ' ') : value(v) { }
+private:
+    char value;
 };
 
 
-class Indicator
+class TunerDisplay
 {
 public:
-    Indicator(ParameterValue *parameter) : param(parameter) { }
+    TunerDisplay(ParameterValue *parameter) : param(parameter) { }
 
     void Draw();
 
@@ -36,6 +39,7 @@ private:
 
     static const int MAX_NUM_DIGITS = 15;
 
+    // Здесь находятся все символы
     Digit digits[MAX_NUM_DIGITS];
 
     void DrawTitle(int x, int y, int width);
@@ -58,5 +62,5 @@ private:
 
     ParameterValue *param;           // Настраиваемый параметр
 
-    Indicator indicator;
+    TunerDisplay display;
 };
