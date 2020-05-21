@@ -11,7 +11,7 @@
 using namespace Primitives;
 
 
-Tuner::Tuner(Parameter *_param) : param(_param), indicator(param)
+Tuner::Tuner(ParameterValue *_param) : param(_param), indicator(param)
 {
 
 }
@@ -58,5 +58,5 @@ void Indicator::DrawTitle(int x, int y, int width)
 
 void Indicator::DrawValue()
 {
-
+    //pString = MathFloatValue::GetStringValue(param->Value()
 }

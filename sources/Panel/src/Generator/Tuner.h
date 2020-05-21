@@ -7,7 +7,7 @@
 */
 
 
-class Parameter;
+class ParameterValue;
 
 
 class Title
@@ -25,12 +25,12 @@ public:
 class Indicator
 {
 public:
-    Indicator(Parameter *parameter) : param(parameter) { }
+    Indicator(ParameterValue *parameter) : param(parameter) { }
 
     void Draw();
 
 private:
-    Parameter *param;
+    ParameterValue *param;
 
     Title title;
 
@@ -48,7 +48,7 @@ class Tuner
 {
 public:
 
-    Tuner(Parameter *param);
+    Tuner(ParameterValue *param);
 
     void Draw();
 
@@ -56,7 +56,7 @@ public:
 
 private:
 
-    Parameter *param;           // Настраиваемый параметр
+    ParameterValue *param;           // Настраиваемый параметр
 
     Indicator indicator;
 };
