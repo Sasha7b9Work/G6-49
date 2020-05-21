@@ -27,11 +27,6 @@ static const int numberDigits[ParameterValue::Count][2] =
     {10, 10},
     {10, 10},
     {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
     {10, 10}
 };
 
