@@ -81,6 +81,10 @@ static bool OnControl_TuneParameter(const Key &key)
             Menu::ResetAdditionPage();
             return true;
         }
+        else
+        {
+            return tuned.tuner.OnKeyControl(key);
+        }
     }
 
     return false;

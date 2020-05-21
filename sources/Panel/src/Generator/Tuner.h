@@ -18,7 +18,7 @@ public:
 
     void Draw();
 
-    void OnKeyControl(const Key &control);
+    bool OnKeyControl(const Key &control);
 
 private:
 

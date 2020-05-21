@@ -24,3 +24,9 @@ void Tuner::Draw()
 
     Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).Fill(x, y, Color::BLUE_10);
 }
+
+
+bool Tuner::OnKeyControl(const Key &)
+{
+    return false;
+}
