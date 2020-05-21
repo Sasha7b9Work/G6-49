@@ -39,6 +39,8 @@ struct Key
 
     bool IsDigit() const;
 
+    pString Name() const;
+
     E value;
 };
 
@@ -69,9 +71,7 @@ struct Control
     bool IsDown() const { return (action == Action::Down); }
     
     bool IsLong() const { return (action == Action::Long); }
-    
-    static pString Name(Key::E key);
-    
+   
     bool IsFunctional() const;
     
     // Возвращает true, если поворот ручки
