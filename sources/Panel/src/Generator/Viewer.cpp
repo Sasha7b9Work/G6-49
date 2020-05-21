@@ -20,7 +20,9 @@ void Viewer::Draw(int x, int y)
 {
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
-    if((ch == CURRENT_CHANNEL) && std::strcmp(CURRENT_PARAM->Name(LANGUAGE), param->Name(LANGUAGE)) == 0 && CURRENT_PAGE == PageSignals::self)
+    if((ch == CURRENT_CHANNEL) && 
+       (std::strcmp(CURRENT_PARAM->Name(LANGUAGE), param->Name(LANGUAGE)) == 0) &&
+       (CURRENT_PAGE == PageSignals::self))
     {
         Rectangle(139, 9).Fill(x, y, Color::GRAY_25);
     }
