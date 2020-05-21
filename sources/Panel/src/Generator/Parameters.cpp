@@ -128,14 +128,14 @@ pString ParameterValue::MainUnits(uint lang) const
         {"",   ""},     // Phase
         {"ñ",  "s"},    // Delay
         {"ñ",  "s"},    // DurationRise
-        {"ñ",  "s"}    // DurationFall
-//        {"ñ",  "s"},    // DurationStady
-//        {"",   ""},     // DutyFactor
-//        {"",   ""},     // ManipulationDuration
-//        {"",   ""},     // ManipulationPeriod
-//        {"",   ""},     // PacketPeriod
-//        {"",   ""},     // PacketNumber
-//        {"",   ""}      // Exit
+        {"ñ",  "s"},    // DurationFall
+        {"ñ",  "s"},    // DurationStady
+        {"",   ""},     // DutyFactor
+        {"",   ""},     // ManipulationDuration
+        {"",   ""},     // ManipulationPeriod
+        {"",   ""},     // PacketPeriod
+        {"",   ""},     // PacketNumber
+        {"",   ""}      // Exit
     };
 
     return units[Type()][lang];
