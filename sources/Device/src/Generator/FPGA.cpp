@@ -17,8 +17,8 @@
 
 FPGA::ModeWork::E       FPGA::modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
 FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
-FloatValue              FPGA::PacketImpulse::periodImpulse(static_cast<uint64>(0));
-FloatValue              FPGA::PacketImpulse::durationImpulse(static_cast<uint64>(0));
+FloatValue              FPGA::PacketImpulse::periodImpulse("0");
+FloatValue              FPGA::PacketImpulse::durationImpulse("0");
 StartMode               FPGA::startMode[Chan::Count] = { StartMode::Auto, StartMode::Auto };
 uint64                  FPGA::registers[RG::Count] = { 0 };
 

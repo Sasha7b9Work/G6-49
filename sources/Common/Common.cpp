@@ -17,10 +17,10 @@ static uint AssembleInteger(const char *const buffer, int start, int end);
 static uint AssembleTriple(const char *const buffer, int start, int *end);
 
 
-FloatValue::FloatValue(int units, uint mUnits, uint uUnits, uint nUnits)
-{
-    FromUnits(units, mUnits, uUnits, nUnits);
-}
+//FloatValue::FloatValue(int units, uint mUnits, uint uUnits, uint nUnits)
+//{
+//    FromUnits(units, mUnits, uUnits, nUnits);
+//}
 
 
 FloatValue::FloatValue(const char *const buffer, int order)

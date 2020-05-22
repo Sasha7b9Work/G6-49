@@ -20,7 +20,7 @@ struct TypeForm
 
 struct FloatValue
 {
-    explicit FloatValue(int units, uint mUnits, uint uUnits, uint nUnits = 0);
+    //explicit FloatValue(int units, uint mUnits, uint uUnits, uint nUnits = 0);
 
     explicit FloatValue(float v);
 

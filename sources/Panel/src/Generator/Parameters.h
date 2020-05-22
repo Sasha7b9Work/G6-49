@@ -211,7 +211,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const FloatValue &min = FloatValue(0, 0, 0), const FloatValue &max = FloatValue(10, 0, 0), const FloatValue &value = FloatValue("9.123")) :
+    ParameterAmplitude(const FloatValue &min = FloatValue("0"), const FloatValue &max = FloatValue("10"), const FloatValue &value = FloatValue("10")) :
         ParameterVoltage(ParameterValue::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 
@@ -219,7 +219,7 @@ public:
 class ParameterOffset : public ParameterVoltage
 {
 public:
-    ParameterOffset(const FloatValue &min = FloatValue(-5, 0, 0), const FloatValue &max = FloatValue(5, 0, 0), const FloatValue &value = FloatValue("-1.23", -1)) :
+    ParameterOffset(const FloatValue &min = FloatValue("-5"), const FloatValue &max = FloatValue("5"), const FloatValue &value = FloatValue("0")) :
         ParameterVoltage(ParameterValue::Offset, "Смещение", "Offset", min, max, value) { }
 };
 
@@ -227,7 +227,7 @@ public:
 class ParameterFrequency : public ParameterValue
 {
 public:
-    ParameterFrequency(const FloatValue &min = FloatValue(0, 100, 0), const FloatValue &max = FloatValue(100 * 1000 * 1000, 0, 0), const FloatValue &value = FloatValue(1000, 0, 0)) :
+    ParameterFrequency(const FloatValue &min = FloatValue("0.1"), const FloatValue &max = FloatValue("100", 6), const FloatValue &value = FloatValue("1000")) :
         ParameterValue(ParameterValue::Frequency, "Частота", "Frequency", min, max, value) { }
 };
 
@@ -243,7 +243,7 @@ public:
 class ParameterPhase : public ParameterValue
 {
 public:
-    ParameterPhase() : ParameterValue(ParameterValue::Phase, "Фаза", "Phase", FloatValue(0, 0, 0), FloatValue(360, 0, 0), FloatValue(0, 0, 0)) { }
+    ParameterPhase() : ParameterValue(ParameterValue::Phase, "Фаза", "Phase", FloatValue("0"), FloatValue("360"), FloatValue("0")) { }
 };
 
 
