@@ -45,7 +45,7 @@ bool Hint::ProcessControl(const Control control)
         {
             if(numPages > 1)
             {
-                if(control.Is(Key::RegLeft))
+                if(control.Is(Key::RotateLeft))
                 {
                     if(currentPage > 1)
                     {

@@ -8,14 +8,41 @@
 #include "Generator/Tuner.h"
 #include "Generator/Wave.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 
 
 using namespace Primitives;
 
 
+bool Digit::Increase()
+{
+    if (value < '9')
+    {
+        value++;
+        return true;
+    }
+
+    return false;
+}
+
+
+bool Digit::Decrease()
+{
+    if (value > '0')
+    {
+        value--;
+        return true;
+    }
+
+    return false;
+}
+
+
 Indicator::Indicator() : indexHighlight(0)
 {
     digits[MAX_NUM_DIGITS - 1] = '\0';
+
+    digits[5] = '.';
 }
 
 
@@ -29,9 +56,9 @@ void Indicator::Draw(int x, int y)
 
     int pos = 0;
 
-    while (digits[pos].value != '\0')
+    while (digits[pos] != '\0')
     {
-        Char(digits[pos].value).Draw(x, y);
+        Char(digits[pos]).Draw(x, y);
 
         if (pos == indexHighlight)
         {
@@ -39,6 +66,12 @@ void Indicator::Draw(int x, int y)
         }
 
         x += dx;
+
+        if (CommaInPosition(pos))
+        {
+            x -= 7;
+        }
+
         pos++;
     }
 
@@ -59,6 +92,56 @@ void Indicator::HighlightSymbol(int x, int y)
     Char(Ideograph::_7::FillUp).Draw(x, y + 19);
 
     Font::Restore();
+}
+
+
+void Indicator::HighlightLeft()
+{
+    do
+    {
+        Math::CircleDecrease(&indexHighlight, 0, LastDigit());
+    } while (CommaInPosition(indexHighlight));
+}
+
+
+void Indicator::HighlightRight()
+{
+    do
+    {
+        Math::CircleIncrease(&indexHighlight, 0, LastDigit());
+    } while (CommaInPosition(indexHighlight));
+}
+
+
+void Indicator::HighlightIncrease()
+{
+    digits[indexHighlight].Increase();
+}
+
+
+void Indicator::HighlightDecrease()
+{
+    digits[indexHighlight].Decrease();
+}
+
+
+int Indicator::LastDigit()
+{
+    for (int i = 0; i < MAX_NUM_DIGITS; i++)
+    {
+        if (digits[i] == '\0')
+        {
+            return (i - 1);
+        }
+    }
+
+    return (MAX_NUM_DIGITS - 1);
+}
+
+
+bool Indicator::CommaInPosition(int pos)
+{
+    return (digits[pos] == '.');
 }
 
 
@@ -99,6 +182,33 @@ void TunerDisplay::DrawValue(int x, int y)
 }
 
 
+bool TunerDisplay::OnControlKey(const Control control)
+{
+    if (control.key == Key::Left)
+    {
+        indicator.HighlightLeft();
+        return true;
+    }
+    else if (control.key == Key::Right)
+    {
+        indicator.HighlightRight();
+        return true;
+    }
+    else if (control.key == Key::RotateLeft)
+    {
+        indicator.HighlightDecrease();
+        return true;
+    }
+    else if (control.key == Key::RotateRight)
+    {
+        indicator.HighlightIncrease();
+        return true;
+    }
+
+    return false;
+}
+
+
 Tuner::Tuner(ParameterValue *_param) : param(_param), display(param)
 {
 
@@ -111,7 +221,12 @@ void Tuner::Draw()
 }
 
 
-bool Tuner::OnKeyControl(const Control)
+bool Tuner::OnControlKey(const Control control)
 {
+    if (control.IsCursors() || control.IsRotate())
+    {
+        return display.OnControlKey(control);
+    }
+
     return false;
 }

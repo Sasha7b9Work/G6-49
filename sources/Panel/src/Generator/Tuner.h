@@ -7,11 +7,20 @@ class ParameterValue;
 
 class Digit
 {
-    friend class Indicator;
-
 public:
 
     Digit(char v = '0') : value(v) { }
+
+    operator char() { return value; }
+
+    // Увеличить значение в разряде. Если невозможно (равно '9') - возращает false
+    bool Increase();
+
+    // Уменьшить значение в разряде. Если невозможно (равно '0') - возвращает false
+    bool Decrease();
+
+    // Установить новое значение
+    void Set(char v) { value = v; }
 
 private:
 
@@ -28,6 +37,18 @@ public:
 
     void Draw(int x, int y);
 
+    // Сделать активным разряд слева от активного
+    void HighlightLeft();
+
+    // Сделать активным разряд справа от активного
+    void HighlightRight();
+
+    // Увелчить значение в текущем разряде
+    void HighlightIncrease();
+
+    // Уменьшить значение в текщем разряде
+    void HighlightDecrease();
+
 private:
 
     static const int MAX_NUM_DIGITS = 15;
@@ -38,6 +59,12 @@ private:
 
     // Нарисовать значок подсветки
     void HighlightSymbol(int x, int y);
+
+    // Возвращает индекс последнего действительного знакоместа
+    int LastDigit();
+
+    // Возвращает true, если в позиции pos - десятичная точка
+    bool CommaInPosition(int pos);
 };
 
 
@@ -48,6 +75,8 @@ public:
     TunerDisplay(ParameterValue *parameter) : param(parameter) { }
 
     void Draw();
+
+    bool OnControlKey(const Control control);
 
 private:
     ParameterValue *param;
@@ -69,7 +98,7 @@ public:
 
     void Draw();
 
-    bool OnKeyControl(const Control control);
+    bool OnControlKey(const Control control);
 
 private:
 

@@ -170,11 +170,11 @@ static void CreateButtons(Frame *frame)
 {
     static const Key::E keys[5][5] =
     {
-        {Key::F1,   Key::_1,      Key::_2,        Key::_3,       Key::Esc},
-        {Key::F2,   Key::_4,      Key::_5,        Key::_6,       Key::Left},
-        {Key::F3,   Key::_7,      Key::_8,        Key::_9,       Key::Right},
-        {Key::F4,   Key::Dot,     Key::_0,        Key::Minus,    Key::On1},
-        {Key::None, Key::RegLeft, Key::RegButton, Key::RegRight, Key::On2}
+        {Key::F1,   Key::_1,         Key::_2,        Key::_3,          Key::Esc},
+        {Key::F2,   Key::_4,         Key::_5,        Key::_6,          Key::Left},
+        {Key::F3,   Key::_7,         Key::_8,        Key::_9,          Key::Right},
+        {Key::F4,   Key::Dot,        Key::_0,        Key::Minus,       Key::On1},
+        {Key::None, Key::RotateLeft, Key::RegButton, Key::RotateRight, Key::On2}
     };
 
     int x0 = 340;

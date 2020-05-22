@@ -194,12 +194,12 @@ static void DetectRegulator()
     }
     else if (prevStatesIsOne && stateLeft && !stateRight)
     {
-        Keyboard::AppendEvent(Key::RegLeft, Action::Down);
+        Keyboard::AppendEvent(Key::RotateLeft, Action::Down);
         prevStatesIsOne = false;
     }
     else if (prevStatesIsOne && !stateLeft && stateRight)
     {
-        Keyboard::AppendEvent(Key::RegRight, Action::Down);
+        Keyboard::AppendEvent(Key::RotateRight, Action::Down);
         prevStatesIsOne = false;
     }
 }

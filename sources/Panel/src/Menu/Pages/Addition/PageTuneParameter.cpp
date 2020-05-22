@@ -83,7 +83,7 @@ static bool OnControl_TuneParameter(const Control control)
         }
         else
         {
-            return tuned.tuner.OnKeyControl(control);
+            return tuned.tuner.OnControlKey(control);
         }
     }
 

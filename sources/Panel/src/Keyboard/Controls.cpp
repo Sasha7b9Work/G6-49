@@ -31,7 +31,7 @@ bool Control::IsFunctional() const
 
 bool Control::IsRotate() const
 {
-    return (key == Key::RegLeft) || (key == Key::RegRight);
+    return (key == Key::RotateLeft) || (key == Key::RotateRight);
 }
 
 

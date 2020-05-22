@@ -170,7 +170,7 @@ static void DrawPage()
 }
 
 
-static bool FuncOnKeyPage(const Control control) //-V2009
+static bool FuncOnControlKeyPage(const Control control) //-V2009
 {
     if(control.Is(Key::RegButton, Action::Down))
     {
@@ -189,7 +189,7 @@ static bool FuncOnKeyPage(const Control control) //-V2009
             else if(parameter == 3) { min = 0; }            // для смещения -max будем ограничивать нулём снизу - можно сделать только больше
             if(parameter == 0 && signal == 1) { max = 0; }  // для амплитуды произвольного сигнала будем ограничивать нулём сверху - можно сделать только меньше
 
-            if(control.Is(Key::RegLeft))
+            if(control.Is(Key::RotateLeft))
             {
                 setCal.ReduceK(min);
                 SendMessage();
@@ -240,7 +240,7 @@ DEF_PAGE_4_VAR( pCalibration, //-V641
     &cSignal,
     &cRange,
     &cParameterFullVoltage,
-    Page::Calibration, page, Item::FuncActive, OnEnter_Calibration, FuncOnKeyPage, DrawPage
+    Page::Calibration, page, Item::FuncActive, OnEnter_Calibration, FuncOnControlKeyPage, DrawPage
 )
 
 

@@ -27,8 +27,8 @@ struct Key
         Right,
         On1,
         On2,
-        RegLeft,
-        RegRight,
+        RotateLeft,
+        RotateRight,
         RegButton,
         Count
     };

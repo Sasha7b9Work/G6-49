@@ -52,14 +52,14 @@ DEF_BUTTON( bChoose,                                                            
 
 
 
-static bool OnKey(const Control control)
+static bool OnControl(const Control control)
 {
-    if (control.Is(Key::RegLeft))
+    if (control.Is(Key::RotateLeft))
     {
         FDrive::PressDown();
         return true;
     }
-    else if (control.Is(Key::RegRight))
+    else if (control.Is(Key::RotateRight))
     {
         FDrive::PressUp();
         return true;
@@ -80,5 +80,5 @@ DEF_PAGE_4( pageLoad,                                                           
     0,
     0,
     0,
-    Page::Settings_Load, nullptr, Item::FuncActive, Page::FuncEnter, OnKey, FDrive::Draw
+    Page::Settings_Load, nullptr, Item::FuncActive, Page::FuncEnter, OnControl, FDrive::Draw
 )

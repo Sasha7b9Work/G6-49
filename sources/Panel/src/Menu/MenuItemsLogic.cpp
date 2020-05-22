@@ -112,11 +112,11 @@ float Choice::Step()
 
 Item *Choice::Press(const Control control)
 {   
-    if((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RegRight))
+    if((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RotateRight))
     {
         StartChange(-1);
     }
-    else if((control.Is(Key::Left) && control.IsRelease()) || control.Is(Key::RegLeft))
+    else if((control.Is(Key::Left) && control.IsRelease()) || control.Is(Key::RotateLeft))
     {
         StartChange(1);
     }
@@ -172,7 +172,7 @@ void Governor::Press(const Control control)
     }
     else if(control.IsRotate())
     {
-        if(control.Is(Key::RegLeft))
+        if(control.Is(Key::RotateLeft))
         {
             if(*cell > minValue)
             {
@@ -180,7 +180,7 @@ void Governor::Press(const Control control)
                 funcOfChanged();
             }
         }
-        else if(control.Is(Key::RegRight))
+        else if(control.Is(Key::RotateRight))
         {
             if(*cell < maxValue)
             {
@@ -566,7 +566,7 @@ bool Page::Press(const Control control)
     {
         if (control.IsRotate() && Menu::RegIsControlSubPages())
         {
-            ChangeSubPage(control.Is(Key::RegLeft) ? -1 : 1);
+            ChangeSubPage(control.Is(Key::RotateLeft) ? -1 : 1);
             return true;
         }
         else if (control.Is(Key::Esc) && control.IsUp())
