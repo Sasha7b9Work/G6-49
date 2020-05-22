@@ -125,21 +125,25 @@ bool Indicator::OnControlKey(const Control control)
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    digits[pos].Increase();
+    if (!digits[pos].Increase())
+    {
+        int left = FindPositionLeftDigit(pos);
 
-//    if (!digits[pos].Increase())
-//    {
-//        if (!FirstSignedDigitInPosition(indexHighlight))
-//        {
-//            digits[pos - 1].Increase();
-//        }
-//    }
+        if (left >= 0)
+        {
+            digits[pos].Set('0');
+            IncreaseInPosition(left);
+        }
+    }
 }
 
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    digits[pos].Decrease();
+    if (!digits[pos].Decrease())
+    {
+
+    }
 }
 
 
@@ -199,6 +203,22 @@ bool Indicator::FirstSignedDigitInPosition(int pos)
 bool Indicator::DigitInPosition(int pos)
 {
     return (digits[pos] >= '0' && digits[pos] <= '9');
+}
+
+
+int Indicator::FindPositionLeftDigit(int pos)
+{
+    if (FirstSignedDigitInPosition(pos))
+    {
+        return -1;
+    }
+
+    do 
+    {
+        pos--;
+    } while (!DigitInPosition(pos));
+
+    return pos;
 }
 
 

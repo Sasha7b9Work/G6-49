@@ -62,6 +62,9 @@ private:
     // Возвращает true, если в позиции pos - цифровой символ
     bool DigitInPosition(int pos);
 
+    // Возвращает позицию ближайшего слева цифрового знакоместа от pos. -1, если такового не имеется
+    int FindPositionLeftDigit(int pos);
+
     // Сделать активным разряд слева от текущего
     void HighlightToLeft();
 
