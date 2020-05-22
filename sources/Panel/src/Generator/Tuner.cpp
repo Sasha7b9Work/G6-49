@@ -50,13 +50,13 @@ void Indicator::HighlightSymbol(int x, int y)
 {
     Font::Store();
 
-    Font::Set(TypeFont::_8);
+    Font::Set(TypeFont::_7);
 
-    Char(Ideograph::_8::FillDown).Draw(x, y);
-    Char(Ideograph::_8::FillDown + 1).Draw(x + 8, y);
+    x += 2;
 
-    Char(Ideograph::_8::FillUp).Draw(x, y + 20);
-    Char(Ideograph::_8::FillUp).Draw(x + 8, y + 20);
+    Char(Ideograph::_7::FillDown).Draw(x, y - 7);
+
+    Char(Ideograph::_7::FillUp).Draw(x, y + 19);
 
     Font::Restore();
 }

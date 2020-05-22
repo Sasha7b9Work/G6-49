@@ -3,6 +3,15 @@
 
 struct Ideograph
 {
+    struct _7
+    {
+        enum
+        {
+            FillUp   = '\xa3',
+            FillDown = '\xa4'
+        };
+    };
+
     struct _8
     {
         struct Governor
