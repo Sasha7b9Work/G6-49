@@ -200,6 +200,13 @@ void PGenerator::SetParameter(ParameterValue *param)
 
     Chan ch(param->GetForm()->GetWave()->GetChannel());
 
+    ParameterValue::E type = param->Type();
+
+    if (type >= ParameterValue::Count)
+    {
+        type = type;
+    }
+
     Command com(commands[param->Type()]);
 
     Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
