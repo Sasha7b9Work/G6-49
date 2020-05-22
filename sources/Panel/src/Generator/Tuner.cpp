@@ -109,11 +109,11 @@ bool Indicator::OnControlKey(const Control control)
         }
         else if (control.Is(Key::RotateLeft))
         {
-            HighlightDecrease();
+            DecreaseInPosition(indexHighlight);
         }
         else if (control.Is(Key::RotateRight))
         {
-            HighlightIncrease();
+            IncreaseInPosition(indexHighlight);
         }
 
         return true;
@@ -123,15 +123,23 @@ bool Indicator::OnControlKey(const Control control)
 }
 
 
-void Indicator::HighlightIncrease()
+void Indicator::IncreaseInPosition(int pos)
 {
-    digits[indexHighlight].Increase();
+    digits[pos].Increase();
+
+//    if (!digits[pos].Increase())
+//    {
+//        if (!FirstSignedDigitInPosition(indexHighlight))
+//        {
+//            digits[pos - 1].Increase();
+//        }
+//    }
 }
 
 
-void Indicator::HighlightDecrease()
+void Indicator::DecreaseInPosition(int pos)
 {
-    digits[indexHighlight].Decrease();
+    digits[pos].Decrease();
 }
 
 
@@ -171,6 +179,26 @@ int Indicator::LastDigit()
 bool Indicator::CommaInPosition(int pos)
 {
     return (digits[pos] == '.');
+}
+
+
+bool Indicator::FirstSignedDigitInPosition(int pos)
+{
+    for (int i = 0; digits[i] != '\0'; i++)
+    {
+        if (DigitInPosition(i))
+        {
+            return (i == pos);
+        }
+    }
+
+    return false;
+}
+
+
+bool Indicator::DigitInPosition(int pos)
+{
+    return (digits[pos] >= '0' && digits[pos] <= '9');
 }
 
 

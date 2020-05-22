@@ -56,17 +56,23 @@ private:
     // Возвращает true, если в позиции pos - десятичная точка
     bool CommaInPosition(int pos);
 
-    // Увеличить значение активного разряда
-    void HighlightIncrease();
+    // Возвращает true, если в позиции pos - первая значащая цифра
+    bool FirstSignedDigitInPosition(int pos);
 
-    // Уменьшить значение активного разряда
-    void HighlightDecrease();
+    // Возвращает true, если в позиции pos - цифровой символ
+    bool DigitInPosition(int pos);
 
     // Сделать активным разряд слева от текущего
     void HighlightToLeft();
 
     // Сделать аткивным разряд справа от текущего
     void HighlightToRight();
+
+    // Увеличить значение в указанном разряде
+    void IncreaseInPosition(int pos);
+
+    // Уменьшить значение в указанном разряде
+    void DecreaseInPosition(int pos);
 };
 
 
