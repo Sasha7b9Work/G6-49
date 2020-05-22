@@ -4,11 +4,30 @@
 #include <cmath>
 
 
+// Находит знак, если первый элемент buffer - знак. В pos записывается позиция элемента за знаком в этом случае
+static void ProcessSign(const char *const buffer, int *pos, int *sign);
+
+// Находит позицю за последним элементом целой части числа
+static int FindIntegerPart(const char *const buffer, int start);
+
+// Собрать целое число из строки символов
+static uint AssembleInteger(const char *const buffer, int start, int end);
+
+// Собрать число из трех или менее символов. В end возвращается позиция следующего символа
+static uint AssembleTriple(const char *const buffer, int start, int *end);
+
+
 FloatValue::FloatValue(int units, uint mUnits, uint uUnits, uint nUnits)
+{
+    Construct(units, mUnits, uUnits, nUnits);
+}
+
+
+void FloatValue::Construct(int units, uint mUnits, uint uUnits, uint nUnits)
 {
     int sign = 1;
 
-    if(units < 0)
+    if (units < 0)
     {
         sign = -1;
         units = -units;
@@ -16,13 +35,141 @@ FloatValue::FloatValue(int units, uint mUnits, uint uUnits, uint nUnits)
 
     value = static_cast<uint>(units);
     value *= 1000 * 1000 * 1000;
-    
+
     value += nUnits + uUnits * 1000 + mUnits * 1000 * 1000;
 
-    if(sign < 0)
+    if (sign < 0)
     {
         SetSign(sign);
     }
+}
+
+
+void FloatValue::FromString(const char * const buffer, int order)
+{
+    int pos = 0;                                    // Текущая обрабатываемая позиция в buffer
+    int sign = 1;                                   // Отрицательное значение означает отрицательный знак
+
+    ProcessSign(buffer, &pos, &sign);               // Обрабатываем информацию о знаке
+
+    int units = 0;
+    uint mUnits = 0;
+    uint uUnits = 0;
+    uint nUnits = 0;
+
+    int end = FindIntegerPart(buffer, pos);         // Находим окончание целой части
+
+    units = static_cast<int>(AssembleInteger(buffer, pos, end));    // Находим целую часть
+
+    if (buffer[end] == '.')
+    {
+        mUnits = AssembleTriple(buffer, end + 1, &end);
+        uUnits = AssembleTriple(buffer, end, &end);
+        nUnits = AssembleTriple(buffer, end, &end);
+    }
+
+    Construct(units * sign, mUnits, uUnits, nUnits);
+
+    if (order > 0)
+    {
+        uint pow = Math::Pow10(order);
+        Multiplie(pow);
+    }
+    else if (order < 0)
+    {
+        uint pow = Math::Pow10(-order);
+        Divide(pow);
+    }
+}
+
+
+static void ProcessSign(const char *const buffer, int *pos, int *sign)
+{
+    if (buffer[0] == '+')
+    {
+        *sign = 1;
+        *pos++;
+    }
+    else if (buffer[1] == '-')
+    {
+        *sign = -1;
+        *pos++;
+    }
+}
+
+
+static int FindIntegerPart(const char *const buffer, int start)
+{
+    int pos = start;
+
+    while (buffer[pos] >= '0' && buffer[pos] <= '9')
+    {
+        pos++;
+    }
+
+    return pos;
+}
+
+
+static uint AssembleInteger(const char *const buffer, int start, int end)
+{
+    char stack[20];
+
+    int posStack = 0;
+
+    for (int i = start; i < end; i++)
+    {
+        stack[posStack++] = buffer[i];
+    }
+
+    uint result = 0;
+
+    uint pow = 1;
+
+    while (posStack > 0)
+    {
+        char value = stack[(posStack--) - 1];
+
+        result += (value & 0x0F) * pow;
+
+        pow *= 10;
+    }
+
+    return result;
+}
+
+
+static uint AssembleTriple(const char *const buffer, int start, int *end)
+{
+    char stack[3];
+    int posStack = 0;
+
+    uint result = 0;
+
+    int i = start;
+
+    while ((buffer[i] >= '0' && buffer[i] <= '9') &&
+           (posStack < 3))
+    {
+        stack[posStack] = buffer[i];
+        posStack++;
+        i++;
+    }
+
+    *end = i;
+
+    uint pow = 1;
+
+    while (posStack > 0)
+    {
+        char value = stack[(posStack--) - 1];
+
+        result += (value & 0x0F) * pow;
+
+        pow *= 10;
+    }
+
+    return result;
 }
 
 

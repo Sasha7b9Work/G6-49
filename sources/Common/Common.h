@@ -24,11 +24,17 @@ struct FloatValue
 
     explicit FloatValue(float v);
 
-    float ToFloat() const;
+    void Construct(int units, uint mUnits, uint uUnits = 0, uint nUnits = 0);
 
     void FromFloat(float v);
 
     void FromUINT64(uint64 v) { value = v; }
+
+    // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
+    // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
+    void FromString(const char * const buffer, int order);
+
+    float ToFloat() const;
 
     uint64 ToUINT64() const { return value; }
 
