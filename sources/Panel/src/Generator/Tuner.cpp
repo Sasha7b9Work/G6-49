@@ -131,8 +131,11 @@ void Indicator::IncreaseInPosition(int pos)
 
         if (left >= 0)
         {
-            digits[pos].Set('0');
-            IncreaseInPosition(left);
+            if (CanBeIncreased(left))
+            {
+                digits[pos].Set('0');
+                IncreaseInPosition(left);
+            }
         }
     }
 }
@@ -142,7 +145,16 @@ void Indicator::DecreaseInPosition(int pos)
 {
     if (!digits[pos].Decrease())
     {
+        int left = FindPositionLeftDigit(pos);
 
+        if (left >= 0)
+        {
+            if (CanBeDecreased(left))
+            {
+                digits[pos].Set('9');
+                DecreaseInPosition(left);
+            }
+        }
     }
 }
 
@@ -190,19 +202,13 @@ bool Indicator::FirstSignedDigitInPosition(int pos)
 {
     for (int i = 0; digits[i] != '\0'; i++)
     {
-        if (DigitInPosition(i))
+        if (digits[i].IsDigit())
         {
             return (i == pos);
         }
     }
 
     return false;
-}
-
-
-bool Indicator::DigitInPosition(int pos)
-{
-    return (digits[pos] >= '0' && digits[pos] <= '9');
 }
 
 
@@ -216,9 +222,41 @@ int Indicator::FindPositionLeftDigit(int pos)
     do 
     {
         pos--;
-    } while (!DigitInPosition(pos));
+    } while (!digits[pos].IsDigit());
 
     return pos;
+}
+
+
+bool Indicator::CanBeDecreased(int pos)
+{
+    if (digits[pos].IsDigit())
+    {
+        if (digits[pos] > '0')
+        {
+            return true;
+        }
+    }
+
+    int left = FindPositionLeftDigit(pos);
+
+    if (left < 0)
+    {
+        return false;
+    }
+
+    return CanBeDecreased(left);
+}
+
+
+bool Indicator::CanBeIncreased(int pos)
+{
+    if (FirstSignedDigitInPosition(pos) && digits[pos] == '9')
+    {
+        return false;
+    }
+
+    return true;
 }
 
 

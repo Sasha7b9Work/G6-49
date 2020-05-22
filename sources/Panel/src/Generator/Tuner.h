@@ -22,6 +22,11 @@ public:
     // Установить новое значение
     void Set(char v) { value = v; }
 
+    bool IsDigit()
+    {
+        return (value >= '0' && value <= '9');
+    }
+
 private:
 
     char value;
@@ -59,9 +64,6 @@ private:
     // Возвращает true, если в позиции pos - первая значащая цифра
     bool FirstSignedDigitInPosition(int pos);
 
-    // Возвращает true, если в позиции pos - цифровой символ
-    bool DigitInPosition(int pos);
-
     // Возвращает позицию ближайшего слева цифрового знакоместа от pos. -1, если такового не имеется
     int FindPositionLeftDigit(int pos);
 
@@ -76,6 +78,12 @@ private:
 
     // Уменьшить значение в указанном разряде
     void DecreaseInPosition(int pos);
+
+    // Возвращает true, если значение знакоместа pos может быть уменьшено
+    bool CanBeDecreased(int pos);
+
+    // Возвращает true, если значение знакоместа pos может быть увеличено
+    bool CanBeIncreased(int pos);
 };
 
 
