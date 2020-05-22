@@ -219,7 +219,7 @@ public:
 class ParameterOffset : public ParameterVoltage
 {
 public:
-    ParameterOffset(const FloatValue &min = FloatValue(-5, 0, 0), const FloatValue &max = FloatValue(5, 0, 0), const FloatValue &value = FloatValue(0, 0, 0)) :
+    ParameterOffset(const FloatValue &min = FloatValue(-5, 0, 0), const FloatValue &max = FloatValue(5, 0, 0), const FloatValue &value = FloatValue("-1.23", -1)) :
         ParameterVoltage(ParameterValue::Offset, "Смещение", "Offset", min, max, value) { }
 };
 

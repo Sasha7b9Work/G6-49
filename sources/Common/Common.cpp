@@ -100,12 +100,12 @@ static void ProcessSign(const char *const buffer, int *pos, int *sign)
     if (buffer[0] == '+')
     {
         *sign = 1;
-        *pos++;
+        *pos = *pos + 1;
     }
-    else if (buffer[1] == '-')
+    else if (buffer[0] == '-')
     {
         *sign = -1;
-        *pos++;
+        *pos = *pos + 1;
     }
 }
 
@@ -168,6 +168,11 @@ static uint AssembleTriple(const char *const buffer, int start, int *end)
         i++;
     }
 
+    while (posStack < 3)                    // Добиваем до 3 символов
+    {
+        stack[posStack++] = '0';
+    }
+
     *end = i;
 
     uint pow = 1;
@@ -219,13 +224,25 @@ uint64 FloatValue::Abs() const
 
 void FloatValue::Divide(uint div)
 {
+    int sign = Sign();
+
+    SetSign(1);
+
     value /= div;
+
+    SetSign(sign);
 }
 
 
 void FloatValue::Multiplie(uint mul)
 {
+    int sign = Sign();
+
+    SetSign(1);
+
     value *= mul;
+
+    SetSign(sign);
 }
 
 
