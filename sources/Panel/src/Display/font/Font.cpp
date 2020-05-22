@@ -3,8 +3,9 @@
 #include "Display/Text.h"
 #include "Display/Font/AdvancedFont.h"
 #include "Display/Font/Font.h"
-#include "Utils/StringUtils.h"
 #include "Settings/Settings.h"
+#include "Utils/Stack.h"
+#include "Utils/StringUtils.h"
 
 
 #include "font7.inc"
@@ -17,7 +18,9 @@ static const Font *font = &font7;
 
 
 TypeFont::E Font::type = TypeFont::_5;
-TypeFont::E Font::savedFont = TypeFont::Count;
+
+
+static Stack<TypeFont::E> stackFonts(10);       // Здесь хранятся сменяемые шрифты для пследующего восстановления
 
 
 int Font::GetSize()
@@ -149,13 +152,13 @@ bool Font::BitIsExist(int s, int row, int bit)
 
 void Font::Store()
 {
-    savedFont = type;
+    stackFonts.Push(type);
 }
 
 
 void Font::Restore()
 {
-    Set(savedFont);
+    Set(stackFonts.Pop());
 }
 
 

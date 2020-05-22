@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "Display/Text.h"
 #include "Display/WaveGraphics.h"
 #include "Generator/MathSupport.h"
@@ -20,7 +21,7 @@ Indicator::Indicator() : indexHighlight(0)
 
 void Indicator::Draw(int x, int y)
 {
-    static const int dx = 10;
+    static const int dx = 12;
 
     Font::Store();
 
@@ -31,9 +32,31 @@ void Indicator::Draw(int x, int y)
     while (digits[pos].value != '\0')
     {
         Char(digits[pos].value).Draw(x, y);
+
+        if (pos == indexHighlight)
+        {
+            HighlightSymbol(x, y);
+        }
+
         x += dx;
         pos++;
     }
+
+    Font::Restore();
+}
+
+
+void Indicator::HighlightSymbol(int x, int y)
+{
+    Font::Store();
+
+    Font::Set(TypeFont::_8);
+
+    Char(Ideograph::_8::FillDown).Draw(x, y);
+    Char(Ideograph::_8::FillDown + 1).Draw(x + 8, y);
+
+    Char(Ideograph::_8::FillUp).Draw(x, y + 20);
+    Char(Ideograph::_8::FillUp).Draw(x + 8, y + 20);
 
     Font::Restore();
 }
@@ -72,7 +95,7 @@ void TunerDisplay::DrawValue(int x, int y)
 //
 //    pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
 
-    indicator.Draw(x, y);
+    indicator.Draw(x + 20, y);
 }
 
 

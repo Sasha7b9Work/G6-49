@@ -2469,6 +2469,16 @@
               <FilePath>.\src\Utils\Queue.h</FilePath>
             </File>
             <File>
+              <FileName>Stack.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Stack.h</FilePath>
+            </File>
+            <File>
+              <FileName>Stack.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Stack.cpp</FilePath>
+            </File>
+            <File>
               <FileName>String.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\String.cpp</FilePath>

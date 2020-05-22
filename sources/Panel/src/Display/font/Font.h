@@ -48,7 +48,5 @@ struct Font
 
 private:
 
-    static TypeFont::E savedFont;
-
     static TypeFont::E type;
 };

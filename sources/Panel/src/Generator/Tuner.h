@@ -34,7 +34,10 @@ private:
 
     Digit digits[MAX_NUM_DIGITS];           // Здесь находятся все символы
 
-    int indexHighlight;                       
+    int indexHighlight;                     // Индекс подсвеченного знакоместа
+
+    // Нарисовать значок подсветки
+    void HighlightSymbol(int x, int y);
 };
 
 
