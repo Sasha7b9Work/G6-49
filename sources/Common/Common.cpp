@@ -19,11 +19,23 @@ static uint AssembleTriple(const char *const buffer, int start, int *end);
 
 FloatValue::FloatValue(int units, uint mUnits, uint uUnits, uint nUnits)
 {
-    Construct(units, mUnits, uUnits, nUnits);
+    FromUnits(units, mUnits, uUnits, nUnits);
 }
 
 
-void FloatValue::Construct(int units, uint mUnits, uint uUnits, uint nUnits)
+FloatValue::FloatValue(const char *const buffer, int order)
+{
+    FromString(buffer, order);
+}
+
+
+FloatValue::FloatValue(float v)
+{
+    FromFloat(v);
+}
+
+
+void FloatValue::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits)
 {
     int sign = 1;
 
@@ -68,7 +80,7 @@ void FloatValue::FromString(const char * const buffer, int order)
         nUnits = AssembleTriple(buffer, end, &end);
     }
 
-    Construct(units * sign, mUnits, uUnits, nUnits);
+    FromUnits(units * sign, mUnits, uUnits, nUnits);
 
     if (order > 0)
     {
@@ -170,12 +182,6 @@ static uint AssembleTriple(const char *const buffer, int start, int *end)
     }
 
     return result;
-}
-
-
-FloatValue::FloatValue(float v)
-{
-    FromFloat(v);
 }
 
 

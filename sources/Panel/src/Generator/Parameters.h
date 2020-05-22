@@ -211,7 +211,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const FloatValue &min = FloatValue(0, 0, 0), const FloatValue &max = FloatValue(10, 0, 0), const FloatValue &value = FloatValue(9, 123, 0)) :
+    ParameterAmplitude(const FloatValue &min = FloatValue(0, 0, 0), const FloatValue &max = FloatValue(10, 0, 0), const FloatValue &value = FloatValue("9.123")) :
         ParameterVoltage(ParameterValue::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 

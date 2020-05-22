@@ -26,9 +26,9 @@ struct FloatValue
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
-    //explicit FloatValue(const char *const buffer, int order);
+    explicit FloatValue(const char *const buffer, int order = 0);
 
-    void Construct(int units, uint mUnits, uint uUnits = 0, uint nUnits = 0);
+    void FromUnits(int units, uint mUnits, uint uUnits = 0, uint nUnits = 0);
 
     void FromFloat(float v);
 
