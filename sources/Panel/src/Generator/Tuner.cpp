@@ -12,21 +12,30 @@
 using namespace Primitives;
 
 
-Tuner::Tuner(ParameterValue *_param) : param(_param), display(param)
+Indicator::Indicator() : indexHighlight(0)
 {
-
+    digits[MAX_NUM_DIGITS - 1] = '\0';
 }
 
 
-void Tuner::Draw()
+void Indicator::Draw(int x, int y)
 {
-    display.Draw();
-}
+    static const int dx = 10;
 
+    Font::Store();
 
-bool Tuner::OnKeyControl(const Control)
-{
-    return false;
+    Font::Set(TypeFont::_GOSTB20);
+
+    int pos = 0;
+
+    while (digits[pos].value != '\0')
+    {
+        Char(digits[pos].value).Draw(x, y);
+        x += dx;
+        pos++;
+    }
+
+    Font::Restore();
 }
 
 
@@ -59,15 +68,27 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
 void TunerDisplay::DrawValue(int x, int y)
 {
-    Font::Store();
+//    Order::E order = Order::One;
+//
+//    pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
 
-    Font::Set(TypeFont::_GOSTB20);
+    indicator.Draw(x, y);
+}
 
-    Order::E order = Order::One;
 
-    pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
+Tuner::Tuner(ParameterValue *_param) : param(_param), display(param)
+{
 
-    Text(str).Draw(x, y);
+}
 
-    Font::Restore();
+
+void Tuner::Draw()
+{
+    display.Draw();
+}
+
+
+bool Tuner::OnKeyControl(const Control)
+{
+    return false;
 }

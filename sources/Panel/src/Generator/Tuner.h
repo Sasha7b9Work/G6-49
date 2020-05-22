@@ -2,29 +2,43 @@
 #include "Keyboard/Controls.h"
 
 
-/*
-    Используется для настройки параметра
-*/
-
-
 class ParameterValue;
-
-
-class Title
-{
-public:
-};
 
 
 class Digit
 {
+    friend class Indicator;
+
 public:
-    Digit(char v = ' ') : value(v) { }
+
+    Digit(char v = '0') : value(v) { }
+
 private:
+
     char value;
 };
 
 
+// Отображает знакоместа, изображения в знакоместах, и стрелки для подсвечивания активного знакоместа
+class Indicator
+{
+public:
+
+    Indicator();
+
+    void Draw(int x, int y);
+
+private:
+
+    static const int MAX_NUM_DIGITS = 15;
+
+    Digit digits[MAX_NUM_DIGITS];           // Здесь находятся все символы
+
+    int indexHighlight;                       
+};
+
+
+// Визуальное отображение Tuner
 class TunerDisplay
 {
 public:
@@ -35,12 +49,7 @@ public:
 private:
     ParameterValue *param;
 
-    Title title;
-
-    static const int MAX_NUM_DIGITS = 15;
-
-    // Здесь находятся все символы
-    Digit digits[MAX_NUM_DIGITS];
+    Indicator indicator;
 
     void DrawTitle(int x, int y, int width);
 
@@ -48,6 +57,7 @@ private:
 };
 
 
+// Используется для визуальной настройки параметра. Является принадлежностью каждог ParameterValue
 class Tuner
 {
 public:
