@@ -97,6 +97,8 @@ class TunerDisplay
 public:
     TunerDisplay(ParameterValue *parameter);
 
+    void Init();
+
     void Draw();
 
     bool OnControlKey(const Control control);
@@ -109,9 +111,6 @@ private:
     void DrawTitle(int x, int y, int width);
 
     void DrawValue(int x, int y);
-
-    // «аполн€ет разр€ды действительными значени€ми из param
-    void FillIndicator();
 };
 
 
@@ -121,6 +120,8 @@ class Tuner
 public:
 
     Tuner(ParameterValue *param);
+
+    void Init();
 
     void Draw();
 

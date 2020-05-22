@@ -298,7 +298,7 @@ void TunerDisplay::DrawValue(int x, int y)
 //
 //    pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
 
-    FillIndicator();
+//    FillIndicator();
 
     indicator.Draw(x + 20, y);
 }
@@ -310,7 +310,7 @@ bool TunerDisplay::OnControlKey(const Control control)
 }
 
 
-void TunerDisplay::FillIndicator()
+void TunerDisplay::Init()
 {
     MathParameterValue::SetParameterValue(param);
 
@@ -325,11 +325,35 @@ void TunerDisplay::FillIndicator()
     indicator.digits[before].Set(Digit::COMMA);
 
     indicator.digits[before + after + 1] = '\0';
+
+    const FloatValue &value = param->value;
+
+    int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
+
+    for (int i = 0; i < before; i++)
+    {
+        indicator.digits[pos].Set(MathFloatValue::GetChar(value, i));
+        pos--;
+    }
+
+    pos = before + 1;                                   // “еперь в эту позицию будем записывать рразр€ды после зап€той
+
+    for (int i = 0; i < after; i++)
+    {
+        indicator.digits[pos].Set(MathFloatValue::GetChar(value, -i - 1));
+        pos++;
+    }
 }
 
 
 Tuner::Tuner(ParameterValue *_param) : param(_param), display(param)
 {
+}
+
+
+void Tuner::Init()
+{
+    display.Init();
 }
 
 

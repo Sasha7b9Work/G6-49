@@ -100,8 +100,7 @@ public:
         Count
     };
 
-    ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
-        Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value) { }
+    ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value);
 
     virtual pString GetStringValue() const;
 
@@ -212,7 +211,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const FloatValue &min = FloatValue(0, 0), const FloatValue &max = FloatValue(10, 0), const FloatValue &value = FloatValue(10, 0)) :
+    ParameterAmplitude(const FloatValue &min = FloatValue(0, 0), const FloatValue &max = FloatValue(10, 0), const FloatValue &value = FloatValue(9, 123)) :
         ParameterVoltage(ParameterValue::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 

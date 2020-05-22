@@ -253,6 +253,13 @@ int ParameterChoice::NumChoices() const
 }
 
 
+ParameterValue::ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
+    Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
+{
+    tuner.Init();
+}
+
+
 pString ParameterValue::GetStringValue() const
 {
     Order order = { Order::Count };
