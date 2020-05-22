@@ -57,21 +57,3 @@ private:
     // —обственно параметр, по которому будут производитс€ вычислеин€
     static ParameterValue *param;
 };
-
-
-struct LogicFloatValue
-{
-    static void SetParameter(Parameter *param);
-
-    // ƒелает попытку изменить знак и возвращает true, если это возможно
-    static bool ChangedSign();
-
-    // »зменить значение числа в позиции pos, где pos - номер дес€тичного разр€да, начина€ от 10e0
-    static void ChangeDigit(int pos, int delta);
-
-private:
-
-    static FloatValue *value;
-
-    static ParameterValue *parameter;
-};

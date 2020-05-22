@@ -294,12 +294,6 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
 void TunerDisplay::DrawValue(int x, int y)
 {
-//    Order::E order = Order::One;
-//
-//    pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
-
-//    FillIndicator();
-
     indicator.Draw(x + 20, y);
 }
 
