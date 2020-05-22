@@ -5,9 +5,9 @@
 
 
 bool SettingsGenerator::waveIsSine[Chan::Count] = { true, true };
-FloatValue SettingsGenerator::amplitude[Chan::Count] = { FloatValue(10, 0), FloatValue(10, 0) };
-FloatValue SettingsGenerator::frequency[Chan::Count] = { FloatValue(1000, 0), FloatValue(1000, 0) };
-FloatValue SettingsGenerator::offset[Chan::Count] = { FloatValue(0, 0), FloatValue(0, 0) };
+FloatValue SettingsGenerator::amplitude[Chan::Count] = { FloatValue(10, 0, 0), FloatValue(10, 0, 0) };
+FloatValue SettingsGenerator::frequency[Chan::Count] = { FloatValue(1000, 0, 0), FloatValue(1000, 0, 0) };
+FloatValue SettingsGenerator::offset[Chan::Count] = { FloatValue(0, 0, 0), FloatValue(0, 0, 0) };
 Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 bool Amplifier::isBlocked = false;
 bool Amplifier::isEnabled[Chan::Count] = { false, false };

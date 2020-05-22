@@ -74,7 +74,7 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
     if(param != 0)              // Для калибровки смещения нужно установить нулевой уровень на выходе, но не аттенюатор не трогать
     {
         Amplifier::Block();
-        DGenerator::SetAmplitude(ch, FloatValue(0, 0));
+        DGenerator::SetAmplitude(ch, FloatValue(0, 0, 0));
         Amplifier::Unblock();
     }
 
