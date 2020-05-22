@@ -95,21 +95,31 @@ void Indicator::HighlightSymbol(int x, int y)
 }
 
 
-void Indicator::HighlightLeft()
+bool Indicator::OnControlKey(const Control control)
 {
-    do
+    if (control.IsRotate() || control.IsCursors())
     {
-        Math::CircleDecrease(&indexHighlight, 0, LastDigit());
-    } while (CommaInPosition(indexHighlight));
-}
+        if (control.Is(Key::Left))
+        {
+            HighlightToLeft();
+        }
+        else if (control.Is(Key::Right))
+        {
+            HighlightToRight();
+        }
+        else if (control.Is(Key::RotateLeft))
+        {
+            HighlightDecrease();
+        }
+        else if (control.Is(Key::RotateRight))
+        {
+            HighlightIncrease();
+        }
 
+        return true;
+    }
 
-void Indicator::HighlightRight()
-{
-    do
-    {
-        Math::CircleIncrease(&indexHighlight, 0, LastDigit());
-    } while (CommaInPosition(indexHighlight));
+    return false;
 }
 
 
@@ -122,6 +132,25 @@ void Indicator::HighlightIncrease()
 void Indicator::HighlightDecrease()
 {
     digits[indexHighlight].Decrease();
+}
+
+
+void Indicator::HighlightToLeft()
+{
+    do
+    {
+        Math::CircleDecrease(&indexHighlight, 0, LastDigit());
+    } while (CommaInPosition(indexHighlight));
+
+}
+
+
+void Indicator::HighlightToRight()
+{
+    do
+    {
+        Math::CircleIncrease(&indexHighlight, 0, LastDigit());
+    } while (CommaInPosition(indexHighlight));
 }
 
 
@@ -184,28 +213,7 @@ void TunerDisplay::DrawValue(int x, int y)
 
 bool TunerDisplay::OnControlKey(const Control control)
 {
-    if (control.key == Key::Left)
-    {
-        indicator.HighlightLeft();
-        return true;
-    }
-    else if (control.key == Key::Right)
-    {
-        indicator.HighlightRight();
-        return true;
-    }
-    else if (control.key == Key::RotateLeft)
-    {
-        indicator.HighlightDecrease();
-        return true;
-    }
-    else if (control.key == Key::RotateRight)
-    {
-        indicator.HighlightIncrease();
-        return true;
-    }
-
-    return false;
+    return indicator.OnControlKey(control);
 }
 
 

@@ -37,17 +37,7 @@ public:
 
     void Draw(int x, int y);
 
-    // Сделать активным разряд слева от активного
-    void HighlightLeft();
-
-    // Сделать активным разряд справа от активного
-    void HighlightRight();
-
-    // Увелчить значение в текущем разряде
-    void HighlightIncrease();
-
-    // Уменьшить значение в текщем разряде
-    void HighlightDecrease();
+    bool OnControlKey(const Control control);
 
 private:
 
@@ -65,6 +55,18 @@ private:
 
     // Возвращает true, если в позиции pos - десятичная точка
     bool CommaInPosition(int pos);
+
+    // Увеличить значение активного разряда
+    void HighlightIncrease();
+
+    // Уменьшить значение активного разряда
+    void HighlightDecrease();
+
+    // Сделать активным разряд слева от текущего
+    void HighlightToLeft();
+
+    // Сделать аткивным разряд справа от текущего
+    void HighlightToRight();
 };
 
 
