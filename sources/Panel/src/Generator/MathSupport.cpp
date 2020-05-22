@@ -11,23 +11,23 @@
 // Здесь хранится количество значащих цифр перед (индекс 0) и после (индекс 1) запятой. Знак не учитывается
 static const int numberDigits[ParameterValue::Count][2] =
 {
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10},
-    {10, 10}
+    {10, 10},   // Frequency,
+    {10, 10},   // Period,
+    {2,   3},   // Amplitude,
+    {10, 10},   // Offset,
+    {10, 10},   // Duration,
+    {10, 10},   // DutyRatio,
+    {10, 10},   // Phase,
+    {10, 10},   // Delay,
+    {10, 10},   // DurationRise,
+    {10, 10},   // DurationFall,
+    {10, 10},   // DurationStady,
+    {10, 10},   // DutyFactor,
+    {10, 10},   // ManipulationDuration,
+    {10, 10},   // ManipulationPeriod,
+    {10, 10},   // PacketPeriod,
+    {10, 10},   // PacketNumber,
+    {10, 10}    // Exit,
 };
 
 ParameterValue *MathParameterValue::param = nullptr;

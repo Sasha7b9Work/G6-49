@@ -9,6 +9,8 @@ class Digit
 {
 public:
 
+    static const char COMMA = '.';
+
     Digit(char v = '0') : value(v) { }
 
     operator char() { return value; }
@@ -36,6 +38,8 @@ private:
 // ќтображает знакоместа, изображени€ в знакоместах, и стрелки дл€ подсвечивани€ активного знакоместа
 class Indicator
 {
+    friend class TunerDisplay;
+
 public:
 
     Indicator();
@@ -46,7 +50,7 @@ public:
 
 private:
 
-    static const int MAX_NUM_DIGITS = 15;
+    static const int MAX_NUM_DIGITS = 25;
 
     Digit digits[MAX_NUM_DIGITS];           // «десь наход€тс€ все символы
 
@@ -91,7 +95,7 @@ private:
 class TunerDisplay
 {
 public:
-    TunerDisplay(ParameterValue *parameter) : param(parameter) { }
+    TunerDisplay(ParameterValue *parameter);
 
     void Draw();
 
@@ -105,6 +109,9 @@ private:
     void DrawTitle(int x, int y, int width);
 
     void DrawValue(int x, int y);
+
+    // «аполн€ет разр€ды действительными значени€ми из param
+    void FillIndicator();
 };
 
 

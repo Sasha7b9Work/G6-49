@@ -42,7 +42,7 @@ Indicator::Indicator() : indexHighlight(0)
 {
     digits[MAX_NUM_DIGITS - 1] = '\0';
 
-    digits[5] = '.';
+    digits[5] = Digit::COMMA;
 }
 
 
@@ -194,7 +194,7 @@ int Indicator::LastDigit()
 
 bool Indicator::CommaInPosition(int pos)
 {
-    return (digits[pos] == '.');
+    return (digits[pos] == Digit::COMMA);
 }
 
 
@@ -260,6 +260,11 @@ bool Indicator::CanBeIncreased(int pos)
 }
 
 
+TunerDisplay::TunerDisplay(ParameterValue *parameter) : param(parameter)
+{
+}
+
+
 void TunerDisplay::Draw()
 {
     Chan ch = param->GetForm()->GetWave()->GetChannel();
@@ -293,6 +298,8 @@ void TunerDisplay::DrawValue(int x, int y)
 //
 //    pString str = MathFloatValue::GetStringValue(param->value, param->IsSigned(), 10, &order);
 
+    FillIndicator();
+
     indicator.Draw(x + 20, y);
 }
 
@@ -303,9 +310,26 @@ bool TunerDisplay::OnControlKey(const Control control)
 }
 
 
+void TunerDisplay::FillIndicator()
+{
+    MathParameterValue::SetParameterValue(param);
+
+    int before = MathParameterValue::GetNumberDigitsBeforeComma();
+    int after = MathParameterValue::GetNumberDigitsAfterComma();
+
+    for (int i = 0; i < before + after + 1; i++)
+    {
+        indicator.digits[i].Set('0');
+    }
+
+    indicator.digits[before].Set(Digit::COMMA);
+
+    indicator.digits[before + after + 1] = '\0';
+}
+
+
 Tuner::Tuner(ParameterValue *_param) : param(_param), display(param)
 {
-
 }
 
 
