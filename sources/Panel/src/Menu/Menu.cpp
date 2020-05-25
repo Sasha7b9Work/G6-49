@@ -72,11 +72,11 @@ void Menu::ProcessKey(const Control control)
     if(ProcessOutputs(control))                     // Обработка включения/отключения каналов
     {
     }
-    else if (GetOpenedItem())                   // Если раскрыт какой-либо элемент меню - передаём управление уему
+    else if (GetOpenedItem())                       // Если раскрыт какой-либо элемент меню - передаём управление уему
     {
         GetOpenedItem()->Press(control);
     }
-    else if(Menu::GetCurrentItem())             // Если какой-либо элемент меню является активным - передаём управление ему
+    else if(Menu::GetCurrentItem())                 // Если какой-либо элемент меню является активным - передаём управление ему
     {
         Menu::GetCurrentItem()->Press(control);
     }

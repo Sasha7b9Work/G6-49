@@ -69,7 +69,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 
 static bool OnControl_TuneParameter(const Control control)
 {
-    if(control.IsUp())
+    if(control.IsDown())
     {
         if(control.Is(Key::Esc))
         {
