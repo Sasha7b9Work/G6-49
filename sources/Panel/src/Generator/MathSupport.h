@@ -39,6 +39,14 @@ struct MathFloatValue
 
     // Возвращает позицию запятой относительно позиции первого значащего символа
     static int PositionComma(int posFirstDigit, Order::E *order);
+
+    // Возвращает:
+    // Order::Mega  - FloatValue::Integer() >= 1e6
+    // Order::Kilo  - FloatValue::Integer() >= 1e3
+    // Order::One   - FloatValue::Integer() >= 0
+    // Order::Milli - FloatValue::Integer() >= 1e-3
+    // Order::Micro - FloatValue::Integer() >= 1e-6
+    static Order::E GetOrder(const FloatValue value);
 };
 
 

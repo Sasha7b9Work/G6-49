@@ -184,6 +184,19 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
 }
 
 
+Order::E MathFloatValue::GetOrder(const FloatValue value)
+{
+    int integer = value.Integer();
+
+    if (integer >= 1000 * 1000)
+    {
+        return Order::Mega;
+    }
+
+    return Order::One;
+}
+
+
 int MathParameterValue::GetNumberDigitsBeforeComma()
 {
     ParameterValueType::E type = param->GetType();
