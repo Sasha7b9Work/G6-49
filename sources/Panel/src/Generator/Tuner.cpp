@@ -50,8 +50,6 @@ int Indicator::Draw(int x, int y)
 {
     static const int dx = 12;
 
-    Font::StoreAndSet(TypeFont::_GOSTB20);
-
     int pos = 0;
 
     while (digits[pos] != '\0')
@@ -72,8 +70,6 @@ int Indicator::Draw(int x, int y)
 
         pos++;
     }
-
-    Font::Restore();
 
     return x;
 }
@@ -306,26 +302,27 @@ void TunerDisplay::Draw()
 
     Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).DrawFilled(x, y, Color::BLUE_10, Color::WHITE);
 
+    Font::StoreAndSet(TypeFont::_GOSTB20);
+
     DrawTitle(x, y, WaveGraphics::Width());
 
     x = DrawValue(x, y + 50);
 
     DrawUnits(x, y + 50);
-}
-
-
-void TunerDisplay::DrawTitle(int x, int y, int width)
-{
-    Font::StoreAndSet(TypeFont::_GOSTB20);
-
-    Text(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 
     Font::Restore();
 }
 
 
-void TunerDisplay::DrawUnits(int, int)
+void TunerDisplay::DrawTitle(int x, int y, int width)
 {
+    Text(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
+}
+
+
+void TunerDisplay::DrawUnits(int x, int y)
+{
+    Text(tuner->GetParameter()->GetMainUnits(LANGUAGE)).Draw(x + 7, y);
 }
 
 
