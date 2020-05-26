@@ -9,15 +9,15 @@
 
 static ParameterValue stored = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
 
-static ParameterValue tuned = ParameterAmplitude();     // Ќастраиваемый параметр //-V1054
+static ParameterValue *tuned = nullptr;     // Ќастраиваемый параметр //-V1054
 
 
-void PageTuneParameter::SetParameter(const ParameterValue *parameter)
+void PageTuneParameter::SetParameter(ParameterValue *parameter)
 {
     if(parameter->IsValue())
     {
         stored = *parameter;
-        tuned = *parameter;
+        tuned = parameter;
     }
 }
 
@@ -83,7 +83,7 @@ static bool OnControl_TuneParameter(const Control control) //-V801
         }
         else
         {
-            return tuned.tuner.OnControlKey(control);
+            return tuned->tuner.OnControlKey(control);
         }
     }
 
@@ -92,7 +92,7 @@ static bool OnControl_TuneParameter(const Control control) //-V801
 
 static void OnDraw_TuneParameter()
 {
-    tuned.tuner.Draw();
+    tuned->tuner.Draw();
 }
 
 

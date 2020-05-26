@@ -50,6 +50,9 @@ public:
 
     bool OnControlKey(const Control control);
 
+    // Возвращает строку символов
+    char *GetStringDigits() const;
+
 private:
 
     static const int MAX_NUM_DIGITS = 25;
@@ -92,12 +95,6 @@ private:
 
     // Возвращает true, если значение знакоместа pos может быть увеличено
     bool CanBeIncreased(int pos);
-
-    // Возвращает строку символов
-    char *GetStringValue() const;
-
-    // Возвращает значение
-    FloatValue GetValue() const;
 };
 
 
@@ -118,6 +115,8 @@ public:
     bool OnControlKey(const Control control);
 
     Tuner *GetTuner() { return tuner; }
+
+    FloatValue GetValue() const;
 
 private:
     Tuner *tuner;

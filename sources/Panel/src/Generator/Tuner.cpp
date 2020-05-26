@@ -139,7 +139,7 @@ void Indicator::IncreaseInPosition(int pos)
         }
     }
 
-    FloatValue value = GetValue();
+    FloatValue value = display->GetValue();
 
     LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
 
@@ -163,7 +163,7 @@ void Indicator::DecreaseInPosition(int pos)
         }
     }
 
-    FloatValue value = GetValue();
+    FloatValue value = display->GetValue();
 
     LIMITATION_BELOW(value, display->GetTuner()->GetParameter()->GetMin());
 
@@ -171,9 +171,9 @@ void Indicator::DecreaseInPosition(int pos)
 }
 
 
-FloatValue Indicator::GetValue() const
+FloatValue TunerDisplay::GetValue() const
 {
-    return FloatValue(GetStringValue());
+    return FloatValue(indicator.GetStringDigits());
 }
 
 
@@ -278,7 +278,7 @@ bool Indicator::CanBeIncreased(int pos)
 }
 
 
-char *Indicator::GetStringValue() const
+char *Indicator::GetStringDigits() const
 {
     static char result[MAX_NUM_DIGITS];
 

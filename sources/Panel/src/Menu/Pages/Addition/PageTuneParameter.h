@@ -9,5 +9,5 @@ struct PageTuneParameter
     static Page *self;
 
     // ”станавливает параметр дл€ редактировани€
-    static void SetParameter(const ParameterValue *);
+    static void SetParameter(ParameterValue *);
 };
