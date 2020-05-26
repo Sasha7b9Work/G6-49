@@ -45,6 +45,8 @@ public:
     // Возвращает строку символов
     char *GetStringDigits() const;
 
+    void InitHighlight();
+
     static const int MAX_NUM_DIGITS = 25;
 
 private:

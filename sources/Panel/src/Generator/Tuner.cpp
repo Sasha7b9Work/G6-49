@@ -61,6 +61,11 @@ Color Indicator::CalculateColor(int pos, bool *alreadyWereNumbers)
 
     if (digits[pos].IsNumber())
     {
+        if (PositionComma() == (pos + 1))
+        {
+            *alreadyWereNumbers = true;
+        }
+
         if (!*alreadyWereNumbers)
         {
             if (digits[pos] != '0')
@@ -353,6 +358,12 @@ FloatValue Indicator::StepPosition(int pos)
 }
 
 
+void Indicator::InitHighlight()
+{
+    indexHighlight = PositionComma() - 1;
+}
+
+
 TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this)
 {
 }
@@ -483,6 +494,8 @@ Tuner::Tuner(ParameterValue *_param) : param(_param), display(this)
 void Tuner::Init()
 {
     display.Init();
+
+    display.indicator.InitHighlight();
 }
 
 
