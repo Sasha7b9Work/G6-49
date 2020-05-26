@@ -17,12 +17,6 @@ public:
 
     operator char() const { return value; }
 
-    // Увеличить значение в разряде. Если невозможно (равно '9') - возращает false
-    bool Increase();
-
-    // Уменьшить значение в разряде. Если невозможно (равно '0') - возвращает false
-    bool Decrease();
-
     // Установить новое значение
     void Set(char v) { value = v; }
 
@@ -34,10 +28,6 @@ public:
 private:
 
     char value;
-
-    bool IncreaseNumber();
-    bool DecreaseNumber();
-    bool ChangeSign();
 };
 
 
@@ -76,6 +66,9 @@ private:
     // Возвращает true, если в позиции pos - десятичная точка
     bool CommaInPosition(int pos);
 
+    // Возвращает позицию разряда с точкой
+    int PositionComma();
+
     // Возвращает true, если в позиции pos - первая значащая цифра
     bool FirstSignedDigitInPosition(int pos);
 
@@ -91,12 +84,8 @@ private:
     // Увеличить значение в указанном разряде
     void IncreaseInPosition(int pos);
 
-    void IncreaseCurrentDigit();
-
     // Уменьшить значение в указанном разряде
     void DecreaseInPosition(int pos);
-
-    void DecreaseCurrentDigit();
 
     // Возвращает true, если значение знакоместа pos может быть уменьшено
     bool CanBeDecreased(int pos);
@@ -106,6 +95,9 @@ private:
 
     // Возвращает true, если числовое значение со знакомЫ
     bool IsSigned();
+
+    // Возвращает "цену разрдяа" в позиции pos
+    FloatValue PriveDigit(int pos);
 };
 
 

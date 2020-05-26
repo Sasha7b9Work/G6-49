@@ -14,69 +14,6 @@
 using namespace Primitives;
 
 
-bool Digit::Increase()
-{
-    if (IsNumber())
-    {
-        return IncreaseNumber();
-    }
-
-    return ChangeSign();
-}
-
-
-bool Digit::Decrease()
-{
-    if (IsNumber())
-    {
-        return DecreaseNumber();
-    }
-
-    return ChangeSign();
-}
-
-
-bool Digit::IncreaseNumber()
-{
-    if (value < '9')
-    {
-        value++;
-        return true;
-    }
-
-    return false;
-}
-
-
-bool Digit::DecreaseNumber()
-{
-    if (value > '0')
-    {
-        value--;
-        return true;
-    }
-
-    return false;
-}
-
-
-bool Digit::ChangeSign()
-{
-    if (value == '-')
-    {
-        value = '+';
-        return true;
-    }
-    else if (value == '+')
-    {
-        value = '-';
-        return true;
-    }
-
-    return false;
-}
-
-
 Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_display)
 {
     digits[MAX_NUM_DIGITS - 1] = '\0';
@@ -142,55 +79,17 @@ bool Indicator::OnControlKey(const Control control) //-V801
         }
         else if (control.Is(Key::RotateLeft))
         {
-            DecreaseCurrentDigit();
+            DecreaseInPosition(indexHighlight);
         }
         else if (control.Is(Key::RotateRight))
         {
-            IncreaseCurrentDigit();
+            IncreaseInPosition(indexHighlight);
         }
 
         return true;
     }
 
     return false;
-}
-
-
-void Indicator::IncreaseCurrentDigit()
-{
-    if ((digits[0] == '-') && (indexHighlight != 0))
-    {
-        DecreaseInPosition(indexHighlight);
-    }
-    else
-    {
-        IncreaseInPosition(indexHighlight);
-    }
-}
-
-
-void Indicator::DecreaseCurrentDigit()
-{
-    if (IsSigned())
-    {
-        if (display->GetTuner()->GetParameter()->GetValue().Abs() == 0)
-        {
-            IncreaseInPosition(indexHighlight);
-            digits[0] = '-';
-        }
-        else if ((digits[0] == '-') && (indexHighlight != 0))
-        {
-            IncreaseInPosition(indexHighlight);
-        }
-        else
-        {
-            DecreaseInPosition(indexHighlight);
-        }
-    }
-    else
-    {
-        DecreaseInPosition(indexHighlight);
-    }
 }
 
 
@@ -202,19 +101,7 @@ bool Indicator::IsSigned()
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    if (!digits[pos].Increase())
-    {
-        int left = FindPositionLeftDigit(pos);
 
-        if (left >= 0)
-        {
-            if (CanBeIncreased(left))
-            {
-                digits[pos].Set('0');
-                IncreaseInPosition(left);
-            }
-        }
-    }
 
     FloatValue value = display->GetValue();
 
@@ -229,19 +116,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    if (!digits[pos].Decrease())
-    {
-        int left = FindPositionLeftDigit(pos);
 
-        if (left >= 0)
-        {
-            if (CanBeDecreased(left))
-            {
-                digits[pos].Set('9');
-                DecreaseInPosition(left);
-            }
-        }
-    }
 
     FloatValue value = display->GetValue();
 
@@ -293,6 +168,20 @@ int Indicator::LastDigit()
 bool Indicator::CommaInPosition(int pos)
 {
     return (digits[pos] == Digit::COMMA);
+}
+
+
+int Indicator::PositionComma()
+{
+    for (int i = 0; i < MAX_NUM_DIGITS; i++)
+    {
+        if (digits[i] == Digit::COMMA)
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 
@@ -375,6 +264,12 @@ char *Indicator::GetStringDigits() const
     } while (result[i] != '\0');
 
     return result;
+}
+
+
+FloatValue Indicator::PriveDigit(int pos)
+{
+    
 }
 
 

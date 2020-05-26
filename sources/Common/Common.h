@@ -32,6 +32,8 @@ struct FloatValue
 
     void FromUINT64(uint64 v) { value = v; }
 
+    static FloatValue FromNanoUnits(int units, uint64 nUnits);
+
     void FromString(const char * const buffer, int order);
 
     float ToFloat() const;
