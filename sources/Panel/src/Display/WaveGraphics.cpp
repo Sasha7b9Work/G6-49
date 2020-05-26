@@ -25,8 +25,7 @@ void WaveGraphics::Draw(Chan::E ch)
     {
         Rectangle(Width(), Height()).Draw(x0, y0, Color::FILL);
 
-        Font::Store();
-        Font::Set(TypeFont::_GOSTB20);
+        Font::StoreAndSet(TypeFont::_GOSTB20);
         Text((ch == Chan::A) ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
         Font::Restore();
 

@@ -84,6 +84,13 @@ void Font::Set(TypeFont::E typeFont)
 }
 
 
+void Font::StoreAndSet(TypeFont::E typeFont)
+{
+    Store();
+    Set(typeFont);
+}
+
+
 int8 Font::Width(char symbol)
 {
     return Width(static_cast<uint8>(symbol));

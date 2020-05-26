@@ -50,9 +50,7 @@ int Indicator::Draw(int x, int y)
 {
     static const int dx = 12;
 
-    Font::Store();
-
-    Font::Set(TypeFont::_GOSTB20);
+    Font::StoreAndSet(TypeFont::_GOSTB20);
 
     int pos = 0;
 
@@ -83,9 +81,7 @@ int Indicator::Draw(int x, int y)
 
 void Indicator::HighlightSymbol(int x, int y)
 {
-    Font::Store();
-
-    Font::Set(TypeFont::_7);
+    Font::StoreAndSet(TypeFont::_7);
 
     x += 2;
 
@@ -320,9 +316,7 @@ void TunerDisplay::Draw()
 
 void TunerDisplay::DrawTitle(int x, int y, int width)
 {
-    Font::Store();
-
-    Font::Set(TypeFont::_GOSTB20);
+    Font::StoreAndSet(TypeFont::_GOSTB20);
 
     Text(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 
@@ -332,7 +326,6 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
 void TunerDisplay::DrawUnits(int, int)
 {
-
 }
 
 

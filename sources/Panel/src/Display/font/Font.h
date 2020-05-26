@@ -29,6 +29,7 @@ struct Font
     static int GetLengthText(const char *text);
     static int GetHeightSymbol(char symbol);
     static int GetLengthSymbol(char symbol);
+    static void StoreAndSet(TypeFont::E typeFont);
     static void Set(TypeFont::E typeFont);
     static void ToggleCharacterSize();
     static int8 Width(char symbol);
@@ -38,8 +39,6 @@ struct Font
     static bool BitIsExist(int s, int row, int bit);
     static bool IsAdvanced();
 
-    // Сохранить текущий шрифт
-    static void Store();
     // Восстановить шрифт, который был сохранён функцией Save()
     static void Restore();
     
@@ -49,4 +48,7 @@ struct Font
 private:
 
     static TypeFont::E type;
+
+    // Сохранить текущий шрифт
+    static void Store();
 };
