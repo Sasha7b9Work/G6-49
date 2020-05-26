@@ -20,10 +20,7 @@ public:
     // Установить новое значение
     void Set(char v) { value = v; }
 
-    bool IsNumber()
-    {
-        return (value >= '0' && value <= '9');
-    }
+    bool IsNumber()  { return (value >= '0' && value <= '9'); }
 
 private:
 
@@ -98,6 +95,9 @@ private:
 
     // Возвращает "цену разрдяа" в позиции pos
     FloatValue PricePosition(int pos);
+
+    // Изменяет знак числа. Возвращает true, если pos == 0
+    bool ChangeSign(FloatValue *value, int pos);
 };
 
 

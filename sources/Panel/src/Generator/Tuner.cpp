@@ -101,13 +101,16 @@ bool Indicator::IsSigned()
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    FloatValue price = PricePosition(pos);
-
     FloatValue value = display->GetValue();
 
-    value.Add(price);
+    if (!ChangeSign(&value, pos))
+    {
+        FloatValue price = PricePosition(pos);
 
-    LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
+        value.Add(price);
+
+        LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
+    }
 
     display->Init(value);
 }
@@ -115,15 +118,34 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    FloatValue price = PricePosition(pos);
-
     FloatValue value = display->GetValue();
 
-    value.Sub(price);
+    if (!ChangeSign(&value, pos))
+    {
+        FloatValue price = PricePosition(pos);
 
-    LIMITATION_BELOW(value, display->GetTuner()->GetParameter()->GetMin());
+        value.Sub(price);
+
+        LIMITATION_BELOW(value, display->GetTuner()->GetParameter()->GetMin());
+    }
 
     display->Init(value);
+}
+
+
+bool Indicator::ChangeSign(FloatValue *value, int pos)
+{
+    if (IsSigned() && (pos == 0))
+    {
+        if (value->Abs() != 0)
+        {
+            value->SetSign(-value->Sign());
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 
