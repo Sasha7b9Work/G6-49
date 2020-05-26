@@ -267,7 +267,7 @@ TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner)
 
 void TunerDisplay::Draw()
 {
-    Chan ch = tuner->param->GetForm()->GetWave()->GetChannel();
+    Chan ch = tuner->Parameter()->GetForm()->GetWave()->GetChannel();
 
     int x = WaveGraphics::X();
     int y = WaveGraphics::Y(ch.GetInverse());
@@ -286,7 +286,7 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
     Font::Set(TypeFont::_GOSTB20);
 
-    Text(tuner->param->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
+    Text(tuner->Parameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 
     Font::Restore();
 }
@@ -306,7 +306,7 @@ bool TunerDisplay::OnControlKey(const Control control) //-V801
 
 void TunerDisplay::Init()
 {
-    MathParameterValue::SetParameterValue(tuner->param);
+    MathParameterValue::SetParameterValue(tuner->Parameter());
 
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     int after = MathParameterValue::GetNumberDigitsAfterComma();
@@ -320,7 +320,7 @@ void TunerDisplay::Init()
 
     indicator.digits[before + after + 1] = '\0';
 
-    const FloatValue &value = tuner->param->value;
+    const FloatValue &value = tuner->Parameter()->value;
 
     int pos = before - 1;                               // Разряд в этой позиции будем заполнять значениями целых
 

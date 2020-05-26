@@ -118,7 +118,6 @@ private:
 // »спользуетс€ дл€ визуальной настройки параметра. явл€етс€ принадлежностью каждог ParameterValue
 class Tuner
 {
-    friend class TunerDisplay;
 
 public:
 
@@ -129,6 +128,8 @@ public:
     void Draw();
 
     bool OnControlKey(const Control control);
+
+    ParameterValue *Parameter() { return param; }
 
 private:
 
