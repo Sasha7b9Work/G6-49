@@ -53,9 +53,9 @@ public:
     // Возвращает строку символов
     char *GetStringDigits() const;
 
-private:
-
     static const int MAX_NUM_DIGITS = 25;
+
+private:
 
     Digit digits[MAX_NUM_DIGITS];           // Здесь находятся все символы
 
@@ -129,6 +129,12 @@ private:
     int DrawValue(int x, int y);
 
     void DrawUnits(int x, int y);
+
+    // Заполнить разряды целой части параметра
+    void FillDigitsIntegerPart();
+
+    // Заполнить разряды дробной части параметра
+    void FillDigitsFractPart();
 };
 
 

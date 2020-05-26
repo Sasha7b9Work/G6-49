@@ -342,38 +342,60 @@ void TunerDisplay::Init()
 {
     MathParameterValue::SetParameterValue(tuner->GetParameter());
 
-    int before = MathParameterValue::GetNumberDigitsBeforeComma();
-    int after = MathParameterValue::GetNumberDigitsAfterComma();
-
-    for (int i = 0; i < before + after + 1; i++)
+    for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
     {
-        indicator.digits[i].Set('0');
+        indicator.digits[i].Set('\0');
     }
+
+    int before = MathParameterValue::GetNumberDigitsBeforeComma();
 
     indicator.digits[before].Set(Digit::COMMA);
 
-    indicator.digits[before + after + 1] = '\0';
+    FillDigitsIntegerPart();
 
-    const FloatValue &value = tuner->GetParameter()->value;
+    FillDigitsFractPart();
+}
+
+
+void TunerDisplay::FillDigitsIntegerPart()
+{
+    int before = MathParameterValue::GetNumberDigitsBeforeComma();
+    ParameterValue *param = tuner->GetParameter();
+    FloatValue value = param->GetValue();
 
     int pos = before - 1;                               // Разряд в этой позиции будем заполнять значениями целых
+
+    if (param->IsSigned())
+    {
+        indicator.digits[0].Set((value < FloatValue("0.0")) ? '-' : '+');
+    }
 
     for (int i = 0; i < before; i++)
     {
         indicator.digits[pos].Set(MathFloatValue::GetChar(value, i));
         pos--;
-    }
 
-    pos = before + 1;                                   // Теперь в эту позицию будем записывать рразряды после запятой
+        if (param->IsSigned() && (pos == 0))
+        {
+            break;
+        }
+    }
+}
+
+
+void TunerDisplay::FillDigitsFractPart()
+{
+    int before = MathParameterValue::GetNumberDigitsBeforeComma();
+    int after = MathParameterValue::GetNumberDigitsAfterComma();
+    FloatValue value = tuner->GetParameter()->GetValue();
+
+    int pos = before + 1;                                   // Теперь в эту позицию будем записывать рразряды после запятой
 
     for (int i = 0; i < after; i++)
     {
         indicator.digits[pos].Set(MathFloatValue::GetChar(value, -i - 1));
         pos++;
     }
-
-    Indicator ind = indicator;
-    ind = ind;
 }
 
 
@@ -397,9 +419,6 @@ void Tuner::Init()
 
 void Tuner::Draw()
 {
-    Indicator ind = display.indicator;
-    ind = ind;
-
     display.Draw();
 }
 

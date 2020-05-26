@@ -31,10 +31,10 @@ struct MathFloatValue
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     static int GetPositionFirstDigit(const FloatValue &value);
 
-    // Возвращает цифру в позиции position
+    // Возвращает цифру в позиции position.
     static int GetDigit(const FloatValue &value, int position);
 
-    // Возвращает символ в позиции position
+    // Возвращает символ в позиции position. Знак не учитывается
     static char GetChar(const FloatValue &value, int postition);
 
     // Возвращает позицию запятой относительно позиции первого значащего символа

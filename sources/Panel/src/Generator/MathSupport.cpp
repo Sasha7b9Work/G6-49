@@ -14,7 +14,7 @@ static const int numberDigits[ParameterValueType::Count][2] =
     {10, 9},   // Frequency,
     {10, 9},   // Period,
     {2,  3},   // Amplitude,
-    {1,  3},   // Offset,
+    {2,  3},   // Offset,
     {10, 9},   // Duration,
     {10, 9},   // DutyRatio,
     {10, 9},   // Phase,
