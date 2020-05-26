@@ -200,8 +200,6 @@ void PGenerator::SetParameter(ParameterValue *param)
 
     Chan ch(param->GetForm()->GetWave()->GetChannel());
 
-
-
     Command com(commands[param->Type()]);
 
     Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
@@ -230,6 +228,6 @@ void PGenerator::SetParameter(Parameter *parameter)
     }
     else if(parameter->IsChoice())
     {
-        SetParameter(static_cast<ParameterValue *>(parameter));
+        SetParameter(static_cast<ParameterChoice *>(parameter));
     }
 }
