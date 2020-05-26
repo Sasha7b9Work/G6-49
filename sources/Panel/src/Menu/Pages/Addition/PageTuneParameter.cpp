@@ -83,7 +83,7 @@ static bool OnControl_TuneParameter(const Control control) //-V801
         }
         else
         {
-            return tuned->tuner.OnControlKey(control);
+            return tuned->GetTuner()->OnControlKey(control);
         }
     }
 
@@ -92,7 +92,7 @@ static bool OnControl_TuneParameter(const Control control) //-V801
 
 static void OnDraw_TuneParameter()
 {
-    tuned->tuner.Draw();
+    tuned->GetTuner()->Draw();
 }
 
 

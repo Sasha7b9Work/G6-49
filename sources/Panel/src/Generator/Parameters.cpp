@@ -104,7 +104,7 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValueType::E p)
         {
             ParameterValue *parameter = static_cast<ParameterValue *>(param);
 
-            if(parameter->Type() == p)
+            if(parameter->GetType() == p)
             {
                 return parameter;
             }
@@ -115,7 +115,7 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValueType::E p)
 }
 
 
-pString ParameterValue::MainUnits(uint lang) const
+pString ParameterValue::GetMainUnits(uint lang) const
 {
     static const pString units[ParameterValueType::Count][2] =
     {
@@ -138,7 +138,7 @@ pString ParameterValue::MainUnits(uint lang) const
         {"",   ""}      // Exit
     };
 
-    return units[Type()][lang];
+    return units[GetType()][lang];
 }
 
 
@@ -289,7 +289,7 @@ pString ParameterValue::GetStringValue() const
     std::strcpy(buffer, MathFloatValue::GetStringValue(value, IsSigned(), 5, &order.value, (type == ParameterValueType::Offset || type == ParameterValueType::Amplitude) ? 1 : 255));
     std::strcat(buffer, " ");
     std::strcat(buffer, order.Suffix(LANGUAGE));
-    std::strcat(buffer, MainUnits(LANGUAGE));
+    std::strcat(buffer, GetMainUnits(LANGUAGE));
 
     return buffer;
 }

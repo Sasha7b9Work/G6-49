@@ -186,11 +186,11 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
 
 int MathParameterValue::GetNumberDigitsBeforeComma()
 {
-    return numberDigits[param->Type()][0];
+    return numberDigits[param->GetType()][0];
 }
 
 
 int MathParameterValue::GetNumberDigitsAfterComma()
 {
-    return numberDigits[param->Type()][1];
+    return numberDigits[param->GetType()][1];
 }

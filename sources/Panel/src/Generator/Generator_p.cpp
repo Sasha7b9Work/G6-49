@@ -200,7 +200,7 @@ void PGenerator::SetParameter(ParameterValue *param)
 
     Chan ch(param->GetForm()->GetWave()->GetChannel());
 
-    Command com(commands[param->Type()]);
+    Command com(commands[param->GetType()]);
 
     Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
 }

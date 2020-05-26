@@ -106,12 +106,6 @@ public:
 
     ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value);
 
-    virtual pString GetStringValue() const;
-
-    ParameterValueType::E Type() const { return type; }
-
-    FloatValue GetValue() const { return value; };
-
     // ”становить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(float val);
     bool SetAndLoadValue(FloatValue val);
@@ -121,19 +115,31 @@ public:
 
     void OnPressButtonTune();
 
-    Tuner tuner;        // »спользуетс€ дл€ настройки 
+    // ¬озвращает строковое представление значени€ параметра
+    virtual pString GetStringValue() const;
 
+    // ¬озвращает основные единицы измерени€ (без учЄта пор€дка)
+    pString GetMainUnits(uint lang) const;
+
+    // ¬озвращает максимальное значение, которое может иметь параметр
     FloatValue GetMax() { return max; }
-
+    
+    // ¬озвращает минимальное значение, которое может иметь параметр
     FloatValue GetMin() { return min; }
 
+    Tuner *GetTuner()   { return &tuner; };
+
+    // ¬озвращает текущее значение параметра
+    FloatValue GetValue() const { return value; };
+
+    ParameterValueType::E GetType() const { return type; }
+
 private:
+    Tuner tuner;        // »спользуетс€ дл€ настройки 
     ParameterValueType::E type;
     FloatValue min;
     FloatValue max;
     FloatValue value;
-
-    pString MainUnits(uint lang) const;
 
     // ¬озвращает true, если параметр может принимать значение v
     bool InRange(float v) const;

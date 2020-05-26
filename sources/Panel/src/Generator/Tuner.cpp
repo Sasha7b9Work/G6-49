@@ -46,7 +46,7 @@ Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_displ
 }
 
 
-void Indicator::Draw(int x, int y)
+int Indicator::Draw(int x, int y)
 {
     static const int dx = 12;
 
@@ -76,6 +76,8 @@ void Indicator::Draw(int x, int y)
     }
 
     Font::Restore();
+
+    return x;
 }
 
 
@@ -310,7 +312,9 @@ void TunerDisplay::Draw()
 
     DrawTitle(x, y, WaveGraphics::Width());
 
-    DrawValue(x, y + 50);
+    x = DrawValue(x, y + 50);
+
+    DrawUnits(x, y + 50);
 }
 
 
@@ -326,9 +330,15 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 }
 
 
-void TunerDisplay::DrawValue(int x, int y)
+void TunerDisplay::DrawUnits(int, int)
 {
-    indicator.Draw(x + 20, y);
+
+}
+
+
+int TunerDisplay::DrawValue(int x, int y)
+{
+    return indicator.Draw(x + 20, y);
 }
 
 

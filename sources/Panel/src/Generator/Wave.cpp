@@ -245,7 +245,7 @@ ParameterValue *Form::FindParameter(ParameterValueType::E p)
         {
             ParameterValue *parameter = static_cast<ParameterValue *>(param);
 
-            if (parameter->Type() == p)
+            if (parameter->GetType() == p)
             {
                 return parameter;
             }

@@ -46,7 +46,7 @@ public:
 
     Indicator(TunerDisplay *display);
 
-    void Draw(int x, int y);
+    int Draw(int x, int y);
 
     bool OnControlKey(const Control control);
 
@@ -125,7 +125,10 @@ private:
 
     void DrawTitle(int x, int y, int width);
 
-    void DrawValue(int x, int y);
+    // Возвращает x зз выведенными символами
+    int DrawValue(int x, int y);
+
+    void DrawUnits(int x, int y);
 };
 
 
