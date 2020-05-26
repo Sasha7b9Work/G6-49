@@ -28,11 +28,13 @@ int Indicator::Draw(int x, int y)
 
     int pos = 0;
 
-    bool alreadyWereNumbers = false;        // Если true, то уже были цифры и надо выводить полным цветом
+    bool fullFill = false;        // Если true, то цифры и надо выводить полным цветом
 
     while (digits[pos] != '\0')
     {
-        Color color = CalculateColor(pos, &alreadyWereNumbers);
+        Color color = CalculateColor(pos, &fullFill);
+
+        x += AdditionShiftForDigit(pos);
 
         Char(digits[pos]).Draw(x, y, color);
 
@@ -55,7 +57,7 @@ int Indicator::Draw(int x, int y)
 }
 
 
-Color Indicator::CalculateColor(int pos, bool *alreadyWereNumbers)
+Color Indicator::CalculateColor(int pos, bool *fullFill)
 {
     Color color = Color::WHITE;
 
@@ -63,18 +65,18 @@ Color Indicator::CalculateColor(int pos, bool *alreadyWereNumbers)
     {
         if (PositionComma() == (pos + 1))
         {
-            *alreadyWereNumbers = true;
+            *fullFill = true;
         }
 
-        if (!*alreadyWereNumbers)
+        if (!*fullFill)
         {
             if (digits[pos] != '0')
             {
-                *alreadyWereNumbers = true;
+                *fullFill = true;
             }
         }
 
-        if (!*alreadyWereNumbers)
+        if (!*fullFill)
         {
             color = Color::GRAY_50;
         }
@@ -84,13 +86,35 @@ Color Indicator::CalculateColor(int pos, bool *alreadyWereNumbers)
 }
 
 
+int Indicator::AdditionShiftForDigit(int pos)
+{
+    static const int d = 5;
+
+    int posComma = PositionComma();
+
+    for (int i = 1; i < 5; i++)
+    {
+        if (pos == (posComma - i * 3))
+        {
+            return d;
+        }
+        if (pos == (posComma + i * 3 + 1))
+        {
+            return d;
+        }
+    }
+
+    return 0;
+}
+
+
 void Indicator::HighlightSymbol(int x, int y)
 {
     Font::StoreAndSet(TypeFont::_7);
 
     x += 2;
 
-    Char(Ideograph::_7::FillDown).Draw(x, y - 7);
+    Char(Ideograph::_7::FillDown).Draw(x, y - 7, Color::WHITE);
 
     Char(Ideograph::_7::FillUp).Draw(x, y + 19);
 

@@ -102,7 +102,10 @@ private:
     // »змен€ет знак у параметра со знаком. ¬озвращает true, если pos == 0
     bool ChangeSign(FloatValue *value, int pos);
 
-    Color CalculateColor(int pos, bool *alreadyWereNumbers);
+    Color CalculateColor(int pos, bool *fullFill);
+
+    // ¬озвращает true, если нужно дополнительное смещение между разр€дами
+    int AdditionShiftForDigit(int pos);
 };
 
 
