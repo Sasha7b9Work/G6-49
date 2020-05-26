@@ -246,6 +246,12 @@ void FloatValue::SetSign(int sign)
 }
 
 
+void FloatValue::ChangeSign()
+{
+    SetSign(-Sign());
+}
+
+
 void FloatValue::Add(float v)
 {
     FromFloat(ToFloat() + v);
@@ -320,6 +326,14 @@ void FloatValue::Add(FloatValue add)
             SetSign(-1);
         }
     }
+}
+
+
+void FloatValue::Sub(FloatValue val)
+{
+    val.ChangeSign();
+
+    Add(val);
 }
 
 

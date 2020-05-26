@@ -32,8 +32,6 @@ struct FloatValue
 
     void FromUINT64(uint64 v) { value = v; }
 
-    static FloatValue FromNanoUnits(int units, uint64 nUnits);
-
     void FromString(const char * const buffer, int order);
 
     float ToFloat() const;
@@ -48,12 +46,15 @@ struct FloatValue
 
     void Multiplie(uint mul);
     
-    // Увеличить на заданное значение
     void Add(float v);
 
     void Add(FloatValue value);
 
+    void Sub(FloatValue value);
+
     void SetSign(int sign);
+
+    void ChangeSign();
     
     // Возвращает целую часть числа
     int Integer() const;

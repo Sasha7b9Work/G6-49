@@ -97,7 +97,7 @@ private:
     bool IsSigned();
 
     // ¬озвращает "цену разрд€а" в позиции pos
-    FloatValue PriveDigit(int pos);
+    FloatValue PricePosition(int pos);
 };
 
 

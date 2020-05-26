@@ -101,12 +101,11 @@ bool Indicator::IsSigned()
 
 void Indicator::IncreaseInPosition(int pos)
 {
-
+    FloatValue price = PricePosition(pos);
 
     FloatValue value = display->GetValue();
 
-    float fValue = value.ToFloat();
-    fValue = fValue;
+    value.Add(price);
 
     LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
 
@@ -116,9 +115,11 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-
+    FloatValue price = PricePosition(pos);
 
     FloatValue value = display->GetValue();
+
+    value.Sub(price);
 
     LIMITATION_BELOW(value, display->GetTuner()->GetParameter()->GetMin());
 
@@ -267,9 +268,30 @@ char *Indicator::GetStringDigits() const
 }
 
 
-FloatValue Indicator::PriveDigit(int pos)
+FloatValue Indicator::PricePosition(int pos)
 {
-    
+    int posAboutComma = pos - PositionComma();          // ѕозици€ разр€да относительно точки
+
+    FloatValue price("1.0");
+
+    if (posAboutComma > 0)                              // ≈сли разр€д находитс€ справа от точки ( в дробной части )
+    {
+        while (posAboutComma > 0)
+        {
+            price.Divide(10);
+            posAboutComma--;
+        }
+    }
+    else
+    {
+        while (posAboutComma < -1)
+        {
+            price.Multiplie(10);
+            posAboutComma++;
+        }
+    }
+
+    return price;
 }
 
 
