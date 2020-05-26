@@ -121,6 +121,10 @@ public:
 
     Tuner tuner;        // Используется для настройки 
 
+    FloatValue GetMax() { return max; }
+
+    FloatValue GetMin() { return min; }
+
 private:
     ParameterValueType::E type;
     FloatValue min;

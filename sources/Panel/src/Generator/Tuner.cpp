@@ -38,7 +38,7 @@ bool Digit::Decrease()
 }
 
 
-Indicator::Indicator(Tuner *_tuner) : indexHighlight(0), tuner(_tuner)
+Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_display)
 {
     digits[MAX_NUM_DIGITS - 1] = '\0';
 
@@ -138,6 +138,13 @@ void Indicator::IncreaseInPosition(int pos)
             }
         }
     }
+
+    FloatValue max = display->GetTuner()->GetParameter()->GetMax();
+
+    if (display->GetValue() > max)
+    {
+        display->Init(max);
+    }
 }
 
 
@@ -155,6 +162,13 @@ void Indicator::DecreaseInPosition(int pos)
                 DecreaseInPosition(left);
             }
         }
+    }
+
+    FloatValue min = display->GetTuner()->GetParameter()->GetMin();
+
+    if (display->GetValue() < min)
+    {
+        display->Init(min);
     }
 }
 
@@ -260,14 +274,14 @@ bool Indicator::CanBeIncreased(int pos)
 }
 
 
-TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(_tuner)
+TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this)
 {
 }
 
 
 void TunerDisplay::Draw()
 {
-    Chan ch = tuner->Parameter()->GetForm()->GetWave()->GetChannel();
+    Chan ch = tuner->GetParameter()->GetForm()->GetWave()->GetChannel();
 
     int x = WaveGraphics::X();
     int y = WaveGraphics::Y(ch.GetInverse());
@@ -286,7 +300,7 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
     Font::Set(TypeFont::_GOSTB20);
 
-    Text(tuner->Parameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
+    Text(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 
     Font::Restore();
 }
@@ -306,7 +320,7 @@ bool TunerDisplay::OnControlKey(const Control control) //-V801
 
 void TunerDisplay::Init()
 {
-    MathParameterValue::SetParameterValue(tuner->Parameter());
+    MathParameterValue::SetParameterValue(tuner->GetParameter());
 
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     int after = MathParameterValue::GetNumberDigitsAfterComma();
@@ -320,7 +334,7 @@ void TunerDisplay::Init()
 
     indicator.Digits()[before + after + 1] = '\0';
 
-    const FloatValue &value = tuner->Parameter()->value;
+    const FloatValue &value = tuner->GetParameter()->value;
 
     int pos = before - 1;                               // Разряд в этой позиции будем заполнять значениями целых
 
@@ -337,6 +351,18 @@ void TunerDisplay::Init()
         indicator.Digits()[pos].Set(MathFloatValue::GetChar(value, -i - 1));
         pos++;
     }
+}
+
+
+void TunerDisplay::Init(FloatValue)
+{
+    Init();
+}
+
+
+FloatValue TunerDisplay::GetValue()
+{
+    return FloatValue(0.0F);
 }
 
 

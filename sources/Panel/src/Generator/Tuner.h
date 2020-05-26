@@ -4,6 +4,7 @@
 
 class ParameterValue;
 class Tuner;
+class TunerDisplay;
 
 
 class Digit
@@ -41,7 +42,7 @@ class Indicator
 {
 public:
 
-    Indicator(Tuner *tuner);
+    Indicator(TunerDisplay *display);
 
     void Draw(int x, int y);
 
@@ -57,7 +58,7 @@ private:
 
     int indexHighlight;                     // Индекс подсвеченного знакоместа
 
-    Tuner *tuner;
+    TunerDisplay *display;
 
     // Нарисовать значок подсветки
     void HighlightSymbol(int x, int y);
@@ -102,9 +103,16 @@ public:
 
     void Init();
 
+    void Init(FloatValue value);
+
     void Draw();
 
     bool OnControlKey(const Control control);
+
+    // Возвращает значение, закодированное в окне ввода
+    FloatValue GetValue();
+
+    Tuner *GetTuner() { return tuner; }
 
 private:
     Tuner *tuner;
@@ -131,7 +139,7 @@ public:
 
     bool OnControlKey(const Control control);
 
-    ParameterValue *Parameter() { return param; }
+    ParameterValue *GetParameter() { return param; }
 
 private:
 
