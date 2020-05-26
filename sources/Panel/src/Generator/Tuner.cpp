@@ -276,19 +276,27 @@ FloatValue Indicator::PricePosition(int pos)
 
     if (posAboutComma > 0)                              // Если разряд находится справа от точки ( в дробной части )
     {
+        uint divider = 1;
+
         while (posAboutComma > 0)
         {
-            price.Div(10);
+            divider *= 10;
             posAboutComma--;
         }
+
+        price.Div(divider);
     }
     else
     {
+        uint multiplier = 1;
+
         while (posAboutComma < -1)
         {
-            price.Mul(10);
+            multiplier *= 10;
             posAboutComma++;
         }
+
+        price.Mul(multiplier);
     }
 
     return price;

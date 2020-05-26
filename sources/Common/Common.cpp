@@ -311,7 +311,7 @@ void FloatValue::Add(FloatValue add)
 
 void FloatValue::Sub(FloatValue val)
 {
-    val.SetSign(val.Sign());
+    val.SetSign(-val.Sign());
 
     Add(val);
 }
