@@ -186,11 +186,51 @@ int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
 
 int MathParameterValue::GetNumberDigitsBeforeComma()
 {
-    return numberDigits[param->GetType()][0];
+    ParameterValueType::E type = param->GetType();
+
+    if (type == ParameterValueType::Frequency)
+    {
+        int integerPart = param->GetValue().Integer();
+
+        int def = numberDigits[type][0];
+
+        if (integerPart < 1000)
+        {
+            return def;
+        }
+        else if (integerPart < 1000 * 1000)
+        {
+            return def - 3;
+        }
+
+        return def - 6;
+    }
+
+    return numberDigits[type][0];
 }
 
 
 int MathParameterValue::GetNumberDigitsAfterComma()
 {
+    ParameterValueType::E type = param->GetType();
+
+    if (type == ParameterValueType::Frequency)
+    {
+        int integerPart = param->GetValue().Integer();
+
+        int def = numberDigits[type][1];
+
+        if (integerPart < 1000)
+        {
+            return def;
+        }
+        else if (integerPart < 1000 * 1000)
+        {
+            return def + 3;
+        }
+
+        return def + 6;
+    }
+
     return numberDigits[param->GetType()][1];
 }
