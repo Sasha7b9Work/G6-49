@@ -246,7 +246,7 @@ bool SCPI::Handler::Processing(SimpleMessage *)
 }
 
 
-pCHAR SCPI::ProcessParameterValue(pCHAR buffer, ParameterValue::E value)
+pCHAR SCPI::ProcessParameterValue(pCHAR buffer, ParameterValueType::E value)
 {
     ParameterValue *param = CURRENT_FORM->FindParameter(value);
 

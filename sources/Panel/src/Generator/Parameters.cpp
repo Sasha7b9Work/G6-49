@@ -94,7 +94,7 @@ ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
 }
 
 
-ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
+ParameterValue *ParameterComplex::FindParameter(ParameterValueType::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -117,7 +117,7 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValue::E p)
 
 pString ParameterValue::MainUnits(uint lang) const
 {
-    static const pString units[ParameterValue::Count][2] =
+    static const pString units[ParameterValueType::Count][2] =
     {
         {"Ãö", "Hz"},   // Frequency
         {"ñ",  "s"},    // Period
@@ -253,7 +253,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterValue::ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
+ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
     Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
     tuner.Init();
@@ -265,7 +265,7 @@ pString ParameterValue::GetStringValue() const
     Order order = { Order::Count };
 
     static char buffer[30];
-    std::strcpy(buffer, MathFloatValue::GetStringValue(value, IsSigned(), 5, &order.value, (type == Offset || type == Amplitude) ? 1 : 255));
+    std::strcpy(buffer, MathFloatValue::GetStringValue(value, IsSigned(), 5, &order.value, (type == ParameterValueType::Offset || type == ParameterValueType::Amplitude) ? 1 : 255));
     std::strcat(buffer, " ");
     std::strcat(buffer, order.Suffix(LANGUAGE));
     std::strcat(buffer, MainUnits(LANGUAGE));

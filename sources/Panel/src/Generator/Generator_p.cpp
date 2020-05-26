@@ -175,7 +175,7 @@ void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
 
 void PGenerator::SetParameter(ParameterValue *param)
 {
-    static const Command::E commands[ParameterValue::Count] =
+    static const Command::E commands[ParameterValueType::Count] =
     {
         Command::SetFrequency,
         Command::SetPeriod,                     // 
@@ -199,6 +199,8 @@ void PGenerator::SetParameter(ParameterValue *param)
     FloatValue value = param->GetValue();
 
     Chan ch(param->GetForm()->GetWave()->GetChannel());
+
+
 
     Command com(commands[param->Type()]);
 

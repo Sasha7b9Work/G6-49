@@ -186,16 +186,16 @@ void Form::TuneGenerator()
         if(CurrentParameter()->GetParent())                                 // Ðàñêðûò ïàðàìåòð ÌÀÍÈÏÓËßÖÈß
         {
             SendParameterToGenerator(ParameterChoice::ManipulationEnabled); //-V525
-            SendParameterToGenerator(ParameterValue::ManipulationDuration);
-            SendParameterToGenerator(ParameterValue::ManipulationPeriod);
+            SendParameterToGenerator(ParameterValueType::ManipulationDuration);
+            SendParameterToGenerator(ParameterValueType::ManipulationPeriod);
 
             int opened = currentParam;
 
             CloseOpenedParameter();
 
-            SendParameterToGenerator(ParameterValue::Frequency);
-            SendParameterToGenerator(ParameterValue::Amplitude);
-            SendParameterToGenerator(ParameterValue::Offset);
+            SendParameterToGenerator(ParameterValueType::Frequency);
+            SendParameterToGenerator(ParameterValueType::Amplitude);
+            SendParameterToGenerator(ParameterValueType::Offset);
 
             OpenComplexParameter();
 
@@ -206,36 +206,36 @@ void Form::TuneGenerator()
             OpenComplexParameter();
 
             SendParameterToGenerator(ParameterChoice::ManipulationEnabled); //-V525
-            SendParameterToGenerator(ParameterValue::ManipulationDuration);
-            SendParameterToGenerator(ParameterValue::ManipulationPeriod);
+            SendParameterToGenerator(ParameterValueType::ManipulationDuration);
+            SendParameterToGenerator(ParameterValueType::ManipulationPeriod);
 
             CloseOpenedParameter();
 
-            SendParameterToGenerator(ParameterValue::Frequency);
-            SendParameterToGenerator(ParameterValue::Amplitude);
-            SendParameterToGenerator(ParameterValue::Offset);
+            SendParameterToGenerator(ParameterValueType::Frequency);
+            SendParameterToGenerator(ParameterValueType::Amplitude);
+            SendParameterToGenerator(ParameterValueType::Offset);
         }
 
         if(GetWave()->GetChannel() != Chan::A)
         {
-            SendParameterToGenerator(ParameterValue::Phase);
+            SendParameterToGenerator(ParameterValueType::Phase);
         }
     }
     else
     {
-        SendParameterToGenerator(ParameterValue::Frequency);
-        SendParameterToGenerator(ParameterValue::Amplitude);
-        SendParameterToGenerator(ParameterValue::Offset);
-        SendParameterToGenerator(ParameterValue::Period);
-        SendParameterToGenerator(ParameterValue::Duration);
-        SendParameterToGenerator(ParameterValue::PacketNumber);
-        SendParameterToGenerator(ParameterValue::PacketPeriod);
+        SendParameterToGenerator(ParameterValueType::Frequency);
+        SendParameterToGenerator(ParameterValueType::Amplitude);
+        SendParameterToGenerator(ParameterValueType::Offset);
+        SendParameterToGenerator(ParameterValueType::Period);
+        SendParameterToGenerator(ParameterValueType::Duration);
+        SendParameterToGenerator(ParameterValueType::PacketNumber);
+        SendParameterToGenerator(ParameterValueType::PacketPeriod);
         SendParameterToGenerator(ParameterChoice::Polarity);
     }
 }
 
 
-ParameterValue *Form::FindParameter(ParameterValue::E p)
+ParameterValue *Form::FindParameter(ParameterValueType::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -300,7 +300,7 @@ ParameterChoice *Form::FindParameter(ParameterChoice::E p)
 }
 
 
-void Form::SendParameterToGenerator(ParameterValue::E p)
+void Form::SendParameterToGenerator(ParameterValueType::E p)
 {
     Parameter *param = FindParameter(p);
 
@@ -577,7 +577,7 @@ uint8 *Form::GetFormFlash(Chan::E ch)
 
 float Form::GetOffset()
 {
-    ParameterValue *parameter = FindParameter(ParameterValue::Offset);
+    ParameterValue *parameter = FindParameter(ParameterValueType::Offset);
 
     return (parameter) ? parameter->GetValue().ToFloat() : 0.0F;
 }
@@ -585,7 +585,7 @@ float Form::GetOffset()
 
 float Form::GetAmplitude()
 {
-    ParameterValue *parameter = FindParameter(ParameterValue::Amplitude);
+    ParameterValue *parameter = FindParameter(ParameterValueType::Amplitude);
 
     return (parameter) ? parameter->GetValue().ToFloat() : 0.0F;
 }

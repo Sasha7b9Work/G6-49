@@ -70,14 +70,8 @@ protected:
 };
 
 
-class ParameterValue : public Parameter
+struct ParameterValueType
 {
-    friend struct LogicFloatValue;
-    friend class Tuner;
-    friend class TunerDisplay;
-
-public:
-
     enum E
     {
         Frequency,              // Частота
@@ -99,26 +93,36 @@ public:
         Exit,                   // Этот параметр закрывает открытый параметр
         Count
     };
+};
 
-    ParameterValue(E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value);
+
+class ParameterValue : public Parameter
+{
+    friend struct LogicFloatValue;
+    friend class Tuner;
+    friend class TunerDisplay;
+
+public:
+
+    ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value);
 
     virtual pString GetStringValue() const;
 
-    E Type() const { return type; }
+    ParameterValueType::E Type() const { return type; }
 
     FloatValue GetValue() const { return value; };
 
     bool SetAndLoadValue(float val);
     
     // Возвращает true, если параметр имеет знак
-    bool IsSigned() const { return (type == Offset); }
+    bool IsSigned() const { return (type == ParameterValueType::Offset); }
 
     void OnPressButtonTune();
 
     Tuner tuner;        // Используется для настройки 
 
 private:
-    E type;
+    ParameterValueType::E type;
     FloatValue min;
     FloatValue max;
     FloatValue value;
@@ -184,7 +188,7 @@ public:
     int NumParams() const { return numParams; }
     Parameter **Params() { return params; }
 
-    ParameterValue *FindParameter(ParameterValue::E p);
+    ParameterValue *FindParameter(ParameterValueType::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
 
     virtual pString GetStringValue() const;
@@ -203,7 +207,7 @@ private:
 class ParameterVoltage : public ParameterValue
 {
 public:
-    ParameterVoltage(ParameterValue::E type, const char *nameRU, const char *nameEN, const FloatValue &min, const FloatValue &max, const FloatValue &value) :
+    ParameterVoltage(ParameterValueType::E type, const char *nameRU, const char *nameEN, const FloatValue &min, const FloatValue &max, const FloatValue &value) :
         ParameterValue(type, nameRU, nameEN, min, max, value) { }
 };
 
@@ -212,7 +216,7 @@ class ParameterAmplitude : public ParameterVoltage
 {
 public:
     ParameterAmplitude(const FloatValue &min = FloatValue("0"), const FloatValue &max = FloatValue("10"), const FloatValue &value = FloatValue("10")) :
-        ParameterVoltage(ParameterValue::Amplitude, "Размах", "Amplitude", min, max, value) { }
+        ParameterVoltage(ParameterValueType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 
 
@@ -220,7 +224,7 @@ class ParameterOffset : public ParameterVoltage
 {
 public:
     ParameterOffset(const FloatValue &min = FloatValue("-5"), const FloatValue &max = FloatValue("5"), const FloatValue &value = FloatValue("0")) :
-        ParameterVoltage(ParameterValue::Offset, "Смещение", "Offset", min, max, value) { }
+        ParameterVoltage(ParameterValueType::Offset, "Смещение", "Offset", min, max, value) { }
 };
 
 
@@ -228,14 +232,14 @@ class ParameterFrequency : public ParameterValue
 {
 public:
     ParameterFrequency(const FloatValue &min = FloatValue("0.1"), const FloatValue &max = FloatValue("100", 6), const FloatValue &value = FloatValue("1000")) :
-        ParameterValue(ParameterValue::Frequency, "Частота", "Frequency", min, max, value) { }
+        ParameterValue(ParameterValueType::Frequency, "Частота", "Frequency", min, max, value) { }
 };
 
 
 class ParameterTime : public ParameterValue
 {
 public:
-    ParameterTime(ParameterValue::E t, const char *nameRU, const char *nameEN, const FloatValue &min, const FloatValue &max, const FloatValue &value) :
+    ParameterTime(ParameterValueType::E t, const char *nameRU, const char *nameEN, const FloatValue &min, const FloatValue &max, const FloatValue &value) :
         ParameterValue(t, nameRU, nameEN, min, max, value) { }
 };
 
@@ -243,28 +247,28 @@ public:
 class ParameterPhase : public ParameterValue
 {
 public:
-    ParameterPhase() : ParameterValue(ParameterValue::Phase, "Фаза", "Phase", FloatValue("0"), FloatValue("360"), FloatValue("0")) { }
+    ParameterPhase() : ParameterValue(ParameterValueType::Phase, "Фаза", "Phase", FloatValue("0"), FloatValue("360"), FloatValue("0")) { }
 };
 
 
 class ParameterPacketPeriod : public ParameterTime
 {
 public:
-    ParameterPacketPeriod(const FloatValue &min, const FloatValue &max, const FloatValue &value) : ParameterTime(ParameterValue::PacketPeriod, "Период", "Period", min, max, value) { }
+    ParameterPacketPeriod(const FloatValue &min, const FloatValue &max, const FloatValue &value) : ParameterTime(ParameterValueType::PacketPeriod, "Период", "Period", min, max, value) { }
 };
 
 
 class ParameterPeriod : public ParameterTime
 {
 public:
-    ParameterPeriod(const FloatValue &min, const FloatValue &max, const FloatValue &value) : ParameterTime(ParameterValue::Period, "Период", "Period", min, max, value) { }
+    ParameterPeriod(const FloatValue &min, const FloatValue &max, const FloatValue &value) :  ParameterTime(ParameterValueType::Period, "Период", "Period", min, max, value) { }
 };
 
 
 class ParameterDuration : public ParameterTime
 {
 public:
-    ParameterDuration(const FloatValue &min, const FloatValue &max, const FloatValue &value) : ParameterTime(ParameterValue::Duration, "Длительность", "Duration", min, max, value) { }
+    ParameterDuration(const FloatValue &min, const FloatValue &max, const FloatValue &value) : ParameterTime(ParameterValueType::Duration, "Длительность", "Duration", min, max, value) { }
 };
 
 
@@ -272,7 +276,7 @@ class ParameterManipulationDuration : public ParameterTime
 {
 public:
     ParameterManipulationDuration(const FloatValue &min, const FloatValue &max, const FloatValue &value) :
-        ParameterTime(ParameterValue::ManipulationDuration, "Длительность", "Duration", min, max, value) { }
+        ParameterTime(ParameterValueType::ManipulationDuration, "Длительность", "Duration", min, max, value) { }
 };
 
 
@@ -280,11 +284,11 @@ class ParameterManipulationPeriod : public ParameterTime
 {
 public:
     ParameterManipulationPeriod(const FloatValue &min, const FloatValue &max, const FloatValue &value) :
-        ParameterTime(ParameterValue::ManipulationPeriod, "Период", "Period", min, max, value) { }
+        ParameterTime(ParameterValueType::ManipulationPeriod, "Период", "Period", min, max, value) { }
 };
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
 class ParameterModeStart : public ParameterChoice
 {
 public:
