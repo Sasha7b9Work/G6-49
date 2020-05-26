@@ -41,7 +41,7 @@ class Indicator
 {
 public:
 
-    Indicator();
+    Indicator(Tuner *tuner);
 
     void Draw(int x, int y);
 
@@ -56,6 +56,8 @@ private:
     Digit digits[MAX_NUM_DIGITS];           // Здесь находятся все символы
 
     int indexHighlight;                     // Индекс подсвеченного знакоместа
+
+    Tuner *tuner;
 
     // Нарисовать значок подсветки
     void HighlightSymbol(int x, int y);

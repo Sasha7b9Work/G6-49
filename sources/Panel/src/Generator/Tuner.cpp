@@ -38,7 +38,7 @@ bool Digit::Decrease()
 }
 
 
-Indicator::Indicator() : indexHighlight(0)
+Indicator::Indicator(Tuner *_tuner) : indexHighlight(0), tuner(_tuner)
 {
     digits[MAX_NUM_DIGITS - 1] = '\0';
 
@@ -260,7 +260,7 @@ bool Indicator::CanBeIncreased(int pos)
 }
 
 
-TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner)
+TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(_tuner)
 {
 }
 
