@@ -28,9 +28,13 @@ int Indicator::Draw(int x, int y)
 
     int pos = 0;
 
+    bool alreadyWereNumbers = false;        // Если true, то уже были цифры и надо выводить полным цветом
+
     while (digits[pos] != '\0')
     {
-        Char(digits[pos]).Draw(x, y);
+        Color color = CalculateColor(pos, &alreadyWereNumbers);
+
+        Char(digits[pos]).Draw(x, y, color);
 
         if (pos == indexHighlight)
         {
@@ -48,6 +52,30 @@ int Indicator::Draw(int x, int y)
     }
 
     return x;
+}
+
+
+Color Indicator::CalculateColor(int pos, bool *alreadyWereNumbers)
+{
+    Color color = Color::WHITE;
+
+    if (digits[pos].IsNumber())
+    {
+        if (!*alreadyWereNumbers)
+        {
+            if (digits[pos] != '0')
+            {
+                *alreadyWereNumbers = true;
+            }
+        }
+
+        if (!*alreadyWereNumbers)
+        {
+            color = Color::GRAY_50;
+        }
+    }
+
+    return color;
 }
 
 
@@ -359,7 +387,11 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
 void TunerDisplay::DrawUnits(int x, int y)
 {
+    Text::SetUpperCase(false);
+
     Text(tuner->GetParameter()->GetMainUnits(LANGUAGE)).Draw(x + 7, y);
+
+    Text::SetUpperCase(true);
 }
 
 

@@ -11,7 +11,7 @@
 // Здесь хранится количество значащих цифр перед (индекс 0) и после (индекс 1) запятой. Знак не учитывается
 static const int numberDigits[ParameterValueType::Count][2] =
 {
-    {10, 9},   // Frequency,
+    {10, 3},   // Frequency,
     {10, 9},   // Period,
     {2,  3},   // Amplitude,
     {2,  3},   // Offset,

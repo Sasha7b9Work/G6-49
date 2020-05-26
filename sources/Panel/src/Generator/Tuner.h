@@ -1,4 +1,5 @@
 #pragma once
+#include "Display/Colors.h"
 #include "Keyboard/Controls.h"
 
 
@@ -98,6 +99,8 @@ private:
 
     // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
     bool ChangeSign(FloatValue *value, int pos);
+
+    Color CalculateColor(int pos, bool *alreadyWereNumbers);
 };
 
 
