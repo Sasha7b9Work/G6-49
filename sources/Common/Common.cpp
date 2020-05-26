@@ -23,7 +23,7 @@ static uint AssembleTriple(const char *const buffer, int start, int *end);
 //}
 
 
-FloatValue::FloatValue(const char *const buffer, int order)
+FloatValue::FloatValue(const char *const buffer, int order) //-V730
 {
     FromString(buffer, order);
 }

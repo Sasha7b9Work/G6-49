@@ -20,7 +20,7 @@ bool        Hint::needCalculate = false;
 
 
 
-bool Hint::ProcessControl(const Control control)
+bool Hint::ProcessControl(const Control control) //-V801
 {
     if (control.Is(Key::Esc) && control.IsLong())
     {

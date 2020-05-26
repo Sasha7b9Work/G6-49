@@ -22,7 +22,7 @@ extern void update();
 extern void init();
 
 
-enum
+enum //-V2521
 {
     MENU_FILE_QUIT = wxID_EXIT,
 

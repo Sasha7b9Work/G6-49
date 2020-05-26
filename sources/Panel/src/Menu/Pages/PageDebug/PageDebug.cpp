@@ -130,7 +130,7 @@ static bool OnRegulator(Control control)
 }
 
 
-static bool OnKey_PageRegisters(const Control control)
+static bool OnKey_PageRegisters(const Control control) //-V801
 {
     if (!showInputWindow)
     {

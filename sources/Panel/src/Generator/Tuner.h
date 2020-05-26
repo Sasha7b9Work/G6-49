@@ -3,6 +3,7 @@
 
 
 class ParameterValue;
+class Tuner;
 
 
 class Digit
@@ -95,7 +96,7 @@ private:
 class TunerDisplay
 {
 public:
-    TunerDisplay(ParameterValue *parameter);
+    TunerDisplay(Tuner *tuner);
 
     void Init();
 
@@ -104,7 +105,7 @@ public:
     bool OnControlKey(const Control control);
 
 private:
-    ParameterValue *param;
+    Tuner *tuner;
 
     Indicator indicator;
 
@@ -117,6 +118,8 @@ private:
 // »спользуетс€ дл€ визуальной настройки параметра. явл€етс€ принадлежностью каждог ParameterValue
 class Tuner
 {
+    friend class TunerDisplay;
+
 public:
 
     Tuner(ParameterValue *param);

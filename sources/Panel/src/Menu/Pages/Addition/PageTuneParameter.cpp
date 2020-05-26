@@ -67,7 +67,7 @@ DEF_SMALL_BUTTON(sbEnter,                                                       
 )
 
 
-static bool OnControl_TuneParameter(const Control control)
+static bool OnControl_TuneParameter(const Control control) //-V801
 {
     if(control.IsDown())
     {

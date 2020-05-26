@@ -95,7 +95,7 @@ void Indicator::HighlightSymbol(int x, int y)
 }
 
 
-bool Indicator::OnControlKey(const Control control)
+bool Indicator::OnControlKey(const Control control) //-V801
 {
     if (control.IsRotate() || control.IsCursors())
     {
@@ -260,14 +260,14 @@ bool Indicator::CanBeIncreased(int pos)
 }
 
 
-TunerDisplay::TunerDisplay(ParameterValue *parameter) : param(parameter)
+TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner)
 {
 }
 
 
 void TunerDisplay::Draw()
 {
-    Chan ch = param->GetForm()->GetWave()->GetChannel();
+    Chan ch = tuner->param->GetForm()->GetWave()->GetChannel();
 
     int x = WaveGraphics::X();
     int y = WaveGraphics::Y(ch.GetInverse());
@@ -286,7 +286,7 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
     Font::Set(TypeFont::_GOSTB20);
 
-    Text(param->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
+    Text(tuner->param->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 
     Font::Restore();
 }
@@ -298,7 +298,7 @@ void TunerDisplay::DrawValue(int x, int y)
 }
 
 
-bool TunerDisplay::OnControlKey(const Control control)
+bool TunerDisplay::OnControlKey(const Control control) //-V801
 {
     return indicator.OnControlKey(control);
 }
@@ -306,7 +306,7 @@ bool TunerDisplay::OnControlKey(const Control control)
 
 void TunerDisplay::Init()
 {
-    MathParameterValue::SetParameterValue(param);
+    MathParameterValue::SetParameterValue(tuner->param);
 
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     int after = MathParameterValue::GetNumberDigitsAfterComma();
@@ -320,7 +320,7 @@ void TunerDisplay::Init()
 
     indicator.digits[before + after + 1] = '\0';
 
-    const FloatValue &value = param->value;
+    const FloatValue &value = tuner->param->value;
 
     int pos = before - 1;                               // Разряд в этой позиции будем заполнять значениями целых
 
@@ -340,7 +340,7 @@ void TunerDisplay::Init()
 }
 
 
-Tuner::Tuner(ParameterValue *_param) : param(_param), display(param)
+Tuner::Tuner(ParameterValue *_param) : param(_param), display(this)
 {
 }
 
@@ -357,7 +357,7 @@ void Tuner::Draw()
 }
 
 
-bool Tuner::OnControlKey(const Control control)
+bool Tuner::OnControlKey(const Control control) //-V801
 {
     if (control.IsCursors() || control.IsRotate())
     {

@@ -1,7 +1,7 @@
 #pragma once
 
 inline void FuncDraw(int, int) {}
-inline bool FuncOnKey(const Control) { return false; }
+inline bool FuncOnKey(const Control ) { return false; } //-V801
 inline void FuncChangedChoice(bool) {}
 inline void FuncChanged() {}
 inline void FuncBeforeDraw() {}

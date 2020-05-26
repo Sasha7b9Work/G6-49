@@ -73,7 +73,7 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-static bool OnKey_PageSignals(const Control)
+static bool OnKey_PageSignals(const Control) //-V801
 {
     return false;
 //    if(CURRENT_PAGE != PageSignals::self)

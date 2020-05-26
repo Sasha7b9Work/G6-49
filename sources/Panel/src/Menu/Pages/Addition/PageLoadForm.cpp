@@ -52,7 +52,7 @@ DEF_BUTTON( bChoose,                                                            
 
 
 
-static bool OnControl(const Control control)
+static bool OnControl(const Control control) //-V801
 {
     if (control.Is(Key::RotateLeft))
     {

@@ -67,7 +67,7 @@ void Menu::Update()
 }
 
 
-void Menu::ProcessKey(const Control control)
+void Menu::ProcessKey(const Control control) //-V801
 {
     if(ProcessOutputs(control))                     // Обработка включения/отключения каналов
     {
@@ -86,7 +86,7 @@ void Menu::ProcessKey(const Control control)
 }
 
 
-bool Menu::ProcessOutputs(const Control control)
+bool Menu::ProcessOutputs(const Control control) //-V801
 {
     if (control.IsRelease())
     {
@@ -193,7 +193,7 @@ void Menu::ResetOpenedItem()
 }
 
 
-bool Menu::OpenDebugPage(const Control control)
+bool Menu::OpenDebugPage(const Control control) //-V801
 {
     if(CURRENT_PAGE != PageService::self)
     {

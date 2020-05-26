@@ -170,7 +170,7 @@ static void DrawPage()
 }
 
 
-static bool FuncOnControlKeyPage(const Control control) //-V2009
+static bool FuncOnControlKeyPage(const Control control) //-V2009 //-V801
 {
     if(control.Is(Key::RegButton, Action::Down))
     {
