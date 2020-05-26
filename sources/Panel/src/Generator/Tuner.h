@@ -26,7 +26,7 @@ public:
     // ”становить новое значение
     void Set(char v) { value = v; }
 
-    bool IsDigit()
+    bool IsNumber()
     {
         return (value >= '0' && value <= '9');
     }
@@ -91,14 +91,21 @@ private:
     // ”величить значение в указанном разр€де
     void IncreaseInPosition(int pos);
 
+    void IncreaseCurrentDigit();
+
     // ”меньшить значение в указанном разр€де
     void DecreaseInPosition(int pos);
+
+    void DecreaseCurrentDigit();
 
     // ¬озвращает true, если значение знакоместа pos может быть уменьшено
     bool CanBeDecreased(int pos);
 
     // ¬озвращает true, если значение знакоместа pos может быть увеличено
     bool CanBeIncreased(int pos);
+
+    // ¬озвращает true, если числовое значение со знакомџ
+    bool IsSigned();
 };
 
 

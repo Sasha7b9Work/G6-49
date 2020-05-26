@@ -26,7 +26,7 @@ struct FloatValue
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
     explicit FloatValue(const char *const buffer, int order = 0);
 
-    void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits);
+    void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
 
     void FromFloat(float v);
 

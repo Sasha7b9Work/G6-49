@@ -16,7 +16,7 @@ using namespace Primitives;
 
 bool Digit::Increase()
 {
-    if (IsDigit())
+    if (IsNumber())
     {
         return IncreaseNumber();
     }
@@ -27,7 +27,7 @@ bool Digit::Increase()
 
 bool Digit::Decrease()
 {
-    if (IsDigit())
+    if (IsNumber())
     {
         return DecreaseNumber();
     }
@@ -142,17 +142,61 @@ bool Indicator::OnControlKey(const Control control) //-V801
         }
         else if (control.Is(Key::RotateLeft))
         {
-            DecreaseInPosition(indexHighlight);
+            DecreaseCurrentDigit();
         }
         else if (control.Is(Key::RotateRight))
         {
-            IncreaseInPosition(indexHighlight);
+            IncreaseCurrentDigit();
         }
 
         return true;
     }
 
     return false;
+}
+
+
+void Indicator::IncreaseCurrentDigit()
+{
+    if ((digits[0] == '-') && (indexHighlight != 0))
+    {
+        DecreaseInPosition(indexHighlight);
+    }
+    else
+    {
+        IncreaseInPosition(indexHighlight);
+    }
+}
+
+
+void Indicator::DecreaseCurrentDigit()
+{
+    if (IsSigned())
+    {
+        if (display->GetTuner()->GetParameter()->GetValue().Abs() == 0)
+        {
+            IncreaseInPosition(indexHighlight);
+            digits[0] = '-';
+        }
+        else if ((digits[0] == '-') && (indexHighlight != 0))
+        {
+            IncreaseInPosition(indexHighlight);
+        }
+        else
+        {
+            DecreaseInPosition(indexHighlight);
+        }
+    }
+    else
+    {
+        DecreaseInPosition(indexHighlight);
+    }
+}
+
+
+bool Indicator::IsSigned()
+{
+    return !digits[0].IsNumber();
 }
 
 
@@ -173,6 +217,9 @@ void Indicator::IncreaseInPosition(int pos)
     }
 
     FloatValue value = display->GetValue();
+
+    float fValue = value.ToFloat();
+    fValue = fValue;
 
     LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
 
@@ -253,7 +300,7 @@ bool Indicator::FirstSignedDigitInPosition(int pos)
 {
     for (int i = 0; digits[i] != '\0'; i++)
     {
-        if (digits[i].IsDigit())
+        if (digits[i].IsNumber())
         {
             return (i == pos);
         }
@@ -273,7 +320,7 @@ int Indicator::FindPositionLeftDigit(int pos)
     do 
     {
         pos--;
-    } while (!digits[pos].IsDigit());
+    } while (!digits[pos].IsNumber());
 
     return pos;
 }
@@ -281,7 +328,7 @@ int Indicator::FindPositionLeftDigit(int pos)
 
 bool Indicator::CanBeDecreased(int pos)
 {
-    if (digits[pos].IsDigit())
+    if (digits[pos].IsNumber())
     {
         if (digits[pos] > '0')
         {
