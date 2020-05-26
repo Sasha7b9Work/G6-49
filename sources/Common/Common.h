@@ -65,8 +65,9 @@ struct FloatValue
     int FractNano() const;
 
     bool operator<(const FloatValue &);
-
     bool operator>(const FloatValue &);
+    bool operator<=(const FloatValue &);
+    bool operator>=(const FloatValue &);
 
 private:
 

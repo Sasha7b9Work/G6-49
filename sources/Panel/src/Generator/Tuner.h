@@ -15,7 +15,7 @@ public:
 
     Digit(char v = '0') : value(v) { }
 
-    operator char() { return value; }
+    operator char() const { return value; }
 
     // Увеличить значение в разряде. Если невозможно (равно '9') - возращает false
     bool Increase();
@@ -40,6 +40,8 @@ private:
 // Отображает знакоместа, изображения в знакоместах, и стрелки для подсвечивания активного знакоместа
 class Indicator
 {
+    friend class TunerDisplay;
+
 public:
 
     Indicator(TunerDisplay *display);
@@ -47,8 +49,6 @@ public:
     void Draw(int x, int y);
 
     bool OnControlKey(const Control control);
-
-    Digit *Digits() { return digits; }
 
 private:
 
@@ -92,6 +92,12 @@ private:
 
     // Возвращает true, если значение знакоместа pos может быть увеличено
     bool CanBeIncreased(int pos);
+
+    // Возвращает строку символов
+    char *GetStringValue() const;
+
+    // Возвращает значение
+    FloatValue GetValue() const;
 };
 
 
@@ -108,9 +114,6 @@ public:
     void Draw();
 
     bool OnControlKey(const Control control);
-
-    // Возвращает значение, закодированное в окне ввода
-    FloatValue GetValue();
 
     Tuner *GetTuner() { return tuner; }
 

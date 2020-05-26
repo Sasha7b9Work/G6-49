@@ -157,6 +157,21 @@ bool ParameterValue::SetAndLoadValue(float val)
 }
 
 
+bool ParameterValue::SetAndLoadValue(FloatValue val)
+{
+    if (!InRange(val))
+    {
+        return false;
+    }
+
+    value = val;
+
+    PGenerator::SetParameter(this);
+
+    return true;
+}
+
+
 pString ParameterComplex::GetStringValue() const
 {
     if(type == Manipulation)
@@ -241,9 +256,15 @@ ParameterManipulation::ParameterManipulation(Parameter **parameters) : Parameter
 }
 
 
-bool ParameterValue::InRange(float) const
+bool ParameterValue::InRange(float val) const
 {
-    return false;
+    return (val >= min.ToFloat()) && (val <= max.ToFloat());
+}
+
+
+bool ParameterValue::InRange(FloatValue val) const
+{
+    return (val >= min && val <= max);
 }
 
 

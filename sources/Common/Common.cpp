@@ -343,7 +343,19 @@ bool FloatValue::operator<(const FloatValue &rhs)
 }
 
 
+bool FloatValue::operator<=(const FloatValue &rhs)
+{
+    return ToFloat() <= rhs.ToFloat();
+}
+
+
 bool FloatValue::operator>(const FloatValue &rhs)
 {
     return ToFloat() > rhs.ToFloat();
+}
+
+
+bool FloatValue::operator>=(const FloatValue &rhs)
+{
+    return ToFloat() >= rhs.ToFloat();
 }

@@ -112,7 +112,9 @@ public:
 
     FloatValue GetValue() const { return value; };
 
+    // ”становить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(float val);
+    bool SetAndLoadValue(FloatValue val);
     
     // ¬озвращает true, если параметр имеет знак
     bool IsSigned() const { return (type == ParameterValueType::Offset); }
@@ -135,6 +137,7 @@ private:
 
     // ¬озвращает true, если параметр может принимать значение v
     bool InRange(float v) const;
+    bool InRange(FloatValue v) const;
 };
 
 

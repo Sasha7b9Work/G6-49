@@ -1,7 +1,11 @@
 #pragma once
 
 
-#define LIMITATION(var, min, max)           if(var < (min)) { (var) = (min); } else if(var > (max)) { var = (max); } else { var = var; };
+#define LIMITATION(var, min, max)       if(var < (min)) { (var) = (min); } else if(var > (max)) { var = (max); } else { var = var; };
+
+#define LIMITATION_ABOVE(var, max)      if(var > (max)) { var = (max); }
+
+#define LIMITATION_BELOW(var, min)      if(var < (min)) { var = (min); }
 
 
 struct Math

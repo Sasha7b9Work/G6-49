@@ -139,12 +139,11 @@ void Indicator::IncreaseInPosition(int pos)
         }
     }
 
-    FloatValue max = display->GetTuner()->GetParameter()->GetMax();
+    FloatValue value = GetValue();
 
-    if (display->GetValue() > max)
-    {
-        display->Init(max);
-    }
+    LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
+
+    display->Init(value);
 }
 
 
@@ -164,12 +163,17 @@ void Indicator::DecreaseInPosition(int pos)
         }
     }
 
-    FloatValue min = display->GetTuner()->GetParameter()->GetMin();
+    FloatValue value = GetValue();
 
-    if (display->GetValue() < min)
-    {
-        display->Init(min);
-    }
+    LIMITATION_BELOW(value, display->GetTuner()->GetParameter()->GetMin());
+
+    display->Init(value);
+}
+
+
+FloatValue Indicator::GetValue() const
+{
+    return FloatValue(GetStringValue());
 }
 
 
@@ -274,6 +278,22 @@ bool Indicator::CanBeIncreased(int pos)
 }
 
 
+char *Indicator::GetStringValue() const
+{
+    static char result[MAX_NUM_DIGITS];
+
+    int i = -1;
+
+    do 
+    {
+        i++;
+        result[i] = digits[i];
+    } while (result[i] != '\0');
+
+    return result;
+}
+
+
 TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this)
 {
 }
@@ -327,12 +347,12 @@ void TunerDisplay::Init()
 
     for (int i = 0; i < before + after + 1; i++)
     {
-        indicator.Digits()[i].Set('0');
+        indicator.digits[i].Set('0');
     }
 
-    indicator.Digits()[before].Set(Digit::COMMA);
+    indicator.digits[before].Set(Digit::COMMA);
 
-    indicator.Digits()[before + after + 1] = '\0';
+    indicator.digits[before + after + 1] = '\0';
 
     const FloatValue &value = tuner->GetParameter()->value;
 
@@ -340,7 +360,7 @@ void TunerDisplay::Init()
 
     for (int i = 0; i < before; i++)
     {
-        indicator.Digits()[pos].Set(MathFloatValue::GetChar(value, i));
+        indicator.digits[pos].Set(MathFloatValue::GetChar(value, i));
         pos--;
     }
 
@@ -348,21 +368,16 @@ void TunerDisplay::Init()
 
     for (int i = 0; i < after; i++)
     {
-        indicator.Digits()[pos].Set(MathFloatValue::GetChar(value, -i - 1));
+        indicator.digits[pos].Set(MathFloatValue::GetChar(value, -i - 1));
         pos++;
     }
 }
 
 
-void TunerDisplay::Init(FloatValue)
+void TunerDisplay::Init(FloatValue value)
 {
+    tuner->GetParameter()->SetAndLoadValue(value);
     Init();
-}
-
-
-FloatValue TunerDisplay::GetValue()
-{
-    return FloatValue(0.0F);
 }
 
 
