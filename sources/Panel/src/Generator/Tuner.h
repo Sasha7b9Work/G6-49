@@ -104,6 +104,8 @@ private:
 // Визуальное отображение Tuner
 class TunerDisplay
 {
+    friend class Tuner;
+
 public:
     TunerDisplay(Tuner *tuner);
 

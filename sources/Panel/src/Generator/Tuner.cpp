@@ -371,6 +371,9 @@ void TunerDisplay::Init()
         indicator.digits[pos].Set(MathFloatValue::GetChar(value, -i - 1));
         pos++;
     }
+
+    Indicator ind = indicator;
+    ind = ind;
 }
 
 
@@ -394,6 +397,9 @@ void Tuner::Init()
 
 void Tuner::Draw()
 {
+    Indicator ind = display.indicator;
+    ind = ind;
+
     display.Draw();
 }
 
