@@ -94,9 +94,9 @@ private:
     bool IsSigned();
 
     // Возвращает "цену разрдяа" в позиции pos
-    FloatValue PricePosition(int pos);
+    FloatValue StepPosition(int pos);
 
-    // Изменяет знак числа. Возвращает true, если pos == 0
+    // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
     bool ChangeSign(FloatValue *value, int pos);
 };
 

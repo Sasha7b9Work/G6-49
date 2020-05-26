@@ -105,9 +105,9 @@ void Indicator::IncreaseInPosition(int pos)
 
     if (!ChangeSign(&value, pos))
     {
-        FloatValue price = PricePosition(pos);
+        FloatValue step = StepPosition(pos);
 
-        value.Add(price);
+        value.Add(step);
 
         LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
     }
@@ -122,9 +122,9 @@ void Indicator::DecreaseInPosition(int pos)
 
     if (!ChangeSign(&value, pos))
     {
-        FloatValue price = PricePosition(pos);
+        FloatValue step = StepPosition(pos);
 
-        value.Sub(price);
+        value.Sub(step);
 
         LIMITATION_BELOW(value, display->GetTuner()->GetParameter()->GetMin());
     }
@@ -290,7 +290,7 @@ char *Indicator::GetStringDigits() const
 }
 
 
-FloatValue Indicator::PricePosition(int pos)
+FloatValue Indicator::StepPosition(int pos)
 {
     int posAboutComma = pos - PositionComma();          // Позиция разряда относительно точки
 
