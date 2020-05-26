@@ -16,6 +16,28 @@ using namespace Primitives;
 
 bool Digit::Increase()
 {
+    if (IsDigit())
+    {
+        return IncreaseNumber();
+    }
+
+    return ChangeSign();
+}
+
+
+bool Digit::Decrease()
+{
+    if (IsDigit())
+    {
+        return DecreaseNumber();
+    }
+
+    return ChangeSign();
+}
+
+
+bool Digit::IncreaseNumber()
+{
     if (value < '9')
     {
         value++;
@@ -26,11 +48,28 @@ bool Digit::Increase()
 }
 
 
-bool Digit::Decrease()
+bool Digit::DecreaseNumber()
 {
     if (value > '0')
     {
         value--;
+        return true;
+    }
+
+    return false;
+}
+
+
+bool Digit::ChangeSign()
+{
+    if (value == '-')
+    {
+        value = '+';
+        return true;
+    }
+    else if (value == '+')
+    {
+        value = '-';
         return true;
     }
 
@@ -248,6 +287,10 @@ bool Indicator::CanBeDecreased(int pos)
         {
             return true;
         }
+    }
+    else
+    {
+        return true;
     }
 
     int left = FindPositionLeftDigit(pos);
