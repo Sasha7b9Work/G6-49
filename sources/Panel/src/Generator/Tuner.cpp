@@ -313,12 +313,12 @@ void TunerDisplay::Init()
 
     for (int i = 0; i < before + after + 1; i++)
     {
-        indicator.digits[i].Set('0');
+        indicator.Digits()[i].Set('0');
     }
 
-    indicator.digits[before].Set(Digit::COMMA);
+    indicator.Digits()[before].Set(Digit::COMMA);
 
-    indicator.digits[before + after + 1] = '\0';
+    indicator.Digits()[before + after + 1] = '\0';
 
     const FloatValue &value = tuner->Parameter()->value;
 
@@ -326,7 +326,7 @@ void TunerDisplay::Init()
 
     for (int i = 0; i < before; i++)
     {
-        indicator.digits[pos].Set(MathFloatValue::GetChar(value, i));
+        indicator.Digits()[pos].Set(MathFloatValue::GetChar(value, i));
         pos--;
     }
 
@@ -334,7 +334,7 @@ void TunerDisplay::Init()
 
     for (int i = 0; i < after; i++)
     {
-        indicator.digits[pos].Set(MathFloatValue::GetChar(value, -i - 1));
+        indicator.Digits()[pos].Set(MathFloatValue::GetChar(value, -i - 1));
         pos++;
     }
 }

@@ -39,8 +39,6 @@ private:
 // Отображает знакоместа, изображения в знакоместах, и стрелки для подсвечивания активного знакоместа
 class Indicator
 {
-    friend class TunerDisplay;
-
 public:
 
     Indicator();
@@ -48,6 +46,8 @@ public:
     void Draw(int x, int y);
 
     bool OnControlKey(const Control control);
+
+    Digit *Digits() { return digits; }
 
 private:
 
