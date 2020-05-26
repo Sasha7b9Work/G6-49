@@ -197,13 +197,13 @@ float FloatValue::ToFloat() const
 
 int FloatValue::Sign() const
 {
-    //    fedcba9876543210
+    //                fedcba9876543210
     return (value & 0x8000000000000000U) ? -1 : 1;
 }
 
 
 uint64 FloatValue::Abs() const
-{               //    fedcba9876543210
+{   //                fedcba9876543210
     return (value & 0x7fffffffffffffff);
 }
 
@@ -243,12 +243,6 @@ void FloatValue::SetSign(int sign)
         //         fedcba9876543210
         value |= 0x8000000000000000U;           // ”станавливаем признак отрицательного числа
     }
-}
-
-
-void FloatValue::ChangeSign()
-{
-    SetSign(-Sign());
 }
 
 
@@ -317,7 +311,7 @@ void FloatValue::Add(FloatValue add)
 
 void FloatValue::Sub(FloatValue val)
 {
-    val.ChangeSign();
+    val.SetSign(val.Sign());
 
     Add(val);
 }

@@ -40,7 +40,6 @@ struct FloatValue
     void Sub(FloatValue value);
 
     void SetSign(int sign);
-    void ChangeSign();
 
     // Возвращает знак
     int Sign() const;
