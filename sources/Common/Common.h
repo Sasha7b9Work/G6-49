@@ -27,43 +27,31 @@ struct FloatValue
     explicit FloatValue(const char *const buffer, int order = 0);
 
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
-
     void FromFloat(float v);
-
     void FromUINT64(uint64 v) { value = v; }
-
     void FromString(const char * const buffer, int order);
 
     float ToFloat() const;
-
     uint64 ToUINT64() const { return value; }
 
-    int Sign() const;
-
-    uint64 Abs() const;
-
-    void Divide(uint div);
-
-    void Multiplie(uint mul);
-    
-    void Add(float v);
-
+    void Div(uint div);
+    void Mul(uint mul);
     void Add(FloatValue value);
-
     void Sub(FloatValue value);
 
     void SetSign(int sign);
-
     void ChangeSign();
-    
-    // ¬озвращает целую часть числа
+
+    // ¬озвращает знак
+    int Sign() const;
+
+    // ¬озвращает целую часть
     int Integer() const;
-    
-    // ¬озвращает дробную часть числа. numDigits - требуемое количество знакомест после зап€той
-    int Fract(int numDigits) const;
-    
+      
     // ¬озвращает количество наночастиц в дробной части
     int FractNano() const;
+
+    uint64 Abs() const;
 
     bool operator<(const FloatValue &);
     bool operator>(const FloatValue &);

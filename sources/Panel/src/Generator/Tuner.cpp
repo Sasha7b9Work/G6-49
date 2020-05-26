@@ -278,7 +278,7 @@ FloatValue Indicator::PricePosition(int pos)
     {
         while (posAboutComma > 0)
         {
-            price.Divide(10);
+            price.Div(10);
             posAboutComma--;
         }
     }
@@ -286,7 +286,7 @@ FloatValue Indicator::PricePosition(int pos)
     {
         while (posAboutComma < -1)
         {
-            price.Multiplie(10);
+            price.Mul(10);
             posAboutComma++;
         }
     }

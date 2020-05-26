@@ -71,12 +71,12 @@ void FloatValue::FromString(const char * const buffer, int order)
     if (order > 0)
     {
         uint pow = Math::Pow10(order);
-        Multiplie(pow);
+        Mul(pow);
     }
     else if (order < 0)
     {
         uint pow = Math::Pow10(-order);
-        Divide(pow);
+        Div(pow);
     }
 }
 
@@ -208,7 +208,7 @@ uint64 FloatValue::Abs() const
 }
 
 
-void FloatValue::Divide(uint div)
+void FloatValue::Div(uint div)
 {
     int sign = Sign();
 
@@ -220,7 +220,7 @@ void FloatValue::Divide(uint div)
 }
 
 
-void FloatValue::Multiplie(uint mul)
+void FloatValue::Mul(uint mul)
 {
     int sign = Sign();
 
@@ -252,25 +252,11 @@ void FloatValue::ChangeSign()
 }
 
 
-void FloatValue::Add(float v)
-{
-    FromFloat(ToFloat() + v);
-}
-
-
 int FloatValue::Integer() const
 {
     uint64 val = Abs();
 
     return static_cast<int>(val / (1000 * 1000 * 1000)) * Sign();
-}
-
-
-int FloatValue::Fract(int numDigits) const
-{
-    float fract = ToFloat() - static_cast<float>(Integer());
-
-    return static_cast<int>(fract * static_cast<float>(::Math::Pow10(numDigits)));
 }
 
 
