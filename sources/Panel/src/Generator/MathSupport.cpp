@@ -86,9 +86,14 @@ static void RepayEmptySymbols(char *buffer)
 
 static Order::E CalculateOrder(const ParameterValue *param)
 {
-    if (param->IsVoltage() && param->GetValue() < FloatValue("1.0"))
+    if (param->IsVoltage())
     {
-        return Order::Milli;
+        FloatValue value = param->GetValue();
+
+        if (value < FloatValue("1.0") && value > FloatValue("-1.0"))
+        {
+            return Order::Milli;
+        }
     }
 
     return Order::Count;
@@ -167,7 +172,9 @@ pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
 
 static int GetPositionFirstDigitVoltate(const ParameterValue *param, Order::E)
 {
-    return (param->GetValue() < FloatValue("1.0")) ? 4 : 1;
+    FloatValue value = param->GetValue();
+
+    return (value < FloatValue("1.0") && value > FloatValue("-1.0")) ? 4 : 1;
 }
 
 
