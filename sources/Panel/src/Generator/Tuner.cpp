@@ -433,10 +433,6 @@ void TunerDisplay::Init()
 {
     MathParameterValue::SetParameterValue(tuner->GetParameter());
 
-    DoubleValue value = tuner->GetParameter()->GetValue();
-    double valueD = value.ToDouble();
-    valueD = valueD;
-
     for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
     {
         indicator.digits[i].Set('\0');

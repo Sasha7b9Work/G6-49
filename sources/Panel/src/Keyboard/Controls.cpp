@@ -83,5 +83,5 @@ bool Control::IsEntering() const
         return true;
     }
 
-    return ((key == '-') || (key == '.'));
+    return ((key == Key::Minus) || (key == Key::Dot));
 }
