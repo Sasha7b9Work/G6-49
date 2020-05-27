@@ -33,13 +33,13 @@ static const int numberDigits[ParameterValueType::Count][2] =
 ParameterValue *MathParameterValue::param = nullptr;
 
 
-pString MathFloatValue::GetIndicatedValue(const ParameterValue *param, bool sign)
+pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
 {
     static const int numDigits = 5;
 
     FloatValue value = param->GetValue();
-
     ParameterValueType::E type = param->GetType();
+    bool sign = param->IsSigned();
 
     static char buffer[20];
 
@@ -47,7 +47,7 @@ pString MathFloatValue::GetIndicatedValue(const ParameterValue *param, bool sign
 
     int position = (type == ParameterValueType::Offset || type == ParameterValueType::Amplitude) ? GetPositionFirstDigit(value) : 1;
 
-    int posComma = PositionComma(position, GetOrder(value));
+    int posComma = PositionComma(position);
 
     if(sign)
     {
@@ -184,33 +184,8 @@ int MathFloatValue::GetDigit(const FloatValue &val, int position, Order::E order
 }
 
 
-int MathFloatValue::PositionComma(int posFirstDigit, Order::E)
+int MathFloatValue::PositionComma(int posFirstDigit)
 {
-//    if(posFirstDigit > 5)
-//    {
-//        *order = Order::Mega;
-//    }
-//    else if(posFirstDigit > 2)
-//    {
-//        *order = Order::Kilo;
-//    }
-//    else if(posFirstDigit > -1)
-//    {
-//        *order = Order::One;
-//    }
-//    else if(posFirstDigit > -4)
-//    {
-//        *order = Order::Milli;
-//    }
-//    else if(posFirstDigit > -7)
-//    {
-//        *order = Order::Micro;
-//    }
-//    else
-//    {
-//        *order = Order::Nano;
-//    }
-
     int result = posFirstDigit - 5;
 
     while(result < 1)
