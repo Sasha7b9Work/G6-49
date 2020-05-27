@@ -295,38 +295,19 @@ Order::E MathFloatValue::GetOrder(FloatValue value)
 {
     value.SetSign(1);
 
-    if (value.Abs() == 0)
-    {
-        return Order::One;
-    }
-
     int integer = value.Integer();
 
-    if (integer >= 1000 * 1000)
-    {
-        return Order::Mega;
-    }
-    else if (integer >= 1000)
-    {
-        return Order::Kilo;
-    }
-    else if (integer > 0)
-    {
-        return Order::One;
-    }
+    if      (integer >= 1000 * 1000) { return Order::Mega;  }
+    else if (integer >= 1000)        { return Order::Kilo;  }
+    else if (integer > 0)            { return Order::One;   }
 
     int fract = value.FractNano();
 
-    if (fract >= 1000 * 1000)
-    {
-        return Order::Milli;
-    }
-    else if (fract >= 1000)
-    {
-        return Order::Micro;
-    }
+    if      (fract >= 1000 * 1000)   { return Order::Milli; }
+    else if (fract >= 1000)          { return Order::Micro; }
+    else if (fract > 0)              { return Order::Nano;  }
 
-    return Order::Nano;
+    return Order::One;
 }
 
 
