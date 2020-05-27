@@ -317,24 +317,11 @@ int MathParameterValue::GetNumberDigitsBeforeComma()
 
     if (type == ParameterValueType::Frequency)
     {
-        int integerPart = param->GetValue().Integer();
+        Order::E order = MathFloatValue::GetOrder(param->GetValue());
 
-        int def = numberDigits[type][0];
+        int pow = Order::GetPow10(order);
 
-        if (integerPart < 1)
-        {
-            return def + 3;
-        }
-        else if (integerPart < 1000)
-        {
-            return def;
-        }
-        else if (integerPart < 1000 * 1000)
-        {
-            return def - 3;
-        }
-
-        return def - 6;
+        return numberDigits[type][0] - pow;
     }
 
     return numberDigits[type][0];
@@ -347,24 +334,11 @@ int MathParameterValue::GetNumberDigitsAfterComma()
 
     if (type == ParameterValueType::Frequency)
     {
-        int integerPart = param->GetValue().Integer();
+        Order::E order = MathFloatValue::GetOrder(param->GetValue());
 
-        int def = numberDigits[type][1];
+        int pow = Order::GetPow10(order);
 
-        if (integerPart < 1)
-        {
-            return def - 3;
-        }
-        else if (integerPart < 1000)
-        {
-            return def;
-        }
-        else if (integerPart < 1000 * 1000)
-        {
-            return def + 3;
-        }
-
-        return def + 6;
+        return numberDigits[type][1] + pow;
     }
 
     return numberDigits[param->GetType()][1];
