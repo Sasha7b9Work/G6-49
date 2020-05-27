@@ -300,7 +300,7 @@ ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, cons
 pString ParameterValue::GetStringValue() const
 {
     static char buffer[30];
-    std::strcpy(buffer, MathFloatValue::GetIndicatedValue(this, IsSigned(), 5));
+    std::strcpy(buffer, MathFloatValue::GetIndicatedValue(this, IsSigned()));
     std::strcat(buffer, " ");
     std::strcat(buffer, GetUnits(LANGUAGE, MathFloatValue::GetOrder(value)));
 

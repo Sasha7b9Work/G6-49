@@ -26,7 +26,7 @@ struct Order
 struct MathFloatValue
 {
     // Возвращает числовое представление FloatValue с numDigits значащими цифрами и запятой.
-    static pString GetIndicatedValue(const ParameterValue *param, bool sign, int numDigits);
+    static pString GetIndicatedValue(const ParameterValue *param, bool sign);
 
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     static int GetPositionFirstDigit(const FloatValue &value);

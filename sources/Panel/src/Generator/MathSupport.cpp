@@ -33,8 +33,10 @@ static const int numberDigits[ParameterValueType::Count][2] =
 ParameterValue *MathParameterValue::param = nullptr;
 
 
-pString MathFloatValue::GetIndicatedValue(const ParameterValue *param, bool sign, int numDigits)
+pString MathFloatValue::GetIndicatedValue(const ParameterValue *param, bool sign)
 {
+    static const int numDigits = 5;
+
     FloatValue value = param->GetValue();
 
     ParameterValueType::E type = param->GetType();
