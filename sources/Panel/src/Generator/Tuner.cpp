@@ -16,9 +16,6 @@ using namespace Primitives;
 
 Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_display)
 {
-    digits[MAX_NUM_DIGITS - 1] = '\0';
-
-    digits[5] = Digit::COMMA;
 }
 
 
@@ -38,7 +35,7 @@ int Indicator::Draw(int x, int y)
 
         Char(digits[pos]).Draw(x, y, color);
 
-        if (pos == indexHighlight)
+        if (pos == IndexHighlightReal())
         {
             HighlightSymbol(x, y);
         }
@@ -122,6 +119,12 @@ void Indicator::HighlightSymbol(int x, int y)
 }
 
 
+int Indicator::IndexHighlightReal()
+{
+    return (indexHighlight < PositionComma()) ? indexHighlight : (indexHighlight + 1);
+}
+
+
 bool Indicator::OnControlKey(const Control control) //-V801
 {
     if (control.IsRotate() || control.IsCursors())
@@ -136,11 +139,11 @@ bool Indicator::OnControlKey(const Control control) //-V801
         }
         else if (control.Is(Key::RotateLeft))
         {
-            DecreaseInPosition(indexHighlight);
+            DecreaseInPosition(IndexHighlightReal());
         }
         else if (control.Is(Key::RotateRight))
         {
-            IncreaseInPosition(indexHighlight);
+            IncreaseInPosition(IndexHighlightReal());
         }
 
         return true;
@@ -220,8 +223,8 @@ void Indicator::HighlightToLeft()
 {
     do
     {
-        Math::CircleDecrease(&indexHighlight, 0, LastDigit());
-    } while (CommaInPosition(indexHighlight));
+        Math::CircleDecrease(&indexHighlight, 0, NumberHighligthingDigits());
+    } while (CommaInPosition(IndexHighlightReal()));
 
 }
 
@@ -230,22 +233,24 @@ void Indicator::HighlightToRight()
 {
     do
     {
-        Math::CircleIncrease(&indexHighlight, 0, LastDigit());
-    } while (CommaInPosition(indexHighlight));
+        Math::CircleIncrease(&indexHighlight, 0, NumberHighligthingDigits());
+    } while (CommaInPosition(IndexHighlightReal()));
 }
 
 
-int Indicator::LastDigit()
+int Indicator::NumberHighligthingDigits()
 {
-    for (int i = 0; i < MAX_NUM_DIGITS; i++)
+    int result = 0;
+
+    for (int i = 0; !digits[i].IsEmpty(); i++)
     {
-        if (digits[i] == '\0')
+        if (digits[i].IsNumber() || digits[i].IsSigned())
         {
-            return (i - 1);
+            result++;
         }
     }
 
-    return (MAX_NUM_DIGITS - 1);
+    return result;
 }
 
 

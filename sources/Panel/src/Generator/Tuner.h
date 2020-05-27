@@ -25,6 +25,8 @@ public:
 
     bool IsEmpty()   { return (value == '\0'); }
 
+    bool IsSigned()  { return (value == '-') || (value == '+'); }
+
 private:
 
     char value;
@@ -55,15 +57,18 @@ private:
 
     Digit digits[MAX_NUM_DIGITS];           // Здесь находятся все символы
 
-    int indexHighlight;                     // Индекс подсвеченного знакоместа
+    int indexHighlight;                     // Индекс подсвеченного знакоместа. Счёт ведётся только по цифровым и знаковым разрядам
 
     TunerDisplay *display;
 
     // Нарисовать значок подсветки
     void HighlightSymbol(int x, int y);
 
-    // Возвращает индекс последнего действительного знакоместа
-    int LastDigit();
+    // Возвращает действительный индекс подсвеченного разряда (номер разряда в массиве digits)
+    int IndexHighlightReal();
+
+    // Количество символов, которые могут быть подсвечены
+    int NumberHighligthingDigits();
 
     // Возвращает true, если в позиции pos - десятичная точка
     bool CommaInPosition(int pos);
