@@ -103,10 +103,16 @@ private:
     // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
     bool ChangeSign(DoubleValue *value, int pos);
 
-    Color CalculateColor(int pos, bool *fullFill);
+    Color CalculateColor(int pos);
 
     // Возвращает true, если нужно дополнительное смещение между разрядами
     int AdditionShiftForDigit(int pos);
+
+    // Возвращает true, если все цифровые разряды слева равны нулю
+    bool AllNumbersOfLeftIsZero(int pos);
+    
+    // Возвращает true, если все цифровые разряды справа равны нулю
+    bool AllNumberOfRightIsZero(int pos);
 };
 
 

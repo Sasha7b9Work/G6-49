@@ -25,11 +25,9 @@ int Indicator::Draw(int x, int y)
 
     int pos = 0;
 
-    bool fullFill = false;        // Если true, то цифры и надо выводить полным цветом
-
     while (digits[pos] != '\0')
     {
-        Color color = CalculateColor(pos, &fullFill);
+        Color color = CalculateColor(pos);
 
         x += AdditionShiftForDigit(pos);
 
@@ -54,32 +52,53 @@ int Indicator::Draw(int x, int y)
 }
 
 
-Color Indicator::CalculateColor(int pos, bool *fullFill)
+Color Indicator::CalculateColor(int pos)
 {
-    Color color = Color::WHITE;
-
-    if (digits[pos].IsNumber())
+    if (!digits[pos].IsNumber())
     {
-        if (PositionComma() == (pos + 1))
-        {
-            *fullFill = true;
-        }
+        return Color::FILL;
+    }
 
-        if (!*fullFill)
+    if (digits[pos] == '0')
+    {
+        if (AllNumbersOfLeftIsZero(pos))
         {
-            if (digits[pos] != '0')
-            {
-                *fullFill = true;
-            }
+            return Color::GRAY_25;
         }
-
-        if (!*fullFill)
+        if (AllNumberOfRightIsZero(pos) && (PositionComma() < pos))
         {
-            color = Color::GRAY_25;
+            return Color::GRAY_25;
+        }
+    }
+    return Color::FILL;
+}
+
+
+bool Indicator::AllNumbersOfLeftIsZero(int pos)
+{
+    for (int i = 0; i < pos; i++)
+    {
+        if (digits[i].IsNumber() && digits[i] != '0')
+        {
+            return false;
         }
     }
 
-    return color;
+    return true;
+}
+
+
+bool Indicator::AllNumberOfRightIsZero(int pos)
+{
+    for (int i = pos + 1; (i < MAX_NUM_DIGITS) && !digits[i].IsEmpty(); i++)
+    {
+        if (digits[i].IsNumber() && digits[i] != '0')
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
@@ -381,7 +400,7 @@ void TunerDisplay::DrawUnits(int x, int y)
 {
     Text::SetUpperCase(false);
 
-    Text(tuner->GetParameter()->GetUnits(LANGUAGE)).Draw(x + 7, y);
+    Text(tuner->GetParameter()->GetUnits(LANGUAGE)).Draw(x + 7, y, Color::WHITE);
 
     Text::SetUpperCase(true);
 }
