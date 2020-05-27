@@ -78,7 +78,7 @@ Color Indicator::CalculateColor(int pos, bool *fullFill)
 
         if (!*fullFill)
         {
-            color = Color::GRAY_50;
+            color = Color::GRAY_25;
         }
     }
 
