@@ -2,6 +2,7 @@
 #include "common/Common.h"
 #include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
+#include "Utils/StringUtils.h"
 
 
 //FloatValue *LogicFloatValue::value = nullptr;
@@ -45,16 +46,38 @@ static void RepayEmptySymbols(char *buffer)
         *buffer = ' ';
         buffer++;
     }
+
+    char *end = SU::FindEnd(buffer);
+
+    buffer = end - 1;
+
+    while (*buffer == '0')
+    {
+        *buffer = ' ';
+        buffer--;
+    }
+}
+
+
+static Order::E CalculateOrder(const ParameterValue *param)
+{
+    if (param->IsVoltage() && param->GetValue() < FloatValue("1.0"))
+    {
+        return Order::Milli;
+    }
+
+    return Order::Count;
 }
 
 
 pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
 {
-    static const int NUM_DIGITS = 5;
+    static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
 
     FloatValue value = param->GetValue();
     bool sign = param->IsSigned();
+    Order::E order = CalculateOrder(param);
 
     static char buffer[LENGTH_BUFFER];                      // Дополнительно завершающий ноль и точка
     buffer[LENGTH_BUFFER - 1] = '\0';
@@ -64,9 +87,9 @@ pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
         buffer[0] = (value.Sign() > 0) ? '+' : '-';
     }
 
-    int posDigit = GetPositionFirstDigit(param);            // Позиция первого значащего символа относительно точки
+    int posDigit = GetPositionFirstDigit(param, order);     // Позиция первого значащего символа относительно точки
 
-    for (int i = sign ? 1 : 0; i < LENGTH_BUFFER; i++)
+    for (int i = sign ? 1 : 0; i < LENGTH_BUFFER - 1; i++)
     {
         char symbol = GetChar(value, posDigit);
         buffer[i] = symbol;
@@ -88,14 +111,7 @@ pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
 
 static int GetPositionFirstDigitVoltate(const ParameterValue *param, Order::E)
 {
-    FloatValue value = param->GetValue();
-
-    if (value == FloatValue("10"))
-    {
-        return 1;
-    }
-
-    return 1;
+    return (param->GetValue() < FloatValue("1.0")) ? 4 : 1;
 }
 
 

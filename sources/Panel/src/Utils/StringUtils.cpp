@@ -522,6 +522,7 @@ char SU::ToLower(char symbol)
     return symbol;
 }
 
+
 char *SU::UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, int forFract)
 {
     int allSymbols = allDigits + 1;         // Всего символов на 1 больше, чем десятичных знаков - ещё одно место занимает точка
@@ -551,4 +552,15 @@ char *SU::UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, in
     }
 
     return bufferOut;
+}
+
+
+char *SU::FindEnd(char *buffer)
+{
+    while (*buffer)
+    {
+        buffer++;
+    }
+
+    return buffer;
 }
