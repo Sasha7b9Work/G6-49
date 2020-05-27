@@ -181,13 +181,29 @@ void Indicator::DecreaseInPosition(int pos)
 
     FloatValue value = param->GetValue();
 
+    float valueF = value.ToFloat();
+
     if (!ChangeSign(&value, pos))
     {
         FloatValue step = StepPosition(pos);
 
+        float stepF = step.ToFloat();
+        stepF = stepF;
+
         value.Sub(step);
 
+        valueF = value.ToFloat();
+
         LIMITATION_BELOW(value, param->GetMin());
+
+        valueF = value.ToFloat();
+
+        int integer = value.Integer();
+        integer = integer;
+
+        int fract = value.FractNano();
+        fract = fract;
+        fract = fract;
     }
 
     display->Init(value);
@@ -363,7 +379,6 @@ FloatValue Indicator::StepPosition(int pos)
     FloatValue step("1.0");
 
     Order::E order = MathFloatValue::GetOrder(display->GetTuner()->GetParameter()->GetValue());
-
 
     step.MulPow10(Order::GetPow10(order) - posAboutComma);
      
