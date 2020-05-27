@@ -340,6 +340,14 @@ pString Order::Suffix(Order::E order, uint lang)
 }
 
 
+int Order::GetPow10(Order::E order)
+{
+    static const int pows[Count] = { 6, 3, 0, -3, -6, -9 };
+
+    return pows[order];
+}
+
+
 void ParameterChoice::OnPressButtonTune()
 {
     NextChoice();

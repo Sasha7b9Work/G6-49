@@ -318,6 +318,22 @@ void FloatValue::Sub(FloatValue val)
 }
 
 
+void FloatValue::MulPow10(int pow)
+{
+    while (pow > 0)
+    {
+        Mul(10);
+        pow--;
+    }
+
+    while (pow < 0)
+    {
+        Div(10);
+        pow++;
+    }
+}
+
+
 bool FloatValue::operator<(const FloatValue &rhs)
 {
     return ToFloat() < rhs.ToFloat();

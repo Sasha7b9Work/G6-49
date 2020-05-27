@@ -158,7 +158,7 @@ bool Indicator::IsSigned()
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    FloatValue value = display->GetValue();
+    FloatValue value = display->GetTuner()->GetParameter()->GetValue();
 
     if (!ChangeSign(&value, pos))
     {
@@ -175,7 +175,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    FloatValue value = display->GetValue();
+    FloatValue value = display->GetTuner()->GetParameter()->GetValue();
 
     if (!ChangeSign(&value, pos))
     {
@@ -352,6 +352,10 @@ FloatValue Indicator::StepPosition(int pos)
     int posAboutComma = pos - PositionComma();          // ѕозици€ разр€да относительно точки
 
     FloatValue price("1.0");
+
+    Order::E order = MathFloatValue::GetOrder(display->GetTuner()->GetParameter()->GetValue());
+
+    price.MulPow10(Order::GetPow10(order));
 
     if (posAboutComma > 0)                              // ≈сли разр€д находитс€ справа от точки ( в дробной части )
     {
