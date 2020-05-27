@@ -181,29 +181,13 @@ void Indicator::DecreaseInPosition(int pos)
 
     DoubleValue value = param->GetValue();
 
-    double valueF = value.ToDouble();
-
     if (!ChangeSign(&value, pos))
     {
         DoubleValue step = StepPosition(pos);
 
-        double stepF = step.ToDouble();
-        stepF = stepF;
-
         value.Sub(step);
 
-        valueF = value.ToDouble();
-
         LIMITATION_BELOW(value, param->GetMin());
-
-        valueF = value.ToDouble();
-
-        int integer = value.Integer();
-        integer = integer;
-
-        int fract = value.FractNano();
-        fract = fract;
-        fract = fract;
     }
 
     display->Init(value);
