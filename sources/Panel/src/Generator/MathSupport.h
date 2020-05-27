@@ -29,7 +29,7 @@ struct MathFloatValue
     static pString GetIndicatedValue(const ParameterValue *param);
 
     // ¬озвращает позицию первого ненулевого символа "1" - дес€тки (1e1), "0" - единицы (1e0), "-1" - дес€тые (1e-1), "-2" - сотые (1e-2)
-    static int GetPositionFirstDigit(const FloatValue &value);
+    static int GetPositionFirstDigit(const FloatValue value, Order::E order = Order::Count);
 
     // ¬озвращает цифру в позиции position. “очка находитс€ соответственно order. One - после единиц, Kilo - после тыс€ч и так далее.
     // Order::Count - значенине по умолчанию - зап€та€ в позиции относительно размерности числового значени€
@@ -38,9 +38,6 @@ struct MathFloatValue
     // ¬озвращает символ в позиции position. «нак не учитываетс€. “очка находитс€ соответственно order. One - после единиц, Kilo - после тыс€ч и так далее.
     // Order::Count - значенине по умолчанию - зап€та€ в позиции относительно размерности числового значени€
     static char GetChar(const FloatValue &value, int postition, Order::E order = Order::Count);
-
-    // ¬озвращает позицию зап€той относительно позиции первого значащего символа
-    static int PositionComma(int posFirstDigit);
 
     // ¬озвращает:
     // Order::Mega  - FloatValue::Integer() >= 1e6

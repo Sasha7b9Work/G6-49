@@ -35,49 +35,41 @@ ParameterValue *MathParameterValue::param = nullptr;
 
 pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
 {
-    static const int numDigits = 5;
+    static const int NUM_DIGITS = 5;
+    static const int LENGTH_BUFFER = NUM_DIGITS + 2;
 
     FloatValue value = param->GetValue();
-    ParameterValueType::E type = param->GetType();
-    bool sign = param->IsSigned();
 
-    static char buffer[20];
+    static char buffer[LENGTH_BUFFER];                      // Дополнительно завершающий ноль и точка
+    buffer[LENGTH_BUFFER - 1] = '\0';
 
-    buffer[numDigits + (sign ? 2 : 1)] = '\0';
+    int posDigit = GetPositionFirstDigit(value);            // Позиция первого значащего символа относительно точки
 
-    int position = (type == ParameterValueType::Offset || type == ParameterValueType::Amplitude) ? GetPositionFirstDigit(value) : 1;
-
-    int posComma = PositionComma(position);
-
-    if(sign)
+    for (int i = 0; i < LENGTH_BUFFER; i++)
     {
-        buffer[0] = value.Sign() == 1 ? '+' : '-';
+        char symbol = GetChar(value, posDigit);
+        buffer[i] = symbol;
+
+        if (posDigit == 0)
+        {
+            buffer[++i] = '.';
+        }
+
+        posDigit--;
     }
 
-#define POS(i) ((sign) ? ((i) + (1)) : (i))
-
-    for(int i = 0; i <= numDigits; i++)
-    {
-        if(i == posComma)
-        {
-            buffer[POS(i)] = '.';
-        }
-        else
-        {
-            buffer[POS(i)] = GetChar(value, position);
-            position--;
-        }
-    }
 
     return buffer;
 
 }
 
 
-int MathFloatValue::GetPositionFirstDigit(const FloatValue &_value)
+int MathFloatValue::GetPositionFirstDigit(const FloatValue val, Order::E order)
 {
-    FloatValue value = _value;
+    FloatValue value = val;
     value.SetSign(1);
+
+    CorrectValueOnOrder(&value, order);
 
     int result = 0;
 
@@ -181,19 +173,6 @@ int MathFloatValue::GetDigit(const FloatValue &val, int position, Order::E order
 
         return (whole % 10);
     }
-}
-
-
-int MathFloatValue::PositionComma(int posFirstDigit)
-{
-    int result = posFirstDigit - 5;
-
-    while(result < 1)
-    {
-        result += 3;
-    }
-
-    return result;
 }
 
 
