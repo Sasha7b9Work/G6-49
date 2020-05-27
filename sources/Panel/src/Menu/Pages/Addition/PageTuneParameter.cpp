@@ -29,10 +29,14 @@ static void OnPress_More()
 }
 
 
-static void Draw_More(int x, int y)
+static void Draw_More(int _x, int _y)
 {
-    Primitives::HLine::Draw(y + 35, x + 15, x + 53);
-    Primitives::Line::Draw(x + 15, y + 35, x + 35, y + 15);
+    int x[3] = { _x + 15, _x + 35, _x + 55};
+    int y[3] = { _y + 35, _y + 15, _y + 35};
+
+    Primitives::Line::Draw(x[0], y[0], x[1], y[1]);
+    Primitives::Line::Draw(x[1], y[1], x[2], y[2]);
+    Primitives::Line::Draw(x[0], y[0], x[2], y[2]);
 }
 
 
@@ -40,6 +44,30 @@ DEF_SMALL_BUTTON(sbMore,
     "БОЛЬШЕ", "MORE",
     "Увеличить порядок", "Increase order",
     *PageTuneParameter::self, Item::FuncActive, OnPress_More, Draw_More
+)
+
+
+static void OnPress_Less()
+{
+
+}
+
+
+static void Draw_Less(int _x, int _y)
+{
+    int x[3] = { _x + 15, _x + 35, _x + 55 };
+    int y[3] = { _y + 15, _y + 35, _y + 15 };
+
+    Primitives::Line::Draw(x[0], y[0], x[1], y[1]);
+    Primitives::Line::Draw(x[1], y[1], x[2], y[2]);
+    Primitives::Line::Draw(x[0], y[0], x[2], y[2]);
+}
+
+
+DEF_SMALL_BUTTON(sbLess,
+    "МЕНЬШЕ", "LESS",
+    "Уменьшить порядок", "Decrease order",
+    *PageTuneParameter::self, Item::FuncActive, OnPress_Less, Draw_Less
 )
 
 
@@ -118,10 +146,11 @@ static void OnDraw_TuneParameter()
 }
 
 
-DEF_PAGE_SB( pTuneParameter,   //-V641
+DEF_PAGE_SB(pTuneParameter,   //-V641
     "ВВОД ЗНАЧЕНИЯ", "ENTER VALUE", //-V641
     "", "",
-    &sbMore,
+    //&sbMore,
+    Item::EmptyDark(),
     Item::EmptyDark(),
     &sbCancel,
     &sbEnter,
@@ -133,5 +162,8 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 
 void PageTuneParameter::SetModeEntering()
 {
-
+    pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore));
+    pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess));
+    pTuneParameter.items[2] = Item::EmptyDark();
+    pTuneParameter.items[3] = Item::EmptyDark();
 }
