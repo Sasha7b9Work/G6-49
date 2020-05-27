@@ -149,7 +149,6 @@ static void OnDraw_TuneParameter()
 DEF_PAGE_SB(pTuneParameter,   //-V641
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", "ENTER VALUE", //-V641
     "", "",
-    //&sbMore,
     Item::EmptyDark(),
     Item::EmptyDark(),
     &sbCancel,
@@ -164,6 +163,4 @@ void PageTuneParameter::SetModeEntering()
 {
     pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore));
     pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess));
-    pTuneParameter.items[2] = Item::EmptyDark();
-    pTuneParameter.items[3] = Item::EmptyDark();
 }
