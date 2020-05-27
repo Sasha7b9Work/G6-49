@@ -117,7 +117,7 @@ pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
 
-    static char buffer[LENGTH_BUFFER];                      // ƒополнительно завершающий ноль и точка
+    static char buffer[LENGTH_BUFFER + 1];                      // ƒополнительно завершающий ноль и точка
     buffer[LENGTH_BUFFER - 1] = '\0';
 
     FloatValue value = param->GetValue();
@@ -153,6 +153,12 @@ pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
     }
 
     RepayEmptySymbols(buffer);
+
+    if (param->IsSigned())
+    {
+        buffer[LENGTH_BUFFER - 1] = ' ';
+        buffer[LENGTH_BUFFER] = '\0';
+    }
 
     return buffer;
 
