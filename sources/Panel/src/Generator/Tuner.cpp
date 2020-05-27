@@ -359,33 +359,8 @@ FloatValue Indicator::StepPosition(int pos)
 
     Order::E order = MathFloatValue::GetOrder(display->GetTuner()->GetParameter()->GetValue());
 
-    step.MulPow10(Order::GetPow10(order));
+    step.MulPow10(Order::GetPow10(order) - posAboutComma - 1);
      
-    if (posAboutComma > 0)                              // Если разряд находится справа от точки ( в дробной части )
-    {
-        uint divider = 1;
-
-        while (posAboutComma > 0)
-        {
-            divider *= 10;
-            posAboutComma--;
-        }
-
-        step.Div(divider);
-    }
-    else
-    {
-        uint multiplier = 1;
-
-        while (posAboutComma < -1)
-        {
-            multiplier *= 10;
-            posAboutComma++;
-        }
-
-        step.Mul(multiplier);
-    }
-
     return step;
 }
 
