@@ -295,6 +295,11 @@ Order::E MathFloatValue::GetOrder(FloatValue value)
 {
     value.SetSign(1);
 
+    if (value.Abs() == 0)
+    {
+        return Order::One;
+    }
+
     int integer = value.Integer();
 
     if (integer >= 1000 * 1000)
@@ -335,7 +340,11 @@ int MathParameterValue::GetNumberDigitsBeforeComma()
 
         int def = numberDigits[type][0];
 
-        if (integerPart < 1000)
+        if (integerPart < 1)
+        {
+            return def + 3;
+        }
+        else if (integerPart < 1000)
         {
             return def;
         }
@@ -361,7 +370,11 @@ int MathParameterValue::GetNumberDigitsAfterComma()
 
         int def = numberDigits[type][1];
 
-        if (integerPart < 1000)
+        if (integerPart < 1)
+        {
+            return def - 3;
+        }
+        else if (integerPart < 1000)
         {
             return def;
         }
