@@ -295,14 +295,14 @@ int MathParameterValue::GetNumberDigitsBeforeComma()
 {
     ParameterValueType::E type = param->GetType();
 
+    int result = numberDigits[type][0];
+
     if (type == ParameterValueType::Frequency)
     {
-        int pow = Order::GetPow10(param->GetValue().GetOrder());
-
-        return numberDigits[type][0] - pow;
+        result -= Order::GetPow10(param->GetValue().GetOrder());
     }
 
-    return numberDigits[type][0];
+    return result;
 }
 
 
@@ -310,12 +310,12 @@ int MathParameterValue::GetNumberDigitsAfterComma()
 {
     ParameterValueType::E type = param->GetType();
 
+    int result = numberDigits[type][1];
+
     if (type == ParameterValueType::Frequency)
     {
-        int pow = Order::GetPow10(param->GetValue().GetOrder());
-
-        return numberDigits[type][1] + pow;
+        result += Order::GetPow10(param->GetValue().GetOrder());
     }
 
-    return numberDigits[param->GetType()][1];
+    return result;
 }
