@@ -129,7 +129,7 @@ public:
     pString GetMainUnits(uint lang) const;
 
     // Возвращает единицы измерения, приведённые к порядку order. Если order == Order::Count, единциы будут рассчитываться исходя из текущего значения value
-    pString GetUnits(uint lang, Order::E order) const;
+    pString GetUnits(uint lang, Order::E order = Order::Count) const;
 
     // Возвращает максимальное значение, которое может иметь параметр
     FloatValue GetMax() { return max; }

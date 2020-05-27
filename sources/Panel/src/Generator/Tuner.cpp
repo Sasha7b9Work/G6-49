@@ -424,7 +424,7 @@ void TunerDisplay::DrawUnits(int x, int y)
 {
     Text::SetUpperCase(false);
 
-    Text(tuner->GetParameter()->GetMainUnits(LANGUAGE)).Draw(x + 7, y);
+    Text(tuner->GetParameter()->GetUnits(LANGUAGE)).Draw(x + 7, y);
 
     Text::SetUpperCase(true);
 }
