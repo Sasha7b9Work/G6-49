@@ -13,7 +13,7 @@ void Calibrator::SetFormWave(Chan::E ch, uint8 sig)
 {
     DGenerator::SetFormWave(ch, (sig == 0) ? TypeForm::Sine : TypeForm::Meander);
 
-    DGenerator::SetFrequency(ch, FloatValue(1e3F));
+    DGenerator::SetFrequency(ch, DoubleValue(1e3F));
 }
 
 
@@ -28,7 +28,7 @@ void Calibrator::SetAmplitude(Chan::E ch)
         10.0F
     };
 
-    DGenerator::SetAmplitude(ch, FloatValue(amplitude[range[ch]]));
+    DGenerator::SetAmplitude(ch, DoubleValue(amplitude[range[ch]]));
 }
 
 
@@ -44,12 +44,12 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
 
     if(param == 0)                   // Для калибровки амплитуды просто устанавливаем смещение
     {
-        DGenerator::SetOffset(ch, FloatValue(offset[param]));
+        DGenerator::SetOffset(ch, DoubleValue(offset[param]));
     }
     else                            // А для калибровки смещений блокируем переключение аттенюаторов
     {
         Amplifier::Block();
-        DGenerator::SetOffset(ch, FloatValue(offset[param]));
+        DGenerator::SetOffset(ch, DoubleValue(offset[param]));
         Amplifier::Unblock();
     }
 }
@@ -74,7 +74,7 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
     if(param != 0)              // Для калибровки смещения нужно установить нулевой уровень на выходе, но не аттенюатор не трогать
     {
         Amplifier::Block();
-        DGenerator::SetAmplitude(ch, FloatValue("0"));
+        DGenerator::SetAmplitude(ch, DoubleValue("0"));
         Amplifier::Unblock();
     }
 

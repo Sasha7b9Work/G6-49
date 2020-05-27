@@ -17,19 +17,19 @@ static uint AssembleInteger(const char *const buffer, int start, int end);
 static uint AssembleTriple(const char *const buffer, int start, int *end);
 
 
-FloatValue::FloatValue(const char *const buffer, int order) //-V730
+DoubleValue::DoubleValue(const char *const buffer, int order) //-V730
 {
     FromString(buffer, order);
 }
 
 
-FloatValue::FloatValue(double v)
+DoubleValue::DoubleValue(double v)
 {
     FromDouble(v);
 }
 
 
-void FloatValue::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
+void DoubleValue::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
 {
     value = static_cast<uint>(units);
     value *= 1000 * 1000 * 1000;
@@ -43,7 +43,7 @@ void FloatValue::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int
 }
 
 
-void FloatValue::FromString(const char * const buffer, int order)
+void DoubleValue::FromString(const char * const buffer, int order)
 {
     int pos = 0;                                    // “екуща€ обрабатываема€ позици€ в buffer
     int sign = 1;                                   // ќтрицательное значение означает отрицательный знак
@@ -176,7 +176,7 @@ static uint AssembleTriple(const char *const buffer, int start, int *end)
 }
 
 
-void FloatValue::FromDouble(double v)
+void DoubleValue::FromDouble(double v)
 {
     int sign = (v < 0.0) ? -1 : 1;
 
@@ -189,26 +189,26 @@ void FloatValue::FromDouble(double v)
 }
 
 
-double FloatValue::ToDouble() const
+double DoubleValue::ToDouble() const
 {
     return static_cast<double>(Abs()) / 1E9 * static_cast<double>(Sign());
 }
 
 
-int FloatValue::Sign() const
+int DoubleValue::Sign() const
 {
     //                fedcba9876543210
     return (value & 0x8000000000000000U) ? -1 : 1;
 }
 
 
-uint64 FloatValue::Abs() const
+uint64 DoubleValue::Abs() const
 {   //                fedcba9876543210
     return (value & 0x7fffffffffffffff);
 }
 
 
-void FloatValue::Div(uint div)
+void DoubleValue::Div(uint div)
 {
     int sign = Sign();
 
@@ -220,7 +220,7 @@ void FloatValue::Div(uint div)
 }
 
 
-void FloatValue::Mul(uint mul)
+void DoubleValue::Mul(uint mul)
 {
     int sign = Sign();
 
@@ -232,7 +232,7 @@ void FloatValue::Mul(uint mul)
 }
 
 
-void FloatValue::SetSign(int sign)
+void DoubleValue::SetSign(int sign)
 {
     if (sign > 0)
     {
@@ -247,7 +247,7 @@ void FloatValue::SetSign(int sign)
 }
 
 
-int FloatValue::Integer() const
+int DoubleValue::Integer() const
 {
     uint64 val = Abs();
 
@@ -255,9 +255,9 @@ int FloatValue::Integer() const
 }
 
 
-int FloatValue::FractNano() const
+int DoubleValue::FractNano() const
 {
-    FloatValue val = *this;
+    DoubleValue val = *this;
     val.SetSign(1);
 
     int whole = val.Integer();
@@ -266,7 +266,7 @@ int FloatValue::FractNano() const
 }
 
 
-void FloatValue::Add(FloatValue add)
+void DoubleValue::Add(DoubleValue add)
 {
     int sign = Sign();
     int signAdd = add.Sign();
@@ -310,7 +310,7 @@ void FloatValue::Add(FloatValue add)
 }
 
 
-void FloatValue::Sub(FloatValue val)
+void DoubleValue::Sub(DoubleValue val)
 {
     val.SetSign(-val.Sign());
 
@@ -318,7 +318,7 @@ void FloatValue::Sub(FloatValue val)
 }
 
 
-void FloatValue::MulPow10(int pow)
+void DoubleValue::MulPow10(int pow)
 {
     while (pow > 0)
     {
@@ -334,31 +334,31 @@ void FloatValue::MulPow10(int pow)
 }
 
 
-bool FloatValue::operator<(const FloatValue &rhs)
+bool DoubleValue::operator<(const DoubleValue &rhs)
 {
     return ToDouble() < rhs.ToDouble();
 }
 
 
-bool FloatValue::operator<=(const FloatValue &rhs)
+bool DoubleValue::operator<=(const DoubleValue &rhs)
 {
     return ToDouble() <= rhs.ToDouble();
 }
 
 
-bool FloatValue::operator>(const FloatValue &rhs)
+bool DoubleValue::operator>(const DoubleValue &rhs)
 {
     return ToDouble() > rhs.ToDouble();
 }
 
 
-bool FloatValue::operator>=(const FloatValue &rhs)
+bool DoubleValue::operator>=(const DoubleValue &rhs)
 {
     return ToDouble() >= rhs.ToDouble();
 }
 
 
-bool FloatValue::operator==(const FloatValue &rhs)
+bool DoubleValue::operator==(const DoubleValue &rhs)
 {
     return (value == rhs.value);
 }

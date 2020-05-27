@@ -97,10 +97,10 @@ private:
     bool IsSigned();
 
     // Возвращает "цену разрдяа" в позиции pos
-    FloatValue StepPosition(int pos);
+    DoubleValue StepPosition(int pos);
 
     // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
-    bool ChangeSign(FloatValue *value, int pos);
+    bool ChangeSign(DoubleValue *value, int pos);
 
     Color CalculateColor(int pos, bool *fullFill);
 
@@ -119,7 +119,7 @@ public:
 
     void Init();
 
-    void Init(FloatValue value);
+    void Init(DoubleValue value);
 
     void Draw();
 
@@ -127,7 +127,7 @@ public:
 
     Tuner *GetTuner() { return tuner; }
 
-    FloatValue GetValue() const;
+    DoubleValue GetValue() const;
 
 private:
     Tuner *tuner;

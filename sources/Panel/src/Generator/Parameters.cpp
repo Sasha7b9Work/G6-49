@@ -173,7 +173,7 @@ bool ParameterValue::SetAndLoadValue(double val)
 }
 
 
-bool ParameterValue::SetAndLoadValue(FloatValue val)
+bool ParameterValue::SetAndLoadValue(DoubleValue val)
 {
     if (!InRange(val))
     {
@@ -278,7 +278,7 @@ bool ParameterValue::InRange(double val) const
 }
 
 
-bool ParameterValue::InRange(FloatValue val) const
+bool ParameterValue::InRange(DoubleValue val) const
 {
     return (val >= min && val <= max);
 }
@@ -290,7 +290,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value) :
+ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value) :
     Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
     tuner.Init();
@@ -299,7 +299,7 @@ ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, cons
 
 static Order::E CalculateOrder(const ParameterValue *param)
 {
-    FloatValue value = param->GetValue();
+    DoubleValue value = param->GetValue();
 
     Order::E order = MathFloatValue::GetOrder(value);
 

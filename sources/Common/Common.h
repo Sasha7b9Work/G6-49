@@ -18,13 +18,13 @@ struct TypeForm
 };
 
 
-struct FloatValue
+struct DoubleValue
 {
-    explicit FloatValue(double v);
+    explicit DoubleValue(double v);
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
-    explicit FloatValue(const char *const buffer, int order = 0);
+    explicit DoubleValue(const char *const buffer, int order = 0);
 
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
     void FromDouble(double v);
@@ -36,8 +36,8 @@ struct FloatValue
 
     void Div(uint div);
     void Mul(uint mul);
-    void Add(FloatValue value);
-    void Sub(FloatValue value);
+    void Add(DoubleValue value);
+    void Sub(DoubleValue value);
     // Умножить на 10 в степени pow
     void MulPow10(int pow);
 
@@ -54,11 +54,11 @@ struct FloatValue
 
     uint64 Abs() const;
 
-    bool operator<(const FloatValue &);
-    bool operator>(const FloatValue &);
-    bool operator<=(const FloatValue &);
-    bool operator>=(const FloatValue &);
-    bool operator==(const FloatValue &);
+    bool operator<(const DoubleValue &);
+    bool operator>(const DoubleValue &);
+    bool operator<=(const DoubleValue &);
+    bool operator>=(const DoubleValue &);
+    bool operator==(const DoubleValue &);
 
 private:
 

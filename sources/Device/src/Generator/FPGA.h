@@ -15,9 +15,9 @@ struct FPGA
 
     static void SetAmplitude();
 
-    static void SetDurationImpulse(Chan::E ch, FloatValue duration);
+    static void SetDurationImpulse(Chan::E ch, DoubleValue duration);
 
-    static void SetPeriodImpulse(Chan::E ch, FloatValue period);
+    static void SetPeriodImpulse(Chan::E ch, DoubleValue period);
 
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
@@ -30,11 +30,11 @@ struct FPGA
         // Устанавливает число импульсов в пачке
         static void SetNumberImpules(uint n);
         // Устанавливает период следования пачки
-        static void SetPeriodPacket(FloatValue period);
+        static void SetPeriodPacket(DoubleValue period);
 
-        static FloatValue periodImpulse;
+        static DoubleValue periodImpulse;
 
-        static FloatValue durationImpulse;
+        static DoubleValue durationImpulse;
     };
 
     struct ModeWork

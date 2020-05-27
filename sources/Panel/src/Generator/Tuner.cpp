@@ -160,11 +160,11 @@ void Indicator::IncreaseInPosition(int pos)
 {
     ParameterValue *param = display->GetTuner()->GetParameter();
 
-    FloatValue value = param->GetValue();
+    DoubleValue value = param->GetValue();
 
     if (!ChangeSign(&value, pos))
     {
-        FloatValue step = StepPosition(pos);
+        DoubleValue step = StepPosition(pos);
 
         value.Add(step);
 
@@ -179,13 +179,13 @@ void Indicator::DecreaseInPosition(int pos)
 {
     ParameterValue *param = display->GetTuner()->GetParameter();
 
-    FloatValue value = param->GetValue();
+    DoubleValue value = param->GetValue();
 
     double valueF = value.ToDouble();
 
     if (!ChangeSign(&value, pos))
     {
-        FloatValue step = StepPosition(pos);
+        DoubleValue step = StepPosition(pos);
 
         double stepF = step.ToDouble();
         stepF = stepF;
@@ -210,7 +210,7 @@ void Indicator::DecreaseInPosition(int pos)
 }
 
 
-bool Indicator::ChangeSign(FloatValue *value, int pos)
+bool Indicator::ChangeSign(DoubleValue *value, int pos)
 {
     if (IsSigned() && (pos == 0))
     {
@@ -226,9 +226,9 @@ bool Indicator::ChangeSign(FloatValue *value, int pos)
 }
 
 
-FloatValue TunerDisplay::GetValue() const
+DoubleValue TunerDisplay::GetValue() const
 {
-    return FloatValue(indicator.GetStringDigits());
+    return DoubleValue(indicator.GetStringDigits());
 }
 
 
@@ -367,7 +367,7 @@ char *Indicator::GetStringDigits() const
 }
 
 
-FloatValue Indicator::StepPosition(int pos)
+DoubleValue Indicator::StepPosition(int pos)
 {
     int posAboutComma = pos - PositionComma();          // ѕозици€ разр€да относительно точки
 
@@ -376,7 +376,7 @@ FloatValue Indicator::StepPosition(int pos)
         posAboutComma++;
     }
 
-    FloatValue step("1.0");
+    DoubleValue step("1.0");
 
     Order::E order = MathFloatValue::GetOrder(display->GetTuner()->GetParameter()->GetValue());
 
@@ -450,7 +450,7 @@ void TunerDisplay::Init()
 {
     MathParameterValue::SetParameterValue(tuner->GetParameter());
 
-    FloatValue value = tuner->GetParameter()->GetValue();
+    DoubleValue value = tuner->GetParameter()->GetValue();
     double valueD = value.ToDouble();
     valueD = valueD;
 
@@ -473,13 +473,13 @@ void TunerDisplay::FillDigitsIntegerPart()
 {
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     ParameterValue *param = tuner->GetParameter();
-    FloatValue value = param->GetValue();
+    DoubleValue value = param->GetValue();
 
     int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
 
     if (param->IsSigned())
     {
-        indicator.digits[0].Set((value < FloatValue("0.0")) ? '-' : '+');
+        indicator.digits[0].Set((value < DoubleValue("0.0")) ? '-' : '+');
     }
 
     for (int i = 0; i < before; i++)
@@ -499,7 +499,7 @@ void TunerDisplay::FillDigitsFractPart()
 {
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     int after = MathParameterValue::GetNumberDigitsAfterComma();
-    FloatValue value = tuner->GetParameter()->GetValue();
+    DoubleValue value = tuner->GetParameter()->GetValue();
 
     int pos = before + 1;                                   // “еперь в эту позицию будем записывать рразр€ды после зап€той
 
@@ -511,7 +511,7 @@ void TunerDisplay::FillDigitsFractPart()
 }
 
 
-void TunerDisplay::Init(FloatValue value)
+void TunerDisplay::Init(DoubleValue value)
 {
     tuner->GetParameter()->SetAndLoadValue(value);
     Init();
