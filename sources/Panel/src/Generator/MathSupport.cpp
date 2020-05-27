@@ -33,19 +33,40 @@ static const int numberDigits[ParameterValueType::Count][2] =
 ParameterValue *MathParameterValue::param = nullptr;
 
 
+// Погасить незначащие символы
+static void RepayEmptySymbols(char *buffer)
+{
+    while (*buffer == '0')
+    {
+        if (*buffer == '\0')
+        {
+            break;
+        }
+        *buffer = ' ';
+        buffer++;
+    }
+}
+
+
 pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
 {
     static const int NUM_DIGITS = 5;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
 
     FloatValue value = param->GetValue();
+    bool sign = param->IsSigned();
 
     static char buffer[LENGTH_BUFFER];                      // Дополнительно завершающий ноль и точка
     buffer[LENGTH_BUFFER - 1] = '\0';
 
-    int posDigit = GetPositionFirstDigit(value);            // Позиция первого значащего символа относительно точки
+    if (sign)
+    {
+        buffer[0] = (value.Sign() > 0) ? '+' : '-';
+    }
 
-    for (int i = 0; i < LENGTH_BUFFER; i++)
+    int posDigit = GetPositionFirstDigit(param);            // Позиция первого значащего символа относительно точки
+
+    for (int i = sign ? 1 : 0; i < LENGTH_BUFFER; i++)
     {
         char symbol = GetChar(value, posDigit);
         buffer[i] = symbol;
@@ -58,15 +79,34 @@ pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
         posDigit--;
     }
 
+    RepayEmptySymbols(buffer);
 
     return buffer;
 
 }
 
 
-int MathFloatValue::GetPositionFirstDigit(const FloatValue val, Order::E order)
+static int GetPositionFirstDigitVoltate(const ParameterValue *param, Order::E)
 {
-    FloatValue value = val;
+    FloatValue value = param->GetValue();
+
+    if (value == FloatValue("10"))
+    {
+        return 1;
+    }
+
+    return 1;
+}
+
+
+int MathFloatValue::GetPositionFirstDigit(const ParameterValue *param, Order::E order)
+{
+    if (param->IsVoltage())
+    {
+        return GetPositionFirstDigitVoltate(param, order);
+    }
+
+    FloatValue value = param->GetValue();
     value.SetSign(1);
 
     CorrectValueOnOrder(&value, order);

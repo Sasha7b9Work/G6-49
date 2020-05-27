@@ -56,6 +56,7 @@ struct FloatValue
     bool operator>(const FloatValue &);
     bool operator<=(const FloatValue &);
     bool operator>=(const FloatValue &);
+    bool operator==(const FloatValue &);
 
 private:
 

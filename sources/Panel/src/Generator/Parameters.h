@@ -114,6 +114,12 @@ public:
     // Возвращает true, если параметр имеет знак
     bool IsSigned() const { return (type == ParameterValueType::Offset); }
 
+    // Возвращает true, если параметр обозначает напряжение
+    bool IsVoltage() const
+    {
+        return (type == ParameterValueType::Amplitude) || (type == ParameterValueType::Offset);
+    }
+
     void OnPressButtonTune();
 
     // Возвращает строковое представление значения параметра
@@ -232,7 +238,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const FloatValue &min = FloatValue("0"), const FloatValue &max = FloatValue("10"), const FloatValue &value = FloatValue("10")) :
+    ParameterAmplitude(const FloatValue &min = FloatValue("0"), const FloatValue &max = FloatValue("10"), const FloatValue &value = FloatValue("1")) :
         ParameterVoltage(ParameterValueType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 

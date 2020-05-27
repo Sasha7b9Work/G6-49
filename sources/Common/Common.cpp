@@ -340,3 +340,9 @@ bool FloatValue::operator>=(const FloatValue &rhs)
 {
     return ToFloat() >= rhs.ToFloat();
 }
+
+
+bool FloatValue::operator==(const FloatValue &rhs)
+{
+    return (value == rhs.value);
+}
