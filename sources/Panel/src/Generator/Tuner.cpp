@@ -158,7 +158,9 @@ bool Indicator::IsSigned()
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    FloatValue value = display->GetTuner()->GetParameter()->GetValue();
+    ParameterValue *param = display->GetTuner()->GetParameter();
+
+    FloatValue value = param->GetValue();
 
     if (!ChangeSign(&value, pos))
     {
@@ -166,7 +168,7 @@ void Indicator::IncreaseInPosition(int pos)
 
         value.Add(step);
 
-        LIMITATION_ABOVE(value, display->GetTuner()->GetParameter()->GetMax());
+        LIMITATION_ABOVE(value, param->GetMax());
     }
 
     display->Init(value);
@@ -175,7 +177,9 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    FloatValue value = display->GetTuner()->GetParameter()->GetValue();
+    ParameterValue *param = display->GetTuner()->GetParameter();
+
+    FloatValue value = param->GetValue();
 
     if (!ChangeSign(&value, pos))
     {
@@ -183,7 +187,7 @@ void Indicator::DecreaseInPosition(int pos)
 
         value.Sub(step);
 
-        LIMITATION_BELOW(value, display->GetTuner()->GetParameter()->GetMin());
+        LIMITATION_BELOW(value, param->GetMin());
     }
 
     display->Init(value);
@@ -351,12 +355,12 @@ FloatValue Indicator::StepPosition(int pos)
 {
     int posAboutComma = pos - PositionComma();          // ѕозици€ разр€да относительно точки
 
-    FloatValue price("1.0");
+    FloatValue step("1.0");
 
     Order::E order = MathFloatValue::GetOrder(display->GetTuner()->GetParameter()->GetValue());
 
-    price.MulPow10(Order::GetPow10(order));
-
+    step.MulPow10(Order::GetPow10(order));
+     
     if (posAboutComma > 0)                              // ≈сли разр€д находитс€ справа от точки ( в дробной части )
     {
         uint divider = 1;
@@ -367,7 +371,7 @@ FloatValue Indicator::StepPosition(int pos)
             posAboutComma--;
         }
 
-        price.Div(divider);
+        step.Div(divider);
     }
     else
     {
@@ -379,10 +383,10 @@ FloatValue Indicator::StepPosition(int pos)
             posAboutComma++;
         }
 
-        price.Mul(multiplier);
+        step.Mul(multiplier);
     }
 
-    return price;
+    return step;
 }
 
 
@@ -470,11 +474,6 @@ void TunerDisplay::FillDigitsIntegerPart()
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     ParameterValue *param = tuner->GetParameter();
     FloatValue value = param->GetValue();
-
-    if (param->GetType() == ParameterValueType::Frequency)
-    {
-        value = value;
-    }
 
     int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
 

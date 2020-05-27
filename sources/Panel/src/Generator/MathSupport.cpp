@@ -55,11 +55,7 @@ static void RepayEmptySymbols(char *buffer)
 
     while (*buffer == '0')
     {
-        if (*buffer == '\0')
-        {
-            break;
-        }
-        if (*(buffer + 1) == '.')
+        if ((*buffer == '\0') || (*(buffer + 1) == '.'))
         {
             break;
         }
