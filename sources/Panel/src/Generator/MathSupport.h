@@ -1,29 +1,10 @@
 #pragma once
+#include "common/Common.h"
 
 
 struct DoubleValue;
 class Parameter;
 class ParameterValue;
-
-
-struct Order
-{
-    enum E
-    {
-        Mega,
-        Kilo,
-        One,
-        Milli,
-        Micro,
-        Nano,
-        Count
-    };
-
-    static pString Suffix(Order::E order, uint lang);
-
-    // ¬озвращает степень, соответсвующую пор€дку
-    static int GetPow10(Order::E order);
-};
 
 
 struct MathFloatValue
@@ -41,14 +22,6 @@ struct MathFloatValue
     // ¬озвращает символ в позиции position. «нак не учитываетс€. “очка находитс€ соответственно order. One - после единиц, Kilo - после тыс€ч и так далее.
     // Order::Count - значенине по умолчанию - зап€та€ в позиции относительно размерности числового значени€
     static char GetChar(const DoubleValue &value, int postition, Order::E order = Order::Count);
-
-    // ¬озвращает:
-    // Order::Mega  - DoubleValue::Integer() >= 1e6
-    // Order::Kilo  - DoubleValue::Integer() >= 1e3
-    // Order::One   - DoubleValue::Integer() >= 0
-    // Order::Milli - DoubleValue::Integer() >= 1e-3
-    // Order::Micro - DoubleValue::Integer() >= 1e-6
-    static Order::E GetOrder(DoubleValue value);
 
 private:
 

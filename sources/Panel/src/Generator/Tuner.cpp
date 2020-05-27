@@ -378,7 +378,7 @@ DoubleValue Indicator::StepPosition(int pos)
 
     DoubleValue step("1.0");
 
-    Order::E order = MathFloatValue::GetOrder(display->GetTuner()->GetParameter()->GetValue());
+    Order::E order = display->GetTuner()->GetParameter()->GetValue().GetOrder();
 
     step.MulPow10(Order::GetPow10(order) - posAboutComma);
      

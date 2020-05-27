@@ -18,6 +18,26 @@ struct TypeForm
 };
 
 
+struct Order
+{
+    enum E
+    {
+        Mega,
+        Kilo,
+        One,
+        Milli,
+        Micro,
+        Nano,
+        Count
+    };
+
+    static pString Suffix(Order::E order, uint lang);
+
+    // Возвращает степень, соответсвующую порядку
+    static int GetPow10(Order::E order);
+};
+
+
 struct DoubleValue
 {
     explicit DoubleValue(double v);
@@ -53,6 +73,14 @@ struct DoubleValue
     int FractNano() const;
 
     uint64 Abs() const;
+
+    // Возвращает:
+    // Order::Mega  - DoubleValue::Integer() >= 1e6
+    // Order::Kilo  - DoubleValue::Integer() >= 1e3
+    // Order::One   - DoubleValue::Integer() >= 0
+    // Order::Milli - DoubleValue::Integer() >= 1e-3
+    // Order::Micro - DoubleValue::Integer() >= 1e-6
+    Order::E GetOrder() const;
 
     bool operator<(const DoubleValue &);
     bool operator>(const DoubleValue &);

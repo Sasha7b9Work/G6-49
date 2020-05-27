@@ -146,7 +146,7 @@ pString ParameterValue::GetUnits(uint lang, Order::E order) const
 {
     if (order == Order::Count)
     {
-        order = MathFloatValue::GetOrder(value);
+        order = value.GetOrder();
     }
 
     static char units[10];
@@ -301,7 +301,7 @@ static Order::E CalculateOrder(const ParameterValue *param)
 {
     DoubleValue value = param->GetValue();
 
-    Order::E order = MathFloatValue::GetOrder(value);
+    Order::E order = value.GetOrder();
 
     if (param->IsVoltage() && (value.Abs() == 0))
     {

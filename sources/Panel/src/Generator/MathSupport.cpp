@@ -228,7 +228,7 @@ void MathFloatValue::CorrectValueOnOrder(DoubleValue *value, Order::E order)
 {
     if (order == Order::Count)
     {
-        order = GetOrder(*value);
+        order = value->GetOrder();
     }
 
     if (order == Order::Mega)
@@ -291,35 +291,13 @@ int MathFloatValue::GetDigit(const DoubleValue &val, int position, Order::E orde
 }
 
 
-Order::E MathFloatValue::GetOrder(DoubleValue value)
-{
-    value.SetSign(1);
-
-    int integer = value.Integer();
-
-    if      (integer >= 1000 * 1000) { return Order::Mega;  }
-    else if (integer >= 1000)        { return Order::Kilo;  }
-    else if (integer > 0)            { return Order::One;   }
-
-    int fract = value.FractNano();
-
-    if      (fract >= 1000 * 1000)   { return Order::Milli; }
-    else if (fract >= 1000)          { return Order::Micro; }
-    else if (fract > 0)              { return Order::Nano;  }
-
-    return Order::One;
-}
-
-
 int MathParameterValue::GetNumberDigitsBeforeComma()
 {
     ParameterValueType::E type = param->GetType();
 
     if (type == ParameterValueType::Frequency)
     {
-        Order::E order = MathFloatValue::GetOrder(param->GetValue());
-
-        int pow = Order::GetPow10(order);
+        int pow = Order::GetPow10(param->GetValue().GetOrder());
 
         return numberDigits[type][0] - pow;
     }
@@ -334,9 +312,7 @@ int MathParameterValue::GetNumberDigitsAfterComma()
 
     if (type == ParameterValueType::Frequency)
     {
-        Order::E order = MathFloatValue::GetOrder(param->GetValue());
-
-        int pow = Order::GetPow10(order);
+        int pow = Order::GetPow10(param->GetValue().GetOrder());
 
         return numberDigits[type][1] + pow;
     }

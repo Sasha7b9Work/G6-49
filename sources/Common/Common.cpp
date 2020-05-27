@@ -362,3 +362,24 @@ bool DoubleValue::operator==(const DoubleValue &rhs)
 {
     return (value == rhs.value);
 }
+
+
+Order::E DoubleValue::GetOrder() const
+{
+    DoubleValue temp = *this;
+    temp.SetSign(1);
+
+    int integer = temp.Integer();
+
+    if      (integer >= 1000 * 1000) { return Order::Mega;  }
+    else if (integer >= 1000)        { return Order::Kilo;  }
+    else if (integer > 0)            { return Order::One;   }
+
+    int fract = temp.FractNano();
+
+    if      (fract >= 1000 * 1000)   { return Order::Milli; }
+    else if (fract >= 1000)          { return Order::Micro; }
+    else if (fract > 0)              { return Order::Nano;  }
+
+    return Order::One;
+}
