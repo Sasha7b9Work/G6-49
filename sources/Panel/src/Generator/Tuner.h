@@ -23,6 +23,8 @@ public:
 
     bool IsNumber()  { return (value >= '0' && value <= '9'); }
 
+    bool IsEmpty()   { return (value == '\0'); }
+
 private:
 
     char value;
@@ -100,6 +102,12 @@ private:
 
     // Возвращает true, если нужно дополнительное смещение между разрядами
     int AdditionShiftForDigit(int pos);
+
+    // Возвращает "чистый" индекс подсвеченного символа - беза учёта знака и точки
+    int GetIndexHighlightPure();
+
+    // Устанавливает "чистый" индекс подсвеченного символа - без учёта знака и точки
+    void SetIndexHighlightPure();
 };
 
 

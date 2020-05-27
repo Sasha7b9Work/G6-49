@@ -340,6 +340,26 @@ void Indicator::InitHighlight()
 }
 
 
+int Indicator::GetIndexHighlightPure()
+{
+    int index = 0;
+
+    for (int i = 0; i < MAX_NUM_DIGITS; i++)
+    {
+        if (digits[i].IsNumber())
+        {
+            index++;
+        }
+    }
+}
+
+
+void Indicator::SetIndexHighlightPure()
+{
+
+}
+
+
 TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this)
 {
 }
