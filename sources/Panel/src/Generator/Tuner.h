@@ -87,12 +87,6 @@ private:
     // ”меньшить значение в указанном разр€де
     void DecreaseInPosition(int pos);
 
-    // ¬озвращает true, если значение знакоместа pos может быть уменьшено
-    bool CanBeDecreased(int pos);
-
-    // ¬озвращает true, если значение знакоместа pos может быть увеличено
-    bool CanBeIncreased(int pos);
-
     // ¬озвращает true, если числовое значение со знакомџ
     bool IsSigned();
 

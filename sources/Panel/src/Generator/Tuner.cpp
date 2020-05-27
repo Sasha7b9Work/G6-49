@@ -299,42 +299,6 @@ int Indicator::FindPositionLeftDigit(int pos)
 }
 
 
-bool Indicator::CanBeDecreased(int pos)
-{
-    if (digits[pos].IsNumber())
-    {
-        if (digits[pos] > '0')
-        {
-            return true;
-        }
-    }
-    else
-    {
-        return true;
-    }
-
-    int left = FindPositionLeftDigit(pos);
-
-    if (left < 0)
-    {
-        return false;
-    }
-
-    return CanBeDecreased(left);
-}
-
-
-bool Indicator::CanBeIncreased(int pos)
-{
-    if (FirstSignedDigitInPosition(pos) && digits[pos] == '9')
-    {
-        return false;
-    }
-
-    return true;
-}
-
-
 char *Indicator::GetStringDigits() const
 {
     static char result[MAX_NUM_DIGITS];
