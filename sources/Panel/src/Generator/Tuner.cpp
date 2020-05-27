@@ -355,11 +355,17 @@ FloatValue Indicator::StepPosition(int pos)
 {
     int posAboutComma = pos - PositionComma();          // Позиция разряда относительно точки
 
+    if (posAboutComma < 0)
+    {
+        posAboutComma++;
+    }
+
     FloatValue step("1.0");
 
     Order::E order = MathFloatValue::GetOrder(display->GetTuner()->GetParameter()->GetValue());
 
-    step.MulPow10(Order::GetPow10(order) - posAboutComma - 1);
+
+    step.MulPow10(Order::GetPow10(order) - posAboutComma);
      
     return step;
 }
