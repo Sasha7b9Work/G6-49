@@ -68,5 +68,5 @@ private:
 
     static ClockFrequency::E clock;
 
-    static float phase[Chan::Count];
+    static double phase[Chan::Count];
 };

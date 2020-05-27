@@ -170,7 +170,7 @@ void FPGA::SetFrequency(Chan::E ch)
 {
     WriteControlRegister();
 
-    float frequency = SettingsGenerator::Frequency(ch);
+    double frequency = SettingsGenerator::Frequency(ch);
     
     if(modeWork[ch] == ModeWork::Meander)
     {
@@ -220,7 +220,7 @@ void FPGA::PacketImpulse::SetPeriodPacket(FloatValue period)
 
 void FPGA::PacketImpulse::SetNumberImpules(uint value)
 {
-    uint64 n = static_cast<uint64>(((value - 1) * periodImpulse.ToFloat() + durationImpulse.ToFloat()) / 10E-9F);
+    uint64 n = static_cast<uint64>(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9);
 
     WriteRegister(RG::_6_DurationImpulseA, n);
 }
@@ -467,9 +467,9 @@ static uint CalculateCodeAmplitude(Chan::E ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
 
-    float att = 1.0F / Amplifier::GetAmplification(ch);
+    double att = 1.0 / Amplifier::GetAmplification(ch);
 
-    float amplitude = k * att * SettingsGenerator::Amplitude(ch);
+    double amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
     return static_cast<uint>(amplitude * 1023);
 }

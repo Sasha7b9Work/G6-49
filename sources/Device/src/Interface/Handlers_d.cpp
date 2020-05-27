@@ -363,11 +363,11 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FreqMeterLevel:
-        AD5697::SetFreqLevel(value.ToFloat());
+        AD5697::SetFreqLevel(value.ToDouble());
         break;
 
     case Register::FreqMeterHYS:
-        AD5697::SetFreqHysteresys(value.ToFloat());
+        AD5697::SetFreqHysteresys(value.ToDouble());
         break;
 
     case Register::FPGA_RG0_Control:

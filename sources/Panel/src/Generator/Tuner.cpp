@@ -181,22 +181,22 @@ void Indicator::DecreaseInPosition(int pos)
 
     FloatValue value = param->GetValue();
 
-    float valueF = value.ToFloat();
+    double valueF = value.ToDouble();
 
     if (!ChangeSign(&value, pos))
     {
         FloatValue step = StepPosition(pos);
 
-        float stepF = step.ToFloat();
+        double stepF = step.ToDouble();
         stepF = stepF;
 
         value.Sub(step);
 
-        valueF = value.ToFloat();
+        valueF = value.ToDouble();
 
         LIMITATION_BELOW(value, param->GetMin());
 
-        valueF = value.ToFloat();
+        valueF = value.ToDouble();
 
         int integer = value.Integer();
         integer = integer;

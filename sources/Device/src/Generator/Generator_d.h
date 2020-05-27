@@ -62,27 +62,36 @@ struct Attenuation
 class Amplifier
 {
 public:
+    
     static void Init();
+    
     // Настроить усилитель в соответствии с текущими настройками
     static void Tune(Chan::E ch);
+    
     // Возвращает коэффициент усиления в разах всего тракта, включая аттенюатор и усилитель. Усилитель даёт усиление 10 раз, за каждые 10 Дб нужно разделить на 3.16
-    static float GetAmplification(Chan::E ch);
+    static double GetAmplification(Chan::E ch);
+    
     // Заблокировать переключение
     static void Block()   { isBlocked = true; };
+    
     // Разблокировать переключение
     static void Unblock() { isBlocked = false; };
+    
     // Возвращает true, если на данном канале включён усилитель
     static bool IsEnabled(Chan::E ch) { return isEnabled[ch]; }
 
 private:
+    
     // Включить/выключить аппаратный усилитель усилитель
     static void Enable(Chan::E ch, bool enable);
 
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
 
     static Attenuation::E attenuation[Chan::Count];
+    
     // Установленное в true значение означает, что усилитель заблокирован - никакие действия в Tune() выолняться не будут
     static bool isBlocked;
+    
     // true, если усилитель соотвествующего канала включён
     static bool isEnabled[Chan::Count];
 };
@@ -93,11 +102,11 @@ struct SettingsGenerator
     friend class DGenerator;
 public:
     // Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
-    static float Amplitude(Chan::E ch) { return amplitude[ch].ToFloat();  }
+    static double Amplitude(Chan::E ch) { return amplitude[ch].ToDouble();  }
     // Возвращает установленное на канале смещение
-    static float Offset(Chan::E ch)    { return offset[ch].ToFloat();     }
+    static double Offset(Chan::E ch)    { return offset[ch].ToDouble();     }
     // Возвращает установленную частоту на канале
-    static float Frequency(Chan::E ch) { return frequency[ch].ToFloat();  }
+    static double Frequency(Chan::E ch) { return frequency[ch].ToDouble();  }
     // Возвращает true, если на канале ch установлена синусоидальная форма сигнала
     static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
 private:

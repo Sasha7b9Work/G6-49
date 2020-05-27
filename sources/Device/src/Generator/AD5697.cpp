@@ -22,50 +22,44 @@ void AD5697::Init()
 }
 
 
-float AD5697::CalculateCodeOffset(Chan::E ch)
+double AD5697::CalculateCodeOffset(Chan::E ch)
 {
-    float zero = Calibrator::GetOffsetK_Zero(ch);           // 2048
+    double zero = Calibrator::GetOffsetK_Zero(ch);           // 2048
 
-    float offset = SettingsGenerator::Offset(ch);
+    double offset = SettingsGenerator::Offset(ch);
 
-    float max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0F : 2.5F;
+    double max = SettingsGenerator::Amplitude(ch) > 1.0 ? 5.0 : 2.5;
 
-    float result = zero;
+    double result = zero;
     
     if (offset > 0.0F)
     {
-        float pos = Calibrator::GetOffsetK_Positive(ch);    // 0
+        double pos = Calibrator::GetOffsetK_Positive(ch);    // 0
 
-        float scale = (zero - pos) / max;
+        double scale = (zero - pos) / max;
 
-        float before = pos + scale * (max - offset);
+        double before = pos + scale * (max - offset);
 
-        result = 4095.0F - before;
-
-//        LOG_WRITE("pos = %d, scale = %.1f, offset = %.1f", (int)pos, scale, SettingsGenerator::Offset(ch));
-//        LOG_WRITE("before = %d, result = %f", (int)before, result);
+        result = 4095.0 - before;
     }
     else if(offset < 0.0F)
     {
-        float neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
+        double neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
 
-        float scale = (neg - zero) / max;
+        double scale = (neg - zero) / max;
 
-        float before = neg - scale * (max + offset);
+        double before = neg - scale * (max + offset);
 
         result = 4095.0F - before;
-
-//        LOG_WRITE("neg = %d, scale = %.1f, offset = %.1f", (int)neg, scale, SettingsGenerator::Offset(ch));
-//        LOG_WRITE("before = %d, result = %f", (int)before, result);
     }
 
-    return Math::Limitation<float>(&result, 0.0F, 4095.0F);
+    return Math::Limitation<double>(&result, 0.0, 4095.0);
 }
 
 
 void AD5697::SetOffset(Chan::E ch)
 {
-    float code = CalculateCodeOffset(ch);
+    double code = CalculateCodeOffset(ch);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
@@ -80,9 +74,9 @@ void AD5697::SetOffset(Chan::E ch)
 }
 
 
-void AD5697::SetFreqHysteresys(float hyst)
+void AD5697::SetFreqHysteresys(double hyst)
 {
-    Math::Limitation(&hyst, 0.0F, 4095.0F);
+    Math::Limitation(&hyst, 0.0, 4095.0);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(hyst) << 4);
 
@@ -97,11 +91,11 @@ void AD5697::SetFreqHysteresys(float hyst)
 }
 
 
-void AD5697::SetFreqLevel(float level)
+void AD5697::SetFreqLevel(double level)
 {
     level += Calibrator::GetFreqMeterK_Trig();
 
-    Math::Limitation(&level, 0.0F, 4095.0F);
+    Math::Limitation(&level, 0.0, 4095.0);
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(level) << 4);
 

@@ -20,18 +20,18 @@ struct TypeForm
 
 struct FloatValue
 {
-    explicit FloatValue(float v);
+    explicit FloatValue(double v);
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
     explicit FloatValue(const char *const buffer, int order = 0);
 
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
-    void FromFloat(float v);
+    void FromDouble(double v);
     void FromUINT64(uint64 v) { value = v; }
     void FromString(const char * const buffer, int order);
 
-    float ToFloat() const;
+    double ToDouble() const;
     uint64 ToUINT64() const { return value; }
 
     void Div(uint div);

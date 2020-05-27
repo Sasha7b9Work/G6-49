@@ -91,7 +91,7 @@ uint8 Calibrator::CalculateRange(Chan::E ch)
         return range[ch];
     }
 
-    float amplitude = SettingsGenerator::Amplitude(ch);
+    double amplitude = SettingsGenerator::Amplitude(ch);
 
     if(amplitude > Attenuation(Attenuation::_10Db).Units())
     {
@@ -134,19 +134,19 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch)
 }
 
 
-float Calibrator::GetOffsetK_Negative(Chan::E ch)
+double Calibrator::GetOffsetK_Negative(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 4095.0F - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U);
+    return 4095.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U);
 }
 
 
-float Calibrator::GetOffsetK_Positive(Chan::E ch)
+double Calibrator::GetOffsetK_Positive(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 0.0F - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U);
+    return 0.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U);
 }
 
 

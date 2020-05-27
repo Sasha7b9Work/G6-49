@@ -108,7 +108,7 @@ public:
     ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const FloatValue &_min, const FloatValue &_max, const FloatValue &_value);
 
     // ”становить значение параметра и загрузить его в прибор
-    bool SetAndLoadValue(float val);
+    bool SetAndLoadValue(double val);
     bool SetAndLoadValue(FloatValue val);
     
     // ¬озвращает true, если параметр имеет знак
@@ -152,7 +152,7 @@ private:
     FloatValue value;
 
     // ¬озвращает true, если параметр может принимать значение v
-    bool InRange(float v) const;
+    bool InRange(double v) const;
     bool InRange(FloatValue v) const;
 };
 

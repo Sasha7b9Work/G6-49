@@ -11,9 +11,9 @@ struct AD5697
 
     static void SetOffset(Chan::E ch);
 
-    static void SetFreqLevel(float level);
+    static void SetFreqLevel(double level);
 
-    static void SetFreqHysteresys(float hyst);
+    static void SetFreqHysteresys(double hyst);
 
 private:
     static void Reset(Chan::E ch);
@@ -24,5 +24,5 @@ private:
     static StructPIN PinLDAC(Chan::E ch);
 
     // Рассчитать код смещения для смещения offset
-    static float CalculateCodeOffset(Chan::E ch);
+    static double CalculateCodeOffset(Chan::E ch);
 };

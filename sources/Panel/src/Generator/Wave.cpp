@@ -575,17 +575,17 @@ uint8 *Form::GetFormFlash(Chan::E ch)
 }
 
 
-float Form::GetOffset()
+double Form::GetOffset()
 {
     ParameterValue *parameter = FindParameter(ParameterValueType::Offset);
 
-    return (parameter) ? parameter->GetValue().ToFloat() : 0.0F;
+    return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }
 
 
-float Form::GetAmplitude()
+double Form::GetAmplitude()
 {
     ParameterValue *parameter = FindParameter(ParameterValueType::Amplitude);
 
-    return (parameter) ? parameter->GetValue().ToFloat() : 0.0F;
+    return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }

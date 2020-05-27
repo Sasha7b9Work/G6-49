@@ -80,10 +80,10 @@ public:
     static uint8 *GetFormFlash(Chan::E ch);
     
     // Получить смещение сигнала
-    float GetOffset();
+    double GetOffset();
     
     // Получить размах сигнала
-    float GetAmplitude();
+    double GetAmplitude();
 
     operator TypeForm::E() { return value; }
     

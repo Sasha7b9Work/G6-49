@@ -23,9 +23,9 @@ FloatValue::FloatValue(const char *const buffer, int order) //-V730
 }
 
 
-FloatValue::FloatValue(float v)
+FloatValue::FloatValue(double v)
 {
-    FromFloat(v);
+    FromDouble(v);
 }
 
 
@@ -176,11 +176,11 @@ static uint AssembleTriple(const char *const buffer, int start, int *end)
 }
 
 
-void FloatValue::FromFloat(float v)
+void FloatValue::FromDouble(double v)
 {
-    int sign = (v < 0.0F) ? -1 : 1;
+    int sign = (v < 0.0) ? -1 : 1;
 
-    value = static_cast<uint64>(std::fabsf(v) * 1.E9F);
+    value = static_cast<uint64>(std::fabs(v) * 1.E9);
 
     if (sign < 0)
     {
@@ -189,9 +189,9 @@ void FloatValue::FromFloat(float v)
 }
 
 
-float FloatValue::ToFloat() const
+double FloatValue::ToDouble() const
 {
-    return static_cast<float>(Abs()) / 1E9F * static_cast<float>(Sign());
+    return static_cast<double>(Abs()) / 1E9 * static_cast<double>(Sign());
 }
 
 
@@ -336,25 +336,25 @@ void FloatValue::MulPow10(int pow)
 
 bool FloatValue::operator<(const FloatValue &rhs)
 {
-    return ToFloat() < rhs.ToFloat();
+    return ToDouble() < rhs.ToDouble();
 }
 
 
 bool FloatValue::operator<=(const FloatValue &rhs)
 {
-    return ToFloat() <= rhs.ToFloat();
+    return ToDouble() <= rhs.ToDouble();
 }
 
 
 bool FloatValue::operator>(const FloatValue &rhs)
 {
-    return ToFloat() > rhs.ToFloat();
+    return ToDouble() > rhs.ToDouble();
 }
 
 
 bool FloatValue::operator>=(const FloatValue &rhs)
 {
-    return ToFloat() >= rhs.ToFloat();
+    return ToDouble() >= rhs.ToDouble();
 }
 
 

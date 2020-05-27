@@ -8,7 +8,7 @@
 
 AD9952::ClockFrequency::E AD9952::clock = ClockFrequency::_100MHz;
 bool AD9952::Manipulation::enabled[Chan::Count] = { false, false };
-float AD9952::phase[Chan::Count] = { 0.0F, 0.0F };
+double AD9952::phase[Chan::Count] = { 0.0, 0.0 };
 
 
 void AD9952::Init()
@@ -47,7 +47,7 @@ void AD9952::SetFrequency(Chan::E ch)
 
 void AD9952::SetPhase(Chan::E ch, FloatValue ph)
 {
-    phase[ch] = ph.ToFloat();
+    phase[ch] = ph.ToDouble();
 
     if(SettingsGenerator::Frequency(Chan::A) == SettingsGenerator::Frequency(Chan::B)) //-V550 //-V2550
     {
@@ -119,9 +119,9 @@ void AD9952::WriteASF(Chan::E ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
 
-    float att = 1.0F / Amplifier::GetAmplification(ch);
+    double att = 1.0 / Amplifier::GetAmplification(ch);
 
-    float amplitude = k * att * SettingsGenerator::Amplitude(ch);
+    double amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
     uint value = static_cast<uint>(amplitude * static_cast<float>(0x3FFF));
 
@@ -133,7 +133,7 @@ void AD9952::WriteASF(Chan::E ch)
 
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    float FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 2e8F : 1e6F)) * std::powf(2.0F, 32.0F);
+    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 2e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
     WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }

@@ -195,7 +195,7 @@ void DGenerator::SetPhase(Chan::E ch, FloatValue phase)
 
 void DGenerator::SetPacketNumber(Chan::E, FloatValue number)
 {
-    FPGA::PacketImpulse::SetNumberImpules(static_cast<uint>(number.ToFloat() + 0.5F));
+    FPGA::PacketImpulse::SetNumberImpules(static_cast<uint>(number.ToDouble() + 0.5));
 }
 
 
@@ -274,7 +274,7 @@ void Amplifier::Tune(Chan::E ch)
         return;
     }
 
-    float amplitude = SettingsGenerator::Amplitude(ch);
+    double amplitude = SettingsGenerator::Amplitude(ch);
 
     if(amplitude > Attenuation(Attenuation::_10Db).Units())                     // 1 диапазон   3.16
     {
@@ -316,7 +316,7 @@ void Amplifier::Enable(Chan::E ch, bool enable)
 }
 
 
-float Amplifier::GetAmplification(Chan::E ch)
+double Amplifier::GetAmplification(Chan::E ch)
 {
     static const Attenuation att[Attenuation::Count] =
     {
@@ -326,7 +326,7 @@ float Amplifier::GetAmplification(Chan::E ch)
         Attenuation(Attenuation::_30Db)
     };
 
-    return (isEnabled[ch] ? 10.0F : 1.0F) / att[attenuation[ch]].Units();
+    return (isEnabled[ch] ? 10.0 : 1.0) / att[attenuation[ch]].Units();
 }
 
 

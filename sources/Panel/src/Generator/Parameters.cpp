@@ -158,14 +158,14 @@ pString ParameterValue::GetUnits(uint lang, Order::E order) const
 }
 
 
-bool ParameterValue::SetAndLoadValue(float val)
+bool ParameterValue::SetAndLoadValue(double val)
 {
     if(!InRange(val))
     {
         return false;
     }
 
-    value.FromFloat(val);
+    value.FromDouble(val);
 
     PGenerator::SetParameter(this);
 
@@ -272,9 +272,9 @@ ParameterManipulation::ParameterManipulation(Parameter **parameters) : Parameter
 }
 
 
-bool ParameterValue::InRange(float val) const
+bool ParameterValue::InRange(double val) const
 {
-    return (val >= min.ToFloat()) && (val <= max.ToFloat());
+    return (val >= min.ToDouble()) && (val <= max.ToDouble());
 }
 
 
