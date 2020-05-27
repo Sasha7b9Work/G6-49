@@ -177,4 +177,10 @@ private:
     ParameterValue *param;           // Настраиваемый параметр
 
     TunerDisplay display;
+
+    // Возвращает true, если в режиме коррекции параметра (ручкой)
+    bool InModeCorrection();
+
+    // Установить режим ввода значения
+    void SetModeEntering();
 };

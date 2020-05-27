@@ -7,11 +7,22 @@
 #include "Generator/Parameters.h"
 #include "Generator/Tuner.h"
 #include "Generator/Wave.h"
+#include "Menu/Pages/Addition/PageTuneParameter.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
 
 using namespace Primitives;
+
+
+enum Mode
+{
+    Correction,     // Режим коррекциии значения параметра (ручкой)
+    Entering        // Режим ввода значения
+};
+
+
+static Mode mode = Correction;
 
 
 Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_display)
@@ -515,6 +526,27 @@ bool Tuner::OnControlKey(const Control control) //-V801
     {
         return display.OnControlKey(control);
     }
+    else if(control.IsEntering())
+    {
+        if (InModeCorrection())
+        {
+            SetModeEntering();
+        }
+
+        return display.OnControlKey(control);
+    }
 
     return false;
+}
+
+
+bool Tuner::InModeCorrection()
+{
+    return (mode == Correction);
+}
+
+
+void Tuner::SetModeEntering()
+{
+    PageTuneParameter::SetModeEntering();
 }

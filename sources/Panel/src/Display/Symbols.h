@@ -31,6 +31,8 @@ struct Ideograph
         enum
         {
             Degree   = '\x7b',
+            Up       = '\x7c',
+            Down     = '\x7e',
             BigPlus  = '\x9c',
             BigMinus = '\x9d',
             Left     = '\xa0',

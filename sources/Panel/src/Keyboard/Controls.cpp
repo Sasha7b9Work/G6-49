@@ -74,3 +74,14 @@ pString Key::Name() const
 
     return names[value];
 }
+
+
+bool Control::IsEntering() const
+{
+    if (key >= Key::_0 && key <= Key::_9)
+    {
+        return true;
+    }
+
+    return ((key == '-') || (key == '.'));
+}

@@ -1,3 +1,4 @@
+#include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
 #include "Generator/Signals.h"
@@ -20,6 +21,26 @@ void PageTuneParameter::SetParameter(ParameterValue *parameter)
         tuned = parameter;
     }
 }
+
+
+static void OnPress_More()
+{
+
+}
+
+
+static void Draw_More(int x, int y)
+{
+    Primitives::HLine::Draw(y + 35, x + 15, x + 53);
+    Primitives::Line::Draw(x + 15, y + 35, x + 35, y + 15);
+}
+
+
+DEF_SMALL_BUTTON(sbMore,
+    "анкэье", "MORE",
+    "сБЕКХВХРЭ ОНПЪДНЙ", "Increase order",
+    *PageTuneParameter::self, Item::FuncActive, OnPress_More, Draw_More
+)
 
 
 static void OnPress_Cancel()
@@ -100,11 +121,17 @@ static void OnDraw_TuneParameter()
 DEF_PAGE_SB( pTuneParameter,   //-V641
     "ббнд гмювемхъ", "ENTER VALUE", //-V641
     "", "",
-    Item::EmptyDark(),      // нймн ббндю - яхлбнк бкебн
-    Item::EmptyDark(),      // нймн ббндю - яхлбнк бопюбн
-    &sbCancel,              // нймн ббндю - нрлемю
-    &sbEnter,               // нймн ббндю - ббнд
+    &sbMore,
+    Item::EmptyDark(),
+    &sbCancel,
+    &sbEnter,
     Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));
+
+
+void PageTuneParameter::SetModeEntering()
+{
+
+}

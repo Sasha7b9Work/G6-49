@@ -33,6 +33,15 @@ void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 }
 
 
+void Text::Draw2SymbolsHorizontal(int x, int y, char ch, Color color)
+{
+    color.SetAsCurrent();
+
+    Char(ch).Draw(x, y);
+    Char(ch + 1).Draw(x + 8, y);
+}
+
+
 int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText)
 {
     int height = 0;

@@ -71,7 +71,11 @@ struct Control
     bool IsDown() const { return (action == Action::Down); }
     
     bool IsLong() const { return (action == Action::Long); }
-   
+
+    // Возвращает true в случае отпускания кнопки или "длинного" нажатия
+    bool IsRelease() const;
+
+    // true, если функциональная клавиша
     bool IsFunctional() const;
     
     // Возвращает true, если поворот ручки
@@ -80,8 +84,8 @@ struct Control
     // Возвращает true, если кнопка управления курсором (Влево-Вправо)
     bool IsCursors() const { return (key == Key::Left) || (key == Key::Right); };
 
-    // Возвращает true в случае отпускания кнопки или "длинного" нажатия
-    bool IsRelease() const;
+    // Возвращает true, если цифровая кнопка, 'минус' или 'точка'
+    bool IsEntering() const;
 
     bool operator==(const Control &rhl) const
     {
