@@ -45,7 +45,7 @@ struct MathFloatValue
     // Order::One   - FloatValue::Integer() >= 0
     // Order::Milli - FloatValue::Integer() >= 1e-3
     // Order::Micro - FloatValue::Integer() >= 1e-6
-    static Order::E GetOrder(const FloatValue value);
+    static Order::E GetOrder(FloatValue value);
 
 private:
 

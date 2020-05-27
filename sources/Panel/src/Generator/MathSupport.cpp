@@ -295,8 +295,10 @@ int MathFloatValue::GetDigit(const FloatValue &val, int position, Order::E order
 }
 
 
-Order::E MathFloatValue::GetOrder(const FloatValue value)
+Order::E MathFloatValue::GetOrder(FloatValue value)
 {
+    value.SetSign(1);
+
     int integer = value.Integer();
 
     if (integer >= 1000 * 1000)

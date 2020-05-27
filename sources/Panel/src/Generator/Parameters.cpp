@@ -315,6 +315,7 @@ static Order::E CalculateOrder(const ParameterValue *param)
 pString ParameterValue::GetStringValue() const
 {
     static char buffer[30];
+
     std::strcpy(buffer, MathFloatValue::GetIndicatedValue(this));
     std::strcat(buffer, " ");
     std::strcat(buffer, GetUnits(LANGUAGE, CalculateOrder(this)));
