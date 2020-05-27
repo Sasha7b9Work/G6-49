@@ -467,6 +467,11 @@ void TunerDisplay::FillDigitsIntegerPart()
     ParameterValue *param = tuner->GetParameter();
     FloatValue value = param->GetValue();
 
+    if (param->GetType() == ParameterValueType::Frequency)
+    {
+        value = value;
+    }
+
     int pos = before - 1;                               // Разряд в этой позиции будем заполнять значениями целых
 
     if (param->IsSigned())

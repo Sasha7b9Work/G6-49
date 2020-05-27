@@ -142,6 +142,22 @@ pString ParameterValue::GetMainUnits(uint lang) const
 }
 
 
+pString ParameterValue::GetUnits(uint lang, Order::E order) const
+{
+    if (order == Order::Count)
+    {
+        order = MathFloatValue::GetOrder(value);
+    }
+
+    static char units[10];
+
+    std::strcpy(units, Order::Suffix(order, lang));
+    std::strcat(units, GetMainUnits(lang));
+
+    return units;
+}
+
+
 bool ParameterValue::SetAndLoadValue(float val)
 {
     if(!InRange(val))
@@ -283,19 +299,16 @@ ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, cons
 
 pString ParameterValue::GetStringValue() const
 {
-    Order order = { Order::Count };
-
     static char buffer[30];
-    std::strcpy(buffer, MathFloatValue::GetStringValue(value, IsSigned(), 5, &order.value, (type == ParameterValueType::Offset || type == ParameterValueType::Amplitude) ? 1 : 255));
+    std::strcpy(buffer, MathFloatValue::GetIndicatedValue(this, IsSigned(), 5));
     std::strcat(buffer, " ");
-    std::strcat(buffer, order.Suffix(LANGUAGE));
-    std::strcat(buffer, GetMainUnits(LANGUAGE));
+    std::strcat(buffer, GetUnits(LANGUAGE, MathFloatValue::GetOrder(value)));
 
     return buffer;
 }
 
 
-pString Order::Suffix(uint lang) const
+pString Order::Suffix(Order::E order, uint lang)
 {
     static const pString suf[Count][2] =
     {
@@ -307,7 +320,7 @@ pString Order::Suffix(uint lang) const
         {"í",  "n"}
     };
 
-    return suf[value][lang];
+    return suf[order][lang];
 }
 
 

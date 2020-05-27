@@ -33,15 +33,19 @@ static const int numberDigits[ParameterValueType::Count][2] =
 ParameterValue *MathParameterValue::param = nullptr;
 
 
-pString MathFloatValue::GetStringValue(const FloatValue &value, bool sign, int numDigits, Order::E *order, int posFirst)
+pString MathFloatValue::GetIndicatedValue(const ParameterValue *param, bool sign, int numDigits)
 {
+    FloatValue value = param->GetValue();
+
+    ParameterValueType::E type = param->GetType();
+
     static char buffer[20];
 
     buffer[numDigits + (sign ? 2 : 1)] = '\0';
 
-    int position = (posFirst == 255) ? GetPositionFirstDigit(value) : posFirst;
+    int position = (type == ParameterValueType::Offset || type == ParameterValueType::Amplitude) ? GetPositionFirstDigit(value) : 1;
 
-    int posComma = PositionComma(position, order);
+    int posComma = PositionComma(position, GetOrder(value));
 
     if(sign)
     {
@@ -105,16 +109,48 @@ int MathFloatValue::GetPositionFirstDigit(const FloatValue &_value)
 }
 
 
-char MathFloatValue::GetChar(const FloatValue &value, int postition)
+char MathFloatValue::GetChar(const FloatValue &value, int postition, Order::E order)
 {
-    return static_cast<char>(GetDigit(value, postition) | 0x30);
+    return static_cast<char>(GetDigit(value, postition, order) | 0x30);
 }
 
 
-int MathFloatValue::GetDigit(const FloatValue &_value, int position)
+void MathFloatValue::CorrectValueOnOrder(FloatValue *value, Order::E order)
 {
-    FloatValue value = _value;
+    if (order == Order::Count)
+    {
+        order = GetOrder(*value);
+    }
+
+    if (order == Order::Mega)
+    {
+        value->Div(1000 * 1000);
+    }
+    else if (order == Order::Kilo)
+    {
+        value->Div(1000);
+    }
+    else if (order == Order::Milli)
+    {
+        value->Mul(1000);
+    }
+    else if (order == Order::Micro)
+    {
+        value->Mul(1000 * 1000);
+    }
+    else if (order == Order::Nano)
+    {
+        value->Mul(1000 * 1000 * 1000);
+    }
+}
+
+
+int MathFloatValue::GetDigit(const FloatValue &val, int position, Order::E order)
+{
+    FloatValue value = val;
     value.SetSign(1);
+
+    CorrectValueOnOrder(&value, order);
 
     if(position < 0)
     {
@@ -146,32 +182,32 @@ int MathFloatValue::GetDigit(const FloatValue &_value, int position)
 }
 
 
-int MathFloatValue::PositionComma(int posFirstDigit, Order::E *order)
+int MathFloatValue::PositionComma(int posFirstDigit, Order::E)
 {
-    if(posFirstDigit > 5)
-    {
-        *order = Order::Mega;
-    }
-    else if(posFirstDigit > 2)
-    {
-        *order = Order::Kilo;
-    }
-    else if(posFirstDigit > -1)
-    {
-        *order = Order::One;
-    }
-    else if(posFirstDigit > -4)
-    {
-        *order = Order::Milli;
-    }
-    else if(posFirstDigit > -7)
-    {
-        *order = Order::Micro;
-    }
-    else
-    {
-        *order = Order::Nano;
-    }
+//    if(posFirstDigit > 5)
+//    {
+//        *order = Order::Mega;
+//    }
+//    else if(posFirstDigit > 2)
+//    {
+//        *order = Order::Kilo;
+//    }
+//    else if(posFirstDigit > -1)
+//    {
+//        *order = Order::One;
+//    }
+//    else if(posFirstDigit > -4)
+//    {
+//        *order = Order::Milli;
+//    }
+//    else if(posFirstDigit > -7)
+//    {
+//        *order = Order::Micro;
+//    }
+//    else
+//    {
+//        *order = Order::Nano;
+//    }
 
     int result = posFirstDigit - 5;
 
@@ -192,8 +228,27 @@ Order::E MathFloatValue::GetOrder(const FloatValue value)
     {
         return Order::Mega;
     }
+    else if (integer >= 1000)
+    {
+        return Order::Kilo;
+    }
+    else if (integer > 0)
+    {
+        return Order::One;
+    }
 
-    return Order::One;
+    int fract = value.FractNano();
+
+    if (fract >= 1000 * 1000)
+    {
+        return Order::Milli;
+    }
+    else if (fract >= 1000)
+    {
+        return Order::Micro;
+    }
+
+    return Order::Nano;
 }
 
 

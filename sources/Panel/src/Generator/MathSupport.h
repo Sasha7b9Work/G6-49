@@ -17,28 +17,30 @@ struct Order
         Micro,
         Nano,
         Count
-    } value;
+    };
 
-    pString Suffix(uint lang) const;
+    static pString Suffix(Order::E order, uint lang);
 };
 
 
 struct MathFloatValue
 {
-    // Возвращает числовое представление FloatValue с numDigits значащими цифрами и запятой. В order сохраняется порядок числа относительно запятой
-    static pString GetStringValue(const FloatValue &value, bool sign, int numDigits, Order::E *order, int posFirst = 255);
+    // Возвращает числовое представление FloatValue с numDigits значащими цифрами и запятой.
+    static pString GetIndicatedValue(const ParameterValue *param, bool sign, int numDigits);
 
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     static int GetPositionFirstDigit(const FloatValue &value);
 
-    // Возвращает цифру в позиции position.
-    static int GetDigit(const FloatValue &value, int position);
+    // Возвращает цифру в позиции position. Точка находится соответственно order. One - после единиц, Kilo - после тысяч и так далее.
+    // Order::Count - значенине по умолчанию - запятая в позиции относительно размерности числового значения
+    static int GetDigit(const FloatValue &value, int position, Order::E order = Order::Count);
 
-    // Возвращает символ в позиции position. Знак не учитывается
-    static char GetChar(const FloatValue &value, int postition);
+    // Возвращает символ в позиции position. Знак не учитывается. Точка находится соответственно order. One - после единиц, Kilo - после тысяч и так далее.
+    // Order::Count - значенине по умолчанию - запятая в позиции относительно размерности числового значения
+    static char GetChar(const FloatValue &value, int postition, Order::E order = Order::Count);
 
     // Возвращает позицию запятой относительно позиции первого значащего символа
-    static int PositionComma(int posFirstDigit, Order::E *order);
+    static int PositionComma(int posFirstDigit, Order::E order);
 
     // Возвращает:
     // Order::Mega  - FloatValue::Integer() >= 1e6
@@ -47,6 +49,10 @@ struct MathFloatValue
     // Order::Milli - FloatValue::Integer() >= 1e-3
     // Order::Micro - FloatValue::Integer() >= 1e-6
     static Order::E GetOrder(const FloatValue value);
+
+private:
+
+    static void CorrectValueOnOrder(FloatValue *value, Order::E order);
 };
 
 

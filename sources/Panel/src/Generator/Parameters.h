@@ -1,5 +1,6 @@
 #pragma once
 #include "common/Common.h"
+#include "Generator/MathSupport.h"
 #include "Generator/Tuner.h"
 #include "Generator/Viewer.h"
 #include "Settings/SettingsTypes.h"
@@ -120,6 +121,9 @@ public:
 
     // Возвращает основные единицы измерения (без учёта порядка)
     pString GetMainUnits(uint lang) const;
+
+    // Возвращает единицы измерения, приведённые к порядку order. Если order == Order::Count, единциы будут рассчитываться исходя из текущего значения value
+    pString GetUnits(uint lang, Order::E order) const;
 
     // Возвращает максимальное значение, которое может иметь параметр
     FloatValue GetMax() { return max; }
