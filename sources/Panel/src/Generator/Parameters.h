@@ -238,7 +238,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const FloatValue &min = FloatValue("0"), const FloatValue &max = FloatValue("10"), const FloatValue &value = FloatValue("10.00")) :
+    ParameterAmplitude(const FloatValue &min = FloatValue("0"), const FloatValue &max = FloatValue("10"), const FloatValue &value = FloatValue("0.001")) :
         ParameterVoltage(ParameterValueType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 
@@ -246,7 +246,7 @@ public:
 class ParameterOffset : public ParameterVoltage
 {
 public:
-    ParameterOffset(const FloatValue &min = FloatValue("-5"), const FloatValue &max = FloatValue("5"), const FloatValue &value = FloatValue("0")) :
+    ParameterOffset(const FloatValue &min = FloatValue("-5"), const FloatValue &max = FloatValue("5"), const FloatValue &value = FloatValue("-0.001")) :
         ParameterVoltage(ParameterValueType::Offset, "Смещение", "Offset", min, max, value) { }
 };
 

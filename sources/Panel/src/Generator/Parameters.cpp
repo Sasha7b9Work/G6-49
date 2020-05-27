@@ -297,12 +297,27 @@ ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, cons
 }
 
 
+static Order::E CalculateOrder(const ParameterValue *param)
+{
+    FloatValue value = param->GetValue();
+
+    Order::E order = MathFloatValue::GetOrder(value);
+
+    if (param->IsVoltage() && (value.Abs() == 0))
+    {
+        order = Order::Milli;
+    }
+
+    return order;
+}
+
+
 pString ParameterValue::GetStringValue() const
 {
     static char buffer[30];
     std::strcpy(buffer, MathFloatValue::GetIndicatedValue(this));
     std::strcat(buffer, " ");
-    std::strcat(buffer, GetUnits(LANGUAGE, MathFloatValue::GetOrder(value)));
+    std::strcat(buffer, GetUnits(LANGUAGE, CalculateOrder(this)));
 
     return buffer;
 }

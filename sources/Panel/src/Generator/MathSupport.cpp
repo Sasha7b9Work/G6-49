@@ -3,6 +3,7 @@
 #include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
 #include "Utils/StringUtils.h"
+#include <cstring>
 
 
 //FloatValue *LogicFloatValue::value = nullptr;
@@ -37,14 +38,38 @@ ParameterValue *MathParameterValue::param = nullptr;
 // Погасить незначащие символы
 static void RepayEmptySymbols(char *buffer)
 {
+    int sign = 0;
+
+    if (*buffer == '-')
+    {
+        sign = -1;
+        buffer[0] = ' ';
+        buffer++;
+    }
+    else if (*buffer == '+')
+    {
+        sign = +1;
+        buffer[0] = ' ';
+        buffer++;
+    }
+
     while (*buffer == '0')
     {
         if (*buffer == '\0')
         {
             break;
         }
+        if (*(buffer + 1) == '.')
+        {
+            break;
+        }
         *buffer = ' ';
         buffer++;
+    }
+
+    if (sign != 0)
+    {
+        *(buffer - 1) = (sign < 0) ? '-' : '+';
     }
 
     char *end = SU::FindEnd(buffer);
@@ -70,36 +95,61 @@ static Order::E CalculateOrder(const ParameterValue *param)
 }
 
 
+static pString ZeroValue(const ParameterValue *param)
+{
+    ParameterValueType::E type = param->GetType();
+
+    if (type == ParameterValueType::Amplitude)
+    {
+        return "00000.0";
+    }
+    else if (type == ParameterValueType::Offset)
+    {
+        return "+00000.0";
+    }
+
+    return "";
+}
+
+
 pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
 
-    FloatValue value = param->GetValue();
-    bool sign = param->IsSigned();
-    Order::E order = CalculateOrder(param);
-
     static char buffer[LENGTH_BUFFER];                      // Дополнительно завершающий ноль и точка
     buffer[LENGTH_BUFFER - 1] = '\0';
 
-    if (sign)
+    FloatValue value = param->GetValue();
+
+    if (value.Abs() == 0)
     {
-        buffer[0] = (value.Sign() > 0) ? '+' : '-';
+        std::strcpy(buffer, ZeroValue(param));
     }
-
-    int posDigit = GetPositionFirstDigit(param, order);     // Позиция первого значащего символа относительно точки
-
-    for (int i = sign ? 1 : 0; i < LENGTH_BUFFER - 1; i++)
+    else
     {
-        char symbol = GetChar(value, posDigit);
-        buffer[i] = symbol;
+        bool sign = param->IsSigned();
+        Order::E order = CalculateOrder(param);
 
-        if (posDigit == 0)
+        if (sign)
         {
-            buffer[++i] = '.';
+            buffer[0] = (value.Sign() > 0) ? '+' : '-';
         }
 
-        posDigit--;
+        int posDigit = GetPositionFirstDigit(param, order);     // Позиция первого значащего символа относительно точки
+
+        for (int i = sign ? 1 : 0; i < LENGTH_BUFFER - 1; i++)
+        {
+            char symbol = GetChar(value, posDigit);
+            buffer[i] = symbol;
+
+            if (posDigit == 0)
+            {
+                buffer[++i] = '.';
+            }
+
+            posDigit--;
+        }
     }
 
     RepayEmptySymbols(buffer);
