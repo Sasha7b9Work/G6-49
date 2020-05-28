@@ -11,8 +11,6 @@ struct Text
 
     static int DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color = Color::NUMBER);
 
-    static int DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...);
-
     // Выводит форматированный текст в столбик шириной width. При этом слов, заключённое в двойные кавычки, выводится цветом color
     static int DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...);
 
