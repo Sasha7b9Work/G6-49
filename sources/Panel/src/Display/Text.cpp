@@ -676,7 +676,7 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
     color.SetAsCurrent();
 
     int lenght = Font::GetLengthText(text);
-    int height = Font::GetHeightSymbol(text[0]);
+    int height = Font::GetHeight(text[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
 
@@ -704,7 +704,7 @@ void String::DrawInColumn(int x, int y, int width)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font::GetHeightSymbol(*t) + 2;
+            y += Font::GetHeight(*t) + 2;
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, t);

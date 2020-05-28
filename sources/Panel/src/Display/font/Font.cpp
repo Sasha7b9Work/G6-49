@@ -52,8 +52,13 @@ int Font::GetLengthText(const char *text)
 }
 
 
-int Font::GetHeightSymbol(char)
+int Font::GetHeight(char s)
 {
+    if (IsAdvanced())
+    {
+        return AdvancedFont::GetHeight(s);
+    }
+
     return 9;
 }
 
@@ -73,7 +78,7 @@ void Font::Set(TypeFont::E typeFont)
 {
     current = typeFont;
 
-    if(current > TypeFont::_8)
+    if(IsAdvanced())
     {
         AdvancedFont::Set(current);
         font = nullptr;

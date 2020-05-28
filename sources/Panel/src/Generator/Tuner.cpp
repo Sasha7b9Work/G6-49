@@ -8,6 +8,8 @@
 #include "Generator/Parameters.h"
 #include "Generator/Tuner.h"
 #include "Generator/Wave.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
@@ -29,7 +31,36 @@ private:
 };
 
 
+class Cursor
+{
+public:
+    Cursor() : timeInit(0U) { }
+    void Init();
+    void Draw(int x, int y);
+private:
+    uint timeInit;
+};
+
+
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
+static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
+
+
+void Cursor::Init()
+{
+    timeInit = TIME_MS;
+}
+
+
+void Cursor::Draw(int x, int y)
+{
+    uint time = TIME_MS - timeInit;
+
+    if ((time % 1000) < 500)
+    {
+        Primitives::Rectangle(10, 3).Fill(x, y);
+    }
+}
 
 
 void EnterBuffer::Prepare(ParameterValue *parameter)
@@ -477,6 +508,7 @@ bool TunerDisplay::OnEnteringKey(const Control &control)
         }
 
         enterBuffer.Push(control);
+        cursor.Init();
 
         return true;
     }
@@ -489,8 +521,12 @@ void TunerDisplay::DrawEnteringMode(int x, int y)
 {
     for (int i = 0; i < enterBuffer.Size(); i++)
     {
-        Char(enterBuffer.At(i)).Draw(x + i * 14, y);
+        Char(enterBuffer.At(i)).Draw(x, y);
+
+        x += 14;
     }
+
+    cursor.Draw(x, y + Font::GetSize());
 }
 
 
