@@ -29,6 +29,8 @@ public:
 
     int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
 
+    void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
+
     void Free();
 
     void Append(const char *str);

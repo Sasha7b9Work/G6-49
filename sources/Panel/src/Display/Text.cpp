@@ -579,13 +579,6 @@ void BigText::Draw(int eX, int eY, Color color)
 }
 
 
-void Text::DrawTextRelativelyRight(int xRight, int y, pString text, Color color)
-{
-    int lenght = Font::GetLengthText(text);
-    String(text).Draw(xRight - lenght, y, color);
-}
-
-
 void Text::DrawTextInColumn(int x, int y, int width, pString t)
 {
     int xStart = x;

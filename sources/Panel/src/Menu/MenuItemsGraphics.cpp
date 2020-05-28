@@ -105,7 +105,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
         GetTitle(LANGUAGE).Draw(x + 5, y + 5, (pressed || opened) ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
-        Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(), Color::BACK);
+        String(NameCurrentSubItem()).DrawRelativelyRight(315, y + 30, Color::BACK);
     }
 }
 
@@ -138,7 +138,7 @@ void Choice::Draw(bool opened, int x, int y) const
 
         HLine::Draw(y + 12, x, x + width);
         Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
-        Text::DrawTextRelativelyRight(x + width - 2, y + 2, GetTitle(LANGUAGE).c_str());
+        GetTitle(LANGUAGE).DrawRelativelyRight(x + width - 2, y + 2);
 
         y += 14;
 
@@ -173,13 +173,13 @@ void Choice::Draw(bool opened, int x, int y) const
 
         if (step == 0.0F) //-V2550 //-V550
         {
-            Text::DrawTextRelativelyRight(315, y + 30, NameCurrentSubItem(LANGUAGE));
+            String(NameCurrentSubItem(LANGUAGE)).DrawRelativelyRight(315, y + 30);
         }
         else
         {
             int x0 = 315 - step;
 
-            Text::DrawTextRelativelyRight(x0, y + 30, NameCurrentSubItem(LANGUAGE));
+            String(NameCurrentSubItem(LANGUAGE)).DrawRelativelyRight(x0, y + 30);
 
             int length = Font::GetLengthText(NameNextSubItem(LANGUAGE).c_str());
 
@@ -189,7 +189,7 @@ void Choice::Draw(bool opened, int x, int y) const
             }
             else
             {
-                Text::DrawTextRelativelyRight(315, y + 30, NameNextSubItem(LANGUAGE).c_str());
+                NameNextSubItem(LANGUAGE).DrawRelativelyRight(315, y + 30);
             }
         }
     }

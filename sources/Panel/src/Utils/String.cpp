@@ -193,12 +193,19 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 {
     color.SetAsCurrent();
 
-    int lenght = Font::GetLengthText(c_str());
-    int height = Font::GetHeightSymbol(c_str()[0]);
+    int lenght = Font::GetLengthText(buffer);
+    int height = Font::GetHeightSymbol(buffer[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
 
     return Draw(x, y);
+}
+
+
+void String::DrawRelativelyRight(int xRight, int y, Color color)
+{
+    int lenght = Font::GetLengthText(buffer);
+    Draw(xRight - lenght, y, color);
 }
 
 

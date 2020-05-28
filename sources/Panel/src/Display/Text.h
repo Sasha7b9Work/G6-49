@@ -13,8 +13,6 @@ struct Text
     // Нарисовать два символа из таблицы, идущие друг за другом горизонтально
     static void Draw2SymbolsHorizontal(int x, int y, char ch, Color color = Color::NUMBER);
 
-    static void DrawTextRelativelyRight(int xRight, int y, pString text, Color color = Color::NUMBER);
-    
     /*************** Вывод текста в области экрана **************************/
 
     static void DrawTextInColumn(int x, int y, int width, pString text);
