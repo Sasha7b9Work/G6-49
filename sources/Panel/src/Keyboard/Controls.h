@@ -63,15 +63,11 @@ struct Control
     Action::E action;
 
     bool Is(Key::E c) const           { return (c == key); };
-    
     bool Is(Key::E c, Action::E a) const { return (key == c) && (action == a); };
        
     bool IsUp() const   { return (action == Action::Up); }
-    
     bool IsDown() const { return (action == Action::Down); }
-    
     bool IsLong() const { return (action == Action::Long); }
-
     // Возвращает true в случае отпускания кнопки или "длинного" нажатия
     bool IsRelease() const;
 

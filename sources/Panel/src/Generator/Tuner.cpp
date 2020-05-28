@@ -25,6 +25,8 @@ public:
     void Push(const Control &control);
     int Size() const;
     char At(const int i) const;
+    // ¬озвращает true, если содержитс€ дес€тична€ точка
+    bool ConsistComma() const;
 private:
     Stack<char> stack;
     ParameterValue *param;
@@ -58,8 +60,22 @@ void Cursor::Draw(int x, int y)
 
     if ((time % 1000) < 500)
     {
-        Primitives::Rectangle(10, 3).Fill(x, y);
+        Primitives::Rectangle(10, 2).Fill(x, y);
     }
+}
+
+
+bool EnterBuffer::ConsistComma() const
+{
+    for (int i = 0; i < stack.Size(); i++)
+    {
+        if (stack[i] == Digit::COMMA)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
@@ -72,6 +88,18 @@ void EnterBuffer::Prepare(ParameterValue *parameter)
 
 void EnterBuffer::Push(const Control &control)
 {
+    Key::E key = control.key;
+
+    if ((key == Key::Minus) && (stack.Size() != 0))
+    {
+        return;
+    }
+
+    if ((key == Key::Dot) && ConsistComma())
+    {
+        return;
+    }
+
     stack.Push(Key(control.key).ToChar());
 }
 
@@ -523,7 +551,7 @@ void TunerDisplay::DrawEnteringMode(int x, int y, int)
     {
         Char(enterBuffer.At(i)).Draw(x, y);
 
-        x += (enterBuffer.At(i) == '.') ? 10 : 14;
+        x += (enterBuffer.At(i) == Digit::COMMA) ? 10 : 14;
     }
 
     cursor.Draw(x, y + Font::GetHeight());
