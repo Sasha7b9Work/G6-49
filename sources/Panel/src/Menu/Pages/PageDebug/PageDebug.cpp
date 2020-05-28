@@ -492,7 +492,7 @@ static void OnPress_Cancel()
 
 static void OnDraw_Cancel(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Delete, Color::FILL);
+    Char(Ideograph::_8::Delete).Draw4InRect(x + 15, y + 30, Color::FILL);
 }
 
 DEF_BUTTON( bCancel,                                                                                                                               //--- –≈√»—“–€ - Input window - ŒÚÏÂÌ‡ ---
@@ -504,7 +504,7 @@ DEF_BUTTON( bCancel,                                                            
 
 static void OnDraw_Backspace(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Left, Color::FILL);
+    Char(Ideograph::_8::Left).Draw4InRect(x + 15, y + 30, Color::FILL);
 }
 
 DEF_BUTTON( bBackspace,                                                                                                                         //--- –≈√»—“–€ - Input window - Backspace ---
@@ -522,7 +522,7 @@ static void OnPress_Save()
 
 static void OnDraw_Save(int x, int y)
 {
-    Text::Draw4SymbolsInRect(x + 15, y + 30, Ideograph::_8::Save, Color::FILL);
+    Char(Ideograph::_8::Save).Draw4InRect(x + 15, y + 30, Color::FILL);
 }
 
 DEF_BUTTON( bSave,                                                                                                                                //--- –≈√»—“–€ - ŒÍÌÓ ‚‚Ó‰‡ --- «‡ÒÎ‡Ú¸ ---

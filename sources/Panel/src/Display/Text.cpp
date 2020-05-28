@@ -12,18 +12,6 @@
 using namespace Primitives;
 
 
-void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
-{
-    color.SetAsCurrent();
-
-    for (char i = 0; i < 2; i++)
-    {
-        Char(eChar + i).Draw(x + 8 * i, y);
-        Char(eChar + i + 16).Draw(x + 8 * i, y + 8);
-    }
-}
-
-
 void Text::Draw2SymbolsHorizontal(int x, int y, char ch, Color color)
 {
     color.SetAsCurrent();
@@ -97,6 +85,19 @@ int Char::Draw(int eX, int eY, Color color)
 
     return eX + width;
 }
+
+
+void Char::Draw4InRect(int x, int y, Color color)
+{
+    color.SetAsCurrent();
+
+    for (char i = 0; i < 2; i++)
+    {
+        Char(symbol + i).Draw(x + 8 * i, y);
+        Char(symbol + i + 16).Draw(x + 8 * i, y + 8);
+    }
+}
+
 
 
 bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height)

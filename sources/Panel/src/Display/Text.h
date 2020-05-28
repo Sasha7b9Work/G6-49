@@ -6,10 +6,6 @@
 
 struct Text
 {
-    Text(pString t) : text(t) { };
-
-    static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
-
     // Ќарисовать два символа из таблицы, идущие друг за другом горизонтально
     static void Draw2SymbolsHorizontal(int x, int y, char ch, Color color = Color::NUMBER);
 
@@ -58,8 +54,6 @@ private:
 
     static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
 
-    pString text;
-
 private:
 };
 
@@ -69,6 +63,7 @@ class Char
 public:
     Char(char s) : symbol(s) { }
     int Draw(int x, int y, Color color = Color::NUMBER);
+    void Draw4InRect(int x, int y, Color color = Color::NUMBER);
 private:
     char symbol;
 };

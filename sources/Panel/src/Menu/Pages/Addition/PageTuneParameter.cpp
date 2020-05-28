@@ -80,7 +80,7 @@ static void OnPress_Cancel()
 static void Draw_Cancel(int x, int y)
 {
     String(LANG_IS_RU ? "Отменить" : "Cancel").Draw(x + 13, y + 12);
-    Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Delete);
+    Char(Ideograph::_8::Delete).Draw4InRect(x + 25, y + 28);
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
@@ -93,7 +93,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 static void Draw_Enter(int x, int y)
 {
     String(LANG_IS_RU ? "Применить" : "Apply").Draw(x + 10, y + 12);
-    Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Save);
+    Char(Ideograph::_8::Save).Draw4InRect(x + 25, y + 28);
 }
 
 static void OnPress_Enter()
