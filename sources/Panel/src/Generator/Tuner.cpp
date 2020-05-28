@@ -562,19 +562,30 @@ bool TunerDisplay::OnEnteringKey(const Control &control)
 }
 
 
-
-
-
-void TunerDisplay::DrawEnteringMode(int x, int y, int width)
+int static DrawEnteringModeValue(int x, int y)
 {
-    Rectangle(width - 1, 30).Fill(x, y, Color::BLACK);
-
     for (int i = 0; i < enterBuffer.Size(); i++)
     {
         Char(enterBuffer.At(i)).Draw(x, y);
 
-        x += (enterBuffer.At(i) == Digit::COMMA) ? 10 : 14;
+        x += (enterBuffer.At(i) == Digit::COMMA) ? 10 : 12;
     }
+
+    return x;
+}
+
+
+void TunerDisplay::DrawEnteringMode(int x, int y, int width)
+{
+    Color::BLACK.SetAsCurrent();
+
+    int end = DrawEnteringModeValue(x, y);
+
+    Color::WHITE.SetAsCurrent();
+
+    int length = end - x;
+
+    x = DrawEnteringModeValue(x + (width - length) / 2, y);
 
     cursor.Draw(x, y + Font::GetHeight());
 }
