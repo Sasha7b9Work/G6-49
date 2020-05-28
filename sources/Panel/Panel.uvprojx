@@ -1724,19 +1724,14 @@
           <GroupName>Display</GroupName>
           <Files>
             <File>
-              <FileName>Colors.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Colors.h</FilePath>
-            </File>
-            <File>
               <FileName>Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Colors.cpp</FilePath>
             </File>
             <File>
-              <FileName>Console.h</FileName>
+              <FileName>Colors.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Console.h</FilePath>
+              <FilePath>.\src\Display\Colors.h</FilePath>
             </File>
             <File>
               <FileName>Console.cpp</FileName>
@@ -1744,9 +1739,9 @@
               <FilePath>.\src\Display\Console.cpp</FilePath>
             </File>
             <File>
-              <FileName>Display.h</FileName>
+              <FileName>Console.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Display.h</FilePath>
+              <FilePath>.\src\Display\Console.h</FilePath>
             </File>
             <File>
               <FileName>Display.cpp</FileName>
@@ -1754,9 +1749,14 @@
               <FilePath>.\src\Display\Display.cpp</FilePath>
             </File>
             <File>
-              <FileName>Display_429.cpp</FileName>
+              <FileName>Display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>Display_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Display_429.cpp</FilePath>
+              <FilePath>.\src\Display\Display_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>DisplayTypes.h</FileName>
@@ -1769,9 +1769,9 @@
               <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
-              <FileName>Painter_429.cpp</FileName>
+              <FileName>Painter_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter_429.cpp</FilePath>
+              <FilePath>.\src\Display\Painter_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>Symbols.h</FileName>
@@ -1779,24 +1779,24 @@
               <FilePath>.\src\Display\Symbols.h</FilePath>
             </File>
             <File>
-              <FileName>Text.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Text.h</FilePath>
-            </File>
-            <File>
               <FileName>Text.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Text.cpp</FilePath>
             </File>
             <File>
-              <FileName>WaveGraphics.h</FileName>
+              <FileName>Text.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\WaveGraphics.h</FilePath>
+              <FilePath>.\src\Display\Text.h</FilePath>
             </File>
             <File>
               <FileName>WaveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\WaveGraphics.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>WaveGraphics.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\WaveGraphics.h</FilePath>
             </File>
           </Files>
         </Group>
