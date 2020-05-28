@@ -129,6 +129,8 @@ public:
 private:
 
     static int DrawValue(int x, int y);
+
+    static void DrawUnits(int x, int y, int width);
 };
 
 

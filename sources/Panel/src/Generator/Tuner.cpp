@@ -110,6 +110,11 @@ void EnterBuffer::Push(const Control &control)
 {
     Key::E key = control.key;
 
+    if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterValueType::Offset))
+    {
+        return;
+    }
+
     if ((key == Key::Minus) && (stack.Size() != 0))
     {
         return;
@@ -500,7 +505,7 @@ void DisplayCorrection::Draw()
 
     if (mode == Entering)
     {
-        DisplayEntering::Draw(x, y + 50, WaveGraphics::Width());
+        DisplayEntering::Draw(x - 5, y + 50, WaveGraphics::Width());
     }
     else
     {
@@ -565,6 +570,24 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 }
 
 
+void DisplayEntering::Draw(int x, int y, int width)
+{
+    Color::BLACK.SetAsCurrent();
+
+    int end = DrawValue(x, y);
+
+    Color::WHITE.SetAsCurrent();
+
+    int length = end - x;
+
+    int xCursor = DrawValue(x + (width - length) / 2 + 5, y);
+
+    cursor.Draw(xCursor, y + Font::GetHeight());
+
+    DrawUnits(x, y + 30, width);
+}
+
+
 int DisplayEntering::DrawValue(int x, int y)
 {
     for (int i = 0; i < enterBuffer.Size(); i++)
@@ -578,19 +601,13 @@ int DisplayEntering::DrawValue(int x, int y)
 }
 
 
-void DisplayEntering::Draw(int x, int y, int width)
+void DisplayEntering::DrawUnits(int x, int y, int width)
 {
-    Color::BLACK.SetAsCurrent();
+    pString units = Tuner::Current()->GetParameter()->GetUnits(LANGUAGE);
 
-    int end = DrawValue(x, y);
+    Font::SetUpperCase(false);
 
-    Color::WHITE.SetAsCurrent();
-
-    int length = end - x;
-
-    x = DrawValue(x + (width - length) / 2, y);
-
-    cursor.Draw(x, y + Font::GetHeight());
+    String(units).DrawInArea(x, y, width);
 }
 
 
