@@ -225,7 +225,7 @@ void String::DrawInColumn(int x, int y, int width)
             y += Font::GetHeightSymbol(*text) + 2;
         }
         int numSymbols = 0;
-        numSymbols = Text::DrawSubString(x, y, text);
+        numSymbols = DrawSubString(x, y, text);
         text += numSymbols;
         x += length;
         x = Text::DrawSpaces(x, y, text, &numSymbols);
@@ -266,6 +266,20 @@ void String::Conversion(TypeConversionString::E conv)
             pointer++;
         }
     }
+}
+
+
+int String::DrawSubString(int x, int y, pString t)
+{
+    const char *text = t;
+    int numSymbols = 0;
+    while (((*text) != ' ') && ((*text) != '\0'))
+    {
+        x = Char(*text).Draw(x, y) + 1;
+        numSymbols++;
+        text++;
+    }
+    return numSymbols;
 }
 
 

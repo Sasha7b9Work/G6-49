@@ -579,20 +579,6 @@ void BigText::Draw(int eX, int eY, Color color)
 }
 
 
-int Text::DrawSubString(int x, int y, pString t)
-{
-    const char *text = t;
-    int numSymbols = 0;
-    while (((*text) != ' ') && ((*text) != '\0'))
-    {
-        x = Char(*text).Draw(x, y) + 1;
-        numSymbols++;
-        text++;
-    }
-    return numSymbols;
-}
-
-
 int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
 {
     const char *text = t;

@@ -51,8 +51,11 @@ public:
 
 private:
 
+    char *buffer;
+
     bool Allocate(uint size);
+    
     void Conversion(TypeConversionString::E conv);
 
-    char *buffer;
+    int DrawSubString(int x, int y, pString t);
 };
