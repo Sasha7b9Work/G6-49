@@ -58,4 +58,5 @@ private:
     void Conversion(TypeConversionString::E conv);
 
     int DrawSubString(int x, int y, pString t);
+    int DrawSpaces(int x, int y, pString t, int *numSymbols);
 };

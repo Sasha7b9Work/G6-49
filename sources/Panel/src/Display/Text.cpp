@@ -579,20 +579,6 @@ void BigText::Draw(int eX, int eY, Color color)
 }
 
 
-int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
-{
-    const char *text = t;
-    *numSymbols = 0;
-    while (*text == ' ')
-    {
-        x = Char(*text).Draw(x, y);
-        text++;
-        (*numSymbols)++;
-    }
-    return x;
-}
-
-
 int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...)
 {
 #define SIZE_BUFFER_DRAW_FORM_TEXT 200

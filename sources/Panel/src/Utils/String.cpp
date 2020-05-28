@@ -228,7 +228,7 @@ void String::DrawInColumn(int x, int y, int width)
         numSymbols = DrawSubString(x, y, text);
         text += numSymbols;
         x += length;
-        x = Text::DrawSpaces(x, y, text, &numSymbols);
+        x = DrawSpaces(x, y, text, &numSymbols);
         text += numSymbols;     // -V102
     }
 }
@@ -280,6 +280,20 @@ int String::DrawSubString(int x, int y, pString t)
         text++;
     }
     return numSymbols;
+}
+
+
+int String::DrawSpaces(int x, int y, pString t, int *numSymbols)
+{
+    const char *text = t;
+    *numSymbols = 0;
+    while (*text == ' ')
+    {
+        x = Char(*text).Draw(x, y);
+        text++;
+        (*numSymbols)++;
+    }
+    return x;
 }
 
 

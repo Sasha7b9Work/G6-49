@@ -33,8 +33,6 @@ struct Text
     
     static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
 
-    static int DrawSpaces(int x, int y, pString text, int *numSymbols);
-
 private:
     
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
