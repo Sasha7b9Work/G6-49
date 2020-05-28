@@ -168,7 +168,7 @@ int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     for (int i = numSyllabels - 2; i >= 0; i--)
     {
         char *subString = WordWorker::PartWordForTransfer(word, lengthSyllables, i, buffer);
-        int length = Font::GetLengthText(subString);
+        int length = String(subString).Width();
         if (xRight - x > length - 5)
         {
             if (draw)
@@ -224,7 +224,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
             }
             else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::GetLengthText(word);
+                int lengthString = String(word).Width();
                 if (x + lengthString > right + 5)
                 {
                     int numSymb = DrawPartWord(word, x, y, right, true);
@@ -470,7 +470,7 @@ void BigText::Draw(int eX, int eY, Color color)
 
 void String::DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground)
 {
-    int lenght = Font::GetLengthText(text);
+    int lenght = Width();
     int eX = String(text).DrawInCenterRect(x, y, width, height, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
@@ -675,9 +675,8 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 {
     color.SetAsCurrent();
 
-    int lenght = Font::GetLengthText(text);
     int height = Font::GetHeight(text[0]);
-    int x = eX + (width - lenght) / 2;
+    int x = eX + (width - Width()) / 2;
     int y = eY + (eHeight - height) / 2;
 
     return Draw(x, y);
@@ -686,8 +685,7 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 
 void String::DrawRelativelyRight(int xRight, int y, Color color)
 {
-    int lenght = Font::GetLengthText(text);
-    Draw(xRight - lenght, y, color);
+    Draw(xRight - Width(), y, color);
 }
 
 
@@ -700,7 +698,7 @@ void String::DrawInColumn(int x, int y, int width)
 
     while (*t != 0)
     {
-        int length = Length();
+        int length = Width();
         if (length + x > xEnd)
         {
             x = xStart;
@@ -746,7 +744,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = WordWorker::GetWord(text + curSymbol, &length, buf);
+            String word(WordWorker::GetWord(text + curSymbol, &length, buf));
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
@@ -764,10 +762,9 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
             }
             else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::GetLengthText(word);
-                if (x + lengthString > right + 5)
+                if (x + word.Width() > right + 5)
                 {
-                    int numSymb = DrawPartWord(word, x, y, right, true);
+                    int numSymb = DrawPartWord(word.c_str(), x, y, right, true);
                     x = right;
                     curSymbol += numSymb;
                     continue;
@@ -775,7 +772,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
                 else
                 {
                     curSymbol += length;
-                    x = String(word).Draw(x, y) + 1;
+                    x = word.Draw(x, y) + 1;
                 }
             }
         }
@@ -787,17 +784,17 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
 }
 
 
-int String::Length() const
+int String::Width() const
 {
     const char *t = text;
 
-    int retValue = 0;
-    while (((*t) != ' ') && ((*t) != '\0'))
+    int length = 0;
+    while (*t != '\0')
     {
-        retValue += Font::GetWidth(*t);
+        length += Font::GetWidth(*t);
         t++;
     }
-    return retValue;
+    return length;
 }
 
 
@@ -865,7 +862,7 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = WordWorker::GetWord(text + curSymbol, &length, buf);
+            String word(WordWorker::GetWord(text + curSymbol, &length, buf));
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
@@ -883,10 +880,9 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
             }
             else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::GetLengthText(word);
-                if (x + lengthString > right + 5)
+                if (x + word.Width() > right + 5)
                 {
-                    int numSymb = DrawPartWord(word, x, y, right, false);
+                    int numSymb = DrawPartWord(word.c_str(), x, y, right, false);
                     x = right;
                     curSymbol += numSymb;
                     continue;
@@ -894,7 +890,7 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
                 else
                 {
                     curSymbol += length;
-                    x += Font::GetLengthText(word);
+                    x += word.Width();
                 }
             }
         }
@@ -937,18 +933,18 @@ void String::RemoveFromEnd()
 }
 
 
-uint String::Size() const
+int String::Size() const
 {
     if (text == nullptr)
     {
         return 0;
     }
 
-    return std::strlen(text);
+    return static_cast<int>(std::strlen(text));
 }
 
 
-char &String::operator[](uint i)
+char &String::operator[](int i)
 {
     static char result = 0;
 

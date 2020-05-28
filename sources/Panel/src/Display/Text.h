@@ -74,7 +74,8 @@ public:
     void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
     int DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
 
-    int Length() const;
+    // Столько пикселей строка займёт в ширину при выводе на экран
+    int Width() const;
 
     void Free();
 
@@ -88,9 +89,10 @@ public:
 
     void RemoveFromEnd();
 
-    uint Size() const;
+    // Размер строки в символах (без учёта заверщающего)
+    int Size() const;
 
-    char &operator[](uint i);
+    char &operator[](int i);
 
 private:
 

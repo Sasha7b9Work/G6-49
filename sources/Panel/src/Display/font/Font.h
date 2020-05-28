@@ -26,7 +26,6 @@ struct TypeFont
 struct Font
 {
     static int GetHeight();
-    static int GetLengthText(const char *text);
     static int GetHeight(char symbol);
     static int GetWidth(char symbol);
     static void StoreAndSet(TypeFont::E typeFont);

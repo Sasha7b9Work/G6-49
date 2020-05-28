@@ -45,18 +45,6 @@ void Font::ToggleCharacterSize()
 }
 
 
-int Font::GetLengthText(const char *text)
-{
-    int retValue = 0;
-    while (*text)
-    {
-        retValue += GetWidth(*text);
-        text++;
-    }
-    return retValue;
-}
-
-
 int Font::GetHeight(char s)
 {
     if (IsAdvanced())

@@ -51,9 +51,9 @@ void Console::Draw()
     int y = 50;
     for (int i = 0; i < numStrings; i++)
     {
-        int length = Font::GetLengthText(&buffer[i][0]);
-        Rectangle(length, 9).Fill(2, y, Color::GREEN_25);
-        String(&buffer[i][0]).Draw(2, y, Color::FILL);
+        String string(&buffer[i][0]);
+        Rectangle(string.Width(), 9).Fill(2, y, Color::GREEN_25);
+        string.Draw(2, y, Color::FILL);
         y += 9;
     }
 

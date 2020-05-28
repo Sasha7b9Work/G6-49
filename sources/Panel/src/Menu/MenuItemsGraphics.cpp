@@ -171,19 +171,19 @@ void Choice::Draw(bool opened, int x, int y) const
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Color::BACK.SetAsCurrent();
 
+        String nameCurrentSubItem(NameCurrentSubItem(LANGUAGE));
+
         if (step == 0.0F) //-V2550 //-V550
         {
-            String(NameCurrentSubItem(LANGUAGE)).DrawRelativelyRight(315, y + 30);
+            nameCurrentSubItem.DrawRelativelyRight(315, y + 30);
         }
         else
         {
             int x0 = 315 - step;
 
-            String(NameCurrentSubItem(LANGUAGE)).DrawRelativelyRight(x0, y + 30);
+            nameCurrentSubItem.DrawRelativelyRight(x0, y + 30);
 
-            int length = Font::GetLengthText(NameNextSubItem(LANGUAGE).c_str());
-
-            if (x0 + length > x + Item::WIDTH - 5)
+            if (x0 + NameNextSubItem(LANGUAGE).Width() > x + Item::WIDTH - 5)
             {
                 NameNextSubItem(LANGUAGE).Draw(x0, y + 30);
             }
