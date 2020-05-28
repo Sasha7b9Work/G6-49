@@ -683,6 +683,16 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 }
 
 
+int String::DrawInArea(int x, int y, int width, Color color)
+{
+    color.SetAsCurrent();
+
+    x += (width - Width()) / 2;
+
+    return Draw(x, y);
+}
+
+
 void String::DrawRelativelyRight(int xRight, int y, Color color)
 {
     Draw(xRight - Width(), y, color);

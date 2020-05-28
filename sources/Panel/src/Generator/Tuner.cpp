@@ -27,6 +27,7 @@ public:
     char At(const int i) const;
     // Возвращает true, если содержится десятичная точка
     bool ConsistComma() const;
+    String GetString() const;
 private:
     Stack<char> stack;
     ParameterValue *param;
@@ -46,6 +47,19 @@ private:
 
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
 static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
+
+
+String EnterBuffer::GetString() const
+{
+    String string;
+
+    for (int i = 0; i < stack.Size(); i++)
+    {
+        string.Append(stack[i]);
+    }
+
+    return string;
+}
 
 
 void Cursor::Init()
@@ -545,8 +559,12 @@ bool TunerDisplay::OnEnteringKey(const Control &control)
 }
 
 
-void TunerDisplay::DrawEnteringMode(int x, int y, int)
+void TunerDisplay::DrawEnteringMode(int x, int y, int width)
 {
+    String text = enterBuffer.GetString();
+
+    x = x + (width - text.Width()) / 2;
+
     for (int i = 0; i < enterBuffer.Size(); i++)
     {
         Char(enterBuffer.At(i)).Draw(x, y);
