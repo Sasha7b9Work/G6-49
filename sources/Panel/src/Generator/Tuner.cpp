@@ -23,15 +23,6 @@ private:
 };
 
 
-enum Mode
-{
-    Correction,     // Режим коррекциии значения параметра (ручкой)
-    Entering        // Режим ввода значения
-};
-
-
-static Mode mode = Correction;
-
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
 
 
@@ -253,12 +244,6 @@ bool Indicator::ChangeSign(DoubleValue *value, int pos)
 }
 
 
-DoubleValue TunerDisplay::GetValue() const
-{
-    return DoubleValue(indicator.GetStringDigits());
-}
-
-
 void Indicator::HighlightToLeft()
 {
     do
@@ -385,7 +370,7 @@ void Indicator::InitHighlight()
 }
 
 
-TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this)
+TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this), mode(Correction)
 {
 }
 
@@ -403,9 +388,16 @@ void TunerDisplay::Draw()
 
     DrawTitle(x, y, WaveGraphics::Width());
 
-    x = DrawValue(x, y + 50);
+    if (mode == Entering)
+    {
+        DrawEnteringMode();
+    }
+    else
+    {
+        x = DrawValue(x, y + 50);
 
-    DrawUnits(x, y + 50);
+        DrawUnits(x, y + 50);
+    }
 
     Font::Restore();
 }
@@ -413,7 +405,7 @@ void TunerDisplay::Draw()
 
 void TunerDisplay::DrawTitle(int x, int y, int width)
 {
-    Text(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
+    String(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 }
 
 
@@ -433,9 +425,43 @@ int TunerDisplay::DrawValue(int x, int y)
 }
 
 
-bool TunerDisplay::OnControlKey(const Control control) //-V801
+bool TunerDisplay::OnControlKey(const Control &control)
 {
+    if (control.IsEntering())
+    {
+        return OnEnteringKey(control);
+    }
+
     return indicator.OnControlKey(control);
+}
+
+
+bool TunerDisplay::OnEnteringKey(const Control &control)
+{
+    if (control.IsEntering())
+    {
+        if (mode == Correction)
+        {
+            SetModeEntering();
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
+
+void TunerDisplay::DrawEnteringMode()
+{
+
+}
+
+
+void TunerDisplay::SetModeEntering()
+{
+    PageTuneParameter::SetModeEntering();
+    mode = Entering;
 }
 
 
@@ -528,31 +554,10 @@ void Tuner::Draw()
 
 bool Tuner::OnControlKey(const Control control) //-V801
 {
-    if (control.IsCursors() || control.IsRotate())
+    if (control.IsCursors() || control.IsRotate() || control.IsEntering())
     {
-        return display.OnControlKey(control);
-    }
-    else if(control.IsEntering())
-    {
-        if (InModeCorrection())
-        {
-            SetModeEntering();
-        }
-
         return display.OnControlKey(control);
     }
 
     return false;
-}
-
-
-bool Tuner::InModeCorrection()
-{
-    return (mode == Correction);
-}
-
-
-void Tuner::SetModeEntering()
-{
-    PageTuneParameter::SetModeEntering();
 }

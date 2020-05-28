@@ -29,19 +29,15 @@ static void OnPress_More()
 }
 
 
-static void Draw_More(int _x, int _y)
+static void Draw_More(int x, int y)
 {
-    int x[3] = { _x + 15, _x + 35, _x + 55};
-    int y[3] = { _y + 35, _y + 15, _y + 35};
-
-    Primitives::Line::Draw(x[0], y[0], x[1], y[1]);
-    Primitives::Line::Draw(x[1], y[1], x[2], y[2]);
-    Primitives::Line::Draw(x[0], y[0], x[2], y[2]);
+    String(LANG_IS_RU ? "Больше" : "Increase").Draw(x + 13, y + 12);
+    Text::Draw2SymbolsHorizontal(x + 25, y + 30, Ideograph::_8::Up);
 }
 
 
 DEF_SMALL_BUTTON(sbMore,
-    "БОЛЬШЕ", "MORE",
+    "Больше", "More",
     "Увеличить порядок", "Increase order",
     *PageTuneParameter::self, Item::FuncActive, OnPress_More, Draw_More
 )
@@ -53,19 +49,15 @@ static void OnPress_Less()
 }
 
 
-static void Draw_Less(int _x, int _y)
+static void Draw_Less(int x, int y)
 {
-    int x[3] = { _x + 15, _x + 35, _x + 55 };
-    int y[3] = { _y + 15, _y + 35, _y + 15 };
-
-    Primitives::Line::Draw(x[0], y[0], x[1], y[1]);
-    Primitives::Line::Draw(x[1], y[1], x[2], y[2]);
-    Primitives::Line::Draw(x[0], y[0], x[2], y[2]);
+    String(LANG_IS_RU ? "Меньше" : "Decrease").Draw(x + 13, y + 12);
+    Text::Draw2SymbolsHorizontal(x + 25, y + 30, Ideograph::_8::Down);
 }
 
 
 DEF_SMALL_BUTTON(sbLess,
-    "МЕНЬШЕ", "LESS",
+    "Меньше", "Less",
     "Уменьшить порядок", "Decrease order",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Less, Draw_Less
 )
@@ -87,12 +79,12 @@ static void OnPress_Cancel()
 
 static void Draw_Cancel(int x, int y)
 {
-    String("Отменить").Draw(x + 13, y + 12);
+    String(LANG_IS_RU ? "Отменить" : "Cancel").Draw(x + 13, y + 12);
     Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Delete);
 }
 
 DEF_SMALL_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
-    "ОТМЕНА", "CANCEL",
+    "Отменить", "Cancel",
     "Отказаться от ввода нового значения", "Refuse to enter a new value",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
@@ -100,7 +92,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 
 static void Draw_Enter(int x, int y)
 {
-    String("Подтвердить").Draw(x + 3, y + 12);
+    String(LANG_IS_RU ? "Применить" : "Apply").Draw(x + 10, y + 12);
     Text::Draw4SymbolsInRect(x + 25, y + 28, Ideograph::_8::Save);
 }
 
@@ -110,7 +102,7 @@ static void OnPress_Enter()
 }
 
 DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
-    "ВВОД", "ENTER",
+    "Применить", "Apply",
     "Подтвердить ввод нового значения", "Confirm new value entry",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Enter, Draw_Enter
 )

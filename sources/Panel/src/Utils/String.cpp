@@ -182,6 +182,19 @@ int String::Draw(int x, int y, Color color) const
 }
 
 
+int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
+{
+    color.SetAsCurrent();
+
+    int lenght = Font::GetLengthText(c_str());
+    int height = Font::GetHeightSymbol(c_str()[0]);
+    int x = eX + (width - lenght) / 2;
+    int y = eY + (eHeight - height) / 2;
+
+    return Text(c_str()).Draw(x, y);
+}
+
+
 void String::Conversion(TypeConversionString::E conv)
 {
     char *pointer = buffer;

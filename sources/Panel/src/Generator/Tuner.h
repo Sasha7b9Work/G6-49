@@ -130,16 +130,23 @@ public:
 
     void Draw();
 
-    bool OnControlKey(const Control control);
+    bool OnControlKey(const Control &control);
 
     Tuner *GetTuner() { return tuner; }
 
-    DoubleValue GetValue() const;
-
 private:
+
+    enum ModeTuning
+    {
+        Correction,     // Режим коррекциии значения параметра (ручкой)
+        Entering        // Режим ввода значения
+    };
+
     Tuner *tuner;
 
     Indicator indicator;
+
+    ModeTuning mode;
 
     void DrawTitle(int x, int y, int width);
 
@@ -153,6 +160,14 @@ private:
 
     // Заполнить разряды дробной части параметра
     void FillDigitsFractPart();
+
+    // Обработка нажатия клавиши набора цифрового значения
+    bool OnEnteringKey(const Control &control);
+
+    // Отрисовка в режиме ввода
+    void DrawEnteringMode();
+
+    void SetModeEntering();
 };
 
 
@@ -177,10 +192,4 @@ private:
     ParameterValue *param;           // Настраиваемый параметр
 
     TunerDisplay display;
-
-    // Возвращает true, если в режиме коррекции параметра (ручкой)
-    bool InModeCorrection();
-
-    // Установить режим ввода значения
-    void SetModeEntering();
 };
