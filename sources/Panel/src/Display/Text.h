@@ -4,9 +4,6 @@
 
 struct Text
 {
-    // Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
-    static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder, Color colorBackground);
-    
     static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
 
     static char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
@@ -99,6 +96,8 @@ public:
     // Пишет текст с переносами
     int DrawInColumnWithTransfers(const int left, const int top, const int width, const Color color = Color::NUMBER);
     int DrawInColumnWithTransfersDiffColors(const int left, const int top, const int width, const Color colorDif, const Color = Color::NUMBER);
+    // Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
+    void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
 
     int Length() const;
 

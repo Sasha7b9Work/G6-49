@@ -453,8 +453,7 @@ void BigText::Draw(int eX, int eY, Color color)
 }
 
 
-void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
-                                                  Color colorBackground)
+void String::DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground)
 {
     int lenght = Font::GetLengthText(text);
     int eX = String(text).DrawInCenterRect(x, y, width, height, colorBackground);
