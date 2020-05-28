@@ -4,10 +4,6 @@
 
 struct Text
 {
-    static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
-
-    static char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
-
     // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
     static int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
 
@@ -98,6 +94,7 @@ public:
     int DrawInColumnWithTransfersDiffColors(const int left, const int top, const int width, const Color colorDif, const Color = Color::NUMBER);
     // Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
+    int DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
 
     int Length() const;
 
@@ -129,4 +126,5 @@ private:
     int DrawSpaces(int x, int y, pString t, int *numSymbols);
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
     bool GetHeightTextWithTransfers(int left, int top, int right, int *height);
+    char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
 };

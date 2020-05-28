@@ -92,7 +92,7 @@ void Char::Draw2Horizontal(int x, int y, Color color)
 }
 
 
-char *Text::GetWord(const char *firstSymbol, int *length, char buffer[20])
+char *String::GetWord(const char *firstSymbol, int *length, char buffer[20])
 {
     int pointer = 0;
     *length = 0;
@@ -191,7 +191,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = Text::GetWord(text + curSymbol, &length, buf);
+            char *word = GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
@@ -465,7 +465,7 @@ void String::DrawInCenterRectOnBackground(int x, int y, int width, int height, C
 }
 
 
-int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill)
+int String::DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill)
 {
     Rectangle(width, height).Draw(x, y, colorFill);
     Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorBackground);
@@ -731,7 +731,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = Text::GetWord(text + curSymbol, &length, buf);
+            char *word = GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
@@ -850,7 +850,7 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = Text::GetWord(text + curSymbol, &length, buf);
+            char *word = GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
