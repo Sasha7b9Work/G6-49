@@ -51,6 +51,11 @@ private:
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
 static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
 
+TunerDisplay::ModeTuning TunerDisplay::mode = TunerDisplay::ModeTuning::Correction;
+
+DisplayEntering TunerDisplay::displayEntering;
+
+Tuner *TunerDisplay::currentTuner = nullptr;
 
 String EnterBuffer::GetString() const
 {
@@ -477,7 +482,7 @@ void Indicator::InitHighlight()
 }
 
 
-TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this), mode(Correction)
+TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this)
 {
 }
 
@@ -536,20 +541,20 @@ bool TunerDisplay::OnControlKey(const Control &control)
 {
     if (control.IsEntering())
     {
-        return OnEnteringKey(control);
+        return displayEntering.OnEnteringKey(control);
     }
 
     return indicator.OnControlKey(control);
 }
 
 
-bool TunerDisplay::OnEnteringKey(const Control &control)
+bool DisplayEntering::OnEnteringKey(const Control &control)
 {
     if (control.IsEntering())
     {
-        if (mode == Correction)
+        if (TunerDisplay::InModeCorrection())
         {
-            SetModeEntering();
+            TunerDisplay::SetModeEntering();
         }
 
         enterBuffer.Push(control);
@@ -595,7 +600,7 @@ void TunerDisplay::SetModeEntering()
 {
     PageTuneParameter::SetModeEntering();
     mode = Entering;
-    enterBuffer.Prepare(tuner->GetParameter());
+    enterBuffer.Prepare(GetTuner()->GetParameter());
 }
 
 
@@ -615,6 +620,8 @@ void TunerDisplay::Init()
     FillDigitsIntegerPart();
 
     FillDigitsFractPart();
+
+    currentTuner = tuner;
 }
 
 

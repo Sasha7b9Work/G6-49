@@ -116,12 +116,31 @@ private:
 };
 
 
+// Класс для ввода и отображения параметра
+class DisplayEntering
+{
+public:
+    
+    // Обработка нажатия клавиши набора цифрового значения
+    bool OnEnteringKey(const Control &control);
+
+private:
+};
+
+
 // Визуальное отображение Tuner
 class TunerDisplay
 {
     friend class Tuner;
 
 public:
+    
+    enum ModeTuning
+    {
+        Correction,     // Режим коррекциии значения параметра (ручкой)
+        Entering        // Режим ввода значения
+    };
+
     TunerDisplay(Tuner *tuner);
 
     void Init();
@@ -132,21 +151,17 @@ public:
 
     bool OnControlKey(const Control &control);
 
-    Tuner *GetTuner() { return tuner; }
+    static Tuner *GetTuner() { return currentTuner; }
+
+    static bool InModeCorrection() { return (mode == Correction); }
+
+    static void SetModeEntering();
 
 private:
-
-    enum ModeTuning
-    {
-        Correction,     // Режим коррекциии значения параметра (ручкой)
-        Entering        // Режим ввода значения
-    };
 
     Tuner *tuner;
 
     Indicator indicator;
-
-    ModeTuning mode;
 
     void DrawTitle(int x, int y, int width);
 
@@ -161,12 +176,13 @@ private:
     // Заполнить разряды дробной части параметра
     void FillDigitsFractPart();
 
-    // Обработка нажатия клавиши набора цифрового значения
-    bool OnEnteringKey(const Control &control);
-
     void DrawEnteringMode(int x, int y, int width);
 
-    void SetModeEntering();
+    static ModeTuning mode;                         // Текущий режим настройки
+
+    static DisplayEntering displayEntering;         // 
+
+    static Tuner *currentTuner;
 };
 
 
