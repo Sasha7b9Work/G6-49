@@ -33,8 +33,6 @@ struct Text
     
     static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
 
-    static int GetLenghtSubString(pString text);
-
     static int DrawSubString(int x, int y, pString text);
 
     static int DrawSpaces(int x, int y, pString text, int *numSymbols);

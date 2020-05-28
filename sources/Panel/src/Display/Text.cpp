@@ -593,20 +593,6 @@ int Text::DrawSubString(int x, int y, pString t)
 }
 
 
-int Text::GetLenghtSubString(pString t)
-{
-    const char *text = t;
-
-    int retValue = 0;
-    while (((*text) != ' ') && ((*text) != '\0'))
-    {
-        retValue += Font::GetLengthSymbol(*text);
-        text++;
-    }
-    return retValue;
-}
-
-
 int Text::DrawSpaces(int x, int y, pString t, int *numSymbols)
 {
     const char *text = t;

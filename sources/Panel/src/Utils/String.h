@@ -31,6 +31,8 @@ public:
     void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
     void DrawInColumn(int x, int y, int width);
 
+    int Length() const;
+
     void Free();
 
     void Append(const char *str);

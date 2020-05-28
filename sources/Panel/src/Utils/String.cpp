@@ -218,7 +218,7 @@ void String::DrawInColumn(int x, int y, int width)
 
     while (*text != 0)
     {
-        int length = Text::GetLenghtSubString(buffer);
+        int length = Length();
         if (length + x > xEnd)
         {
             x = xStart;
@@ -231,6 +231,20 @@ void String::DrawInColumn(int x, int y, int width)
         x = Text::DrawSpaces(x, y, text, &numSymbols);
         text += numSymbols;     // -V102
     }
+}
+
+
+int String::Length() const
+{
+    const char *text = buffer;
+
+    int retValue = 0;
+    while (((*text) != ' ') && ((*text) != '\0'))
+    {
+        retValue += Font::GetLengthSymbol(*text);
+        text++;
+    }
+    return retValue;
 }
 
 
