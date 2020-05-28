@@ -136,7 +136,7 @@ bool Char::IsLetter()
 }
 
 
-int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
+int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 {
     uint *lengthSyllables = BreakWord(word);
     int numSyllabels = 0;
@@ -212,7 +212,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
                 int lengthString = Font::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
-                    int numSymb = Text::DrawPartWord(word, x, y, right, true);
+                    int numSymb = DrawPartWord(word, x, y, right, true);
                     x = right;
                     curSymbol += numSymb;
                     continue;
@@ -255,7 +255,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
 }
 
 
-uint *Text::BreakWord(char *word)
+uint *String::BreakWord(char *word)
 {
     int num = 0;
     static uint lengthSyllables[10];
@@ -284,7 +284,7 @@ uint *Text::BreakWord(char *word)
 }
 
 
-char *Text::PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30])
+char *String::PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30])
 {
     uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
@@ -298,7 +298,7 @@ char *Text::PartWordForTransfer(const char *word, const uint *lengthSyllables, i
 }
 
 
-bool Text::FindNextTransfer(const char *letters, uint *lettersInSyllable)
+bool String::FindNextTransfer(const char *letters, uint *lettersInSyllable)
 {
 
 #define VOWEL       0   // Гласная
@@ -391,7 +391,7 @@ bool Char::IsConsonant()
 }
 
 
-bool Text::CompareArrays(const bool *array1, const bool *array2, int numElems)
+bool String::CompareArrays(const bool *array1, const bool *array2, int numElems)
 {
     for (int i = 0; i < numElems; i++)
     {
@@ -752,7 +752,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
                 int lengthString = Font::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
-                    int numSymb = Text::DrawPartWord(word, x, y, right, true);
+                    int numSymb = DrawPartWord(word, x, y, right, true);
                     x = right;
                     curSymbol += numSymb;
                     continue;
@@ -871,7 +871,7 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
                 int lengthString = Font::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
-                    int numSymb = Text::DrawPartWord(word, x, y, right, false);
+                    int numSymb = DrawPartWord(word, x, y, right, false);
                     x = right;
                     curSymbol += numSymb;
                     continue;
