@@ -179,7 +179,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
     int right = left + width;
 
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(buffer));
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -191,11 +191,11 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = Text::GetWord(buffer + curSymbol, &length, buf);
+            char *word = Text::GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = buffer[curSymbol++];
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -489,36 +489,36 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
 }
 
 
-String::String() : buffer(nullptr)
+String::String() : text(nullptr)
 {
     Set(TypeConversionString::None, "");
 }
 
 
-String::String(const String &rhs) : buffer(nullptr)
+String::String(const String &rhs) : text(nullptr)
 {
     Set(TypeConversionString::None, "");
 
     if (Allocate(std::strlen(rhs.c_str()) + 1))
     {
-        std::strcpy(buffer, rhs.c_str());
+        std::strcpy(text, rhs.c_str());
     }
 }
 
 
-String::String(char symbol) : buffer(nullptr)
+String::String(char symbol) : text(nullptr)
 {
     Set(TypeConversionString::None, "");
 
     if (Allocate(2))
     {
-        buffer[0] = symbol;
-        buffer[1] = 0;
+        text[0] = symbol;
+        text[1] = 0;
     }
 }
 
 
-String::String(const char *format, ...) : buffer(nullptr)
+String::String(const char *format, ...) : text(nullptr)
 {
     Set(TypeConversionString::None, "");
 
@@ -537,11 +537,11 @@ String::String(const char *format, ...) : buffer(nullptr)
 
     if (numSymbols < 0 || numSymbols > SIZE)
     {
-        std::strcpy(buffer, "Буфер слишком мал");
+        std::strcpy(text, "Буфер слишком мал");
     }
     else if (Allocate(std::strlen(buf) + 1))
     {
-        std::strcpy(buffer, buf);
+        std::strcpy(text, buf);
     }
 }
 
@@ -562,11 +562,11 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
 
         if (numSymbols < 0 || numSymbols > SIZE)
         {
-            std::strcpy(buffer, "Буфер слишком мал");
+            std::strcpy(text, "Буфер слишком мал");
         }
         else if (Allocate(std::strlen(buf) + 1))
         {
-            std::strcpy(buffer, buf);
+            std::strcpy(text, buf);
             Conversion(conv);
         }
     }
@@ -586,8 +586,8 @@ void String::Append(const char *str)
 
     Allocate(old.Size() + std::strlen(str) + 1);
 
-    std::strcpy(buffer, old.c_str());
-    std::strcat(buffer, str);
+    std::strcpy(text, old.c_str());
+    std::strcat(text, str);
 }
 
 
@@ -606,9 +606,9 @@ void String::Append(const char *str, uint numSymbols)
 
     Allocate(size);
 
-    std::strcpy(buffer, old.c_str());
-    std::memcpy(buffer + old.Size(), str, numSymbols);
-    buffer[size - 1] = '\0';
+    std::strcpy(text, old.c_str());
+    std::memcpy(text + old.Size(), str, numSymbols);
+    text[size - 1] = '\0';
 }
 
 
@@ -621,16 +621,16 @@ void String::Append(char symbol)
 
 String::~String()
 {
-    std::free(buffer);
+    std::free(text);
 }
 
 
 void String::Free()
 {
-    if (buffer)
+    if (text)
     {
-        std::free(buffer);
-        buffer = nullptr;
+        std::free(text);
+        text = nullptr;
         Set(TypeConversionString::None, "");
     }
 }
@@ -638,15 +638,15 @@ void String::Free()
 
 char *String::c_str() const
 {
-    return buffer;
+    return text;
 }
 
 
 bool String::Allocate(uint size)
 {
-    std::free(buffer);
-    buffer = static_cast<char *>(std::malloc(size));
-    if (buffer)
+    std::free(text);
+    text = static_cast<char *>(std::malloc(size));
+    if (text)
     {
         return true;
     }
@@ -659,10 +659,10 @@ int String::Draw(int x, int y, Color color) const
 {
     color.SetAsCurrent();
 
-    uint numSymbols = std::strlen(buffer);
+    uint numSymbols = std::strlen(text);
     for (uint i = 0; i < numSymbols; ++i)
     {
-        x = Char(buffer[i]).Draw(x, y);
+        x = Char(text[i]).Draw(x, y);
         ++x;
     }
 
@@ -674,8 +674,8 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 {
     color.SetAsCurrent();
 
-    int lenght = Font::GetLengthText(buffer);
-    int height = Font::GetHeightSymbol(buffer[0]);
+    int lenght = Font::GetLengthText(text);
+    int height = Font::GetHeightSymbol(text[0]);
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
 
@@ -685,7 +685,7 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 
 void String::DrawRelativelyRight(int xRight, int y, Color color)
 {
-    int lenght = Font::GetLengthText(buffer);
+    int lenght = Font::GetLengthText(text);
     Draw(xRight - lenght, y, color);
 }
 
@@ -695,22 +695,22 @@ void String::DrawInColumn(int x, int y, int width)
     int xStart = x;
     int xEnd = xStart + width;
 
-    const char *text = buffer;
+    const char *t = text;
 
-    while (*text != 0)
+    while (*t != 0)
     {
         int length = Length();
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font::GetHeightSymbol(*text) + 2;
+            y += Font::GetHeightSymbol(*t) + 2;
         }
         int numSymbols = 0;
-        numSymbols = DrawSubString(x, y, text);
-        text += numSymbols;
+        numSymbols = DrawSubString(x, y, t);
+        t += numSymbols;
         x += length;
-        x = DrawSpaces(x, y, text, &numSymbols);
-        text += numSymbols;     // -V102
+        x = DrawSpaces(x, y, t, &numSymbols);
+        t += numSymbols;     // -V102
     }
 }
 
@@ -733,7 +733,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
     int right = left + width;
 
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(buffer));
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -745,11 +745,11 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = Text::GetWord(buffer + curSymbol, &length, buf);
+            char *word = Text::GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = buffer[curSymbol++];
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -788,13 +788,13 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
 
 int String::Length() const
 {
-    const char *text = buffer;
+    const char *t = text;
 
     int retValue = 0;
-    while (((*text) != ' ') && ((*text) != '\0'))
+    while (((*t) != ' ') && ((*t) != '\0'))
     {
-        retValue += Font::GetLengthSymbol(*text);
-        text++;
+        retValue += Font::GetLengthSymbol(*t);
+        t++;
     }
     return retValue;
 }
@@ -802,7 +802,7 @@ int String::Length() const
 
 void String::Conversion(TypeConversionString::E conv)
 {
-    char *pointer = buffer;
+    char *pointer = text;
 
     if (conv == TypeConversionString::FirstUpper)
     {
@@ -821,28 +821,28 @@ void String::Conversion(TypeConversionString::E conv)
 }
 
 
-int String::DrawSubString(int x, int y, pString t)
+int String::DrawSubString(int x, int y, pString _t)
 {
-    const char *text = t;
+    const char *t = _t;
     int numSymbols = 0;
-    while (((*text) != ' ') && ((*text) != '\0'))
+    while (((*t) != ' ') && ((*t) != '\0'))
     {
-        x = Char(*text).Draw(x, y) + 1;
+        x = Char(*t).Draw(x, y) + 1;
         numSymbols++;
-        text++;
+        t++;
     }
     return numSymbols;
 }
 
 
-int String::DrawSpaces(int x, int y, pString t, int *numSymbols)
+int String::DrawSpaces(int x, int y, pString _t, int *numSymbols)
 {
-    const char *text = t;
+    const char *t = _t;
     *numSymbols = 0;
-    while (*text == ' ')
+    while (*t == ' ')
     {
-        x = Char(*text).Draw(x, y);
-        text++;
+        x = Char(*t).Draw(x, y);
+        t++;
         (*numSymbols)++;
     }
     return x;
@@ -852,7 +852,7 @@ int String::DrawSpaces(int x, int y, pString t, int *numSymbols)
 bool String::GetHeightTextWithTransfers(int left, int top, int right, int *height)
 {
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(buffer));
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -864,11 +864,11 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = Text::GetWord(buffer + curSymbol, &length, buf);
+            char *word = Text::GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = buffer[curSymbol++];
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -910,19 +910,19 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
 
 void String::RemoveFromBegin(uint numSymbols)
 {
-    if (std::strlen(buffer) == numSymbols)
+    if (std::strlen(text) == numSymbols)
     {
         Free();
     }
     else
     {
-        String old(buffer);
+        String old(text);
 
         Free();
 
         Allocate(old.Size() - numSymbols + 1);
 
-        std::strcpy(buffer, old.c_str() + numSymbols);
+        std::strcpy(text, old.c_str() + numSymbols);
     }
 }
 
@@ -931,19 +931,19 @@ void String::RemoveFromEnd()
 {
     if (Size() > 0)
     {
-        buffer[Size() - 1] = '\0';
+        text[Size() - 1] = '\0';
     }
 }
 
 
 uint String::Size() const
 {
-    if (buffer == nullptr)
+    if (text == nullptr)
     {
         return 0;
     }
 
-    return std::strlen(buffer);
+    return std::strlen(text);
 }
 
 
@@ -951,10 +951,10 @@ char &String::operator[](uint i)
 {
     static char result = 0;
 
-    if (buffer == nullptr || Size() < i)
+    if (text == nullptr || Size() < i)
     {
         return result;
     }
 
-    return buffer[i];
+    return text[i];
 }

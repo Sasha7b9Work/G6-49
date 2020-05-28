@@ -128,7 +128,7 @@ public:
 
 private:
 
-    char *buffer;
+    char *text;
 
     bool Allocate(uint size);
 
