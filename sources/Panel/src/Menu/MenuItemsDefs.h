@@ -192,8 +192,8 @@ ChoiceParameterBase name = { TypeItem::ChoiceParameter, 0, false, Page::NoPage, 
 
 
 
-#define DEF_SMALL_BUTTON(name, titleRU, hintRU, titleEN, hintEN, keeper, funcActive, funcPress, funcDraw)                                                        \
-static const SButtonBase name = { TypeItem::SmallButton, 0, false, Page::NoPage,                                                          \
+#define DEF_GRAPH_BUTTON(name, titleRU, hintRU, titleEN, hintEN, keeper, funcActive, funcPress, funcDraw)                                   \
+static const SButtonBase name = { TypeItem::SmallButton, 0, false, Page::NoPage,                                                            \
     reinterpret_cast<const PageBase *>(const_cast<const Page*>(&keeper)),                                                                   \
     {titleRU, hintRU}, {titleRU, hintEN}, funcActive, funcPress, funcDraw, 0, 0};
 

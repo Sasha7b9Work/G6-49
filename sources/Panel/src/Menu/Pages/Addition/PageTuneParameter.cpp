@@ -36,7 +36,7 @@ static void Draw_More(int x, int y)
 }
 
 
-DEF_SMALL_BUTTON(sbMore,
+DEF_GRAPH_BUTTON(sbMore,
     "Больше", "More",
     "Увеличить порядок", "Increase order",
     *PageTuneParameter::self, Item::FuncActive, OnPress_More, Draw_More
@@ -56,7 +56,7 @@ static void Draw_Less(int x, int y)
 }
 
 
-DEF_SMALL_BUTTON(sbLess,
+DEF_GRAPH_BUTTON(sbLess,
     "Меньше", "Less",
     "Уменьшить порядок", "Decrease order",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Less, Draw_Less
@@ -83,7 +83,7 @@ static void Draw_Cancel(int x, int y)
     Char(Ideograph::_8::Delete).Draw4InRect(x + 25, y + 28);
 }
 
-DEF_SMALL_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
+DEF_GRAPH_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
     "Отменить", "Cancel",
     "Отказаться от ввода нового значения", "Refuse to enter a new value",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Cancel, Draw_Cancel
@@ -101,7 +101,7 @@ static void OnPress_Enter()
     Menu::ResetAdditionPage();
 }
 
-DEF_SMALL_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
+DEF_GRAPH_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
     "Применить", "Apply",
     "Подтвердить ввод нового значения", "Confirm new value entry",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Enter, Draw_Enter
