@@ -37,23 +37,14 @@ private:
 };
 
 
-class Cursor
-{
-public:
-    Cursor() : timeInit(0U) { }
-    void Init();
-    void Draw(int x, int y);
-private:
-    uint timeInit;
-};
-
-
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
-static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
 
 DisplayCorrection::ModeTuning DisplayCorrection::mode = DisplayCorrection::Correction;
 
+DisplayEntering::Cursor DisplayEntering::cursor;
+
 Tuner *Tuner::current = nullptr;
+
 
 String EnterBuffer::GetString() const
 {
@@ -68,13 +59,13 @@ String EnterBuffer::GetString() const
 }
 
 
-void Cursor::Init()
+void DisplayEntering::Cursor::Init()
 {
     timeInit = TIME_MS;
 }
 
 
-void Cursor::Draw(int x, int y)
+void DisplayEntering::Cursor::Draw(int x, int y)
 {
     uint time = TIME_MS - timeInit;
 

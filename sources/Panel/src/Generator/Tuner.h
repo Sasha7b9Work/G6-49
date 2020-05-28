@@ -126,7 +126,19 @@ public:
 
     static void Draw(int x, int y, int width);
 
+    class Cursor
+    {
+    public:
+        Cursor() : timeInit(0U) { }
+        void Init();
+        void Draw(int x, int y);
+    private:
+        uint timeInit;
+    };
+
 private:
+
+    static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
 
     static int DrawValue(int x, int y);
 
