@@ -91,7 +91,7 @@ void Hint::Draw()
             int yUGO = y0 + 5;
 
             Color::GREEN_50.SetAsCurrent();
-            Text::DrawFormatStringInCenterRect(x0, y0 + 4, width, 10, "*** %s ***", item->GetTitle(LANGUAGE).c_str());
+            String("*** %s ***", item->GetTitle(LANGUAGE).c_str()).DrawInCenterRect(x0, y0 + 4, width, 10);
             Color::GREEN.SetAsCurrent();
 
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5; //-V2007

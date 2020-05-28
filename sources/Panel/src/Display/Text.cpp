@@ -703,32 +703,6 @@ int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width,
 }
 
 
-int Text::DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...)
-{
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    std::va_list args;
-    va_start(args, text); //-V2567
-    std::vsprintf(buffer, text, args);
-    va_end(args);
-
-    return String(buffer).DrawInCenterRect(x, y, width, height);
-}
-
-
-int Text::DrawFormat(int x, int y, pString text, ...)
-{
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    std::va_list args;
-    va_start(args, text); //-V2567
-    std::vsprintf(buffer, text, args);
-    va_end(args);
-
-    return Text(buffer).Draw(x, y);
-}
-
-
 void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
                                                   Color colorBackground)
 {

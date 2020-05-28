@@ -216,7 +216,7 @@ void Governor::DrawValue(int x, int y) const
 {
     if(Menu::GetCurrentItem() == this)
     {
-        int x1 = Text::DrawFormat(x, y, "%d", *cell);
+        int x1 = String("%d", *cell).Draw(x, y);
 
         Char('\x90').Draw(x - 6, y);
         Char('\x91').Draw(x1 + 1, y);

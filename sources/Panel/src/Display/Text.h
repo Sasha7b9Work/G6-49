@@ -13,9 +13,6 @@ struct Text
     // Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
 
-    // Вывод форматированного текста
-    static int DrawFormat(int x, int y, pString text, ...);
-    
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
     // Нарисовать два символа из таблицы, идущие друг за другом горизонтально
@@ -40,8 +37,6 @@ struct Text
     // Выводит форматированный текст в столбик шириной width. При этом слов, заключённое в двойные кавычки, выводится цветом color
     static int DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...);
 
-    static int DrawFormatStringInCenterRect(int x, int y, int width, int height, pString text, ...);
-    
     // Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder, Color colorBackground);
     
