@@ -12,15 +12,6 @@
 using namespace Primitives;
 
 
-bool Text::upperCase = false;
-
-
-void Text::SetUpperCase(bool upper)
-{
-    upperCase = upper;
-}
-
-
 void Text::Draw4SymbolsInRect(int x, int y, char eChar, Color color)
 {
     color.SetAsCurrent();
@@ -57,7 +48,7 @@ int Char::Draw(int eX, int eY, Color color)
 {
     color.SetAsCurrent();
 
-    if (Text::IsUpperCase())
+    if (Font::IsUpperCase())
     {
         symbol = SU::ToUpper(symbol);
     }
@@ -708,10 +699,4 @@ int Text::DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, 
     colorFill.SetAsCurrent();
 
     return String(text).DrawInCenterRect(x, y, width, height);
-}
-
-
-bool Text::IsUpperCase()
-{
-    return upperCase;
 }

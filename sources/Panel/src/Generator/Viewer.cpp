@@ -40,7 +40,7 @@ void Viewer::DrawParameterValue(int x, int y)
         return;
     }
 
-    Text::SetUpperCase(false);
+    Font::SetUpperCase(false);
     if(param->IsValue() && static_cast<ParameterValue *>(param)->IsSigned())
     {
         x -= 4;
@@ -48,5 +48,5 @@ void Viewer::DrawParameterValue(int x, int y)
 
     String(param->GetStringValue()).Draw(x, y);
 
-    Text::SetUpperCase(true);
+    Font::SetUpperCase(true);
 }

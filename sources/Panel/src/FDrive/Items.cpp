@@ -177,7 +177,7 @@ void Items::PressDown()
 
 void Items::Draw(int x, int y)
 {
-    Text::SetUpperCase(false);
+    Font::SetUpperCase(false);
 
     for (int i = 0; i < numFiles; i++)
     {
@@ -187,7 +187,7 @@ void Items::Draw(int x, int y)
 
     file.Draw(5, 235);
 
-    Text::SetUpperCase(true);
+    Font::SetUpperCase(true);
 }
 
 

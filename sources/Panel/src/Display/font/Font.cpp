@@ -17,7 +17,8 @@ static const Font *fonts[TypeFont::Count] = {&font5, &font7, &font8};
 static const Font *font = &font7;
 
 
-TypeFont::E Font::type = TypeFont::_5;
+TypeFont::E Font::current = TypeFont::_5;
+bool Font::upperCase = false;
 
 
 static Stack<TypeFont::E> stackFonts(10);       // Здесь хранятся сменяемые шрифты для пследующего восстановления
@@ -35,7 +36,7 @@ void Font::ToggleCharacterSize()
 
     fonts[TypeFont::_7] = f;
 
-    Set(type);
+    Set(current);
 }
 
 
@@ -61,7 +62,7 @@ int Font::GetLengthSymbol(char symbol)
 {
     if(font)
     {
-        return font->symbol[static_cast<uint8>(Text::IsUpperCase() ? static_cast<uint8>(SU::ToUpper(symbol)) : static_cast<uint8>(symbol))].width + 1;
+        return font->symbol[static_cast<uint8>(Font::IsUpperCase() ? static_cast<uint8>(SU::ToUpper(symbol)) : static_cast<uint8>(symbol))].width + 1;
     }
     
     return AdvancedFont::GetWidth(static_cast<uint8>(symbol));
@@ -70,16 +71,16 @@ int Font::GetLengthSymbol(char symbol)
 
 void Font::Set(TypeFont::E typeFont)
 {
-    type = typeFont;
+    current = typeFont;
 
-    if(type > TypeFont::_8)
+    if(current > TypeFont::_8)
     {
-        AdvancedFont::Set(type);
+        AdvancedFont::Set(current);
         font = nullptr;
     }
     else
     {
-        font = fonts[type];
+        font = fonts[current];
     }
 }
 
@@ -159,7 +160,7 @@ bool Font::BitIsExist(int s, int row, int bit)
 
 void Font::Store()
 {
-    stackFonts.Push(type);
+    stackFonts.Push(current);
 }
 
 
@@ -171,5 +172,17 @@ void Font::Restore()
 
 bool Font::IsAdvanced()
 {
-    return (type > TypeFont::_8);
+    return (current > TypeFont::_8);
+}
+
+
+void Font::SetUpperCase(bool upper)
+{
+    upperCase = upper;
+}
+
+
+bool Font::IsUpperCase()
+{
+    return upperCase;
 }

@@ -39,7 +39,10 @@ struct Font
     static bool BitIsExist(int s, int row, int bit);
     static bool IsAdvanced();
 
-    // Восстановить шрифт, который был сохранён функцией Save()
+    static void SetUpperCase(bool upper);
+    static bool IsUpperCase();
+
+    // Восстановить шрифт, который был сохранён функцией StoreAndSet()
     static void Restore();
     
     int height;
@@ -47,7 +50,8 @@ struct Font
 
 private:
 
-    static TypeFont::E type;
+    static TypeFont::E current;     // Этим ширфтом производится вывод
+    static bool upperCase;          // Если true, текст будет выводиться большими символы, независимо от того, какие символы в оригинале
 
     // Сохранить текущий шрифт
     static void Store();

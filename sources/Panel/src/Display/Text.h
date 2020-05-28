@@ -8,9 +8,6 @@ struct Text
 {
     Text(pString t) : text(t) { };
 
-    // Устанавливает верхний регистр выводимых символов
-    static void SetUpperCase(bool upper);
-
     static void Draw4SymbolsInRect(int x, int y, char eChar, Color color = Color::NUMBER);
 
     // Нарисовать два символа из таблицы, идущие друг за другом горизонтально
@@ -40,9 +37,6 @@ struct Text
     
     static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
     
-    // Если true, то все буквы выводятся в верхнем регистре
-    static bool IsUpperCase();
-
 private:
     
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
@@ -73,8 +67,6 @@ private:
     static int DrawSubString(int x, int y, pString text);
 
     static int DrawSpaces(int x, int y, pString text, int *numSymbols);
-
-    static bool upperCase;
 
     pString text;
 

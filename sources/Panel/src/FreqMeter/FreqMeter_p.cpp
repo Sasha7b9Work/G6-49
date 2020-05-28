@@ -19,7 +19,7 @@ void PFreqMeter::Draw()
         return;
     }
 
-    Text::SetUpperCase(false);
+    Font::SetUpperCase(false);
 
     if(inactive)
     {
@@ -60,7 +60,7 @@ void PFreqMeter::Draw()
 
     BigText(text, 3).Draw(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10);
 
-    Text::SetUpperCase(true);
+    Font::SetUpperCase(true);
 }
 
 

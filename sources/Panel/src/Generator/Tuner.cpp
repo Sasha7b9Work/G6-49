@@ -411,11 +411,11 @@ void TunerDisplay::DrawTitle(int x, int y, int width)
 
 void TunerDisplay::DrawUnits(int x, int y)
 {
-    Text::SetUpperCase(false);
+    Font::SetUpperCase(false);
 
     String(tuner->GetParameter()->GetUnits(LANGUAGE)).Draw(x + 7, y, Color::WHITE);
 
-    Text::SetUpperCase(true);
+    Font::SetUpperCase(true);
 }
 
 
