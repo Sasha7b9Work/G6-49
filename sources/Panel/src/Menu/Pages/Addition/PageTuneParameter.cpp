@@ -31,7 +31,7 @@ static void OnPress_More()
 
 static void Draw_More(int x, int y)
 {
-    String(LANG_IS_RU ? "Больше" : "Increase").Draw(x + 13, y + 12);
+    String(LANG_IS_RU ? "Больше" : "Increase").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Up).Draw2Horizontal(x + 25, y + 30);
 }
 
@@ -51,7 +51,7 @@ static void OnPress_Less()
 
 static void Draw_Less(int x, int y)
 {
-    String(LANG_IS_RU ? "Меньше" : "Decrease").Draw(x + 13, y + 12);
+    String(LANG_IS_RU ? "Меньше" : "Decrease").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Down).Draw2Horizontal(x + 25, y + 30);
 }
 
@@ -79,7 +79,7 @@ static void OnPress_Cancel()
 
 static void Draw_Cancel(int x, int y)
 {
-    String(LANG_IS_RU ? "Отменить" : "Cancel").Draw(x + 13, y + 12);
+    String(LANG_IS_RU ? "Отменить" : "Cancel").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Delete).Draw4InRect(x + 25, y + 28);
 }
 
@@ -92,7 +92,7 @@ DEF_SMALL_BUTTON(sbCancel,                                                      
 
 static void Draw_Enter(int x, int y)
 {
-    String(LANG_IS_RU ? "Применить" : "Apply").Draw(x + 10, y + 12);
+    String(LANG_IS_RU ? "Применить" : "Apply").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Save).Draw4InRect(x + 25, y + 28);
 }
 
