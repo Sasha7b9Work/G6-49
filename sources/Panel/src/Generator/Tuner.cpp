@@ -16,6 +16,9 @@
 #include "Utils/Stack.h"
 
 
+using namespace Primitives;
+
+
 // Класс для хранения вводимых данных в режиме непосредственного ввода
 class EnterBuffer
 {
@@ -486,7 +489,7 @@ void TunerDisplay::Draw()
     int x = WaveGraphics::X();
     int y = WaveGraphics::Y(ch.GetInverse());
 
-    Primitives::Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).DrawFilled(x, y, Color::BLUE_10, Color::WHITE);
+    Primitives::Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).DrawFilled(x, y, Color::BLACK, Color::WHITE);
 
     Font::StoreAndSet(TypeFont::_GOSTB20);
 
@@ -559,11 +562,12 @@ bool TunerDisplay::OnEnteringKey(const Control &control)
 }
 
 
+
+
+
 void TunerDisplay::DrawEnteringMode(int x, int y, int width)
 {
-    String text = enterBuffer.GetString();
-
-    x = x + (width - text.Width()) / 2;
+    Rectangle(width - 1, 30).Fill(x, y, Color::BLACK);
 
     for (int i = 0; i < enterBuffer.Size(); i++)
     {

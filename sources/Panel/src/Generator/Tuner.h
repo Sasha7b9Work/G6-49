@@ -164,7 +164,6 @@ private:
     // Обработка нажатия клавиши набора цифрового значения
     bool OnEnteringKey(const Control &control);
 
-    // Отрисовка в режиме ввода
     void DrawEnteringMode(int x, int y, int width);
 
     void SetModeEntering();
