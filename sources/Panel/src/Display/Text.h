@@ -107,11 +107,6 @@ private:
     char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
     // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
     int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
-    uint *BreakWord(char *word);
     // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
     char *PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
-    // \brief Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
-    // найденном слоге. Если слово закончилось, функция возвращает false
-    bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
-    bool CompareArrays(const bool *array1, const bool *array2, int numElems);
 };

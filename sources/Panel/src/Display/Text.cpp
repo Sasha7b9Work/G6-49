@@ -15,6 +15,18 @@
 using namespace Primitives;
 
 
+// ¬спомогательный класс дл€ работы со строками
+class WordWorker
+{
+public:
+    static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
+    // \brief Ќаходит следующий перенос. C letters начинаетс€ часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
+    // найденном слоге. ≈сли слово закончилось, функци€ возвращает false
+    static bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
+    static uint *BreakWord(char *word);
+};
+
+
 int Char::Draw(int eX, int eY, Color color)
 {
     color.SetAsCurrent();
@@ -138,7 +150,7 @@ bool Char::IsLetter()
 
 int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 {
-    uint *lengthSyllables = BreakWord(word);
+    uint *lengthSyllables = WordWorker::BreakWord(word);
     int numSyllabels = 0;
     char buffer[30];
     for (int i = 0; i < 10; i++)
@@ -255,7 +267,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
 }
 
 
-uint *String::BreakWord(char *word)
+uint *WordWorker::BreakWord(char *word)
 {
     int num = 0;
     static uint lengthSyllables[10];
@@ -298,7 +310,7 @@ char *String::PartWordForTransfer(const char *word, const uint *lengthSyllables,
 }
 
 
-bool String::FindNextTransfer(const char *letters, uint *lettersInSyllable)
+bool WordWorker::FindNextTransfer(const char *letters, uint *lettersInSyllable)
 {
 
 #define VOWEL       0   // √ласна€
@@ -391,7 +403,7 @@ bool Char::IsConsonant()
 }
 
 
-bool String::CompareArrays(const bool *array1, const bool *array2, int numElems)
+bool WordWorker::CompareArrays(const bool *array1, const bool *array2, int numElems)
 {
     for (int i = 0; i < numElems; i++)
     {
