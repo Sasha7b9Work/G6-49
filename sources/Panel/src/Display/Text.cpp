@@ -324,7 +324,7 @@ bool Text::FindNextTransfer(const char *letters, uint *lettersInSyllable)
     uint size = std::strlen(letters);
     for (uint i = 0; i < size; i++)
     {
-        consonant[i] = IsConsonant(letters[i]);
+        consonant[i] = Char(letters[i]).IsConsonant();
     }
 
     if (CompareArrays(template1, consonant, 3))
@@ -365,7 +365,7 @@ bool Text::FindNextTransfer(const char *letters, uint *lettersInSyllable)
 }
 
 
-bool Text::IsConsonant(char symbol)
+bool Char::IsConsonant()
 {
     static const bool isConsonat[256] =
     {

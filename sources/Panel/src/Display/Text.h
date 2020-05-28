@@ -33,8 +33,6 @@ private:
     // найденном слоге. Если слово закончилось, функция возвращает false
     static bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
 
-    static bool IsConsonant(char symbol);
-
     static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
 
 private:
@@ -49,6 +47,7 @@ public:
     void Draw4InRect(int x, int y, Color color = Color::NUMBER);
     void Draw2Horizontal(int x, int y, Color color = Color::NUMBER);
     bool IsLetter();
+    bool IsConsonant();
 private:
     char symbol;
 };
