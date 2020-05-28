@@ -24,8 +24,6 @@ struct Text
 
 private:
 
-    static bool IsLetter(char symbol);
-
     static uint *BreakWord(char *word);
     
     // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
@@ -50,6 +48,7 @@ public:
     int Draw(int x, int y, Color color = Color::NUMBER);
     void Draw4InRect(int x, int y, Color color = Color::NUMBER);
     void Draw2Horizontal(int x, int y, Color color = Color::NUMBER);
+    bool IsLetter();
 private:
     char symbol;
 };

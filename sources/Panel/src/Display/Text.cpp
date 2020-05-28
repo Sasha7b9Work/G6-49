@@ -97,7 +97,7 @@ char *Text::GetWord(const char *firstSymbol, int *length, char buffer[20])
     int pointer = 0;
     *length = 0;
 
-    while (IsLetter(*firstSymbol))
+    while (Char(*firstSymbol).IsLetter())
     {
         buffer[pointer] = *firstSymbol;
         pointer++;
@@ -110,7 +110,7 @@ char *Text::GetWord(const char *firstSymbol, int *length, char buffer[20])
 }
 
 
-bool Text::IsLetter(char symbol)
+bool Char::IsLetter()
 {
     static const bool isLetter[256] =
     {     //  0x00   0x01   0x02   0x03   0x04   0x05   0x06   0x07   0x08   0x09   0x0a   0x0b   0x0c   0x0d   0x0e   0x0f
