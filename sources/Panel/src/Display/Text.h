@@ -103,9 +103,15 @@ private:
     void Conversion(TypeConversionString::E conv);
 
     int DrawSubString(int x, int y, pString t);
+
     int DrawSpaces(int x, int y, pString t, int *numSymbols);
+
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
     bool GetHeightTextWithTransfers(int left, int top, int right, int *height);
+
     // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
     int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
+
+    // Возвращает ширину, занимаемую словом до первого пробела или нуль-символа
+    int WidthWithoutSpaces(const char *t) const;
 };

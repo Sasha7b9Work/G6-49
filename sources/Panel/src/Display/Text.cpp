@@ -701,17 +701,17 @@ void String::DrawRelativelyRight(int xRight, int y, Color color)
 
 void String::DrawInColumn(int x, int y, int width)
 {
-    int xStart = x;
-    int xEnd = xStart + width;
+    int begin = x;
+    int end = begin + width;
 
     const char *t = text;
 
-    while (*t != 0)
+    while (t && *t != 0)
     {
-        int length = Width();
-        if (length + x > xEnd)
+        int length = WidthWithoutSpaces(t);
+        if (x + length > end)
         {
-            x = xStart;
+            x = begin;
             y += Font::GetHeight(*t) + 2;
         }
         int numSymbols = 0;
@@ -798,13 +798,27 @@ int String::Width() const
 {
     const char *t = text;
 
-    int length = 0;
+    int width = 0;
     while (*t != '\0')
     {
-        length += Font::GetWidth(*t);
+        width += Font::GetWidth(*t);
         t++;
     }
-    return length;
+    return width;
+}
+
+
+int String::WidthWithoutSpaces(const char *t) const
+{
+    int width = 0;
+
+    while (*t != '\0' && *t != ' ')
+    {
+        width += Font::GetWidth(*t);
+        t++;
+    }
+
+    return width;
 }
 
 
