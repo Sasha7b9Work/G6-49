@@ -178,7 +178,14 @@ int String::Draw(int x, int y, Color color) const
 {
     color.SetAsCurrent();
 
-    return Text(c_str()).Draw(x, y);
+    uint numSymbols = std::strlen(buffer);
+    for (uint i = 0; i < numSymbols; ++i)
+    {
+        x = Char(buffer[i]).Draw(x, y);
+        ++x;
+    }
+
+    return x;
 }
 
 
