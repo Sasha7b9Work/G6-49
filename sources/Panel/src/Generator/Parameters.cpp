@@ -293,7 +293,6 @@ int ParameterChoice::NumChoices() const
 ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value) :
     Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
-    tuner.Init();
 }
 
 

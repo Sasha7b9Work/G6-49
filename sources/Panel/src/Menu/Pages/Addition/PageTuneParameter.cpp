@@ -138,6 +138,15 @@ static void OnDraw_TuneParameter()
 }
 
 
+static void OnOpenClose_TuneParameter(bool enter)
+{
+    if (enter)
+    {
+        tuned->GetTuner()->Init();
+    }
+}
+
+
 DEF_PAGE_SB(pTuneParameter,   //-V641
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", "ENTER VALUE", //-V641
     "", "",
@@ -145,7 +154,7 @@ DEF_PAGE_SB(pTuneParameter,   //-V641
     Item::EmptyDark(),
     &sbCancel,
     &sbEnter,
-    Page::SB_Input, 0, Item::FuncActive, Page::FuncEnter, OnDraw_TuneParameter, OnControl_TuneParameter
+    Page::SB_Input, 0, Item::FuncActive, OnOpenClose_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
 Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));

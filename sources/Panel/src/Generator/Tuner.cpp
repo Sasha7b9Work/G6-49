@@ -606,6 +606,8 @@ void TunerDisplay::SetModeEntering()
 
 void TunerDisplay::Init()
 {
+    currentTuner = tuner;
+
     MathParameterValue::SetParameterValue(tuner->GetParameter());
 
     for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
@@ -620,8 +622,6 @@ void TunerDisplay::Init()
     FillDigitsIntegerPart();
 
     FillDigitsFractPart();
-
-    currentTuner = tuner;
 }
 
 
