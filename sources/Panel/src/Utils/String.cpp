@@ -198,7 +198,7 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
 
-    return Text(c_str()).Draw(x, y);
+    return Draw(x, y);
 }
 
 

@@ -8,8 +8,6 @@ struct Text
 {
     Text(pString t) : text(t) { };
 
-    int Draw(int x, int y, Color color = Color::NUMBER);
-
     // Устанавливает верхний регистр выводимых символов
     static void SetUpperCase(bool upper);
 

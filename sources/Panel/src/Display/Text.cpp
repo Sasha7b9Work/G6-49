@@ -108,21 +108,6 @@ int Char::Draw(int eX, int eY, Color color)
 }
 
 
-int Text::Draw(int x, int y, Color color)
-{
-    color.SetAsCurrent();
-
-    uint numSymbols = std::strlen(text);
-    for (uint i = 0; i < numSymbols; ++i)
-    {
-        x = Char(text[i]).Draw(x, y);
-        ++x;
-    }
-
-    return x;
-}
-
-
 bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height)
 {
     char buffer[20];
@@ -248,7 +233,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
         {
             if (draw)
             {
-                Text(subString).Draw(x, y);
+                String(subString).Draw(x, y);
             }
             return static_cast<int>(std::strlen(subString)) - 1;
         }
@@ -393,7 +378,7 @@ int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int
                 else
                 {
                     curSymbol += length;
-                    x = Text(word).Draw(x, y) + 1;
+                    x = String(word).Draw(x, y) + 1;
                 }
             }
         }
@@ -606,7 +591,7 @@ void BigText::Draw(int eX, int eY, Color color)
 void Text::DrawTextRelativelyRight(int xRight, int y, pString text, Color color)
 {
     int lenght = Font::GetLengthText(text);
-    Text(text).Draw(xRight - lenght, y, color);
+    String(text).Draw(xRight - lenght, y, color);
 }
 
 
