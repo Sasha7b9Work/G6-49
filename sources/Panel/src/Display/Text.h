@@ -15,8 +15,6 @@ struct Text
 
     /*************** Вывод текста в области экрана **************************/
 
-    static void DrawTextInColumn(int x, int y, int width, pString text);
-
     // Возвращает нижнюю координату прямоугольника
     static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText);
 
@@ -34,7 +32,13 @@ struct Text
     static void DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder, Color colorBackground);
     
     static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
-    
+
+    static int GetLenghtSubString(pString text);
+
+    static int DrawSubString(int x, int y, pString text);
+
+    static int DrawSpaces(int x, int y, pString text, int *numSymbols);
+
 private:
     
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
@@ -59,12 +63,6 @@ private:
     static bool IsConsonant(char symbol);
 
     static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
-
-    static int GetLenghtSubString(pString text);
-
-    static int DrawSubString(int x, int y, pString text);
-
-    static int DrawSpaces(int x, int y, pString text, int *numSymbols);
 
     pString text;
 

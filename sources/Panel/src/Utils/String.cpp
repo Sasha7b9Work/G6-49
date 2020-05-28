@@ -209,6 +209,31 @@ void String::DrawRelativelyRight(int xRight, int y, Color color)
 }
 
 
+void String::DrawInColumn(int x, int y, int width)
+{
+    int xStart = x;
+    int xEnd = xStart + width;
+
+    const char *text = buffer;
+
+    while (*text != 0)
+    {
+        int length = Text::GetLenghtSubString(buffer);
+        if (length + x > xEnd)
+        {
+            x = xStart;
+            y += Font::GetHeightSymbol(*text) + 2;
+        }
+        int numSymbols = 0;
+        numSymbols = Text::DrawSubString(x, y, text);
+        text += numSymbols;
+        x += length;
+        x = Text::DrawSpaces(x, y, text, &numSymbols);
+        text += numSymbols;     // -V102
+    }
+}
+
+
 void String::Conversion(TypeConversionString::E conv)
 {
     char *pointer = buffer;

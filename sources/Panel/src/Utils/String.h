@@ -24,12 +24,12 @@ public:
     void Set(TypeConversionString::E conv, const char *format, ...);
 
     char *c_str() const;
+
     // Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
-
     int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
-
     void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
+    void DrawInColumn(int x, int y, int width);
 
     void Free();
 

@@ -579,31 +579,6 @@ void BigText::Draw(int eX, int eY, Color color)
 }
 
 
-void Text::DrawTextInColumn(int x, int y, int width, pString t)
-{
-    int xStart = x;
-    int xEnd = xStart + width;
-
-    const char *text = t;
-
-    while (*text != 0)
-    {
-        int length = GetLenghtSubString(text);
-        if (length + x > xEnd)
-        {
-            x = xStart;
-            y += Font::GetHeightSymbol(*text) + 2;
-        }
-        int numSymbols = 0;
-        numSymbols = DrawSubString(x, y, text);
-        text += numSymbols;
-        x += length;
-        x = DrawSpaces(x, y, text, &numSymbols);
-        text += numSymbols;     // -V102
-    }
-}
-
-
 int Text::DrawSubString(int x, int y, pString t)
 {
     const char *text = t;

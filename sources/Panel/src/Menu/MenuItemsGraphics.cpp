@@ -59,7 +59,7 @@ void Button::Draw(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    Text::DrawTextInColumn(x + 5, y + 17, Item::WIDTH, GetTitle(LANGUAGE).c_str());
+    GetTitle(LANGUAGE).DrawInColumn(x + 4, y + 17, Item::WIDTH);
     funcForDraw(x, y);
 }
 
@@ -87,7 +87,7 @@ void Page::DrawClosed(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    Text::DrawTextInColumn(x + 4, y + 17, Item::WIDTH, GetTitle(LANGUAGE).c_str());
+    GetTitle(LANGUAGE).DrawInColumn(x + 4, y + 17, Item::WIDTH);
 }
 
 
