@@ -9,9 +9,6 @@ struct Text
     /*************** Вывод текста в области экрана **************************/
 
 
-    // Пишет текст с переносами
-    static int DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
-
     static int DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color = Color::NUMBER);
 
     static int DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString text, ...);

@@ -162,5 +162,5 @@ int Item::DrawHint(int x, int y, int width, Color color) const
 {
     color.SetAsCurrent();
 
-    return Text::DrawTextInColumnWithTransfers(x, y, width, hint[LANGUAGE], color);
+    return String(hint[LANGUAGE]).DrawInColumnWithTransfers(x, y, width, color);
 }

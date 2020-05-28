@@ -31,6 +31,8 @@ public:
     void DrawInColumn(int x, int y, int width);
     // Возвращает нижнюю координату прямоугольника
     int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBack, Color colorRect, Color colorText);
+    // Пишет текст с переносами
+    int DrawInColumnWithTransfers(const int left, const int top, const int width, const Color color = Color::NUMBER);
 
     int Length() const;
 

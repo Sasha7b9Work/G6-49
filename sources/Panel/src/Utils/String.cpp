@@ -244,8 +244,68 @@ int String::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorB
     GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, &height);
     Rectangle(width, height).Draw(x, y, colorRect);
     Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorBack);
-    Text::DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, buffer, colorText);
+    DrawInColumnWithTransfers(x + 3, y + 3, width - 8, colorText);
     return y + height;
+}
+
+
+int String::DrawInColumnWithTransfers(const int left, const int top, const int width, const Color color) //-V801
+{
+    color.SetAsCurrent();
+
+    int right = left + width;
+
+    char buf[20];
+    int numSymbols = static_cast<int>(std::strlen(buffer));
+
+    int y = top - 1;
+    int x = left;
+
+    int curSymbol = 0;
+
+    while (curSymbol < numSymbols)
+    {
+        while (x < right - 1 && curSymbol < numSymbols)
+        {
+            int length = 0;
+            char *word = Text::GetWord(buffer + curSymbol, &length, buf);
+
+            if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
+            {
+                char symbol = buffer[curSymbol++];
+                if (symbol == '\n')
+                {
+                    x = right;
+                    continue;
+                }
+                if (symbol == ' ' && x == left)
+                {
+                    continue;
+                }
+                x = Char(symbol).Draw(x, y);
+            }
+            else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
+            {
+                int lengthString = Font::GetLengthText(word);
+                if (x + lengthString > right + 5)
+                {
+                    int numSymb = Text::DrawPartWord(word, x, y, right, true);
+                    x = right;
+                    curSymbol += numSymb;
+                    continue;
+                }
+                else
+                {
+                    curSymbol += length;
+                    x = String(word).Draw(x, y) + 1;
+                }
+            }
+        }
+        x = left;
+        y += 9;
+    }
+
+    return y;
 }
 
 

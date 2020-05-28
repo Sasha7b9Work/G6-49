@@ -252,66 +252,6 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
 }
 
 
-int Text::DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color) //-V801
-{
-    color.SetAsCurrent();
-
-    int right = left + width;
-
-    char buffer[20];
-    int numSymbols = static_cast<int>(std::strlen(text));
-
-    int y = top - 1;
-    int x = left;
-
-    int curSymbol = 0;
-
-    while (curSymbol < numSymbols)
-    {
-        while (x < right - 1 && curSymbol < numSymbols)
-        {
-            int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buffer);
-
-            if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
-            {
-                char symbol = text[curSymbol++];
-                if (symbol == '\n')
-                {
-                    x = right;
-                    continue;
-                }
-                if (symbol == ' ' && x == left)
-                {
-                    continue;
-                }
-                x = Char(symbol).Draw(x, y);
-            }
-            else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
-            {
-                int lengthString = Font::GetLengthText(word);
-                if (x + lengthString > right + 5)
-                {
-                    int numSymb = DrawPartWord(word, x, y, right, true);
-                    x = right;
-                    curSymbol += numSymb;
-                    continue;
-                }
-                else
-                {
-                    curSymbol += length;
-                    x = String(word).Draw(x, y) + 1;
-                }
-            }
-        }
-        x = left;
-        y += 9;
-    }
-
-    return y;
-}
-
-
 uint *Text::BreakWord(char *word)
 {
     int num = 0;
@@ -519,7 +459,7 @@ int Text::DrawFormatTextInColumnWithTransfers(int x, int y, int width, pString t
     std::vsprintf(buffer, text, args);
     va_end(args);
 
-    return DrawTextInColumnWithTransfers(x, y, width, buffer);
+    return String(buffer).DrawInColumnWithTransfers(x, y, width);
 }
 
 
