@@ -51,11 +51,9 @@ private:
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
 static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
 
-TunerDisplay::ModeTuning TunerDisplay::mode = TunerDisplay::ModeTuning::Correction;
+DisplayCorrection::ModeTuning DisplayCorrection::mode = DisplayCorrection::Correction;
 
-DisplayEntering TunerDisplay::displayEntering;
-
-Tuner *TunerDisplay::currentTuner = nullptr;
+Tuner *DisplayCorrection::currentTuner = nullptr;
 
 String EnterBuffer::GetString() const
 {
@@ -138,7 +136,7 @@ char EnterBuffer::At(const int i) const
 }
 
 
-Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_display)
+Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_display)
 {
 }
 
@@ -482,12 +480,12 @@ void Indicator::InitHighlight()
 }
 
 
-TunerDisplay::TunerDisplay(Tuner *_tuner) : tuner(_tuner), indicator(this)
+DisplayCorrection::DisplayCorrection(Tuner *_tuner) : tuner(_tuner), indicator(this)
 {
 }
 
 
-void TunerDisplay::Draw()
+void DisplayCorrection::Draw()
 {
     Chan ch = tuner->GetParameter()->GetForm()->GetWave()->GetChannel();
 
@@ -502,7 +500,7 @@ void TunerDisplay::Draw()
 
     if (mode == Entering)
     {
-        DrawEnteringMode(x, y + 50, WaveGraphics::Width());
+        DisplayEntering::Draw(x, y + 50, WaveGraphics::Width());
     }
     else
     {
@@ -515,13 +513,13 @@ void TunerDisplay::Draw()
 }
 
 
-void TunerDisplay::DrawTitle(int x, int y, int width)
+void DisplayCorrection::DrawTitle(int x, int y, int width)
 {
     String(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 }
 
 
-void TunerDisplay::DrawUnits(int x, int y)
+void DisplayCorrection::DrawUnits(int x, int y)
 {
     Font::SetUpperCase(false);
 
@@ -531,17 +529,17 @@ void TunerDisplay::DrawUnits(int x, int y)
 }
 
 
-int TunerDisplay::DrawValue(int x, int y)
+int DisplayCorrection::DrawValue(int x, int y)
 {
     return indicator.Draw(x + 20, y);
 }
 
 
-bool TunerDisplay::OnControlKey(const Control &control)
+bool DisplayCorrection::OnControlKey(const Control &control)
 {
     if (control.IsEntering())
     {
-        return displayEntering.OnEnteringKey(control);
+        return DisplayEntering::OnEnteringKey(control);
     }
 
     return indicator.OnControlKey(control);
@@ -552,9 +550,9 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 {
     if (control.IsEntering())
     {
-        if (TunerDisplay::InModeCorrection())
+        if (DisplayCorrection::InModeCorrection())
         {
-            TunerDisplay::SetModeEntering();
+            DisplayCorrection::SetModeEntering();
         }
 
         enterBuffer.Push(control);
@@ -567,7 +565,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 }
 
 
-int static DrawEnteringModeValue(int x, int y)
+int DisplayEntering::DrawValue(int x, int y)
 {
     for (int i = 0; i < enterBuffer.Size(); i++)
     {
@@ -580,23 +578,23 @@ int static DrawEnteringModeValue(int x, int y)
 }
 
 
-void TunerDisplay::DrawEnteringMode(int x, int y, int width)
+void DisplayEntering::Draw(int x, int y, int width)
 {
     Color::BLACK.SetAsCurrent();
 
-    int end = DrawEnteringModeValue(x, y);
+    int end = DrawValue(x, y);
 
     Color::WHITE.SetAsCurrent();
 
     int length = end - x;
 
-    x = DrawEnteringModeValue(x + (width - length) / 2, y);
+    x = DrawValue(x + (width - length) / 2, y);
 
     cursor.Draw(x, y + Font::GetHeight());
 }
 
 
-void TunerDisplay::SetModeEntering()
+void DisplayCorrection::SetModeEntering()
 {
     PageTuneParameter::SetModeEntering();
     mode = Entering;
@@ -604,7 +602,7 @@ void TunerDisplay::SetModeEntering()
 }
 
 
-void TunerDisplay::Init()
+void DisplayCorrection::Init()
 {
     currentTuner = tuner;
 
@@ -625,7 +623,7 @@ void TunerDisplay::Init()
 }
 
 
-void TunerDisplay::FillDigitsIntegerPart()
+void DisplayCorrection::FillDigitsIntegerPart()
 {
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     ParameterValue *param = tuner->GetParameter();
@@ -651,7 +649,7 @@ void TunerDisplay::FillDigitsIntegerPart()
 }
 
 
-void TunerDisplay::FillDigitsFractPart()
+void DisplayCorrection::FillDigitsFractPart()
 {
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     int after = MathParameterValue::GetNumberDigitsAfterComma();
@@ -667,7 +665,7 @@ void TunerDisplay::FillDigitsFractPart()
 }
 
 
-void TunerDisplay::Init(DoubleValue value)
+void DisplayCorrection::Init(DoubleValue value)
 {
     tuner->GetParameter()->SetAndLoadValue(value);
     Init();

@@ -5,7 +5,7 @@
 
 class ParameterValue;
 class Tuner;
-class TunerDisplay;
+class DisplayCorrection;
 
 
 class Digit
@@ -36,11 +36,11 @@ private:
 // Отображает знакоместа, изображения в знакоместах, и стрелки для подсвечивания активного знакоместа
 class Indicator
 {
-    friend class TunerDisplay;
+    friend class DisplayCorrection;
 
 public:
 
-    Indicator(TunerDisplay *display);
+    Indicator(DisplayCorrection *display);
 
     int Draw(int x, int y);
 
@@ -59,7 +59,7 @@ private:
 
     int indexHighlight;                     // Индекс подсвеченного знакоместа. Счёт ведётся только по цифровым и знаковым разрядам
 
-    TunerDisplay *display;
+    DisplayCorrection *display;
 
     // Нарисовать значок подсветки
     void HighlightSymbol(int x, int y);
@@ -122,14 +122,18 @@ class DisplayEntering
 public:
     
     // Обработка нажатия клавиши набора цифрового значения
-    bool OnEnteringKey(const Control &control);
+    static bool OnEnteringKey(const Control &control);
+
+    static void Draw(int x, int y, int width);
 
 private:
+
+    static int DrawValue(int x, int y);
 };
 
 
 // Визуальное отображение Tuner
-class TunerDisplay
+class DisplayCorrection
 {
     friend class Tuner;
 
@@ -141,7 +145,7 @@ public:
         Entering        // Режим ввода значения
     };
 
-    TunerDisplay(Tuner *tuner);
+    DisplayCorrection(Tuner *tuner);
 
     void Init();
 
@@ -176,13 +180,9 @@ private:
     // Заполнить разряды дробной части параметра
     void FillDigitsFractPart();
 
-    void DrawEnteringMode(int x, int y, int width);
-
     static ModeTuning mode;                         // Текущий режим настройки
 
-    static DisplayEntering displayEntering;         // 
-
-    static Tuner *currentTuner;
+    static Tuner *currentTuner;                     // Сюда записываем указатель на тюнер для вызова из статических методов
 };
 
 
@@ -206,5 +206,5 @@ private:
 
     ParameterValue *param;           // Настраиваемый параметр
 
-    TunerDisplay display;
+    DisplayCorrection display;
 };
