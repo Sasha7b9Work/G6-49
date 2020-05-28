@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "List.h"
+#include "Display/Text.h"
 #include "Interface/Interface_p.h"
-#include "Utils/String.h"
+#include "Utils/List.h"
 
 
 template void               List<Task>::Append(Task *);

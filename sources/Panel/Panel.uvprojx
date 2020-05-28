@@ -2369,16 +2369,6 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>BigNumber.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\BigNumber.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BigNumber.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\BigNumber.h</FilePath>
-            </File>
-            <File>
               <FileName>Debug.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Debug.cpp</FilePath>
@@ -2447,16 +2437,6 @@
               <FileName>Stack.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Stack.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\String.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>String.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\String.h</FilePath>
             </File>
             <File>
               <FileName>StringUtils.cpp</FileName>

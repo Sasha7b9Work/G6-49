@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Log.h"
+#include "Display/Text.h"
 #include "Utils/Buffer.h"
 #include "Utils/Dictionary.h"
 #include "Utils/Math.h"

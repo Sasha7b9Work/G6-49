@@ -4,7 +4,6 @@
 #include "Display/Text.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
-#include "Utils/String.h"
 #include <cstring>
 #include <cstdio>
 

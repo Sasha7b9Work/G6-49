@@ -1,10 +1,10 @@
 #pragma once
 #include "Display/Colors.h"
 #include "Display/Display.h"
+#include "Display/Text.h"
 #include "Keyboard/Controls.h"
 #include "MenuItemsDefs.h"
 #include "common/Command.h"
-#include "Utils/String.h"
 
 
 typedef bool (*pFuncBKey)(const Control);

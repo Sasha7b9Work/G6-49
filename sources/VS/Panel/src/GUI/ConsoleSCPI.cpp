@@ -1,8 +1,8 @@
 #include "defines.h"
+#include "Display/Text.h"
 #include "GUI/ConsoleSCPI.h"
 #include "GUI/ComPort.h"
 #include "SCPI/SCPI.h"
-#include "Utils/String.h"
 
 #undef CRC
 

@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Common.h"
+#include "Display/Text.h"
 #include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
 #include "Utils/StringUtils.h"

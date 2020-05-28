@@ -1,5 +1,6 @@
 #include "defines.h"
-#include "NumberBuffer.h"
+#include "Display/Text.h"
+#include "Utils/NumberBuffer.h"
 #include "Utils/StringUtils.h"
 #include <cstring>
 #include <cstdlib>

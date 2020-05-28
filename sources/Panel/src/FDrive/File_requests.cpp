@@ -1,8 +1,9 @@
 #include "defines.h"
 #include "common/Command.h"
 #include "common/Messages.h"
-#include "File.h"
-#include "Items.h"
+#include "Display/Text.h"
+#include "FDrive/File.h"
+#include "FDrive/Items.h"
 #include "Interface/Interface_p.h"
 
 
