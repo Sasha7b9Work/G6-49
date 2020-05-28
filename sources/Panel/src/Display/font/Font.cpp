@@ -24,8 +24,13 @@ bool Font::upperCase = false;
 static Stack<TypeFont::E> stackFonts(10);       // Здесь хранятся сменяемые шрифты для пследующего восстановления
 
 
-int Font::GetSize()
+int Font::GetHeight()
 {
+    if (IsAdvanced())
+    {
+        return AdvancedFont::GetHeight();
+    }
+
     return font->height;
 }
 
@@ -45,7 +50,7 @@ int Font::GetLengthText(const char *text)
     int retValue = 0;
     while (*text)
     {
-        retValue += GetLengthSymbol(*text);
+        retValue += GetWidth(*text);
         text++;
     }
     return retValue;
@@ -56,21 +61,21 @@ int Font::GetHeight(char s)
 {
     if (IsAdvanced())
     {
-        return AdvancedFont::GetHeight(s);
+        return AdvancedFont::GetHeight(static_cast<uint8>(s));
     }
 
     return 9;
 }
 
 
-int Font::GetLengthSymbol(char symbol)
+int Font::GetWidth(char symbol)
 {
-    if(font)
+    if (IsAdvanced())
     {
-        return font->symbol[static_cast<uint8>(Font::IsUpperCase() ? static_cast<uint8>(SU::ToUpper(symbol)) : static_cast<uint8>(symbol))].width + 1;
+        return AdvancedFont::GetWidth(static_cast<uint8>(symbol));
     }
-    
-    return AdvancedFont::GetWidth(static_cast<uint8>(symbol));
+
+    return font->symbol[static_cast<uint8>(Font::IsUpperCase() ? static_cast<uint8>(SU::ToUpper(symbol)) : static_cast<uint8>(symbol))].width + 1;
 }
 
 

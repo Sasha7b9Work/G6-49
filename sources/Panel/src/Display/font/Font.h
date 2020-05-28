@@ -25,10 +25,10 @@ struct TypeFont
 
 struct Font
 {
-    static int GetSize();
+    static int GetHeight();
     static int GetLengthText(const char *text);
     static int GetHeight(char symbol);
-    static int GetLengthSymbol(char symbol);
+    static int GetWidth(char symbol);
     static void StoreAndSet(TypeFont::E typeFont);
     static void Set(TypeFont::E typeFont);
     static void ToggleCharacterSize();

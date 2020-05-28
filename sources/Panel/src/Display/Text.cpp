@@ -794,7 +794,7 @@ int String::Length() const
     int retValue = 0;
     while (((*t) != ' ') && ((*t) != '\0'))
     {
-        retValue += Font::GetLengthSymbol(*t);
+        retValue += Font::GetWidth(*t);
         t++;
     }
     return retValue;
@@ -879,7 +879,7 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
                 {
                     continue;
                 }
-                x += Font::GetLengthSymbol(SU::ToUpper(symbol));
+                x += Font::GetWidth(SU::ToUpper(symbol));
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {

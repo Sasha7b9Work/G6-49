@@ -452,7 +452,7 @@ void TunerDisplay::Draw()
 
     if (mode == Entering)
     {
-        DrawEnteringMode(x, y + 50);
+        DrawEnteringMode(x, y + 50, WaveGraphics::Width());
     }
     else
     {
@@ -517,16 +517,16 @@ bool TunerDisplay::OnEnteringKey(const Control &control)
 }
 
 
-void TunerDisplay::DrawEnteringMode(int x, int y)
+void TunerDisplay::DrawEnteringMode(int x, int y, int)
 {
     for (int i = 0; i < enterBuffer.Size(); i++)
     {
         Char(enterBuffer.At(i)).Draw(x, y);
 
-        x += 14;
+        x += (enterBuffer.At(i) == '.') ? 10 : 14;
     }
 
-    cursor.Draw(x, y + Font::GetSize());
+    cursor.Draw(x, y + Font::GetHeight());
 }
 
 
