@@ -168,7 +168,7 @@ int Text::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 }
 
 
-int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color color) //-V801
+int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, const int width, const Color colorDif, const Color color) //-V801
 {
     bool inverse = false;               // Установленное в true значение означает, что сейчас идёт вывод инверсным цветом
 
@@ -178,8 +178,8 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
 
     int right = left + width;
 
-    char buffer[20];
-    int numSymbols = static_cast<int>(std::strlen(text));
+    char buf[20];
+    int numSymbols = static_cast<int>(std::strlen(buffer));
 
     int y = top - 1;
     int x = left;
@@ -191,11 +191,11 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buffer);
+            char *word = Text::GetWord(buffer + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = text[curSymbol++];
+                char symbol = buffer[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -212,7 +212,7 @@ int Text::DrawTextInColumnWithTransfersDiffColors(const int left, const int top,
                 int lengthString = Font::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
-                    int numSymb = DrawPartWord(word, x, y, right, true);
+                    int numSymb = Text::DrawPartWord(word, x, y, right, true);
                     x = right;
                     curSymbol += numSymb;
                     continue;
@@ -462,7 +462,7 @@ int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width,
     std::vsprintf(buffer, text, args);
     va_end(args);
 
-    return DrawTextInColumnWithTransfersDiffColors(x, y, width, buffer, color);
+    return String(buffer).DrawInColumnWithTransfersDiffColors(x, y, width, color);
 }
 
 

@@ -7,7 +7,7 @@ struct Text
     /*************** Вывод текста в области экрана **************************/
 
 
-    static int DrawTextInColumnWithTransfersDiffColors(const int left, const int top, const int width, pString text, const Color colorDif, const Color = Color::NUMBER);
+    
 
     // Выводит форматированный текст в столбик шириной width. При этом слов, заключённое в двойные кавычки, выводится цветом color
     static int DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...);
@@ -106,6 +106,7 @@ public:
     int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBack, Color colorRect, Color colorText);
     // Пишет текст с переносами
     int DrawInColumnWithTransfers(const int left, const int top, const int width, const Color color = Color::NUMBER);
+    int DrawInColumnWithTransfersDiffColors(const int left, const int top, const int width, const Color colorDif, const Color = Color::NUMBER);
 
     int Length() const;
 
