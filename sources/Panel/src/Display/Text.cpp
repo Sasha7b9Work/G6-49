@@ -453,19 +453,6 @@ void BigText::Draw(int eX, int eY, Color color)
 }
 
 
-int Text::DrawFormatTextInColumnWithTransfersDiffColors(int x, int y, int width, Color color, pString text, ...)
-{
-#define SIZE_BUFFER_DRAW_FORM_TEXT 200
-    char buffer[SIZE_BUFFER_DRAW_FORM_TEXT];
-    std::va_list args;
-    va_start(args, text); //-V2567
-    std::vsprintf(buffer, text, args);
-    va_end(args);
-
-    return String(buffer).DrawInColumnWithTransfersDiffColors(x, y, width, color);
-}
-
-
 void Text::DrawStringInCenterRectOnBackground(int x, int y, int width, int height, pString text, Color colorText, int widthBorder,
                                                   Color colorBackground)
 {
