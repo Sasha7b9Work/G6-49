@@ -53,7 +53,7 @@ static Cursor cursor;               // ћигающий курсор дл€ режима непосредственн
 
 DisplayCorrection::ModeTuning DisplayCorrection::mode = DisplayCorrection::Correction;
 
-Tuner *DisplayCorrection::currentTuner = nullptr;
+Tuner *Tuner::current = nullptr;
 
 String EnterBuffer::GetString() const
 {
@@ -302,7 +302,7 @@ bool Indicator::IsSigned()
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    ParameterValue *param = display->GetTuner()->GetParameter();
+    ParameterValue *param = Tuner::Current()->GetParameter();
 
     DoubleValue value = param->GetValue();
 
@@ -321,7 +321,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    ParameterValue *param = display->GetTuner()->GetParameter();
+    ParameterValue *param = Tuner::Current()->GetParameter();
 
     DoubleValue value = param->GetValue();
 
@@ -466,7 +466,7 @@ DoubleValue Indicator::StepPosition(int pos)
 
     DoubleValue step("1.0");
 
-    Order::E order = display->GetTuner()->GetParameter()->GetValue().GetOrder();
+    Order::E order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
 
     step.MulPow10(Order::GetPow10(order) - posAboutComma);
      
@@ -571,7 +571,7 @@ int DisplayEntering::DrawValue(int x, int y)
     {
         Char(enterBuffer.At(i)).Draw(x, y);
 
-        x += (enterBuffer.At(i) == Digit::COMMA) ? 10 : 12;
+        x += (enterBuffer.At(i) == Digit::COMMA) ? 9 : 13;
     }
 
     return x;
@@ -598,14 +598,12 @@ void DisplayCorrection::SetModeEntering()
 {
     PageTuneParameter::SetModeEntering();
     mode = Entering;
-    enterBuffer.Prepare(GetTuner()->GetParameter());
+    enterBuffer.Prepare(Tuner::Current()->GetParameter());
 }
 
 
 void DisplayCorrection::Init()
 {
-    currentTuner = tuner;
-
     MathParameterValue::SetParameterValue(tuner->GetParameter());
 
     for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
@@ -682,6 +680,8 @@ void Tuner::Init()
     display.Init();
 
     display.indicator.InitHighlight();
+
+    current = this;
 }
 
 

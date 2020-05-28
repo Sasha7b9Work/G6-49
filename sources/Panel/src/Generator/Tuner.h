@@ -155,8 +155,6 @@ public:
 
     bool OnControlKey(const Control &control);
 
-    static Tuner *GetTuner() { return currentTuner; }
-
     static bool InModeCorrection() { return (mode == Correction); }
 
     static void SetModeEntering();
@@ -181,8 +179,6 @@ private:
     void FillDigitsFractPart();
 
     static ModeTuning mode;                         // Текущий режим настройки
-
-    static Tuner *currentTuner;                     // Сюда записываем указатель на тюнер для вызова из статических методов
 };
 
 
@@ -202,9 +198,13 @@ public:
 
     ParameterValue *GetParameter() { return param; }
 
+    static Tuner *Current() { return current; };
+
 private:
 
     ParameterValue *param;           // Настраиваемый параметр
 
     DisplayCorrection display;
+
+    static Tuner *current;
 };
