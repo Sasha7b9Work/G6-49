@@ -18,8 +18,12 @@ char Key::ToChar() const
     {
         return '.';
     }
+    else if (value == Key::Minus)
+    {
+        return '-';
+    }
 
-    return '\0';
+    return ' ';
 }
 
 

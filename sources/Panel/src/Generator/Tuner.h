@@ -165,7 +165,7 @@ private:
     bool OnEnteringKey(const Control &control);
 
     // Отрисовка в режиме ввода
-    void DrawEnteringMode();
+    void DrawEnteringMode(int x, int y);
 
     void SetModeEntering();
 };

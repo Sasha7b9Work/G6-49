@@ -17,10 +17,9 @@ public:
     
     bool Empty() const;
     
-    // ¬озвращает количество нулей на дне стека
-    int NumFirstZeros() const;
+    T &operator[](const int index) const;
 
-    T &operator[](const int index);
+    void Clear();
 
 private:
     T *buffer;

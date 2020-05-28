@@ -64,25 +64,7 @@ bool Stack<T>::Empty() const
 
 
 template <typename T>
-int Stack<T>::NumFirstZeros() const
-{
-    int result = 0;
-
-    for(int i = 0; i < size; i++)
-    {
-        if(buffer[i] != 0)
-        {
-            break;
-        }
-        result++;
-    }
-
-    return result;
-}
-
-
-template <typename T>
-T &Stack<T>::operator[](const int index)
+T &Stack<T>::operator[](const int index) const
 {
     if (index < numElements)
     {
@@ -92,4 +74,11 @@ T &Stack<T>::operator[](const int index)
     static T nullValue = static_cast<T>(0);
 
     return nullValue;
+}
+
+
+template <typename T>
+void Stack<T>::Clear()
+{
+    numElements = 0;
 }

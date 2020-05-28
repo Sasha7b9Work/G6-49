@@ -1,9 +1,10 @@
 #include "defines.h"
+#include "common/Common.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
+#include "Display/Font/Font.h"
 #include "Display/WaveGraphics.h"
-#include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
 #include "Generator/Tuner.h"
 #include "Generator/Wave.h"
@@ -17,13 +18,43 @@
 class EnterBuffer
 {
 public:
-    EnterBuffer() : stack(30) { }
+    EnterBuffer() : stack(30), param(nullptr) { }
+    void Prepare(ParameterValue *parameter);
+    void Push(const Control &control);
+    int Size() const;
+    char At(const int i) const;
 private:
     Stack<char> stack;
+    ParameterValue *param;
 };
 
 
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
+
+
+void EnterBuffer::Prepare(ParameterValue *parameter)
+{
+    stack.Clear();
+    param = parameter;
+}
+
+
+void EnterBuffer::Push(const Control &control)
+{
+    stack.Push(Key(control.key).ToChar());
+}
+
+
+int EnterBuffer::Size() const
+{
+    return stack.Size();
+}
+
+
+char EnterBuffer::At(const int i) const
+{
+    return stack[i];
+}
 
 
 Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_display)
@@ -390,7 +421,7 @@ void TunerDisplay::Draw()
 
     if (mode == Entering)
     {
-        DrawEnteringMode();
+        DrawEnteringMode(x, y + 50);
     }
     else
     {
@@ -445,6 +476,8 @@ bool TunerDisplay::OnEnteringKey(const Control &control)
             SetModeEntering();
         }
 
+        enterBuffer.Push(control);
+
         return true;
     }
 
@@ -452,9 +485,12 @@ bool TunerDisplay::OnEnteringKey(const Control &control)
 }
 
 
-void TunerDisplay::DrawEnteringMode()
+void TunerDisplay::DrawEnteringMode(int x, int y)
 {
-
+    for (int i = 0; i < enterBuffer.Size(); i++)
+    {
+        Char(enterBuffer.At(i)).Draw(x + i * 14, y);
+    }
 }
 
 
@@ -462,6 +498,7 @@ void TunerDisplay::SetModeEntering()
 {
     PageTuneParameter::SetModeEntering();
     mode = Entering;
+    enterBuffer.Prepare(tuner->GetParameter());
 }
 
 
