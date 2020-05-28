@@ -6,9 +6,6 @@
 
 struct Text
 {
-    // Нарисовать два символа из таблицы, идущие друг за другом горизонтально
-    static void Draw2SymbolsHorizontal(int x, int y, char ch, Color color = Color::NUMBER);
-
     /*************** Вывод текста в области экрана **************************/
 
     // Возвращает нижнюю координату прямоугольника
@@ -64,6 +61,7 @@ public:
     Char(char s) : symbol(s) { }
     int Draw(int x, int y, Color color = Color::NUMBER);
     void Draw4InRect(int x, int y, Color color = Color::NUMBER);
+    void Draw2Horizontal(int x, int y, Color color = Color::NUMBER);
 private:
     char symbol;
 };

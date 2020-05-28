@@ -32,7 +32,7 @@ static void OnPress_More()
 static void Draw_More(int x, int y)
 {
     String(LANG_IS_RU ? "Больше" : "Increase").Draw(x + 13, y + 12);
-    Text::Draw2SymbolsHorizontal(x + 25, y + 30, Ideograph::_8::Up);
+    Char(Ideograph::_8::Up).Draw2Horizontal(x + 25, y + 30);
 }
 
 
@@ -52,7 +52,7 @@ static void OnPress_Less()
 static void Draw_Less(int x, int y)
 {
     String(LANG_IS_RU ? "Меньше" : "Decrease").Draw(x + 13, y + 12);
-    Text::Draw2SymbolsHorizontal(x + 25, y + 30, Ideograph::_8::Down);
+    Char(Ideograph::_8::Down).Draw2Horizontal(x + 25, y + 30);
 }
 
 
