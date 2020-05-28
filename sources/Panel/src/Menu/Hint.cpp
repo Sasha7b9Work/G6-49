@@ -78,11 +78,11 @@ void Hint::Draw()
         int y0 = Page::Title::HEIGHT;
         int width = 319 - Item::WIDTH;
 
-        y0 = Text::DrawTextInBoundedRectWithTransfers(x0, y0, width,
+        y0 = String(
             "Включён режим подсказок.\n"
             "Для получения информации по элементу меню или назначению кнопки используйте соответствующий орган управления.\n"
-            "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC.",
-            Color::BACK, Color::FILL, Color::GRAY_50);
+            "Для выхода из режима подсказок нажмите и удерживайте кнопку ESC."
+        ).DrawInBoundedRectWithTransfers(x0, y0, width, Color::BACK, Color::FILL, Color::GRAY_50);
 
         Rectangle(width, 239 - y0 - 1).DrawFilled(x0, y0, Color::BACK, Color::FILL);
 

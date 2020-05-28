@@ -12,17 +12,6 @@
 using namespace Primitives;
 
 
-int Text::DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText)
-{
-    int height = 0;
-    GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, text, &height);
-    Rectangle(width, height).Draw(x, y, colorRect);
-    Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorBack);
-    DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, text, colorText);
-    return y + height;
-}
-
-
 int Char::Draw(int eX, int eY, Color color)
 {
     color.SetAsCurrent();
@@ -97,66 +86,6 @@ void Char::Draw2Horizontal(int x, int y, Color color)
 
     Char(symbol).Draw(x, y);
     Char(symbol + 1).Draw(x + 8, y);
-}
-
-
-
-bool Text::GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height)
-{
-    char buffer[20];
-    int numSymbols = static_cast<int>(std::strlen(text));
-
-    int y = top - 1;
-    int x = left;
-
-    int curSymbol = 0;
-
-    while (y < 231 && curSymbol < numSymbols)
-    {
-        while (x < right - 1 && curSymbol < numSymbols)
-        {
-            int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buffer);
-
-            if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
-            {
-                char symbol = text[curSymbol++];
-                if (symbol == '\n')
-                {
-                    x = right;
-                    continue;
-                }
-                if (symbol == ' ' && x == left)
-                {
-                    continue;
-                }
-                x += Font::GetLengthSymbol(SU::ToUpper(symbol));
-            }
-            else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
-            {
-                int lengthString = Font::GetLengthText(word);
-                if (x + lengthString > right + 5)
-                {
-                    int numSymb = DrawPartWord(word, x, y, right, false);
-                    x = right;
-                    curSymbol += numSymb;
-                    continue;
-                }
-                else
-                {
-                    curSymbol += length;
-                    x += Font::GetLengthText(word);
-                }
-            }
-        }
-        x = left;
-        y += 9;
-    }
-
-    *height = y - top + 4;
-    LIMITATION(*height, 0, 239);    // -V2516
-
-    return curSymbol == numSymbols;
 }
 
 

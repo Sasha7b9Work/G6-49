@@ -25,11 +25,12 @@ public:
 
     char *c_str() const;
 
-    // Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
     int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
     void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
     void DrawInColumn(int x, int y, int width);
+    // Возвращает нижнюю координату прямоугольника
+    int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBack, Color colorRect, Color colorText);
 
     int Length() const;
 
@@ -59,4 +60,6 @@ private:
 
     int DrawSubString(int x, int y, pString t);
     int DrawSpaces(int x, int y, pString t, int *numSymbols);
+    // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
+    bool GetHeightTextWithTransfers(int left, int top, int right, int *height);
 };

@@ -1,11 +1,15 @@
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
+#include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
+
+
+using namespace Primitives;
 
 
 String::String() : buffer(nullptr)
@@ -234,6 +238,17 @@ void String::DrawInColumn(int x, int y, int width)
 }
 
 
+int String::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBack, Color colorRect, Color colorText)
+{
+    int height = 0;
+    GetHeightTextWithTransfers(x + 3, y + 3, x + width - 8, &height);
+    Rectangle(width, height).Draw(x, y, colorRect);
+    Rectangle(width - 2, height - 2).Fill(x + 1, y + 1, colorBack);
+    Text::DrawTextInColumnWithTransfers(x + 3, y + 3, width - 8, buffer, colorText);
+    return y + height;
+}
+
+
 int String::Length() const
 {
     const char *text = buffer;
@@ -294,6 +309,65 @@ int String::DrawSpaces(int x, int y, pString t, int *numSymbols)
         (*numSymbols)++;
     }
     return x;
+}
+
+
+bool String::GetHeightTextWithTransfers(int left, int top, int right, int *height)
+{
+    char buf[20];
+    int numSymbols = static_cast<int>(std::strlen(buffer));
+
+    int y = top - 1;
+    int x = left;
+
+    int curSymbol = 0;
+
+    while (y < 231 && curSymbol < numSymbols)
+    {
+        while (x < right - 1 && curSymbol < numSymbols)
+        {
+            int length = 0;
+            char *word = Text::GetWord(buffer + curSymbol, &length, buf);
+
+            if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
+            {
+                char symbol = buffer[curSymbol++];
+                if (symbol == '\n')
+                {
+                    x = right;
+                    continue;
+                }
+                if (symbol == ' ' && x == left)
+                {
+                    continue;
+                }
+                x += Font::GetLengthSymbol(SU::ToUpper(symbol));
+            }
+            else                                            // А здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
+            {
+                int lengthString = Font::GetLengthText(word);
+                if (x + lengthString > right + 5)
+                {
+                    int numSymb = Text::DrawPartWord(word, x, y, right, false);
+                    x = right;
+                    curSymbol += numSymb;
+                    continue;
+                }
+                else
+                {
+                    curSymbol += length;
+                    x += Font::GetLengthText(word);
+                }
+            }
+        }
+        x = left;
+        y += 9;
+    }
+
+    *height = y - top + 4;
+    LIMITATION(*height, 0, 239);    // -V2516
+
+    return curSymbol == numSymbols;
 }
 
 

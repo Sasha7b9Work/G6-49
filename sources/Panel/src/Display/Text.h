@@ -8,8 +8,6 @@ struct Text
 {
     /*************** Вывод текста в области экрана **************************/
 
-    // Возвращает нижнюю координату прямоугольника
-    static int DrawTextInBoundedRectWithTransfers(int x, int y, int width, pString text, Color colorBack, Color colorRect, Color colorText);
 
     // Пишет текст с переносами
     static int DrawTextInColumnWithTransfers(const int left, const int top, const int width, pString text, const Color color = Color::NUMBER);
@@ -26,17 +24,14 @@ struct Text
     
     static int DrawStringInCenterRectAndBoundIt(int x, int y, int width, int height, pString text, Color colorBackground, Color colorFill);
 
-private:
-    
-    // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
-    static bool GetHeightTextWithTransfers(int left, int top, int right, pString text, int *height);
-
     static char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
 
-    static bool IsLetter(char symbol);
-    
     // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
     static int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
+
+private:
+
+    static bool IsLetter(char symbol);
 
     static uint *BreakWord(char *word);
     
