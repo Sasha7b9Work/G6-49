@@ -5,7 +5,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Interface/Interface_p.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/PageService.h"
+#include "Menu/Pages/Pages.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 

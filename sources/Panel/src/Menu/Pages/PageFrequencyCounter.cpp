@@ -1,7 +1,6 @@
-#include "PageFrequencyCounter.h"
-#include "Settings/Settings.h"
 #include "Menu/Menu.h"
-#include "Log.h"
+#include "Menu/Pages/Pages.h"
+#include "Settings/Settings.h"
 
 
 extern const PageBase pFrequencyCounter;

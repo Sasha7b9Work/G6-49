@@ -3,7 +3,7 @@
 #include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/Addition/PageTuneParameter.h"
+#include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cstdio>

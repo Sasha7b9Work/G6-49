@@ -2214,14 +2214,9 @@
           <GroupName>Menu/Pages</GroupName>
           <Files>
             <File>
-              <FileName>PageService.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageService.h</FileName>
+              <FileName>Pages.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageService.h</FilePath>
+              <FilePath>.\src\Menu\Pages\Pages.h</FilePath>
             </File>
             <File>
               <FileName>PageFrequencyCounter.cpp</FileName>
@@ -2229,9 +2224,14 @@
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageFrequencyCounter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageFrequencyCounter.h</FilePath>
+              <FileName>PageService.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageSignals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageSignals.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2244,19 +2244,9 @@
               <FilePath>.\src\Menu\Pages\Addition\PageLoadForm.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageLoadForm.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Addition\PageLoadForm.h</FilePath>
-            </File>
-            <File>
               <FileName>PageTuneParameter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\Addition\PageTuneParameter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTuneParameter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\Addition\PageTuneParameter.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2264,19 +2254,9 @@
           <GroupName>Menu/Pages/PageDebug</GroupName>
           <Files>
             <File>
-              <FileName>PageDebug.cpp</FileName>
+              <FileName>PageCalibration.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\PageDebug.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageDebug.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\PageDebug.h</FilePath>
-            </File>
-            <File>
-              <FileName>PageSubRange.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\PageSubRange.cpp</FilePath>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageCalibration.cpp</FilePath>
             </File>
             <File>
               <FileName>PageColors.cpp</FileName>
@@ -2284,24 +2264,14 @@
               <FilePath>.\src\Menu\Pages\PageDebug\PageColors.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageCalibration.cpp</FileName>
+              <FileName>PageDebug.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDebug\PageCalibration.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Menu/Pages/PageSignals</GroupName>
-          <Files>
-            <File>
-              <FileName>PageSignals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals.h</FilePath>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageDebug.cpp</FilePath>
             </File>
             <File>
-              <FileName>PageSignals.cpp</FileName>
+              <FileName>PageSubRange.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageSignals\PageSignals.cpp</FilePath>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageSubRange.cpp</FilePath>
             </File>
           </Files>
         </Group>

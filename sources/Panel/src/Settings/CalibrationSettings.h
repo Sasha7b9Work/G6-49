@@ -1,7 +1,7 @@
 #pragma once
 #include "common/Command.h"
 #include "common/CommonTypes.h"
-#include "Menu/Pages/PageSignals/PageSignals.h"
+#include "Menu/Pages/Pages.h"
 #include "common/Messages.h"
 
 

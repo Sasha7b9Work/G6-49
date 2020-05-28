@@ -5,10 +5,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/Keyboard.h"
-#include "Menu/Pages/PageSignals/PageSignals.h"
-#include "Menu/Pages/PageFrequencyCounter.h"
-#include "Menu/Pages/PageService.h"
-#include "Menu/Pages/PageDebug/PageDebug.h"
+#include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 
 

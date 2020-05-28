@@ -2,7 +2,7 @@
 #include "Interface/Messages_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Menu/Pages/PageDebug/PageDebug.h"
+#include "Menu/Pages/Pages.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"

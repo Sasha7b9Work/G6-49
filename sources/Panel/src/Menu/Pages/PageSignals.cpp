@@ -1,7 +1,6 @@
 #include "Settings/Settings.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/Addition/PageTuneParameter.h"
-#include "Menu/Pages/PageSignals/PageSignals.h"
+#include "Menu/Pages/Pages.h"
 #include "Generator/Signals.h"
 #include "Generator/Generator_p.h"
 #include "Menu/Menu.h"

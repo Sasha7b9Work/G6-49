@@ -7,6 +7,7 @@
 template class Stack<uint>;
 template class Stack<int8>;
 template class Stack<uint8>;
+template class Stack<char>;
 template class Stack<TypeFont::E>;
 
 
@@ -77,4 +78,18 @@ int Stack<T>::NumFirstZeros() const
     }
 
     return result;
+}
+
+
+template <typename T>
+T &Stack<T>::operator[](const int index)
+{
+    if (index < numElements)
+    {
+        return buffer[index];
+    }
+
+    static T nullValue = static_cast<T>(0);
+
+    return nullValue;
 }

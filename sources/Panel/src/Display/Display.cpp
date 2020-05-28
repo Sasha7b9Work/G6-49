@@ -10,7 +10,7 @@
 #include "Keyboard/Keyboard.h"
 #include "Menu/Hint.h"
 #include "Menu/Menu.h"
-#include "Menu/Pages/PageDebug/PageDebug.h"
+#include "Menu/Pages/Pages.h"
 #include "Utils/Statistics.h"
 #include <cstdlib>
 

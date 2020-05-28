@@ -7,12 +7,20 @@
 #include "Generator/Parameters.h"
 #include "Generator/Tuner.h"
 #include "Generator/Wave.h"
-#include "Menu/Pages/Addition/PageTuneParameter.h"
+#include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
+#include "Utils/Stack.h"
 
 
-using namespace Primitives;
+// Класс для хранения вводимых данных в режиме непосредственного ввода
+class EnterBuffer
+{
+public:
+    EnterBuffer() : stack(30) { }
+private:
+    Stack<char> stack;
+};
 
 
 enum Mode
@@ -23,6 +31,8 @@ enum Mode
 
 
 static Mode mode = Correction;
+
+static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
 
 
 Indicator::Indicator(TunerDisplay *_display) : indexHighlight(0), display(_display)
@@ -387,7 +397,7 @@ void TunerDisplay::Draw()
     int x = WaveGraphics::X();
     int y = WaveGraphics::Y(ch.GetInverse());
 
-    Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).DrawFilled(x, y, Color::BLUE_10, Color::WHITE);
+    Primitives::Rectangle(WaveGraphics::Width(), WaveGraphics::Height()).DrawFilled(x, y, Color::BLUE_10, Color::WHITE);
 
     Font::StoreAndSet(TypeFont::_GOSTB20);
 

@@ -4,7 +4,7 @@
 #include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
-#include "Menu/Pages/Addition/PageTuneParameter.h"
+#include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 
 

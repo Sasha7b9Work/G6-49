@@ -1,5 +1,67 @@
 #pragma once
+#include "common/Common.h"
 #include "Menu/MenuItems.h"
+
+
+class ParameterValue;
+
+
+struct PageSignals
+{
+    static void Init();
+
+    static void SetCurrentChanenl(Chan::E ch);
+
+    static void OnPress_Channel(bool);
+
+    static void OnPress_Form(bool);
+
+    static void SetForm(TypeForm::E form);
+
+    static Page *self;
+};
+
+
+class PageFrequencyCounter
+{
+public:
+    // Сформировать содержимое регистра управления частотомером в соответствии с настройками
+    static void WriteRegisterRG9();
+
+    static Page *self;
+};
+
+
+class PageService
+{
+public:
+
+    static void OnPress_Reset();
+
+    static Page *self;
+};
+
+
+class PageLoadForm
+{
+public:
+    static Page *pointer;
+};
+
+
+struct PageTuneParameter
+{
+    static Page *self;
+
+    // Устанавливает параметр для редактирования
+    static void SetParameter(ParameterValue *);
+
+    // Установить режим ввода значения
+    static void SetModeEntering();
+
+    // Сбросить режим ввода значения
+    static void ResetModeEntering();
+};
 
 
 struct PageDebug

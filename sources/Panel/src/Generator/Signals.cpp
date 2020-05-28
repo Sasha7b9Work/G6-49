@@ -2,8 +2,7 @@
 #include "Signals.h"
 #include "Display/Painter.h"
 #include "Generator/Parameters.h"
-#include "Menu/Pages/Addition/PageLoadForm.h"
-#include "Menu/Pages/PageSignals/PageSignals.h"
+#include "Menu/Pages/Pages.h"
 
 
 static ParameterManipulationEnabled   param_SineModulationA_Manipulation        (DISABLED_RU, ENABLED_RU);

@@ -20,6 +20,8 @@ public:
     // ¬озвращает количество нулей на дне стека
     int NumFirstZeros() const;
 
+    T &operator[](const int index);
+
 private:
     T *buffer;
     int size;

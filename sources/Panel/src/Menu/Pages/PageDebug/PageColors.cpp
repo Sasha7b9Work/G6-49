@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Display/Painter.h"
-#include "Menu/Pages/PageDebug/PageDebug.h"
+#include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 
 
