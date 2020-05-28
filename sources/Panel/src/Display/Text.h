@@ -104,9 +104,6 @@ private:
     int DrawSpaces(int x, int y, pString t, int *numSymbols);
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
     bool GetHeightTextWithTransfers(int left, int top, int right, int *height);
-    char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
     // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
     int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
-    // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-    char *PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
 };

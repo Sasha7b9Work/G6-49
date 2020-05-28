@@ -24,6 +24,9 @@ public:
     // найденном слоге. Если слово закончилось, функция возвращает false
     static bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
     static uint *BreakWord(char *word);
+    static char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
+    // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
+    static char *PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
 };
 
 
@@ -104,7 +107,7 @@ void Char::Draw2Horizontal(int x, int y, Color color)
 }
 
 
-char *String::GetWord(const char *firstSymbol, int *length, char buffer[20])
+char *WordWorker::GetWord(const char *firstSymbol, int *length, char buffer[20])
 {
     int pointer = 0;
     *length = 0;
@@ -164,7 +167,7 @@ int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 
     for (int i = numSyllabels - 2; i >= 0; i--)
     {
-        char *subString = PartWordForTransfer(word, lengthSyllables, i, buffer);
+        char *subString = WordWorker::PartWordForTransfer(word, lengthSyllables, i, buffer);
         int length = Font::GetLengthText(subString);
         if (xRight - x > length - 5)
         {
@@ -203,7 +206,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buf);
+            char *word = WordWorker::GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
@@ -296,7 +299,7 @@ uint *WordWorker::BreakWord(char *word)
 }
 
 
-char *String::PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30])
+char *WordWorker::PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30])
 {
     uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
@@ -743,7 +746,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buf);
+            char *word = WordWorker::GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
@@ -862,7 +865,7 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buf);
+            char *word = WordWorker::GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
