@@ -13,92 +13,21 @@
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
-#include "Utils/Stack.h"
 
 
 using namespace Primitives;
 
 
-// Класс для хранения вводимых данных в режиме непосредственного ввода
-class EnterBuffer
-{
-public:
-    EnterBuffer() : stack(30), param(nullptr) { }
-    void Prepare(ParameterValue *parameter);
-    void Push(const Control &control);
-    int Size() const;
-    char At(const int i) const;
-    // Возвращает true, если содержится десятичная точка
-    bool ConsistComma() const;
-    String GetString() const;
-private:
-    Stack<char> stack;
-    ParameterValue *param;
-};
-
-
-static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
-
 Tuner::ModeTuning::E Tuner::mode = ModeTuning::Correction;
 
-DisplayEntering::Cursor DisplayEntering::cursor;
-Order::E                DisplayEntering::order = Order::Count;
+DisplayEntering::Cursor      DisplayEntering::cursor;
+DisplayEntering::EnterBuffer DisplayEntering::buffer;
+Order::E                     DisplayEntering::order = Order::Count;
 
 Tuner *Tuner::current = nullptr;
 
 
-String EnterBuffer::GetString() const
-{
-    String string;
-
-    for (int i = 0; i < stack.Size(); i++)
-    {
-        string.Append(stack[i]);
-    }
-
-    return string;
-}
-
-
-void DisplayEntering::Cursor::Init()
-{
-    timeInit = TIME_MS;
-}
-
-
-void DisplayEntering::Cursor::Draw(int x, int y)
-{
-    uint time = TIME_MS - timeInit;
-
-    if ((time % 1000) < 500)
-    {
-        Primitives::Rectangle(10, 2).Fill(x, y);
-    }
-}
-
-
-bool EnterBuffer::ConsistComma() const
-{
-    for (int i = 0; i < stack.Size(); i++)
-    {
-        if (stack[i] == Digit::COMMA)
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
-void EnterBuffer::Prepare(ParameterValue *parameter)
-{
-    stack.Clear();
-    param = parameter;
-}
-
-
-void EnterBuffer::Push(const Control &control)
+void DisplayEntering::EnterBuffer::Push(const Control &control)
 {
     if (stack.Size() > 14)
     {
@@ -126,15 +55,66 @@ void EnterBuffer::Push(const Control &control)
 }
 
 
-int EnterBuffer::Size() const
+int DisplayEntering::EnterBuffer::Size() const
 {
     return stack.Size();
 }
 
 
-char EnterBuffer::At(const int i) const
+char DisplayEntering::EnterBuffer::At(const int i) const
 {
     return stack[i];
+}
+
+
+void DisplayEntering::EnterBuffer::Prepare(ParameterValue *parameter)
+{
+    stack.Clear();
+    param = parameter;
+}
+
+
+String DisplayEntering::EnterBuffer::GetString() const
+{
+    String string;
+
+    for (int i = 0; i < stack.Size(); i++)
+    {
+        string.Append(stack[i]);
+    }
+
+    return string;
+}
+
+
+bool DisplayEntering::EnterBuffer::ConsistComma() const
+{
+    for (int i = 0; i < stack.Size(); i++)
+    {
+        if (stack[i] == Digit::COMMA)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+void DisplayEntering::Cursor::Init()
+{
+    timeInit = TIME_MS;
+}
+
+
+void DisplayEntering::Cursor::Draw(int x, int y)
+{
+    uint time = TIME_MS - timeInit;
+
+    if ((time % 1000) < 500)
+    {
+        Primitives::Rectangle(10, 2).Fill(x, y);
+    }
 }
 
 
@@ -550,7 +530,7 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 
 void DisplayEntering::Init()
 {
-    enterBuffer.Prepare(Tuner::Current()->GetParameter());
+    buffer.Prepare(Tuner::Current()->GetParameter());
 }
 
 
@@ -564,7 +544,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
             order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
         }
 
-        enterBuffer.Push(control);
+        buffer.Push(control);
         cursor.Init();
 
         return true;
@@ -594,11 +574,11 @@ void DisplayEntering::Draw(int x, int y, int width)
 
 int DisplayEntering::DrawValue(int x, int y)
 {
-    for (int i = 0; i < enterBuffer.Size(); i++)
+    for (int i = 0; i < buffer.Size(); i++)
     {
-        Char(enterBuffer.At(i)).Draw(x, y);
+        Char(buffer.At(i)).Draw(x, y);
 
-        x += (enterBuffer.At(i) == Digit::COMMA) ? 9 : 13;
+        x += (buffer.At(i) == Digit::COMMA) ? 9 : 13;
     }
 
     return x;

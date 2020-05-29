@@ -1,6 +1,8 @@
 #pragma once
 #include "Display/Colors.h"
+#include "Display/Text.h"
 #include "Keyboard/Controls.h"
+#include "Utils/Stack.h"
 
 
 class ParameterValue;
@@ -134,6 +136,24 @@ public:
 
     static void Init();
 
+    // Класс для хранения вводимых данных в режиме непосредственного ввода
+    class EnterBuffer
+    {
+    public:
+        EnterBuffer() : stack(30), param(nullptr)
+        {
+        }
+        void Prepare(ParameterValue *parameter);
+        void Push(const Control &control);
+        int Size() const;
+        char At(const int i) const;
+        // Возвращает true, если содержится десятичная точка
+        bool ConsistComma() const;
+        String GetString() const;
+    private:
+        Stack<char> stack;
+        ParameterValue *param;
+    };
 
     class Cursor
     {
@@ -148,6 +168,8 @@ public:
 private:
 
     static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
+
+    static EnterBuffer buffer;          // Здесь будем хранить нажатые кнопки в режиме ввода
 
     static Order::E order;              // Текущий порядок вводимого значения
 
