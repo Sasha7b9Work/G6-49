@@ -318,6 +318,12 @@ pString ParameterValue::GetStringValue() const
 }
 
 
+pString ParameterValue::GetStringValue(DoubleValue value)
+{
+    
+}
+
+
 pString Order::Suffix(Order::E order)
 {
     static const pString suf[Count][2] =

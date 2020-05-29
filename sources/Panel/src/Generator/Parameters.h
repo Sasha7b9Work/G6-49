@@ -124,6 +124,7 @@ public:
 
     // ¬озвращает строковое представление значени€ параметра
     virtual pString GetStringValue() const;
+    virtual pString GetStringValue(DoubleValue value) const;
 
     // ¬озвращает основные единицы измерени€ (без учЄта пор€дка)
     pString GetMainUnits() const;
@@ -181,6 +182,7 @@ public:
     bool DrawChoice(int x, int y) const;
 
     virtual pString GetStringValue() const;
+    virtual pString GetStringValue(DoubleValue) const { return ""; }
 
     void OnPressButtonTune();
 
