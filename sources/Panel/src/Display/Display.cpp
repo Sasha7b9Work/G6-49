@@ -27,16 +27,15 @@ struct Warning
 
 struct Warnings
 {
-    Warnings() : first(0), last(0), timeFlash(0) { }
+    Warnings() : first(0), last(0) { }
     void Show();
-    void Update();
     void Append(String &warning);
 private:
     static const int NUM_WARNINGS = 10;
     Warning warnings[NUM_WARNINGS];
     int first;
     int last;
-    uint timeFlash;         // Время для расчёта мерцания
+    void Update();
     bool IsEmpty()  { return (first == 0) && (last == 0); }
     Warning &Last() { return warnings[last - 1]; }
     Color ColorText() const;
@@ -75,7 +74,6 @@ void Display::Update()
     Console::Draw();
     Keyboard::Draw();
     warnings.Show();
-    warnings.Update();
     Painter::EndScene();
     Statistics::EndFrame();
 }
@@ -89,21 +87,23 @@ void Display::ShowWarning(String warning)
 
 void Warnings::Append(String &warning)
 {
-    if (!IsEmpty() && Last().IsEqual(warning))
-    {
-        Last().timeStart = TIME_MS;
-    }
-    else if(last < NUM_WARNINGS)
+    //if (!IsEmpty() && Last().IsEqual(warning))
+    //{
+    //    Last().timeStart = TIME_MS;
+    //}
+    //else
+    
+    if(last < NUM_WARNINGS)
     {
         warnings[last++] = Warning(warning.c_str());
     }
-
-    timeFlash = TIME_MS;
 }
 
 
 void Warnings::Show()
 {
+    Update();
+
     int y = 0;
 
     for (int i = first; i < last; i++)
@@ -111,7 +111,7 @@ void Warnings::Show()
         int width = warnings[i].message->Width();
         Rectangle(width + 2, 11).DrawFilled(0, y, ColorBackground(), Color::FILL);
         warnings[i].message->Draw(2, y + 1, ColorText());
-        y += 9;
+        y += 11;
     }
 }
 
@@ -135,9 +135,12 @@ void Warnings::Update()
         }
     }
 
-    first = newFirst;
+    if (newFirst > 0)
+    {
+        first = newFirst;
+    }
 
-    if (first == last)
+    if (last - first < 2 && first != 0)
     {
         first = 0;
         last = 0;
@@ -147,7 +150,7 @@ void Warnings::Update()
 
 Color Warnings::ColorText() const
 {
-    return ((TIME_MS - timeFlash) % 1000) < 500 ? Color::FILL : Color::BACK;
+    return (TIME_MS % 1000) < 500 ? Color::FILL : Color::BACK;
 }
 
 
