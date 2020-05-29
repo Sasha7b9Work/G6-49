@@ -41,7 +41,7 @@ public:
     };
 
     // ¬озвращает человеческое название формы сигнала
-    pString Name(uint lang) const;
+    pString Name(uint lang = static_cast<uint>(-1)) const;
     
     // ¬озвращает ссылку на текущий параметр
     Parameter *CurrentParameter() const;
