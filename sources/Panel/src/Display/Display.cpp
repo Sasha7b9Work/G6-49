@@ -27,7 +27,7 @@ struct Warning
 
 struct Warnings
 {
-    Warnings() : first(0), last(0) { }
+    Warnings() : first(0), last(0), timeFlash(0) { }
     void Show();
     void Update();
     void Append(String &warning);
@@ -36,8 +36,14 @@ private:
     Warning warnings[NUM_WARNINGS];
     int first;
     int last;
+    uint timeFlash;         // Время для расчёта мерцания
     bool IsEmpty()  { return (first == 0) && (last == 0); }
     Warning &Last() { return warnings[last - 1]; }
+    Color ColorText() const;
+    Color ColorBackground() const;
+    int X() const;
+    int Y() const;
+    int Width() const;
 };
 
 
@@ -91,6 +97,8 @@ void Warnings::Append(String &warning)
     {
         warnings[last++] = Warning(warning.c_str());
     }
+
+    timeFlash = TIME_MS;
 }
 
 
@@ -101,8 +109,8 @@ void Warnings::Show()
     for (int i = first; i < last; i++)
     {
         int width = warnings[i].message->Width();
-        Rectangle(width + 2, 11).DrawFilled(0, y, Color::BACK, Color::FILL);
-        warnings[i].message->Draw(2, y + 1, Color::FILL);
+        Rectangle(width + 2, 11).DrawFilled(0, y, ColorBackground(), Color::FILL);
+        warnings[i].message->Draw(2, y + 1, ColorText());
         y += 9;
     }
 }
@@ -119,7 +127,7 @@ void Warnings::Update()
 
     for (int i = first; i < last; i++)
     {
-        if (warnings[i].timeStart + 2000 < TIME_MS)
+        if (warnings[i].timeStart + 5000 < TIME_MS)
         {
             warnings[i].Delete();
             warnings[i].message = nullptr;
@@ -134,6 +142,18 @@ void Warnings::Update()
         first = 0;
         last = 0;
     }
+}
+
+
+Color Warnings::ColorText() const
+{
+    return ((TIME_MS - timeFlash) % 1000) < 500 ? Color::FILL : Color::BACK;
+}
+
+
+Color Warnings::ColorBackground() const
+{
+    return (ColorText().value == Color::FILL.value) ? Color::BACK : Color::FILL;
 }
 
 
