@@ -39,6 +39,7 @@ private:
     Warning &Last() { return warnings[last - 1]; }
     Color ColorText() const;
     Color ColorBackground() const;
+    void DeleteFirst();
     int X() const;
     int Y() const;
     int Width() const;
@@ -86,15 +87,17 @@ void Display::ShowWarning(String warning)
 
 void Warnings::Append(String &warning)
 {
-    //if (!IsEmpty() && Last().IsEqual(warning))
-    //{
-    //    Last().timeStart = TIME_MS;
-    //}
-    //else
-    
-    if(last < NUM_WARNINGS)
+    if (!IsEmpty() && Last().IsEqual(warning))
     {
-        warnings[last].Delete();
+        Last().timeStart = TIME_MS;
+    }
+    else
+    {
+        if (last == NUM_WARNINGS)
+        {
+            DeleteFirst();
+        }
+
         warnings[last++] = Warning(warning.c_str());
     }
 }
@@ -133,6 +136,19 @@ void Warnings::Update()
         }
 
         last--;
+    }
+}
+
+
+void Warnings::DeleteFirst()
+{
+    warnings[0].Delete();
+
+    last--;
+
+    for (int i = 0; i < last; i++)
+    {
+        warnings[i] = warnings[i + 1];
     }
 }
 
