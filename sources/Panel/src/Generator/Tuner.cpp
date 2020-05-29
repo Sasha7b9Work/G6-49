@@ -299,6 +299,11 @@ void Indicator::IncreaseInPosition(int pos)
     {
         display->Init(value);
     }
+
+    if (value > param->GetMax())
+    {
+        Display::ShowWarning(String("Превышение максимального значения"));
+    }
 }
 
 

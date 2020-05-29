@@ -12,7 +12,6 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
-#include "Utils/Queue.h"
 #include "Handlers_p.h"
 #include "Interface_p.h"
 #include <cstdlib>
