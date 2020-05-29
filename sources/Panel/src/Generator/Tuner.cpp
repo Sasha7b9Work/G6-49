@@ -612,7 +612,7 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
 }
 
 
-void DisplayEntering::OnOrderMore()
+void DisplayEntering::OnButtonOrderMore()
 {
     if (order > Order::Mega)
     {
@@ -621,7 +621,7 @@ void DisplayEntering::OnOrderMore()
 }
 
 
-void DisplayEntering::OnOrderLess()
+void DisplayEntering::OnButtonOrderLess()
 {
     if (order < Order::Nano)
     {
@@ -735,4 +735,16 @@ bool Tuner::OnControlKey(const Control control) //-V801
     }
 
     return false;
+}
+
+
+void Tuner::OnButtonCancel()
+{
+    PageTuneParameter::CallbackOnButtonCancel();
+}
+
+
+void Tuner::OnButtonApply()
+{
+    PageTuneParameter::CallbackOnButtonApply();
 }

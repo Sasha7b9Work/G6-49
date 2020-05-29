@@ -127,10 +127,10 @@ public:
     static void Draw(int x, int y, int width);
 
     // Обработчик нажатия кнопки "Увеличить порядок"
-    static void OnOrderMore();
+    static void OnButtonOrderMore();
 
     // Обработчик нажатия кнопки "Уменьшить порядок"
-    static void OnOrderLess();
+    static void OnButtonOrderLess();
 
 
     class Cursor
@@ -218,6 +218,12 @@ public:
     void Draw();
 
     bool OnControlKey(const Control control);
+
+    // Обработчик нажатия кнопки "Отмена"
+    void OnButtonCancel();
+
+    // Обработчик нажатия кнопки "Применить"
+    void OnButtonApply();
 
     ParameterValue *GetParameter() { return param; }
 

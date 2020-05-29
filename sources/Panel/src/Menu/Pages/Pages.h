@@ -61,6 +61,12 @@ struct PageTuneParameter
 
     // Сбросить режим ввода значения
     static void ResetModeEntering();
+
+    // Эту функцию будет вызывать Tuner при нажатии кнопки "Отменить"
+    static void CallbackOnButtonCancel();
+
+    // Эту функцию будет вызывать Tuner при нажатии кнопки "Применить"
+    static void CallbackOnButtonApply();
 };
 
 

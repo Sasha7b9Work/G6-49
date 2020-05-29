@@ -23,32 +23,21 @@ void PageTuneParameter::SetParameter(ParameterValue *parameter)
 }
 
 
-static void OnPress_More()
-{
-    DisplayEntering::OnOrderMore();
-}
-
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_More(int x, int y)
 {
     String(LANG_IS_RU ? "Больше" : "Increase").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Up).Draw2Horizontal(x + 25, y + 30);
 }
 
-
 DEF_GRAPH_BUTTON(sbMore,
     "Больше", "More",
     "Увеличить порядок", "Increase order",
-    *PageTuneParameter::self, Item::FuncActive, OnPress_More, Draw_More
+    *PageTuneParameter::self, Item::FuncActive, DisplayEntering::OnButtonOrderMore, Draw_More
 )
 
 
-static void OnPress_Less()
-{
-    DisplayEntering::OnOrderLess();
-}
-
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Less(int x, int y)
 {
     String(LANG_IS_RU ? "Меньше" : "Decrease").DrawInCenterRect(x, y, 70, 30);
@@ -59,15 +48,16 @@ static void Draw_Less(int x, int y)
 DEF_GRAPH_BUTTON(sbLess,
     "Меньше", "Less",
     "Уменьшить порядок", "Decrease order",
-    *PageTuneParameter::self, Item::FuncActive, OnPress_Less, Draw_Less
+    *PageTuneParameter::self, Item::FuncActive, DisplayEntering::OnButtonOrderLess, Draw_Less
 )
 
 
-static void OnPress_Cancel()
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void PageTuneParameter::CallbackOnButtonCancel()
 {
     Parameter *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
 
-    if(parameter->IsValue())
+    if (parameter->IsValue())
     {
         *reinterpret_cast<ParameterValue *>(parameter) = stored;
     }
@@ -77,37 +67,49 @@ static void OnPress_Cancel()
     Menu::ResetAdditionPage();
 }
 
+static void OnPress_Cancel()
+{
+    Tuner::Current()->OnButtonCancel();
+}
+
 static void Draw_Cancel(int x, int y)
 {
     String(LANG_IS_RU ? "Отменить" : "Cancel").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Delete).Draw4InRect(x + 25, y + 28);
 }
 
-DEF_GRAPH_BUTTON(sbCancel,                                                                                                                                      //--- ОКНО ВВОДА - ОТМЕНА ---
+DEF_GRAPH_BUTTON(sbCancel,
     "Отменить", "Cancel",
     "Отказаться от ввода нового значения", "Refuse to enter a new value",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Cancel, Draw_Cancel
 )
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void Draw_Enter(int x, int y)
 {
     String(LANG_IS_RU ? "Применить" : "Apply").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Save).Draw4InRect(x + 25, y + 28);
 }
 
-static void OnPress_Enter()
+void PageTuneParameter::CallbackOnButtonApply()
 {
     Menu::ResetAdditionPage();
 }
 
-DEF_GRAPH_BUTTON(sbEnter,                                                                                                                                         //--- ОКНО ВВОДА - ВВОД ---
+static void OnPress_Enter()
+{
+    Tuner::Current()->OnButtonApply();
+}
+
+DEF_GRAPH_BUTTON(sbEnter,
     "Применить", "Apply",
     "Подтвердить ввод нового значения", "Confirm new value entry",
     *PageTuneParameter::self, Item::FuncActive, OnPress_Enter, Draw_Enter
 )
 
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static bool OnControl_TuneParameter(const Control control) //-V801
 {
     if (control.IsUp() && control.Is(Key::Esc))
@@ -125,7 +127,7 @@ static bool OnControl_TuneParameter(const Control control) //-V801
         }
         else
         {
-            return tuned->GetTuner()->OnControlKey(control);
+            return Tuner::Current()->OnControlKey(control);
         }
     }
 
