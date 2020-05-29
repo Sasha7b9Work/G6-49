@@ -18,8 +18,8 @@ using namespace Primitives;
 
 struct Warning
 {
-    Warning(pString msg = "") : timeStart(TIME_MS), message(new String(msg)) { };
-    void Delete()              { delete message; }
+    Warning(pString msg = "") : timeStart(TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
+    void Delete()   { if (message) { delete message; message = nullptr; } }
     bool IsEqual(String &msg);
     uint timeStart;
     String *message;
@@ -94,6 +94,7 @@ void Warnings::Append(String &warning)
     
     if(last < NUM_WARNINGS)
     {
+        warnings[last].Delete();
         warnings[last++] = Warning(warning.c_str());
     }
 }
