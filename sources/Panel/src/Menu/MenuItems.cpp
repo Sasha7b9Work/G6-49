@@ -28,13 +28,13 @@ Item *Item::EmptyDark()
 }
 
 
-const char *Choice::NameCurrentSubItem(uint lang) const
+const char *Choice::NameCurrentSubItem() const
 {
-    return NAME_FROM_INDEX(CurrentIndex(), lang);
+    return NAME_FROM_INDEX(CurrentIndex(), LANGUAGE);
 }
 
 
-String Choice::NameNextSubItem(uint lang) const
+String Choice::NameNextSubItem() const
 {
     int8 nextIndex = CurrentIndex() + 1;
 
@@ -42,11 +42,11 @@ String Choice::NameNextSubItem(uint lang) const
     {
         nextIndex = 0;
     }
-    return String(NAME_FROM_INDEX(nextIndex, lang));
+    return String(NAME_FROM_INDEX(nextIndex, LANGUAGE));
 }
 
 
-const char *Choice::NamePrevSubItem(uint lang)
+const char *Choice::NamePrevSubItem()
 {
     int8 prevIndex = CurrentIndex() - 1;
 
@@ -54,7 +54,7 @@ const char *Choice::NamePrevSubItem(uint lang)
     {
         prevIndex = NumSubItems() - 1;
     }
-    return NAME_FROM_INDEX(prevIndex, lang);
+    return NAME_FROM_INDEX(prevIndex, LANGUAGE);
 }
 
 
@@ -66,9 +66,9 @@ Item *Page::GetItem(const Key::E key) const
 }
 
 
-String Choice::NameSubItem(int i, uint lang) const
+String Choice::NameSubItem(int i) const
 {
-    return String(NAME_FROM_INDEX(i, lang));
+    return String(NAME_FROM_INDEX(i, LANGUAGE));
 }
 
 

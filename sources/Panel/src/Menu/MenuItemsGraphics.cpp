@@ -151,11 +151,11 @@ void Choice::Draw(bool opened, int x, int y) const
                 VLine::Draw(x + 1, y - 1, y - 1 + 10);
                 HLine::Draw(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
                 VLine::Draw(x - 1 + Item::WIDTH, y - 1, y + 9);
-                NameSubItem(i, LANGUAGE).Draw(x + 3, y, Color::BACK);
+                NameSubItem(i).Draw(x + 3, y, Color::BACK);
             }
             else
             {
-                NameSubItem(i, LANGUAGE).Draw(x + 3, y, Color::FILL);
+                NameSubItem(i).Draw(x + 3, y, Color::FILL);
             }
             y += 10;
         }
@@ -171,7 +171,7 @@ void Choice::Draw(bool opened, int x, int y) const
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Color::BACK.SetAsCurrent();
 
-        String nameCurrentSubItem(NameCurrentSubItem(LANGUAGE));
+        String nameCurrentSubItem(NameCurrentSubItem());
 
         if (step == 0.0F) //-V2550 //-V550
         {
@@ -183,13 +183,13 @@ void Choice::Draw(bool opened, int x, int y) const
 
             nameCurrentSubItem.DrawRelativelyRight(x0, y + 30);
 
-            if (x0 + NameNextSubItem(LANGUAGE).Width() > x + Item::WIDTH - 5)
+            if (x0 + NameNextSubItem().Width() > x + Item::WIDTH - 5)
             {
-                NameNextSubItem(LANGUAGE).Draw(x0, y + 30);
+                NameNextSubItem().Draw(x0, y + 30);
             }
             else
             {
-                NameNextSubItem(LANGUAGE).DrawRelativelyRight(315, y + 30);
+                NameNextSubItem().DrawRelativelyRight(315, y + 30);
             }
         }
     }

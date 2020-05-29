@@ -368,18 +368,18 @@ public:
     void Draw(bool opened, int x = -1, int y = -1) const;
     
     // ¬озвращает им€ текущего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameCurrentSubItem(uint lang) const;
+    const char *NameCurrentSubItem() const;
     
     // ¬озвращает им€ следующего варианта выбора элемента choice, как оно записано в исходном коде программы
-    String NameNextSubItem(uint lang) const;
+    String NameNextSubItem() const;
     
     // ¬озвращает высоту раскрытого
     int GetHeightOpened() const;
 
-    const char *NamePrevSubItem(uint lang);
+    const char *NamePrevSubItem();
     
     // ¬озвращает им€ варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
-    String NameSubItem(int i, uint lang) const;
+    String NameSubItem(int i) const;
     
     // ¬озвращает указатель на себ€, если находитс€ ы открытом состо€нии, и 0, если в закрытом
     Item *Press(const Control control);
