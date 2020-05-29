@@ -100,6 +100,11 @@ void EnterBuffer::Prepare(ParameterValue *parameter)
 
 void EnterBuffer::Push(const Control &control)
 {
+    if (stack.Size() > 14)
+    {
+        return;
+    }
+
     Key::E key = control.key;
 
     if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterValueType::Offset))
