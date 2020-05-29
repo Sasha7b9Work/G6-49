@@ -302,7 +302,8 @@ void Indicator::IncreaseInPosition(int pos)
 
     if (value > param->GetMax())
     {
-        Display::ShowWarning(String("Превышение максимального значения"));
+        static int counter = 0;
+        Display::ShowWarning(String("Превышение максимального значения %d", counter++));
     }
 }
 

@@ -27,16 +27,15 @@ struct Warning
 
 struct Warnings
 {
-    Warnings() : first(0), last(0) { }
+    Warnings() : last(0) { }
     void Show();
     void Append(String &warning);
 private:
     static const int NUM_WARNINGS = 10;
     Warning warnings[NUM_WARNINGS];
-    int first;
-    int last;
+    int last;                               // Указыват на элемент за последним действительным. Если last == 0, то массив пуст
     void Update();
-    bool IsEmpty()  { return (first == 0) && (last == 0); }
+    bool IsEmpty()  { return (last == 0); }
     Warning &Last() { return warnings[last - 1]; }
     Color ColorText() const;
     Color ColorBackground() const;
@@ -106,7 +105,7 @@ void Warnings::Show()
 
     int y = 0;
 
-    for (int i = first; i < last; i++)
+    for (int i = 0; i < last; i++)
     {
         int width = warnings[i].message->Width();
         Rectangle(width + 2, 11).DrawFilled(0, y, ColorBackground(), Color::FILL);
@@ -118,32 +117,21 @@ void Warnings::Show()
 
 void Warnings::Update()
 {
-    if (first == 0 && last == 0)
+    while ((last != 0) && (warnings[0].timeStart + 5000 < TIME_MS))
     {
-        return;
-    }
+        warnings[0].Delete();
 
-    int newFirst = 0;
-
-    for (int i = first; i < last; i++)
-    {
-        if (warnings[i].timeStart + 5000 < TIME_MS)
+        for (int i = 0; i < last; i++)
         {
-            warnings[i].Delete();
-            warnings[i].message = nullptr;
-            newFirst = i + 1;
+            int index = i + 1;
+
+            if (index < last)
+            {
+                warnings[i] = warnings[index];
+            }
         }
-    }
 
-    if (newFirst > 0)
-    {
-        first = newFirst;
-    }
-
-    if (last - first < 2 && first != 0)
-    {
-        first = 0;
-        last = 0;
+        last--;
     }
 }
 
