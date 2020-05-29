@@ -32,7 +32,7 @@ public:
 
     virtual ~Parameter() { }
 
-    pString Name(uint lang) const;
+    pString Name() const;
 
     virtual void SetForm(Form *form);
 

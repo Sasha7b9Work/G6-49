@@ -512,7 +512,7 @@ void DisplayCorrection::Draw()
 
 void DisplayCorrection::DrawTitle(int x, int y, int width)
 {
-    String(tuner->GetParameter()->Name(LANGUAGE)).DrawInCenterRect(x, y, width, 30, Color::WHITE);
+    String(tuner->GetParameter()->Name()).DrawInCenterRect(x, y, width, 30, Color::WHITE);
 }
 
 

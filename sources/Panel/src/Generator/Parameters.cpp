@@ -33,9 +33,9 @@ bool Parameter::IsChoice() const
 }
 
 
-pString Parameter::Name(uint lang) const
+pString Parameter::Name() const
 {
-    return name[lang];
+    return name[LANGUAGE];
 }
 
 
