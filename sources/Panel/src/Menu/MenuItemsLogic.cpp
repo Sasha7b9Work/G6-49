@@ -515,7 +515,7 @@ pString ChoiceParameter::NameCurrentSubItem() const
 
 String Item::FullPath()
 {
-    String titl = GetTitle(LANGUAGE);
+    String titl = GetTitle();
     const char *titles[5] = {titl.c_str(), 0, 0, 0, 0};
     int pointer = 1;
 

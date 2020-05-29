@@ -119,9 +119,9 @@ void Item::Open(bool open)
 }
 
 
-String Item::GetTitle(uint lang) const
+String Item::GetTitle() const
 {
-    return String(title[lang]);
+    return String(title[LANGUAGE]);
 }
 
 

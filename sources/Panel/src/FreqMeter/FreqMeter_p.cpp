@@ -36,7 +36,7 @@ void PFreqMeter::Draw()
 
     if(set.freq.measure == FreqMeasure::Freq)
     {
-        std::sprintf(text, (LANGUAGE ? "%skHz" : "%sêÃö"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, static_cast<int>(set.freq.billingTime)));
+        std::sprintf(text, (LANG_IS_RU ? "%sêÃö" : "%skHz"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, static_cast<int>(set.freq.billingTime)));
     }
     else
     {

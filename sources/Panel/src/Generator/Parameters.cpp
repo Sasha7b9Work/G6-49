@@ -204,12 +204,7 @@ pString ParameterComplex::GetStringValue() const
 
         ParameterChoice *enabled = const_cast<ParameterComplex *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
 
-        if(LANGUAGE)
-        {
-            return valuesEN[enabled->GetChoice()];
-        }
-
-        return valuesRU[enabled->GetChoice()];
+        return LANG_IS_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()];
     }
 
     return "";

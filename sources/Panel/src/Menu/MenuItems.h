@@ -62,7 +62,7 @@ public:
     void Open(bool open);
     
     // Возвращает название элемента, как оно выглядит на дисплее прибора
-    String GetTitle(uint lang) const;
+    String GetTitle() const;
 
     void Draw(bool opened, int x = -1, int y = -1) const;
     
