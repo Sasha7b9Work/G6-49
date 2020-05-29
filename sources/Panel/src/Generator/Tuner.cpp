@@ -42,6 +42,7 @@ static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режи
 DisplayCorrection::ModeTuning DisplayCorrection::mode = DisplayCorrection::Correction;
 
 DisplayEntering::Cursor DisplayEntering::cursor;
+Order::E                DisplayEntering::order = Order::Count;
 
 Tuner *Tuner::current = nullptr;
 
@@ -549,6 +550,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
         if (DisplayCorrection::InModeCorrection())
         {
             DisplayCorrection::SetModeEntering();
+            order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
         }
 
         enterBuffer.Push(control);
@@ -594,11 +596,27 @@ int DisplayEntering::DrawValue(int x, int y)
 
 void DisplayEntering::DrawUnits(int x, int y, int width)
 {
+//    char units[10];
+//
+//    std::strcpy(units, Tuner::Current()->GetParameter()->GetMainUnits(LANGUAGE));
+
     pString units = Tuner::Current()->GetParameter()->GetUnits(LANGUAGE);
 
     Font::SetUpperCase(false);
 
     String(units).DrawInArea(x, y, width);
+}
+
+
+void DisplayEntering::OnOrderMore()
+{
+
+}
+
+
+void DisplayEntering::OnOrderLess()
+{
+
 }
 
 

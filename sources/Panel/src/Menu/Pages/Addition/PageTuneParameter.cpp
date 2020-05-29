@@ -25,7 +25,7 @@ void PageTuneParameter::SetParameter(ParameterValue *parameter)
 
 static void OnPress_More()
 {
-
+    DisplayEntering::OnOrderMore();
 }
 
 
@@ -45,7 +45,7 @@ DEF_GRAPH_BUTTON(sbMore,
 
 static void OnPress_Less()
 {
-
+    DisplayEntering::OnOrderLess();
 }
 
 

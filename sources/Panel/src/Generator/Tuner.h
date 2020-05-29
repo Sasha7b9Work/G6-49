@@ -126,6 +126,13 @@ public:
 
     static void Draw(int x, int y, int width);
 
+    // Обработчик нажатия кнопки "Увеличить порядок"
+    static void OnOrderMore();
+
+    // Обработчик нажатия кнопки "Уменьшить порядок"
+    static void OnOrderLess();
+
+
     class Cursor
     {
     public:
@@ -139,6 +146,8 @@ public:
 private:
 
     static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
+
+    static Order::E order;              // Текущий порядок вводимого значения
 
     static int DrawValue(int x, int y);
 
