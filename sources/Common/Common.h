@@ -32,7 +32,7 @@ struct Order
         Count
     };
 
-    static pString Suffix(Order::E order, uint lang);
+    static pString Suffix(Order::E order);
 
     // Возвращает степень, соответсвующую порядку
     static int GetPow10(Order::E order);

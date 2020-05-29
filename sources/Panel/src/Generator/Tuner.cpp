@@ -520,7 +520,7 @@ void DisplayCorrection::DrawUnits(int x, int y)
 {
     Font::SetUpperCase(false);
 
-    String(tuner->GetParameter()->GetUnits(LANGUAGE)).Draw(x + 7, y, Color::WHITE);
+    String(tuner->GetParameter()->GetUnits()).Draw(x + 7, y, Color::WHITE);
 
     Font::SetUpperCase(true);
 }
@@ -600,7 +600,7 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
 //
 //    std::strcpy(units, Tuner::Current()->GetParameter()->GetMainUnits(LANGUAGE));
 
-    pString units = Tuner::Current()->GetParameter()->GetUnits(LANGUAGE);
+    pString units = Tuner::Current()->GetParameter()->GetUnits();
 
     Font::SetUpperCase(false);
 

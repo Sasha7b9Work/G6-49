@@ -115,7 +115,7 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValueType::E p)
 }
 
 
-pString ParameterValue::GetMainUnits(uint lang) const
+pString ParameterValue::GetMainUnits() const
 {
     static const pString units[ParameterValueType::Count][2] =
     {
@@ -138,11 +138,11 @@ pString ParameterValue::GetMainUnits(uint lang) const
         {"",   ""}      // Exit
     };
 
-    return units[GetType()][lang];
+    return units[GetType()][LANGUAGE];
 }
 
 
-pString ParameterValue::GetUnits(uint lang, Order::E order) const
+pString ParameterValue::GetUnits(Order::E order) const
 {
     if (order == Order::Count)
     {
@@ -151,8 +151,8 @@ pString ParameterValue::GetUnits(uint lang, Order::E order) const
 
     static char units[10];
 
-    std::strcpy(units, Order::Suffix(order, lang));
-    std::strcat(units, GetMainUnits(lang));
+    std::strcpy(units, Order::Suffix(order));
+    std::strcat(units, GetMainUnits());
 
     return units;
 }
@@ -317,13 +317,13 @@ pString ParameterValue::GetStringValue() const
 
     std::strcpy(buffer, MathFloatValue::GetIndicatedValue(this));
     std::strcat(buffer, " ");
-    std::strcat(buffer, GetUnits(LANGUAGE, CalculateOrder(this)));
+    std::strcat(buffer, GetUnits(CalculateOrder(this)));
 
     return buffer;
 }
 
 
-pString Order::Suffix(Order::E order, uint lang)
+pString Order::Suffix(Order::E order)
 {
     static const pString suf[Count][2] =
     {
@@ -335,7 +335,7 @@ pString Order::Suffix(Order::E order, uint lang)
         {"í",  "n"}
     };
 
-    return suf[order][lang];
+    return suf[order][LANGUAGE];
 }
 
 
