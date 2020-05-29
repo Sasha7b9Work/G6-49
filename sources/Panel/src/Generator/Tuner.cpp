@@ -39,7 +39,7 @@ private:
 
 static EnterBuffer enterBuffer;     // Здесь будем хранить нажатые кнопки в режиме ввода
 
-DisplayCorrection::ModeTuning DisplayCorrection::mode = DisplayCorrection::Correction;
+Tuner::ModeTuning::E Tuner::mode = ModeTuning::Correction;
 
 DisplayEntering::Cursor DisplayEntering::cursor;
 Order::E                DisplayEntering::order = Order::Count;
@@ -500,7 +500,7 @@ void DisplayCorrection::Draw()
 
     DrawTitle(x, y, WaveGraphics::Width());
 
-    if (mode == Entering)
+    if (Tuner::InModeEntering())
     {
         DisplayEntering::Draw(x - 5, y + 50, WaveGraphics::Width());
     }
@@ -548,13 +548,19 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 }
 
 
+void DisplayEntering::Init()
+{
+    enterBuffer.Prepare(Tuner::Current()->GetParameter());
+}
+
+
 bool DisplayEntering::OnEnteringKey(const Control &control)
 {
     if (control.IsEntering())
     {
-        if (DisplayCorrection::InModeCorrection())
+        if (Tuner::Current()->InModeCorrection())
         {
-            DisplayCorrection::SetModeEntering();
+            Tuner::Current()->SetModeEntering();
             order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
         }
 
@@ -627,14 +633,6 @@ void DisplayEntering::OnButtonOrderLess()
     {
         order = static_cast<Order::E>(order + 1);
     }
-}
-
-
-void DisplayCorrection::SetModeEntering()
-{
-    PageTuneParameter::SetModeEntering();
-    mode = Entering;
-    enterBuffer.Prepare(Tuner::Current()->GetParameter());
 }
 
 
@@ -747,4 +745,12 @@ void Tuner::OnButtonCancel()
 void Tuner::OnButtonApply()
 {
     PageTuneParameter::CallbackOnButtonApply();
+}
+
+
+void Tuner::SetModeEntering()
+{
+    PageTuneParameter::SetModeEntering();
+    mode = ModeTuning::Entering;
+    DisplayEntering::Init();
 }

@@ -132,6 +132,8 @@ public:
     // Обработчик нажатия кнопки "Уменьшить порядок"
     static void OnButtonOrderLess();
 
+    static void Init();
+
 
     class Cursor
     {
@@ -162,12 +164,6 @@ class DisplayCorrection
 
 public:
     
-    enum ModeTuning
-    {
-        Correction,     // Режим коррекциии значения параметра (ручкой)
-        Entering        // Режим ввода значения
-    };
-
     DisplayCorrection(Tuner *tuner);
 
     void Init();
@@ -177,10 +173,6 @@ public:
     void Draw();
 
     bool OnControlKey(const Control &control);
-
-    static bool InModeCorrection() { return (mode == Correction); }
-
-    static void SetModeEntering();
 
 private:
 
@@ -200,16 +192,22 @@ private:
 
     // Заполнить разряды дробной части параметра
     void FillDigitsFractPart();
-
-    static ModeTuning mode;                         // Текущий режим настройки
 };
 
 
 // Используется для визуальной настройки параметра. Является принадлежностью каждог ParameterValue
 class Tuner
 {
-
 public:
+
+    struct ModeTuning
+    {
+        enum E
+        {
+            Correction,     // Режим коррекциии значения параметра (ручкой)
+            Entering        // Режим ввода значения
+        };
+    };
 
     Tuner(ParameterValue *param);
 
@@ -227,6 +225,12 @@ public:
 
     ParameterValue *GetParameter() { return param; }
 
+    static bool InModeCorrection() { return (mode == ModeTuning::Correction); }
+
+    static bool InModeEntering()   { return (mode == ModeTuning::Entering);   }
+
+    static void SetModeEntering();
+
     static Tuner *Current() { return current; };
 
 private:
@@ -236,4 +240,6 @@ private:
     DisplayCorrection display;
 
     static Tuner *current;
+
+    static ModeTuning::E mode;                         // Текущий режим настройки
 };
