@@ -293,11 +293,12 @@ void Indicator::IncreaseInPosition(int pos)
         DoubleValue step = StepPosition(pos);
 
         value.Add(step);
-
-        LIMITATION_ABOVE(value, param->GetMax());
     }
 
-    display->Init(value);
+    if (value != param->GetValue() && value <= param->GetMax())
+    {
+        display->Init(value);
+    }
 }
 
 
@@ -312,11 +313,12 @@ void Indicator::DecreaseInPosition(int pos)
         DoubleValue step = StepPosition(pos);
 
         value.Sub(step);
-
-        LIMITATION_BELOW(value, param->GetMin());
     }
 
-    display->Init(value);
+    if (value != param->GetValue() && value >= param->GetMin())
+    {
+        display->Init(value);
+    }
 }
 
 

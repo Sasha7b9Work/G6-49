@@ -47,3 +47,9 @@ void Display::Update()
     Painter::EndScene();
     Statistics::EndFrame();
 }
+
+
+void Display::ShowWarning(String)
+{
+
+}

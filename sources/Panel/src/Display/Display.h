@@ -1,5 +1,6 @@
 #pragma once
-#include "DisplayTypes.h"
+#include "Display/DisplayTypes.h"
+#include "Display/Text.h"
 #include "Keyboard/Controls.h"
 
 
@@ -25,4 +26,6 @@ struct Display
     
     // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
     static uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+
+    static void ShowWarning(String warning);
 };

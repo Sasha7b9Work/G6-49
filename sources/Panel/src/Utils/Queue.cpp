@@ -6,7 +6,7 @@
 
 template Queue<Task>::Queue();
 template bool Queue<Task>::Push(Task *);
-template bool Queue<Task>::Full() const;
+template bool Queue<Task>::IsFull() const;
 
 
 
@@ -55,7 +55,7 @@ int Queue<T>::Size()
 
 
 template <typename T>
-bool Queue<T>::Full() const
+bool Queue<T>::IsFull() const
 {
     return (last == SIZE - 1);
 }

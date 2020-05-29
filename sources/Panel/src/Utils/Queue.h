@@ -16,7 +16,7 @@ public:
 
     int Size();
     // Возвращает true, если очередь полностью заполнена (Push() невозможен)
-    bool Full() const;
+    bool IsFull() const;
 
 private:
     int first;

@@ -364,6 +364,12 @@ bool DoubleValue::operator==(const DoubleValue &rhs)
 }
 
 
+bool DoubleValue::operator!=(const DoubleValue &rhs)
+{
+    return (value != rhs.value);
+}
+
+
 Order::E DoubleValue::GetOrder() const
 {
     DoubleValue temp = *this;

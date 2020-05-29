@@ -88,6 +88,7 @@ struct DoubleValue
     bool operator<=(const DoubleValue &);
     bool operator>=(const DoubleValue &);
     bool operator==(const DoubleValue &);
+    bool operator!=(const DoubleValue &);
 
 private:
 
