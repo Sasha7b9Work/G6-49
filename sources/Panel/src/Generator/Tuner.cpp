@@ -596,11 +596,10 @@ int DisplayEntering::DrawValue(int x, int y)
 
 void DisplayEntering::DrawUnits(int x, int y, int width)
 {
-//    char units[10];
-//
-//    std::strcpy(units, Tuner::Current()->GetParameter()->GetMainUnits(LANGUAGE));
+    char units[10];
 
-    pString units = Tuner::Current()->GetParameter()->GetUnits();
+    std::strcpy(units, Order::Suffix(order));
+    std::strcat(units, Tuner::Current()->GetParameter()->GetMainUnits());
 
     Font::SetUpperCase(false);
 
@@ -610,13 +609,19 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
 
 void DisplayEntering::OnOrderMore()
 {
-
+    if (order > Order::Mega)
+    {
+        order = static_cast<Order::E>(order - 1);
+    }
 }
 
 
 void DisplayEntering::OnOrderLess()
 {
-
+    if (order < Order::Nano)
+    {
+        order = static_cast<Order::E>(order + 1);
+    }
 }
 
 
