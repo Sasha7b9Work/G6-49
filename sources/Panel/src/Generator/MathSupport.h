@@ -7,7 +7,7 @@ class Parameter;
 class ParameterValue;
 
 
-struct MathFloatValue
+struct MathDoubleValue
 {
     // Возвращает числовое представление DoubleValue с numDigits значащими цифрами и запятой.
     static pString GetIndicatedValue(const ParameterValue *param);

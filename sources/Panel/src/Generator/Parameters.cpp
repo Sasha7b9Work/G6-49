@@ -310,7 +310,7 @@ pString ParameterValue::GetStringValue() const
 {
     static char buffer[30];
 
-    std::strcpy(buffer, MathFloatValue::GetIndicatedValue(this));
+    std::strcpy(buffer, MathDoubleValue::GetIndicatedValue(this));
     std::strcat(buffer, " ");
     std::strcat(buffer, GetUnits(CalculateOrder(this)));
 

@@ -114,7 +114,7 @@ static pString ZeroValue(const ParameterValue *param)
 }
 
 
-pString MathFloatValue::GetIndicatedValue(const ParameterValue *param)
+pString MathDoubleValue::GetIndicatedValue(const ParameterValue *param)
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
@@ -175,7 +175,7 @@ static int GetPositionFirstDigitVoltate(const ParameterValue *param, Order::E)
 }
 
 
-int MathFloatValue::GetPositionFirstDigit(const ParameterValue *param, Order::E order)
+int MathDoubleValue::GetPositionFirstDigit(const ParameterValue *param, Order::E order)
 {
     if (param->IsVoltage())
     {
@@ -219,13 +219,13 @@ int MathFloatValue::GetPositionFirstDigit(const ParameterValue *param, Order::E 
 }
 
 
-char MathFloatValue::GetChar(const DoubleValue &value, int postition, Order::E order)
+char MathDoubleValue::GetChar(const DoubleValue &value, int postition, Order::E order)
 {
     return static_cast<char>(GetDigit(value, postition, order) | 0x30);
 }
 
 
-void MathFloatValue::CorrectValueOnOrder(DoubleValue *value, Order::E order)
+void MathDoubleValue::CorrectValueOnOrder(DoubleValue *value, Order::E order)
 {
     if (order == Order::Count)
     {
@@ -255,7 +255,7 @@ void MathFloatValue::CorrectValueOnOrder(DoubleValue *value, Order::E order)
 }
 
 
-int MathFloatValue::GetDigit(const DoubleValue &val, int position, Order::E order)
+int MathDoubleValue::GetDigit(const DoubleValue &val, int position, Order::E order)
 {
     DoubleValue value = val;
     value.SetSign(1);
