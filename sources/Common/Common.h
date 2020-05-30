@@ -83,6 +83,9 @@ struct DoubleValue
     // Order::Micro - DoubleValue::Integer() >= 1e-6
     Order::E GetOrder() const;
 
+    // Возращает строку значения, приведённую к порядку order
+    pString GetStringValue(Order::E order, bool sign) const;
+
     bool operator<(const DoubleValue &);
     bool operator>(const DoubleValue &);
     bool operator<=(const DoubleValue &);

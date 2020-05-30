@@ -389,3 +389,11 @@ Order::E DoubleValue::GetOrder() const
 
     return Order::One;
 }
+
+
+pString DoubleValue::GetStringValue(Order::E, bool) const
+{
+    static char buffer[50];
+
+    return buffer;
+}

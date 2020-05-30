@@ -318,9 +318,9 @@ pString ParameterValue::GetStringValue() const
 }
 
 
-pString ParameterValue::GetStringValue(DoubleValue value)
+pString ParameterValue::GetStringValue(DoubleValue) const
 {
-    
+    return "";
 }
 
 
