@@ -53,7 +53,7 @@ public:
     // ¬озвращает true, если параметр сложный и открыт
     bool IsOpened() const;
 
-    virtual pString GetStringValue() const = 0;
+    virtual pString ToString() const = 0;
 
     Form *GetForm();
     
@@ -123,8 +123,8 @@ public:
     void OnPressButtonTune();
 
     // ¬озвращает строковое представление значени€ параметра
-    virtual pString GetStringValue() const;
-    virtual pString GetStringValue(DoubleValue value) const;
+    virtual pString ToString() const;
+    virtual pString ToString(DoubleValue value) const;
 
     // ¬озвращает основные единицы измерени€ (без учЄта пор€дка)
     pString GetMainUnits() const;
@@ -181,8 +181,8 @@ public:
 
     bool DrawChoice(int x, int y) const;
 
-    virtual pString GetStringValue() const;
-    virtual pString GetStringValue(DoubleValue) const { return ""; }
+    virtual pString ToString() const;
+    virtual pString ToString(DoubleValue) const { return ""; }
 
     void OnPressButtonTune();
 
@@ -216,7 +216,7 @@ public:
     ParameterValue *FindParameter(ParameterValueType::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
 
-    virtual pString GetStringValue() const;
+    virtual pString ToString() const;
 
     void OnPressButtonTune();
 

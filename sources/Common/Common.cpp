@@ -391,9 +391,19 @@ Order::E DoubleValue::GetOrder() const
 }
 
 
-pString DoubleValue::GetStringValue(Order::E, bool) const
+pString DoubleValue::GetStringValue(Order::E, bool sign) const
 {
     static char buffer[50];
+
+    buffer[0] = '\0';
+
+    if (sign)
+    {
+        buffer[0] = (Sign() > 0) ? '+' : '-';
+        buffer[1] = '\0';
+    }
+
+    
 
     return buffer;
 }

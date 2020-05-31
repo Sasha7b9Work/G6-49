@@ -20,7 +20,7 @@ struct Warning
 {
     Warning(pString msg = "") : timeStart(TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
     void Delete()   { if (message) { delete message; message = nullptr; } }
-    bool IsEqual(String &msg);
+    bool IsEqual(const String &msg);
     uint timeStart;
     String *message;
 };
@@ -29,7 +29,7 @@ struct Warnings
 {
     Warnings() : last(0) { }
     void Show();
-    void Append(String &warning);
+    void Append(const String &warning);
 private:
     static const int NUM_WARNINGS = 10;
     Warning warnings[NUM_WARNINGS];
@@ -85,7 +85,7 @@ void Display::ShowWarning(String warning)
 }
 
 
-void Warnings::Append(String &warning)
+void Warnings::Append(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
     {
@@ -165,7 +165,7 @@ Color Warnings::ColorBackground() const
 }
 
 
-bool Warning::IsEqual(String &msg)
+bool Warning::IsEqual(const String &msg)
 {
     return std::strcmp(msg.c_str(), message->c_str()) == 0;
 }

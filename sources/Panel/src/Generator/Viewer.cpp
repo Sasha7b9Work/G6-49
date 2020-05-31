@@ -46,7 +46,7 @@ void Viewer::DrawParameterValue(int x, int y)
         x -= 4;
     }
 
-    String(param->GetStringValue()).Draw(x, y);
+    String(param->ToString()).Draw(x, y);
 
     Font::SetUpperCase(true);
 }

@@ -188,7 +188,7 @@ bool ParameterValue::SetAndLoadValue(DoubleValue val)
 }
 
 
-pString ParameterComplex::GetStringValue() const
+pString ParameterComplex::ToString() const
 {
     if(type == Manipulation)
     {
@@ -211,7 +211,7 @@ pString ParameterComplex::GetStringValue() const
 }
 
 
-pString ParameterChoice::GetStringValue() const
+pString ParameterChoice::ToString() const
 {
     return names[choice];
 }
@@ -306,7 +306,7 @@ static Order::E CalculateOrder(const ParameterValue *param)
 }
 
 
-pString ParameterValue::GetStringValue() const
+pString ParameterValue::ToString() const
 {
     static char buffer[30];
 
@@ -318,8 +318,12 @@ pString ParameterValue::GetStringValue() const
 }
 
 
-pString ParameterValue::GetStringValue(DoubleValue) const
+pString ParameterValue::ToString(DoubleValue) const
 {
+    //static char buffer[30];
+
+    //std::strcpy(buffer, value.get)
+
     return "";
 }
 

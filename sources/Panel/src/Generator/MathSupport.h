@@ -15,6 +15,8 @@ struct MathDoubleValue
     // ¬озвращает позицию первого ненулевого символа "1" - дес€тки (1e1), "0" - единицы (1e0), "-1" - дес€тые (1e-1), "-2" - сотые (1e-2)
     static int GetPositionFirstDigit(const ParameterValue *param, Order::E order = Order::Count);
 
+    static int GetPositionFirstDigit(const DoubleValue &value, Order::E order);
+
     // ¬озвращает цифру в позиции position. “очка находитс€ соответственно order. One - после единиц, Kilo - после тыс€ч и так далее.
     // Order::Count - значенине по умолчанию - зап€та€ в позиции относительно размерности числового значени€
     static int GetDigit(const DoubleValue &value, int position, Order::E order = Order::Count);

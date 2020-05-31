@@ -219,6 +219,45 @@ int MathDoubleValue::GetPositionFirstDigit(const ParameterValue *param, Order::E
 }
 
 
+int MathDoubleValue::GetPositionFirstDigit(const DoubleValue &val, Order::E order)
+{
+    DoubleValue value = val;
+    value.SetSign(1);
+
+    CorrectValueOnOrder(&value, order);
+
+    int result = 0;
+
+    if (value.Integer() > 0)
+    {
+        int whole = value.Integer();
+
+        while (whole > 9)
+        {
+            whole /= 10;
+            result++;
+        }
+    }
+    else
+    {
+        int fract = value.FractNano();
+
+        if (fract == 0)
+        {
+            return 0;
+        }
+
+        do
+        {
+            result--;
+            fract *= 10;
+        } while (fract < (1000 * 1000 * 1000));
+    }
+
+    return result;
+}
+
+
 char MathDoubleValue::GetChar(const DoubleValue &value, int postition, Order::E order)
 {
     return static_cast<char>(GetDigit(value, postition, order) | 0x30);
