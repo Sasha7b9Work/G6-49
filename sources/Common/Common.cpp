@@ -391,7 +391,7 @@ Order::E DoubleValue::GetOrder() const
 }
 
 
-pString DoubleValue::GetStringValue(Order::E, bool sign) const
+pString DoubleValue::ToString(Order::E, bool sign) const
 {
     static char buffer[50];
 
@@ -403,7 +403,7 @@ pString DoubleValue::GetStringValue(Order::E, bool sign) const
         buffer[1] = '\0';
     }
 
-    
+    int first = 
 
     return buffer;
 }

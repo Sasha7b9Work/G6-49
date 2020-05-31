@@ -84,7 +84,7 @@ struct DoubleValue
     Order::E GetOrder() const;
 
     // Возращает строку значения, приведённую к порядку order
-    pString GetStringValue(Order::E order, bool sign) const;
+    pString ToString(Order::E order, bool sign) const;
 
     bool operator<(const DoubleValue &);
     bool operator>(const DoubleValue &);

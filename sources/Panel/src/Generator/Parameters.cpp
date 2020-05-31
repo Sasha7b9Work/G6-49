@@ -318,13 +318,14 @@ pString ParameterValue::ToString() const
 }
 
 
-pString ParameterValue::ToString(DoubleValue) const
+pString ParameterValue::ToString(DoubleValue val) const
 {
-    //static char buffer[30];
+    static char buffer[30];
+    
+    std::strcpy(buffer, val.ToString(val.GetOrder(), IsSigned()));
+    std::strcat(buffer, GetUnits());
 
-    //std::strcpy(buffer, value.get)
-
-    return "";
+    return buffer;
 }
 
 
