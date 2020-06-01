@@ -4,8 +4,6 @@
 #include "Keyboard/Controls.h"
 
 
-#define DISPLAY_SHOW_WARNING(warn)
-
 #define BUFFER_WIDTH    Display::WIDTH    // Ширина буфера для рисования
 #define BUFFER_HEIGHT   Display::HEIGHT   // Высота буфера для рисования
 

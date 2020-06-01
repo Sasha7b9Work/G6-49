@@ -107,17 +107,17 @@ static void SetBuffers(uint front, uint back)
     LTDC_LayerCfgTypeDef pLayerCfg;
 
     pLayerCfg.WindowX0 = 0;
-    pLayerCfg.WindowX1 = SCREEN_WIDTH;
+    pLayerCfg.WindowX1 = Display::WIDTH;
     pLayerCfg.WindowY0 = 0;
-    pLayerCfg.WindowY1 = SCREEN_HEIGHT;
+    pLayerCfg.WindowY1 = Display::HEIGHT;
     pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_L8;
     pLayerCfg.Alpha = 0xff;
     pLayerCfg.Alpha0 = 0xff;
     pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
     pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
     pLayerCfg.FBStartAdress = frontBuffer;
-    pLayerCfg.ImageWidth = SCREEN_WIDTH;
-    pLayerCfg.ImageHeight = SCREEN_HEIGHT;
+    pLayerCfg.ImageWidth = Display::WIDTH;
+    pLayerCfg.ImageHeight = Display::HEIGHT;
     pLayerCfg.Backcolor.Blue = 0;
     pLayerCfg.Backcolor.Green = 0;
     pLayerCfg.Backcolor.Red = 0;
@@ -144,7 +144,7 @@ void HAL_LTDC::ToggleBuffers()
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
+            if (HAL_DMA2D_Start(&hDMA2D, backBuffer, frontBuffer, Display::WIDTH, Display::HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&hDMA2D, 1);
             }
