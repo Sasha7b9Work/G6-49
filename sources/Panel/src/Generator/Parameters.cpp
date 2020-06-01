@@ -23,7 +23,7 @@ bool Parameter::IsDouble() const
 
 bool Parameter::IsComplex() const
 {
-    return (kind == Complex);
+    return (kind == Composite);
 }
 
 
@@ -377,9 +377,9 @@ void Parameter::OnPressButtonTune()
 {
     switch (kind)
     {
-    case Double:  reinterpret_cast<ParameterValue *>(this)->OnPressButtonTune();   break;
-    case Complex: reinterpret_cast<ParameterComplex *>(this)->OnPressButtonTune(); break;
-    case Choice:  reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
+    case Double:    reinterpret_cast<ParameterValue *>(this)->OnPressButtonTune();   break;
+    case Composite: reinterpret_cast<ParameterComplex *>(this)->OnPressButtonTune(); break;
+    case Choice:    reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
 
     case Exit:
         break;

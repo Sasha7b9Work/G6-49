@@ -20,7 +20,7 @@ public:
         Double,     // ¬еличина, выраженна€ числовым значением
         Exit,       // «акрыть составной параметр (манипул€ци€)
         Choice,     // ¬ыбор из нескольких значений
-        Complex     // —оставной параметр, состо€щий из нескольких простых (манипул€ци€)
+        Composite   // —оставной параметр, состо€щий из нескольких простых (манипул€ци€)
     };
 
     Parameter(E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
@@ -205,7 +205,7 @@ public:
     } value;
 
     ParameterComplex(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
-        Parameter(Parameter::Complex, nameRU, nameEN), value(Count), params(parameters), numParams(0), type(v) { }
+        Parameter(Parameter::Composite, nameRU, nameEN), value(Count), params(parameters), numParams(0), type(v) { }
 
     virtual void SetForm(Form *form);
 
