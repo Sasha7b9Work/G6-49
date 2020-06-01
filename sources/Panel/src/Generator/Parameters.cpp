@@ -15,9 +15,9 @@ void Parameter::SetForm(Form *f)
 }
 
 
-bool Parameter::IsValue() const
+bool Parameter::IsDouble() const
 {
-    return (kind == Value);
+    return (kind == Double);
 }
 
 
@@ -100,7 +100,7 @@ ParameterValue *ParameterComplex::FindParameter(ParameterValueType::E p)
     {
         Parameter *param = params[i];
 
-        if(param->IsValue())
+        if(param->IsDouble())
         {
             ParameterValue *parameter = static_cast<ParameterValue *>(param);
 
@@ -286,7 +286,7 @@ int ParameterChoice::NumChoices() const
 
 
 ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value) :
-    Parameter(Parameter::Value, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
+    Parameter(Parameter::Double, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
 }
 
@@ -377,7 +377,7 @@ void Parameter::OnPressButtonTune()
 {
     switch (kind)
     {
-    case Value:   reinterpret_cast<ParameterValue *>(this)->OnPressButtonTune();   break;
+    case Double:  reinterpret_cast<ParameterValue *>(this)->OnPressButtonTune();   break;
     case Complex: reinterpret_cast<ParameterComplex *>(this)->OnPressButtonTune(); break;
     case Choice:  reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
 

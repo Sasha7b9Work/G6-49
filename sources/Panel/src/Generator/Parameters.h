@@ -17,7 +17,7 @@ public:
 
     enum E
     {
-        Value,      // Величина, выраженная числовым значением
+        Double,     // Величина, выраженная числовым значением
         Exit,       // Закрыть составной параметр (манипуляция)
         Choice,     // Выбор из нескольких значений
         Complex     // Составной параметр, состоящий из нескольких простых (манипуляция)
@@ -41,7 +41,7 @@ public:
     Parameter *GetParent();
 
     // true, если параметр имеет тип Parameter::Value
-    bool IsValue() const;
+    bool IsDouble() const;
 
     // true, если параметр имеет тип Parameter::Complex
     bool IsComplex() const;

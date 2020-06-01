@@ -222,7 +222,7 @@ void PGenerator::LoadSettings()
 
 void PGenerator::SetParameter(Parameter *parameter)
 {
-    if(parameter->IsValue())
+    if(parameter->IsDouble())
     {
         SetParameter(static_cast<ParameterValue *>(parameter));
     }

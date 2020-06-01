@@ -246,7 +246,7 @@ ParameterValue *Form::FindParameter(ParameterValueType::E p)
     {
         Parameter *param = params[i];
 
-        if(param->IsValue())
+        if(param->IsDouble())
         {
             ParameterValue *parameter = static_cast<ParameterValue *>(param);
 

@@ -41,7 +41,7 @@ void Viewer::DrawParameterValue(int x, int y)
     }
 
     Font::SetUpperCase(false);
-    if(param->IsValue() && static_cast<ParameterValue *>(param)->IsSigned())
+    if(param->IsDouble() && static_cast<ParameterValue *>(param)->IsSigned())
     {
         x -= 4;
     }

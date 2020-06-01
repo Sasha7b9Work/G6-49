@@ -15,7 +15,7 @@ static ParameterValue *tuned = nullptr;     // Настраиваемый параметр //-V1054
 
 void PageTuneParameter::SetParameter(ParameterValue *parameter)
 {
-    if(parameter->IsValue())
+    if(parameter->IsDouble())
     {
         stored = *parameter;
         tuned = parameter;
@@ -57,7 +57,7 @@ void PageTuneParameter::CallbackOnButtonCancel()
 {
     Parameter *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
 
-    if (parameter->IsValue())
+    if (parameter->IsDouble())
     {
         *reinterpret_cast<ParameterValue *>(parameter) = stored;
     }
