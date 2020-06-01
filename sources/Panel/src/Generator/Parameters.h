@@ -44,7 +44,7 @@ public:
     bool IsDouble() const;
 
     // true, если параметр имеет тип Parameter::Complex
-    bool IsComplex() const;
+    bool IsComposite() const;
 
     // true, если параметр имеет тип Parameter::Choice
     bool IsChoice() const;

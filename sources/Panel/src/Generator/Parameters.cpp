@@ -21,7 +21,7 @@ bool Parameter::IsDouble() const
 }
 
 
-bool Parameter::IsComplex() const
+bool Parameter::IsComposite() const
 {
     return (kind == Composite);
 }

@@ -255,7 +255,7 @@ ParameterDouble *Form::FindParameter(ParameterDoubleType::E p)
                 return parameter;
             }
         }
-        else if(param->IsComplex())
+        else if(param->IsComposite())
         {
             ParameterComposite *parameter = static_cast<ParameterComposite *>(param);
 
@@ -288,7 +288,7 @@ ParameterChoice *Form::FindParameter(ParameterChoice::E p)
             }
         }
         
-        if(param->IsComplex())
+        if(param->IsComposite())
         {
             ParameterComposite *complex = reinterpret_cast<ParameterComposite *>(param);
 
@@ -329,7 +329,7 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
 
 void Form::OpenCompositeParameter()
 {
-    if(!CurrentParameter()->IsComplex())
+    if(!CurrentParameter()->IsComposite())
     {
         return;
     }
