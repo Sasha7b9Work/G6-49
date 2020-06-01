@@ -188,7 +188,7 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 }
 
 
-pString ParameterComposite::ToString() const
+String ParameterComposite::ToString() const
 {
     if(type == Manipulation)
     {
@@ -204,16 +204,16 @@ pString ParameterComposite::ToString() const
 
         ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
 
-        return LANG_IS_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()];
+        return String(LANG_IS_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
     }
 
-    return "";
+    return String("");
 }
 
 
-pString ParameterChoice::ToString() const
+String ParameterChoice::ToString() const
 {
-    return names[choice];
+    return String(names[choice]);
 }
 
 
@@ -306,15 +306,13 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 }
 
 
-pString ParameterDouble::ToString() const
+String ParameterDouble::ToString() const
 {
-    static char buffer[30];
+    String string(MathDoubleValue::GetIndicatedValue(this));
+    string.Append(" ");
+    string.Append(GetUnits(CalculateOrder(this)));
 
-    std::strcpy(buffer, MathDoubleValue::GetIndicatedValue(this));
-    std::strcat(buffer, " ");
-    std::strcat(buffer, GetUnits(CalculateOrder(this)));
-
-    return buffer;
+    return string;
 }
 
 

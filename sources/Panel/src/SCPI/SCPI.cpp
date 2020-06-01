@@ -298,6 +298,6 @@ void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
     }
     else
     {
-        SCPI::SendAnswer(param->ToString());
+        SCPI::SendAnswer(param->ToString().c_str());
     }
 }
