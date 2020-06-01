@@ -240,7 +240,7 @@ void Form::TuneGenerator()
 }
 
 
-ParameterValue *Form::FindParameter(ParameterValueType::E p)
+ParameterDouble *Form::FindParameter(ParameterValueType::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -248,7 +248,7 @@ ParameterValue *Form::FindParameter(ParameterValueType::E p)
 
         if(param->IsDouble())
         {
-            ParameterValue *parameter = static_cast<ParameterValue *>(param);
+            ParameterDouble *parameter = static_cast<ParameterDouble *>(param);
 
             if (parameter->GetType() == p)
             {
@@ -259,7 +259,7 @@ ParameterValue *Form::FindParameter(ParameterValueType::E p)
         {
             ParameterComposite *parameter = static_cast<ParameterComposite *>(param);
 
-            ParameterValue *val = parameter->FindParameter(p);
+            ParameterDouble *val = parameter->FindParameter(p);
 
             if(val)
             {
@@ -582,7 +582,7 @@ uint8 *Form::GetFormFlash(Chan::E ch)
 
 double Form::GetOffset()
 {
-    ParameterValue *parameter = FindParameter(ParameterValueType::Offset);
+    ParameterDouble *parameter = FindParameter(ParameterValueType::Offset);
 
     return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }
@@ -590,7 +590,7 @@ double Form::GetOffset()
 
 double Form::GetAmplitude()
 {
-    ParameterValue *parameter = FindParameter(ParameterValueType::Amplitude);
+    ParameterDouble *parameter = FindParameter(ParameterValueType::Amplitude);
 
     return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }

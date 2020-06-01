@@ -94,7 +94,7 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoice::E p)
 }
 
 
-ParameterValue *ParameterComposite::FindParameter(ParameterValueType::E p)
+ParameterDouble *ParameterComposite::FindParameter(ParameterValueType::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -102,7 +102,7 @@ ParameterValue *ParameterComposite::FindParameter(ParameterValueType::E p)
 
         if(param->IsDouble())
         {
-            ParameterValue *parameter = static_cast<ParameterValue *>(param);
+            ParameterDouble *parameter = static_cast<ParameterDouble *>(param);
 
             if(parameter->GetType() == p)
             {
@@ -115,7 +115,7 @@ ParameterValue *ParameterComposite::FindParameter(ParameterValueType::E p)
 }
 
 
-pString ParameterValue::GetMainUnits() const
+pString ParameterDouble::GetMainUnits() const
 {
     static const pString units[ParameterValueType::Count][2] =
     {
@@ -142,7 +142,7 @@ pString ParameterValue::GetMainUnits() const
 }
 
 
-pString ParameterValue::GetUnits(Order::E order) const
+pString ParameterDouble::GetUnits(Order::E order) const
 {
     if (order == Order::Count)
     {
@@ -158,7 +158,7 @@ pString ParameterValue::GetUnits(Order::E order) const
 }
 
 
-bool ParameterValue::SetAndLoadValue(double val)
+bool ParameterDouble::SetAndLoadValue(double val)
 {
     if(!InRange(val))
     {
@@ -173,7 +173,7 @@ bool ParameterValue::SetAndLoadValue(double val)
 }
 
 
-bool ParameterValue::SetAndLoadValue(DoubleValue val)
+bool ParameterDouble::SetAndLoadValue(DoubleValue val)
 {
     if (!InRange(val))
     {
@@ -267,13 +267,13 @@ ParameterManipulation::ParameterManipulation(Parameter **parameters) : Parameter
 }
 
 
-bool ParameterValue::InRange(double val) const
+bool ParameterDouble::InRange(double val) const
 {
     return (val >= min.ToDouble()) && (val <= max.ToDouble());
 }
 
 
-bool ParameterValue::InRange(DoubleValue val) const
+bool ParameterDouble::InRange(DoubleValue val) const
 {
     return (val >= min && val <= max);
 }
@@ -285,13 +285,13 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterValue::ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value) :
+ParameterDouble::ParameterDouble(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value) :
     Parameter(Parameter::Double, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
 }
 
 
-static Order::E CalculateOrder(const ParameterValue *param)
+static Order::E CalculateOrder(const ParameterDouble *param)
 {
     DoubleValue value = param->GetValue();
 
@@ -306,7 +306,7 @@ static Order::E CalculateOrder(const ParameterValue *param)
 }
 
 
-pString ParameterValue::ToString() const
+pString ParameterDouble::ToString() const
 {
     static char buffer[30];
 
@@ -318,7 +318,7 @@ pString ParameterValue::ToString() const
 }
 
 
-pString ParameterValue::ToString(DoubleValue val) const
+pString ParameterDouble::ToString(DoubleValue val) const
 {
     static char buffer[30];
     
@@ -360,7 +360,7 @@ void ParameterChoice::OnPressButtonTune()
 }
 
 
-void ParameterValue::OnPressButtonTune()
+void ParameterDouble::OnPressButtonTune()
 {
     PageTuneParameter::SetParameter(this);
     Menu::SetAdditionPage(PageTuneParameter::self);
@@ -377,7 +377,7 @@ void Parameter::OnPressButtonTune()
 {
     switch (kind)
     {
-    case Double:    reinterpret_cast<ParameterValue *>(this)->OnPressButtonTune();   break;
+    case Double:    reinterpret_cast<ParameterDouble *>(this)->OnPressButtonTune();   break;
     case Composite: reinterpret_cast<ParameterComposite *>(this)->OnPressButtonTune(); break;
     case Choice:    reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
 

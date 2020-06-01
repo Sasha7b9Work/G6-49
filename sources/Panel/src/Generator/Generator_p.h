@@ -22,7 +22,7 @@ struct PGenerator
 
     static void SetFormWave(Chan::E ch, TypeForm::E form);
 
-    static void SetParameter(ParameterValue *param);
+    static void SetParameter(ParameterDouble *param);
 
     static void SetParameter(ParameterChoice *param);
 

@@ -8,12 +8,12 @@
 #include "Settings/Settings.h"
 
 
-static ParameterValue stored = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
+static ParameterDouble stored = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
 
-static ParameterValue *tuned = nullptr;     // Ќастраиваемый параметр //-V1054
+static ParameterDouble *tuned = nullptr;     // Ќастраиваемый параметр //-V1054
 
 
-void PageTuneParameter::SetParameter(ParameterValue *parameter)
+void PageTuneParameter::SetParameter(ParameterDouble *parameter)
 {
     if(parameter->IsDouble())
     {
@@ -59,7 +59,7 @@ void PageTuneParameter::CallbackOnButtonCancel()
 
     if (parameter->IsDouble())
     {
-        *reinterpret_cast<ParameterValue *>(parameter) = stored;
+        *reinterpret_cast<ParameterDouble *>(parameter) = stored;
     }
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);

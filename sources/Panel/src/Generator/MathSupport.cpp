@@ -8,7 +8,7 @@
 
 
 //DoubleValue *LogicFloatValue::value = nullptr;
-//ParameterValue *LogicFloatValue::parameter = nullptr;
+//ParameterDouble *LogicFloatValue::parameter = nullptr;
 
 
 // Здесь хранится количество значащих цифр перед (индекс 0) и после (индекс 1) запятой. Знак не учитывается
@@ -33,7 +33,7 @@ static const int numberDigits[ParameterValueType::Count][2] =
     {10, 9}    // Exit,
 };
 
-ParameterValue *MathParameterValue::param = nullptr;
+ParameterDouble *MathParameterValue::param = nullptr;
 
 
 // Погасить незначащие символы
@@ -81,7 +81,7 @@ static void RepayEmptySymbols(char *buffer)
 }
 
 
-static Order::E CalculateOrder(const ParameterValue *param)
+static Order::E CalculateOrder(const ParameterDouble *param)
 {
     if (param->IsVoltage())
     {
@@ -97,7 +97,7 @@ static Order::E CalculateOrder(const ParameterValue *param)
 }
 
 
-static pString ZeroValue(const ParameterValue *param)
+static pString ZeroValue(const ParameterDouble *param)
 {
     ParameterValueType::E type = param->GetType();
 
@@ -114,7 +114,7 @@ static pString ZeroValue(const ParameterValue *param)
 }
 
 
-pString MathDoubleValue::GetIndicatedValue(const ParameterValue *param)
+pString MathDoubleValue::GetIndicatedValue(const ParameterDouble *param)
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
@@ -167,7 +167,7 @@ pString MathDoubleValue::GetIndicatedValue(const ParameterValue *param)
 }
 
 
-static int GetPositionFirstDigitVoltate(const ParameterValue *param, Order::E)
+static int GetPositionFirstDigitVoltate(const ParameterDouble *param, Order::E)
 {
     DoubleValue value = param->GetValue();
 
@@ -175,7 +175,7 @@ static int GetPositionFirstDigitVoltate(const ParameterValue *param, Order::E)
 }
 
 
-int MathDoubleValue::GetPositionFirstDigit(const ParameterValue *param, Order::E order)
+int MathDoubleValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
     if (param->IsVoltage())
     {

@@ -96,7 +96,7 @@ struct ParameterValueType
 };
 
 
-class ParameterValue : public Parameter
+class ParameterDouble : public Parameter
 {
     friend struct LogicFloatValue;
     friend class Tuner;
@@ -104,7 +104,7 @@ class ParameterValue : public Parameter
 
 public:
 
-    ParameterValue(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value);
+    ParameterDouble(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value);
 
     // Установить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(double val);
@@ -212,7 +212,7 @@ public:
     int NumParams() const { return numParams; }
     Parameter **Params() { return params; }
 
-    ParameterValue *FindParameter(ParameterValueType::E p);
+    ParameterDouble *FindParameter(ParameterValueType::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
 
     virtual pString ToString() const;
@@ -228,11 +228,11 @@ private:
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Value ///
-class ParameterVoltage : public ParameterValue
+class ParameterVoltage : public ParameterDouble
 {
 public:
     ParameterVoltage(ParameterValueType::E type, const char *nameRU, const char *nameEN, const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) :
-        ParameterValue(type, nameRU, nameEN, min, max, value) { }
+        ParameterDouble(type, nameRU, nameEN, min, max, value) { }
 };
 
 
@@ -252,26 +252,26 @@ public:
 };
 
 
-class ParameterFrequency : public ParameterValue
+class ParameterFrequency : public ParameterDouble
 {
 public:
     ParameterFrequency(const DoubleValue &min = DoubleValue("0.1"), const DoubleValue &max = DoubleValue("100", 6), const DoubleValue &value = DoubleValue("1000")) :
-        ParameterValue(ParameterValueType::Frequency, "Частота", "Frequency", min, max, value) { }
+        ParameterDouble(ParameterValueType::Frequency, "Частота", "Frequency", min, max, value) { }
 };
 
 
-class ParameterTime : public ParameterValue
+class ParameterTime : public ParameterDouble
 {
 public:
     ParameterTime(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) :
-        ParameterValue(t, nameRU, nameEN, min, max, value) { }
+        ParameterDouble(t, nameRU, nameEN, min, max, value) { }
 };
 
 
-class ParameterPhase : public ParameterValue
+class ParameterPhase : public ParameterDouble
 {
 public:
-    ParameterPhase() : ParameterValue(ParameterValueType::Phase, "Фаза", "Phase", DoubleValue("0"), DoubleValue("360"), DoubleValue("0")) { }
+    ParameterPhase() : ParameterDouble(ParameterValueType::Phase, "Фаза", "Phase", DoubleValue("0"), DoubleValue("360"), DoubleValue("0")) { }
 };
 
 

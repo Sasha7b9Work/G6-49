@@ -5,7 +5,7 @@
 #include "Utils/Stack.h"
 
 
-class ParameterValue;
+class ParameterDouble;
 class Tuner;
 class DisplayCorrection;
 
@@ -143,7 +143,7 @@ public:
         EnterBuffer() : stack(30), param(nullptr)
         {
         }
-        void Prepare(ParameterValue *parameter);
+        void Prepare(ParameterDouble *parameter);
         void Push(const Key::E key);
         // Удалить последний добавленный символ
         void Pop();
@@ -155,7 +155,7 @@ public:
         DoubleValue ToDoubleValue() const;
     private:
         Stack<char> stack;
-        ParameterValue *param;
+        ParameterDouble *param;
     };
 
     class Cursor
@@ -223,7 +223,7 @@ private:
 };
 
 
-// Используется для визуальной настройки параметра. Является принадлежностью каждог ParameterValue
+// Используется для визуальной настройки параметра. Является принадлежностью каждог ParameterDouble
 class Tuner
 {
 public:
@@ -237,7 +237,7 @@ public:
         };
     };
 
-    Tuner(ParameterValue *param);
+    Tuner(ParameterDouble *param);
 
     void Init();
 
@@ -251,7 +251,7 @@ public:
     // Обработчик нажатия кнопки "Применить"
     void OnButtonApply();
 
-    ParameterValue *GetParameter() { return param; }
+    ParameterDouble *GetParameter() { return param; }
 
     static bool InModeCorrection() { return (mode == ModeTuning::Correction); }
 
@@ -263,7 +263,7 @@ public:
 
 private:
 
-    ParameterValue *param;           // Настраиваемый параметр
+    ParameterDouble *param;           // Настраиваемый параметр
 
     DisplayCorrection display;
 

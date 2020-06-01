@@ -4,16 +4,16 @@
 
 struct DoubleValue;
 class Parameter;
-class ParameterValue;
+class ParameterDouble;
 
 
 struct MathDoubleValue
 {
     // Возвращает числовое представление DoubleValue с numDigits значащими цифрами и запятой.
-    static pString GetIndicatedValue(const ParameterValue *param);
+    static pString GetIndicatedValue(const ParameterDouble *param);
 
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
-    static int GetPositionFirstDigit(const ParameterValue *param, Order::E order = Order::Count);
+    static int GetPositionFirstDigit(const ParameterDouble *param, Order::E order = Order::Count);
 
     static int GetPositionFirstDigit(const DoubleValue &value, Order::E order);
 
@@ -33,7 +33,7 @@ private:
 
 struct MathParameterValue
 {
-    static void SetParameterValue(ParameterValue *parameter) { param = parameter; };
+    static void SetParameterValue(ParameterDouble *parameter) { param = parameter; };
 
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд)
     static int GetNumberDigitsBeforeComma();
@@ -44,5 +44,5 @@ struct MathParameterValue
 private:
 
     // Собственно параметр, по которому будут производится вычислеиня
-    static ParameterValue *param;
+    static ParameterDouble *param;
 };

@@ -11,7 +11,7 @@
     4. Команда должна заканчиваться символом с кодом 0x0D.
 */
 
-class ParameterValue;
+class ParameterDouble;
 class String;
 class SimpleMessage;
 
@@ -61,7 +61,7 @@ namespace SCPI
 
     void ProcessHint(String *message, pString names[]); //-V2504
 
-    void ProcessRequestParameterValue(const ParameterValue *param);
+    void ProcessRequestParameterValue(const ParameterDouble *param);
 
     pCHAR ProcessParameterValue(pCHAR buffer, ParameterValueType::E value);
 

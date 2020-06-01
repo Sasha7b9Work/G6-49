@@ -88,7 +88,7 @@ public:
     operator TypeForm::E() { return value; }
     
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    ParameterValue *FindParameter(ParameterValueType::E p);
+    ParameterDouble *FindParameter(ParameterValueType::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
     
     // Засылает параметр в генератор

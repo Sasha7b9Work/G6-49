@@ -3,7 +3,7 @@
 #include "Menu/MenuItems.h"
 
 
-class ParameterValue;
+class ParameterDouble;
 
 
 struct PageSignals
@@ -54,7 +54,7 @@ struct PageTuneParameter
     static Page *self;
 
     // Устанавливает параметр для редактирования
-    static void SetParameter(ParameterValue *);
+    static void SetParameter(ParameterDouble *);
 
     // Установить режим ввода значения
     static void SetModeEntering();

@@ -248,7 +248,7 @@ bool SCPI::Handler::Processing(SimpleMessage *)
 
 pCHAR SCPI::ProcessParameterValue(pCHAR buffer, ParameterValueType::E value)
 {
-    ParameterValue *param = CURRENT_FORM->FindParameter(value);
+    ParameterDouble *param = CURRENT_FORM->FindParameter(value);
 
     SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
@@ -290,7 +290,7 @@ pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoice::E choice, pStr
 }
 
 
-void SCPI::ProcessRequestParameterValue(const ParameterValue *param)
+void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
 {
     if(param == nullptr)
     {

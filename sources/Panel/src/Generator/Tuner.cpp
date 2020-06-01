@@ -71,7 +71,7 @@ char DisplayEntering::EnterBuffer::At(const int i) const
 }
 
 
-void DisplayEntering::EnterBuffer::Prepare(ParameterValue *parameter)
+void DisplayEntering::EnterBuffer::Prepare(ParameterDouble *parameter)
 {
     stack.Clear();
     param = parameter;
@@ -294,7 +294,7 @@ bool Indicator::IsSigned()
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    ParameterValue *param = Tuner::Current()->GetParameter();
+    ParameterDouble *param = Tuner::Current()->GetParameter();
 
     DoubleValue value = param->GetValue();
 
@@ -319,7 +319,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    ParameterValue *param = Tuner::Current()->GetParameter();
+    ParameterDouble *param = Tuner::Current()->GetParameter();
 
     DoubleValue value = param->GetValue();
 
@@ -669,7 +669,7 @@ void DisplayCorrection::Init()
 void DisplayCorrection::FillDigitsIntegerPart()
 {
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
-    ParameterValue *param = tuner->GetParameter();
+    ParameterDouble *param = tuner->GetParameter();
     DoubleValue value = param->GetValue();
 
     int pos = before - 1;                               // Разряд в этой позиции будем заполнять значениями целых
@@ -715,7 +715,7 @@ void DisplayCorrection::Init(DoubleValue value)
 }
 
 
-Tuner::Tuner(ParameterValue *_param) : param(_param), display(this)
+Tuner::Tuner(ParameterDouble *_param) : param(_param), display(this)
 {
 }
 

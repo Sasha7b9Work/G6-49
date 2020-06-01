@@ -173,7 +173,7 @@ void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
 }
 
 
-void PGenerator::SetParameter(ParameterValue *param)
+void PGenerator::SetParameter(ParameterDouble *param)
 {
     static const Command::E commands[ParameterValueType::Count] =
     {
@@ -224,7 +224,7 @@ void PGenerator::SetParameter(Parameter *parameter)
 {
     if(parameter->IsDouble())
     {
-        SetParameter(static_cast<ParameterValue *>(parameter));
+        SetParameter(static_cast<ParameterDouble *>(parameter));
     }
     else if(parameter->IsChoice())
     {
