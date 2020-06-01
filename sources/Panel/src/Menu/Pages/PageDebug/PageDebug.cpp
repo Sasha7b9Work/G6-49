@@ -594,7 +594,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     &bPrev,
     &bNext,
     &bSend,
-    &*Item::EmptyLight(),
+    &Item::emptyLight,
     Page::Registers, &pDebug, Item::FuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 

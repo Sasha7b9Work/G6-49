@@ -95,9 +95,8 @@ public:
 
     static bool FuncActive() { return true; }
 
-    static Item *EmptyLight();
-
-    static Item *EmptyDark();
+    static Item emptyDark;
+    static Item emptyLight;
 };
 
 

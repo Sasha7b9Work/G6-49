@@ -12,20 +12,8 @@
 #define NAME_FROM_INDEX(index, lang) ((lang) ? namesEN[index] : namesRU[index])
 
 
-static Item emptyLight = { TypeItem::NoneLight };
-static Item emptyDark = { TypeItem::NoneDark };
-
-
-Item *Item::EmptyLight()
-{
-    return &emptyLight;
-}
-
-
-Item *Item::EmptyDark()
-{
-    return &emptyDark;
-}
+Item Item::emptyLight = { TypeItem::NoneLight };
+Item Item::emptyDark = { TypeItem::NoneDark };
 
 
 const char *Choice::NameCurrentSubItem() const
@@ -62,7 +50,7 @@ Item *Page::GetItem(const Key::E key) const
 {
     int index = CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Key::F1);
 
-    return (index < NumItems()) ? const_cast<Item *>(items[index]) : Item::EmptyLight();
+    return (index < NumItems()) ? const_cast<Item *>(items[index]) : &Item::emptyLight;
 }
 
 

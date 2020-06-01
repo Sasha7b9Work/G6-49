@@ -152,8 +152,8 @@ static void OnOpenClose_TuneParameter(bool enter)
 DEF_PAGE_SB(pTuneParameter,   //-V641
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", "ENTER VALUE", //-V641
     "", "",
-    Item::EmptyDark(),
-    Item::EmptyDark(),
+    &Item::emptyDark,
+    &Item::emptyDark,
     &sbCancel,
     &sbEnter,
     Page::SB_Input, 0, Item::FuncActive, OnOpenClose_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
@@ -171,6 +171,6 @@ void PageTuneParameter::SetModeEntering()
 
 void PageTuneParameter::ResetModeEntering()
 {
-    pTuneParameter.items[0] = Item::EmptyDark();
-    pTuneParameter.items[1] = Item::EmptyDark();
+    pTuneParameter.items[0] = &Item::emptyDark;
+    pTuneParameter.items[1] = &Item::emptyDark;
 }

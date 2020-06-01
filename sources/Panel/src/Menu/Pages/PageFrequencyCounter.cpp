@@ -190,8 +190,8 @@ DEF_PAGE_8( pFrequencyCounter,                                                  
     "Óïðàâëåíèå ôóêíöèÿìè ÷àñòîòîìåðà", "Freqmeter control",
     &cMeasure,       // ×ÀÑÒÎÒÎÌÅÐ - Èçìåðåíèå
     &gLevel,         // ×ÀÑÒÎÒÎÌÅÐ - Óðîâåíü
-    Item::EmptyLight(),
-    Item::EmptyLight(),
+    &Item::emptyLight,
+    &Item::emptyLight,
     &cResist,        // ×ÀÑÒÎÒÎÌÅÐ - Ñîïðîòèâëåíèå
     &cCouple,        // ×ÀÑÒÎÒÎÌÅÐ - Âõîä
     &cFiltr,         // ×ÀÑÒÎÒÎÌÅÐ - ÔÍ×
@@ -207,7 +207,7 @@ static void Tune_Page()
     if (set.freq.measure == FreqMeasure::Freq)
     {
         page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cBillingTime));
-        page->items[3] = Item::EmptyLight();
+        page->items[3] = &Item::emptyLight;
     }
     else if (set.freq.measure == FreqMeasure::Period)
     {
@@ -216,8 +216,8 @@ static void Tune_Page()
     }
     else
     {
-        page->items[2] = Item::EmptyLight();
-        page->items[3] = Item::EmptyLight(); //-V656
+        page->items[2] = &Item::emptyLight;
+        page->items[3] = &Item::emptyLight; //-V656
     } //-V656
 }
 

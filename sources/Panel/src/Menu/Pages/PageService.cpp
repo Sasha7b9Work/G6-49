@@ -54,9 +54,9 @@ DEF_PAGE_4_VAR( pService,                                                       
     "СЕРВИС", "SERVICE",    //-V641
     "Сервисные функции", "Service functions",
     &cLanguage,
-    &*Item::EmptyLight(),
-    &*Item::EmptyLight(),
-    &*Item::EmptyLight(),
+    &Item::emptyLight,
+    &Item::emptyLight,
+    &Item::emptyLight,
     Page::Service, reinterpret_cast<PageBase *>(Menu::mainPage), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
