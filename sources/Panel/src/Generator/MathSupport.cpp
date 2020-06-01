@@ -132,7 +132,7 @@ pString MathValue::GetIndicatedValue(const ParameterDouble *param)
 
         for (int i = sign ? 1 : 0; i < LENGTH_BUFFER - 1; i++)
         {
-            char symbol = GetChar(value, posDigit);
+            char symbol = GetChar(value, posDigit, order);
             buffer[i] = symbol;
 
             if (posDigit == 0)
@@ -163,7 +163,8 @@ int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E orde
 
     if (param->IsVoltage())
     {
-        return (value < Value("1.0") && value > Value("-1.0")) ? 4 : 1;
+        //return (value < Value("1.0") && value > Value("-1.0")) ? 4 : 1;
+        return 1;
     }
 
     value.SetSign(1);
