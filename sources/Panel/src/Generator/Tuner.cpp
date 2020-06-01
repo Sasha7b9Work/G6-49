@@ -27,14 +27,12 @@ Order::E                     DisplayEntering::order = Order::Count;
 Tuner *Tuner::current = nullptr;
 
 
-void DisplayEntering::EnterBuffer::Push(const Control &control)
+void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
     if (stack.Size() > 14)
     {
         return;
     }
-
-    Key::E key = control.key;
 
     if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterValueType::Offset))
     {
@@ -51,7 +49,13 @@ void DisplayEntering::EnterBuffer::Push(const Control &control)
         return;
     }
 
-    stack.Push(Key(control.key).ToChar());
+    stack.Push(Key(key).ToChar());
+}
+
+
+void DisplayEntering::EnterBuffer::Pop()
+{
+    stack.Pop();
 }
 
 
@@ -84,6 +88,12 @@ String DisplayEntering::EnterBuffer::GetString() const
     }
 
     return string;
+}
+
+
+DoubleValue DisplayEntering::EnterBuffer::ToDoubleValue() const
+{
+    return DoubleValue("10.0");
 }
 
 
@@ -551,13 +561,27 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
             order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
         }
 
-        buffer.Push(control);
+        TryToAddSymbol(control.key);
+
         cursor.Init();
 
         return true;
     }
 
     return false;
+}
+
+
+void DisplayEntering::TryToAddSymbol(Key::E key)
+{
+    buffer.Push(key);
+
+    DoubleValue value = buffer.ToDoubleValue();
+
+    if (value < Tuner::Current()->GetParameter()->GetMin() || value > Tuner::Current()->GetParameter()->GetMax())
+    {
+        buffer.Pop();
+    }
 }
 
 

@@ -144,12 +144,15 @@ public:
         {
         }
         void Prepare(ParameterValue *parameter);
-        void Push(const Control &control);
+        void Push(const Key::E key);
+        // Удалить последний добавленный символ
+        void Pop();
         int Size() const;
         char At(const int i) const;
         // Возвращает true, если содержится десятичная точка
         bool ConsistComma() const;
         String GetString() const;
+        DoubleValue ToDoubleValue() const;
     private:
         Stack<char> stack;
         ParameterValue *param;
@@ -176,6 +179,9 @@ private:
     static int DrawValue(int x, int y);
 
     static void DrawUnits(int x, int y, int width);
+
+    // Попытка добавить в буфер новый символ, соотвествующий нажатой кнопке
+    static void TryToAddSymbol(Key::E key);
 };
 
 
