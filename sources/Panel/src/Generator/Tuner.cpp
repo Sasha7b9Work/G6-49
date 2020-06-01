@@ -462,7 +462,7 @@ Value Indicator::StepPosition(int pos)
 
     Value step("1.0");
 
-    Order::E order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
+    Order::E order = DisplayCorrection::CalculateOrderForIndication();
 
     step.MulPow10(Order::GetPow10(order) - posAboutComma);
      
@@ -705,9 +705,9 @@ void DisplayCorrection::Init()
 }
 
 
-Order::E DisplayCorrection::CalculateOrderForIndication() const
+Order::E DisplayCorrection::CalculateOrderForIndication()
 {
-    if (tuner->GetParameter()->IsVoltage())
+    if (Tuner::Current()->GetParameter()->IsVoltage())
     {
         return Order::One;
     }
@@ -776,11 +776,11 @@ Tuner::Tuner(ParameterDouble *_param) : param(_param), display(this)
 
 void Tuner::Init()
 {
+    current = this;
+
     display.Init();
 
     display.indicator.InitHighlight();
-
-    current = this;
 }
 
 

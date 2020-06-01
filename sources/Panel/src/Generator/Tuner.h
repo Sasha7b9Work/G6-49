@@ -211,6 +211,9 @@ public:
     // ¬ывод сообщени€ о выходе за пределы допустимого диапазона, если необходимо
     static void ShowMessageOutRangIfNeed(Value value);
 
+    // –ассчитывает, к какому пор€дку нужно привести значение дл€ индикации (ƒл€ частоты и времени пор€док плавающий, а дл€ счЄтчиков и напр€жени€ - посто€нный, равный Order::One)
+    static Order::E CalculateOrderForIndication();
+
 private:
 
     Tuner *tuner;
@@ -229,9 +232,6 @@ private:
 
     // «аполнить разр€ды дробной части параметра
     void FillDigitsFractPart();
-
-    // –ассчитывает, к какому пор€дку нужно привести значение дл€ индикации
-    Order::E CalculateOrderForIndication() const;
 };
 
 
