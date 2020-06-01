@@ -27,6 +27,8 @@ void Viewer::Draw(int x, int y)
         Rectangle(139, 9).Fill(x, y, Color::GRAY_25);
     }
 
+    Font::SetUpperCase(true);
+
     String(param->Name()).Draw(x + 1, y, Color::Chan(ch));
 
     DrawParameterValue(x + 80, y);

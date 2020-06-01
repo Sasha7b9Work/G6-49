@@ -135,6 +135,8 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 
 int Indicator::Draw(int x, int y)
 {
+    x += Tuner::Current()->GetParameter()->IsVoltage() ? 70 : 20;
+
     static const int dx = 12;
 
     int pos = 0;
@@ -495,17 +497,19 @@ void DisplayCorrection::Draw()
 
     Font::StoreAndSet(TypeFont::_GOSTB20);
 
-    DrawTitle(x, y, WaveGraphics::Width());
+    DrawTitle(x, y + 10, WaveGraphics::Width());
+
+    y += 60;
 
     if (Tuner::InModeEntering())
     {
-        DisplayEntering::Draw(x - 5, y + 50, WaveGraphics::Width());
+        DisplayEntering::Draw(x - 5, y - 10, WaveGraphics::Width());
     }
     else
     {
-        x = DrawValue(x, y + 50);
+        x = DrawValue(x, y);
 
-        DrawUnits(x, y + 50);
+        DrawUnits(x, y);
     }
 
     Font::Restore();
@@ -530,7 +534,7 @@ void DisplayCorrection::DrawUnits(int x, int y)
 
 int DisplayCorrection::DrawValue(int x, int y)
 {
-    return indicator.Draw(x + 20, y);
+    return indicator.Draw(x, y);
 }
 
 

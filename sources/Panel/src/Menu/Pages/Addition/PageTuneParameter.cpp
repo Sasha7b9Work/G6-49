@@ -164,8 +164,15 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 
 void PageTuneParameter::SetModeEntering()
 {
-    pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore));
-    pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess));
+    if (Tuner::Current()->GetParameter()->IsVoltage())
+    {
+
+    }
+    else
+    {
+        pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore));
+        pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess));
+    }
 }
 
 
