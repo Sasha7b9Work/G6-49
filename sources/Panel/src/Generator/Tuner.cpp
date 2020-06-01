@@ -707,12 +707,9 @@ void DisplayCorrection::Init()
 
 Order::E DisplayCorrection::CalculateOrderForIndication()
 {
-    if (Tuner::Current()->GetParameter()->IsVoltage())
-    {
-        return Order::One;
-    }
+    ParameterDouble *param = Tuner::Current()->GetParameter();
 
-    return Order::Count;
+    return param->IsVoltage() ? Order::One : param->GetValue().GetOrder();
 }
 
 
