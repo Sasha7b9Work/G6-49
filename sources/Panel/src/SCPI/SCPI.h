@@ -65,7 +65,7 @@ namespace SCPI
 
     pCHAR ProcessParameterValue(pCHAR buffer, ParameterDoubleType::E value);
 
-    pCHAR ProcessParameterChoice(pCHAR buffer, ParameterChoice::E choice, pString *names);
+    pCHAR ProcessParameterChoice(pCHAR buffer, ParameterChoiceType::E choice, pString *names);
 
     namespace Handler
     {

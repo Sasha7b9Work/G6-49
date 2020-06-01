@@ -203,7 +203,7 @@ static pCHAR const modeStartNames[] =
 
 static pCHAR FuncModeStart(pCHAR buffer)
 {
-    return SCPI::ProcessParameterChoice(buffer, ParameterChoice::ModeStart, modeStartNames);
+    return SCPI::ProcessParameterChoice(buffer, ParameterChoiceType::ModeStart, modeStartNames);
 }
 
 
@@ -224,7 +224,7 @@ static pCHAR const polarityNames[] =
 
 static pCHAR FuncPolarity(pCHAR buffer)
 {
-    return SCPI::ProcessParameterChoice(buffer, ParameterChoice::Polarity, polarityNames);
+    return SCPI::ProcessParameterChoice(buffer, ParameterChoiceType::Polarity, polarityNames);
 }
 
 

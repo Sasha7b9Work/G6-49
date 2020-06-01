@@ -146,7 +146,7 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
 
 void PGenerator::SetParameter(ParameterChoice *param)
 {
-    static const Command::E commands[ParameterChoice::Count] =
+    static const Command::E commands[ParameterChoiceType::Count] =
     {
         Command::SetPolarity,
         Command::SetStartMode,

@@ -89,11 +89,11 @@ public:
     
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
     ParameterDouble *FindParameter(ParameterDoubleType::E p);
-    ParameterChoice *FindParameter(ParameterChoice::E p);
+    ParameterChoice *FindParameter(ParameterChoiceType::E p);
     
     // Засылает параметр в генератор
     void SendParameterToGenerator(ParameterDoubleType::E p);
-    void SendParameterToGenerator(ParameterChoice::E p);
+    void SendParameterToGenerator(ParameterChoiceType::E p);
 
     // Раскрывает составной параметр
     void OpenCompositeParameter();

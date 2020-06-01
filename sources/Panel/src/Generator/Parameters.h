@@ -157,20 +157,25 @@ private:
 };
 
 
-class ParameterChoice : public Parameter
+struct ParameterChoiceType
 {
-public:
-	enum E
-	{
+    enum E
+    {
         Polarity,             // Полярность импульсов
         ModeStart,            // Режим запуска сигналов DDS и импульсных
         ManipulationEnabled,  // Включен или выключен режим манипуляции
         Count
-	};
+    };
+};
 
-    ParameterChoice(E t, const char *nameRU, const char *nameEN) : Parameter(Parameter::Choice, nameRU, nameEN), type(t), choice(0), names(nullptr) { }
 
-	E Type() { return type; }
+class ParameterChoice : public Parameter
+{
+public:
+
+    ParameterChoice(ParameterChoiceType::E t, const char *nameRU, const char *nameEN) : Parameter(Parameter::Choice, nameRU, nameEN), type(t), choice(0), names(nullptr) { }
+
+    ParameterChoiceType::E Type() { return type; }
 
     int GetChoice() const;
 
@@ -185,7 +190,7 @@ public:
     virtual void OnPressButtonTune();
 
 private:
-	E type;
+	ParameterChoiceType::E type;
     int choice;             // Текущий выбор
     const char **names;
     
@@ -212,7 +217,7 @@ public:
     Parameter **Parameters() { return params; }
 
     ParameterDouble *FindParameter(ParameterDoubleType::E p);
-    ParameterChoice *FindParameter(ParameterChoice::E p);
+    ParameterChoice *FindParameter(ParameterChoiceType::E p);
 
     virtual String ToString() const;
 
@@ -316,21 +321,21 @@ class ParameterModeStart : public ParameterChoice
 public:
     //ParameterModeStart(pString choice0 = " Авто", pString choice1 = " Однокр", pString choice2 = " Комп А", pString choice3 = " Форм B");
 
-    ParameterModeStart() : ParameterChoice(ParameterChoice::ModeStart, "Запуск", "Start") { }
+    ParameterModeStart() : ParameterChoice(ParameterChoiceType::ModeStart, "Запуск", "Start") { }
 };
 
 
 class ParameterManipulationEnabled : public ParameterChoice
 {
 public:
-    ParameterManipulationEnabled(pString, pString) : ParameterChoice(ParameterChoice::ManipulationEnabled, "Манипуляция", "Manipulation") { }
+    ParameterManipulationEnabled(pString, pString) : ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манипуляция", "Manipulation") { }
 };
 
 
 class ParameterPolarity : public ParameterChoice
 {
 public:
-    ParameterPolarity() : ParameterChoice(ParameterChoice::Polarity, "Полярность", "Polarity") { }
+    ParameterPolarity() : ParameterChoice(ParameterChoiceType::Polarity, "Полярность", "Polarity") { }
 };
 
 

@@ -86,7 +86,7 @@ int ParameterComposite::NumParameters() const
 }
 
 
-ParameterChoice *ParameterComposite::FindParameter(ParameterChoice::E p)
+ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
@@ -215,7 +215,7 @@ String ParameterComposite::ToString() const
             " Off", " On"
         };
 
-        ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
+        ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(ParameterChoiceType::ManipulationEnabled);
 
         return String(LANG_IS_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
     }
@@ -236,7 +236,7 @@ void ParameterChoice::NextChoice()
 
     Chan::E ch = form->GetWave()->GetChannel();
 
-    if(type == ModeStart)
+    if(type == ParameterChoiceType::ModeStart)
     {
         PGenerator::LoadStartMode(ch, choice);
     }

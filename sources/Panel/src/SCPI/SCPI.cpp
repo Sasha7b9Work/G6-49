@@ -275,7 +275,7 @@ pCHAR SCPI::ProcessParameterValue(pCHAR buffer, ParameterDoubleType::E value)
 }
 
 
-pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoice::E choice, pString *names)
+pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoiceType::E choice, pString *names)
 {
     ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
 
