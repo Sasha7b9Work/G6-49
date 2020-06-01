@@ -96,7 +96,7 @@ public:
     void SendParameterToGenerator(ParameterChoice::E p);
 
     // Раскрывает составной параметр
-    void OpenComplexParameter();
+    void OpenCompositeParameter();
 
 private:
     

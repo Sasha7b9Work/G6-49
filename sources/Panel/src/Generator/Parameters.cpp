@@ -334,5 +334,5 @@ void ParameterDouble::OnPressButtonTune()
 
 void ParameterComposite::OnPressButtonTune()
 {
-    form->OpenComplexParameter();
+    form->OpenCompositeParameter();
 }

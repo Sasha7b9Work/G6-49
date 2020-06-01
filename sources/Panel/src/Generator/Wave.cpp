@@ -202,13 +202,13 @@ void Form::TuneGenerator()
             SendParameterToGenerator(ParameterDoubleType::Amplitude);
             SendParameterToGenerator(ParameterDoubleType::Offset);
 
-            OpenComplexParameter();
+            OpenCompositeParameter();
 
             currentParam = opened;
         }
         else                                                                // Ïàðàìåòð ÌÀÍÈÏÓËßÖÈß çàêðûò
         {
-            OpenComplexParameter();
+            OpenCompositeParameter();
 
             SendParameterToGenerator(ParameterChoice::ManipulationEnabled); //-V525
             SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
@@ -327,7 +327,7 @@ void Form::SendParameterToGenerator(ParameterChoice::E p)
 }
 
 
-void Form::OpenComplexParameter()
+void Form::OpenCompositeParameter()
 {
     if(!CurrentParameter()->IsComplex())
     {
