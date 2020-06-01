@@ -63,7 +63,7 @@ int Font::GetWidth(char symbol)
         return AdvancedFont::GetWidth(static_cast<uint8>(symbol));
     }
 
-    return font->symbol[static_cast<uint8>(Font::IsUpperCase() ? static_cast<uint8>(SU::ToUpper(symbol)) : static_cast<uint8>(symbol))].width + 1;
+    return font->symbol[static_cast<uint8>(Font::InUpperCase() ? static_cast<uint8>(SU::ToUpper(symbol)) : static_cast<uint8>(symbol))].width + 1;
 }
 
 
@@ -174,13 +174,13 @@ bool Font::IsAdvanced()
 }
 
 
-void Font::SetUpperCase(bool upper)
+void Font::ForceUpperCase(bool upper)
 {
     upperCase = upper;
 }
 
 
-bool Font::IsUpperCase()
+bool Font::InUpperCase()
 {
     return upperCase;
 }

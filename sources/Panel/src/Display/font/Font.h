@@ -37,9 +37,9 @@ struct Font
     static bool RowNotEmpty(int s, int row);
     static bool BitIsExist(int s, int row, int bit);
     static bool IsAdvanced();
-
-    static void SetUpperCase(bool upper);
-    static bool IsUpperCase();
+    // Выводить все символы в верхнем регистре
+    static void ForceUpperCase(bool upper);
+    static bool InUpperCase();
 
     // Восстановить шрифт, который был сохранён функцией StoreAndSet()
     static void Restore();

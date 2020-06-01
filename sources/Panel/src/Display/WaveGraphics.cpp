@@ -24,11 +24,11 @@ void WaveGraphics::Draw(Chan::E ch)
     if (set.enabled[ch])
     {
         Rectangle(Width(), Height()).Draw(x0, y0, Color::FILL);
-
+    
         Font::StoreAndSet(TypeFont::_GOSTB20);
         String((ch == Chan::A) ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
         Font::Restore();
-
+    
         FORM(ch)->DrawUGO(ch, y0);
         DrawParameters(ch, y0);
     }
@@ -66,6 +66,8 @@ void WaveGraphics::DrawParameters(Chan::E ch, int y0)
     int x0 = 107;
 
     y0 += 5;
+
+    Font::ForceUpperCase(true);
 
     String(form->Name()).Draw(22, y0 + 3, Color::Chan(ch));
     

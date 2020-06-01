@@ -10,7 +10,7 @@ void Display::Init()
 {
     HAL_LTDC::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
 
-    Font::SetUpperCase(true);
+    Font::ForceUpperCase(true);
 
     Font::Set(TypeFont::_8);
 }

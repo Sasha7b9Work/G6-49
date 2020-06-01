@@ -87,7 +87,7 @@ static Screen *screen = nullptr;
 
 void Display::Init()
 {
-    Font::SetUpperCase(true);
+    Font::ForceUpperCase(true);
 
     Font::Set(TypeFont::_8);
 

@@ -109,7 +109,7 @@ void Warnings::Show()
 
     int y = Y0();
 
-    Font::SetUpperCase(false);
+    Font::ForceUpperCase(false);
 
     for (int i = 0; i < last; i++)
     {

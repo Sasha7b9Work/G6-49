@@ -46,7 +46,7 @@ void Console::Draw()
         return;
     }
 
-    Font::SetUpperCase(false);
+    Font::ForceUpperCase(false);
 
     int y = 50;
     for (int i = 0; i < numStrings; i++)
@@ -57,5 +57,5 @@ void Console::Draw()
         y += 9;
     }
 
-    Font::SetUpperCase(true);
+    Font::ForceUpperCase(true);
 }

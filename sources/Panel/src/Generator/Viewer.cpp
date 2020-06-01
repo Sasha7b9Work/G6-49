@@ -27,7 +27,7 @@ void Viewer::Draw(int x, int y)
         Rectangle(139, 9).Fill(x, y, Color::GRAY_25);
     }
 
-    Font::SetUpperCase(true);
+    Font::ForceUpperCase(true);
 
     String(param->Name()).Draw(x + 1, y, Color::Chan(ch));
 
@@ -42,7 +42,7 @@ void Viewer::DrawParameterValue(int x, int y)
         return;
     }
 
-    Font::SetUpperCase(false);
+    Font::ForceUpperCase(false);
     if(param->IsDouble() && static_cast<ParameterDouble *>(param)->IsSigned())
     {
         x -= 4;
@@ -50,5 +50,5 @@ void Viewer::DrawParameterValue(int x, int y)
 
     String(param->ToString()).Draw(x, y);
 
-    Font::SetUpperCase(true);
+    Font::ForceUpperCase(true);
 }

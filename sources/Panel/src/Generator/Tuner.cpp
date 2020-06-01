@@ -533,11 +533,11 @@ void DisplayCorrection::DrawTitle(int x, int y, int width)
 
 void DisplayCorrection::DrawUnits(int x, int y)
 {
-    Font::SetUpperCase(false);
+    Font::ForceUpperCase(false);
 
     String(tuner->GetParameter()->GetUnits(CalculateOrderForIndication())).Draw(x + 7, y, Color::WHITE);
 
-    Font::SetUpperCase(true);
+    Font::ForceUpperCase(true);
 }
 
 
@@ -662,7 +662,7 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
     std::strcpy(units, Order::Suffix(order));
     std::strcat(units, Tuner::Current()->GetParameter()->GetMainUnits());
 
-    Font::SetUpperCase(false);
+    Font::ForceUpperCase(false);
 
     String(units).DrawInArea(x, y, width);
 }

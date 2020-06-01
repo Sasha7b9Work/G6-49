@@ -34,7 +34,7 @@ int Char::Draw(int eX, int eY, Color color)
 {
     color.SetAsCurrent();
 
-    if (Font::IsUpperCase())
+    if (Font::InUpperCase())
     {
         symbol = SU::ToUpper(symbol);
     }
