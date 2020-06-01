@@ -37,6 +37,11 @@ void Viewer::Draw(int x, int y)
 
 void Viewer::DrawParameterValue(int x, int y)
 {
+    if (param->IsChoice())
+    {
+        int i = 0;
+    }
+
     if(param->IsChoice() && static_cast<ParameterChoice *>(param)->DrawChoice(x + 6, y))
     {
         return;
