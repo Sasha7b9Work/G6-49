@@ -175,11 +175,14 @@ Color Indicator::CalculateColor(int pos) const
     {
         if (AllNumbersOfLeftIsZero(pos))
         {
-            return RightDigitIzComma(pos) ? Color::FILL : Color::GRAY_25;
+            return (RightDigitIzComma(pos) || PositionComma() < pos) ? Color::FILL : Color::GRAY_25;
         }
-        if (AllNumberOfRightIsZero(pos) && (PositionComma() < pos))
+        if (AllNumberOfRightIsZero(pos))
         {
-            return Color::GRAY_25;
+            if (PositionComma() < pos)
+            {
+                return (IndexHighlightReal() >= pos) ? Color::FILL : Color::GRAY_25;
+            }
         }
     }
     return Color::FILL;
@@ -247,7 +250,7 @@ int Indicator::AdditionShiftForDigit(int pos)
 }
 
 
-void Indicator::HighlightSymbol(int x, int y)
+void Indicator::HighlightSymbol(int x, int y) const
 {
     Font::StoreAndSet(TypeFont::_7);
 
@@ -261,7 +264,7 @@ void Indicator::HighlightSymbol(int x, int y)
 }
 
 
-int Indicator::IndexHighlightReal()
+int Indicator::IndexHighlightReal() const
 {
     return (indexHighlight < PositionComma()) ? indexHighlight : (indexHighlight + 1);
 }
@@ -380,7 +383,7 @@ void Indicator::HighlightToRight()
 }
 
 
-int Indicator::NumberHighligthingDigits()
+int Indicator::NumberHighligthingDigits() const
 {
     int result = 0;
 
@@ -396,7 +399,7 @@ int Indicator::NumberHighligthingDigits()
 }
 
 
-bool Indicator::CommaInPosition(int pos)
+bool Indicator::CommaInPosition(int pos) const
 {
     return (digits[pos] == Digit::COMMA);
 }

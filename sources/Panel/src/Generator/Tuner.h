@@ -64,16 +64,16 @@ private:
     DisplayCorrection *display;
 
     // Нарисовать значок подсветки
-    void HighlightSymbol(int x, int y);
+    void HighlightSymbol(int x, int y) const;
 
     // Возвращает действительный индекс подсвеченного разряда (номер разряда в массиве digits)
-    int IndexHighlightReal();
+    int IndexHighlightReal() const;
 
     // Количество символов, которые могут быть подсвечены
-    int NumberHighligthingDigits();
+    int NumberHighligthingDigits() const;
 
     // Возвращает true, если в позиции pos - десятичная точка
-    bool CommaInPosition(int pos);
+    bool CommaInPosition(int pos) const;
 
     // Возвращает позицию разряда с точкой
     int PositionComma() const;
@@ -105,6 +105,7 @@ private:
     // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
     bool ChangeSign(Value *value, int pos);
 
+    // Возвращает цвет, которым нужно отрисовывать символ в позиции pos
     Color CalculateColor(int pos) const;
 
     // Возвращает true, если нужно дополнительное смещение между разрядами

@@ -238,7 +238,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = Value("0.123")) :
+    ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = Value("100", Order::Milli)) :
         ParameterVoltage(ParameterValueType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 
