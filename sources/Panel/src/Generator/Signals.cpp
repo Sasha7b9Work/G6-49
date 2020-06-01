@@ -5,102 +5,102 @@
 #include "Menu/Pages/Pages.h"
 
 
-static ParameterManipulationEnabled   param_SineModulationA_Manipulation        (DISABLED_RU, ENABLED_RU);
-static ParameterManipulationDuration  param_SineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5"));
-static ParameterManipulationPeriod    param_SineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("0.002500"));
-//static ParameterDouble  param_SineModulationA_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
+static ParameterManipulationEnabled   sineModulationA_Manipulation        (DISABLED_RU, ENABLED_RU);
+static ParameterManipulationDuration  sineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5"));
+static ParameterManipulationPeriod    sineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("0.002500"));
+//static ParameterDouble  SineModulationA_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
 
 
 static Parameter *params_SineModulationA[] =
 {
-    &param_SineModulationA_Manipulation,
-    &param_SineModulationA_ManipulationDuration,
-    &param_SineModulationA_ManipulationPeriod,
-//    &param_SineModulationA_Exit,
+    &sineModulationA_Manipulation,
+    &sineModulationA_ManipulationDuration,
+    &sineModulationA_ManipulationPeriod,
+//    &SineModulationA_Exit,
     0
 };
 
-static ParameterFrequency    param_SineA_Frequency;
-static ParameterAmplitude    param_SineA_Amplitude;
-static ParameterOffset       param_SineA_Offset;
-static ParameterManipulation param_SineA_Manipulation(params_SineModulationA);
+static ParameterFrequency    sineA_Frequency;
+static ParameterAmplitude    sineA_Amplitude;
+static ParameterOffset       sineA_Offset;
+static ParameterManipulation sineA_Manipulation(params_SineModulationA);
 
 static Parameter *params_SineA[] =
 {
-    &param_SineA_Frequency,
-    &param_SineA_Amplitude,
-    &param_SineA_Offset,
-    &param_SineA_Manipulation,
+    &sineA_Frequency,
+    &sineA_Amplitude,
+    &sineA_Offset,
+    &sineA_Manipulation,
     0
 };
 
 static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 
-static ParameterFrequency  param_RampPlusA_Frequency;
-static ParameterAmplitude  param_RampPlusA_Amplitude;
-static ParameterOffset     param_RampPlusA_Offset;
-static ParameterModeStart  param_RampPlusA_ModeStart;
+static ParameterFrequency  rampPlusA_Frequency;
+static ParameterAmplitude  rampPlusA_Amplitude;
+static ParameterOffset     rampPlusA_Offset;
+static ParameterModeStart  rampPlusA_ModeStart;
 
 static Parameter *params_RampPlusA[] =
 {
-    &param_RampPlusA_Frequency,
-    &param_RampPlusA_Amplitude,
-    &param_RampPlusA_Offset,
-    &param_RampPlusA_ModeStart,
+    &rampPlusA_Frequency,
+    &rampPlusA_Amplitude,
+    &rampPlusA_Offset,
+    &rampPlusA_ModeStart,
     0
 };
 
 static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A]);
 
 
-static ParameterFrequency  param_RampMinusA_Frequency;
-static ParameterAmplitude  param_RampMinusA_Amplitude;
-static ParameterOffset     param_RampMinusA_Offset;
-static ParameterModeStart  param_RampMinusA_ModeStart;
+static ParameterFrequency  rampMinusA_Frequency;
+static ParameterAmplitude  rampMinusA_Amplitude;
+static ParameterOffset     rampMinusA_Offset;
+static ParameterModeStart  rampMinusA_ModeStart;
 
 static Parameter *params_RampMinusA[] =
 {
-    &param_RampMinusA_Frequency,
-    &param_RampMinusA_Amplitude,
-    &param_RampMinusA_Offset,
-    &param_RampMinusA_ModeStart,
+    &rampMinusA_Frequency,
+    &rampMinusA_Amplitude,
+    &rampMinusA_Offset,
+    &rampMinusA_ModeStart,
     0
 };
 
 static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::A]);
 
 
-static ParameterFrequency param_TriangleA_Frequency;
-static ParameterAmplitude param_TriangleA_Amplitude;
-static ParameterOffset    param_TriangleA_Offset;
-static ParameterModeStart param_TriangleA_ModeStart;
+static ParameterFrequency triangleA_Frequency;
+static ParameterAmplitude triangleA_Amplitude;
+static ParameterOffset    triangleA_Offset;
+static ParameterModeStart triangleA_ModeStart;
 
 static Parameter *params_TriangleA[] =
 {
-    &param_TriangleA_Frequency,
-    &param_TriangleA_Amplitude,
-    &param_TriangleA_Offset,
-    &param_TriangleA_ModeStart,
+    &triangleA_Frequency,
+    &triangleA_Amplitude,
+    &triangleA_Offset,
+    &triangleA_ModeStart,
     0
 };
 
 static Form formTriangleA(TypeForm::Triangle, params_TriangleA, &waves[Chan::A]);
 
 
-static ParameterFrequency  param_FreeA_Frequency;
-static ParameterAmplitude  param_FreeA_Amplitude;
-static ParameterOffset     param_FreeA_Offset;
-static ParameterModeStart  param_FreeA_ModeStart;
-//static ParameterPage   param_FreeA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
+static ParameterFrequency  freeA_Frequency;
+static ParameterAmplitude  freeA_Amplitude;
+static ParameterOffset     freeA_Offset;
+static ParameterModeStart  freeA_ModeStart;
+//static ParameterPage   FreeA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
 static Parameter *params_FreeA[] =
 {
-    &param_FreeA_Frequency,
-    &param_FreeA_Amplitude,
-    &param_FreeA_Offset,
-    &param_FreeA_ModeStart,
-//    &param_FreeA_Choice,
+    &freeA_Frequency,
+    &freeA_Amplitude,
+    &freeA_Offset,
+    &freeA_ModeStart,
+//    &FreeA_Choice,
     0
 };
 
@@ -108,36 +108,36 @@ static Form formFreeA(TypeForm::Free, params_FreeA, &waves[Chan::A]);
 
 
 
-static ParameterFrequency param_MeanderA_Frequency;
-static ParameterAmplitude param_MeanderA_Amplitude;
-static ParameterOffset    param_MeanderA_Offset;
+static ParameterFrequency meanderA_Frequency;
+static ParameterAmplitude meanderA_Amplitude;
+static ParameterOffset    meanderA_Offset;
 
 static Parameter *params_MeanderA[] =
 {
-    &param_MeanderA_Frequency,
-    &param_MeanderA_Amplitude,
-    &param_MeanderA_Offset,
+    &meanderA_Frequency,
+    &meanderA_Amplitude,
+    &meanderA_Offset,
     0
 };
 
 static Form formMeanderA(TypeForm::Meander, params_MeanderA, &waves[Chan::A]);
 
 
-static ParameterPeriod    param_ImpulseA_Period   (Value("33", Order::Nano), Value("10", Order::Mega), Value("0.001"));
-static ParameterDuration  param_ImpulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
-static ParameterAmplitude param_ImpulseA_Amplitude;
-static ParameterOffset    param_ImpulseA_Offset;
-static ParameterPolarity  param_ImpulseA_Polarity;
-static ParameterModeStart param_ImpulseA_ModeStart;
+static ParameterPeriod    impulseA_Period   (Value("33", Order::Nano), Value("10", Order::Mega), Value("0.001"));
+static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
+static ParameterAmplitude impulseA_Amplitude;
+static ParameterOffset    impulseA_Offset;
+static ParameterPolarity  impulseA_Polarity;
+static ParameterModeStart impulseA_ModeStart;
 
 static Parameter *params_ImpulseA[] =
 {
-    &param_ImpulseA_Period,
-    &param_ImpulseA_Duration,
-    &param_ImpulseA_Amplitude,
-    &param_ImpulseA_Offset,
-    &param_ImpulseA_Polarity,
-    &param_ImpulseA_ModeStart,
+    &impulseA_Period,
+    &impulseA_Duration,
+    &impulseA_Amplitude,
+    &impulseA_Offset,
+    &impulseA_Polarity,
+    &impulseA_ModeStart,
     0
 };
 
@@ -145,25 +145,25 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
 
-static ParameterPeriod       param_PacketA_Period        (Value("0"), Value("100", Order::Mega), Value("200", Order::Micro));
-static ParameterDuration     param_PacketA_Duration      (Value("0"), Value("100", Order::Mega), Value("100", Order::Micro));
-static ParameterDouble        param_PacketA_PacketNumber (ParameterDoubleType::PacketNumber, "Кол-во имп", "Count imp", Value("0"), Value("100", Order::Mega), Value("3"));
-static ParameterPacketPeriod param_PacketA_PacketPeriod  (Value("0"), Value("100", Order::Mega), Value("0.1"));
-static ParameterAmplitude    param_PacketA_Amplitude;
-static ParameterOffset       param_PacketA_Offset;
-static ParameterPolarity     param_PacketA_Polarity;
-static ParameterModeStart    param_PacketA_ModeStart;
+static ParameterPeriod       packetA_Period        (Value("0"), Value("100", Order::Mega), Value("200", Order::Micro));
+static ParameterDuration     packetA_Duration      (Value("0"), Value("100", Order::Mega), Value("100", Order::Micro));
+static ParameterDouble       packetA_PacketNumber (ParameterDoubleType::PacketNumber, "Кол-во имп", "Count imp", Value("0"), Value("100", Order::Mega), Value("3"));
+static ParameterPacketPeriod packetA_PacketPeriod  (Value("0"), Value("100", Order::Mega), Value("0.1"));
+static ParameterAmplitude    packetA_Amplitude;
+static ParameterOffset       packetA_Offset;
+static ParameterPolarity     packetA_Polarity;
+static ParameterModeStart    packetA_ModeStart;
 
 static Parameter *params_PacketA[] =
 {
-    &param_PacketA_Period,
-    &param_PacketA_Duration,
-    &param_PacketA_PacketNumber,
-    &param_PacketA_PacketPeriod,
-    &param_PacketA_Amplitude,
-    &param_PacketA_Offset,
-    &param_PacketA_Polarity,
-    &param_PacketA_ModeStart,
+    &packetA_Period,
+    &packetA_Duration,
+    &packetA_PacketNumber,
+    &packetA_PacketPeriod,
+    &packetA_Amplitude,
+    &packetA_Offset,
+    &packetA_Polarity,
+    &packetA_ModeStart,
     0
 };
 
@@ -188,117 +188,117 @@ static Form *formsA[] =
 
 
 
-static ParameterManipulationEnabled  param_SineModulationB_Manipulation         (DISABLED_RU, ENABLED_RU);
-static ParameterManipulationDuration param_SineModulationB_ManipulationDuration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
-static ParameterManipulationPeriod   param_SineModulationB_ManipulationPeriod   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
-//static ParameterDouble  param_SineModulationB_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
+static ParameterManipulationEnabled  sineModulationB_Manipulation         (DISABLED_RU, ENABLED_RU);
+static ParameterManipulationDuration sineModulationB_ManipulationDuration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
+static ParameterManipulationPeriod   sineModulationB_ManipulationPeriod   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
+//static ParameterDouble  SineModulationB_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
 
 static Parameter *params_SineModulationB[] =
 {
-    &param_SineModulationB_Manipulation,
-    &param_SineModulationB_ManipulationDuration,
-    &param_SineModulationB_ManipulationPeriod,
+    &sineModulationB_Manipulation,
+    &sineModulationB_ManipulationDuration,
+    &sineModulationB_ManipulationPeriod,
     0
 };
 
-static ParameterFrequency    param_SineB_Frequency;
-static ParameterAmplitude    param_SineB_Amplitude;
-static ParameterOffset       param_SineB_Offset;
-static ParameterPhase        param_SineB_Phase;
-static ParameterManipulation param_SineB_Manipulation(params_SineModulationB);
+static ParameterFrequency    sineB_Frequency;
+static ParameterAmplitude    sineB_Amplitude;
+static ParameterOffset       sineB_Offset;
+static ParameterPhase        sineB_Phase;
+static ParameterManipulation sineB_Manipulation(params_SineModulationB);
 
 static Parameter *params_SineB[] =
 {
-    &param_SineB_Frequency,
-    &param_SineB_Amplitude,
-    &param_SineB_Offset,
-    &param_SineB_Phase,
-    &param_SineB_Manipulation,
+    &sineB_Frequency,
+    &sineB_Amplitude,
+    &sineB_Offset,
+    &sineB_Phase,
+    &sineB_Manipulation,
     0
 };
 
 static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 
 
-static ParameterFrequency  param_RampPlusB_Frequency;
-static ParameterAmplitude  param_RampPlusB_Amplitude;
-static ParameterOffset     param_RampPlusB_Offset;
-static ParameterModeStart  param_RampPlusB_ModeStart;
+static ParameterFrequency  rampPlusB_Frequency;
+static ParameterAmplitude  rampPlusB_Amplitude;
+static ParameterOffset     rampPlusB_Offset;
+static ParameterModeStart  rampPlusB_ModeStart;
 
 static Parameter *params_RampPlusB[] =
 {
-    &param_RampPlusB_Frequency,
-    &param_RampPlusB_Amplitude,
-    &param_RampPlusB_Offset,
-    &param_RampPlusB_ModeStart,
+    &rampPlusB_Frequency,
+    &rampPlusB_Amplitude,
+    &rampPlusB_Offset,
+    &rampPlusB_ModeStart,
     0
 };
 
 static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B]);
 
 
-static ParameterFrequency  param_RampMinusB_Frequency;
-static ParameterAmplitude  param_RampMinusB_Amplitude;
-static ParameterOffset     param_RampMinusB_Offset;
-static ParameterModeStart  param_RampMinusB_ModeStart;
+static ParameterFrequency  rampMinusB_Frequency;
+static ParameterAmplitude  rampMinusB_Amplitude;
+static ParameterOffset     rampMinusB_Offset;
+static ParameterModeStart  rampMinusB_ModeStart;
 
 static Parameter *params_RampMinusB[] =
 {
-    &param_RampMinusB_Frequency,
-    &param_RampMinusB_Amplitude,
-    &param_RampMinusB_Offset,
-    &param_RampMinusB_ModeStart,
+    &rampMinusB_Frequency,
+    &rampMinusB_Amplitude,
+    &rampMinusB_Offset,
+    &rampMinusB_ModeStart,
     0
 };
 
 static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::B]);
 
 
-static ParameterFrequency  param_TriangleB_Frequency;
-static ParameterAmplitude  param_TriangleB_Amplitude;
-static ParameterOffset     param_TriangleB_Offset;
-static ParameterModeStart  param_TriangleB_ModeStart;
+static ParameterFrequency  triangleB_Frequency;
+static ParameterAmplitude  triangleB_Amplitude;
+static ParameterOffset     triangleB_Offset;
+static ParameterModeStart  triangleB_ModeStart;
 
 static Parameter *params_TriangleB[] =
 {
-    &param_TriangleB_Frequency,
-    &param_TriangleB_Amplitude,
-    &param_TriangleB_Offset,
-    &param_TriangleB_ModeStart,
+    &triangleB_Frequency,
+    &triangleB_Amplitude,
+    &triangleB_Offset,
+    &triangleB_ModeStart,
     0
 };
 
 static Form formTriangleB(TypeForm::Triangle, params_TriangleB, &waves[Chan::B]);
 
 
-static ParameterFrequency  param_FreeB_Frequency;
-static ParameterAmplitude  param_FreeB_Amplitude;
-static ParameterOffset     param_FreeB_Offset;
-static ParameterModeStart  param_FreeB_ModeStart;
-//static ParameterPage   param_FreeB_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
+static ParameterFrequency  freeB_Frequency;
+static ParameterAmplitude  freeB_Amplitude;
+static ParameterOffset     freeB_Offset;
+static ParameterModeStart  freeB_ModeStart;
+//static ParameterPage   FreeB_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
 static Parameter *params_FreeB[] =
 {
-    &param_FreeB_Frequency,
-    &param_FreeB_Amplitude,
-    &param_FreeB_Offset,
-    &param_FreeB_ModeStart,
-//    &param_FreeB_Choice,
+    &freeB_Frequency,
+    &freeB_Amplitude,
+    &freeB_Offset,
+    &freeB_ModeStart,
+//    &FreeB_Choice,
     0
 };
 
 static Form formFreeB(TypeForm::Free, params_FreeB, &waves[Chan::B]);
 
 
-static ParameterFrequency param_MeanderB_Frequency;
-static ParameterAmplitude param_MeanderB_Amplitude;
-static ParameterOffset    param_MeanderB_Offset;
+static ParameterFrequency meanderB_Frequency;
+static ParameterAmplitude meanderB_Amplitude;
+static ParameterOffset    meanderB_Offset;
 
 static Parameter *params_MeanderB[] =
 {
-    &param_MeanderB_Frequency,
-    &param_MeanderB_Amplitude,
-    &param_MeanderB_Offset,
+    &meanderB_Frequency,
+    &meanderB_Amplitude,
+    &meanderB_Offset,
     0
 };
 
@@ -306,21 +306,21 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 
-static ParameterPeriod    param_ImpulseB_Period   (Value("33", Order::Nano), Value("10",  Order::Mega), Value("100", Order::Milli));
-static ParameterDuration  param_ImpulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
-static ParameterAmplitude param_ImpulseB_Amplitude;
-static ParameterOffset    param_ImpulseB_Offset;
-static ParameterPolarity  param_ImpulseB_Polarity;
-static ParameterModeStart param_ImpulseB_ModeStart;
+static ParameterPeriod    impulseB_Period   (Value("33", Order::Nano), Value("10",  Order::Mega), Value("100", Order::Milli));
+static ParameterDuration  impulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
+static ParameterAmplitude impulseB_Amplitude;
+static ParameterOffset    impulseB_Offset;
+static ParameterPolarity  impulseB_Polarity;
+static ParameterModeStart impulseB_ModeStart;
 
 static Parameter *params_ImpulseB[] =
 {
-    &param_ImpulseB_Period,
-    &param_ImpulseB_Duration,
-    &param_ImpulseB_Amplitude,
-    &param_ImpulseB_Offset,
-    &param_ImpulseB_Polarity,
-    &param_ImpulseB_ModeStart,
+    &impulseB_Period,
+    &impulseB_Duration,
+    &impulseB_Amplitude,
+    &impulseB_Offset,
+    &impulseB_Polarity,
+    &impulseB_ModeStart,
     0
 };
 
