@@ -12,7 +12,7 @@
 
 
 // Здесь хранится количество значащих цифр перед (индекс 0) и после (индекс 1) запятой. Знак не учитывается
-static const int numberDigits[ParameterValueType::Count][2] =
+static const int numberDigits[ParameterDoubleType::Count][2] =
 {
     {9,  3},   // Frequency,
     {10, 9},   // Period,
@@ -89,13 +89,13 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 
 static pString ZeroValue(const ParameterDouble *param)
 {
-    ParameterValueType::E type = param->GetType();
+    ParameterDoubleType::E type = param->GetType();
 
-    if (type == ParameterValueType::Amplitude)
+    if (type == ParameterDoubleType::Amplitude)
     {
         return "00000.0";
     }
-    else if (type == ParameterValueType::Offset)
+    else if (type == ParameterDoubleType::Offset)
     {
         return "+00000.0";
     }
@@ -316,11 +316,11 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 
 int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
 {
-    ParameterValueType::E type = param->GetType();
+    ParameterDoubleType::E type = param->GetType();
 
     int result = numberDigits[type][0];
 
-    if (type == ParameterValueType::Frequency)
+    if (type == ParameterDoubleType::Frequency)
     {
         result -= Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
     }
@@ -331,11 +331,11 @@ int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
 
 int MathParameterValue::GetNumberDigitsAfterComma(Order::E order)
 {
-    ParameterValueType::E type = param->GetType();
+    ParameterDoubleType::E type = param->GetType();
 
     int result = numberDigits[type][1];
 
-    if (type == ParameterValueType::Frequency)
+    if (type == ParameterDoubleType::Frequency)
     {
         result += Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
     }

@@ -94,7 +94,7 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoice::E p)
 }
 
 
-ParameterDouble *ParameterComposite::FindParameter(ParameterValueType::E p)
+ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -117,7 +117,7 @@ ParameterDouble *ParameterComposite::FindParameter(ParameterValueType::E p)
 
 pString ParameterDouble::GetMainUnits() const
 {
-    static const pString units[ParameterValueType::Count][2] =
+    static const pString units[ParameterDoubleType::Count][2] =
     {
         {"Ãö", "Hz"},   // Frequency
         {"ñ",  "s"},    // Period
@@ -285,7 +285,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(ParameterValueType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
+ParameterDouble::ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
     Parameter(Parameter::Double, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
 }

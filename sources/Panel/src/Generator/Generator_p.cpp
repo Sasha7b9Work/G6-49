@@ -175,7 +175,7 @@ void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
 
 void PGenerator::SetParameter(ParameterDouble *param)
 {
-    static const Command::E commands[ParameterValueType::Count] =
+    static const Command::E commands[ParameterDoubleType::Count] =
     {
         Command::SetFrequency,
         Command::SetPeriod,                     // 

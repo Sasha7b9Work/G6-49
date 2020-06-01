@@ -237,7 +237,7 @@ static void HintPolarity(String *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncNumberImpulse(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::PacketNumber);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::PacketNumber);
 }
 
 
@@ -250,7 +250,7 @@ static void HintNumberImpulse(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncFrequency(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::Frequency);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::Frequency);
 }
 
 
@@ -263,7 +263,7 @@ static void HintFrequency(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncAmplitude(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::Amplitude);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::Amplitude);
 }
 
 
@@ -276,7 +276,7 @@ static void HintAmplitude(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncPeriod(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::Period);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::Period);
 }
 
 
@@ -289,7 +289,7 @@ static void HintPeriod(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncPhase(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::Phase);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::Phase);
 }
 
 
@@ -302,7 +302,7 @@ static void HintPhase(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncDuration(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::Duration);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::Duration);
 }
 
 
@@ -315,7 +315,7 @@ static void HintDuration(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncPeriodPacket(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::PacketPeriod);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::PacketPeriod);
 }
 
 
@@ -328,7 +328,7 @@ static void HintPeriodPacket(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR FuncOffset(pCHAR buffer)
 {
-    return SCPI::ProcessParameterValue(buffer, ParameterValueType::Offset);
+    return SCPI::ProcessParameterValue(buffer, ParameterDoubleType::Offset);
 }
 
 

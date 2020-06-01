@@ -29,7 +29,7 @@ Tuner *Tuner::current = nullptr;
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
-    if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterValueType::Offset))    { return; }
+    if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterDoubleType::Offset))    { return; }
 
     if (stack.Size() > 14)                                          { return; }
 
