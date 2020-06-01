@@ -75,19 +75,14 @@ void ParameterComposite::SetForm(Form *f)
 
 int ParameterComposite::NumParameters() const
 {
-    return 3;
+    int counter = 0;
 
-    Parameter *parameter = params[0];
-
-    int result = 0;
-
-    while (parameter)
+    while (params[counter] != nullptr)
     {
-        result++;
-        parameter++;
+        counter++;
     }
 
-    return result;
+    return counter;
 }
 
 
