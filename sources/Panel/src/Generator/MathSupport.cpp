@@ -93,11 +93,11 @@ static pString ZeroValue(const ParameterDouble *param)
 
     if (type == ParameterDoubleType::Amplitude)
     {
-        return "00000.0";
+        return "00.0000";
     }
     else if (type == ParameterDoubleType::Offset)
     {
-        return "+00000.0";
+        return "+00.0000";
     }
 
     return "";
