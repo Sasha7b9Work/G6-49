@@ -293,16 +293,7 @@ ParameterDouble::ParameterDouble(ParameterValueType::E t, const char *nameRU, co
 
 static Order::E CalculateOrder(const ParameterDouble *param)
 {
-    Value value = param->GetValue();
-
-    Order::E order = value.GetOrder();
-
-    if (param->IsVoltage() && (value.Abs() == 0))
-    {
-        order = Order::Milli;
-    }
-
-    return order;
+    return param->IsVoltage() ? Order::One : param->GetValue().GetOrder();
 }
 
 

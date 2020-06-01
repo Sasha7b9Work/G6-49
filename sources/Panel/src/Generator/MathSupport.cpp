@@ -83,17 +83,7 @@ static void RepayEmptySymbols(char *buffer)
 
 static Order::E CalculateOrder(const ParameterDouble *param)
 {
-    if (param->IsVoltage())
-    {
-        Value value = param->GetValue();
-
-        if (value < Value("1.0") && value > Value("-1.0"))
-        {
-            return Order::Milli;
-        }
-    }
-
-    return Order::Count;
+    return param->IsVoltage() ? Order::One : Order::Count;
 }
 
 
@@ -167,22 +157,15 @@ pString MathValue::GetIndicatedValue(const ParameterDouble *param)
 }
 
 
-static int GetPositionFirstDigitVoltate(const ParameterDouble *param, Order::E)
-{
-    Value value = param->GetValue();
-
-    return (value < Value("1.0") && value > Value("-1.0")) ? 4 : 1;
-}
-
-
 int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
+    Value value = param->GetValue();
+
     if (param->IsVoltage())
     {
-        return GetPositionFirstDigitVoltate(param, order);
+        return (value < Value("1.0") && value > Value("-1.0")) ? 4 : 1;
     }
 
-    Value value = param->GetValue();
     value.SetSign(1);
 
     CorrectValueOnOrder(&value, order);
