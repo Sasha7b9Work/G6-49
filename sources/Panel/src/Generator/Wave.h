@@ -37,7 +37,7 @@ public:
         currentParam = 0;
         old.params = 0;
         old.numParams = 0;
-        old.currentParams = 0;
+        old.currentParam = 0;
     };
 
     // Возвращает человеческое название формы сигнала
@@ -134,7 +134,7 @@ private:
         // Здесь сохраняется указатель на основные параметры в случае раскрытия сложного параметра
         Parameter **params;
         int numParams;
-        int currentParams;
+        int currentParam;
     } old;
 };
 
