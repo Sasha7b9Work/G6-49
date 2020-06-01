@@ -135,6 +135,7 @@ private:
         Parameter **params;
         int numParams;
         int currentParam;
+        void Init(Parameter **parameters, int num, int current) { params = parameters; numParams = num; currentParam = current; }
     } old;
 };
 

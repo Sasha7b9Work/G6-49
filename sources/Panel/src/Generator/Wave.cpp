@@ -105,9 +105,7 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
 {
     numParams = 0;
 	
-    old.params = nullptr;
-    old.numParams = 0;
-    old.currentParam = 0;
+    old.Init(nullptr, 0, 0);
 
     if(params)
     {
@@ -338,9 +336,7 @@ void Form::OpenCompositeParameter()
         return;
     }
 
-    old.params = params;
-    old.numParams = numParams;
-    old.currentParam = currentParam;
+    old.Init(params, numParams, currentParam);
 
     ParameterComposite *parent = static_cast<ParameterComposite *>(CurrentParameter());
 
