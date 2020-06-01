@@ -167,3 +167,10 @@ void PageTuneParameter::SetModeEntering()
     pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore));
     pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess));
 }
+
+
+void PageTuneParameter::ResetModeEntering()
+{
+    pTuneParameter.items[0] = Item::EmptyDark();
+    pTuneParameter.items[1] = Item::EmptyDark();
+}

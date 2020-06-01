@@ -576,9 +576,6 @@ bool DisplayEntering::ValueInBoundaries()
 {
     Value value = ToValue();
 
-    double valueD = value.ToDouble();
-    valueD = valueD;
-
     return (value >= Tuner::Current()->GetParameter()->GetMin()) && (value <= Tuner::Current()->GetParameter()->GetMax());
 }
 
@@ -772,13 +769,31 @@ bool Tuner::OnControlKey(const Control control) //-V801
 
 void Tuner::OnButtonCancel()
 {
-    PageTuneParameter::CallbackOnButtonCancel();
+    if (InModeCorrection())
+    {
+        PageTuneParameter::CallbackOnButtonCancel();
+    }
+    else
+    {
+        mode = ModeTuning::Correction;
+        PageTuneParameter::ResetModeEntering();
+    }
 }
 
 
 void Tuner::OnButtonApply()
 {
-    PageTuneParameter::CallbackOnButtonApply();
+    if (InModeCorrection())
+    {
+        PageTuneParameter::CallbackOnButtonApply();
+    }
+    else
+    {
+        display.Init(DisplayEntering::ToValue());
+        display.indicator.InitHighlight();
+        mode = ModeTuning::Correction;
+        PageTuneParameter::ResetModeEntering();
+    }
 }
 
 

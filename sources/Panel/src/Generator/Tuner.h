@@ -136,6 +136,9 @@ public:
 
     static void Init();
 
+    // Возвращает значение, которое хранится сейчас в DisplayEntering ( c учётом порядка )
+    static Value ToValue();
+
     // Класс для хранения вводимых данных в режиме непосредственного ввода
     class EnterBuffer
     {
@@ -182,9 +185,6 @@ private:
 
     // Попытка добавить в буфер новый символ, соотвествующий нажатой кнопке
     static void TryToAddSymbol(Key::E key);
-
-    // Возвращает значение, которое хранится сейчас в DisplayEntering ( c учётом порядка )
-    static Value ToValue();
 
     // Хранимое значение находится в границах, ограниченных минимальным и максимальным значениями ParameterDouble
     static bool ValueInBoundaries();
