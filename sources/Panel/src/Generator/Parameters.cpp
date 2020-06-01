@@ -382,7 +382,6 @@ void Parameter::OnPressButtonTune()
     case Choice:  reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
 
     case Exit:
-    case Page:
         break;
     }
 }

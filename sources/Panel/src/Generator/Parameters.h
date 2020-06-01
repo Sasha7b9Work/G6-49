@@ -17,11 +17,10 @@ public:
 
     enum E
     {
-        Value,
-        Exit,
-        Choice,
-        Complex,
-        Page
+        Value,      // ¬еличина, выраженна€ числовым значением
+        Exit,       // «акрыть составной параметр (манипул€ци€)
+        Choice,     // ¬ыбор из нескольких значений
+        Complex     // —оставной параметр, состо€щий из нескольких простых (манипул€ци€)
     };
 
     Parameter(E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
