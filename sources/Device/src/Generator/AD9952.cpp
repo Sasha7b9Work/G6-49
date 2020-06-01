@@ -45,7 +45,7 @@ void AD9952::SetFrequency(Chan::E ch)
 }
 
 
-void AD9952::SetPhase(Chan::E ch, DoubleValue ph)
+void AD9952::SetPhase(Chan::E ch, Value ph)
 {
     phase[ch] = ph.ToDouble();
 

@@ -91,9 +91,9 @@ String DisplayEntering::EnterBuffer::GetString() const
 }
 
 
-DoubleValue DisplayEntering::EnterBuffer::ToDoubleValue() const
+Value DisplayEntering::EnterBuffer::ToDoubleValue() const
 {
-    return DoubleValue("10.0");
+    return Value("10.0");
 }
 
 
@@ -296,11 +296,11 @@ void Indicator::IncreaseInPosition(int pos)
 {
     ParameterDouble *param = Tuner::Current()->GetParameter();
 
-    DoubleValue value = param->GetValue();
+    Value value = param->GetValue();
 
     if (!ChangeSign(&value, pos))
     {
-        DoubleValue step = StepPosition(pos);
+        Value step = StepPosition(pos);
 
         value.Add(step);
     }
@@ -321,11 +321,11 @@ void Indicator::DecreaseInPosition(int pos)
 {
     ParameterDouble *param = Tuner::Current()->GetParameter();
 
-    DoubleValue value = param->GetValue();
+    Value value = param->GetValue();
 
     if (!ChangeSign(&value, pos))
     {
-        DoubleValue step = StepPosition(pos);
+        Value step = StepPosition(pos);
 
         value.Sub(step);
     }
@@ -337,7 +337,7 @@ void Indicator::DecreaseInPosition(int pos)
 }
 
 
-bool Indicator::ChangeSign(DoubleValue *value, int pos)
+bool Indicator::ChangeSign(Value *value, int pos)
 {
     if (IsSigned() && (pos == 0))
     {
@@ -454,7 +454,7 @@ char *Indicator::GetStringDigits() const
 }
 
 
-DoubleValue Indicator::StepPosition(int pos)
+Value Indicator::StepPosition(int pos)
 {
     int posAboutComma = pos - PositionComma();          // ѕозици€ разр€да относительно точки
 
@@ -463,7 +463,7 @@ DoubleValue Indicator::StepPosition(int pos)
         posAboutComma++;
     }
 
-    DoubleValue step("1.0");
+    Value step("1.0");
 
     Order::E order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
 
@@ -576,7 +576,7 @@ void DisplayEntering::TryToAddSymbol(Key::E key)
 {
     buffer.Push(key);
 
-    DoubleValue value = buffer.ToDoubleValue();
+    Value value = buffer.ToDoubleValue();
 
     if (value < Tuner::Current()->GetParameter()->GetMin() || value > Tuner::Current()->GetParameter()->GetMax())
     {
@@ -670,13 +670,13 @@ void DisplayCorrection::FillDigitsIntegerPart()
 {
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     ParameterDouble *param = tuner->GetParameter();
-    DoubleValue value = param->GetValue();
+    Value value = param->GetValue();
 
     int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
 
     if (param->IsSigned())
     {
-        indicator.digits[0].Set((value < DoubleValue("0.0")) ? '-' : '+');
+        indicator.digits[0].Set((value < Value("0.0")) ? '-' : '+');
     }
 
     for (int i = 0; i < before; i++)
@@ -696,7 +696,7 @@ void DisplayCorrection::FillDigitsFractPart()
 {
     int before = MathParameterValue::GetNumberDigitsBeforeComma();
     int after = MathParameterValue::GetNumberDigitsAfterComma();
-    DoubleValue value = tuner->GetParameter()->GetValue();
+    Value value = tuner->GetParameter()->GetValue();
 
     int pos = before + 1;                                   // “еперь в эту позицию будем записывать рразр€ды после зап€той
 
@@ -708,7 +708,7 @@ void DisplayCorrection::FillDigitsFractPart()
 }
 
 
-void DisplayCorrection::Init(DoubleValue value)
+void DisplayCorrection::Init(Value value)
 {
     tuner->GetParameter()->SetAndLoadValue(value);
     Init();

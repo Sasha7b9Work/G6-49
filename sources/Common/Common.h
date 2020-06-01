@@ -39,13 +39,13 @@ struct Order
 };
 
 
-struct DoubleValue
+struct Value
 {
-    explicit DoubleValue(double v);
+    explicit Value(double v);
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
-    explicit DoubleValue(const char *const buffer, int order = 0);
+    explicit Value(const char *const buffer, int order = 0);
 
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
     void FromDouble(double v);
@@ -57,8 +57,8 @@ struct DoubleValue
 
     void Div(uint div);
     void Mul(uint mul);
-    void Add(DoubleValue value);
-    void Sub(DoubleValue value);
+    void Add(Value value);
+    void Sub(Value value);
     // Умножить на 10 в степени pow
     void MulPow10(int pow);
 
@@ -76,22 +76,22 @@ struct DoubleValue
     uint64 Abs() const;
 
     // Возвращает:
-    // Order::Mega  - DoubleValue::Integer() >= 1e6
-    // Order::Kilo  - DoubleValue::Integer() >= 1e3
-    // Order::One   - DoubleValue::Integer() >= 0
-    // Order::Milli - DoubleValue::Integer() >= 1e-3
-    // Order::Micro - DoubleValue::Integer() >= 1e-6
+    // Order::Mega  - Value::Integer() >= 1e6
+    // Order::Kilo  - Value::Integer() >= 1e3
+    // Order::One   - Value::Integer() >= 0
+    // Order::Milli - Value::Integer() >= 1e-3
+    // Order::Micro - Value::Integer() >= 1e-6
     Order::E GetOrder() const;
 
     // Возращает строку значения, приведённую к порядку order
     pString ToString(Order::E order, bool sign) const;
 
-    bool operator<(const DoubleValue &);
-    bool operator>(const DoubleValue &);
-    bool operator<=(const DoubleValue &);
-    bool operator>=(const DoubleValue &);
-    bool operator==(const DoubleValue &);
-    bool operator!=(const DoubleValue &);
+    bool operator<(const Value &);
+    bool operator>(const Value &);
+    bool operator<=(const Value &);
+    bool operator>=(const Value &);
+    bool operator==(const Value &);
+    bool operator!=(const Value &);
 
 private:
 

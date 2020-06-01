@@ -17,8 +17,8 @@
 
 FPGA::ModeWork::E       FPGA::modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
 FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
-DoubleValue              FPGA::PacketImpulse::periodImpulse("0");
-DoubleValue              FPGA::PacketImpulse::durationImpulse("0");
+Value              FPGA::PacketImpulse::periodImpulse("0");
+Value              FPGA::PacketImpulse::durationImpulse("0");
 StartMode               FPGA::startMode[Chan::Count] = { StartMode::Auto, StartMode::Auto };
 uint64                  FPGA::registers[RG::Count] = { 0 };
 
@@ -194,7 +194,7 @@ void FPGA::SetFrequency(Chan::E ch)
 }
 
 
-void FPGA::SetDurationImpulse(Chan::E ch, DoubleValue duration)
+void FPGA::SetDurationImpulse(Chan::E ch, Value duration)
 {
     PacketImpulse::durationImpulse = duration;
 
@@ -210,7 +210,7 @@ void FPGA::SetDurationImpulse(Chan::E ch, DoubleValue duration)
 }
 
 
-void FPGA::PacketImpulse::SetPeriodPacket(DoubleValue period)
+void FPGA::PacketImpulse::SetPeriodPacket(Value period)
 {
     uint64 value = period.ToUINT64() / 10 - 2;
 
@@ -226,7 +226,7 @@ void FPGA::PacketImpulse::SetNumberImpules(uint value)
 }
 
 
-void FPGA::SetPeriodImpulse(Chan::E ch, DoubleValue period)
+void FPGA::SetPeriodImpulse(Chan::E ch, Value period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости

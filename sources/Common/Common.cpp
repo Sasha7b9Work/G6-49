@@ -17,19 +17,19 @@ static uint AssembleInteger(const char *const buffer, int start, int end);
 static uint AssembleTriple(const char *const buffer, int start, int *end);
 
 
-DoubleValue::DoubleValue(const char *const buffer, int order) //-V730
+Value::Value(const char *const buffer, int order) //-V730
 {
     FromString(buffer, order);
 }
 
 
-DoubleValue::DoubleValue(double v)
+Value::Value(double v)
 {
     FromDouble(v);
 }
 
 
-void DoubleValue::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
+void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
 {
     value = static_cast<uint>(units);
     value *= 1000 * 1000 * 1000;
@@ -43,7 +43,7 @@ void DoubleValue::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, in
 }
 
 
-void DoubleValue::FromString(const char * const buffer, int order)
+void Value::FromString(const char * const buffer, int order)
 {
     int pos = 0;                                    // “екуща€ обрабатываема€ позици€ в buffer
     int sign = 1;                                   // ќтрицательное значение означает отрицательный знак
@@ -176,7 +176,7 @@ static uint AssembleTriple(const char *const buffer, int start, int *end)
 }
 
 
-void DoubleValue::FromDouble(double v)
+void Value::FromDouble(double v)
 {
     int sign = (v < 0.0) ? -1 : 1;
 
@@ -189,26 +189,26 @@ void DoubleValue::FromDouble(double v)
 }
 
 
-double DoubleValue::ToDouble() const
+double Value::ToDouble() const
 {
     return static_cast<double>(Abs()) / 1E9 * static_cast<double>(Sign());
 }
 
 
-int DoubleValue::Sign() const
+int Value::Sign() const
 {
     //                fedcba9876543210
     return (value & 0x8000000000000000U) ? -1 : 1;
 }
 
 
-uint64 DoubleValue::Abs() const
+uint64 Value::Abs() const
 {   //                fedcba9876543210
     return (value & 0x7fffffffffffffff);
 }
 
 
-void DoubleValue::Div(uint div)
+void Value::Div(uint div)
 {
     int sign = Sign();
 
@@ -220,7 +220,7 @@ void DoubleValue::Div(uint div)
 }
 
 
-void DoubleValue::Mul(uint mul)
+void Value::Mul(uint mul)
 {
     int sign = Sign();
 
@@ -232,7 +232,7 @@ void DoubleValue::Mul(uint mul)
 }
 
 
-void DoubleValue::SetSign(int sign)
+void Value::SetSign(int sign)
 {
     if (sign > 0)
     {
@@ -247,7 +247,7 @@ void DoubleValue::SetSign(int sign)
 }
 
 
-int DoubleValue::Integer() const
+int Value::Integer() const
 {
     uint64 val = Abs();
 
@@ -255,9 +255,9 @@ int DoubleValue::Integer() const
 }
 
 
-int DoubleValue::FractNano() const
+int Value::FractNano() const
 {
-    DoubleValue val = *this;
+    Value val = *this;
     val.SetSign(1);
 
     int whole = val.Integer();
@@ -266,7 +266,7 @@ int DoubleValue::FractNano() const
 }
 
 
-void DoubleValue::Add(DoubleValue add)
+void Value::Add(Value add)
 {
     int sign = Sign();
     int signAdd = add.Sign();
@@ -310,7 +310,7 @@ void DoubleValue::Add(DoubleValue add)
 }
 
 
-void DoubleValue::Sub(DoubleValue val)
+void Value::Sub(Value val)
 {
     val.SetSign(-val.Sign());
 
@@ -318,7 +318,7 @@ void DoubleValue::Sub(DoubleValue val)
 }
 
 
-void DoubleValue::MulPow10(int pow)
+void Value::MulPow10(int pow)
 {
     while (pow > 0)
     {
@@ -334,45 +334,45 @@ void DoubleValue::MulPow10(int pow)
 }
 
 
-bool DoubleValue::operator<(const DoubleValue &rhs)
+bool Value::operator<(const Value &rhs)
 {
     return ToDouble() < rhs.ToDouble();
 }
 
 
-bool DoubleValue::operator<=(const DoubleValue &rhs)
+bool Value::operator<=(const Value &rhs)
 {
     return ToDouble() <= rhs.ToDouble();
 }
 
 
-bool DoubleValue::operator>(const DoubleValue &rhs)
+bool Value::operator>(const Value &rhs)
 {
     return ToDouble() > rhs.ToDouble();
 }
 
 
-bool DoubleValue::operator>=(const DoubleValue &rhs)
+bool Value::operator>=(const Value &rhs)
 {
     return ToDouble() >= rhs.ToDouble();
 }
 
 
-bool DoubleValue::operator==(const DoubleValue &rhs)
+bool Value::operator==(const Value &rhs)
 {
     return (value == rhs.value);
 }
 
 
-bool DoubleValue::operator!=(const DoubleValue &rhs)
+bool Value::operator!=(const Value &rhs)
 {
     return (value != rhs.value);
 }
 
 
-Order::E DoubleValue::GetOrder() const
+Order::E Value::GetOrder() const
 {
-    DoubleValue temp = *this;
+    Value temp = *this;
     temp.SetSign(1);
 
     int integer = temp.Integer();

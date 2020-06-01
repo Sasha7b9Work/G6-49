@@ -16,29 +16,29 @@ public:
 
     static void SetFormWave(Chan::E ch, TypeForm::E form);
 
-    static void SetOffset(Chan::E ch, DoubleValue offset);
+    static void SetOffset(Chan::E ch, Value offset);
 
-    static void SetFrequency(Chan::E ch, DoubleValue frequency);
+    static void SetFrequency(Chan::E ch, Value frequency);
 
-    static void SetAmplitude(Chan::E ch, DoubleValue amplitude);
+    static void SetAmplitude(Chan::E ch, Value amplitude);
 
-    static void SetDuration(Chan::E ch, DoubleValue duration);
+    static void SetDuration(Chan::E ch, Value duration);
 
-    static void SetDutyRatio(Chan::E ch, DoubleValue dutyRatio);
+    static void SetDutyRatio(Chan::E ch, Value dutyRatio);
 
-    static void SetPhase(Chan::E ch, DoubleValue phase);
+    static void SetPhase(Chan::E ch, Value phase);
 
-    static void SetDelay(Chan::E ch, DoubleValue duration);
+    static void SetDelay(Chan::E ch, Value duration);
 
-    static void SetManipulationDuration(Chan::E ch, DoubleValue duration);
+    static void SetManipulationDuration(Chan::E ch, Value duration);
 
-    static void SetManipulationPeriod(Chan::E ch, DoubleValue period);
+    static void SetManipulationPeriod(Chan::E ch, Value period);
 
-    static void SetPacketPeriod(Chan::E ch, DoubleValue duration);
+    static void SetPacketPeriod(Chan::E ch, Value duration);
 
-    static void SetPacketNumber(Chan::E ch, DoubleValue number);
+    static void SetPacketNumber(Chan::E ch, Value number);
 
-    static void SetPeriod(Chan::E ch, DoubleValue period);
+    static void SetPeriod(Chan::E ch, Value period);
 };
 
 
@@ -113,9 +113,9 @@ private:
     // true, если на канале установлена форма сигнала "синусоида"
     static bool waveIsSine[Chan::Count];
     // Текущая установленная амплитуда на канале
-    static DoubleValue amplitude[Chan::Count];
+    static Value amplitude[Chan::Count];
     // Текущая установленное смещение на кнаале
-    static DoubleValue offset[Chan::Count];
+    static Value offset[Chan::Count];
     // Текущая частота на канале
-    static DoubleValue frequency[Chan::Count];
+    static Value frequency[Chan::Count];
 };

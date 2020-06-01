@@ -3,7 +3,7 @@
 #include <cstring>
 
 
-static void AddChar(char *buffer, const DoubleValue &value, int pos)
+static void AddChar(char *buffer, const Value &value, int pos)
 {
     char digit[2] = { 0, 0 };
     digit[0] = MathDoubleValue::GetChar(value, pos);
@@ -11,7 +11,7 @@ static void AddChar(char *buffer, const DoubleValue &value, int pos)
 }
 
 
-pString DoubleValue::ToString(Order::E, bool sign) const
+pString Value::ToString(Order::E, bool sign) const
 {
     static char buffer[50];
 

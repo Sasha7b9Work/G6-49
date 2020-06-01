@@ -5,9 +5,9 @@
 
 
 bool SettingsGenerator::waveIsSine[Chan::Count] = { true, true };
-DoubleValue SettingsGenerator::amplitude[Chan::Count] = { DoubleValue("10"), DoubleValue("10") };
-DoubleValue SettingsGenerator::frequency[Chan::Count] = { DoubleValue("1000"), DoubleValue("1000") };
-DoubleValue SettingsGenerator::offset[Chan::Count] = { DoubleValue("0"), DoubleValue("0") };
+Value SettingsGenerator::amplitude[Chan::Count] = { Value("10"), Value("10") };
+Value SettingsGenerator::frequency[Chan::Count] = { Value("1000"), Value("1000") };
+Value SettingsGenerator::offset[Chan::Count] = { Value("0"), Value("0") };
 Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
 bool Amplifier::isBlocked = false;
 bool Amplifier::isEnabled[Chan::Count] = { false, false };
@@ -125,7 +125,7 @@ void DGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
 }
 
 
-void DGenerator::SetFrequency(Chan::E ch, DoubleValue freq)
+void DGenerator::SetFrequency(Chan::E ch, Value freq)
 {
     SettingsGenerator::frequency[ch] = freq;
 
@@ -140,27 +140,27 @@ void DGenerator::SetFrequency(Chan::E ch, DoubleValue freq)
 }
 
 
-void DGenerator::SetManipulationPeriod(Chan::E ch, DoubleValue period)
+void DGenerator::SetManipulationPeriod(Chan::E ch, Value period)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void DGenerator::SetManipulationDuration(Chan::E ch, DoubleValue duration)
+void DGenerator::SetManipulationDuration(Chan::E ch, Value duration)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetDurationImpulse(ch, duration);
 }
 
 
-void DGenerator::SetPeriod(Chan::E ch, DoubleValue period)
+void DGenerator::SetPeriod(Chan::E ch, Value period)
 {
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void DGenerator::SetAmplitude(Chan::E ch, DoubleValue ampl)
+void DGenerator::SetAmplitude(Chan::E ch, Value ampl)
 {
     SettingsGenerator::amplitude[ch] = ampl;
 
@@ -177,7 +177,7 @@ void DGenerator::SetAmplitude(Chan::E ch, DoubleValue ampl)
 }
 
 
-void DGenerator::SetOffset(Chan::E ch, DoubleValue off)
+void DGenerator::SetOffset(Chan::E ch, Value off)
 {
     SettingsGenerator::offset[ch] = off;
 
@@ -187,37 +187,37 @@ void DGenerator::SetOffset(Chan::E ch, DoubleValue off)
 }
 
 
-void DGenerator::SetPhase(Chan::E ch, DoubleValue phase)
+void DGenerator::SetPhase(Chan::E ch, Value phase)
 {
     AD9952::SetPhase(ch, phase);
 }
 
 
-void DGenerator::SetPacketNumber(Chan::E, DoubleValue number)
+void DGenerator::SetPacketNumber(Chan::E, Value number)
 {
     FPGA::PacketImpulse::SetNumberImpules(static_cast<uint>(number.ToDouble() + 0.5));
 }
 
 
-void DGenerator::SetPacketPeriod(Chan::E, DoubleValue period)
+void DGenerator::SetPacketPeriod(Chan::E, Value period)
 {
     FPGA::PacketImpulse::SetPeriodPacket(period);
 }
 
 
-void DGenerator::SetDutyRatio(Chan::E, DoubleValue)
+void DGenerator::SetDutyRatio(Chan::E, Value)
 {
 
 }
 
 
-void DGenerator::SetDuration(Chan::E ch, DoubleValue value)
+void DGenerator::SetDuration(Chan::E ch, Value value)
 {
     FPGA::SetDurationImpulse(ch, value);
 }
 
 
-void DGenerator::SetDelay(Chan::E, DoubleValue)
+void DGenerator::SetDelay(Chan::E, Value)
 {
 }
 

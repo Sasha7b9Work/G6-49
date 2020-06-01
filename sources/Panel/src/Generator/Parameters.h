@@ -104,11 +104,11 @@ class ParameterDouble : public Parameter
 
 public:
 
-    ParameterDouble(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value);
+    ParameterDouble(ParameterValueType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value);
 
     // Установить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(double val);
-    bool SetAndLoadValue(DoubleValue val);
+    bool SetAndLoadValue(Value val);
     
     // Возвращает true, если параметр имеет знак
     bool IsSigned() const { return (type == ParameterValueType::Offset); }
@@ -123,7 +123,7 @@ public:
 
     // Возвращает строковое представление значения параметра
     virtual pString ToString() const;
-    virtual pString ToString(DoubleValue value) const;
+    virtual pString ToString(Value value) const;
 
     // Возвращает основные единицы измерения (без учёта порядка)
     pString GetMainUnits() const;
@@ -132,28 +132,28 @@ public:
     pString GetUnits(Order::E order = Order::Count) const;
 
     // Возвращает максимальное значение, которое может иметь параметр
-    DoubleValue GetMax() { return max; }
+    Value GetMax() { return max; }
     
     // Возвращает минимальное значение, которое может иметь параметр
-    DoubleValue GetMin() { return min; }
+    Value GetMin() { return min; }
 
     Tuner *GetTuner()   { return &tuner; };
 
     // Возвращает текущее значение параметра
-    DoubleValue GetValue() const { return value; };
+    Value GetValue() const { return value; };
 
     ParameterValueType::E GetType() const { return type; }
 
 private:
     Tuner tuner;        // Используется для настройки 
     ParameterValueType::E type;
-    DoubleValue min;
-    DoubleValue max;
-    DoubleValue value;
+    Value min;
+    Value max;
+    Value value;
 
     // Возвращает true, если параметр может принимать значение v
     bool InRange(double v) const;
-    bool InRange(DoubleValue v) const;
+    bool InRange(Value v) const;
 };
 
 
@@ -181,7 +181,7 @@ public:
     bool DrawChoice(int x, int y) const;
 
     virtual pString ToString() const;
-    virtual pString ToString(DoubleValue) const { return ""; }
+    virtual pString ToString(Value) const { return ""; }
 
     void OnPressButtonTune();
 
@@ -231,7 +231,7 @@ private:
 class ParameterVoltage : public ParameterDouble
 {
 public:
-    ParameterVoltage(ParameterValueType::E type, const char *nameRU, const char *nameEN, const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) :
+    ParameterVoltage(ParameterValueType::E type, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value) :
         ParameterDouble(type, nameRU, nameEN, min, max, value) { }
 };
 
@@ -239,7 +239,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const DoubleValue &min = DoubleValue("0"), const DoubleValue &max = DoubleValue("10"), const DoubleValue &value = DoubleValue("10")) :
+    ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = Value("10")) :
         ParameterVoltage(ParameterValueType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 
@@ -247,7 +247,7 @@ public:
 class ParameterOffset : public ParameterVoltage
 {
 public:
-    ParameterOffset(const DoubleValue &min = DoubleValue("-5"), const DoubleValue &max = DoubleValue("5"), const DoubleValue &value = DoubleValue("0")) :
+    ParameterOffset(const Value &min = Value("-5"), const Value &max = Value("5"), const Value &value = Value("0")) :
         ParameterVoltage(ParameterValueType::Offset, "Смещение", "Offset", min, max, value) { }
 };
 
@@ -255,7 +255,7 @@ public:
 class ParameterFrequency : public ParameterDouble
 {
 public:
-    ParameterFrequency(const DoubleValue &min = DoubleValue("0.1"), const DoubleValue &max = DoubleValue("100", 6), const DoubleValue &value = DoubleValue("1000")) :
+    ParameterFrequency(const Value &min = Value("0.1"), const Value &max = Value("100", 6), const Value &value = Value("1000")) :
         ParameterDouble(ParameterValueType::Frequency, "Частота", "Frequency", min, max, value) { }
 };
 
@@ -263,7 +263,7 @@ public:
 class ParameterTime : public ParameterDouble
 {
 public:
-    ParameterTime(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) :
+    ParameterTime(ParameterValueType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value) :
         ParameterDouble(t, nameRU, nameEN, min, max, value) { }
 };
 
@@ -271,35 +271,35 @@ public:
 class ParameterPhase : public ParameterDouble
 {
 public:
-    ParameterPhase() : ParameterDouble(ParameterValueType::Phase, "Фаза", "Phase", DoubleValue("0"), DoubleValue("360"), DoubleValue("0")) { }
+    ParameterPhase() : ParameterDouble(ParameterValueType::Phase, "Фаза", "Phase", Value("0"), Value("360"), Value("0")) { }
 };
 
 
 class ParameterPacketPeriod : public ParameterTime
 {
 public:
-    ParameterPacketPeriod(const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) : ParameterTime(ParameterValueType::PacketPeriod, "Период", "Period", min, max, value) { }
+    ParameterPacketPeriod(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterValueType::PacketPeriod, "Период", "Period", min, max, value) { }
 };
 
 
 class ParameterPeriod : public ParameterTime
 {
 public:
-    ParameterPeriod(const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) :  ParameterTime(ParameterValueType::Period, "Период", "Period", min, max, value) { }
+    ParameterPeriod(const Value &min, const Value &max, const Value &value) :  ParameterTime(ParameterValueType::Period, "Период", "Period", min, max, value) { }
 };
 
 
 class ParameterDuration : public ParameterTime
 {
 public:
-    ParameterDuration(const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) : ParameterTime(ParameterValueType::Duration, "Длительность", "Duration", min, max, value) { }
+    ParameterDuration(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterValueType::Duration, "Длительность", "Duration", min, max, value) { }
 };
 
 
 class ParameterManipulationDuration : public ParameterTime
 {
 public:
-    ParameterManipulationDuration(const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) :
+    ParameterManipulationDuration(const Value &min, const Value &max, const Value &value) :
         ParameterTime(ParameterValueType::ManipulationDuration, "Длительность", "Duration", min, max, value) { }
 };
 
@@ -307,7 +307,7 @@ public:
 class ParameterManipulationPeriod : public ParameterTime
 {
 public:
-    ParameterManipulationPeriod(const DoubleValue &min, const DoubleValue &max, const DoubleValue &value) :
+    ParameterManipulationPeriod(const Value &min, const Value &max, const Value &value) :
         ParameterTime(ParameterValueType::ManipulationPeriod, "Период", "Period", min, max, value) { }
 };
 

@@ -100,10 +100,10 @@ private:
     bool IsSigned();
 
     // Возвращает "цену разрдяа" в позиции pos
-    DoubleValue StepPosition(int pos);
+    Value StepPosition(int pos);
 
     // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
-    bool ChangeSign(DoubleValue *value, int pos);
+    bool ChangeSign(Value *value, int pos);
 
     Color CalculateColor(int pos);
 
@@ -152,7 +152,7 @@ public:
         // Возвращает true, если содержится десятичная точка
         bool ConsistComma() const;
         String GetString() const;
-        DoubleValue ToDoubleValue() const;
+        Value ToDoubleValue() const;
     private:
         Stack<char> stack;
         ParameterDouble *param;
@@ -196,7 +196,7 @@ public:
 
     void Init();
 
-    void Init(DoubleValue value);
+    void Init(Value value);
 
     void Draw();
 

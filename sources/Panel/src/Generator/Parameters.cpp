@@ -173,7 +173,7 @@ bool ParameterDouble::SetAndLoadValue(double val)
 }
 
 
-bool ParameterDouble::SetAndLoadValue(DoubleValue val)
+bool ParameterDouble::SetAndLoadValue(Value val)
 {
     if (!InRange(val))
     {
@@ -273,7 +273,7 @@ bool ParameterDouble::InRange(double val) const
 }
 
 
-bool ParameterDouble::InRange(DoubleValue val) const
+bool ParameterDouble::InRange(Value val) const
 {
     return (val >= min && val <= max);
 }
@@ -285,7 +285,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(ParameterValueType::E t, const char *nameRU, const char *nameEN, const DoubleValue &_min, const DoubleValue &_max, const DoubleValue &_value) :
+ParameterDouble::ParameterDouble(ParameterValueType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
     Parameter(Parameter::Double, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
 }
@@ -293,7 +293,7 @@ ParameterDouble::ParameterDouble(ParameterValueType::E t, const char *nameRU, co
 
 static Order::E CalculateOrder(const ParameterDouble *param)
 {
-    DoubleValue value = param->GetValue();
+    Value value = param->GetValue();
 
     Order::E order = value.GetOrder();
 
@@ -318,7 +318,7 @@ pString ParameterDouble::ToString() const
 }
 
 
-pString ParameterDouble::ToString(DoubleValue val) const
+pString ParameterDouble::ToString(Value val) const
 {
     static char buffer[30];
     

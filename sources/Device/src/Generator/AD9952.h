@@ -13,7 +13,7 @@ struct AD9952
 
     static void SetFrequency(Chan::E ch);
 
-    static void SetPhase(Chan::E ch, DoubleValue phase);
+    static void SetPhase(Chan::E ch, Value phase);
 
     // Манипуляция
     struct Manipulation

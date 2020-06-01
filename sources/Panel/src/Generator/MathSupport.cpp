@@ -7,7 +7,7 @@
 #include <cstring>
 
 
-//DoubleValue *LogicFloatValue::value = nullptr;
+//Value *LogicFloatValue::value = nullptr;
 //ParameterDouble *LogicFloatValue::parameter = nullptr;
 
 
@@ -85,9 +85,9 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 {
     if (param->IsVoltage())
     {
-        DoubleValue value = param->GetValue();
+        Value value = param->GetValue();
 
-        if (value < DoubleValue("1.0") && value > DoubleValue("-1.0"))
+        if (value < Value("1.0") && value > Value("-1.0"))
         {
             return Order::Milli;
         }
@@ -122,7 +122,7 @@ pString MathDoubleValue::GetIndicatedValue(const ParameterDouble *param)
     static char buffer[LENGTH_BUFFER + 1];                      // ƒополнительно завершающий ноль и точка
     buffer[LENGTH_BUFFER - 1] = '\0';
 
-    DoubleValue value = param->GetValue();
+    Value value = param->GetValue();
 
     if (value.Abs() == 0)
     {
@@ -169,9 +169,9 @@ pString MathDoubleValue::GetIndicatedValue(const ParameterDouble *param)
 
 static int GetPositionFirstDigitVoltate(const ParameterDouble *param, Order::E)
 {
-    DoubleValue value = param->GetValue();
+    Value value = param->GetValue();
 
-    return (value < DoubleValue("1.0") && value > DoubleValue("-1.0")) ? 4 : 1;
+    return (value < Value("1.0") && value > Value("-1.0")) ? 4 : 1;
 }
 
 
@@ -182,7 +182,7 @@ int MathDoubleValue::GetPositionFirstDigit(const ParameterDouble *param, Order::
         return GetPositionFirstDigitVoltate(param, order);
     }
 
-    DoubleValue value = param->GetValue();
+    Value value = param->GetValue();
     value.SetSign(1);
 
     CorrectValueOnOrder(&value, order);
@@ -219,9 +219,9 @@ int MathDoubleValue::GetPositionFirstDigit(const ParameterDouble *param, Order::
 }
 
 
-int MathDoubleValue::GetPositionFirstDigit(const DoubleValue &val, Order::E order)
+int MathDoubleValue::GetPositionFirstDigit(const Value &val, Order::E order)
 {
-    DoubleValue value = val;
+    Value value = val;
     value.SetSign(1);
 
     CorrectValueOnOrder(&value, order);
@@ -258,13 +258,13 @@ int MathDoubleValue::GetPositionFirstDigit(const DoubleValue &val, Order::E orde
 }
 
 
-char MathDoubleValue::GetChar(const DoubleValue &value, int postition, Order::E order)
+char MathDoubleValue::GetChar(const Value &value, int postition, Order::E order)
 {
     return static_cast<char>(GetDigit(value, postition, order) | 0x30);
 }
 
 
-void MathDoubleValue::CorrectValueOnOrder(DoubleValue *value, Order::E order)
+void MathDoubleValue::CorrectValueOnOrder(Value *value, Order::E order)
 {
     if (order == Order::Count)
     {
@@ -294,9 +294,9 @@ void MathDoubleValue::CorrectValueOnOrder(DoubleValue *value, Order::E order)
 }
 
 
-int MathDoubleValue::GetDigit(const DoubleValue &val, int position, Order::E order)
+int MathDoubleValue::GetDigit(const Value &val, int position, Order::E order)
 {
-    DoubleValue value = val;
+    Value value = val;
     value.SetSign(1);
 
     CorrectValueOnOrder(&value, order);
