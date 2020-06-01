@@ -62,7 +62,7 @@ Form *Parameter::GetForm()
 }
 
 
-void ParameterComplex::SetForm(Form *f)
+void ParameterComposite::SetForm(Form *f)
 {
     Parameter::SetForm(f);
 
@@ -73,7 +73,7 @@ void ParameterComplex::SetForm(Form *f)
 }
 
 
-ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
+ParameterChoice *ParameterComposite::FindParameter(ParameterChoice::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -94,7 +94,7 @@ ParameterChoice *ParameterComplex::FindParameter(ParameterChoice::E p)
 }
 
 
-ParameterValue *ParameterComplex::FindParameter(ParameterValueType::E p)
+ParameterValue *ParameterComposite::FindParameter(ParameterValueType::E p)
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -188,7 +188,7 @@ bool ParameterValue::SetAndLoadValue(DoubleValue val)
 }
 
 
-pString ParameterComplex::ToString() const
+pString ParameterComposite::ToString() const
 {
     if(type == Manipulation)
     {
@@ -202,7 +202,7 @@ pString ParameterComplex::ToString() const
             " Off", " On"
         };
 
-        ParameterChoice *enabled = const_cast<ParameterComplex *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
+        ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(ParameterChoice::ManipulationEnabled);
 
         return LANG_IS_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()];
     }
@@ -261,7 +261,7 @@ bool ParameterChoice::DrawChoice(int, int) const
 }
 
 
-ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComplex(ParameterComplex::Manipulation, "Манипуляция", "Manipulation", parameters)
+ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComposite(ParameterComposite::Manipulation, "Манипуляция", "Manipulation", parameters)
 {
 
 }
@@ -367,7 +367,7 @@ void ParameterValue::OnPressButtonTune()
 }
 
 
-void ParameterComplex::OnPressButtonTune()
+void ParameterComposite::OnPressButtonTune()
 {
     form->OpenComplexParameter();
 }
@@ -378,7 +378,7 @@ void Parameter::OnPressButtonTune()
     switch (kind)
     {
     case Double:    reinterpret_cast<ParameterValue *>(this)->OnPressButtonTune();   break;
-    case Composite: reinterpret_cast<ParameterComplex *>(this)->OnPressButtonTune(); break;
+    case Composite: reinterpret_cast<ParameterComposite *>(this)->OnPressButtonTune(); break;
     case Choice:    reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
 
     case Exit:

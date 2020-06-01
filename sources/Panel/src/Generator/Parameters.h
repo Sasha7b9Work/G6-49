@@ -195,7 +195,7 @@ private:
 };
 
 
-class ParameterComplex : public Parameter
+class ParameterComposite : public Parameter
 {
 public:
     enum E
@@ -204,7 +204,7 @@ public:
         Count
     } value;
 
-    ParameterComplex(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
+    ParameterComposite(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
         Parameter(Parameter::Composite, nameRU, nameEN), value(Count), params(parameters), numParams(0), type(v) { }
 
     virtual void SetForm(Form *form);
@@ -337,7 +337,7 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Complex ///
-class ParameterManipulation : public ParameterComplex
+class ParameterManipulation : public ParameterComposite
 {
 public:
     ParameterManipulation(Parameter **paramaters);

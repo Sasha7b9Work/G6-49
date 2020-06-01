@@ -257,7 +257,7 @@ ParameterValue *Form::FindParameter(ParameterValueType::E p)
         }
         else if(param->IsComplex())
         {
-            ParameterComplex *parameter = static_cast<ParameterComplex *>(param);
+            ParameterComposite *parameter = static_cast<ParameterComposite *>(param);
 
             ParameterValue *val = parameter->FindParameter(p);
 
@@ -290,7 +290,7 @@ ParameterChoice *Form::FindParameter(ParameterChoice::E p)
         
         if(param->IsComplex())
         {
-            ParameterComplex *complex = reinterpret_cast<ParameterComplex *>(param);
+            ParameterComposite *complex = reinterpret_cast<ParameterComposite *>(param);
 
             ParameterChoice *choice = complex->FindParameter(p);
 
@@ -338,7 +338,7 @@ void Form::OpenComplexParameter()
     oldNumParams = numParams;
     oldCurrentParams = currentParam;
 
-    ParameterComplex *parent = static_cast<ParameterComplex *>(CurrentParameter());
+    ParameterComposite *parent = static_cast<ParameterComposite *>(CurrentParameter());
 
     numParams = parent->NumParams();
     params = parent->Params();
