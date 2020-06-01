@@ -123,7 +123,7 @@ public:
 
     // ¬озвращает строковое представление значени€ параметра
     virtual pString ToString() const;
-    virtual pString ToString(Value value) const;
+    String ToString(Value value) const;
 
     // ¬озвращает основные единицы измерени€ (без учЄта пор€дка)
     pString GetMainUnits() const;
@@ -181,7 +181,6 @@ public:
     bool DrawChoice(int x, int y) const;
 
     virtual pString ToString() const;
-    virtual pString ToString(Value) const { return ""; }
 
     void OnPressButtonTune();
 
