@@ -66,16 +66,34 @@ void ParameterComposite::SetForm(Form *f)
 {
     Parameter::SetForm(f);
 
-    for (int i = 0; i < numParams; i++)
+    for (int i = 0; i < NumParameters(); i++)
     {
         params[i]->SetForm(f);
     }
 }
 
 
+int ParameterComposite::NumParameters() const
+{
+    return 3;
+
+    Parameter *parameter = params[0];
+
+    int result = 0;
+
+    while (parameter)
+    {
+        result++;
+        parameter++;
+    }
+
+    return result;
+}
+
+
 ParameterChoice *ParameterComposite::FindParameter(ParameterChoice::E p)
 {
-    for(int i = 0; i < numParams; i++)
+    for(int i = 0; i < NumParameters(); i++)
     {
         Parameter *param = params[i];
 
@@ -96,7 +114,7 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoice::E p)
 
 ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p)
 {
-    for(int i = 0; i < numParams; i++)
+    for(int i = 0; i < NumParameters(); i++)
     {
         Parameter *param = params[i];
 

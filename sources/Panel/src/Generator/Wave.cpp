@@ -340,8 +340,8 @@ void Form::OpenCompositeParameter()
 
     ParameterComposite *parent = static_cast<ParameterComposite *>(CurrentParameter());
 
-    numParams = parent->NumParams();
-    params = parent->Params();
+    numParams = parent->NumParameters();
+    params = parent->Parameters();
     currentParam = 0;
 
     for(int i = 0; i < numParams; i++)

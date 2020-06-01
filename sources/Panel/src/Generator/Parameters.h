@@ -204,12 +204,12 @@ public:
     } value;
 
     ParameterComposite(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
-        Parameter(Parameter::Composite, nameRU, nameEN), value(Count), params(parameters), numParams(0), type(v) { }
+        Parameter(Parameter::Composite, nameRU, nameEN), value(Count), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
-    int NumParams() const { return numParams; }
-    Parameter **Params() { return params; }
+    int NumParameters() const;
+    Parameter **Parameters() { return params; }
 
     ParameterDouble *FindParameter(ParameterDoubleType::E p);
     ParameterChoice *FindParameter(ParameterChoice::E p);
@@ -221,7 +221,6 @@ public:
 private:
     
     Parameter **params; // Здесь находятся дополнительные параметры в случае, если они требуются
-    int numParams;      // Число дополнительных параметров или 0, если таковых не имеется
     E type;
 };
 
