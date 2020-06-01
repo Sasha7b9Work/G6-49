@@ -114,7 +114,7 @@ static pString ZeroValue(const ParameterDouble *param)
 }
 
 
-pString MathDoubleValue::GetIndicatedValue(const ParameterDouble *param)
+pString MathValue::GetIndicatedValue(const ParameterDouble *param)
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
@@ -175,7 +175,7 @@ static int GetPositionFirstDigitVoltate(const ParameterDouble *param, Order::E)
 }
 
 
-int MathDoubleValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
+int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
     if (param->IsVoltage())
     {
@@ -219,7 +219,7 @@ int MathDoubleValue::GetPositionFirstDigit(const ParameterDouble *param, Order::
 }
 
 
-int MathDoubleValue::GetPositionFirstDigit(const Value &val, Order::E order)
+int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
 {
     Value value = val;
     value.SetSign(1);
@@ -258,13 +258,13 @@ int MathDoubleValue::GetPositionFirstDigit(const Value &val, Order::E order)
 }
 
 
-char MathDoubleValue::GetChar(const Value &value, int postition, Order::E order)
+char MathValue::GetChar(const Value &value, int postition, Order::E order)
 {
     return static_cast<char>(GetDigit(value, postition, order) | 0x30);
 }
 
 
-void MathDoubleValue::CorrectValueOnOrder(Value *value, Order::E order)
+void MathValue::CorrectValueOnOrder(Value *value, Order::E order)
 {
     if (order == Order::Count)
     {
@@ -294,7 +294,7 @@ void MathDoubleValue::CorrectValueOnOrder(Value *value, Order::E order)
 }
 
 
-int MathDoubleValue::GetDigit(const Value &val, int position, Order::E order)
+int MathValue::GetDigit(const Value &val, int position, Order::E order)
 {
     Value value = val;
     value.SetSign(1);

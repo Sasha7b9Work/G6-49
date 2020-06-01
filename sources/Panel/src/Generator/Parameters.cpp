@@ -308,7 +308,7 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 
 String ParameterDouble::ToString() const
 {
-    String string(MathDoubleValue::GetIndicatedValue(this));
+    String string(MathValue::GetIndicatedValue(this));
     string.Append(" ");
     string.Append(GetUnits(CalculateOrder(this)));
 
