@@ -175,7 +175,7 @@ public:
 
     ParameterChoice(ParameterChoiceType::E t, const char *nameRU, const char *nameEN) : Parameter(Parameter::Choice, nameRU, nameEN), type(t), choice(0), names(nullptr) { }
 
-    ParameterChoiceType::E Type() { return type; }
+    ParameterChoiceType::E GetType() { return type; }
 
     int GetChoice() const;
 

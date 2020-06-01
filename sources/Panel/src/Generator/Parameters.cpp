@@ -94,11 +94,11 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
 
         if(param->IsChoice())
         {
-            ParameterChoice *parameter = static_cast<ParameterChoice *>(param);
+            ParameterChoice *choice = static_cast<ParameterChoice *>(param);
 
-            if(parameter->Type() == p)
+            if(choice->GetType() == p)
             {
-                return parameter;
+                return choice;
             }
         }
     }
