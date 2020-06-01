@@ -326,7 +326,7 @@ pString ParameterDouble::ToString(Value val) const
 
     std::strcpy(buffer, val.ToString(order, IsSigned()));
     std::strcat(buffer, " ");
-    std::strcat(buffer, GetUnits());
+    std::strcat(buffer, GetUnits(val.GetOrder()));
 
     return buffer;
 }
