@@ -321,12 +321,12 @@ pString ParameterDouble::ToString() const
 pString ParameterDouble::ToString(Value val) const
 {
     static char buffer[30];
- 
+
     Order::E order = val.GetOrder();
 
     std::strcpy(buffer, val.ToString(order, IsSigned()));
     std::strcat(buffer, " ");
-    std::strcat(buffer, GetUnits(val.GetOrder()));
+    std::strcat(buffer, GetUnits(order));
 
     return buffer;
 }

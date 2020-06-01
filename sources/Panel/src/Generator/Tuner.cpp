@@ -554,7 +554,7 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 
     if (value > param->GetMax() || value < param->GetMin())
     {
-        Display::ShowWarning(String("Выход за пределы диапазона %s ... %s", param->ToString(param->GetMin()), param->ToString(param->GetMax())));
+        Display::ShowWarning(String("Выход за границы диапазона %s ... %s", param->ToString(param->GetMin()), param->ToString(param->GetMax())));
     }
 }
 

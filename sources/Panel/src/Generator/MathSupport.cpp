@@ -354,7 +354,7 @@ int MathParameterValue::GetNumberDigitsAfterComma(Order::E order)
 
     if (type == ParameterValueType::Frequency)
     {
-        result += Order::GetPow10(order);
+        result += Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
     }
 
     return result;
