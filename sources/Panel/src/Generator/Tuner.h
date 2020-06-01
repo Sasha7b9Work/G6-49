@@ -151,8 +151,8 @@ public:
         char At(const int i) const;
         // ¬озвращает true, если содержитс€ дес€тична€ точка
         bool ConsistComma() const;
-        String GetString() const;
-        Value ToDoubleValue() const;
+        String ToString() const;
+        Value ToValue() const;
     private:
         Stack<char> stack;
         ParameterDouble *param;

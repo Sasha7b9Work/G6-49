@@ -78,7 +78,7 @@ void DisplayEntering::EnterBuffer::Prepare(ParameterDouble *parameter)
 }
 
 
-String DisplayEntering::EnterBuffer::GetString() const
+String DisplayEntering::EnterBuffer::ToString() const
 {
     String string;
 
@@ -91,7 +91,7 @@ String DisplayEntering::EnterBuffer::GetString() const
 }
 
 
-Value DisplayEntering::EnterBuffer::ToDoubleValue() const
+Value DisplayEntering::EnterBuffer::ToValue() const
 {
     return Value("10.0");
 }
@@ -576,7 +576,7 @@ void DisplayEntering::TryToAddSymbol(Key::E key)
 {
     buffer.Push(key);
 
-    Value value = buffer.ToDoubleValue();
+    Value value = buffer.ToValue();
 
     if (value < Tuner::Current()->GetParameter()->GetMin() || value > Tuner::Current()->GetParameter()->GetMax())
     {
