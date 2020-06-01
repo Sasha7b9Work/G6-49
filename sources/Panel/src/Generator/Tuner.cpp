@@ -29,30 +29,15 @@ Tuner *Tuner::current = nullptr;
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
-    if (stack.Size() > 14)
-    {
-        return;
-    }
+    if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterValueType::Offset))    { return; }
 
-    if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterValueType::Offset))
-    {
-        return;
-    }
+    if (stack.Size() > 14)                                          { return; }
 
-    if ((key == Key::Minus) && (stack.Size() != 0))
-    {
-        return;
-    }
+    if ((key == Key::Minus) && (stack.Size() != 0))                 { return; }
 
-    if ((key == Key::Comma) && ConsistComma())
-    {
-        return;
-    }
+    if ((key == Key::Comma) && ConsistComma())                      { return; }
 
-    if (stack.Size() == 0 && (key == Key::_0 || key == Key::Comma))
-    {
-        return;
-    }
+    if (stack.Size() == 0 && (key == Key::_0 || key == Key::Comma)) { return; }
 
     stack.Push(Key(key).ToChar());
 }
@@ -369,7 +354,7 @@ void Indicator::HighlightToLeft()
 {
     do
     {
-        Math::CircleDecrease(&indexHighlight, 0, NumberHighligthingDigits());
+        Math::CircleDecrease(&indexHighlight, 0, NumberHighligthingDigits() - 1);
     } while (CommaInPosition(IndexHighlightReal()));
 
 }
@@ -379,7 +364,7 @@ void Indicator::HighlightToRight()
 {
     do
     {
-        Math::CircleIncrease(&indexHighlight, 0, NumberHighligthingDigits());
+        Math::CircleIncrease(&indexHighlight, 0, NumberHighligthingDigits() - 1);
     } while (CommaInPosition(IndexHighlightReal()));
 }
 
