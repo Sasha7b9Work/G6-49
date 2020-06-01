@@ -323,6 +323,7 @@ pString ParameterValue::ToString(DoubleValue val) const
     static char buffer[30];
     
     std::strcpy(buffer, val.ToString(val.GetOrder(), IsSigned()));
+    std::strcat(buffer, " ");
     std::strcat(buffer, GetUnits());
 
     return buffer;

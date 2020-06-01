@@ -71,6 +71,7 @@ source_group(common                   FILES              ../../common/Command.h
                                                          ../../common/Command.cpp
                                                          ../../common/Common.h
                                                          ../../common/Common.cpp
+                                                         ../../common/Common_pan.cpp
                                                          ../../common/CommonTypes.h
                                                          ../../common/Messages.h
                                                          ../../common/Messages.cpp
@@ -142,6 +143,7 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../common/Command.cpp
                     ../../common/Common.h
                     ../../common/Common.cpp
+                    ../../common/Common_pan.cpp
                     ../../common/CommonTypes.h
                     ../../common/Messages.h
                     ../../common/Messages.cpp

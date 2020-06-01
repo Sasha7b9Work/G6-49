@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Common.h"
+#include "common/Common.h"
 #include "Utils/Math.h"
 #include <cmath>
 
@@ -388,22 +388,4 @@ Order::E DoubleValue::GetOrder() const
     else if (fract > 0)              { return Order::Nano;  }
 
     return Order::One;
-}
-
-
-pString DoubleValue::ToString(Order::E, bool sign) const
-{
-    static char buffer[50];
-
-    buffer[0] = '\0';
-
-    if (sign)
-    {
-        buffer[0] = (Sign() > 0) ? '+' : '-';
-        buffer[1] = '\0';
-    }
-
-    int first = 
-
-    return buffer;
 }

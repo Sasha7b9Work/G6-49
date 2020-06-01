@@ -1694,6 +1694,11 @@
               <FilePath>..\common\Common.h</FilePath>
             </File>
             <File>
+              <FileName>Common_pan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Common_pan.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\common\Common.cpp</FilePath>
