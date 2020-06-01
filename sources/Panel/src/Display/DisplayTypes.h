@@ -3,5 +3,5 @@
 
 
 
-#define SIGNAL_HEIGHT   ((SCREEN_HEIGHT - Page::Title::HEIGHT) / 2)
-#define SIGNAL_WIDTH    ((SCREEN_WIDTH - Item::WIDTH) - 1)
+#define SIGNAL_HEIGHT   ((Display::HEIGHT - Page::Title::HEIGHT) / 2)
+#define SIGNAL_WIDTH    ((Display::WIDTH - Item::WIDTH) - 1)

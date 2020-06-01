@@ -124,11 +124,11 @@ void Choice::Draw(bool opened, int x, int y) const
         if(x == -1)
         {
             y = Page::Title::HEIGHT + PositionOnPage() % Menu::NUM_ITEMS_ON_DISPLAY * Item::HEIGHT;
-            if(y + GetHeightOpened() > SCREEN_HEIGHT)
+            if(y + GetHeightOpened() > Display::HEIGHT)
             {
-                y = SCREEN_HEIGHT - GetHeightOpened() - 2;
+                y = Display::HEIGHT - GetHeightOpened() - 2;
             }
-            x = SCREEN_WIDTH - Item::WIDTH - 20;
+            x = Display::WIDTH - Item::WIDTH - 20;
         }
 
         Rectangle(width, Item::Title::HEIGHT).Fill(x, y, Color::GRAY_50);
@@ -229,7 +229,7 @@ void Page::DrawOpened() const
     int numPage = CurrentSubPage();
     for (int i = numPage * 4; i < numPage * 4 + 4; i++)
     {
-        int x = SCREEN_WIDTH - Item::WIDTH - 1;
+        int x = Display::WIDTH - Item::WIDTH - 1;
         int y = Page::Title::HEIGHT + (i % Menu::NUM_ITEMS_ON_DISPLAY) * Item::HEIGHT;
         Rectangle(Item::WIDTH, Item::HEIGHT).Draw(x, y, Color::FILL);
 

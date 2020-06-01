@@ -158,7 +158,7 @@ int Hint::DrawDetailedHint(const Choice *choice, int x0, int y0, int width, int 
 
 int Hint::NumPagesInHint(const Choice *choice, int x, int y, int width)
 {
-    if(DrawDetailedHint(choice, x, y, width, 0, choice->NumSubItems(), true) < SCREEN_HEIGHT)
+    if(DrawDetailedHint(choice, x, y, width, 0, choice->NumSubItems(), true) < Display::HEIGHT)
     {
         return 1;
     }
@@ -177,7 +177,7 @@ void Hint::Calcualte(const Choice *choice, int x, int y, int width)
     {
         for(int i = 0; i < choice->NumSubItems(); i++)
         {
-            if(DrawDetailedHint(choice, x, y, width, 0, i, true) > SCREEN_HEIGHT - 1)
+            if(DrawDetailedHint(choice, x, y, width, 0, i, true) > Display::HEIGHT - 1)
             {
                 firstItemOnSecondPage = i;
                 break;

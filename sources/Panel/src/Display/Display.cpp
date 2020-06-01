@@ -40,8 +40,8 @@ private:
     Color ColorText() const;
     Color ColorBackground() const;
     void DeleteFirst();
-    int X() const;
-    int Y() const;
+    int X0() const;
+    int Y0() const;
     int Width() const;
 };
 
@@ -107,13 +107,12 @@ void Warnings::Show()
 {
     Update();
 
-    int y = 0;
+    int y = Y0();
 
     for (int i = 0; i < last; i++)
     {
-        int width = warnings[i].message->Width();
-        Rectangle(width + 2, 11).DrawFilled(0, y, ColorBackground(), Color::FILL);
-        warnings[i].message->Draw(2, y + 1, ColorText());
+        Rectangle(Width(), 11).DrawFilled(X0(), y, ColorBackground(), Color::FILL);
+        warnings[i].message->Draw(X0() + 2, y + 1, ColorText());
         y += 11;
     }
 }
@@ -162,6 +161,34 @@ Color Warnings::ColorText() const
 Color Warnings::ColorBackground() const
 {
     return (ColorText().value == Color::FILL.value) ? Color::BACK : Color::FILL;
+}
+
+
+int Warnings::X0() const
+{
+    return (Display::WIDTH - Width()) / 2;
+}
+
+
+int Warnings::Y0() const
+{
+    return Display::HEIGHT / 2 - last * 11 / 2;
+}
+
+
+int Warnings::Width() const
+{
+    int width = 0;
+
+    for (int i = 0; i < last; i++)
+    {
+        if (warnings[i].message->Width() > width)
+        {
+            width = warnings[i].message->Width();
+        }
+    }
+
+    return width + 2;
 }
 
 

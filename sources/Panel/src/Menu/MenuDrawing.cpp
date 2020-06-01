@@ -25,8 +25,8 @@ void Menu::Draw()
 
 int Menu::DrawTitle()
 {
-    Rectangle(SCREEN_WIDTH - 1, Page::Title::HEIGHT).Draw(0, 0, Color::FILL);
-    Rectangle(SCREEN_WIDTH - 3, Page::Title::HEIGHT - 2).Fill(1, 1, Color::BLUE_10);
+    Rectangle(Display::WIDTH - 1, Page::Title::HEIGHT).Draw(0, 0, Color::FILL);
+    Rectangle(Display::WIDTH - 3, Page::Title::HEIGHT - 2).Fill(1, 1, Color::BLUE_10);
     if(Menu::GetOpenedItem())
     {
         return Menu::GetOpenedItem()->FullPath().Draw(5, 5, Color::FILL);

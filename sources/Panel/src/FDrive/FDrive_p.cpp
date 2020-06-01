@@ -73,8 +73,8 @@ void FDrive::Draw()
     {
         width = 200;
         height = 100;
-        x = (SCREEN_WIDTH - width) / 2;
-        y = (SCREEN_HEIGHT - height) / 2;
+        x = (Display::WIDTH - width) / 2;
+        y = (Display::HEIGHT - height) / 2;
 
         Rectangle(width, height).DrawFilled(x, y, Color::BACK, Color::FILL);
     }

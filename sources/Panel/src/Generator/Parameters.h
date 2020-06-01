@@ -256,7 +256,7 @@ public:
 class ParameterFrequency : public ParameterValue
 {
 public:
-    ParameterFrequency(const DoubleValue &min = DoubleValue("0.1"), const DoubleValue &max = DoubleValue("100.1234", 6), const DoubleValue &value = DoubleValue("1000")) :
+    ParameterFrequency(const DoubleValue &min = DoubleValue("0.1"), const DoubleValue &max = DoubleValue("100", 6), const DoubleValue &value = DoubleValue("1000")) :
         ParameterValue(ParameterValueType::Frequency, "Частота", "Frequency", min, max, value) { }
 };
 

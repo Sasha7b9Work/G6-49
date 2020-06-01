@@ -6,15 +6,15 @@
 
 #define DISPLAY_SHOW_WARNING(warn)
 
-#define SCREEN_WIDTH    320
-#define SCREEN_HEIGHT   240
-
-#define BUFFER_WIDTH    SCREEN_WIDTH    /* Ширина буфера для рисования */
-#define BUFFER_HEIGHT   SCREEN_HEIGHT   /* Высота буфера для рисования */
+#define BUFFER_WIDTH    Display::WIDTH    // Ширина буфера для рисования
+#define BUFFER_HEIGHT   Display::HEIGHT   // Высота буфера для рисования
 
 
 struct Display
 {
+    static const int WIDTH = 320;
+    static const int HEIGHT = 240;
+
     static void Init();
 
     static void Update();
