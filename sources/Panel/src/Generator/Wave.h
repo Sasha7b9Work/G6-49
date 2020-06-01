@@ -35,9 +35,9 @@ public:
         params = nullptr;
         numParams = 0;
         currentParam = 0;
-        oldParams = 0;
-        oldNumParams = 0;
-        oldCurrentParams = 0;
+        old.params = 0;
+        old.numParams = 0;
+        old.currentParams = 0;
     };
 
     // Возвращает человеческое название формы сигнала
@@ -112,15 +112,6 @@ private:
     // Номер текущего параметра в массиве params
     int currentParam;
 
-    // Здесь сохраняется указатель на основные параметры в случае раскрытия сложного параметра
-    Parameter **oldParams;
-    
-    // Относится к oldParams
-    int oldNumParams;
-    
-    // Относится к oldParams
-    int oldCurrentParams;
-
     static void DrawSine(Chan::E ch, int x, int y, int width, int height);
 
     static void DrawRampPlus(Chan::E ch, int x, int y, int width, int height);
@@ -137,7 +128,14 @@ private:
 
     static void DrawDDS(Chan::E ch, int x, int y, int width, int height);
 
-
+    // Здесь будут храниться основные параметры формы при раскрытии составного параметра
+    struct Old
+    {
+        // Здесь сохраняется указатель на основные параметры в случае раскрытия сложного параметра
+        Parameter **params;
+        int numParams;
+        int currentParams;
+    } old;
 };
 
 

@@ -101,7 +101,7 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f)
 }
 
 
-Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), oldParams(nullptr), oldNumParams(0), oldCurrentParams(0)
+Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0), old{ nullptr, 0, 0 }
 {
     numParams = 0;
 
@@ -334,9 +334,9 @@ void Form::OpenCompositeParameter()
         return;
     }
 
-    oldParams = params;
-    oldNumParams = numParams;
-    oldCurrentParams = currentParam;
+    old.params = params;
+    old.numParams = numParams;
+    old.currentParams = currentParam;
 
     ParameterComposite *parent = static_cast<ParameterComposite *>(CurrentParameter());
 
@@ -356,9 +356,9 @@ bool Form::CloseOpenedParameter()
 {
     if (params[0]->IsOpened())
     {
-        params = oldParams;
-        numParams = oldNumParams;
-        currentParam = oldCurrentParams;
+        params = old.params;
+        numParams = old.numParams;
+        currentParam = old.currentParams;
         return true;
     }
 
