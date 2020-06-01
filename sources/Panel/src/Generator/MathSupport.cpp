@@ -331,7 +331,7 @@ int MathDoubleValue::GetDigit(const Value &val, int position, Order::E order)
 }
 
 
-int MathParameterValue::GetNumberDigitsBeforeComma()
+int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
 {
     ParameterValueType::E type = param->GetType();
 
@@ -339,14 +339,14 @@ int MathParameterValue::GetNumberDigitsBeforeComma()
 
     if (type == ParameterValueType::Frequency)
     {
-        result -= Order::GetPow10(param->GetValue().GetOrder());
+        result -= Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
     }
 
     return result;
 }
 
 
-int MathParameterValue::GetNumberDigitsAfterComma()
+int MathParameterValue::GetNumberDigitsAfterComma(Order::E order)
 {
     ParameterValueType::E type = param->GetType();
 
@@ -354,7 +354,7 @@ int MathParameterValue::GetNumberDigitsAfterComma()
 
     if (type == ParameterValueType::Frequency)
     {
-        result += Order::GetPow10(param->GetValue().GetOrder());
+        result += Order::GetPow10(order);
     }
 
     return result;

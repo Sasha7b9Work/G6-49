@@ -526,7 +526,7 @@ void DisplayCorrection::DrawUnits(int x, int y)
 {
     Font::SetUpperCase(false);
 
-    String(tuner->GetParameter()->GetUnits()).Draw(x + 7, y, Color::WHITE);
+    String(tuner->GetParameter()->GetUnits(CalculateOrderForIndication())).Draw(x + 7, y, Color::WHITE);
 
     Font::SetUpperCase(true);
 }
@@ -680,7 +680,7 @@ void DisplayCorrection::Init()
         indicator.digits[i].Set('\0');
     }
 
-    int before = MathParameterValue::GetNumberDigitsBeforeComma();
+    int before = MathParameterValue::GetNumberDigitsBeforeComma(CalculateOrderForIndication());
 
     indicator.digits[before].Set(Digit::COMMA);
 
@@ -690,9 +690,22 @@ void DisplayCorrection::Init()
 }
 
 
+Order::E DisplayCorrection::CalculateOrderForIndication() const
+{
+    if (tuner->GetParameter()->IsVoltage())
+    {
+        return Order::One;
+    }
+
+    return Order::Count;
+}
+
+
 void DisplayCorrection::FillDigitsIntegerPart()
 {
-    int before = MathParameterValue::GetNumberDigitsBeforeComma();
+    Order::E order = CalculateOrderForIndication();
+
+    int before = MathParameterValue::GetNumberDigitsBeforeComma(order);
     ParameterDouble *param = tuner->GetParameter();
     Value value = param->GetValue();
 
@@ -705,7 +718,7 @@ void DisplayCorrection::FillDigitsIntegerPart()
 
     for (int i = 0; i < before; i++)
     {
-        indicator.digits[pos].Set(MathDoubleValue::GetChar(value, i));
+        indicator.digits[pos].Set(MathDoubleValue::GetChar(value, i, order));
         pos--;
 
         if (param->IsSigned() && (pos == 0))
@@ -718,15 +731,17 @@ void DisplayCorrection::FillDigitsIntegerPart()
 
 void DisplayCorrection::FillDigitsFractPart()
 {
-    int before = MathParameterValue::GetNumberDigitsBeforeComma();
-    int after = MathParameterValue::GetNumberDigitsAfterComma();
+    Order::E order = CalculateOrderForIndication();
+
+    int before = MathParameterValue::GetNumberDigitsBeforeComma(order);
+    int after = MathParameterValue::GetNumberDigitsAfterComma(order);
     Value value = tuner->GetParameter()->GetValue();
 
     int pos = before + 1;                                   // Теперь в эту позицию будем записывать рразряды после запятой
 
     for (int i = 0; i < after; i++)
     {
-        indicator.digits[pos].Set(MathDoubleValue::GetChar(value, -i - 1));
+        indicator.digits[pos].Set(MathDoubleValue::GetChar(value, -i - 1, order));
         pos++;
     }
 }

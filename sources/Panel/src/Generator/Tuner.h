@@ -226,6 +226,9 @@ private:
 
     // Заполнить разряды дробной части параметра
     void FillDigitsFractPart();
+
+    // Рассчитывает, к какому порядку нужно привести значение для индикации
+    Order::E CalculateOrderForIndication() const;
 };
 
 
