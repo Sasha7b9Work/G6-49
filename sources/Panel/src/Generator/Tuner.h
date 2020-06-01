@@ -23,11 +23,11 @@ public:
     // Установить новое значение
     void Set(char v) { value = v; }
 
-    bool IsNumber()  { return (value >= '0' && value <= '9'); }
+    bool IsNumber() const  { return (value >= '0' && value <= '9'); }
 
-    bool IsEmpty()   { return (value == '\0'); }
+    bool IsEmpty() const   { return (value == '\0'); }
 
-    bool IsSigned()  { return (value == '-') || (value == '+'); }
+    bool IsSigned() const  { return (value == '-') || (value == '+'); }
 
 private:
 
@@ -76,13 +76,13 @@ private:
     bool CommaInPosition(int pos);
 
     // Возвращает позицию разряда с точкой
-    int PositionComma();
+    int PositionComma() const;
 
     // Возвращает true, если в позиции pos - первая значащая цифра
-    bool FirstSignedDigitInPosition(int pos);
+    bool FirstSignedDigitInPosition(int pos) const;
 
     // Возвращает позицию ближайшего слева цифрового знакоместа от pos. -1, если такового не имеется.
-    int FindPositionLeftDigit(int pos);
+    int FindPositionLeftDigit(int pos) const;
 
     // Сделать активным разряд слева от текущего
     void HighlightToLeft();
@@ -97,24 +97,27 @@ private:
     void DecreaseInPosition(int pos);
 
     // Возвращает true, если числовое значение со знакомЫ
-    bool IsSigned();
+    bool IsSigned() const;
 
     // Возвращает "цену разрдяа" в позиции pos
-    Value StepPosition(int pos);
+    Value StepPosition(int pos) const;
 
     // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
     bool ChangeSign(Value *value, int pos);
 
-    Color CalculateColor(int pos);
+    Color CalculateColor(int pos) const;
 
     // Возвращает true, если нужно дополнительное смещение между разрядами
     int AdditionShiftForDigit(int pos);
 
     // Возвращает true, если все цифровые разряды слева равны нулю
-    bool AllNumbersOfLeftIsZero(int pos);
+    bool AllNumbersOfLeftIsZero(int pos) const;
+
+    // true, если справа от pos находится точка
+    bool RightDigitIzComma(int pos) const;
     
     // Возвращает true, если все цифровые разряды справа равны нулю
-    bool AllNumberOfRightIsZero(int pos);
+    bool AllNumberOfRightIsZero(int pos) const;
 };
 
 

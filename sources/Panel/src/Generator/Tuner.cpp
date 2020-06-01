@@ -164,7 +164,7 @@ int Indicator::Draw(int x, int y)
 }
 
 
-Color Indicator::CalculateColor(int pos)
+Color Indicator::CalculateColor(int pos) const
 {
     if (!digits[pos].IsNumber())
     {
@@ -175,7 +175,7 @@ Color Indicator::CalculateColor(int pos)
     {
         if (AllNumbersOfLeftIsZero(pos))
         {
-            return Color::GRAY_25;
+            return RightDigitIzComma(pos) ? Color::FILL : Color::GRAY_25;
         }
         if (AllNumberOfRightIsZero(pos) && (PositionComma() < pos))
         {
@@ -186,7 +186,7 @@ Color Indicator::CalculateColor(int pos)
 }
 
 
-bool Indicator::AllNumbersOfLeftIsZero(int pos)
+bool Indicator::AllNumbersOfLeftIsZero(int pos) const
 {
     for (int i = 0; i < pos; i++)
     {
@@ -200,7 +200,18 @@ bool Indicator::AllNumbersOfLeftIsZero(int pos)
 }
 
 
-bool Indicator::AllNumberOfRightIsZero(int pos)
+bool Indicator::RightDigitIzComma(int pos) const
+{
+    if (pos == Indicator::MAX_NUM_DIGITS - 1)
+    {
+        return false;
+    }
+
+    return (digits[pos + 1] == Digit::COMMA);
+}
+
+
+bool Indicator::AllNumberOfRightIsZero(int pos) const
 {
     for (int i = pos + 1; (i < MAX_NUM_DIGITS) && !digits[i].IsEmpty(); i++)
     {
@@ -284,7 +295,7 @@ bool Indicator::OnControlKey(const Control control) //-V801
 }
 
 
-bool Indicator::IsSigned()
+bool Indicator::IsSigned() const
 {
     return !digits[0].IsNumber();
 }
@@ -391,7 +402,7 @@ bool Indicator::CommaInPosition(int pos)
 }
 
 
-int Indicator::PositionComma()
+int Indicator::PositionComma() const
 {
     for (int i = 0; i < MAX_NUM_DIGITS; i++)
     {
@@ -405,7 +416,7 @@ int Indicator::PositionComma()
 }
 
 
-bool Indicator::FirstSignedDigitInPosition(int pos)
+bool Indicator::FirstSignedDigitInPosition(int pos) const
 {
     for (int i = 0; digits[i] != '\0'; i++)
     {
@@ -419,7 +430,7 @@ bool Indicator::FirstSignedDigitInPosition(int pos)
 }
 
 
-int Indicator::FindPositionLeftDigit(int pos)
+int Indicator::FindPositionLeftDigit(int pos) const
 {
     if (FirstSignedDigitInPosition(pos))
     {
@@ -451,7 +462,7 @@ char *Indicator::GetStringDigits() const
 }
 
 
-Value Indicator::StepPosition(int pos)
+Value Indicator::StepPosition(int pos) const
 {
     int posAboutComma = pos - PositionComma();          // Позиция разряда относительно точки
 
