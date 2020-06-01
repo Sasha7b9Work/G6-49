@@ -109,6 +109,8 @@ void Warnings::Show()
 
     int y = Y0();
 
+    Font::SetUpperCase(false);
+
     for (int i = 0; i < last; i++)
     {
         Rectangle(Width(), 11).DrawFilled(X0(), y, ColorBackground(), Color::FILL);

@@ -312,10 +312,7 @@ void Indicator::IncreaseInPosition(int pos)
         display->Init(value);
     }
 
-    if (value > param->GetMax())
-    {
-        Display::ShowWarning(String("Превышение максимального значения %s", param->ToString(param->GetMax())));
-    }
+    DisplayCorrection::ShowMessageOutRangIfNeed(value);
 }
 
 
@@ -336,6 +333,8 @@ void Indicator::DecreaseInPosition(int pos)
     {
         display->Init(value);
     }
+
+    DisplayCorrection::ShowMessageOutRangIfNeed(value);
 }
 
 
@@ -546,6 +545,17 @@ bool DisplayCorrection::OnControlKey(const Control &control)
     }
 
     return indicator.OnControlKey(control);
+}
+
+
+void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
+{
+    ParameterDouble *param = Tuner::Current()->GetParameter();
+
+    if (value > param->GetMax() || value < param->GetMin())
+    {
+        Display::ShowWarning(String("Выход за пределы диапазона %s ... %s", param->ToString(param->GetMax()), param->ToString(param->GetMin())));
+    }
 }
 
 

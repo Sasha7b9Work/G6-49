@@ -208,6 +208,9 @@ public:
 
     bool OnControlKey(const Control &control);
 
+    // ¬ывод сообщени€ о выходе за пределы допустимого диапазона, если необходимо
+    static void ShowMessageOutRangIfNeed(Value value);
+
 private:
 
     Tuner *tuner;
