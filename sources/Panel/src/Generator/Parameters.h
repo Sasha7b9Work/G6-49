@@ -57,7 +57,7 @@ public:
     Form *GetForm();
     
     // Обработчик нажатия кнопки "Изменить"
-    void OnPressButtonTune();
+    virtual void OnPressButtonTune() = 0;
 
     Viewer viewer;
 
@@ -119,7 +119,7 @@ public:
         return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset);
     }
 
-    void OnPressButtonTune();
+    virtual void OnPressButtonTune();
 
     // Возвращает строковое представление значения параметра
     virtual String ToString() const;
@@ -182,7 +182,7 @@ public:
 
     virtual String ToString() const;
 
-    void OnPressButtonTune();
+    virtual void OnPressButtonTune();
 
 private:
 	E type;
@@ -216,7 +216,7 @@ public:
 
     virtual String ToString() const;
 
-    void OnPressButtonTune();
+    virtual void OnPressButtonTune();
 
 private:
     

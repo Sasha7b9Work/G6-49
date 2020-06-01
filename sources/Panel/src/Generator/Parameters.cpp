@@ -336,17 +336,3 @@ void ParameterComposite::OnPressButtonTune()
 {
     form->OpenComplexParameter();
 }
-
-
-void Parameter::OnPressButtonTune()
-{
-    switch (kind)
-    {
-    case Double:    reinterpret_cast<ParameterDouble *>(this)->OnPressButtonTune();   break;
-    case Composite: reinterpret_cast<ParameterComposite *>(this)->OnPressButtonTune(); break;
-    case Choice:    reinterpret_cast<ParameterChoice *>(this)->OnPressButtonTune();  break;
-
-    case Exit:
-        break;
-    }
-}
