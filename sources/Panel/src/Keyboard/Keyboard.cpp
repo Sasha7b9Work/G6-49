@@ -35,7 +35,7 @@ static void DetectRegulator();
 static uint timePress[5][6];
 
 //                                         SL0      SL1       SL2          SL3        S4          SL5
-static const Key::E keys[5][6] =     {{Key::_0, Key::_5, Key::Dot,   Key::Esc,   Key::F1,   Key::None},    // RL0
+static const Key::E keys[5][6] =     {{Key::_0, Key::_5, Key::Comma,   Key::Esc,   Key::F1,   Key::None},    // RL0
                                       {Key::_1, Key::_6, Key::Minus, Key::Right, Key::F2,   Key::None},    // RL1
                                       {Key::_2, Key::_7, Key::None,  Key::Left,  Key::F3,   Key::None},    // RL2
                                       {Key::_3, Key::_8, Key::On1,   Key::None,  Key::F4,   Key::None},    // RL3

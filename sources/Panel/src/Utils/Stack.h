@@ -15,7 +15,7 @@ public:
     
     int Size() const;
     
-    bool Empty() const;
+    bool IsEmpty() const;
     
     T &operator[](const int index) const;
 

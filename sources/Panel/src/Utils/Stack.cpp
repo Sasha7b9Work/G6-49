@@ -57,7 +57,7 @@ int Stack<T>::Size() const
 
 
 template <typename T>
-bool Stack<T>::Empty() const
+bool Stack<T>::IsEmpty() const
 {
     return Size() == 0;
 }

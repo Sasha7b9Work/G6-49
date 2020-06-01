@@ -20,7 +20,7 @@ struct Key
         _7,
         _8,
         _9,
-        Dot,
+        Comma,
         Minus,
         Esc,
         Left,

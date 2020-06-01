@@ -14,7 +14,7 @@ char Key::ToChar() const
     {
         return static_cast<char>((value - Key::_0) | 0x30);
     }
-    else if(value == Key::Dot)
+    else if(value == Key::Comma)
     {
         return '.';
     }
@@ -87,5 +87,5 @@ bool Control::IsEntering() const
         return true;
     }
 
-    return ((key == Key::Minus) || (key == Key::Dot));
+    return ((key == Key::Minus) || (key == Key::Comma));
 }

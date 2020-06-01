@@ -51,7 +51,7 @@ void NumberBuffer::ProcessKey(const Key::E key)
 
 bool NumberBuffer::AllowableSymbol(const Key::E key)
 {
-    if(Key(key).IsDigit() || (key == Key::Dot) || (key == Key::Minus))
+    if(Key(key).IsDigit() || (key == Key::Comma) || (key == Key::Minus))
     {
         return true;
     }

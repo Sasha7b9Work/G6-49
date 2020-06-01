@@ -143,9 +143,7 @@ public:
     class EnterBuffer
     {
     public:
-        EnterBuffer() : stack(30), param(nullptr)
-        {
-        }
+        EnterBuffer() : stack(30), param(nullptr) { }
         void Prepare(ParameterDouble *parameter);
         void Push(const Key::E key);
         // Удалить последний добавленный символ
@@ -155,6 +153,8 @@ public:
         // Возвращает true, если содержится десятичная точка
         bool ConsistComma() const;
         String ToString() const;
+        // Возвращает true, если в буфере нет ничего, кроме, возможно, знака
+        bool IsEmpty() const;
 
     private:
         Stack<char> stack;

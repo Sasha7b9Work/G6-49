@@ -44,7 +44,12 @@ void DisplayEntering::EnterBuffer::Push(Key::E key)
         return;
     }
 
-    if ((key == Key::Dot) && ConsistComma())
+    if ((key == Key::Comma) && ConsistComma())
+    {
+        return;
+    }
+
+    if (stack.Size() == 0 && (key == Key::_0 || key == Key::Comma))
     {
         return;
     }
@@ -88,6 +93,12 @@ String DisplayEntering::EnterBuffer::ToString() const
     }
 
     return string;
+}
+
+
+bool DisplayEntering::EnterBuffer::IsEmpty() const
+{
+    return stack.IsEmpty() || (stack[0] == '-') || (stack[0] == '+');
 }
 
 
@@ -590,7 +601,16 @@ bool DisplayEntering::ValueInBoundaries()
 {
     Value value = ToValue();
 
-    return (value >= Tuner::Current()->GetParameter()->GetMin()) && (value <= Tuner::Current()->GetParameter()->GetMax());
+    ParameterDouble *param = Tuner::Current()->GetParameter();
+
+    bool valid = (value >= param->GetMin()) && (value <= param->GetMax());
+
+    if (!valid && !buffer.IsEmpty())
+    {
+        DisplayCorrection::ShowMessageOutRangIfNeed(value);
+    }
+
+    return valid;
 }
 
 

@@ -286,7 +286,7 @@ static bool AllowableSymbol(Key::E key)
             return true;
         }
 
-        if (key == Key::Dot)
+        if (key == Key::Comma)
         {
             for (int i = 0; i < sizeof(buffer); i++)
             {
