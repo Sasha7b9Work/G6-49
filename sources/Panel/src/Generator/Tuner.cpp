@@ -91,9 +91,9 @@ String DisplayEntering::EnterBuffer::ToString() const
 }
 
 
-Value DisplayEntering::EnterBuffer::ToValue() const
+Value DisplayEntering::ToValue()
 {
-    return Value("10.0");
+    return Value(buffer.ToString().c_str(), order);
 }
 
 
@@ -572,13 +572,22 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 }
 
 
+bool DisplayEntering::ValueInBoundaries()
+{
+    Value value = ToValue();
+
+    double valueD = value.ToDouble();
+    valueD = valueD;
+
+    return (value >= Tuner::Current()->GetParameter()->GetMin()) && (value <= Tuner::Current()->GetParameter()->GetMax());
+}
+
+
 void DisplayEntering::TryToAddSymbol(Key::E key)
 {
     buffer.Push(key);
 
-    Value value = buffer.ToValue();
-
-    if (value < Tuner::Current()->GetParameter()->GetMin() || value > Tuner::Current()->GetParameter()->GetMax())
+    if (!ValueInBoundaries())
     {
         buffer.Pop();
     }
@@ -633,7 +642,14 @@ void DisplayEntering::OnButtonOrderMore()
 {
     if (order > Order::Mega)
     {
+        Order::Store(order);
+
         order = static_cast<Order::E>(order - 1);
+
+        if (!ValueInBoundaries())
+        {
+            order = Order::Restore();
+        }
     }
 }
 
@@ -642,7 +658,14 @@ void DisplayEntering::OnButtonOrderLess()
 {
     if (order < Order::Nano)
     {
+        Order::Store(order);
+
         order = static_cast<Order::E>(order + 1);
+
+        if (!ValueInBoundaries())
+        {
+            order = Order::Restore();
+        }
     }
 }
 

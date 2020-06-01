@@ -152,7 +152,7 @@ public:
         // Возвращает true, если содержится десятичная точка
         bool ConsistComma() const;
         String ToString() const;
-        Value ToValue() const;
+
     private:
         Stack<char> stack;
         ParameterDouble *param;
@@ -182,6 +182,12 @@ private:
 
     // Попытка добавить в буфер новый символ, соотвествующий нажатой кнопке
     static void TryToAddSymbol(Key::E key);
+
+    // Возвращает значение, которое хранится сейчас в DisplayEntering ( c учётом порядка )
+    static Value ToValue();
+
+    // Хранимое значение находится в границах, ограниченных минимальным и максимальным значениями ParameterDouble
+    static bool ValueInBoundaries();
 };
 
 

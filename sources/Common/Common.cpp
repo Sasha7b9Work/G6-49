@@ -16,10 +16,13 @@ static uint AssembleInteger(const char *const buffer, int start, int end);
 // Собрать число из трех или менее символов. В end возвращается позиция следующего символа
 static uint AssembleTriple(const char *const buffer, int start, int *end);
 
+// Место для временного сохранения текущего порядка
+static Order::E stored = Order::Count;
 
-Value::Value(const char *const buffer, int order) //-V730
+
+Value::Value(const char *const buffer, Order::E order) //-V730
 {
-    FromString(buffer, order);
+    FromString(buffer, Order::GetPow10(order));
 }
 
 
@@ -43,7 +46,7 @@ void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign
 }
 
 
-void Value::FromString(const char * const buffer, int order)
+void Value::FromString(const char * const buffer, int pow10)
 {
     int pos = 0;                                    // Текущая обрабатываемая позиция в buffer
     int sign = 1;                                   // Отрицательное значение означает отрицательный знак
@@ -68,14 +71,14 @@ void Value::FromString(const char * const buffer, int order)
 
     FromUnits(units, mUnits, uUnits, nUnits, sign);
 
-    if (order > 0)
+    if (pow10 > 0)
     {
-        uint pow = Math::Pow10(order);
+        uint pow = Math::Pow10(pow10);
         Mul(pow);
     }
-    else if (order < 0)
+    else if (pow10 < 0)
     {
-        uint pow = Math::Pow10(-order);
+        uint pow = Math::Pow10(-pow10);
         Div(pow);
     }
 }
@@ -388,4 +391,24 @@ Order::E Value::GetOrder() const
     else if (fract > 0)              { return Order::Nano;  }
 
     return Order::One;
+}
+
+
+void Order::Store(Order::E order)
+{
+    stored = order;
+}
+
+
+Order::E Order::Restore()
+{
+    return stored;
+}
+
+
+int Order::GetPow10(Order::E order)
+{
+    static const int pows[Count] = { 6, 3, 0, -3, -6, -9 };
+
+    return pows[order];
 }

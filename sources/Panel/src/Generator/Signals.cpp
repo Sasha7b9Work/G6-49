@@ -123,8 +123,8 @@ static Parameter *params_MeanderA[] =
 static Form formMeanderA(TypeForm::Meander, params_MeanderA, &waves[Chan::A]);
 
 
-static ParameterPeriod    param_ImpulseA_Period   (Value("33", -9), Value("10", 6), Value("0.001"));
-static ParameterDuration  param_ImpulseA_Duration (Value("0"),      Value("100", 6), Value("100", -6));
+static ParameterPeriod    param_ImpulseA_Period   (Value("33", Order::Nano), Value("10", Order::Mega), Value("0.001"));
+static ParameterDuration  param_ImpulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
 static ParameterAmplitude param_ImpulseA_Amplitude;
 static ParameterOffset    param_ImpulseA_Offset;
 static ParameterPolarity  param_ImpulseA_Polarity;
@@ -145,10 +145,10 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
 
-static ParameterPeriod       param_PacketA_Period       (Value("0"), Value("100", 6), Value("200", -6));
-static ParameterDuration     param_PacketA_Duration     (Value("0"), Value("100", 6), Value("100", -6));
-static ParameterDouble        param_PacketA_PacketNumber (ParameterValueType::PacketNumber, "Кол-во имп", "Count imp", Value("0"), Value("100", 6), Value("3"));
-static ParameterPacketPeriod param_PacketA_PacketPeriod (Value("0"), Value("100", 6), Value("0.1"));
+static ParameterPeriod       param_PacketA_Period        (Value("0"), Value("100", Order::Mega), Value("200", Order::Micro));
+static ParameterDuration     param_PacketA_Duration      (Value("0"), Value("100", Order::Mega), Value("100", Order::Micro));
+static ParameterDouble        param_PacketA_PacketNumber (ParameterValueType::PacketNumber, "Кол-во имп", "Count imp", Value("0"), Value("100", Order::Mega), Value("3"));
+static ParameterPacketPeriod param_PacketA_PacketPeriod  (Value("0"), Value("100", Order::Mega), Value("0.1"));
 static ParameterAmplitude    param_PacketA_Amplitude;
 static ParameterOffset       param_PacketA_Offset;
 static ParameterPolarity     param_PacketA_Polarity;
@@ -189,8 +189,8 @@ static Form *formsA[] =
 
 
 static ParameterManipulationEnabled  param_SineModulationB_Manipulation         (DISABLED_RU, ENABLED_RU);
-static ParameterManipulationDuration param_SineModulationB_ManipulationDuration (Value("0"), Value("10", 3), Value("0.5"));
-static ParameterManipulationPeriod   param_SineModulationB_ManipulationPeriod   (Value("0"), Value("10", 3), Value("2.5", -3));
+static ParameterManipulationDuration param_SineModulationB_ManipulationDuration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
+static ParameterManipulationPeriod   param_SineModulationB_ManipulationPeriod   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
 //static ParameterDouble  param_SineModulationB_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
 
 static Parameter *params_SineModulationB[] =
@@ -306,8 +306,8 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 
-static ParameterPeriod    param_ImpulseB_Period   (Value("33", -9), Value("10", 6),  Value("100", -3));
-static ParameterDuration  param_ImpulseB_Duration (Value("0"),      Value("100", 6), Value("100", -6));
+static ParameterPeriod    param_ImpulseB_Period   (Value("33", Order::Nano), Value("10",  Order::Mega), Value("100", Order::Milli));
+static ParameterDuration  param_ImpulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
 static ParameterAmplitude param_ImpulseB_Amplitude;
 static ParameterOffset    param_ImpulseB_Offset;
 static ParameterPolarity  param_ImpulseB_Polarity;

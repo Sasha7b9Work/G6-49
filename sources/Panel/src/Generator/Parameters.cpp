@@ -330,30 +330,6 @@ pString ParameterDouble::ToString(Value val) const
 }
 
 
-pString Order::Suffix(Order::E order)
-{
-    static const pString suf[Count][2] =
-    {
-        {"ּ", "M"},
-        {"ך",  "k"},
-        {"",   ""},
-        {"ל",  "m"},
-        {"לך", "u"},
-        {"ם",  "n"}
-    };
-
-    return suf[order][LANGUAGE];
-}
-
-
-int Order::GetPow10(Order::E order)
-{
-    static const int pows[Count] = { 6, 3, 0, -3, -6, -9 };
-
-    return pows[order];
-}
-
-
 void ParameterChoice::OnPressButtonTune()
 {
     NextChoice();

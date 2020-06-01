@@ -1,5 +1,6 @@
 #include "common/Common.h"
 #include "Generator/MathSupport.h"
+#include "Settings/Settings.h"
 #include <cstring>
 
 
@@ -44,3 +45,20 @@ pString Value::ToString(Order::E, bool sign) const
 
     return buffer;
 }
+
+
+pString Order::Suffix(Order::E order)
+{
+    static const pString suf[Count][2] =
+    {
+        {"ּ", "M"},
+        {"ך",  "k"},
+        {"",   ""},
+        {"ל",  "m"},
+        {"לך", "u"},
+        {"ם",  "n"}
+    };
+
+    return suf[order][LANGUAGE];
+}
+

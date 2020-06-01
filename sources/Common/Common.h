@@ -36,6 +36,12 @@ struct Order
 
     // Возвращает степень, соответсвующую порядку
     static int GetPow10(Order::E order);
+
+    // Сохранить order во внутренней памяти
+    static void Store(Order::E order);
+
+    // Восстановить значение, ранее сохранённое функцией Store()
+    static Order::E Restore();
 };
 
 
@@ -45,12 +51,12 @@ struct Value
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
-    explicit Value(const char *const buffer, int order = 0);
+    explicit Value(const char *const buffer, Order::E order = Order::One);
 
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
     void FromDouble(double v);
     void FromUINT64(uint64 v) { value = v; }
-    void FromString(const char * const buffer, int order);
+    void FromString(const char * const buffer, int pow10);
 
     double ToDouble() const;
     uint64 ToUINT64() const { return value; }
