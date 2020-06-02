@@ -182,6 +182,9 @@ int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
     Value value = val;
     value.SetSign(1);
 
+    double valueD = val.ToDouble();
+    valueD = valueD;
+
     CorrectValueOnOrder(&value, order);
 
     int result = 0;
@@ -224,6 +227,21 @@ char MathValue::GetChar(const Value &value, int postition, Order::E order)
 
 void MathValue::CorrectValueOnOrder(Value *value, Order::E order)
 {
+    double valueD = value->ToDouble();
+    valueD = valueD;
+
+    static int counter = 0;
+
+    if (order == Order::Kilo)
+    {
+        counter++;
+
+        if (counter == 16)
+        {
+            counter = counter;
+        }
+    }
+
     if (order == Order::Count)
     {
         order = value->GetOrder();
@@ -236,6 +254,8 @@ void MathValue::CorrectValueOnOrder(Value *value, Order::E order)
     else if (order == Order::Kilo)
     {
         value->Div(1000);
+
+        valueD = value->ToDouble();
     }
     else if (order == Order::Milli)
     {
@@ -257,7 +277,7 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
     Value value = val;
     value.SetSign(1);
 
-    CorrectValueOnOrder(&value, order);
+    position += Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
 
     if(position < 0)
     {
