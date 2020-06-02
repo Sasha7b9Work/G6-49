@@ -37,7 +37,6 @@ void Viewer::Draw(int x, int y)
     static const funcDrawValue funcs[ParameterKind::Count] =
     {
         &Viewer::DrawDoubleValue,
-        &Viewer::DrawEmptyValue,
         &Viewer::DrawChoiceValue,
         &Viewer::DrawCompositeValue
     };
