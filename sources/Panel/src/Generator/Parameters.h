@@ -11,19 +11,24 @@ struct Key;
 class Parameter;
 
 
-class Parameter
+struct ParameterKind
 {
-public:
-
     enum E
     {
         Double,     // Величина, выраженная числовым значением
         Exit,       // Закрыть составной параметр (манипуляция)
         Choice,     // Выбор из нескольких значений
-        Composite   // Составной параметр, состоящий из нескольких простых (манипуляция)
+        Composite,  // Составной параметр, состоящий из нескольких простых (манипуляция)
+        Count
     };
+};
 
-    Parameter(E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
+
+class Parameter
+{
+public:
+
+    Parameter(ParameterKind::E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
     {
         name[0] = nRU;
         name[1] = nEN;
@@ -59,13 +64,15 @@ public:
     // Обработчик нажатия кнопки "Изменить"
     virtual void OnPressButtonTune() = 0;
 
+    ParameterKind::E GetKind() { return kind; }
+
     Viewer viewer;
 
 protected:
     
     Form *form;         // Форма, для которой зада этот параметр
     Parameter *parent;  // Если параметр вложенный, то здесь адрес родителя
-    E kind;
+    ParameterKind::E kind;
     const char *name[2];
 };
 
@@ -114,10 +121,7 @@ public:
     bool IsSigned() const { return (type == ParameterDoubleType::Offset); }
 
     // Возвращает true, если параметр обозначает напряжение
-    bool IsVoltage() const
-    {
-        return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset);
-    }
+    bool IsVoltage() const { return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset); }
 
     virtual void OnPressButtonTune();
 
@@ -173,7 +177,8 @@ class ParameterChoice : public Parameter
 {
 public:
 
-    ParameterChoice(ParameterChoiceType::E t, const char *nameRU, const char *nameEN) : Parameter(Parameter::Choice, nameRU, nameEN), type(t), choice(0), names(nullptr) { }
+    ParameterChoice(ParameterChoiceType::E t, const char *nameRU, const char *nameEN, const char **_choices = nullptr) :
+        Parameter(ParameterKind::Choice, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     ParameterChoiceType::E GetType() { return type; }
 
@@ -191,8 +196,8 @@ public:
 
 private:
 	ParameterChoiceType::E type;
-    int choice;             // Текущий выбор
-    const char **names;
+    int choice;                     // Текущий выбор
+    const char **choices;           // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
     
     // Количество вариантов выбора
     int NumChoices() const;
@@ -209,7 +214,7 @@ public:
     } value;
 
     ParameterComposite(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
-        Parameter(Parameter::Composite, nameRU, nameEN), value(Count), params(parameters), type(v) { }
+        Parameter(ParameterKind::Composite, nameRU, nameEN), value(Count), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
@@ -328,7 +333,8 @@ public:
 class ParameterManipulationEnabled : public ParameterChoice
 {
 public:
-    ParameterManipulationEnabled(pString, pString) : ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манипуляция", "Manipulation") { }
+    ParameterManipulationEnabled(const char **names) : 
+        ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манипуляция", "Manipulation", names) { }
 };
 
 

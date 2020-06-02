@@ -17,19 +17,19 @@ void Parameter::SetForm(Form *f)
 
 bool Parameter::IsDouble() const
 {
-    return (kind == Double);
+    return (kind == ParameterKind::Double);
 }
 
 
 bool Parameter::IsComposite() const
 {
-    return (kind == Composite);
+    return (kind == ParameterKind::Composite);
 }
 
 
 bool Parameter::IsChoice() const
 {
-    return (kind == Choice);
+    return (kind == ParameterKind::Choice);
 }
 
 
@@ -226,7 +226,7 @@ String ParameterComposite::ToString() const
 
 String ParameterChoice::ToString() const
 {
-    return String(names[choice]);
+    return String(choices[choice]);
 }
 
 
@@ -294,12 +294,22 @@ bool ParameterDouble::InRange(Value val) const
 
 int ParameterChoice::NumChoices() const
 {
-    return 1;
+    int count = 0;
+
+    const char *ch = choices[count];
+
+    while (ch != nullptr)
+    {
+        count++;
+        ch = choices[count];
+    }
+
+    return count / 2;
 }
 
 
 ParameterDouble::ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
-    Parameter(Parameter::Double, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
+    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
 }
 

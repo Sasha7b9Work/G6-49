@@ -73,18 +73,6 @@ void WaveGraphics::DrawParameters(Chan::E ch, int y0)
     
     for (int i = 0; i < form->NumParameters(); i++)
     {
-        Parameter *parameter = form->GetParameter(i);
-
-        if (parameter->IsChoice())
-        {
-            ParameterChoice *choice = reinterpret_cast<ParameterChoice *>(parameter);
-
-            if (choice->GetType() == ParameterChoiceType::ManipulationEnabled)
-            {
-                int i = 0;
-            }
-        }
-
         form->GetParameter(i)->viewer.Draw(x0, y0);
 
         y0 += 11;

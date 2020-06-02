@@ -31,29 +31,40 @@ void Viewer::Draw(int x, int y)
 
     String(param->Name()).Draw(x + 1, y, Color::Chan(ch));
 
-    DrawParameterValue(x + 80, y);
+    typedef void (Viewer::*funcDraw)(int, int);
+
+    static const funcDraw funcs[ParameterKind::Count] =
+    {
+        &Viewer::DrawDouble,
+        &Viewer::DrawEmpty,
+        &Viewer::DrawChoice,
+        &Viewer::DrawEmpty
+    };
+
+    (this->*funcs[param->GetKind()])(x + 80, y);
 }
 
 
-void Viewer::DrawParameterValue(int x, int y)
+void Viewer::DrawDouble(int x, int y)
 {
-    if (param->IsChoice())
-    {
-        int i = 0;
-    }
-
-    if(param->IsChoice() && static_cast<ParameterChoice *>(param)->DrawChoice(x + 6, y))
-    {
-        return;
-    }
-
     Font::ForceUpperCase(false);
-    if(param->IsDouble() && static_cast<ParameterDouble *>(param)->IsSigned())
+
+    if(static_cast<ParameterDouble *>(param)->IsSigned())
     {
         x -= 4;
     }
 
     String(param->ToString()).Draw(x, y);
+}
 
-    Font::ForceUpperCase(true);
+
+void Viewer::DrawChoice(int x, int y)
+{
+    param->ToString().Draw(x, y);
+}
+
+
+void Viewer::DrawEmpty(int, int)
+{
+
 }

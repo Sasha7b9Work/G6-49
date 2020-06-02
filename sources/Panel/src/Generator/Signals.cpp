@@ -5,7 +5,13 @@
 #include "Menu/Pages/Pages.h"
 
 
-static ParameterManipulationEnabled   sineModulationA_Manipulation        (DISABLED_RU, ENABLED_RU);
+static const char *namesModulationEnabled[] =
+{
+    DISABLED_RU, DISABLED_EN,
+    ENABLED_RU, ENABLED_EN
+};
+
+static ParameterManipulationEnabled   sineModulationA_Manipulation        (namesModulationEnabled);
 static ParameterManipulationDuration  sineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5"));
 static ParameterManipulationPeriod    sineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("0.002500"));
 //static ParameterDouble  SineModulationA_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
@@ -188,7 +194,7 @@ static Form *formsA[] =
 
 
 
-static ParameterManipulationEnabled  sineModulationB_Manipulation         (DISABLED_RU, ENABLED_RU);
+static ParameterManipulationEnabled  sineModulationB_Manipulation         (namesModulationEnabled);
 static ParameterManipulationDuration sineModulationB_ManipulationDuration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
 static ParameterManipulationPeriod   sineModulationB_ManipulationPeriod   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
 //static ParameterDouble  SineModulationB_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
