@@ -175,16 +175,40 @@ Color Indicator::CalculateColor(int pos) const
     {
         if (AllNumbersOfLeftIsZero(pos))
         {
-            return (RightDigitIzComma(pos) || PositionComma() < pos) ? Color::FILL : Color::GRAY_25;
+            if (RightDigitIzComma(pos))
+            {
+                return Color::FILL;
+            }
+            else if ((PositionComma() < pos) && !AllNumbersOfLeftIsZero(pos))
+            {
+                return Color::FILL;
+            }
+            else if (IndexHighlightReal() >= pos && (PositionComma() < pos))
+            {
+                return Color::FILL;
+            }
+            else
+            {
+                return Color::GRAY_25;
+            }
+
         }
         if (AllNumberOfRightIsZero(pos))
         {
             if (PositionComma() < pos)
             {
-                return (IndexHighlightReal() >= pos) ? Color::FILL : Color::GRAY_25;
+                if (IndexHighlightReal() >= pos)
+                {
+                    return Color::FILL;
+                }
+                else
+                {
+                    return Color::GRAY_25;
+                }
             }
         }
     }
+
     return Color::FILL;
 }
 
