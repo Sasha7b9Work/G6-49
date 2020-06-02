@@ -317,33 +317,12 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 
 int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
 {
-    if (param->IsTime())
+    if (param->IsVoltage())
     {
-        return GetNumberDigitsBeforeCommaTime(order);
+        return 2;
     }
 
-    ParameterDoubleType::E type = param->GetType();
-
-    if (type == ParameterDoubleType::Frequency)
-    {
-        return GetNumberDigitsBeforeCommaFrequency(order);
-    }
-
-    return numberDigits[type][0];
-}
-
-
-int MathParameterValue::GetNumberDigitsBeforeCommaTime(Order::E order)
-{
-    Value max = param->GetMax();
-
-    return MathValue::GetPositionFirstDigit(max, order) + 1;
-}
-
-
-int MathParameterValue::GetNumberDigitsBeforeCommaFrequency(Order::E order)
-{
-    return numberDigits[param->GetType()][0] - Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
+    return MathValue::GetPositionFirstDigit(param->GetMax(), order) + 1;
 }
 
 
