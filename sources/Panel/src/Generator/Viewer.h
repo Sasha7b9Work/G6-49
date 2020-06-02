@@ -19,11 +19,13 @@ public:
 
 private:
 
-    void DrawDouble(int x, int y);
+    void DrawDoubleValue(int x, int y);
 
-    void DrawChoice(int x, int y);
+    void DrawChoiceValue(int x, int y);
 
-    void DrawEmpty(int x, int y);
+    void DrawCompositeValue(int x, int y);
+
+    void DrawEmptyValue(int x, int y);
 
     Parameter *param;
 };

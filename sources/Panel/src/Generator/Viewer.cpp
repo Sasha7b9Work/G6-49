@@ -32,21 +32,21 @@ void Viewer::Draw(int x, int y)
 
     String(param->Name()).Draw(x + 1, y, Color::Chan(ch));
 
-    typedef void (Viewer::*funcDraw)(int, int);
+    typedef void (Viewer::*funcDrawValue)(int, int);
 
-    static const funcDraw funcs[ParameterKind::Count] =
+    static const funcDrawValue funcs[ParameterKind::Count] =
     {
-        &Viewer::DrawDouble,
-        &Viewer::DrawEmpty,
-        &Viewer::DrawChoice,
-        &Viewer::DrawEmpty
+        &Viewer::DrawDoubleValue,
+        &Viewer::DrawEmptyValue,
+        &Viewer::DrawChoiceValue,
+        &Viewer::DrawCompositeValue
     };
 
     (this->*funcs[param->GetKind()])(x + 80, y);
 }
 
 
-void Viewer::DrawDouble(int x, int y)
+void Viewer::DrawDoubleValue(int x, int y)
 {
     Font::ForceUpperCase(false);
 
@@ -59,7 +59,7 @@ void Viewer::DrawDouble(int x, int y)
 }
 
 
-void Viewer::DrawChoice(int x, int y)
+void Viewer::DrawChoiceValue(int x, int y)
 {
     String string = param->ToString();
 
@@ -73,7 +73,13 @@ void Viewer::DrawChoice(int x, int y)
 }
 
 
-void Viewer::DrawEmpty(int, int)
+void Viewer::DrawCompositeValue(int x, int y)
+{
+    param->ToString().Draw(x, y);
+}
+
+
+void Viewer::DrawEmptyValue(int, int)
 {
 
 }
