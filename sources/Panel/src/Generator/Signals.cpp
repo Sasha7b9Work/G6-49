@@ -6,7 +6,7 @@
 #include "Menu/Pages/Pages.h"
 
 
-static const char *namesModulationEnabled[] =
+static const char *namesManipulationEnabled[] =
 {
     DISABLED_RU, DISABLED_EN,
     ENABLED_RU,  ENABLED_EN,
@@ -20,25 +20,25 @@ static void FuncCloseManipulation()
 }
 
 
-static ParameterManipulationEnabled   sineModulationA_Manipulation        (namesModulationEnabled);
-static ParameterManipulationDuration  sineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5", Order::Milli));
-static ParameterManipulationPeriod    sineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("25", Order::Milli));
-static ParameterButton                sineModulationA_Exit                ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
+static ParameterManipulationEnabled   sineManipulationA_Enabled (namesManipulationEnabled);
+static ParameterManipulationDuration  sineManipulationA_Duration(Value("0"), Value("10"),    Value("5", Order::Milli));
+static ParameterManipulationPeriod    sineManipulationA_Period  (Value("0"), Value("10000"), Value("25", Order::Milli));
+static ParameterButton                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 
-static Parameter *params_SineModulationA[] =
+static Parameter *sineManipulationA[] =
 {
-    &sineModulationA_Manipulation,
-    &sineModulationA_ManipulationDuration,
-    &sineModulationA_ManipulationPeriod,
-    &sineModulationA_Exit,
+    &sineManipulationA_Enabled,
+    &sineManipulationA_Duration,
+    &sineManipulationA_Period,
+    &sineManipulationA_Exit,
     nullptr
 };
 
 static ParameterFrequency    sineA_Frequency;
 static ParameterAmplitude    sineA_Amplitude;
 static ParameterOffset       sineA_Offset;
-static ParameterManipulation sineA_Manipulation(params_SineModulationA);
+static ParameterManipulation sineA_Manipulation(sineManipulationA);
 
 static Parameter *params_SineA[] =
 {
@@ -221,17 +221,17 @@ static Form *formsA[] =
 
 
 
-static ParameterManipulationEnabled  sineModulationB_Manipulation         (namesModulationEnabled);
-static ParameterManipulationDuration sineModulationB_ManipulationDuration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
-static ParameterManipulationPeriod   sineModulationB_ManipulationPeriod   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
-static ParameterButton               sineModulationB_Exit                 ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
+static ParameterManipulationEnabled  sineManipulationB_Enabled  (namesManipulationEnabled);
+static ParameterManipulationDuration sineManipulationB_Duration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
+static ParameterManipulationPeriod   sineManipulationB_Period   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
+static ParameterButton               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
-static Parameter *params_SineModulationB[] =
+static Parameter *sineManipulationB[] =
 {
-    &sineModulationB_Manipulation,
-    &sineModulationB_ManipulationDuration,
-    &sineModulationB_ManipulationPeriod,
-    &sineModulationB_Exit,
+    &sineManipulationB_Enabled,
+    &sineManipulationB_Duration,
+    &sineManipulationB_Period,
+    &sineManipulationB_Exit,
     nullptr
 };
 
@@ -239,7 +239,7 @@ static ParameterFrequency    sineB_Frequency;
 static ParameterAmplitude    sineB_Amplitude;
 static ParameterOffset       sineB_Offset;
 static ParameterPhase        sineB_Phase;
-static ParameterManipulation sineB_Manipulation(params_SineModulationB);
+static ParameterManipulation sineB_Manipulation(sineManipulationB);
 
 static Parameter *params_SineB[] =
 {
