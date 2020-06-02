@@ -203,7 +203,7 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 
         int fract = value.FractNano();
 
-        while(position < -1)
+        while(position < Order::GetPow10(order) - 1)
         {
             fract %= divider;
             divider /= 10;

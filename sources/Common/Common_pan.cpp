@@ -7,7 +7,7 @@
 static void AddChar(char *buffer, const Value &value, int pos)
 {
     char digit[2] = { 0, 0 };
-    digit[0] = MathValue::GetChar(value, pos);
+    digit[0] = MathValue::GetChar(value, pos, value.GetOrder());
     std::strcat(buffer, digit);
 }
 
@@ -15,6 +15,9 @@ static void AddChar(char *buffer, const Value &value, int pos)
 pString Value::ToString(bool sign) const
 {
     static char buffer[50];
+
+    double valueD = ToDouble();
+    valueD = valueD;
 
     buffer[0] = '\0';
 
