@@ -7,32 +7,6 @@
 #include <cstring>
 
 
-//Value *LogicFloatValue::value = nullptr;
-//ParameterDouble *LogicFloatValue::parameter = nullptr;
-
-
-// Здесь хранится количество значащих цифр перед (индекс 0) и после (индекс 1) запятой. Знак не учитывается
-static const int numberDigits[ParameterDoubleType::Count][2] =
-{
-    {9,  3},   // Frequency,
-    {10, 9},   // Period,
-    {2,  3},   // Amplitude,
-    {2,  3},   // Offset,
-    {10, 9},   // Duration,
-    {10, 9},   // DutyRatio,
-    {10, 9},   // Phase,
-    {10, 9},   // Delay,
-    {10, 9},   // DurationRise,
-    {10, 9},   // DurationFall,
-    {10, 9},   // DurationStady,
-    {10, 9},   // DutyFactor,
-    {10, 9},   // ManipulationDuration,
-    {10, 9},   // ManipulationPeriod,
-    {10, 9},   // PacketPeriod,
-    {10, 9},   // PacketNumber,
-    {10, 9}    // Exit,
-};
-
 ParameterDouble *MathParameterValue::param = nullptr;
 
 
@@ -328,14 +302,19 @@ int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
 
 int MathParameterValue::GetNumberDigitsAfterComma(Order::E order)
 {
+    if (param->IsVoltage())
+    {
+        return 3;
+    }
+
     ParameterDoubleType::E type = param->GetType();
 
-    int result = numberDigits[type][1];
+    order = (order == Order::Count) ? param->GetValue().GetOrder() : order;
 
     if (type == ParameterDoubleType::Frequency)
     {
-        result += Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
+        return 3 + Order::GetPow10(order);
     }
 
-    return result;
+    return 8 + Order::GetPow10(order);
 }
