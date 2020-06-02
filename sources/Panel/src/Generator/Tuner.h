@@ -63,8 +63,10 @@ private:
 
     DisplayCorrection *display;
 
+    int Draw(int x, int y, bool test);
+
     // Нарисовать значок подсветки
-    void HighlightSymbol(int x, int y) const;
+    void HighlightSymbol(int x, int y, Color color) const;
 
     // Возвращает действительный индекс подсвеченного разряда (номер разряда в массиве digits)
     int IndexHighlightReal() const;
@@ -105,8 +107,8 @@ private:
     // Изменяет знак у параметра со знаком. Возвращает true, если pos == 0
     bool ChangeSign(Value *value, int pos);
 
-    // Возвращает цвет, которым нужно отрисовывать символ в позиции pos
-    Color CalculateColor(int pos) const;
+    // Возвращает цвет, которым нужно отрисовывать символ в позиции pos. Если test == true, то функция всегда будет возвращать цвет фона
+    Color CalculateColor(int pos, bool test) const;
 
     // Возвращает true, если нужно дополнительное смещение между разрядами
     int AdditionShiftForDigit(int pos);
@@ -201,7 +203,7 @@ class DisplayCorrection
     friend class Tuner;
 
 public:
-    
+   
     DisplayCorrection(Tuner *tuner);
 
     void Init();
@@ -219,6 +221,9 @@ public:
     static Order::E CalculateOrderForIndication();
 
 private:
+
+    // Ширина поля для вывода единиц измерения
+    static const int WIDTH_UNITS = 50;
 
     Tuner *tuner;
 

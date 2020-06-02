@@ -129,17 +129,30 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 }
 
 
-int Indicator::Draw(int x, int y, int)
+int Indicator::Draw(int x, int y, int width)
 {
-    x = Tuner::Current()->GetParameter()->IsVoltage() ? 70 : 20;
+    if (Tuner::Current()->GetParameter()->IsVoltage())
+    {
+        return Draw(x + 90, y, false);
+    }
 
+    int end = Draw(x, y, true);
+
+    x += (width - (end - x)) / 2;
+
+    return Draw(x, y, false);
+}
+
+
+int Indicator::Draw(int x, int y, bool test)
+{
     static const int dx = 12;
 
     int pos = 0;
 
     while (digits[pos] != '\0')
     {
-        Color color = CalculateColor(pos);
+        Color color = CalculateColor(pos, test);
 
         x += AdditionShiftForDigit(pos);
 
@@ -147,7 +160,7 @@ int Indicator::Draw(int x, int y, int)
 
         if (pos == IndexHighlightReal())
         {
-            HighlightSymbol(x, y);
+            HighlightSymbol(x, y, test ? Color::BACK : Color::FILL);
         }
 
         x += dx;
@@ -164,8 +177,13 @@ int Indicator::Draw(int x, int y, int)
 }
 
 
-Color Indicator::CalculateColor(int pos) const
+Color Indicator::CalculateColor(int pos, bool test) const
 {
+    if (test)
+    {
+        return Color::BACK;
+    }
+
     if (!digits[pos].IsNumber())
     {
         return Color::FILL;
@@ -274,13 +292,13 @@ int Indicator::AdditionShiftForDigit(int pos)
 }
 
 
-void Indicator::HighlightSymbol(int x, int y) const
+void Indicator::HighlightSymbol(int x, int y, Color color) const
 {
     Font::StoreAndSet(TypeFont::_7);
 
     x += 2;
 
-    Char(Ideograph::_7::FillDown).Draw(x, y - 7, Color::WHITE);
+    Char(Ideograph::_7::FillDown).Draw(x, y - 7, color);
 
     Char(Ideograph::_7::FillUp).Draw(x, y + 19);
 
@@ -540,7 +558,7 @@ void DisplayCorrection::Draw()
     }
     else
     {
-        x = indicator.Draw(x, y, WaveGraphics::Width());
+        x = indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width() - WIDTH_UNITS);
 
         DrawUnits(x, y);
     }
