@@ -24,10 +24,6 @@ struct MathValue
     // Возвращает символ в позиции position. Знак не учитывается. Точка находится соответственно order. One - после единиц, Kilo - после тысяч и так далее.
     // Order::Count - значенине по умолчанию - запятая в позиции относительно размерности числового значения
     static char GetChar(const Value &value, int postition, Order::E order = Order::Count);
-
-private:
-
-    static void CorrectValueOnOrder(Value *value, Order::E order);
 };
 
 

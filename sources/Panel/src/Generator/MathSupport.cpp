@@ -179,11 +179,6 @@ int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
     Value value = val;
     value.SetSign(1);
 
-    double valueD = val.ToDouble();
-    valueD = valueD;
-
-    CorrectValueOnOrder(&value, order);
-
     int result = 0;
 
     if (value.Integer() > 0)
@@ -212,60 +207,13 @@ int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
         } while (fract < (1000 * 1000 * 1000));
     }
 
-    return result;
+    return result - Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
 }
 
 
 char MathValue::GetChar(const Value &value, int postition, Order::E order)
 {
     return static_cast<char>(GetDigit(value, postition, order) | 0x30);
-}
-
-
-void MathValue::CorrectValueOnOrder(Value *value, Order::E order)
-{
-    double valueD = value->ToDouble();
-    valueD = valueD;
-
-    static int counter = 0;
-
-    if (order == Order::Kilo)
-    {
-        counter++;
-
-        if (counter == 16)
-        {
-            counter = counter;
-        }
-    }
-
-    if (order == Order::Count)
-    {
-        order = value->GetOrder();
-    }
-
-    if (order == Order::Mega)
-    {
-        value->Div(1000 * 1000);
-    }
-    else if (order == Order::Kilo)
-    {
-        value->Div(1000);
-
-        valueD = value->ToDouble();
-    }
-    else if (order == Order::Milli)
-    {
-        value->Mul(1000);
-    }
-    else if (order == Order::Micro)
-    {
-        value->Mul(1000 * 1000);
-    }
-    else if (order == Order::Nano)
-    {
-        value->Mul(1000 * 1000 * 1000);
-    }
 }
 
 
