@@ -18,6 +18,7 @@ struct ParameterKind
         Double,     // Величина, выраженная числовым значением
         Choice,     // Выбор из нескольких значений
         Composite,  // Составной параметр, состоящий из нескольких простых (манипуляция)
+        Button,     // Кнопка - по её нажатию происходит какое-либо действие
         Count
     };
 };
@@ -203,17 +204,22 @@ private:
 };
 
 
-class ParameterComposite : public Parameter
+struct ParameterCompositeType
 {
-public:
     enum E
     {
         Manipulation,   // НАСТРОЙКИ СИГНАЛОВ / Параметр / МАНИПУЛЯЦИЯ на форме СИНУС
         Count
-    } value;
+    };
+};
 
-    ParameterComposite(E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
-        Parameter(ParameterKind::Composite, nameRU, nameEN), value(Count), params(parameters), type(v) { }
+
+class ParameterComposite : public Parameter
+{
+public:
+
+    ParameterComposite(ParameterCompositeType::E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
+        Parameter(ParameterKind::Composite, nameRU, nameEN), value(ParameterCompositeType::Count), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
@@ -229,8 +235,16 @@ public:
 
 private:
     
+    ParameterCompositeType::E value;
     Parameter **params; // Здесь находятся дополнительные параметры в случае, если они требуются
-    E type;
+    ParameterCompositeType::E type;
+};
+
+
+class ParameterButton : public Parameter
+{
+public:
+private:
 };
 
 
