@@ -6,6 +6,7 @@
 
 
 class ParameterDouble;
+class ParameterInteger;
 class Tuner;
 class DisplayCorrection;
 
@@ -256,6 +257,7 @@ public:
     };
 
     Tuner(ParameterDouble *param);
+    Tuner(ParameterInteger *param);
 
     void Init();
 

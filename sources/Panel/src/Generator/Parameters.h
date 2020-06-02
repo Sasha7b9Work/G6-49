@@ -19,6 +19,7 @@ struct ParameterKind
         Choice,     // ¬ыбор из нескольких значений
         Composite,  // —оставной параметр, состо€щий из нескольких простых (манипул€ци€)
         Button,     //  нопка - по еЄ нажатию происходит какое-либо действие
+        Integer,
         Count
     };
 };
@@ -45,13 +46,9 @@ public:
     // ¬озвращает адрес родительского параметра
     Parameter *GetParent();
 
-    // true, если параметр имеет тип Parameter::Value
     bool IsDouble() const;
-
-    // true, если параметр имеет тип Parameter::Complex
+    bool IsInteger() const;
     bool IsComposite() const;
-
-    // true, если параметр имеет тип Parameter::Choice
     bool IsChoice() const;
 
     // ¬озвращает true, если параметр сложный и открыт
@@ -183,6 +180,12 @@ public:
     virtual void OnPressButtonTune();
 
 private:
+
+    Tuner tuner;
+    ParameterIntegerType::E type;
+    Value min;
+    Value max;
+    Value value;
 };
 
 

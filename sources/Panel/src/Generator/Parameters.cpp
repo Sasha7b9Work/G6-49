@@ -21,6 +21,12 @@ bool Parameter::IsDouble() const
 }
 
 
+bool Parameter::IsInteger() const
+{
+    return (kind == ParameterKind::Integer);
+}
+
+
 bool Parameter::IsComposite() const
 {
     return (kind == ParameterKind::Composite);
@@ -354,6 +360,24 @@ String ParameterDouble::ToString(Value val) const
     string.Append(GetUnits(val.GetOrder()));
 
     return string;
+}
+
+
+ParameterInteger::ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
+    Parameter(ParameterKind::Integer, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
+{
+}
+
+
+String ParameterInteger::ToString() const
+{
+    return String("");
+}
+
+
+void ParameterInteger::OnPressButtonTune()
+{
+
 }
 
 

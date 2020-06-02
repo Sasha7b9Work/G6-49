@@ -826,6 +826,11 @@ Tuner::Tuner(ParameterDouble *_param) : param(_param), display(this)
 {
 }
 
+Tuner::Tuner(ParameterInteger *) : display(this)
+{
+
+}
+
 
 void Tuner::Init()
 {

@@ -39,7 +39,8 @@ void Viewer::Draw(int x, int y)
         &Viewer::DrawDoubleValue,
         &Viewer::DrawChoiceValue,
         &Viewer::DrawCompositeValue,
-        &Viewer::DrawButton
+        &Viewer::DrawButton,
+        &Viewer::DrawIntegerValue
     };
 
     (this->*funcs[param->GetKind()])(x + 80, y);
@@ -56,6 +57,12 @@ void Viewer::DrawDoubleValue(int x, int y)
     }
 
     String(param->ToString()).Draw(x, y);
+}
+
+
+void Viewer::DrawIntegerValue(int, int)
+{
+
 }
 
 

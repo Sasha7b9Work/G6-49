@@ -85,6 +85,7 @@ public:
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
     ParameterDouble *FindParameter(ParameterDoubleType::E p);
     ParameterChoice *FindParameter(ParameterChoiceType::E p);
+    ParameterInteger *FindParameter(ParameterIntegerType::E p);
     
     // Засылает параметр в генератор
     void SendParameterToGenerator(ParameterDoubleType::E p);

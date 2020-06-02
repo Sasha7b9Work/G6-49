@@ -27,5 +27,7 @@ private:
 
     void DrawButton(int x, int y);
 
+    void DrawIntegerValue(int x, int y);
+
     Parameter *param;
 };

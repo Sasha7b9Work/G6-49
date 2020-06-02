@@ -204,6 +204,12 @@ void PGenerator::SetParameter(ParameterDouble *param)
 }
 
 
+void PGenerator::SetParameter(ParameterInteger *)
+{
+    int i = 0;
+}
+
+
 void PGenerator::TuneChannel(Chan::E ch)
 {
     EnableChannel(ch, set.enabled[ch]);
@@ -227,5 +233,9 @@ void PGenerator::SetParameter(Parameter *parameter)
     else if(parameter->IsChoice())
     {
         SetParameter(static_cast<ParameterChoice *>(parameter));
+    }
+    else if (parameter->IsInteger())
+    {
+        SetParameter(static_cast<ParameterInteger *>(parameter));
     }
 }

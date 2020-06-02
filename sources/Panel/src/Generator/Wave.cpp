@@ -307,6 +307,12 @@ ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
 }
 
 
+ParameterInteger *Form::FindParameter(ParameterIntegerType::E p)
+{
+    return nullptr;
+}
+
+
 void Form::SendParameterToGenerator(ParameterDoubleType::E p)
 {
     Parameter *param = FindParameter(p);
@@ -323,6 +329,17 @@ void Form::SendParameterToGenerator(ParameterChoiceType::E p)
     Parameter *param = FindParameter(p);
 
     if(param)
+    {
+        PGenerator::SetParameter(param);
+    }
+}
+
+
+void Form::SendParameterToGenerator(ParameterIntegerType::E p)
+{
+    Parameter *param = FindParameter(p);
+
+    if (param)
     {
         PGenerator::SetParameter(param);
     }
