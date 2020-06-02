@@ -198,7 +198,7 @@ void Form::TuneGenerator()
 
             int opened = currentParam;
 
-            CloseOpenedParameter();
+            CloseCompositeParameter();
 
             SendParameterToGenerator(ParameterDoubleType::Frequency);
             SendParameterToGenerator(ParameterDoubleType::Amplitude);
@@ -216,7 +216,7 @@ void Form::TuneGenerator()
             SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
             SendParameterToGenerator(ParameterDoubleType::ManipulationPeriod);
 
-            CloseOpenedParameter();
+            CloseCompositeParameter();
 
             SendParameterToGenerator(ParameterDoubleType::Frequency);
             SendParameterToGenerator(ParameterDoubleType::Amplitude);
@@ -352,7 +352,7 @@ void Form::OpenCompositeParameter()
 }
 
 
-bool Form::CloseOpenedParameter()
+bool Form::CloseCompositeParameter()
 {
     if (params[0]->IsOpened())
     {

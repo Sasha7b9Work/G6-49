@@ -35,9 +35,7 @@ public:
         params = nullptr;
         numParams = 0;
         currentParam = 0;
-        old.params = 0;
-        old.numParams = 0;
-        old.currentParam = 0;
+        old.Init(nullptr, 0, 0);
     };
 
     // Возвращает человеческое название формы сигнала
@@ -66,10 +64,7 @@ public:
     
     // Возвращает указатель на родительский Wave
     Wave *GetWave() { return wave; };
-    
-    // Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
-    bool CloseOpenedParameter();
-    
+  
     // Нарисовать изображение сигнала
     void DrawUGO(Chan::E ch, int y0);
     
@@ -97,6 +92,8 @@ public:
 
     // Раскрывает составной параметр
     void OpenCompositeParameter();
+    // Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
+    bool CloseCompositeParameter();
 
 private:
     
