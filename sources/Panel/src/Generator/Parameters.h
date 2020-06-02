@@ -244,13 +244,15 @@ class ParameterButton : public Parameter
 {
 public:
 
-    ParameterButton(const char *titleRU, const char *titleEN) : Parameter(ParameterKind::Button, titleRU, titleEN) {};
+    ParameterButton(const char *titleRU, const char *titleEN, pFuncVV f) : Parameter(ParameterKind::Button, titleRU, titleEN), func(f) {};
 
     virtual String ToString() const { return String(""); };
 
-    virtual void OnPressButtonTune() {};
+    virtual void OnPressButtonTune() { func(); };
 
 private:
+
+    pFuncVV func;
 };
 
 

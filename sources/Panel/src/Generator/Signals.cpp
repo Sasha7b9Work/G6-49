@@ -13,10 +13,17 @@ static const char *namesModulationEnabled[] =
     nullptr
 };
 
+
+static void FuncCloseManipulation()
+{
+    CURRENT_FORM->CloseCompositeParameter();
+}
+
+
 static ParameterManipulationEnabled   sineModulationA_Manipulation        (namesModulationEnabled);
 static ParameterManipulationDuration  sineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5", Order::Milli));
 static ParameterManipulationPeriod    sineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("25", Order::Milli));
-static ParameterButton                sineModulationA_Exit                ("Закрыть ( ESC )", "Close ( ESC )");
+static ParameterButton                sineModulationA_Exit                ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 
 static Parameter *params_SineModulationA[] =
@@ -217,7 +224,7 @@ static Form *formsA[] =
 static ParameterManipulationEnabled  sineModulationB_Manipulation         (namesModulationEnabled);
 static ParameterManipulationDuration sineModulationB_ManipulationDuration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
 static ParameterManipulationPeriod   sineModulationB_ManipulationPeriod   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
-static ParameterButton               sineModulationB_Exit                 ("Закрыть ( ESC )", "Close ( ESC )");
+static ParameterButton               sineModulationB_Exit                 ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 static Parameter *params_SineModulationB[] =
 {
