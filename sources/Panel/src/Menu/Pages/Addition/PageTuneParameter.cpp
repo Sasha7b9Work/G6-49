@@ -181,3 +181,9 @@ void PageTuneParameter::ResetModeEntering()
     pTuneParameter.items[0] = &Item::emptyDark;
     pTuneParameter.items[1] = &Item::emptyDark;
 }
+
+
+bool PageTuneParameter::IsOpened()
+{
+    return (CURRENT_PAGE == PageTuneParameter::self);
+}

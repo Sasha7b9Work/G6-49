@@ -67,6 +67,8 @@ struct PageTuneParameter
 
     // Эту функцию будет вызывать Tuner при нажатии кнопки "Применить"
     static void CallbackOnButtonApply();
+
+    static bool IsOpened();
 };
 
 
