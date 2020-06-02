@@ -226,7 +226,7 @@ String ParameterComposite::ToString() const
 
 String ParameterChoice::ToString() const
 {
-    return String(choices[choice]);
+    return String(choices[(choice * 2) + LANGUAGE]);
 }
 
 

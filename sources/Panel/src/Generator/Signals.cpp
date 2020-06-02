@@ -8,7 +8,8 @@
 static const char *namesModulationEnabled[] =
 {
     DISABLED_RU, DISABLED_EN,
-    ENABLED_RU, ENABLED_EN
+    ENABLED_RU,  ENABLED_EN,
+    nullptr
 };
 
 static ParameterManipulationEnabled   sineModulationA_Manipulation        (namesModulationEnabled);
