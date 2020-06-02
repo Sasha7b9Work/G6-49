@@ -201,6 +201,39 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 }
 
 
+bool ParameterDouble::IsVoltage() const
+{
+    return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset);
+}
+
+
+bool ParameterDouble::IsTime() const
+{
+    static const bool isTime[ParameterDoubleType::Count] =
+    {
+        false,  // Частота
+        true,   // Период
+        false,  // Амплитуда
+        false,  // Смещение
+        true,   // Длительность
+        false,  // Скважность
+        false,  // Сдвиг фазы
+        true,   // Задержка
+        true,   // Длительность нарастания
+        true,   // Длительность спада
+        true,   // Длительность установившего значения
+        false,  // Коэффициент заполнения
+        true,   // Длительность импульсов в режиме манипуляции
+        true,   // Период следования импульсов в режиме манипуляции
+        true,   // Период следования пачек импульсов в пакетном режиме
+        false,  // Число импульсов в пачке пакетного режима
+        false   // Этот параметр закрывает открытый параметр
+    };
+
+    return isTime[type];
+}
+
+
 String ParameterComposite::ToString() const
 {
     if(type == Manipulation)

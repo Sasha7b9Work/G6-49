@@ -120,8 +120,11 @@ public:
     // ¬озвращает true, если параметр имеет знак
     bool IsSigned() const { return (type == ParameterDoubleType::Offset); }
 
-    // ¬озвращает true, если параметр обозначает напр€жение
-    bool IsVoltage() const { return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset); }
+    // ¬озвращает true, если параметр имеет размерность "вольт"
+    bool IsVoltage() const;
+
+    // ¬озвращает true, если параметр имеетр размерность "секунда"
+    bool IsTime() const;
 
     virtual void OnPressButtonTune();
 

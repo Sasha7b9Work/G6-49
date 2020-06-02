@@ -317,16 +317,31 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 
 int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
 {
-    ParameterDoubleType::E type = param->GetType();
+    if (param->IsTime())
+    {
+        return GetNumberDigitsBeforeCommaTime(order);
+    }
 
-    int result = numberDigits[type][0];
+    ParameterDoubleType::E type = param->GetType();
 
     if (type == ParameterDoubleType::Frequency)
     {
-        result -= Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
+        return GetNumberDigitsBeforeCommaFrequency(order);
     }
 
-    return result;
+    return numberDigits[type][0];
+}
+
+
+int MathParameterValue::GetNumberDigitsBeforeCommaTime(Order::E)
+{
+    return 5;
+}
+
+
+int MathParameterValue::GetNumberDigitsBeforeCommaFrequency(Order::E order)
+{
+    return numberDigits[param->GetType()][0] - Order::GetPow10((order == Order::Count) ? param->GetValue().GetOrder() : order);
 }
 
 

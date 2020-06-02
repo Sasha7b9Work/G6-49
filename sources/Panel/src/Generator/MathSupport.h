@@ -45,4 +45,10 @@ private:
 
     // —обственно параметр, по которому будут производитс€ вычислеин€
     static ParameterDouble *param;
+
+    // ¬озвращает количество разр€дов перед зап€той у параметра времени
+    static int GetNumberDigitsBeforeCommaTime(Order::E order = Order::Count);
+
+    // ¬озвращает количество разр€дов перед зап€той у параметра частоты
+    static int GetNumberDigitsBeforeCommaFrequency(Order::E order = Order::Count);
 };
