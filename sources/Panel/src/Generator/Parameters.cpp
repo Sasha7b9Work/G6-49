@@ -353,11 +353,9 @@ String ParameterDouble::ToString() const
 
 String ParameterDouble::ToString(Value val) const
 {
-    Order::E order = val.GetOrder();
-
-    String string(val.ToString(order, IsSigned()));
+    String string(val.ToString(IsSigned()));
     string.Append(" ");
-    string.Append(GetUnits(order));
+    string.Append(GetUnits(val.GetOrder()));
 
     return string;
 }

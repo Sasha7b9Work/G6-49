@@ -205,11 +205,6 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 
         while(position < -1)
         {
-            if (position > -4)
-            {
-                int i = 0;
-            }
-
             fract %= divider;
             divider /= 10;
             position++;

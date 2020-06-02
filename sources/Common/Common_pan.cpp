@@ -12,7 +12,7 @@ static void AddChar(char *buffer, const Value &value, int pos)
 }
 
 
-pString Value::ToString(Order::E, bool sign) const
+pString Value::ToString(bool sign) const
 {
     static char buffer[50];
 

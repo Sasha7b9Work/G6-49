@@ -89,8 +89,8 @@ struct Value
     // Order::Micro - Value::Integer() >= 1e-6
     Order::E GetOrder() const;
 
-    // Возращает строку значения, приведённую к порядку order
-    pString ToString(Order::E order, bool sign) const;
+    // Возращает строку значения
+    pString ToString(bool sign) const;
 
     bool operator<(const Value &);
     bool operator>(const Value &);
