@@ -219,7 +219,7 @@ class ParameterComposite : public Parameter
 public:
 
     ParameterComposite(ParameterCompositeType::E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
-        Parameter(ParameterKind::Composite, nameRU, nameEN), value(ParameterCompositeType::Count), params(parameters), type(v) { }
+        Parameter(ParameterKind::Composite, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
@@ -235,7 +235,6 @@ public:
 
 private:
     
-    ParameterCompositeType::E value;
     Parameter **params; // Здесь находятся дополнительные параметры в случае, если они требуются
     ParameterCompositeType::E type;
 };
