@@ -19,6 +19,8 @@ static const Font *font = &font7;
 
 TypeFont::E Font::current = TypeFont::_5;
 bool Font::upperCase = false;
+int Font::Spacing::spacing = 1;
+int Font::Spacing::old = 1;
 
 
 static Stack<TypeFont::E> stackFonts(10);       // Здесь хранятся сменяемые шрифты для пследующего восстановления

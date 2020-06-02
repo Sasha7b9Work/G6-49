@@ -1,6 +1,7 @@
 #include "defines.h"
-#include "Signals.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
+#include "Generator/Signals.h"
 #include "Generator/Parameters.h"
 #include "Menu/Pages/Pages.h"
 
@@ -140,11 +141,19 @@ static Parameter *params_MeanderA[] =
 static Form formMeanderA(TypeForm::Meander, params_MeanderA, &waves[Chan::A]);
 
 
+static const char *namesPolarity[] =
+{
+    POLARITY_POS, POLARITY_POS,
+    POLARITY_NEG, POLARITY_NEG,
+    nullptr
+};
+
+
 static ParameterPeriod    impulseA_Period   (Value("33", Order::Nano), Value("10", Order::Mega), Value("0.001"));
 static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;
-static ParameterPolarity  impulseA_Polarity;
+static ParameterPolarity  impulseA_Polarity(namesPolarity);
 static ParameterModeStart impulseA_ModeStart(namesModeStart);
 
 static Parameter *params_ImpulseA[] =
@@ -168,7 +177,7 @@ static ParameterDouble       packetA_PacketNumber (ParameterDoubleType::PacketNu
 static ParameterPacketPeriod packetA_PacketPeriod  (Value("0"), Value("100", Order::Mega), Value("0.1"));
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
-static ParameterPolarity     packetA_Polarity;
+static ParameterPolarity     packetA_Polarity(namesPolarity);
 static ParameterModeStart    packetA_ModeStart(namesModeStart);
 
 static Parameter *params_PacketA[] =
@@ -327,7 +336,7 @@ static ParameterPeriod    impulseB_Period   (Value("33", Order::Nano), Value("10
 static ParameterDuration  impulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;
-static ParameterPolarity  impulseB_Polarity;
+static ParameterPolarity  impulseB_Polarity(namesPolarity);
 static ParameterModeStart impulseB_ModeStart(namesModeStart);
 
 static Parameter *params_ImpulseB[] =

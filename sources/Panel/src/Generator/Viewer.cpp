@@ -1,5 +1,6 @@
 #include "common/CommonTypes.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "Display/Text.h"
 #include "Generator/Signals.h"
 #include "Generator/Viewer.h"
@@ -60,7 +61,15 @@ void Viewer::DrawDouble(int x, int y)
 
 void Viewer::DrawChoice(int x, int y)
 {
-    param->ToString().Draw(x, y);
+    String string = param->ToString();
+
+    int spacing = ((string[0] == Ideograph::_8::PolarityPos) || (string[0] == Ideograph::_8::PolarityNeg)) ? 0 : 1;
+
+    Font::Spacing::SetAndStore(spacing);
+
+    string.Draw(x, y);
+
+    Font::Spacing::Restore();
 }
 
 

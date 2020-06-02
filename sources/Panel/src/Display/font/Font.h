@@ -28,7 +28,6 @@ struct Font
     static int GetHeight();
     static int GetHeight(char symbol);
     static int GetWidth(char symbol);
-    static void StoreAndSet(TypeFont::E typeFont);
     static void Set(TypeFont::E typeFont);
     static void ToggleCharacterSize();
     static int8 Width(char symbol);
@@ -40,12 +39,22 @@ struct Font
     // Выводить все символы в верхнем регистре
     static void ForceUpperCase(bool upper);
     static bool InUpperCase();
-
+    static void StoreAndSet(TypeFont::E typeFont);
     // Восстановить шрифт, который был сохранён функцией StoreAndSet()
     static void Restore();
     
     int height;
     Symbol symbol[256];
+
+    // Расстояние в пикселях между сосденими пикселями
+    struct Spacing
+    {
+        static void SetAndStore(int space) { old = spacing; spacing = space; }
+        static void Restore()              { spacing = old; }
+        static int Get()                   { return spacing;  };
+        static int spacing;
+        static int old;
+    };
 
 private:
 

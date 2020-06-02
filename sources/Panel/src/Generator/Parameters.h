@@ -339,7 +339,7 @@ public:
 class ParameterPolarity : public ParameterChoice
 {
 public:
-    ParameterPolarity() : ParameterChoice(ParameterChoiceType::Polarity, "Полярность", "Polarity") { }
+    ParameterPolarity(const char **names) : ParameterChoice(ParameterChoiceType::Polarity, "Полярность", "Polarity", names) { }
 };
 
 

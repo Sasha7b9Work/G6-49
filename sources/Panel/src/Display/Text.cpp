@@ -660,11 +660,13 @@ int String::Draw(int x, int y, Color color) const
 {
     color.SetAsCurrent();
 
+    int spacing = Font::Spacing::Get();
+
     uint numSymbols = std::strlen(text);
     for (uint i = 0; i < numSymbols; ++i)
     {
         x = Char(text[i]).Draw(x, y);
-        ++x;
+        x += spacing;
     }
 
     return x;

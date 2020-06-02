@@ -1,6 +1,10 @@
 #pragma once
 
 
+#define POLARITY_POS "\x84\x85\x86"
+#define POLARITY_NEG "\x94\x95\x96"
+
+
 struct Ideograph
 {
     struct _7
@@ -30,17 +34,19 @@ struct Ideograph
 
         enum
         {
-            Degree   = '\x7b',
-            Up       = '\x7c',
-            Down     = '\x7e',
-            BigPlus  = '\x9c',
-            BigMinus = '\x9d',
-            Left     = '\xa0',
-            Right    = '\xa2',
-            Delete   = '\xa6',
-            FillUp   = '\xaa',
-            FillDown = '\xac',
-            Save     = '\xae'
+            Degree      = '\x7b',
+            Up          = '\x7c',
+            Down        = '\x7e',
+            PolarityPos = '\x84',
+            PolarityNeg = '\x94',
+            BigPlus     = '\x9c',
+            BigMinus    = '\x9d',
+            Left        = '\xa0',
+            Right       = '\xa2',
+            Delete      = '\xa6',
+            FillUp      = '\xaa',
+            FillDown    = '\xac',
+            Save        = '\xae'
         };
     };
 };
