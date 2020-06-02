@@ -129,9 +129,9 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 }
 
 
-int Indicator::Draw(int y)
+int Indicator::Draw(int x, int y, int)
 {
-    int x = Tuner::Current()->GetParameter()->IsVoltage() ? 70 : 20;
+    x = Tuner::Current()->GetParameter()->IsVoltage() ? 70 : 20;
 
     static const int dx = 12;
 
@@ -540,7 +540,7 @@ void DisplayCorrection::Draw()
     }
     else
     {
-        x = DrawValue(y);
+        x = indicator.Draw(x, y, WaveGraphics::Width());
 
         DrawUnits(x, y);
     }
@@ -562,12 +562,6 @@ void DisplayCorrection::DrawUnits(int x, int y)
     String(tuner->GetParameter()->GetUnits(CalculateOrderForIndication())).Draw(x + 7, y, Color::WHITE);
 
     Font::ForceUpperCase(true);
-}
-
-
-int DisplayCorrection::DrawValue(int y)
-{
-    return indicator.Draw(y);
 }
 
 

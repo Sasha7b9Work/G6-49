@@ -44,7 +44,7 @@ public:
 
     Indicator(DisplayCorrection *display);
 
-    int Draw(int y);
+    int Draw(int x, int y, int width);
 
     bool OnControlKey(const Control control);
 
@@ -225,9 +225,6 @@ private:
     Indicator indicator;
 
     void DrawTitle(int x, int y, int width);
-
-    // Возвращает x зз выведенными символами
-    int DrawValue(int y);
 
     void DrawUnits(int x, int y);
 
