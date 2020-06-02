@@ -223,7 +223,7 @@ public:
 private:
 
     // Ўирина пол€ дл€ вывода единиц измерени€
-    static const int WIDTH_UNITS = 50;
+    static const int WIDTH_UNITS = 25;
 
     Tuner *tuner;
 
