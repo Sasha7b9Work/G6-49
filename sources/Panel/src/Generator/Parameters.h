@@ -324,9 +324,7 @@ public:
 class ParameterModeStart : public ParameterChoice
 {
 public:
-    //ParameterModeStart(pString choice0 = " Авто", pString choice1 = " Однокр", pString choice2 = " Комп А", pString choice3 = " Форм B");
-
-    ParameterModeStart() : ParameterChoice(ParameterChoiceType::ModeStart, "Запуск", "Start") { }
+    ParameterModeStart(const char **names) : ParameterChoice(ParameterChoiceType::ModeStart, "Запуск", "Start", names) { }
 };
 
 

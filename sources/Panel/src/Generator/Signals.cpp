@@ -44,10 +44,20 @@ static Parameter *params_SineA[] =
 static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 
+static const char *namesModeStart[] =
+{
+    " Авто",   " Auto",
+    " Однокр", " Single",
+    " Комп А", " Comp A",
+    " Форм B", " Form B",
+    nullptr
+};
+
+
 static ParameterFrequency  rampPlusA_Frequency;
 static ParameterAmplitude  rampPlusA_Amplitude;
 static ParameterOffset     rampPlusA_Offset;
-static ParameterModeStart  rampPlusA_ModeStart;
+static ParameterModeStart  rampPlusA_ModeStart(namesModeStart);
 
 static Parameter *params_RampPlusA[] =
 {
@@ -64,7 +74,7 @@ static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A])
 static ParameterFrequency  rampMinusA_Frequency;
 static ParameterAmplitude  rampMinusA_Amplitude;
 static ParameterOffset     rampMinusA_Offset;
-static ParameterModeStart  rampMinusA_ModeStart;
+static ParameterModeStart  rampMinusA_ModeStart(namesModeStart);
 
 static Parameter *params_RampMinusA[] =
 {
@@ -81,7 +91,7 @@ static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::
 static ParameterFrequency triangleA_Frequency;
 static ParameterAmplitude triangleA_Amplitude;
 static ParameterOffset    triangleA_Offset;
-static ParameterModeStart triangleA_ModeStart;
+static ParameterModeStart triangleA_ModeStart(namesModeStart);
 
 static Parameter *params_TriangleA[] =
 {
@@ -98,7 +108,7 @@ static Form formTriangleA(TypeForm::Triangle, params_TriangleA, &waves[Chan::A])
 static ParameterFrequency  freeA_Frequency;
 static ParameterAmplitude  freeA_Amplitude;
 static ParameterOffset     freeA_Offset;
-static ParameterModeStart  freeA_ModeStart;
+static ParameterModeStart  freeA_ModeStart(namesModeStart);
 //static ParameterPage   FreeA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
 static Parameter *params_FreeA[] =
@@ -135,7 +145,7 @@ static ParameterDuration  impulseA_Duration (Value("0"),               Value("10
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;
 static ParameterPolarity  impulseA_Polarity;
-static ParameterModeStart impulseA_ModeStart;
+static ParameterModeStart impulseA_ModeStart(namesModeStart);
 
 static Parameter *params_ImpulseA[] =
 {
@@ -159,7 +169,7 @@ static ParameterPacketPeriod packetA_PacketPeriod  (Value("0"), Value("100", Ord
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
 static ParameterPolarity     packetA_Polarity;
-static ParameterModeStart    packetA_ModeStart;
+static ParameterModeStart    packetA_ModeStart(namesModeStart);
 
 static Parameter *params_PacketA[] =
 {
@@ -230,7 +240,7 @@ static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 static ParameterFrequency  rampPlusB_Frequency;
 static ParameterAmplitude  rampPlusB_Amplitude;
 static ParameterOffset     rampPlusB_Offset;
-static ParameterModeStart  rampPlusB_ModeStart;
+static ParameterModeStart  rampPlusB_ModeStart(namesModeStart);
 
 static Parameter *params_RampPlusB[] =
 {
@@ -247,7 +257,7 @@ static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B])
 static ParameterFrequency  rampMinusB_Frequency;
 static ParameterAmplitude  rampMinusB_Amplitude;
 static ParameterOffset     rampMinusB_Offset;
-static ParameterModeStart  rampMinusB_ModeStart;
+static ParameterModeStart  rampMinusB_ModeStart(namesModeStart);
 
 static Parameter *params_RampMinusB[] =
 {
@@ -264,7 +274,7 @@ static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::
 static ParameterFrequency  triangleB_Frequency;
 static ParameterAmplitude  triangleB_Amplitude;
 static ParameterOffset     triangleB_Offset;
-static ParameterModeStart  triangleB_ModeStart;
+static ParameterModeStart  triangleB_ModeStart(namesModeStart);
 
 static Parameter *params_TriangleB[] =
 {
@@ -281,7 +291,7 @@ static Form formTriangleB(TypeForm::Triangle, params_TriangleB, &waves[Chan::B])
 static ParameterFrequency  freeB_Frequency;
 static ParameterAmplitude  freeB_Amplitude;
 static ParameterOffset     freeB_Offset;
-static ParameterModeStart  freeB_ModeStart;
+static ParameterModeStart  freeB_ModeStart(namesModeStart);
 //static ParameterPage   FreeB_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
 
 static Parameter *params_FreeB[] =
@@ -318,7 +328,7 @@ static ParameterDuration  impulseB_Duration (Value("0"),               Value("10
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity;
-static ParameterModeStart impulseB_ModeStart;
+static ParameterModeStart impulseB_ModeStart(namesModeStart);
 
 static Parameter *params_ImpulseB[] =
 {
