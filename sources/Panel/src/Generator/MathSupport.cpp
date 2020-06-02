@@ -174,9 +174,11 @@ int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
 }
 
 
-char MathValue::GetChar(const Value &value, int postition, Order::E order)
+char MathValue::GetChar(const Value &value, int position, Order::E order)
 {
-    return static_cast<char>(GetDigit(value, postition, order) | 0x30);
+    int digit = GetDigit(value, position, order);
+
+    return (digit == -1) ? '\0' : static_cast<char>(GetDigit(value, position, order) | 0x30);
 }
 
 
@@ -185,15 +187,7 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
     Value value = val;
     value.SetSign(1);
 
-    double valueD = value.ToDouble();
-
     order = (order == Order::Count) ? value.GetOrder() : order;
-
-    if (order == Order::Nano)
-    {
-        order = order;
-        valueD = value.ToDouble();
-    }
 
     position += Order::GetPow10(order);
 
@@ -203,14 +197,19 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 
         int fract = value.FractNano();
 
-        while(position < Order::GetPow10(order) - 1)
+        while(position < - 1)
         {
+            if (divider == 0)
+            {
+                return -1;
+            }
+
             fract %= divider;
             divider /= 10;
             position++;
         }
 
-        return fract / divider;
+        return (divider == 0) ? -1 : (fract / divider);
     }
     else
     {

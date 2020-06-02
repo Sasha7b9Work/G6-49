@@ -37,7 +37,7 @@ void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign
     value = static_cast<uint>(units);
     value *= 1000 * 1000 * 1000;
 
-    value += nUnits + uUnits * 1000 + mUnits * 1000 * 1000;
+    value += static_cast<uint>(nUnits + uUnits * 1000 + mUnits * 1000 * 1000);
 
     if (sign < 0)
     {
@@ -265,7 +265,7 @@ int Value::FractNano() const
 
     int whole = val.Integer();
 
-    return static_cast<int>(val.value - whole * 1000 * 1000 * 1000);
+    return static_cast<int>(val.value - static_cast<int>(whole * 1000 * 1000 * 1000));
 }
 
 
