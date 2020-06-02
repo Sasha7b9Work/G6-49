@@ -137,13 +137,10 @@ int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E orde
 
     if (param->IsVoltage())
     {
-        //return (value < Value("1.0") && value > Value("-1.0")) ? 4 : 1;
         return 1;
     }
 
     value.SetSign(1);
-
-    CorrectValueOnOrder(&value, order);
 
     int result = 0;
 
@@ -173,7 +170,7 @@ int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E orde
         } while(fract < (1000 * 1000 * 1000));
     }
 
-    return result;
+    return result - Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
 }
 
 
