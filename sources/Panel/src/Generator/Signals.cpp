@@ -16,7 +16,7 @@ static const char *namesModulationEnabled[] =
 static ParameterManipulationEnabled   sineModulationA_Manipulation        (namesModulationEnabled);
 static ParameterManipulationDuration  sineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5", Order::Milli));
 static ParameterManipulationPeriod    sineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("25", Order::Milli));
-//static ParameterDouble  SineModulationA_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
+static ParameterButton                sineModulationA_Exit                ("Закрыть ( ESC )", "Close ( ESC )");
 
 
 static Parameter *params_SineModulationA[] =
@@ -24,8 +24,8 @@ static Parameter *params_SineModulationA[] =
     &sineModulationA_Manipulation,
     &sineModulationA_ManipulationDuration,
     &sineModulationA_ManipulationPeriod,
-//    &SineModulationA_Exit,
-    0
+    &sineModulationA_Exit,
+    nullptr
 };
 
 static ParameterFrequency    sineA_Frequency;
@@ -39,7 +39,7 @@ static Parameter *params_SineA[] =
     &sineA_Amplitude,
     &sineA_Offset,
     &sineA_Manipulation,
-    0
+    nullptr
 };
 
 static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
@@ -66,7 +66,7 @@ static Parameter *params_RampPlusA[] =
     &rampPlusA_Amplitude,
     &rampPlusA_Offset,
     &rampPlusA_ModeStart,
-    0
+    nullptr
 };
 
 static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A]);
@@ -83,7 +83,7 @@ static Parameter *params_RampMinusA[] =
     &rampMinusA_Amplitude,
     &rampMinusA_Offset,
     &rampMinusA_ModeStart,
-    0
+    nullptr
 };
 
 static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::A]);
@@ -100,7 +100,7 @@ static Parameter *params_TriangleA[] =
     &triangleA_Amplitude,
     &triangleA_Offset,
     &triangleA_ModeStart,
-    0
+    nullptr
 };
 
 static Form formTriangleA(TypeForm::Triangle, params_TriangleA, &waves[Chan::A]);
@@ -119,7 +119,7 @@ static Parameter *params_FreeA[] =
     &freeA_Offset,
     &freeA_ModeStart,
 //    &FreeA_Choice,
-    0
+    nullptr
 };
 
 static Form formFreeA(TypeForm::Free, params_FreeA, &waves[Chan::A]);
@@ -135,7 +135,7 @@ static Parameter *params_MeanderA[] =
     &meanderA_Frequency,
     &meanderA_Amplitude,
     &meanderA_Offset,
-    0
+    nullptr
 };
 
 static Form formMeanderA(TypeForm::Meander, params_MeanderA, &waves[Chan::A]);
@@ -164,7 +164,7 @@ static Parameter *params_ImpulseA[] =
     &impulseA_Offset,
     &impulseA_Polarity,
     &impulseA_ModeStart,
-    0
+    nullptr
 };
 
 static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
@@ -190,7 +190,7 @@ static Parameter *params_PacketA[] =
     &packetA_Offset,
     &packetA_Polarity,
     &packetA_ModeStart,
-    0
+    nullptr
 };
 
 static Form formPacketImpulseA(TypeForm::PacketImpuls, params_PacketA, &waves[Chan::A]);
@@ -209,7 +209,7 @@ static Form *formsA[] =
     &formImpulseA,
     &formPacketImpulseA,
     &formFreeA,
-    0
+    nullptr
 };
 
 
@@ -217,14 +217,15 @@ static Form *formsA[] =
 static ParameterManipulationEnabled  sineModulationB_Manipulation         (namesModulationEnabled);
 static ParameterManipulationDuration sineModulationB_ManipulationDuration (Value("0"), Value("10", Order::Kilo), Value("0.5"));
 static ParameterManipulationPeriod   sineModulationB_ManipulationPeriod   (Value("0"), Value("10", Order::Kilo), Value("2.5", Order::Milli));
-//static ParameterDouble  SineModulationB_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
+static ParameterButton               sineModulationB_Exit                 ("Закрыть ( ESC )", "Close ( ESC )");
 
 static Parameter *params_SineModulationB[] =
 {
     &sineModulationB_Manipulation,
     &sineModulationB_ManipulationDuration,
     &sineModulationB_ManipulationPeriod,
-    0
+    &sineModulationB_Exit,
+    nullptr
 };
 
 static ParameterFrequency    sineB_Frequency;
@@ -240,7 +241,7 @@ static Parameter *params_SineB[] =
     &sineB_Offset,
     &sineB_Phase,
     &sineB_Manipulation,
-    0
+    nullptr
 };
 
 static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
@@ -257,7 +258,7 @@ static Parameter *params_RampPlusB[] =
     &rampPlusB_Amplitude,
     &rampPlusB_Offset,
     &rampPlusB_ModeStart,
-    0
+    nullptr
 };
 
 static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B]);
@@ -274,7 +275,7 @@ static Parameter *params_RampMinusB[] =
     &rampMinusB_Amplitude,
     &rampMinusB_Offset,
     &rampMinusB_ModeStart,
-    0
+    nullptr
 };
 
 static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::B]);
@@ -291,7 +292,7 @@ static Parameter *params_TriangleB[] =
     &triangleB_Amplitude,
     &triangleB_Offset,
     &triangleB_ModeStart,
-    0
+    nullptr
 };
 
 static Form formTriangleB(TypeForm::Triangle, params_TriangleB, &waves[Chan::B]);
@@ -310,7 +311,7 @@ static Parameter *params_FreeB[] =
     &freeB_Offset,
     &freeB_ModeStart,
 //    &FreeB_Choice,
-    0
+    nullptr
 };
 
 static Form formFreeB(TypeForm::Free, params_FreeB, &waves[Chan::B]);
@@ -325,7 +326,7 @@ static Parameter *params_MeanderB[] =
     &meanderB_Frequency,
     &meanderB_Amplitude,
     &meanderB_Offset,
-    0
+    nullptr
 };
 
 static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
@@ -347,7 +348,7 @@ static Parameter *params_ImpulseB[] =
     &impulseB_Offset,
     &impulseB_Polarity,
     &impulseB_ModeStart,
-    0
+    nullptr
 };
 
 static Form formImpulseB(TypeForm::Impulse, params_ImpulseB, &waves[Chan::B]);
@@ -365,7 +366,7 @@ static Form *formsB[] =
     &formMeanderB,
     &formImpulseB,
     &formFreeB,
-    0
+    nullptr
 };
 
 

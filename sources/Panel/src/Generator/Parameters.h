@@ -243,6 +243,13 @@ private:
 class ParameterButton : public Parameter
 {
 public:
+
+    ParameterButton(const char *titleRU, const char *titleEN) : Parameter(ParameterKind::Button, titleRU, titleEN) {};
+
+    virtual String ToString() const { return String(""); };
+
+    virtual void OnPressButtonTune() {};
+
 private:
 };
 

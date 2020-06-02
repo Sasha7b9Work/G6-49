@@ -38,7 +38,8 @@ void Viewer::Draw(int x, int y)
     {
         &Viewer::DrawDoubleValue,
         &Viewer::DrawChoiceValue,
-        &Viewer::DrawCompositeValue
+        &Viewer::DrawCompositeValue,
+        &Viewer::DrawButton
     };
 
     (this->*funcs[param->GetKind()])(x + 80, y);
@@ -78,7 +79,7 @@ void Viewer::DrawCompositeValue(int x, int y)
 }
 
 
-void Viewer::DrawEmptyValue(int, int)
+void Viewer::DrawButton(int, int)
 {
-
+    
 }

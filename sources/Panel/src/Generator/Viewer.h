@@ -25,7 +25,7 @@ private:
 
     void DrawCompositeValue(int x, int y);
 
-    void DrawEmptyValue(int x, int y);
+    void DrawButton(int x, int y);
 
     Parameter *param;
 };
