@@ -89,6 +89,7 @@ public:
     // Засылает параметр в генератор
     void SendParameterToGenerator(ParameterDoubleType::E p);
     void SendParameterToGenerator(ParameterChoiceType::E p);
+    void SendParameterToGenerator(ParameterIntegerType::E p);
 
     // Раскрывает составной параметр
     void OpenCompositeParameter();

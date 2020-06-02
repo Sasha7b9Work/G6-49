@@ -96,7 +96,6 @@ struct ParameterDoubleType
         ManipulationDuration,   // Длительность импульсов в режиме манипуляции
         ManipulationPeriod,     // Период следования импульсов в режиме манипуляции
         PacketPeriod,           // Период следования пачек импульсов в пакетном режиме
-        PacketNumber,           // Число импульсов в пачке пакетного режима
         Count
     };
 };
@@ -160,6 +159,30 @@ private:
     // Возвращает true, если параметр может принимать значение v
     bool InRange(double v) const;
     bool InRange(Value v) const;
+};
+
+
+struct ParameterIntegerType
+{
+    enum E
+    {
+        PacketNumber,           // Число импульсов в пачке пакетного режима
+        Count
+    };
+};
+
+
+class ParameterInteger : public Parameter
+{
+public:
+
+    ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value);
+
+    virtual String ToString() const;
+
+    virtual void OnPressButtonTune();
+
+private:
 };
 
 

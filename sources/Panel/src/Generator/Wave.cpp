@@ -235,7 +235,7 @@ void Form::TuneGenerator()
         SendParameterToGenerator(ParameterDoubleType::Offset);
         SendParameterToGenerator(ParameterDoubleType::Period);
         SendParameterToGenerator(ParameterDoubleType::Duration);
-        SendParameterToGenerator(ParameterDoubleType::PacketNumber);
+        SendParameterToGenerator(ParameterIntegerType::PacketNumber);
         SendParameterToGenerator(ParameterDoubleType::PacketPeriod);
         SendParameterToGenerator(ParameterChoiceType::Polarity);
     }

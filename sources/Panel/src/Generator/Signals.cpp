@@ -180,7 +180,7 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 static ParameterPeriod       packetA_Period        (Value("0"), Value("100", Order::Mega), Value("200", Order::Micro));
 static ParameterDuration     packetA_Duration      (Value("0"), Value("100", Order::Mega), Value("100", Order::Micro));
-static ParameterDouble       packetA_PacketNumber (ParameterDoubleType::PacketNumber, "Кол-во имп", "Count imp", Value("0"), Value("100", Order::Mega), Value("3"));
+static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber, "Кол-во имп", "Count imp", Value("0"), Value("100", Order::Mega), Value("3"));
 static ParameterPacketPeriod packetA_PacketPeriod  (Value("0"), Value("100", Order::Mega), Value("0.1"));
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
