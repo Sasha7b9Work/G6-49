@@ -14,8 +14,8 @@ static const char *namesModulationEnabled[] =
 };
 
 static ParameterManipulationEnabled   sineModulationA_Manipulation        (namesModulationEnabled);
-static ParameterManipulationDuration  sineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5"));
-static ParameterManipulationPeriod    sineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("0.002500"));
+static ParameterManipulationDuration  sineModulationA_ManipulationDuration(Value("0"), Value("10"),    Value("5", Order::Milli));
+static ParameterManipulationPeriod    sineModulationA_ManipulationPeriod  (Value("0"), Value("10000"), Value("25", Order::Milli));
 //static ParameterDouble  SineModulationA_Exit                (ParameterDouble::Exit,                 -1.0F, 1.0F,   "",     0, Order::One);
 
 

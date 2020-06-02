@@ -144,9 +144,9 @@ pString ParameterDouble::GetMainUnits() const
         {"ñ",  "s"},    // DurationFall
         {"ñ",  "s"},    // DurationStady
         {"",   ""},     // DutyFactor
-        {"",   ""},     // ManipulationDuration
-        {"",   ""},     // ManipulationPeriod
-        {"",   ""},     // PacketPeriod
+        {"ñ",  "s"},    // ManipulationDuration
+        {"ñ",  "s"},    // ManipulationPeriod
+        {"ñ",  "s"},    // PacketPeriod
         {"",   ""},     // PacketNumber
         {"",   ""}      // Exit
     };
