@@ -147,8 +147,7 @@ pString ParameterDouble::GetMainUnits() const
         {"с",  "s"},    // ManipulationDuration
         {"с",  "s"},    // ManipulationPeriod
         {"с",  "s"},    // PacketPeriod
-        {"",   ""},     // PacketNumber
-        {"",   ""}      // Exit
+        {"",   ""}      // PacketNumber
     };
 
     return units[GetType()][LANGUAGE];
@@ -226,8 +225,7 @@ bool ParameterDouble::IsTime() const
         true,   // ƒлительность импульсов в режиме манипул€ции
         true,   // ѕериод следовани€ импульсов в режиме манипул€ции
         true,   // ѕериод следовани€ пачек импульсов в пакетном режиме
-        false,  // „исло импульсов в пачке пакетного режима
-        false   // Ётот параметр закрывает открытый параметр
+        false   // „исло импульсов в пачке пакетного режима
     };
 
     return isTime[type];

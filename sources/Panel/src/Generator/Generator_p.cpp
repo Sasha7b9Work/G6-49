@@ -192,8 +192,7 @@ void PGenerator::SetParameter(ParameterDouble *param)
         Command::SetManipulationDuration,
         Command::SetManipulationPeriod,
         Command::SetPacketPeriod,
-        Command::SetPacketNumber,
-        Command::RequestData
+        Command::SetPacketNumber
     };
 
     Value value = param->GetValue();
