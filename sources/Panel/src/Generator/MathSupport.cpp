@@ -133,44 +133,7 @@ pString MathValue::GetIndicatedValue(const ParameterDouble *param)
 
 int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
-    Value value = param->GetValue();
-
-    if (param->IsVoltage())
-    {
-        return 1;
-    }
-
-    value.SetSign(1);
-
-    int result = 0;
-
-    if(value.Integer() > 0)
-    {
-        int whole = value.Integer();        // Целая часть числа
-
-        while(whole > 9)
-        {
-            whole /= 10;
-            result++;
-        }
-    }
-    else
-    {
-        int fract = value.FractNano();
-
-        if(fract == 0)
-        {
-            return 0;
-        }
-
-        do
-        {
-            result--;
-            fract *= 10;
-        } while(fract < (1000 * 1000 * 1000));
-    }
-
-    return result - Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
+    return GetPositionFirstDigit(param->GetValue(), order);
 }
 
 
@@ -204,7 +167,7 @@ int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
         {
             result--;
             fract *= 10;
-        } while (fract < (1000 * 1000 * 1000));
+        } while (fract < (100 * 1000 * 1000));
     }
 
     return result - Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
@@ -222,7 +185,17 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
     Value value = val;
     value.SetSign(1);
 
-    position += Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
+    double valueD = value.ToDouble();
+
+    order = (order == Order::Count) ? value.GetOrder() : order;
+
+    if (order == Order::Nano)
+    {
+        order = order;
+        valueD = value.ToDouble();
+    }
+
+    position += Order::GetPow10(order);
 
     if(position < 0)
     {
@@ -232,6 +205,11 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 
         while(position < -1)
         {
+            if (position > -4)
+            {
+                int i = 0;
+            }
+
             fract %= divider;
             divider /= 10;
             position++;
