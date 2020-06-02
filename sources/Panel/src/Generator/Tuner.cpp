@@ -129,9 +129,9 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 }
 
 
-int Indicator::Draw(int x, int y)
+int Indicator::Draw(int y)
 {
-    x += Tuner::Current()->GetParameter()->IsVoltage() ? 70 : 20;
+    int x = Tuner::Current()->GetParameter()->IsVoltage() ? 70 : 20;
 
     static const int dx = 12;
 
@@ -536,11 +536,11 @@ void DisplayCorrection::Draw()
 
     if (Tuner::InModeEntering())
     {
-        DisplayEntering::Draw(x - 5, y - 10, WaveGraphics::Width());
+        DisplayEntering::Draw(x + 5, y - 10, WaveGraphics::Width());
     }
     else
     {
-        x = DrawValue(x, y);
+        x = DrawValue(y);
 
         DrawUnits(x, y);
     }
@@ -565,9 +565,9 @@ void DisplayCorrection::DrawUnits(int x, int y)
 }
 
 
-int DisplayCorrection::DrawValue(int x, int y)
+int DisplayCorrection::DrawValue(int y)
 {
-    return indicator.Draw(x, y);
+    return indicator.Draw(y);
 }
 
 
