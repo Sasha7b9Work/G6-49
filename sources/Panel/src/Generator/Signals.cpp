@@ -149,7 +149,7 @@ static const char *namesPolarity[] =
 };
 
 
-static ParameterPeriod    impulseA_Period   (Value("33", Order::Nano), Value("10", Order::Mega), Value("1"));
+static ParameterPeriod    impulseA_Period   (Value("33", Order::Nano), Value("100", Order::Kilo), Value("1"));
 static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;

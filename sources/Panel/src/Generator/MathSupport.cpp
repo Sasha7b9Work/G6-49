@@ -333,9 +333,11 @@ int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
 }
 
 
-int MathParameterValue::GetNumberDigitsBeforeCommaTime(Order::E)
+int MathParameterValue::GetNumberDigitsBeforeCommaTime(Order::E order)
 {
-    return 5;
+    Value max = param->GetMax();
+
+    return MathValue::GetPositionFirstDigit(max, order) + 1;
 }
 
 
