@@ -226,7 +226,7 @@ String ParameterComposite::ToString() const
 
 String ParameterChoice::ToString() const
 {
-    return String(choices[(choice * 2) + LANGUAGE]);
+    return String(choices[GetChoice() * 2 + LANGUAGE]);
 }
 
 
@@ -238,7 +238,7 @@ void ParameterChoice::NextChoice()
 
     if(type == ParameterChoiceType::ModeStart)
     {
-        PGenerator::LoadStartMode(ch, choice);
+        PGenerator::LoadStartMode(ch, GetChoice());
     }
     else
     {
@@ -258,18 +258,6 @@ bool ParameterChoice::SetAndLoadChoice(int ch)
 
     PGenerator::SetParameter(this);
 
-    return true;
-}
-
-
-int ParameterChoice::GetChoice() const
-{
-    return 0;
-}
-
-
-bool ParameterChoice::DrawChoice(int, int) const
-{
     return true;
 }
 

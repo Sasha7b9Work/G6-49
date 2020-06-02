@@ -182,13 +182,11 @@ public:
 
     ParameterChoiceType::E GetType() { return type; }
 
-    int GetChoice() const;
+    int GetChoice() const            {  return choice; }
 
     void NextChoice();
 
     bool SetAndLoadChoice(int ch);
-
-    bool DrawChoice(int x, int y) const;
 
     virtual String ToString() const;
 
