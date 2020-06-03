@@ -240,6 +240,10 @@ private:
 
     // «аполнить разр€ды дробной части параметра
     void FillDigitsFractPart();
+
+    void InitDouble();
+
+    void InitInteger();
 };
 
 

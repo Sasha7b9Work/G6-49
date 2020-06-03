@@ -744,6 +744,19 @@ void DisplayEntering::OnButtonOrderLess()
 
 void DisplayCorrection::Init()
 {
+    if (tuner->ReinterpretToDouble())
+    {
+        InitDouble();
+    }
+    else
+    {
+        InitInteger();
+    }
+}
+
+
+void DisplayCorrection::InitDouble()
+{
     MathParameterDouble::SetParameterValue(tuner->ReinterpretToDouble());
 
     for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
@@ -758,6 +771,12 @@ void DisplayCorrection::Init()
     FillDigitsIntegerPart();
 
     FillDigitsFractPart();
+}
+
+
+void DisplayCorrection::InitInteger()
+{
+
 }
 
 
