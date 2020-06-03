@@ -15,19 +15,20 @@ public:
 
     Viewer(Parameter *param);
 
-    void Draw(int x, int y);
+    // Отрисовать параметр со значением в горизонтали y. Название параметра выводится с xName, значение - с xValue, единциы измерения - c xUnits
+    void Draw(int y, int xName, int xValue, int xUnits);
 
 private:
 
-    void DrawDoubleValue(int x, int y);
+    void DrawDoubleValue(int y, int xValue, int xUnits);
 
-    void DrawChoiceValue(int x, int y);
+    void DrawChoiceValue(int y, int xValue, int xUnits);
 
-    void DrawCompositeValue(int x, int y);
+    void DrawCompositeValue(int y, int xValue, int xUnits);
 
-    void DrawButton(int x, int y);
+    void DrawButton(int y, int xValue, int xUnits);
 
-    void DrawIntegerValue(int x, int y);
+    void DrawIntegerValue(int y, int xValue, int xUnits);
 
     Parameter *param;
 };

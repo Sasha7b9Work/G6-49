@@ -54,7 +54,7 @@ public:
     // ¬озвращает true, если параметр сложный и открыт
     bool IsOpened() const;
 
-    virtual String ToString() const = 0;
+    virtual String ToString(String &units) const = 0;
 
     Form *GetForm();
     
@@ -124,7 +124,7 @@ public:
     virtual void OnPressButtonTune();
 
     // ¬озвращает строковое представление значени€ параметра
-    virtual String ToString() const;
+    virtual String ToString(String &units) const;
     String ToString(Value value) const;
 
     // ¬озвращает основные единицы измерени€ (без учЄта пор€дка)
@@ -175,7 +175,7 @@ public:
 
     ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const int min, const int max, const int value);
 
-    virtual String ToString() const;
+    virtual String ToString(String &units) const;
 
     virtual void OnPressButtonTune();
 
@@ -216,7 +216,7 @@ public:
 
     bool SetAndLoadChoice(int ch);
 
-    virtual String ToString() const;
+    virtual String ToString(String &units) const;
 
     virtual void OnPressButtonTune();
 
@@ -255,7 +255,7 @@ public:
     ParameterDouble *FindParameter(ParameterDoubleType::E p);
     ParameterChoice *FindParameter(ParameterChoiceType::E p);
 
-    virtual String ToString() const;
+    virtual String ToString(String &units) const;
 
     virtual void OnPressButtonTune();
 
@@ -272,7 +272,7 @@ public:
 
     ParameterButton(const char *titleRU, const char *titleEN, pFuncVV f) : Parameter(ParameterKind::Button, titleRU, titleEN), func(f) {};
 
-    virtual String ToString() const { return String(""); };
+    virtual String ToString(String &) const { return String(""); };
 
     virtual void OnPressButtonTune() { func(); };
 

@@ -59,22 +59,22 @@ int WaveGraphics::Height()
 }
 
 
-void WaveGraphics::DrawParameters(Chan::E ch, int y0)
+void WaveGraphics::DrawParameters(Chan::E ch, int y)
 {
     Form *form = FORM(ch);
 
-    int x0 = 107;
+    int x = 107;
 
-    y0 += 5;
+    y += 5;
 
     Font::ForceUpperCase(true);
 
-    String(form->Name()).Draw(22, y0 + 3, Color::Chan(ch));
+    String(form->Name()).Draw(22, y + 3, Color::Chan(ch));
     
     for (int i = 0; i < form->NumParameters(); i++)
     {
-        form->GetParameter(i)->viewer.Draw(x0, y0);
+        form->GetParameter(i)->viewer.Draw(y, x, x + 80, x + 120);
 
-        y0 += 11;
+        y += 11;
     }
 }

@@ -17,7 +17,7 @@ Viewer::Viewer(Parameter *_param) : param(_param)
 }
 
 
-void Viewer::Draw(int x, int y)
+void Viewer::Draw(int y, int xName, int xValue, int xUnits)
 {
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
@@ -25,14 +25,14 @@ void Viewer::Draw(int x, int y)
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
        (CURRENT_PAGE == PageSignals::self))
     {
-        Rectangle(139, 9).Fill(x, y, Color::GRAY_25);
+        Rectangle(139, 9).Fill(xName, y, Color::GRAY_25);
     }
 
     Font::ForceUpperCase(true);
 
-    String(param->Name()).Draw(x + 1, y, Color::Chan(ch));
+    String(param->Name()).Draw(xName + 1, y, Color::Chan(ch));
 
-    typedef void (Viewer::*funcDrawValue)(int, int);
+    typedef void (Viewer::*funcDrawValue)(int, int, int);
 
     static const funcDrawValue funcs[ParameterKind::Count] =
     {
@@ -43,50 +43,52 @@ void Viewer::Draw(int x, int y)
         &Viewer::DrawIntegerValue
     };
 
-    (this->*funcs[param->GetKind()])(x + 80, y);
+    (this->*funcs[param->GetKind()])(y, xValue, xUnits);
 }
 
 
-void Viewer::DrawDoubleValue(int x, int y)
+void Viewer::DrawDoubleValue(int y, int xValue, int xUnits)
 {
     Font::ForceUpperCase(false);
 
-    if(static_cast<ParameterDouble *>(param)->IsSigned())
-    {
-        x -= 4;
-    }
+    String units;
 
-    String(param->ToString()).Draw(x, y);
+    param->ToString(units).Draw(xValue, y);
+
+    units.Draw(xUnits, y);
 }
 
 
-void Viewer::DrawIntegerValue(int, int)
+void Viewer::DrawIntegerValue(int, int, int)
 {
 
 }
 
 
-void Viewer::DrawChoiceValue(int x, int y)
+void Viewer::DrawChoiceValue(int y, int xValue, int)
 {
-    String string = param->ToString();
+    String units;
+    String value = param->ToString(units);
 
-    int spacing = ((string[0] == Ideograph::_8::PolarityPos) || (string[0] == Ideograph::_8::PolarityNeg)) ? 0 : 1;
+    int spacing = ((value[0] == Ideograph::_8::PolarityPos) || (value[0] == Ideograph::_8::PolarityNeg)) ? 0 : 1;
 
     Font::Spacing::SetAndStore(spacing);
 
-    string.Draw(x, y);
+    value.Draw(xValue, y);
 
     Font::Spacing::Restore();
 }
 
 
-void Viewer::DrawCompositeValue(int x, int y)
+void Viewer::DrawCompositeValue(int y, int xValue, int)
 {
-    param->ToString().Draw(x, y);
+    String units;
+
+    param->ToString(units).Draw(xValue, y);
 }
 
 
-void Viewer::DrawButton(int, int)
+void Viewer::DrawButton(int, int, int)
 {
     
 }

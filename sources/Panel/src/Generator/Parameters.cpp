@@ -236,8 +236,10 @@ bool ParameterDouble::IsTime() const
 }
 
 
-String ParameterComposite::ToString() const
+String ParameterComposite::ToString(String &units) const
 {
+    units.Free();
+
     if(type == ParameterCompositeType::Manipulation)
     {
         static pCHAR valuesRU[2] =
@@ -259,8 +261,10 @@ String ParameterComposite::ToString() const
 }
 
 
-String ParameterChoice::ToString() const
+String ParameterChoice::ToString(String &units) const
 {
+    units.Free();
+
     return String(choices[GetChoice() * 2 + LANGUAGE]);
 }
 
@@ -343,13 +347,13 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 }
 
 
-String ParameterDouble::ToString() const
+String ParameterDouble::ToString(String &units) const
 {
-    String string(MathValue::GetIndicatedValue(this));
-    string.Append(" ");
-    string.Append(GetUnits(CalculateOrder(this)));
+    String result(MathValue::GetIndicatedValue(this));
 
-    return string;
+    units.Set(TypeConversionString::None, GetUnits(CalculateOrder(this)));
+
+    return result;
 }
 
 
@@ -369,8 +373,10 @@ ParameterInteger::ParameterInteger(ParameterIntegerType::E t, const char *nameRU
 }
 
 
-String ParameterInteger::ToString() const
+String ParameterInteger::ToString(String &units) const
 {
+    units.Free();
+
     return String("");
 }
 

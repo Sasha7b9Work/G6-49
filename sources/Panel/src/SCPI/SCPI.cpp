@@ -304,6 +304,11 @@ void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
     }
     else
     {
-        SCPI::SendAnswer(param->ToString().c_str());
+        String units;
+        String answer = param->ToString(units);
+        answer.Append(" ");
+        answer.Append(units.c_str());
+
+        SCPI::SendAnswer(answer.c_str());
     }
 }

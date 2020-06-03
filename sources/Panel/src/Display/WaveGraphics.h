@@ -28,6 +28,4 @@ public:
 private:
 
     static void DrawParameters(Chan::E chan, int y0);
-
-    static void DrawParameterValue(Parameter *parameter, int x, int y);
 };
