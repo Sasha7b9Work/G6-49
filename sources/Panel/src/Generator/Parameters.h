@@ -137,7 +137,7 @@ public:
     // Возвращает минимальное значение, которое может иметь параметр
     Value GetMin() { return min; }
 
-    virtual Tuner *_GetTuner()   { return &tuner; };
+    virtual Tuner *GetTuner()   { return &tuner; };
 
     // Возвращает текущее значение параметра
     Value GetValue() const { return value; };
@@ -177,7 +177,7 @@ public:
 
     virtual void OnPressButtonTune();
 
-    virtual Tuner *_GetTuner()  { return &tuner; }
+    virtual Tuner *GetTuner()  { return &tuner; }
 
 private:
 
