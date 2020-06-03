@@ -46,7 +46,7 @@ public:
 
     Indicator(DisplayCorrection *display);
 
-    int Draw(int x, int y, int width);
+    int Draw(int x, int y, int width) const;
 
     bool OnControlKey(const Control control);
 
@@ -64,8 +64,6 @@ private:
     int indexHighlight;                     // Индекс подсвеченного знакоместа. Счёт ведётся только по цифровым и знаковым разрядам
 
     DisplayCorrection *display;
-
-    int Draw(int x, int y, bool test);
 
     // Нарисовать значок подсветки
     void HighlightSymbol(int x, int y, Color color) const;
@@ -113,7 +111,7 @@ private:
     Color CalculateColor(int pos, bool test) const;
 
     // Возвращает true, если нужно дополнительное смещение между разрядами
-    int AdditionShiftForDigit(int pos);
+    int AdditionShiftForDigit(int pos) const;
 
     // Возвращает true, если все цифровые разряды слева равны нулю
     bool AllNumbersOfLeftIsZero(int pos) const;
@@ -123,6 +121,12 @@ private:
     
     // Возвращает true, если все цифровые разряды справа равны нулю
     bool AllNumberOfRightIsZero(int pos) const;
+
+    int DrawDouble(int x, int y, int wdidth) const;
+
+    int DrawDouble(int x, int y, bool test) const;
+
+    int DrawInteger(int x, int y, int width) const;
 };
 
 

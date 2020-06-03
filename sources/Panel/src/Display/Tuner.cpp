@@ -129,22 +129,28 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 }
 
 
-int Indicator::Draw(int x, int y, int width)
+int Indicator::Draw(int x, int y, int width) const
 {
-    if (Tuner::Current()->ParameterIsVoltage())
-    {
-        return Draw(x + 90, y, false);
-    }
-
-    int end = Draw(x, y, true);
-
-    x += (width - (end - x)) / 2;
-
-    return Draw(x, y, false);
+    return Tuner::Current()->ReinterpretToDouble() ? DrawDouble(x, y, width) : DrawInteger(x, y, width);
 }
 
 
-int Indicator::Draw(int x, int y, bool test)
+int Indicator::DrawDouble(int x, int y, int width) const
+{
+    if (Tuner::Current()->ParameterIsVoltage())
+    {
+        return DrawDouble(x + 90, y, false);
+    }
+
+    int end = DrawDouble(x, y, true);
+
+    x += (width - (end - x)) / 2;
+
+    return DrawDouble(x, y, false);
+}
+
+
+int Indicator::DrawDouble(int x, int y, bool test) const
 {
     static const int dx = 12;
 
@@ -174,6 +180,12 @@ int Indicator::Draw(int x, int y, bool test)
     }
 
     return x;
+}
+
+
+int Indicator::DrawInteger(int x, int y, int width) const
+{
+    return 0;
 }
 
 
@@ -270,7 +282,7 @@ bool Indicator::AllNumberOfRightIsZero(int pos) const
 }
 
 
-int Indicator::AdditionShiftForDigit(int pos)
+int Indicator::AdditionShiftForDigit(int pos) const
 {
     static const int d = 5;
 
