@@ -54,10 +54,10 @@ static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 static const char *namesModeStart[] =
 {
-    " Авто",   " Auto",
-    " Однокр", " Single",
-    " Комп А", " Comp A",
-    " Форм B", " Form B",
+    "Авто",   "Auto",
+    "Однокр", "Single",
+    "Комп А", "Comp A",
+    "Форм B", "Form B",
     nullptr
 };
 

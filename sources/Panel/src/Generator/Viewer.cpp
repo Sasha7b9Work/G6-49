@@ -25,7 +25,7 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits)
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
        (CURRENT_PAGE == PageSignals::self))
     {
-        Rectangle(139, 9).Fill(xName, y, Color::GRAY_25);
+        Rectangle(141, 9).Fill(xName, y, Color::GRAY_25);
     }
 
     Font::ForceUpperCase(true);
