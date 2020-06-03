@@ -298,6 +298,8 @@ public:
     // Возвращает указатеь на ParameterDouble, если param имеет тип Double и nullptr в ином случае
     ParameterDouble *ReinterpretToDouble();
 
+    ParameterInteger *ReinterpretToInteger();
+
 private:
 
     Parameter *param;           // Настраиваемый параметр

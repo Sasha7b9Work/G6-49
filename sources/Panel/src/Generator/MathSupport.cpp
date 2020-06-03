@@ -268,3 +268,19 @@ int MathParameterDouble::GetNumberDigitsAfterComma(Order::E order)
 
     return 8 + Order::GetPow10(order);
 }
+
+
+int MathParameterInteger::GetMaxNumberDigits(ParameterInteger *parameter)
+{
+    int max = parameter->GetMax();
+
+    int result = 1;
+
+    while (max != 0)
+    {
+        result++;
+        max /= 10;
+    }
+
+    return result;
+}

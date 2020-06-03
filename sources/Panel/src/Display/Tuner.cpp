@@ -756,6 +756,11 @@ void DisplayEntering::OnButtonOrderLess()
 
 void DisplayCorrection::Init()
 {
+    for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
+    {
+        indicator.digits[i].Set('\0');
+    }
+
     tuner->ReinterpretToDouble() ? InitDouble() : InitInteger();
 }
 
@@ -763,11 +768,6 @@ void DisplayCorrection::Init()
 void DisplayCorrection::InitDouble()
 {
     MathParameterDouble::SetParameterValue(tuner->ReinterpretToDouble());
-
-    for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
-    {
-        indicator.digits[i].Set('\0');
-    }
 
     int before = MathParameterDouble::GetNumberDigitsBeforeComma(CalculateOrderForIndication());
 
@@ -781,7 +781,12 @@ void DisplayCorrection::InitDouble()
 
 void DisplayCorrection::InitInteger()
 {
+    int numDigits = MathParameterInteger::GetMaxNumberDigits(tuner->ReinterpretToInteger());
 
+    for (int i = 0; i < numDigits; i++)
+    {
+        indicator.digits[i].Set('0');
+    }
 }
 
 
@@ -936,4 +941,10 @@ bool Tuner::ParameterIsVoltage()
 ParameterDouble *Tuner::ReinterpretToDouble()
 {
     return param->IsDouble() ? reinterpret_cast<ParameterDouble *>(param) : nullptr;
+}
+
+
+ParameterInteger *Tuner::ReinterpretToInteger()
+{
+    return param->IsInteger() ? reinterpret_cast<ParameterInteger *>(param) : nullptr;
 }

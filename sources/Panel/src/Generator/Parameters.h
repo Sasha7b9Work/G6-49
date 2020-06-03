@@ -179,6 +179,12 @@ public:
 
     virtual Tuner *GetTuner()  { return &tuner; }
 
+    int GetValue() const       { return value; }
+                               
+    int GetMax() const         { return max;   }
+                               
+    int GetMin() const         { return min;   }
+
 private:
 
     Tuner tuner;
