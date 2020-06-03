@@ -244,12 +244,12 @@ String ParameterComposite::ToString(String &units) const
     {
         static pCHAR valuesRU[2] =
         {
-            " Откл", " Вкл"
+            "Откл", "Вкл"
         };
 
         static pCHAR valuesEN[2] =
         {
-            " Off", " On"
+            "Off", "On"
         };
 
         ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(ParameterChoiceType::ManipulationEnabled);

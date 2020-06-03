@@ -13,6 +13,8 @@ ParameterDouble *MathParameterValue::param = nullptr;
 // Погасить незначащие символы
 static void RepayEmptySymbols(char *buffer)
 {
+    char *first = buffer;
+
     int sign = 0;
 
     if (*buffer == '-')
@@ -49,8 +51,19 @@ static void RepayEmptySymbols(char *buffer)
 
     while (*buffer == '0')
     {
-        *buffer = ' ';
+        *buffer = '\0';
         buffer--;
+    }
+
+    while (*first == ' ')
+    {
+        buffer = first;
+
+        do 
+        {
+            buffer++;
+            *(buffer - 1) = *buffer;
+        } while (*buffer != '\0');
     }
 }
 
