@@ -173,7 +173,7 @@ class ParameterInteger : public Parameter
 {
 public:
 
-    ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value);
+    ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const int min, const int max, const int value);
 
     virtual String ToString() const;
 
@@ -183,9 +183,9 @@ private:
 
     Tuner tuner;
     ParameterIntegerType::E type;
-    Value min;
-    Value max;
-    Value value;
+    int min;
+    int max;
+    int value;
 };
 
 
