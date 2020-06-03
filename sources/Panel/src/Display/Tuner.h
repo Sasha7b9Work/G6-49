@@ -108,7 +108,9 @@ private:
     bool ChangeSign(Value *value, int pos);
 
     // Возвращает цвет, которым нужно отрисовывать символ в позиции pos. Если test == true, то функция всегда будет возвращать цвет фона
-    Color CalculateColor(int pos, bool test) const;
+    Color CalculateColorDouble(int pos, bool test) const;
+
+    Color CalculateColorInteger(int pos, bool test) const;
 
     // Возвращает true, если нужно дополнительное смещение между разрядами
     int AdditionShiftForDigit(int pos) const;
@@ -127,6 +129,8 @@ private:
     int DrawDouble(int x, int y, bool test) const;
 
     int DrawInteger(int x, int y, int width) const;
+
+    int DrawInteger(int x, int y, bool test) const;
 };
 
 

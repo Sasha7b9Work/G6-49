@@ -158,7 +158,7 @@ int Indicator::DrawDouble(int x, int y, bool test) const
 
     while (digits[pos] != '\0')
     {
-        Color color = CalculateColor(pos, test);
+        Color color = CalculateColorDouble(pos, test);
 
         x += AdditionShiftForDigit(pos);
 
@@ -185,11 +185,47 @@ int Indicator::DrawDouble(int x, int y, bool test) const
 
 int Indicator::DrawInteger(int x, int y, int width) const
 {
-    return 0;
+    int end = DrawInteger(x, y, true);
+
+    x += (width - (end - x)) / 2;
+
+    return DrawInteger(x, y, false);
 }
 
 
-Color Indicator::CalculateColor(int pos, bool test) const
+int Indicator::DrawInteger(int x, int y, bool test) const
+{
+    static const int dx = 12;
+
+    int pos = 0;
+
+    while (digits[pos] != '\0')
+    {
+        Color color = CalculateColorInteger(pos, test);
+
+        Char(digits[pos]).Draw(x, y, color);
+
+        x += dx;
+
+        pos++;
+    }
+
+    return x;
+}
+
+
+Color Indicator::CalculateColorInteger(int pos, bool test) const
+{
+    if (test)
+    {
+        return Color::BACK;
+    }
+
+    return Color::FILL;
+}
+
+
+Color Indicator::CalculateColorDouble(int pos, bool test) const
 {
     if (test)
     {
@@ -560,7 +596,7 @@ void DisplayCorrection::Draw()
 
     Font::StoreAndSet(TypeFont::_GOSTB20);
 
-    DrawTitle(x, y + 10, WaveGraphics::Width());
+    DrawTitle(x - 10, y + 10, WaveGraphics::Width());
 
     y += 60;
 
