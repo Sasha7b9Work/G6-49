@@ -244,6 +244,10 @@ private:
     void InitDouble();
 
     void InitInteger();
+
+    void DrawDouble();
+
+    void DrawInteger();
 };
 
 

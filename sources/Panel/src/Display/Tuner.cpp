@@ -539,6 +539,18 @@ DisplayCorrection::DisplayCorrection(Tuner *_tuner) : tuner(_tuner), indicator(t
 
 void DisplayCorrection::Draw()
 {
+    tuner->ReinterpretToDouble() ? DrawDouble() : DrawInteger();
+}
+
+
+void DisplayCorrection::DrawInteger()
+{
+
+}
+
+
+void DisplayCorrection::DrawDouble()
+{
     Chan ch = tuner->GetParameter()->GetForm()->GetWave()->GetChannel();
 
     int x = WaveGraphics::X();
@@ -744,14 +756,7 @@ void DisplayEntering::OnButtonOrderLess()
 
 void DisplayCorrection::Init()
 {
-    if (tuner->ReinterpretToDouble())
-    {
-        InitDouble();
-    }
-    else
-    {
-        InitInteger();
-    }
+    tuner->ReinterpretToDouble() ? InitDouble() : InitInteger();
 }
 
 
