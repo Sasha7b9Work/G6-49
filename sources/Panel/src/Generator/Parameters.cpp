@@ -356,7 +356,7 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 
 String ParameterDouble::ToString(String &units) const
 {
-    String result(MathValue::GetIndicatedValue(this));
+    String result(MathDouble::GetIndicatedValue(this));
 
     units.Set(TypeConversionString::None, GetUnits(CalculateOrder(this)));
 

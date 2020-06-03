@@ -7,7 +7,7 @@
 #include <cstring>
 
 
-ParameterDouble *MathParameterValue::param = nullptr;
+ParameterDouble *MathParameterDouble::param = nullptr;
 
 
 // Погасить незначащие символы
@@ -91,7 +91,7 @@ static pString ZeroValue(const ParameterDouble *param)
 }
 
 
-pString MathValue::GetIndicatedValue(const ParameterDouble *param)
+pString MathDouble::GetIndicatedValue(const ParameterDouble *param)
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
@@ -144,13 +144,13 @@ pString MathValue::GetIndicatedValue(const ParameterDouble *param)
 }
 
 
-int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
+int MathDouble::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
     return param->IsVoltage() ? 1 : GetPositionFirstDigit(param->GetValue(), order);
 }
 
 
-int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
+int MathDouble::GetPositionFirstDigit(const Value &val, Order::E order)
 {
     Value value = val;
     value.SetSign(1);
@@ -187,7 +187,7 @@ int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
 }
 
 
-char MathValue::GetChar(const Value &value, int position, Order::E order)
+char MathDouble::GetChar(const Value &value, int position, Order::E order)
 {
     int digit = GetDigit(value, position, order);
 
@@ -195,7 +195,7 @@ char MathValue::GetChar(const Value &value, int position, Order::E order)
 }
 
 
-int MathValue::GetDigit(const Value &val, int position, Order::E order)
+int MathDouble::GetDigit(const Value &val, int position, Order::E order)
 {
     Value value = val;
     value.SetSign(1);
@@ -239,18 +239,18 @@ int MathValue::GetDigit(const Value &val, int position, Order::E order)
 }
 
 
-int MathParameterValue::GetNumberDigitsBeforeComma(Order::E order)
+int MathParameterDouble::GetNumberDigitsBeforeComma(Order::E order)
 {
     if (param->IsVoltage())
     {
         return 2;
     }
 
-    return MathValue::GetPositionFirstDigit(param->GetMax(), order) + 1;
+    return MathDouble::GetPositionFirstDigit(param->GetMax(), order) + 1;
 }
 
 
-int MathParameterValue::GetNumberDigitsAfterComma(Order::E order)
+int MathParameterDouble::GetNumberDigitsAfterComma(Order::E order)
 {
     if (param->IsVoltage())
     {

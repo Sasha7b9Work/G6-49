@@ -744,14 +744,14 @@ void DisplayEntering::OnButtonOrderLess()
 
 void DisplayCorrection::Init()
 {
-    MathParameterValue::SetParameterValue(tuner->ReinterpretToDouble());
+    MathParameterDouble::SetParameterValue(tuner->ReinterpretToDouble());
 
     for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
     {
         indicator.digits[i].Set('\0');
     }
 
-    int before = MathParameterValue::GetNumberDigitsBeforeComma(CalculateOrderForIndication());
+    int before = MathParameterDouble::GetNumberDigitsBeforeComma(CalculateOrderForIndication());
 
     indicator.digits[before].Set(Digit::COMMA);
 
@@ -773,7 +773,7 @@ void DisplayCorrection::FillDigitsIntegerPart()
 {
     Order::E order = CalculateOrderForIndication();
 
-    int before = MathParameterValue::GetNumberDigitsBeforeComma(order);
+    int before = MathParameterDouble::GetNumberDigitsBeforeComma(order);
     ParameterDouble *param = tuner->ReinterpretToDouble();
     Value value = param->GetValue();
 
@@ -786,7 +786,7 @@ void DisplayCorrection::FillDigitsIntegerPart()
 
     for (int i = 0; i < before; i++)
     {
-        indicator.digits[pos].Set(MathValue::GetChar(value, i, order));
+        indicator.digits[pos].Set(MathDouble::GetChar(value, i, order));
         pos--;
 
         if (param->IsSigned() && (pos == 0))
@@ -801,15 +801,15 @@ void DisplayCorrection::FillDigitsFractPart()
 {
     Order::E order = CalculateOrderForIndication();
 
-    int before = MathParameterValue::GetNumberDigitsBeforeComma(order);
-    int after = MathParameterValue::GetNumberDigitsAfterComma(order);
+    int before = MathParameterDouble::GetNumberDigitsBeforeComma(order);
+    int after = MathParameterDouble::GetNumberDigitsAfterComma(order);
     Value value = tuner->ReinterpretToDouble()->GetValue();
 
     int pos = before + 1;                                   // Теперь в эту позицию будем записывать рразряды после запятой
 
     for (int i = 0; i < after; i++)
     {
-        indicator.digits[pos].Set(MathValue::GetChar(value, -i - 1, order));
+        indicator.digits[pos].Set(MathDouble::GetChar(value, -i - 1, order));
         pos++;
     }
 }

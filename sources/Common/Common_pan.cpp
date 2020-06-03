@@ -7,7 +7,7 @@
 static void AddChar(char *buffer, const Value &value, int pos)
 {
     char digit[2] = { 0, 0 };
-    digit[0] = MathValue::GetChar(value, pos, value.GetOrder());
+    digit[0] = MathDouble::GetChar(value, pos, value.GetOrder());
     std::strcat(buffer, digit);
 }
 
@@ -27,7 +27,7 @@ pString Value::ToString(bool sign) const
         buffer[1] = '\0';
     }
 
-    int first = MathValue::GetPositionFirstDigit(*this, GetOrder());
+    int first = MathDouble::GetPositionFirstDigit(*this, GetOrder());
 
     for (int i = first; i >= 0; i--)
     {
