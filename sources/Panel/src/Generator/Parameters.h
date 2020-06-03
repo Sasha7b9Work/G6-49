@@ -1,8 +1,8 @@
 #pragma once
 #include "common/Common.h"
+#include "Display/Tuner.h"
+#include "Display/Viewer.h"
 #include "Generator/MathSupport.h"
-#include "Generator/Tuner.h"
-#include "Generator/Viewer.h"
 #include "Settings/SettingsTypes.h"
 
 

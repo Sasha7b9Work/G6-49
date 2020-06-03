@@ -377,7 +377,7 @@ String ParameterInteger::ToString(String &units) const
 {
     units.Free();
 
-    return String("");
+    return String("%d", value);
 }
 
 

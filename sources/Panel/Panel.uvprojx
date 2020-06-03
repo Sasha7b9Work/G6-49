@@ -1794,6 +1794,26 @@
               <FilePath>.\src\Display\Text.h</FilePath>
             </File>
             <File>
+              <FileName>Tuner.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Tuner.h</FilePath>
+            </File>
+            <File>
+              <FileName>Tuner.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Tuner.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Viewer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Viewer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Viewer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Viewer.cpp</FilePath>
+            </File>
+            <File>
               <FileName>WaveGraphics.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\WaveGraphics.cpp</FilePath>
@@ -1952,26 +1972,6 @@
               <FileName>Signals.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Signals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tuner.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Tuner.h</FilePath>
-            </File>
-            <File>
-              <FileName>Tuner.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Tuner.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Viewer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Viewer.h</FilePath>
-            </File>
-            <File>
-              <FileName>Viewer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Viewer.cpp</FilePath>
             </File>
             <File>
               <FileName>Wave.h</FileName>

@@ -94,8 +94,12 @@ source_group(Display                  FILES              ../../Panel/src/Display
                                                          ../../Panel/src/Display/Painter.cpp
                                                                      src/Display/Painter_win.cpp
                                                          ../../Panel/src/Display/Symbols.h
-                                                         ../../Panel/src/Display/Text.cpp
                                                          ../../Panel/src/Display/Text.h
+                                                         ../../Panel/src/Display/Text.cpp
+                                                         ../../Panel/src/Display/Tuner.h
+                                                         ../../Panel/src/Display/Tuner.cpp
+                                                         ../../Panel/src/Display/Viewer.h
+                                                         ../../Panel/src/Display/Viewer.cpp
                                                          ../../Panel/src/Display/WaveGraphics.h
                                                          ../../Panel/src/Display/WaveGraphics.cpp)
 source_group(Hardware                 FILES                          src/Hardware/Beeper_win.cpp
@@ -171,8 +175,12 @@ file(GLOB SOURCES   ../../common/Command.h
                     ../../Panel/src/Display/Painter.cpp
                                 src/Display/Painter_win.cpp
                     ../../Panel/src/Display/Symbols.h
-                    ../../Panel/src/Display/Text.cpp
                     ../../Panel/src/Display/Text.h
+                    ../../Panel/src/Display/Text.cpp
+                    ../../Panel/src/Display/Tuner.h
+                    ../../Panel/src/Display/Tuner.cpp
+                    ../../Panel/src/Display/Viewer.h
+                    ../../Panel/src/Display/Viewer.cpp
                     ../../Panel/src/Display/WaveGraphics.h
                     ../../Panel/src/Display/WaveGraphics.cpp
                     

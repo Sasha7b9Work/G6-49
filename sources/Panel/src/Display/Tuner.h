@@ -5,10 +5,11 @@
 #include "Utils/Stack.h"
 
 
+class DisplayCorrection;
+class Parameter;
 class ParameterDouble;
 class ParameterInteger;
 class Tuner;
-class DisplayCorrection;
 
 
 class Digit
