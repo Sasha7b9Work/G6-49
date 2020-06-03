@@ -36,18 +36,18 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits)
 
     static const funcDrawValue funcs[ParameterKind::Count] =
     {
-        &Viewer::DrawDoubleValue,
-        &Viewer::DrawChoiceValue,
-        &Viewer::DrawCompositeValue,
+        &Viewer::DrawValue,
+        &Viewer::DrawChoice,
+        &Viewer::DrawComposite,
         &Viewer::DrawButton,
-        &Viewer::DrawIntegerValue
+        &Viewer::DrawValue
     };
 
     (this->*funcs[param->GetKind()])(y, xValue, xUnits);
 }
 
 
-void Viewer::DrawDoubleValue(int y, int xValue, int xUnits)
+void Viewer::DrawValue(int y, int xValue, int xUnits)
 {
     Font::ForceUpperCase(false);
 
@@ -59,13 +59,7 @@ void Viewer::DrawDoubleValue(int y, int xValue, int xUnits)
 }
 
 
-void Viewer::DrawIntegerValue(int, int, int)
-{
-
-}
-
-
-void Viewer::DrawChoiceValue(int y, int xValue, int)
+void Viewer::DrawChoice(int y, int xValue, int)
 {
     String units;
     String value = param->ToString(units);
@@ -80,7 +74,7 @@ void Viewer::DrawChoiceValue(int y, int xValue, int)
 }
 
 
-void Viewer::DrawCompositeValue(int y, int xValue, int)
+void Viewer::DrawComposite(int y, int xValue, int)
 {
     String units;
 

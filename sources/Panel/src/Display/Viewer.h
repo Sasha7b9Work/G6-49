@@ -20,15 +20,13 @@ public:
 
 private:
 
-    void DrawDoubleValue(int y, int xValue, int xUnits);
+    void DrawValue(int y, int xValue, int xUnits);
 
-    void DrawChoiceValue(int y, int xValue, int xUnits);
+    void DrawChoice(int y, int xValue, int xUnits);
 
-    void DrawCompositeValue(int y, int xValue, int xUnits);
+    void DrawComposite(int y, int xValue, int xUnits);
 
     void DrawButton(int y, int xValue, int xUnits);
-
-    void DrawIntegerValue(int y, int xValue, int xUnits);
 
     Parameter *param;
 };
