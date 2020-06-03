@@ -146,7 +146,7 @@ pString MathValue::GetIndicatedValue(const ParameterDouble *param)
 
 int MathValue::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
-    return GetPositionFirstDigit(param->GetValue(), order);
+    return param->IsVoltage() ? 1 : GetPositionFirstDigit(param->GetValue(), order);
 }
 
 
@@ -180,7 +180,7 @@ int MathValue::GetPositionFirstDigit(const Value &val, Order::E order)
         {
             result--;
             fract *= 10;
-        } while (fract < (100 * 1000 * 1000));
+        } while (fract < (1000 * 1000 * 1000));
     }
 
     return result - Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
