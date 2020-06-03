@@ -133,6 +133,10 @@ static void OnOpenClose_TuneParameter(bool enter)
     {
         tuned->GetTuner()->Init();
     }
+    else
+    {
+        tuned = nullptr;
+    }
 }
 
 
@@ -192,13 +196,10 @@ void PageTuneParameter::CallbackOnButtonCancel()
     PGenerator::TuneChannel(CURRENT_CHANNEL);
 
     Menu::ResetAdditionPage();
-
-    tuned = nullptr;
 }
 
 
 void PageTuneParameter::CallbackOnButtonApply()
 {
     Menu::ResetAdditionPage();
-    tuned = nullptr;
 }
