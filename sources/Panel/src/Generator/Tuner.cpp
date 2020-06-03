@@ -29,15 +29,15 @@ Tuner *Tuner::current = nullptr;
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
-    if ((key == Key::Minus) && (Tuner::Current()->GetParameter()->GetType() != ParameterDoubleType::Offset))    { return; }
+    if ((key == Key::Minus) && !Tuner::Current()->ParameterIsOffset()) { return; }
 
-    if (stack.Size() > 14)                                          { return; }
-
-    if ((key == Key::Minus) && (stack.Size() != 0))                 { return; }
-
-    if ((key == Key::Comma) && ConsistComma())                      { return; }
-
-    if (stack.Size() == 0 && (key == Key::_0 || key == Key::Comma)) { return; }
+    if (stack.Size() > 14)                                             { return; }
+                                                                       
+    if ((key == Key::Minus) && (stack.Size() != 0))                    { return; }
+                                                                       
+    if ((key == Key::Comma) && ConsistComma())                         { return; }
+                                                                       
+    if (stack.Size() == 0 && (key == Key::_0 || key == Key::Comma))    { return; }
 
     stack.Push(Key(key).ToChar());
 }
@@ -131,7 +131,7 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 
 int Indicator::Draw(int x, int y, int width)
 {
-    if (Tuner::Current()->GetParameter()->IsVoltage())
+    if (Tuner::Current()->ParameterIsVoltage())
     {
         return Draw(x + 90, y, false);
     }
@@ -348,7 +348,7 @@ bool Indicator::IsSigned() const
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    ParameterDouble *param = Tuner::Current()->GetParameter();
+    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
     Value value = param->GetValue();
 
@@ -370,7 +370,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    ParameterDouble *param = Tuner::Current()->GetParameter();
+    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
     Value value = param->GetValue();
 
@@ -577,7 +577,7 @@ void DisplayCorrection::DrawUnits(int x, int y)
 {
     Font::ForceUpperCase(false);
 
-    String(tuner->GetParameter()->GetUnits(CalculateOrderForIndication())).Draw(x + 7, y, Color::WHITE);
+    String(tuner->ReinterpretToDouble()->GetUnits(CalculateOrderForIndication())).Draw(x + 7, y, Color::WHITE);
 
     Font::ForceUpperCase(true);
 }
@@ -596,7 +596,7 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 
 void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 {
-    ParameterDouble *param = Tuner::Current()->GetParameter();
+    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
     if (value > param->GetMax() || value < param->GetMin())
     {
@@ -613,7 +613,7 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 
 void DisplayEntering::Init()
 {
-    buffer.Prepare(Tuner::Current()->GetParameter());
+    buffer.Prepare(Tuner::Current()->ReinterpretToDouble());
 }
 
 
@@ -624,7 +624,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
         if (Tuner::Current()->InModeCorrection())
         {
             Tuner::Current()->SetModeEntering();
-            order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
+            order = Tuner::Current()->ReinterpretToDouble()->GetValue().GetOrder();
         }
 
         TryToAddSymbol(control.key);
@@ -642,7 +642,7 @@ bool DisplayEntering::ValueInBoundaries()
 {
     Value value = ToValue();
 
-    ParameterDouble *param = Tuner::Current()->GetParameter();
+    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
     bool valid = (value >= param->GetMin()) && (value <= param->GetMax());
 
@@ -702,7 +702,7 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
     char units[10];
 
     std::strcpy(units, Order::Suffix(order));
-    std::strcat(units, Tuner::Current()->GetParameter()->GetMainUnits());
+    std::strcat(units, Tuner::Current()->ReinterpretToDouble()->GetMainUnits());
 
     Font::ForceUpperCase(false);
 
@@ -744,7 +744,7 @@ void DisplayEntering::OnButtonOrderLess()
 
 void DisplayCorrection::Init()
 {
-    MathParameterValue::SetParameterValue(tuner->GetParameter());
+    MathParameterValue::SetParameterValue(tuner->ReinterpretToDouble());
 
     for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
     {
@@ -763,7 +763,7 @@ void DisplayCorrection::Init()
 
 Order::E DisplayCorrection::CalculateOrderForIndication()
 {
-    ParameterDouble *param = Tuner::Current()->GetParameter();
+    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
     return param->IsVoltage() ? Order::One : param->GetValue().GetOrder();
 }
@@ -774,7 +774,7 @@ void DisplayCorrection::FillDigitsIntegerPart()
     Order::E order = CalculateOrderForIndication();
 
     int before = MathParameterValue::GetNumberDigitsBeforeComma(order);
-    ParameterDouble *param = tuner->GetParameter();
+    ParameterDouble *param = tuner->ReinterpretToDouble();
     Value value = param->GetValue();
 
     int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
@@ -803,7 +803,7 @@ void DisplayCorrection::FillDigitsFractPart()
 
     int before = MathParameterValue::GetNumberDigitsBeforeComma(order);
     int after = MathParameterValue::GetNumberDigitsAfterComma(order);
-    Value value = tuner->GetParameter()->GetValue();
+    Value value = tuner->ReinterpretToDouble()->GetValue();
 
     int pos = before + 1;                                   // “еперь в эту позицию будем записывать рразр€ды после зап€той
 
@@ -817,18 +817,13 @@ void DisplayCorrection::FillDigitsFractPart()
 
 void DisplayCorrection::Init(Value value)
 {
-    tuner->GetParameter()->SetAndLoadValue(value);
+    tuner->ReinterpretToDouble()->SetAndLoadValue(value);
     Init();
 }
 
 
-Tuner::Tuner(ParameterDouble *_param) : param(_param), display(this)
+Tuner::Tuner(Parameter *_param) : param(_param), display(this)
 {
-}
-
-Tuner::Tuner(ParameterInteger *) : display(this)
-{
-
 }
 
 
@@ -894,4 +889,27 @@ void Tuner::SetModeEntering()
     PageTuneParameter::SetModeEntering();
     mode = ModeTuning::Entering;
     DisplayEntering::Init();
+}
+
+
+bool Tuner::ParameterIsOffset()
+{
+    ParameterDouble *offset = ReinterpretToDouble();
+
+    return (offset == nullptr) ? false : (offset->GetType() == ParameterDoubleType::Offset);
+
+}
+
+
+bool Tuner::ParameterIsVoltage()
+{
+    ParameterDouble *voltage = ReinterpretToDouble();
+
+    return (voltage == nullptr) ? false : voltage->IsVoltage();
+}
+
+
+ParameterDouble *Tuner::ReinterpretToDouble()
+{
+    return param->IsDouble() ? reinterpret_cast<ParameterDouble *>(param) : nullptr;
 }

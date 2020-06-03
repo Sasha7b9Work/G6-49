@@ -256,8 +256,7 @@ public:
         };
     };
 
-    Tuner(ParameterDouble *param);
-    Tuner(ParameterInteger *param);
+    Tuner(Parameter *param);
 
     void Init();
 
@@ -271,7 +270,7 @@ public:
     // Обработчик нажатия кнопки "Применить"
     void OnButtonApply();
 
-    ParameterDouble *GetParameter() { return param; }
+    Parameter *GetParameter() { return param; }
 
     static bool InModeCorrection() { return (mode == ModeTuning::Correction); }
 
@@ -281,9 +280,18 @@ public:
 
     static Tuner *Current() { return current; };
 
+    // Возвращает true, если натсраиваемый параметр - смещение
+    bool ParameterIsOffset();
+
+    // Возвращает true, если настраиваемый параметр имеет единицы измерения "Вольт"
+    bool ParameterIsVoltage();
+
+    // Возвращает указатеь на ParameterDouble, если param имеет тип Double и nullptr в ином случае
+    ParameterDouble *ReinterpretToDouble();
+
 private:
 
-    ParameterDouble *param;           // Настраиваемый параметр
+    Parameter *param;           // Настраиваемый параметр
 
     DisplayCorrection display;
 
