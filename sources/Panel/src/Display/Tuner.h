@@ -245,9 +245,9 @@ private:
 
     void InitInteger();
 
-    void DrawDouble();
+    void DrawDouble(int x, int y);
 
-    void DrawInteger();
+    void DrawInteger(int x, int y);
 };
 
 

@@ -539,18 +539,6 @@ DisplayCorrection::DisplayCorrection(Tuner *_tuner) : tuner(_tuner), indicator(t
 
 void DisplayCorrection::Draw()
 {
-    tuner->ReinterpretToDouble() ? DrawDouble() : DrawInteger();
-}
-
-
-void DisplayCorrection::DrawInteger()
-{
-
-}
-
-
-void DisplayCorrection::DrawDouble()
-{
     Chan ch = tuner->GetParameter()->GetForm()->GetWave()->GetChannel();
 
     int x = WaveGraphics::X();
@@ -564,6 +552,27 @@ void DisplayCorrection::DrawDouble()
 
     y += 60;
 
+    tuner->ReinterpretToDouble() ? DrawDouble(x, y) : DrawInteger(x, y);
+
+    Font::Restore();
+}
+
+
+void DisplayCorrection::DrawInteger(int x, int y)
+{
+    if (Tuner::InModeEntering())
+    {
+        DisplayEntering::Draw(x + 5, y - 10, WaveGraphics::Width());
+    }
+    else
+    {
+        indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width() - WIDTH_UNITS);
+    }
+}
+
+
+void DisplayCorrection::DrawDouble(int x, int y)
+{
     if (Tuner::InModeEntering())
     {
         DisplayEntering::Draw(x + 5, y - 10, WaveGraphics::Width());
@@ -574,8 +583,6 @@ void DisplayCorrection::DrawDouble()
 
         DrawUnits(x, y);
     }
-
-    Font::Restore();
 }
 
 
