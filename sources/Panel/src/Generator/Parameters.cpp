@@ -9,6 +9,13 @@
 #include <cstdio>
 
 
+Parameter::Parameter(ParameterKind::E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
+{
+    names[0] = nRU;
+    names[1] = nEN;
+}
+
+
 void Parameter::SetForm(Form *f)
 {
     form = f;
@@ -41,7 +48,7 @@ bool Parameter::IsChoice() const
 
 pString Parameter::Name() const
 {
-    return name[LANGUAGE];
+    return names[LANGUAGE];
 }
 
 
@@ -383,8 +390,10 @@ String ParameterInteger::ToString(String &units) const
 
 void ParameterInteger::OnPressButtonTune()
 {
-
+    PageTuneParameter::SetParameter(this);
+    Menu::SetAdditionPage(PageTuneParameter::self);
 }
+
 
 
 void ParameterChoice::OnPressButtonTune()

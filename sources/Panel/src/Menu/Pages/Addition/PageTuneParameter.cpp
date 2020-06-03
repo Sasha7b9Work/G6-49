@@ -8,16 +8,22 @@
 #include "Settings/Settings.h"
 
 
-static ParameterDouble stored = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
+static ParameterDouble storedDouble = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
+static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", 0, 100, 0);
 
-static ParameterDouble *tuned = nullptr;     // Ќастраиваемый параметр //-V1054
+static Parameter *tuned = nullptr;     // Ќастраиваемый параметр //-V1054
 
 
-void PageTuneParameter::SetParameter(ParameterDouble *parameter)
+void PageTuneParameter::SetParameter(Parameter *parameter)
 {
     if(parameter->IsDouble())
     {
-        stored = *parameter;
+        storedDouble = *reinterpret_cast<ParameterDouble *>(parameter);
+        tuned = parameter;
+    }
+    else if (parameter->IsInteger())
+    {
+        storedInteger = *reinterpret_cast<ParameterInteger *>(parameter);
         tuned = parameter;
     }
 }
@@ -53,20 +59,6 @@ DEF_GRAPH_BUTTON(sbLess,
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-void PageTuneParameter::CallbackOnButtonCancel()
-{
-    Parameter *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
-
-    if (parameter->IsDouble())
-    {
-        *reinterpret_cast<ParameterDouble *>(parameter) = stored;
-    }
-
-    PGenerator::TuneChannel(CURRENT_CHANNEL);
-
-    Menu::ResetAdditionPage();
-}
-
 static void OnPress_Cancel()
 {
     Tuner::Current()->OnButtonCancel();
@@ -90,11 +82,6 @@ static void Draw_Enter(int x, int y)
 {
     String(LANG_IS_RU ? "ѕрименить" : "Apply").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Save).Draw4InRect(x + 25, y + 28);
-}
-
-void PageTuneParameter::CallbackOnButtonApply()
-{
-    Menu::ResetAdditionPage();
 }
 
 static void OnPress_Enter()
@@ -186,4 +173,32 @@ void PageTuneParameter::ResetModeEntering()
 bool PageTuneParameter::IsOpened()
 {
     return (CURRENT_PAGE == PageTuneParameter::self);
+}
+
+
+void PageTuneParameter::CallbackOnButtonCancel()
+{
+    Parameter *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
+
+    if (parameter->IsDouble())
+    {
+        *reinterpret_cast<ParameterDouble *>(parameter) = storedDouble;
+    }
+    else if (parameter->IsInteger())
+    {
+        *reinterpret_cast<ParameterInteger *>(parameter) = storedInteger;
+    }
+
+    PGenerator::TuneChannel(CURRENT_CHANNEL);
+
+    Menu::ResetAdditionPage();
+
+    tuned = nullptr;
+}
+
+
+void PageTuneParameter::CallbackOnButtonApply()
+{
+    Menu::ResetAdditionPage();
+    tuned = nullptr;
 }

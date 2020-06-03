@@ -29,17 +29,18 @@ class Parameter
 {
 public:
 
-    Parameter(ParameterKind::E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
-    {
-        name[0] = nRU;
-        name[1] = nEN;
-    }
+    Parameter(ParameterKind::E k, const char *nRU, const char *nEN);
 
     virtual ~Parameter() { }
 
     pString Name() const;
 
     virtual void SetForm(Form *form);
+
+    // Обработчик нажатия кнопки "Изменить"
+    virtual void OnPressButtonTune() = 0;
+
+    virtual Tuner *GetTuner() { return nullptr; }
 
     void SetParent(Parameter *p);
     
@@ -58,9 +59,6 @@ public:
 
     Form *GetForm();
     
-    // Обработчик нажатия кнопки "Изменить"
-    virtual void OnPressButtonTune() = 0;
-
     ParameterKind::E GetKind() { return kind; }
 
     Viewer viewer;
@@ -70,7 +68,7 @@ protected:
     Form *form;         // Форма, для которой зада этот параметр
     Parameter *parent;  // Если параметр вложенный, то здесь адрес родителя
     ParameterKind::E kind;
-    const char *name[2];
+    const char *names[2];
 };
 
 
@@ -139,7 +137,7 @@ public:
     // Возвращает минимальное значение, которое может иметь параметр
     Value GetMin() { return min; }
 
-    Tuner *GetTuner()   { return &tuner; };
+    virtual Tuner *_GetTuner()   { return &tuner; };
 
     // Возвращает текущее значение параметра
     Value GetValue() const { return value; };
@@ -178,6 +176,8 @@ public:
     virtual String ToString(String &units) const;
 
     virtual void OnPressButtonTune();
+
+    virtual Tuner *_GetTuner()  { return &tuner; }
 
 private:
 
