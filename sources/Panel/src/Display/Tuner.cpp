@@ -201,7 +201,7 @@ int Indicator::DrawInteger(int x, int y, bool test) const
 
     while (digits[pos] != '\0')
     {
-        Color color = CalculateColorInteger(pos, test);
+        Color color = CalculateColorInteger(test);
 
         Char(digits[pos]).Draw(x, y, color);
 
@@ -214,7 +214,7 @@ int Indicator::DrawInteger(int x, int y, bool test) const
 }
 
 
-Color Indicator::CalculateColorInteger(int pos, bool test) const
+Color Indicator::CalculateColorInteger(bool test) const
 {
     if (test)
     {
