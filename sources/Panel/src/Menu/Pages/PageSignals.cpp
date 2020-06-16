@@ -88,7 +88,7 @@ DEF_PAGE_4( pageSignals,   //-V641
     &cFormA,                // НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,           // НАСТРОЙКИ СИГНАЛОВ - Параметр
     &bTuneParameter,        // НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
-    Page::Settings, Menu::mainPage, Item::FuncActive, Page::FuncEnter, OnKey_PageSignals, FuncBeforeDraw
+    Page::Settings, PageMain::self, Item::FuncActive, Page::FuncEnter, OnKey_PageSignals, FuncBeforeDraw
 )
 
 Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));

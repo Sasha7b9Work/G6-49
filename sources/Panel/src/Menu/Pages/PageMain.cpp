@@ -13,4 +13,4 @@ DEF_PAGE_4(mainPageMenu,
     Page::Main, 0, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
-Page *Menu::mainPage = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPageMenu));
+Page *PageMain::self = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPageMenu));

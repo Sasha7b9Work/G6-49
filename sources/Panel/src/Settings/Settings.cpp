@@ -3,6 +3,7 @@
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/Pages.h"
 
 
 static const Settings defSet =
@@ -59,7 +60,7 @@ static const Settings defSet =
         MAKE_COLOR(0x40, 0x40, 0xFF)    // CHAN_B
 #endif
     },
-    static_cast<Page *>(Menu::mainPage),// menu_page
+    static_cast<Page *>(PageMain::self),// menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
     {true, true},                       // enabled[2]

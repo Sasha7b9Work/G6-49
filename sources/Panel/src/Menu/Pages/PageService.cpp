@@ -57,7 +57,7 @@ DEF_PAGE_4_VAR( pService,                                                       
     &Item::emptyLight,
     &Item::emptyLight,
     &Item::emptyLight,
-    Page::Service, reinterpret_cast<PageBase *>(Menu::mainPage), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Service, reinterpret_cast<PageBase *>(PageMain::self), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
