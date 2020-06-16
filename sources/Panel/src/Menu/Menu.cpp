@@ -16,17 +16,7 @@ Item *Menu::currentItem = nullptr;
 
 extern const PageBase pSignals;
 
-DEF_PAGE_4( mainPageMenu,
-    "лемч", "MENU",
-    "", "",
-    PageSignals::self,
-    PageFrequencyCounter::self,
-    PageService::self,
-    &Item::emptyLight,
-    Page::Main, 0, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
-)
 
-Page *Menu::mainPage = const_cast<Page *>(reinterpret_cast<const Page *>(&mainPageMenu));
 
 
 void Menu::Init()

@@ -2229,6 +2229,11 @@
               <FilePath>.\src\Menu\Pages\PageFrequencyCounter.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageMain.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMain.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageService.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService.cpp</FilePath>
