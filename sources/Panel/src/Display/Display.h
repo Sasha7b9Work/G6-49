@@ -26,4 +26,6 @@ struct Display
     static uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 
     static void ShowWarning(String warning);
+
+    static void ClearWarnings();
 };

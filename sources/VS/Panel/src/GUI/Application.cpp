@@ -2,6 +2,7 @@
 #undef CRC
 #include "Application.h"
 #include "ConsoleSCPI.h"
+#include "Display/Display.h"
 
 #undef main
 
@@ -129,6 +130,8 @@ void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 void Frame::OnClose(wxCloseEvent &event)
 {
     ConsoleSCPI::Self()->Destroy();
+
+    Display::ClearWarnings();
 
     event.Skip();
 }

@@ -30,6 +30,7 @@ struct Warnings
     Warnings() : last(0) { }
     void Show();
     void Append(const String &warning);
+    void Clear();
 private:
     static const int NUM_WARNINGS = 10;
     Warning warnings[NUM_WARNINGS];
@@ -138,6 +139,26 @@ void Warnings::Update()
 
         last--;
     }
+}
+
+
+void Warnings::Clear()
+{
+    if (last != 0)
+    {
+        for (int i = 0; i < last; i++)
+        {
+            warnings[i].Delete();
+        }
+
+        last = 0;
+    }
+}
+
+
+void Display::ClearWarnings()
+{
+    warnings.Clear();
 }
 
 

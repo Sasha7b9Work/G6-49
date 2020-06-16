@@ -667,9 +667,6 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 
     if (value > param->GetMax() || value < param->GetMin())
     {
-        double minD = param->GetMin().ToDouble();
-        minD = minD;
-
         String min = param->ToString(param->GetMin());
         String max = param->ToString(param->GetMax());
 
