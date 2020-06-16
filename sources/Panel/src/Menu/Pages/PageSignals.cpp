@@ -70,17 +70,6 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-static bool OnKey_PageSignals(const Control) //-V801
-{
-    return false;
-//    if(CURRENT_PAGE != PageSignals::self)
-//    {
-//        return false;
-//    }
-//
-//    return CURRENT_PARAM->ProcessKey(key);
-}
-
 DEF_PAGE_4( pageSignals,   //-V641
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",   //-V641 //-V1027
     "", "",
@@ -88,7 +77,7 @@ DEF_PAGE_4( pageSignals,   //-V641
     &cFormA,                // НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,           // НАСТРОЙКИ СИГНАЛОВ - Параметр
     &bTuneParameter,        // НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
-    Page::Settings, PageMain::self, Item::FuncActive, Page::FuncEnter, OnKey_PageSignals, FuncBeforeDraw
+    Page::Settings, PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
 Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
