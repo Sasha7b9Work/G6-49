@@ -204,7 +204,7 @@ void PGenerator::SetParameter(ParameterDouble *param)
 }
 
 
-void PGenerator::SetParameter(ParameterInteger *parameter)
+void PGenerator::SetParameter(ParameterInteger *)
 {
 }
 

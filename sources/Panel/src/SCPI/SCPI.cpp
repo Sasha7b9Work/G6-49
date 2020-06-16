@@ -275,7 +275,7 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
 }
 
 
-pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E value)
+pCHAR SCPI::ProcessParameterInteger(pCHAR, ParameterIntegerType::E)
 {
     return nullptr;
 }

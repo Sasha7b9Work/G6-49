@@ -307,7 +307,7 @@ ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
 }
 
 
-ParameterInteger *Form::FindParameter(ParameterIntegerType::E p)
+ParameterInteger *Form::FindParameter(ParameterIntegerType::E)
 {
     return nullptr;
 }
