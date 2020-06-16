@@ -10,7 +10,7 @@ inline void EmptyFuncVB(bool) {}
 
 
 #define DEF_BUTTON(name, titleRU, hintRU, titleEN, hintEN, keeper, funcActive, funcPress, funcDraw)                                         \
-static const ButtonBase name = { TypeItem::Button, 0, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,       \
+static const ButtonBase name = { TypeItem::Button, 0, false, Page::NoPage, (const PageBase *)(&keeper), {titleRU, hintRU}, {titleEN, hintEN}, funcActive,       \
     funcPress, funcDraw };
 
 
@@ -187,7 +187,7 @@ const PageBase name = { Item_Page, 15, false, namePage, keeper, funcActive, {tit
 
 
 #define DEF_CHOICE_PARAMETER(name, titleRU, hintRU, titleEN, hintEN, keeper, funcActive, funcPress, form)                                   \
-ChoiceParameterBase name = { TypeItem::ChoiceParameter, 0, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,  \
+ChoiceParameterBase name = { TypeItem::ChoiceParameter, 0, false, Page::NoPage, (const PageBase *)(&keeper), {titleRU, hintRU}, {titleEN, hintEN}, funcActive,  \
     funcPress, form};
 
 
@@ -278,7 +278,7 @@ static pString name##namesRU[] = {name1RU, name2RU, name3RU, name4RU, name5RU, n
 static pString name##namesEN[] = {name1EN, name2EN, name3EN, name4EN, name5EN, name6EN, name7EN};                                                   \
 static pString name##hintsRU[] = {hint1RU, hint2RU, hint3RU, hint4RU, hint5RU, hint6RU, hint7RU};                                                   \
 static pString name##hintsEN[] = {hint1EN, hint2EN, hint3EN, hint4EN, hint5EN, hint6EN, hint7EN};                                                   \
-static const ChoiceBase name = { TypeItem::Choice, 7, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
+static const ChoiceBase name = { TypeItem::Choice, 7, false, Page::NoPage, (const PageBase *)(&keeper), {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
     (int8 *)&cell, name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
 #define DEF_CHOICE_8(name, titleRU, hintRU, titleEN, hintEN,                                                                                        \
@@ -289,7 +289,7 @@ static pString name##namesRU[] = {name1RU, name2RU, name3RU, name4RU, name5RU, n
 static pString name##namesEN[] = {name1EN, name2EN, name3EN, name4EN, name5EN, name6EN, name7EN, name8EN};                                          \
 static pString name##hintsRU[] = {hint1RU, hint2RU, hint3RU, hint4RU, hint5RU, hint6RU, hint7RU, hint8RU};                                          \
 static pString name##hintsEN[] = {hint1EN, hint2EN, hint3EN, hint4EN, hint5EN, hint6EN, hint7EN, hint8EN};                                          \
-static const ChoiceBase name = { TypeItem::Choice, 8, false, Page::NoPage, &keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,               \
+static const ChoiceBase name = { TypeItem::Choice, 8, false, Page::NoPage, (const PageBase *)(&keeper), {titleRU, hintRU}, {titleEN, hintEN}, funcActive, \
     (int8 *)&cell, name##namesRU, name##namesEN, name##hintsRU, name##hintsEN, funcChanged, funcDraw};
 
 #define DEF_CHOICE_12(name, titleRU, titleEN, hintRU, hintEN,                                                                                       \

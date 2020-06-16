@@ -6,8 +6,6 @@
 #include "Menu/Menu.h"
 
 
-extern const PageBase pageSignals;
-Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
 extern ChoiceParameterBase cParameters;
 // Номер текущей формы сигнал
 static int numForm = 0;
@@ -21,7 +19,7 @@ DEF_CHOICE_2( cChannel,                                                         
     "Управление параметрами сигнала на выходе A", "Control the parameters of the signal at output A",
     "B",                                          "B",
     "Управление параметрами сигнала на выходе B", "Control the parameters of the signal at output B",
-    set.current, pageSignals, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
+    set.current, *PageSignals::self, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
@@ -37,7 +35,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(TypeForm::Impulse),      FORM_EN(TypeForm::Impulse),      "Импульсы",         "Impulse",
     FORM_RU(TypeForm::PacketImpuls), FORM_EN(TypeForm::PacketImpuls), "Пакеты",           "Packets",
     FORM_RU(TypeForm::Free),         FORM_EN(TypeForm::Free),         "Произвольный",     "Free",
-    numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
+    numForm, *PageSignals::self, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -50,7 +48,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(TypeForm::Meander),   FORM_RU(TypeForm::Meander),   "Меандр",           "Meander",
     FORM_RU(TypeForm::Impulse),   FORM_RU(TypeForm::Impulse),   "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Free),      FORM_RU(TypeForm::Free),      "Произвольный",     "Free",
-    numForm, pageSignals, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
+    numForm, *PageSignals::self, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
 )
 
 
@@ -62,13 +60,13 @@ static void OnPress_TuneParameter()
 DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
     "Изменить", "Change",
     "Открывает окно ввода параметра", "Opens the parameter input window",
-    pageSignals, Item::FuncActive, OnPress_TuneParameter, FuncDraw
+    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, FuncDraw
 )
 
 DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки", "Select an option to configure",
-    pageSignals, Item::FuncActive, OnPress_TuneParameter, WAVE(Chan::A).GetForm(0)
+    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, WAVE(Chan::A).GetForm(0)
 )
 
 
@@ -92,6 +90,8 @@ DEF_PAGE_4( pageSignals,   //-V641
     &bTuneParameter,        // НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
     Page::Settings, Menu::mainPage, Item::FuncActive, Page::FuncEnter, OnKey_PageSignals, FuncBeforeDraw
 )
+
+Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
 
 
 void PageSignals::Init()
