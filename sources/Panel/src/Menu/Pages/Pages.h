@@ -9,6 +9,9 @@ class Parameter;
 struct PageMain
 {
     static Page *self;
+
+    // ¬озвращает true, если открыта перва€ подстраница (с которой производитс€ настройка каналов)
+    static bool OnSubPageTuneChannels();
 };
 
 
@@ -23,8 +26,6 @@ struct PageSignals
     static void OnPress_Form(bool);
 
     static void SetForm(TypeForm::E form);
-
-    static Page *self;
 };
 
 

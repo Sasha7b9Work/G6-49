@@ -126,7 +126,6 @@ public:
     enum E
     {
          NoPage,
-         Settings,
          Service,
          Debug,
          FrequencyCounter,

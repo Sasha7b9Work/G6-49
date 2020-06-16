@@ -23,7 +23,7 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits)
 
     if((ch == CURRENT_CHANNEL) && 
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
-       (CURRENT_PAGE == PageSignals::self))
+        PageMain::OnSubPageTuneChannels())
     {
         Rectangle(141, 9).Fill(xName, y, Color::GRAY_25);
     }
