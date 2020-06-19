@@ -1,9 +1,5 @@
-@echo off
+@echo off 
 
-call build_load_device.bat
+call build.bat
 
-call build_load_panel.bat
-
-call build_load_ploader.bat
-
-call build_load_dloader.bat
+call load.bat
