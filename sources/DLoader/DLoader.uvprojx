@@ -337,7 +337,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--cpp</MiscControls>
-              <Define>USE_HAL_DRIVER, DEBUG, STM32F407xx</Define>
+              <Define>USE_HAL_DRIVER, DEBUG, STM32F407xx, LOADER</Define>
               <Undefine></Undefine>
               <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;.\src\libs\FatFS;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;.\src\libs\USBH;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;.\src\libs\USBD;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\..\sources;..</IncludePath>
             </VariousControls>
@@ -1005,6 +1005,21 @@
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
+              <FileName>Handlers_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Handlers_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Interface_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Interface_d.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Messages.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Messages.h</FilePath>
@@ -1165,24 +1180,9 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
-              <FileName>Handlers_dl.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Handlers_dl.h</FilePath>
-            </File>
-            <File>
               <FileName>Handlers_dl.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Handlers_dl.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_dl.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Interface_dl.h</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_dl.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Interface\Interface_dl.cpp</FilePath>
             </File>
           </Files>
         </Group>

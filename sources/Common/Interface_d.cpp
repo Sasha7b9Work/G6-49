@@ -3,15 +3,16 @@
 #include "common/Transceiver.h"
 #include "common/Handlers_d.h"
 #include "common/Interface_d.h"
+#ifdef LOADER
+#include "FDrive/FDrive_dl.h"
+#else
 #include "FDrive/FDrive_d.h"
+#endif
 #include "Generator/Generator_d.h"
-#include "Generator/FPGA.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "FreqMeter/FreqMeter_d.h"
 #include "Settings/CalibrationSettings.h"
-#include "Utils/Debug.h"
 #include "Utils/Queue.h"
 #include "Utils/StringUtils.h"
 #include "common/Command.h"
@@ -46,7 +47,7 @@ void DInterface::Update()
         SimpleMessage first;              // —юда принимаем первое сообщение
         SimpleMessage second;             // —юда принимаем второе сообщение
 
-        uint timeout = size > 100U ? 200U : 10U;
+        int timeout = size > 100 ? 200 : 10;
 
         if (first.AllocateMemory(size))
         {
@@ -106,4 +107,15 @@ bool DInterface::AddMessageForTransmit(SimpleMessage *message)
 void SimpleMessage::Transmit()
 {
     DInterface::AddMessageForTransmit(this);
+}
+
+
+void SimpleMessage::TransmitAndSend()
+{
+    Transmit();
+
+    while(DInterface::GetOutbox().Size())
+    {
+        DInterface::Update();
+    }
 }

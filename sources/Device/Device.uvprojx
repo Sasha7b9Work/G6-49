@@ -1252,6 +1252,21 @@
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
+              <FileName>Handlers_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Handlers_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Interface_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Interface_d.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Messages.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Messages.h</FilePath>
@@ -1487,24 +1502,9 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
-              <FileName>Handlers_d.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Handlers_d.h</FilePath>
-            </File>
-            <File>
               <FileName>Handlers_d.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Handlers_d.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_d.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Interface_d.h</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Interface\Interface_d.cpp</FilePath>
             </File>
           </Files>
         </Group>
