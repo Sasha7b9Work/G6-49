@@ -368,7 +368,7 @@ public:
     void Draw(bool opened, int x = -1, int y = -1) const;
     
     // Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
-    const char *NameCurrentSubItem() const;
+    const String NameCurrentSubItem() const;
     
     // Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
     String NameNextSubItem() const;
@@ -409,7 +409,7 @@ public:
 
     pString NameSubItem(int num) const;
 
-    pString NameCurrentSubItem() const;
+    String NameCurrentSubItem() const;
 
     void Draw(bool opened, int x, int y) const;
 };

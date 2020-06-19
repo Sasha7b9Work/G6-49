@@ -308,7 +308,7 @@ bool ParameterChoice::SetAndLoadChoice(int ch)
 }
 
 
-ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComposite(ParameterCompositeType::Manipulation, "Манипуляция", "Manipulation", parameters)
+ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComposite(ParameterCompositeType::Manipulation, "Манип", "Manip", parameters)
 {
 
 }

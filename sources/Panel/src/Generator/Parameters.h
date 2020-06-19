@@ -339,7 +339,7 @@ public:
 class ParameterPacketPeriod : public ParameterTime
 {
 public:
-    ParameterPacketPeriod(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod, "Период пакета", "Packet period", min, max, value) { }
+    ParameterPacketPeriod(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod, "Период пак", "Packet period", min, max, value) { }
 };
 
 
@@ -353,7 +353,7 @@ public:
 class ParameterDuration : public ParameterTime
 {
 public:
-    ParameterDuration(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::Duration, "Длительность", "Duration", min, max, value) { }
+    ParameterDuration(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::Duration, "Длит", "Duration", min, max, value) { }
 };
 
 
@@ -361,7 +361,7 @@ class ParameterManipulationDuration : public ParameterTime
 {
 public:
     ParameterManipulationDuration(const Value &min, const Value &max, const Value &value) :
-        ParameterTime(ParameterDoubleType::ManipulationDuration, "Длительность", "Duration", min, max, value) { }
+        ParameterTime(ParameterDoubleType::ManipulationDuration, "Длит", "Duration", min, max, value) { }
 };
 
 
@@ -385,7 +385,7 @@ class ParameterManipulationEnabled : public ParameterChoice
 {
 public:
     ParameterManipulationEnabled(const char **names) : 
-        ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манипуляция", "Manipulation", names) { }
+        ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манипу", "Manip", names) { }
 };
 
 

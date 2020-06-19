@@ -16,9 +16,9 @@ Item Item::emptyLight = { TypeItem::NoneLight };
 Item Item::emptyDark = { TypeItem::NoneDark };
 
 
-const char *Choice::NameCurrentSubItem() const
+const String Choice::NameCurrentSubItem() const
 {
-    return NAME_FROM_INDEX(CurrentIndex(), LANGUAGE);
+    return String(NAME_FROM_INDEX(CurrentIndex(), LANGUAGE));
 }
 
 

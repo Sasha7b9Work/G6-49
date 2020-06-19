@@ -123,17 +123,13 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
         DrawTitle(x, y);
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
-        String(NameCurrentSubItem()).DrawRelativelyRight(315, y + 30, Color::BACK);
+        NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::BACK);
     }
 }
 
 
 void Choice::Draw(bool opened, int x, int y) const
 {
-    Choice *choice = const_cast<Choice *>(this);
-
-    int step = static_cast<int>(choice->Step() + 0.5F);
-
     if(opened)
     {
         int width = Item::WIDTH;
@@ -169,11 +165,11 @@ void Choice::Draw(bool opened, int x, int y) const
                 VLine::Draw(x + 1, y - 1, y - 1 + 10);
                 HLine::Draw(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
                 VLine::Draw(x - 1 + Item::WIDTH, y - 1, y + 9);
-                NameSubItem(i).Draw(x + 3, y, Color::BACK);
+                NameSubItem(i).DrawInCenterRect(x, y, Item::WIDTH, 10, Color::BACK);
             }
             else
             {
-                NameSubItem(i).Draw(x + 3, y, Color::FILL);
+                NameSubItem(i).DrawInCenterRect(x, y, Item::WIDTH, 10, Color::FILL);
             }
             y += 10;
         }
@@ -187,29 +183,8 @@ void Choice::Draw(bool opened, int x, int y) const
         Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
         DrawTitle(x, y);
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
-        Color::BACK.SetAsCurrent();
 
-        String nameCurrentSubItem(NameCurrentSubItem());
-
-        if (step == 0.0F) //-V2550 //-V550
-        {
-            nameCurrentSubItem.DrawRelativelyRight(315, y + 30);
-        }
-        else
-        {
-            int x0 = 315 - step;
-
-            nameCurrentSubItem.DrawRelativelyRight(x0, y + 30);
-
-            if (x0 + NameNextSubItem().Width() > x + Item::WIDTH - 5)
-            {
-                NameNextSubItem().Draw(x0, y + 30);
-            }
-            else
-            {
-                NameNextSubItem().DrawRelativelyRight(315, y + 30);
-            }
-        }
+        NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::BACK);
     }
 }
 
@@ -226,7 +201,7 @@ void Governor::Draw(int x, int y) const
 
     Color::BACK.SetAsCurrent();
 
-    DrawValue(x + 15, y + 30);
+    DrawValue(x + 30, y + 30);
 }
 
 

@@ -673,7 +673,7 @@ int String::Draw(int x, int y, Color color) const
 }
 
 
-int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color)
+int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color) const
 {
     color.SetAsCurrent();
 

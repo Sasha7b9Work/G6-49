@@ -41,34 +41,29 @@ int8 gCurDigit = 0;
 
 void Choice::StartChange(int delta) const
 {
-    if (tsChoice.address != 0)
+    if (IsActive())
     {
-        return;
-    }
-    if (!IsActive())
-    {
-        funcOnChanged(false);
-    }
-    else
-    {
-        tsChoice.address = this;
-        tsChoice.timeStart = TIME_MS;
-        
-        if(delta > 0)
+        int8 index = CurrentIndex();
+
+        if (delta > 0)
         {
-            tsChoice.dir = INCREASE;
+            Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
-        else
+        else if (delta < 0)
         {
-            tsChoice.dir = DECREASE;
+            Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
+
+        *cell = index;
     }
+
+    funcOnChanged(IsActive());
 }
 
 
 float Choice::Step()
 {
-    static const float speed = 0.3F;
+    static const float speed = 3000.0F;
     static const int numLines = 60;
     if (tsChoice.address == this)
     {
@@ -507,9 +502,9 @@ pString ChoiceParameter::NameSubItem(int number) const
 }
 
 
-pString ChoiceParameter::NameCurrentSubItem() const
+String ChoiceParameter::NameCurrentSubItem() const
 {
-    return form->CurrentParameter()->Name();
+    return String(form->CurrentParameter()->Name());
 }
 
 

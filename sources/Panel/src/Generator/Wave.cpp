@@ -28,11 +28,11 @@ pString Form::Name(uint lang) const
         {"Синус",        "Sinus"},
         {"Пила+",        "Saw+"},
         {"Пила-",        "Saw-"},
-        {"Треугольник",  "Triangle"},
+        {"Треуг",  "Triangle"},
         {"Меандр",       "Meander"},
         {"Импульс",      "Impulse"},
         {"Пакет",        "Packet"},
-        {"Произвольный", "Free"}
+        {"Произв", "Free"}
     };
 
     return names[value][lang];

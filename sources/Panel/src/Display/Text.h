@@ -62,7 +62,7 @@ public:
     char *c_str() const;
 
     int Draw(int x, int y, Color color = Color::NUMBER) const;
-    int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
+    int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER) const;
     int DrawInArea(int x, int y, int width, Color color = Color::NUMBER);
     void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
     void DrawInColumn(int x, int y, int width);

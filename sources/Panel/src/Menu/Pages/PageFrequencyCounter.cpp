@@ -52,7 +52,7 @@ static void OnPress_Interval(bool)
 
 
 DEF_CHOICE_5( cBillingTime,                                                                                                                                //--- ЧАСТОТОМЕР - Время счёта ---
-    "Время счёта", "Counting time",
+    "Вр счёта", "Time count",
     "Выбор времени проведения измерения", "Timing measurement",
     "1 мс",     "1 ms",     "Длительность измерения 1 миллисекунда",    "1 millisecond measurement duration",
     "10 мс",    "10 ms",    "Длительность измерения 10 миллисекунд",    "Measurement duration 10 milliseconds",
@@ -69,7 +69,7 @@ static void OnPress_BillingTime(bool)
 
 
 DEF_CHOICE_2(cResist,                                                                                                                              //--- ЧАСТОТОМЕР - Сопротивление входа ---
-    "Сопротивление входа", "Input impedance",
+    "R вх", "R in",
     "Управление сопротивлением входа частотомера", "Frequency counter input resistance control",
     "1 МОм", "1 MOhm", "Сопротивление входа 1 МОм", "Input impedance 1 MOhm",
     "50 Ом", "50 Ohm", "Сопротивление входа 50 Ом", "50 ohm input impedance",
@@ -110,7 +110,7 @@ static void OnPress_Filtr(bool)
 }
 
 DEF_CHOICE_5(cAvePeriod,                                                                                                                                //--- ЧАСТОТОМЕР - ЧИСЛО ПЕРИОДОВ ---
-    "Число периодов", "Number of periods",
+    "N периодов", "N eriods",
     "Выбор числа усредняемых периодов в режиме измерения периода", "Choosing the number of averaged periods in period measurement mode",
     "1",     "1",     "Измерения производить по одному периоду",          "Measurements on one period",
     "10",    "10",    "Измерения производить по десяти периодам",         "Measure over ten periods",
@@ -127,7 +127,7 @@ static void OnPress_AvePeriod(bool)
 
 
 DEF_CHOICE_5(cTimeStamps,                                                                                                                                //--- ЧАСТОТОМЕР - Метки времени ---
-    "Метки времени", "Time stamps",
+    "Метки вр", "Time stamps",
     "", "",
     "1 кГц",   "1 kHz",   "", "",
     "10 кГц",  "10 kHz",  "", "",
