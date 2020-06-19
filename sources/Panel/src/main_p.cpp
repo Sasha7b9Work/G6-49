@@ -23,6 +23,8 @@ int main()
 
     Menu::Init();
 
+
+
     while (1)
     {
         CPU::Update();

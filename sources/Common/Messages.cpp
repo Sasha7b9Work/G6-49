@@ -214,25 +214,17 @@ uint8 *SimpleMessage::RemainingData() const
 
 bool SimpleMessage::AllocateMemory(int size)
 {
-    DEBUG_POINT_0;
-
     FreeMemory();
-
-    DEBUG_POINT_0;
 
     if (size == 0)
     {
         return false;
     }
 
-    DEBUG_POINT_0;
-
     created++;
     createdSize += size;
 
     buffer = static_cast<uint8 *>(std::malloc(static_cast<uint>(size)));
-
-    DEBUG_POINT_0;
 
     if (buffer)
     {

@@ -48,28 +48,17 @@ void Transceiver::Transmit(SimpleMessage *message)
 
 bool Transceiver::Receive(SimpleMessage *message)
 {
-    DEBUG_POINT_0;
-
     HAL_SPI4::WaitFalling();
-
-    DEBUG_POINT_0;
 
     int size = 0;
     HAL_SPI4::Receive(&size, 4, 10);
 
-    DEBUG_POINT_0;
-
     if (message->AllocateMemory(size))
     {
-        DEBUG_POINT_0;
         HAL_SPI4::Receive(message->TakeData(), message->Size(), 50);
-
-        DEBUG_POINT_0;
 
         return true;
     }
-
-    DEBUG_POINT_0;
 
     return message->Size() != 0;
 }
