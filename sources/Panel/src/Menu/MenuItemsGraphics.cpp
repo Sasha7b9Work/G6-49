@@ -33,6 +33,22 @@ void Item::Draw(bool opened, int x, int y) const
 }
 
 
+void Item::DrawTitle(int x, int y) const
+{
+    if (GetType() == TypeItem::Page || GetType() == TypeItem::Button)
+    {
+        y += 15;
+    }
+
+    if (IsOpened())
+    {
+        y -= 4;
+    }
+
+    GetTitle().DrawInCenterRect(x, y + 5, Item::WIDTH, 10, (IsPressed() || IsOpened()) ? Color::BACK : (IsShade() ? Color::GRAY_25 : Color::FILL));
+}
+
+
 void SButton::Draw(int x, int y) const
 {
     if(Menu::pressedItem == this)
@@ -59,7 +75,8 @@ void Button::Draw(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    GetTitle().DrawInColumn(x + 4, y + 17, Item::WIDTH);
+    DrawTitle(x, y);
+
     funcForDraw(x, y);
 }
 
@@ -87,7 +104,8 @@ void Page::DrawClosed(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    GetTitle().DrawInColumn(x + 4, y + 17, Item::WIDTH);
+    //GetTitle().DrawInColumn(x + 4, y + 17, Item::WIDTH);
+    DrawTitle(x, y);
 }
 
 
@@ -103,7 +121,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         opened = IsOpened();
 
         Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        GetTitle().Draw(x + 5, y + 5, (pressed || opened) ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        DrawTitle(x, y);
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
         String(NameCurrentSubItem()).DrawRelativelyRight(315, y + 30, Color::BACK);
     }
@@ -138,7 +156,7 @@ void Choice::Draw(bool opened, int x, int y) const
 
         HLine::Draw(y + 12, x, x + width);
         Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
-        GetTitle().DrawRelativelyRight(x + width - 2, y + 2);
+        DrawTitle(x, y);
 
         y += 14;
 
@@ -167,7 +185,7 @@ void Choice::Draw(bool opened, int x, int y) const
         opened = IsOpened();
 
         Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-        GetTitle().Draw(x + 5, y + 5, pressed || opened? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+        DrawTitle(x, y);
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
         Color::BACK.SetAsCurrent();
 
@@ -203,7 +221,7 @@ void Governor::Draw(int x, int y) const
     bool opened = IsOpened();
 
     Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::GRAY_10 : Color::GREEN_10));
-    GetTitle().Draw(x + 5, y + 5, (pressed || opened) ? Color::BACK : (isShade ? Color::GRAY_25 : Color::FILL));
+    DrawTitle(x, y);
     Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::GRAY_10 : Color::GREEN_25);
 
     Color::BACK.SetAsCurrent();

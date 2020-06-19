@@ -65,6 +65,8 @@ public:
     String GetTitle() const;
 
     void Draw(bool opened, int x = -1, int y = -1) const;
+
+    void DrawTitle(int x, int y) const;
     
     // ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
     void Press(const Control control);
