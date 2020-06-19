@@ -1,8 +1,6 @@
 #include "defines.h"
-#include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
-#include "log.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f4xx_hal.h>
 
@@ -99,14 +97,6 @@ uint HAL_SPI4::ReceiveAndCompare(const void *compared, int size)
     return result;
 }
 
-
-
-void HAL_SPI4::WaitFreedom()
-{
-	while (!IsReady())
-	{
-	}
-}
 
 
 void HAL_SPI4::WaitFalling()

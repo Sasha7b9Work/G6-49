@@ -1829,9 +1829,9 @@
               <FilePath>.\src\Hardware\HAL\HAL_PIO.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_SPI4.cpp</FileName>
+              <FileName>HAL_SPI4_p.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_SPI4.cpp</FilePath>
+              <FilePath>..\common\Hardware\HAL\HAL_SPI4_p.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_TIM.cpp</FileName>

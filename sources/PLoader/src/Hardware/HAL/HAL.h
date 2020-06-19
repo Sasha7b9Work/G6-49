@@ -56,13 +56,11 @@ struct HAL_SPI4
     static bool Transmit(uint value, int timeout);
     static bool Transmit(int value, int timeout);
     // Принять массив данных
-    static bool Receive(void *recv, int size, uint timeout);
+    static bool Receive(void *recv, int size, int timeout);
     // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
     static uint ReceiveAndCompare(const void *compared, int size);
     // Возвращает true, если прибор готов к обмену
     static bool IsReady();
-    // Ждать пока освободится устройство
-    static void WaitFreedom();
     // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
     static void WaitFalling();
 };

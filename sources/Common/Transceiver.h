@@ -2,6 +2,13 @@
 #include "Messages.h"
 
 
+/*
+
+    Передача должна производиться так.
+
+*/
+
+
 namespace Transceiver
 {
     void Transmit(SimpleMessage *message);

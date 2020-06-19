@@ -82,10 +82,7 @@ struct HAL_SPI4
     
     // Возвращает true, если прибор готов к обмену
     static bool IsReady();
-    
-    // Ждать пока освободится устройство
-    static void WaitFreedom();
-    
+  
     // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
     static void WaitFalling();
 };
