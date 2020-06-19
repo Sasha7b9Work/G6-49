@@ -6,7 +6,7 @@
 #define START_WITH_MANUAL_UPGRADE  2  /* Запуск с обновлением по требованию - попытка обновления происходит, если загрузчик получает запрос на обновление от панели */
 
 
-#define MODE_START START_WITH_MANUAL_UPGRADE
+#define MODE_START 0
 
 
 typedef unsigned int       uint;

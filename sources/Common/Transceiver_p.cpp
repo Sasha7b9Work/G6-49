@@ -9,7 +9,7 @@
 
 void Transceiver::Transmit(SimpleMessage *message)
 {
-    uint timeout = (message->Size() > 1000U) ? 100U : 10U;
+    int timeout = (message->Size() > 1000) ? 100 : 10;
 
     bool result = false;
     

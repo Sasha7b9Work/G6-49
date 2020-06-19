@@ -49,9 +49,9 @@ void HAL_SPI4::Init()
 }
 
 
-bool HAL_SPI4::Transmit(const void *buffer, int size, uint timeout)
+bool HAL_SPI4::Transmit(const void *buffer, int size, int timeout)
 {
-	if (HAL_SPI_Transmit(&handleSPI4, static_cast<uint8 *>(const_cast<void *>(buffer)), static_cast<uint16>(size), timeout) != HAL_OK)
+	if (HAL_SPI_Transmit(&handleSPI4, static_cast<uint8 *>(const_cast<void *>(buffer)), static_cast<uint16>(size), static_cast<uint>(timeout)) != HAL_OK)
 	{
 		return false;
 	}
@@ -60,13 +60,13 @@ bool HAL_SPI4::Transmit(const void *buffer, int size, uint timeout)
 }
 
 
-bool HAL_SPI4::Transmit(uint value, uint timeout)
+bool HAL_SPI4::Transmit(uint value, int timeout)
 {
     return Transmit(&value, 4, timeout);
 }
 
 
-bool HAL_SPI4::Transmit(int value, uint timeout)
+bool HAL_SPI4::Transmit(int value, int timeout)
 {
 	return Transmit(&value, 4, timeout);
 }

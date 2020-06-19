@@ -51,10 +51,10 @@ struct HAL_SPI4
 {
     static void Init();
     // Переслать массив данных
-    static bool Transmit(const void *buffer, int size, uint timeout);
+    static bool Transmit(const void *buffer, int size, int timeout);
 
-    static bool Transmit(uint value, uint timeout);
-    static bool Transmit(int value, uint timeout);
+    static bool Transmit(uint value, int timeout);
+    static bool Transmit(int value, int timeout);
     // Принять массив данных
     static bool Receive(void *recv, int size, uint timeout);
     // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт

@@ -52,9 +52,9 @@ void HAL_SPI4::Init()
 }
 
 
-bool HAL_SPI4::Transmit(const void *buffer, uint size, uint timeout)
+bool HAL_SPI4::Transmit(const void *buffer, int size, int timeout)
 {
-	if (HAL_SPI_Transmit(&handleSPI4, static_cast<uint8 *>(const_cast<void *>(buffer)), static_cast<uint16>(size), timeout) != HAL_OK)
+	if (HAL_SPI_Transmit(&handleSPI4, static_cast<uint8 *>(const_cast<void *>(buffer)), static_cast<uint16>(size), static_cast<uint>(timeout)) != HAL_OK)
 	{
 		return false;
 	}
@@ -63,15 +63,15 @@ bool HAL_SPI4::Transmit(const void *buffer, uint size, uint timeout)
 }
 
 
-bool HAL_SPI4::Transmit(uint value, uint timeout)
+bool HAL_SPI4::Transmit(int value, int timeout)
 {
     return Transmit(&value, 4, timeout);
 }
 
 
-bool HAL_SPI4::Receive(void *recv, uint size, uint timeout)
+bool HAL_SPI4::Receive(void *recv, int size, int timeout)
 {
-	if (HAL_SPI_Receive(&handleSPI4, static_cast<uint8 *>(recv), static_cast<uint16>(size), timeout) != HAL_OK)
+	if (HAL_SPI_Receive(&handleSPI4, static_cast<uint8 *>(recv), static_cast<uint16>(size), static_cast<uint>(timeout)) != HAL_OK)
 	{
 		return false;
 	}
@@ -80,7 +80,7 @@ bool HAL_SPI4::Receive(void *recv, uint size, uint timeout)
 }
 
 
-uint HAL_SPI4::ReceiveAndCompare(const void *compared, uint size)
+uint HAL_SPI4::ReceiveAndCompare(const void *compared, int size)
 {
     uint result = 0;
 
@@ -88,7 +88,7 @@ uint HAL_SPI4::ReceiveAndCompare(const void *compared, uint size)
 
     uint8 *data = static_cast<uint8 *>(const_cast<void *>(compared));
 
-    for (uint i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         if (Receive(&byte, 1, 10) && data[i] != byte)
         {

@@ -43,7 +43,7 @@ void DInterface::Update()
         SimpleMessage first;              // —юда принимаем первое сообщение
         SimpleMessage second;             // —юда принимаем второе сообщение
 
-        uint timeout = size > 100U ? 200U : 10U;
+        int timeout = size > 100 ? 200 : 10;
 
         if (first.AllocateMemory(size))
         {

@@ -58,11 +58,11 @@ struct HAL_SPI1
 {
     static void Init();
 
-    static bool Receive(void *buffer, int size, uint timeout);
+    static bool Receive(void *buffer, int size, int timeout);
 
-    static bool Transmit(void *buffer, int size, uint timeout);
+    static bool Transmit(void *buffer, int size, int timeout);
 
-    static bool Transmit(uint value, uint timeout);
+    static bool Transmit(int value, int timeout);
 };
 
 
