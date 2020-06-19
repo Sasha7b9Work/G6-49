@@ -13,7 +13,7 @@ static SPI_HandleTypeDef handle =                                   // Для связи
         SPI_POLARITY_HIGH,              // Init.CLKPolarity
         SPI_PHASE_2EDGE,                // Init.CLKPhase
         SPI_NSS_SOFT,                   // Init.NSS
-        SPI_BAUDRATEPRESCALER_256,      // Init.BaudRatePrescaler
+        SPI_BAUDRATEPRESCALER_32,      // Init.BaudRatePrescaler
         SPI_FIRSTBIT_MSB,               // Init.FirstBit
         SPI_TIMODE_DISABLED,            // Init.TIMode
         SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
