@@ -915,7 +915,7 @@
 
   <Group>
     <GroupName>common</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1034,8 +1034,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Messages_pl.h</PathWithFileName>
-      <FilenameWithoutPath>Messages_pl.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\Messages_l.h</PathWithFileName>
+      <FilenameWithoutPath>Messages_l.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1046,8 +1046,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Messages_pl.cpp</PathWithFileName>
-      <FilenameWithoutPath>Messages_pl.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\Messages_l.cpp</PathWithFileName>
+      <FilenameWithoutPath>Messages_l.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1363,7 +1363,7 @@
 
   <Group>
     <GroupName>Interface</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

@@ -1714,14 +1714,14 @@
               <FilePath>..\common\Messages.cpp</FilePath>
             </File>
             <File>
-              <FileName>Messages_pl.h</FileName>
+              <FileName>Messages_l.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Messages_pl.h</FilePath>
+              <FilePath>..\common\Messages_l.h</FilePath>
             </File>
             <File>
-              <FileName>Messages_pl.cpp</FileName>
+              <FileName>Messages_l.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Messages_pl.cpp</FilePath>
+              <FilePath>..\common\Messages_l.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver.h</FileName>
@@ -1867,11 +1867,6 @@
               <FileName>Handlers_pl.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Handlers_pl.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_pl.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Interface_pl.h</FilePath>
             </File>
             <File>
               <FileName>Interface_pl.cpp</FileName>

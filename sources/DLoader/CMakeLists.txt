@@ -49,8 +49,8 @@ source_group(common             FILES ../common/Command.h
                                       ../common/Interfact_d.cpp
                                       ../common/Messages.h
                                       ../common/Messages.cpp
-                                      ../common/Messages_pl.h
-                                      ../common/Messages_pl.cpp
+                                      ../common/Messages_l.h
+                                      ../common/Messages_l.cpp
                                       ../common/Transceiver.h
                                       ../common/Transceiver_d.cpp)
 source_group(src                REGULAR_EXPRESSION src/*)
@@ -80,8 +80,8 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Interfact_d.cpp
                     ../common/Messages.h
                     ../common/Messages.cpp
-                    ../common/Messages_pl.h
-                    ../common/Messages_pl.cpp
+                    ../common/Messages_l.h
+                    ../common/Messages_l.cpp
                     ../common/Transceiver.h
                     ../common/Transceiver_d.cpp
                     src/*
