@@ -48,7 +48,8 @@ source_group(common             FILES ../common/Command.h
                                       ../common/Messages.cpp
                                       ../common/Messages_pl.h
                                       ../common/Messages_pl.cpp
-                                      ../common/Transceiver.h)
+                                      ../common/Transceiver.h
+                                      ../common/Transceiver_d.cpp)
 source_group(src                REGULAR_EXPRESSION src/*)
 source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
 source_group(Generator          REGULAR_EXPRESSION src/Generator/*)
@@ -76,6 +77,7 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Messages_pl.h
                     ../common/Messages_pl.cpp
                     ../common/Transceiver.h
+                    ../common/Transceiver_d.cpp
                     src/*
                     src/FDrive/*
                     src/Generator/*

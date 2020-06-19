@@ -35,12 +35,11 @@ add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum 
 source_group(common                   FILES ../common/Command.h
                                             ../common/Command.cpp
                                             ../common/Common.h
-                                            ../common/Common.cpp
+                                            ../common/Common_pan.cpp
                                             ../common/Messages.h
                                             ../common/Messages.cpp
-                                            ../common/Messages_p.h
-                                            ../common/Messages_p.cpp
-                                            ../common/Transceiver.h)
+                                            ../common/Transceiver.h
+                                            ../common/Transceiver_p.cpp)
 source_group(src                      REGULAR_EXPRESSION src/*)
 source_group(Display                  REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font            REGULAR_EXPRESSION src/Display/Font/*)
@@ -64,12 +63,11 @@ source_group(Utils                    REGULAR_EXPRESSION src/Utils/*)
 file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
                     ../common/Common.h
-                    ../common/Common.cpp
+                    ../common/Common_pan.cpp
                     ../common/Messages.h
                     ../common/Messages.cpp
-                    ../common/Messages_p.h
-                    ../common/Messages_p.cpp
                     ../common/Transceiver.h
+                    ../common/Transceiver_p.cpp
                     src/*
                     src/Display/*
                     src/Display/Font/*

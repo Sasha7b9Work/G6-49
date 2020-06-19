@@ -70,7 +70,7 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Messages.cpp
                     ../common/Messages_pl.h
                     ../common/Messages_pl.cpp
-                    ../common/Transceiver.p
+                    ../common/Transceiver.h
                     ../common/Transceiver_p.cpp
                     src/*
                     src/Display/*
