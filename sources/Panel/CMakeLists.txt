@@ -49,7 +49,18 @@ source_group(FDrive                   REGULAR_EXPRESSION src/FDrive/*)
 source_group(FreqMeter                REGULAR_EXPRESSION src/FreqMeter/*)
 source_group(Generator                REGULAR_EXPRESSION src/Generator/*)
 source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\HAL            REGULAR_EXPRESSION src/Hardware/HAL/*)
+source_group(Hardware\\HAL            FILES src/Hardware/HAL/HAL.h
+                                            src/Hardware/HAL/HAL.cpp
+                                            src/Hardware/HAL/HAL_CRC32.cpp
+                                            src/Hardware/HAL/HAL_EEPROM.cpp
+                                            src/Hardware/HAL/HAL_IT.cpp
+                                            src/Hardware/HAL/HAL_LTDC.cpp
+                                            src/Hardware/HAL/HAL_PIO.h
+                                            src/Hardware/HAL/HAL_PIO.cpp
+                                            src/Hardware/HAL/HAL_TIM.cpp
+                                            src/Hardware/HAL/HAL_TIM2.cpp
+                                            src/Hardware/HAL/HAL_TIM3.cpp
+                                            src/Hardware/HAL/HAL_TIM4.cpp)
 source_group(Keyboard                 REGULAR_EXPRESSION src/Keyboard/*)
 source_group(Interface                REGULAR_EXPRESSION src/Interface/*)
 source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*)
@@ -79,7 +90,18 @@ file(GLOB SOURCES   ../common/Command.h
                     src/FreqMeter/*
                     src/Generator/*
                     src/Hardware/*
-                    src/Hardware/HAL/*
+                    src/Hardware/HAL/HAL.h
+                    src/Hardware/HAL/HAL.cpp
+                    src/Hardware/HAL/HAL_CRC32.cpp
+                    src/Hardware/HAL/HAL_EEPROM.cpp
+                    src/Hardware/HAL/HAL_IT.cpp
+                    src/Hardware/HAL/HAL_LTDC.cpp
+                    src/Hardware/HAL/HAL_PIO.h
+                    src/Hardware/HAL/HAL_PIO.cpp
+                    src/Hardware/HAL/HAL_TIM.cpp
+                    src/Hardware/HAL/HAL_TIM2.cpp
+                    src/Hardware/HAL/HAL_TIM3.cpp
+                    src/Hardware/HAL/HAL_TIM4.cpp
                     src/Keyboard/*
                     src/Interface/*
                     src/libs/CMSIS/startup_stm32f429xx.s
