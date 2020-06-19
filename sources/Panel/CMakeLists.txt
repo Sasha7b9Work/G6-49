@@ -35,6 +35,7 @@ add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum 
 source_group(common                   FILES ../common/Command.h
                                             ../common/Command.cpp
                                             ../common/Common.h
+                                            ../common/Common.cpp
                                             ../common/Common_pan.cpp
                                             ../common/Interface_p.h
                                             ../common/Messages.h
@@ -64,6 +65,7 @@ source_group(Utils                    REGULAR_EXPRESSION src/Utils/*)
 file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
                     ../common/Common.h
+                    ../common/Common.cpp
                     ../common/Common_pan.cpp
                     ../common/Interface_p.h
                     ../common/Messages.h
