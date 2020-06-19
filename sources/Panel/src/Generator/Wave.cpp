@@ -307,6 +307,45 @@ ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
 }
 
 
+ParameterComposite *Form::FindParameter(ParameterCompositeType::E p)
+{
+    for (int i = 0; i < numParams; i++)
+    {
+        Parameter *param = params[i];
+
+        if (param->IsComposite())
+        {
+            ParameterComposite *composite = static_cast<ParameterComposite *>(param);
+
+            if (composite->GetType() == p)
+            {
+                return composite;
+            }
+        }
+    }
+
+    if (old.params)
+    {
+        for (int i = 0; i < numParams; i++)
+        {
+            Parameter *param = old.params[i];
+
+            if (param->IsComposite())
+            {
+                ParameterComposite *composite = static_cast<ParameterComposite *>(param);
+
+                if (composite->GetType() == p)
+                {
+                    return composite;
+                }
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+
 ParameterInteger *Form::FindParameter(ParameterIntegerType::E)
 {
     return nullptr;
@@ -455,8 +494,44 @@ void Form::DrawUGO(Chan::E ch, int y0)
 }
 
 
-void Form::DrawSine(Chan::E, int x0, int y0, int width, int height)
+void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height)
 {
+    ParameterComposite *param = FORM(ch)->FindParameter(ParameterCompositeType::Manipulation);
+
+    if (param)
+    {
+        ParameterChoice *choice = param->FindParameter(ParameterChoiceType::ManipulationEnabled);
+
+        if (choice->GetChoice() == 1)
+        {
+            float speed = 0.6f;
+
+            int delta = 1;
+
+            y0 += height / 2;
+
+            for (int j = 0; j < 2; j++)
+            {
+                int dX = j * (width / 3) * 2;
+
+                if (dX > 0)
+                {
+                    dX -= width / 3 / 2;
+                }
+
+                for (int i = delta; i < width / 3; i++)
+                {
+                    int y1 = y0 - static_cast<int>(std::sinf((i - delta) * speed) * height / 2.0F);
+                    int y2 = y0 - static_cast<int>(std::sinf(i * speed) * height / 2.0F);
+
+                    Line::Draw(dX + x0 + i - delta, y1, dX + x0 + i, y2);
+                }
+            }
+
+            return;
+        }
+    }
+
     float speed = 0.2F;
     int delta = 1;
     y0 += height / 2;

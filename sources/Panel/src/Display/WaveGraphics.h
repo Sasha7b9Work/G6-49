@@ -2,7 +2,6 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
 
-
 class Parameter;
 
 

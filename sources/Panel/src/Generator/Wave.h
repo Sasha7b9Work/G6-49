@@ -86,6 +86,7 @@ public:
     ParameterDouble *FindParameter(ParameterDoubleType::E p);
     ParameterChoice *FindParameter(ParameterChoiceType::E p);
     ParameterInteger *FindParameter(ParameterIntegerType::E p);
+    ParameterComposite *FindParameter(ParameterCompositeType::E p);
     
     // Засылает параметр в генератор
     void SendParameterToGenerator(ParameterDoubleType::E p);

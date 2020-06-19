@@ -265,6 +265,8 @@ public:
 
     virtual void OnPressButtonTune();
 
+    ParameterCompositeType::E GetType() { return type; }
+
 private:
     
     Parameter **params; // Здесь находятся дополнительные параметры в случае, если они требуются
@@ -339,7 +341,7 @@ public:
 class ParameterPacketPeriod : public ParameterTime
 {
 public:
-    ParameterPacketPeriod(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod, "Период пак", "Packet period", min, max, value) { }
+    ParameterPacketPeriod(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod, "Период пак", "Packet per", min, max, value) { }
 };
 
 
