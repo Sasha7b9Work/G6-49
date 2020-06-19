@@ -45,6 +45,7 @@ source_group(common             FILES ../common/Command.h
                                       ../common/Common.h
                                       ../common/Common.cpp
                                       ../common/Handlers_d.h
+                                      ../common/Interface_d.h
                                       ../common/Messages.h
                                       ../common/Messages.cpp
                                       ../common/Messages_pl.h
@@ -74,6 +75,7 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Common.h
                     ../common/Common.cpp
                     ../common/Handlers_d.h
+                    ../common/Interface_d.h
                     ../common/Messages.h
                     ../common/Messages.cpp
                     ../common/Messages_pl.h
