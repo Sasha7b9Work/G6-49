@@ -1,9 +1,9 @@
 #include "defines.h"
+#include "common/Interface_p.h"
 #include "common/Messages_pl.h"
 #include "Updater_pl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Interface/Interface_pl.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Debug.h"
 

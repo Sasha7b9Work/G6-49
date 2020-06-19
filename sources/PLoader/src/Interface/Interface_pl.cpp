@@ -1,6 +1,6 @@
 #include "defines.h"
+#include "common/Interface_p.h"
 #include "common/Transceiver.h"
-#include "Interface_pl.h"
 #include "common/Command.h"
 #include "structs.h"
 #include "Hardware/CPU.h"
@@ -8,7 +8,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Queue.h"
 #include "Handlers_pl.h"
-#include "Interface_pl.h"
 #include <cstdlib>
 
 

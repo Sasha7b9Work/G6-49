@@ -1,6 +1,6 @@
 #include "defines.h"
+#include "common/Interface_p.h"
 #include "Display/Display.h"
-#include "Interface/Interface_p.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"

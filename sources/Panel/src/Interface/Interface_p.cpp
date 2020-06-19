@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
+#include "common/Interface_p.h"
 #include "common/Transceiver.h"
-#include "Interface_p.h"
 #include "common/Command.h"
 #include "structs.h"
 #include "Display/Console.h"
@@ -13,7 +13,6 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
 #include "Handlers_p.h"
-#include "Interface_p.h"
 #include <cstdlib>
 
 

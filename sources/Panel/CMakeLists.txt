@@ -36,6 +36,7 @@ source_group(common                   FILES ../common/Command.h
                                             ../common/Command.cpp
                                             ../common/Common.h
                                             ../common/Common_pan.cpp
+                                            ../common/Interface_p.h
                                             ../common/Messages.h
                                             ../common/Messages.cpp
                                             ../common/Transceiver.h
@@ -64,6 +65,7 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/Command.cpp
                     ../common/Common.h
                     ../common/Common_pan.cpp
+                    ../common/Interface_p.h
                     ../common/Messages.h
                     ../common/Messages.cpp
                     ../common/Transceiver.h

@@ -1,6 +1,6 @@
 #include "defines.h"
+#include "common/Interface_p.h"
 #include "Display/Text.h"
-#include "Interface/Interface_p.h"
 #include "Utils/List.h"
 
 

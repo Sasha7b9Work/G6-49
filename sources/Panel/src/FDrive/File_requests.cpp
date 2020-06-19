@@ -1,10 +1,10 @@
 #include "defines.h"
 #include "common/Command.h"
+#include "common/Interface_p.h"
 #include "common/Messages.h"
 #include "Display/Text.h"
 #include "FDrive/File.h"
 #include "FDrive/Items.h"
-#include "Interface/Interface_p.h"
 
 
 static bool EqualsRequestString(Task *task1, Task *task2)

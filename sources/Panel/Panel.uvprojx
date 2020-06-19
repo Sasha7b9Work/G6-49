@@ -1704,6 +1704,11 @@
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
+              <FileName>Interface_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Interface_p.h</FilePath>
+            </File>
+            <File>
               <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
@@ -2142,11 +2147,6 @@
               <FileName>Handlers_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Handlers_p.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_p.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Interface_p.h</FilePath>
             </File>
             <File>
               <FileName>Interface_p.cpp</FileName>
