@@ -17,6 +17,8 @@ struct Display
 
     static void Update();
 
+    static void DrawScreenSplash();
+
     static uint8 *GetBuffer();
     
     // Ёкран

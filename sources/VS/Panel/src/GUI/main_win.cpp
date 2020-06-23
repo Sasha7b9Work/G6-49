@@ -32,14 +32,32 @@ void init()
 
 void update()
 {
-    CPU::Update();
+    static bool first = true;
 
-    Menu::Update();
+    static uint timeStart = 0;
 
-    Display::Update();
+    if (first)
+    {
+        first = false;
 
-    PInterface::Update();
+        timeStart = TIME_MS;
+    }
 
-    SCPI::Update();
+    if (TIME_MS - timeStart < 1000)
+    {
+        Display::DrawScreenSplash();
+    }
+    else
+    {
+        CPU::Update();
+
+        Menu::Update();
+
+        Display::Update();
+
+        PInterface::Update();
+
+        SCPI::Update();
+    }
 }
 

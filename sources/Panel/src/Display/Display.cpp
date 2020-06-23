@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Display/WaveGraphics.h"
 #include "FreqMeter/FreqMeter_p.h"
 #include "Hardware/Timer.h"
@@ -10,6 +11,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
 #include "Utils/Statistics.h"
+#include <cstdlib>
 #include <cstring>
 
 
@@ -60,8 +62,35 @@ uint8 *Display::GetBuffer()
 }
 
 
+void Display::DrawScreenSplash()
+{
+    Painter::BeginScene(Color::BACK);
+
+    Font::Set(TypeFont::_GOST28);
+
+    Font::Spacing::SetAndStore(5);
+
+    Font::ForceUpperCase(false);
+
+    String("Œ¿Œ ÃÕ»œ»").DrawInCenterRect(0, 0, 280, 100, Color::FILL);
+
+    String("√6-49").DrawInCenterRect(0, 50, 280, 100);
+
+    Font::Spacing::Restore();
+
+    Font::Spacing::SetAndStore(2);
+
+    String("‚Â. 1.3.8").DrawInCenterRect(0, 100, 280, 140);
+
+    Font::Spacing::Restore();
+
+    Painter::EndScene();
+}
+
+
 void Display::Update()
 {
+    Font::Set(TypeFont::_8);
     Statistics::BeginFrame();
     Painter::BeginScene(Color::BACK);
     WaveGraphics::Draw(Chan::A);
