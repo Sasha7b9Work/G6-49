@@ -63,7 +63,7 @@ static const Settings defSet =
     static_cast<Page *>(PageMain::self),// menu_page
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
-    {true, true},                       // enabled[2]
+    {false, false},                     // enabled[2]
     Chan::A,                            // current
     0,                                  // lang
     true                                // bigSymbols

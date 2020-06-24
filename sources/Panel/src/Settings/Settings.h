@@ -13,6 +13,7 @@
 #define MENU_POS_ACT_ITEM(x)        (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x)     (set.menu_currentSubPage[x])
 #define CURRENT_CHANNEL             (set.current)
+#define ENABLED_CH(ch)              (set.enabled[ch])
 
 
 struct SettingsFreqMeter

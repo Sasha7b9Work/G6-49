@@ -17,20 +17,31 @@ void WaveGraphics::Draw(Chan::E ch)
         return;
     }
 
-    int x0 = X();
-    int y0 = Y(ch);
+    const int x0 = X();
+    const int y0 = Y(ch);
     Rectangle(Width() - 2, Height() - 2).Fill(x0 + 1, y0 + 1, Color::GREEN_5);
 
-    if (set.enabled[ch])
+    Rectangle(Width(), Height()).Draw(x0, y0, Color::FILL);
+
+    Font::StoreAndSet(TypeFont::_GOSTB20);
+    String((ch == Chan::A) ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
+    Font::Restore();
+
+    DrawParameters(ch, y0);
+
+    if (ENABLED_CH(ch))
     {
-        Rectangle(Width(), Height()).Draw(x0, y0, Color::FILL);
-    
-        Font::StoreAndSet(TypeFont::_GOSTB20);
-        String((ch == Chan::A) ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
-        Font::Restore();
-    
         FORM(ch)->DrawUGO(ch, y0);
-        DrawParameters(ch, y0);
+    }
+    else
+    {
+        Font::StoreAndSet(TypeFont::_GOST28);
+        Font::Spacing::SetAndStore(3);
+
+        String(LANG_IS_RU ? "Œ“ À" : "DIS").Draw(x0 + 20, y0 + 50);
+
+        Font::Restore();
+        Font::Spacing::Restore();
     }
 }
 

@@ -2,6 +2,10 @@
 #include "defines.h"
 
 
+#define ChA Chan::A
+#define ChB Chan::B
+
+
 struct Chan
 {
     enum E
