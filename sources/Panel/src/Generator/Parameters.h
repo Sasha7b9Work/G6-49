@@ -6,6 +6,9 @@
 #include "Settings/SettingsTypes.h"
 
 
+#define DEFAULT_AMPLITUDE Value("1")
+
+
 class Form;
 struct Key;
 class Parameter;
@@ -302,7 +305,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = Value("10")) :
+    ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = DEFAULT_AMPLITUDE) :
         ParameterVoltage(ParameterDoubleType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 };
 
