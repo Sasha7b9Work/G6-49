@@ -195,6 +195,8 @@ private:
 
     static Order::E order;              // Текущий порядок вводимого значения
 
+    static bool noVerifiForValid;       // Не проверять на валидность величины значения
+
     static int DrawValue(int x, int y);
 
     static void DrawUnits(int x, int y, int width);

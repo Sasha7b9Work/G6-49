@@ -21,13 +21,13 @@ struct Display
 
     static uint8 *GetBuffer();
     
-    // Экран
-    static uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
-    
-    // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
-    static uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
-
     static void ShowWarning(String warning);
 
     static void ClearWarnings();
+
+    // Экран
+    static uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+
+    // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
+    static uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 };

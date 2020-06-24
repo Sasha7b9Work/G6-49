@@ -22,6 +22,7 @@ Tuner::ModeTuning::E Tuner::mode = ModeTuning::Correction;
 
 DisplayEntering::Cursor      DisplayEntering::cursor;
 DisplayEntering::EnterBuffer DisplayEntering::buffer;
+bool                         DisplayEntering::noVerifiForValid = true;
 Order::E                     DisplayEntering::order = Order::Count;
 
 Tuner *Tuner::current = nullptr;
@@ -677,6 +678,7 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 
 void DisplayEntering::Init()
 {
+    noVerifiForValid = true;
     buffer.Prepare(Tuner::Current()->ReinterpretToDouble());
 }
 
@@ -704,9 +706,23 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 
 bool DisplayEntering::ValueInBoundaries()
 {
+    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+
+    Value min = param->GetMin();
+    Value max = param->GetMax();
+
     Value value = ToValue();
 
-    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+    if (noVerifiForValid)
+    {
+        if (value >= min && value <= max)
+        {
+            noVerifiForValid = false;
+        }
+
+        return true;
+    }
+
 
     bool valid = (value >= param->GetMin()) && (value <= param->GetMax());
 
