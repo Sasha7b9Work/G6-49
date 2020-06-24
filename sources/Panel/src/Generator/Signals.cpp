@@ -156,8 +156,8 @@ static const char *namesPolarity[] =
 };
 
 
-static ParameterPeriod    impulseA_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("30", Order::Nano));
-static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
+static ParameterPeriod    impulseA_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("1", Order::Milli));
+static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("200", Order::Micro));
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;
 static ParameterPolarity  impulseA_Polarity(namesPolarity);
@@ -179,7 +179,7 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
 static ParameterPeriod       packetA_Period        (Value("0"), Value("100", Order::Mega), Value("200", Order::Micro));
-static ParameterDuration     packetA_Duration      (Value("0"), Value("100", Order::Mega), Value("100", Order::Micro));
+static ParameterDuration     packetA_Duration      (Value("0"), Value("100", Order::Mega), Value("10", Order::Micro));
 static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber, "Кол-во имп", "Count imp", 0, 100000, 3);
 static ParameterPacketPeriod packetA_PacketPeriod  (Value("0"), Value("100", Order::Mega), Value("0.1"));
 static ParameterAmplitude    packetA_Amplitude;
@@ -340,8 +340,8 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 
-static ParameterPeriod    impulseB_Period   (Value("33", Order::Nano), Value("10",  Order::Mega), Value("100", Order::Milli));
-static ParameterDuration  impulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("100", Order::Micro));
+static ParameterPeriod    impulseB_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("1", Order::Milli));
+static ParameterDuration  impulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("200", Order::Micro));
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity(namesPolarity);
