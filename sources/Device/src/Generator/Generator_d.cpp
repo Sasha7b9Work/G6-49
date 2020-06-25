@@ -276,11 +276,9 @@ void Amplifier::Tune(Chan::E ch)
 
     if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
     {
-        bool moreTwoAndHalfVolts = SettingsGenerator::Offset(ch) > 2.5F;
+        SetAttenuation(ch, Attenuation::_0Db);
 
-        SetAttenuation(ch, moreTwoAndHalfVolts ? Attenuation::_0Db : Attenuation::_10Db);
-
-        Enable(ch, moreTwoAndHalfVolts);
+        Enable(ch, true);
     }
     else
     {

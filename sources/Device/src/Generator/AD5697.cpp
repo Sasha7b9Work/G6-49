@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "common/Command.h"
 #include "Generator/AD5697.h"
 #include "Generator/Calibrator.h"
@@ -71,6 +72,8 @@ void AD5697::SetOffset(Chan::E ch)
         static_cast<uint8>(value >> 8),
         static_cast<uint8>(value)
     };
+
+    Log::AddString("%d", static_cast<uint16>(code));
 
     WriteParameter(BIN_U8(00001100), data, WR_AD5697_OFFSET);
 }
