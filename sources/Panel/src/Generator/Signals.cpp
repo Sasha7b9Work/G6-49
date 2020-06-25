@@ -156,8 +156,8 @@ static const char *namesPolarity[] =
 };
 
 
-static ParameterPeriod    impulseA_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("1", Order::Milli));
-static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("200", Order::Micro));
+static ParameterPeriod    impulseA_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Mega), Value("20", Order::Micro));
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;
 static ParameterPolarity  impulseA_Polarity(namesPolarity);
@@ -340,8 +340,8 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 
-static ParameterPeriod    impulseB_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("1", Order::Milli));
-static ParameterDuration  impulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("200", Order::Micro));
+static ParameterPeriod    impulseB_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParameterDuration  impulseB_Duration (Value("0"),               Value("100", Order::Mega), Value("20", Order::Micro));
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity(namesPolarity);
