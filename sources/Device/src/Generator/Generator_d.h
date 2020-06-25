@@ -102,12 +102,13 @@ struct SettingsGenerator
     friend class DGenerator;
 public:
     // Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
-    static double Amplitude(Chan::E ch)     { return amplitude[ch].ToDouble();  }
+    static double Amplitude(Chan::E ch)     { return amplitude[ch].ToDouble(); }
     static Value AmplitudeValue(Chan::E ch) { return amplitude[ch]; }
     // Возвращает установленное на канале смещение
-    static double Offset(Chan::E ch)    { return offset[ch].ToDouble();     }
+    static double Offset(Chan::E ch)        { return offset[ch].ToDouble(); }
+    static Value OffsetValue(Chan::E ch)    { return offset[ch]; }
     // Возвращает установленную частоту на канале
-    static double Frequency(Chan::E ch) { return frequency[ch].ToDouble();  }
+    static double Frequency(Chan::E ch) { return frequency[ch].ToDouble(); }
     // Возвращает true, если на канале ch установлена синусоидальная форма сигнала
     static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
 private:

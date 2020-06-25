@@ -174,6 +174,8 @@ void DGenerator::SetAmplitude(Chan::E ch, Value ampl)
     {
         FPGA::SetAmplitude();
     }
+
+    SetOffset(ch, SettingsGenerator::OffsetValue(ch));
 }
 
 
