@@ -50,18 +50,19 @@ DEF_CHOICE_2(cLanguage,
 extern const PageBase pDebug;
 
 
-DEF_PAGE_4_VAR( pService,                                                                                                                                            //--- СЕРВИС --- //-V641
+DEF_PAGE_4_VAR(pService,                                                                                                                                            //--- СЕРВИС --- //-V641
     "СЕРВИС", "SERVICE",    //-V641
     "Сервисные функции", "Service functions",
     &cLanguage,
     &Item::emptyLight,
     &Item::emptyLight,
-    &Item::emptyLight,
+    //&Item::emptyLight,
+    PageDebug::self,
     Page::Service, reinterpret_cast<PageBase *>(PageMain::self), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
 void PageDebug::Enable()
 {
-    pService.items[2] = PageDebug::self;
+    pService.items[3] = PageDebug::self;
 }
