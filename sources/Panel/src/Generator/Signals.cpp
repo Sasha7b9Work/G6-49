@@ -113,11 +113,16 @@ static Parameter *params_TriangleA[] =
 static Form formTriangleA(TypeForm::Triangle, params_TriangleA, &waves[Chan::A]);
 
 
+static void OnChoose_FileA()
+{
+
+}
+
 static ParameterFrequency  freeA_Frequency;
 static ParameterAmplitude  freeA_Amplitude;
 static ParameterOffset     freeA_Offset;
 static ParameterModeStart  freeA_ModeStart(namesModeStart);
-//static ParameterPage   FreeA_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
+static ParameterButton     freeA_Choose   ("Выбрать", "Choose", OnChoose_FileA);
 
 static Parameter *params_FreeA[] =
 {
@@ -125,7 +130,7 @@ static Parameter *params_FreeA[] =
     &freeA_Amplitude,
     &freeA_Offset,
     &freeA_ModeStart,
-//    &FreeA_Choice,
+    &freeA_Choose,
     nullptr
 };
 
@@ -305,11 +310,16 @@ static Parameter *params_TriangleB[] =
 static Form formTriangleB(TypeForm::Triangle, params_TriangleB, &waves[Chan::B]);
 
 
+static void OnChoose_FileB()
+{
+
+}
+
 static ParameterFrequency  freeB_Frequency;
 static ParameterAmplitude  freeB_Amplitude;
 static ParameterOffset     freeB_Offset;
 static ParameterModeStart  freeB_ModeStart(namesModeStart);
-//static ParameterPage   FreeB_Choice   (ParameterPage::ChoiceForm, reinterpret_cast<PageBase *>(PageLoadForm::pointer));
+static ParameterButton     freeB_Choose("Выбрать", "Choose", OnChoose_FileB);
 
 static Parameter *params_FreeB[] =
 {
@@ -317,7 +327,7 @@ static Parameter *params_FreeB[] =
     &freeB_Amplitude,
     &freeB_Offset,
     &freeB_ModeStart,
-//    &FreeB_Choice,
+    &freeB_Choose,
     nullptr
 };
 
