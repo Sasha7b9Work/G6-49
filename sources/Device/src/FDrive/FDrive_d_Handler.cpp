@@ -294,35 +294,37 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
     {
         char buffer[255];
         f_gets(buffer, 255, &fp);
-        if (std::strcmp(buffer, "Rigol Technologies,Inc. Save analog waveform to text files.\r\n") == 0)
+        if (std::strcmp(buffer, "Data file G6-49\r\n") == 0)
         {
-            char *pointer = 0;
-            int counter = 0;
-            do
-            {
-                pointer = f_gets(buffer, 255, &fp);
-                counter++;
-            } while ((std::strcmp(buffer, " 0 \r\n") != 0) && (pointer[0] == buffer[0]));
+            bool firstPoint = false;            // ”становленное в true значение означает, что мы добрались до первой точки
 
-            if (pointer[0] == buffer[0])
+            while (!firstPoint)
             {
-                for (int i = 0; i < 4096; i++)
+                f_gets(buffer, 255, &fp);
+
+                if (std::strcmp(buffer, "data\r\n") == 0)
                 {
-                    f_gets(buffer, 255, &fp);
-
-                    char *ptr = std::strchr(buffer, ',');
-                    if (ptr != 0)
-                    {
-                        *ptr = '.';
-                    }
-
-                    std::sscanf(buffer, "%e", &values[i]);
-
-                    f_gets(buffer, 255, &fp);
+                    firstPoint = true;
                 }
-
-                result = true;
             }
+
+            // ¬ этой точке файловый указатель указывает на строку с точкой индексом 0
+
+            for (int i = 0; i < 4096; i++)
+            {
+                f_gets(buffer, 255, &fp);
+
+                int numberPoint = 0;
+                int value = 0;
+
+                std::sscanf(buffer, "%d %d", &numberPoint, &value);
+
+                values[i] = -1.0F + value / 4095.0F * 2.0F;
+
+                f_gets(buffer, 255, &fp);
+            }
+
+            result = true;
         }
         f_close(&fp);
     }
