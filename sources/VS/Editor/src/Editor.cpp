@@ -317,7 +317,7 @@ void Frame::OnRedo(wxCommandEvent&)
 
 void Frame::OnOpenFile(wxCommandEvent &)
 {
-    wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, wxT("*.txt"), wxFD_OPEN);
+    wxFileDialog openDialog(nullptr, wxEmptyString, wxEmptyString, wxEmptyString, wxT("*.sig"), wxFD_OPEN);
 
     if (openDialog.ShowModal() == wxID_OK)
     {
@@ -338,7 +338,7 @@ void Frame::OnOpenFile(wxCommandEvent &)
 
 void Frame::OnSaveFile(wxCommandEvent &)
 {
-    wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.txt"), wxFD_SAVE);
+    wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.sig"), wxFD_SAVE);
 
     if (saveDialog.ShowModal() == wxID_OK)
     {
