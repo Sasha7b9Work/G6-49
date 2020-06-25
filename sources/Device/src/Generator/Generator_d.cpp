@@ -271,18 +271,21 @@ void Amplifier::Init()
 
 void Amplifier::Tune(Chan::E ch)
 {
+    uint64 absAmplitude = SettingsGenerator::AmplitudeValue(ch).Abs();
+
+    if (absAmplitude == 0)
+    {
+        SetAttenuation(ch, Attenuation::_10Db);
+
+        Enable(ch, true);
+    }
+
     if(isBlocked)
     {
         return;
     }
-
-    if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
-    {
-        SetAttenuation(ch, Attenuation::_0Db);
-
-        Enable(ch, true);
-    }
-    else
+    
+    if(absAmplitude != 0)
     {
         double amplitude = SettingsGenerator::Amplitude(ch);
 
