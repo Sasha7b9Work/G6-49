@@ -274,34 +274,45 @@ void Amplifier::Tune(Chan::E ch)
         return;
     }
 
-    double amplitude = SettingsGenerator::Amplitude(ch);
+    if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
+    {
+        bool moreTwoAndHalfVolts = SettingsGenerator::Offset(ch) > 2.5F;
 
-    if(amplitude > Attenuation(Attenuation::_10Db).Units())                     // 1 диапазон   3.16
-    {
-        SetAttenuation(ch, Attenuation::_0Db);
-    }
-    else if(amplitude > 1.0F)                                                   // 2 диапазон
-    {
-        SetAttenuation(ch, Attenuation::_10Db);
-    }
-    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10.0F)        // 4 диапазоны 0.316
-    {
-        SetAttenuation(ch, Attenuation::_0Db);
-    }
-    else if(amplitude > 0.100F)                                                 // 5 диапазон
-    {
-        SetAttenuation(ch, Attenuation::_10Db);
-    }
-    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 100.0F)       // 6 диапазон
-    {
-        SetAttenuation(ch, Attenuation::_20Db);
+        SetAttenuation(ch, moreTwoAndHalfVolts ? Attenuation::_0Db : Attenuation::_10Db);
+
+        Enable(ch, moreTwoAndHalfVolts);
     }
     else
     {
-        SetAttenuation(ch, Attenuation::_30Db);
-    }
+        double amplitude = SettingsGenerator::Amplitude(ch);
 
-    Enable(ch, amplitude > 1.0F);
+        if (amplitude > Attenuation(Attenuation::_10Db).Units())                     // 1 диапазон   3.16
+        {
+            SetAttenuation(ch, Attenuation::_0Db);
+        }
+        else if (amplitude > 1.0F)                                                   // 2 диапазон  1
+        {
+            SetAttenuation(ch, Attenuation::_10Db);
+        }
+        else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 10.0F)        // 4 диапазоны 0.316
+        {
+            SetAttenuation(ch, Attenuation::_0Db);
+        }
+        else if (amplitude > 0.100F)                                                 // 5 диапазон 0.100
+        {
+            SetAttenuation(ch, Attenuation::_10Db);
+        }
+        else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 100.0F)       // 6 диапазон
+        {
+            SetAttenuation(ch, Attenuation::_20Db);
+        }
+        else
+        {
+            SetAttenuation(ch, Attenuation::_30Db);
+        }
+
+        Enable(ch, amplitude > 1.0F);
+    }
 }
 
 

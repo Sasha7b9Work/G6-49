@@ -102,7 +102,8 @@ struct SettingsGenerator
     friend class DGenerator;
 public:
     // Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
-    static double Amplitude(Chan::E ch) { return amplitude[ch].ToDouble();  }
+    static double Amplitude(Chan::E ch)     { return amplitude[ch].ToDouble();  }
+    static Value AmplitudeValue(Chan::E ch) { return amplitude[ch]; }
     // Возвращает установленное на канале смещение
     static double Offset(Chan::E ch)    { return offset[ch].ToDouble();     }
     // Возвращает установленную частоту на канале

@@ -78,12 +78,6 @@ void Display::DrawScreenSplash()
 
     Font::Spacing::Restore();
 
-    Font::Spacing::SetAndStore(2);
-
-    String("вер. 1.3.8").DrawInCenterRect(0, 100, 280, 140);
-
-    Font::Spacing::Restore();
-
     Painter::EndScene();
 }
 
