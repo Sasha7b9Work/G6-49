@@ -16,12 +16,9 @@ macro(wx_string_append var str)
     set(${var} ${${var}}${str})
 endmacro()
 
-set(MSVC_LIB_USE "/MDd")
-set(MSVC_LIB_REPLACE "/MTd")
-if(CONF_RELEASE)
-    set(MSVC_LIB_USE "/MTd")
-    set(MSVC_LIB_REPLACE "/MDd")
-endif()
+set(MSVC_LIB_USE "/MTd")
+set(MSVC_LIB_REPLACE "/MDd")
+
 # Set MSVC runtime flags for all configurations
 foreach(cfg "" ${CMAKE_CONFIGURATION_TYPES})
     set(c_flag_var CMAKE_C_FLAGS)
@@ -42,7 +39,6 @@ foreach(cfg "" ${CMAKE_CONFIGURATION_TYPES})
         "Flags used by the CXX compiler during ${cfg_upper} builds." FORCE)
     endif()
 endforeach()
-
 
 add_compile_options(/wd4355)    # 'this': used in base member initializer list
 add_compile_options(/wd4514)    # 'xxx': unreferenced inline function has been removed
