@@ -52,7 +52,7 @@ public:
 class PageLoadForm
 {
 public:
-    static Page *pointer;
+    static Page *self;
 };
 
 
