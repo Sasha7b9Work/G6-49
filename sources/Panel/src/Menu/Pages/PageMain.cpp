@@ -35,7 +35,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(TypeForm::Impulse),      FORM_EN(TypeForm::Impulse),      "Импульсы",         "Impulse",
     FORM_RU(TypeForm::PacketImpuls), FORM_EN(TypeForm::PacketImpuls), "Пакеты",           "Packets",
     FORM_RU(TypeForm::Free),         FORM_EN(TypeForm::Free),         "Произвольный",     "Free",
-    numForm, *PageMain::self, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
+    numForm, *PageMain::self, Item::FuncActive, PageSignals::OnChanged_Form, FuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -48,7 +48,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(TypeForm::Meander),   FORM_RU(TypeForm::Meander),   "Меандр",           "Meander",
     FORM_RU(TypeForm::Impulse),   FORM_RU(TypeForm::Impulse),   "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Free),      FORM_RU(TypeForm::Free),      "Произвольный",     "Free",
-    numForm, *PageMain::self, Item::FuncActive, PageSignals::OnPress_Form, FuncDraw
+    numForm, *PageMain::self, Item::FuncActive, PageSignals::OnChanged_Form, FuncDraw
 )
 
 
@@ -99,7 +99,7 @@ void PageSignals::Init()
 }
 
 
-void PageSignals::OnPress_Form(bool)
+void PageSignals::OnChanged_Form(bool)
 {
     ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageMain.items[1]);    // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
@@ -119,7 +119,7 @@ void PageSignals::SetForm(TypeForm::E form)
     }
 
     numForm = form;
-    OnPress_Form(true);
+    OnChanged_Form();
 }
 
 

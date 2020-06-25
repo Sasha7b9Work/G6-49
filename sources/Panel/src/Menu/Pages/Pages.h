@@ -23,7 +23,8 @@ struct PageSignals
 
     static void OnPress_Channel(bool);
 
-    static void OnPress_Form(bool);
+    // Эта функция должна вызываться после выбора формы сигнала - по её нажатию происходит загрузка формы в прибор
+    static void OnChanged_Form(bool = true);
 
     static void SetForm(TypeForm::E form);
 };
