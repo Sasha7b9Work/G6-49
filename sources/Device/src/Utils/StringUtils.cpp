@@ -23,3 +23,17 @@ float SU::Buffer2Float(const uint8 *buffer)
 {
     return BitSet32(buffer).floatValue;
 }
+
+
+char *SU::Bin2StringN(uint value, char buffer[33], int n)
+{
+    buffer[n] = '\0';
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        buffer[i] = (value & 0x01) ? '1' : '0';
+        value >>= 1;
+    }
+
+    return buffer;
+}
