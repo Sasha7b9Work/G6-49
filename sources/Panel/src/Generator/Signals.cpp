@@ -115,7 +115,7 @@ static Form formTriangleA(TypeForm::Triangle, params_TriangleA, &waves[Chan::A])
 
 static void OnChoose_FileA()
 {
-
+    PageLoadForm::LoadForm(ChA);
 }
 
 static ParameterFrequency  freeA_Frequency;
@@ -312,7 +312,7 @@ static Form formTriangleB(TypeForm::Triangle, params_TriangleB, &waves[Chan::B])
 
 static void OnChoose_FileB()
 {
-
+    PageLoadForm::LoadForm(ChB);
 }
 
 static ParameterFrequency  freeB_Frequency;

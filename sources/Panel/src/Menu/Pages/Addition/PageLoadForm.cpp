@@ -81,3 +81,9 @@ DEF_PAGE_4( pageLoad,                                                           
     0,
     Page::Settings_Load, nullptr, Item::FuncActive, Page::FuncEnter, OnControl, FDrive::Draw
 )
+
+
+void PageLoadForm::LoadForm(Chan::E ch)
+{
+    Menu::SetAdditionPage(self);
+}

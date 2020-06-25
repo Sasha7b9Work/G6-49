@@ -53,6 +53,8 @@ class PageLoadForm
 {
 public:
     static Page *self;
+
+    static void LoadForm(Chan::E ch);
 };
 
 
