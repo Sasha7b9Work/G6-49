@@ -6,6 +6,8 @@
 
 void init()
 {
+    FreeConsole();
+
     Frame *frame = new Frame("");
 
     TheCanvas = new Canvas(frame);
