@@ -8,7 +8,7 @@ void init()
 {
     FreeConsole();
 
-    Frame *frame = new Frame("");
+    Frame *frame = new Frame("Редактор Г6-49");
 
     TheCanvas = new Canvas(frame);
 
