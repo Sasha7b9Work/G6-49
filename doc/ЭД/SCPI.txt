@@ -1,0 +1,49 @@
+- *idn?
+- *rst
+
+- :CHANNEL { A | B }
+- :CHANNEL?
+
+- :FORM { SINE | SAW+ | SAW- | TRIANGLE | MEANDER | IMPULSE | PACKET | FREE }
+- :FORM?
+
+- :FREQUENCY [ 300e-6 ... 10e6 ]
+- :FREQUENCY?
+
+- :AMPLITUDE [ 0.000 ... 10.000 ]
+- :AMPLITUDE?
+
+- :OFFSET [ -5.000 ... 5.000 ]
+- :OFFSET?
+
+- :MODESTART { AUTO | SINGLE | COMPARATORA | FORMB }
+- :MODESTART?
+
+- :PERIOD [ 10e-9 ... 10e3 ]
+- :PERIOD?
+
+- :PERIODPACKET [ 10e-9 ... 10e3 ]
+- :PERIODPACKET?
+
+- :DURATION [ 10e-9 ... 10e3 ]
+- :DURATION?
+
+- :NUMBERIMPULSE [ 1 ... 100 ]
+- :NUMBERIMPULSE?
+
+- :POLARITY { + | - }
+- :POLARITY?
+
+- :PHASE [ 0.000 ... 359.999 ]
+- :PHASE?
+
+  :MANIPULATION
+-              :ENABLED { ON | OFF }
+-              :ENABLED?
+-              :DURATION [ 0 ... 10e3 ]
+-              :DURATION?
+-              :PERIOD [ 0 ... 10e3 ]
+-              :PERIOD?
+
+  :FREQMETER
+            :MEASURE { FREQUENCY | 
