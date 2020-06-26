@@ -17,21 +17,6 @@ void Calibrator::SetFormWave(Chan::E ch, uint8 sig)
 }
 
 
-void Calibrator::SetAmplitude(Chan::E ch)
-{
-    static const float amplitude[6] =
-    {
-        100e-3F,
-        300e-3F,
-        1.0F,
-        3.0F,
-        10.0F
-    };
-
-    DGenerator::SetAmplitude(ch, Value(amplitude[range[ch]]));
-}
-
-
 void Calibrator::SetOffset(Chan::E ch, uint8 param)
 {
     static const float offset[4] =
@@ -69,18 +54,37 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
 
     SetFormWave(ch, _signal);
 
-    SetAmplitude(ch);
-
-    if(param != 0)              // Для калибровки смещения нужно установить нулевой уровень на выходе, но не аттенюатор не трогать
-    {
-        Amplifier::Block();
-        DGenerator::SetAmplitude(ch, Value("0"));
-        Amplifier::Unblock();
-    }
+    SetAmplitude(ch, param != 0);       // Для калибровки смещения нужно установить нулевой уровень на выходе, но аттенюатор не трогать
 
     SetOffset(ch, param);
 
     inModeCalibration = false;
+}
+
+
+void Calibrator::SetAmplitude(Chan::E ch, bool zeroAmplitude)
+{
+    if (zeroAmplitude)
+    {
+        Amplifier::Block();
+
+        DGenerator::SetAmplitude(ch, Value("0"));
+
+        Amplifier::Unblock();
+    }
+    else
+    {
+        static const float amplitude[6] =
+        {
+            100e-3F,
+            300e-3F,
+            1.0F,
+            3.0F,
+            10.0F
+        };
+
+        DGenerator::SetAmplitude(ch, Value(amplitude[range[ch]]));
+    }
 }
 
 

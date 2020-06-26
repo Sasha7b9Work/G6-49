@@ -30,7 +30,7 @@ private:
     static void SetFormWave(Chan::E ch, uint8 signal);
     
     // Установить амплитуду для заданного диапазона
-    static void SetAmplitude(Chan::E ch);
+    static void SetAmplitude(Chan::E ch, bool zeroAmplitude);
     
     // Установить смещение для заданного параметра
     static void SetOffset(Chan::E ch, uint8 param);

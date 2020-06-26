@@ -258,3 +258,4 @@ static void TuneControls()
         pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterFullVoltage));
     }
 }
+

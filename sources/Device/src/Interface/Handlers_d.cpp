@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "structs.h"
 #include "common/Command.h"
 #include "common/Interface_d.h"
@@ -73,6 +74,11 @@ void DHandlers::Processing(SimpleMessage *msg)
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
     uint8 com = msg->TakeUINT8();
+
+    if (com != 0)
+    {
+        LOG_TRACE("%d", com);
+    }
 
     pFuncInterfaceVpM func = E;
 
