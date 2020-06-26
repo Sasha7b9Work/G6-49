@@ -80,11 +80,11 @@ public:
     // Возвращает true, если на данном канале включён усилитель
     static bool IsEnabled(Chan::E ch) { return isEnabled[ch]; }
 
-private:
-    
     // Включить/выключить аппаратный усилитель усилитель
     static void Enable(Chan::E ch, bool enable);
 
+private:
+    
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
 
     static Attenuation::E attenuation[Chan::Count];

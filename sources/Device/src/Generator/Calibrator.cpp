@@ -33,6 +33,7 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
     }
     else                            // А для калибровки смещений блокируем переключение аттенюаторов
     {
+        Amplifier::Enable(ch, range[ch] > 2);
         Amplifier::Block();
         DGenerator::SetOffset(ch, Value(offset[param]));
         Amplifier::Unblock();
