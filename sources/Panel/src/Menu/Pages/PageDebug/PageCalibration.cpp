@@ -249,7 +249,7 @@ Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBas
 
 static void TuneControls()
 {
-    if(range < 2)
+    if(range < 3)
     {
         pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterHalfVoltage));
     }
