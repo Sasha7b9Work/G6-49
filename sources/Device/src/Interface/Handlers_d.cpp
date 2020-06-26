@@ -75,10 +75,10 @@ void DHandlers::Processing(SimpleMessage *msg)
 
     uint8 com = msg->TakeUINT8();
 
-    if (com != 0)
-    {
-        LOG_TRACE("%d", com);
-    }
+//    if (com != 0)
+//    {
+//        LOG_TRACE("%d", com);
+//    }
 
     pFuncInterfaceVpM func = E;
 

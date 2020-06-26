@@ -228,6 +228,8 @@ Color Indicator::CalculateColorInteger(bool test) const
 
 Color Indicator::CalculateColorDouble(int pos, bool test) const
 {
+#define COLOR_SHADOW Color::GRAY_10;        // Ётим цветом вывод€тс€ "назначащие знакоместа"
+
     if (test)
     {
         return Color::BACK;
@@ -256,7 +258,7 @@ Color Indicator::CalculateColorDouble(int pos, bool test) const
             }
             else
             {
-                return Color::GRAY_25;
+                return COLOR_SHADOW;
             }
 
         }
@@ -270,7 +272,7 @@ Color Indicator::CalculateColorDouble(int pos, bool test) const
                 }
                 else
                 {
-                    return Color::GRAY_25;
+                    return COLOR_SHADOW;
                 }
             }
         }
