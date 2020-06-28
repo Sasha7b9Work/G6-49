@@ -151,6 +151,14 @@ namespace Message
     };
 
 
+    class Debug : public SimpleMessage
+    {
+    public:
+
+        Debug();
+    };
+
+
     namespace FDrive
     {
 

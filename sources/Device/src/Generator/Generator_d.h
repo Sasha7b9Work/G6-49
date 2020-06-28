@@ -83,6 +83,8 @@ public:
     // ¬ключить/выключить аппаратный усилитель усилитель
     static void Enable(Chan::E ch, bool enable);
 
+    static void LogState();
+
 private:
     
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);

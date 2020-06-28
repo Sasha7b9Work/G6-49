@@ -92,6 +92,8 @@ struct Command
             RequestPortionUpgradePanel,     // Запрос на порцию прошивки Panel
             // byte(com) | hword(num) | word(crc32) | 512 bytes
             AnswerPortionUpgradePanel,      // Ответ на запрос порции прошивки Panel
+
+            Debug,
             Count
     } value;
     Command(E v) : value(v) {};

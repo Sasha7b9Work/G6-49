@@ -68,6 +68,8 @@ static void CalibrationLoad(SimpleMessage *);
 
 static void CalibrationSet(SimpleMessage *);
 
+static void Debug(SimpleMessage *);
+
 
 void DHandlers::Processing(SimpleMessage *msg)
 {
@@ -110,6 +112,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::CalibrationLoad:         func = CalibrationLoad;           break;
     case Command::CalibrationSet:          func = CalibrationSet;            break;
     case Command::SCPI_Data:               func = DVCP::Handler::Processing; break;
+    case Command::Debug:                   func = Debug;                     break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
@@ -457,4 +460,10 @@ static void ModeDebug(SimpleMessage *)
 static void E(SimpleMessage *)
 {
 
+}
+
+
+static void Debug(SimpleMessage *)
+{
+    Amplifier::LogState();
 }

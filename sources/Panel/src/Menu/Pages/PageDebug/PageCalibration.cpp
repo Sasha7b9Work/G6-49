@@ -81,9 +81,19 @@ static void OnChange_Parameters(bool)
         return;
     }
 
+    Message::Debug().Transmit();
+
     TuneControls();
+
+    Message::Debug().Transmit();
+
     LoadK();
+
+    Message::Debug().Transmit();
+
     SendMessage();
+
+    Message::Debug().Transmit();
 }
 
 // Вызывается при изменении источника сигнал

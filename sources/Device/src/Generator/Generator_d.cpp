@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "Generator/Generator_d.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include <cmath>
@@ -369,4 +370,19 @@ pString Attenuation::Name() const
     };
 
     return name[value];
+}
+
+
+void Amplifier::LogState()
+{
+    static const pString att[] =
+    {
+        "0 Db",
+        "10 Db",
+        "20 Db",
+        "30 Db"
+    };
+
+
+    LOG_WRITE("en = %d, at = %s", isEnabled[Chan::A], att[attenuation[Chan::A]]);
 }

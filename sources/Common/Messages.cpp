@@ -311,6 +311,12 @@ Message::RegCPU::RegCPU(uint8 port, uint8 pin, uint8 state) : SimpleMessage(4, C
 }
 
 
+Message::Debug::Debug() : SimpleMessage(1, Command::Debug)
+{
+
+}
+
+
 Message::Set::FormWave::FormWave(uint8 ch, uint8 form) : SimpleMessage(3, Command::SetFormWave)
 {
     PutUINT8(ch);
