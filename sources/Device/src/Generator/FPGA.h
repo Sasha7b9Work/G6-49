@@ -131,13 +131,13 @@ private:
     static void SetFormSine(Chan::E ch);
     
     // Установить режим Пила+
-    static void SetModeRampPlus(Chan::E ch);
+    static void SetFormRampPlus(Chan::E ch);
     
     // Установить режим Пила-
-    static void SetModeRampMinus(Chan::E ch);
+    static void SetFormRampMinus(Chan::E ch);
     
     // Установить режим Треугольник
-    static void SetModeTriangle(Chan::E ch);
+    static void SetFormTriangle(Chan::E ch);
     
     // Установить режим произвольного сигнала, загруженного с флешки
     static void SetModeDDS(Chan::E ch);

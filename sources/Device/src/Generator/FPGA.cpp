@@ -61,9 +61,9 @@ void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
     static const pFuncFpgaVU8 funcs[TypeForm::Count] =
     {
         SetFormSine,            // Здесь включается режим амплитудной манипуляции
-        SetModeRampPlus,
-        SetModeRampMinus,
-        SetModeTriangle,
+        SetFormRampPlus,
+        SetFormRampMinus,
+        SetFormTriangle,
         SetModeMeander,
         SetModeImpulse,
         SetModePackedImpulse,
@@ -108,21 +108,21 @@ void FPGA::SetModeDDS(Chan::E ch)
 }
 
 
-void FPGA::SetModeRampPlus(Chan::E ch)
+void FPGA::SetFormRampPlus(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData(&dataDDS[Chan::A][0]);
 }
 
 
-void FPGA::SetModeRampMinus(Chan::E ch)
+void FPGA::SetFormRampMinus(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData(&dataDDS[Chan::A][0]);
 }
 
 
-void FPGA::SetModeTriangle(Chan::E ch)
+void FPGA::SetFormTriangle(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData(&dataDDS[Chan::A][0]);
