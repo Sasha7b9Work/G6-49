@@ -29,7 +29,7 @@ struct MathDouble
 
 struct MathParameterDouble
 {
-    static void SetParameterValue(ParameterDouble *parameter) { param = parameter; };
+    static void SetParameterDouble(ParameterDouble *parameter) { param = parameter; };
 
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
     static int GetNumberDigitsBeforeComma(Order::E order = Order::Count);

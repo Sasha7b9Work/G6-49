@@ -837,7 +837,7 @@ void DisplayCorrection::Init()
 
 void DisplayCorrection::InitDouble()
 {
-    MathParameterDouble::SetParameterValue(tuner->ReinterpretToDouble());
+    MathParameterDouble::SetParameterDouble(tuner->ReinterpretToDouble());
 
     int before = MathParameterDouble::GetNumberDigitsBeforeComma(CalculateOrderForIndication());
 
