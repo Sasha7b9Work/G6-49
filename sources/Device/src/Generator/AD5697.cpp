@@ -34,6 +34,11 @@ double AD5697::CalculateCodeOffset(Chan::E ch)
 
     double max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0 : 2.5;
 
+    if (!calibrateMode && SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
+    {
+        max = 5.0;
+    }
+
     double result = zero;
     
     if (offset > 0.0F)
