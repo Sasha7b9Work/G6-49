@@ -83,7 +83,7 @@ DEF_PAGE_4( pageLoad,                                                           
 )
 
 
-void PageLoadForm::LoadForm(Chan::E ch)
+void PageLoadForm::LoadForm(Chan::E)
 {
     Menu::SetAdditionPage(self);
 }

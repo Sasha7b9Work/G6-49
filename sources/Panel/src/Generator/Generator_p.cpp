@@ -238,3 +238,9 @@ void PGenerator::SetParameter(Parameter *parameter)
         SetParameter(static_cast<ParameterInteger *>(parameter));
     }
 }
+
+
+void PGenerator::LoadPictureDDSfromStorage()
+{
+    Message::Storage::RequestPictureDDS().Transmit();
+}

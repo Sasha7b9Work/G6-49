@@ -45,6 +45,9 @@ struct PGenerator
     // Загружает режим запуска из set в аппаратуру
     static void LoadStartMode(Chan::E ch, int mode);
 
+    // Загружает изображение произвольного сигнала, хранящееся в ППЗУ
+    static void LoadPictureDDSfromStorage();
+
 private:
 
     // Загружает форму произвольного сигнала

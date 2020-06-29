@@ -26,7 +26,7 @@ int main()
 
     Menu::Init();
 
-
+    PGenerator::LoadPictureDDSfromStorage();
 
     while (1)
     {

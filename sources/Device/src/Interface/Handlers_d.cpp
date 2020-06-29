@@ -72,6 +72,10 @@ static void Debug(SimpleMessage *);
 
 static void SetFreqMeterTrigK(SimpleMessage *);
 
+static void RequestPictureDDSfromStorage(SimpleMessage *);
+
+static void LoadDDSfromStorage(SimpleMessage *);
+
 
 void DHandlers::Processing(SimpleMessage *msg)
 {
@@ -116,6 +120,8 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::SCPI_Data:               func = DVCP::Handler::Processing; break;
     case Command::Debug:                   func = Debug;                     break;
     case Command::SetFreqMeterTrigK:       func = SetFreqMeterTrigK;         break;
+    case Command::RequestPictureDDSfromStorage: func = RequestPictureDDSfromStorage; break;
+    case Command::LoadDDSfromStorage:      func = LoadDDSfromStorage; break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
@@ -477,4 +483,16 @@ static void E(SimpleMessage *)
 static void Debug(SimpleMessage *)
 {
     Amplifier::LogState();
+}
+
+
+static void RequestPictureDDSfromStorage(SimpleMessage *)
+{
+
+}
+
+
+static void LoadDDSfromStorage(SimpleMessage *)
+{
+
 }

@@ -60,7 +60,7 @@ void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
 
     static const pFuncFpgaVU8 funcs[TypeForm::Count] =
     {
-        SetModeSine,            // Здесь включается режим амплитудной манипуляции
+        SetFormSine,            // Здесь включается режим амплитудной манипуляции
         SetModeRampPlus,
         SetModeRampMinus,
         SetModeTriangle,
@@ -95,7 +95,7 @@ void FPGA::WriteMaxAmplitude(Chan::E ch)
 }
 
 
-void FPGA::SetModeSine(Chan::E ch)
+void FPGA::SetFormSine(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Sine;
 }

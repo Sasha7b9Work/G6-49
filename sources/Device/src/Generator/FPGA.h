@@ -128,13 +128,17 @@ private:
         };
     };
     
-    static void SetModeSine(Chan::E ch);
+    static void SetFormSine(Chan::E ch);
+    
     // Установить режим Пила+
     static void SetModeRampPlus(Chan::E ch);
+    
     // Установить режим Пила-
     static void SetModeRampMinus(Chan::E ch);
+    
     // Установить режим Треугольник
     static void SetModeTriangle(Chan::E ch);
+    
     // Установить режим произвольного сигнала, загруженного с флешки
     static void SetModeDDS(Chan::E ch);
     
@@ -143,18 +147,25 @@ private:
     static void SetModeImpulse(Chan::E ch);
     
     static void SetModePackedImpulse(Chan::E ch);
+    
     // Заслать рассчитанные точки в плис
     static void SendData(uint8 *data);
+    
     // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
     static void WriteAddress(RG::E reg);
+    
     // Запись управляющего регистра
     static void WriteControlRegister();
+    
     // Записывает коды, соответствующие максимальному и минимальному значению
     static void WriteMaxAmplitude(Chan::E ch);
+    
     // Установить биты, соответствующие режиму запуска
     static uint16 SetBitsStartMode(uint16 data);
+    
     // Режим запуска
     static StartMode startMode[Chan::Count];
+    
     // Здесь хранятся записанные в регистры значения
     static uint64 registers[RG::Count];
 };
