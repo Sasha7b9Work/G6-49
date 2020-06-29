@@ -140,13 +140,13 @@ private:
     static void SetFormTriangle(Chan::E ch);
     
     // Установить режим произвольного сигнала, загруженного с флешки
-    static void SetModeDDS(Chan::E ch);
+    static void SetFormDDS(Chan::E ch);
     
-    static void SetModeMeander(Chan::E ch);
+    static void SetFormMeander(Chan::E ch);
     
-    static void SetModeImpulse(Chan::E ch);
+    static void SetFormImpulse(Chan::E ch);
     
-    static void SetModePackedImpulse(Chan::E ch);
+    static void SetFormPackedImpulse(Chan::E ch);
     
     // Заслать рассчитанные точки в плис
     static void SendData(uint8 *data);

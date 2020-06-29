@@ -64,10 +64,10 @@ void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
         SetFormRampPlus,
         SetFormRampMinus,
         SetFormTriangle,
-        SetModeMeander,
-        SetModeImpulse,
-        SetModePackedImpulse,
-        SetModeDDS
+        SetFormMeander,
+        SetFormImpulse,
+        SetFormPackedImpulse,
+        SetFormDDS
     };
     
     funcs[form](ch);
@@ -76,7 +76,7 @@ void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
 }
 
 
-void FPGA::SetModeMeander(Chan::E ch)
+void FPGA::SetFormMeander(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
@@ -101,7 +101,7 @@ void FPGA::SetFormSine(Chan::E ch)
 }
 
 
-void FPGA::SetModeDDS(Chan::E ch)
+void FPGA::SetFormDDS(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData(DataFlash(ch));
@@ -129,7 +129,7 @@ void FPGA::SetFormTriangle(Chan::E ch)
 }
 
 
-void FPGA::SetModePackedImpulse(Chan::E)
+void FPGA::SetFormPackedImpulse(Chan::E)
 {
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
@@ -157,7 +157,7 @@ void FPGA::SetPolarity(Chan::E ch, uint8 polarity)
 }
 
 
-void FPGA::SetModeImpulse(Chan::E ch)
+void FPGA::SetFormImpulse(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Impulse;
     WriteControlRegister();
