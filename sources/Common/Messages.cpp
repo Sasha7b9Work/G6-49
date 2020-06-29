@@ -441,12 +441,12 @@ Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint8 value) : Si
 }
 
 
-Message::FDrive::LoadFromExtStorage::LoadFromExtStorage(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
+Message::FDrive::LoadDDSfromFile::LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
 {
     //          com ch  numFile directory                 завершающий_ноль
     int size = 1 + 1 + 1 +      static_cast<int>(std::strlen(directory)) + 1;
     AllocateMemory(size);
-    PutUINT8(Command::FDrive_LoadFromExtStorage);
+    PutUINT8(Command::FDrive_LoadDDSfromFile);
     PutUINT8(ch);
     PutUINT8(numFile);
     std::strcpy(reinterpret_cast<char *>(&buffer[3]), directory);

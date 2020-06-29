@@ -40,7 +40,7 @@ struct FDrive
         static bool GetNumDirsAndFiles();
         static bool RequestFile();
         static bool RequestFileSize();
-        static bool LoadFromExtStorage();
+        static bool LoadDDSfromFile();
     };
 
 private:

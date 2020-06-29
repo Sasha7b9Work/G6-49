@@ -77,7 +77,7 @@ void DDrive::Handler::Processing(SimpleMessage *message)
     case Command::FDrive_RequestFileSize:
         func = RequestFileSize;
         break;
-    case Command::FDrive_LoadFromExtStorage:
+    case Command::FDrive_LoadDDSfromFile:
         func = LoadFromExtStorage;
         break;
     case Command::FDrive_RequestPictureDDS:
@@ -143,7 +143,7 @@ static void LoadFromExtStorage()
         TransformDataToCode(buffer.DataFloat(), code);
         FPGA::SaveExtSignal(ch, code);
 
-        Message::FDrive::LoadFromExtStorage(ch, static_cast<uint8>(numFile), 0).Transmit();     // ѕосылаем признак того, что сохранение завершено
+        Message::FDrive::LoadDDSfromFile(ch, static_cast<uint8>(numFile), 0).Transmit();     // ѕосылаем признак того, что сохранение завершено
     }
 }
 

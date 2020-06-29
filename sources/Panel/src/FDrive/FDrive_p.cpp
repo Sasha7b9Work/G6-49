@@ -93,11 +93,11 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
     switch(com)
     {
-    case Command::FDrive_NumDirsAndFiles:    func = Handler::GetNumDirsAndFiles; break;
-    case Command::FDrive_Mount:              func = Handler::IsMount;            break;
-    case Command::FDrive_RequestFile:        func = Handler::RequestFile;        break;
-    case Command::FDrive_RequestFileSize:    func = Handler::RequestFileSize;    break;
-    case Command::FDrive_LoadFromExtStorage: func = Handler::LoadFromExtStorage; break;
+    case Command::FDrive_NumDirsAndFiles: func = Handler::GetNumDirsAndFiles; break;
+    case Command::FDrive_Mount:           func = Handler::IsMount;            break;
+    case Command::FDrive_RequestFile:     func = Handler::RequestFile;        break;
+    case Command::FDrive_RequestFileSize: func = Handler::RequestFileSize;    break;
+    case Command::FDrive_LoadDDSfromFile: func = Handler::LoadDDSfromFile;    break;
     }
 
     return func();
@@ -130,7 +130,7 @@ bool FDrive::Handler::RequestFileSize()
 }
 
 
-bool FDrive::Handler::LoadFromExtStorage()
+bool FDrive::Handler::LoadDDSfromFile()
 {
     inStateWaitCompleteLoad = false;
 
@@ -154,7 +154,7 @@ void FDrive::PressChoose()
 {
     inStateWaitCompleteLoad = true;
 
-    Message::FDrive::LoadFromExtStorage(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(Items::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
+    Message::FDrive::LoadDDSfromFile(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(Items::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
 
     File::SetDataToWave();
 }

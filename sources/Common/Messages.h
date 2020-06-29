@@ -170,10 +170,10 @@ namespace Message
     {
 
         // Загрузить выбранный файл в FPGA
-        class LoadFromExtStorage : public SimpleMessage
+        class LoadDDSfromFile : public SimpleMessage
         {
         public:
-            LoadFromExtStorage(uint8 ch, uint8 numFile, char *directory);
+            LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory);
         };
 
 

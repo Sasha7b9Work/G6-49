@@ -123,7 +123,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::FDrive_RequestFile:
     case Command::FDrive_RequestFileString:
     case Command::FDrive_RequestFileSize:
-    case Command::FDrive_LoadFromExtStorage:
+    case Command::FDrive_LoadDDSfromFile:
     case Command::FDrive_RequestPictureDDS:
         func = DDrive::Handler::Processing;
         break;
