@@ -12,8 +12,8 @@ public:
     File();
     ~File();
     
-    // Открывает файл
-    void Open(int numberFile);
+    // Посылает запрос на содержимое файла с номером numberFile (точки сигнала)
+    void RequestFromPicture(int numberFile);
     
     // Отображает содержимое
     void Draw(int x, int y);

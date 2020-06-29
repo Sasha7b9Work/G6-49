@@ -101,7 +101,7 @@ static bool EqualsRequestPicture(Task *request, Task *answer)
 }
 
 
-void File::Open(int numberFile)
+void File::RequestFromPicture(int numberFile)
 {
     Close();
 

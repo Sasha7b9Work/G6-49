@@ -97,7 +97,7 @@ bool Items::Handler::Processing(SimpleMessage *msg)
 
         if (num == curItem)
         {
-            file.Open(num);
+            file.RequestFromPicture(num);
         }
 
         return true;
@@ -159,7 +159,7 @@ void Items::PressUp()
     if (curItem > 0)
     {
         curItem--;
-        file.Open(curItem);
+        file.RequestFromPicture(curItem);
     }
 }
 
@@ -170,7 +170,7 @@ void Items::PressDown()
     if (curItem < numFiles - 1)
     {
         curItem++;
-        file.Open(curItem);
+        file.RequestFromPicture(curItem);
     }
 }
 
