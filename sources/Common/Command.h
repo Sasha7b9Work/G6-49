@@ -68,11 +68,11 @@ struct Command
 /* <-> */   FDrive_RequestFile,         // Запрос имени файла
         //  0      1...5    6...9
         //  Test   size     crc32
-/* <-> */   Test,                       // Команда для тестирования SPI
+/* <-> */   Test,                           // Команда для тестирования SPI
 /* <-> */   FDrive_RequestFileSize,         // Запрос размера файла
 /* <-> */   FDrive_RequestFileString,       // Считать строку из файла
 /* <-> */   FDrive_LoadFromExtStorage,      // Загрузить сигнал с флешки. Получив это сообщение, устройство начинает загрузку сигнала, а по окончании возвращает это же сообщение
-/* <-> */   FDrive_GetPictureDDS,           // Получить изображение формы сигнала
+/* <-> */   FDrive_RequestPictureDDS,       // Получить изображение формы сигнала
          // 0           1...5     6.....
          // SCPI_Data   sizeData  data 
 /* <-> */   SCPI_Data,                      // От VCP приняты данные либо в VCP нужно передать данные

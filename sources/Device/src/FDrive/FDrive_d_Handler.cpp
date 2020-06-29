@@ -80,7 +80,7 @@ void DDrive::Handler::Processing(SimpleMessage *message)
     case Command::FDrive_LoadFromExtStorage:
         func = LoadFromExtStorage;
         break;
-    case Command::FDrive_GetPictureDDS:
+    case Command::FDrive_RequestPictureDDS:
         func = GetPictureDDS;
         break;
     }
@@ -169,7 +169,7 @@ static void GetPictureDDS()
         }
     }
 
-    Message::FDrive::PictureDDS(static_cast<uint8>(numFile), data).Transmit();
+    Message::FDrive::RequestPictureDDS(static_cast<uint8>(numFile), data).Transmit();
 }
 
 

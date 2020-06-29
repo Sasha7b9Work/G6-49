@@ -70,7 +70,7 @@ bool File::Handler(SimpleMessage *msg)
 {
     uint8 com = msg->TakeUINT8();
 
-    if (com == Command::FDrive_GetPictureDDS)
+    if (com == Command::FDrive_RequestPictureDDS)
     {
         num = msg->TakeUINT8();
 
@@ -94,18 +94,18 @@ static bool EqualsRequestPicture(Task *request, Task *answer)
     SimpleMessage *send = request->GetMessage();
     SimpleMessage *recv = answer->GetMessage();
 
-    uint8 com = Command::FDrive_GetPictureDDS;
+    uint8 com = Command::FDrive_RequestPictureDDS;
 
     return  (com == send->TakeUINT8()) &&
             (com == recv->TakeUINT8());
 }
 
 
-void File::Open(int n)
+void File::Open(int numberFile)
 {
     Close();
 
-    Message::FDrive::PictureDDS message(static_cast<uint8>(n));
+    Message::FDrive::RequestPictureDDS message(static_cast<uint8>(numberFile));
 
     Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
 

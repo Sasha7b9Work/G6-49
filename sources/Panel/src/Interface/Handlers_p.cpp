@@ -37,7 +37,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
     case Command::FDrive_RequestFileSize:
     case Command::FDrive_RequestFileString:
     case Command::FDrive_LoadFromExtStorage:
-    case Command::FDrive_GetPictureDDS:
+    case Command::FDrive_RequestPictureDDS:
         func = FDrive::Handler::Processing;
         break;
     }

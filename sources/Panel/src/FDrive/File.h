@@ -11,14 +11,18 @@ class File
 public:
     File();
     ~File();
+    
     // Открывает файл
-    void Open(int num);
+    void Open(int numberFile);
+    
     // Отображает содержимое
     void Draw(int x, int y);
+    
     // Закрывает файл и освобождает память
     void Close();
 
     static bool Handler(SimpleMessage *msg);
+    
     // Сохранить данные как данные формы
     static void SetDataToWave();
 };
