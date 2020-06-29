@@ -14,9 +14,11 @@
 // *IDN?
 static pCHAR FuncIDN(pCHAR);
 static void HintIDN(String *);
+
 // *RST
 static pCHAR FuncReset(pCHAR);
 static void HintReset(String *);
+
 // :HELP
 static pCHAR FuncHelp(pCHAR);
 static void HintHelp(String *);
@@ -24,39 +26,54 @@ static void HintHelp(String *);
 // :AMPLITUDE
 static pCHAR FuncAmplitude(pCHAR);
 static void HintAmplitude(String *);
+
 // :CHANNEL
 static pCHAR FuncChannel(pCHAR);
 static void HintChannel(String *);
+
 // :DURATION
 static pCHAR FuncDuration(pCHAR);
 static void HintDuration(String *);
+
 // :FORM
 static pCHAR FuncForm(pCHAR);
 static void HintForm(String *);
+
 // :FREQUENCY
 static pCHAR FuncFrequency(pCHAR);
 static void HintFrequency(String *);
+
 // :MODESTART
 static pCHAR FuncModeStart(pCHAR);
 static void HintModeStart(String *);
+
 // :NUMBERIMPULSE
 static pCHAR FuncNumberImpulse(pCHAR);
 static void HintNumberImpulse(String *);
+
 // :OFFSET
 static pCHAR FuncOffset(pCHAR);
 static void HintOffset(String *);
+
 // :PERIOD
 static pCHAR FuncPeriod(pCHAR);
 static void HintPeriod(String *);
+
 // :Phase
 static pCHAR FuncPhase(pCHAR);
 static void HintPhase(String *);
+
 // :PERIODPACKET
 static pCHAR FuncPeriodPacket(pCHAR);
 static void HintPeriodPacket(String *);
+
 // :POLARITY
 static pCHAR FuncPolarity(pCHAR);
 static void HintPolarity(String *);
+
+// :OUTPUT
+static pCHAR FuncOutput(pCHAR);
+static void HintOutput(String *);
 
 
 // Рекурсивная функция формирования сообщения подсказки
@@ -77,6 +94,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":MODESTART",     FuncModeStart,     "Set mode start of wave",           HintModeStart),
     SCPI_LEAF(":NUMBERIMPULSE", FuncNumberImpulse, "Set number of impulses in packet", HintNumberImpulse),
     SCPI_LEAF(":OFFSET",        FuncOffset,        "Set offset of wave",               HintOffset),
+    SCPI_LEAF(":OUTPUT",        FuncOutput,        "Enable/disable output",            HintOutput),
     SCPI_LEAF(":PERIODPACKET",  FuncPeriodPacket,  "Set packet following period",      HintPeriodPacket),
     SCPI_LEAF(":PERIOD",        FuncPeriod,        "Set period of wave",               HintPeriod),
     SCPI_LEAF(":PHASE",         FuncPhase,         "Set phase of wave",                HintPhase),
@@ -191,6 +209,35 @@ static void HintForm(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR const outputs[] =
+{
+    " OFF",
+    " ON",
+    ""
+};
+
+
+static void SetOutput(int i)
+{
+    PGenerator::EnableChannel(CURRENT_CHANNEL, i != 0);
+}
+
+
+static pCHAR FuncOutput(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(outputs[ENABLED_CH(CURRENT_CHANNEL)]));
+
+    SCPI_PROCESS_ARRAY(outputs, SetOutput(i));
+}
+
+
+static void HintOutput(String *message)
+{
+    SCPI::ProcessHint(message, outputs);
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pCHAR const modeStartNames[] =
 {
     " AUTO",
@@ -256,7 +303,7 @@ static pCHAR FuncFrequency(pCHAR buffer)
 
 static void HintFrequency(String *)
 {
-
+    SCPI::SendAnswer(":FREQUENCY [300e-6...10e6]");
 }
 
 

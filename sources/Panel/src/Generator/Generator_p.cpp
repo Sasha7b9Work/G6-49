@@ -20,6 +20,7 @@
 
 void PGenerator::EnableChannel(Chan::E ch, bool enable)
 {
+    ENABLED_CH(ch) = enable;
     Message::EnableChannel(static_cast<uint8>(ch), static_cast<uint8>(enable ? 1U : 0U)).Transmit();
 }
 

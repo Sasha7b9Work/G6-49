@@ -1,8 +1,11 @@
 - *idn?
 - *rst
 
-- :CHANNEL { A | B }
-- :CHANNEL?
+  :CHANNEL { A | B }
+  :CHANNEL?
+
+  :OUTPUT { ON | OFF }
+  :OUTPUT?
 
 - :FORM { SINE | SAW+ | SAW- | TRIANGLE | MEANDER | IMPULSE | PACKET | FREE }
 - :FORM?
