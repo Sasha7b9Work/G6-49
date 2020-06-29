@@ -397,5 +397,5 @@ void Amplifier::LogState()
     };
 
 
-    LOG_WRITE("en = %d, at = %s", isEnabled[Chan::A], att[attenuation[Chan::A]]);
+    LOG_WRITE("en = %d / %d, at = %s / %s", isEnabled[Chan::A], isEnabled[Chan::B], att[attenuation[Chan::A]], att[attenuation[Chan::B]]);
 }

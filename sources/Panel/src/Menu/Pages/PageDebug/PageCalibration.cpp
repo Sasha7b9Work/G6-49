@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "Interface/Messages_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -220,6 +221,13 @@ static bool FuncOnControlKeyPage(const Control control) //-V2009 //-V801
 
 static void OnEnter_Calibration(bool enter)
 {
+    if (enter)
+    {
+        LOG_WRITE(" ");
+        LOG_WRITE("вхожу");
+        Message::Debug().Transmit();
+    }
+
     if(enter)
     {
         TuneControls();
@@ -236,6 +244,12 @@ static void OnEnter_Calibration(bool enter)
         prevParameter = 255;
         prevPointerK = nullptr;
         prevK = 0;
+    }
+
+    if (!enter)
+    {
+        LOG_WRITE("выхожу");
+        Message::Debug().Transmit();
     }
 }
 

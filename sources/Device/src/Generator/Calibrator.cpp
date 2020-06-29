@@ -51,17 +51,14 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
 
     if (param != 0)
     {
-        Amplifier::TuneAndLock(ch, _range > 2, Attenuation::_0Db);
+        Amplifier::TuneAndLock(ch, _range > 2, Attenuation::_10Db);
     }
 
     SetAmplitude(ch, param != 0);       // Для калибровки смещения нужно установить нулевой уровень на выходе, но аттенюатор не трогать
 
     SetOffset(ch, param);
 
-    if (param != 0)
-    {
-        Amplifier::Unlock();
-    }
+    Amplifier::Unlock();
 
     inModeCalibration = false;
 }
