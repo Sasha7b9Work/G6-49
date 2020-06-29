@@ -70,13 +70,13 @@ public:
     
     // Возвращает коэффициент усиления в разах всего тракта, включая аттенюатор и усилитель. Усилитель даёт усиление 10 раз, за каждые 10 Дб нужно разделить на 3.16
     static double GetAmplification(Chan::E ch);
-    
-    // Заблокировать переключение
-    static void Block()   { isBlocked = true; };
-    
-    // Разблокировать переключение
-    static void Unblock() { isBlocked = false; };
-    
+
+    // Установить заданные настройки и заблокировать
+    static void TuneAndLock(Chan::E ch, bool enabled, Attenuation::E attenuation);
+
+    // Разблокировать
+    static void Unlock();
+   
     // Возвращает true, если на данном канале включён усилитель
     static bool IsEnabled(Chan::E ch) { return isEnabled[ch]; }
 
@@ -90,12 +90,11 @@ private:
     static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
 
     static Attenuation::E attenuation[Chan::Count];
-    
-    // Установленное в true значение означает, что усилитель заблокирован - никакие действия в Tune() выолняться не будут
-    static bool isBlocked;
-    
+  
     // true, если усилитель соотвествующего канала включён
     static bool isEnabled[Chan::Count];
+
+    static bool locked;
 };
 
 

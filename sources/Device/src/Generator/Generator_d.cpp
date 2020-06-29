@@ -10,8 +10,8 @@ Value SettingsGenerator::amplitude[Chan::Count] = { Value("10"), Value("10") };
 Value SettingsGenerator::frequency[Chan::Count] = { Value("1000"), Value("1000") };
 Value SettingsGenerator::offset[Chan::Count] = { Value("0"), Value("0") };
 Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
-bool Amplifier::isBlocked = false;
 bool Amplifier::isEnabled[Chan::Count] = { false, false };
+bool Amplifier::locked = false;
 
 
 struct Filtr
@@ -176,7 +176,7 @@ void DGenerator::SetAmplitude(Chan::E ch, Value ampl)
         FPGA::SetAmplitude();
     }
 
-    SetOffset(ch, SettingsGenerator::OffsetValue(ch));
+    //SetOffset(ch, SettingsGenerator::OffsetValue(ch));
 }
 
 
@@ -270,8 +270,27 @@ void Amplifier::Init()
 }
 
 
+void Amplifier::TuneAndLock(Chan::E ch, bool enabled, Attenuation::E attenuation)
+{
+    Enable(ch, enabled);
+    SetAttenuation(ch, attenuation);
+    locked = true;
+}
+
+
+void Amplifier::Unlock()
+{
+    locked = false;
+}
+
+
 void Amplifier::Tune(Chan::E ch)
 {
+    if (locked)
+    {
+        return;
+    }
+
     uint64 absAmplitude = SettingsGenerator::AmplitudeValue(ch).Abs();
 
     if (absAmplitude == 0)
@@ -280,13 +299,7 @@ void Amplifier::Tune(Chan::E ch)
 
         Enable(ch, true);
     }
-
-    if(isBlocked)
-    {
-        return;
-    }
-    
-    if(absAmplitude != 0)
+    else
     {
         double amplitude = SettingsGenerator::Amplitude(ch);
 

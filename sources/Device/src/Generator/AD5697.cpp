@@ -29,9 +29,7 @@ double AD5697::CalculateCodeOffset(Chan::E ch)
 
     double offset = SettingsGenerator::Offset(ch);
 
-    double max = (SettingsGenerator::Amplitude(ch) > 1.0 || 
-                  SettingsGenerator::AmplitudeValue(ch).ToUINT64() == 0)        // Это странное условие нужно для того, чтобы проверить максимальные смещения
-        ? 5.0 : 2.5;
+    double max = SettingsGenerator::Amplitude(ch) > 1.0 ? 5.0 : 2.5;
 
     double result = zero;
     
