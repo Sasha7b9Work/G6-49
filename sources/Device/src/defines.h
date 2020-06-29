@@ -17,6 +17,7 @@ typedef void(*pFuncVI)(int);
 inline void EmptyFuncVV() {};
 
 #define _GET_BIT(value, bit)        (((value) >> (bit)) & 0x01)
+#define _CLEAR_BIT(value, bit)      ((value) &= (~(1 << (bit))))
 
 #define _bitset(bits)                               \
   ((uint8)(                                         \
