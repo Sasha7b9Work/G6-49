@@ -145,7 +145,7 @@ int Indicator::DrawDouble(int x, int y, int width) const
 
     int end = DrawDouble(x, y, true);
 
-    x += (width - (end - x)) / 2;
+    x += (width - (end - x)) / 2 - 10;
 
     return DrawDouble(x, y, false);
 }
