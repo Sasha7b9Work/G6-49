@@ -221,14 +221,14 @@ namespace Message
         };
 
 
-        class RequestPictureDDSfromDrive : public SimpleMessage
+        class RequestPictureDDSfromFile : public SimpleMessage
         {
         public:
             // Запрос картинки с изображением из файла numberFile
-            RequestPictureDDSfromDrive(uint8 numberFile);
+            RequestPictureDDSfromFile(uint8 numberFile);
 
             // Ответ
-            RequestPictureDDSfromDrive(uint8 numberFile, uint8 *data);
+            RequestPictureDDSfromFile(uint8 numberFile, uint8 *data);
         };
     }
 

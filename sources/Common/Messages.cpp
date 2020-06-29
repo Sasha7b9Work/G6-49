@@ -453,14 +453,14 @@ Message::FDrive::LoadDDSfromFile::LoadDDSfromFile(uint8 ch, uint8 numFile, char 
 }
 
 
-Message::FDrive::RequestPictureDDSfromDrive::RequestPictureDDSfromDrive(uint8 numFile, uint8 *data) : SimpleMessage(242, Command::FDrive_RequestPictureDDS)
+Message::FDrive::RequestPictureDDSfromFile::RequestPictureDDSfromFile(uint8 numFile, uint8 *data) : SimpleMessage(242, Command::FDrive_RequestPictureDDSfromFile)
 {
     PutUINT8(numFile);
     PutData(data, 240);
 }
 
 
-Message::FDrive::RequestPictureDDSfromDrive::RequestPictureDDSfromDrive(uint8 numFile) : SimpleMessage(2, Command::FDrive_RequestPictureDDS)
+Message::FDrive::RequestPictureDDSfromFile::RequestPictureDDSfromFile(uint8 numFile) : SimpleMessage(2, Command::FDrive_RequestPictureDDSfromFile)
 {
     PutUINT8(numFile);
 }
