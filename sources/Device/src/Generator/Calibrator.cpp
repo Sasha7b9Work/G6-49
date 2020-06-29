@@ -27,7 +27,11 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
         range[ch] < 3 ? -2.5F : -5.0F
     };
 
+    AD5697::EnabledCalibrateMode(true);
+
     DGenerator::SetOffset(ch, Value(offset[param]));
+
+    AD5697::EnabledCalibrateMode(false);
 }
 
 

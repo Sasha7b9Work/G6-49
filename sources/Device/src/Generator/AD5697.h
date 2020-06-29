@@ -15,6 +15,9 @@ struct AD5697
 
     static void SetFreqHysteresys(double hyst);
 
+    // Включает/отключает режим калибровки
+    static void EnabledCalibrateMode(bool enable) { calibrateMode = enable; };
+
 private:
     static void Reset(Chan::E ch);
 
@@ -25,4 +28,6 @@ private:
 
     // Рассчитать код смещения для смещения offset
     static double CalculateCodeOffset(Chan::E ch);
+
+    static bool calibrateMode;
 };

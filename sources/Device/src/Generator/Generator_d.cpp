@@ -270,10 +270,10 @@ void Amplifier::Init()
 }
 
 
-void Amplifier::TuneAndLock(Chan::E ch, bool enabled, Attenuation::E attenuation)
+void Amplifier::TuneAndLock(Chan::E ch, bool enabled, Attenuation::E att)
 {
     Enable(ch, enabled);
-    SetAttenuation(ch, attenuation);
+    SetAttenuation(ch, att);
     locked = true;
 }
 

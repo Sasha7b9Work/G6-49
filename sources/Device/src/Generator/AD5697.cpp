@@ -14,6 +14,9 @@
 #endif
 
 
+bool AD5697::calibrateMode = false;
+
+
 void AD5697::Init()
 {
     Reset(Chan::A);
@@ -29,7 +32,7 @@ double AD5697::CalculateCodeOffset(Chan::E ch)
 
     double offset = SettingsGenerator::Offset(ch);
 
-    double max = SettingsGenerator::Amplitude(ch) > 1.0 ? 5.0 : 2.5;
+    double max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0 : 2.5;
 
     double result = zero;
     
@@ -62,7 +65,7 @@ void AD5697::SetOffset(Chan::E ch)
 {
     double code = CalculateCodeOffset(ch);
 
-    //LOG_WRITE("offset code %d", static_cast<uint16>(code));
+//    LOG_WRITE("offset code %d", static_cast<uint16>(code));
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
