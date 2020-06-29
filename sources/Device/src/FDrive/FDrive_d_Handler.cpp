@@ -26,7 +26,7 @@ static void GetNumDirsAndFiles();
 static void RequestFile();
 static void RequestFileSize();
 // Загрузить сигнал с флешки
-static void LoadFromExtStorage();
+static void LoadDDSfromFile();
 static void GetPictureDDS();
 // Трансформировать точки в пригодный для записи в ПЛИС вид
 static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
@@ -78,7 +78,7 @@ void DDrive::Handler::Processing(SimpleMessage *message)
         func = RequestFileSize;
         break;
     case Command::FDrive_LoadDDSfromFile:
-        func = LoadFromExtStorage;
+        func = LoadDDSfromFile;
         break;
     case Command::FDrive_RequestPictureDDSfromFile:
         func = GetPictureDDS;
@@ -128,7 +128,7 @@ static void RequestFileSize()
 }
 
 
-static void LoadFromExtStorage()
+static void LoadDDSfromFile()
 {
     char fullName[255];
     Chan ch(msg->TakeUINT8());
