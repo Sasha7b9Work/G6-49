@@ -29,7 +29,7 @@ static void RequestFileSize();
 static void LoadDDSfromFile();
 static void GetPictureDDS();
 // Трансформировать точки в пригодный для записи в ПЛИС вид
-static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2]);
+static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POINTS * 2]);
 // Заполнить массив picture данными для отрисовки сигнала на экране
 static void FillPicture(uint8 *picture, uint size, float values[4096]);
 static void Normalize(float d[4096]);
@@ -333,26 +333,26 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
 }
 
 
-static void TransformDataToCode(float d[4096], uint8 code[FPGA::NUM_POINTS * 2])
+static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POINTS * 2])
 {
-    Normalize(d);
+    Normalize(dataIn);
 
     float max = static_cast<float>(0x1fff);
 
     for (int i = 0; i < 4096; i++)
     {
-        uint16 c = static_cast<uint16>(std::fabsf(d[i]) * max);
+        uint16 c = static_cast<uint16>(std::fabsf(dataIn[i]) * max);
 
-        if (Math::Sign(d[i]) == -1)
+        if (Math::Sign(dataIn[i]) == -1)
         {
             SetBit(c, 13);
         }
 
-        code[i * 2]     = static_cast<uint8>(c);
-        code[i * 2 + 1] = static_cast<uint8>(c);
+        codeOut[i * 2]     = static_cast<uint8>(c);
+        codeOut[i * 2 + 1] = static_cast<uint8>(c);
 
-        code[i * 2 + FPGA::NUM_POINTS]     = static_cast<uint8>(c >> 8);
-        code[i * 2 + FPGA::NUM_POINTS + 1] = static_cast<uint8>(c >> 8);
+        codeOut[i * 2 + FPGA::NUM_POINTS]     = static_cast<uint8>(c >> 8);
+        codeOut[i * 2 + FPGA::NUM_POINTS + 1] = static_cast<uint8>(c >> 8);
     }
 }
 
