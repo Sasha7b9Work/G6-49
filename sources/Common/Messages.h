@@ -168,15 +168,6 @@ namespace Message
 
     namespace FDrive
     {
-
-        // Загрузить выбранный файл в FPGA
-        class LoadDDSfromFile : public SimpleMessage
-        {
-        public:
-            LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory);
-        };
-
-
         // Запрос имени файла
         class FileName : public SimpleMessage
         {
@@ -228,7 +219,34 @@ namespace Message
             RequestPictureDDSfromFile(uint8 numberFile);
 
             // Ответ
-            RequestPictureDDSfromFile(uint8 numberFile, uint8 *data);
+            RequestPictureDDSfromFile(uint8 numberFile, uint8 data[240]);
+        };
+
+        // Загрузить выбранный файл в FPGA
+        class LoadDDSfromFile : public SimpleMessage
+        {
+        public:
+            LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory);
+        };
+    }
+
+
+    namespace Storage
+    {
+        class RequestPictureDDS : public SimpleMessage
+        {
+        public:
+            // Запрос изображения произвольного сигнала из ППЗУ
+            RequestPictureDDS();
+
+            // Ответ
+            RequestPictureDDS(uint8 data[240]);
+        };
+
+        class LoadDDS : public SimpleMessage
+        {
+        public:
+            LoadDDS();
         };
     }
 

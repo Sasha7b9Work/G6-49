@@ -453,10 +453,9 @@ Message::FDrive::LoadDDSfromFile::LoadDDSfromFile(uint8 ch, uint8 numFile, char 
 }
 
 
-Message::FDrive::RequestPictureDDSfromFile::RequestPictureDDSfromFile(uint8 numFile, uint8 *data) : SimpleMessage(242, Command::FDrive_RequestPictureDDSfromFile)
+Message::Storage::LoadDDS::LoadDDS() : SimpleMessage(1, Command::LoadDDSfromStorage)
 {
-    PutUINT8(numFile);
-    PutData(data, 240);
+
 }
 
 
@@ -464,6 +463,25 @@ Message::FDrive::RequestPictureDDSfromFile::RequestPictureDDSfromFile(uint8 numF
 {
     PutUINT8(numFile);
 }
+
+
+Message::FDrive::RequestPictureDDSfromFile::RequestPictureDDSfromFile(uint8 numFile, uint8 data[240]) : SimpleMessage(242, Command::FDrive_RequestPictureDDSfromFile)
+{
+    PutUINT8(numFile);
+    PutData(data, 240);
+}
+
+
+Message::Storage::RequestPictureDDS::RequestPictureDDS() : SimpleMessage(1, Command::RequestPictureDDSfromStorage)
+{
+}
+
+
+Message::Storage::RequestPictureDDS::RequestPictureDDS(uint8 data[240]) : SimpleMessage(242, Command::RequestPictureDDSfromStorage)
+{
+    PutData(data, 240);
+}
+
 
 Message::SCPI::Data::Data(uint8 *data, int length) : SimpleMessage()
 {
