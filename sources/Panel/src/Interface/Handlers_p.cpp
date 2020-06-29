@@ -9,6 +9,12 @@
 #include "SCPI/SCPI.h"
 
 
+static bool Request(SimpleMessage *);
+static bool FreqMeasure(SimpleMessage *);
+static bool Log(SimpleMessage *);
+static bool RequestPictureDDSfromStorage(SimpleMessage *);
+
+
 static bool E(SimpleMessage *)
 {
     return false;
@@ -25,10 +31,11 @@ bool PHandlers::Processing(SimpleMessage *msg)
 
     switch(command)
     {
-    case Command::RequestData: func = PHandlers::Request;        break;
-    case Command::FreqMeasure: func = PHandlers::FreqMeasure;    break;
-    case Command::Log:         func = PHandlers::Log;            break;
-    case Command::SCPI_Data:   func = SCPI::Handler::Processing; break;
+    case Command::RequestData:                  func = Request;                      break;
+    case Command::FreqMeasure:                  func = FreqMeasure;                  break;
+    case Command::Log:                          func = Log;                          break;
+    case Command::SCPI_Data:                    func = SCPI::Handler::Processing;    break;
+    case Command::RequestPictureDDSfromStorage: func = RequestPictureDDSfromStorage; break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
@@ -55,21 +62,35 @@ bool PHandlers::Processing(SimpleMessage *msg)
 }
 
 
-bool PHandlers::Request(SimpleMessage *)
+static bool Request(SimpleMessage *)
 {
     return false;
 }
 
 
-bool PHandlers::FreqMeasure(SimpleMessage *msg)
+static bool FreqMeasure(SimpleMessage *msg)
 {
     PFreqMeter::SetMeasure(msg->TakeUINT());
     return true;
 }
 
 
-bool PHandlers::Log(SimpleMessage *msg)
+static bool Log(SimpleMessage *msg)
 {
     Console::AddString(msg->String(1));
+    return true;
+}
+
+
+static bool RequestPictureDDSfromStorage(SimpleMessage *message)
+{
+    Chan::E ch = static_cast<Chan::E>(message->TakeUINT8());
+
+    uint8 picture[240];
+
+    message->TakeRemainigData(picture);
+
+    Form::SetFormFlash(ch, picture);
+
     return true;
 }

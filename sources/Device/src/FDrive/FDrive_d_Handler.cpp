@@ -25,11 +25,14 @@ static SimpleMessage *msg = nullptr;
 static void GetNumDirsAndFiles();
 static void RequestFile();
 static void RequestFileSize();
+
 // Загрузить сигнал с флешки
 static void LoadDDSfromFile();
 static void GetPictureDDS();
+
 // Трансформировать точки в пригодный для записи в ПЛИС вид
 static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POINTS * 2]);
+
 // Заполнить массив picture данными для отрисовки сигнала на экране
 static void FillPicture(uint8 *picture, uint size, float values[4096]);
 static void Normalize(float d[4096]);

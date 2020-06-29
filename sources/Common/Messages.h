@@ -237,10 +237,10 @@ namespace Message
         {
         public:
             // Запрос изображения произвольного сигнала из ППЗУ
-            RequestPictureDDS();
+            RequestPictureDDS(uint8 ch);
 
             // Ответ
-            RequestPictureDDS(uint8 data[240]);
+            RequestPictureDDS(uint8 ch, uint8 data[240]);
         };
 
         class LoadDDS : public SimpleMessage

@@ -54,9 +54,9 @@ typedef void (*pFuncVB)(bool);
 #define ERROR_VALUE_UINT8   255
 #define ERROR_STRING_VALUE  "--.--"
 
-#define GetBit(value, bit) (((value) >> (bit)) & 0x01)
-#define SetBit(value, bit) ((value) |= (1 << (bit)))
-#define ClearBit(value, bit) ((value) &= (~(1 << (bit))))
+//#define GetBit(value, bit) (((value) >> (bit)) & 0x01)
+//#define SetBit(value, bit) ((value) |= (1 << (bit)))
+//#define ClearBit(value, bit) ((value) &= (~(1 << (bit))))
 
 #define ENABLED_RU  "Вкл"
 #define DISABLED_RU "Откл"

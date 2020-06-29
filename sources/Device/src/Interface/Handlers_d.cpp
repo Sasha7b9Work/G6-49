@@ -486,9 +486,32 @@ static void Debug(SimpleMessage *)
 }
 
 
-static void RequestPictureDDSfromStorage(SimpleMessage *)
+static void RequestPictureDDSfromStorage(SimpleMessage *message)
 {
+    Chan::E ch = static_cast<Chan::E>(message->TakeUINT8());
 
+    uint16 *code = HAL_EEPROM::Signal::Get(ch);
+
+    float data[FPGA::NUM_POINTS];
+
+    FPGA::TransformCodeToData(reinterpret_cast<uint8 *>(code), data);
+
+    const int size = 240;
+
+    float aveValue = 127.0F;
+
+    float step = FPGA::NUM_POINTS / static_cast<float>(size);
+
+    uint8 picture[size];
+
+    for (uint i = 0; i < size; i++)
+    {
+        float val = data[static_cast<int>(static_cast<float>(i) * step)];
+
+        picture[i] = static_cast<uint8>(aveValue + val * 125.0F);
+    }
+
+    Message::Storage::RequestPictureDDS(static_cast<uint8>(ch), picture).Transmit();
 }
 
 

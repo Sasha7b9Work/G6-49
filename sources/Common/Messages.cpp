@@ -472,13 +472,15 @@ Message::FDrive::RequestPictureDDSfromFile::RequestPictureDDSfromFile(uint8 numF
 }
 
 
-Message::Storage::RequestPictureDDS::RequestPictureDDS() : SimpleMessage(1, Command::RequestPictureDDSfromStorage)
+Message::Storage::RequestPictureDDS::RequestPictureDDS(uint8 ch) : SimpleMessage(2, Command::RequestPictureDDSfromStorage)
 {
+    PutUINT8(ch);
 }
 
 
-Message::Storage::RequestPictureDDS::RequestPictureDDS(uint8 data[240]) : SimpleMessage(242, Command::RequestPictureDDSfromStorage)
+Message::Storage::RequestPictureDDS::RequestPictureDDS(uint8 ch, uint8 data[240]) : SimpleMessage(242, Command::RequestPictureDDSfromStorage)
 {
+    PutUINT8(ch);
     PutData(data, 240);
 }
 

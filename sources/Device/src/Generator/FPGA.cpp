@@ -501,6 +501,25 @@ void FPGA::SaveExtSignal(Chan::E ch, uint8 *data)
     HAL_EEPROM::Signal::Save(ch, reinterpret_cast<uint16 *>(data));
 }
 
+
+void FPGA::TransformCodeToData(uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut[FPGA::NUM_POINTS])
+{
+    for (int i = 0; i < FPGA::NUM_POINTS; i++)
+    {
+        uint16 code = static_cast<uint16>(codeIn[i] + (codeIn[i + FPGA::NUM_POINTS] << 8));
+
+        float data = 0x1fff / static_cast<float>(code);
+
+        if (_GET_BIT(code, 13))
+        {
+            data = -data;
+        }
+
+        dataOut[i] = data;
+    }
+}
+
+
 #ifdef WIN32
 #pragma warning(pop)
 #endif

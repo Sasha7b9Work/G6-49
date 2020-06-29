@@ -45,8 +45,7 @@ static void WriteData(uint dest, void *src, uint size);
 static uint GetSector(uint address);
 // ¬озвращает размер сектора с данным начальным адресом
 static uint SizeSector(uint address);
-// ¬озвращает адрес EEPROM, куда надо сохран€ть данные этого канала
-static uint AddressForData(Chan::E ch);
+
 
 
 
@@ -195,7 +194,7 @@ void HAL_EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS
     uint sizeData = FPGA::NUM_POINTS * sizeof(data[0]);
 
     EraseSector(SECTOR_TEMP_10);                                                        // ќбнул€ем сектор дл€ временных данных дл€ временного сохранени€ тех данных, которые не нужно перезаписывать
-    WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Count);  // —охран€ем существующие данные //-V566
+    WriteData(SECTOR_TEMP_10, (void *)SECTOR_SIGNAL_FPGA_11, sizeData * Chan::Count);   // —охран€ем существующие данные //-V566
     EraseSector(SECTOR_SIGNAL_FPGA_11);                                                 // —тираем сектор дл€ хранени€ данных
     WriteData(AddressForData(ch), data, sizeData);                                      // «аписываем данные канала
 
@@ -212,12 +211,12 @@ void HAL_EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS
 }
 
 
-static uint AddressForData(Chan::E ch)
+uint HAL_EEPROM::Signal::AddressForData(Chan::E ch)
 {
     uint result = SECTOR_SIGNAL_FPGA_11;
     if (ch == Chan::B)
     {
-        result += FPGA::NUM_POINTS * sizeof(float);
+        result += FPGA::NUM_POINTS * sizeof(uint16);
     }
 
     return result;

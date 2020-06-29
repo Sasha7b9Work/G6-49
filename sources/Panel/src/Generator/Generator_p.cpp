@@ -240,7 +240,7 @@ void PGenerator::SetParameter(Parameter *parameter)
 }
 
 
-void PGenerator::LoadPictureDDSfromStorage()
+void PGenerator::LoadPictureDDSfromStorage(Chan::E ch)
 {
-    Message::Storage::RequestPictureDDS().Transmit();
+    Message::Storage::RequestPictureDDS(static_cast<uint8>(ch)).Transmit();
 }

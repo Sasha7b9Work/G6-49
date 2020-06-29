@@ -46,7 +46,7 @@ struct PGenerator
     static void LoadStartMode(Chan::E ch, int mode);
 
     // Загружает изображение произвольного сигнала, хранящееся в ППЗУ
-    static void LoadPictureDDSfromStorage();
+    static void LoadPictureDDSfromStorage(Chan::E ch);
 
 private:
 
