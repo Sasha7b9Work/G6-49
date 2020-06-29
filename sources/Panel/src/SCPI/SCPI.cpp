@@ -309,11 +309,16 @@ void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
     }
     else
     {
+        uint8 lang = LANGUAGE;
+        lang = 1;
+
         String units;
         String answer = param->ToString(units);
         answer.Append(" ");
         answer.Append(units.c_str());
 
         SCPI::SendAnswer(answer.c_str());
+
+        LANGUAGE = lang;
     }
 }

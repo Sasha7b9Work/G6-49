@@ -316,7 +316,7 @@ static pCHAR FuncAmplitude(pCHAR buffer)
 
 static void HintAmplitude(String *)
 {
-
+    SCPI::SendAnswer(":AMPLITUDE [0.000...10.000]");
 }
 
 
