@@ -169,7 +169,7 @@ static void GetPictureDDS()
         }
     }
 
-    Message::FDrive::RequestPictureDDS(static_cast<uint8>(numFile), data).Transmit();
+    Message::FDrive::RequestPictureDDSfromDrive(static_cast<uint8>(numFile), data).Transmit();
 }
 
 

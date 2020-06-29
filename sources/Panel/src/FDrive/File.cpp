@@ -105,7 +105,7 @@ void File::Open(int numberFile)
 {
     Close();
 
-    Message::FDrive::RequestPictureDDS message(static_cast<uint8>(numberFile));
+    Message::FDrive::RequestPictureDDSfromDrive message(static_cast<uint8>(numberFile));
 
     Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
 
