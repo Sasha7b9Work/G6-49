@@ -121,10 +121,5 @@ static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length) //-V2009 //-V2558
 
     USBD_CDC_ReceivePacket(reinterpret_cast<USBD_HandleTypeDef *>(DVCP::handle));
 
-    for(uint i = 0; i < *length; i++)
-    {
-        LOG_WRITE("%c", static_cast<char>(*(buffer + i)));
-    }
-
-    return (USBD_OK);
+    return USBD_OK;
 }

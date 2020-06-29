@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "common/Messages.h"
 #include "VCP_p.h"
 #include "Generator/Signals.h"
 #include "SCPI/HeadSCPI.h"
@@ -240,8 +241,12 @@ void SCPI::ProcessHint(String *message, pString names[]) //-V2504
 }
 
 
-bool SCPI::Handler::Processing(SimpleMessage *)
+bool SCPI::Handler::Processing(SimpleMessage *message)
 {
+    uint size = message->TakeUINT();
+
+    SCPI::AppendNewData(reinterpret_cast<pCHAR>(message->TakeData(5)), size);
+
     return true;
 }
 

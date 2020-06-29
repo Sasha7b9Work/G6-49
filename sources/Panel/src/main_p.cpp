@@ -6,6 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
+#include "SCPI/SCPI.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 
@@ -35,5 +36,6 @@ int main()
         Menu::Update();
         Display::Update();
         PInterface::Update();
+        SCPI::Update();
     }
 }
