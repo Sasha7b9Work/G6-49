@@ -7,12 +7,16 @@ struct PFreqMeter
     static void LoadSettings();
 
     static void Draw();
+    
     // Установить выводимое значение частоты
     static void SetMeasure(uint value);
+    
     // Этот метод вызывают для того, чтобу указать, что показания индикатора неактивны.
     static void SetInactive();
+    
     // Заслать в ПЛИС значение уровня
     static void LoadLevel();
+
     // Заслать в ПЛИС значение гистерезиса
     static void LoadHysteresis();
 

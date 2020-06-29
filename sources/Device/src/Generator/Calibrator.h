@@ -24,6 +24,9 @@ struct Calibrator
     // Возвращает калбировочный коэффициент смещения для +5В
     static double GetOffsetK_Positive(Chan::E ch);
     
+    // Установка калибровочного коэффицинета уровня синхронизации частотомера
+    static void SetFreqMeterK_Trig(int16 k);
+
     // Возвращает калибровочный коэффициент уровня синхронизации частотомера
     static float GetFreqMeterK_Trig();
 

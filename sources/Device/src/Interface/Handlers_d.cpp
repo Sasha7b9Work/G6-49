@@ -70,6 +70,8 @@ static void CalibrationSet(SimpleMessage *);
 
 static void Debug(SimpleMessage *);
 
+static void SetFreqMeterTrigK(SimpleMessage *);
+
 
 void DHandlers::Processing(SimpleMessage *msg)
 {
@@ -113,6 +115,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::CalibrationSet:          func = CalibrationSet;            break;
     case Command::SCPI_Data:               func = DVCP::Handler::Processing; break;
     case Command::Debug:                   func = Debug;                     break;
+    case Command::SetFreqMeterTrigK:       func = SetFreqMeterTrigK;         break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
@@ -349,6 +352,14 @@ static void CalibrationSet(SimpleMessage *msg)
     int16 k = msg->TakeINT16();
     
     Calibrator::SetK(channel, signal, range, param, k);
+}
+
+
+static void SetFreqMeterTrigK(SimpleMessage *msg)
+{
+    int16 k = msg->TakeINT16();
+
+    Calibrator::SetFreqMeterK_Trig(k);
 }
 
 

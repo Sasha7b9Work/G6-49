@@ -317,6 +317,12 @@ Message::Debug::Debug() : SimpleMessage(1, Command::Debug)
 }
 
 
+Message::SetFreqMeterTrigK::SetFreqMeterTrigK(int16 k) : SimpleMessage(3, Command::SetFreqMeterTrigK)
+{
+    PutINT16(k);
+}
+
+
 Message::Set::FormWave::FormWave(uint8 ch, uint8 form) : SimpleMessage(3, Command::SetFormWave)
 {
     PutUINT8(ch);

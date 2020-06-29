@@ -159,6 +159,13 @@ namespace Message
     };
 
 
+    class SetFreqMeterTrigK : public SimpleMessage
+    {
+    public:
+        SetFreqMeterTrigK(int16 k);
+    };
+
+
     namespace FDrive
     {
 

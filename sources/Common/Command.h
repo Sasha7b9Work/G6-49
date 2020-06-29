@@ -94,6 +94,7 @@ struct Command
             AnswerPortionUpgradePanel,      // Ответ на запрос порции прошивки Panel
 
             Debug,
+            SetFreqMeterTrigK,              // Установка калибровочного коээфициента для уровня синхронизации частотомера
             Count
     } value;
     Command(E v) : value(v) {};

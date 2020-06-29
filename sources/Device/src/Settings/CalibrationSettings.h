@@ -21,12 +21,17 @@ struct CalibrationSettings
         {
             int16 cal[NUM_CHAN][NUM_SIGNALS][NUM_RANGES][NUM_PARAMETERS];
         };
+
+        int16 kFreqMeterTrig;       // Калибровочный коэффициент уровня синхронизации частотомера
+
         uint8 unused[256];
     };
     
     CalibrationSettings& operator =(const CalibrationSettings &);
 
     static int16 *GetK(uint8 channel, uint8 signal, uint8 range, uint8 parameter);
+
+    static int16 *GetFreqMeterK();
 };
 
 

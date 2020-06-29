@@ -1,3 +1,4 @@
+#include "common/Messages.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Display/Painter.h"
@@ -598,13 +599,30 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     Page::Registers, &pDebug, Item::FuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 
+static int16 k = 0;
 
-DEF_PAGE_8( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641
+
+static void OnChange_FreqMeterK()
+{
+    Message::SetFreqMeterTrigK(k).Transmit();
+    PFreqMeter::LoadLevel();
+}
+
+
+DEF_GOVERNOR(gFreqMeterK,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
+    "Ур синхр", "Trig lev",
+    "Калибровочный коэффициент уровня синхронизации частотомера", "Frequency meter calibration factor",
+    k, -150, 150, pDebug, Item::FuncActive, OnChange_FreqMeterK, EmptyFuncVV, 0
+)
+
+
+DEF_PAGE_9( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641
     "ОТЛАДКА", "DEBUG",   //-V641
     "", "",
     PageDebug::Calibartion::self,
     &pRegisters,                                // ОТЛАДКА - Регистры
     PageDebug::SubRange::self,
+    &gFreqMeterK,
     PageDebug::Colors::self,
     &cConsole,                                  // ОТЛАДКА - Консоль
     &cStatistics,                               // ОТЛАДКА - Статистика

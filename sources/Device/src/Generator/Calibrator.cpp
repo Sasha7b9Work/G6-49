@@ -157,5 +157,13 @@ double Calibrator::GetOffsetK_Positive(Chan::E ch)
 
 float Calibrator::GetFreqMeterK_Trig()
 {
-    return 0.0F;
+    float step = 4096.0F / 200.0F;
+
+    return *setCal.GetFreqMeterK() * step;
+}
+
+
+void Calibrator::SetFreqMeterK_Trig(int16 k)
+{
+    *setCal.GetFreqMeterK() = k;
 }

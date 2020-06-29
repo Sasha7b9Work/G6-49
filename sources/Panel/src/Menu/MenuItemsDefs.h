@@ -119,7 +119,7 @@ static Item * items##name[] = {                                                 
 const PageBase name = { TypeItem::Page, 8, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,     \
     items##name, funcPress, funcDraw, funcOnKey};
 
-#define DEF_PAGE_9(name, title, hint,                                                                                                       \
+#define DEF_PAGE_9(name, titleRU, hintRU, titleEN, hintEN,                                                                                  \
     item1, item2, item3, item4, item5, item6, item7, item8, item9, namePage, keeper, funcActive, funcPress, funcOnKey, funcDraw)            \
 static Item * items##name[] = {                                                                                                             \
     (Item *)reinterpret_cast<const Item *>(item1),                                                                                          \
@@ -131,7 +131,7 @@ static Item * items##name[] = {                                                 
     (Item *)reinterpret_cast<const Item *>(item7),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item8),                                                                                          \
     (Item *)reinterpret_cast<const Item *>(item9)};                                                                                         \
-const PageBase name = { TypeItem::Page, 9, false, namePage, (const PageBase *)keeper, funcActive, {title, hint},                            \
+const PageBase name = { TypeItem::Page, 9, false, namePage, (const PageBase *)keeper, {titleRU, hintRU}, {titleEN, hintEN}, funcActive,     \
     items##name, funcPress, funcDraw, funcOnKey};
 
 #define DEF_PAGE_10(name, titleRU, titleEN, hintRU, hintEN,                                                                                 \
