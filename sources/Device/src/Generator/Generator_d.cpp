@@ -293,7 +293,7 @@ void Amplifier::Tune(Chan::E ch)
 
     if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
     {
-        if (SettingsGenerator::Offset(ch) <= 2.5)
+        if (std::fabs(SettingsGenerator::Offset(ch)) <= 2.5)
         {
             SetAttenuation(ch, Attenuation::_20Db);
             Enable(ch, false);

@@ -1,5 +1,4 @@
 #include "defines.h"
-//#include "Log.h"
 #include "common/Command.h"
 #include "Generator/AD5697.h"
 #include "Generator/Calibrator.h"
@@ -7,6 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
+#include <cmath>
 
 #ifdef WIN32
 #pragma warning(push)
@@ -34,7 +34,7 @@ double AD5697::CalculateCodeOffset(Chan::E ch)
 
     double max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0 : 2.5;
 
-    if (!calibrateMode && SettingsGenerator::AmplitudeValue(ch).Abs() == 0 && offset > 2.5)
+    if (!calibrateMode && SettingsGenerator::AmplitudeValue(ch).Abs() == 0 && std::fabs(offset) > 2.5)
     {
         max = 5.0;
     }

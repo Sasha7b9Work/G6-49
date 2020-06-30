@@ -2,6 +2,7 @@
 #include "Generator/Calibrator.h"
 #include "Generator/Generator_d.h"
 #include "Settings/CalibrationSettings.h"
+#include <cmath>
 
 
 bool Calibrator::inModeCalibration = false;
@@ -91,6 +92,11 @@ uint8 Calibrator::CalculateRange(Chan::E ch)
     if(inModeCalibration)
     {
         return range[ch];
+    }
+
+    if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
+    {
+        return std::fabs(SettingsGenerator::Offset(ch)) < 2.5 ? 0U : 3U;
     }
 
     double amplitude = SettingsGenerator::Amplitude(ch);
