@@ -436,8 +436,6 @@ Value ParameterOffset::GetMax()
     Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
 
     Value offset = form->FindParameter(ParameterDoubleType::Offset)->GetValue();
-    offset.SetSign(1);
-    offset.Mul(2);
 
     Value result = max;
 
@@ -450,7 +448,9 @@ Value ParameterOffset::GetMax()
         result.Div(2);
     }
 
-    result.Sub(offset);
+    amplitude.Div(2);
+
+    result.Sub(amplitude);
 
     return result;
 }
