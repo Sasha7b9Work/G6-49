@@ -32,11 +32,15 @@ double AD5697::CalculateCodeOffset(Chan::E ch)
 
     double offset = SettingsGenerator::Offset(ch);
 
-    double max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0 : 2.5;
+    double max = 5.0;
 
     if (!calibrateMode && SettingsGenerator::AmplitudeValue(ch).Abs() == 0 && std::fabs(offset) > 2.5)
     {
         max = 5.0;
+    }
+    else
+    {
+        max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0 : 2.5;
     }
 
     double result = zero;
