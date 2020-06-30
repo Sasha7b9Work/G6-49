@@ -28,11 +28,7 @@ void Calibrator::SetOffset(Chan::E ch, uint8 param)
         range[ch] < 3 ? -2.5F : -5.0F
     };
 
-    AD5697::EnabledCalibrateMode(true);
-
     DGenerator::SetOffset(ch, Value(offset[param]));
-
-    AD5697::EnabledCalibrateMode(false);
 }
 
 
@@ -55,9 +51,13 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
         Amplifier::TuneAndLock(ch, _range > 2, Attenuation::_10Db);
     }
 
+    AD5697::EnabledCalibrateMode(true);
+
     SetAmplitude(ch, param != 0);       // Для калибровки смещения нужно установить нулевой уровень на выходе, но аттенюатор не трогать
 
     SetOffset(ch, param);
+
+    AD5697::EnabledCalibrateMode(false);
 
     Amplifier::Unlock();
 

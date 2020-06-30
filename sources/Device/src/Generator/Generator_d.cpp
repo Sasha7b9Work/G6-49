@@ -176,7 +176,7 @@ void DGenerator::SetAmplitude(Chan::E ch, Value ampl)
         FPGA::SetAmplitude();
     }
 
-    //SetOffset(ch, SettingsGenerator::OffsetValue(ch));
+    SetOffset(ch, SettingsGenerator::OffsetValue(ch));
 }
 
 
@@ -400,7 +400,6 @@ void Amplifier::LogState()
         "20 Db",
         "30 Db"
     };
-
 
     LOG_WRITE("en = %d / %d, at = %s / %s", isEnabled[Chan::A], isEnabled[Chan::B], att[attenuation[Chan::A]], att[attenuation[Chan::B]]);
 }
