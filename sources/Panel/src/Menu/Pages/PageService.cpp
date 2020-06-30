@@ -56,8 +56,8 @@ DEF_PAGE_4_VAR(pService,                                                        
     &cLanguage,
     &Item::emptyLight,
     &Item::emptyLight,
-    &Item::emptyLight,
-    //PageDebug::self,
+    //&Item::emptyLight,
+    PageDebug::self,
     Page::Service, reinterpret_cast<PageBase *>(PageMain::self), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 

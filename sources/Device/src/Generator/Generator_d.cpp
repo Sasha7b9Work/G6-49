@@ -291,41 +291,46 @@ void Amplifier::Tune(Chan::E ch)
         return;
     }
 
-    uint64 absAmplitude = SettingsGenerator::AmplitudeValue(ch).Abs();
-
-    if (absAmplitude == 0)
+    if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
     {
-        SetAttenuation(ch, Attenuation::_10Db);
-
-        Enable(ch, true);
+        if (SettingsGenerator::Offset(ch) <= 2.5)
+        {
+            SetAttenuation(ch, Attenuation::_20Db);
+            Enable(ch, false);
+        }
+        else
+        {
+            SetAttenuation(ch, Attenuation::_10Db);
+            Enable(ch, true);
+        }
     }
     else
     {
         double amplitude = SettingsGenerator::Amplitude(ch);
 
-        if (amplitude > Attenuation(Attenuation::_10Db).Units())                     // 1 диапазон   3.16
+        if (amplitude > Attenuation(Attenuation::_10Db).Units())                     // (3,16 ... 10.0] В
         {
             SetAttenuation(ch, Attenuation::_0Db);
         }
-        else if (amplitude > 1.0F)                                                   // 2 диапазон  1
+        else if (amplitude > 1.0F)                                                   // (1 ... 3.16] В 
         {
             SetAttenuation(ch, Attenuation::_10Db);
         }
-        else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 10.0F)        // 4 диапазоны 0.316
+        else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 10.0F)        // (0.316 ... 1] В
         {
             SetAttenuation(ch, Attenuation::_0Db);
         }
-        else if (amplitude > 0.100F)                                                 // 5 диапазон 0.100
+        else if (amplitude > 0.100F)                                                 // (0.100 ... 0.316] В
         {
             SetAttenuation(ch, Attenuation::_10Db);
         }
-        else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 100.0F)       // 6 диапазон
+        else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 100.0F)       // (31.6 ... 0.100] В
         {
             SetAttenuation(ch, Attenuation::_20Db);
         }
         else
         {
-            SetAttenuation(ch, Attenuation::_30Db);
+            SetAttenuation(ch, Attenuation::_30Db);                                  // [0 ... 31.6] В
         }
 
         Enable(ch, amplitude > 1.0F);

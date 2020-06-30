@@ -49,7 +49,7 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
 
     SetFormWave(ch, _signal);
 
-    if (param != 0)
+    if (param != 0 && _range > 2)
     {
         Amplifier::TuneAndLock(ch, _range > 2, Attenuation::_10Db);
     }
