@@ -75,7 +75,7 @@ void AD5697::SetOffset(Chan::E ch)
 {
     double code = CalculateCodeOffset(ch);
 
-    //LOG_WRITE("offset code %d", static_cast<uint16>(code));
+    //LOG_WRITE("offset code %d %d", static_cast<int>(ch), static_cast<uint16>(code));
 
     uint16 value = static_cast<uint16>(static_cast<uint16>(code) << 4);
 
