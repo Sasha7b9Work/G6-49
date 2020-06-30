@@ -518,7 +518,7 @@ void FPGA::TransformCodeToData(uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut
     {
         uint16 code = static_cast<uint16>(codeIn[i] + (codeIn[i + FPGA::NUM_POINTS] << 8));
 
-        float sign = _GET_BIT(code, 13) ? -1.0F : 1.0F;
+        float sign = _GET_BIT(code, 13) ? 1.0F : -1.0F;
 
         _CLEAR_BIT(code, 13);
 

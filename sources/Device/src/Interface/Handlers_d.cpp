@@ -92,36 +92,36 @@ void DHandlers::Processing(SimpleMessage *msg)
 
     switch(com)
     {
-    case Command::RequestData:             func = SendData;                  break;
-    case Command::EnableChannel:           func = EnableChannel;             break;
-    case Command::SetFormWave:             func = SetFormWave;               break;
-    case Command::SetFrequency:            func = SetFrequency;              break;
-    case Command::SetAmplitude:            func = SetAmplitude;              break;
-    case Command::SetOffset:               func = SetOffset;                 break;
-    case Command::SetDuration:             func = SetDuration;               break;
-    case Command::SetDutyRatio:            func = SetDutyRatio;              break;
-    case Command::SetPhase:                func = SetPhase;                  break;
-    case Command::ModeDebug:               func = ModeDebug;                 break;
-    case Command::SetDelay:                func = SetDelay;                  break;
-    case Command::WriteRegister:           func = WriteRegister;             break;
-    case Command::SetManipulation:         func = SetManipulation;           break;
-    case Command::SetManipulationDuration: func = SetManipulationDuration;   break;
-    case Command::SetManipulationPeriod:   func = SetManipulationPeriod;     break;
-    case Command::SetPacketPeriod:         func = SetPacketPeriod;           break;
-    case Command::SetPacketNumber:         func = SetPacketNumber;           break;
-    case Command::SetStartMode:            func = SetStartMode;              break;
-    case Command::SetPeriod:               func = SetPeriod;                 break;
-    case Command::SetPolarity:             func = SetPolarity;               break;
-    case Command::LoadFormDDS:             func = LoadFormDDS;               break;
-    case Command::Test:                    func = Test;                      break;
-    case Command::PortCPU:                 func = SetPin;                    break;
-    case Command::CalibrationLoad:         func = CalibrationLoad;           break;
-    case Command::CalibrationSet:          func = CalibrationSet;            break;
-    case Command::SCPI_Data:               func = DVCP::Handler::Processing; break;
-    case Command::Debug:                   func = Debug;                     break;
-    case Command::SetFreqMeterTrigK:       func = SetFreqMeterTrigK;         break;
+    case Command::RequestData:                  func = SendData;                     break;
+    case Command::EnableChannel:                func = EnableChannel;                break;
+    case Command::SetFormWave:                  func = SetFormWave;                  break;
+    case Command::SetFrequency:                 func = SetFrequency;                 break;
+    case Command::SetAmplitude:                 func = SetAmplitude;                 break;
+    case Command::SetOffset:                    func = SetOffset;                    break;
+    case Command::SetDuration:                  func = SetDuration;                  break;
+    case Command::SetDutyRatio:                 func = SetDutyRatio;                 break;
+    case Command::SetPhase:                     func = SetPhase;                     break;
+    case Command::ModeDebug:                    func = ModeDebug;                    break;
+    case Command::SetDelay:                     func = SetDelay;                     break;
+    case Command::WriteRegister:                func = WriteRegister;                break;
+    case Command::SetManipulation:              func = SetManipulation;              break;
+    case Command::SetManipulationDuration:      func = SetManipulationDuration;      break;
+    case Command::SetManipulationPeriod:        func = SetManipulationPeriod;        break;
+    case Command::SetPacketPeriod:              func = SetPacketPeriod;              break;
+    case Command::SetPacketNumber:              func = SetPacketNumber;              break;
+    case Command::SetStartMode:                 func = SetStartMode;                 break;
+    case Command::SetPeriod:                    func = SetPeriod;                    break;
+    case Command::SetPolarity:                  func = SetPolarity;                  break;
+    case Command::LoadFormDDS:                  func = LoadFormDDS;                  break;
+    case Command::Test:                         func = Test;                         break;
+    case Command::PortCPU:                      func = SetPin;                       break;
+    case Command::CalibrationLoad:              func = CalibrationLoad;              break;
+    case Command::CalibrationSet:               func = CalibrationSet;               break;
+    case Command::SCPI_Data:                    func = DVCP::Handler::Processing;    break;
+    case Command::Debug:                        func = Debug;                        break;
+    case Command::SetFreqMeterTrigK:            func = SetFreqMeterTrigK;            break;
     case Command::RequestPictureDDSfromStorage: func = RequestPictureDDSfromStorage; break;
-    case Command::LoadDDSfromStorage:      func = LoadDDSfromStorage; break;
+    case Command::LoadDDSfromStorage:           func = LoadDDSfromStorage;           break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
