@@ -133,9 +133,14 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
 
     for (int i = 0; i < DDS_NUM_POINTS; i++)
     {
-        float value = (d[i] + 1.0F) / 2.0F;
+        float value = d[i];
 
-        uint16 c = static_cast<uint16>(max - value * max);
+        uint16 c = static_cast<uint16>(std::fabsf(value) * max);
+
+        if (value < 0.0F)
+        {
+            _SET_BIT(c, 13);
+        }
 
         code[i] = static_cast<uint8>(c);
         code[i + DDS_NUM_POINTS] = static_cast<uint8>(c >> 8);
