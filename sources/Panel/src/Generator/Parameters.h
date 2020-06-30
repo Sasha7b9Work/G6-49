@@ -138,7 +138,7 @@ public:
     virtual Value GetMax() { return max; }
     
     // ¬озвращает минимальное значение, которое может иметь параметр
-    Value GetMin() { return min; }
+    virtual Value GetMin() { return min; }
 
     virtual Tuner *GetTuner()   { return &tuner; };
 
@@ -321,6 +321,7 @@ public:
         ParameterVoltage(ParameterDoubleType::Offset, "—мещение", "Offset", min, max, value) { }
 
     virtual Value GetMax();
+    virtual Value GetMin();
 };
 
 

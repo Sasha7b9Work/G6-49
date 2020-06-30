@@ -418,7 +418,7 @@ void ParameterComposite::OnPressButtonTune()
 
 Value ParameterAmplitude::GetMax()
 {
-    // result = 10 - 2 * fabs(offset)
+    // ampl / 2 + fabs(cm) <= 5
 
     Value offset = form->FindParameter(ParameterDoubleType::Offset)->GetValue();
     offset.SetSign(1);
@@ -433,9 +433,11 @@ Value ParameterAmplitude::GetMax()
 
 Value ParameterOffset::GetMax()
 {
-    Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
+    // Ампл == 0  | [0 ... 5]
+    // Ампл <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
+    // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
 
-    Value offset = form->FindParameter(ParameterDoubleType::Offset)->GetValue();
+    Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
 
     Value result = max;
 
@@ -451,6 +453,16 @@ Value ParameterOffset::GetMax()
     amplitude.Div(2);
 
     result.Sub(amplitude);
+
+    return result;
+}
+
+
+Value ParameterOffset::GetMin()
+{
+    Value result = GetMax();
+
+    result.SetSign(-1);
 
     return result;
 }
