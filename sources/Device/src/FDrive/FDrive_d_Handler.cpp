@@ -346,7 +346,7 @@ static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POIN
     {
         uint16 c = static_cast<uint16>(std::fabsf(dataIn[i]) * max);
 
-        if (Math::Sign(dataIn[i]) == -1)
+        if (dataIn[i] > 0.0F)
         {
             SetBit(c, 13);
         }

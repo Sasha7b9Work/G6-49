@@ -22,6 +22,7 @@ struct FPGA
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
     static void SetStartMode(Chan::E ch, StartMode mode);
+    
     // Делает однократный запуск. Возвращает true в случае успеха (если установлены соответствующие настройки)
     static bool Start();
 
@@ -31,6 +32,7 @@ struct FPGA
     {
         // Устанавливает число импульсов в пачке
         static void SetNumberImpules(uint n);
+        
         // Устанавливает период следования пачки
         static void SetPeriodPacket(Value period);
 
@@ -94,16 +96,21 @@ struct FPGA
     static void SetClockAD992(ClockFrequency::E clock);
 
     static ClockFrequency::E clock;
+    
     // Режим работы ПЛИС
     static ModeWork::E modeWork[Chan::Count];
 
     static inline ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
+    
     // Возвращает указатель на точки сигнала, загружаемого из флешки
     static uint8 *DataFlash(Chan::E ch);
+    
     // Сохранить данные сигнала, загруженного с флешки
     static void SaveExtSignal(Chan::E ch, uint8 *data);
+    
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     static uint8 *DataDDS(Chan::E ch);
+    
     // Записать значение в регистр
     static void WriteRegister(RG::E reg, uint64 value);
 
@@ -142,7 +149,7 @@ private:
     static void SetFormTriangle(Chan::E ch);
     
     // Установить режим произвольного сигнала, загруженного с флешки
-    static void SetFormDDS(Chan::E ch);
+    static void SetFormFree(Chan::E ch);
     
     static void SetFormMeander(Chan::E ch);
     
@@ -164,7 +171,7 @@ private:
     
     // Установить биты, соответствующие режиму запуска
     static uint16 SetBitsStartMode(uint16 data);
-    
+
     // Режим запуска
     static StartMode startMode[Chan::Count];
     

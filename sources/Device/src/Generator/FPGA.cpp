@@ -67,7 +67,7 @@ void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
         SetFormMeander,
         SetFormImpulse,
         SetFormPackedImpulse,
-        SetFormDDS
+        SetFormFree
     };
     
     funcs[form](ch);
@@ -101,7 +101,7 @@ void FPGA::SetFormSine(Chan::E ch)
 }
 
 
-void FPGA::SetFormDDS(Chan::E ch)
+void FPGA::SetFormFree(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData(DataFlash(ch));
@@ -387,6 +387,16 @@ bool FPGA::Start()
 
 void FPGA::SendData(uint8 *data)
 {
+    /*
+        Данные сигнала произвольной формы, засылаемые в ПЛИС, организованы следующим образом.
+        1. Количество точек - 8192
+        2. Каждая точка имеет разрядность 14 бит, старший бит - знак. "+" - 0, "-" - 1
+        3. Порядок засылки данных следующий:
+            - вначале засылаются младшие байты (8192 шт);
+            - затем засылаются старшие байты (8192 шт).
+    */
+
+
     WriteRegister(RG::_0_Control, 0);
     
     uint8 *pointer = data;
@@ -517,6 +527,9 @@ void FPGA::TransformCodeToData(uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut
         dataOut[i] = data * sign;
     }
 }
+
+
+
 
 
 #ifdef WIN32

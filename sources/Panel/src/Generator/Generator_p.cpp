@@ -137,7 +137,7 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
 
         uint16 c = static_cast<uint16>(std::fabsf(value) * max);
 
-        if (value < 0.0F)
+        if (value > 0.0F)
         {
             _SET_BIT(c, 13);
         }
