@@ -135,7 +135,7 @@ public:
     pString GetUnits(Order::E order = Order::Count) const;
 
     // ¬озвращает максимальное значение, которое может иметь параметр
-    Value GetMax() { return max; }
+    virtual Value GetMax() { return max; }
     
     // ¬озвращает минимальное значение, которое может иметь параметр
     Value GetMin() { return min; }
@@ -307,6 +307,8 @@ class ParameterAmplitude : public ParameterVoltage
 public:
     ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = DEFAULT_AMPLITUDE) :
         ParameterVoltage(ParameterDoubleType::Amplitude, "–азмах", "Amplitude", min, max, value) { }
+
+    virtual Value GetMax();
 };
 
 
@@ -315,6 +317,8 @@ class ParameterOffset : public ParameterVoltage
 public:
     ParameterOffset(const Value &min = Value("-5"), const Value &max = Value("5"), const Value &value = Value("0")) :
         ParameterVoltage(ParameterDoubleType::Offset, "—мещение", "Offset", min, max, value) { }
+
+    virtual Value GetMax();
 };
 
 

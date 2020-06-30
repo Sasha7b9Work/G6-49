@@ -6,6 +6,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
+#include <cmath>
 #include <cstdio>
 
 
@@ -412,4 +413,25 @@ void ParameterDouble::OnPressButtonTune()
 void ParameterComposite::OnPressButtonTune()
 {
     form->OpenCompositeParameter();
+}
+
+
+Value ParameterAmplitude::GetMax()
+{
+    // result = 10 - 2 * fabs(offset)
+
+    Value offset = form->FindParameter(ParameterDoubleType::Offset)->GetValue();
+    offset.SetSign(1);
+    offset.Mul(2);
+
+    Value result("10");
+    result.Sub(offset);
+
+    return result;
+}
+
+
+Value ParameterOffset::GetMax()
+{
+    return Value("5");
 }

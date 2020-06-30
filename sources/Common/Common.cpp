@@ -237,7 +237,7 @@ void Value::Mul(uint mul)
 
 void Value::SetSign(int sign)
 {
-    if (sign > 0)
+    if (sign >= 0)
     {
         //         fedcba9876543210
         value &= 0x7FFFFFFFFFFFFFFFU;       // \todo как это может работать?
