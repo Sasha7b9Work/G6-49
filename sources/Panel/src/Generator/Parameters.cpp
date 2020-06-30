@@ -424,7 +424,7 @@ Value ParameterAmplitude::GetMax()
     offset.SetSign(1);
     offset.Mul(2);
 
-    Value result("10");
+    Value result = max;
     result.Sub(offset);
 
     return result;
@@ -435,14 +435,22 @@ Value ParameterOffset::GetMax()
 {
     Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
 
+    Value offset = form->FindParameter(ParameterDoubleType::Offset)->GetValue();
+    offset.SetSign(1);
+    offset.Mul(2);
+
+    Value result = max;
+
     if (amplitude.Abs() == 0)
     {
         return max;
     }
     else if (amplitude.ToDouble() <= 1.0F)
     {
-        return Value("2.5");
+        result.Div(2);
     }
 
-    return Value("5");
+    result.Sub(offset);
+
+    return result;
 }
