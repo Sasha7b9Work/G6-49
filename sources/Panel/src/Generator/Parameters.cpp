@@ -344,7 +344,7 @@ int ParameterChoice::NumChoices() const
 
 
 ParameterDouble::ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
+    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min), value(_value), max(_max)
 {
 }
 
@@ -433,5 +433,16 @@ Value ParameterAmplitude::GetMax()
 
 Value ParameterOffset::GetMax()
 {
+    Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
+
+    if (amplitude.Abs() == 0)
+    {
+        return max;
+    }
+    else if (amplitude.ToDouble() <= 1.0F)
+    {
+        return Value("2.5");
+    }
+
     return Value("5");
 }

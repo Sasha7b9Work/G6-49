@@ -151,12 +151,14 @@ private:
     Tuner tuner;        // Используется для настройки 
     ParameterDoubleType::E type;
     Value min;
-    Value max;
     Value value;
 
     // Возвращает true, если параметр может принимать значение v
     bool InRange(double v) const;
     bool InRange(Value v) const;
+
+protected:
+    Value max;
 };
 
 
