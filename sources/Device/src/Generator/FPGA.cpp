@@ -103,29 +103,29 @@ void FPGA::SetFormSine(Chan::E ch)
 
 void FPGA::SetFormFree(Chan::E ch)
 {
-    modeWork[ch] = ModeWork::DDS;
-    SendData(DataFreeSignal(Chan::A));
+    modeWork[ch] = ModeWork::Free;
+    SendData();
 }
 
 
 void FPGA::SetFormRampPlus(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
-    SendData(&dataDDS[Chan::A][0]);
+    SendData();
 }
 
 
 void FPGA::SetFormRampMinus(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
-    SendData(&dataDDS[Chan::A][0]);
+    SendData();
 }
 
 
 void FPGA::SetFormTriangle(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
-    SendData(&dataDDS[Chan::A][0]);
+    SendData();
 }
 
 
@@ -385,7 +385,7 @@ bool FPGA::Start()
 }
 
 
-void FPGA::SendData(uint8 *data)
+void FPGA::SendData()
 {
     /*
         Данные сигнала произвольной формы, засылаемые в ПЛИС, организованы следующим образом.
@@ -399,29 +399,30 @@ void FPGA::SendData(uint8 *data)
 
     WriteRegister(RG::_0_Control, 0);
     
-    uint8 *pointer = data;
+    SendDataChannel(Chan::A);
+    SendDataChannel(Chan::B);
 
-    // \todo Это временно так задержка организована
-    volatile int i = 0;
+    WriteRegister(RG::_0_Control, 1);
+}
 
-    for(i = 0; i < 10; i++)
-    {
-        *pointer = data[0];
-    }
 
-    for(i = 0; i < FPGA::NUM_POINTS * 4; i++)
+void FPGA::SendDataChannel(Chan::E ch)
+{
+    volatile int j = 0;
+    for(j = 0; j < 10; j++) { }
+
+    uint8 *pointer = (modeWork[ch] == ModeWork::Free) ? DataFreeSignal(ch) : &dataDDS[ch][0];
+
+    for (int i = 0; i < FPGA::NUM_POINTS * 2; i++)
     {
         HAL_PIO::WriteFPGA(*pointer++);
 
         // \todo Это временно так задержка организована
-        volatile int j = 0;
-        for(j = 0; j < 10; j++) {}
+        for (j = 0; j < 10; j++) { }
         HAL_PIO::Set(WR_FPGA_WR_DATA);
-        for(j = 0; j < 10; j++) {}
+        for (j = 0; j < 10; j++) { }
         HAL_PIO::Reset(WR_FPGA_WR_DATA);
     }
-
-    WriteRegister(RG::_0_Control, 1);
 }
 
 

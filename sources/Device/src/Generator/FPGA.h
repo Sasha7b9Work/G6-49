@@ -46,13 +46,14 @@ struct FPGA
         enum E
         {
             None,
-            DDS,
+            DDS,            // Работает по загруженным точкам заранее рассчитанных сигналов - пила, треугольник
             Impulse,        // Режим, в котором импульcы могут иметь разную частоту
             Impulse2,       // Режим, в котором импульсы имеют одинаковую частоту. При этом можно регулировать задержку второго канала отн. первого
             Rectangle,
             Meander,
             PackedImpulse,  // Пакеты импульсов
             Sine,
+            Free,           // Работает по загруженным с флешки точкам
             Count
         } value;
         explicit ModeWork(E v) : value(v) {};
@@ -157,8 +158,11 @@ private:
     
     static void SetFormPackedImpulse(Chan::E ch);
     
-    // Заслать рассчитанные точки в плис
-    static void SendData(uint8 *data);
+    // Заслать рассчитанные точки обоих каналов в плис
+    static void SendData();
+
+    // Заслать рассчитанные точки одного канала в плис
+    static void SendDataChannel(Chan::E ch);
     
     // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
     static void WriteAddress(RG::E reg);
