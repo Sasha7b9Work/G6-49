@@ -1,8 +1,9 @@
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
-#include "CalibrationSettings.h"
+#include "FreqMeter/FreqMeter_p.h"
 #include "Hardware/HAL/HAL.h"
+#include "Settings/CalibrationSettings.h"
 
 
 static const CalibrationSettings defSet =
@@ -38,6 +39,9 @@ void CalibrationSettings::Load()
             }
         }
     }
+
+    Message::SetFreqMeterTrigK(kFreqMeter).Transmit();
+    PFreqMeter::LoadLevel();
 }
 
 
