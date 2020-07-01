@@ -111,7 +111,7 @@ static pCHAR FuncIDN(pCHAR buffer)
 {
     SCPI_PROLOG(buffer)
 
-    SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
+    SCPI::SendAnswer(String("MNIPI, %s, %s, %s", IDENTIFICATOR, VERSION, CRC32).c_str());
 
     SCPI_EPILOG(buffer)
 }

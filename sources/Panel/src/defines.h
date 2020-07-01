@@ -15,6 +15,11 @@
 
 #define DEBUG
 
+
+#define VERSION       "v1.3.8"
+#define IDENTIFICATOR "G6-49"
+#define CRC32         "f37ce6af"
+
 #ifndef __cplusplus
 typedef int bool;
 #endif
