@@ -39,6 +39,15 @@ File::~File()
 }
 
 
+static void DrawSignal(int x, int y, uint8 *data, float scale)
+{
+    for (int i = 0; i < 240; i++)
+    {
+        Point().Draw(x + i, (int)(y - data[i] * scale));
+    }
+}
+
+
 void File::Draw(int x, int y)
 {
     Color::GRAY_10.SetAsCurrent();
@@ -47,10 +56,7 @@ void File::Draw(int x, int y)
 
     Color::GRAY_25.SetAsCurrent();
 
-    for (int i = 0; i < 240; i++)
-    {
-        Point().Draw(x + i, (int)(y - Form::GetFormFlash(CURRENT_CHANNEL)[i] * scale));
-    }
+    DrawSignal(x, y, &Form::GetFormFlash(CURRENT_CHANNEL)[0], scale);
 
     if (num == -1)
     {
@@ -59,10 +65,7 @@ void File::Draw(int x, int y)
 
     Color::FILL.SetAsCurrent();
 
-    for (int i = 0; i < 240; i++)
-    {
-        Point().Draw(x + i, static_cast<int>(y - picture.data[i] * scale));
-    }
+    DrawSignal(x, y, &picture.data[0], scale);
 }
 
 
