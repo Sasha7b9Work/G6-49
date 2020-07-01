@@ -126,7 +126,7 @@ private:
 
     static void DrawPacketImpulse(Chan::E ch, int x, int y, int width, int height);
 
-    static void DrawDDS(Chan::E ch, int x, int y, int width, int height);
+    static void DrawFree(Chan::E ch, int x, int y, int width, int height);
 
     // Здесь будут храниться основные параметры формы при раскрытии составного параметра
     struct Old

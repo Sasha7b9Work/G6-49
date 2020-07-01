@@ -487,7 +487,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
         DrawMeander,
         DrawImpulse,
         DrawPacketImpulse,
-        DrawDDS
+        DrawFree
     };
 
     funcs[value](ch, x0, minY, width, height);
@@ -646,16 +646,22 @@ void Form::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
 }
 
 
-void Form::DrawDDS(Chan::E ch, int x0, int y0, int width, int height)
+void Form::DrawFree(Chan::E ch, int x0, int y0, int width, int height)
 {
     int numPoints = 240;
 
     float sX = width / static_cast<float>(numPoints);
     float sY = height / 255.0F;
 
-    for (int i = 0; i < numPoints; i++)
+    for (int i = 1; i < numPoints; i++)
     {
-        Point().Draw(static_cast<int>(x0 + sX * i), static_cast<int>(y0 + height - formFlash[ch][i] * sY));
+        int x1 = static_cast<int>(x0 + sX * (i - 1));
+        int y1 = static_cast<int>(y0 + height - formFlash[ch][i - 1] * sY);
+
+        int x2 = static_cast<int>(x0 + sX * i);
+        int y2 = static_cast<int>(y0 + height - formFlash[ch][i] * sY);
+
+        Line().Draw(x1, y1, x2, y2);
     }
 }
 
