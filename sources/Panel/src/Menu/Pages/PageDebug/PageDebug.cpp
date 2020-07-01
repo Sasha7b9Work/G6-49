@@ -426,7 +426,6 @@ DEF_CHOICE_2( cConsole,                                                         
 
 static void OnPress_SaveSettings()
 {
-    set.SaveToMemory();
 }
 
 DEF_BUTTON( bSaveSettings,                                                                                                                            //--- Œ“À¿ƒ ¿ - —Œ’–¿Õ»“‹ Õ¿—“–Œ… » ---

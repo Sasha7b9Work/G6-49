@@ -67,8 +67,6 @@ struct Settings // -V690
     SettingsRegisters reg;
     SettingsDebug     dbg;
 
-    void SaveToMemory();
-    void LoadFromMemory();
     void LoadDefault();
     void LoadToDevice();
 

@@ -97,18 +97,6 @@ static const Settings defSet =
 
 Settings set = defSet;
 
-void Settings::SaveToMemory()
-{
-    // EEPROM::SaveSettings(this);
-}
-
-
-void Settings::LoadFromMemory()
-{
-    // EEPROM::LoadSettings(this);
-}
-
-
 void Settings::LoadDefault()
 {
     set = defSet;
