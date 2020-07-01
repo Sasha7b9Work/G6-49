@@ -19,6 +19,7 @@ struct FPGA
 
     static void SetPeriodImpulse(Chan::E ch, Value period);
 
+    // 1 - положительна€ пол€рность, 0 - отрицательна€ пол€рность
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
     static void SetStartMode(Chan::E ch, StartMode mode);

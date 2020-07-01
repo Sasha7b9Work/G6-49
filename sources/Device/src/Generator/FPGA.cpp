@@ -146,7 +146,7 @@ void FPGA::SetPolarity(Chan::E ch, uint8 polarity)
 {
     uint64 data = (8191 << 14) + 16383;     // ѕоложительна€ пол€рность
 
-    if(polarity == 1)
+    if(polarity == 0)
     {
         data = (16383 << 14) + 8191;        // ќтрицательна€ пол€рность
     }
