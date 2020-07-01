@@ -24,9 +24,9 @@ static String GetNameItem(int i);
 //static int GetSizeItem(int i);
 
 
-// Количество файлов в текущем каталоге
-static int numFiles;
+static int numFiles;                    // Количество файлов в текущем каталоге
 static int firstFile = 0;               // Этот файл первый в списке на экране
+static int curFile = 0;                 // Текущий файл
 bool ListFiles::requestIsSend = false;
 
 #define NUM_FILES_ON_SCREEN 10          // Столько файлов помещается на экране
@@ -38,11 +38,14 @@ struct StructFile
     int size;
     StructFile() : size(-1) { name[0] = 0; } //-V730
     void Clear() { name[0] = 0; size = -1; }
+    void CopyFrom(const StructFile &file)
+    {
+        std::strcpy(name, file.name);
+        size = file.size;
+    }
 }
 files[NUM_FILES_ON_SCREEN];
 
-// Текущий файл
-static int curItem = 0;
 // Теукущий файл
 static File file;
 
@@ -64,7 +67,7 @@ void ListFiles::Init()
 
 int ListFiles::NumberCurrentFile()
 {
-    return curItem;
+    return curFile;
 }
 
 
@@ -92,9 +95,9 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg)
     else if (command == Command::FDrive_RequestFile)
     {
         int num = msg->TakeUINT8();
-        std::strcpy(files[num].name, msg->String(2));
+        std::strcpy(files[num - firstFile].name, msg->String(2));
 
-        if (num == curItem)
+        if (num == curFile)
         {
             file.RequestFromPicture(num);
         }
@@ -104,7 +107,7 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg)
     else if (command == Command::FDrive_RequestFileSize)
     {
         int num = msg->TakeUINT8();
-        files[num].size = msg->TakeINT();
+        files[num - firstFile].size = msg->TakeINT();
         return true;
     }
 
@@ -138,12 +141,12 @@ static void SendRequestForNameFile(int number)
 
 String GetNameItem(int i)
 {
-    if (files[i].name[0] == 0)
+    if (files[i - firstFile].name[0] == 0)
     {
         SendRequestForNameFile(i);
     }
     
-    return String(files[i].name);
+    return String(files[i - firstFile].name);
 }
 
 
@@ -155,10 +158,10 @@ int ListFiles::NumberFiles()
 
 void ListFiles::PressUp()
 {
-    if (curItem > 0)
+    if (curFile > 0)
     {
-        curItem--;
-        file.RequestFromPicture(curItem);
+        curFile--;
+        file.RequestFromPicture(curFile);
     }
 }
 
@@ -166,11 +169,26 @@ void ListFiles::PressUp()
 
 void ListFiles::PressDown()
 {
-    if (curItem < numFiles - 1)
+    if (curFile == numFiles - 1)
     {
-        curItem++;
-        file.RequestFromPicture(curItem);
+        return;
     }
+
+    curFile++;
+
+    if (curFile - firstFile > NUM_FILES_ON_SCREEN - 1)
+    {
+        firstFile++;
+
+        for (int i = 1; i < NUM_FILES_ON_SCREEN; i++)
+        {
+            files[i - 1].CopyFrom(files[i]);
+        }
+
+        files[NUM_FILES_ON_SCREEN - 1].Clear();
+    }
+
+    file.RequestFromPicture(curFile);
 }
 
 
@@ -178,9 +196,16 @@ void ListFiles::Draw(int x, int y)
 {
     Font::ForceUpperCase(false);
 
-    for (int i = 0; i < numFiles; i++)
+    int lastFile = firstFile + NUM_FILES_ON_SCREEN;
+
+    if (lastFile > numFiles)
     {
-        DrawItem(i, x, y, (curItem == i));
+        lastFile = numFiles;
+    }
+
+    for (int i = firstFile; i < lastFile; i++)
+    {
+        DrawItem(i, x, y, (curFile == i));
         y += 10;
     }
 
