@@ -23,7 +23,7 @@ void FileRequests::SendRequestForString(const String *name, int numString)
 {
     Message::FDrive::FileString message(static_cast<uint>(numString), name->c_str());
 
-    Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestString);
+    Task *task = new Task(&message, ListFiles::Handler::Processing, EqualsRequestString);
 
     PInterface::AddTask(task);
 }

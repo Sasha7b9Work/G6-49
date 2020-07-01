@@ -6,7 +6,7 @@
 
 class File;
 
-class Items
+class ListFiles
 {
 public:
 

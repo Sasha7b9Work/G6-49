@@ -33,7 +33,7 @@ static bool E()
 void FDrive::Init()
 {
     std::strcpy(directory, "\\");
-    Items::Init();
+    ListFiles::Init();
 }
 
 
@@ -57,17 +57,17 @@ void FDrive::Draw()
         return;
     }
 
-    if (Items::NumberFiles() == -1)
+    if (ListFiles::NumberFiles() == -1)
     {
-        Items::SendRequest();
+        ListFiles::SendRequest();
         return;
     }
-    else if (Items::WaitAnswer())
+    else if (ListFiles::WaitAnswer())
     {
         return;
     }
 
-    Items::Draw(x + 5, y + 5);
+    ListFiles::Draw(x + 5, y + 5);
 
     if (inStateWaitCompleteLoad)
     {
@@ -114,19 +114,19 @@ bool FDrive::Handler::IsMount()
 
 bool FDrive::Handler::GetNumDirsAndFiles()
 {
-    return Items::Handler::Processing(msg);
+    return ListFiles::Handler::Processing(msg);
 }
 
 
 bool FDrive::Handler::RequestFile()
 {
-    return Items::Handler::Processing(msg);
+    return ListFiles::Handler::Processing(msg);
 }
 
 
 bool FDrive::Handler::RequestFileSize()
 {
-    return Items::Handler::Processing(msg);
+    return ListFiles::Handler::Processing(msg);
 }
 
 
@@ -140,13 +140,13 @@ bool FDrive::Handler::LoadDDSfromFile()
 
 void FDrive::PressUp()
 {
-    Items::PressUp();
+    ListFiles::PressUp();
 }
 
 
 void FDrive::PressDown()
 {
-    Items::PressDown();
+    ListFiles::PressDown();
 }
 
 
@@ -154,7 +154,7 @@ void FDrive::PressChoose()
 {
     inStateWaitCompleteLoad = true;
 
-    Message::FDrive::LoadDDSfromFile(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(Items::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
+    Message::FDrive::LoadDDSfromFile(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(ListFiles::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
 
     File::SetDataToWave();
 }

@@ -26,9 +26,10 @@ static String GetNameItem(int i);
 
 // Количество файлов в текущем каталоге
 static int numFiles;
-bool Items::requestIsSend = false;
+static int firstFile = 0;               // Этот файл первый в списке на экране
+bool ListFiles::requestIsSend = false;
 
-#define NUM_ITEMS 15
+#define NUM_FILES_ON_SCREEN 10          // Столько файлов помещается на экране
 
 struct StructFile
 {
@@ -38,7 +39,7 @@ struct StructFile
     StructFile() : size(-1) { name[0] = 0; } //-V730
     void Clear() { name[0] = 0; size = -1; }
 }
-files[NUM_ITEMS];
+files[NUM_FILES_ON_SCREEN];
 
 // Текущий файл
 static int curItem = 0;
@@ -48,25 +49,26 @@ static File file;
 
 
 
-void Items::Init()
+void ListFiles::Init()
 {
+    firstFile = 0;
     numFiles = -1;
     requestIsSend = false;
 
-    for (int i = 0; i < NUM_ITEMS; i++)
+    for (int i = 0; i < NUM_FILES_ON_SCREEN; i++)
     {
         files[i].Clear();
     }
 }
 
 
-int Items::NumberCurrentFile()
+int ListFiles::NumberCurrentFile()
 {
     return curItem;
 }
 
 
-void Items::SendRequest()
+void ListFiles::SendRequest()
 {
     Message::FDrive::NumDirsAndFiles(FDrive::CurrentDirectory()).Transmit();
 
@@ -74,7 +76,7 @@ void Items::SendRequest()
 }
 
 
-bool Items::Handler::Processing(SimpleMessage *msg)
+bool ListFiles::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 
@@ -128,7 +130,7 @@ static void SendRequestForNameFile(int number)
 {
     Message::FDrive::FileName message(static_cast<uint8>(number), FDrive::CurrentDirectory());
     
-    Task *task = new Task(&message, Items::Handler::Processing, EqualsRequestNameFile);
+    Task *task = new Task(&message, ListFiles::Handler::Processing, EqualsRequestNameFile);
     
     PInterface::AddTask(task);
 }
@@ -145,13 +147,13 @@ String GetNameItem(int i)
 }
 
 
-int Items::NumberFiles()
+int ListFiles::NumberFiles()
 {
     return numFiles;
 }
 
 
-void Items::PressUp()
+void ListFiles::PressUp()
 {
     if (curItem > 0)
     {
@@ -162,7 +164,7 @@ void Items::PressUp()
 
 
 
-void Items::PressDown()
+void ListFiles::PressDown()
 {
     if (curItem < numFiles - 1)
     {
@@ -172,7 +174,7 @@ void Items::PressDown()
 }
 
 
-void Items::Draw(int x, int y)
+void ListFiles::Draw(int x, int y)
 {
     Font::ForceUpperCase(false);
 
