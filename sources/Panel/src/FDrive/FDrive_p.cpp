@@ -57,7 +57,7 @@ void FDrive::Draw()
         return;
     }
 
-    if (Items::NumberDirs() == -1)
+    if (Items::NumberFiles() == -1)
     {
         Items::SendRequest();
         return;

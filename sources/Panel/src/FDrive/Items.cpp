@@ -42,8 +42,6 @@ files[NUM_ITEMS];
 
 // Текущий файл
 static int curItem = 0;
-// Количество каталогов в текущем каталоге
-static int numDirs = -1;
 // Теукущий файл
 static File file;
 
@@ -52,7 +50,6 @@ static File file;
 
 void Items::Init()
 {
-    numDirs = -1;
     numFiles = -1;
     requestIsSend = false;
 
@@ -85,7 +82,7 @@ bool Items::Handler::Processing(SimpleMessage *msg)
 
     if (command == Command::FDrive_NumDirsAndFiles)
     {
-        numDirs = msg->TakeINT();
+        msg->TakeINT();             // Количество каталогов нам не нужно
         numFiles = msg->TakeINT(); //-V656
         requestIsSend = false;
         return true;
@@ -148,9 +145,9 @@ String GetNameItem(int i)
 }
 
 
-int Items::NumberDirs()
+int Items::NumberFiles()
 {
-    return numDirs;
+    return numFiles;
 }
 
 
