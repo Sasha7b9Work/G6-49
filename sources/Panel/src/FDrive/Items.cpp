@@ -158,11 +158,26 @@ int ListFiles::NumberFiles()
 
 void ListFiles::PressUp()
 {
-    if (curFile > 0)
+    if (curFile == 0)
     {
-        curFile--;
-        file.RequestFromPicture(curFile);
+        return;
     }
+
+    curFile--;
+
+    if (curFile < firstFile)
+    {
+        firstFile--;
+
+        for (int i = NUM_FILES_ON_SCREEN - 1; i > 0; i--)
+        {
+            files[i].CopyFrom(files[i - 1]);
+        }
+
+        files[0].Clear();
+    }
+
+    file.RequestFromPicture(curFile);
 }
 
 
