@@ -5,6 +5,7 @@
 #include "Display/Text.h"
 #include "Display/Symbols.h"
 #include "Display/WaveGraphics.h"
+#include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include "Utils/NumberBuffer.h"
@@ -599,20 +600,19 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     Page::Registers, &pDebug, Item::FuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 
-static int16 k = 0;
-
 
 static void OnChange_FreqMeterK()
 {
-    Message::SetFreqMeterTrigK(k).Transmit();
+    Message::SetFreqMeterTrigK(setCal.kFreqMeter).Transmit();
     PFreqMeter::LoadLevel();
+    setCal.Save();
 }
 
 
 DEF_GOVERNOR(gFreqMeterK,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
     "Ур синхр", "Trig lev",
     "Калибровочный коэффициент уровня синхронизации частотомера", "Frequency meter calibration factor",
-    k, -150, 150, pDebug, Item::FuncActive, OnChange_FreqMeterK, EmptyFuncVV, 0
+    setCal.kFreqMeter, -150, 150, pDebug, Item::FuncActive, OnChange_FreqMeterK, EmptyFuncVV, 0
 )
 
 
