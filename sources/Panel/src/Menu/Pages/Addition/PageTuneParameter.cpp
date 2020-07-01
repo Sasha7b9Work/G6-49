@@ -6,6 +6,7 @@
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
+#include <cmath>
 
 
 static ParameterDouble storedDouble = ParameterAmplitude();    // Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
@@ -97,6 +98,40 @@ DEF_GRAPH_BUTTON(sbEnter,
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control control)
+{
+    if (control.IsRotate() || control.IsEntering())
+    {
+        Parameter *parameter = Tuner::Current()->GetParameter();
+
+        if (parameter->GetKind() == ParameterKind::Double)
+        {
+            ParameterDouble *paramDouble = reinterpret_cast<ParameterDouble *>(parameter);
+
+            if (paramDouble->GetType() == ParameterDoubleType::Amplitude)
+            {
+                if (paramDouble->GetValue().Abs() == 0)
+                {
+                    ParameterDouble *offset = CURRENT_FORM->FindParameter(ParameterDoubleType::Offset);
+
+                    if (offset)
+                    {
+                        if (std::fabs(offset->GetValue().ToDouble()) > 2.5)
+                        {
+                            Display::ShowWarning(LANG_IS_RU ? String("Смещение не более +/- 2.5В") : String("Offset no more than +/- 2.5V"));
+
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+
 static bool OnControl_TuneParameter(const Control control) //-V801
 {
     if (control.IsUp() && control.Is(Key::Esc))
@@ -109,11 +144,16 @@ static bool OnControl_TuneParameter(const Control control) //-V801
     {
         if(control.Is(Key::RegButton))
         {
-            Menu::ResetAdditionPage();
+            OnPress_Enter();
             return true;
         }
         else
         {
+            if (!PageTuneParameter::VerifyForPossiblyChangesAmplitude(control))
+            {
+                return true;
+            }
+
             return Tuner::Current()->OnControlKey(control);
         }
     }
