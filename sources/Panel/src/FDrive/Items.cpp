@@ -4,6 +4,8 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "FDrive_p.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Items.h"
 #include "File.h"
 #include <cstring>
@@ -24,9 +26,10 @@ static String GetNameItem(int i);
 //static int GetSizeItem(int i);
 
 
-static int numFiles;                    // Количество файлов в текущем каталоге
-static int firstFile = 0;               // Этот файл первый в списке на экране
-static int curFile = 0;                 // Текущий файл
+static int numFiles;                        // Количество файлов в текущем каталоге
+static int firstFile = 0;                   // Этот файл первый в списке на экране
+static int curFile = 0;                     // Текущий файл
+static uint timeStopUnderFile = TIME_MS;    // Время остановки курсора над файлов. Через некоторое время после последней остановки нужно посылать запрос на изображение
 bool ListFiles::requestIsSend = false;
 
 #define NUM_FILES_ON_SCREEN 10          // Столько файлов помещается на экране
@@ -48,8 +51,6 @@ files[NUM_FILES_ON_SCREEN];
 
 // Теукущий файл
 static File file;
-
-
 
 
 void ListFiles::Init()
@@ -177,7 +178,7 @@ void ListFiles::PressUp()
         files[0].Clear();
     }
 
-    file.RequestFromPicture(curFile);
+    timeStopUnderFile = TIME_MS;
 }
 
 
@@ -203,7 +204,7 @@ void ListFiles::PressDown()
         files[NUM_FILES_ON_SCREEN - 1].Clear();
     }
 
-    file.RequestFromPicture(curFile);
+    timeStopUnderFile = TIME_MS;
 }
 
 
@@ -229,6 +230,12 @@ void ListFiles::Draw(int x, int y)
     Font::ForceUpperCase(true);
 
     String("%d/%d", curFile + 1, numFiles).Draw(75, 5, Color::FILL);
+
+    if (timeStopUnderFile != 0 && TIME_MS - timeStopUnderFile >= 500)
+    {
+        file.RequestFromPicture(curFile);
+        timeStopUnderFile = 0;
+    }
 }
 
 
