@@ -227,6 +227,8 @@ void ListFiles::Draw(int x, int y)
     file.Draw(5, 235);
 
     Font::ForceUpperCase(true);
+
+    String("%d/%d", curFile + 1, numFiles).Draw(75, 5, Color::FILL);
 }
 
 
