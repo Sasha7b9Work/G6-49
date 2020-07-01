@@ -48,7 +48,7 @@ void Console::Draw()
 
     Font::ForceUpperCase(false);
 
-    int y = 50;
+    int y = 0;
     for (int i = 0; i < numStrings; i++)
     {
         String string(&buffer[i][0]);

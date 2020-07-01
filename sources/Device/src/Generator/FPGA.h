@@ -103,7 +103,7 @@ struct FPGA
     static inline ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
     
     // Возвращает указатель на точки сигнала, загружаемого из флешки
-    static uint8 *DataFlash(Chan::E ch);
+    static uint8 *DataFreeSignal(Chan::E ch);
     
     // Сохранить данные сигнала, загруженного с флешки
     static void SaveExtSignal(Chan::E ch, uint8 *data);

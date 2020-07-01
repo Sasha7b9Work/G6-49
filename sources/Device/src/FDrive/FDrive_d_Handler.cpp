@@ -138,6 +138,7 @@ static void LoadDDSfromFile()
     int numFile = static_cast<int>(msg->TakeUINT8());
     std::strcpy(fullName, msg->String(2));
     std::strcat(fullName, "\\");
+
     if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
     {
         Buffer buffer(DGenerator::DDS_NUM_POINTS * sizeof(float));

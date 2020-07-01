@@ -104,7 +104,7 @@ void FPGA::SetFormSine(Chan::E ch)
 void FPGA::SetFormFree(Chan::E ch)
 {
     modeWork[ch] = ModeWork::DDS;
-    SendData(DataFlash(ch));
+    SendData(DataFreeSignal(Chan::A));
 }
 
 
@@ -500,7 +500,7 @@ uint8 *FPGA::DataDDS(Chan::E ch)
 }
 
 
-uint8 *FPGA::DataFlash(Chan::E ch)
+uint8 *FPGA::DataFreeSignal(Chan::E ch)
 {
     return reinterpret_cast<uint8 *>(HAL_EEPROM::Signal::Get(ch));
 }

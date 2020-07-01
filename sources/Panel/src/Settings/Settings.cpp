@@ -87,7 +87,7 @@ static const Settings defSet =
     }
     ,
     {
-        false,                              // showConsole
+        true,                              // showConsole
         0,                                  // dbgModeEnabled
         false,                              // showStatistics
         false                               // showSends
