@@ -177,6 +177,17 @@ static void GetPictureDDS()
 }
 
 
+// Возвращает true, если расширение соответствует расширению сигнала
+static bool ExtensionIsSignal(TCHAR *name, char *ext = "sig")
+{
+    uint lenght = std::strlen(name);
+
+    return (name[lenght - 1] == ext[2]) &&
+           (name[lenght - 2] == ext[1]) &&
+           (name[lenght - 3] == ext[0]);
+}
+
+
 void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *numFiles)
 {
     FILINFO fno;
@@ -216,7 +227,7 @@ void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *n
                 {
                     (*numDirs)++;
                 }
-                else
+                else if(ExtensionIsSignal(fno.fname))
                 {
                     (*numFiles)++;
                 }
@@ -259,14 +270,17 @@ bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOu
                 }
                 alreadyNull = true;
             }
-            if (numFile == numFiles && (pFNO->fattrib & AM_DIR) == 0)
+            if (numFile == numFiles && (pFNO->fattrib & AM_DIR) == 0 && ExtensionIsSignal(pFNO->fname))
             {
                 std::strcpy(nameFileOut, pFNO->fname);
                 return true;
             }
             if ((pFNO->fattrib & AM_DIR) == 0 && (pFNO->fname[0] != '.'))
             {
-                numFiles++;
+                if (ExtensionIsSignal(pFNO->fname))
+                {
+                    numFiles++;
+                }
             }
         }
     }
