@@ -58,8 +58,6 @@ public:
     // ¬озвращает true, если параметр сложный и открыт
     bool IsOpened() const;
 
-    virtual String ToString(String &units) const = 0;
-
     Form *GetForm();
     
     ParameterKind::E GetKind() { return kind; }
@@ -70,9 +68,11 @@ public:
 
     virtual Value GetMin() const { return Value("0"); }
 
-    virtual String ToString(Value) const { return String(""); };
-
     virtual Value GetValue() const { return Value("1"); }
+
+    virtual String ToString(String &) const { return String(""); };
+
+    virtual String ToString(Value) const { return String(""); };
 
 protected:
     
@@ -151,7 +151,7 @@ public:
     virtual Tuner *GetTuner()   { return &tuner; };
 
     // ¬озвращает текущее значение параметра
-    Value GetValue() const { return value; };
+    virtual Value GetValue() const { return value; };
 
     ParameterDoubleType::E GetType() const { return type; }
 
@@ -192,7 +192,7 @@ public:
 
     virtual Tuner *GetTuner()  { return &tuner; }
 
-    Value GetValue() const       { return value; }
+    virtual Value GetValue() const { return value; }
                                
     virtual Value GetMax() const         { return max;   }
                                
@@ -245,6 +245,8 @@ public:
 
     virtual String ToString(String &units) const;
 
+    virtual String ToString(Value) const { return String(""); };
+
     virtual void OnPressButtonTune();
 
 private:
@@ -284,6 +286,8 @@ public:
 
     virtual String ToString(String &units) const;
 
+    virtual String ToString(Value) const { return String(""); };
+
     virtual void OnPressButtonTune();
 
     ParameterCompositeType::E GetType() { return type; }
@@ -302,6 +306,8 @@ public:
     ParameterButton(const char *titleRU, const char *titleEN, pFuncVV f) : Parameter(ParameterKind::Button, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
+
+    virtual String ToString(Value) const { return String(""); };
 
     virtual void OnPressButtonTune() { func(); };
 
