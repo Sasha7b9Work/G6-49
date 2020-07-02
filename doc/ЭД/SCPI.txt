@@ -49,4 +49,36 @@
 -              :PERIOD?
 
   :FREQMETER
-            :MEASURE { FREQUENCY | 
+            :MEASURE { FREQUENCY | PERIOD }
+            :MEASURE?
+            
+            :LEVEL [-100...100]
+            :LEVEL?
+            
+            :TIMECOUNTING { 1ms | 10ms | 100ms | 1000ms | 10000ms }
+            :TIMECOUNTING?
+            
+            :TIMELABELS { 1kHz | 10kHz | 100kHz | 1MHz | 10MHz }
+            :TIMELABELS?
+            
+            :NUMBERPERIODS { 1 | 10 | 100 | 1000 | 10000 }
+            :NUMBERPERIODS?
+            
+            :RESISTANCE { 1Mohm | 50Ohm }
+            :RESISTANCE?
+            
+            :COUPLING { AC | DC }
+            :COUPLING?
+            
+            :LPF { ON | OFF}
+            :LPF?
+            
+            :TEST { ON | OFF}
+            :TEST?
+            
+            :VALUE?
+            
+  :KEY 
+    :{ PRESS | LONG } { 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | left | right | dot | minus | esc }
+  :REG { LEFT | RIGHT }
+  
