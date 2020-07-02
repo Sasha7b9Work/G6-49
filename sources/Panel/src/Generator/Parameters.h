@@ -358,14 +358,16 @@ public:
 class ParameterPeriod : public ParameterTime
 {
 public:
-    ParameterPeriod(const Value &min, const Value &max, const Value &value) :  ParameterTime(ParameterDoubleType::Period, "Период", "Period", min, max, value) { }
+    ParameterPeriod(const Value &min, const Value &max, const Value &value, const char *nameRU = "Период", const char *nameEN = "Period") :
+        ParameterTime(ParameterDoubleType::Period, nameRU, nameEN, min, max, value) { }
 };
 
 
 class ParameterDuration : public ParameterTime
 {
 public:
-    ParameterDuration(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::Duration, "Длит", "Duration", min, max, value) { }
+    ParameterDuration(const Value &min, const Value &max, const Value &value, const char *nameRU = "Длит", const char *nameEN = "Dur") :
+        ParameterTime(ParameterDoubleType::Duration, nameRU, nameEN, min, max, value) { }
 };
 
 
