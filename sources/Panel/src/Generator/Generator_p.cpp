@@ -210,8 +210,20 @@ void PGenerator::SetParameter(ParameterDouble *param)
 }
 
 
-void PGenerator::SetParameter(ParameterInteger *)
+void PGenerator::SetParameter(ParameterInteger *param)
 {
+    static const Command::E commands[ParameterIntegerType::Count] =
+    {
+        Command::SetPacketNumber
+    };
+
+    Value value = param->GetValue();
+
+    Chan ch(param->GetForm()->GetWave()->GetChannel());
+
+    Command com(commands[param->GetType()]);
+
+    Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
 }
 
 

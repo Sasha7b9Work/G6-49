@@ -176,7 +176,7 @@ class ParameterInteger : public Parameter
 {
 public:
 
-    ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const int min, const int max, const int value);
+    ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value);
 
     virtual String ToString(String &units) const;
 
@@ -184,19 +184,21 @@ public:
 
     virtual Tuner *GetTuner()  { return &tuner; }
 
-    int GetValue() const       { return value; }
+    Value GetValue() const       { return value; }
                                
-    int GetMax() const         { return max;   }
+    Value GetMax() const         { return max;   }
                                
-    int GetMin() const         { return min;   }
+    Value GetMin() const         { return min;   }
+
+    ParameterIntegerType::E GetType() { return type; }
 
 private:
 
     Tuner tuner;
     ParameterIntegerType::E type;
-    int min;
-    int max;
-    int value;
+    Value min;
+    Value max;
+    Value value;
 };
 
 

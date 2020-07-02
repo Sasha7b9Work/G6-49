@@ -272,14 +272,14 @@ int MathParameterDouble::GetNumberDigitsAfterComma(Order::E order)
 
 int MathParameterInteger::GetMaxNumberDigits(ParameterInteger *parameter)
 {
-    int max = parameter->GetMax();
+    Value max = parameter->GetMax();
 
     int result = 1;
 
-    while (max != 0)
+    while (max.Integer() != 0)
     {
         result++;
-        max /= 10;
+        max.Div(10);
     }
 
     return result;

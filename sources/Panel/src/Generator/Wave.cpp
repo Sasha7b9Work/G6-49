@@ -307,7 +307,7 @@ ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
 }
 
 
-ParameterComposite *Form::FindParameter(ParameterCompositeType::E p)
+ParameterComposite *Form::FindParameter(ParameterCompositeType::E t)
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -317,7 +317,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E p)
         {
             ParameterComposite *composite = static_cast<ParameterComposite *>(param);
 
-            if (composite->GetType() == p)
+            if (composite->GetType() == t)
             {
                 return composite;
             }
@@ -334,7 +334,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E p)
             {
                 ParameterComposite *composite = static_cast<ParameterComposite *>(param);
 
-                if (composite->GetType() == p)
+                if (composite->GetType() == t)
                 {
                     return composite;
                 }
@@ -346,8 +346,23 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E p)
 }
 
 
-ParameterInteger *Form::FindParameter(ParameterIntegerType::E)
+ParameterInteger *Form::FindParameter(ParameterIntegerType::E t)
 {
+    for (int i = 0; i < numParams; i++)
+    {
+        Parameter *param = params[i];
+
+        if (param->IsInteger())
+        {
+            ParameterInteger *integer = static_cast<ParameterInteger *>(param);
+
+            if (integer->GetType() == t)
+            {
+                return integer;
+            }
+        }
+    }
+
     return nullptr;
 }
 
