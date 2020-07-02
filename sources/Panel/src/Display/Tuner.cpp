@@ -761,7 +761,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
             }
 
             Tuner::Current()->SetModeEntering();
-            order = Tuner::Current()->ReinterpretToDouble()->GetValue().GetOrder();
+            order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
         }
 
         TryToAddSymbol(control.key);
@@ -777,7 +777,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 
 bool DisplayEntering::ValueInBoundaries()
 {
-    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+    Parameter *param = Tuner::Current()->GetParameter();
 
     Value min = param->GetMin();
     Value max = param->GetMax();
@@ -850,14 +850,17 @@ int DisplayEntering::DrawValue(int x, int y)
 
 void DisplayEntering::DrawUnits(int x, int y, int width)
 {
-    char units[10];
+    if (Tuner::Current()->GetParameter()->IsDouble())
+    {
+        char units[10];
 
-    std::strcpy(units, Order::Suffix(order));
-    std::strcat(units, Tuner::Current()->ReinterpretToDouble()->GetMainUnits());
+        std::strcpy(units, Order::Suffix(order));
+        std::strcat(units, Tuner::Current()->ReinterpretToDouble()->GetMainUnits());
 
-    Font::ForceUpperCase(false);
+        Font::ForceUpperCase(false);
 
-    String(units).DrawInArea(x, y, width);
+        String(units).DrawInArea(x, y, width);
+    }
 }
 
 
