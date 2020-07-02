@@ -1,14 +1,6 @@
 #pragma once
 
 
-#define START_WITHOUT_UPGRADE      0  /* Запуск без попытки обновления */
-#define START_WITH_AUTO_UPGRADE    1  /* Запуск с автоматическим обновлением - попытка обновиться с флешки в течение некоторого времени */
-#define START_WITH_MANUAL_UPGRADE  2  /* Запуск с обновлением по требованию - попытка обновления происходит, если загрузчик получает запрос на обновление от панели */
-
-
-#define MODE_START START_WITHOUT_UPGRADE
-
-
 typedef unsigned int       uint;
 typedef unsigned short     uint16;
 typedef unsigned short     uint16_t;

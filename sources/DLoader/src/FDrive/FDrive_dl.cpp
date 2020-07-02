@@ -96,6 +96,14 @@ void DLDrive::Init()
     }
 }
 
+void DLDrive::DeInit()
+{
+    USBH_Stop(&handle);
+    USBH_DeInit(&handle);
+    FATFS_UnLinkDriver(USBDISKPath);
+    f_mount(0, "", 0);
+}
+
 
 void DLDrive::Update()
 {

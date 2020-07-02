@@ -17,6 +17,12 @@ static void StartWithManualUpgrade();
 static void JumpToMainApplication();
 
 
+#define START_WITHOUT_UPGRADE      0  /* Запуск без попытки обновления */
+#define START_WITH_AUTO_UPGRADE    1  /* Запуск с автоматическим обновлением - попытка обновиться с флешки в течение некоторого времени */
+#define START_WITH_MANUAL_UPGRADE  2  /* Запуск с обновлением по требованию - попытка обновления происходит, если загрузчик получает запрос на обновление от панели */
+
+static int MODE_START = START_WITHOUT_UPGRADE;
+
 int main()
 {
     CPU::Init();
@@ -26,6 +32,8 @@ int main()
     pFuncVV funcs[] = { StartWithoutUpgrade, StartWithAutoUpgrade, StartWithManualUpgrade };
 
     funcs[MODE_START]();
+
+    DLDrive::DeInit();
 
     Message::StartMainApplication().TransmitAndSend();      // Посылаем команду запуска основного приложения
 
