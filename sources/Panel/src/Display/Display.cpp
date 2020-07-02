@@ -64,7 +64,7 @@ uint8 *Display::GetBuffer()
 
 uint8 *Display::GetRow(int row)
 {
-    return GetBuffer() + row * 320;
+    return frontBuffer + row * 320;
 }
 
 

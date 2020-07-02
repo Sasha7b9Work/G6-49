@@ -386,9 +386,10 @@ Message::FDrive::CreateFile::CreateFile(const char *name) : SimpleMessage()
 }
 
 
-Message::FDrive::WriteToFile::WriteToFile(void *data, int size) : SimpleMessage(size + 1, Command::FDrive_WriteToFile)
+Message::FDrive::WriteToFile::WriteToFile(void *data, int size) : SimpleMessage(size + 1 + 4, Command::FDrive_WriteToFile)
 {
-    std::memcpy(buffer + 1, data, static_cast<uint>(size));
+    PutINT(size);
+    std::memcpy(buffer + 5, data, static_cast<uint>(size));
 }
 
 

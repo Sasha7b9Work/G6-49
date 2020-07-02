@@ -453,9 +453,7 @@ static void CreateFile()
 {
     char fullName[256];
 
-    std::strcpy(fullName, "\\");
-    std::strcat(fullName, msg->String(1));
-    std::strcat(fullName, "\\");
+    std::strcpy(fullName, msg->String(1));
 
     f_open(&fileObj, fullName, FA_CREATE_ALWAYS | FA_WRITE);
 }
@@ -464,7 +462,8 @@ static void CreateFile()
 static void WriteToFile()
 {
     uint wr = 0;
-    f_write(&fileObj, msg->TakeData(1), 240, &wr);
+    uint size = static_cast<uint>(msg->TakeINT());
+    f_write(&fileObj, msg->TakeData(5), size, &wr);
 }
 
 

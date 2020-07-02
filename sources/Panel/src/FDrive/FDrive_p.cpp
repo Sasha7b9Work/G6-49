@@ -279,7 +279,7 @@ void FDrive::SaveScreenToFlash()
 
     for (int row = 239; row >= 0; row--)
     {
-        Message::FDrive::WriteToFile(Display::GetRow(row), 320);
+        Message::FDrive::WriteToFile(Display::GetRow(row), 320).Transmit();
     }
 
     Message::FDrive::CloseFile().Transmit();
