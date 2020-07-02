@@ -92,6 +92,8 @@ struct PageDebug
     // ¬ключить отображение страницы отладки
     static void Enable();
 
+    static bool SaveScreenToFlashIsEnabled();
+
     struct PageRegisters
     {
         static void Draw();

@@ -21,16 +21,19 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits)
 {
     Chan::E ch = param->GetForm()->GetWave()->GetChannel();
 
+    Color color = Color::Chan(ch);
+
     if((ch == CURRENT_CHANNEL) && 
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
         PageMain::OnSubPageTuneChannels())
     {
-        Rectangle(141, 9).Fill(xName, y, Color::GRAY_25);
+        Rectangle(141, 9).Fill(xName, y, Color::GRAY_50);
+        color = Color::BACK;
     }
 
     Font::ForceUpperCase(true);
 
-    String(param->Name()).Draw(xName + 1, y, Color::Chan(ch));
+    String(param->Name()).Draw(xName + 1, y, color);
 
     typedef void (Viewer::*funcDrawValue)(int, int, int);
 

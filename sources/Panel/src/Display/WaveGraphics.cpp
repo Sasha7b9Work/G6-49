@@ -35,6 +35,8 @@ void WaveGraphics::Draw(Chan::E ch)
     }
     else
     {
+        Color::Chan(ch).SetAsCurrent();
+
         Font::StoreAndSet(TypeFont::_GOST28);
         Font::Spacing::SetAndStore(3);
 

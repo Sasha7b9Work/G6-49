@@ -413,14 +413,35 @@ static void OnPress_DebugMode(bool)
     PGenerator::SetDebugMode(set.dbg.modeEnabled != 0);
 }
 
-DEF_CHOICE_2( cConsole,                                                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ ---
+DEF_CHOICE_2(cConsole,                                                                                                                                           //--- ОТЛАДКА - КОНСОЛЬ ---
     "КОНСОЛЬ", "CONSOLE",
     "Включает и выключает отображение отладочной консоли", "Turns the debug console display on or off",
-    DISABLED_RU,                     DISABLED_EN,
+    DISABLED_RU, DISABLED_EN,
     "Отображение консоли выключено", "Console display off",
-    ENABLED_RU,                      ENABLED_EN,
-    "Отображение консоли включено",  "Console Display Enabled",
+    ENABLED_RU, ENABLED_EN,
+    "Отображение консоли включено", "Console Display Enabled",
     set.dbg.showConsole, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
+)
+
+
+static bool saveSreenEnabled = false;
+
+
+bool PageDebug::SaveScreenToFlashIsEnabled()
+{
+    return saveSreenEnabled;
+}
+
+
+DEF_CHOICE_2( cSaveScreen,
+    "Сохранение", "Saving",
+    "При включенной опции и подключенной флешке при нажатии на ручку будет происходить сохранение экрана",
+    "When the option is enabled and a USB flash drive is connected, pressing the handle will save the screen",
+    DISABLED_RU, DISABLED_EN,
+    "Ручка выполняет стандартную функцию", "The handle performs a standard function",
+    ENABLED_RU, ENABLED_EN,
+    "Нажатие на ручку сохраняет содержимое экрана на флешку", "Pressing the pen saves the contents of the screen to a USB flash drive",
+    saveSreenEnabled, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -615,7 +636,7 @@ DEF_GOVERNOR(gFreqMeterK,                                                       
 )
 
 
-DEF_PAGE_9( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641
+DEF_PAGE_10( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641
     "ОТЛАДКА", "DEBUG",   //-V641
     "", "",
     PageDebug::Calibartion::self,
@@ -624,6 +645,7 @@ DEF_PAGE_9( pDebug,                                                             
     &gFreqMeterK,
     PageDebug::Colors::self,
     &cConsole,                                  // ОТЛАДКА - Консоль
+    &cSaveScreen,
     &cStatistics,                               // ОТЛАДКА - Статистика
     &cShowSends,                                // ОТЛАДКА - Показывать параметры
     &bSaveSettings,                             // ОТЛАДКА - Сохранить настройки
