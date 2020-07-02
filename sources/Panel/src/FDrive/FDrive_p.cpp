@@ -177,6 +177,36 @@ static void CreateFileName(char name[256])
 }
 
 
+static col_val cols[32] =
+{
+    MAKE_COLOR(0x00, 0x00, 0x00),   // BLACK
+    MAKE_COLOR(0xff, 0xff, 0xff),   // WHITE
+    MAKE_COLOR(25, 25, 25),         // GRAY_10
+    MAKE_COLOR(0x30, 0x30, 0x30),   // GRAY_25
+    MAKE_COLOR(0x80, 0x80, 0x80),   // GRAY_50
+    MAKE_COLOR(0xC0, 0xC0, 0xC0),   // GRAY_75
+    MAKE_COLOR(0x00, 0x00, 0xff),   // BLUE
+    MAKE_COLOR(0x00, 0x00, 25),     // BLUE_10
+    MAKE_COLOR(0x00, 0x00, 0x40),   // BLUE_25
+    MAKE_COLOR(0x00, 0x00, 0x80),   // BLUE_50
+    MAKE_COLOR(0x00, 0x00, 0xc0),   // BLUE_75
+    MAKE_COLOR(0x00, 0xff, 0x00),   // GREEN
+    MAKE_COLOR(0x00, 13, 0x00),     // GREEN_5
+    MAKE_COLOR(0x00, 25, 0x00),     // GREEN_10
+    MAKE_COLOR(0x00, 0x50, 0x00),   // GREEN_25
+    MAKE_COLOR(0x00, 0x80, 0x00),   // GREEN_50
+    MAKE_COLOR(0x00, 0xc0, 0x00),   // GREEN_75
+    MAKE_COLOR(0xff, 0x00, 0x00),   // RED
+    MAKE_COLOR(0x40, 0x00, 0x00),   // RED_25
+    MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
+    MAKE_COLOR(0xc0, 0x00, 0x00),   // RED_75
+    MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
+    MAKE_COLOR(0xA0, 0xA0, 0xFF)    // CHAN_B
+};
+
+#define COL(x) cols[x]
+
+
 void FDrive::SaveScreenToFlash()
 {
     if (!mounted)
@@ -264,7 +294,7 @@ void FDrive::SaveScreenToFlash()
 
     for (int i = 0; i < 32; i++)
     {
-        uint color = COLOR(i);
+        uint color = COL(i);
         colorStruct.blue = (uint8)((float)B_FROM_COLOR(color));
         colorStruct.green = (uint8)((float)G_FROM_COLOR(color));
         colorStruct.red = (uint8)((float)R_FROM_COLOR(color));
