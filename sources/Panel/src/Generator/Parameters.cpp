@@ -213,6 +213,21 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 }
 
 
+bool ParameterInteger::SetAndLoadValue(Value val)
+{
+    if (!InRange(val))
+    {
+        return false;
+    }
+
+    value = val;
+
+    PGenerator::SetParameter(this);
+
+    return true;
+}
+
+
 bool ParameterDouble::IsVoltage() const
 {
     return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset);
@@ -327,6 +342,12 @@ bool ParameterDouble::InRange(Value val) const
 }
 
 
+bool ParameterInteger::InRange(Value val) const
+{
+    return (val >= min && val <= max);
+}
+
+
 int ParameterChoice::NumChoices() const
 {
     int count = 0;
@@ -375,6 +396,12 @@ String ParameterDouble::ToString(Value val) const
 }
 
 
+String ParameterInteger::ToString(Value val) const
+{
+    return String(val.ToString(false, Order::One));
+}
+
+
 ParameterInteger::ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
     Parameter(ParameterKind::Integer, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
 {
@@ -416,7 +443,7 @@ void ParameterComposite::OnPressButtonTune()
 }
 
 
-Value ParameterAmplitude::GetMax()
+Value ParameterAmplitude::GetMax() const
 {
     // ampl / 2 + fabs(cm) <= 5
 
@@ -431,7 +458,7 @@ Value ParameterAmplitude::GetMax()
 }
 
 
-Value ParameterOffset::GetMax()
+Value ParameterOffset::GetMax() const
 {
     // ΐμολ == 0  | [0 ... 5]
     // ΐμολ <= 1Β | [0 ... 2.5], ampl / 2 + fabs(ρμ) <= 2.5
@@ -458,7 +485,7 @@ Value ParameterOffset::GetMax()
 }
 
 
-Value ParameterOffset::GetMin()
+Value ParameterOffset::GetMin() const
 {
     Value result = GetMax();
 

@@ -413,7 +413,42 @@ bool Indicator::IsSigned() const
 
 void Indicator::IncreaseInPosition(int pos)
 {
+    if (Tuner::Current()->GetParameter()->IsDouble())
+    {
+        IncreaseInPositionDouble(pos);
+    }
+    else
+    {
+        IncreaseInPositionInteger(pos);
+    }
+}
+
+
+void Indicator::IncreaseInPositionDouble(int pos)
+{
     ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+
+    Value value = param->GetValue();
+
+    if (!ChangeSign(&value, pos))
+    {
+        Value step = StepPosition(pos);
+
+        value.Add(step);
+    }
+
+    if (value != param->GetValue() && value <= param->GetMax())
+    {
+        display->Init(value);
+    }
+
+    DisplayCorrection::ShowMessageOutRangIfNeed(value);
+}
+
+
+void Indicator::IncreaseInPositionInteger(int pos)
+{
+    ParameterInteger *param = Tuner::Current()->ReinterpretToInteger();
 
     Value value = param->GetValue();
 
@@ -695,7 +730,7 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 
 void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 {
-    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+    Parameter *param = Tuner::Current()->GetParameter();
 
     if (value > param->GetMax() || value < param->GetMin())
     {
@@ -898,9 +933,14 @@ void DisplayCorrection::InitInteger()
 
 Order::E DisplayCorrection::CalculateOrderForIndication()
 {
-    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+    if (Tuner::Current()->GetParameter()->IsDouble())
+    {
+        ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
-    return param->IsVoltage() ? Order::One : param->GetValue().GetOrder();
+        return param->IsVoltage() ? Order::One : param->GetValue().GetOrder();
+    }
+
+    return Order::One;
 }
 
 
@@ -968,7 +1008,16 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 
 void DisplayCorrection::Init(Value value)
 {
-    tuner->ReinterpretToDouble()->SetAndLoadValue(value);
+    Parameter *param = Tuner::Current()->GetParameter();
+
+    if (param->IsDouble())
+    {
+        tuner->ReinterpretToDouble()->SetAndLoadValue(value);
+    }
+    else if (param->IsInteger())
+    {
+        tuner->ReinterpretToInteger()->SetAndLoadValue(value);
+    }
     Init();
 }
 

@@ -90,7 +90,7 @@ struct Value
     Order::E GetOrder() const;
 
     // Возращает строку значения
-    pString ToString(bool sign) const;
+    pString ToString(bool sign, Order::E order = Order::Count) const;
 
     bool operator<(const Value &);
     bool operator>(const Value &);

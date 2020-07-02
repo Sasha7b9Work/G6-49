@@ -66,6 +66,12 @@ public:
 
     Viewer viewer;
 
+    virtual Value GetMax() const { return Value("1"); }
+
+    virtual Value GetMin() const { return Value("0"); }
+
+    virtual String ToString(Value) const { return String(""); };
+
 protected:
     
     Form *form;         // ‘орма, дл€ которой зада этот параметр
@@ -126,7 +132,7 @@ public:
 
     // ¬озвращает строковое представление значени€ параметра
     virtual String ToString(String &units) const;
-    String ToString(Value value) const;
+    virtual String ToString(Value value) const;
 
     // ¬озвращает основные единицы измерени€ (без учЄта пор€дка)
     pString GetMainUnits() const;
@@ -135,10 +141,10 @@ public:
     pString GetUnits(Order::E order = Order::Count) const;
 
     // ¬озвращает максимальное значение, которое может иметь параметр
-    virtual Value GetMax() { return max; }
+    virtual Value GetMax() const { return max; }
     
     // ¬озвращает минимальное значение, которое может иметь параметр
-    virtual Value GetMin() { return min; }
+    virtual Value GetMin() const { return min; }
 
     virtual Tuner *GetTuner()   { return &tuner; };
 
@@ -186,11 +192,17 @@ public:
 
     Value GetValue() const       { return value; }
                                
-    Value GetMax() const         { return max;   }
+    virtual Value GetMax() const         { return max;   }
                                
-    Value GetMin() const         { return min;   }
+    virtual Value GetMin() const         { return min;   }
+
+    virtual String ToString(Value value) const;
 
     ParameterIntegerType::E GetType() { return type; }
+
+    bool SetAndLoadValue(Value val);
+
+    bool InRange(Value v) const;
 
 private:
 
@@ -312,7 +324,7 @@ public:
     ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = DEFAULT_AMPLITUDE) :
         ParameterVoltage(ParameterDoubleType::Amplitude, "–азмах", "Amplitude", min, max, value) { }
 
-    virtual Value GetMax();
+    virtual Value GetMax() const;
 };
 
 
@@ -322,8 +334,8 @@ public:
     ParameterOffset(const Value &min = Value("-5"), const Value &max = Value("5"), const Value &value = Value("0")) :
         ParameterVoltage(ParameterDoubleType::Offset, "—мещение", "Offset", min, max, value) { }
 
-    virtual Value GetMax();
-    virtual Value GetMin();
+    virtual Value GetMax() const;
+    virtual Value GetMin() const;
 };
 
 

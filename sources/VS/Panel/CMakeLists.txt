@@ -52,6 +52,7 @@ endforeach()
 
 
 add_compile_options(/wd4211)    # nonstandard extension used: redefined extern to static
+add_compile_options(/wd4266)    # 'xxx': no override available for virtual member function from base 'yyy'; function is hidden
 add_compile_options(/wd4355)    # used in base member initializer list
 add_compile_options(/wd4514)    # unreferenced inline function has been removed
 add_compile_options(/wd4623)    # 'xxx': default constructor was implicitly defined as deleted

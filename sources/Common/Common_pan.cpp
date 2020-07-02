@@ -12,7 +12,7 @@ static void AddChar(char *buffer, const Value &value, int pos)
 }
 
 
-pString Value::ToString(bool sign) const
+pString Value::ToString(bool sign, Order::E order) const
 {
     static char buffer[50];
 
@@ -27,7 +27,7 @@ pString Value::ToString(bool sign) const
         buffer[1] = '\0';
     }
 
-    int first = MathDouble::GetPositionFirstDigit(*this, GetOrder());
+    int first = MathDouble::GetPositionFirstDigit(*this, (order == Order::Count) ? GetOrder() : order);
 
     for (int i = first; i >= 0; i--)
     {

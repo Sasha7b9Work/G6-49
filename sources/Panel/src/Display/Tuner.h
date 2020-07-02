@@ -94,6 +94,8 @@ private:
 
     // Увеличить значение в указанном разряде
     void IncreaseInPosition(int pos);
+    void IncreaseInPositionDouble(int pos);
+    void IncreaseInPositionInteger(int pos);
 
     // Уменьшить значение в указанном разряде
     void DecreaseInPosition(int pos);
