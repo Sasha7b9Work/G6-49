@@ -446,19 +446,29 @@ static void FillPicture(uint8 *picture, uint size, float values[4096])
 }
 
 
+static FIL fileObj;
+
+
 static void CreateFile()
 {
+    char fullName[256];
 
+    std::strcpy(fullName, "\\");
+    std::strcat(fullName, msg->String(1));
+    std::strcat(fullName, "\\");
+
+    f_open(&fileObj, fullName, FA_CREATE_ALWAYS | FA_WRITE);
 }
 
 
 static void WriteToFile()
 {
-
+    uint wr = 0;
+    f_write(&fileObj, msg->TakeData(1), 240, &wr);
 }
 
 
 static void CloseFile()
 {
-
+    f_close(&fileObj);
 }

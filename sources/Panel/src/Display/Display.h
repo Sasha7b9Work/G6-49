@@ -24,6 +24,7 @@ struct Display
     static uint8 *GetRow(int row);
     
     static void ShowWarning(String warning);
+    static void ShowWarning(const char *warning);
 
     static void ClearWarnings();
 

@@ -115,6 +115,12 @@ void Display::ShowWarning(String warning)
 }
 
 
+void Display::ShowWarning(const char *warning)
+{
+    ShowWarning(String(warning));
+}
+
+
 void Warnings::Append(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
