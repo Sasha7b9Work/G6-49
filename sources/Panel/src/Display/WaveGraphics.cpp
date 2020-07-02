@@ -29,14 +29,14 @@ void WaveGraphics::Draw(Chan::E ch)
 
     DrawParameters(ch, y0);
 
+    Color::Chan(ch).SetAsCurrent();
+
     if (ENABLED_CH(ch))
     {
         FORM(ch)->DrawUGO(ch, y0);
     }
     else
     {
-        Color::Chan(ch).SetAsCurrent();
-
         Font::StoreAndSet(TypeFont::_GOST28);
         Font::Spacing::SetAndStore(3);
 
