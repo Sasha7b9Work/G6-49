@@ -848,9 +848,9 @@ void DisplayCorrection::InitDouble()
 
     indicator.digits[before].Set(Digit::COMMA);
 
-    FillDigitsIntegerPart();
+    FillDigitsIntegerPartForDouble();
 
-    FillDigitsFractPart();
+    FillDigitsFractPartForDouble();
 }
 
 
@@ -862,6 +862,8 @@ void DisplayCorrection::InitInteger()
     {
         indicator.digits[i].Set('0');
     }
+
+    FillDigitsForInteger();
 }
 
 
@@ -873,7 +875,7 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
 }
 
 
-void DisplayCorrection::FillDigitsIntegerPart()
+void DisplayCorrection::FillDigitsIntegerPartForDouble()
 {
     Order::E order = CalculateOrderForIndication();
 
@@ -901,7 +903,23 @@ void DisplayCorrection::FillDigitsIntegerPart()
 }
 
 
-void DisplayCorrection::FillDigitsFractPart()
+void DisplayCorrection::FillDigitsForInteger()
+{
+    ParameterInteger *param = tuner->ReinterpretToInteger();
+
+    Value value = param->GetValue();
+
+    int pos = MathParameterInteger::GetMaxNumberDigits(param) - 1;
+
+    for (int i = 0; pos >= 0; i++)
+    {
+        indicator.digits[pos].Set(MathDouble::GetChar(value, i, Order::One));
+        pos--;
+    }
+}
+
+
+void DisplayCorrection::FillDigitsFractPartForDouble()
 {
     Order::E order = CalculateOrderForIndication();
 

@@ -246,10 +246,12 @@ private:
     void DrawUnits(int x, int y);
 
     // «аполнить разр€ды целой части параметра
-    void FillDigitsIntegerPart();
+    void FillDigitsIntegerPartForDouble();
 
     // «аполнить разр€ды дробной части параметра
-    void FillDigitsFractPart();
+    void FillDigitsFractPartForDouble();
+
+    void FillDigitsForInteger();
 
     void InitDouble();
 
