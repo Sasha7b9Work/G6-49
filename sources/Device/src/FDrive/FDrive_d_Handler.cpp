@@ -30,6 +30,10 @@ static void RequestFileSize();
 static void LoadDDSfromFile();
 static void GetPictureDDS();
 
+static void CreateFile();
+static void WriteToFile();
+static void CloseFile();
+
 // Трансформировать точки в пригодный для записи в ПЛИС вид
 static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POINTS * 2]);
 
@@ -71,21 +75,14 @@ void DDrive::Handler::Processing(SimpleMessage *message)
 
     switch(com)
     {
-    case Command::FDrive_NumDirsAndFiles:
-        func = GetNumDirsAndFiles;
-        break;
-    case Command::FDrive_RequestFile:
-        func = RequestFile;
-        break;
-    case Command::FDrive_RequestFileSize:
-        func = RequestFileSize;
-        break;
-    case Command::FDrive_LoadDDSfromFile:
-        func = LoadDDSfromFile;
-        break;
-    case Command::FDrive_RequestPictureDDSfromFile:
-        func = GetPictureDDS;
-        break;
+    case Command::FDrive_NumDirsAndFiles:               func = GetNumDirsAndFiles;  break;
+    case Command::FDrive_RequestFile:                   func = RequestFile;         break;
+    case Command::FDrive_RequestFileSize:               func = RequestFileSize;     break;
+    case Command::FDrive_LoadDDSfromFile:               func = LoadDDSfromFile;     break;
+    case Command::FDrive_RequestPictureDDSfromFile:     func = GetPictureDDS;       break;
+    case Command::FDrive_CreateFile:                    func = CreateFile;          break;
+    case Command::FDrive_WriteToFile:                   func = WriteToFile;         break;
+    case Command::FDrive_CloseFile:                     func = CloseFile;           break;
     }
 
     func();
@@ -446,4 +443,22 @@ static void FillPicture(uint8 *picture, uint size, float values[4096])
 
         picture[i] = static_cast<uint8>(aveValue + val * 125.0F);
     }
+}
+
+
+static void CreateFile()
+{
+
+}
+
+
+static void WriteToFile()
+{
+
+}
+
+
+static void CloseFile()
+{
+
 }

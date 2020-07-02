@@ -131,6 +131,9 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::FDrive_RequestFileSize:
     case Command::FDrive_LoadDDSfromFile:
     case Command::FDrive_RequestPictureDDSfromFile:
+    case Command::FDrive_CreateFile:
+    case Command::FDrive_WriteToFile:
+    case Command::FDrive_CloseFile:
         func = DDrive::Handler::Processing;
         break;
     }
