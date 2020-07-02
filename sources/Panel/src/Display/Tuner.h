@@ -110,7 +110,7 @@ private:
     // Возвращает цвет, которым нужно отрисовывать символ в позиции pos. Если test == true, то функция всегда будет возвращать цвет фона
     Color CalculateColorDouble(int pos, bool test) const;
 
-    Color CalculateColorInteger(bool test) const;
+    Color CalculateColorInteger(int pos, bool test) const;
 
     // Возвращает true, если нужно дополнительное смещение между разрядами
     int AdditionShiftForDigit(int pos) const;

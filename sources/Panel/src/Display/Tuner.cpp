@@ -192,7 +192,7 @@ int Indicator::DrawInteger(int x, int y, bool test) const
 
     while (digits[pos] != '\0')
     {
-        Color color = CalculateColorInteger(test);
+        Color color = CalculateColorInteger(pos, test);
 
         Char(digits[pos]).Draw(x, y, color);
 
@@ -220,11 +220,22 @@ int Indicator::DrawInteger(int x, int y, int width) const
 }
 
 
-Color Indicator::CalculateColorInteger(bool test) const
+#define COLOR_SHADOW Color::GRAY_10;        // Ётим цветом вывод€тс€ "назначащие знакоместа"
+
+
+Color Indicator::CalculateColorInteger(int pos, bool test) const
 {
     if (test)
     {
         return Color::BACK;
+    }
+
+    if (digits[pos] == '0')
+    {
+        if (AllNumbersOfLeftIsZero(pos))
+        {
+            return COLOR_SHADOW;
+        }
     }
 
     return Color::FILL;
@@ -233,8 +244,6 @@ Color Indicator::CalculateColorInteger(bool test) const
 
 Color Indicator::CalculateColorDouble(int pos, bool test) const
 {
-#define COLOR_SHADOW Color::GRAY_10;        // Ётим цветом вывод€тс€ "назначащие знакоместа"
-
     if (test)
     {
         return Color::BACK;
