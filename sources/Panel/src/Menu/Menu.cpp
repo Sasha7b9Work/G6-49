@@ -1,6 +1,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
+#include "FDrive/FDrive_p.h"
 #include "Generator/Signals.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -33,6 +34,16 @@ void Menu::Update()
     while (!Keyboard::BufferIsEmpty())
     {
         Control control = Keyboard::GetNextControl();
+
+        if (PageDebug::SaveScreenToFlashIsEnabled() && control.key == Key::RegButton)
+        {
+            if (control.IsDown())
+            {
+                FDrive::SaveScreenToFlash();
+            }
+
+            continue;
+        }
 
         if(OpenDebugPage(control))                              // Открываем страницу отладки, если распознали соотвествующую клавиатурную последовательность
         {

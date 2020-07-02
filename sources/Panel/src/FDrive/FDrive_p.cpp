@@ -164,3 +164,9 @@ char *FDrive::CurrentDirectory()
 {
     return directory;
 }
+
+
+void FDrive::SaveScreenToFlash()
+{
+
+}

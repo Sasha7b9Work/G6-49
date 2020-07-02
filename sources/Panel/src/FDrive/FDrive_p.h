@@ -31,6 +31,8 @@ struct FDrive
 
     static char *CurrentDirectory();
 
+    static void SaveScreenToFlash();
+
     struct Handler
     {
         static bool Processing(SimpleMessage *msg);
