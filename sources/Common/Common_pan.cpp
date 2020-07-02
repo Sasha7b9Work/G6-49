@@ -4,10 +4,10 @@
 #include <cstring>
 
 
-static void AddChar(char *buffer, const Value &value, int pos)
+static void AddChar(char *buffer, const Value &value, int pos, Order::E order)
 {
     char digit[2] = { 0, 0 };
-    digit[0] = MathDouble::GetChar(value, pos, value.GetOrder());
+    digit[0] = MathDouble::GetChar(value, pos, order);
     std::strcat(buffer, digit);
 }
 
@@ -27,18 +27,20 @@ pString Value::ToString(bool sign, Order::E order) const
         buffer[1] = '\0';
     }
 
-    int first = MathDouble::GetPositionFirstDigit(*this, (order == Order::Count) ? GetOrder() : order);
+    order = (order == Order::Count) ? GetOrder() : order;
+
+    int first = MathDouble::GetPositionFirstDigit(*this, order);
 
     for (int i = first; i >= 0; i--)
     {
-        AddChar(buffer, *this, i);
+        AddChar(buffer, *this, i, order);
     }
 
     std::strcat(buffer, ".");
 
     for (int i = -1; i >= -9; i--)
     {
-        AddChar(buffer, *this, i);
+        AddChar(buffer, *this, i, order);
     }
 
     while (buffer[std::strlen(buffer) - 1] == '0') //-V1044
