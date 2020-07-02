@@ -377,6 +377,27 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 }
 
 
+Message::FDrive::CreateFile::CreateFile(const char *name) : SimpleMessage()
+{
+    int size = 1 + static_cast<int>(std::strlen(name)) + 1;
+    AllocateMemory(size);
+    PutUINT8(Command::FDrive_CreateFile);
+    std::strcpy(reinterpret_cast<char *>(buffer + 1), name);
+}
+
+
+Message::FDrive::WriteToFile::WriteToFile(void *data, int size) : SimpleMessage(size + 1, Command::FDrive_WriteToFile)
+{
+    std::memcpy(buffer + 1, data, static_cast<uint>(size));
+}
+
+
+Message::FDrive::CloseFile::CloseFile() : SimpleMessage(1, Command::FDrive_CloseFile)
+{
+
+}
+
+
 Message::FDrive::FileString::FileString(uint numString, char *nameFile) : SimpleMessage()
 {
     //          commmand  numString  nameFile                завершающий_ноль

@@ -228,6 +228,25 @@ namespace Message
         public:
             LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory);
         };
+
+
+        class CreateFile : public SimpleMessage
+        {
+        public:
+            CreateFile(const char *name);
+        };
+
+        class WriteToFile : public SimpleMessage
+        {
+        public:
+            WriteToFile(void *data, int size);
+        };
+
+        class CloseFile : public SimpleMessage
+        {
+        public:
+            CloseFile();
+        };
     }
 
 

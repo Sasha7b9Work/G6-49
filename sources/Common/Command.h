@@ -97,6 +97,9 @@ struct Command
             SetFreqMeterTrigK,              // Установка калибровочного коээфициента для уровня синхронизации частотомера
             RequestPictureDDSfromStorage,   // Запрос изображения сигнала, сохранённого в ППЗУ
             LoadDDSfromStorage,             // Загрузка сигнала из ППЗУ
+            FDrive_CreateFile,
+            FDrive_WriteToFile,
+            FDrive_CloseFile,
             Count
     } value;
     Command(E v) : value(v) {};

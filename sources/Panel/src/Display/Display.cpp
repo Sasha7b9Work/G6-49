@@ -62,6 +62,12 @@ uint8 *Display::GetBuffer()
 }
 
 
+uint8 *Display::GetRow(int row)
+{
+    return GetBuffer() + row * 320;
+}
+
+
 void Display::DrawScreenSplash()
 {
     Painter::BeginScene(Color::BACK);

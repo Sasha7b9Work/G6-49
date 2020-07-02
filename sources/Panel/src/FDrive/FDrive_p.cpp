@@ -11,6 +11,7 @@
 #include "Settings/Settings.h"
 #include "Hardware/Timer.h"
 #include <cstdlib>
+#include <cstdio>
 
 
 using namespace Primitives;
@@ -166,7 +167,119 @@ char *FDrive::CurrentDirectory()
 }
 
 
+static void CreateFileName(char name[256])
+{
+    static int number = 0;
+
+    std::snprintf(name, 255, "G649_%03d.bmp", number);
+
+    number++;
+}
+
+
 void FDrive::SaveScreenToFlash()
 {
+    if (!mounted)
+    {
+        return;
+    }
 
+#pragma pack(1)
+    struct BITMAPFILEHEADER
+    {
+        char    type0;      // 0
+        char    type1;      // 1
+        uint    size;       // 2
+        uint16  res1;       // 6
+        uint16  res2;       // 8
+        uint    offBits;    // 10
+    }
+    bmFH =
+    {
+        0x42,
+        0x4d,
+        14 + 40 + 1024 + 320 * 240,
+        0,
+        0,
+        14 + 40 + 1024
+    };
+
+    // 14
+
+    struct BITMAPINFOHEADER
+    {
+        uint    size;           // 14
+        int     width;          // 18
+        int     height;         // 22
+        uint16  planes;         // 26
+        uint16  bitCount;       // 28
+        uint    compression;    // 30
+        uint    sizeImage;      // 34
+        int     xPelsPerMeter;  // 38
+        int     yPelsPerMeter;  // 42
+        uint    clrUsed;        // 46
+        uint    clrImportant;   // 50
+        //uint    notUsed[15];
+    }
+    bmIH =
+    {
+        40, // size;
+        320,// width;
+        240,// height;
+        1,  // planes;
+        8,  // bitCount;
+        0,  // compression;
+        0,  // sizeImage;
+        0,  // xPelsPerMeter;
+        0,  // yPelsPerMeter;
+        0,  // clrUsed;
+        0   // clrImportant;
+    };
+
+    // 54
+#pragma pack(4)
+
+    char fileName[255];
+
+    CreateFileName(fileName);
+
+    Message::FDrive::CreateFile(fileName).Transmit();
+
+    Message::FDrive::WriteToFile(&bmFH, 14).Transmit();
+
+    Message::FDrive::WriteToFile(&bmIH, 40).Transmit();
+
+    uint8 buffer[320 * 3] = { 0 };
+
+    typedef struct tagRGBQUAD
+    {
+        uint8    blue;
+        uint8    green;
+        uint8    red;
+        uint8    rgbReserved;
+    } RGBQUAD;
+
+    RGBQUAD colorStruct;
+
+    for (int i = 0; i < 32; i++)
+    {
+        uint color = COLOR(i);
+        colorStruct.blue = (uint8)((float)B_FROM_COLOR(color));
+        colorStruct.green = (uint8)((float)G_FROM_COLOR(color));
+        colorStruct.red = (uint8)((float)R_FROM_COLOR(color));
+        colorStruct.rgbReserved = 0;
+        (reinterpret_cast<RGBQUAD *>(buffer))[i] = colorStruct;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        Message::FDrive::WriteToFile(buffer, 256).Transmit();
+    }
+
+    for (int row = 239; row >= 0; row--)
+    {
+        Message::FDrive::WriteToFile(Display::GetRow(row), 320);
+    }
+
+    Message::FDrive::CloseFile().Transmit();
 }

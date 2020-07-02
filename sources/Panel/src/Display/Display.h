@@ -20,6 +20,8 @@ struct Display
     static void DrawScreenSplash();
 
     static uint8 *GetBuffer();
+
+    static uint8 *GetRow(int row);
     
     static void ShowWarning(String warning);
 
