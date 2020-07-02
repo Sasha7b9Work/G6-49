@@ -72,6 +72,8 @@ public:
 
     virtual String ToString(Value) const { return String(""); };
 
+    virtual Value GetValue() const { return Value("1"); }
+
 protected:
     
     Form *form;         // Форма, для которой зада этот параметр

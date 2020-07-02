@@ -470,7 +470,7 @@ void Indicator::IncreaseInPositionInteger(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+    Parameter *param = Tuner::Current()->GetParameter();
 
     Value value = param->GetValue();
 
