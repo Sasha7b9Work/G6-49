@@ -199,7 +199,7 @@ void FDrive::SaveScreenToFlash()
     {
         0x42,
         0x4d,
-        14 + 40 + 1024 + 320 * 240,
+        14 + 40 + 1024 + 320 * 237,
         0,
         0,
         14 + 40 + 1024
@@ -226,7 +226,7 @@ void FDrive::SaveScreenToFlash()
     {
         40, // size;
         320,// width;
-        240,// height;
+        237,// height;
         1,  // planes;
         8,  // bitCount;
         0,  // compression;
@@ -277,7 +277,7 @@ void FDrive::SaveScreenToFlash()
         Message::FDrive::WriteToFile(buffer, 256).Transmit();
     }
 
-    for (int row = 239; row >= 0; row--)
+    for (int row = 238; row >= 2; row--)
     {
         Message::FDrive::WriteToFile(Display::GetRow(row), 320).Transmit();
     }

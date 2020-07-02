@@ -37,7 +37,7 @@ void Transceiver::Transmit(SimpleMessage *message)
         {
             // \todo Затычка на то, что при быстром нажатии кнопки ФОРМА происходит зависание. По хорошему надо бы разобраться в чем дело.
             failed++;
-            if(failed > 5)
+            if(failed > 15)
             {
                 break;
             }
