@@ -184,16 +184,6 @@ int Indicator::DrawDouble(int x, int y, bool test) const
 }
 
 
-int Indicator::DrawInteger(int x, int y, int width) const
-{
-    int end = DrawInteger(x, y, true);
-
-    x += (width - (end - x)) / 2;
-
-    return DrawInteger(x, y, false);
-}
-
-
 int Indicator::DrawInteger(int x, int y, bool test) const
 {
     static const int dx = 12;
@@ -206,12 +196,27 @@ int Indicator::DrawInteger(int x, int y, bool test) const
 
         Char(digits[pos]).Draw(x, y, color);
 
+        if (pos == IndexHighlightReal())
+        {
+            HighlightSymbol(x, y, test ? Color::BACK : Color::FILL);
+        }
+
         x += dx;
 
         pos++;
     }
 
     return x;
+}
+
+
+int Indicator::DrawInteger(int x, int y, int width) const
+{
+    int end = DrawInteger(x, y, true);
+
+    x += (width - (end - x)) / 2;
+
+    return DrawInteger(x, y, false);
 }
 
 
@@ -500,11 +505,26 @@ bool Indicator::CommaInPosition(int pos) const
 
 int Indicator::PositionComma() const
 {
-    for (int i = 0; i < MAX_NUM_DIGITS; i++)
+    Parameter *param = Tuner::Current()->GetParameter();
+
+    if (param->IsDouble())
     {
-        if (digits[i] == Digit::COMMA)
+        for (int i = 0; i < MAX_NUM_DIGITS; i++)
         {
-            return i;
+            if (digits[i] == Digit::COMMA)
+            {
+                return i;
+            }
+        }
+    }
+    else if(param->IsInteger())
+    {
+        for (int i = 0; i < MAX_NUM_DIGITS; i++)
+        {
+            if (digits[i].IsEmpty())
+            {
+                return i;
+            }
         }
     }
 
