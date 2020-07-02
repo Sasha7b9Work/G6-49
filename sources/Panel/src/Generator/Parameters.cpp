@@ -385,7 +385,7 @@ String ParameterInteger::ToString(String &units) const
 {
     units.Free();
 
-    return String("%d", value);
+    return String("%d", value.Integer());
 }
 
 
