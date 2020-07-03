@@ -46,6 +46,7 @@ enum //-V2521
     CREATE_TRIANGLE,
     CREATE_TRAPEZE,
     CREATE_EXPONENT,
+    CREATE_SINX,
     INSERT_POINTS
 };
 
@@ -91,28 +92,29 @@ Frame::Frame(const wxString &title)
 
     SetSizeAndPosition();
 
-    Bind(wxEVT_MENU, &Frame::OnQuit, this, MENU_FILE_QUIT);
-    Bind(wxEVT_MENU, &Frame::OnDeletePoint, this, CONTEXT_MENU_DELETE);
-    Bind(wxEVT_MENU, &Frame::OnParametersPoint, this, CONTEXT_MENU_PARAMETERS);
-    Bind(wxEVT_MENU, &Frame::OnAlignLeft, this, ALIGN_LEFT);
-    Bind(wxEVT_MENU, &Frame::OnAlignRight, this, ALIGN_RIGHT);
-    Bind(wxEVT_MENU, &Frame::OnAlignLeftTop, this, ALIGN_LEFT_TOP);
-    Bind(wxEVT_MENU, &Frame::OnAlignLeftDown, this, ALIGN_LEFT_DOWN);
-    Bind(wxEVT_MENU, &Frame::OnAlignRightTop, this, ALIGN_RIGHT_TOP);
-    Bind(wxEVT_MENU, &Frame::OnAlignRightDown, this, ALIGN_RIGHT_DOWN);
-    Bind(wxEVT_MENU, &Frame::OnOpenFile, this, FILE_OPEN);
-    Bind(wxEVT_MENU, &Frame::OnSaveFile, this, FILE_SAVE);
-    Bind(wxEVT_MENU, &Frame::OnNewFile, this, FILE_NEW);
-    Bind(wxEVT_MENU, &Frame::OnUndo, this, UNDO);
-    Bind(wxEVT_MENU, &Frame::OnRedo, this, REDO);
-    Bind(wxEVT_MENU, &Frame::CreateSine, this, CREATE_SINE);
-    Bind(wxEVT_MENU, &Frame::CreateTriangle, this, CREATE_TRIANGLE);
-    Bind(wxEVT_MENU, &Frame::CreateTrapeze, this, CREATE_TRAPEZE);
-    Bind(wxEVT_MENU, &Frame::CreateExponent, this, CREATE_EXPONENT);
-    Bind(wxEVT_MENU, &Frame::InsertPoints, this, INSERT_POINTS);
-    Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
-    Bind(wxEVT_PAINT, &Frame::OnRepaint, this);
-    Bind(wxEVT_KEY_DOWN, &Frame::OnKeyDown, this);
+    Bind(wxEVT_MENU,     &Frame::OnQuit,            this, MENU_FILE_QUIT);
+    Bind(wxEVT_MENU,     &Frame::OnDeletePoint,     this, CONTEXT_MENU_DELETE);
+    Bind(wxEVT_MENU,     &Frame::OnParametersPoint, this, CONTEXT_MENU_PARAMETERS);
+    Bind(wxEVT_MENU,     &Frame::OnAlignLeft,       this, ALIGN_LEFT);
+    Bind(wxEVT_MENU,     &Frame::OnAlignRight,      this, ALIGN_RIGHT);
+    Bind(wxEVT_MENU,     &Frame::OnAlignLeftTop,    this, ALIGN_LEFT_TOP);
+    Bind(wxEVT_MENU,     &Frame::OnAlignLeftDown,   this, ALIGN_LEFT_DOWN);
+    Bind(wxEVT_MENU,     &Frame::OnAlignRightTop,   this, ALIGN_RIGHT_TOP);
+    Bind(wxEVT_MENU,     &Frame::OnAlignRightDown,  this, ALIGN_RIGHT_DOWN);
+    Bind(wxEVT_MENU,     &Frame::OnOpenFile,        this, FILE_OPEN);
+    Bind(wxEVT_MENU,     &Frame::OnSaveFile,        this, FILE_SAVE);
+    Bind(wxEVT_MENU,     &Frame::OnNewFile,         this, FILE_NEW);
+    Bind(wxEVT_MENU,     &Frame::OnUndo,            this, UNDO);
+    Bind(wxEVT_MENU,     &Frame::OnRedo,            this, REDO);
+    Bind(wxEVT_MENU,     &Frame::CreateSine,        this, CREATE_SINE);
+    Bind(wxEVT_MENU,     &Frame::CreateTriangle,    this, CREATE_TRIANGLE);
+    Bind(wxEVT_MENU,     &Frame::CreateTrapeze,     this, CREATE_TRAPEZE);
+    Bind(wxEVT_MENU,     &Frame::CreateExponent,    this, CREATE_EXPONENT);
+    Bind(wxEVT_MENU,     &Frame::CreateSinX,        this, CREATE_SINX);
+    Bind(wxEVT_MENU,     &Frame::InsertPoints,      this, INSERT_POINTS);
+    Bind(wxEVT_TIMER,    &Frame::OnTimer,           this, TIMER_ID);
+    Bind(wxEVT_PAINT,    &Frame::OnRepaint,         this);
+    Bind(wxEVT_KEY_DOWN, &Frame::OnKeyDown,         this);
 
     Show(true);
 
@@ -208,6 +210,7 @@ void Frame::CreateMenu()
     wxBitmap imgCreateTriangle(wxImage(wxT("icons/triangle.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateTrapeze(wxImage(wxT("icons/trapeze.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateExponent(wxImage(wxT("icons/exponent.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgCreateSinX(wxImage(wxT("icons/sinx.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
 
     wxToolBar* toolBar = CreateToolBar();
@@ -224,6 +227,7 @@ void Frame::CreateMenu()
     toolBar->AddTool(CREATE_TRIANGLE, wxT("Треугольник"), imgCreateTriangle, wxT("Создать новый сигнал в форме треугольника"));
     toolBar->AddTool(CREATE_TRAPEZE, wxT("Трапеция"), imgCreateTrapeze, wxT("Создать новый сигнал в форме трапеции"));
     toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"), imgCreateExponent, wxT("Создать новый экспоненциальный сигнал"));
+    toolBar->AddTool(CREATE_SINX, wxT("Sin(x)/x"), imgCreateSinX, wxT("Создать сигнал вида sin(x)/x"));
 
     toolBar->AddSeparator();
     toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить маркеры"));
@@ -403,6 +407,11 @@ void Frame::CreateExponent(wxCommandEvent &)
     ExponentDialog dialog;
 
     dialog.ShowModal();
+}
+
+void Frame::CreateSinX(wxCommandEvent &)
+{
+
 }
 
 void Frame::InsertPoints(wxCommandEvent &)

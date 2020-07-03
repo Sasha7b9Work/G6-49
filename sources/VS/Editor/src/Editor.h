@@ -65,6 +65,8 @@ private:
 
     void CreateExponent(wxCommandEvent &);
 
+    void CreateSinX(wxCommandEvent &);
+
     void InsertPoints(wxCommandEvent &);
 
     void OnKeyDown(wxKeyEvent &);
