@@ -10,7 +10,8 @@ wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)
     int x = 40;
     int y = 20;
 
-    scNumPeriods = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxT("3"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Число периодов"));
+    scNumPeriods = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxT("1"), wxPoint(x, y), wxSize(50, 20), 1, 100, 1, this, wxCommandEventHandler(Dialog::OnControlEvent),
+        wxT("Число периодов"));
 
     return panel;
 }
@@ -30,5 +31,20 @@ SinXDialog::SinXDialog() : Dialog(wxT("Параметры сигнала sin(x)/x"))
 
 void SinXDialog::SendAdditionForm()
 {
+    static float dataF[Point::NUM_POINTS];
 
+    float T = static_cast<float>(Point::NUM_POINTS / 2) / static_cast<float>(scNumPeriods->GetValue()) - Point::NUM_POINTS / 12;
+
+    //int x0 = Point::NUM_POINTS / 2;
+
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        float x = (i /*+ T / 4.0F*/) / T * 2.0F * 3.14F;
+
+        dataF[i] = std::sinf(x) / x;
+
+        data[i] = static_cast<uint16>(Point::AVE + dataF[i] * Point::AVE);
+    }
+
+    TheForm->SetAdditionForm(data);
 }

@@ -383,7 +383,7 @@ void Frame::CreateSine(wxCommandEvent &)
 
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        data[i] = static_cast<uint16>(Point::AVE + (std::sin(static_cast<float>(i) / Point::NUM_POINTS * 2 * 3.14) * Point::AVE));
+        data[i] = static_cast<uint16>(Point::AVE + (std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F) * Point::AVE));
     }
 
     TheForm->SetMainForm(data, nullptr);
