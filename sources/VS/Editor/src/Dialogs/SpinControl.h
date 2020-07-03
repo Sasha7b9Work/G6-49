@@ -7,6 +7,18 @@
 #pragma warning(pop)
 
 
+enum
+{
+    ID_SPINCTRL_DONW,
+    ID_SPINCTRL_UP,
+    ID_SPINCTRL_NUMBER_PERIODS,
+    ID_BUTTON_OK,
+    ID_BUTTON_CANCEL,
+    ID_RADIOBUTTON_DIRECT,
+    ID_RADIOBUTTON_BACK
+};
+
+
 class SpinControl : public wxSpinCtrl
 {
 public:

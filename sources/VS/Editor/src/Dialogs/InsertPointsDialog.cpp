@@ -11,10 +11,7 @@
 
 enum
 {
-    ID_SPINCTRL_DELTA,
-
-    ID_BUTTON_OK,
-    ID_BUTTON_CANCEL
+    ID_SPINCTRL_DELTA
 };
 
 

@@ -6,17 +6,6 @@
 #include "Dialogs/SpinControl.h"
 
 
-enum
-{
-    ID_SPINCTRL_DONW,
-    ID_SPINCTRL_UP,
-    ID_BUTTON_OK,
-    ID_BUTTON_CANCEL,
-    ID_RADIOBUTTON_DIRECT,
-    ID_RADIOBUTTON_BACK
-};
-
-
 uint16 Dialog::data[Point::NUM_POINTS];
 
 std::vector<Point> Dialog::points;
@@ -66,7 +55,7 @@ wxPanel *Dialog::CreatePanelLevels()
 
     int y = 20, x = 10;
 
-    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT("100"), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
+    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT(""), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
     scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
 
     return panel;

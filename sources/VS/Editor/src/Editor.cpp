@@ -15,6 +15,7 @@
 #include "History.h"
 #include "Dialogs/ExponentDialog.h"
 #include "Dialogs/InsertPointsDialog.h"
+#include "Dialogs/SinXDialog.h"
 #include "Dialogs/TrapezeDialog.h"
 #include "Dialogs/TriangleDialog.h"
 
@@ -253,7 +254,7 @@ void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
         menuAlign->Append(ALIGN_RIGHT_DOWN, "Справа внизу");
 
         menuPoint.Append(CONTEXT_MENU_DELETE, "Удалить");
-        menuPoint.Append(CONTEXT_MENU_PARAMETERS, "Параметры");
+        //menuPoint.Append(CONTEXT_MENU_PARAMETERS, "Параметры");
         menuPoint.AppendSubMenu(menuAlign, "Выровнять");
 
         menuContext.Append(FILE_NEW, "Очистить");
@@ -390,35 +391,27 @@ void Frame::CreateSine(wxCommandEvent &)
 
 void Frame::CreateTriangle(wxCommandEvent &)
 {
-    TriangleDialog dialog;
-
-    dialog.ShowModal();
+    TriangleDialog().ShowModal();
 }
 
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
-    TrapezeDialog dialog;
-
-    dialog.ShowModal();
+    TrapezeDialog().ShowModal();
 }
 
 void Frame::CreateExponent(wxCommandEvent &)
 {
-    ExponentDialog dialog;
-
-    dialog.ShowModal();
+    ExponentDialog().ShowModal();
 }
 
 void Frame::CreateSinX(wxCommandEvent &)
 {
-
+    SinXDialog().ShowModal();
 }
 
 void Frame::InsertPoints(wxCommandEvent &)
 {
-    InsertPointsDialog dialog;
-
-    dialog.ShowModal();
+    InsertPointsDialog().ShowModal();
 }
 
 

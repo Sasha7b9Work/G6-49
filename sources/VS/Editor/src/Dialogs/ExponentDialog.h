@@ -9,5 +9,5 @@ public:
 
 protected:
 
-    virtual void SendAdditionForm();
+    virtual void SendAdditionForm() override;
 };
