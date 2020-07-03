@@ -33,17 +33,30 @@ void SinXDialog::SendAdditionForm()
 {
     static float dataF[Point::NUM_POINTS];
 
-    float T = static_cast<float>(Point::NUM_POINTS / 2) / static_cast<float>(scNumPeriods->GetValue()) - Point::NUM_POINTS / 12;
+    float T = static_cast<float>(Point::NUM_POINTS / 2) / static_cast<float>(scNumPeriods->GetValue());
 
-    //int x0 = Point::NUM_POINTS / 2;
+    int i0 = Point::NUM_POINTS / 2;
 
-    for (int i = 0; i < Point::NUM_POINTS; i++)
+    for (int i = 0; i <= Point::NUM_POINTS / 2; i++)
     {
         float x = (i /*+ T / 4.0F*/) / T * 2.0F * 3.14F;
 
         dataF[i] = std::sinf(x) / x;
 
-        data[i] = static_cast<uint16>(Point::AVE + dataF[i] * Point::AVE);
+        int curLess = i0 + i;
+        int curMore = i0 - i;
+
+        uint16 value = static_cast<uint16>(Point::AVE + dataF[i] * Point::AVE);
+
+        if (curLess >= 0 && curLess < Point::NUM_POINTS)
+        {
+            data[curLess] = value;
+        }
+
+        if (curMore >= 0 && curMore < Point::NUM_POINTS)
+        {
+            data[curMore] = value;
+        }
     }
 
     TheForm->SetAdditionForm(data);
