@@ -350,7 +350,7 @@ public:
 class ParameterFrequency : public ParameterDouble
 {
 public:
-    ParameterFrequency(const Value &min = Value("0.1"), const Value &max = Value("100", Order::Mega), const Value &value = Value("1", Order::Kilo)) :
+    ParameterFrequency(const Value &min, const Value &max, const Value &value = Value("1", Order::Kilo)) :
         ParameterDouble(ParameterDoubleType::Frequency, "Частота", "Frequency", min, max, value) { }
 };
 
