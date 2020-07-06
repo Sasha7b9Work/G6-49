@@ -263,7 +263,7 @@ int MathParameterDouble::GetNumberDigitsAfterComma(Order::E order)
 
     if (type == ParameterDoubleType::Frequency)
     {
-        return 3 + Order::GetPow10(order);
+        return 6 + Order::GetPow10(order);
     }
 
     return 8 + Order::GetPow10(order);
