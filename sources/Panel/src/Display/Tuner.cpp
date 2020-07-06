@@ -543,6 +543,21 @@ int Indicator::NumberHighligthingDigits() const
         }
     }
 
+    if (Tuner::Current()->GetParameter()->IsDouble())
+    {
+        ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+
+        ParameterDoubleType::E type = param->GetType();
+
+        if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period || type == ParameterDoubleType::PacketPeriod)
+        {
+            if (digits[result + 1].IsEmpty())
+            {
+                result--;
+            }
+        }
+    }
+
     return result;
 }
 
@@ -650,6 +665,11 @@ Value Indicator::StepPosition(int pos) const
 void Indicator::InitHighlight()
 {
     indexHighlight = PositionComma() - 1;
+
+    if (indexHighlight >= NumberHighligthingDigits() - 1)
+    {
+        indexHighlight--;
+    }
 }
 
 
