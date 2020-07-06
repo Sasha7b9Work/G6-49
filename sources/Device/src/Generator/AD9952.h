@@ -56,17 +56,5 @@ private:
     static void WriteFTW0(Chan::E ch);
     static void WritePOW(Chan::E ch);
 
-    struct ClockFrequency
-    {
-        enum E
-        {
-            _200MHz,
-            _2MHz
-        } value;
-        explicit ClockFrequency(E v) : value(v) {};
-    };
-
-    static ClockFrequency::E clock;
-
     static double phase[Chan::Count];
 };

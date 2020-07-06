@@ -7,7 +7,6 @@
 #include <cmath>
 
 
-AD9952::ClockFrequency::E AD9952::clock = ClockFrequency::_200MHz;
 bool AD9952::Manipulation::enabled[Chan::Count] = { false, false };
 double AD9952::phase[Chan::Count] = { 0.0, 0.0 };
 
