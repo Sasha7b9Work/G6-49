@@ -46,7 +46,7 @@ public:
 
     Indicator(DisplayCorrection *display);
 
-    int Draw(int x, int y, int width) const;
+    int Draw(int x, int y, int width, const pString units) const;
 
     bool OnControlKey(const Control control);
 
@@ -126,9 +126,9 @@ private:
     // Возвращает true, если все цифровые разряды справа равны нулю
     bool AllNumberOfRightIsZero(int pos) const;
 
-    int DrawDouble(int x, int y, int wdidth) const;
+    int DrawDouble(int x, int y, int wdidth, const pString units) const;
 
-    int DrawDouble(int x, int y, bool test) const;
+    int DrawDouble(int x, int y, const pString units, bool test) const;
 
     int DrawInteger(int x, int y, int width) const;
 
@@ -244,8 +244,6 @@ private:
     Indicator indicator;
 
     void DrawTitle(int x, int y, int width);
-
-    void DrawUnits(int x, int y);
 
     // Заполнить разряды целой части параметра
     void FillDigitsIntegerPartForDouble();

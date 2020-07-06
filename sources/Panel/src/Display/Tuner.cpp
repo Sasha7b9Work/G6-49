@@ -130,28 +130,28 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 }
 
 
-int Indicator::Draw(int x, int y, int width) const
+int Indicator::Draw(int x, int y, int width, const pString units) const
 {
-    return Tuner::Current()->ReinterpretToDouble() ? DrawDouble(x, y, width) : DrawInteger(x, y, width);
+    return Tuner::Current()->ReinterpretToDouble() ? DrawDouble(x, y, width, units) : DrawInteger(x, y, width);
 }
 
 
-int Indicator::DrawDouble(int x, int y, int width) const
+int Indicator::DrawDouble(int x, int y, int width, const pString units) const
 {
     if (Tuner::Current()->ParameterIsVoltage())
     {
-        return DrawDouble(x + 90, y, false);
+        return DrawDouble(x + 90, y, units, false);
     }
 
-    int end = DrawDouble(x, y, true);
+    int end = DrawDouble(x, y, units, true);
 
-    x += (width - (end - x)) / 2 - 10;
+    x += (width - (end - x)) / 2;
 
-    return DrawDouble(x, y, false);
+    return DrawDouble(x, y, units, false);
 }
 
 
-int Indicator::DrawDouble(int x, int y, bool test) const
+int Indicator::DrawDouble(int x, int y, const pString units, bool test) const
 {
     static const int dx = 12;
 
@@ -179,6 +179,12 @@ int Indicator::DrawDouble(int x, int y, bool test) const
 
         pos++;
     }
+
+    Font::ForceUpperCase(false);
+
+    x = String(units).Draw(x + 5, y, test ? Color::BACK : Color::FILL);
+
+    Font::ForceUpperCase(true);
 
     return x;
 }
@@ -681,7 +687,7 @@ void DisplayCorrection::DrawInteger(int x, int y)
     }
     else
     {
-        indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width() - WIDTH_UNITS);
+        indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width(), "");
     }
 }
 
@@ -694,9 +700,7 @@ void DisplayCorrection::DrawDouble(int x, int y)
     }
     else
     {
-        x = indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width() - WIDTH_UNITS);
-
-        DrawUnits(x, y);
+        indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width(), tuner->ReinterpretToDouble()->GetUnits(CalculateOrderForIndication()));
     }
 }
 
@@ -704,16 +708,6 @@ void DisplayCorrection::DrawDouble(int x, int y)
 void DisplayCorrection::DrawTitle(int x, int y, int width)
 {
     String(tuner->GetParameter()->Name()).DrawInCenterRect(x, y, width, 30, Color::WHITE);
-}
-
-
-void DisplayCorrection::DrawUnits(int x, int y)
-{
-    Font::ForceUpperCase(false);
-
-    String(tuner->ReinterpretToDouble()->GetUnits(CalculateOrderForIndication())).Draw(x + 7, y, Color::WHITE);
-
-    Font::ForceUpperCase(true);
 }
 
 

@@ -408,7 +408,15 @@ Order::E Order::Restore()
 
 int Order::GetPow10(Order::E order)
 {
-    static const int pows[Count] = { 6, 3, 0, -3, -6, -9 };
+    static const int pows[Count] =
+    {
+        6,  // Mega
+        3,  // Kilo
+        0,  // One
+        -3, // Milli
+        -6, // Micro
+        -9  // Nano
+    };
 
     return pows[order];
 }

@@ -257,16 +257,9 @@ int MathParameterDouble::GetNumberDigitsAfterComma(Order::E order)
         return 3;
     }
 
-    ParameterDoubleType::E type = param->GetType();
-
     order = (order == Order::Count) ? param->GetValue().GetOrder() : order;
 
-    if (type == ParameterDoubleType::Frequency)
-    {
-        return 6 + Order::GetPow10(order);
-    }
-
-    return 8 + Order::GetPow10(order);
+    return -Order::GetPow10(param->GetMin().GetOrder()) + Order::GetPow10(param->GetValue().GetOrder());
 }
 
 
