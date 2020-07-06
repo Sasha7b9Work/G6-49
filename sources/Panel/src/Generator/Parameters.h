@@ -8,6 +8,9 @@
 
 #define DEFAULT_AMPLITUDE Value("1")
 
+#define IMPULSE_PERIOD_MIN   Value("20", Order::Nano)
+#define IMPULSE_DURATION_MIN Value("10", Order::Nano)
+
 
 class Form;
 struct Key;
@@ -373,23 +376,23 @@ public:
 class ParameterPacketPeriod : public ParameterTime
 {
 public:
-    ParameterPacketPeriod(const Value &min, const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod, "Период пак", "Packet per", min, max, value) { }
+    ParameterPacketPeriod(const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 
 class ParameterPeriod : public ParameterTime
 {
 public:
-    ParameterPeriod(const Value &min, const Value &max, const Value &value, const char *nameRU = "Период", const char *nameEN = "Period") :
-        ParameterTime(ParameterDoubleType::Period, nameRU, nameEN, min, max, value) { }
+    ParameterPeriod(const Value &max, const Value &value, const char *nameRU = "Период", const char *nameEN = "Period") :
+        ParameterTime(ParameterDoubleType::Period, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 
 class ParameterDuration : public ParameterTime
 {
 public:
-    ParameterDuration(const Value &min, const Value &max, const Value &value, const char *nameRU = "Длит", const char *nameEN = "Dur") :
-        ParameterTime(ParameterDoubleType::Duration, nameRU, nameEN, min, max, value) { }
+    ParameterDuration(const Value &max, const Value &value, const char *nameRU = "Длит", const char *nameEN = "Dur") :
+        ParameterTime(ParameterDoubleType::Duration, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 

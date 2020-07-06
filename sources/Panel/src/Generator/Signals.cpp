@@ -7,7 +7,7 @@
 
 
 #define FREQUENCY_SINE_MIN  Value("300", Order::Micro)
-#define FREQUENCY_SINE_MAX  Value("20", Order::Mega)
+#define FREQUENCY_SINE_MAX  Value("20",  Order::Mega)
 
 #define FREQUENCY_DDS_MIN   Value("100", Order::Micro)
 #define FREQUENCY_DDS_MAX   Value("10",  Order::Mega)
@@ -28,8 +28,8 @@ static void FuncCloseManipulation()
 
 
 static ParameterManipulationEnabled   sineManipulationA_Enabled (namesManipulationEnabled);
-static ParameterManipulationDuration  sineManipulationA_Duration(Value("0"), Value("10"),    Value("5", Order::Milli));
-static ParameterManipulationPeriod    sineManipulationA_Period  (Value("0"), Value("10000"), Value("25", Order::Milli));
+static ParameterManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10"),    Value("5", Order::Milli));
+static ParameterManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000"), Value("25", Order::Milli));
 static ParameterButton                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 
@@ -168,8 +168,8 @@ static const char *namesPolarity[] =
 };
 
 
-static ParameterPeriod    impulseA_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("100", Order::Micro));
-static ParameterDuration  impulseA_Duration (Value("0"),               Value("100", Order::Kilo), Value("20", Order::Micro));
+static ParameterPeriod    impulseA_Period   (Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParameterDuration  impulseA_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;
 static ParameterPolarity  impulseA_Polarity(namesPolarity);
@@ -190,10 +190,10 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
 
-static ParameterPeriod       packetA_Period        (Value("0"), Value("100", Order::Kilo), Value("200", Order::Micro), "Период имп", "Period imp");
-static ParameterDuration     packetA_Duration      (Value("0"), Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",   "Dur imp");
+static ParameterPeriod       packetA_Period        (Value("100", Order::Kilo), Value("200", Order::Micro), "Период имп", "Period imp");
+static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",   "Dur imp");
 static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber, "Кол-во имп", "Count imp", Value("1"), Value("100000"), Value("3"));
-static ParameterPacketPeriod packetA_PacketPeriod  (Value("0"), Value("100", Order::Kilo), Value("0.1"));
+static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1"));
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
 static ParameterPolarity     packetA_Polarity(namesPolarity);
@@ -357,8 +357,8 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 
 
-static ParameterPeriod    impulseB_Period   (Value("30", Order::Nano), Value("100", Order::Kilo), Value("100", Order::Micro));
-static ParameterDuration  impulseB_Duration (Value("0"),               Value("100", Order::Kilo), Value("20", Order::Micro));
+static ParameterPeriod    impulseB_Period   (Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParameterDuration  impulseB_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity(namesPolarity);
