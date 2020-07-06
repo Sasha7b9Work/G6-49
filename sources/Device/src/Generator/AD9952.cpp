@@ -7,7 +7,7 @@
 #include <cmath>
 
 
-AD9952::ClockFrequency::E AD9952::clock = ClockFrequency::_100MHz;
+AD9952::ClockFrequency::E AD9952::clock = ClockFrequency::_200MHz;
 bool AD9952::Manipulation::enabled[Chan::Count] = { false, false };
 double AD9952::phase[Chan::Count] = { 0.0, 0.0 };
 
@@ -40,7 +40,7 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 
 void AD9952::SetFrequency(Chan::E ch)
 {
-    FPGA::SetClockAD992(SettingsGenerator::Frequency(ch) < 0.1F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
+    FPGA::SetClockAD992(SettingsGenerator::Frequency(ch) < 0.2F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
 
     WriteRegister(ch, Register::FTW0);
 }
@@ -136,7 +136,7 @@ void AD9952::WriteASF(Chan::E ch)
 
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 2e8F : 1e6F)) * std::powf(2.0F, 32.0F);
+    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 2e8F : 2e6F)) * std::powf(2.0F, 32.0F);
 
     WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }

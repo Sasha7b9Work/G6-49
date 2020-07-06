@@ -60,8 +60,8 @@ private:
     {
         enum E
         {
-            _100MHz,
-            _1MHz
+            _200MHz,
+            _2MHz
         } value;
         explicit ClockFrequency(E v) : value(v) {};
     };
