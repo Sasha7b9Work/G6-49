@@ -12,9 +12,11 @@ uint8 Calibrator::signal[Chan::Count] = { 0 , 0 };
 
 void Calibrator::SetFormWave(Chan::E ch, uint8 sig)
 {
-    DGenerator::SetFormWave(ch, (sig == 0) ? TypeForm::Sine : TypeForm::Meander);
+    bool isSine = (sig == 0);
 
-    DGenerator::SetFrequency(ch, Value(1e3F));
+    DGenerator::SetFormWave(ch, isSine ? TypeForm::Sine : TypeForm::Meander);
+
+    DGenerator::SetFrequency(ch, isSine ? Value(1e3F) : Value("0.1", Order::One));
 }
 
 
