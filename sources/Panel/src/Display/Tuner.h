@@ -307,6 +307,8 @@ public:
     // Возвращает true, если настраиваемый параметр имеет единицы измерения "Вольт"
     bool ParameterIsVoltage();
 
+    static bool ParameterIsDouble() { return Current()->ReinterpretToDouble() != nullptr; };
+
     // Возвращает указатеь на ParameterDouble, если param имеет тип Double и nullptr в ином случае
     ParameterDouble *ReinterpretToDouble();
 

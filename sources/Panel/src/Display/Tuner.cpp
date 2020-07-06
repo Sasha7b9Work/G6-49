@@ -1093,6 +1093,24 @@ void Tuner::OnButtonApply()
     }
     else
     {
+        if (Current()->ParameterIsDouble())
+        {
+            ParameterDouble *paramDouble = Current()->ReinterpretToDouble();
+
+            ParameterDoubleType::E type = paramDouble->GetType();
+
+            if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period || type == ParameterDoubleType::PacketPeriod)
+            {
+                int fractNano = DisplayEntering::ToValue().FractNano();
+
+                if ((fractNano % 10) != 0)
+                {
+                    Display::ShowWarning("Параметр должен быть кратен 10 нс");
+                    return;
+                }
+            }
+        }
+
         display.Init(DisplayEntering::ToValue());
         display.indicator.InitHighlight();
         mode = ModeTuning::Correction;
