@@ -42,6 +42,8 @@ void AD9952::SetFrequency(Chan::E ch)
     FPGA::SetClockAD992(SettingsGenerator::Frequency(ch) < 0.2F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
 
     WriteRegister(ch, Register::FTW0);
+
+    WriteRegister(ch, Register::CFR2);
 }
 
 
@@ -102,8 +104,11 @@ void AD9952::WriteCFR1(Chan::E ch)
 void AD9952::WriteCFR2(Chan::E ch)
 {
     uint value = 0;
-    Bit::Set(value, 4);
-    Bit::Set(value, 6);
+    if (FPGA::clock == FPGA::ClockFrequency::_100MHz)
+    {
+        Bit::Set(value, 3);
+        Bit::Set(value, 5);
+    }
     WriteToHardware(ch, Register::CFR2, value);
 }
 
@@ -135,7 +140,7 @@ void AD9952::WriteASF(Chan::E ch)
 
 void AD9952::WriteFTW0(Chan::E ch)
 {
-    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 2e8F : 2e6F)) * std::powf(2.0F, 32.0F);
+    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
     WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }
