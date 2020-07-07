@@ -17,13 +17,11 @@ Viewer::Viewer(Parameter *_param) : param(_param)
 }
 
 
-void Viewer::Draw(int y, int xName, int xValue, int xUnits)
+void Viewer::Draw(int y, int xName, int xValue, int xUnits, Chan::E ch)
 {
-    Chan::E ch = param->GetForm()->GetWave()->GetChannel();
-
     Color color = Color::Chan(ch);
 
-    if((ch == CURRENT_CHANNEL) && 
+    if((ch == CURRENT_CHANNEL) &&
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
         PageMain::OnSubPageTuneChannels())
     {
