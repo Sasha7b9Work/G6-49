@@ -176,7 +176,7 @@ void FPGA::SetFrequency(Chan::E ch)
     {
         AD9952::SetFrequency(ch);
     }
-    else if (modeWork[ch] == ModeWork::DDS)
+    else if (InModeDDS(ch))
     {
         uint64 N = static_cast<uint64>((frequency * (static_cast<uint64>(1) << 40)) / 1E8F);
         WriteRegister(RG::_1_Freq, N);
@@ -312,6 +312,12 @@ void FPGA::WriteControlRegister()
 }
 
 
+bool FPGA::InModeDDS(Chan::E ch)
+{
+    return (modeWork[ch] == FPGA::ModeWork::DDS) || (modeWork[ch] == FPGA::ModeWork::Free);
+}
+
+
 uint16 FPGA::SetBitsStartMode(uint16 data)
 {
     ModeWork::E mode = modeWork[Chan::A];
@@ -325,7 +331,7 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
         }
     }
 
-    if(mode == ModeWork::DDS)
+    if(InModeDDS(Chan::A))
     {
         if(start.Is(StartMode::ComparatorA))
         {
@@ -353,7 +359,7 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
         }
     }
 
-    if (mode == ModeWork::DDS)
+    if (InModeDDS(Chan::B))
     {
         if (start.Is(StartMode::ComparatorA))
         {

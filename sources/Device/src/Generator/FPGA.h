@@ -54,7 +54,7 @@ struct FPGA
             Meander,
             PackedImpulse,  // Пакеты импульсов
             Sine,
-            Free,           // Работает по загруженным с флешки точкам
+            Free,
             Count
         } value;
         explicit ModeWork(E v) : value(v) {};
@@ -182,4 +182,7 @@ private:
     
     // Здесь хранятся записанные в регистры значения
     static uint64 registers[RG::Count];
+
+    // Возвращает true, если по каналу ch работает DDS
+    static bool InModeDDS(Chan::E ch);
 };
