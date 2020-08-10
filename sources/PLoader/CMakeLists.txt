@@ -36,60 +36,46 @@ set_source_files_properties(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Dr
                             PROPERTIES HEADER_FILE_ONLY TRUE)
 
 
-source_group(common             FILES ../common/Command.h
-                                      ../common/Command.cpp
-                                      ../common/Common.h
-                                      ../common/Common.cpp
-                                      ../common/Interface_p.h
-                                      ../common/Messages.h
-                                      ../common/Messages.cpp
-                                      ../common/Messages_l.h
-                                      ../common/Messages_l.cpp
-                                      ../common/Transceiver.h
-                                      ../common/Transceiver_p.cpp)
-source_group(src                REGULAR_EXPRESSION src/*)
-source_group(Display            REGULAR_EXPRESSION src/Display/*)
-source_group(Generator          REGULAR_EXPRESSION src/Generator/*)
-source_group(Hardware           REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\HAL      REGULAR_EXPRESSION src/Hardware/HAL/*)
-source_group(Keyboard           REGULAR_EXPRESSION src/Keyboard/*)
-source_group(Interface          REGULAR_EXPRESSION src/Interface/*)
-source_group(libs\\CMSIS        REGULAR_EXPRESSION src/libs/CMSIS/*)
-source_group(libs\\HAL          REGULAR_EXPRESSION src/libs/HAL/*)
-source_group(Settings           REGULAR_EXPRESSION src/Settings/*)
-source_group(Utils              REGULAR_EXPRESSION src/Utils/*)
-source_group(ThirdParty\\HAL    FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
-                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
-                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h
-                                      ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c)
+file(GLOB COMMON          ../common/Command.h
+                          ../common/Command.cpp
+                          ../common/Common.h
+                          ../common/Common.cpp
+                          ../common/Interface_p.h
+                          ../common/Messages.h
+                          ../common/Messages.cpp
+                          ../common/Messages_l.h
+                          ../common/Messages_l.cpp
+                          ../common/Transceiver.h
+                          ../common/Transceiver_p.cpp)
+file(GLOB SRC             src/*)
+file(GLOB DISPLAY         src/Display/*)
+file(GLOB GENERATOR       src/Generator/*)
+file(GLOB HARDWARE        src/Hardware/*)
+file(GLOB HARDWARE_HAL    src/Hardware/HAL/*)
+file(GLOB KEYBOARD        src/Keyboard/*)
+file(GLOB INTERFACE       src/Interface/*)
+file(GLOB LIBS_CMSIS      src/libs/CMSIS/*)
+file(GLOB LIBS_HAL        src/libs/HAL/*)
+file(GLOB SETTINGS        src/Settings/*)
+file(GLOB UTILS           src/Utils/*)
+file(GLOB THIRD_PARTY_HAL ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c)
 
-file(GLOB SOURCES   ../common/Command.h
-                    ../common/Command.cpp
-                    ../common/Common.h
-                    ../common/Common.cpp
-                    ../common/Interface_p.h
-                    ../common/Messages.h
-                    ../common/Messages.cpp
-                    ../common/Messages_l.h
-                    ../common/Messages_l.cpp
-                    ../common/Transceiver.h
-                    ../common/Transceiver_p.cpp
-                    src/*
-                    src/Display/*
-                    src/Generator/*
-                    src/Hardware/*
-                    src/Hardware/HAL/*
-                    src/Keyboard/*
-                    src/Interface/*
-                    src/libs/CMSIS/startup_stm32f429xx.s
-                    src/libs/HAL/*
-                    src/Settings/*
-                    src/Utils/*
+source_group(common          FILES ${COMMON})
+source_group(src             FILES ${SRC})
+source_group(Display         FILES ${DISPLAY})
+source_group(Generator       FILES ${GENERATOR})
+source_group(Hardware        FILES ${HARDWARE})
+source_group(Hardware\\HAL   FILES ${HARDWARE_HAL})
+source_group(Keyboard        FILES ${KEYBOARD})
+source_group(Interface       FILES ${INTERFACE})
+source_group(libs\\CMSIS     FILES ${LIBS_CMSIS})
+source_group(libs\\HAL       FILES ${LIBS_HAL})
+source_group(Settings        FILES ${SETTINGS})
+source_group(Utils           FILES ${UTILS})
+source_group(ThirdParty\\HAL FILES ${THIRD_PARTY_HAL})
 
-                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
-                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
-                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_crc.h
-                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
-                    )
-
-add_library(PLoader ${SOURCES})
+add_library(PLoader ${COMMON} ${SRC} ${DISPLAY} ${GENERATOR} ${HARDWARE} ${HARDWARE_HAL} ${KEYBOARD} ${INTERFACE}
+                    ${LIBS_CMSIS} ${LIBS_HAL} ${SETTINGS} ${UTILS} ${THIRD_PARTY_HAL})
