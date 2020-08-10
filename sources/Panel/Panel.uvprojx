@@ -1654,16 +1654,6 @@
               <FilePath>.\src\defines.h</FilePath>
             </File>
             <File>
-              <FileName>log.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\log.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>log.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\log.h</FilePath>
-            </File>
-            <File>
               <FileName>structs.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\structs.h</FilePath>
@@ -1672,6 +1662,16 @@
               <FileName>main_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\main_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Log.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2111,31 +2111,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Keyboard</GroupName>
-          <Files>
-            <File>
-              <FileName>Controls.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\Controls.h</FilePath>
-            </File>
-            <File>
-              <FileName>Controls.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Keyboard\Controls.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Keyboard.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\Keyboard.h</FilePath>
-            </File>
-            <File>
-              <FileName>Keyboard.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Keyboard\Keyboard.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Interface</GroupName>
           <Files>
             <File>
@@ -2162,6 +2137,31 @@
               <FileName>Messages_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Messages_p.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Keyboard</GroupName>
+          <Files>
+            <File>
+              <FileName>Controls.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\Controls.h</FilePath>
+            </File>
+            <File>
+              <FileName>Controls.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\Controls.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\Keyboard.h</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\Keyboard.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2337,6 +2337,11 @@
               <FileName>SCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\SCPI.txt</FilePath>
             </File>
           </Files>
         </Group>
