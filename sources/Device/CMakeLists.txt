@@ -34,60 +34,47 @@ add_compile_options(/wd5027)
 add_compile_options(/wd5039)
 add_compile_options(/wd5045)
 
-source_group(common             FILES ../common/Command.h
-                                      ../common/Command.cpp
-                                      ../common/Common.h
-                                      ../common/Common.cpp
-                                      ../common/Handlers_d.h
-                                      ../common/Interface_d.h
-                                      ../common/Interface_d.cpp
-                                      ../common/Messages.h
-                                      ../common/Messages.cpp
-                                      ../common/Transceiver.h
-                                      ../common/Transceiver_d.cpp)
-source_group(src                REGULAR_EXPRESSION src/*)
-source_group(FDrive             REGULAR_EXPRESSION src/FDrive/*)
-source_group(FreqMeter          REGULAR_EXPRESSION src/FreqMeter/*)
-source_group(Generator          REGULAR_EXPRESSION src/Generator/*)
-source_group(Hardware           REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\HAL      REGULAR_EXPRESSION src/Hardware/HAL/*)
-source_group(Interface          REGULAR_EXPRESSION src/Interface/*)
-source_group(libs               REGULAR_EXPRESSION src/libs/*)
-source_group(libs\\CMSIS        REGULAR_EXPRESSION src/libs/CMSIS/*)
-source_group(libs\\FatFS        REGULAR_EXPRESSION src/libs/FatFS/*)
-source_group(libs\\HAL          REGULAR_EXPRESSION src/libs/HAL/*)
-source_group(libs\\USBD         REGULAR_EXPRESSION src/libs/USBD/*)
-source_group(libs\\USBH         REGULAR_EXPRESSION src/libs/USBH/*)
-source_group(Settings           REGULAR_EXPRESSION src/Settings/*)
-source_group(Utils              REGULAR_EXPRESSION src/Utils/*)
+file(GLOB COMMON       ../common/Command.h
+                       ../common/Command.cpp
+                       ../common/Common.h
+                       ../common/Common.cpp
+                       ../common/Handlers_d.h
+                       ../common/Interface_d.h
+                       ../common/Interface_d.cpp
+                       ../common/Messages.h
+                       ../common/Messages.cpp
+                       ../common/Transceiver.h
+                       ../common/Transceiver_d.cpp)
+file(GLOB SRC          src/*)
+file(GLOB FDRIVE       src/FDrive/*)
+file(GLOB FREQMETER    src/FreqMeter/*)
+file(GLOB GENERATOR    src/Generator/*)
+file(GLOB HARDWARE     src/Hardware/*)
+file(GLOB HARDWARE_HAL src/Hardware/HAL/*)
+file(GLOB INTERFACE    src/Interface/*)
+file(GLOB LIBS_CMSIS   src/libs/CMSIS/*)
+file(GLOB LIBS_FATFS   src/libs/FatFS/*)
+file(GLOB LIBS_HAL     src/libs/HAL/*)
+file(GLOB LIBS_USBD    src/libs/USBD/*)
+file(GLOB LIBS_USBH    src/libs/USBH/*)
+file(GLOB SETTINGS     src/Settings/*)
+file(GLOB UTILS        src/Utils/*)
 
-file(GLOB SOURCES   ../common/Command.h
-                    ../common/Command.cpp
-                    ../common/Common.h
-                    ../common/Common.cpp
-                    ../common/Handlers_d.h
-                    ../common/Interface_d.h
-                    ../common/Interface_d.cpp
-                    ../common/Messages.h
-                    ../common/Messages.cpp
-                    ../common/Transceiver.h
-                    ../common/Transceiver_d.cpp
-                    src/*
-                    src/FDrive/*
-                    src/FreqMeter/*
-                    src/Generator/*
-                    src/Hardware/*
-                    src/Hardware/HAL/*
-                    src/Interface/*
-                    src/libs/*
-                    src/libs/CMSIS/startup_stm32f407xx.s
-                    src/libs/FatFS/*
-                    src/libs/HAL/*
-                    src/libs/USBD/*
-                    src/libs/USBH/*
-                    src/Settings/*
-                    src/Utils/*)
+source_group(common        FILES ${COMMON})
+source_group(src           FILES ${SRC})
+source_group(FDrive        FILES ${FDRIVE})
+source_group(FreqMeter     FILES ${FREQMETER})
+source_group(Generator     FILES ${GENERATOR})
+source_group(Hardware      FILES ${HARDWARE})
+source_group(Hardware\\HAL FILES ${HARDWARE_HAL})
+source_group(Interface     FILES ${INTERFACE})
+source_group(libs\\CMSIS   FILES ${LIBS_CMSIS})
+source_group(libs\\FatFS   FILES ${LIBS_FATFS})
+source_group(libs\\HAL     FILES ${LIBS_HAL})
+source_group(libs\\USBD    FILES ${LIBS_USBD})
+source_group(libs\\USBH    FILES ${LIBS_USBH})
+source_group(Settings      FILES ${SETTINGS})
+source_group(Utils         FILES ${UTILS})
 
-list(REMOVE_ITEM SOURCES "src/libs/CMSIS/system_stm32f4xx.c")
-                    
-add_library(Device ${SOURCES})
+add_library(Device ${COMMON} ${SRC} ${FDRIVE} ${FREQMETER} ${GENERATOR} ${HARDWARE} ${HARDWARE_HAL} ${INTERFACE} ${LIBS_CMSIS}
+                   ${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} ${SETTINGS} ${UTILS})
