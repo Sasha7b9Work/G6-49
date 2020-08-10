@@ -32,87 +32,67 @@ add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for me
 add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
 
 
-source_group(common                   FILES ../common/Command.h
-                                            ../common/Command.cpp
-                                            ../common/Common.h
-                                            ../common/Common.cpp
-                                            ../common/Common_pan.cpp
-                                            ../common/Interface_p.h
-                                            ../common/Messages.h
-                                            ../common/Messages.cpp
-                                            ../common/Transceiver.h
-                                            ../common/Transceiver_p.cpp)
-source_group(src                      REGULAR_EXPRESSION src/*)
-source_group(Display                  REGULAR_EXPRESSION src/Display/*)
-source_group(Display\\Font            REGULAR_EXPRESSION src/Display/Font/*)
-source_group(FDrive                   REGULAR_EXPRESSION src/FDrive/*)
-source_group(FreqMeter                REGULAR_EXPRESSION src/FreqMeter/*)
-source_group(Generator                REGULAR_EXPRESSION src/Generator/*)
-source_group(Hardware                 REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\HAL            FILES src/Hardware/HAL/HAL.h
-                                            src/Hardware/HAL/HAL.cpp
-                                            src/Hardware/HAL/HAL_CRC32.cpp
-                                            src/Hardware/HAL/HAL_EEPROM.cpp
-                                            src/Hardware/HAL/HAL_IT.cpp
-                                            src/Hardware/HAL/HAL_LTDC.cpp
-                                            src/Hardware/HAL/HAL_PIO.h
-                                            src/Hardware/HAL/HAL_PIO.cpp
-                                            src/Hardware/HAL/HAL_TIM.cpp
-                                            src/Hardware/HAL/HAL_TIM2.cpp
-                                            src/Hardware/HAL/HAL_TIM3.cpp
-                                            src/Hardware/HAL/HAL_TIM4.cpp)
-source_group(Keyboard                 REGULAR_EXPRESSION src/Keyboard/*)
-source_group(Interface                REGULAR_EXPRESSION src/Interface/*)
-source_group(libs\\CMSIS              REGULAR_EXPRESSION src/libs/CMSIS/*)
-source_group(libs\\HAL                REGULAR_EXPRESSION src/libs/HAL/*)
-source_group(Menu                     REGULAR_EXPRESSION src/Menu/*)
-source_group(Menu\\Pages              REGULAR_EXPRESSION src/Menu/Pages/*)
-source_group(Menu\\Pages\\Addition    REGULAR_EXPRESSION src/Menu/Pages/Addition/*)
-source_group(Menu\\Pages\\PageDebug   REGULAR_EXPRESSION src/Menu/Pages/PageDebug/*)
-source_group(SCPI                     REGULAR_EXPRESSION src/SCPI/*)
-source_group(Settings                 REGULAR_EXPRESSION src/Settings/*)
-source_group(Utils                    REGULAR_EXPRESSION src/Utils/*)
+file(GLOB COMMON               ../common/Command.h
+                               ../common/Command.cpp
+                               ../common/Common.h
+                               ../common/Common.cpp
+                               ../common/Common_pan.cpp
+                               ../common/Interface_p.h
+                               ../common/Messages.h
+                               ../common/Messages.cpp
+                               ../common/Transceiver.h
+                               ../common/Transceiver_p.cpp)
+file(GLOB SRC                  src/*)
+file(GLOB DISPLAY              src/Display/*)
+file(GLOB DISPLAY_FONT         src/Display/Font/*)
+file(GLOB FDRIVE               src/FDrive/*)
+file(GLOB FREQMETER            src/FreqMeter/*)
+file(GLOB GENERATOR            src/Generator/*)
+file(GLOB HARDWARE             src/Hardware/*)
+file(GLOB HARDWARE_HAL         src/Hardware/HAL/HAL.h
+                               src/Hardware/HAL/HAL.cpp
+                               src/Hardware/HAL/HAL_CRC32.cpp
+                               src/Hardware/HAL/HAL_EEPROM.cpp
+                               src/Hardware/HAL/HAL_IT.cpp
+                               src/Hardware/HAL/HAL_LTDC.cpp
+                               src/Hardware/HAL/HAL_PIO.h
+                               src/Hardware/HAL/HAL_PIO.cpp
+                               src/Hardware/HAL/HAL_TIM.cpp
+                               src/Hardware/HAL/HAL_TIM2.cpp
+                               src/Hardware/HAL/HAL_TIM3.cpp
+                               src/Hardware/HAL/HAL_TIM4.cpp)
+file(GLOB KEYBOARD             src/Keyboard/*)
+file(GLOB INTERFACE            src/Interface/*)
+file(GLOB LIBS_CMSIS           src/libs/CMSIS/*)
+file(GLOB LIBS_HAL             src/libs/HAL/*)
+file(GLOB MENU                 src/Menu/*)
+file(GLOB MENU_PAGES           src/Menu/Pages/*)
+file(GLOB MENU_PAGES_ADDITION  src/Menu/Pages/Addition/*)
+file(GLOB MENU_PAGES_PAGEDEBUG src/Menu/Pages/PageDebug/*)
+file(GLOB _SCPI                src/SCPI/*)
+file(GLOB SETTINGS             src/Settings/*)
+file(GLOB UTILS                src/Utils/*)
 
-file(GLOB SOURCES   ../common/Command.h
-                    ../common/Command.cpp
-                    ../common/Common.h
-                    ../common/Common.cpp
-                    ../common/Common_pan.cpp
-                    ../common/Interface_p.h
-                    ../common/Messages.h
-                    ../common/Messages.cpp
-                    ../common/Transceiver.h
-                    ../common/Transceiver_p.cpp
-                    src/*
-                    src/Display/*
-                    src/Display/Font/*
-                    src/FDrive/*
-                    src/FreqMeter/*
-                    src/Generator/*
-                    src/Hardware/*
-                    src/Hardware/HAL/HAL.h
-                    src/Hardware/HAL/HAL.cpp
-                    src/Hardware/HAL/HAL_CRC32.cpp
-                    src/Hardware/HAL/HAL_EEPROM.cpp
-                    src/Hardware/HAL/HAL_IT.cpp
-                    src/Hardware/HAL/HAL_LTDC.cpp
-                    src/Hardware/HAL/HAL_PIO.h
-                    src/Hardware/HAL/HAL_PIO.cpp
-                    src/Hardware/HAL/HAL_TIM.cpp
-                    src/Hardware/HAL/HAL_TIM2.cpp
-                    src/Hardware/HAL/HAL_TIM3.cpp
-                    src/Hardware/HAL/HAL_TIM4.cpp
-                    src/Keyboard/*
-                    src/Interface/*
-                    src/libs/CMSIS/startup_stm32f429xx.s
-                    src/libs/HAL/*
-                    src/Menu/*
-                    src/Menu/Pages/*
-                    src/Menu/Pages/Addition/*
-                    src/Menu/Pages/PageDebug/*
-                    src/SCPI/*
-                    src/Settings/*
-                    src/Utils/*
-)
+source_group(common                 FILES ${COMMON})
+source_group(src                    FILES ${SRC})
+source_group(Display                FILES ${DISPLAY})
+source_group(Display\\Font          FILES ${DISPLAY_FONT})
+source_group(FDrive                 FILES ${FDRIVE})
+source_group(FreqMeter              FILES ${FREQMETER})
+source_group(Generator              FILES ${GENERATOR})
+source_group(Hardware               FILES ${HARDWARE})
+source_group(Hardware\\HAL          FILES ${HARDWARE_HAL})
+source_group(Keyboard               FILES ${KEYBOARD})
+source_group(Interface              FILES ${INTERFACE})
+source_group(libs\\CMSIS            FILES ${LIBS_CMSIS})
+source_group(libs\\HAL              FILES ${LIBS_HAL})
+source_group(Menu                   FILES ${MENU})
+source_group(Menu\\Pages            FILES ${MENU_PAGES})
+source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
+source_group(Menu\\Pages\\PageDebug FILES ${MENU_PAGES_PAGEDEBUG})
+source_group(SCPI                   FILES ${_SCPI})
+source_group(Settings               FILES ${SETTINGS})
+source_group(Utils                  FILES ${UTILS})
 
-add_library(Panel ${SOURCES})
+add_library(Panel ${COMMON} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${FREQMETER} ${GENERATOR} ${HARDWARE} ${HARDWARE_HAL} ${KEYBOARD}
+                  ${INTERFACE} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES} ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${_SCPI} ${SETTINGS} ${UTILS})

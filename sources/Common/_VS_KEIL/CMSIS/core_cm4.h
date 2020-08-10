@@ -12,6 +12,9 @@
 #define __ASM()
 
 
+#define __FPU_USED 0
+
+
 struct SysTickStruct
 {
     unsigned short CTRL;
@@ -25,7 +28,7 @@ struct SysTickStruct
 extern struct structSCB
 {
     unsigned VTOR;
-} SCB;
+} *SCB;
 
 
 #define __disable_irq()
