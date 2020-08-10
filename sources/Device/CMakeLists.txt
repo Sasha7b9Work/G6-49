@@ -92,8 +92,7 @@ file(GLOB LIBS_FATFS   src/libs/FatFS/*
                        ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/ff.*
                        ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/diskio.*
                        ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/option/ccsbcs.*
-                       ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/option/syscall.*
-                       )
+                       ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/option/syscall.*)
 file(GLOB LIBS_HAL     src/libs/HAL/*
                        ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
                        ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
@@ -150,8 +149,7 @@ file(GLOB LIBS_USBH    src/libs/USBH/*
                        ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_bot.h
                        ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
                        ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_scsi.h
-                       ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c
-                        )
+                       ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c)
 file(GLOB SETTINGS     src/Settings/*)
 file(GLOB UTILS        src/Utils/*)
 
