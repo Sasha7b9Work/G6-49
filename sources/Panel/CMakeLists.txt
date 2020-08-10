@@ -73,18 +73,8 @@ file(GLOB FDRIVE               src/FDrive/*)
 file(GLOB FREQMETER            src/FreqMeter/*)
 file(GLOB GENERATOR            src/Generator/*)
 file(GLOB HARDWARE             src/Hardware/*.h src/Hardware/*.cpp)
-file(GLOB HARDWARE_HAL         src/Hardware/HAL/HAL.h
-                               src/Hardware/HAL/HAL.cpp
-                               src/Hardware/HAL/HAL_CRC32.cpp
-                               src/Hardware/HAL/HAL_EEPROM.cpp
-                               src/Hardware/HAL/HAL_IT.cpp
-                               src/Hardware/HAL/HAL_LTDC.cpp
-                               src/Hardware/HAL/HAL_PIO.h
-                               src/Hardware/HAL/HAL_PIO.cpp
-                               src/Hardware/HAL/HAL_TIM.cpp
-                               src/Hardware/HAL/HAL_TIM2.cpp
-                               src/Hardware/HAL/HAL_TIM3.cpp
-                               src/Hardware/HAL/HAL_TIM4.cpp)
+file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
+                               ../common/Hardware/HAL/HAL_SPI4_p.cpp)
 file(GLOB KEYBOARD             src/Keyboard/*)
 file(GLOB INTERFACE            src/Interface/*)
 file(GLOB LIBS_CMSIS           src/libs/CMSIS/*)
