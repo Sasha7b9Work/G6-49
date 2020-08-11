@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "libs/FatFS/ffconf.h"
-#include "libs/FatFS/FatFS.h"
+#include "ffconf.h"
+#include "Hardware/FatFS/FatFS.h"
 #include "FDrive/FDrive_d.h"
 #include "Generator/FPGA.h"
 #include "Generator/Generator_d.h"
