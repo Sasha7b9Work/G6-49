@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.13)
-
 project (DLoader)
 
 include_directories(../common/_VS_KEIL
