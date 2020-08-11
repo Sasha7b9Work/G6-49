@@ -3,8 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project (Panel)
 
 include_directories( src
-                     src/libs/HAL
-                     src/Hardware
+                     src/Hardware/HAL
                      ..
                      ../common/_VS_KEIL/CMSIS
                      ../common/_VS/std_includes
@@ -31,55 +30,8 @@ add_compile_options(/wd5027)    # 'xxx': move assignment operator was implicitly
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
 
-set_source_files_properties(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac.c
-                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac_ex.c
-                            PROPERTIES HEADER_FILE_ONLY TRUE)
 
-
-file(GLOB COMMON               ../common/Command.h
-                               ../common/Command.cpp
-                               ../common/Common.h
-                               ../common/Common.cpp
-                               ../common/Common_pan.cpp
-                               ../common/Interface_p.h
-                               ../common/Messages.h
-                               ../common/Messages.cpp
-                               ../common/Transceiver.h
-                               ../common/Transceiver_p.cpp)
-file(GLOB SRC                  src/*.h src/*.cpp)
-file(GLOB DISPLAY              src/Display/*.h src/Display/*.cpp)
-file(GLOB DISPLAY_FONT         src/Display/Font/*)
-file(GLOB FDRIVE               src/FDrive/*)
-file(GLOB FREQMETER            src/FreqMeter/*)
-file(GLOB GENERATOR            src/Generator/*)
-file(GLOB HARDWARE             src/Hardware/*.h src/Hardware/*.cpp)
-file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
-                               ../common/Hardware/HAL/HAL_SPI4_p.cpp)
-file(GLOB KEYBOARD             src/Keyboard/*)
-file(GLOB INTERFACE            src/Interface/*)
-file(GLOB LIBS_CMSIS           src/libs/CMSIS/*)
-file(GLOB LIBS_HAL             src/libs/HAL/*
-                               ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+file(GLOB LIBS_HAL             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
                                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
                                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
                                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
@@ -122,8 +74,30 @@ file(GLOB LIBS_HAL             src/libs/HAL/*
                                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac.h
                                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac.c
                                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac_ex.h
-                               ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac_ex.c
-                       )
+                               ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac_ex.c)
+
+file(GLOB HARDWARE             src/Hardware/*.h src/Hardware/*.cpp)
+file(GLOB HARDWARE_CMSIS       src/Hardware/CMSIS/*)
+file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
+                               ../common/Hardware/HAL/HAL_SPI4_p.cpp)
+file(GLOB SRC                  src/*.h src/*.cpp)
+file(GLOB COMMON               ../common/Command.h
+                               ../common/Command.cpp
+                               ../common/Common.h
+                               ../common/Common.cpp
+                               ../common/Common_pan.cpp
+                               ../common/Interface_p.h
+                               ../common/Messages.h
+                               ../common/Messages.cpp
+                               ../common/Transceiver.h
+                               ../common/Transceiver_p.cpp)
+file(GLOB DISPLAY              src/Display/*.h src/Display/*.cpp)
+file(GLOB DISPLAY_FONT         src/Display/Font/*)
+file(GLOB FDRIVE               src/FDrive/*)
+file(GLOB FREQMETER            src/FreqMeter/*)
+file(GLOB GENERATOR            src/Generator/*)
+file(GLOB KEYBOARD             src/Keyboard/*)
+file(GLOB INTERFACE            src/Interface/*)
 file(GLOB MENU                 src/Menu/*.h src/Menu/*.cpp)
 file(GLOB MENU_PAGES           src/Menu/Pages/*.h src/Menu/Pages/*.cpp)
 file(GLOB MENU_PAGES_ADDITION  src/Menu/Pages/Addition/*)
@@ -132,19 +106,21 @@ file(GLOB _SCPI                src/SCPI/*)
 file(GLOB SETTINGS             src/Settings/*)
 file(GLOB UTILS                src/Utils/*)
 
-source_group(common                 FILES ${COMMON})
+set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
+
+source_group(libs\\HAL              FILES ${LIBS_HAL})
+source_group(Hardware               FILES ${HARDWARE})
+source_group(Hardware\\CMSIS        FILES ${HARDWARE_CMSIS})
+source_group(Hardware\\HAL          FILES ${HARDWARE_HAL})
 source_group(src                    FILES ${SRC})
+source_group(common                 FILES ${COMMON})
 source_group(Display                FILES ${DISPLAY})
 source_group(Display\\Font          FILES ${DISPLAY_FONT})
 source_group(FDrive                 FILES ${FDRIVE})
 source_group(FreqMeter              FILES ${FREQMETER})
 source_group(Generator              FILES ${GENERATOR})
-source_group(Hardware               FILES ${HARDWARE})
-source_group(Hardware\\HAL          FILES ${HARDWARE_HAL})
-source_group(Keyboard               FILES ${KEYBOARD})
 source_group(Interface              FILES ${INTERFACE})
-source_group(libs\\CMSIS            FILES ${LIBS_CMSIS})
-source_group(libs\\HAL              FILES ${LIBS_HAL})
+source_group(Keyboard               FILES ${KEYBOARD})
 source_group(Menu                   FILES ${MENU})
 source_group(Menu\\Pages            FILES ${MENU_PAGES})
 source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
@@ -153,5 +129,6 @@ source_group(SCPI                   FILES ${_SCPI})
 source_group(Settings               FILES ${SETTINGS})
 source_group(Utils                  FILES ${UTILS})
 
-add_library(Panel ${COMMON} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${FREQMETER} ${GENERATOR} ${HARDWARE} ${HARDWARE_HAL} ${KEYBOARD}
-                  ${INTERFACE} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES} ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${_SCPI} ${SETTINGS} ${UTILS})
+add_library(Panel ${LIBS_HAL} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL} ${SRC} ${COMMON} ${DISPLAY} ${DISPLAY_FONT}
+                  ${FDRIVE} ${FREQMETER} ${GENERATOR} ${INTERFACE} ${KEYBOARD} ${MENU} ${MENU_PAGES} ${MENU_PAGES_ADDITION}
+                  ${MENU_PAGES_PAGEDEBUG} ${_SCPI} ${SETTINGS} ${UTILS})

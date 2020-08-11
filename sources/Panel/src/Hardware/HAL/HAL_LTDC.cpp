@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "CPU.h"
+#include "Hardware/CPU.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"

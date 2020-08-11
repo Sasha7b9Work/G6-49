@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "common/Messages.h"
-#include "VCP_p.h"
+#include "Hardware/VCP_p.h"
 #include "Generator/Signals.h"
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/SCPI.h"
