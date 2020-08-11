@@ -6,19 +6,18 @@ include_directories(../common/_VS_KEIL
                     ../common/_VS_KEIL/CMSIS
                     ../common/_VS_KEIL/std_includes
                     src
+                    src/Hardware/FatFS
+                    src/Hardware/HAL
+                    src/Hardware/USBH
                     ..
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-                    ../DLoader/src/libs/USBD
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
-                    ../DLoader/src/libs/HAL
                     ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc
-                    ../DLoader/src/libs/USBH
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../DLoader/src/libs/FatFS
                     )
 
 add_definitions(-DSTM32F407xx -DLOADER)
