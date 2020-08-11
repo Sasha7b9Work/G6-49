@@ -2,13 +2,12 @@ project (G6-49)
 
 include_directories(src
                     ../../Panel/src
-                    ../../Panel/src/libs/HAL
                     ../../Panel/src/Hardware
                     ../..
                     ../../common/_VS_GUI
                     ../../common/_VS_GUI/CMSIS
                     ../../common/_VS_GUI/HAL
-                    ../../Panel/src/libs/HAL
+                    ../../Panel/src/Hardware/HAL
                     ../../../../ThirdParty/wxWidgets/include
                     ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
 
@@ -65,176 +64,85 @@ add_compile_options(/wd5027)    # move assignment operator was implicitly define
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
 
-source_group(common                   FILES              ../../common/Command.h
-                                                         ../../common/Command.cpp
-                                                         ../../common/Common.h
-                                                         ../../common/Common.cpp
-                                                         ../../common/Common_pan.cpp
-                                                         ../../common/CommonTypes.h
-                                                         ../../common/Messages.h
-                                                         ../../common/Messages.cpp
-                                                         ../../common/Transceiver.h)
-source_group(common\\_VS\\HAL         FILES              ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp)
-source_group(src                      FILES              ../../Panel/src/defines.h
-                                                         ../../Panel/src/Log.cpp
-                                                         ../../Panel/src/Log.h
-                                                         ../../Panel/src/stdafx.cpp
-                                                         ../../Panel/src/stdafx.h
-                                                         ../../Panel/src/structs.h)
-source_group(Display                  FILES              ../../Panel/src/Display/Colors.h
-                                                         ../../Panel/src/Display/Colors.cpp
-                                                         ../../Panel/src/Display/Console.h
-                                                         ../../Panel/src/Display/Console.cpp
-                                                         ../../Panel/src/Display/Display.h
-                                                         ../../Panel/src/Display/Display.cpp
-                                                         ../../Panel/src/Display/DisplayTypes.h
-                                                         ../../Panel/src/Display/Painter.h
-                                                         ../../Panel/src/Display/Painter.cpp
-                                                                     src/Display/Painter_win.cpp
-                                                         ../../Panel/src/Display/Symbols.h
-                                                         ../../Panel/src/Display/Text.h
-                                                         ../../Panel/src/Display/Text.cpp
-                                                         ../../Panel/src/Display/Tuner.h
-                                                         ../../Panel/src/Display/Tuner.cpp
-                                                         ../../Panel/src/Display/Viewer.h
-                                                         ../../Panel/src/Display/Viewer.cpp
-                                                         ../../Panel/src/Display/WaveGraphics.h
-                                                         ../../Panel/src/Display/WaveGraphics.cpp)
-source_group(Hardware                 FILES                          src/Hardware/Beeper_win.cpp
-                                                         ../../Panel/src/Hardware/CPU.h
-                                                         ../../Panel/src/Hardware/Timer.h
-                                                         ../../Panel/src/Hardware/Timer.cpp
-                                                         ../../Panel/src/Hardware/VCP_p.h
-                                                                     src/Hardware/CPU_win.cpp
-                                                                     src/Hardware/LTDC_win.cpp
-                                                                     src/Hardware/VCP_p_win.cpp)
-source_group(Hardware\\HAL            FILES              ../../Panel/src/Hardware/HAL/HAL_TIM.cpp
-                                                                     src/Hardware/HAL/HAL_EEPROM_win.cpp
-                                                                     src/Hardware/HAL/HAL_PIO_win.cpp
-                                                                     src/Hardware/HAL/HAL_TIM2_win.cpp
-                                                                     src/Hardware/HAL/HAL_TIM3_win.cpp
-                                                                     src/Hardware/HAL/HAL_TIM4_win.cpp)
-source_group(Keyboard                 FILES              ../../Panel/src/Keyboard/Controls.h
-                                                         ../../Panel/src/Keyboard/Controls.cpp
-                                                         ../../Panel/src/Keyboard/Keyboard.h
-                                                         ../../Panel/src/Keyboard/Keyboard.cpp
-                                                                     src/Keyboard/Keyboard_win.h)
-source_group(Interface                FILES              ../../Panel/src/Interface/Handlers_p.cpp
-                                                         ../../Panel/src/Interface/Handlers_p.h
-                                                         ../../Panel/src/Interface/Interface_p.cpp
-                                                         ../../Panel/src/Interface/Interface_p.h
-                                                         ../../Panel/src/Interface/Messages_p.h
-                                                         ../../Panel/src/Interface/Messages_p.cpp
-                                                                     src/Interface/Transceiver_p_win.cpp)
-source_group(Display\\Font            REGULAR_EXPRESSION ../Panel/src/Display/Font/*)
-source_group(FDrive                   REGULAR_EXPRESSION ../Panel/src/FDrive/*)
-source_group(FreqMeter                REGULAR_EXPRESSION ../Panel/src/FreqMeter/*)
-source_group(Generator                REGULAR_EXPRESSION ../Panel/src/Generator/*)
-source_group(GUI                      REGULAR_EXPRESSION src/GUI/*)
-source_group(libs\\CMSIS              REGULAR_EXPRESSION ../Panel/src/libs/CMSIS/*)
-source_group(libs\\HAL                REGULAR_EXPRESSION ../Panel/src/libs/HAL/*)
-source_group(Menu                     REGULAR_EXPRESSION ../Panel/src/Menu/*)
-source_group(Menu\\Pages              REGULAR_EXPRESSION ../Panel/src/Menu/Pages/*)
-source_group(Menu\\Pages\\Addition    REGULAR_EXPRESSION ../Panel/src/Menu/Pages/Addition/*)
-source_group(Menu\\Pages\\PageDebug   REGULAR_EXPRESSION ../Panel/src/Menu/Pages/PageDebug/*)
-source_group(SCPI                     REGULAR_EXPRESSION ../Panel/src/SCPI/*)
-source_group(Settings                 REGULAR_EXPRESSION ../Panel/src/Settings/*)
-source_group(Utils                    REGULAR_EXPRESSION ../Panel/src/Utils/*)
+file(GLOB COMMON                 ../../common/Command.*
+                                 ../../common/Common.*
+                                 ../../common/Common_pan.cpp
+                                 ../../common/CommonTypes.h
+                                 ../../common/Messages.*
+                                 ../../common/Transceiver.h)
+file(GLOB COMMON_VS_HAL          ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp)
+file(GLOB SRC                    ../../Panel/src/defines.h
+                                 ../../Panel/src/Log.*
+                                 ../../Panel/src/stdafx.*
+                                 ../../Panel/src/structs.h)
+file(GLOB DISPLAY                ../../Panel/src/Display/Colors.*
+                                 ../../Panel/src/Display/Console.*
+                                 ../../Panel/src/Display/Display.*
+                                 ../../Panel/src/Display/DisplayTypes.h
+                                 ../../Panel/src/Display/Painter.*
+                                             src/Display/Painter_win.cpp
+                                 ../../Panel/src/Display/Symbols.h
+                                 ../../Panel/src/Display/Text.*
+                                 ../../Panel/src/Display/Tuner.*
+                                 ../../Panel/src/Display/Viewer.*
+                                 ../../Panel/src/Display/WaveGraphics.*)
+file(GLOB HARDWARE                           src/Hardware/Beeper_win.cpp
+                                 ../../Panel/src/Hardware/CPU.h
+                                 ../../Panel/src/Hardware/Timer.*
+                                 ../../Panel/src/Hardware/VCP_p.h
+                                             src/Hardware/CPU_win.cpp
+                                             src/Hardware/LTDC_win.cpp
+                                             src/Hardware/VCP_p_win.cpp)
+file(GLOB HARDWARE_HAL           ../../Panel/src/Hardware/HAL/HAL_TIM.cpp
+                                             src/Hardware/HAL/HAL_EEPROM_win.cpp
+                                             src/Hardware/HAL/HAL_PIO_win.cpp
+                                             src/Hardware/HAL/HAL_TIM2_win.cpp
+                                             src/Hardware/HAL/HAL_TIM3_win.cpp
+                                             src/Hardware/HAL/HAL_TIM4_win.cpp)
+file(GLOB KEYBOARD               ../../Panel/src/Keyboard/Controls.*
+                                 ../../Panel/src/Keyboard/Keyboard.*
+                                             src/Keyboard/Keyboard_win.h)
+file(GLOB INTERFACE              ../../Panel/src/Interface/Handlers_p.*
+                                 ../../Panel/src/Interface/Interface_p.*
+                                 ../../Panel/src/Interface/Messages_p.*
+                                             src/Interface/Transceiver_p_win.cpp)
+file(GLOB DISPLAY_FONT           ../../Panel/src/Display/Font/*)
+file(GLOB FDRIVE                 ../../Panel/src/FDrive/*)
+file(GLOB FREQMETER              ../../Panel/src/FreqMeter/*)
+file(GLOB GENERATOR              ../../Panel/src/Generator/*)
+file(GLOB _GUI                               src/GUI/*)
+file(GLOB LIBS_CMSIS             ../../Panel/src/libs/CMSIS/*)
+file(GLOB LIBS_HAL               ../../Panel/src/libs/HAL/*)
+file(GLOB MENU                   ../../Panel/src/Menu/*.h ../Panel/src/Menu/*.cpp)
+file(GLOB MENU_PAGES             ../../Panel/src/Menu/Pages/*.h ../Panel/src/Menu/Pages/*.cpp)
+file(GLOB MENU_PAGES_ADDITION    ../../Panel/src/Menu/Pages/Addition/*)
+file(GLOB MENU_PAGES_PAGEDEBUG   ../../Panel/src/Menu/Pages/PageDebug/*)
+file(GLOB _SCPI                  ../../Panel/src/SCPI/*)
+file(GLOB SETTINGS               ../../Panel/src/Settings/*)
+file(GLOB UTILS                  ../../Panel/src/Utils/*)
 
-file(GLOB SOURCES   ../../common/Command.h
-                    ../../common/Command.cpp
-                    ../../common/Common.h
-                    ../../common/Common.cpp
-                    ../../common/Common_pan.cpp
-                    ../../common/CommonTypes.h
-                    ../../common/Messages.h
-                    ../../common/Messages.cpp
-                    ../../common/Messages_p.h
-                    ../../common/Messages_p.cpp
-                    ../../common/Transceiver.h
-                    
-                    ../../common/_VS_GUI/HAL/stm32f4xx_hal.cpp
-                    
-                    ../../Panel/src/defines.h
-                    ../../Panel/src/Log.cpp
-                    ../../Panel/src/Log.h
-                    ../../Panel/src/stdafx.cpp
-                    ../../Panel/src/stdafx.h
-                    ../../Panel/src/structs.h
-                    
-                    ../../Panel/src/Display/Colors.h
-                    ../../Panel/src/Display/Colors.cpp
-                    ../../Panel/src/Display/Console.h
-                    ../../Panel/src/Display/Console.cpp
-                    ../../Panel/src/Display/Display.h
-                    ../../Panel/src/Display/Display.cpp
-                    ../../Panel/src/Display/DisplayTypes.h
-                    ../../Panel/src/Display/Painter.h
-                    ../../Panel/src/Display/Painter.cpp
-                                src/Display/Painter_win.cpp
-                    ../../Panel/src/Display/Symbols.h
-                    ../../Panel/src/Display/Text.h
-                    ../../Panel/src/Display/Text.cpp
-                    ../../Panel/src/Display/Tuner.h
-                    ../../Panel/src/Display/Tuner.cpp
-                    ../../Panel/src/Display/Viewer.h
-                    ../../Panel/src/Display/Viewer.cpp
-                    ../../Panel/src/Display/WaveGraphics.h
-                    ../../Panel/src/Display/WaveGraphics.cpp
-                    
-                    ../../Panel/src/Hardware/Controls.h
-                    ../../Panel/src/Hardware/Controls.cpp
-                    ../../Panel/src/Hardware/CPU.h
-                    ../../Panel/src/Hardware/Keyboard.h
-                    ../../Panel/src/Hardware/Keyboard.cpp
-                    ../../Panel/src/Hardware/Timer.h
-                    ../../Panel/src/Hardware/Timer.cpp
-                    ../../Panel/src/Hardware/VCP_p.h
-                                src/Hardware/Beeper_win.cpp
-                                src/Hardware/CPU_win.cpp
-                                src/Hardware/Keyboard_win.h
-                                src/Hardware/LTDC_win.cpp
-                                src/Hardware/VCP_p_win.cpp
-
-                    ../../Panel/src/Hardware/HAL/HAL_TIM.cpp
-                                src/Hardware/HAL/HAL_EEPROM_win.cpp
-                                src/Hardware/HAL/HAL_PIO_win.cpp
-                                src/Hardware/HAL/HAL_TIM2_win.cpp
-                                src/Hardware/HAL/HAL_TIM3_win.cpp
-                                src/Hardware/HAL/HAL_TIM4_win.cpp
-                                
-                                
-                    ../../Panel/src/Keyboard/Controls.h
-                    ../../Panel/src/Keyboard/Controls.cpp
-                    ../../Panel/src/Keyboard/Keyboard.h
-                    ../../Panel/src/Keyboard/Keyboard.cpp
-                                src/Keyboard/Keyboard_win.h
-                    
-                    ../../Panel/src/Interface/Handlers_p.cpp
-                    ../../Panel/src/Interface/Handlers_p.h
-                    ../../Panel/src/Interface/Interface_p.cpp
-                    ../../Panel/src/Interface/Interface_p.h
-                    ../../Panel/src/Interface/Messages_p.h
-                    ../../Panel/src/Interface/Messages_p.cpp
-                                src/Interface/Transceiver_p_win.cpp
-                                
-                    ../../Panel/src/libs/CMSIS/startup_stm32f429xx.s
-                                src/GUI/*
-                                src/Display/Painter_win.cpp
-
-                    ../../Panel/src/Display/Font/*
-                    ../../Panel/src/FDrive/*
-                    ../../Panel/src/FreqMeter/*
-                    ../../Panel/src/Generator/*
-                    ../../Panel/src/libs/HAL/*
-                    ../../Panel/src/Menu/*
-                    ../../Panel/src/Menu/Pages/*
-                    ../../Panel/src/Menu/Pages/Addition/*
-                    ../../Panel/src/Menu/Pages/PageDebug/*
-                    ../../Panel/src/SCPI/*
-                    ../../Panel/src/Settings/*
-                    ../../Panel/src/Utils/*
-                    )
+source_group(common                 FILES ${COMMON})
+source_group(common\\_VS\\HAL       FILES ${COMMON_VS_HAL})
+source_group(src                    FILES ${SRC})
+source_group(Display                FILES ${DISPLAY})
+source_group(Display\\Font          FILES ${DISPLAY_FONT})
+source_group(FDrive                 FILES ${FDRIVE})
+source_group(FreqMeter              FILES ${FREQMETER})
+source_group(Generator              FILES ${GENERATOR})
+source_group(GUI                    FILES ${_GUI})
+source_group(Hardware               FILES ${HARDWARE})
+source_group(Hardware\\HAL          FILES ${HARDWARE_HAL})
+source_group(Interface              FILES ${INTERFACE})
+source_group(Keyboard               FILES ${KEYBOARD})
+source_group(libs\\CMSIS            FILES ${LIBS_CMSIS})
+source_group(libs\\HAL              FILES ${LIBS_HAL})
+source_group(Menu                   FILES ${MENU})
+source_group(Menu\\Pages            FILES ${MENU_PAGES})
+source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
+source_group(Menu\\Pages\\PageDebug FILES ${MENU_PAGES_PAGEDEBUG})
+source_group(SCPI                   FILES ${_SCPI})
+source_group(Settings               FILES ${SETTINGS})
+source_group(Utils                  FILES ${UTILS})
 
 add_executable(G6-49 ${SOURCES})
 
