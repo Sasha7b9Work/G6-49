@@ -144,7 +144,9 @@ source_group(SCPI                   FILES ${_SCPI})
 source_group(Settings               FILES ${SETTINGS})
 source_group(Utils                  FILES ${UTILS})
 
-add_executable(G6-49 ${SOURCES})
+add_executable(G6-49 ${COMMON} ${COMMON_VS_HAL} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${FREQMETER} ${GENERATOR}
+                     ${_GUI} ${HARDWARE} ${HARDWARE_HAL} ${INTERFACE} ${KEYBOARD} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES}
+                     ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${_SCPI} ${SETTINGS} ${UTILS})
 
 target_link_libraries(G6-49 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(G6-49 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
