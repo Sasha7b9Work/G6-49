@@ -1,5 +1,5 @@
 @echo off
-MSBuild.exe ..\..\wxWidgets\generated\wxWidgets.sln -t:rebuild
+MSBuild.exe ..\wxWidgets\generated\wxWidgets.sln -t:rebuild
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
 
@@ -15,13 +15,6 @@ echo .
 goto Exit
 
 :Success
-echo .
-echo .
-echo .
-echo                          Build success
-echo .
-echo .
-echo .
 
 :Exit
 

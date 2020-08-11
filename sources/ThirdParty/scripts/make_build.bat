@@ -1,4 +1,4 @@
-call cmake.bat
-call msbuild.bat
+call make.bat
+call build.bat
 pause
 exit
