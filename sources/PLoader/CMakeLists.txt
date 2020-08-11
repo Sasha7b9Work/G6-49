@@ -95,7 +95,7 @@ set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 source_group(libs\\HAL       FILES ${LIBS_HAL})
 source_group(Hardware        FILES ${HARDWARE})
-source_group(libs\\CMSIS     FILES ${HARDWARE_CMSIS})
+source_group(Hardware\\CMSIS FILES ${HARDWARE_CMSIS})
 source_group(Hardware\\HAL   FILES ${HARDWARE_HAL})
 source_group(src             FILES ${SRC})
 source_group(common          FILES ${COMMON})
