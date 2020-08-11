@@ -10,10 +10,7 @@ archive.zip
 *out.txt
 
 
-doc/doxygen/KornetDDS/*
-
 sources/.vs/*
-sources/DDS-VS/Panel/.vs/*
 
 sources/generated/*
 
@@ -37,25 +34,7 @@ sources/VS/Panel/Debug/*
 sources/VS/Panel/x64/*
 sources/VS/Generator/x64/*
 
-sources/DDS-VS/Panel/Debug/*
-sources/DDS-VS/Panel/x64/*
-sources/DDS-VS/Panel/Release/*
-
-sources/DDS-VS/Device/x64/*
-sources/DDS-VS/Device/Debug/*
-sources/DDS-VS/Device/Release/*
-
-sources/DDS-Open/Panel/DebugConfig/*
-sources/DDS-Open/Panel/Objects/*
-sources/DDS-Open/Panel/Listings/*
-
-sources/DDS-Open/Generator/DebugConfig/*
-sources/DDS-Open/Generator/Objects/*
-sources/DDS-Open/Generator/Listings/*
-
-sources/DDS-Open-VS/Panel/Debug/*
-sources/DDS-Open-VS/Panel/Release/*
-sources/DDS-Open-VS/Panel/x64/*
-
 sources/Device/*.bin
 sources/Panel/*.bin
+
+sources/ThirdParty/wxWidgets/generated/*

@@ -1,8 +1,8 @@
 project (Editor)
 
 include_directories(src
-                    ../../../../ThirdParty/wxWidgets/include
-                    ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
+                    ../../ThirdParty/wxWidgets/include
+                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
                     
 add_definitions(-DWXUSINGDLL)
 
