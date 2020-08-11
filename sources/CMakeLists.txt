@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.18.1)
 
 # Set CMake policy required by UrhoCommon module
 if (COMMAND cmake_policy)
