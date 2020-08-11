@@ -8,8 +8,8 @@ include_directories(src
                     ../../common/_VS_GUI/CMSIS
                     ../../common/_VS_GUI/HAL
                     ../../Panel/src/Hardware/HAL
-                    ../../../../ThirdParty/wxWidgets/include
-                    ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
+                    ../../ThirdParty/wxWidgets/include
+                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
 
 add_definitions(-DSTM32F437xx -DWXUSINGDLL -DUSE_SDL2 -DPANEL)
 
@@ -113,8 +113,8 @@ file(GLOB GENERATOR              ../../Panel/src/Generator/*)
 file(GLOB _GUI                               src/GUI/*)
 file(GLOB LIBS_CMSIS             ../../Panel/src/libs/CMSIS/*)
 file(GLOB LIBS_HAL               ../../Panel/src/libs/HAL/*)
-file(GLOB MENU                   ../../Panel/src/Menu/*.h ../Panel/src/Menu/*.cpp)
-file(GLOB MENU_PAGES             ../../Panel/src/Menu/Pages/*.h ../Panel/src/Menu/Pages/*.cpp)
+file(GLOB MENU                   ../../Panel/src/Menu/*.h ../../Panel/src/Menu/*.cpp)
+file(GLOB MENU_PAGES             ../../Panel/src/Menu/Pages/*.h ../../Panel/src/Menu/Pages/*.cpp)
 file(GLOB MENU_PAGES_ADDITION    ../../Panel/src/Menu/Pages/Addition/*)
 file(GLOB MENU_PAGES_PAGEDEBUG   ../../Panel/src/Menu/Pages/PageDebug/*)
 file(GLOB _SCPI                  ../../Panel/src/SCPI/*)
@@ -148,8 +148,8 @@ add_executable(G6-49 ${COMMON} ${COMMON_VS_HAL} ${SRC} ${DISPLAY} ${DISPLAY_FONT
                      ${_GUI} ${HARDWARE} ${HARDWARE_HAL} ${INTERFACE} ${KEYBOARD} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES}
                      ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${_SCPI} ${SETTINGS} ${UTILS})
 
-target_link_libraries(G6-49 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-target_link_libraries(G6-49 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
+target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
 
 target_link_libraries(G6-49 WinMM.lib)
 target_link_libraries(G6-49 version.lib)
