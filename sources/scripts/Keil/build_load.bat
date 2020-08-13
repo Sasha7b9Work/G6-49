@@ -15,39 +15,49 @@ if %1==all     ( set _BUILD_DEVICE_=1  & set _BUILD_PANEL_=1 & set _BUILD_DLOADE
 
 if %_PROCESSED_%==0 goto HINT
 
-if %_BUILD_DEVICE_%==0 goto BUILD_PANEL
-
 :BUILD_DEVICE
 
-    call clean.bat device
+if %_BUILD_DEVICE_%==0 goto BUILD_PANEL
+
     call build.bat device
+    call load.bat device
+
+echo 1
     
 :BUILD_PANEL
 
+echo 2
+
 if %_BUILD_PANEL_%==0 goto BUILD_DLOADER
 
-    call clean.bat panel
+echo 3
+
     call build.bat panel
+    call load.bat panel
 
 :BUILD_DLOADER
 
+echo 4
+
 if %_BUILD_DLOADER_%==0 goto BUILD_PLOADER
 
-    call clean.bat dloader
     call build.bat dloader
+    call load.bat dloader
 
 :BUILD_PLOADER
 
 if %_BUILD_PLOADER_%==0 goto EXIT
 
-    call clean.bat ploader
     call build.bat ploader
+    call load.bat ploader
     goto EXIT
 
 :HINT
     echo.
     echo Usage:
-    echo       rebuild.bat [device^|panel^|dloader^|ploader^|all]
+    echo       build_load.bat [device^|panel^|dloader^|ploader^|all]
     goto EXIT
 
 :EXIT
+
+echo 5
