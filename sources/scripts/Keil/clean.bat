@@ -1,46 +1,30 @@
 @echo off
 
-set _CLEAN_DEVICE_=0
-set _CLEAN_PANEL_=0
-set _CLEAN_PLOADER_=0
-set _CLEAN_DLOADER_=0
-set _PROCESSED_=0
-
 if "%1" EQU "" goto HINT
+if %1==device  goto CLEAN_DEVICE
+if %1==panel   goto CLEAN_PANEL
+if %1==dloader goto CLEAN_DLOADER
+if %1==ploader goto CLEAN_PLOADER
+if %1==all     ( call clean.bat device & call clean.bat panel & call clean.bat dloader & call clean.bat ploader & goto EXIT )
 
-if %1==device  ( set _CLEAN_DEVICE_=1  & set _PROCESSED_=1 )
-if %1==panel   ( set _CLEAN_PANEL_=1   & set _PROCESSED_=1 )
-if %1==dloader ( set _CLEAN_DLOADER_=1 & set _PROCESSED_=1 )
-if %1==ploader ( set _CLEAN_PLOADER_=1 & set _PROCESSED_=1 )
-if %1==all     ( set _CLEAN_DEVICE_=1 & set _CLEAN_PANEL_= 1 & set _CLEAN_DLOADER_=1 & set _CLEAN_PLOADER_=1 & set _PROCESSED_=1 )
-
-if %_PROCESSED_%==0 goto HINT
+goto HINT
 
 :CLEAN_PANEL
-
-if %_CLEAN_PANEL_%==0 goto CLEAN_DEVICE
-
     echo Clean Panel
     c:\Keil_v5\UV4\UV4 -c..\..\Panel\Panel.uvprojx -j0
+    goto EXIT
 
 :CLEAN_DEVICE
-
-if %_CLEAN_DEVICE_%==0 goto CLEAN_DLOADER
-
     echo Clean Device
     c:\Keil_v5\UV4\UV4 -c..\..\Device\Device.uvprojx -j0
+    goto EXIT
 
 :CLEAN_DLOADER
-
-if %_CLEAN_DLOADER_%==0 goto CLEAN_PLOADER
-
     echo Clean Device Loader
     c:\Keil_v5\UV4\UV4 -c..\..\DLoader\DLoader.uvprojx -j0
+    goto EXIT
 
 :CLEAN_PLOADER
-
-if %_CLEAN_PLOADER_%==0 goto EXIT
-
     echo Clean Panel Loader
     c:\Keil_v5\UV4\UV4 -c..\..\PLoader\PLoader.uvprojx -j0
     goto EXIT
