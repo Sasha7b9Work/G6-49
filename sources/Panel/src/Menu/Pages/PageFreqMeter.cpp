@@ -129,11 +129,11 @@ static void OnPress_AvePeriod(bool)
 DEF_CHOICE_5(cTimeStamps,                                                                                                                                //--- „ј—“ќ“ќћ≈– - ћетки времени ---
     "ћетки вр", "Time stamps",
     "", "",
-    "1 к√ц",   "1 kHz",   "", "",
-    "10 к√ц",  "10 kHz",  "", "",
-    "100 к√ц", "100 kHz", "", "",
-    "1 ћ√ц",   "1 MHz",   "", "",
-    "10 ћ√ц",  "10 MHz",  "", "",
+    "1e-3 с", "1e-3 s",  "", "",
+    "1e-4 с", "1e-4 s",  "", "",
+    "1e-5 с", "1e-5 s",  "", "",
+    "1e-6 с", "1e-6 s",  "", "",
+    "1e-7 с", "1e-7 s",  "", "",
     set.freq.timeStamps, pFrequencyCounter, Item::FuncActive, OnPress_TimeStamps, FuncDraw
 )
 
