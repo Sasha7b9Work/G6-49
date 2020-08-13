@@ -7,11 +7,11 @@ set _BUILD_PLOADER_=0
 set _PROCESSED_=0
 
 if "%1" EQU "" goto HINT
-if %1==device ( set _BUILD_DEVICE_=1 & set _PROCESSED_=1 )
-if %1==panel ( set _BUILD_PANEL_=1 & set _PROCESSED_=1 )
+if %1==device  ( set _BUILD_DEVICE_=1  & set _PROCESSED_=1 )
+if %1==panel   ( set _BUILD_PANEL_=1   & set _PROCESSED_=1 )
 if %1==dloader ( set _BUILD_DLOADER_=1 & set _PROCESSED_=1 )
 if %1==ploader ( set _BUILD_PLOADER_=1 & set _PROCESSED_=1 )
-if %1==all ( set _BUILD_DEVICE_=1 & set _BUILD_PANEL_=1 & set _BUILD_DLOADER_=1 & set _BUILD_PLOADER_=1 & set _PROCESSED_=1 )
+if %1==all     ( set _BUILD_DEVICE_=1  & set _BUILD_PANEL_=1 & set _BUILD_DLOADER_=1 & set _BUILD_PLOADER_=1 & set _PROCESSED_=1 )
 
 if %_PROCESSED_%==0 goto HINT
 
