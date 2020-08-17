@@ -129,11 +129,11 @@ static void OnPress_AvePeriod(bool)
 DEF_CHOICE_5(cTimeStamps,                                                                                                                                //--- ЧАСТОТОМЕР - Метки времени ---
     "Метки вр", "Time stamps",
     "", "",
-    "1e-3 с", "1e-3 s",  "", "",
-    "1e-4 с", "1e-4 s",  "", "",
-    "1e-5 с", "1e-5 s",  "", "",
-    "1e-6 с", "1e-6 s",  "", "",
-    "1e-7 с", "1e-7 s",  "", "",
+    "10-3 с", "10-3 s",  "", "",
+    "10-4 с", "10-4 s",  "", "",
+    "10-5 с", "10-5 s",  "", "",
+    "10-6 с", "10-6 s",  "", "",
+    "10-7 с", "10-7 s",  "", "",
     set.freq.timeStamps, pFrequencyCounter, Item::FuncActive, OnPress_TimeStamps, FuncDraw
 )
 
