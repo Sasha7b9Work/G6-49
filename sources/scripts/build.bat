@@ -1,7 +1,7 @@
 @echo off
 
 cd keil
-call build.bat
+call build.bat all
 cd ..
 
 cd vs_keil
