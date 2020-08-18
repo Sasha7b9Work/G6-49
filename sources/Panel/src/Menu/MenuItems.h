@@ -134,6 +134,7 @@ public:
          USB,
          SB_Input,
          Registers,
+         Signals,
          Main,
          Settings_Load,
          Settings_CalibrationA,

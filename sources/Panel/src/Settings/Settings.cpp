@@ -60,13 +60,13 @@ static const Settings defSet =
         MAKE_COLOR(0x40, 0x40, 0xFF)    // CHAN_B
 #endif
     },
-    static_cast<Page *>(PageSignals::self),// menu_currentPage
-    {0},                                // menu_posActItem[]
-    {0},                                // menu_currentSubPage[]
-    {false, false},                     // enabled[2]
-    Chan::A,                            // current
-    0,                                  // lang
-    true                                // bigSymbols
+    static_cast<Page *>(PageSignals::self), // menu_currentPage
+    {0},                                    // menu_posActItem[]
+    {0},                                    // menu_currentSubPage[]
+    {false, false},                         // enabled[2]
+    Chan::A,                                // current
+    0,                                      // lang
+    true                                    // bigSymbols
     ,                               
     {
         PFreqMeter::BillingTime::_1ms,      // freq_billingTime

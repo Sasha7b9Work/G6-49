@@ -81,7 +81,7 @@ DEF_PAGE_8( pageSignals,   //-V641
     PageService::self,
     &Item::emptyLight,
     &Item::emptyLight,
-    Page::Main, nullptr, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
+    Page::Signals, PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
 Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
