@@ -22,7 +22,7 @@ extern const PageBase pSignals;
 
 void Menu::Init()
 {
-    PageSignals::Init();
+    PageMain::Init();
     PageDebug::Colors::Init();
 }
 

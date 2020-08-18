@@ -12,16 +12,12 @@ struct PageMain
 
     // Возвращает true, если открыта первая подстраница (с которой производится настройка каналов)
     static bool OnSubPageTuneChannels();
-};
 
-
-struct PageSignals
-{
     static void Init();
 
-    static void SetCurrentChanenl(Chan::E ch);
-
     static void OnPress_Channel(bool);
+
+    static void SetCurrentChanenl(Chan::E ch);
 
     // Эта функция должна вызываться после выбора формы сигнала - по её нажатию происходит загрузка формы в прибор
     static void OnChanged_Form(bool = true);

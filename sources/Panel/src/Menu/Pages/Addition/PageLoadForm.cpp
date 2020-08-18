@@ -40,7 +40,7 @@ volatile const ButtonBase *pbEnter = &bEnter;
 static void OnPress_Choose()
 {
     FDrive::PressChoose();
-    PageSignals::OnChanged_Form();
+    PageMain::OnChanged_Form();
 }
 
 DEF_BUTTON( bChoose,                                                                                                                     //--- ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃĞÓÇÊÀ - Óñòàíîâèòü ---

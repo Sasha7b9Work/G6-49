@@ -19,7 +19,7 @@ DEF_CHOICE_2( cChannel,                                                         
     "Управление параметрами сигнала на выходе A", "Control the parameters of the signal at output A",
     "B",                                          "B",
     "Управление параметрами сигнала на выходе B", "Control the parameters of the signal at output B",
-    set.current, *PageMain::self, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
+    set.current, *PageMain::self, Item::FuncActive, PageMain::OnPress_Channel, FuncDraw
 )
 
 
@@ -35,7 +35,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(TypeForm::Impulse),      FORM_EN(TypeForm::Impulse),      "Импульсы",         "Impulse",
     FORM_RU(TypeForm::PacketImpuls), FORM_EN(TypeForm::PacketImpuls), "Пакеты",           "Packets",
     FORM_RU(TypeForm::Free),         FORM_EN(TypeForm::Free),         "Произвольный",     "Free",
-    numForm, *PageMain::self, Item::FuncActive, PageSignals::OnChanged_Form, FuncDraw
+    numForm, *PageMain::self, Item::FuncActive, PageMain::OnChanged_Form, FuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -48,7 +48,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(TypeForm::Meander),   FORM_RU(TypeForm::Meander),   "Меандр",           "Meander",
     FORM_RU(TypeForm::Impulse),   FORM_RU(TypeForm::Impulse),   "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Free),      FORM_RU(TypeForm::Free),      "Произвольный",     "Free",
-    numForm, *PageMain::self, Item::FuncActive, PageSignals::OnChanged_Form, FuncDraw
+    numForm, *PageMain::self, Item::FuncActive, PageMain::OnChanged_Form, FuncDraw
 )
 
 
@@ -93,13 +93,13 @@ bool PageMain::OnSubPageTuneChannels()
 }
 
 
-void PageSignals::Init()
+void PageMain::Init()
 {
     OnPress_Channel(true);
 }
 
 
-void PageSignals::OnChanged_Form(bool)
+void PageMain::OnChanged_Form(bool)
 {
     ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageMain.items[1]);    // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
@@ -111,7 +111,7 @@ void PageSignals::OnChanged_Form(bool)
 }
 
 
-void PageSignals::SetForm(TypeForm::E form)
+void PageMain::SetForm(TypeForm::E form)
 {
     if(form == TypeForm::Free && (CURRENT_CHANNEL == Chan::B))
     {
@@ -123,7 +123,7 @@ void PageSignals::SetForm(TypeForm::E form)
 }
 
 
-void PageSignals::OnPress_Channel(bool)
+void PageMain::OnPress_Channel(bool)
 {
     cParameters.form = CURRENT_FORM;
     numForm = CURRENT_FORM->value;
@@ -134,7 +134,7 @@ void PageSignals::OnPress_Channel(bool)
 }
 
 
-void PageSignals::SetCurrentChanenl(Chan::E ch)
+void PageMain::SetCurrentChanenl(Chan::E ch)
 {
     set.current = ch;
 }

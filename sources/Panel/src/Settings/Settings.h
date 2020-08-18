@@ -9,7 +9,7 @@
 #define LANGUAGE                    (set.lang)
 #define LANG_IS_RU                  (LANGUAGE == 0)
 #define COLOR(x)                    (set.disp_Colors[x])
-#define CURRENT_PAGE                (set.menu_currentPage)
+#define CURRENT_PAGE                (set._menu_currentPage)
 #define MENU_POS_ACT_ITEM(x)        (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x)     (set.menu_currentSubPage[x])
 #define CURRENT_CHANNEL             (set.current)
@@ -55,7 +55,7 @@ struct Settings // -V690
 {
     uint16    size;                             // –азмер структуры Settings
     col_val   disp_Colors[32];                  // ÷вета
-    Page*     menu_currentPage;                 // јдрес открытой страницы меню. 0, если открыта главна€ страница
+    Page*     _menu_currentPage;                 // јдрес открытой страницы меню. 0, если открыта главна€ страница
     int8      menu_posActItem[Page::Count];     // ѕозици€ активного пункта меню дл€ каждой страницы
     int8      menu_currentSubPage[Page::Count]; // Ќомер текущей подстраницы дл€ каждой страницы
     bool      enabled[2];
