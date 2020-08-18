@@ -100,7 +100,7 @@ file(GLOB MENU                 src/Menu/*.h src/Menu/*.cpp)
 file(GLOB MENU_PAGES           src/Menu/Pages/*.h src/Menu/Pages/*.cpp)
 file(GLOB MENU_PAGES_ADDITION  src/Menu/Pages/Addition/*)
 file(GLOB MENU_PAGES_PAGEDEBUG src/Menu/Pages/PageDebug/*)
-file(GLOB _SCPI                src/SCPI/*)
+file(GLOB SCPI                 src/SCPI/*)
 file(GLOB SETTINGS             src/Settings/*)
 file(GLOB UTILS                src/Utils/*)
 
@@ -123,10 +123,10 @@ source_group(Menu                   FILES ${MENU})
 source_group(Menu\\Pages            FILES ${MENU_PAGES})
 source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
 source_group(Menu\\Pages\\PageDebug FILES ${MENU_PAGES_PAGEDEBUG})
-source_group(SCPI                   FILES ${_SCPI})
+source_group(SCPI                   FILES ${SCPI})
 source_group(Settings               FILES ${SETTINGS})
 source_group(Utils                  FILES ${UTILS})
 
 add_library(Panel ${LIBS_HAL} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL} ${SRC} ${COMMON} ${DISPLAY} ${DISPLAY_FONT}
                   ${FDRIVE} ${FREQMETER} ${GENERATOR} ${INTERFACE} ${KEYBOARD} ${MENU} ${MENU_PAGES} ${MENU_PAGES_ADDITION}
-                  ${MENU_PAGES_PAGEDEBUG} ${_SCPI} ${SETTINGS} ${UTILS})
+                  ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${SETTINGS} ${UTILS})
