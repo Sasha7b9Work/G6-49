@@ -55,6 +55,6 @@ void Menu::DrawPagesUGO(int x)
 
         Rectangle(delta, 9).Fill(x + 5 + numPage * delta, 5, Color::FILL);
 
-        SU::Int2String(numPage + 1, false, 2).Draw(x + 6 + numPage * delta, 5, Color::BACK);
+        SU::Int2String(numPage + 1, false, 1).Draw(x + 9 + numPage * delta, 5, Color::BACK);
     }
 }

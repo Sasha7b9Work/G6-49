@@ -70,17 +70,13 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-DEF_PAGE_8( pageSignals,   //-V641
+DEF_PAGE_4( pageSignals,   //-V641
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",   //-V641 //-V1027
     "", "",
     &cChannel,                  // НАСТРОЙКИ СИГНАЛОВ - Канал
     &cFormA,                    // НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,               // НАСТРОЙКИ СИГНАЛОВ - Параметр
     &bTuneParameter,            // НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
-    PageFrequencyCounter::self,
-    PageService::self,
-    &Item::emptyLight,
-    &Item::emptyLight,
     Page::Signals, PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
