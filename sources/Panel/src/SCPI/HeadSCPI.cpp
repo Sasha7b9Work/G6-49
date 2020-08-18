@@ -170,7 +170,7 @@ static pCHAR FuncChannel(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(channelNames[CURRENT_CHANNEL]));
 
-    SCPI_PROCESS_ARRAY(channelNames, PageMain::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A')));
+    SCPI_PROCESS_ARRAY(channelNames, PageSignals::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A')));
 }
 
 
@@ -198,7 +198,7 @@ static pCHAR FuncForm(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(formNames[*CURRENT_FORM]));
 
-    SCPI_PROCESS_ARRAY(formNames, PageMain::SetForm(static_cast<TypeForm::E>(i)));
+    SCPI_PROCESS_ARRAY(formNames, PageSignals::SetForm(static_cast<TypeForm::E>(i)));
 }
 
 

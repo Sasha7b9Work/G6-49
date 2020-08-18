@@ -60,7 +60,7 @@ static const Settings defSet =
         MAKE_COLOR(0x40, 0x40, 0xFF)    // CHAN_B
 #endif
     },
-    static_cast<Page *>(PageMain::self),// menu_currentPage
+    static_cast<Page *>(PageSignals::self),// menu_currentPage
     {0},                                // menu_posActItem[]
     {0},                                // menu_currentSubPage[]
     {false, false},                     // enabled[2]

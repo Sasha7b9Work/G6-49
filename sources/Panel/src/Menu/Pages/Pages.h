@@ -6,7 +6,7 @@
 class Parameter;
 
 
-struct PageMain
+struct PageSignals
 {
     static Page *self;
 
