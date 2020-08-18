@@ -62,16 +62,26 @@ public:
     char *c_str() const;
 
     int Draw(int x, int y, Color color = Color::NUMBER) const;
+    
     int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER) const;
+    
     int DrawInArea(int x, int y, int width, Color color = Color::NUMBER);
+    
     void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
-    void DrawInColumn(int x, int y, int width);
+    
+    // Выввести слова "в столбик"
+    void DrawInColumn(int x, int y, int width, int delta = 2);
+    
     int DrawInColumnWithTransfers(const int left, const int top, const int width, const Color color = Color::NUMBER);
+    
     int DrawInColumnWithTransfersDiffColors(const int left, const int top, const int width, const Color colorDif, const Color = Color::NUMBER);
+    
     // Возвращает нижнюю координату прямоугольника
     int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBack, Color colorRect, Color colorText);
+    
     // Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
+    
     int DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
 
     // Столько пикселей строка займёт в ширину при выводе на экран
@@ -91,6 +101,9 @@ public:
 
     // Размер строки в символах (без учёта заверщающего)
     int Size() const;
+
+    // Возвращает колечество слов, разделённых пробелами
+    int NumberWords() const;
 
     char &operator[](int i);
 

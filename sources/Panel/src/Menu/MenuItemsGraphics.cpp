@@ -45,7 +45,18 @@ void Item::DrawTitle(int x, int y) const
         y -= 4;
     }
 
-    GetTitle().DrawInCenterRect(x, y + 5, Item::WIDTH, 10, (IsPressed() || IsOpened()) ? Color::BACK : (IsShade() ? Color::GRAY_25 : Color::FILL));
+    String string = GetTitle();
+
+    Color((IsPressed() || IsOpened()) ? Color::BACK : (IsShade() ? Color::GRAY_25 : Color::FILL)).SetAsCurrent();
+
+    if (string.NumberWords() != 1 && GetType() == TypeItem::Page)
+    {
+        string.DrawInColumn(x + 7, y, Item::WIDTH, 7);
+    }
+    else
+    {
+        string.DrawInCenterRect(x, y + 5, Item::WIDTH, 10);
+    }
 }
 
 
@@ -104,7 +115,6 @@ void Page::DrawClosed(int x, int y) const
         Color::FILL.SetAsCurrent();
     }
 
-    //GetTitle().DrawInColumn(x + 4, y + 17, Item::WIDTH);
     DrawTitle(x, y);
 }
 

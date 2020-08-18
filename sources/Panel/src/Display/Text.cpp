@@ -701,7 +701,7 @@ void String::DrawRelativelyRight(int xRight, int y, Color color)
 }
 
 
-void String::DrawInColumn(int x, int y, int width)
+void String::DrawInColumn(int x, int y, int width, int delta)
 {
     int begin = x;
     int end = begin + width;
@@ -714,7 +714,7 @@ void String::DrawInColumn(int x, int y, int width)
         if (x + length > end)
         {
             x = begin;
-            y += Font::GetHeight(*t) + 2;
+            y += Font::GetHeight(*t) + delta;
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, t);
@@ -967,6 +967,25 @@ int String::Size() const
     }
 
     return static_cast<int>(std::strlen(text));
+}
+
+
+int String::NumberWords() const
+{
+    char *pointer = text;
+
+    int result = 0;
+
+    while (*pointer)
+    {
+        if (*pointer == ' ')
+        {
+            result++;
+        }
+        pointer++;
+    }
+
+    return result + 1;
 }
 
 
