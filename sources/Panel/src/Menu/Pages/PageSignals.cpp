@@ -70,7 +70,7 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-DEF_PAGE_8( pageMain,   //-V641
+DEF_PAGE_8( pageSignals,   //-V641
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",   //-V641 //-V1027
     "", "",
     &cChannel,                  // НАСТРОЙКИ СИГНАЛОВ - Канал
@@ -84,7 +84,7 @@ DEF_PAGE_8( pageMain,   //-V641
     Page::Main, nullptr, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
-Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageMain));
+Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
 
 
 bool PageSignals::OnSubPageTuneChannels()
@@ -101,7 +101,7 @@ void PageSignals::Init()
 
 void PageSignals::OnChanged_Form(bool)
 {
-    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageMain.items[1]);    // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
+    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);    // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
     CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());          // Установить для текущего сигнала индекс формы из ChoiceBase
 
@@ -128,7 +128,7 @@ void PageSignals::OnPress_Channel(bool)
     cParameters.form = CURRENT_FORM;
     numForm = CURRENT_FORM->value;
 
-    pageMain.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
+    pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);
 }
