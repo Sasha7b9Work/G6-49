@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Log.h"
 #include "structs.h"
 #include "common/Command.h"
 #include "common/Interface_d.h"
@@ -485,7 +484,7 @@ static void E(SimpleMessage *)
 
 static void Debug(SimpleMessage *)
 {
-    Amplifier::LogState();
+//    Amplifier::LogState();
 }
 
 

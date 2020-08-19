@@ -20,9 +20,9 @@ struct CalibrationSettings
         struct
         {
             int16 cal[NUM_CHAN][NUM_SIGNALS][NUM_RANGES][NUM_PARAMETERS];
-        };
 
-        int16 kFreqMeterTrig;       // Калибровочный коэффициент уровня синхронизации частотомера
+            int16 kFreqMeterTrig;       // Калибровочный коэффициент уровня синхронизации частотомера
+        };
 
         uint8 unused[256];
     };

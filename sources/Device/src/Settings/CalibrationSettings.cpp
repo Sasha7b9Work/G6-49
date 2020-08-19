@@ -9,8 +9,6 @@ static const CalibrationSettings defSet =
 
 CalibrationSettings setCal = defSet;
 
-static int16 *currentCAL = CalibrationSettings::GetK(0, 0, 0, 0);
-
 
 CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &rhs)
 {
@@ -32,9 +30,7 @@ int16 *CalibrationSettings::GetK(uint8 channel, uint8 signal, uint8 range, uint8
         signal = 1;
     }
 
-    currentCAL = &setCal.cal[channel][signal][range][parameter];
-
-    return currentCAL;
+    return &setCal.cal[channel][signal][range][parameter];
 }
 
 
