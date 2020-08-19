@@ -159,18 +159,62 @@
           <Type>0</Type>
           <LineNumber>471</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134381666</Address>
+          <Address>134400832</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\G6-49\sources\PLoader\src\FDrive\FDrive_d_Handler.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\FDrive\FDrive_d_Handler.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\G6_49_D\src/FDrive/FDrive_d_Handler.cpp\471</Expression>
         </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>144</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134401592</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Generator\Calibrator.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\G6_49_D\src/Generator/Calibrator.cpp\144</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>142</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134401578</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Generator\Calibrator.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\G6_49_D\src/Generator/Calibrator.cpp\142</Expression>
+        </Bp>
       </Breakpoint>
+      <WatchWindow1>
+        <Ww>
+          <count>0</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>waveIsSine</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>currentCAL</ItemText>
+        </Ww>
+      </WatchWindow1>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>

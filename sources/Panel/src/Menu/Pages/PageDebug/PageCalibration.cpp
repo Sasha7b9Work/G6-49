@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "Interface/Messages_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -222,6 +223,8 @@ static void OnEnter_Calibration(bool enter)
 {
     if (enter)
     {
+        LOG_WRITE(" ");
+        LOG_WRITE("вхожу");
         Message::Debug().Transmit();
     }
 
@@ -245,6 +248,7 @@ static void OnEnter_Calibration(bool enter)
 
     if (!enter)
     {
+        LOG_WRITE("выхожу");
         Message::Debug().Transmit();
     }
 }
