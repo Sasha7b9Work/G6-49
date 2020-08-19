@@ -391,15 +391,15 @@ pString Attenuation::Name() const
 }
 
 
-void Amplifier::LogState()
-{
-    static const pString att[] =
-    {
-        "0Db",
-        "10Db",
-        "20Db",
-        "30Db"
-    };
-
-    LOG_WRITE("ampl en = %d/%d, at = %s/%s", isEnabled[Chan::A], isEnabled[Chan::B], att[attenuation[Chan::A]], att[attenuation[Chan::B]]);
-}
+//void Amplifier::LogState()
+//{
+//    static const pString att[] =
+//    {
+//        "0Db",
+//        "10Db",
+//        "20Db",
+//        "30Db"
+//    };
+//
+//    LOG_WRITE("ampl en = %d/%d, at = %s/%s", isEnabled[Chan::A], isEnabled[Chan::B], att[attenuation[Chan::A]], att[attenuation[Chan::B]]);
+//}

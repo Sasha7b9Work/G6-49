@@ -31,92 +31,12 @@
                            FLASH_FLAG_PGSERR);  /* programming sequence error flag    */
 
 
-
-
-// ¬озвращает первый адрес, значение в котором равно 0xffffffff (можно записывать). ѕоиск начинаетс€ с адреса start, продолжаетс€ в участке пам€ти размером sizeFull.  ратно размеру sizeObject
-static uint FindFirstFreeRecord(uint start, uint sizeSector, uint sizeRecord);
-// ¬озвращает адрес последнего блока, в котором первый байт не равен 0xffffffff (в нЄм сохраенены последние настройки)
-static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord);
 // —тирает сектор с начальным адресом startAddress
 static void EraseSector(uint startAddress);
 // «аписывает size байт из массива data по адресу address
 static void WriteData(uint dest, void *src, uint size);
 // ¬озвращает системный идентификатор сектора с начальным адресом address. ≈жели такового нету, возвращает -1
 static uint GetSector(uint address);
-// ¬озвращает размер сектора с данным начальным адресом
-static uint SizeSector(uint address);
-
-
-
-
-void HAL_EEPROM::SaveSettings(CalibrationSettings *settings)
-{
-    uint address = FindFirstFreeRecord(SECTOR_CALIBRATION_4, SizeSector(SECTOR_CALIBRATION_4), sizeof(CalibrationSettings));
-
-    if (address == 0)
-    {
-        EraseSector(SECTOR_CALIBRATION_4);
-        address = SECTOR_CALIBRATION_4;
-    }
-
-    WriteData(address, settings, sizeof(CalibrationSettings));
-}
-
-
-static uint SizeSector(uint address)
-{
-    if (GetSector(address) < 4)       { return (16 * 1024); }
-    else if (GetSector(address) == 4) { return (64 * 1024); }
-
-    return (128 * 1024);
-}
-
-
-void HAL_EEPROM::LoadSettings(CalibrationSettings *settings)
-{
-    uint address = FindLastOccupiedRecord(SECTOR_CALIBRATION_4, SizeSector(SECTOR_CALIBRATION_4), sizeof(CalibrationSettings));
-
-    if (address)                                            // ≈сли нашли сохранЄнную запись
-    {
-        *settings = *(reinterpret_cast<CalibrationSettings *>(address));      // “о запишем еЄ в целевой объект
-    }
-}
-
-
-static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
-{
-    uint address = start;
-    uint end = start + sizeFull;
-
-    while (address < end)
-    {
-        if (*reinterpret_cast<uint *>(address) == 0xffffffffU)
-        {
-            return address;
-        }
-        address += sizeRecord;
-    }
-
-    return 0;
-}
-
-
-static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
-{
-    uint address = FindFirstFreeRecord(start, sizeSector, sizeRecord);
-
-    if (address == 0)                               // ≈сли свободной записи нет, значит, весь сектора заполнен
-    {
-        return start + sizeSector - sizeRecord;     // надо считвать последнюю запись
-    }
-
-    if (address == start)                           // ≈сли перва€ свободна€ запись находитс€ в начале сектора, то сектор пуст - запись в него не производилась
-    {
-        return 0;                                   // ¬озвращаем 0 как признак того, что записей нет
-    }
-
-    return address - sizeRecord;                    // ¬о всех остальных случа€х возвращаем адрес записи, предыдущей по отношению к первой свободной
-}
 
 
 static void EraseSector(uint startAddress)

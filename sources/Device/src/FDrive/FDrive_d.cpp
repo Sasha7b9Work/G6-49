@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "FDrive_d.h"
 #include "Generator/Generator_d.h"
 #include "Hardware/HAL/HAL.h"
@@ -95,11 +94,11 @@ void DDrive::Update()
 
         if(result == FR_OK)
         {
-            LOG_WRITE("флешка примонтирована");
+//            LOG_WRITE("флешка примонтирована");
         }
         else
         {
-            LOG_WRITE("не удалось примонтировать флешку");
+//            LOG_WRITE("не удалось примонтировать флешку");
         }
     }
     else if(state == State::NeedUnmount)
@@ -110,7 +109,7 @@ void DDrive::Update()
 
         state = State::Disconnected;
 
-        LOG_WRITE("флешка отмонтирована");
+//        LOG_WRITE("флешка отмонтирована");
     }
 }
 

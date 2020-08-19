@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Log.h"
 #include "Generator/AD9952.h"
 #include "Generator/Calibrator.h"
 #include "Hardware/HAL/HAL.h"
@@ -123,15 +122,12 @@ void AD9952::WritePOW(Chan::E ch)
 void AD9952::WriteASF(Chan::E ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
-    //float k = 1.0F;
 
     double att = 1.0 / Amplifier::GetAmplification(ch);
 
     double amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
     uint value = static_cast<uint>(amplitude * static_cast<float>(0x3FFF));
-
-    LOG_WRITE("%f %f %f %d %f", SettingsGenerator::Amplitude(ch), amplitude, att, value, k);
 
     Bit::Set(value, 14);  // \ Ёто биты множител€ скорости
     Bit::Set(value, 15);  // / нарастани€ фронта 
