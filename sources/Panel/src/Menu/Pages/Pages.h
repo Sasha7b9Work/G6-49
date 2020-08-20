@@ -9,19 +9,21 @@ class Parameter;
 struct PageMain
 {
     static Page *self;
-
-    // ¬озвращает true, если открыта перва€ подстраница (с которой производитс€ настройка каналов)
-    static bool OnSubPageTuneChannels();
 };
 
 
 struct PageSignals
 {
+    static Page *self;
+
+    // ¬озвращает true, если открыта перва€ подстраница (с которой производитс€ настройка каналов)
+    static bool OnSubPageTuneChannels();
+
     static void Init();
 
-    static void SetCurrentChanenl(Chan::E ch);
-
     static void OnPress_Channel(bool);
+
+    static void SetCurrentChanenl(Chan::E ch);
 
     // Ёта функци€ должна вызыватьс€ после выбора формы сигнала - по еЄ нажатию происходит загрузка формы в прибор
     static void OnChanged_Form(bool = true);
