@@ -28,15 +28,13 @@ struct HAL_DAC2
 {
 	static void Init();
 
-//    static void StartDMA(uint prescaler);
-//	
-//    static void StopDMA();
-
-    static void *handle;
+    static void StartDMA(uint prescaler);
+	
+    static void StopDMA();
 
 private:
 	
-//    static void ConfigTIM7(uint prescaler);
+    static void ConfigTIM7(uint prescaler);
 };
 
 
