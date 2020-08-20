@@ -26,7 +26,7 @@ float Number::GetValue()
     uint64 intValue = GetInteger(integer);
     uint64 fractValue = GetInteger(fract);
 
-    float result = static_cast<float>(intValue) + static_cast<float>(fractValue) / Math::Pow10(SIZE_PART);
+    float result = static_cast<float>(intValue) + static_cast<float>(fractValue) / static_cast<float>(Math::Pow10(SIZE_PART));
 
     if(sign == '-')
     {

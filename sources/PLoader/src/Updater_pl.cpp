@@ -89,7 +89,7 @@ bool Updater::Handler(SimpleMessage *message)
     switch(com)
     {
     case Command::PortionUpgradeDevice:
-        sud.portionUpgrade = message->TakeUINT() / 100.0F;
+        sud.portionUpgrade = static_cast<float>(message->TakeUINT()) / 100.0F;
         break;
 
     case Command::AnswerUpgradePanel:
@@ -117,7 +117,7 @@ float StructUpgradePanel::PortionUpgrade()
         return -1.0F;
     }
 
-    return static_cast<float>(numChunk * SIZE_CHUNK) / sizeFirmware;
+    return static_cast<float>(numChunk * SIZE_CHUNK) / static_cast<float>(sizeFirmware);
 }
 
 

@@ -190,7 +190,7 @@ static void SendMessageAboutDevicePortion(int size, int fullSize)
 
 static int CalculatePortion(int size, int fullSize)
 {
-    return static_cast<int>((1.0F - static_cast<float>(size) / fullSize) * 100);
+    return static_cast<int>((1.0F - static_cast<float>(size) / static_cast<float>(fullSize)) * 100);
 }
 
 

@@ -44,10 +44,10 @@ static void DrawSignal(int x, int y, uint8 *data, float scale)
     for (int i = 1; i < 240; i++)
     {
         int x1 = x + i - 1;
-        int y1 = static_cast<int>(y - data[i - 1] * scale);
+        int y1 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i - 1]) * scale);
 
         int x2 = x + i;
-        int y2 = static_cast<int>(y - data[i] * scale);
+        int y2 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i]) * scale);
 
         Line().Draw(x1, y1, x2, y2);
     }

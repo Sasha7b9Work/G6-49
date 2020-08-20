@@ -334,7 +334,7 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
 
                 std::sscanf(buffer, "%d %d", &numberPoint, &value);
 
-                values[i] = -1.0F + value / 4095.0F * 2.0F;
+                values[i] = -1.0F + static_cast<float>(value) / 4095.0F * 2.0F;
 
                 f_gets(buffer, 255, &fp);
             }

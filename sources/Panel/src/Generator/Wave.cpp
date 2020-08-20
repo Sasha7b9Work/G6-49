@@ -482,7 +482,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
         {
             yNoise[i] = aveY - static_cast<int>(std::rand() % 50 - 25);
 
-            yExp[i] = aveY - static_cast<int>(std::expf(i / 12.5F) + 0.5F) + 1;
+            yExp[i] = aveY - static_cast<int>(std::expf(static_cast<float>(i) / 12.5F) + 0.5F) + 1;
         }
 
         first = false;
@@ -536,8 +536,8 @@ void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height)
 
                 for (int i = delta; i < width / 3; i++)
                 {
-                    int y1 = y0 - static_cast<int>(std::sinf((i - delta) * speed) * height / 2.0F);
-                    int y2 = y0 - static_cast<int>(std::sinf(i * speed) * height / 2.0F);
+                    int y1 = y0 - static_cast<int>(std::sinf(static_cast<float>(i - delta) * speed) * static_cast<float>(height) / 2.0F);
+                    int y2 = y0 - static_cast<int>(std::sinf(static_cast<float>(i) * speed) * static_cast<float>(height) / 2.0F);
 
                     Line::Draw(dX + x0 + i - delta, y1, dX + x0 + i, y2);
                 }
@@ -553,8 +553,8 @@ void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height)
 
     for (int i = delta; i < width; i++)
     {
-        int y1 = y0 - static_cast<int>(std::sinf((i - delta) * speed) * height / 2.0F);
-        int y2 = y0 - static_cast<int>(std::sinf(i * speed) * height / 2.0F);
+        int y1 = y0 - static_cast<int>(std::sinf(static_cast<float>(i - delta) * speed) * static_cast<float>(height) / 2.0F);
+        int y2 = y0 - static_cast<int>(std::sinf(static_cast<float>(i) * speed) * static_cast<float>(height) / 2.0F);
 
         Line::Draw(x0 + i - delta, y1, x0 + i, y2);
     }
@@ -665,16 +665,16 @@ void Form::DrawFree(Chan::E ch, int x0, int y0, int width, int height)
 {
     int numPoints = 240;
 
-    float sX = width / static_cast<float>(numPoints);
-    float sY = height / 255.0F;
+    float sX = static_cast<float>(width) / static_cast<float>(numPoints);
+    float sY = static_cast<float>(height) / 255.0F;
 
     for (int i = 1; i < numPoints; i++)
     {
-        int x1 = static_cast<int>(x0 + sX * (i - 1));
-        int y1 = static_cast<int>(y0 + height - formFlash[ch][i - 1] * sY);
+        int x1 = static_cast<int>(static_cast<float>(x0) + sX * static_cast<float>(i - 1));
+        int y1 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch][i - 1]) * sY);
 
-        int x2 = static_cast<int>(x0 + sX * i);
-        int y2 = static_cast<int>(y0 + height - formFlash[ch][i] * sY);
+        int x2 = static_cast<int>(static_cast<float>(x0) + sX * static_cast<float>(i));
+        int y2 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch][i]) * sY);
 
         Line().Draw(x1, y1, x2, y2);
     }

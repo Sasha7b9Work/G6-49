@@ -13,44 +13,27 @@ void HAL_DAC2::Init()
 	__TIM7_CLK_ENABLE();
 	__DAC_CLK_ENABLE();
 
-	GPIO_InitTypeDef structGPIO =
+    GPIO_InitTypeDef structGPIO =
+    {
+        GPIO_PIN_5,
+        GPIO_MODE_ANALOG,
+        GPIO_NOPULL,
+        0, 0
+    };
+
+    HAL_GPIO_Init(GPIOA, &structGPIO);
+
+	DAC_ChannelConfTypeDef config =
 	{
-		GPIO_PIN_5,
-		GPIO_MODE_ANALOG,
-		GPIO_NOPULL,
-		0, 0
+		DAC_TRIGGER_T7_TRGO,
+		DAC_OUTPUTBUFFER_ENABLE
 	};
 
-	HAL_GPIO_Init(GPIOA, &structGPIO);
+	HAL_DAC_DeInit(&handleDAC);
 
-	static DMA_HandleTypeDef hdmaDAC2 =
-	{
-		DMA1_Stream5,
-		{
-			DMA_CHANNEL_7,
-			DMA_MEMORY_TO_PERIPH,
-			DMA_PINC_DISABLE,
-			DMA_MINC_ENABLE,
-			DMA_PDATAALIGN_BYTE,
-			DMA_MDATAALIGN_BYTE,
-			DMA_CIRCULAR,
-			DMA_PRIORITY_HIGH,
-			DMA_FIFOMODE_DISABLE,
-			DMA_FIFO_THRESHOLD_HALFFULL,
-			DMA_MBURST_SINGLE,
-			DMA_PBURST_SINGLE
-		},
-		HAL_UNLOCKED, HAL_DMA_STATE_RESET, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	};
+	HAL_DAC_Init(&handleDAC);
 
-	HAL_DMA_Init(&hdmaDAC2);
-
-	__HAL_LINKDMA(&handleDAC, DMA_Handle1, hdmaDAC2);
-
-	HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, PRIORITY_SOUND_DMA1_STREAM5);
-	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
-
-	ConfigTIM7(0xff);
+	HAL_DAC_ConfigChannel(&handleDAC, &config, DAC_CHANNEL_1);
 }
 
 

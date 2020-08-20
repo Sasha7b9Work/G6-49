@@ -30,6 +30,7 @@ add_compile_options(/wd4820)
 add_compile_options(/wd5027)
 add_compile_options(/wd5039)
 add_compile_options(/wd5045)
+add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
 
 file(GLOB LIBS_FATFS     ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/ff_gen_drv.*
                          ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/ff.*

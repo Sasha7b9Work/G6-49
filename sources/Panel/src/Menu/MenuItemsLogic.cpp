@@ -67,7 +67,7 @@ float Choice::Step()
     static const int numLines = 60;
     if (tsChoice.address == this)
     {
-        float delta = speed * (TIME_MS - tsChoice.timeStart);
+        float delta = speed * static_cast<float>(TIME_MS - tsChoice.timeStart);
         if (delta == 0.0F)  // -V550 //-V2550 //-V550
         {
             delta = 0.001F; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
@@ -238,7 +238,7 @@ float Governor::Step()
     float delta = 0.0F;
     if (tsGovernor.address == this)
     {
-        delta = speed * (TIME_MS - tsGovernor.timeStart);
+        delta = speed * static_cast<float>(TIME_MS - tsGovernor.timeStart);
         if (tsGovernor.dir == DECREASE)
         {
             delta *= -1.0F;
