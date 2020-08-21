@@ -1,6 +1,6 @@
 @echo off
 
-@echo .
+@echo.
 
 @echo %TIME%   Building VS-Keil version
 
@@ -16,6 +16,7 @@ goto Exit
 
 :Success
 @echo %TIME%   Complete
+echo.
 
 :Exit
 
