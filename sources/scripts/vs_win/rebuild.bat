@@ -1,6 +1,5 @@
 @echo off
 
-@echo .
 @echo %TIME%   Rebuild VS-GUI version ...
 
 MSBuild.exe ..\..\generated\Win32\G6-49_GUI.sln -clp:ErrorsOnly;WarningsOnly -nologo -t:rebuild /m
