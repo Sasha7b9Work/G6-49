@@ -15,5 +15,5 @@ goto Exit
 
 :Exit
 
-call copy_wxWidgets_dlls.bat
-call copy_resources.bat
+call copy.bat WX_DLLS
+call copy.bat resources
