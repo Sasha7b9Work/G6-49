@@ -47,5 +47,5 @@ private:
 struct MathParameterInteger
 {
     // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)
-    static int GetMaxNumberDigits(ParameterInteger *parameter);
+    static int GetMaxNumberDigits(const ParameterInteger *parameter);
 };

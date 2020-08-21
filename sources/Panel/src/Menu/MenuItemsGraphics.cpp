@@ -217,10 +217,10 @@ void Governor::Draw(int x, int y) const
 
 void Governor::DrawValue(int x, int y) const
 {
-    int x1 = String("%d", *cell).Draw(x, y);
-
     if(Menu::GetCurrentItem() == this)
     {
+        int x1 = String("%d", *cell).Draw(x, y);
+
         Char('\x90').Draw(x - 6, y);
         Char('\x91').Draw(x1 + 1, y);
     }

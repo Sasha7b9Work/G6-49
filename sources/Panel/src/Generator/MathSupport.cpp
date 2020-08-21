@@ -55,7 +55,7 @@ static void RepayEmptySymbols(char *buffer)
         buffer--;
     }
 
-    while (*first == ' ')
+    while (*first == ' ') //-V1044
     {
         buffer = first;
 
@@ -250,20 +250,20 @@ int MathParameterDouble::GetNumberDigitsBeforeComma(Order::E order)
 }
 
 
-int MathParameterDouble::GetNumberDigitsAfterComma(Order::E order)
+int MathParameterDouble::GetNumberDigitsAfterComma(Order::E /*order*/)
 {
     if (param->IsVoltage())
     {
         return 3;
     }
 
-    order = (order == Order::Count) ? param->GetValue().GetOrder() : order;
+    //order = (order == Order::Count) ? param->GetValue().GetOrder() : order;
 
     return -Order::GetPow10(param->GetMin().GetOrder()) + Order::GetPow10(param->GetValue().GetOrder());
 }
 
 
-int MathParameterInteger::GetMaxNumberDigits(ParameterInteger *parameter)
+int MathParameterInteger::GetMaxNumberDigits(const ParameterInteger *parameter)
 {
     Value max = parameter->GetMax();
 

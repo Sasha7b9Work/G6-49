@@ -477,7 +477,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
 
     if (first)
     {
-        std::srand(2);
+        std::srand(2); //-V1057
         for (int i = 0; i < 100; i++)
         {
             yNoise[i] = aveY - static_cast<int>(std::rand() % 50 - 25);
