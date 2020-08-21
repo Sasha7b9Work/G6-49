@@ -100,7 +100,7 @@ void DLDrive::DeInit()
 {
     USBH_Stop(&handle);
     USBH_DeInit(&handle);
-    FATFS_UnLinkDriver(USBDISKPath);
+    FATFS_UnLinkDriver(USBDISKPath); //-V2001
     f_mount(0, "", 0);
 }
 
