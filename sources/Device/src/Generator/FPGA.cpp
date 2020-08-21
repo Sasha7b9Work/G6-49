@@ -519,7 +519,7 @@ void FPGA::SaveExtSignal(Chan::E ch, uint8 *data)
 }
 
 
-void FPGA::TransformCodeToData(uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut[FPGA::NUM_POINTS])
+void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut[FPGA::NUM_POINTS])
 {
     for (int i = 0; i < FPGA::NUM_POINTS; i++)
     {

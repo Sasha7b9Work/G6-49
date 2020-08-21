@@ -175,7 +175,7 @@ static void GetPictureDDS()
 
 
 // Возвращает true, если расширение соответствует расширению сигнала
-static bool ExtensionIsSignal(TCHAR *name, char *ext = "sig")
+static bool ExtensionIsSignal(const TCHAR *name, const char *ext = "sig")
 {
     uint lenght = std::strlen(name);
 
