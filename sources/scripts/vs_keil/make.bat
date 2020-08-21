@@ -28,7 +28,6 @@ cmake ../../CMakeLists.txt -B../../generated/Keil -G "Visual Studio 16 2019" -A 
 @echo %TIME%   Complete
 
 if "%1" EQU "" goto EXIT
-
 if %1==build goto BUILD
 
 :BUILD

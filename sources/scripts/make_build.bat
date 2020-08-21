@@ -2,7 +2,7 @@
 cd keil
 call build.bat all
 cd ../vs_keil
-call make_build.bat
+call make.bat build
 cd ../vs_win
-call make_build.bat
+call make.bat build
 cd ..
