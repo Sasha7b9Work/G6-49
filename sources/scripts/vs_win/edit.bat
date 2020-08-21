@@ -1,4 +1,4 @@
-call copy_wxWidgets_dlls.bat
+call copy.bat WX_DLLS
 
 @echo on
 

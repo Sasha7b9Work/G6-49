@@ -39,7 +39,7 @@ wxBitmap* Bitmap::LoadFromResource(int name)
 	wxBitmap* r_bitmapPtr = 0;
 
 	char* a_data = 0;
-	DWORD       a_dataSize = 0;
+	DWORD a_dataSize = 0;
 
 	if (LoadDataFromResource(a_data, a_dataSize, name))
 	{
