@@ -71,7 +71,7 @@ public:
 
     virtual Value GetMin() const { return Value("0"); }
 
-    virtual Value GetValue() const { return Value("1"); }
+    virtual Value GetValue() const { return Value("1"); } //-V524
 
     virtual String ToString(String &) const { return String(""); };
 

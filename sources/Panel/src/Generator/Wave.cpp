@@ -519,7 +519,7 @@ void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height)
 
         if (choice->GetChoice() == 1)
         {
-            float speed = 0.6f;
+            float speed = 0.6F;
 
             int delta = 1;
 

@@ -39,7 +39,7 @@ File::~File()
 }
 
 
-static void DrawSignal(int x, int y, uint8 *data, float scale)
+static void DrawSignal(int x, int y, const uint8 *data, float scale)
 {
     for (int i = 1; i < 240; i++)
     {

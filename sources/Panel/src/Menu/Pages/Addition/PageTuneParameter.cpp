@@ -98,7 +98,7 @@ DEF_GRAPH_BUTTON(sbEnter,
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control control)
+bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control)
 {
     if (control.IsRotate() || control.IsEntering())
     {

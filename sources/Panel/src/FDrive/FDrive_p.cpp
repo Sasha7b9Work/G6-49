@@ -209,7 +209,7 @@ static col_val cols[32] =
 
 void FDrive::SaveScreenToFlash()
 {
-    if (!mounted)
+    if (mounted != Mounted)
     {
         Display::ShowWarning("Флешка не подключена");
         return;

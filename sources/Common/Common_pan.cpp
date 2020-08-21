@@ -16,9 +16,6 @@ pString Value::ToString(bool sign, Order::E order) const
 {
     static char buffer[50];
 
-    double valueD = ToDouble();
-    valueD = valueD;
-
     buffer[0] = '\0';
 
     if (sign)
