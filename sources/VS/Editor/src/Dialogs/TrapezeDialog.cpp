@@ -57,15 +57,15 @@ void TrapezeDialog::SendAdditionForm()
 {
     int delay = scDelay->GetValue();
 
-    int center = delay + (static_cast<int>(Point::NUM_POINTS) - delay) / 2;
+    float center = static_cast<float>(delay) + static_cast<float>(Point::NUM_POINTS - delay) / 2.0F;
 
-    int pointsInTrapeze = static_cast<int>(Point::NUM_POINTS) - delay;
+    float pointsInTrapeze = static_cast<float>(Point::NUM_POINTS - delay);
 
-    int vertex1 = static_cast<int>(center + pointsInTrapeze / 2.0F * scVertex1->GetValue() / 100.0F);
-    int vertex2 = static_cast<int>(center + pointsInTrapeze / 2.0F * scVertex2->GetValue() / 100.0F);
+    int vertex1 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex1->GetValue()) / 100.0F);
+    int vertex2 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex2->GetValue()) / 100.0F);
 
-    int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * scLevelUp->GetValue() / 100.0F); //-V2007
-    int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * scLevelDown->GetValue() / 100.0F); //-V2007
+    int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelUp->GetValue()) / 100.0F); //-V2007
+    int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelDown->GetValue()) / 100.0F); //-V2007
 
     int min = levelLOW;
     int max = levelHI;

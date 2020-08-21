@@ -92,14 +92,14 @@ void Dialog::DrawLine(int x1, int y1, int x2, int y2)
     {
         for(int x = x1; x <= x2; x++)
         {
-            data[x] = static_cast<uint16>(y1 + (x - x1) * k + 0.5F);
+            data[x] = static_cast<uint16>(static_cast<float>(y1) + static_cast<float>(x - x1) * k + 0.5F);
         }
     }
     else
     {
         for(int x = x1; x <= x2; x++)
         {
-            data[x] = static_cast<uint16>(y1 - (x - x1) * k + 0.5F);
+            data[x] = static_cast<uint16>(static_cast<float>(y1) - static_cast<float>(x - x1) * k + 0.5F);
         }
     }
 }

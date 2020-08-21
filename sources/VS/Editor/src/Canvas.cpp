@@ -139,8 +139,8 @@ void Canvas::DrawGrid()
     int width = GetSize().x;
     int height = GetSize().y;
 
-    float stepX = width / 20.0F;
-    float stepY = height / 20.0F;
+    float stepX = static_cast<float>(width) / 20.0F;
+    float stepY = static_cast<float>(height) / 20.0F;
 
     float x = stepX;
     float y = stepY;

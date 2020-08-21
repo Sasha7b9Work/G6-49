@@ -54,12 +54,12 @@ void TriangleDialog::SendAdditionForm()
 {
     int start = scDelay->GetValue();
 
-    int pointsInTriangle = static_cast<int>(Point::NUM_POINTS) - start;
+    float pointsInTriangle = static_cast<float>(Point::NUM_POINTS - start);
 
-    int top = static_cast<int>(start + pointsInTriangle / 2 + pointsInTriangle / 2.0F * scCenter->GetValue() / 100.0F);
+    int top = static_cast<int>(static_cast<float>(start) + pointsInTriangle / 2 + pointsInTriangle / 2.0F * static_cast<float>(scCenter->GetValue()) / 100.0F);
 
-    int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * scLevelUp->GetValue() / 100.0F); //-V2007
-    int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * scLevelDown->GetValue() / 100.0F); //-V2007
+    int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelUp->GetValue()) / 100.0F); //-V2007
+    int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelDown->GetValue()) / 100.0F); //-V2007
 
     int min = levelLOW;
     int max = levelHI;

@@ -39,7 +39,7 @@ void SinXDialog::SendAdditionForm()
 
     for (int i = 0; i <= Point::NUM_POINTS / 2; i++)
     {
-        float x = (i /*+ T / 4.0F*/) / T * 2.0F * 3.14F;
+        float x = (static_cast<float>(i) /*+ T / 4.0F*/) / T * 2.0F * 3.14F;
 
         dataF[i] = std::sinf(x) / x;
 
