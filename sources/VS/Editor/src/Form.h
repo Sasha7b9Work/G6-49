@@ -80,23 +80,31 @@ class Form
 public:
     Form();
     ~Form();
-    /// Очистить сигнал
+    // Очистить сигнал
     void Clear();
-    /// Добавить точку с координатами мыши
+
+	// Добавить точку с координатами мыши
     void SetPoint(int mouseX, int mouseY);
-    /// Добавить точку с абсолютными значениями
+
+	// Добавить точку с абсолютными значениями
     void SetPoint(uint16 pos, uint16 data);
-    /// Заносит точку куда следует
+
+	// Заносит точку куда следует
     void SetPoint(Point point);
-    /// Вставить точку в позицию pos
+
+	// Вставить точку в позицию pos
     void SetPoint(uint16 pos);
-    /// Возвращает true, если курсор мыши находится над поставленной точкой. Pressed - нажата ли кнопка мыши
+
+	// Возвращает true, если курсор мыши находится над поставленной точкой. Pressed - нажата ли кнопка мыши
 	bool ExistPoint(int mouseX, int mouseY, bool pressed, uint16 *index = nullptr, uint16 *value = nullptr);
-    /// Удалить точку в позиции мыши
+
+	// Удалить точку в позиции мыши
     void RemovePoint();
-    /// Переместить точку в новую позицию
+
+	// Переместить точку в новую позицию
     void MovePoint(int mouseX, int mouseY);
-    /// Выровнять точку
+
+	// Выровнять точку
     void AlignPoint(Align::E align);
 
     void Draw();
@@ -104,9 +112,11 @@ public:
 	void UndoHistory();
 
 	void RedoHistory();
-    /// Установить дополнительную форму, которая будет рисоваться поверх основной. 
+
+	// Установить дополнительную форму, которая будет рисоваться поверх основной. 
     void SetAdditionForm(const uint16 data[Point::NUM_POINTS]);
-    /// Установить основную форму
+
+	// Установить основную форму
     void SetMainForm(const uint16 data[Point::NUM_POINTS], const std::vector<Point> *points);
 
     bool IsEquals(const Form *form) const;

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Form.h"
 #include "Dialogs/ParametersDialog.h"
 #include "Dialogs/SpinControl.h"
 
@@ -42,7 +43,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, SMALL_BUTTON_SIZE);
+    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Применить"), wxDefaultPosition, SMALL_BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonApply));
 
     wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, SMALL_BUTTON_SIZE);
@@ -77,11 +78,14 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
 void ParametersDialog::OnButtonApply(wxCommandEvent &)
 {
+    uint16 index = atoi(tcPosition->GetValue().c_str());
+    uint16 value = atoi(tcValue->GetValue().c_str());
 
+    TheForm->SetPoint(index, value);
 }
 
 
 void ParametersDialog::OnButtonCancel(wxCommandEvent &)
 {
-
+    Destroy();
 }

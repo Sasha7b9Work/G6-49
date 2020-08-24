@@ -80,15 +80,15 @@ void Form::SetPoint(Point point)
 
     uint index = PointInPosition(point.pos);
 
-    if (index != static_cast<uint>(-1))
-    {
-        points[index] = point;
-    }
-    else
+    if (index == static_cast<uint>(-1))
     {
         points.push_back(point);
 
         std::sort(points.begin(), points.end());
+    }
+    else
+    {
+        points[index] = point;
     }
 
     CalculateNeighboringPoints(point);
